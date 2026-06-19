@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from workspace_bench.exports import RolloutRecord, build_preference_pairs
+from workspace_bench.exports.metadata import annotate_rollouts
 from workspace_bench.exports.schema import ROLLOUT_SCHEMA_VERSION
 from workspace_bench.exports.sft import format_sft_record
 
@@ -30,6 +31,16 @@ def test_format_sft_record_supports_openai_messages() -> None:
 
     assert payload["messages"] == [{"role": "user", "content": "hello"}]
     assert payload["metadata"]["scenario_id"] == "scenario_1"
+
+
+def test_annotate_rollouts_adds_benchmark_metadata() -> None:
+    record = _record("scenario_1", passed=True, score=1.0, repeat=1)
+
+    annotated = annotate_rollouts([record], exported_at="2026-06-19T00:00:00Z")
+
+    assert annotated[0].metadata["benchmark_release_id"] == "workspace-core-v0"
+    assert annotated[0].metadata["export_schema_version"] == ROLLOUT_SCHEMA_VERSION
+    assert annotated[0].metadata["exported_at"] == "2026-06-19T00:00:00Z"
 
 
 def _record(

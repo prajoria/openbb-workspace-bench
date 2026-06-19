@@ -125,6 +125,11 @@ Each JSONL row has this shape:
 }
 ```
 
+Each row also includes versioning metadata such as `benchmark_release_id`,
+`benchmark_version`, `export_schema_version`, and `exported_at`. Private or
+hidden task-pack exports include task-pack metadata when a `task_pack.json`
+manifest is available.
+
 `export-sft` converts the same rollout records to `openai_messages`,
 `sharegpt`, or `tool_call_jsonl`. Passing attempts are exported by default;
 use `--include-failures` to include failed attempts with grade metadata.

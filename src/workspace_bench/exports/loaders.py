@@ -9,6 +9,7 @@ from typing import Any, Iterable
 
 from workspace_bench.agent_command import build_task_envelope, load_tool_calls
 from workspace_bench.episode import WorkspaceEpisode
+from workspace_bench.exports.metadata import base_export_metadata
 from workspace_bench.exports.schema import RolloutRecord
 from workspace_bench.models import JsonDict, RunResult, Scenario, ToolCall
 from workspace_bench.runner import ScenarioRunner
@@ -141,6 +142,7 @@ def load_trace_dir_rollouts(
                 final_snapshot=payload.get("final_snapshot", {}),
                 grade=grade,
                 metadata={
+                    **base_export_metadata(),
                     "source": "trace_dir",
                     "scenario_id": scenario_id,
                     "level": scenario_payload.get("level"),
@@ -185,6 +187,7 @@ def run_result_to_rollout(
     ]
     grade = asdict(result.grade)
     combined_metadata = {
+        **base_export_metadata(),
         "scenario_id": result.scenario.id,
         "level": result.scenario.level,
         "difficulty": result.scenario.difficulty,
@@ -251,4 +254,3 @@ def _resolve_artifact_path(value: Any, *, base_dir: Path) -> Path:
     if candidate.exists():
         return candidate
     return path
-

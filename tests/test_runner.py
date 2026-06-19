@@ -310,6 +310,9 @@ def test_cli_export_rollouts_writes_oracle_record(tmp_path) -> None:
     assert exit_code == 0
     assert len(records) == 1
     assert records[0]["schema_version"] == "workspace-bench-rollout-v1"
+    assert records[0]["metadata"]["benchmark_release_id"] == "workspace-core-v0"
+    assert records[0]["metadata"]["export_schema_version"] == "workspace-bench-rollout-v1"
+    assert records[0]["metadata"]["exported_at"].endswith("Z")
     assert records[0]["metadata"]["passed"] is True
     assert records[0]["tool_calls"][0]["tool"] == "get_workspace_snapshot"
     assert records[0]["tool_results"][0]["ok"] is True

@@ -8,6 +8,7 @@ from workspace_bench.exports.loaders import (
     run_result_to_rollout,
     synthesize_messages,
 )
+from workspace_bench.exports.metadata import annotate_rollouts, base_export_metadata
 from workspace_bench.exports.preferences import (
     build_preference_pairs,
     write_preferences_jsonl,
@@ -19,6 +20,8 @@ from workspace_bench.exports.sft import format_sft_record, write_sft_jsonl
 __all__ = [
     "RolloutRecord",
     "SFTFormat",
+    "annotate_rollouts",
+    "base_export_metadata",
     "build_preference_pairs",
     "format_sft_record",
     "load_comparison_rollouts",
@@ -31,4 +34,3 @@ __all__ = [
     "write_rollouts_jsonl",
     "write_sft_jsonl",
 ]
-

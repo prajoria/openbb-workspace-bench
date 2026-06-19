@@ -776,6 +776,7 @@ def _selected_scenarios(args: argparse.Namespace) -> list[Scenario]:
 
 
 def _load_export_rollouts(args: argparse.Namespace):
+    from workspace_bench.exports import annotate_rollouts
     from workspace_bench.exports import (
         load_comparison_rollouts,
         load_trace_dir_rollouts,
@@ -796,10 +797,13 @@ def _load_export_rollouts(args: argparse.Namespace):
 
     scenarios = _selected_scenarios(args)
     if getattr(args, "oracle", False):
-        return rollouts_from_oracle(scenarios)
+        records = rollouts_from_oracle(scenarios)
+        return annotate_rollouts(records, task_pack=_task_pack_manifest(args))
     if getattr(args, "comparison_dir", None):
-        return load_comparison_rollouts(Path(args.comparison_dir), scenarios)
-    return load_trace_dir_rollouts(Path(args.trace_dir), scenarios)
+        records = load_comparison_rollouts(Path(args.comparison_dir), scenarios)
+        return annotate_rollouts(records, task_pack=_task_pack_manifest(args))
+    records = load_trace_dir_rollouts(Path(args.trace_dir), scenarios)
+    return annotate_rollouts(records, task_pack=_task_pack_manifest(args))
 
 
 def _scenario_collection(args: argparse.Namespace) -> list[Scenario]:
