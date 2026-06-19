@@ -148,7 +148,6 @@ class WorkspaceGymEnv:
         assert self._scenario is not None
         return process_reward(
             episode=self._episode,
-            scenario=self._scenario,
             call=call,
             tool_result=tool_result,
             valid_tool_reward=self.valid_tool_reward,

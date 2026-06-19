@@ -3,13 +3,12 @@
 from __future__ import annotations
 
 from workspace_bench.episode import WorkspaceEpisode
-from workspace_bench.models import JsonDict, Scenario, ToolCall
+from workspace_bench.models import JsonDict, ToolCall
 
 
 def process_reward(
     *,
     episode: WorkspaceEpisode,
-    scenario: Scenario,
     call: ToolCall,
     tool_result: JsonDict,
     valid_tool_reward: float,
@@ -19,7 +18,6 @@ def process_reward(
 ) -> float:
     """Compute optional process reward for one intermediate tool call."""
 
-    del scenario
     reward = valid_tool_reward if tool_result.get("ok") else invalid_tool_penalty
     if schema_before_create_satisfied(episode, call):
         reward += schema_before_create_reward
@@ -51,4 +49,3 @@ def is_repeated_snapshot(episode: WorkspaceEpisode, call: ToolCall) -> bool:
     if call.name != "get_workspace_snapshot" or len(episode.trace) < 2:
         return False
     return episode.trace[-2].call.name == "get_workspace_snapshot"
-

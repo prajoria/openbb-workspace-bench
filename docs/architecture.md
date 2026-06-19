@@ -87,7 +87,7 @@ The bundled `oracle` agent replays reference traces from scenario files. The `no
 
 This is a trace-producing protocol. It is intentionally simpler than a fully interactive MCP environment, but it establishes the public BYO-agent result contract and works well for CI baselines.
 
-For local model baselines, `examples/compare_models.py` also provides an
+For local model baselines, `workspace-bench compare-models` also provides an
 interactive runner. It calls the model once per turn, executes the chosen
 Workspace tool through `WorkspaceEpisode.step`, returns the observation to the
 model, and grades the same final state.

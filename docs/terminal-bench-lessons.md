@@ -129,7 +129,7 @@ Recommended next step: add a small converter from trace JSON to a ShareGPT-style
 ### Interactive Model Runner
 
 The external-agent command still evaluates trace-producing agents. For local
-model baselines, `examples/compare_models.py` now runs an interactive loop
+model baselines, `workspace-bench compare-models` now runs an interactive loop
 backed by `WorkspaceEpisode.step`, so the model can observe after every tool
 call.
 
