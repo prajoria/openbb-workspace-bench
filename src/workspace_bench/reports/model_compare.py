@@ -47,7 +47,23 @@ from workspace_bench.metrics import compute_reliability_metrics
 from workspace_bench.runner import load_builtin_scenarios, load_scenario_directory
 
 
+INTERACTIVE_PROVIDERS = {"openai", "ollama"}
 REPO_ROOT = Path.cwd()
+
+
+def resolve_repo_root(start: Path | None = None) -> Path:
+    """Find the checkout root used for repo-local example adapters."""
+
+    start = start or Path.cwd()
+    candidates = [start, *start.parents, *Path(__file__).resolve().parents]
+    for candidate in candidates:
+        if (
+            (candidate / "pyproject.toml").exists()
+            and (candidate / "examples" / "openai_gpt4_1.py").exists()
+            and (candidate / "examples" / "ollama_agent.py").exists()
+        ):
+            return candidate
+    return Path.cwd()
 
 
 def load_dotenv(path: str | Path = ".env") -> None:
@@ -100,12 +116,13 @@ class TransientModelError(RuntimeError):
 
 
 def default_adapters() -> dict[str, ModelAdapter]:
+    repo_root = resolve_repo_root()
     python = shlex.quote(sys.executable)
     return {
         "openai-gpt-4.1": ModelAdapter(
             slug="openai-gpt-4.1",
             label="OpenAI GPT-4.1",
-            command=f"{python} {shlex.quote(str(REPO_ROOT / 'examples' / 'openai_gpt4_1.py'))}",
+            command=f"{python} {shlex.quote(str(repo_root / 'examples' / 'openai_gpt4_1.py'))}",
             env={},
             provider="openai",
             model="gpt-4.1",
@@ -113,7 +130,7 @@ def default_adapters() -> dict[str, ModelAdapter]:
         "ollama-gpt-oss-20b": ModelAdapter(
             slug="ollama-gpt-oss-20b",
             label="Ollama gpt-oss:20b",
-            command=f"{python} {shlex.quote(str(REPO_ROOT / 'examples' / 'ollama_agent.py'))}",
+            command=f"{python} {shlex.quote(str(repo_root / 'examples' / 'ollama_agent.py'))}",
             env={"OLLAMA_MODEL": "gpt-oss:20b"},
             provider="ollama",
             model="gpt-oss:20b",
@@ -274,6 +291,10 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     selected_adapters = [adapters[slug] for slug in selected_model_slugs]
+    provider_error = validate_adapters_for_runner(selected_adapters, runner=args.runner)
+    if provider_error:
+        print(provider_error, file=sys.stderr)
+        return 2
     output_dir = resolve_output_dir(args)
     if args.dry_run:
         print_dry_run(selected_adapters, scenarios, args)
@@ -425,6 +446,37 @@ def model_adapter_from_config(payload: JsonDict, *, index: int) -> ModelAdapter:
     )
 
 
+def validate_adapters_for_runner(
+    adapters: list[ModelAdapter],
+    *,
+    runner: str,
+) -> str | None:
+    """Return a user-facing validation error for unsupported runner/provider combos."""
+
+    if runner == "interactive":
+        unsupported = [
+            adapter
+            for adapter in adapters
+            if adapter.provider not in INTERACTIVE_PROVIDERS
+        ]
+        if unsupported:
+            labels = ", ".join(
+                f"{adapter.slug} ({adapter.provider})" for adapter in unsupported
+            )
+            return (
+                "Interactive runner only supports provider values "
+                f"{', '.join(sorted(INTERACTIVE_PROVIDERS))}; unsupported: {labels}"
+            )
+    if runner == "batch":
+        missing_command = [adapter.slug for adapter in adapters if not adapter.command]
+        if missing_command:
+            return (
+                "Batch runner requires command for every adapter; missing command for "
+                f"{', '.join(missing_command)}"
+            )
+    return None
+
+
 def export_png(svg_path: Path, png_path: Path) -> bool:
     """Export SVG to PNG with available local tools."""
 
@@ -525,10 +577,6 @@ def run_adapter(
     retry_backoff: float,
     color: bool,
 ) -> list[ComparisonRun]:
-    if runner == "batch" and not adapter.command:
-        raise ValueError(
-            f"Model adapter {adapter.slug!r} needs a command for batch runner."
-        )
     runs = []
     total_attempts = len(scenarios) * repeats
     attempt_index = 0

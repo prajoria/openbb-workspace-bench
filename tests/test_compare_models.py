@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from workspace_bench.metrics import compute_reliability_metrics
 from workspace_bench.model_compare import (
+    ModelAdapter,
     colorize,
     format_result_cell,
     is_transient_http_status,
@@ -12,6 +13,8 @@ from workspace_bench.model_compare import (
     normalize_tool_name,
     parse_interactive_action,
     process_failure_rows,
+    resolve_repo_root,
+    validate_adapters_for_runner,
 )
 
 
@@ -177,3 +180,41 @@ def test_load_model_adapters_rejects_missing_models_list(tmp_path) -> None:
         assert "non-empty models list" in str(error)
     else:
         raise AssertionError("missing models list should fail")
+
+
+def test_resolve_repo_root_finds_checkout_from_nested_path() -> None:
+    root = resolve_repo_root()
+
+    assert (root / "pyproject.toml").exists()
+    assert (root / "examples" / "openai_gpt4_1.py").exists()
+
+
+def test_validate_adapters_for_runner_rejects_unsupported_interactive_provider() -> None:
+    adapter = ModelAdapter(
+        slug="custom-agent",
+        label="Custom Agent",
+        command="python my_agent.py",
+        env={},
+        provider="custom",
+        model="custom-model",
+    )
+
+    error = validate_adapters_for_runner([adapter], runner="interactive")
+
+    assert error is not None
+    assert "Interactive runner only supports" in error
+
+
+def test_validate_adapters_for_runner_requires_batch_command() -> None:
+    adapter = ModelAdapter(
+        slug="openai-compatible",
+        label="OpenAI Compatible",
+        command="",
+        env={},
+        provider="openai",
+        model="local-model",
+    )
+
+    error = validate_adapters_for_runner([adapter], runner="batch")
+
+    assert error == "Batch runner requires command for every adapter; missing command for openai-compatible"
