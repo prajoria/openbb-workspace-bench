@@ -91,7 +91,7 @@ The OpenAI adapter writes `openai_prompt.txt`, `openai_response.txt`, and `tool_
 Compare two models over all bundled scenarios with the interactive runner:
 
 ```bash
-uv run --extra dev python examples/compare_models.py \
+uv run --extra dev workspace-bench compare-models \
   --difficulty all \
   --timeout 240
 ```
@@ -99,7 +99,7 @@ uv run --extra dev python examples/compare_models.py \
 Compare only one difficulty slice:
 
 ```bash
-uv run --extra dev python examples/compare_models.py \
+uv run --extra dev workspace-bench compare-models \
   --difficulty easy \
   --timeout 240
 ```
@@ -107,10 +107,10 @@ uv run --extra dev python examples/compare_models.py \
 Run repeated attempts for a more stable comparison:
 
 ```bash
-uv run --extra dev python examples/compare_models.py \
+uv run --extra dev workspace-bench compare-models \
   --difficulty all \
   --repeats 3 \
-  --metric task-pass-rate \
+  --metric pass-at-k \
   --timeout 240
 ```
 
@@ -127,6 +127,9 @@ and `tool_calls.jsonl`. Use `--runner batch` to compare against the older
 single-shot JSONL adapter behavior. Transient model API failures such as HTTP
 520 are retried by default; tune this with `--model-retries` and
 `--retry-backoff`.
+
+Use `--scenario-dir` to compare models against a private task pack, and
+`--split dev|validation|test|train` to select a release slice.
 
 Export a task envelope without running an agent:
 

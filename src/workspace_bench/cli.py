@@ -23,16 +23,26 @@ from workspace_bench.models import (
     CANARY_GUID,
     RunResult,
     Scenario,
+    TaskPackManifest,
+    VALID_SCENARIO_SPLITS,
 )
 from workspace_bench.runner import (
     ScenarioRunner,
     find_scenario,
     load_builtin_scenarios,
+    load_scenario_directory,
     load_scenario_file,
+    load_task_pack_manifest,
 )
 
 
 def main(argv: list[str] | None = None) -> int:
+    raw_argv = list(sys.argv[1:] if argv is None else argv)
+    if raw_argv[:1] == ["compare-models"]:
+        from workspace_bench.model_compare import main as compare_models_main
+
+        return compare_models_main(raw_argv[1:])
+
     parser = argparse.ArgumentParser(prog="workspace-bench")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -70,6 +80,11 @@ def main(argv: list[str] | None = None) -> int:
     _add_scenario_collection_args(report_parser)
     report_parser.add_argument("--json", action="store_true", help="Emit JSON.")
     report_parser.add_argument("--output", help="Write report to a file.")
+
+    subparsers.add_parser(
+        "compare-models",
+        help="Compare local model adapters with the interactive benchmark runner.",
+    )
 
     run_parser = subparsers.add_parser("run", help="Run scenarios.")
     run_parser.add_argument("--scenario", help="Scenario id. Runs all when omitted.")
@@ -127,7 +142,7 @@ def main(argv: list[str] | None = None) -> int:
 
     subparsers.add_parser("canary", help="Print the benchmark contamination canary.")
 
-    args = parser.parse_args(argv)
+    args = parser.parse_args(raw_argv)
 
     if args.command == "list":
         return _cmd_list(args)
@@ -160,6 +175,11 @@ def _add_scenario_filters(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--level", help="Filter by level, e.g. L2.")
     parser.add_argument("--category", help="Filter by category.")
     parser.add_argument("--difficulty", help="Filter by difficulty.")
+    parser.add_argument(
+        "--split",
+        choices=sorted(VALID_SCENARIO_SPLITS),
+        help="Filter by scenario split.",
+    )
     parser.add_argument("--tag", action="append", default=[], help="Require a tag.")
 
 
@@ -185,6 +205,7 @@ def _cmd_list(args: argparse.Namespace) -> int:
         tags = ",".join(scenario.tags) if scenario.tags else "-"
         print(
             f"{scenario.id}\t{scenario.level}\t{scenario.difficulty}\t"
+            f"{scenario.split}\t"
             f"{scenario.category}\t{tags}\t{scenario.title}"
         )
     return 0
@@ -230,7 +251,7 @@ def _cmd_validate(args: argparse.Namespace) -> int:
 
 
 def _cmd_manifest(args: argparse.Namespace) -> int:
-    manifest = build_manifest(_scenario_collection(args))
+    manifest = build_manifest(_scenario_collection(args), _task_pack_manifest(args))
     if args.json:
         print(json.dumps(manifest, indent=2, sort_keys=True))
         return 0
@@ -240,13 +261,14 @@ def _cmd_manifest(args: argparse.Namespace) -> int:
     print(f"levels\t{','.join(manifest['levels'])}")
     print(f"categories\t{','.join(manifest['categories'])}")
     print(f"difficulties\t{','.join(manifest['difficulties'])}")
+    print(f"splits\t{','.join(manifest['splits'])}")
     print(f"canary\t{manifest['canary_guid']}")
     return 0
 
 
 def _cmd_report(args: argparse.Namespace) -> int:
     scenarios = _scenario_collection(args)
-    report = build_report(scenarios)
+    report = build_report(scenarios, _task_pack_manifest(args))
     rendered = (
         json.dumps(report, indent=2, sort_keys=True)
         if args.json
@@ -259,10 +281,13 @@ def _cmd_report(args: argparse.Namespace) -> int:
     return 0
 
 
-def build_manifest(scenarios: list[Scenario]) -> dict:
+def build_manifest(
+    scenarios: list[Scenario],
+    task_pack: TaskPackManifest | None = None,
+) -> dict:
     """Build a machine-readable dataset manifest."""
 
-    return {
+    payload = {
         "name": BENCHMARK_NAME,
         "version": BENCHMARK_VERSION,
         "release_id": BENCHMARK_RELEASE_ID,
@@ -271,19 +296,33 @@ def build_manifest(scenarios: list[Scenario]) -> dict:
         "levels": sorted({scenario.level for scenario in scenarios}),
         "categories": sorted({scenario.category for scenario in scenarios}),
         "difficulties": sorted({scenario.difficulty for scenario in scenarios}),
+        "splits": sorted({scenario.split for scenario in scenarios}),
         "tags": sorted({tag for scenario in scenarios for tag in scenario.tags}),
         "scenarios": [_scenario_summary(scenario) for scenario in scenarios],
     }
+    if task_pack:
+        payload["task_pack"] = {
+            "pack_id": task_pack.pack_id,
+            "release_id": task_pack.release_id,
+            "version": task_pack.version,
+            "visibility": task_pack.visibility,
+            "default_split": task_pack.default_split,
+            "description": task_pack.description,
+        }
+    return payload
 
 
-def build_report(scenarios: list[Scenario]) -> dict:
+def build_report(
+    scenarios: list[Scenario],
+    task_pack: TaskPackManifest | None = None,
+) -> dict:
     """Run built-in baselines and return a release-style report payload."""
 
     runner = ScenarioRunner()
     oracle_results = [runner.run(scenario, "oracle") for scenario in scenarios]
     noop_results = [runner.run(scenario, "noop") for scenario in scenarios]
     return {
-        "manifest": build_manifest(scenarios),
+        "manifest": build_manifest(scenarios, task_pack),
         "baselines": {
             "oracle": _results_summary(oracle_results),
             "noop": _results_summary(noop_results),
@@ -477,6 +516,7 @@ def _render_markdown_report(report: dict) -> str:
         f"- Levels: {', '.join(manifest['levels'])}",
         f"- Categories: {', '.join(manifest['categories'])}",
         f"- Difficulties: {', '.join(manifest['difficulties'])}",
+        f"- Splits: {', '.join(manifest['splits'])}",
         f"- Tags: {', '.join(manifest['tags'])}",
         "",
         "## Baselines",
@@ -503,8 +543,8 @@ def _render_markdown_report(report: dict) -> str:
             "",
             "## Scenario Results",
             "",
-            "| Scenario | Level | Category | Difficulty | Oracle | Noop |",
-            "| --- | --- | --- | --- | ---: | ---: |",
+            "| Scenario | Split | Level | Category | Difficulty | Oracle | Noop |",
+            "| --- | --- | --- | --- | --- | ---: | ---: |",
         ]
     )
     noop_by_id = {result["id"]: result for result in report["noop_results"]}
@@ -513,6 +553,7 @@ def _render_markdown_report(report: dict) -> str:
         lines.append(
             "| "
             f"{oracle_result['id']} | "
+            f"{oracle_result['split']} | "
             f"{oracle_result['level']} | "
             f"{oracle_result['category']} | "
             f"{oracle_result['difficulty']} | "
@@ -571,6 +612,10 @@ def _scenario_metadata_issues(scenario: Scenario) -> list[str]:
     issues = []
     if scenario.difficulty not in {"easy", "medium", "hard"}:
         issues.append("difficulty must be one of easy, medium, hard")
+    if scenario.split not in VALID_SCENARIO_SPLITS:
+        issues.append(
+            f"split must be one of {', '.join(sorted(VALID_SCENARIO_SPLITS))}"
+        )
     if not scenario.category:
         issues.append("category must be non-empty")
     if not scenario.tags:
@@ -600,6 +645,8 @@ def _filtered_scenarios(args: argparse.Namespace) -> list[Scenario]:
             for scenario in scenarios
             if scenario.difficulty == args.difficulty
         ]
+    if getattr(args, "split", None):
+        scenarios = [scenario for scenario in scenarios if scenario.split == args.split]
     for tag in getattr(args, "tag", []) or []:
         scenarios = [scenario for scenario in scenarios if tag in scenario.tags]
     return scenarios
@@ -621,8 +668,14 @@ def _scenario_collection(args: argparse.Namespace) -> list[Scenario]:
     scenario_dir = getattr(args, "scenario_dir", None)
     if not scenario_dir:
         return load_builtin_scenarios()
-    scenario_paths = sorted(Path(scenario_dir).glob("*.json"))
-    return [load_scenario_file(path) for path in scenario_paths]
+    return load_scenario_directory(Path(scenario_dir))
+
+
+def _task_pack_manifest(args: argparse.Namespace) -> TaskPackManifest | None:
+    scenario_dir = getattr(args, "scenario_dir", None)
+    if not scenario_dir:
+        return None
+    return load_task_pack_manifest(Path(scenario_dir))
 
 
 def _scenario_from_file_or_builtin(
@@ -645,6 +698,7 @@ def _scenario_summary(scenario: Scenario) -> dict:
         "level": scenario.level,
         "category": scenario.category,
         "difficulty": scenario.difficulty,
+        "split": scenario.split,
         "tags": scenario.tags,
         "source": scenario.source,
         "fixtures": [backend.name for backend in scenario.fixtures],
@@ -658,6 +712,7 @@ def _result_summary(result: RunResult) -> dict:
         "level": result.scenario.level,
         "category": result.scenario.category,
         "difficulty": result.scenario.difficulty,
+        "split": result.scenario.split,
         "tags": result.scenario.tags,
         "score": result.grade.score,
         "passed": result.grade.passed,

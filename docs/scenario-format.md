@@ -55,6 +55,7 @@ Metadata follows the same practical shape that makes Terminal-Bench tasks easy t
 | `level` | Yes | Capability tier such as `L0`, `L1`, or `L2`. |
 | `category` | Yes | Broad task family, e.g. `dashboard-construction`. |
 | `difficulty` | Yes | One of `easy`, `medium`, `hard`. |
+| `split` | Optional | One of `dev`, `validation`, `test`, or `train`. Defaults to the task pack default, then `dev`. |
 | `tags` | Yes | Non-empty list for filtering and benchmark cards. |
 | `source` | Recommended | Provenance for task authorship or dataset origin. |
 
@@ -215,3 +216,21 @@ uv run --extra dev workspace-bench run --scenario-dir ./my-workspace-tasks --age
 ```
 
 Use `--scenario-file` when iterating on one local scenario.
+
+A scenario directory can include a `task_pack.json` manifest:
+
+```json
+{
+  "pack_id": "my-workspace-tasks",
+  "release_id": "my-workspace-tasks-v1",
+  "version": "1.0.0",
+  "visibility": "private",
+  "default_split": "validation",
+  "description": "Internal Workspace tasks for model selection."
+}
+```
+
+`default_split` is applied to scenario files that do not set `split` directly.
+Use `workspace-bench list --scenario-dir ./my-workspace-tasks --split validation`
+or `workspace-bench compare-models --scenario-dir ./my-workspace-tasks --split validation`
+to run a specific slice.

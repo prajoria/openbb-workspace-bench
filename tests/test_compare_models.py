@@ -1,15 +1,9 @@
-"""Regression tests for the example comparison runner."""
+"""Regression tests for the model comparison runner."""
 
 from __future__ import annotations
 
-import sys
-from pathlib import Path
-
-
-EXAMPLES_DIR = Path(__file__).resolve().parents[1] / "examples"
-sys.path.insert(0, str(EXAMPLES_DIR))
-
-from compare_models import (  # noqa: E402
+from workspace_bench.metrics import compute_reliability_metrics
+from workspace_bench.model_compare import (
     colorize,
     format_result_cell,
     is_transient_http_status,
@@ -86,3 +80,20 @@ def test_format_result_cell_aggregates_repeats() -> None:
     )
 
     assert cell == "1/2 avg=0.750, proc=1 (missing_widget)"
+
+
+def test_compute_reliability_metrics_for_repeated_attempts() -> None:
+    metrics = compute_reliability_metrics(
+        {
+            "always_passes": [True, True, True],
+            "sometimes_passes": [False, True, False],
+            "never_passes": [False, False, False],
+        }
+    )
+
+    assert metrics["pass_at_k_count"] == 2
+    assert metrics["pass_power_k_count"] == 1
+    assert metrics["pass_at_k"] == 2 / 3
+    assert metrics["pass_power_k"] == 1 / 3
+    assert metrics["reliability_min_k"] == 3
+    assert metrics["reliability_max_k"] == 3

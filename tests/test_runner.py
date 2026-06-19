@@ -93,6 +93,7 @@ def test_cli_manifest_json_includes_dataset_summary(capsys) -> None:
     assert payload["scenario_count"] == len(load_builtin_scenarios())
     assert payload["canary_guid"] == CANARY_GUID
     assert "dashboard-construction" in payload["categories"]
+    assert payload["splits"] == ["dev"]
 
 
 def test_cli_report_json_includes_release_checks(capsys) -> None:
@@ -132,6 +133,7 @@ def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
     assert exit_code == 0
     assert payload["summary"]["passed"] == 1
     assert payload["results"][0]["difficulty"] == "easy"
+    assert payload["results"][0]["split"] == "dev"
 
 
 def test_cli_can_run_private_scenario_directory(tmp_path, capsys) -> None:
@@ -164,6 +166,65 @@ def test_cli_can_run_private_scenario_directory(tmp_path, capsys) -> None:
     assert run_exit == 0
     assert payload["summary"]["total"] == 1
     assert payload["summary"]["passed"] == 1
+
+
+def test_cli_private_task_pack_manifest_sets_default_split(tmp_path, capsys) -> None:
+    scenario = next(
+        item for item in load_builtin_scenarios() if item.id == "l1_add_price_widget"
+    )
+    (tmp_path / "task_pack.json").write_text(
+        json.dumps(
+            {
+                "pack_id": "private-pack",
+                "release_id": "private-pack-v1",
+                "version": "1.0.0",
+                "visibility": "private",
+                "default_split": "validation",
+            }
+        ),
+        encoding="utf-8",
+    )
+    (tmp_path / "l1_add_price_widget.json").write_text(
+        scenario.source_path.read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+
+    manifest_exit = main(["manifest", "--scenario-dir", str(tmp_path), "--json"])
+
+    payload = json.loads(capsys.readouterr().out)
+    assert manifest_exit == 0
+    assert payload["splits"] == ["validation"]
+    assert payload["task_pack"]["pack_id"] == "private-pack"
+    assert payload["scenarios"][0]["split"] == "validation"
+
+
+def test_cli_filters_by_split_for_private_task_pack(tmp_path, capsys) -> None:
+    scenario = next(
+        item for item in load_builtin_scenarios() if item.id == "l1_add_price_widget"
+    )
+    (tmp_path / "task_pack.json").write_text(
+        json.dumps({"default_split": "validation"}),
+        encoding="utf-8",
+    )
+    (tmp_path / "l1_add_price_widget.json").write_text(
+        scenario.source_path.read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+
+    exit_code = main(
+        [
+            "list",
+            "--scenario-dir",
+            str(tmp_path),
+            "--split",
+            "test",
+            "--json",
+        ]
+    )
+
+    payload = json.loads(capsys.readouterr().out)
+    assert exit_code == 0
+    assert payload == []
 
 
 def test_cli_export_task_writes_public_agent_envelope(tmp_path) -> None:

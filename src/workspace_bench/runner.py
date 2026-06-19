@@ -11,11 +11,13 @@ from workspace_bench.episode import WorkspaceEpisode
 from workspace_bench.models import (
     RunResult,
     Scenario,
+    TaskPackManifest,
 )
 from workspace_bench.simulated_workspace import SimulatedWorkspace
 
 
 SCENARIO_PACKAGE = "workspace_bench.scenarios"
+TASK_PACK_MANIFEST = "task_pack.json"
 
 
 class ScenarioRunner:
@@ -49,10 +51,30 @@ def load_builtin_scenarios() -> list[Scenario]:
     return [load_scenario_file(Path(path)) for path in scenario_files]
 
 
-def load_scenario_file(path: Path) -> Scenario:
+def load_scenario_file(path: Path, default_split: str = "dev") -> Scenario:
     with path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
-    return Scenario.from_dict(payload, source_path=path)
+    return Scenario.from_dict(payload, source_path=path, default_split=default_split)
+
+
+def load_task_pack_manifest(path: Path) -> TaskPackManifest | None:
+    manifest_path = path / TASK_PACK_MANIFEST
+    if not manifest_path.exists():
+        return None
+    with manifest_path.open("r", encoding="utf-8") as handle:
+        return TaskPackManifest.from_dict(json.load(handle))
+
+
+def load_scenario_directory(path: Path) -> list[Scenario]:
+    manifest = load_task_pack_manifest(path)
+    default_split = manifest.default_split if manifest else "dev"
+    scenario_paths = sorted(
+        candidate for candidate in path.glob("*.json") if candidate.name != TASK_PACK_MANIFEST
+    )
+    return [
+        load_scenario_file(scenario_path, default_split=default_split)
+        for scenario_path in scenario_paths
+    ]
 
 
 def find_scenario(scenario_id: str) -> Scenario:
