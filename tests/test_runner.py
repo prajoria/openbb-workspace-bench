@@ -5,7 +5,7 @@ from pathlib import Path
 
 from workspace_bench.cli import main
 from workspace_bench.models import CANARY_GUID
-from workspace_bench.runner import ScenarioRunner, load_builtin_scenarios
+from workspace_bench.runner import ScenarioRunner, load_builtin_scenarios, load_scenario_file
 
 
 def test_oracle_passes_all_builtin_scenarios() -> None:
@@ -397,3 +397,54 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
     assert second_exit == 1
     assert payload["summary"]["passed"] == 0
     assert payload["summary"]["process_failures"] == 1
+
+
+def test_scenario_loader_rejects_invalid_split(tmp_path) -> None:
+    scenario = next(
+        item for item in load_builtin_scenarios() if item.id == "l1_add_price_widget"
+    )
+    payload = json.loads(scenario.source_path.read_text(encoding="utf-8"))
+    payload["split"] = "prod"
+    scenario_path = tmp_path / "bad_split.json"
+    scenario_path.write_text(json.dumps(payload), encoding="utf-8")
+
+    try:
+        load_scenario_file(scenario_path)
+    except ValueError as error:
+        assert "split must be one of" in str(error)
+    else:
+        raise AssertionError("invalid scenario split should fail")
+
+
+def test_scenario_loader_rejects_malformed_allowed_tools(tmp_path) -> None:
+    scenario = next(
+        item for item in load_builtin_scenarios() if item.id == "l1_add_price_widget"
+    )
+    payload = json.loads(scenario.source_path.read_text(encoding="utf-8"))
+    payload["allowed_tools"] = "create_widget"
+    scenario_path = tmp_path / "bad_allowed_tools.json"
+    scenario_path.write_text(json.dumps(payload), encoding="utf-8")
+
+    try:
+        load_scenario_file(scenario_path)
+    except ValueError as error:
+        assert "allowed_tools must be a list" in str(error)
+    else:
+        raise AssertionError("malformed allowed_tools should fail")
+
+
+def test_validate_reports_duplicate_scenario_ids(tmp_path, capsys) -> None:
+    scenario = next(
+        item for item in load_builtin_scenarios() if item.id == "l1_add_price_widget"
+    )
+    source = scenario.source_path.read_text(encoding="utf-8")
+    (tmp_path / "one.json").write_text(source, encoding="utf-8")
+    (tmp_path / "two.json").write_text(source, encoding="utf-8")
+
+    exit_code = main(
+        ["validate", "--scenario-dir", str(tmp_path), "--min-scenarios", "1"]
+    )
+
+    output = capsys.readouterr().out
+    assert exit_code == 1
+    assert "scenario id must be unique" in output

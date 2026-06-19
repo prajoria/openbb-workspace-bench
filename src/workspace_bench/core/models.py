@@ -29,11 +29,19 @@ class TaskPackManifest:
 
     @classmethod
     def from_dict(cls, payload: JsonDict) -> "TaskPackManifest":
+        if not isinstance(payload, dict):
+            raise ValueError("task pack manifest must be a JSON object")
         pack_id = str(payload.get("pack_id", "workspace-task-pack"))
         release_id = str(payload.get("release_id", pack_id))
         version = str(payload.get("version", "0.1.0"))
         visibility = str(payload.get("visibility", "private"))
         default_split = str(payload.get("default_split", "dev"))
+        if not pack_id:
+            raise ValueError("task pack manifest requires non-empty pack_id")
+        if not release_id:
+            raise ValueError("task pack manifest requires non-empty release_id")
+        if not version:
+            raise ValueError("task pack manifest requires non-empty version")
         if visibility not in VALID_TASK_PACK_VISIBILITIES:
             raise ValueError(
                 f"task pack visibility must be one of {sorted(VALID_TASK_PACK_VISIBILITIES)}"
@@ -195,6 +203,8 @@ class LayoutChecks:
     @classmethod
     def from_dict(cls, payload: JsonDict | None) -> "LayoutChecks":
         payload = payload or {}
+        if not isinstance(payload, dict):
+            raise ValueError("layout must be an object")
         return cls(
             no_overlaps=bool(payload.get("no_overlaps", False)),
             within_grid=bool(payload.get("within_grid", True)),
@@ -214,6 +224,8 @@ class TraceChecks:
     @classmethod
     def from_dict(cls, payload: JsonDict | None) -> "TraceChecks":
         payload = payload or {}
+        if not isinstance(payload, dict):
+            raise ValueError("trace_checks must be an object")
         repeated = payload.get("max_repeated_snapshots")
         return cls(
             max_invalid_tool_calls=int(payload.get("max_invalid_tool_calls", 0)),
@@ -242,19 +254,30 @@ class SuccessCriteria:
     @classmethod
     def from_dict(cls, payload: JsonDict | None) -> "SuccessCriteria":
         payload = payload or {}
+        if not isinstance(payload, dict):
+            raise ValueError("success must be an object")
+        required_tabs = _string_list(payload.get("required_tabs", []), "required_tabs")
+        required_widgets = _object_list(
+            payload.get("required_widgets", []), "required_widgets"
+        )
+        required_generated_widgets = _object_list(
+            payload.get("required_generated_widgets", []),
+            "required_generated_widgets",
+        )
+        required_layouts = _object_list(
+            payload.get("required_layouts", []), "required_layouts"
+        )
         return cls(
-            required_tabs=tuple(payload.get("required_tabs", [])),
+            required_tabs=tuple(required_tabs),
             required_widgets=tuple(
-                RequiredWidget.from_dict(item)
-                for item in payload.get("required_widgets", [])
+                RequiredWidget.from_dict(item) for item in required_widgets
             ),
             required_generated_widgets=tuple(
                 RequiredGeneratedWidget.from_dict(item)
-                for item in payload.get("required_generated_widgets", [])
+                for item in required_generated_widgets
             ),
             required_layouts=tuple(
-                RequiredLayout.from_dict(item)
-                for item in payload.get("required_layouts", [])
+                RequiredLayout.from_dict(item) for item in required_layouts
             ),
             required_dashboard_name_contains=payload.get(
                 "required_dashboard_name_contains"
@@ -292,6 +315,8 @@ class Scenario:
         source_path: Path | None = None,
         default_split: str = "dev",
     ) -> "Scenario":
+        if not isinstance(payload, dict):
+            raise ValueError("scenario must be a JSON object")
         scenario_id = payload.get("id")
         title = payload.get("title")
         prompt = payload.get("prompt")
@@ -301,27 +326,48 @@ class Scenario:
             raise ValueError(f"scenario {scenario_id} requires title")
         if not isinstance(prompt, str) or not prompt:
             raise ValueError(f"scenario {scenario_id} requires prompt")
-        fixtures_payload = payload.get("fixtures", {}).get("backends", [])
+        split = str(payload.get("split", default_split))
+        if split not in VALID_SCENARIO_SPLITS:
+            raise ValueError(
+                f"scenario {scenario_id} split must be one of "
+                f"{sorted(VALID_SCENARIO_SPLITS)}"
+            )
+        fixtures = _optional_object(payload.get("fixtures", {}), "fixtures")
+        fixtures_payload = _object_list(
+            fixtures.get("backends", []), "fixtures.backends"
+        )
+        initial_state = _optional_object(
+            payload.get("initial_state", {}), "initial_state"
+        )
+        allowed_tools = _string_list(
+            payload.get("allowed_tools", []), "allowed_tools"
+        )
+        tags = _string_list(payload.get("tags", []), "tags")
+        success = _optional_object(payload.get("success", {}), "success")
+        oracle_tool_calls = _object_list(
+            payload.get("oracle_tool_calls", []), "oracle_tool_calls"
+        )
+        limits = _optional_object(payload.get("limits", {}), "limits")
         return cls(
             id=scenario_id,
             title=title,
             level=str(payload.get("level", "L0")),
             category=str(payload.get("category", "workspace")),
             difficulty=str(payload.get("difficulty", "medium")),
-            split=str(payload.get("split", default_split)),
-            tags=tuple(str(tag) for tag in payload.get("tags", [])),
+            split=split,
+            tags=tuple(tags),
             source=payload.get("source"),
             prompt=prompt,
             fixtures=tuple(
                 FixtureBackendRef.from_dict(item) for item in fixtures_payload
             ),
-            initial_state=payload.get("initial_state", {}),
-            allowed_tools=tuple(payload.get("allowed_tools", [])),
-            success=SuccessCriteria.from_dict(payload.get("success")),
+            initial_state=initial_state,
+            allowed_tools=tuple(allowed_tools),
+            success=SuccessCriteria.from_dict(success),
             oracle_tool_calls=tuple(
-                ToolCall.from_dict(item) for item in payload.get("oracle_tool_calls", [])
+                ToolCall.from_dict(item) for item in oracle_tool_calls
             ),
-            limits=payload.get("limits", {}),
+            limits=limits,
             source_path=source_path,
         )
 
@@ -371,3 +417,27 @@ def _optional_float(value: Any) -> float | None:
     if value is None:
         return None
     return float(value)
+
+
+def _optional_object(value: Any, field_name: str) -> JsonDict:
+    if value is None:
+        return {}
+    if not isinstance(value, dict):
+        raise ValueError(f"{field_name} must be an object")
+    return value
+
+
+def _object_list(value: Any, field_name: str) -> list[JsonDict]:
+    if not isinstance(value, list):
+        raise ValueError(f"{field_name} must be a list")
+    if not all(isinstance(item, dict) for item in value):
+        raise ValueError(f"{field_name} must contain only objects")
+    return value
+
+
+def _string_list(value: Any, field_name: str) -> list[str]:
+    if not isinstance(value, list):
+        raise ValueError(f"{field_name} must be a list")
+    if not all(isinstance(item, str) for item in value):
+        raise ValueError(f"{field_name} must contain only strings")
+    return value

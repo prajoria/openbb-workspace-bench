@@ -668,6 +668,19 @@ def validate_scenarios(scenarios: list[Scenario], min_scenarios: int = 1) -> dic
     oracle_results = [runner.run(scenario, "oracle") for scenario in scenarios]
     noop_results = [runner.run(scenario, "noop") for scenario in scenarios]
     issues = []
+    seen_ids: set[str] = set()
+    duplicate_ids: set[str] = set()
+    for scenario in scenarios:
+        if scenario.id in seen_ids:
+            duplicate_ids.add(scenario.id)
+        seen_ids.add(scenario.id)
+    for scenario_id in sorted(duplicate_ids):
+        issues.append(
+            {
+                "scenario_id": scenario_id,
+                "message": "scenario id must be unique within the selected pack",
+            }
+        )
     if len(scenarios) < min_scenarios:
         issues.append(
             {

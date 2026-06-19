@@ -1,6 +1,6 @@
 # Scenario Format
 
-Scenarios are JSON files bundled under `src/workspace_bench/scenarios`.
+Scenarios are JSON files bundled under `src/workspace_bench/core/scenarios`.
 
 The bundled `workspace-core-v0` release uses this same format as private task packs loaded through `--scenario-dir`.
 
