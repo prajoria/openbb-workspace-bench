@@ -14,7 +14,15 @@ Use this package when you need to:
 - create chosen/rejected preference pairs from repeated attempts
 - replay saved tool calls through the normal grader
 
+Module responsibilities:
+
+- `schema.py`: canonical rollout and preference schema constants.
+- `loaders.py`: oracle, comparison-directory, trace-directory, and replay loaders.
+- `rollouts.py`: canonical rollout JSONL writer.
+- `sft.py`: SFT format conversion and JSONL writer.
+- `preferences.py`: chosen/rejected preference-pair builder and writer.
+- `jsonl.py`: shared JSONL writer utility.
+
 Exports should stay separate from benchmark publishing. Public tasks, hidden
 tasks, oracle traces, and model traces should only become training data through
 an explicit export command.
-
