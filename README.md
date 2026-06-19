@@ -21,6 +21,16 @@ Current release: `workspace-core-v0` alpha.
 
 The simulator is intentional. It makes evals fast, deterministic, and suitable for CI or RL rollouts. The live smoke runner exercises the real `workspace-mcp` HTTP and websocket bridge path against the same scenario contract.
 
+## What This Is Not
+
+- It is not a full model-training framework.
+- It is not a public leaderboard yet.
+- It is not live-market-data financial reasoning by default.
+- It is not a real browser-backed Workspace runner by default.
+
+Training, RL, and live Workspace execution are downstream paths that reuse the
+same benchmark core.
+
 ## Quick Start
 
 Install dependencies and inspect the benchmark:
@@ -259,6 +269,7 @@ See [docs/scenario-format.md](docs/scenario-format.md).
 
 See [docs/benchmark-card.md](docs/benchmark-card.md) for the `workspace-core-v0` benchmark card, scope, and limitations.
 See [docs/publishing.md](docs/publishing.md) for release and publishing gates.
+See [docs/contributing.md](docs/contributing.md) for scenario, grader, agent, export, and RL contribution paths.
 
 ## Task Levels
 
@@ -273,35 +284,34 @@ See [docs/publishing.md](docs/publishing.md) for release and publishing gates.
 
 ```text
 src/workspace_bench/
-  agent_command.py       External agent command adapter
-  agents.py              Oracle and no-op agents
   cli.py                 Command line interface
-  envs.py                Gym-style RL environment adapter
-  exports.py             Rollout, SFT, and preference export helpers
-  fixtures.py            Deterministic fixture backends and HTTP server
-  graders.py             State and trace graders
-  live_mcp.py            Live workspace-mcp smoke bridge
-  models.py              Scenario and result dataclasses
-  runner.py              Scenario loading and execution
-  simulated_workspace.py Workspace MCP simulator
-  scenarios/*.json       Bundled workspace-core-v0 scenarios
+  core/                  Scenario dataclasses, bundled tasks, episodes, runner, graders
+  workspace/             Fixture backends, simulator, live workspace-mcp smoke bridge
+  agents/                Oracle/noop agents, JSONL command protocol, model adapter helpers
+  reports/               Model comparison, reliability metrics, charts, analysis reports
+  exports/               Rollout, SFT, preference, and metadata export helpers
+  rl/                    Gym-style env, action/observation/reward helpers
+  *.py                   Backward-compatible public import wrappers
 docs/
   agent-command.md
   architecture.md
   benchmark-card.md
   benchmark-report.md
+  contributing.md
   launch-readiness.md
   publishing.md
   private-task-packs.md
   result-schema.md
   rl-factory-adapter.md
   scenario-format.md
+  training-recipes.md
   terminal-bench-lessons.md
 examples/
   jsonl_rule_agent.py       Repo-checkout wrapper for the packaged demo agent
   ollama_agent.py           Local Ollama adapter template
   openai_gpt4_1.py          GPT-4.1 OpenAI API adapter template
   compare_models.py         Interactive multi-model runner and chart generator
+  models.example.json       Model comparison adapter config example
 tests/
 ```
 

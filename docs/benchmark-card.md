@@ -58,6 +58,9 @@ Official published model/agent baselines are not yet included. The repository
 does include local Ollama and OpenAI adapter examples plus an interactive
 comparison runner for producing your own baselines.
 
+The comparison runner supports repeated attempts, pass rate, task pass rate,
+mean score, pass@k, pass^k, Markdown analysis, SVG charts, and PNG charts.
+
 ## Intended Use
 
 Use this release for:
@@ -67,6 +70,7 @@ Use this release for:
 - simulator-backed CI evals
 - fixture-backed workflow prototyping
 - RL environment development
+- SFT, preference, and rollout export generation
 - live `workspace-mcp` sidecar smoke tests
 
 Do not use this release as a public leaderboard without adding hidden/generated tasks and real model baselines.
@@ -79,6 +83,10 @@ Do not use this release as a public leaderboard without adding hidden/generated 
 - Financial data is deterministic fixture data, not live market data.
 - `run-agent-command` is trace-producing. Use `examples/compare_models.py` for
   interactive local model runs.
+- The Gym-style adapter is an environment wrapper, not a complete RL training
+  stack.
+- Training exports are explicit artifacts; benchmark publishing does not imply
+  that oracle traces are training data.
 - Narrative quality is only checked through deterministic generated-widget content criteria.
 
 ## Contamination Policy

@@ -14,6 +14,9 @@ Workspace Bench is ready for an alpha benchmark release because it now has:
 - report generation
 - external agent command contract
 - task envelope export
+- configurable multi-model comparison
+- rollout, SFT, and preference exports
+- Gym-style RL adapter
 - private scenario directory support
 - live `workspace-mcp` sidecar smoke command
 - CI configuration
@@ -38,3 +41,13 @@ The most important gaps before a broader public leaderboard are:
 5. A submission protocol and leaderboard policy.
 
 The benchmark is strong enough to announce as an alpha developer release if the simulator-backed nature and leaderboard limitations are explicit.
+
+## Alpha Release Checklist
+
+- `uv run --extra dev python -m pytest`
+- `uv run --extra dev workspace-bench validate --min-scenarios 25`
+- `uv run --extra dev workspace-bench compare-models --models-file examples/models.example.json --difficulty easy --dry-run`
+- `uv run --extra dev workspace-bench export-rollouts --oracle --scenario l1_add_price_widget --output /tmp/workspace-rollouts.jsonl`
+- README quickstart commands match the CLI.
+- `docs/benchmark-card.md` limitations are current.
+- Hidden/private task-pack behavior is documented.

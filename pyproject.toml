@@ -23,8 +23,8 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Repository = "https://github.com/OpenBB-finance/workspace-bench"
-Issues = "https://github.com/OpenBB-finance/workspace-bench/issues"
+Repository = "https://github.com/DidierRLopes/openbb-workspace-bench"
+Issues = "https://github.com/DidierRLopes/openbb-workspace-bench/issues"
 
 [project.optional-dependencies]
 dev = [

@@ -35,7 +35,9 @@ uv run --extra live workspace-bench smoke-workspace-mcp \
 - `docs/benchmark-report.md`: current oracle/no-op scorecard
 - `docs/agent-command.md`: BYO-agent protocol
 - `docs/private-task-packs.md`: BYO-data/task-pack workflow
-- `RELEASE_CHECKLIST.md`: release gate checklist
+- `docs/training-recipes.md`: SFT, preference, and RL rollout export patterns
+- `docs/contributing.md`: contribution paths for scenarios, graders, agents, exports, and RL
+- `docs/launch-readiness.md`: release gate checklist
 - `.github/workflows/ci.yml`: continuous validation
 
 ## Owner Decisions Before Public Announcement
