@@ -20,15 +20,15 @@ Workspace Bench conceptually maps to an RL-Factory environment like this:
 Start with a sparse final reward:
 
 ```python
-from workspace_bench.episode import WorkspaceEpisode
-from workspace_bench.models import ToolCall
+from workspace_bench.envs import WorkspaceGymEnv
 
-episode = WorkspaceEpisode(scenario)
+env = WorkspaceGymEnv(scenario=scenario)
+observation, info = env.reset()
 
 for action in rollout_actions:
-    observation = episode.step(ToolCall(action.name, action.args))
-
-reward = episode.grade().score
+    observation, reward, terminated, truncated, info = env.step(action)
+    if terminated or truncated:
+        break
 ```
 
 This is robust because it uses deterministic state checks instead of judging prose.

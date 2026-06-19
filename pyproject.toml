@@ -35,6 +35,9 @@ live = [
   "mcp>=1.27.0",
   "websockets>=16.0"
 ]
+gym = [
+  "gymnasium>=0.29"
+]
 
 [project.scripts]
 workspace-bench = "workspace_bench.cli:main"

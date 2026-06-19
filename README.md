@@ -264,6 +264,8 @@ src/workspace_bench/
   agent_command.py       External agent command adapter
   agents.py              Oracle and no-op agents
   cli.py                 Command line interface
+  envs.py                Gym-style RL environment adapter
+  exports.py             Rollout, SFT, and preference export helpers
   fixtures.py            Deterministic fixture backends and HTTP server
   graders.py             State and trace graders
   live_mcp.py            Live workspace-mcp smoke bridge
@@ -310,6 +312,18 @@ RL is a downstream consumer of the benchmark, not the primary identity. The same
 5. compute reward with the same grader used by evaluation
 
 The first reward should be sparse final-state correctness. Process rewards can then reuse trace checks: schema-before-create, valid identifiers, no repeated snapshots, and limited invalid calls.
+
+Minimal Gym-style usage:
+
+```python
+from workspace_bench.envs import WorkspaceGymEnv
+
+env = WorkspaceGymEnv()
+observation, info = env.reset(seed=1)
+observation, reward, terminated, truncated, info = env.step(
+    {"tool": "get_workspace_snapshot", "args": {}}
+)
+```
 
 ## Release Notes
 
