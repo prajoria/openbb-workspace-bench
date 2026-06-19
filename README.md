@@ -139,6 +139,26 @@ uv run workspace-bench export-task \
   --output task.json
 ```
 
+Export rollouts or SFT data explicitly:
+
+```bash
+uv run --extra dev workspace-bench export-rollouts \
+  --oracle \
+  --scenario l1_add_price_widget \
+  --output runs/exports/oracle-rollouts.jsonl
+
+uv run --extra dev workspace-bench export-sft \
+  --oracle \
+  --scenario l1_add_price_widget \
+  --format openai_messages \
+  --output runs/exports/oracle-sft.jsonl
+```
+
+You can also export from a `compare-models` output directory with
+`--comparison-dir runs/comparison/<run-id>`. SFT export includes only passing
+attempts by default; add `--include-failures` to keep failed attempts with grade
+metadata.
+
 See [docs/agent-command.md](docs/agent-command.md) for the external-agent contract and [docs/result-schema.md](docs/result-schema.md) for result JSON.
 
 ## Private Task Packs

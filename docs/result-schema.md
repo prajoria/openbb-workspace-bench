@@ -97,3 +97,37 @@ Each trace artifact includes:
 - final Workspace snapshot
 
 Trace artifacts are the best debugging input when a benchmark run regresses.
+
+## Rollout Export
+
+Use `export-rollouts` to normalize oracle traces, comparison runs, or trace
+artifacts into portable JSONL:
+
+```bash
+uv run --extra dev workspace-bench export-rollouts \
+  --oracle \
+  --scenario l1_add_price_widget \
+  --output rollouts.jsonl
+```
+
+Each JSONL row has this shape:
+
+```json
+{
+  "schema_version": "workspace-bench-rollout-v1",
+  "task": {},
+  "messages": [],
+  "tool_calls": [],
+  "tool_results": [],
+  "final_snapshot": {},
+  "grade": {},
+  "metadata": {}
+}
+```
+
+`export-sft` converts the same rollout records to `openai_messages`,
+`sharegpt`, or `tool_call_jsonl`. Passing attempts are exported by default;
+use `--include-failures` to include failed attempts with grade metadata.
+
+`export-preferences` reads a repeated `compare-models` run and emits
+`chosen`/`rejected` pairs for attempts on the same model and scenario.

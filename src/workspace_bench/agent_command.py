@@ -55,6 +55,7 @@ def build_task_envelope(scenario: Scenario) -> JsonDict:
             "level": scenario.level,
             "category": scenario.category,
             "difficulty": scenario.difficulty,
+            "split": scenario.split,
             "tags": list(scenario.tags),
             "source": scenario.source,
             "prompt": scenario.prompt,

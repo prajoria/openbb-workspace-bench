@@ -126,6 +126,37 @@ def main(argv: list[str] | None = None) -> int:
     export_parser.add_argument("--scenario-file", help="Export a scenario JSON file.")
     export_parser.add_argument("--output", required=True)
 
+    rollout_parser = subparsers.add_parser(
+        "export-rollouts", help="Export normalized rollout JSONL."
+    )
+    _add_rollout_source_args(rollout_parser)
+    _add_scenario_selection_args(rollout_parser)
+
+    sft_parser = subparsers.add_parser(
+        "export-sft", help="Export rollout data in an SFT-friendly JSONL format."
+    )
+    _add_rollout_source_args(sft_parser)
+    _add_scenario_selection_args(sft_parser)
+    sft_parser.add_argument(
+        "--format",
+        choices=["sharegpt", "openai_messages", "tool_call_jsonl"],
+        default="openai_messages",
+        help="SFT output format.",
+    )
+    sft_parser.add_argument(
+        "--include-failures",
+        action="store_true",
+        help="Include failed attempts. By default only passing attempts are exported.",
+    )
+
+    preference_parser = subparsers.add_parser(
+        "export-preferences",
+        help="Export chosen/rejected preference pairs from repeated attempts.",
+    )
+    preference_parser.add_argument("--comparison-dir", required=True)
+    preference_parser.add_argument("--output", required=True)
+    _add_scenario_selection_args(preference_parser)
+
     agent_parser = subparsers.add_parser(
         "run-agent-command",
         help="Run an external command that emits JSONL Workspace tool calls.",
@@ -162,6 +193,12 @@ def main(argv: list[str] | None = None) -> int:
         return _cmd_smoke_workspace_mcp(args)
     if args.command == "export-task":
         return _cmd_export_task(args)
+    if args.command == "export-rollouts":
+        return _cmd_export_rollouts(args)
+    if args.command == "export-sft":
+        return _cmd_export_sft(args)
+    if args.command == "export-preferences":
+        return _cmd_export_preferences(args)
     if args.command == "run-agent-command":
         return _cmd_run_agent_command(args)
     if args.command == "canary":
@@ -187,6 +224,24 @@ def _add_scenario_collection_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--scenario-dir",
         help="Directory of scenario JSON files. Defaults to the bundled benchmark.",
+    )
+
+
+def _add_scenario_selection_args(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--scenario", help="Scenario id. Uses all when omitted.")
+    parser.add_argument("--scenario-file", help="Use one scenario JSON file.")
+    _add_scenario_collection_args(parser)
+    _add_scenario_filters(parser)
+
+
+def _add_rollout_source_args(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--output", required=True)
+    parser.add_argument("--comparison-dir", help="Read a compare-models output directory.")
+    parser.add_argument("--trace-dir", help="Read trace artifacts from this directory.")
+    parser.add_argument(
+        "--oracle",
+        action="store_true",
+        help="Export oracle traces for the selected scenarios.",
     )
 
 
@@ -385,6 +440,38 @@ def _cmd_export_task(args: argparse.Namespace) -> int:
     scenario = _scenario_from_file_or_builtin(scenario_id, args.scenario_file)
     write_task_envelope(Path(args.output), scenario)
     print(f"Wrote task envelope for {scenario.id} to {args.output}")
+    return 0
+
+
+def _cmd_export_rollouts(args: argparse.Namespace) -> int:
+    from workspace_bench.exports import write_rollouts_jsonl
+
+    records = _load_export_rollouts(args)
+    count = write_rollouts_jsonl(records, Path(args.output))
+    print(f"Wrote {count} rollout record(s) to {args.output}")
+    return 0
+
+
+def _cmd_export_sft(args: argparse.Namespace) -> int:
+    from workspace_bench.exports import write_sft_jsonl
+
+    records = _load_export_rollouts(args)
+    count = write_sft_jsonl(
+        records,
+        Path(args.output),
+        fmt=args.format,
+        include_failures=args.include_failures,
+    )
+    print(f"Wrote {count} SFT record(s) to {args.output}")
+    return 0
+
+
+def _cmd_export_preferences(args: argparse.Namespace) -> int:
+    from workspace_bench.exports import write_preferences_jsonl
+
+    records = _load_export_rollouts(args)
+    count = write_preferences_jsonl(records, Path(args.output))
+    print(f"Wrote {count} preference pair(s) to {args.output}")
     return 0
 
 
@@ -662,6 +749,33 @@ def _selected_scenarios(args: argparse.Namespace) -> list[Scenario]:
         if not scenarios:
             raise KeyError(f"Unknown scenario {scenario_id!r}")
     return scenarios
+
+
+def _load_export_rollouts(args: argparse.Namespace):
+    from workspace_bench.exports import (
+        load_comparison_rollouts,
+        load_trace_dir_rollouts,
+        rollouts_from_oracle,
+    )
+
+    source_count = sum(
+        [
+            bool(getattr(args, "comparison_dir", None)),
+            bool(getattr(args, "trace_dir", None)),
+            bool(getattr(args, "oracle", False)),
+        ]
+    )
+    if source_count != 1:
+        raise SystemExit(
+            "Choose exactly one rollout source: --oracle, --comparison-dir, or --trace-dir"
+        )
+
+    scenarios = _selected_scenarios(args)
+    if getattr(args, "oracle", False):
+        return rollouts_from_oracle(scenarios)
+    if getattr(args, "comparison_dir", None):
+        return load_comparison_rollouts(Path(args.comparison_dir), scenarios)
+    return load_trace_dir_rollouts(Path(args.trace_dir), scenarios)
 
 
 def _scenario_collection(args: argparse.Namespace) -> list[Scenario]:

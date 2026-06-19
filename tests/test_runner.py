@@ -245,8 +245,61 @@ def test_cli_export_task_writes_public_agent_envelope(tmp_path) -> None:
     assert payload["schema_version"] == "workspace-bench-task-v1"
     assert payload["benchmark"]["release_id"] == "workspace-core-v0"
     assert payload["scenario"]["id"] == "l1_add_price_widget"
+    assert payload["scenario"]["split"] == "dev"
     assert "oracle_tool_calls" not in payload["scenario"]
     assert "success" not in payload["scenario"]
+
+
+def test_cli_export_rollouts_writes_oracle_record(tmp_path) -> None:
+    output = tmp_path / "rollouts.jsonl"
+
+    exit_code = main(
+        [
+            "export-rollouts",
+            "--oracle",
+            "--scenario",
+            "l1_add_price_widget",
+            "--output",
+            str(output),
+        ]
+    )
+
+    records = [
+        json.loads(line)
+        for line in output.read_text(encoding="utf-8").splitlines()
+    ]
+    assert exit_code == 0
+    assert len(records) == 1
+    assert records[0]["schema_version"] == "workspace-bench-rollout-v1"
+    assert records[0]["metadata"]["passed"] is True
+    assert records[0]["tool_calls"][0]["tool"] == "get_workspace_snapshot"
+    assert records[0]["tool_results"][0]["ok"] is True
+
+
+def test_cli_export_sft_defaults_to_passing_oracle_attempts(tmp_path) -> None:
+    output = tmp_path / "sft.jsonl"
+
+    exit_code = main(
+        [
+            "export-sft",
+            "--oracle",
+            "--scenario",
+            "l1_add_price_widget",
+            "--format",
+            "openai_messages",
+            "--output",
+            str(output),
+        ]
+    )
+
+    records = [
+        json.loads(line)
+        for line in output.read_text(encoding="utf-8").splitlines()
+    ]
+    assert exit_code == 0
+    assert len(records) == 1
+    assert records[0]["metadata"]["passed"] is True
+    assert records[0]["messages"][0]["role"] == "user"
 
 
 def test_cli_run_agent_command_uses_jsonl_contract(tmp_path, capsys) -> None:
