@@ -1,0 +1,224 @@
+{
+  "id": "l2_macro_rates_dashboard",
+  "title": "Build a Rates Dashboard",
+  "level": "L2",
+  "category": "dashboard-construction",
+  "difficulty": "medium",
+  "tags": [
+    "macro",
+    "generated-chart",
+    "multi-widget"
+  ],
+  "source": "workspace-bench",
+  "prompt": "Create a rates dashboard with a Rates tab containing 2Y Treasury, 10Y Treasury, and the current yield curve. Add a generated chart for the yield curve and a note explaining the curve shape on the Rates tab.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "macro"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Rates",
+    "required_tabs": [
+      "rates"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS2"
+        },
+        "tab_id": "rates"
+      },
+      {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS10"
+        },
+        "tab_id": "rates"
+      },
+      {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve",
+        "data_args": {},
+        "tab_id": "rates"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "chart",
+        "name_contains": "Yield Curve",
+        "data_contains": [
+          "10Y",
+          "yield"
+        ],
+        "tab_id": "rates"
+      },
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "curve",
+          "10Y"
+        ],
+        "tab_id": "rates"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "create",
+        "name": "Rates Dashboard",
+        "activate": true
+      }
+    },
+    {
+      "tool": "manage_navigation_bar",
+      "args": {
+        "operation": "create",
+        "tabs": [
+          {
+            "name": "Rates"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Macro"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries"
+      }
+    },
+    {
+      "tool": "get_params_options",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "param_name": "series"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS2"
+        }
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS10"
+        }
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "chart",
+        "name": "Yield Curve Chart",
+        "data": [
+          {
+            "tenor": "3M",
+            "yield": 4.02
+          },
+          {
+            "tenor": "2Y",
+            "yield": 3.75
+          },
+          {
+            "tenor": "5Y",
+            "yield": 3.92
+          },
+          {
+            "tenor": "10Y",
+            "yield": 4.16
+          },
+          {
+            "tenor": "30Y",
+            "yield": 4.48
+          }
+        ],
+        "chart_params": {
+          "chartType": "line",
+          "xKey": "tenor",
+          "yKey": [
+            "yield"
+          ]
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Curve Note",
+        "data": "The curve is upward sloping from the 2Y to the 10Y, with the 10Y yield above the 2Y."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 16
+  }
+}

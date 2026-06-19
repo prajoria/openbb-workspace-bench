@@ -1,0 +1,107 @@
+{
+  "id": "l4_repair_macro_series",
+  "title": "Repair a Macro Widget Series",
+  "level": "L4",
+  "category": "repair",
+  "difficulty": "hard",
+  "tags": [
+    "repair",
+    "macro",
+    "rates"
+  ],
+  "source": "workspace-bench",
+  "prompt": "This dashboard is supposed to track the 10Y Treasury, but the time-series widget is configured for the 2Y. Fix it.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "macro"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "10Y Repair Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Macro",
+          "widget_id": "macro_timeseries",
+          "data_args": {
+            "series": "DGS2"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS10"
+        },
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS2"
+        },
+        "min_count": 0,
+        "max_count": 0
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "read_widget",
+      "args": {
+        "widget_id": "macro_timeseries"
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS10"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 5
+  }
+}

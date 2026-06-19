@@ -1,0 +1,151 @@
+{
+  "id": "l0_existing_dashboard_note",
+  "title": "Inspect an Existing Dashboard and Add an Answer Note",
+  "level": "L0",
+  "category": "dashboard-qa",
+  "difficulty": "easy",
+  "tags": [
+    "read-only",
+    "generated-note",
+    "equities"
+  ],
+  "source": "workspace-bench",
+  "prompt": "Review the existing AAPL dashboard and add a short note with the latest close and the main news theme.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Existing AAPL Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "price_performance",
+          "data_args": {
+            "symbol": "AAPL"
+          },
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 2,
+            "w": 20,
+            "h": 12
+          }
+        },
+        {
+          "origin": "Bench Equities",
+          "widget_id": "latest_news",
+          "data_args": {
+            "symbol": "AAPL",
+            "limit": 5
+          },
+          "tab_id": "overview",
+          "layout": {
+            "x": 20,
+            "y": 2,
+            "w": 20,
+            "h": 12
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_widget_data",
+    "read_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tabs": [
+      "overview"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        },
+        "tab_id": "overview"
+      },
+      {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news",
+        "data_args": {
+          "symbol": "AAPL",
+          "limit": 5
+        },
+        "tab_id": "overview"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "196.10",
+          "services"
+        ],
+        "tab_id": "overview"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      }
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news",
+        "data_args": {
+          "symbol": "AAPL",
+          "limit": 5
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "AAPL Answer",
+        "data": "Latest close is 196.10. The main news theme is services revenue and margin support."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 6
+  }
+}

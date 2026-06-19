@@ -1,0 +1,107 @@
+{
+  "id": "l1_update_ticker_to_nvda",
+  "title": "Update an Existing Widget to NVDA",
+  "level": "L1",
+  "category": "widget-update",
+  "difficulty": "easy",
+  "tags": [
+    "update-widget",
+    "equities",
+    "repair"
+  ],
+  "source": "workspace-bench",
+  "prompt": "Change the existing price performance widget from AAPL to NVDA.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Ticker Update Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "price_performance",
+          "data_args": {
+            "symbol": "AAPL"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 12
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "NVDA"
+        },
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        },
+        "min_count": 0,
+        "max_count": 0
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "read_widget",
+      "args": {
+        "widget_id": "price_performance"
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "NVDA"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 5
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "id": "l1_remove_duplicate_news_widget",
+  "title": "Remove a Duplicate News Widget",
+  "level": "L1",
+  "category": "widget-update",
+  "difficulty": "medium",
+  "tags": [
+    "delete-widget",
+    "equities",
+    "repair"
+  ],
+  "source": "workspace-bench",
+  "prompt": "There are two identical AAPL news widgets on this dashboard. Remove the duplicate and leave one valid news widget.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Duplicate News Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "latest_news",
+          "data_args": {
+            "symbol": "AAPL",
+            "limit": 5
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Equities",
+          "widget_id": "latest_news",
+          "data_args": {
+            "symbol": "AAPL",
+            "limit": 5
+          },
+          "layout": {
+            "x": 20,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "delete_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news",
+        "data_args": {
+          "symbol": "AAPL",
+          "limit": 5
+        },
+        "min_count": 1,
+        "max_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "delete_widget",
+      "args": {
+        "widget_uuid": "widget_002"
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 4
+  }
+}

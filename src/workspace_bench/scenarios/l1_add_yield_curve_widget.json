@@ -1,0 +1,72 @@
+{
+  "id": "l1_add_yield_curve_widget",
+  "title": "Add a Yield Curve Widget",
+  "level": "L1",
+  "category": "widget-creation",
+  "difficulty": "easy",
+  "tags": [
+    "schema-discovery",
+    "macro",
+    "rates"
+  ],
+  "source": "workspace-bench",
+  "prompt": "Add the yield curve widget to the active dashboard.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "macro"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve",
+        "data_args": {}
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Macro"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve",
+        "data_args": {}
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 5
+  }
+}

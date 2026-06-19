@@ -1,0 +1,217 @@
+"""External command adapter for bring-your-own Workspace agents."""
+
+from __future__ import annotations
+
+import json
+import os
+import subprocess
+import tempfile
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+from workspace_bench.episode import WorkspaceEpisode
+from workspace_bench.models import (
+    BENCHMARK_NAME,
+    BENCHMARK_RELEASE_ID,
+    BENCHMARK_VERSION,
+    CANARY_GUID,
+    JsonDict,
+    RunResult,
+    Scenario,
+    ToolCall,
+)
+
+
+@dataclass(frozen=True)
+class AgentCommandRun:
+    """One external-agent execution and its graded Workspace result."""
+
+    run_result: RunResult
+    command: str
+    exit_code: int | None
+    timed_out: bool
+    stdout: str
+    stderr: str
+    run_dir: Path
+    task_path: Path
+    output_path: Path
+
+
+def build_task_envelope(scenario: Scenario) -> JsonDict:
+    """Build the public task payload handed to external agents."""
+
+    return {
+        "schema_version": "workspace-bench-task-v1",
+        "benchmark": {
+            "name": BENCHMARK_NAME,
+            "version": BENCHMARK_VERSION,
+            "release_id": BENCHMARK_RELEASE_ID,
+            "canary_guid": CANARY_GUID,
+        },
+        "scenario": {
+            "id": scenario.id,
+            "title": scenario.title,
+            "level": scenario.level,
+            "category": scenario.category,
+            "difficulty": scenario.difficulty,
+            "tags": list(scenario.tags),
+            "source": scenario.source,
+            "prompt": scenario.prompt,
+            "fixtures": {
+                "backends": [
+                    {
+                        "name": backend.name,
+                        "backend_id": backend.backend_id,
+                        "url": backend.url,
+                    }
+                    for backend in scenario.fixtures
+                ]
+            },
+            "initial_state": scenario.initial_state,
+            "allowed_tools": list(scenario.allowed_tools),
+            "limits": scenario.limits,
+        },
+        "tool_call_protocol": {
+            "format": "jsonl",
+            "output_env": "WORKSPACE_BENCH_OUTPUT_JSONL",
+            "record_shape": {"tool": "tool_name", "args": {}},
+            "notes": [
+                "Write one JSON object per line.",
+                "Use only tools listed in scenario.allowed_tools.",
+                "The harness executes calls after the command exits and grades final state.",
+            ],
+        },
+    }
+
+
+def write_task_envelope(path: Path, scenario: Scenario) -> None:
+    """Write one task envelope JSON file."""
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(build_task_envelope(scenario), indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+
+def load_tool_calls(path: Path) -> tuple[ToolCall, ...]:
+    """Load JSONL or JSON-array tool calls emitted by an external agent."""
+
+    if not path.exists():
+        return ()
+    text = path.read_text(encoding="utf-8").strip()
+    if not text:
+        return ()
+    if text.startswith("["):
+        payload = json.loads(text)
+        if not isinstance(payload, list):
+            raise ValueError("tool call JSON must be an array or JSONL records")
+        return tuple(ToolCall.from_dict(item) for item in payload)
+    calls = []
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        if not line.strip():
+            continue
+        payload = json.loads(line)
+        if not isinstance(payload, dict):
+            raise ValueError(f"tool call line {line_number} must be an object")
+        calls.append(ToolCall.from_dict(payload))
+    return tuple(calls)
+
+
+def run_agent_command(
+    *,
+    scenario: Scenario,
+    command: str,
+    timeout_seconds: float = 120,
+    run_dir: Path | None = None,
+) -> AgentCommandRun:
+    """Run an external command that writes JSONL tool calls, then grade it."""
+
+    resolved_run_dir = run_dir or Path(tempfile.mkdtemp(prefix="workspace-bench-"))
+    resolved_run_dir.mkdir(parents=True, exist_ok=True)
+    task_path = resolved_run_dir / "task.json"
+    output_path = resolved_run_dir / "tool_calls.jsonl"
+    write_task_envelope(task_path, scenario)
+    if output_path.exists():
+        output_path.unlink()
+
+    env = os.environ.copy()
+    env.update(
+        {
+            "WORKSPACE_BENCH_TASK_JSON": str(task_path),
+            "WORKSPACE_BENCH_OUTPUT_JSONL": str(output_path),
+            "WORKSPACE_BENCH_RUN_DIR": str(resolved_run_dir),
+            "WORKSPACE_BENCH_SCENARIO_ID": scenario.id,
+        }
+    )
+
+    timed_out = False
+    exit_code: int | None
+    stdout = ""
+    stderr = ""
+    try:
+        completed = subprocess.run(
+            command,
+            shell=True,
+            env=env,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+            check=False,
+        )
+        exit_code = completed.returncode
+        stdout = completed.stdout
+        stderr = completed.stderr
+    except subprocess.TimeoutExpired as error:
+        timed_out = True
+        exit_code = None
+        stdout = _decode_timeout_output(error.stdout)
+        stderr = _decode_timeout_output(error.stderr)
+
+    try:
+        tool_calls = load_tool_calls(output_path)
+    except Exception as error:  # noqa: BLE001 - convert malformed output to failed run.
+        tool_calls = (
+            ToolCall(
+                name="agent_output_parse_error",
+                args={"message": str(error)},
+            ),
+        )
+
+    episode = WorkspaceEpisode(scenario=scenario)
+    for call in tool_calls:
+        episode.step(call)
+    final_snapshot = episode.snapshot()
+    grade = episode.grade()
+
+    return AgentCommandRun(
+        run_result=RunResult(
+            scenario=scenario,
+            grade=grade,
+            trace=tuple(episode.trace),
+            final_snapshot=final_snapshot,
+        ),
+        command=command,
+        exit_code=exit_code,
+        timed_out=timed_out,
+        stdout=_truncate(stdout),
+        stderr=_truncate(stderr),
+        run_dir=resolved_run_dir,
+        task_path=task_path,
+        output_path=output_path,
+    )
+
+
+def _decode_timeout_output(value: Any) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, bytes):
+        return value.decode("utf-8", errors="replace")
+    return str(value)
+
+
+def _truncate(value: str, max_chars: int = 4000) -> str:
+    if len(value) <= max_chars:
+        return value
+    return value[:max_chars] + "\n...[truncated]"

@@ -1,0 +1,87 @@
+{
+  "id": "l1_add_latest_news_widget",
+  "title": "Add a Latest News Widget",
+  "level": "L1",
+  "category": "widget-creation",
+  "difficulty": "easy",
+  "tags": [
+    "schema-discovery",
+    "equities",
+    "news"
+  ],
+  "source": "workspace-bench",
+  "prompt": "Add a latest news widget for AAPL with a limit of 5 articles.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "create_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news",
+        "data_args": {
+          "symbol": "AAPL",
+          "limit": 5
+        }
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Equities"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news"
+      }
+    },
+    {
+      "tool": "get_params_options",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news",
+        "param_name": "symbol"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news",
+        "data_args": {
+          "symbol": "AAPL",
+          "limit": 5
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 6
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "id": "l2_equity_comparison_dashboard",
+  "title": "Build a Three-Ticker Equity Comparison Dashboard",
+  "level": "L2",
+  "category": "dashboard-construction",
+  "difficulty": "medium",
+  "tags": [
+    "equities",
+    "comparison",
+    "multi-widget",
+    "generated-note"
+  ],
+  "source": "workspace-bench",
+  "prompt": "Create an equity comparison dashboard for AAPL, MSFT, and NVDA with price performance widgets and a note summarizing the latest closes.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "manage_dashboard",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Equity Comparison",
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      },
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "MSFT"
+        }
+      },
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "NVDA"
+        }
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "AAPL",
+          "196.10",
+          "MSFT",
+          "451.25",
+          "NVDA",
+          "179.45"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "create",
+        "name": "Equity Comparison Dashboard",
+        "activate": true
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Equities"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance"
+      }
+    },
+    {
+      "tool": "get_params_options",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "param_name": "symbol"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "MSFT"
+        }
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "NVDA"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Latest Close Summary",
+        "data": "AAPL latest close is 196.10, MSFT latest close is 451.25, and NVDA latest close is 179.45."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 12
+  }
+}

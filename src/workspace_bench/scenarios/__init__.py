@@ -1,0 +1,1 @@
+"""Bundled Workspace Bench scenarios."""

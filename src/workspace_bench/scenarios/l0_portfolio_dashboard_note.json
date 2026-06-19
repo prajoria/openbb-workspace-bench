@@ -1,0 +1,134 @@
+{
+  "id": "l0_portfolio_dashboard_note",
+  "title": "Inspect a Portfolio Dashboard and Add a Concentration Note",
+  "level": "L0",
+  "category": "dashboard-qa",
+  "difficulty": "easy",
+  "tags": [
+    "read-only",
+    "portfolio",
+    "generated-note"
+  ],
+  "source": "workspace-bench",
+  "prompt": "Review the existing portfolio dashboard and add a note naming the largest position and the largest sector exposure. Include the exact weights from the data.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "portfolio"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Existing Portfolio Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "holdings_table",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 2,
+            "w": 24,
+            "h": 12
+          }
+        },
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "sector_exposure",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 24,
+            "y": 2,
+            "w": 16,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_widget_data",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "holdings_table",
+        "data_args": {},
+        "tab_id": "overview"
+      },
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "sector_exposure",
+        "data_args": {},
+        "tab_id": "overview"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "MSFT",
+          "0.34",
+          "Technology",
+          "0.86"
+        ],
+        "tab_id": "overview"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "holdings_table",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "sector_exposure",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Concentration Note",
+        "data": "MSFT is the largest position at 0.34 weight. Technology is the largest sector exposure at 0.86."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 6
+  }
+}

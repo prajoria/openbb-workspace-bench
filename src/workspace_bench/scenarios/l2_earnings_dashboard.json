@@ -1,0 +1,226 @@
+{
+  "id": "l2_earnings_dashboard",
+  "title": "Build an AAPL Earnings Dashboard",
+  "level": "L2",
+  "category": "dashboard-construction",
+  "difficulty": "medium",
+  "tags": [
+    "tabs",
+    "equities",
+    "generated-note",
+    "multi-widget"
+  ],
+  "source": "workspace-bench",
+  "prompt": "Create an AAPL earnings review dashboard with Overview and Estimates tabs. Overview should show price performance and latest news. Estimates should show EPS/revenue estimates and fundamental metrics. Add a concise markdown note with the key takeaways on the Overview tab.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "add_generative_widget",
+    "update_widget_layout",
+    "read_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "AAPL Earnings",
+    "required_tabs": [
+      "overview",
+      "estimates"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        },
+        "tab_id": "overview"
+      },
+      {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news",
+        "data_args": {
+          "symbol": "AAPL",
+          "limit": 5
+        },
+        "tab_id": "overview"
+      },
+      {
+        "origin": "Bench Equities",
+        "widget_id": "estimate_history",
+        "data_args": {
+          "symbol": "AAPL"
+        },
+        "tab_id": "estimates"
+      },
+      {
+        "origin": "Bench Equities",
+        "widget_id": "fundamental_metrics",
+        "data_args": {
+          "symbol": "AAPL"
+        },
+        "tab_id": "estimates"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Takeaways",
+        "data_contains": [
+          "AAPL",
+          "EPS",
+          "revenue"
+        ],
+        "tab_id": "overview"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "create",
+        "name": "AAPL Earnings Review",
+        "activate": true
+      }
+    },
+    {
+      "tool": "manage_navigation_bar",
+      "args": {
+        "operation": "create",
+        "tabs": [
+          {
+            "name": "Overview"
+          },
+          {
+            "name": "Estimates"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "overview"
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Equities"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news",
+        "data_args": {
+          "symbol": "AAPL",
+          "limit": 5
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "AAPL Takeaways",
+        "data": "# AAPL Takeaways\n\nAAPL price action is positive into earnings. EPS and revenue estimates remain the core watch items, with services news supporting margins."
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "estimates"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "estimate_history"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "estimate_history",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "fundamental_metrics"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "fundamental_metrics",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 18
+  }
+}

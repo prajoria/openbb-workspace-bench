@@ -1,0 +1,41 @@
+name: Workspace Bench CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Run tests
+        run: uv run --extra dev pytest
+
+      - name: Validate benchmark scenarios
+        run: uv run --extra dev workspace-bench validate --min-scenarios 25
+
+      - name: Run oracle baseline
+        run: uv run --extra dev workspace-bench run --agent oracle
+
+      - name: Export agent task envelope
+        run: uv run --extra dev workspace-bench export-task --scenario l1_add_price_widget --output /tmp/workspace-task.json
+
+      - name: Run demo external agent
+        run: uv run --extra dev workspace-bench run-agent-command --scenario l1_add_price_widget --agent-command "python -m workspace_bench.examples.jsonl_rule_agent"
+
+      - name: Build manifest
+        run: uv run --extra dev workspace-bench manifest --json
+
+      - name: Build report
+        run: uv run --extra dev workspace-bench report --json
