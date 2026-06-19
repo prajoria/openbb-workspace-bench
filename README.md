@@ -161,6 +161,7 @@ attempts by default; add `--include-failures` to keep failed attempts with grade
 metadata.
 
 See [docs/agent-command.md](docs/agent-command.md) for the external-agent contract and [docs/result-schema.md](docs/result-schema.md) for result JSON.
+For a visual walkthrough of how the repo fits together, open [docs/repo-explainer.html](docs/repo-explainer.html).
 
 ## Private Task Packs
 
