@@ -925,15 +925,14 @@
       <h2>Where the pieces live.</h2>
       <div class="repo-list">
         <div class="repo-row"><code>src/workspace_bench/cli.py</code><span>Command-line entry point. Routes commands like <code>validate</code>, <code>compare-models</code>, <code>export-sft</code>, and <code>run-agent-command</code>.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/models.py</code><span>Typed dataclasses for scenarios, task packs, tool calls, grades, and run results.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/runner.py</code><span>Loads scenarios and runs oracle/noop agents through the simulator.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/episode.py</code><span>Step-based episode API: execute one tool call, store trace, grade current state.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/simulated_workspace.py</code><span>Deterministic Workspace MCP-like state machine.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/graders.py</code><span>Checks final state, layout, generated widgets, required tabs, and trace discipline.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/model_compare.py</code><span>Interactive GPT-4.1 vs Ollama comparison runner, chart writer, and analysis report generator.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/exports.py</code><span>Rollout, SFT, and preference-pair export helpers.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/envs.py</code><span>Gym-style environment wrapper for RL loops.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/scenarios/*.json</code><span>The bundled benchmark tasks. Current release includes 25 scenarios.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/core/</code><span>The benchmark source of truth: scenario dataclasses, bundled tasks, episode stepping, runner, and deterministic graders.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/workspace/</code><span>Deterministic Workspace MCP-like state machine, fixture backends, and live MCP smoke bridge.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/agents/</code><span>Oracle/noop agents, JSONL command protocol, and model adapter helper prompts.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/reports/</code><span>Interactive GPT-4.1 vs Ollama comparison runner, reliability metrics, chart writer, and analysis report generator.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/exports/</code><span>Rollout, SFT, and preference-pair export helpers.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/rl/</code><span>Gym-style environment wrapper for RL loops.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/core/scenarios/*.json</code><span>The bundled benchmark tasks. Current release includes 25 scenarios.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/*.py</code><span>Compatibility wrappers so older imports such as <code>workspace_bench.runner</code> and <code>workspace_bench.envs</code> still work.</span></div>
       </div>
     </section>
 

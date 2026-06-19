@@ -46,7 +46,7 @@ workspace-bench = "workspace_bench.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-workspace_bench = ["scenarios/*.json"]
+"workspace_bench.core" = ["scenarios/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

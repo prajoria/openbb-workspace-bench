@@ -19,6 +19,21 @@ flowchart LR
     Grader --> Result["Scorecard"]
 ```
 
+## Package Layout
+
+The implementation is grouped by responsibility:
+
+- `workspace_bench.core`: scenarios, dataclasses, episodes, runner, and graders.
+- `workspace_bench.workspace`: deterministic fixture backends, simulator, and live MCP smoke bridge.
+- `workspace_bench.agents`: oracle/noop baselines, JSONL command protocol, and model adapter helpers.
+- `workspace_bench.reports`: model comparison, metrics, charts, and analysis reports.
+- `workspace_bench.exports`: rollout, SFT, and preference data exports.
+- `workspace_bench.rl`: Gym-style environment wrappers for RL loops.
+
+The old import paths remain available as compatibility wrappers. For example,
+`workspace_bench.runner`, `workspace_bench.exports`, and `workspace_bench.envs`
+continue to work.
+
 ## Components
 
 ### Fixture Backends
