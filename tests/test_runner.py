@@ -198,6 +198,45 @@ def test_cli_private_task_pack_manifest_sets_default_split(tmp_path, capsys) -> 
     assert payload["scenarios"][0]["split"] == "validation"
 
 
+def test_cli_hidden_task_pack_redacts_trace_prompts(tmp_path, capsys) -> None:
+    scenario = next(
+        item for item in load_builtin_scenarios() if item.id == "l1_add_price_widget"
+    )
+    scenario_dir = tmp_path / "hidden_pack"
+    trace_dir = tmp_path / "traces"
+    scenario_dir.mkdir()
+    (scenario_dir / "task_pack.json").write_text(
+        json.dumps({"visibility": "hidden"}),
+        encoding="utf-8",
+    )
+    (scenario_dir / "l1_add_price_widget.json").write_text(
+        scenario.source_path.read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+
+    manifest_exit = main(["manifest", "--scenario-dir", str(scenario_dir), "--json"])
+    manifest = json.loads(capsys.readouterr().out)
+    run_exit = main(
+        [
+            "run",
+            "--scenario-dir",
+            str(scenario_dir),
+            "--agent",
+            "oracle",
+            "--trace-dir",
+            str(trace_dir),
+            "--json",
+        ]
+    )
+
+    payload = json.loads((trace_dir / "l1_add_price_widget.json").read_text())
+    assert manifest_exit == 0
+    assert run_exit == 0
+    assert manifest["redacted"] is True
+    assert "prompt" not in payload["scenario"]
+    assert payload["scenario"]["prompt_redacted"] is True
+
+
 def test_cli_filters_by_split_for_private_task_pack(tmp_path, capsys) -> None:
     scenario = next(
         item for item in load_builtin_scenarios() if item.id == "l1_add_price_widget"

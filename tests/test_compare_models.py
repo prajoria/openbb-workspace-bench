@@ -10,6 +10,7 @@ from workspace_bench.model_compare import (
     normalize_interactive_args,
     normalize_tool_name,
     parse_interactive_action,
+    process_failure_rows,
 )
 
 
@@ -97,3 +98,39 @@ def test_compute_reliability_metrics_for_repeated_attempts() -> None:
     assert metrics["pass_power_k"] == 1 / 3
     assert metrics["reliability_min_k"] == 3
     assert metrics["reliability_max_k"] == 3
+
+
+def test_process_failure_rows_are_separate_from_task_issues() -> None:
+    rows = process_failure_rows(
+        [
+            {
+                "model": {"label": "Model A"},
+                "results": [
+                    {
+                        "id": "scenario_a",
+                        "repeat": 2,
+                        "process_failed": True,
+                        "agent_exit_code": 1,
+                        "agent_timed_out": False,
+                        "agent_stderr": "provider failed\nretry exhausted",
+                    },
+                    {
+                        "id": "scenario_b",
+                        "process_failed": False,
+                        "issues": [{"code": "missing_widget"}],
+                    },
+                ],
+            }
+        ]
+    )
+
+    assert rows == [
+        {
+            "model": "Model A",
+            "scenario": "scenario_a",
+            "repeat": 2,
+            "exit_code": 1,
+            "timed_out": False,
+            "stderr_preview": "provider failed retry exhausted",
+        }
+    ]

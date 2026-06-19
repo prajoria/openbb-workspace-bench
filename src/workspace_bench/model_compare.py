@@ -1122,7 +1122,7 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
             f"{format_bucket(by_level.get('L4'))} |"
         )
 
-    lines.extend(["", "## Issue Counts", ""])
+    lines.extend(["", "## Task Issue Counts", ""])
     for payload in model_payloads:
         label = payload["model"]["label"]
         issue_counts = Counter(
@@ -1140,6 +1140,30 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
         for code, count in issue_counts.most_common():
             lines.append(f"| `{code}` | {count} |")
         lines.append("")
+
+    lines.extend(
+        [
+            "## Process Failures",
+            "",
+            "| Model | Scenario | Repeat | Exit Code | Timed Out | Stderr Preview |",
+            "| --- | --- | ---: | ---: | --- | --- |",
+        ]
+    )
+    process_rows = process_failure_rows(model_payloads)
+    if process_rows:
+        for row in process_rows:
+            lines.append(
+                "| "
+                f"{row['model']} | "
+                f"{row['scenario']} | "
+                f"{row['repeat']} | "
+                f"{row['exit_code']} | "
+                f"{row['timed_out']} | "
+                f"{row['stderr_preview']} |"
+            )
+    else:
+        lines.append("| - | - | - | - | - | No provider or process failures. |")
+    lines.append("")
 
     lines.extend(
         [
@@ -1192,6 +1216,27 @@ def results_grouped_by_scenario(payload: dict) -> dict[str, list[dict]]:
     for result in payload["results"]:
         grouped.setdefault(result["id"], []).append(result)
     return grouped
+
+
+def process_failure_rows(model_payloads: list[dict]) -> list[dict]:
+    rows = []
+    for payload in model_payloads:
+        label = payload["model"]["label"]
+        for result in payload["results"]:
+            if not result.get("process_failed"):
+                continue
+            stderr = str(result.get("agent_stderr") or "").replace("\n", " ")
+            rows.append(
+                {
+                    "model": label,
+                    "scenario": result["id"],
+                    "repeat": result.get("repeat", 1),
+                    "exit_code": result.get("agent_exit_code"),
+                    "timed_out": result.get("agent_timed_out"),
+                    "stderr_preview": html.escape(stderr[:120] or "-"),
+                }
+            )
+    return rows
 
 
 def format_result_cell(results: list[dict]) -> str:

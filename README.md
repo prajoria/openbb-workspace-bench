@@ -117,6 +117,7 @@ uv run --extra dev workspace-bench compare-models \
 The comparison runner prints `[PASS]` or `[FAIL]` after each scenario and writes
 raw JSON results plus `comparison.json`, `analysis.md`, `chart.svg`, and
 `chart.png` into a timestamped directory under `runs/comparison/`.
+`analysis.md` separates grader/task issues from provider or process failures.
 PASS/FAIL status is colorized on normal terminals; use `--color always` or
 `--color never` to force a behavior.
 
@@ -312,6 +313,7 @@ RL is a downstream consumer of the benchmark, not the primary identity. The same
 5. compute reward with the same grader used by evaluation
 
 The first reward should be sparse final-state correctness. Process rewards can then reuse trace checks: schema-before-create, valid identifiers, no repeated snapshots, and limited invalid calls.
+`WorkspaceGymEnv` exposes these as optional additive shaping rewards, disabled by default.
 
 Minimal Gym-style usage:
 

@@ -31,6 +31,8 @@ class WorkspaceGymEnv:
         process_rewards: bool = False,
         valid_tool_reward: float = 0.0,
         invalid_tool_penalty: float = 0.0,
+        schema_before_create_reward: float = 0.0,
+        repeated_snapshot_penalty: float = 0.0,
     ):
         if scenario is not None and scenarios is not None:
             raise ValueError("Pass either scenario or scenarios, not both.")
@@ -42,6 +44,8 @@ class WorkspaceGymEnv:
         self.process_rewards = process_rewards
         self.valid_tool_reward = valid_tool_reward
         self.invalid_tool_penalty = invalid_tool_penalty
+        self.schema_before_create_reward = schema_before_create_reward
+        self.repeated_snapshot_penalty = repeated_snapshot_penalty
         self._rng = random.Random()
         self._scenario: Scenario | None = None
         self._episode: WorkspaceEpisode | None = None
@@ -89,8 +93,10 @@ class WorkspaceGymEnv:
         truncated = not terminated and self._turn_index >= self._max_turns()
         self._done = terminated or truncated
         reward = grade.score if self._done else 0.0
+        process_reward = 0.0
         if self.process_rewards:
-            reward += self._process_reward(tool_result)
+            process_reward = self._process_reward(call, tool_result)
+            reward += process_reward
         return (
             self._observation(),
             reward,
@@ -99,6 +105,7 @@ class WorkspaceGymEnv:
             {
                 "grade": asdict(grade),
                 "tool_result": tool_result,
+                "process_reward": process_reward,
                 "done_reason": _done_reason(terminated, truncated),
             },
         )
@@ -140,10 +147,41 @@ class WorkspaceGymEnv:
         assert self._scenario is not None
         return int(self._scenario.limits.get("max_turns", 12))
 
-    def _process_reward(self, tool_result: JsonDict) -> float:
+    def _process_reward(self, call: ToolCall, tool_result: JsonDict) -> float:
+        assert self._episode is not None
+        assert self._scenario is not None
         if tool_result.get("ok"):
-            return self.valid_tool_reward
-        return self.invalid_tool_penalty
+            reward = self.valid_tool_reward
+        else:
+            reward = self.invalid_tool_penalty
+
+        if self._schema_before_create_satisfied(call):
+            reward += self.schema_before_create_reward
+        if self._is_repeated_snapshot(call):
+            reward += self.repeated_snapshot_penalty
+        return reward
+
+    def _schema_before_create_satisfied(self, call: ToolCall) -> bool:
+        assert self._episode is not None
+        if call.name != "create_widget":
+            return False
+        args = call.args
+        origin = str(args.get("origin") or args.get("backend_name"))
+        widget_id = str(args.get("widget_id"))
+        prior_events = self._episode.trace[:-1]
+        return any(
+            event.ok
+            and event.call.name == "get_widget_schema"
+            and str(event.call.args.get("origin")) == origin
+            and str(event.call.args.get("widget_id")) == widget_id
+            for event in prior_events
+        )
+
+    def _is_repeated_snapshot(self, call: ToolCall) -> bool:
+        assert self._episode is not None
+        if call.name != "get_workspace_snapshot" or len(self._episode.trace) < 2:
+            return False
+        return self._episode.trace[-2].call.name == "get_workspace_snapshot"
 
 
 def _is_done_action(action: JsonDict) -> bool:

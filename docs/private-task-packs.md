@@ -6,6 +6,7 @@ Workspace Bench is designed to be useful both as a public benchmark and as a pri
 
 ```text
 my-workspace-tasks/
+  task_pack.json
   portfolio_rebalance_note.json
   earnings_dashboard_repair.json
   macro_rates_briefing.json
@@ -64,3 +65,21 @@ When an agent is evaluated with `run-agent-command`, it receives a public task e
 - hidden grader logic
 
 This keeps the agent-facing prompt and metadata separate from the evaluator-facing answer key.
+
+## Hidden Packs
+
+Add `task_pack.json` when a pack needs release metadata or redaction behavior:
+
+```json
+{
+  "pack_id": "internal-workspace-tasks",
+  "release_id": "internal-workspace-tasks-v1",
+  "version": "1.0.0",
+  "visibility": "hidden",
+  "default_split": "validation"
+}
+```
+
+For `visibility: "hidden"`, manifests and reports mark the pack as redacted.
+Trace artifacts written with `--trace-dir` keep scenario ids, scores, tool
+calls, tool results, and final snapshots, but omit the scenario prompt.

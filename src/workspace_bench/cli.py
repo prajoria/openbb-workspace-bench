@@ -342,11 +342,13 @@ def build_manifest(
 ) -> dict:
     """Build a machine-readable dataset manifest."""
 
+    redacted = _task_pack_is_hidden(task_pack)
     payload = {
         "name": BENCHMARK_NAME,
         "version": BENCHMARK_VERSION,
         "release_id": BENCHMARK_RELEASE_ID,
         "canary_guid": CANARY_GUID,
+        "redacted": redacted,
         "scenario_count": len(scenarios),
         "levels": sorted({scenario.level for scenario in scenarios}),
         "categories": sorted({scenario.category for scenario in scenarios}),
@@ -398,7 +400,11 @@ def _cmd_run(args: argparse.Namespace) -> int:
     runner = ScenarioRunner()
     results = [runner.run(scenario, agent) for scenario in scenarios]
     if args.trace_dir:
-        _write_trace_artifacts(Path(args.trace_dir), results)
+        _write_trace_artifacts(
+            Path(args.trace_dir),
+            results,
+            redact_prompts=_should_redact_task_pack(args),
+        )
 
     if args.json:
         print(
@@ -491,7 +497,11 @@ def _cmd_run_agent_command(args: argparse.Namespace) -> int:
         )
     results = [run.run_result for run in runs]
     if args.trace_dir:
-        _write_trace_artifacts(Path(args.trace_dir), results)
+        _write_trace_artifacts(
+            Path(args.trace_dir),
+            results,
+            redact_prompts=_should_redact_task_pack(args),
+        )
 
     if args.json:
         print(
@@ -597,6 +607,7 @@ def _render_markdown_report(report: dict) -> str:
         f"Release: `{manifest['release_id']}`",
         f"Scenarios: `{manifest['scenario_count']}`",
         f"Canary: `{manifest['canary_guid']}`",
+        f"Redacted: `{manifest.get('redacted', False)}`",
         "",
         "## Coverage",
         "",
@@ -792,6 +803,14 @@ def _task_pack_manifest(args: argparse.Namespace) -> TaskPackManifest | None:
     return load_task_pack_manifest(Path(scenario_dir))
 
 
+def _should_redact_task_pack(args: argparse.Namespace) -> bool:
+    return _task_pack_is_hidden(_task_pack_manifest(args))
+
+
+def _task_pack_is_hidden(task_pack: TaskPackManifest | None) -> bool:
+    return task_pack is not None and task_pack.visibility == "hidden"
+
+
 def _scenario_from_file_or_builtin(
     scenario_id: str, scenario_file: str | None
 ) -> Scenario:
@@ -894,19 +913,29 @@ def _agent_runs_summary(runs: list[AgentCommandRun]) -> dict:
     return summary
 
 
-def _write_trace_artifacts(trace_dir: Path, results: list[RunResult]) -> None:
+def _write_trace_artifacts(
+    trace_dir: Path,
+    results: list[RunResult],
+    *,
+    redact_prompts: bool = False,
+) -> None:
     trace_dir.mkdir(parents=True, exist_ok=True)
     for result in results:
+        scenario_payload = {
+            "id": result.scenario.id,
+            "title": result.scenario.title,
+            "level": result.scenario.level,
+            "category": result.scenario.category,
+            "difficulty": result.scenario.difficulty,
+            "split": result.scenario.split,
+            "tags": result.scenario.tags,
+        }
+        if redact_prompts:
+            scenario_payload["prompt_redacted"] = True
+        else:
+            scenario_payload["prompt"] = result.scenario.prompt
         payload = {
-            "scenario": {
-                "id": result.scenario.id,
-                "title": result.scenario.title,
-                "level": result.scenario.level,
-                "category": result.scenario.category,
-                "difficulty": result.scenario.difficulty,
-                "tags": result.scenario.tags,
-                "prompt": result.scenario.prompt,
-            },
+            "scenario": scenario_payload,
             "grade": asdict(result.grade),
             "trace": [
                 {

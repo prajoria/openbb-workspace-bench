@@ -46,6 +46,22 @@ Once sparse reward works, trace checks can become process rewards:
 
 These process rewards are directly available from the trace and do not require an LLM judge.
 
+`WorkspaceGymEnv` exposes the first set of configurable process rewards:
+
+```python
+env = WorkspaceGymEnv(
+    scenario=scenario,
+    process_rewards=True,
+    valid_tool_reward=0.01,
+    invalid_tool_penalty=-0.25,
+    schema_before_create_reward=0.1,
+    repeated_snapshot_penalty=-0.05,
+)
+```
+
+The final reward still comes from the deterministic grader. Process rewards are
+additive shaping signals for rollout collection and can be disabled entirely.
+
 ## Tool Configuration
 
 For the simulator, a lightweight adapter can expose the same tools in-process. For a real Workspace sidecar, RL-Factory should connect to streamable HTTP MCP:

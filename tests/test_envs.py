@@ -67,3 +67,56 @@ def test_workspace_gym_env_invalid_actions_can_receive_process_penalty() -> None
     assert terminated is False
     assert truncated is False
     assert info["tool_result"]["ok"] is False
+
+
+def test_workspace_gym_env_rewards_schema_before_create() -> None:
+    scenario = find_scenario("l1_add_price_widget")
+    env = WorkspaceGymEnv(
+        scenario=scenario,
+        process_rewards=True,
+        schema_before_create_reward=0.4,
+    )
+    env.reset(seed=1)
+
+    calls = {call.name: call for call in scenario.oracle_tool_calls}
+    env.step(
+        {
+            "tool": "list_available_widgets",
+            "args": calls["list_available_widgets"].args,
+        }
+    )
+    env.step(
+        {
+            "tool": "get_widget_schema",
+            "args": calls["get_widget_schema"].args,
+        }
+    )
+    _, reward, _, _, info = env.step(
+        {
+            "tool": "create_widget",
+            "args": calls["create_widget"].args,
+        }
+    )
+
+    assert info["process_reward"] == 0.4
+    assert reward >= 0.4
+
+
+def test_workspace_gym_env_penalizes_repeated_snapshots() -> None:
+    scenario = find_scenario("l1_add_price_widget")
+    env = WorkspaceGymEnv(
+        scenario=scenario,
+        process_rewards=True,
+        repeated_snapshot_penalty=-0.3,
+    )
+    env.reset(seed=1)
+
+    env.step({"tool": "get_workspace_snapshot", "args": {}})
+    _, reward, terminated, truncated, info = env.step(
+        {"tool": "get_workspace_snapshot", "args": {}}
+    )
+
+    assert reward == -0.3
+    assert info["process_reward"] == -0.3
+    assert terminated is False
+    assert truncated is False
