@@ -126,10 +126,19 @@ def main(argv: list[str] | None = None) -> int:
         description="Run selected Workspace Bench scenarios against multiple model adapters."
     )
     parser.add_argument(
+        "--models-file",
+        help=(
+            "JSON file defining model adapters. When provided without --models, "
+            "all models in the file are run."
+        ),
+    )
+    parser.add_argument(
         "--models",
         nargs="+",
-        default=["openai-gpt-4.1", "ollama-gpt-oss-20b"],
-        help="Model adapter slugs to run. Defaults to both built-in comparison adapters.",
+        help=(
+            "Model adapter slugs to run. Defaults to both built-in adapters, "
+            "or all adapters in --models-file when that option is set."
+        ),
     )
     parser.add_argument(
         "--difficulty",
@@ -229,8 +238,21 @@ def main(argv: list[str] | None = None) -> int:
         print("--retry-backoff must be >= 0", file=sys.stderr)
         return 2
 
-    adapters = default_adapters()
-    unknown_models = [slug for slug in args.models if slug not in adapters]
+    try:
+        adapters, configured_model_slugs = load_model_adapters(args.models_file)
+    except (OSError, ValueError) as error:
+        print(f"Invalid model adapter config: {error}", file=sys.stderr)
+        return 2
+
+    selected_model_slugs = args.models
+    if selected_model_slugs is None:
+        selected_model_slugs = (
+            configured_model_slugs
+            if configured_model_slugs
+            else ["openai-gpt-4.1", "ollama-gpt-oss-20b"]
+        )
+
+    unknown_models = [slug for slug in selected_model_slugs if slug not in adapters]
     if unknown_models:
         print(
             f"Unknown model adapter(s): {', '.join(unknown_models)}. "
@@ -251,7 +273,7 @@ def main(argv: list[str] | None = None) -> int:
         print("No scenarios matched the selected filters.", file=sys.stderr)
         return 2
 
-    selected_adapters = [adapters[slug] for slug in args.models]
+    selected_adapters = [adapters[slug] for slug in selected_model_slugs]
     output_dir = resolve_output_dir(args)
     if args.dry_run:
         print_dry_run(selected_adapters, scenarios, args)
@@ -303,6 +325,7 @@ def main(argv: list[str] | None = None) -> int:
         "model_retries": args.model_retries,
         "retry_backoff": args.retry_backoff,
         "metric": args.metric,
+        "models_file": args.models_file,
         "scenario_count": len(scenarios),
         "attempt_count": len(scenarios) * args.repeats,
         "models": model_summaries,
@@ -344,6 +367,62 @@ def main(argv: list[str] | None = None) -> int:
             f"process_failures={model['process_failures']}"
         )
     return 0
+
+
+def load_model_adapters(
+    models_file: str | None = None,
+) -> tuple[dict[str, ModelAdapter], list[str]]:
+    """Load built-in adapters plus optional adapters from a JSON config file."""
+
+    adapters = default_adapters()
+    configured_slugs: list[str] = []
+    if not models_file:
+        return adapters, configured_slugs
+
+    path = Path(models_file)
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError("top-level config must be a JSON object")
+    models = payload.get("models")
+    if not isinstance(models, list) or not models:
+        raise ValueError("config requires a non-empty models list")
+
+    for index, item in enumerate(models, start=1):
+        if not isinstance(item, dict):
+            raise ValueError(f"models[{index}] must be an object")
+        adapter = model_adapter_from_config(item, index=index)
+        adapters[adapter.slug] = adapter
+        configured_slugs.append(adapter.slug)
+    return adapters, configured_slugs
+
+
+def model_adapter_from_config(payload: JsonDict, *, index: int) -> ModelAdapter:
+    slug = payload.get("slug")
+    label = payload.get("label", slug)
+    provider = payload.get("provider")
+    model = payload.get("model")
+    command = payload.get("command", "")
+    env = payload.get("env", {})
+    if not isinstance(slug, str) or not slug:
+        raise ValueError(f"models[{index}].slug must be a non-empty string")
+    if not isinstance(label, str) or not label:
+        raise ValueError(f"models[{index}].label must be a non-empty string")
+    if not isinstance(provider, str) or not provider:
+        raise ValueError(f"models[{index}].provider must be a non-empty string")
+    if not isinstance(model, str) or not model:
+        raise ValueError(f"models[{index}].model must be a non-empty string")
+    if not isinstance(command, str):
+        raise ValueError(f"models[{index}].command must be a string when set")
+    if not isinstance(env, dict):
+        raise ValueError(f"models[{index}].env must be an object")
+    return ModelAdapter(
+        slug=slug,
+        label=label,
+        command=command,
+        env={str(key): str(value) for key, value in env.items()},
+        provider=provider,
+        model=model,
+    )
 
 
 def export_png(svg_path: Path, png_path: Path) -> bool:
@@ -446,6 +525,10 @@ def run_adapter(
     retry_backoff: float,
     color: bool,
 ) -> list[ComparisonRun]:
+    if runner == "batch" and not adapter.command:
+        raise ValueError(
+            f"Model adapter {adapter.slug!r} needs a command for batch runner."
+        )
     runs = []
     total_attempts = len(scenarios) * repeats
     attempt_index = 0

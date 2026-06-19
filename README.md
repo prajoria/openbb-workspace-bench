@@ -114,6 +114,15 @@ uv run --extra dev workspace-bench compare-models \
   --timeout 240
 ```
 
+Run models from a JSON adapter config:
+
+```bash
+uv run --extra dev workspace-bench compare-models \
+  --models-file examples/models.example.json \
+  --difficulty all \
+  --timeout 240
+```
+
 The comparison runner prints `[PASS]` or `[FAIL]` after each scenario and writes
 raw JSON results plus `comparison.json`, `analysis.md`, `chart.svg`, and
 `chart.png` into a timestamped directory under `runs/comparison/`.

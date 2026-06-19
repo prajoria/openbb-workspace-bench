@@ -7,6 +7,7 @@ from workspace_bench.model_compare import (
     colorize,
     format_result_cell,
     is_transient_http_status,
+    load_model_adapters,
     normalize_interactive_args,
     normalize_tool_name,
     parse_interactive_action,
@@ -134,3 +135,45 @@ def test_process_failure_rows_are_separate_from_task_issues() -> None:
             "stderr_preview": "provider failed retry exhausted",
         }
     ]
+
+
+def test_load_model_adapters_merges_configured_models(tmp_path) -> None:
+    config = tmp_path / "models.json"
+    config.write_text(
+        """
+        {
+          "models": [
+            {
+              "slug": "local-openai-compatible",
+              "label": "Local OpenAI Compatible",
+              "provider": "openai",
+              "model": "local-model",
+              "command": "python my_agent.py",
+              "env": {
+                "OPENAI_BASE_URL": "http://127.0.0.1:8000/v1"
+              }
+            }
+          ]
+        }
+        """,
+        encoding="utf-8",
+    )
+
+    adapters, configured_slugs = load_model_adapters(str(config))
+
+    assert "openai-gpt-4.1" in adapters
+    assert configured_slugs == ["local-openai-compatible"]
+    assert adapters["local-openai-compatible"].model == "local-model"
+    assert adapters["local-openai-compatible"].env["OPENAI_BASE_URL"].endswith("/v1")
+
+
+def test_load_model_adapters_rejects_missing_models_list(tmp_path) -> None:
+    config = tmp_path / "models.json"
+    config.write_text("{}", encoding="utf-8")
+
+    try:
+        load_model_adapters(str(config))
+    except ValueError as error:
+        assert "non-empty models list" in str(error)
+    else:
+        raise AssertionError("missing models list should fail")

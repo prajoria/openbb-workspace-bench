@@ -113,6 +113,34 @@ uv run --extra dev python examples/compare_models.py \
   --timeout 240
 ```
 
+Run a configured set of adapters:
+
+```bash
+uv run --extra dev workspace-bench compare-models \
+  --models-file examples/models.example.json \
+  --difficulty all \
+  --timeout 240
+```
+
+The config file shape is:
+
+```json
+{
+  "models": [
+    {
+      "slug": "local-openai-compatible",
+      "label": "Local OpenAI Compatible",
+      "provider": "openai",
+      "model": "local-model",
+      "command": "python my_agent.py",
+      "env": {
+        "OPENAI_BASE_URL": "http://127.0.0.1:8000/v1"
+      }
+    }
+  ]
+}
+```
+
 The comparison runner writes:
 
 - per-model raw JSON result files
