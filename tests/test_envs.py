@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from workspace_bench.envs import WorkspaceGymEnv
+from workspace_bench.rl import action_to_tool_call, collect_rollout, is_done_action
 from workspace_bench.runner import find_scenario
 
 
@@ -120,3 +121,28 @@ def test_workspace_gym_env_penalizes_repeated_snapshots() -> None:
     assert info["process_reward"] == -0.3
     assert terminated is False
     assert truncated is False
+
+
+def test_rl_action_helpers_normalize_done_and_tool_calls() -> None:
+    assert is_done_action({"tool": "finish"}) is True
+
+    call = action_to_tool_call({"tool": "get_workspace_snapshot", "args": {}})
+
+    assert call.name == "get_workspace_snapshot"
+    assert call.args == {}
+
+
+def test_collect_rollout_records_fixed_action_sequence() -> None:
+    scenario = find_scenario("l1_add_price_widget")
+    env = WorkspaceGymEnv(scenario=scenario)
+
+    transitions = collect_rollout(
+        env,
+        [{"tool": "get_workspace_snapshot", "args": {}}],
+        seed=1,
+    )
+
+    assert len(transitions) == 1
+    assert transitions[0]["action"]["tool"] == "get_workspace_snapshot"
+    assert transitions[0]["reward"] == 0.0
+    assert transitions[0]["terminated"] is False

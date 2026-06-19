@@ -8,6 +8,14 @@ eval runs.
 
 The public environment is `WorkspaceGymEnv`.
 
+Module responsibilities:
+
+- `env.py`: public `WorkspaceGymEnv`.
+- `actions.py`: JSON action normalization and done-action detection.
+- `observations.py`: observation construction.
+- `rewards.py`: optional process reward helpers.
+- `rollouts.py`: simple fixed-action rollout collection.
+
 Actions are structured Workspace tool calls:
 
 ```python
@@ -25,4 +33,3 @@ Reward modes:
 
 Keep policy training code outside this package. This package should provide the
 environment and rollout primitives that trainers can consume.
-

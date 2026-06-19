@@ -33,6 +33,19 @@ for action in rollout_actions:
 
 This is robust because it uses deterministic state checks instead of judging prose.
 
+For fixed policy traces or smoke tests, the helper in `workspace_bench.rl` can
+collect transition records:
+
+```python
+from workspace_bench.rl import collect_rollout
+
+transitions = collect_rollout(
+    env,
+    [{"tool": "get_workspace_snapshot", "args": {}}],
+    seed=1,
+)
+```
+
 ## Process Rewards
 
 Once sparse reward works, trace checks can become process rewards:
@@ -61,6 +74,10 @@ env = WorkspaceGymEnv(
 
 The final reward still comes from the deterministic grader. Process rewards are
 additive shaping signals for rollout collection and can be disabled entirely.
+
+The RL package is split by responsibility: `actions.py` normalizes JSON actions,
+`observations.py` builds observations, `rewards.py` holds process-reward logic,
+and `env.py` wires those pieces into `WorkspaceGymEnv`.
 
 ## Tool Configuration
 
