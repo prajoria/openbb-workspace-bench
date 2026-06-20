@@ -11,6 +11,7 @@ import os
 import shutil
 import subprocess
 import shlex
+import ssl
 import sys
 import time
 import urllib.error
@@ -45,6 +46,7 @@ from workspace_bench.models import (
 )
 from workspace_bench.metrics import compute_reliability_metrics
 from workspace_bench.runner import load_builtin_scenarios, load_scenario_directory
+from workspace_bench.runner import load_builtin_task_pack_manifest, load_task_pack_manifest
 
 
 INTERACTIVE_PROVIDERS = {"openai", "ollama"}
@@ -346,11 +348,7 @@ def main(argv: list[str] | None = None) -> int:
         model_summaries.append({"model": adapter.label, "slug": adapter.slug, **summary})
 
     comparison = {
-        "benchmark": {
-            "name": BENCHMARK_NAME,
-            "version": BENCHMARK_VERSION,
-            "release_id": BENCHMARK_RELEASE_ID,
-        },
+        "benchmark": benchmark_metadata(args),
         "filters": selected_filters(args),
         "runner": args.runner,
         "max_turns_override": args.max_turns,
@@ -802,7 +800,18 @@ def build_interactive_messages(task: JsonDict) -> list[JsonDict]:
     scenario = task["scenario"]
     allowed_tools = scenario["allowed_tools"]
     origin_hints = fixture_origin_hints(scenario["fixtures"])
-    widget_hints = fixture_widget_hints(origin_hints)
+    widget_tool_names = {
+        "list_available_widgets",
+        "get_widget_schema",
+        "get_widget_data",
+        "get_params_options",
+        "create_widget",
+    }
+    widget_hints = (
+        fixture_widget_hints(origin_hints)
+        if widget_tool_names.intersection(allowed_tools)
+        else {}
+    )
     tool_reference = {
         name: TOOL_REFERENCE[name]
         for name in allowed_tools
@@ -841,6 +850,7 @@ def build_interactive_messages(task: JsonDict) -> list[JsonDict]:
             "Tool names must exactly match allowed_tools. Do not call shell, container, browser, or developer tools.",
             "When a tool asks for origin, use the display origin from origin_hints, not the fixture slug.",
             "Use IDs returned by tool results exactly. Do not use placeholders like {{dashboard_id}}.",
+            "If dashboard_id is optional and you do not know the UUID, omit it instead of using a dashboard name.",
             "Never invent widget_id values. Use exact widget_id values from list_available_widgets, widget_hints, or prior tool results.",
             "Before create_widget, you MUST call list_available_widgets for the same origin when that tool is allowed.",
             "Before create_widget, you MUST call get_widget_schema for the same origin and widget_id when that tool is allowed.",
@@ -1013,7 +1023,13 @@ def post_json(
             raise TransientModelError(message, status_code=error.code) from error
         raise RuntimeError(message) from error
     except urllib.error.URLError as error:
-        raise RuntimeError(f"could not reach model API at {url}") from error
+        raise TransientModelError(
+            f"could not reach model API at {url}: {error.reason}"
+        ) from error
+    except (ConnectionError, OSError, ssl.SSLError) as error:
+        raise TransientModelError(
+            f"transient model API transport error at {url}: {error}"
+        ) from error
 
 
 def is_transient_http_status(status_code: int) -> bool:
@@ -1171,11 +1187,7 @@ def model_result_payload(
     args: argparse.Namespace,
 ) -> dict:
     return {
-        "benchmark": {
-            "name": BENCHMARK_NAME,
-            "version": BENCHMARK_VERSION,
-            "release_id": BENCHMARK_RELEASE_ID,
-        },
+        "benchmark": benchmark_metadata(args),
         "model": {"slug": adapter.slug, "label": adapter.label},
         "filters": selected_filters(args),
         "runner": args.runner,
@@ -1521,6 +1533,19 @@ def selected_filters(args: argparse.Namespace) -> dict:
         "split": getattr(args, "split", None),
         "scenario_dir": getattr(args, "scenario_dir", None),
         "tags": args.tag,
+    }
+
+
+def benchmark_metadata(args: argparse.Namespace) -> dict:
+    task_pack = None
+    if getattr(args, "scenario_dir", None):
+        task_pack = load_task_pack_manifest(Path(args.scenario_dir))
+    else:
+        task_pack = load_builtin_task_pack_manifest(getattr(args, "pack", "core"))
+    return {
+        "name": BENCHMARK_NAME,
+        "version": task_pack.version if task_pack else BENCHMARK_VERSION,
+        "release_id": task_pack.release_id if task_pack else BENCHMARK_RELEASE_ID,
     }
 
 

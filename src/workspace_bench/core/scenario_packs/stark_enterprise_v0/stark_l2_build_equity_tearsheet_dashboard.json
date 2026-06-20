@@ -15,7 +15,7 @@
     "multi-widget"
   ],
   "source": "stark-enterprise-v0",
-  "prompt": "Build an Equity Tearsheet Dashboard using company tear sheet, DCF sensitivity, and comps table widgets, then add a skill-based note.",
+  "prompt": "Build an Equity Tearsheet Dashboard with Company and Valuation tabs. Add regular Bench Stark Enterprise widgets for Company Tear Sheet, DCF Sensitivity, and Comps Table using ticker LLY and period YTD. Then add a skill-based note that mentions the tearsheet workflow, DCF sensitivity, and comps table.",
   "fixtures": {
     "backends": [
       {

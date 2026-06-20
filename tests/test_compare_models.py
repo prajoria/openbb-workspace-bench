@@ -2,9 +2,16 @@
 
 from __future__ import annotations
 
+from types import SimpleNamespace
+import urllib.error
+
+from workspace_bench.agent_command import build_task_envelope
 from workspace_bench.metrics import compute_reliability_metrics
 from workspace_bench.model_compare import (
     ModelAdapter,
+    TransientModelError,
+    benchmark_metadata,
+    build_interactive_messages,
     colorize,
     format_result_cell,
     is_transient_http_status,
@@ -12,10 +19,12 @@ from workspace_bench.model_compare import (
     normalize_interactive_args,
     normalize_tool_name,
     parse_interactive_action,
+    post_json,
     process_failure_rows,
     resolve_repo_root,
     validate_adapters_for_runner,
 )
+from workspace_bench.runner import find_scenario
 
 
 def test_parse_interactive_action_unwraps_nested_tool_name() -> None:
@@ -52,6 +61,33 @@ def test_normalize_interactive_args_maps_fixture_origin_slug() -> None:
     ) == {"origin": "Bench Equities", "widget_id": "price_performance"}
 
 
+def test_stark_interactive_prompt_uses_display_origin_and_widget_hints() -> None:
+    scenario = find_scenario("stark_l1_add_rebalance_drift_widget")
+
+    messages = build_interactive_messages(build_task_envelope(scenario))
+    prompt = messages[1]["content"]
+
+    assert '"stark-enterprise": "Bench Stark Enterprise"' in prompt
+    assert "rebalance_scenario_lab_drift_current_vs_target_weights" in prompt
+
+
+def test_non_widget_stark_prompt_omits_widget_hints() -> None:
+    scenario = find_scenario("stark_l3_delegate_earnings_research_tasks")
+
+    messages = build_interactive_messages(build_task_envelope(scenario))
+    prompt = messages[1]["content"]
+
+    assert '"widget_hints": {}' in prompt
+
+
+def test_stark_comparison_metadata_uses_pack_release_id() -> None:
+    metadata = benchmark_metadata(
+        SimpleNamespace(scenario_dir=None, pack="stark-enterprise-v0")
+    )
+
+    assert metadata["release_id"] == "stark-enterprise-v0"
+
+
 def test_colorize_wraps_enabled_status() -> None:
     assert colorize("[PASS]", "green", enabled=True) == "\033[32m[PASS]\033[0m"
     assert colorize("[FAIL]", "red", enabled=False) == "[FAIL]"
@@ -64,6 +100,20 @@ def test_normalize_tool_name_accepts_tool_prefix_alias() -> None:
 def test_http_520_is_transient() -> None:
     assert is_transient_http_status(520) is True
     assert is_transient_http_status(400) is False
+
+
+def test_transport_errors_are_transient(monkeypatch) -> None:
+    def fail(*args, **kwargs):
+        raise urllib.error.URLError("connection reset")
+
+    monkeypatch.setattr("urllib.request.urlopen", fail)
+
+    try:
+        post_json("https://api.openai.com/v1/chat/completions", {}, timeout=1)
+    except TransientModelError as error:
+        assert "could not reach model API" in str(error)
+    else:
+        raise AssertionError("transport failures should be retryable")
 
 
 def test_format_result_cell_aggregates_repeats() -> None:

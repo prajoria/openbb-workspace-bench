@@ -15,7 +15,7 @@
     "chart"
   ],
   "source": "stark-enterprise-v0",
-  "prompt": "Pull the underlying data for the VaR Trend widget and add a short note that cites the widget id and that it is risk data.",
+  "prompt": "Use get_widget_data on the Bench Stark Enterprise VaR Trend widget, then add a short note that cites risk_exposure_monitor_dashboard_var_trend and says it is risk data.",
   "fixtures": {
     "backends": [
       {

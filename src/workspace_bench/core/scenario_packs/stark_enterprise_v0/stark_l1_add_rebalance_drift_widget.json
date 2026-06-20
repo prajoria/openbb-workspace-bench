@@ -15,7 +15,7 @@
     "schema-discovery"
   ],
   "source": "stark-enterprise-v0",
-  "prompt": "Add the Current vs Target Weights widget from the Stark enterprise backend for Flagship Long/Short, YTD.",
+  "prompt": "Add the Current vs Target Weights regular widget from the Bench Stark Enterprise origin for Flagship Long/Short, YTD. Use the exact widget id from the Stark widget hints or list_available_widgets.",
   "fixtures": {
     "backends": [
       {

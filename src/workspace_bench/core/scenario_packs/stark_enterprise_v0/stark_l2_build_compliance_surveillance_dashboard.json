@@ -15,7 +15,7 @@
     "multi-widget"
   ],
   "source": "stark-enterprise-v0",
-  "prompt": "Create a Compliance Surveillance Review dashboard with Alerts and Restricted List tabs, using surveillance alerts and restricted/watch-list widgets.",
+  "prompt": "Create a Compliance Surveillance Review dashboard with Alerts and Restricted List tabs. Add regular Bench Stark Enterprise widgets for Surveillance Alerts and Restricted and Watch List using status Open and period YTD.",
   "fixtures": {
     "backends": [
       {

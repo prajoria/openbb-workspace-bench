@@ -15,7 +15,7 @@
     "multi-widget"
   ],
   "source": "stark-enterprise-v0",
-  "prompt": "Create an Execution Exception Review dashboard with Blotter and Exceptions tabs using live orders, rejected orders, and restricted-list checks.",
+  "prompt": "Create an Execution Exception Review dashboard with Blotter and Exceptions tabs. Add regular Bench Stark Enterprise widgets for Live Orders, Rejected Orders, and Restricted List Checks using desk US Equities, status Open, and period YTD.",
   "fixtures": {
     "backends": [
       {

@@ -15,7 +15,7 @@
     "mcp"
   ],
   "source": "stark-enterprise-v0",
-  "prompt": "Load the finance-earnings-prep skill and add a note that captures the workflow steps for an analyst.",
+  "prompt": "Call get_skill_content with slug finance-earnings-prep, then add a note on the active dashboard that captures the earnings prep workflow steps for an analyst. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
       {

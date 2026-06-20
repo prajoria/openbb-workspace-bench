@@ -15,7 +15,7 @@
     "delegation"
   ],
   "source": "stark-enterprise-v0",
-  "prompt": "Assign two earnings-prep tasks to external Workspace agents, then add a coordinator note naming the coverage analyst and model analyst workstreams.",
+  "prompt": "Call assign_tasks_to_agents with two task_requests using ids coverage-analyst and model-analyst for earnings prep work. Then add a coordinator note naming the coverage analyst and model analyst workstreams on the active dashboard; omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
       {

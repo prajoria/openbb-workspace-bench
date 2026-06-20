@@ -15,7 +15,7 @@
     "multi-widget"
   ],
   "source": "stark-enterprise-v0",
-  "prompt": "Create a Client Meeting Prep Dashboard with Meeting Prep and Portfolio tabs, then add a note for the relationship manager.",
+  "prompt": "Create a Client Meeting Prep Dashboard with Meeting Prep and Portfolio tabs. Add regular Bench Stark Enterprise widgets for Meeting Agenda, Approved Talking Points, and Client Portfolio Summary using client Northstar Pension and period YTD. Then add a relationship manager note that mentions client meeting prep, approved talking points, and client portfolio summary.",
   "fixtures": {
     "backends": [
       {
