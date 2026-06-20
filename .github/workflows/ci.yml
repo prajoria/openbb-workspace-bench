@@ -39,3 +39,9 @@ jobs:
 
       - name: Build report
         run: uv run --extra dev workspace-bench report --json
+
+      - name: Smoke model comparison config
+        run: uv run --extra dev workspace-bench compare-models --models-file examples/models.example.json --difficulty easy --dry-run
+
+      - name: Build package
+        run: uv build
