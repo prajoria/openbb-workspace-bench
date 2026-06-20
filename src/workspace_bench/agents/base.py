@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Protocol
 
-from workspace_bench.models import Scenario, ToolCall
+from workspace_bench.core.models import Scenario, ToolCall
 
 
 class BenchAgent(Protocol):

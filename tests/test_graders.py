@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from dataclasses import replace
 
-from workspace_bench.graders import grade_scenario
-from workspace_bench.models import LayoutChecks, SuccessCriteria
-from workspace_bench.runner import ScenarioRunner, find_scenario
+from workspace_bench.core.graders import grade_scenario
+from workspace_bench.core.models import LayoutChecks, SuccessCriteria
+from workspace_bench.core.runner import ScenarioRunner, find_scenario
 
 
 def test_grader_detects_missing_required_widget() -> None:

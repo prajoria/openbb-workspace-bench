@@ -15,9 +15,9 @@ from typing import Any
 from uuid import UUID
 
 from workspace_bench.agents import BenchAgent, build_agent
-from workspace_bench.graders import grade_scenario
-from workspace_bench.models import JsonDict, RunResult, Scenario, ToolCall, ToolTraceEvent
-from workspace_bench.simulated_workspace import SimulatedWorkspace
+from workspace_bench.core.graders import grade_scenario
+from workspace_bench.core.models import JsonDict, RunResult, Scenario, ToolCall, ToolTraceEvent
+from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
 SNAPSHOT_FIELDS = {

@@ -4,7 +4,7 @@ import json
 import threading
 from urllib.request import urlopen
 
-from workspace_bench.fixtures import (
+from workspace_bench.workspace.fixtures import (
     build_equities_backend,
     build_stark_enterprise_backend,
     make_fixture_server,

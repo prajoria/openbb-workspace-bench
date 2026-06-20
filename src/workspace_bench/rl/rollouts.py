@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Iterable
 
-from workspace_bench.models import JsonDict
+from workspace_bench.core.models import JsonDict
 
 
 def collect_rollout(

@@ -14,6 +14,5 @@ Use this package when you need to:
 - grade a final snapshot and trace
 - inspect scenario/result dataclasses
 
-The top-level compatibility modules still work, for example
-`workspace_bench.runner` and `workspace_bench.models`.
-
+Use canonical imports such as `workspace_bench.core.runner` and
+`workspace_bench.core.models` from implementation code.

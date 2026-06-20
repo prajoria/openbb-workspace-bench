@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from workspace_bench.agent_command import build_task_envelope
-from workspace_bench.episode import WorkspaceEpisode
-from workspace_bench.models import JsonDict, Scenario
+from workspace_bench.agents.agent_command import build_task_envelope
+from workspace_bench.core.episode import WorkspaceEpisode
+from workspace_bench.core.models import JsonDict, Scenario
 
 
 def build_observation(

@@ -7,8 +7,8 @@ import re
 from dataclasses import dataclass, field
 from typing import Any
 
-from workspace_bench.fixtures import FixtureBackend, default_fixture_backends
-from workspace_bench.models import FixtureBackendRef, JsonDict, ToolCall
+from workspace_bench.workspace.fixtures import FixtureBackend, default_fixture_backends
+from workspace_bench.core.models import FixtureBackendRef, JsonDict, ToolCall
 
 
 WORKSPACE_SKILLS: dict[str, JsonDict] = {

@@ -6,8 +6,8 @@ from workspace_bench.workspace.live_mcp import (
     bridge_command_to_simulator_call,
     execute_bridge_command,
 )
-from workspace_bench.models import FixtureBackendRef
-from workspace_bench.simulated_workspace import SimulatedWorkspace
+from workspace_bench.core.models import FixtureBackendRef
+from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
 def test_bridge_command_maps_browser_data_source_shape() -> None:

@@ -35,10 +35,10 @@ The implementation is grouped by responsibility:
 - `workspace_bench.exports`: rollout, SFT, and preference data exports.
 - `workspace_bench.rl`: Gym-style environment wrappers for RL loops.
 
-Public import wrappers such as `workspace_bench.runner`,
-`workspace_bench.exports`, and `workspace_bench.envs` continue to work, but
-scenario metadata no longer keeps the old flat `category` field. New scenarios
-use explicit axes: `capability`, `workflow`, `domain`, and `subdomain`.
+The package root intentionally stays small: `workspace_bench.cli` is the command
+entry point and `workspace_bench.__init__` exposes a few convenience objects.
+Implementation imports should use the focused packages above. Scenario metadata
+uses explicit axes: `capability`, `workflow`, `domain`, and `subdomain`.
 
 ## Components
 
@@ -112,9 +112,9 @@ model, and grades the same final state.
 `WorkspaceEpisode` exposes the step-based interface used by the runner and intended for RL adapters:
 
 ```python
-from workspace_bench.episode import WorkspaceEpisode
-from workspace_bench.models import ToolCall
-from workspace_bench.runner import find_scenario
+from workspace_bench.core.episode import WorkspaceEpisode
+from workspace_bench.core.models import ToolCall
+from workspace_bench.core.runner import find_scenario
 
 scenario = find_scenario("l1_add_price_widget")
 episode = WorkspaceEpisode(scenario)

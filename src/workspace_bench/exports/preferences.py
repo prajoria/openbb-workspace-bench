@@ -7,7 +7,7 @@ from typing import Iterable
 
 from workspace_bench.exports.jsonl import write_jsonl
 from workspace_bench.exports.schema import PREFERENCE_SCHEMA_VERSION, RolloutRecord
-from workspace_bench.models import JsonDict
+from workspace_bench.core.models import JsonDict
 
 
 def build_preference_pairs(records: Iterable[RolloutRecord]) -> list[JsonDict]:

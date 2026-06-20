@@ -7,8 +7,8 @@ workspace simulation, tool calls, grading, and results.
 ## 1. Repo Organization And Documentation
 
 - Keep the CLI at `workspace_bench.cli`.
-- Keep public compatibility imports such as `workspace_bench.runner`,
-  `workspace_bench.exports`, and `workspace_bench.envs`.
+- Keep the package root small. Use `workspace_bench.__init__` for a few common
+  convenience exports and put implementation modules inside focused packages.
 - Organize implementation code into focused packages:
   - `core`: scenarios, episodes, runner, models, grading
   - `workspace`: simulator, fixtures, live MCP smoke bridge
@@ -67,4 +67,3 @@ workspace simulation, tool calls, grading, and results.
   task packs, and benchmark limitations.
 - Validate the bundled 25 scenarios before releases.
 - Make benchmark results reproducible, explainable, and safe to compare.
-

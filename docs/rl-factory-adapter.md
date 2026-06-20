@@ -20,7 +20,7 @@ Workspace Bench conceptually maps to an RL-Factory environment like this:
 Start with a sparse final reward:
 
 ```python
-from workspace_bench.envs import WorkspaceGymEnv
+from workspace_bench.rl.env import WorkspaceGymEnv
 
 env = WorkspaceGymEnv(scenario=scenario)
 observation, info = env.reset()

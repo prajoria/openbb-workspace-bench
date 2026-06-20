@@ -4,8 +4,8 @@ import json
 from pathlib import Path
 
 from workspace_bench.cli import main
-from workspace_bench.models import CANARY_GUID
-from workspace_bench.runner import ScenarioRunner, load_builtin_scenarios, load_scenario_file
+from workspace_bench.core.models import CANARY_GUID
+from workspace_bench.core.runner import ScenarioRunner, load_builtin_scenarios, load_scenario_file
 
 
 def test_oracle_passes_all_builtin_scenarios() -> None:

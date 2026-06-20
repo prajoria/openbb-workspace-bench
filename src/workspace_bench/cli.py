@@ -9,14 +9,14 @@ import sys
 from dataclasses import asdict
 from pathlib import Path
 
-from workspace_bench.agent_command import (
+from workspace_bench.agents.agent_command import (
     AgentCommandRun,
     run_agent_command,
     write_task_envelope,
 )
 from workspace_bench.agents import build_agent
-from workspace_bench.fixtures import get_fixture_backend, make_fixture_server
-from workspace_bench.models import (
+from workspace_bench.workspace.fixtures import get_fixture_backend, make_fixture_server
+from workspace_bench.core.models import (
     BENCHMARK_NAME,
     BENCHMARK_RELEASE_ID,
     BENCHMARK_VERSION,
@@ -26,7 +26,7 @@ from workspace_bench.models import (
     TaskPackManifest,
     VALID_SCENARIO_SPLITS,
 )
-from workspace_bench.runner import (
+from workspace_bench.core.runner import (
     BUILTIN_SCENARIO_PACKS,
     BUILTIN_SCENARIO_PACK_ORDER,
     ScenarioRunner,
@@ -42,7 +42,7 @@ from workspace_bench.runner import (
 def main(argv: list[str] | None = None) -> int:
     raw_argv = list(sys.argv[1:] if argv is None else argv)
     if raw_argv[:1] == ["compare-models"]:
-        from workspace_bench.model_compare import main as compare_models_main
+        from workspace_bench.reports.model_compare import main as compare_models_main
 
         return compare_models_main(raw_argv[1:])
 
@@ -574,7 +574,7 @@ def _cmd_run_agent_command(args: argparse.Namespace) -> int:
 
 
 def _cmd_smoke_workspace_mcp(args: argparse.Namespace) -> int:
-    from workspace_bench.live_mcp import run_workspace_mcp_smoke
+    from workspace_bench.workspace.live_mcp import run_workspace_mcp_smoke
 
     scenario = find_scenario(args.scenario, pack=args.pack)
     try:

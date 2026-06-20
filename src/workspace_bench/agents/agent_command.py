@@ -10,8 +10,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from workspace_bench.episode import WorkspaceEpisode
-from workspace_bench.models import (
+from workspace_bench.core.episode import WorkspaceEpisode
+from workspace_bench.core.models import (
     BENCHMARK_NAME,
     BENCHMARK_RELEASE_ID,
     BENCHMARK_VERSION,

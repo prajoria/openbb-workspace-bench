@@ -324,7 +324,8 @@ src/workspace_bench/
   reports/               Model comparison, reliability metrics, charts, analysis reports
   exports/               Rollout, SFT, preference, and metadata export helpers
   rl/                    Gym-style env, action/observation/reward helpers
-  *.py                   Backward-compatible public import wrappers
+  __init__.py            Small public convenience surface
+  cli.py                 Command line entry point
 docs/
   agent-command.md
   architecture.md
@@ -372,7 +373,7 @@ The first reward should be sparse final-state correctness. Process rewards can t
 Minimal Gym-style usage:
 
 ```python
-from workspace_bench.envs import WorkspaceGymEnv
+from workspace_bench.rl.env import WorkspaceGymEnv
 
 env = WorkspaceGymEnv()
 observation, info = env.reset(seed=1)

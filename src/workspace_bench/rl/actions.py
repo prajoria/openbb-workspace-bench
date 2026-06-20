@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from workspace_bench.models import JsonDict, ToolCall
+from workspace_bench.core.models import JsonDict, ToolCall
 
 
 DONE_TOOLS = {"done", "__done__", "finish", "final"}

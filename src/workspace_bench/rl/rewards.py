@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from workspace_bench.episode import WorkspaceEpisode
-from workspace_bench.models import JsonDict, ToolCall
+from workspace_bench.core.episode import WorkspaceEpisode
+from workspace_bench.core.models import JsonDict, ToolCall
 
 
 def process_reward(

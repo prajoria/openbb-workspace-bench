@@ -7,7 +7,7 @@ from typing import Iterable
 
 from workspace_bench.exports.jsonl import write_jsonl
 from workspace_bench.exports.schema import RolloutRecord, SFTFormat
-from workspace_bench.models import JsonDict
+from workspace_bench.core.models import JsonDict
 
 
 def write_sft_jsonl(

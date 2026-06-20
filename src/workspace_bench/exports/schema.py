@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Literal
 
-from workspace_bench.models import JsonDict
+from workspace_bench.core.models import JsonDict
 
 
 ROLLOUT_SCHEMA_VERSION = "workspace-bench-rollout-v1"

@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from workspace_bench.episode import WorkspaceEpisode
-from workspace_bench.models import ToolCall
-from workspace_bench.runner import find_scenario
+from workspace_bench.core.episode import WorkspaceEpisode
+from workspace_bench.core.models import ToolCall
+from workspace_bench.core.runner import find_scenario
 
 
 def test_episode_step_api_supports_incremental_tool_execution() -> None:

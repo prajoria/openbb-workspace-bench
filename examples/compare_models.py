@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from workspace_bench.model_compare import main
+from workspace_bench.reports.model_compare import main
 
 
 if __name__ == "__main__":

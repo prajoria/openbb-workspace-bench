@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from workspace_bench.envs import WorkspaceGymEnv
+from workspace_bench.rl.env import WorkspaceGymEnv
 from workspace_bench.rl import action_to_tool_call, collect_rollout, is_done_action
-from workspace_bench.runner import find_scenario
+from workspace_bench.core.runner import find_scenario
 
 
 def test_workspace_gym_env_reset_returns_task_observation() -> None:

@@ -934,7 +934,7 @@
         <div class="repo-row"><code>src/workspace_bench/core/scenarios/*.json</code><span>The core public benchmark pack: <code>workspace-core-v0</code>.</span></div>
         <div class="repo-row"><code>src/workspace_bench/core/scenario_packs/</code><span>Additional bundled packs, including <code>stark-enterprise-v0</code> for enterprise finance workflows.</span></div>
         <div class="repo-row"><code>src/workspace_bench/workspace/data/</code><span>Packaged fixture metadata such as the Stark widget and app catalog.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/*.py</code><span>Compatibility wrappers so older imports such as <code>workspace_bench.runner</code> and <code>workspace_bench.envs</code> still work.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/__init__.py</code><span>Small public convenience surface for the most common objects.</span></div>
       </div>
     </section>
 
@@ -1083,7 +1083,7 @@
       },
       gym: {
         title: "Use the Gym-style environment",
-        code: "from workspace_bench.envs import WorkspaceGymEnv\n\nenv = WorkspaceGymEnv()\nobservation, info = env.reset(seed=1)\nobservation, reward, terminated, truncated, info = env.step(\n    {\"tool\": \"get_workspace_snapshot\", \"args\": {}}\n)"
+        code: "from workspace_bench.rl.env import WorkspaceGymEnv\n\nenv = WorkspaceGymEnv()\nobservation, info = env.reset(seed=1)\nobservation, reward, terminated, truncated, info = env.step(\n    {\"tool\": \"get_workspace_snapshot\", \"args\": {}}\n)"
       }
     };
 

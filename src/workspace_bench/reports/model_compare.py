@@ -22,19 +22,19 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterator
 
-from workspace_bench.model_adapter_helpers import (
+from workspace_bench.agents.model_adapter_helpers import (
     TOOL_REFERENCE,
     fixture_origin_hints,
     fixture_widget_hints,
     strip_code_fence,
 )
-from workspace_bench.agent_command import (
+from workspace_bench.agents.agent_command import (
     AgentCommandRun,
     build_task_envelope,
     run_agent_command,
 )
-from workspace_bench.episode import WorkspaceEpisode
-from workspace_bench.models import (
+from workspace_bench.core.episode import WorkspaceEpisode
+from workspace_bench.core.models import (
     BENCHMARK_NAME,
     BENCHMARK_RELEASE_ID,
     BENCHMARK_VERSION,
@@ -44,9 +44,9 @@ from workspace_bench.models import (
     ToolCall,
     VALID_SCENARIO_SPLITS,
 )
-from workspace_bench.metrics import compute_reliability_metrics
-from workspace_bench.runner import load_builtin_scenarios, load_scenario_directory
-from workspace_bench.runner import load_builtin_task_pack_manifest, load_task_pack_manifest
+from workspace_bench.reports.metrics import compute_reliability_metrics
+from workspace_bench.core.runner import load_builtin_scenarios, load_scenario_directory
+from workspace_bench.core.runner import load_builtin_task_pack_manifest, load_task_pack_manifest
 
 
 INTERACTIVE_PROVIDERS = {"openai", "ollama"}

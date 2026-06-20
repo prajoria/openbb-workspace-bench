@@ -10,7 +10,7 @@ from importlib import resources
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
-from workspace_bench.models import JsonDict
+from workspace_bench.core.models import JsonDict
 
 
 SYMBOLS = ["AAPL", "MSFT", "NVDA"]

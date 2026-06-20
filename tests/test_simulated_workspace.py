@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from workspace_bench.models import FixtureBackendRef, ToolCall
-from workspace_bench.simulated_workspace import SimulatedWorkspace
+from workspace_bench.core.models import FixtureBackendRef, ToolCall
+from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
 def test_simulator_runs_schema_first_widget_creation_flow() -> None:

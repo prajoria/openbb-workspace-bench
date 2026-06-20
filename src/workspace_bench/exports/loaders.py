@@ -7,12 +7,12 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Iterable
 
-from workspace_bench.agent_command import build_task_envelope, load_tool_calls
-from workspace_bench.episode import WorkspaceEpisode
+from workspace_bench.agents.agent_command import build_task_envelope, load_tool_calls
+from workspace_bench.core.episode import WorkspaceEpisode
 from workspace_bench.exports.metadata import base_export_metadata
 from workspace_bench.exports.schema import RolloutRecord
-from workspace_bench.models import JsonDict, RunResult, Scenario, ToolCall
-from workspace_bench.runner import ScenarioRunner
+from workspace_bench.core.models import JsonDict, RunResult, Scenario, ToolCall
+from workspace_bench.core.runner import ScenarioRunner
 
 
 def rollouts_from_oracle(scenarios: Iterable[Scenario]) -> list[RolloutRecord]:

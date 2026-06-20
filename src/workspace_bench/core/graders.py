@@ -7,7 +7,7 @@ import re
 from collections import defaultdict
 from typing import Any
 
-from workspace_bench.models import (
+from workspace_bench.core.models import (
     GradeIssue,
     GradeResult,
     JsonDict,

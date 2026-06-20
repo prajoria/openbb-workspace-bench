@@ -73,9 +73,9 @@ and scenario. The rejected attempt is the failing or lower-scoring attempt.
 Use the Gym-style adapter for policy loops:
 
 ```python
-from workspace_bench.envs import WorkspaceGymEnv
+from workspace_bench.rl.env import WorkspaceGymEnv
 from workspace_bench.rl import collect_rollout
-from workspace_bench.runner import find_scenario
+from workspace_bench.core.runner import find_scenario
 
 scenario = find_scenario("l1_add_price_widget")
 env = WorkspaceGymEnv(scenario=scenario, process_rewards=True)

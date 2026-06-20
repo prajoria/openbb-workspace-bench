@@ -5,9 +5,9 @@ from __future__ import annotations
 import random
 from dataclasses import asdict
 
-from workspace_bench.episode import WorkspaceEpisode
-from workspace_bench.models import JsonDict, Scenario, ToolCall
-from workspace_bench.runner import load_builtin_scenarios
+from workspace_bench.core.episode import WorkspaceEpisode
+from workspace_bench.core.models import JsonDict, Scenario, ToolCall
+from workspace_bench.core.runner import load_builtin_scenarios
 from workspace_bench.rl.actions import action_to_tool_call, is_done_action
 from workspace_bench.rl.observations import build_observation
 from workspace_bench.rl.rewards import process_reward

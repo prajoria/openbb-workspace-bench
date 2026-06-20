@@ -5,9 +5,9 @@ from __future__ import annotations
 from types import SimpleNamespace
 import urllib.error
 
-from workspace_bench.agent_command import build_task_envelope
-from workspace_bench.metrics import compute_reliability_metrics
-from workspace_bench.model_compare import (
+from workspace_bench.agents.agent_command import build_task_envelope
+from workspace_bench.reports.metrics import compute_reliability_metrics
+from workspace_bench.reports.model_compare import (
     ModelAdapter,
     TransientModelError,
     benchmark_metadata,
@@ -24,7 +24,7 @@ from workspace_bench.model_compare import (
     resolve_repo_root,
     validate_adapters_for_runner,
 )
-from workspace_bench.runner import find_scenario
+from workspace_bench.core.runner import find_scenario
 
 
 def test_parse_interactive_action_unwraps_nested_tool_name() -> None:

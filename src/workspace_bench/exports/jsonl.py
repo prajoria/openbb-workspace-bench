@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from typing import Iterable
 
-from workspace_bench.models import JsonDict
+from workspace_bench.core.models import JsonDict
 
 
 def write_jsonl(rows: Iterable[JsonDict], output_path: Path) -> int:

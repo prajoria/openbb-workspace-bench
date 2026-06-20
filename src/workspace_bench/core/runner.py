@@ -7,9 +7,9 @@ from importlib import resources
 from pathlib import Path
 
 from workspace_bench.agents import BenchAgent, build_agent
-from workspace_bench.episode import WorkspaceEpisode
-from workspace_bench.models import RunResult, Scenario, TaskPackManifest
-from workspace_bench.simulated_workspace import SimulatedWorkspace
+from workspace_bench.core.episode import WorkspaceEpisode
+from workspace_bench.core.models import RunResult, Scenario, TaskPackManifest
+from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
 SCENARIO_PACKAGE = "workspace_bench.core.scenarios"

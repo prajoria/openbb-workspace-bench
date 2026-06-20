@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from typing import Iterable
 
 from workspace_bench.exports.schema import ROLLOUT_SCHEMA_VERSION, RolloutRecord
-from workspace_bench.models import (
+from workspace_bench.core.models import (
     BENCHMARK_NAME,
     BENCHMARK_RELEASE_ID,
     BENCHMARK_VERSION,

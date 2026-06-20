@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from workspace_bench.graders import grade_scenario
-from workspace_bench.models import GradeResult, JsonDict, Scenario, ToolCall, ToolTraceEvent
-from workspace_bench.simulated_workspace import SimulatedWorkspace
+from workspace_bench.core.graders import grade_scenario
+from workspace_bench.core.models import GradeResult, JsonDict, Scenario, ToolCall, ToolTraceEvent
+from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
 class WorkspaceEpisode:
