@@ -360,7 +360,9 @@ def _cmd_report(args: argparse.Namespace) -> int:
         else _render_markdown_report(report)
     )
     if args.output:
-        Path(args.output).write_text(rendered + "\n", encoding="utf-8")
+        output_path = Path(args.output)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(rendered + "\n", encoding="utf-8")
     else:
         print(rendered)
     return 0
@@ -375,8 +377,8 @@ def build_manifest(
     redacted = _task_pack_is_hidden(task_pack)
     payload = {
         "name": BENCHMARK_NAME,
-        "version": BENCHMARK_VERSION,
-        "release_id": BENCHMARK_RELEASE_ID,
+        "version": task_pack.version if task_pack else BENCHMARK_VERSION,
+        "release_id": task_pack.release_id if task_pack else BENCHMARK_RELEASE_ID,
         "canary_guid": CANARY_GUID,
         "redacted": redacted,
         "scenario_count": len(scenarios),

@@ -71,6 +71,7 @@ def test_cli_all_pack_includes_core_and_stark(capsys) -> None:
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["scenario_count"] == 40
+    assert payload["release_id"] == "workspace-all-v0"
     assert "skill-access" in payload["capabilities"]
     assert "client-meeting-prep" in payload["workflows"]
 
@@ -126,7 +127,7 @@ def test_cli_report_json_includes_release_checks(capsys) -> None:
 
 
 def test_cli_report_can_write_markdown(tmp_path) -> None:
-    output = tmp_path / "report.md"
+    output = tmp_path / "nested" / "report.md"
 
     exit_code = main(["report", "--output", str(output)])
 

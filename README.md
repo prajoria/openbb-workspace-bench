@@ -49,7 +49,7 @@ Run built-in baselines:
 ```bash
 uv run --extra dev workspace-bench run --agent oracle
 uv run --extra dev workspace-bench run --agent noop
-uv run --extra dev workspace-bench report --output docs/benchmark-report.md
+uv run --extra dev workspace-bench report --output runs/reports/benchmark-report.md
 ```
 
 Run tests:
@@ -298,8 +298,8 @@ The grader evaluates final Workspace state first. Text-only answers are secondar
 See [docs/scenario-format.md](docs/scenario-format.md).
 
 See [docs/benchmark-card.md](docs/benchmark-card.md) for the `workspace-core-v0` benchmark card, scope, and limitations.
-See [docs/publishing.md](docs/publishing.md) for release and publishing gates.
-See [docs/contributing.md](docs/contributing.md) for scenario, grader, agent, export, and RL contribution paths.
+See [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) for release gates.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for scenario, grader, agent, export, and RL contribution paths.
 
 ## Task Levels
 
@@ -325,21 +325,17 @@ src/workspace_bench/
   exports/               Rollout, SFT, preference, and metadata export helpers
   rl/                    Gym-style env, action/observation/reward helpers
   __init__.py            Small public convenience surface
-  cli.py                 Command line entry point
 docs/
   agent-command.md
   architecture.md
   benchmark-card.md
-  benchmark-report.md
   contributing.md
-  launch-readiness.md
-  publishing.md
   private-task-packs.md
   result-schema.md
   rl-factory-adapter.md
+  roadmap.md
   scenario-format.md
   training-recipes.md
-  terminal-bench-lessons.md
 examples/
   jsonl_rule_agent.py       Repo-checkout wrapper for the packaged demo agent
   ollama_agent.py           Local Ollama adapter template

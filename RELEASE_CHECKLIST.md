@@ -5,12 +5,12 @@ Use this checklist before announcing a public Workspace Bench release.
 ## Required for v0.1
 
 - [ ] `uv run --extra dev pytest` passes.
-- [ ] `uv run --extra dev workspace-bench validate --min-scenarios 25` passes.
+- [ ] `uv run --extra dev workspace-bench validate --pack all --min-scenarios 40` passes.
 - [ ] `uv run --extra dev workspace-bench run --agent oracle` passes all scenarios.
 - [ ] `uv run --extra dev workspace-bench export-task --scenario l1_add_price_widget --output /tmp/workspace-task.json` succeeds.
 - [ ] `uv run --extra dev workspace-bench run-agent-command --scenario l1_add_price_widget --agent-command "python -m workspace_bench.examples.jsonl_rule_agent"` passes.
-- [ ] `uv run --extra dev workspace-bench report --output docs/benchmark-report.md` is regenerated.
-- [ ] Scenario count is at least 25.
+- [ ] `uv run --extra dev workspace-bench report --pack all --output runs/reports/benchmark-report.md` succeeds.
+- [ ] Scenario count is at least 40.
 - [ ] No-op baseline fails every scenario.
 - [ ] README quick start is accurate.
 - [ ] `CONTRIBUTING.md` explains how to add scenarios.
