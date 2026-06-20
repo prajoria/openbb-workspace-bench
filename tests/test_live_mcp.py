@@ -1,4 +1,8 @@
-from workspace_bench.live_mcp import (
+from workspace_bench.workspace.live_mcp import (
+    EXPECTED_MCP_PROMPTS,
+    EXPECTED_MCP_RESOURCES,
+    EXPECTED_MCP_TOOLS,
+    _surface_issues,
     bridge_command_to_simulator_call,
     execute_bridge_command,
 )
@@ -99,3 +103,15 @@ def test_execute_bridge_snapshot_strips_simulator_only_fields() -> None:
     assert result["request_id"] == "request-3"
     assert "dashboard_composition" in result["data"]
     assert "backends" not in result["data"]
+
+
+def test_surface_issues_reports_missing_mcp_resources() -> None:
+    issues = _surface_issues(
+        tools=tuple(sorted(EXPECTED_MCP_TOOLS)),
+        prompts=tuple(sorted(EXPECTED_MCP_PROMPTS)),
+        resources=(),
+    )
+
+    assert issues == (
+        f"missing resource(s): {', '.join(sorted(EXPECTED_MCP_RESOURCES))}",
+    )

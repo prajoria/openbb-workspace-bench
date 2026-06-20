@@ -2,6 +2,11 @@
 
 OpenBB Workspace Bench is organized around one stable contract: a scenario describes the initial Workspace state, the agent prompt, the allowed Workspace MCP tools, and deterministic success criteria.
 
+Scenarios are grouped into packs. The default `core` pack is the original
+`workspace-core-v0` financial workspace benchmark. The `stark-enterprise-v0`
+pack adds broader enterprise workflows using a deterministic fixture exported
+from `~/Documents/git/stark-industries-demo`.
+
 ```mermaid
 flowchart LR
     Scenario["Scenario JSON"] --> Runner["ScenarioRunner"]
@@ -30,9 +35,10 @@ The implementation is grouped by responsibility:
 - `workspace_bench.exports`: rollout, SFT, and preference data exports.
 - `workspace_bench.rl`: Gym-style environment wrappers for RL loops.
 
-The old import paths remain available as compatibility wrappers. For example,
-`workspace_bench.runner`, `workspace_bench.exports`, and `workspace_bench.envs`
-continue to work.
+Public import wrappers such as `workspace_bench.runner`,
+`workspace_bench.exports`, and `workspace_bench.envs` continue to work, but
+scenario metadata no longer keeps the old flat `category` field. New scenarios
+use explicit axes: `capability`, `workflow`, `domain`, and `subdomain`.
 
 ## Components
 
@@ -49,11 +55,18 @@ They are deterministic and local. The built-in fixtures cover:
 - `Bench Equities`
 - `Bench Macro`
 - `Bench Portfolio`
+- `Bench Stark Enterprise`
 
 Each fixture can be used in two ways:
 
 - directly by the simulator
 - as a real HTTP server through `workspace-bench serve-fixture`
+
+The Stark fixture packages widget and app metadata from the demo enterprise app
+catalog into a local backend. It lets scenarios cover portfolio command
+centers, client meeting prep, vendor monitoring, compliance surveillance,
+execution exceptions, and research workflows without requiring a live external
+service.
 
 ### SimulatedWorkspace
 
@@ -65,6 +78,8 @@ Each fixture can be used in two ways:
 - dashboard creation, tab navigation, and layout mutation
 - regular and generated widget creation
 - widget read/update/delete
+- deterministic workspace skills through `get_skill_content`
+- task delegation envelopes through `assign_tasks_to_agents`
 
 It is not a pixel or browser simulator. It is a deterministic state machine for the Workspace MCP contract. That makes it cheap enough for benchmark development and RL rollouts.
 
@@ -127,6 +142,8 @@ The grader checks final Workspace state and trace behavior:
 - required layout values
 - grid bounds and overlap checks
 - invalid tool call count
+- required tool calls
+- required tool result fragments
 - schema-before-create discipline
 - listed widget id discipline
 - repeated snapshot behavior
@@ -143,6 +160,10 @@ snapshot = workspace.snapshot()
 ```
 
 `workspace-bench smoke-workspace-mcp` forwards scenario tool calls to a running `workspace-mcp` server at `http://127.0.0.1:8787/mcp`. It emulates the browser websocket bridge with `SimulatedWorkspace`, so the smoke path covers the real MCP streamable HTTP endpoint, tool schemas, server-side validation, browser command translation, and session-context updates.
+
+With `--check-surface`, the smoke command also checks that the server exposes
+the expected tool, prompt, and resource surface. This is useful when validating
+that Workspace skills and MCP affordances are still reachable from the bench.
 
 The smoke bridge is not a high-throughput production adapter. It intentionally owns reset and seeding outside the evaluated model and refuses to replace an already connected browser unless requested. A full real Workspace adapter would use the same pattern but connect to an isolated Workspace browser profile and use `get_workspace_snapshot` or `manage_dashboard read` for final grading.
 

@@ -13,6 +13,8 @@ from workspace_bench.models import (
     JsonDict,
     RequiredGeneratedWidget,
     RequiredLayout,
+    RequiredToolCall,
+    RequiredToolResult,
     RequiredWidget,
     Scenario,
     ToolTraceEvent,
@@ -139,6 +141,30 @@ def grade_scenario(
             bool(matches),
             "layout_mismatch",
             f"No widget layout matched {required_layout}.",
+        )
+
+    for required_call in scenario.success.required_tool_calls:
+        matches = _matching_tool_calls(required_call, trace)
+        builder.check(
+            len(matches) >= required_call.min_count,
+            "missing_tool_call",
+            (
+                f"Expected at least {required_call.min_count} "
+                f"{required_call.name!r} call(s) with args containing "
+                f"{required_call.args_contains}, found {len(matches)}."
+            ),
+        )
+
+    for required_result in scenario.success.required_tool_results:
+        matches = _matching_tool_results(required_result, trace)
+        builder.check(
+            len(matches) >= required_result.min_count,
+            "missing_tool_result",
+            (
+                f"Expected at least {required_result.min_count} "
+                f"{required_result.name!r} result(s) containing "
+                f"{required_result.data_contains}, found {len(matches)}."
+            ),
         )
 
     if scenario.success.layout.within_grid:
@@ -299,9 +325,38 @@ def _matching_layouts(required: RequiredLayout, widgets: list[JsonDict]) -> list
 
 def _dict_contains(actual: JsonDict, expected: JsonDict) -> bool:
     for key, value in expected.items():
-        if actual.get(key) != value:
+        observed = actual.get(key)
+        if isinstance(observed, dict) and isinstance(value, dict):
+            if not _dict_contains(observed, value):
+                return False
+            continue
+        if observed != value:
             return False
     return True
+
+
+def _matching_tool_calls(
+    required: RequiredToolCall, trace: tuple[ToolTraceEvent, ...]
+) -> list[ToolTraceEvent]:
+    return [
+        event
+        for event in trace
+        if event.call.name == required.name
+        and _dict_contains(event.call.args, required.args_contains)
+    ]
+
+
+def _matching_tool_results(
+    required: RequiredToolResult, trace: tuple[ToolTraceEvent, ...]
+) -> list[ToolTraceEvent]:
+    matches = []
+    for event in trace:
+        if event.call.name != required.name:
+            continue
+        data_blob = json.dumps(event.result, sort_keys=True)
+        if all(_generated_text_contains(data_blob, text) for text in required.data_contains):
+            matches.append(event)
+    return matches
 
 
 def _within_grid(layout: JsonDict, grid_width: int) -> bool:

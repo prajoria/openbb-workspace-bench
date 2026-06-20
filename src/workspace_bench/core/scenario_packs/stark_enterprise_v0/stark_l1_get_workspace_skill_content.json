@@ -1,0 +1,92 @@
+{
+  "id": "stark_l1_get_workspace_skill_content",
+  "title": "Use Finance Skill Content",
+  "level": "L1",
+  "capability": "skill-access",
+  "workflow": "earnings-prep",
+  "domain": "finance",
+  "subdomain": "equity-research",
+  "difficulty": "easy",
+  "split": "dev",
+  "tags": [
+    "stark",
+    "skills",
+    "earnings",
+    "mcp"
+  ],
+  "source": "stark-enterprise-v0",
+  "prompt": "Load the finance-earnings-prep skill and add a note that captures the workflow steps for an analyst.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Earnings Skill Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_skill_content",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_results": [
+      {
+        "tool": "get_skill_content",
+        "data_contains": [
+          "Earnings prep workflow",
+          "surprise drivers",
+          "portfolio manager"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Earnings prep",
+          "surprise drivers",
+          "portfolio manager"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_skill_content",
+      "args": {
+        "slug": "finance-earnings-prep",
+        "reason": "Build analyst workflow note"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Earnings Prep Workflow",
+        "data": "Earnings prep workflow: compare estimates, identify surprise drivers, review guidance and transcript tone, then produce action items for the portfolio manager."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 6
+  }
+}

@@ -2,7 +2,10 @@
   "id": "l2_equity_comparison_dashboard",
   "title": "Build a Three-Ticker Equity Comparison Dashboard",
   "level": "L2",
-  "category": "dashboard-construction",
+  "capability": "dashboard-construction",
+  "workflow": "equity-tearsheet",
+  "domain": "finance",
+  "subdomain": "equity-research",
   "difficulty": "medium",
   "tags": [
     "equities",

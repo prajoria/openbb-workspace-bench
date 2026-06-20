@@ -2,7 +2,10 @@
   "id": "l3_instantiate_app_with_takeaway_note",
   "title": "Instantiate an App and Add a Takeaway Note",
   "level": "L3",
-  "category": "app-instantiation",
+  "capability": "app-instantiation",
+  "workflow": "equity-tearsheet",
+  "domain": "finance",
+  "subdomain": "equity-research",
   "difficulty": "medium",
   "tags": [
     "apps",

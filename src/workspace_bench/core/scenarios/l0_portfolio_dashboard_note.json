@@ -2,7 +2,10 @@
   "id": "l0_portfolio_dashboard_note",
   "title": "Inspect a Portfolio Dashboard and Add a Concentration Note",
   "level": "L0",
-  "category": "dashboard-qa",
+  "capability": "workspace-inspection",
+  "workflow": "portfolio-risk-review",
+  "domain": "finance",
+  "subdomain": "portfolio-management",
   "difficulty": "easy",
   "tags": [
     "read-only",

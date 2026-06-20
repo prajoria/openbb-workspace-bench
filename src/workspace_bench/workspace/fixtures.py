@@ -6,6 +6,7 @@ import copy
 import json
 from dataclasses import dataclass
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from importlib import resources
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
@@ -239,6 +240,13 @@ class FixtureBackend:
             ]
         if param_name == "sector":
             return [{"label": sector, "value": sector} for sector in SECTORS]
+        if widget_id and widget_id in self.widgets:
+            schema = self.widgets[widget_id]
+            for param in schema.get("params", []) or []:
+                if param.get("paramName") == param_name:
+                    options = param.get("options") or []
+                    if isinstance(options, list):
+                        return copy.deepcopy(options)
         return []
 
     def fetch_widget_data(
@@ -267,6 +275,8 @@ class FixtureBackend:
             return copy.deepcopy(EXPOSURE_ROWS)
         if widget_id == "risk_metrics":
             return copy.deepcopy(RISK_ROWS)
+        if widget_id in self.widgets:
+            return _generic_widget_data(widget_id, self.widgets[widget_id], data_args)
         raise KeyError(f"Unknown widget data endpoint for {widget_id!r}")
 
     def fetch_http_path(self, path: str, query: JsonDict) -> Any:
@@ -539,6 +549,77 @@ def build_portfolio_backend(url: str = "http://127.0.0.1:9103") -> FixtureBacken
     return FixtureBackend("portfolio", "Bench Portfolio", widgets, apps, url)
 
 
+def build_stark_enterprise_backend(
+    url: str = "http://127.0.0.1:9104",
+) -> FixtureBackend:
+    """Build the deterministic Stark enterprise demo fixture backend."""
+
+    data_path = resources.files("workspace_bench.workspace.data") / "stark_enterprise.json"
+    with data_path.open("r", encoding="utf-8") as handle:
+        payload = json.load(handle)
+    return FixtureBackend(
+        "stark-enterprise",
+        "Bench Stark Enterprise",
+        payload["widgets"],
+        payload["apps"],
+        url,
+    )
+
+
+def _generic_widget_data(
+    widget_id: str, definition: JsonDict, data_args: JsonDict
+) -> Any:
+    name = str(definition.get("name", widget_id))
+    widget_type = str(definition.get("type", "table"))
+    category = str(definition.get("category", "Workspace"))
+    params = {
+        str(param.get("paramName")): data_args.get(
+            str(param.get("paramName")), param.get("value")
+        )
+        for param in definition.get("params", []) or []
+        if param.get("paramName")
+    }
+    base = {
+        "widget_id": widget_id,
+        "widget_name": name,
+        "category": category,
+        "status": params.get("status", "Open"),
+        "period": params.get("period", "YTD"),
+        "fund": params.get("fund", "Flagship Long/Short"),
+        "ticker": params.get("ticker", params.get("symbol", "AAPL")),
+        "workflow": widget_id.rsplit("_", 1)[0],
+        "value": round((sum(ord(char) for char in widget_id) % 9000) / 100, 2),
+    }
+    if widget_type == "markdown":
+        return (
+            f"{name}: deterministic fixture summary for {category}. "
+            f"Status {base['status']}; period {base['period']}; "
+            f"fund {base['fund']}; ticker {base['ticker']}."
+        )
+    if widget_type == "metric":
+        return [
+            {"metric": "primary_value", **base},
+            {"metric": "change", **base, "value": round(base["value"] / 10, 2)},
+        ]
+    return [
+        {"row": 1, "metric": "priority", **base},
+        {
+            "row": 2,
+            "metric": "risk_or_opportunity",
+            **base,
+            "status": "In Review",
+            "value": round(base["value"] * 1.15, 2),
+        },
+        {
+            "row": 3,
+            "metric": "action_required",
+            **base,
+            "status": "Approved",
+            "value": round(base["value"] * 0.85, 2),
+        },
+    ]
+
+
 def default_fixture_backends() -> dict[str, FixtureBackend]:
     """Return all built-in fixture backends keyed by slug and display name."""
 
@@ -546,6 +627,7 @@ def default_fixture_backends() -> dict[str, FixtureBackend]:
         build_equities_backend(),
         build_macro_backend(),
         build_portfolio_backend(),
+        build_stark_enterprise_backend(),
     ]
     result: dict[str, FixtureBackend] = {}
     for backend in backends:

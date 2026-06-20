@@ -1,0 +1,144 @@
+{
+  "id": "stark_l4_repair_earnings_ticker_and_layout",
+  "title": "Repair Earnings Ticker and Layout",
+  "level": "L4",
+  "capability": "workspace-repair",
+  "workflow": "earnings-prep",
+  "domain": "finance",
+  "subdomain": "equity-research",
+  "difficulty": "hard",
+  "split": "dev",
+  "tags": [
+    "stark",
+    "repair",
+    "earnings",
+    "layout"
+  ],
+  "source": "stark-enterprise-v0",
+  "prompt": "The earnings estimate widget is using AAPL and overlaps the price reaction widget. Update the estimate widget to LLY and move the price reaction widget to the right half.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Earnings Repair",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "estimates",
+          "name": "Estimates"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "earnings_estimates_monitor_estimates_consensus_revisions",
+          "data_args": {
+            "ticker": "AAPL",
+            "period": "YTD"
+          },
+          "tab_id": "estimates",
+          "layout": {
+            "x": 0,
+            "y": 2,
+            "w": 20,
+            "h": 12
+          }
+        },
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "earnings_estimates_monitor_post_earnings_price_reaction",
+          "data_args": {
+            "ticker": "LLY",
+            "period": "YTD"
+          },
+          "tab_id": "estimates",
+          "layout": {
+            "x": 10,
+            "y": 2,
+            "w": 20,
+            "h": 12
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "update_widget",
+    "update_widget_layout"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "earnings_estimates_monitor_estimates_consensus_revisions",
+        "data_args": {
+          "ticker": "LLY",
+          "period": "YTD"
+        },
+        "tab_id": "estimates"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "earnings_estimates_monitor_post_earnings_price_reaction",
+        "data_args": {
+          "ticker": "LLY",
+          "period": "YTD"
+        },
+        "tab_id": "estimates"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_id": "earnings_estimates_monitor_post_earnings_price_reaction",
+        "tab_id": "estimates",
+        "x": 20,
+        "y": 2,
+        "w": 20,
+        "h": 12
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "ticker": "LLY"
+        }
+      }
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_uuid": "widget_002",
+        "tab_id": "estimates",
+        "x": 20,
+        "y": 2,
+        "w": 20,
+        "h": 12
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 7
+  }
+}

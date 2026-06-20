@@ -2,7 +2,10 @@
   "id": "l0_macro_dashboard_note",
   "title": "Inspect a Macro Dashboard and Add a Rates Note",
   "level": "L0",
-  "category": "dashboard-qa",
+  "capability": "workspace-inspection",
+  "workflow": "macro-rates-review",
+  "domain": "finance",
+  "subdomain": "macro",
   "difficulty": "easy",
   "tags": [
     "read-only",

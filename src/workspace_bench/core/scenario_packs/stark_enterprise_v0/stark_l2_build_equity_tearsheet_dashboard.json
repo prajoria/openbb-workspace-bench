@@ -1,0 +1,205 @@
+{
+  "id": "stark_l2_build_equity_tearsheet_dashboard",
+  "title": "Equity Tearsheet Dashboard",
+  "level": "L2",
+  "capability": "dashboard-construction",
+  "workflow": "equity-tearsheet",
+  "domain": "finance",
+  "subdomain": "equity-research",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": [
+    "stark",
+    "equity-research",
+    "dashboard-construction",
+    "multi-widget"
+  ],
+  "source": "stark-enterprise-v0",
+  "prompt": "Build an Equity Tearsheet Dashboard using company tear sheet, DCF sensitivity, and comps table widgets, then add a skill-based note.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Equity Tearsheet Dashboard",
+    "required_tabs": [
+      "company",
+      "valuation"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "equity_research_workbench_company_company_tear_sheet",
+        "data_args": {
+          "ticker": "LLY",
+          "period": "YTD"
+        },
+        "tab_id": "company"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "equity_research_workbench_valuation_dcf_sensitivity",
+        "data_args": {
+          "ticker": "LLY",
+          "period": "YTD"
+        },
+        "tab_id": "valuation"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "equity_research_workbench_valuation_comps_table",
+        "data_args": {
+          "ticker": "LLY",
+          "period": "YTD"
+        },
+        "tab_id": "valuation"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Tearsheet workflow",
+          "DCF sensitivity",
+          "comps table"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "create",
+        "name": "Equity Tearsheet Dashboard",
+        "activate": true
+      }
+    },
+    {
+      "tool": "manage_navigation_bar",
+      "args": {
+        "operation": "create",
+        "tabs": [
+          {
+            "name": "Company"
+          },
+          {
+            "name": "Valuation"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Stark Enterprise"
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "company"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "equity_research_workbench_company_company_tear_sheet"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "equity_research_workbench_company_company_tear_sheet",
+        "data_args": {
+          "ticker": "LLY",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "valuation"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "equity_research_workbench_valuation_dcf_sensitivity"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "equity_research_workbench_valuation_dcf_sensitivity",
+        "data_args": {
+          "ticker": "LLY",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "valuation"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "equity_research_workbench_valuation_comps_table"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "equity_research_workbench_valuation_comps_table",
+        "data_args": {
+          "ticker": "LLY",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Tearsheet Note",
+        "data": "Tearsheet workflow for LLY: combine company tear sheet, DCF sensitivity, comps table, catalysts, risks, and an investment conclusion."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 18
+  }
+}

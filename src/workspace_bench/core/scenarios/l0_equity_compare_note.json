@@ -2,7 +2,10 @@
   "id": "l0_equity_compare_note",
   "title": "Compare Existing AAPL and MSFT Widgets",
   "level": "L0",
-  "category": "dashboard-qa",
+  "capability": "workspace-inspection",
+  "workflow": "equity-tearsheet",
+  "domain": "finance",
+  "subdomain": "equity-research",
   "difficulty": "easy",
   "tags": [
     "read-only",

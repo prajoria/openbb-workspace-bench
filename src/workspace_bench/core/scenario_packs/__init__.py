@@ -1,0 +1,1 @@
+"""Bundled WorkspaceBench scenario packs."""

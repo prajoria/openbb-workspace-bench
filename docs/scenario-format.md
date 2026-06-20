@@ -1,8 +1,10 @@
 # Scenario Format
 
-Scenarios are JSON files bundled under `src/workspace_bench/core/scenarios`.
+Scenarios are JSON files bundled under `src/workspace_bench/core/scenarios` and
+`src/workspace_bench/core/scenario_packs`.
 
-The bundled `workspace-core-v0` release uses this same format as private task packs loaded through `--scenario-dir`.
+The bundled `workspace-core-v0` and `stark-enterprise-v0` packs use this same
+format as private task packs loaded through `--scenario-dir`.
 
 ## Minimal Shape
 
@@ -11,7 +13,10 @@ The bundled `workspace-core-v0` release uses this same format as private task pa
   "id": "l1_add_price_widget",
   "title": "Add a Price Performance Widget",
   "level": "L1",
-  "category": "widget-creation",
+  "capability": "widget-creation",
+  "workflow": "equity-tearsheet",
+  "domain": "finance",
+  "subdomain": "equity-research",
   "difficulty": "easy",
   "tags": ["schema-discovery", "equities", "layout"],
   "source": "workspace-bench",
@@ -46,14 +51,17 @@ The bundled `workspace-core-v0` release uses this same format as private task pa
 
 ## Metadata
 
-Metadata follows the same practical shape that makes Terminal-Bench tasks easy to browse and slice:
+Metadata splits general Workspace usability from business workflow context:
 
 | Field | Required | Notes |
 | --- | --- | --- |
 | `id` | Yes | Stable scenario id. |
 | `title` | Yes | Human-readable task name. |
 | `level` | Yes | Capability tier such as `L0`, `L1`, or `L2`. |
-| `category` | Yes | Broad task family, e.g. `dashboard-construction`. |
+| `capability` | Yes | General agent/workspace skill, e.g. `dashboard-construction`, `widget-creation`, or `skill-access`. |
+| `workflow` | Yes | Real business task, e.g. `earnings-prep`, `portfolio-morning-review`, or `client-meeting-prep`. |
+| `domain` | Yes | Broad domain such as `finance` or `workspace-usability`. |
+| `subdomain` | Yes | Narrower area such as `equity-research`, `risk`, `execution`, or `client-ir`. |
 | `difficulty` | Yes | One of `easy`, `medium`, `hard`. |
 | `split` | Optional | One of `dev`, `validation`, `test`, or `train`. Defaults to the task pack default, then `dev`. |
 | `tags` | Yes | Non-empty list for filtering and benchmark cards. |
@@ -73,6 +81,14 @@ uv run workspace-bench export-task \
 
 The task envelope includes prompt, metadata, fixtures, initial state, allowed tools, limits, and the JSONL tool-call protocol. It excludes `success` and `oracle_tool_calls`.
 
+## Built-In Packs
+
+Use `--pack` to select bundled scenarios:
+
+- `core`: the original 25 deterministic Workspace scenarios.
+- `stark-enterprise-v0`: enterprise finance workflow scenarios derived from the Stark demo backend.
+- `all`: every bundled pack.
+
 ## Fixtures
 
 `fixtures.backends[].name` accepts either the fixture slug or display name:
@@ -80,6 +96,7 @@ The task envelope includes prompt, metadata, fixtures, initial state, allowed to
 - `equities` or `Bench Equities`
 - `macro` or `Bench Macro`
 - `portfolio` or `Bench Portfolio`
+- `stark-enterprise` or `Bench Stark Enterprise`
 
 The simulator assigns backend ids in registration order: `backend_001`, `backend_002`, and so on.
 
@@ -138,6 +155,34 @@ Tabs are checked by `tab_id`, not display name.
 ```
 
 `data_args` is a subset match. A widget may have additional args, but the expected keys must match exactly.
+
+### Required Tool Calls
+
+Use this when the behavior itself matters, for example MCP skill access or
+agent delegation:
+
+```json
+{
+  "tool": "get_skill_content",
+  "args_contains": { "slug": "finance-earnings-prep" },
+  "min_count": 1
+}
+```
+
+`args_contains` is a nested subset match against the trace call args.
+
+### Required Tool Results
+
+Use this when the agent must retrieve specific information through a tool:
+
+```json
+{
+  "tool": "get_skill_content",
+  "data_contains": ["Earnings prep workflow", "surprise drivers"]
+}
+```
+
+The grader string-matches against the serialized tool result.
 
 ### Required Generated Widgets
 

@@ -2,7 +2,10 @@
   "id": "l1_update_ticker_to_nvda",
   "title": "Update an Existing Widget to NVDA",
   "level": "L1",
-  "category": "widget-update",
+  "capability": "widget-update",
+  "workflow": "equity-tearsheet",
+  "domain": "finance",
+  "subdomain": "equity-research",
   "difficulty": "easy",
   "tags": [
     "update-widget",

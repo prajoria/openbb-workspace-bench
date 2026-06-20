@@ -11,6 +11,47 @@ from workspace_bench.fixtures import FixtureBackend, default_fixture_backends
 from workspace_bench.models import FixtureBackendRef, JsonDict, ToolCall
 
 
+WORKSPACE_SKILLS: dict[str, JsonDict] = {
+    "finance-earnings-prep": {
+        "slug": "finance-earnings-prep",
+        "name": "Finance Earnings Prep",
+        "description": "Build an earnings preview from estimates, guidance, transcript, price reaction, and thesis risks.",
+        "content": (
+            "Earnings prep workflow: compare internal estimates to street numbers, "
+            "identify surprise drivers, review guidance, inspect transcript tone, "
+            "and produce action items for the portfolio manager."
+        ),
+    },
+    "finance-tearsheet": {
+        "slug": "finance-tearsheet",
+        "name": "Finance Tearsheet",
+        "description": "Create a concise company or asset tear sheet with valuation, catalysts, risks, and ownership context.",
+        "content": (
+            "Tearsheet workflow: gather price action, fundamentals, valuation, "
+            "catalysts, risks, ownership, and a short investment conclusion."
+        ),
+    },
+    "finance-guidance-tracker": {
+        "slug": "finance-guidance-tracker",
+        "name": "Finance Guidance Tracker",
+        "description": "Track company guidance changes, management claims, and follow-up evidence.",
+        "content": (
+            "Guidance tracker workflow: extract management claims, compare them "
+            "with prior guidance, flag changed assumptions, and list evidence gaps."
+        ),
+    },
+    "finance-comps": {
+        "slug": "finance-comps",
+        "name": "Finance Comps",
+        "description": "Compare companies or assets using peer valuation and operating metrics.",
+        "content": (
+            "Comps workflow: define the peer set, normalize metrics, compare "
+            "valuation multiples, and explain why outliers deserve premium or discount."
+        ),
+    },
+}
+
+
 def slugify(value: str) -> str:
     """Slugify a Workspace navigation tab name."""
 
@@ -683,11 +724,21 @@ class SimulatedWorkspace:
         )
 
     def _tool_get_skill_content(self, args: JsonDict) -> JsonDict:
+        slug = str(args.get("slug", ""))
+        skill = WORKSPACE_SKILLS.get(slug)
+        if skill is None:
+            return self._error(
+                "get_skill_content",
+                "invalid_request",
+                f"Unknown skill slug {slug!r}.",
+            )
         return self._ok(
             "get_skill_content",
             {
-                "slug": args.get("slug"),
-                "content": "Fixture skill content for Workspace Bench.",
+                "slug": slug,
+                "name": skill["name"],
+                "description": skill["description"],
+                "content": skill["content"],
             },
         )
 
@@ -748,6 +799,14 @@ class SimulatedWorkspace:
             ],
             "dashboard_composition": self._dashboard_composition(active),
             "backends": self._backend_list(),
+            "skills": [
+                {
+                    "slug": skill["slug"],
+                    "name": skill["name"],
+                    "description": skill["description"],
+                }
+                for skill in WORKSPACE_SKILLS.values()
+            ],
         }
 
     def _dashboard_payload(self, dashboard: Dashboard) -> JsonDict:

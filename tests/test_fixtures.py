@@ -4,7 +4,11 @@ import json
 import threading
 from urllib.request import urlopen
 
-from workspace_bench.fixtures import build_equities_backend, make_fixture_server
+from workspace_bench.fixtures import (
+    build_equities_backend,
+    build_stark_enterprise_backend,
+    make_fixture_server,
+)
 
 
 def test_equities_backend_catalog_and_data_are_deterministic() -> None:
@@ -41,3 +45,21 @@ def test_fixture_backend_http_server_serves_workspace_contract() -> None:
     assert "estimate_history" in widgets
     assert rows[-1]["close"] == 196.10
     assert symbols[0] == {"label": "AAPL", "value": "AAPL"}
+
+
+def test_stark_enterprise_backend_exposes_demo_catalog() -> None:
+    backend = build_stark_enterprise_backend()
+
+    assert len(backend.widgets) == 349
+    assert len(backend.apps) == 23
+    schema = backend.get_widget_schema(
+        "equity_research_workbench_company_company_tear_sheet"
+    )
+    rows = backend.fetch_widget_data(
+        "equity_research_workbench_company_company_tear_sheet",
+        {"ticker": "LLY", "period": "YTD"},
+    )
+
+    assert schema["origin"] == "Bench Stark Enterprise"
+    assert schema["grid_data"]
+    assert rows[0]["ticker"] == "LLY"

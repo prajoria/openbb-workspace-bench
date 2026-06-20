@@ -6,15 +6,18 @@ This document captures the Terminal-Bench/Harbor ideas worth adopting now, witho
 
 ### 1. Task Metadata
 
-Terminal-Bench tasks are easy to browse because they have difficulty, tags, and categories. Workspace Bench now has:
+Terminal-Bench tasks are easy to browse because they have difficulty, tags, and categories. Workspace Bench uses more explicit axes:
 
 - `level`
-- `category`
+- `capability`
+- `workflow`
+- `domain`
+- `subdomain`
 - `difficulty`
 - `tags`
 - `source`
 
-High ROI: lets us build subsets such as `--level L2 --tag multi-widget`, compare by task family, and create benchmark cards.
+High ROI: lets us build subsets such as `--level L2 --tag multi-widget`, compare by Workspace capability, compare by finance workflow, and create benchmark cards.
 
 Low effort: pure scenario JSON and CLI changes.
 
@@ -25,7 +28,7 @@ Low effort: pure scenario JSON and CLI changes.
 - benchmark name/version
 - canary GUID
 - scenario count
-- levels/categories/difficulties/tags
+- levels/capabilities/workflows/domains/subdomains/difficulties/tags
 - per-scenario summaries
 
 High ROI: useful for leaderboards, regression dashboards, and published eval artifacts.
@@ -49,7 +52,10 @@ Low effort: reuses existing runner and graders.
 `workspace-bench list` and `workspace-bench run` support:
 
 - `--level`
-- `--category`
+- `--capability`
+- `--workflow`
+- `--domain`
+- `--subdomain`
 - `--difficulty`
 - `--tag`
 

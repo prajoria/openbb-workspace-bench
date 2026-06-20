@@ -4,7 +4,7 @@ from dataclasses import replace
 
 from workspace_bench.graders import grade_scenario
 from workspace_bench.models import LayoutChecks, SuccessCriteria
-from workspace_bench.runner import find_scenario
+from workspace_bench.runner import ScenarioRunner, find_scenario
 
 
 def test_grader_detects_missing_required_widget() -> None:
@@ -103,6 +103,16 @@ def test_grader_matches_generated_percent_equivalent() -> None:
     grade = grade_scenario(scenario, snapshot, ())
 
     assert grade.passed is True
+
+
+def test_grader_requires_tool_results_for_skill_scenario() -> None:
+    scenario = find_scenario(
+        "stark_l1_get_workspace_skill_content", pack="stark-enterprise-v0"
+    )
+    result = ScenarioRunner().run(scenario, "oracle")
+
+    assert result.grade.passed is True
+    assert any(event.call.name == "get_skill_content" for event in result.trace)
 
 
 def test_grader_matches_generated_widget_display_alias() -> None:

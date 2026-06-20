@@ -1,0 +1,106 @@
+{
+  "id": "stark_l0_portfolio_command_note",
+  "title": "Summarize a Portfolio Command Center",
+  "level": "L0",
+  "capability": "workspace-inspection",
+  "workflow": "portfolio-morning-review",
+  "domain": "finance",
+  "subdomain": "portfolio-management",
+  "difficulty": "easy",
+  "split": "dev",
+  "tags": [
+    "stark",
+    "portfolio",
+    "note",
+    "inspection"
+  ],
+  "source": "stark-enterprise-v0",
+  "prompt": "Review the existing Portfolio Command Center and add a short PM morning note that mentions the Flagship Long/Short fund, Top Alerts, and the purpose of the dashboard.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Portfolio Command Center Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "portfolio_command_center_overview_portfolio_snapshot",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "period": "YTD"
+          },
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 2,
+            "w": 40,
+            "h": 5
+          }
+        },
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "portfolio_command_center_overview_top_alerts",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "period": "YTD"
+          },
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 7,
+            "w": 40,
+            "h": 12
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Portfolio Command Center",
+          "Flagship Long/Short",
+          "Top Alerts"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "PM Morning Note",
+        "data": "Portfolio Command Center note: Flagship Long/Short uses the Top Alerts and portfolio snapshot to focus the PM morning review on exposure, limit pressure, and immediate actions."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 5
+  }
+}

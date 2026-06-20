@@ -2,7 +2,10 @@
   "id": "l3_app_template_summary",
   "title": "Summarize an App Template",
   "level": "L3",
-  "category": "app-instantiation",
+  "capability": "app-instantiation",
+  "workflow": "equity-tearsheet",
+  "domain": "finance",
+  "subdomain": "equity-research",
   "difficulty": "medium",
   "tags": [
     "apps",

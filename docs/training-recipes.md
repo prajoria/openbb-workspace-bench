@@ -15,7 +15,7 @@ Every rollout export includes metadata for:
 - benchmark release id
 - export schema version
 - export timestamp
-- scenario id, level, difficulty, split, and category
+- scenario id, level, capability, workflow, domain, subdomain, difficulty, and split
 - model or runner metadata when available
 - task-pack metadata for private or hidden packs
 
@@ -100,4 +100,3 @@ discipline, but they should not replace final deterministic grading.
 - Prefer passing traces for SFT.
 - Keep failed traces only when their grade metadata is preserved.
 - Keep raw comparison outputs so exported rows can be audited later.
-

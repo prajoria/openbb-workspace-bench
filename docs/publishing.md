@@ -1,6 +1,7 @@
 # Publishing Guide
 
-This folder is prepared as an alpha benchmark package for `workspace-core-v0`.
+This folder is prepared as an alpha benchmark package for the bundled
+`workspace-core-v0` and `stark-enterprise-v0` packs.
 
 ## Pre-Publish Gates
 
@@ -8,7 +9,7 @@ Run:
 
 ```bash
 uv run --extra dev pytest
-uv run --extra dev workspace-bench validate --min-scenarios 25
+uv run --extra dev workspace-bench validate --pack all --min-scenarios 40
 uv run --extra dev workspace-bench run --agent oracle
 uv run --extra dev workspace-bench export-task --scenario l1_add_price_widget --output /tmp/workspace-task.json
 uv run --extra dev workspace-bench run-agent-command \
@@ -53,7 +54,7 @@ uv run --extra live workspace-bench smoke-workspace-mcp \
 Supported:
 
 - simulator-backed Workspace MCP agent evaluation
-- deterministic `workspace-core-v0` scenario set
+- deterministic `workspace-core-v0` and `stark-enterprise-v0` scenario sets
 - private task packs through `--scenario-dir`
 - external trace-producing agents through `run-agent-command`
 - live `workspace-mcp` sidecar smoke checks

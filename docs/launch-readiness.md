@@ -2,7 +2,7 @@
 
 Workspace Bench is ready for an alpha benchmark release because it now has:
 
-- 25 bundled deterministic scenarios
+- 40 bundled deterministic scenarios across the core and Stark enterprise packs
 - L0-L4 task coverage
 - equities, macro, and portfolio fixture domains
 - cross-backend tasks
@@ -28,7 +28,10 @@ Recommended wording:
 
 > OpenBB Workspace Bench is a Terminal-Bench-style evaluation harness for agents that compose financial analyst workspaces through OpenBB Workspace MCP tools.
 
-The current public release should be positioned as `workspace-core-v0` alpha. It supports simulator-backed evals, private task packs, external trace-producing agents, and live `workspace-mcp` sidecar smoke tests.
+The current public release should be positioned as alpha. It includes the
+`workspace-core-v0` core pack and the `stark-enterprise-v0` enterprise workflow
+pack. It supports simulator-backed evals, private task packs, external
+trace-producing agents, and live `workspace-mcp` sidecar smoke tests.
 
 ## Remaining Gaps
 
@@ -45,7 +48,7 @@ The benchmark is strong enough to announce as an alpha developer release if the 
 ## Alpha Release Checklist
 
 - `uv run --extra dev python -m pytest`
-- `uv run --extra dev workspace-bench validate --min-scenarios 25`
+- `uv run --extra dev workspace-bench validate --pack all --min-scenarios 40`
 - `uv run --extra dev workspace-bench compare-models --models-file examples/models.example.json --difficulty easy --dry-run`
 - `uv run --extra dev workspace-bench export-rollouts --oracle --scenario l1_add_price_widget --output /tmp/workspace-rollouts.jsonl`
 - README quickstart commands match the CLI.

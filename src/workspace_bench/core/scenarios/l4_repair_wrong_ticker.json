@@ -2,7 +2,10 @@
   "id": "l4_repair_wrong_ticker",
   "title": "Repair a Dashboard With the Wrong Ticker",
   "level": "L4",
-  "category": "repair",
+  "capability": "workspace-repair",
+  "workflow": "equity-tearsheet",
+  "domain": "finance",
+  "subdomain": "equity-research",
   "difficulty": "hard",
   "tags": [
     "repair",

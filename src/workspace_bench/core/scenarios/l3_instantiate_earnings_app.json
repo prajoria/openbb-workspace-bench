@@ -2,7 +2,10 @@
   "id": "l3_instantiate_earnings_app",
   "title": "Instantiate the Equity Earnings App",
   "level": "L3",
-  "category": "app-instantiation",
+  "capability": "app-instantiation",
+  "workflow": "earnings-prep",
+  "domain": "finance",
+  "subdomain": "equity-research",
   "difficulty": "medium",
   "tags": [
     "apps",

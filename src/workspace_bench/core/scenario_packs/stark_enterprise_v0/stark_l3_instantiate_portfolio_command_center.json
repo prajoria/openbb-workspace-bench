@@ -1,0 +1,106 @@
+{
+  "id": "stark_l3_instantiate_portfolio_command_center",
+  "title": "Instantiate Portfolio Command Center",
+  "level": "L3",
+  "capability": "app-instantiation",
+  "workflow": "portfolio-morning-review",
+  "domain": "finance",
+  "subdomain": "portfolio-management",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": [
+    "stark",
+    "apps",
+    "portfolio",
+    "generated-note"
+  ],
+  "source": "stark-enterprise-v0",
+  "prompt": "Instantiate the Portfolio Command Center app as PM Morning Command Center and add a note on the Actions tab explaining the morning workflow.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "PM Morning Command Center",
+    "required_tabs": [
+      "overview",
+      "holdings",
+      "actions"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_holdings_holdings_table",
+        "tab_id": "holdings"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_actions_trade_ideas",
+        "tab_id": "actions"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "PM morning workflow",
+          "trade ideas",
+          "approval checklist"
+        ],
+        "tab_id": "actions"
+      }
+    ],
+    "layout": {
+      "within_grid": true
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Portfolio Command Center",
+        "dashboard_name": "PM Morning Command Center",
+        "activate": true
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "actions"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Morning Workflow",
+        "data": "PM morning workflow: review holdings, Top Alerts, trade ideas, analyst conviction, and the approval checklist before the risk meeting."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 10
+  }
+}

@@ -27,8 +27,11 @@ from workspace_bench.models import (
     VALID_SCENARIO_SPLITS,
 )
 from workspace_bench.runner import (
+    BUILTIN_SCENARIO_PACKS,
+    BUILTIN_SCENARIO_PACK_ORDER,
     ScenarioRunner,
     find_scenario,
+    load_builtin_task_pack_manifest,
     load_builtin_scenarios,
     load_scenario_directory,
     load_scenario_file,
@@ -110,9 +113,20 @@ def main(argv: list[str] | None = None) -> int:
         help="Run one scenario through a live workspace-mcp sidecar.",
     )
     smoke_parser.add_argument("--url", default="http://127.0.0.1:8787")
+    smoke_parser.add_argument(
+        "--pack",
+        default="core",
+        choices=["all", *BUILTIN_SCENARIO_PACK_ORDER],
+        help="Bundled scenario pack used to resolve --scenario.",
+    )
     smoke_parser.add_argument("--scenario", default="l1_add_price_widget")
     smoke_parser.add_argument("--agent", default="oracle", choices=["oracle", "noop"])
     smoke_parser.add_argument("--json", action="store_true", help="Emit JSON.")
+    smoke_parser.add_argument(
+        "--check-surface",
+        action="store_true",
+        help="Also verify expected Workspace MCP tools, prompts, and resources.",
+    )
     smoke_parser.add_argument(
         "--replace-browser-session",
         action="store_true",
@@ -210,7 +224,10 @@ def main(argv: list[str] | None = None) -> int:
 
 def _add_scenario_filters(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--level", help="Filter by level, e.g. L2.")
-    parser.add_argument("--category", help="Filter by category.")
+    parser.add_argument("--capability", help="Filter by agent/workspace capability.")
+    parser.add_argument("--workflow", help="Filter by business or finance workflow.")
+    parser.add_argument("--domain", help="Filter by broad domain.")
+    parser.add_argument("--subdomain", help="Filter by narrower domain area.")
     parser.add_argument("--difficulty", help="Filter by difficulty.")
     parser.add_argument(
         "--split",
@@ -222,8 +239,17 @@ def _add_scenario_filters(parser: argparse.ArgumentParser) -> None:
 
 def _add_scenario_collection_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
+        "--pack",
+        default="core",
+        choices=["all", *BUILTIN_SCENARIO_PACK_ORDER],
+        help=(
+            "Bundled scenario pack. Defaults to core. Use all to run every "
+            "bundled pack."
+        ),
+    )
+    parser.add_argument(
         "--scenario-dir",
-        help="Directory of scenario JSON files. Defaults to the bundled benchmark.",
+        help="Directory of scenario JSON files. Overrides --pack.",
     )
 
 
@@ -261,7 +287,8 @@ def _cmd_list(args: argparse.Namespace) -> int:
         print(
             f"{scenario.id}\t{scenario.level}\t{scenario.difficulty}\t"
             f"{scenario.split}\t"
-            f"{scenario.category}\t{tags}\t{scenario.title}"
+            f"{scenario.capability}\t{scenario.workflow}\t"
+            f"{scenario.domain}\t{scenario.subdomain}\t{tags}\t{scenario.title}"
         )
     return 0
 
@@ -314,7 +341,10 @@ def _cmd_manifest(args: argparse.Namespace) -> int:
     print(f"version\t{manifest['version']}")
     print(f"scenario_count\t{manifest['scenario_count']}")
     print(f"levels\t{','.join(manifest['levels'])}")
-    print(f"categories\t{','.join(manifest['categories'])}")
+    print(f"capabilities\t{','.join(manifest['capabilities'])}")
+    print(f"workflows\t{','.join(manifest['workflows'])}")
+    print(f"domains\t{','.join(manifest['domains'])}")
+    print(f"subdomains\t{','.join(manifest['subdomains'])}")
     print(f"difficulties\t{','.join(manifest['difficulties'])}")
     print(f"splits\t{','.join(manifest['splits'])}")
     print(f"canary\t{manifest['canary_guid']}")
@@ -351,7 +381,10 @@ def build_manifest(
         "redacted": redacted,
         "scenario_count": len(scenarios),
         "levels": sorted({scenario.level for scenario in scenarios}),
-        "categories": sorted({scenario.category for scenario in scenarios}),
+        "capabilities": sorted({scenario.capability for scenario in scenarios}),
+        "workflows": sorted({scenario.workflow for scenario in scenarios}),
+        "domains": sorted({scenario.domain for scenario in scenarios}),
+        "subdomains": sorted({scenario.subdomain for scenario in scenarios}),
         "difficulties": sorted({scenario.difficulty for scenario in scenarios}),
         "splits": sorted({scenario.split for scenario in scenarios}),
         "tags": sorted({tag for scenario in scenarios for tag in scenario.tags}),
@@ -543,7 +576,7 @@ def _cmd_run_agent_command(args: argparse.Namespace) -> int:
 def _cmd_smoke_workspace_mcp(args: argparse.Namespace) -> int:
     from workspace_bench.live_mcp import run_workspace_mcp_smoke
 
-    scenario = find_scenario(args.scenario)
+    scenario = find_scenario(args.scenario, pack=args.pack)
     try:
         result = asyncio.run(
             run_workspace_mcp_smoke(
@@ -551,6 +584,7 @@ def _cmd_smoke_workspace_mcp(args: argparse.Namespace) -> int:
                 base_url=args.url,
                 agent=args.agent,
                 replace_existing_session=args.replace_browser_session,
+                check_surface=args.check_surface,
             )
         )
     except RuntimeError as error:
@@ -565,6 +599,9 @@ def _cmd_smoke_workspace_mcp(args: argparse.Namespace) -> int:
                     "result": _result_summary(run_result),
                     "mcp_tool_count": len(result.mcp_tools),
                     "mcp_tools": result.mcp_tools,
+                    "mcp_prompts": result.mcp_prompts,
+                    "mcp_resources": result.mcp_resources,
+                    "surface_issues": result.surface_issues,
                     "bridge_commands": result.bridge_commands,
                     "health_before": result.health_before,
                     "health_with_bridge": result.health_with_bridge,
@@ -582,6 +619,10 @@ def _cmd_smoke_workspace_mcp(args: argparse.Namespace) -> int:
             f"{run_result.grade.checks_passed}/{run_result.grade.checks_total}"
         )
         print(f"MCP_TOOLS\t{len(result.mcp_tools)}")
+        print(f"MCP_PROMPTS\t{len(result.mcp_prompts)}")
+        print(f"MCP_RESOURCES\t{len(result.mcp_resources)}")
+        for issue in result.surface_issues:
+            print(f"  - surface: {issue}")
         print(f"BRIDGE_COMMANDS\t{','.join(result.bridge_commands)}")
         print(
             "HEALTH\t"
@@ -592,7 +633,7 @@ def _cmd_smoke_workspace_mcp(args: argparse.Namespace) -> int:
         for issue in run_result.grade.issues:
             print(f"  - {issue.code}: {issue.message}")
 
-    return 0 if run_result.grade.passed else 1
+    return 0 if run_result.grade.passed and not result.surface_issues else 1
 
 
 def _render_markdown_report(report: dict) -> str:
@@ -612,7 +653,10 @@ def _render_markdown_report(report: dict) -> str:
         "## Coverage",
         "",
         f"- Levels: {', '.join(manifest['levels'])}",
-        f"- Categories: {', '.join(manifest['categories'])}",
+        f"- Capabilities: {', '.join(manifest['capabilities'])}",
+        f"- Workflows: {', '.join(manifest['workflows'])}",
+        f"- Domains: {', '.join(manifest['domains'])}",
+        f"- Subdomains: {', '.join(manifest['subdomains'])}",
         f"- Difficulties: {', '.join(manifest['difficulties'])}",
         f"- Splits: {', '.join(manifest['splits'])}",
         f"- Tags: {', '.join(manifest['tags'])}",
@@ -641,8 +685,8 @@ def _render_markdown_report(report: dict) -> str:
             "",
             "## Scenario Results",
             "",
-            "| Scenario | Split | Level | Category | Difficulty | Oracle | Noop |",
-            "| --- | --- | --- | --- | --- | ---: | ---: |",
+            "| Scenario | Split | Level | Capability | Workflow | Domain | Subdomain | Difficulty | Oracle | Noop |",
+            "| --- | --- | --- | --- | --- | --- | --- | --- | ---: | ---: |",
         ]
     )
     noop_by_id = {result["id"]: result for result in report["noop_results"]}
@@ -653,7 +697,10 @@ def _render_markdown_report(report: dict) -> str:
             f"{oracle_result['id']} | "
             f"{oracle_result['split']} | "
             f"{oracle_result['level']} | "
-            f"{oracle_result['category']} | "
+            f"{oracle_result['capability']} | "
+            f"{oracle_result['workflow']} | "
+            f"{oracle_result['domain']} | "
+            f"{oracle_result['subdomain']} | "
             f"{oracle_result['difficulty']} | "
             f"{oracle_result['score']:.3f} | "
             f"{noop_result['score']:.3f} |"
@@ -727,8 +774,14 @@ def _scenario_metadata_issues(scenario: Scenario) -> list[str]:
         issues.append(
             f"split must be one of {', '.join(sorted(VALID_SCENARIO_SPLITS))}"
         )
-    if not scenario.category:
-        issues.append("category must be non-empty")
+    if not scenario.capability:
+        issues.append("capability must be non-empty")
+    if not scenario.workflow:
+        issues.append("workflow must be non-empty")
+    if not scenario.domain:
+        issues.append("domain must be non-empty")
+    if not scenario.subdomain:
+        issues.append("subdomain must be non-empty")
     if not scenario.tags:
         issues.append("at least one tag is required")
     if not scenario.oracle_tool_calls:
@@ -744,11 +797,19 @@ def _filtered_scenarios(args: argparse.Namespace) -> list[Scenario]:
         scenarios = [
             scenario for scenario in scenarios if scenario.level == args.level
         ]
-    if getattr(args, "category", None):
+    if getattr(args, "capability", None):
         scenarios = [
-            scenario
-            for scenario in scenarios
-            if scenario.category == args.category
+            scenario for scenario in scenarios if scenario.capability == args.capability
+        ]
+    if getattr(args, "workflow", None):
+        scenarios = [
+            scenario for scenario in scenarios if scenario.workflow == args.workflow
+        ]
+    if getattr(args, "domain", None):
+        scenarios = [scenario for scenario in scenarios if scenario.domain == args.domain]
+    if getattr(args, "subdomain", None):
+        scenarios = [
+            scenario for scenario in scenarios if scenario.subdomain == args.subdomain
         ]
     if getattr(args, "difficulty", None):
         scenarios = [
@@ -809,14 +870,14 @@ def _load_export_rollouts(args: argparse.Namespace):
 def _scenario_collection(args: argparse.Namespace) -> list[Scenario]:
     scenario_dir = getattr(args, "scenario_dir", None)
     if not scenario_dir:
-        return load_builtin_scenarios()
+        return load_builtin_scenarios(getattr(args, "pack", "core"))
     return load_scenario_directory(Path(scenario_dir))
 
 
 def _task_pack_manifest(args: argparse.Namespace) -> TaskPackManifest | None:
     scenario_dir = getattr(args, "scenario_dir", None)
     if not scenario_dir:
-        return None
+        return load_builtin_task_pack_manifest(getattr(args, "pack", "core"))
     return load_task_pack_manifest(Path(scenario_dir))
 
 
@@ -846,7 +907,10 @@ def _scenario_summary(scenario: Scenario) -> dict:
         "id": scenario.id,
         "title": scenario.title,
         "level": scenario.level,
-        "category": scenario.category,
+        "capability": scenario.capability,
+        "workflow": scenario.workflow,
+        "domain": scenario.domain,
+        "subdomain": scenario.subdomain,
         "difficulty": scenario.difficulty,
         "split": scenario.split,
         "tags": scenario.tags,
@@ -860,7 +924,10 @@ def _result_summary(result: RunResult) -> dict:
     return {
         "id": result.scenario.id,
         "level": result.scenario.level,
-        "category": result.scenario.category,
+        "capability": result.scenario.capability,
+        "workflow": result.scenario.workflow,
+        "domain": result.scenario.domain,
+        "subdomain": result.scenario.subdomain,
         "difficulty": result.scenario.difficulty,
         "split": result.scenario.split,
         "tags": result.scenario.tags,
@@ -942,7 +1009,10 @@ def _write_trace_artifacts(
             "id": result.scenario.id,
             "title": result.scenario.title,
             "level": result.scenario.level,
-            "category": result.scenario.category,
+            "capability": result.scenario.capability,
+            "workflow": result.scenario.workflow,
+            "domain": result.scenario.domain,
+            "subdomain": result.scenario.subdomain,
             "difficulty": result.scenario.difficulty,
             "split": result.scenario.split,
             "tags": result.scenario.tags,

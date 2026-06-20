@@ -164,7 +164,16 @@ def main(argv: list[str] | None = None) -> int:
         help="Scenario difficulty slice to run.",
     )
     parser.add_argument("--level", help="Optional level filter, e.g. L1 or L2.")
-    parser.add_argument("--category", help="Optional category filter.")
+    parser.add_argument("--capability", help="Optional capability filter.")
+    parser.add_argument("--workflow", help="Optional workflow filter.")
+    parser.add_argument("--domain", help="Optional domain filter.")
+    parser.add_argument("--subdomain", help="Optional subdomain filter.")
+    parser.add_argument(
+        "--pack",
+        default="core",
+        choices=["core", "stark-enterprise-v0", "all"],
+        help="Bundled scenario pack. Defaults to core.",
+    )
     parser.add_argument(
         "--split",
         choices=sorted(VALID_SCENARIO_SPLITS),
@@ -282,7 +291,10 @@ def main(argv: list[str] | None = None) -> int:
         load_scenario_source(args),
         difficulty=args.difficulty,
         level=args.level,
-        category=args.category,
+        capability=args.capability,
+        workflow=args.workflow,
+        domain=args.domain,
+        subdomain=args.subdomain,
         split=args.split,
         tags=args.tag,
     )
@@ -523,7 +535,10 @@ def filter_scenarios(
     *,
     difficulty: str,
     level: str | None,
-    category: str | None,
+    capability: str | None,
+    workflow: str | None,
+    domain: str | None,
+    subdomain: str | None,
     split: str | None,
     tags: list[str],
 ) -> list[Scenario]:
@@ -531,8 +546,14 @@ def filter_scenarios(
         scenarios = [scenario for scenario in scenarios if scenario.difficulty == difficulty]
     if level:
         scenarios = [scenario for scenario in scenarios if scenario.level == level]
-    if category:
-        scenarios = [scenario for scenario in scenarios if scenario.category == category]
+    if capability:
+        scenarios = [scenario for scenario in scenarios if scenario.capability == capability]
+    if workflow:
+        scenarios = [scenario for scenario in scenarios if scenario.workflow == workflow]
+    if domain:
+        scenarios = [scenario for scenario in scenarios if scenario.domain == domain]
+    if subdomain:
+        scenarios = [scenario for scenario in scenarios if scenario.subdomain == subdomain]
     if split:
         scenarios = [scenario for scenario in scenarios if scenario.split == split]
     for tag in tags:
@@ -544,7 +565,7 @@ def load_scenario_source(args: argparse.Namespace) -> list[Scenario]:
     scenario_dir = getattr(args, "scenario_dir", None)
     if scenario_dir:
         return load_scenario_directory(Path(scenario_dir))
-    return load_builtin_scenarios()
+    return load_builtin_scenarios(getattr(args, "pack", "core"))
 
 
 def print_dry_run(
@@ -560,7 +581,9 @@ def print_dry_run(
     for scenario in scenarios:
         print(
             f"  - {scenario.id}\t{scenario.level}\t"
-            f"{scenario.difficulty}\t{scenario.split}\t{scenario.category}"
+            f"{scenario.difficulty}\t{scenario.split}\t"
+            f"{scenario.capability}\t{scenario.workflow}\t"
+            f"{scenario.domain}\t{scenario.subdomain}"
         )
 
 
@@ -789,7 +812,10 @@ def build_interactive_messages(task: JsonDict) -> list[JsonDict]:
         "id": scenario["id"],
         "title": scenario["title"],
         "level": scenario["level"],
-        "category": scenario["category"],
+        "capability": scenario["capability"],
+        "workflow": scenario["workflow"],
+        "domain": scenario["domain"],
+        "subdomain": scenario["subdomain"],
         "difficulty": scenario["difficulty"],
         "prompt": scenario["prompt"],
         "fixtures": scenario["fixtures"],
@@ -1300,10 +1326,10 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
         [
             "## Scenario Matrix",
             "",
-            "| Scenario | Level | Difficulty | Category | "
+            "| Scenario | Level | Difficulty | Capability | Workflow | Domain | Subdomain | "
             + " | ".join(payload["model"]["label"] for payload in model_payloads)
             + " |",
-            "| --- | --- | --- | --- | "
+            "| --- | --- | --- | --- | --- | --- | --- | "
             + " | ".join("---:" for _ in model_payloads)
             + " |",
         ]
@@ -1320,7 +1346,10 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
             f"{scenario_id} | "
             f"{first['level']} | "
             f"{first['difficulty']} | "
-            f"{first['category']} | "
+            f"{first['capability']} | "
+            f"{first['workflow']} | "
+            f"{first['domain']} | "
+            f"{first['subdomain']} | "
             + " | ".join(cells)
             + " |"
         )
@@ -1454,7 +1483,10 @@ def agent_run_summary(run: ComparisonRun) -> dict:
         "level": result.scenario.level,
         "difficulty": result.scenario.difficulty,
         "split": result.scenario.split,
-        "category": result.scenario.category,
+        "capability": result.scenario.capability,
+        "workflow": result.scenario.workflow,
+        "domain": result.scenario.domain,
+        "subdomain": result.scenario.subdomain,
         "passed": agent_run_passed(run),
         "process_failed": agent_run_process_failed(run),
         "task_failed": not agent_run_process_failed(run) and not result.grade.passed,
@@ -1481,7 +1513,11 @@ def selected_filters(args: argparse.Namespace) -> dict:
     return {
         "difficulty": args.difficulty,
         "level": args.level,
-        "category": args.category,
+        "capability": args.capability,
+        "workflow": args.workflow,
+        "domain": args.domain,
+        "subdomain": args.subdomain,
+        "pack": getattr(args, "pack", "core"),
         "split": getattr(args, "split", None),
         "scenario_dir": getattr(args, "scenario_dir", None),
         "tags": args.tag,

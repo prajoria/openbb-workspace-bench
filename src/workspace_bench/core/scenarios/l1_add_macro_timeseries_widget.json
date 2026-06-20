@@ -2,7 +2,10 @@
   "id": "l1_add_macro_timeseries_widget",
   "title": "Add a 2Y Treasury Macro Widget",
   "level": "L1",
-  "category": "widget-creation",
+  "capability": "widget-creation",
+  "workflow": "macro-rates-review",
+  "domain": "finance",
+  "subdomain": "macro",
   "difficulty": "easy",
   "tags": [
     "schema-discovery",

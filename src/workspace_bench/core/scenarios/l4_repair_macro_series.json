@@ -2,7 +2,10 @@
   "id": "l4_repair_macro_series",
   "title": "Repair a Macro Widget Series",
   "level": "L4",
-  "category": "repair",
+  "capability": "workspace-repair",
+  "workflow": "macro-rates-review",
+  "domain": "finance",
+  "subdomain": "macro",
   "difficulty": "hard",
   "tags": [
     "repair",

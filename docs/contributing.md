@@ -7,7 +7,7 @@ and RL adapter.
 ## Add A Scenario
 
 1. Copy an existing scenario from `src/workspace_bench/core/scenarios`.
-2. Give it a stable `id`, title, level, category, difficulty, split, and tags.
+2. Give it a stable `id`, title, level, capability, workflow, domain, subdomain, difficulty, split, and tags.
 3. Keep fixture data deterministic.
 4. Add clear `success` criteria that grade durable Workspace state.
 5. Add an `oracle_tool_calls` trace.
@@ -89,4 +89,3 @@ uv run --extra dev workspace-bench compare-models \
   --difficulty easy \
   --dry-run
 ```
-

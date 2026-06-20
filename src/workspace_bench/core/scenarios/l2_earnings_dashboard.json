@@ -2,7 +2,10 @@
   "id": "l2_earnings_dashboard",
   "title": "Build an AAPL Earnings Dashboard",
   "level": "L2",
-  "category": "dashboard-construction",
+  "capability": "dashboard-construction",
+  "workflow": "earnings-prep",
+  "domain": "finance",
+  "subdomain": "equity-research",
   "difficulty": "medium",
   "tags": [
     "tabs",

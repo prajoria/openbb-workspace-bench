@@ -2,7 +2,10 @@
   "id": "l1_add_portfolio_holdings_widget",
   "title": "Add a Portfolio Holdings Widget",
   "level": "L1",
-  "category": "widget-creation",
+  "capability": "widget-creation",
+  "workflow": "portfolio-risk-review",
+  "domain": "finance",
+  "subdomain": "portfolio-management",
   "difficulty": "easy",
   "tags": [
     "schema-discovery",

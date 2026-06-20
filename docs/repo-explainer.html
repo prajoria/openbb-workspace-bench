@@ -740,7 +740,7 @@
         </ul>
 
         <div class="summary-strip" aria-label="Benchmark facts">
-          <div class="metric"><strong>25</strong><span>deterministic scenarios in the current alpha release</span></div>
+          <div class="metric"><strong>40</strong><span>deterministic scenarios across the core and Stark packs</span></div>
           <div class="metric"><strong>L0-L4</strong><span>task levels from simple inspection to repair workflows</span></div>
           <div class="metric"><strong>2</strong><span>built-in comparison adapters: GPT-4.1 and Ollama gpt-oss:20b</span></div>
           <div class="metric"><strong>3</strong><span>downstream paths: evals, training exports, and RL</span></div>
@@ -931,8 +931,33 @@
         <div class="repo-row"><code>src/workspace_bench/reports/</code><span>Interactive GPT-4.1 vs Ollama comparison runner, reliability metrics, chart writer, and analysis report generator.</span></div>
         <div class="repo-row"><code>src/workspace_bench/exports/</code><span>Rollout, SFT, and preference-pair export helpers.</span></div>
         <div class="repo-row"><code>src/workspace_bench/rl/</code><span>Gym-style environment wrapper for RL loops.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/core/scenarios/*.json</code><span>The bundled benchmark tasks. Current release includes 25 scenarios.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/core/scenarios/*.json</code><span>The core public benchmark pack: <code>workspace-core-v0</code>.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/core/scenario_packs/</code><span>Additional bundled packs, including <code>stark-enterprise-v0</code> for enterprise finance workflows.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/workspace/data/</code><span>Packaged fixture metadata such as the Stark widget and app catalog.</span></div>
         <div class="repo-row"><code>src/workspace_bench/*.py</code><span>Compatibility wrappers so older imports such as <code>workspace_bench.runner</code> and <code>workspace_bench.envs</code> still work.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Scenario metadata</p>
+      <h2>Tasks are sliced by action and by workflow.</h2>
+      <div class="four-col">
+        <article class="panel teal">
+          <h3>Capability</h3>
+          <p>What the agent must do: create a widget, instantiate an app, read data, use a skill, delegate work, or repair state.</p>
+        </article>
+        <article class="panel gold">
+          <h3>Workflow</h3>
+          <p>The real work context: earnings prep, client meeting prep, risk review, compliance surveillance, or vendor monitoring.</p>
+        </article>
+        <article class="panel green">
+          <h3>Domain</h3>
+          <p>The broad area, usually finance or workspace operations.</p>
+        </article>
+        <article class="panel red">
+          <h3>Subdomain</h3>
+          <p>The narrower desk or function, such as equities, portfolio, macro, compliance, execution, or research.</p>
+        </article>
       </div>
     </section>
 
@@ -943,7 +968,7 @@
         <div class="level"><strong>L0</strong><p>Inspect existing state and produce a useful note or answer.</p></div>
         <div class="level"><strong>L1</strong><p>Create, update, read, or resize a single widget.</p></div>
         <div class="level"><strong>L2</strong><p>Build multi-widget dashboards from analyst requirements.</p></div>
-        <div class="level"><strong>L3</strong><p>Use app templates, tabs, parameter groups, and generated takeaways.</p></div>
+        <div class="level"><strong>L3</strong><p>Use app templates, tabs, parameter groups, generated takeaways, skills, or delegation.</p></div>
         <div class="level"><strong>L4</strong><p>Repair bad Workspace state, wrong tickers, layout overlap, or bad metadata assumptions.</p></div>
       </div>
     </section>
@@ -991,7 +1016,7 @@
           <h3>pass^k</h3>
           <p>A scenario counts as passed only if all k repeated attempts pass.</p>
           <h3>Task pack</h3>
-          <p>A directory of scenarios, optionally with <code>task_pack.json</code> metadata.</p>
+          <p>A directory of scenarios, optionally with <code>task_pack.json</code> metadata. Bundled packs include <code>core</code> and <code>stark-enterprise-v0</code>.</p>
           <h3>Gym env</h3>
           <p>A reset/step/render wrapper around the same benchmark episode and grader.</p>
         </div>
@@ -1007,7 +1032,7 @@
     const nodeDetails = {
       scenario: {
         title: "Scenario",
-        body: "A scenario is the unit of work. It says what the analyst wants, what Workspace starts with, which tools the model may call, and what final state counts as success."
+        body: "A scenario is the unit of work. It says what the analyst wants, what Workspace starts with, which tools the model may call, and what final state counts as success. Metadata separates capability from workflow, domain, and subdomain."
       },
       agent: {
         title: "Agent",
@@ -1042,11 +1067,11 @@
     const commands = {
       validate: {
         title: "Validate the benchmark",
-        code: "uv run --extra dev workspace-bench validate --min-scenarios 25"
+        code: "uv run --extra dev workspace-bench validate --pack all --min-scenarios 40"
       },
       compare: {
         title: "Compare GPT-4.1 vs Ollama",
-        code: "uv run --extra dev workspace-bench compare-models \\\n  --models openai-gpt-4.1 ollama-gpt-oss-20b \\\n  --difficulty all \\\n  --timeout 240"
+        code: "uv run --extra dev workspace-bench compare-models \\\n  --models openai-gpt-4.1 ollama-gpt-oss-20b \\\n  --pack all \\\n  --difficulty all \\\n  --timeout 240"
       },
       agent: {
         title: "Run a JSONL agent command",

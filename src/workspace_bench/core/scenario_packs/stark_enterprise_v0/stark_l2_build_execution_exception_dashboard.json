@@ -1,0 +1,194 @@
+{
+  "id": "stark_l2_build_execution_exception_dashboard",
+  "title": "Execution Exception Review",
+  "level": "L2",
+  "capability": "dashboard-construction",
+  "workflow": "execution-exception-review",
+  "domain": "finance",
+  "subdomain": "execution",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": [
+    "stark",
+    "execution",
+    "dashboard-construction",
+    "multi-widget"
+  ],
+  "source": "stark-enterprise-v0",
+  "prompt": "Create an Execution Exception Review dashboard with Blotter and Exceptions tabs using live orders, rejected orders, and restricted-list checks.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Execution Exception Review",
+    "required_tabs": [
+      "blotter",
+      "exceptions"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_blotter_live_orders",
+        "data_args": {
+          "desk": "US Equities",
+          "status": "Open",
+          "period": "YTD"
+        },
+        "tab_id": "blotter"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_exceptions_rejected_orders",
+        "data_args": {
+          "desk": "US Equities",
+          "status": "Open",
+          "period": "YTD"
+        },
+        "tab_id": "exceptions"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_exceptions_restricted_list_checks",
+        "data_args": {
+          "desk": "US Equities",
+          "status": "Open",
+          "period": "YTD"
+        },
+        "tab_id": "exceptions"
+      }
+    ],
+    "required_generated_widgets": [],
+    "layout": {
+      "within_grid": true
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "create",
+        "name": "Execution Exception Review",
+        "activate": true
+      }
+    },
+    {
+      "tool": "manage_navigation_bar",
+      "args": {
+        "operation": "create",
+        "tabs": [
+          {
+            "name": "Blotter"
+          },
+          {
+            "name": "Exceptions"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Stark Enterprise"
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "blotter"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_blotter_live_orders"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_blotter_live_orders",
+        "data_args": {
+          "desk": "US Equities",
+          "status": "Open",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "exceptions"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_exceptions_rejected_orders"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_exceptions_rejected_orders",
+        "data_args": {
+          "desk": "US Equities",
+          "status": "Open",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "exceptions"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_exceptions_restricted_list_checks"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_exceptions_restricted_list_checks",
+        "data_args": {
+          "desk": "US Equities",
+          "status": "Open",
+          "period": "YTD"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 18
+  }
+}

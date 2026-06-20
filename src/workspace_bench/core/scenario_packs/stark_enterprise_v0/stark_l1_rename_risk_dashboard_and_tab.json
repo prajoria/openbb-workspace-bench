@@ -1,0 +1,87 @@
+{
+  "id": "stark_l1_rename_risk_dashboard_and_tab",
+  "title": "Rename a Dashboard and Tab",
+  "level": "L1",
+  "capability": "workspace-navigation",
+  "workflow": "risk-review",
+  "domain": "finance",
+  "subdomain": "risk",
+  "difficulty": "easy",
+  "split": "dev",
+  "tags": [
+    "stark",
+    "navigation",
+    "rename",
+    "risk"
+  ],
+  "source": "stark-enterprise-v0",
+  "prompt": "Rename the active dashboard to Daily Risk Control and rename the Overview tab to Risk Review.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Daily Control",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "manage_dashboard",
+    "manage_navigation_bar"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Daily Risk Control",
+    "required_tabs": [
+      "risk-review"
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "manage_dashboard",
+        "args_contains": {
+          "operation": "update",
+          "name": "Daily Risk Control"
+        }
+      },
+      {
+        "tool": "manage_navigation_bar",
+        "args_contains": {
+          "operation": "rename_tabs"
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "update",
+        "name": "Daily Risk Control"
+      }
+    },
+    {
+      "tool": "manage_navigation_bar",
+      "args": {
+        "operation": "rename_tabs",
+        "rename_map": {
+          "overview": "Risk Review"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 5
+  }
+}

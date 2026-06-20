@@ -49,13 +49,30 @@ def test_cli_can_write_trace_artifacts(tmp_path) -> None:
 def test_builtin_scenarios_have_terminal_bench_style_metadata() -> None:
     scenarios = load_builtin_scenarios()
 
-    assert all(scenario.category for scenario in scenarios)
+    assert all(scenario.capability for scenario in scenarios)
+    assert all(scenario.workflow for scenario in scenarios)
+    assert all(scenario.domain for scenario in scenarios)
+    assert all(scenario.subdomain for scenario in scenarios)
     assert all(scenario.difficulty in {"easy", "medium", "hard"} for scenario in scenarios)
     assert all(scenario.tags for scenario in scenarios)
 
 
 def test_cli_validate_passes_for_builtin_scenarios() -> None:
     assert main(["validate", "--min-scenarios", "25"]) == 0
+
+
+def test_cli_validate_passes_for_stark_enterprise_pack() -> None:
+    assert main(["validate", "--pack", "stark-enterprise-v0", "--min-scenarios", "15"]) == 0
+
+
+def test_cli_all_pack_includes_core_and_stark(capsys) -> None:
+    exit_code = main(["manifest", "--pack", "all", "--json"])
+
+    payload = json.loads(capsys.readouterr().out)
+    assert exit_code == 0
+    assert payload["scenario_count"] == 40
+    assert "skill-access" in payload["capabilities"]
+    assert "client-meeting-prep" in payload["workflows"]
 
 
 def test_cli_validate_fails_when_min_scenario_gate_is_not_met(capsys) -> None:
@@ -92,7 +109,9 @@ def test_cli_manifest_json_includes_dataset_summary(capsys) -> None:
     assert payload["release_id"] == "workspace-core-v0"
     assert payload["scenario_count"] == len(load_builtin_scenarios())
     assert payload["canary_guid"] == CANARY_GUID
-    assert "dashboard-construction" in payload["categories"]
+    assert "dashboard-construction" in payload["capabilities"]
+    assert "finance" in payload["domains"]
+    assert "equity-research" in payload["subdomains"]
     assert payload["splits"] == ["dev"]
 
 

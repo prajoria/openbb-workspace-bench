@@ -2,7 +2,10 @@
   "id": "l4_repair_layout_overlap",
   "title": "Repair Overlapping Widgets",
   "level": "L4",
-  "category": "repair",
+  "capability": "workspace-repair",
+  "workflow": "equity-tearsheet",
+  "domain": "finance",
+  "subdomain": "equity-research",
   "difficulty": "hard",
   "tags": [
     "repair",

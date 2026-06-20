@@ -8,16 +8,18 @@ from pathlib import Path
 
 from workspace_bench.agents import BenchAgent, build_agent
 from workspace_bench.episode import WorkspaceEpisode
-from workspace_bench.models import (
-    RunResult,
-    Scenario,
-    TaskPackManifest,
-)
+from workspace_bench.models import RunResult, Scenario, TaskPackManifest
 from workspace_bench.simulated_workspace import SimulatedWorkspace
 
 
 SCENARIO_PACKAGE = "workspace_bench.core.scenarios"
+STARK_SCENARIO_PACKAGE = "workspace_bench.core.scenario_packs.stark_enterprise_v0"
 TASK_PACK_MANIFEST = "task_pack.json"
+BUILTIN_SCENARIO_PACKS = {
+    "core": SCENARIO_PACKAGE,
+    "stark-enterprise-v0": STARK_SCENARIO_PACKAGE,
+}
+BUILTIN_SCENARIO_PACK_ORDER = ("core", "stark-enterprise-v0")
 
 
 class ScenarioRunner:
@@ -44,11 +46,59 @@ class ScenarioRunner:
         )
 
 
-def load_builtin_scenarios() -> list[Scenario]:
-    """Load bundled JSON scenarios."""
+def load_builtin_scenarios(pack: str = "core") -> list[Scenario]:
+    """Load bundled JSON scenarios for a named pack."""
 
-    scenario_files = sorted(resources.files(SCENARIO_PACKAGE).glob("*.json"))
-    return [load_scenario_file(Path(path)) for path in scenario_files]
+    if pack == "all":
+        scenarios: list[Scenario] = []
+        for pack_id in BUILTIN_SCENARIO_PACK_ORDER:
+            scenarios.extend(load_builtin_scenarios(pack_id))
+        return scenarios
+    try:
+        package = BUILTIN_SCENARIO_PACKS[pack]
+    except KeyError as error:
+        available = ", ".join(["all", *BUILTIN_SCENARIO_PACK_ORDER])
+        raise KeyError(f"Unknown built-in scenario pack {pack!r}. Available: {available}") from error
+    scenario_files = sorted(
+        path
+        for path in resources.files(package).glob("*.json")
+        if path.name != TASK_PACK_MANIFEST
+    )
+    manifest = load_builtin_task_pack_manifest(pack)
+    default_split = manifest.default_split if manifest else "dev"
+    return [load_scenario_file(Path(path), default_split=default_split) for path in scenario_files]
+
+
+def load_builtin_task_pack_manifest(pack: str = "core") -> TaskPackManifest | None:
+    """Load a bundled task-pack manifest when one exists."""
+
+    if pack == "all":
+        return TaskPackManifest(
+            pack_id="all",
+            release_id="workspace-all-v0",
+            version="0.1.0",
+            visibility="public",
+            default_split="dev",
+            description="All bundled WorkspaceBench scenario packs.",
+        )
+    package = BUILTIN_SCENARIO_PACKS[pack]
+    manifest = resources.files(package) / TASK_PACK_MANIFEST
+    if not manifest.is_file():
+        if pack == "core":
+            return TaskPackManifest(
+                pack_id="core",
+                release_id="workspace-core-v0",
+                version="0.1.0",
+                visibility="public",
+                default_split="dev",
+                description="Core deterministic OpenBB Workspace scenarios.",
+            )
+        return None
+    with manifest.open("r", encoding="utf-8") as handle:
+        payload = json.load(handle)
+    if not isinstance(payload, dict):
+        raise ValueError(f"{manifest} must contain a JSON object")
+    return TaskPackManifest.from_dict(payload)
 
 
 def load_scenario_file(path: Path, default_split: str = "dev") -> Scenario:
@@ -84,8 +134,8 @@ def load_scenario_directory(path: Path) -> list[Scenario]:
     ]
 
 
-def find_scenario(scenario_id: str) -> Scenario:
-    for scenario in load_builtin_scenarios():
+def find_scenario(scenario_id: str, pack: str = "all") -> Scenario:
+    for scenario in load_builtin_scenarios(pack):
         if scenario.id == scenario_id:
             return scenario
     raise KeyError(f"Unknown scenario {scenario_id!r}")

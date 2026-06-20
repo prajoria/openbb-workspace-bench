@@ -1,0 +1,205 @@
+{
+  "id": "stark_l2_build_client_meeting_dashboard",
+  "title": "Client Meeting Prep Dashboard",
+  "level": "L2",
+  "capability": "dashboard-construction",
+  "workflow": "client-meeting-prep",
+  "domain": "finance",
+  "subdomain": "client-ir",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": [
+    "stark",
+    "client-ir",
+    "dashboard-construction",
+    "multi-widget"
+  ],
+  "source": "stark-enterprise-v0",
+  "prompt": "Create a Client Meeting Prep Dashboard with Meeting Prep and Portfolio tabs, then add a note for the relationship manager.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Client Meeting Prep Dashboard",
+    "required_tabs": [
+      "meeting-prep",
+      "portfolio"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_meeting_prep_meeting_agenda",
+        "data_args": {
+          "client": "Northstar Pension",
+          "period": "YTD"
+        },
+        "tab_id": "meeting-prep"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_meeting_prep_approved_talking_points",
+        "data_args": {
+          "client": "Northstar Pension",
+          "period": "YTD"
+        },
+        "tab_id": "meeting-prep"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_portfolio_view_client_portfolio_summary",
+        "data_args": {
+          "client": "Northstar Pension",
+          "period": "YTD"
+        },
+        "tab_id": "portfolio"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Client meeting prep",
+          "approved talking points",
+          "client portfolio summary"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "create",
+        "name": "Client Meeting Prep Dashboard",
+        "activate": true
+      }
+    },
+    {
+      "tool": "manage_navigation_bar",
+      "args": {
+        "operation": "create",
+        "tabs": [
+          {
+            "name": "Meeting Prep"
+          },
+          {
+            "name": "Portfolio"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Stark Enterprise"
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "meeting-prep"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_meeting_prep_meeting_agenda"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_meeting_prep_meeting_agenda",
+        "data_args": {
+          "client": "Northstar Pension",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "meeting-prep"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_meeting_prep_approved_talking_points"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_meeting_prep_approved_talking_points",
+        "data_args": {
+          "client": "Northstar Pension",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "portfolio"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_portfolio_view_client_portfolio_summary"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_portfolio_view_client_portfolio_summary",
+        "data_args": {
+          "client": "Northstar Pension",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Relationship Manager Note",
+        "data": "Client meeting prep combines the meeting agenda, approved talking points, and client portfolio summary for Northstar Pension."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 18
+  }
+}

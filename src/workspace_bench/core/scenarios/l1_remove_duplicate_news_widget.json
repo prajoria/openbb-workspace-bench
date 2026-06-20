@@ -2,7 +2,10 @@
   "id": "l1_remove_duplicate_news_widget",
   "title": "Remove a Duplicate News Widget",
   "level": "L1",
-  "category": "widget-update",
+  "capability": "widget-update",
+  "workflow": "equity-tearsheet",
+  "domain": "finance",
+  "subdomain": "equity-research",
   "difficulty": "medium",
   "tags": [
     "delete-widget",

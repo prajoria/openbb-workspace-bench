@@ -2,7 +2,10 @@
   "id": "l2_portfolio_macro_risk_dashboard",
   "title": "Build a Portfolio and Macro Risk Dashboard",
   "level": "L2",
-  "category": "dashboard-construction",
+  "capability": "dashboard-construction",
+  "workflow": "macro-rates-review",
+  "domain": "finance",
+  "subdomain": "macro",
   "difficulty": "medium",
   "tags": [
     "portfolio",

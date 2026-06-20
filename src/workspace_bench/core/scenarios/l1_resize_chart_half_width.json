@@ -2,7 +2,10 @@
   "id": "l1_resize_chart_half_width",
   "title": "Resize a Widget to Half Width",
   "level": "L1",
-  "category": "layout",
+  "capability": "layout-management",
+  "workflow": "equity-tearsheet",
+  "domain": "finance",
+  "subdomain": "equity-research",
   "difficulty": "easy",
   "tags": [
     "layout",

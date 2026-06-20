@@ -14,6 +14,10 @@
 
 The benchmark is primarily an agent evaluation harness. RL training is a downstream use case that reuses the same scenario, step, trace, and grader contracts.
 
+The repository also bundles `stark-enterprise-v0`, a separate public pack for
+enterprise finance workflows. It uses the same harness and graders, but its
+coverage is intentionally broader than the core release.
+
 ## Task Coverage
 
 - L0 read-only dashboard QA
@@ -28,6 +32,13 @@ Fixture domains:
 - macro/rates
 - portfolio/risk
 
+Scenario metadata is split into four axes:
+
+- `capability`: what Workspace action is being evaluated
+- `workflow`: the business or analyst workflow
+- `domain`: broad area, such as finance or workspace operations
+- `subdomain`: narrower desk or function
+
 ## Evaluation
 
 The primary score is deterministic final-state correctness. Graders inspect:
@@ -38,6 +49,7 @@ The primary score is deterministic final-state correctness. Graders inspect:
 - generated widgets
 - widget `data_args`
 - layout bounds and overlaps
+- required tool calls and tool result fragments
 - trace discipline
 
 Trace discipline includes invalid tool calls, invented widget ids, schema-before-create behavior, and repeated snapshot limits.

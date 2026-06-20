@@ -2,7 +2,10 @@
   "id": "l2_cross_asset_market_dashboard",
   "title": "Build a Cross-Asset Market Dashboard",
   "level": "L2",
-  "category": "dashboard-construction",
+  "capability": "dashboard-construction",
+  "workflow": "macro-rates-review",
+  "domain": "finance",
+  "subdomain": "macro",
   "difficulty": "medium",
   "tags": [
     "equities",

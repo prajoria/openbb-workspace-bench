@@ -2,7 +2,10 @@
   "id": "l2_portfolio_risk_dashboard",
   "title": "Build a Portfolio Risk Dashboard",
   "level": "L2",
-  "category": "dashboard-construction",
+  "capability": "dashboard-construction",
+  "workflow": "portfolio-risk-review",
+  "domain": "finance",
+  "subdomain": "portfolio-management",
   "difficulty": "medium",
   "tags": [
     "portfolio",

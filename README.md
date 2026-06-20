@@ -4,12 +4,13 @@ OpenBB Workspace Bench is a Terminal-Bench-style evaluation harness for agents t
 
 The benchmark asks a simple question: can an agent inspect, build, update, and repair durable Workspace state? Scoring is based on final dashboard/app state, widget configuration, generated artifacts, layout, and tool-use discipline.
 
-Current release: `workspace-core-v0` alpha.
+Current bundled releases: `workspace-core-v0` and `stark-enterprise-v0` alpha packs.
 
 ## What Is Included
 
-- 25 deterministic scenarios across L0-L4
-- equities, macro, and portfolio fixture domains
+- 40 deterministic scenarios across L0-L4
+- core equities, macro, and portfolio tasks
+- Stark enterprise workflow tasks based on a deterministic fixture backend
 - simulator-backed Workspace MCP runtime for fast local evals
 - live `workspace-mcp` sidecar smoke runner
 - public task envelope export
@@ -39,6 +40,8 @@ Install dependencies and inspect the benchmark:
 uv run --extra dev workspace-bench list
 uv run --extra dev workspace-bench manifest --json
 uv run --extra dev workspace-bench validate --min-scenarios 25
+uv run --extra dev workspace-bench validate --pack stark-enterprise-v0 --min-scenarios 15
+uv run --extra dev workspace-bench validate --pack all --min-scenarios 40
 ```
 
 Run built-in baselines:
@@ -102,6 +105,7 @@ Compare two models over all bundled scenarios with the interactive runner:
 
 ```bash
 uv run --extra dev workspace-bench compare-models \
+  --pack all \
   --difficulty all \
   --timeout 240
 ```
@@ -110,6 +114,7 @@ Compare only one difficulty slice:
 
 ```bash
 uv run --extra dev workspace-bench compare-models \
+  --pack core \
   --difficulty easy \
   --timeout 240
 ```
@@ -118,6 +123,7 @@ Run repeated attempts for a more stable comparison:
 
 ```bash
 uv run --extra dev workspace-bench compare-models \
+  --pack all \
   --difficulty all \
   --repeats 3 \
   --metric pass-at-k \
@@ -129,6 +135,7 @@ Run models from a JSON adapter config:
 ```bash
 uv run --extra dev workspace-bench compare-models \
   --models-file examples/models.example.json \
+  --pack stark-enterprise-v0 \
   --difficulty all \
   --timeout 240
 ```
@@ -148,8 +155,10 @@ single-shot JSONL adapter behavior. Transient model API failures such as HTTP
 520 are retried by default; tune this with `--model-retries` and
 `--retry-backoff`.
 
-Use `--scenario-dir` to compare models against a private task pack, and
-`--split dev|validation|test|train` to select a release slice.
+Use `--pack core|stark-enterprise-v0|all` for bundled packs, `--scenario-dir`
+for a private task pack, and `--split dev|validation|test|train` to select a
+release slice. You can also slice with `--capability`, `--workflow`,
+`--domain`, and `--subdomain`.
 
 Export a task envelope without running an agent:
 
@@ -216,6 +225,17 @@ uv run --extra live workspace-bench smoke-workspace-mcp \
   --json
 ```
 
+Check the broader live MCP surface against a Stark workflow scenario:
+
+```bash
+uv run --extra live workspace-bench smoke-workspace-mcp \
+  --url http://127.0.0.1:8787 \
+  --pack stark-enterprise-v0 \
+  --scenario stark_l1_get_workspace_skill_content \
+  --check-surface \
+  --json
+```
+
 The smoke command emulates the browser bridge with the benchmark simulator. It exercises the real streamable HTTP endpoint, tool schemas, server-side validation, websocket bridge, command translation layer, and session-context updates without requiring a Workspace browser tab. If a real browser is already connected, the command refuses to replace it unless `--replace-browser-session` is passed.
 
 ## Serve Fixture Backends
@@ -232,6 +252,10 @@ The server exposes:
 - `GET /apps.json`
 - widget data endpoints such as `/price-performance?symbol=AAPL&raw=true`
 
+The bundled `Bench Stark Enterprise` fixture packages widget and app metadata
+from `~/Documents/git/stark-industries-demo` into a stable local backend. It is
+used for enterprise workflow coverage without depending on a live demo app.
+
 ## Scenario Shape
 
 Each scenario defines:
@@ -242,7 +266,11 @@ Each scenario defines:
 - allowed tools and limits
 - deterministic success criteria
 - oracle trace
-- metadata for slicing and reporting
+- metadata for slicing and reporting:
+  - `capability`: the benchmark action under test, such as widget creation, app instantiation, repair, data reading, skill access, or MCP tool use
+  - `workflow`: the real analyst workflow, such as earnings prep, risk review, client meeting prep, or vendor SLA monitoring
+  - `domain`: broad area, usually `finance` or `workspace-ops`
+  - `subdomain`: narrower finance or ops area, such as equities, portfolio, macro, compliance, execution, or research
 
 The agent acts through Workspace MCP-like tools such as:
 
@@ -262,6 +290,8 @@ The agent acts through Workspace MCP-like tools such as:
 - `read_widget`
 - `manage_backends`
 - `manage_apps`
+- `get_skill_content`
+- `assign_tasks_to_agents`
 
 The grader evaluates final Workspace state first. Text-only answers are secondary; the durable artifact is the dashboard/app state the agent produced.
 
@@ -276,9 +306,9 @@ See [docs/contributing.md](docs/contributing.md) for scenario, grader, agent, ex
 - `L0`: inspect and answer from an existing dashboard
 - `L1`: create, update, read, or lay out a single widget
 - `L2`: build a multi-widget dashboard from analyst requirements
-- `L3`: use app templates, tabs, parameter groups, and prompts
+- `L3`: use app templates, tabs, parameter groups, prompts, skills, or delegation
 - `L4`: repair incorrect Workspace state or bad metadata assumptions
-- `L5`: multi-agent delegation and skill workflows, reserved for later
+- `L5`: long-horizon multi-agent workflows, reserved for later
 
 ## Repository Layout
 
@@ -286,7 +316,10 @@ See [docs/contributing.md](docs/contributing.md) for scenario, grader, agent, ex
 src/workspace_bench/
   cli.py                 Command line interface
   core/                  Scenario dataclasses, bundled tasks, episodes, runner, graders
+    scenarios/           Core public pack: workspace-core-v0
+    scenario_packs/      Additional bundled packs, including stark-enterprise-v0
   workspace/             Fixture backends, simulator, live workspace-mcp smoke bridge
+    data/                Packaged fixture metadata such as Stark widgets/apps
   agents/                Oracle/noop agents, JSONL command protocol, model adapter helpers
   reports/               Model comparison, reliability metrics, charts, analysis reports
   exports/               Rollout, SFT, preference, and metadata export helpers

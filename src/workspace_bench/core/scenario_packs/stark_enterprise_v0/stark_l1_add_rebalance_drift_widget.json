@@ -1,0 +1,93 @@
+{
+  "id": "stark_l1_add_rebalance_drift_widget",
+  "title": "Add a Rebalance Drift Widget",
+  "level": "L1",
+  "capability": "widget-creation",
+  "workflow": "rebalance-review",
+  "domain": "finance",
+  "subdomain": "portfolio-management",
+  "difficulty": "easy",
+  "split": "dev",
+  "tags": [
+    "stark",
+    "rebalance",
+    "widget-creation",
+    "schema-discovery"
+  ],
+  "source": "stark-enterprise-v0",
+  "prompt": "Add the Current vs Target Weights widget from the Stark enterprise backend for Flagship Long/Short, YTD.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Rebalance Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "drift",
+          "name": "Drift"
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "rebalance_scenario_lab_drift_current_vs_target_weights",
+        "data_args": {
+          "fund": "Flagship Long/Short",
+          "period": "YTD"
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Stark Enterprise"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "rebalance_scenario_lab_drift_current_vs_target_weights"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "rebalance_scenario_lab_drift_current_vs_target_weights",
+        "data_args": {
+          "fund": "Flagship Long/Short",
+          "period": "YTD"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 8
+  }
+}

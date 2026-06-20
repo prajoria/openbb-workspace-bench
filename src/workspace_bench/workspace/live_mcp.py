@@ -33,6 +33,28 @@ SNAPSHOT_FIELDS = {
     "tools",
     "skills",
 }
+EXPECTED_MCP_TOOLS = {
+    "get_workspace_snapshot",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "read_widget",
+    "create_widget",
+    "update_widget",
+    "delete_widget",
+    "update_widget_layout",
+    "add_generative_widget",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "assign_tasks_to_agents",
+}
+EXPECTED_MCP_PROMPTS = {"workspace_tool_usage", "workspace_session_context"}
+EXPECTED_MCP_RESOURCES = {"openbb://workspace/app-builder/index"}
 
 
 @dataclass(frozen=True)
@@ -41,6 +63,9 @@ class LiveMcpRunResult:
 
     run_result: RunResult
     mcp_tools: tuple[str, ...]
+    mcp_prompts: tuple[str, ...]
+    mcp_resources: tuple[str, ...]
+    surface_issues: tuple[str, ...]
     bridge_commands: tuple[str, ...]
     health_before: JsonDict
     health_with_bridge: JsonDict
@@ -102,6 +127,7 @@ async def run_workspace_mcp_smoke(
     base_url: str = "http://127.0.0.1:8787",
     agent: BenchAgent | str = "oracle",
     replace_existing_session: bool = False,
+    check_surface: bool = False,
 ) -> LiveMcpRunResult:
     """Run a scenario through a live Workspace MCP sidecar."""
 
@@ -119,6 +145,9 @@ async def run_workspace_mcp_smoke(
     workspace.reset(backends=scenario.fixtures, initial_state=scenario.initial_state)
     trace: list[ToolTraceEvent] = []
     mcp_tools: tuple[str, ...] = ()
+    mcp_prompts: tuple[str, ...] = ()
+    mcp_resources: tuple[str, ...] = ()
+    surface_issues: tuple[str, ...] = ()
     health_with_bridge: JsonDict = {}
 
     async with _BrowserBridge(
@@ -135,6 +164,14 @@ async def run_workspace_mcp_smoke(
                 await session.initialize()
                 tool_result = await session.list_tools()
                 mcp_tools = tuple(tool.name for tool in tool_result.tools)
+                mcp_prompts = await _list_prompt_names(session)
+                mcp_resources = await _list_resource_uris(session)
+                if check_surface:
+                    surface_issues = _surface_issues(
+                        tools=mcp_tools,
+                        prompts=mcp_prompts,
+                        resources=mcp_resources,
+                    )
                 for index, call in enumerate(resolved_agent.tool_calls(scenario), start=1):
                     payload = await _call_mcp_tool(session, call)
                     trace.append(
@@ -157,11 +194,48 @@ async def run_workspace_mcp_smoke(
             final_snapshot=final_snapshot,
         ),
         mcp_tools=mcp_tools,
+        mcp_prompts=mcp_prompts,
+        mcp_resources=mcp_resources,
+        surface_issues=surface_issues,
         bridge_commands=tuple(bridge.commands),
         health_before=health_before,
         health_with_bridge=health_with_bridge,
         health_after=health_after,
     )
+
+
+async def _list_prompt_names(session: Any) -> tuple[str, ...]:
+    try:
+        result = await session.list_prompts()
+    except Exception:  # noqa: BLE001 - optional surface check handles absence.
+        return ()
+    return tuple(prompt.name for prompt in getattr(result, "prompts", []) or [])
+
+
+async def _list_resource_uris(session: Any) -> tuple[str, ...]:
+    try:
+        result = await session.list_resources()
+    except Exception:  # noqa: BLE001 - optional surface check handles absence.
+        return ()
+    return tuple(str(resource.uri) for resource in getattr(result, "resources", []) or [])
+
+
+def _surface_issues(
+    *,
+    tools: tuple[str, ...],
+    prompts: tuple[str, ...],
+    resources: tuple[str, ...],
+) -> tuple[str, ...]:
+    issues: list[str] = []
+    for label, expected, observed in (
+        ("tool", EXPECTED_MCP_TOOLS, set(tools)),
+        ("prompt", EXPECTED_MCP_PROMPTS, set(prompts)),
+        ("resource", EXPECTED_MCP_RESOURCES, set(resources)),
+    ):
+        missing = sorted(expected - observed)
+        if missing:
+            issues.append(f"missing {label}(s): {', '.join(missing)}")
+    return tuple(issues)
 
 
 @dataclass(frozen=True)

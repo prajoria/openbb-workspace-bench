@@ -28,7 +28,7 @@ Top-level shape:
 Each result includes:
 
 - scenario id
-- level, category, difficulty, tags
+- level, capability, workflow, domain, subdomain, difficulty, tags
 - numeric score
 - pass/fail
 - checks passed and total

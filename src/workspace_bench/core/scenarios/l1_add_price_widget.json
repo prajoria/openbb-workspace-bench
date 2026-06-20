@@ -2,7 +2,10 @@
   "id": "l1_add_price_widget",
   "title": "Add a Price Performance Widget",
   "level": "L1",
-  "category": "widget-creation",
+  "capability": "widget-creation",
+  "workflow": "equity-tearsheet",
+  "domain": "finance",
+  "subdomain": "equity-research",
   "difficulty": "easy",
   "tags": [
     "schema-discovery",
