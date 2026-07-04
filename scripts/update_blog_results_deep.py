@@ -274,7 +274,7 @@ def main() -> None:
   </figure>
 
   <p>
-    The rows nobody passes are the most valuable output of the whole sweep. {len(all_fail)} of 300 scenarios defeat all six models, and they are not scattered: {fail_families.get('inspect', 0)} are inspect-family tasks (deduplicate or reconcile a workspace the agent did not build — ambient-state reasoning), {fail_families.get('params', 0)} are companion-widget parameter tasks, {fail_families.get('layout', 0)} are precise layout splits, and {fail_families.get('skills', 0)} is a full skills-driven tearsheet. Even GPT-5.5 passes only {models['gpt-5.5']['families']['inspect'][0]}/20 of the inspect family. That list is simultaneously t5's seed, Part 2's tool-surface work queue, and the strongest evidence that the remaining headroom is about reading state, not composing calls. At the opposite end, {len(all_pass)} scenarios are passed by everyone — the sanity floor, {sum(1 for s in all_pass if s['tier'] in ('t0', 't1'))} of them in t0–t1, which is what "t0 nearly free" should look like.
+    The rows nobody passes are the most valuable output of the whole sweep. {len(all_fail)} of 300 scenarios defeat all six models, and they are not scattered: {fail_families.get('inspect', 0)} are inspect-family tasks (deduplicate or reconcile a workspace the agent did not build — ambient-state reasoning), {fail_families.get('params', 0)} are companion-widget parameter tasks, {fail_families.get('layout', 0)} are precise layout splits, and {fail_families.get('skills', 0)} is a full skills-driven tearsheet. Even GPT-5.5 passes only {models['gpt-5.5']['families']['inspect'][0]}/20 of the inspect family. That list is simultaneously t5's seed, a ranked work queue for the tool surface itself, and the strongest evidence that the remaining headroom is about reading state, not composing calls. At the opposite end, {len(all_pass)} scenarios are passed by everyone — the sanity floor, {sum(1 for s in all_pass if s['tier'] in ('t0', 't1'))} of them in t0–t1, which is what "t0 nearly free" should look like.
   </p>
   <p>
     Failures are also model-specific in ways a single number hides. Qwen3 8B scores {models['qwen3-8b']['families']['apps'][0]}/20 on the apps family — long instantiation chains — where every other model scores 17 or better. GLM-5.2 is the only model that struggles with the prompts family ({models['glm-5.2']['families']['prompts'][0]}/20), because it skips the prompt fetch it considers unnecessary. gpt-oss:20b bottoms out on documentation notes ({models['gpt-oss-20b']['families']['note'][0]}/20). Six models, six different failure fingerprints on identical tasks — which is why the issue-code explorer below follows whichever model you pick, instead of averaging the differences away.
@@ -402,7 +402,7 @@ def main() -> None:
     # ---- apply ----------------------------------------------------------------------
     src = BLOG.read_text()
 
-    tldr_anchor = "Part 3 turns the traces into training data.\n  </p>"
+    tldr_anchor = "how the scenarios are generated and certified, and what real models score.\n  </p>"
     src = replace_between(src, "WB-DEEP-TLDR", tldr, tldr_anchor, before=False)
 
     intro_anchor = "exported as portable rollout JSONL in the repo.\n  </p>"
