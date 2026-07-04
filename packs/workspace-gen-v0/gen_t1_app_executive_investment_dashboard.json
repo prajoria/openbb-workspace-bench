@@ -1,0 +1,84 @@
+{
+  "id": "gen_t1_app_executive_investment_dashboard",
+  "title": "Instantiate Executive Investment Dashboard (Checked)",
+  "level": "L3",
+  "capability": "app-instantiation",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-apps",
+    "tier-t1",
+    "apps",
+    "stark"
+  ],
+  "prompt": "Instantiate the Executive Investment Dashboard app from the Bench Stark Enterprise backend as a new dashboard named Executive Morning Brief.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Executive Morning Brief",
+    "required_tabs": [
+      "overview",
+      "firm_overview",
+      "issues"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "executive_investment_dashboard_firm_overview_firm_snapshot",
+        "tab_id": "firm_overview",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "executive_investment_dashboard_issues_major_open_issues",
+        "tab_id": "issues",
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Executive Investment Dashboard",
+        "dashboard_name": "Executive Morning Brief",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "test",
+  "novelty": "Unique apps/t1 exercise using manage_apps, manage_backends with checks dashboard_name, layout_out_of_grid, missing_tab, missing_widget, too_many_invalid_calls on stark-enterprise; artifact apps:Executive Investment Dashboard; widgets:Bench Stark Enterprise/executive_investment_dashboard_firm_overview_firm_snapshot@firm_overview,Bench Stark Enterprise/executive_investment_dashboard_issues_major_open_issues@issues; tabs:firm_overview,issues,overview."
+}

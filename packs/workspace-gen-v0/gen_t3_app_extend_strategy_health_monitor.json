@@ -1,0 +1,118 @@
+{
+  "id": "gen_t3_app_extend_strategy_health_monitor",
+  "title": "Instantiate And Extend Strategy Health Monitor",
+  "level": "L3",
+  "capability": "app-instantiation",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-apps",
+    "tier-t3",
+    "apps",
+    "stark",
+    "widget-creation"
+  ],
+  "prompt": "Instantiate the Strategy Health Monitor app from the Bench Stark Enterprise backend as a new dashboard named Strategy Health Desk. Then add the Catalyst Calendar widget (id strategy_health_monitor_watchlist_catalyst_calendar) to the Watchlist tab of the new dashboard.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Strategy Health Desk",
+    "required_tabs": [
+      "overview",
+      "capacity",
+      "performance",
+      "watchlist"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "strategy_health_monitor_capacity_capacity_utilization",
+        "tab_id": "capacity",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "strategy_health_monitor_performance_strategy_health_metrics",
+        "tab_id": "performance",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "strategy_health_monitor_watchlist_catalyst_calendar",
+        "tab_id": "watchlist",
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Strategy Health Monitor",
+        "dashboard_name": "Strategy Health Desk",
+        "activate": true
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "watchlist"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "strategy_health_monitor_watchlist_catalyst_calendar"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "strategy_health_monitor_watchlist_catalyst_calendar",
+        "data_args": {}
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "test",
+  "novelty": "Unique apps/t3 exercise using create_widget, get_widget_schema, manage_apps, manage_backends, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_tab, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact apps:Strategy Health Monitor; widgets:Bench Stark Enterprise/strategy_health_monitor_capacity_capacity_utilization@capacity,Bench Stark Enterprise/strategy_health_monitor_performance_strategy_health_metrics@performance,Bench Stark Enterprise/strategy_health_monitor_watchlist_catalyst_calendar@watchlist; tabs:capacity,overview,performance,watchlist."
+}

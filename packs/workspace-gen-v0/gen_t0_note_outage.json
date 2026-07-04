@@ -1,0 +1,75 @@
+{
+  "id": "gen_t0_note_outage",
+  "title": "Vendor Outage",
+  "level": "L1",
+  "capability": "workspace-inspection",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-note",
+    "tier-t0",
+    "note"
+  ],
+  "prompt": "Add a note named Vendor Outage saying the FactSet feed is degraded and fallback pricing is active.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Notes Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Vendor Outage",
+        "data_contains": [
+          "FactSet",
+          "fallback"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Vendor Outage",
+        "data": "FactSet feed degraded; fallback pricing is active."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique note/t0 exercise using add_generative_widget, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact generated:note@*:FactSet,fallback."
+}
