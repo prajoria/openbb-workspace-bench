@@ -13,8 +13,8 @@ Top-level shape:
 ```json
 {
   "summary": {
-    "total": 25,
-    "passed": 25,
+    "total": 300,
+    "passed": 300,
     "failed": 0,
     "mean_score": 1.0,
     "by_level": {
@@ -38,7 +38,7 @@ Each result includes:
 
 ```bash
 uv run --extra dev workspace-bench run-agent-command \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python -m workspace_bench.examples.jsonl_rule_agent" \
   --json
 ```
@@ -49,8 +49,8 @@ Top-level shape:
 {
   "benchmark": {
     "name": "openbb-workspace-bench",
-    "version": "0.1.0",
-    "release_id": "workspace-core-v0"
+    "version": "1.0.0",
+    "release_id": "workspace-bench-v1"
   },
   "summary": {
     "total": 1,
@@ -83,7 +83,7 @@ Use `--trace-dir` to write per-scenario trace artifacts:
 
 ```bash
 uv run --extra dev workspace-bench run-agent-command \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python -m workspace_bench.examples.jsonl_rule_agent" \
   --trace-dir traces
 ```
@@ -106,7 +106,7 @@ artifacts into portable JSONL:
 ```bash
 uv run --extra dev workspace-bench export-rollouts \
   --oracle \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --output rollouts.jsonl
 ```
 

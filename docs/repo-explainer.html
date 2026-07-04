@@ -931,8 +931,8 @@
         <div class="repo-row"><code>src/workspace_bench/reports/</code><span>Interactive GPT-4.1 vs Ollama comparison runner, reliability metrics, chart writer, and analysis report generator.</span></div>
         <div class="repo-row"><code>src/workspace_bench/exports/</code><span>Rollout, SFT, and preference-pair export helpers.</span></div>
         <div class="repo-row"><code>src/workspace_bench/rl/</code><span>Gym-style environment wrapper for RL loops.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/core/scenarios/*.json</code><span>The core public benchmark pack: <code>workspace-core-v0</code>.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/core/scenario_packs/</code><span>Additional bundled packs, including <code>stark-enterprise-v0</code> for enterprise finance workflows.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/core/scenario_packs/workspace_bench_v1/*.json</code><span>The unified bundled benchmark pack: <code>workspace-bench-v1</code>.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/core/scenario_packs/</code><span>Packaged scenario releases; <code>core</code> and <code>all</code> are CLI aliases for v1.</span></div>
         <div class="repo-row"><code>src/workspace_bench/workspace/data/</code><span>Packaged fixture metadata such as the Stark widget and app catalog.</span></div>
         <div class="repo-row"><code>src/workspace_bench/__init__.py</code><span>Small public convenience surface for the most common objects.</span></div>
       </div>
@@ -1016,7 +1016,7 @@
           <h3>pass^k</h3>
           <p>A scenario counts as passed only if all k repeated attempts pass.</p>
           <h3>Task pack</h3>
-          <p>A directory of scenarios, optionally with <code>task_pack.json</code> metadata. Bundled packs include <code>core</code> and <code>stark-enterprise-v0</code>.</p>
+          <p>A directory of scenarios, optionally with <code>task_pack.json</code> metadata. Bundled pack aliases include <code>core</code> and <code>all</code>.</p>
           <h3>Gym env</h3>
           <p>A reset/step/render wrapper around the same benchmark episode and grader.</p>
         </div>

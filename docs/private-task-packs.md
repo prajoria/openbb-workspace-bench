@@ -1,6 +1,6 @@
 # Private Task Packs
 
-Workspace Bench is designed to be useful both as a public benchmark and as a private evaluation harness. A private task pack is a directory of scenario JSON files using the same schema as the bundled `workspace-core-v0` and `stark-enterprise-v0` packs.
+Workspace Bench is designed to be useful both as a public benchmark and as a private evaluation harness. A private task pack is a directory of scenario JSON files using the same schema as the bundled `workspace-bench-v1` pack.
 
 ## Directory Shape
 

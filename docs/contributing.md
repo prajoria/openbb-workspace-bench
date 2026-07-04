@@ -6,7 +6,7 @@ and RL adapter.
 
 ## Add A Scenario
 
-1. Copy an existing scenario from `src/workspace_bench/core/scenarios`.
+1. Copy an existing scenario from `src/workspace_bench/core/scenario_packs/workspace_bench_v1` or create one in a private scenario directory.
 2. Give it a stable `id`, title, level, capability, workflow, domain, subdomain, difficulty, split, and tags.
 3. Keep fixture data deterministic.
 4. Add clear `success` criteria that grade durable Workspace state.
@@ -14,7 +14,7 @@ and RL adapter.
 6. Run:
 
 ```bash
-uv run --extra dev workspace-bench validate --min-scenarios 25
+uv run --extra dev workspace-bench validate --pack all --min-scenarios 300
 ```
 
 For private scenarios, put JSON files in a separate directory and use
@@ -28,13 +28,18 @@ For private scenarios, put JSON files in a separate directory and use
 4. Add a focused unit test in `tests/test_graders.py`.
 5. Confirm oracle still passes and noop still fails.
 
+Current trace-oriented issue codes include `missing_tool_call`,
+`missing_tool_result`, `missing_resource_read`, `too_many_invalid_calls`,
+`schema_not_called_before_create`, `unlisted_widget_id`, and
+`repeated_snapshots`.
+
 ## Add An Agent Adapter
 
 Prefer the external JSONL command protocol first:
 
 ```bash
 uv run --extra dev workspace-bench run-agent-command \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python my_agent.py" \
   --json
 ```
@@ -78,7 +83,7 @@ Run before submitting:
 
 ```bash
 uv run --extra dev python -m pytest
-uv run --extra dev workspace-bench validate --min-scenarios 25
+uv run --extra dev workspace-bench validate --pack all --min-scenarios 300
 ```
 
 For comparison-runner changes, also run:

@@ -6,12 +6,12 @@ Workspace Bench can evaluate any agent process that can write Workspace tool cal
 
 ```bash
 uv run --extra dev workspace-bench run-agent-command \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python -m workspace_bench.examples.jsonl_rule_agent" \
   --json
 ```
 
-The command should pass `l1_add_price_widget`. The demo is not a model agent; it is a tiny script that demonstrates the protocol.
+The command should pass `gen_t0_create_price_performance_aapl`. The demo is not a model agent; it is a tiny script that demonstrates the protocol.
 
 ## Run A Local Ollama Agent
 
@@ -26,7 +26,7 @@ Then run the provided adapter with your local model:
 ```bash
 OLLAMA_MODEL=gpt-oss:20b \
 uv run --extra dev workspace-bench run-agent-command \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python examples/ollama_agent.py" \
   --run-dir runs/ollama \
   --json
@@ -65,7 +65,7 @@ Run one scenario:
 
 ```bash
 uv run --extra dev workspace-bench run-agent-command \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python examples/openai_gpt4_1.py" \
   --run-dir runs/openai-gpt-4.1 \
   --json
@@ -205,7 +205,7 @@ Export one task without running an agent:
 
 ```bash
 uv run workspace-bench export-task \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --output task.json
 ```
 
@@ -218,6 +218,11 @@ The envelope includes:
 - allowed tools
 - limits
 - the JSONL output protocol
+
+`allowed_tools` uses Workspace MCP-style tool names. Retrieval-only tools may
+include `read_workspace_resource` with `{"uri": "openbb://workspace/app-builder/index"}`
+or `{"uri": "openbb://workspace/skills/<slug>"}`, and `get_workspace_prompt`
+with `{"name": "workspace_tool_usage"}` or `{"name": "workspace_session_context"}`.
 
 It intentionally does not include success criteria or oracle tool calls. Those remain grader-side data.
 
@@ -236,7 +241,7 @@ Use `--run-dir` if you want deterministic output paths:
 
 ```bash
 uv run --extra dev workspace-bench run-agent-command \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python my_agent.py" \
   --run-dir runs/my-agent
 ```

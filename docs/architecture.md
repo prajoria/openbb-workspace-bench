@@ -2,10 +2,11 @@
 
 OpenBB Workspace Bench is organized around one stable contract: a scenario describes the initial Workspace state, the agent prompt, the allowed Workspace MCP tools, and deterministic success criteria.
 
-Scenarios are grouped into packs. The default `core` pack is the original
-`workspace-core-v0` financial workspace benchmark. The `stark-enterprise-v0`
-pack adds broader enterprise workflows using a deterministic fixture exported
-from `~/Documents/git/stark-industries-demo`.
+Scenarios are grouped into packs. The bundled release is the unified
+`workspace-bench-v1` pack: 300 generated, certified scenarios spanning the
+equities, macro, portfolio, and Stark enterprise fixture backends. The `core`
+and `all` CLI pack names are kept as backward-compatible aliases for this
+release.
 
 ```mermaid
 flowchart LR
@@ -79,6 +80,7 @@ service.
 - regular and generated widget creation
 - widget read/update/delete
 - deterministic workspace skills through `get_skill_content`
+- MCP resource and prompt retrieval through `read_workspace_resource` and `get_workspace_prompt`
 - task delegation envelopes through `assign_tasks_to_agents`
 
 It is not a pixel or browser simulator. It is a deterministic state machine for the Workspace MCP contract. That makes it cheap enough for benchmark development and RL rollouts.
@@ -116,7 +118,7 @@ from workspace_bench.core.episode import WorkspaceEpisode
 from workspace_bench.core.models import ToolCall
 from workspace_bench.core.runner import find_scenario
 
-scenario = find_scenario("l1_add_price_widget")
+scenario = find_scenario("gen_t0_create_price_performance_aapl")
 episode = WorkspaceEpisode(scenario)
 
 observation = episode.step(
@@ -144,6 +146,7 @@ The grader checks final Workspace state and trace behavior:
 - invalid tool call count
 - required tool calls
 - required tool result fragments
+- required resource reads
 - schema-before-create discipline
 - listed widget id discipline
 - repeated snapshot behavior

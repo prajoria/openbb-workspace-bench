@@ -4,13 +4,13 @@ OpenBB Workspace Bench is a Terminal-Bench-style evaluation harness for agents t
 
 The benchmark asks a simple question: can an agent inspect, build, update, and repair durable Workspace state? Scoring is based on final dashboard/app state, widget configuration, generated artifacts, layout, and tool-use discipline.
 
-Current bundled releases: `workspace-core-v0` and `stark-enterprise-v0` alpha packs.
+Current bundled release: `workspace-bench-v1` (`core` and `all` are backward-compatible CLI aliases).
 
 ## What Is Included
 
-- 40 deterministic scenarios across L0-L4
-- core equities, macro, and portfolio tasks
-- Stark enterprise workflow tasks based on a deterministic fixture backend
+- 300 deterministic scenarios across L0-L4
+- generated families covering widgets, apps, prompts, resources, skills, delegation, inspection, repair, and layout
+- equities, macro, portfolio, and Stark enterprise fixture backends
 - simulator-backed Workspace MCP runtime for fast local evals
 - live `workspace-mcp` sidecar smoke runner
 - public task envelope export
@@ -39,9 +39,7 @@ Install dependencies and inspect the benchmark:
 ```bash
 uv run --extra dev workspace-bench list
 uv run --extra dev workspace-bench manifest --json
-uv run --extra dev workspace-bench validate --min-scenarios 25
-uv run --extra dev workspace-bench validate --pack stark-enterprise-v0 --min-scenarios 15
-uv run --extra dev workspace-bench validate --pack all --min-scenarios 40
+uv run --extra dev workspace-bench validate --pack all --min-scenarios 300
 ```
 
 Run built-in baselines:
@@ -66,7 +64,7 @@ Run the included demo agent:
 
 ```bash
 uv run --extra dev workspace-bench run-agent-command \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python -m workspace_bench.examples.jsonl_rule_agent" \
   --json
 ```
@@ -78,7 +76,7 @@ Run a local Ollama model:
 ```bash
 OLLAMA_MODEL=gpt-oss:20b \
 uv run --extra dev workspace-bench run-agent-command \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python examples/ollama_agent.py" \
   --run-dir runs/ollama \
   --json
@@ -93,7 +91,7 @@ cp .env.example .env
 # edit .env and set OPENAI_API_KEY
 
 uv run --extra dev workspace-bench run-agent-command \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python examples/openai_gpt4_1.py" \
   --run-dir runs/openai-gpt-4.1 \
   --json
@@ -114,7 +112,7 @@ Compare only one difficulty slice:
 
 ```bash
 uv run --extra dev workspace-bench compare-models \
-  --pack core \
+  --pack all \
   --difficulty easy \
   --timeout 240
 ```
@@ -135,7 +133,7 @@ Run models from a JSON adapter config:
 ```bash
 uv run --extra dev workspace-bench compare-models \
   --models-file examples/models.example.json \
-  --pack stark-enterprise-v0 \
+  --pack all \
   --difficulty all \
   --timeout 240
 ```
@@ -155,16 +153,16 @@ single-shot JSONL adapter behavior. Transient model API failures such as HTTP
 520 are retried by default; tune this with `--model-retries` and
 `--retry-backoff`.
 
-Use `--pack core|stark-enterprise-v0|all` for bundled packs, `--scenario-dir`
-for a private task pack, and `--split dev|validation|test|train` to select a
-release slice. You can also slice with `--capability`, `--workflow`,
+Use `--pack core|all` for the bundled pack aliases, `--scenario-dir`
+for a private task pack, and `--split train|validation|test` to select a
+release slice. Private packs may also use `dev`. You can also slice with `--capability`, `--workflow`,
 `--domain`, and `--subdomain`.
 
 Export a task envelope without running an agent:
 
 ```bash
 uv run workspace-bench export-task \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --output task.json
 ```
 
@@ -173,12 +171,12 @@ Export rollouts or SFT data explicitly:
 ```bash
 uv run --extra dev workspace-bench export-rollouts \
   --oracle \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --output runs/exports/oracle-rollouts.jsonl
 
 uv run --extra dev workspace-bench export-sft \
   --oracle \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --format openai_messages \
   --output runs/exports/oracle-sft.jsonl
 ```
@@ -190,6 +188,7 @@ metadata.
 
 See [docs/agent-command.md](docs/agent-command.md) for the external-agent contract and [docs/result-schema.md](docs/result-schema.md) for result JSON.
 See [docs/training-recipes.md](docs/training-recipes.md) for SFT, preference, and RL rollout export patterns.
+See [docs/research-tmax-general-agent.md](docs/research-tmax-general-agent.md) for notes on applying TMax and General Agent-style environment generation to WorkspaceBench.
 For a visual walkthrough of how the repo fits together, open [docs/repo-explainer.html](docs/repo-explainer.html).
 
 ## Private Task Packs
@@ -221,17 +220,17 @@ Then smoke-test the real MCP endpoint and browser bridge protocol:
 ```bash
 uv run --extra live workspace-bench smoke-workspace-mcp \
   --url http://127.0.0.1:8787 \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --json
 ```
 
-Check the broader live MCP surface against a Stark workflow scenario:
+Check the broader live MCP surface against a workflow scenario:
 
 ```bash
 uv run --extra live workspace-bench smoke-workspace-mcp \
   --url http://127.0.0.1:8787 \
-  --pack stark-enterprise-v0 \
-  --scenario stark_l1_get_workspace_skill_content \
+  --pack all \
+  --scenario gen_t0_skill_finance_earnings_prep \
   --check-surface \
   --json
 ```
@@ -291,13 +290,15 @@ The agent acts through Workspace MCP-like tools such as:
 - `manage_backends`
 - `manage_apps`
 - `get_skill_content`
+- `read_workspace_resource`
+- `get_workspace_prompt`
 - `assign_tasks_to_agents`
 
 The grader evaluates final Workspace state first. Text-only answers are secondary; the durable artifact is the dashboard/app state the agent produced.
 
 See [docs/scenario-format.md](docs/scenario-format.md).
 
-See [docs/benchmark-card.md](docs/benchmark-card.md) for the `workspace-core-v0` benchmark card, scope, and limitations.
+See [docs/benchmark-card.md](docs/benchmark-card.md) for the `workspace-bench-v1` benchmark card, scope, and limitations.
 See [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) for release gates.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for scenario, grader, agent, export, and RL contribution paths.
 
@@ -316,8 +317,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for scenario, grader, agent, export, and 
 src/workspace_bench/
   cli.py                 Command line interface
   core/                  Scenario dataclasses, bundled tasks, episodes, runner, graders
-    scenarios/           Core public pack: workspace-core-v0
-    scenario_packs/      Additional bundled packs, including stark-enterprise-v0
+    scenario_packs/      Unified bundled pack: workspace-bench-v1
   workspace/             Fixture backends, simulator, live workspace-mcp smoke bridge
     data/                Packaged fixture metadata such as Stark widgets/apps
   agents/                Oracle/noop agents, JSONL command protocol, model adapter helpers
@@ -332,6 +332,7 @@ docs/
   contributing.md
   private-task-packs.md
   result-schema.md
+  research-tmax-general-agent.md
   rl-factory-adapter.md
   roadmap.md
   scenario-format.md

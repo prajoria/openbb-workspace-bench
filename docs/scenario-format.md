@@ -1,16 +1,15 @@
 # Scenario Format
 
-Scenarios are JSON files bundled under `src/workspace_bench/core/scenarios` and
-`src/workspace_bench/core/scenario_packs`.
+Scenarios are JSON files bundled under `src/workspace_bench/core/scenario_packs`.
 
-The bundled `workspace-core-v0` and `stark-enterprise-v0` packs use this same
-format as private task packs loaded through `--scenario-dir`.
+The bundled `workspace-bench-v1` pack uses this same format as private task
+packs loaded through `--scenario-dir`.
 
 ## Minimal Shape
 
 ```json
 {
-  "id": "l1_add_price_widget",
+  "id": "gen_t0_create_price_performance_aapl",
   "title": "Add a Price Performance Widget",
   "level": "L1",
   "capability": "widget-creation",
@@ -20,6 +19,7 @@ format as private task packs loaded through `--scenario-dir`.
   "difficulty": "easy",
   "tags": ["schema-discovery", "equities", "layout"],
   "source": "workspace-bench",
+  "novelty": "Unique create/t0 exercise using schema discovery for AAPL price performance.",
   "prompt": "Add a price performance widget for AAPL to the active dashboard.",
   "fixtures": {
     "backends": [{ "name": "equities" }]
@@ -66,6 +66,7 @@ Metadata splits general Workspace usability from business workflow context:
 | `split` | Optional | One of `dev`, `validation`, `test`, or `train`. Defaults to the task pack default, then `dev`. |
 | `tags` | Yes | Non-empty list for filtering and benchmark cards. |
 | `source` | Recommended | Provenance for task authorship or dataset origin. |
+| `novelty` | Optional | One-line uniqueness note used by catalogs and release checks. Defaults to empty. |
 
 `workspace-bench validate` checks metadata, oracle traces, and no-op baseline strength.
 
@@ -75,7 +76,7 @@ Metadata splits general Workspace usability from business workflow context:
 
 ```bash
 uv run workspace-bench export-task \
-  --scenario l1_add_price_widget \
+  --scenario gen_t0_create_price_performance_aapl \
   --output task.json
 ```
 
@@ -85,9 +86,8 @@ The task envelope includes prompt, metadata, fixtures, initial state, allowed to
 
 Use `--pack` to select bundled scenarios:
 
-- `core`: the original 25 deterministic Workspace scenarios.
-- `stark-enterprise-v0`: enterprise finance workflow scenarios derived from the Stark demo backend.
-- `all`: every bundled pack.
+- `core`: backward-compatible alias for the unified `workspace-bench-v1` pack.
+- `all`: backward-compatible alias for the same unified pack.
 
 ## Fixtures
 
@@ -183,6 +183,29 @@ Use this when the agent must retrieve specific information through a tool:
 ```
 
 The grader string-matches against the serialized tool result.
+
+### Required Resource Reads
+
+Use this when the agent must retrieve an MCP resource through the
+`read_workspace_resource` tool:
+
+```json
+{
+  "uri": "openbb://workspace/app-builder/index",
+  "data_contains": ["Workspace app builder index", "template_id"]
+}
+```
+
+Resource read checks match successful `read_workspace_resource` trace events by
+exact URI, then string-match against the serialized tool result using the same
+contains semantics as required tool results.
+
+### Workspace Prompts And Resources
+
+Scenarios may include these retrieval tools in `allowed_tools`:
+
+- `read_workspace_resource` with `{"uri": "openbb://workspace/app-builder/index"}` or `{"uri": "openbb://workspace/skills/<slug>"}`.
+- `get_workspace_prompt` with `{"name": "workspace_tool_usage"}` or `{"name": "workspace_session_context"}`.
 
 ### Required Generated Widgets
 
