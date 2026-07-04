@@ -1,0 +1,7 @@
+{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"limit": 5, "symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"data": "MSFT has significant sector exposure as shown in the Sector Exposure table.", "description": "Note on MSFT and sector exposure", "widget_type": "note"}, "tool": "add_generative_widget"}

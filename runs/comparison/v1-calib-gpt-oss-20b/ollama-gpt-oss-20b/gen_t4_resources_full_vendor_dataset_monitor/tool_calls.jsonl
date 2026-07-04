@@ -1,0 +1,3 @@
+{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
+{"args": {"backend_id": "backend_001", "dashboard_name": "Vendor & Dataset Monitor", "operation": "instantiate", "template_id": "vendor-dataset-monitor"}, "tool": "manage_apps"}
+{"args": {"data": "Incident Log and Vendor Resource noted.", "description": "Note on incident log and vendor resource.", "widget_type": "note"}, "tool": "add_generative_widget"}

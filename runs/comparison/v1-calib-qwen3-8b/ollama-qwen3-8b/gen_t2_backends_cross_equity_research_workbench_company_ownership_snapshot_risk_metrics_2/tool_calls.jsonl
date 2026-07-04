@@ -1,0 +1,6 @@
+{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"name": "portfolio", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "equity_research_workbench_company_ownership_snapshot"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "equity_research_workbench_company_ownership_snapshot"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "create_widget"}

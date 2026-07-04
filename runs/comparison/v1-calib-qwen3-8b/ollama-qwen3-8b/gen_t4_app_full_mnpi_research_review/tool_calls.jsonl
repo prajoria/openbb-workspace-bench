@@ -1,0 +1,3 @@
+{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"app_name": "MNPI & Research Review", "backend_id": "backend_001", "dashboard_name": "MNPI Control Desk", "operation": "instantiate"}, "tool": "manage_apps"}
+{"args": {"dashboard_id": "dash_002", "data": "Reviewer comments and sign off", "inner_tab": "research", "name": "Reviewer Comments Note", "widget_type": "note"}, "tool": "add_generative_widget"}

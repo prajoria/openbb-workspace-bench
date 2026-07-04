@@ -1,0 +1,2 @@
+{"args": {"slug": "finance-guidance-tracker"}, "tool": "get_skill_content"}
+{"args": {"data": "Guidance tracker workflow: extract management claims, compare them with prior guidance, flag changed assumptions, and list evidence gaps.", "description": "Workflow steps for an analyst using the Finance Guidance Tracker skill.", "widget_type": "note"}, "tool": "add_generative_widget"}

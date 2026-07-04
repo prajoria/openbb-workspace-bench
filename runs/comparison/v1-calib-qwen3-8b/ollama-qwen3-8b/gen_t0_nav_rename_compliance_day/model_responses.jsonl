@@ -1,0 +1,2 @@
+{"action": {"args": {"name": "Daily Compliance Control", "operation": "update"}, "done": false, "tool": "manage_dashboard"}, "content": "{\"done\": false, \"tool\": \"manage_dashboard\", \"args\": {\"operation\": \"update\", \"name\": \"Daily Compliance Control\"}}", "turn": 1}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 2}

@@ -1,0 +1,1 @@
+{"args": {"task_requests": [{"assigned_agent_id": "stress-analyst", "assigned_holder_url": "", "description": "risk review work", "id": "task-stress"}, {"assigned_agent_id": "limits-analyst", "assigned_holder_url": "", "description": "risk review work", "id": "task-limits"}]}, "tool": "assign_tasks_to_agents"}

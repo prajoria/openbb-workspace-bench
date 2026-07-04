@@ -1,0 +1,4 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "name": "Client Review Agenda", "operation": "update"}, "tool": "manage_dashboard"}
+{"args": {"dashboard_id": "dash_001", "operation": "rename_tabs", "rename_map": {"overview": "Talking Points"}}, "tool": "manage_navigation_bar"}
+{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "talking-points"}, "tool": "navigate_workspace"}

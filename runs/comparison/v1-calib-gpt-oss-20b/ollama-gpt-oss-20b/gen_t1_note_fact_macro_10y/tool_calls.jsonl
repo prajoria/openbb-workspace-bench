@@ -1,0 +1,2 @@
+{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_data"}
+{"args": {"data": "Series DGS10 latest value is 4.12% as of 2025-12-31.", "description": "Latest 10Y Treasury yield.", "widget_type": "note"}, "tool": "add_generative_widget"}

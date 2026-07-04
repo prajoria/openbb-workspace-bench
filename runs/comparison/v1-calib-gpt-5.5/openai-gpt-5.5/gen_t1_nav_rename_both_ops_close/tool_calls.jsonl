@@ -1,0 +1,4 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "name": "Fund Close Control", "operation": "update"}, "tool": "manage_dashboard"}
+{"args": {"dashboard_id": "dash_001", "operation": "rename_tabs", "rename_map": {"overview": "Close Checklist"}}, "tool": "manage_navigation_bar"}
+{"args": {"operation": "tab", "tab_id": "close-checklist"}, "tool": "navigate_workspace"}

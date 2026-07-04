@@ -1,0 +1,4 @@
+{"args": {"slug": "finance-guidance-tracker"}, "tool": "get_skill_content"}
+{"args": {"operation": "add_tabs", "tabs": [{"name": "Guidance"}]}, "tool": "manage_navigation_bar"}
+{"args": {"operation": "tab", "tab_id": "guidance"}, "tool": "navigate_workspace"}
+{"args": {"data": "Finance Guidance Tracker workflow steps:\n1. Extract management claims\n2. Compare them with prior guidance\n3. Flag changed assumptions\n4. List evidence gaps", "inner_tab": "guidance", "name": "Finance Guidance Tracker", "widget_type": "note"}, "tool": "add_generative_widget"}

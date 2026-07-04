@@ -1,0 +1,4 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_001", "dashboard_name": "Corporate Access Log", "operation": "instantiate", "template_id": "corporate-access-meeting-notes"}, "tool": "manage_apps"}
+{"args": {"data": "This tab tracks expert calls and the meeting calendar.", "inner_tab": "meetings", "name": "Expert Calls & Calendar Note", "widget_type": "note"}, "tool": "add_generative_widget"}

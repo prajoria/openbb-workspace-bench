@@ -1,0 +1,6 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "compliance_surveillance_hub_audit_access_and_export_logs"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Stark Enterprise", "param_name": "sector", "widget_id": "compliance_surveillance_hub_audit_access_and_export_logs"}, "tool": "get_params_options"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"sector": "Consumer Staples"}, "origin": "Bench Stark Enterprise", "ui_args": {}, "widget_id": "compliance_surveillance_hub_audit_access_and_export_logs"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_001", "h": 10, "tab_id": "", "w": 20, "widget_uuid": "widget_002", "x": 20, "y": 0}, "tool": "update_widget_layout"}

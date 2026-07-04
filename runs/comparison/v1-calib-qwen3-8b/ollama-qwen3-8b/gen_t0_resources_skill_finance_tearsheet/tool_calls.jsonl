@@ -1,0 +1,2 @@
+{"args": {"uri": "openbb://workspace/skills/finance-tearsheet"}, "tool": "read_workspace_resource"}
+{"args": {"data": "Note: Valuation is a critical component of the finance-tearsheet workflow, encompassing metrics like P/E ratios, discounted cash flow analysis, and comparable company analysis.", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,4 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_data"}
+{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_data"}
+{"args": {"dashboard_id": "dash_001", "data": "NVDA latest close: 179.45 (2026-01-15). 2026Q1 EPS estimate: 1.18.", "name": "NVDA Close & EPS Note", "widget_type": "note"}, "tool": "add_generative_widget"}

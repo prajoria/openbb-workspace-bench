@@ -1,0 +1,5 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "healthcare_research_dashboard_documents_healthcare_thesis_note"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"period": "YTD", "therapeutic_area": "Obesity / Metabolic", "ticker": "LLY"}, "origin": "Bench Stark Enterprise", "ui_args": {}, "widget_id": "healthcare_research_dashboard_documents_healthcare_thesis_note"}, "tool": "create_widget"}

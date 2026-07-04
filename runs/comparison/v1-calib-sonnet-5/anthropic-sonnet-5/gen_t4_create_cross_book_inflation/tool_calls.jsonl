@@ -1,0 +1,8 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"series": "CPIAUCSL"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
+{"args": {"data": "This dashboard combines portfolio holdings with macro inflation data. The Holdings table shows current portfolio positions, while the Macro Time Series widget tracks CPIAUCSL to monitor inflation trends relevant to portfolio risk.", "name": "Cross-Book Inflation Note", "widget_type": "note"}, "tool": "add_generative_widget"}

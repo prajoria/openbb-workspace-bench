@@ -1,0 +1,5 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "name": "Vendor Control Center", "operation": "update"}, "tool": "manage_dashboard"}
+{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Incident Log"}]}, "tool": "manage_navigation_bar"}
+{"args": {"operation": "tab", "tab_id": "incident-log"}, "tool": "navigate_workspace"}
+{"args": {"data": "Incident Log: items are pending.", "inner_tab": "incident-log", "name": "Incident Log Note", "widget_type": "note"}, "tool": "add_generative_widget"}

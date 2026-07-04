@@ -1,0 +1,1 @@
+{"args": {"task_requests": [{"assigned_agent_id": "ir-analyst", "assigned_holder_url": "", "description": "Prepare IR materials for client meeting.", "id": "task-ir"}, {"assigned_agent_id": "portfolio-analyst", "assigned_holder_url": "", "description": "Analyze portfolio performance for client meeting.", "id": "task-portfolio"}]}, "tool": "assign_tasks_to_agents"}

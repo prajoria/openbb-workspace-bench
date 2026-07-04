@@ -1,0 +1,3 @@
+{"args": {"slug": "finance-guidance-tracker"}, "tool": "get_skill_content"}
+{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_data"}

@@ -1,0 +1,4 @@
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "ui_args": {"h": 10, "w": 20, "x": 20, "y": 0}, "widget_id": "latest_news"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_001", "h": 10, "w": 20, "widget_uuid": "widget_002", "x": 20, "y": 0}, "tool": "update_widget_layout"}

@@ -1,0 +1,7 @@
+{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "Vendor Resource Command", "operation": "instantiate", "template_id": "vendor-dataset-monitor"}, "tool": "manage_apps"}
+{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "incidents"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "vendor_dataset_monitor_incidents_incident_log"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "data_args": {"period": "YTD", "status": "Open", "vendor": "FactSet"}, "origin": "Bench Stark Enterprise", "ui_args": {}, "widget_id": "vendor_dataset_monitor_incidents_incident_log"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data": "Incident log resource note: the incidents tab includes vendor_dataset_monitor_incidents_incident_log from the Vendor & Dataset Monitor resource for tracking Open FactSet YTD incident log entries and data-platform resource health.", "inner_tab": "incidents", "name": "Resource Incident Note", "widget_type": "note"}, "tool": "add_generative_widget"}

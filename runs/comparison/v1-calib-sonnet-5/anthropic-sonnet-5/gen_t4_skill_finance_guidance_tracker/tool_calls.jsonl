@@ -1,0 +1,6 @@
+{"args": {"reason": "Follow required workflow before creating widget", "slug": "finance-guidance-tracker"}, "tool": "get_skill_content"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
+{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_data"}
+{"args": {"data": "Guidance Tracker (NVDA) \u2014 Estimate History review per finance-guidance-tracker workflow: Management-implied claims are reflected in consensus estimates showing sequential growth. For quarter 2026Q3, eps_estimate is 1.33 and revenue_estimate_b is 45.7. Comparing to prior quarter 2026Q2 (eps_estimate 1.26, revenue_estimate_b 42.1) and 2026Q1 (eps_estimate 1.18, revenue_estimate_b 39.4), the data shows consistent upward revisions each quarter with no flagged assumption changes. Evidence gap: no qualitative management guidance commentary is available in this dataset, only quantitative estimates.", "description": "Guidance tracking note for NVDA based on Estimate History data.", "name": "NVDA Guidance Tracker", "widget_type": "note"}, "tool": "add_generative_widget"}

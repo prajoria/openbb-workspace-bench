@@ -1,0 +1,10 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"name": "Prompt Cross Book CPI", "operation": "create"}, "tool": "manage_dashboard"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_schema"}
+{"args": {"data": "The Sector Exposure table shows sector weights, while CPIAUCSL indicates inflation trends on the current-dashboard.", "inner_tab": "", "name": "Sector & CPI Note", "widget_type": "note"}, "tool": "add_generative_widget"}
+{"args": {"data_args": {"series": "CPIAUCSL"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}

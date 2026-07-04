@@ -1,0 +1,3 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"sector": "Technology"}, "widget_id": "sector_exposure"}, "tool": "update_widget"}
+{"args": {"dashboard_id": "dash_001", "data": "Repairs completed: Sector exposure for 'Consumer Staples' has been updated to 'Technology'.", "widget_type": "note"}, "tool": "add_generative_widget"}

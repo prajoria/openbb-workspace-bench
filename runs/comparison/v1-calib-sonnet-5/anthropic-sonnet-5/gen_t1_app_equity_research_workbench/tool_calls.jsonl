@@ -1,0 +1,3 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "Coverage Workbench", "operation": "instantiate", "template_id": "equity-research-workbench"}, "tool": "manage_apps"}

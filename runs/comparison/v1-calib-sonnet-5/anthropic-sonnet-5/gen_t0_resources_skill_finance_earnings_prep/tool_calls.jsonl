@@ -1,0 +1,2 @@
+{"args": {"uri": "openbb://workspace/skills/finance-earnings-prep"}, "tool": "read_workspace_resource"}
+{"args": {"data": "Finance Earnings Prep: Build an earnings preview from estimates, guidance, transcript, price reaction, and thesis risks. Earnings prep workflow: compare internal estimates to street numbers, identify surprise drivers, review guidance, inspect transcript tone, and produce action items for the portfolio manager.", "name": "Earnings Prep Skill Summary", "widget_type": "note"}, "tool": "add_generative_widget"}

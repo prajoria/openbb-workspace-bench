@@ -1,0 +1,2 @@
+{"args": {"uri": "openbb://workspace/skills/finance-comps"}, "tool": "read_workspace_resource"}
+{"args": {"data": "This skill defines the peer set for comparative analysis.", "description": "Peer Set Definition", "name": "Peer Set Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,6 @@
+{"args": {"slug": "finance-earnings-prep"}, "tool": "get_skill_content"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
+{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_data"}
+{"args": {"data": "MSFT Estimate History: For 2026Q1, the EPS estimate is 3.42 and the revenue estimate is 71.2B. For 2026Q2, the EPS estimate is 3.55 and the revenue estimate is 73.0B. For 2026Q3, the EPS estimate is 3.72 and the revenue estimate is 75.6B.", "inner_tab": "overview", "name": "MSFT Earnings Prep Note", "widget_type": "note"}, "tool": "add_generative_widget"}

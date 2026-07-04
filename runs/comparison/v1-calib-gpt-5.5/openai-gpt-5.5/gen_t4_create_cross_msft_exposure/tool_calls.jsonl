@@ -1,0 +1,7 @@
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"limit": 5, "symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "create_widget"}
+{"args": {"data_args": {}, "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"data": "Added Latest News for MSFT from Bench Equities and Sector Exposure from Bench Portfolio to review MSFT news alongside portfolio sector exposure.", "name": "MSFT Sector Exposure Note", "widget_type": "note"}, "tool": "add_generative_widget"}

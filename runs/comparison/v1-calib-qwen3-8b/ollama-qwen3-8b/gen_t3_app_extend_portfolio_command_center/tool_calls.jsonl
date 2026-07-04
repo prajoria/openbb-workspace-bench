@@ -1,0 +1,2 @@
+{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"app_name": "Portfolio Command Center", "backend_id": "backend_002", "operation": "instantiate"}, "tool": "manage_apps"}

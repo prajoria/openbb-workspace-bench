@@ -1,0 +1,12 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"name": "equities", "operation": "add"}, "tool": "manage_backends"}
+{"args": {}, "tool": "manage_backends"}
+{"args": {"name": "macro", "operation": "add"}, "tool": "manage_backends"}
+{"args": {}, "tool": "list_available_widgets"}
+{"args": {}, "tool": "get_widget_schema"}
+{"args": {}, "tool": "get_widget_schema"}
+{"args": {}, "tool": "get_widget_schema"}
+{"args": {}, "tool": "get_widget_schema"}
+{"args": {}, "tool": "get_widget_schema"}
+{"args": {}, "tool": "get_widget_schema"}
+{"args": {}, "tool": "create_widget"}

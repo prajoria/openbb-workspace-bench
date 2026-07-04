@@ -1,0 +1,2 @@
+{"args": {"name": "stark-enterprise", "operation": "list"}, "tool": "manage_backends"}
+{"args": {"app_name": "Rebalance & Scenario Lab", "backend_id": "backend_001", "dashboard_name": "Rebalance Studio", "operation": "instantiate"}, "tool": "manage_apps"}

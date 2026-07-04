@@ -1,0 +1,4 @@
+{"args": {"name": "", "operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_001", "dashboard_name": "Quarterly Stress Review", "operation": "instantiate", "template_id": "stress-liquidity-lab"}, "tool": "manage_apps"}
+{"args": {"data": "This review includes sign off and residual risk considerations.", "inner_tab": "sign_off", "name": "Sign Off Summary", "widget_type": "note"}, "tool": "add_generative_widget"}

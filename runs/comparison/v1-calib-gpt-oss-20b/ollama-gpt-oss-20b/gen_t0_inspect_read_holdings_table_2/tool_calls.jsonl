@@ -1,0 +1,2 @@
+{"args": {"widget_id": "holdings_table"}, "tool": "read_widget"}
+{"args": {"data": "This table shows the current holdings in the Bench Portfolio.", "description": "Holdings Overview", "widget_type": "note"}, "tool": "add_generative_widget"}

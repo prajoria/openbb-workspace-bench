@@ -1,0 +1,6 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "param_name": "symbol", "widget_id": "latest_news"}, "tool": "get_params_options"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"limit": 5, "symbol": "MSFT"}, "origin": "Bench Equities", "ui_args": {"h": 10, "w": 20, "x": 20, "y": 0}, "widget_id": "latest_news"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_001", "h": 10, "w": 20, "widget_uuid": "widget_001", "x": 20, "y": 0}, "tool": "update_widget_layout"}

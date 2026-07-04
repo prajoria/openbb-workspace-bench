@@ -1,0 +1,2 @@
+{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
+{"args": {"data": "Template id equity-earnings-review", "name": "Equity Earnings Review", "widget_type": "note"}, "tool": "add_generative_widget"}

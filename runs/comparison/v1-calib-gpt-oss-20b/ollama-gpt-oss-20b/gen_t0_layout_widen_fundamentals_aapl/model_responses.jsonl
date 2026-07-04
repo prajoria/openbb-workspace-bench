@@ -1,0 +1,2 @@
+{"action": {"args": {"h": 8, "tab_id": "charts", "w": 20, "widget_id": "fundamental_metrics", "x": 0, "y": 0}, "done": false, "tool": "update_widget_layout"}, "content": "{\"done\":false,\"tool\":\"update_widget_layout\",\"args\":{\"widget_id\":\"fundamental_metrics\",\"tab_id\":\"charts\",\"w\":20,\"h\":8,\"x\":0,\"y\":0}}", "turn": 1}
+{"action": {"done": true}, "content": "{\"done\":true}", "turn": 2}

@@ -1,0 +1,2 @@
+{"action": {"args": {"name": "Rates Watch", "operation": "update"}, "done": false, "tool": "manage_dashboard"}, "content": "{\"done\": false, \"tool\": \"manage_dashboard\", \"args\": {\"operation\": \"update\", \"name\": \"Rates Watch\"}}", "turn": 1}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 2}

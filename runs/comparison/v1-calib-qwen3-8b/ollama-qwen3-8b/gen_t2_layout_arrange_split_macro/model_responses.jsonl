@@ -1,0 +1,2 @@
+{"action": {"args": {"h": 9, "w": 18, "widget_id": "yield_curve", "x": 18, "y": 0}, "done": false, "tool": "update_widget_layout"}, "content": "{\"done\": false, \"tool\": \"update_widget_layout\", \"args\": {\"widget_id\": \"yield_curve\", \"x\": 18, \"y\": 0, \"w\": 18, \"h\": 9}}", "turn": 1}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 2}

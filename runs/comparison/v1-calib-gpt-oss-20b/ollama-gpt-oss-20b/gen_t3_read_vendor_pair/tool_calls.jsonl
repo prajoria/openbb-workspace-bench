@@ -1,0 +1,3 @@
+{"args": {"data_args": {"period": "YTD", "status": "In Review", "vendor": "FactSet"}, "origin": "Bench Stark Enterprise", "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status"}, "tool": "get_widget_data"}
+{"args": {"data_args": {"period": "YTD", "status": "In Review", "vendor": "FactSet"}, "origin": "Bench Stark Enterprise", "widget_id": "vendor_dataset_monitor_slas_latency_by_feed"}, "tool": "get_widget_data"}
+{"args": {"data": "I reviewed the data from vendor_dataset_monitor_slas_vendor_sla_status and vendor_dataset_monitor_slas_latency_by_feed.", "inner_tab": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

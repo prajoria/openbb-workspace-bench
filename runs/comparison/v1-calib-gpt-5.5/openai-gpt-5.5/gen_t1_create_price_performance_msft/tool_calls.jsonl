@@ -1,0 +1,4 @@
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Equities", "param_name": "symbol", "widget_id": "price_performance"}, "tool": "get_params_options"}
+{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "create_widget"}

@@ -1,0 +1,4 @@
+{"args": {"dashboard_id": "Duplicate Repair", "widget_id": "estimate_history"}, "tool": "delete_widget"}
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "widget_uuid": "widget_002"}, "tool": "delete_widget"}
+{"args": {"dashboard_id": "dash_001", "data": "The duplicate Estimate History widget has been removed.", "widget_type": "note"}, "tool": "add_generative_widget"}

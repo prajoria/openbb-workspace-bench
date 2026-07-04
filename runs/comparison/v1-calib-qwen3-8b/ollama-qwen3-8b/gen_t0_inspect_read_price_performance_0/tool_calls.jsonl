@@ -1,0 +1,2 @@
+{"args": {"widget_id": "price_performance"}, "tool": "read_widget"}
+{"args": {"data": "AAPL note", "name": "AAPL Note", "widget_type": "note"}, "tool": "add_generative_widget"}

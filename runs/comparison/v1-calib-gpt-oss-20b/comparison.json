@@ -1,0 +1,88 @@
+{
+  "attempt_count": 300,
+  "benchmark": {
+    "name": "openbb-workspace-bench",
+    "release_id": "workspace-bench-v1",
+    "version": "1.0.0"
+  },
+  "filters": {
+    "capability": null,
+    "difficulty": "all",
+    "domain": null,
+    "level": null,
+    "pack": "all",
+    "scenario_dir": null,
+    "split": null,
+    "subdomain": null,
+    "tags": [],
+    "workflow": null
+  },
+  "max_turns_override": null,
+  "metric": "pass-rate",
+  "model_retries": 2,
+  "models": [
+    {
+      "by_difficulty": {
+        "easy": {
+          "passed": 76,
+          "total": 90
+        },
+        "hard": {
+          "passed": 35,
+          "total": 90
+        },
+        "medium": {
+          "passed": 67,
+          "total": 120
+        }
+      },
+      "by_level": {
+        "L0": {
+          "passed": 13,
+          "total": 28
+        },
+        "L1": {
+          "passed": 90,
+          "total": 124
+        },
+        "L2": {
+          "passed": 29,
+          "total": 76
+        },
+        "L3": {
+          "passed": 31,
+          "total": 40
+        },
+        "L4": {
+          "passed": 15,
+          "total": 32
+        }
+      },
+      "failed": 122,
+      "mean_score": 0.9184294293504321,
+      "model": "Ollama gpt-oss:20b",
+      "pass_at_k": 0.5933333333333334,
+      "pass_at_k_count": 178,
+      "pass_power_k": 0.5933333333333334,
+      "pass_power_k_count": 178,
+      "pass_rate": 0.5933333333333334,
+      "passed": 178,
+      "process_failures": 22,
+      "reliability_max_k": 1,
+      "reliability_min_k": 1,
+      "reliability_scenario_count": 300,
+      "result_path": "runs/comparison/v1-calib-gpt-oss-20b/ollama-gpt-oss-20b.json",
+      "slug": "ollama-gpt-oss-20b",
+      "task_failures": 100,
+      "task_pass_rate": 0.6402877697841727,
+      "task_passed": 178,
+      "total": 300,
+      "valid_attempts": 278
+    }
+  ],
+  "models_file": "/private/tmp/claude-501/-Users-didierlopes-Documents-git-rl-workspace/648b998b-e4d7-43dc-b1cd-53c1d5b81793/scratchpad/models_ollama_only.json",
+  "repeats": 1,
+  "retry_backoff": 1.0,
+  "runner": "interactive",
+  "scenario_count": 300
+}

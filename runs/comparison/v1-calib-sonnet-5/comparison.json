@@ -1,0 +1,88 @@
+{
+  "attempt_count": 300,
+  "benchmark": {
+    "name": "openbb-workspace-bench",
+    "release_id": "workspace-bench-v1",
+    "version": "1.0.0"
+  },
+  "filters": {
+    "capability": null,
+    "difficulty": "all",
+    "domain": null,
+    "level": null,
+    "pack": "all",
+    "scenario_dir": null,
+    "split": null,
+    "subdomain": null,
+    "tags": [],
+    "workflow": null
+  },
+  "max_turns_override": null,
+  "metric": "pass-rate",
+  "model_retries": 2,
+  "models": [
+    {
+      "by_difficulty": {
+        "easy": {
+          "passed": 90,
+          "total": 90
+        },
+        "hard": {
+          "passed": 72,
+          "total": 90
+        },
+        "medium": {
+          "passed": 105,
+          "total": 120
+        }
+      },
+      "by_level": {
+        "L0": {
+          "passed": 28,
+          "total": 28
+        },
+        "L1": {
+          "passed": 118,
+          "total": 124
+        },
+        "L2": {
+          "passed": 59,
+          "total": 76
+        },
+        "L3": {
+          "passed": 37,
+          "total": 40
+        },
+        "L4": {
+          "passed": 25,
+          "total": 32
+        }
+      },
+      "failed": 33,
+      "mean_score": 0.9851335225232287,
+      "model": "Claude Sonnet 5",
+      "pass_at_k": 0.89,
+      "pass_at_k_count": 267,
+      "pass_power_k": 0.89,
+      "pass_power_k_count": 267,
+      "pass_rate": 0.89,
+      "passed": 267,
+      "process_failures": 15,
+      "reliability_max_k": 1,
+      "reliability_min_k": 1,
+      "reliability_scenario_count": 300,
+      "result_path": "runs/comparison/v1-calib-sonnet-5/anthropic-sonnet-5.json",
+      "slug": "anthropic-sonnet-5",
+      "task_failures": 18,
+      "task_pass_rate": 0.9368421052631579,
+      "task_passed": 267,
+      "total": 300,
+      "valid_attempts": 285
+    }
+  ],
+  "models_file": "/private/tmp/claude-501/-Users-didierlopes-Documents-git-rl-workspace/648b998b-e4d7-43dc-b1cd-53c1d5b81793/scratchpad/models_sonnet-5-or.json",
+  "repeats": 1,
+  "retry_backoff": 1.0,
+  "runner": "interactive",
+  "scenario_count": 300
+}

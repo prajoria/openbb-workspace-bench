@@ -1,0 +1,1 @@
+{"args": {"task_requests": [{"assigned_agent_id": "risk-analyst-1", "assigned_holder_url": "Bench Stark Enterprise", "description": "Risk review analysis", "id": "stress-analyst"}, {"assigned_agent_id": "risk-analyst-2", "assigned_holder_url": "Bench Stark Enterprise", "description": "Risk review analysis", "id": "limits-analyst"}]}, "tool": "assign_tasks_to_agents"}

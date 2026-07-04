@@ -1,0 +1,3 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_data"}
+{"args": {"dashboard_id": "dash_001", "data": "MSFT 2026Q1 estimate facts from estimate_history: EPS estimate is 3.42 and revenue_estimate_b is 71.2.", "description": "Note with 2026Q1 EPS and revenue estimate from MSFT estimate_history data.", "inner_tab": "overview", "name": "MSFT 2026Q1 Estimates Note", "widget_type": "note"}, "tool": "add_generative_widget"}

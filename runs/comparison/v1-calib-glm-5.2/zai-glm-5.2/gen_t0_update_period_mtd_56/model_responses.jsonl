@@ -1,0 +1,3 @@
+{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\n  \"done\": false,\n  \"tool\": \"get_workspace_snapshot\",\n  \"args\": {}\n}", "turn": 1}
+{"action": {"args": {"data_args": {"fund": "Flagship Long/Short", "period": "MTD"}, "widget_uuid": "widget_001"}, "done": false, "tool": "update_widget"}, "content": "{\n  \"done\": false,\n  \"tool\": \"update_widget\",\n  \"args\": {\n    \"widget_uuid\": \"widget_001\",\n    \"data_args\": {\n      \"fund\": \"Flagship Long/Short\",\n      \"period\": \"MTD\"\n    }\n  }\n}", "turn": 2}
+{"action": {"done": true}, "content": "{\n  \"done\": true\n}", "turn": 3}

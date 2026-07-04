@@ -1,0 +1,2 @@
+{"args": {"uri": "openbb://workspace/skills/finance-guidance-tracker"}, "tool": "read_workspace_resource"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}

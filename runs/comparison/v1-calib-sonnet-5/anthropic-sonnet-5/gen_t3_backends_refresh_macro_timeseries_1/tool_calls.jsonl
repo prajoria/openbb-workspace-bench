@@ -1,0 +1,6 @@
+{"args": {"name": "macro", "operation": "add", "url": "Bench Macro"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "refresh"}, "tool": "manage_backends"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"series": "DGS10"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
+{"args": {"data": "Backend 'macro' (Bench Macro, backend_001) was registered and refreshed before adding the Bench Macro/macro_timeseries widget with data_args {\"series\": \"DGS10\"}.", "name": "Backend Refresh Log", "widget_type": "note"}, "tool": "add_generative_widget"}

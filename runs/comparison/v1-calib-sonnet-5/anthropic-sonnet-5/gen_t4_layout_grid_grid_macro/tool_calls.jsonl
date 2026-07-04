@@ -1,0 +1,4 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "h": 10, "tab_id": "", "w": 20, "widget_uuid": "widget_001", "x": 0, "y": 0}, "tool": "update_widget_layout"}
+{"args": {"dashboard_id": "dash_001", "h": 10, "tab_id": "", "w": 20, "widget_uuid": "widget_002", "x": 20, "y": 0}, "tool": "update_widget_layout"}
+{"args": {"dashboard_id": "dash_001", "h": 10, "tab_id": "", "w": 40, "widget_uuid": "widget_003", "x": 0, "y": 10}, "tool": "update_widget_layout"}

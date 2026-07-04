@@ -1,0 +1,2 @@
+{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}

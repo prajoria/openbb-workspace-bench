@@ -1,0 +1,6 @@
+{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
+{"args": {"operation": "add_tabs", "tabs": [{"name": "Ops"}]}, "tool": "manage_navigation_bar"}
+{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "ops"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "liquidity_tca_workbench_tca_slippage_by_algo"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"desk": "US Equity", "period": "YTD"}, "origin": "Bench Stark Enterprise", "ui_args": {"tab_id": "ops"}, "widget_id": "liquidity_tca_workbench_tca_slippage_by_algo"}, "tool": "create_widget"}

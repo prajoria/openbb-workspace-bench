@@ -1,0 +1,8 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"activate": true, "name": "Macro Prompt Dashboard", "operation": "create"}, "tool": "manage_dashboard"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "data_args": {"series": "DGS2"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "data_args": {}, "origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data": "This dashboard tracks DGS2 (2-Year Treasury Yield) via macro_timeseries and the Yield Curve via yield_curve, both added on Bench Macro following schema-before-create workspace tool discipline: schemas were retrieved via get_widget_schema before create_widget calls to ensure correct data_args, such as series=DGS2 for macro_timeseries.", "name": "Macro Review Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,4 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "widget_uuid": "widget_002"}, "tool": "read_widget"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"sector": "Technology"}, "widget_uuid": "widget_002"}, "tool": "update_widget"}
+{"args": {"dashboard_id": "dash_001", "data": "Repaired widget_002 (reporting_factsheet_studio_factsheets_risk_stats / Risk Stats): sector changed from Consumer Staples to Technology. Kept companion widget_001 (reporting_factsheet_studio_overview_workflow_overview / Workflow Overview) on the dashboard.", "description": "Risk Stats sector repair note", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

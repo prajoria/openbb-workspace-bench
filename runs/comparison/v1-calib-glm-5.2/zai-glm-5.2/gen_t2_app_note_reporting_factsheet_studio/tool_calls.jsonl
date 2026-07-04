@@ -1,0 +1,5 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_001", "dashboard_name": "Factsheet Control", "operation": "instantiate", "template_id": "reporting-factsheet-studio"}, "tool": "manage_apps"}
+{"args": {"operation": "tab", "tab_id": "factsheets"}, "tool": "navigate_workspace"}
+{"args": {"dashboard_id": "dash_002", "data": "This tab covers factsheet production and distribution for the Atlas Pension client. The Factsheet Preview and Factsheet Chart Pack provide the client-facing materials, while the Factsheet Distribution Status tracks delivery across channels. Ensure all factsheet content is approved before distribution.", "inner_tab": "factsheets", "name": "Factsheet & Distribution Brief", "widget_type": "note"}, "tool": "add_generative_widget"}

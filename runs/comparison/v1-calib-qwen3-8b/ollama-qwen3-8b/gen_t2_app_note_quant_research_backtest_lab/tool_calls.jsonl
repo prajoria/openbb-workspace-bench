@@ -1,0 +1,5 @@
+{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_002", "dashboard_name": "Signal Research Lab", "operation": "instantiate", "template_id": "Quant Research & Backtest Lab"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_002", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_002", "dashboard_name": "Signal Research Lab", "operation": "instantiate", "template_id": "quant-research-backtest-lab"}, "tool": "manage_apps"}
+{"args": {"dashboard_id": "dash_002", "data": "signal and decay", "inner_tab": "signals", "name": "Signal Note", "widget_type": "note"}, "tool": "add_generative_widget"}

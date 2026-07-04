@@ -1,0 +1,3 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"app_name": "Corporate Access & Meeting Notes", "backend_id": "backend_001", "dashboard_name": "Corporate Access Log", "operation": "instantiate"}, "tool": "manage_apps"}
+{"args": {"dashboard_id": "dash_002", "data": "Expert calls are scheduled on the meeting calendar. Please review the calendar for details.", "inner_tab": "meetings", "name": "Expert Calls Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,8 @@
+{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
+{"args": {"operation": "add_tabs", "tabs": [{"name": "Exposure"}]}, "tool": "manage_navigation_bar"}
+{"args": {"args": {"operation": "tab", "tab_id": "exposure"}, "done": false, "tool": "navigate_workspace"}, "tool": "navigate_workspace"}
+{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "exposure"}, "tool": "navigate_workspace"}
+{"args": {"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "done": false, "tool": "get_widget_schema"}, "tool": "add_generative_widget"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"data": "Exposure on this tab reflects the sector distribution of the portfolio.", "description": "Sector Exposure Note", "widget_type": "note"}, "tool": "add_generative_widget"}

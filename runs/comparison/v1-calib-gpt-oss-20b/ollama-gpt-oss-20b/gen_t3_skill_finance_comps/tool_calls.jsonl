@@ -1,0 +1,5 @@
+{"args": {"slug": "finance-comps"}, "tool": "get_skill_content"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "create_widget"}
+{"args": {"data": "This Fundamental Metrics widget displays key financial metrics for AAPL.\n\nAccording to the Finance Comps workflow:\n1. Define a peer set.\n2. Normalize these metrics.\n3. Compare valuation multiples.\n4. Explain why outliers deserve premium or discount.", "inner_tab": "overview", "widget_type": "note"}, "tool": "add_generative_widget"}

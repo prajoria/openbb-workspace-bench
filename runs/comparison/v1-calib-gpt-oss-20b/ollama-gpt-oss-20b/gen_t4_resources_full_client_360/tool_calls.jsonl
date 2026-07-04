@@ -1,0 +1,4 @@
+{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
+{"args": {"backend_id": "backend_001", "operation": "instantiate", "template_id": "client-360"}, "tool": "manage_apps"}
+{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "flows"}, "tool": "navigate_workspace"}
+{"args": {"data": "Pipeline and resource overview: The client\u2019s flow pipeline by stage is displayed above, showing the current status of each stage and associated resources.", "inner_tab": "flows", "widget_type": "note"}, "tool": "add_generative_widget"}

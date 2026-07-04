@@ -1,0 +1,4 @@
+{"action": {"args": {"operation": "list"}, "done": false, "tool": "manage_backends"}, "content": "{\"args\": {\"operation\": \"list\"}, \"done\": false, \"tool\": \"manage_backends\"}", "turn": 1}
+{"action": {"args": {"backend_id": "backend_001", "operation": "list"}, "done": false, "tool": "manage_apps"}, "content": "{\"args\": {\"backend_id\": \"backend_001\", \"operation\": \"list\"}, \"done\": false, \"tool\": \"manage_apps\"}", "turn": 2}
+{"action": {"args": {"backend_id": "backend_001", "dashboard_name": "Rebalance Studio", "operation": "instantiate", "template_id": "rebalance-scenario-lab"}, "done": false, "tool": "manage_apps"}, "content": "{\"done\": false, \"tool\": \"manage_apps\", \"args\": {\"operation\":\"instantiate\",\"backend_id\":\"backend_001\",\"template_id\":\"rebalance-scenario-lab\",\"dashboard_name\":\"Rebalance Studio\"}}", "turn": 3}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 4}

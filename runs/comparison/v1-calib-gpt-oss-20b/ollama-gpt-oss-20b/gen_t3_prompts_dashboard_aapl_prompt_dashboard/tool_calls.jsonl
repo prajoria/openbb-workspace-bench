@@ -1,0 +1,8 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "get_widget_schema"}
+{"args": {"activate": true, "name": "AAPL Prompt Dashboard", "operation": "create"}, "tool": "manage_dashboard"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "create_widget"}
+{"args": {"data_args": {"limit": 5, "symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "create_widget"}
+{"args": {"data": "This dashboard includes AAPL data using the Bench Equities price_performance and latest_news widgets. Schema-first discipline was followed: schemas were fetched before creating each widget.", "name": "AAPL Note", "widget_type": "note"}, "tool": "add_generative_widget"}

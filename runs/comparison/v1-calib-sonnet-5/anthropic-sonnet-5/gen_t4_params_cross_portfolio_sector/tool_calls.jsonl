@@ -1,0 +1,10 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Portfolio", "param_name": "sector", "widget_id": "sector_exposure"}, "tool": "get_params_options"}
+{"args": {"data_args": {"sector": "Technology"}, "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Macro", "param_name": "series", "widget_id": "macro_timeseries"}, "tool": "get_params_options"}
+{"args": {"data_args": {"series": "CPIAUCSL"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
+{"args": {"data": "This dashboard highlights sector exposure for Technology and macroeconomic time series data for CPIAUCSL.", "description": "Note referencing Technology sector exposure and CPIAUCSL macro series.", "name": "Portfolio & Macro Note", "widget_type": "note"}, "tool": "add_generative_widget"}

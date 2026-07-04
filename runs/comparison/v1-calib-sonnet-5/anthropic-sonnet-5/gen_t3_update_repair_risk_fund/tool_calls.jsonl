@@ -1,0 +1,3 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"data_args": {"fund": "Flagship Long/Short"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
+{"args": {"data": "The Risk Snapshot widget on the Flagship Long/Short risk dashboard was misconfigured to show fund data for Global Macro. It has been repaired to correctly display the Flagship Long/Short fund instead of Global Macro.", "name": "Risk Snapshot Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

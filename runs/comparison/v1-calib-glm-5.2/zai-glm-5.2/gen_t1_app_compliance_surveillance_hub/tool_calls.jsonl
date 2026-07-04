@@ -1,0 +1,3 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_001", "dashboard_name": "Daily Surveillance Board", "operation": "instantiate", "template_id": "compliance-surveillance-hub"}, "tool": "manage_apps"}

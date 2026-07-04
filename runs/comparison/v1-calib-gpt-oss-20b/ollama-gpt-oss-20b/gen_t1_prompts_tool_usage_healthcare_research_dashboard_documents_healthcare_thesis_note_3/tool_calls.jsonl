@@ -1,0 +1,2 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}

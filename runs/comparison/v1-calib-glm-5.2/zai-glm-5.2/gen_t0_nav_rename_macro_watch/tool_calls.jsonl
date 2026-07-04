@@ -1,0 +1,2 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "name": "Rates Watch", "operation": "update"}, "tool": "manage_dashboard"}

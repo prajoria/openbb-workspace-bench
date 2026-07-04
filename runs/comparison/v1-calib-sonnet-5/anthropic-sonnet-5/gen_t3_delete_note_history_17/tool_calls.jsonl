@@ -1,0 +1,3 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "widget_uuid": "widget_002"}, "tool": "delete_widget"}
+{"args": {"dashboard_id": "dash_001", "data": "The duplicate Estimate History widget (widget_002) for AAPL was removed from this dashboard. Only one Estimate History widget (widget_001) remains.", "name": "Duplicate Removed", "widget_type": "note"}, "tool": "add_generative_widget"}

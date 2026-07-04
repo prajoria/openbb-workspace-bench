@@ -1,0 +1,2 @@
+{"args": {"widget_id": "macro_timeseries"}, "tool": "read_widget"}
+{"args": {"data": "This widget displays the macro time series data for the series DGS10.", "description": "Note mentioning DGS10 series from the macro timeseries widget", "name": "Note on DGS10", "widget_type": "note"}, "tool": "add_generative_widget"}

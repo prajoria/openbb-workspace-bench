@@ -1,0 +1,2 @@
+{"action": {"args": {"uri": "openbb://workspace/skills/finance-guidance-tracker"}, "done": false, "tool": "read_workspace_resource"}, "content": "{\"args\": {\"uri\": \"openbb://workspace/skills/finance-guidance-tracker\"}, \"done\": false, \"tool\": \"read_workspace_resource\"}", "turn": 1}
+{"action": {"args": {"origin": "Bench Stark Enterprise"}, "done": false, "tool": "list_available_widgets"}, "content": "{\"done\": false, \"tool\": \"list_available_widgets\", \"args\": {\"origin\": \"Bench Stark Enterprise\"}}", "turn": 2}

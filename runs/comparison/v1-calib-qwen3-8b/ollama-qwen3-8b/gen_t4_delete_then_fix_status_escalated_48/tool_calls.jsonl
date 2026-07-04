@@ -1,0 +1,5 @@
+{"args": {"widget_id": "vendor_dataset_monitor_slas_vendor_sla_status"}, "tool": "delete_widget"}
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"widget_uuid": "widget_002"}, "tool": "delete_widget"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"status": "Escalated"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
+{"args": {"dashboard_id": "dash_001", "data": "<p>Escalated and repaired</p>", "widget_type": "note"}, "tool": "add_generative_widget"}

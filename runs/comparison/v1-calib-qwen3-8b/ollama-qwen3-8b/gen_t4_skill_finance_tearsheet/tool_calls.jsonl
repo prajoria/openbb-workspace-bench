@@ -1,0 +1,5 @@
+{"args": {"slug": "finance-tearsheet"}, "tool": "get_skill_content"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "create_widget"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_data"}
+{"args": {"data": "AAPL's latest close price is $196.1 as of 2026-01-15.", "widget_type": "note"}, "tool": "add_generative_widget"}

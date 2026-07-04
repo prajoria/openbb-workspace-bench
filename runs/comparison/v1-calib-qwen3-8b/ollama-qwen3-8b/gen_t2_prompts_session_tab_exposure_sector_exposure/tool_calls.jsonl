@@ -1,0 +1,10 @@
+{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
+{"args": {"dashboard_id": "Prompt Session", "operation": "add_tabs", "tabs": [{"name": "Exposure"}]}, "tool": "manage_navigation_bar"}
+{"args": {"dashboard_id": "Prompt Session", "operation": "dashboard"}, "tool": "navigate_workspace"}
+{"args": {"dashboard_id": "Prompt Session", "operation": "add_tabs", "tabs": [{"name": "Exposure"}]}, "tool": "manage_navigation_bar"}
+{"args": {"dashboard_id": "Prompt Session", "operation": "add_tabs", "tabs": [{"name": "Exposure"}]}, "tool": "manage_navigation_bar"}
+{"args": {"dashboard_id": "Prompt Session", "operation": "add_tabs", "tabs": [{"name": "Exposure"}]}, "tool": "manage_navigation_bar"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "Prompt Session", "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}

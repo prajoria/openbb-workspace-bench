@@ -1,0 +1,5 @@
+{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\": false, \"tool\": \"get_workspace_snapshot\", \"args\": {}}", "turn": 1}
+{"action": {"args": {"h": 10, "w": 40, "widget_id": "price_performance", "x": 0, "y": 0}, "done": false, "tool": "update_widget_layout"}, "content": "{\"done\": false, \"tool\": \"update_widget_layout\", \"args\": {\"widget_id\": \"price_performance\", \"w\": 40, \"h\": 10, \"x\": 0, \"y\": 0}}", "turn": 2}
+{"action": {"args": {"h": 10, "w": 20, "widget_id": "estimate_history", "x": 0, "y": 10}, "done": false, "tool": "update_widget_layout"}, "content": "{\"done\": false, \"tool\": \"update_widget_layout\", \"args\": {\"widget_id\": \"estimate_history\", \"w\": 20, \"h\": 10, \"x\": 0, \"y\": 10}}", "turn": 3}
+{"action": {"args": {"h": 10, "w": 20, "widget_id": "fundamental_metrics", "x": 20, "y": 10}, "done": false, "tool": "update_widget_layout"}, "content": "{\"done\": false, \"tool\": \"update_widget_layout\", \"args\": {\"widget_id\": \"fundamental_metrics\", \"w\": 20, \"h\": 10, \"x\": 20, \"y\": 10}}", "turn": 4}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 5}

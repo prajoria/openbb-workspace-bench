@@ -1,0 +1,2 @@
+{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
+{"args": {"data": "The Client 360 template id is client-360.", "name": "Client 360 Template", "widget_type": "note"}, "tool": "add_generative_widget"}

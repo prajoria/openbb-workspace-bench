@@ -1,0 +1,7 @@
+{"args": {"line_end": 20, "line_start": 1, "path": ""}, "tool": "repo_browser.open_file"}
+{"args": {"data_args": {"series": "FEDFUNDS"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_data"}
+{"args": {"line_end": 20, "line_start": 1, "path": ""}, "tool": "repo_browser.open_file"}
+{"args": {"line_end": 20, "line_start": 1, "path": ""}, "tool": "repo_browser.open_file"}
+{"args": {"line_end": 20, "line_start": 1, "path": ""}, "tool": "repo_browser.open_file"}
+{"args": {"line_end": 20, "line_start": 1, "path": ""}, "tool": "repo_browser.open_file"}
+{"args": {"line_end": 20, "line_start": 1, "path": ""}, "tool": "repo_browser.open_file"}

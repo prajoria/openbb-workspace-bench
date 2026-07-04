@@ -1,0 +1,3 @@
+{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\": false, \"tool\": \"get_workspace_snapshot\", \"args\": {}}", "turn": 1}
+{"action": {"args": {"dashboard_id": "dash_001", "data": "EU book is flat. US open checklist is complete.", "name": "Desk Handover", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\n  \"done\": false,\n  \"tool\": \"add_generative_widget\",\n  \"args\": {\n    \"dashboard_id\": \"dash_001\",\n    \"widget_type\": \"note\",\n    \"name\": \"Desk Handover\",\n    \"data\": \"EU book is flat. US open checklist is complete.\"\n  }\n}", "turn": 2}
+{"action": {"done": true}, "content": "{\n  \"done\": true\n}", "turn": 3}

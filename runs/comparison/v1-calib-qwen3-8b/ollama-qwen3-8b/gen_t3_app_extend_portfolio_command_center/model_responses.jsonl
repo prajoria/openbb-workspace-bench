@@ -1,0 +1,3 @@
+{"action": {"args": {"name": "stark-enterprise", "operation": "add"}, "done": false, "tool": "manage_backends"}, "content": "{\"done\": false, \"tool\": \"manage_backends\", \"args\": {\"operation\": \"add\", \"name\": \"stark-enterprise\"}}", "turn": 1}
+{"action": {"args": {"app_name": "Portfolio Command Center", "backend_id": "backend_002", "operation": "instantiate"}, "done": false, "tool": "manage_apps"}, "content": "{\"done\": false, \"tool\": \"manage_apps\", \"args\": {\"operation\": \"instantiate\", \"app_name\": \"Portfolio Command Center\", \"backend_id\": \"backend_002\"}}", "turn": 2}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

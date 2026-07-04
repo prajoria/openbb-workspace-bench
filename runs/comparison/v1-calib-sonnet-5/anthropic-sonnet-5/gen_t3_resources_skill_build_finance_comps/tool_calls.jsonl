@@ -1,0 +1,5 @@
+{"args": {"uri": "openbb://workspace/skills/finance-comps"}, "tool": "read_workspace_resource"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {}, "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"data": "Finance Comps workflow: define the peer set, normalize metrics, compare valuation multiples, and explain why outliers deserve premium or discount. This portfolio-risk-review dashboard uses the Sector Exposure widget to help frame the peer set for comparison.", "description": "Note referencing the finance-comps skill resource.", "name": "Comps Workflow Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,5 @@
+{"action": {"args": {"widget_id": "sector_exposure"}, "done": false, "tool": "delete_widget"}, "content": "{\"done\": false, \"tool\": \"delete_widget\", \"args\": {\"widget_id\": \"sector_exposure\"}}", "turn": 1}
+{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\": false, \"tool\": \"get_workspace_snapshot\", \"args\": {}}", "turn": 2}
+{"action": {"args": {"widget_uuid": "widget_002"}, "done": false, "tool": "delete_widget"}, "content": "{\"done\": false, \"tool\": \"delete_widget\", \"args\": {\"widget_uuid\": \"widget_002\"}}", "turn": 3}
+{"action": {"args": {"data": "Duplicate Sector Exposure widget removed.", "name": "Note: Duplicate Removed", "origin": "Bench Portfolio", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"data\": \"Duplicate Sector Exposure widget removed.\", \"name\": \"Note: Duplicate Removed\", \"widget_type\": \"note\", \"origin\": \"Bench Portfolio\"}}", "turn": 4}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 5}

@@ -1,0 +1,2 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"data": "schema-before-create workspace tool discipline", "description": "schema-before-create discipline note", "widget_type": "note"}, "tool": "add_generative_widget"}

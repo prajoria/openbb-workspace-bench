@@ -1,0 +1,2 @@
+{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "widget_id": "compliance_surveillance_hub_alerts_alert_trend"}, "tool": "get_widget_data"}
+{"args": {"data": "I reviewed the data from compliance_surveillance_hub_alerts_alert_trend.", "inner_tab": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

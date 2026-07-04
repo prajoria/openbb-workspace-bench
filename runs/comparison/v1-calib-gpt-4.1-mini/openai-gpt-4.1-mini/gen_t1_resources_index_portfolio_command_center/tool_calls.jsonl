@@ -1,0 +1,2 @@
+{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
+{"args": {"data": "Template ID: portfolio-command-center\nName: Portfolio Command Center\nDescription: Morning command center for fund-level P&L, holdings, exposures, attribution, and investable actions.", "name": "Portfolio Command Center", "widget_type": "note"}, "tool": "add_generative_widget"}

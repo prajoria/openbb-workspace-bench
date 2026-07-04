@@ -1,0 +1,2 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "data": "Attestations are due Friday and trading in restricted names is blocked.", "name": "Compliance Reminder", "widget_type": "note"}, "tool": "add_generative_widget"}

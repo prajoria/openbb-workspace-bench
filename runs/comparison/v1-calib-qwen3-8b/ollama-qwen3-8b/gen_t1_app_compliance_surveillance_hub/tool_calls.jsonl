@@ -1,0 +1,4 @@
+{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_002", "dashboard_name": "Daily Surveillance Board", "operation": "instantiate", "template_id": "Compliance Surveillance Hub"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_002", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_002", "dashboard_name": "Daily Surveillance Board", "operation": "instantiate", "template_id": "compliance-surveillance-hub"}, "tool": "manage_apps"}

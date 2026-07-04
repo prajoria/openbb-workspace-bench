@@ -1,0 +1,2 @@
+{"args": {"operation": "add_tabs", "tabs": [{"name": "Risk"}]}, "tool": "manage_navigation_bar"}
+{"args": {"origin": "Bench Portfolio", "tab_id": "risk", "widget_id": "risk_metrics"}, "tool": "create_widget"}

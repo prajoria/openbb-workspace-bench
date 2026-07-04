@@ -1,0 +1,2 @@
+{"args": {"uri": "openbb://workspace/skills/finance-guidance-tracker"}, "tool": "read_workspace_resource"}
+{"args": {"data": "Management claims are extracted and tracked in the Finance Guidance Tracker skill.", "description": "Note on management claims", "widget_type": "note"}, "tool": "add_generative_widget"}

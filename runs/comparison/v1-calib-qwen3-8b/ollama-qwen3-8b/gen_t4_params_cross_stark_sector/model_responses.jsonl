@@ -1,0 +1,1 @@
+{"action": {"args": {"origin": "stark-enterprise"}, "done": false, "tool": "list_available_widgets"}, "content": "{\"done\": false, \"tool\": \"list_available_widgets\", \"args\": {\"origin\": \"stark-enterprise\"}}", "turn": 1}

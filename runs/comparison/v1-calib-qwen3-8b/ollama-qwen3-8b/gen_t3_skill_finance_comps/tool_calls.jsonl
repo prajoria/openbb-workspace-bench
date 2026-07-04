@@ -1,0 +1,3 @@
+{"args": {"slug": "finance-comps"}, "tool": "get_skill_content"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "create_widget"}
+{"args": {"data": "The Finance Comps workflow steps applied to the Fundamental Metrics widget for AAPL:\n1. Define peer set: Compare AAPL with tech peers like MSFT, GOOGL, and AMZN.\n2. Normalize metrics: Adjust P/E, P/B, and EV/EBITDA for revenue scale and growth.\n3. Compare valuation multiples: Analyze where AAPL stands relative to its peers.\n4. Explain outliers: Highlight any premium/discount based on growth prospects or risk profile.", "widget_type": "note"}, "tool": "add_generative_widget"}

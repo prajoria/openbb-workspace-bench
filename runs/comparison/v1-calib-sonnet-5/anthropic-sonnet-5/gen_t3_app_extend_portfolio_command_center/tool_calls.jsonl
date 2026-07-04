@@ -1,0 +1,3 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "PM Command Post", "operation": "instantiate", "template_id": "portfolio-command-center"}, "tool": "manage_apps"}

@@ -1,0 +1,2 @@
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_attribution_attribution_summary"}, "tool": "get_widget_data"}
+{"args": {"data": "I reviewed the data from the portfolio_command_center_attribution_attribution_summary widget on Bench Stark Enterprise. The data includes performance changes and scores for various funds and periods.", "name": "Review Note on Attribution Summary", "tab_id": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

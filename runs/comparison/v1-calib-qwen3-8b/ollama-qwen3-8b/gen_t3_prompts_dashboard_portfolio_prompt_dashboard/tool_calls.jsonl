@@ -1,0 +1,8 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"name": "Portfolio Prompt Dashboard", "operation": "create"}, "tool": "manage_dashboard"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data": "Holdings and schema information for the portfolio.", "widget_type": "note"}, "tool": "add_generative_widget"}

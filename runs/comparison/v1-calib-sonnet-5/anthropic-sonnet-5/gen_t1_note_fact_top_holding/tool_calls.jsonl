@@ -1,0 +1,3 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "get_widget_data"}
+{"args": {"data": "The largest position in the portfolio is MSFT, with a weight of 0.34 (34% of the portfolio), market value of $265,000.", "description": "Note identifying the top holding based on holdings_table data.", "name": "Top Holding", "widget_type": "note"}, "tool": "add_generative_widget"}

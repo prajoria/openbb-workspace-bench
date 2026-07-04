@@ -1,0 +1,2 @@
+{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
+{"args": {"data": "The Risk Exposure Monitor template id is risk-exposure-monitor. Description: Portfolio VaR, stress loss, exposures, limits, and position-level risk contributions. Backend: Bench Stark Enterprise. Tabs: dashboard, drilldown, exposures, limits, overview.", "name": "Risk Exposure Monitor Template", "widget_type": "note"}, "tool": "add_generative_widget"}

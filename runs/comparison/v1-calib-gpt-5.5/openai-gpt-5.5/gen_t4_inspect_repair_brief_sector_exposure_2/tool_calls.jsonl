@@ -1,0 +1,3 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"sector": "Technology"}, "widget_uuid": "widget_002"}, "tool": "update_widget"}
+{"args": {"dashboard_id": "dash_001", "data": "Repaired the sector_exposure widget (widget_002): changed data_args sector from Consumer Staples to Technology. Kept the companion risk_metrics widget (widget_001) on the dashboard.", "inner_tab": "", "name": "Sector Exposure Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

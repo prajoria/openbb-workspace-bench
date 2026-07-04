@@ -1,0 +1,3 @@
+{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_002", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_002", "dashboard_name": "Ops Control Room", "operation": "instantiate", "template_id": "fund-operations-control-tower"}, "tool": "manage_apps"}

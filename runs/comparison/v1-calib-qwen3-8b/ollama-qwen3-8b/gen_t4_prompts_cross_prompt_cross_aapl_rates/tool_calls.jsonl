@@ -1,0 +1,7 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"name": "Prompt Cross AAPL Rates", "operation": "create"}, "tool": "manage_dashboard"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"dashboard_id": "dash_002", "data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data_args": {"series": "DGS10"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data": "AAPL (Apple Inc.) and DGS10 (10-Year Treasury Constant Maturity Rate) are being compared in this dashboard. Current dashboard: Prompt Cross AAPL Rates.", "widget_type": "note"}, "tool": "add_generative_widget"}

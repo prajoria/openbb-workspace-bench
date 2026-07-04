@@ -1,0 +1,2 @@
+{"action": {"args": {"widget_id": "portfolio_command_center_overview_top_alerts"}, "done": false, "tool": "delete_widget"}, "content": "{\"done\": false, \"tool\": \"delete_widget\", \"args\": {\"widget_id\": \"portfolio_command_center_overview_top_alerts\"}}", "turn": 1}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 2}

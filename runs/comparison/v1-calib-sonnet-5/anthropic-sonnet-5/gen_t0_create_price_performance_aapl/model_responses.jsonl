@@ -1,0 +1,3 @@
+{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\": false, \"tool\": \"get_workspace_snapshot\", \"args\": {}}", "turn": 1}
+{"action": {"args": {"dashboard_id": "dash_001", "data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "done": false, "tool": "create_widget"}, "content": "{\"done\": false, \"tool\": \"create_widget\", \"args\": {\"origin\": \"Bench Equities\", \"widget_id\": \"price_performance\", \"data_args\": {\"symbol\": \"AAPL\"}, \"dashboard_id\": \"dash_001\"}}", "turn": 2}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

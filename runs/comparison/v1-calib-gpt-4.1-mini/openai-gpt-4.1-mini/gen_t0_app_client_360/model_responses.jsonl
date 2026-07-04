@@ -1,0 +1,3 @@
+{"action": {"args": {"operation": "list"}, "done": false, "tool": "manage_backends"}, "content": "{\"done\":false,\"tool\":\"manage_backends\",\"args\":{\"operation\":\"list\"}}", "turn": 1}
+{"action": {"args": {"app_name": "Client 360", "backend_id": "backend_001", "dashboard_name": "Client Review Workspace", "operation": "instantiate"}, "done": false, "tool": "manage_apps"}, "content": "{\"done\":false,\"tool\":\"manage_apps\",\"args\":{\"operation\":\"instantiate\",\"app_name\":\"Client 360\",\"backend_id\":\"backend_001\",\"dashboard_name\":\"Client Review Workspace\"}}", "turn": 2}
+{"action": {"done": true}, "content": "{\"done\":true}", "turn": 3}

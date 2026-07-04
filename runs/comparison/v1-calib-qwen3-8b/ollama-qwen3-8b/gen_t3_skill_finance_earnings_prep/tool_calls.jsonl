@@ -1,0 +1,6 @@
+{"args": {"slug": "finance-earnings-prep"}, "tool": "get_skill_content"}
+{"args": {"chart_params": {"chartType": "estimate_history", "data_args": {"symbol": "AAPL"}}, "name": "Estimate History", "widget_type": "chart"}, "tool": "add_generative_widget"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
+{"args": {"data": "Earnings prep workflow steps applied to Estimate History widget (AAPL):\n1. Compare internal estimates to street numbers\n2. Identify surprise drivers\n3. Review guidance\n4. Inspect transcript tone\n5. Produce action items for portfolio manager", "name": "Workflow Steps", "widget_type": "note"}, "tool": "add_generative_widget"}

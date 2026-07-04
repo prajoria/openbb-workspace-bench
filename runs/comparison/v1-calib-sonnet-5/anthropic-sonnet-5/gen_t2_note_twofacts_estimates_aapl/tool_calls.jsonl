@@ -1,0 +1,3 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_data"}
+{"args": {"dashboard_id": "dash_001", "data": "For 2026Q1, AAPL's EPS estimate is 2.31 and the revenue estimate is 94.8B.", "description": "Key AAPL estimates for 2026Q1 from the estimate history widget.", "inner_tab": "overview", "name": "AAPL 2026Q1 Estimates", "widget_type": "note"}, "tool": "add_generative_widget"}

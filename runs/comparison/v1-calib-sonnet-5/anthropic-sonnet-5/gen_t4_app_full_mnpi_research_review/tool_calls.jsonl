@@ -1,0 +1,8 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_001", "dashboard_name": "MNPI Control Desk", "operation": "instantiate", "template_id": "mnpi-research-review"}, "tool": "manage_apps"}
+{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "research"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "mnpi_research_review_research_reviewer_comments"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "origin": "Bench Stark Enterprise", "ui_args": {"tab_id": "research"}, "widget_id": "mnpi_research_review_research_reviewer_comments"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data": "This note tracks the Reviewer Comments widget on the Research tab of the MNPI Control Desk dashboard. Reviewer comments must be reviewed and documented, and each research item requires formal sign off from the designated compliance reviewer before the draft research review or price target approval can move to Approved or Closed status. Ensure all reviewer comments are addressed and sign off is recorded in the Evidence and Sign-Off History before publication.", "inner_tab": "research", "name": "Reviewer Comments Sign-Off Note", "widget_type": "note"}, "tool": "add_generative_widget"}

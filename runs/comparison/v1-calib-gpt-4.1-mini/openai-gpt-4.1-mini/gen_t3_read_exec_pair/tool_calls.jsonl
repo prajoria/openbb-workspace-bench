@@ -1,0 +1,3 @@
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "execution_desk_fills_fills_table"}, "tool": "get_widget_data"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "execution_desk_fills_broker_scorecard"}, "tool": "get_widget_data"}
+{"args": {"data": "I reviewed the data from execution_desk_fills_fills_table and execution_desk_fills_broker_scorecard.", "name": "Data Review Note", "tab_id": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

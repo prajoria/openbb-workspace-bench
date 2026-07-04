@@ -1,0 +1,7 @@
+{"args": {"uri": "openbb://workspace/skills/finance-comps"}, "tool": "read_workspace_resource"}
+{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
+{"args": {"cmd": ["bash", "-lc", "echo test"]}, "tool": "container.exec"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"data": "The Finance Comps workflow includes defining the peer set for comparison.", "description": "Peer Set Note", "widget_type": "note"}, "tool": "add_generative_widget"}

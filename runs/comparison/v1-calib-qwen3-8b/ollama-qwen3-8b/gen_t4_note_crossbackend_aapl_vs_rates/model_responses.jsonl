@@ -1,0 +1,3 @@
+{"action": {"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "done": false, "tool": "get_widget_data"}, "content": "{\"done\": false, \"tool\": \"get_widget_data\", \"args\": {\"origin\": \"Bench Equities\", \"widget_id\": \"price_performance\"}}", "turn": 1}
+{"action": {"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "done": false, "tool": "get_widget_data"}, "content": "{\"done\": false, \"tool\": \"get_widget_data\", \"args\": {\"origin\": \"Bench Macro\", \"widget_id\": \"macro_timeseries\"}}", "turn": 2}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

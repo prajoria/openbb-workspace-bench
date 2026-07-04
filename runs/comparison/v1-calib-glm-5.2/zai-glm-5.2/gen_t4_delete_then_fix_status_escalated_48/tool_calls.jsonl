@@ -1,0 +1,4 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"widget_uuid": "widget_002"}, "tool": "delete_widget"}
+{"args": {"data_args": {"status": "Escalated"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
+{"args": {"data": "Vendor SLA Status has been repaired. The remaining widget is now set to Escalated status.", "name": "Repaired Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,6 @@
+{"args": {"name": "equities", "operation": "add", "url": "Bench Equities"}, "tool": "manage_backends"}
+{"args": {"name": "macro", "operation": "add", "url": "Bench Macro"}, "tool": "manage_backends"}
+{"args": {"origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"limit": 5, "symbol": "MSFT"}, "origin": "Bench Equities", "ui_args": {"grid_data": {"h": 10, "w": 20}}, "widget_id": "latest_news"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Macro", "ui_args": {"grid_data": {"h": 10, "w": 20}}, "widget_id": "yield_curve"}, "tool": "create_widget"}

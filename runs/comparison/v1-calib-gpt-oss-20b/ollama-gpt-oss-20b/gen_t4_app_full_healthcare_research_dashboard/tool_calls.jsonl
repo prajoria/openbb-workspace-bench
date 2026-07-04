@@ -1,0 +1,4 @@
+{"args": {"name": "", "operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_001", "dashboard_name": "Biotech Catalyst Desk", "operation": "instantiate", "template_id": "healthcare-research-dashboard"}, "tool": "manage_apps"}
+{"args": {"data": "This note highlights the Regulatory Timeline and associated catalysts for the current therapeutic area.", "inner_tab": "clinical", "name": "Regulatory Timeline Note", "widget_type": "note"}, "tool": "add_generative_widget"}

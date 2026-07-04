@@ -1,0 +1,6 @@
+{"args": {"slug": "finance-comps"}, "tool": "get_skill_content"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "create_widget"}
+{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_data"}
+{"args": {"data": "NVDA Fundamental Metrics (Bench Equities): gross_margin = 0.742, net_cash_b = 31.3, buyback_yield = 0.004. Per the finance-comps workflow, NVDA's gross_margin of 0.742 stands out as a key metric supporting a premium valuation multiple relative to peers, reflecting strong operating efficiency.", "inner_tab": "overview", "name": "NVDA Fundamental Metrics Note", "widget_type": "note"}, "tool": "add_generative_widget"}

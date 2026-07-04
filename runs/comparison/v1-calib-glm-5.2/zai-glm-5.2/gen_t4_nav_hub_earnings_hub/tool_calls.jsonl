@@ -1,0 +1,8 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "name": "Earnings Hub", "operation": "update"}, "tool": "manage_dashboard"}
+{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Estimates"}]}, "tool": "manage_navigation_bar"}
+{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "estimates"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_001", "data": "This Estimates tab is part of the Earnings Hub dashboard. It tracks quarterly EPS and revenue estimates for AAPL, providing key insight into analyst expectations ahead of upcoming earnings.", "inner_tab": "estimates", "widget_type": "note"}, "tool": "add_generative_widget"}

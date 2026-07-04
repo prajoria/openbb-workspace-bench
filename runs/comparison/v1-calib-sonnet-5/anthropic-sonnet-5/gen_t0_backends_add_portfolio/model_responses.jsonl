@@ -1,0 +1,3 @@
+{"action": {"args": {"name": "portfolio", "operation": "add", "url": "Bench Portfolio"}, "done": false, "tool": "manage_backends"}, "content": "{\"done\": false, \"tool\": \"manage_backends\", \"args\": {\"operation\": \"add\", \"name\": \"portfolio\", \"url\": \"Bench Portfolio\"}}", "turn": 1}
+{"action": {"args": {"operation": "list"}, "done": false, "tool": "manage_backends"}, "content": "{\"done\": false, \"tool\": \"manage_backends\", \"args\": {\"operation\": \"list\"}}", "turn": 2}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

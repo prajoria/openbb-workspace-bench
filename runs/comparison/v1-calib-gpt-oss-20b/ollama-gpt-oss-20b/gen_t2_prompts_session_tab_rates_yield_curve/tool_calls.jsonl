@@ -1,0 +1,7 @@
+{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
+{"args": {"operation": "add_tabs", "tabs": [{"name": "Rates"}]}, "tool": "manage_navigation_bar"}
+{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "rates"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "create_widget"}
+{"args": {"data": "Rates: This tab displays the US Treasury yield curve.", "description": "Note on Rates tab", "widget_type": "note"}, "tool": "add_generative_widget"}

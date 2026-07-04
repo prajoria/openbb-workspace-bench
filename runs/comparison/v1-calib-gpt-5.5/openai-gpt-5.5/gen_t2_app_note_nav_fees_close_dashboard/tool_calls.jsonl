@@ -1,0 +1,5 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "Monthly Close Control", "operation": "instantiate", "template_id": "nav-fees-close-dashboard"}, "tool": "manage_apps"}
+{"args": {"operation": "tab", "tab_id": "close"}, "tool": "navigate_workspace"}
+{"args": {"dashboard_id": "dash_002", "data": "Close checklist and exceptions: review the Close Exceptions, Close Notes, and Close Dependency Register on the Close tab for Monthly Close Control; confirm all close checklist items are assigned, dependencies are tracked, and any open exceptions are documented for follow-up.", "inner_tab": "close", "name": "Close Checklist and Exceptions Note", "widget_type": "note"}, "tool": "add_generative_widget"}

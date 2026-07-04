@@ -1,0 +1,3 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_data"}
+{"args": {"dashboard_id": "dash_001", "data": "AAPL latest close: 196.1 on 2026-01-15.", "name": "AAPL Latest Close", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,4 @@
+{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"widget_uuid": "widget_002"}, "tool": "delete_widget"}
+{"args": {"data": "Duplicate Estimate History widget removed.", "description": "Note about duplicate removal.", "widget_type": "note"}, "tool": "add_generative_widget"}

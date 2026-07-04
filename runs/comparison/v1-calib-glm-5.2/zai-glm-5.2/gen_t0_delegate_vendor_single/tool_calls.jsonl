@@ -1,0 +1,1 @@
+{"args": {"task_requests": [{"assigned_agent_id": "triage-analyst", "assigned_holder_url": "Bench Stark Enterprise", "description": "Triage the open vendor incident log by severity.", "id": "triage-analyst"}]}, "tool": "assign_tasks_to_agents"}

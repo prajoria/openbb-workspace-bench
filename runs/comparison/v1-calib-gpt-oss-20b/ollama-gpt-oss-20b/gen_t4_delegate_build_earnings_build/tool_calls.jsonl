@@ -1,0 +1,4 @@
+{"args": {"task_requests": [{"assigned_agent_id": "revisions-analyst", "assigned_holder_url": "", "description": "Revisions workstream for earnings build", "id": "rev_task"}, {"assigned_agent_id": "reaction-analyst", "assigned_holder_url": "", "description": "Reaction workstream for earnings build", "id": "react_task"}]}, "tool": "assign_tasks_to_agents"}
+{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
+{"args": {"cmd": ["bash", "-lc", "echo test"]}, "tool": "container.exec"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}

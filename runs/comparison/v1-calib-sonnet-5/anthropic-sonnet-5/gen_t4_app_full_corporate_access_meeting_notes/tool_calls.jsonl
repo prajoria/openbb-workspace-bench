@@ -1,0 +1,7 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_001", "dashboard_name": "Corporate Access Log", "operation": "instantiate", "template_id": "corporate-access-meeting-notes"}, "tool": "manage_apps"}
+{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "meetings"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "corporate_access_meeting_notes_meetings_expert_calls"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "data": "This Meetings tab tracks expert calls and the meeting calendar for corporate access activity. The Expert Calls widget (corporate_access_meeting_notes_meetings_expert_calls) logs expert network engagements, topics, attendees, and status, while the Meeting Calendar widget (corporate_access_meeting_notes_meetings_meeting_calendar) tracks scheduled company meetings and upcoming access metrics. Use both together to monitor upcoming and completed expert calls alongside the broader meeting calendar for compliance and research follow-up.", "inner_tab": "meetings", "name": "Meetings Tab Notes", "widget_type": "note"}, "tool": "add_generative_widget"}

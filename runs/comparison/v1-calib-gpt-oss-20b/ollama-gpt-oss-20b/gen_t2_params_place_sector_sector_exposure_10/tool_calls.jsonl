@@ -1,0 +1,9 @@
+{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
+{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
+{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}

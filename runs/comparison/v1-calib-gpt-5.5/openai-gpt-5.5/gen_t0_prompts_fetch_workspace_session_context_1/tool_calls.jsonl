@@ -1,0 +1,2 @@
+{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
+{"args": {"data": "Workspace session context guidance reviewed. Note: current-dashboard current-tab session grounding.", "description": "Prompt review note for workspace_session_context", "name": "Workspace Session Context Note", "widget_type": "note"}, "tool": "add_generative_widget"}

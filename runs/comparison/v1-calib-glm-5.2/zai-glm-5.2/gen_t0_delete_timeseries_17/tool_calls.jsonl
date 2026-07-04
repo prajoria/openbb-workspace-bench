@@ -1,0 +1,2 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"widget_uuid": "widget_001"}, "tool": "delete_widget"}

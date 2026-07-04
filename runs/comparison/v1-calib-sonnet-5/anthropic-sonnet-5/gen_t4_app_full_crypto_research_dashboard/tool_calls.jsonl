@@ -1,0 +1,8 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_001", "dashboard_name": "Digital Assets Desk", "operation": "instantiate", "template_id": "crypto-research-dashboard"}, "tool": "manage_apps"}
+{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "market"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "crypto_research_dashboard_market_crypto_market_metrics"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "data_args": {"chain": "Ethereum", "crypto_asset": "BTC", "period": "YTD"}, "origin": "Bench Stark Enterprise", "ui_args": {"tab_id": "market"}, "widget_id": "crypto_research_dashboard_market_crypto_market_metrics"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data": "This note highlights the Crypto Market Metrics widget on the Market tab, which tracks key market metrics for the BTC token on the Ethereum chain over the YTD period, including primary value 23.79 (change 0.0353), secondary value 87.7 (change 0.0123), threshold value 20.22 (change -0.0727), and watchlist value 7.18 (change -0.0682).", "inner_tab": "market", "name": "Market Metrics Note", "widget_type": "note"}, "tool": "add_generative_widget"}

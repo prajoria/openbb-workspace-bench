@@ -1,0 +1,2 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "create_widget"}

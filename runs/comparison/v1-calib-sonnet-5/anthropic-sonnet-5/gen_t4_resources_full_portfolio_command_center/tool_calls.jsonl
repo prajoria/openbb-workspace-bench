@@ -1,0 +1,7 @@
+{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "dashboard_name": "PM Resource Command", "operation": "instantiate", "template_id": "portfolio-command-center"}, "tool": "manage_apps"}
+{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "holdings"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_holdings_sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "ui_args": {"tab_id": "holdings"}, "widget_id": "portfolio_command_center_holdings_sector_exposure"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data": "This note is part of the PM Resource Command dashboard, built from the Portfolio Command Center app on the Bench Stark Enterprise resource. The Holdings tab now includes the Sector Exposure widget (portfolio_command_center_holdings_sector_exposure), which tracks sector exposure across funds such as Flagship Long/Short (YTD exposure 0.0389, change -0.0767) and Global Opportunities (QTD exposure 0.1147, change 0.0768). Use this sector exposure data alongside the other holdings resources to monitor concentration risk.", "inner_tab": "holdings", "name": "PM Resource Command Note", "widget_type": "note"}, "tool": "add_generative_widget"}

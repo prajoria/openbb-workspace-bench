@@ -1,0 +1,2 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"task_requests": [{"assigned_agent_id": "stress-analyst", "assigned_holder_url": "http://127.0.0.1:9104", "description": "Run the historical stress scenarios and summarize losses.", "id": "stress-analyst"}]}, "tool": "assign_tasks_to_agents"}

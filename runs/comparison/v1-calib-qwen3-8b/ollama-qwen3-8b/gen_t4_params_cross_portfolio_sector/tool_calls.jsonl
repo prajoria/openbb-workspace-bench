@@ -1,0 +1,4 @@
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "param_name": "sector", "widget_id": "sector_exposure"}, "tool": "get_params_options"}
+{"args": {"origin": "Bench Macro", "param_name": "series", "widget_id": "macro_timeseries"}, "tool": "get_params_options"}

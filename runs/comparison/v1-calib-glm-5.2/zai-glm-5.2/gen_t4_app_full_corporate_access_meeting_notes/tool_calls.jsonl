@@ -1,0 +1,5 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_001", "dashboard_name": "Corporate Access Log", "operation": "instantiate", "template_id": "corporate-access-meeting-notes"}, "tool": "manage_apps"}
+{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "meetings"}, "tool": "navigate_workspace"}
+{"args": {"dashboard_id": "dash_002", "data": "This Meetings tab consolidates corporate access activity. The Expert Calls widget tracks scheduled and completed expert call engagements, while the Meeting Calendar provides a comprehensive view of upcoming and past company meetings. Together, expert calls and the meeting calendar ensure all corporate access interactions are logged and monitored for compliance.", "inner_tab": "meetings", "name": "Meetings Tab Note", "widget_type": "note"}, "tool": "add_generative_widget"}

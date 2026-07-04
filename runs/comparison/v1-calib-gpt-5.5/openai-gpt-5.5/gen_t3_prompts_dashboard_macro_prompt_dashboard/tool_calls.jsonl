@@ -1,0 +1,8 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"activate": true, "name": "Macro Prompt Dashboard", "operation": "create"}, "tool": "manage_dashboard"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"series": "DGS2"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
+{"args": {"data_args": {}, "origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "create_widget"}
+{"args": {"data": "DGS2 was added using Bench Macro/macro_timeseries with data_args {\"series\":\"DGS2\"}. The yield_curve widget was added after schema-before-create workspace tool discipline: schema was read first, then the widget was created.", "description": "Note mentioning DGS2 and schema.", "name": "DGS2 schema note", "widget_type": "note"}, "tool": "add_generative_widget"}

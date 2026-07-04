@@ -1,0 +1,10 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
+{"args": {"activate": true, "name": "Prompt Cross Book CPI", "operation": "create"}, "tool": "manage_dashboard"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "data_args": {}, "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data_args": {"series": "CPIAUCSL"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data": "This current-dashboard combines Bench Portfolio sector exposure data with Bench Macro CPIAUCSL series data to review portfolio risk against inflation trends.", "description": "Cross-backend note linking sector exposure and CPIAUCSL macro data on the current-dashboard.", "name": "Cross-Book CPI Note", "widget_type": "note"}, "tool": "add_generative_widget"}

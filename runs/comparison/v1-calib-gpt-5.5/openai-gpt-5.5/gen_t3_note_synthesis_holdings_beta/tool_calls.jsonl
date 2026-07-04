@@ -1,0 +1,3 @@
+{"args": {"data_args": {}, "origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "get_widget_data"}
+{"args": {"data_args": {}, "origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "get_widget_data"}
+{"args": {"data": "Largest position weight: MSFT has weight 0.34. Portfolio beta: 1.18 from metric portfolio_beta.", "description": "Synthesis of holdings_table and risk_metrics data", "name": "Holdings Beta Synthesis", "widget_type": "note"}, "tool": "add_generative_widget"}

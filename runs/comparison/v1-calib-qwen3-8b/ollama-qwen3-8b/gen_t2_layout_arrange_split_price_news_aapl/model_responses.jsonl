@@ -1,0 +1,3 @@
+{"action": {"args": {"h": 12, "w": 18, "widget_id": "price_performance", "x": 0, "y": 0}, "done": false, "tool": "update_widget_layout"}, "content": "{\"done\": false, \"tool\": \"update_widget_layout\", \"args\": {\"widget_id\": \"price_performance\", \"h\": 12, \"w\": 18, \"x\": 0, \"y\": 0}}", "turn": 1}
+{"action": {"args": {"h": 12, "w": 18, "widget_id": "latest_news", "x": 18, "y": 0}, "done": false, "tool": "update_widget_layout"}, "content": "{\"done\": false, \"tool\": \"update_widget_layout\", \"args\": {\"widget_id\": \"latest_news\", \"h\": 12, \"w\": 18, \"x\": 18, \"y\": 0}}", "turn": 2}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

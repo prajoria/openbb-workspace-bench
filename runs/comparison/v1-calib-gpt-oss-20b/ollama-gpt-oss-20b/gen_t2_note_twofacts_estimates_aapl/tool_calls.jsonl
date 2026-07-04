@@ -1,0 +1,2 @@
+{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_data"}
+{"args": {"data": "The 2026Q1 EPS estimate is $2.31, and the revenue estimate is $94.8B.", "inner_tab": "overview", "name": "Two-Fact Note: Estimates Aapl", "widget_type": "note"}, "tool": "add_generative_widget"}

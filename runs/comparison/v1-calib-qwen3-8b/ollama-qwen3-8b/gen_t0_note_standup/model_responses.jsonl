@@ -1,0 +1,2 @@
+{"action": {"args": {"data": "the desk meeting moved to 9am and the risk review is at noon.", "name": "Morning Standup", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"widget_type\": \"note\", \"name\": \"Morning Standup\", \"data\": \"the desk meeting moved to 9am and the risk review is at noon.\"}}", "turn": 1}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 2}

@@ -1,0 +1,6 @@
+{"args": {"reason": "Read the required earnings prep workflow before adding widgets.", "slug": "finance-earnings-prep"}, "tool": "get_skill_content"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
+{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_data"}
+{"args": {"data": "Following the finance-earnings-prep workflow, compare internal estimates to street numbers and identify surprise drivers for MSFT. Estimate History shows 2026Q1 eps_estimate is 3.42 and revenue_estimate_b is 71.2; later quarters include 2026Q2 eps_estimate 3.55 and 2026Q3 eps_estimate 3.72.", "description": "Grounded note citing exact MSFT Estimate History values.", "name": "MSFT Earnings Prep Note", "widget_type": "note"}, "tool": "add_generative_widget"}

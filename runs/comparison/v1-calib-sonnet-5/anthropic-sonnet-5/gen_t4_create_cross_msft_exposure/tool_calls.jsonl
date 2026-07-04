@@ -1,0 +1,9 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Equities", "param_name": "symbol", "widget_id": "latest_news"}, "tool": "get_params_options"}
+{"args": {"data_args": {"limit": 5, "symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {}, "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"data": "This dashboard tracks MSFT news alongside portfolio sector exposure to assess how Microsoft's technology sector exposure relates to overall portfolio risk.", "name": "MSFT Sector Exposure Note", "widget_type": "note"}, "tool": "add_generative_widget"}

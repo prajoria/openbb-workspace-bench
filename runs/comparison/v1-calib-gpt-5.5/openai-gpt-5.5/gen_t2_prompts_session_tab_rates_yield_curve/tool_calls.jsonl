@@ -1,0 +1,7 @@
+{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
+{"args": {"operation": "add_tabs", "tabs": [{"name": "Rates"}]}, "tool": "manage_navigation_bar"}
+{"args": {"operation": "tab", "tab_id": "rates"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {}, "origin": "Bench Macro", "ui_args": {"tab_id": "rates"}, "widget_id": "yield_curve"}, "tool": "create_widget"}
+{"args": {"data": "Rates tab note: created Bench Macro/yield_curve on the Rates tab, grounded in workspace_session_context guidance with current-dashboard current-tab session grounding.", "inner_tab": "rates", "name": "Rates note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,2 @@
+{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "widget_id": "strategy_health_monitor_performance_strategy_health_metrics"}, "tool": "get_widget_data"}
+{"args": {"data": "Reviewed data from strategy_health_monitor_performance_strategy_health_metrics for Flagship Long/Short (YTD). Primary metric: 84.92 (change: -0.065), Secondary metric: 66.14 (change: -0.0256), Threshold: 76.18 (change: -0.0738).", "inner_tab": "main", "name": "Strategy Health Review Note", "widget_type": "note"}, "tool": "add_generative_widget"}

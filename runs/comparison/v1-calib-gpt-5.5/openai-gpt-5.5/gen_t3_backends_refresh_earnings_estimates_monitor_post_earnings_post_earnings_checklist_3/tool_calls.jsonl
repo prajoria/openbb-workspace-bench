@@ -1,0 +1,6 @@
+{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "refresh"}, "tool": "manage_backends"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist"}, "tool": "create_widget"}
+{"args": {"data": "Backend refresh completed for Bench Stark Enterprise (backend_001) after registering backend name stark-enterprise. Added widget earnings_estimates_monitor_post_earnings_post_earnings_checklist from Bench Stark Enterprise: Post-Earnings Checklist for Earnings & Estimates Monitor.", "description": "Documents backend refresh before adding the post-earnings checklist.", "name": "Backend Refresh Note", "widget_type": "note"}, "tool": "add_generative_widget"}

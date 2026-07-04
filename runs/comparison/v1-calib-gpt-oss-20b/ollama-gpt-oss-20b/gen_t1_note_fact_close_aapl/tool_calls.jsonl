@@ -1,0 +1,4 @@
+{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
+{"args": {"line_end": 20, "line_start": 1, "path": ""}, "tool": "repo_browser.open_file"}
+{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_data"}
+{"args": {"data": "AAPL closed at $196.1 on 2026-01-15.", "description": "Latest closing price for AAPL.", "widget_type": "note"}, "tool": "add_generative_widget"}

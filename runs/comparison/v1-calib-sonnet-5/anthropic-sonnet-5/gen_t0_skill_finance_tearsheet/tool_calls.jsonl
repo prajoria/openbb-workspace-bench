@@ -1,0 +1,2 @@
+{"args": {"reason": "Retrieve Finance Tearsheet skill content as requested", "slug": "finance-tearsheet"}, "tool": "get_skill_content"}
+{"args": {"data": "Skill: Finance Tearsheet (slug: finance-tearsheet)\n\nDescription: Create a concise company or asset tear sheet with valuation, catalysts, risks, and ownership context.\n\nContent: Tearsheet workflow: gather price action, fundamentals, valuation, catalysts, risks, ownership, and a short investment conclusion.", "name": "Finance Tearsheet Skill", "widget_type": "note"}, "tool": "add_generative_widget"}

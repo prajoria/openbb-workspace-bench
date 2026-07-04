@@ -1,0 +1,5 @@
+{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\": false, \"tool\": \"get_workspace_snapshot\", \"args\": {}}", "turn": 1}
+{"action": {"args": {}, "done": false, "tool": "update_widget"}, "content": "{\"done\": false, \"tool\": \"update_widget\"}", "turn": 2}
+{"action": {"args": {}, "done": false, "tool": "update_widget"}, "content": "{\"done\": false, \"tool\": \"update_widget\"}", "turn": 3}
+{"action": {"args": {}, "done": false, "tool": "update_widget"}, "content": "{\"done\": false, \"tool\": \"update_widget\"}", "turn": 4}
+{"action": {"args": {}, "done": false, "tool": "update_widget"}, "content": "{\"done\": false, \"tool\": \"update_widget\"}", "turn": 5}

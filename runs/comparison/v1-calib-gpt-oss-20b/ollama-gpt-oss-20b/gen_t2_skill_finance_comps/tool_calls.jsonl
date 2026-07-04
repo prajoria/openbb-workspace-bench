@@ -1,0 +1,4 @@
+{"args": {"line_end": 20, "line_start": 1, "path": ""}, "tool": "repo_browser.open_file"}
+{"args": {"slug": "finance-comps"}, "tool": "get_skill_content"}
+{"args": {"operation": "add_tabs", "tabs": [{"name": "Comps"}]}, "tool": "manage_navigation_bar"}
+{"args": {"data": "Comps workflow: define the peer set, normalize metrics, compare valuation multiples, and explain why outliers deserve premium or discount.", "inner_tab": "comps", "widget_type": "note"}, "tool": "add_generative_widget"}

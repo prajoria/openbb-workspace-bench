@@ -1,0 +1,6 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "name": "Desk Hub", "operation": "update"}, "tool": "manage_dashboard"}
+{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "News"}]}, "tool": "manage_navigation_bar"}
+{"args": {"chart_params": {"chartType": "chart", "xKey": "date", "yKey": "price"}, "data": "Latest News for NVDA", "inner_tab": "news", "widget_type": "chart"}, "tool": "add_generative_widget"}
+{"args": {"data_args": {"limit": 5, "symbol": "NVDA"}, "inner_tab": "news", "origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "create_widget"}
+{"args": {"data": "Latest news updates for Desk Hub", "inner_tab": "news", "name": "Note on News and Desk Hub", "widget_type": "note"}, "tool": "add_generative_widget"}

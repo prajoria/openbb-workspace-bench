@@ -1,0 +1,9 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "corporate_access_meeting_notes_claims_evidence_and_sign_off_history"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Stark Enterprise", "param_name": "sector", "widget_id": "corporate_access_meeting_notes_claims_evidence_and_sign_off_history"}, "tool": "get_params_options"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "corporate_access_meeting_notes_claims_management_claims_tracker"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"sector": "Communication Services"}, "origin": "Bench Stark Enterprise", "ui_args": {"h": 14, "w": 20, "x": 0, "y": 0}, "widget_id": "corporate_access_meeting_notes_claims_evidence_and_sign_off_history"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"sector": "Communication Services"}, "origin": "Bench Stark Enterprise", "ui_args": {"h": 14, "w": 20, "x": 20, "y": 0}, "widget_id": "corporate_access_meeting_notes_claims_management_claims_tracker"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_001", "h": 14, "tab_id": "", "w": 20, "widget_uuid": "widget_002", "x": 0, "y": 0}, "tool": "update_widget_layout"}
+{"args": {"dashboard_id": "dash_001", "h": 14, "tab_id": "", "w": 20, "widget_uuid": "widget_003", "x": 20, "y": 0}, "tool": "update_widget_layout"}

@@ -1,0 +1,2 @@
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "execution_desk_blotter_order_status_metrics"}, "tool": "get_widget_data"}
+{"args": {"data": "Reviewed data from execution_desk_blotter_order_status_metrics", "name": "Order Status Review", "tab_id": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

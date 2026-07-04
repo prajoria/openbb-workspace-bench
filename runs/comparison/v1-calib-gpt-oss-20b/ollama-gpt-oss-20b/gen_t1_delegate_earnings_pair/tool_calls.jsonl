@@ -1,0 +1,1 @@
+{"args": {"task_requests": [{"assigned_agent_id": "coverage-analyst", "assigned_holder_url": "", "description": "Prepare earnings pair analysis.", "id": "task-coverage"}, {"assigned_agent_id": "model-analyst", "assigned_holder_url": "", "description": "Prepare earnings pair analysis.", "id": "task-model"}]}, "tool": "assign_tasks_to_agents"}

@@ -1,0 +1,5 @@
+{"args": {"uri": "openbb://workspace/skills/finance-tearsheet"}, "tool": "read_workspace_resource"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "create_widget"}
+{"args": {"data": "Based on the Finance Tearsheet skill resource, this tearsheet covers valuation, catalysts, risks, and ownership context for MSFT. The fundamental metrics widget above provides gross margin, net cash, and buyback data that feed into the valuation assessment.", "name": "Valuation Note", "widget_type": "note"}, "tool": "add_generative_widget"}

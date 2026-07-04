@@ -1,0 +1,3 @@
+{"args": {"name": "equities", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "refresh"}, "tool": "manage_backends"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "create_widget"}

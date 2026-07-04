@@ -1,0 +1,5 @@
+{"args": {"dashboard_id": "Incomplete Review", "operation": "add_tabs", "tabs": [{"name": "Estimates"}]}, "tool": "manage_navigation_bar"}
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Estimates"}]}, "tool": "manage_navigation_bar"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "tab_id": "estimates", "widget_id": "estimate_history"}, "tool": "create_widget"}

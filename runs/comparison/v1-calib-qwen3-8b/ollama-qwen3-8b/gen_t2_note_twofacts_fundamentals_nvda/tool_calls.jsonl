@@ -1,0 +1,2 @@
+{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_data"}
+{"args": {"dashboard_id": null, "data": "Gross Margin: 0.462, Buyback Yield: 0.034", "description": "NVDA Fundamentals Note", "inner_tab": "overview", "name": "NVDA Fundamentals Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,7 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"name": "Prompt Cross NVDA Holdings", "operation": "create"}, "tool": "manage_dashboard"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"dashboard_id": "dash_002", "data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data": "NVDA holdings analysis in the current dashboard: <br>1. Estimate History (Bench Equities) shows quarterly EPS/revenue forecasts<br>2. Holdings Table (Bench Portfolio) displays portfolio weightings and market values<br>3. This dashboard compares NVDA's financial metrics against portfolio allocations", "widget_type": "note"}, "tool": "add_generative_widget"}

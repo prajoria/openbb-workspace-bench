@@ -1,0 +1,2 @@
+{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "widget_id": "execution_desk_blotter_order_status_metrics"}, "tool": "get_widget_data"}
+{"args": {"data": "Reviewed execution_desk_blotter_order_status_metrics data for Flagship Long/Short (YTD). The widget reports Order Status Metrics primary at 157 (change 0.0434) and Order Status Metrics secondary at 205 (change 0.0275). Data review complete.", "inner_tab": "main", "name": "Order Status Metrics Review Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,9 @@
+{"args": {"slug": "finance-comps"}, "tool": "get_skill_content"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {}, "tool": "get_widget_schema"}
+{"args": {}, "tool": "get_widget_schema"}
+{"args": {}, "tool": "get_widget_schema"}
+{"args": {}, "tool": "get_widget_schema"}
+{"args": {}, "tool": "get_widget_schema"}
+{"args": {}, "tool": "get_widget_schema"}
+{"args": {}, "tool": "get_widget_schema"}

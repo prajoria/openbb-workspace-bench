@@ -1,0 +1,4 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"backend_id": "backend_001", "dashboard_name": "MNPI Control Desk", "operation": "instantiate", "template_id": "mnpi-research-review"}, "tool": "manage_apps"}
+{"args": {"dashboard_id": "dash_002", "data": "Reviewer comments must be addressed and documented before research sign off. All reviewer comments on the Research tab should be resolved and acknowledged by the compliance reviewer prior to final sign off.", "inner_tab": "research", "name": "Reviewer Comments & Sign Off Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,2 @@
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "execution_desk_fills_fills_table"}, "tool": "get_widget_data"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "execution_desk_fills_broker_scorecard"}, "tool": "get_widget_data"}

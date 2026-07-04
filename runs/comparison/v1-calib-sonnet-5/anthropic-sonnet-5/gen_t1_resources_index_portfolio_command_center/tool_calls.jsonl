@@ -1,0 +1,2 @@
+{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
+{"args": {"data": "Portfolio Command Center template id: portfolio-command-center. Backend: Bench Stark Enterprise. Description: Morning command center for fund-level P&L, holdings, exposures, attribution, and investable actions. Tabs: actions, attribution, holdings, overview.", "name": "Portfolio Command Center App", "widget_type": "note"}, "tool": "add_generative_widget"}

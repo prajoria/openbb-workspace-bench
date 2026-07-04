@@ -1,0 +1,2 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"h": 10, "w": 16, "widget_id": "latest_news", "x": 24, "y": 0}, "tool": "update_widget_layout"}

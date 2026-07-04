@@ -1,0 +1,2 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"data": "This note references the stable phrase: schema-before-create workspace tool discipline.", "name": "Schema Note", "widget_type": "note"}, "tool": "add_generative_widget"}

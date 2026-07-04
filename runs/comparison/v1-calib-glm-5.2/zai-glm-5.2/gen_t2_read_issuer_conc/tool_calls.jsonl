@@ -1,0 +1,2 @@
+{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_holdings_issuer_concentration"}, "tool": "get_widget_data"}
+{"args": {"data": "Issuer Concentration Data Review\n\nWidget ID: portfolio_command_center_holdings_issuer_concentration\nField: score\n\n- AAPL: score = 94.45\n- XOM: score = 57.23", "inner_tab": "main", "name": "Issuer Concentration Score Note", "widget_type": "note"}, "tool": "add_generative_widget"}

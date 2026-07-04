@@ -1,0 +1,3 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"limit": 5, "symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "create_widget"}

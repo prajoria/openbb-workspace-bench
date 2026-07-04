@@ -1,0 +1,2 @@
+{"args": {"h": 12, "w": 18, "widget_id": "price_performance", "x": 0, "y": 0}, "tool": "update_widget_layout"}
+{"args": {"h": 12, "w": 18, "widget_id": "latest_news", "x": 18, "y": 0}, "tool": "update_widget_layout"}

@@ -1,0 +1,3 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"data_args": {}, "origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "get_widget_data"}
+{"args": {"dashboard_id": "dash_001", "data": "Largest position: MSFT with exact weight 0.34 from the holdings_table data.", "description": "Largest position from holdings_table data", "inner_tab": "", "name": "Top Holding Note", "widget_type": "note"}, "tool": "add_generative_widget"}

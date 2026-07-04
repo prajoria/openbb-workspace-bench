@@ -1,0 +1,3 @@
+{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "YTD", "raw": true}, "origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_dashboard_var_trend"}, "tool": "get_widget_data"}
+{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_dashboard_drawdown"}, "tool": "get_widget_data"}
+{"args": {"data": "Reviewed VaR Trend (risk_exposure_monitor_dashboard_var_trend) and Drawdown (risk_exposure_monitor_dashboard_drawdown) data.", "inner_tab": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

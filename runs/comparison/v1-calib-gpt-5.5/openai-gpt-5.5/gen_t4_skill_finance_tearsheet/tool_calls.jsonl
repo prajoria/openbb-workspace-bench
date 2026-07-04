@@ -1,0 +1,6 @@
+{"args": {"reason": "Follow the requested equity tearsheet workflow before adding the AAPL Price Performance widget and grounded note.", "slug": "finance-tearsheet"}, "tool": "get_skill_content"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "create_widget"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_data"}
+{"args": {"data": "Finance Tearsheet price action note: the Bench Equities price_performance widget for AAPL shows the latest row date 2026-01-15 with close 196.1 and return_pct 0.014.", "description": "Grounded note from Bench Equities price_performance data for AAPL.", "name": "AAPL Price Performance Note", "widget_type": "note"}, "tool": "add_generative_widget"}

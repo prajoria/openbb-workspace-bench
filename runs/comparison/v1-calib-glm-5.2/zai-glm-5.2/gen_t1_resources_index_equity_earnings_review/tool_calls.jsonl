@@ -1,0 +1,2 @@
+{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
+{"args": {"data": "Equity Earnings Review template id: equity-earnings-review. Two-tab earnings dashboard with prices, news, estimates, and fundamentals. Backend: Bench Equities. Tabs: estimates, overview.", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,6 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Macro", "param_name": "series", "widget_id": "macro_timeseries"}, "tool": "get_params_options"}
+{"args": {"data_args": {"series": "FEDFUNDS"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
+{"args": {"h": 10, "w": 20, "widget_uuid": "widget_001", "x": 0, "y": 2}, "tool": "update_widget_layout"}

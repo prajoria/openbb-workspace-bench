@@ -1,0 +1,6 @@
+{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
+{"args": {"backend_id": "backend_001", "dashboard_name": "Client Resource Command", "operation": "instantiate", "template_id": "client-360"}, "tool": "manage_apps"}
+{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "flows"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "client_360_flows_pipeline_by_stage"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "data_args": {"client": "Atlas Pension", "period": "YTD", "region": "Americas"}, "origin": "Bench Stark Enterprise", "ui_args": {"tab_id": "flows"}, "widget_id": "client_360_flows_pipeline_by_stage"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data": "This note highlights the pipeline by stage data added to the Client Resource Command dashboard as part of the Client 360 resource for tracking client pipeline progress across stages.", "description": "Note on pipeline and resource tracking for Flows tab.", "inner_tab": "flows", "name": "Flows Note", "widget_type": "note"}, "tool": "add_generative_widget"}

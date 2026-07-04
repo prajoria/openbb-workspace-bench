@@ -1,0 +1,2 @@
+{"action": {"args": {"origin": "Bench Stark Enterprise", "widget_id": "execution_desk_fills_broker_scorecard"}, "done": false, "tool": "get_widget_data"}, "content": "{\"done\": false, \"tool\": \"get_widget_data\", \"args\": {\"origin\": \"Bench Stark Enterprise\", \"widget_id\": \"execution_desk_fills_broker_scorecard\"}}", "turn": 1}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 2}

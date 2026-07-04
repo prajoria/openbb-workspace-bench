@@ -1,0 +1,3 @@
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "stress_liquidity_lab_liquidity_days_to_liquidate"}, "tool": "get_widget_data"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "stress_liquidity_lab_stress_tests_risk_snapshot"}, "tool": "get_widget_data"}
+{"args": {"data": "Widget stress_liquidity_lab_liquidity_days_to_liquidate: field score = 79.81.\nWidget stress_liquidity_lab_stress_tests_risk_snapshot: metric Risk Snapshot primary value = 83.56.", "widget_type": "note"}, "tool": "add_generative_widget"}

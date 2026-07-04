@@ -1,0 +1,5 @@
+{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
+{"args": {"line_end": 20, "line_start": 1, "path": ""}, "tool": "repo_browser.open_file"}
+{"args": {"line_end": 20, "line_start": 1, "path": ""}, "tool": "repo_browser.open_file"}
+{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_data"}
+{"args": {"data": "NVDA has a gross margin of 46.2% and a buyback yield of 3.4%.", "inner_tab": "overview", "widget_type": "note"}, "tool": "add_generative_widget"}

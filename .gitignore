@@ -11,5 +11,8 @@ build/
 dist/
 *.egg-info/
 traces/
-runs/
+runs/*
+!runs/comparison/
+!runs/exports/
+!runs/reports/
 .DS_Store

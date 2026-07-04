@@ -1,0 +1,5 @@
+{"args": {"uri": "openbb://workspace/skills/finance-earnings-prep"}, "tool": "read_workspace_resource"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
+{"args": {"data": "Earnings prep workflow for AAPL: compare internal estimates to street numbers, identify surprise drivers, review guidance, inspect transcript tone, and produce action items for the portfolio manager. Key surprise drivers to monitor include EPS estimate beats/misses versus consensus and revenue estimate deviations shown in the Estimate History table, which should be cross-checked against guidance commentary and transcript tone ahead of the print.", "description": "Note summarizing surprise drivers per the finance-earnings-prep skill for AAPL.", "name": "AAPL Earnings Prep Notes", "widget_type": "note"}, "tool": "add_generative_widget"}

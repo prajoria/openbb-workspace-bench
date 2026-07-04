@@ -1,0 +1,2 @@
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "vendor_dataset_monitor_vendors_sla_metrics"}, "tool": "get_widget_data"}
+{"args": {"data": "vendor_dataset_monitor_vendors_sla_metrics SLA Metrics primary: 63.73\nvendor_dataset_monitor_vendors_sla_metrics SLA Metrics secondary: 88.47\nvendor_dataset_monitor_vendors_sla_metrics SLA Metrics threshold: 60.04", "description": "Note citing each widget id, the field name, and the exact value for SLA Metrics", "name": "SLA Metrics Values Note", "widget_type": "note"}, "tool": "add_generative_widget"}

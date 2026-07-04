@@ -1,0 +1,2 @@
+{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_data"}
+{"args": {"chart_params": {}, "dashboard_id": null, "data": "Gross Margin: 0.462, Net Cash: 54.0", "description": "", "inner_tab": null, "name": "Gross Margin & Net Cash", "widget_type": "note"}, "tool": "add_generative_widget"}

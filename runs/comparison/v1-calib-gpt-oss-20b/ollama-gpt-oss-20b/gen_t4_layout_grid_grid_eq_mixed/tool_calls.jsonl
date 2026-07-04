@@ -1,0 +1,3 @@
+{"args": {"h": 10, "w": 40, "widget_id": "price_performance", "x": 0, "y": 0}, "tool": "update_widget_layout"}
+{"args": {"h": 10, "w": 20, "widget_id": "estimate_history", "x": 0, "y": 10}, "tool": "update_widget_layout"}
+{"args": {"h": 10, "w": 20, "widget_id": "fundamental_metrics", "x": 20, "y": 10}, "tool": "update_widget_layout"}

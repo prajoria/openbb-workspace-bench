@@ -1,0 +1,10 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
+{"args": {"activate": true, "name": "Prompt Cross NVDA Holdings", "operation": "create"}, "tool": "manage_dashboard"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data_args": {}, "origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data": "NVDA estimate_history and portfolio holdings_table are included on the current-dashboard for cross-backend review of NVDA and holdings.", "name": "NVDA Holdings Note", "widget_type": "note"}, "tool": "add_generative_widget"}

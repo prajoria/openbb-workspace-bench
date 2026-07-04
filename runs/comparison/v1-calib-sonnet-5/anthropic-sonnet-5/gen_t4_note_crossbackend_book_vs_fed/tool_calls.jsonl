@@ -1,0 +1,4 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "get_widget_data"}
+{"args": {"data_args": {"series": "FEDFUNDS"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_data"}
+{"args": {"data": "Portfolio beta: 1.18\nLatest FEDFUNDS value: 4.12 (as of 2025-12-31)", "description": "Cross-backend review comparing portfolio risk metrics against the latest Fed Funds rate.", "name": "Book Vs Fed: Beta and Fed Funds", "widget_type": "note"}, "tool": "add_generative_widget"}

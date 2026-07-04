@@ -1,0 +1,6 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Curve"}]}, "tool": "manage_navigation_bar"}
+{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "curve"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_001", "data_args": {}, "origin": "Bench Macro", "ui_args": {}, "widget_id": "yield_curve"}, "tool": "create_widget"}

@@ -1,0 +1,7 @@
+{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "PM Resource Command", "operation": "instantiate", "template_id": "portfolio-command-center"}, "tool": "manage_apps"}
+{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "holdings"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_holdings_sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "ui_args": {}, "widget_id": "portfolio_command_center_holdings_sector_exposure"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data": "Sector exposure resource note: The Holdings tab in PM Resource Command includes portfolio_command_center_holdings_sector_exposure for Flagship Long/Short YTD. This was added after reading the app-builder index resource at openbb://workspace/app-builder/index for portfolio-command-center.", "inner_tab": "holdings", "name": "Resource Note", "widget_type": "note"}, "tool": "add_generative_widget"}

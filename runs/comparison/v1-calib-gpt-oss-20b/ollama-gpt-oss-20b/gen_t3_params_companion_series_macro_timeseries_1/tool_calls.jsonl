@@ -1,0 +1,9 @@
+{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
+{"args": {"cmd": ["bash", "-lc", "echo test"]}, "tool": "container.exec"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro", "param_name": "series", "widget_id": "macro_timeseries"}, "tool": "get_params_options"}
+{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_schema"}
+{"args": {"cmd": ["bash", "-lc", "echo test"]}, "tool": "container.exec"}
+{"args": {"cmd": ["bash", "-lc", "echo test"]}, "tool": "container.exec"}
+{"args": {"data_args": {"series": "DGS2"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "create_widget"}

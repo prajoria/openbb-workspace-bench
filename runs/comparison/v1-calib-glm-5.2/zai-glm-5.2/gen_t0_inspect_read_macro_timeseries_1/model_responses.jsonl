@@ -1,0 +1,3 @@
+{"action": {"args": {"widget_id": "macro_timeseries"}, "done": false, "tool": "read_widget"}, "content": "{\"done\": false, \"tool\": \"read_widget\", \"args\": {\"widget_id\": \"macro_timeseries\"}}", "turn": 1}
+{"action": {"args": {"data": "The macro_timeseries widget displays the DGS10 series (10-Year Treasury Constant Maturity Rate) from the Bench Macro backend.", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"widget_type\": \"note\", \"data\": \"The macro_timeseries widget displays the DGS10 series (10-Year Treasury Constant Maturity Rate) from the Bench Macro backend.\"}}", "turn": 2}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

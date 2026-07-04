@@ -1,0 +1,3 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"symbol": "AAPL"}, "widget_uuid": "widget_002"}, "tool": "update_widget"}
+{"args": {"dashboard_id": "dash_001", "data": "Inspected dashboard dash_001 and found price_performance widget_002 with symbol=MSFT. Repaired price_performance to symbol=AAPL while keeping companion latest_news widget_001 with symbol=AAPL and limit=5.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

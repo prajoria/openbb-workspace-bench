@@ -1,0 +1,7 @@
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "active", "data": "NVDA's Price Performance and the Yield Curve", "widget_type": "note"}, "tool": "add_generative_widget"}
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "data": "NVDA's Price Performance and the Yield Curve", "widget_type": "note"}, "tool": "add_generative_widget"}

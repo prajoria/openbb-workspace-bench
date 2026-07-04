@@ -1,0 +1,4 @@
+{"action": {"args": {"data_args": {"symbol": "AAPL"}, "widget_id": "price_performance"}, "done": false, "tool": "update_widget"}, "content": "{\"done\": false, \"tool\": \"update_widget\", \"args\": {\"widget_id\": \"price_performance\", \"data_args\": {\"symbol\": \"AAPL\"}}}", "turn": 1}
+{"action": {"args": {"data_args": {"limit": 5}, "widget_id": "latest_news"}, "done": false, "tool": "update_widget"}, "content": "{\"args\": {\"data_args\": {\"limit\": 5}, \"widget_id\": \"latest_news\"}, \"done\": false, \"tool\": \"update_widget\"}", "turn": 2}
+{"action": {"args": {"data": "AAPL repaired.", "name": "Repair Note", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"widget_type\": \"note\", \"data\": \"AAPL repaired.\", \"name\": \"Repair Note\"}}", "turn": 3}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 4}

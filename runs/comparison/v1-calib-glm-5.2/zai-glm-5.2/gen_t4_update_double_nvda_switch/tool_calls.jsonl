@@ -1,0 +1,4 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"data_args": {"symbol": "NVDA"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
+{"args": {"data_args": {"symbol": "NVDA"}, "widget_uuid": "widget_002"}, "tool": "update_widget"}
+{"args": {"data": "NVDA widgets have been repaired. Both the price performance and estimate history widgets now track NVDA.", "name": "NVDA Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

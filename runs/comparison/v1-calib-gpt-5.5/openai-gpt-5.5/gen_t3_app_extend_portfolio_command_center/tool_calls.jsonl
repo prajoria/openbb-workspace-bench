@@ -1,0 +1,7 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "PM Command Post", "operation": "instantiate", "template_id": "portfolio-command-center"}, "tool": "manage_apps"}
+{"args": {"operation": "tab", "tab_id": "holdings"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_holdings_sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_holdings_sector_exposure"}, "tool": "create_widget"}

@@ -1,0 +1,10 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"name": "portfolio", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "equity_research_workbench_valuation_football_field"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "equity_research_workbench_valuation_football_field"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"data": "This dashboard combines the Bench Stark Enterprise Football Field valuation widget with the Bench Portfolio Sector Exposure widget. The stark enterprise backend provides equity research valuation data, while the portfolio backend provides sector exposure analysis for portfolio risk monitoring.", "name": "Stark Sector Exposure Note", "widget_type": "note"}, "tool": "add_generative_widget"}

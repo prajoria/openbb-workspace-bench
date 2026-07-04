@@ -1,0 +1,6 @@
+{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
+{"args": {"operation": "add_tabs", "tabs": [{"name": "Estimates"}]}, "tool": "manage_navigation_bar"}
+{"args": {"operation": "tab", "tab_id": "estimates"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
+{"args": {"data": "Estimates", "inner_tab": "estimates", "widget_type": "note"}, "tool": "add_generative_widget"}

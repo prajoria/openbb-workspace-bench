@@ -1,0 +1,3 @@
+{"action": {"args": {"slug": "finance-earnings-prep"}, "done": false, "tool": "get_skill_content"}, "content": "{\"args\": {\"slug\": \"finance-earnings-prep\"}, \"done\": false, \"tool\": \"get_skill_content\"}", "turn": 1}
+{"action": {"args": {"data": "Finance Earnings Prep", "name": "Finance Earnings Prep", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"widget_type\":\"note\",\"data\":\"Finance Earnings Prep\",\"name\":\"Finance Earnings Prep\"}}", "turn": 2}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

@@ -1,0 +1,8 @@
+{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('')\nPY"]}, "tool": "container.exec"}
+{"args": {"depth": 2, "path": ""}, "tool": "repo_browser.print_tree"}
+{"args": {}, "tool": "repo_browser.print_tree"}
+{"args": {"args": {"depth": 2, "path": ""}}, "tool": "repo_browser.print_tree"}
+{"args": {"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}}, "tool": "repo_browser.print_tree"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Portfolio", "ui_args": {"h": 8, "w": 16, "x": 20, "y": 0}, "widget_id": "risk_metrics"}, "tool": "create_widget"}

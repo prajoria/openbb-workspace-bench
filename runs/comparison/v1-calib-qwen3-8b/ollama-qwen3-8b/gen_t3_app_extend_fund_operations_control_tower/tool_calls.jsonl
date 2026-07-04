@@ -1,0 +1,3 @@
+{"args": {"app_name": "Fund Operations Control Tower", "backend_id": "stark-enterprise", "dashboard_name": "Ops Control Room", "operation": "instantiate"}, "tool": "manage_apps"}
+{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"app_name": "Fund Operations Control Tower", "backend_id": "backend_002", "dashboard_name": "Ops Control Room", "operation": "instantiate"}, "tool": "manage_apps"}

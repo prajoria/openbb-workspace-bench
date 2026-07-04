@@ -1,0 +1,3 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"name": "Prompt Cross Stark Risk", "operation": "create"}, "tool": "manage_dashboard"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}

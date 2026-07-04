@@ -1,0 +1,2 @@
+{"args": {"reason": "Read skill content to reference in note", "slug": "finance-guidance-tracker"}, "tool": "get_skill_content"}
+{"args": {"data": "Skill: Finance Guidance Tracker\nSlug: finance-guidance-tracker\nDescription: Track company guidance changes, management claims, and follow-up evidence.\nContent: Guidance tracker workflow: extract management claims, compare them with prior guidance, flag changed assumptions, and list evidence gaps.", "name": "Finance Guidance Tracker Skill", "widget_type": "note"}, "tool": "add_generative_widget"}

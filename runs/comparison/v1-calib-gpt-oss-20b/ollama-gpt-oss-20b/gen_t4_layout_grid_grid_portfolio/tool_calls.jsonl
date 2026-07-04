@@ -1,0 +1,3 @@
+{"args": {"h": 12, "w": 24, "widget_id": "holdings_table", "x": 0, "y": 0}, "tool": "update_widget_layout"}
+{"args": {"h": 12, "w": 16, "widget_id": "sector_exposure", "x": 24, "y": 0}, "tool": "update_widget_layout"}
+{"args": {"h": 8, "w": 40, "widget_id": "risk_metrics", "x": 0, "y": 12}, "tool": "update_widget_layout"}

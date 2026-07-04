@@ -1,0 +1,2 @@
+{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_data"}
+{"args": {"data": "The latest close price for MSFT is 196.1 on 2026-01-15.", "name": "Latest Close Price for MSFT", "widget_type": "note"}, "tool": "add_generative_widget"}

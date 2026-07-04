@@ -1,0 +1,7 @@
+{"action": {"args": {}, "done": false, "tool": "get_widget_data',"}, "content": "{\"done\": false, \"tool\": \"get_widget_data', \"    }", "turn": 1}
+{"action": {"args": {}, "done": false, "tool": "get_widget_data',"}, "content": "{\"done\": false, \"tool\": \"get_widget_data', \"    }", "turn": 2}
+{"action": {"args": {}, "done": false, "tool": "get_widget_data"}, "content": "{\"done\": false, \"tool\": \"get_widget_data\"}", "turn": 3}
+{"action": {"args": {}, "done": false, "tool": "get_widget_data"}, "content": "{\"done\": false, \"tool\": \"get_widget_data\"}", "turn": 4}
+{"action": {"args": {}, "done": false, "tool": "get_widget_data"}, "content": "{\"done\": false, \"tool\": \"get_widget_data\"}", "turn": 5}
+{"action": {"args": {}, "done": false, "tool": "get_widget_data"}, "content": "{\"done\": false, \"tool\": \"get_widget_data\"}", "turn": 6}
+{"action": {"args": {}, "done": false, "tool": "get_widget_data"}, "content": "{\"done\": false, \"tool\": \"get_widget_data\"}", "turn": 7}

@@ -1,0 +1,3 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_data"}
+{"args": {"data": "NVDA gross margin: 0.742\nNVDA buyback yield: 0.004", "inner_tab": "overview", "name": "NVDA Fundamentals Note", "widget_type": "note"}, "tool": "add_generative_widget"}

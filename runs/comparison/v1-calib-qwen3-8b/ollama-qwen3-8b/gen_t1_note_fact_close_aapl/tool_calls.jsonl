@@ -1,0 +1,2 @@
+{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_data"}
+{"args": {"data": "Latest AAPL Close: $196.10", "name": "Latest AAPL Close", "widget_type": "note"}, "tool": "add_generative_widget"}

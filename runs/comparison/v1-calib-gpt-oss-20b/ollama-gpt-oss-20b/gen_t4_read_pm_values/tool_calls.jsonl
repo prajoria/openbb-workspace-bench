@@ -1,0 +1,6 @@
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_overview_portfolio_snapshot"}, "tool": "get_widget_data"}
+{"args": {"args": {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_overview_top_alerts"}, "done": false, "tool": "get_widget_data"}, "tool": "add_generative_widget"}
+{"args": {"depth": 2, "path": ""}, "tool": "repo_browser.print_tree"}
+{"args": {}, "tool": "repo_browser.print_tree"}
+{"args": {}, "tool": "repo_browser.print_tree"}
+{"args": {}, "tool": "repo_browser.print_tree"}

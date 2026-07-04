@@ -1,0 +1,8 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "name": "Desk Hub", "operation": "update"}, "tool": "manage_dashboard"}
+{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "News"}]}, "tool": "manage_navigation_bar"}
+{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "news"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"limit": 5, "symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_001", "data": "This News tab on the Desk Hub dashboard displays the Latest News widget for NVDA, keeping the desk up to date with the latest headlines.", "inner_tab": "news", "name": "Desk Hub News Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,7 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {}, "origin": "Bench Portfolio", "param_name": "sector", "widget_id": "sector_exposure"}, "tool": "get_params_options"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"sector": "Technology"}, "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_001", "data_args": {}, "origin": "Bench Portfolio", "ui_args": {}, "widget_id": "risk_metrics"}, "tool": "create_widget"}

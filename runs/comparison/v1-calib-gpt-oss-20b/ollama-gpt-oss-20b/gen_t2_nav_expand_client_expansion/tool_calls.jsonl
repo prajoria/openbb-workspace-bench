@@ -1,0 +1,3 @@
+{"args": {"name": "Client Command Center", "operation": "update"}, "tool": "manage_dashboard"}
+{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Open Requests"}]}, "tool": "manage_navigation_bar"}
+{"args": {"data": "Open requests are pending.", "inner_tab": "open-requests", "widget_type": "note"}, "tool": "add_generative_widget"}

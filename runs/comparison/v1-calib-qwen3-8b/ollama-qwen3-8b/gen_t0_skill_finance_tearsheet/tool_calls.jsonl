@@ -1,0 +1,2 @@
+{"args": {"slug": "finance-tearsheet"}, "tool": "get_skill_content"}
+{"args": {"data": "Finance Tearsheet", "name": "Finance Tearsheet Skill", "origin": "Bench Stark Enterprise", "tab_id": "overview", "widget_type": "note"}, "tool": "add_generative_widget"}

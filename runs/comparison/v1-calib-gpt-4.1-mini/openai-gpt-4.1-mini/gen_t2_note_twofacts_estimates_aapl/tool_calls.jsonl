@@ -1,0 +1,2 @@
+{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_data"}
+{"args": {"data": "For Apple Inc. (AAPL), the 2026Q1 EPS estimate is 2.31 and the revenue estimate is $94.8 billion.", "description": "Note on 2026Q1 EPS and revenue estimates for AAPL from the estimate history widget.", "inner_tab": "overview", "name": "2026Q1 EPS and Revenue Estimates", "widget_type": "note"}, "tool": "add_generative_widget"}

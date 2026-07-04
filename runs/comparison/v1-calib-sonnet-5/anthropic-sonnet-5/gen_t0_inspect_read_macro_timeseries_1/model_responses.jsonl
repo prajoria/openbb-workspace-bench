@@ -1,0 +1,3 @@
+{"action": {"args": {"widget_id": "macro_timeseries"}, "done": false, "tool": "read_widget"}, "content": "{\"done\": false, \"tool\": \"read_widget\", \"args\": {\"widget_id\": \"macro_timeseries\"}}", "turn": 1}
+{"action": {"args": {"data": "This note references the Macro Time Series widget, which displays data for the DGS10 series.", "name": "DGS10 Note", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"widget_type\": \"note\", \"name\": \"DGS10 Note\", \"data\": \"This note references the Macro Time Series widget, which displays data for the DGS10 series.\"}}", "turn": 2}
+{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

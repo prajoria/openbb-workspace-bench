@@ -1,0 +1,4 @@
+{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_attribution_attribution_summary"}, "tool": "get_widget_data"}
+{"args": {"dashboard_id": "Data Review", "data": "Reviewed data from widget portfolio_command_center_attribution_attribution_summary", "inner_tab": "main", "widget_type": "note"}, "tool": "add_generative_widget"}
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "data": "Reviewed data from widget portfolio_command_center_attribution_attribution_summary", "inner_tab": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

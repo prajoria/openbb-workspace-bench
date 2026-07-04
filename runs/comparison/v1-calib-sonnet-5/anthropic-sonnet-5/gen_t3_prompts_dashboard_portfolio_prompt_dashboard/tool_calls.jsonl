@@ -1,0 +1,8 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"activate": true, "name": "Portfolio Prompt Dashboard", "operation": "create"}, "tool": "manage_dashboard"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data": "This dashboard follows schema-before-create workspace tool discipline. The Holdings widget (holdings_table) shows portfolio holdings with market value, sector, weight, and daily return, and the Risk Metrics widget (risk_metrics) shows portfolio beta, one-day VaR, and concentration metrics. Schemas for both widgets were fetched from Bench Portfolio before creation to ensure schema-first discipline.", "name": "Portfolio Dashboard Notes", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,2 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"task_requests": [{"assigned_agent_id": "backend_001", "assigned_holder_url": "http://127.0.0.1:9104", "description": "Review estimate revisions and transcript tone for earnings prep.", "id": "coverage-analyst"}]}, "tool": "assign_tasks_to_agents"}

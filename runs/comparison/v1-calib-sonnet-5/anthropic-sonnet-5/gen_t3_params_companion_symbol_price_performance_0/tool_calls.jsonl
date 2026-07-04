@@ -1,0 +1,7 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Equities", "param_name": "symbol", "widget_id": "price_performance"}, "tool": "get_params_options"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"limit": 5, "symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "create_widget"}

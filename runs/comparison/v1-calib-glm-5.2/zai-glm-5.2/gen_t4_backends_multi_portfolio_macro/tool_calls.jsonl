@@ -1,0 +1,10 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"name": "portfolio", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"name": "macro", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "create_widget"}
+{"args": {"data": "This dashboard combines portfolio risk metrics from Bench Portfolio with the US Treasury yield curve from Bench Macro. Reviewing portfolio risk alongside the yield curve helps assess how interest rate movements may impact portfolio performance.", "name": "Portfolio & Yield Curve Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,5 @@
+{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"origin": "backend_001"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist"}, "tool": "create_widget"}
