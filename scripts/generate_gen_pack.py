@@ -1,4 +1,4 @@
-"""Generate the workspace-gen-v0 task pack (v1 candidate: tool-centric ladders).
+"""Generate the bundled WorkspaceBench scenario pack (tool-centric ladders).
 
 TMax-style compositional generation, restructured so that **every family is
 anchored on one MCP tool and carries a complete t0-t4 ladder**:
@@ -23,7 +23,7 @@ semantically identical full-prompt variants. The selected surface wording is
 `md5(scenario_id) % len(pool)`, so the same scenario id keeps the same prompt
 forever without using randomness.
 
-Certification: `workspace-bench validate --scenario-dir packs/workspace-gen-v0`
+Certification: `workspace-bench validate --pack all --min-scenarios 300`
 must report oracle pass and no-op fail for every scenario.
 """
 
@@ -38,9 +38,8 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 STARK = json.loads((REPO / "src/workspace_bench/workspace/data/stark_enterprise.json").read_text())
-OUT_DIR = REPO / "packs/workspace-gen-v0"
 BUNDLED_OUT_DIR = REPO / "src/workspace_bench/core/scenario_packs/workspace_bench_v1"
-OUT_DIRS = (OUT_DIR, BUNDLED_OUT_DIR)
+OUT_DIRS = (BUNDLED_OUT_DIR,)
 
 STK = "Bench Stark Enterprise"
 EQ, MACRO, PF = "Bench Equities", "Bench Macro", "Bench Portfolio"
