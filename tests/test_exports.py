@@ -38,7 +38,7 @@ def test_annotate_rollouts_adds_benchmark_metadata() -> None:
 
     annotated = annotate_rollouts([record], exported_at="2026-06-19T00:00:00Z")
 
-    assert annotated[0].metadata["benchmark_release_id"] == "workspace-core-v0"
+    assert annotated[0].metadata["benchmark_release_id"] == "workspace-bench-v1"
     assert annotated[0].metadata["export_schema_version"] == ROLLOUT_SCHEMA_VERSION
     assert annotated[0].metadata["exported_at"] == "2026-06-19T00:00:00Z"
 

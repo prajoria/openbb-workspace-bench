@@ -14,41 +14,15 @@ def main() -> int:
     scenario_id = task["scenario"]["id"]
 
     calls = []
-    if scenario_id == "l1_add_price_widget":
+    if scenario_id == "gen_t0_create_price_performance_aapl":
         calls = [
             {"tool": "get_workspace_snapshot", "args": {}},
-            {"tool": "list_available_widgets", "args": {"origin": "Bench Equities"}},
-            {
-                "tool": "get_widget_schema",
-                "args": {
-                    "origin": "Bench Equities",
-                    "widget_id": "price_performance",
-                },
-            },
-            {
-                "tool": "get_params_options",
-                "args": {
-                    "origin": "Bench Equities",
-                    "widget_id": "price_performance",
-                    "param_name": "symbol",
-                },
-            },
             {
                 "tool": "create_widget",
                 "args": {
                     "origin": "Bench Equities",
                     "widget_id": "price_performance",
                     "data_args": {"symbol": "AAPL"},
-                },
-            },
-            {
-                "tool": "update_widget_layout",
-                "args": {
-                    "widget_id": "price_performance",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 12,
                 },
             },
         ]

@@ -6,7 +6,7 @@ from workspace_bench.core.runner import find_scenario
 
 
 def test_episode_step_api_supports_incremental_tool_execution() -> None:
-    scenario = find_scenario("l1_add_price_widget")
+    scenario = find_scenario("gen_t0_create_price_performance_aapl")
     episode = WorkspaceEpisode(scenario)
 
     for call in scenario.oracle_tool_calls:
@@ -19,7 +19,7 @@ def test_episode_step_api_supports_incremental_tool_execution() -> None:
 
 
 def test_episode_records_disallowed_tool_as_invalid_step() -> None:
-    scenario = find_scenario("l1_add_price_widget")
+    scenario = find_scenario("gen_t0_create_price_performance_aapl")
     episode = WorkspaceEpisode(scenario)
 
     result = episode.step(ToolCall("manage_apps", {"operation": "list"}))
@@ -27,4 +27,3 @@ def test_episode_records_disallowed_tool_as_invalid_step() -> None:
     assert result["ok"] is False
     assert episode.trace[0].ok is False
     assert episode.grade().passed is False
-

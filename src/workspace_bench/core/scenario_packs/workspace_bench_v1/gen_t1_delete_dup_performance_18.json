@@ -1,0 +1,108 @@
+{
+  "id": "gen_t1_delete_dup_performance_18",
+  "title": "Remove Duplicate Price Performance",
+  "level": "L1",
+  "capability": "widget-update",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-delete",
+    "tier-t1",
+    "delete-widget"
+  ],
+  "prompt": "The dashboard has two identical Price Performance widgets. Remove exactly one so a single copy remains; do not change the one that stays.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Duplicate Cleanup",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "price_performance",
+          "data_args": {
+            "symbol": "AAPL"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Equities",
+          "widget_id": "price_performance",
+          "data_args": {
+            "symbol": "AAPL"
+          },
+          "layout": {
+            "x": 20,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "delete_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        },
+        "min_count": 1,
+        "max_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "delete_widget",
+      "args": {
+        "widget_uuid": "widget_002"
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique delete/t1 exercise using delete_widget, get_workspace_snapshot with checks layout_out_of_grid, layout_overlap, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on equities; artifact widgets:Bench Equities/price_performance@*."
+}

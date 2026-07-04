@@ -1,0 +1,104 @@
+{
+  "id": "gen_t0_inspect_read_price_performance_0",
+  "title": "Inspect Price Performance",
+  "level": "L0",
+  "capability": "workspace-inspection",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-inspect",
+    "tier-t0",
+    "inspect",
+    "read-widget"
+  ],
+  "prompt": "Use read_widget with widget_id price_performance to inspect the existing Bench Equities/price_performance widget, then add a note mentioning AAPL.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Inspect Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "price_performance",
+          "data_args": {
+            "symbol": "AAPL"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "read_widget",
+        "args_contains": {
+          "widget_id": "price_performance"
+        }
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "AAPL"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "read_widget",
+      "args": {
+        "widget_id": "price_performance"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Inspect Note",
+        "data": "Inspected price_performance: AAPL."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "validation",
+  "novelty": "Unique inspect/t0 exercise using add_generative_widget, get_workspace_snapshot, read_widget with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, repeated_snapshots, too_many_invalid_calls on equities; artifact generated:note@*:AAPL."
+}

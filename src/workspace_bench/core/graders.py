@@ -13,6 +13,7 @@ from workspace_bench.core.models import (
     JsonDict,
     RequiredGeneratedWidget,
     RequiredLayout,
+    RequiredResourceRead,
     RequiredToolCall,
     RequiredToolResult,
     RequiredWidget,
@@ -164,6 +165,18 @@ def grade_scenario(
                 f"Expected at least {required_result.min_count} "
                 f"{required_result.name!r} result(s) containing "
                 f"{required_result.data_contains}, found {len(matches)}."
+            ),
+        )
+
+    for required_read in scenario.success.required_resource_reads:
+        matches = _matching_resource_reads(required_read, trace)
+        builder.check(
+            len(matches) >= required_read.min_count,
+            "missing_resource_read",
+            (
+                f"Expected at least {required_read.min_count} resource read(s) "
+                f"for {required_read.uri!r} containing "
+                f"{required_read.data_contains}, found {len(matches)}."
             ),
         )
 
@@ -352,6 +365,21 @@ def _matching_tool_results(
     matches = []
     for event in trace:
         if event.call.name != required.name:
+            continue
+        data_blob = json.dumps(event.result, sort_keys=True)
+        if all(_generated_text_contains(data_blob, text) for text in required.data_contains):
+            matches.append(event)
+    return matches
+
+
+def _matching_resource_reads(
+    required: RequiredResourceRead, trace: tuple[ToolTraceEvent, ...]
+) -> list[ToolTraceEvent]:
+    matches = []
+    for event in trace:
+        if event.call.name != "read_workspace_resource" or not event.ok:
+            continue
+        if event.call.args.get("uri") != required.uri:
             continue
         data_blob = json.dumps(event.result, sort_keys=True)
         if all(_generated_text_contains(data_blob, text) for text in required.data_contains):

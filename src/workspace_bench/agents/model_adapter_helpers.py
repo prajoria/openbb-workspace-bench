@@ -272,6 +272,24 @@ TOOL_REFERENCE = {
             "reason": "string, optional",
         },
     },
+    "read_workspace_resource": {
+        "description": (
+            "Read deterministic Workspace resources by exact URI, including the "
+            "app-builder index and skill resources."
+        ),
+        "args": {
+            "uri": (
+                "string, e.g. openbb://workspace/app-builder/index or "
+                "openbb://workspace/skills/finance-comps"
+            ),
+        },
+    },
+    "get_workspace_prompt": {
+        "description": "Fetch deterministic Workspace prompt text by exact prompt name.",
+        "args": {
+            "name": "workspace_tool_usage|workspace_session_context",
+        },
+    },
     "assign_tasks_to_agents": {
         "description": "Delegate work to external Workspace agents.",
         "args": {

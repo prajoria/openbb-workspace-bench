@@ -1,0 +1,129 @@
+{
+  "id": "gen_t2_layout_arrange_split_price_news_aapl",
+  "title": "Arrange: Split Price News Aapl",
+  "level": "L1",
+  "capability": "layout-management",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-layout",
+    "tier-t2",
+    "layout",
+    "multi-widget"
+  ],
+  "prompt": "Place the AAPL price widget on the left half and the AAPL news widget on the right half, side by side, both 12 rows tall starting at row 0.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Arrangement Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "price_performance",
+          "data_args": {
+            "symbol": "AAPL"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 18,
+            "h": 9
+          }
+        },
+        {
+          "origin": "Bench Equities",
+          "widget_id": "latest_news",
+          "data_args": {
+            "symbol": "AAPL",
+            "limit": 5
+          },
+          "layout": {
+            "x": 0,
+            "y": 9,
+            "w": 18,
+            "h": 9
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget_layout"
+  ],
+  "success": {
+    "required_layouts": [
+      {
+        "widget_id": "price_performance",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_id": "latest_news",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_id": "price_performance",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      }
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_id": "latest_news",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "validation",
+  "novelty": "Unique layout/t2 exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on equities; artifact layouts:latest_news:::20:0:20:12,price_performance:::0:0:20:12."
+}

@@ -1,7 +1,12 @@
+import asyncio
+from types import SimpleNamespace
+
+from workspace_bench.core.models import ToolCall
 from workspace_bench.workspace.live_mcp import (
     EXPECTED_MCP_PROMPTS,
     EXPECTED_MCP_RESOURCES,
     EXPECTED_MCP_TOOLS,
+    _call_mcp_tool,
     _surface_issues,
     bridge_command_to_simulator_call,
     execute_bridge_command,
@@ -115,3 +120,51 @@ def test_surface_issues_reports_missing_mcp_resources() -> None:
     assert issues == (
         f"missing resource(s): {', '.join(sorted(EXPECTED_MCP_RESOURCES))}",
     )
+
+
+def test_synthetic_tools_translate_to_mcp_resources_and_prompts() -> None:
+    class FakeSession:
+        async def read_resource(self, uri: str):
+            return SimpleNamespace(
+                contents=[
+                    SimpleNamespace(
+                        uri=uri,
+                        mimeType="text/plain",
+                        text="Workspace app builder index",
+                    )
+                ]
+            )
+
+        async def get_prompt(self, name: str, arguments=None):
+            return SimpleNamespace(
+                description="fixture prompt",
+                messages=[
+                    SimpleNamespace(
+                        role="user",
+                        content=SimpleNamespace(text="Workspace tool usage guidance"),
+                    )
+                ],
+            )
+
+    resource = asyncio.run(
+        _call_mcp_tool(
+            FakeSession(),
+            ToolCall(
+                "read_workspace_resource",
+                {"uri": "openbb://workspace/app-builder/index"},
+            ),
+        )
+    )
+    prompt = asyncio.run(
+        _call_mcp_tool(
+            FakeSession(),
+            ToolCall("get_workspace_prompt", {"name": "workspace_tool_usage"}),
+        )
+    )
+
+    assert resource["ok"] is True
+    assert resource["command"] == "read_workspace_resource"
+    assert resource["data"]["text"] == "Workspace app builder index"
+    assert prompt["ok"] is True
+    assert prompt["command"] == "get_workspace_prompt"
+    assert prompt["data"]["messages"][0]["content"] == "Workspace tool usage guidance"

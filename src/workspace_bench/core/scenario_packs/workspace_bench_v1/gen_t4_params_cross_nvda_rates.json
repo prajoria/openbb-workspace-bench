@@ -1,0 +1,184 @@
+{
+  "id": "gen_t4_params_cross_nvda_rates",
+  "title": "Cross-Backend Options Build: Nvda Rates",
+  "level": "L2",
+  "capability": "dashboard-construction",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-params",
+    "tier-t4",
+    "params",
+    "cross-backend",
+    "note"
+  ],
+  "prompt": "Build a dashboard with these two widgets after using parameter options for both: Bench Equities/estimate_history symbol=NVDA; Bench Macro/macro_timeseries series=FEDFUNDS. Add a note mentioning NVDA and FEDFUNDS.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      },
+      {
+        "name": "macro"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Cross Options",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "estimate_history",
+        "data_args": {
+          "symbol": "NVDA"
+        }
+      },
+      {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "FEDFUNDS"
+        }
+      }
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "get_params_options",
+        "args_contains": {
+          "widget_id": "estimate_history",
+          "param_name": "symbol"
+        }
+      },
+      {
+        "tool": "get_params_options",
+        "args_contains": {
+          "widget_id": "macro_timeseries",
+          "param_name": "series"
+        }
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "NVDA",
+          "FEDFUNDS"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Equities"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "estimate_history"
+      }
+    },
+    {
+      "tool": "get_params_options",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "estimate_history",
+        "param_name": "symbol"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "estimate_history",
+        "data_args": {
+          "symbol": "NVDA"
+        }
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Macro"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries"
+      }
+    },
+    {
+      "tool": "get_params_options",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "param_name": "series"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "FEDFUNDS"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Options Note",
+        "data": "Options used: NVDA, FEDFUNDS."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 12
+  },
+  "split": "train",
+  "novelty": "Unique params/t4 exercise using add_generative_widget, create_widget, get_params_options, get_widget_schema, get_workspace_snapshot, list_available_widgets with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on equities, macro; artifact widgets:Bench Equities/estimate_history@*,Bench Macro/macro_timeseries@*; generated:note@*:NVDA,FEDFUNDS."
+}

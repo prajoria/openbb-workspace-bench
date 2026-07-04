@@ -51,6 +51,23 @@ WORKSPACE_SKILLS: dict[str, JsonDict] = {
     },
 }
 
+WORKSPACE_PROMPTS: dict[str, str] = {
+    "workspace_tool_usage": (
+        "Workspace tool usage guidance: inspect current state first, discover "
+        "backend catalogs before creating widgets, read schemas before mutation, "
+        "and prefer deterministic Workspace MCP tools over shell or browser hacks. "
+        "Stable phrase: schema-before-create workspace tool discipline."
+    ),
+    "workspace_session_context": (
+        "Workspace session context guidance: use the current dashboard and tab "
+        "from session context, create or navigate tabs deliberately, and keep "
+        "generated notes tied to durable dashboard artifacts. Stable phrase: "
+        "current-dashboard current-tab session grounding."
+    ),
+}
+
+APP_BUILDER_INDEX_URI = "openbb://workspace/app-builder/index"
+
 
 def slugify(value: str) -> str:
     """Slugify a Workspace navigation tab name."""
@@ -742,6 +759,65 @@ class SimulatedWorkspace:
             },
         )
 
+    def _tool_read_workspace_resource(self, args: JsonDict) -> JsonDict:
+        uri = str(args.get("uri", ""))
+        if uri == APP_BUILDER_INDEX_URI:
+            return self._ok(
+                "read_workspace_resource",
+                {
+                    "uri": uri,
+                    "mime_type": "application/json",
+                    "text": self._app_builder_index_text(),
+                    "apps": self._app_builder_index(),
+                },
+            )
+        skill_prefix = "openbb://workspace/skills/"
+        if uri.startswith(skill_prefix):
+            slug = uri.removeprefix(skill_prefix)
+            skill = WORKSPACE_SKILLS.get(slug)
+            if skill is not None:
+                return self._ok(
+                    "read_workspace_resource",
+                    {
+                        "uri": uri,
+                        "mime_type": "application/json",
+                        "slug": slug,
+                        "name": skill["name"],
+                        "description": skill["description"],
+                        "content": skill["content"],
+                        "text": (
+                            f"{skill['name']}: {skill['description']} "
+                            f"{skill['content']}"
+                        ),
+                    },
+                )
+        valid = ", ".join(self._valid_resource_uris())
+        return self._error(
+            "read_workspace_resource",
+            "invalid_request",
+            f"Unknown workspace resource URI {uri!r}. Valid URIs: {valid}.",
+        )
+
+    def _tool_get_workspace_prompt(self, args: JsonDict) -> JsonDict:
+        name = str(args.get("name", ""))
+        text = WORKSPACE_PROMPTS.get(name)
+        if text is None:
+            valid = ", ".join(sorted(WORKSPACE_PROMPTS))
+            return self._error(
+                "get_workspace_prompt",
+                "invalid_request",
+                f"Unknown workspace prompt {name!r}. Valid prompts: {valid}.",
+            )
+        return self._ok(
+            "get_workspace_prompt",
+            {
+                "name": name,
+                "description": f"Deterministic fixture prompt for {name}.",
+                "messages": [{"role": "user", "content": text}],
+                "text": text,
+            },
+        )
+
     def _tool_assign_tasks_to_agents(self, args: JsonDict) -> JsonDict:
         return self._ok(
             "assign_tasks_to_agents",
@@ -850,6 +926,50 @@ class SimulatedWorkspace:
                 "app_count": len(backend.apps),
             }
             for backend_id, backend in self.backends.items()
+        ]
+
+    def _app_builder_index(self) -> list[JsonDict]:
+        apps: list[JsonDict] = []
+        for backend_id, backend in self.backends.items():
+            for app in backend.apps_json():
+                tabs = app.get("tabs", {})
+                tab_ids = sorted(tabs) if isinstance(tabs, dict) else []
+                apps.append(
+                    {
+                        "backend_id": backend_id,
+                        "backend_name": backend.name,
+                        "backend_slug": backend.slug,
+                        "name": app.get("name"),
+                        "template_id": app.get("template_id"),
+                        "description": app.get("description"),
+                        "tab_ids": tab_ids,
+                    }
+                )
+        return apps
+
+    def _app_builder_index_text(self) -> str:
+        lines = ["Workspace app builder index"]
+        for app in self._app_builder_index():
+            lines.append(
+                " | ".join(
+                    [
+                        str(app["backend_name"]),
+                        str(app["name"]),
+                        str(app["template_id"]),
+                        str(app.get("description") or ""),
+                        f"tabs={','.join(app['tab_ids'])}",
+                    ]
+                )
+            )
+        return "\n".join(lines)
+
+    def _valid_resource_uris(self) -> list[str]:
+        return [
+            APP_BUILDER_INDEX_URI,
+            *[
+                f"openbb://workspace/skills/{slug}"
+                for slug in sorted(WORKSPACE_SKILLS)
+            ],
         ]
 
     def _select_backends(

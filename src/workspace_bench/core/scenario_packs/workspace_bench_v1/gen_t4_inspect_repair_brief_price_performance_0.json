@@ -1,0 +1,160 @@
+{
+  "id": "gen_t4_inspect_repair_brief_price_performance_0",
+  "title": "Ambient Repair And Brief Price Performance",
+  "level": "L4",
+  "capability": "workspace-repair",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-inspect",
+    "tier-t4",
+    "inspect",
+    "repair",
+    "note"
+  ],
+  "prompt": "Keep the companion widget while finding the widget with symbol=MSFT, repairing it to AAPL, and adding a note mentioning the repair after inspecting the dashboard.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Inspect Full Repair",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "latest_news",
+          "data_args": {
+            "symbol": "AAPL",
+            "limit": 5
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Equities",
+          "widget_id": "price_performance",
+          "data_args": {
+            "symbol": "MSFT"
+          },
+          "layout": {
+            "x": 20,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news",
+        "data_args": {
+          "symbol": "AAPL",
+          "limit": 5
+        }
+      },
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      },
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "MSFT"
+        },
+        "min_count": 0,
+        "max_count": 0
+      }
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "read_widget",
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "MSFT",
+          "AAPL",
+          "repair"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "read_widget",
+      "args": {
+        "widget_uuid": "widget_002"
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_uuid": "widget_002",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Inspect Repair Note",
+        "data": "Repair changed MSFT to AAPL."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique inspect/t4 exercise using add_generative_widget, get_workspace_snapshot, read_widget, update_widget with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on equities; artifact widgets:Bench Equities/latest_news@*,Bench Equities/price_performance@*; generated:note@*:MSFT,AAPL."
+}

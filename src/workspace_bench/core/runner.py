@@ -12,14 +12,12 @@ from workspace_bench.core.models import RunResult, Scenario, TaskPackManifest
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
-SCENARIO_PACKAGE = "workspace_bench.core.scenarios"
-STARK_SCENARIO_PACKAGE = "workspace_bench.core.scenario_packs.stark_enterprise_v0"
+WORKSPACE_BENCH_V1_PACKAGE = "workspace_bench.core.scenario_packs.workspace_bench_v1"
 TASK_PACK_MANIFEST = "task_pack.json"
 BUILTIN_SCENARIO_PACKS = {
-    "core": SCENARIO_PACKAGE,
-    "stark-enterprise-v0": STARK_SCENARIO_PACKAGE,
+    "core": WORKSPACE_BENCH_V1_PACKAGE,
 }
-BUILTIN_SCENARIO_PACK_ORDER = ("core", "stark-enterprise-v0")
+BUILTIN_SCENARIO_PACK_ORDER = ("core",)
 
 
 class ScenarioRunner:
@@ -50,10 +48,7 @@ def load_builtin_scenarios(pack: str = "core") -> list[Scenario]:
     """Load bundled JSON scenarios for a named pack."""
 
     if pack == "all":
-        scenarios: list[Scenario] = []
-        for pack_id in BUILTIN_SCENARIO_PACK_ORDER:
-            scenarios.extend(load_builtin_scenarios(pack_id))
-        return scenarios
+        return load_builtin_scenarios("core")
     try:
         package = BUILTIN_SCENARIO_PACKS[pack]
     except KeyError as error:
@@ -73,26 +68,10 @@ def load_builtin_task_pack_manifest(pack: str = "core") -> TaskPackManifest | No
     """Load a bundled task-pack manifest when one exists."""
 
     if pack == "all":
-        return TaskPackManifest(
-            pack_id="all",
-            release_id="workspace-all-v0",
-            version="0.1.0",
-            visibility="public",
-            default_split="dev",
-            description="All bundled WorkspaceBench scenario packs.",
-        )
+        return load_builtin_task_pack_manifest("core")
     package = BUILTIN_SCENARIO_PACKS[pack]
     manifest = resources.files(package) / TASK_PACK_MANIFEST
     if not manifest.is_file():
-        if pack == "core":
-            return TaskPackManifest(
-                pack_id="core",
-                release_id="workspace-core-v0",
-                version="0.1.0",
-                visibility="public",
-                default_split="dev",
-                description="Core deterministic OpenBB Workspace scenarios.",
-            )
         return None
     with manifest.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)

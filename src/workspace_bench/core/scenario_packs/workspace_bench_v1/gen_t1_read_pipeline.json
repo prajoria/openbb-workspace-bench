@@ -1,0 +1,122 @@
+{
+  "id": "gen_t1_read_pipeline",
+  "title": "Read Data: Pipeline by Stage",
+  "level": "L1",
+  "capability": "data-reading",
+  "workflow": "client-meeting-prep",
+  "subdomain": "client-ir",
+  "tags": [
+    "family-read",
+    "tier-t1",
+    "data-reading",
+    "stark"
+  ],
+  "prompt": "Use get_widget_data on the Bench Stark Enterprise Pipeline by Stage widget, then add a short note that cites client_360_flows_pipeline_by_stage and says you reviewed the data.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Data Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "main",
+          "name": "Main"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "client_360_flows_pipeline_by_stage",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "period": "YTD"
+          },
+          "tab_id": "main",
+          "layout": {
+            "x": 0,
+            "y": 2,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_widget_data",
+    "read_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "get_widget_data",
+        "args_contains": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "client_360_flows_pipeline_by_stage"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_widget_data",
+        "data_contains": [
+          "client_360_flows_pipeline_by_stage"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "client_360_flows_pipeline_by_stage",
+          "data"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_flows_pipeline_by_stage",
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "fund": "Flagship Long/Short",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Data Note",
+        "data": "Reviewed the data returned by client_360_flows_pipeline_by_stage."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "validation",
+  "novelty": "Unique read/t1 exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:client_360_flows_pipeline_by_stage,data."
+}

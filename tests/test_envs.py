@@ -6,20 +6,20 @@ from workspace_bench.core.runner import find_scenario
 
 
 def test_workspace_gym_env_reset_returns_task_observation() -> None:
-    scenario = find_scenario("l1_add_price_widget")
+    scenario = find_scenario("gen_t0_create_price_performance_aapl")
     env = WorkspaceGymEnv(scenario=scenario)
 
     observation, info = env.reset(seed=1)
 
-    assert info["scenario_id"] == "l1_add_price_widget"
-    assert observation["task"]["id"] == "l1_add_price_widget"
+    assert info["scenario_id"] == "gen_t0_create_price_performance_aapl"
+    assert observation["task"]["id"] == "gen_t0_create_price_performance_aapl"
     assert observation["turn_index"] == 0
     assert observation["remaining_turns"] == scenario.limits["max_turns"]
     assert "create_widget" in observation["allowed_tools"]
 
 
 def test_workspace_gym_env_oracle_actions_terminate_with_final_reward() -> None:
-    scenario = find_scenario("l1_add_price_widget")
+    scenario = find_scenario("gen_t0_create_price_performance_aapl")
     env = WorkspaceGymEnv(scenario=scenario)
     env.reset(seed=1)
 
@@ -41,7 +41,7 @@ def test_workspace_gym_env_oracle_actions_terminate_with_final_reward() -> None:
 
 
 def test_workspace_gym_env_done_action_terminates_with_current_score() -> None:
-    scenario = find_scenario("l1_add_price_widget")
+    scenario = find_scenario("gen_t0_create_price_performance_aapl")
     env = WorkspaceGymEnv(scenario=scenario)
     env.reset(seed=1)
 
@@ -54,7 +54,7 @@ def test_workspace_gym_env_done_action_terminates_with_current_score() -> None:
 
 
 def test_workspace_gym_env_invalid_actions_can_receive_process_penalty() -> None:
-    scenario = find_scenario("l1_add_price_widget")
+    scenario = find_scenario("gen_t0_create_price_performance_aapl")
     env = WorkspaceGymEnv(
         scenario=scenario,
         process_rewards=True,
@@ -71,7 +71,7 @@ def test_workspace_gym_env_invalid_actions_can_receive_process_penalty() -> None
 
 
 def test_workspace_gym_env_rewards_schema_before_create() -> None:
-    scenario = find_scenario("l1_add_price_widget")
+    scenario = find_scenario("gen_t1_create_price_performance_msft")
     env = WorkspaceGymEnv(
         scenario=scenario,
         process_rewards=True,
@@ -104,7 +104,7 @@ def test_workspace_gym_env_rewards_schema_before_create() -> None:
 
 
 def test_workspace_gym_env_penalizes_repeated_snapshots() -> None:
-    scenario = find_scenario("l1_add_price_widget")
+    scenario = find_scenario("gen_t0_create_price_performance_aapl")
     env = WorkspaceGymEnv(
         scenario=scenario,
         process_rewards=True,
@@ -133,7 +133,7 @@ def test_rl_action_helpers_normalize_done_and_tool_calls() -> None:
 
 
 def test_collect_rollout_records_fixed_action_sequence() -> None:
-    scenario = find_scenario("l1_add_price_widget")
+    scenario = find_scenario("gen_t0_create_price_performance_aapl")
     env = WorkspaceGymEnv(scenario=scenario)
 
     transitions = collect_rollout(

@@ -380,6 +380,10 @@ async def _health(httpx: Any, base_url: str) -> JsonDict:
 
 
 async def _call_mcp_tool(session: Any, call: ToolCall) -> JsonDict:
+    if call.name == "read_workspace_resource":
+        return await _call_mcp_resource(session, call)
+    if call.name == "get_workspace_prompt":
+        return await _call_mcp_prompt(session, call)
     try:
         result = await session.call_tool(call.name, call.args)
     except Exception as error:  # noqa: BLE001 - failures are trace events.
@@ -391,6 +395,61 @@ async def _call_mcp_tool(session: Any, call: ToolCall) -> JsonDict:
             "error": {"code": "mcp_call_failed", "message": str(error)},
         }
     return _tool_result_payload(result, call.name)
+
+
+async def _call_mcp_resource(session: Any, call: ToolCall) -> JsonDict:
+    uri = str(call.args.get("uri", ""))
+    if not uri:
+        return _synthetic_mcp_error(
+            command=call.name,
+            code="invalid_request",
+            message="read_workspace_resource requires uri.",
+        )
+    try:
+        result = await session.read_resource(uri)
+    except Exception as error:  # noqa: BLE001 - failures are trace events.
+        return _synthetic_mcp_error(
+            command=call.name,
+            code="mcp_resource_read_failed",
+            message=str(error),
+        )
+    return _resource_result_payload(result, uri)
+
+
+async def _call_mcp_prompt(session: Any, call: ToolCall) -> JsonDict:
+    name = str(call.args.get("name", ""))
+    if not name:
+        return _synthetic_mcp_error(
+            command=call.name,
+            code="invalid_request",
+            message="get_workspace_prompt requires name.",
+        )
+    arguments = call.args.get("arguments")
+    if arguments is not None and not isinstance(arguments, dict):
+        return _synthetic_mcp_error(
+            command=call.name,
+            code="invalid_request",
+            message="get_workspace_prompt arguments must be an object when provided.",
+        )
+    try:
+        result = await session.get_prompt(name, arguments=arguments)
+    except Exception as error:  # noqa: BLE001 - failures are trace events.
+        return _synthetic_mcp_error(
+            command=call.name,
+            code="mcp_prompt_get_failed",
+            message=str(error),
+        )
+    return _prompt_result_payload(result, name)
+
+
+def _synthetic_mcp_error(*, command: str, code: str, message: str) -> JsonDict:
+    return {
+        "ok": False,
+        "command": command,
+        "message": message,
+        "data": None,
+        "error": {"code": code, "message": message, "retryable": False},
+    }
 
 
 def _tool_result_payload(result: Any, command: str) -> JsonDict:
@@ -414,3 +473,70 @@ def _tool_result_payload(result: Any, command: str) -> JsonDict:
         "data": None,
         "error": None,
     }
+
+
+def _resource_result_payload(result: Any, uri: str) -> JsonDict:
+    contents = []
+    text_parts = []
+    for item in getattr(result, "contents", []) or []:
+        text = getattr(item, "text", None)
+        blob = getattr(item, "blob", None)
+        item_uri = str(getattr(item, "uri", uri))
+        mime_type = getattr(item, "mimeType", None)
+        payload: JsonDict = {"uri": item_uri}
+        if mime_type:
+            payload["mime_type"] = mime_type
+        if isinstance(text, str):
+            payload["text"] = text
+            text_parts.append(text)
+        elif isinstance(blob, str):
+            payload["blob"] = blob
+        contents.append(payload)
+    return {
+        "ok": True,
+        "command": "read_workspace_resource",
+        "message": "ok",
+        "data": {
+            "uri": uri,
+            "contents": contents,
+            "text": "\n".join(text_parts),
+        },
+        "error": None,
+    }
+
+
+def _prompt_result_payload(result: Any, name: str) -> JsonDict:
+    messages = []
+    text_parts = []
+    for message in getattr(result, "messages", []) or []:
+        role = getattr(message, "role", None)
+        content = getattr(message, "content", None)
+        text = _mcp_content_text(content)
+        payload: JsonDict = {}
+        if role:
+            payload["role"] = role
+        if text is not None:
+            payload["content"] = text
+            text_parts.append(text)
+        messages.append(payload)
+    return {
+        "ok": True,
+        "command": "get_workspace_prompt",
+        "message": "ok",
+        "data": {
+            "name": name,
+            "description": getattr(result, "description", None),
+            "messages": messages,
+            "text": "\n".join(text_parts),
+        },
+        "error": None,
+    }
+
+
+def _mcp_content_text(content: Any) -> str | None:
+    if isinstance(content, str):
+        return content
+    text = getattr(content, "text", None)
+    if isinstance(text, str):
+        return text
+    return None

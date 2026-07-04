@@ -1,0 +1,161 @@
+{
+  "id": "gen_t4_skill_finance_tearsheet",
+  "level": "L1",
+  "capability": "skill-access",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-skills",
+    "tier-t4",
+    "skills",
+    "mcp"
+  ],
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Skill Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ]
+    }
+  },
+  "title": "Grounded Finance Tearsheet For AAPL",
+  "prompt": "Call get_skill_content with slug finance-tearsheet. Following that workflow, add the Price Performance widget for AAPL, read its data, and add a note that cites the exact key value from the data. Omit dashboard_id when adding the note.",
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_skill_content",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "get_widget_data",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "get_skill_content",
+        "args_contains": {
+          "slug": "finance-tearsheet"
+        }
+      },
+      {
+        "tool": "get_widget_data",
+        "args_contains": {
+          "widget_id": "price_performance"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_skill_content",
+        "data_contains": [
+          "Tearsheet workflow",
+          "valuation",
+          "investment conclusion"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        },
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "AAPL",
+          "196.10",
+          "valuation"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_skill_content",
+      "args": {
+        "slug": "finance-tearsheet"
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Equities"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      }
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Skill Note",
+        "data": "AAPL tearsheet: close 196.10; valuation next."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 9
+  },
+  "split": "test",
+  "novelty": "Unique skills/t4 exercise using add_generative_widget, create_widget, get_skill_content, get_widget_data, get_widget_schema, get_workspace_snapshot, list_available_widgets with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on equities; artifact widgets:Bench Equities/price_performance@*; generated:note@*:AAPL,196.10."
+}

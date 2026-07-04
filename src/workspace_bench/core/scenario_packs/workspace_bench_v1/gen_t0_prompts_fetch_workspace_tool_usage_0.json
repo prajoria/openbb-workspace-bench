@@ -1,0 +1,123 @@
+{
+  "id": "gen_t0_prompts_fetch_workspace_tool_usage_0",
+  "title": "Fetch Prompt workspace_tool_usage",
+  "level": "L0",
+  "capability": "prompt-access",
+  "workflow": "workspace-guidance",
+  "domain": "workspace-usability",
+  "subdomain": "mcp-prompts",
+  "tags": [
+    "family-prompts",
+    "tier-t0",
+    "prompts",
+    "mcp"
+  ],
+  "prompt": "Use get_workspace_prompt with name workspace_tool_usage, then add a note mentioning schema-before-create workspace tool discipline.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      },
+      {
+        "name": "portfolio"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Prompt Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "risk_metrics",
+          "data_args": {},
+          "tab_id": "",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_workspace_prompt",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "get_workspace_prompt",
+        "args_contains": {
+          "name": "workspace_tool_usage"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_workspace_prompt",
+        "data_contains": [
+          "schema-before-create workspace tool discipline"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "schema-before-create"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "required_widgets": [
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics",
+        "data_args": {},
+        "tab_id": "",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_workspace_prompt",
+      "args": {
+        "name": "workspace_tool_usage"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Prompt Note",
+        "data": "Prompt guidance: schema-before-create workspace tool discipline."
+      }
+    }
+  ],
+  "source": "workspace-bench-gen",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique prompts/t0 exercise using add_generative_widget, get_workspace_prompt, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on equities, portfolio; artifact prompts:workspace_tool_usage; widgets:Bench Portfolio/risk_metrics@; generated:note@*:schema-before-create."
+}

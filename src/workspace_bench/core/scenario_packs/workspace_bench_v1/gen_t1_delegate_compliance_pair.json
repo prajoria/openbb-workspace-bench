@@ -1,0 +1,115 @@
+{
+  "id": "gen_t1_delegate_compliance_pair",
+  "title": "Delegate Two Tasks: Compliance Pair",
+  "level": "L3",
+  "capability": "mcp-tool-use",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-delegate",
+    "tier-t1",
+    "delegation",
+    "agents",
+    "mcp"
+  ],
+  "prompt": "Call assign_tasks_to_agents with two task_requests using ids alerts-analyst and restricted-analyst for compliance surveillance work.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Delegation Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "stress_liquidity_lab_scenarios_position_impact_table",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "assign_tasks_to_agents"
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "assign_tasks_to_agents",
+        "data_contains": [
+          "alerts-analyst",
+          "restricted-analyst"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "stress_liquidity_lab_scenarios_position_impact_table",
+        "data_args": {},
+        "tab_id": "overview",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "assign_tasks_to_agents",
+      "args": {
+        "task_requests": [
+          {
+            "id": "alerts-analyst",
+            "description": "Triage open surveillance alerts by severity.",
+            "assigned_holder_url": "workspace://agents/alerts",
+            "assigned_agent_id": "alerts-agent"
+          },
+          {
+            "id": "restricted-analyst",
+            "description": "Verify restricted list changes against orders.",
+            "assigned_holder_url": "workspace://agents/restricted",
+            "assigned_agent_id": "restricted-agent"
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique delegate/t1 exercise using assign_tasks_to_agents, get_workspace_snapshot with checks layout_out_of_grid, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact tasks:alerts-analyst,restricted-analyst; widgets:Bench Stark Enterprise/stress_liquidity_lab_scenarios_position_impact_table@overview."
+}

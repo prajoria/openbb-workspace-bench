@@ -6,6 +6,7 @@ import argparse
 import asyncio
 import json
 import sys
+from collections import Counter
 from dataclasses import asdict
 from pathlib import Path
 
@@ -117,9 +118,9 @@ def main(argv: list[str] | None = None) -> int:
         "--pack",
         default="core",
         choices=["all", *BUILTIN_SCENARIO_PACK_ORDER],
-        help="Bundled scenario pack used to resolve --scenario.",
+        help="Bundled scenario pack used to resolve --scenario; core/all are aliases for workspace-bench-v1.",
     )
-    smoke_parser.add_argument("--scenario", default="l1_add_price_widget")
+    smoke_parser.add_argument("--scenario", default="gen_t0_create_price_performance_aapl")
     smoke_parser.add_argument("--agent", default="oracle", choices=["oracle", "noop"])
     smoke_parser.add_argument("--json", action="store_true", help="Emit JSON.")
     smoke_parser.add_argument(
@@ -243,8 +244,8 @@ def _add_scenario_collection_args(parser: argparse.ArgumentParser) -> None:
         default="core",
         choices=["all", *BUILTIN_SCENARIO_PACK_ORDER],
         help=(
-            "Bundled scenario pack. Defaults to core. Use all to run every "
-            "bundled pack."
+            "Bundled scenario pack. Defaults to core. core/all are deprecated "
+            "aliases for the unified workspace-bench-v1 pack."
         ),
     )
     parser.add_argument(
@@ -413,6 +414,11 @@ def build_report(
     runner = ScenarioRunner()
     oracle_results = [runner.run(scenario, "oracle") for scenario in scenarios]
     noop_results = [runner.run(scenario, "noop") for scenario in scenarios]
+    release_checks = {
+        "oracle_all_pass": all(result.grade.passed for result in oracle_results),
+        "noop_all_fail": all(not result.grade.passed for result in noop_results),
+    }
+    release_checks.update(_release_checks(scenarios))
     return {
         "manifest": build_manifest(scenarios, task_pack),
         "baselines": {
@@ -421,11 +427,7 @@ def build_report(
         },
         "oracle_results": [_result_summary(result) for result in oracle_results],
         "noop_results": [_result_summary(result) for result in noop_results],
-        "release_checks": {
-            "oracle_all_pass": all(result.grade.passed for result in oracle_results),
-            "noop_all_fail": all(not result.grade.passed for result in noop_results),
-            "scenario_count_at_least_25": len(scenarios) >= 25,
-        },
+        "release_checks": release_checks,
     }
 
 
@@ -477,7 +479,7 @@ def _cmd_export_task(args: argparse.Namespace) -> int:
         write_task_envelope(Path(args.output), scenario)
         print(f"Wrote task envelope for {scenario.id} to {args.output}")
         return 0
-    scenario_id = args.scenario or "l1_add_price_widget"
+    scenario_id = args.scenario or "gen_t0_create_price_performance_aapl"
     scenario = _scenario_from_file_or_builtin(scenario_id, args.scenario_file)
     write_task_envelope(Path(args.output), scenario)
     print(f"Wrote task envelope for {scenario.id} to {args.output}")
@@ -740,6 +742,17 @@ def validate_scenarios(scenarios: list[Scenario], min_scenarios: int = 1) -> dic
                 ),
             }
         )
+    release_checks = (
+        _release_checks(scenarios) if min_scenarios >= 300 or len(scenarios) >= 300 else {}
+    )
+    for check_name, passed in release_checks.items():
+        if not passed:
+            issues.append(
+                {
+                    "scenario_id": "benchmark",
+                    "message": f"release check failed: {check_name}",
+                }
+            )
     for scenario, oracle_result, noop_result in zip(
         scenarios, oracle_results, noop_results
     ):
@@ -764,8 +777,103 @@ def validate_scenarios(scenarios: list[Scenario], min_scenarios: int = 1) -> dic
         "scenario_count": len(scenarios),
         "oracle_passed": sum(result.grade.passed for result in oracle_results),
         "noop_failed": sum(not result.grade.passed for result in noop_results),
+        "release_checks": release_checks,
         "issues": issues,
     }
+
+
+def _release_checks(scenarios: list[Scenario]) -> dict[str, bool]:
+    total = len(scenarios)
+    levels = Counter(scenario.level for scenario in scenarios)
+    difficulties = Counter(scenario.difficulty for scenario in scenarios)
+    backends = Counter(
+        backend for scenario in scenarios for backend in _scenario_backend_slugs(scenario)
+    )
+    widget_pairs = {
+        (required.origin, required.widget_id)
+        for scenario in scenarios
+        for required in scenario.success.required_widgets
+        if required.min_count > 0
+    }
+    checks = _release_check_type_counts(scenarios)
+    novelty = [scenario.novelty for scenario in scenarios]
+    return {
+        "scenario_count_at_least_300": total >= 300,
+        "fingerprint_unique": len(set(novelty)) == total and all(novelty),
+        "quota_l2_dashboard_construction": levels["L2"] >= total * 0.15,
+        "quota_backend_equities": backends["equities"] >= total * 0.15,
+        "quota_backend_macro": backends["macro"] >= total * 0.15,
+        "quota_backend_portfolio": backends["portfolio"] >= total * 0.15,
+        "quota_backend_stark_enterprise": backends["stark-enterprise"] >= total * 0.15,
+        "quota_difficulty_bands": (
+            abs(difficulties["easy"] - total * 0.30) <= total * 0.05
+            and abs(difficulties["medium"] - total * 0.40) <= total * 0.05
+            and abs(difficulties["hard"] - total * 0.30) <= total * 0.05
+        ),
+        "quota_required_widget_pairs": len(widget_pairs) >= 120,
+        "quota_grader_check_types": bool(checks)
+        and all(count >= 10 for count in checks.values()),
+    }
+
+
+def _scenario_backend_slugs(scenario: Scenario) -> set[str]:
+    backends = {_backend_slug(backend.name) for backend in scenario.fixtures}
+    for call in scenario.oracle_tool_calls:
+        if call.name == "manage_backends" and call.args.get("operation") == "add":
+            name = call.args.get("name")
+            if isinstance(name, str):
+                backends.add(_backend_slug(name))
+    return backends
+
+
+def _backend_slug(name: str) -> str:
+    return {
+        "equities": "equities",
+        "Bench Equities": "equities",
+        "macro": "macro",
+        "Bench Macro": "macro",
+        "portfolio": "portfolio",
+        "Bench Portfolio": "portfolio",
+        "stark-enterprise": "stark-enterprise",
+        "Bench Stark Enterprise": "stark-enterprise",
+    }.get(name, name)
+
+
+def _release_check_type_counts(scenarios: list[Scenario]) -> Counter:
+    counts: Counter = Counter()
+    for scenario in scenarios:
+        success = scenario.success
+        if success.required_dashboard_name_contains:
+            counts["dashboard_name"] += 1
+        if success.required_tabs:
+            counts["missing_tab"] += 1
+        for required in success.required_widgets:
+            if required.min_count > 0:
+                counts["missing_widget"] += 1
+            if required.max_count is not None:
+                counts["too_many_widgets"] += 1
+        if success.required_generated_widgets:
+            counts["missing_generated_widget"] += 1
+        if success.required_layouts:
+            counts["layout_mismatch"] += 1
+        if success.required_tool_calls:
+            counts["missing_tool_call"] += 1
+        if success.required_tool_results:
+            counts["missing_tool_result"] += 1
+        if success.required_resource_reads:
+            counts["missing_resource_read"] += 1
+        if success.layout.within_grid:
+            counts["layout_out_of_grid"] += 1
+        if success.layout.no_overlaps:
+            counts["layout_overlap"] += 1
+        counts["too_many_invalid_calls"] += 1
+        if success.trace.must_call_schema_before_create:
+            counts["schema_not_called_before_create"] += 1
+        if success.trace.forbid_invented_widget_ids:
+            counts["unlisted_widget_id"] += 1
+        if success.trace.max_repeated_snapshots is not None:
+            counts["repeated_snapshots"] += 1
+    return counts
 
 
 def _scenario_metadata_issues(scenario: Scenario) -> list[str]:
@@ -917,6 +1025,7 @@ def _scenario_summary(scenario: Scenario) -> dict:
         "split": scenario.split,
         "tags": scenario.tags,
         "source": scenario.source,
+        "novelty": scenario.novelty,
         "fixtures": [backend.name for backend in scenario.fixtures],
         "oracle_tool_call_count": len(scenario.oracle_tool_calls),
     }
@@ -930,11 +1039,12 @@ def _result_summary(result: RunResult) -> dict:
         "workflow": result.scenario.workflow,
         "domain": result.scenario.domain,
         "subdomain": result.scenario.subdomain,
-        "difficulty": result.scenario.difficulty,
-        "split": result.scenario.split,
-        "tags": result.scenario.tags,
-        "score": result.grade.score,
-        "passed": result.grade.passed,
+            "difficulty": result.scenario.difficulty,
+            "split": result.scenario.split,
+            "tags": result.scenario.tags,
+            "novelty": result.scenario.novelty,
+            "score": result.grade.score,
+            "passed": result.grade.passed,
         "checks_passed": result.grade.checks_passed,
         "checks_total": result.grade.checks_total,
         "issues": [
@@ -1018,6 +1128,7 @@ def _write_trace_artifacts(
             "difficulty": result.scenario.difficulty,
             "split": result.scenario.split,
             "tags": result.scenario.tags,
+            "novelty": result.scenario.novelty,
         }
         if redact_prompts:
             scenario_payload["prompt_redacted"] = True

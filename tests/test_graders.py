@@ -3,12 +3,19 @@ from __future__ import annotations
 from dataclasses import replace
 
 from workspace_bench.core.graders import grade_scenario
-from workspace_bench.core.models import LayoutChecks, SuccessCriteria
+from workspace_bench.core.models import (
+    LayoutChecks,
+    RequiredGeneratedWidget,
+    RequiredResourceRead,
+    SuccessCriteria,
+    ToolCall,
+    ToolTraceEvent,
+)
 from workspace_bench.core.runner import ScenarioRunner, find_scenario
 
 
 def test_grader_detects_missing_required_widget() -> None:
-    scenario = find_scenario("l1_add_price_widget")
+    scenario = find_scenario("gen_t0_create_price_performance_aapl")
     snapshot = {
         "dashboard_composition": {
             "name": "Empty",
@@ -24,7 +31,7 @@ def test_grader_detects_missing_required_widget() -> None:
 
 
 def test_grader_detects_layout_overlap() -> None:
-    scenario = find_scenario("l1_add_price_widget")
+    scenario = find_scenario("gen_t0_create_price_performance_aapl")
     scenario = replace(
         scenario,
         success=replace(
@@ -65,7 +72,7 @@ def test_grader_detects_layout_overlap() -> None:
 
 
 def test_grader_matches_generated_percent_equivalent() -> None:
-    scenario = find_scenario("l0_portfolio_dashboard_note")
+    scenario = find_scenario("gen_t1_note_fact_top_holding")
     snapshot = {
         "dashboard_composition": {
             "name": "Existing Portfolio Review",
@@ -106,9 +113,7 @@ def test_grader_matches_generated_percent_equivalent() -> None:
 
 
 def test_grader_requires_tool_results_for_skill_scenario() -> None:
-    scenario = find_scenario(
-        "stark_l1_get_workspace_skill_content", pack="stark-enterprise-v0"
-    )
+    scenario = find_scenario("gen_t1_skill_finance_earnings_prep")
     result = ScenarioRunner().run(scenario, "oracle")
 
     assert result.grade.passed is True
@@ -116,7 +121,18 @@ def test_grader_requires_tool_results_for_skill_scenario() -> None:
 
 
 def test_grader_matches_generated_widget_display_alias() -> None:
-    scenario = find_scenario("l3_app_template_summary")
+    scenario = find_scenario("gen_t0_create_price_performance_aapl")
+    scenario = replace(
+        scenario,
+        success=SuccessCriteria(
+            required_generated_widgets=(
+                RequiredGeneratedWidget(
+                    widget_type="note",
+                    data_contains=("price_performance",),
+                ),
+            )
+        ),
+    )
     snapshot = {
         "dashboard_composition": {
             "name": "Workspace Bench",
@@ -144,7 +160,7 @@ def test_grader_matches_generated_widget_display_alias() -> None:
 
 
 def test_grader_dashboard_name_allows_stopwords_between_terms() -> None:
-    scenario = find_scenario("l2_portfolio_macro_risk_dashboard")
+    scenario = find_scenario("gen_t0_create_price_performance_aapl")
     scenario = replace(
         scenario,
         success=SuccessCriteria(
@@ -160,5 +176,72 @@ def test_grader_dashboard_name_allows_stopwords_between_terms() -> None:
     }
 
     grade = grade_scenario(scenario, snapshot, ())
+
+    assert grade.passed is True
+
+
+def test_grader_detects_missing_required_resource_read() -> None:
+    scenario = find_scenario("gen_t0_create_price_performance_aapl")
+    scenario = replace(
+        scenario,
+        success=SuccessCriteria(
+            required_resource_reads=(
+                RequiredResourceRead(
+                    uri="openbb://workspace/app-builder/index",
+                    data_contains=("Workspace app builder index",),
+                ),
+            )
+        ),
+    )
+    snapshot = {
+        "dashboard_composition": {
+            "name": "Workspace Bench",
+            "tabs": [{"id": "", "name": "", "layout": []}],
+            "widgets": [],
+        }
+    }
+
+    grade = grade_scenario(scenario, snapshot, ())
+
+    assert grade.passed is False
+    assert any(issue.code == "missing_resource_read" for issue in grade.issues)
+
+
+def test_grader_matches_required_resource_read() -> None:
+    scenario = find_scenario("gen_t0_create_price_performance_aapl")
+    scenario = replace(
+        scenario,
+        success=SuccessCriteria(
+            required_resource_reads=(
+                RequiredResourceRead(
+                    uri="openbb://workspace/app-builder/index",
+                    data_contains=("Equity Earnings Review",),
+                ),
+            )
+        ),
+    )
+    snapshot = {
+        "dashboard_composition": {
+            "name": "Workspace Bench",
+            "tabs": [{"id": "", "name": "", "layout": []}],
+            "widgets": [],
+        }
+    }
+    trace = (
+        ToolTraceEvent(
+            index=1,
+            call=ToolCall(
+                "read_workspace_resource",
+                {"uri": "openbb://workspace/app-builder/index"},
+            ),
+            ok=True,
+            result={
+                "ok": True,
+                "data": {"text": "Workspace app builder index: Equity Earnings Review"},
+            },
+        ),
+    )
+
+    grade = grade_scenario(scenario, snapshot, trace)
 
     assert grade.passed is True

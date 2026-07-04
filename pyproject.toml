@@ -46,8 +46,7 @@ workspace-bench = "workspace_bench.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-"workspace_bench.core" = ["scenarios/*.json"]
-"workspace_bench.core.scenario_packs.stark_enterprise_v0" = ["*.json"]
+"workspace_bench.core.scenario_packs.workspace_bench_v1" = ["*.json"]
 "workspace_bench.workspace.data" = ["*.json"]
 
 [tool.pytest.ini_options]

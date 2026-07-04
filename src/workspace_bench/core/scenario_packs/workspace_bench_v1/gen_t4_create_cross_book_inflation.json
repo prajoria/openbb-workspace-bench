@@ -1,0 +1,150 @@
+{
+  "id": "gen_t4_create_cross_book_inflation",
+  "title": "Cross-Backend Build: Book Inflation",
+  "level": "L2",
+  "capability": "widget-creation",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-create",
+    "tier-t4",
+    "widget-creation",
+    "cross-backend"
+  ],
+  "prompt": "On the active dashboard, add these two widgets: the Holdings Table widget from Bench Portfolio and the Macro Timeseries widget from Bench Macro for CPIAUCSL. Then add a note mentioning holdings and CPIAUCSL.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "macro"
+      },
+      {
+        "name": "portfolio"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Cross-Backend Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "create_widget",
+    "update_widget_layout",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "holdings_table",
+        "data_args": {},
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "CPIAUCSL"
+        },
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "holdings",
+          "CPIAUCSL"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Portfolio"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "holdings_table"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "holdings_table",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Macro"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "CPIAUCSL"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Build Note",
+        "data": "Holdings reviewed against the CPIAUCSL inflation series."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 10
+  },
+  "split": "train",
+  "novelty": "Unique create/t4 exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on macro, portfolio; artifact widgets:Bench Macro/macro_timeseries@*,Bench Portfolio/holdings_table@*; generated:note@*:holdings,CPIAUCSL."
+}

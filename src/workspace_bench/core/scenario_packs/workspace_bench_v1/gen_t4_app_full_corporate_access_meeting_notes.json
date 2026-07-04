@@ -1,0 +1,138 @@
+{
+  "id": "gen_t4_app_full_corporate_access_meeting_notes",
+  "title": "Instantiate, Extend, And Brief Corporate Access & Meeting Notes",
+  "level": "L3",
+  "capability": "app-instantiation",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-apps",
+    "tier-t4",
+    "apps",
+    "stark",
+    "widget-creation",
+    "note"
+  ],
+  "prompt": "Create a new dashboard named Corporate Access Log by instantiating the Corporate Access & Meeting Notes app from the Bench Stark Enterprise backend. Then add the Expert Calls widget (id corporate_access_meeting_notes_meetings_expert_calls) to the Meetings tab, and add a note on the same tab mentioning expert calls and meeting calendar.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Corporate Access Log",
+    "required_tabs": [
+      "overview",
+      "claims",
+      "compliance",
+      "meetings"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "corporate_access_meeting_notes_claims_management_claims_tracker",
+        "tab_id": "claims",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "corporate_access_meeting_notes_compliance_mnpi_attestation_status",
+        "tab_id": "compliance",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "corporate_access_meeting_notes_meetings_expert_calls",
+        "tab_id": "meetings",
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "expert calls",
+          "meeting calendar"
+        ],
+        "tab_id": "meetings"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Corporate Access & Meeting Notes",
+        "dashboard_name": "Corporate Access Log",
+        "activate": true
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "meetings"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "corporate_access_meeting_notes_meetings_expert_calls"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "corporate_access_meeting_notes_meetings_expert_calls",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Brief Note",
+        "data": "Expert calls tracked against the meeting calendar."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique apps/t4 exercise using add_generative_widget, create_widget, get_widget_schema, manage_apps, manage_backends, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_tab, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact apps:Corporate Access & Meeting Notes; widgets:Bench Stark Enterprise/corporate_access_meeting_notes_claims_management_claims_tracker@claims,Bench Stark Enterprise/corporate_access_meeting_notes_compliance_mnpi_attestation_status@compliance,Bench Stark Enterprise/corporate_access_meeting_notes_meetings_expert_calls@meetings; tabs:claims,compliance,meetings,overview; generated:note@meetings:expert calls,meeting calendar."
+}

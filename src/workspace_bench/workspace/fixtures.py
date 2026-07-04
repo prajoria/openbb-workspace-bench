@@ -276,6 +276,8 @@ class FixtureBackend:
         if widget_id == "risk_metrics":
             return copy.deepcopy(RISK_ROWS)
         if widget_id in self.widgets:
+            if self.slug == "stark-enterprise" and "data" in self.widgets[widget_id]:
+                return _stark_widget_data(self.widgets[widget_id]["data"], data_args)
             return _generic_widget_data(widget_id, self.widgets[widget_id], data_args)
         raise KeyError(f"Unknown widget data endpoint for {widget_id!r}")
 
@@ -618,6 +620,28 @@ def _generic_widget_data(
             "value": round(base["value"] * 0.85, 2),
         },
     ]
+
+
+def _stark_widget_data(payload: Any, data_args: JsonDict) -> Any:
+    data = copy.deepcopy(payload)
+    if not isinstance(data, list) or not all(isinstance(row, dict) for row in data):
+        return data
+
+    filter_fields = {"status", "desk", "vendor", "fund", "period"}
+    filters = {
+        key: data_args[key]
+        for key in filter_fields
+        if key in data_args and any(key in row for row in data)
+    }
+    if not filters:
+        return data
+
+    filtered = [
+        row
+        for row in data
+        if all(str(row.get(key)) == str(value) for key, value in filters.items())
+    ]
+    return filtered or data
 
 
 def default_fixture_backends() -> dict[str, FixtureBackend]:

@@ -1,0 +1,118 @@
+{
+  "id": "gen_t2_note_twofacts_estimates_aapl",
+  "title": "Two-Fact Note: Estimates Aapl",
+  "level": "L0",
+  "capability": "workspace-inspection",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-note",
+    "tier-t2",
+    "note",
+    "read-only"
+  ],
+  "prompt": "Add a note on the overview tab with the 2026Q1 EPS estimate and the revenue estimate from the data after reviewing the existing AAPL estimates widget.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Existing Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "estimate_history",
+          "data_args": {
+            "symbol": "AAPL"
+          },
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 12
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_widget_data",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tabs": [
+      "overview"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "estimate_history",
+        "data_args": {
+          "symbol": "AAPL"
+        },
+        "tab_id": "overview",
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "AAPL",
+          "2.31",
+          "94.8"
+        ],
+        "tab_id": "overview"
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "estimate_history",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Answer Note",
+        "data": "AAPL 2026Q1: EPS 2.31, revenue 94.8B."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique note/t2 exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tab, missing_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact widgets:Bench Equities/estimate_history@overview; tabs:overview; generated:note@overview:AAPL,2.31."
+}

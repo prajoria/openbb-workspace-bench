@@ -1,8 +1,0 @@
-{
-  "pack_id": "stark-enterprise-v0",
-  "release_id": "stark-enterprise-v0",
-  "version": "0.1.0",
-  "visibility": "public",
-  "default_split": "dev",
-  "description": "Enterprise finance workflow scenarios derived from the Stark Industries demo backend and Workspace MCP tool surface."
-}

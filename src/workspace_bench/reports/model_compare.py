@@ -173,8 +173,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--pack",
         default="core",
-        choices=["core", "stark-enterprise-v0", "all"],
-        help="Bundled scenario pack. Defaults to core.",
+        choices=["core", "all"],
+        help="Bundled scenario pack. core/all resolve to workspace-bench-v1.",
     )
     parser.add_argument(
         "--split",
@@ -949,16 +949,20 @@ def call_openai_chat(model: str, messages: list[JsonDict], timeout: float) -> st
     payload = {
         "model": model,
         "temperature": float(os.environ.get("OPENAI_TEMPERATURE", "0")),
-        "response_format": {
+        "messages": messages,
+    }
+    # Some OpenAI-compatible providers (e.g. Anthropic models behind
+    # OpenRouter/Bedrock) degrade to schema-minimal outputs under
+    # json_schema response_format; allow opting out per adapter.
+    if os.environ.get("OPENAI_RESPONSE_FORMAT", "json_schema") != "none":
+        payload["response_format"] = {
             "type": "json_schema",
             "json_schema": {
                 "name": "workspace_next_action",
                 "schema": interactive_action_schema(),
                 "strict": False,
             },
-        },
-        "messages": messages,
-    }
+        }
     body = post_json(
         f"{base_url}/chat/completions",
         payload,

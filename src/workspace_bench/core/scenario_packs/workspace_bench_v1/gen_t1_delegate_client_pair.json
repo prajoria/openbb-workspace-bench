@@ -1,0 +1,115 @@
+{
+  "id": "gen_t1_delegate_client_pair",
+  "title": "Delegate Two Tasks: Client Pair",
+  "level": "L3",
+  "capability": "mcp-tool-use",
+  "workflow": "client-meeting-prep",
+  "subdomain": "client-ir",
+  "tags": [
+    "family-delegate",
+    "tier-t1",
+    "delegation",
+    "agents",
+    "mcp"
+  ],
+  "prompt": "For client meeting prep work, call assign_tasks_to_agents with two task_requests using ids ir-analyst and portfolio-analyst.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Delegation Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "stress_liquidity_lab_scenarios_portfolio_impact",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "assign_tasks_to_agents"
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "assign_tasks_to_agents",
+        "data_contains": [
+          "ir-analyst",
+          "portfolio-analyst"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "stress_liquidity_lab_scenarios_portfolio_impact",
+        "data_args": {},
+        "tab_id": "overview",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "assign_tasks_to_agents",
+      "args": {
+        "task_requests": [
+          {
+            "id": "ir-analyst",
+            "description": "Prepare talking points and open requests.",
+            "assigned_holder_url": "workspace://agents/ir",
+            "assigned_agent_id": "ir-agent"
+          },
+          {
+            "id": "portfolio-analyst",
+            "description": "Summarize client portfolio performance and exposure.",
+            "assigned_holder_url": "workspace://agents/portfolio",
+            "assigned_agent_id": "portfolio-agent"
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique delegate/t1 exercise using assign_tasks_to_agents, get_workspace_snapshot with checks layout_out_of_grid, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact tasks:ir-analyst,portfolio-analyst; widgets:Bench Stark Enterprise/stress_liquidity_lab_scenarios_portfolio_impact@overview."
+}

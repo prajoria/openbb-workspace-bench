@@ -6,6 +6,7 @@ from types import SimpleNamespace
 import urllib.error
 
 from workspace_bench.agents.agent_command import build_task_envelope
+from workspace_bench.agents.model_adapter_helpers import TOOL_REFERENCE
 from workspace_bench.reports.metrics import compute_reliability_metrics
 from workspace_bench.reports.model_compare import (
     ModelAdapter,
@@ -25,6 +26,7 @@ from workspace_bench.reports.model_compare import (
     validate_adapters_for_runner,
 )
 from workspace_bench.core.runner import find_scenario
+from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
 def test_parse_interactive_action_unwraps_nested_tool_name() -> None:
@@ -62,17 +64,19 @@ def test_normalize_interactive_args_maps_fixture_origin_slug() -> None:
 
 
 def test_stark_interactive_prompt_uses_display_origin_and_widget_hints() -> None:
-    scenario = find_scenario("stark_l1_add_rebalance_drift_widget")
+    scenario = find_scenario(
+        "gen_t1_params_schema_sector_client_360_portfolio_view_exposure_summary_7"
+    )
 
     messages = build_interactive_messages(build_task_envelope(scenario))
     prompt = messages[1]["content"]
 
     assert '"stark-enterprise": "Bench Stark Enterprise"' in prompt
-    assert "rebalance_scenario_lab_drift_current_vs_target_weights" in prompt
+    assert "client_360_portfolio_view_exposure_summary" in prompt
 
 
 def test_non_widget_stark_prompt_omits_widget_hints() -> None:
-    scenario = find_scenario("stark_l3_delegate_earnings_research_tasks")
+    scenario = find_scenario("gen_t0_delegate_earnings_single")
 
     messages = build_interactive_messages(build_task_envelope(scenario))
     prompt = messages[1]["content"]
@@ -80,12 +84,12 @@ def test_non_widget_stark_prompt_omits_widget_hints() -> None:
     assert '"widget_hints": {}' in prompt
 
 
-def test_stark_comparison_metadata_uses_pack_release_id() -> None:
+def test_comparison_metadata_uses_unified_pack_release_id() -> None:
     metadata = benchmark_metadata(
-        SimpleNamespace(scenario_dir=None, pack="stark-enterprise-v0")
+        SimpleNamespace(scenario_dir=None, pack="all")
     )
 
-    assert metadata["release_id"] == "stark-enterprise-v0"
+    assert metadata["release_id"] == "workspace-bench-v1"
 
 
 def test_colorize_wraps_enabled_status() -> None:
@@ -95,6 +99,16 @@ def test_colorize_wraps_enabled_status() -> None:
 
 def test_normalize_tool_name_accepts_tool_prefix_alias() -> None:
     assert normalize_tool_name("tool_get_widget_schema") == "get_widget_schema"
+
+
+def test_tool_reference_documents_every_simulator_tool() -> None:
+    simulator_tools = {
+        name.removeprefix("_tool_")
+        for name in dir(SimulatedWorkspace)
+        if name.startswith("_tool_")
+    }
+
+    assert simulator_tools <= set(TOOL_REFERENCE)
 
 
 def test_http_520_is_transient() -> None:

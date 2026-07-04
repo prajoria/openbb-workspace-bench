@@ -1,0 +1,113 @@
+{
+  "id": "gen_t0_layout_halve_price_msft",
+  "title": "Layout: Halve Price Msft",
+  "level": "L1",
+  "capability": "layout-management",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-layout",
+    "tier-t0",
+    "layout"
+  ],
+  "prompt": "Resize the MSFT price widget to half width (20 columns). Keep its position.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Layout Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "charts",
+          "name": "Charts"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "price_performance",
+          "data_args": {
+            "symbol": "MSFT"
+          },
+          "tab_id": "charts",
+          "layout": {
+            "x": 0,
+            "y": 2,
+            "w": 40,
+            "h": 12
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget_layout"
+  ],
+  "success": {
+    "required_tabs": [
+      "charts"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "MSFT"
+        },
+        "tab_id": "charts"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_id": "price_performance",
+        "tab_id": "charts",
+        "x": 0,
+        "y": 2,
+        "w": 20,
+        "h": 12
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_id": "price_performance",
+        "tab_id": "charts",
+        "x": 0,
+        "y": 2,
+        "w": 20,
+        "h": 12
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique layout/t0 exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, missing_tab, missing_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact widgets:Bench Equities/price_performance@charts; layouts:price_performance::charts:0:2:20:12; tabs:charts."
+}

@@ -1,0 +1,160 @@
+{
+  "id": "gen_t4_layout_grid_grid_eq",
+  "title": "Three-Widget Grid: Grid Eq",
+  "level": "L1",
+  "capability": "layout-management",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-layout",
+    "tier-t4",
+    "layout",
+    "multi-widget",
+    "combo"
+  ],
+  "prompt": "Arrange the three AAPL widgets into a grid: price at columns 0-20 rows 0-12, news at columns 20-40 rows 0-12, and estimates full-width below them (40 columns, 8 rows, starting at row 12).",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Grid Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "price_performance",
+          "data_args": {
+            "symbol": "AAPL"
+          },
+          "layout": {
+            "x": 2,
+            "y": 2,
+            "w": 16,
+            "h": 9
+          }
+        },
+        {
+          "origin": "Bench Equities",
+          "widget_id": "latest_news",
+          "data_args": {
+            "symbol": "AAPL",
+            "limit": 5
+          },
+          "layout": {
+            "x": 6,
+            "y": 13,
+            "w": 16,
+            "h": 9
+          }
+        },
+        {
+          "origin": "Bench Equities",
+          "widget_id": "estimate_history",
+          "data_args": {
+            "symbol": "AAPL"
+          },
+          "layout": {
+            "x": 10,
+            "y": 24,
+            "w": 16,
+            "h": 9
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget_layout"
+  ],
+  "success": {
+    "required_layouts": [
+      {
+        "widget_uuid": "widget_001",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "widget_002",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "widget_003",
+        "x": 0,
+        "y": 12,
+        "w": 40,
+        "h": 8
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_uuid": "widget_001",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      }
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_uuid": "widget_002",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      }
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_uuid": "widget_003",
+        "x": 0,
+        "y": 12,
+        "w": 40,
+        "h": 8
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique layout/t4 exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on equities; artifact layouts::widget_001::0:0:20:12,:widget_002::20:0:20:12,:widget_003::0:12:40:8."
+}

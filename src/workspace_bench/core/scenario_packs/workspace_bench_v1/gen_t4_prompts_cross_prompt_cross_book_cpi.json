@@ -1,0 +1,167 @@
+{
+  "id": "gen_t4_prompts_cross_prompt_cross_book_cpi",
+  "title": "Prompt Cross Book CPI",
+  "level": "L2",
+  "capability": "dashboard-construction",
+  "workflow": "portfolio-risk-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-prompts",
+    "tier-t4",
+    "prompts",
+    "cross-backend"
+  ],
+  "prompt": "After fetching workspace_tool_usage and workspace_session_context, create Prompt Cross Book CPI, build the cross-backend dashboard with Bench Portfolio/sector_exposure and Bench Macro/macro_timeseries with data_args {\"series\": \"CPIAUCSL\"}, and add a note mentioning sector and CPIAUCSL and current-dashboard.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "macro"
+      },
+      {
+        "name": "portfolio"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_prompt",
+    "manage_dashboard",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Prompt Cross Book CPI",
+    "required_tool_calls": [
+      {
+        "tool": "get_workspace_prompt",
+        "args_contains": {
+          "name": "workspace_tool_usage"
+        }
+      },
+      {
+        "tool": "get_workspace_prompt",
+        "args_contains": {
+          "name": "workspace_session_context"
+        }
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "sector_exposure",
+        "data_args": {}
+      },
+      {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "CPIAUCSL"
+        }
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "sector",
+          "CPIAUCSL",
+          "current-dashboard"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_prompt",
+      "args": {
+        "name": "workspace_tool_usage"
+      }
+    },
+    {
+      "tool": "get_workspace_prompt",
+      "args": {
+        "name": "workspace_session_context"
+      }
+    },
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "create",
+        "name": "Prompt Cross Book CPI"
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Portfolio"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "sector_exposure"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "sector_exposure",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Macro"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "CPIAUCSL"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Prompt Cross Note",
+        "data": "Prompt cross build: sector, CPIAUCSL, current-dashboard."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 12
+  },
+  "split": "train",
+  "novelty": "Unique prompts/t4 exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_prompt, list_available_widgets, manage_dashboard with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on macro, portfolio; artifact prompts:workspace_session_context,workspace_tool_usage; widgets:Bench Macro/macro_timeseries@*,Bench Portfolio/sector_exposure@*; generated:note@*:sector,CPIAUCSL."
+}
