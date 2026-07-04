@@ -517,7 +517,7 @@
 
   <h2 id="why">01 · Why a benchmark</h2>
   <p>
-    Two ideas carry this section: agent work should be graded like software, and a workspace agent's answer is the state it leaves behind.
+    The idea in this section is simple: grade agent work the way we grade software, and judge a workspace agent by the state it leaves behind.
   </p>
 
   <h3>The pattern, elsewhere</h3>
@@ -622,7 +622,7 @@
     The core loop is deliberately small. A scenario defines the task. The harness seeds a deterministic workspace from fixture backends. The agent emits tool calls. The simulator applies them. The grader checks the final state and the trace.
   </p>
   <p>
-    The simulator is intentional. It is not a pixel or browser simulator — it is a deterministic state machine for the Workspace MCP contract (<code class="repo-path">src/workspace_bench/workspace/simulated_workspace.py</code>). That makes runs fast, reproducible, and cheap enough for CI. A live smoke runner (<code class="repo-path">src/workspace_bench/workspace/live_mcp.py</code>) drives the same scenario contract through a real local <code>workspace-mcp</code> sidecar and websocket bridge, with the benchmark simulator acting as the browser side. A separate read-only audit lists the hosted deployment's tools, prompts, and resources and diffs that surface against what the scenarios assume.
+    The simulator is intentional. It is not a pixel or browser simulator; it is a deterministic state machine for the Workspace MCP contract (<code class="repo-path">src/workspace_bench/workspace/simulated_workspace.py</code>). That makes runs fast, reproducible, and cheap enough for CI. A live smoke runner (<code class="repo-path">src/workspace_bench/workspace/live_mcp.py</code>) drives the same scenario contract through a real local <code>workspace-mcp</code> sidecar and websocket bridge, with the benchmark simulator acting as the browser side. A separate read-only audit lists the hosted deployment's tools, prompts, and resources and diffs that surface against what the scenarios assume.
   </p>
 
   <figure class="panel">
@@ -643,7 +643,7 @@
 
   <h3>The MCP surface: tools, prompts, resources</h3>
   <p>
-    The agent's world is exactly what the <a href="https://openbb.co/blog/introducing-workspace-mcp/">Workspace MCP server</a> exposes: <strong>20 tools</strong>, <strong>2 prompts</strong> (the server's own usage guidance and session context, fetched with <code>get_workspace_prompt</code>), and <strong><a href="https://modelcontextprotocol.io/">MCP resources</a></strong> (the app-builder index and the workspace skills, read with <code>read_workspace_resource</code>). A benchmark that skips the prompts and resources isn't measuring workspace competence — an agent that ignores the app-builder index rebuilds by hand a dashboard the platform would have assembled for it.
+    The agent's world is exactly what the <a href="https://openbb.co/blog/introducing-workspace-mcp/">Workspace MCP server</a> exposes: <strong>20 tools</strong>, <strong>2 prompts</strong> (the server's own usage guidance and session context, fetched with <code>get_workspace_prompt</code>), and <strong><a href="https://modelcontextprotocol.io/">MCP resources</a></strong> (the app-builder index and the workspace skills, read with <code>read_workspace_resource</code>). A benchmark that skips the prompts and resources isn't measuring workspace competence. An agent that ignores the app-builder index ends up rebuilding by hand a dashboard the platform would have assembled for it.
   </p>
   <p>
     Every row below is live from the benchmark data: how many of the 300 scenarios exercise each part of the surface. Click one for what it does, example tests, and footage of it firing in the real Workspace.
@@ -672,7 +672,7 @@
 
   <h3>Five kinds of workspace work</h3>
   <p>
-    Scenarios are grouped into five workflow levels, each mapping to something an analyst actually does. Levels classify the kind of work — they are not the difficulty axis; that is the tier's job, later. The distribution is deliberate — dashboard construction (L2), the most product-relevant slice, is a quarter of the suite.
+    Scenarios are grouped into five workflow levels, each mapping to something an analyst actually does. Levels classify the kind of work. They are not the difficulty axis; that comes later, with the tiers. The distribution is deliberate: dashboard construction (L2) is the most product-relevant slice, so it gets a quarter of the suite.
   </p>
 
   <figure class="panel">
@@ -698,7 +698,7 @@
 
   <h2 id="distribution">03 · A designed distribution</h2>
   <p>
-    The 300 scenarios are not a collection; they are a lattice — and the difficulty axis had to earn its shape empirically before any result below could be trusted.
+    The 300 scenarios are generated as a lattice, not collected one by one. And the difficulty axis had to earn its shape empirically before I trusted any of the results below.
   </p>
 
   <h3>Generated, not hand-written</h3>
@@ -709,7 +709,7 @@
     So the suite is generated compositionally: <strong>15 families, each anchored on one MCP capability, each carrying a complete t0–t4 ladder</strong> — 4 scenarios per rung per family, 300 total. The same tool is tested at every difficulty. <code>delete_widget</code> at t0 means "remove the only widget"; at t4 it means "remove one duplicate, fix the survivor, document the repair" in a single episode. Tiers are not the L0–L4 levels from earlier — levels classify the kind of work, tiers grade how structurally demanding the episode is, and a single-widget L1 task can sit anywhere from t0 to t4.
   </p>
   <p>
-    Tiers are structural, not adjectives. A tier is defined by what the task is made of — composition, seeded pathologies, discovery pressure, turn budget — and difficulty labels derive from the tier (the boundary tiers t1 and t3 straddle two bands, as boundaries should). The composition is measurable: the average episode uses 2.3 tools at t0 and 5.0 at t4.
+    Tiers are structural, not adjectives. A tier is defined by what the task is made of — composition, seeded pathologies, discovery pressure, turn budget — and difficulty labels derive from the tier (the boundary tiers t1 and t3 straddle two bands). The composition is measurable: the average episode uses 2.3 tools at t0 and 5.0 at t4.
   </p>
 
   <h3>The shape of the suite</h3>
@@ -749,7 +749,7 @@
   </figure>
 
   <p>
-    Split discipline is built in, and it is sampled, not blessed: 180 train / 60 validation / 60 test, stratified per family×tier cell so every slice of the distribution appears in every split. No scenario is more equal than another. One honest caveat for anyone training on this: stratification means the same template family spans splits with different parameters — for evaluation that is exactly right, but if you train on the train split, prefer held-out-family splits to rule out template-shaped shortcuts. All 300 scenarios ship publicly, including the test split, so the split is a bookkeeping device, not contamination protection. The real defense is that the generator is deterministic and template-driven, so fresh held-out packs can be regenerated at will. Reproduce or extend it:
+    Splits are built in: 180 train / 60 validation / 60 test, stratified per family×tier cell so every slice of the distribution appears in every split. One honest caveat for anyone training on this: stratification means the same template family spans splits with different parameters — for evaluation that is exactly right, but if you train on the train split, prefer held-out-family splits to rule out template-shaped shortcuts. All 300 scenarios ship publicly, including the test split, so the split is a bookkeeping device, not contamination protection. The real defense is that the generator is deterministic and template-driven, so fresh held-out packs can be regenerated at will. Reproduce or extend it:
   </p>
 
   <pre><code># regenerate the pack (deterministic templates, no LLM required)
@@ -871,10 +871,10 @@ python scripts/generate_tool_matrix.py</code></pre>
   </figure>
 
   <p>
-    The first gating run did something better than confirm the ladder: it exposed three defects in our own benchmark. Two brand-new families scored 0/20 — because the harness never documented the two new tools' schemas to models (they invented argument shapes), and because several prompts demanded facts the grader checked but the instructions never requested. A third pass caught an inconsistency in when schema-discipline was instructed versus silently expected. All three were fixed at the generator level, the pack re-certified (oracle 300/300, no-op 0/300), and the sweep re-run from scratch.
+    The first gating run did something better than confirm the ladder: it exposed three defects in my own benchmark. Two brand-new families scored 0/20 — because the harness never documented the two new tools' schemas to models (they invented argument shapes), and because several prompts demanded facts the grader checked but the instructions never requested. A third pass caught an inconsistency in when schema-discipline was instructed versus silently expected. All three were fixed at the generator level, the pack re-certified (oracle 300/300, no-op 0/300), and the sweep re-run from scratch.
   </p>
   <p>
-    The before/after tells the story: the gating curve went from 83–67–48–47–30 (with two broken families and a suspicious t2/t3 tie) to <strong>98–92–77–52–33</strong> — monotonic, well-spaced, t0 nearly-free, t4 unfloored. That loop — design structurally, certify, calibrate empirically, let calibration expose your own bugs, fix, recalibrate — is the discipline this whole series argues for. It cost about three days of compute babysitting, and it is the difference between a benchmark and a demo.
+    The before/after tells the story: the gating curve went from 83–67–48–47–30 (with two broken families and a suspicious t2/t3 tie) to <strong>98–92–77–52–33</strong> — monotonic and well spaced, with t0 close to free and t4 still hard. I would read that loop (design structurally, certify, calibrate, let calibration expose your own bugs, fix, recalibrate) as the main discipline in this post. It cost about three days of compute babysitting, and it is the difference between a benchmark and a demo.
   </p>
 
   <h2 id="results">04 · Results</h2>
@@ -937,7 +937,7 @@ python scripts/generate_tool_matrix.py</code></pre>
   </figure>
 
   <p>
-    Two things to read off the table before the charts. First, the spread: 94.0% to 49.7% strict separates roughly two generations of capability, and the ordering is stable — across all 300 scenarios there is exactly 1 inversion between the top and the bottom of the board (a t0 delegation task GPT-5.5 fumbles and Qwen3 8B happens to pass). All results are single-attempt pass@1 from one run (GPT-5.5 additionally samples at temperature 1), so per-cell numbers carry sampling noise; the harness supports <code>--repeats</code> and pass@k for anyone who wants error bars. Second, the gap between mean check score and strict pass: GPT-5.5 earns 99.2% of all grader checks but passes 94.0% of scenarios — partial credit flatters everyone, which is exactly why the headline metric is all-checks-or-nothing. One inversion hides in the mean checks too: GLM-5.2's mean check score (90.1%) sits below gpt-4.1-mini's (95.7%) and even Qwen3 8B's (90.8%) despite a far higher strict pass rate — GLM fails messily across many checks while weaker models fail narrowly. The family block at the bottom is the benchmark's diagnostic panel: read down a column and you get a model's failure fingerprint; read across the inspect row and you see the suite's open problem.
+    Two things to read off the table before the charts. First, the spread. 94.0% to 49.7% strict separates roughly two generations of capability, and the ordering is stable: across all 300 scenarios there is exactly 1 scenario where the bottom model beats the top one (a t0 delegation task GPT-5.5 fumbles and Qwen3 8B happens to pass). All results are single-attempt pass@1 from one run (GPT-5.5 additionally samples at temperature 1), so per-cell numbers carry sampling noise; the Repeatability panel below puts a band on that, and the harness supports <code>--repeats</code> and pass@k for anyone who wants error bars. Second, the gap between mean check score and strict pass: GPT-5.5 earns 99.2% of all grader checks but passes 94.0% of scenarios — partial credit flatters everyone, which is exactly why the headline metric is all-checks-or-nothing. One inversion hides in the mean checks too: GLM-5.2's mean check score (90.1%) sits below gpt-4.1-mini's (95.7%) and even Qwen3 8B's (90.8%) despite a far higher strict pass rate — GLM fails messily across many checks while weaker models fail narrowly. The family block at the bottom is where I spend the most time: read down a column and you get a model's failure fingerprint; read across the inspect row and you see the suite's open problem.
   </p>
 
   <p>
@@ -968,7 +968,7 @@ python scripts/generate_tool_matrix.py</code></pre>
           <tr><td>attempt spread</td><td><strong>71.7% · 70.0% · 70.7%</strong> strict across three independent attempts — a 1.7-point spread, so the single-attempt table above is a point estimate good to about ±1 point overall</td></tr>
           <tr><td>tier stability</td><td>pooled per-tier pass rates (98 · 93 · 77 · 55 · 31) repeat the single-attempt curve within ±3 points, and the curve is monotonic in every one of the three attempts</td></tr>
           <tr><td>flappiness</td><td><strong>19 of 300</strong> scenarios pass sometimes and fail sometimes for the same model — 1 · 0 · 3 · 5 · 10 across t0→t4: within-model variance concentrates exactly where the ladder puts difficulty</td></tr>
-          <tr><td>capability vs reliability</td><td>pass@3 <strong>73.7%</strong> against pass^3 <strong>67.3%</strong> — the 6.4-point gap is the model's consistency tax, and the strict single-attempt number sits between them</td></tr>
+          <tr><td>capability vs reliability</td><td>pass@3 <strong>73.7%</strong> against pass^3 <strong>67.3%</strong> — the 6.4-point gap between them is what reliability costs, and the strict single-attempt number sits in the middle</td></tr>
         </tbody>
       </table>
     </div>
@@ -1044,7 +1044,7 @@ python scripts/generate_tool_matrix.py</code></pre>
   </figure>
 
   <p>
-    The distribution shows three distinct ladder shapes, and each one is informative. GPT-5.5 compresses the ladder: 95% at t4, barely below its t0 — multi-intent composition is essentially solved for it, and its residue is precision and ambiguity. Claude Sonnet 5, gpt-4.1-mini, and gpt-oss:20b degrade monotonically, each an echo of the gating curve at a different altitude — the tier axis measures the same thing at every capability level. Qwen3 8B shows the third shape: near-parity with the mid-field at t0–t1, then a cliff — it halves at t2 and lands at 17% by t4. Small models don't degrade on this benchmark; they break, and they break exactly where episodes become multi-step. The agreement panel makes the same point from the other side: unanimity falls from 36/60 at t0 to 6/60 at t4, so the contested band — 192 of 300 scenarios — is concentrated precisely where the ladder claims difficulty lives (24, 26, 43, 45, 54 contested scenarios across t0→t4).
+    The distribution shows three distinct ladder shapes, and each one is informative. GPT-5.5 compresses the ladder: 95% at t4, barely below its t0. Multi-intent composition is essentially solved for it; what it still misses is precision and ambiguity. Claude Sonnet 5, gpt-4.1-mini, and gpt-oss:20b degrade monotonically, each one looks like the gating curve shifted down, which is what you want to see: the tier axis seems to measure the same thing at every capability level. Qwen3 8B shows the third shape: near-parity with the mid-field at t0–t1, then a cliff — it halves at t2 and lands at 17% by t4. Small models don't degrade on this benchmark; they break, and they break exactly where episodes become multi-step. The agreement panel makes the same point from the other side: unanimity falls from 36/60 at t0 to 6/60 at t4, so the contested band — 192 of 300 scenarios — sits where the ladder says difficulty should live (24, 26, 43, 45, 54 contested scenarios across t0→t4).
   </p>
 
   <h3>Who passed what</h3>
@@ -1063,13 +1063,13 @@ python scripts/generate_tool_matrix.py</code></pre>
   </figure>
 
   <p>
-    The rows nobody passes are the most valuable output of the whole sweep. 15 of 300 scenarios defeat all six models, and they are not scattered: 8 are inspect-family tasks (deduplicate or reconcile a workspace the agent did not build — ambient-state reasoning), 4 are companion-widget parameter tasks, 2 are precise layout splits, and 1 is a full skills-driven tearsheet. Even GPT-5.5 passes only 11/20 of the inspect family. That list is simultaneously t5's seed, a ranked work queue for the tool surface itself, and the strongest evidence that the remaining headroom is about reading state, not composing calls. At the opposite end, 93 scenarios are passed by everyone — the sanity floor, 70 of them in t0–t1, which is what "t0 nearly free" should look like.
+    The rows nobody passes are the most valuable output of the whole sweep. 15 of 300 scenarios defeat all six models, and they are not scattered: 8 are inspect-family tasks (deduplicate or reconcile a workspace the agent did not build — ambient-state reasoning), 4 are companion-widget parameter tasks, 2 are precise layout splits, and 1 is a full skills-driven tearsheet. Even GPT-5.5 passes only 11/20 of the inspect family. That list is where a future t5 comes from, and it doubles as a work queue for the tool surface itself. It is also the clearest evidence that the remaining headroom is about reading state, not composing calls. At the opposite end, 93 scenarios are passed by everyone — the sanity floor, 70 of them in t0–t1, which is what "t0 nearly free" should look like.
   </p>
   <p>
     Failures are also model-specific in ways a single number hides. Qwen3 8B scores 4/20 on the apps family — long instantiation chains — where every other model scores 17 or better. GLM-5.2 is the only model that struggles with the prompts family (8/20), because it skips the prompt fetch it considers unnecessary. gpt-oss:20b bottoms out on documentation notes (5/20). Six models, six different failure fingerprints on identical tasks — which is why the issue-code explorer below follows whichever model you pick, instead of averaging the differences away.
   </p>
   <blockquote class="soft">
-    The honest read: the benchmark separates the mid-field sharply, but the frontier is already near the ceiling — and what it still fails is precision and ambient state, not composition. That is the roadmap for t5.
+    The honest read: the benchmark separates the mid-field sharply, but the frontier is already near the ceiling, and what it still fails is precision and ambient state, not composition. I would treat that as the roadmap for t5.
   </blockquote>
 
   <p>Don't take my word for any of this. Every chart above is one command away, and each run writes analysis.md, chart.png, and full per-scenario traces:</p>
@@ -1087,7 +1087,7 @@ uv run --extra dev workspace-bench export-rollouts \
 
   <h3>Failures get names, not vibes</h3>
   <p>
-    Every failed check maps to a stable issue code (all of them defined in <code class="repo-path">src/workspace_bench/core/graders.py</code>), and issue codes aggregate across a run. That turns "model X is worse" into something specific: the gating model's #1 failure is schema-before-create discipline, GLM-5.2 burns attempts on invalid calls, and GPT-5.5's residue is exact-layout precision. Same benchmark, different failure fingerprints — that specificity is the point.
+    Every failed check maps to a stable issue code (all of them defined in <code class="repo-path">src/workspace_bench/core/graders.py</code>), and issue codes aggregate across a run. That turns "model X is worse" into something specific: the gating model's #1 failure is schema-before-create discipline, GLM-5.2 burns attempts on invalid calls, and GPT-5.5 mostly fails on exact-layout precision. Same benchmark, different failure fingerprints — that specificity is the point.
   </p>
 
   <figure class="panel">
@@ -1406,7 +1406,7 @@ uv run --extra dev workspace-bench compare-models \\
   // ------------------------------------------------------------------
   // calibration explorer — data from scripts/compile_calibration.py
   // ------------------------------------------------------------------
-  const CALIB = [{"slug":"gpt-5.5","label":"GPT-5.5","role":"frontier \u00b7 OpenAI API","strict":282,"mean":99.2,"tiers":[98,100,90,87,95],"issues":[["layout_mismatch",11],["missing_tool_call",10],["missing_generated_widget",2],["missing_tool_result",1]],"note":"Frontier compression: composition (t4) barely slows it down; what remains are precision failures (exact layout coordinates) and ambient-state reasoning (the inspect family). the benchmark's headroom warning, quantified."},{"slug":"sonnet-5","label":"Claude Sonnet 5","role":"frontier \u00b7 via OpenRouter","strict":267,"mean":98.5,"tiers":[100,98,85,82,80],"issues":[["missing_tool_call",11],["layout_mismatch",11],["missing_generated_widget",11],["missing_widget",7],["too_many_invalid_calls",2]],"note":"Run at temperature 0 via OpenRouter after a structured-output incompatibility was diagnosed and fixed in the harness (OpenRouter can route Anthropic models through Bedrock, where json_schema response_format degrades them to schema-minimal outputs)."},{"slug":"glm-5.2","label":"GLM-5.2","role":"open frontier \u00b7 via OpenRouter","strict":229,"mean":90.1,"tiers":[85,100,73,60,63],"issues":[["too_many_invalid_calls",45],["missing_tool_call",39],["missing_generated_widget",38],["missing_widget",34],["unlisted_widget_id",30]],"note":"Strong mid-frontier. Its t0 dip is a discipline trait \u2014 invalid tool calls and skipped prompt fetches on tasks it treats as beneath deliberation \u2014 not a ladder fault."},{"slug":"gpt-4.1-mini","label":"gpt-4.1-mini","role":"gating model \u00b7 tier bands defined here","strict":211,"mean":95.7,"tiers":[98,92,77,52,33],"issues":[["schema_not_called_before_create",56],["missing_generated_widget",24],["missing_tool_call",17],["too_many_invalid_calls",15],["missing_widget",12]],"note":"The gating model. Strictly monotonic \u2014 this curve defines the tier bands. Its #1 issue is schema-before-create discipline, the exact behavior tool-surface fixes should target."},{"slug":"gpt-oss-20b","label":"gpt-oss:20b","role":"open 20B \u00b7 local Ollama","strict":178,"mean":91.8,"tiers":[93,68,57,45,33],"issues":[["too_many_invalid_calls",78],["missing_generated_widget",42],["missing_widget",37],["missing_tool_call",21],["layout_mismatch",13]],"note":"Open-weights mid model. Independently reproduces the monotonic ladder \u2014 the cross-validation that the tier structure is real, not tuned to one vendor."},{"slug":"qwen3-8b","label":"Qwen3 8B","role":"small floor \u00b7 local Ollama","strict":149,"mean":90.8,"tiers":[80,78,47,27,17],"issues":[["missing_generated_widget",58],["schema_not_called_before_create",56],["too_many_invalid_calls",49],["missing_widget",35],["missing_tool_call",23]],"note":"The small-model floor: what an 8B can and cannot do against a real tool surface. Every failure here is headroom for distillation and fine-tuning."}];
+  const CALIB = [{"slug":"gpt-5.5","label":"GPT-5.5","role":"frontier \u00b7 OpenAI API","strict":282,"mean":99.2,"tiers":[98,100,90,87,95],"issues":[["layout_mismatch",11],["missing_tool_call",10],["missing_generated_widget",2],["missing_tool_result",1]],"note":"Frontier compression: composition (t4) barely slows it down; what remains are precision failures (exact layout coordinates) and ambient-state reasoning (the inspect family). This is the headroom warning, quantified."},{"slug":"sonnet-5","label":"Claude Sonnet 5","role":"frontier \u00b7 via OpenRouter","strict":267,"mean":98.5,"tiers":[100,98,85,82,80],"issues":[["missing_tool_call",11],["layout_mismatch",11],["missing_generated_widget",11],["missing_widget",7],["too_many_invalid_calls",2]],"note":"Run at temperature 0 via OpenRouter after a structured-output incompatibility was diagnosed and fixed in the harness (OpenRouter can route Anthropic models through Bedrock, where json_schema response_format degrades them to schema-minimal outputs)."},{"slug":"glm-5.2","label":"GLM-5.2","role":"open frontier \u00b7 via OpenRouter","strict":229,"mean":90.1,"tiers":[85,100,73,60,63],"issues":[["too_many_invalid_calls",45],["missing_tool_call",39],["missing_generated_widget",38],["missing_widget",34],["unlisted_widget_id",30]],"note":"Strong mid-frontier. Its t0 dip is a discipline trait \u2014 invalid tool calls and skipped prompt fetches on tasks it treats as beneath deliberation \u2014 not a ladder fault."},{"slug":"gpt-4.1-mini","label":"gpt-4.1-mini","role":"gating model \u00b7 tier bands defined here","strict":211,"mean":95.7,"tiers":[98,92,77,52,33],"issues":[["schema_not_called_before_create",56],["missing_generated_widget",24],["missing_tool_call",17],["too_many_invalid_calls",15],["missing_widget",12]],"note":"The gating model. Strictly monotonic \u2014 this curve defines the tier bands. Its #1 issue is schema-before-create discipline, the exact behavior tool-surface fixes should target."},{"slug":"gpt-oss-20b","label":"gpt-oss:20b","role":"open 20B \u00b7 local Ollama","strict":178,"mean":91.8,"tiers":[93,68,57,45,33],"issues":[["too_many_invalid_calls",78],["missing_generated_widget",42],["missing_widget",37],["missing_tool_call",21],["layout_mismatch",13]],"note":"Open-weights mid model. Independently reproduces the monotonic ladder \u2014 the cross-validation that the tier structure is real, not tuned to one vendor."},{"slug":"qwen3-8b","label":"Qwen3 8B","role":"small floor \u00b7 local Ollama","strict":149,"mean":90.8,"tiers":[80,78,47,27,17],"issues":[["missing_generated_widget",58],["schema_not_called_before_create",56],["too_many_invalid_calls",49],["missing_widget",35],["missing_tool_call",23]],"note":"The small-model floor: what an 8B can and cannot do against a real tool surface. Every failure here is headroom for distillation and fine-tuning."}];
   const CALIB_TIERS = ["t0", "t1", "t2", "t3", "t4"];
 
   const calibPills = document.getElementById("calib-pills");
