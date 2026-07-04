@@ -3,28 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WorkspaceBench Part 2: The Benchmark Grades Your API Too</title>
+  <title>The Benchmark Grades Your API, Not Just the Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f7f5ef;
-      --paper: #fffdfa;
-      --ink: #18211f;
-      --muted: #5d6764;
-      --line: #d8d3c8;
-      --soft: #ece7dc;
-      --green: #1f7a5f;
-      --green-soft: #dceee7;
-      --blue: #346f9f;
-      --blue-soft: #dce9f2;
-      --amber: #b7791f;
-      --amber-soft: #f2e5cc;
-      --red: #b9473d;
-      --red-soft: #f4dfdb;
-      /* chart series colors: validated for lightness, chroma, CVD separation, contrast */
-      --chart-1: #0f8262;
-      --chart-2: #b7791f;
-      --chart-3: #2e6fad;
-      --shadow: 0 16px 42px rgba(24, 33, 31, 0.10);
+      --bg: #f8f9fa;
+      --paper: #ffffff;
+      --ink: #1a1a1a;
+      --muted: #57606a;
+      --line: #d0d7de;
+      --chip: #f0f2f4;
+      --pass: #1a7f37;
+      --fail: #cf222e;
+      --bar2: #a8b1ba;
     }
 
     * { box-sizing: border-box; }
@@ -33,754 +26,641 @@
       margin: 0;
       background: var(--bg);
       color: var(--ink);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "IBM Plex Mono", "Courier New", monospace;
+      font-size: 16px;
       line-height: 1.55;
     }
-    a { color: var(--green); text-underline-offset: 3px; }
+    a { color: inherit; text-underline-offset: 3px; }
+    a:hover { background: var(--chip); }
     button { font: inherit; }
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      border-bottom: 1px solid rgba(216, 211, 200, 0.92);
-      background: rgba(247, 245, 239, 0.94);
-      backdrop-filter: blur(14px);
-    }
-    .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      max-width: 1180px;
+    .article {
+      max-width: 900px;
       margin: 0 auto;
-      padding: 12px 24px;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 780;
-      min-width: 0;
-    }
-    .brand-mark {
-      width: 28px;
-      height: 28px;
-      border: 2px solid var(--green);
-      border-radius: 6px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
-      padding: 4px;
-      flex: 0 0 auto;
-    }
-    .brand-mark span { background: var(--green); border-radius: 2px; }
-    nav {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-    nav a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 34px;
-      padding: 7px 10px;
-      border-radius: 6px;
-      color: var(--muted);
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    nav a:hover, nav a:focus-visible {
-      color: var(--ink);
-      background: var(--soft);
-      outline: none;
+      padding: 72px 24px 110px;
     }
 
-    .hero {
-      border-bottom: 1px solid var(--line);
-      background:
-        linear-gradient(90deg, rgba(183, 121, 31, 0.09), rgba(31, 122, 95, 0.08)),
-        var(--paper);
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(1.9rem, 5vw, 2.9rem);
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
     }
-    .hero-inner {
-      display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
-      gap: 42px;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 76px 24px 58px;
-      align-items: center;
-    }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin: 0 0 18px;
-      color: var(--green);
+    .meta {
+      margin: 0 0 44px;
+      color: var(--muted);
       font-size: 0.82rem;
-      font-weight: 780;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 64px 0 18px;
+      font-size: 1.45rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 1.25;
+    }
+    h3 { margin: 28px 0 10px; font-size: 1rem; font-weight: 600; }
+    p { margin: 0 0 16px; }
+    ol, ul { margin: 0 0 16px; padding-left: 26px; }
+    li { margin-bottom: 6px; }
+    strong { font-weight: 600; }
+
+    blockquote {
+      margin: 22px 0;
+      padding: 2px 0 2px 16px;
+      border-left: 3px solid var(--ink);
+      font-weight: 600;
+    }
+    blockquote.soft { font-weight: 400; color: #333; }
+
+    code {
+      background: var(--chip);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 0.85em;
+      font-family: inherit;
+    }
+    pre {
+      margin: 18px 0;
+      padding: 14px 16px;
+      background: var(--chip);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+    pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+    .pass { color: var(--pass); font-weight: 600; }
+    .fail { color: var(--fail); font-weight: 600; }
+
+    hr { border: 0; border-top: 1px solid var(--line); margin: 56px 0; }
+
+    /* Panels: every interactive is a figure with a caption bar */
+    .panel {
+      margin: 26px 0;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--paper);
+      overflow: hidden;
+    }
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .panel-head strong { color: var(--ink); font-weight: 600; }
+    .panel-body { padding: 16px; }
+    .panel-note {
+      padding: 12px 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* Buttons: inverse-video active state */
+    .btn-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .btn-row + .btn-row { margin-top: 8px; }
+    .btn-label {
+      color: var(--muted);
+      font-size: 0.72rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      margin-right: 4px;
     }
-    .eyebrow::before {
-      content: "";
-      width: 26px;
-      height: 2px;
-      background: var(--green);
-      border-radius: 999px;
-    }
-    h1, h2, h3 { margin: 0; line-height: 1.1; letter-spacing: 0; }
-    h1 { font-size: clamp(2.45rem, 6vw, 5.1rem); max-width: 980px; }
-    h2 { font-size: clamp(2rem, 4vw, 3.15rem); margin-bottom: 18px; }
-    h3 { font-size: 1.12rem; margin-bottom: 10px; }
-    p { margin-top: 0; }
-    .lede {
-      max-width: 760px;
-      margin: 24px 0 0;
-      color: #35413e;
-      font-size: clamp(1.08rem, 2vw, 1.3rem);
-    }
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
-    }
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 10px 14px;
-      border: 1px solid var(--ink);
-      border-radius: 6px;
-      background: var(--ink);
-      color: #fffdfa;
-      text-decoration: none;
-      font-weight: 740;
-      cursor: pointer;
-    }
-    .button.secondary {
-      background: transparent;
-      color: var(--ink);
-      border-color: var(--line);
-    }
-
-    .terminal-card {
+    .btn {
       border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 253, 250, 0.9);
-      box-shadow: var(--shadow);
-      overflow: hidden;
+      border-radius: 4px;
+      background: var(--paper);
+      color: var(--ink);
+      padding: 5px 11px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      min-height: 32px;
     }
-    .terminal-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      border-bottom: 1px solid var(--line);
-      padding: 12px 14px;
-      background: #f0ece2;
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
-    .dots { display: flex; gap: 6px; flex: 0 0 auto; }
-    .dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
-    .terminal-body {
-      padding: 16px;
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 0.84rem;
-      color: #26302d;
-    }
-    .terminal-line {
-      display: grid;
-      grid-template-columns: 92px minmax(0, 1fr);
-      gap: 10px;
-      padding: 7px 0;
-      border-bottom: 1px solid #eee8dc;
-    }
-    .terminal-line:last-child { border-bottom: 0; }
-    .prompt { color: var(--green); font-weight: 780; }
-    .term-bad { color: var(--red); font-weight: 780; }
+    .btn:hover, .btn:focus-visible { border-color: var(--ink); outline: none; }
+    .btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
-    .section { border-bottom: 1px solid var(--line); background: var(--paper); }
-    .section.alt { background: var(--bg); }
-    .wrap { max-width: 1180px; margin: 0 auto; padding: 70px 24px; }
-    .narrow { max-width: 860px; }
-    .kicker {
-      margin: 0 0 10px;
-      color: var(--green);
+    /* Selector tiles (bench / steps / levels / tiers) */
+    .tiles { display: grid; gap: 8px; }
+    .tiles.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tiles.cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .tiles.cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .tile {
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--paper);
+      color: var(--ink);
+      padding: 12px;
+      text-align: left;
+      cursor: pointer;
+      min-height: 84px;
+    }
+    .tile:hover, .tile:focus-visible { border-color: var(--ink); outline: none; }
+    .tile.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .tile small {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .tile.active small { color: #c8cdd2; }
+    .tile span { display: block; font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+    .tile.active span { color: #c8cdd2; }
+    .tile strong { font-weight: 600; font-size: 0.9rem; }
+
+    .detail-box {
+      border-top: 1px solid var(--line);
+      background: var(--bg);
+      padding: 14px 16px;
+      min-height: 96px;
+    }
+    .detail-box h4 { margin: 0 0 6px; font-size: 0.95rem; font-weight: 600; }
+    .detail-box p { margin: 0; font-size: 0.92rem; color: #333; }
+    .detail-box .example {
+      display: inline-block;
+      margin-top: 10px;
       font-size: 0.78rem;
-      font-weight: 780;
+      color: var(--muted);
+      background: var(--chip);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 3px 8px;
+    }
+
+    /* Level ladder heights */
+    .tiles.ladder { align-items: end; }
+    .tiles.ladder .tile { display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; }
+    .tiles.ladder .tile:nth-child(1) { min-height: 96px; }
+    .tiles.ladder .tile:nth-child(2) { min-height: 118px; }
+    .tiles.ladder .tile:nth-child(3) { min-height: 140px; }
+    .tiles.ladder .tile:nth-child(4) { min-height: 162px; }
+    .tiles.ladder .tile:nth-child(5) { min-height: 184px; }
+
+    /* Minimal data tables */
+    table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+    th {
+      text-align: left;
+      font-size: 0.72rem;
       letter-spacing: 0.07em;
       text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--ink);
     }
-    .body-copy { max-width: 860px; color: #35403d; font-size: 1.05rem; }
-    .body-copy p { margin-bottom: 16px; }
-    .callout {
-      border-left: 4px solid var(--green);
-      background: var(--green-soft);
-      border-radius: 0 8px 8px 0;
-      padding: 18px 20px;
-      color: #1d3e33;
-      margin-top: 22px;
-      max-width: 860px;
-    }
-    .callout.amber {
-      border-left-color: var(--amber);
-      background: var(--amber-soft);
-      color: #5c3d10;
-    }
+    td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    tr:last-child td { border-bottom: 0; }
 
-    .interactive {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--paper);
-      box-shadow: 0 10px 32px rgba(24, 33, 31, 0.06);
-      overflow: hidden;
-      margin-top: 30px;
-    }
-    .interactive-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      border-bottom: 1px solid var(--line);
-      background: #f1ede4;
-      padding: 14px 16px;
-      flex-wrap: wrap;
-    }
-    .hint { color: var(--muted); font-size: 0.88rem; }
+    /* Stats table */
+    .stats-table td:first-child { color: var(--muted); width: 38%; }
+    .stats-table td strong { font-size: 1rem; }
 
-    /* Issue dual-reading explorer */
-    .issue-rows { display: grid; gap: 6px; padding: 18px; }
-    .issue-row {
+    /* Bars (results explorer) */
+    .bars { display: grid; gap: 18px; }
+    .bar-group-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .bar-row {
       display: grid;
-      grid-template-columns: 250px minmax(0, 1fr) 44px;
+      grid-template-columns: 130px minmax(0, 1fr) 64px;
       gap: 12px;
       align-items: center;
+      margin-bottom: 6px;
+    }
+    .bar-row .series-name { font-size: 0.82rem; }
+    .bar-track { height: 13px; background: #e6e9ec; border-radius: 3px; overflow: hidden; }
+    .bar-fill { height: 100%; width: 0; background: var(--ink); transition: width 300ms ease; }
+    .bar-fill.s2 { background: var(--bar2); }
+    .bar-value { font-size: 0.85rem; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+
+    /* Issue chart */
+    .issue-row {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr) 40px;
+      gap: 12px;
+      align-items: center;
+      width: 100%;
       border: 1px solid transparent;
-      border-radius: 6px;
+      border-radius: 4px;
       background: transparent;
       padding: 5px 8px;
       cursor: pointer;
       text-align: left;
       color: var(--ink);
-      min-height: 34px;
     }
-    .issue-row:hover, .issue-row:focus-visible, .issue-row.active {
-      border-color: var(--green);
-      background: var(--green-soft);
-      outline: none;
-    }
-    .issue-row code {
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 0.8rem;
-      color: #34403d;
-      overflow-wrap: anywhere;
-    }
-    .issue-track { height: 16px; border-radius: 4px; background: var(--soft); overflow: hidden; }
-    .issue-fill {
-      height: 100%;
-      width: 0;
-      border-radius: 0 4px 4px 0;
-      background: var(--chart-1);
-      transition: width 320ms ease;
-    }
-    .issue-count {
-      font-variant-numeric: tabular-nums;
-      font-weight: 700;
-      font-size: 0.88rem;
-      text-align: right;
-    }
-    .dual {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0;
-      border-top: 1px solid var(--line);
-    }
-    .dual-panel { padding: 18px; background: #fbf8f0; }
-    .dual-panel + .dual-panel { border-left: 1px solid var(--line); }
-    .dual-panel small {
-      display: block;
-      font-weight: 780;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-size: 0.72rem;
-      margin-bottom: 8px;
-    }
-    .dual-panel.model small { color: var(--blue); }
-    .dual-panel.api small { color: var(--amber); }
-    .dual-panel p { margin: 0; color: #34403d; font-size: 0.97rem; }
+    .issue-row:hover, .issue-row:focus-visible { border-color: var(--ink); outline: none; }
+    .issue-row.active { background: var(--chip); border-color: var(--ink); }
+    .issue-row code { font-size: 0.78rem; }
+    .issue-track { height: 12px; background: #e6e9ec; border-radius: 3px; overflow: hidden; }
+    .issue-fill { height: 100%; width: 0; background: var(--ink); transition: width 300ms ease; }
+    .issue-count { font-size: 0.85rem; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
 
-    /* Experiment cards */
-    .exp-grid { display: grid; gap: 16px; margin-top: 30px; }
-    .exp-card {
-      border: 1px solid var(--line);
-      border-radius: 8px;
+    /* Dashboard mock */
+    .mock-titlebar {
+      display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+      border: 1px solid var(--line); border-bottom: 0; border-radius: 6px 6px 0 0;
+      background: var(--chip); padding: 8px 12px; font-size: 0.85rem;
+    }
+    .mock-tabs { display: inline-flex; gap: 6px; }
+    .mock-tab {
+      font-size: 0.72rem; letter-spacing: 0.04em; border: 1px solid var(--line);
+      border-radius: 3px; padding: 2px 8px; background: var(--paper); color: var(--muted);
+    }
+    .mock-tab.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .mock-grid {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;
+      border: 1px solid var(--line); border-radius: 0 0 6px 6px; background: var(--bg); padding: 10px;
+    }
+    .mock-widget {
+      border: 1px solid var(--line); border-radius: 4px; background: var(--paper);
+      padding: 10px; display: flex; flex-direction: column; gap: 8px; min-height: 118px;
+    }
+    .mock-widget-head { font-size: 0.75rem; font-weight: 600; }
+    .mock-spark { width: 100%; height: 40px; }
+    .mock-lines { display: grid; gap: 6px; margin-top: 2px; }
+    .mock-lines span { display: block; height: 7px; border-radius: 3px; background: var(--chip); }
+    .mock-check { margin-top: auto; font-size: 0.7rem; font-weight: 600; color: var(--pass); }
+    .mock-footer { margin-top: 8px; font-size: 0.78rem; font-weight: 600; color: var(--pass); }
+
+    /* Tool matrix */
+    .matrix-scroll { max-height: 540px; overflow: auto; }
+    .matrix-scroll table { min-width: 960px; }
+    .matrix-scroll thead th {
+      position: sticky; top: 0; background: var(--paper); z-index: 2;
+      border-bottom: 1px solid var(--ink);
+    }
+    .matrix-scroll th small { display: block; font-weight: 400; color: var(--bar2); text-transform: none; letter-spacing: 0; }
+    tr.tier-sep td {
+      background: var(--chip); color: var(--muted); font-size: 0.72rem;
+      letter-spacing: 0.07em; text-transform: uppercase; font-weight: 600; padding: 6px 10px;
+    }
+    tr.test-row { cursor: pointer; }
+    tr.test-row:hover td, tr.test-row:focus-visible td { background: var(--chip); }
+    tr.test-row.active td { background: #e6e9ec; }
+    tr.test-row:focus-visible { outline: 1px solid var(--ink); outline-offset: -1px; }
+    td.mark { text-align: center; font-weight: 600; }
+    td.mark.anchor { background: var(--ink); color: var(--paper); }
+    .tm-bar { display: inline-flex; gap: 2px; vertical-align: middle; margin-right: 6px; }
+    .tm-bar span { width: 6px; height: 11px; border-radius: 1px; background: var(--ink); }
+    .tm-id { font-size: 0.78rem; min-width: 230px; overflow-wrap: anywhere; }
+
+    .esc-strip {
+      display: flex; align-items: flex-end; gap: 20px; flex-wrap: wrap;
+      padding: 14px 16px; border-bottom: 1px solid var(--line);
+    }
+    .esc-label { color: var(--muted); font-size: 0.8rem; max-width: 250px; }
+    .esc-col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .esc-col .esc-bar { width: 22px; background: var(--ink); border-radius: 2px 2px 0 0; }
+    .esc-col small { color: var(--muted); font-size: 0.72rem; }
+    .esc-col strong { font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+
+    .tm-prompt {
+      margin: 10px 0; padding: 10px 14px; border-left: 3px solid var(--ink);
+      background: var(--chip); font-size: 0.88rem;
+    }
+    .tm-seq { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 8px 0 4px; }
+    .tm-step {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid var(--line); border-radius: 3px; background: var(--paper);
+      padding: 2px 8px; font-size: 0.74rem;
+    }
+    .tm-step em { font-style: normal; font-weight: 700; font-size: 0.68rem; color: var(--muted); }
+    .tm-step.anchor { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .tm-step.anchor em { color: #c8cdd2; }
+    .tm-arrow { color: var(--bar2); font-size: 0.78rem; }
+    .tm-checks { margin: 6px 0 0; padding-left: 20px; font-size: 0.85rem; }
+    .tm-checks li { margin-bottom: 4px; }
+    .tm-meta { color: var(--muted); font-size: 0.8rem; margin: 0 0 8px; }
+    .tm-h { font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+
+    /* Distribution small multiples */
+    .dist-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .dist-panel h5 {
+      margin: 0 0 8px; font-size: 0.72rem; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--muted); font-weight: 600;
+    }
+    .dist-row { display: grid; grid-template-columns: 92px minmax(0, 1fr) 40px; gap: 8px; align-items: center; margin-bottom: 4px; }
+    .dist-row span:first-child { font-size: 0.75rem; color: var(--muted); }
+    .dist-track { height: 10px; background: #e6e9ec; border-radius: 2px; overflow: hidden; }
+    .dist-fill { height: 100%; background: var(--ink); }
+    .dist-row span:last-child { font-size: 0.78rem; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+
+    /* Coverage heatmap */
+    .heat td, .heat th { text-align: center; padding: 6px 8px; }
+    .heat td:first-child, .heat th:first-child { text-align: left; }
+    .heat td.cell { font-size: 0.78rem; font-variant-numeric: tabular-nums; border-bottom: 1px solid #eceff1; }
+
+    /* MCP surface reference */
+    .surface-scroll { max-height: 430px; overflow: auto; }
+    .surface-scroll thead th { position: sticky; top: 0; background: var(--paper); z-index: 2; border-bottom: 1px solid var(--ink); }
+    tr.surface-row { cursor: pointer; }
+    tr.surface-row:hover td, tr.surface-row:focus-visible td { background: var(--chip); }
+    tr.surface-row.active td { background: #e6e9ec; }
+    tr.surface-row:focus-visible { outline: 1px solid var(--ink); outline-offset: -1px; }
+    .surface-kind { font-size: 0.68rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+
+    /* Media slots: resolved from docs/media/media.json when assets land */
+    .media-slot {
+      margin: 26px 0;
+      border: 1px dashed var(--bar2);
+      border-radius: 6px;
       background: var(--paper);
       overflow: hidden;
     }
-    .exp-head {
+    .media-slot .media-body {
+      min-height: 180px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding: 14px 18px;
-      background: #f1ede4;
-      border-bottom: 1px solid var(--line);
-    }
-    .exp-head strong { font-size: 1.02rem; }
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border: 1px solid var(--amber);
-      color: #7a5410;
-      background: var(--amber-soft);
-      border-radius: 999px;
+      justify-content: center;
+      color: var(--bar2);
       font-size: 0.78rem;
-      font-weight: 780;
-      padding: 4px 10px;
-      letter-spacing: 0.03em;
-    }
-    .exp-body {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-      gap: 0;
-    }
-    .exp-facts { padding: 18px; display: grid; gap: 12px; align-content: start; }
-    .fact small {
-      display: block;
-      color: var(--green);
-      font-weight: 780;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-size: 0.72rem;
-      margin-bottom: 3px;
+      padding: 24px;
+      text-align: center;
     }
-    .fact span { color: #34403d; font-size: 0.95rem; }
-    .exp-demo { border-left: 1px solid var(--line); background: #fbf8f0; padding: 18px; }
-    .exp-demo .label {
-      font-size: 0.78rem;
-      font-weight: 780;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .exp-demo .label.bad { color: var(--red); }
-    .exp-demo .label.good { color: var(--green); margin-top: 14px; }
-    .code {
-      margin: 4px 0 0;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #1f2825;
-      color: #f5f1e8;
-      padding: 12px;
-      overflow: auto;
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 0.82rem;
-      line-height: 1.5;
-    }
-
-    /* Loop tiles */
-    .step-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(130px, 1fr));
-      gap: 10px;
-      padding: 18px;
-    }
-    .tile {
-      min-height: 112px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fffdfa;
-      padding: 14px;
-      text-align: left;
-      cursor: pointer;
-      color: var(--ink);
-      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
-    }
-    .tile:hover, .tile:focus-visible, .tile.active {
-      transform: translateY(-2px);
-      border-color: var(--green);
-      background: var(--green-soft);
-      outline: none;
-    }
-    .tile small {
-      display: block;
-      color: var(--green);
-      font-weight: 780;
-      margin-bottom: 8px;
-    }
-    .tile span {
-      display: block;
+    .media-slot video, .media-slot img { display: block; width: 100%; height: auto; }
+    .media-slot figcaption {
+      padding: 10px 16px;
+      border-top: 1px dashed var(--bar2);
       color: var(--muted);
-      font-size: 0.88rem;
-      margin-top: 8px;
+      font-size: 0.8rem;
     }
-    .detail {
-      border-top: 1px solid var(--line);
-      background: #fbf8f0;
-      padding: 18px;
-      min-height: 120px;
+    .media-slot figcaption small {
+      display: block;
+      color: var(--bar2);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 2px;
     }
-    .detail p { margin: 0; color: #34403d; }
 
-    .footer { background: #18211f; color: #f7f5ef; }
-    .footer .wrap { padding-top: 42px; padding-bottom: 42px; }
-    .footer p { max-width: 820px; margin: 0; color: #d8d3c8; }
+    @media (max-width: 760px) {
+      .tiles.cols-4, .tiles.cols-6, .tiles.cols-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .tiles.ladder .tile { min-height: 96px !important; }
+      .mock-grid { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 1fr; gap: 4px; }
+      .bar-value { text-align: left; }
+      .issue-row { grid-template-columns: 1fr; gap: 6px; }
+      .issue-count { text-align: left; }
+    }
+    @media (max-width: 480px) {
+      .tiles.cols-4, .tiles.cols-6, .tiles.cols-5 { grid-template-columns: 1fr; }
+    }
 
-    @media (max-width: 940px) {
-      .topbar-inner { align-items: flex-start; flex-direction: column; }
-      nav { justify-content: flex-start; }
-      .hero-inner, .exp-body, .dual { grid-template-columns: 1fr; }
-      .exp-demo, .dual-panel + .dual-panel { border-left: 0; border-top: 1px solid var(--line); }
-      .step-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .issue-row { grid-template-columns: minmax(0, 1fr); }
-      .issue-row .issue-count { text-align: left; }
-    }
-    @media (max-width: 620px) {
-      .wrap, .hero-inner { padding-left: 18px; padding-right: 18px; }
-      .step-grid { grid-template-columns: 1fr; }
-      .terminal-line { grid-template-columns: 1fr; }
-    }
+    /* Inline SVG diagrams (house style) */
+    .diagram { display: block; width: 100%; height: auto; }
+    .diagram rect.node { fill: var(--paper); stroke: var(--ink); stroke-width: 1; }
+    .diagram .d-main { font-size: 12px; font-weight: 600; fill: var(--ink); }
+    .diagram .d-sub { font-size: 9.5px; fill: var(--muted); }
+    .diagram .d-edge { font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; fill: var(--muted); }
+    .diagram .link { stroke: var(--ink); stroke-width: 1; fill: none; }
+    .diagram .d-note { font-size: 11px; fill: var(--muted); }
+    .diagram .d-after { font-weight: 700; fill: var(--pass); }
+
+/* WB-DEEP-CSS:START */
+    /* Headline columns chart (overall strict) */
+    .cols-chart { display: flex; align-items: flex-end; gap: 14px; padding: 4px 4px 0; }
+    .cols-chart .col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0; }
+    .cols-chart .col-track { width: 100%; max-width: 72px; height: 170px; display: flex; align-items: flex-end; border-bottom: 1px solid var(--line); }
+    .cols-chart .col-fill { width: 100%; background: var(--ink); border-radius: 3px 3px 0 0; }
+    .cols-chart .col-val { font-size: 0.84rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .cols-chart .col-name { font-size: 0.7rem; color: var(--muted); text-align: center; overflow-wrap: anywhere; }
+
+    /* Industry benchmark table */
+    .bench-table, .matrix-scroll table.bench-table { width: 100%; min-width: 640px; table-layout: fixed; }
+    .bench-table thead th { text-align: center; padding: 8px 4px; }
+    .bench-table thead th:first-child { width: 22%; }
+    .bench-table thead th .bench-sub { display: block; font-size: 0.6rem; letter-spacing: 0.02em; text-transform: none; color: var(--muted); font-weight: 400; margin-top: 2px; }
+    .bench-table tbody th { text-align: left; font-size: 0.8rem; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--ink); padding: 6px 8px; border-bottom: 1px solid var(--line); }
+    .bench-table td { text-align: center; font-size: 0.8rem; font-variant-numeric: tabular-nums; padding: 6px 4px; }
+    .bench-table td.best { font-weight: 700; background: var(--chip); }
+    .bench-table tr.bench-overall th, .bench-table tr.bench-overall td { font-size: 0.95rem; font-weight: 600; }
+    .bench-table tr.bench-group td { text-align: left; text-transform: uppercase; letter-spacing: 0.07em; font-size: 0.68rem; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--ink); padding: 18px 10px 6px; background: none; }
+
+    /* Tier explorer (who passed what) */
+    .tx-table { min-width: 720px; }
+    .tx-table th, .tx-table td { text-align: center; padding: 5px 8px; }
+    .tx-table th:nth-child(-n+2), .tx-table td:nth-child(-n+2) { text-align: left; }
+    .tx-table td { font-size: 0.8rem; border-bottom: 1px solid #eceff1; }
+    .tx-table tbody tr { cursor: pointer; }
+    .tx-table tbody tr:hover td, .tx-table tbody tr.active td { background: var(--chip); }
+    .tx-table tfoot td { border-top: 1px solid var(--ink); border-bottom: 0; font-weight: 600; }
+    .tx-id { font-size: 0.78rem; overflow-wrap: anywhere; }
+/* WB-DEEP-CSS:END */
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand" aria-label="WorkspaceBench Part 2">
-        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-        <span>WorkspaceBench Part 2</span>
-      </div>
-      <nav aria-label="Article sections">
-        <a href="blog-workspacebench-series-draft.html">Part 1</a>
-        <a href="#evidence">Evidence</a>
-        <a href="#experiments">Experiments</a>
-        <a href="#loop">The loop</a>
-        <a href="blog-workspacebench-part-3-draft.html">Part 3</a>
-      </nav>
-    </div>
-  </header>
+<main class="article">
+  <h1>The benchmark grades your API, not just the agent</h1>
+  <p class="meta">July 2026 &middot; Part 2 of 3 &middot; WorkspaceBench &middot; <a href="blog-workspacebench-series-draft.html">Part 1</a> · <a href="blog-workspacebench-part-3-draft.html">Part 3</a></p>
 
-  <main>
-    <section class="hero">
-      <div class="hero-inner">
+  <p>
+    <a href="blog-workspacebench-series-draft.html">Part 1</a> ran six models against 300 certified scenarios and read the results as a verdict on the agents. This post reads the same results the other way. When a capable model burns attempts on malformed calls, invents argument shapes, or skips a schema lookup it was never told mattered, that is not only a model failure — it is a verdict on the tool surface: the schemas, the names, the error messages, and the documentation the workspace hands to agents.
+  </p>
+  <p>
+    The asymmetry is why this reading matters. Models improve on their vendors' schedule. The tool surface improves on ours. Every failure class eliminated at the API level is a gain that applies to every agent, at every capability tier, on day one.
+  </p>
+
+  <h2>Two accidental experiments</h2>
+  <p>
+    The strongest evidence in this post was not designed. It happened to us during Part 1's calibration, and both incidents are controlled experiments in exactly the sense this post cares about: same model, same scenarios, same grader — one surface variable changed.
+  </p>
+
+  <figure class="panel">
+    <figcaption class="panel-head"><strong>Accident 1 — documentation is capability</strong><span>same model · same tasks · one docs fix</span></figcaption>
+    <div class="panel-body">
+      <p style="margin-top: 0;">
+        The first calibration run scored two entire families at <span class="fail">0/20</span>: prompts and resources. Not weak — zero, for every model. The cause was not the models. The harness documented every tool's argument schema to the model <em>except the two newest ones</em>, so models facing <code>read_workspace_resource</code> invented plausible argument shapes (<code>{"origin", "path"}</code>) instead of the real one (<code>{"uri"}</code>). They were being graded on tools they had never been told how to call.
+      </p>
+      <div class="bars">
         <div>
-          <p class="eyebrow">Part 2</p>
-          <h1>The benchmark grades your API, not just the agent</h1>
-          <p class="lede">
-            Part 1 measured agents operating OpenBB Workspace. But read the failure taxonomy again and half of it isn't about the models at all. When a capable model burns dozens of attempts on malformed calls, invented ids, and skipped schema lookups, that is a verdict on the tool surface &mdash; the schemas, names, and error messages the workspace hands to agents. Part 2 flips the harness around: fix the model, vary the tools, and optimize the MCP server with the same graded runs.
-          </p>
-          <div class="hero-actions">
-            <a class="button" href="#experiments">See the experiments</a>
-            <a class="button secondary" href="blog-workspacebench-part-3-draft.html">Read Part 3</a>
-          </div>
-        </div>
-        <aside class="terminal-card" aria-label="Two readings of the same failure">
-          <div class="terminal-head">
-            <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
-            <span>same evidence, two readings</span>
-          </div>
-          <div class="terminal-body">
-            <div class="terminal-line"><span class="term-bad">issue</span><span>too_many_invalid_calls &times; 38</span></div>
-            <div class="terminal-line"><span class="prompt">model</span><span>"the 20B model hallucinates tools"</span></div>
-            <div class="terminal-line"><span class="prompt">api</span><span>"our rejections teach it nothing"</span></div>
-            <div class="terminal-line"><span class="prompt">fix</span><span>make the error message name the fix</span></div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section alt" id="evidence">
-      <div class="wrap">
-        <p class="kicker">The evidence</p>
-        <h2>Failures are API bug reports.</h2>
-        <div class="body-copy">
-          <p>
-            This is the issue-code distribution from Part 1's core run: gpt-oss:20b, 25 scenarios, 3 attempts each, 75 graded episodes. In Part 1 we read it as a model report card. Read each code again with a product hat on and it becomes a queue of MCP-surface bugs, ranked by frequency.
-          </p>
-          <p>
-            The point is not that the model is blameless &mdash; a frontier model avoids most of these traps, which is why GPT-4.1 passes 98.7% of the same tasks. The point is that <em>traps</em> is the right word. An MCP surface that only frontier models can operate reliably is leaving most of the market's agents behind, including the cheaper models enterprises actually want to run.
-          </p>
-        </div>
-
-        <div class="interactive">
-          <div class="interactive-head">
-            <strong>One failure, two diagnoses</strong>
-            <span class="hint">Click an issue code &middot; gpt-oss:20b, core pack, 75 attempts</span>
-          </div>
-          <div class="issue-rows" id="issue-rows"></div>
-          <div class="dual" aria-live="polite">
-            <div class="dual-panel model">
-              <small>Model diagnosis</small>
-              <p id="model-text">Click an issue code above to see the same failure read from both sides.</p>
-            </div>
-            <div class="dual-panel api">
-              <small>API diagnosis</small>
-              <p id="api-text">The model reading blames the agent. The API reading asks what the tool surface could have done to prevent the failure class entirely.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="callout">
-          <strong>Why this framing matters:</strong> models improve on their vendors' schedule. The tool surface improves on yours. Every failure class you eliminate at the API level is a gain that applies to every agent, every model tier, on day one.
+          <div class="bar-group-label">gating model, strict pass — before and after the documentation fix</div>
+          <div class="bar-row"><span class="series-name">undocumented</span><div class="bar-track"><div class="bar-fill" style="width:55%; background:var(--bar2);"></div></div><span class="bar-value">165/300</span></div>
+          <div class="bar-row"><span class="series-name">documented</span><div class="bar-track"><div class="bar-fill" style="width:70.3%;"></div></div><span class="bar-value">211/300</span></div>
         </div>
       </div>
-    </section>
-
-    <section class="section" id="experiments">
-      <div class="wrap">
-        <p class="kicker">The method</p>
-        <h2>Fix the model, vary the tools.</h2>
-        <div class="body-copy">
-          <p>
-            Normal benchmarking holds the tasks constant and swaps models. This is the mirror image: hold the model constant, change one thing about the tool surface, rerun the same 25 scenarios &times; 3 repeats, and diff the issue codes. The benchmark's determinism is what makes this a controlled experiment instead of an anecdote.
-          </p>
-          <p>
-            Three experiments, each targeting the top of the failure distribution. Baselines are from the Part 1 run; the changed arm reruns after the simulator's tool surface is modified &mdash; and any fix that survives ships to the real <code style="font-size: 0.9em;">workspace-mcp</code> server, with <code style="font-size: 0.9em;">smoke-workspace-mcp --check-surface</code> keeping the two in sync.
-          </p>
-        </div>
-
-        <div class="exp-grid">
-          <div class="exp-card">
-            <div class="exp-head">
-              <strong>E1 &middot; Rejections that teach</strong>
-              <span class="status">queued &mdash; results pending</span>
-            </div>
-            <div class="exp-body">
-              <div class="exp-facts">
-                <div class="fact"><small>Hypothesis</small><span>Invalid-call cascades collapse when the rejection names the fix instead of just refusing.</span></div>
-                <div class="fact"><small>Change</small><span>create_widget / update_widget rejections return the expected schema, valid widget ids for the origin, and a one-line hint.</span></div>
-                <div class="fact"><small>Baseline</small><span>too_many_invalid_calls: 38 failures across 75 attempts.</span></div>
-                <div class="fact"><small>Metric</small><span>Invalid-call failures and mean invalid calls per episode, same model, same scenarios.</span></div>
-              </div>
-              <div class="exp-demo">
-                <div class="label bad">Before</div>
-                <pre class="code">{"error": "invalid create_widget call"}</pre>
-                <div class="label good">After</div>
-                <pre class="code">{
-  "error": "unknown widget_id 'yield-curve'
-            for origin 'Bench Macro'",
-  "did_you_mean": "yield_curve",
-  "valid_widget_ids": ["yield_curve",
-    "macro_timeseries", "rate_decisions"],
-  "hint": "call get_widget_schema before create"
-}</pre>
-              </div>
-            </div>
-          </div>
-
-          <div class="exp-card">
-            <div class="exp-head">
-              <strong>E2 &middot; Discovery affordances</strong>
-              <span class="status">queued &mdash; results pending</span>
-            </div>
-            <div class="exp-body">
-              <div class="exp-facts">
-                <div class="fact"><small>Hypothesis</small><span>Models skip schema lookups because discovery feels optional; make the discovery response carry what creation needs.</span></div>
-                <div class="fact"><small>Change</small><span>Tool descriptions disambiguate backend origin vs display name; list_available_widgets returns a ready-to-fill create template per widget.</span></div>
-                <div class="fact"><small>Baseline</small><span>schema_not_called_before_create: 27 &middot; missing_widget: 12 &middot; unlisted_widget_id: 1.</span></div>
-                <div class="fact"><small>Metric</small><span>Schema-discipline failures and wrong-widget selections per 75 attempts.</span></div>
-              </div>
-              <div class="exp-demo">
-                <div class="label bad">Before</div>
-                <pre class="code">{"widgets": [{"widget_id": "yield_curve",
-  "name": "Yield Curve"}]}</pre>
-                <div class="label good">After</div>
-                <pre class="code">{"widgets": [{
-  "widget_id": "yield_curve",
-  "name": "Yield Curve",
-  "create_template": {
-    "tool": "create_widget",
-    "args": {"origin": "Bench Macro",
-             "widget_id": "yield_curve",
-             "data_args": {"curve_date": "<optional>"}}
-  }}]}</pre>
-              </div>
-            </div>
-          </div>
-
-          <div class="exp-card">
-            <div class="exp-head">
-              <strong>E3 &middot; Scoped snapshots</strong>
-              <span class="status">queued &mdash; results pending</span>
-            </div>
-            <div class="exp-body">
-              <div class="exp-facts">
-                <div class="fact"><small>Hypothesis</small><span>Agents re-fetch the full workspace because they cannot ask a narrower question; smaller answers save turns and context.</span></div>
-                <div class="fact"><small>Change</small><span>get_workspace_snapshot accepts a scope (active dashboard, single tab, single widget) instead of always returning everything.</span></div>
-                <div class="fact"><small>Baseline</small><span>Repeated-snapshot trace checks plus turn budgets burned on re-inspection in long L2 episodes.</span></div>
-                <div class="fact"><small>Metric</small><span>Mean turns per episode and truncation (max_turns) rate on L2 dashboard-construction tasks.</span></div>
-              </div>
-              <div class="exp-demo">
-                <div class="label bad">Before</div>
-                <pre class="code">{"tool": "get_workspace_snapshot", "args": {}}
-&rarr; every dashboard, tab, widget, layout</pre>
-                <div class="label good">After</div>
-                <pre class="code">{"tool": "get_workspace_snapshot",
- "args": {"scope": "tab",
-          "tab_id": "overview"}}
-&rarr; one tab's widgets and layout</pre>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="callout amber">
-          <strong>Protocol, stated up front:</strong> same model (gpt-oss:20b, with GPT-4.1 as the saturation control), same 25 scenarios, 3 repeats per arm, one tool-surface change at a time. Success is a drop in the targeted issue class without regressions elsewhere &mdash; and the grader's trace checks stay unchanged, so agents can't pass by gaming softer rules. Results will replace these badges when the runs land.
-        </div>
-      </div>
-    </section>
-
-    <section class="section alt" id="loop">
-      <div class="wrap">
-        <p class="kicker">Making it permanent</p>
-        <h2>CI for the tool surface.</h2>
-        <div class="body-copy">
-          <p>
-            One-off experiments decay. The durable version is a regression loop: every change to the MCP server's tools, schemas, or descriptions runs the benchmark with pinned models before it ships. Pass rates and issue-code counts become the release gate &mdash; the same way a test suite gates a code change.
-          </p>
-        </div>
-
-        <div class="interactive">
-          <div class="interactive-head">
-            <strong>The regression loop</strong>
-            <span class="hint">Click a stage</span>
-          </div>
-          <div class="step-grid" role="list" aria-label="Tool surface regression loop">
-            <button class="tile active" data-loop="change" role="listitem">
-              <small>01</small>Change
-              <span>Edit a tool, schema, or description</span>
-            </button>
-            <button class="tile" data-loop="run" role="listitem">
-              <small>02</small>Run
-              <span>Benchmark with pinned models</span>
-            </button>
-            <button class="tile" data-loop="diff" role="listitem">
-              <small>03</small>Diff
-              <span>Compare issue codes vs baseline</span>
-            </button>
-            <button class="tile" data-loop="ship" role="listitem">
-              <small>04</small>Ship or revert
-              <span>Gate the MCP release on the delta</span>
-            </button>
-          </div>
-          <div class="detail" aria-live="polite">
-            <h3 id="loop-title">Change</h3>
-            <p id="loop-text">A tool-surface change is anything an agent can observe: a renamed argument, a reworded description, a new error payload, a scoped response. Each is a product decision that today ships unmeasured.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="next">
-      <div class="wrap narrow">
-        <p class="kicker">Where this goes next</p>
-        <h2>Stabilize the interface, then farm it.</h2>
-        <div class="body-copy">
-          <p>
-            There is a second reason to run these experiments before anything else: training data. Every trace collected against a tool surface you are still changing bakes in workarounds for flaws you intend to fix &mdash; and describes an API that will no longer exist. Optimize the tools first, and the traces that come after are worth keeping.
-          </p>
-          <p>
-            <a href="blog-workspacebench-part-3-draft.html">Part 3 starts there:</a> turning graded traces into SFT data, preference pairs, and a step-based learning environment.
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">
-      <p>
-        Part 2 flips WorkspaceBench around: the same graded runs that measure agents become evidence for optimizing the Workspace MCP server's tools, schemas, and error messages &mdash; and a permanent regression gate for the tool surface.
+      <p style="margin-bottom: 0;">
+        One fix — a documentation entry per tool, enforced by a regression test that every simulator tool must have one — and the same model's strict pass went from 165/300 to 211/300, with the dead families rejoining the distribution. Nothing about the models changed. If your MCP server's tool descriptions are incomplete, you are not measuring your agents; you are measuring your docs.
       </p>
     </div>
-  </footer>
+  </figure>
 
-  <script>
-    // Baseline issue counts: gpt-oss:20b, core pack, 75 attempts
-    // (runs/comparison/20260619-174716-all)
-    const issues = [
-      ["too_many_invalid_calls", 38, {
-        model: "The 20B model emits malformed calls, unresolved placeholders, and tools that don't exist — in one trace it tried to run bash through a hallucinated container.exec.",
-        api: "Our rejections say \"invalid\" and nothing else. A rejection that names the unknown id, suggests the nearest valid one, and points at the right discovery tool turns a dead end into a correction. That's experiment E1."
-      }],
-      ["schema_not_called_before_create", 27, {
-        model: "The model mutates state without looking first — it assumes it already knows the widget's parameters.",
-        api: "Discovery feels optional because list_available_widgets returns names, not what creation actually needs. If the discovery response carries a ready-to-fill create template, looking first becomes the path of least resistance. That's experiment E2."
-      }],
-      ["missing_generated_widget", 23, {
-        model: "The model answers in chat and stops, or writes a placeholder note without the required facts — it doesn't internalize that the note is the deliverable.",
-        api: "Partly a real model gap — but the add_generative_widget description can state explicitly that notes are durable artifacts with required content, and the task envelope can surface note requirements more prominently."
-      }],
-      ["missing_widget", 12, {
-        model: "Wrong widget id, wrong backend origin, or wrong data arguments — the model picked the wrong thing from the catalog.",
-        api: "Origin vs display name is genuinely confusing in our surface (\"macro\" vs \"Bench Macro\"). Accepting either, or failing with the valid alternatives listed, removes a whole failure class. Folded into E2."
-      }],
-      ["unlisted_widget_id", 1, {
-        model: "The model used a widget id it never saw in any listing — it invented one from prior knowledge.",
-        api: "Rare here, but the same E1 fix applies: reject with the valid id list attached, and the invention gets corrected on the next turn instead of cascading."
-      }],
-      ["layout_overlap", 1, {
-        model: "The model placed widgets on top of each other and never checked the result.",
-        api: "The layout tools could validate placement server-side and return the collision — or auto-pack with an explicit opt-out — instead of accepting silently broken state."
-      }]
-    ];
+  <figure class="panel">
+    <figcaption class="panel-head"><strong>Accident 2 — the transport layer is part of the surface</strong><span>0/300 → 267/300 without touching the model</span></figcaption>
+    <div class="panel-body">
+      <p style="margin-top: 0;">
+        Claude Sonnet 5 scored <span class="fail">0/300</span>. Twice. Every turn it emitted the same degenerate schema-minimal tool call, on tasks a much smaller model solves. The cause sat two layers below the prompt: requesting structured output via <code>response_format: json_schema</code> through an OpenAI-compatible gateway degraded this model's generations to bare schema-satisfying stubs. A controlled A/B — identical conversation replayed with and without the flag — isolated it. With the flag opt-out, the same model scored <span class="pass">267/300</span>.
+      </p>
+      <p style="margin-bottom: 0;">
+        The uncomfortable lesson: we nearly published a catastrophically wrong number for a frontier model, and nothing in the scores themselves would have flagged it. Serialization settings, gateway quirks, and response-format contracts are part of the interface your agents experience. If a benchmark treats them as invisible plumbing, it will eventually report plumbing as intelligence.
+      </p>
+    </div>
+  </figure>
 
-    const rowsEl = document.getElementById("issue-rows");
-    const max = Math.max(...issues.map((i) => i[1]));
-    rowsEl.innerHTML = issues.map(([code, count], i) => `
-      <button class="issue-row" data-idx="${i}">
-        <code>${code}</code>
-        <div class="issue-track"><div class="issue-fill" data-width="${(count / max) * 100}"></div></div>
-        <span class="issue-count">${count}</span>
-      </button>`).join("");
-    requestAnimationFrame(() => {
-      rowsEl.querySelectorAll(".issue-fill").forEach((fill) => {
-        fill.style.width = fill.dataset.width + "%";
-      });
-    });
-    rowsEl.querySelectorAll("[data-idx]").forEach((row) => {
-      row.addEventListener("click", () => {
-        rowsEl.querySelectorAll("[data-idx]").forEach((node) => node.classList.remove("active"));
-        row.classList.add("active");
-        const item = issues[Number(row.dataset.idx)][2];
-        document.getElementById("model-text").textContent = item.model;
-        document.getElementById("api-text").textContent = item.api;
-      });
-    });
+  <h2>Failure fingerprints are surface signals</h2>
+  <p>
+    Part 1 showed each model failing differently on identical tasks. Read those fingerprints as bug reports against the surface, and each one names a concrete API change — that mapping is the experiment queue for this post.
+  </p>
 
-    const loopCopy = {
-      change: {
-        title: "Change",
-        text: "A tool-surface change is anything an agent can observe: a renamed argument, a reworded description, a new error payload, a scoped response. Each is a product decision that today ships unmeasured."
-      },
-      run: {
-        title: "Run",
-        text: "compare-models with pinned model versions and pinned scenario packs. Determinism is the whole point: the only variable between baseline and candidate is the tool surface."
-      },
-      diff: {
-        title: "Diff",
-        text: "Not just the pass rate — the issue-code distribution. A change that lifts pass rate by trading invalid-call failures for layout failures is a different product decision than a clean win, and the diff shows which one you got."
-      },
-      ship: {
-        title: "Ship or revert",
-        text: "Fixes that survive the diff ship to the real workspace-mcp server; smoke-workspace-mcp --check-surface verifies the live surface matches what the benchmark tested. Regressions never reach an agent."
-      }
-    };
-    document.querySelectorAll("[data-loop]").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll("[data-loop]").forEach((node) => node.classList.remove("active"));
-        button.classList.add("active");
-        const item = loopCopy[button.dataset.loop];
-        document.getElementById("loop-title").textContent = item.title;
-        document.getElementById("loop-text").textContent = item.text;
-      });
-    });
-  </script>
+  <figure class="panel">
+    <figcaption class="panel-head"><strong>From fingerprint to fix</strong><span>Part 1's per-model failures, read with a product hat</span></figcaption>
+    <div class="matrix-scroll">
+      <table>
+        <thead><tr><th>observation (Part 1 data)</th><th>model reading</th><th>API reading</th><th>experiment</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="tm-id"><code>schema_not_called_before_create</code> is the gating model's #1 issue — 56 occurrences in one run</td>
+            <td>"mid models skip discovery"</td>
+            <td>discovery feels optional because the list response carries nothing creation needs</td>
+            <td>E2</td>
+          </tr>
+          <tr>
+            <td class="tm-id">GLM-5.2 burns attempts on invalid calls at t0 (85%, below its own t1) and skips prompt fetches (8/20 on the prompts family)</td>
+            <td>"the model is impatient"</td>
+            <td>rejections refuse without teaching; the prompt surface doesn't advertise why fetching it pays</td>
+            <td>E1</td>
+          </tr>
+          <tr>
+            <td class="tm-id">Qwen3 8B scores 4/20 on apps — long instantiation chains — where every other model scores ≥17</td>
+            <td>"8B can't plan long episodes"</td>
+            <td>every step returns the full workspace; small contexts drown in un-scoped state</td>
+            <td>E3</td>
+          </tr>
+          <tr>
+            <td class="tm-id">GPT-5.5's residue is <code>layout_mismatch</code> — exact grid coordinates — and 2 of the 15 nobody-passes scenarios are layout splits</td>
+            <td>"even frontier models miss pixel-precise geometry"</td>
+            <td>the layout tool only speaks absolute coordinates; humans say "right half"</td>
+            <td>E4</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <figcaption class="panel-note">Sources: the per-model issue explorer and family table in <a href="blog-workspacebench-series-draft.html#results">Part 1's results section</a>; raw data in <code class="repo-path">runs/reports/calibration.json</code>.</figcaption>
+  </figure>
+
+  <h2>The work queue nobody passes</h2>
+  <p>
+    The sharpest input is the 15 scenarios that defeat all six models. They cluster, and each cluster names a surface investment rather than a model wish:
+  </p>
+
+  <figure class="panel">
+    <figcaption class="panel-head"><strong>15 all-fail scenarios → 4 surface investments</strong></figcaption>
+    <div class="panel-body" style="padding: 0;">
+      <table class="stats-table">
+        <tbody>
+          <tr><td>8 × inspect</td><td>deduplicate or reconcile a workspace the agent did not build. The surface offers no way to <em>compare</em> widgets — an agent must fetch everything and diff in its head. Candidate affordance: snapshot diffing and duplicate-detection queries.</td></tr>
+          <tr><td>4 × params</td><td>companion-widget parameter tasks. Parameter groups spanning widgets are invisible until you already know they exist. Candidate: <code>get_params_options</code> surfacing linked widgets explicitly.</td></tr>
+          <tr><td>2 × layout</td><td>precise split arrangements. Candidate: relative placement verbs (E4) instead of absolute grid mathematics.</td></tr>
+          <tr><td>1 × skills</td><td>a full skills-driven tearsheet — the longest composition in the suite. Candidate: skill content that carries a step template, not just prose.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </figure>
+
+  <h2>The method: fix the model, vary the tools</h2>
+  <p>
+    Normal benchmarking holds tasks constant and swaps models. This is the mirror image: hold the model constant, change one thing about the tool surface, rerun all 300 scenarios, and diff the issue codes. The benchmark's determinism is what turns this from anecdote into controlled experiment, and Part 1's calibration gives the two instruments the protocol needs: <strong>gpt-4.1-mini</strong> as the sensitive mid-strength probe (strict 211/300 — plenty of headroom in both directions), and <strong>GPT-5.5</strong> as the saturation control (94% — any fix that <em>drops</em> it is a regression, not an improvement).
+  </p>
+  <blockquote class="soft">
+    Success criterion, stated before any run: the targeted issue class drops for the probe model without regressions elsewhere, and the grader's checks stay byte-identical — agents must not pass because the rules got softer, only because the surface got clearer.
+  </blockquote>
+
+  <h2>The experiments</h2>
+  <p>
+    Four changes, one at a time, each targeting a fingerprint from the table above. The before/after payloads are concrete; the result badges are honest — these runs land after the surface changes are implemented in the simulator, and any fix that survives ships to the real <code>workspace-mcp</code> server with <code>smoke-workspace-mcp --check-surface</code> keeping the two in sync.
+  </p>
+
+  <figure class="panel">
+    <figcaption class="panel-head"><strong>E1 · Rejections that teach</strong><span class="queued">queued — results land here</span></figcaption>
+    <div class="panel-body">
+      <p style="margin-top: 0;"><strong>Hypothesis:</strong> invalid-call cascades collapse when the rejection names the fix instead of just refusing. <strong>Baseline:</strong> <code>too_many_invalid_calls</code> appears in every model's top-5; it is GLM-5.2's defining failure and costs Qwen3 8B strict passes on episodes it otherwise solves (score 88%, one bad call). <strong>Metric:</strong> invalid calls per episode and strict-pass delta, probe model, all 300.</p>
+      <pre><code><span class="fail">before</span> {"error": "invalid create_widget call"}
+<span class="pass">after </span> {"error": "unknown widget_id 'yield-curve' for origin 'Bench Macro'",
+        "did_you_mean": "yield_curve",
+        "valid_widget_ids": ["yield_curve", "macro_timeseries", "rate_decisions"],
+        "hint": "call get_widget_schema before create"}</code></pre>
+    </div>
+  </figure>
+
+  <figure class="panel">
+    <figcaption class="panel-head"><strong>E2 · Discovery that carries what creation needs</strong><span class="queued">queued — results land here</span></figcaption>
+    <div class="panel-body">
+      <p style="margin-top: 0;"><strong>Hypothesis:</strong> models skip schema lookups because discovery feels optional; make the discovery response carry a ready-to-fill template and the discipline becomes the path of least resistance. <strong>Baseline:</strong> <code>schema_not_called_before_create</code>, 56 occurrences for the probe model — its single largest failure class. <strong>Metric:</strong> schema-discipline failures per 300, plus wrong-widget selections.</p>
+      <pre><code><span class="fail">before</span> {"widgets": [{"widget_id": "yield_curve", "name": "Yield Curve"}]}
+<span class="pass">after </span> {"widgets": [{"widget_id": "yield_curve", "name": "Yield Curve",
+         "create_template": {"tool": "create_widget",
+           "args": {"origin": "Bench Macro", "widget_id": "yield_curve",
+                    "data_args": {"curve_date": "<required>"}}}}]}</code></pre>
+    </div>
+  </figure>
+
+  <figure class="panel">
+    <figcaption class="panel-head"><strong>E3 · Scoped snapshots</strong><span class="queued">queued — results land here</span></figcaption>
+    <div class="panel-body">
+      <p style="margin-top: 0;"><strong>Hypothesis:</strong> agents re-fetch the full workspace because they cannot ask a narrower question; smaller answers save turns and keep small-context models alive through long episodes. <strong>Baseline:</strong> Qwen3 8B's cliff — 47% at t2, 4/20 on apps — is a context-management failure as much as a planning one. <strong>Metric:</strong> mean turns per episode, truncation rate, and the 8B's t2–t4 pass delta.</p>
+      <pre><code><span class="fail">before</span> {"tool": "get_workspace_snapshot", "args": {}}   → every dashboard, tab, widget, layout
+<span class="pass">after </span> {"tool": "get_workspace_snapshot", "args": {"scope": "tab", "tab_id": "overview"}}</code></pre>
+    </div>
+  </figure>
+
+  <figure class="panel">
+    <figcaption class="panel-head"><strong>E4 · Relative layout verbs</strong><span class="queued">queued — results land here</span></figcaption>
+    <div class="panel-body">
+      <p style="margin-top: 0;"><strong>Hypothesis:</strong> layout failures are a translation problem — prompts speak in halves and stacks, the tool demands grid arithmetic. Give the tool the human vocabulary. <strong>Baseline:</strong> <code>layout_mismatch</code> is the top residual issue for the <em>strongest</em> model in the suite, and 2 of the 15 all-fail scenarios are splits. This one targets the frontier's remaining failures, not the mid-field's. <strong>Metric:</strong> layout-check failures across all six committed baselines.</p>
+      <pre><code><span class="fail">before</span> {"tool": "update_widget_layout", "args": {"widget_uuid": "…", "x": 20, "y": 0, "w": 20, "h": 12}}
+<span class="pass">after </span> {"tool": "update_widget_layout", "args": {"widget_uuid": "…", "place": "right-half"}}</code></pre>
+    </div>
+  </figure>
+
+  <h2>Making it permanent</h2>
+  <p>
+    One-off experiments decay; the loop is the product. Every surface change reruns the same release gates from Part 1 — oracle 300/300, no-op 0/300, quota and fingerprint checks — plus the probe-model sweep, in CI. The tool surface gets the same regression discipline as the code behind it, and <code>smoke-workspace-mcp --check-surface</code> diffs the simulator's surface against the deployed server so the benchmark can never quietly measure an API that no longer exists.
+  </p>
+  <p>
+    That last property is what Part 3 depends on. Once the surface is stable and its failure classes are being fixed deliberately, every graded episode becomes an artifact with a shelf life — 1,800 of them are already committed to the repo. <a href="blog-workspacebench-part-3-draft.html">Part 3 turns them into training data.</a>
+  </p>
+
+  <hr>
+
+  <h2>References &amp; pointers</h2>
+  <ul>
+    <li><a href="blog-workspacebench-series-draft.html">Part 1 — You can't improve workspace agents you can't measure</a> — the benchmark, the calibration protocol, and every number cited here.</li>
+    <li><a href="https://openbb.co/blog/introducing-workspace-mcp/">Introducing Workspace MCP</a> — the product surface under optimization.</li>
+    <li><code class="repo-path">runs/reports/calibration.json</code> — per-model, per-scenario results behind the fingerprint table.</li>
+    <li><code class="repo-path">src/workspace_bench/agents/model_adapter_helpers.py</code> — where the tool-documentation regression test lives (accident 1's fix).</li>
+    <li><code class="repo-path">src/workspace_bench/reports/model_compare.py</code> — the response-format opt-out (accident 2's fix).</li>
+  </ul>
+</main>
+<script>
+  const REPO_URL = "https://github.com/DidierRLopes/openbb-workspace-bench/blob/main/";
+  document.querySelectorAll("code.repo-path").forEach((code) => {
+    const link = document.createElement("a");
+    link.href = REPO_URL + code.textContent.trim();
+    code.replaceWith(link);
+    link.appendChild(code);
+  });
+</script>
+
 </body>
 </html>
