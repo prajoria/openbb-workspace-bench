@@ -466,6 +466,8 @@
     .tx-table tbody tr:hover td, .tx-table tbody tr.active td { background: var(--chip); }
     .tx-table tfoot td { border-top: 1px solid var(--ink); border-bottom: 0; font-weight: 600; }
     .tx-id { font-size: 0.78rem; overflow-wrap: anywhere; }
+    .toc { font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; margin: 26px 0 4px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+    .toc a { color: var(--muted); }
   </style>
 </head>
 <body>
@@ -495,6 +497,14 @@
     </div>
   </figure>
 
+  <nav class="toc" aria-label="Contents">
+    <a href="#why">01 · Why a benchmark</a>
+    <a href="#inside">02 · Inside the benchmark</a>
+    <a href="#distribution">03 · A designed distribution</a>
+    <a href="#results">04 · Results</a>
+    <a href="#cuts">05 · The score cuts both ways</a>
+  </nav>
+
   <pre><code>$ workspace-bench compare-models --pack all
 <span class="pass">PASS</span>  sonnet-5  gen_t2_skill_finance_earnings_prep  1.000
 <span class="fail">FAIL</span>  qwen3:8b  gen_t2_skill_finance_earnings_prep  0.800
@@ -505,12 +515,17 @@
   </figure>
 
 
-  <h2>What is an eval bench?</h2>
+  <h2 id="why">01 · Why a benchmark</h2>
+  <p>
+    Two ideas carry this section: agent work should be graded like software, and a workspace agent's answer is the state it leaves behind.
+  </p>
+
+  <h3>The pattern, elsewhere</h3>
   <p>
     An eval bench is a repeatable test suite for agents. Instead of saying "this model feels better", you give every agent the same task, the same tools, the same starting state, and the same grader.
   </p>
   <p>
-    The inspiration is the pattern. <a href="https://www.swebench.com/">SWE-bench</a> made software issues measurable. <a href="https://www.tbench.ai/">Terminal-Bench</a> made terminal work measurable. <a href="https://webarena.dev/">WebArena</a> and <a href="https://os-world.github.io/">OSWorld</a> pushed the same idea toward browser and desktop tasks. WorkspaceBench is my attempt to bring that discipline to financial workspaces.
+    The inspiration is the pattern. <a href="https://www.swebench.com/">SWE-bench</a> (<a href="https://arxiv.org/abs/2310.06770">Jimenez et al., 2023</a>) made software issues measurable. <a href="https://www.tbench.ai/">Terminal-Bench</a> made terminal work measurable. <a href="https://webarena.dev/">WebArena</a> (<a href="https://arxiv.org/abs/2307.13854">Zhou et al., 2023</a>) and <a href="https://os-world.github.io/">OSWorld</a> (<a href="https://arxiv.org/abs/2404.07972">Xie et al., 2024</a>) pushed the same idea toward browser and desktop tasks. WorkspaceBench is my attempt to bring that discipline to financial workspaces.
   </p>
 
   <figure class="panel">
@@ -527,7 +542,7 @@
     </div>
   </figure>
 
-  <h2>A chat answer is not enough</h2>
+  <h3>A chat answer is not enough</h3>
   <p>
     Most agent demos are still judged by whether the final answer sounds good. That is fine for conversation and weak for real workflows. In a workspace, the important question is not what the agent says. It is what the agent changed.
   </p>
@@ -535,7 +550,7 @@
     Did it create the correct widget? Did it use the right ticker? Did it inspect the schema before creating anything? Did it repair the dashboard without breaking the layout? A software agent is judged by whether the tests pass, not by how confident the diff description sounds. A workspace agent should be judged the same way: by the dashboard, tabs, widgets, layout, and notes it leaves behind.
   </p>
   <p>
-    So WorkspaceBench grades final state deterministically — exact widget identifiers, exact data arguments, layout bounds, overlap checks — before it considers anything the agent said. This is what the grader inspects after an agent finishes an earnings-review task:
+    So WorkspaceBench grades final state deterministically — exact widget identifiers, exact data arguments, layout bounds, overlap checks — before it considers anything the agent said, the same final-state-first stance <a href="https://arxiv.org/abs/2406.12045">τ-bench</a> takes for tool agents. This is what the grader inspects after an agent finishes an earnings-review task:
   </p>
 
   <figure class="panel">
@@ -597,7 +612,12 @@
     </div>
   </figure>
 
-  <h2>From workflow to scored episode</h2>
+  <h2 id="inside">02 · Inside the benchmark</h2>
+  <p>
+    How a task becomes a score: the loop, the surface the agent lives on, the kinds of work, and the contracts that hold it together.
+  </p>
+
+  <h3>From workflow to scored episode</h3>
   <p>
     The core loop is deliberately small. A scenario defines the task. The harness seeds a deterministic workspace from fixture backends. The agent emits tool calls. The simulator applies them. The grader checks the final state and the trace.
   </p>
@@ -621,9 +641,9 @@
     </div>
   </figure>
 
-  <h2>The MCP surface: tools, prompts, resources</h2>
+  <h3>The MCP surface: tools, prompts, resources</h3>
   <p>
-    The agent's world is exactly what the <a href="https://openbb.co/blog/introducing-workspace-mcp/">Workspace MCP server</a> exposes: <strong>20 tools</strong>, <strong>2 prompts</strong> (the server's own usage guidance and session context, fetched with <code>get_workspace_prompt</code>), and <strong>MCP resources</strong> (the app-builder index and the workspace skills, read with <code>read_workspace_resource</code>). A benchmark that skips the prompts and resources isn't measuring workspace competence — an agent that ignores the app-builder index rebuilds by hand a dashboard the platform would have assembled for it.
+    The agent's world is exactly what the <a href="https://openbb.co/blog/introducing-workspace-mcp/">Workspace MCP server</a> exposes: <strong>20 tools</strong>, <strong>2 prompts</strong> (the server's own usage guidance and session context, fetched with <code>get_workspace_prompt</code>), and <strong><a href="https://modelcontextprotocol.io/">MCP resources</a></strong> (the app-builder index and the workspace skills, read with <code>read_workspace_resource</code>). A benchmark that skips the prompts and resources isn't measuring workspace competence — an agent that ignores the app-builder index rebuilds by hand a dashboard the platform would have assembled for it.
   </p>
   <p>
     Every row below is live from the benchmark data: how many of the 300 scenarios exercise each part of the surface. Click one for what it does, example tests, and footage of it firing in the real Workspace.
@@ -650,7 +670,7 @@
     <figcaption></figcaption>
   </figure>
 
-  <h2>Five kinds of workspace work</h2>
+  <h3>Five kinds of workspace work</h3>
   <p>
     Scenarios are grouped into five workflow levels, each mapping to something an analyst actually does. Levels classify the kind of work — they are not the difficulty axis; that is the tier's job, later. The distribution is deliberate — dashboard construction (L2), the most product-relevant slice, is a quarter of the suite.
   </p>
@@ -676,7 +696,12 @@
     <figcaption></figcaption>
   </figure>
 
-  <h2>The tasks are generated, not hand-written</h2>
+  <h2 id="distribution">03 · A designed distribution</h2>
+  <p>
+    The 300 scenarios are not a collection; they are a lattice — and the difficulty axis had to earn its shape empirically before any result below could be trusted.
+  </p>
+
+  <h3>Generated, not hand-written</h3>
   <p>
     Every scenario in the benchmark is generated — including the early ones I drafted myself, which were AI-written too, so pretending they were a special hand-audited caste would be dishonest. What matters is not who typed the JSON; it is whether the distribution is designed. My first pack quietly skewed: four MCP tools appeared in exactly one scenario each, and half the suite tested the same single-widget motion. The lesson from <a href="https://wai-org.com/blog/tmax/">TMax</a> — 14,600 terminal environments sampled compositionally from nine structured axes — is that a task distribution should be a designed property, not an accident of what the author felt like writing.
   </p>
@@ -686,6 +711,8 @@
   <p>
     Tiers are structural, not adjectives. A tier is defined by what the task is made of — composition, seeded pathologies, discovery pressure, turn budget — and difficulty labels derive from the tier (the boundary tiers t1 and t3 straddle two bands, as boundaries should). The composition is measurable: the average episode uses 2.3 tools at t0 and 5.0 at t4.
   </p>
+
+  <h3>The shape of the suite</h3>
 
   <figure class="panel">
     <figcaption class="panel-head"><strong>The distribution, at a glance</strong><span>all 300 scenarios</span></figcaption>
@@ -735,7 +762,7 @@ uv run --extra dev workspace-bench validate \
 # rebuild the per-test tool matrix
 python scripts/generate_tool_matrix.py</code></pre>
 
-  <h2>The benchmark is mostly contracts</h2>
+  <h3>Mostly contracts</h3>
   <p>
     The repo works because every layer speaks a simple shape. Scenarios are JSON. Agent actions are JSONL tool calls. Results are graded scorecards with stable issue codes. The harness writes a task envelope, sets four environment variables, runs your agent command, reads its tool calls, and grades what happened. Your agent never has to import the package.
   </p>
@@ -797,7 +824,7 @@ python scripts/generate_tool_matrix.py</code></pre>
     </div>
   </figure>
 
-  <h2>Calibration caught our own bugs</h2>
+  <h3>Calibration caught our own bugs</h3>
   <p>
     Before trusting any of the numbers below, the tiers had to earn them. The protocol: run a mid-strength gating model (gpt-4.1-mini) over all 300 scenarios and check that measured pass rates fall monotonically from t0 to t4 — if difficulty is structural, the curve must show it.
   </p>
@@ -850,13 +877,15 @@ python scripts/generate_tool_matrix.py</code></pre>
     The before/after tells the story: the gating curve went from 83–67–48–47–30 (with two broken families and a suspicious t2/t3 tie) to <strong>98–92–77–52–33</strong> — monotonic, well-spaced, t0 nearly-free, t4 unfloored. That loop — design structurally, certify, calibrate empirically, let calibration expose your own bugs, fix, recalibrate — is the discipline this whole series argues for. It cost about three days of compute babysitting, and it is the difference between a benchmark and a demo.
   </p>
 
-  <h2 id="results">Same benchmark, different agents</h2>
+  <h2 id="results">04 · Results</h2>
   <p>
     The first useful question is not whether one model produced a nice answer once. It is whether different agents can solve the same workflows under the same constraints, and whether their failures are understandable.
   </p>
   <p>
-    These are real runs from the interactive comparison harness (<code class="repo-path">src/workspace_bench/reports/model_compare.py</code>): each model chooses one tool call, receives the simulated workspace result, then chooses the next call — all 6 models against the same 300 certified scenarios, same grader, same logs. Two run locally through Ollama for free; the rest go through vendor APIs and OpenRouter. Every episode's full transcript is exported as portable rollout JSONL in the repo.
+    These are real runs from the interactive comparison harness (<code class="repo-path">src/workspace_bench/reports/model_compare.py</code>): each model chooses one tool call, receives the simulated workspace result, then chooses the next call — all 6 models against the same 300 certified scenarios, same grader, same logs. Two run locally through Ollama for free; the rest go through vendor APIs and OpenRouter. Every episode's full transcript is exported as portable rollout JSONL in <code class="repo-path">runs/exports/</code>.
   </p>
+  <h3>The board</h3>
+
   <figure class="panel">
     <figcaption class="panel-head"><strong>WorkspaceBench</strong><span>strict pass rate · 300 scenarios · single attempt · higher is better</span></figcaption>
     <div class="panel-body">
@@ -922,7 +951,7 @@ python scripts/generate_tool_matrix.py</code></pre>
         <tbody>
           <tr><td>release</td><td><strong>WorkspaceBench</strong> — one release, 300 scenarios, certified before any model ran (oracle 300/300, no-op 0/300)</td></tr>
           <tr><td>models</td><td>gpt-5.5 &amp; gpt-4.1-mini (OpenAI API) · anthropic/claude-sonnet-5 &amp; z-ai/glm-5.2 (OpenRouter) · gpt-oss:20b &amp; qwen3:8b (local Ollama)</td></tr>
-          <tr><td>protocol</td><td><strong>pass@1</strong> — one attempt per scenario, interactive tool loop, temperature 0 (GPT-5.5: 1, API-enforced), same turn budget and grader for every model</td></tr>
+          <tr><td>protocol</td><td><strong>pass@1</strong> (<a href="https://arxiv.org/abs/2107.03374">Chen et al., 2021</a>) — one attempt per scenario, interactive tool loop, temperature 0 (GPT-5.5: 1, API-enforced), same turn budget and grader for every model</td></tr>
           <tr><td>artifacts</td><td>1,800 full episode transcripts as rollout JSONL (runs/exports/) · compiled report (runs/reports/calibration.json)</td></tr>
           <!-- TODO(didier): confirm total API spend -->
           <tr><td>cost</td><td>≈ $60 of API spend across the calibration loop and the final sweep · run July 2026</td></tr>
@@ -945,6 +974,8 @@ python scripts/generate_tool_matrix.py</code></pre>
     </div>
     <figcaption class="panel-note">gpt-4.1-mini × 3 repeats over all 300 scenarios — 900 graded attempts at temperature 0, so the variance is provider nondeterminism, not sampling. Raw data in <code class="repo-path">runs/comparison/mini-x3-banding/</code>.</figcaption>
   </figure>
+
+  <h3>Model by model</h3>
 
   <figure class="panel">
     <figcaption class="panel-head"><strong>Calibration results</strong><span>6 models · 300 scenarios each · pick one</span></figcaption>
@@ -1016,8 +1047,10 @@ python scripts/generate_tool_matrix.py</code></pre>
     The distribution shows three distinct ladder shapes, and each one is informative. GPT-5.5 compresses the ladder: 95% at t4, barely below its t0 — multi-intent composition is essentially solved for it, and its residue is precision and ambiguity. Claude Sonnet 5, gpt-4.1-mini, and gpt-oss:20b degrade monotonically, each an echo of the gating curve at a different altitude — the tier axis measures the same thing at every capability level. Qwen3 8B shows the third shape: near-parity with the mid-field at t0–t1, then a cliff — it halves at t2 and lands at 17% by t4. Small models don't degrade on this benchmark; they break, and they break exactly where episodes become multi-step. The agreement panel makes the same point from the other side: unanimity falls from 36/60 at t0 to 6/60 at t4, so the contested band — 192 of 300 scenarios — is concentrated precisely where the ladder claims difficulty lives (24, 26, 43, 45, 54 contested scenarios across t0→t4).
   </p>
 
+  <h3>Who passed what</h3>
+
   <figure class="panel">
-    <figcaption class="panel-head"><strong>Who passed what</strong><span>pick a tier · every scenario · click a row</span></figcaption>
+    <figcaption class="panel-head"><strong>Scenario × model</strong><span>pick a tier · every scenario · click a row</span></figcaption>
     <div class="panel-body">
       <div class="btn-row"><span class="btn-label">Tier</span><button class="btn active" data-tx="t0">t0</button><button class="btn" data-tx="t1">t1</button><button class="btn" data-tx="t2">t2</button><button class="btn" data-tx="t3">t3</button><button class="btn" data-tx="t4">t4</button></div>
       <p class="tm-meta" id="tx-meta" style="margin: 12px 0 8px;"></p>
@@ -1052,7 +1085,7 @@ uv run --extra dev workspace-bench validate --pack all --min-scenarios 300
 uv run --extra dev workspace-bench export-rollouts \
   --comparison-dir runs/comparison/&lt;run&gt; --output rollouts.jsonl</code></pre>
 
-  <h2>Failures get names, not vibes</h2>
+  <h3>Failures get names, not vibes</h3>
   <p>
     Every failed check maps to a stable issue code (all of them defined in <code class="repo-path">src/workspace_bench/core/graders.py</code>), and issue codes aggregate across a run. That turns "model X is worse" into something specific: the gating model's #1 failure is schema-before-create discipline, GLM-5.2 burns attempts on invalid calls, and GPT-5.5's residue is exact-layout precision. Same benchmark, different failure fingerprints — that specificity is the point.
   </p>
@@ -1080,7 +1113,7 @@ uv run --extra dev workspace-bench export-rollouts \
 
   <hr>
 
-  <h2>The score cuts both ways</h2>
+  <h2 id="cuts">05 · The score cuts both ways</h2>
   <p>
     This post is only about the eval. But look at the failure taxonomy again: GLM-5.2 made 303 rejected tool calls across its 300-scenario run, enough to fail the invalid-call budget on 45 scenarios. That is not only a verdict on the model. It is a verdict on the tool surface — the schemas, the names, the error messages the workspace hands to agents.
   </p>
@@ -1091,32 +1124,7 @@ uv run --extra dev workspace-bench export-rollouts \
     Incentives always win. The least I can do is measure the ones I am creating.
   </p>
 
-  <hr>
 
-  <h2>References &amp; pointers</h2>
-  <p>The benchmarks and papers this post leans on:</p>
-  <ul>
-    <li><a href="https://www.swebench.com/">SWE-bench</a> — Jimenez et al., 2023 (<a href="https://arxiv.org/abs/2310.06770">arXiv:2310.06770</a>). Resolved GitHub issues as verifiable tasks; the template for "same task, same verifier, comparable result".</li>
-    <li><a href="https://www.tbench.ai/">Terminal-Bench</a> — terminal work graded by what actually happened in the shell; the closest cousin to grading a workspace by its durable state.</li>
-    <li><a href="https://webarena.dev/">WebArena</a> — Zhou et al., 2023 (<a href="https://arxiv.org/abs/2307.13854">arXiv:2307.13854</a>). Long-horizon browser tasks with programmatic verification.</li>
-    <li><a href="https://os-world.github.io/">OSWorld</a> — Xie et al., 2024 (<a href="https://arxiv.org/abs/2404.07972">arXiv:2404.07972</a>). Full-desktop agent tasks; the reference point for environment realism.</li>
-    <li>τ-bench — Yao et al., 2024 (<a href="https://arxiv.org/abs/2406.12045">arXiv:2406.12045</a>). Tool-agent interaction graded on final database state — the same final-state-first philosophy our grader uses.</li>
-    <li><a href="https://wai-org.com/blog/tmax/">TMax</a> — 14,600 terminal environments sampled compositionally from structured axes; the argument behind treating our task distribution as a designed property.</li>
-    <li>Chen et al., 2021 (<a href="https://arxiv.org/abs/2107.03374">arXiv:2107.03374</a>) — the Codex paper, origin of the pass@k metric family. Our headline number is pass@1.</li>
-    <li><a href="https://modelcontextprotocol.io/">Model Context Protocol</a> — the spec for the tools, prompts, and resources surface this whole benchmark exercises.</li>
-    <li><a href="https://openbb.co/blog/introducing-workspace-mcp/">Introducing Workspace MCP</a> — OpenBB, May 2026. The product this benchmark measures: what the tool surface is for, and the governance story around agents working inside a financial workspace.</li>
-  </ul>
-  <p>Where to look in the repo — every number in this post traces back to one of these files:</p>
-  <ul>
-    <li><code class="repo-path">scripts/generate_gen_pack.py</code> — the deterministic generator: 15 families × 5 tiers, phrasing pools, novelty fingerprints, quota checks.</li>
-    <li><code class="repo-path">src/workspace_bench/workspace/simulated_workspace.py</code> — the simulator: a deterministic state machine over the Workspace MCP surface.</li>
-    <li><code class="repo-path">src/workspace_bench/core/graders.py</code> — the final-state and trace checks, and every issue code named in this post.</li>
-    <li><code class="repo-path">src/workspace_bench/workspace/live_mcp.py</code> — the live bridge that keeps the simulator honest against the real <code>workspace-mcp</code> server.</li>
-    <li><code class="repo-path">src/workspace_bench/reports/model_compare.py</code> — the interactive harness that ran all six models.</li>
-    <li><code class="repo-path">scripts/compile_calibration.py</code> → <code class="repo-path">runs/reports/calibration.json</code> — every chart and table in the results section renders from this file.</li>
-    <li><code class="repo-path">docs/scenario-catalog.md</code> and <code class="repo-path">docs/tool-coverage-matrix.md</code> — all 300 scenarios and the per-test tool matrix as flat, greppable markdown.</li>
-    <li><code class="repo-path">runs/exports/</code> — the 1,800 episode transcripts as rollout JSONL, one file per model.</li>
-  </ul>
 </main>
 <script>
   "use strict";
