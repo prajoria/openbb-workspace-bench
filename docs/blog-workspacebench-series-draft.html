@@ -479,7 +479,7 @@
     This project started with a question I kept coming back to at OpenBB: if agents are going to work inside financial workspaces, how do we know they are actually useful? Not useful in a demo. Useful in the boring, concrete way that matters: can they inspect data, call tools, build dashboards, repair broken state, and leave something behind that a human can open the next morning?
   </p>
   <p>
-    I could not answer that question, because nothing measured it. So I built WorkspaceBench<!-- TODO on publish: link this name to the public repo AND set REPO_URL in the script at the bottom of this file (turns every repo-path citation into a link) -->. It includes the harness, a deterministic workspace simulator, 300 scenarios, the graders, and every number in this post.
+    I could not answer that question, because nothing measured it. So I built <a href="https://github.com/DidierRLopes/openbb-workspace-bench">WorkspaceBench</a><!-- repo goes public at announcement time -->. It includes the harness, a deterministic workspace simulator, 300 scenarios, the graders, and every number in this post.
   </p>
   <p>
     This is the first post of three. It covers the benchmark: how a workspace task becomes a scored episode, how the scenarios are generated, and what real models score. Part 2 flips the harness around and uses the same scores to fix the MCP tool surface. Part 3 turns the traces into training data.
@@ -1674,9 +1674,7 @@ uv run --extra dev workspace-bench compare-models \\
   </script>
 <!-- WB-DEEP-JS:END -->
 <script>
-  // TODO: set to the public repo blob root on publish, e.g.
-  // "https://github.com/OpenBB-finance/workspace-bench/blob/main/"
-  const REPO_URL = null;
+  const REPO_URL = "https://github.com/DidierRLopes/openbb-workspace-bench/blob/main/";
   if (REPO_URL) {
     document.querySelectorAll("code.repo-path").forEach((code) => {
       const link = document.createElement("a");
