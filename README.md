@@ -8,8 +8,9 @@ Current bundled release: `workspace-bench-v1` (`core` and `all` are backward-com
 
 ## What Is Included
 
-- 300 deterministic scenarios across L0-L4
+- 300 deterministic scenarios: 15 tool-anchored families x 5 structural tiers (t0-t4) x 4, stratified 180/60/60 train/validation/test splits
 - generated families covering widgets, apps, prompts, resources, skills, delegation, inspection, repair, and layout
+- six committed model baselines with full traces and rollout exports
 - equities, macro, portfolio, and Stark enterprise fixture backends
 - simulator-backed Workspace MCP runtime for fast local evals
 - live `workspace-mcp` sidecar smoke runner
@@ -55,6 +56,25 @@ Run tests:
 ```bash
 uv run --extra dev pytest
 ```
+
+## Baselines
+
+Six models have been run against the full 300-scenario release (pass@1, single
+attempt, temperature 0, same grader and turn budget for every model):
+
+| Model | Strict pass | t0 → t4 pass rate (%) |
+|---|---|---|
+| GPT-5.5 | 282/300 (94.0%) | 98 · 100 · 90 · 87 · 95 |
+| Claude Sonnet 5 | 267/300 (89.0%) | 100 · 98 · 85 · 82 · 80 |
+| GLM-5.2 | 229/300 (76.3%) | 85 · 100 · 73 · 60 · 63 |
+| gpt-4.1-mini | 211/300 (70.3%) | 98 · 92 · 77 · 52 · 33 |
+| gpt-oss:20b | 178/300 (59.3%) | 93 · 68 · 57 · 45 · 33 |
+| Qwen3 8B | 149/300 (49.7%) | 80 · 78 · 47 · 27 · 17 |
+
+Full per-scenario results and traces are committed under `runs/comparison/`,
+portable rollout JSONL for all 1,800 episodes under `runs/exports/`, and the
+compiled report at `runs/reports/calibration.json` (built by
+`scripts/compile_calibration.py`).
 
 ## Evaluate Your Agent
 
@@ -252,8 +272,9 @@ The server exposes:
 - widget data endpoints such as `/price-performance?symbol=AAPL&raw=true`
 
 The bundled `Bench Stark Enterprise` fixture packages widget and app metadata
-from `~/Documents/git/stark-industries-demo` into a stable local backend. It is
-used for enterprise workflow coverage without depending on a live demo app.
+from an enterprise demo application into a stable local backend, with seeded
+deterministic data per widget. It is used for enterprise workflow coverage
+without depending on a live demo app.
 
 ## Scenario Shape
 
@@ -302,7 +323,9 @@ See [docs/benchmark-card.md](docs/benchmark-card.md) for the `workspace-bench-v1
 See [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) for release gates.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for scenario, grader, agent, export, and RL contribution paths.
 
-## Task Levels
+## Task Levels and Tiers
+
+Levels classify what kind of workflow a task is:
 
 - `L0`: inspect and answer from an existing dashboard
 - `L1`: create, update, read, or lay out a single widget
@@ -310,6 +333,20 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for scenario, grader, agent, export, and 
 - `L3`: use app templates, tabs, parameter groups, prompts, skills, or delegation
 - `L4`: repair incorrect Workspace state or bad metadata assumptions
 - `L5`: long-horizon multi-agent workflows, reserved for later
+
+Structural tiers grade how demanding the episode is, orthogonally to level —
+every tool family carries a complete ladder:
+
+- `t0`: one action, generous budget
+- `t1`: one mutation under full discovery discipline
+- `t2`: composed artifacts — several checks must hold at once
+- `t3`: repair seeded pathologies without collateral damage
+- `t4`: multi-intent composition under a tight turn budget
+
+Difficulty labels derive from tiers (t0 easy, t2 medium, t4 hard; t1 and t3
+straddle bands), yielding 90 easy / 120 medium / 90 hard. Calibration against
+six models confirmed the ladder: the gating model's pass rate falls
+monotonically 98 → 92 → 77 → 52 → 33 across t0 → t4.
 
 ## Repository Layout
 
@@ -336,7 +373,17 @@ docs/
   rl-factory-adapter.md
   roadmap.md
   scenario-format.md
+  scenario-catalog.md      All 300 scenarios, documented
+  tool-coverage-matrix.md  Per-test x per-tool requirement matrix
   training-recipes.md
+scripts/
+  generate_gen_pack.py     Deterministic scenario-pack generator (families x tiers)
+  generate_stark_data.py   Seeded Stark fixture data baker
+  compile_calibration.py   Aggregates model runs into runs/reports/calibration.json
+runs/
+  comparison/              Committed calibration runs: six models x 300 scenarios
+  exports/                 Rollout JSONL for all 1,800 episodes
+  reports/                 Compiled calibration report
 examples/
   jsonl_rule_agent.py       Repo-checkout wrapper for the packaged demo agent
   ollama_agent.py           Local Ollama adapter template
@@ -381,4 +428,4 @@ observation, reward, terminated, truncated, info = env.step(
 
 ## Release Notes
 
-This is an alpha benchmark package. It is ready for local evals, private task packs, CI regression testing, and `workspace-mcp` sidecar smoke tests. Before a broader public leaderboard, add more real model baselines, hidden/generated scenario splits, and a browser-backed real Workspace runner.
+This is an alpha benchmark package. It is ready for local evals, private task packs, CI regression testing, and `workspace-mcp` sidecar smoke tests, and it ships with six real model baselines. Before a broader public leaderboard: held-out/hidden scenario splits and a browser-backed real Workspace runner.
