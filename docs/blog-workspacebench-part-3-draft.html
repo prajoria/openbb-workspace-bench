@@ -1,0 +1,1335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WorkspaceBench Part 3: Turning Traces Into A Learning Interface</title>
+  <style>
+    :root {
+      --bg: #f7f5ef;
+      --paper: #fffdfa;
+      --ink: #17211f;
+      --muted: #5d6864;
+      --line: #d8d3c8;
+      --soft: #ece7dc;
+      --green: #1f7a5f;
+      --green-soft: #dceee7;
+      --blue: #346f9f;
+      --blue-soft: #dce9f2;
+      --amber: #b7791f;
+      --amber-soft: #f2e5cc;
+      --red: #b9473d;
+      --red-soft: #f4dfdb;
+      /* chart series colors: validated for lightness, chroma, CVD separation, contrast */
+      --chart-1: #0f8262;
+      --chart-2: #b7791f;
+      --chart-3: #2e6fad;
+      --shadow: 0 16px 42px rgba(23, 33, 31, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: var(--green); text-underline-offset: 3px; }
+    button { font: inherit; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(216, 211, 200, 0.92);
+      background: rgba(247, 245, 239, 0.94);
+      backdrop-filter: blur(14px);
+    }
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 12px 24px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 780;
+      min-width: 0;
+    }
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--green);
+      border-radius: 6px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      padding: 4px;
+      flex: 0 0 auto;
+    }
+    .brand-mark span { background: var(--green); border-radius: 2px; }
+    nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 10px;
+      border-radius: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    nav a:hover, nav a:focus-visible {
+      color: var(--ink);
+      background: var(--soft);
+      outline: none;
+    }
+
+    .hero {
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(31, 122, 95, 0.08), rgba(52, 111, 159, 0.08)),
+        var(--paper);
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      align-items: center;
+      gap: 42px;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 76px 24px 58px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      color: var(--green);
+      font-size: 0.82rem;
+      font-weight: 780;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 26px;
+      height: 2px;
+      background: var(--green);
+      border-radius: 999px;
+    }
+    h1, h2, h3 { margin: 0; line-height: 1.1; letter-spacing: 0; }
+    h1 { font-size: clamp(2.45rem, 6vw, 5.2rem); max-width: 980px; }
+    h2 { font-size: clamp(2rem, 4vw, 3.15rem); margin-bottom: 18px; }
+    h3 { font-size: 1.12rem; margin-bottom: 10px; }
+    p { margin-top: 0; }
+    .lede {
+      max-width: 760px;
+      margin: 24px 0 0;
+      color: #35413e;
+      font-size: clamp(1.08rem, 2vw, 1.3rem);
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 14px;
+      border: 1px solid var(--ink);
+      border-radius: 6px;
+      background: var(--ink);
+      color: #fffdfa;
+      text-decoration: none;
+      font-weight: 740;
+      cursor: pointer;
+    }
+    .button.secondary { background: transparent; color: var(--ink); border-color: var(--line); }
+
+    .terminal-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 250, 0.92);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .terminal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid var(--line);
+      padding: 12px 14px;
+      background: #f0ece2;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+    .dots { display: flex; gap: 6px; flex: 0 0 auto; }
+    .dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+    .terminal {
+      padding: 16px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.86rem;
+      color: #26302d;
+    }
+    .terminal-line {
+      display: grid;
+      grid-template-columns: 70px minmax(0, 1fr);
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee8dc;
+    }
+    .terminal-line:last-child { border-bottom: 0; }
+    .prompt { color: var(--green); font-weight: 780; }
+    .term-ok { color: var(--green); font-weight: 780; }
+    .term-bad { color: var(--red); font-weight: 780; }
+
+    .section { border-bottom: 1px solid var(--line); background: var(--paper); }
+    .section.alt { background: var(--bg); }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 70px 24px; }
+    .narrow { max-width: 880px; }
+    .kicker {
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 780;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+    .body-copy { max-width: 880px; color: #35403d; font-size: 1.05rem; }
+    .body-copy p { margin-bottom: 16px; }
+    .callout {
+      border-left: 4px solid var(--green);
+      background: var(--green-soft);
+      border-radius: 0 8px 8px 0;
+      padding: 18px 20px;
+      color: #1d3e33;
+      margin-top: 22px;
+      max-width: 880px;
+    }
+    .callout.amber {
+      border-left-color: var(--amber);
+      background: var(--amber-soft);
+      color: #5c3d10;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 30px;
+    }
+    .stat {
+      grid-column: span 4;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      padding: 18px;
+      min-height: 140px;
+    }
+    .stat strong { display: block; color: var(--ink); font-size: 1.9rem; line-height: 1; margin-bottom: 10px; font-weight: 680; }
+    .stat span { color: var(--muted); font-size: 0.94rem; }
+
+    .interactive {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: 0 10px 32px rgba(23, 33, 31, 0.06);
+      overflow: hidden;
+      margin-top: 30px;
+    }
+    .interactive-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border-bottom: 1px solid var(--line);
+      background: #f1ede4;
+      padding: 14px 16px;
+      flex-wrap: wrap;
+    }
+    .hint { color: var(--muted); font-size: 0.88rem; }
+
+    .trace-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(130px, 1fr));
+      gap: 10px;
+      padding: 18px;
+    }
+    .tile {
+      min-height: 118px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdfa;
+      padding: 14px;
+      text-align: left;
+      cursor: pointer;
+      color: var(--ink);
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+    .tile:hover, .tile:focus-visible, .tile.active {
+      transform: translateY(-2px);
+      border-color: var(--green);
+      background: var(--green-soft);
+      outline: none;
+    }
+    .tile small {
+      display: block;
+      color: var(--green);
+      font-weight: 780;
+      margin-bottom: 8px;
+    }
+    .tile span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 8px;
+    }
+    .detail {
+      border-top: 1px solid var(--line);
+      background: #fbf8f0;
+      padding: 18px;
+      min-height: 145px;
+    }
+    .detail p { margin: 0; color: #34403d; }
+    .detail .example {
+      display: inline-block;
+      margin-top: 10px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.82rem;
+      color: var(--muted);
+      background: var(--soft);
+      border-radius: 6px;
+      padding: 4px 8px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 28px;
+      align-items: start;
+      margin-top: 30px;
+    }
+    .tabs, .pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #f1ede4;
+    }
+    .pill {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fffdfa;
+      color: var(--muted);
+      padding: 7px 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .pill.active, .pill:hover, .pill:focus-visible {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: var(--ink);
+      outline: none;
+    }
+    .tab-panel { display: none; padding: 20px; }
+    .tab-panel.active { display: block; }
+    .code {
+      margin: 16px 0 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #1f2825;
+      color: #f5f1e8;
+      padding: 14px;
+      overflow: auto;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    /* Variance strip */
+    .variance-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 16px 18px 4px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .variance-legend .key { display: inline-flex; align-items: center; gap: 7px; }
+    .swatch { width: 12px; height: 12px; border-radius: 3px; flex: 0 0 auto; }
+    .swatch.none { background: var(--soft); border: 1px solid var(--line); }
+    .swatch.signal { background: var(--chart-1); }
+    .swatch.all { background: #8d8677; }
+    .variance-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+      gap: 6px;
+      padding: 14px 18px 18px;
+    }
+    .cell {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--soft);
+      color: #4c554f;
+      font-weight: 740;
+      font-size: 0.82rem;
+      font-variant-numeric: tabular-nums;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 140ms ease, box-shadow 140ms ease;
+      padding: 0;
+    }
+    .cell.signal { background: var(--chart-1); border-color: var(--chart-1); color: #fffdfa; }
+    .cell.all { background: #8d8677; border-color: #8d8677; color: #fffdfa; }
+    .cell:hover, .cell:focus-visible, .cell.active {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(23, 33, 31, 0.18);
+      outline: none;
+    }
+
+    /* Tier bands */
+    .tier-rows { display: grid; gap: 10px; padding: 18px; }
+    .tier-row {
+      display: grid;
+      grid-template-columns: 200px minmax(0, 1fr) 96px;
+      gap: 12px;
+      align-items: center;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      padding: 6px 8px;
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+      color: var(--ink);
+      min-height: 36px;
+    }
+    .tier-row:hover, .tier-row:focus-visible, .tier-row.active {
+      border-color: var(--green);
+      background: var(--green-soft);
+      outline: none;
+    }
+    .tier-name { font-weight: 740; font-size: 0.92rem; }
+    .tier-name small { display: block; font-weight: 520; color: var(--muted); }
+    .tier-track { position: relative; height: 16px; border-radius: 4px; background: var(--soft); }
+    .tier-band {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      border-radius: 4px;
+      background: var(--chart-1);
+    }
+    .tier-value { font-variant-numeric: tabular-nums; font-size: 0.88rem; font-weight: 700; text-align: right; }
+
+    .architecture {
+      padding: 18px;
+      overflow-x: auto;
+    }
+    .architecture-svg {
+      display: block;
+      width: 100%;
+      min-width: 900px;
+      height: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdfa;
+    }
+    .arch-node { cursor: pointer; }
+    .arch-node rect {
+      fill: #fffdfa;
+      stroke: #cfc8ba;
+      stroke-width: 1.5;
+      transition: fill 160ms ease, stroke 160ms ease;
+    }
+    .arch-node text {
+      fill: var(--ink);
+      font-size: 14px;
+      font-weight: 740;
+      pointer-events: none;
+    }
+    .arch-node .sub {
+      fill: var(--muted);
+      font-size: 12px;
+      font-weight: 520;
+    }
+    .arch-node:hover rect, .arch-node:focus rect, .arch-node.active rect {
+      fill: var(--green-soft);
+      stroke: var(--green);
+    }
+    .edge {
+      stroke: #a9a294;
+      stroke-width: 1.5;
+      fill: none;
+      marker-end: url(#arrow);
+    }
+    .edge-label {
+      fill: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .lane-label {
+      fill: var(--green);
+      font-size: 12px;
+      font-weight: 780;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .check {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      padding: 16px;
+    }
+    .check strong { display: block; margin-bottom: 8px; }
+    .check p { color: var(--muted); margin: 0; }
+
+    .factory-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(112px, 1fr));
+      gap: 10px;
+      padding: 18px;
+    }
+
+    .footer { background: #17211f; color: #f7f5ef; }
+    .footer .wrap { padding-top: 42px; padding-bottom: 42px; }
+    .footer p { max-width: 820px; margin: 0; color: #d8d3c8; }
+
+    @media (max-width: 940px) {
+      .topbar-inner { align-items: flex-start; flex-direction: column; }
+      nav { justify-content: flex-start; }
+      .hero-inner, .split { grid-template-columns: 1fr; }
+      .trace-grid, .factory-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stat { grid-column: span 6; }
+      .checklist { grid-template-columns: 1fr; }
+      .tier-row { grid-template-columns: minmax(0, 1fr); }
+      .tier-value { text-align: left; }
+    }
+    @media (max-width: 620px) {
+      .wrap, .hero-inner { padding-left: 18px; padding-right: 18px; }
+      .trace-grid, .factory-grid { grid-template-columns: 1fr; }
+      .stat { grid-column: span 12; }
+      .terminal-line { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand" aria-label="WorkspaceBench Part 3">
+        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <span>WorkspaceBench Part 3</span>
+      </div>
+      <nav aria-label="Article sections">
+        <a href="blog-workspacebench-series-draft.html">Part 1</a>
+        <a href="blog-workspacebench-part-2-draft.html">Part 2</a>
+        <a href="#why">Why</a>
+        <a href="#exports">Exports</a>
+        <a href="#distribution">Distribution</a>
+        <a href="#environment">Environment</a>
+        <a href="#contract">V1 Contract</a>
+        <a href="#factory">Part 4</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <p class="eyebrow">Part 3</p>
+          <h1>Turning eval traces into a learning interface</h1>
+          <p class="lede">
+            Part 1 measured whether an agent can operate OpenBB Workspace. Part 2 used those measurements to fix the MCP tool surface itself. Part 3 starts after both: with a stable interface, every run's trace &mdash; what the agent saw, what it tried, what the workspace returned, how the final state was graded &mdash; becomes data worth keeping. The order matters: traces collected against a tool surface you are still changing describe an API that no longer exists.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#distribution">Why distribution matters</a>
+            <a class="button secondary" href="#architecture">Explore the architecture</a>
+          </div>
+        </div>
+        <aside class="terminal-card" aria-label="Part 3 command examples">
+          <div class="terminal-head">
+            <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <span>one trace, three uses</span>
+          </div>
+          <div class="terminal">
+            <div class="terminal-line"><span class="prompt">eval</span><span>measure the agent on a scenario</span></div>
+            <div class="terminal-line"><span class="prompt">export</span><span>write rollout, SFT, or preference data</span></div>
+            <div class="terminal-line"><span class="prompt">env</span><span>wrap the same task as reset and step</span></div>
+            <div class="terminal-line"><span class="prompt">grade</span><span>one final-state verifier for all three</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="wrap">
+        <p class="kicker">Why this matters</p>
+        <h2>The score is useful. The trace is reusable.</h2>
+        <div class="body-copy">
+          <p>
+            A score tells me whether an agent passed. A trace tells me why. It shows the task, the observations, the tool calls, the tool results, the final workspace, and the grade. That is much more valuable than a single number.
+          </p>
+          <p>
+            In OpenBB terms, this means a run can show whether the agent listed available widgets, inspected the schema, created the right dashboard artifact, recovered from a bad state, or stopped too early. The trace is the evidence.
+          </p>
+          <p>
+            This is where the benchmark becomes more than a scoreboard. If the trace is clean enough, it can become a supervised example, a preference pair, or an episode inside a step-based environment. WorkspaceBench normalizes every attempt &mdash; oracle replays, comparison runs, external agent commands &mdash; into one canonical rollout record.
+          </p>
+        </div>
+
+        <div class="interactive">
+          <div class="interactive-head">
+            <strong>Anatomy of a rollout record</strong>
+            <span class="hint">Click a field</span>
+          </div>
+          <div class="trace-grid" role="list" aria-label="Rollout record fields">
+            <button class="tile active" data-trace="task" role="listitem">
+              <small>task</small>Task
+              <span>What the agent was asked to do</span>
+            </button>
+            <button class="tile" data-trace="actions" role="listitem">
+              <small>tool_calls</small>Actions
+              <span>Tool calls emitted by the agent</span>
+            </button>
+            <button class="tile" data-trace="results" role="listitem">
+              <small>tool_results</small>Results
+              <span>Workspace feedback after each call</span>
+            </button>
+            <button class="tile" data-trace="state" role="listitem">
+              <small>final_snapshot</small>State
+              <span>The final dashboard snapshot</span>
+            </button>
+            <button class="tile" data-trace="grade" role="listitem">
+              <small>grade</small>Grade
+              <span>Pass/fail, score, issue codes</span>
+            </button>
+          </div>
+          <div class="detail" aria-live="polite">
+            <h3 id="trace-title">Task</h3>
+            <p id="trace-text">The task gives the model its objective and constraints: prompt, allowed tools, limits, and metadata. It is the common envelope shared by evals, exports, and environment rollouts.</p>
+            <span class="example" id="trace-example">"schema_version": "workspace-bench-rollout-v1"</span>
+          </div>
+        </div>
+
+        <div class="body-copy" style="margin-top: 40px;">
+          <h3 style="font-size: 1.35rem;">Here is a real one.</h3>
+          <p>
+            This is gpt-oss:20b on <code style="font-size: 0.9em;">l1_add_yield_curve_widget</code>, attempt 1 of 3, verbatim from the run directory. Watch the first call: the model hallucinated a <code style="font-size: 0.9em;">container.exec</code> tool from some other agent harness and tried to run bash in a financial workspace.
+          </p>
+        </div>
+        <div class="terminal-card" style="margin-top: 18px; max-width: 880px;" aria-label="Real failing trace">
+          <div class="terminal-head">
+            <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <span>l1_add_yield_curve_widget &middot; gpt-oss:20b &middot; repeat 1/3</span>
+          </div>
+          <div class="terminal">
+            <div class="terminal-line"><span class="prompt">task</span><span>"Add the yield curve widget to the active dashboard."</span></div>
+            <div class="terminal-line"><span class="term-bad">call 1</span><span>container.exec {"cmd": ["bash", "-lc", ...]} &mdash; <strong>invalid</strong>: no such tool</span></div>
+            <div class="terminal-line"><span class="term-ok">call 2</span><span>list_available_widgets {"origin": "Bench Macro"}</span></div>
+            <div class="terminal-line"><span class="term-ok">call 3</span><span>get_widget_schema {"origin": "Bench Macro", "widget_id": "yield_curve"}</span></div>
+            <div class="terminal-line"><span class="term-ok">call 4</span><span>create_widget {"origin": "Bench Macro", "widget_id": "yield_curve"}</span></div>
+            <div class="terminal-line"><span class="term-bad">grade</span><span>passed: false &middot; score 0.857 (6/7 checks) &middot; too_many_invalid_calls: "Expected &lt;= 0 invalid tool calls, observed 1."</span></div>
+          </div>
+        </div>
+        <div class="body-copy" style="margin-top: 18px;">
+          <p>
+            The widget got built &mdash; the durable artifact is sitting in the final snapshot &mdash; but the strict pass died on one hallucinated tool call. All three attempts failed the same way, so this scenario contributes nothing to preference pairs even though the model is one decision away from solving it. That closeness is invisible in a pass rate and obvious in a trace. It is exactly what the next section is about.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="exports">
+      <div class="wrap">
+        <p class="kicker">Data exports</p>
+        <h2>Before you train anything, export clean data.</h2>
+        <div class="split">
+          <div class="body-copy">
+            <p>
+              The first useful path is offline. Take passing traces and turn them into supervised examples. Take repeated attempts and turn them into preference pairs. Keep failed attempts only when the grade metadata travels with them.
+            </p>
+            <p>
+              This is not glamorous, but it is where most of the leverage is. Every exported row carries versioning metadata &mdash; benchmark release id, scenario pack, export schema version, model slug, timestamp &mdash; so a training row can always be traced back to the exact benchmark release that produced it. If you cannot audit the data, you cannot trust the training run.
+            </p>
+            <div class="callout">
+              <strong>Practical rule:</strong> export only after grading. The benchmark decides what happened before any training pipeline consumes the trace. SFT export drops failed attempts by default; you have to opt in with <code style="font-size: 0.9em;">--include-failures</code> to keep them, and then the grade rides along.
+            </div>
+          </div>
+
+          <div class="interactive">
+            <div class="tabs" role="tablist" aria-label="Export formats">
+              <button class="pill active" data-tab="rollout" role="tab" aria-selected="true">Rollout</button>
+              <button class="pill" data-tab="sft" role="tab" aria-selected="false">SFT</button>
+              <button class="pill" data-tab="prefs" role="tab" aria-selected="false">Preferences</button>
+            </div>
+            <div class="tab-panel active" id="tab-rollout" role="tabpanel">
+              <h3>Canonical rollout</h3>
+              <p>A rollout is the lossless record for one attempt.</p>
+              <pre class="code">workspace-bench export-rollouts \
+  --comparison-dir runs/comparison/&lt;run-id&gt; \
+  --output runs/exports/rollouts.jsonl</pre>
+              <pre class="code">{
+  "schema_version": "workspace-bench-rollout-v1",
+  "task": {...},
+  "messages": [...],
+  "tool_calls": [...],
+  "tool_results": [...],
+  "final_snapshot": {...},
+  "grade": {"passed": true, "score": 1.0},
+  "metadata": {
+    "scenario_id": "l1_add_price_widget",
+    "benchmark_release_id": "workspace-core-v0",
+    "model_slug": "openai-gpt-4.1",
+    "export_schema_version": "...",
+    "exported_at": "..."
+  }
+}</pre>
+            </div>
+            <div class="tab-panel" id="tab-sft" role="tabpanel">
+              <h3>Supervised fine-tuning</h3>
+              <p>SFT starts from traces that already passed, or from oracle traces that describe the intended behavior. Formats: openai_messages, sharegpt, or raw tool-call JSONL.</p>
+              <pre class="code"># bootstrap from oracle reference traces
+workspace-bench export-sft \
+  --oracle \
+  --format openai_messages \
+  --output runs/exports/oracle-sft.jsonl
+
+# or from passing model attempts
+workspace-bench export-sft \
+  --comparison-dir runs/comparison/&lt;run-id&gt; \
+  --format openai_messages \
+  --output runs/exports/model-sft.jsonl</pre>
+            </div>
+            <div class="tab-panel" id="tab-prefs" role="tabpanel">
+              <h3>Preference pairs</h3>
+              <p>Repeated attempts on the same scenario produce chosen/rejected examples: the passing or higher-scoring attempt is chosen, the failing or lower-scoring attempt rejected.</p>
+              <pre class="code">workspace-bench compare-models \
+  --pack all \
+  --difficulty all \
+  --repeats 3 \
+  --metric pass-at-k
+
+workspace-bench export-preferences \
+  --comparison-dir runs/comparison/&lt;run-id&gt; \
+  --output runs/exports/preferences.jsonl</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="distribution">
+      <div class="wrap">
+        <p class="kicker">The real asset</p>
+        <h2>The trace is reusable. The task distribution is the asset.</h2>
+        <div class="body-copy">
+          <p>
+            Here is the thing recent agent-training work keeps converging on: the scarce resource is not the RL algorithm. It is a large, diverse, executable, verifiable task distribution with calibrated difficulty. A clean trace from a bad task distribution is still bad training data.
+          </p>
+          <p>
+            The clearest way to see this is reward variance. Learning signal comes from tasks a model <em>sometimes</em> solves. If every attempt passes, there is nothing to prefer between attempts. If every attempt fails, there is nothing to reinforce. The useful scenarios are the ones in between &mdash; and you only find them by running repeats and measuring.
+          </p>
+          <p>
+            This is real data: gpt-oss:20b, three attempts on each of the 25 core scenarios. Each cell below is one scenario showing attempts passed. Click any cell.
+          </p>
+        </div>
+
+        <div class="interactive">
+          <div class="interactive-head">
+            <strong>Where the learning signal lives</strong>
+            <span class="hint">gpt-oss:20b &middot; 25 scenarios &times; 3 attempts</span>
+          </div>
+          <div class="variance-legend" aria-label="Legend">
+            <span class="key"><span class="swatch none"></span>0/3 &mdash; all fail (no signal)</span>
+            <span class="key"><span class="swatch signal"></span>1&ndash;2/3 &mdash; variance (signal)</span>
+            <span class="key"><span class="swatch all"></span>3/3 &mdash; all pass (no signal)</span>
+          </div>
+          <div class="variance-strip" id="variance-strip" role="list" aria-label="Per-scenario outcomes"></div>
+          <div class="detail" aria-live="polite">
+            <h3 id="var-title">Click a scenario cell</h3>
+            <p id="var-text">Green cells are scenarios where the same model both passed and failed across three attempts. Those 9 scenarios are where preference pairs come from, and where an RL gradient exists for this model. The other 16 produce no contrast at all.</p>
+          </div>
+        </div>
+
+        <div class="grid" aria-label="Variance summary">
+          <div class="stat"><strong>52%</strong><span>pass@3 &mdash; scenarios this model solves at least once. Capability.</span></div>
+          <div class="stat"><strong>16%</strong><span>pass^3 &mdash; scenarios it solves every time. Reliability.</span></div>
+          <div class="stat"><strong>9 / 25</strong><span>scenarios with reward variance &mdash; the only ones that yield preference pairs and RL gradient for this model.</span></div>
+        </div>
+
+        <div class="body-copy" style="margin-top: 40px;">
+          <h3 style="font-size: 1.35rem;">Difficulty should be measured, not labeled.</h3>
+          <p>
+            Scenarios currently carry author-assigned labels: easy, medium, hard. That is fine for a hand-written alpha pack, but it does not scale. The discipline I want to adopt &mdash; borrowed from recent synthetic-environment work like TMax and General Agent &mdash; is empirical gating: a task earns its difficulty tier by landing in a target pass-rate band for a named gating model, measured over repeated attempts.
+          </p>
+        </div>
+
+        <div class="interactive">
+          <div class="interactive-head">
+            <strong>Target pass-rate bands per tier</strong>
+            <span class="hint">Click a tier</span>
+          </div>
+          <div class="tier-rows" id="tier-rows" aria-label="Difficulty tiers"></div>
+          <div class="detail" aria-live="polite">
+            <h3 id="tier-title">How gating works</h3>
+            <p id="tier-text">Generate or author a candidate scenario. Validate the schema. Assert the no-op agent fails it and the oracle trace passes it. Then run a gating model for N attempts: the task is accepted into a tier only if its measured pass rate lands in that tier's band. Difficulty becomes a property you can version and reproduce, tied to a named solver.</p>
+          </div>
+        </div>
+
+        <div class="callout amber">
+          <strong>Split discipline comes before training.</strong> Today every bundled scenario sits in the <code style="font-size: 0.9em;">dev</code> split &mdash; honest for an alpha. Before any training run: <strong>train</strong> for generated tasks intended for SFT/RL, <strong>dev</strong> for debugging agents, <strong>validation</strong> for iteration, <strong>test</strong> for reporting, <strong>hidden</strong> for leaderboards. And split by workflow family, not just by scenario &mdash; if earnings-prep tier-0 is in train and earnings-prep tier-4 is in test, the model can learn family shortcuts. The schema already supports splits per scenario and per task pack; the discipline is the missing piece, and it is deliberate work, not a flag.
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="environment">
+      <div class="wrap">
+        <p class="kicker">Environment interface</p>
+        <h2>The same task can become reset, step, reward.</h2>
+        <div class="body-copy">
+          <p>
+            Once the eval loop is deterministic, the same scenario can be exposed as a step-based environment. The agent receives an observation, emits a structured action, gets a tool result back, and eventually receives a final grade as reward.
+          </p>
+          <p>
+            This is where <code style="font-size: 0.9em;">WorkspaceGymEnv</code> fits. It does not replace the benchmark. It wraps <code style="font-size: 0.9em;">WorkspaceEpisode</code> &mdash; the same episode object the eval runner uses &mdash; so the same scenario, simulator, trace, and grader serve a policy loop. There is no separate RL-only environment logic to drift out of sync.
+          </p>
+        </div>
+
+        <div class="interactive" id="architecture">
+          <div class="interactive-head">
+            <strong>Interactive architecture</strong>
+            <span class="hint">Click a layer</span>
+          </div>
+          <div class="architecture">
+            <svg class="architecture-svg" viewBox="0 0 1080 460" role="img" aria-labelledby="arch-title">
+              <title id="arch-title">WorkspaceBench trace, export, and environment architecture</title>
+              <defs>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0,0 L0,6 L9,3 z" fill="#a9a294"></path>
+                </marker>
+              </defs>
+
+              <text x="42" y="42" class="lane-label">Policy loop</text>
+              <text x="42" y="188" class="lane-label">Workspace episode</text>
+              <text x="42" y="334" class="lane-label">Data layer</text>
+
+              <path class="edge" d="M196 88 C246 88, 264 88, 314 88"></path>
+              <path class="edge" d="M466 88 C516 88, 534 88, 584 88"></path>
+              <path class="edge" d="M736 88 C786 88, 804 88, 854 88"></path>
+              <path class="edge" d="M654 144 C654 178, 654 184, 654 218"></path>
+              <path class="edge" d="M736 234 C786 234, 804 234, 854 234"></path>
+              <path class="edge" d="M924 288 C924 322, 924 328, 924 362"></path>
+              <path class="edge" d="M854 388 C600 388, 480 388, 346 388"></path>
+              <text x="560" y="380" class="edge-label" text-anchor="middle">graded traces only</text>
+              <text x="668" y="186" class="edge-label">records trace</text>
+              <text x="930" y="330" class="edge-label" text-anchor="start">reward</text>
+
+              <g tabindex="0" class="arch-node active" data-arch="observation">
+                <rect x="56" y="60" width="140" height="72" rx="8"></rect>
+                <text x="126" y="91" text-anchor="middle">Observation</text>
+                <text x="126" y="113" text-anchor="middle" class="sub">task + snapshot</text>
+              </g>
+              <g tabindex="0" class="arch-node" data-arch="policy">
+                <rect x="316" y="60" width="150" height="72" rx="8"></rect>
+                <text x="391" y="91" text-anchor="middle">Policy</text>
+                <text x="391" y="113" text-anchor="middle" class="sub">model or agent</text>
+              </g>
+              <g tabindex="0" class="arch-node" data-arch="action">
+                <rect x="586" y="60" width="150" height="72" rx="8"></rect>
+                <text x="661" y="91" text-anchor="middle">Action</text>
+                <text x="661" y="113" text-anchor="middle" class="sub">tool + args</text>
+              </g>
+              <g tabindex="0" class="arch-node" data-arch="env">
+                <rect x="856" y="60" width="160" height="72" rx="8"></rect>
+                <text x="936" y="91" text-anchor="middle">WorkspaceGymEnv</text>
+                <text x="936" y="113" text-anchor="middle" class="sub">reset / step</text>
+              </g>
+
+              <g tabindex="0" class="arch-node" data-arch="episode">
+                <rect x="586" y="206" width="150" height="72" rx="8"></rect>
+                <text x="661" y="237" text-anchor="middle">Episode</text>
+                <text x="661" y="259" text-anchor="middle" class="sub">trace owner</text>
+              </g>
+              <g tabindex="0" class="arch-node" data-arch="workspace">
+                <rect x="856" y="206" width="160" height="72" rx="8"></rect>
+                <text x="936" y="237" text-anchor="middle">Workspace</text>
+                <text x="936" y="259" text-anchor="middle" class="sub">simulator tools</text>
+              </g>
+              <g tabindex="0" class="arch-node" data-arch="grade">
+                <rect x="856" y="352" width="160" height="72" rx="8"></rect>
+                <text x="936" y="383" text-anchor="middle">Grader</text>
+                <text x="936" y="405" text-anchor="middle" class="sub">final state score</text>
+              </g>
+              <g tabindex="0" class="arch-node" data-arch="exports">
+                <rect x="190" y="352" width="154" height="72" rx="8"></rect>
+                <text x="267" y="383" text-anchor="middle">Exports</text>
+                <text x="267" y="405" text-anchor="middle" class="sub">rollout / SFT / prefs</text>
+              </g>
+            </svg>
+          </div>
+          <div class="detail" aria-live="polite">
+            <h3 id="arch-detail-title">Observation</h3>
+            <p id="arch-detail-text">The policy sees the task envelope, allowed tools, the latest tool result, the current workspace snapshot, the turn index, and remaining turns.</p>
+          </div>
+        </div>
+
+        <div class="interactive">
+          <div class="interactive-head">
+            <strong>Environment code</strong>
+            <span class="hint">Choose a snippet</span>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Environment code snippets">
+            <button class="pill active" data-code="minimal" role="tab" aria-selected="true">Minimal loop</button>
+            <button class="pill" data-code="action" role="tab" aria-selected="false">Action shape</button>
+            <button class="pill" data-code="reward" role="tab" aria-selected="false">Reward config</button>
+          </div>
+          <div class="tab-panel active" id="code-panel" role="tabpanel">
+            <h3 id="code-title">Minimal loop</h3>
+            <p id="code-text">A policy loop only needs reset, step, and a structured action. The return shape is Gymnasium's, but Gymnasium is not a dependency.</p>
+            <pre class="code" id="code-snippet">from workspace_bench.core.runner import find_scenario
+from workspace_bench.rl.env import WorkspaceGymEnv
+
+scenario = find_scenario("l1_add_price_widget")
+env = WorkspaceGymEnv(scenario=scenario)
+
+observation, info = env.reset(seed=1)
+observation, reward, terminated, truncated, info = env.step({
+    "tool": "get_workspace_snapshot",
+    "args": {},
+})</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contract">
+      <div class="wrap">
+        <p class="kicker">The v1 contract</p>
+        <h2>The first version has a clear boundary.</h2>
+        <div class="body-copy">
+          <p>
+            I do not want this to be vague. For v1, the goal is a clean interface: agents can be measured, traces can be exported, and policies can interact with the same tasks through a stable environment API. Everything downstream inherits from one source of truth.
+          </p>
+        </div>
+
+        <div class="checklist">
+          <div class="check">
+            <strong>Deterministic workspace state</strong>
+            <p>Fixture-backed scenarios make local evals repeatable and suitable for regression tests, CI, and rollouts. No live market data by default.</p>
+          </div>
+          <div class="check">
+            <strong>One grader contract</strong>
+            <p>Normal runs, exports, and environment rollouts all use the same final-state grading. Reward and score can never disagree.</p>
+          </div>
+          <div class="check">
+            <strong>Private task-pack path</strong>
+            <p>Teams point the same scenario schema at internal backends and keep graders local. BYO data without forking the harness.</p>
+          </div>
+          <div class="check">
+            <strong>Split metadata</strong>
+            <p>Scenarios and task packs carry dev, validation, test, or train splits so training and reporting data can be separated cleanly.</p>
+          </div>
+          <div class="check">
+            <strong>Explicit export formats</strong>
+            <p>Rollouts, SFT records, and preference pairs are produced only through export commands. Publishing a benchmark never silently publishes training data.</p>
+          </div>
+          <div class="check">
+            <strong>Environment wrapper</strong>
+            <p>WorkspaceGymEnv wraps the benchmark episode without duplicating scenario or grader logic. Sparse final reward by default; process rewards opt-in.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>The point:</strong> the benchmark remains the source of truth. Data exports and environment rollouts are downstream views of the same evaluated behavior.
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="factory">
+      <div class="wrap">
+        <p class="kicker">Where this goes next</p>
+        <h2>Hand-written evals are the seed, not the destination.</h2>
+        <div class="body-copy">
+          <p>
+            Forty polished scenarios are a benchmark. They are not yet an environment. The serious unlock &mdash; the direction TMax's 14,600 terminal environments and General Agent's 4,500 evolved tasks both point at &mdash; is a task factory: a pipeline that generates Workspace scenarios along structured axes, evolves them across difficulty tiers, and certifies each one before it ships.
+          </p>
+          <p>
+            Certification is the part that keeps generation honest. Every candidate task must fail with no actions, pass under its reference trace, and land in its tier's pass-rate band for a gating model. Generation without verification just produces benchmark-shaped noise.
+          </p>
+        </div>
+
+        <div class="interactive">
+          <div class="interactive-head">
+            <strong>The factory loop</strong>
+            <span class="hint">Click a stage</span>
+          </div>
+          <div class="factory-grid" role="list" aria-label="Task factory pipeline">
+            <button class="tile active" data-factory="synth" role="listitem">
+              <small>01</small>Synthesize
+              <span>Generate along workflow axes</span>
+            </button>
+            <button class="tile" data-factory="validate" role="listitem">
+              <small>02</small>Validate
+              <span>Schema and fixture checks</span>
+            </button>
+            <button class="tile" data-factory="oracle" role="listitem">
+              <small>03</small>Oracle / noop
+              <span>Gold passes, no-op fails</span>
+            </button>
+            <button class="tile" data-factory="gate" role="listitem">
+              <small>04</small>Gate
+              <span>Solver pass-rate bands</span>
+            </button>
+            <button class="tile" data-factory="pack" role="listitem">
+              <small>05</small>Certify
+              <span>Versioned task pack</span>
+            </button>
+            <button class="tile" data-factory="consume" role="listitem">
+              <small>06</small>Consume
+              <span>Evals, exports, RL</span>
+            </button>
+          </div>
+          <div class="detail" aria-live="polite">
+            <h3 id="factory-title">Synthesize</h3>
+            <p id="factory-text">Generate candidate scenarios from task-family templates along explicit axes: workflow, persona, capability, artifact target, data topology, initial-state pathology, constraint type, layout rigor, ambiguity. The axes describe the distribution's shape — not just "40 scenarios" but what they cover.</p>
+          </div>
+        </div>
+
+        <div class="body-copy" style="margin-top: 32px;">
+          <p>
+            That is Part 4 territory: from eval suite to environment factory. The order across this series is deliberate &mdash; benchmark first, tool surface second, training data third, environment factory fourth. Everything downstream consumes the same certified asset.
+          </p>
+          <p>
+            <a href="blog-workspacebench-series-draft.html">Back to Part 1</a> &middot; <a href="blog-workspacebench-part-2-draft.html">Back to Part 2</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>
+        Part 3 shows how WorkspaceBench traces become reusable data and a step-based environment interface, why the task distribution itself is the asset, and how final-state evaluation stays the source of truth throughout.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const traceCopy = {
+      task: {
+        title: "Task",
+        text: "The task gives the model its objective and constraints: prompt, allowed tools, limits, and metadata. It is the common envelope shared by evals, exports, and environment rollouts.",
+        example: '"schema_version": "workspace-bench-rollout-v1"'
+      },
+      actions: {
+        title: "Actions (tool_calls)",
+        text: "Actions are Workspace tool calls in order. They are useful for debugging, SFT examples, and policy rollouts because they show what the agent actually tried — including the invalid calls.",
+        example: '{"tool": "create_widget", "args": {...}}'
+      },
+      results: {
+        title: "Results (tool_results)",
+        text: "Tool results are the environment feedback. They show what the workspace returned after each action — the observations an interactive agent conditioned on, turn by turn.",
+        example: '"tool_results": [...aligned with tool_calls...]'
+      },
+      state: {
+        title: "State (final_snapshot)",
+        text: "The final snapshot captures the durable artifact: dashboards, tabs, widgets, layout, generated notes, and data arguments. This is what the grader reads, and what a human would inherit.",
+        example: '"final_snapshot": {"dashboards": [...]}'
+      },
+      grade: {
+        title: "Grade",
+        text: "The grade labels the attempt with pass/fail, partial score, and issue codes. That label is what makes the trace safe to use as training or analysis data — the benchmark decided what happened before any trainer sees it.",
+        example: '"grade": {"passed": true, "score": 1.0}'
+      }
+    };
+
+    document.querySelectorAll("[data-trace]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-trace]").forEach((node) => node.classList.remove("active"));
+        button.classList.add("active");
+        const item = traceCopy[button.dataset.trace];
+        document.getElementById("trace-title").textContent = item.title;
+        document.getElementById("trace-text").textContent = item.text;
+        document.getElementById("trace-example").textContent = item.example;
+      });
+    });
+
+    document.querySelectorAll("[data-tab]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const key = button.dataset.tab;
+        document.querySelectorAll("[data-tab]").forEach((node) => {
+          node.classList.remove("active");
+          node.setAttribute("aria-selected", "false");
+        });
+        button.classList.add("active");
+        button.setAttribute("aria-selected", "true");
+        document.querySelectorAll(".tab-panel").forEach((panel) => {
+          if (panel.id.startsWith("tab-")) panel.classList.remove("active");
+        });
+        document.getElementById("tab-" + key).classList.add("active");
+      });
+    });
+
+    // Real per-scenario outcomes: gpt-oss:20b, 3 attempts each,
+    // from runs/comparison/20260619-174716-all.
+    const varianceData = [
+      ["l0_equity_compare_note", 0],
+      ["l0_existing_dashboard_note", 2],
+      ["l0_macro_dashboard_note", 2],
+      ["l0_portfolio_dashboard_note", 2],
+      ["l1_add_latest_news_widget", 2],
+      ["l1_add_macro_timeseries_widget", 0],
+      ["l1_add_portfolio_holdings_widget", 0],
+      ["l1_add_price_widget", 2],
+      ["l1_add_yield_curve_widget", 0],
+      ["l1_remove_duplicate_news_widget", 2],
+      ["l1_resize_chart_half_width", 3],
+      ["l1_update_ticker_to_nvda", 2],
+      ["l2_cross_asset_market_dashboard", 0],
+      ["l2_earnings_dashboard", 0],
+      ["l2_equity_comparison_dashboard", 0],
+      ["l2_macro_rates_dashboard", 0],
+      ["l2_portfolio_macro_risk_dashboard", 0],
+      ["l2_portfolio_risk_dashboard", 0],
+      ["l3_app_template_summary", 3],
+      ["l3_instantiate_app_with_takeaway_note", 3],
+      ["l3_instantiate_earnings_app", 3],
+      ["l4_add_missing_estimates_tab", 0],
+      ["l4_repair_layout_overlap", 1],
+      ["l4_repair_macro_series", 2],
+      ["l4_repair_wrong_ticker", 0]
+    ];
+
+    function varianceClass(passes) {
+      if (passes === 0) return "";
+      if (passes === 3) return "all";
+      return "signal";
+    }
+
+    const strip = document.getElementById("variance-strip");
+    strip.innerHTML = varianceData.map(([id, passes], i) => `
+      <button class="cell ${varianceClass(passes)}" data-var="${i}" role="listitem"
+              aria-label="${id}: ${passes} of 3 attempts passed">${passes}/3</button>
+    `).join("");
+
+    strip.querySelectorAll("[data-var]").forEach((cell) => {
+      cell.addEventListener("click", () => {
+        strip.querySelectorAll("[data-var]").forEach((node) => node.classList.remove("active"));
+        cell.classList.add("active");
+        const [id, passes] = varianceData[Number(cell.dataset.var)];
+        let read;
+        if (passes === 0) {
+          read = "All three attempts failed. For this model there is nothing to reinforce here yet — no preference pair, no RL gradient. It stays valuable as an eval and becomes trainable once the model (or a curriculum) closes the gap.";
+        } else if (passes === 3) {
+          read = "All three attempts passed. No contrast between attempts, so no preference pair and no gradient — but the passing traces are clean SFT candidates.";
+        } else {
+          read = `Passed ${passes} of 3 attempts. Same model, same task, different outcomes: this scenario yields chosen/rejected preference pairs and gives outcome-based RL something to push against.`;
+        }
+        document.getElementById("var-title").textContent = id;
+        document.getElementById("var-text").textContent = read;
+      });
+    });
+
+    // Difficulty tier target bands (candidate calibration protocol).
+    const tiers = [
+      ["t0", "Inspect + note", 80, 100, "A t0 task should be nearly free for the gating model: inspect one existing widget, record a note. If a strong model fails a t0 task often, the task — not the model — is suspect."],
+      ["t1", "Single widget after discovery", 65, 90, "Create one widget after schema discovery. Solvable most of the time, with occasional discipline slips keeping it informative."],
+      ["t2", "Small dashboard", 40, 70, "Two or three widgets plus a note. The sweet spot for training: high reward variance, so repeated attempts disagree and produce signal."],
+      ["t3", "Cross-backend repair", 20, 45, "Repair a multi-tab dashboard with a cross-backend constraint. Hard enough that most attempts fail, easy enough that some succeed."],
+      ["t4", "Ambiguity + distractors", 5, 25, "Realistic analyst language, distractor widgets, strict layout, and preservation of existing useful state. The frontier band — mostly failed, occasionally solved."]
+    ];
+
+    const tierRows = document.getElementById("tier-rows");
+    tierRows.innerHTML = tiers.map(([id, name, lo, hi], i) => `
+      <button class="tier-row${i === 0 ? " active" : ""}" data-tier="${i}">
+        <span class="tier-name">${id}<small>${name}</small></span>
+        <div class="tier-track">
+          <div class="tier-band" style="left: ${lo}%; width: ${hi - lo}%;"></div>
+        </div>
+        <span class="tier-value">${lo}&ndash;${hi}%</span>
+      </button>
+    `).join("");
+
+    tierRows.querySelectorAll("[data-tier]").forEach((row) => {
+      row.addEventListener("click", () => {
+        tierRows.querySelectorAll("[data-tier]").forEach((node) => node.classList.remove("active"));
+        row.classList.add("active");
+        const [id, name, lo, hi, text] = tiers[Number(row.dataset.tier)];
+        document.getElementById("tier-title").textContent = `${id}: ${name} (target ${lo}–${hi}% pass rate)`;
+        document.getElementById("tier-text").textContent = text;
+      });
+    });
+
+    const archCopy = {
+      observation: {
+        title: "Observation",
+        text: "The policy sees the task envelope, allowed tools, the latest tool result, the current workspace snapshot, the turn index, and remaining turns."
+      },
+      policy: {
+        title: "Policy",
+        text: "The policy can be a local model, hosted model, rule-based agent, or training loop. It only needs to produce structured tool actions."
+      },
+      action: {
+        title: "Action",
+        text: "Actions use the same shape as Workspace tool calls: a tool name plus JSON args. This keeps the environment aligned with the eval harness — an agent trained here speaks the product's real tool surface."
+      },
+      env: {
+        title: "WorkspaceGymEnv",
+        text: "The environment owns reset and step. It wraps WorkspaceEpisode instead of inventing separate environment logic, so eval and training can never grade differently."
+      },
+      episode: {
+        title: "Episode",
+        text: "The episode records the trace and coordinates calls into the simulated workspace. It is the same object the benchmark runner uses — the trace owner for both worlds."
+      },
+      workspace: {
+        title: "Workspace",
+        text: "The simulator applies Workspace MCP-style tool calls to deterministic fixture state. Fast enough for RL rollouts, faithful enough to smoke-test against the real workspace-mcp bridge."
+      },
+      grade: {
+        title: "Grader",
+        text: "The grader checks final state and trace discipline. This is the reward source at the end of an episode: reward equals the grade score, so training optimizes exactly what evaluation measures."
+      },
+      exports: {
+        title: "Exports",
+        text: "The same graded trace can be written as rollout JSONL, SFT messages, or chosen/rejected preference pairs — always after grading, never before."
+      }
+    };
+
+    document.querySelectorAll("[data-arch]").forEach((node) => {
+      const activate = () => {
+        document.querySelectorAll("[data-arch]").forEach((item) => item.classList.remove("active"));
+        node.classList.add("active");
+        const item = archCopy[node.dataset.arch];
+        document.getElementById("arch-detail-title").textContent = item.title;
+        document.getElementById("arch-detail-text").textContent = item.text;
+      };
+      node.addEventListener("click", activate);
+      node.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          activate();
+        }
+      });
+    });
+
+    const codeCopy = {
+      minimal: {
+        title: "Minimal loop",
+        text: "A policy loop only needs reset, step, and a structured action. The return shape is Gymnasium's, but Gymnasium is not a dependency.",
+        code: `from workspace_bench.core.runner import find_scenario
+from workspace_bench.rl.env import WorkspaceGymEnv
+
+scenario = find_scenario("l1_add_price_widget")
+env = WorkspaceGymEnv(scenario=scenario)
+
+observation, info = env.reset(seed=1)
+observation, reward, terminated, truncated, info = env.step({
+    "tool": "get_workspace_snapshot",
+    "args": {},
+})`
+      },
+      action: {
+        title: "Action shape",
+        text: "The action is deliberately identical to the Workspace MCP tool-call shape used everywhere else in the harness.",
+        code: `{
+  "tool": "create_widget",
+  "args": {
+    "origin": "Bench Equities",
+    "widget_id": "price_performance",
+    "data_args": {"symbol": "AAPL"}
+  }
+}`
+      },
+      reward: {
+        title: "Reward config",
+        text: "Sparse final reward is the default: the grade score arrives when the episode ends. Optional process rewards shape tool discipline — the same checks the grader already runs — but they should stay small. Optimize the ritual too hard and agents learn rituals, not workspaces.",
+        code: `env = WorkspaceGymEnv(
+    scenario=scenario,
+    process_rewards=True,
+    valid_tool_reward=0.01,
+    invalid_tool_penalty=-0.25,
+    schema_before_create_reward=0.1,
+    repeated_snapshot_penalty=-0.05,
+)`
+      }
+    };
+
+    document.querySelectorAll("[data-code]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-code]").forEach((node) => {
+          node.classList.remove("active");
+          node.setAttribute("aria-selected", "false");
+        });
+        button.classList.add("active");
+        button.setAttribute("aria-selected", "true");
+        const item = codeCopy[button.dataset.code];
+        document.getElementById("code-title").textContent = item.title;
+        document.getElementById("code-text").textContent = item.text;
+        document.getElementById("code-snippet").textContent = item.code;
+      });
+    });
+
+    const factoryCopy = {
+      synth: {
+        title: "Synthesize",
+        text: "Generate candidate scenarios from task-family templates along explicit axes: workflow, persona, capability, artifact target, data topology, initial-state pathology, constraint type, layout rigor, ambiguity. The axes describe the distribution's shape — not just \"40 scenarios\" but what they cover."
+      },
+      validate: {
+        title: "Validate",
+        text: "Structural checks before anything runs: the scenario JSON is well-formed, referenced fixture backends and widget ids exist, metadata is complete, limits are sane. Cheap filters first."
+      },
+      oracle: {
+        title: "Oracle / noop certification",
+        text: "The task must be real: the no-op agent must fail it (the initial state does not already satisfy the verifier) and the gold reference trace must pass it. This mirrors General Agent's rule that verification flips from fail to pass exactly under the gold solution."
+      },
+      gate: {
+        title: "Gate",
+        text: "Run a named gating model for N attempts. Accept the task into a tier only if its measured pass rate lands in the tier's target band. Too easy or too hard for its tier means back to evolution — add distractors, coupling, or pathologies, or dial them down."
+      },
+      pack: {
+        title: "Certify",
+        text: "Accepted tasks ship as a versioned task pack with gating metadata, split assignment (held out by family, not just by scenario), and a benchmark card. Difficulty is now a measured, reproducible property."
+      },
+      consume: {
+        title: "Consume",
+        text: "Certified packs feed everything downstream: public and private evals, regression CI, SFT and preference exports, and RL rollouts through WorkspaceGymEnv — all against the same grader."
+      }
+    };
+
+    document.querySelectorAll("[data-factory]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-factory]").forEach((node) => node.classList.remove("active"));
+        button.classList.add("active");
+        const item = factoryCopy[button.dataset.factory];
+        document.getElementById("factory-title").textContent = item.title;
+        document.getElementById("factory-text").textContent = item.text;
+      });
+    });
+  </script>
+</body>
+</html>

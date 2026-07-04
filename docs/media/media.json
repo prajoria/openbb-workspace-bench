@@ -1,0 +1,47 @@
+{
+  "$schema_note": "Slot registry for blog media. Each slot id is referenced by a <figure data-media-slot> in the blog HTML. Drop the recording into docs/media/ and fill `file`; the blog resolves it at render time. kind: video|image|gif.",
+  "slots": [
+    {
+      "id": "hero-earnings-build",
+      "kind": "video",
+      "file": null,
+      "caption": "An agent building the AAPL earnings dashboard end-to-end in OpenBB Workspace (30s).",
+      "demonstrates": "full episode: manage_dashboard, create_widget, add_generative_widget"
+    },
+    {
+      "id": "durable-artifact-real",
+      "kind": "image",
+      "file": null,
+      "caption": "The real graded dashboard: the durable artifact the grader inspects.",
+      "demonstrates": "final workspace state"
+    },
+    {
+      "id": "surface-discovery-create",
+      "kind": "gif",
+      "file": null,
+      "caption": "The discovery discipline in one take: list_available_widgets → get_widget_schema → create_widget landing on the grid.",
+      "demonstrates": "list_available_widgets, get_widget_schema, create_widget"
+    },
+    {
+      "id": "resources-prompts-in-action",
+      "kind": "gif",
+      "file": null,
+      "caption": "The newest part of the surface: reading the app-builder index over MCP resources, then instantiating the app it described.",
+      "demonstrates": "read_workspace_resource, get_workspace_prompt, manage_apps"
+    },
+    {
+      "id": "repair-episode",
+      "kind": "gif",
+      "file": null,
+      "caption": "A t3 repair: the agent finds the wrong ticker, fixes it in place, and documents the repair — without touching the healthy widgets.",
+      "demonstrates": "read_widget, update_widget, add_generative_widget"
+    },
+    {
+      "id": "failure-container-exec",
+      "kind": "gif",
+      "file": null,
+      "caption": "The hallucinated container.exec moment: a 20B model tries to run bash in a financial workspace.",
+      "demonstrates": "too_many_invalid_calls"
+    }
+  ]
+}
