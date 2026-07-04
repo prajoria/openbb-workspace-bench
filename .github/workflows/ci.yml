@@ -23,16 +23,16 @@ jobs:
         run: uv run --extra dev pytest
 
       - name: Validate benchmark scenarios
-        run: uv run --extra dev workspace-bench validate --min-scenarios 25
+        run: uv run --extra dev workspace-bench validate --pack all --min-scenarios 300
 
       - name: Run oracle baseline
         run: uv run --extra dev workspace-bench run --agent oracle
 
       - name: Export agent task envelope
-        run: uv run --extra dev workspace-bench export-task --scenario l1_add_price_widget --output /tmp/workspace-task.json
+        run: uv run --extra dev workspace-bench export-task --scenario gen_t0_create_price_performance_aapl --output /tmp/workspace-task.json
 
       - name: Run demo external agent
-        run: uv run --extra dev workspace-bench run-agent-command --scenario l1_add_price_widget --agent-command "python -m workspace_bench.examples.jsonl_rule_agent"
+        run: uv run --extra dev workspace-bench run-agent-command --scenario gen_t0_create_price_performance_aapl --agent-command "python -m workspace_bench.examples.jsonl_rule_agent"
 
       - name: Build manifest
         run: uv run --extra dev workspace-bench manifest --json
