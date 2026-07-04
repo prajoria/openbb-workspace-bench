@@ -1,0 +1,2 @@
+{"args": {"widget_id": "portfolio_command_center_overview_portfolio_snapshot"}, "tool": "read_widget"}
+{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "MTD"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}

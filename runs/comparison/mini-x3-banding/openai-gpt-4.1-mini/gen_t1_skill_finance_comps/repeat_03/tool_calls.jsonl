@@ -1,0 +1,2 @@
+{"args": {"slug": "finance-comps"}, "tool": "get_skill_content"}
+{"args": {"data": "Comps workflow: define the peer set, normalize metrics, compare valuation multiples, and explain why outliers deserve premium or discount.", "description": "Workflow steps for an analyst using finance comps.", "name": "Finance Comps Workflow Steps", "widget_type": "note"}, "tool": "add_generative_widget"}

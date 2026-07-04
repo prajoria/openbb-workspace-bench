@@ -1,0 +1,4 @@
+{"args": {"uri": "openbb://workspace/skills/finance-earnings-prep"}, "tool": "read_workspace_resource"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
+{"args": {"data": "Earnings prep workflow: compare internal estimates to street numbers, identify surprise drivers, review guidance, inspect transcript tone, and produce action items for the portfolio manager. This note highlights the importance of identifying surprise drivers in earnings to better understand company performance and market reaction.", "name": "Earnings Surprise Drivers Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,2 @@
+{"args": {"widget_id": "portfolio_command_center_overview_workflow_overview"}, "tool": "read_widget"}
+{"args": {"data": "This note mentions Stark as requested.", "name": "Note mentioning Stark", "origin": "Bench Stark Enterprise", "widget_type": "note"}, "tool": "add_generative_widget"}

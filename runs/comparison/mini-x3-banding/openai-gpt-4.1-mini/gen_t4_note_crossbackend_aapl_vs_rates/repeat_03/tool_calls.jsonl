@@ -1,0 +1,3 @@
+{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_data"}
+{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_data"}
+{"args": {"data": "The latest close price for AAPL on 2026-01-15 was 196.1. The latest 10Y Treasury yield value on 2025-12-31 was 4.12%.", "description": "Note summarizing the latest close price of AAPL and the latest 10Y Treasury yield value from the respective widgets.", "name": "AAPL and 10Y Treasury Latest Values", "widget_type": "note"}, "tool": "add_generative_widget"}

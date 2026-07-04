@@ -1,0 +1,6 @@
+{"args": {"name": "Earnings Hub", "operation": "update"}, "tool": "manage_dashboard"}
+{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Estimates"}]}, "tool": "manage_navigation_bar"}
+{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "estimates"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
+{"args": {"data": "This tab contains the Estimate History widget for AAPL. It is part of the Earnings Hub dashboard, focusing on estimates and earnings information.", "inner_tab": "estimates", "name": "Estimates and Earnings Hub Note", "widget_type": "note"}, "tool": "add_generative_widget"}

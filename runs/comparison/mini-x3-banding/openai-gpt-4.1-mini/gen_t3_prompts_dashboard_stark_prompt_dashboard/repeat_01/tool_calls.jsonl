@@ -1,0 +1,8 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"activate": true, "name": "Stark Prompt Dashboard", "operation": "create"}, "tool": "manage_dashboard"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "mnpi_research_review_research_draft_research_review"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "mnpi_research_review_research_evidence_and_sign_off_history"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_002", "origin": "Bench Stark Enterprise", "widget_id": "mnpi_research_review_research_draft_research_review"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "origin": "Bench Stark Enterprise", "widget_id": "mnpi_research_review_research_evidence_and_sign_off_history"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "data": "This dashboard contains widgets from Bench Stark Enterprise related to MNPI research with schema-first discipline. It includes Draft Research Review and Evidence and Sign-Off History widgets.", "name": "Stark and Schema Note", "widget_type": "note"}, "tool": "add_generative_widget"}

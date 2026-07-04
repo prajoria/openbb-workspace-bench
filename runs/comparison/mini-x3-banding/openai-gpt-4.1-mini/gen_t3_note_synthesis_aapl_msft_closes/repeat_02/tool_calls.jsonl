@@ -1,0 +1,3 @@
+{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_data"}
+{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_data"}
+{"args": {"data": "The latest closing price for AAPL on 2026-01-15 was 196.1 USD. The latest closing price for MSFT on 2026-01-15 was 451.25 USD. MSFT closed at a higher price compared to AAPL on the same date.", "description": "Synthesis note comparing the latest close prices of AAPL and MSFT.", "name": "Latest Close Prices for AAPL and MSFT", "widget_type": "note"}, "tool": "add_generative_widget"}

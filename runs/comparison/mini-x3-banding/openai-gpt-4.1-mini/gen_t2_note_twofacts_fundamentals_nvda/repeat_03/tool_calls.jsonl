@@ -1,0 +1,2 @@
+{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_data"}
+{"args": {"data": "NVIDIA's gross margin is 0.462, indicating strong profitability. The buyback yield is 0.034, reflecting the company's share repurchase activity.", "inner_tab": "overview", "name": "NVDA Fundamentals Note", "widget_type": "note"}, "tool": "add_generative_widget"}

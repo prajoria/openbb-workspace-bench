@@ -1,0 +1,6 @@
+{"args": {"dashboard_id": "Incomplete Review", "operation": "add_tabs", "tabs": [{"name": "Fundamentals"}]}, "tool": "manage_navigation_bar"}
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Fundamentals"}]}, "tool": "manage_navigation_bar"}
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_schema"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "tab_id": "fundamentals", "ui_args": {"layout": {"h": 8, "w": 10, "x": 0, "y": 0}}, "widget_id": "fundamental_metrics"}, "tool": "create_widget"}

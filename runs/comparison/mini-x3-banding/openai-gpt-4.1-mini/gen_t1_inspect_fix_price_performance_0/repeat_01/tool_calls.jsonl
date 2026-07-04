@@ -1,0 +1,2 @@
+{"args": {"widget_id": "price_performance"}, "tool": "read_widget"}
+{"args": {"data_args": {"symbol": "AAPL"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}

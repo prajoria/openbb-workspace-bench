@@ -1,0 +1,5 @@
+{"args": {"widget_id": "price_performance"}, "tool": "read_widget"}
+{"args": {"data_args": {"symbol": "AAPL"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
+{"args": {"widget_id": "latest_news"}, "tool": "read_widget"}
+{"args": {"data_args": {"limit": 5, "symbol": "AAPL"}, "widget_uuid": "widget_002"}, "tool": "update_widget"}
+{"args": {"data": "The AAPL desk has been repaired: price widget now shows AAPL and news widget shows 5 articles.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

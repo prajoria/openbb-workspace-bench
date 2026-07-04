@@ -1,0 +1,6 @@
+{"args": {"dashboard_id": "Risk Board", "name": "Risk Command Center", "operation": "update"}, "tool": "manage_dashboard"}
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "name": "Risk Command Center", "operation": "update"}, "tool": "manage_dashboard"}
+{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Stress Results"}]}, "tool": "manage_navigation_bar"}
+{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "stress-results"}, "tool": "navigate_workspace"}
+{"args": {"data": "Stress results are pending.", "inner_tab": "stress-results", "name": "Stress Results Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,2 @@
+{"args": {"slug": "finance-tearsheet"}, "tool": "get_skill_content"}
+{"args": {"data": "Tearsheet workflow: gather price action, fundamentals, valuation, catalysts, risks, ownership, and a short investment conclusion.", "name": "Finance Tearsheet skill", "widget_type": "note"}, "tool": "add_generative_widget"}

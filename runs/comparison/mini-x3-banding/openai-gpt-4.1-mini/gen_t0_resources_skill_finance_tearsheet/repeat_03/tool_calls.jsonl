@@ -1,0 +1,2 @@
+{"args": {"uri": "openbb://workspace/skills/finance-tearsheet"}, "tool": "read_workspace_resource"}
+{"args": {"data": "The Finance Tearsheet skill helps create a concise company or asset tear sheet including valuation, catalysts, risks, and ownership context. The workflow gathers price action, fundamentals, valuation, catalysts, risks, ownership, and a short investment conclusion.", "description": "Note on valuation from Finance Tearsheet skill", "name": "Finance Tearsheet Overview", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -79,6 +79,11 @@ portable rollout JSONL for all 1,800 episodes under `runs/exports/`, and the
 compiled report at `runs/reports/calibration.json` (built by
 `scripts/compile_calibration.py`).
 
+Repeatability: the gating model repeated 3x over all 300 scenarios lands at
+71.7 / 70.0 / 70.7% strict per attempt (pass@3 73.7%, pass^3 67.3%), with only
+19/300 scenarios showing within-model variance — see
+`runs/comparison/mini-x3-banding/`.
+
 ## Evaluate Your Agent
 
 Workspace Bench can evaluate any external process that writes tool calls as JSON Lines.

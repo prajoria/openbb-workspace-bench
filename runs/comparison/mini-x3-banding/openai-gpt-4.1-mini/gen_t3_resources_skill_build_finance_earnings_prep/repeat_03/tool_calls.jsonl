@@ -1,0 +1,3 @@
+{"args": {"uri": "openbb://workspace/skills/finance-earnings-prep"}, "tool": "read_workspace_resource"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
+{"args": {"data": "The earnings surprise drivers include factors such as revenue beats, cost control, and product demand shifts. These drivers are key to understanding the deviation from consensus estimates and provide insight into the company's performance relative to expectations.", "name": "Surprise Drivers Note", "widget_type": "note"}, "tool": "add_generative_widget"}

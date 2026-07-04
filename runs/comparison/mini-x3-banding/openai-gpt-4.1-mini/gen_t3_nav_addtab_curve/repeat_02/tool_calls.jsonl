@@ -1,0 +1,8 @@
+{"args": {"dashboard_id": "", "operation": "add_tabs", "tabs": [{"name": "Curve"}]}, "tool": "manage_navigation_bar"}
+{"args": {"origin": "Bench Macro", "tab_id": "curve", "widget_id": "yield_curve"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "curve"}, "tool": "navigate_workspace"}
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "operation": "remove_tabs", "tabs": [{"name": "Curve"}]}, "tool": "manage_navigation_bar"}
+{"args": {"origin": "Bench Macro", "tab_id": "curve", "widget_id": "yield_curve"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "curve"}, "tool": "navigate_workspace"}
+{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Curve"}]}, "tool": "manage_navigation_bar"}

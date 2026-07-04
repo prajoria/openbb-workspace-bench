@@ -1,0 +1,2 @@
+{"args": {"widget_id": "macro_timeseries"}, "tool": "read_widget"}
+{"args": {"data_args": {"series": "DGS10"}, "widget_id": "macro_timeseries"}, "tool": "update_widget"}

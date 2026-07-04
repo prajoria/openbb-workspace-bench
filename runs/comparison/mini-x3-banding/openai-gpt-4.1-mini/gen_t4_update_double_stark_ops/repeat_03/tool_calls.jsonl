@@ -1,0 +1,3 @@
+{"args": {"data_args": {"status": "Escalated"}, "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status"}, "tool": "update_widget"}
+{"args": {"data_args": {"period": "MTD"}, "widget_id": "portfolio_command_center_overview_portfolio_snapshot"}, "tool": "update_widget"}
+{"args": {"data": "The Vendor SLA Status has been escalated and the Portfolio Snapshot period is now MTD. Both widgets have been repaired as requested.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,2 @@
+{"args": {"name": "equities", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"operation": "list"}, "tool": "manage_backends"}

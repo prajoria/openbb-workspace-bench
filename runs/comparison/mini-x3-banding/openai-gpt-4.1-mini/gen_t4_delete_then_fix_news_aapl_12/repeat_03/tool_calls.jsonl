@@ -1,0 +1,5 @@
+{"args": {"widget_id": "latest_news"}, "tool": "delete_widget"}
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"widget_uuid": "widget_002"}, "tool": "delete_widget"}
+{"args": {"data_args": {"limit": 5, "symbol": "AAPL"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
+{"args": {"data": "This dashboard has been repaired to show the latest news for AAPL.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

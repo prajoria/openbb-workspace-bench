@@ -1,0 +1,7 @@
+{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"name": "portfolio", "operation": "add"}, "tool": "manage_backends"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "equity_research_workbench_valuation_football_field"}, "tool": "create_widget"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"data": "This dashboard includes the Football Field valuation from Stark Enterprise and the Sector Exposure from Portfolio.", "name": "Dashboard Note", "widget_type": "note"}, "tool": "add_generative_widget"}

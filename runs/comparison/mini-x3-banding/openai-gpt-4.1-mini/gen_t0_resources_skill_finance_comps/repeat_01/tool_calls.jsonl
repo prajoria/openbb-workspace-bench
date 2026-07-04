@@ -1,0 +1,2 @@
+{"args": {"uri": "openbb://workspace/skills/finance-comps"}, "tool": "read_workspace_resource"}
+{"args": {"data": "The peer set is a crucial part of the comps workflow. It involves defining the group of comparable companies or assets to analyze and compare valuation and operating metrics.", "name": "Peer Set Note", "widget_type": "note"}, "tool": "add_generative_widget"}

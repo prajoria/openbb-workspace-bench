@@ -1,0 +1,8 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
+{"args": {"activate": true, "name": "Prompt Cross Stark Risk", "operation": "create"}, "tool": "manage_dashboard"}
+{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"dashboard_id": "dash_002", "origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_actions_analyst_conviction"}, "tool": "create_widget"}
+{"args": {"dashboard_id": "dash_002", "origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "create_widget"}
+{"args": {"data": "This dashboard combines insights from Bench Stark Enterprise and Bench Portfolio, focusing on stark and risk aspects relevant to the current-dashboard.", "name": "Stark and Risk Note", "widget_type": "note"}, "tool": "add_generative_widget"}

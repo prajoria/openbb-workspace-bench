@@ -1,0 +1,2 @@
+{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
+{"args": {"data": "This dashboard is based on the Risk Exposure Monitor template with template id risk-exposure-monitor.", "name": "Risk Exposure Monitor", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,3 @@
+{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\":false,\"tool\":\"get_workspace_snapshot\",\"args\":{}}", "turn": 1}
+{"action": {"args": {"dashboard_id": "dash_001", "name": "Rates Watch", "operation": "update"}, "done": false, "tool": "manage_dashboard"}, "content": "{\"done\":false,\"tool\":\"manage_dashboard\",\"args\":{\"operation\":\"update\",\"dashboard_id\":\"dash_001\",\"name\":\"Rates Watch\"}}", "turn": 2}
+{"action": {"done": true}, "content": "{\"done\":true}", "turn": 3}

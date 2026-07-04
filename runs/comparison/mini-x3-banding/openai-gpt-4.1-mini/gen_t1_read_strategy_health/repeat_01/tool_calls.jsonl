@@ -1,0 +1,2 @@
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "strategy_health_monitor_performance_strategy_health_metrics"}, "tool": "get_widget_data"}
+{"args": {"data": "I reviewed the data from the strategy_health_monitor_performance_strategy_health_metrics widget. The primary metric is 84.92 with a change of -0.065, the secondary metric is 66.14 with a change of -0.0256, and the threshold metric is 76.18 with a change of -0.0738.", "name": "Review Note on Strategy Health Metrics", "tab_id": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,3 @@
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "stress_liquidity_lab_liquidity_days_to_liquidate"}, "tool": "get_widget_data"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "stress_liquidity_lab_stress_tests_risk_snapshot"}, "tool": "get_widget_data"}
+{"args": {"data": "For widget stress_liquidity_lab_liquidity_days_to_liquidate, the exact score is 62.96 for Flagship Long/Short fund YTD period. For widget stress_liquidity_lab_stress_tests_risk_snapshot, the primary Risk Snapshot value is 83.56.", "name": "Stress Liquidity Scores Note", "tab_id": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

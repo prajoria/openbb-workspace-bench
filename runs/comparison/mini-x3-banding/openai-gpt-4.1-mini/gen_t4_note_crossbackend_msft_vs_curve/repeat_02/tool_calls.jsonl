@@ -1,0 +1,3 @@
+{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_data"}
+{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "get_widget_data"}
+{"args": {"data": "The gross margin for MSFT is 0.462 (46.2%). The 30Y yield on the yield curve is 4.48%.", "name": "MSFT Gross Margin and 30Y Yield Note", "widget_type": "note"}, "tool": "add_generative_widget"}

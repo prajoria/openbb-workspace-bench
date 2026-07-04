@@ -1,0 +1,4 @@
+{"args": {"operation": "list"}, "tool": "manage_backends"}
+{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
+{"args": {"app_name": "Portfolio Command Center", "backend_id": "backend_001", "dashboard_name": "PM Command Post", "operation": "instantiate"}, "tool": "manage_apps"}
+{"args": {"dashboard_id": "dash_002", "data_args": {}, "origin": "Bench Stark Enterprise", "tab_id": "holdings", "ui_args": {}, "widget_id": "portfolio_command_center_holdings_sector_exposure"}, "tool": "create_widget"}

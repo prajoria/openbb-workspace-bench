@@ -1,0 +1,10 @@
+{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
+{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
+{"args": {"activate": true, "name": "Prompt Cross Book CPI", "operation": "create"}, "tool": "manage_dashboard"}
+{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_schema"}
+{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
+{"args": {"data_args": {"series": "CPIAUCSL"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
+{"args": {"data": "This dashboard combines sector exposure from Bench Portfolio and CPIAUCSL macroeconomic series from Bench Macro. It provides insights into sector allocation alongside inflation trends.", "name": "Sector and CPIAUCSL Note", "widget_type": "note"}, "tool": "add_generative_widget"}

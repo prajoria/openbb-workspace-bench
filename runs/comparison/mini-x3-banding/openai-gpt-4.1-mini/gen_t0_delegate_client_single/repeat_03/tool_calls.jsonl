@@ -1,0 +1,1 @@
+{"args": {"task_requests": [{"assigned_agent_id": "ir-analyst", "assigned_holder_url": "Bench Stark Enterprise", "description": "Prepare talking points and open requests for the client meeting.", "id": "ir-analyst"}]}, "tool": "assign_tasks_to_agents"}

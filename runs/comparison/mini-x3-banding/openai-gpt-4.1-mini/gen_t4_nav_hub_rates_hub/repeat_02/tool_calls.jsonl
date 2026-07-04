@@ -1,0 +1,6 @@
+{"args": {"name": "Rates Hub", "operation": "update"}, "tool": "manage_dashboard"}
+{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Curve"}]}, "tool": "manage_navigation_bar"}
+{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "curve"}, "tool": "navigate_workspace"}
+{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
+{"args": {"dashboard_id": "dash_001", "data_args": {}, "origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "create_widget"}
+{"args": {"data": "This tab contains the Yield Curve widget and is part of the Rates Hub dashboard, focusing on curve and rates hub analysis.", "inner_tab": "curve", "name": "Curve and Rates Hub Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,4 @@
+{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
+{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_schema"}
+{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "create_widget"}
+{"args": {"h": 8, "w": 10, "widget_uuid": "widget_002", "x": 20, "y": 0}, "tool": "update_widget_layout"}

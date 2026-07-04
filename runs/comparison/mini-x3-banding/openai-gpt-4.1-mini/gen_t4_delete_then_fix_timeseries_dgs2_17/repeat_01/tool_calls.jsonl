@@ -1,0 +1,4 @@
+{"args": {}, "tool": "get_workspace_snapshot"}
+{"args": {"dashboard_id": "dash_001", "widget_uuid": "widget_002"}, "tool": "delete_widget"}
+{"args": {"dashboard_id": "dash_001", "data_args": {"series": "DGS2"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
+{"args": {"data": "This dashboard has been repaired to show DGS2 instead of DGS10, removing duplicates and fixing the series as requested.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

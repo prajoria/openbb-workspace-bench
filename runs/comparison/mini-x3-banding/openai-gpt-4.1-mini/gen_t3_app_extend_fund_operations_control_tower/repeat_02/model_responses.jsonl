@@ -1,0 +1,4 @@
+{"action": {"args": {"operation": "list"}, "done": false, "tool": "manage_backends"}, "content": "{\"done\":false,\"tool\":\"manage_backends\",\"args\":{\"operation\":\"list\"}}", "turn": 1}
+{"action": {"args": {"backend_id": "backend_001", "operation": "list"}, "done": false, "tool": "manage_apps"}, "content": "{\"done\":false,\"tool\":\"manage_apps\",\"args\":{\"backend_id\":\"backend_001\",\"operation\":\"list\"}}", "turn": 2}
+{"action": {"args": {"app_name": "Fund Operations Control Tower", "backend_id": "backend_001", "dashboard_name": "Ops Control Room", "operation": "instantiate"}, "done": false, "tool": "manage_apps"}, "content": "{\"done\":false,\"tool\":\"manage_apps\",\"args\":{\"backend_id\":\"backend_001\",\"operation\":\"instantiate\",\"app_name\":\"Fund Operations Control Tower\",\"dashboard_name\":\"Ops Control Room\"}}", "turn": 3}
+{"action": {"done": true}, "content": "{\"done\":true}", "turn": 4}

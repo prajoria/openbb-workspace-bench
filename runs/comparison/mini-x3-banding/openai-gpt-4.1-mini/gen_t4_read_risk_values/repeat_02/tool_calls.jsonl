@@ -1,0 +1,3 @@
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot"}, "tool": "get_widget_data"}
+{"args": {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_limits_limit_utilization"}, "tool": "get_widget_data"}
+{"args": {"data": "From widget risk_exposure_monitor_dashboard_risk_snapshot, the Risk Snapshot primary value is 0.2878. From widget risk_exposure_monitor_limits_limit_utilization, the exposure for fund 'Flagship Long/Short' is 0.0339.", "inner_tab": "main", "name": "Risk Snapshot and Limit Utilization Values", "widget_type": "note"}, "tool": "add_generative_widget"}

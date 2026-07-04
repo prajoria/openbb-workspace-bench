@@ -1,0 +1,2 @@
+{"args": {"widget_id": "latest_news"}, "tool": "read_widget"}
+{"args": {"data_args": {"limit": 5, "symbol": "MSFT"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}

@@ -1,0 +1,3 @@
+{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_data"}
+{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_data"}
+{"args": {"data": "The latest close price for NVDA is 196.1 as of 2026-01-15. The EPS estimate for 2026Q1 is 2.31.", "description": "Summary note of NVDA latest close price and 2026Q1 EPS estimate.", "name": "NVDA Close and 2026Q1 EPS Estimate", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,3 @@
+{"args": {"slug": "finance-comps"}, "tool": "get_skill_content"}
+{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "create_widget"}
+{"args": {"data": "The Finance Comps workflow involves defining the peer set, normalizing metrics, comparing valuation multiples, and explaining why outliers deserve premium or discount. This widget shows the fundamental metrics for AAPL, which can be used as a basis for comparison with its peers to identify valuation and operational differences.", "description": "Applying Finance Comps workflow steps to AAPL Fundamental Metrics widget.", "name": "Finance Comps Workflow Note", "widget_type": "note"}, "tool": "add_generative_widget"}

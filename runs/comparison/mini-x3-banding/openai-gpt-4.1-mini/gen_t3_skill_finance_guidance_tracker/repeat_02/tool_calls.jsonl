@@ -1,0 +1,3 @@
+{"args": {"slug": "finance-guidance-tracker"}, "tool": "get_skill_content"}
+{"args": {"data_args": {"limit": 5, "symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "create_widget"}
+{"args": {"data": "The Finance Guidance Tracker workflow involves extracting management claims, comparing them with prior guidance, flagging changed assumptions, and listing evidence gaps. For the AAPL Latest News widget, we can apply this by reviewing recent news articles to identify any new management statements or guidance changes, noting any shifts in assumptions, and highlighting areas where further evidence or clarification is needed.", "name": "Finance Guidance Tracker Application", "widget_type": "note"}, "tool": "add_generative_widget"}
