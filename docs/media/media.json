@@ -16,13 +16,6 @@
       "demonstrates": "final workspace state"
     },
     {
-      "id": "surface-discovery-create",
-      "kind": "gif",
-      "file": null,
-      "caption": "The discovery discipline in one take: list_available_widgets → get_widget_schema → create_widget landing on the grid.",
-      "demonstrates": "list_available_widgets, get_widget_schema, create_widget"
-    },
-    {
       "id": "resources-prompts-in-action",
       "kind": "gif",
       "file": null,
@@ -33,15 +26,8 @@
       "id": "repair-episode",
       "kind": "gif",
       "file": null,
-      "caption": "A t3 repair: the agent finds the wrong ticker, fixes it in place, and documents the repair — without touching the healthy widgets.",
+      "caption": "A t3 repair: the agent finds the wrong ticker, fixes it in place, and documents the repair \u2014 without touching the healthy widgets.",
       "demonstrates": "read_widget, update_widget, add_generative_widget"
-    },
-    {
-      "id": "failure-container-exec",
-      "kind": "gif",
-      "file": null,
-      "caption": "The hallucinated container.exec moment: a 20B model tries to run bash in a financial workspace.",
-      "demonstrates": "too_many_invalid_calls"
     }
   ]
 }
