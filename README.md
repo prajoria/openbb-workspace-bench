@@ -7,6 +7,8 @@ OpenBB Workspace Bench is a Terminal-Bench-style evaluation harness for agents t
 
 The benchmark asks a simple question: can an agent inspect, build, update, and repair durable Workspace state? Scoring is based on final dashboard/app state, widget configuration, generated artifacts, layout, and tool-use discipline.
 
+Motivation: a [NY Tech Week talk](https://youtu.be/7fDTDYh2NJ4?t=1210) showed agents driving real financial work in OpenBB Workspace over MCP, on the [Stark Industries demo](https://github.com/DidierRLopes/stark-industries-demo). A demo shows work can happen once; this benchmark measures how reliably agents actually drive it. The Stark demo is also where the enterprise scenarios come from.
+
 Current bundled release: `workspace-bench-v1` (`core` and `all` are backward-compatible CLI aliases).
 
 ## What Is Included
@@ -280,7 +282,7 @@ The server exposes:
 - widget data endpoints such as `/price-performance?symbol=AAPL&raw=true`
 
 The bundled `Bench Stark Enterprise` fixture packages widget and app metadata
-from an enterprise demo application into a stable local backend, with seeded
+from the [Stark Industries demo](https://github.com/DidierRLopes/stark-industries-demo) into a stable local backend, with seeded
 deterministic data per widget. It is used for enterprise workflow coverage
 without depending on a live demo app.
 
