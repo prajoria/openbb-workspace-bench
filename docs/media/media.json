@@ -6,12 +6,13 @@
       "kind": "video",
       "file": null,
       "caption": "An agent building the AAPL earnings dashboard end-to-end in OpenBB Workspace (30s).",
-      "demonstrates": "full episode: manage_dashboard, create_widget, add_generative_widget"
+      "demonstrates": "full episode: manage_dashboard, create_widget, add_generative_widget",
+      "url": "https://youtu.be/fC3kpw9G15I"
     },
     {
       "id": "durable-artifact-real",
       "kind": "image",
-      "file": null,
+      "file": "durable-artifact-real.png",
       "caption": "The real graded dashboard: the durable artifact the grader inspects.",
       "demonstrates": "final workspace state"
     },
@@ -20,14 +21,16 @@
       "kind": "gif",
       "file": null,
       "caption": "The newest part of the surface: reading the app-builder index over MCP resources, then instantiating the app it described.",
-      "demonstrates": "read_workspace_resource, get_workspace_prompt, manage_apps"
+      "demonstrates": "read_workspace_resource, get_workspace_prompt, manage_apps",
+      "url": "https://youtu.be/JDfLnBGEFIM"
     },
     {
       "id": "repair-episode",
       "kind": "gif",
       "file": null,
       "caption": "A t3 repair: the agent finds the wrong ticker, fixes it in place, and documents the repair \u2014 without touching the healthy widgets.",
-      "demonstrates": "read_widget, update_widget, add_generative_widget"
+      "demonstrates": "read_widget, update_widget, add_generative_widget",
+      "url": "https://youtu.be/zYuARXMykeQ"
     }
   ]
 }
