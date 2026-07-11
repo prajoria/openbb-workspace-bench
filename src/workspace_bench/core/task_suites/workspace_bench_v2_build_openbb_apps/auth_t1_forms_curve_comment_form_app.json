@@ -1,0 +1,151 @@
+{
+  "id": "auth_t1_forms_curve_comment_form_app",
+  "title": "Ship Curve Comment Form as the Curve Comments app",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-forms",
+    "level-t1",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "forms"
+  ],
+  "prompt": "Register \"Rates Watch Data\" (http://localhost:7803) with `curve_comment_form`: name \"Curve Comment Form\", description \"Submit a curve desk comment.\", endpoint /curve-comment, type markdown, sized w=12 h=8 on the grid, params required: comment \u2014 a form submitting POST to /curve-comment-submit with inputs [series \u2014 a text input (type text), labeled \"Series\", default \"DGS10\"; commentary \u2014 a text input (type text), labeled \"Commentary\", default \"Steeper bias.\"; post \u2014 a button (type button), labeled \"Post\"] (that bracket is the complete list of the form's inputParams), and ship that form as an app named \"Curve Comments\" (description \"Submit curve desk comments.\") with one tab `comments` named \"Comments\" placing `curve_comment_form` at x=0 y=0 w=12 h=8.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Rates Watch Data",
+        "widget_id": "curve_comment_form",
+        "expect": {
+          "type": "markdown",
+          "endpoint": "/curve-comment",
+          "gridData.w": 12,
+          "gridData.h": 8
+        },
+        "params_include": [
+          {
+            "paramName": "comment",
+            "type": "form"
+          }
+        ]
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Rates Watch Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Curve Comments",
+        "tabs_include": [
+          "comments"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "comments",
+            "widget_id": "curve_comment_form"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Rates Watch Data",
+        "url": "http://localhost:7803",
+        "widgets_json": {
+          "curve_comment_form": {
+            "name": "Curve Comment Form",
+            "description": "Submit a curve desk comment.",
+            "endpoint": "/curve-comment",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "comment",
+                "type": "form",
+                "label": "Comment",
+                "endpoint": "/curve-comment-submit",
+                "method": "POST",
+                "inputParams": [
+                  {
+                    "paramName": "series",
+                    "type": "text",
+                    "label": "Series",
+                    "value": "DGS10"
+                  },
+                  {
+                    "paramName": "commentary",
+                    "type": "text",
+                    "label": "Commentary",
+                    "value": "Steeper bias."
+                  },
+                  {
+                    "paramName": "post",
+                    "type": "button",
+                    "label": "Post"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Curve Comments",
+            "description": "Submit curve desk comments.",
+            "tabs": {
+              "comments": {
+                "id": "comments",
+                "name": "Comments",
+                "layout": [
+                  {
+                    "i": "curve_comment_form",
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 8
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t1",
+  "capability": "widget-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique forms/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_comment_form; appdefs:Rates Watch Data/Curve Comments."
+}

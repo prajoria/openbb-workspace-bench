@@ -1,0 +1,298 @@
+{
+  "id": "auth_t4_grouping_click_sync_live",
+  "title": "Ship, open, and configure the grouped Click Sync Live app",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-grouping",
+    "level-t4",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "grouping",
+    "orchestration"
+  ],
+  "prompt": "End to end. Publish \"Earnings Prep Data\" at http://localhost:7805 - widgets.json: `click_live_table`: name \"Click Live Table\", description \"Clickable live symbol rows for grouped review.\", endpoint /click-live-table, type table, sized w=20 h=9 on the grid, params required: symbol \u2014 a dropdown (type endpoint), labeled \"Symbol\", options fetched from /symbols, default \"AAPL\", table columns required (field \u2192 header (type, extras)): symbol \u2192 header \"Symbol\" (text, cellOnClick render) with renderFnParams {\"actionType\": \"groupBy\", \"groupByParamName\": \"symbol\"}; revision_pct \u2192 header \"Revision %\" (number, percent formatter); `earnings_chart`: name \"EPS History\", description \"Plotly EPS beat/miss history.\", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true, params required: symbol \u2014 a dropdown (type endpoint), labeled \"Symbol\", options fetched from /symbols, default \"AAPL\"; `earnings_note`: name \"Earnings Preview\", description \"Preview note for the earnings call.\", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol \u2014 a dropdown (type endpoint), labeled \"Symbol\", options fetched from /symbols, default \"AAPL\". apps.json: app \"Click Sync Live\", description \"Live grouped click table and chart.\", tab `clicks` named \"Clicks\" places: `click_live_table` at x=0 y=0 w=20 h=9 preset with params {\"symbol\": \"NVDA\"}, tab `linked` named \"Linked\" places: `earnings_chart` at x=0 y=0 w=12 h=9, group \"Click Live Sync\" (type param) syncing param symbol across [\"click_live_table\", \"earnings_chart\"]. Then instantiate \"Click Sync Live\" from that backend into a dashboard named \"Click Sync Live Board\", set symbol to \"AAPL\" on the opened `click_live_table` widget, and leave a note titled \"Click Sync Live\" that says exactly: \"Click Sync Live is live from Earnings Prep Data: click sync ready.\"",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "add_generative_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "click_live_table",
+        "expect": {
+          "type": "table",
+          "endpoint": "/click-live-table",
+          "gridData.w": 20,
+          "gridData.h": 9
+        },
+        "params_include": [
+          {
+            "paramName": "symbol",
+            "type": "endpoint",
+            "optionsEndpoint": "/symbols"
+          }
+        ],
+        "columns_include": [
+          {
+            "field": "symbol",
+            "headerName": "Symbol",
+            "cellDataType": "text",
+            "renderFn": "cellOnClick"
+          },
+          {
+            "field": "revision_pct",
+            "headerName": "Revision %",
+            "cellDataType": "number",
+            "formatterFn": "percent"
+          }
+        ]
+      },
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "earnings_chart",
+        "expect": {
+          "type": "chart",
+          "endpoint": "/eps-history"
+        }
+      },
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "earnings_note",
+        "expect": {
+          "type": "markdown",
+          "endpoint": "/earnings-preview"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Earnings Prep Data",
+        "tab_count": 2,
+        "layout_refs_valid": true,
+        "name_contains": "Click Sync Live"
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Earnings Prep Data",
+        "widget_id": "click_live_table",
+        "data_args": {
+          "symbol": "AAPL"
+        },
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Click Sync Live",
+          "click sync"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Earnings Prep Data",
+        "url": "http://localhost:7805",
+        "widgets_json": {
+          "click_live_table": {
+            "name": "Click Live Table",
+            "description": "Clickable live symbol rows for grouped review.",
+            "endpoint": "/click-live-table",
+            "type": "table",
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "symbol",
+                    "headerName": "Symbol",
+                    "cellDataType": "text",
+                    "renderFn": "cellOnClick",
+                    "renderFnParams": {
+                      "actionType": "groupBy",
+                      "groupByParamName": "symbol"
+                    },
+                    "cellOnClick": {
+                      "actionType": "groupBy",
+                      "groupByParamName": "symbol"
+                    }
+                  },
+                  {
+                    "field": "revision_pct",
+                    "headerName": "Revision %",
+                    "cellDataType": "number",
+                    "formatterFn": "percent"
+                  }
+                ]
+              }
+            },
+            "gridData": {
+              "w": 20,
+              "h": 9
+            }
+          },
+          "earnings_chart": {
+            "name": "EPS History",
+            "description": "Plotly EPS beat/miss history.",
+            "endpoint": "/eps-history",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "raw": true
+          },
+          "earnings_note": {
+            "name": "Earnings Preview",
+            "description": "Preview note for the earnings call.",
+            "endpoint": "/earnings-preview",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ]
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Click Sync Live",
+            "description": "Live grouped click table and chart.",
+            "tabs": {
+              "clicks": {
+                "id": "clicks",
+                "name": "Clicks",
+                "layout": [
+                  {
+                    "i": "click_live_table",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9,
+                    "state": {
+                      "params": {
+                        "symbol": "NVDA"
+                      }
+                    }
+                  }
+                ]
+              },
+              "linked": {
+                "id": "linked",
+                "name": "Linked",
+                "layout": [
+                  {
+                    "i": "earnings_chart",
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Click Live Sync",
+                "type": "param",
+                "paramName": "symbol",
+                "widgetIds": [
+                  "click_live_table",
+                  "earnings_chart"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Click Sync Live",
+        "dashboard_name": "Click Sync Live Board",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "click_live_table",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Click Sync Live",
+        "data": "Click Sync Live is live from Earnings Prep Data: click sync ready."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t4",
+  "capability": "widget-building",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique grouping/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/click_live_table,Earnings Prep Data/earnings_chart,Earnings Prep Data/earnings_note; appdefs:Earnings Prep Data/Click Sync Live; widgets:Earnings Prep Data/click_live_table@*; generated:note@*:Click Sync Live,click sync."
+}

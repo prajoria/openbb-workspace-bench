@@ -1,0 +1,148 @@
+{
+  "id": "gen_t2_backends_cross_latest_news_yield_curve_0",
+  "title": "Register Two Backends: Latest News And Yield Curve",
+  "capability": "dashboard-construction",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-backends",
+    "level-t2",
+    "backends",
+    "cross-backend"
+  ],
+  "prompt": "Register backend names equities and macro; then fetch each widget's schema and add Bench Equities/latest_news with data_args {\"limit\": 5, \"symbol\": \"MSFT\"} and Bench Macro/yield_curve to the active dashboard.",
+  "fixtures": {
+    "backends": []
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Cross Backend Build",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "manage_backends",
+    "get_workspace_snapshot",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news",
+        "data_args": {
+          "symbol": "MSFT",
+          "limit": 5
+        }
+      },
+      {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve",
+        "data_args": {}
+      }
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "manage_backends",
+        "args_contains": {
+          "operation": "add"
+        },
+        "min_count": 2
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "equities"
+      }
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "macro"
+      }
+    },
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Equities"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news",
+        "data_args": {
+          "symbol": "MSFT",
+          "limit": 5
+        }
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Macro"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve",
+        "data_args": {}
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "dashboard",
+  "level": "t2",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 12
+  },
+  "split": "validation",
+  "novelty": "Unique backends/t2 exercise using create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks layout_out_of_grid, layout_overlap, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on equities, macro; artifact widgets:Bench Equities/latest_news@*,Bench Macro/yield_curve@*."
+}

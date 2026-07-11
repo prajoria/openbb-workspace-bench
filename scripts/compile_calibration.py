@@ -1,6 +1,6 @@
 """Compile v1 calibration results across all model runs into one JSON blob.
 
-Reads every runs/comparison/v1-calib-*/<model>.json, joins scenarios with
+Reads every runs/comparison/v1-calib-*/<model>.json, joins tasks with
 family/tier tags from the bundled pack, and writes
 runs/reports/calibration.json with per-model strict totals, mean scores,
 per-tier and per-family pass rates, and top issue codes. The blog chart is
@@ -14,12 +14,12 @@ from collections import defaultdict
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-PACK = REPO / "src/workspace_bench/core/scenario_packs/workspace_bench_v1"
+PACK = REPO / "src/workspace_bench/core/task_suites/workspace_bench_v1"
 OUT = REPO / "runs/reports/calibration.json"
 
 pack = {}
 for f in PACK.glob("*.json"):
-    if f.name == "task_pack.json":
+    if f.name == "task_suite.json":
         continue
     s = json.loads(f.read_text())
     pack[s["id"]] = (
@@ -29,7 +29,7 @@ for f in PACK.glob("*.json"):
     )
 
 models = []
-per_scenario = defaultdict(dict)
+per_task = defaultdict(dict)
 for run_dir in sorted((REPO / "runs/comparison").glob("v1-calib-*")):
     result_files = [f for f in run_dir.glob("*.json") if f.name != "comparison.json"]
     if not result_files:
@@ -50,7 +50,7 @@ for run_dir in sorted((REPO / "runs/comparison").glob("v1-calib-*")):
         diffs[diff][0] += r["passed"]; diffs[diff][1] += 1
         for i in r["issues"]:
             codes[i["code"]] += 1
-        per_scenario[r["id"]][slug] = {
+        per_task[r["id"]][slug] = {
             "passed": int(r["passed"]),
             "score": round(100 * r["score"]),
             "issue": r["issues"][0]["code"] if r["issues"] else None,
@@ -65,19 +65,19 @@ for run_dir in sorted((REPO / "runs/comparison").glob("v1-calib-*")):
         "top_issues": dict(sorted(codes.items(), key=lambda kv: -kv[1])[:6]),
     })
 
-scenarios = [
+tasks = [
     {
         "id": sid,
         "tier": pack[sid][0],
         "family": pack[sid][1],
         "difficulty": pack[sid][2],
-        "models": per_scenario[sid],
+        "models": per_task[sid],
     }
-    for sid in sorted(per_scenario)
+    for sid in sorted(per_task)
 ]
 
 OUT.write_text(json.dumps(
-    {"release": "workspace-bench-v1", "models": models, "scenarios": scenarios},
+    {"release": "workspace-bench-v1", "models": models, "tasks": tasks},
     indent=1,
 ))
 print(f"Wrote {OUT}: {len(models)} complete model runs")

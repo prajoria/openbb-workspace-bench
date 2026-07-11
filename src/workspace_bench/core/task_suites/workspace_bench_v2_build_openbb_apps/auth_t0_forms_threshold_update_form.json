@@ -1,0 +1,110 @@
+{
+  "id": "auth_t0_forms_threshold_update_form",
+  "title": "Build the Threshold Update Form form widget",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-forms",
+    "level-t0",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "forms"
+  ],
+  "prompt": "Add \"Execution Desk Data\" at http://localhost:7806 serving this single form-capable widget definition: `threshold_update_form`: name \"Threshold Update Form\", description \"Submit a threshold change for operations.\", endpoint /threshold-update, type table, sized w=20 h=10 on the grid, category \"Workflow Forms\", params required: threshold \u2014 a form submitting POST to /threshold-update-submit with inputs [limit \u2014 a number input (type number), labeled \"Limit\", default 250, min 0, max 1000; owner \u2014 a text input (type text), labeled \"Owner\", default \"ops\"; apply \u2014 a button (type button), labeled \"Apply\"] (that bracket is the complete list of the form's inputParams).",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "threshold_update_form",
+        "expect": {
+          "type": "table",
+          "endpoint": "/threshold-update",
+          "gridData.w": 20,
+          "gridData.h": 10,
+          "category": "Workflow Forms"
+        },
+        "params_include": [
+          {
+            "paramName": "threshold",
+            "type": "form"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "threshold_update_form": {
+            "name": "Threshold Update Form",
+            "description": "Submit a threshold change for operations.",
+            "endpoint": "/threshold-update",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 10
+            },
+            "params": [
+              {
+                "paramName": "threshold",
+                "type": "form",
+                "label": "Threshold",
+                "endpoint": "/threshold-update-submit",
+                "method": "POST",
+                "inputParams": [
+                  {
+                    "paramName": "limit",
+                    "type": "number",
+                    "label": "Limit",
+                    "value": 250,
+                    "min": 0,
+                    "max": 1000
+                  },
+                  {
+                    "paramName": "owner",
+                    "type": "text",
+                    "label": "Owner",
+                    "value": "ops"
+                  },
+                  {
+                    "paramName": "apply",
+                    "type": "button",
+                    "label": "Apply"
+                  }
+                ]
+              }
+            ],
+            "category": "Workflow Forms"
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t0",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "train",
+  "novelty": "Unique forms/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/threshold_update_form."
+}

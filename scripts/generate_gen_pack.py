@@ -1,30 +1,30 @@
-"""Generate the bundled WorkspaceBench scenario pack (tool-centric ladders).
+"""Generate the bundled WorkspaceBench task pack (tool-centric ladders).
 
 TMax-style compositional generation, restructured so that **every family is
 anchored on one MCP tool and carries a complete t0-t4 ladder**:
 
-    15 tool families x 5 tiers x 4 scenarios = 300
+    15 tool families x 5 levels x 4 tasks = 300
 
 Tiers are structural (composition, pathology, discovery pressure, budget),
 never adjectives. Difficulty labels are balanced across the suite rather than
-used as tier names: t0 is easy, t2 is medium, t4 is hard, while each t1 cell
+used as level names: t0 is easy, t2 is medium, t4 is hard, while each t1 cell
 splits 2 easy / 2 medium and each t3 cell splits 2 medium / 2 hard. This yields
-90 easy / 120 medium / 90 hard for the 300-scenario lattice. Higher tiers
+90 easy / 120 medium / 90 hard for the 300-task lattice. Higher levels
 *compose* the anchor tool with others, so a t4 run requires several MCP tools in
 a single episode while the anchor stays central.
 
-Discipline rule: where a scenario enforces schema-before-create, tiers t0-t2
-instruct the discipline explicitly in the prompt; tiers t3-t4 expect it
+Discipline rule: where a task enforces schema-before-create, levels t0-t2
+instruct the discipline explicitly in the prompt; levels t3-t4 expect it
 unprompted — looking before touching without being told is part of what makes
-the upper tiers hard.
+the upper levels hard.
 
 Each prompt site uses a deterministic phrasing pool with at least three
 semantically identical full-prompt variants. The selected surface wording is
-`md5(scenario_id) % len(pool)`, so the same scenario id keeps the same prompt
+`md5(task_id) % len(pool)`, so the same task id keeps the same prompt
 forever without using randomness.
 
-Certification: `workspace-bench validate --pack all --min-scenarios 300`
-must report oracle pass and no-op fail for every scenario.
+Certification: `workspace-bench validate --pack all --min-tasks 300`
+must report oracle pass and no-op fail for every task.
 """
 
 from __future__ import annotations
@@ -38,7 +38,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 STARK = json.loads((REPO / "src/workspace_bench/workspace/data/stark_enterprise.json").read_text())
-BUNDLED_OUT_DIR = REPO / "src/workspace_bench/core/scenario_packs/workspace_bench_v1"
+BUNDLED_OUT_DIR = REPO / "src/workspace_bench/core/task_suites/workspace_bench_v1"
 OUT_DIRS = (BUNDLED_OUT_DIR,)
 
 STK = "Bench Stark Enterprise"
@@ -54,24 +54,24 @@ TRACE_FULL = {
 TRACE_BASIC = {"max_invalid_tool_calls": 0, "max_repeated_snapshots": 1}
 
 TIER_DIFFICULTY = {"t0": "easy", "t1": "easy", "t2": "medium", "t3": "hard", "t4": "hard"}
-TIER_SLACK = {"t0": 3, "t1": 3, "t2": 3, "t3": 3, "t4": 2}
+LEVEL_SLACK = {"t0": 3, "t1": 3, "t2": 3, "t3": 3, "t4": 2}
 
 SCENARIOS: list[dict] = []
 CELL_COUNTS: dict[tuple[str, str], int] = defaultdict(int)
 PROMPT_POOL_SIZES: dict[str, int] = {}
 
 
-def phrased(scenario_id: str, variants: list[str]) -> str:
-    """Select a prompt variant by stable scenario-id hash and record pool coverage."""
-    assert isinstance(variants, list), f"{scenario_id} prompt pool must be a list"
-    assert len(variants) >= 3, f"{scenario_id} prompt pool has {len(variants)} variants"
+def phrased(task_id: str, variants: list[str]) -> str:
+    """Select a prompt variant by stable task-id hash and record pool coverage."""
+    assert isinstance(variants, list), f"{task_id} prompt pool must be a list"
+    assert len(variants) >= 3, f"{task_id} prompt pool has {len(variants)} variants"
     frame = sys._getframe(1)
     site = f"{Path(frame.f_code.co_filename).name}:{frame.f_lineno}"
     previous = PROMPT_POOL_SIZES.setdefault(site, len(variants))
     assert previous == len(variants), (
         f"prompt site {site} used pool sizes {previous} and {len(variants)}"
     )
-    index = int(hashlib.md5(scenario_id.encode()).hexdigest(), 16) % len(variants)
+    index = int(hashlib.md5(task_id.encode()).hexdigest(), 16) % len(variants)
     return variants[index]
 
 
@@ -173,31 +173,41 @@ def wf(origin: str, widget_id: str = "") -> tuple[str, str]:
     return stark_family(widget_id) if origin == STK else core_workflow(origin)
 
 
-def difficulty_for(tier: str, cell_index: int) -> str:
-    if tier == "t0":
+def difficulty_for(level: str, cell_index: int) -> str:
+    if level == "t0":
         return "easy"
-    if tier == "t1":
+    if level == "t1":
         return "easy" if cell_index <= 2 else "medium"
-    if tier == "t2":
+    if level == "t2":
         return "medium"
-    if tier == "t3":
+    if level == "t3":
         return "medium" if cell_index <= 2 else "hard"
     return "hard"
 
 
-def add(family: str, tier: str, scenario: dict) -> None:
-    CELL_COUNTS[(family, tier)] += 1
-    cell_index = CELL_COUNTS[(family, tier)]
-    scenario.setdefault("domain", "finance")
-    scenario.setdefault("source", "workspace-bench-gen")
-    scenario["difficulty"] = difficulty_for(tier, cell_index)
-    tags = scenario.setdefault("tags", [])
-    tags.insert(0, f"tier-{tier}")
+_LEVEL_TO_CATEGORY = {
+    "L0": "read", "L1": "single-widget", "L2": "dashboard",
+    "L3": "platform", "L4": "repair", "L5": "platform",
+}
+
+
+def add(family: str, level: str, task: dict) -> None:
+    CELL_COUNTS[(family, level)] += 1
+    cell_index = CELL_COUNTS[(family, level)]
+    task.setdefault("domain", "finance")
+    task.setdefault("source", "workspace-bench-gen")
+    # tasks in this module declare the legacy L-code; map it to the category
+    # axis and carry the difficulty level as the t-code.
+    task["category"] = _LEVEL_TO_CATEGORY[task.pop("level", "L1")]
+    task["level"] = level
+    task["difficulty"] = difficulty_for(level, cell_index)
+    tags = task.setdefault("tags", [])
+    tags.insert(0, f"level-{level}")
     tags.insert(0, f"family-{family}")
-    scenario.setdefault("limits", {})["max_turns"] = (
-        len(scenario["oracle_tool_calls"]) + TIER_SLACK[tier])
-    scenario["_family"], scenario["_tier"] = family, tier
-    SCENARIOS.append(scenario)
+    task.setdefault("limits", {})["max_turns"] = (
+        len(task["oracle_tool_calls"]) + LEVEL_SLACK[level])
+    task["_family"], task["_level"] = family, level
+    SCENARIOS.append(task)
 
 
 def seeded(name: str, widgets: list[dict], tabs: list[dict] | None = None) -> dict:
@@ -1843,7 +1853,7 @@ for slug, widgets, prompt_variants, facts, text in NOTE_T4:
 STK_ARGS = {"fund": "Flagship Long/Short", "period": "YTD"}
 
 
-def read_scenario(tier: str, slug: str, widgets: list[str], facts_mode: str) -> None:
+def read_task(level: str, slug: str, widgets: list[str], facts_mode: str) -> None:
     """facts_mode: 'id' (cite widget ids) or 'value' (cite exact baked fixture facts)."""
     primary = widgets[0]
     workflow, sub = stark_family(primary)
@@ -1895,12 +1905,12 @@ def read_scenario(tier: str, slug: str, widgets: list[str], facts_mode: str) -> 
             f"find the exact {targets}, then add a note that cites each widget id, "
             "the field name, and the exact value."
         )
-    add("read", tier, {
-        "id": f"gen_{tier}_read_{slug}",
+    add("read", level, {
+        "id": f"gen_{level}_read_{slug}",
         "title": f"Read Data: {names}",
         "level": "L1", "capability": "data-reading", "workflow": workflow,
         "subdomain": sub, "tags": ["data-reading", "stark"],
-        "prompt": phrased(f"gen_{tier}_read_{slug}", [
+        "prompt": phrased(f"gen_{level}_read_{slug}", [
             (f"Use get_widget_data on the Bench Stark Enterprise "
              f"{names} widget{'s' if len(widgets) > 1 else ''}, {ask}"),
             (f"On the Bench Stark Enterprise {names} "
@@ -1933,7 +1943,7 @@ for slug, wid in [
     ("order_status", "execution_desk_blotter_order_status_metrics"),
     ("latency", "vendor_dataset_monitor_slas_latency_by_feed"),
 ]:
-    read_scenario("t0", slug, [wid], "id")
+    read_task("t0", slug, [wid], "id")
 
 for slug, wid in [
     ("alert_trend", "compliance_surveillance_hub_alerts_alert_trend"),
@@ -1941,7 +1951,7 @@ for slug, wid in [
     ("strategy_health", "strategy_health_monitor_performance_strategy_health_metrics"),
     ("break_aging", "fund_operations_control_tower_recons_break_aging"),
 ]:
-    read_scenario("t1", slug, [wid], "id")
+    read_task("t1", slug, [wid], "id")
 
 for slug, wid in [
     ("var_trend", "risk_exposure_monitor_dashboard_var_trend"),
@@ -1949,7 +1959,7 @@ for slug, wid in [
     ("broker_scorecard", "execution_desk_fills_broker_scorecard"),
     ("sla_metrics", "vendor_dataset_monitor_vendors_sla_metrics"),
 ]:
-    read_scenario("t2", slug, [wid], "value")
+    read_task("t2", slug, [wid], "value")
 
 for slug, wids in [
     ("risk_pair", ["risk_exposure_monitor_dashboard_var_trend",
@@ -1961,7 +1971,7 @@ for slug, wids in [
     ("client_pair", ["client_360_client_book_client_accounts",
                        "client_360_client_book_relationship_metrics"]),
 ]:
-    read_scenario("t3", slug, wids, "id")
+    read_task("t3", slug, wids, "id")
 
 for slug, wids in [
     ("risk_values", ["risk_exposure_monitor_dashboard_risk_snapshot",
@@ -1973,7 +1983,7 @@ for slug, wids in [
     ("stress_values", ["stress_liquidity_lab_liquidity_days_to_liquidate",
                          "stress_liquidity_lab_stress_tests_risk_snapshot"]),
 ]:
-    read_scenario("t4", slug, wids, "value")
+    read_task("t4", slug, wids, "value")
 
 
 # ===========================================================================
@@ -2557,10 +2567,10 @@ SKILLS = {
 SKILL_SLUGS = list(SKILLS)
 
 
-def skill_scenario(tier: str, slug: str, extra: dict) -> None:
+def skill_task(level: str, slug: str, extra: dict) -> None:
     skill_name, result_facts, note_facts = SKILLS[slug]
     base = {
-        "id": f"gen_{tier}_skill_{slug.replace('-', '_')}",
+        "id": f"gen_{level}_skill_{slug.replace('-', '_')}",
         "level": "L1", "capability": "skill-access",
         "workflow": "earnings-prep" if "earnings" in slug else "equity-tearsheet",
         "subdomain": "equity-research", "tags": ["skills", "mcp"],
@@ -2569,12 +2579,12 @@ def skill_scenario(tier: str, slug: str, extra: dict) -> None:
                                  tabs=[{"id": "overview", "name": "Overview"}]),
     }
     base.update(extra)
-    add("skills", tier, base)
+    add("skills", level, base)
 
 
 for slug in SKILL_SLUGS:
     skill_name, result_facts, note_facts = SKILLS[slug]
-    skill_scenario("t0", slug, {
+    skill_task("t0", slug, {
         "title": f"Read The {skill_name} Skill",
         "prompt": phrased(f"gen_t0_skill_{slug.replace('-', '_')}", [
             (f"Call get_skill_content with slug {slug}, then add a note on the active "
@@ -2634,7 +2644,7 @@ for slug in SKILL_SLUGS:
                                          f"{skill_name} workflow: "
                                          + "; ".join(note_facts) + ".")],
     }
-    skill_scenario("t1", slug, extra)
+    skill_task("t1", slug, extra)
 
 SKILL_T2_TABS = {"finance-earnings-prep": "Earnings Prep", "finance-tearsheet": "Tearsheet",
                   "finance-guidance-tracker": "Guidance", "finance-comps": "Comps"}
@@ -2642,7 +2652,7 @@ for slug in SKILL_SLUGS:
     skill_name, result_facts, note_facts = SKILLS[slug]
     tab_name = SKILL_T2_TABS[slug]
     tab_slug = slugify(tab_name)
-    skill_scenario("t2", slug, {
+    skill_task("t2", slug, {
         "title": f"File {skill_name} Under Its Own Tab",
         "prompt": phrased(f"gen_t2_skill_{slug.replace('-', '_')}", [
             (f"Call get_skill_content with slug {slug}. Add a new tab named "
@@ -2689,7 +2699,7 @@ SKILL_T3 = [
 for slug, origin, widget_id, data_args in SKILL_T3:
     skill_name, result_facts, note_facts = SKILLS[slug]
     value = data_args.get("symbol", "")
-    skill_scenario("t3", slug, {
+    skill_task("t3", slug, {
         "title": f"Apply {skill_name} With {value}",
         "fixtures": {"backends": [{"name": "equities"}]},
         "prompt": phrased(f"gen_t3_skill_{slug.replace('-', '_')}", [
@@ -2745,7 +2755,7 @@ SKILL_T4 = [
 for slug, widget_id, data_args, note_facts, note_text in SKILL_T4:
     skill_name, result_facts, _ = SKILLS[slug]
     value = data_args["symbol"]
-    skill_scenario("t4", slug, {
+    skill_task("t4", slug, {
         "title": f"Grounded {skill_name} For {value}",
         "fixtures": {"backends": [{"name": "equities"}]},
         "prompt": phrased(f"gen_t4_skill_{slug.replace('-', '_')}", [
@@ -4358,7 +4368,7 @@ for idx, (origin, wrong_widget, param, wrong_value, right_value, companion, comp
 # Write the pack + print the distribution matrix
 # ===========================================================================
 
-TIERS = ["t0", "t1", "t2", "t3", "t4"]
+LEVELS = ["t0", "t1", "t2", "t3", "t4"]
 EXPECTED_FAMILIES = {
     "apps", "backends", "create", "delegate", "delete", "inspect", "layout",
     "navigate", "note", "params", "prompts", "read", "resources", "skills",
@@ -4379,12 +4389,12 @@ def backend_slug(name: str) -> str:
     }.get(name, name)
 
 
-def scenario_backends(scenario: dict) -> set[str]:
+def task_backends(task: dict) -> set[str]:
     backends = {
         backend_slug(str(backend.get("name")))
-        for backend in scenario.get("fixtures", {}).get("backends", [])
+        for backend in task.get("fixtures", {}).get("backends", [])
     }
-    for call in scenario.get("oracle_tool_calls", []):
+    for call in task.get("oracle_tool_calls", []):
         if call.get("tool") != "manage_backends":
             continue
         args = call.get("args", {})
@@ -4393,19 +4403,19 @@ def scenario_backends(scenario: dict) -> set[str]:
     return backends
 
 
-def positive_required_widget_pairs(scenario: dict) -> set[tuple[str, str]]:
+def positive_required_widget_pairs(task: dict) -> set[tuple[str, str]]:
     pairs = set()
-    for req in scenario.get("success", {}).get("required_widgets", []):
+    for req in task.get("success", {}).get("required_widgets", []):
         if int(req.get("min_count", 1)) <= 0:
             continue
         pairs.add((str(req.get("origin")), str(req.get("widget_id"))))
     return pairs
 
 
-def check_type_counts(scenarios: list[dict]) -> Counter:
+def check_type_counts(tasks: list[dict]) -> Counter:
     counts: Counter = Counter()
-    for scenario in scenarios:
-        success = scenario.get("success", {})
+    for task in tasks:
+        success = task.get("success", {})
         if success.get("required_dashboard_name_contains"):
             counts["dashboard_name"] += 1
         if success.get("required_tabs"):
@@ -4442,31 +4452,31 @@ def check_type_counts(scenarios: list[dict]) -> Counter:
     return counts
 
 
-def scenario_check_types(scenario: dict) -> tuple[str, ...]:
-    return tuple(sorted(check_type_counts([scenario])))
+def task_check_types(task: dict) -> tuple[str, ...]:
+    return tuple(sorted(check_type_counts([task])))
 
 
-def artifact_discriminator(scenario: dict) -> str:
-    success = scenario.get("success", {})
+def artifact_discriminator(task: dict) -> str:
+    success = task.get("success", {})
     parts: list[str] = []
     for req in success.get("required_resource_reads", []):
         parts.append(f"resource:{req.get('uri')}")
     prompt_names = [
         str(call.get("args", {}).get("name"))
-        for call in scenario.get("oracle_tool_calls", [])
+        for call in task.get("oracle_tool_calls", [])
         if call.get("tool") == "get_workspace_prompt"
     ]
     if prompt_names:
         parts.append("prompts:" + ",".join(sorted(prompt_names)))
     app_templates = [
         str(call.get("args", {}).get("template_id") or call.get("args", {}).get("app_name"))
-        for call in scenario.get("oracle_tool_calls", [])
+        for call in task.get("oracle_tool_calls", [])
         if call.get("tool") == "manage_apps"
     ]
     if app_templates:
         parts.append("apps:" + ",".join(sorted(app_templates)))
     task_ids = []
-    for call in scenario.get("oracle_tool_calls", []):
+    for call in task.get("oracle_tool_calls", []):
         if call.get("tool") == "assign_tasks_to_agents":
             for task in call.get("args", {}).get("task_requests", []):
                 task_ids.append(str(task.get("id")))
@@ -4495,36 +4505,36 @@ def artifact_discriminator(scenario: dict) -> str:
     if generated:
         parts.append("generated:" + ",".join(sorted(generated)))
     if not parts:
-        parts.append("id:" + scenario["id"])
+        parts.append("id:" + task["id"])
     return "|".join(parts)
 
 
-def novelty_fingerprint(scenario: dict) -> tuple:
-    family = scenario["_family"]
-    tier = scenario["_tier"]
-    oracle_tools = tuple(sorted({call["tool"] for call in scenario["oracle_tool_calls"]}))
-    checks = scenario_check_types(scenario)
-    backends = tuple(sorted(scenario_backends(scenario)))
-    return (family, tier, oracle_tools, checks, backends, artifact_discriminator(scenario))
+def novelty_fingerprint(task: dict) -> tuple:
+    family = task["_family"]
+    level = task["_level"]
+    oracle_tools = tuple(sorted({call["tool"] for call in task["oracle_tool_calls"]}))
+    checks = task_check_types(task)
+    backends = tuple(sorted(task_backends(task)))
+    return (family, level, oracle_tools, checks, backends, artifact_discriminator(task))
 
 
-def add_novelty(scenario: dict) -> None:
-    family = scenario["_family"]
-    tier = scenario["_tier"]
-    tools = ", ".join(sorted({call["tool"] for call in scenario["oracle_tool_calls"]}))
-    checks = ", ".join(scenario_check_types(scenario))
-    backends = ", ".join(sorted(scenario_backends(scenario))) or "no preloaded backend"
-    artifact = artifact_discriminator(scenario).replace("|", "; ")
-    scenario["novelty"] = (
-        f"Unique {family}/{tier} exercise using {tools} with checks "
+def add_novelty(task: dict) -> None:
+    family = task["_family"]
+    level = task["_level"]
+    tools = ", ".join(sorted({call["tool"] for call in task["oracle_tool_calls"]}))
+    checks = ", ".join(task_check_types(task))
+    backends = ", ".join(sorted(task_backends(task))) or "no preloaded backend"
+    artifact = artifact_discriminator(task).replace("|", "; ")
+    task["novelty"] = (
+        f"Unique {family}/{level} exercise using {tools} with checks "
         f"{checks} on {backends}; artifact {artifact}."
     )
 
 
-def assign_splits(scenarios: list[dict]) -> None:
+def assign_splits(tasks: list[dict]) -> None:
     grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)
-    for scenario in scenarios:
-        grouped[(scenario["_family"], scenario["_tier"])].append(scenario)
+    for task in tasks:
+        grouped[(task["_family"], task["_level"])].append(task)
     patterns = {
         "t0": ("train", "train", "train", "validation"),
         "t1": ("train", "train", "validation", "test"),
@@ -4534,16 +4544,16 @@ def assign_splits(scenarios: list[dict]) -> None:
     }
     for key, cell in grouped.items():
         cell.sort(key=lambda item: item["id"])
-        assert len(cell) == 4, f"split assignment expects 4 scenarios in {key}"
-        for scenario, split in zip(cell, patterns[key[1]]):
-            scenario["split"] = split
+        assert len(cell) == 4, f"split assignment expects 4 tasks in {key}"
+        for task, split in zip(cell, patterns[key[1]]):
+            task["split"] = split
 
 
-def build_matrix(scenarios: list[dict]) -> dict[str, dict[str, int]]:
+def build_matrix(tasks: list[dict]) -> dict[str, dict[str, int]]:
     matrix: dict[str, dict[str, int]] = {}
-    for scenario in scenarios:
-        family, tier = scenario["_family"], scenario["_tier"]
-        matrix.setdefault(family, {})[tier] = matrix.setdefault(family, {}).get(tier, 0) + 1
+    for task in tasks:
+        family, level = task["_family"], task["_level"]
+        matrix.setdefault(family, {})[level] = matrix.setdefault(family, {}).get(level, 0) + 1
     return matrix
 
 
@@ -4552,31 +4562,31 @@ def assert_lattice(matrix: dict[str, dict[str, int]]) -> None:
         f"expected families {sorted(EXPECTED_FAMILIES)}, got {sorted(matrix)}"
     )
     for family in EXPECTED_FAMILIES:
-        for tier in TIERS:
-            assert matrix[family].get(tier, 0) == 4, (
-                f"{family}/{tier} expected 4, got {matrix[family].get(tier, 0)}"
+        for level in LEVELS:
+            assert matrix[family].get(level, 0) == 4, (
+                f"{family}/{level} expected 4, got {matrix[family].get(level, 0)}"
             )
 
 
-def quota_report(scenarios: list[dict]) -> list[tuple[str, int | str, str, bool]]:
-    total = len(scenarios)
-    levels = Counter(s["level"] for s in scenarios)
-    difficulties = Counter(s["difficulty"] for s in scenarios)
+def quota_report(tasks: list[dict]) -> list[tuple[str, int | str, str, bool]]:
+    total = len(tasks)
+    categories = Counter(s["category"] for s in tasks)
+    difficulties = Counter(s["difficulty"] for s in tasks)
     backend_counts = Counter(
-        backend for scenario in scenarios for backend in scenario_backends(scenario)
+        backend for task in tasks for backend in task_backends(task)
     )
     widget_pairs = {
-        pair for scenario in scenarios for pair in positive_required_widget_pairs(scenario)
+        pair for task in tasks for pair in positive_required_widget_pairs(task)
     }
-    checks = check_type_counts(scenarios)
-    fingerprints = [novelty_fingerprint(scenario) for scenario in scenarios]
+    checks = check_type_counts(tasks)
+    fingerprints = [novelty_fingerprint(task) for task in tasks]
     unique_fingerprints = len(set(fingerprints))
     report: list[tuple[str, int | str, str, bool]] = []
     report.append((
-        "L2 dashboard-construction",
-        levels["L2"],
+        "dashboard-construction category",
+        categories["dashboard"],
         f">= {int(total * 0.15)}",
-        levels["L2"] >= total * 0.15,
+        categories["dashboard"] >= total * 0.15,
     ))
     for backend in ("equities", "macro", "portfolio", "stark-enterprise"):
         report.append((
@@ -4607,25 +4617,25 @@ def quota_report(scenarios: list[dict]) -> list[tuple[str, int | str, str, bool]
     report.append((
         "novelty fingerprints",
         unique_fingerprints,
-        f"= {len(scenarios)}",
-        unique_fingerprints == len(scenarios),
+        f"= {len(tasks)}",
+        unique_fingerprints == len(tasks),
     ))
     return report
 
 
-def uses_fixed_widget_uuid(scenario: dict) -> bool:
+def uses_fixed_widget_uuid(task: dict) -> bool:
     payload = json.dumps(
         {
-            "oracle": scenario.get("oracle_tool_calls", []),
-            "layouts": scenario.get("success", {}).get("required_layouts", []),
+            "oracle": task.get("oracle_tool_calls", []),
+            "layouts": task.get("success", {}).get("required_layouts", []),
         },
         sort_keys=True,
     )
     return "widget_uuid" in payload
 
 
-def replaces_active_dashboard(scenario: dict) -> bool:
-    for call in scenario.get("oracle_tool_calls", []):
+def replaces_active_dashboard(task: dict) -> bool:
+    for call in task.get("oracle_tool_calls", []):
         args = call.get("args", {})
         if call.get("tool") == "manage_dashboard" and args.get("operation") == "create":
             return True
@@ -4634,21 +4644,21 @@ def replaces_active_dashboard(scenario: dict) -> bool:
     return False
 
 
-def has_fixture(scenario: dict, slug: str) -> bool:
+def has_fixture(task: dict, slug: str) -> bool:
     return any(
         backend_slug(str(backend.get("name"))) == slug
-        for backend in scenario.get("fixtures", {}).get("backends", [])
+        for backend in task.get("fixtures", {}).get("backends", [])
     )
 
 
-def append_fixture(scenario: dict, slug: str) -> None:
-    if has_fixture(scenario, slug):
+def append_fixture(task: dict, slug: str) -> None:
+    if has_fixture(task, slug):
         return
-    scenario.setdefault("fixtures", {}).setdefault("backends", []).append({"name": slug})
+    task.setdefault("fixtures", {}).setdefault("backends", []).append({"name": slug})
 
 
-def append_companion_widget(scenario: dict, origin: str, widget_id: str) -> None:
-    dashboard = scenario.setdefault("initial_state", {}).setdefault(
+def append_companion_widget(task: dict, origin: str, widget_id: str) -> None:
+    dashboard = task.setdefault("initial_state", {}).setdefault(
         "dashboard",
         {"name": "Coverage Board", "activate": True, "tabs": [{"id": "", "name": ""}]},
     )
@@ -4665,7 +4675,7 @@ def append_companion_widget(scenario: dict, origin: str, widget_id: str) -> None
             "layout": {"x": 0, "y": y, "w": 8, "h": 4},
         }
     )
-    scenario.setdefault("success", {}).setdefault("required_widgets", []).append(
+    task.setdefault("success", {}).setdefault("required_widgets", []).append(
         {
             "origin": origin,
             "widget_id": widget_id,
@@ -4677,41 +4687,41 @@ def append_companion_widget(scenario: dict, origin: str, widget_id: str) -> None
     )
 
 
-def add_diversity_companions(scenarios: list[dict]) -> None:
+def add_diversity_companions(tasks: list[dict]) -> None:
     portfolio_widgets = ["holdings_table", "sector_exposure", "risk_metrics", "holdings_table"]
     prompt_t0 = [
-        scenario for scenario in scenarios
-        if scenario["_family"] == "prompts" and scenario["_tier"] == "t0"
+        task for task in tasks
+        if task["_family"] == "prompts" and task["_level"] == "t0"
     ]
-    for scenario, widget_id in zip(sorted(prompt_t0, key=lambda item: item["id"]), portfolio_widgets):
-        append_fixture(scenario, "portfolio")
-        append_companion_widget(scenario, PF, widget_id)
+    for task, widget_id in zip(sorted(prompt_t0, key=lambda item: item["id"]), portfolio_widgets):
+        append_fixture(task, "portfolio")
+        append_companion_widget(task, PF, widget_id)
 
     used_pairs = {
-        pair for scenario in scenarios for pair in positive_required_widget_pairs(scenario)
+        pair for task in tasks for pair in positive_required_widget_pairs(task)
     }
     eligible = [
-        scenario for scenario in scenarios
-        if has_fixture(scenario, "stark-enterprise")
-        and scenario.get("initial_state", {}).get("dashboard")
-        and not uses_fixed_widget_uuid(scenario)
-        and not replaces_active_dashboard(scenario)
+        task for task in tasks
+        if has_fixture(task, "stark-enterprise")
+        and task.get("initial_state", {}).get("dashboard")
+        and not uses_fixed_widget_uuid(task)
+        and not replaces_active_dashboard(task)
     ]
     companion_index = 290
-    for scenario in sorted(eligible, key=lambda item: item["id"]):
+    for task in sorted(eligible, key=lambda item: item["id"]):
         if len({
-            pair for item in scenarios for pair in positive_required_widget_pairs(item)
+            pair for item in tasks for pair in positive_required_widget_pairs(item)
         }) >= 125:
             break
         while (STK, sw(companion_index)) in used_pairs:
             companion_index += 1
         widget_id = sw(companion_index)
-        append_companion_widget(scenario, STK, widget_id)
+        append_companion_widget(task, STK, widget_id)
         used_pairs.add((STK, widget_id))
         companion_index += 1
 
 
-def prompt_pool_report(scenarios: list[dict]) -> tuple[int, Counter, int]:
+def prompt_pool_report(tasks: list[dict]) -> tuple[int, Counter, int]:
     source_lines = Path(__file__).read_text().splitlines()
     prompt_fields = sum(line.lstrip().startswith('"prompt":') for line in source_lines)
     phrased_fields = sum(line.lstrip().startswith('"prompt": phrased(') for line in source_lines)
@@ -4727,7 +4737,7 @@ def prompt_pool_report(scenarios: list[dict]) -> tuple[int, Counter, int]:
     }
     assert not undersized, f"prompt pools need >=3 variants: {undersized}"
     pool_sizes = Counter(PROMPT_POOL_SIZES.values())
-    distinct_prompts = len({scenario["prompt"] for scenario in scenarios})
+    distinct_prompts = len({task["prompt"] for task in tasks})
     return len(PROMPT_POOL_SIZES), pool_sizes, distinct_prompts
 
 
@@ -4744,48 +4754,48 @@ def main() -> None:
     assign_splits(SCENARIOS)
     matrix = build_matrix(SCENARIOS)
     assert_lattice(matrix)
-    for scenario in SCENARIOS:
-        add_novelty(scenario)
+    for task in SCENARIOS:
+        add_novelty(task)
     report = quota_report(SCENARIOS)
     failed = [name for name, _, _, ok in report if not ok]
     assert not failed, "quota failure(s): " + ", ".join(failed)
     prompt_sites, prompt_pool_sizes, distinct_prompts = prompt_pool_report(SCENARIOS)
 
-    for scenario in SCENARIOS:
-        family, tier = scenario.pop("_family"), scenario.pop("_tier")
+    for task in SCENARIOS:
+        family, level = task.pop("_family"), task.pop("_level")
         for directory in OUT_DIRS:
-            (directory / f"{scenario['id']}.json").write_text(
-                json.dumps(scenario, indent=2) + "\n")
+            (directory / f"{task['id']}.json").write_text(
+                json.dumps(task, indent=2) + "\n")
 
     manifest = {
-        "pack_id": "workspace-bench-v1",
+        "suite_id": "workspace-bench-v1",
         "release_id": "workspace-bench-v1",
         "version": "1.0.0",
         "visibility": "public",
         "default_split": "train",
         "description": (
             "Unified WorkspaceBench v1 generated benchmark: 15 MCP-surface families, "
-            "each with a complete t0-t4 structural-difficulty ladder (4 scenarios per "
+            "each with a complete t0-t4 structural-difficulty ladder (4 tasks per "
             "cell, 300 total). Splits are deterministic 180/60/60 train/validation/test "
             "across each family ladder."
         ),
     }
     for directory in OUT_DIRS:
-        (directory / "task_pack.json").write_text(json.dumps(manifest, indent=2) + "\n")
+        (directory / "task_suite.json").write_text(json.dumps(manifest, indent=2) + "\n")
 
-    print(f"Wrote {len(SCENARIOS)} scenarios to {', '.join(str(d) for d in OUT_DIRS)}\n")
+    print(f"Wrote {len(SCENARIOS)} tasks to {', '.join(str(d) for d in OUT_DIRS)}\n")
     print(
         "Prompt phrasing pools: "
         f"{prompt_sites} sites; pool sizes {dict(sorted(prompt_pool_sizes.items()))}"
     )
     print(f"Distinct surface prompt phrasings used: {distinct_prompts}/{len(SCENARIOS)}\n")
-    print(f"{'family':12s}" + "".join(f"{t:>5s}" for t in TIERS) + f"{'total':>7s}")
+    print(f"{'family':12s}" + "".join(f"{t:>5s}" for t in LEVELS) + f"{'total':>7s}")
     for family in sorted(matrix):
         row = matrix[family]
-        print(f"{family:12s}" + "".join(f"{row.get(t, 0):5d}" for t in TIERS)
+        print(f"{family:12s}" + "".join(f"{row.get(t, 0):5d}" for t in LEVELS)
               + f"{sum(row.values()):7d}")
-    totals = {t: sum(row.get(t, 0) for row in matrix.values()) for t in TIERS}
-    print(f"{'TOTAL':12s}" + "".join(f"{totals[t]:5d}" for t in TIERS)
+    totals = {t: sum(row.get(t, 0) for row in matrix.values()) for t in LEVELS}
+    print(f"{'TOTAL':12s}" + "".join(f"{totals[t]:5d}" for t in LEVELS)
           + f"{sum(totals.values()):7d}")
     print("\nQuota report")
     for name, observed, expected, ok in report:

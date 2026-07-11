@@ -1,0 +1,148 @@
+{
+  "id": "gen_t4_nav_hub_rates_hub",
+  "title": "Build Out Rates Hub",
+  "capability": "workspace-navigation",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-navigate",
+    "level-t4",
+    "rename",
+    "tabs",
+    "navigation",
+    "combo"
+  ],
+  "prompt": "Rename the active dashboard to Rates Hub, add a new tab named Curve, put the Yield Curve widget on it, and add a note on the same tab mentioning curve and rates hub.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "macro"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Starter Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Rates Hub",
+    "required_tabs": [
+      "overview",
+      "curve"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve",
+        "data_args": {},
+        "tab_id": "curve",
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "curve",
+          "rates hub"
+        ],
+        "tab_id": "curve"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "update",
+        "name": "Rates Hub"
+      }
+    },
+    {
+      "tool": "manage_navigation_bar",
+      "args": {
+        "operation": "add_tabs",
+        "tabs": [
+          {
+            "name": "Curve"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "curve"
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Macro"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Hub Note",
+        "data": "Rates hub: curve tab holds the term-structure view."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "dashboard",
+  "level": "t4",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 9
+  },
+  "split": "test",
+  "novelty": "Unique navigate/t4 exercise using add_generative_widget, create_widget, get_widget_schema, list_available_widgets, manage_dashboard, manage_navigation_bar, navigate_workspace with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tab, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on macro; artifact widgets:Bench Macro/yield_curve@curve; tabs:curve,overview; generated:note@curve:curve,rates hub."
+}

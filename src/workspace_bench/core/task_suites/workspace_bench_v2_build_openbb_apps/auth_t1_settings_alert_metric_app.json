@@ -1,0 +1,121 @@
+{
+  "id": "auth_t1_settings_alert_metric_app",
+  "title": "Ship the configured Open Alerts app",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-settings",
+    "level-t1",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "settings"
+  ],
+  "prompt": "Check the workspace, then connect \"Surveillance Data\" at http://localhost:7807. widgets.json serves one configured widget \u2014 `alert_metric`: name \"Open Alerts\", description \"Open alert count.\", endpoint /alert-count, type metric, sized w=5 h=4 on the grid, category \"Surveillance\", staleTime 900000. apps.json ships an app named \"Alert Settings\" (description \"Cached alert posture.\") with one tab `alerts` named \"Alerts\" placing `alert_metric` at x=0 y=0 w=6 h=4. Publish both in one manage_backends add.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Surveillance Data",
+        "widget_id": "alert_metric",
+        "expect": {
+          "type": "metric",
+          "endpoint": "/alert-count",
+          "gridData.w": 5,
+          "gridData.h": 4,
+          "category": "Surveillance",
+          "staleTime": 900000
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Surveillance Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Alert Settings",
+        "tabs_include": [
+          "alerts"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "alerts",
+            "widget_id": "alert_metric"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "alert_metric": {
+            "name": "Open Alerts",
+            "description": "Open alert count.",
+            "endpoint": "/alert-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "staleTime": 900000,
+            "category": "Surveillance"
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Alert Settings",
+            "description": "Cached alert posture.",
+            "tabs": {
+              "alerts": {
+                "id": "alerts",
+                "name": "Alerts",
+                "layout": [
+                  {
+                    "i": "alert_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 6,
+                    "h": 4
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t1",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique settings/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric; appdefs:Surveillance Data/Alert Settings."
+}

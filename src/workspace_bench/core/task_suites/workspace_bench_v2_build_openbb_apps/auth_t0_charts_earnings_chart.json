@@ -1,0 +1,92 @@
+{
+  "id": "auth_t0_charts_earnings_chart",
+  "title": "Build the EPS History chart definition",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-charts",
+    "level-t0",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "charts"
+  ],
+  "prompt": "Connect a new custom backend named \"Earnings Prep Data\" at http://localhost:7805. Its widgets.json serves exactly one chart widget \u2014 `earnings_chart`: name \"EPS History\", description \"Plotly EPS beat/miss history.\", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, staleTime 900000, raw true, params required: symbol \u2014 a dropdown (type endpoint), labeled \"Symbol\", options fetched from /symbols, default \"AAPL\". Register it with manage_backends.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "earnings_chart",
+        "expect": {
+          "type": "chart",
+          "endpoint": "/eps-history",
+          "gridData.w": 20,
+          "gridData.h": 9,
+          "staleTime": 900000,
+          "raw": true
+        },
+        "params_include": [
+          {
+            "paramName": "symbol",
+            "type": "endpoint",
+            "optionsEndpoint": "/symbols"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Earnings Prep Data",
+        "url": "http://localhost:7805",
+        "widgets_json": {
+          "earnings_chart": {
+            "name": "EPS History",
+            "description": "Plotly EPS beat/miss history.",
+            "endpoint": "/eps-history",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "raw": true,
+            "staleTime": 900000
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t0",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "train",
+  "novelty": "Unique charts/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart."
+}

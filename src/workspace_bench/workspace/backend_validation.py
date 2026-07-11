@@ -527,7 +527,7 @@ def validate_apps_json(
     Returns (errors, warnings, normalized). Mirrors backendTemplateSchema: schema
     violations REJECT; dangling widget references, geometry problems, and group
     wiring problems WARN (the real product adds the app and toasts a warning; the
-    grader is what fails the scenario).
+    grader is what fails the task).
     """
 
     errors: list[str] = []

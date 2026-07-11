@@ -1,0 +1,281 @@
+{
+  "id": "auth_t4_params_earnings_ship",
+  "title": "Ship, open, and configure the Earnings Symbol Live parameter app",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-params",
+    "level-t4",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "params",
+    "orchestration"
+  ],
+  "prompt": "Build, publish, open, configure, document. \"Earnings Prep Data\" (http://localhost:7805) serves `estimate_revisions`: name \"Estimate Revisions\", description \"Street estimate revisions by quarter.\", endpoint /estimate-revisions, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: symbol \u2014 a dropdown (type endpoint), labeled \"Symbol\", options fetched from /symbols, default \"AAPL\", table columns required (field \u2192 header (type, extras)): quarter \u2192 header \"Quarter\" (text); eps_estimate \u2192 header \"EPS Est\" (number); revenue_estimate_b \u2192 header \"Revenue Est ($B)\" (number); `earnings_chart`: name \"EPS History\", description \"Plotly EPS beat/miss history.\", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, staleTime 900000, raw true, params required: symbol \u2014 a dropdown (type endpoint), labeled \"Symbol\", options fetched from /symbols, default \"AAPL\"; `surprise_metric`: name \"Avg Surprise\", description \"Average EPS surprise last 4 quarters.\", endpoint /avg-surprise, type metric, sized w=6 h=4 on the grid, staleTime 900000. Desk convention: every widget this backend serves carries staleTime 900000 and ships app \"Earnings Symbol Live\", description \"Preset symbol revisions and EPS history.\", tab `earnings` named \"Earnings\" places: `estimate_revisions` at x=0 y=0 w=20 h=9 preset with params {\"symbol\": \"NVDA\"}, tab `posture` named \"Posture\" places: `earnings_chart` at x=0 y=0 w=12 h=6. Open it as \"Earnings Symbol Live Board\" via manage_apps, set symbol to \"MSFT\" on the opened `estimate_revisions` widget, then add a note \"Earnings Symbol Live\" saying: \"Earnings Symbol Live is live from Earnings Prep Data: symbol sync ready.\"",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "add_generative_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "estimate_revisions",
+        "expect": {
+          "type": "table",
+          "endpoint": "/estimate-revisions",
+          "gridData.w": 20,
+          "gridData.h": 9,
+          "staleTime": 900000
+        },
+        "params_include": [
+          {
+            "paramName": "symbol",
+            "type": "endpoint",
+            "optionsEndpoint": "/symbols"
+          }
+        ],
+        "columns_include": [
+          {
+            "field": "quarter",
+            "headerName": "Quarter",
+            "cellDataType": "text"
+          },
+          {
+            "field": "eps_estimate",
+            "headerName": "EPS Est",
+            "cellDataType": "number"
+          },
+          {
+            "field": "revenue_estimate_b",
+            "headerName": "Revenue Est ($B)",
+            "cellDataType": "number"
+          }
+        ]
+      },
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "earnings_chart",
+        "expect": {
+          "type": "chart",
+          "endpoint": "/eps-history"
+        }
+      },
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "surprise_metric",
+        "expect": {
+          "type": "metric",
+          "endpoint": "/avg-surprise"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Earnings Prep Data",
+        "tab_count": 2,
+        "layout_refs_valid": true,
+        "name_contains": "Earnings Symbol Live"
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Earnings Prep Data",
+        "widget_id": "estimate_revisions",
+        "data_args": {
+          "symbol": "MSFT"
+        },
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Earnings Symbol Live",
+          "symbol sync"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Earnings Prep Data",
+        "url": "http://localhost:7805",
+        "widgets_json": {
+          "estimate_revisions": {
+            "name": "Estimate Revisions",
+            "description": "Street estimate revisions by quarter.",
+            "endpoint": "/estimate-revisions",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "quarter",
+                    "headerName": "Quarter",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "eps_estimate",
+                    "headerName": "EPS Est",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "revenue_estimate_b",
+                    "headerName": "Revenue Est ($B)",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            },
+            "staleTime": 900000
+          },
+          "earnings_chart": {
+            "name": "EPS History",
+            "description": "Plotly EPS beat/miss history.",
+            "endpoint": "/eps-history",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "raw": true,
+            "staleTime": 900000
+          },
+          "surprise_metric": {
+            "name": "Avg Surprise",
+            "description": "Average EPS surprise last 4 quarters.",
+            "endpoint": "/avg-surprise",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            },
+            "staleTime": 900000
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Earnings Symbol Live",
+            "description": "Preset symbol revisions and EPS history.",
+            "tabs": {
+              "earnings": {
+                "id": "earnings",
+                "name": "Earnings",
+                "layout": [
+                  {
+                    "i": "estimate_revisions",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9,
+                    "state": {
+                      "params": {
+                        "symbol": "NVDA"
+                      }
+                    }
+                  }
+                ]
+              },
+              "posture": {
+                "id": "posture",
+                "name": "Posture",
+                "layout": [
+                  {
+                    "i": "earnings_chart",
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Earnings Symbol Live",
+        "dashboard_name": "Earnings Symbol Live Board",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "estimate_revisions",
+        "data_args": {
+          "symbol": "MSFT"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Earnings Symbol Live",
+        "data": "Earnings Symbol Live is live from Earnings Prep Data: symbol sync ready."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t4",
+  "capability": "widget-building",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique params/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart,Earnings Prep Data/estimate_revisions,Earnings Prep Data/surprise_metric; appdefs:Earnings Prep Data/Earnings Symbol Live; widgets:Earnings Prep Data/estimate_revisions@*; generated:note@*:Earnings Symbol Live,symbol sync."
+}

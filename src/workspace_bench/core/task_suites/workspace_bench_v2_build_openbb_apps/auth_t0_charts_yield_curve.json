@@ -1,0 +1,76 @@
+{
+  "id": "auth_t0_charts_yield_curve",
+  "title": "Build the Yield Curve chart definition",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-charts",
+    "level-t0",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "charts"
+  ],
+  "prompt": "Connect a new custom backend named \"Rates Watch Data\" at http://localhost:7803. Its widgets.json serves exactly one chart widget \u2014 `yield_curve`: name \"Yield Curve\", description \"Plotly treasury yield curve snapshot.\", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, staleTime 900000, raw true. Register it with manage_backends.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Rates Watch Data",
+        "widget_id": "yield_curve",
+        "expect": {
+          "type": "chart",
+          "endpoint": "/yield-curve",
+          "gridData.w": 20,
+          "gridData.h": 9,
+          "staleTime": 900000,
+          "raw": true
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Rates Watch Data",
+        "url": "http://localhost:7803",
+        "widgets_json": {
+          "yield_curve": {
+            "name": "Yield Curve",
+            "description": "Plotly treasury yield curve snapshot.",
+            "endpoint": "/yield-curve",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "raw": true,
+            "staleTime": 900000
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t0",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "validation",
+  "novelty": "Unique charts/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/yield_curve."
+}

@@ -1,0 +1,98 @@
+{
+  "id": "auth_t2_charts_venue_slippage_chart",
+  "title": "Compose the Venue Slippage Chart chart widget",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-charts",
+    "level-t2",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "charts",
+    "composed"
+  ],
+  "prompt": "Build the widgets.json for \"Execution Desk Data\" at http://localhost:7806: `venue_slippage_chart`: name \"Venue Slippage Chart\", description \"Plotly slippage chart by venue.\", endpoint /venue-slippage-chart, type chart, sized w=20 h=9 on the grid, category \"Execution\", raw true, params required: venue \u2014 a text input (type text), labeled \"Venue\", default \"ARCA\", described \"Venue code to chart.\"; it auto-refreshes every 30 seconds. Time-based config converts to milliseconds: \"cache results for N minutes\" means staleTime N*60000; \"auto-refresh every N seconds\" means refetchInterval N*1000.. Then add the backend.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "venue_slippage_chart",
+        "expect": {
+          "type": "chart",
+          "endpoint": "/venue-slippage-chart",
+          "gridData.w": 20,
+          "gridData.h": 9,
+          "category": "Execution",
+          "raw": true,
+          "refetchInterval": 30000
+        },
+        "params_include": [
+          {
+            "paramName": "venue",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "venue_slippage_chart": {
+            "name": "Venue Slippage Chart",
+            "description": "Plotly slippage chart by venue.",
+            "endpoint": "/venue-slippage-chart",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "venue",
+                "type": "text",
+                "label": "Venue",
+                "value": "ARCA",
+                "description": "Venue code to chart."
+              }
+            ],
+            "raw": true,
+            "refetchInterval": 30000,
+            "category": "Execution"
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t2",
+  "capability": "widget-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "test",
+  "novelty": "Unique charts/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/venue_slippage_chart."
+}

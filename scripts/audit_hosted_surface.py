@@ -2,7 +2,7 @@
 
 Connects to the hosted MCP endpoint with a bearer token, lists tools,
 prompts, and resources, and diffs them against the surface that
-workspace-bench scenarios assume. No tool calls are made; nothing is
+workspace-bench tasks assume. No tool calls are made; nothing is
 mutated.
 
 Usage:
@@ -134,7 +134,7 @@ def report(url: str, surface: dict[str, object]) -> int:
     if failed:
         print("FAIL: hosted surface is missing expected entries.", file=sys.stderr)
         return 1
-    print("OK: hosted surface covers everything the scenarios assume.")
+    print("OK: hosted surface covers everything the tasks assume.")
     return 0
 
 

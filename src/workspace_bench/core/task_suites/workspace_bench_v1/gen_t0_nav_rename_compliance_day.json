@@ -1,0 +1,95 @@
+{
+  "id": "gen_t0_nav_rename_compliance_day",
+  "title": "Rename To Daily Compliance Control",
+  "capability": "workspace-navigation",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-navigate",
+    "level-t0",
+    "rename",
+    "navigation"
+  ],
+  "prompt": "Rename the active dashboard to Daily Compliance Control.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Alert Triage",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "strategy_health_monitor_themes_factor_tilts",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Daily Compliance Control",
+    "required_tool_calls": [
+      {
+        "tool": "manage_dashboard",
+        "args_contains": {
+          "operation": "update",
+          "name": "Daily Compliance Control"
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "strategy_health_monitor_themes_factor_tilts",
+        "data_args": {},
+        "tab_id": "overview",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "update",
+        "name": "Daily Compliance Control"
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "single-widget",
+  "level": "t0",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "train",
+  "novelty": "Unique navigate/t0 exercise using manage_dashboard with checks dashboard_name, layout_out_of_grid, missing_tool_call, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/strategy_health_monitor_themes_factor_tilts@overview."
+}

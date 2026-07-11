@@ -1,0 +1,108 @@
+{
+  "id": "auth_t0_forms_access_review_form",
+  "title": "Build the Access Review Form form widget",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-forms",
+    "level-t0",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "forms"
+  ],
+  "prompt": "Register \"Surveillance Data\" (http://localhost:7807) with one widgets.json entry for the form: `access_review_form`: name \"Access Review Form\", description \"Capture an access review decision.\", endpoint /access-review, type markdown, sized w=12 h=8 on the grid, category \"Workflow Forms\", params required: review \u2014 a form submitting POST to /access-review-submit with inputs [user_name \u2014 a text input (type text), labeled \"User\", default \"analyst1\"; approved \u2014 a boolean toggle (type boolean), labeled \"Approved\", default false; save \u2014 a button (type button), labeled \"Save\"] (that bracket is the complete list of the form's inputParams).",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Surveillance Data",
+        "widget_id": "access_review_form",
+        "expect": {
+          "type": "markdown",
+          "endpoint": "/access-review",
+          "gridData.w": 12,
+          "gridData.h": 8,
+          "category": "Workflow Forms"
+        },
+        "params_include": [
+          {
+            "paramName": "review",
+            "type": "form"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "access_review_form": {
+            "name": "Access Review Form",
+            "description": "Capture an access review decision.",
+            "endpoint": "/access-review",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "review",
+                "type": "form",
+                "label": "Access Review",
+                "endpoint": "/access-review-submit",
+                "method": "POST",
+                "inputParams": [
+                  {
+                    "paramName": "user_name",
+                    "type": "text",
+                    "label": "User",
+                    "value": "analyst1"
+                  },
+                  {
+                    "paramName": "approved",
+                    "type": "boolean",
+                    "label": "Approved",
+                    "value": false
+                  },
+                  {
+                    "paramName": "save",
+                    "type": "button",
+                    "label": "Save"
+                  }
+                ]
+              }
+            ],
+            "category": "Workflow Forms"
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t0",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "train",
+  "novelty": "Unique forms/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/access_review_form."
+}

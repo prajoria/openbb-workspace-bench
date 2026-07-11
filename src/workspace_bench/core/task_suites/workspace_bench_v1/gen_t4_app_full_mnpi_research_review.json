@@ -1,0 +1,139 @@
+{
+  "id": "gen_t4_app_full_mnpi_research_review",
+  "title": "Instantiate, Extend, And Brief MNPI & Research Review",
+  "capability": "app-instantiation",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-apps",
+    "level-t4",
+    "apps",
+    "stark",
+    "widget-creation",
+    "note"
+  ],
+  "prompt": "From the Bench Stark Enterprise backend, instantiate the MNPI & Research Review app as a new dashboard named MNPI Control Desk. Then add the Reviewer Comments widget (id mnpi_research_review_research_reviewer_comments) to the Research tab, and add a note on the same tab mentioning reviewer comments and sign off.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "MNPI Control Desk",
+    "required_tabs": [
+      "overview",
+      "evidence",
+      "meetings",
+      "research"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "mnpi_research_review_evidence_evidence_and_sign_off_history",
+        "tab_id": "evidence",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "mnpi_research_review_meetings_company_meeting_logs",
+        "tab_id": "meetings",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "mnpi_research_review_research_reviewer_comments",
+        "tab_id": "research",
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "reviewer comments",
+          "sign off"
+        ],
+        "tab_id": "research"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "MNPI & Research Review",
+        "dashboard_name": "MNPI Control Desk",
+        "activate": true
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "research"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "mnpi_research_review_research_reviewer_comments"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "mnpi_research_review_research_reviewer_comments",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Brief Note",
+        "data": "Reviewer comments tracked; evidence sign off pending."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "platform",
+  "level": "t4",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "test",
+  "novelty": "Unique apps/t4 exercise using add_generative_widget, create_widget, get_widget_schema, manage_apps, manage_backends, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_tab, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact apps:MNPI & Research Review; widgets:Bench Stark Enterprise/mnpi_research_review_evidence_evidence_and_sign_off_history@evidence,Bench Stark Enterprise/mnpi_research_review_meetings_company_meeting_logs@meetings,Bench Stark Enterprise/mnpi_research_review_research_reviewer_comments@research; tabs:evidence,meetings,overview,research; generated:note@research:reviewer comments,sign off."
+}

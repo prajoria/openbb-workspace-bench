@@ -1,0 +1,171 @@
+{
+  "id": "auth_t1_params_trial_catalysts_app",
+  "title": "Ship Trial Catalysts as the Catalyst Filter app",
+  "workflow": "healthcare-catalyst-review",
+  "subdomain": "healthcare",
+  "tags": [
+    "family-params",
+    "level-t1",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "params"
+  ],
+  "prompt": "Check the workspace, then connect \"Healthcare Research Data\" at http://localhost:7808. widgets.json serves one widget - `trial_catalysts`: name \"Trial Catalysts\", description \"Upcoming clinical trial readouts.\", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, params required: ticker \u2014 a dropdown (type endpoint), labeled \"Ticker\", options fetched from /tickers, default \"PFE\", table columns required (field \u2192 header (type, extras)): ticker \u2192 header \"Ticker\" (text); phase \u2192 header \"Phase\" (text); readout_date \u2192 header \"Readout\" (dateString). apps.json ships an app named \"Catalyst Filter\" (description \"Ticker-filtered trial catalysts.\") with one tab `catalysts` named \"Catalysts\" placing `trial_catalysts` at x=0 y=0 w=20 h=9. Publish both in one manage_backends add.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Healthcare Research Data",
+        "widget_id": "trial_catalysts",
+        "expect": {
+          "type": "table",
+          "endpoint": "/trial-catalysts",
+          "gridData.w": 20,
+          "gridData.h": 9
+        },
+        "params_include": [
+          {
+            "paramName": "ticker",
+            "type": "endpoint",
+            "optionsEndpoint": "/tickers"
+          }
+        ],
+        "columns_include": [
+          {
+            "field": "ticker",
+            "headerName": "Ticker",
+            "cellDataType": "text"
+          },
+          {
+            "field": "phase",
+            "headerName": "Phase",
+            "cellDataType": "text"
+          },
+          {
+            "field": "readout_date",
+            "headerName": "Readout",
+            "cellDataType": "dateString"
+          }
+        ]
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Healthcare Research Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Catalyst Filter",
+        "tabs_include": [
+          "catalysts"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "catalysts",
+            "widget_id": "trial_catalysts"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Healthcare Research Data",
+        "url": "http://localhost:7808",
+        "widgets_json": {
+          "trial_catalysts": {
+            "name": "Trial Catalysts",
+            "description": "Upcoming clinical trial readouts.",
+            "endpoint": "/trial-catalysts",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "ticker",
+                "type": "endpoint",
+                "label": "Ticker",
+                "value": "PFE",
+                "optionsEndpoint": "/tickers"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "ticker",
+                    "headerName": "Ticker",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "phase",
+                    "headerName": "Phase",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "readout_date",
+                    "headerName": "Readout",
+                    "cellDataType": "dateString"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Catalyst Filter",
+            "description": "Ticker-filtered trial catalysts.",
+            "tabs": {
+              "catalysts": {
+                "id": "catalysts",
+                "name": "Catalysts",
+                "layout": [
+                  {
+                    "i": "trial_catalysts",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t1",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "validation",
+  "novelty": "Unique params/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/trial_catalysts; appdefs:Healthcare Research Data/Catalyst Filter."
+}

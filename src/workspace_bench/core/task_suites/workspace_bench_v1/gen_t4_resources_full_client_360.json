@@ -1,0 +1,131 @@
+{
+  "id": "gen_t4_resources_full_client_360",
+  "title": "Index-Guided App Extension: Client 360",
+  "capability": "dashboard-construction",
+  "workflow": "client-meeting-prep",
+  "subdomain": "client-ir",
+  "tags": [
+    "family-resources",
+    "level-t4",
+    "resources",
+    "apps",
+    "widget-creation"
+  ],
+  "prompt": "After reading the app-builder index resource openbb://workspace/app-builder/index, instantiate client-360 as Client Resource Command, navigate to flows, add widget client_360_flows_pipeline_by_stage, and add a note mentioning pipeline and resource.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "read_workspace_resource",
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Client Resource Command",
+    "required_resource_reads": [
+      {
+        "uri": "openbb://workspace/app-builder/index",
+        "data_contains": [
+          "client-360"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_flows_pipeline_by_stage",
+        "tab_id": "flows"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "pipeline",
+          "resource"
+        ],
+        "tab_id": "flows"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "read_workspace_resource",
+      "args": {
+        "uri": "openbb://workspace/app-builder/index"
+      }
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "template_id": "client-360",
+        "dashboard_name": "Client Resource Command",
+        "activate": true
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "flows"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_flows_pipeline_by_stage"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_flows_pipeline_by_stage"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Resource Extension Note",
+        "data": "pipeline added from resource guidance."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "dashboard",
+  "level": "t4",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 9
+  },
+  "split": "train",
+  "novelty": "Unique resources/t4 exercise using add_generative_widget, create_widget, get_widget_schema, manage_apps, manage_backends, navigate_workspace, read_workspace_resource with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_resource_read, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact resource:openbb://workspace/app-builder/index; apps:client-360; widgets:Bench Stark Enterprise/client_360_flows_pipeline_by_stage@flows; generated:note@flows:pipeline,resource."
+}

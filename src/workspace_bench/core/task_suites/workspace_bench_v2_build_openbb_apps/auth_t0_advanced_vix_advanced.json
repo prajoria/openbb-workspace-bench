@@ -1,0 +1,78 @@
+{
+  "id": "auth_t0_advanced_vix_advanced",
+  "title": "Build the VIX Advanced Chart advanced widget",
+  "workflow": "risk-review",
+  "subdomain": "volatility",
+  "tags": [
+    "family-advanced",
+    "level-t0",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "advanced"
+  ],
+  "prompt": "Add \"Vol Desk Data\" at http://localhost:7801 as a custom backend serving this single widget definition - `vix_advanced`: name \"VIX Advanced Chart\", description \"TradingView advanced charting for VIX futures.\", endpoint /udf, type advanced_charting, sized w=20 h=20 on the grid, data.defaultSymbol \"VIX\", data.updateFrequency 60000.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Vol Desk Data",
+        "widget_id": "vix_advanced",
+        "expect": {
+          "type": "advanced_charting",
+          "endpoint": "/udf",
+          "gridData.w": 20,
+          "gridData.h": 20,
+          "data.defaultSymbol": "VIX",
+          "data.updateFrequency": 60000
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Vol Desk Data",
+        "url": "http://localhost:7801",
+        "widgets_json": {
+          "vix_advanced": {
+            "name": "VIX Advanced Chart",
+            "description": "TradingView advanced charting for VIX futures.",
+            "endpoint": "/udf",
+            "type": "advanced_charting",
+            "gridData": {
+              "w": 20,
+              "h": 20
+            },
+            "data": {
+              "defaultSymbol": "VIX",
+              "updateFrequency": 60000
+            }
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t0",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "validation",
+  "novelty": "Unique advanced/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_advanced."
+}

@@ -1,0 +1,138 @@
+{
+  "id": "auth_t1_types_evidence_files_app",
+  "title": "Ship Evidence Files as the Evidence Browser app",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-types",
+    "level-t1",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "types"
+  ],
+  "prompt": "Build both files for \"Surveillance Data\" at http://localhost:7807: widgets.json with `evidence_files`: name \"Evidence Files\", description \"Browse case evidence documents.\", endpoint /evidence-files, type multi_file_viewer, sized w=20 h=14 on the grid, params required: file \u2014 a dropdown (type endpoint), labeled \"File\", options fetched from /evidence-file-options, multi-select, default [], roles [\"fileSelector\"], apps.json with an app named \"Evidence Browser\" (description \"Case evidence files.\") with a single tab `evidence` named \"Evidence\" that places `evidence_files` at x=0 y=0 w=20 h=14. Then add the backend.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Surveillance Data",
+        "widget_id": "evidence_files",
+        "expect": {
+          "type": "multi_file_viewer",
+          "endpoint": "/evidence-files",
+          "gridData.w": 20,
+          "gridData.h": 14
+        },
+        "params_include": [
+          {
+            "paramName": "file",
+            "type": "endpoint",
+            "optionsEndpoint": "/evidence-file-options",
+            "multiSelect": true
+          }
+        ]
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Surveillance Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Evidence Browser",
+        "tabs_include": [
+          "evidence"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "evidence",
+            "widget_id": "evidence_files"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "evidence_files": {
+            "name": "Evidence Files",
+            "description": "Browse case evidence documents.",
+            "endpoint": "/evidence-files",
+            "type": "multi_file_viewer",
+            "gridData": {
+              "w": 20,
+              "h": 14
+            },
+            "params": [
+              {
+                "paramName": "file",
+                "type": "endpoint",
+                "label": "File",
+                "optionsEndpoint": "/evidence-file-options",
+                "roles": [
+                  "fileSelector"
+                ],
+                "multiSelect": true,
+                "value": []
+              }
+            ]
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Evidence Browser",
+            "description": "Case evidence files.",
+            "tabs": {
+              "evidence": {
+                "id": "evidence",
+                "name": "Evidence",
+                "layout": [
+                  {
+                    "i": "evidence_files",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 14
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t1",
+  "capability": "widget-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "validation",
+  "novelty": "Unique types/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/evidence_files; appdefs:Surveillance Data/Evidence Browser."
+}

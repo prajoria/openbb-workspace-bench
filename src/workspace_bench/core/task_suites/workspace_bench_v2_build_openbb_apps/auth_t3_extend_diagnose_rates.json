@@ -1,0 +1,249 @@
+{
+  "id": "auth_t3_extend_diagnose_rates",
+  "title": "Diagnose and extend Rates Watch Data",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-extend",
+    "level-t3",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "refresh",
+    "extend",
+    "diagnosis"
+  ],
+  "prompt": "The connected backend \"Rates Watch Data\" shows only a validation badge in the snapshot, with a count of affected entries. Scan the served widgets against these desk conventions: Rates conventions: Auction Calendar keeps Date as the date header; Rates Commentary series is an endpoint param from /series-options; single-value spread metric tiles use compact width 6. Fix every flagged entry, preserve healthy entries, and ship the queued addition in the same widgets_json refresh: `yield_curve`: name \"Yield Curve\", description \"Plotly treasury yield curve snapshot.\", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, raw true.",
+  "fixtures": {},
+  "initial_state": {
+    "custom_backends": [
+      {
+        "name": "Rates Watch Data",
+        "url": "http://localhost:7803",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "auction_calendar": {
+            "name": "Auction Calendar",
+            "description": "Upcoming treasury auctions.",
+            "endpoint": "/auction-calendar",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "date",
+                    "cellDataType": "dateString"
+                  },
+                  {
+                    "field": "security",
+                    "headerName": "Security",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "size_bn",
+                    "headerName": "Size ($B)",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            }
+          },
+          "rates_commentary": {
+            "name": "Rates Commentary",
+            "description": "Desk commentary on the rates day.",
+            "endpoint": "/rates-commentary",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "series",
+                "type": "dropdownz",
+                "label": "Series",
+                "value": "DGS10",
+                "optionsEndpoint": "/series-options"
+              }
+            ]
+          },
+          "curve_spread_metric": {
+            "name": "2s10s Spread",
+            "description": "Current 2s10s spread in bps.",
+            "endpoint": "/curve-spread",
+            "type": "metric",
+            "gridData": {
+              "w": 99,
+              "h": 4
+            }
+          }
+        },
+        "warnings": [
+          "workspace validation failed: 3 entries in the backend's served payload need fixing"
+        ]
+      }
+    ]
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Rates Watch Data",
+        "widget_id": "auction_calendar",
+        "expect": {
+          "type": "table",
+          "endpoint": "/auction-calendar"
+        },
+        "columns_include": [
+          {
+            "field": "date",
+            "headerName": "Date"
+          }
+        ]
+      },
+      {
+        "backend_name": "Rates Watch Data",
+        "widget_id": "rates_commentary",
+        "expect": {
+          "type": "markdown",
+          "endpoint": "/rates-commentary"
+        },
+        "params_include": [
+          {
+            "paramName": "series",
+            "type": "endpoint",
+            "optionsEndpoint": "/series-options"
+          }
+        ]
+      },
+      {
+        "backend_name": "Rates Watch Data",
+        "widget_id": "curve_spread_metric",
+        "expect": {
+          "type": "metric",
+          "endpoint": "/curve-spread",
+          "gridData.w": 6
+        }
+      },
+      {
+        "backend_name": "Rates Watch Data",
+        "widget_id": "yield_curve",
+        "expect": {
+          "type": "chart",
+          "endpoint": "/yield-curve",
+          "gridData.w": 20,
+          "gridData.h": 9,
+          "raw": true
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "auction_calendar": {
+            "name": "Auction Calendar",
+            "description": "Upcoming treasury auctions.",
+            "endpoint": "/auction-calendar",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "date",
+                    "headerName": "Date",
+                    "cellDataType": "dateString"
+                  },
+                  {
+                    "field": "security",
+                    "headerName": "Security",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "size_bn",
+                    "headerName": "Size ($B)",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            }
+          },
+          "rates_commentary": {
+            "name": "Rates Commentary",
+            "description": "Desk commentary on the rates day.",
+            "endpoint": "/rates-commentary",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "series",
+                "type": "endpoint",
+                "label": "Series",
+                "value": "DGS10",
+                "optionsEndpoint": "/series-options"
+              }
+            ]
+          },
+          "curve_spread_metric": {
+            "name": "2s10s Spread",
+            "description": "Current 2s10s spread in bps.",
+            "endpoint": "/curve-spread",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            }
+          },
+          "yield_curve": {
+            "name": "Yield Curve",
+            "description": "Plotly treasury yield curve snapshot.",
+            "endpoint": "/yield-curve",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "raw": true
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "repair",
+  "level": "t3",
+  "capability": "app-building",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "validation",
+  "novelty": "Unique extend/t3 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/auction_calendar,Rates Watch Data/curve_spread_metric,Rates Watch Data/rates_commentary,Rates Watch Data/yield_curve."
+}

@@ -46,7 +46,7 @@ def main() -> int:
         content = call_openai(prompt)
         write_debug_file(run_dir / "openai_response.txt", content)
         calls = extract_tool_calls(content)
-        calls = normalize_tool_calls(calls, allowed_tools=task["scenario"]["allowed_tools"])
+        calls = normalize_tool_calls(calls, allowed_tools=task["task"]["allowed_tools"])
     except Exception as error:  # noqa: BLE001 - adapter should fail visibly.
         print(f"OpenAI agent failed: {error}", file=sys.stderr)
         return 1

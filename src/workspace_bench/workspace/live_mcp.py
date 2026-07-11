@@ -15,8 +15,8 @@ from typing import Any
 from uuid import UUID
 
 from workspace_bench.agents import BenchAgent, build_agent
-from workspace_bench.core.graders import grade_scenario
-from workspace_bench.core.models import JsonDict, RunResult, Scenario, ToolCall, ToolTraceEvent
+from workspace_bench.core.graders import grade_task
+from workspace_bench.core.models import JsonDict, RunResult, Task, ToolCall, ToolTraceEvent
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
@@ -59,7 +59,7 @@ EXPECTED_MCP_RESOURCES = {"openbb://workspace/app-builder/index"}
 
 @dataclass(frozen=True)
 class LiveMcpRunResult:
-    """Result for one scenario run through a live Workspace MCP sidecar."""
+    """Result for one task run through a live Workspace MCP sidecar."""
 
     run_result: RunResult
     mcp_tools: tuple[str, ...]
@@ -123,13 +123,13 @@ def bridge_command_to_simulator_call(command: JsonDict) -> tuple[str, JsonDict]:
 
 async def run_workspace_mcp_smoke(
     *,
-    scenario: Scenario,
+    task: Task,
     base_url: str = "http://127.0.0.1:8787",
     agent: BenchAgent | str = "oracle",
     replace_existing_session: bool = False,
     check_surface: bool = False,
 ) -> LiveMcpRunResult:
-    """Run a scenario through a live Workspace MCP sidecar."""
+    """Run a task through a live Workspace MCP sidecar."""
 
     deps = _load_live_dependencies()
     normalized_base_url = base_url.rstrip("/")
@@ -142,7 +142,7 @@ async def run_workspace_mcp_smoke(
 
     resolved_agent = build_agent(agent) if isinstance(agent, str) else agent
     workspace = SimulatedWorkspace()
-    workspace.reset(backends=scenario.fixtures, initial_state=scenario.initial_state)
+    workspace.reset(backends=task.fixtures, initial_state=task.initial_state)
     trace: list[ToolTraceEvent] = []
     mcp_tools: tuple[str, ...] = ()
     mcp_prompts: tuple[str, ...] = ()
@@ -172,7 +172,7 @@ async def run_workspace_mcp_smoke(
                         prompts=mcp_prompts,
                         resources=mcp_resources,
                     )
-                for index, call in enumerate(resolved_agent.tool_calls(scenario), start=1):
+                for index, call in enumerate(resolved_agent.tool_calls(task), start=1):
                     payload = await _call_mcp_tool(session, call)
                     trace.append(
                         ToolTraceEvent(
@@ -185,10 +185,10 @@ async def run_workspace_mcp_smoke(
 
     health_after = await _health(deps.httpx, normalized_base_url)
     final_snapshot = workspace.snapshot()
-    grade = grade_scenario(scenario, final_snapshot, tuple(trace))
+    grade = grade_task(task, final_snapshot, tuple(trace))
     return LiveMcpRunResult(
         run_result=RunResult(
-            scenario=scenario,
+            task=task,
             grade=grade,
             trace=tuple(trace),
             final_snapshot=final_snapshot,

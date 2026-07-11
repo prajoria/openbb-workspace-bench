@@ -215,7 +215,7 @@ def main() -> int:
         content = call_ollama(prompt)
         write_debug_file(run_dir / "ollama_response.txt", content)
         calls = extract_tool_calls(content)
-        calls = normalize_tool_calls(calls, allowed_tools=task["scenario"]["allowed_tools"])
+        calls = normalize_tool_calls(calls, allowed_tools=task["task"]["allowed_tools"])
     except Exception as error:  # noqa: BLE001 - adapter should fail visibly.
         print(f"Ollama agent failed: {error}", file=sys.stderr)
         return 1
@@ -229,9 +229,9 @@ def main() -> int:
 
 
 def build_prompt(task: dict[str, Any]) -> str:
-    scenario = task["scenario"]
-    allowed_tools = scenario["allowed_tools"]
-    origin_hints = fixture_origin_hints(scenario["fixtures"])
+    task = task["task"]
+    allowed_tools = task["allowed_tools"]
+    origin_hints = fixture_origin_hints(task["fixtures"])
     widget_hints = fixture_widget_hints(origin_hints)
     tool_reference = {
         name: TOOL_REFERENCE[name]
@@ -240,21 +240,21 @@ def build_prompt(task: dict[str, Any]) -> str:
     }
 
     public_task = {
-        "id": scenario["id"],
-        "title": scenario["title"],
-        "level": scenario["level"],
-        "capability": scenario["capability"],
-        "workflow": scenario["workflow"],
-        "domain": scenario["domain"],
-        "subdomain": scenario["subdomain"],
-        "difficulty": scenario["difficulty"],
-        "prompt": scenario["prompt"],
-        "fixtures": scenario["fixtures"],
+        "id": task["id"],
+        "title": task["title"],
+        "level": task["level"],
+        "capability": task["capability"],
+        "workflow": task["workflow"],
+        "domain": task["domain"],
+        "subdomain": task["subdomain"],
+        "difficulty": task["difficulty"],
+        "prompt": task["prompt"],
+        "fixtures": task["fixtures"],
         "origin_hints": origin_hints,
         "widget_hints": widget_hints,
-        "initial_state": scenario["initial_state"],
+        "initial_state": task["initial_state"],
         "allowed_tools": allowed_tools,
-        "limits": scenario.get("limits", {}),
+        "limits": task.get("limits", {}),
     }
 
     return "\n".join(

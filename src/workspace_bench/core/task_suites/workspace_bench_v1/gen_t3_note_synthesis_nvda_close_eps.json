@@ -1,0 +1,145 @@
+{
+  "id": "gen_t3_note_synthesis_nvda_close_eps",
+  "title": "Synthesis Note: Nvda Close Eps",
+  "capability": "workspace-inspection",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-note",
+    "level-t3",
+    "note",
+    "read-only",
+    "multi-widget"
+  ],
+  "prompt": "Review the NVDA price and estimates widgets and add a note with the latest close and the 2026Q1 EPS estimate from the data.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Existing Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "price_performance",
+          "data_args": {
+            "symbol": "NVDA"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Equities",
+          "widget_id": "estimate_history",
+          "data_args": {
+            "symbol": "NVDA"
+          },
+          "layout": {
+            "x": 20,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_widget_data",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "NVDA"
+        },
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Equities",
+        "widget_id": "estimate_history",
+        "data_args": {
+          "symbol": "NVDA"
+        },
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "NVDA",
+          "179.45",
+          "1.18"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "NVDA"
+        }
+      }
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "estimate_history",
+        "data_args": {
+          "symbol": "NVDA"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Answer Note",
+        "data": "NVDA: close 179.45; 2026Q1 EPS 1.18."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "read",
+  "level": "t3",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 7
+  },
+  "split": "test",
+  "novelty": "Unique note/t3 exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact widgets:Bench Equities/estimate_history@*,Bench Equities/price_performance@*; generated:note@*:NVDA,179.45."
+}

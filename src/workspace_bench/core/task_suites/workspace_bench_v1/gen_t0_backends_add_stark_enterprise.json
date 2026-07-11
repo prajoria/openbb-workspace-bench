@@ -1,0 +1,83 @@
+{
+  "id": "gen_t0_backends_add_stark_enterprise",
+  "title": "Register Bench Stark Enterprise",
+  "capability": "dashboard-construction",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-backends",
+    "level-t0",
+    "backends"
+  ],
+  "prompt": "With manage_backends, use operation add and name stark-enterprise to register Bench Stark Enterprise, then list it with operation list.",
+  "fixtures": {
+    "backends": []
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Backend Registration",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "manage_backends"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "manage_backends",
+        "args_contains": {
+          "operation": "add"
+        }
+      },
+      {
+        "tool": "manage_backends",
+        "args_contains": {
+          "operation": "list"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "manage_backends",
+        "data_contains": [
+          "Bench Stark Enterprise"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "stark-enterprise"
+      }
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "dashboard",
+  "level": "t0",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "validation",
+  "novelty": "Unique backends/t0 exercise using manage_backends with checks layout_out_of_grid, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact id:gen_t0_backends_add_stark_enterprise."
+}

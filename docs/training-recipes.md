@@ -15,12 +15,12 @@ Every rollout export includes metadata for:
 - benchmark release id
 - export schema version
 - export timestamp
-- scenario id, level, capability, workflow, domain, subdomain, difficulty, and split
+- task id, level, capability, workflow, domain, subdomain, difficulty, and split
 - model or runner metadata when available
 - task-pack metadata for private or hidden packs
 
 This metadata lets you trace a training row back to the benchmark release and
-scenario pack that produced it.
+task pack that produced it.
 
 ## SFT From Passing Traces
 
@@ -66,19 +66,19 @@ uv run workspace-bench export-preferences \
 ```
 
 The chosen attempt is the passing or higher-scoring attempt for the same model
-and scenario. The rejected attempt is the failing or lower-scoring attempt.
+and task. The rejected attempt is the failing or lower-scoring attempt.
 
-## RL Rollout Collection
+## RL Rollout Suite
 
 Use the Gym-style adapter for policy loops:
 
 ```python
 from workspace_bench.rl.env import WorkspaceGymEnv
 from workspace_bench.rl import collect_rollout
-from workspace_bench.core.runner import find_scenario
+from workspace_bench.core.runner import find_task
 
-scenario = find_scenario("gen_t0_create_price_performance_aapl")
-env = WorkspaceGymEnv(scenario=scenario, process_rewards=True)
+task = find_task("gen_t0_create_price_performance_aapl")
+env = WorkspaceGymEnv(task=task, process_rewards=True)
 
 transitions = collect_rollout(
     env,
@@ -94,7 +94,7 @@ discipline, but they should not replace final deterministic grading.
 ## Quality Rules
 
 - Export data only from a known benchmark release.
-- Keep train/dev/test scenario splits separate.
+- Keep train/dev/test task splits separate.
 - Do not train on hidden benchmark answers if the same hidden pack will be used
   for held-out evaluation.
 - Prefer passing traces for SFT.

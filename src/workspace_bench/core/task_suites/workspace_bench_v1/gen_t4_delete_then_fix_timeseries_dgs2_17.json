@@ -1,0 +1,148 @@
+{
+  "id": "gen_t4_delete_then_fix_timeseries_dgs2_17",
+  "title": "Deduplicate And Fix Macro Timeseries",
+  "capability": "workspace-repair",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-delete",
+    "level-t4",
+    "repair",
+    "delete-widget",
+    "combo"
+  ],
+  "prompt": "This dashboard has two identical Macro Timeseries widgets for DGS10, and the desk actually needs DGS2. Remove exactly one duplicate, update the remaining widget to DGS2, and add a note mentioning DGS2 and the word repaired.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "macro"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Dedup And Fix",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Macro",
+          "widget_id": "macro_timeseries",
+          "data_args": {
+            "series": "DGS10"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Macro",
+          "widget_id": "macro_timeseries",
+          "data_args": {
+            "series": "DGS10"
+          },
+          "layout": {
+            "x": 20,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "delete_widget",
+    "update_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS2"
+        },
+        "min_count": 1,
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS10"
+        },
+        "min_count": 0,
+        "max_count": 0
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "DGS2",
+          "repaired"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "delete_widget",
+      "args": {
+        "widget_uuid": "widget_002"
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "series": "DGS2"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Repair Note",
+        "data": "Removed the duplicate and repaired to DGS2."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "repair",
+  "level": "t4",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "test",
+  "novelty": "Unique delete/t4 exercise using add_generative_widget, delete_widget, get_workspace_snapshot, update_widget with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on macro; artifact widgets:Bench Macro/macro_timeseries@*; generated:note@*:DGS2,repaired."
+}

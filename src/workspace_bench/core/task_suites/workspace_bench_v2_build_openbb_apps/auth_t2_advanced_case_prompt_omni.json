@@ -1,0 +1,97 @@
+{
+  "id": "auth_t2_advanced_case_prompt_omni",
+  "title": "Compose the Case Prompt Omni widget",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-advanced",
+    "level-t2",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "advanced",
+    "composed"
+  ],
+  "prompt": "Build the widgets.json for \"Surveillance Data\" at http://localhost:7807. One widget only: `case_prompt_omni`: name \"Case Prompt Omni\", description \"Hidden-prompt Omni search over case evidence.\", endpoint /case-prompt-qa, type omni, sized w=20 h=9 on the grid, category \"Compliance\", params required: prompt \u2014 a text input (type text), labeled \"Prompt\", hidden from the UI (show false), described \"Question to run over the case corpus.\"; it caches results for 15 minutes. Time-based config converts to milliseconds: \"cache results for N minutes\" means staleTime N*60000; \"auto-refresh every N seconds\" means refetchInterval N*1000.. Make sure to keep the prompt param hidden and place the widget in the Compliance category, then add the backend.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Surveillance Data",
+        "widget_id": "case_prompt_omni",
+        "expect": {
+          "type": "omni",
+          "endpoint": "/case-prompt-qa",
+          "gridData.w": 20,
+          "gridData.h": 9,
+          "category": "Compliance",
+          "staleTime": 900000
+        },
+        "params_include": [
+          {
+            "paramName": "prompt",
+            "type": "text",
+            "show": false
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "case_prompt_omni": {
+            "name": "Case Prompt Omni",
+            "description": "Hidden-prompt Omni search over case evidence.",
+            "endpoint": "/case-prompt-qa",
+            "type": "omni",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "prompt",
+                "type": "text",
+                "label": "Prompt",
+                "description": "Question to run over the case corpus.",
+                "show": false
+              }
+            ],
+            "category": "Compliance",
+            "staleTime": 900000
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t2",
+  "capability": "widget-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique advanced/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/case_prompt_omni."
+}

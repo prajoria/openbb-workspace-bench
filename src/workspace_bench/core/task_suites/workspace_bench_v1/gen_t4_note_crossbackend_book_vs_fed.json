@@ -1,0 +1,141 @@
+{
+  "id": "gen_t4_note_crossbackend_book_vs_fed",
+  "title": "Cross-Backend Note: Book Vs Fed",
+  "capability": "workspace-inspection",
+  "workflow": "portfolio-risk-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-note",
+    "level-t4",
+    "note",
+    "read-only",
+    "cross-backend"
+  ],
+  "prompt": "Review the risk metrics and Fed Funds widgets and add a note with the portfolio beta and the latest FEDFUNDS value from the data.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "macro"
+      },
+      {
+        "name": "portfolio"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Existing Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "risk_metrics",
+          "data_args": {},
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Macro",
+          "widget_id": "macro_timeseries",
+          "data_args": {
+            "series": "FEDFUNDS"
+          },
+          "layout": {
+            "x": 20,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_widget_data",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics",
+        "data_args": {},
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "FEDFUNDS"
+        },
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "1.18",
+          "4.12"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "FEDFUNDS"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Answer Note",
+        "data": "Portfolio beta 1.18 with Fed Funds at 4.12."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "read",
+  "level": "t4",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique note/t4 exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls on macro, portfolio; artifact widgets:Bench Macro/macro_timeseries@*,Bench Portfolio/risk_metrics@*; generated:note@*:1.18,4.12."
+}

@@ -8,12 +8,12 @@ Workspace Bench conceptually maps to an RL-Factory environment like this:
 
 | RL concept | Workspace Bench object |
 | --- | --- |
-| prompt | `Scenario.prompt` plus tool instructions |
+| prompt | `Task.prompt` plus tool instructions |
 | observation | latest tool result or Workspace snapshot |
 | action | model-emitted Workspace MCP tool call or final answer |
 | transition | `workspace.call_tool(...)` |
 | done | final answer, max turns, or terminal tool policy |
-| reward | `grade_scenario(...)` final score plus optional trace rewards |
+| reward | `grade_task(...)` final score plus optional trace rewards |
 
 ## Sparse Final Reward
 
@@ -22,7 +22,7 @@ Start with a sparse final reward:
 ```python
 from workspace_bench.rl.env import WorkspaceGymEnv
 
-env = WorkspaceGymEnv(scenario=scenario)
+env = WorkspaceGymEnv(task=task)
 observation, info = env.reset()
 
 for action in rollout_actions:
@@ -63,7 +63,7 @@ These process rewards are directly available from the trace and do not require a
 
 ```python
 env = WorkspaceGymEnv(
-    scenario=scenario,
+    task=task,
     process_rewards=True,
     valid_tool_reward=0.01,
     invalid_tool_penalty=-0.25,
@@ -73,7 +73,7 @@ env = WorkspaceGymEnv(
 ```
 
 The final reward still comes from the deterministic grader. Process rewards are
-additive shaping signals for rollout collection and can be disabled entirely.
+additive shaping signals for rollout suite and can be disabled entirely.
 
 The RL package is split by responsibility: `actions.py` normalizes JSON actions,
 `observations.py` builds observations, `rewards.py` holds process-reward logic,
@@ -102,7 +102,7 @@ The real sidecar path needs a bench control plane to reset browser state and reg
 
 1. Run the bundled oracle traces against the simulator.
 2. Add an RL-Factory environment wrapper that executes tool calls against `SimulatedWorkspace`.
-3. Train/evaluate on a small scenario subset.
+3. Train/evaluate on a small task subset.
 4. Add a real `workspace-mcp` adapter.
 5. Compare simulator and real-sidecar grades on the same oracle traces.
 6. Scale only after reset isolation and fixture backend lifecycle are reliable.
@@ -110,6 +110,6 @@ The real sidecar path needs a bench control plane to reset browser state and reg
 ## Open Questions
 
 - How should final answers be represented for agents that stop without creating an artifact?
-- Should real Workspace browser sessions be pooled or created per scenario?
+- Should real Workspace browser sessions be pooled or created per task?
 - Which trace checks should be process rewards versus hard failures?
 - How much layout quality should be rewarded beyond no overlap and grid bounds?

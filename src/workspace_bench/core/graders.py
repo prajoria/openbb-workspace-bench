@@ -17,7 +17,7 @@ from workspace_bench.core.models import (
     RequiredToolCall,
     RequiredToolResult,
     RequiredWidget,
-    Scenario,
+    Task,
     ToolTraceEvent,
 )
 
@@ -52,8 +52,8 @@ STOPWORDS = {"a", "an", "and", "for", "of", "the"}
 class GradeBuilder:
     """Accumulates pass/fail checks into one score."""
 
-    def __init__(self, scenario_id: str):
-        self.scenario_id = scenario_id
+    def __init__(self, task_id: str):
+        self.task_id = task_id
         self.passed = 0
         self.total = 0
         self.issues: list[GradeIssue] = []
@@ -68,7 +68,7 @@ class GradeBuilder:
     def result(self) -> GradeResult:
         score = self.passed / self.total if self.total else 1.0
         return GradeResult(
-            scenario_id=self.scenario_id,
+            task_id=self.task_id,
             score=score,
             passed=not self.issues,
             checks_passed=self.passed,
@@ -77,18 +77,18 @@ class GradeBuilder:
         )
 
 
-def grade_scenario(
-    scenario: Scenario, final_snapshot: JsonDict, trace: tuple[ToolTraceEvent, ...]
+def grade_task(
+    task: Task, final_snapshot: JsonDict, trace: tuple[ToolTraceEvent, ...]
 ) -> GradeResult:
-    """Grade one scenario run against final state and trace checks."""
+    """Grade one task run against final state and trace checks."""
 
-    builder = GradeBuilder(scenario.id)
+    builder = GradeBuilder(task.id)
     composition = final_snapshot.get("dashboard_composition") or {}
     widgets = composition.get("widgets", [])
     tabs = composition.get("tabs", [])
     tab_ids = {tab.get("id") for tab in tabs}
 
-    name_contains = scenario.success.required_dashboard_name_contains
+    name_contains = task.success.required_dashboard_name_contains
     if name_contains:
         builder.check(
             _phrase_matches(str(composition.get("name", "")), name_contains),
@@ -96,14 +96,14 @@ def grade_scenario(
             f"Active dashboard name should contain {name_contains!r}.",
         )
 
-    for tab_id in scenario.success.required_tabs:
+    for tab_id in task.success.required_tabs:
         builder.check(
             tab_id in tab_ids,
             "missing_tab",
             f"Expected tab {tab_id!r} in final dashboard.",
         )
 
-    for required in scenario.success.required_widgets:
+    for required in task.success.required_widgets:
         matches = _matching_required_widgets(required, widgets)
         builder.check(
             len(matches) >= required.min_count,
@@ -125,7 +125,7 @@ def grade_scenario(
                 ),
             )
 
-    for required in scenario.success.required_generated_widgets:
+    for required in task.success.required_generated_widgets:
         matches = _matching_generated_widgets(required, widgets)
         builder.check(
             len(matches) >= required.min_count,
@@ -136,7 +136,7 @@ def grade_scenario(
             ),
         )
 
-    for required_layout in scenario.success.required_layouts:
+    for required_layout in task.success.required_layouts:
         matches = _matching_layouts(required_layout, widgets)
         builder.check(
             bool(matches),
@@ -144,7 +144,7 @@ def grade_scenario(
             f"No widget layout matched {required_layout}.",
         )
 
-    for required_call in scenario.success.required_tool_calls:
+    for required_call in task.success.required_tool_calls:
         matches = _matching_tool_calls(required_call, trace)
         builder.check(
             len(matches) >= required_call.min_count,
@@ -156,7 +156,7 @@ def grade_scenario(
             ),
         )
 
-    for required_result in scenario.success.required_tool_results:
+    for required_result in task.success.required_tool_results:
         matches = _matching_tool_results(required_result, trace)
         builder.check(
             len(matches) >= required_result.min_count,
@@ -168,7 +168,7 @@ def grade_scenario(
             ),
         )
 
-    for required_read in scenario.success.required_resource_reads:
+    for required_read in task.success.required_resource_reads:
         matches = _matching_resource_reads(required_read, trace)
         builder.check(
             len(matches) >= required_read.min_count,
@@ -180,17 +180,17 @@ def grade_scenario(
             ),
         )
 
-    if scenario.success.layout.within_grid:
+    if task.success.layout.within_grid:
         for widget in widgets:
             layout = widget.get("layout") or {}
-            grid_width = scenario.success.layout.grid_width
+            grid_width = task.success.layout.grid_width
             builder.check(
                 _within_grid(layout, grid_width),
                 "layout_out_of_grid",
                 f"Widget {widget.get('widget_uuid')} is outside {grid_width}-column grid.",
             )
 
-    if scenario.success.layout.no_overlaps:
+    if task.success.layout.no_overlaps:
         for tab_id, tab_widgets in _widgets_by_tab(widgets).items():
             overlaps = _find_overlaps(tab_widgets)
             builder.check(
@@ -199,9 +199,9 @@ def grade_scenario(
                 f"Tab {tab_id!r} has overlapping widgets: {overlaps}.",
             )
 
-    _grade_backend_building(builder, scenario, final_snapshot)
+    _grade_backend_building(builder, task, final_snapshot)
 
-    _grade_trace(builder, scenario, trace)
+    _grade_trace(builder, task, trace)
     return builder.result()
 
 
@@ -507,9 +507,9 @@ def _find_custom_backend(snapshot: JsonDict, backend_name: str) -> JsonDict | No
 
 
 def _grade_backend_building(
-    builder: GradeBuilder, scenario: Scenario, final_snapshot: JsonDict
+    builder: GradeBuilder, task: Task, final_snapshot: JsonDict
 ) -> None:
-    for required in scenario.success.required_widget_defs:
+    for required in task.success.required_widget_defs:
         backend = _find_custom_backend(final_snapshot, required.backend_name)
         if backend is None:
             builder.check(
@@ -567,7 +567,7 @@ def _grade_backend_building(
                 ),
             )
 
-    for required in scenario.success.required_app_defs:
+    for required in task.success.required_app_defs:
         backend = _find_custom_backend(final_snapshot, required.backend_name)
         if backend is None:
             builder.check(
@@ -708,9 +708,9 @@ def _grade_backend_building(
 
 
 def _grade_trace(
-    builder: GradeBuilder, scenario: Scenario, trace: tuple[ToolTraceEvent, ...]
+    builder: GradeBuilder, task: Task, trace: tuple[ToolTraceEvent, ...]
 ) -> None:
-    checks = scenario.success.trace
+    checks = task.success.trace
     invalid_count = sum(1 for event in trace if not event.ok)
     builder.check(
         invalid_count <= checks.max_invalid_tool_calls,

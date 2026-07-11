@@ -10,7 +10,7 @@ workspace simulation, tool calls, grading, and results.
 - Keep the package root small. Use `workspace_bench.__init__` for a few common
   convenience exports and put implementation modules inside focused packages.
 - Organize implementation code into focused packages:
-  - `core`: scenarios, episodes, runner, models, grading
+  - `core`: tasks, episodes, runner, models, grading
   - `workspace`: simulator, fixtures, live MCP smoke bridge
   - `agents`: oracle/noop agents, JSONL command protocol, model adapter helpers
   - `reports`: model comparison, metrics, charts
@@ -19,12 +19,12 @@ workspace simulation, tool calls, grading, and results.
 
 ## 2. Benchmark Core Hardening
 
-- Keep scenarios explicit about prompt, fixtures, allowed tools, limits, split,
+- Keep tasks explicit about prompt, fixtures, allowed tools, limits, split,
   tags, oracle calls, and deterministic success criteria.
-- Support public, private, and hidden task packs through local scenario
-  directories and `task_pack.json`.
-- Validate that oracle passes, noop fails, scenario metadata is complete, and
-  malformed scenarios fail with useful messages.
+- Support public, private, and hidden task suites through local task
+  directories and `task_suite.json`.
+- Validate that oracle passes, noop fails, task metadata is complete, and
+  malformed tasks fail with useful messages.
 - Keep strict pass/fail separate from partial score and preserve stable issue
   codes.
 
@@ -55,15 +55,15 @@ workspace simulation, tool calls, grading, and results.
 
 ## 6. Training Platform Foundations
 
-- Version exported datasets with benchmark release, scenario pack, model, run
+- Version exported datasets with benchmark release, task pack, model, run
   timestamp, and export schema version.
-- Provide recipes for SFT, preference optimization, and RL rollout collection.
+- Provide recipes for SFT, preference optimization, and RL rollout suite.
 - Do not add heavyweight trainer dependencies to the base package.
 
 ## 7. Public Readiness
 
 - Keep README quickstarts current.
-- Maintain docs for scenario building, agent adapters, export formats, private
-  task packs, and benchmark limitations.
-- Validate the bundled 300-scenario release before releases.
+- Maintain docs for task building, agent adapters, export formats, private
+  task suites, and benchmark limitations.
+- Validate the bundled 300-task release before releases.
 - Make benchmark results reproducible, explainable, and safe to compare.

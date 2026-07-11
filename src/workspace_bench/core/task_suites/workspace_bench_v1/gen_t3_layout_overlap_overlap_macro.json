@@ -1,0 +1,117 @@
+{
+  "id": "gen_t3_layout_overlap_overlap_macro",
+  "title": "Repair Overlap: Overlap Macro",
+  "capability": "workspace-repair",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-layout",
+    "level-t3",
+    "repair",
+    "layout"
+  ],
+  "prompt": "The yield curve widget overlaps the 10Y series widget. Move the yield curve widget to start at column 20 with its current size. Do not move the series widget.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "macro"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Overlap Repair",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Macro",
+          "widget_id": "macro_timeseries",
+          "data_args": {
+            "series": "DGS10"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Macro",
+          "widget_id": "yield_curve",
+          "data_args": {},
+          "layout": {
+            "x": 15,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget_layout"
+  ],
+  "success": {
+    "required_layouts": [
+      {
+        "widget_id": "macro_timeseries",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 10
+      },
+      {
+        "widget_id": "yield_curve",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 10
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_id": "yield_curve",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 10
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "repair",
+  "level": "t3",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique layout/t3 exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on macro; artifact layouts:macro_timeseries:::0:0:20:10,yield_curve:::20:0:20:10."
+}

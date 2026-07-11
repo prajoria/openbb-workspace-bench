@@ -1,0 +1,119 @@
+{
+  "id": "gen_t3_app_extend_portfolio_command_center",
+  "title": "Instantiate And Extend Portfolio Command Center",
+  "capability": "app-instantiation",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-apps",
+    "level-t3",
+    "apps",
+    "stark",
+    "widget-creation"
+  ],
+  "prompt": "Create a new dashboard named PM Command Post by instantiating the Portfolio Command Center app from the Bench Stark Enterprise backend. Then add the Sector Exposure widget (id portfolio_command_center_holdings_sector_exposure) to the Holdings tab of the new dashboard.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "PM Command Post",
+    "required_tabs": [
+      "overview",
+      "actions",
+      "attribution",
+      "holdings"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_actions_trade_ideas",
+        "tab_id": "actions",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_attribution_brinson_attribution",
+        "tab_id": "attribution",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_holdings_sector_exposure",
+        "tab_id": "holdings",
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Portfolio Command Center",
+        "dashboard_name": "PM Command Post",
+        "activate": true
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "holdings"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_holdings_sector_exposure"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_holdings_sector_exposure",
+        "data_args": {}
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "platform",
+  "level": "t3",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique apps/t3 exercise using create_widget, get_widget_schema, manage_apps, manage_backends, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_tab, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact apps:Portfolio Command Center; widgets:Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas@actions,Bench Stark Enterprise/portfolio_command_center_attribution_brinson_attribution@attribution,Bench Stark Enterprise/portfolio_command_center_holdings_sector_exposure@holdings; tabs:actions,attribution,holdings,overview."
+}

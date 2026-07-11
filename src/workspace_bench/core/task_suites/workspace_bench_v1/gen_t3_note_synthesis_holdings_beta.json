@@ -1,0 +1,133 @@
+{
+  "id": "gen_t3_note_synthesis_holdings_beta",
+  "title": "Synthesis Note: Holdings Beta",
+  "capability": "workspace-inspection",
+  "workflow": "portfolio-risk-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-note",
+    "level-t3",
+    "note",
+    "read-only",
+    "multi-widget"
+  ],
+  "prompt": "Use the holdings and risk metrics widget data to add a note with the largest position weight and the portfolio beta from the data.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "portfolio"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Existing Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "holdings_table",
+          "data_args": {},
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "risk_metrics",
+          "data_args": {},
+          "layout": {
+            "x": 20,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_widget_data",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "holdings_table",
+        "data_args": {},
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics",
+        "data_args": {},
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "MSFT",
+          "0.34",
+          "1.18"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "holdings_table",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Answer Note",
+        "data": "MSFT largest at 0.34; portfolio beta 1.18."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "read",
+  "level": "t3",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 7
+  },
+  "split": "validation",
+  "novelty": "Unique note/t3 exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls on portfolio; artifact widgets:Bench Portfolio/holdings_table@*,Bench Portfolio/risk_metrics@*; generated:note@*:MSFT,0.34."
+}

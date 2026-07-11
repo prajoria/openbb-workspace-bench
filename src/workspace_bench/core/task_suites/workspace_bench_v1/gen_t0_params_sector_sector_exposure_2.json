@@ -1,0 +1,104 @@
+{
+  "id": "gen_t0_params_sector_sector_exposure_2",
+  "title": "Use Sector Options For Sector Exposure",
+  "capability": "parameter-discovery",
+  "workflow": "portfolio-risk-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-params",
+    "level-t0",
+    "params",
+    "options"
+  ],
+  "prompt": "Call get_params_options for Bench Portfolio/sector_exposure parameter sector, choose Technology, and create that widget with sector=Technology.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "portfolio"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Parameter Options",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_params_options",
+    "create_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "sector_exposure",
+        "data_args": {
+          "sector": "Technology"
+        }
+      }
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "get_params_options",
+        "args_contains": {
+          "widget_id": "sector_exposure",
+          "param_name": "sector"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_params_options",
+        "data_contains": [
+          "Technology"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_params_options",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "sector_exposure",
+        "param_name": "sector"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "sector_exposure",
+        "data_args": {
+          "sector": "Technology"
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "single-widget",
+  "level": "t0",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique params/t0 exercise using create_widget, get_params_options, get_workspace_snapshot with checks layout_out_of_grid, missing_tool_call, missing_tool_result, missing_widget, repeated_snapshots, too_many_invalid_calls on portfolio; artifact widgets:Bench Portfolio/sector_exposure@*."
+}

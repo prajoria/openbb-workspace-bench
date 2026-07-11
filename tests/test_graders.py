@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import replace
 
-from workspace_bench.core.graders import grade_scenario
+from workspace_bench.core.graders import grade_task
 from workspace_bench.core.models import (
     LayoutChecks,
     RequiredGeneratedWidget,
@@ -11,11 +11,11 @@ from workspace_bench.core.models import (
     ToolCall,
     ToolTraceEvent,
 )
-from workspace_bench.core.runner import ScenarioRunner, find_scenario
+from workspace_bench.core.runner import TaskRunner, find_task
 
 
 def test_grader_detects_missing_required_widget() -> None:
-    scenario = find_scenario("gen_t0_create_price_performance_aapl")
+    task = find_task("gen_t0_create_price_performance_aapl")
     snapshot = {
         "dashboard_composition": {
             "name": "Empty",
@@ -24,18 +24,18 @@ def test_grader_detects_missing_required_widget() -> None:
         }
     }
 
-    grade = grade_scenario(scenario, snapshot, ())
+    grade = grade_task(task, snapshot, ())
 
     assert grade.passed is False
     assert any(issue.code == "missing_widget" for issue in grade.issues)
 
 
 def test_grader_detects_layout_overlap() -> None:
-    scenario = find_scenario("gen_t0_create_price_performance_aapl")
-    scenario = replace(
-        scenario,
+    task = find_task("gen_t0_create_price_performance_aapl")
+    task = replace(
+        task,
         success=replace(
-            scenario.success,
+            task.success,
             required_widgets=(),
             required_layouts=(),
             layout=LayoutChecks(no_overlaps=True, within_grid=True, grid_width=40),
@@ -65,14 +65,14 @@ def test_grader_detects_layout_overlap() -> None:
         }
     }
 
-    grade = grade_scenario(scenario, snapshot, ())
+    grade = grade_task(task, snapshot, ())
 
     assert grade.passed is False
     assert any(issue.code == "layout_overlap" for issue in grade.issues)
 
 
 def test_grader_matches_generated_percent_equivalent() -> None:
-    scenario = find_scenario("gen_t1_note_fact_top_holding")
+    task = find_task("gen_t1_note_fact_top_holding")
     snapshot = {
         "dashboard_composition": {
             "name": "Existing Portfolio Review",
@@ -107,23 +107,23 @@ def test_grader_matches_generated_percent_equivalent() -> None:
         }
     }
 
-    grade = grade_scenario(scenario, snapshot, ())
+    grade = grade_task(task, snapshot, ())
 
     assert grade.passed is True
 
 
-def test_grader_requires_tool_results_for_skill_scenario() -> None:
-    scenario = find_scenario("gen_t1_skill_finance_earnings_prep")
-    result = ScenarioRunner().run(scenario, "oracle")
+def test_grader_requires_tool_results_for_skill_task() -> None:
+    task = find_task("gen_t1_skill_finance_earnings_prep")
+    result = TaskRunner().run(task, "oracle")
 
     assert result.grade.passed is True
     assert any(event.call.name == "get_skill_content" for event in result.trace)
 
 
 def test_grader_matches_generated_widget_display_alias() -> None:
-    scenario = find_scenario("gen_t0_create_price_performance_aapl")
-    scenario = replace(
-        scenario,
+    task = find_task("gen_t0_create_price_performance_aapl")
+    task = replace(
+        task,
         success=SuccessCriteria(
             required_generated_widgets=(
                 RequiredGeneratedWidget(
@@ -154,15 +154,15 @@ def test_grader_matches_generated_widget_display_alias() -> None:
         }
     }
 
-    grade = grade_scenario(scenario, snapshot, ())
+    grade = grade_task(task, snapshot, ())
 
     assert grade.passed is True
 
 
 def test_grader_dashboard_name_allows_stopwords_between_terms() -> None:
-    scenario = find_scenario("gen_t0_create_price_performance_aapl")
-    scenario = replace(
-        scenario,
+    task = find_task("gen_t0_create_price_performance_aapl")
+    task = replace(
+        task,
         success=SuccessCriteria(
             required_dashboard_name_contains="Portfolio Macro Risk",
         ),
@@ -175,15 +175,15 @@ def test_grader_dashboard_name_allows_stopwords_between_terms() -> None:
         }
     }
 
-    grade = grade_scenario(scenario, snapshot, ())
+    grade = grade_task(task, snapshot, ())
 
     assert grade.passed is True
 
 
 def test_grader_detects_missing_required_resource_read() -> None:
-    scenario = find_scenario("gen_t0_create_price_performance_aapl")
-    scenario = replace(
-        scenario,
+    task = find_task("gen_t0_create_price_performance_aapl")
+    task = replace(
+        task,
         success=SuccessCriteria(
             required_resource_reads=(
                 RequiredResourceRead(
@@ -201,16 +201,16 @@ def test_grader_detects_missing_required_resource_read() -> None:
         }
     }
 
-    grade = grade_scenario(scenario, snapshot, ())
+    grade = grade_task(task, snapshot, ())
 
     assert grade.passed is False
     assert any(issue.code == "missing_resource_read" for issue in grade.issues)
 
 
 def test_grader_matches_required_resource_read() -> None:
-    scenario = find_scenario("gen_t0_create_price_performance_aapl")
-    scenario = replace(
-        scenario,
+    task = find_task("gen_t0_create_price_performance_aapl")
+    task = replace(
+        task,
         success=SuccessCriteria(
             required_resource_reads=(
                 RequiredResourceRead(
@@ -242,6 +242,6 @@ def test_grader_matches_required_resource_read() -> None:
         ),
     )
 
-    grade = grade_scenario(scenario, snapshot, trace)
+    grade = grade_task(task, snapshot, trace)
 
     assert grade.passed is True

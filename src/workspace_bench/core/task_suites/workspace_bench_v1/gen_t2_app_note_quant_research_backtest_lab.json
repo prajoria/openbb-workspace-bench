@@ -1,0 +1,113 @@
+{
+  "id": "gen_t2_app_note_quant_research_backtest_lab",
+  "title": "Instantiate Quant Research & Backtest Lab And Brief",
+  "capability": "app-instantiation",
+  "workflow": "risk-review",
+  "subdomain": "risk",
+  "tags": [
+    "family-apps",
+    "level-t2",
+    "apps",
+    "stark",
+    "note"
+  ],
+  "prompt": "Instantiate the Quant Research & Backtest Lab app from the Bench Stark Enterprise backend as a new dashboard named Signal Research Lab, then add a note on the Signals tab mentioning signal and decay.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Signal Research Lab",
+    "required_tabs": [
+      "overview",
+      "backtest",
+      "optimization",
+      "signals"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "quant_research_backtest_lab_backtest_backtest_performance",
+        "tab_id": "backtest",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "quant_research_backtest_lab_optimization_efficient_frontier",
+        "tab_id": "optimization",
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "signal",
+          "decay"
+        ],
+        "tab_id": "signals"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Quant Research & Backtest Lab",
+        "dashboard_name": "Signal Research Lab",
+        "activate": true
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "signals"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Brief Note",
+        "data": "Signal leaderboard reviewed; watch signal decay."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "platform",
+  "level": "t2",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 7
+  },
+  "split": "train",
+  "novelty": "Unique apps/t2 exercise using add_generative_widget, manage_apps, manage_backends, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_tab, missing_widget, too_many_invalid_calls on stark-enterprise; artifact apps:Quant Research & Backtest Lab; widgets:Bench Stark Enterprise/quant_research_backtest_lab_backtest_backtest_performance@backtest,Bench Stark Enterprise/quant_research_backtest_lab_optimization_efficient_frontier@optimization; tabs:backtest,optimization,overview,signals; generated:note@signals:signal,decay."
+}

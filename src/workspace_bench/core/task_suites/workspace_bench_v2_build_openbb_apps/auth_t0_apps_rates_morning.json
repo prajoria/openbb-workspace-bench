@@ -1,0 +1,132 @@
+{
+  "id": "auth_t0_apps_rates_morning",
+  "title": "Build the Rates Morning app definition",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-apps",
+    "level-t0",
+    "cell2",
+    "build-openbb-apps",
+    "apps-json"
+  ],
+  "prompt": "Your backend \"Rates Watch Data\" is already connected and serves `yield_curve`, `curve_spread_metric`. Ship its apps.json \u2014 exactly one app: app \"Rates Morning\", description \"Curve and spread at the open.\", tab `morning` named \"Morning\" places: `yield_curve` at x=0 y=0 w=20 h=9; `curve_spread_metric` at x=20 y=0 w=12 h=6. Submit it with a manage_backends refresh (apps_json).",
+  "fixtures": {},
+  "initial_state": {
+    "custom_backends": [
+      {
+        "name": "Rates Watch Data",
+        "url": "http://localhost:7803",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "yield_curve": {
+            "name": "Yield Curve",
+            "description": "Plotly treasury yield curve snapshot.",
+            "endpoint": "/yield-curve",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "raw": true
+          },
+          "curve_spread_metric": {
+            "name": "2s10s Spread",
+            "description": "Current 2s10s spread in bps.",
+            "endpoint": "/curve-spread",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            }
+          }
+        }
+      }
+    ]
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_app_defs": [
+      {
+        "backend_name": "Rates Watch Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Rates Morning",
+        "tabs_include": [
+          "morning"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "morning",
+            "widget_id": "yield_curve"
+          },
+          {
+            "tab_id": "morning",
+            "widget_id": "curve_spread_metric"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "backend_001",
+        "apps_json": [
+          {
+            "name": "Rates Morning",
+            "description": "Curve and spread at the open.",
+            "tabs": {
+              "morning": {
+                "id": "morning",
+                "name": "Morning",
+                "layout": [
+                  {
+                    "i": "yield_curve",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  },
+                  {
+                    "i": "curve_spread_metric",
+                    "x": 20,
+                    "y": 0,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t0",
+  "capability": "app-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique apps/t0 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact appdefs:Rates Watch Data/Rates Morning."
+}

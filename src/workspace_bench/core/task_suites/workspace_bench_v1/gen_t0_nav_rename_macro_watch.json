@@ -1,0 +1,71 @@
+{
+  "id": "gen_t0_nav_rename_macro_watch",
+  "title": "Rename To Rates Watch",
+  "capability": "workspace-navigation",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-navigate",
+    "level-t0",
+    "rename",
+    "navigation"
+  ],
+  "prompt": "Rename the active dashboard to Rates Watch.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "macro"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Macro Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Rates Watch",
+    "required_tool_calls": [
+      {
+        "tool": "manage_dashboard",
+        "args_contains": {
+          "operation": "update",
+          "name": "Rates Watch"
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "update",
+        "name": "Rates Watch"
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "single-widget",
+  "level": "t0",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "validation",
+  "novelty": "Unique navigate/t0 exercise using manage_dashboard with checks dashboard_name, layout_out_of_grid, missing_tool_call, too_many_invalid_calls on macro; artifact id:gen_t0_nav_rename_macro_watch."
+}

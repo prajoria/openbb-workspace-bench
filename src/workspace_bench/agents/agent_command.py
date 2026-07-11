@@ -18,7 +18,7 @@ from workspace_bench.core.models import (
     CANARY_GUID,
     JsonDict,
     RunResult,
-    Scenario,
+    Task,
     ToolCall,
 )
 
@@ -38,30 +38,30 @@ class AgentCommandRun:
     output_path: Path
 
 
-def build_task_envelope(scenario: Scenario) -> JsonDict:
+def build_task_envelope(task: Task) -> JsonDict:
     """Build the public task payload handed to external agents."""
 
     return {
-        "schema_version": "workspace-bench-task-v1",
+        "schema_version": "workspace-bench-task-v2",
         "benchmark": {
             "name": BENCHMARK_NAME,
             "version": BENCHMARK_VERSION,
             "release_id": BENCHMARK_RELEASE_ID,
             "canary_guid": CANARY_GUID,
         },
-        "scenario": {
-            "id": scenario.id,
-            "title": scenario.title,
-            "level": scenario.level,
-            "capability": scenario.capability,
-            "workflow": scenario.workflow,
-            "domain": scenario.domain,
-            "subdomain": scenario.subdomain,
-            "difficulty": scenario.difficulty,
-            "split": scenario.split,
-            "tags": list(scenario.tags),
-            "source": scenario.source,
-            "prompt": scenario.prompt,
+        "task": {
+            "id": task.id,
+            "title": task.title,
+            "level": task.level,
+            "capability": task.capability,
+            "workflow": task.workflow,
+            "domain": task.domain,
+            "subdomain": task.subdomain,
+            "difficulty": task.difficulty,
+            "split": task.split,
+            "tags": list(task.tags),
+            "source": task.source,
+            "prompt": task.prompt,
             "fixtures": {
                 "backends": [
                     {
@@ -69,12 +69,12 @@ def build_task_envelope(scenario: Scenario) -> JsonDict:
                         "backend_id": backend.backend_id,
                         "url": backend.url,
                     }
-                    for backend in scenario.fixtures
+                    for backend in task.fixtures
                 ]
             },
-            "initial_state": scenario.initial_state,
-            "allowed_tools": list(scenario.allowed_tools),
-            "limits": scenario.limits,
+            "initial_state": task.initial_state,
+            "allowed_tools": list(task.allowed_tools),
+            "limits": task.limits,
         },
         "tool_call_protocol": {
             "format": "jsonl",
@@ -82,19 +82,19 @@ def build_task_envelope(scenario: Scenario) -> JsonDict:
             "record_shape": {"tool": "tool_name", "args": {}},
             "notes": [
                 "Write one JSON object per line.",
-                "Use only tools listed in scenario.allowed_tools.",
+                "Use only tools listed in task.allowed_tools.",
                 "The harness executes calls after the command exits and grades final state.",
             ],
         },
     }
 
 
-def write_task_envelope(path: Path, scenario: Scenario) -> None:
+def write_task_envelope(path: Path, task: Task) -> None:
     """Write one task envelope JSON file."""
 
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
-        json.dumps(build_task_envelope(scenario), indent=2, sort_keys=True) + "\n",
+        json.dumps(build_task_envelope(task), indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
 
@@ -125,7 +125,7 @@ def load_tool_calls(path: Path) -> tuple[ToolCall, ...]:
 
 def run_agent_command(
     *,
-    scenario: Scenario,
+    task: Task,
     command: str,
     timeout_seconds: float = 120,
     run_dir: Path | None = None,
@@ -136,7 +136,7 @@ def run_agent_command(
     resolved_run_dir.mkdir(parents=True, exist_ok=True)
     task_path = resolved_run_dir / "task.json"
     output_path = resolved_run_dir / "tool_calls.jsonl"
-    write_task_envelope(task_path, scenario)
+    write_task_envelope(task_path, task)
     if output_path.exists():
         output_path.unlink()
 
@@ -146,7 +146,7 @@ def run_agent_command(
             "WORKSPACE_BENCH_TASK_JSON": str(task_path),
             "WORKSPACE_BENCH_OUTPUT_JSONL": str(output_path),
             "WORKSPACE_BENCH_RUN_DIR": str(resolved_run_dir),
-            "WORKSPACE_BENCH_SCENARIO_ID": scenario.id,
+            "WORKSPACE_BENCH_SCENARIO_ID": task.id,
         }
     )
 
@@ -183,7 +183,7 @@ def run_agent_command(
             ),
         )
 
-    episode = WorkspaceEpisode(scenario=scenario)
+    episode = WorkspaceEpisode(task=task)
     for call in tool_calls:
         episode.step(call)
     final_snapshot = episode.snapshot()
@@ -191,7 +191,7 @@ def run_agent_command(
 
     return AgentCommandRun(
         run_result=RunResult(
-            scenario=scenario,
+            task=task,
             grade=grade,
             trace=tuple(episode.trace),
             final_snapshot=final_snapshot,

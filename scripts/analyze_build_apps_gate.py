@@ -1,6 +1,6 @@
 """Analyze a gpt-4.1-mini gating run over the Part 2 building pack.
 
-Reads a the evaluator per-model result JSON and prints the tier curve, per-family
+Reads a the evaluator per-model result JSON and prints the level curve, per-family
 pass rates, and the issue-code histogram — the calibration view used to accept or
 reject the pack's difficulty ladder.
 
@@ -22,9 +22,9 @@ def main() -> int:
         return 2
     payload = json.loads(open(sys.argv[1]).read())
     rows = payload["results"]
-    tiers = ["t0", "t1", "t2", "t3", "t4"]
+    levels = ["t0", "t1", "t2", "t3", "t4"]
 
-    by_tier: dict[str, list] = defaultdict(list)
+    by_level: dict[str, list] = defaultdict(list)
     by_family: dict[str, list] = defaultdict(list)
     issues: Counter = Counter()
     failures: list[tuple[str, str]] = []
@@ -32,9 +32,9 @@ def main() -> int:
         match = re.match(r"auth_(t\d)_([a-z0-9]+)_", row["id"])
         if not match:
             continue
-        tier, family = match.group(1), match.group(2)
+        level, family = match.group(1), match.group(2)
         passed = bool(row["passed"])
-        by_tier[tier].append(passed)
+        by_level[level].append(passed)
         by_family[family].append(passed)
         if not passed:
             first = row["issues"][0] if row["issues"] else {}
@@ -44,18 +44,18 @@ def main() -> int:
                     issues[issue.get("code", "?")] += 1
             failures.append((row["id"], code))
 
-    total = sum(len(v) for v in by_tier.values())
-    passed_total = sum(sum(v) for v in by_tier.values())
-    print(f"scenarios: {total}  strict pass: {passed_total} "
+    total = sum(len(v) for v in by_level.values())
+    passed_total = sum(sum(v) for v in by_level.values())
+    print(f"tasks: {total}  strict pass: {passed_total} "
           f"({100 * passed_total / max(total, 1):.1f}%)\n")
 
-    print("tier curve (pass %):")
+    print("level curve (pass %):")
     curve = []
-    for tier in tiers:
-        attempts = by_tier.get(tier, [])
+    for level in levels:
+        attempts = by_level.get(level, [])
         rate = 100 * sum(attempts) / max(len(attempts), 1)
         curve.append(rate)
-        print(f"  {tier}: {rate:5.1f}%  ({sum(attempts)}/{len(attempts)})")
+        print(f"  {level}: {rate:5.1f}%  ({sum(attempts)}/{len(attempts)})")
     monotonic = all(curve[i] >= curve[i + 1] for i in range(len(curve) - 1))
     print(f"  monotonic: {monotonic}\n")
 
@@ -65,21 +65,21 @@ def main() -> int:
         print(f"{family:10s} {sum(attempts):4d}/{len(attempts):<4d} "
               f"{100 * sum(attempts) / len(attempts):5.1f}%")
 
-    # per-family ladder matrix — the instrument that catches misallocated tier
+    # per-family ladder matrix — the instrument that catches misallocated level
     # material (a family whose t2 outpasses its t1 has its weight in the wrong
-    # tier even when the aggregate curve looks fine).
+    # level even when the aggregate curve looks fine).
     by_cell: dict[tuple[str, str], list] = defaultdict(list)
     for row in rows:
         match = re.match(r"auth_(t\d)_([a-z0-9]+)_", row["id"])
         if match:
             by_cell[(match.group(2), match.group(1))].append(bool(row["passed"]))
-    print(f"\n{'family':10s}" + "".join(f"{t:>7s}" for t in tiers)
+    print(f"\n{'family':10s}" + "".join(f"{t:>7s}" for t in levels)
           + "   ladder")
     for family in sorted(by_family):
         cells = []
         rates = []
-        for tier in tiers:
-            attempts = by_cell.get((family, tier), [])
+        for level in levels:
+            attempts = by_cell.get((family, level), [])
             cells.append(f"{sum(attempts)}/{len(attempts)}" if attempts else "-")
             rates.append(
                 sum(attempts) / len(attempts) if attempts else None
@@ -95,9 +95,9 @@ def main() -> int:
     for code, count in issues.most_common(12):
         print(f"  {count:4d}  {code}")
 
-    print(f"\nfailed scenarios ({len(failures)}):")
-    for scenario_id, code in failures[:60]:
-        print(f"  {scenario_id}  [{code}]")
+    print(f"\nfailed tasks ({len(failures)}):")
+    for task_id, code in failures[:60]:
+        print(f"  {task_id}  [{code}]")
     if len(failures) > 60:
         print(f"  ... and {len(failures) - 60} more")
     return 0

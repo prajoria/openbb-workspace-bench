@@ -1,0 +1,276 @@
+{
+  "id": "auth_t2_grouping_revision_preview_sync",
+  "title": "Compose the grouped Revision Preview Sync app",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-grouping",
+    "level-t2",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "grouping",
+    "composed"
+  ],
+  "prompt": "One grouped app to ship on \"Earnings Prep Data\": app \"Revision Preview Sync\", description \"Preset preview note with synced revisions.\", tab `preview` named \"Preview\" places: `estimate_revisions` at x=0 y=0 w=20 h=9; `earnings_note` at x=20 y=0 w=12 h=9 preset with params {\"symbol\": \"MSFT\"}, group \"Preview Symbol Sync\" (type param) syncing param symbol across [\"estimate_revisions\", \"earnings_note\"], suggested prompts: \"Draft a preview note for the synced symbol.\". The widgets are already served - submit apps_json and refresh widgets_json so `estimate_revisions` it caches results for 15 minutes. Time-based config converts to milliseconds: \"cache results for N minutes\" means staleTime N*60000; \"auto-refresh every N seconds\" means refetchInterval N*1000.",
+  "fixtures": {},
+  "initial_state": {
+    "custom_backends": [
+      {
+        "name": "Earnings Prep Data",
+        "url": "http://localhost:7805",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "estimate_revisions": {
+            "name": "Estimate Revisions",
+            "description": "Street estimate revisions by quarter.",
+            "endpoint": "/estimate-revisions",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "quarter",
+                    "headerName": "Quarter",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "eps_estimate",
+                    "headerName": "EPS Est",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "revenue_estimate_b",
+                    "headerName": "Revenue Est ($B)",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            }
+          },
+          "earnings_note": {
+            "name": "Earnings Preview",
+            "description": "Preview note for the earnings call.",
+            "endpoint": "/earnings-preview",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "estimate_revisions",
+        "expect": {
+          "type": "table",
+          "endpoint": "/estimate-revisions",
+          "staleTime": 900000
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Earnings Prep Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Revision Preview Sync",
+        "tabs_include": [
+          "preview"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "preview",
+            "widget_id": "estimate_revisions"
+          },
+          {
+            "tab_id": "preview",
+            "widget_id": "earnings_note"
+          }
+        ],
+        "groups_include": [
+          {
+            "name": "Preview Symbol Sync",
+            "type": "param",
+            "paramName": "symbol",
+            "widgetIds_include": [
+              "estimate_revisions",
+              "earnings_note"
+            ]
+          }
+        ],
+        "prompts_min_count": 1
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "estimate_revisions": {
+            "name": "Estimate Revisions",
+            "description": "Street estimate revisions by quarter.",
+            "endpoint": "/estimate-revisions",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "quarter",
+                    "headerName": "Quarter",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "eps_estimate",
+                    "headerName": "EPS Est",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "revenue_estimate_b",
+                    "headerName": "Revenue Est ($B)",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            },
+            "staleTime": 900000
+          },
+          "earnings_note": {
+            "name": "Earnings Preview",
+            "description": "Preview note for the earnings call.",
+            "endpoint": "/earnings-preview",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ]
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Revision Preview Sync",
+            "description": "Preset preview note with synced revisions.",
+            "tabs": {
+              "preview": {
+                "id": "preview",
+                "name": "Preview",
+                "layout": [
+                  {
+                    "i": "estimate_revisions",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  },
+                  {
+                    "i": "earnings_note",
+                    "x": 20,
+                    "y": 0,
+                    "w": 12,
+                    "h": 9,
+                    "state": {
+                      "params": {
+                        "symbol": "MSFT"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Preview Symbol Sync",
+                "type": "param",
+                "paramName": "symbol",
+                "widgetIds": [
+                  "estimate_revisions",
+                  "earnings_note"
+                ]
+              }
+            ],
+            "prompts": [
+              "Draft a preview note for the synced symbol."
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t2",
+  "capability": "widget-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "test",
+  "novelty": "Unique grouping/t2 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/estimate_revisions; appdefs:Earnings Prep Data/Revision Preview Sync."
+}

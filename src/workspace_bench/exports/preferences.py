@@ -11,18 +11,18 @@ from workspace_bench.core.models import JsonDict
 
 
 def build_preference_pairs(records: Iterable[RolloutRecord]) -> list[JsonDict]:
-    """Create best-vs-worst pairs from repeated attempts on the same scenario."""
+    """Create best-vs-worst pairs from repeated attempts on the same task."""
 
     grouped: dict[tuple[str | None, str | None], list[RolloutRecord]] = {}
     for record in records:
         key = (
             record.metadata.get("model_slug") or record.metadata.get("runner"),
-            record.metadata.get("scenario_id"),
+            record.metadata.get("task_id"),
         )
         grouped.setdefault(key, []).append(record)
 
     pairs = []
-    for (model_slug, scenario_id), attempts in grouped.items():
+    for (model_slug, task_id), attempts in grouped.items():
         if len(attempts) < 2:
             continue
         ranked = sorted(attempts, key=_preference_rank)
@@ -33,7 +33,7 @@ def build_preference_pairs(records: Iterable[RolloutRecord]) -> list[JsonDict]:
         pairs.append(
             {
                 "schema_version": PREFERENCE_SCHEMA_VERSION,
-                "scenario_id": scenario_id,
+                "task_id": task_id,
                 "model_slug": model_slug,
                 "chosen": chosen.to_dict(),
                 "rejected": rejected.to_dict(),

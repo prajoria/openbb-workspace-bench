@@ -1,0 +1,153 @@
+{
+  "id": "auth_t2_extend_modify_case_notes",
+  "title": "Modify Case Notes without dropping siblings",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-extend",
+    "level-t2",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "refresh",
+    "extend",
+    "composed"
+  ],
+  "prompt": "Check the workspace. The connected backend \"Surveillance Data\" already serves `case_notes` and `alert_metric`. Refresh widgets_json to preserve everything except these two stated changes: Case Notes cache results for 10 minutes and are categorized as Surveillance; and its case_id parameter must be restored to a text input. The resulting `case_notes` should read: `case_notes`: name \"Case Notes\", description \"Notes for one surveillance case.\", endpoint /case-notes, type markdown, sized w=12 h=8 on the grid, category \"Surveillance\", params required: case_id \u2014 a text input (type text), labeled \"Case\", default \"C-1042\", described \"Case identifier.\"; it caches results for 10 minutes. Time-based config converts to milliseconds: \"cache results for N minutes\" means staleTime N*60000; \"auto-refresh every N seconds\" means refetchInterval N*1000..",
+  "fixtures": {},
+  "initial_state": {
+    "custom_backends": [
+      {
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "case_notes": {
+            "name": "Case Notes",
+            "description": "Notes for one surveillance case.",
+            "endpoint": "/case-notes",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "case_id",
+                "type": "dropdownz",
+                "label": "Case",
+                "value": "C-1042",
+                "description": "Case identifier."
+              }
+            ]
+          },
+          "alert_metric": {
+            "name": "Open Alerts",
+            "description": "Open alert count.",
+            "endpoint": "/alert-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            }
+          }
+        }
+      }
+    ]
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Surveillance Data",
+        "widget_id": "case_notes",
+        "expect": {
+          "type": "markdown",
+          "endpoint": "/case-notes",
+          "gridData.w": 12,
+          "gridData.h": 8,
+          "category": "Surveillance",
+          "staleTime": 600000
+        },
+        "params_include": [
+          {
+            "paramName": "case_id",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "backend_name": "Surveillance Data",
+        "widget_id": "alert_metric",
+        "expect": {
+          "type": "metric",
+          "endpoint": "/alert-count"
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "case_notes": {
+            "name": "Case Notes",
+            "description": "Notes for one surveillance case.",
+            "endpoint": "/case-notes",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "case_id",
+                "type": "text",
+                "label": "Case",
+                "value": "C-1042",
+                "description": "Case identifier."
+              }
+            ],
+            "staleTime": 600000,
+            "category": "Surveillance"
+          },
+          "alert_metric": {
+            "name": "Open Alerts",
+            "description": "Open alert count.",
+            "endpoint": "/alert-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            }
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "repair",
+  "level": "t2",
+  "capability": "app-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique extend/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric,Surveillance Data/case_notes."
+}

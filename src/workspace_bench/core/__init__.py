@@ -1,2 +1,2 @@
-"""Core scenario, episode, runner, model, and grading primitives."""
+"""Core task, episode, runner, model, and grading primitives."""
 

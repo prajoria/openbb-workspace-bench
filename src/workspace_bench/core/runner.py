@@ -1,4 +1,4 @@
-"""Scenario loading and execution."""
+"""Task loading and execution."""
 
 from __future__ import annotations
 
@@ -8,117 +8,117 @@ from pathlib import Path
 
 from workspace_bench.agents import BenchAgent, build_agent
 from workspace_bench.core.episode import WorkspaceEpisode
-from workspace_bench.core.models import RunResult, Scenario, TaskPackManifest
+from workspace_bench.core.models import RunResult, Task, TaskSuiteManifest
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
-WORKSPACE_BENCH_V1_PACKAGE = "workspace_bench.core.scenario_packs.workspace_bench_v1"
+WORKSPACE_BENCH_V1_PACKAGE = "workspace_bench.core.task_suites.workspace_bench_v1"
 WORKSPACE_BENCH_V2_BUILD_APPS_PACKAGE = (
-    "workspace_bench.core.scenario_packs.workspace_bench_v2_build_openbb_apps"
+    "workspace_bench.core.task_suites.workspace_bench_v2_build_openbb_apps"
 )
-TASK_PACK_MANIFEST = "task_pack.json"
-BUILTIN_SCENARIO_PACKS = {
+TASK_SUITE_MANIFEST = "task_suite.json"
+BUILTIN_TASK_SUITES = {
     "core": WORKSPACE_BENCH_V1_PACKAGE,
     "build-openbb-apps": WORKSPACE_BENCH_V2_BUILD_APPS_PACKAGE,
 }
-BUILTIN_SCENARIO_PACK_ORDER = ("core", "build-openbb-apps")
+BUILTIN_TASK_SUITE_ORDER = ("core", "build-openbb-apps")
 
 
-class ScenarioRunner:
-    """Run Workspace Bench scenarios against a simulated Workspace."""
+class TaskRunner:
+    """Run Workspace Bench tasks against a simulated Workspace."""
 
     def __init__(self, workspace: SimulatedWorkspace | None = None):
         self.workspace = workspace or SimulatedWorkspace()
 
-    def run(self, scenario: Scenario, agent: BenchAgent | str = "oracle") -> RunResult:
+    def run(self, task: Task, agent: BenchAgent | str = "oracle") -> RunResult:
         if isinstance(agent, str):
             agent = build_agent(agent)
 
-        episode = WorkspaceEpisode(scenario=scenario, workspace=self.workspace)
-        for call in agent.tool_calls(scenario):
+        episode = WorkspaceEpisode(task=task, workspace=self.workspace)
+        for call in agent.tool_calls(task):
             episode.step(call)
 
         final_snapshot = episode.snapshot()
         grade = episode.grade()
         return RunResult(
-            scenario=scenario,
+            task=task,
             grade=grade,
             trace=tuple(episode.trace),
             final_snapshot=final_snapshot,
         )
 
 
-def load_builtin_scenarios(pack: str = "core") -> list[Scenario]:
-    """Load bundled JSON scenarios for a named pack."""
+def load_builtin_tasks(suite: str = "core") -> list[Task]:
+    """Load bundled JSON tasks for a named suite."""
 
-    if pack == "all":
-        return load_builtin_scenarios("core")
+    if suite == "all":
+        return load_builtin_tasks("core")
     try:
-        package = BUILTIN_SCENARIO_PACKS[pack]
+        package = BUILTIN_TASK_SUITES[suite]
     except KeyError as error:
-        available = ", ".join(["all", *BUILTIN_SCENARIO_PACK_ORDER])
-        raise KeyError(f"Unknown built-in scenario pack {pack!r}. Available: {available}") from error
-    scenario_files = sorted(
+        available = ", ".join(BUILTIN_TASK_SUITE_ORDER)
+        raise KeyError(f"Unknown built-in task suite {suite!r}. Available: {available}") from error
+    task_files = sorted(
         path
         for path in resources.files(package).glob("*.json")
-        if path.name != TASK_PACK_MANIFEST
+        if path.name != TASK_SUITE_MANIFEST
     )
-    manifest = load_builtin_task_pack_manifest(pack)
+    manifest = load_builtin_task_suite_manifest(suite)
     default_split = manifest.default_split if manifest else "dev"
-    return [load_scenario_file(Path(path), default_split=default_split) for path in scenario_files]
+    return [load_task_file(Path(path), default_split=default_split) for path in task_files]
 
 
-def load_builtin_task_pack_manifest(pack: str = "core") -> TaskPackManifest | None:
-    """Load a bundled task-pack manifest when one exists."""
+def load_builtin_task_suite_manifest(suite: str = "core") -> TaskSuiteManifest | None:
+    """Load a bundled task-suite manifest when one exists."""
 
-    if pack == "all":
-        return load_builtin_task_pack_manifest("core")
-    package = BUILTIN_SCENARIO_PACKS[pack]
-    manifest = resources.files(package) / TASK_PACK_MANIFEST
+    if suite == "all":
+        return load_builtin_task_suite_manifest("core")
+    package = BUILTIN_TASK_SUITES[suite]
+    manifest = resources.files(package) / TASK_SUITE_MANIFEST
     if not manifest.is_file():
         return None
     with manifest.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
     if not isinstance(payload, dict):
         raise ValueError(f"{manifest} must contain a JSON object")
-    return TaskPackManifest.from_dict(payload)
+    return TaskSuiteManifest.from_dict(payload)
 
 
-def load_scenario_file(path: Path, default_split: str = "dev") -> Scenario:
+def load_task_file(path: Path, default_split: str = "dev") -> Task:
     with path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
-    return Scenario.from_dict(payload, source_path=path, default_split=default_split)
+    return Task.from_dict(payload, source_path=path, default_split=default_split)
 
 
-def load_task_pack_manifest(path: Path) -> TaskPackManifest | None:
-    manifest_path = path / TASK_PACK_MANIFEST
+def load_task_suite_manifest(path: Path) -> TaskSuiteManifest | None:
+    manifest_path = path / TASK_SUITE_MANIFEST
     if not manifest_path.exists():
         return None
     with manifest_path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
     if not isinstance(payload, dict):
         raise ValueError(f"{manifest_path} must contain a JSON object")
-    return TaskPackManifest.from_dict(payload)
+    return TaskSuiteManifest.from_dict(payload)
 
 
-def load_scenario_directory(path: Path) -> list[Scenario]:
+def load_task_directory(path: Path) -> list[Task]:
     if not path.exists():
-        raise FileNotFoundError(f"scenario directory does not exist: {path}")
+        raise FileNotFoundError(f"task directory does not exist: {path}")
     if not path.is_dir():
-        raise NotADirectoryError(f"scenario directory is not a directory: {path}")
-    manifest = load_task_pack_manifest(path)
+        raise NotADirectoryError(f"task directory is not a directory: {path}")
+    manifest = load_task_suite_manifest(path)
     default_split = manifest.default_split if manifest else "dev"
-    scenario_paths = sorted(
-        candidate for candidate in path.glob("*.json") if candidate.name != TASK_PACK_MANIFEST
+    task_paths = sorted(
+        candidate for candidate in path.glob("*.json") if candidate.name != TASK_SUITE_MANIFEST
     )
     return [
-        load_scenario_file(scenario_path, default_split=default_split)
-        for scenario_path in scenario_paths
+        load_task_file(task_path, default_split=default_split)
+        for task_path in task_paths
     ]
 
 
-def find_scenario(scenario_id: str, pack: str = "all") -> Scenario:
-    for scenario in load_builtin_scenarios(pack):
-        if scenario.id == scenario_id:
-            return scenario
-    raise KeyError(f"Unknown scenario {scenario_id!r}")
+def find_task(task_id: str, suite: str = "all") -> Task:
+    for task in load_builtin_tasks(suite):
+        if task.id == task_id:
+            return task
+    raise KeyError(f"Unknown task {task_id!r}")

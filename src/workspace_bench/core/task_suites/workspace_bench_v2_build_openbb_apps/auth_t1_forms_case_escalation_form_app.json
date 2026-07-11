@@ -1,0 +1,151 @@
+{
+  "id": "auth_t1_forms_case_escalation_form_app",
+  "title": "Ship Case Escalation Form as the Case Escalation app",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-forms",
+    "level-t1",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "forms"
+  ],
+  "prompt": "Build widgets.json (`case_escalation_form`: name \"Case Escalation Form\", description \"Escalate a surveillance case to a reviewer.\", endpoint /case-escalation, type table, sized w=20 h=10 on the grid, params required: escalation \u2014 a form submitting POST to /case-escalation-submit with inputs [case_id \u2014 a text input (type text), labeled \"Case\", default \"C-1042\"; due_date \u2014 a date picker (type date), labeled \"Due date\", default \"$currentDate+2d\"; escalate \u2014 a button (type button), labeled \"Escalate\"] (that bracket is the complete list of the form's inputParams)) and apps.json (an app named \"Case Escalation\" (description \"Escalate surveillance cases.\") with one tab `cases` named \"Cases\" placing `case_escalation_form` at x=0 y=0 w=20 h=10) for \"Surveillance Data\" at http://localhost:7807; add them together.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Surveillance Data",
+        "widget_id": "case_escalation_form",
+        "expect": {
+          "type": "table",
+          "endpoint": "/case-escalation",
+          "gridData.w": 20,
+          "gridData.h": 10
+        },
+        "params_include": [
+          {
+            "paramName": "escalation",
+            "type": "form"
+          }
+        ]
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Surveillance Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Case Escalation",
+        "tabs_include": [
+          "cases"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "cases",
+            "widget_id": "case_escalation_form"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "case_escalation_form": {
+            "name": "Case Escalation Form",
+            "description": "Escalate a surveillance case to a reviewer.",
+            "endpoint": "/case-escalation",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 10
+            },
+            "params": [
+              {
+                "paramName": "escalation",
+                "type": "form",
+                "label": "Escalation",
+                "endpoint": "/case-escalation-submit",
+                "method": "POST",
+                "inputParams": [
+                  {
+                    "paramName": "case_id",
+                    "type": "text",
+                    "label": "Case",
+                    "value": "C-1042"
+                  },
+                  {
+                    "paramName": "due_date",
+                    "type": "date",
+                    "label": "Due date",
+                    "value": "$currentDate+2d"
+                  },
+                  {
+                    "paramName": "escalate",
+                    "type": "button",
+                    "label": "Escalate"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Case Escalation",
+            "description": "Escalate surveillance cases.",
+            "tabs": {
+              "cases": {
+                "id": "cases",
+                "name": "Cases",
+                "layout": [
+                  {
+                    "i": "case_escalation_form",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 10
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t1",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique forms/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/case_escalation_form; appdefs:Surveillance Data/Case Escalation."
+}

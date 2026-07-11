@@ -7,10 +7,10 @@ OpenBB Workspace Bench:
 - Prime Intellect, [General Agent: A Self-Evolving, Synthetic Agent Environment](https://www.primeintellect.ai/blog/general-agent?dark=).
 
 It also uses the current Workspace Bench repository state as evidence. At the
-time this memo was written, `workspace-bench validate --pack all
---min-scenarios 40 --json` passed with 40 scenarios, 40 oracle passes, and 40
+time this memo was written, `workspace-bench validate --suite all
+--min-tasks 40 --json` passed with 40 tasks, 40 oracle passes, and 40
 noop failures. The manifest reports 11 capabilities, 12 workflows, 9
-subdomains, 5 levels, and one top-level domain: finance. All bundled scenarios
+subdomains, 5 levels, and one top-level domain: finance. All bundled tasks
 are currently in the `dev` split.
 
 ## Executive View
@@ -21,14 +21,14 @@ ROI direction is:
 1. Keep Workspace Bench as a Terminal-Bench-style, stateful, deterministic
    Workspace Agent benchmark.
 2. Add a task/environment factory layer that can generate, evolve, calibrate,
-   and certify many Workspace scenarios.
+   and certify many Workspace tasks.
 3. Let RL, SFT, preference optimization, and model comparison consume the same
    task, trace, and grader contracts.
 
 TMax and General Agent both point to the same core lesson: the scarce asset is
 not the RL algorithm. The scarce asset is a large, diverse, executable,
 verifiable task distribution with calibrated difficulty. Workspace Bench already
-has the seed of this: scenario JSON, a simulator, MCP-like tools, fixture
+has the seed of this: task JSON, a simulator, MCP-like tools, fixture
 backends, oracle traces, final-state graders, trace checks, run artifacts,
 exports, and a Gym-style wrapper. What is missing is the systematic factory
 that turns those contracts into a broad curriculum.
@@ -70,17 +70,17 @@ Key claims from the post:
 The transferable insight is not "use DPPO immediately." It is that a simple RL
 algorithm can work once the environment distribution is good enough. For
 Workspace Bench, that means we should first build the equivalent of TMax-15K for
-Workspace tasks: many executable Workspace scenarios with controlled workflow,
+Workspace tasks: many executable Workspace tasks with controlled workflow,
 tool, data, state, and difficulty axes.
 
 ### TMax Concept Mapping
 
 | TMax concept | Workspace Bench analogue | Gap today |
 | --- | --- | --- |
-| Terminal environment | Workspace scenario plus fixture backend | Exists for 40 scenarios |
+| Terminal environment | Workspace task plus fixture backend | Exists for 40 tasks |
 | Shell commands | Workspace MCP tool calls | Exists |
 | Files and services | Dashboards, tabs, widgets, apps, backend catalogs, fixture data | Exists, but limited catalog diversity |
-| Docker build check | Scenario validation and fixture load check | Exists partially |
+| Docker build check | Task validation and fixture load check | Exists partially |
 | Unit-test verifier | Final-state and trace grader | Exists |
 | Graded verifier | Partial score and issue codes | Exists partially |
 | Difficulty axes | level, capability, workflow, difficulty, tags | Exists as metadata, not calibrated |
@@ -88,9 +88,9 @@ tool, data, state, and difficulty axes.
 | Soft filtering during RL | Drop all-pass/all-fail rollout groups | Missing from local RL helpers |
 | Harness generalization tests | JSONL, interactive model runner, real MCP smoke, future browser runner | Partial |
 
-The TMax warning for Workspace Bench: do not hand-write 40 polished scenarios
+The TMax warning for Workspace Bench: do not hand-write 40 polished tasks
 and call that an RL environment. The serious unlock is a reproducible pipeline
-that can produce hundreds or thousands of scenarios while preserving verifiers.
+that can produce hundreds or thousands of tasks while preserving verifiers.
 
 ## What General Agent Contributes
 
@@ -104,8 +104,8 @@ Key claims from the post:
   language instruction, a gold solution, and a verification function.
 - The environment is synthetic and self-evolving: a synthesizer designs task
   families, and a solver attempts them.
-- Tasks evolve through difficulty tiers, from `t0` to `t4`.
-- Each tier is empirically gated by solver pass rate, not just designer intuition.
+- Tasks evolve through difficulty levels, from `t0` to `t4`.
+- Each level is empirically gated by solver pass rate, not just designer intuition.
 - Gold replay must flip verification from failing on the initial state to
   passing after the gold solution.
 - The current corpus reported by the post has 4,504 tasks, 1,040 domains, and
@@ -122,12 +122,12 @@ This maps very naturally onto Workspace Bench:
 - The "database" is Workspace state plus deterministic fixture backends.
 - The "tools" are Workspace MCP tools and the app/widget catalog exposed
   through those tools.
-- The "instruction" is `Scenario.prompt`.
+- The "instruction" is `Task.prompt`.
 - The "gold solution" is `oracle_tool_calls`.
-- The "verification function" is `success` plus `grade_scenario`.
+- The "verification function" is `success` plus `grade_task`.
 - The "task family" is currently implicit in workflow/capability, but should
   become explicit.
-- Difficulty tiers map to L0-L5 and can also become family-local tiers such as
+- Difficulty levels map to L0-L5 and can also become family-local levels such as
   `t0` through `t4`.
 
 The most important General Agent idea to copy is empirical gating. Workspace
@@ -141,34 +141,34 @@ agents.
 | --- | --- | --- |
 | Pydantic DB | Workspace state model and fixture backend data | Exists, but not exposed as task-family schema |
 | Domain-specific tools | Workspace MCP tools plus catalog-specific widget/app schemas | Exists |
-| Instruction | Scenario prompt | Exists |
+| Instruction | Task prompt | Exists |
 | Gold solution | Oracle tool calls | Exists |
 | Verify function | Deterministic grader | Exists |
-| Initial verify fails, gold verify passes | Noop fails, oracle passes | Exists at scenario level |
+| Initial verify fails, gold verify passes | Noop fails, oracle passes | Exists at task level |
 | Task family | Workflow/capability clusters | Missing as first-class schema |
-| Tiered evolution | L0-L4 levels and difficulty labels | Partial, not family-local |
+| Leveled evolution | L0-L4 levels and difficulty labels | Partial, not family-local |
 | Solver pass-rate gating | Model comparison runner | Partial, not in generation loop |
-| Synthesizer agent | Scenario factory agent | Missing |
+| Synthesizer agent | Task factory agent | Missing |
 | Multi-harness solver | JSONL, interactive, MCP sidecar, future browser | Partial |
 
 The General Agent warning for Workspace Bench: if we add generation without
 verification and pass-rate gating, we will create benchmark-shaped noise. The
-factory must certify tasks, not just write scenario JSON.
+factory must certify tasks, not just write task JSON.
 
 ## Current Workspace Bench Strengths
 
 The repository is already aligned with the right architecture in several ways:
 
-- `Scenario` is the durable task contract.
+- `Task` is the durable task contract.
 - `WorkspaceEpisode` is the step-based execution contract.
 - `SimulatedWorkspace` is a cheap state machine for Workspace MCP-like tools.
-- `grade_scenario` is deterministic and checks durable Workspace state first.
+- `grade_task` is deterministic and checks durable Workspace state first.
 - `oracle` and `noop` baselines are strong validation primitives.
 - the evaluator creates interactive model traces, not only batch JSONL.
 - Exports produce rollout, SFT, and preference data.
 - `WorkspaceGymEnv` wraps the same episode and grader instead of creating a
   separate RL-only environment.
-- Private task packs support BYO enterprise data.
+- Private task suites support BYO enterprise data.
 - The Stark pack already points toward broader workflow coverage beyond toy
   equity widgets.
 
@@ -180,11 +180,11 @@ verification, not prose judging.
 
 ### 1. A First-Class Task Family Schema
 
-The repo has scenarios, packs, workflows, capabilities, and difficulty labels.
+The repo has tasks, packs, workflows, capabilities, and difficulty labels.
 It does not yet have task families.
 
-A task family should group related scenarios that share a backend catalog,
-business workflow, and verifier shape, then vary by tier. For example:
+A task family should group related tasks that share a backend catalog,
+business workflow, and verifier shape, then vary by level. For example:
 
 - `earnings_prep_family`
 - `portfolio_morning_review_family`
@@ -202,16 +202,16 @@ Each family should define:
 - state template
 - verifier template
 - evolution strategies used
-- tiers and expected pass-rate bands
+- levels and expected pass-rate bands
 - oracle/gold trace
 - gating results by model
 
-Scenario fields to add later:
+Task fields to add later:
 
 ```json
 {
   "family_id": "earnings_prep",
-  "tier": "t2",
+  "level": "t2",
   "evolution_strategies": ["larger_catalog", "cross_tab_coupling"],
   "gating": {
     "model": "gpt-4.1",
@@ -240,24 +240,24 @@ layout would be:
 src/workspace_bench/factory/
   axes.py              Structured generation axes
   families.py          Task family schema and templates
-  synthesize.py        LLM or rule-based scenario synthesis
-  evolve.py            Tier evolution strategies
-  validate.py          Structural validation beyond scenario load
+  synthesize.py        LLM or rule-based task synthesis
+  evolve.py            Level evolution strategies
+  validate.py          Structural validation beyond task load
   gate.py              Run solver attempts and accept/reject pass-rate bands
   dedupe.py            Similarity and canary checks
   split.py             Train/dev/validation/test assignment
-  write_pack.py        Emit scenario JSON plus task_pack.json
+  write_pack.py        Emit task JSON plus task_suite.json
 ```
 
 CLI commands:
 
 ```bash
-workspace-bench synthesize-family --family earnings_prep --tiers t0:t4
-workspace-bench evolve-scenario --scenario l2_earnings_dashboard --target-tier t3
-workspace-bench gate-pack --scenario-dir generated/earnings --model gpt-4.1 --attempts 20
-workspace-bench calibrate-pack --scenario-dir generated/earnings --models-file examples/models.json
-workspace-bench split-pack --scenario-dir generated/earnings --strategy family-heldout
-workspace-bench certify-pack --scenario-dir generated/earnings --min-oracle-pass-rate 1.0
+workspace-bench synthesize-family --family earnings_prep --levels t0:t4
+workspace-bench evolve-task --task l2_earnings_dashboard --target-level t3
+workspace-bench gate-pack --task-dir generated/earnings --model gpt-4.1 --attempts 20
+workspace-bench calibrate-pack --task-dir generated/earnings --models-file examples/models.json
+workspace-bench split-pack --task-dir generated/earnings --strategy family-heldout
+workspace-bench certify-pack --task-dir generated/earnings --min-oracle-pass-rate 1.0
 ```
 
 The first version can be mostly deterministic templates plus small LLM-assisted
@@ -282,12 +282,12 @@ Suggested axes:
 | Ambiguity/noise | typo, implicit constraint, conflicting wording, stale label, distractor widget | Tests robustness |
 | Verification shape | exact state, numeric threshold, semantic note content, trace discipline, no-regression repair | Determines reward quality |
 
-This would let Workspace Bench describe not just "40 scenarios" but the shape
+This would let Workspace Bench describe not just "40 tasks" but the shape
 of the task distribution.
 
 ### 4. Evolution Strategies
 
-General Agent evolves tasks tier by tier. Workspace Bench should define a small
+General Agent evolves tasks level by level. Workspace Bench should define a small
 taxonomy of Workspace evolution strategies:
 
 - `larger_catalog`: expose more widgets/apps than needed.
@@ -327,18 +327,18 @@ this should become measured.
 
 A practical gating protocol:
 
-1. Generate or hand-write a candidate scenario.
+1. Generate or hand-write a candidate task.
 2. Validate schema and fixture availability.
 3. Assert noop fails.
 4. Replay oracle and assert pass.
 5. Run one or more gating agents for N attempts.
-6. Accept only if pass rate lands in the target band for its tier.
-7. Store gating metadata in the scenario or sidecar report.
+6. Accept only if pass rate lands in the target band for its level.
+7. Store gating metadata in the task or sidecar report.
 8. Assign splits after gating, ideally holding out whole families.
 
 Example pass-rate bands:
 
-| Tier | Target pass rate with gating model |
+| Level | Target pass rate with gating model |
 | --- | --- |
 | `t0` | 0.80 to 1.00 |
 | `t1` | 0.65 to 0.90 |
@@ -363,7 +363,7 @@ Recommended split policy:
 - `hidden`: private/public-leaderboard tasks with prompts and success criteria
   withheld.
 
-Better yet, split by family, not only by scenario. If `earnings_prep_t0` is in
+Better yet, split by family, not only by task. If `earnings_prep_t0` is in
 train and `earnings_prep_t4` is in test, the model may learn family-specific
 shortcuts. A stricter split would hold out entire workflows, backends, or
 families.
@@ -436,18 +436,18 @@ debugging, RL reward shaping, and product tool design.
 The current RL layer is appropriately modest. `WorkspaceGymEnv` returns
 observations with the task, allowed tools, last tool result, snapshot, turn
 index, and remaining turns. Actions are structured Workspace tool calls. Final
-reward comes from `grade_scenario`, and optional process rewards can shape
+reward comes from `grade_task`, and optional process rewards can shape
 valid tool use, schema-before-create, and repeated snapshots.
 
 That is the correct baseline.
 
 What to add next:
 
-- rollout group collection for K attempts per scenario
+- rollout group suite for K attempts per task
 - all-pass/all-fail filtering for RL batches
-- active sampling of scenarios whose pass rate is neither 0 nor 1
+- active sampling of tasks whose pass rate is neither 0 nor 1
 - reward reports by issue code
-- curriculum sampling by tier and measured pass rate
+- curriculum sampling by level and measured pass rate
 - deterministic seeding and run replay
 - train/eval split enforcement in `WorkspaceGymEnv`
 - batch reset/step helpers for high-throughput rollout workers
@@ -459,18 +459,18 @@ What not to do yet:
 - Do not make an LLM judge the core reward.
 - Do not tightly couple the repo to one trainer.
 - Do not train on public oracle traces and then report on the same public
-  scenarios.
+  tasks.
 - Do not optimize process reward so heavily that agents learn tool rituals
   without creating correct workspace state.
 
 The best first RL experiment would be small and honest:
 
-1. Create a train pack with generated/evolved scenarios.
+1. Create a train pack with generated/evolved tasks.
 2. Hold out validation and test families.
-3. Collect K rollouts per scenario using a baseline local model.
+3. Collect K rollouts per task using a baseline local model.
 4. Filter all-pass/all-fail groups.
 5. Run outcome-only RL or an RL-Factory adapter.
-6. Evaluate on held-out Workspace Bench scenarios through the same grader.
+6. Evaluate on held-out Workspace Bench tasks through the same grader.
 7. Report not only pass rate, but failure taxonomy shifts.
 
 ## Applying This To The WorkspaceBench Blog Posts
@@ -490,7 +490,7 @@ argument even more explicit:
 - Workspace agents are not judged by nice answers.
 - They are judged by whether they leave behind a correct Workspace state.
 - The benchmark is the product contract for agentic Workspace tools.
-- The same scenario can be run against local models, hosted models, custom
+- The same task can be run against local models, hosted models, custom
   agents, and eventually real Workspace sessions.
 
 Add one small section: "Why final-state grading matters." This can reference the
@@ -524,27 +524,27 @@ Outline:
 1. Hand-written evals are the seed, not the destination.
 2. A Workspace task family is initial state, fixture data, tool surface,
    instruction, oracle trace, and verifier.
-3. Tasks evolve across tiers by adding catalog size, cross-backend coupling,
+3. Tasks evolve across levels by adding catalog size, cross-backend coupling,
    repair pathologies, stricter layout, ambiguity, and numeric constraints.
 4. Candidate tasks are certified by oracle replay, noop failure, and solver
    pass-rate bands.
-5. The same certified tasks power evals, private task packs, SFT exports,
+5. The same certified tasks power evals, private task suites, SFT exports,
    preference pairs, and RL rollouts.
 
 That post would connect WorkspaceBench to the TMax and General Agent direction
-without claiming that OpenBB is already training frontier agents.
+without claiming that OpenBB is already training fronlevel agents.
 
 ## Recommended Architecture
 
 ```mermaid
 flowchart LR
-    Axes["Generation axes"] --> Synth["Scenario synthesizer"]
+    Axes["Generation axes"] --> Synth["Task synthesizer"]
     Families["Task family templates"] --> Synth
     Synth --> Structural["Structural validator"]
     Structural --> Oracle["Oracle replay"]
     Oracle --> Noop["Noop failure check"]
     Noop --> Gate["Solver pass-rate gate"]
-    Gate --> Pack["Certified task pack"]
+    Gate --> Pack["Certified task suite"]
     Pack --> Eval["Benchmark eval"]
     Pack --> Export["SFT / preference / rollout export"]
     Pack --> Env["WorkspaceGymEnv / RL adapter"]
@@ -562,9 +562,9 @@ task-pack generation.
 
 ### P0: Make The Current Bench Research-Grade
 
-- Add non-dev splits to bundled scenarios.
-- Add family metadata fields to scenarios.
-- Add scenario stats to manifests: oracle steps, tool count, widget catalog
+- Add non-dev splits to bundled tasks.
+- Add family metadata fields to tasks.
+- Add task stats to manifests: oracle steps, tool count, widget catalog
   size, initial widget count, required artifact count.
 - Add validation for "initial state fails, oracle state passes" explicitly.
 - Add model baseline reports for at least one hosted and one local model.
@@ -575,16 +575,16 @@ task-pack generation.
 
 - Implement `workspace_bench.factory` with deterministic template generation.
 - Define 5 to 8 task families across the existing core and Stark fixtures.
-- Add tiered evolution strategies.
-- Generate candidate scenario JSON from templates.
-- Certify generated scenarios with oracle/noop validation.
+- Add leveled evolution strategies.
+- Generate candidate task JSON from templates.
+- Certify generated tasks with oracle/noop validation.
 - Gate a small generated pack with the evaluator.
 - Store gating metadata in a sidecar report first, then consider embedding it
-  in scenario JSON.
+  in task JSON.
 
 ### P2: Calibrated Environment Packs
 
-- Generate 200 to 500 scenarios across families and tiers.
+- Generate 200 to 500 tasks across families and levels.
 - Split by held-out families.
 - Run multiple model baselines with repeated attempts.
 - Publish a benchmark card for each pack.

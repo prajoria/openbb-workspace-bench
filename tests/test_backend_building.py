@@ -1,7 +1,7 @@
 """Tests for the Part 2 build-openbb-apps surface: validation, simulator, graders."""
 
 from workspace_bench.core.episode import WorkspaceEpisode
-from workspace_bench.core.models import Scenario, ToolCall
+from workspace_bench.core.models import Task, ToolCall
 from workspace_bench.workspace.backend_validation import (
     validate_apps_json,
     validate_widgets_json,
@@ -294,9 +294,9 @@ def test_seeded_custom_backend_and_broken_instantiate():
 # ---------------------------------------------------------------- grading
 
 
-def _building_scenario() -> Scenario:
-    return Scenario.from_dict({
-        "id": "auth_test_scenario",
+def _building_task() -> Task:
+    return Task.from_dict({
+        "id": "auth_test_task",
         "title": "Author a VIX backend",
         "level": "L3",
         "capability": "backend-building",
@@ -345,16 +345,16 @@ def _building_scenario() -> Scenario:
     })
 
 
-def test_building_scenario_oracle_passes_and_noop_fails():
-    scenario = _building_scenario()
-    episode = WorkspaceEpisode(scenario)
-    for call in scenario.oracle_tool_calls:
+def test_building_task_oracle_passes_and_noop_fails():
+    task = _building_task()
+    episode = WorkspaceEpisode(task)
+    for call in task.oracle_tool_calls:
         result = episode.step(call)
         assert result.get("ok"), result
     grade = episode.grade()
     assert grade.passed, [issue.message for issue in grade.issues]
 
-    noop = WorkspaceEpisode(scenario)
+    noop = WorkspaceEpisode(task)
     noop_grade = noop.grade()
     assert not noop_grade.passed
     assert any(
@@ -363,8 +363,8 @@ def test_building_scenario_oracle_passes_and_noop_fails():
 
 
 def test_building_grader_catches_wrong_definition():
-    scenario = _building_scenario()
-    episode = WorkspaceEpisode(scenario)
+    task = _building_task()
+    episode = WorkspaceEpisode(task)
     wrong_widget = dict(VALID_WIDGET, endpoint="/wrong")
     episode.step(ToolCall(name="manage_backends", args={
         "operation": "add", "name": "VIX Desk", "url": "http://localhost:7779",

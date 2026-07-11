@@ -1,21 +1,21 @@
 # Architecture
 
-OpenBB Workspace Bench is organized around one stable contract: a scenario describes the initial Workspace state, the agent prompt, the allowed Workspace MCP tools, and deterministic success criteria.
+OpenBB Workspace Bench is organized around one stable contract: a task describes the initial Workspace state, the agent prompt, the allowed Workspace MCP tools, and deterministic success criteria.
 
-Scenarios are grouped into collections. Two ship bundled: `core`
-(`workspace-bench-v1`) — 300 generated, certified scenarios for *operating*
+Tasks are grouped into suites. Two ship bundled: `core`
+(`workspace-bench-v1`) — 300 generated, certified tasks for *operating*
 the workspace, spanning the equities, macro, portfolio, and Stark enterprise
 fixture backends — and `build-openbb-apps`
-(`workspace-bench-v2-build-openbb-apps`) — 212 generated, certified scenarios
+(`workspace-bench-v2-build-openbb-apps`) — 212 generated, certified tasks
 for *building* custom backend apps: the agent writes the `widgets.json` /
 `apps.json` payloads a backend serves, validated against the transcribed
 production rules. `all` remains a backward-compatible CLI alias for `core`.
 
 ```mermaid
 flowchart LR
-    Scenario["Scenario JSON"] --> Runner["ScenarioRunner"]
+    Task["Task JSON"] --> Runner["TaskRunner"]
     Fixtures["Fixture Backends"] --> Workspace["SimulatedWorkspace"]
-    Scenario --> Envelope["Task Envelope"]
+    Task --> Envelope["Task Envelope"]
     Envelope --> ExtAgent["External Agent Command"]
     Runner --> Agent["Agent"]
     ExtAgent --> ToolCalls
@@ -32,7 +32,7 @@ flowchart LR
 
 The implementation is grouped by responsibility:
 
-- `workspace_bench.core`: scenarios, dataclasses, episodes, runner, and graders.
+- `workspace_bench.core`: tasks, dataclasses, episodes, runner, and graders.
 - `workspace_bench.workspace`: deterministic fixture backends, simulator, and live MCP smoke bridge.
 - `workspace_bench.agents`: oracle/noop baselines, JSONL command protocol, and model adapter helpers.
 - `workspace_bench.reports`: model comparison, metrics, charts, and analysis reports.
@@ -41,7 +41,7 @@ The implementation is grouped by responsibility:
 
 The package root intentionally stays small: `workspace_bench.cli` is the command
 entry point and `workspace_bench.__init__` exposes a few convenience objects.
-Implementation imports should use the focused packages above. Scenario metadata
+Implementation imports should use the focused packages above. Task metadata
 uses explicit axes: `capability`, `workflow`, `domain`, and `subdomain`.
 
 ## Components
@@ -67,7 +67,7 @@ Each fixture can be used in two ways:
 - as a real HTTP server through `workspace-bench serve-fixture`
 
 The Stark fixture packages widget and app metadata from the demo enterprise app
-catalog into a local backend. It lets scenarios cover portfolio command
+catalog into a local backend. It lets tasks cover portfolio command
 centers, client meeting prep, vendor monitoring, compliance surveillance,
 execution exceptions, and research workflows without requiring a live external
 service.
@@ -92,14 +92,14 @@ It is not a pixel or browser simulator. It is a deterministic state machine for 
 
 The runner:
 
-1. loads a scenario
+1. loads a task
 2. registers fixture backends
 3. seeds initial dashboard state
 4. executes agent tool calls
 5. captures trace and final snapshot
 6. invokes the grader
 
-The bundled `oracle` agent replays reference traces from scenario files. The `noop` agent is a failing baseline.
+The bundled `oracle` agent replays reference traces from task files. The `noop` agent is a failing baseline.
 
 ### External Agent Command
 
@@ -119,10 +119,10 @@ model, and grades the same final state.
 ```python
 from workspace_bench.core.episode import WorkspaceEpisode
 from workspace_bench.core.models import ToolCall
-from workspace_bench.core.runner import find_scenario
+from workspace_bench.core.runner import find_task
 
-scenario = find_scenario("gen_t0_create_price_performance_aapl")
-episode = WorkspaceEpisode(scenario)
+task = find_task("gen_t0_create_price_performance_aapl")
+episode = WorkspaceEpisode(task)
 
 observation = episode.step(
     ToolCall(
@@ -158,14 +158,14 @@ The primary artifact is final Workspace state. Natural-language quality can be l
 
 ## Real Workspace Adapter
 
-The simulator and a real Workspace adapter share the same scenario and grading contracts:
+The simulator and a real Workspace adapter share the same task and grading contracts:
 
 ```python
 result = workspace.call_tool(ToolCall("create_widget", {...}))
 snapshot = workspace.snapshot()
 ```
 
-`workspace-bench smoke-workspace-mcp` forwards scenario tool calls to a running `workspace-mcp` server at `http://127.0.0.1:8787/mcp`. It emulates the browser websocket bridge with `SimulatedWorkspace`, so the smoke path covers the real MCP streamable HTTP endpoint, tool schemas, server-side validation, browser command translation, and session-context updates.
+`workspace-bench smoke-workspace-mcp` forwards task tool calls to a running `workspace-mcp` server at `http://127.0.0.1:8787/mcp`. It emulates the browser websocket bridge with `SimulatedWorkspace`, so the smoke path covers the real MCP streamable HTTP endpoint, tool schemas, server-side validation, browser command translation, and session-context updates.
 
 With `--check-surface`, the smoke command also checks that the server exposes
 the expected tool, prompt, and resource surface. This is useful when validating
@@ -175,9 +175,9 @@ The smoke bridge is not a high-throughput production adapter. It intentionally o
 
 ## Design Constraints
 
-- No live market data in default scenarios.
+- No live market data in default tasks.
 - Fixture data should be versioned and stable.
 - Graders should prefer exact state checks over LLM judging.
-- Scenario ids should be durable.
+- Task ids should be durable.
 - Tool traces should be preserved for regression analysis and post-training.
 - Real Workspace sessions must be isolated per run before using this for high-throughput evaluation.

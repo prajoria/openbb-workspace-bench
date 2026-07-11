@@ -7,8 +7,8 @@ from workspace_bench.exports.sft import format_sft_record
 
 
 def test_build_preference_pairs_prefers_passing_or_higher_score_attempt() -> None:
-    failed = _record("scenario_1", passed=False, score=0.5, repeat=1)
-    passed = _record("scenario_1", passed=True, score=1.0, repeat=2)
+    failed = _record("task_1", passed=False, score=0.5, repeat=1)
+    passed = _record("task_1", passed=True, score=1.0, repeat=2)
 
     pairs = build_preference_pairs([failed, passed])
 
@@ -18,23 +18,23 @@ def test_build_preference_pairs_prefers_passing_or_higher_score_attempt() -> Non
 
 
 def test_rollout_schema_version_is_stable() -> None:
-    record = _record("scenario_1", passed=True, score=1.0, repeat=1)
+    record = _record("task_1", passed=True, score=1.0, repeat=1)
 
     assert record.to_dict()["schema_version"] == ROLLOUT_SCHEMA_VERSION
 
 
 def test_format_sft_record_supports_openai_messages() -> None:
-    record = _record("scenario_1", passed=True, score=1.0, repeat=1)
+    record = _record("task_1", passed=True, score=1.0, repeat=1)
     record.messages.append({"role": "user", "content": "hello"})
 
     payload = format_sft_record(record, fmt="openai_messages")
 
     assert payload["messages"] == [{"role": "user", "content": "hello"}]
-    assert payload["metadata"]["scenario_id"] == "scenario_1"
+    assert payload["metadata"]["task_id"] == "task_1"
 
 
 def test_annotate_rollouts_adds_benchmark_metadata() -> None:
-    record = _record("scenario_1", passed=True, score=1.0, repeat=1)
+    record = _record("task_1", passed=True, score=1.0, repeat=1)
 
     annotated = annotate_rollouts([record], exported_at="2026-06-19T00:00:00Z")
 
@@ -44,21 +44,21 @@ def test_annotate_rollouts_adds_benchmark_metadata() -> None:
 
 
 def _record(
-    scenario_id: str,
+    task_id: str,
     *,
     passed: bool,
     score: float,
     repeat: int,
 ) -> RolloutRecord:
     metadata = {
-        "scenario_id": scenario_id,
+        "task_id": task_id,
         "model_slug": "model-a",
         "passed": passed,
         "score": score,
         "repeat": repeat,
     }
     return RolloutRecord(
-        task={"scenario": {"id": scenario_id}},
+        task={"task": {"id": task_id}},
         messages=[],
         tool_calls=[],
         tool_results=[],

@@ -12,7 +12,7 @@ from workspace_bench.core.models import (
     BENCHMARK_RELEASE_ID,
     BENCHMARK_VERSION,
     JsonDict,
-    TaskPackManifest,
+    TaskSuiteManifest,
 )
 
 
@@ -31,7 +31,7 @@ def base_export_metadata(*, exported_at: str | None = None) -> JsonDict:
 def annotate_rollouts(
     records: Iterable[RolloutRecord],
     *,
-    task_pack: TaskPackManifest | None = None,
+    task_suite: TaskSuiteManifest | None = None,
     exported_at: str | None = None,
 ) -> list[RolloutRecord]:
     """Return rollout records with benchmark and task-pack metadata attached."""
@@ -41,13 +41,13 @@ def annotate_rollouts(
     for record in records:
         metadata = dict(record.metadata)
         metadata.update(base_export_metadata(exported_at=timestamp))
-        if task_pack is not None:
-            metadata["task_pack"] = {
-                "pack_id": task_pack.pack_id,
-                "release_id": task_pack.release_id,
-                "version": task_pack.version,
-                "visibility": task_pack.visibility,
-                "default_split": task_pack.default_split,
+        if task_suite is not None:
+            metadata["task_suite"] = {
+                "suite_id": task_suite.suite_id,
+                "release_id": task_suite.release_id,
+                "version": task_suite.version,
+                "visibility": task_suite.visibility,
+                "default_split": task_suite.default_split,
             }
         annotated.append(replace(record, metadata=metadata))
     return annotated

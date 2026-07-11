@@ -1,0 +1,276 @@
+{
+  "id": "auth_t4_e2e_vol_cockpit",
+  "title": "Ship, open, and configure Vol Cockpit",
+  "workflow": "risk-review",
+  "subdomain": "volatility",
+  "tags": [
+    "family-e2e",
+    "level-t4",
+    "cell8",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "e2e",
+    "orchestration"
+  ],
+  "prompt": "Build the full custom backend for \"Vol Desk Data\" at http://localhost:7801: table from rows and rules (`vol_cockpit_table` data API: name \"Vol Cockpit Table\", description \"Implied and realized volatility by tenor.\", endpoint /vol-cockpit-table, type table, gridData w=20 h=9. It takes tenor \u2014 a text input (type text), labeled \"Tenor\", default \"1M\", described \"Vol Cockpit Table focus field.\". The endpoint serves sample rows like [{\"as_of\": \"2026-07-01\", \"iv_pct\": 0.182, \"realized_pct\": 0.164, \"tenor\": \"1M\"}, {\"as_of\": \"2026-07-01\", \"iv_pct\": 0.204, \"realized_pct\": 0.181, \"tenor\": \"3M\"}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {\"filled_pct\": 0.42} becomes {\"field\": \"filled_pct\", \"headerName\": \"Filled Pct\", \"cellDataType\": \"number\", \"formatterFn\": \"percent\"}.); sibling `vix_advanced`: name \"VIX Advanced Chart\", description \"TradingView advanced charting for VIX futures.\", endpoint /udf, type advanced_charting, sized w=20 h=20 on the grid, data.defaultSymbol \"VIX\", data.updateFrequency 60000; app app \"Vol Cockpit\", description \"Volatility table and advanced chart.\", tab `surface` named \"Surface\" places: `vol_cockpit_table` at x=0 y=0 w=20 h=9, tab `chart` named \"Chart\" places: `vix_advanced` at x=0 y=0 w=20 h=9. Add it once, instantiate \"Vol Cockpit\" into \"Vol Cockpit Live\", set tenor to \"3M\" on the opened `vol_cockpit_table` widget, and create note \"Vol Cockpit\" with text \"Vol Cockpit is live from Vol Desk Data: vol cockpit ready.\".",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "add_generative_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Vol Desk Data",
+        "widget_id": "vol_cockpit_table",
+        "expect": {
+          "type": "table",
+          "endpoint": "/vol-cockpit-table",
+          "gridData.w": 20,
+          "gridData.h": 9
+        },
+        "params_include": [
+          {
+            "paramName": "tenor",
+            "type": "text"
+          }
+        ],
+        "columns_include": [
+          {
+            "field": "tenor",
+            "headerName": "Tenor",
+            "cellDataType": "text"
+          },
+          {
+            "field": "iv_pct",
+            "headerName": "Iv Pct",
+            "cellDataType": "number",
+            "formatterFn": "percent"
+          },
+          {
+            "field": "realized_pct",
+            "headerName": "Realized Pct",
+            "cellDataType": "number",
+            "formatterFn": "percent"
+          },
+          {
+            "field": "as_of",
+            "headerName": "As Of",
+            "cellDataType": "dateString"
+          }
+        ]
+      },
+      {
+        "backend_name": "Vol Desk Data",
+        "widget_id": "vix_advanced",
+        "expect": {
+          "type": "advanced_charting",
+          "endpoint": "/udf"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Vol Desk Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Vol Cockpit",
+        "tabs_include": [
+          "chart",
+          "surface"
+        ],
+        "tab_count": 2,
+        "widgets_on_tab": [
+          {
+            "tab_id": "surface",
+            "widget_id": "vol_cockpit_table"
+          },
+          {
+            "tab_id": "chart",
+            "widget_id": "vix_advanced"
+          }
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Vol Desk Data",
+        "widget_id": "vol_cockpit_table",
+        "data_args": {
+          "tenor": "3M"
+        },
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Vol Cockpit",
+          "vol cockpit"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Vol Desk Data",
+        "url": "http://localhost:7801",
+        "widgets_json": {
+          "vol_cockpit_table": {
+            "name": "Vol Cockpit Table",
+            "description": "Implied and realized volatility by tenor.",
+            "endpoint": "/vol-cockpit-table",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "tenor",
+                    "headerName": "Tenor",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "iv_pct",
+                    "headerName": "Iv Pct",
+                    "cellDataType": "number",
+                    "formatterFn": "percent"
+                  },
+                  {
+                    "field": "realized_pct",
+                    "headerName": "Realized Pct",
+                    "cellDataType": "number",
+                    "formatterFn": "percent"
+                  },
+                  {
+                    "field": "as_of",
+                    "headerName": "As Of",
+                    "cellDataType": "dateString"
+                  }
+                ]
+              }
+            },
+            "params": [
+              {
+                "paramName": "tenor",
+                "type": "text",
+                "label": "Tenor",
+                "value": "1M",
+                "description": "Vol Cockpit Table focus field."
+              }
+            ]
+          },
+          "vix_advanced": {
+            "name": "VIX Advanced Chart",
+            "description": "TradingView advanced charting for VIX futures.",
+            "endpoint": "/udf",
+            "type": "advanced_charting",
+            "gridData": {
+              "w": 20,
+              "h": 20
+            },
+            "data": {
+              "defaultSymbol": "VIX",
+              "updateFrequency": 60000
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Vol Cockpit",
+            "description": "Volatility table and advanced chart.",
+            "tabs": {
+              "surface": {
+                "id": "surface",
+                "name": "Surface",
+                "layout": [
+                  {
+                    "i": "vol_cockpit_table",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "chart": {
+                "id": "chart",
+                "name": "Chart",
+                "layout": [
+                  {
+                    "i": "vix_advanced",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Vol Cockpit",
+        "dashboard_name": "Vol Cockpit Live",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "vol_cockpit_table",
+        "data_args": {
+          "tenor": "3M"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Vol Cockpit",
+        "data": "Vol Cockpit is live from Vol Desk Data: vol cockpit ready."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t4",
+  "capability": "backend-integration",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "test",
+  "novelty": "Unique e2e/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_advanced,Vol Desk Data/vol_cockpit_table; appdefs:Vol Desk Data/Vol Cockpit; widgets:Vol Desk Data/vol_cockpit_table@*; generated:note@*:Vol Cockpit,vol cockpit."
+}

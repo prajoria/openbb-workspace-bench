@@ -1,0 +1,148 @@
+{
+  "id": "gen_t3_prompts_dashboard_portfolio_prompt_dashboard",
+  "title": "Portfolio Prompt Dashboard",
+  "capability": "dashboard-construction",
+  "workflow": "portfolio-risk-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-prompts",
+    "level-t3",
+    "prompts",
+    "multi-widget"
+  ],
+  "prompt": "After fetching workspace_tool_usage, create dashboard Portfolio Prompt Dashboard, add Bench Portfolio/holdings_table and Bench Portfolio/risk_metrics with schema-first discipline, and add a note mentioning holdings and schema.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "portfolio"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_prompt",
+    "manage_dashboard",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Portfolio Prompt Dashboard",
+    "required_tool_results": [
+      {
+        "tool": "get_workspace_prompt",
+        "data_contains": [
+          "schema-before-create workspace tool discipline"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "holdings_table",
+        "data_args": {}
+      },
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics",
+        "data_args": {}
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "holdings",
+          "schema"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_prompt",
+      "args": {
+        "name": "workspace_tool_usage"
+      }
+    },
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "create",
+        "name": "Portfolio Prompt Dashboard"
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Portfolio"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "holdings_table"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "holdings_table",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Portfolio"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Prompt Build Note",
+        "data": "Prompt build used holdings and schema."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "dashboard",
+  "level": "t3",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 12
+  },
+  "split": "validation",
+  "novelty": "Unique prompts/t3 exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_prompt, list_available_widgets, manage_dashboard with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_result, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on portfolio; artifact prompts:workspace_tool_usage; widgets:Bench Portfolio/holdings_table@*,Bench Portfolio/risk_metrics@*; generated:note@*:holdings,schema."
+}

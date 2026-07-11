@@ -1,0 +1,283 @@
+{
+  "id": "auth_t3_forms_exception_intake_room",
+  "title": "Assemble the Exception Intake Room form app",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-forms",
+    "level-t3",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "forms",
+    "multi-tab"
+  ],
+  "prompt": "Check the workspace, then publish \"Execution Desk Data\" at http://localhost:7806 in one add. widgets.json serves: `venue_exception_form`: name \"Venue Exception Form\", description \"Record an execution venue exception.\", endpoint /venue-exception, type table, sized w=20 h=10 on the grid, params required: exception \u2014 a form submitting POST to /venue-exception-submit with inputs [venue \u2014 a text input (type text), labeled \"Venue\", default \"ARCA\"; slippage_bps \u2014 a number input (type number), labeled \"Slippage bps\", default 12, min 0; record \u2014 a button (type button), labeled \"Record\"] (that bracket is the complete list of the form's inputParams); `open_orders`: name \"Open Orders\", description \"Live open orders blotter.\", endpoint /open-orders, type table, sized w=20 h=9 on the grid, table columns required (field \u2192 header (type, extras)): order_id \u2192 header \"Order\" (text); symbol \u2192 header \"Symbol\" (text); qty \u2192 header \"Qty\" (number, int formatter); status \u2192 header \"Status\" (text, titleCase render); `exception_metric`: name \"Exceptions\", description \"Open execution exceptions.\", endpoint /exception-count, type metric, sized w=5 h=4 on the grid All of `venue_exception_form`, `open_orders` take the same shared param: venue_scope \u2014 a text input (type text), labeled \"Venue scope\", default \"ARCA\", described \"Venue reviewed across intake and status.\".. apps.json ships app \"Exception Intake Room\", description \"Venue exceptions and order status.\", tab `intake` named \"Intake\" places: `venue_exception_form` at x=0 y=0 w=20 h=10; `exception_metric` at x=20 y=0 w=8 h=6, tab `status` named \"Status\" places: `open_orders` at x=0 y=0 w=20 h=9, group \"Venue Sync\" (type param) syncing param venue_scope across [\"venue_exception_form\", \"open_orders\"].",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "venue_exception_form",
+        "expect": {
+          "type": "table",
+          "endpoint": "/venue-exception",
+          "gridData.w": 20,
+          "gridData.h": 10
+        },
+        "params_include": [
+          {
+            "paramName": "exception",
+            "type": "form"
+          }
+        ]
+      },
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "open_orders",
+        "expect": {
+          "type": "table",
+          "endpoint": "/open-orders"
+        }
+      },
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "exception_metric",
+        "expect": {
+          "type": "metric",
+          "endpoint": "/exception-count"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Exception Intake Room",
+        "tabs_include": [
+          "intake",
+          "status"
+        ],
+        "tab_count": 2,
+        "widgets_on_tab": [
+          {
+            "tab_id": "intake",
+            "widget_id": "venue_exception_form"
+          },
+          {
+            "tab_id": "intake",
+            "widget_id": "exception_metric"
+          },
+          {
+            "tab_id": "status",
+            "widget_id": "open_orders"
+          }
+        ],
+        "groups_include": [
+          {
+            "name": "Venue Sync",
+            "type": "param",
+            "paramName": "venue_scope",
+            "widgetIds_include": [
+              "venue_exception_form",
+              "open_orders"
+            ]
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "venue_exception_form": {
+            "name": "Venue Exception Form",
+            "description": "Record an execution venue exception.",
+            "endpoint": "/venue-exception",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 10
+            },
+            "params": [
+              {
+                "paramName": "exception",
+                "type": "form",
+                "label": "Exception",
+                "endpoint": "/venue-exception-submit",
+                "method": "POST",
+                "inputParams": [
+                  {
+                    "paramName": "venue",
+                    "type": "text",
+                    "label": "Venue",
+                    "value": "ARCA"
+                  },
+                  {
+                    "paramName": "slippage_bps",
+                    "type": "number",
+                    "label": "Slippage bps",
+                    "value": 12,
+                    "min": 0
+                  },
+                  {
+                    "paramName": "record",
+                    "type": "button",
+                    "label": "Record"
+                  }
+                ]
+              },
+              {
+                "paramName": "venue_scope",
+                "type": "text",
+                "label": "Venue scope",
+                "value": "ARCA",
+                "description": "Venue reviewed across intake and status."
+              }
+            ]
+          },
+          "open_orders": {
+            "name": "Open Orders",
+            "description": "Live open orders blotter.",
+            "endpoint": "/open-orders",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "order_id",
+                    "headerName": "Order",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "symbol",
+                    "headerName": "Symbol",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "qty",
+                    "headerName": "Qty",
+                    "cellDataType": "number",
+                    "formatterFn": "int"
+                  },
+                  {
+                    "field": "status",
+                    "headerName": "Status",
+                    "cellDataType": "text",
+                    "renderFn": "titleCase"
+                  }
+                ]
+              }
+            },
+            "params": [
+              {
+                "paramName": "venue_scope",
+                "type": "text",
+                "label": "Venue scope",
+                "value": "ARCA",
+                "description": "Venue reviewed across intake and status."
+              }
+            ]
+          },
+          "exception_metric": {
+            "name": "Exceptions",
+            "description": "Open execution exceptions.",
+            "endpoint": "/exception-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Exception Intake Room",
+            "description": "Venue exceptions and order status.",
+            "tabs": {
+              "intake": {
+                "id": "intake",
+                "name": "Intake",
+                "layout": [
+                  {
+                    "i": "venue_exception_form",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 10
+                  },
+                  {
+                    "i": "exception_metric",
+                    "x": 20,
+                    "y": 0,
+                    "w": 8,
+                    "h": 6
+                  }
+                ]
+              },
+              "status": {
+                "id": "status",
+                "name": "Status",
+                "layout": [
+                  {
+                    "i": "open_orders",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Venue Sync",
+                "type": "param",
+                "paramName": "venue_scope",
+                "widgetIds": [
+                  "venue_exception_form",
+                  "open_orders"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t3",
+  "capability": "widget-building",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique forms/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/open_orders,Execution Desk Data/venue_exception_form; appdefs:Execution Desk Data/Exception Intake Room."
+}

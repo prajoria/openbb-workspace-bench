@@ -1,0 +1,1378 @@
+{
+  "suites": {
+    "core": {
+      "models": {
+        "openai-gpt-5.5": {
+          "passed": 282,
+          "total": 300,
+          "strict_pass_rate": 0.94,
+          "mean_score": 0.9919,
+          "by_tier": {
+            "t0": {
+              "passed": 59,
+              "total": 60,
+              "rate": 0.9833
+            },
+            "t1": {
+              "passed": 60,
+              "total": 60,
+              "rate": 1.0
+            },
+            "t2": {
+              "passed": 54,
+              "total": 60,
+              "rate": 0.9
+            },
+            "t3": {
+              "passed": 52,
+              "total": 60,
+              "rate": 0.8667
+            },
+            "t4": {
+              "passed": 57,
+              "total": 60,
+              "rate": 0.95
+            }
+          },
+          "by_family": {
+            "app": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "backends": {
+              "passed": 19,
+              "total": 20,
+              "rate": 0.95
+            },
+            "create": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "delegate": {
+              "passed": 19,
+              "total": 20,
+              "rate": 0.95
+            },
+            "delete": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "inspect": {
+              "passed": 11,
+              "total": 20,
+              "rate": 0.55
+            },
+            "layout": {
+              "passed": 18,
+              "total": 20,
+              "rate": 0.9
+            },
+            "nav": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "note": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "params": {
+              "passed": 16,
+              "total": 20,
+              "rate": 0.8
+            },
+            "prompts": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "read": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "resources": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "skill": {
+              "passed": 19,
+              "total": 20,
+              "rate": 0.95
+            },
+            "update": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            }
+          },
+          "issue_codes": {
+            "layout_mismatch": 11,
+            "missing_tool_call": 10,
+            "missing_generated_widget": 2,
+            "missing_tool_result": 1
+          }
+        },
+        "anthropic-sonnet-5": {
+          "passed": 267,
+          "total": 300,
+          "strict_pass_rate": 0.89,
+          "mean_score": 0.9851,
+          "by_tier": {
+            "t0": {
+              "passed": 60,
+              "total": 60,
+              "rate": 1.0
+            },
+            "t1": {
+              "passed": 59,
+              "total": 60,
+              "rate": 0.9833
+            },
+            "t2": {
+              "passed": 51,
+              "total": 60,
+              "rate": 0.85
+            },
+            "t3": {
+              "passed": 49,
+              "total": 60,
+              "rate": 0.8167
+            },
+            "t4": {
+              "passed": 48,
+              "total": 60,
+              "rate": 0.8
+            }
+          },
+          "by_family": {
+            "app": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "backends": {
+              "passed": 16,
+              "total": 20,
+              "rate": 0.8
+            },
+            "create": {
+              "passed": 19,
+              "total": 20,
+              "rate": 0.95
+            },
+            "delegate": {
+              "passed": 17,
+              "total": 20,
+              "rate": 0.85
+            },
+            "delete": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "inspect": {
+              "passed": 9,
+              "total": 20,
+              "rate": 0.45
+            },
+            "layout": {
+              "passed": 18,
+              "total": 20,
+              "rate": 0.9
+            },
+            "nav": {
+              "passed": 19,
+              "total": 20,
+              "rate": 0.95
+            },
+            "note": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "params": {
+              "passed": 15,
+              "total": 20,
+              "rate": 0.75
+            },
+            "prompts": {
+              "passed": 17,
+              "total": 20,
+              "rate": 0.85
+            },
+            "read": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "resources": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "skill": {
+              "passed": 17,
+              "total": 20,
+              "rate": 0.85
+            },
+            "update": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            }
+          },
+          "issue_codes": {
+            "missing_tool_call": 11,
+            "layout_mismatch": 11,
+            "missing_generated_widget": 11,
+            "missing_widget": 7,
+            "too_many_invalid_calls": 2,
+            "unlisted_widget_id": 2,
+            "missing_tab": 1
+          }
+        },
+        "zai-glm-5.2": {
+          "passed": 229,
+          "total": 300,
+          "strict_pass_rate": 0.7633,
+          "mean_score": 0.9015,
+          "by_tier": {
+            "t0": {
+              "passed": 51,
+              "total": 60,
+              "rate": 0.85
+            },
+            "t1": {
+              "passed": 60,
+              "total": 60,
+              "rate": 1.0
+            },
+            "t2": {
+              "passed": 44,
+              "total": 60,
+              "rate": 0.7333
+            },
+            "t3": {
+              "passed": 36,
+              "total": 60,
+              "rate": 0.6
+            },
+            "t4": {
+              "passed": 38,
+              "total": 60,
+              "rate": 0.6333
+            }
+          },
+          "by_family": {
+            "app": {
+              "passed": 19,
+              "total": 20,
+              "rate": 0.95
+            },
+            "backends": {
+              "passed": 18,
+              "total": 20,
+              "rate": 0.9
+            },
+            "create": {
+              "passed": 17,
+              "total": 20,
+              "rate": 0.85
+            },
+            "delegate": {
+              "passed": 19,
+              "total": 20,
+              "rate": 0.95
+            },
+            "delete": {
+              "passed": 11,
+              "total": 20,
+              "rate": 0.55
+            },
+            "inspect": {
+              "passed": 8,
+              "total": 20,
+              "rate": 0.4
+            },
+            "layout": {
+              "passed": 17,
+              "total": 20,
+              "rate": 0.85
+            },
+            "nav": {
+              "passed": 18,
+              "total": 20,
+              "rate": 0.9
+            },
+            "note": {
+              "passed": 16,
+              "total": 20,
+              "rate": 0.8
+            },
+            "params": {
+              "passed": 14,
+              "total": 20,
+              "rate": 0.7
+            },
+            "prompts": {
+              "passed": 8,
+              "total": 20,
+              "rate": 0.4
+            },
+            "read": {
+              "passed": 16,
+              "total": 20,
+              "rate": 0.8
+            },
+            "resources": {
+              "passed": 19,
+              "total": 20,
+              "rate": 0.95
+            },
+            "skill": {
+              "passed": 12,
+              "total": 20,
+              "rate": 0.6
+            },
+            "update": {
+              "passed": 17,
+              "total": 20,
+              "rate": 0.85
+            }
+          },
+          "issue_codes": {
+            "too_many_invalid_calls": 45,
+            "missing_tool_call": 39,
+            "missing_generated_widget": 38,
+            "missing_widget": 34,
+            "unlisted_widget_id": 30,
+            "missing_tool_result": 19,
+            "layout_mismatch": 15,
+            "too_many_widgets": 12,
+            "dashboard_name": 10,
+            "schema_not_called_before_create": 1
+          }
+        },
+        "openai-gpt-4.1-mini": {
+          "passed": 211,
+          "total": 300,
+          "strict_pass_rate": 0.7033,
+          "mean_score": 0.9574,
+          "by_tier": {
+            "t0": {
+              "passed": 59,
+              "total": 60,
+              "rate": 0.9833
+            },
+            "t1": {
+              "passed": 55,
+              "total": 60,
+              "rate": 0.9167
+            },
+            "t2": {
+              "passed": 46,
+              "total": 60,
+              "rate": 0.7667
+            },
+            "t3": {
+              "passed": 31,
+              "total": 60,
+              "rate": 0.5167
+            },
+            "t4": {
+              "passed": 20,
+              "total": 60,
+              "rate": 0.3333
+            }
+          },
+          "by_family": {
+            "app": {
+              "passed": 17,
+              "total": 20,
+              "rate": 0.85
+            },
+            "backends": {
+              "passed": 12,
+              "total": 20,
+              "rate": 0.6
+            },
+            "create": {
+              "passed": 15,
+              "total": 20,
+              "rate": 0.75
+            },
+            "delegate": {
+              "passed": 15,
+              "total": 20,
+              "rate": 0.75
+            },
+            "delete": {
+              "passed": 18,
+              "total": 20,
+              "rate": 0.9
+            },
+            "inspect": {
+              "passed": 8,
+              "total": 20,
+              "rate": 0.4
+            },
+            "layout": {
+              "passed": 18,
+              "total": 20,
+              "rate": 0.9
+            },
+            "nav": {
+              "passed": 9,
+              "total": 20,
+              "rate": 0.45
+            },
+            "note": {
+              "passed": 11,
+              "total": 20,
+              "rate": 0.55
+            },
+            "params": {
+              "passed": 11,
+              "total": 20,
+              "rate": 0.55
+            },
+            "prompts": {
+              "passed": 14,
+              "total": 20,
+              "rate": 0.7
+            },
+            "read": {
+              "passed": 19,
+              "total": 20,
+              "rate": 0.95
+            },
+            "resources": {
+              "passed": 13,
+              "total": 20,
+              "rate": 0.65
+            },
+            "skill": {
+              "passed": 12,
+              "total": 20,
+              "rate": 0.6
+            },
+            "update": {
+              "passed": 19,
+              "total": 20,
+              "rate": 0.95
+            }
+          },
+          "issue_codes": {
+            "schema_not_called_before_create": 56,
+            "missing_generated_widget": 24,
+            "missing_tool_call": 17,
+            "too_many_invalid_calls": 15,
+            "missing_widget": 12,
+            "layout_mismatch": 11,
+            "missing_tool_result": 2,
+            "dashboard_name": 2,
+            "missing_tab": 1
+          }
+        },
+        "ollama-gpt-oss-20b": {
+          "passed": 178,
+          "total": 300,
+          "strict_pass_rate": 0.5933,
+          "mean_score": 0.9184,
+          "by_tier": {
+            "t0": {
+              "passed": 56,
+              "total": 60,
+              "rate": 0.9333
+            },
+            "t1": {
+              "passed": 41,
+              "total": 60,
+              "rate": 0.6833
+            },
+            "t2": {
+              "passed": 34,
+              "total": 60,
+              "rate": 0.5667
+            },
+            "t3": {
+              "passed": 27,
+              "total": 60,
+              "rate": 0.45
+            },
+            "t4": {
+              "passed": 20,
+              "total": 60,
+              "rate": 0.3333
+            }
+          },
+          "by_family": {
+            "app": {
+              "passed": 18,
+              "total": 20,
+              "rate": 0.9
+            },
+            "backends": {
+              "passed": 8,
+              "total": 20,
+              "rate": 0.4
+            },
+            "create": {
+              "passed": 8,
+              "total": 20,
+              "rate": 0.4
+            },
+            "delegate": {
+              "passed": 13,
+              "total": 20,
+              "rate": 0.65
+            },
+            "delete": {
+              "passed": 17,
+              "total": 20,
+              "rate": 0.85
+            },
+            "inspect": {
+              "passed": 7,
+              "total": 20,
+              "rate": 0.35
+            },
+            "layout": {
+              "passed": 15,
+              "total": 20,
+              "rate": 0.75
+            },
+            "nav": {
+              "passed": 13,
+              "total": 20,
+              "rate": 0.65
+            },
+            "note": {
+              "passed": 5,
+              "total": 20,
+              "rate": 0.25
+            },
+            "params": {
+              "passed": 7,
+              "total": 20,
+              "rate": 0.35
+            },
+            "prompts": {
+              "passed": 13,
+              "total": 20,
+              "rate": 0.65
+            },
+            "read": {
+              "passed": 14,
+              "total": 20,
+              "rate": 0.7
+            },
+            "resources": {
+              "passed": 13,
+              "total": 20,
+              "rate": 0.65
+            },
+            "skill": {
+              "passed": 12,
+              "total": 20,
+              "rate": 0.6
+            },
+            "update": {
+              "passed": 15,
+              "total": 20,
+              "rate": 0.75
+            }
+          },
+          "issue_codes": {
+            "too_many_invalid_calls": 78,
+            "missing_generated_widget": 42,
+            "missing_widget": 37,
+            "missing_tool_call": 21,
+            "layout_mismatch": 13,
+            "schema_not_called_before_create": 9,
+            "missing_tool_result": 4,
+            "dashboard_name": 4,
+            "missing_tab": 3,
+            "too_many_widgets": 1
+          }
+        },
+        "ollama-qwen3-8b": {
+          "passed": 149,
+          "total": 300,
+          "strict_pass_rate": 0.4967,
+          "mean_score": 0.9077,
+          "by_tier": {
+            "t0": {
+              "passed": 48,
+              "total": 60,
+              "rate": 0.8
+            },
+            "t1": {
+              "passed": 47,
+              "total": 60,
+              "rate": 0.7833
+            },
+            "t2": {
+              "passed": 28,
+              "total": 60,
+              "rate": 0.4667
+            },
+            "t3": {
+              "passed": 16,
+              "total": 60,
+              "rate": 0.2667
+            },
+            "t4": {
+              "passed": 10,
+              "total": 60,
+              "rate": 0.1667
+            }
+          },
+          "by_family": {
+            "app": {
+              "passed": 4,
+              "total": 20,
+              "rate": 0.2
+            },
+            "backends": {
+              "passed": 9,
+              "total": 20,
+              "rate": 0.45
+            },
+            "create": {
+              "passed": 11,
+              "total": 20,
+              "rate": 0.55
+            },
+            "delegate": {
+              "passed": 13,
+              "total": 20,
+              "rate": 0.65
+            },
+            "delete": {
+              "passed": 15,
+              "total": 20,
+              "rate": 0.75
+            },
+            "inspect": {
+              "passed": 8,
+              "total": 20,
+              "rate": 0.4
+            },
+            "layout": {
+              "passed": 15,
+              "total": 20,
+              "rate": 0.75
+            },
+            "nav": {
+              "passed": 9,
+              "total": 20,
+              "rate": 0.45
+            },
+            "note": {
+              "passed": 6,
+              "total": 20,
+              "rate": 0.3
+            },
+            "params": {
+              "passed": 6,
+              "total": 20,
+              "rate": 0.3
+            },
+            "prompts": {
+              "passed": 11,
+              "total": 20,
+              "rate": 0.55
+            },
+            "read": {
+              "passed": 8,
+              "total": 20,
+              "rate": 0.4
+            },
+            "resources": {
+              "passed": 11,
+              "total": 20,
+              "rate": 0.55
+            },
+            "skill": {
+              "passed": 8,
+              "total": 20,
+              "rate": 0.4
+            },
+            "update": {
+              "passed": 15,
+              "total": 20,
+              "rate": 0.75
+            }
+          },
+          "issue_codes": {
+            "missing_generated_widget": 58,
+            "schema_not_called_before_create": 56,
+            "too_many_invalid_calls": 49,
+            "missing_widget": 35,
+            "missing_tool_call": 23,
+            "layout_mismatch": 15,
+            "missing_tab": 8,
+            "dashboard_name": 6,
+            "missing_tool_result": 3,
+            "unlisted_widget_id": 3,
+            "too_many_widgets": 2,
+            "missing_resource_read": 1
+          }
+        }
+      },
+      "tasks": 300
+    },
+    "build-openbb-apps": {
+      "models": {
+        "openai-gpt-5.5": {
+          "passed": 212,
+          "total": 212,
+          "strict_pass_rate": 1.0,
+          "mean_score": 1.0,
+          "by_tier": {
+            "t0": {
+              "passed": 40,
+              "total": 40,
+              "rate": 1.0
+            },
+            "t1": {
+              "passed": 40,
+              "total": 40,
+              "rate": 1.0
+            },
+            "t2": {
+              "passed": 40,
+              "total": 40,
+              "rate": 1.0
+            },
+            "t3": {
+              "passed": 40,
+              "total": 40,
+              "rate": 1.0
+            },
+            "t4": {
+              "passed": 52,
+              "total": 52,
+              "rate": 1.0
+            }
+          },
+          "by_family": {
+            "advanced": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "aggrid": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "apps": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "charts": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "e2e": {
+              "passed": 12,
+              "total": 12,
+              "rate": 1.0
+            },
+            "extend": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "forms": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "grouping": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "params": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "settings": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "types": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            }
+          },
+          "issue_codes": {}
+        },
+        "anthropic-sonnet-5": {
+          "passed": 209,
+          "total": 212,
+          "strict_pass_rate": 0.9858,
+          "mean_score": 0.9992,
+          "by_tier": {
+            "t0": {
+              "passed": 40,
+              "total": 40,
+              "rate": 1.0
+            },
+            "t1": {
+              "passed": 39,
+              "total": 40,
+              "rate": 0.975
+            },
+            "t2": {
+              "passed": 40,
+              "total": 40,
+              "rate": 1.0
+            },
+            "t3": {
+              "passed": 38,
+              "total": 40,
+              "rate": 0.95
+            },
+            "t4": {
+              "passed": 52,
+              "total": 52,
+              "rate": 1.0
+            }
+          },
+          "by_family": {
+            "advanced": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "aggrid": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "apps": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "charts": {
+              "passed": 18,
+              "total": 20,
+              "rate": 0.9
+            },
+            "e2e": {
+              "passed": 12,
+              "total": 12,
+              "rate": 1.0
+            },
+            "extend": {
+              "passed": 19,
+              "total": 20,
+              "rate": 0.95
+            },
+            "forms": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "grouping": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "params": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "settings": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "types": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            }
+          },
+          "issue_codes": {
+            "widget_def_mismatch": 3
+          }
+        },
+        "zai-glm-5.2": {
+          "passed": 210,
+          "total": 212,
+          "strict_pass_rate": 0.9906,
+          "mean_score": 0.9991,
+          "by_tier": {
+            "t0": {
+              "passed": 40,
+              "total": 40,
+              "rate": 1.0
+            },
+            "t1": {
+              "passed": 40,
+              "total": 40,
+              "rate": 1.0
+            },
+            "t2": {
+              "passed": 40,
+              "total": 40,
+              "rate": 1.0
+            },
+            "t3": {
+              "passed": 40,
+              "total": 40,
+              "rate": 1.0
+            },
+            "t4": {
+              "passed": 50,
+              "total": 52,
+              "rate": 0.9615
+            }
+          },
+          "by_family": {
+            "advanced": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "aggrid": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "apps": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "charts": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "e2e": {
+              "passed": 11,
+              "total": 12,
+              "rate": 0.9167
+            },
+            "extend": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "forms": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "grouping": {
+              "passed": 19,
+              "total": 20,
+              "rate": 0.95
+            },
+            "params": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "settings": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            },
+            "types": {
+              "passed": 20,
+              "total": 20,
+              "rate": 1.0
+            }
+          },
+          "issue_codes": {
+            "missing_widget": 2,
+            "missing_generated_widget": 2
+          }
+        },
+        "openai-gpt-4.1-mini": {
+          "passed": 153,
+          "total": 212,
+          "strict_pass_rate": 0.7217,
+          "mean_score": 0.9484,
+          "by_tier": {
+            "t0": {
+              "passed": 38,
+              "total": 40,
+              "rate": 0.95
+            },
+            "t1": {
+              "passed": 36,
+              "total": 40,
+              "rate": 0.9
+            },
+            "t2": {
+              "passed": 29,
+              "total": 40,
+              "rate": 0.725
+            },
+            "t3": {
+              "passed": 25,
+              "total": 40,
+              "rate": 0.625
+            },
+            "t4": {
+              "passed": 25,
+              "total": 52,
+              "rate": 0.4808
+            }
+          },
+          "by_family": {
+            "advanced": {
+              "passed": 13,
+              "total": 20,
+              "rate": 0.65
+            },
+            "aggrid": {
+              "passed": 7,
+              "total": 20,
+              "rate": 0.35
+            },
+            "apps": {
+              "passed": 19,
+              "total": 20,
+              "rate": 0.95
+            },
+            "charts": {
+              "passed": 19,
+              "total": 20,
+              "rate": 0.95
+            },
+            "e2e": {
+              "passed": 1,
+              "total": 12,
+              "rate": 0.0833
+            },
+            "extend": {
+              "passed": 16,
+              "total": 20,
+              "rate": 0.8
+            },
+            "forms": {
+              "passed": 15,
+              "total": 20,
+              "rate": 0.75
+            },
+            "grouping": {
+              "passed": 12,
+              "total": 20,
+              "rate": 0.6
+            },
+            "params": {
+              "passed": 17,
+              "total": 20,
+              "rate": 0.85
+            },
+            "settings": {
+              "passed": 16,
+              "total": 20,
+              "rate": 0.8
+            },
+            "types": {
+              "passed": 18,
+              "total": 20,
+              "rate": 0.9
+            }
+          },
+          "issue_codes": {
+            "widget_def_mismatch": 116,
+            "too_many_invalid_calls": 18,
+            "app_def_mismatch": 13,
+            "missing_custom_backend": 11,
+            "missing_app_def": 10,
+            "missing_widget": 10,
+            "missing_generated_widget": 7
+          }
+        },
+        "ollama-gpt-oss-20b": {
+          "passed": 144,
+          "total": 212,
+          "strict_pass_rate": 0.6792,
+          "mean_score": 0.9235,
+          "by_tier": {
+            "t0": {
+              "passed": 35,
+              "total": 40,
+              "rate": 0.875
+            },
+            "t1": {
+              "passed": 27,
+              "total": 40,
+              "rate": 0.675
+            },
+            "t2": {
+              "passed": 33,
+              "total": 40,
+              "rate": 0.825
+            },
+            "t3": {
+              "passed": 26,
+              "total": 40,
+              "rate": 0.65
+            },
+            "t4": {
+              "passed": 23,
+              "total": 52,
+              "rate": 0.4423
+            }
+          },
+          "by_family": {
+            "advanced": {
+              "passed": 13,
+              "total": 20,
+              "rate": 0.65
+            },
+            "aggrid": {
+              "passed": 10,
+              "total": 20,
+              "rate": 0.5
+            },
+            "apps": {
+              "passed": 16,
+              "total": 20,
+              "rate": 0.8
+            },
+            "charts": {
+              "passed": 14,
+              "total": 20,
+              "rate": 0.7
+            },
+            "e2e": {
+              "passed": 6,
+              "total": 12,
+              "rate": 0.5
+            },
+            "extend": {
+              "passed": 18,
+              "total": 20,
+              "rate": 0.9
+            },
+            "forms": {
+              "passed": 13,
+              "total": 20,
+              "rate": 0.65
+            },
+            "grouping": {
+              "passed": 11,
+              "total": 20,
+              "rate": 0.55
+            },
+            "params": {
+              "passed": 12,
+              "total": 20,
+              "rate": 0.6
+            },
+            "settings": {
+              "passed": 16,
+              "total": 20,
+              "rate": 0.8
+            },
+            "types": {
+              "passed": 15,
+              "total": 20,
+              "rate": 0.75
+            }
+          },
+          "issue_codes": {
+            "widget_def_mismatch": 74,
+            "missing_custom_backend": 45,
+            "missing_widget": 16,
+            "too_many_invalid_calls": 12,
+            "missing_generated_widget": 12,
+            "app_def_mismatch": 6,
+            "missing_widget_def": 6,
+            "missing_app_def": 4
+          }
+        },
+        "ollama-qwen3-8b": {
+          "passed": 30,
+          "total": 212,
+          "strict_pass_rate": 0.1415,
+          "mean_score": 0.7474,
+          "by_tier": {
+            "t0": {
+              "passed": 11,
+              "total": 40,
+              "rate": 0.275
+            },
+            "t1": {
+              "passed": 8,
+              "total": 40,
+              "rate": 0.2
+            },
+            "t2": {
+              "passed": 4,
+              "total": 40,
+              "rate": 0.1
+            },
+            "t3": {
+              "passed": 4,
+              "total": 40,
+              "rate": 0.1
+            },
+            "t4": {
+              "passed": 3,
+              "total": 52,
+              "rate": 0.0577
+            }
+          },
+          "by_family": {
+            "advanced": {
+              "passed": 3,
+              "total": 20,
+              "rate": 0.15
+            },
+            "aggrid": {
+              "passed": 1,
+              "total": 20,
+              "rate": 0.05
+            },
+            "apps": {
+              "passed": 9,
+              "total": 20,
+              "rate": 0.45
+            },
+            "charts": {
+              "passed": 0,
+              "total": 20,
+              "rate": 0.0
+            },
+            "e2e": {
+              "passed": 1,
+              "total": 12,
+              "rate": 0.0833
+            },
+            "extend": {
+              "passed": 14,
+              "total": 20,
+              "rate": 0.7
+            },
+            "forms": {
+              "passed": 0,
+              "total": 20,
+              "rate": 0.0
+            },
+            "grouping": {
+              "passed": 0,
+              "total": 20,
+              "rate": 0.0
+            },
+            "params": {
+              "passed": 2,
+              "total": 20,
+              "rate": 0.1
+            },
+            "settings": {
+              "passed": 0,
+              "total": 20,
+              "rate": 0.0
+            },
+            "types": {
+              "passed": 0,
+              "total": 20,
+              "rate": 0.0
+            }
+          },
+          "issue_codes": {
+            "widget_def_mismatch": 341,
+            "missing_custom_backend": 94,
+            "too_many_invalid_calls": 73,
+            "app_def_mismatch": 49,
+            "missing_generated_widget": 28,
+            "missing_widget": 26,
+            "missing_widget_def": 8,
+            "missing_app_def": 4,
+            "layout_overlap": 1
+          }
+        }
+      },
+      "tasks": 212
+    }
+  },
+  "aggregate": {
+    "anthropic-sonnet-5": {
+      "passed": 476,
+      "total": 512,
+      "strict_pass_rate": 0.9297,
+      "suites_included": [
+        "core",
+        "build-openbb-apps"
+      ],
+      "suites_pending": []
+    },
+    "ollama-gpt-oss-20b": {
+      "passed": 322,
+      "total": 512,
+      "strict_pass_rate": 0.6289,
+      "suites_included": [
+        "core",
+        "build-openbb-apps"
+      ],
+      "suites_pending": []
+    },
+    "ollama-qwen3-8b": {
+      "passed": 179,
+      "total": 512,
+      "strict_pass_rate": 0.3496,
+      "suites_included": [
+        "core",
+        "build-openbb-apps"
+      ],
+      "suites_pending": []
+    },
+    "openai-gpt-4.1-mini": {
+      "passed": 364,
+      "total": 512,
+      "strict_pass_rate": 0.7109,
+      "suites_included": [
+        "core",
+        "build-openbb-apps"
+      ],
+      "suites_pending": []
+    },
+    "openai-gpt-5.5": {
+      "passed": 494,
+      "total": 512,
+      "strict_pass_rate": 0.9648,
+      "suites_included": [
+        "core",
+        "build-openbb-apps"
+      ],
+      "suites_pending": []
+    },
+    "zai-glm-5.2": {
+      "passed": 439,
+      "total": 512,
+      "strict_pass_rate": 0.8574,
+      "suites_included": [
+        "core",
+        "build-openbb-apps"
+      ],
+      "suites_pending": []
+    }
+  }
+}

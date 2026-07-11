@@ -40,14 +40,14 @@ from workspace_bench.core.models import (
     BENCHMARK_VERSION,
     JsonDict,
     RunResult,
-    Scenario,
+    Task,
     ToolCall,
-    VALID_SCENARIO_SPLITS,
+    VALID_TASK_SPLITS,
 )
 from workspace_bench.reports.metrics import compute_reliability_metrics
-from workspace_bench.core.runner import BUILTIN_SCENARIO_PACK_ORDER
-from workspace_bench.core.runner import load_builtin_scenarios, load_scenario_directory
-from workspace_bench.core.runner import load_builtin_task_pack_manifest, load_task_pack_manifest
+from workspace_bench.core.runner import BUILTIN_TASK_SUITE_ORDER
+from workspace_bench.core.runner import load_builtin_tasks, load_task_directory
+from workspace_bench.core.runner import load_builtin_task_suite_manifest, load_task_suite_manifest
 
 
 INTERACTIVE_PROVIDERS = {"openai", "ollama"}
@@ -143,7 +143,7 @@ def default_adapters() -> dict[str, ModelAdapter]:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Run selected Workspace Bench scenarios against multiple model adapters."
+        description="Run selected Workspace Bench tasks against multiple model adapters."
     )
     parser.add_argument(
         "--models-file",
@@ -175,32 +175,33 @@ def main(argv: list[str] | None = None) -> int:
         "--difficulty",
         choices=["all", "easy", "medium", "hard"],
         default="all",
-        help="Scenario difficulty slice to run.",
+        help="Task difficulty slice to run.",
     )
-    parser.add_argument("--level", help="Optional level filter, e.g. L1 or L2.")
+    parser.add_argument("--level", help="Optional difficulty-level filter, e.g. t1 or t2.")
+    parser.add_argument("--category", help="Optional task-category filter, e.g. dashboard.")
     parser.add_argument("--capability", help="Optional capability filter.")
     parser.add_argument("--workflow", help="Optional workflow filter.")
     parser.add_argument("--domain", help="Optional domain filter.")
     parser.add_argument("--subdomain", help="Optional subdomain filter.")
     parser.add_argument(
-        "--pack", "--collection",
-        dest="pack",
+        "--suite",
+        dest="suite",
         default="core",
-        choices=["all", *BUILTIN_SCENARIO_PACK_ORDER],
+        choices=list(BUILTIN_TASK_SUITE_ORDER),
         help=(
-            "Bundled scenario collection. core = operating the workspace; "
+            "Bundled task suite. core = operating the workspace; "
             "build-openbb-apps = building custom backend apps; all is a "
             "deprecated alias for core."
         ),
     )
     parser.add_argument(
         "--split",
-        choices=sorted(VALID_SCENARIO_SPLITS),
-        help="Optional scenario split filter.",
+        choices=sorted(VALID_TASK_SPLITS),
+        help="Optional task split filter.",
     )
     parser.add_argument(
-        "--scenario-dir",
-        help="Directory of scenario JSON files. Defaults to the bundled benchmark.",
+        "--task-dir",
+        help="Directory of task JSON files. Defaults to the bundled benchmark.",
     )
     parser.add_argument(
         "--tag",
@@ -209,10 +210,10 @@ def main(argv: list[str] | None = None) -> int:
         help="Optional tag filter. Can be passed multiple times.",
     )
     parser.add_argument(
-        "--scenario",
+        "--task",
         action="append",
         default=[],
-        help="Run only these scenario id(s). Can be passed multiple times.",
+        help="Run only these task id(s). Can be passed multiple times.",
     )
     parser.add_argument(
         "--metric",
@@ -241,13 +242,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--max-turns",
         type=int,
-        help="Override scenario max_turns for interactive runs.",
+        help="Override task max_turns for interactive runs.",
     )
     parser.add_argument(
         "--repeats",
         type=int,
         default=1,
-        help="Run each selected scenario this many times per model.",
+        help="Run each selected task this many times per model.",
     )
     parser.add_argument(
         "--model-retries",
@@ -277,16 +278,16 @@ def main(argv: list[str] | None = None) -> int:
         "--resume",
         action="store_true",
         help=(
-            "Reuse completed scenario run directories already present in the "
+            "Reuse completed task run directories already present in the "
             "output directory (interactive runner only): replay their recorded "
             "tool calls through a fresh simulator to regrade, and only run "
-            "scenarios with no completed episode on disk."
+            "tasks with no completed episode on disk."
         ),
     )
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Print selected models and scenarios without running agents.",
+        help="Print selected models and tasks without running agents.",
     )
     args = parser.parse_args(argv)
     if args.repeats < 1:
@@ -339,20 +340,21 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 2
 
-    scenarios = filter_scenarios(
-        load_scenario_source(args),
+    tasks = filter_tasks(
+        load_task_source(args),
         difficulty=args.difficulty,
         level=args.level,
+        category=args.category,
         capability=args.capability,
         workflow=args.workflow,
         domain=args.domain,
         subdomain=args.subdomain,
         split=args.split,
         tags=args.tag,
-        scenario_ids=args.scenario,
+        task_ids=args.task,
     )
-    if not scenarios:
-        print("No scenarios matched the selected filters.", file=sys.stderr)
+    if not tasks:
+        print("No tasks matched the selected filters.", file=sys.stderr)
         return 2
 
     selected_adapters = [adapters[slug] for slug in selected_model_slugs]
@@ -362,7 +364,7 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     output_dir = resolve_output_dir(args)
     if args.dry_run:
-        print_dry_run(selected_adapters, scenarios, args)
+        print_dry_run(selected_adapters, tasks, args)
         print(f"Output directory would be: {output_dir}")
         return 0
 
@@ -370,15 +372,15 @@ def main(argv: list[str] | None = None) -> int:
     model_summaries = []
 
     for adapter in selected_adapters:
-        total_attempts = len(scenarios) * args.repeats
+        total_attempts = len(tasks) * args.repeats
         print(
-            f"Running {adapter.label} on {len(scenarios)} scenario(s) "
+            f"Running {adapter.label} on {len(tasks)} task(s) "
             f"({total_attempts} attempt(s)) with {args.runner} runner...",
             file=sys.stderr,
         )
         runs = run_adapter(
             adapter,
-            scenarios,
+            tasks,
             output_dir,
             timeout=args.timeout,
             runner=args.runner,
@@ -389,7 +391,7 @@ def main(argv: list[str] | None = None) -> int:
             color=should_colorize(args.color, sys.stderr),
             resume=args.resume,
         )
-        result_payload = model_result_payload(adapter, scenarios, runs, args)
+        result_payload = model_result_payload(adapter, tasks, runs, args)
         result_path = output_dir / f"{adapter.slug}.json"
         result_path.write_text(
             json.dumps(result_payload, indent=2, sort_keys=True) + "\n",
@@ -409,8 +411,8 @@ def main(argv: list[str] | None = None) -> int:
         "retry_backoff": args.retry_backoff,
         "metric": args.metric,
         "models_file": args.models_file,
-        "scenario_count": len(scenarios),
-        "attempt_count": len(scenarios) * args.repeats,
+        "task_count": len(tasks),
+        "attempt_count": len(tasks) * args.repeats,
         "models": model_summaries,
     }
     comparison_path = output_dir / "comparison.json"
@@ -580,63 +582,66 @@ def export_png(svg_path: Path, png_path: Path) -> bool:
     return False
 
 
-def filter_scenarios(
-    scenarios: list[Scenario],
+def filter_tasks(
+    tasks: list[Task],
     *,
     difficulty: str,
     level: str | None,
+    category: str | None,
     capability: str | None,
     workflow: str | None,
     domain: str | None,
     subdomain: str | None,
     split: str | None,
     tags: list[str],
-    scenario_ids: list[str] | None = None,
-) -> list[Scenario]:
-    if scenario_ids:
-        wanted = set(scenario_ids)
-        scenarios = [scenario for scenario in scenarios if scenario.id in wanted]
+    task_ids: list[str] | None = None,
+) -> list[Task]:
+    if task_ids:
+        wanted = set(task_ids)
+        tasks = [task for task in tasks if task.id in wanted]
     if difficulty != "all":
-        scenarios = [scenario for scenario in scenarios if scenario.difficulty == difficulty]
+        tasks = [task for task in tasks if task.difficulty == difficulty]
     if level:
-        scenarios = [scenario for scenario in scenarios if scenario.level == level]
+        tasks = [task for task in tasks if task.level == level]
+    if category:
+        tasks = [task for task in tasks if task.category == category]
     if capability:
-        scenarios = [scenario for scenario in scenarios if scenario.capability == capability]
+        tasks = [task for task in tasks if task.capability == capability]
     if workflow:
-        scenarios = [scenario for scenario in scenarios if scenario.workflow == workflow]
+        tasks = [task for task in tasks if task.workflow == workflow]
     if domain:
-        scenarios = [scenario for scenario in scenarios if scenario.domain == domain]
+        tasks = [task for task in tasks if task.domain == domain]
     if subdomain:
-        scenarios = [scenario for scenario in scenarios if scenario.subdomain == subdomain]
+        tasks = [task for task in tasks if task.subdomain == subdomain]
     if split:
-        scenarios = [scenario for scenario in scenarios if scenario.split == split]
+        tasks = [task for task in tasks if task.split == split]
     for tag in tags:
-        scenarios = [scenario for scenario in scenarios if tag in scenario.tags]
-    return scenarios
+        tasks = [task for task in tasks if tag in task.tags]
+    return tasks
 
 
-def load_scenario_source(args: argparse.Namespace) -> list[Scenario]:
-    scenario_dir = getattr(args, "scenario_dir", None)
-    if scenario_dir:
-        return load_scenario_directory(Path(scenario_dir))
-    pack = getattr(args, "pack", "core")
-    # `--scenario <id>` should just work without naming the collection:
+def load_task_source(args: argparse.Namespace) -> list[Task]:
+    task_dir = getattr(args, "task_dir", None)
+    if task_dir:
+        return load_task_directory(Path(task_dir))
+    pack = getattr(args, "suite", "core")
+    # `--task <id>` should just work without naming the collection:
     # when ids are given and the pack was left at its default, search every
     # bundled collection for them.
-    if getattr(args, "scenario", None) and pack == "core":
-        scenarios: list[Scenario] = []
+    if getattr(args, "task", None) and pack == "core":
+        tasks: list[Task] = []
         seen: set[str] = set()
-        for name in BUILTIN_SCENARIO_PACK_ORDER:
-            for scenario in load_builtin_scenarios(name):
-                if scenario.id not in seen:
-                    seen.add(scenario.id)
-                    scenarios.append(scenario)
-        return scenarios
-    return load_builtin_scenarios(pack)
+        for name in BUILTIN_TASK_SUITE_ORDER:
+            for task in load_builtin_tasks(name):
+                if task.id not in seen:
+                    seen.add(task.id)
+                    tasks.append(task)
+        return tasks
+    return load_builtin_tasks(pack)
 
 
 def print_dry_run(
-    adapters: list[ModelAdapter], scenarios: list[Scenario], args: argparse.Namespace
+    adapters: list[ModelAdapter], tasks: list[Task], args: argparse.Namespace
 ) -> None:
     print(f"Runner: {args.runner}")
     print(f"Repeats: {args.repeats}")
@@ -644,19 +649,19 @@ def print_dry_run(
     print("Models:")
     for adapter in adapters:
         print(f"  - {adapter.slug}: {adapter.label}")
-    print(f"Scenarios ({len(scenarios)}) for filters {selected_filters(args)}:")
-    for scenario in scenarios:
+    print(f"Tasks ({len(tasks)}) for filters {selected_filters(args)}:")
+    for task in tasks:
         print(
-            f"  - {scenario.id}\t{scenario.level}\t"
-            f"{scenario.difficulty}\t{scenario.split}\t"
-            f"{scenario.capability}\t{scenario.workflow}\t"
-            f"{scenario.domain}\t{scenario.subdomain}"
+            f"  - {task.id}\t{task.level}\t"
+            f"{task.difficulty}\t{task.split}\t"
+            f"{task.capability}\t{task.workflow}\t"
+            f"{task.domain}\t{task.subdomain}"
         )
 
 
 def run_adapter(
     adapter: ModelAdapter,
-    scenarios: list[Scenario],
+    tasks: list[Task],
     output_dir: Path,
     *,
     timeout: float,
@@ -669,28 +674,28 @@ def run_adapter(
     resume: bool = False,
 ) -> list[ComparisonRun]:
     runs = []
-    total_attempts = len(scenarios) * repeats
+    total_attempts = len(tasks) * repeats
     attempt_index = 0
     resumed_count = 0
     with patched_env(adapter.env):
         for repeat in range(1, repeats + 1):
-            for scenario in scenarios:
+            for task in tasks:
                 attempt_index += 1
                 repeat_label = f" repeat {repeat}/{repeats}" if repeats > 1 else ""
                 print(
-                    f"  [{attempt_index}/{total_attempts}] {scenario.id}{repeat_label} ...",
+                    f"  [{attempt_index}/{total_attempts}] {task.id}{repeat_label} ...",
                     file=sys.stderr,
                     flush=True,
                 )
-                run_dir = scenario_run_dir(
+                run_dir = task_run_dir(
                     output_dir / adapter.slug,
-                    scenario.id,
+                    task.id,
                     repeat=repeat,
                     repeats=repeats,
                 )
                 if resume and runner == "interactive":
                     run = replay_completed_run(
-                        adapter, scenario, run_dir, repeat=repeat
+                        adapter, task, run_dir, repeat=repeat
                     )
                     if run is not None:
                         runs.append(run)
@@ -709,7 +714,7 @@ def run_adapter(
                 if runner == "batch":
                     run = batch_comparison_run(
                         run_agent_command(
-                            scenario=scenario,
+                            task=task,
                             command=adapter.command,
                             timeout_seconds=timeout,
                             run_dir=run_dir,
@@ -719,7 +724,7 @@ def run_adapter(
                 else:
                     run = run_interactive_agent(
                         adapter=adapter,
-                        scenario=scenario,
+                        task=task,
                         run_dir=run_dir,
                         timeout=timeout,
                         max_turns_override=max_turns_override,
@@ -749,7 +754,7 @@ def run_adapter(
 
 def replay_completed_run(
     adapter: ModelAdapter,
-    scenario: Scenario,
+    task: Task,
     run_dir: Path,
     *,
     repeat: int = 1,
@@ -757,7 +762,7 @@ def replay_completed_run(
     """Rebuild a ComparisonRun from a completed episode already on disk.
 
     conversation.json is written only after the turn loop finishes, so its
-    presence marks a completed episode; a run killed mid-scenario lacks it and
+    presence marks a completed episode; a run killed mid-task lacks it and
     re-runs live. tool_calls.jsonl records each executed call after
     normalization, and the simulator is deterministic, so replaying the calls
     into a fresh episode reproduces the exact final state, trace, and grade.
@@ -778,7 +783,7 @@ def replay_completed_run(
         meta: JsonDict = json.loads(meta_path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return None
-    episode = WorkspaceEpisode(scenario=scenario)
+    episode = WorkspaceEpisode(task=task)
     if output_path.exists():
         for line in output_path.read_text(encoding="utf-8").splitlines():
             line = line.strip()
@@ -788,7 +793,7 @@ def replay_completed_run(
             episode.step(ToolCall(payload["tool"], payload["args"]))
     return ComparisonRun(
         run_result=RunResult(
-            scenario=scenario,
+            task=task,
             grade=episode.grade(),
             trace=tuple(episode.trace),
             final_snapshot=episode.snapshot(),
@@ -806,10 +811,10 @@ def replay_completed_run(
     )
 
 
-def scenario_run_dir(base_dir: Path, scenario_id: str, *, repeat: int, repeats: int) -> Path:
+def task_run_dir(base_dir: Path, task_id: str, *, repeat: int, repeats: int) -> Path:
     if repeats == 1:
-        return base_dir / scenario_id
-    return base_dir / scenario_id / f"repeat_{repeat:02d}"
+        return base_dir / task_id
+    return base_dir / task_id / f"repeat_{repeat:02d}"
 
 
 def batch_comparison_run(run: AgentCommandRun, *, repeat: int = 1) -> ComparisonRun:
@@ -831,7 +836,7 @@ def batch_comparison_run(run: AgentCommandRun, *, repeat: int = 1) -> Comparison
 def run_interactive_agent(
     *,
     adapter: ModelAdapter,
-    scenario: Scenario,
+    task: Task,
     run_dir: Path,
     timeout: float,
     max_turns_override: int | None,
@@ -844,8 +849,8 @@ def run_interactive_agent(
     output_path = run_dir / "tool_calls.jsonl"
     conversation_path = run_dir / "conversation.json"
     responses_path = run_dir / "model_responses.jsonl"
-    task_payload = build_task_envelope(scenario)
-    origin_hints = fixture_origin_hints(task_payload["scenario"]["fixtures"])
+    task_payload = build_task_envelope(task)
+    origin_hints = fixture_origin_hints(task_payload["task"]["fixtures"])
     task_path.write_text(
         json.dumps(task_payload, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
@@ -855,9 +860,9 @@ def run_interactive_agent(
     if responses_path.exists():
         responses_path.unlink()
 
-    episode = WorkspaceEpisode(scenario=scenario)
+    episode = WorkspaceEpisode(task=task)
     messages = build_interactive_messages(task_payload)
-    max_turns = max_turns_override or int(scenario.limits.get("max_turns", 12))
+    max_turns = max_turns_override or int(task.limits.get("max_turns", 12))
     stdout_lines: list[str] = []
     stderr = ""
     exit_code: int | None = 0
@@ -973,7 +978,7 @@ def run_interactive_agent(
     )
     return ComparisonRun(
         run_result=RunResult(
-            scenario=scenario,
+            task=task,
             grade=grade,
             trace=tuple(episode.trace),
             final_snapshot=final_snapshot,
@@ -992,9 +997,9 @@ def run_interactive_agent(
 
 
 def build_interactive_messages(task: JsonDict) -> list[JsonDict]:
-    scenario = task["scenario"]
-    allowed_tools = scenario["allowed_tools"]
-    origin_hints = fixture_origin_hints(scenario["fixtures"])
+    task = task["task"]
+    allowed_tools = task["allowed_tools"]
+    origin_hints = fixture_origin_hints(task["fixtures"])
     widget_tool_names = {
         "list_available_widgets",
         "get_widget_schema",
@@ -1013,21 +1018,21 @@ def build_interactive_messages(task: JsonDict) -> list[JsonDict]:
         if name in TOOL_REFERENCE
     }
     public_task = {
-        "id": scenario["id"],
-        "title": scenario["title"],
-        "level": scenario["level"],
-        "capability": scenario["capability"],
-        "workflow": scenario["workflow"],
-        "domain": scenario["domain"],
-        "subdomain": scenario["subdomain"],
-        "difficulty": scenario["difficulty"],
-        "prompt": scenario["prompt"],
-        "fixtures": scenario["fixtures"],
+        "id": task["id"],
+        "title": task["title"],
+        "level": task["level"],
+        "capability": task["capability"],
+        "workflow": task["workflow"],
+        "domain": task["domain"],
+        "subdomain": task["subdomain"],
+        "difficulty": task["difficulty"],
+        "prompt": task["prompt"],
+        "fixtures": task["fixtures"],
         "origin_hints": origin_hints,
         "widget_hints": widget_hints,
-        "initial_state": scenario["initial_state"],
+        "initial_state": task["initial_state"],
         "allowed_tools": allowed_tools,
-        "limits": scenario.get("limits", {}),
+        "limits": task.get("limits", {}),
     }
     system = "\n".join(
         [
@@ -1391,7 +1396,7 @@ def patched_env(env: dict[str, str]) -> Iterator[None]:
 
 def model_result_payload(
     adapter: ModelAdapter,
-    scenarios: list[Scenario],
+    tasks: list[Task],
     runs: list[ComparisonRun],
     args: argparse.Namespace,
 ) -> dict:
@@ -1404,7 +1409,7 @@ def model_result_payload(
         "model_retries": args.model_retries,
         "summary": summarize_runs(runs),
         "results": [agent_run_summary(run) for run in runs],
-        "scenarios": [scenario.id for scenario in scenarios],
+        "tasks": [task.id for task in tasks],
     }
 
 
@@ -1421,19 +1426,19 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
         "",
         f"- Benchmark: `{comparison['benchmark']['name']}`",
         f"- Release: `{comparison['benchmark']['release_id']}`",
-        f"- Scenarios: `{comparison['scenario_count']}`",
-        f"- Attempts: `{comparison.get('attempt_count', comparison['scenario_count'])}`",
+        f"- Tasks: `{comparison['task_count']}`",
+        f"- Attempts: `{comparison.get('attempt_count', comparison['task_count'])}`",
         f"- Filters: `{json.dumps(comparison['filters'], sort_keys=True)}`",
         f"- Runner: `{comparison['runner']}`",
         f"- Repeats: `{comparison.get('repeats', 1)}`",
         "",
         "## How To Read This",
         "",
-        "`pass_rate` is strict scenario success: a scenario counts as passed only when every grader check passes and the agent process exits cleanly.",
+        "`pass_rate` is strict task success: a task counts as passed only when every grader check passes and the agent process exits cleanly.",
         "`task_pass_rate` excludes provider/process failures and asks whether valid attempts satisfied the grader.",
-        "`mean_score` is partial credit: it averages each scenario's fraction of passed checks.",
-        "`pass@k` counts a scenario when at least one repeat passes. `pass^k` counts it only when every repeat passes.",
-        "Two models can therefore have the same pass rate but different mean scores when they pass the same number of scenarios but fail with different severity.",
+        "`mean_score` is partial credit: it averages each task's fraction of passed checks.",
+        "`pass@k` counts a task when at least one repeat passes. `pass^k` counts it only when every repeat passes.",
+        "Two models can therefore have the same pass rate but different mean scores when they pass the same number of tasks but fail with different severity.",
         "",
         "## Summary",
         "",
@@ -1459,7 +1464,7 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
                 "",
                 "## Reliability",
                 "",
-                "| Model | pass@k | pass^k | Scenarios | k Range |",
+                "| Model | pass@k | pass^k | Tasks | k Range |",
                 "| --- | ---: | ---: | ---: | ---: |",
             ]
         )
@@ -1472,7 +1477,7 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
                 f"{model['model']} | "
                 f"{model.get('pass_at_k', 0.0):.1%} | "
                 f"{model.get('pass_power_k', 0.0):.1%} | "
-                f"{model.get('reliability_scenario_count', 0)} | "
+                f"{model.get('reliability_task_count', 0)} | "
                 f"{k_range} |"
             )
 
@@ -1487,17 +1492,17 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
             f"{format_bucket(by_difficulty.get('hard'))} |"
         )
 
-    lines.extend(["", "## By Level", "", "| Model | L0 | L1 | L2 | L3 | L4 |", "| --- | ---: | ---: | ---: | ---: | ---: |"])
+    lines.extend(["", "## By Level", "", "| Model | t0 | t1 | t2 | t3 | t4 |", "| --- | ---: | ---: | ---: | ---: | ---: |"])
     for model in comparison["models"]:
         by_level = model.get("by_level", {})
         lines.append(
             "| "
             f"{model['model']} | "
-            f"{format_bucket(by_level.get('L0'))} | "
-            f"{format_bucket(by_level.get('L1'))} | "
-            f"{format_bucket(by_level.get('L2'))} | "
-            f"{format_bucket(by_level.get('L3'))} | "
-            f"{format_bucket(by_level.get('L4'))} |"
+            f"{format_bucket(by_level.get('t0'))} | "
+            f"{format_bucket(by_level.get('t1'))} | "
+            f"{format_bucket(by_level.get('t2'))} | "
+            f"{format_bucket(by_level.get('t3'))} | "
+            f"{format_bucket(by_level.get('t4'))} |"
         )
 
     lines.extend(["", "## Task Issue Counts", ""])
@@ -1523,7 +1528,7 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
         [
             "## Process Failures",
             "",
-            "| Model | Scenario | Repeat | Exit Code | Timed Out | Stderr Preview |",
+            "| Model | Task | Repeat | Exit Code | Timed Out | Stderr Preview |",
             "| --- | --- | ---: | ---: | --- | --- |",
         ]
     )
@@ -1533,7 +1538,7 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
             lines.append(
                 "| "
                 f"{row['model']} | "
-                f"{row['scenario']} | "
+                f"{row['task']} | "
                 f"{row['repeat']} | "
                 f"{row['exit_code']} | "
                 f"{row['timed_out']} | "
@@ -1545,9 +1550,9 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
 
     lines.extend(
         [
-            "## Scenario Matrix",
+            "## Task Matrix",
             "",
-            "| Scenario | Level | Difficulty | Capability | Workflow | Domain | Subdomain | "
+            "| Task | Level | Difficulty | Capability | Workflow | Domain | Subdomain | "
             + " | ".join(payload["model"]["label"] for payload in model_payloads)
             + " |",
             "| --- | --- | --- | --- | --- | --- | --- | "
@@ -1555,16 +1560,16 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
             + " |",
         ]
     )
-    scenario_ids = model_payloads[0]["scenarios"] if model_payloads else []
-    results_by_model = [results_grouped_by_scenario(payload) for payload in model_payloads]
-    for scenario_id in scenario_ids:
-        first = results_by_model[0][scenario_id][0]
+    task_ids = model_payloads[0]["tasks"] if model_payloads else []
+    results_by_model = [results_grouped_by_task(payload) for payload in model_payloads]
+    for task_id in task_ids:
+        first = results_by_model[0][task_id][0]
         cells = []
         for results in results_by_model:
-            cells.append(format_result_cell(results[scenario_id]))
+            cells.append(format_result_cell(results[task_id]))
         lines.append(
             "| "
-            f"{scenario_id} | "
+            f"{task_id} | "
             f"{first['level']} | "
             f"{first['difficulty']} | "
             f"{first['capability']} | "
@@ -1592,7 +1597,7 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
     return "\n".join(lines)
 
 
-def results_grouped_by_scenario(payload: dict) -> dict[str, list[dict]]:
+def results_grouped_by_task(payload: dict) -> dict[str, list[dict]]:
     grouped: dict[str, list[dict]] = {}
     for result in payload["results"]:
         grouped.setdefault(result["id"], []).append(result)
@@ -1610,7 +1615,7 @@ def process_failure_rows(model_payloads: list[dict]) -> list[dict]:
             rows.append(
                 {
                     "model": label,
-                    "scenario": result["id"],
+                    "task": result["id"],
                     "repeat": result.get("repeat", 1),
                     "exit_code": result.get("agent_exit_code"),
                     "timed_out": result.get("agent_timed_out"),
@@ -1662,11 +1667,11 @@ def summarize_runs(runs: list[ComparisonRun]) -> dict:
     )
     by_level: dict[str, dict[str, int]] = {}
     by_difficulty: dict[str, dict[str, int]] = {}
-    outcomes_by_scenario: dict[str, list[bool]] = {}
+    outcomes_by_task: dict[str, list[bool]] = {}
     for run in runs:
-        scenario = run.run_result.scenario
-        outcomes_by_scenario.setdefault(scenario.id, []).append(agent_run_passed(run))
-        for bucket, key in ((by_level, scenario.level), (by_difficulty, scenario.difficulty)):
+        task = run.run_result.task
+        outcomes_by_task.setdefault(task.id, []).append(agent_run_passed(run))
+        for bucket, key in ((by_level, task.level), (by_difficulty, task.difficulty)):
             item = bucket.setdefault(key, {"passed": 0, "total": 0})
             item["total"] += 1
             if agent_run_passed(run):
@@ -1684,7 +1689,7 @@ def summarize_runs(runs: list[ComparisonRun]) -> dict:
         "process_failures": process_failures,
         "by_level": by_level,
         "by_difficulty": by_difficulty,
-        **compute_reliability_metrics(outcomes_by_scenario),
+        **compute_reliability_metrics(outcomes_by_task),
     }
 
 
@@ -1699,15 +1704,15 @@ def agent_run_process_failed(run: ComparisonRun) -> bool:
 def agent_run_summary(run: ComparisonRun) -> dict:
     result = run.run_result
     return {
-        "id": result.scenario.id,
+        "id": result.task.id,
         "repeat": run.repeat,
-        "level": result.scenario.level,
-        "difficulty": result.scenario.difficulty,
-        "split": result.scenario.split,
-        "capability": result.scenario.capability,
-        "workflow": result.scenario.workflow,
-        "domain": result.scenario.domain,
-        "subdomain": result.scenario.subdomain,
+        "level": result.task.level,
+        "difficulty": result.task.difficulty,
+        "split": result.task.split,
+        "capability": result.task.capability,
+        "workflow": result.task.workflow,
+        "domain": result.task.domain,
+        "subdomain": result.task.subdomain,
         "passed": agent_run_passed(run),
         "process_failed": agent_run_process_failed(run),
         "task_failed": not agent_run_process_failed(run) and not result.grade.passed,
@@ -1738,23 +1743,23 @@ def selected_filters(args: argparse.Namespace) -> dict:
         "workflow": args.workflow,
         "domain": args.domain,
         "subdomain": args.subdomain,
-        "pack": getattr(args, "pack", "core"),
+        "pack": getattr(args, "suite", "core"),
         "split": getattr(args, "split", None),
-        "scenario_dir": getattr(args, "scenario_dir", None),
+        "task_dir": getattr(args, "task_dir", None),
         "tags": args.tag,
     }
 
 
 def benchmark_metadata(args: argparse.Namespace) -> dict:
-    task_pack = None
-    if getattr(args, "scenario_dir", None):
-        task_pack = load_task_pack_manifest(Path(args.scenario_dir))
+    task_suite = None
+    if getattr(args, "task_dir", None):
+        task_suite = load_task_suite_manifest(Path(args.task_dir))
     else:
-        task_pack = load_builtin_task_pack_manifest(getattr(args, "pack", "core"))
+        task_suite = load_builtin_task_suite_manifest(getattr(args, "suite", "core"))
     return {
         "name": BENCHMARK_NAME,
-        "version": task_pack.version if task_pack else BENCHMARK_VERSION,
-        "release_id": task_pack.release_id if task_pack else BENCHMARK_RELEASE_ID,
+        "version": task_suite.version if task_suite else BENCHMARK_VERSION,
+        "release_id": task_suite.release_id if task_suite else BENCHMARK_RELEASE_ID,
     }
 
 
@@ -1803,7 +1808,7 @@ def render_svg_chart(comparison: dict) -> str:
     title = (
         f"Workspace Bench {metric_label} "
         f"({comparison['filters']['difficulty']} difficulty, "
-        f"{comparison['scenario_count']} scenarios)"
+        f"{comparison['task_count']} tasks)"
     )
     parts = [
         '<svg xmlns="http://www.w3.org/2000/svg" '

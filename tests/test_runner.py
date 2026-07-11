@@ -5,20 +5,20 @@ from pathlib import Path
 
 from workspace_bench.cli import main
 from workspace_bench.core.models import CANARY_GUID
-from workspace_bench.core.runner import ScenarioRunner, load_builtin_scenarios, load_scenario_file
+from workspace_bench.core.runner import TaskRunner, load_builtin_tasks, load_task_file
 
 
-def test_oracle_passes_all_builtin_scenarios() -> None:
-    runner = ScenarioRunner()
-    results = [runner.run(scenario, "oracle") for scenario in load_builtin_scenarios()]
+def test_oracle_passes_all_builtin_tasks() -> None:
+    runner = TaskRunner()
+    results = [runner.run(task, "oracle") for task in load_builtin_tasks()]
 
     assert results
     assert all(result.grade.passed for result in results)
 
 
-def test_noop_agent_fails_builtin_scenarios() -> None:
-    runner = ScenarioRunner()
-    results = [runner.run(scenario, "noop") for scenario in load_builtin_scenarios()]
+def test_noop_agent_fails_builtin_tasks() -> None:
+    runner = TaskRunner()
+    results = [runner.run(task, "noop") for task in load_builtin_tasks()]
 
     assert results
     assert all(not result.grade.passed for result in results)
@@ -28,7 +28,7 @@ def test_cli_can_write_trace_artifacts(tmp_path) -> None:
     exit_code = main(
         [
             "run",
-            "--scenario",
+            "--task",
             "gen_t0_create_price_performance_aapl",
             "--agent",
             "oracle",
@@ -42,42 +42,42 @@ def test_cli_can_write_trace_artifacts(tmp_path) -> None:
     payload = json.loads(artifact.read_text(encoding="utf-8"))
     assert exit_code == 0
     assert payload["grade"]["passed"] is True
-    assert payload["scenario"]["difficulty"] == "easy"
+    assert payload["task"]["difficulty"] == "easy"
     assert payload["trace"][0]["tool"] == "get_workspace_snapshot"
 
 
-def test_builtin_scenarios_have_terminal_bench_style_metadata() -> None:
-    scenarios = load_builtin_scenarios()
+def test_builtin_tasks_have_terminal_bench_style_metadata() -> None:
+    tasks = load_builtin_tasks()
 
-    assert all(scenario.capability for scenario in scenarios)
-    assert all(scenario.workflow for scenario in scenarios)
-    assert all(scenario.domain for scenario in scenarios)
-    assert all(scenario.subdomain for scenario in scenarios)
-    assert all(scenario.difficulty in {"easy", "medium", "hard"} for scenario in scenarios)
-    assert all(scenario.tags for scenario in scenarios)
-
-
-def test_cli_validate_passes_for_builtin_scenarios() -> None:
-    assert main(["validate", "--min-scenarios", "300"]) == 0
+    assert all(task.capability for task in tasks)
+    assert all(task.workflow for task in tasks)
+    assert all(task.domain for task in tasks)
+    assert all(task.subdomain for task in tasks)
+    assert all(task.difficulty in {"easy", "medium", "hard"} for task in tasks)
+    assert all(task.tags for task in tasks)
 
 
-def test_cli_validate_passes_for_all_alias() -> None:
-    assert main(["validate", "--pack", "all", "--min-scenarios", "300"]) == 0
+def test_cli_validate_passes_for_builtin_tasks() -> None:
+    assert main(["validate", "--min-tasks", "300"]) == 0
 
 
-def test_cli_all_pack_resolves_to_unified_v1(capsys) -> None:
-    exit_code = main(["manifest", "--pack", "all", "--json"])
+def test_cli_validate_passes_for_build_suite() -> None:
+    assert main(["validate", "--suite", "build-openbb-apps", "--min-tasks", "212"]) == 0
+
+
+def test_cli_manifest_resolves_core_suite(capsys) -> None:
+    exit_code = main(["manifest", "--suite", "core", "--json"])
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
-    assert payload["scenario_count"] == 300
+    assert payload["task_count"] == 300
     assert payload["release_id"] == "workspace-bench-v1"
     assert "skill-access" in payload["capabilities"]
     assert "client-meeting-prep" in payload["workflows"]
 
 
-def test_cli_validate_fails_when_min_scenario_gate_is_not_met(capsys) -> None:
-    exit_code = main(["validate", "--level", "L4", "--min-scenarios", "300"])
+def test_cli_validate_fails_when_min_task_gate_is_not_met(capsys) -> None:
+    exit_code = main(["validate", "--category", "repair", "--min-tasks", "300"])
 
     output = capsys.readouterr().out
     assert exit_code == 1
@@ -85,7 +85,7 @@ def test_cli_validate_fails_when_min_scenario_gate_is_not_met(capsys) -> None:
 
 
 def test_cli_filters_by_level_and_tag(capsys) -> None:
-    exit_code = main(["list", "--level", "L2", "--tag", "multi-widget"])
+    exit_code = main(["list", "--level", "t3", "--tag", "multi-widget"])
 
     output = capsys.readouterr().out
     assert exit_code == 0
@@ -108,7 +108,7 @@ def test_cli_manifest_json_includes_dataset_summary(capsys) -> None:
     assert exit_code == 0
     assert payload["name"] == "openbb-workspace-bench"
     assert payload["release_id"] == "workspace-bench-v1"
-    assert payload["scenario_count"] == len(load_builtin_scenarios())
+    assert payload["task_count"] == len(load_builtin_tasks())
     assert payload["canary_guid"] == CANARY_GUID
     assert "dashboard-construction" in payload["capabilities"]
     assert "finance" in payload["domains"]
@@ -121,7 +121,7 @@ def test_cli_report_json_includes_release_checks(capsys) -> None:
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
-    assert payload["manifest"]["scenario_count"] >= 300
+    assert payload["manifest"]["task_count"] >= 300
     assert payload["release_checks"]["oracle_all_pass"] is True
     assert payload["release_checks"]["noop_all_fail"] is True
 
@@ -134,14 +134,14 @@ def test_cli_report_can_write_markdown(tmp_path) -> None:
     text = output.read_text(encoding="utf-8")
     assert exit_code == 0
     assert "# OpenBB Workspace Bench Report" in text
-    assert "scenario_count_at_least_300" in text
+    assert "task_count_at_least_300" in text
 
 
 def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
     exit_code = main(
         [
             "run",
-            "--scenario",
+            "--task",
             "gen_t0_create_price_performance_aapl",
             "--agent",
             "oracle",
@@ -156,24 +156,24 @@ def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
     assert payload["results"][0]["split"] == "train"
 
 
-def test_cli_can_run_private_scenario_directory(tmp_path, capsys) -> None:
-    scenario = next(
-        item for item in load_builtin_scenarios() if item.id == "gen_t0_create_price_performance_aapl"
+def test_cli_can_run_private_task_directory(tmp_path, capsys) -> None:
+    task = next(
+        item for item in load_builtin_tasks() if item.id == "gen_t0_create_price_performance_aapl"
     )
-    scenario_path = tmp_path / "gen_t0_create_price_performance_aapl.json"
-    scenario_path.write_text(
-        scenario.source_path.read_text(encoding="utf-8"),
+    task_path = tmp_path / "gen_t0_create_price_performance_aapl.json"
+    task_path.write_text(
+        task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
     )
 
     validate_exit = main(
-        ["validate", "--scenario-dir", str(tmp_path), "--min-scenarios", "1"]
+        ["validate", "--task-dir", str(tmp_path), "--min-tasks", "1"]
     )
     capsys.readouterr()
     run_exit = main(
         [
             "run",
-            "--scenario-dir",
+            "--task-dir",
             str(tmp_path),
             "--agent",
             "oracle",
@@ -188,9 +188,9 @@ def test_cli_can_run_private_scenario_directory(tmp_path, capsys) -> None:
     assert payload["summary"]["passed"] == 1
 
 
-def test_runner_round_trips_workspace_resource_and_prompt_scenario(tmp_path) -> None:
-    scenario_path = tmp_path / "resource_prompt_round_trip.json"
-    scenario_path.write_text(
+def test_runner_round_trips_workspace_resource_and_prompt_task(tmp_path) -> None:
+    task_path = tmp_path / "resource_prompt_round_trip.json"
+    task_path.write_text(
         json.dumps(
             {
                 "id": "resource_prompt_round_trip",
@@ -248,9 +248,9 @@ def test_runner_round_trips_workspace_resource_and_prompt_scenario(tmp_path) -> 
         ),
         encoding="utf-8",
     )
-    scenario = load_scenario_file(scenario_path)
+    task = load_task_file(task_path)
 
-    result = ScenarioRunner().run(scenario, "oracle")
+    result = TaskRunner().run(task, "oracle")
 
     assert result.grade.passed is True
     assert [event.call.name for event in result.trace] == [
@@ -259,14 +259,14 @@ def test_runner_round_trips_workspace_resource_and_prompt_scenario(tmp_path) -> 
     ]
 
 
-def test_cli_private_task_pack_manifest_sets_default_split(tmp_path, capsys) -> None:
-    scenario = next(
-        item for item in load_builtin_scenarios() if item.id == "gen_t0_create_price_performance_aapl"
+def test_cli_private_task_suite_manifest_sets_default_split(tmp_path, capsys) -> None:
+    task = next(
+        item for item in load_builtin_tasks() if item.id == "gen_t0_create_price_performance_aapl"
     )
-    (tmp_path / "task_pack.json").write_text(
+    (tmp_path / "task_suite.json").write_text(
         json.dumps(
             {
-                "pack_id": "private-pack",
+                "suite_id": "private-pack",
                 "release_id": "private-pack-v1",
                 "version": "1.0.0",
                 "visibility": "private",
@@ -275,45 +275,45 @@ def test_cli_private_task_pack_manifest_sets_default_split(tmp_path, capsys) -> 
         ),
         encoding="utf-8",
     )
-    payload = json.loads(scenario.source_path.read_text(encoding="utf-8"))
+    payload = json.loads(task.source_path.read_text(encoding="utf-8"))
     payload.pop("split", None)
     (tmp_path / "gen_t0_create_price_performance_aapl.json").write_text(
         json.dumps(payload),
         encoding="utf-8",
     )
 
-    manifest_exit = main(["manifest", "--scenario-dir", str(tmp_path), "--json"])
+    manifest_exit = main(["manifest", "--task-dir", str(tmp_path), "--json"])
 
     payload = json.loads(capsys.readouterr().out)
     assert manifest_exit == 0
     assert payload["splits"] == ["validation"]
-    assert payload["task_pack"]["pack_id"] == "private-pack"
-    assert payload["scenarios"][0]["split"] == "validation"
+    assert payload["task_suite"]["suite_id"] == "private-pack"
+    assert payload["tasks"][0]["split"] == "validation"
 
 
-def test_cli_hidden_task_pack_redacts_trace_prompts(tmp_path, capsys) -> None:
-    scenario = next(
-        item for item in load_builtin_scenarios() if item.id == "gen_t0_create_price_performance_aapl"
+def test_cli_hidden_task_suite_redacts_trace_prompts(tmp_path, capsys) -> None:
+    task = next(
+        item for item in load_builtin_tasks() if item.id == "gen_t0_create_price_performance_aapl"
     )
-    scenario_dir = tmp_path / "hidden_pack"
+    task_dir = tmp_path / "hidden_pack"
     trace_dir = tmp_path / "traces"
-    scenario_dir.mkdir()
-    (scenario_dir / "task_pack.json").write_text(
+    task_dir.mkdir()
+    (task_dir / "task_suite.json").write_text(
         json.dumps({"visibility": "hidden"}),
         encoding="utf-8",
     )
-    (scenario_dir / "gen_t0_create_price_performance_aapl.json").write_text(
-        scenario.source_path.read_text(encoding="utf-8"),
+    (task_dir / "gen_t0_create_price_performance_aapl.json").write_text(
+        task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
     )
 
-    manifest_exit = main(["manifest", "--scenario-dir", str(scenario_dir), "--json"])
+    manifest_exit = main(["manifest", "--task-dir", str(task_dir), "--json"])
     manifest = json.loads(capsys.readouterr().out)
     run_exit = main(
         [
             "run",
-            "--scenario-dir",
-            str(scenario_dir),
+            "--task-dir",
+            str(task_dir),
             "--agent",
             "oracle",
             "--trace-dir",
@@ -326,27 +326,27 @@ def test_cli_hidden_task_pack_redacts_trace_prompts(tmp_path, capsys) -> None:
     assert manifest_exit == 0
     assert run_exit == 0
     assert manifest["redacted"] is True
-    assert "prompt" not in payload["scenario"]
-    assert payload["scenario"]["prompt_redacted"] is True
+    assert "prompt" not in payload["task"]
+    assert payload["task"]["prompt_redacted"] is True
 
 
-def test_cli_filters_by_split_for_private_task_pack(tmp_path, capsys) -> None:
-    scenario = next(
-        item for item in load_builtin_scenarios() if item.id == "gen_t0_create_price_performance_aapl"
+def test_cli_filters_by_split_for_private_task_suite(tmp_path, capsys) -> None:
+    task = next(
+        item for item in load_builtin_tasks() if item.id == "gen_t0_create_price_performance_aapl"
     )
-    (tmp_path / "task_pack.json").write_text(
+    (tmp_path / "task_suite.json").write_text(
         json.dumps({"default_split": "validation"}),
         encoding="utf-8",
     )
     (tmp_path / "gen_t0_create_price_performance_aapl.json").write_text(
-        scenario.source_path.read_text(encoding="utf-8"),
+        task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
     )
 
     exit_code = main(
         [
             "list",
-            "--scenario-dir",
+            "--task-dir",
             str(tmp_path),
             "--split",
             "test",
@@ -365,7 +365,7 @@ def test_cli_export_task_writes_public_agent_envelope(tmp_path) -> None:
     exit_code = main(
         [
             "export-task",
-            "--scenario",
+            "--task",
             "gen_t0_create_price_performance_aapl",
             "--output",
             str(output),
@@ -374,12 +374,12 @@ def test_cli_export_task_writes_public_agent_envelope(tmp_path) -> None:
 
     payload = json.loads(output.read_text(encoding="utf-8"))
     assert exit_code == 0
-    assert payload["schema_version"] == "workspace-bench-task-v1"
+    assert payload["schema_version"] == "workspace-bench-task-v2"
     assert payload["benchmark"]["release_id"] == "workspace-bench-v1"
-    assert payload["scenario"]["id"] == "gen_t0_create_price_performance_aapl"
-    assert payload["scenario"]["split"] == "train"
-    assert "oracle_tool_calls" not in payload["scenario"]
-    assert "success" not in payload["scenario"]
+    assert payload["task"]["id"] == "gen_t0_create_price_performance_aapl"
+    assert payload["task"]["split"] == "train"
+    assert "oracle_tool_calls" not in payload["task"]
+    assert "success" not in payload["task"]
 
 
 def test_cli_export_rollouts_writes_oracle_record(tmp_path) -> None:
@@ -389,7 +389,7 @@ def test_cli_export_rollouts_writes_oracle_record(tmp_path) -> None:
         [
             "export-rollouts",
             "--oracle",
-            "--scenario",
+            "--task",
             "gen_t0_create_price_performance_aapl",
             "--output",
             str(output),
@@ -418,7 +418,7 @@ def test_cli_export_sft_defaults_to_passing_oracle_attempts(tmp_path) -> None:
         [
             "export-sft",
             "--oracle",
-            "--scenario",
+            "--task",
             "gen_t0_create_price_performance_aapl",
             "--format",
             "openai_messages",
@@ -441,7 +441,7 @@ def test_cli_run_agent_command_uses_jsonl_contract(tmp_path, capsys) -> None:
     exit_code = main(
         [
             "run-agent-command",
-            "--scenario",
+            "--task",
             "gen_t0_create_price_performance_aapl",
             "--agent-command",
             "python -m workspace_bench.examples.jsonl_rule_agent",
@@ -464,7 +464,7 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
     first_exit = main(
         [
             "run-agent-command",
-            "--scenario",
+            "--task",
             "gen_t0_create_price_performance_aapl",
             "--agent-command",
             "python -m workspace_bench.examples.jsonl_rule_agent",
@@ -478,7 +478,7 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
     second_exit = main(
         [
             "run-agent-command",
-            "--scenario",
+            "--task",
             "gen_t0_create_price_performance_aapl",
             "--agent-command",
             "python -c \"raise SystemExit(2)\"",
@@ -495,52 +495,52 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
     assert payload["summary"]["process_failures"] == 1
 
 
-def test_scenario_loader_rejects_invalid_split(tmp_path) -> None:
-    scenario = next(
-        item for item in load_builtin_scenarios() if item.id == "gen_t0_create_price_performance_aapl"
+def test_task_loader_rejects_invalid_split(tmp_path) -> None:
+    task = next(
+        item for item in load_builtin_tasks() if item.id == "gen_t0_create_price_performance_aapl"
     )
-    payload = json.loads(scenario.source_path.read_text(encoding="utf-8"))
+    payload = json.loads(task.source_path.read_text(encoding="utf-8"))
     payload["split"] = "prod"
-    scenario_path = tmp_path / "bad_split.json"
-    scenario_path.write_text(json.dumps(payload), encoding="utf-8")
+    task_path = tmp_path / "bad_split.json"
+    task_path.write_text(json.dumps(payload), encoding="utf-8")
 
     try:
-        load_scenario_file(scenario_path)
+        load_task_file(task_path)
     except ValueError as error:
         assert "split must be one of" in str(error)
     else:
-        raise AssertionError("invalid scenario split should fail")
+        raise AssertionError("invalid task split should fail")
 
 
-def test_scenario_loader_rejects_malformed_allowed_tools(tmp_path) -> None:
-    scenario = next(
-        item for item in load_builtin_scenarios() if item.id == "gen_t0_create_price_performance_aapl"
+def test_task_loader_rejects_malformed_allowed_tools(tmp_path) -> None:
+    task = next(
+        item for item in load_builtin_tasks() if item.id == "gen_t0_create_price_performance_aapl"
     )
-    payload = json.loads(scenario.source_path.read_text(encoding="utf-8"))
+    payload = json.loads(task.source_path.read_text(encoding="utf-8"))
     payload["allowed_tools"] = "create_widget"
-    scenario_path = tmp_path / "bad_allowed_tools.json"
-    scenario_path.write_text(json.dumps(payload), encoding="utf-8")
+    task_path = tmp_path / "bad_allowed_tools.json"
+    task_path.write_text(json.dumps(payload), encoding="utf-8")
 
     try:
-        load_scenario_file(scenario_path)
+        load_task_file(task_path)
     except ValueError as error:
         assert "allowed_tools must be a list" in str(error)
     else:
         raise AssertionError("malformed allowed_tools should fail")
 
 
-def test_validate_reports_duplicate_scenario_ids(tmp_path, capsys) -> None:
-    scenario = next(
-        item for item in load_builtin_scenarios() if item.id == "gen_t0_create_price_performance_aapl"
+def test_validate_reports_duplicate_task_ids(tmp_path, capsys) -> None:
+    task = next(
+        item for item in load_builtin_tasks() if item.id == "gen_t0_create_price_performance_aapl"
     )
-    source = scenario.source_path.read_text(encoding="utf-8")
+    source = task.source_path.read_text(encoding="utf-8")
     (tmp_path / "one.json").write_text(source, encoding="utf-8")
     (tmp_path / "two.json").write_text(source, encoding="utf-8")
 
     exit_code = main(
-        ["validate", "--scenario-dir", str(tmp_path), "--min-scenarios", "1"]
+        ["validate", "--task-dir", str(tmp_path), "--min-tasks", "1"]
     )
 
     output = capsys.readouterr().out
     assert exit_code == 1
-    assert "scenario id must be unique" in output
+    assert "task id must be unique" in output

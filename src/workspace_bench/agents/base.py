@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Protocol
 
-from workspace_bench.core.models import Scenario, ToolCall
+from workspace_bench.core.models import Task, ToolCall
 
 
 class BenchAgent(Protocol):
@@ -13,18 +13,18 @@ class BenchAgent(Protocol):
 
     name: str
 
-    def tool_calls(self, scenario: Scenario) -> tuple[ToolCall, ...]:
-        """Return the tool calls to execute for a scenario."""
+    def tool_calls(self, task: Task) -> tuple[ToolCall, ...]:
+        """Return the tool calls to execute for a task."""
 
 
 @dataclass(frozen=True)
 class OracleAgent:
-    """Replays the scenario's reference tool-call trace."""
+    """Replays the task's reference tool-call trace."""
 
     name: str = "oracle"
 
-    def tool_calls(self, scenario: Scenario) -> tuple[ToolCall, ...]:
-        return scenario.oracle_tool_calls
+    def tool_calls(self, task: Task) -> tuple[ToolCall, ...]:
+        return task.oracle_tool_calls
 
 
 @dataclass(frozen=True)
@@ -33,7 +33,7 @@ class NoopAgent:
 
     name: str = "noop"
 
-    def tool_calls(self, scenario: Scenario) -> tuple[ToolCall, ...]:
+    def tool_calls(self, task: Task) -> tuple[ToolCall, ...]:
         return ()
 
 

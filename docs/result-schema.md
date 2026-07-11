@@ -27,7 +27,7 @@ Top-level shape:
 
 Each result includes:
 
-- scenario id
+- task id
 - level, capability, workflow, domain, subdomain, difficulty, tags
 - numeric score
 - pass/fail
@@ -38,7 +38,7 @@ Each result includes:
 
 ```bash
 uv run --extra dev workspace-bench run-agent-command \
-  --scenario gen_t0_create_price_performance_aapl \
+  --task gen_t0_create_price_performance_aapl \
   --agent-command "python -m workspace_bench.examples.jsonl_rule_agent" \
   --json
 ```
@@ -75,22 +75,22 @@ External-agent result rows add:
 - `task_path`
 - `output_path`
 
-`passed` is true only when the process succeeds and the scenario grader passes.
+`passed` is true only when the process succeeds and the task grader passes.
 
 ## Trace Artifacts
 
-Use `--trace-dir` to write per-scenario trace artifacts:
+Use `--trace-dir` to write per-task trace artifacts:
 
 ```bash
 uv run --extra dev workspace-bench run-agent-command \
-  --scenario gen_t0_create_price_performance_aapl \
+  --task gen_t0_create_price_performance_aapl \
   --agent-command "python -m workspace_bench.examples.jsonl_rule_agent" \
   --trace-dir traces
 ```
 
 Each trace artifact includes:
 
-- scenario metadata and prompt
+- task metadata and prompt
 - grade object
 - ordered tool calls
 - tool results
@@ -106,7 +106,7 @@ artifacts into portable JSONL:
 ```bash
 uv run --extra dev workspace-bench export-rollouts \
   --oracle \
-  --scenario gen_t0_create_price_performance_aapl \
+  --task gen_t0_create_price_performance_aapl \
   --output rollouts.jsonl
 ```
 
@@ -127,7 +127,7 @@ Each JSONL row has this shape:
 
 Each row also includes versioning metadata such as `benchmark_release_id`,
 `benchmark_version`, `export_schema_version`, and `exported_at`. Private or
-hidden task-pack exports include task-pack metadata when a `task_pack.json`
+hidden task-pack exports include task-pack metadata when a `task_suite.json`
 manifest is available.
 
 `export-sft` converts the same rollout records to `openai_messages`,
@@ -135,4 +135,4 @@ manifest is available.
 use `--include-failures` to include failed attempts with grade metadata.
 
 `export-preferences` reads a repeated the evaluator run and emits
-`chosen`/`rejected` pairs for attempts on the same model and scenario.
+`chosen`/`rejected` pairs for attempts on the same model and task.

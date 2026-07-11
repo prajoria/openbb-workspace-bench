@@ -249,10 +249,10 @@ class SimulatedWorkspace:
         return resolved_id
 
     def _seed_custom_backend(self, spec: JsonDict) -> str:
-        """Seed a custom backend from scenario initial_state, bypassing validation.
+        """Seed a custom backend from task initial_state, bypassing validation.
 
         Seeded state represents "whatever the author's backend currently serves" —
-        including broken payloads a repair scenario expects the agent to fix via
+        including broken payloads a repair task expects the agent to fix via
         ``manage_backends operation='refresh'``.
         """
 

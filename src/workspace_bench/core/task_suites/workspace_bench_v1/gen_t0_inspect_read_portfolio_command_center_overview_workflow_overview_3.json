@@ -1,0 +1,125 @@
+{
+  "id": "gen_t0_inspect_read_portfolio_command_center_overview_workflow_overview_3",
+  "title": "Inspect Workflow Overview",
+  "capability": "workspace-inspection",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-inspect",
+    "level-t0",
+    "inspect",
+    "read-widget"
+  ],
+  "prompt": "Call read_widget with widget_id portfolio_command_center_overview_workflow_overview for the existing Bench Stark Enterprise/portfolio_command_center_overview_workflow_overview widget, then add a note mentioning stark.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Inspect Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "portfolio_command_center_overview_workflow_overview",
+          "data_args": {},
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "strategy_health_monitor_themes_crowded_names",
+          "data_args": {},
+          "tab_id": "",
+          "layout": {
+            "x": 0,
+            "y": 506,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "read_widget",
+        "args_contains": {
+          "widget_id": "portfolio_command_center_overview_workflow_overview"
+        }
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "stark"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "strategy_health_monitor_themes_crowded_names",
+        "data_args": {},
+        "tab_id": "",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "read_widget",
+      "args": {
+        "widget_id": "portfolio_command_center_overview_workflow_overview"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Inspect Note",
+        "data": "Inspected portfolio_command_center_overview_workflow_overview: stark."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "read",
+  "level": "t0",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique inspect/t0 exercise using add_generative_widget, get_workspace_snapshot, read_widget with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/strategy_health_monitor_themes_crowded_names@; generated:note@*:stark."
+}

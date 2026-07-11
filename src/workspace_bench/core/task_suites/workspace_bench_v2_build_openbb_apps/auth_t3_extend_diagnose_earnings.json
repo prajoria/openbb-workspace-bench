@@ -1,0 +1,279 @@
+{
+  "id": "auth_t3_extend_diagnose_earnings",
+  "title": "Diagnose and extend Earnings Prep Data",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-extend",
+    "level-t3",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "refresh",
+    "extend",
+    "diagnosis"
+  ],
+  "prompt": "The connected backend \"Earnings Prep Data\" shows only a validation badge in the snapshot, with a count of affected entries. Scan the served widgets against these desk conventions: Earnings conventions: symbol controls are endpoint params using /symbols; history charts use the standard 20-column chart width; single-value metric tiles use compact width 6. Fix every flagged entry, preserve healthy entries, and ship the queued addition in the same widgets_json refresh: `earnings_note`: name \"Earnings Preview\", description \"Preview note for the earnings call.\", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol \u2014 a dropdown (type endpoint), labeled \"Symbol\", options fetched from /symbols, default \"AAPL\".",
+  "fixtures": {},
+  "initial_state": {
+    "custom_backends": [
+      {
+        "name": "Earnings Prep Data",
+        "url": "http://localhost:7805",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "estimate_revisions": {
+            "name": "Estimate Revisions",
+            "description": "Street estimate revisions by quarter.",
+            "endpoint": "/estimate-revisions",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "dropdownz",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "quarter",
+                    "headerName": "Quarter",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "eps_estimate",
+                    "headerName": "EPS Est",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "revenue_estimate_b",
+                    "headerName": "Revenue Est ($B)",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            }
+          },
+          "earnings_chart": {
+            "name": "EPS History",
+            "description": "Plotly EPS beat/miss history.",
+            "endpoint": "/eps-history",
+            "type": "chart",
+            "gridData": {
+              "w": 99,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "raw": true
+          },
+          "surprise_metric": {
+            "name": "Avg Surprise",
+            "description": "Average EPS surprise last 4 quarters.",
+            "endpoint": "/avg-surprise",
+            "type": "metric",
+            "gridData": {
+              "w": 99,
+              "h": 4
+            }
+          }
+        },
+        "warnings": [
+          "workspace validation failed: 3 entries in the backend's served payload need fixing"
+        ]
+      }
+    ]
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "estimate_revisions",
+        "expect": {
+          "type": "table",
+          "endpoint": "/estimate-revisions"
+        },
+        "params_include": [
+          {
+            "paramName": "symbol",
+            "type": "endpoint",
+            "optionsEndpoint": "/symbols"
+          }
+        ]
+      },
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "earnings_chart",
+        "expect": {
+          "type": "chart",
+          "endpoint": "/eps-history",
+          "gridData.w": 20
+        }
+      },
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "surprise_metric",
+        "expect": {
+          "type": "metric",
+          "endpoint": "/avg-surprise",
+          "gridData.w": 6
+        }
+      },
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "earnings_note",
+        "expect": {
+          "type": "markdown",
+          "endpoint": "/earnings-preview",
+          "gridData.w": 12,
+          "gridData.h": 8
+        },
+        "params_include": [
+          {
+            "paramName": "symbol",
+            "type": "endpoint",
+            "optionsEndpoint": "/symbols"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "estimate_revisions": {
+            "name": "Estimate Revisions",
+            "description": "Street estimate revisions by quarter.",
+            "endpoint": "/estimate-revisions",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "quarter",
+                    "headerName": "Quarter",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "eps_estimate",
+                    "headerName": "EPS Est",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "revenue_estimate_b",
+                    "headerName": "Revenue Est ($B)",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            }
+          },
+          "earnings_chart": {
+            "name": "EPS History",
+            "description": "Plotly EPS beat/miss history.",
+            "endpoint": "/eps-history",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "raw": true
+          },
+          "surprise_metric": {
+            "name": "Avg Surprise",
+            "description": "Average EPS surprise last 4 quarters.",
+            "endpoint": "/avg-surprise",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            }
+          },
+          "earnings_note": {
+            "name": "Earnings Preview",
+            "description": "Preview note for the earnings call.",
+            "endpoint": "/earnings-preview",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "repair",
+  "level": "t3",
+  "capability": "app-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique extend/t3 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart,Earnings Prep Data/earnings_note,Earnings Prep Data/estimate_revisions,Earnings Prep Data/surprise_metric."
+}

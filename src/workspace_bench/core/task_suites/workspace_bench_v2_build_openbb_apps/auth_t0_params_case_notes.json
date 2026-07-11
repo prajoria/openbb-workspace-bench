@@ -1,0 +1,87 @@
+{
+  "id": "auth_t0_params_case_notes",
+  "title": "Build the Case Notes parameter widget",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-params",
+    "level-t0",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "params"
+  ],
+  "prompt": "Add the custom backend \"Surveillance Data\" at http://localhost:7807 serving this single widget definition: `case_notes`: name \"Case Notes\", description \"Notes for one surveillance case.\", endpoint /case-notes, type markdown, sized w=12 h=8 on the grid, params required: case_id \u2014 a text input (type text), labeled \"Case\", default \"C-1042\", described \"Case identifier.\".",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Surveillance Data",
+        "widget_id": "case_notes",
+        "expect": {
+          "type": "markdown",
+          "endpoint": "/case-notes",
+          "gridData.w": 12,
+          "gridData.h": 8
+        },
+        "params_include": [
+          {
+            "paramName": "case_id",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "case_notes": {
+            "name": "Case Notes",
+            "description": "Notes for one surveillance case.",
+            "endpoint": "/case-notes",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "case_id",
+                "type": "text",
+                "label": "Case",
+                "value": "C-1042",
+                "description": "Case identifier."
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t0",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "train",
+  "novelty": "Unique params/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/case_notes."
+}

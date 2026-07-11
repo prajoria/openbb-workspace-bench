@@ -11,10 +11,10 @@ def main() -> int:
     task_path = Path(os.environ["WORKSPACE_BENCH_TASK_JSON"])
     output_path = Path(os.environ["WORKSPACE_BENCH_OUTPUT_JSONL"])
     task = json.loads(task_path.read_text(encoding="utf-8"))
-    scenario_id = task["scenario"]["id"]
+    task_id = task["task"]["id"]
 
     calls = []
-    if scenario_id == "gen_t0_create_price_performance_aapl":
+    if task_id == "gen_t0_create_price_performance_aapl":
         calls = [
             {"tool": "get_workspace_snapshot", "args": {}},
             {

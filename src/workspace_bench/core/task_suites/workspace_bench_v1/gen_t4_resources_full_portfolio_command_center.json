@@ -1,0 +1,131 @@
+{
+  "id": "gen_t4_resources_full_portfolio_command_center",
+  "title": "Index-Guided App Extension: Portfolio Command Center",
+  "capability": "dashboard-construction",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-resources",
+    "level-t4",
+    "resources",
+    "apps",
+    "widget-creation"
+  ],
+  "prompt": "Read the app-builder index resource at openbb://workspace/app-builder/index, instantiate portfolio-command-center as PM Resource Command, navigate to holdings, add widget portfolio_command_center_holdings_sector_exposure, and add a note mentioning sector exposure and resource.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "read_workspace_resource",
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "PM Resource Command",
+    "required_resource_reads": [
+      {
+        "uri": "openbb://workspace/app-builder/index",
+        "data_contains": [
+          "portfolio-command-center"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_holdings_sector_exposure",
+        "tab_id": "holdings"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "sector exposure",
+          "resource"
+        ],
+        "tab_id": "holdings"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "read_workspace_resource",
+      "args": {
+        "uri": "openbb://workspace/app-builder/index"
+      }
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "template_id": "portfolio-command-center",
+        "dashboard_name": "PM Resource Command",
+        "activate": true
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "holdings"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_holdings_sector_exposure"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_holdings_sector_exposure"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Resource Extension Note",
+        "data": "sector exposure added from resource guidance."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "dashboard",
+  "level": "t4",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 9
+  },
+  "split": "train",
+  "novelty": "Unique resources/t4 exercise using add_generative_widget, create_widget, get_widget_schema, manage_apps, manage_backends, navigate_workspace, read_workspace_resource with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_resource_read, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact resource:openbb://workspace/app-builder/index; apps:portfolio-command-center; widgets:Bench Stark Enterprise/portfolio_command_center_holdings_sector_exposure@holdings; generated:note@holdings:sector exposure,resource."
+}

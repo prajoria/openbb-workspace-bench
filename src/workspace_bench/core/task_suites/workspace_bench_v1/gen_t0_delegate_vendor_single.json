@@ -1,0 +1,109 @@
+{
+  "id": "gen_t0_delegate_vendor_single",
+  "title": "Delegate One Task: Vendor Single",
+  "capability": "mcp-tool-use",
+  "workflow": "vendor-sla-monitoring",
+  "subdomain": "data-platform",
+  "tags": [
+    "family-delegate",
+    "level-t0",
+    "delegation",
+    "agents",
+    "mcp"
+  ],
+  "prompt": "Call assign_tasks_to_agents with one task_request using id triage-analyst for vendor sla monitoring work: Triage the open vendor incident log by severity.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Delegation Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "strategy_health_monitor_performance_sleeve_performance",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "assign_tasks_to_agents"
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "assign_tasks_to_agents",
+        "data_contains": [
+          "triage-analyst"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "strategy_health_monitor_performance_sleeve_performance",
+        "data_args": {},
+        "tab_id": "overview",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "assign_tasks_to_agents",
+      "args": {
+        "task_requests": [
+          {
+            "id": "triage-analyst",
+            "description": "Triage the open vendor incident log by severity.",
+            "assigned_holder_url": "workspace://agents/triage",
+            "assigned_agent_id": "triage-agent"
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "platform",
+  "level": "t0",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "validation",
+  "novelty": "Unique delegate/t0 exercise using assign_tasks_to_agents, get_workspace_snapshot with checks layout_out_of_grid, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact tasks:triage-analyst; widgets:Bench Stark Enterprise/strategy_health_monitor_performance_sleeve_performance@overview."
+}

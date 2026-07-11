@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from workspace_bench.core.graders import grade_scenario
-from workspace_bench.core.models import GradeResult, JsonDict, Scenario, ToolCall, ToolTraceEvent
+from workspace_bench.core.graders import grade_task
+from workspace_bench.core.models import GradeResult, JsonDict, Task, ToolCall, ToolTraceEvent
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
@@ -17,15 +17,15 @@ class WorkspaceEpisode:
 
     def __init__(
         self,
-        scenario: Scenario,
+        task: Task,
         workspace: SimulatedWorkspace | None = None,
     ):
-        self.scenario = scenario
+        self.task = task
         self.workspace = workspace or SimulatedWorkspace()
         self.trace: list[ToolTraceEvent] = []
         self.workspace.reset(
-            backends=scenario.fixtures,
-            initial_state=scenario.initial_state,
+            backends=task.fixtures,
+            initial_state=task.initial_state,
         )
 
     def step(self, call: ToolCall) -> JsonDict:
@@ -50,15 +50,15 @@ class WorkspaceEpisode:
     def grade(self) -> GradeResult:
         """Grade the current episode state."""
 
-        return grade_scenario(self.scenario, self.snapshot(), tuple(self.trace))
+        return grade_task(self.task, self.snapshot(), tuple(self.trace))
 
     def _execute_allowed(self, call: ToolCall) -> JsonDict:
-        if self.scenario.allowed_tools and call.name not in self.scenario.allowed_tools:
+        if self.task.allowed_tools and call.name not in self.task.allowed_tools:
             return {
                 "ok": False,
                 "command": call.name,
                 "request_id": None,
-                "message": f"Tool {call.name!r} is not allowed for this scenario.",
+                "message": f"Tool {call.name!r} is not allowed for this task.",
                 "data": None,
                 "error": {
                     "code": "invalid_request",

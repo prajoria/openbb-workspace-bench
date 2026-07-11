@@ -29,6 +29,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 8,
       "difficulty": "easy",
@@ -36,7 +37,7 @@
       "grade_passed": true,
       "id": "auth_t0_advanced_case_qa_omni",
       "issues": [],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_advanced_case_qa_omni/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -56,6 +57,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 11,
       "difficulty": "easy",
@@ -76,7 +78,7 @@
           "message": "Widget def 'live_orders_grid': missing wsEndpoint (expected 'live-orders-ws')."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_advanced_live_orders_grid/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -96,6 +98,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 7,
       "checks_total": 9,
       "difficulty": "easy",
@@ -112,7 +115,7 @@
           "message": "Widget def 'rates_advanced_chart': missing gridData.h (expected 18)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_advanced_rates_advanced_chart/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -132,6 +135,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 7,
       "checks_total": 9,
       "difficulty": "easy",
@@ -148,7 +152,7 @@
           "message": "Widget def 'vix_advanced': missing gridData.h (expected 20)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_advanced_vix_advanced/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -168,6 +172,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 10,
       "checks_total": 10,
       "difficulty": "easy",
@@ -175,7 +180,7 @@
       "grade_passed": true,
       "id": "auth_t0_aggrid_auction_calendar",
       "issues": [],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_aggrid_auction_calendar/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -195,6 +200,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 6,
       "checks_total": 9,
       "difficulty": "easy",
@@ -215,7 +221,7 @@
           "message": "Widget def 'estimates_ssrm': missing data.dataKey (expected 'rows')."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_aggrid_estimates_ssrm/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -235,6 +241,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 11,
       "difficulty": "easy",
@@ -251,7 +258,7 @@
           "message": "Widget def 'open_orders': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_aggrid_open_orders/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -271,6 +278,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 11,
       "difficulty": "easy",
@@ -287,7 +295,7 @@
           "message": "Widget def 'vix_history': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_aggrid_vix_history/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -307,6 +315,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 9,
       "difficulty": "easy",
@@ -314,7 +323,7 @@
       "grade_passed": true,
       "id": "auth_t0_apps_order_watch",
       "issues": [],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_apps_order_watch/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -334,6 +343,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 9,
       "difficulty": "easy",
@@ -341,7 +351,7 @@
       "grade_passed": true,
       "id": "auth_t0_apps_rates_morning",
       "issues": [],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_apps_rates_morning/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -361,6 +371,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 9,
       "difficulty": "easy",
@@ -368,7 +379,7 @@
       "grade_passed": true,
       "id": "auth_t0_apps_vendor_board",
       "issues": [],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_apps_vendor_board/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -388,6 +399,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 9,
       "difficulty": "easy",
@@ -395,7 +407,7 @@
       "grade_passed": true,
       "id": "auth_t0_apps_vol_overview",
       "issues": [],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_apps_vol_overview/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -415,6 +427,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 7,
       "checks_total": 9,
       "difficulty": "easy",
@@ -431,7 +444,7 @@
           "message": "Widget def 'chains_highchart': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_charts_chains_highchart/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -451,6 +464,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 10,
       "difficulty": "easy",
@@ -467,7 +481,7 @@
           "message": "Widget def 'earnings_chart': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_charts_earnings_chart/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -487,6 +501,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 7,
       "checks_total": 9,
       "difficulty": "easy",
@@ -503,7 +518,7 @@
           "message": "Widget def 'pipeline_vegalite': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_charts_pipeline_vegalite/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -523,6 +538,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 7,
       "checks_total": 9,
       "difficulty": "easy",
@@ -539,7 +555,7 @@
           "message": "Widget def 'yield_curve': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_charts_yield_curve/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -559,6 +575,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 12,
       "checks_total": 12,
       "difficulty": "easy",
@@ -566,7 +583,7 @@
       "grade_passed": true,
       "id": "auth_t0_extend_add_catalyst_metric",
       "issues": [],
-      "level": "L4",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_extend_add_catalyst_metric/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -586,6 +603,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 12,
       "checks_total": 12,
       "difficulty": "easy",
@@ -593,7 +611,7 @@
       "grade_passed": true,
       "id": "auth_t0_extend_add_curve_spread_metric",
       "issues": [],
-      "level": "L4",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_extend_add_curve_spread_metric/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -613,6 +631,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 12,
       "checks_total": 12,
       "difficulty": "easy",
@@ -620,7 +639,7 @@
       "grade_passed": true,
       "id": "auth_t0_extend_add_exception_metric",
       "issues": [],
-      "level": "L4",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_extend_add_exception_metric/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -640,6 +659,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 12,
       "checks_total": 12,
       "difficulty": "easy",
@@ -647,7 +667,7 @@
       "grade_passed": true,
       "id": "auth_t0_extend_add_vol_regime_metric",
       "issues": [],
-      "level": "L4",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_extend_add_vol_regime_metric/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -667,6 +687,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 6,
       "checks_total": 9,
       "difficulty": "easy",
@@ -687,7 +708,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 2."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_forms_access_review_form/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -707,6 +728,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 6,
       "checks_total": 9,
       "difficulty": "easy",
@@ -727,7 +749,7 @@
           "message": "Widget def 'incident_triage_form': no param matching {'paramName': 'triage', 'type': 'form'}."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_forms_incident_triage_form/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -747,6 +769,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 6,
       "checks_total": 9,
       "difficulty": "easy",
@@ -767,7 +790,7 @@
           "message": "Widget def 'threshold_update_form': no param matching {'paramName': 'threshold', 'type': 'form'}."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_forms_threshold_update_form/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -787,6 +810,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 6,
       "checks_total": 9,
       "difficulty": "easy",
@@ -807,7 +831,7 @@
           "message": "Widget def 'vendor_intake_form': no param matching {'paramName': 'intake', 'type': 'form'}."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_forms_vendor_intake_form/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -827,6 +851,7 @@
       "agent_stdout": "turn 4 retry 1/4 after model timeout: timed out\ndone at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 10,
       "difficulty": "easy",
@@ -843,7 +868,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 2."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_grouping_chart_note_board/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -863,6 +888,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 10,
       "difficulty": "easy",
@@ -875,7 +901,7 @@
           "message": "App 'Earnings Symbol Board': no group matching {'name': 'Symbol Sync', 'type': 'param', 'paramName': 'symbol', 'widgetIds_include': ['estimate_revisions', 'earnings_chart']}."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_grouping_earnings_symbol_board/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -895,6 +921,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 10,
       "difficulty": "easy",
@@ -911,7 +938,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_grouping_nvda_review_board/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -931,6 +958,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 10,
       "difficulty": "easy",
@@ -943,7 +971,7 @@
           "message": "App 'Revision Note Board': no group matching {'name': 'Revision Symbol Sync', 'type': 'param', 'paramName': 'symbol', 'widgetIds_include': ['estimate_revisions', 'earnings_note']}."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_grouping_revision_note_board/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -963,6 +991,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 6,
       "checks_total": 8,
       "difficulty": "easy",
@@ -979,7 +1008,7 @@
           "message": "Widget def 'case_notes': missing gridData.h (expected 8)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_params_case_notes/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -999,6 +1028,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 8,
       "difficulty": "easy",
@@ -1006,7 +1036,7 @@
       "grade_passed": true,
       "id": "auth_t0_params_kpi_tabs_table",
       "issues": [],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_params_kpi_tabs_table/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -1026,6 +1056,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 11,
       "difficulty": "easy",
@@ -1042,7 +1073,7 @@
           "message": "Widget def 'trial_catalysts': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_params_trial_catalysts/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1062,6 +1093,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 11,
       "difficulty": "easy",
@@ -1078,7 +1110,7 @@
           "message": "Widget def 'vix_history': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_params_vix_history/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1098,6 +1130,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 7,
       "checks_total": 9,
       "difficulty": "easy",
@@ -1114,7 +1147,7 @@
           "message": "Widget def 'exception_metric': missing gridData.h (expected 4)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_settings_exception_metric/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1134,6 +1167,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 7,
       "checks_total": 9,
       "difficulty": "easy",
@@ -1150,7 +1184,7 @@
           "message": "Widget def 'gas_metric': missing gridData.h (expected 4)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_settings_gas_metric/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1170,6 +1204,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 10,
       "difficulty": "easy",
@@ -1186,7 +1221,7 @@
           "message": "Widget def 'rates_commentary': missing gridData.h (expected 8)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_settings_rates_commentary/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1206,6 +1241,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 7,
       "checks_total": 9,
       "difficulty": "easy",
@@ -1222,7 +1258,7 @@
           "message": "Widget def 'vol_regime_metric': missing gridData.h (expected 4)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_settings_vol_regime_metric/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1242,6 +1278,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 7,
       "checks_total": 9,
       "difficulty": "easy",
@@ -1258,7 +1295,7 @@
           "message": "Widget def 'chains_heatmap_html': missing gridData.h (expected 10)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_types_chains_heatmap_html/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1278,6 +1315,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 7,
       "checks_total": 9,
       "difficulty": "easy",
@@ -1294,7 +1332,7 @@
           "message": "Widget def 'gas_metric': missing gridData.h (expected 4)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_types_gas_metric/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1314,6 +1352,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 7,
       "checks_total": 9,
       "difficulty": "easy",
@@ -1330,7 +1369,7 @@
           "message": "Widget def 'venue_pdf': missing gridData.h (expected 14)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_types_venue_pdf/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1350,6 +1389,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 7,
       "checks_total": 9,
       "difficulty": "easy",
@@ -1366,7 +1406,7 @@
           "message": "Widget def 'vol_commentary': missing gridData.h (expected 8)."
         }
       ],
-      "level": "L3",
+      "level": "t0",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t0_types_vol_commentary/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1386,6 +1426,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 4,
       "difficulty": "medium",
@@ -1406,7 +1447,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_advanced_case_qa_omni_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1426,6 +1467,7 @@
       "agent_stdout": "turn 1: malformed action recovered (Unterminated string starting at: line 1 column 807 (char 806))\nreached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 4,
       "difficulty": "easy",
@@ -1446,7 +1488,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_advanced_live_orders_grid_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1466,6 +1508,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 11,
       "checks_total": 13,
       "difficulty": "medium",
@@ -1482,7 +1525,7 @@
           "message": "Widget def 'rates_advanced_chart': missing gridData.h (expected 18)."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_advanced_rates_advanced_chart_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1502,6 +1545,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 13,
       "checks_total": 13,
       "difficulty": "easy",
@@ -1509,7 +1553,7 @@
       "grade_passed": true,
       "id": "auth_t1_advanced_vix_advanced_app",
       "issues": [],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_advanced_vix_advanced_app/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -1529,6 +1573,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 15,
       "checks_total": 18,
       "difficulty": "medium",
@@ -1549,7 +1594,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_aggrid_alert_queue_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1569,6 +1614,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 4,
       "difficulty": "easy",
@@ -1589,7 +1635,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 5."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_aggrid_chains_table_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1609,6 +1655,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 14,
       "checks_total": 17,
       "difficulty": "medium",
@@ -1629,7 +1676,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_aggrid_trial_catalysts_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1649,6 +1696,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 15,
       "checks_total": 18,
       "difficulty": "easy",
@@ -1669,7 +1717,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 2."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_aggrid_vendor_sla_table_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1689,6 +1737,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 2,
       "checks_total": 4,
       "difficulty": "easy",
@@ -1705,7 +1754,7 @@
           "message": "Expected custom backend 'Surveillance Data' to be registered (manage_backends operation='add' with widgets_json)."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_apps_alert_metric_wrap/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1725,6 +1774,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 11,
       "checks_total": 11,
       "difficulty": "medium",
@@ -1732,7 +1782,7 @@
       "grade_passed": true,
       "id": "auth_t1_apps_catalyst_metric_wrap",
       "issues": [],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_apps_catalyst_metric_wrap/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -1752,6 +1802,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 11,
       "checks_total": 11,
       "difficulty": "easy",
@@ -1759,7 +1810,7 @@
       "grade_passed": true,
       "id": "auth_t1_apps_gas_metric_wrap",
       "issues": [],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_apps_gas_metric_wrap/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -1779,6 +1830,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 11,
       "checks_total": 11,
       "difficulty": "medium",
@@ -1786,7 +1838,7 @@
       "grade_passed": true,
       "id": "auth_t1_apps_surprise_metric_wrap",
       "issues": [],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_apps_surprise_metric_wrap/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -1806,6 +1858,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 2,
       "checks_total": 4,
       "difficulty": "easy",
@@ -1822,7 +1875,7 @@
           "message": "Expected custom backend 'Chain TVL Data' to be registered (manage_backends operation='add' with widgets_json)."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_charts_chains_highchart_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1842,6 +1895,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 13,
       "checks_total": 15,
       "difficulty": "medium",
@@ -1858,7 +1912,7 @@
           "message": "Widget def 'earnings_chart': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_charts_earnings_chart_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1878,6 +1932,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 12,
       "checks_total": 14,
       "difficulty": "medium",
@@ -1894,7 +1949,7 @@
           "message": "Widget def 'pipeline_vegalite': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_charts_pipeline_vegalite_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1914,6 +1969,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 12,
       "checks_total": 14,
       "difficulty": "easy",
@@ -1930,7 +1986,7 @@
           "message": "Widget def 'yield_curve': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_charts_yield_curve_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -1950,6 +2006,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 12,
       "checks_total": 12,
       "difficulty": "medium",
@@ -1957,7 +2014,7 @@
       "grade_passed": true,
       "id": "auth_t1_extend_place_alert_metric",
       "issues": [],
-      "level": "L4",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_extend_place_alert_metric/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -1977,6 +2034,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 12,
       "checks_total": 12,
       "difficulty": "medium",
@@ -1984,7 +2042,7 @@
       "grade_passed": true,
       "id": "auth_t1_extend_place_breach_metric",
       "issues": [],
-      "level": "L4",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_extend_place_breach_metric/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -2004,6 +2062,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 12,
       "checks_total": 12,
       "difficulty": "easy",
@@ -2011,7 +2070,7 @@
       "grade_passed": true,
       "id": "auth_t1_extend_place_curve_spread_metric",
       "issues": [],
-      "level": "L4",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_extend_place_curve_spread_metric/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -2031,6 +2090,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 12,
       "checks_total": 12,
       "difficulty": "easy",
@@ -2038,7 +2098,7 @@
       "grade_passed": true,
       "id": "auth_t1_extend_place_vol_regime_metric",
       "issues": [],
-      "level": "L4",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_extend_place_vol_regime_metric/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -2058,6 +2118,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 13,
       "checks_total": 14,
       "difficulty": "easy",
@@ -2070,7 +2131,7 @@
           "message": "Widget def 'case_escalation_form': no param matching {'paramName': 'escalation', 'type': 'form'}."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_forms_case_escalation_form_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2090,6 +2151,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 11,
       "checks_total": 14,
       "difficulty": "medium",
@@ -2110,7 +2172,7 @@
           "message": "Widget def 'curve_comment_form': no param matching {'paramName': 'comment', 'type': 'form'}."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_forms_curve_comment_form_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2130,6 +2192,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 11,
       "checks_total": 14,
       "difficulty": "easy",
@@ -2150,7 +2213,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_forms_vendor_intake_form_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2170,6 +2233,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 12,
       "checks_total": 14,
       "difficulty": "medium",
@@ -2186,7 +2250,7 @@
           "message": "Widget def 'venue_exception_form': missing gridData.h (expected 10)."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_forms_venue_exception_form_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2206,6 +2270,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 13,
       "checks_total": 16,
       "difficulty": "easy",
@@ -2226,7 +2291,7 @@
           "message": "App 'Chart Group App': no group matching {'name': 'Chart Symbol Group', 'type': 'param', 'paramName': 'symbol', 'widgetIds_include': ['earnings_chart']}."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_grouping_earnings_chart_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2246,6 +2311,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 12,
       "checks_total": 15,
       "difficulty": "medium",
@@ -2266,7 +2332,7 @@
           "message": "App 'Preview Group App': no group matching {'name': 'Preview Symbol Group', 'type': 'param', 'paramName': 'symbol', 'widgetIds_include': ['earnings_note']}."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_grouping_earnings_note_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2286,6 +2352,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 15,
       "checks_total": 18,
       "difficulty": "easy",
@@ -2306,7 +2373,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_grouping_estimate_revisions_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2326,6 +2393,7 @@
       "agent_stdout": "turn 2: malformed action recovered (Unterminated string starting at: line 1 column 1064 (char 1063))\nreached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 13,
       "checks_total": 17,
       "difficulty": "medium",
@@ -2350,7 +2418,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 2."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_grouping_symbol_click_summary_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2370,6 +2438,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 12,
       "checks_total": 14,
       "difficulty": "medium",
@@ -2386,7 +2455,7 @@
           "message": "Widget def 'case_notes': missing gridData.h (expected 8)."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_params_case_notes_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2406,6 +2475,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 11,
       "checks_total": 14,
       "difficulty": "easy",
@@ -2426,7 +2496,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 2."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_params_rates_commentary_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2446,6 +2516,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 14,
       "checks_total": 17,
       "difficulty": "easy",
@@ -2466,7 +2537,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 2."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_params_trial_catalysts_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2486,6 +2557,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 11,
       "checks_total": 18,
       "difficulty": "medium",
@@ -2522,7 +2594,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 2."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_params_vendor_sla_table_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2542,6 +2614,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 12,
       "checks_total": 15,
       "difficulty": "easy",
@@ -2562,7 +2635,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_settings_alert_metric_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2582,6 +2655,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 13,
       "checks_total": 15,
       "difficulty": "easy",
@@ -2598,7 +2672,7 @@
           "message": "Widget def 'catalyst_metric': missing gridData.h (expected 4)."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_settings_catalyst_metric_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2618,6 +2692,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 14,
       "checks_total": 16,
       "difficulty": "medium",
@@ -2634,7 +2709,7 @@
           "message": "Widget def 'sla_runbook': missing gridData.h (expected 8)."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_settings_sla_runbook_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2654,6 +2729,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 13,
       "checks_total": 15,
       "difficulty": "medium",
@@ -2670,7 +2746,7 @@
           "message": "Widget def 'surprise_metric': missing gridData.h (expected 4)."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_settings_surprise_metric_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2690,6 +2766,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 11,
       "checks_total": 13,
       "difficulty": "easy",
@@ -2706,7 +2783,7 @@
           "message": "Widget def 'curve_monitor_iframe': missing gridData.h (expected 16)."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_types_curve_monitor_iframe_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2726,6 +2803,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 2,
       "checks_total": 4,
       "difficulty": "medium",
@@ -2742,7 +2820,7 @@
           "message": "Expected custom backend 'Earnings Prep Data' to be registered (manage_backends operation='add' with widgets_json)."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_types_earnings_calls_video_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2762,6 +2840,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 2,
       "checks_total": 4,
       "difficulty": "medium",
@@ -2778,7 +2857,7 @@
           "message": "Expected custom backend 'Surveillance Data' to be registered (manage_backends operation='add' with widgets_json)."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_types_evidence_files_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2798,6 +2877,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 4,
       "difficulty": "easy",
@@ -2818,7 +2898,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t1",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t1_types_sla_newsfeed_app/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2838,6 +2918,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 10,
       "difficulty": "medium",
@@ -2854,7 +2935,7 @@
           "message": "Widget def 'case_prompt_omni': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_advanced_case_prompt_omni/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2874,6 +2955,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 10,
       "checks_total": 16,
       "difficulty": "medium",
@@ -2906,7 +2988,7 @@
           "message": "Widget def 'orders_stream': no columnsDefs entry matching {'field': 'px', 'headerName': 'Price', 'cellDataType': 'number', 'renderFn': 'showCellChange'}."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_advanced_orders_stream/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2926,6 +3008,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 12,
       "checks_total": 12,
       "difficulty": "medium",
@@ -2933,7 +3016,7 @@
       "grade_passed": true,
       "id": "auth_t2_advanced_rates_symbol_chart",
       "issues": [],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_advanced_rates_symbol_chart/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -2953,6 +3036,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 12,
       "difficulty": "medium",
@@ -2973,7 +3057,7 @@
           "message": "Widget def 'vol_symbol_chart': missing staleTime (expected 600000)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_advanced_vol_symbol_chart/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -2993,6 +3077,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 13,
       "difficulty": "medium",
@@ -3017,7 +3102,7 @@
           "message": "Widget def 'auction_watch': no columnsDefs entry matching {'field': 'bid_to_cover', 'headerName': 'Bid To Cover', 'cellDataType': 'number'}."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_aggrid_auction_watch/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3037,6 +3122,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 11,
       "checks_total": 13,
       "difficulty": "medium",
@@ -3053,7 +3139,7 @@
           "message": "Widget def 'fill_quality': missing refetchInterval (expected 30000)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_aggrid_fill_quality/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3073,6 +3159,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 2,
       "checks_total": 3,
       "difficulty": "medium",
@@ -3085,7 +3172,7 @@
           "message": "Expected widget definition 'realized_screen' on custom backend 'Vol Desk Data'."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_aggrid_realized_screen/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3105,6 +3192,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 6,
       "checks_total": 12,
       "difficulty": "medium",
@@ -3137,7 +3225,7 @@
           "message": "Widget def 'revision_grid': no columnsDefs entry matching {'field': 'momentum_pct', 'headerName': 'Momentum Pct', 'cellDataType': 'number', 'formatterFn': 'percent'}."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_aggrid_revision_grid/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3157,6 +3245,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 10,
       "checks_total": 11,
       "difficulty": "medium",
@@ -3169,7 +3258,7 @@
           "message": "App 'Earnings Command': no group matching {'name': 'Symbol Sync', 'type': 'param', 'paramName': 'symbol', 'widgetIds_include': ['estimate_revisions', 'earnings_chart']}."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_apps_earnings_command/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3189,6 +3278,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 10,
       "checks_total": 11,
       "difficulty": "medium",
@@ -3201,7 +3291,7 @@
           "message": "App 'Surveillance Morning': expected at least 1 prompt(s), found 0."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_apps_surveillance_morning/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3221,6 +3311,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 11,
       "difficulty": "medium",
@@ -3237,7 +3328,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_apps_vendor_command/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3257,6 +3348,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 6,
       "checks_total": 11,
       "difficulty": "medium",
@@ -3285,7 +3377,7 @@
           "message": "App 'Vol Morning': expected widget 'vol_regime_metric' on tab 'morning'."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_apps_vol_morning/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3305,6 +3397,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 11,
       "difficulty": "medium",
@@ -3325,7 +3418,7 @@
           "message": "Widget def 'chain_flow_highchart': missing staleTime (expected 900000)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_charts_chain_flow_highchart/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3345,6 +3438,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 2,
       "checks_total": 3,
       "difficulty": "medium",
@@ -3357,7 +3451,7 @@
           "message": "Expected widget definition 'phase_mix_vegalite' on custom backend 'Healthcare Research Data'."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_charts_phase_mix_vegalite/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3377,6 +3471,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 11,
       "difficulty": "medium",
@@ -3393,7 +3488,7 @@
           "message": "Widget def 'symbol_momentum_chart': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_charts_symbol_momentum_chart/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3413,6 +3508,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 9,
       "checks_total": 11,
       "difficulty": "medium",
@@ -3429,7 +3525,7 @@
           "message": "Widget def 'venue_slippage_chart': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_charts_venue_slippage_chart/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3449,6 +3545,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 13,
       "checks_total": 13,
       "difficulty": "medium",
@@ -3456,7 +3553,7 @@
       "grade_passed": true,
       "id": "auth_t2_extend_modify_case_notes",
       "issues": [],
-      "level": "L4",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_extend_modify_case_notes/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -3476,6 +3573,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 12,
       "checks_total": 13,
       "difficulty": "medium",
@@ -3488,7 +3586,7 @@
           "message": "Widget def 'rates_commentary': missing refetchInterval (expected 30000)."
         }
       ],
-      "level": "L4",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_extend_modify_rates_commentary/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3508,6 +3606,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 15,
       "checks_total": 15,
       "difficulty": "medium",
@@ -3515,7 +3614,7 @@
       "grade_passed": true,
       "id": "auth_t2_extend_modify_trial_catalysts",
       "issues": [],
-      "level": "L4",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_extend_modify_trial_catalysts/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -3535,6 +3634,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 15,
       "checks_total": 15,
       "difficulty": "medium",
@@ -3542,7 +3642,7 @@
       "grade_passed": true,
       "id": "auth_t2_extend_modify_vol_screener",
       "issues": [],
-      "level": "L4",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_extend_modify_vol_screener/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -3562,6 +3662,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 11,
       "difficulty": "medium",
@@ -3582,7 +3683,7 @@
           "message": "Widget def 'policy_exception_form': missing staleTime (expected 900000)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_forms_policy_exception_form/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3602,6 +3703,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 6,
       "checks_total": 10,
       "difficulty": "medium",
@@ -3626,7 +3728,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 2."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_forms_trade_break_form/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3646,6 +3748,7 @@
       "agent_stdout": "turn 1 retry 1/4 after model timeout: timed out\nturn 1 retry 2/4 after model timeout: timed out\nturn 1 retry 3/4 after model timeout: timed out\nturn 1 retry 4/4 after model timeout: timed out",
       "agent_timed_out": true,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 2,
       "checks_total": 3,
       "difficulty": "medium",
@@ -3658,7 +3761,7 @@
           "message": "Expected custom backend 'Healthcare Research Data' to be registered (manage_backends operation='add' with widgets_json)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_forms_trial_readout_form/tool_calls.jsonl",
       "passed": false,
       "process_failed": true,
@@ -3678,6 +3781,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 5,
       "checks_total": 10,
       "difficulty": "medium",
@@ -3706,7 +3810,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 2."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_forms_vendor_review_form/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3726,6 +3830,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 13,
       "checks_total": 15,
       "difficulty": "medium",
@@ -3742,7 +3847,7 @@
           "message": "App 'Chart Preview Sync': no group matching {'name': 'Chart Symbol Sync', 'type': 'param', 'paramName': 'symbol', 'widgetIds_include': ['earnings_chart', 'earnings_note']}."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_grouping_chart_preview_sync/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3762,6 +3867,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 13,
       "checks_total": 15,
       "difficulty": "medium",
@@ -3778,7 +3884,7 @@
           "message": "App 'Earnings Review Sync': no group matching {'name': 'Review Symbol Sync', 'type': 'param', 'paramName': 'symbol', 'widgetIds_include': ['estimate_revisions', 'earnings_chart']}."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_grouping_earnings_review_sync/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3798,6 +3904,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 14,
       "checks_total": 16,
       "difficulty": "medium",
@@ -3814,7 +3921,7 @@
           "message": "App 'Full Earnings Sync': no group matching {'name': 'Full Symbol Sync', 'type': 'param', 'paramName': 'symbol', 'widgetIds_include': ['estimate_revisions', 'earnings_chart', 'earnings_note']}."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_grouping_full_earnings_sync/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3834,6 +3941,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 10,
       "checks_total": 15,
       "difficulty": "medium",
@@ -3862,7 +3970,7 @@
           "message": "App 'Revision Preview Sync': no group matching {'name': 'Preview Symbol Sync', 'type': 'param', 'paramName': 'symbol', 'widgetIds_include': ['estimate_revisions', 'earnings_note']}."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_grouping_revision_preview_sync/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3882,6 +3990,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 3,
       "difficulty": "medium",
@@ -3898,7 +4007,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 2."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_params_kpi_param_tabs/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3918,6 +4027,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 6,
       "checks_total": 10,
       "difficulty": "medium",
@@ -3942,7 +4052,7 @@
           "message": "Expected <= 1 invalid tool calls, observed 2."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_params_series_markdown/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3962,6 +4072,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 10,
       "checks_total": 12,
       "difficulty": "medium",
@@ -3978,7 +4089,7 @@
           "message": "Widget def 'vol_screener': missing gridData.h (expected 10)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_params_vol_screener/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -3998,6 +4109,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 7,
       "checks_total": 11,
       "difficulty": "medium",
@@ -4022,7 +4134,7 @@
           "message": "Widget def 'windowed_vix_slice': missing raw (expected True)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_params_windowed_vix_slice/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4042,6 +4154,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 10,
       "checks_total": 13,
       "difficulty": "medium",
@@ -4062,7 +4175,7 @@
           "message": "Widget def 'auction_cache_grid': no columnsDefs entry matching {'field': 'size_bn', 'headerName': 'Size Bn', 'cellDataType': 'number'}."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_settings_auction_cache_grid/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4082,6 +4195,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 2,
       "checks_total": 3,
       "difficulty": "medium",
@@ -4094,7 +4208,7 @@
           "message": "Expected widget definition 'exception_refresh_grid' on custom backend 'Execution Desk Data'."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_settings_exception_refresh_grid/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4114,6 +4228,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 10,
       "difficulty": "medium",
@@ -4130,7 +4245,7 @@
           "message": "Widget def 'gas_refresh_metric': missing gridData.h (expected 4)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_settings_gas_refresh_metric/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4150,6 +4265,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 10,
       "difficulty": "medium",
@@ -4166,7 +4282,7 @@
           "message": "Widget def 'runbook_markdown': missing gridData.h (expected 8)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_settings_runbook_markdown/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4186,6 +4302,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 10,
       "difficulty": "medium",
@@ -4202,7 +4319,7 @@
           "message": "Widget def 'call_replay_video': missing gridData.h (expected 12)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_types_call_replay_video/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4222,6 +4339,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 10,
       "difficulty": "medium",
@@ -4238,7 +4356,7 @@
           "message": "Widget def 'gas_priority_metric': missing gridData.h (expected 4)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_types_gas_priority_metric/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4258,6 +4376,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 7,
       "checks_total": 9,
       "difficulty": "medium",
@@ -4274,7 +4393,7 @@
           "message": "Widget def 'policy_digest_pdf': missing gridData.h (expected 14)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_types_policy_digest_pdf/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4294,6 +4413,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 8,
       "checks_total": 10,
       "difficulty": "medium",
@@ -4310,7 +4430,7 @@
           "message": "Widget def 'vol_playbook_note': missing gridData.h (expected 8)."
         }
       ],
-      "level": "L3",
+      "level": "t2",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t2_types_vol_playbook_note/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4330,6 +4450,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 6,
       "difficulty": "hard",
@@ -4358,7 +4479,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_advanced_case_room_omni_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4378,6 +4499,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 6,
       "difficulty": "hard",
@@ -4406,7 +4528,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_advanced_macro_advanced_chart_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4426,6 +4548,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 15,
       "checks_total": 26,
       "difficulty": "medium",
@@ -4478,7 +4601,7 @@
           "message": "App 'Execution Stream Room': no group matching {'name': 'Venue Sync', 'type': 'param', 'paramName': 'venue_scope', 'widgetIds_include': ['orders_ops_stream', 'exception_metric']}."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_advanced_orders_ops_stream_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4498,6 +4621,7 @@
       "agent_stdout": "turn 3: malformed action recovered (Unterminated string starting at: line 1 column 545 (char 544))\nreached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 5,
       "difficulty": "medium",
@@ -4522,7 +4646,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_advanced_vix_room_chart_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4542,6 +4666,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 2,
       "checks_total": 6,
       "difficulty": "hard",
@@ -4566,7 +4691,7 @@
           "message": "Expected custom backend 'Surveillance Data' to be registered (manage_backends operation='add' with widgets_json)."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_aggrid_case_aging/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4586,6 +4711,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 2,
       "checks_total": 5,
       "difficulty": "medium",
@@ -4606,7 +4732,7 @@
           "message": "Expected custom backend 'Chain TVL Data' to be registered (manage_backends operation='add' with widgets_json)."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_aggrid_chain_flows/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4626,6 +4752,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 19,
       "checks_total": 23,
       "difficulty": "medium",
@@ -4650,7 +4777,7 @@
           "message": "Widget def 'latency_history': no columnsDefs entry matching {'field': 'breach', 'headerName': 'Breach', 'cellDataType': 'boolean'}."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_aggrid_latency_history/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4670,6 +4797,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 6,
       "difficulty": "hard",
@@ -4698,7 +4826,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_aggrid_realized_vol_grid/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4718,6 +4846,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 6,
       "difficulty": "hard",
@@ -4746,7 +4875,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_apps_case_command/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4766,6 +4895,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 20,
       "checks_total": 23,
       "difficulty": "medium",
@@ -4786,7 +4916,7 @@
           "message": "App 'Chain Deck': no group matching {'name': 'Chain Sync', 'type': 'param', 'paramName': 'chain', 'widgetIds_include': ['chains_table', 'chains_chart']}."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_apps_chain_deck/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4806,6 +4936,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 22,
       "checks_total": 25,
       "difficulty": "hard",
@@ -4826,7 +4957,7 @@
           "message": "App 'Earnings Desk': expected widget 'surprise_metric' on tab 'revisions'."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_apps_earnings_desk/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4846,6 +4977,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 16,
       "checks_total": 22,
       "difficulty": "medium",
@@ -4878,7 +5010,7 @@
           "message": "Widget def 'auction_calendar': no columnsDefs entry matching {'field': 'size_bn', 'headerName': 'Size ($B)', 'cellDataType': 'number'}."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_apps_rates_desk/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4898,6 +5030,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 18,
       "checks_total": 20,
       "difficulty": "medium",
@@ -4914,7 +5047,7 @@
           "message": "Widget def 'chains_highchart': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_charts_chains_highchart_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4934,6 +5067,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 6,
       "difficulty": "hard",
@@ -4962,7 +5096,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_charts_earnings_chart_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -4982,6 +5116,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 20,
       "checks_total": 24,
       "difficulty": "hard",
@@ -5006,7 +5141,7 @@
           "message": "App 'Pipeline Chart Room': no group matching {'name': 'Pipeline Sync', 'type': 'param', 'paramName': 'pipeline_ticker', 'widgetIds_include': ['pipeline_vegalite', 'trial_catalysts']}."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_charts_pipeline_vegalite_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5026,6 +5161,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 5,
       "difficulty": "medium",
@@ -5050,7 +5186,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_charts_yield_curve_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5070,6 +5206,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 20,
       "checks_total": 20,
       "difficulty": "medium",
@@ -5077,7 +5214,7 @@
       "grade_passed": true,
       "id": "auth_t3_extend_diagnose_earnings",
       "issues": [],
-      "level": "L4",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_extend_diagnose_earnings/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -5097,6 +5234,7 @@
       "agent_stdout": "done at turn 3",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 18,
       "checks_total": 18,
       "difficulty": "medium",
@@ -5104,7 +5242,7 @@
       "grade_passed": true,
       "id": "auth_t3_extend_diagnose_healthcare",
       "issues": [],
-      "level": "L4",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_extend_diagnose_healthcare/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -5124,6 +5262,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 19,
       "checks_total": 20,
       "difficulty": "hard",
@@ -5136,7 +5275,7 @@
           "message": "Widget def 'yield_curve': missing raw (expected True)."
         }
       ],
-      "level": "L4",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_extend_diagnose_rates/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5156,6 +5295,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 18,
       "checks_total": 18,
       "difficulty": "hard",
@@ -5163,7 +5303,7 @@
       "grade_passed": true,
       "id": "auth_t3_extend_diagnose_sla",
       "issues": [],
-      "level": "L4",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_extend_diagnose_sla/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -5183,6 +5323,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 5,
       "difficulty": "medium",
@@ -5207,7 +5348,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_forms_case_intake_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5227,6 +5368,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 6,
       "difficulty": "hard",
@@ -5255,7 +5397,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_forms_exception_intake_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5275,6 +5417,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 6,
       "difficulty": "hard",
@@ -5303,7 +5446,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_forms_trial_intake_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5323,6 +5466,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 18,
       "checks_total": 20,
       "difficulty": "medium",
@@ -5339,7 +5483,7 @@
           "message": "Widget def 'vendor_intake_form': missing gridData.h (expected 10)."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_forms_vendor_intake_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5359,6 +5503,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 5,
       "difficulty": "medium",
@@ -5383,7 +5528,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_grouping_click_preview_desk/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5403,6 +5548,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 20,
       "checks_total": 22,
       "difficulty": "medium",
@@ -5419,7 +5565,7 @@
           "message": "Widget def 'click_revision_table': no columnsDefs entry matching {'field': 'revision_pct', 'headerName': 'Revision %', 'cellDataType': 'number', 'formatterFn': 'percent'}."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_grouping_click_revision_desk/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5439,6 +5585,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 6,
       "difficulty": "hard",
@@ -5467,7 +5614,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 5."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_grouping_click_season_desk/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5487,6 +5634,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 2,
       "checks_total": 6,
       "difficulty": "hard",
@@ -5511,7 +5659,7 @@
           "message": "Expected custom backend 'Earnings Prep Data' to be registered (manage_backends operation='add' with widgets_json)."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_grouping_click_summary_desk/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5531,6 +5679,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 5,
       "difficulty": "medium",
@@ -5555,7 +5704,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_params_earnings_param_review/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5575,6 +5724,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 6,
       "difficulty": "hard",
@@ -5603,7 +5753,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_params_symbol_param_desk/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5623,6 +5773,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 22,
       "checks_total": 22,
       "difficulty": "medium",
@@ -5630,7 +5781,7 @@
       "grade_passed": true,
       "id": "auth_t3_params_trial_param_review",
       "issues": [],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_params_trial_param_review/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -5650,6 +5801,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 23,
       "checks_total": 26,
       "difficulty": "hard",
@@ -5670,7 +5822,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_params_vol_param_cockpit/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5690,6 +5842,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 2,
       "checks_total": 6,
       "difficulty": "hard",
@@ -5714,7 +5867,7 @@
           "message": "Expected custom backend 'Surveillance Data' to be registered (manage_backends operation='add' with widgets_json)."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_settings_alert_metric_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5734,6 +5887,7 @@
       "agent_stdout": "done at turn 2",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 5,
       "checks_total": 11,
       "difficulty": "medium",
@@ -5766,7 +5920,7 @@
           "message": "Expected app 'Network Settings Room' in the apps.json of custom backend 'Chain TVL Data'."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_settings_gas_metric_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5786,6 +5940,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 19,
       "checks_total": 24,
       "difficulty": "hard",
@@ -5814,7 +5969,7 @@
           "message": "App 'Earnings Settings Room': expected widget 'earnings_note' on tab 'preview'."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_settings_surprise_metric_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5834,6 +5989,7 @@
       "agent_stdout": "reached max_turns=5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 18,
       "checks_total": 20,
       "difficulty": "medium",
@@ -5850,7 +6006,7 @@
           "message": "Widget def 'vol_commentary': missing gridData.h (expected 8)."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_settings_vol_commentary_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5870,6 +6026,7 @@
       "agent_stdout": "turn 2: malformed action recovered (Unterminated string starting at: line 1 column 1068 (char 1067))\ndone at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 18,
       "checks_total": 21,
       "difficulty": "medium",
@@ -5890,7 +6047,7 @@
           "message": "Widget def 'case_notes': no param matching {'paramName': 'case_scope', 'type': 'text'}."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_types_case_notes_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5910,6 +6067,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 1,
       "checks_total": 6,
       "difficulty": "hard",
@@ -5938,7 +6096,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_types_earnings_calls_video_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -5958,6 +6116,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 21,
       "checks_total": 25,
       "difficulty": "hard",
@@ -5982,7 +6141,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_types_evidence_files_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6002,6 +6161,7 @@
       "agent_stdout": "done at turn 4",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 2,
       "checks_total": 5,
       "difficulty": "medium",
@@ -6022,7 +6182,7 @@
           "message": "Expected custom backend 'Healthcare Research Data' to be registered (manage_backends operation='add' with widgets_json)."
         }
       ],
-      "level": "L3",
+      "level": "t3",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t3_types_fda_newsfeed_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6042,6 +6202,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 17,
       "checks_total": 20,
       "difficulty": "hard",
@@ -6062,7 +6223,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 5."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_advanced_case_qa_omni_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6082,6 +6243,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 17,
       "checks_total": 26,
       "difficulty": "hard",
@@ -6126,7 +6288,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_advanced_live_orders_grid_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6146,6 +6308,7 @@
       "agent_stdout": "done at turn 8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 25,
       "checks_total": 28,
       "difficulty": "hard",
@@ -6166,7 +6329,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_advanced_rates_live_chart_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6186,6 +6349,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 19,
       "checks_total": 26,
       "difficulty": "hard",
@@ -6222,7 +6386,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_advanced_vix_advanced_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6242,6 +6406,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 21,
       "checks_total": 27,
       "difficulty": "hard",
@@ -6274,7 +6439,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 5."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_aggrid_earnings_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6294,6 +6459,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 17,
       "checks_total": 23,
       "difficulty": "hard",
@@ -6326,7 +6492,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 6."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_aggrid_execution_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6346,6 +6512,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 20,
       "checks_total": 27,
       "difficulty": "hard",
@@ -6382,7 +6549,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_aggrid_healthcare_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6402,6 +6569,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 23,
       "checks_total": 30,
       "difficulty": "hard",
@@ -6438,7 +6606,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_aggrid_rates_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6458,6 +6626,7 @@
       "agent_stdout": "done at turn 6",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 26,
       "checks_total": 26,
       "difficulty": "hard",
@@ -6465,7 +6634,7 @@
       "grade_passed": true,
       "id": "auth_t4_apps_healthcare_ship",
       "issues": [],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_apps_healthcare_ship/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -6485,6 +6654,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 23,
       "checks_total": 25,
       "difficulty": "hard",
@@ -6501,7 +6671,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_apps_sla_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6521,6 +6691,7 @@
       "agent_stdout": "done at turn 6",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 26,
       "checks_total": 26,
       "difficulty": "hard",
@@ -6528,7 +6699,7 @@
       "grade_passed": true,
       "id": "auth_t4_apps_tvl_ship",
       "issues": [],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_apps_tvl_ship/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -6548,6 +6719,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "platform",
       "checks_passed": 10,
       "checks_total": 14,
       "difficulty": "hard",
@@ -6572,7 +6744,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 6."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_apps_vol_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6592,6 +6764,7 @@
       "agent_stdout": "done at turn 5",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 24,
       "checks_total": 26,
       "difficulty": "hard",
@@ -6608,7 +6781,7 @@
           "message": "Widget def 'earnings_chart': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_charts_earnings_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6628,6 +6801,7 @@
       "agent_stdout": "done at turn 8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 22,
       "checks_total": 25,
       "difficulty": "hard",
@@ -6648,7 +6822,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_charts_healthcare_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6668,6 +6842,7 @@
       "agent_stdout": "done at turn 7",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 24,
       "checks_total": 26,
       "difficulty": "hard",
@@ -6684,7 +6859,7 @@
           "message": "Widget def 'yield_curve': missing gridData.h (expected 9)."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_charts_rates_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6704,6 +6879,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 20,
       "checks_total": 24,
       "difficulty": "hard",
@@ -6728,7 +6904,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_charts_tvl_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6748,6 +6924,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "backend-integration",
+      "category": "platform",
       "checks_passed": 25,
       "checks_total": 29,
       "difficulty": "hard",
@@ -6772,7 +6949,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_e2e_case_triage/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6792,6 +6969,7 @@
       "agent_stdout": "done at turn 7",
       "agent_timed_out": false,
       "capability": "backend-integration",
+      "category": "platform",
       "checks_passed": 26,
       "checks_total": 30,
       "difficulty": "hard",
@@ -6816,7 +6994,7 @@
           "message": "Widget def 'catalyst_calendar_table': no columnsDefs entry matching {'field': 'impact_score', 'headerName': 'Impact Score', 'cellDataType': 'number'}."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_e2e_catalyst_calendar/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6836,6 +7014,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "backend-integration",
+      "category": "platform",
       "checks_passed": 21,
       "checks_total": 29,
       "difficulty": "hard",
@@ -6876,7 +7055,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 5."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_e2e_chain_flows/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6896,6 +7075,7 @@
       "agent_stdout": "done at turn 6",
       "agent_timed_out": false,
       "capability": "backend-integration",
+      "category": "platform",
       "checks_passed": 30,
       "checks_total": 30,
       "difficulty": "hard",
@@ -6903,7 +7083,7 @@
       "grade_passed": true,
       "id": "auth_t4_e2e_compliance_surveillance",
       "issues": [],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_e2e_compliance_surveillance/tool_calls.jsonl",
       "passed": true,
       "process_failed": false,
@@ -6923,6 +7103,7 @@
       "agent_stdout": "done at turn 8",
       "agent_timed_out": false,
       "capability": "backend-integration",
+      "category": "platform",
       "checks_passed": 26,
       "checks_total": 30,
       "difficulty": "hard",
@@ -6947,7 +7128,7 @@
           "message": "Widget def 'earnings_season_table': no columnsDefs entry matching {'field': 'report_date', 'headerName': 'Report Date', 'cellDataType': 'dateString'}."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_e2e_earnings_season/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -6967,6 +7148,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "backend-integration",
+      "category": "platform",
       "checks_passed": 23,
       "checks_total": 29,
       "difficulty": "hard",
@@ -6999,7 +7181,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_e2e_execution_monitor/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7019,6 +7201,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "backend-integration",
+      "category": "platform",
       "checks_passed": 21,
       "checks_total": 27,
       "difficulty": "hard",
@@ -7051,7 +7234,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 5."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_e2e_healthcare_pipeline/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7071,6 +7254,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "backend-integration",
+      "category": "platform",
       "checks_passed": 18,
       "checks_total": 25,
       "difficulty": "hard",
@@ -7107,7 +7291,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 6."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_e2e_macro_morning/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7127,6 +7311,7 @@
       "agent_stdout": "done at turn 6",
       "agent_timed_out": false,
       "capability": "backend-integration",
+      "category": "platform",
       "checks_passed": 26,
       "checks_total": 30,
       "difficulty": "hard",
@@ -7151,7 +7336,7 @@
           "message": "Widget def 'rates_auctions_table': no columnsDefs entry matching {'field': 'bid_to_cover', 'headerName': 'Bid To Cover', 'cellDataType': 'number'}."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_e2e_rates_auctions/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7171,6 +7356,7 @@
       "agent_stdout": "done at turn 6",
       "agent_timed_out": false,
       "capability": "backend-integration",
+      "category": "platform",
       "checks_passed": 24,
       "checks_total": 29,
       "difficulty": "hard",
@@ -7199,7 +7385,7 @@
           "message": "Widget def 'research_room_table': no columnsDefs entry matching {'field': 'upside_pct', 'headerName': 'Upside Pct', 'cellDataType': 'number', 'formatterFn': 'percent'}."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_e2e_research_room/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7219,6 +7405,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "backend-integration",
+      "category": "platform",
       "checks_passed": 22,
       "checks_total": 29,
       "difficulty": "hard",
@@ -7255,7 +7442,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 5."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_e2e_vendor_ops/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7275,6 +7462,7 @@
       "agent_stdout": "done at turn 7",
       "agent_timed_out": false,
       "capability": "backend-integration",
+      "category": "platform",
       "checks_passed": 24,
       "checks_total": 30,
       "difficulty": "hard",
@@ -7307,7 +7495,7 @@
           "message": "Widget def 'vol_cockpit_table': no columnsDefs entry matching {'field': 'as_of', 'headerName': 'As Of', 'cellDataType': 'dateString'}."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_e2e_vol_cockpit/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7327,6 +7515,7 @@
       "agent_stdout": "done at turn 6",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 21,
       "checks_total": 25,
       "difficulty": "hard",
@@ -7351,7 +7540,7 @@
           "message": "App 'Case Repair Live': expected widget 'alert_metric' on tab 'posture'."
         }
       ],
-      "level": "L4",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_extend_repair_compliance/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7371,6 +7560,7 @@
       "agent_stdout": "done at turn 9",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 18,
       "checks_total": 25,
       "difficulty": "hard",
@@ -7407,7 +7597,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L4",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_extend_repair_execution/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7427,6 +7617,7 @@
       "agent_stdout": "turn 1 retry 1/4 after model timeout: timed out\nturn 1 retry 2/4 after model timeout: timed out\nturn 1 retry 3/4 after model timeout: timed out\nturn 1 retry 4/4 after model timeout: timed out",
       "agent_timed_out": true,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 10,
       "checks_total": 17,
       "difficulty": "hard",
@@ -7463,7 +7654,7 @@
           "message": "App 'Rates Repair Live': expected widget 'curve_spread_metric' on tab 'posture'."
         }
       ],
-      "level": "L4",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_extend_repair_rates/tool_calls.jsonl",
       "passed": false,
       "process_failed": true,
@@ -7483,6 +7674,7 @@
       "agent_stdout": "done at turn 8",
       "agent_timed_out": false,
       "capability": "app-building",
+      "category": "repair",
       "checks_passed": 20,
       "checks_total": 23,
       "difficulty": "hard",
@@ -7503,7 +7695,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L4",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_extend_repair_vol/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7523,6 +7715,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 19,
       "checks_total": 25,
       "difficulty": "hard",
@@ -7555,7 +7748,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_forms_compliance_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7575,6 +7768,7 @@
       "agent_stdout": "done at turn 8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 24,
       "checks_total": 26,
       "difficulty": "hard",
@@ -7591,7 +7785,7 @@
           "message": "Widget def 'venue_exception_form': missing gridData.h (expected 10)."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_forms_execution_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7611,6 +7805,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 17,
       "checks_total": 22,
       "difficulty": "hard",
@@ -7639,7 +7834,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 5."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_forms_healthcare_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7659,6 +7854,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 20,
       "checks_total": 26,
       "difficulty": "hard",
@@ -7691,7 +7887,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_forms_sla_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7711,6 +7907,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 12,
       "checks_total": 18,
       "difficulty": "hard",
@@ -7743,7 +7940,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 5."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_grouping_chart_sync_live/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7763,6 +7960,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 21,
       "checks_total": 25,
       "difficulty": "hard",
@@ -7787,7 +7985,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_grouping_click_sync_live/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7807,6 +8005,7 @@
       "agent_stdout": "done at turn 8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 19,
       "checks_total": 25,
       "difficulty": "hard",
@@ -7839,7 +8038,7 @@
           "message": "Expected widget definition 'earnings_note' on custom backend 'Earnings Prep Data'."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_grouping_earnings_sync_live/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7859,6 +8058,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 5,
       "checks_total": 12,
       "difficulty": "hard",
@@ -7895,7 +8095,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 5."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_grouping_preview_sync_live/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7915,6 +8115,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 22,
       "checks_total": 28,
       "difficulty": "hard",
@@ -7947,7 +8148,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_params_earnings_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -7967,6 +8168,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 19,
       "checks_total": 24,
       "difficulty": "hard",
@@ -7995,7 +8197,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_params_healthcare_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -8015,6 +8217,7 @@
       "agent_stdout": "done at turn 6",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 23,
       "checks_total": 25,
       "difficulty": "hard",
@@ -8031,7 +8234,7 @@
           "message": "Widget def 'rates_series_pack': missing gridData.h (expected 8)."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_params_rates_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -8051,6 +8254,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 17,
       "checks_total": 21,
       "difficulty": "hard",
@@ -8075,7 +8279,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 5."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_params_vol_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -8095,6 +8299,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 14,
       "checks_total": 20,
       "difficulty": "hard",
@@ -8127,7 +8332,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 5."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_settings_execution_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -8147,6 +8352,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 19,
       "checks_total": 23,
       "difficulty": "hard",
@@ -8171,7 +8377,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_settings_healthcare_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -8191,6 +8397,7 @@
       "agent_stdout": "done at turn 8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 24,
       "checks_total": 27,
       "difficulty": "hard",
@@ -8211,7 +8418,7 @@
           "message": "Widget def 'curve_spread_metric': missing gridData.h (expected 4)."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_settings_rates_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -8231,6 +8438,7 @@
       "agent_stdout": "done at turn 6",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 24,
       "checks_total": 26,
       "difficulty": "hard",
@@ -8247,7 +8455,7 @@
           "message": "Widget def 'vol_regime_metric': missing gridData.h (expected 4)."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_settings_vol_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -8267,6 +8475,7 @@
       "agent_stdout": "done at turn 6",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 23,
       "checks_total": 25,
       "difficulty": "hard",
@@ -8283,7 +8492,7 @@
           "message": "Widget def 'evidence_files': missing gridData.h (expected 14)."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_types_evidence_files_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -8303,6 +8512,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 19,
       "checks_total": 23,
       "difficulty": "hard",
@@ -8327,7 +8537,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_types_policy_digest_pdf_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -8347,6 +8557,7 @@
       "agent_stdout": "done at turn 8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 22,
       "checks_total": 25,
       "difficulty": "hard",
@@ -8367,7 +8578,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 3."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_types_sla_newsfeed_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -8387,6 +8598,7 @@
       "agent_stdout": "reached max_turns=8",
       "agent_timed_out": false,
       "capability": "widget-building",
+      "category": "platform",
       "checks_passed": 21,
       "checks_total": 25,
       "difficulty": "hard",
@@ -8411,7 +8623,7 @@
           "message": "Expected <= 2 invalid tool calls, observed 4."
         }
       ],
-      "level": "L3",
+      "level": "t4",
       "output_path": "runs/comparison/build-qwen3-8b/ollama-qwen3-8b/auth_t4_types_venue_packet_pdf_ship/tool_calls.jsonl",
       "passed": false,
       "process_failed": false,
@@ -8642,6 +8854,16 @@
     "auth_t4_types_venue_packet_pdf_ship"
   ],
   "summary": {
+    "by_category": {
+      "platform": {
+        "passed": 16,
+        "total": 192
+      },
+      "repair": {
+        "passed": 14,
+        "total": 20
+      }
+    },
     "by_difficulty": {
       "easy": {
         "passed": 15,
@@ -8657,13 +8879,25 @@
       }
     },
     "by_level": {
-      "L3": {
-        "passed": 16,
-        "total": 192
+      "t0": {
+        "passed": 11,
+        "total": 40
       },
-      "L4": {
-        "passed": 14,
-        "total": 20
+      "t1": {
+        "passed": 8,
+        "total": 40
+      },
+      "t2": {
+        "passed": 4,
+        "total": 40
+      },
+      "t3": {
+        "passed": 4,
+        "total": 40
+      },
+      "t4": {
+        "passed": 3,
+        "total": 52
       }
     },
     "failed": 182,

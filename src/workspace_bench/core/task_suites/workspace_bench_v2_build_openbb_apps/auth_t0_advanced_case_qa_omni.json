@@ -1,0 +1,88 @@
+{
+  "id": "auth_t0_advanced_case_qa_omni",
+  "title": "Build the Case Q&A advanced widget",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-advanced",
+    "level-t0",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "advanced"
+  ],
+  "prompt": "Register custom backend \"Surveillance Data\" (http://localhost:7807) with one widgets.json entry: `case_qa_omni`: name \"Case Q&A\", description \"Ask questions over the surveillance case corpus.\", endpoint /case-qa, type omni, sized w=20 h=9 on the grid, params required: prompt \u2014 a text input (type text), labeled \"Prompt\", hidden from the UI (show false), described \"Question to run over the case corpus.\".",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Surveillance Data",
+        "widget_id": "case_qa_omni",
+        "expect": {
+          "type": "omni",
+          "endpoint": "/case-qa",
+          "gridData.w": 20,
+          "gridData.h": 9
+        },
+        "params_include": [
+          {
+            "paramName": "prompt",
+            "type": "text",
+            "show": false
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "case_qa_omni": {
+            "name": "Case Q&A",
+            "description": "Ask questions over the surveillance case corpus.",
+            "endpoint": "/case-qa",
+            "type": "omni",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "prompt",
+                "type": "text",
+                "label": "Prompt",
+                "description": "Question to run over the case corpus.",
+                "show": false
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "category": "platform",
+  "level": "t0",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "train",
+  "novelty": "Unique advanced/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/case_qa_omni."
+}

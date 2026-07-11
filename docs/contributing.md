@@ -1,12 +1,12 @@
 # Contributing To WorkspaceBench
 
 WorkspaceBench should stay benchmark-first. Contributions should preserve the
-same scenario, simulator, trace, and grader contracts used by the CLI, exports,
+same task, simulator, trace, and grader contracts used by the CLI, exports,
 and RL adapter.
 
-## Add A Scenario
+## Add A Task
 
-1. Copy an existing scenario from `src/workspace_bench/core/scenario_packs/workspace_bench_v1` or create one in a private scenario directory.
+1. Copy an existing task from `src/workspace_bench/core/task_suites/workspace_bench_v1` or create one in a private task directory.
 2. Give it a stable `id`, title, level, capability, workflow, domain, subdomain, difficulty, split, and tags.
 3. Keep fixture data deterministic.
 4. Add clear `success` criteria that grade durable Workspace state.
@@ -14,11 +14,11 @@ and RL adapter.
 6. Run:
 
 ```bash
-uv run workspace-bench validate --pack all --min-scenarios 300
+uv run workspace-bench validate --suite all --min-tasks 300
 ```
 
-For private scenarios, put JSON files in a separate directory and use
-`--scenario-dir`.
+For private tasks, put JSON files in a separate directory and use
+`--task-dir`.
 
 ## Add A Grader Check
 
@@ -39,7 +39,7 @@ Prefer the external JSONL command protocol first:
 
 ```bash
 uv run workspace-bench run-agent-command \
-  --scenario gen_t0_create_price_performance_aapl \
+  --task gen_t0_create_price_performance_aapl \
   --agent-command "python my_agent.py" \
   --json
 ```
@@ -60,7 +60,7 @@ rather than changing the built-in defaults.
 
 1. Keep canonical rollout records unchanged.
 2. Add conversion logic under `workspace_bench.exports`.
-3. Preserve benchmark release, export schema, scenario, and task-pack metadata.
+3. Preserve benchmark release, export schema, task, and task-pack metadata.
 4. Add tests in `tests/test_exports.py`.
 5. Document the new format in `docs/result-schema.md` or
    `docs/training-recipes.md`.
@@ -83,7 +83,7 @@ Run before submitting:
 
 ```bash
 uv run --extra dev python -m pytest
-uv run workspace-bench validate --pack all --min-scenarios 300
+uv run workspace-bench validate --suite all --min-tasks 300
 ```
 
 For comparison-runner changes, also run:

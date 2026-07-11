@@ -1,0 +1,164 @@
+{
+  "id": "gen_t4_prompts_cross_prompt_cross_stark_risk",
+  "title": "Prompt Cross Stark Risk",
+  "capability": "dashboard-construction",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-prompts",
+    "level-t4",
+    "prompts",
+    "cross-backend"
+  ],
+  "prompt": "Get workspace_tool_usage and workspace_session_context, create Prompt Cross Stark Risk, build the cross-backend dashboard with Bench Stark Enterprise/portfolio_command_center_actions_analyst_conviction and Bench Portfolio/risk_metrics, and add a note mentioning stark and risk and current-dashboard.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "portfolio"
+      },
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_prompt",
+    "manage_dashboard",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Prompt Cross Stark Risk",
+    "required_tool_calls": [
+      {
+        "tool": "get_workspace_prompt",
+        "args_contains": {
+          "name": "workspace_tool_usage"
+        }
+      },
+      {
+        "tool": "get_workspace_prompt",
+        "args_contains": {
+          "name": "workspace_session_context"
+        }
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_actions_analyst_conviction",
+        "data_args": {}
+      },
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics",
+        "data_args": {}
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "stark",
+          "risk",
+          "current-dashboard"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_prompt",
+      "args": {
+        "name": "workspace_tool_usage"
+      }
+    },
+    {
+      "tool": "get_workspace_prompt",
+      "args": {
+        "name": "workspace_session_context"
+      }
+    },
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "create",
+        "name": "Prompt Cross Stark Risk"
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Stark Enterprise"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_actions_analyst_conviction"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_actions_analyst_conviction",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Portfolio"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Prompt Cross Note",
+        "data": "Prompt cross build: stark, risk, current-dashboard."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "category": "dashboard",
+  "level": "t4",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 12
+  },
+  "split": "test",
+  "novelty": "Unique prompts/t4 exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_prompt, list_available_widgets, manage_dashboard with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on portfolio, stark-enterprise; artifact prompts:workspace_session_context,workspace_tool_usage; widgets:Bench Portfolio/risk_metrics@*,Bench Stark Enterprise/portfolio_command_center_actions_analyst_conviction@*; generated:note@*:stark,risk."
+}

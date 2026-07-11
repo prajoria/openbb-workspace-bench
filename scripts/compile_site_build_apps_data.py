@@ -1,14 +1,14 @@
 """Inject build-openbb-apps-collection + aggregate blocks into the site's data blob.
 
 Adds two keys to my-website/src/data/workspaceBench.json:
-  AUTH: {overall{passed,total,rate}, mean_score, curve:[{tier,rate,passed,total}],
+  AUTH: {overall{passed,total,rate}, mean_score, curve:[{level,rate,passed,total}],
          families:[{family,passed,total,rate}], issues:[{code,count}],
          model:"gpt-4.1-mini",
-         board:[{slug,label,passed,total,rate,mean,tiers:[t0..t4 rates],
+         board:[{slug,label,passed,total,rate,mean,levels:[t0..t4 rates],
                  families:{fam:rate}}],           # one entry per --auth-run
          family_order:[fams, easiest->hardest across board],
          issues_matrix:{codes:[...], counts:{code:[aligned to board order]}}}
-  AGG:  {collections:[{name,scenarios}], models:[{slug,label,per:{name:{passed,
+  AGG:  {collections:[{name,tasks}], models:[{slug,label,per:{name:{passed,
          total,rate}|null}, pooled:{passed,total,rate}, pending:[names]}]}
 
 The mini-only fields (overall/curve/families/issues) always come from --gate —
@@ -20,7 +20,7 @@ Usage:
       --gate runs/comparison/build-gpt-4.1-mini/openai-gpt-4.1-mini.json \
       --auth-run openai-gpt-4.1-mini=runs/comparison/build-gpt-4.1-mini/openai-gpt-4.1-mini.json \
       --auth-run openai-gpt-5.5=runs/comparison/build-gpt-5.5/openai-gpt-5.5.json \
-      --collections runs/reports/collections.json \
+      --collections runs/reports/suites.json \
       --site /Users/didierlopes/Documents/git/my-website/src/data/workspaceBench.json
 """
 
@@ -53,11 +53,11 @@ ORDER = [
     "openai-gpt-5.5", "anthropic-sonnet-5", "zai-glm-5.2",
     "openai-gpt-4.1-mini", "ollama-gpt-oss-20b", "ollama-qwen3-8b",
 ]
-TIERS = ["t0", "t1", "t2", "t3", "t4"]
+LEVELS = ["t0", "t1", "t2", "t3", "t4"]
 
 
 def summarize(rows: list[dict]) -> dict:
-    tiers: dict[str, list[int]] = defaultdict(lambda: [0, 0])
+    levels: dict[str, list[int]] = defaultdict(lambda: [0, 0])
     families: dict[str, list[int]] = defaultdict(lambda: [0, 0])
     issues: Counter = Counter()
     passed = 0
@@ -67,8 +67,8 @@ def summarize(rows: list[dict]) -> dict:
         ok = bool(row["passed"])
         passed += ok
         score_sum += float(row.get("score") or 0.0)
-        tiers[match.group(1)][1] += 1
-        tiers[match.group(1)][0] += ok
+        levels[match.group(1)][1] += 1
+        levels[match.group(1)][0] += ok
         families[match.group(2)][1] += 1
         families[match.group(2)][0] += ok
         if not ok:
@@ -79,7 +79,7 @@ def summarize(rows: list[dict]) -> dict:
         "passed": passed,
         "total": len(rows),
         "mean": round(100 * score_sum / len(rows), 1),
-        "tiers": tiers,
+        "levels": levels,
         "families": families,
         "issues": issues,
     }
@@ -100,7 +100,7 @@ def main() -> int:
     )
     parser.add_argument(
         "--pack-dir", default=None,
-        help="scenario directory; when set, AUTH.tx gains per-scenario prompt + rubric",
+        help="task directory; when set, AUTH.tx gains per-task prompt + rubric",
     )
     args = parser.parse_args()
 
@@ -112,8 +112,8 @@ def main() -> int:
                     "rate": round(100 * g["passed"] / g["total"], 1)},
         "mean_score": g["mean"],
         "curve": [
-            {"tier": tier, "passed": p, "total": t, "rate": round(100 * p / t, 1)}
-            for tier, (p, t) in sorted(g["tiers"].items())
+            {"level": level, "passed": p, "total": t, "rate": round(100 * p / t, 1)}
+            for level, (p, t) in sorted(g["levels"].items())
         ],
         "families": sorted(
             (
@@ -136,9 +136,9 @@ def main() -> int:
         auth["staircase"] = {
             "model": "gpt-oss:20b (local proxy)",
             "curve": [
-                {"tier": tier, "passed": p, "total": t,
+                {"level": level, "passed": p, "total": t,
                  "rate": round(100 * p / t, 1)}
-                for tier, (p, t) in sorted(st["tiers"].items())
+                for level, (p, t) in sorted(st["levels"].items())
             ],
         }
 
@@ -160,9 +160,9 @@ def main() -> int:
             "total": s["total"],
             "rate": round(100 * s["passed"] / s["total"], 1),
             "mean": s["mean"],
-            "tiers": [
-                round(100 * s["tiers"][t][0] / s["tiers"][t][1], 1)
-                for t in TIERS
+            "levels": [
+                round(100 * s["levels"][t][0] / s["levels"][t][1], 1)
+                for t in LEVELS
             ],
             "families": {
                 fam: round(100 * p / t, 1)
@@ -189,7 +189,7 @@ def main() -> int:
             },
         }
 
-    # ---- clickable scenario explorer: per-scenario verdicts + prompt + rubric
+    # ---- clickable task explorer: per-task verdicts + prompt + rubric
     if args.pack_dir and board:
         ordered = [slug for slug in ORDER if slug in runs]
         raw_runs = {}
@@ -198,7 +198,7 @@ def main() -> int:
             raw_runs[slug] = {
                 r["id"]: r for r in json.loads(Path(path).read_text())["results"]
             }
-        scenarios = []
+        tasks = []
         for f in sorted(Path(args.pack_dir).glob("auth_*.json")):
             sc = json.loads(f.read_text())
             match = re.match(r"auth_(t\d)_([a-z0-9]+)_", sc["id"])
@@ -219,24 +219,24 @@ def main() -> int:
                 entry["s"].append(round(100 * (r["score"] if r else 0)))
                 first = (r or {}).get("issues") or []
                 entry["i"].append(first[0]["code"] if (r and not r["passed"] and first) else "")
-            scenarios.append(entry)
-        scenarios.sort(key=lambda e: (e["t"], e["f"], e["id"]))
+            tasks.append(entry)
+        tasks.sort(key=lambda e: (e["t"], e["f"], e["id"]))
         auth["tx"] = {
             "labels": [LABELS.get(s2, s2) for s2 in ordered],
             "short": [SHORT.get(s2, s2) for s2 in ordered],
-            "scenarios": scenarios,
+            "tasks": tasks,
         }
 
     report = json.loads(Path(args.collections).read_text())
-    collection_names = list(report["collections"])
+    suite_names = list(report["suites"])
     agg_models = []
     for slug in ORDER:
         if slug not in report["aggregate"]:
             continue
         agg = report["aggregate"][slug]
         per = {}
-        for name in collection_names:
-            summary = report["collections"][name]["models"].get(slug)
+        for name in suite_names:
+            summary = report["suites"][name]["models"].get(slug)
             per[name] = (
                 {"passed": summary["passed"], "total": summary["total"],
                  "rate": round(100 * summary["strict_pass_rate"], 1)}
@@ -248,12 +248,12 @@ def main() -> int:
             "per": per,
             "pooled": {"passed": agg["passed"], "total": agg["total"],
                        "rate": round(100 * agg["strict_pass_rate"], 1)},
-            "pending": agg["collections_pending"],
+            "pending": agg["suites_pending"],
         })
     agg_block = {
-        "collections": [
-            {"name": name, "scenarios": report["collections"][name]["scenarios"]}
-            for name in collection_names
+        "suites": [
+            {"name": name, "tasks": report["suites"][name]["tasks"]}
+            for name in suite_names
         ],
         "models": agg_models,
     }
@@ -278,7 +278,7 @@ def main() -> int:
     site_path.write_text(json.dumps(site, separators=(",", ":")))
     print(f"Injected AUTH + AGG into {site_path}")
     print("AUTH overall:", auth["overall"], "| curve:",
-          [(c["tier"], c["rate"]) for c in auth["curve"]])
+          [(c["level"], c["rate"]) for c in auth["curve"]])
     if board:
         print("AUTH board:",
               [(b["slug"], f"{b['rate']}%") for b in auth["board"]])

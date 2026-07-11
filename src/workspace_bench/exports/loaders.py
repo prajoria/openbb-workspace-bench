@@ -11,25 +11,25 @@ from workspace_bench.agents.agent_command import build_task_envelope, load_tool_
 from workspace_bench.core.episode import WorkspaceEpisode
 from workspace_bench.exports.metadata import base_export_metadata
 from workspace_bench.exports.schema import RolloutRecord
-from workspace_bench.core.models import JsonDict, RunResult, Scenario, ToolCall
-from workspace_bench.core.runner import ScenarioRunner
+from workspace_bench.core.models import JsonDict, RunResult, Task, ToolCall
+from workspace_bench.core.runner import TaskRunner
 
 
-def rollouts_from_oracle(scenarios: Iterable[Scenario]) -> list[RolloutRecord]:
+def rollouts_from_oracle(tasks: Iterable[Task]) -> list[RolloutRecord]:
     """Export reference oracle traces as rollout records."""
 
-    runner = ScenarioRunner()
+    runner = TaskRunner()
     records = []
-    for scenario in scenarios:
-        result = runner.run(scenario, "oracle")
+    for task in tasks:
+        result = runner.run(task, "oracle")
         records.append(
             run_result_to_rollout(
                 result,
-                task=build_task_envelope(scenario),
+                task=build_task_envelope(task),
                 metadata={
                     "source": "oracle",
                     "runner": "oracle",
-                    "attempt_id": f"oracle:{scenario.id}:1",
+                    "attempt_id": f"oracle:{task.id}:1",
                     "repeat": 1,
                 },
             )
@@ -39,13 +39,13 @@ def rollouts_from_oracle(scenarios: Iterable[Scenario]) -> list[RolloutRecord]:
 
 def load_comparison_rollouts(
     comparison_dir: Path,
-    scenarios: Iterable[Scenario],
+    tasks: Iterable[Task],
 ) -> list[RolloutRecord]:
     """Load model comparison artifacts and normalize them into rollout records."""
 
     if not comparison_dir.exists():
         raise FileNotFoundError(f"comparison directory does not exist: {comparison_dir}")
-    scenario_by_id = {scenario.id: scenario for scenario in scenarios}
+    task_by_id = {task.id: task for task in tasks}
     records = []
     for result_path in sorted(comparison_dir.glob("*.json")):
         if result_path.name == "comparison.json":
@@ -55,8 +55,8 @@ def load_comparison_rollouts(
             continue
         model = payload["model"]
         for item in payload["results"]:
-            scenario = scenario_by_id.get(item["id"])
-            if scenario is None:
+            task = task_by_id.get(item["id"])
+            if task is None:
                 continue
             output_path = _resolve_artifact_path(
                 item.get("output_path"), base_dir=comparison_dir
@@ -66,8 +66,8 @@ def load_comparison_rollouts(
             )
             run_dir = _resolve_artifact_path(item.get("run_dir"), base_dir=comparison_dir)
             tool_calls = load_tool_calls(output_path)
-            result = replay_tool_calls(scenario, tool_calls)
-            task = _read_json(task_path) if task_path.exists() else build_task_envelope(scenario)
+            result = replay_tool_calls(task, tool_calls)
+            task = _read_json(task_path) if task_path.exists() else build_task_envelope(task)
             messages_path = run_dir / "conversation.json"
             messages = _read_json(messages_path) if messages_path.exists() else []
             records.append(
@@ -82,7 +82,7 @@ def load_comparison_rollouts(
                         "runner": item.get("runner"),
                         "repeat": item.get("repeat", 1),
                         "attempt_id": (
-                            f"{model.get('slug')}:{scenario.id}:"
+                            f"{model.get('slug')}:{task.id}:"
                             f"{item.get('repeat', 1)}"
                         ),
                         "result_path": str(result_path),
@@ -100,23 +100,23 @@ def load_comparison_rollouts(
 
 def load_trace_dir_rollouts(
     trace_dir: Path,
-    scenarios: Iterable[Scenario],
+    tasks: Iterable[Task],
 ) -> list[RolloutRecord]:
     """Load trace artifacts produced by ``workspace-bench run --trace-dir``."""
 
     if not trace_dir.exists():
         raise FileNotFoundError(f"trace directory does not exist: {trace_dir}")
-    scenario_by_id = {scenario.id: scenario for scenario in scenarios}
+    task_by_id = {task.id: task for task in tasks}
     records = []
     for trace_path in sorted(trace_dir.glob("*.json")):
         payload = _read_json(trace_path)
-        scenario_payload = payload.get("scenario", {})
-        scenario_id = scenario_payload.get("id")
-        scenario = scenario_by_id.get(scenario_id)
+        task_payload = payload.get("task", {})
+        task_id = task_payload.get("id")
+        task = task_by_id.get(task_id)
         task = (
-            build_task_envelope(scenario)
-            if scenario is not None
-            else {"schema_version": "workspace-bench-task-v1", "scenario": scenario_payload}
+            build_task_envelope(task)
+            if task is not None
+            else {"schema_version": "workspace-bench-task-v1", "task": task_payload}
         )
         trace = payload.get("trace", [])
         tool_calls = [
@@ -144,13 +144,13 @@ def load_trace_dir_rollouts(
                 metadata={
                     **base_export_metadata(),
                     "source": "trace_dir",
-                    "scenario_id": scenario_id,
-                    "level": scenario_payload.get("level"),
-                    "difficulty": scenario_payload.get("difficulty"),
-                    "capability": scenario_payload.get("capability"),
-                    "workflow": scenario_payload.get("workflow"),
-                    "domain": scenario_payload.get("domain"),
-                    "subdomain": scenario_payload.get("subdomain"),
+                    "task_id": task_id,
+                    "level": task_payload.get("level"),
+                    "difficulty": task_payload.get("difficulty"),
+                    "capability": task_payload.get("capability"),
+                    "workflow": task_payload.get("workflow"),
+                    "domain": task_payload.get("domain"),
+                    "subdomain": task_payload.get("subdomain"),
                     "passed": grade.get("passed"),
                     "score": grade.get("score"),
                     "trace_path": str(trace_path),
@@ -160,14 +160,14 @@ def load_trace_dir_rollouts(
     return records
 
 
-def replay_tool_calls(scenario: Scenario, tool_calls: Iterable[ToolCall]) -> RunResult:
+def replay_tool_calls(task: Task, tool_calls: Iterable[ToolCall]) -> RunResult:
     """Replay tool calls in the simulator and return a freshly graded result."""
 
-    episode = WorkspaceEpisode(scenario=scenario)
+    episode = WorkspaceEpisode(task=task)
     for call in tool_calls:
         episode.step(call)
     return RunResult(
-        scenario=scenario,
+        task=task,
         grade=episode.grade(),
         trace=tuple(episode.trace),
         final_snapshot=episode.snapshot(),
@@ -191,14 +191,14 @@ def run_result_to_rollout(
     grade = asdict(result.grade)
     combined_metadata = {
         **base_export_metadata(),
-        "scenario_id": result.scenario.id,
-        "level": result.scenario.level,
-        "difficulty": result.scenario.difficulty,
-        "split": result.scenario.split,
-        "capability": result.scenario.capability,
-        "workflow": result.scenario.workflow,
-        "domain": result.scenario.domain,
-        "subdomain": result.scenario.subdomain,
+        "task_id": result.task.id,
+        "level": result.task.level,
+        "difficulty": result.task.difficulty,
+        "split": result.task.split,
+        "capability": result.task.capability,
+        "workflow": result.task.workflow,
+        "domain": result.task.domain,
+        "subdomain": result.task.subdomain,
         "passed": result.grade.passed,
         "score": result.grade.score,
     }
@@ -226,15 +226,15 @@ def run_result_to_rollout(
 def synthesize_messages(task: JsonDict, tool_calls: list[JsonDict]) -> list[JsonDict]:
     """Create a minimal two-message training conversation from tool calls."""
 
-    scenario = task.get("scenario", {})
+    task = task.get("task", {})
     return [
         {
             "role": "user",
             "content": json.dumps(
                 {
-                    "prompt": scenario.get("prompt"),
-                    "allowed_tools": scenario.get("allowed_tools", []),
-                    "initial_state": scenario.get("initial_state", {}),
+                    "prompt": task.get("prompt"),
+                    "allowed_tools": task.get("allowed_tools", []),
+                    "initial_state": task.get("initial_state", {}),
                 },
                 sort_keys=True,
             ),
