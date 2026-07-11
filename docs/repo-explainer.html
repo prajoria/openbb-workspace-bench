@@ -733,16 +733,16 @@
           benchmark, with export and RL adapters layered on top.
         </p>
         <ul class="plain-list">
-          <li><span class="tick">1</span><span>The task is a scenario JSON file with a prompt, allowed tools, fixtures, and hidden success checks.</span></li>
+          <li><span class="tick">1</span><span>A task is a JSON file with a prompt, allowed tools, fixtures, and hidden success checks.</span></li>
           <li><span class="tick">2</span><span>The agent emits Workspace tool calls, either one-shot JSONL or interactively.</span></li>
           <li><span class="tick">3</span><span>The simulator executes those tool calls and the grader scores final Workspace state.</span></li>
           <li><span class="tick">4</span><span>Results can become reports, model comparisons, rollout JSONL, SFT data, or RL environment steps.</span></li>
         </ul>
 
         <div class="summary-strip" aria-label="Benchmark facts">
-          <div class="metric"><strong>40</strong><span>deterministic scenarios across the core and Stark packs</span></div>
-          <div class="metric"><strong>L0-L4</strong><span>task levels from simple inspection to repair workflows</span></div>
-          <div class="metric"><strong>2</strong><span>built-in comparison adapters: GPT-4.1 and Ollama gpt-oss:20b</span></div>
+          <div class="metric"><strong>512</strong><span>deterministic tasks across the core and build-openbb-apps suites</span></div>
+          <div class="metric"><strong>t0-t4</strong><span>difficulty levels from one action to multi-intent composition</span></div>
+          <div class="metric"><strong>6</strong><span>committed model baselines with full per-task transcripts</span></div>
           <div class="metric"><strong>3</strong><span>downstream paths: evals, training exports, and RL</span></div>
         </div>
       </div>
@@ -750,13 +750,13 @@
       <div class="system-map" aria-label="Interactive system map">
         <div class="map-title">
           <strong>Click a layer to see what it does</strong>
-          <span>scenario -> agent -> tools -> grade -> outputs</span>
+          <span>task -> agent -> tools -> grade -> outputs</span>
         </div>
         <div class="flow-grid">
-          <button class="flow-node active" data-node="scenario">
+          <button class="flow-node active" data-node="task">
             <span class="index">01</span>
-            <b>Scenario</b>
-            <small>Defines the task, fixtures, allowed tools, limits, oracle trace, and success checks.</small>
+            <b>Task</b>
+            <small>Defines the prompt, fixtures, allowed tools, limits, oracle trace, and success checks.</small>
           </button>
           <button class="flow-node" data-node="agent">
             <span class="index">02</span>
@@ -776,7 +776,7 @@
           <button class="flow-node" data-node="compare">
             <span class="index">05</span>
             <b>Compare</b>
-            <small>Runs multiple models over the same scenarios and produces charts plus analysis.</small>
+            <small>Runs multiple models over the same tasks and produces charts plus analysis.</small>
           </button>
           <button class="flow-node" data-node="exports">
             <span class="index">06</span>
@@ -790,13 +790,13 @@
           </button>
           <button class="flow-node" data-node="private">
             <span class="index">08</span>
-            <b>Private Packs</b>
-            <small>Lets you run proprietary scenarios locally with split and redaction metadata.</small>
+            <b>Private Suites</b>
+            <small>Lets you run proprietary task suites locally with split and redaction metadata.</small>
           </button>
         </div>
         <div class="detail-panel" id="detail-panel" aria-live="polite">
-          <h3>Scenario</h3>
-          <p>A scenario is the unit of work. It says what the analyst wants, what Workspace starts with, which tools the model may call, and what final state counts as success.</p>
+          <h3>Task</h3>
+          <p>A task is the unit of work. It says what the analyst wants, what Workspace starts with, which tools the model may call, and what final state counts as success.</p>
         </div>
       </div>
     </section>
@@ -808,12 +808,12 @@
         <article class="panel teal">
           <span class="tag">Core identity</span>
           <h3>Benchmark</h3>
-          <p>The source of truth is deterministic evaluation: load a scenario, run tool calls, grade final Workspace state, record results.</p>
+          <p>The source of truth is deterministic evaluation: load a task, run tool calls, grade final Workspace state, record results.</p>
         </article>
         <article class="panel gold">
           <span class="tag">Research use</span>
           <h3>Model comparison</h3>
-          <p>The comparison runner gives GPT-4.1 and Ollama the same tasks, tracks pass rates, retries transient failures, and writes reports.</p>
+          <p>The evaluator gives every model the same tasks through inline <code>--model provider:model</code> adapters or a models file, tracks pass rates, retries transient failures, and writes reports.</p>
         </article>
         <article class="panel blue">
           <span class="tag">Training use</span>
@@ -826,7 +826,7 @@
         <div class="timeline-item">
           <strong>Task author</strong>
           <div>
-            <h3>Writes scenario JSON</h3>
+            <h3>Writes task JSON</h3>
             <p>They define the analyst prompt, fixtures, starting dashboard state, allowed tool set, success checks, metadata, and oracle trace.</p>
           </div>
         </div>
@@ -868,18 +868,19 @@
         <strong id="command-title">Validate the benchmark</strong>
         <button class="copy-button" id="copy-command" type="button">Copy</button>
       </div>
-      <pre><code id="command-code">uv run --extra dev workspace-bench validate --min-scenarios 25</code></pre>
+      <pre><code id="command-code">uv run workspace-bench validate --suite core --min-tasks 300</code></pre>
     </section>
 
     <section>
-      <p class="eyebrow">What happens during GPT-4.1 vs Ollama</p>
-      <h2>Both models get the same task. The harness measures the resulting Workspace.</h2>
+      <p class="eyebrow">What happens during a model comparison</p>
+      <h2>Every model gets the same tasks. The harness measures the resulting Workspace.</h2>
       <div class="two-col">
         <div class="panel">
           <h3>Command</h3>
-          <pre><code>uv run --extra dev workspace-bench compare-models \
-  --models openai-gpt-4.1 ollama-gpt-oss-20b \
-  --difficulty all \
+          <pre><code>uv run workspace-bench \
+  --model openai:gpt-4.1-mini \
+  --model ollama:qwen3:8b \
+  --suite core \
   --timeout 240</code></pre>
         </div>
         <div class="panel">
@@ -888,7 +889,7 @@
             <li><span class="tick">A</span><span><code>comparison.json</code>: machine-readable summary across models.</span></li>
             <li><span class="tick">B</span><span><code>analysis.md</code>: human-readable report with task issues and process failures separated.</span></li>
             <li><span class="tick">C</span><span><code>chart.svg</code> and <code>chart.png</code>: model performance chart.</span></li>
-            <li><span class="tick">D</span><span>Per-scenario folders with conversations, responses, and tool calls.</span></li>
+            <li><span class="tick">D</span><span>Per-task folders with conversations, responses, and tool calls.</span></li>
           </ul>
         </div>
       </div>
@@ -924,22 +925,21 @@
       <p class="eyebrow">Repository map</p>
       <h2>Where the pieces live.</h2>
       <div class="repo-list">
-        <div class="repo-row"><code>src/workspace_bench/cli.py</code><span>Command-line entry point. Routes commands like <code>validate</code>, <code>compare-models</code>, <code>export-sft</code>, and <code>run-agent-command</code>.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/core/</code><span>The benchmark source of truth: scenario dataclasses, bundled tasks, episode stepping, runner, and deterministic graders.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/cli.py</code><span>Command-line entry point. Routes commands like <code>validate</code>, <code>export-sft</code>, and <code>run-agent-command</code>; bare flags route straight to the evaluator.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/core/</code><span>The benchmark source of truth: task dataclasses, bundled tasks, episode stepping, runner, release checks, and deterministic graders.</span></div>
         <div class="repo-row"><code>src/workspace_bench/workspace/</code><span>Deterministic Workspace MCP-like state machine, fixture backends, and live MCP smoke bridge.</span></div>
         <div class="repo-row"><code>src/workspace_bench/agents/</code><span>Oracle/noop agents, JSONL command protocol, and model adapter helper prompts.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/reports/</code><span>Interactive GPT-4.1 vs Ollama comparison runner, reliability metrics, chart writer, and analysis report generator.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/reports/</code><span>The interactive model evaluator behind <code>workspace-bench --model ...</code>, reliability metrics, chart writer, and analysis report generator.</span></div>
         <div class="repo-row"><code>src/workspace_bench/exports/</code><span>Rollout, SFT, and preference-pair export helpers.</span></div>
         <div class="repo-row"><code>src/workspace_bench/rl/</code><span>Gym-style environment wrapper for RL loops.</span></div>
-        <div class="repo-row"><code>src/workspace_bench/core/scenario_packs/</code><span>The bundled collections: <code>workspace-bench-v1</code> (core, 300) and <code>workspace-bench-v2-build-openbb-apps</code> (212).</span></div>
-        <div class="repo-row"><code>src/workspace_bench/core/scenario_packs/</code><span>Packaged scenario releases; <code>core</code> and <code>all</code> are CLI aliases for v1.</span></div>
+        <div class="repo-row"><code>src/workspace_bench/core/task_suites/</code><span>The bundled suites: <code>workspace-bench-v1</code> (core, 300) and <code>workspace-bench-v2-build-openbb-apps</code> (212).</span></div>
         <div class="repo-row"><code>src/workspace_bench/workspace/data/</code><span>Packaged fixture metadata such as the Stark widget and app catalog.</span></div>
         <div class="repo-row"><code>src/workspace_bench/__init__.py</code><span>Small public convenience surface for the most common objects.</span></div>
       </div>
     </section>
 
     <section>
-      <p class="eyebrow">Scenario metadata</p>
+      <p class="eyebrow">Task metadata</p>
       <h2>Tasks are sliced by action and by workflow.</h2>
       <div class="four-col">
         <article class="panel teal">
@@ -962,14 +962,14 @@
     </section>
 
     <section>
-      <p class="eyebrow">Scenario levels</p>
-      <h2>The tasks get harder by requiring more Workspace skill.</h2>
+      <p class="eyebrow">Task categories</p>
+      <h2>Every task carries a category (workflow kind) and a level (t0-t4 difficulty).</h2>
       <div class="level-grid">
-        <div class="level"><strong>L0</strong><p>Inspect existing state and produce a useful note or answer.</p></div>
-        <div class="level"><strong>L1</strong><p>Create, update, read, or resize a single widget.</p></div>
-        <div class="level"><strong>L2</strong><p>Build multi-widget dashboards from analyst requirements.</p></div>
-        <div class="level"><strong>L3</strong><p>Use app templates, tabs, parameter groups, generated takeaways, skills, or delegation.</p></div>
-        <div class="level"><strong>L4</strong><p>Repair bad Workspace state, wrong tickers, layout overlap, or bad metadata assumptions.</p></div>
+        <div class="level"><strong>read</strong><p>Inspect existing state and produce a useful note or answer.</p></div>
+        <div class="level"><strong>single-widget</strong><p>Create, update, read, or resize a single widget.</p></div>
+        <div class="level"><strong>dashboard</strong><p>Build multi-widget dashboards from analyst requirements.</p></div>
+        <div class="level"><strong>platform</strong><p>Use app templates, tabs, parameter groups, generated takeaways, skills, or delegation.</p></div>
+        <div class="level"><strong>repair</strong><p>Repair bad Workspace state, wrong tickers, layout overlap, or bad metadata assumptions.</p></div>
       </div>
     </section>
 
@@ -979,7 +979,7 @@
       <div class="four-col">
         <article class="panel teal">
           <h3>1. Evaluate</h3>
-          <p>Run agents on deterministic scenarios. Store final snapshots, traces, grades, and model metadata.</p>
+          <p>Run agents on deterministic tasks. Store final snapshots, traces, grades, and model metadata.</p>
         </article>
         <article class="panel gold">
           <h3>2. Export</h3>
@@ -1001,22 +1001,22 @@
       <h2>Terms in plain English.</h2>
       <div class="two-col">
         <div class="panel">
-          <h3>Scenario</h3>
-          <p>One task the agent must solve.</p>
+          <h3>Task</h3>
+          <p>One unit of work the agent must solve.</p>
           <h3>Fixture</h3>
           <p>Deterministic backend data, such as equities, macro, or portfolio data.</p>
           <h3>Oracle</h3>
-          <p>A reference tool-call trace that should pass the scenario.</p>
+          <p>A reference tool-call trace that should pass the task.</p>
           <h3>Noop</h3>
-          <p>A deliberately weak baseline that should fail every scenario.</p>
+          <p>A deliberately weak baseline that should fail every task.</p>
         </div>
         <div class="panel">
           <h3>pass@k</h3>
-          <p>A scenario counts as passed if at least one of k repeated attempts passes.</p>
+          <p>A task counts as passed if at least one of k repeated attempts passes.</p>
           <h3>pass^k</h3>
-          <p>A scenario counts as passed only if all k repeated attempts pass.</p>
-          <h3>Task pack</h3>
-          <p>A directory of scenarios, optionally with <code>task_pack.json</code> metadata. Bundled pack aliases include <code>core</code> and <code>all</code>.</p>
+          <p>A task counts as passed only if all k repeated attempts pass.</p>
+          <h3>Task suite</h3>
+          <p>A directory of tasks, optionally with <code>task_suite.json</code> metadata. Bundled suites: <code>core</code> and <code>build-openbb-apps</code>.</p>
           <h3>Gym env</h3>
           <p>A reset/step/render wrapper around the same benchmark episode and grader.</p>
         </div>
@@ -1030,9 +1030,9 @@
 
   <script>
     const nodeDetails = {
-      scenario: {
-        title: "Scenario",
-        body: "A scenario is the unit of work. It says what the analyst wants, what Workspace starts with, which tools the model may call, and what final state counts as success. Metadata separates capability from workflow, domain, and subdomain."
+      task: {
+        title: "Task",
+        body: "A task is the unit of work. It says what the analyst wants, what Workspace starts with, which tools the model may call, and what final state counts as success. Metadata separates capability from workflow, domain, and subdomain."
       },
       agent: {
         title: "Agent",
@@ -1059,27 +1059,27 @@
         body: "The Gym-style adapter exposes reset, step, render, and close. It uses the same episode and grader, so RL does not fork the benchmark logic."
       },
       private: {
-        title: "Private Packs",
-        body: "Private packs are scenario directories. A task_pack.json can define release metadata, default split, and hidden visibility with prompt redaction."
+        title: "Private Suites",
+        body: "Private suites are task directories. A task_suite.json can define release metadata, default split, and hidden visibility with prompt redaction."
       }
     };
 
     const commands = {
       validate: {
         title: "Validate the benchmark",
-        code: "uv run --extra dev workspace-bench validate --pack all --min-scenarios 40"
+        code: "uv run workspace-bench validate --suite core --min-tasks 300"
       },
       compare: {
-        title: "Compare GPT-4.1 vs Ollama",
-        code: "uv run --extra dev workspace-bench compare-models \\\n  --models openai-gpt-4.1 ollama-gpt-oss-20b \\\n  --pack all \\\n  --difficulty all \\\n  --timeout 240"
+        title: "Compare models",
+        code: "uv run workspace-bench \\\n  --model openai:gpt-4.1-mini \\\n  --model ollama:qwen3:8b \\\n  --suite core \\\n  --timeout 240"
       },
       agent: {
         title: "Run a JSONL agent command",
-        code: "uv run --extra dev workspace-bench run-agent-command \\\n  --scenario l1_add_price_widget \\\n  --agent-command \"python -m workspace_bench.examples.jsonl_rule_agent\" \\\n  --json"
+        code: "uv run workspace-bench run-agent-command \\\n  --task gen_t0_create_price_performance_aapl \\\n  --agent-command \"python -m workspace_bench.examples.jsonl_rule_agent\" \\\n  --json"
       },
       export: {
         title: "Export SFT data",
-        code: "uv run --extra dev workspace-bench export-sft \\\n  --oracle \\\n  --scenario l1_add_price_widget \\\n  --format openai_messages \\\n  --output runs/exports/oracle-sft.jsonl"
+        code: "uv run workspace-bench export-sft \\\n  --oracle \\\n  --task gen_t0_create_price_performance_aapl \\\n  --format openai_messages \\\n  --output runs/exports/oracle-sft.jsonl"
       },
       gym: {
         title: "Use the Gym-style environment",

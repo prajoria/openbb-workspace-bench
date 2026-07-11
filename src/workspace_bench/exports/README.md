@@ -17,7 +17,7 @@ Use this package when you need to:
 Module responsibilities:
 
 - `schema.py`: canonical rollout and preference schema constants.
-- `metadata.py`: benchmark release, export timestamp, and task-pack annotations.
+- `metadata.py`: benchmark release, export timestamp, and task-suite annotations.
 - `loaders.py`: oracle, comparison-directory, trace-directory, and replay loaders.
 - `rollouts.py`: canonical rollout JSONL writer.
 - `sft.py`: SFT format conversion and JSONL writer.

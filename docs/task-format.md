@@ -2,8 +2,8 @@
 
 Tasks are JSON files bundled under `src/workspace_bench/core/task_suites`.
 
-The bundled `workspace-bench-v1` pack uses this same format as private task
-packs loaded through `--task-dir`.
+The bundled suites use this same format as private task suites loaded
+through `--task-dir`.
 
 ## Minimal Shape
 
@@ -84,12 +84,13 @@ uv run workspace-bench export-task \
 
 The task envelope includes prompt, metadata, fixtures, initial state, allowed tools, limits, and the JSONL tool-call protocol. It excludes `success` and `oracle_tool_calls`.
 
-## Built-In Packs
+## Built-In Suites
 
 Use `--suite` to select bundled tasks:
 
-- `core`: backward-compatible alias for the unified `workspace-bench-v1` pack.
-- `all`: backward-compatible alias for the same unified pack.
+- `core`: the `workspace-bench-v1` operating suite (300 tasks).
+- `build-openbb-apps`: the `workspace-bench-v2-build-openbb-apps` app-building
+  suite (212 tasks).
 
 ## Fixtures
 

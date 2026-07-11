@@ -2,7 +2,7 @@
 
 `workspace_bench.rl` exposes the benchmark through a Gym-style interface.
 
-The RL adapter does not replace the benchmark core. It wraps the same scenario
+The RL adapter does not replace the benchmark core. It wraps the same task
 loader, `WorkspaceEpisode`, simulator, and deterministic grader used by normal
 eval runs.
 

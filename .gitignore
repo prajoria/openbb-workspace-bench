@@ -16,3 +16,4 @@ runs/*
 !runs/exports/
 !runs/reports/
 .DS_Store
+.coverage

@@ -6,12 +6,13 @@ OpenBB Workspace Bench:
 - WAI, [TMax: A Simple Recipe for Terminal Agents](https://wai-org.com/blog/tmax/), published June 16, 2026.
 - Prime Intellect, [General Agent: A Self-Evolving, Synthetic Agent Environment](https://www.primeintellect.ai/blog/general-agent?dark=).
 
-It also uses the current Workspace Bench repository state as evidence. At the
-time this memo was written, `workspace-bench validate --suite all
---min-tasks 40 --json` passed with 40 tasks, 40 oracle passes, and 40
-noop failures. The manifest reports 11 capabilities, 12 workflows, 9
-subdomains, 5 levels, and one top-level domain: finance. All bundled tasks
-are currently in the `dev` split.
+It also uses the Workspace Bench repository state as evidence. At the time
+this memo was written, the benchmark held 40 certified tasks (40 oracle
+passes, 40 noop failures), with 11 capabilities, 12 workflows, 9 subdomains,
+5 levels, one top-level domain (finance), and every bundled task in the
+`dev` split. The repository has since grown to two certified suites totaling
+512 tasks with train/validation/test splits; the analysis below is kept as
+the design memo that motivated that expansion.
 
 ## Executive View
 

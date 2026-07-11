@@ -9,7 +9,7 @@ fixture backends — and `build-openbb-apps`
 (`workspace-bench-v2-build-openbb-apps`) — 212 generated, certified tasks
 for *building* custom backend apps: the agent writes the `widgets.json` /
 `apps.json` payloads a backend serves, validated against the transcribed
-production rules. `all` remains a backward-compatible CLI alias for `core`.
+production rules.
 
 ```mermaid
 flowchart LR

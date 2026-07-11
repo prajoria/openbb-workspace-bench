@@ -14,7 +14,7 @@ and RL adapter.
 6. Run:
 
 ```bash
-uv run workspace-bench validate --suite all --min-tasks 300
+uv run workspace-bench validate --suite core --min-tasks 300
 ```
 
 For private tasks, put JSON files in a separate directory and use
@@ -49,7 +49,7 @@ Your adapter should read:
 - `WORKSPACE_BENCH_TASK_JSON`
 - `WORKSPACE_BENCH_OUTPUT_JSONL`
 - `WORKSPACE_BENCH_RUN_DIR`
-- `WORKSPACE_BENCH_SCENARIO_ID`
+- `WORKSPACE_BENCH_TASK_ID`
 
 It should write one JSON object per line to `WORKSPACE_BENCH_OUTPUT_JSONL`.
 
@@ -60,7 +60,7 @@ rather than changing the built-in defaults.
 
 1. Keep canonical rollout records unchanged.
 2. Add conversion logic under `workspace_bench.exports`.
-3. Preserve benchmark release, export schema, task, and task-pack metadata.
+3. Preserve benchmark release, export schema, task, and task-suite metadata.
 4. Add tests in `tests/test_exports.py`.
 5. Document the new format in `docs/result-schema.md` or
    `docs/training-recipes.md`.
@@ -82,11 +82,14 @@ Do not duplicate simulator or grader logic inside the RL package.
 Run before submitting:
 
 ```bash
-uv run --extra dev python -m pytest
-uv run workspace-bench validate --suite all --min-tasks 300
+uv run --extra dev ruff check src tests scripts examples
+uv run --extra dev mypy src/workspace_bench
+uv run --extra dev pytest
+uv run workspace-bench validate --suite core --min-tasks 300
+uv run workspace-bench validate --suite build-openbb-apps --min-tasks 212
 ```
 
-For comparison-runner changes, also run:
+For evaluator changes, also run:
 
 ```bash
 uv run workspace-bench \

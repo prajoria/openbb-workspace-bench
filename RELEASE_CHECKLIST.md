@@ -4,6 +4,8 @@ Use this checklist before announcing a public Workspace Bench release.
 
 ## Required
 
+- [ ] `uv run --extra dev ruff check src tests scripts examples` passes.
+- [ ] `uv run --extra dev mypy src/workspace_bench` passes.
 - [ ] `uv run --extra dev pytest` passes.
 - [ ] `uv run workspace-bench validate --suite core --min-tasks 300` passes with release checks green.
 - [ ] `uv run workspace-bench validate --suite build-openbb-apps --min-tasks 212` passes with release checks green.
@@ -16,7 +18,7 @@ Use this checklist before announcing a public Workspace Bench release.
 - [ ] Task counts: exactly 300 in `core`, exactly 212 in `build-openbb-apps` (512 total).
 - [ ] `core` split counts are 180 train, 60 validation, and 60 test.
 - [ ] Novelty fingerprints and task ids are unique in both suites.
-- [ ] Coverage quotas pass in both suites (core: backend, difficulty, widget-pair, L2 dashboard, grader-check quotas; build-openbb-apps: widget-type/param-type ownership, difficulty bands, per-level graded-check caps).
+- [ ] Coverage quotas pass in both suites via `validate` (core: backend, difficulty, widget-pair, dashboard-category, grader-check quotas; build-openbb-apps: widget-type/param-type ownership, difficulty bands, per-level graded-check caps).
 - [ ] The build-openbb-apps official gating curve (gpt-4.1-mini, one fresh end-to-end run) is strictly decreasing with no tied levels.
 - [ ] Published runs under `runs/comparison/` are single clean end-to-end runs — no `summary.patched` field in any result file.
 - [ ] `runs/reports/suites.json` is compiled from the published run directories (`core-*`, `build-*`).

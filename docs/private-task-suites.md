@@ -1,6 +1,6 @@
 # Private Task Suites
 
-Workspace Bench is designed to be useful both as a public benchmark and as a private evaluation harness. A private task suite is a directory of task JSON files using the same schema as the bundled `workspace-bench-v1` pack.
+Workspace Bench is designed to be useful both as a public benchmark and as a private evaluation harness. A private task suite is a directory of task JSON files using the same schema as the bundled suites.
 
 ## Directory Shape
 
@@ -12,7 +12,7 @@ my-workspace-tasks/
   macro_rates_briefing.json
 ```
 
-Run the pack:
+Run the suite:
 
 ```bash
 uv run workspace-bench validate --task-dir ./my-workspace-tasks
@@ -25,7 +25,7 @@ uv run workspace-bench run-agent-command \
 
 ## Custom Data
 
-Bundled tasks use deterministic in-package fixture backends. Private packs can use the same fixture names or point fixtures at URLs that represent internal Workspace backends:
+Bundled tasks use deterministic in-package fixture backends. Private suites can use the same fixture names or point fixtures at URLs that represent internal Workspace backends:
 
 ```json
 {
@@ -43,13 +43,15 @@ Bundled tasks use deterministic in-package fixture backends. Private packs can u
 
 For public benchmark submissions, keep data deterministic and versioned. For private regression testing, the same task format can wrap proprietary backend data as long as the grader expectations are stable.
 
-## From Pack to Suite
+## From Directory to Suite
 
-A private pack becomes a **suite** the moment you report it as one. Three steps:
+A private task directory becomes a **suite** the moment you report it as one.
+Three steps:
 
 ```bash
-# 1. certify it the same way the bundled suites are certified:
-#    the reference solution must pass, a do-nothing agent must fail
+# 1. certify it with the universal gates: the reference solution must pass,
+#    a do-nothing agent must fail (the bundled suites additionally hold
+#    generation-time coverage quotas that do not apply to private suites)
 uv run workspace-bench validate --task-dir ./my-workspace-tasks
 
 # 2. run your models over it (one run directory per model)
@@ -93,9 +95,9 @@ When an agent is evaluated with `run-agent-command`, it receives a public task e
 
 This keeps the agent-facing prompt and metadata separate from the evaluator-facing answer key.
 
-## Hidden Packs
+## Hidden Suites
 
-Add `task_suite.json` when a pack needs release metadata or redaction behavior:
+Add `task_suite.json` when a suite needs release metadata or redaction behavior:
 
 ```json
 {
@@ -107,6 +109,6 @@ Add `task_suite.json` when a pack needs release metadata or redaction behavior:
 }
 ```
 
-For `visibility: "hidden"`, manifests and reports mark the pack as redacted.
+For `visibility: "hidden"`, manifests and reports mark the suite as redacted.
 Trace artifacts written with `--trace-dir` keep task ids, scores, tool
 calls, tool results, and final snapshots, but omit the task prompt.

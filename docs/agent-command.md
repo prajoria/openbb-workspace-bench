@@ -185,7 +185,7 @@ Environment variables:
 | `WORKSPACE_BENCH_TASK_JSON` | Absolute path to the task envelope JSON. |
 | `WORKSPACE_BENCH_OUTPUT_JSONL` | Absolute path where the agent must write tool calls. |
 | `WORKSPACE_BENCH_RUN_DIR` | Absolute path to the task run directory. |
-| `WORKSPACE_BENCH_SCENARIO_ID` | Task id being evaluated. |
+| `WORKSPACE_BENCH_TASK_ID` | Task id being evaluated. |
 
 The command runs from the caller's current working directory. Use `WORKSPACE_BENCH_RUN_DIR` for per-run scratch files and `WORKSPACE_BENCH_OUTPUT_JSONL` for the evaluated tool-call output.
 

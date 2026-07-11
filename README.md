@@ -9,12 +9,12 @@ The benchmark asks a simple question: can an agent inspect, build, update, and r
 
 Motivation: a [NY Tech Week talk](https://youtu.be/7fDTDYh2NJ4?t=1210) showed agents driving real financial work in OpenBB Workspace over MCP, on the [Stark Industries demo](https://github.com/DidierRLopes/stark-industries-demo). A demo shows work can happen once; this benchmark measures how reliably agents actually drive it. The Stark demo is also where the enterprise tasks come from.
 
-Two suites ship bundled: `core` (operating the workspace, 300 tasks) and `build-openbb-apps` (building custom backend apps, 212 tasks). `all` is a backward-compatible CLI alias for `core`.
+Two suites ship bundled: `core` (operating the workspace, 300 tasks) and `build-openbb-apps` (building custom backend apps, 212 tasks).
 
 ## What Is Included
 
 - two task suites, 512 deterministic tasks total:
-  - `core` — the operating suite: 300 tasks, 15 tool-anchored families x 5 levels (t0-t4) x 4, stratified 180/60/60 train/validation/test splits
+  - `core` — the operating suite: 300 tasks, 15 tool-anchored families x 5 levels (t0-t4) x 4, deterministic 180/60/60 train/validation/test splits
   - `build-openbb-apps` — the app-building suite: 212 tasks where the agent writes valid `widgets.json` / `apps.json` payloads for custom backends (10 families x t0-t4 x 4 + a 12-task e2e capstone)
 - generated families covering widgets, apps, prompts, resources, skills, delegation, inspection, repair, layout, and backend/app building
 - six committed model baselines with full traces and rollout exports
@@ -166,7 +166,7 @@ Compare only one difficulty slice:
 
 ```bash
 uv run workspace-bench \
-  --suite all \
+  --suite core \
   --difficulty easy \
   --timeout 240
 ```
@@ -175,8 +175,7 @@ Run repeated attempts for a more stable comparison:
 
 ```bash
 uv run workspace-bench \
-  --suite all \
-  --difficulty all \
+  --suite core \
   --repeats 3 \
   --metric pass-at-k \
   --timeout 240
@@ -209,8 +208,7 @@ Run models from a JSON adapter config:
 ```bash
 uv run workspace-bench \
   --models-file examples/models.example.json \
-  --suite all \
-  --difficulty all \
+  --suite core \
   --timeout 240
 ```
 
@@ -229,10 +227,9 @@ single-shot JSONL adapter behavior. Transient model API failures such as HTTP
 520 are retried by default; tune this with `--model-retries` and
 `--retry-backoff`.
 
-Use `--suite core|build-openbb-apps` for the bundled suites (`--suite`
-is a synonym, `all` an alias for `core`), `--task-dir`
+Use `--suite core|build-openbb-apps` for the bundled suites, `--task-dir`
 for a private task suite, and `--split train|validation|test` to select a
-release slice. Private packs may also use `dev`. You can also slice with `--capability`, `--workflow`,
+release slice. Private suites may also use `dev`. You can also slice with `--capability`, `--workflow`,
 `--domain`, and `--subdomain`.
 
 Export a task envelope without running an agent:
@@ -258,7 +255,7 @@ uv run workspace-bench export-sft \
   --output runs/exports/oracle-sft.jsonl
 ```
 
-You can also export from a the evaluator output directory with
+You can also export from an evaluator output directory with
 `--comparison-dir runs/comparison/<run-id>`. SFT export includes only passing
 attempts by default; add `--include-failures` to keep failed attempts with grade
 metadata.
@@ -279,7 +276,7 @@ be added independently and reported separately or in aggregate. Bundled today:
 | `build-openbb-apps` | 212 | building for the workspace (writing the `widgets.json` / `apps.json` a backend serves) |
 
 ```bash
-# run or validate one suite (--suite is an alias of --suite)
+# run or validate one suite
 uv run workspace-bench validate --suite build-openbb-apps --min-tasks 212
 uv run workspace-bench --models-file examples/models.example.json --suite build-openbb-apps
 ```
@@ -296,7 +293,7 @@ added across suites, never averaged percentages. Point the report at one
 run directory per model per suite:
 
 ```bash
-# each the evaluator invocation writes one run directory per model
+# each evaluator invocation writes one run directory per model
 uv run python scripts/compile_suites_report.py \
   --run core=runs/comparison/core-gpt-4.1-mini \
   --run build-openbb-apps=runs/comparison/build-gpt-4.1-mini \
@@ -308,7 +305,7 @@ data and workflows that matter to it — its workspace skills, macro workflows,
 client advisory, research, or trading flows — using the same task schema,
 certification gates, and reporting. The suite name in `--run name=dir` is
 free-form, so a private suite joins the aggregate just by naming itself.
-See [docs/private-task-packs.md](docs/private-task-packs.md) for the private path.
+See [docs/private-task-suites.md](docs/private-task-suites.md) for the private path.
 
 ## Private Task Suites
 
@@ -324,7 +321,7 @@ uv run workspace-bench run-agent-command \
 
 Private task suites use the same task schema as the bundled benchmark. This is the main BYO-data path: teams can point tasks at deterministic internal Workspace backends and keep graders local.
 
-See [docs/private-task-packs.md](docs/private-task-packs.md).
+See [docs/private-task-suites.md](docs/private-task-suites.md).
 
 ## Live Workspace MCP Smoke
 
@@ -348,7 +345,7 @@ Check the broader live MCP surface against a workflow task:
 ```bash
 uv run --extra live workspace-bench smoke-workspace-mcp \
   --url http://127.0.0.1:8787 \
-  --suite all \
+  --suite core \
   --task gen_t0_skill_finance_earnings_prep \
   --check-surface \
   --json
@@ -490,14 +487,16 @@ docs/
   architecture.md
   benchmark-card.md
   contributing.md
-  private-task-packs.md
+  private-task-suites.md
+  repo-explainer.html    Visual repo walkthrough
   result-schema.md
   research-tmax-general-agent.md
   rl-factory-adapter.md
   roadmap.md
   task-format.md
   task-catalog.md      All 512 tasks (both suites), documented
-  tool-coverage-matrix.md  Per-test x per-tool requirement matrix
+  tool-coverage-matrix.md  Per-task x per-tool requirement matrix
+  tool-matrix-data.json    Data behind the tool matrix
   training-recipes.md
 scripts/
   generate_gen_pack.py     Core suite generator (families x levels)
