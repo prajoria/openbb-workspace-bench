@@ -51,18 +51,13 @@ CAPABILITY = {
 }
 
 # Widget-type / param-type ownership per family (asserted at certification):
-# every owned key must appear in that family's built artifacts.
-TYPE_OWNERSHIP = {
-    "types": {"markdown", "metric", "pdf", "html", "iframe", "youtube",
-              "newsfeed", "multi_file_viewer"},
-    "aggrid": {"table", "ssrm_table"},
-    "charts": {"chart", "chart-highcharts", "chart-vegalite"},
-    "advanced": {"advanced_charting", "live_grid", "omni"},
-}
-PARAM_OWNERSHIP = {
-    "params": {"text", "date", "ticker", "number", "boolean", "endpoint", "tabs"},
-    "forms": {"form", "button"},
-}
+# every owned key must appear in that family's built artifacts. The maps live
+# in the package so `workspace-bench validate` re-verifies the same gate on
+# the shipped suite.
+from workspace_bench.core.suite_checks import (  # noqa: E402, F401 - re-exported
+    BUILD_PARAM_OWNERSHIP as PARAM_OWNERSHIP,
+    BUILD_TYPE_OWNERSHIP as TYPE_OWNERSHIP,
+)
 
 SCENARIOS: list[dict] = []
 CELL_COUNTS: dict[tuple[str, str], int] = defaultdict(int)

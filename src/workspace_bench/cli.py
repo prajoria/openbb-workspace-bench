@@ -6,7 +6,6 @@ import argparse
 import asyncio
 import json
 import sys
-from collections import Counter
 from dataclasses import asdict
 from pathlib import Path
 
@@ -22,13 +21,13 @@ from workspace_bench.core.models import (
     BENCHMARK_RELEASE_ID,
     BENCHMARK_VERSION,
     CANARY_GUID,
+    JsonDict,
     RunResult,
     Task,
     TaskSuiteManifest,
     VALID_TASK_SPLITS,
 )
 from workspace_bench.core.runner import (
-    BUILTIN_TASK_SUITES,
     BUILTIN_TASK_SUITE_ORDER,
     TaskRunner,
     find_task,
@@ -38,13 +37,14 @@ from workspace_bench.core.runner import (
     load_task_file,
     load_task_suite_manifest,
 )
+from workspace_bench.core.suite_checks import release_checks_for_suite
 
 
 def main(argv: list[str] | None = None) -> int:
     raw_argv = list(sys.argv[1:] if argv is None else argv)
     # Evaluating IS the tool's function, so it takes no subcommand:
     # `workspace-bench --model openai:gpt-4.1-mini --task <id>` (or
-    # --models-file / --collection / any runner flag) routes straight to the
+    # --models-file / --suite / any runner flag) routes straight to the
     # interactive runner. Bare `workspace-bench` prints the help below.
     if raw_argv and raw_argv[0].startswith("-") and raw_argv[0] not in ("-h", "--help"):
         from workspace_bench.reports.model_compare import main as compare_models_main
@@ -119,7 +119,7 @@ def main(argv: list[str] | None = None) -> int:
         "--suite",
         default="core",
         choices=list(BUILTIN_TASK_SUITE_ORDER),
-        help="Bundled task pack used to resolve --task; core/all are aliases for workspace-bench-v1.",
+        help="Bundled task suite used to resolve --task.",
     )
     smoke_parser.add_argument("--task", default="gen_t0_create_price_performance_aapl")
     smoke_parser.add_argument("--agent", default="oracle", choices=["oracle", "noop"])
@@ -254,7 +254,7 @@ def _add_task_collection_args(parser: argparse.ArgumentParser) -> None:
     )
     parser.add_argument(
         "--task-dir",
-        help="Directory of task JSON files. Overrides --pack.",
+        help="Directory of task JSON files. Overrides --suite.",
     )
 
 
@@ -322,7 +322,11 @@ def _cmd_show(args: argparse.Namespace) -> int:
 
 def _cmd_validate(args: argparse.Namespace) -> int:
     tasks = _filtered_tasks(args)
-    validation = validate_tasks(tasks, min_tasks=args.min_tasks)
+    validation = validate_tasks(
+        tasks,
+        min_tasks=args.min_tasks,
+        release_profile=_release_profile(args),
+    )
     if args.json:
         print(json.dumps(validation, indent=2, sort_keys=True))
     else:
@@ -358,7 +362,11 @@ def _cmd_manifest(args: argparse.Namespace) -> int:
 
 def _cmd_report(args: argparse.Namespace) -> int:
     tasks = _task_collection(args)
-    report = build_report(tasks, _task_suite_manifest(args))
+    report = build_report(
+        tasks,
+        _task_suite_manifest(args),
+        release_profile=_release_profile(args),
+    )
     rendered = (
         json.dumps(report, indent=2, sort_keys=True)
         if args.json
@@ -412,6 +420,7 @@ def build_manifest(
 def build_report(
     tasks: list[Task],
     task_suite: TaskSuiteManifest | None = None,
+    release_profile: str | None = None,
 ) -> dict:
     """Run built-in baselines and return a release-style report payload."""
 
@@ -422,7 +431,9 @@ def build_report(
         "oracle_all_pass": all(result.grade.passed for result in oracle_results),
         "noop_all_fail": all(not result.grade.passed for result in noop_results),
     }
-    release_checks.update(_release_checks(tasks))
+    release_checks.update(
+        release_checks_for_suite(release_profile, tasks, oracle_results)
+    )
     return {
         "manifest": build_manifest(tasks, task_suite),
         "baselines": {
@@ -584,7 +595,7 @@ def _cmd_run_agent_command(args: argparse.Namespace) -> int:
 def _cmd_smoke_workspace_mcp(args: argparse.Namespace) -> int:
     from workspace_bench.workspace.live_mcp import run_workspace_mcp_smoke
 
-    task = find_task(args.task, pack=args.suite)
+    task = find_task(args.task, suite=args.suite)
     try:
         result = asyncio.run(
             run_workspace_mcp_smoke(
@@ -629,8 +640,8 @@ def _cmd_smoke_workspace_mcp(args: argparse.Namespace) -> int:
         print(f"MCP_TOOLS\t{len(result.mcp_tools)}")
         print(f"MCP_PROMPTS\t{len(result.mcp_prompts)}")
         print(f"MCP_RESOURCES\t{len(result.mcp_resources)}")
-        for issue in result.surface_issues:
-            print(f"  - surface: {issue}")
+        for surface_issue in result.surface_issues:
+            print(f"  - surface: {surface_issue}")
         print(f"BRIDGE_COMMANDS\t{','.join(result.bridge_commands)}")
         print(
             "HEALTH\t"
@@ -716,8 +727,17 @@ def _render_markdown_report(report: dict) -> str:
     return "\n".join(lines)
 
 
-def validate_tasks(tasks: list[Task], min_tasks: int = 1) -> dict:
-    """Validate task loadability, metadata, oracle pass, and noop failure."""
+def validate_tasks(
+    tasks: list[Task],
+    min_tasks: int = 1,
+    release_profile: str | None = None,
+) -> dict:
+    """Validate task loadability, metadata, oracle pass, and noop failure.
+
+    ``release_profile`` names a bundled suite whose coverage quotas should
+    also be enforced; private task directories pass ``None`` and are only
+    held to the universal gates.
+    """
 
     runner = TaskRunner()
     oracle_results = [runner.run(task, "oracle") for task in tasks]
@@ -733,7 +753,7 @@ def validate_tasks(tasks: list[Task], min_tasks: int = 1) -> dict:
         issues.append(
             {
                 "task_id": task_id,
-                "message": "task id must be unique within the selected pack",
+                "message": "task id must be unique within the selected suite",
             }
         )
     if len(tasks) < min_tasks:
@@ -746,9 +766,7 @@ def validate_tasks(tasks: list[Task], min_tasks: int = 1) -> dict:
                 ),
             }
         )
-    release_checks = (
-        _release_checks(tasks) if min_tasks >= 300 or len(tasks) >= 300 else {}
-    )
+    release_checks = release_checks_for_suite(release_profile, tasks, oracle_results)
     for check_name, passed in release_checks.items():
         if not passed:
             issues.append(
@@ -786,98 +804,34 @@ def validate_tasks(tasks: list[Task], min_tasks: int = 1) -> dict:
     }
 
 
-def _release_checks(tasks: list[Task]) -> dict[str, bool]:
-    total = len(tasks)
-    categories = Counter(task.category for task in tasks)
-    difficulties = Counter(task.difficulty for task in tasks)
-    backends = Counter(
-        backend for task in tasks for backend in _task_backend_slugs(task)
+def _release_profile(args: argparse.Namespace) -> str | None:
+    """Resolve which bundled suite's release quotas apply, if any.
+
+    Quotas hold for a full bundled suite only: a private ``--task-dir`` suite
+    or a filtered slice is validated for the universal gates alone.
+    """
+
+    if getattr(args, "task_dir", None):
+        return None
+    if _filters_active(args):
+        return None
+    return getattr(args, "suite", "core")
+
+
+def _filters_active(args: argparse.Namespace) -> bool:
+    return any(
+        [
+            getattr(args, "level", None),
+            getattr(args, "category", None),
+            getattr(args, "capability", None),
+            getattr(args, "workflow", None),
+            getattr(args, "domain", None),
+            getattr(args, "subdomain", None),
+            getattr(args, "difficulty", None),
+            getattr(args, "split", None),
+            getattr(args, "tag", []),
+        ]
     )
-    widget_pairs = {
-        (required.origin, required.widget_id)
-        for task in tasks
-        for required in task.success.required_widgets
-        if required.min_count > 0
-    }
-    checks = _release_check_type_counts(tasks)
-    novelty = [task.novelty for task in tasks]
-    return {
-        "task_count_at_least_300": total >= 300,
-        "fingerprint_unique": len(set(novelty)) == total and all(novelty),
-        "quota_dashboard_construction": categories["dashboard"] >= total * 0.15,
-        "quota_backend_equities": backends["equities"] >= total * 0.15,
-        "quota_backend_macro": backends["macro"] >= total * 0.15,
-        "quota_backend_portfolio": backends["portfolio"] >= total * 0.15,
-        "quota_backend_stark_enterprise": backends["stark-enterprise"] >= total * 0.15,
-        "quota_difficulty_bands": (
-            abs(difficulties["easy"] - total * 0.30) <= total * 0.05
-            and abs(difficulties["medium"] - total * 0.40) <= total * 0.05
-            and abs(difficulties["hard"] - total * 0.30) <= total * 0.05
-        ),
-        "quota_required_widget_pairs": len(widget_pairs) >= 120,
-        "quota_grader_check_types": bool(checks)
-        and all(count >= 10 for count in checks.values()),
-    }
-
-
-def _task_backend_slugs(task: Task) -> set[str]:
-    backends = {_backend_slug(backend.name) for backend in task.fixtures}
-    for call in task.oracle_tool_calls:
-        if call.name == "manage_backends" and call.args.get("operation") == "add":
-            name = call.args.get("name")
-            if isinstance(name, str):
-                backends.add(_backend_slug(name))
-    return backends
-
-
-def _backend_slug(name: str) -> str:
-    return {
-        "equities": "equities",
-        "Bench Equities": "equities",
-        "macro": "macro",
-        "Bench Macro": "macro",
-        "portfolio": "portfolio",
-        "Bench Portfolio": "portfolio",
-        "stark-enterprise": "stark-enterprise",
-        "Bench Stark Enterprise": "stark-enterprise",
-    }.get(name, name)
-
-
-def _release_check_type_counts(tasks: list[Task]) -> Counter:
-    counts: Counter = Counter()
-    for task in tasks:
-        success = task.success
-        if success.required_dashboard_name_contains:
-            counts["dashboard_name"] += 1
-        if success.required_tabs:
-            counts["missing_tab"] += 1
-        for required in success.required_widgets:
-            if required.min_count > 0:
-                counts["missing_widget"] += 1
-            if required.max_count is not None:
-                counts["too_many_widgets"] += 1
-        if success.required_generated_widgets:
-            counts["missing_generated_widget"] += 1
-        if success.required_layouts:
-            counts["layout_mismatch"] += 1
-        if success.required_tool_calls:
-            counts["missing_tool_call"] += 1
-        if success.required_tool_results:
-            counts["missing_tool_result"] += 1
-        if success.required_resource_reads:
-            counts["missing_resource_read"] += 1
-        if success.layout.within_grid:
-            counts["layout_out_of_grid"] += 1
-        if success.layout.no_overlaps:
-            counts["layout_overlap"] += 1
-        counts["too_many_invalid_calls"] += 1
-        if success.trace.must_call_schema_before_create:
-            counts["schema_not_called_before_create"] += 1
-        if success.trace.forbid_invented_widget_ids:
-            counts["unlisted_widget_id"] += 1
-        if success.trace.max_repeated_snapshots is not None:
-            counts["repeated_snapshots"] += 1
-    return counts
 
 
 def _task_metadata_issues(task: Task) -> list[str]:
@@ -1047,12 +1001,12 @@ def _result_summary(result: RunResult) -> dict:
         "workflow": result.task.workflow,
         "domain": result.task.domain,
         "subdomain": result.task.subdomain,
-            "difficulty": result.task.difficulty,
-            "split": result.task.split,
-            "tags": result.task.tags,
-            "novelty": result.task.novelty,
-            "score": result.grade.score,
-            "passed": result.grade.passed,
+        "difficulty": result.task.difficulty,
+        "split": result.task.split,
+        "tags": result.task.tags,
+        "novelty": result.task.novelty,
+        "score": result.grade.score,
+        "passed": result.grade.passed,
         "checks_passed": result.grade.checks_passed,
         "checks_total": result.grade.checks_total,
         "issues": [
@@ -1125,7 +1079,7 @@ def _write_trace_artifacts(
 ) -> None:
     trace_dir.mkdir(parents=True, exist_ok=True)
     for result in results:
-        task_payload = {
+        task_payload: JsonDict = {
             "id": result.task.id,
             "title": result.task.title,
             "level": result.task.level,

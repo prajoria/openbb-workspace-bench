@@ -51,16 +51,15 @@ class TaskRunner:
 def load_builtin_tasks(suite: str = "core") -> list[Task]:
     """Load bundled JSON tasks for a named suite."""
 
-    if suite == "all":
-        return load_builtin_tasks("core")
     try:
         package = BUILTIN_TASK_SUITES[suite]
     except KeyError as error:
         available = ", ".join(BUILTIN_TASK_SUITE_ORDER)
         raise KeyError(f"Unknown built-in task suite {suite!r}. Available: {available}") from error
+    # MultiplexedPath supports glob at runtime; typeshed's Traversable doesn't.
     task_files = sorted(
         path
-        for path in resources.files(package).glob("*.json")
+        for path in resources.files(package).glob("*.json")  # type: ignore[attr-defined]
         if path.name != TASK_SUITE_MANIFEST
     )
     manifest = load_builtin_task_suite_manifest(suite)
@@ -71,8 +70,6 @@ def load_builtin_tasks(suite: str = "core") -> list[Task]:
 def load_builtin_task_suite_manifest(suite: str = "core") -> TaskSuiteManifest | None:
     """Load a bundled task-suite manifest when one exists."""
 
-    if suite == "all":
-        return load_builtin_task_suite_manifest("core")
     package = BUILTIN_TASK_SUITES[suite]
     manifest = resources.files(package) / TASK_SUITE_MANIFEST
     if not manifest.is_file():
@@ -117,8 +114,12 @@ def load_task_directory(path: Path) -> list[Task]:
     ]
 
 
-def find_task(task_id: str, suite: str = "all") -> Task:
-    for task in load_builtin_tasks(suite):
-        if task.id == task_id:
-            return task
+def find_task(task_id: str, suite: str | None = None) -> Task:
+    """Find a bundled task by id, searching every bundled suite by default."""
+
+    suites = (suite,) if suite else BUILTIN_TASK_SUITE_ORDER
+    for name in suites:
+        for task in load_builtin_tasks(name):
+            if task.id == task_id:
+                return task
     raise KeyError(f"Unknown task {task_id!r}")

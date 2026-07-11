@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
 from workspace_bench.cli import main
 from workspace_bench.core.models import CANARY_GUID
@@ -61,8 +60,66 @@ def test_cli_validate_passes_for_builtin_tasks() -> None:
     assert main(["validate", "--min-tasks", "300"]) == 0
 
 
-def test_cli_validate_passes_for_build_suite() -> None:
-    assert main(["validate", "--suite", "build-openbb-apps", "--min-tasks", "212"]) == 0
+def test_cli_validate_passes_for_build_suite(capsys) -> None:
+    exit_code = main(
+        ["validate", "--suite", "build-openbb-apps", "--min-tasks", "212", "--json"]
+    )
+
+    payload = json.loads(capsys.readouterr().out)
+    assert exit_code == 0
+    assert payload["release_checks"], "build suite must carry release quotas"
+    assert payload["release_checks"]["per_level_graded_check_caps"] is True
+    assert payload["release_checks"]["ownership_aggrid_widget_types"] is True
+    assert all(payload["release_checks"].values())
+
+
+def test_cli_validate_skips_bundled_quotas_for_filtered_slices(capsys) -> None:
+    exit_code = main(["validate", "--level", "t0", "--json"])
+
+    payload = json.loads(capsys.readouterr().out)
+    assert exit_code == 0
+    assert payload["release_checks"] == {}
+
+
+def test_find_task_searches_all_bundled_suites() -> None:
+    from workspace_bench.core.runner import find_task
+
+    assert find_task("gen_t0_create_price_performance_aapl").id == (
+        "gen_t0_create_price_performance_aapl"
+    )
+    assert find_task("auth_t2_aggrid_revision_grid").id == (
+        "auth_t2_aggrid_revision_grid"
+    )
+    assert find_task(
+        "auth_t2_aggrid_revision_grid", suite="build-openbb-apps"
+    ).id == "auth_t2_aggrid_revision_grid"
+    try:
+        find_task("auth_t2_aggrid_revision_grid", suite="core")
+    except KeyError:
+        pass
+    else:
+        raise AssertionError("build task must not resolve from the core suite")
+
+
+def test_cli_smoke_workspace_mcp_wires_task_and_suite(monkeypatch) -> None:
+    from workspace_bench.workspace import live_mcp
+
+    async def stub(**kwargs):
+        raise RuntimeError("stubbed live bridge")
+
+    monkeypatch.setattr(live_mcp, "run_workspace_mcp_smoke", stub)
+
+    exit_code = main(
+        [
+            "smoke-workspace-mcp",
+            "--task",
+            "gen_t0_create_price_performance_aapl",
+            "--suite",
+            "core",
+        ]
+    )
+
+    assert exit_code == 2
 
 
 def test_cli_manifest_resolves_core_suite(capsys) -> None:

@@ -157,11 +157,17 @@ def quota_report(tasks: list[dict], partial: bool) -> list[tuple[str, object, st
     difficulties = Counter(task["difficulty"] for task in tasks)
     if not partial:
         report.append(("total tasks", total, "= 212", total == 212))
+        expected_bands = "/".join(
+            str(BUILD_DIFFICULTY_BANDS[band]) for band in ("easy", "medium", "hard")
+        )
         report.append((
             "difficulty easy/medium/hard",
             f"{difficulties['easy']}/{difficulties['medium']}/{difficulties['hard']}",
-            "60/80/72",
-            (difficulties["easy"], difficulties["medium"], difficulties["hard"]) == (60, 80, 72),
+            expected_bands,
+            all(
+                difficulties[band] == count
+                for band, count in BUILD_DIFFICULTY_BANDS.items()
+            ),
         ))
         types = authored_widget_types(tasks)
         report.append((
@@ -246,10 +252,12 @@ def quota_report(tasks: list[dict], partial: bool) -> list[tuple[str, object, st
 # root-cause finding; the discipline is permanent. v3 ladder: t1 grades the
 # widget as a 3-check anchor (skill proven at t0) + the app wrapper fully, so
 # its cap sits just above t0; t3 is focus-widget-full + sibling anchors + app.
-CHECK_CAPS = {"t0": 12, "t1": 20, "t2": 16, "t3": 26, "t4": 30}
-# t1 > t2 cap is intentional: t1 CONTAINS t0 (full widget) plus the app
-# wrapper — containment guarantees t1 <= t0 by construction; t2 is one
-# composed artifact.
+# The caps live in the package so `workspace-bench validate` re-verifies the
+# same gate on the shipped suite.
+from workspace_bench.core.suite_checks import (  # noqa: E402
+    BUILD_CHECK_CAPS as CHECK_CAPS,
+    BUILD_DIFFICULTY_BANDS,
+)
 
 
 def certify(tasks: list[dict]) -> tuple[list[str], dict[str, int]]:
