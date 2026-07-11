@@ -13,6 +13,9 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 PACK_DIR = REPO / "src/workspace_bench/core/scenario_packs/workspace_bench_v1"
+BUILD_PACK_DIR = (
+    REPO / "src/workspace_bench/core/scenario_packs/workspace_bench_v2_build_openbb_apps"
+)
 REPORT = REPO / "runs/reports/benchmark-report.md"
 OUT = REPO / "docs/scenario-catalog.md"
 
@@ -227,8 +230,11 @@ def render_scenario(scenario: dict, pack: str, noop: dict[str, str]) -> str:
 def main() -> None:
     noop = load_noop_scores()
     packs = [(
-        "workspace-bench-v1",
+        "core (workspace-bench-v1)",
         sorted(p for p in PACK_DIR.glob("*.json") if p.name != "task_pack.json"),
+    ), (
+        "build-openbb-apps (workspace-bench-v2-build-openbb-apps)",
+        sorted(p for p in BUILD_PACK_DIR.glob("*.json") if p.name != "task_pack.json"),
     )]
 
     out = [

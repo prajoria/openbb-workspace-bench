@@ -7,6 +7,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Any
 
+from workspace_bench.workspace import backend_validation
 from workspace_bench.workspace.fixtures import FixtureBackend, default_fixture_backends
 from workspace_bench.core.models import FixtureBackendRef, JsonDict, ToolCall
 
@@ -183,11 +184,14 @@ class SimulatedWorkspace:
         self.active_tab_id: str = ""
         self.backends: dict[str, FixtureBackend] = {}
         self.backend_ids_by_name: dict[str, str] = {}
+        self.custom_backends: dict[str, JsonDict] = {}
 
         for backend_ref in backends:
             self.register_backend(backend_ref.name, backend_ref.backend_id, backend_ref.url)
 
         initial_state = initial_state or {}
+        for custom_spec in initial_state.get("custom_backends", []) or []:
+            self._seed_custom_backend(custom_spec)
         dashboard_spec = initial_state.get("dashboard")
         if dashboard_spec:
             self.seed_dashboard(dashboard_spec)
@@ -214,6 +218,69 @@ class SimulatedWorkspace:
         self.backends[resolved_id] = backend
         self.backend_ids_by_name[backend.name] = resolved_id
         return resolved_id
+
+    def _register_custom_backend(
+        self,
+        name: str,
+        url: str,
+        widgets: dict[str, JsonDict],
+        apps: list[JsonDict],
+        warnings: list[str],
+        backend_id: str | None = None,
+    ) -> str:
+        """Register an authored (custom) backend from validated payloads."""
+
+        self._backend_counter += 1
+        resolved_id = backend_id or f"backend_{self._backend_counter:03d}"
+        backend = FixtureBackend(
+            slug=f"custom-{backend_validation.slugify(name)}",
+            name=name,
+            widgets=copy.deepcopy(widgets),
+            apps=copy.deepcopy(apps),
+            default_url=url,
+        )
+        self.backends[resolved_id] = backend
+        self.backend_ids_by_name[name] = resolved_id
+        self.custom_backends[resolved_id] = {
+            "name": name,
+            "url": url,
+            "warnings": list(warnings),
+        }
+        return resolved_id
+
+    def _seed_custom_backend(self, spec: JsonDict) -> str:
+        """Seed a custom backend from scenario initial_state, bypassing validation.
+
+        Seeded state represents "whatever the author's backend currently serves" —
+        including broken payloads a repair scenario expects the agent to fix via
+        ``manage_backends operation='refresh'``.
+        """
+
+        widgets: dict[str, JsonDict] = {}
+        for widget_id, definition in (spec.get("widgets_json") or {}).items():
+            stored = dict(definition)
+            stored.setdefault(
+                "type",
+                stored.get("defaultViz") if isinstance(stored.get("defaultViz"), str) else "table",
+            )
+            widgets[str(widget_id)] = stored
+        apps: list[JsonDict] = []
+        for app in spec.get("apps_json") or []:
+            stored = dict(app)
+            stored.setdefault(
+                "template_id",
+                stored.get("templateId")
+                or backend_validation.slugify(str(stored.get("name", "app"))),
+            )
+            apps.append(stored)
+        return self._register_custom_backend(
+            name=str(spec.get("name", "Custom Backend")),
+            url=str(spec.get("url", "http://127.0.0.1:7779")),
+            widgets=widgets,
+            apps=apps,
+            warnings=list(spec.get("warnings", [])),
+            backend_id=spec.get("backend_id"),
+        )
 
     def seed_dashboard(self, spec: JsonDict) -> Dashboard:
         dashboard = self.create_dashboard(
@@ -333,6 +400,8 @@ class SimulatedWorkspace:
                     "invalid_request",
                     "manage_backends operation='add' requires name.",
                 )
+            if "widgets_json" in args or "apps_json" in args:
+                return self._add_custom_backend(args, name)
             backend_id = self.register_backend(name, args.get("backend_id"), args.get("url"))
             return self._ok(
                 "manage_backends",
@@ -342,11 +411,151 @@ class SimulatedWorkspace:
             backend_id = args.get("backend_id")
             if backend_id not in self.backends:
                 return self._error("manage_backends", "invalid_request", "Unknown backend_id.")
+            if "widgets_json" in args or "apps_json" in args:
+                return self._refresh_custom_backend(args, str(backend_id))
             return self._ok("manage_backends", {"backend_id": backend_id})
         return self._error(
             "manage_backends",
             "invalid_request",
             "manage_backends supports list, add, and refresh in the simulator.",
+        )
+
+    @staticmethod
+    def _validation_message(prefix: str, errors: list[str]) -> str:
+        shown = errors[:3]
+        suffix = f" (+{len(errors) - 3} more)" if len(errors) > 3 else ""
+        return f"{prefix}: " + " | ".join(shown) + suffix
+
+    def _add_custom_backend(self, args: JsonDict, name: str) -> JsonDict:
+        url = args.get("url")
+        if not isinstance(url, str) or not url:
+            return self._error(
+                "manage_backends",
+                "invalid_request",
+                "manage_backends operation='add' requires name and url.",
+            )
+        if name in self.backend_ids_by_name:
+            return self._error(
+                "manage_backends",
+                "invalid_request",
+                f'A backend with the name "{name}" already exists.',
+            )
+        widgets_payload = args.get("widgets_json")
+        if widgets_payload is None:
+            return self._error(
+                "manage_backends",
+                "invalid_request",
+                "manage_backends operation='add' with apps_json also requires "
+                "widgets_json (the widgets.json content your backend serves).",
+            )
+        errors, warnings, widgets = backend_validation.validate_widgets_json(
+            widgets_payload
+        )
+        if errors:
+            return self._error(
+                "manage_backends",
+                "command_failed",
+                self._validation_message("Widget validation failed", errors),
+            )
+        app_errors, app_warnings, apps = backend_validation.validate_apps_json(
+            args.get("apps_json"), set(widgets)
+        )
+        if app_errors:
+            return self._error(
+                "manage_backends",
+                "command_failed",
+                self._validation_message("App validation failed", app_errors),
+            )
+        all_warnings = warnings + app_warnings
+        backend_id = self._register_custom_backend(
+            name=name,
+            url=url.strip().rstrip("/"),
+            widgets=widgets,
+            apps=apps,
+            warnings=all_warnings,
+            backend_id=args.get("backend_id"),
+        )
+        return self._ok(
+            "manage_backends",
+            {
+                "message": "Backend added.",
+                "backend_id": backend_id,
+                "backend": {
+                    "id": backend_id,
+                    "name": name,
+                    "url": self.backends[backend_id].default_url,
+                    "widget_count": len(widgets),
+                    "app_count": len(apps),
+                },
+                "validation_warnings": all_warnings,
+            },
+        )
+
+    def _refresh_custom_backend(self, args: JsonDict, backend_id: str) -> JsonDict:
+        if backend_id not in self.custom_backends:
+            return self._error(
+                "manage_backends",
+                "invalid_request",
+                "refresh with widgets_json/apps_json is only supported for custom "
+                "backends added with widgets_json.",
+            )
+        current = self.backends[backend_id]
+        widgets_payload = args.get("widgets_json")
+        if widgets_payload is not None:
+            errors, warnings, widgets = backend_validation.validate_widgets_json(
+                widgets_payload
+            )
+            if errors:
+                return self._error(
+                    "manage_backends",
+                    "command_failed",
+                    self._validation_message("Backend refresh failed", errors),
+                )
+        else:
+            warnings, widgets = [], copy.deepcopy(current.widgets)
+        apps_payload = args.get("apps_json")
+        if apps_payload is not None:
+            app_errors, app_warnings, apps = backend_validation.validate_apps_json(
+                apps_payload, set(widgets)
+            )
+        else:
+            app_errors, app_warnings, apps = backend_validation.validate_apps_json(
+                current.apps_json(), set(widgets)
+            )
+        if app_errors:
+            return self._error(
+                "manage_backends",
+                "command_failed",
+                self._validation_message("Backend refresh failed", app_errors),
+            )
+        all_warnings = warnings + app_warnings
+        name = current.name
+        self.backends[backend_id] = FixtureBackend(
+            slug=current.slug,
+            name=name,
+            widgets=copy.deepcopy(widgets),
+            apps=copy.deepcopy(apps),
+            default_url=current.default_url,
+        )
+        self.custom_backends[backend_id] = {
+            "name": name,
+            "url": current.default_url,
+            "warnings": all_warnings,
+        }
+        return self._ok(
+            "manage_backends",
+            {
+                "message": "Backend refreshed.",
+                "backend_id": backend_id,
+                "backend": {
+                    "id": backend_id,
+                    "name": name,
+                    "url": current.default_url,
+                    "widget_count": len(widgets),
+                    "app_count": len(apps),
+                },
+                "validation_warnings": all_warnings,
+            },
         )
 
     def _tool_list_available_widgets(self, args: JsonDict) -> JsonDict:
@@ -686,6 +895,15 @@ class SimulatedWorkspace:
 
     def _tool_manage_apps(self, args: JsonDict) -> JsonDict:
         operation = args.get("operation")
+        if "apps_json" in args or "widgets_json" in args:
+            return self._error(
+                "manage_apps",
+                "invalid_request",
+                "manage_apps does not publish apps or widgets. Your backend serves "
+                "them: use manage_backends operation='add' (new custom backend) or "
+                "operation='refresh' (existing backend_id) with widgets_json and/or "
+                "apps_json, then manage_apps can list/read/instantiate them.",
+            )
         backend = self._backend_by_id(str(args.get("backend_id", "")))
         if operation == "list":
             apps = [
@@ -704,6 +922,20 @@ class SimulatedWorkspace:
         if operation == "read":
             return self._ok("manage_apps", {"app": app})
         if operation == "instantiate":
+            unavailable = sorted({
+                str(layout.get("i"))
+                for tab_payload in app.get("tabs", {}).values()
+                for layout in tab_payload.get("layout", [])
+                if str(layout.get("i")) not in backend.widgets
+                and str(layout.get("i")) != "navigation_bar"
+            })
+            if unavailable:
+                return self._error(
+                    "manage_apps",
+                    "command_failed",
+                    "Unable to create app because these widgets are unavailable: "
+                    + ", ".join(unavailable),
+                )
             dashboard = self.create_dashboard(
                 name=str(args.get("dashboard_name") or app["name"]),
                 activate=bool(args.get("activate", True)),
@@ -875,6 +1107,17 @@ class SimulatedWorkspace:
             ],
             "dashboard_composition": self._dashboard_composition(active),
             "backends": self._backend_list(),
+            "custom_backends": {
+                backend_id: {
+                    "name": meta["name"],
+                    "url": meta["url"],
+                    "widgets_json": self.backends[backend_id].widgets_json(),
+                    "apps_json": self.backends[backend_id].apps_json(),
+                    "warnings": list(meta.get("warnings", [])),
+                }
+                for backend_id, meta in self.custom_backends.items()
+                if backend_id in self.backends
+            },
             "skills": [
                 {
                     "slug": skill["slug"],
@@ -1034,7 +1277,15 @@ class SimulatedWorkspace:
                 return app
             if template_id and app.get("template_id") == template_id:
                 return app
-        raise KeyError(f"Unknown app {app_name or template_id!r}")
+        served = ", ".join(
+            f"{app.get('name')} (template_id {app.get('template_id')})"
+            for app in backend.apps_json()
+        ) or "none"
+        raise KeyError(
+            f"App {app_name or template_id!r} not found. Apps served by this "
+            f"backend: {served}. Pass the app's name as app_name (or its "
+            "template_id), and the new dashboard's name as dashboard_name."
+        )
 
     def _next_y(self, dashboard: Dashboard, tab_id: str) -> float:
         max_bottom = 2 if dashboard.navigation_bar else 0

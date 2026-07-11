@@ -319,6 +319,95 @@ class RequiredResourceRead:
 
 
 @dataclass(frozen=True)
+class RequiredWidgetDef:
+    """A widget definition an authored custom backend must contain."""
+
+    backend_name: str
+    widget_id: str
+    expect: JsonDict = field(default_factory=dict)
+    params_include: tuple[JsonDict, ...] = ()
+    columns_include: tuple[JsonDict, ...] = ()
+
+    @classmethod
+    def from_dict(cls, payload: JsonDict) -> "RequiredWidgetDef":
+        backend_name = payload.get("backend_name")
+        widget_id = payload.get("widget_id")
+        if not isinstance(backend_name, str) or not backend_name:
+            raise ValueError("required widget def needs backend_name")
+        if not isinstance(widget_id, str) or not widget_id:
+            raise ValueError("required widget def needs widget_id")
+        expect = payload.get("expect", {})
+        if not isinstance(expect, dict):
+            raise ValueError("required widget def expect must be an object")
+        params_include = _object_list(
+            payload.get("params_include", []), "params_include"
+        )
+        columns_include = _object_list(
+            payload.get("columns_include", []), "columns_include"
+        )
+        return cls(
+            backend_name=backend_name,
+            widget_id=widget_id,
+            expect=expect,
+            params_include=tuple(params_include),
+            columns_include=tuple(columns_include),
+        )
+
+
+@dataclass(frozen=True)
+class RequiredAppDef:
+    """An app definition an authored custom backend must contain."""
+
+    backend_name: str
+    template_id: str | None = None
+    name_contains: str | None = None
+    expect: JsonDict = field(default_factory=dict)
+    tabs_include: tuple[str, ...] = ()
+    tab_count: int | None = None
+    prompts_min_count: int | None = None
+    layout_refs_valid: bool = False
+    no_overlaps: bool = False
+    widgets_on_tab: tuple[JsonDict, ...] = ()
+    groups_include: tuple[JsonDict, ...] = ()
+
+    @classmethod
+    def from_dict(cls, payload: JsonDict) -> "RequiredAppDef":
+        backend_name = payload.get("backend_name")
+        if not isinstance(backend_name, str) or not backend_name:
+            raise ValueError("required app def needs backend_name")
+        template_id = payload.get("template_id")
+        name_contains = payload.get("name_contains")
+        if not template_id and not name_contains:
+            raise ValueError("required app def needs template_id or name_contains")
+        expect = payload.get("expect", {})
+        if not isinstance(expect, dict):
+            raise ValueError("required app def expect must be an object")
+        tab_count = payload.get("tab_count")
+        prompts_min_count = payload.get("prompts_min_count")
+        return cls(
+            backend_name=backend_name,
+            template_id=template_id,
+            name_contains=name_contains,
+            expect=expect,
+            tabs_include=tuple(
+                _string_list(payload.get("tabs_include", []), "tabs_include")
+            ),
+            tab_count=int(tab_count) if tab_count is not None else None,
+            prompts_min_count=(
+                int(prompts_min_count) if prompts_min_count is not None else None
+            ),
+            layout_refs_valid=bool(payload.get("layout_refs_valid", False)),
+            no_overlaps=bool(payload.get("no_overlaps", False)),
+            widgets_on_tab=tuple(
+                _object_list(payload.get("widgets_on_tab", []), "widgets_on_tab")
+            ),
+            groups_include=tuple(
+                _object_list(payload.get("groups_include", []), "groups_include")
+            ),
+        )
+
+
+@dataclass(frozen=True)
 class SuccessCriteria:
     """All deterministic checks for a scenario."""
 
@@ -329,6 +418,8 @@ class SuccessCriteria:
     required_tool_calls: tuple[RequiredToolCall, ...] = ()
     required_tool_results: tuple[RequiredToolResult, ...] = ()
     required_resource_reads: tuple[RequiredResourceRead, ...] = ()
+    required_widget_defs: tuple[RequiredWidgetDef, ...] = ()
+    required_app_defs: tuple[RequiredAppDef, ...] = ()
     required_dashboard_name_contains: str | None = None
     layout: LayoutChecks = field(default_factory=LayoutChecks)
     trace: TraceChecks = field(default_factory=TraceChecks)
@@ -358,6 +449,12 @@ class SuccessCriteria:
         required_resource_reads = _object_list(
             payload.get("required_resource_reads", []), "required_resource_reads"
         )
+        required_widget_defs = _object_list(
+            payload.get("required_widget_defs", []), "required_widget_defs"
+        )
+        required_app_defs = _object_list(
+            payload.get("required_app_defs", []), "required_app_defs"
+        )
         return cls(
             required_tabs=tuple(required_tabs),
             required_widgets=tuple(
@@ -379,6 +476,12 @@ class SuccessCriteria:
             required_resource_reads=tuple(
                 RequiredResourceRead.from_dict(item)
                 for item in required_resource_reads
+            ),
+            required_widget_defs=tuple(
+                RequiredWidgetDef.from_dict(item) for item in required_widget_defs
+            ),
+            required_app_defs=tuple(
+                RequiredAppDef.from_dict(item) for item in required_app_defs
             ),
             required_dashboard_name_contains=payload.get(
                 "required_dashboard_name_contains"

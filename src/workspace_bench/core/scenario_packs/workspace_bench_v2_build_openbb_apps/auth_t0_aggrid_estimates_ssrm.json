@@ -1,0 +1,91 @@
+{
+  "id": "auth_t0_aggrid_estimates_ssrm",
+  "title": "Build the Estimates Explorer (SSRM) table definition",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-aggrid",
+    "tier-t0",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "aggrid"
+  ],
+  "prompt": "You wrote a backend at http://localhost:7805. Add it to the workspace as \"Earnings Prep Data\" serving this single widgets.json entry \u2014 `estimates_ssrm`: name \"Estimates Explorer (SSRM)\", description \"Server-side sorted and filtered estimates dataset.\", endpoint /estimates-ssrm, type ssrm_table, sized w=24 h=16 on the grid, params required: symbol \u2014 a dropdown (type endpoint), labeled \"Symbol\", options fetched from /symbols, default \"AAPL\", rows are read from the response key \"rows\".",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "estimates_ssrm",
+        "expect": {
+          "type": "ssrm_table",
+          "endpoint": "/estimates-ssrm",
+          "gridData.w": 24,
+          "gridData.h": 16,
+          "data.dataKey": "rows"
+        },
+        "params_include": [
+          {
+            "paramName": "symbol",
+            "type": "endpoint",
+            "optionsEndpoint": "/symbols"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Earnings Prep Data",
+        "url": "http://localhost:7805",
+        "widgets_json": {
+          "estimates_ssrm": {
+            "name": "Estimates Explorer (SSRM)",
+            "description": "Server-side sorted and filtered estimates dataset.",
+            "endpoint": "/estimates-ssrm",
+            "type": "ssrm_table",
+            "gridData": {
+              "w": 24,
+              "h": 16
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "data": {
+              "dataKey": "rows"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "train",
+  "novelty": "Unique aggrid/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/estimates_ssrm."
+}

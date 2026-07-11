@@ -13,11 +13,15 @@ from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
 WORKSPACE_BENCH_V1_PACKAGE = "workspace_bench.core.scenario_packs.workspace_bench_v1"
+WORKSPACE_BENCH_V2_BUILD_APPS_PACKAGE = (
+    "workspace_bench.core.scenario_packs.workspace_bench_v2_build_openbb_apps"
+)
 TASK_PACK_MANIFEST = "task_pack.json"
 BUILTIN_SCENARIO_PACKS = {
     "core": WORKSPACE_BENCH_V1_PACKAGE,
+    "build-openbb-apps": WORKSPACE_BENCH_V2_BUILD_APPS_PACKAGE,
 }
-BUILTIN_SCENARIO_PACK_ORDER = ("core",)
+BUILTIN_SCENARIO_PACK_ORDER = ("core", "build-openbb-apps")
 
 
 class ScenarioRunner:

@@ -1,0 +1,275 @@
+{
+  "id": "auth_t4_aggrid_earnings_ship",
+  "title": "Ship, open, and configure the Season Tracker app",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-aggrid",
+    "tier-t4",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "aggrid",
+    "orchestration"
+  ],
+  "prompt": "End to end. Publish \"Earnings Prep Data\" at http://localhost:7805 \u2014 widgets.json: `beat_miss_grid`: name \"Beat Miss Grid\", description \"Beat/miss by ticker this season.\", endpoint /beat-miss, type table, gridData w=20 h=9, taking ticker \u2014 a text input (type text), labeled \"Ticker\", default \"AAPL\", described \"Ticker in focus.\", columns derived from served rows like [{\"eps_surprise_pct\": 0.042, \"revenue_beat\": true, \"ticker\": \"AAPL\"}, {\"eps_surprise_pct\": 0.021, \"revenue_beat\": true, \"ticker\": \"MSFT\"}] \u2014 Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent.. Desk convention: every widget this backend serves carries staleTime 900000; plus `surprise_metric`: name \"Avg Surprise\", description \"Average EPS surprise last 4 quarters.\", endpoint /avg-surprise, type metric, sized w=6 h=4 on the grid; `earnings_note`: name \"Earnings Preview\", description \"Preview note for the earnings call.\", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol \u2014 a dropdown (type endpoint), labeled \"Symbol\", options fetched from /symbols, default \"AAPL\". apps.json: app \"Season Tracker\", description \"Beats, misses, surprises.\", tab `season` named \"Season\" places: `beat_miss_grid` at x=0 y=0 w=20 h=9, tab `signals` named \"Signals\" places: `surprise_metric` at x=0 y=0 w=12 h=6. Then instantiate the \"Season Tracker\" app from that backend into a dashboard named \"Season Tracker Live\", set ticker to \"MSFT\" on the opened `beat_miss_grid` widget, and leave a note titled \"Season Tracker\" that says exactly: \"Season Tracker is live from Earnings Prep Data: season on tap.\"",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "add_generative_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "beat_miss_grid",
+        "expect": {
+          "type": "table",
+          "endpoint": "/beat-miss",
+          "gridData.w": 20,
+          "gridData.h": 9,
+          "staleTime": 900000
+        },
+        "params_include": [
+          {
+            "paramName": "ticker",
+            "type": "text"
+          }
+        ],
+        "columns_include": [
+          {
+            "field": "ticker",
+            "headerName": "Ticker",
+            "cellDataType": "text"
+          },
+          {
+            "field": "eps_surprise_pct",
+            "headerName": "Eps Surprise Pct",
+            "cellDataType": "number",
+            "formatterFn": "percent"
+          },
+          {
+            "field": "revenue_beat",
+            "headerName": "Revenue Beat",
+            "cellDataType": "boolean"
+          }
+        ]
+      },
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "surprise_metric",
+        "expect": {
+          "type": "metric",
+          "endpoint": "/avg-surprise"
+        }
+      },
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "earnings_note",
+        "expect": {
+          "type": "markdown",
+          "endpoint": "/earnings-preview"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Earnings Prep Data",
+        "tab_count": 2,
+        "layout_refs_valid": true,
+        "name_contains": "Season Tracker"
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Earnings Prep Data",
+        "widget_id": "beat_miss_grid",
+        "data_args": {
+          "ticker": "MSFT"
+        },
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Season Tracker",
+          "season"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Earnings Prep Data",
+        "url": "http://localhost:7805",
+        "widgets_json": {
+          "beat_miss_grid": {
+            "name": "Beat Miss Grid",
+            "description": "Beat/miss by ticker this season.",
+            "endpoint": "/beat-miss",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "ticker",
+                    "headerName": "Ticker",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "eps_surprise_pct",
+                    "headerName": "Eps Surprise Pct",
+                    "cellDataType": "number",
+                    "formatterFn": "percent"
+                  },
+                  {
+                    "field": "revenue_beat",
+                    "headerName": "Revenue Beat",
+                    "cellDataType": "boolean"
+                  }
+                ]
+              }
+            },
+            "params": [
+              {
+                "paramName": "ticker",
+                "type": "text",
+                "label": "Ticker",
+                "value": "AAPL",
+                "description": "Ticker in focus."
+              }
+            ],
+            "staleTime": 900000
+          },
+          "surprise_metric": {
+            "name": "Avg Surprise",
+            "description": "Average EPS surprise last 4 quarters.",
+            "endpoint": "/avg-surprise",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            },
+            "staleTime": 900000
+          },
+          "earnings_note": {
+            "name": "Earnings Preview",
+            "description": "Preview note for the earnings call.",
+            "endpoint": "/earnings-preview",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "staleTime": 900000
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Season Tracker",
+            "description": "Beats, misses, surprises.",
+            "tabs": {
+              "season": {
+                "id": "season",
+                "name": "Season",
+                "layout": [
+                  {
+                    "i": "beat_miss_grid",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "signals": {
+                "id": "signals",
+                "name": "Signals",
+                "layout": [
+                  {
+                    "i": "surprise_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Season Tracker",
+        "dashboard_name": "Season Tracker Live",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "beat_miss_grid",
+        "data_args": {
+          "ticker": "MSFT"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Season Tracker",
+        "data": "Season Tracker is live from Earnings Prep Data: season on tap."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique aggrid/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/beat_miss_grid,Earnings Prep Data/earnings_note,Earnings Prep Data/surprise_metric; appdefs:Earnings Prep Data/Season Tracker; widgets:Earnings Prep Data/beat_miss_grid@*; generated:note@*:Season Tracker,season."
+}

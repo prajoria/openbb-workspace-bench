@@ -1,0 +1,77 @@
+{
+  "id": "auth_t0_advanced_rates_advanced_chart",
+  "title": "Build the Rates Advanced Chart advanced widget",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-advanced",
+    "tier-t0",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "advanced"
+  ],
+  "prompt": "Connect a new custom backend named \"Rates Watch Data\" at http://localhost:7803. Its widgets.json serves exactly one widget - `rates_advanced_chart`: name \"Rates Advanced Chart\", description \"TradingView advanced charting for the 10Y yield future.\", endpoint /rates-udf, type advanced_charting, sized w=20 h=18 on the grid, data.defaultSymbol \"US10Y\", data.updateFrequency 30000. Register it with manage_backends.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Rates Watch Data",
+        "widget_id": "rates_advanced_chart",
+        "expect": {
+          "type": "advanced_charting",
+          "endpoint": "/rates-udf",
+          "gridData.w": 20,
+          "gridData.h": 18,
+          "data.defaultSymbol": "US10Y",
+          "data.updateFrequency": 30000
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Rates Watch Data",
+        "url": "http://localhost:7803",
+        "widgets_json": {
+          "rates_advanced_chart": {
+            "name": "Rates Advanced Chart",
+            "description": "TradingView advanced charting for the 10Y yield future.",
+            "endpoint": "/rates-udf",
+            "type": "advanced_charting",
+            "gridData": {
+              "w": 20,
+              "h": 18
+            },
+            "data": {
+              "defaultSymbol": "US10Y",
+              "updateFrequency": 30000
+            }
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "train",
+  "novelty": "Unique advanced/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/rates_advanced_chart."
+}

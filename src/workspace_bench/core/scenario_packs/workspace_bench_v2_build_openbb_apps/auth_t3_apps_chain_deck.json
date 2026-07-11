@@ -1,0 +1,242 @@
+{
+  "id": "auth_t3_apps_chain_deck",
+  "title": "Assemble the Chain Deck app from scratch",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "crypto",
+  "tags": [
+    "family-apps",
+    "tier-t3",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "multi-tab"
+  ],
+  "prompt": "Connect \"Chain TVL Data\" (http://localhost:7802) with widgets `chains_table`: name \"Top Chains by TVL\", description \"Current TVL of all chains from the desk aggregator.\", endpoint /chains-table, type table, sized w=20 h=9 on the grid, table columns required (field \u2192 header (type, extras)): name \u2192 header \"Chain\" (text); tvl_usd \u2192 header \"TVL ($)\" (number, int formatter); change_1d \u2192 header \"1d Change\" (number, percent formatter, greenRed render); `chains_chart`: name \"TVL by Chain\", description \"Plotly bar chart of chain TVL.\", endpoint /chains-chart, type chart, sized w=20 h=9 on the grid, raw true All of `chains_table`, `chains_chart` take the same shared param: chain \u2014 a text input (type text), labeled \"Chain\", default \"Ethereum\", described \"Chain the deck is focused on.\". \u2014 and ship the app: app \"Chain Deck\", description \"TVL table and trend.\", tab `table` named \"Table\" places: `chains_table` at x=0 y=0 w=20 h=9, tab `trend` named \"Trend\" places: `chains_chart` at x=0 y=0 w=20 h=9, group \"Chain Sync\" (type param) syncing param chain across [\"chains_table\", \"chains_chart\"]. Both files in one manage_backends add.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Chain TVL Data",
+        "widget_id": "chains_table",
+        "expect": {
+          "type": "table",
+          "endpoint": "/chains-table",
+          "gridData.w": 20,
+          "gridData.h": 9
+        },
+        "params_include": [
+          {
+            "paramName": "chain",
+            "type": "text"
+          }
+        ],
+        "columns_include": [
+          {
+            "field": "name",
+            "headerName": "Chain",
+            "cellDataType": "text"
+          },
+          {
+            "field": "tvl_usd",
+            "headerName": "TVL ($)",
+            "cellDataType": "number",
+            "formatterFn": "int"
+          },
+          {
+            "field": "change_1d",
+            "headerName": "1d Change",
+            "cellDataType": "number",
+            "formatterFn": "percent",
+            "renderFn": "greenRed"
+          }
+        ]
+      },
+      {
+        "backend_name": "Chain TVL Data",
+        "widget_id": "chains_chart",
+        "expect": {
+          "type": "chart",
+          "endpoint": "/chains-chart"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Chain TVL Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Chain Deck",
+        "tabs_include": [
+          "table",
+          "trend"
+        ],
+        "tab_count": 2,
+        "widgets_on_tab": [
+          {
+            "tab_id": "table",
+            "widget_id": "chains_table"
+          },
+          {
+            "tab_id": "trend",
+            "widget_id": "chains_chart"
+          }
+        ],
+        "groups_include": [
+          {
+            "name": "Chain Sync",
+            "type": "param",
+            "paramName": "chain",
+            "widgetIds_include": [
+              "chains_table",
+              "chains_chart"
+            ]
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Chain TVL Data",
+        "url": "http://localhost:7802",
+        "widgets_json": {
+          "chains_table": {
+            "name": "Top Chains by TVL",
+            "description": "Current TVL of all chains from the desk aggregator.",
+            "endpoint": "/chains-table",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "name",
+                    "headerName": "Chain",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "tvl_usd",
+                    "headerName": "TVL ($)",
+                    "cellDataType": "number",
+                    "formatterFn": "int"
+                  },
+                  {
+                    "field": "change_1d",
+                    "headerName": "1d Change",
+                    "cellDataType": "number",
+                    "formatterFn": "percent",
+                    "renderFn": "greenRed"
+                  }
+                ]
+              }
+            },
+            "params": [
+              {
+                "paramName": "chain",
+                "type": "text",
+                "label": "Chain",
+                "value": "Ethereum",
+                "description": "Chain the deck is focused on."
+              }
+            ]
+          },
+          "chains_chart": {
+            "name": "TVL by Chain",
+            "description": "Plotly bar chart of chain TVL.",
+            "endpoint": "/chains-chart",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "raw": true,
+            "params": [
+              {
+                "paramName": "chain",
+                "type": "text",
+                "label": "Chain",
+                "value": "Ethereum",
+                "description": "Chain the deck is focused on."
+              }
+            ]
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Chain Deck",
+            "description": "TVL table and trend.",
+            "tabs": {
+              "table": {
+                "id": "table",
+                "name": "Table",
+                "layout": [
+                  {
+                    "i": "chains_table",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "trend": {
+                "id": "trend",
+                "name": "Trend",
+                "layout": [
+                  {
+                    "i": "chains_chart",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Chain Sync",
+                "type": "param",
+                "paramName": "chain",
+                "widgetIds": [
+                  "chains_table",
+                  "chains_chart"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "app-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique apps/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chains_chart,Chain TVL Data/chains_table; appdefs:Chain TVL Data/Chain Deck."
+}

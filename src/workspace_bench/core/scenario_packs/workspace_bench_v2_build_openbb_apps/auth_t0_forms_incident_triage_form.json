@@ -1,0 +1,107 @@
+{
+  "id": "auth_t0_forms_incident_triage_form",
+  "title": "Build the Incident Triage Form form widget",
+  "workflow": "vendor-sla-monitoring",
+  "subdomain": "operations",
+  "tags": [
+    "family-forms",
+    "tier-t0",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "forms"
+  ],
+  "prompt": "Add \"Vendor SLA Data\" at http://localhost:7804 serving this single form-capable widget definition: `incident_triage_form`: name \"Incident Triage Form\", description \"Submit an incident triage record for review.\", endpoint /incident-triage, type table, sized w=20 h=10 on the grid, category \"Workflow Forms\", params required: triage \u2014 a form submitting POST to /incident-triage-submit with inputs [incident_id \u2014 a text input (type text), labeled \"Incident\", default \"INC-1042\"; review_date \u2014 a date picker (type date), labeled \"Review date\", default \"$currentDate\"; submit \u2014 a button (type button), labeled \"Submit\"] (that bracket is the complete list of the form's inputParams).",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Vendor SLA Data",
+        "widget_id": "incident_triage_form",
+        "expect": {
+          "type": "table",
+          "endpoint": "/incident-triage",
+          "gridData.w": 20,
+          "gridData.h": 10,
+          "category": "Workflow Forms"
+        },
+        "params_include": [
+          {
+            "paramName": "triage",
+            "type": "form"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Vendor SLA Data",
+        "url": "http://localhost:7804",
+        "widgets_json": {
+          "incident_triage_form": {
+            "name": "Incident Triage Form",
+            "description": "Submit an incident triage record for review.",
+            "endpoint": "/incident-triage",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 10
+            },
+            "params": [
+              {
+                "paramName": "triage",
+                "type": "form",
+                "label": "Triage",
+                "endpoint": "/incident-triage-submit",
+                "method": "POST",
+                "inputParams": [
+                  {
+                    "paramName": "incident_id",
+                    "type": "text",
+                    "label": "Incident",
+                    "value": "INC-1042"
+                  },
+                  {
+                    "paramName": "review_date",
+                    "type": "date",
+                    "label": "Review date",
+                    "value": "$currentDate"
+                  },
+                  {
+                    "paramName": "submit",
+                    "type": "button",
+                    "label": "Submit"
+                  }
+                ]
+              }
+            ],
+            "category": "Workflow Forms"
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "train",
+  "novelty": "Unique forms/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/incident_triage_form."
+}

@@ -1,0 +1,115 @@
+{
+  "id": "auth_t2_forms_trade_break_form",
+  "title": "Compose the Trade Break Form form widget",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-forms",
+    "tier-t2",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "forms",
+    "composed"
+  ],
+  "prompt": "Check the workspace, then connect \"Execution Desk Data\" at http://localhost:7806 with one widgets.json entry. Requirements: `trade_break_form`: name \"Trade Break Form\", description \"Record a trade break for operations review.\", endpoint /trade-break, type table, sized w=20 h=10 on the grid, category \"Execution\", params required: break_item \u2014 a form submitting POST to /trade-break-submit with inputs [trade_id \u2014 a text input (type text), labeled \"Trade\", default \"TR-8821\"; break_amount \u2014 a number input (type number), labeled \"Break amount\", default 1000, min 0; record \u2014 a button (type button), labeled \"Record\"] (that bracket is the complete list of the form's inputParams); it auto-refreshes every 30 seconds. Time-based config converts to milliseconds: \"cache results for N minutes\" means staleTime N*60000; \"auto-refresh every N seconds\" means refetchInterval N*1000..",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "trade_break_form",
+        "expect": {
+          "type": "table",
+          "endpoint": "/trade-break",
+          "gridData.w": 20,
+          "gridData.h": 10,
+          "category": "Execution",
+          "refetchInterval": 30000
+        },
+        "params_include": [
+          {
+            "paramName": "break_item",
+            "type": "form"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "trade_break_form": {
+            "name": "Trade Break Form",
+            "description": "Record a trade break for operations review.",
+            "endpoint": "/trade-break",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 10
+            },
+            "params": [
+              {
+                "paramName": "break_item",
+                "type": "form",
+                "label": "Break Item",
+                "endpoint": "/trade-break-submit",
+                "method": "POST",
+                "inputParams": [
+                  {
+                    "paramName": "trade_id",
+                    "type": "text",
+                    "label": "Trade",
+                    "value": "TR-8821"
+                  },
+                  {
+                    "paramName": "break_amount",
+                    "type": "number",
+                    "label": "Break amount",
+                    "value": 1000,
+                    "min": 0
+                  },
+                  {
+                    "paramName": "record",
+                    "type": "button",
+                    "label": "Record"
+                  }
+                ]
+              }
+            ],
+            "refetchInterval": 30000,
+            "category": "Execution"
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique forms/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/trade_break_form."
+}

@@ -45,6 +45,7 @@ from workspace_bench.core.models import (
     VALID_SCENARIO_SPLITS,
 )
 from workspace_bench.reports.metrics import compute_reliability_metrics
+from workspace_bench.core.runner import BUILTIN_SCENARIO_PACK_ORDER
 from workspace_bench.core.runner import load_builtin_scenarios, load_scenario_directory
 from workspace_bench.core.runner import load_builtin_task_pack_manifest, load_task_pack_manifest
 
@@ -160,6 +161,17 @@ def main(argv: list[str] | None = None) -> int:
         ),
     )
     parser.add_argument(
+        "--model",
+        action="append",
+        default=[],
+        metavar="PROVIDER:MODEL",
+        help=(
+            "Inline model shorthand, e.g. openai:gpt-4.1-mini or "
+            "ollama:qwen3:8b — no models file needed. Repeatable. API keys "
+            "come from the environment or .env."
+        ),
+    )
+    parser.add_argument(
         "--difficulty",
         choices=["all", "easy", "medium", "hard"],
         default="all",
@@ -171,10 +183,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--domain", help="Optional domain filter.")
     parser.add_argument("--subdomain", help="Optional subdomain filter.")
     parser.add_argument(
-        "--pack",
+        "--pack", "--collection",
+        dest="pack",
         default="core",
-        choices=["core", "all"],
-        help="Bundled scenario pack. core/all resolve to workspace-bench-v1.",
+        choices=["all", *BUILTIN_SCENARIO_PACK_ORDER],
+        help=(
+            "Bundled scenario collection. core = operating the workspace; "
+            "build-openbb-apps = building custom backend apps; all is a "
+            "deprecated alias for core."
+        ),
     )
     parser.add_argument(
         "--split",
@@ -190,6 +207,12 @@ def main(argv: list[str] | None = None) -> int:
         action="append",
         default=[],
         help="Optional tag filter. Can be passed multiple times.",
+    )
+    parser.add_argument(
+        "--scenario",
+        action="append",
+        default=[],
+        help="Run only these scenario id(s). Can be passed multiple times.",
     )
     parser.add_argument(
         "--metric",
@@ -251,6 +274,16 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--timeout", type=float, default=240)
     parser.add_argument(
+        "--resume",
+        action="store_true",
+        help=(
+            "Reuse completed scenario run directories already present in the "
+            "output directory (interactive runner only): replay their recorded "
+            "tool calls through a fresh simulator to regrade, and only run "
+            "scenarios with no completed episode on disk."
+        ),
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Print selected models and scenarios without running agents.",
@@ -271,6 +304,23 @@ def main(argv: list[str] | None = None) -> int:
     except (OSError, ValueError) as error:
         print(f"Invalid model adapter config: {error}", file=sys.stderr)
         return 2
+
+    for spec in args.model:
+        provider, _, model_name = spec.partition(":")
+        if provider not in INTERACTIVE_PROVIDERS or not model_name:
+            print(
+                f"--model expects PROVIDER:MODEL with provider one of "
+                f"{sorted(INTERACTIVE_PROVIDERS)}, got: {spec}",
+                file=sys.stderr,
+            )
+            return 2
+        slug = f"{provider}-{model_name}".replace(":", "-").replace("/", "-")
+        adapters[slug] = ModelAdapter(
+            slug=slug, label=model_name, command="",
+            env={"OLLAMA_MODEL": model_name} if provider == "ollama" else {},
+            provider=provider, model=model_name,
+        )
+        configured_model_slugs.append(slug)
 
     selected_model_slugs = args.models
     if selected_model_slugs is None:
@@ -299,6 +349,7 @@ def main(argv: list[str] | None = None) -> int:
         subdomain=args.subdomain,
         split=args.split,
         tags=args.tag,
+        scenario_ids=args.scenario,
     )
     if not scenarios:
         print("No scenarios matched the selected filters.", file=sys.stderr)
@@ -336,6 +387,7 @@ def main(argv: list[str] | None = None) -> int:
             model_retries=args.model_retries,
             retry_backoff=args.retry_backoff,
             color=should_colorize(args.color, sys.stderr),
+            resume=args.resume,
         )
         result_payload = model_result_payload(adapter, scenarios, runs, args)
         result_path = output_dir / f"{adapter.slug}.json"
@@ -539,7 +591,11 @@ def filter_scenarios(
     subdomain: str | None,
     split: str | None,
     tags: list[str],
+    scenario_ids: list[str] | None = None,
 ) -> list[Scenario]:
+    if scenario_ids:
+        wanted = set(scenario_ids)
+        scenarios = [scenario for scenario in scenarios if scenario.id in wanted]
     if difficulty != "all":
         scenarios = [scenario for scenario in scenarios if scenario.difficulty == difficulty]
     if level:
@@ -563,7 +619,20 @@ def load_scenario_source(args: argparse.Namespace) -> list[Scenario]:
     scenario_dir = getattr(args, "scenario_dir", None)
     if scenario_dir:
         return load_scenario_directory(Path(scenario_dir))
-    return load_builtin_scenarios(getattr(args, "pack", "core"))
+    pack = getattr(args, "pack", "core")
+    # `--scenario <id>` should just work without naming the collection:
+    # when ids are given and the pack was left at its default, search every
+    # bundled collection for them.
+    if getattr(args, "scenario", None) and pack == "core":
+        scenarios: list[Scenario] = []
+        seen: set[str] = set()
+        for name in BUILTIN_SCENARIO_PACK_ORDER:
+            for scenario in load_builtin_scenarios(name):
+                if scenario.id not in seen:
+                    seen.add(scenario.id)
+                    scenarios.append(scenario)
+        return scenarios
+    return load_builtin_scenarios(pack)
 
 
 def print_dry_run(
@@ -597,10 +666,12 @@ def run_adapter(
     model_retries: int,
     retry_backoff: float,
     color: bool,
+    resume: bool = False,
 ) -> list[ComparisonRun]:
     runs = []
     total_attempts = len(scenarios) * repeats
     attempt_index = 0
+    resumed_count = 0
     with patched_env(adapter.env):
         for repeat in range(1, repeats + 1):
             for scenario in scenarios:
@@ -617,6 +688,24 @@ def run_adapter(
                     repeat=repeat,
                     repeats=repeats,
                 )
+                if resume and runner == "interactive":
+                    run = replay_completed_run(
+                        adapter, scenario, run_dir, repeat=repeat
+                    )
+                    if run is not None:
+                        runs.append(run)
+                        resumed_count += 1
+                        print(
+                            "    "
+                            f"{run_status(run, color=color)} "
+                            f"score={run.run_result.grade.score:.2f} "
+                            f"checks={run.run_result.grade.checks_passed}/"
+                            f"{run.run_result.grade.checks_total} "
+                            "(resumed from disk)",
+                            file=sys.stderr,
+                            flush=True,
+                        )
+                        continue
                 if runner == "batch":
                     run = batch_comparison_run(
                         run_agent_command(
@@ -649,7 +738,72 @@ def run_adapter(
                     file=sys.stderr,
                     flush=True,
                 )
+    if resumed_count:
+        print(
+            f"  resumed {resumed_count}/{total_attempts} attempt(s) from disk",
+            file=sys.stderr,
+            flush=True,
+        )
     return runs
+
+
+def replay_completed_run(
+    adapter: ModelAdapter,
+    scenario: Scenario,
+    run_dir: Path,
+    *,
+    repeat: int = 1,
+) -> ComparisonRun | None:
+    """Rebuild a ComparisonRun from a completed episode already on disk.
+
+    conversation.json is written only after the turn loop finishes, so its
+    presence marks a completed episode; a run killed mid-scenario lacks it and
+    re-runs live. tool_calls.jsonl records each executed call after
+    normalization, and the simulator is deterministic, so replaying the calls
+    into a fresh episode reproduces the exact final state, trace, and grade.
+    """
+
+    conversation_path = run_dir / "conversation.json"
+    task_path = run_dir / "task.json"
+    output_path = run_dir / "tool_calls.jsonl"
+    meta_path = run_dir / "run_meta.json"
+    if not conversation_path.exists() or not task_path.exists():
+        return None
+    # strict pass folds in exit_code/timed_out, which only run_meta.json
+    # records — without it a crashed-but-graded episode would silently flip
+    # to a pass on resume, so re-run live instead.
+    if not meta_path.exists():
+        return None
+    try:
+        meta: JsonDict = json.loads(meta_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    episode = WorkspaceEpisode(scenario=scenario)
+    if output_path.exists():
+        for line in output_path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            payload = json.loads(line)
+            episode.step(ToolCall(payload["tool"], payload["args"]))
+    return ComparisonRun(
+        run_result=RunResult(
+            scenario=scenario,
+            grade=episode.grade(),
+            trace=tuple(episode.trace),
+            final_snapshot=episode.snapshot(),
+        ),
+        command=f"interactive:{adapter.provider}:{adapter.model}",
+        exit_code=meta.get("exit_code", 0),
+        timed_out=bool(meta.get("timed_out", False)),
+        stdout=str(meta.get("stdout", "")),
+        stderr=str(meta.get("stderr", "")),
+        run_dir=run_dir,
+        task_path=task_path,
+        output_path=output_path,
+        runner="interactive",
+        repeat=repeat,
+    )
 
 
 def scenario_run_dir(base_dir: Path, scenario_id: str, *, repeat: int, repeats: int) -> Path:
@@ -709,6 +863,7 @@ def run_interactive_agent(
     exit_code: int | None = 0
     timed_out = False
 
+    malformed_recoveries = 0
     for turn in range(1, max_turns + 1):
         try:
             content = call_model_with_retries(
@@ -720,16 +875,41 @@ def run_interactive_agent(
                 retry_log=stdout_lines,
                 turn=turn,
             )
-            action = parse_interactive_action(content)
         except TimeoutError as error:
             timed_out = True
             exit_code = None
             stderr = str(error)
             break
-        except Exception as error:  # noqa: BLE001 - malformed model action is run output.
+        except Exception as error:  # noqa: BLE001 - model API failure is run output.
             exit_code = 1
             stderr = str(error)
             break
+        try:
+            action = parse_interactive_action(content)
+        except Exception as error:  # noqa: BLE001 - malformed model action.
+            # Teaching turn, mirroring invalid-tool-call rejections: a malformed
+            # action costs a turn (and patience), not the episode. Two strikes.
+            malformed_recoveries += 1
+            if malformed_recoveries > 2:
+                exit_code = 1
+                stderr = str(error)
+                break
+            stdout_lines.append(
+                f"turn {turn}: malformed action recovered ({error})"
+            )
+            messages.append({"role": "assistant", "content": content})
+            messages.append(
+                {
+                    "role": "user",
+                    "content": (
+                        "Your last response could not be parsed as a single "
+                        f"JSON action ({error}). Reply with exactly one JSON "
+                        'object: {"tool": "<name>", "args": {...}} or '
+                        '{"done": true} — no prose, no second object.'
+                    ),
+                }
+            )
+            continue
 
         append_jsonl(
             responses_path,
@@ -774,6 +954,21 @@ def run_interactive_agent(
     grade = episode.grade()
     conversation_path.write_text(
         json.dumps(messages, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    meta_path = run_dir / "run_meta.json"
+    meta_path.write_text(
+        json.dumps(
+            {
+                "exit_code": exit_code,
+                "timed_out": timed_out,
+                "stdout": "\n".join(stdout_lines),
+                "stderr": stderr,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
         encoding="utf-8",
     )
     return ComparisonRun(
@@ -983,10 +1178,14 @@ def call_ollama_chat(model: str, messages: list[JsonDict], timeout: float) -> st
     payload = {
         "model": os.environ.get("OLLAMA_MODEL", model),
         "stream": False,
-        "format": interactive_action_schema(),
         "options": {"temperature": float(os.environ.get("OLLAMA_TEMPERATURE", "0"))},
         "messages": messages,
     }
+    # Same escape hatch as OPENAI_RESPONSE_FORMAT: some generations 500 inside
+    # ollama's schema-grammar sampler; format=none falls back to unconstrained
+    # JSON (the teaching-turn recovery backstops malformed output).
+    if os.environ.get("OLLAMA_FORMAT", "schema") != "none":
+        payload["format"] = interactive_action_schema()
     body = post_json(f"{base_url}/api/chat", payload, timeout)
     message = body.get("message") or {}
     content = message.get("content")
@@ -1042,7 +1241,10 @@ def is_transient_http_status(status_code: int) -> bool:
 
 def parse_interactive_action(content: str) -> JsonDict:
     text = strip_code_fence(content.strip())
-    payload = json.loads(text)
+    # Lenient parse: accept the FIRST JSON object and tolerate trailing data
+    # (models sometimes emit a second object or prose after the action; the
+    # protocol takes one action per turn, so extra data is ignored, not fatal).
+    payload, end = json.JSONDecoder().raw_decode(text)
     if not isinstance(payload, dict):
         raise ValueError("model output must be a JSON object")
     if payload.get("done") is True:
@@ -1142,9 +1344,12 @@ def interactive_action_schema() -> JsonDict:
 
 
 def append_jsonl(path: Path, payload: JsonDict) -> None:
+    # No sort_keys: tool-call args are replayed through the simulator on
+    # --resume, and dict order is semantic there (app tabs/layout iteration
+    # assigns widget uuids in order) — sorting keys breaks replay fidelity.
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8") as handle:
-        handle.write(json.dumps(payload, sort_keys=True) + "\n")
+        handle.write(json.dumps(payload) + "\n")
 
 
 def run_status(run: ComparisonRun, *, color: bool = False) -> str:

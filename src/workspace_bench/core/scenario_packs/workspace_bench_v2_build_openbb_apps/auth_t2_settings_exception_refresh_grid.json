@@ -1,0 +1,122 @@
+{
+  "id": "auth_t2_settings_exception_refresh_grid",
+  "title": "Compose the configured Exception Refresh Grid widget",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-settings",
+    "tier-t2",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "settings",
+    "composed"
+  ],
+  "prompt": "Register \"Execution Desk Data\" (http://localhost:7806) with exactly one configured widget. Requirements: `exception_refresh_grid`: name \"Exception Refresh Grid\", description \"Execution exceptions with manual refresh.\", endpoint /exception-refresh, type table, gridData w=20 h=9; it auto-refreshes every 45 seconds, exposes a run button, is categorized as Execution, and caches results for 15 minutes. Time-based config converts to milliseconds: \"cache results for N minutes\" means staleTime N*60000; \"auto-refresh every N seconds\" means refetchInterval N*1000. The endpoint returns rows like [{\"age_min\": 12, \"order_id\": \"O-1042\", \"symbol\": \"AAPL\"}, {\"age_min\": 7, \"order_id\": \"O-1043\", \"symbol\": \"MSFT\"}] \u2014 Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {\"filled_pct\": 0.42} becomes {\"field\": \"filled_pct\", \"headerName\": \"Filled Pct\", \"cellDataType\": \"number\", \"formatterFn\": \"percent\"}..",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "exception_refresh_grid",
+        "expect": {
+          "type": "table",
+          "endpoint": "/exception-refresh",
+          "gridData.w": 20,
+          "gridData.h": 9,
+          "category": "Execution",
+          "staleTime": 900000,
+          "runButton": true,
+          "refetchInterval": 45000
+        },
+        "columns_include": [
+          {
+            "field": "order_id",
+            "headerName": "Order Id",
+            "cellDataType": "text"
+          },
+          {
+            "field": "symbol",
+            "headerName": "Symbol",
+            "cellDataType": "text"
+          },
+          {
+            "field": "age_min",
+            "headerName": "Age Min",
+            "cellDataType": "number"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "exception_refresh_grid": {
+            "name": "Exception Refresh Grid",
+            "description": "Execution exceptions with manual refresh.",
+            "endpoint": "/exception-refresh",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "order_id",
+                    "headerName": "Order Id",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "symbol",
+                    "headerName": "Symbol",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "age_min",
+                    "headerName": "Age Min",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            },
+            "refetchInterval": 45000,
+            "runButton": true,
+            "category": "Execution",
+            "staleTime": 900000
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique settings/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_refresh_grid."
+}

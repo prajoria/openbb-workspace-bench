@@ -1,0 +1,75 @@
+{
+  "id": "auth_t0_types_venue_pdf",
+  "title": "Build the Venue Scorecard pdf widget",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-types",
+    "tier-t0",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "types"
+  ],
+  "prompt": "Register \"Execution Desk Data\" (http://localhost:7806) with one widgets.json entry: `venue_pdf`: name \"Venue Scorecard\", description \"Monthly venue scorecard PDF.\", endpoint /venue-scorecard, type pdf, sized w=16 h=14 on the grid, category \"Execution Reports\", staleTime 1800000. Use a single manage_backends add.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "venue_pdf",
+        "expect": {
+          "type": "pdf",
+          "endpoint": "/venue-scorecard",
+          "gridData.w": 16,
+          "gridData.h": 14,
+          "category": "Execution Reports",
+          "staleTime": 1800000
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "venue_pdf": {
+            "name": "Venue Scorecard",
+            "description": "Monthly venue scorecard PDF.",
+            "endpoint": "/venue-scorecard",
+            "type": "pdf",
+            "gridData": {
+              "w": 16,
+              "h": 14
+            },
+            "staleTime": 1800000,
+            "category": "Execution Reports"
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "train",
+  "novelty": "Unique types/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/venue_pdf."
+}

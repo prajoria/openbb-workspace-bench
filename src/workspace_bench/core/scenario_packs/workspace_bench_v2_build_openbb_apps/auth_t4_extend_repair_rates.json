@@ -1,0 +1,294 @@
+{
+  "id": "auth_t4_extend_repair_rates",
+  "title": "Repair, extend, open, and configure Rates Repair Live",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-extend",
+    "tier-t4",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "refresh",
+    "extend",
+    "orchestration"
+  ],
+  "prompt": "Diagnose and ship \"Rates Watch Data\". The warning badge does not name fields; apply this convention: Rates Commentary series is an endpoint param backed by /series-options. Refresh widgets_json with fixed `rates_commentary` plus `curve_spread_metric`: name \"2s10s Spread\", description \"Current 2s10s spread in bps.\", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid, params required: series \u2014 a dropdown (type endpoint), labeled \"Series\", options fetched from /series-options, default \"DGS10\", refresh the served app \"Rates Repair Live\" to include `curve_spread_metric` on a second `posture` tab, open it as \"Rates Repair Live Dashboard\", set series to \"DGS2\" on the opened `rates_commentary` widget, and add note \"Rates Repair Live\" saying \"Rates Repair Live is live from Rates Watch Data: rates repair done.\".",
+  "fixtures": {},
+  "initial_state": {
+    "custom_backends": [
+      {
+        "name": "Rates Watch Data",
+        "url": "http://localhost:7803",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "rates_commentary": {
+            "name": "Rates Commentary",
+            "description": "Desk commentary on the rates day.",
+            "endpoint": "/rates-commentary",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "series",
+                "type": "dropdownz",
+                "label": "Series",
+                "value": "DGS10",
+                "optionsEndpoint": "/series-options"
+              }
+            ]
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Rates Repair Live",
+            "description": "Rates commentary and curve spread.",
+            "tabs": {
+              "rates": {
+                "id": "rates",
+                "name": "Rates",
+                "layout": [
+                  {
+                    "i": "rates_commentary",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ],
+        "warnings": [
+          "workspace validation failed: 1 entry in the backend's served payload need fixing"
+        ]
+      }
+    ]
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "add_generative_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Rates Watch Data",
+        "widget_id": "rates_commentary",
+        "expect": {
+          "type": "markdown",
+          "endpoint": "/rates-commentary"
+        },
+        "params_include": [
+          {
+            "paramName": "series",
+            "type": "endpoint",
+            "optionsEndpoint": "/series-options"
+          }
+        ]
+      },
+      {
+        "backend_name": "Rates Watch Data",
+        "widget_id": "curve_spread_metric",
+        "expect": {
+          "type": "metric",
+          "endpoint": "/curve-spread",
+          "gridData.w": 6,
+          "gridData.h": 4
+        },
+        "params_include": [
+          {
+            "paramName": "series",
+            "type": "endpoint",
+            "optionsEndpoint": "/series-options"
+          }
+        ]
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Rates Watch Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Rates Repair Live",
+        "tabs_include": [
+          "posture",
+          "rates"
+        ],
+        "tab_count": 2,
+        "widgets_on_tab": [
+          {
+            "tab_id": "rates",
+            "widget_id": "rates_commentary"
+          },
+          {
+            "tab_id": "posture",
+            "widget_id": "curve_spread_metric"
+          }
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Rates Watch Data",
+        "widget_id": "rates_commentary",
+        "data_args": {
+          "series": "DGS2"
+        },
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Rates Repair Live",
+          "rates repair"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "rates_commentary": {
+            "name": "Rates Commentary",
+            "description": "Desk commentary on the rates day.",
+            "endpoint": "/rates-commentary",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "series",
+                "type": "endpoint",
+                "label": "Series",
+                "value": "DGS10",
+                "optionsEndpoint": "/series-options"
+              }
+            ]
+          },
+          "curve_spread_metric": {
+            "name": "2s10s Spread",
+            "description": "Current 2s10s spread in bps.",
+            "endpoint": "/curve-spread",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            },
+            "params": [
+              {
+                "paramName": "series",
+                "type": "endpoint",
+                "label": "Series",
+                "value": "DGS10",
+                "optionsEndpoint": "/series-options"
+              }
+            ]
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Rates Repair Live",
+            "description": "Rates commentary and curve spread.",
+            "tabs": {
+              "rates": {
+                "id": "rates",
+                "name": "Rates",
+                "layout": [
+                  {
+                    "i": "rates_commentary",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "posture": {
+                "id": "posture",
+                "name": "Posture",
+                "layout": [
+                  {
+                    "i": "curve_spread_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 8,
+                    "h": 5
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Rates Repair Live",
+        "dashboard_name": "Rates Repair Live Dashboard",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "rates_commentary",
+        "data_args": {
+          "series": "DGS2"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Rates Repair Live",
+        "data": "Rates Repair Live is live from Rates Watch Data: rates repair done."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L4",
+  "capability": "app-building",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 9
+  },
+  "split": "train",
+  "novelty": "Unique extend/t4 building exercise using add_generative_widget, get_workspace_snapshot, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_spread_metric,Rates Watch Data/rates_commentary; appdefs:Rates Watch Data/Rates Repair Live; widgets:Rates Watch Data/rates_commentary@*; generated:note@*:Rates Repair Live,rates repair."
+}

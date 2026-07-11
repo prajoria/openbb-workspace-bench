@@ -1,0 +1,129 @@
+{
+  "id": "auth_t0_aggrid_vix_history",
+  "title": "Build the VIX History table definition",
+  "workflow": "risk-review",
+  "subdomain": "volatility",
+  "tags": [
+    "family-aggrid",
+    "tier-t0",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "aggrid"
+  ],
+  "prompt": "You wrote a backend at http://localhost:7801. Add it to the workspace as \"Vol Desk Data\" serving this single widgets.json entry \u2014 `vix_history`: name \"VIX History\", description \"Daily CBOE VIX closes with returns.\", endpoint /vix-history, type table, sized w=20 h=9 on the grid, params required: window \u2014 a number input (type number), labeled \"Window\", default 30, min 5, max 365, table columns required (field \u2192 header (type, extras)): date \u2192 header \"Date\" (dateString); close \u2192 header \"Close\" (number); return_pct \u2192 header \"Return %\" (number, percent formatter, greenRed render).",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Vol Desk Data",
+        "widget_id": "vix_history",
+        "expect": {
+          "type": "table",
+          "endpoint": "/vix-history",
+          "gridData.w": 20,
+          "gridData.h": 9
+        },
+        "params_include": [
+          {
+            "paramName": "window",
+            "type": "number"
+          }
+        ],
+        "columns_include": [
+          {
+            "field": "date",
+            "headerName": "Date",
+            "cellDataType": "dateString"
+          },
+          {
+            "field": "close",
+            "headerName": "Close",
+            "cellDataType": "number"
+          },
+          {
+            "field": "return_pct",
+            "headerName": "Return %",
+            "cellDataType": "number",
+            "formatterFn": "percent",
+            "renderFn": "greenRed"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Vol Desk Data",
+        "url": "http://localhost:7801",
+        "widgets_json": {
+          "vix_history": {
+            "name": "VIX History",
+            "description": "Daily CBOE VIX closes with returns.",
+            "endpoint": "/vix-history",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "window",
+                "type": "number",
+                "label": "Window",
+                "value": 30,
+                "min": 5,
+                "max": 365
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "date",
+                    "headerName": "Date",
+                    "cellDataType": "dateString"
+                  },
+                  {
+                    "field": "close",
+                    "headerName": "Close",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "return_pct",
+                    "headerName": "Return %",
+                    "cellDataType": "number",
+                    "formatterFn": "percent",
+                    "renderFn": "greenRed"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "validation",
+  "novelty": "Unique aggrid/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_history."
+}

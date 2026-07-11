@@ -1,0 +1,277 @@
+{
+  "id": "auth_t2_grouping_earnings_review_sync",
+  "title": "Compose the grouped Earnings Review Sync app",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-grouping",
+    "tier-t2",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "grouping",
+    "composed"
+  ],
+  "prompt": "Check the workspace. \"Earnings Prep Data\" already serves `estimate_revisions`, `earnings_chart`. Refresh widgets_json so `estimate_revisions` it caches results for 15 minutes. Time-based config converts to milliseconds: \"cache results for N minutes\" means staleTime N*60000; \"auto-refresh every N seconds\" means refetchInterval N*1000. Build apps.json with one grouped app: app \"Earnings Review Sync\", description \"Preset chart with synced revisions.\", tab `review` named \"Review\" places: `estimate_revisions` at x=0 y=0 w=20 h=9; `earnings_chart` at x=20 y=0 w=12 h=9 preset with params {\"symbol\": \"NVDA\"}, group \"Review Symbol Sync\" (type param) syncing param symbol across [\"estimate_revisions\", \"earnings_chart\"], suggested prompts: \"Summarize the synced NVDA revision signal.\". Refresh the backend.",
+  "fixtures": {},
+  "initial_state": {
+    "custom_backends": [
+      {
+        "name": "Earnings Prep Data",
+        "url": "http://localhost:7805",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "estimate_revisions": {
+            "name": "Estimate Revisions",
+            "description": "Street estimate revisions by quarter.",
+            "endpoint": "/estimate-revisions",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "quarter",
+                    "headerName": "Quarter",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "eps_estimate",
+                    "headerName": "EPS Est",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "revenue_estimate_b",
+                    "headerName": "Revenue Est ($B)",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            }
+          },
+          "earnings_chart": {
+            "name": "EPS History",
+            "description": "Plotly EPS beat/miss history.",
+            "endpoint": "/eps-history",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "raw": true
+          }
+        }
+      }
+    ]
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "estimate_revisions",
+        "expect": {
+          "type": "table",
+          "endpoint": "/estimate-revisions",
+          "staleTime": 900000
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Earnings Prep Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Earnings Review Sync",
+        "tabs_include": [
+          "review"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "review",
+            "widget_id": "estimate_revisions"
+          },
+          {
+            "tab_id": "review",
+            "widget_id": "earnings_chart"
+          }
+        ],
+        "groups_include": [
+          {
+            "name": "Review Symbol Sync",
+            "type": "param",
+            "paramName": "symbol",
+            "widgetIds_include": [
+              "estimate_revisions",
+              "earnings_chart"
+            ]
+          }
+        ],
+        "prompts_min_count": 1
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "estimate_revisions": {
+            "name": "Estimate Revisions",
+            "description": "Street estimate revisions by quarter.",
+            "endpoint": "/estimate-revisions",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "quarter",
+                    "headerName": "Quarter",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "eps_estimate",
+                    "headerName": "EPS Est",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "revenue_estimate_b",
+                    "headerName": "Revenue Est ($B)",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            },
+            "staleTime": 900000
+          },
+          "earnings_chart": {
+            "name": "EPS History",
+            "description": "Plotly EPS beat/miss history.",
+            "endpoint": "/eps-history",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "raw": true
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Earnings Review Sync",
+            "description": "Preset chart with synced revisions.",
+            "tabs": {
+              "review": {
+                "id": "review",
+                "name": "Review",
+                "layout": [
+                  {
+                    "i": "estimate_revisions",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  },
+                  {
+                    "i": "earnings_chart",
+                    "x": 20,
+                    "y": 0,
+                    "w": 12,
+                    "h": 9,
+                    "state": {
+                      "params": {
+                        "symbol": "NVDA"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Review Symbol Sync",
+                "type": "param",
+                "paramName": "symbol",
+                "widgetIds": [
+                  "estimate_revisions",
+                  "earnings_chart"
+                ]
+              }
+            ],
+            "prompts": [
+              "Summarize the synced NVDA revision signal."
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique grouping/t2 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/estimate_revisions; appdefs:Earnings Prep Data/Earnings Review Sync."
+}

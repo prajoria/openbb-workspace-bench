@@ -1,0 +1,262 @@
+{
+  "id": "auth_t4_settings_execution_ship",
+  "title": "Ship, open, and configure the Execution Config Live app",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-settings",
+    "tier-t4",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "settings",
+    "orchestration"
+  ],
+  "prompt": "Four steps. One: add \"Execution Desk Data\" at http://localhost:7806 serving `exception_metric`: name \"Exceptions\", description \"Open execution exceptions.\", endpoint /exception-count, type metric, sized w=5 h=4 on the grid, staleTime 900000, runButton true, refetchInterval 45000, params required: queue \u2014 a text input (type text), labeled \"Queue\", default \"all\", described \"Exception queue to inspect.\"; `open_orders`: name \"Open Orders\", description \"Live open orders blotter.\", endpoint /open-orders, type table, sized w=20 h=9 on the grid, staleTime 900000, runButton true, refetchInterval 45000, table columns required (field \u2192 header (type, extras)): order_id \u2192 header \"Order\" (text); symbol \u2192 header \"Symbol\" (text); qty \u2192 header \"Qty\" (number, int formatter); status \u2192 header \"Status\" (text, titleCase render); `venue_pdf`: name \"Venue Scorecard\", description \"Monthly venue scorecard PDF.\", endpoint /venue-scorecard, type pdf, sized w=16 h=14 on the grid, staleTime 900000, runButton true, refetchInterval 45000. Desk convention: every widget this backend serves carries staleTime 900000, shipping app \"Execution Config Live\", description \"Configured exceptions and orders.\", tab `execution` named \"Execution\" places: `exception_metric` at x=0 y=0 w=8 h=5, tab `posture` named \"Posture\" places: `open_orders` at x=0 y=0 w=20 h=9. Two: instantiate \"Execution Config Live\" into \"Execution Config Live Board\". Three: set queue to \"urgent\" on the opened `exception_metric` widget. Four: a note titled \"Execution Config Live\" with the text: \"Execution Config Live shipped from Execution Desk Data: runButton true.\"",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "add_generative_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "exception_metric",
+        "expect": {
+          "type": "metric",
+          "endpoint": "/exception-count",
+          "gridData.w": 5,
+          "gridData.h": 4,
+          "staleTime": 900000,
+          "runButton": true,
+          "refetchInterval": 45000
+        },
+        "params_include": [
+          {
+            "paramName": "queue",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "open_orders",
+        "expect": {
+          "type": "table",
+          "endpoint": "/open-orders"
+        }
+      },
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "venue_pdf",
+        "expect": {
+          "type": "pdf",
+          "endpoint": "/venue-scorecard"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "tab_count": 2,
+        "layout_refs_valid": true,
+        "name_contains": "Execution Config Live"
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Execution Desk Data",
+        "widget_id": "exception_metric",
+        "data_args": {
+          "queue": "urgent"
+        },
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Execution Config Live",
+          "runButton true"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "exception_metric": {
+            "name": "Exceptions",
+            "description": "Open execution exceptions.",
+            "endpoint": "/exception-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "runButton": true,
+            "refetchInterval": 45000,
+            "params": [
+              {
+                "paramName": "queue",
+                "type": "text",
+                "label": "Queue",
+                "value": "all",
+                "description": "Exception queue to inspect."
+              }
+            ],
+            "staleTime": 900000
+          },
+          "open_orders": {
+            "name": "Open Orders",
+            "description": "Live open orders blotter.",
+            "endpoint": "/open-orders",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "order_id",
+                    "headerName": "Order",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "symbol",
+                    "headerName": "Symbol",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "qty",
+                    "headerName": "Qty",
+                    "cellDataType": "number",
+                    "formatterFn": "int"
+                  },
+                  {
+                    "field": "status",
+                    "headerName": "Status",
+                    "cellDataType": "text",
+                    "renderFn": "titleCase"
+                  }
+                ]
+              }
+            },
+            "runButton": true,
+            "refetchInterval": 45000,
+            "staleTime": 900000
+          },
+          "venue_pdf": {
+            "name": "Venue Scorecard",
+            "description": "Monthly venue scorecard PDF.",
+            "endpoint": "/venue-scorecard",
+            "type": "pdf",
+            "gridData": {
+              "w": 16,
+              "h": 14
+            },
+            "runButton": true,
+            "refetchInterval": 45000,
+            "staleTime": 900000
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Execution Config Live",
+            "description": "Configured exceptions and orders.",
+            "tabs": {
+              "execution": {
+                "id": "execution",
+                "name": "Execution",
+                "layout": [
+                  {
+                    "i": "exception_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 8,
+                    "h": 5
+                  }
+                ]
+              },
+              "posture": {
+                "id": "posture",
+                "name": "Posture",
+                "layout": [
+                  {
+                    "i": "open_orders",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Execution Config Live",
+        "dashboard_name": "Execution Config Live Board",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "exception_metric",
+        "data_args": {
+          "queue": "urgent"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Execution Config Live",
+        "data": "Execution Config Live shipped from Execution Desk Data: runButton true."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique settings/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/open_orders,Execution Desk Data/venue_pdf; appdefs:Execution Desk Data/Execution Config Live; widgets:Execution Desk Data/exception_metric@*; generated:note@*:Execution Config Live,runButton true."
+}

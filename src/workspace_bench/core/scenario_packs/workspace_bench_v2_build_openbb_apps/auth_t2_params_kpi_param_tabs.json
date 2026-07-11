@@ -1,0 +1,104 @@
+{
+  "id": "auth_t2_params_kpi_param_tabs",
+  "title": "Compose the KPI Param Tabs parameter widget",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-params",
+    "tier-t2",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "params",
+    "composed"
+  ],
+  "prompt": "Publish \"Earnings Prep Data\" at http://localhost:7805 serving a single widgets.json entry with these requirements: `kpi_param_tabs`: name \"KPI Param Tabs\", description \"KPI table switched between growth and margin views.\", endpoint /kpi-param-tabs, type table, sized w=24 h=10 on the grid, category \"Earnings\", params required: view \u2014 a tabs switcher (type tabs), labeled \"View\", static options [\"Growth\"=\"growth\", \"Margins\"=\"margins\"], default \"growth\"; it auto-refreshes every 60 seconds. Time-based config converts to milliseconds: \"cache results for N minutes\" means staleTime N*60000; \"auto-refresh every N seconds\" means refetchInterval N*1000..",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Earnings Prep Data",
+        "widget_id": "kpi_param_tabs",
+        "expect": {
+          "type": "table",
+          "endpoint": "/kpi-param-tabs",
+          "gridData.w": 24,
+          "gridData.h": 10,
+          "category": "Earnings",
+          "refetchInterval": 60000
+        },
+        "params_include": [
+          {
+            "paramName": "view",
+            "type": "tabs"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Earnings Prep Data",
+        "url": "http://localhost:7805",
+        "widgets_json": {
+          "kpi_param_tabs": {
+            "name": "KPI Param Tabs",
+            "description": "KPI table switched between growth and margin views.",
+            "endpoint": "/kpi-param-tabs",
+            "type": "table",
+            "gridData": {
+              "w": 24,
+              "h": 10
+            },
+            "params": [
+              {
+                "paramName": "view",
+                "type": "tabs",
+                "label": "View",
+                "value": "growth",
+                "options": [
+                  {
+                    "label": "Growth",
+                    "value": "growth"
+                  },
+                  {
+                    "label": "Margins",
+                    "value": "margins"
+                  }
+                ]
+              }
+            ],
+            "refetchInterval": 60000,
+            "category": "Earnings"
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique params/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/kpi_param_tabs."
+}

@@ -42,7 +42,7 @@ from workspace_bench.core.runner import (
 
 def main(argv: list[str] | None = None) -> int:
     raw_argv = list(sys.argv[1:] if argv is None else argv)
-    if raw_argv[:1] == ["compare-models"]:
+    if raw_argv[:1] in (["compare-models"], ["eval"]):
         from workspace_bench.reports.model_compare import main as compare_models_main
 
         return compare_models_main(raw_argv[1:])
@@ -86,8 +86,12 @@ def main(argv: list[str] | None = None) -> int:
     report_parser.add_argument("--output", help="Write report to a file.")
 
     subparsers.add_parser(
+        "eval",
+        help="Run models with the interactive benchmark runner (one scenario, a slice, or everything).",
+    )
+    subparsers.add_parser(
         "compare-models",
-        help="Compare local model adapters with the interactive benchmark runner.",
+        help="Alias of eval — kept for multi-model sweep muscle memory.",
     )
 
     run_parser = subparsers.add_parser("run", help="Run scenarios.")
@@ -240,12 +244,14 @@ def _add_scenario_filters(parser: argparse.ArgumentParser) -> None:
 
 def _add_scenario_collection_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
-        "--pack",
+        "--pack", "--collection",
+        dest="pack",
         default="core",
         choices=["all", *BUILTIN_SCENARIO_PACK_ORDER],
         help=(
-            "Bundled scenario pack. Defaults to core. core/all are deprecated "
-            "aliases for the unified workspace-bench-v1 pack."
+            "Bundled scenario collection. core = operating the workspace "
+            "(300); build-openbb-apps = building custom backend apps (212); "
+            "all is a deprecated alias for core."
         ),
     )
     parser.add_argument(

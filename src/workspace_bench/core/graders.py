@@ -199,6 +199,8 @@ def grade_scenario(
                 f"Tab {tab_id!r} has overlapping widgets: {overlaps}.",
             )
 
+    _grade_backend_building(builder, scenario, final_snapshot)
+
     _grade_trace(builder, scenario, trace)
     return builder.result()
 
@@ -428,6 +430,281 @@ def _rect(layout: JsonDict) -> tuple[float, float, float, float]:
         float(layout.get("w", 0)),
         float(layout.get("h", 0)),
     )
+
+
+def _lookup_path(payload, dotted: str):
+    """Resolve a dotted path inside nested dicts. Returns (found, value)."""
+
+    current = payload
+    for part in dotted.split("."):
+        if isinstance(current, dict) and part in current:
+            current = current[part]
+        else:
+            return False, None
+    return True, current
+
+
+def _normalized_render_fns(value) -> list[str]:
+    if isinstance(value, str):
+        return [part.strip() for part in value.split(",") if part.strip()]
+    if isinstance(value, list):
+        return [str(part).strip() for part in value]
+    return []
+
+
+def _subset_matches(spec: JsonDict, candidate: JsonDict) -> bool:
+    for key, expected in spec.items():
+        if key == "renderFn":
+            expected_fns = set(_normalized_render_fns(expected))
+            if expected_fns - set(_normalized_render_fns(candidate.get(key))):
+                return False
+            continue
+        if candidate.get(key) != expected:
+            return False
+    return True
+
+
+def _flat_params(definition: JsonDict) -> list[JsonDict]:
+    params = definition.get("params")
+    flattened: list[JsonDict] = []
+    if isinstance(params, list):
+        for entry in params:
+            if isinstance(entry, list):
+                flattened.extend(item for item in entry if isinstance(item, dict))
+            elif isinstance(entry, dict):
+                flattened.append(entry)
+    return flattened
+
+
+def _app_layout_items(app: JsonDict) -> list[tuple[str, JsonDict]]:
+    items: list[tuple[str, JsonDict]] = []
+    for tab_key, tab in (app.get("tabs") or {}).items():
+        if not isinstance(tab, dict):
+            continue
+        for item in tab.get("layout", []) or []:
+            if isinstance(item, dict):
+                items.append((str(tab_key), item))
+    return items
+
+
+def _layout_items_overlap(first: JsonDict, second: JsonDict) -> bool:
+    try:
+        return (
+            first["x"] < second["x"] + second["w"]
+            and second["x"] < first["x"] + first["w"]
+            and first["y"] < second["y"] + second["h"]
+            and second["y"] < first["y"] + first["h"]
+        )
+    except (KeyError, TypeError):
+        return False
+
+
+def _find_custom_backend(snapshot: JsonDict, backend_name: str) -> JsonDict | None:
+    for meta in (snapshot.get("custom_backends") or {}).values():
+        if isinstance(meta, dict) and meta.get("name") == backend_name:
+            return meta
+    return None
+
+
+def _grade_backend_building(
+    builder: GradeBuilder, scenario: Scenario, final_snapshot: JsonDict
+) -> None:
+    for required in scenario.success.required_widget_defs:
+        backend = _find_custom_backend(final_snapshot, required.backend_name)
+        if backend is None:
+            builder.check(
+                False,
+                "missing_custom_backend",
+                (
+                    f"Expected custom backend {required.backend_name!r} to be "
+                    "registered (manage_backends operation='add' with widgets_json)."
+                ),
+            )
+            continue
+        definition = (backend.get("widgets_json") or {}).get(required.widget_id)
+        builder.check(
+            definition is not None,
+            "missing_widget_def",
+            (
+                f"Expected widget definition {required.widget_id!r} on custom "
+                f"backend {required.backend_name!r}."
+            ),
+        )
+        if definition is None:
+            continue
+        for path, expected in required.expect.items():
+            found, actual = _lookup_path(definition, path)
+            if found:
+                message = (
+                    f"Widget def {required.widget_id!r}: expected {path} == "
+                    f"{expected!r}, found {actual!r}."
+                )
+            else:
+                message = (
+                    f"Widget def {required.widget_id!r}: missing {path} "
+                    f"(expected {expected!r})."
+                )
+            builder.check(found and actual == expected, "widget_def_mismatch", message)
+        params = _flat_params(definition)
+        for spec in required.params_include:
+            builder.check(
+                any(_subset_matches(spec, param) for param in params),
+                "widget_def_mismatch",
+                f"Widget def {required.widget_id!r}: no param matching {spec}.",
+            )
+        found_cols, columns = _lookup_path(definition, "data.table.columnsDefs")
+        column_entries = columns if found_cols and isinstance(columns, list) else []
+        for spec in required.columns_include:
+            builder.check(
+                any(
+                    isinstance(column, dict) and _subset_matches(spec, column)
+                    for column in column_entries
+                ),
+                "widget_def_mismatch",
+                (
+                    f"Widget def {required.widget_id!r}: no columnsDefs entry "
+                    f"matching {spec}."
+                ),
+            )
+
+    for required in scenario.success.required_app_defs:
+        backend = _find_custom_backend(final_snapshot, required.backend_name)
+        if backend is None:
+            builder.check(
+                False,
+                "missing_custom_backend",
+                (
+                    f"Expected custom backend {required.backend_name!r} to be "
+                    "registered (manage_backends operation='add' with widgets_json)."
+                ),
+            )
+            continue
+        label = required.template_id or required.name_contains
+        app = None
+        for candidate in backend.get("apps_json") or []:
+            if not isinstance(candidate, dict):
+                continue
+            if required.template_id and candidate.get("template_id") == required.template_id:
+                app = candidate
+                break
+            if required.name_contains and required.name_contains.lower() in str(
+                candidate.get("name", "")
+            ).lower():
+                app = candidate
+                break
+        builder.check(
+            app is not None,
+            "missing_app_def",
+            (
+                f"Expected app {label!r} in the apps.json of custom backend "
+                f"{required.backend_name!r}."
+            ),
+        )
+        if app is None:
+            continue
+        for path, expected in required.expect.items():
+            found, actual = _lookup_path(app, path)
+            if found:
+                message = (
+                    f"App {label!r}: expected {path} == {expected!r}, "
+                    f"found {actual!r}."
+                )
+            else:
+                message = f"App {label!r}: missing {path} (expected {expected!r})."
+            builder.check(found and actual == expected, "app_def_mismatch", message)
+        tabs = app.get("tabs") or {}
+        for tab_id in required.tabs_include:
+            builder.check(
+                tab_id in tabs,
+                "app_def_mismatch",
+                f"App {label!r}: expected tab {tab_id!r}, found {sorted(tabs)}.",
+            )
+        if required.tab_count is not None:
+            builder.check(
+                len(tabs) == required.tab_count,
+                "app_def_mismatch",
+                f"App {label!r}: expected {required.tab_count} tab(s), found {len(tabs)}.",
+            )
+        if required.prompts_min_count is not None:
+            prompts = app.get("prompts") or []
+            count = len(prompts) if isinstance(prompts, list) else 0
+            builder.check(
+                count >= required.prompts_min_count,
+                "app_def_mismatch",
+                (
+                    f"App {label!r}: expected at least {required.prompts_min_count} "
+                    f"prompt(s), found {count}."
+                ),
+            )
+        items = _app_layout_items(app)
+        if required.layout_refs_valid:
+            widget_ids = set(backend.get("widgets_json") or {})
+            dangling = sorted({
+                str(item.get("i"))
+                for _, item in items
+                if str(item.get("i")) not in widget_ids
+                and str(item.get("i")) != "navigation_bar"
+            })
+            builder.check(
+                not dangling,
+                "app_layout_ref_invalid",
+                (
+                    f"App {label!r}: layout references widgets the backend does "
+                    f"not serve: {dangling}."
+                ),
+            )
+        if required.no_overlaps:
+            by_tab: dict[str, list[JsonDict]] = {}
+            for tab_key, item in items:
+                by_tab.setdefault(tab_key, []).append(item)
+            overlaps = []
+            for tab_key, tab_items in by_tab.items():
+                for index, first in enumerate(tab_items):
+                    for second in tab_items[index + 1:]:
+                        if _layout_items_overlap(first, second):
+                            overlaps.append(
+                                (tab_key, str(first.get("i")), str(second.get("i")))
+                            )
+            builder.check(
+                not overlaps,
+                "app_layout_overlap",
+                f"App {label!r}: overlapping layout items: {overlaps}.",
+            )
+        for placement in required.widgets_on_tab:
+            tab_id = str(placement.get("tab_id"))
+            widget_id = str(placement.get("widget_id"))
+            present = any(
+                tab_key == tab_id and str(item.get("i")) == widget_id
+                for tab_key, item in items
+            )
+            builder.check(
+                present,
+                "app_def_mismatch",
+                f"App {label!r}: expected widget {widget_id!r} on tab {tab_id!r}.",
+            )
+        groups = app.get("groups") or []
+        for spec in required.groups_include:
+            widget_ids_include = spec.get("widgetIds_include", [])
+            base_spec = {
+                key: value
+                for key, value in spec.items()
+                if key != "widgetIds_include"
+            }
+            matched = False
+            for group in groups:
+                if not isinstance(group, dict):
+                    continue
+                if not _subset_matches(base_spec, group):
+                    continue
+                group_widgets = group.get("widgetIds") or []
+                if all(wid in group_widgets for wid in widget_ids_include):
+                    matched = True
+                    break
+            builder.check(
+                matched,
+                "app_def_mismatch",
+                f"App {label!r}: no group matching {spec}.",
+            )
 
 
 def _grade_trace(

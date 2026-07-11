@@ -1,0 +1,220 @@
+{
+  "id": "auth_t2_apps_surveillance_morning",
+  "title": "Compose the Surveillance Morning app",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-apps",
+    "tier-t2",
+    "cell3",
+    "build-openbb-apps",
+    "apps-json",
+    "composed"
+  ],
+  "prompt": "One app to ship on \"Surveillance Data\": app \"Surveillance Morning\", description \"Alerts and case notes.\", tab `alerts` named \"Alerts\" places: `alert_queue` at x=0 y=0 w=24 h=10 preset with params {\"severity\": \"high\"}; `case_notes` at x=24 y=0 w=12 h=10; `alert_metric` at x=0 y=10 w=12 h=6, suggested prompts: \"Which high-severity alerts are unassigned?\". The widgets are already served \u2014 submit apps_json with a refresh.",
+  "fixtures": {},
+  "initial_state": {
+    "custom_backends": [
+      {
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "alert_queue": {
+            "name": "Alert Queue",
+            "description": "Open surveillance alerts.",
+            "endpoint": "/alert-queue",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "severity",
+                "type": "text",
+                "label": "Severity",
+                "value": "high",
+                "options": [
+                  {
+                    "label": "High",
+                    "value": "high"
+                  },
+                  {
+                    "label": "Medium",
+                    "value": "medium"
+                  },
+                  {
+                    "label": "Low",
+                    "value": "low"
+                  }
+                ]
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "alert_id",
+                    "headerName": "Alert",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "desk",
+                    "headerName": "Desk",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "severity",
+                    "headerName": "Severity",
+                    "cellDataType": "text",
+                    "renderFn": "titleCase"
+                  },
+                  {
+                    "field": "age_days",
+                    "headerName": "Age (d)",
+                    "cellDataType": "number",
+                    "formatterFn": "int"
+                  }
+                ]
+              }
+            }
+          },
+          "case_notes": {
+            "name": "Case Notes",
+            "description": "Notes for one surveillance case.",
+            "endpoint": "/case-notes",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "case_id",
+                "type": "text",
+                "label": "Case",
+                "value": "C-1042",
+                "description": "Case identifier."
+              }
+            ]
+          },
+          "alert_metric": {
+            "name": "Open Alerts",
+            "description": "Open alert count.",
+            "endpoint": "/alert-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            }
+          }
+        }
+      }
+    ]
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_app_defs": [
+      {
+        "backend_name": "Surveillance Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Surveillance Morning",
+        "tabs_include": [
+          "alerts"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "alerts",
+            "widget_id": "alert_queue"
+          },
+          {
+            "tab_id": "alerts",
+            "widget_id": "case_notes"
+          },
+          {
+            "tab_id": "alerts",
+            "widget_id": "alert_metric"
+          }
+        ],
+        "prompts_min_count": 1
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "backend_001",
+        "apps_json": [
+          {
+            "name": "Surveillance Morning",
+            "description": "Alerts and case notes.",
+            "tabs": {
+              "alerts": {
+                "id": "alerts",
+                "name": "Alerts",
+                "layout": [
+                  {
+                    "i": "alert_queue",
+                    "x": 0,
+                    "y": 0,
+                    "w": 24,
+                    "h": 10,
+                    "state": {
+                      "params": {
+                        "severity": "high"
+                      }
+                    }
+                  },
+                  {
+                    "i": "case_notes",
+                    "x": 24,
+                    "y": 0,
+                    "w": 12,
+                    "h": 10
+                  },
+                  {
+                    "i": "alert_metric",
+                    "x": 0,
+                    "y": 10,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              }
+            },
+            "groups": [],
+            "prompts": [
+              "Which high-severity alerts are unassigned?"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "app-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique apps/t2 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact appdefs:Surveillance Data/Surveillance Morning."
+}

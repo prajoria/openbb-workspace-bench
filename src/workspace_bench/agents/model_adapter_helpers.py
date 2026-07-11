@@ -246,16 +246,56 @@ TOOL_REFERENCE = {
         },
     },
     "manage_backends": {
-        "description": "List, add, or refresh fixture backends.",
+        "description": (
+            "List, add, or refresh backends. operation='add' with widgets_json "
+            "registers a CUSTOM backend you author: widgets_json is the "
+            "widgets.json object map your backend serves (each widget definition "
+            "REQUIRES name, description, and endpoint; optional type from the "
+            "workspace enum table|markdown|chart|chart-highcharts|chart-vegalite|"
+            "metric|pdf|html|newsfeed|omni|live_grid|ssrm_table|multi_file_viewer|"
+            "advanced_charting|iframe|youtube|note|file_viewer|ssrm_advanced "
+            "(default table), gridData {w,h} on a 40-column grid, params "
+            "[{paramName, type text|number|date|boolean|endpoint|ticker|button|"
+            "tabs|form, label, value, options, optionsEndpoint, multiSelect, ...}], "
+            "and data.table.columnsDefs [{field, headerName, cellDataType, "
+            "formatterFn, renderFn greenRed|titleCase|hoverCard|cellOnClick|"
+            "columnColor|showCellChange, renderFnParams {actionType "
+            "groupBy|sendToAgent, groupBy {paramName}}, ...}] for tables). "
+            "Widget config fields: staleTime "
+            "(cache ms, >=1000), refetchInterval (auto-refresh ms), runButton "
+            "(boolean, adds a manual run button), source, category. Type-specific "
+            "data fields: data.defaultSymbol (advanced_charting), data.wsRowIdColumn "
+            "+ top-level wsEndpoint (live_grid), data.updateFrequency, data.dataKey "
+            "(response key holding rows). form params carry inputParams (an array "
+            "of inner param definitions) plus their own submit 'endpoint' "
+            "(relative path) and optional 'method' POST|PUT; 'multiple' is "
+            "allowed on text params only. apps_json is the apps.json ARRAY "
+            "(each app REQUIRES name and "
+            "tabs {tab_id: {id, name, layout: [{i, x, y, w, h, optional state "
+            "{params {..}} presets}]}}; every layout 'i' must be a widget_id the "
+            "backend serves; no overlapping layout items; optional description, "
+            "allowCustomization, groups [{name, type endpointParam|param|ticker, "
+            "paramName, widgetIds}], prompts [string]). Invalid payloads are "
+            "rejected with specific errors. operation='refresh' with widgets_json/"
+            "apps_json replaces what an existing custom backend serves — use it to "
+            "fix a broken custom backend."
+        ),
         "args": {
             "operation": "list|add|refresh",
             "name": "string, required for add",
-            "backend_id": "string, optional",
-            "url": "string, optional",
+            "backend_id": "string, required for refresh",
+            "url": "string, required when adding a custom backend",
+            "widgets_json": "object map widget_id -> widget definition (build payload)",
+            "apps_json": "array of app definitions (build payload)",
         },
     },
     "manage_apps": {
-        "description": "List, read, or instantiate app templates from a backend.",
+        "description": (
+            "List, read, or instantiate app templates a backend serves. This tool "
+            "does NOT publish or author apps — apps.json is served by the backend, "
+            "so publish or update it via manage_backends (operation='add' or "
+            "'refresh' with apps_json), then instantiate here."
+        ),
         "args": {
             "operation": "list|read|instantiate",
             "backend_id": "string",

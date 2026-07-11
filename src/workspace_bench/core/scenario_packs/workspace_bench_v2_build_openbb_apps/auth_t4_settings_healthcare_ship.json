@@ -1,0 +1,261 @@
+{
+  "id": "auth_t4_settings_healthcare_ship",
+  "title": "Ship, open, and configure the Catalyst Config Live app",
+  "workflow": "healthcare-catalyst-review",
+  "subdomain": "healthcare",
+  "tags": [
+    "family-settings",
+    "tier-t4",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "settings",
+    "orchestration"
+  ],
+  "prompt": "Four steps. One: add \"Healthcare Research Data\" at http://localhost:7808 serving `catalyst_metric`: name \"Catalysts 30d\", description \"Catalysts in the next 30 days.\", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid, category \"Catalysts\", staleTime 900000, params required: window \u2014 a text input (type text), labeled \"Window\", default \"30d\", described \"Catalyst window in focus.\"; `trial_catalysts`: name \"Trial Catalysts\", description \"Upcoming clinical trial readouts.\", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, category \"Catalysts\", staleTime 900000, params required: ticker \u2014 a dropdown (type endpoint), labeled \"Ticker\", options fetched from /tickers, default \"PFE\", table columns required (field \u2192 header (type, extras)): ticker \u2192 header \"Ticker\" (text); phase \u2192 header \"Phase\" (text); readout_date \u2192 header \"Readout\" (dateString); `pipeline_chart`: name \"Pipeline by Phase\", description \"Plotly pipeline distribution by phase.\", endpoint /pipeline-by-phase, type chart, sized w=20 h=9 on the grid, category \"Catalysts\", staleTime 900000, raw true. Desk convention: every widget this backend serves carries staleTime 900000, shipping app \"Catalyst Config Live\", description \"Configured catalysts and trial table.\", tab `catalysts` named \"Catalysts\" places: `catalyst_metric` at x=0 y=0 w=8 h=5, tab `posture` named \"Posture\" places: `trial_catalysts` at x=0 y=0 w=20 h=9. Two: instantiate \"Catalyst Config Live\" into \"Catalyst Config Live Board\". Three: set window to \"60d\" on the opened `catalyst_metric` widget. Four: a note titled \"Catalyst Config Live\" with the text: \"Catalyst Config Live shipped from Healthcare Research Data: Catalysts category.\"",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "add_generative_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Healthcare Research Data",
+        "widget_id": "catalyst_metric",
+        "expect": {
+          "type": "metric",
+          "endpoint": "/catalyst-count",
+          "gridData.w": 6,
+          "gridData.h": 4,
+          "category": "Catalysts",
+          "staleTime": 900000
+        },
+        "params_include": [
+          {
+            "paramName": "window",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "backend_name": "Healthcare Research Data",
+        "widget_id": "trial_catalysts",
+        "expect": {
+          "type": "table",
+          "endpoint": "/trial-catalysts"
+        }
+      },
+      {
+        "backend_name": "Healthcare Research Data",
+        "widget_id": "pipeline_chart",
+        "expect": {
+          "type": "chart",
+          "endpoint": "/pipeline-by-phase"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Healthcare Research Data",
+        "tab_count": 2,
+        "layout_refs_valid": true,
+        "name_contains": "Catalyst Config Live"
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Healthcare Research Data",
+        "widget_id": "catalyst_metric",
+        "data_args": {
+          "window": "60d"
+        },
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Catalyst Config Live",
+          "Catalysts category"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Healthcare Research Data",
+        "url": "http://localhost:7808",
+        "widgets_json": {
+          "catalyst_metric": {
+            "name": "Catalysts 30d",
+            "description": "Catalysts in the next 30 days.",
+            "endpoint": "/catalyst-count",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            },
+            "category": "Catalysts",
+            "staleTime": 900000,
+            "params": [
+              {
+                "paramName": "window",
+                "type": "text",
+                "label": "Window",
+                "value": "30d",
+                "description": "Catalyst window in focus."
+              }
+            ]
+          },
+          "trial_catalysts": {
+            "name": "Trial Catalysts",
+            "description": "Upcoming clinical trial readouts.",
+            "endpoint": "/trial-catalysts",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "ticker",
+                "type": "endpoint",
+                "label": "Ticker",
+                "value": "PFE",
+                "optionsEndpoint": "/tickers"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "ticker",
+                    "headerName": "Ticker",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "phase",
+                    "headerName": "Phase",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "readout_date",
+                    "headerName": "Readout",
+                    "cellDataType": "dateString"
+                  }
+                ]
+              }
+            },
+            "category": "Catalysts",
+            "staleTime": 900000
+          },
+          "pipeline_chart": {
+            "name": "Pipeline by Phase",
+            "description": "Plotly pipeline distribution by phase.",
+            "endpoint": "/pipeline-by-phase",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "raw": true,
+            "category": "Catalysts",
+            "staleTime": 900000
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Catalyst Config Live",
+            "description": "Configured catalysts and trial table.",
+            "tabs": {
+              "catalysts": {
+                "id": "catalysts",
+                "name": "Catalysts",
+                "layout": [
+                  {
+                    "i": "catalyst_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 8,
+                    "h": 5
+                  }
+                ]
+              },
+              "posture": {
+                "id": "posture",
+                "name": "Posture",
+                "layout": [
+                  {
+                    "i": "trial_catalysts",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Catalyst Config Live",
+        "dashboard_name": "Catalyst Config Live Board",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "catalyst_metric",
+        "data_args": {
+          "window": "60d"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Catalyst Config Live",
+        "data": "Catalyst Config Live shipped from Healthcare Research Data: Catalysts category."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique settings/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric,Healthcare Research Data/pipeline_chart,Healthcare Research Data/trial_catalysts; appdefs:Healthcare Research Data/Catalyst Config Live; widgets:Healthcare Research Data/catalyst_metric@*; generated:note@*:Catalyst Config Live,Catalysts category."
+}

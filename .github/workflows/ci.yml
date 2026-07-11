@@ -23,7 +23,9 @@ jobs:
         run: uv run --extra dev pytest
 
       - name: Validate benchmark scenarios
-        run: uv run --extra dev workspace-bench validate --pack all --min-scenarios 300
+        run: |
+          uv run --extra dev workspace-bench validate --collection core --min-scenarios 300
+          uv run --extra dev workspace-bench validate --collection build-openbb-apps --min-scenarios 212
 
       - name: Run oracle baseline
         run: uv run --extra dev workspace-bench run --agent oracle

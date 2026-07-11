@@ -1,0 +1,109 @@
+{
+  "id": "auth_t0_aggrid_auction_calendar",
+  "title": "Build the Auction Calendar table definition",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-aggrid",
+    "tier-t0",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "aggrid"
+  ],
+  "prompt": "Connect a new custom backend named \"Rates Watch Data\" at http://localhost:7803. Its widgets.json serves exactly one widget \u2014 `auction_calendar`: name \"Auction Calendar\", description \"Upcoming treasury auctions.\", endpoint /auction-calendar, type table, sized w=20 h=9 on the grid, table columns required (field \u2192 header (type, extras)): date \u2192 header \"Date\" (dateString); security \u2192 header \"Security\" (text); size_bn \u2192 header \"Size ($B)\" (number). Register it with manage_backends.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Rates Watch Data",
+        "widget_id": "auction_calendar",
+        "expect": {
+          "type": "table",
+          "endpoint": "/auction-calendar",
+          "gridData.w": 20,
+          "gridData.h": 9
+        },
+        "columns_include": [
+          {
+            "field": "date",
+            "headerName": "Date",
+            "cellDataType": "dateString"
+          },
+          {
+            "field": "security",
+            "headerName": "Security",
+            "cellDataType": "text"
+          },
+          {
+            "field": "size_bn",
+            "headerName": "Size ($B)",
+            "cellDataType": "number"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Rates Watch Data",
+        "url": "http://localhost:7803",
+        "widgets_json": {
+          "auction_calendar": {
+            "name": "Auction Calendar",
+            "description": "Upcoming treasury auctions.",
+            "endpoint": "/auction-calendar",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "date",
+                    "headerName": "Date",
+                    "cellDataType": "dateString"
+                  },
+                  {
+                    "field": "security",
+                    "headerName": "Security",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "size_bn",
+                    "headerName": "Size ($B)",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "train",
+  "novelty": "Unique aggrid/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/auction_calendar."
+}

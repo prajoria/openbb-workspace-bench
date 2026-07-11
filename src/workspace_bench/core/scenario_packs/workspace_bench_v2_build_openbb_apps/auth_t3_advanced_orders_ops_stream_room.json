@@ -1,0 +1,239 @@
+{
+  "id": "auth_t3_advanced_orders_ops_stream_room",
+  "title": "Assemble the Execution Stream Room",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-advanced",
+    "tier-t3",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "advanced",
+    "multi-tab"
+  ],
+  "prompt": "Check the workspace, then publish \"Execution Desk Data\" at http://localhost:7806 in one add. widgets.json serves: `orders_ops_stream`: name \"Orders Ops Stream\", description \"Streaming order tape for the ops room.\", endpoint /orders-ops-stream, type live_grid, sized w=24 h=10 on the grid, wsEndpoint \"wss://execution.example/ops-orders\", refetchInterval false, table columns required (field \u2192 header (type, extras)): order_id \u2192 header \"Order\" (text); px \u2192 header \"Price\" (number, showCellChange render) with renderFnParams {\"colorValueKey\": \"px_change\"}, data.updateFrequency 1000, data.wsRowIdColumn \"order_id\"; `exception_metric`: name \"Exceptions\", description \"Open execution exceptions.\", endpoint /exception-count, type metric, sized w=5 h=4 on the grid All of `orders_ops_stream`, `exception_metric` take the same shared param: venue_scope \u2014 a text input (type text), labeled \"Venue scope\", default \"ARCA\", described \"Venue reviewed across the stream room.\".. apps.json ships app \"Execution Stream Room\", description \"Live orders and exception posture.\", tab `stream` named \"Stream\" places: `orders_ops_stream` at x=0 y=0 w=24 h=10, tab `exceptions` named \"Exceptions\" places: `exception_metric` at x=0 y=0 w=8 h=5, group \"Venue Sync\" (type param) syncing param venue_scope across [\"orders_ops_stream\", \"exception_metric\"].",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "orders_ops_stream",
+        "expect": {
+          "type": "live_grid",
+          "endpoint": "/orders-ops-stream",
+          "gridData.w": 24,
+          "gridData.h": 10,
+          "wsEndpoint": "wss://execution.example/ops-orders",
+          "refetchInterval": false,
+          "data.updateFrequency": 1000,
+          "data.wsRowIdColumn": "order_id"
+        },
+        "params_include": [
+          {
+            "paramName": "venue_scope",
+            "type": "text"
+          }
+        ],
+        "columns_include": [
+          {
+            "field": "order_id",
+            "headerName": "Order",
+            "cellDataType": "text"
+          },
+          {
+            "field": "px",
+            "headerName": "Price",
+            "cellDataType": "number",
+            "renderFn": "showCellChange"
+          }
+        ]
+      },
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "exception_metric",
+        "expect": {
+          "type": "metric",
+          "endpoint": "/exception-count"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Execution Stream Room",
+        "tabs_include": [
+          "exceptions",
+          "stream"
+        ],
+        "tab_count": 2,
+        "widgets_on_tab": [
+          {
+            "tab_id": "stream",
+            "widget_id": "orders_ops_stream"
+          },
+          {
+            "tab_id": "exceptions",
+            "widget_id": "exception_metric"
+          }
+        ],
+        "groups_include": [
+          {
+            "name": "Venue Sync",
+            "type": "param",
+            "paramName": "venue_scope",
+            "widgetIds_include": [
+              "orders_ops_stream",
+              "exception_metric"
+            ]
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "orders_ops_stream": {
+            "name": "Orders Ops Stream",
+            "description": "Streaming order tape for the ops room.",
+            "endpoint": "/orders-ops-stream",
+            "type": "live_grid",
+            "wsEndpoint": "wss://execution.example/ops-orders",
+            "gridData": {
+              "w": 24,
+              "h": 10
+            },
+            "data": {
+              "wsRowIdColumn": "order_id",
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "order_id",
+                    "headerName": "Order",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "px",
+                    "headerName": "Price",
+                    "cellDataType": "number",
+                    "renderFn": "showCellChange",
+                    "renderFnParams": {
+                      "colorValueKey": "px_change"
+                    }
+                  }
+                ]
+              },
+              "updateFrequency": 1000
+            },
+            "refetchInterval": false,
+            "params": [
+              {
+                "paramName": "venue_scope",
+                "type": "text",
+                "label": "Venue scope",
+                "value": "ARCA",
+                "description": "Venue reviewed across the stream room."
+              }
+            ]
+          },
+          "exception_metric": {
+            "name": "Exceptions",
+            "description": "Open execution exceptions.",
+            "endpoint": "/exception-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "params": [
+              {
+                "paramName": "venue_scope",
+                "type": "text",
+                "label": "Venue scope",
+                "value": "ARCA",
+                "description": "Venue reviewed across the stream room."
+              }
+            ]
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Execution Stream Room",
+            "description": "Live orders and exception posture.",
+            "tabs": {
+              "stream": {
+                "id": "stream",
+                "name": "Stream",
+                "layout": [
+                  {
+                    "i": "orders_ops_stream",
+                    "x": 0,
+                    "y": 0,
+                    "w": 24,
+                    "h": 10
+                  }
+                ]
+              },
+              "exceptions": {
+                "id": "exceptions",
+                "name": "Exceptions",
+                "layout": [
+                  {
+                    "i": "exception_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 8,
+                    "h": 5
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Venue Sync",
+                "type": "param",
+                "paramName": "venue_scope",
+                "widgetIds": [
+                  "orders_ops_stream",
+                  "exception_metric"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "validation",
+  "novelty": "Unique advanced/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/orders_ops_stream; appdefs:Execution Desk Data/Execution Stream Room."
+}

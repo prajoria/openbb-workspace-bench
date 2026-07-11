@@ -1,0 +1,205 @@
+{
+  "id": "auth_t3_aggrid_chain_flows",
+  "title": "Assemble the Flow Monitor app around Chain Flows",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "crypto",
+  "tags": [
+    "family-aggrid",
+    "tier-t3",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "aggrid",
+    "multi-tab"
+  ],
+  "prompt": "Check the workspace, then publish \"Chain TVL Data\" at http://localhost:7802 in one add. widgets.json serves 2 entries: `chain_flows`: name \"Chain Flows\", description \"Net flows by chain.\", endpoint /chain-flows, type table, gridData w=20 h=9, staleTime 900000, columns derived from served rows like [{\"chain\": \"Ethereum\", \"inflow_usd\": 120000000, \"net_pct\": 0.033, \"outflow_usd\": 90000000}, {\"chain\": \"Solana\", \"inflow_usd\": 80000000, \"net_pct\": -0.019, \"outflow_usd\": 95000000}] \u2014 Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent.. Plus: `gas_metric`: name \"Gas Now\", description \"Current gas price snapshot.\", endpoint /gas-now, type metric, sized w=5 h=4 on the grid. apps.json ships app \"Flow Monitor\", description \"Chain flows and gas.\", tab `flows` named \"Flows\" places: `chain_flows` at x=0 y=0 w=20 h=9, tab `gas` named \"Gas\" places: `gas_metric` at x=0 y=0 w=12 h=6.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Chain TVL Data",
+        "widget_id": "chain_flows",
+        "expect": {
+          "type": "table",
+          "endpoint": "/chain-flows",
+          "gridData.w": 20,
+          "gridData.h": 9,
+          "staleTime": 900000
+        },
+        "columns_include": [
+          {
+            "field": "chain",
+            "headerName": "Chain",
+            "cellDataType": "text"
+          },
+          {
+            "field": "inflow_usd",
+            "headerName": "Inflow Usd",
+            "cellDataType": "number"
+          },
+          {
+            "field": "outflow_usd",
+            "headerName": "Outflow Usd",
+            "cellDataType": "number"
+          },
+          {
+            "field": "net_pct",
+            "headerName": "Net Pct",
+            "cellDataType": "number",
+            "formatterFn": "percent"
+          }
+        ]
+      },
+      {
+        "backend_name": "Chain TVL Data",
+        "widget_id": "gas_metric",
+        "expect": {
+          "type": "metric",
+          "endpoint": "/gas-now"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Chain TVL Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Flow Monitor",
+        "tabs_include": [
+          "flows",
+          "gas"
+        ],
+        "tab_count": 2,
+        "widgets_on_tab": [
+          {
+            "tab_id": "flows",
+            "widget_id": "chain_flows"
+          },
+          {
+            "tab_id": "gas",
+            "widget_id": "gas_metric"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Chain TVL Data",
+        "url": "http://localhost:7802",
+        "widgets_json": {
+          "chain_flows": {
+            "name": "Chain Flows",
+            "description": "Net flows by chain.",
+            "endpoint": "/chain-flows",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "chain",
+                    "headerName": "Chain",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "inflow_usd",
+                    "headerName": "Inflow Usd",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "outflow_usd",
+                    "headerName": "Outflow Usd",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "net_pct",
+                    "headerName": "Net Pct",
+                    "cellDataType": "number",
+                    "formatterFn": "percent"
+                  }
+                ]
+              }
+            },
+            "staleTime": 900000
+          },
+          "gas_metric": {
+            "name": "Gas Now",
+            "description": "Current gas price snapshot.",
+            "endpoint": "/gas-now",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Flow Monitor",
+            "description": "Chain flows and gas.",
+            "tabs": {
+              "flows": {
+                "id": "flows",
+                "name": "Flows",
+                "layout": [
+                  {
+                    "i": "chain_flows",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "gas": {
+                "id": "gas",
+                "name": "Gas",
+                "layout": [
+                  {
+                    "i": "gas_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique aggrid/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chain_flows,Chain TVL Data/gas_metric; appdefs:Chain TVL Data/Flow Monitor."
+}

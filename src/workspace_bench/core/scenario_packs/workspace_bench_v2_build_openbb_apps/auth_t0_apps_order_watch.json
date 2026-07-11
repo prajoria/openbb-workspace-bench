@@ -1,0 +1,158 @@
+{
+  "id": "auth_t0_apps_order_watch",
+  "title": "Build the Order Watch app definition",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-apps",
+    "tier-t0",
+    "cell3",
+    "build-openbb-apps",
+    "apps-json"
+  ],
+  "prompt": "Your backend \"Execution Desk Data\" is already connected and serves `open_orders`, `exception_metric`. Ship its apps.json \u2014 exactly one app: app \"Order Watch\", description \"Open orders and exceptions.\", tab `orders` named \"Orders\" places: `open_orders` at x=0 y=0 w=20 h=9; `exception_metric` at x=20 y=0 w=12 h=6. Submit it with a manage_backends refresh (apps_json).",
+  "fixtures": {},
+  "initial_state": {
+    "custom_backends": [
+      {
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "open_orders": {
+            "name": "Open Orders",
+            "description": "Live open orders blotter.",
+            "endpoint": "/open-orders",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "order_id",
+                    "headerName": "Order",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "symbol",
+                    "headerName": "Symbol",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "qty",
+                    "headerName": "Qty",
+                    "cellDataType": "number",
+                    "formatterFn": "int"
+                  },
+                  {
+                    "field": "status",
+                    "headerName": "Status",
+                    "cellDataType": "text",
+                    "renderFn": "titleCase"
+                  }
+                ]
+              }
+            }
+          },
+          "exception_metric": {
+            "name": "Exceptions",
+            "description": "Open execution exceptions.",
+            "endpoint": "/exception-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            }
+          }
+        }
+      }
+    ]
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_app_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Order Watch",
+        "tabs_include": [
+          "orders"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "orders",
+            "widget_id": "open_orders"
+          },
+          {
+            "tab_id": "orders",
+            "widget_id": "exception_metric"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "backend_001",
+        "apps_json": [
+          {
+            "name": "Order Watch",
+            "description": "Open orders and exceptions.",
+            "tabs": {
+              "orders": {
+                "id": "orders",
+                "name": "Orders",
+                "layout": [
+                  {
+                    "i": "open_orders",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  },
+                  {
+                    "i": "exception_metric",
+                    "x": 20,
+                    "y": 0,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "app-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique apps/t0 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact appdefs:Execution Desk Data/Order Watch."
+}

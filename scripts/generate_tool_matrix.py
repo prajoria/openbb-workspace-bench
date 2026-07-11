@@ -14,6 +14,9 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 PACK = REPO / "src/workspace_bench/core/scenario_packs/workspace_bench_v1"
+BUILD_PACK = (
+    REPO / "src/workspace_bench/core/scenario_packs/workspace_bench_v2_build_openbb_apps"
+)
 OUT_MD = REPO / "docs/tool-coverage-matrix.md"
 OUT_JSON = REPO / "docs/tool-matrix-data.json"
 
@@ -65,7 +68,10 @@ def rows_for(scenarios: list[dict], pack: str) -> list[dict]:
 
 
 def main() -> None:
-    packs = [("workspace-bench-v1", load(PACK))]
+    packs = [
+        ("core (workspace-bench-v1)", load(PACK)),
+        ("build-openbb-apps (workspace-bench-v2-build-openbb-apps)", load(BUILD_PACK)),
+    ]
 
     all_rows: list[dict] = []
     lines = [

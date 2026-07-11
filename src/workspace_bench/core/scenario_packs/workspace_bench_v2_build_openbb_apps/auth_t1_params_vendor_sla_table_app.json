@@ -1,0 +1,194 @@
+{
+  "id": "auth_t1_params_vendor_sla_table_app",
+  "title": "Ship Vendor SLA Status as the Vendor Filter Board app",
+  "workflow": "vendor-sla-monitoring",
+  "subdomain": "operations",
+  "tags": [
+    "family-params",
+    "tier-t1",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "params"
+  ],
+  "prompt": "Build widgets.json (`vendor_sla_table`: name \"Vendor SLA Status\", description \"Vendor SLA state with breach flags.\", endpoint /vendor-sla, type table, sized w=20 h=9 on the grid, params required: status \u2014 a text input (type text), labeled \"Status\", static options [\"Open\"=\"Open\", \"Escalated\"=\"Escalated\", \"Resolved\"=\"Resolved\"], default \"Open\", table columns required (field \u2192 header (type, extras)): vendor \u2192 header \"Vendor\" (text); status \u2192 header \"Status\" (text, titleCase render); latency_ms \u2192 header \"Latency (ms)\" (number); breach \u2192 header \"Breach\" (boolean)) and apps.json (an app named \"Vendor Filter Board\" (description \"Status-filtered vendor SLA table.\") with one tab `vendors` named \"Vendors\" placing `vendor_sla_table` at x=0 y=0 w=20 h=9) for \"Vendor SLA Data\" at http://localhost:7804; add them together.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Vendor SLA Data",
+        "widget_id": "vendor_sla_table",
+        "expect": {
+          "type": "table",
+          "endpoint": "/vendor-sla",
+          "gridData.w": 20,
+          "gridData.h": 9
+        },
+        "params_include": [
+          {
+            "paramName": "status",
+            "type": "text"
+          }
+        ],
+        "columns_include": [
+          {
+            "field": "vendor",
+            "headerName": "Vendor",
+            "cellDataType": "text"
+          },
+          {
+            "field": "status",
+            "headerName": "Status",
+            "cellDataType": "text",
+            "renderFn": "titleCase"
+          },
+          {
+            "field": "latency_ms",
+            "headerName": "Latency (ms)",
+            "cellDataType": "number"
+          },
+          {
+            "field": "breach",
+            "headerName": "Breach",
+            "cellDataType": "boolean"
+          }
+        ]
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Vendor SLA Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Vendor Filter Board",
+        "tabs_include": [
+          "vendors"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "vendors",
+            "widget_id": "vendor_sla_table"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Vendor SLA Data",
+        "url": "http://localhost:7804",
+        "widgets_json": {
+          "vendor_sla_table": {
+            "name": "Vendor SLA Status",
+            "description": "Vendor SLA state with breach flags.",
+            "endpoint": "/vendor-sla",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "status",
+                "type": "text",
+                "label": "Status",
+                "value": "Open",
+                "options": [
+                  {
+                    "label": "Open",
+                    "value": "Open"
+                  },
+                  {
+                    "label": "Escalated",
+                    "value": "Escalated"
+                  },
+                  {
+                    "label": "Resolved",
+                    "value": "Resolved"
+                  }
+                ]
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "vendor",
+                    "headerName": "Vendor",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "status",
+                    "headerName": "Status",
+                    "cellDataType": "text",
+                    "renderFn": "titleCase"
+                  },
+                  {
+                    "field": "latency_ms",
+                    "headerName": "Latency (ms)",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "breach",
+                    "headerName": "Breach",
+                    "cellDataType": "boolean"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Vendor Filter Board",
+            "description": "Status-filtered vendor SLA table.",
+            "tabs": {
+              "vendors": {
+                "id": "vendors",
+                "name": "Vendors",
+                "layout": [
+                  {
+                    "i": "vendor_sla_table",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "test",
+  "novelty": "Unique params/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/vendor_sla_table; appdefs:Vendor SLA Data/Vendor Filter Board."
+}

@@ -1,0 +1,179 @@
+{
+  "id": "auth_t0_apps_vendor_board",
+  "title": "Build the Vendor Board app definition",
+  "workflow": "vendor-sla-monitoring",
+  "subdomain": "operations",
+  "tags": [
+    "family-apps",
+    "tier-t0",
+    "cell4",
+    "build-openbb-apps",
+    "apps-json"
+  ],
+  "prompt": "The widgets are served; the app file is missing. For \"Vendor SLA Data\", build apps.json with one entry \u2014 app \"Vendor Board\", description \"Vendor SLAs and breaches.\", tab `vendors` named \"Vendors\" places: `vendor_sla_table` at x=0 y=0 w=20 h=9; `breach_metric` at x=20 y=0 w=12 h=6 \u2014 and refresh the backend with it.",
+  "fixtures": {},
+  "initial_state": {
+    "custom_backends": [
+      {
+        "name": "Vendor SLA Data",
+        "url": "http://localhost:7804",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "vendor_sla_table": {
+            "name": "Vendor SLA Status",
+            "description": "Vendor SLA state with breach flags.",
+            "endpoint": "/vendor-sla",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "status",
+                "type": "text",
+                "label": "Status",
+                "value": "Open",
+                "options": [
+                  {
+                    "label": "Open",
+                    "value": "Open"
+                  },
+                  {
+                    "label": "Escalated",
+                    "value": "Escalated"
+                  },
+                  {
+                    "label": "Resolved",
+                    "value": "Resolved"
+                  }
+                ]
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "vendor",
+                    "headerName": "Vendor",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "status",
+                    "headerName": "Status",
+                    "cellDataType": "text",
+                    "renderFn": "titleCase"
+                  },
+                  {
+                    "field": "latency_ms",
+                    "headerName": "Latency (ms)",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "breach",
+                    "headerName": "Breach",
+                    "cellDataType": "boolean"
+                  }
+                ]
+              }
+            }
+          },
+          "breach_metric": {
+            "name": "Open Breaches",
+            "description": "Count of open SLA breaches.",
+            "endpoint": "/breach-count",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            }
+          }
+        }
+      }
+    ]
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_app_defs": [
+      {
+        "backend_name": "Vendor SLA Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Vendor Board",
+        "tabs_include": [
+          "vendors"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "vendors",
+            "widget_id": "vendor_sla_table"
+          },
+          {
+            "tab_id": "vendors",
+            "widget_id": "breach_metric"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "backend_001",
+        "apps_json": [
+          {
+            "name": "Vendor Board",
+            "description": "Vendor SLAs and breaches.",
+            "tabs": {
+              "vendors": {
+                "id": "vendors",
+                "name": "Vendors",
+                "layout": [
+                  {
+                    "i": "vendor_sla_table",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  },
+                  {
+                    "i": "breach_metric",
+                    "x": 20,
+                    "y": 0,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "app-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique apps/t0 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Vendor SLA Data; artifact appdefs:Vendor SLA Data/Vendor Board."
+}

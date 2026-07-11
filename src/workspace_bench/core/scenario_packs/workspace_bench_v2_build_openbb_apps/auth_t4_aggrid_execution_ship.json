@@ -1,0 +1,267 @@
+{
+  "id": "auth_t4_aggrid_execution_ship",
+  "title": "Ship, open, and configure the Execution Room app",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-aggrid",
+    "tier-t4",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "aggrid",
+    "orchestration"
+  ],
+  "prompt": "Four steps. One: add \"Execution Desk Data\" at http://localhost:7806 serving `venue_scorecard`: name \"Venue Scorecard\", description \"Execution quality by venue.\", endpoint /venue-scorecard, type table, gridData w=20 h=9, taking venue \u2014 a text input (type text), labeled \"Venue\", default \"ARCA\", described \"Venue in focus.\", columns derived from served rows like [{\"fills\": 1240, \"slippage_pct\": 0.0021, \"venue\": \"ARCA\"}, {\"fills\": 980, \"slippage_pct\": 0.0034, \"venue\": \"EDGX\"}] \u2014 Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent.. Desk convention: every widget this backend serves carries staleTime 900000, `exception_metric`: name \"Exceptions\", description \"Open execution exceptions.\", endpoint /exception-count, type metric, sized w=5 h=4 on the grid; `slippage_chart`: name \"Slippage by Venue\", description \"Plotly slippage distribution by venue.\", endpoint /slippage-by-venue, type chart, sized w=20 h=9 on the grid, raw true, and app \"Execution Room\", description \"Venue quality and exceptions.\", tab `venues` named \"Venues\" places: `venue_scorecard` at x=0 y=0 w=20 h=9, tab `signals` named \"Signals\" places: `exception_metric` at x=0 y=0 w=12 h=6. Two: instantiate \"Execution Room\" into \"Execution Room Live\". Three: set venue to \"EDGX\" on the opened `venue_scorecard` widget. Four: a note titled \"Execution Room\" with the text: \"Execution Room is live from Execution Desk Data: venues on tap.\"",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "add_generative_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "venue_scorecard",
+        "expect": {
+          "type": "table",
+          "endpoint": "/venue-scorecard",
+          "gridData.w": 20,
+          "gridData.h": 9,
+          "staleTime": 900000
+        },
+        "params_include": [
+          {
+            "paramName": "venue",
+            "type": "text"
+          }
+        ],
+        "columns_include": [
+          {
+            "field": "venue",
+            "headerName": "Venue",
+            "cellDataType": "text"
+          },
+          {
+            "field": "fills",
+            "headerName": "Fills",
+            "cellDataType": "number"
+          },
+          {
+            "field": "slippage_pct",
+            "headerName": "Slippage Pct",
+            "cellDataType": "number",
+            "formatterFn": "percent"
+          }
+        ]
+      },
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "exception_metric",
+        "expect": {
+          "type": "metric",
+          "endpoint": "/exception-count"
+        }
+      },
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "slippage_chart",
+        "expect": {
+          "type": "chart",
+          "endpoint": "/slippage-by-venue"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "tab_count": 2,
+        "layout_refs_valid": true,
+        "name_contains": "Execution Room"
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Execution Desk Data",
+        "widget_id": "venue_scorecard",
+        "data_args": {
+          "venue": "EDGX"
+        },
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Execution Room",
+          "venues"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "venue_scorecard": {
+            "name": "Venue Scorecard",
+            "description": "Execution quality by venue.",
+            "endpoint": "/venue-scorecard",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "venue",
+                    "headerName": "Venue",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "fills",
+                    "headerName": "Fills",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "slippage_pct",
+                    "headerName": "Slippage Pct",
+                    "cellDataType": "number",
+                    "formatterFn": "percent"
+                  }
+                ]
+              }
+            },
+            "params": [
+              {
+                "paramName": "venue",
+                "type": "text",
+                "label": "Venue",
+                "value": "ARCA",
+                "description": "Venue in focus."
+              }
+            ],
+            "staleTime": 900000
+          },
+          "exception_metric": {
+            "name": "Exceptions",
+            "description": "Open execution exceptions.",
+            "endpoint": "/exception-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "staleTime": 900000
+          },
+          "slippage_chart": {
+            "name": "Slippage by Venue",
+            "description": "Plotly slippage distribution by venue.",
+            "endpoint": "/slippage-by-venue",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "raw": true,
+            "staleTime": 900000
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Execution Room",
+            "description": "Venue quality and exceptions.",
+            "tabs": {
+              "venues": {
+                "id": "venues",
+                "name": "Venues",
+                "layout": [
+                  {
+                    "i": "venue_scorecard",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "signals": {
+                "id": "signals",
+                "name": "Signals",
+                "layout": [
+                  {
+                    "i": "exception_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Execution Room",
+        "dashboard_name": "Execution Room Live",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "venue_scorecard",
+        "data_args": {
+          "venue": "EDGX"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Execution Room",
+        "data": "Execution Room is live from Execution Desk Data: venues on tap."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique aggrid/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/slippage_chart,Execution Desk Data/venue_scorecard; appdefs:Execution Desk Data/Execution Room; widgets:Execution Desk Data/venue_scorecard@*; generated:note@*:Execution Room,venues."
+}

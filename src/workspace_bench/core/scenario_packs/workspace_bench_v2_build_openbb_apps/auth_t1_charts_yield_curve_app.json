@@ -1,0 +1,118 @@
+{
+  "id": "auth_t1_charts_yield_curve_app",
+  "title": "Ship Yield Curve as the Yield Curve App app",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-charts",
+    "tier-t1",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "charts"
+  ],
+  "prompt": "Check the workspace, then connect \"Rates Watch Data\" at http://localhost:7803. widgets.json serves one chart \u2014 `yield_curve`: name \"Yield Curve\", description \"Plotly treasury yield curve snapshot.\", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, raw true. apps.json ships an app named \"Yield Curve App\" (description \"Treasury curve chart.\") with a single tab `curve` named \"Curve\" placing `yield_curve` at x=0 y=0 w=20 h=9. Publish both in one manage_backends add.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Rates Watch Data",
+        "widget_id": "yield_curve",
+        "expect": {
+          "type": "chart",
+          "endpoint": "/yield-curve",
+          "gridData.w": 20,
+          "gridData.h": 9,
+          "raw": true
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Rates Watch Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Yield Curve App",
+        "tabs_include": [
+          "curve"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "curve",
+            "widget_id": "yield_curve"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Rates Watch Data",
+        "url": "http://localhost:7803",
+        "widgets_json": {
+          "yield_curve": {
+            "name": "Yield Curve",
+            "description": "Plotly treasury yield curve snapshot.",
+            "endpoint": "/yield-curve",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "raw": true
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Yield Curve App",
+            "description": "Treasury curve chart.",
+            "tabs": {
+              "curve": {
+                "id": "curve",
+                "name": "Curve",
+                "layout": [
+                  {
+                    "i": "yield_curve",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "level": "L3",
+  "capability": "widget-building",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "test",
+  "novelty": "Unique charts/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/yield_curve; appdefs:Rates Watch Data/Yield Curve App."
+}
