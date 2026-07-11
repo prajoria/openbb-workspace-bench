@@ -182,12 +182,10 @@ Run one specific scenario with one specific model — the fastest way to study
 what a model actually does on a single task:
 
 ```bash
-uv run workspace-bench eval \
-  --model openai:gpt-4.1-mini \
-  --scenario auth_t2_aggrid_revision_grid
+uv run workspace-bench --model openai:gpt-4.1-mini --scenario auth_t2_aggrid_revision_grid
 ```
 
-That's the whole command: `--model provider:model` needs no adapter config
+That's the whole command - no subcommand needed, evaluating is what the tool does: `--model provider:model` needs no adapter config
 (API keys are read from the environment or `.env`; `ollama:<model>` works the
 same for local models), the scenario id is found across the bundled
 collections automatically, and the output directory defaults to a timestamped

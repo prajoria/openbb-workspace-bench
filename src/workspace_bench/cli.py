@@ -47,6 +47,15 @@ def main(argv: list[str] | None = None) -> int:
 
         return compare_models_main(raw_argv[1:])
 
+    # No subcommand at all: `workspace-bench --model openai:gpt-4.1-mini
+    # --scenario <id>` should just do the obvious thing — evaluating IS the
+    # tool's function. Anything starting with a flag routes to the runner;
+    # bare `workspace-bench` still prints the subcommand help below.
+    if raw_argv and raw_argv[0].startswith("-") and raw_argv[0] not in ("-h", "--help"):
+        from workspace_bench.reports.model_compare import main as compare_models_main
+
+        return compare_models_main(raw_argv)
+
     parser = argparse.ArgumentParser(prog="workspace-bench")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
