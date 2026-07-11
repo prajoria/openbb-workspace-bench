@@ -169,6 +169,6 @@
   "limits": {
     "max_turns": 5
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique extend/t0 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/open_orders."
 }

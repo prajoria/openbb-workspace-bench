@@ -252,6 +252,6 @@
   "limits": {
     "max_turns": 8
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique apps/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chains_chart,Chain TVL Data/chains_table,Chain TVL Data/gas_metric; appdefs:Chain TVL Data/Chain Live; widgets:Chain TVL Data/chains_table@*; generated:note@*:Chain Live,chains."
 }

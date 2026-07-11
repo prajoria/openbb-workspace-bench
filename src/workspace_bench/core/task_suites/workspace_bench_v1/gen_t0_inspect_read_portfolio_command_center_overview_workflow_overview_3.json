@@ -120,6 +120,6 @@
   "limits": {
     "max_turns": 6
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique inspect/t0 exercise using add_generative_widget, get_workspace_snapshot, read_widget with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/strategy_health_monitor_themes_crowded_names@; generated:note@*:stark."
 }

@@ -100,6 +100,6 @@
   "limits": {
     "max_turns": 6
   },
-  "split": "validation",
+  "split": "test",
   "novelty": "Unique inspect/t0 exercise using add_generative_widget, get_workspace_snapshot, read_widget with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, repeated_snapshots, too_many_invalid_calls on equities; artifact generated:note@*:AAPL."
 }

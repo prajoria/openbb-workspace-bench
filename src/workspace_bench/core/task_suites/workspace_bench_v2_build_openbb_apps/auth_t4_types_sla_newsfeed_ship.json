@@ -271,6 +271,6 @@
   "limits": {
     "max_turns": 8
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique types/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/breach_metric,Vendor SLA Data/sla_newsfeed,Vendor SLA Data/vendor_sla_table; appdefs:Vendor SLA Data/Vendor Notice Room; widgets:Vendor SLA Data/sla_newsfeed@*; generated:note@*:Vendor Notice Room,notices."
 }

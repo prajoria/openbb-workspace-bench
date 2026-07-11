@@ -133,6 +133,6 @@
   "limits": {
     "max_turns": 8
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique apps/t4 exercise using add_generative_widget, create_widget, get_widget_schema, manage_apps, manage_backends, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_tab, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact apps:Healthcare Research Dashboard; widgets:Bench Stark Enterprise/healthcare_research_dashboard_clinical_regulatory_timeline@clinical,Bench Stark Enterprise/healthcare_research_dashboard_clinical_trial_catalyst_calendar@clinical,Bench Stark Enterprise/healthcare_research_dashboard_commercial_drug_revenue_bridge@commercial; tabs:clinical,commercial,overview; generated:note@clinical:regulatory timeline,catalysts."
 }

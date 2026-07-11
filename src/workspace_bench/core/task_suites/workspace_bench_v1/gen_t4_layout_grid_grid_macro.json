@@ -153,6 +153,6 @@
   "limits": {
     "max_turns": 6
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique layout/t4 exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on macro; artifact layouts::widget_001::0:0:20:10,:widget_002::20:0:20:10,:widget_003::0:10:40:10."
 }

@@ -1,9 +1,9 @@
 """Generate docs/tool-coverage-matrix.md and docs/tool-matrix-data.json.
 
-For every task in the unified workspace-bench-v1 pack, mark which of the 20
-Workspace MCP tools its oracle trace uses -- the ground-truth minimal solution
-path -- along with its family, tier, and difficulty. The markdown table answers
-"which tools does test N require?"; the JSON feeds the blog's interactive
+For every task in both bundled suites, mark which of the 20 Workspace MCP
+tools its oracle trace uses -- the ground-truth minimal solution path --
+along with its family, level, and difficulty. The markdown table answers
+"which tools does task N require?"; the JSON feeds the blog's interactive
 matrix (tool usage encoded as a 20-bit mask).
 """
 
@@ -38,13 +38,6 @@ def load(directory: Path) -> list[dict]:
             for f in sorted(directory.glob("*.json")) if f.name != "task_suite.json"]
 
 
-def tier_of(task: dict) -> str:
-    for tag in task.get("tags", []):
-        if tag.startswith("tier-"):
-            return tag.removeprefix("tier-")
-    return "-"
-
-
 def family_of(task: dict) -> str:
     for tag in task.get("tags", []):
         if tag.startswith("family-"):
@@ -52,14 +45,14 @@ def family_of(task: dict) -> str:
     return "-"
 
 
-def rows_for(tasks: list[dict], pack: str) -> list[dict]:
+def rows_for(tasks: list[dict], suite: str) -> list[dict]:
     rows = []
     for index, task in enumerate(tasks, start=1):
         used = {call["tool"] for call in task.get("oracle_tool_calls", [])}
         mask = sum(1 << i for i, tool in enumerate(TOOLS) if tool in used)
         rows.append({
-            "n": index, "id": task["id"], "pack": pack,
-            "family": family_of(task), "tier": tier_of(task),
+            "n": index, "id": task["id"], "suite": suite,
+            "family": family_of(task),
             "difficulty": task.get("difficulty", "-"),
             "level": task.get("level", "-"),
             "mask": mask, "tool_count": bin(mask).count("1"),
@@ -81,21 +74,21 @@ def main() -> None:
         "an `x` marks each Workspace MCP tool the **oracle trace** uses — the",
         "ground-truth minimal solution path. `allowed_tools` in each task is a",
         "superset (agents may explore), and grader `required_tool_calls` are a subset",
-        "(behaviors checked explicitly). Tier is the structural difficulty rung for",
+        "(behaviors checked explicitly). Level is the structural difficulty rung for",
         "generated tasks (t0 single action -> t4 multi-intent composition);",
-        "difficulty derives from tier.",
+        "difficulty derives from level.",
         "",
         "Column key: " + ", ".join(f"`{short}`={tool}"
                                      for short, tool in zip(SHORT, TOOLS)),
         "",
     ]
 
-    for pack_name, tasks in packs:
-        rows = rows_for(tasks, pack_name)
+    for suite_name, tasks in packs:
+        rows = rows_for(tasks, suite_name)
         all_rows.extend(rows)
-        lines.append(f"## {pack_name} ({len(rows)} tasks)")
+        lines.append(f"## {suite_name} ({len(rows)} tasks)")
         lines.append("")
-        header = "| # | task | " + " | ".join(SHORT) + " | tools | tier | difficulty |"
+        header = "| # | task | " + " | ".join(SHORT) + " | tools | level | difficulty |"
         sep = "|--:|:---------|" + "|".join([":-:"] * len(SHORT)) + "|--:|:-:|:-----------|"
         lines += [header, sep]
         for row in rows:
@@ -103,7 +96,7 @@ def main() -> None:
                                 for i in range(len(TOOLS)))
             lines.append(
                 f"| {row['n']} | `{row['id']}` | {marks} | {row['tool_count']} "
-                f"| {row['tier']} | {row['difficulty']} |")
+                f"| {row['level']} | {row['difficulty']} |")
         lines.append("")
 
     per_tool = {tool: sum(1 for row in all_rows if row["mask"] & (1 << i))
@@ -119,7 +112,7 @@ def main() -> None:
 
     OUT_JSON.write_text(json.dumps({
         "tools": TOOLS, "short": SHORT,
-        "rows": [[row["id"], row["pack"], row["family"], row["tier"],
+        "rows": [[row["id"], row["suite"], row["family"], row["level"],
                    row["difficulty"], row["mask"]] for row in all_rows],
     }, separators=(",", ":")))
     print(f"Wrote {OUT_MD} and {OUT_JSON}: {len(all_rows)} rows")

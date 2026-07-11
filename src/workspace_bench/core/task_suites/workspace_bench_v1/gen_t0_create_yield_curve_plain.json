@@ -75,6 +75,6 @@
   "limits": {
     "max_turns": 5
   },
-  "split": "validation",
+  "split": "test",
   "novelty": "Unique create/t0 exercise using create_widget, get_workspace_snapshot with checks layout_out_of_grid, layout_overlap, missing_widget, repeated_snapshots, too_many_invalid_calls on macro; artifact widgets:Bench Macro/yield_curve@*."
 }

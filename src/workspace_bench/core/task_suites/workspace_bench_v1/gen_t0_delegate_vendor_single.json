@@ -104,6 +104,6 @@
   "limits": {
     "max_turns": 5
   },
-  "split": "validation",
+  "split": "test",
   "novelty": "Unique delegate/t0 exercise using assign_tasks_to_agents, get_workspace_snapshot with checks layout_out_of_grid, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact tasks:triage-analyst; widgets:Bench Stark Enterprise/strategy_health_monitor_performance_sleeve_performance@overview."
 }

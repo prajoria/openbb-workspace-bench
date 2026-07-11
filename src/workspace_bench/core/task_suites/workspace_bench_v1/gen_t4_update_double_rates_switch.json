@@ -157,6 +157,6 @@
   "limits": {
     "max_turns": 6
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique update/t4 exercise using add_generative_widget, get_workspace_snapshot, update_widget with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on macro; artifact widgets:Bench Macro/macro_timeseries@*,Bench Macro/macro_timeseries@*; generated:note@*:DGS10,CPIAUCSL."
 }

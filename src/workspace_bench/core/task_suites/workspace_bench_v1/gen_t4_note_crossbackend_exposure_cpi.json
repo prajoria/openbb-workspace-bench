@@ -137,6 +137,6 @@
   "limits": {
     "max_turns": 6
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique note/t4 exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls on macro, portfolio; artifact widgets:Bench Macro/macro_timeseries@*,Bench Portfolio/sector_exposure@*; generated:note@*:Technology,0.86."
 }

@@ -119,6 +119,6 @@
   "limits": {
     "max_turns": 6
   },
-  "split": "validation",
+  "split": "test",
   "novelty": "Unique prompts/t0 exercise using add_generative_widget, get_workspace_prompt, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on equities, portfolio; artifact prompts:workspace_tool_usage; widgets:Bench Portfolio/holdings_table@; generated:note@*:schema-before-create."
 }

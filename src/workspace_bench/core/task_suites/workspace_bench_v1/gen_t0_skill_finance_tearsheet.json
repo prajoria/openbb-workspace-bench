@@ -108,6 +108,6 @@
   "limits": {
     "max_turns": 6
   },
-  "split": "validation",
+  "split": "test",
   "novelty": "Unique skills/t0 exercise using add_generative_widget, get_skill_content, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/stress_liquidity_lab_overview_workflow_overview@overview; generated:note@*:Finance Tearsheet."
 }

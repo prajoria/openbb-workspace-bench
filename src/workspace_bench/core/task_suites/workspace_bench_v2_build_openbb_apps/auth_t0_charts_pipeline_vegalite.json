@@ -71,6 +71,6 @@
   "limits": {
     "max_turns": 4
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique charts/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/pipeline_vegalite."
 }

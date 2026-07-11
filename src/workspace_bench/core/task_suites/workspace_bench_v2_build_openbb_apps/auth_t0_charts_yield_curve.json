@@ -71,6 +71,6 @@
   "limits": {
     "max_turns": 4
   },
-  "split": "validation",
+  "split": "test",
   "novelty": "Unique charts/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/yield_curve."
 }

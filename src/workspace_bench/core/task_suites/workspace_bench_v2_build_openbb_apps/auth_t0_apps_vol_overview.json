@@ -159,6 +159,6 @@
   "limits": {
     "max_turns": 5
   },
-  "split": "validation",
+  "split": "test",
   "novelty": "Unique apps/t0 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact appdefs:Vol Desk Data/Vol Overview."
 }

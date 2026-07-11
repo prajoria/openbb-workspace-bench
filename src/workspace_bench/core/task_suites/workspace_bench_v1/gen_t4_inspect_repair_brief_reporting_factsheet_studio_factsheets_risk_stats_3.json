@@ -150,6 +150,6 @@
   "limits": {
     "max_turns": 6
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique inspect/t4 exercise using add_generative_widget, get_workspace_snapshot, read_widget, update_widget with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/reporting_factsheet_studio_factsheets_risk_stats@*,Bench Stark Enterprise/reporting_factsheet_studio_overview_workflow_overview@*; generated:note@*:Consumer Staples,Technology."
 }

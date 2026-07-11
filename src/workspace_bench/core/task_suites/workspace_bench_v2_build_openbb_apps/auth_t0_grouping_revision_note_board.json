@@ -187,6 +187,6 @@
   "limits": {
     "max_turns": 5
   },
-  "split": "validation",
+  "split": "test",
   "novelty": "Unique grouping/t0 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact appdefs:Earnings Prep Data/Revision Note Board."
 }

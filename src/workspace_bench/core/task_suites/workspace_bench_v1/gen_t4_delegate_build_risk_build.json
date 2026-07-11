@@ -169,6 +169,6 @@
   "limits": {
     "max_turns": 8
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique delegate/t4 exercise using add_generative_widget, assign_tasks_to_agents, create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, too_many_widgets, unlisted_widget_id on stark-enterprise; artifact tasks:stress-analyst,var-analyst; widgets:Bench Stark Enterprise/risk_exposure_monitor_dashboard_var_trend@*,Bench Stark Enterprise/workspace_data_control_center_usage_export_activity@overview; generated:note@*:var analyst,stress analyst."
 }

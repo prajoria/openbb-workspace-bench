@@ -78,6 +78,6 @@
   "limits": {
     "max_turns": 5
   },
-  "split": "validation",
+  "split": "test",
   "novelty": "Unique backends/t0 exercise using manage_backends with checks layout_out_of_grid, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact id:gen_t0_backends_add_stark_enterprise."
 }

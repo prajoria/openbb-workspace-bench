@@ -64,6 +64,6 @@
   "limits": {
     "max_turns": 5
   },
-  "split": "validation",
+  "split": "test",
   "novelty": "Unique apps/t0 exercise using manage_apps, manage_backends with checks dashboard_name, layout_out_of_grid, missing_tool_call, too_many_invalid_calls on stark-enterprise; artifact apps:Vendor & Dataset Monitor."
 }

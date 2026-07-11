@@ -4532,20 +4532,18 @@ def add_novelty(task: dict) -> None:
 
 
 def assign_splits(tasks: list[dict]) -> None:
+    # Uniform per-cell pattern so every (family, level) cell contributes one
+    # validation and one test task: per-level curves stay computable on the
+    # held-out splits (the earlier level-skewed patterns left t0 absent from
+    # test and t4 absent from validation).
     grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for task in tasks:
         grouped[(task["_family"], task["_level"])].append(task)
-    patterns = {
-        "t0": ("train", "train", "train", "validation"),
-        "t1": ("train", "train", "validation", "test"),
-        "t2": ("train", "train", "validation", "test"),
-        "t3": ("train", "train", "validation", "test"),
-        "t4": ("train", "train", "train", "test"),
-    }
+    pattern = ("train", "train", "validation", "test")
     for key, cell in grouped.items():
         cell.sort(key=lambda item: item["id"])
         assert len(cell) == 4, f"split assignment expects 4 tasks in {key}"
-        for task, split in zip(cell, patterns[key[1]]):
+        for task, split in zip(cell, pattern):
             task["split"] = split
 
 
@@ -4777,8 +4775,8 @@ def main() -> None:
         "description": (
             "Unified WorkspaceBench v1 generated benchmark: 15 MCP-surface families, "
             "each with a complete t0-t4 structural-difficulty ladder (4 tasks per "
-            "cell, 300 total). Splits are deterministic 180/60/60 train/validation/test "
-            "across each family ladder."
+            "cell, 300 total). Splits are deterministic 150/75/75 train/validation/test, "
+            "with every family/level cell contributing one validation and one test task."
         ),
     }
     for directory in OUT_DIRS:

@@ -87,6 +87,6 @@
   "limits": {
     "max_turns": 4
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique settings/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/rates_commentary."
 }

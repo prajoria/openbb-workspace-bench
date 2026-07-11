@@ -1367,12 +1367,16 @@ def add_novelty(task: dict) -> None:
     )
 
 
+# Uniform per-cell pattern so every (family, level) cell contributes one
+# validation and one test task: per-level curves stay computable on the
+# held-out splits (the earlier level-skewed patterns left t0 absent from
+# test and t4 absent from validation).
 SPLIT_PATTERNS = {
-    "t0": ("train", "train", "train", "validation"),
+    "t0": ("train", "train", "validation", "test"),
     "t1": ("train", "train", "validation", "test"),
     "t2": ("train", "train", "validation", "test"),
     "t3": ("train", "train", "validation", "test"),
-    "t4": ("train", "train", "train", "test"),
+    "t4": ("train", "train", "validation", "test"),
 }
 
 

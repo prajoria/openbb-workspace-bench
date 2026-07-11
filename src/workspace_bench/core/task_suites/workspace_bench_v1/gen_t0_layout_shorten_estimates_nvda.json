@@ -109,6 +109,6 @@
   "limits": {
     "max_turns": 5
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique layout/t0 exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, missing_tab, missing_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact widgets:Bench Equities/estimate_history@charts; layouts:estimate_history::charts:0:0:20:8; tabs:charts."
 }

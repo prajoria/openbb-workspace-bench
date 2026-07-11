@@ -118,6 +118,6 @@
   "limits": {
     "max_turns": 6
   },
-  "split": "validation",
+  "split": "test",
   "novelty": "Unique read/t0 exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:execution_desk_blotter_order_status_metrics,data."
 }

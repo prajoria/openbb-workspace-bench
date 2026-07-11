@@ -84,6 +84,6 @@
   "limits": {
     "max_turns": 5
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique delete/t0 exercise using delete_widget, get_workspace_snapshot with checks layout_out_of_grid, repeated_snapshots, too_many_invalid_calls, too_many_widgets on equities; artifact id:gen_t0_delete_performance_18."
 }

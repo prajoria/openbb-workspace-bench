@@ -71,6 +71,6 @@
   "limits": {
     "max_turns": 5
   },
-  "split": "validation",
+  "split": "test",
   "novelty": "Unique note/t0 exercise using add_generative_widget, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact generated:note@*:9am,noon."
 }

@@ -66,6 +66,6 @@
   "limits": {
     "max_turns": 4
   },
-  "split": "validation",
+  "split": "test",
   "novelty": "Unique navigate/t0 exercise using manage_dashboard with checks dashboard_name, layout_out_of_grid, missing_tool_call, too_many_invalid_calls on macro; artifact id:gen_t0_nav_rename_macro_watch."
 }

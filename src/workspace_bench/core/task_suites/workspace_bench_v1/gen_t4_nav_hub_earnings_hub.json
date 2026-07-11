@@ -147,6 +147,6 @@
   "limits": {
     "max_turns": 9
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique navigate/t4 exercise using add_generative_widget, create_widget, get_widget_schema, list_available_widgets, manage_dashboard, manage_navigation_bar, navigate_workspace with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tab, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on equities; artifact widgets:Bench Equities/estimate_history@estimates; tabs:estimates,overview; generated:note@estimates:estimates,earnings hub."
 }

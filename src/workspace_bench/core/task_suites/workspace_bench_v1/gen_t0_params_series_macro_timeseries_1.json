@@ -99,6 +99,6 @@
   "limits": {
     "max_turns": 6
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique params/t0 exercise using create_widget, get_params_options, get_workspace_snapshot with checks layout_out_of_grid, missing_tool_call, missing_tool_result, missing_widget, repeated_snapshots, too_many_invalid_calls on macro; artifact widgets:Bench Macro/macro_timeseries@*."
 }

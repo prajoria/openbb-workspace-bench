@@ -84,6 +84,6 @@
   "limits": {
     "max_turns": 6
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique resources/t0 exercise using add_generative_widget, get_workspace_snapshot, read_workspace_resource with checks layout_out_of_grid, missing_generated_widget, missing_resource_read, too_many_invalid_calls on equities; artifact resource:openbb://workspace/skills/finance-guidance-tracker; generated:note@*:management claims."
 }

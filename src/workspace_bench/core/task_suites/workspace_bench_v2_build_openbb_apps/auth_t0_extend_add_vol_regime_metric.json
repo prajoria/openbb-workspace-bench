@@ -115,6 +115,6 @@
   "limits": {
     "max_turns": 5
   },
-  "split": "validation",
+  "split": "test",
   "novelty": "Unique extend/t0 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_term_structure,Vol Desk Data/vol_regime_metric."
 }

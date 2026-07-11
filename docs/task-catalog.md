@@ -65,7 +65,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_app_risk_exposure_monitor` — Instantiate Risk & Exposure Monitor
 
-**t0** · app-instantiation · workflow: risk-review · risk · difficulty: easy · split: train · no-op baseline score: 0.333
+**t0** · app-instantiation · workflow: risk-review · risk · difficulty: easy · split: validation · no-op baseline score: 0.333
 
 > Instantiate the Risk & Exposure Monitor app from the Bench Stark Enterprise backend as a new dashboard named Risk Watch.
 
@@ -83,7 +83,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_app_vendor_dataset_monitor` — Instantiate Vendor & Dataset Monitor
 
-**t0** · app-instantiation · workflow: vendor-sla-monitoring · data-platform · difficulty: easy · split: validation · no-op baseline score: 0.333
+**t0** · app-instantiation · workflow: vendor-sla-monitoring · data-platform · difficulty: easy · split: test · no-op baseline score: 0.333
 
 > From the Bench Stark Enterprise backend, instantiate the Vendor & Dataset Monitor app as a new dashboard named Data Vendor Watch.
 
@@ -137,7 +137,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_backends_add_portfolio` — Register Bench Portfolio
 
-**t0** · dashboard-construction · workflow: portfolio-risk-review · portfolio-management · difficulty: easy · split: train · no-op baseline score: 0.250
+**t0** · dashboard-construction · workflow: portfolio-risk-review · portfolio-management · difficulty: easy · split: validation · no-op baseline score: 0.250
 
 > Use manage_backends with operation add and name portfolio for Bench Portfolio; then use manage_backends with operation list.
 
@@ -155,7 +155,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_backends_add_stark_enterprise` — Register Bench Stark Enterprise
 
-**t0** · dashboard-construction · workflow: earnings-prep · equity-research · difficulty: easy · split: validation · no-op baseline score: 0.250
+**t0** · dashboard-construction · workflow: earnings-prep · equity-research · difficulty: easy · split: test · no-op baseline score: 0.250
 
 > With manage_backends, use operation add and name stark-enterprise to register Bench Stark Enterprise, then list it with operation list.
 
@@ -213,7 +213,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_create_risk_metrics_plain` — Create Risk Metrics
 
-**t0** · widget-creation · workflow: portfolio-risk-review · portfolio-management · difficulty: easy · split: train · no-op baseline score: 0.667
+**t0** · widget-creation · workflow: portfolio-risk-review · portfolio-management · difficulty: easy · split: validation · no-op baseline score: 0.667
 
 > Create a Risk Metrics widget (widget_id risk_metrics) from the Bench Portfolio backend on the active dashboard.
 
@@ -233,7 +233,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_create_yield_curve_plain` — Create Yield Curve
 
-**t0** · widget-creation · workflow: macro-rates-review · macro · difficulty: easy · split: validation · no-op baseline score: 0.667
+**t0** · widget-creation · workflow: macro-rates-review · macro · difficulty: easy · split: test · no-op baseline score: 0.667
 
 > Create a Yield Curve widget (widget_id yield_curve) from the Bench Macro backend on the active dashboard.
 
@@ -291,7 +291,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_delegate_risk_single` — Delegate One Task: Risk Single
 
-**t0** · mcp-tool-use · workflow: risk-review · risk · difficulty: easy · split: train · no-op baseline score: 0.667
+**t0** · mcp-tool-use · workflow: risk-review · risk · difficulty: easy · split: validation · no-op baseline score: 0.667
 
 > Call assign_tasks_to_agents with one task_request using id stress-analyst for risk review work: Run the historical stress scenarios and summarize losses.
 
@@ -310,7 +310,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_delegate_vendor_single` — Delegate One Task: Vendor Single
 
-**t0** · mcp-tool-use · workflow: vendor-sla-monitoring · data-platform · difficulty: easy · split: validation · no-op baseline score: 0.667
+**t0** · mcp-tool-use · workflow: vendor-sla-monitoring · data-platform · difficulty: easy · split: test · no-op baseline score: 0.667
 
 > Call assign_tasks_to_agents with one task_request using id triage-analyst for vendor sla monitoring work: Triage the open vendor incident log by severity.
 
@@ -365,7 +365,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_delete_performance_18` — Remove Price Performance
 
-**t0** · widget-update · workflow: equity-tearsheet · equity-research · difficulty: easy · split: train · no-op baseline score: 0.800
+**t0** · widget-update · workflow: equity-tearsheet · equity-research · difficulty: easy · split: validation · no-op baseline score: 0.800
 
 > This dashboard no longer needs the Price Performance widget; remove it.
 
@@ -383,7 +383,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_delete_timeseries_17` — Remove Macro Timeseries
 
-**t0** · widget-update · workflow: macro-rates-review · macro · difficulty: easy · split: validation · no-op baseline score: 0.800
+**t0** · widget-update · workflow: macro-rates-review · macro · difficulty: easy · split: test · no-op baseline score: 0.800
 
 > The Macro Timeseries widget is no longer needed on this dashboard. Remove it.
 
@@ -439,7 +439,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_inspect_read_portfolio_command_center_overview_workflow_overview_3` — Inspect Workflow Overview
 
-**t0** · workspace-inspection · workflow: portfolio-morning-review · portfolio-management · difficulty: easy · split: train · no-op baseline score: 0.750
+**t0** · workspace-inspection · workflow: portfolio-morning-review · portfolio-management · difficulty: easy · split: validation · no-op baseline score: 0.750
 
 > Call read_widget with widget_id portfolio_command_center_overview_workflow_overview for the existing Bench Stark Enterprise/portfolio_command_center_overview_workflow_overview widget, then add a note mentioning stark.
 
@@ -459,7 +459,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_inspect_read_price_performance_0` — Inspect Price Performance
 
-**t0** · workspace-inspection · workflow: equity-tearsheet · equity-research · difficulty: easy · split: validation · no-op baseline score: 0.600
+**t0** · workspace-inspection · workflow: equity-tearsheet · equity-research · difficulty: easy · split: test · no-op baseline score: 0.600
 
 > Use read_widget with widget_id price_performance to inspect the existing Bench Equities/price_performance widget, then add a note mentioning AAPL.
 
@@ -522,7 +522,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_layout_shorten_estimates_nvda` — Layout: Shorten Estimates Nvda
 
-**t0** · layout-management · workflow: equity-tearsheet · equity-research · difficulty: easy · split: train · no-op baseline score: 0.857
+**t0** · layout-management · workflow: equity-tearsheet · equity-research · difficulty: easy · split: validation · no-op baseline score: 0.857
 
 > Keep the NVDA estimates widget's position and width, but reduce its height to 8 rows.
 
@@ -544,7 +544,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_layout_widen_fundamentals_aapl` — Layout: Widen Fundamentals Aapl
 
-**t0** · layout-management · workflow: equity-tearsheet · equity-research · difficulty: easy · split: validation · no-op baseline score: 0.857
+**t0** · layout-management · workflow: equity-tearsheet · equity-research · difficulty: easy · split: test · no-op baseline score: 0.857
 
 > Widen the AAPL fundamentals widget to 20 columns. Keep its position and height.
 
@@ -603,7 +603,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_nav_rename_execution_open` — Rename To Execution Morning Board
 
-**t0** · workspace-navigation · workflow: execution-exception-review · execution · difficulty: easy · split: train · no-op baseline score: 0.667
+**t0** · workspace-navigation · workflow: execution-exception-review · execution · difficulty: easy · split: validation · no-op baseline score: 0.667
 
 > Rename the active dashboard to Execution Morning Board.
 
@@ -622,7 +622,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_nav_rename_macro_watch` — Rename To Rates Watch
 
-**t0** · workspace-navigation · workflow: macro-rates-review · macro · difficulty: easy · split: validation · no-op baseline score: 0.333
+**t0** · workspace-navigation · workflow: macro-rates-review · macro · difficulty: easy · split: test · no-op baseline score: 0.333
 
 > Rename the active dashboard to Rates Watch.
 
@@ -676,7 +676,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_note_reminder` — Compliance Reminder
 
-**t0** · workspace-inspection · workflow: portfolio-morning-review · portfolio-management · difficulty: easy · split: train · no-op baseline score: 0.667
+**t0** · workspace-inspection · workflow: portfolio-morning-review · portfolio-management · difficulty: easy · split: validation · no-op baseline score: 0.667
 
 > On the dashboard, add a note named Compliance Reminder stating that attestations are due Friday and trading in restricted names is blocked.
 
@@ -694,7 +694,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_note_standup` — Morning Standup
 
-**t0** · workspace-inspection · workflow: portfolio-morning-review · portfolio-management · difficulty: easy · split: validation · no-op baseline score: 0.667
+**t0** · workspace-inspection · workflow: portfolio-morning-review · portfolio-management · difficulty: easy · split: test · no-op baseline score: 0.667
 
 > Create a note named Morning Standup that says the desk meeting moved to 9am and the risk review is at noon.
 
@@ -753,7 +753,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_params_series_macro_timeseries_1` — Use Series Options For Macro Timeseries
 
-**t0** · parameter-discovery · workflow: macro-rates-review · macro · difficulty: easy · split: train · no-op baseline score: 0.400
+**t0** · parameter-discovery · workflow: macro-rates-review · macro · difficulty: easy · split: validation · no-op baseline score: 0.400
 
 > Use get_params_options for Bench Macro/macro_timeseries parameter series, choose DGS10, and create that widget with series=DGS10.
 
@@ -773,7 +773,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_params_symbol_price_performance_0` — Use Symbol Options For Price Performance
 
-**t0** · parameter-discovery · workflow: equity-tearsheet · equity-research · difficulty: easy · split: validation · no-op baseline score: 0.400
+**t0** · parameter-discovery · workflow: equity-tearsheet · equity-research · difficulty: easy · split: test · no-op baseline score: 0.400
 
 > Use get_params_options for Bench Equities/price_performance parameter symbol, choose AAPL, and create that widget with symbol=AAPL.
 
@@ -833,7 +833,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_prompts_fetch_workspace_tool_usage_0` — Fetch Prompt workspace_tool_usage
 
-**t0** · prompt-access · workflow: workspace-guidance · mcp-prompts · difficulty: easy · split: train · no-op baseline score: 0.571
+**t0** · prompt-access · workflow: workspace-guidance · mcp-prompts · difficulty: easy · split: validation · no-op baseline score: 0.571
 
 > Use get_workspace_prompt with name workspace_tool_usage, then add a note mentioning schema-before-create workspace tool discipline.
 
@@ -853,7 +853,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_prompts_fetch_workspace_tool_usage_2` — Fetch Prompt workspace_tool_usage
 
-**t0** · prompt-access · workflow: workspace-guidance · mcp-prompts · difficulty: easy · split: validation · no-op baseline score: 0.571
+**t0** · prompt-access · workflow: workspace-guidance · mcp-prompts · difficulty: easy · split: test · no-op baseline score: 0.571
 
 > Use get_workspace_prompt with name workspace_tool_usage, then add a note mentioning schema-before-create workspace tool discipline.
 
@@ -911,7 +911,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_read_limits` — Read Data: Limit Utilization
 
-**t0** · data-reading · workflow: risk-review · risk · difficulty: easy · split: train · no-op baseline score: 0.400
+**t0** · data-reading · workflow: risk-review · risk · difficulty: easy · split: validation · no-op baseline score: 0.400
 
 > On the Bench Stark Enterprise Limit Utilization widget, use get_widget_data, then add a short note that cites risk_exposure_monitor_limits_limit_utilization and says you reviewed the data.
 
@@ -930,7 +930,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_read_order_status` — Read Data: Order Status Metrics
 
-**t0** · data-reading · workflow: execution-exception-review · execution · difficulty: easy · split: validation · no-op baseline score: 0.400
+**t0** · data-reading · workflow: execution-exception-review · execution · difficulty: easy · split: test · no-op baseline score: 0.400
 
 > On the Bench Stark Enterprise Order Status Metrics widget, use get_widget_data, then add a short note that cites execution_desk_blotter_order_status_metrics and says you reviewed the data.
 
@@ -985,7 +985,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_resources_skill_finance_guidance_tracker` — Read Skill Resource finance-guidance-tracker
 
-**t0** · resource-access · workflow: equity-tearsheet · equity-research · difficulty: easy · split: train · no-op baseline score: 0.333
+**t0** · resource-access · workflow: equity-tearsheet · equity-research · difficulty: easy · split: validation · no-op baseline score: 0.333
 
 > After calling read_workspace_resource with uri openbb://workspace/skills/finance-guidance-tracker, add a note mentioning management claims.
 
@@ -1003,7 +1003,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_resources_skill_finance_tearsheet` — Read Skill Resource finance-tearsheet
 
-**t0** · resource-access · workflow: equity-tearsheet · equity-research · difficulty: easy · split: validation · no-op baseline score: 0.333
+**t0** · resource-access · workflow: equity-tearsheet · equity-research · difficulty: easy · split: test · no-op baseline score: 0.333
 
 > Use read_workspace_resource with uri openbb://workspace/skills/finance-tearsheet and add a note mentioning valuation.
 
@@ -1059,7 +1059,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_skill_finance_guidance_tracker` — Read The Finance Guidance Tracker Skill
 
-**t0** · skill-access · workflow: equity-tearsheet · equity-research · difficulty: easy · split: train · no-op baseline score: 0.667
+**t0** · skill-access · workflow: equity-tearsheet · equity-research · difficulty: easy · split: validation · no-op baseline score: 0.667
 
 > Call get_skill_content with slug finance-guidance-tracker, then add a note on the active dashboard naming the Finance Guidance Tracker skill. Omit dashboard_id when adding the note.
 
@@ -1078,7 +1078,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_skill_finance_tearsheet` — Read The Finance Tearsheet Skill
 
-**t0** · skill-access · workflow: equity-tearsheet · equity-research · difficulty: easy · split: validation · no-op baseline score: 0.667
+**t0** · skill-access · workflow: equity-tearsheet · equity-research · difficulty: easy · split: test · no-op baseline score: 0.667
 
 > Call get_skill_content with slug finance-tearsheet, then add a note on the active dashboard naming the Finance Tearsheet skill. Omit dashboard_id when adding the note.
 
@@ -1133,7 +1133,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_update_symbol_aapl_18` — Set Price Performance symbol To AAPL
 
-**t0** · widget-update · workflow: equity-tearsheet · equity-research · difficulty: easy · split: train · no-op baseline score: 0.750
+**t0** · widget-update · workflow: equity-tearsheet · equity-research · difficulty: easy · split: validation · no-op baseline score: 0.750
 
 > For the existing Price Performance widget, set symbol to AAPL.
 
@@ -1151,7 +1151,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t0_update_symbol_msft_12` — Set Latest News symbol To MSFT
 
-**t0** · widget-update · workflow: equity-tearsheet · equity-research · difficulty: easy · split: validation · no-op baseline score: 0.750
+**t0** · widget-update · workflow: equity-tearsheet · equity-research · difficulty: easy · split: test · no-op baseline score: 0.750
 
 > Update the existing Latest News widget by setting symbol to MSFT.
 
@@ -5163,7 +5163,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_app_full_healthcare_research_dashboard` — Instantiate, Extend, And Brief Healthcare Research Dashboard
 
-**t4** · app-instantiation · workflow: healthcare-catalyst-review · healthcare-research · difficulty: hard · split: train · no-op baseline score: 0.111
+**t4** · app-instantiation · workflow: healthcare-catalyst-review · healthcare-research · difficulty: hard · split: validation · no-op baseline score: 0.111
 
 > Instantiate the Healthcare Research Dashboard app from the Bench Stark Enterprise backend as a new dashboard named Biotech Catalyst Desk. Then add the Regulatory Timeline widget (id healthcare_research_dashboard_clinical_regulatory_timeline) to the Clinical tab, and add a note on the same tab mentioning regulatory timeline and catalysts.
 
@@ -5264,7 +5264,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_backends_multi_portfolio_macro` — Multi-Backend Build: Portfolio Macro
 
-**t4** · dashboard-construction · workflow: portfolio-risk-review · portfolio-management · difficulty: hard · split: train · no-op baseline score: 0.333
+**t4** · dashboard-construction · workflow: portfolio-risk-review · portfolio-management · difficulty: hard · split: validation · no-op baseline score: 0.333
 
 > After registering backend names portfolio, macro, build a dashboard with Bench Portfolio/risk_metrics and Bench Macro/yield_curve, and add a note mentioning portfolio and yield curve.
 
@@ -5360,7 +5360,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_create_cross_msft_exposure` — Cross-Backend Build: Msft Exposure
 
-**t4** · widget-creation · workflow: equity-tearsheet · equity-research · difficulty: hard · split: train · no-op baseline score: 0.400
+**t4** · widget-creation · workflow: equity-tearsheet · equity-research · difficulty: hard · split: validation · no-op baseline score: 0.400
 
 > On the active dashboard, add these two widgets: the Latest News widget from Bench Equities for MSFT and the Sector Exposure widget from Bench Portfolio. Then add a note mentioning MSFT and sector exposure.
 
@@ -5460,7 +5460,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_delegate_build_risk_build` — Delegate And Equip: Risk Build
 
-**t4** · mcp-tool-use · workflow: risk-review · risk · difficulty: hard · split: train · no-op baseline score: 0.600
+**t4** · mcp-tool-use · workflow: risk-review · risk · difficulty: hard · split: validation · no-op baseline score: 0.600
 
 > Call assign_tasks_to_agents with two task_requests using ids var-analyst and stress-analyst. Then add the VaR Trend widget (id risk_exposure_monitor_dashboard_var_trend) from the Bench Stark Enterprise backend so the workstreams have their data, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.
 
@@ -5556,7 +5556,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_delete_then_fix_status_escalated_48` — Deduplicate And Fix Vendor SLA Status
 
-**t4** · workspace-repair · workflow: vendor-sla-monitoring · data-platform · difficulty: hard · split: train · no-op baseline score: 0.700
+**t4** · workspace-repair · workflow: vendor-sla-monitoring · data-platform · difficulty: hard · split: validation · no-op baseline score: 0.700
 
 > The dashboard contains two identical Vendor SLA Status widgets for Open, but the desk actually needs Escalated. Remove exactly one duplicate, update the remaining widget to Escalated, and add a note mentioning Escalated and the word repaired.
 
@@ -5648,7 +5648,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_inspect_repair_brief_reporting_factsheet_studio_factsheets_risk_stats_3` — Ambient Repair And Brief Risk Stats
 
-**t4** · workspace-repair · workflow: client-meeting-prep · client-ir · difficulty: hard · split: train · no-op baseline score: 0.636
+**t4** · workspace-repair · workflow: client-meeting-prep · client-ir · difficulty: hard · split: validation · no-op baseline score: 0.636
 
 > After inspecting the dashboard, find the widget with sector=Consumer Staples, repair it to Technology, keep the companion widget, and add a note mentioning the repair.
 
@@ -5740,7 +5740,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_layout_grid_grid_macro` — Three-Widget Grid: Grid Macro
 
-**t4** · layout-management · workflow: macro-rates-review · macro · difficulty: hard · split: train · no-op baseline score: 0.667
+**t4** · layout-management · workflow: macro-rates-review · macro · difficulty: hard · split: validation · no-op baseline score: 0.667
 
 > Set the three macro widgets as a grid: the 2Y series at columns 0-20 rows 0-10, the 10Y series at columns 20-40 rows 0-10, and the yield curve full-width below them (40 columns, 10 rows, starting at row 10).
 
@@ -5836,7 +5836,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_nav_hub_earnings_hub` — Build Out Earnings Hub
 
-**t4** · workspace-navigation · workflow: equity-tearsheet · equity-research · difficulty: hard · split: train · no-op baseline score: 0.429
+**t4** · workspace-navigation · workflow: equity-tearsheet · equity-research · difficulty: hard · split: validation · no-op baseline score: 0.429
 
 > Rename the active dashboard to Earnings Hub, add a new tab named Estimates, put the Estimate History widget for AAPL on it, and add a note on the same tab mentioning estimates and earnings hub.
 
@@ -5928,7 +5928,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_note_crossbackend_exposure_cpi` — Cross-Backend Note: Exposure Cpi
 
-**t4** · workspace-inspection · workflow: portfolio-risk-review · portfolio-management · difficulty: hard · split: train · no-op baseline score: 0.857
+**t4** · workspace-inspection · workflow: portfolio-risk-review · portfolio-management · difficulty: hard · split: validation · no-op baseline score: 0.857
 
 > Use the sector exposure and CPI widget data to add a note with the largest sector weight and the latest CPI value from the data.
 
@@ -6020,7 +6020,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_params_cross_portfolio_sector` — Cross-Backend Options Build: Portfolio Sector
 
-**t4** · dashboard-construction · workflow: portfolio-risk-review · portfolio-management · difficulty: hard · split: train · no-op baseline score: 0.286
+**t4** · dashboard-construction · workflow: portfolio-risk-review · portfolio-management · difficulty: hard · split: validation · no-op baseline score: 0.286
 
 > Build a two-widget dashboard using parameter options for both widgets: Bench Portfolio/sector_exposure sector=Technology; Bench Macro/macro_timeseries series=CPIAUCSL. Add a note mentioning Technology and CPIAUCSL.
 
@@ -6126,7 +6126,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_prompts_cross_prompt_cross_nvda_holdings` — Prompt Cross NVDA Holdings
 
-**t4** · dashboard-construction · workflow: equity-tearsheet · equity-research · difficulty: hard · split: train · no-op baseline score: 0.250
+**t4** · dashboard-construction · workflow: equity-tearsheet · equity-research · difficulty: hard · split: validation · no-op baseline score: 0.250
 
 > Fetch workspace_tool_usage and workspace_session_context, create Prompt Cross NVDA Holdings, build the cross-backend dashboard with Bench Equities/estimate_history with data_args {"symbol": "NVDA"} and Bench Portfolio/holdings_table, and add a note mentioning NVDA and holdings and current-dashboard.
 
@@ -6222,7 +6222,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_read_risk_values` — Read Data: Risk Snapshot and Limit Utilization
 
-**t4** · data-reading · workflow: risk-review · risk · difficulty: hard · split: train · no-op baseline score: 0.375
+**t4** · data-reading · workflow: risk-review · risk · difficulty: hard · split: validation · no-op baseline score: 0.375
 
 > Use get_widget_data for the Bench Stark Enterprise Risk Snapshot and Limit Utilization widgets; find the exact value for risk_exposure_monitor_dashboard_risk_snapshot and exposure for risk_exposure_monitor_limits_limit_utilization, then add a note that cites each widget id, the field name, and the exact value.
 
@@ -6308,7 +6308,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_resources_full_risk_exposure_monitor` — Index-Guided App Extension: Risk & Exposure Monitor
 
-**t4** · dashboard-construction · workflow: risk-review · risk · difficulty: hard · split: train · no-op baseline score: 0.200
+**t4** · dashboard-construction · workflow: risk-review · risk · difficulty: hard · split: validation · no-op baseline score: 0.200
 
 > After reading the app-builder index resource openbb://workspace/app-builder/index, instantiate risk-exposure-monitor as Risk Resource Command, navigate to limits, add widget risk_exposure_monitor_limits_limit_utilization, and add a note mentioning limit utilization and resource.
 
@@ -6404,7 +6404,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_skill_finance_guidance_tracker` — Grounded Finance Guidance Tracker For NVDA
 
-**t4** · skill-access · workflow: equity-tearsheet · equity-research · difficulty: hard · split: train · no-op baseline score: 0.286
+**t4** · skill-access · workflow: equity-tearsheet · equity-research · difficulty: hard · split: validation · no-op baseline score: 0.286
 
 > Use get_skill_content with slug finance-guidance-tracker. Following that workflow, add the Estimate History widget for NVDA, read its data, and add a note that cites the exact key value from the data. Omit dashboard_id when adding the note.
 
@@ -6500,7 +6500,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `gen_t4_update_double_rates_switch` — Double Repair: Rates Switch
 
-**t4** · workspace-repair · workflow: macro-rates-review · macro · difficulty: hard · split: train · no-op baseline score: 0.545
+**t4** · workspace-repair · workflow: macro-rates-review · macro · difficulty: hard · split: validation · no-op baseline score: 0.545
 
 > The first macro widget is DGS2 but should be DGS10, and the second is FEDFUNDS but should be CPIAUCSL. Repair both existing widgets and add a note mentioning DGS10, CPIAUCSL, and the word repaired.
 
@@ -6581,7 +6581,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_advanced_rates_advanced_chart` — Build the Rates Advanced Chart advanced widget
 
-**t0** · widget-building · workflow: macro-rates-review · macro · difficulty: easy · split: train
+**t0** · widget-building · workflow: macro-rates-review · macro · difficulty: easy · split: validation
 
 > Connect a new custom backend named "Rates Watch Data" at http://localhost:7803. Its widgets.json serves exactly one widget - `rates_advanced_chart`: name "Rates Advanced Chart", description "TradingView advanced charting for the 10Y yield future.", endpoint /rates-udf, type advanced_charting, sized w=20 h=18 on the grid, data.defaultSymbol "US10Y", data.updateFrequency 30000. Register it with manage_backends.
 
@@ -6597,7 +6597,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_advanced_vix_advanced` — Build the VIX Advanced Chart advanced widget
 
-**t0** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: validation
+**t0** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: test
 
 > Add "Vol Desk Data" at http://localhost:7801 as a custom backend serving this single widget definition - `vix_advanced`: name "VIX Advanced Chart", description "TradingView advanced charting for VIX futures.", endpoint /udf, type advanced_charting, sized w=20 h=20 on the grid, data.defaultSymbol "VIX", data.updateFrequency 60000.
 
@@ -6645,7 +6645,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_aggrid_open_orders` — Build the Open Orders table definition
 
-**t0** · widget-building · workflow: execution-exception-review · execution · difficulty: easy · split: train
+**t0** · widget-building · workflow: execution-exception-review · execution · difficulty: easy · split: validation
 
 > Register a custom backend "Execution Desk Data" (url http://localhost:7806) whose widgets.json contains one entry: `open_orders`: name "Open Orders", description "Live open orders blotter.", endpoint /open-orders, type table, sized w=20 h=9 on the grid, table columns required (field → header (type, extras)): order_id → header "Order" (text); symbol → header "Symbol" (text); qty → header "Qty" (number, int formatter); status → header "Status" (text, titleCase render).
 
@@ -6661,7 +6661,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_aggrid_vix_history` — Build the VIX History table definition
 
-**t0** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: validation
+**t0** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: test
 
 > You wrote a backend at http://localhost:7801. Add it to the workspace as "Vol Desk Data" serving this single widgets.json entry — `vix_history`: name "VIX History", description "Daily CBOE VIX closes with returns.", endpoint /vix-history, type table, sized w=20 h=9 on the grid, params required: window — a number input (type number), labeled "Window", default 30, min 5, max 365, table columns required (field → header (type, extras)): date → header "Date" (dateString); close → header "Close" (number); return_pct → header "Return %" (number, percent formatter, greenRed render).
 
@@ -6709,7 +6709,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_apps_vendor_board` — Build the Vendor Board app definition
 
-**t0** · app-building · workflow: vendor-sla-monitoring · operations · difficulty: easy · split: train
+**t0** · app-building · workflow: vendor-sla-monitoring · operations · difficulty: easy · split: validation
 
 > The widgets are served; the app file is missing. For "Vendor SLA Data", build apps.json with one entry — app "Vendor Board", description "Vendor SLAs and breaches.", tab `vendors` named "Vendors" places: `vendor_sla_table` at x=0 y=0 w=20 h=9; `breach_metric` at x=20 y=0 w=12 h=6 — and refresh the backend with it.
 
@@ -6725,7 +6725,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_apps_vol_overview` — Build the Vol Overview app definition
 
-**t0** · app-building · workflow: risk-review · volatility · difficulty: easy · split: validation
+**t0** · app-building · workflow: risk-review · volatility · difficulty: easy · split: test
 
 > Add an apps.json to the connected backend "Vol Desk Data" (it already serves `vix_history`, `vol_regime_metric`): app "Vol Overview", description "Vol level and regime.", tab `overview` named "Overview" places: `vix_history` at x=0 y=0 w=20 h=9; `vol_regime_metric` at x=20 y=0 w=12 h=6. Use operation refresh with the apps_json payload.
 
@@ -6773,7 +6773,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_charts_pipeline_vegalite` — Build the Pipeline Mix (Vega-Lite) chart definition
 
-**t0** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: easy · split: train
+**t0** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: easy · split: validation
 
 > Register "Healthcare Research Data" (http://localhost:7808) with one widgets.json chart entry: `pipeline_vegalite`: name "Pipeline Mix (Vega-Lite)", description "Vega-Lite bar spec of pipeline phase mix.", endpoint /pipeline-vegalite, type chart-vegalite, sized w=20 h=9 on the grid, category "Pipeline Charts", staleTime 1800000. Use one manage_backends add.
 
@@ -6789,7 +6789,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_charts_yield_curve` — Build the Yield Curve chart definition
 
-**t0** · widget-building · workflow: macro-rates-review · macro · difficulty: easy · split: validation
+**t0** · widget-building · workflow: macro-rates-review · macro · difficulty: easy · split: test
 
 > Connect a new custom backend named "Rates Watch Data" at http://localhost:7803. Its widgets.json serves exactly one chart widget — `yield_curve`: name "Yield Curve", description "Plotly treasury yield curve snapshot.", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, staleTime 900000, raw true. Register it with manage_backends.
 
@@ -6837,7 +6837,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_extend_add_exception_metric` — Refresh Execution Desk Data with Exceptions
 
-**t0** · app-building · workflow: execution-exception-review · execution · difficulty: easy · split: train
+**t0** · app-building · workflow: execution-exception-review · execution · difficulty: easy · split: validation
 
 > Refresh "Execution Desk Data" (http://localhost:7806) with widgets_json containing both the served `open_orders` and this new entry - `exception_metric`: name "Exceptions", description "Open execution exceptions.", endpoint /exception-count, type metric, sized w=5 h=4 on the grid, category "Desk Extensions", staleTime 900000.
 
@@ -6853,7 +6853,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_extend_add_vol_regime_metric` — Refresh Vol Desk Data with Vol Regime
 
-**t0** · app-building · workflow: risk-review · volatility · difficulty: easy · split: validation
+**t0** · app-building · workflow: risk-review · volatility · difficulty: easy · split: test
 
 > Update the connected backend "Vol Desk Data" with a manage_backends refresh. The widgets_json payload replaces the served file, so include existing `vix_term_structure` and add `vol_regime_metric`: name "Vol Regime", description "Current volatility regime score.", endpoint /vol-regime, type metric, sized w=6 h=4 on the grid, category "Desk Extensions", staleTime 900000.
 
@@ -6901,7 +6901,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_forms_threshold_update_form` — Build the Threshold Update Form form widget
 
-**t0** · widget-building · workflow: execution-exception-review · execution · difficulty: easy · split: train
+**t0** · widget-building · workflow: execution-exception-review · execution · difficulty: easy · split: validation
 
 > Add "Execution Desk Data" at http://localhost:7806 serving this single form-capable widget definition: `threshold_update_form`: name "Threshold Update Form", description "Submit a threshold change for operations.", endpoint /threshold-update, type table, sized w=20 h=10 on the grid, category "Workflow Forms", params required: threshold — a form submitting POST to /threshold-update-submit with inputs [limit — a number input (type number), labeled "Limit", default 250, min 0, max 1000; owner — a text input (type text), labeled "Owner", default "ops"; apply — a button (type button), labeled "Apply"] (that bracket is the complete list of the form's inputParams).
 
@@ -6917,7 +6917,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_forms_vendor_intake_form` — Build the Vendor Intake Form form widget
 
-**t0** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: easy · split: validation
+**t0** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: easy · split: test
 
 > Add "Vendor SLA Data" at http://localhost:7804 serving this single form-capable widget definition: `vendor_intake_form`: name "Vendor Intake Form", description "Submit a new vendor record into the SLA register.", endpoint /vendor-intake, type table, sized w=20 h=10 on the grid, category "Workflow Forms", params required: intake — a form submitting POST to /vendor-intake-submit with inputs [vendor — a text input (type text), labeled "Vendor"; tier — a number input (type number), labeled "Tier"; submit — a button (type button), labeled "Add Vendor"] (that bracket is the complete list of the form's inputParams).
 
@@ -6965,7 +6965,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_grouping_nvda_review_board` — Build the grouped NVDA Review Board app definition
 
-**t0** · widget-building · workflow: earnings-prep · equity-research · difficulty: easy · split: train
+**t0** · widget-building · workflow: earnings-prep · equity-research · difficulty: easy · split: validation
 
 > Your backend "Earnings Prep Data" is already connected and serves `estimate_revisions`, `earnings_chart`. Ship its apps.json - exactly one grouped app: app "NVDA Review Board", description "A second symbol-synced earnings review.", tab `nvda` named "NVDA" places: `estimate_revisions` at x=0 y=0 w=20 h=9; `earnings_chart` at x=20 y=0 w=12 h=9, group "NVDA Symbol Sync" (type param) syncing param symbol across ["estimate_revisions", "earnings_chart"]. Submit it with manage_backends refresh (apps_json).
 
@@ -6981,7 +6981,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_grouping_revision_note_board` — Build the grouped Revision Note Board app definition
 
-**t0** · widget-building · workflow: earnings-prep · equity-research · difficulty: easy · split: validation
+**t0** · widget-building · workflow: earnings-prep · equity-research · difficulty: easy · split: test
 
 > Add apps.json to the connected backend "Earnings Prep Data" (already serving `estimate_revisions`, `earnings_note`): app "Revision Note Board", description "Revisions and preview note synced by symbol.", tab `notes` named "Notes" places: `estimate_revisions` at x=0 y=0 w=20 h=9; `earnings_note` at x=20 y=0 w=12 h=9, group "Revision Symbol Sync" (type param) syncing param symbol across ["estimate_revisions", "earnings_note"]. Use operation refresh with apps_json.
 
@@ -7029,7 +7029,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_params_trial_catalysts` — Build the Trial Catalysts parameter widget
 
-**t0** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: easy · split: train
+**t0** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: easy · split: validation
 
 > Connect a new custom backend named "Healthcare Research Data" at http://localhost:7808. Its widgets.json serves exactly one widget - `trial_catalysts`: name "Trial Catalysts", description "Upcoming clinical trial readouts.", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, params required: ticker — a dropdown (type endpoint), labeled "Ticker", options fetched from /tickers, default "PFE", table columns required (field → header (type, extras)): ticker → header "Ticker" (text); phase → header "Phase" (text); readout_date → header "Readout" (dateString). Register it with manage_backends.
 
@@ -7045,7 +7045,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_params_vix_history` — Build the VIX History parameter widget
 
-**t0** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: validation
+**t0** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: test
 
 > Register "Vol Desk Data" (http://localhost:7801) with one param-bearing widgets.json entry: `vix_history`: name "VIX History", description "Daily CBOE VIX closes with returns.", endpoint /vix-history, type table, sized w=20 h=9 on the grid, params required: window — a number input (type number), labeled "Window", default 30, min 5, max 365, table columns required (field → header (type, extras)): date → header "Date" (dateString); close → header "Close" (number); return_pct → header "Return %" (number, percent formatter, greenRed render).
 
@@ -7093,7 +7093,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_settings_rates_commentary` — Build the Rates Commentary cached categorized markdown
 
-**t0** · widget-building · workflow: macro-rates-review · macro · difficulty: easy · split: train
+**t0** · widget-building · workflow: macro-rates-review · macro · difficulty: easy · split: validation
 
 > Register "Rates Watch Data" (http://localhost:7803) with one widgets.json entry carrying its configuration: `rates_commentary`: name "Rates Commentary", description "Desk commentary on the rates day.", endpoint /rates-commentary, type markdown, sized w=12 h=8 on the grid, category "Macro Notes", staleTime 1800000, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS10".
 
@@ -7109,7 +7109,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_settings_vol_regime_metric` — Build the Vol Regime cached run-button metric
 
-**t0** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: validation
+**t0** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: test
 
 > You wrote a backend at http://localhost:7801. Add it as "Vol Desk Data" serving this configured widget exactly — `vol_regime_metric`: name "Vol Regime", description "Current volatility regime score.", endpoint /vol-regime, type metric, sized w=6 h=4 on the grid, staleTime 900000, runButton true.
 
@@ -7157,7 +7157,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_types_venue_pdf` — Build the Venue Scorecard pdf widget
 
-**t0** · widget-building · workflow: execution-exception-review · execution · difficulty: easy · split: train
+**t0** · widget-building · workflow: execution-exception-review · execution · difficulty: easy · split: validation
 
 > Register "Execution Desk Data" (http://localhost:7806) with one widgets.json entry: `venue_pdf`: name "Venue Scorecard", description "Monthly venue scorecard PDF.", endpoint /venue-scorecard, type pdf, sized w=16 h=14 on the grid, category "Execution Reports", staleTime 1800000. Use a single manage_backends add.
 
@@ -7173,7 +7173,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t0_types_vol_commentary` — Build the Vol Commentary markdown widget
 
-**t0** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: validation
+**t0** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: test
 
 > Connect a new custom backend named "Vol Desk Data" at http://localhost:7801. Its widgets.json serves exactly one content widget — `vol_commentary`: name "Vol Commentary", description "Morning volatility commentary.", endpoint /vol-commentary, type markdown, sized w=12 h=8 on the grid, staleTime 900000, params required: desk — a text input (type text), labeled "Desk", static options ["Index"="index", "Single Stock"="single"], default "index". Register it with manage_backends.
 
@@ -9157,7 +9157,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t4_advanced_rates_live_chart_ship` — Ship, open, and configure Rates Advanced Live
 
-**t4** · widget-building · workflow: macro-rates-review · macro · difficulty: hard · split: train
+**t4** · widget-building · workflow: macro-rates-review · macro · difficulty: hard · split: validation
 
 > End to end. Publish "Rates Watch Data" at http://localhost:7803 - widgets.json: `rates_live_chart`: name "Rates Live Chart", description "TradingView chart for treasury futures.", endpoint /rates-live-udf, type advanced_charting, sized w=20 h=18 on the grid, category "Macro", staleTime 900000, params required: contract — a text input (type text), labeled "Contract", default "ZN", described "Treasury futures contract.", data.defaultSymbol "ZN", data.updateFrequency 30000; `yield_curve`: name "Yield Curve", description "Plotly treasury yield curve snapshot.", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, staleTime 900000, raw true; `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid, staleTime 900000. Desk convention: every widget this backend serves carries staleTime 900000. apps.json: app "Rates Advanced Live", description "TradingView rates chart and curve.", tab `chart` named "Chart" places: `rates_live_chart` at x=0 y=0 w=20 h=18, tab `curve` named "Curve" places: `yield_curve` at x=0 y=0 w=20 h=9. Then instantiate "Rates Advanced Live" into a dashboard named "Rates Advanced Live Dashboard", set contract to "ZB" on the opened `rates_live_chart` widget, and leave a note titled "Rates Advanced Live" that says exactly: "Rates Advanced Live is live from Rates Watch Data: rates chart ready."
 
@@ -9237,7 +9237,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t4_aggrid_healthcare_ship` — Ship, open, and configure the Readout Desk app
 
-**t4** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: hard · split: train
+**t4** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: hard · split: validation
 
 > Build, publish, open, configure, document. Backend "Healthcare Research Data" (http://localhost:7808) serves `readout_calendar`: name "Readout Calendar", description "Upcoming trial readouts.", endpoint /readout-calendar, type table, gridData w=20 h=9, taking phase — a text input (type text), labeled "Phase", default "III", described "Trial phase filter.", columns derived from served rows like [{"phase": "III", "readout": "2026-08-19", "ticker": "PFE"}, {"phase": "II", "readout": "2026-09-02", "ticker": "MRNA"}] — Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent.. Desk convention: every widget this backend serves carries staleTime 900000; `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid; `fda_newsfeed`: name "FDA Notices", description "FDA decision and notice feed.", endpoint /fda-notices, type newsfeed, sized w=12 h=10 on the grid; and ships app "Readout Desk", description "Trial readouts and catalysts.", tab `readouts` named "Readouts" places: `readout_calendar` at x=0 y=0 w=20 h=9, tab `signals` named "Signals" places: `catalyst_metric` at x=0 y=0 w=12 h=6. Open the app as "Readout Desk Live" via manage_apps, set phase to "II" on the opened `readout_calendar` widget, then record a note "Readout Desk" saying: "Readout Desk is live from Healthcare Research Data: readouts on tap."
 
@@ -9317,7 +9317,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t4_apps_tvl_ship` — Ship, open, and configure the Chain Live app
 
-**t4** · app-building · workflow: portfolio-morning-review · crypto · difficulty: hard · split: train
+**t4** · app-building · workflow: portfolio-morning-review · crypto · difficulty: hard · split: validation
 
 > Build, publish, open, configure, document. "Chain TVL Data" (http://localhost:7802) serves `chains_table`: name "Top Chains by TVL", description "Current TVL of all chains from the desk aggregator.", endpoint /chains-table, type table, sized w=20 h=9 on the grid, params required: chain — a text input (type text), labeled "Chain", default "Ethereum", described "Chain in focus.", table columns required (field → header (type, extras)): name → header "Chain" (text); tvl_usd → header "TVL ($)" (number, int formatter); change_1d → header "1d Change" (number, percent formatter, greenRed render); `gas_metric`: name "Gas Now", description "Current gas price snapshot.", endpoint /gas-now, type metric, sized w=5 h=4 on the grid; `chains_chart`: name "TVL by Chain", description "Plotly bar chart of chain TVL.", endpoint /chains-chart, type chart, sized w=20 h=9 on the grid, raw true. Desk convention: every widget this backend serves carries staleTime 900000 and ships app "Chain Live", description "TVL and gas.", tab `chains` named "Chains" places: `chains_table` at x=0 y=0 w=20 h=9, tab `posture` named "Posture" places: `gas_metric` at x=0 y=0 w=12 h=6. Open the app as "Chain Live Board" via manage_apps, set chain to "Solana" on the opened `chains_table` widget, then a note "Chain Live" saying: "Chain Live shipped from Chain TVL Data: chains live."
 
@@ -9397,7 +9397,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t4_charts_rates_ship` — Ship, open, and configure the Rates Chart Live app
 
-**t4** · widget-building · workflow: macro-rates-review · macro · difficulty: hard · split: train
+**t4** · widget-building · workflow: macro-rates-review · macro · difficulty: hard · split: validation
 
 > Build, publish, open, configure, document. "Rates Watch Data" (http://localhost:7803) serves `yield_curve`: name "Yield Curve", description "Plotly treasury yield curve snapshot.", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, staleTime 900000, raw true, params required: curve_view — a text input (type text), labeled "Curve View", default "2s10s", described "Curve segment in focus."; `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid, staleTime 900000; `rates_commentary`: name "Rates Commentary", description "Desk commentary on the rates day.", endpoint /rates-commentary, type markdown, sized w=12 h=8 on the grid, staleTime 900000, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS10". Desk convention: every widget this backend serves carries staleTime 900000 and ships app "Rates Chart Live", description "Yield curve and spread.", tab `rates` named "Rates" places: `yield_curve` at x=0 y=0 w=20 h=9, tab `signals` named "Signals" places: `curve_spread_metric` at x=0 y=0 w=8 h=5. Open the app as "Rates Chart Live Board" via manage_apps, set curve_view to "5s30s" on the opened `yield_curve` widget, then a note "Rates Chart Live" saying: "Rates Chart Live shipped from Rates Watch Data: yield curve live."
 
@@ -9717,7 +9717,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t4_extend_repair_rates` — Repair, extend, open, and configure Rates Repair Live
 
-**t4** · app-building · workflow: macro-rates-review · macro · difficulty: hard · split: train
+**t4** · app-building · workflow: macro-rates-review · macro · difficulty: hard · split: validation
 
 > Diagnose and ship "Rates Watch Data". The warning badge does not name fields; apply this convention: Rates Commentary series is an endpoint param backed by /series-options. Refresh widgets_json with fixed `rates_commentary` plus `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS10", refresh the served app "Rates Repair Live" to include `curve_spread_metric` on a second `posture` tab, open it as "Rates Repair Live Dashboard", set series to "DGS2" on the opened `rates_commentary` widget, and add note "Rates Repair Live" saying "Rates Repair Live is live from Rates Watch Data: rates repair done.".
 
@@ -9797,7 +9797,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t4_forms_healthcare_ship` — Ship, open, and configure the Trial Intake Live form app
 
-**t4** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: hard · split: train
+**t4** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: hard · split: validation
 
 > End to end. Publish "Healthcare Research Data" at http://localhost:7808 - widgets.json: `trial_readout_form`: name "Trial Readout Form", description "Capture a clinical trial readout note.", endpoint /trial-readout-form, type table, sized w=20 h=10 on the grid, category "Research", staleTime 900000, params required: readout — a form submitting POST to /trial-readout-submit with inputs [ticker — a text input (type text), labeled "Ticker", default "PFE"; readout_date — a date picker (type date), labeled "Readout date", default "2026-08-19"; save — a button (type button), labeled "Save"] (that bracket is the complete list of the form's inputParams); ticker_scope — a text input (type text), labeled "Ticker Scope", default "PFE", described "Trial readout ticker filter." (a separate widget-level param, NOT one of the form's inputs); `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid, staleTime 900000; `trial_catalysts`: name "Trial Catalysts", description "Upcoming clinical trial readouts.", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: ticker — a dropdown (type endpoint), labeled "Ticker", options fetched from /tickers, default "PFE", table columns required (field → header (type, extras)): ticker → header "Ticker" (text); phase → header "Phase" (text); readout_date → header "Readout" (dateString). Desk convention: every widget this backend serves carries staleTime 900000. apps.json: app "Trial Intake Live", description "Trial readouts and catalyst count.", tab `trials` named "Trials" places: `trial_readout_form` at x=0 y=0 w=20 h=10, tab `status` named "Status" places: `catalyst_metric` at x=0 y=0 w=8 h=6. Then instantiate "Trial Intake Live" from that backend into a dashboard named "Trial Intake Live Board", set ticker_scope to "MRNA" on the opened `trial_readout_form` widget, and leave a note titled "Trial Intake Live" that says exactly: "Trial Intake Live is live from Healthcare Research Data: trial intake ready."
 
@@ -9877,7 +9877,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t4_grouping_earnings_sync_live` — Ship, open, and configure the grouped Earnings Sync Live app
 
-**t4** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: train
+**t4** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: validation
 
 > End to end. Publish "Earnings Prep Data" at http://localhost:7805 - widgets.json: `estimate_revisions`: name "Estimate Revisions", description "Street estimate revisions by quarter.", endpoint /estimate-revisions, type table, sized w=20 h=9 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): quarter → header "Quarter" (text); eps_estimate → header "EPS Est" (number); revenue_estimate_b → header "Revenue Est ($B)" (number); `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; `earnings_note`: name "Earnings Preview", description "Preview note for the earnings call.", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL". apps.json: app "Earnings Sync Live", description "Live grouped revisions and EPS history.", tab `review` named "Review" places: `estimate_revisions` at x=0 y=0 w=20 h=9 preset with params {"symbol": "NVDA"}, tab `linked` named "Linked" places: `earnings_chart` at x=0 y=0 w=12 h=9, group "Live Symbol Sync" (type param) syncing param symbol across ["estimate_revisions", "earnings_chart"]. Then instantiate "Earnings Sync Live" from that backend into a dashboard named "Earnings Sync Live Board", set symbol to "MSFT" on the opened `estimate_revisions` widget, and leave a note titled "Earnings Sync Live" that says exactly: "Earnings Sync Live is live from Earnings Prep Data: symbol sync ready."
 
@@ -9957,7 +9957,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t4_params_rates_ship` — Ship, open, and configure the Rates Series Live parameter app
 
-**t4** · widget-building · workflow: macro-rates-review · macro · difficulty: hard · split: train
+**t4** · widget-building · workflow: macro-rates-review · macro · difficulty: hard · split: validation
 
 > Four steps: add "Rates Watch Data" at http://localhost:7803 with `rates_series_pack`: name "Rates Series Pack", description "Rates commentary filtered by selected series.", endpoint /rates-series-pack, type markdown, sized w=12 h=8 on the grid, staleTime 900000, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS2"; `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid, staleTime 900000; `rates_commentary`: name "Rates Commentary", description "Desk commentary on the rates day.", endpoint /rates-commentary, type markdown, sized w=12 h=8 on the grid, staleTime 900000, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS10". Desk convention: every widget this backend serves carries staleTime 900000 and app "Rates Series Live", description "Preset rates series commentary.", tab `series` named "Series" places: `rates_series_pack` at x=0 y=0 w=20 h=9 preset with params {"series": "DGS2"}, tab `posture` named "Posture" places: `curve_spread_metric` at x=0 y=0 w=12 h=6; instantiate "Rates Series Live" as "Rates Series Live Board"; set series to "DGS10" on the opened `rates_series_pack` widget; add a note titled "Rates Series Live" with the text "Rates Series Live is live from Rates Watch Data: series preset ready.".
 
@@ -10037,7 +10037,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t4_settings_rates_ship` — Ship, open, and configure the Rates Config Live app
 
-**t4** · widget-building · workflow: macro-rates-review · macro · difficulty: hard · split: train
+**t4** · widget-building · workflow: macro-rates-review · macro · difficulty: hard · split: validation
 
 > End to end. Publish "Rates Watch Data" at http://localhost:7803 — widgets.json: `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid, category "Macro", staleTime 900000, refetchInterval 30000, params required: curve_view — a text input (type text), labeled "Curve View", default "2s10s", described "Curve segment in focus."; `rates_commentary`: name "Rates Commentary", description "Desk commentary on the rates day.", endpoint /rates-commentary, type markdown, sized w=12 h=8 on the grid, category "Macro", staleTime 900000, refetchInterval 30000, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS10"; `yield_curve`: name "Yield Curve", description "Plotly treasury yield curve snapshot.", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, category "Macro", staleTime 900000, raw true, refetchInterval 30000. Desk convention: every widget this backend serves carries staleTime 900000. apps.json: app "Rates Config Live", description "Configured curve spread and commentary.", tab `rates` named "Rates" places: `curve_spread_metric` at x=0 y=0 w=8 h=5, tab `posture` named "Posture" places: `rates_commentary` at x=0 y=0 w=20 h=9. Then instantiate "Rates Config Live" from that backend into a dashboard named "Rates Config Live Board", set curve_view to "5s30s" on the opened `curve_spread_metric` widget, and leave a note titled "Rates Config Live" that says exactly: "Rates Config Live shipped from Rates Watch Data: Macro category."
 
@@ -10117,7 +10117,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `auth_t4_types_sla_newsfeed_ship` — Ship, open, and configure the Vendor Notice Room app
 
-**t4** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: hard · split: train
+**t4** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: hard · split: validation
 
 > Four steps. One: add "Vendor SLA Data" at http://localhost:7804 serving `sla_newsfeed`: name "Vendor Notices", description "Vendor incident notices feed.", endpoint /vendor-notices, type newsfeed, sized w=12 h=10 on the grid, staleTime 900000, params required: vendor — a text input (type text), labeled "Vendor", default "AlphaFeed", described "Vendor filter for notices."; `breach_metric`: name "Open Breaches", description "Count of open SLA breaches.", endpoint /breach-count, type metric, sized w=6 h=4 on the grid, staleTime 900000; `vendor_sla_table`: name "Vendor SLA Status", description "Vendor SLA state with breach flags.", endpoint /vendor-sla, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: status — a text input (type text), labeled "Status", static options ["Open"="Open", "Escalated"="Escalated", "Resolved"="Resolved"], default "Open", table columns required (field → header (type, extras)): vendor → header "Vendor" (text); status → header "Status" (text, titleCase render); latency_ms → header "Latency (ms)" (number); breach → header "Breach" (boolean). Desk convention: every widget this backend serves carries staleTime 900000, shipping app "Vendor Notice Room", description "Vendor notices and breach count.", tab `notices` named "Notices" places: `sla_newsfeed` at x=0 y=0 w=20 h=12, tab `signals` named "Signals" places: `breach_metric` at x=0 y=0 w=8 h=5. Two: instantiate "Vendor Notice Room" into "Vendor Notice Room Live". Three: set vendor to "QuoteStream" on the opened `sla_newsfeed` widget. Four: a note titled "Vendor Notice Room" with the text: "Vendor Notice Room is live from Vendor SLA Data: notices ready."
 

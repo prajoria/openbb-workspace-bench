@@ -90,6 +90,6 @@
   "limits": {
     "max_turns": 4
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique navigate/t0 exercise using manage_dashboard with checks dashboard_name, layout_out_of_grid, missing_tool_call, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/strategy_health_monitor_themes_thematic_baskets@overview."
 }

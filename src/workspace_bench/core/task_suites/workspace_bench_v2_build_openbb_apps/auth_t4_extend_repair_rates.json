@@ -290,6 +290,6 @@
   "limits": {
     "max_turns": 9
   },
-  "split": "train",
+  "split": "validation",
   "novelty": "Unique extend/t4 building exercise using add_generative_widget, get_workspace_snapshot, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_spread_metric,Rates Watch Data/rates_commentary; appdefs:Rates Watch Data/Rates Repair Live; widgets:Rates Watch Data/rates_commentary@*; generated:note@*:Rates Repair Live,rates repair."
 }
