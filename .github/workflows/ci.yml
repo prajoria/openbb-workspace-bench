@@ -19,31 +19,45 @@ jobs:
       - name: Set up Python
         run: uv python install 3.11
 
-      - name: Run tests
-        run: uv run --extra dev pytest
+      - name: Lint
+        run: uv run --extra dev ruff check src tests scripts examples
 
-      - name: Validate benchmark scenarios
-        run: |
-          uv run --extra dev workspace-bench validate --collection core --min-scenarios 300
-          uv run --extra dev workspace-bench validate --collection build-openbb-apps --min-scenarios 212
+      - name: Type-check
+        run: uv run --extra dev mypy src/workspace_bench
 
-      - name: Run oracle baseline
-        run: uv run --extra dev workspace-bench run --agent oracle
+      - name: Run tests with coverage
+        run: uv run --extra dev pytest --cov=workspace_bench --cov-report=term --cov-fail-under=65
+
+      - name: Validate the core suite
+        run: uv run --extra dev workspace-bench validate --suite core --min-tasks 300
+
+      - name: Validate the build-openbb-apps suite
+        run: uv run --extra dev workspace-bench validate --suite build-openbb-apps --min-tasks 212
+
+      - name: Run oracle baseline (core)
+        run: uv run --extra dev workspace-bench run --suite core --agent oracle
+
+      - name: Run oracle baseline (build-openbb-apps)
+        run: uv run --extra dev workspace-bench run --suite build-openbb-apps --agent oracle
 
       - name: Export agent task envelope
-        run: uv run --extra dev workspace-bench export-task --scenario gen_t0_create_price_performance_aapl --output /tmp/workspace-task.json
+        run: uv run --extra dev workspace-bench export-task --task gen_t0_create_price_performance_aapl --output /tmp/workspace-task.json
 
       - name: Run demo external agent
-        run: uv run --extra dev workspace-bench run-agent-command --scenario gen_t0_create_price_performance_aapl --agent-command "python -m workspace_bench.examples.jsonl_rule_agent"
+        run: uv run --extra dev workspace-bench run-agent-command --task gen_t0_create_price_performance_aapl --agent-command "python -m workspace_bench.examples.jsonl_rule_agent"
 
-      - name: Build manifest
-        run: uv run --extra dev workspace-bench manifest --json
+      - name: Build manifests
+        run: |
+          uv run --extra dev workspace-bench manifest --suite core --json > /dev/null
+          uv run --extra dev workspace-bench manifest --suite build-openbb-apps --json > /dev/null
 
-      - name: Build report
-        run: uv run --extra dev workspace-bench report --json
+      - name: Build release reports
+        run: |
+          uv run --extra dev workspace-bench report --suite core --json > /dev/null
+          uv run --extra dev workspace-bench report --suite build-openbb-apps --json > /dev/null
 
-      - name: Smoke model comparison config
-        run: uv run --extra dev workspace-bench compare-models --models-file examples/models.example.json --difficulty easy --dry-run
+      - name: Smoke the evaluator dispatch
+        run: uv run --extra dev workspace-bench --models-file examples/models.example.json --difficulty easy --dry-run
 
       - name: Build package
         run: uv build
