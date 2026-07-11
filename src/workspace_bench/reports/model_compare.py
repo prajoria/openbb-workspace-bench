@@ -17,8 +17,8 @@ import time
 import urllib.error
 import urllib.request
 from contextlib import contextmanager
-from dataclasses import dataclass
-from datetime import datetime
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterator
 
@@ -109,6 +109,7 @@ class ComparisonRun:
     output_path: Path
     runner: str
     repeat: int = 1
+    provider_meta: JsonDict = field(default_factory=dict)
 
 
 class TransientModelError(RuntimeError):
@@ -117,6 +118,75 @@ class TransientModelError(RuntimeError):
     def __init__(self, message: str, *, status_code: int | None = None):
         super().__init__(message)
         self.status_code = status_code
+
+
+# Last provider-reported identity (model string, system fingerprint) observed
+# by a chat call. Providers mutate what an alias like "gpt-4.1-mini" points at,
+# so runs record what the API actually reported serving them.
+_LAST_PROVIDER_META: dict[str, str] = {}
+
+
+def _record_provider_meta(**fields: Any) -> None:
+    _LAST_PROVIDER_META.clear()
+    _LAST_PROVIDER_META.update(
+        {key: str(value) for key, value in fields.items() if value}
+    )
+
+
+def _utc_now() -> str:
+    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def harness_metadata() -> JsonDict:
+    """Best-effort harness identity for result provenance."""
+
+    package_version: str | None
+    try:
+        from importlib.metadata import version
+
+        package_version = version("openbb-workspace-bench")
+    except Exception:  # noqa: BLE001 - provenance is best-effort.
+        package_version = None
+    git_commit: str | None = None
+    try:
+        completed = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            cwd=Path(__file__).resolve().parent,
+            timeout=5,
+            check=False,
+        )
+        git_commit = completed.stdout.strip() or None
+    except Exception:  # noqa: BLE001 - provenance is best-effort.
+        git_commit = None
+    return {"package_version": package_version, "git_commit": git_commit}
+
+
+def effective_settings(args: argparse.Namespace) -> JsonDict:
+    """Snapshot the settings that shape model behavior for this run.
+
+    Called inside the adapter's patched environment so per-adapter env
+    overrides (base URLs, temperatures, format escape hatches) are recorded
+    as they actually applied.
+    """
+
+    return {
+        "runner": args.runner,
+        "timeout": args.timeout,
+        "repeats": args.repeats,
+        "model_retries": args.model_retries,
+        "retry_backoff": args.retry_backoff,
+        "max_turns_override": args.max_turns,
+        "widget_hints": not getattr(args, "no_widget_hints", False),
+        "malformed_retries": getattr(args, "malformed_retries", 2),
+        "openai_base_url": os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"),
+        "ollama_base_url": os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434"),
+        "openai_temperature": os.environ.get("OPENAI_TEMPERATURE", "0"),
+        "ollama_temperature": os.environ.get("OLLAMA_TEMPERATURE", "0"),
+        "openai_response_format": os.environ.get("OPENAI_RESPONSE_FORMAT", "json_schema"),
+        "ollama_format": os.environ.get("OLLAMA_FORMAT", "schema"),
+    }
 
 
 def default_adapters() -> dict[str, ModelAdapter]:
@@ -257,6 +327,24 @@ def main(argv: list[str] | None = None) -> int:
         help="Retry transient model API failures this many times per turn.",
     )
     parser.add_argument(
+        "--malformed-retries",
+        type=int,
+        default=2,
+        help=(
+            "Recovery turns granted for malformed model actions before the "
+            "episode counts as a process failure. 0 disables the teaching "
+            "turn (ablation)."
+        ),
+    )
+    parser.add_argument(
+        "--no-widget-hints",
+        action="store_true",
+        help=(
+            "Omit the fixture widget-hint sheet from the first message "
+            "(ablation; hints are on by default and identical for every model)."
+        ),
+    )
+    parser.add_argument(
         "--retry-backoff",
         type=float,
         default=1.0,
@@ -295,6 +383,9 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     if args.model_retries < 0:
         print("--model-retries must be >= 0", file=sys.stderr)
+        return 2
+    if args.malformed_retries < 0:
+        print("--malformed-retries must be >= 0", file=sys.stderr)
         return 2
     if args.retry_backoff < 0:
         print("--retry-backoff must be >= 0", file=sys.stderr)
@@ -378,7 +469,7 @@ def main(argv: list[str] | None = None) -> int:
             f"({total_attempts} attempt(s)) with {args.runner} runner...",
             file=sys.stderr,
         )
-        runs = run_adapter(
+        runs, run_metadata = run_adapter(
             adapter,
             tasks,
             output_dir,
@@ -390,8 +481,11 @@ def main(argv: list[str] | None = None) -> int:
             retry_backoff=args.retry_backoff,
             color=should_colorize(args.color, sys.stderr),
             resume=args.resume,
+            malformed_retries=args.malformed_retries,
+            include_widget_hints=not args.no_widget_hints,
+            args=args,
         )
-        result_payload = model_result_payload(adapter, tasks, runs, args)
+        result_payload = model_result_payload(adapter, tasks, runs, args, run_metadata)
         result_path = output_dir / f"{adapter.slug}.json"
         result_path.write_text(
             json.dumps(result_payload, indent=2, sort_keys=True) + "\n",
@@ -403,12 +497,15 @@ def main(argv: list[str] | None = None) -> int:
 
     comparison = {
         "benchmark": benchmark_metadata(args),
+        "harness": harness_metadata(),
         "filters": selected_filters(args),
         "runner": args.runner,
         "max_turns_override": args.max_turns,
         "repeats": args.repeats,
         "model_retries": args.model_retries,
         "retry_backoff": args.retry_backoff,
+        "malformed_retries": args.malformed_retries,
+        "widget_hints": not args.no_widget_hints,
         "metric": args.metric,
         "models_file": args.models_file,
         "task_count": len(tasks),
@@ -672,12 +769,19 @@ def run_adapter(
     retry_backoff: float,
     color: bool,
     resume: bool = False,
-) -> list[ComparisonRun]:
+    malformed_retries: int = 2,
+    include_widget_hints: bool = True,
+    args: argparse.Namespace | None = None,
+) -> tuple[list[ComparisonRun], JsonDict]:
     runs = []
     total_attempts = len(tasks) * repeats
     attempt_index = 0
     resumed_count = 0
+    started_at = _utc_now()
+    settings: JsonDict = {}
     with patched_env(adapter.env):
+        if args is not None:
+            settings = effective_settings(args)
         for repeat in range(1, repeats + 1):
             for task in tasks:
                 attempt_index += 1
@@ -731,6 +835,8 @@ def run_adapter(
                         model_retries=model_retries,
                         retry_backoff=retry_backoff,
                         repeat=repeat,
+                        malformed_retries=malformed_retries,
+                        include_widget_hints=include_widget_hints,
                     )
                 runs.append(run)
                 print(
@@ -749,7 +855,25 @@ def run_adapter(
             file=sys.stderr,
             flush=True,
         )
-    return runs
+    run_metadata: JsonDict = {
+        "started_at": started_at,
+        "finished_at": _utc_now(),
+        "harness": harness_metadata(),
+        "settings": settings,
+        "provider_observed": {
+            "models": sorted({
+                model
+                for run in runs
+                for model in run.provider_meta.get("models", [])
+            }),
+            "system_fingerprints": sorted({
+                fingerprint
+                for run in runs
+                for fingerprint in run.provider_meta.get("system_fingerprints", [])
+            }),
+        },
+    }
+    return runs, run_metadata
 
 
 def replay_completed_run(
@@ -808,6 +932,7 @@ def replay_completed_run(
         output_path=output_path,
         runner="interactive",
         repeat=repeat,
+        provider_meta=dict(meta.get("provider", {})),
     )
 
 
@@ -843,6 +968,8 @@ def run_interactive_agent(
     model_retries: int,
     retry_backoff: float,
     repeat: int = 1,
+    malformed_retries: int = 2,
+    include_widget_hints: bool = True,
 ) -> ComparisonRun:
     run_dir.mkdir(parents=True, exist_ok=True)
     task_path = run_dir / "task.json"
@@ -861,12 +988,16 @@ def run_interactive_agent(
         responses_path.unlink()
 
     episode = WorkspaceEpisode(task=task)
-    messages = build_interactive_messages(task_payload)
+    messages = build_interactive_messages(
+        task_payload, include_widget_hints=include_widget_hints
+    )
     max_turns = max_turns_override or int(task.limits.get("max_turns", 12))
     stdout_lines: list[str] = []
     stderr = ""
     exit_code: int | None = 0
     timed_out = False
+    observed_models: set[str] = set()
+    observed_fingerprints: set[str] = set()
 
     malformed_recoveries = 0
     for turn in range(1, max_turns + 1):
@@ -889,13 +1020,18 @@ def run_interactive_agent(
             exit_code = 1
             stderr = str(error)
             break
+        if _LAST_PROVIDER_META.get("model"):
+            observed_models.add(_LAST_PROVIDER_META["model"])
+        if _LAST_PROVIDER_META.get("system_fingerprint"):
+            observed_fingerprints.add(_LAST_PROVIDER_META["system_fingerprint"])
         try:
             action = parse_interactive_action(content)
         except Exception as error:  # noqa: BLE001 - malformed model action.
             # Teaching turn, mirroring invalid-tool-call rejections: a malformed
-            # action costs a turn (and patience), not the episode. Two strikes.
+            # action costs a turn (and patience), not the episode. Two strikes
+            # by default; --malformed-retries 0 disables the recovery.
             malformed_recoveries += 1
-            if malformed_recoveries > 2:
+            if malformed_recoveries > malformed_retries:
                 exit_code = 1
                 stderr = str(error)
                 break
@@ -961,6 +1097,10 @@ def run_interactive_agent(
         json.dumps(messages, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
+    provider_meta: JsonDict = {
+        "models": sorted(observed_models),
+        "system_fingerprints": sorted(observed_fingerprints),
+    }
     meta_path = run_dir / "run_meta.json"
     meta_path.write_text(
         json.dumps(
@@ -969,6 +1109,7 @@ def run_interactive_agent(
                 "timed_out": timed_out,
                 "stdout": "\n".join(stdout_lines),
                 "stderr": stderr,
+                "provider": provider_meta,
             },
             indent=2,
             sort_keys=True,
@@ -993,10 +1134,13 @@ def run_interactive_agent(
         output_path=output_path,
         runner="interactive",
         repeat=repeat,
+        provider_meta=provider_meta,
     )
 
 
-def build_interactive_messages(task: JsonDict) -> list[JsonDict]:
+def build_interactive_messages(
+    task: JsonDict, *, include_widget_hints: bool = True
+) -> list[JsonDict]:
     task = task["task"]
     allowed_tools = task["allowed_tools"]
     origin_hints = fixture_origin_hints(task["fixtures"])
@@ -1009,7 +1153,7 @@ def build_interactive_messages(task: JsonDict) -> list[JsonDict]:
     }
     widget_hints = (
         fixture_widget_hints(origin_hints)
-        if widget_tool_names.intersection(allowed_tools)
+        if include_widget_hints and widget_tool_names.intersection(allowed_tools)
         else {}
     )
     tool_reference = {
@@ -1169,6 +1313,10 @@ def call_openai_chat(model: str, messages: list[JsonDict], timeout: float) -> st
         timeout,
         headers={"Authorization": f"Bearer {api_key}"},
     )
+    _record_provider_meta(
+        model=body.get("model"),
+        system_fingerprint=body.get("system_fingerprint"),
+    )
     try:
         content = body["choices"][0]["message"]["content"]
     except (KeyError, IndexError, TypeError) as error:
@@ -1192,6 +1340,7 @@ def call_ollama_chat(model: str, messages: list[JsonDict], timeout: float) -> st
     if os.environ.get("OLLAMA_FORMAT", "schema") != "none":
         payload["format"] = interactive_action_schema()
     body = post_json(f"{base_url}/api/chat", payload, timeout)
+    _record_provider_meta(model=body.get("model"))
     message = body.get("message") or {}
     content = message.get("content")
     if isinstance(content, str) and content.strip():
@@ -1399,6 +1548,7 @@ def model_result_payload(
     tasks: list[Task],
     runs: list[ComparisonRun],
     args: argparse.Namespace,
+    run_metadata: JsonDict | None = None,
 ) -> dict:
     return {
         "benchmark": benchmark_metadata(args),
@@ -1407,6 +1557,7 @@ def model_result_payload(
         "runner": args.runner,
         "repeats": args.repeats,
         "model_retries": args.model_retries,
+        "run_metadata": run_metadata or {},
         "summary": summarize_runs(runs),
         "results": [agent_run_summary(run) for run in runs],
         "tasks": [task.id for task in tasks],

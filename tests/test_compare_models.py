@@ -84,6 +84,44 @@ def test_non_widget_stark_prompt_omits_widget_hints() -> None:
     assert '"widget_hints": {}' in prompt
 
 
+def test_widget_hints_can_be_ablated() -> None:
+    task = find_task(
+        "gen_t1_params_schema_sector_client_360_portfolio_view_exposure_summary_7"
+    )
+
+    messages = build_interactive_messages(
+        build_task_envelope(task), include_widget_hints=False
+    )
+    prompt = messages[1]["content"]
+
+    assert '"widget_hints": {}' in prompt
+
+
+def test_run_metadata_snapshot_records_effective_settings(monkeypatch) -> None:
+    from workspace_bench.reports.model_compare import effective_settings, harness_metadata
+
+    monkeypatch.setenv("OPENAI_BASE_URL", "http://127.0.0.1:9/v1")
+    args = SimpleNamespace(
+        runner="interactive",
+        timeout=240.0,
+        repeats=1,
+        model_retries=2,
+        retry_backoff=1.0,
+        max_turns=None,
+        no_widget_hints=True,
+        malformed_retries=0,
+    )
+
+    settings = effective_settings(args)
+    harness = harness_metadata()
+
+    assert settings["widget_hints"] is False
+    assert settings["malformed_retries"] == 0
+    assert settings["openai_base_url"] == "http://127.0.0.1:9/v1"
+    assert "git_commit" in harness
+    assert "package_version" in harness
+
+
 def test_comparison_metadata_uses_core_suite_release_id() -> None:
     metadata = benchmark_metadata(
         SimpleNamespace(task_dir=None, suite="core")
