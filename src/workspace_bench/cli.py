@@ -42,15 +42,10 @@ from workspace_bench.core.runner import (
 
 def main(argv: list[str] | None = None) -> int:
     raw_argv = list(sys.argv[1:] if argv is None else argv)
-    if raw_argv[:1] in (["compare-models"], ["eval"]):
-        from workspace_bench.reports.model_compare import main as compare_models_main
-
-        return compare_models_main(raw_argv[1:])
-
-    # No subcommand at all: `workspace-bench --model openai:gpt-4.1-mini
-    # --scenario <id>` should just do the obvious thing — evaluating IS the
-    # tool's function. Anything starting with a flag routes to the runner;
-    # bare `workspace-bench` still prints the subcommand help below.
+    # Evaluating IS the tool's function, so it takes no subcommand:
+    # `workspace-bench --model openai:gpt-4.1-mini --scenario <id>` (or
+    # --models-file / --collection / any runner flag) routes straight to the
+    # interactive runner. Bare `workspace-bench` prints the help below.
     if raw_argv and raw_argv[0].startswith("-") and raw_argv[0] not in ("-h", "--help"):
         from workspace_bench.reports.model_compare import main as compare_models_main
 
@@ -94,14 +89,7 @@ def main(argv: list[str] | None = None) -> int:
     report_parser.add_argument("--json", action="store_true", help="Emit JSON.")
     report_parser.add_argument("--output", help="Write report to a file.")
 
-    subparsers.add_parser(
-        "eval",
-        help="Run models with the interactive benchmark runner (one scenario, a slice, or everything).",
-    )
-    subparsers.add_parser(
-        "compare-models",
-        help="Alias of eval — kept for multi-model sweep muscle memory.",
-    )
+
 
     run_parser = subparsers.add_parser("run", help="Run scenarios.")
     run_parser.add_argument("--scenario", help="Scenario id. Runs all when omitted.")
@@ -278,7 +266,7 @@ def _add_scenario_selection_args(parser: argparse.ArgumentParser) -> None:
 
 def _add_rollout_source_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--output", required=True)
-    parser.add_argument("--comparison-dir", help="Read a compare-models output directory.")
+    parser.add_argument("--comparison-dir", help="Read an evaluator output directory.")
     parser.add_argument("--trace-dir", help="Read trace artifacts from this directory.")
     parser.add_argument(
         "--oracle",

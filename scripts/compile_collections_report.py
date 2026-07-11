@@ -26,7 +26,7 @@ ID_SHAPE = re.compile(r"^(?:gen|auth)_(t\d)_([a-z0-9]+)_")
 
 
 def load_model_results(comparison_dir: Path) -> dict[str, dict]:
-    """Read every per-model result JSON in a compare-models output directory."""
+    """Read every per-model result JSON in an evaluator output directory."""
 
     models: dict[str, dict] = {}
     for path in sorted(comparison_dir.glob("*.json")):
@@ -83,7 +83,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--run", action="append", required=True, metavar="COLLECTION=DIR",
-        help="collection name = compare-models output directory (repeatable)",
+        help="collection name = evaluator output directory (repeatable)",
     )
     parser.add_argument("--output", default="runs/reports/collections.json")
     args = parser.parse_args()

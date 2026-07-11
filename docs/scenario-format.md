@@ -300,5 +300,5 @@ A scenario directory can include a `task_pack.json` manifest:
 
 `default_split` is applied to scenario files that do not set `split` directly.
 Use `workspace-bench list --scenario-dir ./my-workspace-tasks --split validation`
-or `workspace-bench compare-models --scenario-dir ./my-workspace-tasks --split validation`
+or `workspace-bench --scenario-dir ./my-workspace-tasks --split validation`
 to run a specific slice.

@@ -81,7 +81,7 @@ Run both built-in model adapters across all scenarios with the interactive
 comparison runner:
 
 ```bash
-uv run workspace-bench compare-models \
+uv run workspace-bench \
   --difficulty all \
   --timeout 240
 ```
@@ -89,7 +89,7 @@ uv run workspace-bench compare-models \
 Run one difficulty slice:
 
 ```bash
-uv run workspace-bench compare-models \
+uv run workspace-bench \
   --difficulty medium \
   --timeout 240
 ```
@@ -97,7 +97,7 @@ uv run workspace-bench compare-models \
 Change the chart metric from pass rate to mean score:
 
 ```bash
-uv run workspace-bench compare-models \
+uv run workspace-bench \
   --difficulty all \
   --metric mean-score \
   --timeout 240
@@ -106,7 +106,7 @@ uv run workspace-bench compare-models \
 Run repeated attempts and chart task pass rate:
 
 ```bash
-uv run workspace-bench compare-models \
+uv run workspace-bench \
   --difficulty all \
   --repeats 3 \
   --metric task-pass-rate \
@@ -116,7 +116,7 @@ uv run workspace-bench compare-models \
 Run a configured set of adapters:
 
 ```bash
-uv run workspace-bench compare-models \
+uv run workspace-bench \
   --models-file examples/models.example.json \
   --difficulty all \
   --timeout 240
@@ -263,5 +263,5 @@ Malformed output is converted into an invalid trace event so it is visible in th
 
 `run-agent-command` evaluates trace-producing agents. The agent does not receive
 interactive observations after each tool call from that command alone. For
-interactive local model evaluation, use `workspace-bench compare-models`, which
+interactive local model evaluation, use `workspace-bench`, which
 is backed by `WorkspaceEpisode.step` and shares the same scenarios and graders.

@@ -53,7 +53,7 @@ A private pack becomes a **collection** the moment you report it as one. Three s
 uv run workspace-bench validate --scenario-dir ./my-workspace-tasks
 
 # 2. run your models over it (one run directory per model)
-uv run workspace-bench compare-models \
+uv run workspace-bench \
   --models-file models.json --scenario-dir ./my-workspace-tasks \
   --output-dir runs/comparison/mydesk-gpt-4.1-mini
 

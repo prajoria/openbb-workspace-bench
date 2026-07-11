@@ -89,7 +89,7 @@ uv run workspace-bench validate --pack all --min-scenarios 300
 For comparison-runner changes, also run:
 
 ```bash
-uv run workspace-bench compare-models \
+uv run workspace-bench \
   --models-file examples/models.example.json \
   --difficulty easy \
   --dry-run

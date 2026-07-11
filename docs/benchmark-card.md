@@ -109,7 +109,7 @@ Do not use this release as a public leaderboard without adding hidden tasks and 
 - The live sidecar smoke path emulates the browser bridge with the simulator.
 - Public scenario JSON includes oracle traces.
 - Financial data is deterministic fixture data, not live market data.
-- `run-agent-command` is trace-producing. Use `workspace-bench compare-models` for
+- `run-agent-command` is trace-producing. Use `workspace-bench` for
   interactive local model runs.
 - The Gym-style adapter is an environment wrapper, not a complete RL training
   stack.

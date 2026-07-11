@@ -164,7 +164,7 @@ The repository is already aligned with the right architecture in several ways:
 - `SimulatedWorkspace` is a cheap state machine for Workspace MCP-like tools.
 - `grade_scenario` is deterministic and checks durable Workspace state first.
 - `oracle` and `noop` baselines are strong validation primitives.
-- `compare-models` creates interactive model traces, not only batch JSONL.
+- the evaluator creates interactive model traces, not only batch JSONL.
 - Exports produce rollout, SFT, and preference data.
 - `WorkspaceGymEnv` wraps the same episode and grader instead of creating a
   separate RL-only environment.
@@ -376,7 +376,7 @@ General Agent has local, MCP, and RLM backends.
 Workspace Bench should formalize solver backends:
 
 - `jsonl_batch`: current external command protocol.
-- `interactive_local`: current `compare-models` loop.
+- `interactive_local`: current the evaluator loop.
 - `gym`: `WorkspaceGymEnv`.
 - `mcp_sidecar`: current live `workspace-mcp` smoke path.
 - `browser_workspace`: future isolated real Workspace browser runner.
@@ -578,7 +578,7 @@ task-pack generation.
 - Add tiered evolution strategies.
 - Generate candidate scenario JSON from templates.
 - Certify generated scenarios with oracle/noop validation.
-- Gate a small generated pack with `compare-models`.
+- Gate a small generated pack with the evaluator.
 - Store gating metadata in a sidecar report first, then consider embedding it
   in scenario JSON.
 

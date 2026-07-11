@@ -50,7 +50,7 @@ trainer needs negative examples with grade metadata.
 Run repeated attempts first:
 
 ```bash
-uv run workspace-bench compare-models \
+uv run workspace-bench \
   --difficulty all \
   --repeats 3 \
   --metric pass-at-k \

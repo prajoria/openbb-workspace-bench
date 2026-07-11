@@ -134,5 +134,5 @@ manifest is available.
 `sharegpt`, or `tool_call_jsonl`. Passing attempts are exported by default;
 use `--include-failures` to include failed attempts with grade metadata.
 
-`export-preferences` reads a repeated `compare-models` run and emits
+`export-preferences` reads a repeated the evaluator run and emits
 `chosen`/`rejected` pairs for attempts on the same model and scenario.

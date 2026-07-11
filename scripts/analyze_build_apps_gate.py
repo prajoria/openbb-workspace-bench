@@ -1,6 +1,6 @@
 """Analyze a gpt-4.1-mini gating run over the Part 2 building pack.
 
-Reads a compare-models per-model result JSON and prints the tier curve, per-family
+Reads a the evaluator per-model result JSON and prints the tier curve, per-family
 pass rates, and the issue-code histogram — the calibration view used to accept or
 reject the pack's difficulty ladder.
 

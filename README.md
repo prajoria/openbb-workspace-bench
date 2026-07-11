@@ -149,19 +149,23 @@ uv run workspace-bench run-agent-command \
 
 The OpenAI adapter writes `openai_prompt.txt`, `openai_response.txt`, and `tool_calls.jsonl` inside the scenario run directory.
 
-Compare two models over all bundled scenarios with the interactive runner:
+Run several models side by side — `--model` is repeatable:
 
 ```bash
-uv run workspace-bench compare-models \
-  --pack all \
-  --difficulty all \
-  --timeout 240
+uv run workspace-bench \
+  --model openai:gpt-4.1-mini \
+  --model ollama:qwen3:8b \
+  --collection build-openbb-apps
 ```
+
+Omit `--scenario` and the runner covers the whole collection (`--collection
+core` or `--collection build-openbb-apps`); add `--difficulty`, `--level`, or
+`--tag` to run a slice.
 
 Compare only one difficulty slice:
 
 ```bash
-uv run workspace-bench compare-models \
+uv run workspace-bench \
   --pack all \
   --difficulty easy \
   --timeout 240
@@ -170,7 +174,7 @@ uv run workspace-bench compare-models \
 Run repeated attempts for a more stable comparison:
 
 ```bash
-uv run workspace-bench compare-models \
+uv run workspace-bench \
   --pack all \
   --difficulty all \
   --repeats 3 \
@@ -203,7 +207,7 @@ a known-good solution to diff against.
 Run models from a JSON adapter config:
 
 ```bash
-uv run workspace-bench compare-models \
+uv run workspace-bench \
   --models-file examples/models.example.json \
   --pack all \
   --difficulty all \
@@ -254,7 +258,7 @@ uv run workspace-bench export-sft \
   --output runs/exports/oracle-sft.jsonl
 ```
 
-You can also export from a `compare-models` output directory with
+You can also export from a the evaluator output directory with
 `--comparison-dir runs/comparison/<run-id>`. SFT export includes only passing
 attempts by default; add `--include-failures` to keep failed attempts with grade
 metadata.
@@ -277,7 +281,7 @@ be added independently and reported separately or in aggregate. Bundled today:
 ```bash
 # run or validate one collection (--pack is an alias of --collection)
 uv run workspace-bench validate --collection build-openbb-apps --min-scenarios 212
-uv run workspace-bench compare-models --models-file examples/models.example.json --collection build-openbb-apps
+uv run workspace-bench --models-file examples/models.example.json --collection build-openbb-apps
 ```
 
 Every collection has to clear the same gates before it counts: the reference
@@ -292,7 +296,7 @@ added across collections, never averaged percentages. Point the report at one
 run directory per model per collection:
 
 ```bash
-# each compare-models invocation writes one run directory per model
+# each the evaluator invocation writes one run directory per model
 uv run python scripts/compile_collections_report.py \
   --run core=runs/comparison/core-gpt-4.1-mini \
   --run build-openbb-apps=runs/comparison/build-gpt-4.1-mini \
