@@ -52,6 +52,7 @@ def build_task_envelope(task: Task) -> JsonDict:
         "task": {
             "id": task.id,
             "title": task.title,
+            "category": task.category,
             "level": task.level,
             "capability": task.capability,
             "workflow": task.workflow,

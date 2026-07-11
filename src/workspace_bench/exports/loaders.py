@@ -61,15 +61,14 @@ def load_comparison_rollouts(
             output_path = _resolve_artifact_path(
                 item.get("output_path"), base_dir=comparison_dir
             )
-            task_path = _resolve_artifact_path(
-                item.get("task_path"), base_dir=comparison_dir
-            )
             run_dir = _resolve_artifact_path(item.get("run_dir"), base_dir=comparison_dir)
             tool_calls = load_tool_calls(output_path)
             result = replay_tool_calls(task, tool_calls)
-            envelope = (
-                _read_json(task_path) if task_path.exists() else build_task_envelope(task)
-            )
+            # Embed the CURRENT canonical envelope: attempts are replayed and
+            # re-graded against the current suite, so the exported task payload
+            # must match it (the run directory keeps the run-time task.json as
+            # the historical record).
+            envelope = build_task_envelope(task)
             messages_path = run_dir / "conversation.json"
             messages = _read_json(messages_path) if messages_path.exists() else []
             records.append(
@@ -147,6 +146,7 @@ def load_trace_dir_rollouts(
                     **base_export_metadata(),
                     "source": "trace_dir",
                     "task_id": task_id,
+                    "category": task_payload.get("category"),
                     "level": task_payload.get("level"),
                     "difficulty": task_payload.get("difficulty"),
                     "capability": task_payload.get("capability"),
@@ -194,6 +194,7 @@ def run_result_to_rollout(
     combined_metadata = {
         **base_export_metadata(),
         "task_id": result.task.id,
+        "category": result.task.category,
         "level": result.task.level,
         "difficulty": result.task.difficulty,
         "split": result.task.split,
