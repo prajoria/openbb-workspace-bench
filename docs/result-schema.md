@@ -18,7 +18,7 @@ Top-level shape:
     "failed": 0,
     "mean_score": 1.0,
     "by_level": {
-      "L1": { "passed": 8, "total": 8 }
+      "t0": { "passed": 60, "total": 60 }
     }
   },
   "results": []
@@ -28,7 +28,7 @@ Top-level shape:
 Each result includes:
 
 - task id
-- level, capability, workflow, domain, subdomain, difficulty, tags
+- category, level, capability, workflow, domain, subdomain, difficulty, tags
 - numeric score
 - pass/fail
 - checks passed and total
@@ -76,6 +76,27 @@ External-agent result rows add:
 - `output_path`
 
 `passed` is true only when the process succeeds and the task grader passes.
+
+## Evaluator Result Files
+
+Each `workspace-bench --model ...` run writes one result JSON per model into
+the run directory, alongside `comparison.json`, `analysis.md`, and charts.
+The per-model payload adds, on top of the external-agent row fields:
+
+- `benchmark`, `model`, `filters`, `runner`, `repeats`, `model_retries`
+- `run_metadata`: `started_at`/`finished_at` timestamps, `harness`
+  (`package_version`, `git_commit`), `settings` (the effective base URLs,
+  temperatures, response-format modes, retry/turn budgets, `widget_hints`,
+  and `malformed_retries` as they applied inside the adapter's environment),
+  and `provider_observed` (the model identifiers and system fingerprints the
+  provider actually reported serving)
+- `summary` with strict and valid-attempt pass rates, `process_failures`,
+  `by_level`, `by_category`, `by_difficulty`, and pass@k/pass^k reliability
+  fields when `--repeats` is used
+
+`comparison.json` carries the shared `benchmark`/`harness` blocks, the
+selected filters, and one summary entry per model. Runs published before the
+`run_metadata` capture do not contain that block.
 
 ## Trace Artifacts
 
@@ -126,13 +147,14 @@ Each JSONL row has this shape:
 ```
 
 Each row also includes versioning metadata such as `benchmark_release_id`,
-`benchmark_version`, `export_schema_version`, and `exported_at`. Private or
-hidden task-pack exports include task-pack metadata when a `task_suite.json`
+`benchmark_version`, `export_schema_version`, and `exported_at`, plus the
+task's `category`, `level`, `difficulty`, and `split`. Private or hidden
+task-suite exports include task-suite metadata when a `task_suite.json`
 manifest is available.
 
 `export-sft` converts the same rollout records to `openai_messages`,
 `sharegpt`, or `tool_call_jsonl`. Passing attempts are exported by default;
 use `--include-failures` to include failed attempts with grade metadata.
 
-`export-preferences` reads a repeated the evaluator run and emits
+`export-preferences` reads a repeated evaluator run and emits
 `chosen`/`rejected` pairs for attempts on the same model and task.

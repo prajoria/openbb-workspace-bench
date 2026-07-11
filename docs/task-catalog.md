@@ -23,9 +23,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
   doing nothing — the gap to 1.0 is what the task actually demands. Release gates
   require the no-op to *fail* every task and the oracle trace to *pass* every one.
 
-## Pack: core (workspace-bench-v1) (300 tasks)
+## Suite: core (workspace-bench-v1) (300 tasks)
 
-### t0 —  (60)
+### t0 (60)
 
 #### `gen_t0_app_client_360` — Instantiate Client 360
 
@@ -1167,7 +1167,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Trace**: ≤0 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
 - **Trace**: ≤1 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
 
-### t1 —  (60)
+### t1 (60)
 
 #### `gen_t1_app_compliance_surveillance_hub` — Instantiate Compliance Surveillance Hub (Checked)
 
@@ -2408,7 +2408,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Trace**: ≤0 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
 - **Trace**: ≤1 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
 
-### t2 —  (60)
+### t2 (60)
 
 #### `gen_t2_app_note_nav_fees_close_dashboard` — Instantiate NAV, Fees & Close Dashboard And Brief
 
@@ -3723,7 +3723,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Trace**: ≤0 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
 - **Trace**: ≤1 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
 
-### t3 —  (60)
+### t3 (60)
 
 #### `gen_t3_app_extend_fund_operations_control_tower` — Instantiate And Extend Fund Operations Control Tower
 
@@ -5106,7 +5106,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Trace**: ≤0 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
 - **Trace**: ≤1 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
 
-### t4 —  (60)
+### t4 (60)
 
 #### `gen_t4_app_full_corporate_access_meeting_notes` — Instantiate, Extend, And Brief Corporate Access & Meeting Notes
 
@@ -6543,9 +6543,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Trace**: ≤1 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
 
 
-## Pack: build-openbb-apps (workspace-bench-v2-build-openbb-apps) (212 tasks)
+## Suite: build-openbb-apps (workspace-bench-v2-build-openbb-apps) (212 tasks)
 
-### t0 —  (40)
+### t0 (40)
 
 #### `auth_t0_advanced_case_qa_omni` — Build the Case Q&A advanced widget
 
@@ -7187,7 +7187,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
 - **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
 
-### t1 —  (40)
+### t1 (40)
 
 #### `auth_t1_advanced_case_qa_omni_app` — Ship Case Q&A as Case QA
 
@@ -7829,7 +7829,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
 - **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
 
-### t2 —  (40)
+### t2 (40)
 
 #### `auth_t2_advanced_case_prompt_omni` — Compose the Case Prompt Omni widget
 
@@ -8471,7 +8471,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
 - **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
 
-### t3 —  (40)
+### t3 (40)
 
 #### `auth_t3_advanced_case_room_omni_room` — Assemble the Case QA Room
 
@@ -9113,7 +9113,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
 - **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
 
-### t4 —  (52)
+### t4 (52)
 
 #### `auth_t4_advanced_case_qa_omni_ship` — Ship, open, and configure Surveillance QA
 

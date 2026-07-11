@@ -629,7 +629,7 @@ def build() -> None:
             ]
             convention = (
                 f"{convention} The repaired `{focus_id}` also takes "
-                f"{c._param_requirement(config_param)}."
+                f"{c.param_requirement(config_param)}."
             )
         app_name, app_desc, tab_id, tab_name = app_spec
         initial_app = c.app_def(app_name, app_desc, tabs=[

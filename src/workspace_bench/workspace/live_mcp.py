@@ -358,6 +358,9 @@ def _mcp_compatible_snapshot(snapshot: JsonDict) -> JsonDict:
     payload = {key: value for key, value in snapshot.items() if key in SNAPSHOT_FIELDS}
     workspace_state = payload.get("workspace_state")
     if isinstance(workspace_state, dict):
+        # The real sidecar validates dashboard ids as UUIDs; the simulator
+        # issues counter ids (dash_001), so drop workspace_state rather than
+        # send an id the server would reject.
         dashboard_uuid = workspace_state.get("current_dashboard_uuid")
         try:
             UUID(str(dashboard_uuid))

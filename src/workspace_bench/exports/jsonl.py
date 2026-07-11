@@ -10,7 +10,13 @@ from workspace_bench.core.models import JsonDict
 
 
 def write_jsonl(rows: Iterable[JsonDict], output_path: Path) -> int:
-    """Write JSONL rows and return the number written."""
+    """Write JSONL rows and return the number written.
+
+    Keys are sorted for stable diffs. Consumers must treat JSON object key
+    order as insignificant; the harness's own replay files
+    (tool_calls.jsonl) preserve insertion order instead, because tool-call
+    arg order is semantic to the simulator there.
+    """
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     count = 0

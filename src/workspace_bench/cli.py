@@ -903,6 +903,14 @@ def _selected_tasks(args: argparse.Namespace) -> list[Task]:
     task_id = getattr(args, "task", None)
     if task_id:
         tasks = [task for task in tasks if task.id == task_id]
+        if (
+            not tasks
+            and not getattr(args, "task_dir", None)
+            and getattr(args, "suite", "core") == "core"
+        ):
+            # A task id should just work without naming the suite (mirrors
+            # the evaluator): fall back to searching every bundled suite.
+            return [find_task(task_id)]
         if not tasks:
             raise KeyError(f"Unknown task {task_id!r}")
     return tasks
@@ -996,6 +1004,7 @@ def _task_summary(task: Task) -> dict:
 def _result_summary(result: RunResult) -> dict:
     return {
         "id": result.task.id,
+        "category": result.task.category,
         "level": result.task.level,
         "capability": result.task.capability,
         "workflow": result.task.workflow,

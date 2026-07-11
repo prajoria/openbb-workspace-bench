@@ -1,8 +1,8 @@
 """Generate docs/task-catalog.md from the bundled task JSON files.
 
-Reads every task in the unified workspace-bench-v1 pack and renders each
-one's prompt, setup, novelty note, and exact pass/fail criteria as the grader
-applies them. Regenerate after editing tasks so the catalog never drifts.
+Reads every task in both bundled suites and renders each one's prompt,
+setup, novelty note, and exact pass/fail criteria as the grader applies
+them. Regenerate after editing tasks so the catalog never drifts.
 """
 
 from __future__ import annotations
@@ -19,22 +19,13 @@ BUILD_PACK_DIR = (
 REPORT = REPO / "runs/reports/benchmark-report.md"
 OUT = REPO / "docs/task-catalog.md"
 
-LEVEL_NAMES = {
-    "L0": "Inspect & answer",
-    "L1": "Single-widget operations",
-    "L2": "Dashboard construction",
-    "L3": "Apps, skills & delegation",
-    "L4": "Repair",
-}
-
-
 def load_noop_scores() -> dict[str, str]:
     """Parse the release report's task table for noop baseline scores."""
     scores: dict[str, str] = {}
     if not REPORT.exists():
         return scores
     for line in REPORT.read_text().splitlines():
-        match = re.match(r"\| (\w+) \| \w+ \| L\d \|", line)
+        match = re.match(r"\| (\w+) \| \w+ \| t\d \|", line)
         if match:
             cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
             scores[cells[0]] = cells[-1]
@@ -193,7 +184,7 @@ def describe_success(success: dict) -> list[str]:
     return checks
 
 
-def render_task(task: dict, pack: str, noop: dict[str, str]) -> str:
+def render_task(task: dict, noop: dict[str, str]) -> str:
     sid = task["id"]
     lines = [f"#### `{sid}` — {task.get('title', '')}", ""]
     meta = (
@@ -266,20 +257,20 @@ def main() -> None:
     ]
 
     total = 0
-    for pack_name, files in packs:
+    for suite_name, files in packs:
         tasks = [json.loads(f.read_text()) for f in files]
         total += len(tasks)
-        out.append(f"## Pack: {pack_name} ({len(tasks)} tasks)")
+        out.append(f"## Suite: {suite_name} ({len(tasks)} tasks)")
         out.append("")
         by_level: dict[str, list[dict]] = {}
         for task in tasks:
             by_level.setdefault(task.get("level", "?"), []).append(task)
         for level in sorted(by_level):
             group = by_level[level]
-            out.append(f"### {level} — {LEVEL_NAMES.get(level, '')} ({len(group)})")
+            out.append(f"### {level} ({len(group)})")
             out.append("")
             for task in group:
-                out.append(render_task(task, pack_name, noop))
+                out.append(render_task(task, noop))
         out.append("")
 
     out.append(f"---\n\nTotal: {total} tasks.")

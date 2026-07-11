@@ -437,7 +437,7 @@ def build() -> None:
         )
         convention = c.stamp_consistency(widgets)
         param_name = config_param["paramName"]
-        param_words = c._param_requirement(config_param)
+        param_words = c.param_requirement(config_param)
         focus_surface = (
             f"`{widget_id}`: name \"{name}\", description \"{description}\", "
             f"endpoint {endpoint}, type table, gridData w=20 h=9, taking "

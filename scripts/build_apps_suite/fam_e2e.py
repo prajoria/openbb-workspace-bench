@@ -42,7 +42,7 @@ def _add_capstone(
         (sibling_tab_id, sibling_tab_name, [c.layout_item(sibling_id, 0, 0, 20, 9)]),
     ])
     note_text = f"{app_name} is live from {desk['backend']}: {note_term} ready."
-    param_words = c._param_requirement(config_param)
+    param_words = c.param_requirement(config_param)
     table_words = (
         f"`{table_id}` data API: name \"{table_name}\", description "
         f"\"{table_desc}\", endpoint {endpoint}, type table, gridData w=20 h=9. "

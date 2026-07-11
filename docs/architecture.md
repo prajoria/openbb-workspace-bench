@@ -163,7 +163,10 @@ measure guided tool orchestration rather than cold discovery. The full list,
 for anyone interpreting or citing the boards:
 
 - a per-task tool reference (descriptions and argument shapes for the
-  allowed tools only)
+  allowed tools only). For `manage_backends` the description is effectively
+  the full widgets.json/apps.json format specification — type enums,
+  required fields, param and column rules — so build tasks measure applying
+  the spec under composed requirements, not recalling it
 - fixture origin hints (slug-to-display-name mapping) and, for the bundled
   fixtures, a widget-hint sheet with known widget ids and canonical
   `data_args` examples

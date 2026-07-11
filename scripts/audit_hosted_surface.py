@@ -53,7 +53,7 @@ def load_token() -> str | None:
     for key in TOKEN_KEYS:
         if os.environ.get(key):
             return os.environ[key]
-    env_path = Path(os.environ.get("OPENAI_ENV_FILE", ".env"))
+    env_path = Path(os.environ.get("WORKSPACE_MCP_ENV_FILE", ".env"))
     if not env_path.exists():
         return None
     for raw_line in env_path.read_text(encoding="utf-8").splitlines():

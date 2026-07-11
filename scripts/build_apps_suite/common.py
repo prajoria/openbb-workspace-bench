@@ -295,12 +295,12 @@ _PARAM_KIND = {
 }
 
 
-def _param_requirement(param: dict) -> str:
+def param_requirement(param: dict) -> str:
     name = param["paramName"]
     kind = param.get("type", "text")
     if kind == "form":
         inner = "; ".join(
-            _param_requirement(item) for item in param.get("inputParams", [])
+            param_requirement(item) for item in param.get("inputParams", [])
         )
         return (
             f"{name} — a form submitting {param.get('method', 'POST')} to "
@@ -390,7 +390,7 @@ def widget_requirements_text(
         has_form = any(p.get("type") == "form" for p in params)
         rendered_params = []
         for p in params:
-            text = _param_requirement(p)
+            text = param_requirement(p)
             if has_form and p.get("type") != "form":
                 text += " (a separate widget-level param, NOT one of the form's inputs)"
             rendered_params.append(text)
@@ -419,7 +419,7 @@ def shared_param_note(param: dict, widget_ids: list[str]) -> str:
 
     return (
         f"All of {', '.join(f'`{wid}`' for wid in widget_ids)} take the same shared "
-        f"param: {_param_requirement(param)}."
+        f"param: {param_requirement(param)}."
     )
 
 

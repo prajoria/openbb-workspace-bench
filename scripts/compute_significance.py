@@ -59,14 +59,18 @@ def mcnemar_exact(b: int, c: int) -> float:
     return min(1.0, 2 * tail)
 
 
-def load_split_map(suite_dir: Path) -> dict[str, str]:
+def load_task_fields(suite_dir: Path) -> tuple[dict[str, str], dict[str, str]]:
+    """Return (task_id -> split, task_id -> level) from the shipped suite."""
+
     splits: dict[str, str] = {}
+    levels: dict[str, str] = {}
     for path in sorted(suite_dir.glob("*.json")):
         if path.name == "task_suite.json":
             continue
         task = json.loads(path.read_text())
         splits[task["id"]] = task.get("split", "train")
-    return splits
+        levels[task["id"]] = task.get("level", "?")
+    return splits, levels
 
 
 def load_runs(prefix: str) -> dict[str, dict[str, bool]]:
@@ -110,16 +114,14 @@ def slice_summary(
 
 
 def holdout_levels(
-    outcomes: dict[str, bool], splits: dict[str, str]
+    outcomes: dict[str, bool],
+    splits: dict[str, str],
+    levels: dict[str, str],
 ) -> dict[str, dict]:
     by_level: dict[str, list[bool]] = defaultdict(list)
     for task_id, ok in outcomes.items():
         if splits.get(task_id) in {"validation", "test"}:
-            level = next(
-                (part for part in task_id.split("_") if part.startswith("t") and len(part) == 2),
-                "?",
-            )
-            by_level[level].append(ok)
+            by_level[levels.get(task_id, "?")].append(ok)
     return {
         level: {"passed": sum(oks), "total": len(oks)}
         for level, oks in sorted(by_level.items())
@@ -129,7 +131,7 @@ def holdout_levels(
 def main() -> int:
     report: dict = {"suites": {}}
     for suite, suite_dir in SUITE_DIRS.items():
-        splits = load_split_map(suite_dir)
+        splits, levels = load_task_fields(suite_dir)
         outcomes = load_runs(RUN_PREFIX[suite])
         if not outcomes:
             continue
@@ -139,7 +141,7 @@ def main() -> int:
                 "all": slice_summary(per_task, splits, None),
                 "holdout": slice_summary(per_task, splits, {"validation", "test"}),
                 "test_only": slice_summary(per_task, splits, {"test"}),
-                "holdout_by_level": holdout_levels(per_task, splits),
+                "holdout_by_level": holdout_levels(per_task, splits, levels),
             }
         ranked = sorted(
             outcomes, key=lambda slug: -models[slug]["all"]["passed"]

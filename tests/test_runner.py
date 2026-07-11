@@ -209,8 +209,27 @@ def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["summary"]["passed"] == 1
+    assert payload["results"][0]["category"] == "single-widget"
     assert payload["results"][0]["difficulty"] == "easy"
     assert payload["results"][0]["split"] == "train"
+
+
+def test_cli_run_resolves_build_suite_task_without_suite_flag(capsys) -> None:
+    exit_code = main(
+        [
+            "run",
+            "--task",
+            "auth_t2_aggrid_revision_grid",
+            "--agent",
+            "oracle",
+            "--json",
+        ]
+    )
+
+    payload = json.loads(capsys.readouterr().out)
+    assert exit_code == 0
+    assert payload["summary"]["passed"] == 1
+    assert payload["results"][0]["id"] == "auth_t2_aggrid_revision_grid"
 
 
 def test_cli_can_run_private_task_directory(tmp_path, capsys) -> None:

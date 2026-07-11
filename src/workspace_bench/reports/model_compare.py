@@ -52,7 +52,6 @@ from workspace_bench.core.runner import load_builtin_task_suite_manifest, load_t
 
 
 INTERACTIVE_PROVIDERS = {"openai", "ollama"}
-REPO_ROOT = Path.cwd()
 
 
 def resolve_repo_root(start: Path | None = None) -> Path:
@@ -122,7 +121,8 @@ class TransientModelError(RuntimeError):
 
 # Last provider-reported identity (model string, system fingerprint) observed
 # by a chat call. Providers mutate what an alias like "gpt-4.1-mini" points at,
-# so runs record what the API actually reported serving them.
+# so runs record what the API actually reported serving them. A module global
+# is safe only because the runner executes episodes sequentially.
 _LAST_PROVIDER_META: dict[str, str] = {}
 
 
@@ -1569,7 +1569,7 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
     for model in comparison["models"]:
         result_path = Path(model["result_path"])
         if not result_path.is_absolute():
-            result_path = REPO_ROOT / result_path
+            result_path = Path.cwd() / result_path
         model_payloads.append(json.loads(result_path.read_text(encoding="utf-8")))
 
     lines = [
@@ -1879,6 +1879,7 @@ def agent_run_summary(run: ComparisonRun) -> dict:
     return {
         "id": result.task.id,
         "repeat": run.repeat,
+        "category": result.task.category,
         "level": result.task.level,
         "difficulty": result.task.difficulty,
         "split": result.task.split,

@@ -212,7 +212,7 @@ uv run workspace-bench export-task \
 The envelope includes:
 
 - benchmark name, version, release id, and canary
-- task id, prompt, level, capability, workflow, domain, subdomain, difficulty, tags
+- task id, prompt, category, level, capability, workflow, domain, subdomain, difficulty, tags
 - fixture backend references
 - initial Workspace state
 - allowed tools
