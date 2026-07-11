@@ -86,7 +86,7 @@ service.
 - MCP resource and prompt retrieval through `read_workspace_resource` and `get_workspace_prompt`
 - task delegation envelopes through `assign_tasks_to_agents`
 
-It is not a pixel or browser simulator. It is a deterministic state machine for the Workspace MCP contract. That makes it cheap enough for benchmark development and RL rollouts.
+It is not a pixel or browser simulator. It is a deterministic state machine for the Workspace MCP contract. That makes it cheap enough for benchmark development and high-volume automated runs.
 
 ### Runner
 
@@ -155,6 +155,34 @@ The grader checks final Workspace state and trace behavior:
 - repeated snapshot behavior
 
 The primary artifact is final Workspace state. Natural-language quality can be layered in later, but should not replace deterministic checks.
+
+### Interactive Harness Assistance
+
+The interactive evaluator gives every model the same assistance, so scores
+measure guided tool orchestration rather than cold discovery. The full list,
+for anyone interpreting or citing the boards:
+
+- a per-task tool reference (descriptions and argument shapes for the
+  allowed tools only)
+- fixture origin hints (slug-to-display-name mapping) and, for the bundled
+  fixtures, a widget-hint sheet with known widget ids and canonical
+  `data_args` examples
+- tool-name normalization (`functions.`/`tool.` prefixes stripped, fixture
+  slugs mapped to display origins)
+- lenient action parsing: the first JSON object in the reply is taken as the
+  action; trailing prose or extra objects are ignored
+- a teaching turn for malformed actions: a reply that cannot be parsed costs
+  a turn and gets a corrective message, twice per episode by default, before
+  the episode counts as a process failure
+- transient provider failures (HTTP 429/5xx, transport errors) retried with
+  exponential backoff
+
+Two ablation flags exist for measuring what the scaffolding is worth:
+`--no-widget-hints` omits the widget-hint sheet, and `--malformed-retries 0`
+disables the teaching turn. Both are recorded in each result's
+`run_metadata`, and widget hints exist only for the bundled fixtures — a
+private suite runs without them, which should be kept in mind when comparing
+scores across suites.
 
 ## Real Workspace Adapter
 

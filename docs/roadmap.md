@@ -45,25 +45,18 @@ workspace simulation, tool calls, grading, and results.
   requested.
 - Keep training data export separate from benchmark publishing.
 
-## 5. RL Adapter
+## 5. Export And Dataset Versioning
 
-- Expose `WorkspaceGymEnv` as an optional Gym-style wrapper around the benchmark.
-- Use structured JSON actions: `{"tool": "tool_name", "args": {...}}`.
-- Return observations with task, allowed tools, last tool result, snapshot,
-  turn index, and remaining turns.
-- Keep rewards configurable between sparse final grade and process rewards.
-
-## 6. Training Platform Foundations
-
-- Version exported datasets with benchmark release, task pack, model, run
+- Version exported datasets with benchmark release, task suite, model, run
   timestamp, and export schema version.
-- Provide recipes for SFT, preference optimization, and RL rollout suite.
 - Do not add heavyweight trainer dependencies to the base package.
+- Keep step-based integrations (such as the Gym-style wrapper) as thin
+  adapters over `WorkspaceEpisode`, never as forks of grading logic.
 
-## 7. Public Readiness
+## 6. Public Readiness
 
 - Keep README quickstarts current.
 - Maintain docs for task building, agent adapters, export formats, private
   task suites, and benchmark limitations.
-- Validate the bundled 300-task release before releases.
+- Validate both bundled suites before releases.
 - Make benchmark results reproducible, explainable, and safe to compare.

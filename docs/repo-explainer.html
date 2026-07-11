@@ -730,20 +730,20 @@
         <p class="lead">
           This repo tests whether an AI agent can inspect, build, update, and repair
           durable OpenBB Workspace state through tool calls. It is mainly an eval
-          benchmark, with export and RL adapters layered on top.
+          benchmark, with export and integration adapters layered on top.
         </p>
         <ul class="plain-list">
           <li><span class="tick">1</span><span>A task is a JSON file with a prompt, allowed tools, fixtures, and hidden success checks.</span></li>
           <li><span class="tick">2</span><span>The agent emits Workspace tool calls, either one-shot JSONL or interactively.</span></li>
           <li><span class="tick">3</span><span>The simulator executes those tool calls and the grader scores final Workspace state.</span></li>
-          <li><span class="tick">4</span><span>Results can become reports, model comparisons, rollout JSONL, SFT data, or RL environment steps.</span></li>
+          <li><span class="tick">4</span><span>Results can become reports, model comparisons, rollout JSONL, or SFT data.</span></li>
         </ul>
 
         <div class="summary-strip" aria-label="Benchmark facts">
           <div class="metric"><strong>512</strong><span>deterministic tasks across the core and build-openbb-apps suites</span></div>
           <div class="metric"><strong>t0-t4</strong><span>difficulty levels from one action to multi-intent composition</span></div>
           <div class="metric"><strong>6</strong><span>committed model baselines with full per-task transcripts</span></div>
-          <div class="metric"><strong>3</strong><span>downstream paths: evals, training exports, and RL</span></div>
+          <div class="metric"><strong>3</strong><span>downstream paths: evals, exports, and integrations</span></div>
         </div>
       </div>
 

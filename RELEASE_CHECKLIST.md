@@ -16,12 +16,13 @@ Use this checklist before announcing a public Workspace Bench release.
 - [ ] `uv run workspace-bench report --suite core --output runs/reports/benchmark-report.md` succeeds.
 - [ ] `uv run --extra live python scripts/audit_hosted_surface.py` reports no missing tools, prompts, or resources against the hosted Workspace MCP (needs `WORKSPACE_MCP_TOKEN` in `.env`).
 - [ ] Task counts: exactly 300 in `core`, exactly 212 in `build-openbb-apps` (512 total).
-- [ ] `core` split counts are 180 train, 60 validation, and 60 test.
+- [ ] Split counts are 150/75/75 (`core`) and 106/53/53 (`build-openbb-apps`) train/validation/test, with every family/level cell contributing one validation and one test task.
 - [ ] Novelty fingerprints and task ids are unique in both suites.
 - [ ] Coverage quotas pass in both suites via `validate` (core: backend, difficulty, widget-pair, dashboard-category, grader-check quotas; build-openbb-apps: widget-type/param-type ownership, difficulty bands, per-level graded-check caps).
 - [ ] The build-openbb-apps official gating curve (gpt-4.1-mini, one fresh end-to-end run) is strictly decreasing with no tied levels.
 - [ ] Published runs under `runs/comparison/` are single clean end-to-end runs — no `summary.patched` field in any result file.
 - [ ] `runs/reports/suites.json` is compiled from the published run directories (`core-*`, `build-*`).
+- [ ] `runs/reports/significance.json` is recomputed (`scripts/compute_significance.py`) and the README board notes match it.
 - [ ] README quick start, suites table, and aggregate command are accurate.
 - [ ] `docs/task-catalog.md` is regenerated and covers both suites (512 entries).
 - [ ] `docs/contributing.md` explains how to add tasks and suites.

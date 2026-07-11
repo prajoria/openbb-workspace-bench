@@ -12,6 +12,7 @@ dist/
 *.egg-info/
 traces/
 runs/*
+!runs/README.md
 !runs/comparison/
 !runs/exports/
 !runs/reports/

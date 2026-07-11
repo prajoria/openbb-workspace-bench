@@ -14,7 +14,7 @@ Two suites ship bundled: `core` (operating the workspace, 300 tasks) and `build-
 ## What Is Included
 
 - two task suites, 512 deterministic tasks total:
-  - `core` — the operating suite: 300 tasks, 15 tool-anchored families x 5 levels (t0-t4) x 4, deterministic 180/60/60 train/validation/test splits
+  - `core` — the operating suite: 300 tasks, 15 tool-anchored families x 5 levels (t0-t4) x 4, deterministic 150/75/75 train/validation/test splits (every family/level cell contributes one validation and one test task)
   - `build-openbb-apps` — the app-building suite: 212 tasks where the agent writes valid `widgets.json` / `apps.json` payloads for custom backends (10 families x t0-t4 x 4 + a 12-task e2e capstone)
 - generated families covering widgets, apps, prompts, resources, skills, delegation, inspection, repair, layout, and backend/app building
 - six committed model baselines with full traces and rollout exports
@@ -28,7 +28,7 @@ Two suites ship bundled: `core` (operating the workspace, 300 tasks) and `build-
 - state and trace graders
 - release report generation
 
-The simulator is intentional. It makes evals fast, deterministic, and suitable for CI or RL rollouts. The live smoke runner exercises the real `workspace-mcp` HTTP and websocket bridge path against the same task contract.
+The simulator is intentional. It makes evals fast, deterministic, and suitable for CI and high-volume regression runs. The live smoke runner exercises the real `workspace-mcp` HTTP and websocket bridge path against the same task contract.
 
 ## What This Is Not
 
@@ -78,14 +78,23 @@ Core suite (operating the workspace, 300 tasks):
 | GPT-5.5 | 282/300 (94.0%) | 98 · 100 · 90 · 87 · 95 |
 | Claude Sonnet 5 | 267/300 (89.0%) | 100 · 98 · 85 · 82 · 80 |
 | GLM-5.2 | 229/300 (76.3%) | 85 · 100 · 73 · 60 · 63 |
-| gpt-4.1-mini | 211/300 (70.3%) | 98 · 92 · 77 · 52 · 33 |
+| gpt-4.1-mini ‡ | 211/300 (70.3%) | 98 · 92 · 77 · 52 · 33 |
 | gpt-oss:20b | 178/300 (59.3%) | 93 · 68 · 57 · 45 · 33 |
 | Qwen3 8B | 149/300 (49.7%) | 80 · 78 · 47 · 27 · 17 |
 
+95% Wilson intervals at n=300 span roughly ±3–6 points (GPT-5.5 90.7–96.2%,
+Qwen3 8B 44.0–55.3%). Paired McNemar tests separate every adjacent rank
+except GLM-5.2 vs gpt-4.1-mini (p=0.06). Strict pass counts provider/process
+failures as failures — core process failures: Sonnet 5 15, gpt-oss:20b 22,
+Qwen3 8B 20, GLM-5.2 4, GPT-5.5 1, gpt-4.1-mini 0; excluding them, the
+valid-attempt pass rates are 94.3 / 93.7 / 77.4 / 70.3 / 64.0 / 53.2%.
+
 Full per-task results and traces are committed under `runs/comparison/`,
-portable rollout JSONL for all 1,800 episodes under `runs/exports/`, and the
+portable rollout JSONL for all 1,800 episodes under `runs/exports/`, the
 compiled report at `runs/reports/calibration.json` (built by
-`scripts/compile_calibration.py`).
+`scripts/compile_calibration.py`), and confidence intervals, held-out-split
+slices, and all pairwise tests at `runs/reports/significance.json` (built by
+`scripts/compute_significance.py`).
 
 build-openbb-apps suite (building custom backend apps, 212 tasks):
 
@@ -94,15 +103,27 @@ build-openbb-apps suite (building custom backend apps, 212 tasks):
 | GPT-5.5 | 212/212 (100.0%) | 100 · 100 · 100 · 100 · 100 |
 | GLM-5.2 | 210/212 (99.1%) | 100 · 100 · 100 · 100 · 96 |
 | Claude Sonnet 5 | 209/212 (98.6%) | 100 · 98 · 100 · 95 · 100 |
-| gpt-4.1-mini | 153/212 (72.2%) | 95 · 90 · 73 · 63 · 48 |
+| gpt-4.1-mini ‡ | 153/212 (72.2%) | 95 · 90 · 73 · 63 · 48 |
 | gpt-oss:20b | 144/212 (67.9%) | 88 · 68 · 83 · 65 · 44 |
 | Qwen3 8B | 30/212 (14.2%) | 28 · 20 · 10 · 10 · 6 |
+
+The top three build scores are not statistically separable at n=212
+(GPT-5.5 vs GLM-5.2 p=0.50; GLM-5.2 vs Sonnet 5 p=1.0), and neither are
+gpt-4.1-mini vs gpt-oss:20b (p=0.35) — read those as ties. The suite is
+saturated at the frontier: its headroom is for small and mid-tier models,
+and it doubles as the certification gate for the build-task generator.
+Build process failures: gpt-oss:20b 11, GLM-5.2 2, Qwen3 8B 2.
+
+‡ gpt-4.1-mini is the calibration model. The build ladder was accepted only
+when its pass rate fell strictly from t0 to t4, so its build curve is a
+design target rather than an independent measurement; the other five models
+never influenced task selection.
 
 Pooled over all 512 tasks: GPT-5.5 96.5%, Sonnet 5 93.0%, GLM-5.2 85.7%,
 gpt-4.1-mini 71.1%, gpt-oss:20b 62.9%, Qwen3 8B 35.0% — per-suite and
 pooled results in `runs/reports/suites.json`.
 
-Repeatability: the gating model repeated 3x over the 300 core tasks lands
+Repeatability: the calibration model repeated 3x over the 300 core tasks lands
 at 71.7 / 70.0 / 70.7% strict per attempt (pass@3 73.7%, pass^3 67.3%), with
 only 19/300 tasks showing within-model variance.
 
@@ -261,7 +282,7 @@ attempts by default; add `--include-failures` to keep failed attempts with grade
 metadata.
 
 See [docs/agent-command.md](docs/agent-command.md) for the external-agent contract and [docs/result-schema.md](docs/result-schema.md) for result JSON.
-See [docs/training-recipes.md](docs/training-recipes.md) for SFT, preference, and RL rollout export patterns.
+See [docs/training-recipes.md](docs/training-recipes.md) for SFT and preference export patterns.
 See [docs/research-tmax-general-agent.md](docs/research-tmax-general-agent.md) for notes on applying TMax and General Agent-style environment generation to WorkspaceBench.
 For a visual walkthrough of how the repo fits together, open [docs/repo-explainer.html](docs/repo-explainer.html).
 
@@ -417,7 +438,7 @@ See [docs/task-format.md](docs/task-format.md).
 
 See [docs/benchmark-card.md](docs/benchmark-card.md) for the benchmark card, scope, and limitations.
 See [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) for release gates.
-See [CONTRIBUTING.md](CONTRIBUTING.md) for task, grader, agent, export, and RL contribution paths.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for task, grader, agent, and export contribution paths.
 
 ## Categories and Levels
 
@@ -442,16 +463,18 @@ ladder:
 - `t4`: multi-intent composition under a tight turn budget
 
 Difficulty labels derive from levels (t0 easy, t2 medium, t4 hard; t1 and t3
-straddle bands), yielding 90 easy / 120 medium / 90 hard in `core`. Calibration
-against six models confirmed the ladder: the gating model's pass rate falls
-monotonically 98 → 92 → 77 → 52 → 33 across t0 → t4.
+straddle bands), yielding 90 easy / 120 medium / 90 hard in `core`. The ladder
+was calibrated on gpt-4.1-mini, whose core pass rate falls monotonically
+98 → 92 → 77 → 52 → 33 across t0 → t4; Sonnet 5, gpt-oss:20b, and Qwen3 8B
+decline monotonically as well, while GPT-5.5 and GLM-5.2 compress or invert
+the upper levels near their ceiling.
 
 The `build-openbb-apps` suite carries its own ladder — t0 one widget with
 the right schema, t1 ship it as an app (graded in full: each level contains the
 one below by construction), t2 composed requirements with policy derivation,
 t3 multi-widget multi-tab apps, t4 build-publish-instantiate-configure-document
-— with 60 easy / 80 medium / 72 hard. Its official gating curve falls
-95 → 90 → 73 → 63 → 48.
+— with 60 easy / 80 medium / 72 hard. Its acceptance gate is the calibration
+model's strictly falling curve: 95 → 90 → 73 → 63 → 48.
 
 ## Terminology
 
@@ -491,7 +514,6 @@ docs/
   repo-explainer.html    Visual repo walkthrough
   result-schema.md
   research-tmax-general-agent.md
-  rl-factory-adapter.md
   roadmap.md
   task-format.md
   task-catalog.md      All 512 tasks (both suites), documented
@@ -508,7 +530,7 @@ runs/
   comparison/              Committed runs: six models x both suites
                            (core-<model>, build-<model>)
   exports/                 Rollout JSONL for the 1,800 core episodes
-  reports/                 Compiled calibration + suites reports
+  reports/                 Compiled calibration, suites, and significance reports
 examples/
   jsonl_rule_agent.py       Repo-checkout wrapper for the packaged demo agent
   ollama_agent.py           Local Ollama adapter template
@@ -524,31 +546,6 @@ uv run workspace-bench canary
 ```
 
 Benchmark data should not appear in model training corpora unless explicitly released for training.
-
-## RL Path
-
-RL is a downstream consumer of the benchmark, not the primary identity. The same task, step, trace, and grader contracts can be wrapped by RL-Factory or a Gym-style environment:
-
-1. load a task
-2. reset a simulated or real Workspace environment
-3. expose Workspace MCP tools to the rollout model
-4. execute tool calls through the environment
-5. compute reward with the same grader used by evaluation
-
-The first reward should be sparse final-state correctness. Process rewards can then reuse trace checks: schema-before-create, valid identifiers, no repeated snapshots, and limited invalid calls.
-`WorkspaceGymEnv` exposes these as optional additive shaping rewards, disabled by default.
-
-Minimal Gym-style usage:
-
-```python
-from workspace_bench.rl.env import WorkspaceGymEnv
-
-env = WorkspaceGymEnv()
-observation, info = env.reset(seed=1)
-observation, reward, terminated, truncated, info = env.step(
-    {"tool": "get_workspace_snapshot", "args": {}}
-)
-```
 
 ## Release Notes
 
