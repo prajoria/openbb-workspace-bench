@@ -514,7 +514,6 @@ examples/
   jsonl_rule_agent.py       Repo-checkout wrapper for the packaged demo agent
   ollama_agent.py           Local Ollama adapter template
   openai_gpt4_1.py          GPT-4.1 OpenAI API adapter template
-  compare_models.py         Interactive multi-model runner and chart generator
   models.example.json       Model comparison adapter config example
 tests/
 ```
