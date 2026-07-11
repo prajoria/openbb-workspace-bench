@@ -2,11 +2,14 @@
 
 OpenBB Workspace Bench is organized around one stable contract: a scenario describes the initial Workspace state, the agent prompt, the allowed Workspace MCP tools, and deterministic success criteria.
 
-Scenarios are grouped into packs. The bundled release is the unified
-`workspace-bench-v1` pack: 300 generated, certified scenarios spanning the
-equities, macro, portfolio, and Stark enterprise fixture backends. The `core`
-and `all` CLI pack names are kept as backward-compatible aliases for this
-release.
+Scenarios are grouped into collections. Two ship bundled: `core`
+(`workspace-bench-v1`) — 300 generated, certified scenarios for *operating*
+the workspace, spanning the equities, macro, portfolio, and Stark enterprise
+fixture backends — and `build-openbb-apps`
+(`workspace-bench-v2-build-openbb-apps`) — 212 generated, certified scenarios
+for *building* custom backend apps: the agent writes the `widgets.json` /
+`apps.json` payloads a backend serves, validated against the transcribed
+production rules. `all` remains a backward-compatible CLI alias for `core`.
 
 ```mermaid
 flowchart LR

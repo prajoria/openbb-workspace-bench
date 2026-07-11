@@ -5,7 +5,7 @@ Workspace Bench can evaluate any agent process that can write Workspace tool cal
 ## Run The Demo Agent
 
 ```bash
-uv run --extra dev workspace-bench run-agent-command \
+uv run workspace-bench run-agent-command \
   --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python -m workspace_bench.examples.jsonl_rule_agent" \
   --json
@@ -25,7 +25,7 @@ Then run the provided adapter with your local model:
 
 ```bash
 OLLAMA_MODEL=gpt-oss:20b \
-uv run --extra dev workspace-bench run-agent-command \
+uv run workspace-bench run-agent-command \
   --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python examples/ollama_agent.py" \
   --run-dir runs/ollama \
@@ -64,7 +64,7 @@ OPENAI_API_KEY=sk-your-key-here
 Run one scenario:
 
 ```bash
-uv run --extra dev workspace-bench run-agent-command \
+uv run workspace-bench run-agent-command \
   --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python examples/openai_gpt4_1.py" \
   --run-dir runs/openai-gpt-4.1 \
@@ -81,7 +81,7 @@ Run both built-in model adapters across all scenarios with the interactive
 comparison runner:
 
 ```bash
-uv run --extra dev workspace-bench compare-models \
+uv run workspace-bench compare-models \
   --difficulty all \
   --timeout 240
 ```
@@ -89,7 +89,7 @@ uv run --extra dev workspace-bench compare-models \
 Run one difficulty slice:
 
 ```bash
-uv run --extra dev workspace-bench compare-models \
+uv run workspace-bench compare-models \
   --difficulty medium \
   --timeout 240
 ```
@@ -97,7 +97,7 @@ uv run --extra dev workspace-bench compare-models \
 Change the chart metric from pass rate to mean score:
 
 ```bash
-uv run --extra dev workspace-bench compare-models \
+uv run workspace-bench compare-models \
   --difficulty all \
   --metric mean-score \
   --timeout 240
@@ -106,7 +106,7 @@ uv run --extra dev workspace-bench compare-models \
 Run repeated attempts and chart task pass rate:
 
 ```bash
-uv run --extra dev workspace-bench compare-models \
+uv run workspace-bench compare-models \
   --difficulty all \
   --repeats 3 \
   --metric task-pass-rate \
@@ -116,7 +116,7 @@ uv run --extra dev workspace-bench compare-models \
 Run a configured set of adapters:
 
 ```bash
-uv run --extra dev workspace-bench compare-models \
+uv run workspace-bench compare-models \
   --models-file examples/models.example.json \
   --difficulty all \
   --timeout 240
@@ -231,7 +231,7 @@ It intentionally does not include success criteria or oracle tool calls. Those r
 Use `--scenario-dir` to evaluate an agent over a private task pack:
 
 ```bash
-uv run --extra dev workspace-bench run-agent-command \
+uv run workspace-bench run-agent-command \
   --scenario-dir ./my-workspace-tasks \
   --agent-command "python my_agent.py" \
   --json
@@ -240,7 +240,7 @@ uv run --extra dev workspace-bench run-agent-command \
 Use `--run-dir` if you want deterministic output paths:
 
 ```bash
-uv run --extra dev workspace-bench run-agent-command \
+uv run workspace-bench run-agent-command \
   --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python my_agent.py" \
   --run-dir runs/my-agent

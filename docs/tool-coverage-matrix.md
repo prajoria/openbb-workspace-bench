@@ -10,7 +10,7 @@ difficulty derives from tier.
 
 Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=manage_navigation_bar, `nav`=navigate_workspace, `list_w`=list_available_widgets, `schema`=get_widget_schema, `params`=get_params_options, `data`=get_widget_data, `create`=create_widget, `update`=update_widget, `layout`=update_widget_layout, `delete`=delete_widget, `note`=add_generative_widget, `read_w`=read_widget, `backends`=manage_backends, `apps`=manage_apps, `skill`=get_skill_content, `resource`=read_workspace_resource, `prompt`=get_workspace_prompt, `agents`=assign_tasks_to_agents
 
-## workspace-bench-v1 (300 scenarios)
+## core (workspace-bench-v1) (300 scenarios)
 
 | # | scenario | snap | dash | nav_bar | nav | list_w | schema | params | data | create | update | layout | delete | note | read_w | backends | apps | skill | resource | prompt | agents | tools | tier | difficulty |
 |--:|:---------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|--:|:-:|:-----------|
@@ -315,22 +315,239 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 299 | `gen_t4_update_double_rates_switch` | x |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   |   | 3 | t4 | hard |
 | 300 | `gen_t4_update_double_stark_ops` | x |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   |   | 3 | t4 | hard |
 
+## build-openbb-apps (workspace-bench-v2-build-openbb-apps) (212 scenarios)
+
+| # | scenario | snap | dash | nav_bar | nav | list_w | schema | params | data | create | update | layout | delete | note | read_w | backends | apps | skill | resource | prompt | agents | tools | tier | difficulty |
+|--:|:---------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|--:|:-:|:-----------|
+| 1 | `auth_t0_advanced_case_qa_omni` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 2 | `auth_t0_advanced_live_orders_grid` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 3 | `auth_t0_advanced_rates_advanced_chart` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 4 | `auth_t0_advanced_vix_advanced` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 5 | `auth_t0_aggrid_auction_calendar` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 6 | `auth_t0_aggrid_estimates_ssrm` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 7 | `auth_t0_aggrid_open_orders` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 8 | `auth_t0_aggrid_vix_history` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 9 | `auth_t0_apps_order_watch` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t0 | easy |
+| 10 | `auth_t0_apps_rates_morning` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t0 | easy |
+| 11 | `auth_t0_apps_vendor_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t0 | easy |
+| 12 | `auth_t0_apps_vol_overview` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t0 | easy |
+| 13 | `auth_t0_charts_chains_highchart` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 14 | `auth_t0_charts_earnings_chart` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 15 | `auth_t0_charts_pipeline_vegalite` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 16 | `auth_t0_charts_yield_curve` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 17 | `auth_t0_extend_add_catalyst_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t0 | easy |
+| 18 | `auth_t0_extend_add_curve_spread_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t0 | easy |
+| 19 | `auth_t0_extend_add_exception_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t0 | easy |
+| 20 | `auth_t0_extend_add_vol_regime_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t0 | easy |
+| 21 | `auth_t0_forms_access_review_form` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 22 | `auth_t0_forms_incident_triage_form` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 23 | `auth_t0_forms_threshold_update_form` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 24 | `auth_t0_forms_vendor_intake_form` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 25 | `auth_t0_grouping_chart_note_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t0 | easy |
+| 26 | `auth_t0_grouping_earnings_symbol_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t0 | easy |
+| 27 | `auth_t0_grouping_nvda_review_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t0 | easy |
+| 28 | `auth_t0_grouping_revision_note_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t0 | easy |
+| 29 | `auth_t0_params_case_notes` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 30 | `auth_t0_params_kpi_tabs_table` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 31 | `auth_t0_params_trial_catalysts` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 32 | `auth_t0_params_vix_history` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 33 | `auth_t0_settings_exception_metric` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 34 | `auth_t0_settings_gas_metric` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 35 | `auth_t0_settings_rates_commentary` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 36 | `auth_t0_settings_vol_regime_metric` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 37 | `auth_t0_types_chains_heatmap_html` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 38 | `auth_t0_types_gas_metric` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 39 | `auth_t0_types_venue_pdf` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 40 | `auth_t0_types_vol_commentary` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | t0 | easy |
+| 41 | `auth_t1_advanced_case_qa_omni_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 42 | `auth_t1_advanced_live_orders_grid_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 43 | `auth_t1_advanced_rates_advanced_chart_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 44 | `auth_t1_advanced_vix_advanced_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 45 | `auth_t1_aggrid_alert_queue_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 46 | `auth_t1_aggrid_chains_table_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 47 | `auth_t1_aggrid_trial_catalysts_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 48 | `auth_t1_aggrid_vendor_sla_table_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 49 | `auth_t1_apps_alert_metric_wrap` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 50 | `auth_t1_apps_catalyst_metric_wrap` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 51 | `auth_t1_apps_gas_metric_wrap` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 52 | `auth_t1_apps_surprise_metric_wrap` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 53 | `auth_t1_charts_chains_highchart_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 54 | `auth_t1_charts_earnings_chart_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 55 | `auth_t1_charts_pipeline_vegalite_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 56 | `auth_t1_charts_yield_curve_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 57 | `auth_t1_extend_place_alert_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 58 | `auth_t1_extend_place_breach_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 59 | `auth_t1_extend_place_curve_spread_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 60 | `auth_t1_extend_place_vol_regime_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 61 | `auth_t1_forms_case_escalation_form_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 62 | `auth_t1_forms_curve_comment_form_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 63 | `auth_t1_forms_vendor_intake_form_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 64 | `auth_t1_forms_venue_exception_form_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 65 | `auth_t1_grouping_earnings_chart_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 66 | `auth_t1_grouping_earnings_note_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 67 | `auth_t1_grouping_estimate_revisions_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 68 | `auth_t1_grouping_symbol_click_summary_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 69 | `auth_t1_params_case_notes_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 70 | `auth_t1_params_rates_commentary_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 71 | `auth_t1_params_trial_catalysts_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 72 | `auth_t1_params_vendor_sla_table_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 73 | `auth_t1_settings_alert_metric_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 74 | `auth_t1_settings_catalyst_metric_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 75 | `auth_t1_settings_sla_runbook_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 76 | `auth_t1_settings_surprise_metric_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 77 | `auth_t1_types_curve_monitor_iframe_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 78 | `auth_t1_types_earnings_calls_video_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 79 | `auth_t1_types_evidence_files_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | medium |
+| 80 | `auth_t1_types_sla_newsfeed_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t1 | easy |
+| 81 | `auth_t2_advanced_case_prompt_omni` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 82 | `auth_t2_advanced_orders_stream` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 83 | `auth_t2_advanced_rates_symbol_chart` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 84 | `auth_t2_advanced_vol_symbol_chart` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 85 | `auth_t2_aggrid_auction_watch` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 86 | `auth_t2_aggrid_fill_quality` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 87 | `auth_t2_aggrid_realized_screen` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 88 | `auth_t2_aggrid_revision_grid` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 89 | `auth_t2_apps_earnings_command` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 90 | `auth_t2_apps_surveillance_morning` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 91 | `auth_t2_apps_vendor_command` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 92 | `auth_t2_apps_vol_morning` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 93 | `auth_t2_charts_chain_flow_highchart` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 94 | `auth_t2_charts_phase_mix_vegalite` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 95 | `auth_t2_charts_symbol_momentum_chart` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 96 | `auth_t2_charts_venue_slippage_chart` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 97 | `auth_t2_extend_modify_case_notes` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 98 | `auth_t2_extend_modify_rates_commentary` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 99 | `auth_t2_extend_modify_trial_catalysts` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 100 | `auth_t2_extend_modify_vol_screener` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 101 | `auth_t2_forms_policy_exception_form` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 102 | `auth_t2_forms_trade_break_form` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 103 | `auth_t2_forms_trial_readout_form` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 104 | `auth_t2_forms_vendor_review_form` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 105 | `auth_t2_grouping_chart_preview_sync` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 106 | `auth_t2_grouping_earnings_review_sync` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 107 | `auth_t2_grouping_full_earnings_sync` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 108 | `auth_t2_grouping_revision_preview_sync` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 109 | `auth_t2_params_kpi_param_tabs` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 110 | `auth_t2_params_series_markdown` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 111 | `auth_t2_params_vol_screener` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 112 | `auth_t2_params_windowed_vix_slice` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 113 | `auth_t2_settings_auction_cache_grid` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 114 | `auth_t2_settings_exception_refresh_grid` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 115 | `auth_t2_settings_gas_refresh_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 116 | `auth_t2_settings_runbook_markdown` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 117 | `auth_t2_types_call_replay_video` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 118 | `auth_t2_types_gas_priority_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 119 | `auth_t2_types_policy_digest_pdf` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 120 | `auth_t2_types_vol_playbook_note` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t2 | medium |
+| 121 | `auth_t3_advanced_case_room_omni_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 122 | `auth_t3_advanced_macro_advanced_chart_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 123 | `auth_t3_advanced_orders_ops_stream_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 124 | `auth_t3_advanced_vix_room_chart_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 125 | `auth_t3_aggrid_case_aging` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 126 | `auth_t3_aggrid_chain_flows` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 127 | `auth_t3_aggrid_latency_history` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 128 | `auth_t3_aggrid_realized_vol_grid` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 129 | `auth_t3_apps_case_command` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 130 | `auth_t3_apps_chain_deck` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 131 | `auth_t3_apps_earnings_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 132 | `auth_t3_apps_rates_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 133 | `auth_t3_charts_chains_highchart_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 134 | `auth_t3_charts_earnings_chart_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 135 | `auth_t3_charts_pipeline_vegalite_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 136 | `auth_t3_charts_yield_curve_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 137 | `auth_t3_extend_diagnose_earnings` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 138 | `auth_t3_extend_diagnose_healthcare` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 139 | `auth_t3_extend_diagnose_rates` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 140 | `auth_t3_extend_diagnose_sla` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 141 | `auth_t3_forms_case_intake_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 142 | `auth_t3_forms_exception_intake_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 143 | `auth_t3_forms_trial_intake_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 144 | `auth_t3_forms_vendor_intake_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 145 | `auth_t3_grouping_click_preview_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 146 | `auth_t3_grouping_click_revision_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 147 | `auth_t3_grouping_click_season_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 148 | `auth_t3_grouping_click_summary_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 149 | `auth_t3_params_earnings_param_review` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 150 | `auth_t3_params_symbol_param_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 151 | `auth_t3_params_trial_param_review` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 152 | `auth_t3_params_vol_param_cockpit` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 153 | `auth_t3_settings_alert_metric_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 154 | `auth_t3_settings_gas_metric_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 155 | `auth_t3_settings_surprise_metric_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 156 | `auth_t3_settings_vol_commentary_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 157 | `auth_t3_types_case_notes_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 158 | `auth_t3_types_earnings_calls_video_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 159 | `auth_t3_types_evidence_files_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | hard |
+| 160 | `auth_t3_types_fda_newsfeed_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 2 | t3 | medium |
+| 161 | `auth_t4_advanced_case_qa_omni_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 162 | `auth_t4_advanced_live_orders_grid_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 163 | `auth_t4_advanced_rates_live_chart_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 164 | `auth_t4_advanced_vix_advanced_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 165 | `auth_t4_aggrid_earnings_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 166 | `auth_t4_aggrid_execution_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 167 | `auth_t4_aggrid_healthcare_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 168 | `auth_t4_aggrid_rates_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 169 | `auth_t4_apps_healthcare_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 170 | `auth_t4_apps_sla_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 171 | `auth_t4_apps_tvl_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 172 | `auth_t4_apps_vol_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 173 | `auth_t4_charts_earnings_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 174 | `auth_t4_charts_healthcare_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 175 | `auth_t4_charts_rates_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 176 | `auth_t4_charts_tvl_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 177 | `auth_t4_e2e_case_triage` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 178 | `auth_t4_e2e_catalyst_calendar` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 179 | `auth_t4_e2e_chain_flows` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 180 | `auth_t4_e2e_compliance_surveillance` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 181 | `auth_t4_e2e_earnings_season` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 182 | `auth_t4_e2e_execution_monitor` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 183 | `auth_t4_e2e_healthcare_pipeline` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 184 | `auth_t4_e2e_macro_morning` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 185 | `auth_t4_e2e_rates_auctions` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 186 | `auth_t4_e2e_research_room` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 187 | `auth_t4_e2e_vendor_ops` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 188 | `auth_t4_e2e_vol_cockpit` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 189 | `auth_t4_extend_repair_compliance` | x |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 5 | t4 | hard |
+| 190 | `auth_t4_extend_repair_execution` | x |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 5 | t4 | hard |
+| 191 | `auth_t4_extend_repair_rates` | x |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 5 | t4 | hard |
+| 192 | `auth_t4_extend_repair_vol` | x |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 5 | t4 | hard |
+| 193 | `auth_t4_forms_compliance_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 194 | `auth_t4_forms_execution_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 195 | `auth_t4_forms_healthcare_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 196 | `auth_t4_forms_sla_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 197 | `auth_t4_grouping_chart_sync_live` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 198 | `auth_t4_grouping_click_sync_live` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 199 | `auth_t4_grouping_earnings_sync_live` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 200 | `auth_t4_grouping_preview_sync_live` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 201 | `auth_t4_params_earnings_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 202 | `auth_t4_params_healthcare_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 203 | `auth_t4_params_rates_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 204 | `auth_t4_params_vol_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 205 | `auth_t4_settings_execution_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 206 | `auth_t4_settings_healthcare_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 207 | `auth_t4_settings_rates_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 208 | `auth_t4_settings_vol_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 209 | `auth_t4_types_evidence_files_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 210 | `auth_t4_types_policy_digest_pdf_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 211 | `auth_t4_types_sla_newsfeed_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+| 212 | `auth_t4_types_venue_packet_pdf_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | t4 | hard |
+
 ## Per-tool scenario counts
 
 | tool | scenarios |
 |:-----|----------:|
-| `get_workspace_snapshot` | 236 |
-| `add_generative_widget` | 160 |
+| `get_workspace_snapshot` | 372 |
+| `manage_backends` | 260 |
+| `add_generative_widget` | 212 |
 | `create_widget` | 108 |
 | `get_widget_schema` | 100 |
 | `list_available_widgets` | 88 |
-| `manage_backends` | 48 |
+| `update_widget` | 84 |
+| `manage_apps` | 80 |
 | `get_widget_data` | 40 |
 | `update_widget_layout` | 40 |
 | `navigate_workspace` | 36 |
-| `update_widget` | 32 |
 | `read_widget` | 28 |
-| `manage_apps` | 28 |
 | `manage_dashboard` | 24 |
 | `manage_navigation_bar` | 24 |
 | `get_params_options` | 24 |

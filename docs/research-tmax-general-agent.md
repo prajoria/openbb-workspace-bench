@@ -105,7 +105,7 @@ Key claims from the post:
 - The environment is synthetic and self-evolving: a synthesizer designs task
   families, and a solver attempts them.
 - Tasks evolve through difficulty tiers, from `t0` to `t4`.
-- Each tier is empirically gated by solver pass rate, not just author intuition.
+- Each tier is empirically gated by solver pass rate, not just designer intuition.
 - Gold replay must flip verification from failing on the initial state to
   passing after the gold solution.
 - The current corpus reported by the post has 4,504 tasks, 1,040 domains, and
@@ -322,12 +322,12 @@ each business workflow.
 
 ### 5. Empirical Difficulty Calibration
 
-Current `difficulty` is author-supplied. TMax and General Agent both imply that
+Current `difficulty` is hand-assigned. TMax and General Agent both imply that
 this should become measured.
 
 A practical gating protocol:
 
-1. Generate or author a candidate scenario.
+1. Generate or hand-write a candidate scenario.
 2. Validate schema and fixture availability.
 3. Assert noop fails.
 4. Replay oracle and assert pass.

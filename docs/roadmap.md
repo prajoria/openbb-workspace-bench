@@ -63,7 +63,7 @@ workspace simulation, tool calls, grading, and results.
 ## 7. Public Readiness
 
 - Keep README quickstarts current.
-- Maintain docs for scenario authoring, agent adapters, export formats, private
+- Maintain docs for scenario building, agent adapters, export formats, private
   task packs, and benchmark limitations.
 - Validate the bundled 300-scenario release before releases.
 - Make benchmark results reproducible, explainable, and safe to compare.

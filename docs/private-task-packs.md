@@ -15,9 +15,9 @@ my-workspace-tasks/
 Run the pack:
 
 ```bash
-uv run --extra dev workspace-bench validate --scenario-dir ./my-workspace-tasks
-uv run --extra dev workspace-bench run --scenario-dir ./my-workspace-tasks --agent oracle
-uv run --extra dev workspace-bench run-agent-command \
+uv run workspace-bench validate --scenario-dir ./my-workspace-tasks
+uv run workspace-bench run --scenario-dir ./my-workspace-tasks --agent oracle
+uv run workspace-bench run-agent-command \
   --scenario-dir ./my-workspace-tasks \
   --agent-command "python my_agent.py" \
   --json
@@ -43,7 +43,34 @@ Bundled scenarios use deterministic in-package fixture backends. Private packs c
 
 For public benchmark submissions, keep data deterministic and versioned. For private regression testing, the same scenario format can wrap proprietary backend data as long as the grader expectations are stable.
 
-## Authoring Rules
+## From Pack to Collection
+
+A private pack becomes a **collection** the moment you report it as one. Three steps:
+
+```bash
+# 1. certify it the same way the bundled collections are certified:
+#    the reference solution must pass, a do-nothing agent must fail
+uv run workspace-bench validate --scenario-dir ./my-workspace-tasks
+
+# 2. run your models over it (one run directory per model)
+uv run workspace-bench compare-models \
+  --models-file models.json --scenario-dir ./my-workspace-tasks \
+  --output-dir runs/comparison/mydesk-gpt-4.1-mini
+
+# 3. pool it with the bundled collections — the name before '=' is yours
+uv run python scripts/compile_collections_report.py \
+  --run core=runs/comparison/core-gpt-4.1-mini \
+  --run build-openbb-apps=runs/comparison/build-gpt-4.1-mini \
+  --run my-desk-flows=runs/comparison/mydesk-gpt-4.1-mini \
+  --output runs/reports/collections.json
+```
+
+The report keeps every collection separable (a model's score on *your* flows is
+its own number) and pools scenario counts into the aggregate. Models that have
+not run a collection are marked pending there and excluded from its pool, so
+adding a collection never distorts existing ones.
+
+## Building Rules
 
 Good private tasks should:
 

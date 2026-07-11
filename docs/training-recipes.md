@@ -27,7 +27,7 @@ scenario pack that produced it.
 Use oracle traces as a small bootstrap dataset:
 
 ```bash
-uv run --extra dev workspace-bench export-sft \
+uv run workspace-bench export-sft \
   --oracle \
   --format openai_messages \
   --output runs/exports/oracle-sft.jsonl
@@ -36,7 +36,7 @@ uv run --extra dev workspace-bench export-sft \
 Use passing model attempts from a comparison run:
 
 ```bash
-uv run --extra dev workspace-bench export-sft \
+uv run workspace-bench export-sft \
   --comparison-dir runs/comparison/<run-id> \
   --format openai_messages \
   --output runs/exports/model-sft.jsonl
@@ -50,7 +50,7 @@ trainer needs negative examples with grade metadata.
 Run repeated attempts first:
 
 ```bash
-uv run --extra dev workspace-bench compare-models \
+uv run workspace-bench compare-models \
   --difficulty all \
   --repeats 3 \
   --metric pass-at-k \
@@ -60,7 +60,7 @@ uv run --extra dev workspace-bench compare-models \
 Then export chosen/rejected pairs:
 
 ```bash
-uv run --extra dev workspace-bench export-preferences \
+uv run workspace-bench export-preferences \
   --comparison-dir runs/comparison/<run-id> \
   --output runs/exports/preferences.jsonl
 ```

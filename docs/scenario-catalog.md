@@ -23,7 +23,7 @@ Every criterion below becomes one or more boolean checks in `grade_scenario`
   doing nothing — the gap to 1.0 is what the scenario actually demands. Release gates
   require the no-op to *fail* every scenario and the oracle trace to *pass* every one.
 
-## Pack: workspace-bench-v1 (300 scenarios)
+## Pack: core (workspace-bench-v1) (300 scenarios)
 
 ### L0 — Inspect & answer (28)
 
@@ -6543,6 +6543,3613 @@ Every criterion below becomes one or more boolean checks in `grade_scenario`
 - **Trace**: ≤1 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
 
 
+## Pack: build-openbb-apps (workspace-bench-v2-build-openbb-apps) (212 scenarios)
+
+### L3 — Apps, skills & delegation (192)
+
+#### `auth_t0_advanced_case_qa_omni` — Build the Case Q&A advanced widget
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: easy · split: train
+
+> Register custom backend "Surveillance Data" (http://localhost:7807) with one widgets.json entry: `case_qa_omni`: name "Case Q&A", description "Ask questions over the surveillance case corpus.", endpoint /case-qa, type omni, sized w=20 h=9 on the grid, params required: prompt — a text input (type text), labeled "Prompt", hidden from the UI (show false), described "Question to run over the case corpus.".
+
+- Novelty: Unique advanced/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/case_qa_omni.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_advanced_live_orders_grid` — Build the Live Orders Grid advanced widget
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: easy · split: train
+
+> Register custom backend "Execution Desk Data" (http://localhost:7806) with one widgets.json entry: `live_orders_grid`: name "Live Orders Grid", description "Streaming order blotter over websocket.", endpoint /live-orders, type live_grid, sized w=24 h=12 on the grid, wsEndpoint "live-orders-ws", table columns required (field → header (type, extras)): order_id → header "Order" (text); px → header "Price" (number, showCellChange render) with renderFnParams {"colorValueKey": "px_change"}, data.wsRowIdColumn "order_id".
+
+- Novelty: Unique advanced/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/live_orders_grid.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_advanced_rates_advanced_chart` — Build the Rates Advanced Chart advanced widget
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: easy · split: train
+
+> Connect a new custom backend named "Rates Watch Data" at http://localhost:7803. Its widgets.json serves exactly one widget - `rates_advanced_chart`: name "Rates Advanced Chart", description "TradingView advanced charting for the 10Y yield future.", endpoint /rates-udf, type advanced_charting, sized w=20 h=18 on the grid, data.defaultSymbol "US10Y", data.updateFrequency 30000. Register it with manage_backends.
+
+- Novelty: Unique advanced/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/rates_advanced_chart.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_advanced_vix_advanced` — Build the VIX Advanced Chart advanced widget
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: validation
+
+> Add "Vol Desk Data" at http://localhost:7801 as a custom backend serving this single widget definition - `vix_advanced`: name "VIX Advanced Chart", description "TradingView advanced charting for VIX futures.", endpoint /udf, type advanced_charting, sized w=20 h=20 on the grid, data.defaultSymbol "VIX", data.updateFrequency 60000.
+
+- Novelty: Unique advanced/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_advanced.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_aggrid_auction_calendar` — Build the Auction Calendar table definition
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: easy · split: train
+
+> Connect a new custom backend named "Rates Watch Data" at http://localhost:7803. Its widgets.json serves exactly one widget — `auction_calendar`: name "Auction Calendar", description "Upcoming treasury auctions.", endpoint /auction-calendar, type table, sized w=20 h=9 on the grid, table columns required (field → header (type, extras)): date → header "Date" (dateString); security → header "Security" (text); size_bn → header "Size ($B)" (number). Register it with manage_backends.
+
+- Novelty: Unique aggrid/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/auction_calendar.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_aggrid_estimates_ssrm` — Build the Estimates Explorer (SSRM) table definition
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: easy · split: train
+
+> You wrote a backend at http://localhost:7805. Add it to the workspace as "Earnings Prep Data" serving this single widgets.json entry — `estimates_ssrm`: name "Estimates Explorer (SSRM)", description "Server-side sorted and filtered estimates dataset.", endpoint /estimates-ssrm, type ssrm_table, sized w=24 h=16 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", rows are read from the response key "rows".
+
+- Novelty: Unique aggrid/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/estimates_ssrm.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_aggrid_open_orders` — Build the Open Orders table definition
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: easy · split: train
+
+> Register a custom backend "Execution Desk Data" (url http://localhost:7806) whose widgets.json contains one entry: `open_orders`: name "Open Orders", description "Live open orders blotter.", endpoint /open-orders, type table, sized w=20 h=9 on the grid, table columns required (field → header (type, extras)): order_id → header "Order" (text); symbol → header "Symbol" (text); qty → header "Qty" (number, int formatter); status → header "Status" (text, titleCase render).
+
+- Novelty: Unique aggrid/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/open_orders.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_aggrid_vix_history` — Build the VIX History table definition
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: validation
+
+> You wrote a backend at http://localhost:7801. Add it to the workspace as "Vol Desk Data" serving this single widgets.json entry — `vix_history`: name "VIX History", description "Daily CBOE VIX closes with returns.", endpoint /vix-history, type table, sized w=20 h=9 on the grid, params required: window — a number input (type number), labeled "Window", default 30, min 5, max 365, table columns required (field → header (type, extras)): date → header "Date" (dateString); close → header "Close" (number); return_pct → header "Return %" (number, percent formatter, greenRed render).
+
+- Novelty: Unique aggrid/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_history.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_apps_order_watch` — Build the Order Watch app definition
+
+**L3** · app-building · workflow: execution-exception-review · execution · difficulty: easy · split: train
+
+> Your backend "Execution Desk Data" is already connected and serves `open_orders`, `exception_metric`. Ship its apps.json — exactly one app: app "Order Watch", description "Open orders and exceptions.", tab `orders` named "Orders" places: `open_orders` at x=0 y=0 w=20 h=9; `exception_metric` at x=20 y=0 w=12 h=6. Submit it with a manage_backends refresh (apps_json).
+
+- Novelty: Unique apps/t0 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact appdefs:Execution Desk Data/Order Watch.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_apps_rates_morning` — Build the Rates Morning app definition
+
+**L3** · app-building · workflow: macro-rates-review · macro · difficulty: easy · split: train
+
+> Your backend "Rates Watch Data" is already connected and serves `yield_curve`, `curve_spread_metric`. Ship its apps.json — exactly one app: app "Rates Morning", description "Curve and spread at the open.", tab `morning` named "Morning" places: `yield_curve` at x=0 y=0 w=20 h=9; `curve_spread_metric` at x=20 y=0 w=12 h=6. Submit it with a manage_backends refresh (apps_json).
+
+- Novelty: Unique apps/t0 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact appdefs:Rates Watch Data/Rates Morning.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_apps_vendor_board` — Build the Vendor Board app definition
+
+**L3** · app-building · workflow: vendor-sla-monitoring · operations · difficulty: easy · split: train
+
+> The widgets are served; the app file is missing. For "Vendor SLA Data", build apps.json with one entry — app "Vendor Board", description "Vendor SLAs and breaches.", tab `vendors` named "Vendors" places: `vendor_sla_table` at x=0 y=0 w=20 h=9; `breach_metric` at x=20 y=0 w=12 h=6 — and refresh the backend with it.
+
+- Novelty: Unique apps/t0 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Vendor SLA Data; artifact appdefs:Vendor SLA Data/Vendor Board.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_apps_vol_overview` — Build the Vol Overview app definition
+
+**L3** · app-building · workflow: risk-review · volatility · difficulty: easy · split: validation
+
+> Add an apps.json to the connected backend "Vol Desk Data" (it already serves `vix_history`, `vol_regime_metric`): app "Vol Overview", description "Vol level and regime.", tab `overview` named "Overview" places: `vix_history` at x=0 y=0 w=20 h=9; `vol_regime_metric` at x=20 y=0 w=12 h=6. Use operation refresh with the apps_json payload.
+
+- Novelty: Unique apps/t0 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact appdefs:Vol Desk Data/Vol Overview.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_charts_chains_highchart` — Build the TVL by Chain (Highcharts) chart definition
+
+**L3** · widget-building · workflow: portfolio-morning-review · crypto · difficulty: easy · split: train
+
+> Connect a new custom backend named "Chain TVL Data" at http://localhost:7802. Its widgets.json serves exactly one chart widget — `chains_highchart`: name "TVL by Chain (Highcharts)", description "Highcharts rendering of chain TVL.", endpoint /chains-highchart, type chart-highcharts, sized w=20 h=9 on the grid, category "Chain Charts", staleTime 900000. Register it with manage_backends.
+
+- Novelty: Unique charts/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chains_highchart.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_charts_earnings_chart` — Build the EPS History chart definition
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: easy · split: train
+
+> Connect a new custom backend named "Earnings Prep Data" at http://localhost:7805. Its widgets.json serves exactly one chart widget — `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, staleTime 900000, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL". Register it with manage_backends.
+
+- Novelty: Unique charts/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_charts_pipeline_vegalite` — Build the Pipeline Mix (Vega-Lite) chart definition
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: easy · split: train
+
+> Register "Healthcare Research Data" (http://localhost:7808) with one widgets.json chart entry: `pipeline_vegalite`: name "Pipeline Mix (Vega-Lite)", description "Vega-Lite bar spec of pipeline phase mix.", endpoint /pipeline-vegalite, type chart-vegalite, sized w=20 h=9 on the grid, category "Pipeline Charts", staleTime 1800000. Use one manage_backends add.
+
+- Novelty: Unique charts/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/pipeline_vegalite.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_charts_yield_curve` — Build the Yield Curve chart definition
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: easy · split: validation
+
+> Connect a new custom backend named "Rates Watch Data" at http://localhost:7803. Its widgets.json serves exactly one chart widget — `yield_curve`: name "Yield Curve", description "Plotly treasury yield curve snapshot.", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, staleTime 900000, raw true. Register it with manage_backends.
+
+- Novelty: Unique charts/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/yield_curve.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_forms_access_review_form` — Build the Access Review Form form widget
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: easy · split: train
+
+> Register "Surveillance Data" (http://localhost:7807) with one widgets.json entry for the form: `access_review_form`: name "Access Review Form", description "Capture an access review decision.", endpoint /access-review, type markdown, sized w=12 h=8 on the grid, category "Workflow Forms", params required: review — a form submitting POST to /access-review-submit with inputs [user_name — a text input (type text), labeled "User", default "analyst1"; approved — a boolean toggle (type boolean), labeled "Approved", default false; save — a button (type button), labeled "Save"] (that bracket is the complete list of the form's inputParams).
+
+- Novelty: Unique forms/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/access_review_form.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_forms_incident_triage_form` — Build the Incident Triage Form form widget
+
+**L3** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: easy · split: train
+
+> Add "Vendor SLA Data" at http://localhost:7804 serving this single form-capable widget definition: `incident_triage_form`: name "Incident Triage Form", description "Submit an incident triage record for review.", endpoint /incident-triage, type table, sized w=20 h=10 on the grid, category "Workflow Forms", params required: triage — a form submitting POST to /incident-triage-submit with inputs [incident_id — a text input (type text), labeled "Incident", default "INC-1042"; review_date — a date picker (type date), labeled "Review date", default "$currentDate"; submit — a button (type button), labeled "Submit"] (that bracket is the complete list of the form's inputParams).
+
+- Novelty: Unique forms/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/incident_triage_form.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_forms_threshold_update_form` — Build the Threshold Update Form form widget
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: easy · split: train
+
+> Add "Execution Desk Data" at http://localhost:7806 serving this single form-capable widget definition: `threshold_update_form`: name "Threshold Update Form", description "Submit a threshold change for operations.", endpoint /threshold-update, type table, sized w=20 h=10 on the grid, category "Workflow Forms", params required: threshold — a form submitting POST to /threshold-update-submit with inputs [limit — a number input (type number), labeled "Limit", default 250, min 0, max 1000; owner — a text input (type text), labeled "Owner", default "ops"; apply — a button (type button), labeled "Apply"] (that bracket is the complete list of the form's inputParams).
+
+- Novelty: Unique forms/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/threshold_update_form.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_forms_vendor_intake_form` — Build the Vendor Intake Form form widget
+
+**L3** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: easy · split: validation
+
+> Add "Vendor SLA Data" at http://localhost:7804 serving this single form-capable widget definition: `vendor_intake_form`: name "Vendor Intake Form", description "Submit a new vendor record into the SLA register.", endpoint /vendor-intake, type table, sized w=20 h=10 on the grid, category "Workflow Forms", params required: intake — a form submitting POST to /vendor-intake-submit with inputs [vendor — a text input (type text), labeled "Vendor"; tier — a number input (type number), labeled "Tier"; submit — a button (type button), labeled "Add Vendor"] (that bracket is the complete list of the form's inputParams).
+
+- Novelty: Unique forms/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/vendor_intake_form.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_grouping_chart_note_board` — Build the grouped Chart Note Board app definition
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: easy · split: train
+
+> Add apps.json to the connected backend "Earnings Prep Data" (already serving `earnings_chart`, `earnings_note`): app "Chart Note Board", description "Chart and preview note synced by symbol.", tab `preview` named "Preview" places: `earnings_chart` at x=0 y=0 w=20 h=9; `earnings_note` at x=20 y=0 w=12 h=9, group "Preview Symbol Sync" (type param) syncing param symbol across ["earnings_chart", "earnings_note"]. Use operation refresh with apps_json.
+
+- Novelty: Unique grouping/t0 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact appdefs:Earnings Prep Data/Chart Note Board.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_grouping_earnings_symbol_board` — Build the grouped Earnings Symbol Board app definition
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: easy · split: train
+
+> Add apps.json to the connected backend "Earnings Prep Data" (already serving `estimate_revisions`, `earnings_chart`): app "Earnings Symbol Board", description "Revisions and EPS history synced by symbol.", tab `review` named "Review" places: `estimate_revisions` at x=0 y=0 w=20 h=9; `earnings_chart` at x=20 y=0 w=12 h=9, group "Symbol Sync" (type param) syncing param symbol across ["estimate_revisions", "earnings_chart"]. Use operation refresh with apps_json.
+
+- Novelty: Unique grouping/t0 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact appdefs:Earnings Prep Data/Earnings Symbol Board.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_grouping_nvda_review_board` — Build the grouped NVDA Review Board app definition
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: easy · split: train
+
+> Your backend "Earnings Prep Data" is already connected and serves `estimate_revisions`, `earnings_chart`. Ship its apps.json - exactly one grouped app: app "NVDA Review Board", description "A second symbol-synced earnings review.", tab `nvda` named "NVDA" places: `estimate_revisions` at x=0 y=0 w=20 h=9; `earnings_chart` at x=20 y=0 w=12 h=9, group "NVDA Symbol Sync" (type param) syncing param symbol across ["estimate_revisions", "earnings_chart"]. Submit it with manage_backends refresh (apps_json).
+
+- Novelty: Unique grouping/t0 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact appdefs:Earnings Prep Data/NVDA Review Board.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_grouping_revision_note_board` — Build the grouped Revision Note Board app definition
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: easy · split: validation
+
+> Add apps.json to the connected backend "Earnings Prep Data" (already serving `estimate_revisions`, `earnings_note`): app "Revision Note Board", description "Revisions and preview note synced by symbol.", tab `notes` named "Notes" places: `estimate_revisions` at x=0 y=0 w=20 h=9; `earnings_note` at x=20 y=0 w=12 h=9, group "Revision Symbol Sync" (type param) syncing param symbol across ["estimate_revisions", "earnings_note"]. Use operation refresh with apps_json.
+
+- Novelty: Unique grouping/t0 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact appdefs:Earnings Prep Data/Revision Note Board.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_params_case_notes` — Build the Case Notes parameter widget
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: easy · split: train
+
+> Add the custom backend "Surveillance Data" at http://localhost:7807 serving this single widget definition: `case_notes`: name "Case Notes", description "Notes for one surveillance case.", endpoint /case-notes, type markdown, sized w=12 h=8 on the grid, params required: case_id — a text input (type text), labeled "Case", default "C-1042", described "Case identifier.".
+
+- Novelty: Unique params/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/case_notes.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_params_kpi_tabs_table` — Build the KPI Tabs parameter widget
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: easy · split: train
+
+> Connect a new custom backend named "Earnings Prep Data" at http://localhost:7805. Its widgets.json serves exactly one widget - `kpi_tabs_table`: name "KPI Tabs", description "KPI table with static and dynamic tab views.", endpoint /kpi-tabs, type table, sized w=24 h=10 on the grid, params required: view — a tabs switcher (type tabs), labeled "View", static options ["Growth"="growth", "Margins"="margins"], default "growth". Register it with manage_backends.
+
+- Novelty: Unique params/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/kpi_tabs_table.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_params_trial_catalysts` — Build the Trial Catalysts parameter widget
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: easy · split: train
+
+> Connect a new custom backend named "Healthcare Research Data" at http://localhost:7808. Its widgets.json serves exactly one widget - `trial_catalysts`: name "Trial Catalysts", description "Upcoming clinical trial readouts.", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, params required: ticker — a dropdown (type endpoint), labeled "Ticker", options fetched from /tickers, default "PFE", table columns required (field → header (type, extras)): ticker → header "Ticker" (text); phase → header "Phase" (text); readout_date → header "Readout" (dateString). Register it with manage_backends.
+
+- Novelty: Unique params/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/trial_catalysts.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_params_vix_history` — Build the VIX History parameter widget
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: validation
+
+> Register "Vol Desk Data" (http://localhost:7801) with one param-bearing widgets.json entry: `vix_history`: name "VIX History", description "Daily CBOE VIX closes with returns.", endpoint /vix-history, type table, sized w=20 h=9 on the grid, params required: window — a number input (type number), labeled "Window", default 30, min 5, max 365, table columns required (field → header (type, extras)): date → header "Date" (dateString); close → header "Close" (number); return_pct → header "Return %" (number, percent formatter, greenRed render).
+
+- Novelty: Unique params/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_history.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_settings_exception_metric` — Build the Exceptions refreshing run-button metric
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: easy · split: train
+
+> Register "Execution Desk Data" (http://localhost:7806) with one widgets.json entry carrying its configuration: `exception_metric`: name "Exceptions", description "Open execution exceptions.", endpoint /exception-count, type metric, sized w=5 h=4 on the grid, runButton true, refetchInterval 45000.
+
+- Novelty: Unique settings/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_settings_gas_metric` — Build the Gas Now auto-refresh categorized metric
+
+**L3** · widget-building · workflow: portfolio-morning-review · crypto · difficulty: easy · split: train
+
+> You wrote a backend at http://localhost:7802. Add it as "Chain TVL Data" serving this configured widget exactly — `gas_metric`: name "Gas Now", description "Current gas price snapshot.", endpoint /gas-now, type metric, sized w=5 h=4 on the grid, category "Network Ops", refetchInterval 30000.
+
+- Novelty: Unique settings/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/gas_metric.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_settings_rates_commentary` — Build the Rates Commentary cached categorized markdown
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: easy · split: train
+
+> Register "Rates Watch Data" (http://localhost:7803) with one widgets.json entry carrying its configuration: `rates_commentary`: name "Rates Commentary", description "Desk commentary on the rates day.", endpoint /rates-commentary, type markdown, sized w=12 h=8 on the grid, category "Macro Notes", staleTime 1800000, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS10".
+
+- Novelty: Unique settings/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/rates_commentary.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_settings_vol_regime_metric` — Build the Vol Regime cached run-button metric
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: validation
+
+> You wrote a backend at http://localhost:7801. Add it as "Vol Desk Data" serving this configured widget exactly — `vol_regime_metric`: name "Vol Regime", description "Current volatility regime score.", endpoint /vol-regime, type metric, sized w=6 h=4 on the grid, staleTime 900000, runButton true.
+
+- Novelty: Unique settings/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vol_regime_metric.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_types_chains_heatmap_html` — Build the Chain Heatmap html widget
+
+**L3** · widget-building · workflow: portfolio-morning-review · crypto · difficulty: easy · split: train
+
+> You wrote a backend at http://localhost:7802. Add it as "Chain TVL Data" serving this exact widgets.json entry — `chains_heatmap_html`: name "Chain Heatmap", description "Raw HTML heatmap of chain flows.", endpoint /chains-heatmap, type html, sized w=20 h=10 on the grid, category "Network Ops", staleTime 900000.
+
+- Novelty: Unique types/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chains_heatmap_html.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_types_gas_metric` — Build the Gas Now metric widget
+
+**L3** · widget-building · workflow: portfolio-morning-review · crypto · difficulty: easy · split: train
+
+> You wrote a backend at http://localhost:7802. Add it as "Chain TVL Data" serving this exact widgets.json entry — `gas_metric`: name "Gas Now", description "Current gas price snapshot.", endpoint /gas-now, type metric, sized w=5 h=4 on the grid, staleTime 900000, runButton true.
+
+- Novelty: Unique types/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/gas_metric.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_types_venue_pdf` — Build the Venue Scorecard pdf widget
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: easy · split: train
+
+> Register "Execution Desk Data" (http://localhost:7806) with one widgets.json entry: `venue_pdf`: name "Venue Scorecard", description "Monthly venue scorecard PDF.", endpoint /venue-scorecard, type pdf, sized w=16 h=14 on the grid, category "Execution Reports", staleTime 1800000. Use a single manage_backends add.
+
+- Novelty: Unique types/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/venue_pdf.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_types_vol_commentary` — Build the Vol Commentary markdown widget
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: validation
+
+> Connect a new custom backend named "Vol Desk Data" at http://localhost:7801. Its widgets.json serves exactly one content widget — `vol_commentary`: name "Vol Commentary", description "Morning volatility commentary.", endpoint /vol-commentary, type markdown, sized w=12 h=8 on the grid, staleTime 900000, params required: desk — a text input (type text), labeled "Desk", static options ["Index"="index", "Single Stock"="single"], default "index". Register it with manage_backends.
+
+- Novelty: Unique types/t0 building exercise using manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vol_commentary.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 4 · oracle reference trace: 1 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_advanced_case_qa_omni_app` — Ship Case Q&A as Case QA
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: medium · split: train
+
+> Check the workspace, then connect "Surveillance Data" at http://localhost:7807. Its widgets.json serves one widget - `case_qa_omni`: name "Case Q&A", description "Ask questions over the surveillance case corpus.", endpoint /case-qa, type omni, sized w=20 h=9 on the grid, params required: prompt — a text input (type text), labeled "Prompt", hidden from the UI (show false), described "Question to run over the case corpus.". Its apps.json ships an app named "Case QA" (description "Ask over the surveillance corpus.") with a single tab `qa` named "Q&A" placing `case_qa_omni` at x=0 y=0 w=20 h=9. Publish both in one add.
+
+- Novelty: Unique advanced/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/case_qa_omni; appdefs:Surveillance Data/Case QA.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_advanced_live_orders_grid_app` — Ship Live Orders Grid as Live Order Tape
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: easy · split: train
+
+> Register "Execution Desk Data" (http://localhost:7806) serving `live_orders_grid`: name "Live Orders Grid", description "Streaming order blotter over websocket.", endpoint /live-orders, type live_grid, sized w=24 h=12 on the grid, wsEndpoint "live-orders-ws", table columns required (field → header (type, extras)): order_id → header "Order" (text); px → header "Price" (number, showCellChange render) with renderFnParams {"colorValueKey": "px_change"}, data.wsRowIdColumn "order_id", and wrap it as an app named "Live Order Tape" (description "Streaming orders for the execution desk.") with a single tab `orders` named "Orders" placing `live_orders_grid` at x=0 y=0 w=24 h=12. Use one manage_backends add for both files.
+
+- Novelty: Unique advanced/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/live_orders_grid; appdefs:Execution Desk Data/Live Order Tape.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_advanced_rates_advanced_chart_app` — Ship Rates Advanced Chart as Rates Advanced
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: medium · split: validation
+
+> Check the workspace, then connect "Rates Watch Data" at http://localhost:7803. Its widgets.json serves one widget - `rates_advanced_chart`: name "Rates Advanced Chart", description "TradingView advanced charting for the 10Y yield future.", endpoint /rates-udf, type advanced_charting, sized w=20 h=18 on the grid, data.defaultSymbol "US10Y", data.updateFrequency 30000. Its apps.json ships an app named "Rates Advanced" (description "TradingView rates charting.") with a single tab `rates` named "Rates" placing `rates_advanced_chart` at x=0 y=0 w=20 h=18. Publish both in one add.
+
+- Novelty: Unique advanced/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/rates_advanced_chart; appdefs:Rates Watch Data/Rates Advanced.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_advanced_vix_advanced_app` — Ship VIX Advanced Chart as Vol Advanced
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: easy · split: test
+
+> Register "Vol Desk Data" (http://localhost:7801) serving `vix_advanced`: name "VIX Advanced Chart", description "TradingView advanced charting for VIX futures.", endpoint /udf, type advanced_charting, sized w=20 h=20 on the grid, data.defaultSymbol "VIX", data.updateFrequency 60000, and wrap it as an app named "Vol Advanced" (description "TradingView VIX view.") with a single tab `chart` named "Chart" placing `vix_advanced` at x=0 y=0 w=20 h=20. Use one manage_backends add for both files.
+
+- Novelty: Unique advanced/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_advanced; appdefs:Vol Desk Data/Vol Advanced.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_aggrid_alert_queue_app` — Ship Alert Queue as the Surveillance Desk app
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: medium · split: train
+
+> Check the workspace, then connect "Surveillance Data" at http://localhost:7807. Its widgets.json serves one widget — `alert_queue`: name "Alert Queue", description "Open surveillance alerts.", endpoint /alert-queue, type table, sized w=20 h=9 on the grid, params required: severity — a text input (type text), labeled "Severity", static options ["High"="high", "Medium"="medium", "Low"="low"], default "high", table columns required (field → header (type, extras)): alert_id → header "Alert" (text); desk → header "Desk" (text); severity → header "Severity" (text, titleCase render); age_days → header "Age (d)" (number, int formatter). Its apps.json ships an app named "Surveillance Desk" (description "Open surveillance alerts.") with a single tab `alerts` named "Alerts" that places `alert_queue` at x=0 y=0 w=24 h=10. Publish both in the same manage_backends add.
+
+- Novelty: Unique aggrid/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_queue; appdefs:Surveillance Data/Surveillance Desk.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_aggrid_chains_table_app` — Ship Top Chains by TVL as the Chains Board app
+
+**L3** · widget-building · workflow: portfolio-morning-review · crypto · difficulty: easy · split: train
+
+> Build both files for "Chain TVL Data" at http://localhost:7802: widgets.json with `chains_table`: name "Top Chains by TVL", description "Current TVL of all chains from the desk aggregator.", endpoint /chains-table, type table, sized w=20 h=9 on the grid, table columns required (field → header (type, extras)): name → header "Chain" (text); tvl_usd → header "TVL ($)" (number, int formatter); change_1d → header "1d Change" (number, percent formatter, greenRed render), apps.json with an app named "Chains Board" (description "Chain TVL at a glance.") with a single tab `overview` named "Overview" that places `chains_table` at x=0 y=0 w=20 h=9. One manage_backends call.
+
+- Novelty: Unique aggrid/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chains_table; appdefs:Chain TVL Data/Chains Board.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_aggrid_trial_catalysts_app` — Ship Trial Catalysts as the Catalyst Watch app
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: medium · split: validation
+
+> Check the workspace, then connect "Healthcare Research Data" at http://localhost:7808. Its widgets.json serves one widget — `trial_catalysts`: name "Trial Catalysts", description "Upcoming clinical trial readouts.", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, params required: ticker — a dropdown (type endpoint), labeled "Ticker", options fetched from /tickers, default "PFE", table columns required (field → header (type, extras)): ticker → header "Ticker" (text); phase → header "Phase" (text); readout_date → header "Readout" (dateString). Its apps.json ships an app named "Catalyst Watch" (description "Upcoming trial catalysts.") with a single tab `catalysts` named "Catalysts" that places `trial_catalysts` at x=0 y=0 w=24 h=10. Publish both in the same manage_backends add.
+
+- Novelty: Unique aggrid/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/trial_catalysts; appdefs:Healthcare Research Data/Catalyst Watch.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_aggrid_vendor_sla_table_app` — Ship Vendor SLA Status as the Vendor Ops app
+
+**L3** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: easy · split: test
+
+> Check the workspace, then connect "Vendor SLA Data" at http://localhost:7804. Its widgets.json serves one widget — `vendor_sla_table`: name "Vendor SLA Status", description "Vendor SLA state with breach flags.", endpoint /vendor-sla, type table, sized w=20 h=9 on the grid, params required: status — a text input (type text), labeled "Status", static options ["Open"="Open", "Escalated"="Escalated", "Resolved"="Resolved"], default "Open", table columns required (field → header (type, extras)): vendor → header "Vendor" (text); status → header "Status" (text, titleCase render); latency_ms → header "Latency (ms)" (number); breach → header "Breach" (boolean). Its apps.json ships an app named "Vendor Ops" (description "Vendor SLA operations.") with a single tab `vendors` named "Vendors" that places `vendor_sla_table` at x=0 y=0 w=20 h=9. Publish both in the same manage_backends add.
+
+- Novelty: Unique aggrid/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/vendor_sla_table; appdefs:Vendor SLA Data/Vendor Ops.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_apps_alert_metric_wrap` — Ship Open Alerts inside the Alert Board app
+
+**L3** · app-building · workflow: compliance-surveillance · compliance · difficulty: easy · split: train
+
+> Build widgets.json (`alert_metric`: name "Open Alerts", description "Open alert count.", endpoint /alert-count, type metric, sized w=5 h=4 on the grid) and apps.json (an app named "Alert Board" (description "Alert posture.") with one tab `alerts` named "Alerts" placing `alert_metric` at x=0 y=0 w=12 h=6) for "Surveillance Data" at http://localhost:7807, then add the backend.
+
+- Novelty: Unique apps/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric; appdefs:Surveillance Data/Alert Board.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_apps_catalyst_metric_wrap` — Ship Catalysts 30d inside the Catalyst Board app
+
+**L3** · app-building · workflow: healthcare-catalyst-review · healthcare · difficulty: medium · split: train
+
+> Build widgets.json (`catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid) and apps.json (an app named "Catalyst Board" (description "Catalyst count.") with one tab `catalysts` named "Catalysts" placing `catalyst_metric` at x=0 y=0 w=12 h=6) for "Healthcare Research Data" at http://localhost:7808, then add the backend.
+
+- Novelty: Unique apps/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric; appdefs:Healthcare Research Data/Catalyst Board.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_apps_gas_metric_wrap` — Ship Gas Now inside the Gas Board app
+
+**L3** · app-building · workflow: portfolio-morning-review · crypto · difficulty: easy · split: validation
+
+> Build widgets.json (`gas_metric`: name "Gas Now", description "Current gas price snapshot.", endpoint /gas-now, type metric, sized w=5 h=4 on the grid) and apps.json (an app named "Gas Board" (description "Gas posture at a glance.") with one tab `gas` named "Gas" placing `gas_metric` at x=0 y=0 w=12 h=6) for "Chain TVL Data" at http://localhost:7802, then add the backend.
+
+- Novelty: Unique apps/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/gas_metric; appdefs:Chain TVL Data/Gas Board.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_apps_surprise_metric_wrap` — Ship Avg Surprise inside the Surprise Board app
+
+**L3** · app-building · workflow: earnings-prep · equity-research · difficulty: medium · split: test
+
+> Build widgets.json (`surprise_metric`: name "Avg Surprise", description "Average EPS surprise last 4 quarters.", endpoint /avg-surprise, type metric, sized w=6 h=4 on the grid) and apps.json (an app named "Surprise Board" (description "Surprise posture.") with one tab `surprises` named "Surprises" placing `surprise_metric` at x=0 y=0 w=12 h=6) for "Earnings Prep Data" at http://localhost:7805, then add the backend.
+
+- Novelty: Unique apps/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/surprise_metric; appdefs:Earnings Prep Data/Surprise Board.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_charts_chains_highchart_app` — Ship TVL by Chain (Highcharts) as the Chain Highchart app
+
+**L3** · widget-building · workflow: portfolio-morning-review · crypto · difficulty: easy · split: train
+
+> Build widgets.json (`chains_highchart`: name "TVL by Chain (Highcharts)", description "Highcharts rendering of chain TVL.", endpoint /chains-highchart, type chart-highcharts, sized w=20 h=9 on the grid) and apps.json (an app named "Chain Highchart" (description "Highcharts TVL view.") with a single tab `chains` named "Chains" placing `chains_highchart` at x=0 y=0 w=20 h=9) for "Chain TVL Data" at http://localhost:7802, then add the backend.
+
+- Novelty: Unique charts/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chains_highchart; appdefs:Chain TVL Data/Chain Highchart.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_charts_earnings_chart_app` — Ship EPS History as the EPS Chart App app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: train
+
+> Register "Earnings Prep Data" (http://localhost:7805) serving `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", shipped as an app named "EPS Chart App" (description "EPS history chart.") with a single tab `eps` named "EPS" placing `earnings_chart` at x=0 y=0 w=20 h=9. Both files go in the same add.
+
+- Novelty: Unique charts/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart; appdefs:Earnings Prep Data/EPS Chart App.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_charts_pipeline_vegalite_app` — Ship Pipeline Mix (Vega-Lite) as the Pipeline Vega App app
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: medium · split: validation
+
+> Register "Healthcare Research Data" (http://localhost:7808) serving `pipeline_vegalite`: name "Pipeline Mix (Vega-Lite)", description "Vega-Lite bar spec of pipeline phase mix.", endpoint /pipeline-vegalite, type chart-vegalite, sized w=20 h=9 on the grid, params required: phase — a dropdown (type endpoint), labeled "Phase", options fetched from /phase-options, default "all", shipped as an app named "Pipeline Vega App" (description "Vega-Lite pipeline view.") with a single tab `pipeline` named "Pipeline" placing `pipeline_vegalite` at x=0 y=0 w=20 h=9. Both files go in the same add.
+
+- Novelty: Unique charts/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/pipeline_vegalite; appdefs:Healthcare Research Data/Pipeline Vega App.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_charts_yield_curve_app` — Ship Yield Curve as the Yield Curve App app
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: easy · split: test
+
+> Check the workspace, then connect "Rates Watch Data" at http://localhost:7803. widgets.json serves one chart — `yield_curve`: name "Yield Curve", description "Plotly treasury yield curve snapshot.", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, raw true. apps.json ships an app named "Yield Curve App" (description "Treasury curve chart.") with a single tab `curve` named "Curve" placing `yield_curve` at x=0 y=0 w=20 h=9. Publish both in one manage_backends add.
+
+- Novelty: Unique charts/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/yield_curve; appdefs:Rates Watch Data/Yield Curve App.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_forms_case_escalation_form_app` — Ship Case Escalation Form as the Case Escalation app
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: easy · split: train
+
+> Build widgets.json (`case_escalation_form`: name "Case Escalation Form", description "Escalate a surveillance case to a reviewer.", endpoint /case-escalation, type table, sized w=20 h=10 on the grid, params required: escalation — a form submitting POST to /case-escalation-submit with inputs [case_id — a text input (type text), labeled "Case", default "C-1042"; due_date — a date picker (type date), labeled "Due date", default "$currentDate+2d"; escalate — a button (type button), labeled "Escalate"] (that bracket is the complete list of the form's inputParams)) and apps.json (an app named "Case Escalation" (description "Escalate surveillance cases.") with one tab `cases` named "Cases" placing `case_escalation_form` at x=0 y=0 w=20 h=10) for "Surveillance Data" at http://localhost:7807; add them together.
+
+- Novelty: Unique forms/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/case_escalation_form; appdefs:Surveillance Data/Case Escalation.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_forms_curve_comment_form_app` — Ship Curve Comment Form as the Curve Comments app
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: medium · split: train
+
+> Register "Rates Watch Data" (http://localhost:7803) with `curve_comment_form`: name "Curve Comment Form", description "Submit a curve desk comment.", endpoint /curve-comment, type markdown, sized w=12 h=8 on the grid, params required: comment — a form submitting POST to /curve-comment-submit with inputs [series — a text input (type text), labeled "Series", default "DGS10"; commentary — a text input (type text), labeled "Commentary", default "Steeper bias."; post — a button (type button), labeled "Post"] (that bracket is the complete list of the form's inputParams), and ship that form as an app named "Curve Comments" (description "Submit curve desk comments.") with one tab `comments` named "Comments" placing `curve_comment_form` at x=0 y=0 w=12 h=8.
+
+- Novelty: Unique forms/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_comment_form; appdefs:Rates Watch Data/Curve Comments.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_forms_vendor_intake_form_app` — Ship Vendor Intake Form as the Vendor Intake app
+
+**L3** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: easy · split: validation
+
+> Register "Vendor SLA Data" (http://localhost:7804) with `vendor_intake_form`: name "Vendor Intake Form", description "Submit a new vendor record into the SLA register.", endpoint /vendor-intake, type table, sized w=20 h=10 on the grid, params required: intake — a form submitting POST to /vendor-intake-submit with inputs [vendor — a text input (type text), labeled "Vendor"; tier — a number input (type number), labeled "Tier"; submit — a button (type button), labeled "Add Vendor"] (that bracket is the complete list of the form's inputParams), and ship that form as an app named "Vendor Intake" (description "New vendor intake.") with one tab `intake` named "Intake" placing `vendor_intake_form` at x=0 y=0 w=20 h=10.
+
+- Novelty: Unique forms/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/vendor_intake_form; appdefs:Vendor SLA Data/Vendor Intake.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_forms_venue_exception_form_app` — Ship Venue Exception Form as the Venue Exceptions app
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: medium · split: test
+
+> Build widgets.json (`venue_exception_form`: name "Venue Exception Form", description "Record an execution venue exception.", endpoint /venue-exception, type table, sized w=20 h=10 on the grid, params required: exception — a form submitting POST to /venue-exception-submit with inputs [venue — a text input (type text), labeled "Venue", default "ARCA"; slippage_bps — a number input (type number), labeled "Slippage bps", default 12, min 0; record — a button (type button), labeled "Record"] (that bracket is the complete list of the form's inputParams)) and apps.json (an app named "Venue Exceptions" (description "Capture venue exception records.") with one tab `exceptions` named "Exceptions" placing `venue_exception_form` at x=0 y=0 w=20 h=10) for "Execution Desk Data" at http://localhost:7806; add them together.
+
+- Novelty: Unique forms/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/venue_exception_form; appdefs:Execution Desk Data/Venue Exceptions.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_grouping_earnings_chart_app` — Ship EPS History with a grouping app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: easy · split: train
+
+> Register "Earnings Prep Data" (http://localhost:7805) with `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", and wrap it in a grouped app: app "Chart Group App", description "Grouped EPS chart by symbol.", tab `chart` named "Chart" places: `earnings_chart` at x=0 y=0 w=20 h=9, group "Chart Symbol Group" (type param) syncing param symbol across ["earnings_chart"].
+
+- Novelty: Unique grouping/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart; appdefs:Earnings Prep Data/Chart Group App.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_grouping_earnings_note_app` — Ship Earnings Preview with a grouping app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: train
+
+> Build widgets.json (`earnings_note`: name "Earnings Preview", description "Preview note for the earnings call.", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL") and apps.json (app "Preview Group App", description "Grouped earnings preview by symbol.", tab `preview` named "Preview" places: `earnings_note` at x=0 y=0 w=20 h=9, group "Preview Symbol Group" (type param) syncing param symbol across ["earnings_note"]) for "Earnings Prep Data" at http://localhost:7805; add them together.
+
+- Novelty: Unique grouping/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_note; appdefs:Earnings Prep Data/Preview Group App.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_grouping_estimate_revisions_app` — Ship Estimate Revisions with a grouping app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: easy · split: validation
+
+> Build widgets.json (`estimate_revisions`: name "Estimate Revisions", description "Street estimate revisions by quarter.", endpoint /estimate-revisions, type table, sized w=20 h=9 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): quarter → header "Quarter" (text); eps_estimate → header "EPS Est" (number); revenue_estimate_b → header "Revenue Est ($B)" (number)) and apps.json (app "Revision Group App", description "Grouped revisions by symbol.", tab `revisions` named "Revisions" places: `estimate_revisions` at x=0 y=0 w=20 h=9, group "Revision Symbol Group" (type param) syncing param symbol across ["estimate_revisions"]) for "Earnings Prep Data" at http://localhost:7805; add them together.
+
+- Novelty: Unique grouping/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/estimate_revisions; appdefs:Earnings Prep Data/Revision Group App.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_grouping_symbol_click_summary_app` — Ship Symbol Click Summary with a grouping app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: test
+
+> Check the workspace, then connect "Earnings Prep Data" at http://localhost:7805. widgets.json serves one widget - `symbol_click_summary`: name "Symbol Click Summary", description "Symbol rows that can drive a grouped app.", endpoint /symbol-click-summary, type table, sized w=20 h=9 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): symbol → header "Symbol" (text, cellOnClick render) with renderFnParams {"actionType": "groupBy", "groupByParamName": "symbol"}; revision_pct → header "Revision %" (number, percent formatter). apps.json ships app "Click Group App", description "Clickable symbol rows in a grouped app.", tab `clicks` named "Clicks" places: `symbol_click_summary` at x=0 y=0 w=20 h=9, group "Click Symbol Group" (type param) syncing param symbol across ["symbol_click_summary"]. Publish both in one add.
+
+- Novelty: Unique grouping/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/symbol_click_summary; appdefs:Earnings Prep Data/Click Group App.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_params_case_notes_app` — Ship Case Notes as the Case Note Filter app
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: medium · split: train
+
+> Register "Surveillance Data" (http://localhost:7807) with `case_notes`: name "Case Notes", description "Notes for one surveillance case.", endpoint /case-notes, type markdown, sized w=12 h=8 on the grid, params required: case_id — a text input (type text), labeled "Case", default "C-1042", described "Case identifier.", and include apps.json shipping it as an app named "Case Note Filter" (description "Case notes by entered case id.") with one tab `notes` named "Notes" placing `case_notes` at x=0 y=0 w=12 h=8.
+
+- Novelty: Unique params/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/case_notes; appdefs:Surveillance Data/Case Note Filter.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_params_rates_commentary_app` — Ship Rates Commentary as the Series Commentary app
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: easy · split: train
+
+> Build widgets.json (`rates_commentary`: name "Rates Commentary", description "Desk commentary on the rates day.", endpoint /rates-commentary, type markdown, sized w=12 h=8 on the grid, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS10") and apps.json (an app named "Series Commentary" (description "Rates commentary by selected series.") with one tab `commentary` named "Commentary" placing `rates_commentary` at x=0 y=0 w=12 h=8) for "Rates Watch Data" at http://localhost:7803; add them together.
+
+- Novelty: Unique params/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/rates_commentary; appdefs:Rates Watch Data/Series Commentary.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_params_trial_catalysts_app` — Ship Trial Catalysts as the Catalyst Filter app
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: easy · split: validation
+
+> Check the workspace, then connect "Healthcare Research Data" at http://localhost:7808. widgets.json serves one widget - `trial_catalysts`: name "Trial Catalysts", description "Upcoming clinical trial readouts.", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, params required: ticker — a dropdown (type endpoint), labeled "Ticker", options fetched from /tickers, default "PFE", table columns required (field → header (type, extras)): ticker → header "Ticker" (text); phase → header "Phase" (text); readout_date → header "Readout" (dateString). apps.json ships an app named "Catalyst Filter" (description "Ticker-filtered trial catalysts.") with one tab `catalysts` named "Catalysts" placing `trial_catalysts` at x=0 y=0 w=20 h=9. Publish both in one manage_backends add.
+
+- Novelty: Unique params/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/trial_catalysts; appdefs:Healthcare Research Data/Catalyst Filter.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_params_vendor_sla_table_app` — Ship Vendor SLA Status as the Vendor Filter Board app
+
+**L3** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: medium · split: test
+
+> Build widgets.json (`vendor_sla_table`: name "Vendor SLA Status", description "Vendor SLA state with breach flags.", endpoint /vendor-sla, type table, sized w=20 h=9 on the grid, params required: status — a text input (type text), labeled "Status", static options ["Open"="Open", "Escalated"="Escalated", "Resolved"="Resolved"], default "Open", table columns required (field → header (type, extras)): vendor → header "Vendor" (text); status → header "Status" (text, titleCase render); latency_ms → header "Latency (ms)" (number); breach → header "Breach" (boolean)) and apps.json (an app named "Vendor Filter Board" (description "Status-filtered vendor SLA table.") with one tab `vendors` named "Vendors" placing `vendor_sla_table` at x=0 y=0 w=20 h=9) for "Vendor SLA Data" at http://localhost:7804; add them together.
+
+- Novelty: Unique params/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/vendor_sla_table; appdefs:Vendor SLA Data/Vendor Filter Board.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_settings_alert_metric_app` — Ship the configured Open Alerts app
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: easy · split: train
+
+> Check the workspace, then connect "Surveillance Data" at http://localhost:7807. widgets.json serves one configured widget — `alert_metric`: name "Open Alerts", description "Open alert count.", endpoint /alert-count, type metric, sized w=5 h=4 on the grid, category "Surveillance", staleTime 900000. apps.json ships an app named "Alert Settings" (description "Cached alert posture.") with one tab `alerts` named "Alerts" placing `alert_metric` at x=0 y=0 w=6 h=4. Publish both in one manage_backends add.
+
+- Novelty: Unique settings/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric; appdefs:Surveillance Data/Alert Settings.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_settings_catalyst_metric_app` — Ship the configured Catalysts 30d app
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: easy · split: train
+
+> Check the workspace, then connect "Healthcare Research Data" at http://localhost:7808. widgets.json serves one configured widget — `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid, runButton true, refetchInterval 30000. apps.json ships an app named "Catalyst Settings" (description "Refreshing catalyst count.") with one tab `catalysts` named "Catalysts" placing `catalyst_metric` at x=0 y=0 w=6 h=4. Publish both in one manage_backends add.
+
+- Novelty: Unique settings/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric; appdefs:Healthcare Research Data/Catalyst Settings.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_settings_sla_runbook_app` — Ship the configured SLA Runbook app
+
+**L3** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: medium · split: validation
+
+> Check the workspace, then connect "Vendor SLA Data" at http://localhost:7804. widgets.json serves one configured widget — `sla_runbook`: name "SLA Runbook", description "Runbook for SLA escalations.", endpoint /sla-runbook, type markdown, sized w=12 h=8 on the grid, category "Runbooks", staleTime 900000, runButton true. apps.json ships an app named "Runbook Settings" (description "Configured SLA runbook.") with one tab `runbook` named "Runbook" placing `sla_runbook` at x=0 y=0 w=12 h=8. Publish both in one manage_backends add.
+
+- Novelty: Unique settings/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/sla_runbook; appdefs:Vendor SLA Data/Runbook Settings.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_settings_surprise_metric_app` — Ship the configured Avg Surprise app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: test
+
+> Build widgets.json (`surprise_metric`: name "Avg Surprise", description "Average EPS surprise last 4 quarters.", endpoint /avg-surprise, type metric, sized w=6 h=4 on the grid, category "Earnings", source "surprise-service", staleTime 1800000) and apps.json (an app named "Surprise Settings" (description "Cached earnings surprise.") with one tab `surprises` named "Surprises" placing `surprise_metric` at x=0 y=0 w=8 h=5) for "Earnings Prep Data" at http://localhost:7805, then add the backend.
+
+- Novelty: Unique settings/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/surprise_metric; appdefs:Earnings Prep Data/Surprise Settings.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_types_curve_monitor_iframe_app` — Ship Curve Monitor App as the Curve Monitor app
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: easy · split: train
+
+> Check the workspace, then connect "Rates Watch Data" at http://localhost:7803. Its widgets.json serves one widget — `curve_monitor_iframe`: name "Curve Monitor App", description "Embedded standalone curve monitor application.", endpoint http://localhost:5173, type iframe, sized w=24 h=16 on the grid. Its apps.json ships an app named "Curve Monitor" (description "Embedded curve monitor.") with a single tab `monitor` named "Monitor" that places `curve_monitor_iframe` at x=0 y=0 w=24 h=16. Publish both in the same manage_backends add.
+
+- Novelty: Unique types/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_monitor_iframe; appdefs:Rates Watch Data/Curve Monitor.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_types_earnings_calls_video_app` — Ship Earnings Call Replays as the Replay Room app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: train
+
+> Build both files for "Earnings Prep Data" at http://localhost:7805: widgets.json with `earnings_calls_video`: name "Earnings Call Replays", description "Replay library of earnings calls.", endpoint /call-videos, type youtube, sized w=20 h=12 on the grid, params required: video — a dropdown (type endpoint), labeled "Video", options fetched from /call-video-options, default "q1-call", apps.json with an app named "Replay Room" (description "Earnings call replays.") with a single tab `replays` named "Replays" that places `earnings_calls_video` at x=0 y=0 w=20 h=12. Then add the backend.
+
+- Novelty: Unique types/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_calls_video; appdefs:Earnings Prep Data/Replay Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_types_evidence_files_app` — Ship Evidence Files as the Evidence Browser app
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: medium · split: validation
+
+> Build both files for "Surveillance Data" at http://localhost:7807: widgets.json with `evidence_files`: name "Evidence Files", description "Browse case evidence documents.", endpoint /evidence-files, type multi_file_viewer, sized w=20 h=14 on the grid, params required: file — a dropdown (type endpoint), labeled "File", options fetched from /evidence-file-options, multi-select, default [], roles ["fileSelector"], apps.json with an app named "Evidence Browser" (description "Case evidence files.") with a single tab `evidence` named "Evidence" that places `evidence_files` at x=0 y=0 w=20 h=14. Then add the backend.
+
+- Novelty: Unique types/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/evidence_files; appdefs:Surveillance Data/Evidence Browser.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_types_sla_newsfeed_app` — Ship Vendor Notices as the Vendor Notices app
+
+**L3** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: easy · split: test
+
+> Check the workspace, then connect "Vendor SLA Data" at http://localhost:7804. Its widgets.json serves one widget — `sla_newsfeed`: name "Vendor Notices", description "Vendor incident notices feed.", endpoint /vendor-notices, type newsfeed, sized w=12 h=10 on the grid. Its apps.json ships an app named "Vendor Notices" (description "Vendor incident notices.") with a single tab `notices` named "Notices" that places `sla_newsfeed` at x=0 y=0 w=12 h=10. Publish both in the same manage_backends add.
+
+- Novelty: Unique types/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/sla_newsfeed; appdefs:Vendor SLA Data/Vendor Notices.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_advanced_case_prompt_omni` — Compose the Case Prompt Omni widget
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: medium · split: train
+
+> Build the widgets.json for "Surveillance Data" at http://localhost:7807. One widget only: `case_prompt_omni`: name "Case Prompt Omni", description "Hidden-prompt Omni search over case evidence.", endpoint /case-prompt-qa, type omni, sized w=20 h=9 on the grid, category "Compliance", params required: prompt — a text input (type text), labeled "Prompt", hidden from the UI (show false), described "Question to run over the case corpus."; it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.. Make sure to keep the prompt param hidden and place the widget in the Compliance category, then add the backend.
+
+- Novelty: Unique advanced/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/case_prompt_omni.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_advanced_orders_stream` — Compose the Orders Stream widget
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: medium · split: train
+
+> Register "Execution Desk Data" (http://localhost:7806) with a single advanced-surface widget. Build it from these requirements, not from copied JSON: `orders_stream`: name "Orders Stream", description "Streaming orders with a stable row id.", endpoint /orders-stream, type live_grid, sized w=24 h=10 on the grid, category "Execution", wsEndpoint "wss://execution.example/orders", params required: venue — a text input (type text), labeled "Venue", default "ARCA", described "Execution venue filter.", table columns required (field → header (type, extras)): order_id → header "Order" (text); px → header "Price" (number, showCellChange render) with renderFnParams {"colorValueKey": "px_change"}, data.updateFrequency 1000, data.wsRowIdColumn "order_id"; it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.. The composed detail is to stream from the websocket endpoint and do not poll HTTP again — polling is disabled by setting refetchInterval to false.
+
+- Novelty: Unique advanced/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/orders_stream.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_advanced_rates_symbol_chart` — Compose the Rates Symbol Chart widget
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: medium · split: validation
+
+> Build the widgets.json for "Rates Watch Data" at http://localhost:7803. One widget only: `rates_symbol_chart`: name "Rates Symbol Chart", description "TradingView chart with a selectable symbol.", endpoint /rates-symbol-udf, type advanced_charting, sized w=20 h=18 on the grid, category "Macro", params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /rates-symbols, default "US10Y", data.defaultSymbol "US10Y", data.updateFrequency 30000; it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.. Make sure to carry the default TradingView symbol and expose the symbol dropdown, then add the backend.
+
+- Novelty: Unique advanced/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/rates_symbol_chart.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_advanced_vol_symbol_chart` — Compose the Vol Symbol Chart widget
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: medium · split: test
+
+> Check the workspace, then connect "Vol Desk Data" at http://localhost:7801 serving one widgets.json entry. Requirements: `vol_symbol_chart`: name "Vol Symbol Chart", description "TradingView chart for volatility futures.", endpoint /vol-symbol-udf, type advanced_charting, sized w=20 h=18 on the grid, category "Volatility", params required: venue — a text input (type text), labeled "Venue", default "CFE", data.defaultSymbol "VX1", data.updateFrequency 15000; it caches results for 10 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.. Also, use a faster update frequency and a text venue param.
+
+- Novelty: Unique advanced/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vol_symbol_chart.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_aggrid_auction_watch` — Compose the Auction Watch table from its rows and requirements
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: medium · split: train
+
+> Register "Rates Watch Data" (http://localhost:7803) with a single table — `auction_watch`: name "Auction Watch", description "Upcoming treasury auctions.", endpoint /auction-watch, type table, gridData w=20 h=9. Requirements: it caches results for 15 minutes and exposes a run button (runButton true). Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.; and the columns come from the served rows [{"auction_date": "2026-07-14", "bid_to_cover": 2.43, "security": "10Y Note", "size_bn": 42}, {"auction_date": "2026-07-15", "bid_to_cover": 2.31, "security": "30Y Bond", "size_bn": 25}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.
+
+- Novelty: Unique aggrid/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/auction_watch.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_aggrid_fill_quality` — Compose the Fill Quality table from its rows and requirements
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: medium · split: train
+
+> Check the workspace, then connect "Execution Desk Data" at http://localhost:7806 serving one widgets.json entry — `fill_quality`: name "Fill Quality", description "Fill quality by venue.", endpoint /fill-quality, type table, gridData w=20 h=9. Two composed requirements. First, it auto-refreshes every 30 seconds and files under category "Execution". Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.. Second, the endpoint returns rows like [{"as_of": "2026-07-01", "fills": 1240, "slippage_pct": 0.0021, "venue": "ARCA"}, {"as_of": "2026-07-01", "fills": 980, "slippage_pct": 0.0034, "venue": "EDGX"}] — Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.
+
+- Novelty: Unique aggrid/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/fill_quality.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_aggrid_realized_screen` — Compose the Realized Vol Screen table from its rows and requirements
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: medium · split: validation
+
+> Register "Vol Desk Data" (http://localhost:7801) with a single table — `realized_screen`: name "Realized Vol Screen", description "Realized volatility by tenor.", endpoint /realized-vol, type table, gridData w=20 h=9. Requirements: the realized_pct column additionally renders greenRed (renderFn), and it caches results for 20 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.; and the columns come from the served rows [{"as_of": "2026-07-01", "realized_pct": 0.182, "tenor": "1M"}, {"as_of": "2026-07-01", "realized_pct": 0.204, "tenor": "3M"}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.
+
+- Novelty: Unique aggrid/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/realized_screen.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_aggrid_revision_grid` — Compose the Revision Grid table from its rows and requirements
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: test
+
+> Register "Earnings Prep Data" (http://localhost:7805) with a single table — `revision_grid`: name "Revision Grid", description "Street revision momentum by ticker.", endpoint /revision-momentum, type ssrm_table, gridData w=20 h=9. Requirements: it is served as a server-side row-model grid — type ssrm_table — whose rows are read from the response key "rows"; and the columns come from the served rows [{"momentum_pct": 0.084, "revised_down": 3, "revised_up": 14, "ticker": "AAPL"}, {"momentum_pct": 0.041, "revised_down": 5, "revised_up": 11, "ticker": "MSFT"}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.
+
+- Novelty: Unique aggrid/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/revision_grid.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_apps_earnings_command` — Compose the Earnings Command app
+
+**L3** · app-building · workflow: earnings-prep · equity-research · difficulty: medium · split: train
+
+> Check the workspace. Your backend "Earnings Prep Data" already serves `estimate_revisions`, `earnings_chart`, `surprise_metric`; its apps.json is missing. Build it — one app: app "Earnings Command", description "Symbol-synced earnings review.", tab `review` named "Review" places: `estimate_revisions` at x=0 y=0 w=20 h=9; `earnings_chart` at x=20 y=0 w=12 h=9 preset with params {"symbol": "NVDA"}; `surprise_metric` at x=32 y=0 w=8 h=6, group "Symbol Sync" (type param) syncing param symbol across ["estimate_revisions", "earnings_chart"]. Ship it via manage_backends refresh.
+
+- Novelty: Unique apps/t2 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact appdefs:Earnings Prep Data/Earnings Command.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_apps_surveillance_morning` — Compose the Surveillance Morning app
+
+**L3** · app-building · workflow: compliance-surveillance · compliance · difficulty: medium · split: train
+
+> One app to ship on "Surveillance Data": app "Surveillance Morning", description "Alerts and case notes.", tab `alerts` named "Alerts" places: `alert_queue` at x=0 y=0 w=24 h=10 preset with params {"severity": "high"}; `case_notes` at x=24 y=0 w=12 h=10; `alert_metric` at x=0 y=10 w=12 h=6, suggested prompts: "Which high-severity alerts are unassigned?". The widgets are already served — submit apps_json with a refresh.
+
+- Novelty: Unique apps/t2 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact appdefs:Surveillance Data/Surveillance Morning.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_apps_vendor_command` — Compose the Vendor Command app
+
+**L3** · app-building · workflow: vendor-sla-monitoring · operations · difficulty: medium · split: validation
+
+> Check the workspace. Your backend "Vendor SLA Data" already serves `vendor_sla_table`, `breach_metric`, `sla_newsfeed`; its apps.json is missing. Build it — one app: app "Vendor Command", description "Vendors, breaches, headlines.", tab `vendors` named "Vendors" places: `vendor_sla_table` at x=0 y=0 w=20 h=9 preset with params {"status": "breach"}; `breach_metric` at x=20 y=0 w=12 h=6; `sla_newsfeed` at x=20 y=6 w=12 h=8, suggested prompts: "Which vendors breached SLA this week?". Ship it via manage_backends refresh.
+
+- Novelty: Unique apps/t2 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Vendor SLA Data; artifact appdefs:Vendor SLA Data/Vendor Command.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_apps_vol_morning` — Compose the Vol Morning app
+
+**L3** · app-building · workflow: risk-review · volatility · difficulty: medium · split: test
+
+> One app to ship on "Vol Desk Data": app "Vol Morning", description "Vol level, structure, regime.", tab `morning` named "Morning" places: `vix_history` at x=0 y=0 w=20 h=9 preset with params {"window": 30}; `vix_term_structure` at x=20 y=0 w=12 h=9; `vol_regime_metric` at x=32 y=0 w=8 h=6, suggested prompts: "What changed in the term structure overnight?"; "Summarize the vol regime in one line.". The widgets are already served — submit apps_json with a refresh.
+
+- Novelty: Unique apps/t2 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact appdefs:Vol Desk Data/Vol Morning.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_charts_chain_flow_highchart` — Compose the Chain Flow Highchart chart widget
+
+**L3** · widget-building · workflow: portfolio-morning-review · crypto · difficulty: medium · split: train
+
+> Register "Chain TVL Data" (http://localhost:7802) with exactly one chart entry. Requirements: `chain_flow_highchart`: name "Chain Flow Highchart", description "Highcharts chain flow chart.", endpoint /chain-flow-highchart, type chart-highcharts, sized w=20 h=9 on the grid, category "Chain Flows", runButton true, params required: chain — a dropdown (type endpoint), labeled "Chain", options fetched from /chain-options, default "ethereum"; it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000..
+
+- Novelty: Unique charts/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chain_flow_highchart.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_charts_phase_mix_vegalite` — Compose the Phase Mix Vega-Lite chart widget
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: medium · split: train
+
+> Check the workspace, then connect "Healthcare Research Data" at http://localhost:7808 serving one composed chart widget: `phase_mix_vegalite`: name "Phase Mix Vega-Lite", description "Vega-Lite phase mix chart.", endpoint /phase-mix-vegalite, type chart-vegalite, sized w=20 h=9 on the grid, category "Clinical", params required: phase — a dropdown (type endpoint), labeled "Phase", options fetched from /phase-options, default "all"; it caches results for 30 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.. Publish it with manage_backends add.
+
+- Novelty: Unique charts/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/phase_mix_vegalite.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_charts_symbol_momentum_chart` — Compose the Symbol Momentum Chart chart widget
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: validation
+
+> Register "Earnings Prep Data" (http://localhost:7805) with exactly one chart entry. Requirements: `symbol_momentum_chart`: name "Symbol Momentum Chart", description "Plotly momentum chart by symbol.", endpoint /symbol-momentum, type chart, sized w=20 h=9 on the grid, category "Earnings", raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000..
+
+- Novelty: Unique charts/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/symbol_momentum_chart.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_charts_venue_slippage_chart` — Compose the Venue Slippage Chart chart widget
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: medium · split: test
+
+> Build the widgets.json for "Execution Desk Data" at http://localhost:7806: `venue_slippage_chart`: name "Venue Slippage Chart", description "Plotly slippage chart by venue.", endpoint /venue-slippage-chart, type chart, sized w=20 h=9 on the grid, category "Execution", raw true, params required: venue — a text input (type text), labeled "Venue", default "ARCA", described "Venue code to chart."; it auto-refreshes every 30 seconds. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.. Then add the backend.
+
+- Novelty: Unique charts/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/venue_slippage_chart.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_forms_policy_exception_form` — Compose the Policy Exception Form form widget
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: medium · split: train
+
+> Check the workspace, then connect "Surveillance Data" at http://localhost:7807 with one widgets.json entry. Requirements: `policy_exception_form`: name "Policy Exception Form", description "Submit a policy exception request.", endpoint /policy-exception, type table, sized w=20 h=10 on the grid, category "Surveillance", runButton true, params required: exception — a form submitting POST to /policy-exception-submit with inputs [policy_id — a text input (type text), labeled "Policy", default "POL-7"; owner — a text input (type text), labeled "Owner", default "compliance"; request — a button (type button), labeled "Request"] (that bracket is the complete list of the form's inputParams); it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000..
+
+- Novelty: Unique forms/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/policy_exception_form.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_forms_trade_break_form` — Compose the Trade Break Form form widget
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: medium · split: train
+
+> Check the workspace, then connect "Execution Desk Data" at http://localhost:7806 with one widgets.json entry. Requirements: `trade_break_form`: name "Trade Break Form", description "Record a trade break for operations review.", endpoint /trade-break, type table, sized w=20 h=10 on the grid, category "Execution", params required: break_item — a form submitting POST to /trade-break-submit with inputs [trade_id — a text input (type text), labeled "Trade", default "TR-8821"; break_amount — a number input (type number), labeled "Break amount", default 1000, min 0; record — a button (type button), labeled "Record"] (that bracket is the complete list of the form's inputParams); it auto-refreshes every 30 seconds. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000..
+
+- Novelty: Unique forms/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/trade_break_form.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_forms_trial_readout_form` — Compose the Trial Readout Form form widget
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: medium · split: validation
+
+> Publish "Healthcare Research Data" at http://localhost:7808 serving a single form widget from these requirements: `trial_readout_form`: name "Trial Readout Form", description "Capture a clinical trial readout note.", endpoint /trial-readout-form, type table, sized w=20 h=10 on the grid, category "Research", params required: readout — a form submitting POST to /trial-readout-submit with inputs [ticker — a text input (type text), labeled "Ticker", default "PFE"; readout_date — a date picker (type date), labeled "Readout date", default "2026-08-19"; save — a button (type button), labeled "Save"] (that bracket is the complete list of the form's inputParams); it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000..
+
+- Novelty: Unique forms/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/trial_readout_form.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_forms_vendor_review_form` — Compose the Vendor Review Form form widget
+
+**L3** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: medium · split: test
+
+> Build a form widget for "Vendor SLA Data" (http://localhost:7804): `vendor_review_form`: name "Vendor Review Form", description "Create a vendor review item.", endpoint /vendor-review, type table, sized w=20 h=10 on the grid, category "Vendor Ops", params required: review — a form submitting POST to /vendor-review-submit with inputs [vendor_name — a text input (type text), labeled "Vendor", default "AlphaFeed"; review_date — a date picker (type date), labeled "Review date", default "$currentDate"; submit — a button (type button), labeled "Submit"] (that bracket is the complete list of the form's inputParams); it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.. Submit it with manage_backends add.
+
+- Novelty: Unique forms/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/vendor_review_form.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_grouping_chart_preview_sync` — Compose the grouped Chart Preview Sync app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: train
+
+> One grouped app to ship on "Earnings Prep Data": app "Chart Preview Sync", description "Preset chart and preview note.", tab `chart` named "Chart" places: `earnings_chart` at x=0 y=0 w=20 h=9 preset with params {"symbol": "AAPL"}; `earnings_note` at x=20 y=0 w=12 h=9, group "Chart Symbol Sync" (type param) syncing param symbol across ["earnings_chart", "earnings_note"], suggested prompts: "Compare the chart and preview for the synced symbol.". The widgets are already served - submit apps_json and refresh widgets_json so `earnings_chart` it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.
+
+- Novelty: Unique grouping/t2 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart; appdefs:Earnings Prep Data/Chart Preview Sync.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_grouping_earnings_review_sync` — Compose the grouped Earnings Review Sync app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: train
+
+> Check the workspace. "Earnings Prep Data" already serves `estimate_revisions`, `earnings_chart`. Refresh widgets_json so `estimate_revisions` it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000. Build apps.json with one grouped app: app "Earnings Review Sync", description "Preset chart with synced revisions.", tab `review` named "Review" places: `estimate_revisions` at x=0 y=0 w=20 h=9; `earnings_chart` at x=20 y=0 w=12 h=9 preset with params {"symbol": "NVDA"}, group "Review Symbol Sync" (type param) syncing param symbol across ["estimate_revisions", "earnings_chart"], suggested prompts: "Summarize the synced NVDA revision signal.". Refresh the backend.
+
+- Novelty: Unique grouping/t2 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/estimate_revisions; appdefs:Earnings Prep Data/Earnings Review Sync.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_grouping_full_earnings_sync` — Compose the grouped Full Earnings Sync app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: validation
+
+> Build the grouped apps.json for "Earnings Prep Data" (http://localhost:7805) over served widgets `estimate_revisions`, `earnings_chart`, `earnings_note`: app "Full Earnings Sync", description "Three earnings widgets synced by symbol.", tab `full` named "Full" places: `estimate_revisions` at x=0 y=0 w=20 h=9 preset with params {"symbol": "NVDA"}; `earnings_chart` at x=20 y=0 w=12 h=9; `earnings_note` at x=32 y=0 w=8 h=6, group "Full Symbol Sync" (type param) syncing param symbol across ["estimate_revisions", "earnings_chart", "earnings_note"], suggested prompts: "List the main synced earnings takeaway.". Also refresh widgets_json so `estimate_revisions` it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.
+
+- Novelty: Unique grouping/t2 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/estimate_revisions; appdefs:Earnings Prep Data/Full Earnings Sync.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_grouping_revision_preview_sync` — Compose the grouped Revision Preview Sync app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: test
+
+> One grouped app to ship on "Earnings Prep Data": app "Revision Preview Sync", description "Preset preview note with synced revisions.", tab `preview` named "Preview" places: `estimate_revisions` at x=0 y=0 w=20 h=9; `earnings_note` at x=20 y=0 w=12 h=9 preset with params {"symbol": "MSFT"}, group "Preview Symbol Sync" (type param) syncing param symbol across ["estimate_revisions", "earnings_note"], suggested prompts: "Draft a preview note for the synced symbol.". The widgets are already served - submit apps_json and refresh widgets_json so `estimate_revisions` it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.
+
+- Novelty: Unique grouping/t2 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/estimate_revisions; appdefs:Earnings Prep Data/Revision Preview Sync.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_params_kpi_param_tabs` — Compose the KPI Param Tabs parameter widget
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: train
+
+> Publish "Earnings Prep Data" at http://localhost:7805 serving a single widgets.json entry with these requirements: `kpi_param_tabs`: name "KPI Param Tabs", description "KPI table switched between growth and margin views.", endpoint /kpi-param-tabs, type table, sized w=24 h=10 on the grid, category "Earnings", params required: view — a tabs switcher (type tabs), labeled "View", static options ["Growth"="growth", "Margins"="margins"], default "growth"; it auto-refreshes every 60 seconds. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000..
+
+- Novelty: Unique params/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/kpi_param_tabs.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_params_series_markdown` — Compose the Series Markdown parameter widget
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: medium · split: train
+
+> Publish "Rates Watch Data" at http://localhost:7803 serving a single widgets.json entry with these requirements: `series_markdown`: name "Series Markdown", description "Rates note for the selected time series.", endpoint /series-markdown, type markdown, sized w=12 h=8 on the grid, runButton true, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS10"; it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000..
+
+- Novelty: Unique params/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/series_markdown.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_params_vol_screener` — Compose the Vol Screener parameter widget
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: medium · split: validation
+
+> Check the workspace, then connect "Vol Desk Data" at http://localhost:7801 with one widgets.json entry. Requirements: `vol_screener`: name "Vol Screener", description "Screen names by implied-vol criteria.", endpoint /vol-screener, type table, sized w=24 h=10 on the grid, category "Volatility", params required: ticker — a ticker picker (type ticker), labeled "Ticker", default "AAPL"; as_of — a date picker (type date), labeled "As of", default "$currentDate-1d"; only_liquid — a boolean toggle (type boolean), labeled "Liquid only", default true; it caches results for 10 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.. Build the definition from those words and add the backend.
+
+- Novelty: Unique params/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vol_screener.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_params_windowed_vix_slice` — Compose the Windowed VIX Slice parameter widget
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: medium · split: test
+
+> Publish "Vol Desk Data" at http://localhost:7801 serving a single widgets.json entry with these requirements: `windowed_vix_slice`: name "Windowed VIX Slice", description "VIX chart for a selected window and as-of date.", endpoint /windowed-vix, type chart, sized w=20 h=9 on the grid, raw true, params required: window — a number input (type number), labeled "Window", default 30, min 5, max 365; as_of — a date picker (type date), labeled "As of", default "$currentDate-1d"; it caches results for 10 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000..
+
+- Novelty: Unique params/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/windowed_vix_slice.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_settings_auction_cache_grid` — Compose the configured Auction Cache Grid widget
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: medium · split: train
+
+> Check the workspace, then connect "Rates Watch Data" at http://localhost:7803 serving one configured widgets.json entry: `auction_cache_grid`: name "Auction Cache Grid", description "Cached auction watchlist.", endpoint /auction-cache, type table, gridData w=20 h=9; it caches results for 15 minutes, exposes a run button, and is categorized as Rates. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000. The endpoint returns rows like [{"auction_date": "2026-07-14", "security": "10Y Note", "size_bn": 42}, {"auction_date": "2026-07-15", "security": "30Y Bond", "size_bn": 25}] — Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.. Publish it with manage_backends add.
+
+- Novelty: Unique settings/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/auction_cache_grid.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_settings_exception_refresh_grid` — Compose the configured Exception Refresh Grid widget
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: medium · split: train
+
+> Register "Execution Desk Data" (http://localhost:7806) with exactly one configured widget. Requirements: `exception_refresh_grid`: name "Exception Refresh Grid", description "Execution exceptions with manual refresh.", endpoint /exception-refresh, type table, gridData w=20 h=9; it auto-refreshes every 45 seconds, exposes a run button, is categorized as Execution, and caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000. The endpoint returns rows like [{"age_min": 12, "order_id": "O-1042", "symbol": "AAPL"}, {"age_min": 7, "order_id": "O-1043", "symbol": "MSFT"}] — Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}..
+
+- Novelty: Unique settings/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_refresh_grid.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_settings_gas_refresh_metric` — Compose the configured Gas Refresh Metric widget
+
+**L3** · widget-building · workflow: portfolio-morning-review · crypto · difficulty: medium · split: validation
+
+> Check the workspace, then connect "Chain TVL Data" at http://localhost:7802 serving one configured widgets.json entry: `gas_refresh_metric`: name "Gas Refresh Metric", description "Auto-refreshing gas snapshot.", endpoint /gas-refresh, type metric, sized w=6 h=4 on the grid, category "Network Ops", runButton true; it auto-refreshes every 30 seconds. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.. Publish it with manage_backends add.
+
+- Novelty: Unique settings/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/gas_refresh_metric.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_settings_runbook_markdown` — Compose the configured Runbook Markdown widget
+
+**L3** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: medium · split: test
+
+> Register "Vendor SLA Data" (http://localhost:7804) with exactly one configured widget. Requirements: `runbook_markdown`: name "Runbook Markdown", description "Configured SLA runbook note.", endpoint /runbook-markdown, type markdown, sized w=12 h=8 on the grid, category "Runbooks", source "sla-runbook", runButton true; it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000..
+
+- Novelty: Unique settings/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/runbook_markdown.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_types_call_replay_video` — Compose the Call Replay Video content widget
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: train
+
+> Build the widgets.json for "Earnings Prep Data" at http://localhost:7805. It has exactly one entry, `call_replay_video`: name "Call Replay Video", description "Selected earnings replay video.", endpoint /call-replay-video, type youtube, sized w=20 h=12 on the grid, category "Earnings Media", params required: video — a dropdown (type endpoint), labeled "Video", options fetched from /call-video-options, default "q1-call"; it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.. Then add the backend.
+
+- Novelty: Unique types/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/call_replay_video.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_types_gas_priority_metric` — Compose the Gas Priority content widget
+
+**L3** · widget-building · workflow: portfolio-morning-review · crypto · difficulty: medium · split: train
+
+> Build the widgets.json for "Chain TVL Data" at http://localhost:7802. It has exactly one entry, `gas_priority_metric`: name "Gas Priority", description "Priority gas fee monitor.", endpoint /gas-priority, type metric, sized w=6 h=4 on the grid, category "Network Ops", runButton true; it auto-refreshes every 30 seconds. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.. Then add the backend.
+
+- Novelty: Unique types/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/gas_priority_metric.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_types_policy_digest_pdf` — Compose the Policy Digest PDF content widget
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: medium · split: validation
+
+> Build the widgets.json for "Surveillance Data" at http://localhost:7807. It has exactly one entry, `policy_digest_pdf`: name "Policy Digest PDF", description "Current surveillance policy digest.", endpoint /policy-digest-pdf, type pdf, sized w=16 h=14 on the grid, category "Surveillance", source "/policy/digest.pdf"; it caches results for 30 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.. Then add the backend.
+
+- Novelty: Unique types/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/policy_digest_pdf.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_types_vol_playbook_note` — Compose the Vol Playbook Note content widget
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: medium · split: test
+
+> Build the widgets.json for "Vol Desk Data" at http://localhost:7801. It has exactly one entry, `vol_playbook_note`: name "Vol Playbook Note", description "Markdown playbook for the vol desk.", endpoint /vol-playbook, type markdown, sized w=12 h=8 on the grid, category "Volatility", params required: section — a text input (type text), labeled "Section", default "morning", described "Playbook section to open."; it caches results for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000.. Then add the backend.
+
+- Novelty: Unique types/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vol_playbook_note.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_advanced_case_room_omni_room` — Assemble the Case QA Room
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: hard · split: train
+
+> Build both files for "Surveillance Data" at http://localhost:7807. Widgets: `case_room_omni`: name "Case Room Omni", description "Omni search over surveillance cases.", endpoint /case-room-qa, type omni, sized w=20 h=9 on the grid, category "Compliance", params required: prompt — a text input (type text), labeled "Prompt", hidden from the UI (show false), described "Question to run over the case corpus."; `alert_queue`: name "Alert Queue", description "Open surveillance alerts.", endpoint /alert-queue, type table, sized w=20 h=9 on the grid, params required: severity — a text input (type text), labeled "Severity", static options ["High"="high", "Medium"="medium", "Low"="low"], default "high", table columns required (field → header (type, extras)): alert_id → header "Alert" (text); desk → header "Desk" (text); severity → header "Severity" (text, titleCase render); age_days → header "Age (d)" (number, int formatter); `alert_metric`: name "Open Alerts", description "Open alert count.", endpoint /alert-count, type metric, sized w=5 h=4 on the grid All of `case_room_omni`, `alert_queue` take the same shared param: severity_scope — a text input (type text), labeled "Severity scope", static options ["High"="high", "Medium"="medium", "Low"="low"], default "high".. App: app "Case QA Room", description "Case questions, alert queue, and posture.", tab `qa` named "Q&A" places: `case_room_omni` at x=0 y=0 w=20 h=9; `alert_metric` at x=20 y=0 w=8 h=5, tab `queue` named "Queue" places: `alert_queue` at x=0 y=0 w=24 h=10, group "Severity Sync" (type param) syncing param severity_scope across ["case_room_omni", "alert_queue"]. Publish both in one add.
+
+- Novelty: Unique advanced/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric,Surveillance Data/alert_queue,Surveillance Data/case_room_omni; appdefs:Surveillance Data/Case QA Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_advanced_macro_advanced_chart_room` — Assemble the Macro Chart Room
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: hard · split: train
+
+> Check the workspace, then publish "Rates Watch Data" at http://localhost:7803 in one add. widgets.json serves: `macro_advanced_chart`: name "Macro Advanced Chart", description "TradingView chart for treasury futures.", endpoint /macro-udf, type advanced_charting, sized w=20 h=18 on the grid, category "Macro", data.defaultSymbol "ZN", data.updateFrequency 30000; `yield_curve`: name "Yield Curve", description "Plotly treasury yield curve snapshot.", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, raw true; `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid. Desk convention: every widget this backend serves carries staleTime 900000. apps.json ships app "Macro Chart Room", description "TradingView rates chart, curve, and spread.", tab `chart` named "Chart" places: `macro_advanced_chart` at x=0 y=0 w=20 h=18; `curve_spread_metric` at x=20 y=0 w=8 h=5, tab `curve` named "Curve" places: `yield_curve` at x=0 y=0 w=20 h=9.
+
+- Novelty: Unique advanced/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_spread_metric,Rates Watch Data/macro_advanced_chart,Rates Watch Data/yield_curve; appdefs:Rates Watch Data/Macro Chart Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_advanced_orders_ops_stream_room` — Assemble the Execution Stream Room
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: medium · split: validation
+
+> Check the workspace, then publish "Execution Desk Data" at http://localhost:7806 in one add. widgets.json serves: `orders_ops_stream`: name "Orders Ops Stream", description "Streaming order tape for the ops room.", endpoint /orders-ops-stream, type live_grid, sized w=24 h=10 on the grid, wsEndpoint "wss://execution.example/ops-orders", refetchInterval false, table columns required (field → header (type, extras)): order_id → header "Order" (text); px → header "Price" (number, showCellChange render) with renderFnParams {"colorValueKey": "px_change"}, data.updateFrequency 1000, data.wsRowIdColumn "order_id"; `exception_metric`: name "Exceptions", description "Open execution exceptions.", endpoint /exception-count, type metric, sized w=5 h=4 on the grid All of `orders_ops_stream`, `exception_metric` take the same shared param: venue_scope — a text input (type text), labeled "Venue scope", default "ARCA", described "Venue reviewed across the stream room.".. apps.json ships app "Execution Stream Room", description "Live orders and exception posture.", tab `stream` named "Stream" places: `orders_ops_stream` at x=0 y=0 w=24 h=10, tab `exceptions` named "Exceptions" places: `exception_metric` at x=0 y=0 w=8 h=5, group "Venue Sync" (type param) syncing param venue_scope across ["orders_ops_stream", "exception_metric"].
+
+- Novelty: Unique advanced/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/orders_ops_stream; appdefs:Execution Desk Data/Execution Stream Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_advanced_vix_room_chart_room` — Assemble the Vol Chart Room
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: medium · split: test
+
+> Check the workspace, then publish "Vol Desk Data" at http://localhost:7801 in one add. widgets.json serves: `vix_room_chart`: name "VIX Advanced Chart", description "TradingView advanced charting for VIX futures.", endpoint /udf, type advanced_charting, sized w=20 h=20 on the grid, data.defaultSymbol "VIX", data.updateFrequency 60000; `vix_history`: name "VIX History", description "Daily CBOE VIX closes with returns.", endpoint /vix-history, type table, sized w=20 h=9 on the grid, params required: window — a number input (type number), labeled "Window", default 30, min 5, max 365, table columns required (field → header (type, extras)): date → header "Date" (dateString); close → header "Close" (number); return_pct → header "Return %" (number, percent formatter, greenRed render) All of `vix_room_chart`, `vix_history` take the same shared param: window_days — a number input (type number), labeled "Window days", default 30, min 5, max 365.. apps.json ships app "Vol Chart Room", description "TradingView chart and historical context.", tab `chart` named "Chart" places: `vix_room_chart` at x=0 y=0 w=20 h=20, tab `history` named "History" places: `vix_history` at x=0 y=0 w=20 h=9, group "Window Sync" (type param) syncing param window_days across ["vix_room_chart", "vix_history"].
+
+- Novelty: Unique advanced/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_history,Vol Desk Data/vix_room_chart; appdefs:Vol Desk Data/Vol Chart Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_aggrid_case_aging` — Assemble the Case Room app around Case Aging
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: hard · split: train
+
+> Build both files for "Surveillance Data" at http://localhost:7807. Widgets: `case_aging`: name "Case Aging", description "Open surveillance cases by age bucket.", endpoint /case-aging, type table, gridData w=20 h=9, columns derived from served rows like [{"age_days": 12, "case_id": "C-1042", "desk": "Rates"}, {"age_days": 4, "case_id": "C-1044", "desk": "Equities"}] — Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent.. Desk convention: every widget this backend serves carries staleTime 900000; `alert_queue`: name "Alert Queue", description "Open surveillance alerts.", endpoint /alert-queue, type table, sized w=20 h=9 on the grid, params required: severity — a text input (type text), labeled "Severity", static options ["High"="high", "Medium"="medium", "Low"="low"], default "high", table columns required (field → header (type, extras)): alert_id → header "Alert" (text); desk → header "Desk" (text); severity → header "Severity" (text, titleCase render); age_days → header "Age (d)" (number, int formatter); `alert_metric`: name "Open Alerts", description "Open alert count.", endpoint /alert-count, type metric, sized w=5 h=4 on the grid. App: app "Case Room", description "Cases, alerts, posture.", tab `cases` named "Cases" places: `case_aging` at x=0 y=0 w=20 h=9; `alert_metric` at x=20 y=0 w=12 h=6, tab `queue` named "Queue" places: `alert_queue` at x=0 y=0 w=24 h=10. Publish everything in one add.
+
+- Novelty: Unique aggrid/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric,Surveillance Data/alert_queue,Surveillance Data/case_aging; appdefs:Surveillance Data/Case Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_aggrid_chain_flows` — Assemble the Flow Monitor app around Chain Flows
+
+**L3** · widget-building · workflow: portfolio-morning-review · crypto · difficulty: medium · split: train
+
+> Check the workspace, then publish "Chain TVL Data" at http://localhost:7802 in one add. widgets.json serves 2 entries: `chain_flows`: name "Chain Flows", description "Net flows by chain.", endpoint /chain-flows, type table, gridData w=20 h=9, staleTime 900000, columns derived from served rows like [{"chain": "Ethereum", "inflow_usd": 120000000, "net_pct": 0.033, "outflow_usd": 90000000}, {"chain": "Solana", "inflow_usd": 80000000, "net_pct": -0.019, "outflow_usd": 95000000}] — Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent.. Plus: `gas_metric`: name "Gas Now", description "Current gas price snapshot.", endpoint /gas-now, type metric, sized w=5 h=4 on the grid. apps.json ships app "Flow Monitor", description "Chain flows and gas.", tab `flows` named "Flows" places: `chain_flows` at x=0 y=0 w=20 h=9, tab `gas` named "Gas" places: `gas_metric` at x=0 y=0 w=12 h=6.
+
+- Novelty: Unique aggrid/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chain_flows,Chain TVL Data/gas_metric; appdefs:Chain TVL Data/Flow Monitor.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_aggrid_latency_history` — Assemble the Vendor Health app around Latency History
+
+**L3** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: medium · split: validation
+
+> Connect "Vendor SLA Data" (http://localhost:7804) serving `latency_history`: name "Latency History", description "Vendor latency history.", endpoint /latency-history, type table, gridData w=20 h=9, staleTime 900000, columns derived from served rows like [{"breach": false, "day": "2026-07-01", "latency_ms": 240, "vendor": "AlphaFeed"}, {"breach": true, "day": "2026-07-01", "latency_ms": 610, "vendor": "QuoteStream"}] — Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent.; alongside `breach_metric`: name "Open Breaches", description "Count of open SLA breaches.", endpoint /breach-count, type metric, sized w=6 h=4 on the grid. Ship the app too — app "Vendor Health", description "Latency and breach posture.", tab `latency` named "Latency" places: `latency_history` at x=0 y=0 w=20 h=9, tab `signals` named "Signals" places: `breach_metric` at x=0 y=0 w=12 h=6 — widgets.json and apps.json in the same manage_backends add.
+
+- Novelty: Unique aggrid/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/breach_metric,Vendor SLA Data/latency_history; appdefs:Vendor SLA Data/Vendor Health.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_aggrid_realized_vol_grid` — Assemble the Vol Cockpit app around Realized Vol Grid
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: hard · split: test
+
+> Check the workspace, then publish "Vol Desk Data" at http://localhost:7801 in one add. widgets.json serves 3 entries: `realized_vol_grid`: name "Realized Vol Grid", description "Realized volatility by tenor.", endpoint /realized-vol-grid, type table, gridData w=20 h=9, columns derived from served rows like [{"as_of": "2026-07-01", "realized_pct": 0.182, "tenor": "1M"}, {"as_of": "2026-07-01", "realized_pct": 0.204, "tenor": "3M"}] — Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent.. Desk convention: every widget this backend serves carries staleTime 900000. Plus: `vix_term_structure`: name "VIX Term Structure", description "Plotly curve of VIX futures by expiry.", endpoint /vix-term-structure, type chart, sized w=20 h=9 on the grid, raw true; `vol_regime_metric`: name "Vol Regime", description "Current volatility regime score.", endpoint /vol-regime, type metric, sized w=6 h=4 on the grid. apps.json ships app "Vol Cockpit", description "Realized, term structure, regime.", tab `realized` named "Realized" places: `realized_vol_grid` at x=0 y=0 w=20 h=9; `vol_regime_metric` at x=20 y=0 w=12 h=6, tab `structure` named "Structure" places: `vix_term_structure` at x=0 y=0 w=20 h=9.
+
+- Novelty: Unique aggrid/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/realized_vol_grid,Vol Desk Data/vix_term_structure,Vol Desk Data/vol_regime_metric; appdefs:Vol Desk Data/Vol Cockpit.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_apps_case_command` — Assemble the Case Command app from scratch
+
+**L3** · app-building · workflow: compliance-surveillance · compliance · difficulty: hard · split: train
+
+> Check the workspace, then publish "Surveillance Data" at http://localhost:7807 in one add. widgets.json serves: `case_notes`: name "Case Notes", description "Notes for one surveillance case.", endpoint /case-notes, type markdown, sized w=12 h=8 on the grid, params required: case_id — a text input (type text), labeled "Case", default "C-1042", described "Case identifier."; `alert_queue`: name "Alert Queue", description "Open surveillance alerts.", endpoint /alert-queue, type table, sized w=20 h=9 on the grid, params required: severity — a text input (type text), labeled "Severity", static options ["High"="high", "Medium"="medium", "Low"="low"], default "high", table columns required (field → header (type, extras)): alert_id → header "Alert" (text); desk → header "Desk" (text); severity → header "Severity" (text, titleCase render); age_days → header "Age (d)" (number, int formatter); `alert_metric`: name "Open Alerts", description "Open alert count.", endpoint /alert-count, type metric, sized w=5 h=4 on the grid. Desk convention: every widget this backend serves carries staleTime 900000. apps.json ships app "Case Command", description "Alerts, notes, posture.", tab `queue` named "Queue" places: `alert_queue` at x=0 y=0 w=24 h=10; `alert_metric` at x=24 y=0 w=12 h=6, tab `notes` named "Notes" places: `case_notes` at x=0 y=0 w=20 h=10.
+
+- Novelty: Unique apps/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric,Surveillance Data/alert_queue,Surveillance Data/case_notes; appdefs:Surveillance Data/Case Command.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_apps_chain_deck` — Assemble the Chain Deck app from scratch
+
+**L3** · app-building · workflow: portfolio-morning-review · crypto · difficulty: medium · split: train
+
+> Connect "Chain TVL Data" (http://localhost:7802) with widgets `chains_table`: name "Top Chains by TVL", description "Current TVL of all chains from the desk aggregator.", endpoint /chains-table, type table, sized w=20 h=9 on the grid, table columns required (field → header (type, extras)): name → header "Chain" (text); tvl_usd → header "TVL ($)" (number, int formatter); change_1d → header "1d Change" (number, percent formatter, greenRed render); `chains_chart`: name "TVL by Chain", description "Plotly bar chart of chain TVL.", endpoint /chains-chart, type chart, sized w=20 h=9 on the grid, raw true All of `chains_table`, `chains_chart` take the same shared param: chain — a text input (type text), labeled "Chain", default "Ethereum", described "Chain the deck is focused on.". — and ship the app: app "Chain Deck", description "TVL table and trend.", tab `table` named "Table" places: `chains_table` at x=0 y=0 w=20 h=9, tab `trend` named "Trend" places: `chains_chart` at x=0 y=0 w=20 h=9, group "Chain Sync" (type param) syncing param chain across ["chains_table", "chains_chart"]. Both files in one manage_backends add.
+
+- Novelty: Unique apps/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chains_chart,Chain TVL Data/chains_table; appdefs:Chain TVL Data/Chain Deck.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_apps_earnings_desk` — Assemble the Earnings Desk app from scratch
+
+**L3** · app-building · workflow: earnings-prep · equity-research · difficulty: hard · split: validation
+
+> Connect "Earnings Prep Data" (http://localhost:7805) with widgets `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; `estimate_revisions`: name "Estimate Revisions", description "Street estimate revisions by quarter.", endpoint /estimate-revisions, type table, sized w=20 h=9 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): quarter → header "Quarter" (text); eps_estimate → header "EPS Est" (number); revenue_estimate_b → header "Revenue Est ($B)" (number); `surprise_metric`: name "Avg Surprise", description "Average EPS surprise last 4 quarters.", endpoint /avg-surprise, type metric, sized w=6 h=4 on the grid — and ship the app: app "Earnings Desk", description "Revisions, price, surprises.", tab `revisions` named "Revisions" places: `estimate_revisions` at x=0 y=0 w=20 h=9; `surprise_metric` at x=20 y=0 w=12 h=6, tab `price` named "Price" places: `earnings_chart` at x=0 y=0 w=20 h=9, group "Symbol Sync" (type param) syncing param symbol across ["estimate_revisions", "earnings_chart"]. Both files in one manage_backends add.
+
+- Novelty: Unique apps/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart,Earnings Prep Data/estimate_revisions,Earnings Prep Data/surprise_metric; appdefs:Earnings Prep Data/Earnings Desk.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_apps_rates_desk` — Assemble the Rates Desk app from scratch
+
+**L3** · app-building · workflow: macro-rates-review · macro · difficulty: medium · split: test
+
+> Connect "Rates Watch Data" (http://localhost:7803) with widgets `auction_calendar`: name "Auction Calendar", description "Upcoming treasury auctions.", endpoint /auction-calendar, type table, sized w=20 h=9 on the grid, table columns required (field → header (type, extras)): date → header "Date" (dateString); security → header "Security" (text); size_bn → header "Size ($B)" (number); `yield_curve`: name "Yield Curve", description "Plotly treasury yield curve snapshot.", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, raw true. Desk convention: every widget this backend serves carries staleTime 900000 — and ship the app: app "Rates Desk", description "Auctions and the curve.", tab `auctions` named "Auctions" places: `auction_calendar` at x=0 y=0 w=20 h=9, tab `curve` named "Curve" places: `yield_curve` at x=0 y=0 w=20 h=9. Both files in one manage_backends add.
+
+- Novelty: Unique apps/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/auction_calendar,Rates Watch Data/yield_curve; appdefs:Rates Watch Data/Rates Desk.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_charts_chains_highchart_room` — Assemble the Chain Chart Room chart app
+
+**L3** · widget-building · workflow: portfolio-morning-review · crypto · difficulty: medium · split: train
+
+> Connect "Chain TVL Data" (http://localhost:7802) with widgets `chains_highchart`: name "TVL by Chain (Highcharts)", description "Highcharts rendering of chain TVL.", endpoint /chains-highchart, type chart-highcharts, sized w=20 h=9 on the grid; `chains_table`: name "Top Chains by TVL", description "Current TVL of all chains from the desk aggregator.", endpoint /chains-table, type table, sized w=20 h=9 on the grid, table columns required (field → header (type, extras)): name → header "Chain" (text); tvl_usd → header "TVL ($)" (number, int formatter); change_1d → header "1d Change" (number, percent formatter, greenRed render) All of `chains_highchart`, `chains_table` take the same shared param: chain_scope — a text input (type text), labeled "Chain scope", default "Ethereum", described "Chain reviewed across chart and table.".. Ship the chart-led app too: app "Chain Chart Room", description "Highcharts chain view and TVL table.", tab `chart` named "Chart" places: `chains_highchart` at x=0 y=0 w=20 h=9, tab `table` named "Table" places: `chains_table` at x=0 y=0 w=20 h=9, group "Chain Sync" (type param) syncing param chain_scope across ["chains_highchart", "chains_table"]. One manage_backends add.
+
+- Novelty: Unique charts/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chains_highchart,Chain TVL Data/chains_table; appdefs:Chain TVL Data/Chain Chart Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_charts_earnings_chart_room` — Assemble the Earnings Chart Room chart app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: train
+
+> Check the workspace, then publish "Earnings Prep Data" at http://localhost:7805 in one add. widgets.json serves: `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; `estimate_revisions`: name "Estimate Revisions", description "Street estimate revisions by quarter.", endpoint /estimate-revisions, type table, sized w=20 h=9 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): quarter → header "Quarter" (text); eps_estimate → header "EPS Est" (number); revenue_estimate_b → header "Revenue Est ($B)" (number); `surprise_metric`: name "Avg Surprise", description "Average EPS surprise last 4 quarters.", endpoint /avg-surprise, type metric, sized w=6 h=4 on the grid All of `earnings_chart`, `estimate_revisions` take the same shared param: period — a text input (type text), labeled "Period", static options ["Quarterly"="quarterly", "Annual"="annual"], default "quarterly".. apps.json ships app "Earnings Chart Room", description "EPS chart, revisions, and surprise metric.", tab `chart` named "Chart" places: `earnings_chart` at x=0 y=0 w=20 h=9; `surprise_metric` at x=20 y=0 w=6 h=4, tab `revisions` named "Revisions" places: `estimate_revisions` at x=0 y=0 w=20 h=9, group "Period Sync" (type param) syncing param period across ["earnings_chart", "estimate_revisions"].
+
+- Novelty: Unique charts/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart,Earnings Prep Data/estimate_revisions,Earnings Prep Data/surprise_metric; appdefs:Earnings Prep Data/Earnings Chart Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_charts_pipeline_vegalite_room` — Assemble the Pipeline Chart Room chart app
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: hard · split: validation
+
+> Build both files for "Healthcare Research Data" at http://localhost:7808. Widgets: `pipeline_vegalite`: name "Pipeline Mix (Vega-Lite)", description "Vega-Lite bar spec of pipeline phase mix.", endpoint /pipeline-vegalite, type chart-vegalite, sized w=20 h=9 on the grid; `trial_catalysts`: name "Trial Catalysts", description "Upcoming clinical trial readouts.", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, params required: ticker — a dropdown (type endpoint), labeled "Ticker", options fetched from /tickers, default "PFE", table columns required (field → header (type, extras)): ticker → header "Ticker" (text); phase → header "Phase" (text); readout_date → header "Readout" (dateString); `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid All of `pipeline_vegalite`, `trial_catalysts` take the same shared param: pipeline_ticker — a dropdown (type endpoint), labeled "Pipeline ticker", options fetched from /tickers, default "PFE".. App: app "Pipeline Chart Room", description "Pipeline chart, trials, and catalyst count.", tab `pipeline` named "Pipeline" places: `pipeline_vegalite` at x=0 y=0 w=20 h=9; `catalyst_metric` at x=20 y=0 w=6 h=4, tab `trials` named "Trials" places: `trial_catalysts` at x=0 y=0 w=20 h=9, group "Pipeline Sync" (type param) syncing param pipeline_ticker across ["pipeline_vegalite", "trial_catalysts"]. Publish together.
+
+- Novelty: Unique charts/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric,Healthcare Research Data/pipeline_vegalite,Healthcare Research Data/trial_catalysts; appdefs:Healthcare Research Data/Pipeline Chart Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_charts_yield_curve_room` — Assemble the Rates Chart Room chart app
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: medium · split: test
+
+> Check the workspace, then publish "Rates Watch Data" at http://localhost:7803 in one add. widgets.json serves: `yield_curve`: name "Yield Curve", description "Plotly treasury yield curve snapshot.", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, raw true; `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid All of `yield_curve`, `curve_spread_metric` take the same shared param: curve_scope — a text input (type text), labeled "Curve scope", default "UST 2s10s", described "Curve segment shared across chart and spread.".. apps.json ships app "Rates Chart Room", description "Curve chart and spread metric.", tab `curve` named "Curve" places: `yield_curve` at x=0 y=0 w=20 h=9, tab `spread` named "Spread" places: `curve_spread_metric` at x=0 y=0 w=6 h=4, group "Curve Sync" (type param) syncing param curve_scope across ["yield_curve", "curve_spread_metric"].
+
+- Novelty: Unique charts/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_spread_metric,Rates Watch Data/yield_curve; appdefs:Rates Watch Data/Rates Chart Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_forms_case_intake_room` — Assemble the Case Intake Room form app
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: medium · split: train
+
+> Check the workspace, then publish "Surveillance Data" at http://localhost:7807 in one add. widgets.json serves: `case_escalation_form`: name "Case Escalation Form", description "Escalate a surveillance case to a reviewer.", endpoint /case-escalation, type table, sized w=20 h=10 on the grid, params required: escalation — a form submitting POST to /case-escalation-submit with inputs [case_id — a text input (type text), labeled "Case", default "C-1042"; due_date — a date picker (type date), labeled "Due date", default "$currentDate+2d"; escalate — a button (type button), labeled "Escalate"] (that bracket is the complete list of the form's inputParams); `alert_queue`: name "Alert Queue", description "Open surveillance alerts.", endpoint /alert-queue, type table, sized w=20 h=9 on the grid, params required: severity — a text input (type text), labeled "Severity", static options ["High"="high", "Medium"="medium", "Low"="low"], default "high", table columns required (field → header (type, extras)): alert_id → header "Alert" (text); desk → header "Desk" (text); severity → header "Severity" (text, titleCase render); age_days → header "Age (d)" (number, int formatter) All of `case_escalation_form`, `alert_queue` take the same shared param: case_scope — a text input (type text), labeled "Case scope", default "C-1042", described "Case bundle reviewed by intake and status.".. apps.json ships app "Case Intake Room", description "Case escalation and alert status.", tab `intake` named "Intake" places: `case_escalation_form` at x=0 y=0 w=20 h=10, tab `status` named "Status" places: `alert_queue` at x=0 y=0 w=24 h=10, group "Case Sync" (type param) syncing param case_scope across ["case_escalation_form", "alert_queue"].
+
+- Novelty: Unique forms/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_queue,Surveillance Data/case_escalation_form; appdefs:Surveillance Data/Case Intake Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_forms_exception_intake_room` — Assemble the Exception Intake Room form app
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: hard · split: train
+
+> Check the workspace, then publish "Execution Desk Data" at http://localhost:7806 in one add. widgets.json serves: `venue_exception_form`: name "Venue Exception Form", description "Record an execution venue exception.", endpoint /venue-exception, type table, sized w=20 h=10 on the grid, params required: exception — a form submitting POST to /venue-exception-submit with inputs [venue — a text input (type text), labeled "Venue", default "ARCA"; slippage_bps — a number input (type number), labeled "Slippage bps", default 12, min 0; record — a button (type button), labeled "Record"] (that bracket is the complete list of the form's inputParams); `open_orders`: name "Open Orders", description "Live open orders blotter.", endpoint /open-orders, type table, sized w=20 h=9 on the grid, table columns required (field → header (type, extras)): order_id → header "Order" (text); symbol → header "Symbol" (text); qty → header "Qty" (number, int formatter); status → header "Status" (text, titleCase render); `exception_metric`: name "Exceptions", description "Open execution exceptions.", endpoint /exception-count, type metric, sized w=5 h=4 on the grid All of `venue_exception_form`, `open_orders` take the same shared param: venue_scope — a text input (type text), labeled "Venue scope", default "ARCA", described "Venue reviewed across intake and status.".. apps.json ships app "Exception Intake Room", description "Venue exceptions and order status.", tab `intake` named "Intake" places: `venue_exception_form` at x=0 y=0 w=20 h=10; `exception_metric` at x=20 y=0 w=8 h=6, tab `status` named "Status" places: `open_orders` at x=0 y=0 w=20 h=9, group "Venue Sync" (type param) syncing param venue_scope across ["venue_exception_form", "open_orders"].
+
+- Novelty: Unique forms/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/open_orders,Execution Desk Data/venue_exception_form; appdefs:Execution Desk Data/Exception Intake Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_forms_trial_intake_room` — Assemble the Trial Intake Room form app
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: hard · split: validation
+
+> Check the workspace, then publish "Healthcare Research Data" at http://localhost:7808 in one add. widgets.json serves: `trial_readout_form`: name "Trial Readout Form", description "Capture a clinical trial readout note.", endpoint /trial-readout-form, type table, sized w=20 h=10 on the grid, category "Research", params required: readout — a form submitting POST to /trial-readout-submit with inputs [ticker — a text input (type text), labeled "Ticker", default "PFE"; readout_date — a date picker (type date), labeled "Readout date", default "2026-08-19"; save — a button (type button), labeled "Save"] (that bracket is the complete list of the form's inputParams); `trial_catalysts`: name "Trial Catalysts", description "Upcoming clinical trial readouts.", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, params required: ticker — a dropdown (type endpoint), labeled "Ticker", options fetched from /tickers, default "PFE", table columns required (field → header (type, extras)): ticker → header "Ticker" (text); phase → header "Phase" (text); readout_date → header "Readout" (dateString); `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid All of `trial_readout_form`, `trial_catalysts` take the same shared param: trial_ticker — a dropdown (type endpoint), labeled "Trial ticker", options fetched from /tickers, default "PFE".. apps.json ships app "Trial Intake Room", description "Trial readouts and catalyst status.", tab `intake` named "Intake" places: `trial_readout_form` at x=0 y=0 w=20 h=10; `catalyst_metric` at x=20 y=0 w=8 h=6, tab `status` named "Status" places: `trial_catalysts` at x=0 y=0 w=20 h=9, group "Trial Sync" (type param) syncing param trial_ticker across ["trial_readout_form", "trial_catalysts"].
+
+- Novelty: Unique forms/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric,Healthcare Research Data/trial_catalysts,Healthcare Research Data/trial_readout_form; appdefs:Healthcare Research Data/Trial Intake Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_forms_vendor_intake_room` — Assemble the Vendor Intake Room form app
+
+**L3** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: medium · split: test
+
+> Check the workspace, then publish "Vendor SLA Data" at http://localhost:7804 in one add. widgets.json serves: `vendor_intake_form`: name "Vendor Intake Form", description "Submit a new vendor record into the SLA register.", endpoint /vendor-intake, type table, sized w=20 h=10 on the grid, params required: intake — a form submitting POST to /vendor-intake-submit with inputs [vendor — a text input (type text), labeled "Vendor"; tier — a number input (type number), labeled "Tier"; submit — a button (type button), labeled "Add Vendor"] (that bracket is the complete list of the form's inputParams); `vendor_sla_table`: name "Vendor SLA Status", description "Vendor SLA state with breach flags.", endpoint /vendor-sla, type table, sized w=20 h=9 on the grid, params required: status — a text input (type text), labeled "Status", static options ["Open"="Open", "Escalated"="Escalated", "Resolved"="Resolved"], default "Open", table columns required (field → header (type, extras)): vendor → header "Vendor" (text); status → header "Status" (text, titleCase render); latency_ms → header "Latency (ms)" (number); breach → header "Breach" (boolean) All of `vendor_intake_form`, `vendor_sla_table` take the same shared param: vendor_scope — a text input (type text), labeled "Vendor scope", default "Acme Cloud", described "Vendor reviewed across intake and status.".. apps.json ships app "Vendor Intake Room", description "Vendor intake and status.", tab `intake` named "Intake" places: `vendor_intake_form` at x=0 y=0 w=20 h=10, tab `status` named "Status" places: `vendor_sla_table` at x=0 y=0 w=20 h=9, group "Vendor Sync" (type param) syncing param vendor_scope across ["vendor_intake_form", "vendor_sla_table"].
+
+- Novelty: Unique forms/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/vendor_intake_form,Vendor SLA Data/vendor_sla_table; appdefs:Vendor SLA Data/Vendor Intake Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_grouping_click_preview_desk` — Assemble the grouped Click Preview Desk app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: train
+
+> Check the workspace, then publish "Earnings Prep Data" at http://localhost:7805 in one add. widgets.json serves: `click_preview_table`: name "Click Preview Table", description "Preview rows whose symbol cell syncs the app.", endpoint /click-preview-table, type table, sized w=20 h=9 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): symbol → header "Symbol" (text, cellOnClick render) with renderFnParams {"actionType": "groupBy", "groupByParamName": "symbol"}; revision_pct → header "Revision %" (number, percent formatter); The `symbol` column's cell-click action must group by the shared `symbol` param.; `earnings_note`: name "Earnings Preview", description "Preview note for the earnings call.", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL". apps.json ships app "Click Preview Desk", description "Clickable preview rows and notes.", tab `table` named "Table" places: `click_preview_table` at x=0 y=0 w=20 h=9, tab `note` named "Note" places: `earnings_note` at x=0 y=0 w=12 h=8, group "Click Preview Sync" (type param) syncing param symbol across ["click_preview_table", "earnings_note"].
+
+- Novelty: Unique grouping/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/click_preview_table,Earnings Prep Data/earnings_note; appdefs:Earnings Prep Data/Click Preview Desk.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_grouping_click_revision_desk` — Assemble the grouped Click Revision Desk app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: train
+
+> Build both files for "Earnings Prep Data" at http://localhost:7805. Widgets: `click_revision_table`: name "Click Revision Table", description "Revision rows whose symbol cell syncs the app.", endpoint /click-revision-table, type table, sized w=20 h=9 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): symbol → header "Symbol" (text, cellOnClick render) with renderFnParams {"actionType": "groupBy", "groupByParamName": "symbol"}; revision_pct → header "Revision %" (number, percent formatter); The `symbol` column's cell-click action must group by the shared `symbol` param.; `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL". App: app "Click Revision Desk", description "Clickable revisions and EPS history.", tab `table` named "Table" places: `click_revision_table` at x=0 y=0 w=20 h=9, tab `chart` named "Chart" places: `earnings_chart` at x=0 y=0 w=20 h=9, group "Click Revision Sync" (type param) syncing param symbol across ["click_revision_table", "earnings_chart"]. One add.
+
+- Novelty: Unique grouping/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/click_revision_table,Earnings Prep Data/earnings_chart; appdefs:Earnings Prep Data/Click Revision Desk.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_grouping_click_season_desk` — Assemble the grouped Click Season Desk app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: validation
+
+> Build both files for "Earnings Prep Data" at http://localhost:7805. Widgets: `click_season_table`: name "Click Season Table", description "Season rows whose symbol cell syncs revisions.", endpoint /click-season-table, type table, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): symbol → header "Symbol" (text, cellOnClick render) with renderFnParams {"actionType": "groupBy", "groupByParamName": "symbol"}; revision_pct → header "Revision %" (number, percent formatter); The `symbol` column's cell-click action must group by the shared `symbol` param.; `estimate_revisions`: name "Estimate Revisions", description "Street estimate revisions by quarter.", endpoint /estimate-revisions, type table, sized w=20 h=9 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): quarter → header "Quarter" (text); eps_estimate → header "EPS Est" (number); revenue_estimate_b → header "Revenue Est ($B)" (number); `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL". App: app "Click Season Desk", description "Clickable season rows, revisions, and chart.", tab `season` named "Season" places: `click_season_table` at x=0 y=0 w=20 h=9; `estimate_revisions` at x=20 y=0 w=20 h=9, tab `chart` named "Chart" places: `earnings_chart` at x=0 y=0 w=20 h=9, group "Click Season Sync" (type param) syncing param symbol across ["click_season_table", "estimate_revisions", "earnings_chart"]. One add.
+
+- Novelty: Unique grouping/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/click_season_table,Earnings Prep Data/earnings_chart,Earnings Prep Data/estimate_revisions; appdefs:Earnings Prep Data/Click Season Desk.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_grouping_click_summary_desk` — Assemble the grouped Click Summary Desk app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: test
+
+> Build both files for "Earnings Prep Data" at http://localhost:7805. Widgets: `click_summary_table`: name "Click Summary Table", description "Summary rows whose symbol cell syncs every tab.", endpoint /click-summary-table, type table, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): symbol → header "Symbol" (text, cellOnClick render) with renderFnParams {"actionType": "groupBy", "groupByParamName": "symbol"}; revision_pct → header "Revision %" (number, percent formatter); The `symbol` column's cell-click action must group by the shared `symbol` param.; `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; `earnings_note`: name "Earnings Preview", description "Preview note for the earnings call.", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL". App: app "Click Summary Desk", description "Clickable summary, chart, and note.", tab `summary` named "Summary" places: `click_summary_table` at x=0 y=0 w=20 h=9; `earnings_note` at x=20 y=0 w=12 h=8, tab `chart` named "Chart" places: `earnings_chart` at x=0 y=0 w=20 h=9, group "Click Summary Sync" (type param) syncing param symbol across ["click_summary_table", "earnings_chart", "earnings_note"]. One add.
+
+- Novelty: Unique grouping/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/click_summary_table,Earnings Prep Data/earnings_chart,Earnings Prep Data/earnings_note; appdefs:Earnings Prep Data/Click Summary Desk.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_params_earnings_param_review` — Assemble the Earnings Param Review app with shared parameters
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: medium · split: train
+
+> Check the workspace, then publish "Earnings Prep Data" at http://localhost:7805 in one add. widgets.json serves: `estimate_revisions`: name "Estimate Revisions", description "Street estimate revisions by quarter.", endpoint /estimate-revisions, type table, sized w=20 h=9 on the grid, table columns required (field → header (type, extras)): quarter → header "Quarter" (text); eps_estimate → header "EPS Est" (number); revenue_estimate_b → header "Revenue Est ($B)" (number); `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true; All of `estimate_revisions`, `earnings_chart` take the same shared param: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL".. apps.json ships app "Earnings Param Review", description "Symbol-linked revisions and EPS history.", tab `revisions` named "Revisions" places: `estimate_revisions` at x=0 y=0 w=20 h=9, tab `history` named "History" places: `earnings_chart` at x=0 y=0 w=20 h=9.
+
+- Novelty: Unique params/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart,Earnings Prep Data/estimate_revisions; appdefs:Earnings Prep Data/Earnings Param Review.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_params_symbol_param_desk` — Assemble the Symbol Param Desk app with shared parameters
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: train
+
+> Check the workspace, then publish "Earnings Prep Data" at http://localhost:7805 in one add. widgets.json serves: `earnings_note`: name "Earnings Preview", description "Preview note for the earnings call.", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid; `estimate_revisions`: name "Estimate Revisions", description "Street estimate revisions by quarter.", endpoint /estimate-revisions, type table, sized w=20 h=9 on the grid, table columns required (field → header (type, extras)): quarter → header "Quarter" (text); eps_estimate → header "EPS Est" (number); revenue_estimate_b → header "Revenue Est ($B)" (number); `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true; All of `earnings_note`, `estimate_revisions`, `earnings_chart` take the same shared param: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL".. apps.json ships app "Symbol Param Desk", description "Shared-symbol earnings review.", tab `review` named "Review" places: `earnings_note` at x=0 y=0 w=12 h=8; `estimate_revisions` at x=12 y=0 w=20 h=9, tab `price` named "Price" places: `earnings_chart` at x=0 y=0 w=20 h=9.
+
+- Novelty: Unique params/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart,Earnings Prep Data/earnings_note,Earnings Prep Data/estimate_revisions; appdefs:Earnings Prep Data/Symbol Param Desk.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_params_trial_param_review` — Assemble the Trial Param Review app with shared parameters
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: medium · split: validation
+
+> Build both files for "Healthcare Research Data" at http://localhost:7808. Widgets: `trial_catalysts`: name "Trial Catalysts", description "Upcoming clinical trial readouts.", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, table columns required (field → header (type, extras)): ticker → header "Ticker" (text); phase → header "Phase" (text); readout_date → header "Readout" (dateString); `pipeline_chart`: name "Pipeline by Phase", description "Plotly pipeline distribution by phase.", endpoint /pipeline-by-phase, type chart, sized w=20 h=9 on the grid, raw true; All of `trial_catalysts`, `pipeline_chart` take the same shared param: ticker — a dropdown (type endpoint), labeled "Ticker", options fetched from /tickers, default "PFE".. App: app "Trial Param Review", description "Ticker-filtered catalysts and pipeline mix.", tab `catalysts` named "Catalysts" places: `trial_catalysts` at x=0 y=0 w=20 h=9, tab `pipeline` named "Pipeline" places: `pipeline_chart` at x=0 y=0 w=20 h=9. One add.
+
+- Novelty: Unique params/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/pipeline_chart,Healthcare Research Data/trial_catalysts; appdefs:Healthcare Research Data/Trial Param Review.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_params_vol_param_cockpit` — Assemble the Vol Param Cockpit app with shared parameters
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: hard · split: test
+
+> Connect "Vol Desk Data" (http://localhost:7801) with widgets `vol_screener`: name "Vol Screener", description "Screen names by implied-vol criteria.", endpoint /vol-screener, type table, sized w=24 h=10 on the grid, params required: ticker — a ticker picker (type ticker), labeled "Ticker"; as_of — a date picker (type date), labeled "As of", default "$currentDate-1d"; only_liquid — a boolean toggle (type boolean), labeled "Liquid only", default true; `vix_history`: name "VIX History", description "Daily CBOE VIX closes with returns.", endpoint /vix-history, type table, sized w=20 h=9 on the grid, params required: window — a number input (type number), labeled "Window", default 30, min 5, max 365, table columns required (field → header (type, extras)): date → header "Date" (dateString); close → header "Close" (number); return_pct → header "Return %" (number, percent formatter, greenRed render); `vol_commentary`: name "Vol Commentary", description "Morning volatility commentary.", endpoint /vol-commentary, type markdown, sized w=12 h=8 on the grid, params required: desk — a text input (type text), labeled "Desk", static options ["Index"="index", "Single Stock"="single"], default "index". Desk convention: every widget this backend serves carries staleTime 900000. Ship the app too: app "Vol Param Cockpit", description "Screen, history, and commentary filters.", tab `screen` named "Screen" places: `vol_screener` at x=0 y=0 w=24 h=10; `vol_commentary` at x=24 y=0 w=12 h=8, tab `history` named "History" places: `vix_history` at x=0 y=0 w=20 h=9.
+
+- Novelty: Unique params/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_history,Vol Desk Data/vol_commentary,Vol Desk Data/vol_screener; appdefs:Vol Desk Data/Vol Param Cockpit.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_settings_alert_metric_room` — Assemble the Surveillance Settings Room configured app
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: hard · split: train
+
+> Connect "Surveillance Data" (http://localhost:7807). Apply this shared configuration once: All three widgets are categorized as Surveillance and cache with staleTime 1800000. Widgets: `alert_metric`: name "Open Alerts", description "Open alert count.", endpoint /alert-count, type metric, sized w=5 h=4 on the grid; `case_notes`: name "Case Notes", description "Notes for one surveillance case.", endpoint /case-notes, type markdown, sized w=12 h=8 on the grid, params required: case_id — a text input (type text), labeled "Case", default "C-1042", described "Case identifier."; `policy_pdf`: name "Policy Digest", description "Latest surveillance policy digest.", endpoint /policy-digest, type pdf, sized w=16 h=14 on the grid. App: app "Surveillance Settings Room", description "Alerts, notes, and policy settings.", tab `alerts` named "Alerts" places: `alert_metric` at x=0 y=0 w=6 h=4; `case_notes` at x=6 y=0 w=12 h=8, tab `policy` named "Policy" places: `policy_pdf` at x=0 y=0 w=16 h=14. One manage_backends add.
+
+- Novelty: Unique settings/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric,Surveillance Data/case_notes,Surveillance Data/policy_pdf; appdefs:Surveillance Data/Surveillance Settings Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_settings_gas_metric_room` — Assemble the Network Settings Room configured app
+
+**L3** · widget-building · workflow: portfolio-morning-review · crypto · difficulty: medium · split: train
+
+> Connect "Chain TVL Data" (http://localhost:7802). Apply this shared configuration once: Both widgets are categorized as Network Ops and refresh every 30000 ms. Widgets: `gas_metric`: name "Gas Now", description "Current gas price snapshot.", endpoint /gas-now, type metric, sized w=5 h=4 on the grid; `protocol_details`: name "Protocol Details", description "Markdown details for one protocol.", endpoint /protocol-details, type markdown, sized w=12 h=8 on the grid, params required: protocol — a text input (type text), labeled "Protocol", default "uniswap", described "Protocol slug to describe.". App: app "Network Settings Room", description "Gas and protocol settings.", tab `gas` named "Gas" places: `gas_metric` at x=0 y=0 w=6 h=4, tab `protocol` named "Protocol" places: `protocol_details` at x=0 y=0 w=12 h=8. One manage_backends add.
+
+- Novelty: Unique settings/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/gas_metric,Chain TVL Data/protocol_details; appdefs:Chain TVL Data/Network Settings Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_settings_surprise_metric_room` — Assemble the Earnings Settings Room configured app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: validation
+
+> Check the workspace, then publish "Earnings Prep Data" at http://localhost:7805 in one add. Shared configuration: All three widgets expose runButton true and refresh every 45000 ms. widgets.json serves: `surprise_metric`: name "Avg Surprise", description "Average EPS surprise last 4 quarters.", endpoint /avg-surprise, type metric, sized w=6 h=4 on the grid; `earnings_note`: name "Earnings Preview", description "Preview note for the earnings call.", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL". apps.json ships app "Earnings Settings Room", description "Surprise, preview, and chart settings.", tab `summary` named "Summary" places: `surprise_metric` at x=0 y=0 w=6 h=4; `earnings_chart` at x=6 y=0 w=20 h=9, tab `preview` named "Preview" places: `earnings_note` at x=0 y=0 w=12 h=8.
+
+- Novelty: Unique settings/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart,Earnings Prep Data/earnings_note,Earnings Prep Data/surprise_metric; appdefs:Earnings Prep Data/Earnings Settings Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_settings_vol_commentary_room` — Assemble the Vol Settings Room configured app
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: medium · split: test
+
+> Connect "Vol Desk Data" (http://localhost:7801). Apply this shared configuration once: Both widgets cache with staleTime 900000. Widgets: `vol_commentary`: name "Vol Commentary", description "Morning volatility commentary.", endpoint /vol-commentary, type markdown, sized w=12 h=8 on the grid, params required: desk — a text input (type text), labeled "Desk", static options ["Index"="index", "Single Stock"="single"], default "index"; `vol_regime_metric`: name "Vol Regime", description "Current volatility regime score.", endpoint /vol-regime, type metric, sized w=6 h=4 on the grid. App: app "Vol Settings Room", description "Cached commentary and regime.", tab `commentary` named "Commentary" places: `vol_commentary` at x=0 y=0 w=12 h=8, tab `regime` named "Regime" places: `vol_regime_metric` at x=0 y=0 w=6 h=4. One manage_backends add.
+
+- Novelty: Unique settings/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vol_commentary,Vol Desk Data/vol_regime_metric; appdefs:Vol Desk Data/Vol Settings Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_types_case_notes_room` — Assemble the Case Research Room content app
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: medium · split: train
+
+> Connect "Surveillance Data" (http://localhost:7807) with widgets `case_notes`: name "Case Notes", description "Notes for one surveillance case.", endpoint /case-notes, type markdown, sized w=12 h=8 on the grid, params required: case_id — a text input (type text), labeled "Case", default "C-1042", described "Case identifier."; `policy_pdf`: name "Policy Digest", description "Latest surveillance policy digest.", endpoint /policy-digest, type pdf, sized w=16 h=14 on the grid All of `case_notes`, `policy_pdf` take the same shared param: case_scope — a text input (type text), labeled "Case scope", default "C-1042", described "Case bundle reviewed across the room.".. Ship the multi-tab app too: app "Case Research Room", description "Case notes and policy digest.", tab `notes` named "Notes" places: `case_notes` at x=0 y=0 w=12 h=8, tab `policy` named "Policy" places: `policy_pdf` at x=0 y=0 w=16 h=14, group "Case Sync" (type param) syncing param case_scope across ["case_notes", "policy_pdf"]. One manage_backends add.
+
+- Novelty: Unique types/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/case_notes,Surveillance Data/policy_pdf; appdefs:Surveillance Data/Case Research Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_types_earnings_calls_video_room` — Assemble the Media Research Room content app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: train
+
+> Check the workspace, then publish "Earnings Prep Data" at http://localhost:7805 in one add. widgets.json serves: `earnings_calls_video`: name "Earnings Call Replays", description "Replay library of earnings calls.", endpoint /call-videos, type youtube, sized w=20 h=12 on the grid, params required: video — a dropdown (type endpoint), labeled "Video", options fetched from /call-video-options, default "q1-call"; `earnings_note`: name "Earnings Preview", description "Preview note for the earnings call.", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; `surprise_metric`: name "Avg Surprise", description "Average EPS surprise last 4 quarters.", endpoint /avg-surprise, type metric, sized w=6 h=4 on the grid All of `earnings_calls_video`, `earnings_note` take the same shared param: symbol_scope — a dropdown (type endpoint), labeled "Symbol scope", options fetched from /symbols, default "AAPL".. apps.json ships app "Media Research Room", description "Replays, previews, and surprise posture.", tab `replays` named "Replays" places: `earnings_calls_video` at x=0 y=0 w=20 h=12; `surprise_metric` at x=20 y=0 w=6 h=4, tab `preview` named "Preview" places: `earnings_note` at x=0 y=0 w=12 h=8, group "Symbol Sync" (type param) syncing param symbol_scope across ["earnings_calls_video", "earnings_note"].
+
+- Novelty: Unique types/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_calls_video,Earnings Prep Data/earnings_note,Earnings Prep Data/surprise_metric; appdefs:Earnings Prep Data/Media Research Room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_types_evidence_files_room` — Assemble the Evidence Hub content app
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: hard · split: validation
+
+> Connect "Surveillance Data" (http://localhost:7807) with widgets `evidence_files`: name "Evidence Files", description "Browse case evidence documents.", endpoint /evidence-files, type multi_file_viewer, sized w=20 h=14 on the grid, params required: file — a dropdown (type endpoint), labeled "File", options fetched from /evidence-file-options, multi-select, default [], roles ["fileSelector"]; `case_notes`: name "Case Notes", description "Notes for one surveillance case.", endpoint /case-notes, type markdown, sized w=12 h=8 on the grid, params required: case_id — a text input (type text), labeled "Case", default "C-1042", described "Case identifier."; `alert_metric`: name "Open Alerts", description "Open alert count.", endpoint /alert-count, type metric, sized w=5 h=4 on the grid All of `evidence_files`, `case_notes` take the same shared param: case_scope — a text input (type text), labeled "Case scope", default "C-1042", described "Case bundle used by the evidence room.".. Ship the multi-tab app too: app "Evidence Hub", description "Evidence, notes, and alert posture.", tab `evidence` named "Evidence" places: `evidence_files` at x=0 y=0 w=20 h=14; `alert_metric` at x=20 y=0 w=6 h=4, tab `notes` named "Notes" places: `case_notes` at x=0 y=0 w=12 h=8, group "Evidence Sync" (type param) syncing param case_scope across ["evidence_files", "case_notes"]. One manage_backends add.
+
+- Novelty: Unique types/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric,Surveillance Data/case_notes,Surveillance Data/evidence_files; appdefs:Surveillance Data/Evidence Hub.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_types_fda_newsfeed_room` — Assemble the Catalyst Wire content app
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: medium · split: test
+
+> Build both files for "Healthcare Research Data" at http://localhost:7808. Widgets: `fda_newsfeed`: name "FDA Notices", description "FDA decision and notice feed.", endpoint /fda-notices, type newsfeed, sized w=12 h=10 on the grid; `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid All of `fda_newsfeed`, `catalyst_metric` take the same shared param: therapy_area — a text input (type text), labeled "Therapy area", default "Oncology", described "Therapy area for the catalyst wire.".. App: app "Catalyst Wire", description "FDA notices and catalyst count.", tab `wire` named "Wire" places: `fda_newsfeed` at x=0 y=0 w=12 h=10, tab `metrics` named "Metrics" places: `catalyst_metric` at x=0 y=0 w=6 h=4, group "Therapy Sync" (type param) syncing param therapy_area across ["fda_newsfeed", "catalyst_metric"]. Publish both together.
+
+- Novelty: Unique types/t3 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric,Healthcare Research Data/fda_newsfeed; appdefs:Healthcare Research Data/Catalyst Wire.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_advanced_case_qa_omni_ship` — Ship, open, and configure Surveillance QA
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: hard · split: train
+
+> Four steps. One: add "Surveillance Data" at http://localhost:7807 serving `case_qa_omni`: name "Case Q&A", description "Ask questions over the surveillance case corpus.", endpoint /case-qa, type omni, sized w=20 h=9 on the grid, staleTime 900000, params required: prompt — a text input (type text), labeled "Prompt", hidden from the UI (show false), described "Question to run over the case corpus."; `alert_queue`: name "Alert Queue", description "Open surveillance alerts.", endpoint /alert-queue, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: severity — a text input (type text), labeled "Severity", static options ["High"="high", "Medium"="medium", "Low"="low"], default "high", table columns required (field → header (type, extras)): alert_id → header "Alert" (text); desk → header "Desk" (text); severity → header "Severity" (text, titleCase render); age_days → header "Age (d)" (number, int formatter); `alert_metric`: name "Open Alerts", description "Open alert count.", endpoint /alert-count, type metric, sized w=5 h=4 on the grid, staleTime 900000. Desk convention: every widget this backend serves carries staleTime 900000, shipping app "Surveillance QA", description "Omni case questions and alerts.", tab `qa` named "Q&A" places: `case_qa_omni` at x=0 y=0 w=20 h=9, tab `alerts` named "Alerts" places: `alert_queue` at x=0 y=0 w=24 h=10. Two: instantiate "Surveillance QA" into "Surveillance QA Dashboard". Three: set prompt to "Show high severity cases" on the opened `case_qa_omni` widget. Four: note titled "Surveillance QA" with text "Surveillance QA is live from Surveillance Data: case QA ready."
+
+- Novelty: Unique advanced/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric,Surveillance Data/alert_queue,Surveillance Data/case_qa_omni; appdefs:Surveillance Data/Surveillance QA; widgets:Surveillance Data/case_qa_omni@*; generated:note@*:Surveillance QA,case QA.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Surveillance Data/case_qa_omni` with data_args ⊇ {"prompt": "Show high severity cases"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Surveillance QA", "case QA" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_advanced_live_orders_grid_ship` — Ship, open, and configure Execution Live Grid
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: hard · split: train
+
+> End to end. Publish "Execution Desk Data" at http://localhost:7806 - widgets.json: `live_orders_grid`: name "Live Orders Grid", description "Streaming order blotter over websocket.", endpoint /live-orders, type live_grid, sized w=24 h=12 on the grid, staleTime 900000, wsEndpoint "live-orders-ws", params required: venue — a text input (type text), labeled "Venue", default "ARCA", described "Execution venue filter.", table columns required (field → header (type, extras)): order_id → header "Order" (text); px → header "Price" (number, showCellChange render) with renderFnParams {"colorValueKey": "px_change"}, data.wsRowIdColumn "order_id"; `exception_metric`: name "Exceptions", description "Open execution exceptions.", endpoint /exception-count, type metric, sized w=5 h=4 on the grid, staleTime 900000; `open_orders`: name "Open Orders", description "Live open orders blotter.", endpoint /open-orders, type table, sized w=20 h=9 on the grid, staleTime 900000, table columns required (field → header (type, extras)): order_id → header "Order" (text); symbol → header "Symbol" (text); qty → header "Qty" (number, int formatter); status → header "Status" (text, titleCase render). Desk convention: every widget this backend serves carries staleTime 900000. apps.json: app "Execution Live Grid", description "Streaming order grid and exceptions.", tab `orders` named "Orders" places: `live_orders_grid` at x=0 y=0 w=24 h=12, tab `signals` named "Signals" places: `exception_metric` at x=24 y=0 w=8 h=5. Then instantiate "Execution Live Grid" into a dashboard named "Execution Live Grid Dashboard", set venue to "EDGX" on the opened `live_orders_grid` widget, and leave a note titled "Execution Live Grid" that says exactly: "Execution Live Grid is live from Execution Desk Data: live stream ready."
+
+- Novelty: Unique advanced/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/live_orders_grid,Execution Desk Data/open_orders; appdefs:Execution Desk Data/Execution Live Grid; widgets:Execution Desk Data/live_orders_grid@*; generated:note@*:Execution Live Grid,live stream.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Execution Desk Data/live_orders_grid` with data_args ⊇ {"venue": "EDGX"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Execution Live Grid", "live stream" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_advanced_rates_live_chart_ship` — Ship, open, and configure Rates Advanced Live
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: hard · split: train
+
+> End to end. Publish "Rates Watch Data" at http://localhost:7803 - widgets.json: `rates_live_chart`: name "Rates Live Chart", description "TradingView chart for treasury futures.", endpoint /rates-live-udf, type advanced_charting, sized w=20 h=18 on the grid, category "Macro", staleTime 900000, params required: contract — a text input (type text), labeled "Contract", default "ZN", described "Treasury futures contract.", data.defaultSymbol "ZN", data.updateFrequency 30000; `yield_curve`: name "Yield Curve", description "Plotly treasury yield curve snapshot.", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, staleTime 900000, raw true; `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid, staleTime 900000. Desk convention: every widget this backend serves carries staleTime 900000. apps.json: app "Rates Advanced Live", description "TradingView rates chart and curve.", tab `chart` named "Chart" places: `rates_live_chart` at x=0 y=0 w=20 h=18, tab `curve` named "Curve" places: `yield_curve` at x=0 y=0 w=20 h=9. Then instantiate "Rates Advanced Live" into a dashboard named "Rates Advanced Live Dashboard", set contract to "ZB" on the opened `rates_live_chart` widget, and leave a note titled "Rates Advanced Live" that says exactly: "Rates Advanced Live is live from Rates Watch Data: rates chart ready."
+
+- Novelty: Unique advanced/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_spread_metric,Rates Watch Data/rates_live_chart,Rates Watch Data/yield_curve; appdefs:Rates Watch Data/Rates Advanced Live; widgets:Rates Watch Data/rates_live_chart@*; generated:note@*:Rates Advanced Live,rates chart.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Rates Watch Data/rates_live_chart` with data_args ⊇ {"contract": "ZB"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Rates Advanced Live", "rates chart" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_advanced_vix_advanced_ship` — Ship, open, and configure Vol Advanced Live
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: hard · split: test
+
+> End to end. Publish "Vol Desk Data" at http://localhost:7801 - widgets.json: `vix_advanced`: name "VIX Advanced Chart", description "TradingView advanced charting for VIX futures.", endpoint /udf, type advanced_charting, sized w=20 h=20 on the grid, staleTime 900000, params required: symbol — a text input (type text), labeled "Symbol", default "VX1", described "Advanced chart symbol.", data.defaultSymbol "VIX", data.updateFrequency 60000; `vol_regime_metric`: name "Vol Regime", description "Current volatility regime score.", endpoint /vol-regime, type metric, sized w=6 h=4 on the grid, staleTime 900000; `vix_history`: name "VIX History", description "Daily CBOE VIX closes with returns.", endpoint /vix-history, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: window — a number input (type number), labeled "Window", default 30, min 5, max 365, table columns required (field → header (type, extras)): date → header "Date" (dateString); close → header "Close" (number); return_pct → header "Return %" (number, percent formatter, greenRed render). Desk convention: every widget this backend serves carries staleTime 900000. apps.json: app "Vol Advanced Live", description "VIX TradingView chart and regime.", tab `vol` named "Vol" places: `vix_advanced` at x=0 y=0 w=20 h=20, tab `signals` named "Signals" places: `vol_regime_metric` at x=20 y=0 w=8 h=5. Then instantiate "Vol Advanced Live" into a dashboard named "Vol Advanced Live Dashboard", set symbol to "VX2" on the opened `vix_advanced` widget, and leave a note titled "Vol Advanced Live" that says exactly: "Vol Advanced Live is live from Vol Desk Data: advanced chart ready."
+
+- Novelty: Unique advanced/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_advanced,Vol Desk Data/vix_history,Vol Desk Data/vol_regime_metric; appdefs:Vol Desk Data/Vol Advanced Live; widgets:Vol Desk Data/vix_advanced@*; generated:note@*:Vol Advanced Live,advanced chart.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Vol Desk Data/vix_advanced` with data_args ⊇ {"symbol": "VX2"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Vol Advanced Live", "advanced chart" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_aggrid_earnings_ship` — Ship, open, and configure the Season Tracker app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: train
+
+> End to end. Publish "Earnings Prep Data" at http://localhost:7805 — widgets.json: `beat_miss_grid`: name "Beat Miss Grid", description "Beat/miss by ticker this season.", endpoint /beat-miss, type table, gridData w=20 h=9, taking ticker — a text input (type text), labeled "Ticker", default "AAPL", described "Ticker in focus.", columns derived from served rows like [{"eps_surprise_pct": 0.042, "revenue_beat": true, "ticker": "AAPL"}, {"eps_surprise_pct": 0.021, "revenue_beat": true, "ticker": "MSFT"}] — Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent.. Desk convention: every widget this backend serves carries staleTime 900000; plus `surprise_metric`: name "Avg Surprise", description "Average EPS surprise last 4 quarters.", endpoint /avg-surprise, type metric, sized w=6 h=4 on the grid; `earnings_note`: name "Earnings Preview", description "Preview note for the earnings call.", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL". apps.json: app "Season Tracker", description "Beats, misses, surprises.", tab `season` named "Season" places: `beat_miss_grid` at x=0 y=0 w=20 h=9, tab `signals` named "Signals" places: `surprise_metric` at x=0 y=0 w=12 h=6. Then instantiate the "Season Tracker" app from that backend into a dashboard named "Season Tracker Live", set ticker to "MSFT" on the opened `beat_miss_grid` widget, and leave a note titled "Season Tracker" that says exactly: "Season Tracker is live from Earnings Prep Data: season on tap."
+
+- Novelty: Unique aggrid/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/beat_miss_grid,Earnings Prep Data/earnings_note,Earnings Prep Data/surprise_metric; appdefs:Earnings Prep Data/Season Tracker; widgets:Earnings Prep Data/beat_miss_grid@*; generated:note@*:Season Tracker,season.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Earnings Prep Data/beat_miss_grid` with data_args ⊇ {"ticker": "MSFT"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Season Tracker", "season" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_aggrid_execution_ship` — Ship, open, and configure the Execution Room app
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: hard · split: train
+
+> Four steps. One: add "Execution Desk Data" at http://localhost:7806 serving `venue_scorecard`: name "Venue Scorecard", description "Execution quality by venue.", endpoint /venue-scorecard, type table, gridData w=20 h=9, taking venue — a text input (type text), labeled "Venue", default "ARCA", described "Venue in focus.", columns derived from served rows like [{"fills": 1240, "slippage_pct": 0.0021, "venue": "ARCA"}, {"fills": 980, "slippage_pct": 0.0034, "venue": "EDGX"}] — Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent.. Desk convention: every widget this backend serves carries staleTime 900000, `exception_metric`: name "Exceptions", description "Open execution exceptions.", endpoint /exception-count, type metric, sized w=5 h=4 on the grid; `slippage_chart`: name "Slippage by Venue", description "Plotly slippage distribution by venue.", endpoint /slippage-by-venue, type chart, sized w=20 h=9 on the grid, raw true, and app "Execution Room", description "Venue quality and exceptions.", tab `venues` named "Venues" places: `venue_scorecard` at x=0 y=0 w=20 h=9, tab `signals` named "Signals" places: `exception_metric` at x=0 y=0 w=12 h=6. Two: instantiate "Execution Room" into "Execution Room Live". Three: set venue to "EDGX" on the opened `venue_scorecard` widget. Four: a note titled "Execution Room" with the text: "Execution Room is live from Execution Desk Data: venues on tap."
+
+- Novelty: Unique aggrid/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/slippage_chart,Execution Desk Data/venue_scorecard; appdefs:Execution Desk Data/Execution Room; widgets:Execution Desk Data/venue_scorecard@*; generated:note@*:Execution Room,venues.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Execution Desk Data/venue_scorecard` with data_args ⊇ {"venue": "EDGX"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Execution Room", "venues" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_aggrid_healthcare_ship` — Ship, open, and configure the Readout Desk app
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: hard · split: train
+
+> Build, publish, open, configure, document. Backend "Healthcare Research Data" (http://localhost:7808) serves `readout_calendar`: name "Readout Calendar", description "Upcoming trial readouts.", endpoint /readout-calendar, type table, gridData w=20 h=9, taking phase — a text input (type text), labeled "Phase", default "III", described "Trial phase filter.", columns derived from served rows like [{"phase": "III", "readout": "2026-08-19", "ticker": "PFE"}, {"phase": "II", "readout": "2026-09-02", "ticker": "MRNA"}] — Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent.. Desk convention: every widget this backend serves carries staleTime 900000; `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid; `fda_newsfeed`: name "FDA Notices", description "FDA decision and notice feed.", endpoint /fda-notices, type newsfeed, sized w=12 h=10 on the grid; and ships app "Readout Desk", description "Trial readouts and catalysts.", tab `readouts` named "Readouts" places: `readout_calendar` at x=0 y=0 w=20 h=9, tab `signals` named "Signals" places: `catalyst_metric` at x=0 y=0 w=12 h=6. Open the app as "Readout Desk Live" via manage_apps, set phase to "II" on the opened `readout_calendar` widget, then record a note "Readout Desk" saying: "Readout Desk is live from Healthcare Research Data: readouts on tap."
+
+- Novelty: Unique aggrid/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric,Healthcare Research Data/fda_newsfeed,Healthcare Research Data/readout_calendar; appdefs:Healthcare Research Data/Readout Desk; widgets:Healthcare Research Data/readout_calendar@*; generated:note@*:Readout Desk,readouts.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Healthcare Research Data/readout_calendar` with data_args ⊇ {"phase": "II"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Readout Desk", "readouts" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_aggrid_rates_ship` — Ship, open, and configure the Auction Desk app
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: hard · split: test
+
+> Build, publish, open, configure, document. Backend "Rates Watch Data" (http://localhost:7803) serves `auction_ladder`: name "Auction Ladder", description "Upcoming treasury auctions.", endpoint /auction-ladder, type table, gridData w=20 h=9, taking security — a text input (type text), labeled "Security", default "10Y Note", described "Security filter for the ladder.", columns derived from served rows like [{"auction_date": "2026-07-14", "security": "10Y Note", "size_bn": 42}, {"auction_date": "2026-07-15", "security": "30Y Bond", "size_bn": 25}] — Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent.. Desk convention: every widget this backend serves carries staleTime 900000; `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid; `rates_commentary`: name "Rates Commentary", description "Desk commentary on the rates day.", endpoint /rates-commentary, type markdown, sized w=12 h=8 on the grid, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS10"; and ships app "Auction Desk", description "Auctions and curve posture.", tab `auctions` named "Auctions" places: `auction_ladder` at x=0 y=0 w=20 h=9, tab `signals` named "Signals" places: `curve_spread_metric` at x=0 y=0 w=12 h=6. Open the app as "Auction Desk Live" via manage_apps, set security to "30Y Bond" on the opened `auction_ladder` widget, then record a note "Auction Desk" saying: "Auction Desk is live from Rates Watch Data: auctions on tap."
+
+- Novelty: Unique aggrid/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/auction_ladder,Rates Watch Data/curve_spread_metric,Rates Watch Data/rates_commentary; appdefs:Rates Watch Data/Auction Desk; widgets:Rates Watch Data/auction_ladder@*; generated:note@*:Auction Desk,auctions.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Rates Watch Data/auction_ladder` with data_args ⊇ {"security": "30Y Bond"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Auction Desk", "auctions" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_apps_healthcare_ship` — Ship, open, and configure the Trial Desk app
+
+**L3** · app-building · workflow: healthcare-catalyst-review · healthcare · difficulty: hard · split: train
+
+> Four steps. One: add "Healthcare Research Data" at http://localhost:7808 serving `trial_catalysts`: name "Trial Catalysts", description "Upcoming clinical trial readouts.", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, params required: ticker — a dropdown (type endpoint), labeled "Ticker", options fetched from /tickers, default "PFE", table columns required (field → header (type, extras)): ticker → header "Ticker" (text); phase → header "Phase" (text); readout_date → header "Readout" (dateString); `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid; `pipeline_chart`: name "Pipeline by Phase", description "Plotly pipeline distribution by phase.", endpoint /pipeline-by-phase, type chart, sized w=20 h=9 on the grid, raw true. Desk convention: every widget this backend serves carries staleTime 900000, shipping app "Trial Desk", description "Catalysts on tap.", tab `trials` named "Trials" places: `trial_catalysts` at x=0 y=0 w=20 h=9, tab `posture` named "Posture" places: `catalyst_metric` at x=0 y=0 w=12 h=6. Two: instantiate "Trial Desk" into "Trial Desk Board". Three: set ticker to "MRNA" on the opened `trial_catalysts` widget. Four: a note titled "Trial Desk" with the text: "Trial Desk shipped from Healthcare Research Data: catalysts live."
+
+- Novelty: Unique apps/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric,Healthcare Research Data/pipeline_chart,Healthcare Research Data/trial_catalysts; appdefs:Healthcare Research Data/Trial Desk; widgets:Healthcare Research Data/trial_catalysts@*; generated:note@*:Trial Desk,catalysts.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Healthcare Research Data/trial_catalysts` with data_args ⊇ {"ticker": "MRNA"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Trial Desk", "catalysts" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_apps_sla_ship` — Ship, open, and configure the Vendor Live app
+
+**L3** · app-building · workflow: vendor-sla-monitoring · operations · difficulty: hard · split: train
+
+> Build, publish, open, configure, document. "Vendor SLA Data" (http://localhost:7804) serves `breach_metric`: name "Open Breaches", description "Count of open SLA breaches.", endpoint /breach-count, type metric, sized w=6 h=4 on the grid, params required: desk_view — a text input (type text), labeled "Desk View", default "summary", described "Which posture view the metric shows."; `vendor_sla_table`: name "Vendor SLA Status", description "Vendor SLA state with breach flags.", endpoint /vendor-sla, type table, sized w=20 h=9 on the grid, params required: status — a text input (type text), labeled "Status", static options ["Open"="Open", "Escalated"="Escalated", "Resolved"="Resolved"], default "Open", table columns required (field → header (type, extras)): vendor → header "Vendor" (text); status → header "Status" (text, titleCase render); latency_ms → header "Latency (ms)" (number); breach → header "Breach" (boolean); `sla_newsfeed`: name "Vendor Notices", description "Vendor incident notices feed.", endpoint /vendor-notices, type newsfeed, sized w=12 h=10 on the grid. Desk convention: every widget this backend serves carries staleTime 900000 and ships app "Vendor Live", description "Vendors and breaches.", tab `vendors` named "Vendors" places: `breach_metric` at x=0 y=0 w=20 h=9, tab `posture` named "Posture" places: `vendor_sla_table` at x=0 y=0 w=12 h=6. Open the app as "Vendor Live Board" via manage_apps, set desk_view to "detail" on the opened `breach_metric` widget, then a note "Vendor Live" saying: "Vendor Live shipped from Vendor SLA Data: vendors live."
+
+- Novelty: Unique apps/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/breach_metric,Vendor SLA Data/sla_newsfeed,Vendor SLA Data/vendor_sla_table; appdefs:Vendor SLA Data/Vendor Live; widgets:Vendor SLA Data/breach_metric@*; generated:note@*:Vendor Live,vendors.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Vendor SLA Data/breach_metric` with data_args ⊇ {"desk_view": "detail"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Vendor Live", "vendors" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_apps_tvl_ship` — Ship, open, and configure the Chain Live app
+
+**L3** · app-building · workflow: portfolio-morning-review · crypto · difficulty: hard · split: train
+
+> Build, publish, open, configure, document. "Chain TVL Data" (http://localhost:7802) serves `chains_table`: name "Top Chains by TVL", description "Current TVL of all chains from the desk aggregator.", endpoint /chains-table, type table, sized w=20 h=9 on the grid, params required: chain — a text input (type text), labeled "Chain", default "Ethereum", described "Chain in focus.", table columns required (field → header (type, extras)): name → header "Chain" (text); tvl_usd → header "TVL ($)" (number, int formatter); change_1d → header "1d Change" (number, percent formatter, greenRed render); `gas_metric`: name "Gas Now", description "Current gas price snapshot.", endpoint /gas-now, type metric, sized w=5 h=4 on the grid; `chains_chart`: name "TVL by Chain", description "Plotly bar chart of chain TVL.", endpoint /chains-chart, type chart, sized w=20 h=9 on the grid, raw true. Desk convention: every widget this backend serves carries staleTime 900000 and ships app "Chain Live", description "TVL and gas.", tab `chains` named "Chains" places: `chains_table` at x=0 y=0 w=20 h=9, tab `posture` named "Posture" places: `gas_metric` at x=0 y=0 w=12 h=6. Open the app as "Chain Live Board" via manage_apps, set chain to "Solana" on the opened `chains_table` widget, then a note "Chain Live" saying: "Chain Live shipped from Chain TVL Data: chains live."
+
+- Novelty: Unique apps/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chains_chart,Chain TVL Data/chains_table,Chain TVL Data/gas_metric; appdefs:Chain TVL Data/Chain Live; widgets:Chain TVL Data/chains_table@*; generated:note@*:Chain Live,chains.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Chain TVL Data/chains_table` with data_args ⊇ {"chain": "Solana"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Chain Live", "chains" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_apps_vol_ship` — Ship, open, and configure the Vol Command app
+
+**L3** · app-building · workflow: risk-review · volatility · difficulty: hard · split: test
+
+> Four steps. One: add "Vol Desk Data" at http://localhost:7801 serving `vix_history`: name "VIX History", description "Daily CBOE VIX closes with returns.", endpoint /vix-history, type table, sized w=20 h=9 on the grid, params required: window — a number input (type number), labeled "Window", default 30, min 5, max 365, table columns required (field → header (type, extras)): date → header "Date" (dateString); close → header "Close" (number); return_pct → header "Return %" (number, percent formatter, greenRed render); `vol_regime_metric`: name "Vol Regime", description "Current volatility regime score.", endpoint /vol-regime, type metric, sized w=6 h=4 on the grid; `vol_commentary`: name "Vol Commentary", description "Morning volatility commentary.", endpoint /vol-commentary, type markdown, sized w=12 h=8 on the grid, params required: desk — a text input (type text), labeled "Desk", static options ["Index"="index", "Single Stock"="single"], default "index". Desk convention: every widget this backend serves carries staleTime 900000, shipping app "Vol Command", description "Vol level and regime.", tab `vol` named "Vol" places: `vix_history` at x=0 y=0 w=20 h=9, tab `posture` named "Posture" places: `vol_regime_metric` at x=0 y=0 w=12 h=6. Two: instantiate "Vol Command" into "Vol Command Board". Three: set window to 60 on the opened `vix_history` widget. Four: a note titled "Vol Command" with the text: "Vol Command shipped from Vol Desk Data: vol live."
+
+- Novelty: Unique apps/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_history,Vol Desk Data/vol_commentary,Vol Desk Data/vol_regime_metric; appdefs:Vol Desk Data/Vol Command; widgets:Vol Desk Data/vix_history@*; generated:note@*:Vol Command,vol.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Vol Desk Data/vix_history` with data_args ⊇ {"window": 60} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Vol Command", "vol" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_charts_earnings_ship` — Ship, open, and configure the Earnings Chart Live app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: train
+
+> Four steps. One: add "Earnings Prep Data" at http://localhost:7805 serving `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, staleTime 900000, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; `surprise_metric`: name "Avg Surprise", description "Average EPS surprise last 4 quarters.", endpoint /avg-surprise, type metric, sized w=6 h=4 on the grid, staleTime 900000; `estimate_revisions`: name "Estimate Revisions", description "Street estimate revisions by quarter.", endpoint /estimate-revisions, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): quarter → header "Quarter" (text); eps_estimate → header "EPS Est" (number); revenue_estimate_b → header "Revenue Est ($B)" (number). Desk convention: every widget this backend serves carries staleTime 900000, shipping app "Earnings Chart Live", description "EPS chart and surprise metric.", tab `earnings` named "Earnings" places: `earnings_chart` at x=0 y=0 w=20 h=9, tab `signals` named "Signals" places: `surprise_metric` at x=0 y=0 w=8 h=5. Two: instantiate "Earnings Chart Live" into "Earnings Chart Live Board". Three: set symbol to "MSFT" on the opened `earnings_chart` widget. Four: a note titled "Earnings Chart Live" with the text: "Earnings Chart Live shipped from Earnings Prep Data: EPS chart live."
+
+- Novelty: Unique charts/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart,Earnings Prep Data/estimate_revisions,Earnings Prep Data/surprise_metric; appdefs:Earnings Prep Data/Earnings Chart Live; widgets:Earnings Prep Data/earnings_chart@*; generated:note@*:Earnings Chart Live,EPS chart.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Earnings Prep Data/earnings_chart` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Earnings Chart Live", "EPS chart" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_charts_healthcare_ship` — Ship, open, and configure the Pipeline Chart Live app
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: hard · split: train
+
+> Four steps. One: add "Healthcare Research Data" at http://localhost:7808 serving `pipeline_vegalite`: name "Pipeline Mix (Vega-Lite)", description "Vega-Lite bar spec of pipeline phase mix.", endpoint /pipeline-vegalite, type chart-vegalite, sized w=20 h=9 on the grid, staleTime 900000, params required: phase — a text input (type text), labeled "Phase", default "all", described "Pipeline phase to chart."; `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid, staleTime 900000; `trial_catalysts`: name "Trial Catalysts", description "Upcoming clinical trial readouts.", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: ticker — a dropdown (type endpoint), labeled "Ticker", options fetched from /tickers, default "PFE", table columns required (field → header (type, extras)): ticker → header "Ticker" (text); phase → header "Phase" (text); readout_date → header "Readout" (dateString). Desk convention: every widget this backend serves carries staleTime 900000, shipping app "Pipeline Chart Live", description "Vega-Lite pipeline and catalysts.", tab `pipeline` named "Pipeline" places: `pipeline_vegalite` at x=0 y=0 w=20 h=9, tab `signals` named "Signals" places: `catalyst_metric` at x=0 y=0 w=8 h=5. Two: instantiate "Pipeline Chart Live" into "Pipeline Chart Live Board". Three: set phase to "III" on the opened `pipeline_vegalite` widget. Four: a note titled "Pipeline Chart Live" with the text: "Pipeline Chart Live shipped from Healthcare Research Data: Vega-Lite live."
+
+- Novelty: Unique charts/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric,Healthcare Research Data/pipeline_vegalite,Healthcare Research Data/trial_catalysts; appdefs:Healthcare Research Data/Pipeline Chart Live; widgets:Healthcare Research Data/pipeline_vegalite@*; generated:note@*:Pipeline Chart Live,Vega-Lite.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Healthcare Research Data/pipeline_vegalite` with data_args ⊇ {"phase": "III"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Pipeline Chart Live", "Vega-Lite" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_charts_rates_ship` — Ship, open, and configure the Rates Chart Live app
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: hard · split: train
+
+> Build, publish, open, configure, document. "Rates Watch Data" (http://localhost:7803) serves `yield_curve`: name "Yield Curve", description "Plotly treasury yield curve snapshot.", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, staleTime 900000, raw true, params required: curve_view — a text input (type text), labeled "Curve View", default "2s10s", described "Curve segment in focus."; `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid, staleTime 900000; `rates_commentary`: name "Rates Commentary", description "Desk commentary on the rates day.", endpoint /rates-commentary, type markdown, sized w=12 h=8 on the grid, staleTime 900000, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS10". Desk convention: every widget this backend serves carries staleTime 900000 and ships app "Rates Chart Live", description "Yield curve and spread.", tab `rates` named "Rates" places: `yield_curve` at x=0 y=0 w=20 h=9, tab `signals` named "Signals" places: `curve_spread_metric` at x=0 y=0 w=8 h=5. Open the app as "Rates Chart Live Board" via manage_apps, set curve_view to "5s30s" on the opened `yield_curve` widget, then a note "Rates Chart Live" saying: "Rates Chart Live shipped from Rates Watch Data: yield curve live."
+
+- Novelty: Unique charts/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_spread_metric,Rates Watch Data/rates_commentary,Rates Watch Data/yield_curve; appdefs:Rates Watch Data/Rates Chart Live; widgets:Rates Watch Data/yield_curve@*; generated:note@*:Rates Chart Live,yield curve.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Rates Watch Data/yield_curve` with data_args ⊇ {"curve_view": "5s30s"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Rates Chart Live", "yield curve" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_charts_tvl_ship` — Ship, open, and configure the Chain Chart Live app
+
+**L3** · widget-building · workflow: portfolio-morning-review · crypto · difficulty: hard · split: test
+
+> Four steps. One: add "Chain TVL Data" at http://localhost:7802 serving `chains_highchart`: name "TVL by Chain (Highcharts)", description "Highcharts rendering of chain TVL.", endpoint /chains-highchart, type chart-highcharts, sized w=20 h=9 on the grid, staleTime 900000, params required: chain — a text input (type text), labeled "Chain", default "Ethereum", described "Chain to chart."; `gas_metric`: name "Gas Now", description "Current gas price snapshot.", endpoint /gas-now, type metric, sized w=5 h=4 on the grid, staleTime 900000; `chains_table`: name "Top Chains by TVL", description "Current TVL of all chains from the desk aggregator.", endpoint /chains-table, type table, sized w=20 h=9 on the grid, staleTime 900000, table columns required (field → header (type, extras)): name → header "Chain" (text); tvl_usd → header "TVL ($)" (number, int formatter); change_1d → header "1d Change" (number, percent formatter, greenRed render). Desk convention: every widget this backend serves carries staleTime 900000, shipping app "Chain Chart Live", description "Highcharts chain view and gas.", tab `chains` named "Chains" places: `chains_highchart` at x=0 y=0 w=20 h=9, tab `signals` named "Signals" places: `gas_metric` at x=0 y=0 w=8 h=5. Two: instantiate "Chain Chart Live" into "Chain Chart Live Board". Three: set chain to "Solana" on the opened `chains_highchart` widget. Four: a note titled "Chain Chart Live" with the text: "Chain Chart Live shipped from Chain TVL Data: Highcharts live."
+
+- Novelty: Unique charts/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chains_highchart,Chain TVL Data/chains_table,Chain TVL Data/gas_metric; appdefs:Chain TVL Data/Chain Chart Live; widgets:Chain TVL Data/chains_highchart@*; generated:note@*:Chain Chart Live,Highcharts.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Chain TVL Data/chains_highchart` with data_args ⊇ {"chain": "Solana"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Chain Chart Live", "Highcharts" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_e2e_case_triage` — Ship, open, and configure Case Triage
+
+**L3** · backend-integration · workflow: compliance-surveillance · compliance · difficulty: hard · split: train
+
+> Build the full custom backend for "Surveillance Data" at http://localhost:7807: table from rows and rules (`case_triage_table` data API: name "Case Triage Table", description "Case owners, priorities, and SLA days.", endpoint /case-triage-table, type table, gridData w=20 h=9. It takes case_id — a text input (type text), labeled "Case Id", default "C-1045", described "Case Triage Table focus field.". The endpoint serves sample rows like [{"case_id": "C-1045", "owner": "Mira", "priority": "high", "sla_days": 2}, {"case_id": "C-1048", "owner": "Jon", "priority": "medium", "sla_days": 5}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.); sibling `case_notes`: name "Case Notes", description "Notes for one surveillance case.", endpoint /case-notes, type markdown, sized w=12 h=8 on the grid, params required: case_id — a text input (type text), labeled "Case", default "C-1042", described "Case identifier."; app app "Case Triage", description "Case triage queue and notes.", tab `triage` named "Triage" places: `case_triage_table` at x=0 y=0 w=20 h=9, tab `notes` named "Notes" places: `case_notes` at x=0 y=0 w=20 h=9. Add it once, instantiate "Case Triage" into "Case Triage Live", set case_id to "C-1048" on the opened `case_triage_table` widget, and create note "Case Triage" with text "Case Triage is live from Surveillance Data: case triage ready.".
+
+- Novelty: Unique e2e/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/case_notes,Surveillance Data/case_triage_table; appdefs:Surveillance Data/Case Triage; widgets:Surveillance Data/case_triage_table@*; generated:note@*:Case Triage,case triage.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Surveillance Data/case_triage_table` with data_args ⊇ {"case_id": "C-1048"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Case Triage", "case triage" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_e2e_catalyst_calendar` — Ship, open, and configure Catalyst Calendar
+
+**L3** · backend-integration · workflow: healthcare-catalyst-review · healthcare · difficulty: hard · split: train
+
+> End to end. Publish "Healthcare Research Data" at http://localhost:7808 in one manage_backends add. widgets.json has the derived table `catalyst_calendar_table` data API: name "Catalyst Calendar Table", description "Healthcare catalysts and impact scores.", endpoint /catalyst-calendar-table, type table, gridData w=20 h=9. It takes ticker — a text input (type text), labeled "Ticker", default "MRNA", described "Catalyst Calendar Table focus field.". The endpoint serves sample rows like [{"event": "Phase II readout", "event_date": "2026-09-02", "impact_score": 8, "ticker": "MRNA"}, {"event": "FDA decision", "event_date": "2026-10-11", "impact_score": 7, "ticker": "PFE"}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.; plus sibling widget `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid. apps.json ships app "Catalyst Calendar", description "Catalyst calendar and 30-day count.", tab `calendar` named "Calendar" places: `catalyst_calendar_table` at x=0 y=0 w=20 h=9, tab `count` named "Count" places: `catalyst_metric` at x=0 y=0 w=20 h=9. Then instantiate "Catalyst Calendar" into dashboard "Catalyst Calendar Live", set ticker to "PFE" on the opened `catalyst_calendar_table` widget, and leave a note titled "Catalyst Calendar" that says exactly: "Catalyst Calendar is live from Healthcare Research Data: catalyst calendar ready."
+
+- Novelty: Unique e2e/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_calendar_table,Healthcare Research Data/catalyst_metric; appdefs:Healthcare Research Data/Catalyst Calendar; widgets:Healthcare Research Data/catalyst_calendar_table@*; generated:note@*:Catalyst Calendar,catalyst calendar.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Healthcare Research Data/catalyst_calendar_table` with data_args ⊇ {"ticker": "PFE"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Catalyst Calendar", "catalyst calendar" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_e2e_chain_flows` — Ship, open, and configure Chain Flows
+
+**L3** · backend-integration · workflow: portfolio-morning-review · crypto · difficulty: hard · split: validation
+
+> Build the full custom backend for "Chain TVL Data" at http://localhost:7802: table from rows and rules (`chain_flows_table` data API: name "Chain Flows Table", description "Net chain flows and fee share.", endpoint /chain-flows-table, type table, gridData w=20 h=9. It takes chain — a text input (type text), labeled "Chain", default "Ethereum", described "Chain Flows Table focus field.". The endpoint serves sample rows like [{"as_of": "2026-07-01", "chain": "Ethereum", "fee_pct": 0.031, "net_flow_usd": 120000000}, {"as_of": "2026-07-01", "chain": "Solana", "fee_pct": 0.018, "net_flow_usd": -15000000}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.); sibling `gas_metric`: name "Gas Now", description "Current gas price snapshot.", endpoint /gas-now, type metric, sized w=5 h=4 on the grid; app app "Chain Flows", description "Chain flows and gas context.", tab `flows` named "Flows" places: `chain_flows_table` at x=0 y=0 w=20 h=9, tab `gas` named "Gas" places: `gas_metric` at x=0 y=0 w=20 h=9. Add it once, instantiate "Chain Flows" into "Chain Flows Live", set chain to "Solana" on the opened `chain_flows_table` widget, and create note "Chain Flows" with text "Chain Flows is live from Chain TVL Data: chain flows ready.".
+
+- Novelty: Unique e2e/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chain_flows_table,Chain TVL Data/gas_metric; appdefs:Chain TVL Data/Chain Flows; widgets:Chain TVL Data/chain_flows_table@*; generated:note@*:Chain Flows,chain flows.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Chain TVL Data/chain_flows_table` with data_args ⊇ {"chain": "Solana"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Chain Flows", "chain flows" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_e2e_compliance_surveillance` — Ship, open, and configure Compliance Surveillance
+
+**L3** · backend-integration · workflow: compliance-surveillance · compliance · difficulty: hard · split: test
+
+> End to end. Publish "Surveillance Data" at http://localhost:7807 in one manage_backends add. widgets.json has the derived table `surveillance_cases_table` data API: name "Surveillance Cases Table", description "Open surveillance cases by severity.", endpoint /surveillance-cases-table, type table, gridData w=20 h=9. It takes case_id — a text input (type text), labeled "Case Id", default "C-1042", described "Surveillance Cases Table focus field.". The endpoint serves sample rows like [{"age_days": 12, "case_id": "C-1042", "desk": "Rates", "severity": "high"}, {"age_days": 4, "case_id": "C-1044", "desk": "Equities", "severity": "medium"}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.; plus sibling widget `alert_metric`: name "Open Alerts", description "Open alert count.", endpoint /alert-count, type metric, sized w=5 h=4 on the grid. apps.json ships app "Compliance Surveillance", description "Surveillance cases and alert posture.", tab `cases` named "Cases" places: `surveillance_cases_table` at x=0 y=0 w=20 h=9, tab `posture` named "Posture" places: `alert_metric` at x=0 y=0 w=20 h=9. Then instantiate "Compliance Surveillance" into dashboard "Compliance Surveillance Live", set case_id to "C-1044" on the opened `surveillance_cases_table` widget, and leave a note titled "Compliance Surveillance" that says exactly: "Compliance Surveillance is live from Surveillance Data: surveillance ready."
+
+- Novelty: Unique e2e/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric,Surveillance Data/surveillance_cases_table; appdefs:Surveillance Data/Compliance Surveillance; widgets:Surveillance Data/surveillance_cases_table@*; generated:note@*:Compliance Surveillance,surveillance.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Surveillance Data/surveillance_cases_table` with data_args ⊇ {"case_id": "C-1044"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Compliance Surveillance", "surveillance" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_e2e_earnings_season` — Ship, open, and configure Earnings Season
+
+**L3** · backend-integration · workflow: earnings-prep · equity-research · difficulty: hard · split: train
+
+> Build the full custom backend for "Earnings Prep Data" at http://localhost:7805: table from rows and rules (`earnings_season_table` data API: name "Earnings Season Table", description "Earnings surprises and report dates.", endpoint /earnings-season-table, type table, gridData w=20 h=9. It takes ticker — a text input (type text), labeled "Ticker", default "AAPL", described "Earnings Season Table focus field.". The endpoint serves sample rows like [{"eps_surprise_pct": 0.042, "report_date": "2026-07-24", "revenue_beat": true, "ticker": "AAPL"}, {"eps_surprise_pct": 0.021, "report_date": "2026-07-29", "revenue_beat": true, "ticker": "MSFT"}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.); sibling `surprise_metric`: name "Avg Surprise", description "Average EPS surprise last 4 quarters.", endpoint /avg-surprise, type metric, sized w=6 h=4 on the grid; app app "Earnings Season", description "Season surprises and headline metric.", tab `season` named "Season" places: `earnings_season_table` at x=0 y=0 w=20 h=9, tab `surprise` named "Surprise" places: `surprise_metric` at x=0 y=0 w=20 h=9. Add it once, instantiate "Earnings Season" into "Earnings Season Live", set ticker to "MSFT" on the opened `earnings_season_table` widget, and create note "Earnings Season" with text "Earnings Season is live from Earnings Prep Data: earnings season ready.".
+
+- Novelty: Unique e2e/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_season_table,Earnings Prep Data/surprise_metric; appdefs:Earnings Prep Data/Earnings Season; widgets:Earnings Prep Data/earnings_season_table@*; generated:note@*:Earnings Season,earnings season.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Earnings Prep Data/earnings_season_table` with data_args ⊇ {"ticker": "MSFT"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Earnings Season", "earnings season" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_e2e_execution_monitor` — Ship, open, and configure Execution Monitor
+
+**L3** · backend-integration · workflow: execution-exception-review · execution · difficulty: hard · split: train
+
+> Build, publish, open, configure, document. Backend "Execution Desk Data" (http://localhost:7806) serves a data-API table: `execution_monitor_table` data API: name "Execution Monitor Table", description "Venue execution quality and rejects.", endpoint /execution-monitor-table, type table, gridData w=20 h=9. It takes venue — a text input (type text), labeled "Venue", default "ARCA", described "Execution Monitor Table focus field.". The endpoint serves sample rows like [{"as_of": "2026-07-01", "orders": 1240, "reject_rate_pct": 0.003, "venue": "ARCA"}, {"as_of": "2026-07-01", "orders": 980, "reject_rate_pct": 0.005, "venue": "EDGX"}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.. It also serves `exception_metric`: name "Exceptions", description "Open execution exceptions.", endpoint /exception-count, type metric, sized w=5 h=4 on the grid. Ship app app "Execution Monitor", description "Execution venue quality and exceptions.", tab `venues` named "Venues" places: `execution_monitor_table` at x=0 y=0 w=20 h=9, tab `exceptions` named "Exceptions" places: `exception_metric` at x=0 y=0 w=20 h=9, instantiate it as "Execution Monitor Live", set venue to "EDGX" on the opened `execution_monitor_table` widget, then add note "Execution Monitor" saying "Execution Monitor is live from Execution Desk Data: execution monitor ready.".
+
+- Novelty: Unique e2e/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/execution_monitor_table; appdefs:Execution Desk Data/Execution Monitor; widgets:Execution Desk Data/execution_monitor_table@*; generated:note@*:Execution Monitor,execution monitor.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Execution Desk Data/execution_monitor_table` with data_args ⊇ {"venue": "EDGX"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Execution Monitor", "execution monitor" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_e2e_healthcare_pipeline` — Ship, open, and configure Healthcare Pipeline
+
+**L3** · backend-integration · workflow: healthcare-catalyst-review · healthcare · difficulty: hard · split: validation
+
+> Build, publish, open, configure, document. Backend "Healthcare Research Data" (http://localhost:7808) serves a data-API table: `pipeline_status_table` data API: name "Pipeline Status Table", description "Healthcare pipeline programs by phase.", endpoint /pipeline-status-table, type table, gridData w=20 h=9. It takes ticker — a text input (type text), labeled "Ticker", default "PFE", described "Pipeline Status Table focus field.". The endpoint serves sample rows like [{"phase": "III", "programs": 4, "readout_date": "2026-08-19", "ticker": "PFE"}, {"phase": "II", "programs": 3, "readout_date": "2026-09-02", "ticker": "MRNA"}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.. It also serves `pipeline_chart`: name "Pipeline by Phase", description "Plotly pipeline distribution by phase.", endpoint /pipeline-by-phase, type chart, sized w=20 h=9 on the grid, raw true. Ship app app "Healthcare Pipeline", description "Pipeline table and phase chart.", tab `pipeline` named "Pipeline" places: `pipeline_status_table` at x=0 y=0 w=20 h=9, tab `phase` named "Phase" places: `pipeline_chart` at x=0 y=0 w=20 h=9, instantiate it as "Healthcare Pipeline Live", set ticker to "MRNA" on the opened `pipeline_status_table` widget, then add note "Healthcare Pipeline" saying "Healthcare Pipeline is live from Healthcare Research Data: pipeline ready.".
+
+- Novelty: Unique e2e/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/pipeline_chart,Healthcare Research Data/pipeline_status_table; appdefs:Healthcare Research Data/Healthcare Pipeline; widgets:Healthcare Research Data/pipeline_status_table@*; generated:note@*:Healthcare Pipeline,pipeline.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Healthcare Research Data/pipeline_status_table` with data_args ⊇ {"ticker": "MRNA"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Healthcare Pipeline", "pipeline" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_e2e_macro_morning` — Ship, open, and configure Macro Morning
+
+**L3** · backend-integration · workflow: macro-rates-review · macro · difficulty: hard · split: test
+
+> Build the full custom backend for "Rates Watch Data" at http://localhost:7803: table from rows and rules (`macro_morning_table` data API: name "Macro Morning Table", description "Rates morning levels and changes.", endpoint /macro-morning-table, type table, gridData w=20 h=9. It takes series — a text input (type text), labeled "Series", default "DGS10", described "Macro Morning Table focus field.". The endpoint serves sample rows like [{"as_of": "2026-07-01", "change_bp": -3, "level": 4.21, "series": "DGS10"}, {"as_of": "2026-07-01", "change_bp": -1, "level": 3.86, "series": "DGS2"}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.); sibling `yield_curve`: name "Yield Curve", description "Plotly treasury yield curve snapshot.", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, raw true; app app "Macro Morning", description "Rates levels and curve context.", tab `levels` named "Levels" places: `macro_morning_table` at x=0 y=0 w=20 h=9, tab `curve` named "Curve" places: `yield_curve` at x=0 y=0 w=20 h=9. Add it once, instantiate "Macro Morning" into "Macro Morning Live", set series to "DGS2" on the opened `macro_morning_table` widget, and create note "Macro Morning" with text "Macro Morning is live from Rates Watch Data: macro morning ready.".
+
+- Novelty: Unique e2e/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/macro_morning_table,Rates Watch Data/yield_curve; appdefs:Rates Watch Data/Macro Morning; widgets:Rates Watch Data/macro_morning_table@*; generated:note@*:Macro Morning,macro morning.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Rates Watch Data/macro_morning_table` with data_args ⊇ {"series": "DGS2"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Macro Morning", "macro morning" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_e2e_rates_auctions` — Ship, open, and configure Rates Auctions
+
+**L3** · backend-integration · workflow: macro-rates-review · macro · difficulty: hard · split: train
+
+> End to end. Publish "Rates Watch Data" at http://localhost:7803 in one manage_backends add. widgets.json has the derived table `rates_auctions_table` data API: name "Rates Auctions Table", description "Upcoming auctions and demand metrics.", endpoint /rates-auctions-table, type table, gridData w=20 h=9. It takes auction_date — a text input (type text), labeled "Auction Date", default "2026-07-14", described "Rates Auctions Table focus field.". The endpoint serves sample rows like [{"auction_date": "2026-07-14", "bid_to_cover": 2.43, "security": "10Y Note", "size_bn": 42}, {"auction_date": "2026-07-15", "bid_to_cover": 2.31, "security": "30Y Bond", "size_bn": 25}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.; plus sibling widget `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid. apps.json ships app "Rates Auctions", description "Auction calendar and curve spread.", tab `auctions` named "Auctions" places: `rates_auctions_table` at x=0 y=0 w=20 h=9, tab `spread` named "Spread" places: `curve_spread_metric` at x=0 y=0 w=20 h=9. Then instantiate "Rates Auctions" into dashboard "Rates Auctions Live", set auction_date to "2026-07-15" on the opened `rates_auctions_table` widget, and leave a note titled "Rates Auctions" that says exactly: "Rates Auctions is live from Rates Watch Data: rates auctions ready."
+
+- Novelty: Unique e2e/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_spread_metric,Rates Watch Data/rates_auctions_table; appdefs:Rates Watch Data/Rates Auctions; widgets:Rates Watch Data/rates_auctions_table@*; generated:note@*:Rates Auctions,rates auctions.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Rates Watch Data/rates_auctions_table` with data_args ⊇ {"auction_date": "2026-07-15"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Rates Auctions", "rates auctions" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_e2e_research_room` — Ship, open, and configure Research Room
+
+**L3** · backend-integration · workflow: earnings-prep · equity-research · difficulty: hard · split: train
+
+> Build the full custom backend for "Earnings Prep Data" at http://localhost:7805: table from rows and rules (`research_room_table` data API: name "Research Room Table", description "Analyst research actions by ticker.", endpoint /research-room-table, type table, gridData w=20 h=9. It takes ticker — a text input (type text), labeled "Ticker", default "AAPL", described "Research Room Table focus field.". The endpoint serves sample rows like [{"analyst": "North Coast", "rating": "Buy", "ticker": "AAPL", "upside_pct": 0.12}, {"analyst": "Lake Street", "rating": "Hold", "ticker": "MSFT", "upside_pct": 0.04}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.); sibling `earnings_note`: name "Earnings Preview", description "Preview note for the earnings call.", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; app app "Research Room", description "Analyst actions and earnings notes.", tab `research` named "Research" places: `research_room_table` at x=0 y=0 w=20 h=9, tab `notes` named "Notes" places: `earnings_note` at x=0 y=0 w=20 h=9. Add it once, instantiate "Research Room" into "Research Room Live", set ticker to "MSFT" on the opened `research_room_table` widget, and create note "Research Room" with text "Research Room is live from Earnings Prep Data: research room ready.".
+
+- Novelty: Unique e2e/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_note,Earnings Prep Data/research_room_table; appdefs:Earnings Prep Data/Research Room; widgets:Earnings Prep Data/research_room_table@*; generated:note@*:Research Room,research room.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Earnings Prep Data/research_room_table` with data_args ⊇ {"ticker": "MSFT"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Research Room", "research room" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_e2e_vendor_ops` — Ship, open, and configure Vendor Ops
+
+**L3** · backend-integration · workflow: vendor-sla-monitoring · operations · difficulty: hard · split: validation
+
+> Build, publish, open, configure, document. Backend "Vendor SLA Data" (http://localhost:7804) serves a data-API table: `vendor_ops_table` data API: name "Vendor Ops Table", description "Vendor uptime and latency posture.", endpoint /vendor-ops-table, type table, gridData w=20 h=9. It takes vendor — a text input (type text), labeled "Vendor", default "AlphaFeed", described "Vendor Ops Table focus field.". The endpoint serves sample rows like [{"latency_ms": 240, "status": "open", "uptime_pct": 0.999, "vendor": "AlphaFeed"}, {"latency_ms": 610, "status": "breach", "uptime_pct": 0.982, "vendor": "QuoteStream"}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.. It also serves `breach_metric`: name "Open Breaches", description "Count of open SLA breaches.", endpoint /breach-count, type metric, sized w=6 h=4 on the grid. Ship app app "Vendor Ops", description "Vendor uptime, latency, and breaches.", tab `vendors` named "Vendors" places: `vendor_ops_table` at x=0 y=0 w=20 h=9, tab `breaches` named "Breaches" places: `breach_metric` at x=0 y=0 w=20 h=9, instantiate it as "Vendor Ops Live", set vendor to "QuoteStream" on the opened `vendor_ops_table` widget, then add note "Vendor Ops" saying "Vendor Ops is live from Vendor SLA Data: vendor ops ready.".
+
+- Novelty: Unique e2e/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/breach_metric,Vendor SLA Data/vendor_ops_table; appdefs:Vendor SLA Data/Vendor Ops; widgets:Vendor SLA Data/vendor_ops_table@*; generated:note@*:Vendor Ops,vendor ops.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Vendor SLA Data/vendor_ops_table` with data_args ⊇ {"vendor": "QuoteStream"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Vendor Ops", "vendor ops" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_e2e_vol_cockpit` — Ship, open, and configure Vol Cockpit
+
+**L3** · backend-integration · workflow: risk-review · volatility · difficulty: hard · split: test
+
+> Build the full custom backend for "Vol Desk Data" at http://localhost:7801: table from rows and rules (`vol_cockpit_table` data API: name "Vol Cockpit Table", description "Implied and realized volatility by tenor.", endpoint /vol-cockpit-table, type table, gridData w=20 h=9. It takes tenor — a text input (type text), labeled "Tenor", default "1M", described "Vol Cockpit Table focus field.". The endpoint serves sample rows like [{"as_of": "2026-07-01", "iv_pct": 0.182, "realized_pct": 0.164, "tenor": "1M"}, {"as_of": "2026-07-01", "iv_pct": 0.204, "realized_pct": 0.181, "tenor": "3M"}]. Derive the table columns from the served rows using the workspace conventions: every field in the rows becomes a column, in row order; headerName is the field name with underscores as spaces, Title Case; cellDataType is number for numeric values, dateString for ISO dates (YYYY-MM-DD), boolean for true/false, text otherwise; fields ending in _pct additionally carry formatterFn percent. Example: a field {"filled_pct": 0.42} becomes {"field": "filled_pct", "headerName": "Filled Pct", "cellDataType": "number", "formatterFn": "percent"}.); sibling `vix_advanced`: name "VIX Advanced Chart", description "TradingView advanced charting for VIX futures.", endpoint /udf, type advanced_charting, sized w=20 h=20 on the grid, data.defaultSymbol "VIX", data.updateFrequency 60000; app app "Vol Cockpit", description "Volatility table and advanced chart.", tab `surface` named "Surface" places: `vol_cockpit_table` at x=0 y=0 w=20 h=9, tab `chart` named "Chart" places: `vix_advanced` at x=0 y=0 w=20 h=9. Add it once, instantiate "Vol Cockpit" into "Vol Cockpit Live", set tenor to "3M" on the opened `vol_cockpit_table` widget, and create note "Vol Cockpit" with text "Vol Cockpit is live from Vol Desk Data: vol cockpit ready.".
+
+- Novelty: Unique e2e/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_advanced,Vol Desk Data/vol_cockpit_table; appdefs:Vol Desk Data/Vol Cockpit; widgets:Vol Desk Data/vol_cockpit_table@*; generated:note@*:Vol Cockpit,vol cockpit.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Vol Desk Data/vol_cockpit_table` with data_args ⊇ {"tenor": "3M"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Vol Cockpit", "vol cockpit" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_forms_compliance_ship` — Ship, open, and configure the Case Intake Live form app
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: hard · split: train
+
+> Build, publish, open, configure, document. "Surveillance Data" (http://localhost:7807) serves `case_escalation_form`: name "Case Escalation Form", description "Escalate a surveillance case to a reviewer.", endpoint /case-escalation, type table, sized w=20 h=10 on the grid, staleTime 900000, params required: escalation — a form submitting POST to /case-escalation-submit with inputs [case_id — a text input (type text), labeled "Case", default "C-1042"; due_date — a date picker (type date), labeled "Due date", default "$currentDate+2d"; escalate — a button (type button), labeled "Escalate"] (that bracket is the complete list of the form's inputParams); case_scope — a text input (type text), labeled "Case Scope", default "C-1042", described "Case intake filter." (a separate widget-level param, NOT one of the form's inputs); `alert_metric`: name "Open Alerts", description "Open alert count.", endpoint /alert-count, type metric, sized w=5 h=4 on the grid, staleTime 900000; `alert_queue`: name "Alert Queue", description "Open surveillance alerts.", endpoint /alert-queue, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: severity — a text input (type text), labeled "Severity", static options ["High"="high", "Medium"="medium", "Low"="low"], default "high", table columns required (field → header (type, extras)): alert_id → header "Alert" (text); desk → header "Desk" (text); severity → header "Severity" (text, titleCase render); age_days → header "Age (d)" (number, int formatter). Desk convention: every widget this backend serves carries staleTime 900000 and ships app "Case Intake Live", description "Case escalation and alert count.", tab `cases` named "Cases" places: `case_escalation_form` at x=0 y=0 w=20 h=10, tab `status` named "Status" places: `alert_metric` at x=0 y=0 w=8 h=6. Open it as "Case Intake Live Board" via manage_apps, set case_scope to "C-1044" on the opened `case_escalation_form` widget, then add a note "Case Intake Live" saying: "Case Intake Live is live from Surveillance Data: case intake ready."
+
+- Novelty: Unique forms/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric,Surveillance Data/alert_queue,Surveillance Data/case_escalation_form; appdefs:Surveillance Data/Case Intake Live; widgets:Surveillance Data/case_escalation_form@*; generated:note@*:Case Intake Live,case intake.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Surveillance Data/case_escalation_form` with data_args ⊇ {"case_scope": "C-1044"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Case Intake Live", "case intake" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_forms_execution_ship` — Ship, open, and configure the Exception Intake Live form app
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: hard · split: train
+
+> Build, publish, open, configure, document. "Execution Desk Data" (http://localhost:7806) serves `venue_exception_form`: name "Venue Exception Form", description "Record an execution venue exception.", endpoint /venue-exception, type table, sized w=20 h=10 on the grid, staleTime 900000, params required: exception — a form submitting POST to /venue-exception-submit with inputs [venue — a text input (type text), labeled "Venue", default "ARCA"; slippage_bps — a number input (type number), labeled "Slippage bps", default 12, min 0; record — a button (type button), labeled "Record"] (that bracket is the complete list of the form's inputParams); venue_scope — a text input (type text), labeled "Venue Scope", default "ARCA", described "Venue exception filter." (a separate widget-level param, NOT one of the form's inputs); `exception_metric`: name "Exceptions", description "Open execution exceptions.", endpoint /exception-count, type metric, sized w=5 h=4 on the grid, staleTime 900000; `open_orders`: name "Open Orders", description "Live open orders blotter.", endpoint /open-orders, type table, sized w=20 h=9 on the grid, staleTime 900000, table columns required (field → header (type, extras)): order_id → header "Order" (text); symbol → header "Symbol" (text); qty → header "Qty" (number, int formatter); status → header "Status" (text, titleCase render). Desk convention: every widget this backend serves carries staleTime 900000 and ships app "Exception Intake Live", description "Venue exceptions and exception count.", tab `exceptions` named "Exceptions" places: `venue_exception_form` at x=0 y=0 w=20 h=10, tab `status` named "Status" places: `exception_metric` at x=0 y=0 w=8 h=6. Open it as "Exception Intake Live Board" via manage_apps, set venue_scope to "EDGX" on the opened `venue_exception_form` widget, then add a note "Exception Intake Live" saying: "Exception Intake Live is live from Execution Desk Data: exception intake ready."
+
+- Novelty: Unique forms/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/open_orders,Execution Desk Data/venue_exception_form; appdefs:Execution Desk Data/Exception Intake Live; widgets:Execution Desk Data/venue_exception_form@*; generated:note@*:Exception Intake Live,exception intake.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Execution Desk Data/venue_exception_form` with data_args ⊇ {"venue_scope": "EDGX"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Exception Intake Live", "exception intake" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_forms_healthcare_ship` — Ship, open, and configure the Trial Intake Live form app
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: hard · split: train
+
+> End to end. Publish "Healthcare Research Data" at http://localhost:7808 - widgets.json: `trial_readout_form`: name "Trial Readout Form", description "Capture a clinical trial readout note.", endpoint /trial-readout-form, type table, sized w=20 h=10 on the grid, category "Research", staleTime 900000, params required: readout — a form submitting POST to /trial-readout-submit with inputs [ticker — a text input (type text), labeled "Ticker", default "PFE"; readout_date — a date picker (type date), labeled "Readout date", default "2026-08-19"; save — a button (type button), labeled "Save"] (that bracket is the complete list of the form's inputParams); ticker_scope — a text input (type text), labeled "Ticker Scope", default "PFE", described "Trial readout ticker filter." (a separate widget-level param, NOT one of the form's inputs); `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid, staleTime 900000; `trial_catalysts`: name "Trial Catalysts", description "Upcoming clinical trial readouts.", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: ticker — a dropdown (type endpoint), labeled "Ticker", options fetched from /tickers, default "PFE", table columns required (field → header (type, extras)): ticker → header "Ticker" (text); phase → header "Phase" (text); readout_date → header "Readout" (dateString). Desk convention: every widget this backend serves carries staleTime 900000. apps.json: app "Trial Intake Live", description "Trial readouts and catalyst count.", tab `trials` named "Trials" places: `trial_readout_form` at x=0 y=0 w=20 h=10, tab `status` named "Status" places: `catalyst_metric` at x=0 y=0 w=8 h=6. Then instantiate "Trial Intake Live" from that backend into a dashboard named "Trial Intake Live Board", set ticker_scope to "MRNA" on the opened `trial_readout_form` widget, and leave a note titled "Trial Intake Live" that says exactly: "Trial Intake Live is live from Healthcare Research Data: trial intake ready."
+
+- Novelty: Unique forms/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric,Healthcare Research Data/trial_catalysts,Healthcare Research Data/trial_readout_form; appdefs:Healthcare Research Data/Trial Intake Live; widgets:Healthcare Research Data/trial_readout_form@*; generated:note@*:Trial Intake Live,trial intake.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Healthcare Research Data/trial_readout_form` with data_args ⊇ {"ticker_scope": "MRNA"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Trial Intake Live", "trial intake" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_forms_sla_ship` — Ship, open, and configure the Vendor Intake Live form app
+
+**L3** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: hard · split: test
+
+> Build, publish, open, configure, document. "Vendor SLA Data" (http://localhost:7804) serves `vendor_intake_form`: name "Vendor Intake Form", description "Submit a new vendor record into the SLA register.", endpoint /vendor-intake, type table, sized w=20 h=10 on the grid, staleTime 900000, params required: intake — a form submitting POST to /vendor-intake-submit with inputs [vendor — a text input (type text), labeled "Vendor"; tier — a number input (type number), labeled "Tier"; submit — a button (type button), labeled "Add Vendor"] (that bracket is the complete list of the form's inputParams); vendor_scope — a text input (type text), labeled "Vendor Scope", default "AlphaFeed", described "Vendor intake filter." (a separate widget-level param, NOT one of the form's inputs); `breach_metric`: name "Open Breaches", description "Count of open SLA breaches.", endpoint /breach-count, type metric, sized w=6 h=4 on the grid, staleTime 900000; `vendor_sla_table`: name "Vendor SLA Status", description "Vendor SLA state with breach flags.", endpoint /vendor-sla, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: status — a text input (type text), labeled "Status", static options ["Open"="Open", "Escalated"="Escalated", "Resolved"="Resolved"], default "Open", table columns required (field → header (type, extras)): vendor → header "Vendor" (text); status → header "Status" (text, titleCase render); latency_ms → header "Latency (ms)" (number); breach → header "Breach" (boolean). Desk convention: every widget this backend serves carries staleTime 900000 and ships app "Vendor Intake Live", description "Vendor intake and breach count.", tab `intake` named "Intake" places: `vendor_intake_form` at x=0 y=0 w=20 h=10, tab `status` named "Status" places: `breach_metric` at x=0 y=0 w=8 h=6. Open it as "Vendor Intake Live Board" via manage_apps, set vendor_scope to "QuoteStream" on the opened `vendor_intake_form` widget, then add a note "Vendor Intake Live" saying: "Vendor Intake Live is live from Vendor SLA Data: vendor intake ready."
+
+- Novelty: Unique forms/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/breach_metric,Vendor SLA Data/vendor_intake_form,Vendor SLA Data/vendor_sla_table; appdefs:Vendor SLA Data/Vendor Intake Live; widgets:Vendor SLA Data/vendor_intake_form@*; generated:note@*:Vendor Intake Live,vendor intake.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Vendor SLA Data/vendor_intake_form` with data_args ⊇ {"vendor_scope": "QuoteStream"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Vendor Intake Live", "vendor intake" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_grouping_chart_sync_live` — Ship, open, and configure the grouped Chart Sync Live app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: train
+
+> Build, publish, open, configure, document. "Earnings Prep Data" (http://localhost:7805) serves `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; `earnings_note`: name "Earnings Preview", description "Preview note for the earnings call.", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; `estimate_revisions`: name "Estimate Revisions", description "Street estimate revisions by quarter.", endpoint /estimate-revisions, type table, sized w=20 h=9 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): quarter → header "Quarter" (text); eps_estimate → header "EPS Est" (number); revenue_estimate_b → header "Revenue Est ($B)" (number) and ships app "Chart Sync Live", description "Live grouped chart and preview.", tab `chart` named "Chart" places: `earnings_chart` at x=0 y=0 w=20 h=9 preset with params {"symbol": "NVDA"}, tab `linked` named "Linked" places: `earnings_note` at x=0 y=0 w=12 h=9, group "Chart Symbol Sync" (type param) syncing param symbol across ["earnings_chart", "earnings_note"]. Open it as "Chart Sync Live Board" via manage_apps, set symbol to "MSFT" on the opened `earnings_chart` widget, then add a note "Chart Sync Live" saying: "Chart Sync Live is live from Earnings Prep Data: chart sync ready."
+
+- Novelty: Unique grouping/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart,Earnings Prep Data/earnings_note,Earnings Prep Data/estimate_revisions; appdefs:Earnings Prep Data/Chart Sync Live; widgets:Earnings Prep Data/earnings_chart@*; generated:note@*:Chart Sync Live,chart sync.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Earnings Prep Data/earnings_chart` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Chart Sync Live", "chart sync" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_grouping_click_sync_live` — Ship, open, and configure the grouped Click Sync Live app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: train
+
+> End to end. Publish "Earnings Prep Data" at http://localhost:7805 - widgets.json: `click_live_table`: name "Click Live Table", description "Clickable live symbol rows for grouped review.", endpoint /click-live-table, type table, sized w=20 h=9 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): symbol → header "Symbol" (text, cellOnClick render) with renderFnParams {"actionType": "groupBy", "groupByParamName": "symbol"}; revision_pct → header "Revision %" (number, percent formatter); `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; `earnings_note`: name "Earnings Preview", description "Preview note for the earnings call.", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL". apps.json: app "Click Sync Live", description "Live grouped click table and chart.", tab `clicks` named "Clicks" places: `click_live_table` at x=0 y=0 w=20 h=9 preset with params {"symbol": "NVDA"}, tab `linked` named "Linked" places: `earnings_chart` at x=0 y=0 w=12 h=9, group "Click Live Sync" (type param) syncing param symbol across ["click_live_table", "earnings_chart"]. Then instantiate "Click Sync Live" from that backend into a dashboard named "Click Sync Live Board", set symbol to "AAPL" on the opened `click_live_table` widget, and leave a note titled "Click Sync Live" that says exactly: "Click Sync Live is live from Earnings Prep Data: click sync ready."
+
+- Novelty: Unique grouping/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/click_live_table,Earnings Prep Data/earnings_chart,Earnings Prep Data/earnings_note; appdefs:Earnings Prep Data/Click Sync Live; widgets:Earnings Prep Data/click_live_table@*; generated:note@*:Click Sync Live,click sync.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Earnings Prep Data/click_live_table` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Click Sync Live", "click sync" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_grouping_earnings_sync_live` — Ship, open, and configure the grouped Earnings Sync Live app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: train
+
+> End to end. Publish "Earnings Prep Data" at http://localhost:7805 - widgets.json: `estimate_revisions`: name "Estimate Revisions", description "Street estimate revisions by quarter.", endpoint /estimate-revisions, type table, sized w=20 h=9 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): quarter → header "Quarter" (text); eps_estimate → header "EPS Est" (number); revenue_estimate_b → header "Revenue Est ($B)" (number); `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; `earnings_note`: name "Earnings Preview", description "Preview note for the earnings call.", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL". apps.json: app "Earnings Sync Live", description "Live grouped revisions and EPS history.", tab `review` named "Review" places: `estimate_revisions` at x=0 y=0 w=20 h=9 preset with params {"symbol": "NVDA"}, tab `linked` named "Linked" places: `earnings_chart` at x=0 y=0 w=12 h=9, group "Live Symbol Sync" (type param) syncing param symbol across ["estimate_revisions", "earnings_chart"]. Then instantiate "Earnings Sync Live" from that backend into a dashboard named "Earnings Sync Live Board", set symbol to "MSFT" on the opened `estimate_revisions` widget, and leave a note titled "Earnings Sync Live" that says exactly: "Earnings Sync Live is live from Earnings Prep Data: symbol sync ready."
+
+- Novelty: Unique grouping/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart,Earnings Prep Data/earnings_note,Earnings Prep Data/estimate_revisions; appdefs:Earnings Prep Data/Earnings Sync Live; widgets:Earnings Prep Data/estimate_revisions@*; generated:note@*:Earnings Sync Live,symbol sync.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Earnings Prep Data/estimate_revisions` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Earnings Sync Live", "symbol sync" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_grouping_preview_sync_live` — Ship, open, and configure the grouped Preview Sync Live app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: test
+
+> Four steps: add "Earnings Prep Data" at http://localhost:7805 with `earnings_note`: name "Earnings Preview", description "Preview note for the earnings call.", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; `estimate_revisions`: name "Estimate Revisions", description "Street estimate revisions by quarter.", endpoint /estimate-revisions, type table, sized w=20 h=9 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): quarter → header "Quarter" (text); eps_estimate → header "EPS Est" (number); revenue_estimate_b → header "Revenue Est ($B)" (number); `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL" and app "Preview Sync Live", description "Live grouped preview and revisions.", tab `preview` named "Preview" places: `earnings_note` at x=0 y=0 w=20 h=9 preset with params {"symbol": "NVDA"}, tab `linked` named "Linked" places: `estimate_revisions` at x=0 y=0 w=12 h=9, group "Preview Symbol Sync" (type param) syncing param symbol across ["earnings_note", "estimate_revisions"]; instantiate "Preview Sync Live" as "Preview Sync Live Board"; set symbol to "AAPL" on the opened `earnings_note` widget; add a note titled "Preview Sync Live" with the text "Preview Sync Live is live from Earnings Prep Data: preview sync ready.".
+
+- Novelty: Unique grouping/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart,Earnings Prep Data/earnings_note,Earnings Prep Data/estimate_revisions; appdefs:Earnings Prep Data/Preview Sync Live; widgets:Earnings Prep Data/earnings_note@*; generated:note@*:Preview Sync Live,preview sync.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Earnings Prep Data/earnings_note` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Preview Sync Live", "preview sync" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_params_earnings_ship` — Ship, open, and configure the Earnings Symbol Live parameter app
+
+**L3** · widget-building · workflow: earnings-prep · equity-research · difficulty: hard · split: train
+
+> Build, publish, open, configure, document. "Earnings Prep Data" (http://localhost:7805) serves `estimate_revisions`: name "Estimate Revisions", description "Street estimate revisions by quarter.", endpoint /estimate-revisions, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL", table columns required (field → header (type, extras)): quarter → header "Quarter" (text); eps_estimate → header "EPS Est" (number); revenue_estimate_b → header "Revenue Est ($B)" (number); `earnings_chart`: name "EPS History", description "Plotly EPS beat/miss history.", endpoint /eps-history, type chart, sized w=20 h=9 on the grid, staleTime 900000, raw true, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL"; `surprise_metric`: name "Avg Surprise", description "Average EPS surprise last 4 quarters.", endpoint /avg-surprise, type metric, sized w=6 h=4 on the grid, staleTime 900000. Desk convention: every widget this backend serves carries staleTime 900000 and ships app "Earnings Symbol Live", description "Preset symbol revisions and EPS history.", tab `earnings` named "Earnings" places: `estimate_revisions` at x=0 y=0 w=20 h=9 preset with params {"symbol": "NVDA"}, tab `posture` named "Posture" places: `earnings_chart` at x=0 y=0 w=12 h=6. Open it as "Earnings Symbol Live Board" via manage_apps, set symbol to "MSFT" on the opened `estimate_revisions` widget, then add a note "Earnings Symbol Live" saying: "Earnings Symbol Live is live from Earnings Prep Data: symbol sync ready."
+
+- Novelty: Unique params/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart,Earnings Prep Data/estimate_revisions,Earnings Prep Data/surprise_metric; appdefs:Earnings Prep Data/Earnings Symbol Live; widgets:Earnings Prep Data/estimate_revisions@*; generated:note@*:Earnings Symbol Live,symbol sync.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Earnings Prep Data/estimate_revisions` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Earnings Symbol Live", "symbol sync" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_params_healthcare_ship` — Ship, open, and configure the Trial Symbol Live parameter app
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: hard · split: train
+
+> Build, publish, open, configure, document. "Healthcare Research Data" (http://localhost:7808) serves `trial_symbol_pack`: name "Trial Symbol Pack", description "Trial review filtered by symbol.", endpoint /trial-symbol-pack, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: symbol — a ticker picker (type ticker), labeled "Symbol", default "MRNA"; `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid, staleTime 900000; `trial_catalysts`: name "Trial Catalysts", description "Upcoming clinical trial readouts.", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: ticker — a dropdown (type endpoint), labeled "Ticker", options fetched from /tickers, default "PFE", table columns required (field → header (type, extras)): ticker → header "Ticker" (text); phase → header "Phase" (text); readout_date → header "Readout" (dateString). Desk convention: every widget this backend serves carries staleTime 900000 and ships app "Trial Symbol Live", description "Preset symbol catalyst review.", tab `trials` named "Trials" places: `trial_symbol_pack` at x=0 y=0 w=20 h=9 preset with params {"symbol": "MRNA"}, tab `posture` named "Posture" places: `catalyst_metric` at x=0 y=0 w=12 h=6. Open it as "Trial Symbol Live Board" via manage_apps, set symbol to "PFE" on the opened `trial_symbol_pack` widget, then add a note "Trial Symbol Live" saying: "Trial Symbol Live is live from Healthcare Research Data: trial symbol ready."
+
+- Novelty: Unique params/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric,Healthcare Research Data/trial_catalysts,Healthcare Research Data/trial_symbol_pack; appdefs:Healthcare Research Data/Trial Symbol Live; widgets:Healthcare Research Data/trial_symbol_pack@*; generated:note@*:Trial Symbol Live,trial symbol.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Healthcare Research Data/trial_symbol_pack` with data_args ⊇ {"symbol": "PFE"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Trial Symbol Live", "trial symbol" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_params_rates_ship` — Ship, open, and configure the Rates Series Live parameter app
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: hard · split: train
+
+> Four steps: add "Rates Watch Data" at http://localhost:7803 with `rates_series_pack`: name "Rates Series Pack", description "Rates commentary filtered by selected series.", endpoint /rates-series-pack, type markdown, sized w=12 h=8 on the grid, staleTime 900000, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS2"; `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid, staleTime 900000; `rates_commentary`: name "Rates Commentary", description "Desk commentary on the rates day.", endpoint /rates-commentary, type markdown, sized w=12 h=8 on the grid, staleTime 900000, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS10". Desk convention: every widget this backend serves carries staleTime 900000 and app "Rates Series Live", description "Preset rates series commentary.", tab `series` named "Series" places: `rates_series_pack` at x=0 y=0 w=20 h=9 preset with params {"series": "DGS2"}, tab `posture` named "Posture" places: `curve_spread_metric` at x=0 y=0 w=12 h=6; instantiate "Rates Series Live" as "Rates Series Live Board"; set series to "DGS10" on the opened `rates_series_pack` widget; add a note titled "Rates Series Live" with the text "Rates Series Live is live from Rates Watch Data: series preset ready.".
+
+- Novelty: Unique params/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_spread_metric,Rates Watch Data/rates_commentary,Rates Watch Data/rates_series_pack; appdefs:Rates Watch Data/Rates Series Live; widgets:Rates Watch Data/rates_series_pack@*; generated:note@*:Rates Series Live,series preset.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Rates Watch Data/rates_series_pack` with data_args ⊇ {"series": "DGS10"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Rates Series Live", "series preset" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_params_vol_ship` — Ship, open, and configure the Vol Symbol Live parameter app
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: hard · split: test
+
+> Four steps: add "Vol Desk Data" at http://localhost:7801 with `vol_symbol_pack`: name "Vol Symbol Pack", description "Volatility review filtered by symbol.", endpoint /vol-symbol-pack, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: symbol — a ticker picker (type ticker), labeled "Symbol", default "MSFT"; only_liquid — a boolean toggle (type boolean), labeled "Liquid only", default true; `vol_regime_metric`: name "Vol Regime", description "Current volatility regime score.", endpoint /vol-regime, type metric, sized w=6 h=4 on the grid, staleTime 900000; `vix_history`: name "VIX History", description "Daily CBOE VIX closes with returns.", endpoint /vix-history, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: window — a number input (type number), labeled "Window", default 30, min 5, max 365, table columns required (field → header (type, extras)): date → header "Date" (dateString); close → header "Close" (number); return_pct → header "Return %" (number, percent formatter, greenRed render). Desk convention: every widget this backend serves carries staleTime 900000 and app "Vol Symbol Live", description "Preset symbol volatility review.", tab `vol` named "Vol" places: `vol_symbol_pack` at x=0 y=0 w=20 h=9 preset with params {"symbol": "MSFT"}, tab `posture` named "Posture" places: `vol_regime_metric` at x=0 y=0 w=12 h=6; instantiate "Vol Symbol Live" as "Vol Symbol Live Board"; set symbol to "AAPL" on the opened `vol_symbol_pack` widget; add a note titled "Vol Symbol Live" with the text "Vol Symbol Live is live from Vol Desk Data: vol symbol ready.".
+
+- Novelty: Unique params/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_history,Vol Desk Data/vol_regime_metric,Vol Desk Data/vol_symbol_pack; appdefs:Vol Desk Data/Vol Symbol Live; widgets:Vol Desk Data/vol_symbol_pack@*; generated:note@*:Vol Symbol Live,vol symbol.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Vol Desk Data/vol_symbol_pack` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Vol Symbol Live", "vol symbol" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_settings_execution_ship` — Ship, open, and configure the Execution Config Live app
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: hard · split: train
+
+> Four steps. One: add "Execution Desk Data" at http://localhost:7806 serving `exception_metric`: name "Exceptions", description "Open execution exceptions.", endpoint /exception-count, type metric, sized w=5 h=4 on the grid, staleTime 900000, runButton true, refetchInterval 45000, params required: queue — a text input (type text), labeled "Queue", default "all", described "Exception queue to inspect."; `open_orders`: name "Open Orders", description "Live open orders blotter.", endpoint /open-orders, type table, sized w=20 h=9 on the grid, staleTime 900000, runButton true, refetchInterval 45000, table columns required (field → header (type, extras)): order_id → header "Order" (text); symbol → header "Symbol" (text); qty → header "Qty" (number, int formatter); status → header "Status" (text, titleCase render); `venue_pdf`: name "Venue Scorecard", description "Monthly venue scorecard PDF.", endpoint /venue-scorecard, type pdf, sized w=16 h=14 on the grid, staleTime 900000, runButton true, refetchInterval 45000. Desk convention: every widget this backend serves carries staleTime 900000, shipping app "Execution Config Live", description "Configured exceptions and orders.", tab `execution` named "Execution" places: `exception_metric` at x=0 y=0 w=8 h=5, tab `posture` named "Posture" places: `open_orders` at x=0 y=0 w=20 h=9. Two: instantiate "Execution Config Live" into "Execution Config Live Board". Three: set queue to "urgent" on the opened `exception_metric` widget. Four: a note titled "Execution Config Live" with the text: "Execution Config Live shipped from Execution Desk Data: runButton true."
+
+- Novelty: Unique settings/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/open_orders,Execution Desk Data/venue_pdf; appdefs:Execution Desk Data/Execution Config Live; widgets:Execution Desk Data/exception_metric@*; generated:note@*:Execution Config Live,runButton true.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Execution Desk Data/exception_metric` with data_args ⊇ {"queue": "urgent"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Execution Config Live", "runButton true" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_settings_healthcare_ship` — Ship, open, and configure the Catalyst Config Live app
+
+**L3** · widget-building · workflow: healthcare-catalyst-review · healthcare · difficulty: hard · split: train
+
+> Four steps. One: add "Healthcare Research Data" at http://localhost:7808 serving `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid, category "Catalysts", staleTime 900000, params required: window — a text input (type text), labeled "Window", default "30d", described "Catalyst window in focus."; `trial_catalysts`: name "Trial Catalysts", description "Upcoming clinical trial readouts.", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, category "Catalysts", staleTime 900000, params required: ticker — a dropdown (type endpoint), labeled "Ticker", options fetched from /tickers, default "PFE", table columns required (field → header (type, extras)): ticker → header "Ticker" (text); phase → header "Phase" (text); readout_date → header "Readout" (dateString); `pipeline_chart`: name "Pipeline by Phase", description "Plotly pipeline distribution by phase.", endpoint /pipeline-by-phase, type chart, sized w=20 h=9 on the grid, category "Catalysts", staleTime 900000, raw true. Desk convention: every widget this backend serves carries staleTime 900000, shipping app "Catalyst Config Live", description "Configured catalysts and trial table.", tab `catalysts` named "Catalysts" places: `catalyst_metric` at x=0 y=0 w=8 h=5, tab `posture` named "Posture" places: `trial_catalysts` at x=0 y=0 w=20 h=9. Two: instantiate "Catalyst Config Live" into "Catalyst Config Live Board". Three: set window to "60d" on the opened `catalyst_metric` widget. Four: a note titled "Catalyst Config Live" with the text: "Catalyst Config Live shipped from Healthcare Research Data: Catalysts category."
+
+- Novelty: Unique settings/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric,Healthcare Research Data/pipeline_chart,Healthcare Research Data/trial_catalysts; appdefs:Healthcare Research Data/Catalyst Config Live; widgets:Healthcare Research Data/catalyst_metric@*; generated:note@*:Catalyst Config Live,Catalysts category.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Healthcare Research Data/catalyst_metric` with data_args ⊇ {"window": "60d"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Catalyst Config Live", "Catalysts category" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_settings_rates_ship` — Ship, open, and configure the Rates Config Live app
+
+**L3** · widget-building · workflow: macro-rates-review · macro · difficulty: hard · split: train
+
+> End to end. Publish "Rates Watch Data" at http://localhost:7803 — widgets.json: `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid, category "Macro", staleTime 900000, refetchInterval 30000, params required: curve_view — a text input (type text), labeled "Curve View", default "2s10s", described "Curve segment in focus."; `rates_commentary`: name "Rates Commentary", description "Desk commentary on the rates day.", endpoint /rates-commentary, type markdown, sized w=12 h=8 on the grid, category "Macro", staleTime 900000, refetchInterval 30000, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS10"; `yield_curve`: name "Yield Curve", description "Plotly treasury yield curve snapshot.", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, category "Macro", staleTime 900000, raw true, refetchInterval 30000. Desk convention: every widget this backend serves carries staleTime 900000. apps.json: app "Rates Config Live", description "Configured curve spread and commentary.", tab `rates` named "Rates" places: `curve_spread_metric` at x=0 y=0 w=8 h=5, tab `posture` named "Posture" places: `rates_commentary` at x=0 y=0 w=20 h=9. Then instantiate "Rates Config Live" from that backend into a dashboard named "Rates Config Live Board", set curve_view to "5s30s" on the opened `curve_spread_metric` widget, and leave a note titled "Rates Config Live" that says exactly: "Rates Config Live shipped from Rates Watch Data: Macro category."
+
+- Novelty: Unique settings/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_spread_metric,Rates Watch Data/rates_commentary,Rates Watch Data/yield_curve; appdefs:Rates Watch Data/Rates Config Live; widgets:Rates Watch Data/curve_spread_metric@*; generated:note@*:Rates Config Live,Macro category.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Rates Watch Data/curve_spread_metric` with data_args ⊇ {"curve_view": "5s30s"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Rates Config Live", "Macro category" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_settings_vol_ship` — Ship, open, and configure the Vol Config Live app
+
+**L3** · widget-building · workflow: risk-review · volatility · difficulty: hard · split: test
+
+> Build, publish, open, configure, document. "Vol Desk Data" (http://localhost:7801) serves `vol_regime_metric`: name "Vol Regime", description "Current volatility regime score.", endpoint /vol-regime, type metric, sized w=6 h=4 on the grid, staleTime 900000, runButton true, params required: regime_view — a text input (type text), labeled "Regime View", default "summary", described "Vol regime view to show."; `vol_commentary`: name "Vol Commentary", description "Morning volatility commentary.", endpoint /vol-commentary, type markdown, sized w=12 h=8 on the grid, staleTime 900000, runButton true, params required: desk — a text input (type text), labeled "Desk", static options ["Index"="index", "Single Stock"="single"], default "index"; `vix_history`: name "VIX History", description "Daily CBOE VIX closes with returns.", endpoint /vix-history, type table, sized w=20 h=9 on the grid, staleTime 900000, runButton true, params required: window — a number input (type number), labeled "Window", default 30, min 5, max 365, table columns required (field → header (type, extras)): date → header "Date" (dateString); close → header "Close" (number); return_pct → header "Return %" (number, percent formatter, greenRed render). Desk convention: every widget this backend serves carries staleTime 900000 and ships app "Vol Config Live", description "Configured vol metric and commentary.", tab `vol` named "Vol" places: `vol_regime_metric` at x=0 y=0 w=8 h=5, tab `posture` named "Posture" places: `vol_commentary` at x=0 y=0 w=20 h=9. Open the app as "Vol Config Live Board" via manage_apps, set regime_view to "stress" on the opened `vol_regime_metric` widget, then a note "Vol Config Live" saying: "Vol Config Live shipped from Vol Desk Data: staleTime 900000."
+
+- Novelty: Unique settings/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_history,Vol Desk Data/vol_commentary,Vol Desk Data/vol_regime_metric; appdefs:Vol Desk Data/Vol Config Live; widgets:Vol Desk Data/vol_regime_metric@*; generated:note@*:Vol Config Live,staleTime 900000.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Vol Desk Data/vol_regime_metric` with data_args ⊇ {"regime_view": "stress"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Vol Config Live", "staleTime 900000" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_types_evidence_files_ship` — Ship, open, and configure the Evidence Live app
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: hard · split: train
+
+> Build, publish, open, configure, document. "Surveillance Data" (http://localhost:7807) serves `evidence_files`: name "Evidence Files", description "Browse case evidence documents.", endpoint /evidence-files, type multi_file_viewer, sized w=20 h=14 on the grid, staleTime 900000, params required: file — a dropdown (type endpoint), labeled "File", options fetched from /evidence-file-options, multi-select, default [], roles ["fileSelector"]; `alert_metric`: name "Open Alerts", description "Open alert count.", endpoint /alert-count, type metric, sized w=5 h=4 on the grid, staleTime 900000; `case_notes`: name "Case Notes", description "Notes for one surveillance case.", endpoint /case-notes, type markdown, sized w=12 h=8 on the grid, staleTime 900000, params required: case_id — a text input (type text), labeled "Case", default "C-1042", described "Case identifier.". Desk convention: every widget this backend serves carries staleTime 900000 and ships app "Evidence Live", description "Evidence files, alerts, and notes.", tab `evidence` named "Evidence" places: `evidence_files` at x=0 y=0 w=20 h=12, tab `signals` named "Signals" places: `alert_metric` at x=0 y=0 w=8 h=5. Open the app as "Evidence Live Live" via manage_apps, set file to ["case-pack.pdf"] on the opened `evidence_files` widget, then record a note "Evidence Live" saying: "Evidence Live is live from Surveillance Data: evidence ready."
+
+- Novelty: Unique types/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric,Surveillance Data/case_notes,Surveillance Data/evidence_files; appdefs:Surveillance Data/Evidence Live; widgets:Surveillance Data/evidence_files@*; generated:note@*:Evidence Live,evidence.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Surveillance Data/evidence_files` with data_args ⊇ {"file": ["case-pack.pdf"]} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Evidence Live", "evidence" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_types_policy_digest_pdf_ship` — Ship, open, and configure the Policy Digest Live app
+
+**L3** · widget-building · workflow: compliance-surveillance · compliance · difficulty: hard · split: train
+
+> Four steps. One: add "Surveillance Data" at http://localhost:7807 serving `policy_digest_pdf`: name "Policy Digest PDF", description "Current surveillance policy digest.", endpoint /policy-digest-pdf, type pdf, sized w=16 h=14 on the grid, category "Surveillance", source "/policy/digest.pdf", staleTime 900000, params required: case_scope — a text input (type text), labeled "Case scope", default "C-1042", described "Case bundle for the policy review."; `alert_queue`: name "Alert Queue", description "Open surveillance alerts.", endpoint /alert-queue, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: severity — a text input (type text), labeled "Severity", static options ["High"="high", "Medium"="medium", "Low"="low"], default "high", table columns required (field → header (type, extras)): alert_id → header "Alert" (text); desk → header "Desk" (text); severity → header "Severity" (text, titleCase render); age_days → header "Age (d)" (number, int formatter); `case_notes`: name "Case Notes", description "Notes for one surveillance case.", endpoint /case-notes, type markdown, sized w=12 h=8 on the grid, staleTime 900000, params required: case_id — a text input (type text), labeled "Case", default "C-1042", described "Case identifier.". Desk convention: every widget this backend serves carries staleTime 900000, shipping app "Policy Digest Live", description "Policy PDF, alert queue, and case notes.", tab `policy` named "Policy" places: `policy_digest_pdf` at x=0 y=0 w=20 h=12, tab `signals` named "Signals" places: `alert_queue` at x=0 y=0 w=8 h=5. Two: instantiate "Policy Digest Live" into "Policy Digest Live Live". Three: set case_scope to "C-2099" on the opened `policy_digest_pdf` widget. Four: a note titled "Policy Digest Live" with the text: "Policy Digest Live is live from Surveillance Data: policy digest ready."
+
+- Novelty: Unique types/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_queue,Surveillance Data/case_notes,Surveillance Data/policy_digest_pdf; appdefs:Surveillance Data/Policy Digest Live; widgets:Surveillance Data/policy_digest_pdf@*; generated:note@*:Policy Digest Live,policy digest.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Surveillance Data/policy_digest_pdf` with data_args ⊇ {"case_scope": "C-2099"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Policy Digest Live", "policy digest" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_types_sla_newsfeed_ship` — Ship, open, and configure the Vendor Notice Room app
+
+**L3** · widget-building · workflow: vendor-sla-monitoring · operations · difficulty: hard · split: train
+
+> Four steps. One: add "Vendor SLA Data" at http://localhost:7804 serving `sla_newsfeed`: name "Vendor Notices", description "Vendor incident notices feed.", endpoint /vendor-notices, type newsfeed, sized w=12 h=10 on the grid, staleTime 900000, params required: vendor — a text input (type text), labeled "Vendor", default "AlphaFeed", described "Vendor filter for notices."; `breach_metric`: name "Open Breaches", description "Count of open SLA breaches.", endpoint /breach-count, type metric, sized w=6 h=4 on the grid, staleTime 900000; `vendor_sla_table`: name "Vendor SLA Status", description "Vendor SLA state with breach flags.", endpoint /vendor-sla, type table, sized w=20 h=9 on the grid, staleTime 900000, params required: status — a text input (type text), labeled "Status", static options ["Open"="Open", "Escalated"="Escalated", "Resolved"="Resolved"], default "Open", table columns required (field → header (type, extras)): vendor → header "Vendor" (text); status → header "Status" (text, titleCase render); latency_ms → header "Latency (ms)" (number); breach → header "Breach" (boolean). Desk convention: every widget this backend serves carries staleTime 900000, shipping app "Vendor Notice Room", description "Vendor notices and breach count.", tab `notices` named "Notices" places: `sla_newsfeed` at x=0 y=0 w=20 h=12, tab `signals` named "Signals" places: `breach_metric` at x=0 y=0 w=8 h=5. Two: instantiate "Vendor Notice Room" into "Vendor Notice Room Live". Three: set vendor to "QuoteStream" on the opened `sla_newsfeed` widget. Four: a note titled "Vendor Notice Room" with the text: "Vendor Notice Room is live from Vendor SLA Data: notices ready."
+
+- Novelty: Unique types/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/breach_metric,Vendor SLA Data/sla_newsfeed,Vendor SLA Data/vendor_sla_table; appdefs:Vendor SLA Data/Vendor Notice Room; widgets:Vendor SLA Data/sla_newsfeed@*; generated:note@*:Vendor Notice Room,notices.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Vendor SLA Data/sla_newsfeed` with data_args ⊇ {"vendor": "QuoteStream"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Vendor Notice Room", "notices" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_types_venue_packet_pdf_ship` — Ship, open, and configure the Venue Packet Live app
+
+**L3** · widget-building · workflow: execution-exception-review · execution · difficulty: hard · split: test
+
+> Build, publish, open, configure, document. "Execution Desk Data" (http://localhost:7806) serves `venue_packet_pdf`: name "Venue Packet PDF", description "Monthly venue scorecard packet.", endpoint /venue-packet-pdf, type pdf, sized w=16 h=14 on the grid, category "Execution Reports", source "/reports/venue-scorecard.pdf", staleTime 900000, params required: venue — a dropdown (type endpoint), labeled "Venue", options fetched from /venue-options, default "ARCA"; `exception_metric`: name "Exceptions", description "Open execution exceptions.", endpoint /exception-count, type metric, sized w=5 h=4 on the grid, staleTime 900000; `open_orders`: name "Open Orders", description "Live open orders blotter.", endpoint /open-orders, type table, sized w=20 h=9 on the grid, staleTime 900000, table columns required (field → header (type, extras)): order_id → header "Order" (text); symbol → header "Symbol" (text); qty → header "Qty" (number, int formatter); status → header "Status" (text, titleCase render). Desk convention: every widget this backend serves carries staleTime 900000 and ships app "Venue Packet Live", description "Venue PDF, exceptions, and open orders.", tab `venue` named "Venue" places: `venue_packet_pdf` at x=0 y=0 w=20 h=12, tab `signals` named "Signals" places: `exception_metric` at x=0 y=0 w=8 h=5. Open the app as "Venue Packet Live Live" via manage_apps, set venue to "EDGX" on the opened `venue_packet_pdf` widget, then record a note "Venue Packet Live" saying: "Venue Packet Live is live from Execution Desk Data: venue packet ready."
+
+- Novelty: Unique types/t4 building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/open_orders,Execution Desk Data/venue_packet_pdf; appdefs:Execution Desk Data/Venue Packet Live; widgets:Execution Desk Data/venue_packet_pdf@*; generated:note@*:Venue Packet Live,venue packet.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 8 · oracle reference trace: 4 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Execution Desk Data/venue_packet_pdf` with data_args ⊇ {"venue": "EDGX"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Venue Packet Live", "venue packet" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+### L4 — Repair (20)
+
+#### `auth_t0_extend_add_catalyst_metric` — Refresh Healthcare Research Data with Catalysts 30d
+
+**L4** · app-building · workflow: healthcare-catalyst-review · healthcare · difficulty: easy · split: train
+
+> The custom backend "Healthcare Research Data" is already connected at http://localhost:7808 and serves `pipeline_chart`. Refresh its widgets_json so it still carries `pipeline_chart` and also adds one exact widget: `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid, category "Desk Extensions", staleTime 900000.
+
+- Novelty: Unique extend/t0 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric,Healthcare Research Data/pipeline_chart.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_extend_add_curve_spread_metric` — Refresh Rates Watch Data with 2s10s Spread
+
+**L4** · app-building · workflow: macro-rates-review · macro · difficulty: easy · split: train
+
+> Refresh "Rates Watch Data" (http://localhost:7803) with widgets_json containing both the served `yield_curve` and this new entry - `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid, category "Desk Extensions", staleTime 900000.
+
+- Novelty: Unique extend/t0 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_spread_metric,Rates Watch Data/yield_curve.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_extend_add_exception_metric` — Refresh Execution Desk Data with Exceptions
+
+**L4** · app-building · workflow: execution-exception-review · execution · difficulty: easy · split: train
+
+> Refresh "Execution Desk Data" (http://localhost:7806) with widgets_json containing both the served `open_orders` and this new entry - `exception_metric`: name "Exceptions", description "Open execution exceptions.", endpoint /exception-count, type metric, sized w=5 h=4 on the grid, category "Desk Extensions", staleTime 900000.
+
+- Novelty: Unique extend/t0 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/open_orders.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t0_extend_add_vol_regime_metric` — Refresh Vol Desk Data with Vol Regime
+
+**L4** · app-building · workflow: risk-review · volatility · difficulty: easy · split: validation
+
+> Update the connected backend "Vol Desk Data" with a manage_backends refresh. The widgets_json payload replaces the served file, so include existing `vix_term_structure` and add `vol_regime_metric`: name "Vol Regime", description "Current volatility regime score.", endpoint /vol-regime, type metric, sized w=6 h=4 on the grid, category "Desk Extensions", staleTime 900000.
+
+- Novelty: Unique extend/t0 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_term_structure,Vol Desk Data/vol_regime_metric.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_extend_place_alert_metric` — Add Open Alerts to Alert Review
+
+**L4** · app-building · workflow: compliance-surveillance · compliance · difficulty: medium · split: train
+
+> Extend the connected backend "Surveillance Data" at http://localhost:7807: add widget `alert_metric`: name "Open Alerts", description "Open alert count.", endpoint /alert-count, type metric, sized w=5 h=4 on the grid, keep the existing widgets, and edit apps.json to keep app "Alert Review" on tab `alerts` named "Alerts" and add `alert_metric` at x=24 y=0 w=8 h=5; preserve the existing placement.
+
+- Novelty: Unique extend/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric; appdefs:Surveillance Data/Alert Review.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_extend_place_breach_metric` — Add Open Breaches to Vendor Review
+
+**L4** · app-building · workflow: vendor-sla-monitoring · operations · difficulty: medium · split: train
+
+> Use manage_backends refresh on "Vendor SLA Data". Because widgets_json replaces the file, include `vendor_sla_table` plus `breach_metric`: name "Open Breaches", description "Count of open SLA breaches.", endpoint /breach-count, type metric, sized w=6 h=4 on the grid. Also refresh apps_json so it will keep app "Vendor Review" on tab `vendors` named "Vendors" and add `breach_metric` at x=20 y=0 w=8 h=5; preserve the existing placement.
+
+- Novelty: Unique extend/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/breach_metric; appdefs:Vendor SLA Data/Vendor Review.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_extend_place_curve_spread_metric` — Add 2s10s Spread to Auction Review
+
+**L4** · app-building · workflow: macro-rates-review · macro · difficulty: easy · split: validation
+
+> Check the workspace. "Rates Watch Data" already serves `auction_calendar` and app "Auction Review". Refresh both files: widgets_json must keep the served widgets and add `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid. apps_json must keep app "Auction Review" on tab `auctions` named "Auctions" and add `curve_spread_metric` at x=20 y=0 w=8 h=5; preserve the existing placement.
+
+- Novelty: Unique extend/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_spread_metric; appdefs:Rates Watch Data/Auction Review.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t1_extend_place_vol_regime_metric` — Add Vol Regime to Vol Review
+
+**L4** · app-building · workflow: risk-review · volatility · difficulty: easy · split: test
+
+> Check the workspace. "Vol Desk Data" already serves `vix_history` and app "Vol Review". Refresh both files: widgets_json must keep the served widgets and add `vol_regime_metric`: name "Vol Regime", description "Current volatility regime score.", endpoint /vol-regime, type metric, sized w=6 h=4 on the grid. apps_json must keep app "Vol Review" on tab `overview` named "Overview" and add `vol_regime_metric` at x=20 y=0 w=8 h=5; preserve the existing placement.
+
+- Novelty: Unique extend/t1 building exercise using get_workspace_snapshot, manage_backends with checks app_def, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vol_regime_metric; appdefs:Vol Desk Data/Vol Review.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_extend_modify_case_notes` — Modify Case Notes without dropping siblings
+
+**L4** · app-building · workflow: compliance-surveillance · compliance · difficulty: medium · split: train
+
+> Check the workspace. The connected backend "Surveillance Data" already serves `case_notes` and `alert_metric`. Refresh widgets_json to preserve everything except these two stated changes: Case Notes cache results for 10 minutes and are categorized as Surveillance; and its case_id parameter must be restored to a text input. The resulting `case_notes` should read: `case_notes`: name "Case Notes", description "Notes for one surveillance case.", endpoint /case-notes, type markdown, sized w=12 h=8 on the grid, category "Surveillance", params required: case_id — a text input (type text), labeled "Case", default "C-1042", described "Case identifier."; it caches results for 10 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000..
+
+- Novelty: Unique extend/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric,Surveillance Data/case_notes.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_extend_modify_rates_commentary` — Modify Rates Commentary without dropping siblings
+
+**L4** · app-building · workflow: macro-rates-review · macro · difficulty: medium · split: train
+
+> Use a manage_backends refresh for "Rates Watch Data". widgets_json replaces all served widgets, so carry `curve_spread_metric` unchanged and update `rates_commentary` so Rates Commentary auto-refreshes every 30 seconds and exposes a run button; also its series parameter must be an endpoint dropdown backed by /series-options. Requirements for the changed widget: `rates_commentary`: name "Rates Commentary", description "Desk commentary on the rates day.", endpoint /rates-commentary, type markdown, sized w=12 h=8 on the grid, runButton true, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS10"; it auto-refreshes every 30 seconds. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000..
+
+- Novelty: Unique extend/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_spread_metric,Rates Watch Data/rates_commentary.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_extend_modify_trial_catalysts` — Modify Trial Catalysts without dropping siblings
+
+**L4** · app-building · workflow: healthcare-catalyst-review · healthcare · difficulty: medium · split: validation
+
+> Check the workspace. The connected backend "Healthcare Research Data" already serves `trial_catalysts` and `catalyst_metric`. Refresh widgets_json to preserve everything except these two stated changes: Trial Catalysts cache results for 10 minutes; and its ticker parameter must be an endpoint dropdown backed by /tickers. The resulting `trial_catalysts` should read: `trial_catalysts`: name "Trial Catalysts", description "Upcoming clinical trial readouts.", endpoint /trial-catalysts, type table, sized w=20 h=9 on the grid, params required: ticker — a dropdown (type endpoint), labeled "Ticker", options fetched from /tickers, default "PFE", table columns required (field → header (type, extras)): ticker → header "Ticker" (text); phase → header "Phase" (text); readout_date → header "Readout" (dateString); it caches results for 10 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000..
+
+- Novelty: Unique extend/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric,Healthcare Research Data/trial_catalysts.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t2_extend_modify_vol_screener` — Modify Vol Screener without dropping siblings
+
+**L4** · app-building · workflow: risk-review · volatility · difficulty: medium · split: test
+
+> Check the workspace. The connected backend "Vol Desk Data" already serves `vol_screener` and `vol_regime_metric`. Refresh widgets_json to preserve everything except these two stated changes: the Vol Screener caches results for 10 minutes and is categorized as Volatility; and its ticker parameter must be restored to type ticker. The resulting `vol_screener` should read: `vol_screener`: name "Vol Screener", description "Screen names by implied-vol criteria.", endpoint /vol-screener, type table, sized w=24 h=10 on the grid, category "Volatility", params required: ticker — a ticker picker (type ticker), labeled "Ticker"; as_of — a date picker (type date), labeled "As of", default "$currentDate-1d"; only_liquid — a boolean toggle (type boolean), labeled "Liquid only", default true; it caches results for 10 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000..
+
+- Novelty: Unique extend/t2 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vol_regime_metric,Vol Desk Data/vol_screener.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤1 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_extend_diagnose_earnings` — Diagnose and extend Earnings Prep Data
+
+**L4** · app-building · workflow: earnings-prep · equity-research · difficulty: medium · split: train
+
+> The connected backend "Earnings Prep Data" shows only a validation badge in the snapshot, with a count of affected entries. Scan the served widgets against these desk conventions: Earnings conventions: symbol controls are endpoint params using /symbols; history charts use the standard 20-column chart width; single-value metric tiles use compact width 6. Fix every flagged entry, preserve healthy entries, and ship the queued addition in the same widgets_json refresh: `earnings_note`: name "Earnings Preview", description "Preview note for the earnings call.", endpoint /earnings-preview, type markdown, sized w=12 h=8 on the grid, params required: symbol — a dropdown (type endpoint), labeled "Symbol", options fetched from /symbols, default "AAPL".
+
+- Novelty: Unique extend/t3 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/earnings_chart,Earnings Prep Data/earnings_note,Earnings Prep Data/estimate_revisions,Earnings Prep Data/surprise_metric.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_extend_diagnose_healthcare` — Diagnose and extend Healthcare Research Data
+
+**L4** · app-building · workflow: healthcare-catalyst-review · healthcare · difficulty: medium · split: train
+
+> Diagnose "Healthcare Research Data" from its served payload and count-only warning badge. Conventions: Healthcare conventions: Vega-Lite pipeline widgets use the chart-vegalite type; clinical readout date columns display as Readout; cached healthcare feeds cache for 15 minutes. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000. Refresh widgets_json with all widgets preserved or repaired, plus the queued widget `catalyst_metric`: name "Catalysts 30d", description "Catalysts in the next 30 days.", endpoint /catalyst-count, type metric, sized w=6 h=4 on the grid.
+
+- Novelty: Unique extend/t3 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Healthcare Research Data; artifact widgetdefs:Healthcare Research Data/catalyst_metric,Healthcare Research Data/fda_newsfeed,Healthcare Research Data/pipeline_vegalite,Healthcare Research Data/trial_catalysts.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_extend_diagnose_rates` — Diagnose and extend Rates Watch Data
+
+**L4** · app-building · workflow: macro-rates-review · macro · difficulty: hard · split: validation
+
+> The connected backend "Rates Watch Data" shows only a validation badge in the snapshot, with a count of affected entries. Scan the served widgets against these desk conventions: Rates conventions: Auction Calendar keeps Date as the date header; Rates Commentary series is an endpoint param from /series-options; single-value spread metric tiles use compact width 6. Fix every flagged entry, preserve healthy entries, and ship the queued addition in the same widgets_json refresh: `yield_curve`: name "Yield Curve", description "Plotly treasury yield curve snapshot.", endpoint /yield-curve, type chart, sized w=20 h=9 on the grid, raw true.
+
+- Novelty: Unique extend/t3 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/auction_calendar,Rates Watch Data/curve_spread_metric,Rates Watch Data/rates_commentary,Rates Watch Data/yield_curve.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t3_extend_diagnose_sla` — Diagnose and extend Vendor SLA Data
+
+**L4** · app-building · workflow: vendor-sla-monitoring · operations · difficulty: hard · split: test
+
+> Use manage_backends refresh for "Vendor SLA Data". The snapshot's warning badge names no fields, so compare the served payload to the conventions: Vendor conventions: SLA status tables cache for 10 minutes; single-value breach metrics use compact width 6; incident notice streams are newsfeed widgets. Time-based config converts to milliseconds: "cache results for N minutes" means staleTime N*60000; "auto-refresh every N seconds" means refetchInterval N*1000. Then fix the bad entries, keep compliant widgets, and add `sla_runbook`: name "SLA Runbook", description "Runbook for SLA escalations.", endpoint /sla-runbook, type markdown, sized w=12 h=8 on the grid.
+
+- Novelty: Unique extend/t3 building exercise using get_workspace_snapshot, manage_backends with checks repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/breach_metric,Vendor SLA Data/sla_newsfeed,Vendor SLA Data/sla_runbook,Vendor SLA Data/vendor_sla_table.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (2): `get_workspace_snapshot`, `manage_backends`
+- Turn budget: 5 · oracle reference trace: 2 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_extend_repair_compliance` — Repair, extend, open, and configure Case Repair Live
+
+**L4** · app-building · workflow: compliance-surveillance · compliance · difficulty: hard · split: train
+
+> Diagnose and ship "Surveillance Data". The warning badge does not name fields; apply this convention: Case Q&A keeps a hidden text prompt param. Refresh widgets_json with fixed `case_qa_omni` plus `alert_metric`: name "Open Alerts", description "Open alert count.", endpoint /alert-count, type metric, sized w=5 h=4 on the grid, params required: severity — a text input (type text), labeled "Severity", static options ["High"="high", "Medium"="medium", "Low"="low"], default "high", refresh the served app "Case Repair Live" to include `alert_metric` on a second `posture` tab, open it as "Case Repair Live Dashboard", set prompt to "Show high severity cases" on the opened `case_qa_omni` widget, and add note "Case Repair Live" saying "Case Repair Live is live from Surveillance Data: case repair done.".
+
+- Novelty: Unique extend/t4 building exercise using add_generative_widget, get_workspace_snapshot, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/alert_metric,Surveillance Data/case_qa_omni; appdefs:Surveillance Data/Case Repair Live; widgets:Surveillance Data/case_qa_omni@*; generated:note@*:Case Repair Live,case repair.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 9 · oracle reference trace: 5 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Surveillance Data/case_qa_omni` with data_args ⊇ {"prompt": "Show high severity cases"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Case Repair Live", "case repair" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_extend_repair_execution` — Repair, extend, open, and configure Execution Repair Live
+
+**L4** · app-building · workflow: execution-exception-review · execution · difficulty: hard · split: train
+
+> Diagnose and ship "Execution Desk Data". The warning badge does not name fields; apply this convention: Live Orders Grid keeps Order as the order_id header. The repaired `live_orders_grid` also takes venue — a text input (type text), labeled "Venue", default "ARCA", described "Execution venue filter.". Refresh widgets_json with fixed `live_orders_grid` plus `exception_metric`: name "Exceptions", description "Open execution exceptions.", endpoint /exception-count, type metric, sized w=5 h=4 on the grid, params required: venue — a text input (type text), labeled "Venue", default "ARCA", described "Execution venue.", refresh the served app "Execution Repair Live" to include `exception_metric` on a second `posture` tab, open it as "Execution Repair Live Dashboard", set venue to "EDGX" on the opened `live_orders_grid` widget, and add note "Execution Repair Live" saying "Execution Repair Live is live from Execution Desk Data: execution repair done.".
+
+- Novelty: Unique extend/t4 building exercise using add_generative_widget, get_workspace_snapshot, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/live_orders_grid; appdefs:Execution Desk Data/Execution Repair Live; widgets:Execution Desk Data/live_orders_grid@*; generated:note@*:Execution Repair Live,execution repair.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 9 · oracle reference trace: 5 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Execution Desk Data/live_orders_grid` with data_args ⊇ {"venue": "EDGX"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Execution Repair Live", "execution repair" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_extend_repair_rates` — Repair, extend, open, and configure Rates Repair Live
+
+**L4** · app-building · workflow: macro-rates-review · macro · difficulty: hard · split: train
+
+> Diagnose and ship "Rates Watch Data". The warning badge does not name fields; apply this convention: Rates Commentary series is an endpoint param backed by /series-options. Refresh widgets_json with fixed `rates_commentary` plus `curve_spread_metric`: name "2s10s Spread", description "Current 2s10s spread in bps.", endpoint /curve-spread, type metric, sized w=6 h=4 on the grid, params required: series — a dropdown (type endpoint), labeled "Series", options fetched from /series-options, default "DGS10", refresh the served app "Rates Repair Live" to include `curve_spread_metric` on a second `posture` tab, open it as "Rates Repair Live Dashboard", set series to "DGS2" on the opened `rates_commentary` widget, and add note "Rates Repair Live" saying "Rates Repair Live is live from Rates Watch Data: rates repair done.".
+
+- Novelty: Unique extend/t4 building exercise using add_generative_widget, get_workspace_snapshot, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_spread_metric,Rates Watch Data/rates_commentary; appdefs:Rates Watch Data/Rates Repair Live; widgets:Rates Watch Data/rates_commentary@*; generated:note@*:Rates Repair Live,rates repair.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 9 · oracle reference trace: 5 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Rates Watch Data/rates_commentary` with data_args ⊇ {"series": "DGS2"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Rates Repair Live", "rates repair" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+#### `auth_t4_extend_repair_vol` — Repair, extend, open, and configure Vol Repair Live
+
+**L4** · app-building · workflow: risk-review · volatility · difficulty: hard · split: test
+
+> End to end on the connected backend "Vol Desk Data". The snapshot shows a count-only validation badge. Desk convention: VIX Advanced Chart uses grid width 20. The repaired `vix_advanced` also takes symbol — a text input (type text), labeled "Symbol", default "VX1", described "Advanced chart symbol.". Refresh widgets_json to repair `vix_advanced`, preserve it, and add `vol_regime_metric`: name "Vol Regime", description "Current volatility regime score.", endpoint /vol-regime, type metric, sized w=6 h=4 on the grid, params required: symbol — a text input (type text), labeled "Symbol", default "VIX", described "Volatility symbol.". Refresh apps_json so app "Vol Repair Live" keeps `vix_advanced` on tab `vol` and places `vol_regime_metric` on a second tab `posture` named "Posture". Then instantiate "Vol Repair Live" into dashboard "Vol Repair Live Dashboard", set symbol to "VX2" on the opened `vix_advanced` widget, and leave a note titled "Vol Repair Live" that says exactly: "Vol Repair Live is live from Vol Desk Data: vol regime done."
+
+- Novelty: Unique extend/t4 building exercise using add_generative_widget, get_workspace_snapshot, manage_apps, manage_backends, update_widget with checks app_def, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_advanced,Vol Desk Data/vol_regime_metric; appdefs:Vol Desk Data/Vol Repair Live; widgets:Vol Desk Data/vix_advanced@*; generated:note@*:Vol Repair Live,vol regime.
+- Initial workspace: empty (no seeded dashboard)
+- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `add_generative_widget`, `update_widget`
+- Turn budget: 9 · oracle reference trace: 5 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Vol Desk Data/vix_advanced` with data_args ⊇ {"symbol": "VX2"} → `missing_widget`
+- **Generated note** ≥1× whose content mentions "Vol Repair Live", "vol regime" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
+- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Trace**: ≤2 invalid tool call(s) in the whole episode → `too_many_invalid_calls`
+- **Trace**: ≤2 consecutive `get_workspace_snapshot` call(s) → `repeated_snapshots`
+
+
 ---
 
-Total: 300 scenarios.
+Total: 512 scenarios.

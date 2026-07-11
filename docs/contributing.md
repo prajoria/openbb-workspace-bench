@@ -14,7 +14,7 @@ and RL adapter.
 6. Run:
 
 ```bash
-uv run --extra dev workspace-bench validate --pack all --min-scenarios 300
+uv run workspace-bench validate --pack all --min-scenarios 300
 ```
 
 For private scenarios, put JSON files in a separate directory and use
@@ -38,7 +38,7 @@ Current trace-oriented issue codes include `missing_tool_call`,
 Prefer the external JSONL command protocol first:
 
 ```bash
-uv run --extra dev workspace-bench run-agent-command \
+uv run workspace-bench run-agent-command \
   --scenario gen_t0_create_price_performance_aapl \
   --agent-command "python my_agent.py" \
   --json
@@ -83,13 +83,13 @@ Run before submitting:
 
 ```bash
 uv run --extra dev python -m pytest
-uv run --extra dev workspace-bench validate --pack all --min-scenarios 300
+uv run workspace-bench validate --pack all --min-scenarios 300
 ```
 
 For comparison-runner changes, also run:
 
 ```bash
-uv run --extra dev workspace-bench compare-models \
+uv run workspace-bench compare-models \
   --models-file examples/models.example.json \
   --difficulty easy \
   --dry-run
