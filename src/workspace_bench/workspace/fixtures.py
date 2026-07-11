@@ -242,7 +242,7 @@ class FixtureBackend:
             return [{"label": sector, "value": sector} for sector in SECTORS]
         if widget_id and widget_id in self.widgets:
             schema = self.widgets[widget_id]
-            for param in schema.get("params", []) or []:
+            for param in _flat_widget_params(schema):
                 if param.get("paramName") == param_name:
                     options = param.get("options") or []
                     if isinstance(options, list):
@@ -471,7 +471,7 @@ def build_equities_backend(url: str = "http://127.0.0.1:9101") -> FixtureBackend
 
 
 def build_macro_backend(url: str = "http://127.0.0.1:9102") -> FixtureBackend:
-    widgets = {
+    widgets: dict[str, JsonDict] = {
         "macro_timeseries": {
             "name": "Macro Time Series",
             "description": "Historical macroeconomic series values by date.",
@@ -568,6 +568,21 @@ def build_stark_enterprise_backend(
     )
 
 
+def _flat_widget_params(definition: JsonDict) -> list[JsonDict]:
+    """Flatten widget params; authored payloads may nest them in row arrays."""
+
+    params = definition.get("params")
+    flat: list[JsonDict] = []
+    if not isinstance(params, list):
+        return flat
+    for entry in params:
+        if isinstance(entry, list):
+            flat.extend(item for item in entry if isinstance(item, dict))
+        elif isinstance(entry, dict):
+            flat.append(entry)
+    return flat
+
+
 def _generic_widget_data(
     widget_id: str, definition: JsonDict, data_args: JsonDict
 ) -> Any:
@@ -578,9 +593,10 @@ def _generic_widget_data(
         str(param.get("paramName")): data_args.get(
             str(param.get("paramName")), param.get("value")
         )
-        for param in definition.get("params", []) or []
+        for param in _flat_widget_params(definition)
         if param.get("paramName")
     }
+    value = round((sum(ord(char) for char in widget_id) % 9000) / 100, 2)
     base = {
         "widget_id": widget_id,
         "widget_name": name,
@@ -590,7 +606,7 @@ def _generic_widget_data(
         "fund": params.get("fund", "Flagship Long/Short"),
         "ticker": params.get("ticker", params.get("symbol", "AAPL")),
         "workflow": widget_id.rsplit("_", 1)[0],
-        "value": round((sum(ord(char) for char in widget_id) % 9000) / 100, 2),
+        "value": value,
     }
     if widget_type == "markdown":
         return (
@@ -601,7 +617,7 @@ def _generic_widget_data(
     if widget_type == "metric":
         return [
             {"metric": "primary_value", **base},
-            {"metric": "change", **base, "value": round(base["value"] / 10, 2)},
+            {"metric": "change", **base, "value": round(value / 10, 2)},
         ]
     return [
         {"row": 1, "metric": "priority", **base},
@@ -610,14 +626,14 @@ def _generic_widget_data(
             "metric": "risk_or_opportunity",
             **base,
             "status": "In Review",
-            "value": round(base["value"] * 1.15, 2),
+            "value": round(value * 1.15, 2),
         },
         {
             "row": 3,
             "metric": "action_required",
             **base,
             "status": "Approved",
-            "value": round(base["value"] * 0.85, 2),
+            "value": round(value * 0.85, 2),
         },
     ]
 

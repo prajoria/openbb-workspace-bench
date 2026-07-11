@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 import re
 from collections import defaultdict
-from typing import Any
 
 from workspace_bench.core.models import (
     GradeIssue,
@@ -125,58 +124,59 @@ def grade_task(
                 ),
             )
 
-    for required in task.success.required_generated_widgets:
-        matches = _matching_generated_widgets(required, widgets)
+    for required_generated in task.success.required_generated_widgets:
+        generated_matches = _matching_generated_widgets(required_generated, widgets)
         builder.check(
-            len(matches) >= required.min_count,
+            len(generated_matches) >= required_generated.min_count,
             "missing_generated_widget",
             (
-                f"Expected at least {required.min_count} generated "
-                f"{required.widget_type} widget(s), found {len(matches)}."
+                f"Expected at least {required_generated.min_count} generated "
+                f"{required_generated.widget_type} widget(s), "
+                f"found {len(generated_matches)}."
             ),
         )
 
     for required_layout in task.success.required_layouts:
-        matches = _matching_layouts(required_layout, widgets)
+        layout_matches = _matching_layouts(required_layout, widgets)
         builder.check(
-            bool(matches),
+            bool(layout_matches),
             "layout_mismatch",
             f"No widget layout matched {required_layout}.",
         )
 
     for required_call in task.success.required_tool_calls:
-        matches = _matching_tool_calls(required_call, trace)
+        call_matches = _matching_tool_calls(required_call, trace)
         builder.check(
-            len(matches) >= required_call.min_count,
+            len(call_matches) >= required_call.min_count,
             "missing_tool_call",
             (
                 f"Expected at least {required_call.min_count} "
                 f"{required_call.name!r} call(s) with args containing "
-                f"{required_call.args_contains}, found {len(matches)}."
+                f"{required_call.args_contains}, found {len(call_matches)}."
             ),
         )
 
     for required_result in task.success.required_tool_results:
-        matches = _matching_tool_results(required_result, trace)
+        result_matches = _matching_tool_results(required_result, trace)
         builder.check(
-            len(matches) >= required_result.min_count,
+            len(result_matches) >= required_result.min_count,
             "missing_tool_result",
             (
                 f"Expected at least {required_result.min_count} "
                 f"{required_result.name!r} result(s) containing "
-                f"{required_result.data_contains}, found {len(matches)}."
+                f"{required_result.data_contains}, found {len(result_matches)}."
             ),
         )
 
     for required_read in task.success.required_resource_reads:
-        matches = _matching_resource_reads(required_read, trace)
+        read_matches = _matching_resource_reads(required_read, trace)
         builder.check(
-            len(matches) >= required_read.min_count,
+            len(read_matches) >= required_read.min_count,
             "missing_resource_read",
             (
                 f"Expected at least {required_read.min_count} resource read(s) "
                 f"for {required_read.uri!r} containing "
-                f"{required_read.data_contains}, found {len(matches)}."
+                f"{required_read.data_contains}, found {len(read_matches)}."
             ),
         )
 
@@ -318,6 +318,9 @@ def _normalized_text(text: str) -> str:
 
 def _matching_layouts(required: RequiredLayout, widgets: list[JsonDict]) -> list[JsonDict]:
     matches = []
+    expected_values = (
+        ("x", required.x), ("y", required.y), ("w", required.w), ("h", required.h),
+    )
     for widget in widgets:
         if required.widget_uuid and widget.get("widget_uuid") != required.widget_uuid:
             continue
@@ -326,16 +329,21 @@ def _matching_layouts(required: RequiredLayout, widgets: list[JsonDict]) -> list
         layout = widget.get("layout") or {}
         if required.tab_id is not None and layout.get("tab_id") != required.tab_id:
             continue
-        if required.x is not None and float(layout.get("x")) != required.x:
-            continue
-        if required.y is not None and float(layout.get("y")) != required.y:
-            continue
-        if required.w is not None and float(layout.get("w")) != required.w:
-            continue
-        if required.h is not None and float(layout.get("h")) != required.h:
+        if any(
+            expected is not None and not _layout_value_equals(layout, key, expected)
+            for key, expected in expected_values
+        ):
             continue
         matches.append(widget)
     return matches
+
+
+def _layout_value_equals(layout: JsonDict, key: str, expected: float) -> bool:
+    value = layout.get(key)
+    try:
+        return value is not None and float(value) == expected
+    except (TypeError, ValueError):
+        return False
 
 
 def _dict_contains(actual: JsonDict, expected: JsonDict) -> bool:
@@ -567,27 +575,27 @@ def _grade_backend_building(
                 ),
             )
 
-    for required in task.success.required_app_defs:
-        backend = _find_custom_backend(final_snapshot, required.backend_name)
+    for required_app in task.success.required_app_defs:
+        backend = _find_custom_backend(final_snapshot, required_app.backend_name)
         if backend is None:
             builder.check(
                 False,
                 "missing_custom_backend",
                 (
-                    f"Expected custom backend {required.backend_name!r} to be "
+                    f"Expected custom backend {required_app.backend_name!r} to be "
                     "registered (manage_backends operation='add' with widgets_json)."
                 ),
             )
             continue
-        label = required.template_id or required.name_contains
+        label = required_app.template_id or required_app.name_contains
         app = None
         for candidate in backend.get("apps_json") or []:
             if not isinstance(candidate, dict):
                 continue
-            if required.template_id and candidate.get("template_id") == required.template_id:
+            if required_app.template_id and candidate.get("template_id") == required_app.template_id:
                 app = candidate
                 break
-            if required.name_contains and required.name_contains.lower() in str(
+            if required_app.name_contains and required_app.name_contains.lower() in str(
                 candidate.get("name", "")
             ).lower():
                 app = candidate
@@ -597,12 +605,12 @@ def _grade_backend_building(
             "missing_app_def",
             (
                 f"Expected app {label!r} in the apps.json of custom backend "
-                f"{required.backend_name!r}."
+                f"{required_app.backend_name!r}."
             ),
         )
         if app is None:
             continue
-        for path, expected in required.expect.items():
+        for path, expected in required_app.expect.items():
             found, actual = _lookup_path(app, path)
             if found:
                 message = (
@@ -613,31 +621,31 @@ def _grade_backend_building(
                 message = f"App {label!r}: missing {path} (expected {expected!r})."
             builder.check(found and actual == expected, "app_def_mismatch", message)
         tabs = app.get("tabs") or {}
-        for tab_id in required.tabs_include:
+        for tab_id in required_app.tabs_include:
             builder.check(
                 tab_id in tabs,
                 "app_def_mismatch",
                 f"App {label!r}: expected tab {tab_id!r}, found {sorted(tabs)}.",
             )
-        if required.tab_count is not None:
+        if required_app.tab_count is not None:
             builder.check(
-                len(tabs) == required.tab_count,
+                len(tabs) == required_app.tab_count,
                 "app_def_mismatch",
-                f"App {label!r}: expected {required.tab_count} tab(s), found {len(tabs)}.",
+                f"App {label!r}: expected {required_app.tab_count} tab(s), found {len(tabs)}.",
             )
-        if required.prompts_min_count is not None:
+        if required_app.prompts_min_count is not None:
             prompts = app.get("prompts") or []
             count = len(prompts) if isinstance(prompts, list) else 0
             builder.check(
-                count >= required.prompts_min_count,
+                count >= required_app.prompts_min_count,
                 "app_def_mismatch",
                 (
-                    f"App {label!r}: expected at least {required.prompts_min_count} "
+                    f"App {label!r}: expected at least {required_app.prompts_min_count} "
                     f"prompt(s), found {count}."
                 ),
             )
         items = _app_layout_items(app)
-        if required.layout_refs_valid:
+        if required_app.layout_refs_valid:
             widget_ids = set(backend.get("widgets_json") or {})
             dangling = sorted({
                 str(item.get("i"))
@@ -653,7 +661,7 @@ def _grade_backend_building(
                     f"not serve: {dangling}."
                 ),
             )
-        if required.no_overlaps:
+        if required_app.no_overlaps:
             by_tab: dict[str, list[JsonDict]] = {}
             for tab_key, item in items:
                 by_tab.setdefault(tab_key, []).append(item)
@@ -670,7 +678,7 @@ def _grade_backend_building(
                 "app_layout_overlap",
                 f"App {label!r}: overlapping layout items: {overlaps}.",
             )
-        for placement in required.widgets_on_tab:
+        for placement in required_app.widgets_on_tab:
             tab_id = str(placement.get("tab_id"))
             widget_id = str(placement.get("widget_id"))
             present = any(
@@ -683,7 +691,7 @@ def _grade_backend_building(
                 f"App {label!r}: expected widget {widget_id!r} on tab {tab_id!r}.",
             )
         groups = app.get("groups") or []
-        for spec in required.groups_include:
+        for spec in required_app.groups_include:
             widget_ids_include = spec.get("widgetIds_include", [])
             base_spec = {
                 key: value
@@ -743,13 +751,18 @@ def _grade_trace(
                 for widget in (event.result.get("data") or {}).get("widgets", []):
                     listed_widgets.add((widget.get("origin"), widget.get("widget_id")))
             if event.call.name in {"get_widget_schema", "create_widget"}:
-                origin = event.call.args.get("origin") or event.call.args.get("backend_name")
-                widget_id = event.call.args.get("widget_id")
+                used_origin = (
+                    event.call.args.get("origin") or event.call.args.get("backend_name")
+                )
+                used_widget_id = event.call.args.get("widget_id")
                 if listed_widgets:
                     builder.check(
-                        (origin, widget_id) in listed_widgets,
+                        (used_origin, used_widget_id) in listed_widgets,
                         "unlisted_widget_id",
-                        f"{event.call.name} used unlisted widget {origin}/{widget_id}.",
+                        (
+                            f"{event.call.name} used unlisted widget "
+                            f"{used_origin}/{used_widget_id}."
+                        ),
                     )
 
     if checks.max_repeated_snapshots is not None:
@@ -771,9 +784,6 @@ def _max_consecutive_snapshots(trace: tuple[ToolTraceEvent, ...]) -> int:
         if event.call.name == "get_workspace_snapshot":
             current += 1
             max_seen = max(max_seen, current)
-            continue
-        if event.call.name in STATE_CHANGING_TOOLS:
-            current = 0
         else:
             current = 0
     return max_seen

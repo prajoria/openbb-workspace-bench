@@ -34,7 +34,7 @@ def annotate_rollouts(
     task_suite: TaskSuiteManifest | None = None,
     exported_at: str | None = None,
 ) -> list[RolloutRecord]:
-    """Return rollout records with benchmark and task-pack metadata attached."""
+    """Return rollout records with benchmark and task-suite metadata attached."""
 
     timestamp = exported_at or _utc_now()
     annotated = []

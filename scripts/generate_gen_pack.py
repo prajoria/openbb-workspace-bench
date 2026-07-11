@@ -23,7 +23,7 @@ semantically identical full-prompt variants. The selected surface wording is
 `md5(task_id) % len(pool)`, so the same task id keeps the same prompt
 forever without using randomness.
 
-Certification: `workspace-bench validate --pack all --min-tasks 300`
+Certification: `workspace-bench validate --suite core --min-tasks 300`
 must report oracle pass and no-op fail for every task.
 """
 
@@ -1894,7 +1894,7 @@ def read_task(level: str, slug: str, widgets: list[str], facts_mode: str) -> Non
     oracle.append(note_call("Data Note", text))
     names = " and ".join(STARK["widgets"][wid]["name"] for wid in widgets)
     if facts_mode == "id":
-        ask = (f"then add a short note that cites "
+        ask = ("then add a short note that cites "
                + (f"{widgets[0]}" if len(widgets) == 1 else " and ".join(widgets))
                + " and says you reviewed the data.")
     else:
@@ -4762,7 +4762,8 @@ def main() -> None:
     prompt_sites, prompt_pool_sizes, distinct_prompts = prompt_pool_report(SCENARIOS)
 
     for task in SCENARIOS:
-        family, level = task.pop("_family"), task.pop("_level")
+        task.pop("_family")
+        task.pop("_level")
         for directory in OUT_DIRS:
             (directory / f"{task['id']}.json").write_text(
                 json.dumps(task, indent=2) + "\n")

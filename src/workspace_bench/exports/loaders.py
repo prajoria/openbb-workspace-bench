@@ -67,13 +67,15 @@ def load_comparison_rollouts(
             run_dir = _resolve_artifact_path(item.get("run_dir"), base_dir=comparison_dir)
             tool_calls = load_tool_calls(output_path)
             result = replay_tool_calls(task, tool_calls)
-            task = _read_json(task_path) if task_path.exists() else build_task_envelope(task)
+            envelope = (
+                _read_json(task_path) if task_path.exists() else build_task_envelope(task)
+            )
             messages_path = run_dir / "conversation.json"
             messages = _read_json(messages_path) if messages_path.exists() else []
             records.append(
                 run_result_to_rollout(
                     result,
-                    task=task,
+                    task=envelope,
                     messages=messages,
                     metadata={
                         "source": "comparison",
@@ -113,7 +115,7 @@ def load_trace_dir_rollouts(
         task_payload = payload.get("task", {})
         task_id = task_payload.get("id")
         task = task_by_id.get(task_id)
-        task = (
+        envelope = (
             build_task_envelope(task)
             if task is not None
             else {"schema_version": "workspace-bench-task-v1", "task": task_payload}
@@ -135,8 +137,8 @@ def load_trace_dir_rollouts(
         grade = payload.get("grade", {})
         records.append(
             RolloutRecord(
-                task=task,
-                messages=synthesize_messages(task, tool_calls),
+                task=envelope,
+                messages=synthesize_messages(envelope, tool_calls),
                 tool_calls=tool_calls,
                 tool_results=tool_results,
                 final_snapshot=payload.get("final_snapshot", {}),
@@ -246,7 +248,7 @@ def synthesize_messages(task: JsonDict, tool_calls: list[JsonDict]) -> list[Json
     ]
 
 
-def _read_json(path: Path) -> JsonDict:
+def _read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 

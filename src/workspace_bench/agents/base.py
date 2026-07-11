@@ -11,7 +11,10 @@ from workspace_bench.core.models import Task, ToolCall
 class BenchAgent(Protocol):
     """Agent interface used by the local runner."""
 
-    name: str
+    @property
+    def name(self) -> str:
+        """Stable agent name used in reports."""
+        ...
 
     def tool_calls(self, task: Task) -> tuple[ToolCall, ...]:
         """Return the tool calls to execute for a task."""

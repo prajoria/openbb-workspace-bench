@@ -5,7 +5,7 @@
    "slug": "glm-5.2",
    "strict": 229,
    "mean_score": 0.9015,
-   "tiers": {
+   "levels": {
     "t0": [
      51,
      60
@@ -116,7 +116,7 @@
    "slug": "gpt-4.1-mini",
    "strict": 211,
    "mean_score": 0.9574,
-   "tiers": {
+   "levels": {
     "t0": [
      59,
      60
@@ -227,7 +227,7 @@
    "slug": "gpt-5.5",
    "strict": 282,
    "mean_score": 0.9919,
-   "tiers": {
+   "levels": {
     "t0": [
      59,
      60
@@ -336,7 +336,7 @@
    "slug": "gpt-oss-20b",
    "strict": 178,
    "mean_score": 0.9184,
-   "tiers": {
+   "levels": {
     "t0": [
      56,
      60
@@ -447,7 +447,7 @@
    "slug": "qwen3-8b",
    "strict": 149,
    "mean_score": 0.9077,
-   "tiers": {
+   "levels": {
     "t0": [
      48,
      60
@@ -558,7 +558,7 @@
    "slug": "sonnet-5",
    "strict": 267,
    "mean_score": 0.9851,
-   "tiers": {
+   "levels": {
     "t0": [
      60,
      60
@@ -666,10 +666,10 @@
    }
   }
  ],
- "scenarios": [
+ "tasks": [
   {
    "id": "gen_t0_app_client_360",
-   "tier": "t0",
+   "level": "t0",
    "family": "apps",
    "difficulty": "easy",
    "models": {
@@ -707,7 +707,7 @@
   },
   {
    "id": "gen_t0_app_execution_desk",
-   "tier": "t0",
+   "level": "t0",
    "family": "apps",
    "difficulty": "easy",
    "models": {
@@ -745,7 +745,7 @@
   },
   {
    "id": "gen_t0_app_risk_exposure_monitor",
-   "tier": "t0",
+   "level": "t0",
    "family": "apps",
    "difficulty": "easy",
    "models": {
@@ -783,7 +783,7 @@
   },
   {
    "id": "gen_t0_app_vendor_dataset_monitor",
-   "tier": "t0",
+   "level": "t0",
    "family": "apps",
    "difficulty": "easy",
    "models": {
@@ -821,7 +821,7 @@
   },
   {
    "id": "gen_t0_backends_add_equities",
-   "tier": "t0",
+   "level": "t0",
    "family": "backends",
    "difficulty": "easy",
    "models": {
@@ -859,7 +859,7 @@
   },
   {
    "id": "gen_t0_backends_add_macro",
-   "tier": "t0",
+   "level": "t0",
    "family": "backends",
    "difficulty": "easy",
    "models": {
@@ -897,7 +897,7 @@
   },
   {
    "id": "gen_t0_backends_add_portfolio",
-   "tier": "t0",
+   "level": "t0",
    "family": "backends",
    "difficulty": "easy",
    "models": {
@@ -935,7 +935,7 @@
   },
   {
    "id": "gen_t0_backends_add_stark_enterprise",
-   "tier": "t0",
+   "level": "t0",
    "family": "backends",
    "difficulty": "easy",
    "models": {
@@ -973,7 +973,7 @@
   },
   {
    "id": "gen_t0_create_latest_news_aapl",
-   "tier": "t0",
+   "level": "t0",
    "family": "create",
    "difficulty": "easy",
    "models": {
@@ -1011,7 +1011,7 @@
   },
   {
    "id": "gen_t0_create_price_performance_aapl",
-   "tier": "t0",
+   "level": "t0",
    "family": "create",
    "difficulty": "easy",
    "models": {
@@ -1049,7 +1049,7 @@
   },
   {
    "id": "gen_t0_create_risk_metrics_plain",
-   "tier": "t0",
+   "level": "t0",
    "family": "create",
    "difficulty": "easy",
    "models": {
@@ -1087,7 +1087,7 @@
   },
   {
    "id": "gen_t0_create_yield_curve_plain",
-   "tier": "t0",
+   "level": "t0",
    "family": "create",
    "difficulty": "easy",
    "models": {
@@ -1125,7 +1125,7 @@
   },
   {
    "id": "gen_t0_delegate_client_single",
-   "tier": "t0",
+   "level": "t0",
    "family": "delegate",
    "difficulty": "easy",
    "models": {
@@ -1163,7 +1163,7 @@
   },
   {
    "id": "gen_t0_delegate_earnings_single",
-   "tier": "t0",
+   "level": "t0",
    "family": "delegate",
    "difficulty": "easy",
    "models": {
@@ -1201,7 +1201,7 @@
   },
   {
    "id": "gen_t0_delegate_risk_single",
-   "tier": "t0",
+   "level": "t0",
    "family": "delegate",
    "difficulty": "easy",
    "models": {
@@ -1239,7 +1239,7 @@
   },
   {
    "id": "gen_t0_delegate_vendor_single",
-   "tier": "t0",
+   "level": "t0",
    "family": "delegate",
    "difficulty": "easy",
    "models": {
@@ -1277,7 +1277,7 @@
   },
   {
    "id": "gen_t0_delete_alerts_47",
-   "tier": "t0",
+   "level": "t0",
    "family": "delete",
    "difficulty": "easy",
    "models": {
@@ -1315,7 +1315,7 @@
   },
   {
    "id": "gen_t0_delete_news_12",
-   "tier": "t0",
+   "level": "t0",
    "family": "delete",
    "difficulty": "easy",
    "models": {
@@ -1353,7 +1353,7 @@
   },
   {
    "id": "gen_t0_delete_performance_18",
-   "tier": "t0",
+   "level": "t0",
    "family": "delete",
    "difficulty": "easy",
    "models": {
@@ -1391,7 +1391,7 @@
   },
   {
    "id": "gen_t0_delete_timeseries_17",
-   "tier": "t0",
+   "level": "t0",
    "family": "delete",
    "difficulty": "easy",
    "models": {
@@ -1429,7 +1429,7 @@
   },
   {
    "id": "gen_t0_inspect_read_holdings_table_2",
-   "tier": "t0",
+   "level": "t0",
    "family": "inspect",
    "difficulty": "easy",
    "models": {
@@ -1467,7 +1467,7 @@
   },
   {
    "id": "gen_t0_inspect_read_macro_timeseries_1",
-   "tier": "t0",
+   "level": "t0",
    "family": "inspect",
    "difficulty": "easy",
    "models": {
@@ -1505,7 +1505,7 @@
   },
   {
    "id": "gen_t0_inspect_read_portfolio_command_center_overview_workflow_overview_3",
-   "tier": "t0",
+   "level": "t0",
    "family": "inspect",
    "difficulty": "easy",
    "models": {
@@ -1543,7 +1543,7 @@
   },
   {
    "id": "gen_t0_inspect_read_price_performance_0",
-   "tier": "t0",
+   "level": "t0",
    "family": "inspect",
    "difficulty": "easy",
    "models": {
@@ -1581,7 +1581,7 @@
   },
   {
    "id": "gen_t0_layout_halve_price_msft",
-   "tier": "t0",
+   "level": "t0",
    "family": "layout",
    "difficulty": "easy",
    "models": {
@@ -1619,7 +1619,7 @@
   },
   {
    "id": "gen_t0_layout_move_news_right",
-   "tier": "t0",
+   "level": "t0",
    "family": "layout",
    "difficulty": "easy",
    "models": {
@@ -1657,7 +1657,7 @@
   },
   {
    "id": "gen_t0_layout_shorten_estimates_nvda",
-   "tier": "t0",
+   "level": "t0",
    "family": "layout",
    "difficulty": "easy",
    "models": {
@@ -1695,7 +1695,7 @@
   },
   {
    "id": "gen_t0_layout_widen_fundamentals_aapl",
-   "tier": "t0",
+   "level": "t0",
    "family": "layout",
    "difficulty": "easy",
    "models": {
@@ -1733,7 +1733,7 @@
   },
   {
    "id": "gen_t0_nav_rename_compliance_day",
-   "tier": "t0",
+   "level": "t0",
    "family": "navigate",
    "difficulty": "easy",
    "models": {
@@ -1771,7 +1771,7 @@
   },
   {
    "id": "gen_t0_nav_rename_equity_desk",
-   "tier": "t0",
+   "level": "t0",
    "family": "navigate",
    "difficulty": "easy",
    "models": {
@@ -1809,7 +1809,7 @@
   },
   {
    "id": "gen_t0_nav_rename_execution_open",
-   "tier": "t0",
+   "level": "t0",
    "family": "navigate",
    "difficulty": "easy",
    "models": {
@@ -1847,7 +1847,7 @@
   },
   {
    "id": "gen_t0_nav_rename_macro_watch",
-   "tier": "t0",
+   "level": "t0",
    "family": "navigate",
    "difficulty": "easy",
    "models": {
@@ -1885,7 +1885,7 @@
   },
   {
    "id": "gen_t0_note_handover",
-   "tier": "t0",
+   "level": "t0",
    "family": "note",
    "difficulty": "easy",
    "models": {
@@ -1923,7 +1923,7 @@
   },
   {
    "id": "gen_t0_note_outage",
-   "tier": "t0",
+   "level": "t0",
    "family": "note",
    "difficulty": "easy",
    "models": {
@@ -1961,7 +1961,7 @@
   },
   {
    "id": "gen_t0_note_reminder",
-   "tier": "t0",
+   "level": "t0",
    "family": "note",
    "difficulty": "easy",
    "models": {
@@ -1999,7 +1999,7 @@
   },
   {
    "id": "gen_t0_note_standup",
-   "tier": "t0",
+   "level": "t0",
    "family": "note",
    "difficulty": "easy",
    "models": {
@@ -2037,7 +2037,7 @@
   },
   {
    "id": "gen_t0_params_sector_client_360_meeting_prep_relationship_metrics_3",
-   "tier": "t0",
+   "level": "t0",
    "family": "params",
    "difficulty": "easy",
    "models": {
@@ -2075,7 +2075,7 @@
   },
   {
    "id": "gen_t0_params_sector_sector_exposure_2",
-   "tier": "t0",
+   "level": "t0",
    "family": "params",
    "difficulty": "easy",
    "models": {
@@ -2113,7 +2113,7 @@
   },
   {
    "id": "gen_t0_params_series_macro_timeseries_1",
-   "tier": "t0",
+   "level": "t0",
    "family": "params",
    "difficulty": "easy",
    "models": {
@@ -2151,7 +2151,7 @@
   },
   {
    "id": "gen_t0_params_symbol_price_performance_0",
-   "tier": "t0",
+   "level": "t0",
    "family": "params",
    "difficulty": "easy",
    "models": {
@@ -2189,7 +2189,7 @@
   },
   {
    "id": "gen_t0_prompts_fetch_workspace_session_context_1",
-   "tier": "t0",
+   "level": "t0",
    "family": "prompts",
    "difficulty": "easy",
    "models": {
@@ -2227,7 +2227,7 @@
   },
   {
    "id": "gen_t0_prompts_fetch_workspace_session_context_3",
-   "tier": "t0",
+   "level": "t0",
    "family": "prompts",
    "difficulty": "easy",
    "models": {
@@ -2265,7 +2265,7 @@
   },
   {
    "id": "gen_t0_prompts_fetch_workspace_tool_usage_0",
-   "tier": "t0",
+   "level": "t0",
    "family": "prompts",
    "difficulty": "easy",
    "models": {
@@ -2303,7 +2303,7 @@
   },
   {
    "id": "gen_t0_prompts_fetch_workspace_tool_usage_2",
-   "tier": "t0",
+   "level": "t0",
    "family": "prompts",
    "difficulty": "easy",
    "models": {
@@ -2341,7 +2341,7 @@
   },
   {
    "id": "gen_t0_read_attribution",
-   "tier": "t0",
+   "level": "t0",
    "family": "read",
    "difficulty": "easy",
    "models": {
@@ -2379,7 +2379,7 @@
   },
   {
    "id": "gen_t0_read_latency",
-   "tier": "t0",
+   "level": "t0",
    "family": "read",
    "difficulty": "easy",
    "models": {
@@ -2417,7 +2417,7 @@
   },
   {
    "id": "gen_t0_read_limits",
-   "tier": "t0",
+   "level": "t0",
    "family": "read",
    "difficulty": "easy",
    "models": {
@@ -2455,7 +2455,7 @@
   },
   {
    "id": "gen_t0_read_order_status",
-   "tier": "t0",
+   "level": "t0",
    "family": "read",
    "difficulty": "easy",
    "models": {
@@ -2493,7 +2493,7 @@
   },
   {
    "id": "gen_t0_resources_skill_finance_comps",
-   "tier": "t0",
+   "level": "t0",
    "family": "resources",
    "difficulty": "easy",
    "models": {
@@ -2531,7 +2531,7 @@
   },
   {
    "id": "gen_t0_resources_skill_finance_earnings_prep",
-   "tier": "t0",
+   "level": "t0",
    "family": "resources",
    "difficulty": "easy",
    "models": {
@@ -2569,7 +2569,7 @@
   },
   {
    "id": "gen_t0_resources_skill_finance_guidance_tracker",
-   "tier": "t0",
+   "level": "t0",
    "family": "resources",
    "difficulty": "easy",
    "models": {
@@ -2607,7 +2607,7 @@
   },
   {
    "id": "gen_t0_resources_skill_finance_tearsheet",
-   "tier": "t0",
+   "level": "t0",
    "family": "resources",
    "difficulty": "easy",
    "models": {
@@ -2645,7 +2645,7 @@
   },
   {
    "id": "gen_t0_skill_finance_comps",
-   "tier": "t0",
+   "level": "t0",
    "family": "skills",
    "difficulty": "easy",
    "models": {
@@ -2683,7 +2683,7 @@
   },
   {
    "id": "gen_t0_skill_finance_earnings_prep",
-   "tier": "t0",
+   "level": "t0",
    "family": "skills",
    "difficulty": "easy",
    "models": {
@@ -2721,7 +2721,7 @@
   },
   {
    "id": "gen_t0_skill_finance_guidance_tracker",
-   "tier": "t0",
+   "level": "t0",
    "family": "skills",
    "difficulty": "easy",
    "models": {
@@ -2759,7 +2759,7 @@
   },
   {
    "id": "gen_t0_skill_finance_tearsheet",
-   "tier": "t0",
+   "level": "t0",
    "family": "skills",
    "difficulty": "easy",
    "models": {
@@ -2797,7 +2797,7 @@
   },
   {
    "id": "gen_t0_update_period_mtd_56",
-   "tier": "t0",
+   "level": "t0",
    "family": "update",
    "difficulty": "easy",
    "models": {
@@ -2835,7 +2835,7 @@
   },
   {
    "id": "gen_t0_update_series_dgs10_17",
-   "tier": "t0",
+   "level": "t0",
    "family": "update",
    "difficulty": "easy",
    "models": {
@@ -2873,7 +2873,7 @@
   },
   {
    "id": "gen_t0_update_symbol_aapl_18",
-   "tier": "t0",
+   "level": "t0",
    "family": "update",
    "difficulty": "easy",
    "models": {
@@ -2911,7 +2911,7 @@
   },
   {
    "id": "gen_t0_update_symbol_msft_12",
-   "tier": "t0",
+   "level": "t0",
    "family": "update",
    "difficulty": "easy",
    "models": {
@@ -2949,7 +2949,7 @@
   },
   {
    "id": "gen_t1_app_compliance_surveillance_hub",
-   "tier": "t1",
+   "level": "t1",
    "family": "apps",
    "difficulty": "easy",
    "models": {
@@ -2987,7 +2987,7 @@
   },
   {
    "id": "gen_t1_app_earnings_estimates_monitor",
-   "tier": "t1",
+   "level": "t1",
    "family": "apps",
    "difficulty": "medium",
    "models": {
@@ -3025,7 +3025,7 @@
   },
   {
    "id": "gen_t1_app_equity_research_workbench",
-   "tier": "t1",
+   "level": "t1",
    "family": "apps",
    "difficulty": "easy",
    "models": {
@@ -3063,7 +3063,7 @@
   },
   {
    "id": "gen_t1_app_executive_investment_dashboard",
-   "tier": "t1",
+   "level": "t1",
    "family": "apps",
    "difficulty": "medium",
    "models": {
@@ -3101,7 +3101,7 @@
   },
   {
    "id": "gen_t1_backends_add_widget_earnings_estimates_monitor_post_earnings_post_earnings_checklist_3",
-   "tier": "t1",
+   "level": "t1",
    "family": "backends",
    "difficulty": "medium",
    "models": {
@@ -3139,7 +3139,7 @@
   },
   {
    "id": "gen_t1_backends_add_widget_holdings_table_2",
-   "tier": "t1",
+   "level": "t1",
    "family": "backends",
    "difficulty": "medium",
    "models": {
@@ -3177,7 +3177,7 @@
   },
   {
    "id": "gen_t1_backends_add_widget_macro_timeseries_1",
-   "tier": "t1",
+   "level": "t1",
    "family": "backends",
    "difficulty": "easy",
    "models": {
@@ -3215,7 +3215,7 @@
   },
   {
    "id": "gen_t1_backends_add_widget_price_performance_0",
-   "tier": "t1",
+   "level": "t1",
    "family": "backends",
    "difficulty": "easy",
    "models": {
@@ -3253,7 +3253,7 @@
   },
   {
    "id": "gen_t1_create_estimate_history_nvda",
-   "tier": "t1",
+   "level": "t1",
    "family": "create",
    "difficulty": "easy",
    "models": {
@@ -3291,7 +3291,7 @@
   },
   {
    "id": "gen_t1_create_macro_timeseries_dgs10",
-   "tier": "t1",
+   "level": "t1",
    "family": "create",
    "difficulty": "medium",
    "models": {
@@ -3329,7 +3329,7 @@
   },
   {
    "id": "gen_t1_create_price_performance_msft",
-   "tier": "t1",
+   "level": "t1",
    "family": "create",
    "difficulty": "easy",
    "models": {
@@ -3367,7 +3367,7 @@
   },
   {
    "id": "gen_t1_create_sector_exposure_plain",
-   "tier": "t1",
+   "level": "t1",
    "family": "create",
    "difficulty": "medium",
    "models": {
@@ -3405,7 +3405,7 @@
   },
   {
    "id": "gen_t1_delegate_client_pair",
-   "tier": "t1",
+   "level": "t1",
    "family": "delegate",
    "difficulty": "medium",
    "models": {
@@ -3443,7 +3443,7 @@
   },
   {
    "id": "gen_t1_delegate_compliance_pair",
-   "tier": "t1",
+   "level": "t1",
    "family": "delegate",
    "difficulty": "medium",
    "models": {
@@ -3481,7 +3481,7 @@
   },
   {
    "id": "gen_t1_delegate_earnings_pair",
-   "tier": "t1",
+   "level": "t1",
    "family": "delegate",
    "difficulty": "easy",
    "models": {
@@ -3519,7 +3519,7 @@
   },
   {
    "id": "gen_t1_delegate_risk_pair",
-   "tier": "t1",
+   "level": "t1",
    "family": "delegate",
    "difficulty": "easy",
    "models": {
@@ -3557,7 +3557,7 @@
   },
   {
    "id": "gen_t1_delete_dup_news_12",
-   "tier": "t1",
+   "level": "t1",
    "family": "delete",
    "difficulty": "easy",
    "models": {
@@ -3595,7 +3595,7 @@
   },
   {
    "id": "gen_t1_delete_dup_performance_18",
-   "tier": "t1",
+   "level": "t1",
    "family": "delete",
    "difficulty": "easy",
    "models": {
@@ -3633,7 +3633,7 @@
   },
   {
    "id": "gen_t1_delete_dup_status_48",
-   "tier": "t1",
+   "level": "t1",
    "family": "delete",
    "difficulty": "medium",
    "models": {
@@ -3671,7 +3671,7 @@
   },
   {
    "id": "gen_t1_delete_dup_timeseries_17",
-   "tier": "t1",
+   "level": "t1",
    "family": "delete",
    "difficulty": "medium",
    "models": {
@@ -3709,7 +3709,7 @@
   },
   {
    "id": "gen_t1_inspect_fix_estimate_history_1",
-   "tier": "t1",
+   "level": "t1",
    "family": "inspect",
    "difficulty": "easy",
    "models": {
@@ -3747,7 +3747,7 @@
   },
   {
    "id": "gen_t1_inspect_fix_macro_timeseries_2",
-   "tier": "t1",
+   "level": "t1",
    "family": "inspect",
    "difficulty": "medium",
    "models": {
@@ -3785,7 +3785,7 @@
   },
   {
    "id": "gen_t1_inspect_fix_price_performance_0",
-   "tier": "t1",
+   "level": "t1",
    "family": "inspect",
    "difficulty": "easy",
    "models": {
@@ -3823,7 +3823,7 @@
   },
   {
    "id": "gen_t1_inspect_fix_quant_research_backtest_lab_risk_model_factor_exposure_table_3",
-   "tier": "t1",
+   "level": "t1",
    "family": "inspect",
    "difficulty": "medium",
    "models": {
@@ -3861,7 +3861,7 @@
   },
   {
    "id": "gen_t1_layout_preserve_estimates_fundamentals_msft",
-   "tier": "t1",
+   "level": "t1",
    "family": "layout",
    "difficulty": "easy",
    "models": {
@@ -3899,7 +3899,7 @@
   },
   {
    "id": "gen_t1_layout_preserve_macro_pair",
-   "tier": "t1",
+   "level": "t1",
    "family": "layout",
    "difficulty": "medium",
    "models": {
@@ -3937,7 +3937,7 @@
   },
   {
    "id": "gen_t1_layout_preserve_portfolio_pair",
-   "tier": "t1",
+   "level": "t1",
    "family": "layout",
    "difficulty": "medium",
    "models": {
@@ -3975,7 +3975,7 @@
   },
   {
    "id": "gen_t1_layout_preserve_price_news_aapl",
-   "tier": "t1",
+   "level": "t1",
    "family": "layout",
    "difficulty": "easy",
    "models": {
@@ -4013,7 +4013,7 @@
   },
   {
    "id": "gen_t1_nav_rename_both_client_review",
-   "tier": "t1",
+   "level": "t1",
    "family": "navigate",
    "difficulty": "easy",
    "models": {
@@ -4051,7 +4051,7 @@
   },
   {
    "id": "gen_t1_nav_rename_both_earnings_week",
-   "tier": "t1",
+   "level": "t1",
    "family": "navigate",
    "difficulty": "medium",
    "models": {
@@ -4089,7 +4089,7 @@
   },
   {
    "id": "gen_t1_nav_rename_both_ops_close",
-   "tier": "t1",
+   "level": "t1",
    "family": "navigate",
    "difficulty": "easy",
    "models": {
@@ -4127,7 +4127,7 @@
   },
   {
    "id": "gen_t1_nav_rename_both_pm_morning",
-   "tier": "t1",
+   "level": "t1",
    "family": "navigate",
    "difficulty": "medium",
    "models": {
@@ -4165,7 +4165,7 @@
   },
   {
    "id": "gen_t1_note_fact_close_aapl",
-   "tier": "t1",
+   "level": "t1",
    "family": "note",
    "difficulty": "easy",
    "models": {
@@ -4203,7 +4203,7 @@
   },
   {
    "id": "gen_t1_note_fact_close_msft",
-   "tier": "t1",
+   "level": "t1",
    "family": "note",
    "difficulty": "easy",
    "models": {
@@ -4241,7 +4241,7 @@
   },
   {
    "id": "gen_t1_note_fact_macro_10y",
-   "tier": "t1",
+   "level": "t1",
    "family": "note",
    "difficulty": "medium",
    "models": {
@@ -4279,7 +4279,7 @@
   },
   {
    "id": "gen_t1_note_fact_top_holding",
-   "tier": "t1",
+   "level": "t1",
    "family": "note",
    "difficulty": "medium",
    "models": {
@@ -4317,7 +4317,7 @@
   },
   {
    "id": "gen_t1_params_schema_sector_client_360_portfolio_view_exposure_summary_7",
-   "tier": "t1",
+   "level": "t1",
    "family": "params",
    "difficulty": "medium",
    "models": {
@@ -4355,7 +4355,7 @@
   },
   {
    "id": "gen_t1_params_schema_sector_sector_exposure_6",
-   "tier": "t1",
+   "level": "t1",
    "family": "params",
    "difficulty": "medium",
    "models": {
@@ -4393,7 +4393,7 @@
   },
   {
    "id": "gen_t1_params_schema_series_macro_timeseries_5",
-   "tier": "t1",
+   "level": "t1",
    "family": "params",
    "difficulty": "easy",
    "models": {
@@ -4431,7 +4431,7 @@
   },
   {
    "id": "gen_t1_params_schema_symbol_price_performance_4",
-   "tier": "t1",
+   "level": "t1",
    "family": "params",
    "difficulty": "easy",
    "models": {
@@ -4469,7 +4469,7 @@
   },
   {
    "id": "gen_t1_prompts_tool_usage_healthcare_research_dashboard_documents_healthcare_thesis_note_3",
-   "tier": "t1",
+   "level": "t1",
    "family": "prompts",
    "difficulty": "medium",
    "models": {
@@ -4507,7 +4507,7 @@
   },
   {
    "id": "gen_t1_prompts_tool_usage_macro_timeseries_1",
-   "tier": "t1",
+   "level": "t1",
    "family": "prompts",
    "difficulty": "easy",
    "models": {
@@ -4545,7 +4545,7 @@
   },
   {
    "id": "gen_t1_prompts_tool_usage_price_performance_0",
-   "tier": "t1",
+   "level": "t1",
    "family": "prompts",
    "difficulty": "easy",
    "models": {
@@ -4583,7 +4583,7 @@
   },
   {
    "id": "gen_t1_prompts_tool_usage_risk_metrics_2",
-   "tier": "t1",
+   "level": "t1",
    "family": "prompts",
    "difficulty": "medium",
    "models": {
@@ -4621,7 +4621,7 @@
   },
   {
    "id": "gen_t1_read_alert_trend",
-   "tier": "t1",
+   "level": "t1",
    "family": "read",
    "difficulty": "easy",
    "models": {
@@ -4659,7 +4659,7 @@
   },
   {
    "id": "gen_t1_read_break_aging",
-   "tier": "t1",
+   "level": "t1",
    "family": "read",
    "difficulty": "medium",
    "models": {
@@ -4697,7 +4697,7 @@
   },
   {
    "id": "gen_t1_read_pipeline",
-   "tier": "t1",
+   "level": "t1",
    "family": "read",
    "difficulty": "easy",
    "models": {
@@ -4735,7 +4735,7 @@
   },
   {
    "id": "gen_t1_read_strategy_health",
-   "tier": "t1",
+   "level": "t1",
    "family": "read",
    "difficulty": "medium",
    "models": {
@@ -4773,7 +4773,7 @@
   },
   {
    "id": "gen_t1_resources_index_client_360",
-   "tier": "t1",
+   "level": "t1",
    "family": "resources",
    "difficulty": "medium",
    "models": {
@@ -4811,7 +4811,7 @@
   },
   {
    "id": "gen_t1_resources_index_equity_earnings_review",
-   "tier": "t1",
+   "level": "t1",
    "family": "resources",
    "difficulty": "easy",
    "models": {
@@ -4849,7 +4849,7 @@
   },
   {
    "id": "gen_t1_resources_index_portfolio_command_center",
-   "tier": "t1",
+   "level": "t1",
    "family": "resources",
    "difficulty": "easy",
    "models": {
@@ -4887,7 +4887,7 @@
   },
   {
    "id": "gen_t1_resources_index_risk_exposure_monitor",
-   "tier": "t1",
+   "level": "t1",
    "family": "resources",
    "difficulty": "medium",
    "models": {
@@ -4925,7 +4925,7 @@
   },
   {
    "id": "gen_t1_skill_finance_comps",
-   "tier": "t1",
+   "level": "t1",
    "family": "skills",
    "difficulty": "medium",
    "models": {
@@ -4963,7 +4963,7 @@
   },
   {
    "id": "gen_t1_skill_finance_earnings_prep",
-   "tier": "t1",
+   "level": "t1",
    "family": "skills",
    "difficulty": "easy",
    "models": {
@@ -5001,7 +5001,7 @@
   },
   {
    "id": "gen_t1_skill_finance_guidance_tracker",
-   "tier": "t1",
+   "level": "t1",
    "family": "skills",
    "difficulty": "medium",
    "models": {
@@ -5039,7 +5039,7 @@
   },
   {
    "id": "gen_t1_skill_finance_tearsheet",
-   "tier": "t1",
+   "level": "t1",
    "family": "skills",
    "difficulty": "easy",
    "models": {
@@ -5077,7 +5077,7 @@
   },
   {
    "id": "gen_t1_update_series_fedfunds_17",
-   "tier": "t1",
+   "level": "t1",
    "family": "update",
    "difficulty": "medium",
    "models": {
@@ -5115,7 +5115,7 @@
   },
   {
    "id": "gen_t1_update_status_escalated_44",
-   "tier": "t1",
+   "level": "t1",
    "family": "update",
    "difficulty": "medium",
    "models": {
@@ -5153,7 +5153,7 @@
   },
   {
    "id": "gen_t1_update_symbol_nvda_17",
-   "tier": "t1",
+   "level": "t1",
    "family": "update",
    "difficulty": "easy",
    "models": {
@@ -5191,7 +5191,7 @@
   },
   {
    "id": "gen_t1_update_symbol_nvda_20",
-   "tier": "t1",
+   "level": "t1",
    "family": "update",
    "difficulty": "easy",
    "models": {
@@ -5229,7 +5229,7 @@
   },
   {
    "id": "gen_t2_app_note_nav_fees_close_dashboard",
-   "tier": "t2",
+   "level": "t2",
    "family": "apps",
    "difficulty": "medium",
    "models": {
@@ -5267,7 +5267,7 @@
   },
   {
    "id": "gen_t2_app_note_quant_research_backtest_lab",
-   "tier": "t2",
+   "level": "t2",
    "family": "apps",
    "difficulty": "medium",
    "models": {
@@ -5305,7 +5305,7 @@
   },
   {
    "id": "gen_t2_app_note_reporting_factsheet_studio",
-   "tier": "t2",
+   "level": "t2",
    "family": "apps",
    "difficulty": "medium",
    "models": {
@@ -5343,7 +5343,7 @@
   },
   {
    "id": "gen_t2_app_note_stress_liquidity_lab",
-   "tier": "t2",
+   "level": "t2",
    "family": "apps",
    "difficulty": "medium",
    "models": {
@@ -5381,7 +5381,7 @@
   },
   {
    "id": "gen_t2_backends_cross_equity_research_workbench_company_ownership_snapshot_risk_metrics_2",
-   "tier": "t2",
+   "level": "t2",
    "family": "backends",
    "difficulty": "medium",
    "models": {
@@ -5419,7 +5419,7 @@
   },
   {
    "id": "gen_t2_backends_cross_fundamental_metrics_holdings_table_3",
-   "tier": "t2",
+   "level": "t2",
    "family": "backends",
    "difficulty": "medium",
    "models": {
@@ -5457,7 +5457,7 @@
   },
   {
    "id": "gen_t2_backends_cross_latest_news_yield_curve_0",
-   "tier": "t2",
+   "level": "t2",
    "family": "backends",
    "difficulty": "medium",
    "models": {
@@ -5495,7 +5495,7 @@
   },
   {
    "id": "gen_t2_backends_cross_sector_exposure_macro_timeseries_1",
-   "tier": "t2",
+   "level": "t2",
    "family": "backends",
    "difficulty": "medium",
    "models": {
@@ -5533,7 +5533,7 @@
   },
   {
    "id": "gen_t2_create_place_fundamental_metrics_aapl",
-   "tier": "t2",
+   "level": "t2",
    "family": "create",
    "difficulty": "medium",
    "models": {
@@ -5571,7 +5571,7 @@
   },
   {
    "id": "gen_t2_create_place_latest_news_msft",
-   "tier": "t2",
+   "level": "t2",
    "family": "create",
    "difficulty": "medium",
    "models": {
@@ -5609,7 +5609,7 @@
   },
   {
    "id": "gen_t2_create_place_macro_timeseries_fedfunds",
-   "tier": "t2",
+   "level": "t2",
    "family": "create",
    "difficulty": "medium",
    "models": {
@@ -5647,7 +5647,7 @@
   },
   {
    "id": "gen_t2_create_place_price_performance_nvda",
-   "tier": "t2",
+   "level": "t2",
    "family": "create",
    "difficulty": "medium",
    "models": {
@@ -5685,7 +5685,7 @@
   },
   {
    "id": "gen_t2_delegate_client_note",
-   "tier": "t2",
+   "level": "t2",
    "family": "delegate",
    "difficulty": "medium",
    "models": {
@@ -5723,7 +5723,7 @@
   },
   {
    "id": "gen_t2_delegate_earnings_note",
-   "tier": "t2",
+   "level": "t2",
    "family": "delegate",
    "difficulty": "medium",
    "models": {
@@ -5761,7 +5761,7 @@
   },
   {
    "id": "gen_t2_delegate_ops_note",
-   "tier": "t2",
+   "level": "t2",
    "family": "delegate",
    "difficulty": "medium",
    "models": {
@@ -5799,7 +5799,7 @@
   },
   {
    "id": "gen_t2_delegate_risk_note",
-   "tier": "t2",
+   "level": "t2",
    "family": "delegate",
    "difficulty": "medium",
    "models": {
@@ -5837,7 +5837,7 @@
   },
   {
    "id": "gen_t2_delete_similar_estimate_history_msft",
-   "tier": "t2",
+   "level": "t2",
    "family": "delete",
    "difficulty": "medium",
    "models": {
@@ -5875,7 +5875,7 @@
   },
   {
    "id": "gen_t2_delete_similar_latest_news_nvda",
-   "tier": "t2",
+   "level": "t2",
    "family": "delete",
    "difficulty": "medium",
    "models": {
@@ -5913,7 +5913,7 @@
   },
   {
    "id": "gen_t2_delete_similar_macro_timeseries_dgs10",
-   "tier": "t2",
+   "level": "t2",
    "family": "delete",
    "difficulty": "medium",
    "models": {
@@ -5951,7 +5951,7 @@
   },
   {
    "id": "gen_t2_delete_similar_price_performance_aapl",
-   "tier": "t2",
+   "level": "t2",
    "family": "delete",
    "difficulty": "medium",
    "models": {
@@ -5989,7 +5989,7 @@
   },
   {
    "id": "gen_t2_inspect_deduplicate_latest_news_0",
-   "tier": "t2",
+   "level": "t2",
    "family": "inspect",
    "difficulty": "medium",
    "models": {
@@ -6027,7 +6027,7 @@
   },
   {
    "id": "gen_t2_inspect_deduplicate_macro_timeseries_1",
-   "tier": "t2",
+   "level": "t2",
    "family": "inspect",
    "difficulty": "medium",
    "models": {
@@ -6065,7 +6065,7 @@
   },
   {
    "id": "gen_t2_inspect_deduplicate_rebalance_scenario_lab_drift_drift_by_sleeve_3",
-   "tier": "t2",
+   "level": "t2",
    "family": "inspect",
    "difficulty": "medium",
    "models": {
@@ -6103,7 +6103,7 @@
   },
   {
    "id": "gen_t2_inspect_deduplicate_risk_metrics_2",
-   "tier": "t2",
+   "level": "t2",
    "family": "inspect",
    "difficulty": "medium",
    "models": {
@@ -6141,7 +6141,7 @@
   },
   {
    "id": "gen_t2_layout_arrange_split_macro",
-   "tier": "t2",
+   "level": "t2",
    "family": "layout",
    "difficulty": "medium",
    "models": {
@@ -6179,7 +6179,7 @@
   },
   {
    "id": "gen_t2_layout_arrange_split_portfolio",
-   "tier": "t2",
+   "level": "t2",
    "family": "layout",
    "difficulty": "medium",
    "models": {
@@ -6217,7 +6217,7 @@
   },
   {
    "id": "gen_t2_layout_arrange_split_price_news_aapl",
-   "tier": "t2",
+   "level": "t2",
    "family": "layout",
    "difficulty": "medium",
    "models": {
@@ -6255,7 +6255,7 @@
   },
   {
    "id": "gen_t2_layout_arrange_stack_price_news_nvda",
-   "tier": "t2",
+   "level": "t2",
    "family": "layout",
    "difficulty": "medium",
    "models": {
@@ -6293,7 +6293,7 @@
   },
   {
    "id": "gen_t2_nav_expand_client_expansion",
-   "tier": "t2",
+   "level": "t2",
    "family": "navigate",
    "difficulty": "medium",
    "models": {
@@ -6331,7 +6331,7 @@
   },
   {
    "id": "gen_t2_nav_expand_research_expansion",
-   "tier": "t2",
+   "level": "t2",
    "family": "navigate",
    "difficulty": "medium",
    "models": {
@@ -6369,7 +6369,7 @@
   },
   {
    "id": "gen_t2_nav_expand_risk_expansion",
-   "tier": "t2",
+   "level": "t2",
    "family": "navigate",
    "difficulty": "medium",
    "models": {
@@ -6407,7 +6407,7 @@
   },
   {
    "id": "gen_t2_nav_expand_vendor_expansion",
-   "tier": "t2",
+   "level": "t2",
    "family": "navigate",
    "difficulty": "medium",
    "models": {
@@ -6445,7 +6445,7 @@
   },
   {
    "id": "gen_t2_note_twofacts_estimates_aapl",
-   "tier": "t2",
+   "level": "t2",
    "family": "note",
    "difficulty": "medium",
    "models": {
@@ -6483,7 +6483,7 @@
   },
   {
    "id": "gen_t2_note_twofacts_estimates_msft",
-   "tier": "t2",
+   "level": "t2",
    "family": "note",
    "difficulty": "medium",
    "models": {
@@ -6521,7 +6521,7 @@
   },
   {
    "id": "gen_t2_note_twofacts_fundamentals_aapl",
-   "tier": "t2",
+   "level": "t2",
    "family": "note",
    "difficulty": "medium",
    "models": {
@@ -6559,7 +6559,7 @@
   },
   {
    "id": "gen_t2_note_twofacts_fundamentals_nvda",
-   "tier": "t2",
+   "level": "t2",
    "family": "note",
    "difficulty": "medium",
    "models": {
@@ -6597,7 +6597,7 @@
   },
   {
    "id": "gen_t2_params_place_sector_compliance_surveillance_hub_audit_access_and_export_logs_11",
-   "tier": "t2",
+   "level": "t2",
    "family": "params",
    "difficulty": "medium",
    "models": {
@@ -6635,7 +6635,7 @@
   },
   {
    "id": "gen_t2_params_place_sector_sector_exposure_10",
-   "tier": "t2",
+   "level": "t2",
    "family": "params",
    "difficulty": "medium",
    "models": {
@@ -6673,7 +6673,7 @@
   },
   {
    "id": "gen_t2_params_place_series_macro_timeseries_9",
-   "tier": "t2",
+   "level": "t2",
    "family": "params",
    "difficulty": "medium",
    "models": {
@@ -6711,7 +6711,7 @@
   },
   {
    "id": "gen_t2_params_place_symbol_price_performance_8",
-   "tier": "t2",
+   "level": "t2",
    "family": "params",
    "difficulty": "medium",
    "models": {
@@ -6749,7 +6749,7 @@
   },
   {
    "id": "gen_t2_prompts_session_tab_estimates_estimate_history",
-   "tier": "t2",
+   "level": "t2",
    "family": "prompts",
    "difficulty": "medium",
    "models": {
@@ -6787,7 +6787,7 @@
   },
   {
    "id": "gen_t2_prompts_session_tab_exposure_sector_exposure",
-   "tier": "t2",
+   "level": "t2",
    "family": "prompts",
    "difficulty": "medium",
    "models": {
@@ -6825,7 +6825,7 @@
   },
   {
    "id": "gen_t2_prompts_session_tab_ops_liquidity_tca_workbench_tca_slippage_by_algo",
-   "tier": "t2",
+   "level": "t2",
    "family": "prompts",
    "difficulty": "medium",
    "models": {
@@ -6863,7 +6863,7 @@
   },
   {
    "id": "gen_t2_prompts_session_tab_rates_yield_curve",
-   "tier": "t2",
+   "level": "t2",
    "family": "prompts",
    "difficulty": "medium",
    "models": {
@@ -6901,7 +6901,7 @@
   },
   {
    "id": "gen_t2_read_broker_scorecard",
-   "tier": "t2",
+   "level": "t2",
    "family": "read",
    "difficulty": "medium",
    "models": {
@@ -6939,7 +6939,7 @@
   },
   {
    "id": "gen_t2_read_issuer_conc",
-   "tier": "t2",
+   "level": "t2",
    "family": "read",
    "difficulty": "medium",
    "models": {
@@ -6977,7 +6977,7 @@
   },
   {
    "id": "gen_t2_read_sla_metrics",
-   "tier": "t2",
+   "level": "t2",
    "family": "read",
    "difficulty": "medium",
    "models": {
@@ -7015,7 +7015,7 @@
   },
   {
    "id": "gen_t2_read_var_trend",
-   "tier": "t2",
+   "level": "t2",
    "family": "read",
    "difficulty": "medium",
    "models": {
@@ -7053,7 +7053,7 @@
   },
   {
    "id": "gen_t2_resources_instantiate_compliance_surveillance_hub",
-   "tier": "t2",
+   "level": "t2",
    "family": "resources",
    "difficulty": "medium",
    "models": {
@@ -7091,7 +7091,7 @@
   },
   {
    "id": "gen_t2_resources_instantiate_equity_earnings_review",
-   "tier": "t2",
+   "level": "t2",
    "family": "resources",
    "difficulty": "medium",
    "models": {
@@ -7129,7 +7129,7 @@
   },
   {
    "id": "gen_t2_resources_instantiate_execution_desk",
-   "tier": "t2",
+   "level": "t2",
    "family": "resources",
    "difficulty": "medium",
    "models": {
@@ -7167,7 +7167,7 @@
   },
   {
    "id": "gen_t2_resources_instantiate_vendor_dataset_monitor",
-   "tier": "t2",
+   "level": "t2",
    "family": "resources",
    "difficulty": "medium",
    "models": {
@@ -7205,7 +7205,7 @@
   },
   {
    "id": "gen_t2_skill_finance_comps",
-   "tier": "t2",
+   "level": "t2",
    "family": "skills",
    "difficulty": "medium",
    "models": {
@@ -7243,7 +7243,7 @@
   },
   {
    "id": "gen_t2_skill_finance_earnings_prep",
-   "tier": "t2",
+   "level": "t2",
    "family": "skills",
    "difficulty": "medium",
    "models": {
@@ -7281,7 +7281,7 @@
   },
   {
    "id": "gen_t2_skill_finance_guidance_tracker",
-   "tier": "t2",
+   "level": "t2",
    "family": "skills",
    "difficulty": "medium",
    "models": {
@@ -7319,7 +7319,7 @@
   },
   {
    "id": "gen_t2_skill_finance_tearsheet",
-   "tier": "t2",
+   "level": "t2",
    "family": "skills",
    "difficulty": "medium",
    "models": {
@@ -7357,7 +7357,7 @@
   },
   {
    "id": "gen_t2_update_pick_series_dgs2_17",
-   "tier": "t2",
+   "level": "t2",
    "family": "update",
    "difficulty": "medium",
    "models": {
@@ -7395,7 +7395,7 @@
   },
   {
    "id": "gen_t2_update_pick_symbol_msft_18",
-   "tier": "t2",
+   "level": "t2",
    "family": "update",
    "difficulty": "medium",
    "models": {
@@ -7433,7 +7433,7 @@
   },
   {
    "id": "gen_t2_update_pick_symbol_nvda_12",
-   "tier": "t2",
+   "level": "t2",
    "family": "update",
    "difficulty": "medium",
    "models": {
@@ -7471,7 +7471,7 @@
   },
   {
    "id": "gen_t2_update_pick_vendor_factset_48",
-   "tier": "t2",
+   "level": "t2",
    "family": "update",
    "difficulty": "medium",
    "models": {
@@ -7509,7 +7509,7 @@
   },
   {
    "id": "gen_t3_app_extend_fund_operations_control_tower",
-   "tier": "t3",
+   "level": "t3",
    "family": "apps",
    "difficulty": "hard",
    "models": {
@@ -7547,7 +7547,7 @@
   },
   {
    "id": "gen_t3_app_extend_portfolio_command_center",
-   "tier": "t3",
+   "level": "t3",
    "family": "apps",
    "difficulty": "medium",
    "models": {
@@ -7585,7 +7585,7 @@
   },
   {
    "id": "gen_t3_app_extend_rebalance_scenario_lab",
-   "tier": "t3",
+   "level": "t3",
    "family": "apps",
    "difficulty": "medium",
    "models": {
@@ -7623,7 +7623,7 @@
   },
   {
    "id": "gen_t3_app_extend_strategy_health_monitor",
-   "tier": "t3",
+   "level": "t3",
    "family": "apps",
    "difficulty": "hard",
    "models": {
@@ -7661,7 +7661,7 @@
   },
   {
    "id": "gen_t3_backends_refresh_earnings_estimates_monitor_post_earnings_post_earnings_checklist_3",
-   "tier": "t3",
+   "level": "t3",
    "family": "backends",
    "difficulty": "hard",
    "models": {
@@ -7699,7 +7699,7 @@
   },
   {
    "id": "gen_t3_backends_refresh_holdings_table_2",
-   "tier": "t3",
+   "level": "t3",
    "family": "backends",
    "difficulty": "hard",
    "models": {
@@ -7737,7 +7737,7 @@
   },
   {
    "id": "gen_t3_backends_refresh_macro_timeseries_1",
-   "tier": "t3",
+   "level": "t3",
    "family": "backends",
    "difficulty": "medium",
    "models": {
@@ -7775,7 +7775,7 @@
   },
   {
    "id": "gen_t3_backends_refresh_price_performance_0",
-   "tier": "t3",
+   "level": "t3",
    "family": "backends",
    "difficulty": "medium",
    "models": {
@@ -7813,7 +7813,7 @@
   },
   {
    "id": "gen_t3_create_preserve_fundamental_metrics_msft",
-   "tier": "t3",
+   "level": "t3",
    "family": "create",
    "difficulty": "hard",
    "models": {
@@ -7851,7 +7851,7 @@
   },
   {
    "id": "gen_t3_create_preserve_latest_news_aapl",
-   "tier": "t3",
+   "level": "t3",
    "family": "create",
    "difficulty": "medium",
    "models": {
@@ -7889,7 +7889,7 @@
   },
   {
    "id": "gen_t3_create_preserve_risk_metrics_plain",
-   "tier": "t3",
+   "level": "t3",
    "family": "create",
    "difficulty": "hard",
    "models": {
@@ -7927,7 +7927,7 @@
   },
   {
    "id": "gen_t3_create_preserve_yield_curve_plain",
-   "tier": "t3",
+   "level": "t3",
    "family": "create",
    "difficulty": "medium",
    "models": {
@@ -7965,7 +7965,7 @@
   },
   {
    "id": "gen_t3_delegate_skill_comps_skill",
-   "tier": "t3",
+   "level": "t3",
    "family": "delegate",
    "difficulty": "hard",
    "models": {
@@ -8003,7 +8003,7 @@
   },
   {
    "id": "gen_t3_delegate_skill_earnings_skill",
-   "tier": "t3",
+   "level": "t3",
    "family": "delegate",
    "difficulty": "medium",
    "models": {
@@ -8041,7 +8041,7 @@
   },
   {
    "id": "gen_t3_delegate_skill_guidance_skill",
-   "tier": "t3",
+   "level": "t3",
    "family": "delegate",
    "difficulty": "hard",
    "models": {
@@ -8079,7 +8079,7 @@
   },
   {
    "id": "gen_t3_delegate_skill_tearsheet_skill",
-   "tier": "t3",
+   "level": "t3",
    "family": "delegate",
    "difficulty": "medium",
    "models": {
@@ -8117,7 +8117,7 @@
   },
   {
    "id": "gen_t3_delete_note_exposure_16",
-   "tier": "t3",
+   "level": "t3",
    "family": "delete",
    "difficulty": "hard",
    "models": {
@@ -8155,7 +8155,7 @@
   },
   {
    "id": "gen_t3_delete_note_history_17",
-   "tier": "t3",
+   "level": "t3",
    "family": "delete",
    "difficulty": "medium",
    "models": {
@@ -8193,7 +8193,7 @@
   },
   {
    "id": "gen_t3_delete_note_metrics_20",
-   "tier": "t3",
+   "level": "t3",
    "family": "delete",
    "difficulty": "medium",
    "models": {
@@ -8231,7 +8231,7 @@
   },
   {
    "id": "gen_t3_delete_note_orders_36",
-   "tier": "t3",
+   "level": "t3",
    "family": "delete",
    "difficulty": "hard",
    "models": {
@@ -8269,7 +8269,7 @@
   },
   {
    "id": "gen_t3_inspect_overlap_holdings_table_2",
-   "tier": "t3",
+   "level": "t3",
    "family": "inspect",
    "difficulty": "hard",
    "models": {
@@ -8307,7 +8307,7 @@
   },
   {
    "id": "gen_t3_inspect_overlap_macro_timeseries_1",
-   "tier": "t3",
+   "level": "t3",
    "family": "inspect",
    "difficulty": "medium",
    "models": {
@@ -8345,7 +8345,7 @@
   },
   {
    "id": "gen_t3_inspect_overlap_price_performance_0",
-   "tier": "t3",
+   "level": "t3",
    "family": "inspect",
    "difficulty": "medium",
    "models": {
@@ -8383,7 +8383,7 @@
   },
   {
    "id": "gen_t3_inspect_overlap_reporting_factsheet_studio_commentary_disclosure_checklist_3",
-   "tier": "t3",
+   "level": "t3",
    "family": "inspect",
    "difficulty": "hard",
    "models": {
@@ -8421,7 +8421,7 @@
   },
   {
    "id": "gen_t3_layout_overlap_overlap_estimates_fund_msft",
-   "tier": "t3",
+   "level": "t3",
    "family": "layout",
    "difficulty": "medium",
    "models": {
@@ -8459,7 +8459,7 @@
   },
   {
    "id": "gen_t3_layout_overlap_overlap_macro",
-   "tier": "t3",
+   "level": "t3",
    "family": "layout",
    "difficulty": "hard",
    "models": {
@@ -8497,7 +8497,7 @@
   },
   {
    "id": "gen_t3_layout_overlap_overlap_portfolio",
-   "tier": "t3",
+   "level": "t3",
    "family": "layout",
    "difficulty": "hard",
    "models": {
@@ -8535,7 +8535,7 @@
   },
   {
    "id": "gen_t3_layout_overlap_overlap_price_news_aapl",
-   "tier": "t3",
+   "level": "t3",
    "family": "layout",
    "difficulty": "medium",
    "models": {
@@ -8573,7 +8573,7 @@
   },
   {
    "id": "gen_t3_nav_addtab_curve",
-   "tier": "t3",
+   "level": "t3",
    "family": "navigate",
    "difficulty": "hard",
    "models": {
@@ -8611,7 +8611,7 @@
   },
   {
    "id": "gen_t3_nav_addtab_estimates_msft",
-   "tier": "t3",
+   "level": "t3",
    "family": "navigate",
    "difficulty": "medium",
    "models": {
@@ -8649,7 +8649,7 @@
   },
   {
    "id": "gen_t3_nav_addtab_fundamentals_aapl",
-   "tier": "t3",
+   "level": "t3",
    "family": "navigate",
    "difficulty": "medium",
    "models": {
@@ -8687,7 +8687,7 @@
   },
   {
    "id": "gen_t3_nav_addtab_risk",
-   "tier": "t3",
+   "level": "t3",
    "family": "navigate",
    "difficulty": "hard",
    "models": {
@@ -8725,7 +8725,7 @@
   },
   {
    "id": "gen_t3_note_synthesis_aapl_msft_closes",
-   "tier": "t3",
+   "level": "t3",
    "family": "note",
    "difficulty": "medium",
    "models": {
@@ -8763,7 +8763,7 @@
   },
   {
    "id": "gen_t3_note_synthesis_fed_vs_10y",
-   "tier": "t3",
+   "level": "t3",
    "family": "note",
    "difficulty": "hard",
    "models": {
@@ -8801,7 +8801,7 @@
   },
   {
    "id": "gen_t3_note_synthesis_holdings_beta",
-   "tier": "t3",
+   "level": "t3",
    "family": "note",
    "difficulty": "hard",
    "models": {
@@ -8839,7 +8839,7 @@
   },
   {
    "id": "gen_t3_note_synthesis_nvda_close_eps",
-   "tier": "t3",
+   "level": "t3",
    "family": "note",
    "difficulty": "medium",
    "models": {
@@ -8877,7 +8877,7 @@
   },
   {
    "id": "gen_t3_params_companion_sector_corporate_access_meeting_notes_claims_evidence_and_sign_off_history_3",
-   "tier": "t3",
+   "level": "t3",
    "family": "params",
    "difficulty": "hard",
    "models": {
@@ -8915,7 +8915,7 @@
   },
   {
    "id": "gen_t3_params_companion_sector_sector_exposure_2",
-   "tier": "t3",
+   "level": "t3",
    "family": "params",
    "difficulty": "hard",
    "models": {
@@ -8953,7 +8953,7 @@
   },
   {
    "id": "gen_t3_params_companion_series_macro_timeseries_1",
-   "tier": "t3",
+   "level": "t3",
    "family": "params",
    "difficulty": "medium",
    "models": {
@@ -8991,7 +8991,7 @@
   },
   {
    "id": "gen_t3_params_companion_symbol_price_performance_0",
-   "tier": "t3",
+   "level": "t3",
    "family": "params",
    "difficulty": "medium",
    "models": {
@@ -9029,7 +9029,7 @@
   },
   {
    "id": "gen_t3_prompts_dashboard_aapl_prompt_dashboard",
-   "tier": "t3",
+   "level": "t3",
    "family": "prompts",
    "difficulty": "medium",
    "models": {
@@ -9067,7 +9067,7 @@
   },
   {
    "id": "gen_t3_prompts_dashboard_macro_prompt_dashboard",
-   "tier": "t3",
+   "level": "t3",
    "family": "prompts",
    "difficulty": "medium",
    "models": {
@@ -9105,7 +9105,7 @@
   },
   {
    "id": "gen_t3_prompts_dashboard_portfolio_prompt_dashboard",
-   "tier": "t3",
+   "level": "t3",
    "family": "prompts",
    "difficulty": "hard",
    "models": {
@@ -9143,7 +9143,7 @@
   },
   {
    "id": "gen_t3_prompts_dashboard_stark_prompt_dashboard",
-   "tier": "t3",
+   "level": "t3",
    "family": "prompts",
    "difficulty": "hard",
    "models": {
@@ -9181,7 +9181,7 @@
   },
   {
    "id": "gen_t3_read_client_pair",
-   "tier": "t3",
+   "level": "t3",
    "family": "read",
    "difficulty": "hard",
    "models": {
@@ -9219,7 +9219,7 @@
   },
   {
    "id": "gen_t3_read_exec_pair",
-   "tier": "t3",
+   "level": "t3",
    "family": "read",
    "difficulty": "medium",
    "models": {
@@ -9257,7 +9257,7 @@
   },
   {
    "id": "gen_t3_read_risk_pair",
-   "tier": "t3",
+   "level": "t3",
    "family": "read",
    "difficulty": "medium",
    "models": {
@@ -9295,7 +9295,7 @@
   },
   {
    "id": "gen_t3_read_vendor_pair",
-   "tier": "t3",
+   "level": "t3",
    "family": "read",
    "difficulty": "hard",
    "models": {
@@ -9333,7 +9333,7 @@
   },
   {
    "id": "gen_t3_resources_skill_build_finance_comps",
-   "tier": "t3",
+   "level": "t3",
    "family": "resources",
    "difficulty": "hard",
    "models": {
@@ -9371,7 +9371,7 @@
   },
   {
    "id": "gen_t3_resources_skill_build_finance_earnings_prep",
-   "tier": "t3",
+   "level": "t3",
    "family": "resources",
    "difficulty": "medium",
    "models": {
@@ -9409,7 +9409,7 @@
   },
   {
    "id": "gen_t3_resources_skill_build_finance_guidance_tracker",
-   "tier": "t3",
+   "level": "t3",
    "family": "resources",
    "difficulty": "hard",
    "models": {
@@ -9447,7 +9447,7 @@
   },
   {
    "id": "gen_t3_resources_skill_build_finance_tearsheet",
-   "tier": "t3",
+   "level": "t3",
    "family": "resources",
    "difficulty": "medium",
    "models": {
@@ -9485,7 +9485,7 @@
   },
   {
    "id": "gen_t3_skill_finance_comps",
-   "tier": "t3",
+   "level": "t3",
    "family": "skills",
    "difficulty": "hard",
    "models": {
@@ -9523,7 +9523,7 @@
   },
   {
    "id": "gen_t3_skill_finance_earnings_prep",
-   "tier": "t3",
+   "level": "t3",
    "family": "skills",
    "difficulty": "medium",
    "models": {
@@ -9561,7 +9561,7 @@
   },
   {
    "id": "gen_t3_skill_finance_guidance_tracker",
-   "tier": "t3",
+   "level": "t3",
    "family": "skills",
    "difficulty": "hard",
    "models": {
@@ -9599,7 +9599,7 @@
   },
   {
    "id": "gen_t3_skill_finance_tearsheet",
-   "tier": "t3",
+   "level": "t3",
    "family": "skills",
    "difficulty": "medium",
    "models": {
@@ -9637,7 +9637,7 @@
   },
   {
    "id": "gen_t3_update_repair_news_msft_aapl",
-   "tier": "t3",
+   "level": "t3",
    "family": "update",
    "difficulty": "medium",
    "models": {
@@ -9675,7 +9675,7 @@
   },
   {
    "id": "gen_t3_update_repair_risk_fund",
-   "tier": "t3",
+   "level": "t3",
    "family": "update",
    "difficulty": "hard",
    "models": {
@@ -9713,7 +9713,7 @@
   },
   {
    "id": "gen_t3_update_repair_series_fedfunds_cpi",
-   "tier": "t3",
+   "level": "t3",
    "family": "update",
    "difficulty": "hard",
    "models": {
@@ -9751,7 +9751,7 @@
   },
   {
    "id": "gen_t3_update_repair_ticker_nvda_msft",
-   "tier": "t3",
+   "level": "t3",
    "family": "update",
    "difficulty": "medium",
    "models": {
@@ -9789,7 +9789,7 @@
   },
   {
    "id": "gen_t4_app_full_corporate_access_meeting_notes",
-   "tier": "t4",
+   "level": "t4",
    "family": "apps",
    "difficulty": "hard",
    "models": {
@@ -9827,7 +9827,7 @@
   },
   {
    "id": "gen_t4_app_full_crypto_research_dashboard",
-   "tier": "t4",
+   "level": "t4",
    "family": "apps",
    "difficulty": "hard",
    "models": {
@@ -9865,7 +9865,7 @@
   },
   {
    "id": "gen_t4_app_full_healthcare_research_dashboard",
-   "tier": "t4",
+   "level": "t4",
    "family": "apps",
    "difficulty": "hard",
    "models": {
@@ -9903,7 +9903,7 @@
   },
   {
    "id": "gen_t4_app_full_mnpi_research_review",
-   "tier": "t4",
+   "level": "t4",
    "family": "apps",
    "difficulty": "hard",
    "models": {
@@ -9941,7 +9941,7 @@
   },
   {
    "id": "gen_t4_backends_multi_equities_macro",
-   "tier": "t4",
+   "level": "t4",
    "family": "backends",
    "difficulty": "hard",
    "models": {
@@ -9979,7 +9979,7 @@
   },
   {
    "id": "gen_t4_backends_multi_equities_portfolio",
-   "tier": "t4",
+   "level": "t4",
    "family": "backends",
    "difficulty": "hard",
    "models": {
@@ -10017,7 +10017,7 @@
   },
   {
    "id": "gen_t4_backends_multi_portfolio_macro",
-   "tier": "t4",
+   "level": "t4",
    "family": "backends",
    "difficulty": "hard",
    "models": {
@@ -10055,7 +10055,7 @@
   },
   {
    "id": "gen_t4_backends_multi_stark_portfolio",
-   "tier": "t4",
+   "level": "t4",
    "family": "backends",
    "difficulty": "hard",
    "models": {
@@ -10093,7 +10093,7 @@
   },
   {
    "id": "gen_t4_create_cross_aapl_rates",
-   "tier": "t4",
+   "level": "t4",
    "family": "create",
    "difficulty": "hard",
    "models": {
@@ -10131,7 +10131,7 @@
   },
   {
    "id": "gen_t4_create_cross_book_inflation",
-   "tier": "t4",
+   "level": "t4",
    "family": "create",
    "difficulty": "hard",
    "models": {
@@ -10169,7 +10169,7 @@
   },
   {
    "id": "gen_t4_create_cross_msft_exposure",
-   "tier": "t4",
+   "level": "t4",
    "family": "create",
    "difficulty": "hard",
    "models": {
@@ -10207,7 +10207,7 @@
   },
   {
    "id": "gen_t4_create_cross_nvda_curve",
-   "tier": "t4",
+   "level": "t4",
    "family": "create",
    "difficulty": "hard",
    "models": {
@@ -10245,7 +10245,7 @@
   },
   {
    "id": "gen_t4_delegate_build_earnings_build",
-   "tier": "t4",
+   "level": "t4",
    "family": "delegate",
    "difficulty": "hard",
    "models": {
@@ -10283,7 +10283,7 @@
   },
   {
    "id": "gen_t4_delegate_build_exec_build",
-   "tier": "t4",
+   "level": "t4",
    "family": "delegate",
    "difficulty": "hard",
    "models": {
@@ -10321,7 +10321,7 @@
   },
   {
    "id": "gen_t4_delegate_build_risk_build",
-   "tier": "t4",
+   "level": "t4",
    "family": "delegate",
    "difficulty": "hard",
    "models": {
@@ -10359,7 +10359,7 @@
   },
   {
    "id": "gen_t4_delegate_build_vendor_build",
-   "tier": "t4",
+   "level": "t4",
    "family": "delegate",
    "difficulty": "hard",
    "models": {
@@ -10397,7 +10397,7 @@
   },
   {
    "id": "gen_t4_delete_then_fix_news_aapl_12",
-   "tier": "t4",
+   "level": "t4",
    "family": "delete",
    "difficulty": "hard",
    "models": {
@@ -10435,7 +10435,7 @@
   },
   {
    "id": "gen_t4_delete_then_fix_performance_nvda_18",
-   "tier": "t4",
+   "level": "t4",
    "family": "delete",
    "difficulty": "hard",
    "models": {
@@ -10473,7 +10473,7 @@
   },
   {
    "id": "gen_t4_delete_then_fix_status_escalated_48",
-   "tier": "t4",
+   "level": "t4",
    "family": "delete",
    "difficulty": "hard",
    "models": {
@@ -10511,7 +10511,7 @@
   },
   {
    "id": "gen_t4_delete_then_fix_timeseries_dgs2_17",
-   "tier": "t4",
+   "level": "t4",
    "family": "delete",
    "difficulty": "hard",
    "models": {
@@ -10549,7 +10549,7 @@
   },
   {
    "id": "gen_t4_inspect_repair_brief_macro_timeseries_1",
-   "tier": "t4",
+   "level": "t4",
    "family": "inspect",
    "difficulty": "hard",
    "models": {
@@ -10587,7 +10587,7 @@
   },
   {
    "id": "gen_t4_inspect_repair_brief_price_performance_0",
-   "tier": "t4",
+   "level": "t4",
    "family": "inspect",
    "difficulty": "hard",
    "models": {
@@ -10625,7 +10625,7 @@
   },
   {
    "id": "gen_t4_inspect_repair_brief_reporting_factsheet_studio_factsheets_risk_stats_3",
-   "tier": "t4",
+   "level": "t4",
    "family": "inspect",
    "difficulty": "hard",
    "models": {
@@ -10663,7 +10663,7 @@
   },
   {
    "id": "gen_t4_inspect_repair_brief_sector_exposure_2",
-   "tier": "t4",
+   "level": "t4",
    "family": "inspect",
    "difficulty": "hard",
    "models": {
@@ -10701,7 +10701,7 @@
   },
   {
    "id": "gen_t4_layout_grid_grid_eq",
-   "tier": "t4",
+   "level": "t4",
    "family": "layout",
    "difficulty": "hard",
    "models": {
@@ -10739,7 +10739,7 @@
   },
   {
    "id": "gen_t4_layout_grid_grid_eq_mixed",
-   "tier": "t4",
+   "level": "t4",
    "family": "layout",
    "difficulty": "hard",
    "models": {
@@ -10777,7 +10777,7 @@
   },
   {
    "id": "gen_t4_layout_grid_grid_macro",
-   "tier": "t4",
+   "level": "t4",
    "family": "layout",
    "difficulty": "hard",
    "models": {
@@ -10815,7 +10815,7 @@
   },
   {
    "id": "gen_t4_layout_grid_grid_portfolio",
-   "tier": "t4",
+   "level": "t4",
    "family": "layout",
    "difficulty": "hard",
    "models": {
@@ -10853,7 +10853,7 @@
   },
   {
    "id": "gen_t4_nav_hub_book_hub",
-   "tier": "t4",
+   "level": "t4",
    "family": "navigate",
    "difficulty": "hard",
    "models": {
@@ -10891,7 +10891,7 @@
   },
   {
    "id": "gen_t4_nav_hub_desk_hub",
-   "tier": "t4",
+   "level": "t4",
    "family": "navigate",
    "difficulty": "hard",
    "models": {
@@ -10929,7 +10929,7 @@
   },
   {
    "id": "gen_t4_nav_hub_earnings_hub",
-   "tier": "t4",
+   "level": "t4",
    "family": "navigate",
    "difficulty": "hard",
    "models": {
@@ -10967,7 +10967,7 @@
   },
   {
    "id": "gen_t4_nav_hub_rates_hub",
-   "tier": "t4",
+   "level": "t4",
    "family": "navigate",
    "difficulty": "hard",
    "models": {
@@ -11005,7 +11005,7 @@
   },
   {
    "id": "gen_t4_note_crossbackend_aapl_vs_rates",
-   "tier": "t4",
+   "level": "t4",
    "family": "note",
    "difficulty": "hard",
    "models": {
@@ -11043,7 +11043,7 @@
   },
   {
    "id": "gen_t4_note_crossbackend_book_vs_fed",
-   "tier": "t4",
+   "level": "t4",
    "family": "note",
    "difficulty": "hard",
    "models": {
@@ -11081,7 +11081,7 @@
   },
   {
    "id": "gen_t4_note_crossbackend_exposure_cpi",
-   "tier": "t4",
+   "level": "t4",
    "family": "note",
    "difficulty": "hard",
    "models": {
@@ -11119,7 +11119,7 @@
   },
   {
    "id": "gen_t4_note_crossbackend_msft_vs_curve",
-   "tier": "t4",
+   "level": "t4",
    "family": "note",
    "difficulty": "hard",
    "models": {
@@ -11157,7 +11157,7 @@
   },
   {
    "id": "gen_t4_params_cross_aapl_macro",
-   "tier": "t4",
+   "level": "t4",
    "family": "params",
    "difficulty": "hard",
    "models": {
@@ -11195,7 +11195,7 @@
   },
   {
    "id": "gen_t4_params_cross_nvda_rates",
-   "tier": "t4",
+   "level": "t4",
    "family": "params",
    "difficulty": "hard",
    "models": {
@@ -11233,7 +11233,7 @@
   },
   {
    "id": "gen_t4_params_cross_portfolio_sector",
-   "tier": "t4",
+   "level": "t4",
    "family": "params",
    "difficulty": "hard",
    "models": {
@@ -11271,7 +11271,7 @@
   },
   {
    "id": "gen_t4_params_cross_stark_sector",
-   "tier": "t4",
+   "level": "t4",
    "family": "params",
    "difficulty": "hard",
    "models": {
@@ -11309,7 +11309,7 @@
   },
   {
    "id": "gen_t4_prompts_cross_prompt_cross_aapl_rates",
-   "tier": "t4",
+   "level": "t4",
    "family": "prompts",
    "difficulty": "hard",
    "models": {
@@ -11347,7 +11347,7 @@
   },
   {
    "id": "gen_t4_prompts_cross_prompt_cross_book_cpi",
-   "tier": "t4",
+   "level": "t4",
    "family": "prompts",
    "difficulty": "hard",
    "models": {
@@ -11385,7 +11385,7 @@
   },
   {
    "id": "gen_t4_prompts_cross_prompt_cross_nvda_holdings",
-   "tier": "t4",
+   "level": "t4",
    "family": "prompts",
    "difficulty": "hard",
    "models": {
@@ -11423,7 +11423,7 @@
   },
   {
    "id": "gen_t4_prompts_cross_prompt_cross_stark_risk",
-   "tier": "t4",
+   "level": "t4",
    "family": "prompts",
    "difficulty": "hard",
    "models": {
@@ -11461,7 +11461,7 @@
   },
   {
    "id": "gen_t4_read_pm_values",
-   "tier": "t4",
+   "level": "t4",
    "family": "read",
    "difficulty": "hard",
    "models": {
@@ -11499,7 +11499,7 @@
   },
   {
    "id": "gen_t4_read_quant_values",
-   "tier": "t4",
+   "level": "t4",
    "family": "read",
    "difficulty": "hard",
    "models": {
@@ -11537,7 +11537,7 @@
   },
   {
    "id": "gen_t4_read_risk_values",
-   "tier": "t4",
+   "level": "t4",
    "family": "read",
    "difficulty": "hard",
    "models": {
@@ -11575,7 +11575,7 @@
   },
   {
    "id": "gen_t4_read_stress_values",
-   "tier": "t4",
+   "level": "t4",
    "family": "read",
    "difficulty": "hard",
    "models": {
@@ -11613,7 +11613,7 @@
   },
   {
    "id": "gen_t4_resources_full_client_360",
-   "tier": "t4",
+   "level": "t4",
    "family": "resources",
    "difficulty": "hard",
    "models": {
@@ -11651,7 +11651,7 @@
   },
   {
    "id": "gen_t4_resources_full_portfolio_command_center",
-   "tier": "t4",
+   "level": "t4",
    "family": "resources",
    "difficulty": "hard",
    "models": {
@@ -11689,7 +11689,7 @@
   },
   {
    "id": "gen_t4_resources_full_risk_exposure_monitor",
-   "tier": "t4",
+   "level": "t4",
    "family": "resources",
    "difficulty": "hard",
    "models": {
@@ -11727,7 +11727,7 @@
   },
   {
    "id": "gen_t4_resources_full_vendor_dataset_monitor",
-   "tier": "t4",
+   "level": "t4",
    "family": "resources",
    "difficulty": "hard",
    "models": {
@@ -11765,7 +11765,7 @@
   },
   {
    "id": "gen_t4_skill_finance_comps",
-   "tier": "t4",
+   "level": "t4",
    "family": "skills",
    "difficulty": "hard",
    "models": {
@@ -11803,7 +11803,7 @@
   },
   {
    "id": "gen_t4_skill_finance_earnings_prep",
-   "tier": "t4",
+   "level": "t4",
    "family": "skills",
    "difficulty": "hard",
    "models": {
@@ -11841,7 +11841,7 @@
   },
   {
    "id": "gen_t4_skill_finance_guidance_tracker",
-   "tier": "t4",
+   "level": "t4",
    "family": "skills",
    "difficulty": "hard",
    "models": {
@@ -11879,7 +11879,7 @@
   },
   {
    "id": "gen_t4_skill_finance_tearsheet",
-   "tier": "t4",
+   "level": "t4",
    "family": "skills",
    "difficulty": "hard",
    "models": {
@@ -11917,7 +11917,7 @@
   },
   {
    "id": "gen_t4_update_double_aapl_desk",
-   "tier": "t4",
+   "level": "t4",
    "family": "update",
    "difficulty": "hard",
    "models": {
@@ -11955,7 +11955,7 @@
   },
   {
    "id": "gen_t4_update_double_nvda_switch",
-   "tier": "t4",
+   "level": "t4",
    "family": "update",
    "difficulty": "hard",
    "models": {
@@ -11993,7 +11993,7 @@
   },
   {
    "id": "gen_t4_update_double_rates_switch",
-   "tier": "t4",
+   "level": "t4",
    "family": "update",
    "difficulty": "hard",
    "models": {
@@ -12031,7 +12031,7 @@
   },
   {
    "id": "gen_t4_update_double_stark_ops",
-   "tier": "t4",
+   "level": "t4",
    "family": "update",
    "difficulty": "hard",
    "models": {

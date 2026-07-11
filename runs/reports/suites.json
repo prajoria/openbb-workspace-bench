@@ -7,7 +7,7 @@
           "total": 300,
           "strict_pass_rate": 0.94,
           "mean_score": 0.9919,
-          "by_tier": {
+          "by_level": {
             "t0": {
               "passed": 59,
               "total": 60,
@@ -123,7 +123,7 @@
           "total": 300,
           "strict_pass_rate": 0.89,
           "mean_score": 0.9851,
-          "by_tier": {
+          "by_level": {
             "t0": {
               "passed": 60,
               "total": 60,
@@ -242,7 +242,7 @@
           "total": 300,
           "strict_pass_rate": 0.7633,
           "mean_score": 0.9015,
-          "by_tier": {
+          "by_level": {
             "t0": {
               "passed": 51,
               "total": 60,
@@ -364,7 +364,7 @@
           "total": 300,
           "strict_pass_rate": 0.7033,
           "mean_score": 0.9574,
-          "by_tier": {
+          "by_level": {
             "t0": {
               "passed": 59,
               "total": 60,
@@ -485,7 +485,7 @@
           "total": 300,
           "strict_pass_rate": 0.5933,
           "mean_score": 0.9184,
-          "by_tier": {
+          "by_level": {
             "t0": {
               "passed": 56,
               "total": 60,
@@ -607,7 +607,7 @@
           "total": 300,
           "strict_pass_rate": 0.4967,
           "mean_score": 0.9077,
-          "by_tier": {
+          "by_level": {
             "t0": {
               "passed": 48,
               "total": 60,
@@ -736,7 +736,7 @@
           "total": 212,
           "strict_pass_rate": 1.0,
           "mean_score": 1.0,
-          "by_tier": {
+          "by_level": {
             "t0": {
               "passed": 40,
               "total": 40,
@@ -827,7 +827,7 @@
           "total": 212,
           "strict_pass_rate": 0.9858,
           "mean_score": 0.9992,
-          "by_tier": {
+          "by_level": {
             "t0": {
               "passed": 40,
               "total": 40,
@@ -920,7 +920,7 @@
           "total": 212,
           "strict_pass_rate": 0.9906,
           "mean_score": 0.9991,
-          "by_tier": {
+          "by_level": {
             "t0": {
               "passed": 40,
               "total": 40,
@@ -1014,7 +1014,7 @@
           "total": 212,
           "strict_pass_rate": 0.7217,
           "mean_score": 0.9484,
-          "by_tier": {
+          "by_level": {
             "t0": {
               "passed": 38,
               "total": 40,
@@ -1113,7 +1113,7 @@
           "total": 212,
           "strict_pass_rate": 0.6792,
           "mean_score": 0.9235,
-          "by_tier": {
+          "by_level": {
             "t0": {
               "passed": 35,
               "total": 40,
@@ -1213,7 +1213,7 @@
           "total": 212,
           "strict_pass_rate": 0.1415,
           "mean_score": 0.7474,
-          "by_tier": {
+          "by_level": {
             "t0": {
               "passed": 11,
               "total": 40,

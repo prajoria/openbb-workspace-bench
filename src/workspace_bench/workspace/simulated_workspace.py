@@ -408,12 +408,12 @@ class SimulatedWorkspace:
                 {"backend_id": backend_id, "backends": self._backend_list()},
             )
         if operation == "refresh":
-            backend_id = args.get("backend_id")
-            if backend_id not in self.backends:
+            refresh_backend_id = args.get("backend_id")
+            if refresh_backend_id not in self.backends:
                 return self._error("manage_backends", "invalid_request", "Unknown backend_id.")
             if "widgets_json" in args or "apps_json" in args:
-                return self._refresh_custom_backend(args, str(backend_id))
-            return self._ok("manage_backends", {"backend_id": backend_id})
+                return self._refresh_custom_backend(args, str(refresh_backend_id))
+            return self._ok("manage_backends", {"backend_id": refresh_backend_id})
         return self._error(
             "manage_backends",
             "invalid_request",
@@ -1288,7 +1288,7 @@ class SimulatedWorkspace:
         )
 
     def _next_y(self, dashboard: Dashboard, tab_id: str) -> float:
-        max_bottom = 2 if dashboard.navigation_bar else 0
+        max_bottom = 2.0 if dashboard.navigation_bar else 0.0
         for widget in dashboard.widgets.values():
             if widget.layout.tab_id == tab_id:
                 max_bottom = max(max_bottom, widget.layout.y + widget.layout.h)

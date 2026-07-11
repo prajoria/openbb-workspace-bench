@@ -21,12 +21,12 @@ _LEGACY_LEVEL_TO_CATEGORY = {
 }
 # difficulty axis codes (kept as t0-t4 labels for id/tag stability)
 TASK_LEVELS = ("t0", "t1", "t2", "t3", "t4")
-VALID_TASK_PACK_VISIBILITIES = {"public", "private", "hidden"}
+VALID_TASK_SUITE_VISIBILITIES = {"public", "private", "hidden"}
 
 
 @dataclass(frozen=True)
 class TaskSuiteManifest:
-    """Metadata for a task directory task pack."""
+    """Metadata for a bundled or private task-suite directory."""
 
     suite_id: str
     release_id: str
@@ -38,7 +38,7 @@ class TaskSuiteManifest:
     @classmethod
     def from_dict(cls, payload: JsonDict) -> "TaskSuiteManifest":
         if not isinstance(payload, dict):
-            raise ValueError("task pack manifest must be a JSON object")
+            raise ValueError("task suite manifest must be a JSON object")
         suite_id = str(payload.get("suite_id", "workspace-task-suite"))
         release_id = str(payload.get("release_id", suite_id))
         version = str(payload.get("version", "0.1.0"))
@@ -47,16 +47,16 @@ class TaskSuiteManifest:
         if not suite_id:
             raise ValueError("task suite manifest requires non-empty suite_id")
         if not release_id:
-            raise ValueError("task pack manifest requires non-empty release_id")
+            raise ValueError("task suite manifest requires non-empty release_id")
         if not version:
-            raise ValueError("task pack manifest requires non-empty version")
-        if visibility not in VALID_TASK_PACK_VISIBILITIES:
+            raise ValueError("task suite manifest requires non-empty version")
+        if visibility not in VALID_TASK_SUITE_VISIBILITIES:
             raise ValueError(
-                f"task pack visibility must be one of {sorted(VALID_TASK_PACK_VISIBILITIES)}"
+                f"task suite visibility must be one of {sorted(VALID_TASK_SUITE_VISIBILITIES)}"
             )
         if default_split not in VALID_TASK_SPLITS:
             raise ValueError(
-                f"task pack default_split must be one of {sorted(VALID_TASK_SPLITS)}"
+                f"task suite default_split must be one of {sorted(VALID_TASK_SPLITS)}"
             )
         return cls(
             suite_id=suite_id,

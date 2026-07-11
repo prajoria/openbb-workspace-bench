@@ -1,11 +1,11 @@
-"""Analyze a gpt-4.1-mini gating run over the Part 2 building pack.
+"""Analyze a gating run over the build-openbb-apps suite.
 
-Reads a the evaluator per-model result JSON and prints the level curve, per-family
+Reads an evaluator per-model result JSON and prints the level curve, per-family
 pass rates, and the issue-code histogram — the calibration view used to accept or
-reject the pack's difficulty ladder.
+reject the suite's difficulty ladder.
 
 Usage:
-    uv run python scripts/analyze_authoring_gate.py runs/comparison/<run>/<model>.json
+    uv run python scripts/analyze_build_apps_gate.py runs/comparison/<run>/<model>.json
 """
 
 from __future__ import annotations

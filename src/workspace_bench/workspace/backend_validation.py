@@ -135,7 +135,7 @@ def _validate_render_fn_params(where: str, column: JsonDict, errors: list[str]) 
     if action == "groupBy":
         group_by = params.get("groupBy")
         legacy = params.get("groupByParamName")
-        has_param = isinstance(legacy, str) and legacy
+        has_param = bool(isinstance(legacy, str) and legacy)
         if isinstance(group_by, dict) and isinstance(group_by.get("paramName"), str):
             has_param = has_param or bool(group_by["paramName"])
         if not has_param:
@@ -245,7 +245,6 @@ def _validate_param(
     seen_names: set[str],
     file_selector_count: list[int],
     errors: list[str],
-    warnings: list[str],
 ) -> None:
     if not isinstance(param, dict):
         errors.append(f"{where}: each param must be an object.")
@@ -436,7 +435,7 @@ def validate_widgets_json(
             else:
                 for param in _iter_params(params):
                     _validate_param(
-                        where, param, seen_names, file_selector_count, errors, warnings
+                        where, param, seen_names, file_selector_count, errors
                     )
                 for param in _iter_params(params):
                     if not isinstance(param, dict):

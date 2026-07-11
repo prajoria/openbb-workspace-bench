@@ -369,7 +369,6 @@ def build() -> None:
         for sibling_id in sibling_ids:
             widgets[sibling_id] = c.desk_widget(desk_key, sibling_id)
         sibling_id = sibling_ids[0]
-        sibling = widgets[sibling_id]
         new_param, param_name, set_value = configure
         if new_param is not None:
             focus.setdefault("params", []).append(json.loads(json.dumps(new_param)))

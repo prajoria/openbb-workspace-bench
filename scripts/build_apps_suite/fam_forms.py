@@ -461,7 +461,6 @@ def build() -> None:
         for sibling_id in sibling_ids:
             widgets[sibling_id] = c.desk_widget(desk_key, sibling_id)
         sibling_id = sibling_ids[0]
-        sibling = widgets[sibling_id]
         config_param, param_name, set_value = configure
         focus.setdefault("params", []).append(json.loads(json.dumps(config_param)))
         app_name, app_desc, tab_id, tab_name = app_spec

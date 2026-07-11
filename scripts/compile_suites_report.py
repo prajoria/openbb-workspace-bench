@@ -41,20 +41,20 @@ def load_model_results(comparison_dir: Path) -> dict[str, dict]:
 
 
 def summarize(rows: list[dict]) -> dict:
-    by_tier: dict[str, list[int]] = defaultdict(lambda: [0, 0])
+    by_level: dict[str, list[int]] = defaultdict(lambda: [0, 0])
     by_family: dict[str, list[int]] = defaultdict(lambda: [0, 0])
     issues: Counter = Counter()
     passed = 0
     score_sum = 0.0
     for row in rows:
         match = ID_SHAPE.match(row["id"])
-        tier = match.group(1) if match else "?"
+        level = match.group(1) if match else "?"
         family = match.group(2) if match else "?"
         ok = bool(row["passed"])
         passed += ok
         score_sum += float(row.get("score") or 0.0)
-        by_tier[tier][1] += 1
-        by_tier[tier][0] += ok
+        by_level[level][1] += 1
+        by_level[level][0] += ok
         by_family[family][1] += 1
         by_family[family][0] += ok
         if not ok:
@@ -67,9 +67,9 @@ def summarize(rows: list[dict]) -> dict:
         "total": total,
         "strict_pass_rate": round(passed / total, 4) if total else None,
         "mean_score": round(score_sum / total, 4) if total else None,
-        "by_tier": {
-            tier: {"passed": p, "total": t, "rate": round(p / t, 4)}
-            for tier, (p, t) in sorted(by_tier.items())
+        "by_level": {
+            level: {"passed": p, "total": t, "rate": round(p / t, 4)}
+            for level, (p, t) in sorted(by_level.items())
         },
         "by_family": {
             family: {"passed": p, "total": t, "rate": round(p / t, 4)}
@@ -82,7 +82,7 @@ def summarize(rows: list[dict]) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--run", action="append", required=True, metavar="COLLECTION=DIR",
+        "--run", action="append", required=True, metavar="SUITE=DIR",
         help="suite name = evaluator output directory (repeatable)",
     )
     parser.add_argument("--output", default="runs/reports/suites.json")

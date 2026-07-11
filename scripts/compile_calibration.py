@@ -1,9 +1,9 @@
-"""Compile v1 calibration results across all model runs into one JSON blob.
+"""Compile core-suite calibration results across all model runs into one JSON blob.
 
-Reads every runs/comparison/v1-calib-*/<model>.json, joins tasks with
-family/tier tags from the bundled pack, and writes
+Reads every runs/comparison/core-*/<model>.json, joins tasks with
+family/level tags from the bundled suite, and writes
 runs/reports/calibration.json with per-model strict totals, mean scores,
-per-tier and per-family pass rates, and top issue codes. The blog chart is
+per-level and per-family pass rates, and top issue codes. The blog chart is
 rendered from this file.
 """
 
@@ -23,14 +23,14 @@ for f in PACK.glob("*.json"):
         continue
     s = json.loads(f.read_text())
     pack[s["id"]] = (
-        next(t[5:] for t in s["tags"] if t.startswith("tier-")),
+        next(t.split("-", 1)[1] for t in s["tags"] if t.startswith(("level-t", "tier-t"))),
         next(t[7:] for t in s["tags"] if t.startswith("family-")),
         s.get("difficulty", "medium"),
     )
 
 models = []
 per_task = defaultdict(dict)
-for run_dir in sorted((REPO / "runs/comparison").glob("v1-calib-*")):
+for run_dir in sorted((REPO / "runs/comparison").glob("core-*")):
     result_files = [f for f in run_dir.glob("*.json") if f.name != "comparison.json"]
     if not result_files:
         continue
@@ -38,16 +38,19 @@ for run_dir in sorted((REPO / "runs/comparison").glob("v1-calib-*")):
     rows = d.get("results", [])
     if len(rows) != 300:
         continue
-    slug = run_dir.name.removeprefix("v1-calib-")
-    tiers = defaultdict(lambda: [0, 0])
+    slug = run_dir.name.removeprefix("core-")
+    levels = defaultdict(lambda: [0, 0])
     fams = defaultdict(lambda: [0, 0])
     diffs = defaultdict(lambda: [0, 0])
     codes = defaultdict(int)
     for r in rows:
-        tier, fam, diff = pack[r["id"]]
-        tiers[tier][0] += r["passed"]; tiers[tier][1] += 1
-        fams[fam][0] += r["passed"]; fams[fam][1] += 1
-        diffs[diff][0] += r["passed"]; diffs[diff][1] += 1
+        level, fam, diff = pack[r["id"]]
+        levels[level][0] += r["passed"]
+        levels[level][1] += 1
+        fams[fam][0] += r["passed"]
+        fams[fam][1] += 1
+        diffs[diff][0] += r["passed"]
+        diffs[diff][1] += 1
         for i in r["issues"]:
             codes[i["code"]] += 1
         per_task[r["id"]][slug] = {
@@ -59,7 +62,7 @@ for run_dir in sorted((REPO / "runs/comparison").glob("v1-calib-*")):
         "slug": slug,
         "strict": sum(r["passed"] for r in rows),
         "mean_score": round(sum(r["score"] for r in rows) / 300, 4),
-        "tiers": {t: [p, n] for t, (p, n) in sorted(tiers.items())},
+        "levels": {t: [p, n] for t, (p, n) in sorted(levels.items())},
         "families": {f: [p, n] for f, (p, n) in sorted(fams.items())},
         "difficulties": {d_: [p, n] for d_, (p, n) in sorted(diffs.items())},
         "top_issues": dict(sorted(codes.items(), key=lambda kv: -kv[1])[:6]),
@@ -68,7 +71,7 @@ for run_dir in sorted((REPO / "runs/comparison").glob("v1-calib-*")):
 tasks = [
     {
         "id": sid,
-        "tier": pack[sid][0],
+        "level": pack[sid][0],
         "family": pack[sid][1],
         "difficulty": pack[sid][2],
         "models": per_task[sid],
@@ -82,5 +85,5 @@ OUT.write_text(json.dumps(
 ))
 print(f"Wrote {OUT}: {len(models)} complete model runs")
 for m in models:
-    curve = " -> ".join(f"{t} {p}/{n}" for t, (p, n) in m["tiers"].items())
+    curve = " -> ".join(f"{t} {p}/{n}" for t, (p, n) in m["levels"].items())
     print(f"  {m['slug']:16s} strict {m['strict']}/300 | {curve}")

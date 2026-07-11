@@ -146,7 +146,7 @@ def run_agent_command(
             "WORKSPACE_BENCH_TASK_JSON": str(task_path),
             "WORKSPACE_BENCH_OUTPUT_JSONL": str(output_path),
             "WORKSPACE_BENCH_RUN_DIR": str(resolved_run_dir),
-            "WORKSPACE_BENCH_SCENARIO_ID": task.id,
+            "WORKSPACE_BENCH_TASK_ID": task.id,
         }
     )
 

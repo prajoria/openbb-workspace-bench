@@ -40,6 +40,7 @@ from workspace_bench.core.models import (
     BENCHMARK_VERSION,
     JsonDict,
     RunResult,
+    TASK_CATEGORIES,
     Task,
     ToolCall,
     VALID_TASK_SPLITS,
@@ -190,8 +191,7 @@ def main(argv: list[str] | None = None) -> int:
         choices=list(BUILTIN_TASK_SUITE_ORDER),
         help=(
             "Bundled task suite. core = operating the workspace; "
-            "build-openbb-apps = building custom backend apps; all is a "
-            "deprecated alias for core."
+            "build-openbb-apps = building custom backend apps."
         ),
     )
     parser.add_argument(
@@ -624,11 +624,11 @@ def load_task_source(args: argparse.Namespace) -> list[Task]:
     task_dir = getattr(args, "task_dir", None)
     if task_dir:
         return load_task_directory(Path(task_dir))
-    pack = getattr(args, "suite", "core")
-    # `--task <id>` should just work without naming the collection:
-    # when ids are given and the pack was left at its default, search every
-    # bundled collection for them.
-    if getattr(args, "task", None) and pack == "core":
+    suite = getattr(args, "suite", "core")
+    # `--task <id>` should just work without naming the suite: when ids are
+    # given and the suite was left at its default, search every bundled
+    # suite for them.
+    if getattr(args, "task", None) and suite == "core":
         tasks: list[Task] = []
         seen: set[str] = set()
         for name in BUILTIN_TASK_SUITE_ORDER:
@@ -637,7 +637,7 @@ def load_task_source(args: argparse.Namespace) -> list[Task]:
                     seen.add(task.id)
                     tasks.append(task)
         return tasks
-    return load_builtin_tasks(pack)
+    return load_builtin_tasks(suite)
 
 
 def print_dry_run(
@@ -1505,6 +1505,22 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
             f"{format_bucket(by_level.get('t4'))} |"
         )
 
+    lines.extend(
+        [
+            "",
+            "## By Category",
+            "",
+            "| Model | " + " | ".join(TASK_CATEGORIES) + " |",
+            "| --- | " + " | ".join("---:" for _ in TASK_CATEGORIES) + " |",
+        ]
+    )
+    for model in comparison["models"]:
+        by_category = model.get("by_category", {})
+        category_cells = " | ".join(
+            format_bucket(by_category.get(category)) for category in TASK_CATEGORIES
+        )
+        lines.append(f"| {model['model']} | {category_cells} |")
+
     lines.extend(["", "## Task Issue Counts", ""])
     for payload in model_payloads:
         label = payload["model"]["label"]
@@ -1666,12 +1682,17 @@ def summarize_runs(runs: list[ComparisonRun]) -> dict:
         sum(run.run_result.grade.score for run in runs) / total if total else 0.0
     )
     by_level: dict[str, dict[str, int]] = {}
+    by_category: dict[str, dict[str, int]] = {}
     by_difficulty: dict[str, dict[str, int]] = {}
     outcomes_by_task: dict[str, list[bool]] = {}
     for run in runs:
         task = run.run_result.task
         outcomes_by_task.setdefault(task.id, []).append(agent_run_passed(run))
-        for bucket, key in ((by_level, task.level), (by_difficulty, task.difficulty)):
+        for bucket, key in (
+            (by_level, task.level),
+            (by_category, task.category),
+            (by_difficulty, task.difficulty),
+        ):
             item = bucket.setdefault(key, {"passed": 0, "total": 0})
             item["total"] += 1
             if agent_run_passed(run):
@@ -1688,6 +1709,7 @@ def summarize_runs(runs: list[ComparisonRun]) -> dict:
         "mean_score": mean_score,
         "process_failures": process_failures,
         "by_level": by_level,
+        "by_category": by_category,
         "by_difficulty": by_difficulty,
         **compute_reliability_metrics(outcomes_by_task),
     }
@@ -1743,7 +1765,7 @@ def selected_filters(args: argparse.Namespace) -> dict:
         "workflow": args.workflow,
         "domain": args.domain,
         "subdomain": args.subdomain,
-        "pack": getattr(args, "suite", "core"),
+        "suite": getattr(args, "suite", "core"),
         "split": getattr(args, "split", None),
         "task_dir": getattr(args, "task_dir", None),
         "tags": args.tag,
@@ -1803,7 +1825,7 @@ def render_svg_chart(comparison: dict) -> str:
     baseline_y = margin_top + chart_height
     bar_width = 88
     slot_width = (width - margin_left - 60) / max(len(models), 1)
-    colors = ["#2563eb", "#16a34a", "#f97316", "#7c3aed", "#dc2626"]
+    colors = ["#2563eb", "#16a34a", "#f97316", "#7c3aed", "#dc2626", "#0891b2"]
 
     title = (
         f"Workspace Bench {metric_label} "

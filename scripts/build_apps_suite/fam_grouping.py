@@ -384,7 +384,6 @@ def build() -> None:
         for sibling_id in sibling_ids:
             widgets[sibling_id] = c.desk_widget("earnings", sibling_id)
         sibling_id = sibling_ids[0]
-        sibling = widgets[sibling_id]
         param_name, set_value = configure
         app_name, app_desc, tab_id, tab_name, group_name = app_spec
         app = c.app_def(app_name, app_desc, tabs=[

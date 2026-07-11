@@ -422,7 +422,6 @@ def build() -> None:
         for sib in sibling_ids:
             widgets[sib] = c.desk_widget(desk_key, sib)
         sibling_id = sibling_ids[0]
-        sibling = widgets[sibling_id]
         app_name, app_desc, tab_id, tab_name = app_spec
         # t4 writes what t3 writes (two tabs + a fanned-out convention) and
         # then OPERATES it — proxy r3 found a t3/t4 inversion when t4's

@@ -84,9 +84,9 @@ def test_non_widget_stark_prompt_omits_widget_hints() -> None:
     assert '"widget_hints": {}' in prompt
 
 
-def test_comparison_metadata_uses_unified_pack_release_id() -> None:
+def test_comparison_metadata_uses_core_suite_release_id() -> None:
     metadata = benchmark_metadata(
-        SimpleNamespace(task_dir=None, pack="all")
+        SimpleNamespace(task_dir=None, suite="core")
     )
 
     assert metadata["release_id"] == "workspace-bench-v1"
