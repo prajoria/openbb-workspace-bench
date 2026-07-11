@@ -1,4 +1,0 @@
-{"args": {"task_requests": [{"assigned_agent_id": "rejects-analyst", "assigned_holder_url": "workspace://", "description": "Handle rejects analyst tasks for execution desk exceptions.", "id": "rejects-analyst"}, {"assigned_agent_id": "restricted-analyst", "assigned_holder_url": "workspace://", "description": "Handle restricted analyst tasks for execution desk exceptions.", "id": "restricted-analyst"}]}, "tool": "assign_tasks_to_agents"}
-{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "execution_desk_exceptions_rejected_orders"}, "tool": "create_widget"}
-{"args": {"data": "This dashboard includes two workstreams: rejects-analyst and restricted-analyst, assigned to handle execution desk exceptions.", "name": "Coordinator Note", "widget_type": "note"}, "tool": "add_generative_widget"}

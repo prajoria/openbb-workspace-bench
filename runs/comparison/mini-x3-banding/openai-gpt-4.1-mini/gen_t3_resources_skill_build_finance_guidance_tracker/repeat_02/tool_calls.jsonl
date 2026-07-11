@@ -1,3 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-guidance-tracker"}, "tool": "read_workspace_resource"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "executive_investment_dashboard_risk_limit_utilization"}, "tool": "create_widget"}
-{"args": {"data": "This dashboard widget shows risk limit utilization. Note that there are evidence gaps in the data and assumptions that should be addressed for better risk management and decision-making.", "name": "Evidence Gaps Note", "widget_type": "note"}, "tool": "add_generative_widget"}

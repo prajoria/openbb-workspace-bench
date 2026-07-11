@@ -1,0 +1,5 @@
+{"tool": "manage_backends", "args": {"apps_json": [], "backend_id": "", "name": "", "operation": "list", "url": "", "widgets_json": {}}}
+{"tool": "manage_backends", "args": {"name": "Vol Desk Data", "operation": "add", "url": "http://localhost:7801", "widgets_json": {"vol_symbol_chart": {"category": "Volatility", "data": {"defaultSymbol": "VX1", "updateFrequency": 15000}, "description": "TradingView chart for volatility futures.", "endpoint": "/vol-symbol-udf", "gridData": {"h": 18, "w": 20}, "name": "Vol Symbol Chart", "params": [{"label": "Venue", "paramName": "venue", "type": "text", "value": "CFE"}], "staleTime": 600000, "type": "advanced_charting"}}}}
+{"tool": "manage_backends", "args": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}}
+{"tool": "manage_backends", "args": {"apps_json": [], "backend_id": "", "name": "", "operation": "list", "url": "", "widgets_json": {}}}
+{"tool": "manage_backends", "args": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}}

@@ -1,0 +1,3 @@
+{"tool": "manage_backends", "args": {"backend_id": "backend_001", "operation": "refresh", "apps_json": [{"name": "Surveillance Morning", "description": "Alerts and case notes.", "tabs": {"alerts": {"id": "alerts", "name": "Alerts", "layout": [{"i": "alert_queue", "x": 0, "y": 0, "w": 24, "h": 10, "state": {"params": {"severity": "high"}}}, {"i": "case_notes", "x": 24, "y": 0, "w": 12, "h": 10}, {"i": "alert_metric", "x": 0, "y": 10, "w": 12, "h": 6}]}}, "prompts": ["Which high-severity alerts are unassigned?"]}]}}
+{"tool": "manage_backends", "args": {"backend_id": "backend_001", "operation": "list"}}
+{"tool": "manage_backends", "args": {"backend_id": "backend_001", "operation": "list"}}

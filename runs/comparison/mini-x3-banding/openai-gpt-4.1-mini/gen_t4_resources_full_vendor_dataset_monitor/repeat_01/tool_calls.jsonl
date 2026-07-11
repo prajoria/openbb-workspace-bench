@@ -1,6 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {"app_name": "vendor-dataset-monitor", "backend_id": "backend_001", "operation": "instantiate"}, "tool": "manage_apps"}
-{"args": {"backend_id": "backend_001", "operation": "instantiate", "template_id": "vendor-dataset-monitor"}, "tool": "manage_apps"}
-{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "incidents"}, "tool": "navigate_workspace"}
-{"args": {"dashboard_id": "dash_002", "origin": "Bench Stark Enterprise", "widget_id": "vendor_dataset_monitor_incidents_incident_log"}, "tool": "create_widget"}
-{"args": {"data": "This incident log widget displays the incident log and resource information for vendor dataset monitoring.", "inner_tab": "incidents", "name": "Incident Log Note", "widget_type": "note"}, "tool": "add_generative_widget"}

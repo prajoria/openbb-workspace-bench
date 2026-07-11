@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {"series": "CPIAUCSL"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
-{"args": {"data": "Repaired the macro timeseries widget from FEDFUNDS to CPIAUCSL as requested.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

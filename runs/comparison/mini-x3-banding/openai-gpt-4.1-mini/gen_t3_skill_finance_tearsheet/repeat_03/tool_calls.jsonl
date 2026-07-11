@@ -1,4 +1,0 @@
-{"args": {"slug": "finance-tearsheet"}, "tool": "get_skill_content"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "create_widget"}
-{"args": {"data": "The Finance Tearsheet workflow involves gathering price action, fundamentals, valuation, catalysts, risks, ownership, and a short investment conclusion. The Price Performance widget for MSFT provides the price action data needed as the first step in this workflow. Further steps would include adding widgets for fundamentals, valuation, catalysts, risks, and ownership to complete the tear sheet for MSFT.", "name": "Finance Tearsheet Workflow Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,5 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_001", "data_args": {"limit": 5, "symbol": "AAPL"}, "layout": {"h": 10, "w": 20, "x": 20, "y": 0}, "origin": "Bench Equities", "ui_args": {}, "widget_id": "latest_news"}, "tool": "create_widget"}
-{"args": {"dashboard_id": "dash_001", "h": 10, "w": 20, "widget_uuid": "widget_002", "x": 20, "y": 0}, "tool": "update_widget_layout"}

@@ -1,0 +1,88 @@
+{
+  "attempt_count": 300,
+  "benchmark": {
+    "name": "openbb-workspace-bench",
+    "release_id": "workspace-bench-v1",
+    "version": "1.0.0"
+  },
+  "filters": {
+    "capability": null,
+    "difficulty": "all",
+    "domain": null,
+    "level": null,
+    "pack": "all",
+    "scenario_dir": null,
+    "split": null,
+    "subdomain": null,
+    "tags": [],
+    "workflow": null
+  },
+  "max_turns_override": null,
+  "metric": "pass-rate",
+  "model_retries": 2,
+  "models": [
+    {
+      "by_difficulty": {
+        "easy": {
+          "passed": 89,
+          "total": 90
+        },
+        "hard": {
+          "passed": 83,
+          "total": 90
+        },
+        "medium": {
+          "passed": 110,
+          "total": 120
+        }
+      },
+      "by_level": {
+        "L0": {
+          "passed": 28,
+          "total": 28
+        },
+        "L1": {
+          "passed": 121,
+          "total": 124
+        },
+        "L2": {
+          "passed": 67,
+          "total": 76
+        },
+        "L3": {
+          "passed": 39,
+          "total": 40
+        },
+        "L4": {
+          "passed": 27,
+          "total": 32
+        }
+      },
+      "failed": 18,
+      "mean_score": 0.9918932536761486,
+      "model": "OpenAI GPT-5.5",
+      "pass_at_k": 0.94,
+      "pass_at_k_count": 282,
+      "pass_power_k": 0.94,
+      "pass_power_k_count": 282,
+      "pass_rate": 0.94,
+      "passed": 282,
+      "process_failures": 1,
+      "reliability_max_k": 1,
+      "reliability_min_k": 1,
+      "reliability_scenario_count": 300,
+      "result_path": "runs/comparison/core-gpt-5.5/openai-gpt-5.5.json",
+      "slug": "openai-gpt-5.5",
+      "task_failures": 17,
+      "task_pass_rate": 0.9431438127090301,
+      "task_passed": 282,
+      "total": 300,
+      "valid_attempts": 299
+    }
+  ],
+  "models_file": "/private/tmp/claude-501/-Users-didierlopes-Documents-git-rl-workspace/648b998b-e4d7-43dc-b1cd-53c1d5b81793/scratchpad/models_openai-gpt-5.5.json",
+  "repeats": 1,
+  "retry_backoff": 1.0,
+  "runner": "interactive",
+  "scenario_count": 300
+}

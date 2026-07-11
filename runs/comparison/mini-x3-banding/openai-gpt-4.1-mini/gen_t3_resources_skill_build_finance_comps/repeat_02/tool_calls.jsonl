@@ -1,4 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-comps"}, "tool": "read_workspace_resource"}
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
-{"args": {"data": "This dashboard includes the sector exposure of the portfolio. The peer set is defined to compare companies or assets using peer valuation and operating metrics, which helps in understanding relative performance and valuation.", "name": "Peer Set Note", "widget_type": "note"}, "tool": "add_generative_widget"}

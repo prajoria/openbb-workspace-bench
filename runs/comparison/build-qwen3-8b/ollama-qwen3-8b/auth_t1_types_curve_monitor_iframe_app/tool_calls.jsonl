@@ -1,0 +1,2 @@
+{"tool": "get_workspace_snapshot", "args": {}}
+{"tool": "manage_backends", "args": {"operation": "add", "name": "Rates Watch Data", "url": "http://localhost:7803", "widgets_json": {"curve_monitor_iframe": {"name": "Curve Monitor App", "description": "Embedded standalone curve monitor application.", "endpoint": "http://localhost:5173", "type": "iframe", "w": 24, "h": 16}}, "apps_json": [{"name": "Curve Monitor", "tabs": {"monitor": {"id": "monitor", "name": "Monitor", "layout": [{"i": "curve_monitor_iframe", "x": 0, "y": 0, "w": 24, "h": 16}]}}}]}}

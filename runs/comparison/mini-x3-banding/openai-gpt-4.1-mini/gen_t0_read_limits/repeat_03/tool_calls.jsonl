@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_limits_limit_utilization"}, "tool": "get_widget_data"}
-{"args": {"data": "I reviewed the data from the risk_exposure_monitor_limits_limit_utilization widget on Bench Stark Enterprise. The data shows limit utilization changes and exposures for various funds over different periods with statuses ranging from Open to Closed.", "name": "Review Note on Limit Utilization", "tab_id": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

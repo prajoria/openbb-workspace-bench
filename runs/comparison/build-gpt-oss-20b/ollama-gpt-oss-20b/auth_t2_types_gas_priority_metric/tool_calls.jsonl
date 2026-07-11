@@ -1,0 +1,1 @@
+{"tool": "manage_backends", "args": {"name": "Chain TVL Data", "operation": "add", "url": "http://localhost:7802", "widgets_json": {"gas_priority_metric": {"category": "Network Ops", "description": "Priority gas fee monitor.", "endpoint": "/gas-priority", "gridData": {"h": 4, "w": 6}, "name": "Gas Priority", "refetchInterval": 30000, "runButton": true, "type": "metric"}}}}

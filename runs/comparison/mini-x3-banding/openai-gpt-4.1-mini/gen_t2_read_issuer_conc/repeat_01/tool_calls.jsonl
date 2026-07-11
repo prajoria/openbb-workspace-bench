@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_holdings_issuer_concentration"}, "tool": "get_widget_data"}
-{"args": {"data": "Widget ID: portfolio_command_center_holdings_issuer_concentration\nField: score\nExact Values for Flagship Long/Short fund, YTD period:\n- AAPL: 94.45\n- XOM: 57.23", "description": "Note citing widget id, field name, and exact values for Flagship Long/Short fund YTD period", "name": "Issuer Concentration Scores Note", "widget_type": "note"}, "tool": "add_generative_widget"}

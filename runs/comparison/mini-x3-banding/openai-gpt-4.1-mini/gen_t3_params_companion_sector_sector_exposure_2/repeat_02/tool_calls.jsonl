@@ -1,5 +1,0 @@
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {"sector": "Technology"}, "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "create_widget"}

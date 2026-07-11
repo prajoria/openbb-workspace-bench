@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "stderr": "",
+  "stdout": "turn 3 retry 1/4 after transient model error: model API request failed: HTTP 500: {\"error\":\"error parsing tool call: raw='{\\\"backend_id\\\":\\\"backend_001\\\",\\\"operation\\\":\\\"refresh\\\",\\\"apps_json\\\":[{\\\"name\\\":\\\"Case Triage\\\",\\\"description\\\":\\\"Case triage queue and notes.\\\",\\\"tabs\\\":{\\\"triage\\\":{\\\"id\\\":\\\"triage\\\",\\\"name\\\":\\\"Triage\\\",\\\"layout\\\":[{\\\"i\\\":\\\"case_triage_table\\\",\\\"x\\\":0,\\\"y\\\":0,\\\"w\\\":20,\\\"h\\\":9}]}, \\\"notes\\\":{\\\"id\\\":\\\"notes\\\",\\\"name\\\":\\\"Notes\\\",\\\"layout\\\":[{\\\"i\\\":\\\"case_notes\\\",\\\"x\\\":0,\\\"y\\\":0,\\\"w\\\":12,\\\"h\\\":8}]}}]}', err=invalid character ']' after object key:value pair\"}\nreached max_turns=8",
+  "timed_out": false
+}

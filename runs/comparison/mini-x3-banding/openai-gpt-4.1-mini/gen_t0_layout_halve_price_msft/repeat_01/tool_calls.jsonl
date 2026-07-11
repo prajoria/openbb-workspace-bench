@@ -1,2 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "h": 12, "tab_id": "charts", "w": 20, "widget_uuid": "widget_001", "x": 0, "y": 2}, "tool": "update_widget_layout"}

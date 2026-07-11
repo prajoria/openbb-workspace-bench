@@ -1,3 +1,0 @@
-{"action": {"args": {"operation": "list"}, "done": false, "tool": "manage_backends"}, "content": "{\"done\":false,\"tool\":\"manage_backends\",\"args\":{\"operation\":\"list\"}}", "turn": 1}
-{"action": {"args": {"app_name": "Equity Research Workbench", "backend_id": "backend_001", "dashboard_name": "Coverage Workbench", "operation": "instantiate"}, "done": false, "tool": "manage_apps"}, "content": "{\"done\":false,\"tool\":\"manage_apps\",\"args\":{\"operation\":\"instantiate\",\"backend_id\":\"backend_001\",\"app_name\":\"Equity Research Workbench\",\"dashboard_name\":\"Coverage Workbench\"}}", "turn": 2}
-{"action": {"done": true}, "content": "{\"done\":true}", "turn": 3}

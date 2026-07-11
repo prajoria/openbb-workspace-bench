@@ -1,7 +1,0 @@
-{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
-{"args": {"activate": true, "name": "Macro Prompt Dashboard", "operation": "create"}, "tool": "manage_dashboard"}
-{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_002", "data_args": {"series": "DGS2"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
-{"args": {"dashboard_id": "dash_002", "origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "create_widget"}
-{"args": {"dashboard_id": "dash_002", "data": "This dashboard includes the DGS2 macro time series and the yield curve widget. The DGS2 series is a 2-year Treasury constant maturity rate. The yield curve widget shows US Treasury yields by tenor, with schema including tenor as text and yield as number.", "name": "Dashboard Note", "widget_type": "note"}, "tool": "add_generative_widget"}

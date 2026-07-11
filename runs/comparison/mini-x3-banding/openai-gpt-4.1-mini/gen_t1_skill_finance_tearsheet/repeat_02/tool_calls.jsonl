@@ -1,2 +1,0 @@
-{"args": {"slug": "finance-tearsheet"}, "tool": "get_skill_content"}
-{"args": {"data": "Tearsheet workflow steps for an analyst:\n1. Gather price action data.\n2. Analyze fundamentals.\n3. Assess valuation.\n4. Identify catalysts.\n5. Evaluate risks.\n6. Review ownership.\n7. Formulate a short investment conclusion.", "name": "Finance Tearsheet Workflow Note", "widget_type": "note"}, "tool": "add_generative_widget"}

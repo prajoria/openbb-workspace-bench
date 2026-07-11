@@ -1,0 +1,1 @@
+{"tool": "manage_backends", "args": {"name": "Vol Desk Data", "url": "http://localhost:7801", "operation": "add", "widgets_json": {"vol_regime_metric": {"name": "Vol Regime", "description": "Current volatility regime score.", "endpoint": "/vol-regime", "type": "metric", "gridData": {"w": 6, "h": 4}, "staleTime": 900000, "runButton": true}}}}

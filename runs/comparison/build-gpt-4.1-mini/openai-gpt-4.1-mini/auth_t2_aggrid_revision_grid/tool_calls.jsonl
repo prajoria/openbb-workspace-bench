@@ -1,0 +1,2 @@
+{"tool": "manage_backends", "args": {"operation": "add", "name": "Earnings Prep Data", "url": "http://localhost:7805", "widgets_json": {"revision_grid": {"name": "Revision Grid", "description": "Street revision momentum by ticker.", "endpoint": "/revision-momentum", "type": "ssrm_table", "gridData": {"w": 20, "h": 9}, "dataKey": "rows"}}}}
+{"tool": "get_workspace_snapshot", "args": {}}

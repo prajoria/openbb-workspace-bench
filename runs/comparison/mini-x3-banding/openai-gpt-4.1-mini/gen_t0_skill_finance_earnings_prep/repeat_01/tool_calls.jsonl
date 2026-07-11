@@ -1,2 +1,0 @@
-{"args": {"slug": "finance-earnings-prep"}, "tool": "get_skill_content"}
-{"args": {"data": "The Finance Earnings Prep skill involves comparing internal estimates to street numbers, identifying surprise drivers, reviewing guidance, inspecting transcript tone, and producing action items for the portfolio manager.", "name": "Finance Earnings Prep Skill", "widget_type": "note"}, "tool": "add_generative_widget"}

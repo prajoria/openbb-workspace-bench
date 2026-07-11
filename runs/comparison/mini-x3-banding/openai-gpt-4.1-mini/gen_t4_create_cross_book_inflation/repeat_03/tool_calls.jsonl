@@ -1,5 +1,0 @@
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "create_widget"}
-{"args": {"data_args": {"series": "CPIAUCSL"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
-{"args": {"data": "This dashboard includes the Holdings Table from Bench Portfolio and the Macro Timeseries for CPIAUCSL from Bench Macro.", "name": "Holdings and CPIAUCSL Note", "widget_type": "note"}, "tool": "add_generative_widget"}

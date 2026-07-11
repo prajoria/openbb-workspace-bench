@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "stderr": "",
+  "stdout": "turn 2: malformed action recovered (Unterminated string starting at: line 1 column 1068 (char 1067))\ndone at turn 4",
+  "timed_out": false
+}

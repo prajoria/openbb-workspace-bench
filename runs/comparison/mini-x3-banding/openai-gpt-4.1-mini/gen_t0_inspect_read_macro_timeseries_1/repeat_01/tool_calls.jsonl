@@ -1,2 +1,0 @@
-{"args": {"widget_id": "macro_timeseries"}, "tool": "read_widget"}
-{"args": {"data": "This widget shows the macroeconomic time series for the DGS10 series, which represents the 10-year Treasury constant maturity rate.", "name": "Note on DGS10", "origin": "Bench Macro", "widget_type": "note"}, "tool": "add_generative_widget"}

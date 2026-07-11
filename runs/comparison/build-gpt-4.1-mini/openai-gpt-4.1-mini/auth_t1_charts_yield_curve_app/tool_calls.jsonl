@@ -1,0 +1,2 @@
+{"tool": "get_workspace_snapshot", "args": {}}
+{"tool": "manage_backends", "args": {"operation": "add", "name": "Rates Watch Data", "url": "http://localhost:7803", "widgets_json": {"yield_curve": {"name": "Yield Curve", "description": "Plotly treasury yield curve snapshot.", "endpoint": "/yield-curve", "type": "chart", "gridData": {"w": 20, "h": 9}, "raw": true}}, "apps_json": [{"name": "Yield Curve App", "description": "Treasury curve chart.", "tabs": {"curve": {"id": "curve", "name": "Curve", "layout": [{"i": "yield_curve", "x": 0, "y": 0, "w": 20, "h": 9}]}}}]}}

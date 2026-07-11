@@ -1,9 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {"app_name": "risk-exposure-monitor", "backend_id": "backend_001", "dashboard_name": "Risk Resource Command", "operation": "instantiate"}, "tool": "manage_apps"}
-{"args": {"app_name": "risk-exposure-monitor", "backend_id": "backend_001", "operation": "instantiate"}, "tool": "manage_apps"}
-{"args": {"app_name": "risk-exposure-monitor", "backend_id": "backend_001", "dashboard_name": "Risk & Exposure Monitor", "operation": "instantiate"}, "tool": "manage_apps"}
-{"args": {"app_name": "risk-exposure-monitor", "backend_id": "backend_001", "dashboard_name": "Risk & Exposure Monitor", "operation": "instantiate"}, "tool": "manage_apps"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"app_name": "risk-exposure-monitor", "backend_id": "backend_001", "dashboard_name": "Risk Resource Command", "operation": "instantiate"}, "tool": "manage_apps"}
-{"args": {"dashboard_id": "risk-exposure-monitor", "operation": "dashboard"}, "tool": "navigate_workspace"}
-{"args": {"dashboard_id": "risk-exposure-monitor", "operation": "dashboard"}, "tool": "navigate_workspace"}

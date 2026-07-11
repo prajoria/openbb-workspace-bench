@@ -1,2 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-guidance-tracker"}, "tool": "read_workspace_resource"}
-{"args": {"data": "Management claims are extracted and tracked to compare with prior guidance, flag changed assumptions, and identify evidence gaps.", "name": "Management Claims Note", "widget_type": "note"}, "tool": "add_generative_widget"}

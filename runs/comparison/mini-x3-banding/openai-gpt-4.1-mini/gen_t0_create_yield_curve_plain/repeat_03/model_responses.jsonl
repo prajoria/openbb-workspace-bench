@@ -1,2 +1,0 @@
-{"action": {"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "done": false, "tool": "create_widget"}, "content": "{\"done\":false,\"tool\":\"create_widget\",\"args\":{\"origin\":\"Bench Macro\",\"widget_id\":\"yield_curve\"}}", "turn": 1}
-{"action": {"done": true}, "content": "{\"done\":true}", "turn": 2}

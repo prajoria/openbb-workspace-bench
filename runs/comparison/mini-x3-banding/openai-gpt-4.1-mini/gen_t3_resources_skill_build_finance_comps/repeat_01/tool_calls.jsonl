@@ -1,4 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-comps"}, "tool": "read_workspace_resource"}
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
-{"args": {"data": "This portfolio analysis includes a sector exposure breakdown. The peer set is defined to compare sector allocations and identify relative strengths and weaknesses within the portfolio.", "name": "Peer Set Note", "widget_type": "note"}, "tool": "add_generative_widget"}

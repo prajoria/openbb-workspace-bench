@@ -1,6 +1,0 @@
-{"args": {"name": "portfolio", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"origin": "backend_001"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "get_widget_schema"}
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "create_widget"}

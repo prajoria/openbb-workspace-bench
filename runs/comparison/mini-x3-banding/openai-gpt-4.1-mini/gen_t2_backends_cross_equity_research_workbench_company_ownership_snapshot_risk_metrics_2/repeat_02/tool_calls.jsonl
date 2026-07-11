@@ -1,5 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"name": "portfolio", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"origin": "backend_001"}, "tool": "list_available_widgets"}
-{"args": {"origin": "backend_002"}, "tool": "list_available_widgets"}

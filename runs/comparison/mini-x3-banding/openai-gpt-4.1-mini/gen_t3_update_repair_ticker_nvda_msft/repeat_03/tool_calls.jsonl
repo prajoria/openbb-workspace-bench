@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {"symbol": "MSFT"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
-{"args": {"data": "The price performance widget was repaired by changing the symbol from NVDA to MSFT as requested.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

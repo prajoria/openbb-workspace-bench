@@ -1,1 +1,0 @@
-{"models": [{"slug": "openai-gpt-4.1-mini", "label": "OpenAI GPT-4.1 mini", "provider": "openai", "model": "gpt-4.1-mini", "command": "python examples/openai_gpt4_1.py", "env": {}}]}

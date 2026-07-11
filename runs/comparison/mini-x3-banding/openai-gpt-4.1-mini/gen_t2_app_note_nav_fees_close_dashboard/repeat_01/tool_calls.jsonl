@@ -1,5 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"app_name": "NAV, Fees & Close Dashboard", "backend_id": "backend_001", "dashboard_name": "Monthly Close Control", "operation": "instantiate"}, "tool": "manage_apps"}
-{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "close"}, "tool": "navigate_workspace"}
-{"args": {"data": "Close checklist and exceptions.", "inner_tab": "close", "name": "Close Tab Note", "widget_type": "note"}, "tool": "add_generative_widget"}

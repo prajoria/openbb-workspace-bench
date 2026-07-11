@@ -1,0 +1,2 @@
+{"tool": "manage_backends", "args": {"operation": "list"}}
+{"tool": "manage_backends", "args": {"operation": "refresh", "backend_id": "backend_001", "apps_json": [{"name": "Rates Morning", "description": "Curve and spread at the open.", "tabs": {"morning": {"id": "morning", "name": "Morning", "layout": [{"i": "yield_curve", "x": 0, "y": 0, "w": 20, "h": 9}, {"i": "curve_spread_metric", "x": 20, "y": 0, "w": 12, "h": 6}]}}}]}}

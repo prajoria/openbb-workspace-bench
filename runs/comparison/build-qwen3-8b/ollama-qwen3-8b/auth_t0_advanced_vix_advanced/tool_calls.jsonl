@@ -1,0 +1,1 @@
+{"tool": "manage_backends", "args": {"operation": "add", "name": "Vol Desk Data", "url": "http://localhost:7801", "widgets_json": {"vix_advanced": {"name": "VIX Advanced Chart", "description": "TradingView advanced charting for VIX futures.", "endpoint": "/udf", "type": "advanced_charting", "data": {"defaultSymbol": "VIX", "updateFrequency": 60000}, "w": 20, "h": 20}}}}

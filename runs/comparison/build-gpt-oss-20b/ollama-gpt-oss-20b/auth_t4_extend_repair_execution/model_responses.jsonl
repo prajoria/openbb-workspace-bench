@@ -1,0 +1,1 @@
+{"turn": 1, "content": "{\"args\": {\"args\": {}, \"operation\": \"list\"}, \"done\": false, \"tool\": \"manage_backends\"}", "action": {"done": false, "tool": "manage_backends", "args": {"args": {}, "operation": "list"}}}

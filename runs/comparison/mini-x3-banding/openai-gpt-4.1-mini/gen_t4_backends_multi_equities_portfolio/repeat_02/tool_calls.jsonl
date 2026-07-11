@@ -1,7 +1,0 @@
-{"args": {"name": "equities", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"name": "portfolio", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"data_args": {"limit": 5, "symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "create_widget"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "create_widget"}
-{"args": {"data": "This dashboard shows the latest news for NVDA and the current portfolio holdings.", "name": "NVDA and Holdings Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,76 @@
+{
+  "attempt_count": 212,
+  "benchmark": {
+    "name": "openbb-workspace-bench",
+    "release_id": "workspace-bench-v2-build-openbb-apps",
+    "version": "2.0.0"
+  },
+  "filters": {
+    "capability": null,
+    "difficulty": "all",
+    "domain": null,
+    "level": null,
+    "pack": "build-openbb-apps",
+    "scenario_dir": null,
+    "split": null,
+    "subdomain": null,
+    "tags": [],
+    "workflow": null
+  },
+  "max_turns_override": null,
+  "metric": "pass-rate",
+  "model_retries": 4,
+  "models": [
+    {
+      "by_difficulty": {
+        "easy": {
+          "passed": 56,
+          "total": 60
+        },
+        "hard": {
+          "passed": 37,
+          "total": 72
+        },
+        "medium": {
+          "passed": 60,
+          "total": 80
+        }
+      },
+      "by_level": {
+        "L3": {
+          "passed": 137,
+          "total": 192
+        },
+        "L4": {
+          "passed": 16,
+          "total": 20
+        }
+      },
+      "failed": 59,
+      "mean_score": 0.9483560323054626,
+      "model": "OpenAI GPT-4.1 mini",
+      "pass_at_k": 0.7216981132075472,
+      "pass_at_k_count": 153,
+      "pass_power_k": 0.7216981132075472,
+      "pass_power_k_count": 153,
+      "pass_rate": 0.7216981132075472,
+      "passed": 153,
+      "process_failures": 0,
+      "reliability_max_k": 1,
+      "reliability_min_k": 1,
+      "reliability_scenario_count": 212,
+      "result_path": "runs/comparison/build-gpt-4.1-mini/openai-gpt-4.1-mini.json",
+      "slug": "openai-gpt-4.1-mini",
+      "task_failures": 59,
+      "task_pass_rate": 0.7216981132075472,
+      "task_passed": 153,
+      "total": 212,
+      "valid_attempts": 212
+    }
+  ],
+  "models_file": "/private/tmp/claude-501/-Users-didierlopes-Documents-git-rl-workspace-docs/9155fc62-d6dc-4c50-8bf3-34251944aa99/scratchpad/models-mini.json",
+  "repeats": 1,
+  "retry_backoff": 1.0,
+  "runner": "interactive",
+  "scenario_count": 212
+}

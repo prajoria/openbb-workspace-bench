@@ -1,0 +1,2 @@
+{"tool": "manage_backends", "args": {"operation": "list"}}
+{"tool": "manage_backends", "args": {"operation": "refresh", "backend_id": "backend_001", "widgets_json": {"yield_curve": {"name": "Yield Curve", "description": "Plotly treasury yield curve snapshot.", "endpoint": "/yield-curve", "type": "chart", "gridData": {"w": 20, "h": 9}, "raw": true}, "curve_spread_metric": {"name": "2s10s Spread", "description": "Current 2s10s spread in bps.", "endpoint": "/curve-spread", "type": "metric", "gridData": {"w": 6, "h": 4}, "category": "Desk Extensions", "staleTime": 900000}}}}

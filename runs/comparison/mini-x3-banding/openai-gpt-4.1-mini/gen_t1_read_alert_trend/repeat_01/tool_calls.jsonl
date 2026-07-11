@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "compliance_surveillance_hub_alerts_alert_trend"}, "tool": "get_widget_data"}
-{"args": {"data": "I have reviewed the data from the compliance_surveillance_hub_alerts_alert_trend widget.", "name": "Review Note", "tab_id": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,4 +1,0 @@
-{"args": {"dashboard_id": "", "operation": "add_tabs", "tabs": [{"name": "Risk"}]}, "tool": "manage_navigation_bar"}
-{"args": {"dashboard_id": "dash_001", "data_args": {}, "origin": "Bench Portfolio", "tab_id": "risk", "ui_args": {}, "widget_id": "risk_metrics"}, "tool": "create_widget"}
-{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "risk"}, "tool": "navigate_workspace"}
-{"args": {"dashboard_id": "dash_001", "operation": "update_widget_layout", "tabs": [{"id": "risk", "layout": [{"h": 8, "origin": "Bench Portfolio", "tab_id": "risk", "w": 16, "widget_id": "risk_metrics", "x": 0, "y": 0}]}]}, "tool": "manage_navigation_bar"}

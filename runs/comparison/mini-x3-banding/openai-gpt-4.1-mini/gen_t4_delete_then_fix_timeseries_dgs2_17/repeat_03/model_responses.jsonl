@@ -1,6 +1,0 @@
-{"action": {"args": {"widget_id": "macro_timeseries"}, "done": false, "tool": "delete_widget"}, "content": "{\"done\":false,\"tool\":\"delete_widget\",\"args\":{\"widget_id\":\"macro_timeseries\"}}", "turn": 1}
-{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\":false,\"tool\":\"get_workspace_snapshot\",\"args\":{}}", "turn": 2}
-{"action": {"args": {"widget_uuid": "widget_002"}, "done": false, "tool": "delete_widget"}, "content": "{\"done\":false,\"tool\":\"delete_widget\",\"args\":{\"widget_uuid\":\"widget_002\"}}", "turn": 3}
-{"action": {"args": {"data_args": {"series": "DGS2"}, "widget_uuid": "widget_001"}, "done": false, "tool": "update_widget"}, "content": "{\"done\":false,\"tool\":\"update_widget\",\"args\":{\"widget_uuid\":\"widget_001\",\"data_args\":{\"series\":\"DGS2\"}}}", "turn": 4}
-{"action": {"args": {"data": "The Macro Timeseries widget has been repaired to show DGS2 instead of DGS10.", "name": "Repair Note", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\":false,\"tool\":\"add_generative_widget\",\"args\":{\"widget_type\":\"note\",\"data\":\"The Macro Timeseries widget has been repaired to show DGS2 instead of DGS10.\",\"name\":\"Repair Note\"}}", "turn": 5}
-{"action": {"done": true}, "content": "{\"done\":true}", "turn": 6}

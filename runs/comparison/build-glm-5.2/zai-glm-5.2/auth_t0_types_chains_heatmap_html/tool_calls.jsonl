@@ -1,0 +1,1 @@
+{"tool": "manage_backends", "args": {"operation": "add", "name": "Chain TVL Data", "url": "http://localhost:7802", "widgets_json": {"chains_heatmap_html": {"name": "Chain Heatmap", "description": "Raw HTML heatmap of chain flows.", "endpoint": "/chains-heatmap", "type": "html", "gridData": {"w": 20, "h": 10}, "category": "Network Ops", "staleTime": 900000}}}}

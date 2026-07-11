@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {"sector": "Technology"}, "widget_uuid": "widget_002"}, "tool": "update_widget"}
-{"args": {"data": "Repaired sector exposure widget from Consumer Staples to Technology sector as requested. The companion risk metrics widget remains unchanged.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

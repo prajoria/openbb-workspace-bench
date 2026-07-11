@@ -1,5 +1,0 @@
-{"args": {"slug": "finance-comps"}, "tool": "get_skill_content"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "create_widget"}
-{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_data"}
-{"args": {"data": "The gross margin for NVDA is 0.462 as per the Fundamental Metrics widget data.", "widget_type": "note"}, "tool": "add_generative_widget"}

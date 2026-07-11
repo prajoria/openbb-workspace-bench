@@ -1,4 +1,0 @@
-{"action": {"args": {"operation": "list"}, "done": false, "tool": "manage_backends"}, "content": "{\"done\": false, \"tool\": \"manage_backends\", \"args\": {\"operation\": \"list\"}}", "turn": 1}
-{"action": {"args": {"backend_id": "backend_001", "operation": "list"}, "done": false, "tool": "manage_apps"}, "content": "{\"done\":false,\"tool\":\"manage_apps\",\"args\":{\"operation\":\"list\",\"backend_id\":\"backend_001\"}}", "turn": 2}
-{"action": {"args": {"app_name": "Execution Desk", "backend_id": "backend_001", "dashboard_name": "AM Execution Desk", "operation": "instantiate", "template_id": "execution-desk"}, "done": false, "tool": "manage_apps"}, "content": "{\"done\":false,\"tool\":\"manage_apps\",\"args\":{\"operation\":\"instantiate\",\"backend_id\":\"backend_001\",\"app_name\":\"Execution Desk\",\"dashboard_name\":\"AM Execution Desk\",\"template_id\":\"execution-desk\"}}", "turn": 3}
-{"action": {"done": true}, "content": "{\"done\":true}", "turn": 4}

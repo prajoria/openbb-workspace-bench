@@ -1,6 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {"app_name": "risk-exposure-monitor", "backend_id": "backend_001", "dashboard_name": "Risk Resource Command", "operation": "instantiate"}, "tool": "manage_apps"}
-{"args": {"backend_id": "backend_001", "dashboard_name": "Risk Resource Command", "operation": "instantiate", "template_id": "risk-exposure-monitor"}, "tool": "manage_apps"}
-{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "limits"}, "tool": "navigate_workspace"}
-{"args": {"dashboard_id": "dash_002", "origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_limits_limit_utilization"}, "tool": "create_widget"}
-{"args": {"data": "This note mentions limit utilization and resource in the Risk & Exposure Monitor limits tab.", "inner_tab": "limits", "name": "Limit Utilization and Resource Note", "widget_type": "note"}, "tool": "add_generative_widget"}

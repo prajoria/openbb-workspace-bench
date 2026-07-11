@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "stderr": "",
+  "stdout": "turn 3: malformed action recovered (Unterminated string starting at: line 1 column 545 (char 544))\nreached max_turns=5",
+  "timed_out": false
+}

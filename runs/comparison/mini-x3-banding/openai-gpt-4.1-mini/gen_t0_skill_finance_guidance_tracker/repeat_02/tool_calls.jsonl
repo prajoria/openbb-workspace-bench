@@ -1,2 +1,0 @@
-{"args": {"slug": "finance-guidance-tracker"}, "tool": "get_skill_content"}
-{"args": {"data": "Guidance tracker workflow: extract management claims, compare them with prior guidance, flag changed assumptions, and list evidence gaps.", "description": "Track company guidance changes, management claims, and follow-up evidence.", "inner_tab": "overview", "name": "Finance Guidance Tracker", "widget_type": "note"}, "tool": "add_generative_widget"}

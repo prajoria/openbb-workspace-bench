@@ -1,3 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"app_name": "Client 360", "backend_id": "backend_001", "dashboard_name": "Client Review Workspace", "operation": "instantiate"}, "tool": "manage_apps"}

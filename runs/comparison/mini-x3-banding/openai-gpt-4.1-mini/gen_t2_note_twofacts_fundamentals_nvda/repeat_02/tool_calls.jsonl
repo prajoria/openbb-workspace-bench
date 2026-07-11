@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_data"}
-{"args": {"data": "NVIDIA (NVDA) has a gross margin of 46.2% and a buyback yield of 3.4%.", "description": "Note on gross margin and buyback yield for NVDA fundamentals", "inner_tab": "overview", "name": "NVDA Fundamentals Note", "widget_type": "note"}, "tool": "add_generative_widget"}

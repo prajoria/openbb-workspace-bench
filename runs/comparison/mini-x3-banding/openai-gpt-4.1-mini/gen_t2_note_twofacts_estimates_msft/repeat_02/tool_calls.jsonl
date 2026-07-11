@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_data"}
-{"args": {"data": "The 2026Q1 EPS estimate for MSFT is 2.31, and the revenue estimate is 94.8 billion dollars.", "inner_tab": "overview", "name": "2026Q1 EPS and Revenue Estimates", "widget_type": "note"}, "tool": "add_generative_widget"}

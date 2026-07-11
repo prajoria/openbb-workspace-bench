@@ -1,0 +1,2 @@
+{"tool": "get_workspace_snapshot", "args": {}}
+{"tool": "manage_backends", "args": {"operation": "add", "name": "Healthcare Research Data", "url": "http://localhost:7808", "widgets_json": {"phase-mix-vegalite": {"name": "Phase Mix Vega-Lite", "description": "Vega-Lite phase mix chart", "endpoint": "/phase-mix-vegalite", "type": "chart-vegalite", "params": [{"paramName": "phase", "type": "endpoint", "label": "Phase", "optionsEndpoint": "/phase-options", "defaultValue": "all", "staleTime": 1800000}], "category": "Clinical", "layout": {"w": 20, "h": 9}}}}}

@@ -1,7 +1,0 @@
-{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
-{"args": {"operation": "add_tabs", "tabs": [{"name": "Exposure"}]}, "tool": "manage_navigation_bar"}
-{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "exposure"}, "tool": "navigate_workspace"}
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_001", "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
-{"args": {"data": "This tab shows the portfolio exposure by sector.", "inner_tab": "exposure", "name": "Exposure Note", "widget_type": "note"}, "tool": "add_generative_widget"}

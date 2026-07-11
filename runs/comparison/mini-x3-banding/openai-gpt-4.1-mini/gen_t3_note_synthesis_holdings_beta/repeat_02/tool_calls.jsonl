@@ -1,3 +1,0 @@
-{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "get_widget_data"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "get_widget_data"}
-{"args": {"data": "The largest position weight in the portfolio is 0.34, corresponding to MSFT. The portfolio beta is 1.18.", "name": "Synthesis Note: Holdings Beta", "widget_type": "note"}, "tool": "add_generative_widget"}

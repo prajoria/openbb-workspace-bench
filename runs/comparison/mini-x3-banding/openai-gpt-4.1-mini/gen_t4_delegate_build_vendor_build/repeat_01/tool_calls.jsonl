@@ -1,6 +1,0 @@
-{"args": {"task_requests": [{"assigned_agent_id": "triage-analyst", "assigned_holder_url": "workspace", "description": "Handle triage analysis for vendor build workstream.", "id": "triage-analyst"}, {"assigned_agent_id": "sla-analyst", "assigned_holder_url": "workspace", "description": "Handle SLA analysis for vendor build workstream.", "id": "sla-analyst"}]}, "tool": "assign_tasks_to_agents"}
-{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
-{"args": {"dashboard_id": "Delegation Board", "data_args": {}, "origin": "Bench Stark Enterprise", "tab_id": "overview", "ui_args": {}, "widget_id": "vendor_dataset_monitor_incidents_incident_log"}, "tool": "create_widget"}
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "origin": "Bench Stark Enterprise", "tab_id": "overview", "widget_id": "vendor_dataset_monitor_incidents_incident_log"}, "tool": "create_widget"}
-{"args": {"data": "This dashboard supports two workstreams: triage analysis and SLA analysis, assigned to triage-analyst and sla-analyst respectively.", "name": "Coordinator Note: Workstreams Overview", "widget_type": "note"}, "tool": "add_generative_widget"}
