@@ -30,6 +30,20 @@ BUILD_SPECIFICATION_LEVEL_COUNTS = {
     "partially-specified": 92,
     "open-brief": 84,
 }
+# Task files store specification_level only when it deviates from the
+# difficulty default, so stats reconstruct the effective level.
+DEFAULT_SPECIFICATION_LEVEL = {
+    "easy": "explicit",
+    "medium": "partially-specified",
+    "hard": "open-brief",
+}
+
+
+def effective_specification_level(task: dict) -> str:
+    return str(
+        task.get("specification_level")
+        or DEFAULT_SPECIFICATION_LEVEL.get(str(task.get("difficulty")), "")
+    )
 BUILD_DIFFICULTY_COUNTS = json.loads(
     (REPO / "src/workspace_bench/core/measured_difficulty.json").read_text()
 )["bands"]
@@ -62,7 +76,7 @@ def suite_stats(suite_dir: Path) -> dict:
         counts = [
             len(str(task["prompt"]).split())
             for task in tasks
-            if task.get("specification_level") == level
+            if effective_specification_level(task) == level
         ]
         if counts:
             by_specification_level[level] = {
