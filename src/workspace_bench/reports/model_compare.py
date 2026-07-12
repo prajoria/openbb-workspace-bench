@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import copy
 from collections import Counter
+from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 import html
 import json
 import os
@@ -13,13 +14,15 @@ import subprocess
 import shlex
 import ssl
 import sys
+import threading
 import time
 import urllib.error
 import urllib.request
 from contextlib import contextmanager
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from datetime import datetime, timezone
 from pathlib import Path
+from functools import lru_cache
 from typing import Any, Iterator
 
 from workspace_bench.agents.model_adapter_helpers import (
@@ -36,8 +39,6 @@ from workspace_bench.agents.agent_command import (
 from workspace_bench.core.episode import WorkspaceEpisode
 from workspace_bench.core.models import (
     BENCHMARK_NAME,
-    BENCHMARK_RELEASE_ID,
-    BENCHMARK_VERSION,
     JsonDict,
     RunResult,
     TASK_CATEGORIES,
@@ -45,13 +46,20 @@ from workspace_bench.core.models import (
     ToolCall,
     VALID_TASK_SPLITS,
 )
-from workspace_bench.reports.metrics import compute_reliability_metrics
+from workspace_bench.core.provenance import git_provenance
+from workspace_bench.reports.metrics import (
+    compute_reliability_metrics,
+    summarize_result_rows,
+    task_reliability_matrix,
+)
 from workspace_bench.core.runner import BUILTIN_TASK_SUITE_ORDER
 from workspace_bench.core.runner import load_builtin_tasks, load_task_directory
 from workspace_bench.core.runner import load_builtin_task_suite_manifest, load_task_suite_manifest
 
 
-INTERACTIVE_PROVIDERS = {"openai", "ollama"}
+INTERACTIVE_PROVIDERS = {"openai", "openrouter", "ollama"}
+RESULT_SCHEMA_VERSION = "workspace-bench-model-result/v2"
+RUN_MANIFEST_SCHEMA_VERSION = "workspace-bench-run-manifest/v1"
 
 
 def resolve_repo_root(start: Path | None = None) -> Path:
@@ -93,6 +101,10 @@ class ModelAdapter:
     env: dict[str, str]
     provider: str
     model: str
+    input_cost_per_million: float | None = None
+    cached_input_cost_per_million: float | None = None
+    output_cost_per_million: float | None = None
+    pricing_source: str | None = None
 
 
 @dataclass(frozen=True)
@@ -109,6 +121,9 @@ class ComparisonRun:
     runner: str
     repeat: int = 1
     provider_meta: JsonDict = field(default_factory=dict)
+    usage: JsonDict = field(default_factory=dict)
+    wall_time_seconds: float = 0.0
+    resumed: bool = False
 
 
 class TransientModelError(RuntimeError):
@@ -119,18 +134,17 @@ class TransientModelError(RuntimeError):
         self.status_code = status_code
 
 
-# Last provider-reported identity (model string, system fingerprint) observed
-# by a chat call. Providers mutate what an alias like "gpt-4.1-mini" points at,
-# so runs record what the API actually reported serving them. A module global
-# is safe only because the runner executes episodes sequentially.
-_LAST_PROVIDER_META: dict[str, str] = {}
+# Last provider response metadata is thread-local because bounded concurrency
+# can execute several episodes for one adapter at once.
+_PROVIDER_LOCAL = threading.local()
 
 
 def _record_provider_meta(**fields: Any) -> None:
-    _LAST_PROVIDER_META.clear()
-    _LAST_PROVIDER_META.update(
-        {key: str(value) for key, value in fields.items() if value}
-    )
+    _PROVIDER_LOCAL.last = {key: value for key, value in fields.items() if value is not None}
+
+
+def _last_provider_meta() -> JsonDict:
+    return dict(getattr(_PROVIDER_LOCAL, "last", {}))
 
 
 def _utc_now() -> str:
@@ -140,27 +154,7 @@ def _utc_now() -> str:
 def harness_metadata() -> JsonDict:
     """Best-effort harness identity for result provenance."""
 
-    package_version: str | None
-    try:
-        from importlib.metadata import version
-
-        package_version = version("openbb-workspace-bench")
-    except Exception:  # noqa: BLE001 - provenance is best-effort.
-        package_version = None
-    git_commit: str | None = None
-    try:
-        completed = subprocess.run(
-            ["git", "rev-parse", "HEAD"],
-            capture_output=True,
-            text=True,
-            cwd=Path(__file__).resolve().parent,
-            timeout=5,
-            check=False,
-        )
-        git_commit = completed.stdout.strip() or None
-    except Exception:  # noqa: BLE001 - provenance is best-effort.
-        git_commit = None
-    return {"package_version": package_version, "git_commit": git_commit}
+    return git_provenance(Path(__file__).resolve())
 
 
 def effective_settings(args: argparse.Namespace) -> JsonDict:
@@ -174,13 +168,20 @@ def effective_settings(args: argparse.Namespace) -> JsonDict:
     return {
         "runner": args.runner,
         "timeout": args.timeout,
+        "episode_timeout": getattr(args, "episode_timeout", None),
+        "concurrency": getattr(args, "concurrency", 1),
         "repeats": args.repeats,
         "model_retries": args.model_retries,
         "retry_backoff": args.retry_backoff,
         "max_turns_override": args.max_turns,
         "widget_hints": not getattr(args, "no_widget_hints", False),
+        "track": getattr(args, "track", "guided"),
+        "release_run": getattr(args, "release_run", False),
         "malformed_retries": getattr(args, "malformed_retries", 2),
         "openai_base_url": os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"),
+        "openrouter_base_url": os.environ.get(
+            "OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1"
+        ),
         "ollama_base_url": os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434"),
         "openai_temperature": os.environ.get("OPENAI_TEMPERATURE", "0"),
         "ollama_temperature": os.environ.get("OLLAMA_TEMPERATURE", "0"),
@@ -248,7 +249,7 @@ def main(argv: list[str] | None = None) -> int:
         default="all",
         help="Task difficulty slice to run.",
     )
-    parser.add_argument("--level", help="Optional difficulty-level filter, e.g. t1 or t2.")
+    parser.add_argument("--family", help="Optional task-family filter, e.g. create.")
     parser.add_argument("--category", help="Optional task-category filter, e.g. dashboard.")
     parser.add_argument("--capability", help="Optional capability filter.")
     parser.add_argument("--workflow", help="Optional workflow filter.")
@@ -345,6 +346,21 @@ def main(argv: list[str] | None = None) -> int:
         ),
     )
     parser.add_argument(
+        "--track",
+        choices=["guided", "cold"],
+        default="guided",
+        help=(
+            "guided includes benchmark procedure and fixture hints; cold exposes "
+            "only the task, tools, and raw observations. Scores from the two "
+            "tracks must not be pooled."
+        ),
+    )
+    parser.add_argument(
+        "--release-run",
+        action="store_true",
+        help="Enforce release-quality settings, currently at least three repeats.",
+    )
+    parser.add_argument(
         "--retry-backoff",
         type=float,
         default=1.0,
@@ -363,6 +379,18 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--timeout", type=float, default=240)
     parser.add_argument(
+        "--episode-timeout",
+        type=float,
+        default=900,
+        help="Maximum wall-clock seconds for one task attempt, including all model turns.",
+    )
+    parser.add_argument(
+        "--concurrency",
+        type=int,
+        default=1,
+        help="Maximum task attempts per model to execute concurrently.",
+    )
+    parser.add_argument(
         "--resume",
         action="store_true",
         help=(
@@ -378,8 +406,13 @@ def main(argv: list[str] | None = None) -> int:
         help="Print selected models and tasks without running agents.",
     )
     args = parser.parse_args(argv)
+    if args.track == "cold":
+        args.no_widget_hints = True
     if args.repeats < 1:
         print("--repeats must be >= 1", file=sys.stderr)
+        return 2
+    if args.release_run and args.repeats < 3:
+        print("--release-run requires --repeats >= 3", file=sys.stderr)
         return 2
     if args.model_retries < 0:
         print("--model-retries must be >= 0", file=sys.stderr)
@@ -389,6 +422,12 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     if args.retry_backoff < 0:
         print("--retry-backoff must be >= 0", file=sys.stderr)
+        return 2
+    if args.timeout <= 0 or args.episode_timeout <= 0:
+        print("--timeout and --episode-timeout must be > 0", file=sys.stderr)
+        return 2
+    if args.concurrency < 1:
+        print("--concurrency must be >= 1", file=sys.stderr)
         return 2
 
     try:
@@ -408,9 +447,12 @@ def main(argv: list[str] | None = None) -> int:
             return 2
         slug = f"{provider}-{model_name}".replace(":", "-").replace("/", "-")
         adapters[slug] = ModelAdapter(
-            slug=slug, label=model_name, command="",
+            slug=slug,
+            label=model_name,
+            command="",
             env={"OLLAMA_MODEL": model_name} if provider == "ollama" else {},
-            provider=provider, model=model_name,
+            provider=provider,
+            model=model_name,
         )
         configured_model_slugs.append(slug)
 
@@ -434,7 +476,7 @@ def main(argv: list[str] | None = None) -> int:
     tasks = filter_tasks(
         load_task_source(args),
         difficulty=args.difficulty,
-        level=args.level,
+        family=args.family,
         category=args.category,
         capability=args.capability,
         workflow=args.workflow,
@@ -469,11 +511,20 @@ def main(argv: list[str] | None = None) -> int:
             f"({total_attempts} attempt(s)) with {args.runner} runner...",
             file=sys.stderr,
         )
+        with patched_env(adapter.env):
+            manifest = build_run_manifest(adapter, tasks, args)
+        manifest_path = output_dir / f"{adapter.slug}.manifest.json"
+        try:
+            ensure_run_manifest(manifest_path, manifest, resume=args.resume)
+        except ValueError as error:
+            print(str(error), file=sys.stderr)
+            return 2
         runs, run_metadata = run_adapter(
             adapter,
             tasks,
             output_dir,
             timeout=args.timeout,
+            episode_timeout=args.episode_timeout,
             runner=args.runner,
             max_turns_override=args.max_turns,
             repeats=args.repeats,
@@ -483,6 +534,8 @@ def main(argv: list[str] | None = None) -> int:
             resume=args.resume,
             malformed_retries=args.malformed_retries,
             include_widget_hints=not args.no_widget_hints,
+            concurrency=args.concurrency,
+            manifest=manifest,
             args=args,
         )
         result_payload = model_result_payload(adapter, tasks, runs, args, run_metadata)
@@ -504,6 +557,8 @@ def main(argv: list[str] | None = None) -> int:
         "repeats": args.repeats,
         "model_retries": args.model_retries,
         "retry_backoff": args.retry_backoff,
+        "episode_timeout": args.episode_timeout,
+        "concurrency": args.concurrency,
         "malformed_retries": args.malformed_retries,
         "widget_hints": not args.no_widget_hints,
         "metric": args.metric,
@@ -585,6 +640,7 @@ def model_adapter_from_config(payload: JsonDict, *, index: int) -> ModelAdapter:
     model = payload.get("model")
     command = payload.get("command", "")
     env = payload.get("env", {})
+    pricing = payload.get("pricing", {})
     if not isinstance(slug, str) or not slug:
         raise ValueError(f"models[{index}].slug must be a non-empty string")
     if not isinstance(label, str) or not label:
@@ -597,6 +653,21 @@ def model_adapter_from_config(payload: JsonDict, *, index: int) -> ModelAdapter:
         raise ValueError(f"models[{index}].command must be a string when set")
     if not isinstance(env, dict):
         raise ValueError(f"models[{index}].env must be an object")
+    if not isinstance(pricing, dict):
+        raise ValueError(f"models[{index}].pricing must be an object when set")
+    input_price = pricing.get("input_per_million")
+    cached_input_price = pricing.get("cached_input_per_million")
+    output_price = pricing.get("output_per_million")
+    pricing_source = pricing.get("source")
+    for field_name, value in (
+        ("input_per_million", input_price),
+        ("cached_input_per_million", cached_input_price),
+        ("output_per_million", output_price),
+    ):
+        if value is not None and (not isinstance(value, (int, float)) or value < 0):
+            raise ValueError(f"models[{index}].pricing.{field_name} must be non-negative")
+    if pricing_source is not None and not isinstance(pricing_source, str):
+        raise ValueError(f"models[{index}].pricing.source must be a string")
     return ModelAdapter(
         slug=slug,
         label=label,
@@ -604,6 +675,12 @@ def model_adapter_from_config(payload: JsonDict, *, index: int) -> ModelAdapter:
         env={str(key): str(value) for key, value in env.items()},
         provider=provider,
         model=model,
+        input_cost_per_million=float(input_price) if input_price is not None else None,
+        cached_input_cost_per_million=(
+            float(cached_input_price) if cached_input_price is not None else None
+        ),
+        output_cost_per_million=float(output_price) if output_price is not None else None,
+        pricing_source=pricing_source,
     )
 
 
@@ -616,14 +693,10 @@ def validate_adapters_for_runner(
 
     if runner == "interactive":
         unsupported = [
-            adapter
-            for adapter in adapters
-            if adapter.provider not in INTERACTIVE_PROVIDERS
+            adapter for adapter in adapters if adapter.provider not in INTERACTIVE_PROVIDERS
         ]
         if unsupported:
-            labels = ", ".join(
-                f"{adapter.slug} ({adapter.provider})" for adapter in unsupported
-            )
+            labels = ", ".join(f"{adapter.slug} ({adapter.provider})" for adapter in unsupported)
             return (
                 "Interactive runner only supports provider values "
                 f"{', '.join(sorted(INTERACTIVE_PROVIDERS))}; unsupported: {labels}"
@@ -683,7 +756,7 @@ def filter_tasks(
     tasks: list[Task],
     *,
     difficulty: str,
-    level: str | None,
+    family: str | None,
     category: str | None,
     capability: str | None,
     workflow: str | None,
@@ -695,11 +768,11 @@ def filter_tasks(
 ) -> list[Task]:
     if task_ids:
         wanted = set(task_ids)
-        tasks = [task for task in tasks if task.id in wanted]
+        tasks = [task for task in tasks if task.id in wanted or task.qualified_id in wanted]
     if difficulty != "all":
         tasks = [task for task in tasks if task.difficulty == difficulty]
-    if level:
-        tasks = [task for task in tasks if task.level == level]
+    if family:
+        tasks = [task for task in tasks if task.family == family]
     if category:
         tasks = [task for task in tasks if task.category == category]
     if capability:
@@ -730,8 +803,8 @@ def load_task_source(args: argparse.Namespace) -> list[Task]:
         seen: set[str] = set()
         for name in BUILTIN_TASK_SUITE_ORDER:
             for task in load_builtin_tasks(name):
-                if task.id not in seen:
-                    seen.add(task.id)
+                if task.qualified_id not in seen:
+                    seen.add(task.qualified_id)
                     tasks.append(task)
         return tasks
     return load_builtin_tasks(suite)
@@ -749,11 +822,67 @@ def print_dry_run(
     print(f"Tasks ({len(tasks)}) for filters {selected_filters(args)}:")
     for task in tasks:
         print(
-            f"  - {task.id}\t{task.level}\t"
+            f"  - {task.qualified_id}\t"
             f"{task.difficulty}\t{task.split}\t"
             f"{task.capability}\t{task.workflow}\t"
             f"{task.domain}\t{task.subdomain}"
         )
+
+
+def build_run_manifest(
+    adapter: ModelAdapter,
+    tasks: list[Task],
+    args: argparse.Namespace,
+) -> JsonDict:
+    """Build a stable identity for cells that may be resumed from disk."""
+
+    benchmark = benchmark_metadata(args)
+    temperature_key = (
+        "OLLAMA_TEMPERATURE" if adapter.provider == "ollama" else "OPENAI_TEMPERATURE"
+    )
+    return {
+        "schema_version": RUN_MANIFEST_SCHEMA_VERSION,
+        "model": adapter.model,
+        "model_slug": adapter.slug,
+        "provider": adapter.provider,
+        "temperature": float(os.environ.get(temperature_key, "0")),
+        "harness_git_commit": harness_metadata().get("git_commit"),
+        "harness_git_dirty": harness_metadata().get("git_dirty"),
+        "suite_id": benchmark.get("suite_id"),
+        "suite_content_sha256": benchmark.get("content_sha256"),
+        "runner": args.runner,
+        "track": getattr(args, "track", "guided"),
+        "repeats": args.repeats,
+        "tasks": [task.qualified_id for task in tasks],
+    }
+
+
+def ensure_run_manifest(path: Path, manifest: JsonDict, *, resume: bool) -> None:
+    """Write a manifest, rejecting incompatible resume attempts."""
+
+    if path.exists() and resume:
+        existing = json.loads(path.read_text(encoding="utf-8"))
+        comparable_existing = dict(existing)
+        comparable_existing.pop("pricing", None)
+        comparable_manifest = dict(manifest)
+        comparable_manifest.pop("pricing", None)
+        if comparable_existing != comparable_manifest:
+            raise ValueError(
+                f"Cannot resume {path}: run manifest differs from the requested run."
+            )
+        write_json_atomic(path, manifest)
+        return
+    write_json_atomic(path, manifest)
+
+
+def write_json_atomic(path: Path, payload: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    temporary.replace(path)
 
 
 def run_adapter(
@@ -762,6 +891,7 @@ def run_adapter(
     output_dir: Path,
     *,
     timeout: float,
+    episode_timeout: float = 900,
     runner: str,
     max_turns_override: int | None,
     repeats: int,
@@ -771,87 +901,119 @@ def run_adapter(
     resume: bool = False,
     malformed_retries: int = 2,
     include_widget_hints: bool = True,
+    concurrency: int = 1,
+    manifest: JsonDict | None = None,
     args: argparse.Namespace | None = None,
 ) -> tuple[list[ComparisonRun], JsonDict]:
-    runs = []
+    indexed_runs: dict[int, ComparisonRun] = {}
     total_attempts = len(tasks) * repeats
-    attempt_index = 0
     resumed_count = 0
     started_at = _utc_now()
     settings: JsonDict = {}
+    checkpoint_path = output_dir / f"{adapter.slug}.checkpoint.json"
+    cells = [
+        (index, task, repeat)
+        for index, (repeat, task) in enumerate(
+            (
+                (repeat, task)
+                for repeat in range(1, repeats + 1)
+                for task in tasks
+            ),
+            start=1,
+        )
+    ]
+
+    def execute_cell(task: Task, repeat: int) -> ComparisonRun:
+        cell_started = time.monotonic()
+        run_dir = task_run_dir(
+            output_dir / adapter.slug,
+            task.qualified_id.replace("/", "__"),
+            repeat=repeat,
+            repeats=repeats,
+        )
+        if resume and runner == "interactive":
+            replayed = replay_completed_run(adapter, task, run_dir, repeat=repeat)
+            if replayed is not None:
+                return replayed
+        if runner == "batch":
+            run = batch_comparison_run(
+                run_agent_command(
+                    task=task,
+                    command=adapter.command,
+                    timeout_seconds=episode_timeout,
+                    run_dir=run_dir,
+                ),
+                repeat=repeat,
+            )
+        else:
+            run = run_interactive_agent(
+                adapter=adapter,
+                task=task,
+                run_dir=run_dir,
+                timeout=timeout,
+                episode_timeout=episode_timeout,
+                max_turns_override=max_turns_override,
+                model_retries=model_retries,
+                retry_backoff=retry_backoff,
+                repeat=repeat,
+                malformed_retries=malformed_retries,
+                include_widget_hints=include_widget_hints,
+            )
+        if run.wall_time_seconds == 0.0:
+            run = replace(run, wall_time_seconds=time.monotonic() - cell_started)
+        return run
+
+    def record(index: int, task: Task, repeat: int, run: ComparisonRun) -> None:
+        nonlocal resumed_count
+        indexed_runs[index] = run
+        if run.resumed:
+            resumed_count += 1
+        write_json_atomic(
+            checkpoint_path,
+            {
+                "schema_version": RESULT_SCHEMA_VERSION,
+                "manifest": manifest or {},
+                "completed_cells": [
+                    agent_run_summary(indexed_runs[cell_index])
+                    for cell_index in sorted(indexed_runs)
+                ],
+                "completed_count": len(indexed_runs),
+                "requested_count": total_attempts,
+            },
+        )
+        repeat_label = f" repeat {repeat}/{repeats}" if repeats > 1 else ""
+        resume_label = " (resumed from disk)" if run.resumed else ""
+        print(
+            f"  [{index}/{total_attempts}] {task.id}{repeat_label} "
+            f"{run_status(run, color=color)} "
+            f"score={run.run_result.grade.score:.2f} "
+            f"checks={run.run_result.grade.checks_passed}/"
+            f"{run.run_result.grade.checks_total} "
+            f"exit={run.exit_code} timeout={run.timed_out}{resume_label}",
+            file=sys.stderr,
+            flush=True,
+        )
+
     with patched_env(adapter.env):
         if args is not None:
             settings = effective_settings(args)
-        for repeat in range(1, repeats + 1):
-            for task in tasks:
-                attempt_index += 1
-                repeat_label = f" repeat {repeat}/{repeats}" if repeats > 1 else ""
-                print(
-                    f"  [{attempt_index}/{total_attempts}] {task.id}{repeat_label} ...",
-                    file=sys.stderr,
-                    flush=True,
-                )
-                run_dir = task_run_dir(
-                    output_dir / adapter.slug,
-                    task.id,
-                    repeat=repeat,
-                    repeats=repeats,
-                )
-                if resume and runner == "interactive":
-                    run = replay_completed_run(
-                        adapter, task, run_dir, repeat=repeat
-                    )
-                    if run is not None:
-                        runs.append(run)
-                        resumed_count += 1
-                        print(
-                            "    "
-                            f"{run_status(run, color=color)} "
-                            f"score={run.run_result.grade.score:.2f} "
-                            f"checks={run.run_result.grade.checks_passed}/"
-                            f"{run.run_result.grade.checks_total} "
-                            "(resumed from disk)",
-                            file=sys.stderr,
-                            flush=True,
-                        )
-                        continue
-                if runner == "batch":
-                    run = batch_comparison_run(
-                        run_agent_command(
-                            task=task,
-                            command=adapter.command,
-                            timeout_seconds=timeout,
-                            run_dir=run_dir,
-                        ),
-                        repeat=repeat,
-                    )
-                else:
-                    run = run_interactive_agent(
-                        adapter=adapter,
-                        task=task,
-                        run_dir=run_dir,
-                        timeout=timeout,
-                        max_turns_override=max_turns_override,
-                        model_retries=model_retries,
-                        retry_backoff=retry_backoff,
-                        repeat=repeat,
-                        malformed_retries=malformed_retries,
-                        include_widget_hints=include_widget_hints,
-                    )
-                runs.append(run)
-                print(
-                    "    "
-                    f"{run_status(run, color=color)} "
-                    f"score={run.run_result.grade.score:.2f} "
-                    f"checks={run.run_result.grade.checks_passed}/"
-                    f"{run.run_result.grade.checks_total} "
-                    f"exit={run.exit_code} timeout={run.timed_out}",
-                    file=sys.stderr,
-                    flush=True,
-                )
+        if concurrency == 1:
+            for index, task, repeat in cells:
+                record(index, task, repeat, execute_cell(task, repeat))
+        else:
+            with ThreadPoolExecutor(max_workers=concurrency) as executor:
+                futures: dict[Future[ComparisonRun], tuple[int, Task, int]] = {
+                    executor.submit(execute_cell, task, repeat): (index, task, repeat)
+                    for index, task, repeat in cells
+                }
+                for future in as_completed(futures):
+                    index, task, repeat = futures[future]
+                    record(index, task, repeat, future.result())
+    runs = [indexed_runs[index] for index in sorted(indexed_runs)]
     if resumed_count:
         print(
-            f"  resumed {resumed_count}/{total_attempts} attempt(s) from disk",
+            f"  resume summary: resumed={resumed_count} "
+            f"new={total_attempts - resumed_count} total={total_attempts}",
             file=sys.stderr,
             flush=True,
         )
@@ -860,17 +1022,21 @@ def run_adapter(
         "finished_at": _utc_now(),
         "harness": harness_metadata(),
         "settings": settings,
+        "requested_cells": total_attempts,
+        "completed_cells": len(runs),
+        "resumed_cells": resumed_count,
+        "new_cells": total_attempts - resumed_count,
         "provider_observed": {
-            "models": sorted({
-                model
-                for run in runs
-                for model in run.provider_meta.get("models", [])
-            }),
-            "system_fingerprints": sorted({
-                fingerprint
-                for run in runs
-                for fingerprint in run.provider_meta.get("system_fingerprints", [])
-            }),
+            "models": sorted(
+                {model for run in runs for model in run.provider_meta.get("models", [])}
+            ),
+            "system_fingerprints": sorted(
+                {
+                    fingerprint
+                    for run in runs
+                    for fingerprint in run.provider_meta.get("system_fingerprints", [])
+                }
+            ),
         },
     }
     return runs, run_metadata
@@ -933,6 +1099,9 @@ def replay_completed_run(
         runner="interactive",
         repeat=repeat,
         provider_meta=dict(meta.get("provider", {})),
+        usage=reprice_usage(adapter, dict(meta.get("usage", {}))),
+        wall_time_seconds=float(meta.get("wall_time_seconds", 0.0)),
+        resumed=True,
     )
 
 
@@ -964,6 +1133,7 @@ def run_interactive_agent(
     task: Task,
     run_dir: Path,
     timeout: float,
+    episode_timeout: float = 900,
     max_turns_override: int | None,
     model_retries: int,
     retry_backoff: float,
@@ -971,6 +1141,7 @@ def run_interactive_agent(
     malformed_retries: int = 2,
     include_widget_hints: bool = True,
 ) -> ComparisonRun:
+    episode_started = time.monotonic()
     run_dir.mkdir(parents=True, exist_ok=True)
     task_path = run_dir / "task.json"
     output_path = run_dir / "tool_calls.jsonl"
@@ -988,9 +1159,7 @@ def run_interactive_agent(
         responses_path.unlink()
 
     episode = WorkspaceEpisode(task=task)
-    messages = build_interactive_messages(
-        task_payload, include_widget_hints=include_widget_hints
-    )
+    messages = build_interactive_messages(task_payload, include_widget_hints=include_widget_hints)
     max_turns = max_turns_override or int(task.limits.get("max_turns", 12))
     stdout_lines: list[str] = []
     stderr = ""
@@ -998,18 +1167,34 @@ def run_interactive_agent(
     timed_out = False
     observed_models: set[str] = set()
     observed_fingerprints: set[str] = set()
+    usage_totals: JsonDict = {
+        "api_calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cached_tokens": 0,
+        "provider_cost_usd": 0.0,
+        "provider_cost_reported": False,
+    }
 
     malformed_recoveries = 0
     for turn in range(1, max_turns + 1):
+        remaining = episode_timeout - (time.monotonic() - episode_started)
+        if remaining <= 0:
+            timed_out = True
+            exit_code = None
+            stderr = f"episode exceeded {episode_timeout:.1f}s wall-clock timeout"
+            break
         try:
             content = call_model_with_retries(
                 adapter,
                 messages,
-                timeout=timeout,
+                timeout=min(timeout, remaining),
                 retries=model_retries,
                 backoff_seconds=retry_backoff,
                 retry_log=stdout_lines,
                 turn=turn,
+                deadline=episode_started + episode_timeout,
             )
         except TimeoutError as error:
             timed_out = True
@@ -1020,10 +1205,12 @@ def run_interactive_agent(
             exit_code = 1
             stderr = str(error)
             break
-        if _LAST_PROVIDER_META.get("model"):
-            observed_models.add(_LAST_PROVIDER_META["model"])
-        if _LAST_PROVIDER_META.get("system_fingerprint"):
-            observed_fingerprints.add(_LAST_PROVIDER_META["system_fingerprint"])
+        call_meta = _last_provider_meta()
+        if call_meta.get("model"):
+            observed_models.add(str(call_meta["model"]))
+        if call_meta.get("system_fingerprint"):
+            observed_fingerprints.add(str(call_meta["system_fingerprint"]))
+        accumulate_usage(usage_totals, call_meta.get("usage"))
         try:
             action = parse_interactive_action(content)
         except Exception as error:  # noqa: BLE001 - malformed model action.
@@ -1035,9 +1222,7 @@ def run_interactive_agent(
                 exit_code = 1
                 stderr = str(error)
                 break
-            stdout_lines.append(
-                f"turn {turn}: malformed action recovered ({error})"
-            )
+            stdout_lines.append(f"turn {turn}: malformed action recovered ({error})")
             messages.append({"role": "assistant", "content": content})
             messages.append(
                 {
@@ -1101,6 +1286,8 @@ def run_interactive_agent(
         "models": sorted(observed_models),
         "system_fingerprints": sorted(observed_fingerprints),
     }
+    usage = finalize_usage(adapter, usage_totals)
+    wall_time_seconds = time.monotonic() - episode_started
     meta_path = run_dir / "run_meta.json"
     meta_path.write_text(
         json.dumps(
@@ -1110,6 +1297,8 @@ def run_interactive_agent(
                 "stdout": "\n".join(stdout_lines),
                 "stderr": stderr,
                 "provider": provider_meta,
+                "usage": usage,
+                "wall_time_seconds": wall_time_seconds,
             },
             indent=2,
             sort_keys=True,
@@ -1135,6 +1324,8 @@ def run_interactive_agent(
         runner="interactive",
         repeat=repeat,
         provider_meta=provider_meta,
+        usage=usage,
+        wall_time_seconds=wall_time_seconds,
     )
 
 
@@ -1143,7 +1334,7 @@ def build_interactive_messages(
 ) -> list[JsonDict]:
     task = task["task"]
     allowed_tools = task["allowed_tools"]
-    origin_hints = fixture_origin_hints(task["fixtures"])
+    origin_hints = fixture_origin_hints(task["fixtures"]) if include_widget_hints else {}
     widget_tool_names = {
         "list_available_widgets",
         "get_widget_schema",
@@ -1157,20 +1348,21 @@ def build_interactive_messages(
         else {}
     )
     tool_reference = {
-        name: TOOL_REFERENCE[name]
-        for name in allowed_tools
-        if name in TOOL_REFERENCE
+        name: TOOL_REFERENCE[name] for name in allowed_tools if name in TOOL_REFERENCE
     }
     public_task = {
         "id": task["id"],
+        "qualified_id": task["qualified_id"],
         "title": task["title"],
-        "level": task["level"],
+        "family": task.get("family", "general"),
         "capability": task["capability"],
         "workflow": task["workflow"],
         "domain": task["domain"],
         "subdomain": task["subdomain"],
+        "specification_level": task.get("specification_level"),
         "difficulty": task["difficulty"],
         "prompt": task["prompt"],
+        "business_terms": task.get("business_terms", []),
         "fixtures": task["fixtures"],
         "origin_hints": origin_hints,
         "widget_hints": widget_hints,
@@ -1178,35 +1370,36 @@ def build_interactive_messages(
         "allowed_tools": allowed_tools,
         "limits": task.get("limits", {}),
     }
-    system = "\n".join(
-        [
-            "You are controlling OpenBB Workspace through tool calls.",
-            "This is an interactive eval. You will choose one tool call at a time.",
-            "After each tool call, you will receive the real tool result.",
-            "Return only valid JSON. Do not use Markdown or prose.",
-            "",
-            "Response schema:",
-            '{"done": false, "tool": "tool_name", "args": {}}',
-            "or",
-            '{"done": true}',
-            "",
-            "Use only allowed tools.",
-            "Tool names must exactly match allowed_tools. Do not call shell, container, browser, or developer tools.",
-            "When a tool asks for origin, use the display origin from origin_hints, not the fixture slug.",
-            "Use IDs returned by tool results exactly. Do not use placeholders like {{dashboard_id}}.",
-            "If dashboard_id is optional and you do not know the UUID, omit it instead of using a dashboard name.",
-            "Never invent widget_id values. Use exact widget_id values from list_available_widgets, widget_hints, or prior tool results.",
-            "Before create_widget, you MUST call list_available_widgets for the same origin when that tool is allowed.",
-            "Before create_widget, you MUST call get_widget_schema for the same origin and widget_id when that tool is allowed.",
-            "Calling create_widget before list_available_widgets and get_widget_schema will fail the benchmark.",
-            "For tabbed dashboards, navigate to the target tab before creating widgets or set layout tab_id correctly.",
-            "For app templates, call manage_backends list, then use the returned backend id in manage_apps.",
-            "For generated notes/charts, include concrete task facts from tool data and put the widget on the required tab when applicable.",
-            "Generated widget text is checked literally. Copy exact numbers and identifiers from observations: write 0.86, not 86%; write price_performance, not only Price Performance.",
-            "Use update_widget_layout for layout changes, not update_widget.",
-            "When the final Workspace state satisfies the task, return {\"done\": true}.",
-        ]
-    )
+    base_instructions = [
+        "You are controlling OpenBB Workspace through tool calls.",
+        "This is an interactive eval. You will choose one tool call at a time.",
+        "After each tool call, you will receive the real tool result.",
+        "Return only valid JSON. Do not use Markdown or prose.",
+        "",
+        "Response schema:",
+        '{"done": false, "tool": "tool_name", "args": {}}',
+        "or",
+        '{"done": true}',
+        "",
+        "Use only allowed tools.",
+        "Tool names must exactly match allowed_tools. Do not call shell, container, browser, or developer tools.",
+        "Use IDs returned by tool results exactly. Do not use placeholders like {{dashboard_id}}.",
+        'When the final Workspace state satisfies the task, return {"done": true}.',
+    ]
+    guided_instructions = [
+        "When a tool asks for origin, use the display origin from origin_hints, not the fixture slug.",
+        "If dashboard_id is optional and you do not know the UUID, omit it instead of using a dashboard name.",
+        "Never invent widget_id values. Use exact widget_id values from list_available_widgets, widget_hints, or prior tool results.",
+        "Before create_widget, you MUST call list_available_widgets for the same origin when that tool is allowed.",
+        "Before create_widget, you MUST call get_widget_schema for the same origin and widget_id when that tool is allowed.",
+        "Calling create_widget before list_available_widgets and get_widget_schema will fail the benchmark.",
+        "For tabbed dashboards, navigate to the target tab before creating widgets or set layout tab_id correctly.",
+        "For app templates, call manage_backends list, then use the returned backend id in manage_apps.",
+        "For generated notes/charts, include concrete task facts from tool data and put the widget on the required tab when applicable.",
+        "Generated widget text is checked literally. Copy exact numbers and identifiers from observations: write 0.86, not 86%; write price_performance, not only Price Performance.",
+        "Use update_widget_layout for layout changes, not update_widget.",
+    ]
+    system = "\n".join(base_instructions + (guided_instructions if include_widget_hints else []))
     user = "\n".join(
         [
             "Available tool reference:",
@@ -1235,7 +1428,7 @@ def tool_result_prompt(turn: int, call: ToolCall, result: JsonDict) -> str:
                 sort_keys=True,
             ),
             "",
-            "Choose the next single tool call, or return {\"done\": true} if the task is complete.",
+            'Choose the next single tool call, or return {"done": true} if the task is complete.',
         ]
     )
 
@@ -1243,6 +1436,15 @@ def tool_result_prompt(turn: int, call: ToolCall, result: JsonDict) -> str:
 def call_model(adapter: ModelAdapter, messages: list[JsonDict], timeout: float) -> str:
     if adapter.provider == "openai":
         return call_openai_chat(adapter.model, messages, timeout)
+    if adapter.provider == "openrouter":
+        return call_openai_chat(
+            adapter.model,
+            messages,
+            timeout,
+            api_key_env="OPENROUTER_API_KEY",
+            default_base_url="https://openrouter.ai/api/v1",
+            base_url_env="OPENROUTER_BASE_URL",
+        )
     if adapter.provider == "ollama":
         return call_ollama_chat(adapter.model, messages, timeout)
     raise ValueError(f"Unsupported provider {adapter.provider!r}")
@@ -1257,11 +1459,18 @@ def call_model_with_retries(
     backoff_seconds: float,
     retry_log: list[str],
     turn: int,
+    deadline: float | None = None,
 ) -> str:
     attempt = 0
     while True:
         try:
-            return call_model(adapter, messages, timeout=timeout)
+            request_timeout = timeout
+            if deadline is not None:
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
+                    raise TimeoutError("episode wall-clock timeout exhausted")
+                request_timeout = min(request_timeout, remaining)
+            return call_model(adapter, messages, timeout=request_timeout)
         except TransientModelError as error:
             if attempt >= retries:
                 raise
@@ -1270,6 +1479,8 @@ def call_model_with_retries(
             retry_log.append(
                 f"turn {turn} retry {attempt}/{retries} after transient model error: {error}"
             )
+            if deadline is not None and time.monotonic() + wait_seconds >= deadline:
+                raise TimeoutError("episode wall-clock timeout exhausted") from error
             if wait_seconds:
                 time.sleep(wait_seconds)
         except TimeoutError as error:
@@ -1277,19 +1488,27 @@ def call_model_with_retries(
                 raise
             attempt += 1
             wait_seconds = backoff_seconds * (2 ** (attempt - 1))
-            retry_log.append(
-                f"turn {turn} retry {attempt}/{retries} after model timeout: {error}"
-            )
+            retry_log.append(f"turn {turn} retry {attempt}/{retries} after model timeout: {error}")
+            if deadline is not None and time.monotonic() + wait_seconds >= deadline:
+                raise TimeoutError("episode wall-clock timeout exhausted") from error
             if wait_seconds:
                 time.sleep(wait_seconds)
 
 
-def call_openai_chat(model: str, messages: list[JsonDict], timeout: float) -> str:
+def call_openai_chat(
+    model: str,
+    messages: list[JsonDict],
+    timeout: float,
+    *,
+    api_key_env: str = "OPENAI_API_KEY",
+    default_base_url: str = "https://api.openai.com/v1",
+    base_url_env: str = "OPENAI_BASE_URL",
+) -> str:
     load_dotenv()
-    api_key = os.environ.get("OPENAI_API_KEY")
+    api_key = os.environ.get(api_key_env)
     if not api_key:
-        raise RuntimeError("OPENAI_API_KEY is not set in the environment or .env")
-    base_url = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+        raise RuntimeError(f"{api_key_env} is not set in the environment or .env")
+    base_url = os.environ.get(base_url_env, default_base_url).rstrip("/")
     payload = {
         "model": model,
         "temperature": float(os.environ.get("OPENAI_TEMPERATURE", "0")),
@@ -1316,6 +1535,7 @@ def call_openai_chat(model: str, messages: list[JsonDict], timeout: float) -> st
     _record_provider_meta(
         model=body.get("model"),
         system_fingerprint=body.get("system_fingerprint"),
+        usage=openai_usage(body),
     )
     try:
         content = body["choices"][0]["message"]["content"]
@@ -1340,7 +1560,15 @@ def call_ollama_chat(model: str, messages: list[JsonDict], timeout: float) -> st
     if os.environ.get("OLLAMA_FORMAT", "schema") != "none":
         payload["format"] = interactive_action_schema()
     body = post_json(f"{base_url}/api/chat", payload, timeout)
-    _record_provider_meta(model=body.get("model"))
+    _record_provider_meta(
+        model=body.get("model"),
+        usage={
+            "input_tokens": int(body.get("prompt_eval_count") or 0),
+            "output_tokens": int(body.get("eval_count") or 0),
+            "total_tokens": int(body.get("prompt_eval_count") or 0)
+            + int(body.get("eval_count") or 0),
+        },
+    )
     message = body.get("message") or {}
     content = message.get("content")
     if isinstance(content, str) and content.strip():
@@ -1351,6 +1579,95 @@ def call_ollama_chat(model: str, messages: list[JsonDict], timeout: float) -> st
     if not isinstance(content, str) or not content.strip():
         raise ValueError(f"Ollama returned no message content: {body!r}")
     return content
+
+
+def openai_usage(body: JsonDict) -> JsonDict:
+    """Normalize OpenAI-compatible usage, including OpenRouter cost fields."""
+
+    raw = body.get("usage")
+    usage = raw if isinstance(raw, dict) else {}
+    input_tokens = int(usage.get("prompt_tokens") or usage.get("input_tokens") or 0)
+    output_tokens = int(usage.get("completion_tokens") or usage.get("output_tokens") or 0)
+    details = usage.get("prompt_tokens_details") or usage.get("input_tokens_details") or {}
+    cached_tokens = int(details.get("cached_tokens") or 0) if isinstance(details, dict) else 0
+    raw_cost = usage.get("cost", body.get("cost"))
+    try:
+        cost = float(raw_cost) if raw_cost is not None else None
+    except (TypeError, ValueError):
+        cost = None
+    return {
+        "input_tokens": input_tokens,
+        "output_tokens": output_tokens,
+        "total_tokens": int(usage.get("total_tokens") or input_tokens + output_tokens),
+        "cached_tokens": cached_tokens,
+        "provider_cost_usd": cost,
+    }
+
+
+def accumulate_usage(total: JsonDict, usage: Any) -> None:
+    if not isinstance(usage, dict):
+        return
+    total["api_calls"] = int(total.get("api_calls", 0)) + 1
+    for key in ("input_tokens", "output_tokens", "total_tokens", "cached_tokens"):
+        total[key] = int(total.get(key, 0)) + int(usage.get(key) or 0)
+    cost = usage.get("provider_cost_usd")
+    if isinstance(cost, (int, float)):
+        total["provider_cost_usd"] = float(total.get("provider_cost_usd", 0.0)) + float(cost)
+        total["provider_cost_reported"] = True
+
+
+def finalize_usage(adapter: ModelAdapter, usage: JsonDict) -> JsonDict:
+    """Attach provider-reported or configured token-price cost to an episode."""
+
+    result = dict(usage)
+    if result.pop("provider_cost_reported", False):
+        result["cost_usd"] = round(float(result.get("provider_cost_usd", 0.0)), 10)
+        result["cost_source"] = "provider"
+    elif (
+        adapter.input_cost_per_million is not None
+        and adapter.output_cost_per_million is not None
+    ):
+        cached_tokens = int(result.get("cached_tokens", 0))
+        input_tokens = int(result.get("input_tokens", 0))
+        uncached_tokens = max(0, input_tokens - cached_tokens)
+        cached_price = (
+            adapter.cached_input_cost_per_million
+            if adapter.cached_input_cost_per_million is not None
+            else adapter.input_cost_per_million
+        )
+        result["cost_usd"] = round(
+            uncached_tokens * adapter.input_cost_per_million / 1_000_000
+            + cached_tokens * cached_price / 1_000_000
+            + int(result.get("output_tokens", 0))
+            * adapter.output_cost_per_million
+            / 1_000_000,
+            10,
+        )
+        result["cost_source"] = adapter.pricing_source or "configured_token_prices"
+    else:
+        result["cost_usd"] = None
+        result["cost_source"] = None
+    result.pop("provider_cost_usd", None)
+    return result
+
+
+def reprice_usage(adapter: ModelAdapter, usage: JsonDict) -> JsonDict:
+    """Reapply configured pricing when replaying a completed episode."""
+
+    if usage.get("cost_source") == "provider":
+        return usage
+    raw = {
+        key: usage.get(key, 0)
+        for key in (
+            "api_calls",
+            "input_tokens",
+            "output_tokens",
+            "total_tokens",
+            "cached_tokens",
+        )
+    }
+    raw["provider_cost_reported"] = False
+    return finalize_usage(adapter, raw)
 
 
 def post_json(
@@ -1380,9 +1697,7 @@ def post_json(
             raise TransientModelError(message, status_code=error.code) from error
         raise RuntimeError(message) from error
     except urllib.error.URLError as error:
-        raise TransientModelError(
-            f"could not reach model API at {url}: {error.reason}"
-        ) from error
+        raise TransientModelError(f"could not reach model API at {url}: {error.reason}") from error
     except (ConnectionError, OSError, ssl.SSLError) as error:
         raise TransientModelError(
             f"transient model API transport error at {url}: {error}"
@@ -1550,17 +1865,31 @@ def model_result_payload(
     args: argparse.Namespace,
     run_metadata: JsonDict | None = None,
 ) -> dict:
+    result_rows = [agent_run_summary(run) for run in runs]
     return {
+        "schema_version": RESULT_SCHEMA_VERSION,
         "benchmark": benchmark_metadata(args),
-        "model": {"slug": adapter.slug, "label": adapter.label},
+        "model": {
+            "slug": adapter.slug,
+            "label": adapter.label,
+            "provider": adapter.provider,
+            "id": adapter.model,
+            "pricing": {
+                "input_per_million": adapter.input_cost_per_million,
+                "cached_input_per_million": adapter.cached_input_cost_per_million,
+                "output_per_million": adapter.output_cost_per_million,
+                "source": adapter.pricing_source,
+            },
+        },
         "filters": selected_filters(args),
         "runner": args.runner,
         "repeats": args.repeats,
         "model_retries": args.model_retries,
         "run_metadata": run_metadata or {},
-        "summary": summarize_runs(runs),
-        "results": [agent_run_summary(run) for run in runs],
-        "tasks": [task.id for task in tasks],
+        "summary": summarize_runs(runs, result_rows=result_rows),
+        "results": result_rows,
+        "task_matrix": task_reliability_matrix(result_rows),
+        "tasks": [task.qualified_id for task in tasks],
     }
 
 
@@ -1576,7 +1905,8 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
         "# Workspace Bench Model Comparison",
         "",
         f"- Benchmark: `{comparison['benchmark']['name']}`",
-        f"- Release: `{comparison['benchmark']['release_id']}`",
+        f"- Git commit: `{comparison['benchmark']['git_commit']}`",
+        f"- Git dirty: `{comparison['benchmark']['git_dirty']}`",
         f"- Tasks: `{comparison['task_count']}`",
         f"- Attempts: `{comparison.get('attempt_count', comparison['task_count'])}`",
         f"- Filters: `{json.dumps(comparison['filters'], sort_keys=True)}`",
@@ -1632,7 +1962,15 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
                 f"{k_range} |"
             )
 
-    lines.extend(["", "## By Difficulty", "", "| Model | Easy | Medium | Hard |", "| --- | ---: | ---: | ---: |"])
+    lines.extend(
+        [
+            "",
+            "## By Difficulty",
+            "",
+            "| Model | Easy | Medium | Hard |",
+            "| --- | ---: | ---: | ---: |",
+        ]
+    )
     for model in comparison["models"]:
         by_difficulty = model.get("by_difficulty", {})
         lines.append(
@@ -1641,19 +1979,6 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
             f"{format_bucket(by_difficulty.get('easy'))} | "
             f"{format_bucket(by_difficulty.get('medium'))} | "
             f"{format_bucket(by_difficulty.get('hard'))} |"
-        )
-
-    lines.extend(["", "## By Level", "", "| Model | t0 | t1 | t2 | t3 | t4 |", "| --- | ---: | ---: | ---: | ---: | ---: |"])
-    for model in comparison["models"]:
-        by_level = model.get("by_level", {})
-        lines.append(
-            "| "
-            f"{model['model']} | "
-            f"{format_bucket(by_level.get('t0'))} | "
-            f"{format_bucket(by_level.get('t1'))} | "
-            f"{format_bucket(by_level.get('t2'))} | "
-            f"{format_bucket(by_level.get('t3'))} | "
-            f"{format_bucket(by_level.get('t4'))} |"
         )
 
     lines.extend(
@@ -1676,9 +2001,7 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
     for payload in model_payloads:
         label = payload["model"]["label"]
         issue_counts = Counter(
-            issue["code"]
-            for result in payload["results"]
-            for issue in result["issues"]
+            issue["code"] for result in payload["results"] for issue in result["issues"]
         )
         lines.append(f"### {label}")
         if not issue_counts:
@@ -1719,10 +2042,10 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
         [
             "## Task Matrix",
             "",
-            "| Task | Level | Difficulty | Capability | Workflow | Domain | Subdomain | "
+            "| Task | Difficulty | Capability | Workflow | Domain | Subdomain | "
             + " | ".join(payload["model"]["label"] for payload in model_payloads)
             + " |",
-            "| --- | --- | --- | --- | --- | --- | --- | "
+            "| --- | --- | --- | --- | --- | --- | "
             + " | ".join("---:" for _ in model_payloads)
             + " |",
         ]
@@ -1737,14 +2060,11 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
         lines.append(
             "| "
             f"{task_id} | "
-            f"{first['level']} | "
             f"{first['difficulty']} | "
             f"{first['capability']} | "
             f"{first['workflow']} | "
             f"{first['domain']} | "
-            f"{first['subdomain']} | "
-            + " | ".join(cells)
-            + " |"
+            f"{first['subdomain']} | " + " | ".join(cells) + " |"
         )
 
     lines.extend(
@@ -1767,7 +2087,8 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
 def results_grouped_by_task(payload: dict) -> dict[str, list[dict]]:
     grouped: dict[str, list[dict]] = {}
     for result in payload["results"]:
-        grouped.setdefault(result["id"], []).append(result)
+        identity = result.get("qualified_id") or result["id"]
+        grouped.setdefault(identity, []).append(result)
     return grouped
 
 
@@ -1802,11 +2123,7 @@ def format_result_cell(results: list[dict]) -> str:
     passed = sum(result["passed"] for result in results)
     process_failed = sum(result.get("process_failed", False) for result in results)
     mean_score = sum(result["score"] for result in results) / len(results)
-    issue_counts = Counter(
-        issue["code"]
-        for result in results
-        for issue in result["issues"]
-    )
+    issue_counts = Counter(issue["code"] for result in results for issue in result["issues"])
     codes = ",".join(code for code, _ in issue_counts.most_common(3))
     suffix = f" ({codes})" if codes else ""
     process_suffix = f", proc={process_failed}" if process_failed else ""
@@ -1822,25 +2139,27 @@ def format_bucket(bucket: dict | None) -> str:
     return f"{passed}/{total} ({rate:.0%})"
 
 
-def summarize_runs(runs: list[ComparisonRun]) -> dict:
+def summarize_runs(
+    runs: list[ComparisonRun], *, result_rows: list[dict] | None = None
+) -> dict:
     total = len(runs)
     passed = sum(agent_run_passed(run) for run in runs)
     process_failures = sum(agent_run_process_failed(run) for run in runs)
     valid_runs = [run for run in runs if not agent_run_process_failed(run)]
     task_passed = sum(run.run_result.grade.passed for run in valid_runs)
     task_failures = len(valid_runs) - task_passed
-    mean_score = (
-        sum(run.run_result.grade.score for run in runs) / total if total else 0.0
-    )
-    by_level: dict[str, dict[str, int]] = {}
+    mean_score = sum(run.run_result.grade.score for run in runs) / total if total else 0.0
+    state_passed = sum(run.run_result.grade.state_passed for run in valid_runs)
+    trace_passed = sum(run.run_result.grade.trace_passed for run in valid_runs)
+    runtime_runs = [run for run in valid_runs if run.run_result.task.success.runtime is not None]
+    runtime_passed = sum(run.run_result.grade.runtime_passed for run in runtime_runs)
     by_category: dict[str, dict[str, int]] = {}
     by_difficulty: dict[str, dict[str, int]] = {}
     outcomes_by_task: dict[str, list[bool]] = {}
     for run in runs:
         task = run.run_result.task
-        outcomes_by_task.setdefault(task.id, []).append(agent_run_passed(run))
+        outcomes_by_task.setdefault(task.qualified_id, []).append(agent_run_passed(run))
         for bucket, key in (
-            (by_level, task.level),
             (by_category, task.category),
             (by_difficulty, task.difficulty),
         ):
@@ -1848,7 +2167,7 @@ def summarize_runs(runs: list[ComparisonRun]) -> dict:
             item["total"] += 1
             if agent_run_passed(run):
                 item["passed"] += 1
-    return {
+    summary: dict[str, Any] = {
         "total": total,
         "passed": passed,
         "failed": total - passed,
@@ -1858,12 +2177,67 @@ def summarize_runs(runs: list[ComparisonRun]) -> dict:
         "task_failures": task_failures,
         "task_pass_rate": task_passed / len(valid_runs) if valid_runs else 0.0,
         "mean_score": mean_score,
+        "state_passed": state_passed,
+        "state_pass_rate": state_passed / len(valid_runs) if valid_runs else 0.0,
+        "trace_passed": trace_passed,
+        "trace_pass_rate": trace_passed / len(valid_runs) if valid_runs else 0.0,
+        "mean_state_score": (
+            sum(run.run_result.grade.state_score for run in runs) / total if total else 0.0
+        ),
+        "mean_trace_score": (
+            sum(run.run_result.grade.trace_score for run in runs) / total if total else 0.0
+        ),
+        "runtime_task_count": len(runtime_runs),
+        "runtime_passed": runtime_passed,
+        "runtime_pass_rate": (runtime_passed / len(runtime_runs) if runtime_runs else 1.0),
+        "mean_runtime_score": (
+            sum(run.run_result.grade.runtime_score for run in runtime_runs) / len(runtime_runs)
+            if runtime_runs
+            else 1.0
+        ),
         "process_failures": process_failures,
-        "by_level": by_level,
         "by_category": by_category,
         "by_difficulty": by_difficulty,
         **compute_reliability_metrics(outcomes_by_task),
     }
+    rows = result_rows or [agent_run_summary(run) for run in runs]
+    calibration = summarize_result_rows(rows)
+    summary.update(calibration)
+    summary["pass_rate"] = calibration["strict_pass_rate"]
+    by_family_metrics: dict[str, dict[str, Any]] = {}
+    by_difficulty_metrics: dict[str, dict[str, Any]] = {}
+    family_difficulty_matrix: dict[str, dict[str, dict[str, Any]]] = {}
+    for row in rows:
+        family = str(row.get("family") or "unknown")
+        difficulty = str(row.get("difficulty") or "unknown")
+        family_difficulty_matrix.setdefault(family, {}).setdefault(difficulty, {})
+    for family in sorted({str(row.get("family") or "unknown") for row in rows}):
+        family_rows = [row for row in rows if str(row.get("family") or "unknown") == family]
+        by_family_metrics[family] = summarize_result_rows(family_rows)
+        for difficulty in sorted(
+            {str(row.get("difficulty") or "unknown") for row in family_rows}
+        ):
+            family_difficulty_matrix[family][difficulty] = summarize_result_rows(
+                [
+                    row
+                    for row in family_rows
+                    if str(row.get("difficulty") or "unknown") == difficulty
+                ]
+            )
+    for difficulty in sorted(
+        {str(row.get("difficulty") or "unknown") for row in rows}
+    ):
+        by_difficulty_metrics[difficulty] = summarize_result_rows(
+            [
+                row
+                for row in rows
+                if str(row.get("difficulty") or "unknown") == difficulty
+            ]
+        )
+    summary["by_family_metrics"] = by_family_metrics
+    summary["by_difficulty_metrics"] = by_difficulty_metrics
+    summary["family_difficulty_matrix"] = family_difficulty_matrix
+    return summary
 
 
 def agent_run_passed(run: ComparisonRun) -> bool:
@@ -1876,11 +2250,16 @@ def agent_run_process_failed(run: ComparisonRun) -> bool:
 
 def agent_run_summary(run: ComparisonRun) -> dict:
     result = run.run_result
+    tool_call_count = len(result.trace)
+    failed_tool_call_count = sum(not event.ok for event in result.trace)
+    browser = browser_verdict_for_task(result.task.qualified_id)
     return {
         "id": result.task.id,
+        "qualified_id": result.task.qualified_id,
         "repeat": run.repeat,
         "category": result.task.category,
-        "level": result.task.level,
+        "family": result.task.family,
+        "specification_level": result.task.specification_level,
         "difficulty": result.task.difficulty,
         "split": result.task.split,
         "capability": result.task.capability,
@@ -1892,12 +2271,44 @@ def agent_run_summary(run: ComparisonRun) -> dict:
         "task_failed": not agent_run_process_failed(run) and not result.grade.passed,
         "grade_passed": result.grade.passed,
         "score": result.grade.score,
+        "state_score": result.grade.state_score,
+        "state_passed": result.grade.state_passed,
+        "state_checks_passed": result.grade.state_checks_passed,
+        "state_checks_total": result.grade.state_checks_total,
+        "trace_score": result.grade.trace_score,
+        "trace_passed": result.grade.trace_passed,
+        "trace_checks_passed": result.grade.trace_checks_passed,
+        "trace_checks_total": result.grade.trace_checks_total,
+        "runtime_score": result.grade.runtime_score,
+        "runtime_passed": result.grade.runtime_passed,
+        "runtime_checks_passed": result.grade.runtime_checks_passed,
+        "runtime_checks_total": result.grade.runtime_checks_total,
+        "deployment_receipt": (
+            asdict(result.grade.deployment_receipt)
+            if result.grade.deployment_receipt is not None
+            else None
+        ),
+        "polish_score": result.grade.polish_score,
+        "polish_checks_passed": result.grade.polish_checks_passed,
+        "polish_checks_total": result.grade.polish_checks_total,
+        "polish_issues": [
+            {"code": issue.code, "message": issue.message} for issue in result.grade.polish_issues
+        ],
         "checks_passed": result.grade.checks_passed,
         "checks_total": result.grade.checks_total,
-        "issues": [
-            {"code": issue.code, "message": issue.message}
-            for issue in result.grade.issues
-        ],
+        "issues": [{"code": issue.code, "message": issue.message} for issue in result.grade.issues],
+        "tool_call_count": tool_call_count,
+        "failed_tool_call_count": failed_tool_call_count,
+        "browser_verdict": browser,
+        "wall_time_seconds": round(run.wall_time_seconds, 6),
+        "input_tokens": int(run.usage.get("input_tokens") or 0),
+        "output_tokens": int(run.usage.get("output_tokens") or 0),
+        "total_tokens": int(run.usage.get("total_tokens") or 0),
+        "cached_tokens": int(run.usage.get("cached_tokens") or 0),
+        "api_calls": int(run.usage.get("api_calls") or 0),
+        "cost_usd": run.usage.get("cost_usd"),
+        "cost_source": run.usage.get("cost_source"),
+        "resumed": run.resumed,
         "agent_exit_code": run.exit_code,
         "agent_timed_out": run.timed_out,
         "agent_stdout": run.stdout,
@@ -1909,10 +2320,34 @@ def agent_run_summary(run: ComparisonRun) -> dict:
     }
 
 
+@lru_cache(maxsize=1)
+def browser_verdict_index() -> dict[str, str]:
+    """Index completed browser verdicts; missing task entries remain pending."""
+
+    verdicts: dict[str, str] = {}
+    root = resolve_repo_root() / "runs" / "browser-cert"
+    if not root.exists():
+        return verdicts
+    for path in sorted(root.rglob("verdict.json")):
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        task_ref = payload.get("task_ref")
+        if isinstance(task_ref, str) and isinstance(payload.get("passed"), bool):
+            verdicts[task_ref] = "pass" if payload["passed"] else "fail"
+    return verdicts
+
+
+def browser_verdict_for_task(task_ref: str) -> str:
+    return browser_verdict_index().get(task_ref, "pending")
+
+
 def selected_filters(args: argparse.Namespace) -> dict:
     return {
+        "track": getattr(args, "track", "guided"),
         "difficulty": args.difficulty,
-        "level": args.level,
+        "family": args.family,
         "capability": args.capability,
         "workflow": args.workflow,
         "domain": args.domain,
@@ -1932,8 +2367,9 @@ def benchmark_metadata(args: argparse.Namespace) -> dict:
         task_suite = load_builtin_task_suite_manifest(getattr(args, "suite", "core"))
     return {
         "name": BENCHMARK_NAME,
-        "version": task_suite.version if task_suite else BENCHMARK_VERSION,
-        "release_id": task_suite.release_id if task_suite else BENCHMARK_RELEASE_ID,
+        "suite_id": task_suite.suite_id if task_suite else "local",
+        "content_sha256": task_suite.content_sha256 if task_suite else None,
+        **git_provenance(Path(__file__).resolve()),
     }
 
 
@@ -1943,8 +2379,7 @@ def resolve_output_dir(args: argparse.Namespace) -> Path:
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     slice_name = args.run_name or args.difficulty
     safe_slice_name = "".join(
-        char if char.isalnum() or char in {"-", "_"} else "-"
-        for char in slice_name.lower()
+        char if char.isalnum() or char in {"-", "_"} else "-" for char in slice_name.lower()
     ).strip("-")
     return Path("runs") / "comparison" / f"{timestamp}-{safe_slice_name}"
 

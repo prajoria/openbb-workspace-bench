@@ -1,0 +1,22 @@
+{
+  "competent_models": ["openai-gpt-5.1", "openai-gpt-5.5"],
+  "frontier_models": ["openai-gpt-5.5"],
+  "small_models": ["openai-gpt-5.4-mini"],
+  "measurement": {
+    "measured_at": "2026-07",
+    "suite": "build-openbb-apps",
+    "track": "guided",
+    "repeats": 2,
+    "harness_git_commit": "fab4b7ef4bdba318eca7de6ec604813e96a60272",
+    "suite_content_sha256": "ad2826fac83548fa89f59fdbef8ba05f406042db16caf0cb94cc21afafe87b0e"
+  },
+  "review_policy": {
+    "minimum_repeats": 2
+  },
+  "thresholds": {
+    "easy_min_competent_rate": 0.8,
+    "medium_min_competent_rate": 0.4,
+    "hard_max_frontier_rate": 0.8,
+    "hard_max_small_rate": 0.2
+  }
+}

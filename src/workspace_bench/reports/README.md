@@ -11,16 +11,17 @@ Use this package when you need to:
 
 - compare multiple model adapters across task slices
 - run repeated attempts for reliability metrics
-- compute pass rate, task pass rate, mean score, pass@k, and pass^k
+- compute strict/state/runtime/browser pass rates, invalid-call and recovery
+  rates, median turns, pairwise repeat flip rate, pass@k, and pass^k
+- checkpoint task×repeat cells and account for episode time, tokens, and cost
 - generate comparison JSON, Markdown, SVG, and PNG artifacts
 - separate task failures from provider/process failures
 
 Module responsibilities:
 
 - `model_compare.py`: interactive/batch comparison runner, model adapter config, charts, and reports.
-- `metrics.py`: shared benchmark reliability metrics.
+- `metrics.py`: shared calibration and reliability metrics.
 
 Reports should not change grading semantics. They should summarize results
 produced by the core runner, external-agent harness, or interactive comparison
 runner.
-
