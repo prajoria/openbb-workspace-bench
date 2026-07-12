@@ -27,8 +27,7 @@ the separate experimental-v0 `build-openbb-backends` real-code track (12 tasks).
 - [Browser Certification](#browser-certification)
 - [Serve Fixture Backends](#serve-fixture-backends)
 - [Real-Code Backend Track](#real-code-backend-track)
-- [Task & Success Schema](#task--success-schema)
-- [Result & Output Schema](#result--output-schema)
+- [Reference](#reference) — [TASK-SCHEMA.md](TASK-SCHEMA.md) · [RESULT-SCHEMA.md](RESULT-SCHEMA.md)
 - [Grading Model](#grading-model)
 - [Task Organization](#task-organization)
 - [Terminology](#terminology)
@@ -656,180 +655,19 @@ checks those tests reject a garbage endpoint implementation. The exact spawned
 process is terminated and a `deployment-receipt.json` is left under
 `.workspace-bench/` in the task workdir.
 
-## Task & Success Schema
+## Reference
 
-Tasks are strict `workspace-bench-task` JSON objects under
-`src/workspace_bench/core/task_suites/<suite>/<family>/`; private
-`--task-dir` trees use the same schema. Unknown fields are rejected.
+Two focused reference documents sit at the repository root:
 
-### Task fields
+- **[TASK-SCHEMA.md](TASK-SCHEMA.md)** — the full `workspace-bench-task` JSON
+  contract: task fields, `SuccessCriteria`, runtime datasets, capabilities, and
+  the `specification_level` vs measured `difficulty` split.
+- **[RESULT-SCHEMA.md](RESULT-SCHEMA.md)** — evaluator output: result rows and
+  `GradeResult` dimensions, deployment receipts, rollout/SFT/preference exports,
+  and the complete issue-code catalog.
 
-| field | contract |
-| --- | --- |
-| `schema_version` | Required; `workspace-bench-task`. |
-| `id`, `title` | Stable local slug and human-readable title. The public identity is `suite/family/task`. |
-| `category`, `family` | Required workflow kind (`read`, `single-widget`, `dashboard`, `platform`, or `repair`) and generator/verifier family. Neither is inferred from paths or tags. |
-| `capability`, `workflow`, `domain`, `subdomain` | Required slicing axes: the general action, analyst workflow, broad area, and narrower desk/function. |
-| `specification_level` | Required for build tasks; structural prompt level: `explicit`, `partially-specified`, or `open-brief`. |
-| `difficulty` | Measured `easy`, `medium`, or `hard` reporting label. |
-| `split` | `train`, `validation`, `test`, or private-suite `dev`; otherwise the suite default, then `dev`. |
-| `tags`, `source`, `novelty`, `business_terms` | Filtering, provenance, uniqueness, and the declared allowlist of genuine verbatim business identifiers in less-specified prompts. |
-| `prompt` | Analyst-facing instruction. |
-| `fixtures`, `initial_state` | Deterministic backend references and optional seeded dashboards, tabs, widgets, apps, generated widgets, or repair state. |
-| `allowed_tools`, `limits` | Agent-visible Workspace MCP tool surface and budgets such as `max_turns`. |
-| `success` | Evaluator-only deterministic `SuccessCriteria`. |
-| `oracle_tool_calls` | Known-good reference trajectory; it is evidence, not the only valid solution. |
-| `code_task` | Experimental code-track contract: confined starter/oracle paths, argv install/start/test commands, health path, timeouts, manifest requirements, and typed HTTP probes. |
-
-`workspace-bench export-task` publishes prompt, business terms, metadata,
-fixtures, initial state, tools, limits, protocol, suite hash, and Git
-provenance. It deliberately excludes `success` and `oracle_tool_calls`.
-Pre-versioned tasks must be migrated explicitly with `workspace-bench
-migrate-task`.
-
-`specification_level` and `difficulty` are independent. Specification level
-controls prompt structure, openness linting, exact-versus-capability grading,
-and graded-check caps. Difficulty is measured from calibration evidence and
-never changes prompt rendering or grader selection. Explicit tasks can name a
-complete implementation contract; partially specified tasks provide a business
-outcome and one or two declared anchors; open briefs describe the user,
-subject, actions, and genuine constraints while leaving ids, widget types,
-paths, fields, tabs, and geometry to the agent.
-
-### SuccessCriteria
-
-| field | what it checks |
-| --- | --- |
-| `required_dashboard_name_contains`, `required_tabs` | Required active-dashboard phrase and tab ids. |
-| `required_widgets` | Origin/widget id, subset-matched `data_args`, optional tab, and min/max instance counts. |
-| `required_generated_widgets` | Type, optional name/tab, minimum count, and case-insensitive semantic `data_contains` facts. |
-| `required_widget_defs`, `required_app_defs` | Exact custom-backend manifest contracts for structurally explicit tasks. |
-| `required_capabilities` | Architecture-neutral business capability, bound to runtime datasets by widget kind, covered fields, parameter kinds, and business-significant config. |
-| `capability_connections` | Required source/target capability edge through the final app's real shared-parameter graph. |
-| `business_names`, `app_structure` | Opt-in business-critical dashboard/app/tab names and generic app/reference/layout integrity. |
-| `required_layouts`, `layout` | Exact move/resize outcomes plus grid-bound and no-overlap invariants. |
-| `required_tool_calls`, `required_tool_results`, `required_resource_reads` | Nested-subset call arguments and required fragments from successful tool results or exact resource URIs. |
-| `trace_checks` | Invalid-call budget, schema-before-create, listed-widget-id discipline, and repeated-snapshot limit. |
-| `runtime_checks` | Task-owned datasets and evaluator HTTP probes, with optional pinned paths and request timeout. |
-| `workspace_checks` | Preservation of unrelated dashboards/apps/backend ids, warning/name invariants, mutable ids, and dashboard/backend delta bounds. |
-| `polish` | Desirable authored details reported separately; never gates strict pass. |
-
-A required capability names one or more `runtime_checks.datasets`, selects a
-widget kind (`any`, table/grid/chart-like, metric, form, or a native content
-kind), and may require fields, parameter kinds, and meaningful configuration.
-Several runtime-valid widgets may jointly cover its fields; one combined widget
-may cover compatible capabilities. Connections are derived from actual
-`apps.json` shared-parameter groups, so group names and oracle ids are not
-compared. Use `business_names` only when the literal name is part of the brief.
-
-Each runtime dataset has a unique `name`, authored `widget_id`, field
-vocabulary, JSON `payload`, and optional `path` or `form_endpoint`; negative
-fixtures may provide `status` or `raw_body`. Paths are flexible unless
-`pinned_paths` is true. The evaluator remaps the authored backend to its own
-localhost server, synthesizes representative parameters, issues GET or POST,
-and rejects unreachable/non-2xx endpoints, malformed or incompatible JSON,
-empty placeholder data, invalid parameter schemas, and broken form submission
-contracts.
-
-For generated widgets, `data_contains` is the current semantic contract. It
-searches serialized data plus name, description, and tab id case-insensitively,
-with supported aliases and numeric equivalence. Legacy `data_equals` remains
-accepted for private and older schemas but performs strict payload equality;
-bundled suites do not use it.
-
-Oracle traces smoke-test task correctness and can bootstrap SFT/RL exports, but
-the grader is the source of truth. For experimental `code_task` entries the
-oracle is a solved-file overlay instead; paths cannot escape the task fixture,
-commands are argv arrays, every manifest endpoint needs a typed probe, starter
-tests must fail before implementation, and the oracle plus test-sensitivity
-mutation must pass validation.
-
-The simulator surface includes snapshot, dashboard/navigation, widget
-discovery/data/create/update/layout/delete/read, generated-widget, backend/app,
-skill/resource/prompt, and delegation tools. The complete per-task oracle-tool
-matrix and generated task catalog live under `runs/reports/`.
-
-## Result & Output Schema
-
-All result issues are `{code, message}` objects. A built-in `run --json` emits
-`{summary, results}`; external commands and model comparisons also include a
-`benchmark` provenance block with benchmark/suite identity, content SHA-256,
-Git commit, and dirty-worktree flag.
-
-### Result rows and GradeResult
-
-Every result row identifies the qualified task, family, category, capability,
-workflow, domain, subdomain, specification level, difficulty, and tags. Its
-grade exposes these dimensions:
-
-| dimension | fields | meaning |
-| --- | --- | --- |
-| outcome/state | `score`, `state_score`, `state_passed`, state check counts | Correct durable workspace or code outcome. For runtime tasks, primary partial credit averages state and runtime dimension scores rather than raw checks. |
-| trace | `trace_score`, `trace_passed`, trace check counts | Required retrieval/tool behavior and workflow-policy discipline. |
-| runtime | `runtime_score`, `runtime_passed`, runtime check counts | Real evaluator-owned HTTP usability; neutral defaults when unconfigured. |
-| polish | `polish_score`, polish check counts, `polish_issues` | Non-gating authored quality diagnostics. |
-| combined | `passed`, total check counts, `issues` | Strict pass requires state, trace, and every configured runtime check; polish is excluded. |
-
-Runtime-enabled rows carry an evaluator-generated `deployment_receipt` (and
-other rows use `null`). It records observed backend names, app ids,
-instantiated dashboard ids, per-widget endpoint/method/dataset probe outcomes,
-issue codes, and aggregate counts. It is derived from final state and real
-probes, never authored by the agent or used as a requested success artifact.
-
-External-agent rows additionally record `grade_passed`, command, exit code,
-timeout, stdout/stderr, run directory, task path, and output path. Their
-`passed` requires both process and grade success. Interactive evaluator files
-add model/filter/runner/repeat settings, run timestamps and harness/provider
-identity, strict/state/runtime/browser summaries, invalid-call and recovery
-metrics, turns, tokens, cost, per-task repeats/pass@k/pass^k, durable manifests,
-and checkpoints. Resume is accepted only when model, provider, temperature,
-harness revision, suite hash, track, repeats, and ordered task manifest match.
-
-The real-code command emits `workspace-bench-code-result/v0`, containing task,
-agent process, strict code grade, artifact paths, and an evaluator-owned
-`workspace-bench-code-receipt/v0`. The receipt covers install, server pid/log
-tails, manifests, HTTP probes, non-empty pytest results, garbage-mutation test
-sensitivity, cleanup, and final grade.
-
-### Rollouts and trace artifacts
-
-`export-rollouts` writes one `workspace-bench-rollout-v1` JSONL object per
-episode with `task`, `messages`, `tool_calls`, `tool_results`,
-`final_snapshot`, `grade`, and `metadata`. Metadata includes export schema and
-time, Git state, suite hash, taxonomy, difficulty, and split; private/hidden
-suite metadata is retained when available. `export-sft` converts the same
-record to `openai_messages`, `sharegpt`, or `tool_call_jsonl`, while
-`export-preferences` selects chosen/rejected attempts for the same model/task.
-Per-task trace artifacts retain task metadata and prompt, grade, ordered calls
-and results, and final snapshot.
-
-### Issue-code catalog
-
-- State and definition: `dashboard_name`, `missing_tab`, `missing_widget`,
-  `too_many_widgets`, `missing_generated_widget`, `layout_mismatch`,
-  `layout_out_of_grid`, `layout_overlap`, `missing_custom_backend`,
-  `missing_widget_def`, and `missing_app_def`.
-- Trace: `missing_tool_call`, `missing_tool_result`, `missing_resource_read`,
-  `too_many_invalid_calls`, `schema_not_called_before_create`,
-  `unlisted_widget_id`, and `repeated_snapshots`.
-- Runtime: `endpoint_unreachable`, `endpoint_bad_status`,
-  `endpoint_response_malformed`, `endpoint_response_incompatible`,
-  `endpoint_response_placeholder`, `endpoint_params_invalid`, and
-  `form_submission_incompatible`.
-- Capability: `missing_capability`, `capability_fields_uncovered`,
-  `capability_param_missing`, `capability_config_missing`,
-  `capability_unconnected`, and `business_name_missing`.
-- Repair/preservation: `backend_validation_warnings`,
-  `custom_backend_replaced`, `duplicate_custom_backend_name`,
-  `collateral_app_change`, and `collateral_dashboard_change`.
-- Code track: `code_install_failed`, `code_server_startup_failed`,
-  `code_widgets_invalid`, `code_apps_invalid`, `code_cors_missing`,
-  `code_probe_coverage_missing`, `code_endpoint_unreachable`,
-  `code_endpoint_incompatible`, `code_endpoint_placeholder`,
-  `code_tests_failed`, `code_tests_insensitive`, and `code_server_orphaned`.
-
-Polish codes are task-authored (bundled tasks currently use
-`polish_refresh_policy`) and appear only in `polish_issues`.
+The generated per-task oracle-tool matrix and task catalog live under
+`runs/reports/`.
 
 ## Grading Model
 
