@@ -9,6 +9,7 @@ from dataclasses import dataclass, replace
 from functools import partial
 from typing import Literal
 
+from workspace_bench.core.grading.state import lookup_path, widget_definitions
 from workspace_bench.core.graders import grade_task
 from workspace_bench.core.models import (
     GradeResult,
@@ -1099,12 +1100,8 @@ def _preferred_paths(values: JsonDict) -> list[str]:
 
 
 def _path_exists(payload: JsonDict, dotted: str) -> bool:
-    current: object = payload
-    for part in dotted.split("."):
-        if not isinstance(current, dict) or part not in current:
-            return False
-        current = current[part]
-    return True
+    found, _ = lookup_path(payload, dotted)
+    return found
 
 
 def _flip_path(payload: JsonDict, dotted: str) -> None:
@@ -1212,12 +1209,4 @@ def _replay(
 
 
 def _widget_definitions(snapshot: JsonDict) -> list[tuple[str, str, JsonDict]]:
-    definitions: list[tuple[str, str, JsonDict]] = []
-    for backend in (snapshot.get("custom_backends") or {}).values():
-        if not isinstance(backend, dict):
-            continue
-        backend_name = str(backend.get("name", ""))
-        for widget_id, definition in (backend.get("widgets_json") or {}).items():
-            if isinstance(definition, dict):
-                definitions.append((backend_name, str(widget_id), definition))
-    return definitions
+    return widget_definitions(snapshot)

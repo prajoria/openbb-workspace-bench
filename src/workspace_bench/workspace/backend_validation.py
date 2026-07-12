@@ -19,6 +19,8 @@ import re
 from typing import Any
 
 from workspace_bench.core.models import JsonDict
+from workspace_bench.workspace.geometry import rects_overlap
+from workspace_bench.workspace.naming import slugify
 from workspace_bench.workspace.widget_params import flatten_params
 
 # WidgetVizTypes — terminalpro src/lib/types/app.ts:543-563
@@ -77,11 +79,6 @@ KNOWN_TEMPLATE_KEYS = frozenset({
 })
 
 CRON_FIELDS = 5
-
-
-def slugify(value: str) -> str:
-    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
-    return slug or "app"
 
 
 def _is_number(value: Any) -> bool:
@@ -501,15 +498,6 @@ def validate_widgets_json(
     return errors, warnings, normalized
 
 
-def _rects_overlap(a: JsonDict, b: JsonDict) -> bool:
-    return (
-        a["x"] < b["x"] + b["w"]
-        and b["x"] < a["x"] + a["w"]
-        and a["y"] < b["y"] + b["h"]
-        and b["y"] < a["y"] + a["h"]
-    )
-
-
 def validate_apps_json(
     payload: Any,
     widget_ids: set[str],
@@ -598,7 +586,7 @@ def validate_apps_json(
                     "x": item["x"], "y": item["y"], "w": item["w"], "h": item["h"],
                 }
                 for other in rects:
-                    if _rects_overlap(rect, other):
+                    if rects_overlap(rect, other):
                         warnings.append(
                             f"{tab_where}: layout items '{other['i']}' and "
                             f"'{widget_ref}' overlap."

@@ -18,6 +18,7 @@ from workspace_bench.agents import BenchAgent, build_agent
 from workspace_bench.core.graders import grade_task
 from workspace_bench.core.models import JsonDict, RunResult, Task, ToolCall, ToolTraceEvent
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
+from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
 
 
 SNAPSHOT_FIELDS = {
@@ -33,25 +34,12 @@ SNAPSHOT_FIELDS = {
     "tools",
     "skills",
 }
-EXPECTED_MCP_TOOLS = {
-    "get_workspace_snapshot",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "read_widget",
-    "create_widget",
-    "update_widget",
-    "delete_widget",
-    "update_widget_layout",
-    "add_generative_widget",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "assign_tasks_to_agents",
+# The live MCP exposes these two canonical synthetic tools as a resource and a
+# prompt, respectively. Every actual tool expectation is derived from the one
+# canonical tool surface so additions cannot silently drift between runners.
+EXPECTED_MCP_TOOLS = set(WORKSPACE_TOOL_NAMES) - {
+    "read_workspace_resource",
+    "get_workspace_prompt",
 }
 EXPECTED_MCP_PROMPTS = {"workspace_tool_usage", "workspace_session_context"}
 EXPECTED_MCP_RESOURCES = {"openbb://workspace/app-builder/index"}

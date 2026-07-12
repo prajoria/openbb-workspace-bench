@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 import copy
-import re
 from dataclasses import dataclass, field
 from typing import Any
 
 from workspace_bench.core.models import FixtureBackendRef, JsonDict, RuntimeChecks, ToolCall
 from workspace_bench.workspace import backend_validation
 from workspace_bench.workspace.fixtures import FixtureBackend, default_fixture_backends
+from workspace_bench.workspace.naming import slugify
 from workspace_bench.workspace.runtime import task_widget_data
 
 
@@ -69,13 +69,6 @@ WORKSPACE_PROMPTS: dict[str, str] = {
 }
 
 APP_BUILDER_INDEX_URI = "openbb://workspace/app-builder/index"
-
-
-def slugify(value: str) -> str:
-    """Slugify a Workspace navigation tab name."""
-
-    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
-    return slug or "tab"
 
 
 @dataclass
@@ -241,7 +234,7 @@ class SimulatedWorkspace:
         self._backend_counter += 1
         resolved_id = backend_id or f"backend_{self._backend_counter:03d}"
         backend = FixtureBackend(
-            slug=f"custom-{backend_validation.slugify(name)}",
+            slug=f"custom-{slugify(name)}",
             name=name,
             widgets=copy.deepcopy(widgets),
             apps=copy.deepcopy(apps),
@@ -278,7 +271,7 @@ class SimulatedWorkspace:
             stored.setdefault(
                 "template_id",
                 stored.get("templateId")
-                or backend_validation.slugify(str(stored.get("name", "app"))),
+                or slugify(str(stored.get("name", "app"))),
             )
             apps.append(stored)
         return self._register_custom_backend(
@@ -300,7 +293,9 @@ class SimulatedWorkspace:
         if tabs:
             dashboard.tabs.clear()
             for tab in tabs:
-                tab_id = str(tab.get("id", slugify(str(tab.get("name", "")))))
+                tab_id = str(
+                    tab.get("id", slugify(str(tab.get("name", "")), fallback="tab"))
+                )
                 dashboard.ensure_tab(tab_id, str(tab.get("name", tab_id)))
             self.active_tab_id = str(tabs[0].get("id", ""))
         for widget_spec in spec.get("widgets", []):
@@ -737,17 +732,21 @@ class SimulatedWorkspace:
             dashboard.navigation_bar = True
             dashboard.tabs.clear()
             for tab in tabs_payload:
-                dashboard.ensure_tab(slugify(str(tab["name"])), str(tab["name"]))
+                dashboard.ensure_tab(
+                    slugify(str(tab["name"]), fallback="tab"), str(tab["name"])
+                )
             self.active_tab_id = next(iter(dashboard.tabs), "")
             return self._ok("manage_navigation_bar", self._dashboard_payload(dashboard))
         if operation == "add_tabs":
             dashboard.navigation_bar = True
             for tab in tabs_payload:
-                dashboard.ensure_tab(slugify(str(tab["name"])), str(tab["name"]))
+                dashboard.ensure_tab(
+                    slugify(str(tab["name"]), fallback="tab"), str(tab["name"])
+                )
             return self._ok("manage_navigation_bar", self._dashboard_payload(dashboard))
         if operation == "remove_tabs":
             for tab in tabs_payload:
-                dashboard.tabs.pop(slugify(str(tab["name"])), None)
+                dashboard.tabs.pop(slugify(str(tab["name"]), fallback="tab"), None)
             if self.active_tab_id not in dashboard.tabs:
                 self.active_tab_id = next(iter(dashboard.tabs), "")
             return self._ok("manage_navigation_bar", self._dashboard_payload(dashboard))
@@ -763,7 +762,7 @@ class SimulatedWorkspace:
                 if old_tab_id in dashboard.tabs:
                     tab = dashboard.tabs.pop(old_tab_id)
                     tab.name = str(new_name)
-                    tab.tab_id = slugify(str(new_name))
+                    tab.tab_id = slugify(str(new_name), fallback="tab")
                     dashboard.tabs[tab.tab_id] = tab
             return self._ok("manage_navigation_bar", self._dashboard_payload(dashboard))
         return self._error(
