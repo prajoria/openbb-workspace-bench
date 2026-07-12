@@ -1,3 +1,0 @@
-{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "widget_id": "stress_liquidity_lab_liquidity_days_to_liquidate"}, "tool": "get_widget_data"}
-{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "widget_id": "stress_liquidity_lab_stress_tests_risk_snapshot"}, "tool": "get_widget_data"}
-{"args": {"data": "stress_liquidity_lab_liquidity_days_to_liquidate \u2014 field name: score \u2014 exact values: 62.96, 79.81\nstress_liquidity_lab_stress_tests_risk_snapshot \u2014 field name: value \u2014 exact values: 83.56, 50.25, 2.09", "inner_tab": "main", "name": "Stress liquidity exact values", "widget_type": "note"}, "tool": "add_generative_widget"}

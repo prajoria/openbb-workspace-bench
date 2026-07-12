@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "vendor_dataset_monitor_slas_latency_by_feed"}, "tool": "get_widget_data"}
-{"args": {"data": "Reviewed data from vendor_dataset_monitor_slas_latency_by_feed.", "description": "Data review note", "inner_tab": "", "name": "", "widget_type": "note"}, "tool": "add_generative_widget"}

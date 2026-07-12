@@ -1,0 +1,292 @@
+{
+  "id": "macro_advanced_chart_room",
+  "title": "Assemble the Macro Chart Room",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-advanced",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "advanced",
+    "multi-tab"
+  ],
+  "prompt": "Build a rates strategist a dependable rates and Treasury markets workspace. The workspace must cover market history for treasury futures. The workspace must cover the Treasury yield curve. The workspace must cover current 2s10s spread in bps. Leave the complete working workspace open for review. Decide how best to organize the experience and preserve unrelated work.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "rates-watch-data__curve_spread_metric",
+          "widget_id": "curve_spread_metric",
+          "fields": [
+            "curve_spread_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/curve-spread",
+          "payload": {
+            "curve_spread_metric_value": 10.25,
+            "label": "2s10s Spread",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "rates-watch-data__macro_advanced_chart",
+          "widget_id": "macro_advanced_chart",
+          "fields": [
+            "macro_advanced_chart_value"
+          ],
+          "path": "/macro-udf",
+          "payload": [
+            {
+              "macro_advanced_chart_value": 10.25
+            },
+            {
+              "macro_advanced_chart_value": 20.5
+            },
+            {
+              "macro_advanced_chart_value": 30.75
+            }
+          ]
+        },
+        {
+          "name": "rates-watch-data__yield_curve",
+          "widget_id": "yield_curve",
+          "fields": [
+            "yield_curve_value"
+          ],
+          "path": "/yield-curve",
+          "payload": [
+            {
+              "yield_curve_value": 10.25
+            },
+            {
+              "yield_curve_value": 20.5
+            },
+            {
+              "yield_curve_value": 30.75
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_curve-spread-metric",
+        "datasets": [
+          "rates-watch-data__curve_spread_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "curve_spread_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_macro-advanced-chart",
+        "datasets": [
+          "rates-watch-data__macro_advanced_chart"
+        ],
+        "widget_kind": "chart-like",
+        "must_cover_fields": [
+          "macro_advanced_chart_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {
+          "data.defaultSymbol": "ZN",
+          "data.updateFrequency": 30000
+        }
+      },
+      {
+        "name": "capability_3_yield-curve",
+        "datasets": [
+          "rates-watch-data__yield_curve"
+        ],
+        "widget_kind": "chart-like",
+        "must_cover_fields": [
+          "yield_curve_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    },
+    "polish": [
+      {
+        "code": "polish_refresh_policy",
+        "backend_name": "Rates Watch Data",
+        "widget_id": "macro_advanced_chart",
+        "path": "staleTime",
+        "expected": 900000
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Rates Watch Data",
+        "url": "http://localhost:7803",
+        "widgets_json": {
+          "macro_advanced_chart": {
+            "name": "Macro Advanced Chart",
+            "description": "TradingView chart for treasury futures.",
+            "endpoint": "/macro-udf",
+            "type": "advanced_charting",
+            "gridData": {
+              "w": 20,
+              "h": 18
+            },
+            "data": {
+              "defaultSymbol": "ZN",
+              "updateFrequency": 30000,
+              "valueField": "macro_advanced_chart_value"
+            },
+            "category": "Macro",
+            "staleTime": 900000
+          },
+          "yield_curve": {
+            "name": "Yield Curve",
+            "description": "Plotly treasury yield curve snapshot.",
+            "endpoint": "/yield-curve",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "raw": true,
+            "staleTime": 900000,
+            "data": {
+              "valueField": "yield_curve_value"
+            }
+          },
+          "curve_spread_metric": {
+            "name": "2s10s Spread",
+            "description": "Current 2s10s spread in bps.",
+            "endpoint": "/curve-spread",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            },
+            "staleTime": 900000,
+            "data": {
+              "valueField": "curve_spread_metric_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Macro Chart Room",
+            "description": "TradingView rates chart, curve, and spread.",
+            "tabs": {
+              "chart": {
+                "id": "chart",
+                "name": "Chart",
+                "layout": [
+                  {
+                    "i": "macro_advanced_chart",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 18
+                  },
+                  {
+                    "i": "curve_spread_metric",
+                    "x": 20,
+                    "y": 0,
+                    "w": 8,
+                    "h": 5
+                  }
+                ]
+              },
+              "curve": {
+                "id": "curve",
+                "name": "Curve",
+                "layout": [
+                  {
+                    "i": "yield_curve",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Macro Chart Room",
+        "dashboard_name": "Macro Chart Room Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "advanced",
+  "capability": "widget-building",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique advanced/macro_advanced_chart_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact capabilities:capability_1_curve-spread-metric:metric:curve_spread_metric_value,capability_2_macro-advanced-chart:chart-like:macro_advanced_chart_value,capability_3_yield-curve:chart-like:yield_curve_value."
+}

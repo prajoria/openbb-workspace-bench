@@ -1,1 +1,0 @@
-{"tool": "manage_backends", "args": {"apps_json": [{"description": "Vendor SLAs and breaches.", "name": "Vendor Board", "tabs": {"vendors": {"id": "vendors", "layout": [{"h": 9, "i": "vendor_sla_table", "w": 20, "x": 0, "y": 0}, {"h": 6, "i": "breach_metric", "w": 12, "x": 20, "y": 0}], "name": "Vendors"}}}], "backend_id": "backend_001", "operation": "refresh"}}

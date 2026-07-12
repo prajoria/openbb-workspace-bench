@@ -64,6 +64,9 @@ def main() -> int:
 def build_prompt(task: dict[str, Any]) -> str:
     task = task["task"]
     allowed_tools = task["allowed_tools"]
+    specification_level = task.get("specification_level")
+    if specification_level is None:
+        specification_level = task.get("level")
     origin_hints = fixture_origin_hints(task["fixtures"])
     widget_hints = fixture_widget_hints(origin_hints)
     tool_reference = {
@@ -75,7 +78,7 @@ def build_prompt(task: dict[str, Any]) -> str:
     public_task = {
         "id": task["id"],
         "title": task["title"],
-        "level": task["level"],
+        "specification_level": specification_level,
         "capability": task["capability"],
         "workflow": task["workflow"],
         "domain": task["domain"],

@@ -1,4 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "name": "Client Command Center", "operation": "update"}, "tool": "manage_dashboard"}
-{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Open Requests"}]}, "tool": "manage_navigation_bar"}
-{"args": {"dashboard_id": "dash_001", "data": "Open requests are pending. Please review and address as needed.", "tab_id": "open-requests", "widget_type": "note"}, "tool": "add_generative_widget"}

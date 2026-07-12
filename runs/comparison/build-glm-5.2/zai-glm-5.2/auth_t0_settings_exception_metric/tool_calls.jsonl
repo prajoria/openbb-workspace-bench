@@ -1,1 +1,0 @@
-{"tool": "manage_backends", "args": {"operation": "add", "name": "Execution Desk Data", "url": "http://localhost:7806", "widgets_json": {"exception_metric": {"name": "Exceptions", "description": "Open execution exceptions.", "endpoint": "/exception-count", "type": "metric", "gridData": {"w": 5, "h": 4}, "runButton": true, "refetchInterval": 45000}}}}

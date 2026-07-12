@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "widget_id": "estimate_history"}, "tool": "read_widget"}
-{"args": {"dashboard_id": "dash_001", "data_args": {"symbol": "NVDA"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}

@@ -1,0 +1,219 @@
+{
+  "id": "symbol_click_summary_app",
+  "title": "Ship Symbol Click Summary with a grouping app",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-grouping",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "grouping"
+  ],
+  "prompt": "Deliver an analyst-ready Workspace solution for earnings and estimates. The workspace must cover symbol rows that can drive a grouped app. Analysts need to inspect symbol, revision percentage. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Use `symbol` and `revision_pct` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "earnings-prep-data__symbol_click_summary",
+          "widget_id": "symbol_click_summary",
+          "fields": [
+            "revision_pct",
+            "symbol"
+          ],
+          "path": "/symbol-click-summary",
+          "payload": [
+            {
+              "revision_pct": 10.25,
+              "symbol": "AAPL"
+            },
+            {
+              "revision_pct": 20.5,
+              "symbol": "MSFT"
+            },
+            {
+              "revision_pct": 30.75,
+              "symbol": "NVDA"
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_symbol-click-summary",
+        "datasets": [
+          "earnings-prep-data__symbol_click_summary"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "revision_pct",
+          "symbol"
+        ],
+        "required_param_kinds": [
+          "ticker"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Earnings Prep Data",
+        "url": "http://localhost:7805",
+        "widgets_json": {
+          "symbol_click_summary": {
+            "name": "Symbol Click Summary",
+            "description": "Symbol rows that can drive a grouped app.",
+            "endpoint": "/symbol-click-summary",
+            "type": "table",
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "symbol",
+                    "headerName": "Symbol",
+                    "cellDataType": "text",
+                    "renderFn": "cellOnClick",
+                    "renderFnParams": {
+                      "actionType": "groupBy",
+                      "groupByParamName": "symbol"
+                    },
+                    "cellOnClick": {
+                      "actionType": "groupBy",
+                      "groupByParamName": "symbol"
+                    }
+                  },
+                  {
+                    "field": "revision_pct",
+                    "headerName": "Revision %",
+                    "cellDataType": "number",
+                    "formatterFn": "percent"
+                  }
+                ]
+              }
+            },
+            "gridData": {
+              "w": 20,
+              "h": 9
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Click Group App",
+            "description": "Clickable symbol rows in a grouped app.",
+            "tabs": {
+              "clicks": {
+                "id": "clicks",
+                "name": "Clicks",
+                "layout": [
+                  {
+                    "i": "symbol_click_summary",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Click Symbol Group",
+                "type": "param",
+                "paramName": "symbol",
+                "widgetIds": [
+                  "symbol_click_summary"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Click Group App",
+        "dashboard_name": "Click Group App Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "grouping",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "medium",
+  "business_terms": [
+    "symbol",
+    "revision_pct"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "test",
+  "novelty": "Unique grouping/symbol_click_summary_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_symbol-click-summary:table-like:revision_pct,symbol."
+}

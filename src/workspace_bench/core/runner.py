@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 from importlib import resources
+from importlib.resources.abc import Traversable
 from pathlib import Path
 
 from workspace_bench.agents import BenchAgent, build_agent
@@ -12,16 +14,32 @@ from workspace_bench.core.models import RunResult, Task, TaskSuiteManifest
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
-WORKSPACE_BENCH_V1_PACKAGE = "workspace_bench.core.task_suites.workspace_bench_v1"
-WORKSPACE_BENCH_V2_BUILD_APPS_PACKAGE = (
-    "workspace_bench.core.task_suites.workspace_bench_v2_build_openbb_apps"
-)
+CORE_TASKS_PACKAGE = "workspace_bench.core.task_suites.core"
+BUILD_APPS_TASKS_PACKAGE = "workspace_bench.core.task_suites.build_openbb_apps"
+BUILD_BACKENDS_TASKS_PACKAGE = "workspace_bench.core.task_suites.build_openbb_backends"
 TASK_SUITE_MANIFEST = "task_suite.json"
 BUILTIN_TASK_SUITES = {
-    "core": WORKSPACE_BENCH_V1_PACKAGE,
-    "build-openbb-apps": WORKSPACE_BENCH_V2_BUILD_APPS_PACKAGE,
+    "core": CORE_TASKS_PACKAGE,
+    "build-openbb-apps": BUILD_APPS_TASKS_PACKAGE,
+    "build-openbb-backends": BUILD_BACKENDS_TASKS_PACKAGE,
 }
-BUILTIN_TASK_SUITE_ORDER = ("core", "build-openbb-apps")
+BUILTIN_TASK_SUITE_ORDER = ("core", "build-openbb-apps", "build-openbb-backends")
+
+
+def _resource_task_files(root: Traversable) -> list[Traversable]:
+    """Return task JSON resources recursively, preserving filename ordering."""
+
+    files: list[Traversable] = []
+
+    def visit(directory: Traversable) -> None:
+        for child in directory.iterdir():
+            if child.is_dir():
+                visit(child)
+            elif child.name.endswith(".json") and child.name != TASK_SUITE_MANIFEST:
+                files.append(child)
+
+    visit(root)
+    return sorted(files, key=lambda path: path.name)
 
 
 class TaskRunner:
@@ -31,6 +49,10 @@ class TaskRunner:
         self.workspace = workspace or SimulatedWorkspace()
 
     def run(self, task: Task, agent: BenchAgent | str = "oracle") -> RunResult:
+        if task.code_task is not None:
+            raise ValueError(
+                "real-code tasks require run-code-task or validate, not the simulated TaskRunner"
+            )
         if isinstance(agent, str):
             agent = build_agent(agent)
 
@@ -56,15 +78,17 @@ def load_builtin_tasks(suite: str = "core") -> list[Task]:
     except KeyError as error:
         available = ", ".join(BUILTIN_TASK_SUITE_ORDER)
         raise KeyError(f"Unknown built-in task suite {suite!r}. Available: {available}") from error
-    # MultiplexedPath supports glob at runtime; typeshed's Traversable doesn't.
-    task_files = sorted(
-        path
-        for path in resources.files(package).glob("*.json")  # type: ignore[attr-defined]
-        if path.name != TASK_SUITE_MANIFEST
-    )
+    task_files = _resource_task_files(resources.files(package))
     manifest = load_builtin_task_suite_manifest(suite)
     default_split = manifest.default_split if manifest else "dev"
-    return [load_task_file(Path(path), default_split=default_split) for path in task_files]
+    return [
+        load_task_file(
+            Path(str(path)),
+            default_split=default_split,
+            task_suite=manifest,
+        )
+        for path in task_files
+    ]
 
 
 def load_builtin_task_suite_manifest(suite: str = "core") -> TaskSuiteManifest | None:
@@ -81,10 +105,15 @@ def load_builtin_task_suite_manifest(suite: str = "core") -> TaskSuiteManifest |
     return TaskSuiteManifest.from_dict(payload)
 
 
-def load_task_file(path: Path, default_split: str = "dev") -> Task:
+def load_task_file(
+    path: Path,
+    default_split: str = "dev",
+    task_suite: TaskSuiteManifest | None = None,
+) -> Task:
     with path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
-    return Task.from_dict(payload, source_path=path, default_split=default_split)
+    task = Task.from_dict(payload, source_path=path, default_split=default_split)
+    return replace(task, suite=task_suite) if task_suite else task
 
 
 def load_task_suite_manifest(path: Path) -> TaskSuiteManifest | None:
@@ -106,20 +135,40 @@ def load_task_directory(path: Path) -> list[Task]:
     manifest = load_task_suite_manifest(path)
     default_split = manifest.default_split if manifest else "dev"
     task_paths = sorted(
-        candidate for candidate in path.glob("*.json") if candidate.name != TASK_SUITE_MANIFEST
+        (candidate for candidate in path.rglob("*.json") if candidate.name != TASK_SUITE_MANIFEST),
+        key=lambda candidate: candidate.name,
     )
     return [
-        load_task_file(task_path, default_split=default_split)
+        load_task_file(
+            task_path,
+            default_split=default_split,
+            task_suite=manifest,
+        )
         for task_path in task_paths
     ]
 
 
-def find_task(task_id: str, suite: str | None = None) -> Task:
-    """Find a bundled task by id, searching every bundled suite by default."""
+def find_task(task_id: str, suite: str | None = None, family: str | None = None) -> Task:
+    """Find a task by local id or ``suite/family/task`` reference."""
+
+    parts = task_id.split("/")
+    if len(parts) == 3:
+        qualified_suite, qualified_family, task_id = parts
+        if suite and suite != qualified_suite:
+            raise KeyError(f"Task reference selects suite {qualified_suite!r}, not {suite!r}")
+        suite, family = qualified_suite, qualified_family
+    elif len(parts) != 1:
+        raise KeyError(f"Invalid task reference {task_id!r}; expected suite/family/task")
 
     suites = (suite,) if suite else BUILTIN_TASK_SUITE_ORDER
+    matches: list[Task] = []
     for name in suites:
         for task in load_builtin_tasks(name):
-            if task.id == task_id:
-                return task
+            if task.id == task_id and (family is None or task.family == family):
+                matches.append(task)
+    if len(matches) == 1:
+        return matches[0]
+    if len(matches) > 1:
+        candidates = ", ".join(task.qualified_id for task in matches)
+        raise KeyError(f"Ambiguous task {task_id!r}; use one of: {candidates}")
     raise KeyError(f"Unknown task {task_id!r}")

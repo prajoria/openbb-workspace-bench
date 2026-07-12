@@ -1,1 +1,0 @@
-{"tool": "manage_backends", "args": {"name": "Rates Watch Data", "operation": "add", "url": "http://localhost:7803", "widgets_json": {"yield_curve": {"description": "Plotly treasury yield curve snapshot.", "endpoint": "/yield-curve", "gridData": {"h": 9, "w": 20}, "name": "Yield Curve", "raw": true, "staleTime": 900000, "type": "chart"}}}}

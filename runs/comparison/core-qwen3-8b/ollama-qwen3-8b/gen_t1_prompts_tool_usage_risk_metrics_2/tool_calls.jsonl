@@ -1,4 +1,0 @@
-{"args": {"name": "workspace_tool_usage"}, "tool": "get_workspace_prompt"}
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "get_widget_schema"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "create_widget"}

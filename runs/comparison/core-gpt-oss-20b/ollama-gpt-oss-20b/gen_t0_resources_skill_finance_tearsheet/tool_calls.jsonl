@@ -1,2 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-tearsheet"}, "tool": "read_workspace_resource"}
-{"args": {"data": "This tear sheet includes a valuation analysis.", "description": "Valuation Note", "widget_type": "note"}, "tool": "add_generative_widget"}

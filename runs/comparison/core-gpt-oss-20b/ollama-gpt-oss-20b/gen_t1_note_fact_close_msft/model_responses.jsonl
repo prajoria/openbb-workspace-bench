@@ -1,3 +1,0 @@
-{"action": {"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "done": false, "tool": "get_widget_data"}, "content": "{\"done\": false, \"tool\": \"get_widget_data\", \"args\": {\"origin\": \"Bench Equities\", \"widget_id\": \"price_performance\"}}", "turn": 1}
-{"action": {"args": {"data": "MSFT closed at $196.1 on 2026-01-15.", "description": "Latest close for MSFT", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"widget_type\":\"note\",\"data\":\"MSFT closed at $196.1 on 2026-01-15.\",\"description\":\"Latest close for MSFT\"}}", "turn": 2}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

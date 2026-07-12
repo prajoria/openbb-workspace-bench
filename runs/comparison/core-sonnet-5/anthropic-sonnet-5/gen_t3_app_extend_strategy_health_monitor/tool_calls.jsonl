@@ -1,7 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "Strategy Health Desk", "operation": "instantiate", "template_id": "strategy-health-monitor"}, "tool": "manage_apps"}
-{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "watchlist"}, "tool": "navigate_workspace"}
-{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "strategy_health_monitor_watchlist_catalyst_calendar"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_002", "data_args": {"period": "YTD", "strategy": "Global Equities"}, "origin": "Bench Stark Enterprise", "ui_args": {"tab_id": "watchlist"}, "widget_id": "strategy_health_monitor_watchlist_catalyst_calendar"}, "tool": "create_widget"}

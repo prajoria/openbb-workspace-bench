@@ -1,0 +1,159 @@
+{
+  "id": "rates_advanced_chart",
+  "title": "Build the Rates Advanced Chart advanced widget",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-advanced",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "advanced"
+  ],
+  "prompt": "Register the backend and place the specified widget on the active dashboard. Use 'Rates Watch Data' at http://localhost:7803. Implement the live or advanced interaction correctly. The experience needs Rates Advanced Chart (`rates_advanced_chart`, advanced_charting) using `/rates-udf` for tradingView advanced charting for the 10Y yield future; default symbol `US10Y`; update frequency `30000`. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Rates Watch Data",
+        "widget_id": "rates_advanced_chart",
+        "expect": {
+          "type": "advanced_charting",
+          "endpoint": "/rates-udf",
+          "data.defaultSymbol": "US10Y",
+          "data.updateFrequency": 30000
+        },
+        "params_include": [],
+        "columns_include": []
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2,
+      "must_call_schema_before_create": true
+    },
+    "required_widgets": [
+      {
+        "origin": "Rates Watch Data",
+        "widget_id": "rates_advanced_chart",
+        "min_count": 1
+      }
+    ],
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 0,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "rates-watch-data__rates_advanced_chart",
+          "widget_id": "rates_advanced_chart",
+          "fields": [
+            "category",
+            "value"
+          ],
+          "path": "/rates-udf",
+          "payload": [
+            {
+              "category": "Primary",
+              "value": 10.25
+            },
+            {
+              "category": "Review",
+              "value": 20.5
+            },
+            {
+              "category": "Approved",
+              "value": 30.75
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Rates Watch Data",
+        "url": "http://localhost:7803",
+        "widgets_json": {
+          "rates_advanced_chart": {
+            "name": "Rates Advanced Chart",
+            "description": "TradingView advanced charting for the 10Y yield future.",
+            "endpoint": "/rates-udf",
+            "type": "advanced_charting",
+            "gridData": {
+              "w": 20,
+              "h": 18
+            },
+            "data": {
+              "defaultSymbol": "US10Y",
+              "updateFrequency": 30000
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Rates Watch Data"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Rates Watch Data",
+        "widget_id": "rates_advanced_chart"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Rates Watch Data",
+        "widget_id": "rates_advanced_chart"
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "advanced",
+  "capability": "widget-building",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "business_terms": [],
+  "limits": {
+    "max_turns": 7
+  },
+  "split": "validation",
+  "novelty": "Unique advanced/rates_advanced_chart building exercise using create_widget, get_widget_schema, list_available_widgets, manage_backends with checks missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/rates_advanced_chart; widgets:Rates Watch Data/rates_advanced_chart@*."
+}

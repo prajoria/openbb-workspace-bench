@@ -1,0 +1,172 @@
+{
+  "id": "access_review_form",
+  "title": "Build the Access Review Form widget",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-forms",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "forms"
+  ],
+  "prompt": "Register the backend and place the specified widget on the active dashboard. Use 'Surveillance Data' at http://localhost:7807. Make the submission workflow functional. The experience needs Access Review Form (`access_review_form`, markdown) using `/access-review` for capture an access review decision; user controls: Access Review (`review`, form) with User, Approved, Save. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Surveillance Data",
+        "widget_id": "access_review_form",
+        "expect": {
+          "type": "markdown",
+          "endpoint": "/access-review"
+        },
+        "params_include": [
+          {
+            "paramName": "review",
+            "type": "form"
+          }
+        ],
+        "columns_include": []
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2,
+      "must_call_schema_before_create": true
+    },
+    "required_widgets": [
+      {
+        "origin": "Surveillance Data",
+        "widget_id": "access_review_form",
+        "min_count": 1
+      }
+    ],
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 0,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "surveillance-data__access_review_form",
+          "widget_id": "access_review_form",
+          "fields": [],
+          "path": "/access-review",
+          "payload": "Access Review Form fixture-backed runtime summary.",
+          "form_endpoint": "/access-review-submit"
+        }
+      ],
+      "pinned_paths": false
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "access_review_form": {
+            "name": "Access Review Form",
+            "description": "Capture an access review decision.",
+            "endpoint": "/access-review",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "review",
+                "type": "form",
+                "label": "Access Review",
+                "endpoint": "/access-review-submit",
+                "method": "POST",
+                "inputParams": [
+                  {
+                    "paramName": "user_name",
+                    "type": "text",
+                    "label": "User",
+                    "value": "analyst1"
+                  },
+                  {
+                    "paramName": "approved",
+                    "type": "boolean",
+                    "label": "Approved",
+                    "value": false
+                  },
+                  {
+                    "paramName": "save",
+                    "type": "button",
+                    "label": "Save"
+                  }
+                ]
+              }
+            ],
+            "category": "Workflow Forms"
+          }
+        }
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Surveillance Data"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Surveillance Data",
+        "widget_id": "access_review_form"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Surveillance Data",
+        "widget_id": "access_review_form"
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "forms",
+  "capability": "widget-building",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "business_terms": [],
+  "limits": {
+    "max_turns": 7
+  },
+  "split": "train",
+  "novelty": "Unique forms/access_review_form building exercise using create_widget, get_widget_schema, list_available_widgets, manage_backends with checks missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/access_review_form; widgets:Surveillance Data/access_review_form@*."
+}

@@ -1,5 +1,0 @@
-{"args": {"dashboard_id": "Research Board", "name": "Research Command Center", "operation": "update"}, "tool": "manage_dashboard"}
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "name": "Research Command Center", "operation": "update"}, "tool": "manage_dashboard"}
-{"args": {"dashboard_id": "dash_001", "operation": "create", "tabs": [{"name": "Draft Reviews"}]}, "tool": "manage_navigation_bar"}
-{"args": {"data": "Draft reviews are pending.", "inner_tab": "draft-reviews", "name": "Draft Reviews Note", "widget_type": "note"}, "tool": "add_generative_widget"}

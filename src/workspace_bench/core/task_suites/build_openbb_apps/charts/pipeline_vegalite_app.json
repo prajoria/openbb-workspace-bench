@@ -1,0 +1,181 @@
+{
+  "id": "pipeline_vegalite_app",
+  "title": "Ship Pipeline Mix (Vega-Lite) as the Pipeline Vega App",
+  "workflow": "healthcare-catalyst-review",
+  "subdomain": "healthcare",
+  "tags": [
+    "family-charts",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "charts"
+  ],
+  "prompt": "Create a usable clinical catalysts and pipelines workflow for a healthcare-research analyst. The workspace must cover distribution of pipeline phase mix. Leave the complete working workspace open for review. The source contract must retain `phase`; decide the remaining implementation and preserve unrelated workspace state.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "healthcare-research-data__pipeline_vegalite",
+          "widget_id": "pipeline_vegalite",
+          "fields": [
+            "pipeline_vegalite_value"
+          ],
+          "path": "/pipeline-vegalite",
+          "payload": [
+            {
+              "pipeline_vegalite_value": 10.25
+            },
+            {
+              "pipeline_vegalite_value": 20.5
+            },
+            {
+              "pipeline_vegalite_value": 30.75
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_pipeline-vegalite",
+        "datasets": [
+          "healthcare-research-data__pipeline_vegalite"
+        ],
+        "widget_kind": "chart-like",
+        "must_cover_fields": [
+          "pipeline_vegalite_value"
+        ],
+        "required_param_kinds": [
+          "endpoint"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Healthcare Research Data",
+        "url": "http://localhost:7808",
+        "widgets_json": {
+          "pipeline_vegalite": {
+            "name": "Pipeline Mix (Vega-Lite)",
+            "description": "Vega-Lite bar spec of pipeline phase mix.",
+            "endpoint": "/pipeline-vegalite",
+            "type": "chart-vegalite",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "phase",
+                "type": "endpoint",
+                "label": "Phase",
+                "value": "all",
+                "optionsEndpoint": "/phase-options"
+              }
+            ],
+            "data": {
+              "valueField": "pipeline_vegalite_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Pipeline Vega App",
+            "description": "Vega-Lite pipeline view.",
+            "tabs": {
+              "pipeline": {
+                "id": "pipeline",
+                "name": "Pipeline",
+                "layout": [
+                  {
+                    "i": "pipeline_vegalite",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Pipeline Vega App",
+        "dashboard_name": "Pipeline Vega App Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "charts",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "phase"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "validation",
+  "novelty": "Unique charts/pipeline_vegalite_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_pipeline-vegalite:chart-like:pipeline_vegalite_value."
+}

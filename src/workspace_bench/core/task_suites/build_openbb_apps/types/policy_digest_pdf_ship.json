@@ -1,0 +1,368 @@
+{
+  "id": "policy_digest_pdf_ship",
+  "title": "Ship, open, and configure the Policy Digest Live app",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-types",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "types",
+    "orchestration"
+  ],
+  "prompt": "A surveillance analyst needs a decision-ready Workspace for cases and compliance alerts. The workspace must cover current surveillance policy digest. The workspace must cover open surveillance alerts. The workspace must cover notes for one surveillance case. Analysts need to inspect alert ID, desk, severity, age days. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Policy Digest Live', 'policy digest', 'Surveillance Data', 'C-2099'. Choose an effective architecture and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Policy Digest Live",
+          "policy digest",
+          "Surveillance Data",
+          "C-2099"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "surveillance-data__alert_queue",
+          "widget_id": "alert_queue",
+          "fields": [
+            "age_days",
+            "alert_id",
+            "desk",
+            "severity"
+          ],
+          "path": "/alert-queue",
+          "payload": [
+            {
+              "age_days": 10.25,
+              "alert_id": "alert_id-1",
+              "desk": "Primary",
+              "severity": "Primary"
+            },
+            {
+              "age_days": 20.5,
+              "alert_id": "alert_id-2",
+              "desk": "Review",
+              "severity": "Review"
+            },
+            {
+              "age_days": 30.75,
+              "alert_id": "alert_id-3",
+              "desk": "Approved",
+              "severity": "Approved"
+            }
+          ]
+        },
+        {
+          "name": "surveillance-data__case_notes",
+          "widget_id": "case_notes",
+          "fields": [
+            "case_notes_value"
+          ],
+          "path": "/case-notes",
+          "payload": "Case Notes fixture-backed runtime summary."
+        },
+        {
+          "name": "surveillance-data__policy_digest_pdf",
+          "widget_id": "policy_digest_pdf",
+          "fields": [
+            "policy_digest_pdf_value",
+            "title",
+            "url"
+          ],
+          "path": "/policy-digest-pdf",
+          "payload": {
+            "policy_digest_pdf_value": 10.25,
+            "title": "Policy Digest PDF",
+            "url": "https://fixtures.workspace-bench.invalid/policy_digest_pdf"
+          }
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_alert-queue",
+        "datasets": [
+          "surveillance-data__alert_queue"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "age_days",
+          "alert_id",
+          "desk",
+          "severity"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_policy-digest-pdf",
+        "datasets": [
+          "surveillance-data__policy_digest_pdf"
+        ],
+        "widget_kind": "pdf",
+        "must_cover_fields": [
+          "policy_digest_pdf_value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "policy_digest_pdf": {
+            "name": "Policy Digest PDF",
+            "description": "Current surveillance policy digest.",
+            "endpoint": "/policy-digest-pdf",
+            "type": "pdf",
+            "gridData": {
+              "w": 16,
+              "h": 14
+            },
+            "params": [
+              {
+                "paramName": "case_scope",
+                "type": "text",
+                "label": "Case scope",
+                "value": "C-1042",
+                "description": "Case bundle for the policy review."
+              }
+            ],
+            "source": "/policy/digest.pdf",
+            "staleTime": 900000,
+            "category": "Surveillance",
+            "data": {
+              "valueField": "policy_digest_pdf_value"
+            }
+          },
+          "alert_queue": {
+            "name": "Alert Queue",
+            "description": "Open surveillance alerts.",
+            "endpoint": "/alert-queue",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "severity",
+                "type": "text",
+                "label": "Severity",
+                "value": "high",
+                "options": [
+                  {
+                    "label": "High",
+                    "value": "high"
+                  },
+                  {
+                    "label": "Medium",
+                    "value": "medium"
+                  },
+                  {
+                    "label": "Low",
+                    "value": "low"
+                  }
+                ]
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "alert_id",
+                    "headerName": "Alert",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "desk",
+                    "headerName": "Desk",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "severity",
+                    "headerName": "Severity",
+                    "cellDataType": "text",
+                    "renderFn": "titleCase"
+                  },
+                  {
+                    "field": "age_days",
+                    "headerName": "Age (d)",
+                    "cellDataType": "number",
+                    "formatterFn": "int"
+                  }
+                ]
+              }
+            },
+            "staleTime": 900000
+          },
+          "case_notes": {
+            "name": "Case Notes",
+            "description": "Notes for one surveillance case.",
+            "endpoint": "/case-notes",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "case_id",
+                "type": "text",
+                "label": "Case",
+                "value": "C-1042",
+                "description": "Case identifier."
+              }
+            ],
+            "staleTime": 900000,
+            "data": {
+              "valueField": "case_notes_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Policy Digest Live",
+            "description": "Policy PDF, alert queue, and case notes.",
+            "tabs": {
+              "policy": {
+                "id": "policy",
+                "name": "Policy",
+                "layout": [
+                  {
+                    "i": "policy_digest_pdf",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 12
+                  }
+                ]
+              },
+              "signals": {
+                "id": "signals",
+                "name": "Signals",
+                "layout": [
+                  {
+                    "i": "alert_queue",
+                    "x": 0,
+                    "y": 0,
+                    "w": 8,
+                    "h": 5
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Policy Digest Live",
+        "dashboard_name": "Policy Digest Live Live",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "policy_digest_pdf",
+        "data_args": {
+          "case_scope": "C-2099"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Policy Digest Live",
+        "data": "Policy Digest Live is live from Surveillance Data: policy digest ready. Configured case_scope=C-2099."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "types",
+  "capability": "widget-building",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [
+    "Policy Digest Live",
+    "policy digest",
+    "Surveillance Data",
+    "C-2099"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique types/policy_digest_pdf_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_alert-queue:table-like:age_days,alert_id,desk,severity,capability_2_policy-digest-pdf:pdf:policy_digest_pdf_value; generated:note@*:Policy Digest Live,policy digest."
+}

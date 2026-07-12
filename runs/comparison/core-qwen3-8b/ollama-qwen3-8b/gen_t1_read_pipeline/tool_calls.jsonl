@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "client_360_flows_pipeline_by_stage"}, "tool": "get_widget_data"}
-{"args": {"data": "<p>Cite widget: client_360_flows_pipeline_by_stage. Reviewed the data.</p>", "name": "Data Review Note", "tab_id": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

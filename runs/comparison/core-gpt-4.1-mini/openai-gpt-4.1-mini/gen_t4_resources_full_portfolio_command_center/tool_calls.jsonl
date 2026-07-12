@@ -1,6 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {"app_name": "portfolio-command-center", "backend_id": "backend_001", "dashboard_name": "PM Resource Command", "operation": "instantiate"}, "tool": "manage_apps"}
-{"args": {"app_name": "Portfolio Command Center", "backend_id": "backend_001", "dashboard_name": "PM Resource Command", "operation": "instantiate"}, "tool": "manage_apps"}
-{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "holdings"}, "tool": "navigate_workspace"}
-{"args": {"dashboard_id": "dash_002", "origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_holdings_sector_exposure"}, "tool": "create_widget"}
-{"args": {"data": "This widget shows the sector exposure of the portfolio holdings, providing insight into the distribution of investments across different sectors. It is a key resource for understanding portfolio risk and allocation.", "inner_tab": "holdings", "name": "Sector Exposure Note", "widget_type": "note"}, "tool": "add_generative_widget"}

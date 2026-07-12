@@ -1,0 +1,280 @@
+{
+  "id": "trial_param_review",
+  "title": "Assemble the Trial Param Review app with shared parameters",
+  "workflow": "healthcare-catalyst-review",
+  "subdomain": "healthcare",
+  "tags": [
+    "family-params",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "params",
+    "multi-tab"
+  ],
+  "prompt": "Build a working Workspace experience for a healthcare-research analyst covering clinical catalysts and pipelines. The workspace must cover upcoming clinical trial readouts. The workspace must cover pipeline distribution by phase. Analysts need to inspect ticker, phase, readout date. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Keep these source-contract anchors: `ticker` and `phase`. Choose the rest of the architecture and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "healthcare-research-data__pipeline_chart",
+          "widget_id": "pipeline_chart",
+          "fields": [
+            "pipeline_chart_value"
+          ],
+          "path": "/pipeline-by-phase",
+          "payload": [
+            {
+              "pipeline_chart_value": 10.25
+            },
+            {
+              "pipeline_chart_value": 20.5
+            },
+            {
+              "pipeline_chart_value": 30.75
+            }
+          ]
+        },
+        {
+          "name": "healthcare-research-data__trial_catalysts",
+          "widget_id": "trial_catalysts",
+          "fields": [
+            "phase",
+            "readout_date",
+            "ticker"
+          ],
+          "path": "/trial-catalysts",
+          "payload": [
+            {
+              "phase": "Primary",
+              "readout_date": "2026-01-13",
+              "ticker": "AAPL"
+            },
+            {
+              "phase": "Review",
+              "readout_date": "2026-01-14",
+              "ticker": "MSFT"
+            },
+            {
+              "phase": "Approved",
+              "readout_date": "2026-01-15",
+              "ticker": "NVDA"
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_pipeline-chart",
+        "datasets": [
+          "healthcare-research-data__pipeline_chart"
+        ],
+        "widget_kind": "chart-like",
+        "must_cover_fields": [
+          "pipeline_chart_value"
+        ],
+        "required_param_kinds": [
+          "ticker"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_trial-catalysts",
+        "datasets": [
+          "healthcare-research-data__trial_catalysts"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "phase",
+          "readout_date",
+          "ticker"
+        ],
+        "required_param_kinds": [
+          "ticker"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Healthcare Research Data",
+        "url": "http://localhost:7808",
+        "widgets_json": {
+          "trial_catalysts": {
+            "name": "Trial Catalysts",
+            "description": "Upcoming clinical trial readouts.",
+            "endpoint": "/trial-catalysts",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "ticker",
+                "type": "endpoint",
+                "label": "Ticker",
+                "value": "PFE",
+                "optionsEndpoint": "/tickers"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "ticker",
+                    "headerName": "Ticker",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "phase",
+                    "headerName": "Phase",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "readout_date",
+                    "headerName": "Readout",
+                    "cellDataType": "dateString"
+                  }
+                ]
+              }
+            }
+          },
+          "pipeline_chart": {
+            "name": "Pipeline by Phase",
+            "description": "Plotly pipeline distribution by phase.",
+            "endpoint": "/pipeline-by-phase",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "raw": true,
+            "params": [
+              {
+                "paramName": "ticker",
+                "type": "endpoint",
+                "label": "Ticker",
+                "value": "PFE",
+                "optionsEndpoint": "/tickers"
+              }
+            ],
+            "data": {
+              "valueField": "pipeline_chart_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Trial Param Review",
+            "description": "Ticker-filtered catalysts and pipeline mix.",
+            "tabs": {
+              "catalysts": {
+                "id": "catalysts",
+                "name": "Catalysts",
+                "layout": [
+                  {
+                    "i": "trial_catalysts",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "pipeline": {
+                "id": "pipeline",
+                "name": "Pipeline",
+                "layout": [
+                  {
+                    "i": "pipeline_chart",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Trial Param Review",
+        "dashboard_name": "Trial Param Review Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "params",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "ticker",
+    "phase"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "validation",
+  "novelty": "Unique params/trial_param_review building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_pipeline-chart:chart-like:pipeline_chart_value,capability_2_trial-catalysts:table-like:phase,readout_date,ticker."
+}

@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {"series": "DGS10"}, "widget_uuid": "widget_002"}, "tool": "update_widget"}
-{"args": {"data": "Repaired macro_timeseries widget (widget_uuid widget_002): series changed from DGS2 to DGS10. Companion widget yield_curve (widget_uuid widget_001) was kept unchanged.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

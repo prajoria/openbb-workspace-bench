@@ -1,4 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"widget_uuid": "widget_002"}, "tool": "delete_widget"}
-{"args": {"data_args": {"series": "DGS2"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
-{"args": {"data": "The duplicate DGS10 macro timeseries widget has been removed and the remaining widget has been repaired to display DGS2 instead of DGS10.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

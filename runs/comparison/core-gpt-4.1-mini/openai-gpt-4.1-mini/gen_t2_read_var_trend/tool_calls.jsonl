@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_dashboard_var_trend"}, "tool": "get_widget_data"}
-{"args": {"data": "The widget with ID risk_exposure_monitor_dashboard_var_trend shows the field var_usd for the fund 'Flagship Long/Short' and period 'YTD' as -222500.", "name": "VaR USD Value Note", "tab_id": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {"sector": "Technology"}, "widget_id": "reporting_factsheet_studio_factsheets_risk_stats"}, "tool": "update_widget"}
-{"args": {"dashboard_id": "dash_001", "data": "Sector updated to Technology as part of the repair process.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

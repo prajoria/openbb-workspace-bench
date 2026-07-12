@@ -1,5 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"app_name": "Crypto Research Dashboard", "backend_id": "backend_001", "dashboard_name": "Digital Assets Desk", "operation": "instantiate"}, "tool": "manage_apps"}
-{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "market"}, "tool": "navigate_workspace"}
-{"args": {"data": "This note highlights key market metrics and token information relevant to the digital assets market.", "inner_tab": "market", "name": "Market Metrics and Token Note", "widget_type": "note"}, "tool": "add_generative_widget"}

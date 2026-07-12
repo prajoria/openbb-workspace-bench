@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_data"}
-{"args": {"data": "Gross margin: 0.462; Net cash: 54.0", "inner_tab": "overview", "widget_type": "note"}, "tool": "add_generative_widget"}

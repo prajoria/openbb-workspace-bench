@@ -1,0 +1,245 @@
+{
+  "id": "vol_commentary_room",
+  "title": "Assemble the Vol Settings Room configured app",
+  "workflow": "risk-review",
+  "subdomain": "volatility",
+  "tags": [
+    "family-settings",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "settings",
+    "multi-tab"
+  ],
+  "prompt": "Build a working Workspace experience for a volatility analyst covering volatility and derivatives. The workspace must cover morning volatility commentary. The workspace must cover current volatility regime score. Leave the complete working workspace open for review. Keep these source-contract anchors: `desk`. Choose the rest of the architecture and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "vol-desk-data__vol_commentary",
+          "widget_id": "vol_commentary",
+          "fields": [
+            "vol_commentary_value"
+          ],
+          "path": "/vol-commentary",
+          "payload": "Vol Commentary fixture-backed runtime summary."
+        },
+        {
+          "name": "vol-desk-data__vol_regime_metric",
+          "widget_id": "vol_regime_metric",
+          "fields": [
+            "label",
+            "value",
+            "vol_regime_metric_value"
+          ],
+          "path": "/vol-regime",
+          "payload": {
+            "label": "Vol Regime",
+            "value": 42.5,
+            "vol_regime_metric_value": 10.25
+          }
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_vol-commentary",
+        "datasets": [
+          "vol-desk-data__vol_commentary"
+        ],
+        "widget_kind": "markdown",
+        "must_cover_fields": [
+          "vol_commentary_value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_vol-regime-metric",
+        "datasets": [
+          "vol-desk-data__vol_regime_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "vol_regime_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    },
+    "polish": [
+      {
+        "code": "polish_refresh_policy",
+        "backend_name": "Vol Desk Data",
+        "widget_id": "vol_commentary",
+        "path": "staleTime",
+        "expected": 900000
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Vol Desk Data",
+        "url": "http://localhost:7801",
+        "widgets_json": {
+          "vol_commentary": {
+            "name": "Vol Commentary",
+            "description": "Morning volatility commentary.",
+            "endpoint": "/vol-commentary",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "desk",
+                "type": "text",
+                "label": "Desk",
+                "value": "index",
+                "options": [
+                  {
+                    "label": "Index",
+                    "value": "index"
+                  },
+                  {
+                    "label": "Single Stock",
+                    "value": "single"
+                  }
+                ]
+              }
+            ],
+            "staleTime": 900000,
+            "data": {
+              "valueField": "vol_commentary_value"
+            }
+          },
+          "vol_regime_metric": {
+            "name": "Vol Regime",
+            "description": "Current volatility regime score.",
+            "endpoint": "/vol-regime",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            },
+            "staleTime": 900000,
+            "data": {
+              "valueField": "vol_regime_metric_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Vol Settings Room",
+            "description": "Cached commentary and regime.",
+            "tabs": {
+              "commentary": {
+                "id": "commentary",
+                "name": "Commentary",
+                "layout": [
+                  {
+                    "i": "vol_commentary",
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 8
+                  }
+                ]
+              },
+              "regime": {
+                "id": "regime",
+                "name": "Regime",
+                "layout": [
+                  {
+                    "i": "vol_regime_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 6,
+                    "h": 4
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Vol Settings Room",
+        "dashboard_name": "Vol Settings Room Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "settings",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "desk"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "test",
+  "novelty": "Unique settings/vol_commentary_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact capabilities:capability_1_vol-commentary:markdown:vol_commentary_value,capability_2_vol-regime-metric:metric:vol_regime_metric_value."
+}

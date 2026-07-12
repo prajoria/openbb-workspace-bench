@@ -1,0 +1,299 @@
+{
+  "id": "chains_highchart_room",
+  "title": "Assemble the Chain Chart Room chart app",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "crypto",
+  "tags": [
+    "family-charts",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "charts",
+    "multi-tab"
+  ],
+  "prompt": "Deliver an analyst-ready Workspace solution for chain activity and liquidity. The workspace must cover comparisons of chain TVL. The workspace must cover current TVL of all chains from the desk aggregator. Analysts need to inspect name, TVL USD, change one-day. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Use `chain_scope` and `name` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "chain-tvl-data__chains_highchart",
+          "widget_id": "chains_highchart",
+          "fields": [
+            "chains_highchart_value"
+          ],
+          "path": "/chains-highchart",
+          "payload": [
+            {
+              "chains_highchart_value": 10.25
+            },
+            {
+              "chains_highchart_value": 20.5
+            },
+            {
+              "chains_highchart_value": 30.75
+            }
+          ]
+        },
+        {
+          "name": "chain-tvl-data__chains_table",
+          "widget_id": "chains_table",
+          "fields": [
+            "change_1d",
+            "name",
+            "tvl_usd"
+          ],
+          "path": "/chains-table",
+          "payload": [
+            {
+              "change_1d": 10.25,
+              "name": "name-1",
+              "tvl_usd": 10.25
+            },
+            {
+              "change_1d": 20.5,
+              "name": "name-2",
+              "tvl_usd": 20.5
+            },
+            {
+              "change_1d": 30.75,
+              "name": "name-3",
+              "tvl_usd": 30.75
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_chains-highchart",
+        "datasets": [
+          "chain-tvl-data__chains_highchart"
+        ],
+        "widget_kind": "chart-like",
+        "must_cover_fields": [
+          "chains_highchart_value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_chains-table",
+        "datasets": [
+          "chain-tvl-data__chains_table"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "change_1d",
+          "name",
+          "tvl_usd"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      }
+    ],
+    "capability_connections": [
+      {
+        "source": "capability_1_chains-highchart",
+        "target": "capability_2_chains-table",
+        "param_kind": "text"
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Chain TVL Data",
+        "url": "http://localhost:7802",
+        "widgets_json": {
+          "chains_highchart": {
+            "name": "TVL by Chain (Highcharts)",
+            "description": "Highcharts rendering of chain TVL.",
+            "endpoint": "/chains-highchart",
+            "type": "chart-highcharts",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "chain_scope",
+                "type": "text",
+                "label": "Chain scope",
+                "value": "Ethereum",
+                "description": "Chain reviewed across chart and table."
+              }
+            ],
+            "data": {
+              "valueField": "chains_highchart_value"
+            }
+          },
+          "chains_table": {
+            "name": "Top Chains by TVL",
+            "description": "Current TVL of all chains from the desk aggregator.",
+            "endpoint": "/chains-table",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "name",
+                    "headerName": "Chain",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "tvl_usd",
+                    "headerName": "TVL ($)",
+                    "cellDataType": "number",
+                    "formatterFn": "int"
+                  },
+                  {
+                    "field": "change_1d",
+                    "headerName": "1d Change",
+                    "cellDataType": "number",
+                    "formatterFn": "percent",
+                    "renderFn": "greenRed"
+                  }
+                ]
+              }
+            },
+            "params": [
+              {
+                "paramName": "chain_scope",
+                "type": "text",
+                "label": "Chain scope",
+                "value": "Ethereum",
+                "description": "Chain reviewed across chart and table."
+              }
+            ]
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Chain Chart Room",
+            "description": "Highcharts chain view and TVL table.",
+            "tabs": {
+              "chart": {
+                "id": "chart",
+                "name": "Chart",
+                "layout": [
+                  {
+                    "i": "chains_highchart",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "table": {
+                "id": "table",
+                "name": "Table",
+                "layout": [
+                  {
+                    "i": "chains_table",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Chain Sync",
+                "type": "param",
+                "paramName": "chain_scope",
+                "widgetIds": [
+                  "chains_highchart",
+                  "chains_table"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Chain Chart Room",
+        "dashboard_name": "Chain Chart Room Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "charts",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "chain_scope",
+    "name"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique charts/chains_highchart_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Chain TVL Data; artifact capabilities:capability_1_chains-highchart:chart-like:chains_highchart_value,capability_2_chains-table:table-like:change_1d,name,tvl_usd."
+}

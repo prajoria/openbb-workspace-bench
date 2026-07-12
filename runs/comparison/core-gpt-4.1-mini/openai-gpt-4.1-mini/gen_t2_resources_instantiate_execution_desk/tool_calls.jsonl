@@ -1,2 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {"backend_id": "backend_001", "dashboard_name": "Execution Resource Dashboard", "operation": "instantiate", "template_id": "execution-desk"}, "tool": "manage_apps"}

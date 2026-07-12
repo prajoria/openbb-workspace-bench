@@ -1,0 +1,295 @@
+{
+  "id": "modify_trial_catalysts",
+  "title": "Modify Trial Catalysts without dropping siblings",
+  "workflow": "healthcare-catalyst-review",
+  "subdomain": "healthcare",
+  "tags": [
+    "family-extend",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "refresh",
+    "extend",
+    "composed"
+  ],
+  "prompt": "Deliver an analyst-ready Workspace solution for clinical catalysts and pipelines. The workspace must cover upcoming clinical trial readouts. The workspace must cover catalysts in the next 30 days. Analysts need to inspect ticker, phase, readout date. An analyst can filter the analysis by ticker. Use `ticker` and `phase` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
+  "fixtures": {},
+  "initial_state": {
+    "custom_backends": [
+      {
+        "name": "Healthcare Research Data",
+        "url": "http://localhost:7808",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "trial_catalysts": {
+            "name": "Trial Catalysts",
+            "description": "Upcoming clinical trial readouts.",
+            "endpoint": "/trial-catalysts",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "ticker",
+                "type": "dropdownz",
+                "label": "Ticker",
+                "value": "PFE",
+                "optionsEndpoint": "/tickers"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "ticker",
+                    "headerName": "Ticker",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "phase",
+                    "headerName": "Phase",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "readout_date",
+                    "headerName": "Readout",
+                    "cellDataType": "dateString"
+                  }
+                ]
+              }
+            }
+          },
+          "catalyst_metric": {
+            "name": "Catalysts 30d",
+            "description": "Catalysts in the next 30 days.",
+            "endpoint": "/catalyst-count",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            },
+            "data": {
+              "valueField": "catalyst_metric_value"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2,
+      "must_call_schema_before_create": true
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 0,
+      "max_custom_backend_delta": 0
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "healthcare-research-data__catalyst_metric",
+          "widget_id": "catalyst_metric",
+          "fields": [
+            "catalyst_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/catalyst-count",
+          "payload": {
+            "catalyst_metric_value": 10.25,
+            "label": "Catalysts 30d",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "healthcare-research-data__trial_catalysts",
+          "widget_id": "trial_catalysts",
+          "fields": [
+            "phase",
+            "readout_date",
+            "ticker"
+          ],
+          "path": "/trial-catalysts",
+          "payload": [
+            {
+              "phase": "Primary",
+              "readout_date": "2026-01-13",
+              "ticker": "AAPL"
+            },
+            {
+              "phase": "Review",
+              "readout_date": "2026-01-14",
+              "ticker": "MSFT"
+            },
+            {
+              "phase": "Approved",
+              "readout_date": "2026-01-15",
+              "ticker": "NVDA"
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_trial-catalysts",
+        "datasets": [
+          "healthcare-research-data__trial_catalysts"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "phase",
+          "readout_date",
+          "ticker"
+        ],
+        "required_param_kinds": [
+          "ticker"
+        ],
+        "required_config": {}
+      }
+    ],
+    "polish": [
+      {
+        "code": "polish_refresh_policy",
+        "backend_name": "Healthcare Research Data",
+        "widget_id": "trial_catalysts",
+        "path": "staleTime",
+        "expected": 600000
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "trial_catalysts": {
+            "name": "Trial Catalysts",
+            "description": "Upcoming clinical trial readouts.",
+            "endpoint": "/trial-catalysts",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "ticker",
+                "type": "endpoint",
+                "label": "Ticker",
+                "value": "PFE",
+                "optionsEndpoint": "/tickers"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "ticker",
+                    "headerName": "Ticker",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "phase",
+                    "headerName": "Phase",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "readout_date",
+                    "headerName": "Readout",
+                    "cellDataType": "dateString"
+                  }
+                ]
+              }
+            },
+            "staleTime": 600000
+          },
+          "catalyst_metric": {
+            "name": "Catalysts 30d",
+            "description": "Catalysts in the next 30 days.",
+            "endpoint": "/catalyst-count",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            },
+            "data": {
+              "valueField": "catalyst_metric_value"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Healthcare Research Data"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Healthcare Research Data",
+        "widget_id": "trial_catalysts"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Healthcare Research Data",
+        "widget_id": "trial_catalysts"
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "repair",
+  "family": "extend",
+  "capability": "app-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "ticker",
+    "phase"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "validation",
+  "novelty": "Unique extend/modify_trial_catalysts building exercise using create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks capability, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_trial-catalysts:table-like:phase,readout_date,ticker."
+}

@@ -1,4 +1,0 @@
-{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\":false,\"tool\":\"get_workspace_snapshot\",\"args\":{}}", "turn": 1}
-{"action": {"args": {"dashboard_id": "dash_001", "h": 12, "tab_id": "", "w": 40, "widget_uuid": "widget_001", "x": 0, "y": 0}, "done": false, "tool": "update_widget_layout"}, "content": "{\"done\":false,\"tool\":\"update_widget_layout\",\"args\":{\"dashboard_id\":\"dash_001\",\"widget_uuid\":\"widget_001\",\"tab_id\":\"\",\"x\":0,\"y\":0,\"w\":40,\"h\":12}}", "turn": 2}
-{"action": {"args": {"dashboard_id": "dash_001", "h": 10, "tab_id": "", "w": 40, "widget_uuid": "widget_002", "x": 0, "y": 12}, "done": false, "tool": "update_widget_layout"}, "content": "{\"done\":false,\"tool\":\"update_widget_layout\",\"args\":{\"dashboard_id\":\"dash_001\",\"widget_uuid\":\"widget_002\",\"tab_id\":\"\",\"x\":0,\"y\":12,\"w\":40,\"h\":10}}", "turn": 3}
-{"action": {"done": true}, "content": "{\"done\":true}", "turn": 4}

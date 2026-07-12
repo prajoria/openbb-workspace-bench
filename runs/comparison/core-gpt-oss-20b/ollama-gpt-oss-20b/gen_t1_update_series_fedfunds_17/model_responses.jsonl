@@ -1,2 +1,0 @@
-{"action": {"args": {"data_args": {"series": "FEDFUNDS"}, "widget_id": "macro_timeseries"}, "done": false, "tool": "update_widget"}, "content": "{\"done\": false, \"tool\": \"update_widget\", \"args\": {\"widget_id\": \"macro_timeseries\", \"data_args\": {\"series\": \"FEDFUNDS\"}}}", "turn": 1}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 2}

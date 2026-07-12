@@ -1,2 +1,0 @@
-{"args": {"task_requests": [{"assigned_agent_id": "stark-enterprise", "assigned_holder_url": "Bench Stark Enterprise", "description": "Triage vendor dataset incidents and review the incident log for the Delegation Board.", "id": "triage-analyst"}, {"assigned_agent_id": "stark-enterprise", "assigned_holder_url": "Bench Stark Enterprise", "description": "Monitor vendor SLA status and review the incident log for the Delegation Board.", "id": "sla-analyst"}]}, "tool": "assign_tasks_to_agents"}
-{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}

@@ -1,0 +1,334 @@
+{
+  "id": "tvl_ship",
+  "title": "Ship, open, and configure the Chain Live app",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "crypto",
+  "tags": [
+    "family-apps",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "orchestration"
+  ],
+  "prompt": "A digital-assets analyst needs a decision-ready Workspace for chain activity and liquidity. The workspace must cover current TVL of all chains from the desk aggregator. The workspace must cover current gas price snapshot. The workspace must cover comparison of chain TVL. Analysts need to inspect name, TVL USD, change one-day. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Chain Live', 'chains', 'Chain TVL Data', 'Solana'. Choose an effective architecture and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Chain Live",
+          "chains",
+          "Chain TVL Data",
+          "Solana"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "chain-tvl-data__chains_chart",
+          "widget_id": "chains_chart",
+          "fields": [
+            "chains_chart_value"
+          ],
+          "path": "/chains-chart",
+          "payload": [
+            {
+              "chains_chart_value": 10.25
+            },
+            {
+              "chains_chart_value": 20.5
+            },
+            {
+              "chains_chart_value": 30.75
+            }
+          ]
+        },
+        {
+          "name": "chain-tvl-data__chains_table",
+          "widget_id": "chains_table",
+          "fields": [
+            "change_1d",
+            "name",
+            "tvl_usd"
+          ],
+          "path": "/chains-table",
+          "payload": [
+            {
+              "change_1d": 10.25,
+              "name": "name-1",
+              "tvl_usd": 10.25
+            },
+            {
+              "change_1d": 20.5,
+              "name": "name-2",
+              "tvl_usd": 20.5
+            },
+            {
+              "change_1d": 30.75,
+              "name": "name-3",
+              "tvl_usd": 30.75
+            }
+          ]
+        },
+        {
+          "name": "chain-tvl-data__gas_metric",
+          "widget_id": "gas_metric",
+          "fields": [
+            "gas_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/gas-now",
+          "payload": {
+            "gas_metric_value": 10.25,
+            "label": "Gas Now",
+            "value": 42.5
+          }
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_chains-table",
+        "datasets": [
+          "chain-tvl-data__chains_table"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "change_1d",
+          "name",
+          "tvl_usd"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_gas-metric",
+        "datasets": [
+          "chain-tvl-data__gas_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "gas_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Chain TVL Data",
+        "url": "http://localhost:7802",
+        "widgets_json": {
+          "chains_table": {
+            "name": "Top Chains by TVL",
+            "description": "Current TVL of all chains from the desk aggregator.",
+            "endpoint": "/chains-table",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "name",
+                    "headerName": "Chain",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "tvl_usd",
+                    "headerName": "TVL ($)",
+                    "cellDataType": "number",
+                    "formatterFn": "int"
+                  },
+                  {
+                    "field": "change_1d",
+                    "headerName": "1d Change",
+                    "cellDataType": "number",
+                    "formatterFn": "percent",
+                    "renderFn": "greenRed"
+                  }
+                ]
+              }
+            },
+            "params": [
+              {
+                "paramName": "chain",
+                "type": "text",
+                "label": "Chain",
+                "value": "Ethereum",
+                "description": "Chain in focus."
+              }
+            ],
+            "staleTime": 900000
+          },
+          "gas_metric": {
+            "name": "Gas Now",
+            "description": "Current gas price snapshot.",
+            "endpoint": "/gas-now",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "staleTime": 900000,
+            "data": {
+              "valueField": "gas_metric_value"
+            }
+          },
+          "chains_chart": {
+            "name": "TVL by Chain",
+            "description": "Plotly bar chart of chain TVL.",
+            "endpoint": "/chains-chart",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "raw": true,
+            "staleTime": 900000,
+            "data": {
+              "valueField": "chains_chart_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Chain Live",
+            "description": "TVL and gas.",
+            "tabs": {
+              "chains": {
+                "id": "chains",
+                "name": "Chains",
+                "layout": [
+                  {
+                    "i": "chains_table",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "posture": {
+                "id": "posture",
+                "name": "Posture",
+                "layout": [
+                  {
+                    "i": "gas_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Chain Live",
+        "dashboard_name": "Chain Live Board",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "chains_table",
+        "data_args": {
+          "chain": "Solana"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Chain Live",
+        "data": "Chain Live shipped from Chain TVL Data: chains live. Configured chain=Solana."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "apps",
+  "capability": "app-building",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [
+    "Chain Live",
+    "chains",
+    "Chain TVL Data",
+    "Solana"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "validation",
+  "novelty": "Unique apps/tvl_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Chain TVL Data; artifact capabilities:capability_1_chains-table:table-like:change_1d,name,tvl_usd,capability_2_gas-metric:metric:gas_metric_value; generated:note@*:Chain Live,chains."
+}

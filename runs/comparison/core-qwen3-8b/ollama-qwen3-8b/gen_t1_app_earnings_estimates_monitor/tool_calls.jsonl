@@ -1,4 +1,0 @@
-{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "instantiate", "template_id": "Earnings & Estimates Monitor"}, "tool": "manage_apps"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"backend_id": "backend_001", "dashboard_name": "Earnings Season Monitor", "operation": "instantiate", "template_id": "earnings-estimates-monitor"}, "tool": "manage_apps"}

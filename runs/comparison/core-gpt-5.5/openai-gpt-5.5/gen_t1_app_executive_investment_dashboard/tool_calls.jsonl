@@ -1,3 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "Executive Morning Brief", "operation": "instantiate", "template_id": "executive-investment-dashboard"}, "tool": "manage_apps"}

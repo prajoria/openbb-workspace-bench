@@ -1,2 +1,0 @@
-{"args": {"task_requests": [{"assigned_agent_id": "stress-analyst", "assigned_holder_url": "https://example.com", "description": "risk review work", "id": "stress-analyst"}, {"assigned_agent_id": "limits-analyst", "assigned_holder_url": "https://example.com", "description": "risk review work", "id": "limits-analyst"}]}, "tool": "assign_tasks_to_agents"}
-{"args": {"data": "Workstreams: stress-analyst, limits-analyst.", "inner_tab": "overview", "name": "Risk Review Workstreams", "widget_type": "note"}, "tool": "add_generative_widget"}

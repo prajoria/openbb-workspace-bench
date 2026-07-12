@@ -1,2 +1,0 @@
-{"tool": "get_workspace_snapshot", "args": {}}
-{"tool": "manage_backends", "args": {"operation": "add", "name": "Vendor SLA Data", "url": "http://localhost:7804", "widgets_json": {"sla_newsfeed": {"name": "Vendor Notices", "description": "Vendor incident notices feed.", "endpoint": "/vendor-notices", "type": "newsfeed", "gridData": {"w": 12, "h": 10}}}, "apps_json": [{"name": "Vendor Notices", "description": "Vendor incident notices.", "tabs": {"notices": {"id": "notices", "name": "Notices", "layout": [{"i": "sla_newsfeed", "x": 0, "y": 0, "w": 12, "h": 10}]}}}]}}

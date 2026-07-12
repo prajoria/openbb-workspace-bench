@@ -9,11 +9,10 @@ from typing import Iterable
 from workspace_bench.exports.schema import ROLLOUT_SCHEMA_VERSION, RolloutRecord
 from workspace_bench.core.models import (
     BENCHMARK_NAME,
-    BENCHMARK_RELEASE_ID,
-    BENCHMARK_VERSION,
     JsonDict,
     TaskSuiteManifest,
 )
+from workspace_bench.core.provenance import git_provenance
 
 
 def base_export_metadata(*, exported_at: str | None = None) -> JsonDict:
@@ -21,8 +20,7 @@ def base_export_metadata(*, exported_at: str | None = None) -> JsonDict:
 
     return {
         "benchmark_name": BENCHMARK_NAME,
-        "benchmark_version": BENCHMARK_VERSION,
-        "benchmark_release_id": BENCHMARK_RELEASE_ID,
+        **git_provenance(),
         "export_schema_version": ROLLOUT_SCHEMA_VERSION,
         "exported_at": exported_at or _utc_now(),
     }
@@ -44,8 +42,7 @@ def annotate_rollouts(
         if task_suite is not None:
             metadata["task_suite"] = {
                 "suite_id": task_suite.suite_id,
-                "release_id": task_suite.release_id,
-                "version": task_suite.version,
+                "content_sha256": task_suite.content_sha256,
                 "visibility": task_suite.visibility,
                 "default_split": task_suite.default_split,
             }

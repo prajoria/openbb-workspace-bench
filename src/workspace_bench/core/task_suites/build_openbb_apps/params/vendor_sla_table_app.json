@@ -1,0 +1,234 @@
+{
+  "id": "vendor_sla_table_app",
+  "title": "Ship Vendor SLA Status as the Vendor Filter Board app",
+  "workflow": "vendor-sla-monitoring",
+  "subdomain": "operations",
+  "tags": [
+    "family-params",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "params"
+  ],
+  "prompt": "Create a usable vendor service levels workflow for a vendor-operations manager. The workspace must cover vendor SLA state with breach flags. Analysts need to inspect vendor, status, latency milliseconds, breach. Leave the complete working workspace open for review. The source contract must retain `status` and `vendor`; decide the remaining implementation and preserve unrelated workspace state.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "vendor-sla-data__vendor_sla_table",
+          "widget_id": "vendor_sla_table",
+          "fields": [
+            "breach",
+            "latency_ms",
+            "status",
+            "vendor"
+          ],
+          "path": "/vendor-sla",
+          "payload": [
+            {
+              "breach": true,
+              "latency_ms": 10.25,
+              "status": "Primary",
+              "vendor": "vendor-1"
+            },
+            {
+              "breach": false,
+              "latency_ms": 20.5,
+              "status": "Review",
+              "vendor": "vendor-2"
+            },
+            {
+              "breach": true,
+              "latency_ms": 30.75,
+              "status": "Approved",
+              "vendor": "vendor-3"
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_vendor-sla-table",
+        "datasets": [
+          "vendor-sla-data__vendor_sla_table"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "breach",
+          "latency_ms",
+          "status",
+          "vendor"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Vendor SLA Data",
+        "url": "http://localhost:7804",
+        "widgets_json": {
+          "vendor_sla_table": {
+            "name": "Vendor SLA Status",
+            "description": "Vendor SLA state with breach flags.",
+            "endpoint": "/vendor-sla",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "status",
+                "type": "text",
+                "label": "Status",
+                "value": "Open",
+                "options": [
+                  {
+                    "label": "Open",
+                    "value": "Open"
+                  },
+                  {
+                    "label": "Escalated",
+                    "value": "Escalated"
+                  },
+                  {
+                    "label": "Resolved",
+                    "value": "Resolved"
+                  }
+                ]
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "vendor",
+                    "headerName": "Vendor",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "status",
+                    "headerName": "Status",
+                    "cellDataType": "text",
+                    "renderFn": "titleCase"
+                  },
+                  {
+                    "field": "latency_ms",
+                    "headerName": "Latency (ms)",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "breach",
+                    "headerName": "Breach",
+                    "cellDataType": "boolean"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Vendor Filter Board",
+            "description": "Status-filtered vendor SLA table.",
+            "tabs": {
+              "vendors": {
+                "id": "vendors",
+                "name": "Vendors",
+                "layout": [
+                  {
+                    "i": "vendor_sla_table",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Vendor Filter Board",
+        "dashboard_name": "Vendor Filter Board Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "params",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "medium",
+  "business_terms": [
+    "status",
+    "vendor"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "test",
+  "novelty": "Unique params/vendor_sla_table_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Vendor SLA Data; artifact capabilities:capability_1_vendor-sla-table:table-like:breach,latency_ms,status,vendor."
+}

@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Stark Enterprise", "param_name": "sector", "widget_id": "client_360_meeting_prep_relationship_metrics"}, "tool": "get_params_options"}
-{"args": {"data_args": {"sector": "Consumer Staples"}, "origin": "Bench Stark Enterprise", "widget_id": "client_360_meeting_prep_relationship_metrics"}, "tool": "create_widget"}

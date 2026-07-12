@@ -1,3 +1,0 @@
-{"args": {"slug": "finance-tearsheet"}, "tool": "get_skill_content"}
-{"args": {"operation": "add_tabs", "tabs": [{"name": "Tearsheet"}]}, "tool": "manage_navigation_bar"}
-{"args": {"data": "Tearsheet workflow: gather price action, fundamentals, valuation, catalysts, risks, ownership, and a short investment conclusion.", "inner_tab": "tearsheet", "name": "Tearsheet Workflow Note", "widget_type": "note"}, "tool": "add_generative_widget"}

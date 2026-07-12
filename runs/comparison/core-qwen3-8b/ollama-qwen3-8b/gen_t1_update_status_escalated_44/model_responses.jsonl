@@ -1,2 +1,0 @@
-{"action": {"args": {"data_args": {"status": "Escalated"}, "widget_id": "execution_desk_exceptions_rejected_orders"}, "done": false, "tool": "update_widget"}, "content": "{\"done\": false, \"tool\": \"update_widget\", \"args\": {\"widget_id\": \"execution_desk_exceptions_rejected_orders\", \"data_args\": {\"status\": \"Escalated\"}}}", "turn": 1}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 2}

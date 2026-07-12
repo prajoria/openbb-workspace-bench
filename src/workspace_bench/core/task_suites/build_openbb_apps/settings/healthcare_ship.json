@@ -1,0 +1,356 @@
+{
+  "id": "healthcare_ship",
+  "title": "Ship, open, and configure the Catalyst Config Live app",
+  "workflow": "healthcare-catalyst-review",
+  "subdomain": "healthcare",
+  "tags": [
+    "family-settings",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "settings",
+    "orchestration"
+  ],
+  "prompt": "A healthcare-research analyst needs a decision-ready Workspace for clinical catalysts and pipelines. The workspace must cover catalysts in the next 30 days. The workspace must cover upcoming clinical trial readouts. The workspace must cover pipeline distribution by phase. Analysts need to inspect ticker, phase, readout date. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Catalyst Config Live', 'Catalysts category', 'Healthcare Research Data', '60d', 'ticker'. Choose an effective architecture and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Catalyst Config Live",
+          "Catalysts category",
+          "Healthcare Research Data",
+          "60d"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "healthcare-research-data__catalyst_metric",
+          "widget_id": "catalyst_metric",
+          "fields": [
+            "catalyst_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/catalyst-count",
+          "payload": {
+            "catalyst_metric_value": 10.25,
+            "label": "Catalysts 30d",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "healthcare-research-data__pipeline_chart",
+          "widget_id": "pipeline_chart",
+          "fields": [
+            "pipeline_chart_value"
+          ],
+          "path": "/pipeline-by-phase",
+          "payload": [
+            {
+              "pipeline_chart_value": 10.25
+            },
+            {
+              "pipeline_chart_value": 20.5
+            },
+            {
+              "pipeline_chart_value": 30.75
+            }
+          ]
+        },
+        {
+          "name": "healthcare-research-data__trial_catalysts",
+          "widget_id": "trial_catalysts",
+          "fields": [
+            "phase",
+            "readout_date",
+            "ticker"
+          ],
+          "path": "/trial-catalysts",
+          "payload": [
+            {
+              "phase": "Primary",
+              "readout_date": "2026-01-13",
+              "ticker": "AAPL"
+            },
+            {
+              "phase": "Review",
+              "readout_date": "2026-01-14",
+              "ticker": "MSFT"
+            },
+            {
+              "phase": "Approved",
+              "readout_date": "2026-01-15",
+              "ticker": "NVDA"
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_catalyst-metric",
+        "datasets": [
+          "healthcare-research-data__catalyst_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "catalyst_metric_value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_trial-catalysts",
+        "datasets": [
+          "healthcare-research-data__trial_catalysts"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "phase",
+          "readout_date",
+          "ticker"
+        ],
+        "required_param_kinds": [
+          "ticker"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    },
+    "polish": [
+      {
+        "code": "polish_refresh_policy",
+        "backend_name": "Healthcare Research Data",
+        "widget_id": "catalyst_metric",
+        "path": "staleTime",
+        "expected": 900000
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Healthcare Research Data",
+        "url": "http://localhost:7808",
+        "widgets_json": {
+          "catalyst_metric": {
+            "name": "Catalysts 30d",
+            "description": "Catalysts in the next 30 days.",
+            "endpoint": "/catalyst-count",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            },
+            "category": "Catalysts",
+            "staleTime": 900000,
+            "params": [
+              {
+                "paramName": "window",
+                "type": "text",
+                "label": "Window",
+                "value": "30d",
+                "description": "Catalyst window in focus."
+              }
+            ],
+            "data": {
+              "valueField": "catalyst_metric_value"
+            }
+          },
+          "trial_catalysts": {
+            "name": "Trial Catalysts",
+            "description": "Upcoming clinical trial readouts.",
+            "endpoint": "/trial-catalysts",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "ticker",
+                "type": "endpoint",
+                "label": "Ticker",
+                "value": "PFE",
+                "optionsEndpoint": "/tickers"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "ticker",
+                    "headerName": "Ticker",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "phase",
+                    "headerName": "Phase",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "readout_date",
+                    "headerName": "Readout",
+                    "cellDataType": "dateString"
+                  }
+                ]
+              }
+            },
+            "category": "Catalysts",
+            "staleTime": 900000
+          },
+          "pipeline_chart": {
+            "name": "Pipeline by Phase",
+            "description": "Plotly pipeline distribution by phase.",
+            "endpoint": "/pipeline-by-phase",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "raw": true,
+            "category": "Catalysts",
+            "staleTime": 900000,
+            "data": {
+              "valueField": "pipeline_chart_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Catalyst Config Live",
+            "description": "Configured catalysts and trial table.",
+            "tabs": {
+              "catalysts": {
+                "id": "catalysts",
+                "name": "Catalysts",
+                "layout": [
+                  {
+                    "i": "catalyst_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 8,
+                    "h": 5
+                  }
+                ]
+              },
+              "posture": {
+                "id": "posture",
+                "name": "Posture",
+                "layout": [
+                  {
+                    "i": "trial_catalysts",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Catalyst Config Live",
+        "dashboard_name": "Catalyst Config Live Board",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "catalyst_metric",
+        "data_args": {
+          "window": "60d"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Catalyst Config Live",
+        "data": "Catalyst Config Live shipped from Healthcare Research Data: Catalysts category. Configured window=60d."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "settings",
+  "capability": "widget-building",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [
+    "Catalyst Config Live",
+    "Catalysts category",
+    "Healthcare Research Data",
+    "60d",
+    "ticker"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique settings/healthcare_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_catalyst-metric:metric:catalyst_metric_value,capability_2_trial-catalysts:table-like:phase,readout_date,ticker; generated:note@*:Catalyst Config Live,Catalysts category."
+}

@@ -1,0 +1,131 @@
+{
+  "id": "repair_risk_fund",
+  "title": "Repair Risk Snapshot",
+  "capability": "workspace-repair",
+  "workflow": "risk-review",
+  "subdomain": "risk",
+  "tags": [
+    "family-update",
+    "repair",
+    "update-widget"
+  ],
+  "prompt": "This Flagship Long/Short risk dashboard has its snapshot configured for Global Macro. Repair the widget to Flagship Long/Short; then add a note saying what was repaired and mentioning both values.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Repair Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot",
+          "data_args": {
+            "fund": "Global Macro"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 12
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot",
+        "data_args": {
+          "fund": "Flagship Long/Short"
+        },
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot",
+        "data_args": {
+          "fund": "Global Macro"
+        },
+        "min_count": 0,
+        "max_count": 0
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Global Macro",
+          "Flagship Long/Short",
+          "repaired"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "read_widget",
+      "args": {
+        "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot"
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "fund": "Flagship Long/Short"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Repair Note",
+        "data": "Repaired risk_exposure_monitor_dashboard_risk_snapshot from Global Macro to Flagship Long/Short."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "repair",
+  "family": "update",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 7
+  },
+  "split": "train",
+  "novelty": "Unique update/repair_risk_fund exercise using add_generative_widget, get_workspace_snapshot, read_widget, update_widget with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/risk_exposure_monitor_dashboard_risk_snapshot@*; generated:note@*:Global Macro,Flagship Long/Short."
+}

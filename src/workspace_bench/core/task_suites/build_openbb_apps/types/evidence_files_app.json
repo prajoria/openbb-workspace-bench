@@ -1,0 +1,181 @@
+{
+  "id": "evidence_files_app",
+  "title": "Ship Evidence Files as the Evidence Browser app",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-types",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "types"
+  ],
+  "prompt": "Create a usable cases and compliance alerts workflow for a surveillance analyst. The workspace must cover browse case evidence documents. Leave the complete working workspace open for review. The source contract must retain `file`; decide the remaining implementation and preserve unrelated workspace state.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "surveillance-data__evidence_files",
+          "widget_id": "evidence_files",
+          "fields": [
+            "evidence_files_value",
+            "title",
+            "url"
+          ],
+          "path": "/evidence-files",
+          "payload": {
+            "evidence_files_value": 10.25,
+            "title": "Evidence Files",
+            "url": "https://fixtures.workspace-bench.invalid/evidence_files"
+          }
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_evidence-files",
+        "datasets": [
+          "surveillance-data__evidence_files"
+        ],
+        "widget_kind": "multi-file",
+        "must_cover_fields": [
+          "evidence_files_value"
+        ],
+        "required_param_kinds": [
+          "endpoint"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "evidence_files": {
+            "name": "Evidence Files",
+            "description": "Browse case evidence documents.",
+            "endpoint": "/evidence-files",
+            "type": "multi_file_viewer",
+            "gridData": {
+              "w": 20,
+              "h": 14
+            },
+            "params": [
+              {
+                "paramName": "file",
+                "type": "endpoint",
+                "label": "File",
+                "optionsEndpoint": "/evidence-file-options",
+                "roles": [
+                  "fileSelector"
+                ],
+                "multiSelect": true,
+                "value": []
+              }
+            ],
+            "data": {
+              "valueField": "evidence_files_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Evidence Browser",
+            "description": "Case evidence files.",
+            "tabs": {
+              "evidence": {
+                "id": "evidence",
+                "name": "Evidence",
+                "layout": [
+                  {
+                    "i": "evidence_files",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 14
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Evidence Browser",
+        "dashboard_name": "Evidence Browser Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "types",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "file"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "validation",
+  "novelty": "Unique types/evidence_files_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_evidence-files:multi-file:evidence_files_value."
+}

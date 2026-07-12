@@ -1,8 +1,0 @@
-{
-  "suite_id": "workspace-bench-v2-build-openbb-apps",
-  "release_id": "workspace-bench-v2-build-openbb-apps",
-  "version": "2.0.0",
-  "visibility": "public",
-  "default_split": "train",
-  "description": "WorkspaceBench build-openbb-apps collection: the agent writes valid widgets.json / apps.json payloads for custom backends. Families mirror the onboarding reference app (types, settings, params, forms, aggrid, charts, advanced, grouping, apps, extend) x the v3 ladder (t0 schema, t1 ship-as-app, t2 composed requirements, t3 multi-widget app, t4 orchestrate), 4 per cell, plus a 12-task e2e capstone at t4 (212 total). Certified oracle-passes / no-op-fails; validation mirrors the real workspace frontend."
-}

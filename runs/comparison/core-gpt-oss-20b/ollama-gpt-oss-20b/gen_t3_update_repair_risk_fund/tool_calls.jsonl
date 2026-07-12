@@ -1,2 +1,0 @@
-{"args": {"data_args": {"fund": "Flagship Long/Short"}, "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot"}, "tool": "update_widget"}
-{"args": {"data": "Repaired Risk Snapshot widget: changed fund from Global Macro to Flagship Long/Short.", "description": "Repair note", "widget_type": "note"}, "tool": "add_generative_widget"}

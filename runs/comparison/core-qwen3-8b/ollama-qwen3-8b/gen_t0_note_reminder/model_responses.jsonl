@@ -1,2 +1,0 @@
-{"action": {"args": {"data": "Attestations are due Friday and trading in restricted names is blocked.", "name": "Compliance Reminder", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"widget_type\": \"note\", \"name\": \"Compliance Reminder\", \"data\": \"Attestations are due Friday and trading in restricted names is blocked.\"}}", "turn": 1}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 2}

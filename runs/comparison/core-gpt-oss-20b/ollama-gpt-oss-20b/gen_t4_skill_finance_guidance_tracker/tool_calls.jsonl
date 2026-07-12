@@ -1,8 +1,0 @@
-{"args": {"slug": "finance-guidance-tracker"}, "tool": "get_skill_content"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_schema"}
-{"args": {"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "done": false, "tool": "create_widget"}, "tool": "add_generative_widget"}
-{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
-{"args": {"cmd": ["bash", "-lc", "echo test"]}, "tool": "container.exec"}
-{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_data"}
-{"args": {"data": "NVDA Estimate History: The EPS estimate for 2026Q1 is 1.18.", "description": "Note citing key value from Estimate History widget.", "widget_type": "note"}, "tool": "add_generative_widget"}

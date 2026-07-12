@@ -1,3 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-guidance-tracker"}, "tool": "read_workspace_resource"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "executive_investment_dashboard_risk_limit_utilization"}, "tool": "create_widget"}
-{"args": {"data": "Evidence gaps identified in the Finance Guidance Tracker: management claims require further validation, and some assumptions lack supporting data. Please review the guidance comparisons and update this note with specific gaps.", "widget_type": "note"}, "tool": "add_generative_widget"}

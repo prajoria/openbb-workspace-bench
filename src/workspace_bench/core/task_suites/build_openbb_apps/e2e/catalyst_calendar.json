@@ -1,0 +1,312 @@
+{
+  "id": "catalyst_calendar",
+  "title": "Ship, open, and configure Catalyst Calendar",
+  "workflow": "healthcare-catalyst-review",
+  "subdomain": "healthcare",
+  "tags": [
+    "family-e2e",
+    "cell12",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "e2e",
+    "orchestration"
+  ],
+  "prompt": "Build a healthcare-research analyst a dependable clinical catalysts and pipelines workspace. The workspace must cover healthcare catalysts and impact scores. The workspace must cover catalysts in the next 30 days. Analysts need to inspect ticker, event, event date, impact score. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Catalyst Calendar', 'Healthcare Research Data', 'PFE', 'ticker'. Decide how best to organize the experience and preserve unrelated work.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Catalyst Calendar",
+          "catalyst calendar",
+          "Healthcare Research Data",
+          "PFE"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "healthcare-research-data__catalyst_calendar_table",
+          "widget_id": "catalyst_calendar_table",
+          "fields": [
+            "event",
+            "event_date",
+            "impact_score",
+            "ticker"
+          ],
+          "path": "/catalyst-calendar-table",
+          "payload": [
+            {
+              "event": "event-1",
+              "event_date": "2026-01-13",
+              "impact_score": 10.25,
+              "ticker": "AAPL"
+            },
+            {
+              "event": "event-2",
+              "event_date": "2026-01-14",
+              "impact_score": 20.5,
+              "ticker": "MSFT"
+            },
+            {
+              "event": "event-3",
+              "event_date": "2026-01-15",
+              "impact_score": 30.75,
+              "ticker": "NVDA"
+            }
+          ]
+        },
+        {
+          "name": "healthcare-research-data__catalyst_metric",
+          "widget_id": "catalyst_metric",
+          "fields": [
+            "catalyst_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/catalyst-count",
+          "payload": {
+            "catalyst_metric_value": 10.25,
+            "label": "Catalysts 30d",
+            "value": 42.5
+          }
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_catalyst-calendar-table",
+        "datasets": [
+          "healthcare-research-data__catalyst_calendar_table"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "event",
+          "event_date",
+          "impact_score",
+          "ticker"
+        ],
+        "required_param_kinds": [
+          "ticker"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_catalyst-metric",
+        "datasets": [
+          "healthcare-research-data__catalyst_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "catalyst_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    },
+    "business_names": [
+      {
+        "scope": "dashboard",
+        "contains": "Catalyst Calendar"
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Healthcare Research Data",
+        "url": "http://localhost:7808",
+        "widgets_json": {
+          "catalyst_calendar_table": {
+            "name": "Catalyst Calendar Table",
+            "description": "Healthcare catalysts and impact scores.",
+            "endpoint": "/catalyst-calendar-table",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "ticker",
+                    "headerName": "Ticker",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "event",
+                    "headerName": "Event",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "event_date",
+                    "headerName": "Event Date",
+                    "cellDataType": "dateString"
+                  },
+                  {
+                    "field": "impact_score",
+                    "headerName": "Impact Score",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            },
+            "params": [
+              {
+                "paramName": "ticker",
+                "type": "text",
+                "label": "Ticker",
+                "value": "MRNA",
+                "description": "Catalyst Calendar Table focus field."
+              }
+            ]
+          },
+          "catalyst_metric": {
+            "name": "Catalysts 30d",
+            "description": "Catalysts in the next 30 days.",
+            "endpoint": "/catalyst-count",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            },
+            "data": {
+              "valueField": "catalyst_metric_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Catalyst Calendar",
+            "description": "Catalyst calendar and 30-day count.",
+            "tabs": {
+              "calendar": {
+                "id": "calendar",
+                "name": "Calendar",
+                "layout": [
+                  {
+                    "i": "catalyst_calendar_table",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "count": {
+                "id": "count",
+                "name": "Count",
+                "layout": [
+                  {
+                    "i": "catalyst_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Catalyst Calendar",
+        "dashboard_name": "Catalyst Calendar Live",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "catalyst_calendar_table",
+        "data_args": {
+          "ticker": "PFE"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Catalyst Calendar",
+        "data": "Catalyst Calendar is live from Healthcare Research Data: catalyst calendar ready. Configured ticker=PFE."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "e2e",
+  "capability": "backend-integration",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [
+    "Catalyst Calendar",
+    "Healthcare Research Data",
+    "PFE",
+    "ticker"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique e2e/catalyst_calendar building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_catalyst-calendar-table:table-like:event,event_date,impact_score,ticker,capability_2_catalyst-metric:metric:catalyst_metric_value; generated:note@*:Catalyst Calendar,catalyst calendar."
+}

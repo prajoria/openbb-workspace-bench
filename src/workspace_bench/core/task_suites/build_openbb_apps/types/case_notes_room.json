@@ -1,0 +1,261 @@
+{
+  "id": "case_notes_room",
+  "title": "Assemble the Case Research Room content app",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-types",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "types",
+    "multi-tab"
+  ],
+  "prompt": "Build a working Workspace experience for a surveillance analyst covering cases and compliance alerts. The workspace must cover notes for one surveillance case. The workspace must cover latest surveillance policy digest. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Keep these source-contract anchors: `case_id` and `case_scope`. Choose the rest of the architecture and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "surveillance-data__case_notes",
+          "widget_id": "case_notes",
+          "fields": [
+            "case_notes_value"
+          ],
+          "path": "/case-notes",
+          "payload": "Case Notes fixture-backed runtime summary."
+        },
+        {
+          "name": "surveillance-data__policy_pdf",
+          "widget_id": "policy_pdf",
+          "fields": [
+            "policy_pdf_value",
+            "title",
+            "url"
+          ],
+          "path": "/policy-digest",
+          "payload": {
+            "policy_pdf_value": 10.25,
+            "title": "Policy Digest",
+            "url": "https://fixtures.workspace-bench.invalid/policy_pdf"
+          }
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_case-notes",
+        "datasets": [
+          "surveillance-data__case_notes"
+        ],
+        "widget_kind": "markdown",
+        "must_cover_fields": [
+          "case_notes_value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_policy-pdf",
+        "datasets": [
+          "surveillance-data__policy_pdf"
+        ],
+        "widget_kind": "pdf",
+        "must_cover_fields": [
+          "policy_pdf_value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      }
+    ],
+    "capability_connections": [
+      {
+        "source": "capability_1_case-notes",
+        "target": "capability_2_policy-pdf",
+        "param_kind": "text"
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "case_notes": {
+            "name": "Case Notes",
+            "description": "Notes for one surveillance case.",
+            "endpoint": "/case-notes",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "case_id",
+                "type": "text",
+                "label": "Case",
+                "value": "C-1042",
+                "description": "Case identifier."
+              },
+              {
+                "paramName": "case_scope",
+                "type": "text",
+                "label": "Case scope",
+                "value": "C-1042",
+                "description": "Case bundle reviewed across the room."
+              }
+            ],
+            "data": {
+              "valueField": "case_notes_value"
+            }
+          },
+          "policy_pdf": {
+            "name": "Policy Digest",
+            "description": "Latest surveillance policy digest.",
+            "endpoint": "/policy-digest",
+            "type": "pdf",
+            "gridData": {
+              "w": 16,
+              "h": 14
+            },
+            "params": [
+              {
+                "paramName": "case_scope",
+                "type": "text",
+                "label": "Case scope",
+                "value": "C-1042",
+                "description": "Case bundle reviewed across the room."
+              }
+            ],
+            "data": {
+              "valueField": "policy_pdf_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Case Research Room",
+            "description": "Case notes and policy digest.",
+            "tabs": {
+              "notes": {
+                "id": "notes",
+                "name": "Notes",
+                "layout": [
+                  {
+                    "i": "case_notes",
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 8
+                  }
+                ]
+              },
+              "policy": {
+                "id": "policy",
+                "name": "Policy",
+                "layout": [
+                  {
+                    "i": "policy_pdf",
+                    "x": 0,
+                    "y": 0,
+                    "w": 16,
+                    "h": 14
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Case Sync",
+                "type": "param",
+                "paramName": "case_scope",
+                "widgetIds": [
+                  "case_notes",
+                  "policy_pdf"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Case Research Room",
+        "dashboard_name": "Case Research Room Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "types",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "case_id",
+    "case_scope"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique types/case_notes_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_case-notes:markdown:case_notes_value,capability_2_policy-pdf:pdf:policy_pdf_value."
+}

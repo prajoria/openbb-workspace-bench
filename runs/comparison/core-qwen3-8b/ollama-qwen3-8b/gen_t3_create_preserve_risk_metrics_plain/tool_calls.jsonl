@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"data_args": {}, "origin": "Bench Portfolio", "ui_args": {"h": 8, "w": 16, "x": 20, "y": 0}, "widget_id": "risk_metrics"}, "tool": "create_widget"}

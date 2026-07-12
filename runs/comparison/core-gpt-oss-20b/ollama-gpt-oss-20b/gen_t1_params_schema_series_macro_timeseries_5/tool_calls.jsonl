@@ -1,6 +1,0 @@
-{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
-{"args": {"depth": 2, "path": ""}, "tool": "repo_browser.print_tree"}
-{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_schema"}
-{"args": {"origin": "Bench Macro", "param_name": "series", "widget_id": "macro_timeseries"}, "tool": "get_params_options"}
-{"args": {"data_args": {"series": "DGS10"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}

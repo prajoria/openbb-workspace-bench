@@ -1,0 +1,189 @@
+{
+  "id": "chains_highchart_app",
+  "title": "Ship TVL by Chain (Highcharts) as the Chain Highchart app",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "crypto",
+  "tags": [
+    "family-charts",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "charts"
+  ],
+  "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Chain TVL Data' at http://localhost:7802. Choose a working chart representation for the data. The experience needs TVL by Chain (Highcharts) (`chains_highchart`, chart-highcharts) using `/chains-highchart` for highcharts rendering of chain TVL. Organize it as app 'Chain Highchart' with tabs Chains (chains_highchart). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Chain TVL Data",
+        "widget_id": "chains_highchart",
+        "expect": {
+          "type": "chart-highcharts",
+          "endpoint": "/chains-highchart"
+        },
+        "params_include": [],
+        "columns_include": []
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Chain TVL Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Chain Highchart",
+        "tabs_include": [
+          "chains"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "chains",
+            "widget_id": "chains_highchart"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    },
+    "required_dashboard_name_contains": "Chain Highchart",
+    "required_widgets": [
+      {
+        "origin": "Chain TVL Data",
+        "widget_id": "chains_highchart",
+        "tab_id": "chains",
+        "min_count": 1
+      }
+    ],
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "chain-tvl-data__chains_highchart",
+          "widget_id": "chains_highchart",
+          "fields": [
+            "category",
+            "value"
+          ],
+          "path": "/chains-highchart",
+          "payload": [
+            {
+              "category": "Primary",
+              "value": 10.25
+            },
+            {
+              "category": "Review",
+              "value": 20.5
+            },
+            {
+              "category": "Approved",
+              "value": 30.75
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Chain TVL Data",
+        "url": "http://localhost:7802",
+        "widgets_json": {
+          "chains_highchart": {
+            "name": "TVL by Chain (Highcharts)",
+            "description": "Highcharts rendering of chain TVL.",
+            "endpoint": "/chains-highchart",
+            "type": "chart-highcharts",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Chain Highchart",
+            "description": "Highcharts TVL view.",
+            "tabs": {
+              "chains": {
+                "id": "chains",
+                "name": "Chains",
+                "layout": [
+                  {
+                    "i": "chains_highchart",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Chain Highchart",
+        "dashboard_name": "Chain Highchart Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "charts",
+  "capability": "widget-building",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "business_terms": [],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique charts/chains_highchart_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks app_def, dashboard_name, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Chain TVL Data; artifact widgetdefs:Chain TVL Data/chains_highchart; appdefs:Chain TVL Data/Chain Highchart; widgets:Chain TVL Data/chains_highchart@chains."
+}

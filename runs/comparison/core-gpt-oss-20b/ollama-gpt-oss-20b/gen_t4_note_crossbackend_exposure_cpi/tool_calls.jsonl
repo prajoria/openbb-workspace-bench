@@ -1,6 +1,0 @@
-{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_data"}
-{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
-{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
-{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
-{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_data"}
-{"args": {"data": "Largest sector weight: Technology (0.86). Latest CPI: 4.12.", "widget_type": "note"}, "tool": "add_generative_widget"}

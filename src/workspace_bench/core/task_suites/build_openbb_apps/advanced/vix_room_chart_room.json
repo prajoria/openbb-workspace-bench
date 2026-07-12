@@ -1,0 +1,313 @@
+{
+  "id": "vix_room_chart_room",
+  "title": "Assemble the Vol Chart Room",
+  "workflow": "risk-review",
+  "subdomain": "volatility",
+  "tags": [
+    "family-advanced",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "advanced",
+    "multi-tab"
+  ],
+  "prompt": "Deliver an analyst-ready Workspace solution for volatility and derivatives. The workspace must cover market history for VIX futures. The workspace must cover daily CBOE VIX closes with returns. Analysts need to inspect date, close, return percentage. An analyst can adjust the relevant numeric scope. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Use `window_days` and `window` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "vol-desk-data__vix_history",
+          "widget_id": "vix_history",
+          "fields": [
+            "close",
+            "date",
+            "return_pct"
+          ],
+          "path": "/vix-history",
+          "payload": [
+            {
+              "close": 10.25,
+              "date": "2026-01-13",
+              "return_pct": 10.25
+            },
+            {
+              "close": 20.5,
+              "date": "2026-01-14",
+              "return_pct": 20.5
+            },
+            {
+              "close": 30.75,
+              "date": "2026-01-15",
+              "return_pct": 30.75
+            }
+          ]
+        },
+        {
+          "name": "vol-desk-data__vix_room_chart",
+          "widget_id": "vix_room_chart",
+          "fields": [
+            "vix_room_chart_value"
+          ],
+          "path": "/udf",
+          "payload": [
+            {
+              "vix_room_chart_value": 10.25
+            },
+            {
+              "vix_room_chart_value": 20.5
+            },
+            {
+              "vix_room_chart_value": 30.75
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_vix-history",
+        "datasets": [
+          "vol-desk-data__vix_history"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "close",
+          "date",
+          "return_pct"
+        ],
+        "required_param_kinds": [
+          "number"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_vix-room-chart",
+        "datasets": [
+          "vol-desk-data__vix_room_chart"
+        ],
+        "widget_kind": "chart-like",
+        "must_cover_fields": [
+          "vix_room_chart_value"
+        ],
+        "required_param_kinds": [
+          "number"
+        ],
+        "required_config": {
+          "data.defaultSymbol": "VIX",
+          "data.updateFrequency": 60000
+        }
+      }
+    ],
+    "capability_connections": [
+      {
+        "source": "capability_2_vix-room-chart",
+        "target": "capability_1_vix-history",
+        "param_kind": "number"
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Vol Desk Data",
+        "url": "http://localhost:7801",
+        "widgets_json": {
+          "vix_room_chart": {
+            "name": "VIX Advanced Chart",
+            "description": "TradingView advanced charting for VIX futures.",
+            "endpoint": "/udf",
+            "type": "advanced_charting",
+            "gridData": {
+              "w": 20,
+              "h": 20
+            },
+            "data": {
+              "defaultSymbol": "VIX",
+              "updateFrequency": 60000,
+              "valueField": "vix_room_chart_value"
+            },
+            "params": [
+              {
+                "paramName": "window_days",
+                "type": "number",
+                "label": "Window days",
+                "value": 30,
+                "min": 5,
+                "max": 365
+              }
+            ]
+          },
+          "vix_history": {
+            "name": "VIX History",
+            "description": "Daily CBOE VIX closes with returns.",
+            "endpoint": "/vix-history",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "window",
+                "type": "number",
+                "label": "Window",
+                "value": 30,
+                "min": 5,
+                "max": 365
+              },
+              {
+                "paramName": "window_days",
+                "type": "number",
+                "label": "Window days",
+                "value": 30,
+                "min": 5,
+                "max": 365
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "date",
+                    "headerName": "Date",
+                    "cellDataType": "dateString"
+                  },
+                  {
+                    "field": "close",
+                    "headerName": "Close",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "return_pct",
+                    "headerName": "Return %",
+                    "cellDataType": "number",
+                    "formatterFn": "percent",
+                    "renderFn": "greenRed"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Vol Chart Room",
+            "description": "TradingView chart and historical context.",
+            "tabs": {
+              "chart": {
+                "id": "chart",
+                "name": "Chart",
+                "layout": [
+                  {
+                    "i": "vix_room_chart",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 20
+                  }
+                ]
+              },
+              "history": {
+                "id": "history",
+                "name": "History",
+                "layout": [
+                  {
+                    "i": "vix_history",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Window Sync",
+                "type": "param",
+                "paramName": "window_days",
+                "widgetIds": [
+                  "vix_room_chart",
+                  "vix_history"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Vol Chart Room",
+        "dashboard_name": "Vol Chart Room Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "advanced",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "window_days",
+    "window"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "test",
+  "novelty": "Unique advanced/vix_room_chart_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact capabilities:capability_1_vix-history:table-like:close,date,return_pct,capability_2_vix-room-chart:chart-like:vix_room_chart_value."
+}

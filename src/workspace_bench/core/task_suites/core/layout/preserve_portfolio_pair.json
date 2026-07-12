@@ -1,0 +1,118 @@
+{
+  "id": "preserve_portfolio_pair",
+  "title": "Move Without Disturbing: Portfolio Pair",
+  "capability": "layout-management",
+  "workflow": "portfolio-risk-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-layout",
+    "layout",
+    "preservation"
+  ],
+  "prompt": "Move the sector exposure widget beside the holdings widget: it should start at column 24, row 0, keeping its size. Do not move the holdings widget.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "portfolio"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Preserve Layout Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "holdings_table",
+          "data_args": {},
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 24,
+            "h": 12
+          }
+        },
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "sector_exposure",
+          "data_args": {},
+          "layout": {
+            "x": 0,
+            "y": 12,
+            "w": 16,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget_layout"
+  ],
+  "success": {
+    "required_layouts": [
+      {
+        "widget_id": "holdings_table",
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 12
+      },
+      {
+        "widget_id": "sector_exposure",
+        "x": 24,
+        "y": 0,
+        "w": 16,
+        "h": 10
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_id": "sector_exposure",
+        "x": 24,
+        "y": 0,
+        "w": 16,
+        "h": 10
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "validation",
+  "novelty": "Unique layout/preserve_portfolio_pair exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on portfolio; artifact layouts:holdings_table:::0:0:24:12,sector_exposure:::24:0:16:10."
+}

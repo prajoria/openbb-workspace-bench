@@ -1,0 +1,201 @@
+{
+  "id": "add_equities",
+  "title": "Register Bench Equities",
+  "capability": "dashboard-construction",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-backends",
+    "backends"
+  ],
+  "prompt": "With manage_backends, use operation add and name equities to register Bench Equities, then list it with operation list.",
+  "fixtures": {
+    "backends": []
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Backend Registration",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "manage_backends"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "manage_backends",
+        "args_contains": {
+          "operation": "add"
+        }
+      },
+      {
+        "tool": "manage_backends",
+        "args_contains": {
+          "operation": "list"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "manage_backends",
+        "data_contains": [
+          "Bench Equities"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "equities__estimate_history",
+          "widget_id": "estimate_history",
+          "fields": [
+            "eps_estimate",
+            "quarter",
+            "revenue_estimate_b"
+          ],
+          "path": "/estimate-history",
+          "payload": [
+            {
+              "quarter": "2026Q1",
+              "eps_estimate": 2.31,
+              "revenue_estimate_b": 94.8
+            },
+            {
+              "quarter": "2026Q2",
+              "eps_estimate": 1.78,
+              "revenue_estimate_b": 88.5
+            },
+            {
+              "quarter": "2026Q3",
+              "eps_estimate": 1.63,
+              "revenue_estimate_b": 84.1
+            }
+          ]
+        },
+        {
+          "name": "equities__fundamental_metrics",
+          "widget_id": "fundamental_metrics",
+          "fields": [
+            "metric",
+            "value"
+          ],
+          "path": "/fundamental-metrics",
+          "payload": [
+            {
+              "metric": "gross_margin",
+              "value": 0.462
+            },
+            {
+              "metric": "net_cash_b",
+              "value": 54.0
+            },
+            {
+              "metric": "buyback_yield",
+              "value": 0.034
+            }
+          ]
+        },
+        {
+          "name": "equities__latest_news",
+          "widget_id": "latest_news",
+          "fields": [
+            "author",
+            "body",
+            "date",
+            "excerpt",
+            "title"
+          ],
+          "path": "/latest-news",
+          "payload": [
+            {
+              "title": "Apple services revenue reaches new high",
+              "date": "2026-01-15",
+              "author": "Bench News",
+              "excerpt": "Services and wearables offset slower hardware upgrades.",
+              "body": "Fixture article for AAPL services mix."
+            },
+            {
+              "title": "Analysts focus on AI device roadmap",
+              "date": "2026-01-14",
+              "author": "Bench News",
+              "excerpt": "Investors are watching on-device AI features and margins.",
+              "body": "Fixture article for AAPL AI roadmap."
+            }
+          ]
+        },
+        {
+          "name": "equities__price_performance",
+          "widget_id": "price_performance",
+          "fields": [
+            "close",
+            "date",
+            "return_pct"
+          ],
+          "path": "/price-performance",
+          "payload": [
+            {
+              "date": "2026-01-12",
+              "close": 188.2,
+              "return_pct": -0.011
+            },
+            {
+              "date": "2026-01-13",
+              "close": 190.85,
+              "return_pct": 0.014
+            },
+            {
+              "date": "2026-01-14",
+              "close": 193.4,
+              "return_pct": 0.013
+            },
+            {
+              "date": "2026-01-15",
+              "close": 196.1,
+              "return_pct": 0.014
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "equities"
+      }
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "dashboard",
+  "family": "backends",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique backends/add_equities exercise using manage_backends with checks layout_out_of_grid, missing_tool_call, missing_tool_result, too_many_invalid_calls on equities; artifact id:add_equities."
+}

@@ -14,7 +14,7 @@ def main() -> int:
     task_id = task["task"]["id"]
 
     calls = []
-    if task_id == "gen_t0_create_price_performance_aapl":
+    if task_id == "price_performance_aapl":
         calls = [
             {"tool": "get_workspace_snapshot", "args": {}},
             {

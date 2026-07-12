@@ -1,4 +1,0 @@
-{"args": {"slug": "finance-guidance-tracker"}, "tool": "get_skill_content"}
-{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('')\nPY"]}, "tool": "container.exec"}
-{"args": {"operation": "add_tabs", "tabs": [{"name": "Guidance"}]}, "tool": "manage_navigation_bar"}
-{"args": {"data": "Guidance tracker workflow: extract management claims, compare them with prior guidance, flag changed assumptions, and list evidence gaps.", "inner_tab": "guidance", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,6 +1,0 @@
-{
-  "exit_code": null,
-  "stderr": "timed out",
-  "stdout": "turn 1 retry 1/4 after model timeout: timed out\nturn 1 retry 2/4 after model timeout: timed out\nturn 1 retry 3/4 after model timeout: timed out\nturn 1 retry 4/4 after model timeout: timed out",
-  "timed_out": true
-}

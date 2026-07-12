@@ -1,6 +1,0 @@
-{"args": {"slug": "finance-tearsheet"}, "tool": "get_skill_content"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "create_widget"}
-{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_data"}
-{"args": {"data": "AAPL Price Performance (Bench Equities): as of 2026-01-15, close was 196.1 with a return_pct of 0.014, up from 193.4 (0.013) on 2026-01-14, 190.85 (0.014) on 2026-01-13, and 188.2 (-0.011) on 2026-01-12. Latest key value cited: close=196.1, return_pct=0.014 on 2026-01-15.", "inner_tab": "overview", "name": "AAPL Price Performance Note", "widget_type": "note"}, "tool": "add_generative_widget"}

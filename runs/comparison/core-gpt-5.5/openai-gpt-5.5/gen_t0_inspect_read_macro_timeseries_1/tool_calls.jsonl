@@ -1,2 +1,0 @@
-{"args": {"widget_id": "macro_timeseries"}, "tool": "read_widget"}
-{"args": {"data": "Read existing Bench Macro/macro_timeseries widget. The macro time series is configured with series DGS10.", "description": "Note mentioning DGS10 from inspected macro_timeseries widget", "name": "DGS10 Note", "widget_type": "note"}, "tool": "add_generative_widget"}

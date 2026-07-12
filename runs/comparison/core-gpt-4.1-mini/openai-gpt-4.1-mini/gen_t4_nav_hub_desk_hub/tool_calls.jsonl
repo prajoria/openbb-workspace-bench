@@ -1,7 +1,0 @@
-{"args": {"name": "Desk Hub", "operation": "update"}, "tool": "manage_dashboard"}
-{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "News"}]}, "tool": "manage_navigation_bar"}
-{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "news"}, "tool": "navigate_workspace"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {"limit": 5, "symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "create_widget"}
-{"args": {"data": "This tab contains the latest news for NVDA and is part of the Desk Hub dashboard.", "inner_tab": "news", "name": "Desk Hub Note", "widget_type": "note"}, "tool": "add_generative_widget"}

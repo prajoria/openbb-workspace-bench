@@ -1,6 +1,0 @@
-{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('')\nPY"]}, "tool": "container.exec"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "compliance_surveillance_hub_audit_access_and_export_logs"}, "tool": "get_widget_schema"}
-{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('')\nPY"]}, "tool": "container.exec"}
-{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('')\nPY"]}, "tool": "container.exec"}
-{"args": {"origin": "Bench Stark Enterprise", "param_name": "sector", "widget_id": "compliance_surveillance_hub_audit_access_and_export_logs"}, "tool": "get_params_options"}
-{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}

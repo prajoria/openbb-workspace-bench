@@ -1,2 +1,0 @@
-{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_limits_limit_utilization"}, "tool": "get_widget_data"}
-{"args": {"data": "Reviewed the Bench Stark Enterprise Limit Utilization data for risk_exposure_monitor_limits_limit_utilization. Fund: Flagship Long/Short; period: YTD; status: Open; exposure: 0.0339; change: -0.0755.", "inner_tab": "main", "name": "Limit Utilization Review Note", "widget_type": "note"}, "tool": "add_generative_widget"}

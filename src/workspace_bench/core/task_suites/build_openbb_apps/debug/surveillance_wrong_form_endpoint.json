@@ -1,0 +1,784 @@
+{
+  "schema_version": "workspace-bench-task",
+  "id": "surveillance_wrong_form_endpoint",
+  "title": "Repair Surveillance Recovery Room wrong form endpoint incident",
+  "category": "repair",
+  "family": "debug",
+  "capability": "backend-repair",
+  "workflow": "diagnose-repair-retest",
+  "domain": "finance",
+  "subdomain": "surveillance",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "tags": [
+    "build-openbb-apps",
+    "debug",
+    "repair",
+    "wrong_form_endpoint",
+    "long-oracle"
+  ],
+  "source": "workspace-bench-build-apps-gen",
+  "novelty": "Unique debug/surveillance_wrong_form_endpoint building exercise using add_generative_widget, get_widget_data, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_apps, manage_backends, read_widget, read_workspace_resource with checks capability, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Repair Data, custom:Surveillance Repair Data Archive; artifact capabilities:incident-detail-wrong_form_endpoint:table-like:age_days,case_id,updated_at,incident-overview-wrong_form_endpoint:form:case_id,owner,status; generated:note@*:Surveillance Recovery Room,Surveillance Repair Data.",
+  "prompt": "Surveillance analysts report that the intake form accepts input but submission does nothing in Surveillance Recovery Room. Diagnose the existing Surveillance Repair Data connection, repair it in place, and retest the affected workflow with live data before handing it back. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Surveillance Recovery Room open and add a short verification note that naturally mentions Surveillance Recovery Room, Surveillance Repair Data, and repair verified.",
+  "business_terms": [
+    "Surveillance Recovery Room",
+    "Surveillance Repair Data",
+    "repair verified",
+    "Operations Handbook",
+    "Archive Workspace"
+  ],
+  "fixtures": {},
+  "initial_state": {
+    "custom_backends": [
+      {
+        "backend_id": "debug_target",
+        "name": "Surveillance Repair Data",
+        "url": "http://localhost:7898",
+        "widgets_json": {
+          "review_queue": {
+            "name": "Intake Review",
+            "description": "Submit and review one case intake request.",
+            "endpoint": "/intake-review",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 10
+            },
+            "params": [
+              {
+                "paramName": "intake",
+                "type": "form",
+                "label": "Intake request",
+                "endpoint": "/retired-intake",
+                "method": "POST",
+                "inputParams": [
+                  {
+                    "paramName": "case_id",
+                    "type": "text",
+                    "label": "Identifier"
+                  },
+                  {
+                    "paramName": "owner",
+                    "type": "text",
+                    "label": "Owner"
+                  },
+                  {
+                    "paramName": "submit",
+                    "type": "button",
+                    "label": "Submit"
+                  }
+                ]
+              },
+              {
+                "paramName": "scope",
+                "type": "text",
+                "label": "Review scope",
+                "value": "Open"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "case_id",
+                    "headerName": "Case Id",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "status",
+                    "headerName": "Status",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "owner",
+                    "headerName": "Owner",
+                    "cellDataType": "text"
+                  }
+                ]
+              }
+            }
+          },
+          "review_detail": {
+            "name": "Review Detail",
+            "description": "Detail and aging for each case review.",
+            "endpoint": "/review-detail",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "scope",
+                "type": "text",
+                "label": "Review scope",
+                "value": "Open"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "case_id",
+                    "headerName": "Case Id",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "updated_at",
+                    "headerName": "Updated At",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "age_days",
+                    "headerName": "Age Days",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            }
+          },
+          "health_metric": {
+            "name": "Service Health",
+            "description": "A stable health indicator used by the operations handbook.",
+            "endpoint": "/service-health",
+            "type": "metric",
+            "gridData": {
+              "w": 8,
+              "h": 4
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Surveillance Recovery Room",
+            "template_id": "incident-recovery",
+            "description": "Recovery workflow for cases and alert review.",
+            "tabs": {
+              "overview": {
+                "id": "overview",
+                "name": "Overview",
+                "layout": [
+                  {
+                    "i": "review_queue",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 10
+                  }
+                ]
+              },
+              "detail": {
+                "id": "detail",
+                "name": "Detail",
+                "layout": [
+                  {
+                    "i": "review_detail",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Review Scope",
+                "type": "param",
+                "paramName": "scope",
+                "widgetIds": [
+                  "review_queue",
+                  "review_detail"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Operations Handbook",
+            "template_id": "operations-handbook",
+            "description": "Stable operational context that must not change during repair.",
+            "tabs": {
+              "health": {
+                "id": "health",
+                "name": "Health",
+                "layout": [
+                  {
+                    "i": "health_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 8,
+                    "h": 4
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ],
+        "warnings": []
+      },
+      {
+        "backend_id": "debug_archive",
+        "name": "Surveillance Repair Data Archive",
+        "url": "http://localhost:7899",
+        "widgets_json": {
+          "archive_status": {
+            "name": "Archive Status",
+            "description": "Stable archive status that is unrelated to the incident.",
+            "endpoint": "/archive-status",
+            "type": "table",
+            "gridData": {
+              "w": 12,
+              "h": 6
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "archive_id",
+                    "headerName": "Archive Id",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "retention_state",
+                    "headerName": "Retention State",
+                    "cellDataType": "text"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Archive Console",
+            "template_id": "archive-console",
+            "description": "Unrelated archive controls.",
+            "tabs": {
+              "archive": {
+                "id": "archive",
+                "name": "Archive",
+                "layout": [
+                  {
+                    "i": "archive_status",
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    ],
+    "dashboards": [
+      {
+        "dashboard_id": "incident_triage",
+        "name": "Incident Triage",
+        "activate": true
+      },
+      {
+        "dashboard_id": "archive_workspace",
+        "name": "Archive Workspace",
+        "activate": false,
+        "widgets": [
+          {
+            "origin": "Surveillance Repair Data Archive",
+            "widget_id": "archive_status",
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 12,
+              "h": 6
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_capabilities": [
+      {
+        "name": "incident-overview-wrong_form_endpoint",
+        "datasets": [
+          "surveillance-repair-data__review_queue"
+        ],
+        "widget_kind": "form",
+        "must_cover_fields": [
+          "case_id",
+          "owner",
+          "status"
+        ],
+        "required_param_kinds": [
+          "form"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "incident-detail-wrong_form_endpoint",
+        "datasets": [
+          "surveillance-repair-data__review_detail"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "age_days",
+          "case_id",
+          "updated_at"
+        ],
+        "required_param_kinds": [
+          "text"
+        ]
+      }
+    ],
+    "capability_connections": [],
+    "business_names": [
+      {
+        "scope": "app",
+        "contains": "Surveillance Recovery Room"
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    },
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Verification",
+        "data_contains": [
+          "Surveillance Recovery Room",
+          "Surveillance Repair Data",
+          "repair verified"
+        ]
+      }
+    ],
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "preserve_other_apps": true,
+      "mutable_app_ids": [
+        "incident-recovery"
+      ],
+      "preserve_custom_backend_ids": true,
+      "required_custom_backend_ids": [],
+      "unique_custom_backend_names": true,
+      "require_no_backend_warnings": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 0
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "surveillance-repair-data__health_metric",
+          "widget_id": "health_metric",
+          "fields": [
+            "label",
+            "value"
+          ],
+          "path": "/service-health",
+          "payload": {
+            "label": "Service Health",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "surveillance-repair-data__review_detail",
+          "widget_id": "review_detail",
+          "fields": [
+            "age_days",
+            "case_id",
+            "updated_at"
+          ],
+          "path": "/review-detail",
+          "payload": [
+            {
+              "age_days": 10.25,
+              "case_id": "case_id-1",
+              "updated_at": "2026-01-13"
+            },
+            {
+              "age_days": 20.5,
+              "case_id": "case_id-2",
+              "updated_at": "2026-01-14"
+            },
+            {
+              "age_days": 30.75,
+              "case_id": "case_id-3",
+              "updated_at": "2026-01-15"
+            }
+          ]
+        },
+        {
+          "name": "surveillance-repair-data__review_queue",
+          "widget_id": "review_queue",
+          "fields": [
+            "case_id",
+            "owner",
+            "status"
+          ],
+          "path": "/intake-review",
+          "payload": [
+            {
+              "case_id": "case_id-1",
+              "owner": "owner-1",
+              "status": "Primary"
+            },
+            {
+              "case_id": "case_id-2",
+              "owner": "owner-2",
+              "status": "Review"
+            },
+            {
+              "case_id": "case_id-3",
+              "owner": "owner-3",
+              "status": "Approved"
+            }
+          ],
+          "form_endpoint": "/intake-submit"
+        },
+        {
+          "name": "surveillance-repair-data-archive__archive_status",
+          "widget_id": "archive_status",
+          "fields": [
+            "archive_id",
+            "retention_state"
+          ],
+          "path": "/archive-status",
+          "payload": [
+            {
+              "archive_id": "archive_id-1",
+              "retention_state": "retention_state-1"
+            },
+            {
+              "archive_id": "archive_id-2",
+              "retention_state": "retention_state-2"
+            },
+            {
+              "archive_id": "archive_id-3",
+              "retention_state": "retention_state-3"
+            }
+          ]
+        }
+      ],
+      "pinned_paths": true
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 3,
+      "max_repeated_snapshots": 4
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "read_workspace_resource",
+      "args": {
+        "uri": "openbb://workspace/app-builder/index"
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Surveillance Repair Data"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Surveillance Repair Data",
+        "widget_id": "review_queue"
+      }
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Surveillance Repair Data",
+        "widget_id": "review_queue"
+      }
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "debug_target",
+        "widgets_json": {
+          "review_queue": {
+            "name": "Intake Review",
+            "description": "Submit and review one case intake request.",
+            "endpoint": "/intake-review",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 10
+            },
+            "params": [
+              {
+                "paramName": "intake",
+                "type": "form",
+                "label": "Intake request",
+                "endpoint": "/intake-submit",
+                "method": "POST",
+                "inputParams": [
+                  {
+                    "paramName": "case_id",
+                    "type": "text",
+                    "label": "Identifier"
+                  },
+                  {
+                    "paramName": "owner",
+                    "type": "text",
+                    "label": "Owner"
+                  },
+                  {
+                    "paramName": "submit",
+                    "type": "button",
+                    "label": "Submit"
+                  }
+                ]
+              },
+              {
+                "paramName": "scope",
+                "type": "text",
+                "label": "Review scope",
+                "value": "Open"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "case_id",
+                    "headerName": "Case Id",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "status",
+                    "headerName": "Status",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "owner",
+                    "headerName": "Owner",
+                    "cellDataType": "text"
+                  }
+                ]
+              }
+            }
+          },
+          "review_detail": {
+            "name": "Review Detail",
+            "description": "Detail and aging for each case review.",
+            "endpoint": "/review-detail",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "scope",
+                "type": "text",
+                "label": "Review scope",
+                "value": "Open"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "case_id",
+                    "headerName": "Case Id",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "updated_at",
+                    "headerName": "Updated At",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "age_days",
+                    "headerName": "Age Days",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            }
+          },
+          "health_metric": {
+            "name": "Service Health",
+            "description": "A stable health indicator used by the operations handbook.",
+            "endpoint": "/service-health",
+            "type": "metric",
+            "gridData": {
+              "w": 8,
+              "h": 4
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Surveillance Recovery Room",
+            "template_id": "incident-recovery",
+            "description": "Recovery workflow for cases and alert review.",
+            "tabs": {
+              "overview": {
+                "id": "overview",
+                "name": "Overview",
+                "layout": [
+                  {
+                    "i": "review_queue",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 10
+                  }
+                ]
+              },
+              "detail": {
+                "id": "detail",
+                "name": "Detail",
+                "layout": [
+                  {
+                    "i": "review_detail",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Review Scope",
+                "type": "param",
+                "paramName": "scope",
+                "widgetIds": [
+                  "review_queue",
+                  "review_detail"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Operations Handbook",
+            "template_id": "operations-handbook",
+            "description": "Stable operational context that must not change during repair.",
+            "tabs": {
+              "health": {
+                "id": "health",
+                "name": "Health",
+                "layout": [
+                  {
+                    "i": "health_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 8,
+                    "h": 4
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Surveillance Repair Data"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Surveillance Repair Data",
+        "widget_id": "review_queue"
+      }
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Surveillance Repair Data",
+        "widget_id": "review_queue"
+      }
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Surveillance Repair Data",
+        "widget_id": "review_detail"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "debug_target",
+        "template_id": "incident-recovery"
+      }
+    },
+    {
+      "tool": "read_widget",
+      "args": {
+        "widget_id": "review_queue"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Surveillance Recovery Room Verification",
+        "data": "Surveillance Recovery Room on Surveillance Repair Data: repair verified with a successful data retest."
+      }
+    },
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    }
+  ],
+  "limits": {
+    "max_turns": 40
+  },
+  "split": "validation"
+}

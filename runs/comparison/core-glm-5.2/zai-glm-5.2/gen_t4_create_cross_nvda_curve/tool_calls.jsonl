@@ -1,8 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_001", "data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "create_widget"}
-{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_001", "data_args": {}, "origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "create_widget"}
-{"args": {"dashboard_id": "dash_001", "data": "This dashboard combines NVDA price performance from Bench Equities with the US Treasury Yield Curve from Bench Macro. NVDA's equity returns can be analyzed alongside the yield curve to assess macroeconomic conditions affecting NVDA's valuation.", "name": "NVDA and Yield Curve Note", "widget_type": "note"}, "tool": "add_generative_widget"}

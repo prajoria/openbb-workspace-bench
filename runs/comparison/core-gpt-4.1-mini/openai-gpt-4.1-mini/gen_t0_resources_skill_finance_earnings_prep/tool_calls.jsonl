@@ -1,2 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-earnings-prep"}, "tool": "read_workspace_resource"}
-{"args": {"data": "Earnings prep workflow includes comparing internal estimates to street numbers, identifying surprise drivers, reviewing guidance, inspecting transcript tone, and producing action items for the portfolio manager.", "name": "Earnings Prep Workflow Note", "widget_type": "note"}, "tool": "add_generative_widget"}

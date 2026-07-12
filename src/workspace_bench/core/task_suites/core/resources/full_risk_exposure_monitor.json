@@ -1,0 +1,134 @@
+{
+  "id": "full_risk_exposure_monitor",
+  "title": "Index-Guided App Extension: Risk & Exposure Monitor",
+  "capability": "dashboard-construction",
+  "workflow": "risk-review",
+  "subdomain": "risk",
+  "tags": [
+    "family-resources",
+    "resources",
+    "apps",
+    "widget-creation"
+  ],
+  "prompt": "Use the app-builder index resource openbb://workspace/app-builder/index, instantiate risk-exposure-monitor as Risk Resource Command, navigate to limits, add widget risk_exposure_monitor_limits_limit_utilization, and add a note mentioning limit utilization and resource.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "read_workspace_resource",
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Risk Resource Command",
+    "required_resource_reads": [
+      {
+        "uri": "openbb://workspace/app-builder/index",
+        "data_contains": [
+          "risk-exposure-monitor"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "risk_exposure_monitor_limits_limit_utilization",
+        "tab_id": "limits"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "limit utilization",
+          "resource"
+        ],
+        "tab_id": "limits"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "read_workspace_resource",
+      "args": {
+        "uri": "openbb://workspace/app-builder/index"
+      }
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "template_id": "risk-exposure-monitor",
+        "dashboard_name": "Risk Resource Command",
+        "activate": true
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "limits"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "risk_exposure_monitor_limits_limit_utilization"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "risk_exposure_monitor_limits_limit_utilization"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Resource Extension Note",
+        "data": "limit utilization added from resource guidance."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "dashboard",
+  "family": "resources",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 9
+  },
+  "split": "validation",
+  "novelty": "Unique resources/full_risk_exposure_monitor exercise using add_generative_widget, create_widget, get_widget_schema, manage_apps, manage_backends, navigate_workspace, read_workspace_resource with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_resource_read, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact resource:openbb://workspace/app-builder/index; apps:risk-exposure-monitor; widgets:Bench Stark Enterprise/risk_exposure_monitor_limits_limit_utilization@limits; generated:note@limits:limit utilization,resource."
+}

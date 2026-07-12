@@ -1,0 +1,98 @@
+{
+  "id": "set_portfolio_snapshot_period_to_mtd",
+  "title": "Set Portfolio Snapshot period To MTD",
+  "capability": "widget-update",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-update",
+    "update-widget"
+  ],
+  "prompt": "For the existing Portfolio Snapshot widget, set period to MTD.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Update Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "portfolio_command_center_overview_portfolio_snapshot",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "period": "YTD"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 12
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_overview_portfolio_snapshot",
+        "data_args": {
+          "fund": "Flagship Long/Short",
+          "period": "MTD"
+        },
+        "min_count": 1
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "period": "MTD"
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "single-widget",
+  "family": "update",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "validation",
+  "novelty": "Unique update/set_portfolio_snapshot_period_to_mtd exercise using get_workspace_snapshot, update_widget with checks layout_out_of_grid, missing_widget, repeated_snapshots, too_many_invalid_calls on stark-enterprise; artifact widgets:Bench Stark Enterprise/portfolio_command_center_overview_portfolio_snapshot@*."
+}

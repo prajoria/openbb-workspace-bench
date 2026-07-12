@@ -1,0 +1,414 @@
+{
+  "id": "case_aging",
+  "title": "Assemble the Case Room app around Case Aging",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-aggrid",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "aggrid",
+    "multi-tab"
+  ],
+  "prompt": "The desk needs a production-ready cases and compliance alerts workflow for a surveillance analyst. The workspace must cover open surveillance cases by age bucket. The workspace must cover open surveillance alerts. The workspace must cover open alert count. Analysts need to inspect case ID, desk, age days, alert ID, severity. Leave the complete working workspace open for review. Use your judgment on the architecture and leave other work intact.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "surveillance-data__alert_metric",
+          "widget_id": "alert_metric",
+          "fields": [
+            "alert_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/alert-count",
+          "payload": {
+            "alert_metric_value": 10.25,
+            "label": "Open Alerts",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "surveillance-data__alert_queue",
+          "widget_id": "alert_queue",
+          "fields": [
+            "age_days",
+            "alert_id",
+            "desk",
+            "severity"
+          ],
+          "path": "/alert-queue",
+          "payload": [
+            {
+              "age_days": 10.25,
+              "alert_id": "alert_id-1",
+              "desk": "Primary",
+              "severity": "Primary"
+            },
+            {
+              "age_days": 20.5,
+              "alert_id": "alert_id-2",
+              "desk": "Review",
+              "severity": "Review"
+            },
+            {
+              "age_days": 30.75,
+              "alert_id": "alert_id-3",
+              "desk": "Approved",
+              "severity": "Approved"
+            }
+          ]
+        },
+        {
+          "name": "surveillance-data__case_aging",
+          "widget_id": "case_aging",
+          "fields": [
+            "age_days",
+            "case_id",
+            "desk"
+          ],
+          "path": "/case-aging",
+          "payload": [
+            {
+              "age_days": 10.25,
+              "case_id": "case_id-1",
+              "desk": "Primary"
+            },
+            {
+              "age_days": 20.5,
+              "case_id": "case_id-2",
+              "desk": "Review"
+            },
+            {
+              "age_days": 30.75,
+              "case_id": "case_id-3",
+              "desk": "Approved"
+            }
+          ]
+        },
+        {
+          "name": "capability-union__case_aging",
+          "widget_id": "capability_union_case_aging",
+          "fields": [
+            "age_days",
+            "alert_id",
+            "case_id",
+            "desk",
+            "severity"
+          ],
+          "path": "/capability-union",
+          "payload": [
+            {
+              "age_days": 10.25,
+              "alert_id": "alert_id-1",
+              "case_id": "case_id-1",
+              "desk": "Primary",
+              "severity": "Primary"
+            },
+            {
+              "age_days": 20.5,
+              "alert_id": "alert_id-2",
+              "case_id": "case_id-2",
+              "desk": "Review",
+              "severity": "Review"
+            },
+            {
+              "age_days": 30.75,
+              "alert_id": "alert_id-3",
+              "case_id": "case_id-3",
+              "desk": "Approved",
+              "severity": "Approved"
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_alert-metric",
+        "datasets": [
+          "surveillance-data__alert_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "alert_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_alert-queue",
+        "datasets": [
+          "surveillance-data__alert_queue",
+          "capability-union__case_aging"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "age_days",
+          "alert_id",
+          "desk",
+          "severity"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_3_case-aging",
+        "datasets": [
+          "surveillance-data__case_aging",
+          "capability-union__case_aging"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "age_days",
+          "case_id",
+          "desk"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    },
+    "polish": [
+      {
+        "code": "polish_refresh_policy",
+        "backend_name": "Surveillance Data",
+        "widget_id": "case_aging",
+        "path": "staleTime",
+        "expected": 900000
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "case_aging": {
+            "name": "Case Aging",
+            "description": "Open surveillance cases by age bucket.",
+            "endpoint": "/case-aging",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "case_id",
+                    "headerName": "Case Id",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "desk",
+                    "headerName": "Desk",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "age_days",
+                    "headerName": "Age Days",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            },
+            "staleTime": 900000
+          },
+          "alert_queue": {
+            "name": "Alert Queue",
+            "description": "Open surveillance alerts.",
+            "endpoint": "/alert-queue",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "severity",
+                "type": "text",
+                "label": "Severity",
+                "value": "high",
+                "options": [
+                  {
+                    "label": "High",
+                    "value": "high"
+                  },
+                  {
+                    "label": "Medium",
+                    "value": "medium"
+                  },
+                  {
+                    "label": "Low",
+                    "value": "low"
+                  }
+                ]
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "alert_id",
+                    "headerName": "Alert",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "desk",
+                    "headerName": "Desk",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "severity",
+                    "headerName": "Severity",
+                    "cellDataType": "text",
+                    "renderFn": "titleCase"
+                  },
+                  {
+                    "field": "age_days",
+                    "headerName": "Age (d)",
+                    "cellDataType": "number",
+                    "formatterFn": "int"
+                  }
+                ]
+              }
+            },
+            "staleTime": 900000
+          },
+          "alert_metric": {
+            "name": "Open Alerts",
+            "description": "Open alert count.",
+            "endpoint": "/alert-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "staleTime": 900000,
+            "data": {
+              "valueField": "alert_metric_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Case Room",
+            "description": "Cases, alerts, posture.",
+            "tabs": {
+              "cases": {
+                "id": "cases",
+                "name": "Cases",
+                "layout": [
+                  {
+                    "i": "case_aging",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  },
+                  {
+                    "i": "alert_metric",
+                    "x": 20,
+                    "y": 0,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              },
+              "queue": {
+                "id": "queue",
+                "name": "Queue",
+                "layout": [
+                  {
+                    "i": "alert_queue",
+                    "x": 0,
+                    "y": 0,
+                    "w": 24,
+                    "h": 10
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Case Room",
+        "dashboard_name": "Case Room Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "aggrid",
+  "capability": "widget-building",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique aggrid/case_aging building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_alert-metric:metric:alert_metric_value,capability_2_alert-queue:table-like:age_days,alert_id,desk,severity,capability_3_case-aging:table-like:age_days,case_id,desk."
+}

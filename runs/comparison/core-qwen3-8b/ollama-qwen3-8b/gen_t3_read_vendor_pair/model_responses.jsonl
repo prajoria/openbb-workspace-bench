@@ -1,3 +1,0 @@
-{"action": {"args": {"origin": "Bench Stark Enterprise", "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status"}, "done": false, "tool": "get_widget_data"}, "content": "{\"done\": false, \"tool\": \"get_widget_data\", \"args\": {\"origin\": \"Bench Stark Enterprise\", \"widget_id\": \"vendor_dataset_monitor_slas_vendor_sla_status\"}}", "turn": 1}
-{"action": {"args": {"origin": "Bench Stark Enterprise", "widget_id": "vendor_dataset_monitor_slas_latency_by_feed"}, "done": false, "tool": "get_widget_data"}, "content": "{\"done\": false, \"tool\": \"get_widget_data\", \"args\": {\"origin\": \"Bench Stark Enterprise\", \"widget_id\": \"vendor_dataset_monitor_slas_latency_by_feed\"}}", "turn": 2}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

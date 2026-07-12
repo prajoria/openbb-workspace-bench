@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "data_args": {"fund": "Flagship Long/Short"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
-{"args": {"dashboard_id": "dash_001", "data": "Repaired the Risk Snapshot widget fund setting from Global Macro to Flagship Long/Short.", "description": "Risk snapshot repair note", "inner_tab": "", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

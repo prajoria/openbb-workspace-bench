@@ -1,0 +1,122 @@
+{
+  "allowed_tools": [
+    "filesystem",
+    "shell"
+  ],
+  "business_terms": [],
+  "capability": "build-real-backend",
+  "category": "platform",
+  "code_task": {
+    "command_timeout_ms": 120000,
+    "core_module": "app.py",
+    "health_path": "/health",
+    "install_command": [
+      "uv",
+      "sync",
+      "--quiet"
+    ],
+    "oracle_path": "fixtures/parameterized_price_history/oracle",
+    "probes": [
+      {
+        "expected_values": {
+          "date": "2026-02-28",
+          "ticker": "MSFT"
+        },
+        "field_types": {
+          "close": "number",
+          "date": "string",
+          "ticker": "string"
+        },
+        "json_body": {},
+        "method": "GET",
+        "minimum_items": 2,
+        "name": "MSFT February",
+        "path": "/prices",
+        "query": {
+          "end_date": "2026-02-28",
+          "start_date": "2026-02-01",
+          "ticker": "MSFT"
+        },
+        "required_fields": [
+          "ticker",
+          "date",
+          "close"
+        ],
+        "widget_id": "historical_prices"
+      },
+      {
+        "expected_values": {
+          "date": "2026-03-21",
+          "ticker": "NVDA"
+        },
+        "field_types": {},
+        "json_body": {},
+        "method": "GET",
+        "minimum_items": 2,
+        "name": "NVDA March",
+        "path": "/prices",
+        "query": {
+          "end_date": "2026-03-21",
+          "start_date": "2026-03-03",
+          "ticker": "NVDA"
+        },
+        "required_fields": [
+          "ticker",
+          "date",
+          "close"
+        ],
+        "widget_id": "historical_prices"
+      }
+    ],
+    "request_timeout_ms": 3000,
+    "require_apps": false,
+    "schema_version": "workspace-bench-code-task/v0",
+    "start_command": [
+      "{python}",
+      "-m",
+      "uvicorn",
+      "app:app",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "{port}"
+    ],
+    "starter_path": "fixtures/parameterized_price_history/starter",
+    "startup_timeout_ms": 20000,
+    "test_command": [
+      "{python}",
+      "-m",
+      "pytest",
+      "-q",
+      "--junitxml={junit}"
+    ]
+  },
+  "difficulty": "medium",
+  "domain": "engineering",
+  "family": "backend-code",
+  "fixtures": {
+    "backends": []
+  },
+  "id": "parameterized_price_history",
+  "initial_state": {},
+  "limits": {
+    "max_turns": 24
+  },
+  "novelty": "Real-code backend task: parameterized_price_history",
+  "oracle_tool_calls": [],
+  "prompt": "An equity analyst needs historical prices filtered by ticker and inclusive date range. Honor the supplied ticker, start_date, and end_date query contract at the HTTP layer; the response must make the selected instrument and date boundaries unambiguous.",
+  "schema_version": "workspace-bench-task",
+  "source": "WorkspaceBench Phase 10 authored code track",
+  "split": "validation",
+  "subdomain": "openbb-custom-backends",
+  "success": {},
+  "tags": [
+    "build-openbb-backends",
+    "experimental-v0",
+    "parameters",
+    "dates",
+    "ticker"
+  ],
+  "title": "Implement parameterized price history",
+  "workflow": "custom-backend-development"
+}

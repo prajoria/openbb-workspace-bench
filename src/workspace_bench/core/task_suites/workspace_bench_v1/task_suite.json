@@ -1,8 +1,0 @@
-{
-  "suite_id": "workspace-bench-v1",
-  "release_id": "workspace-bench-v1",
-  "version": "1.0.0",
-  "visibility": "public",
-  "default_split": "train",
-  "description": "Unified WorkspaceBench v1 generated benchmark: 15 MCP-surface families, each with a complete t0-t4 structural-difficulty ladder (4 tasks per cell, 300 total). Splits are deterministic 150/75/75 train/validation/test, with every family/level cell contributing one validation and one test task."
-}

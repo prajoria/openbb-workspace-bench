@@ -1,2 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-comps"}, "tool": "read_workspace_resource"}
-{"args": {"data": "Finance Comps: Compare companies or assets using peer valuation and operating metrics. Comps workflow: define the peer set, normalize metrics, compare valuation multiples, and explain why outliers deserve premium or discount. Peer set should be explicitly defined before comparing valuation multiples and operating metrics.", "name": "Finance Comps Peer Set Note", "widget_type": "note"}, "tool": "add_generative_widget"}

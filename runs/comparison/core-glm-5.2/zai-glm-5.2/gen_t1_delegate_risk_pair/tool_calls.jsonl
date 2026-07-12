@@ -1,2 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"task_requests": [{"assigned_agent_id": "stress-analyst", "assigned_holder_url": "dash_001", "description": "Perform stress and liquidity risk review on residual risk actions", "id": "stress-analyst"}, {"assigned_agent_id": "limits-analyst", "assigned_holder_url": "dash_001", "description": "Review and validate risk limits against current residual risk actions", "id": "limits-analyst"}]}, "tool": "assign_tasks_to_agents"}

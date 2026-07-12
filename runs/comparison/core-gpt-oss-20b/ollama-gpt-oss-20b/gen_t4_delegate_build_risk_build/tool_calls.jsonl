@@ -1,5 +1,0 @@
-{"args": {"task_requests": [{"assigned_agent_id": "var-analyst", "assigned_holder_url": "", "description": "VaR Analysis Workstream", "id": "task-var"}, {"assigned_agent_id": "stress-analyst", "assigned_holder_url": "", "description": "Stress Test Workstream", "id": "task-stress"}]}, "tool": "assign_tasks_to_agents"}
-{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
-{"args": {"cmd": ["bash", "-lc", "echo test"]}, "tool": "container.exec"}
-{"args": {"cmd": ["bash", "-lc", "echo test"]}, "tool": "container.exec"}
-{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}

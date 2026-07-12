@@ -18,6 +18,7 @@ from workspace_bench.agents import BenchAgent, build_agent
 from workspace_bench.core.graders import grade_task
 from workspace_bench.core.models import JsonDict, RunResult, Task, ToolCall, ToolTraceEvent
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
+from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
 
 
 SNAPSHOT_FIELDS = {
@@ -33,25 +34,12 @@ SNAPSHOT_FIELDS = {
     "tools",
     "skills",
 }
-EXPECTED_MCP_TOOLS = {
-    "get_workspace_snapshot",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "read_widget",
-    "create_widget",
-    "update_widget",
-    "delete_widget",
-    "update_widget_layout",
-    "add_generative_widget",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "assign_tasks_to_agents",
+# The live MCP exposes these two canonical synthetic tools as a resource and a
+# prompt, respectively. Every actual tool expectation is derived from the one
+# canonical tool surface so additions cannot silently drift between runners.
+EXPECTED_MCP_TOOLS = set(WORKSPACE_TOOL_NAMES) - {
+    "read_workspace_resource",
+    "get_workspace_prompt",
 }
 EXPECTED_MCP_PROMPTS = {"workspace_tool_usage", "workspace_session_context"}
 EXPECTED_MCP_RESOURCES = {"openbb://workspace/app-builder/index"}
@@ -102,9 +90,7 @@ def bridge_command_to_simulator_call(command: JsonDict) -> tuple[str, JsonDict]:
         )
 
     if command_name == "get_params_options":
-        query = _single_payload(
-            args.get("param_options_queries"), "param_options_queries"
-        )
+        query = _single_payload(args.get("param_options_queries"), "param_options_queries")
         return (
             "get_params_options",
             {
@@ -143,6 +129,7 @@ async def run_workspace_mcp_smoke(
     resolved_agent = build_agent(agent) if isinstance(agent, str) else agent
     workspace = SimulatedWorkspace()
     workspace.reset(backends=task.fixtures, initial_state=task.initial_state)
+    initial_snapshot = workspace.snapshot()
     trace: list[ToolTraceEvent] = []
     mcp_tools: tuple[str, ...] = ()
     mcp_prompts: tuple[str, ...] = ()
@@ -156,9 +143,7 @@ async def run_workspace_mcp_smoke(
         workspace=workspace,
     ) as bridge:
         health_with_bridge = await _health(deps.httpx, normalized_base_url)
-        async with deps.streamablehttp_client(
-            f"{normalized_base_url}/mcp"
-        ) as streams:
+        async with deps.streamablehttp_client(f"{normalized_base_url}/mcp") as streams:
             read_stream, write_stream, _ = streams
             async with deps.ClientSession(read_stream, write_stream) as session:
                 await session.initialize()
@@ -185,7 +170,12 @@ async def run_workspace_mcp_smoke(
 
     health_after = await _health(deps.httpx, normalized_base_url)
     final_snapshot = workspace.snapshot()
-    grade = grade_task(task, final_snapshot, tuple(trace))
+    grade = grade_task(
+        task,
+        final_snapshot,
+        tuple(trace),
+        initial_snapshot=initial_snapshot,
+    )
     return LiveMcpRunResult(
         run_result=RunResult(
             task=task,

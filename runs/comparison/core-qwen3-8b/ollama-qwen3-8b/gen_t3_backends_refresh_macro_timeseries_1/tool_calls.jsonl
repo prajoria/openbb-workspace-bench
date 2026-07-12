@@ -1,4 +1,0 @@
-{"args": {"name": "macro", "operation": "add", "origin": "Bench Macro"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "refresh"}, "tool": "manage_backends"}
-{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
-{"args": {"data_args": {"series": "DGS10"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}

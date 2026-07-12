@@ -1,3 +1,0 @@
-{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\": false, \"tool\": \"get_workspace_snapshot\", \"args\": {}}", "turn": 1}
-{"action": {"args": {"data": "The desk meeting moved to 9am and the risk review is at noon.", "name": "Morning Standup", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"widget_type\": \"note\", \"name\": \"Morning Standup\", \"data\": \"The desk meeting moved to 9am and the risk review is at noon.\"}}", "turn": 2}
-{"action": {"done": true}, "content": "{\n  \"done\": true\n}", "turn": 3}

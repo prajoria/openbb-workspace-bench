@@ -1,0 +1,14 @@
+{
+  "add_backend_button": "[data-action='add-backend']",
+  "backend_url_input": "[data-field='backend-url']",
+  "backend_submit_button": "[data-action='connect-backend']",
+  "backend_ready": "[data-state='backend-ready']",
+  "app_add_button": "[data-app-id='{app_id}']",
+  "widget_add_button": "[data-add-widget='{widget_id}']",
+  "rendered_widget": "[data-widget-id='{widget_id}']",
+  "tab_button": "[data-tab-id='{tab_id}'], [data-tab-name='{tab_name}']",
+  "param_input": "[data-widget-id='{widget_id}'] [data-param-name='{param}']",
+  "form_submit": "[data-widget-id='{widget_id}'] [data-form-param='{param}']",
+  "column_header": "[data-widget-id='{widget_id}'] [data-column='{column}']",
+  "refresh_widget": "[data-widget-id='{widget_id}'] [data-action='refresh-widget']"
+}

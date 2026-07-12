@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import importlib
+import shlex
+import sys
 from types import SimpleNamespace
 import urllib.error
 
@@ -17,12 +20,14 @@ from workspace_bench.reports.model_compare import (
     format_result_cell,
     is_transient_http_status,
     load_model_adapters,
+    main,
     normalize_interactive_args,
     normalize_tool_name,
     parse_interactive_action,
     post_json,
     process_failure_rows,
     resolve_repo_root,
+    run_adapter,
     validate_adapters_for_runner,
 )
 from workspace_bench.core.runner import find_task
@@ -64,9 +69,7 @@ def test_normalize_interactive_args_maps_fixture_origin_slug() -> None:
 
 
 def test_stark_interactive_prompt_uses_display_origin_and_widget_hints() -> None:
-    task = find_task(
-        "gen_t1_params_schema_sector_client_360_portfolio_view_exposure_summary_7"
-    )
+    task = find_task("discover_schema_then_options_for_exposure_summary")
 
     messages = build_interactive_messages(build_task_envelope(task))
     prompt = messages[1]["content"]
@@ -76,7 +79,7 @@ def test_stark_interactive_prompt_uses_display_origin_and_widget_hints() -> None
 
 
 def test_non_widget_stark_prompt_omits_widget_hints() -> None:
-    task = find_task("gen_t0_delegate_earnings_single")
+    task = find_task("earnings_single")
 
     messages = build_interactive_messages(build_task_envelope(task))
     prompt = messages[1]["content"]
@@ -85,16 +88,81 @@ def test_non_widget_stark_prompt_omits_widget_hints() -> None:
 
 
 def test_widget_hints_can_be_ablated() -> None:
-    task = find_task(
-        "gen_t1_params_schema_sector_client_360_portfolio_view_exposure_summary_7"
-    )
+    task = find_task("discover_schema_then_options_for_exposure_summary")
 
-    messages = build_interactive_messages(
-        build_task_envelope(task), include_widget_hints=False
-    )
+    messages = build_interactive_messages(build_task_envelope(task), include_widget_hints=False)
     prompt = messages[1]["content"]
 
     assert '"widget_hints": {}' in prompt
+
+    system = messages[0]["content"]
+    assert "Before create_widget" not in system
+    assert "origin_hints" not in system
+
+
+def test_default_batch_adapter_prompts_accept_public_task_envelope(monkeypatch) -> None:
+    examples_dir = resolve_repo_root() / "examples"
+    monkeypatch.syspath_prepend(str(examples_dir))
+    monkeypatch.delitem(sys.modules, "ollama_agent", raising=False)
+    monkeypatch.delitem(sys.modules, "openai_gpt4_1", raising=False)
+    ollama_agent = importlib.import_module("ollama_agent")
+    openai_agent = importlib.import_module("openai_gpt4_1")
+    envelope = build_task_envelope(find_task("price_performance_aapl"))
+    specification_level = envelope["task"]["specification_level"]
+
+    prompts = (
+        ollama_agent.build_prompt(envelope),
+        openai_agent.build_prompt(envelope),
+    )
+
+    assert all(
+        f'"specification_level": "{specification_level}"' in prompt
+        for prompt in prompts
+    )
+
+    legacy_envelope = build_task_envelope(find_task("price_performance_aapl"))
+    legacy_task = legacy_envelope["task"]
+    legacy_task["level"] = legacy_task.pop("specification_level")
+    assert (
+        f'"specification_level": "{specification_level}"'
+        in ollama_agent.build_prompt(legacy_envelope)
+    )
+
+
+def test_batch_runner_executes_one_real_jsonl_agent_attempt(tmp_path) -> None:
+    adapter = ModelAdapter(
+        slug="jsonl-rule-agent",
+        label="JSONL rule agent",
+        command=(
+            f"{shlex.quote(sys.executable)} "
+            "-m workspace_bench.examples.jsonl_rule_agent"
+        ),
+        env={},
+        provider="custom",
+        model="rule-agent",
+    )
+    task = find_task("price_performance_aapl")
+
+    runs, metadata = run_adapter(
+        adapter,
+        [task],
+        tmp_path,
+        timeout=5,
+        episode_timeout=30,
+        runner="batch",
+        max_turns_override=None,
+        repeats=1,
+        model_retries=0,
+        retry_backoff=0,
+        color=False,
+    )
+
+    assert metadata["completed_cells"] == 1
+    assert len(runs) == 1
+    assert runs[0].runner == "batch"
+    assert runs[0].exit_code == 0
+    assert runs[0].run_result.grade.passed
+    assert runs[0].output_path.read_text(encoding="utf-8").strip()
 
 
 def test_run_metadata_snapshot_records_effective_settings(monkeypatch) -> None:
@@ -119,15 +187,20 @@ def test_run_metadata_snapshot_records_effective_settings(monkeypatch) -> None:
     assert settings["malformed_retries"] == 0
     assert settings["openai_base_url"] == "http://127.0.0.1:9/v1"
     assert "git_commit" in harness
-    assert "package_version" in harness
+    assert "git_dirty" in harness
 
 
-def test_comparison_metadata_uses_core_suite_release_id() -> None:
-    metadata = benchmark_metadata(
-        SimpleNamespace(task_dir=None, suite="core")
-    )
+def test_release_run_requires_repeated_attempts(capsys) -> None:
+    assert main(["--release-run", "--repeats", "1", "--dry-run"]) == 2
+    assert "requires --repeats >= 3" in capsys.readouterr().err
 
-    assert metadata["release_id"] == "workspace-bench-v1"
+
+def test_comparison_metadata_uses_core_suite_content_provenance() -> None:
+    metadata = benchmark_metadata(SimpleNamespace(task_dir=None, suite="core"))
+
+    assert metadata["suite_id"] == "core"
+    assert len(metadata["content_sha256"]) == 64
+    assert "git_commit" in metadata
 
 
 def test_colorize_wraps_enabled_status() -> None:
@@ -141,9 +214,7 @@ def test_normalize_tool_name_accepts_tool_prefix_alias() -> None:
 
 def test_tool_reference_documents_every_simulator_tool() -> None:
     simulator_tools = {
-        name.removeprefix("_tool_")
-        for name in dir(SimulatedWorkspace)
-        if name.startswith("_tool_")
+        name.removeprefix("_tool_") for name in dir(SimulatedWorkspace) if name.startswith("_tool_")
     }
 
     assert simulator_tools <= set(TOOL_REFERENCE)
@@ -319,4 +390,7 @@ def test_validate_adapters_for_runner_requires_batch_command() -> None:
 
     error = validate_adapters_for_runner([adapter], runner="batch")
 
-    assert error == "Batch runner requires command for every adapter; missing command for openai-compatible"
+    assert (
+        error
+        == "Batch runner requires command for every adapter; missing command for openai-compatible"
+    )

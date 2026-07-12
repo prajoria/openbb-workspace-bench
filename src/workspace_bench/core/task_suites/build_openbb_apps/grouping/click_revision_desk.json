@@ -1,0 +1,297 @@
+{
+  "id": "click_revision_desk",
+  "title": "Assemble the grouped Click Revision Desk app",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-grouping",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "grouping",
+    "cell-click"
+  ],
+  "prompt": "Deliver an analyst-ready Workspace solution for earnings and estimates. The workspace must cover revision rows whose symbol cell syncs the app. The workspace must cover EPS beat and miss history. Analysts need to inspect symbol, revision percentage. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Use `symbol` and `revision_pct` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "earnings-prep-data__click_revision_table",
+          "widget_id": "click_revision_table",
+          "fields": [
+            "revision_pct",
+            "symbol"
+          ],
+          "path": "/click-revision-table",
+          "payload": [
+            {
+              "revision_pct": 10.25,
+              "symbol": "AAPL"
+            },
+            {
+              "revision_pct": 20.5,
+              "symbol": "MSFT"
+            },
+            {
+              "revision_pct": 30.75,
+              "symbol": "NVDA"
+            }
+          ]
+        },
+        {
+          "name": "earnings-prep-data__earnings_chart",
+          "widget_id": "earnings_chart",
+          "fields": [
+            "earnings_chart_value"
+          ],
+          "path": "/eps-history",
+          "payload": [
+            {
+              "earnings_chart_value": 10.25
+            },
+            {
+              "earnings_chart_value": 20.5
+            },
+            {
+              "earnings_chart_value": 30.75
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_click-revision-table",
+        "datasets": [
+          "earnings-prep-data__click_revision_table"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "revision_pct",
+          "symbol"
+        ],
+        "required_param_kinds": [
+          "ticker"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_earnings-chart",
+        "datasets": [
+          "earnings-prep-data__earnings_chart"
+        ],
+        "widget_kind": "chart-like",
+        "must_cover_fields": [
+          "earnings_chart_value"
+        ],
+        "required_param_kinds": [
+          "ticker"
+        ],
+        "required_config": {}
+      }
+    ],
+    "capability_connections": [
+      {
+        "source": "capability_1_click-revision-table",
+        "target": "capability_2_earnings-chart",
+        "param_kind": "ticker"
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Earnings Prep Data",
+        "url": "http://localhost:7805",
+        "widgets_json": {
+          "click_revision_table": {
+            "name": "Click Revision Table",
+            "description": "Revision rows whose symbol cell syncs the app.",
+            "endpoint": "/click-revision-table",
+            "type": "table",
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "symbol",
+                    "headerName": "Symbol",
+                    "cellDataType": "text",
+                    "renderFn": "cellOnClick",
+                    "renderFnParams": {
+                      "actionType": "groupBy",
+                      "groupByParamName": "symbol"
+                    },
+                    "cellOnClick": {
+                      "actionType": "groupBy",
+                      "groupByParamName": "symbol"
+                    }
+                  },
+                  {
+                    "field": "revision_pct",
+                    "headerName": "Revision %",
+                    "cellDataType": "number",
+                    "formatterFn": "percent"
+                  }
+                ]
+              }
+            },
+            "gridData": {
+              "w": 20,
+              "h": 9
+            }
+          },
+          "earnings_chart": {
+            "name": "EPS History",
+            "description": "Plotly EPS beat/miss history.",
+            "endpoint": "/eps-history",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "raw": true,
+            "data": {
+              "valueField": "earnings_chart_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Click Revision Desk",
+            "description": "Clickable revisions and EPS history.",
+            "tabs": {
+              "table": {
+                "id": "table",
+                "name": "Table",
+                "layout": [
+                  {
+                    "i": "click_revision_table",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "chart": {
+                "id": "chart",
+                "name": "Chart",
+                "layout": [
+                  {
+                    "i": "earnings_chart",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Click Revision Sync",
+                "type": "param",
+                "paramName": "symbol",
+                "widgetIds": [
+                  "click_revision_table",
+                  "earnings_chart"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Click Revision Desk",
+        "dashboard_name": "Click Revision Desk Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "grouping",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "symbol",
+    "revision_pct"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique grouping/click_revision_desk building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_click-revision-table:table-like:revision_pct,symbol,capability_2_earnings-chart:chart-like:earnings_chart_value."
+}

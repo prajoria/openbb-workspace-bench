@@ -1,0 +1,129 @@
+{
+  "id": "broker_scorecard",
+  "title": "Read Data: Broker Scorecard",
+  "capability": "data-reading",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-read",
+    "data-reading",
+    "stark"
+  ],
+  "prompt": "On the Bench Stark Enterprise Broker Scorecard widget, use get_widget_data, find the exact score for execution_desk_fills_broker_scorecard, then add a note that cites each widget id, the field name, and the exact value.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Data Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "main",
+          "name": "Main"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "execution_desk_fills_broker_scorecard",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "period": "YTD"
+          },
+          "tab_id": "main",
+          "layout": {
+            "x": 0,
+            "y": 2,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_widget_data",
+    "read_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "get_widget_data",
+        "args_contains": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "execution_desk_fills_broker_scorecard"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_widget_data",
+        "data_contains": [
+          "execution_desk_fills_broker_scorecard",
+          "score",
+          "68.41"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "execution_desk_fills_broker_scorecard",
+          "score",
+          "68.41"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_fills_broker_scorecard",
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "fund": "Flagship Long/Short",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Data Note",
+        "data": "execution_desk_fills_broker_scorecard score is 68.41."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique read/broker_scorecard exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:execution_desk_fills_broker_scorecard,score."
+}

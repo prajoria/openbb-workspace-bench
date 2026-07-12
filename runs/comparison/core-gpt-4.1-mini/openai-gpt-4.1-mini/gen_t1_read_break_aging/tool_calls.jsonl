@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "fund_operations_control_tower_recons_break_aging"}, "tool": "get_widget_data"}
-{"args": {"data": "Reviewed the data from the fund_operations_control_tower_recons_break_aging widget on Bench Stark Enterprise.", "name": "Review Note on Break Aging Widget", "tab_id": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -11,6 +11,7 @@ from typing import Any
 from urllib.parse import parse_qs, urlparse
 
 from workspace_bench.core.models import JsonDict
+from workspace_bench.workspace.widget_params import flatten_params
 
 
 SYMBOLS = ["AAPL", "MSFT", "NVDA"]
@@ -242,7 +243,7 @@ class FixtureBackend:
             return [{"label": sector, "value": sector} for sector in SECTORS]
         if widget_id and widget_id in self.widgets:
             schema = self.widgets[widget_id]
-            for param in _flat_widget_params(schema):
+            for param in flatten_params(schema, recurse=False):
                 if param.get("paramName") == param_name:
                     options = param.get("options") or []
                     if isinstance(options, list):
@@ -568,21 +569,6 @@ def build_stark_enterprise_backend(
     )
 
 
-def _flat_widget_params(definition: JsonDict) -> list[JsonDict]:
-    """Flatten widget params; authored payloads may nest them in row arrays."""
-
-    params = definition.get("params")
-    flat: list[JsonDict] = []
-    if not isinstance(params, list):
-        return flat
-    for entry in params:
-        if isinstance(entry, list):
-            flat.extend(item for item in entry if isinstance(item, dict))
-        elif isinstance(entry, dict):
-            flat.append(entry)
-    return flat
-
-
 def _generic_widget_data(
     widget_id: str, definition: JsonDict, data_args: JsonDict
 ) -> Any:
@@ -593,7 +579,7 @@ def _generic_widget_data(
         str(param.get("paramName")): data_args.get(
             str(param.get("paramName")), param.get("value")
         )
-        for param in _flat_widget_params(definition)
+        for param in flatten_params(definition, recurse=False)
         if param.get("paramName")
     }
     value = round((sum(ord(char) for char in widget_id) % 9000) / 100, 2)

@@ -1,4 +1,0 @@
-{"args": {"reason": "Need workflow steps to capture in a note on the Guidance tab", "slug": "finance-guidance-tracker"}, "tool": "get_skill_content"}
-{"args": {"operation": "add_tabs", "tabs": [{"name": "Guidance"}]}, "tool": "manage_navigation_bar"}
-{"args": {"operation": "tab", "tab_id": "guidance"}, "tool": "navigate_workspace"}
-{"args": {"data": "Guidance tracker workflow: extract management claims, compare them with prior guidance, flag changed assumptions, and list evidence gaps.", "description": "Workflow steps from finance-guidance-tracker skill content", "inner_tab": "guidance", "name": "Finance Guidance Tracker Workflow", "widget_type": "note"}, "tool": "add_generative_widget"}

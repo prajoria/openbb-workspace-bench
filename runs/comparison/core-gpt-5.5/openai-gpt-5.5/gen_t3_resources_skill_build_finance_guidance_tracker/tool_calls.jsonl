@@ -1,5 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-guidance-tracker"}, "tool": "read_workspace_resource"}
-{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "executive_investment_dashboard_risk_limit_utilization"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {"period": "YTD", "strategy": "Global Equities"}, "origin": "Bench Stark Enterprise", "widget_id": "executive_investment_dashboard_risk_limit_utilization"}, "tool": "create_widget"}
-{"args": {"data": "Finance Guidance Tracker: Track company guidance changes, management claims, and follow-up evidence. Workflow: extract management claims, compare them with prior guidance, flag changed assumptions, and list evidence gaps. Use this alongside executive_investment_dashboard_risk_limit_utilization for Global Equities / YTD to capture evidence gaps before risk-limit decisions are finalized.", "description": "Guidance tracker workflow note", "name": "Finance Guidance Tracker Note", "widget_type": "note"}, "tool": "add_generative_widget"}

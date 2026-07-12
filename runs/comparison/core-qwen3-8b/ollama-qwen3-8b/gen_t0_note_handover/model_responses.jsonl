@@ -1,2 +1,0 @@
-{"action": {"args": {"data": "The EU book is flat and the US open checklist is complete.", "name": "Desk Handover", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"widget_type\": \"note\", \"data\": \"The EU book is flat and the US open checklist is complete.\", \"name\": \"Desk Handover\"}}", "turn": 1}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 2}

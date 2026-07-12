@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_data"}
-{"args": {"dashboard_id": "dash_001", "data": "MSFT latest close from price_performance data: 451.25 on 2026-01-15.", "description": "Latest close from existing MSFT price widget data.", "inner_tab": "", "name": "MSFT Latest Close", "widget_type": "note"}, "tool": "add_generative_widget"}

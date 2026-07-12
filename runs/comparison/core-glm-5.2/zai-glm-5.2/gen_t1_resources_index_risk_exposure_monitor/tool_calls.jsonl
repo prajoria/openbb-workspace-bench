@@ -1,3 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "data": "The Risk Exposure Monitor template id is risk-exposure-monitor. It provides Portfolio VaR, stress loss, exposures, limits, and position-level risk contributions.", "inner_tab": "", "name": "Risk Exposure Monitor Template", "widget_type": "note"}, "tool": "add_generative_widget"}

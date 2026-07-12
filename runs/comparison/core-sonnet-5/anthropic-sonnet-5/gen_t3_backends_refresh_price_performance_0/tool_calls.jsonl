@@ -1,6 +1,0 @@
-{"args": {"name": "equities", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "refresh"}, "tool": "manage_backends"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "create_widget"}
-{"args": {"data": "Backend 'equities' was registered as Bench Equities (backend_id: backend_001, url: http://127.0.0.1:9101) and successfully refreshed. Following the refresh, the Price Performance widget (widget_id: price_performance) was added with data_args symbol: AAPL.", "name": "Backend Refresh Log", "widget_type": "note"}, "tool": "add_generative_widget"}

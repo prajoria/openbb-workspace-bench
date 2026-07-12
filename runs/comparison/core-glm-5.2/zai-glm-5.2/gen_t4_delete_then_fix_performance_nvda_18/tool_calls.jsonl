@@ -1,4 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "widget_uuid": "widget_002"}, "tool": "delete_widget"}
-{"args": {"dashboard_id": "dash_001", "data_args": {"symbol": "NVDA"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
-{"args": {"dashboard_id": "dash_001", "data": "NVDA Price Performance widget repaired. The duplicate was removed and the remaining widget was updated to NVDA.", "name": "NVDA Repaired Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,0 +1,105 @@
+{
+  "allowed_tools": [
+    "filesystem",
+    "shell"
+  ],
+  "business_terms": [],
+  "capability": "build-real-backend",
+  "category": "platform",
+  "code_task": {
+    "command_timeout_ms": 120000,
+    "core_module": "app.py",
+    "health_path": "/health",
+    "install_command": [
+      "uv",
+      "sync",
+      "--quiet"
+    ],
+    "oracle_path": "fixtures/risk_metric_and_commentary/oracle",
+    "probes": [
+      {
+        "expected_values": {},
+        "field_types": {
+          "label": "string",
+          "value": "number"
+        },
+        "json_body": {},
+        "method": "GET",
+        "minimum_items": 1,
+        "name": "risk score",
+        "path": "/risk/score",
+        "query": {},
+        "required_fields": [
+          "label",
+          "value"
+        ],
+        "widget_id": "risk_score"
+      },
+      {
+        "expected_values": {},
+        "field_types": {
+          "markdown": "string"
+        },
+        "json_body": {},
+        "method": "GET",
+        "minimum_items": 1,
+        "name": "risk commentary",
+        "path": "/risk/commentary",
+        "query": {},
+        "required_fields": [
+          "markdown"
+        ],
+        "widget_id": "risk_commentary"
+      }
+    ],
+    "request_timeout_ms": 3000,
+    "require_apps": false,
+    "schema_version": "workspace-bench-code-task/v0",
+    "start_command": [
+      "{python}",
+      "-m",
+      "uvicorn",
+      "app:app",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "{port}"
+    ],
+    "starter_path": "fixtures/risk_metric_and_commentary/starter",
+    "startup_timeout_ms": 20000,
+    "test_command": [
+      "{python}",
+      "-m",
+      "pytest",
+      "-q",
+      "--junitxml={junit}"
+    ]
+  },
+  "difficulty": "easy",
+  "domain": "engineering",
+  "family": "backend-code",
+  "fixtures": {
+    "backends": []
+  },
+  "id": "risk_metric_and_commentary",
+  "initial_state": {},
+  "limits": {
+    "max_turns": 24
+  },
+  "novelty": "Real-code backend task: risk_metric_and_commentary",
+  "oracle_tool_calls": [],
+  "prompt": "Finish both supplied risk widgets. Put the shared portfolio-risk calculation in analytics.py, then serve a numeric metric from /risk/score and meaningful markdown from /risk/commentary. Both endpoints must use that shared module and keep CORS/tests green.",
+  "schema_version": "workspace-bench-task",
+  "source": "WorkspaceBench Phase 10 authored code track",
+  "split": "train",
+  "subdomain": "openbb-custom-backends",
+  "success": {},
+  "tags": [
+    "build-openbb-backends",
+    "experimental-v0",
+    "multi-widget",
+    "shared-module"
+  ],
+  "title": "Build shared risk metric and commentary widgets",
+  "workflow": "custom-backend-development"
+}

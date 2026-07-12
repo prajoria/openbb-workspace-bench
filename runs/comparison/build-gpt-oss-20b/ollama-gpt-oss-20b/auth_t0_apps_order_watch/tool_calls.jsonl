@@ -1,1 +1,0 @@
-{"tool": "manage_backends", "args": {"operation": "refresh", "backend_id": "backend_001", "apps_json": [{"name": "Order Watch", "description": "Open orders and exceptions.", "tabs": {"orders": {"id": "orders", "name": "Orders", "layout": [{"i": "open_orders", "x": 0, "y": 0, "w": 20, "h": 9}, {"i": "exception_metric", "x": 20, "y": 0, "w": 12, "h": 6}]}}}]}}

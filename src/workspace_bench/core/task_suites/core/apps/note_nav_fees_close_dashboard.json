@@ -1,0 +1,115 @@
+{
+  "id": "note_nav_fees_close_dashboard",
+  "title": "Instantiate NAV, Fees & Close Dashboard And Brief",
+  "capability": "app-instantiation",
+  "workflow": "vendor-sla-monitoring",
+  "subdomain": "data-platform",
+  "tags": [
+    "family-apps",
+    "apps",
+    "stark",
+    "note"
+  ],
+  "prompt": "Create a new dashboard named Monthly Close Control by instantiating the NAV, Fees & Close Dashboard app from the Bench Stark Enterprise backend, then add a note on the Close tab mentioning close checklist and exceptions.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Monthly Close Control",
+    "required_tabs": [
+      "overview",
+      "cash",
+      "close"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "nav_fees_close_dashboard_cash_cash_movements",
+        "tab_id": "cash",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "nav_fees_close_dashboard_close_close_exceptions",
+        "tab_id": "close",
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "close checklist",
+          "exceptions"
+        ],
+        "tab_id": "close"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "NAV, Fees & Close Dashboard",
+        "dashboard_name": "Monthly Close Control",
+        "activate": true
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "close"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Brief Note",
+        "data": "Close checklist in progress; NAV exceptions open."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 7
+  },
+  "split": "train",
+  "novelty": "Unique apps/note_nav_fees_close_dashboard exercise using add_generative_widget, manage_apps, manage_backends, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_tab, missing_widget, too_many_invalid_calls on stark-enterprise; artifact apps:NAV, Fees & Close Dashboard; widgets:Bench Stark Enterprise/nav_fees_close_dashboard_cash_cash_movements@cash,Bench Stark Enterprise/nav_fees_close_dashboard_close_close_exceptions@close; tabs:cash,close,overview; generated:note@close:close checklist,exceptions."
+}

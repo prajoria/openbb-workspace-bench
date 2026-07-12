@@ -1,3 +1,0 @@
-{"args": {"data_args": {"symbol": "AAPL"}, "widget_id": "price_performance"}, "tool": "update_widget"}
-{"args": {"data_args": {"limit": 5}, "widget_id": "latest_news"}, "tool": "update_widget"}
-{"args": {"data": "AAPL repaired.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

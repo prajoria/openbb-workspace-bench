@@ -1,0 +1,155 @@
+{
+  "id": "addtab_fundamentals_aapl",
+  "title": "Add The Missing Fundamentals Tab",
+  "capability": "workspace-repair",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-navigate",
+    "repair",
+    "tabs",
+    "navigation"
+  ],
+  "prompt": "This dashboard is missing its Fundamentals tab. Add a tab named Fundamentals and put the Fundamental Metrics widget for AAPL on it. Keep the existing Overview tab intact.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Incomplete Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "price_performance",
+          "data_args": {
+            "symbol": "AAPL"
+          },
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 2,
+            "w": 20,
+            "h": 12
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget"
+  ],
+  "success": {
+    "required_tabs": [
+      "overview",
+      "fundamentals"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        },
+        "tab_id": "overview",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Equities",
+        "widget_id": "fundamental_metrics",
+        "data_args": {
+          "symbol": "AAPL"
+        },
+        "tab_id": "fundamentals",
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_navigation_bar",
+      "args": {
+        "operation": "add_tabs",
+        "tabs": [
+          {
+            "name": "Fundamentals"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "fundamentals"
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Equities"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "fundamental_metrics"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "fundamental_metrics",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "repair",
+  "family": "navigate",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 9
+  },
+  "split": "validation",
+  "novelty": "Unique navigate/addtab_fundamentals_aapl exercise using create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_navigation_bar, navigate_workspace with checks layout_out_of_grid, layout_overlap, missing_tab, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on equities; artifact widgets:Bench Equities/fundamental_metrics@fundamentals,Bench Equities/price_performance@overview; tabs:fundamentals,overview."
+}

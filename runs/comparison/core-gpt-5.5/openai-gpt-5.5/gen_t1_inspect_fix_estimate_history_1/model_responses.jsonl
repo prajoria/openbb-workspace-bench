@@ -1,4 +1,0 @@
-{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\":false,\"tool\":\"get_workspace_snapshot\",\"args\":{}}", "turn": 1}
-{"action": {"args": {"dashboard_id": "dash_001", "widget_id": "estimate_history"}, "done": false, "tool": "read_widget"}, "content": "{\"done\":false,\"tool\":\"read_widget\",\"args\":{\"dashboard_id\":\"dash_001\",\"widget_id\":\"estimate_history\"}}", "turn": 2}
-{"action": {"args": {"dashboard_id": "dash_001", "data_args": {"symbol": "NVDA"}, "widget_uuid": "widget_001"}, "done": false, "tool": "update_widget"}, "content": "{\"done\":false,\"tool\":\"update_widget\",\"args\":{\"dashboard_id\":\"dash_001\",\"widget_uuid\":\"widget_001\",\"data_args\":{\"symbol\":\"NVDA\"}}}", "turn": 3}
-{"action": {"done": true}, "content": "{\"done\":true}", "turn": 4}

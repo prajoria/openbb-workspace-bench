@@ -1,0 +1,314 @@
+{
+  "id": "rates_ship",
+  "title": "Ship, open, and configure the Rates Chart Live app",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-charts",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "charts",
+    "orchestration"
+  ],
+  "prompt": "The desk needs a production-ready rates and Treasury markets workflow for a rates strategist. The workspace must cover the Treasury yield curve. The workspace must cover current 2s10s spread in bps. The workspace must cover desk commentary on the rates day. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Rates Chart Live', 'yield curve', 'Rates Watch Data', '5s30s'. Use your judgment on the architecture and leave other work intact.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Rates Chart Live",
+          "yield curve",
+          "Rates Watch Data",
+          "5s30s"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "rates-watch-data__curve_spread_metric",
+          "widget_id": "curve_spread_metric",
+          "fields": [
+            "curve_spread_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/curve-spread",
+          "payload": {
+            "curve_spread_metric_value": 10.25,
+            "label": "2s10s Spread",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "rates-watch-data__rates_commentary",
+          "widget_id": "rates_commentary",
+          "fields": [
+            "rates_commentary_value"
+          ],
+          "path": "/rates-commentary",
+          "payload": "Rates Commentary fixture-backed runtime summary."
+        },
+        {
+          "name": "rates-watch-data__yield_curve",
+          "widget_id": "yield_curve",
+          "fields": [
+            "yield_curve_value"
+          ],
+          "path": "/yield-curve",
+          "payload": [
+            {
+              "yield_curve_value": 10.25
+            },
+            {
+              "yield_curve_value": 20.5
+            },
+            {
+              "yield_curve_value": 30.75
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_curve-spread-metric",
+        "datasets": [
+          "rates-watch-data__curve_spread_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "curve_spread_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_yield-curve",
+        "datasets": [
+          "rates-watch-data__yield_curve"
+        ],
+        "widget_kind": "chart-like",
+        "must_cover_fields": [
+          "yield_curve_value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {
+          "raw": true
+        }
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    },
+    "polish": [
+      {
+        "code": "polish_refresh_policy",
+        "backend_name": "Rates Watch Data",
+        "widget_id": "yield_curve",
+        "path": "staleTime",
+        "expected": 900000
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Rates Watch Data",
+        "url": "http://localhost:7803",
+        "widgets_json": {
+          "yield_curve": {
+            "name": "Yield Curve",
+            "description": "Plotly treasury yield curve snapshot.",
+            "endpoint": "/yield-curve",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "raw": true,
+            "params": [
+              {
+                "paramName": "curve_view",
+                "type": "text",
+                "label": "Curve View",
+                "value": "2s10s",
+                "description": "Curve segment in focus."
+              }
+            ],
+            "staleTime": 900000,
+            "data": {
+              "valueField": "yield_curve_value"
+            }
+          },
+          "curve_spread_metric": {
+            "name": "2s10s Spread",
+            "description": "Current 2s10s spread in bps.",
+            "endpoint": "/curve-spread",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            },
+            "staleTime": 900000,
+            "data": {
+              "valueField": "curve_spread_metric_value"
+            }
+          },
+          "rates_commentary": {
+            "name": "Rates Commentary",
+            "description": "Desk commentary on the rates day.",
+            "endpoint": "/rates-commentary",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "series",
+                "type": "endpoint",
+                "label": "Series",
+                "value": "DGS10",
+                "optionsEndpoint": "/series-options"
+              }
+            ],
+            "staleTime": 900000,
+            "data": {
+              "valueField": "rates_commentary_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Rates Chart Live",
+            "description": "Yield curve and spread.",
+            "tabs": {
+              "rates": {
+                "id": "rates",
+                "name": "Rates",
+                "layout": [
+                  {
+                    "i": "yield_curve",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "signals": {
+                "id": "signals",
+                "name": "Signals",
+                "layout": [
+                  {
+                    "i": "curve_spread_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 8,
+                    "h": 5
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Rates Chart Live",
+        "dashboard_name": "Rates Chart Live Board",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "yield_curve",
+        "data_args": {
+          "curve_view": "5s30s"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Rates Chart Live",
+        "data": "Rates Chart Live shipped from Rates Watch Data: yield curve live. Configured curve_view=5s30s."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "charts",
+  "capability": "widget-building",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [
+    "Rates Chart Live",
+    "yield curve",
+    "Rates Watch Data",
+    "5s30s"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "validation",
+  "novelty": "Unique charts/rates_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact capabilities:capability_1_curve-spread-metric:metric:curve_spread_metric_value,capability_2_yield-curve:chart-like:yield_curve_value; generated:note@*:Rates Chart Live,yield curve."
+}

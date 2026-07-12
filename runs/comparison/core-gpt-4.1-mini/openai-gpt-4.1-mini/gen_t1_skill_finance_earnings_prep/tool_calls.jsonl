@@ -1,2 +1,0 @@
-{"args": {"slug": "finance-earnings-prep"}, "tool": "get_skill_content"}
-{"args": {"data": "Earnings prep workflow: compare internal estimates to street numbers, identify surprise drivers, review guidance, inspect transcript tone, and produce action items for the portfolio manager.", "description": "Workflow steps for an analyst preparing earnings review.", "name": "Earnings Prep Workflow Notes", "widget_type": "note"}, "tool": "add_generative_widget"}

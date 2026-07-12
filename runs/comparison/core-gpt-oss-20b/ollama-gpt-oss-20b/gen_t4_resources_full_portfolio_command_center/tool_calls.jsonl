@@ -1,4 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {"backend_id": "backend_001", "dashboard_name": "PM Resource Command", "operation": "instantiate", "template_id": "portfolio-command-center"}, "tool": "manage_apps"}
-{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "holdings"}, "tool": "navigate_workspace"}
-{"args": {"data": "The Sector Exposure table provides insight into the portfolio's allocation across sectors, highlighting key concentration areas and potential risks.\n\nResource: Portfolio Command Center", "inner_tab": "holdings", "widget_type": "note"}, "tool": "add_generative_widget"}

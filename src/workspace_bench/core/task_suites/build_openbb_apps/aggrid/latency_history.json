@@ -1,0 +1,273 @@
+{
+  "id": "latency_history",
+  "title": "Assemble the Vendor Health app around Latency History",
+  "workflow": "vendor-sla-monitoring",
+  "subdomain": "operations",
+  "tags": [
+    "family-aggrid",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "aggrid",
+    "multi-tab"
+  ],
+  "prompt": "Deliver an analyst-ready Workspace solution for vendor service levels. The workspace must cover vendor latency history. The workspace must cover count of open SLA breaches. Analysts need to inspect vendor, day, latency milliseconds, breach. Leave the complete working workspace open for review. Use `vendor` and `day` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "vendor-sla-data__breach_metric",
+          "widget_id": "breach_metric",
+          "fields": [
+            "breach_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/breach-count",
+          "payload": {
+            "breach_metric_value": 10.25,
+            "label": "Open Breaches",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "vendor-sla-data__latency_history",
+          "widget_id": "latency_history",
+          "fields": [
+            "breach",
+            "day",
+            "latency_ms",
+            "vendor"
+          ],
+          "path": "/latency-history",
+          "payload": [
+            {
+              "breach": true,
+              "day": "2026-01-13",
+              "latency_ms": 10.25,
+              "vendor": "vendor-1"
+            },
+            {
+              "breach": false,
+              "day": "2026-01-14",
+              "latency_ms": 20.5,
+              "vendor": "vendor-2"
+            },
+            {
+              "breach": true,
+              "day": "2026-01-15",
+              "latency_ms": 30.75,
+              "vendor": "vendor-3"
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_breach-metric",
+        "datasets": [
+          "vendor-sla-data__breach_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "breach_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_latency-history",
+        "datasets": [
+          "vendor-sla-data__latency_history"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "breach",
+          "day",
+          "latency_ms",
+          "vendor"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    },
+    "polish": [
+      {
+        "code": "polish_refresh_policy",
+        "backend_name": "Vendor SLA Data",
+        "widget_id": "latency_history",
+        "path": "staleTime",
+        "expected": 900000
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Vendor SLA Data",
+        "url": "http://localhost:7804",
+        "widgets_json": {
+          "latency_history": {
+            "name": "Latency History",
+            "description": "Vendor latency history.",
+            "endpoint": "/latency-history",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "vendor",
+                    "headerName": "Vendor",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "day",
+                    "headerName": "Day",
+                    "cellDataType": "dateString"
+                  },
+                  {
+                    "field": "latency_ms",
+                    "headerName": "Latency Ms",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "breach",
+                    "headerName": "Breach",
+                    "cellDataType": "boolean"
+                  }
+                ]
+              }
+            },
+            "staleTime": 900000
+          },
+          "breach_metric": {
+            "name": "Open Breaches",
+            "description": "Count of open SLA breaches.",
+            "endpoint": "/breach-count",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            },
+            "data": {
+              "valueField": "breach_metric_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Vendor Health",
+            "description": "Latency and breach posture.",
+            "tabs": {
+              "latency": {
+                "id": "latency",
+                "name": "Latency",
+                "layout": [
+                  {
+                    "i": "latency_history",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "signals": {
+                "id": "signals",
+                "name": "Signals",
+                "layout": [
+                  {
+                    "i": "breach_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Vendor Health",
+        "dashboard_name": "Vendor Health Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "aggrid",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "vendor",
+    "day"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "validation",
+  "novelty": "Unique aggrid/latency_history building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Vendor SLA Data; artifact capabilities:capability_1_breach-metric:metric:breach_metric_value,capability_2_latency-history:table-like:breach,day,latency_ms,vendor."
+}

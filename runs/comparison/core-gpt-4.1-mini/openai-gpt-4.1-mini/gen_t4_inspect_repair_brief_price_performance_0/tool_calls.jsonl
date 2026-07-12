@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {"symbol": "AAPL"}, "widget_uuid": "widget_002"}, "tool": "update_widget"}
-{"args": {"dashboard_id": "dash_001", "data": "Repaired the Price Performance widget symbol from MSFT to AAPL to match the companion Latest News widget.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,4 +1,0 @@
-{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\": false, \"tool\": \"get_workspace_snapshot\", \"args\": {}}", "turn": 1}
-{"action": {"args": {"h": 13, "w": 40, "widget_id": "price_performance", "x": 0, "y": 0}, "done": false, "tool": "update_widget_layout"}, "content": "{\"done\": false, \"tool\": \"update_widget_layout\", \"args\": {\"widget_id\": \"price_performance\", \"h\": 13, \"w\": 40, \"x\": 0, \"y\": 0}}", "turn": 2}
-{"action": {"args": {"h": 10, "w": 40, "widget_id": "latest_news", "x": 0, "y": 13}, "done": false, "tool": "update_widget_layout"}, "content": "{\"done\": false, \"tool\": \"update_widget_layout\", \"args\": {\"widget_id\": \"latest_news\", \"h\": 10, \"w\": 40, \"x\": 0, \"y\": 13}}", "turn": 3}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 4}

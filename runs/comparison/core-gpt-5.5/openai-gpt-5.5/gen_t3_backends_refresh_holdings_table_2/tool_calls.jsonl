@@ -1,6 +1,0 @@
-{"args": {"name": "portfolio", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "refresh"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "get_widget_schema"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "create_widget"}
-{"args": {"data": "Backend Bench Portfolio was registered with backend name portfolio and refreshed before adding Bench Portfolio/holdings_table. Refreshed backend_id: backend_001. Added widget: holdings_table (Holdings).", "name": "Backend Refresh Note", "widget_type": "note"}, "tool": "add_generative_widget"}

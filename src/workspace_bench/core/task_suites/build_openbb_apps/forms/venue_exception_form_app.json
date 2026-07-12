@@ -1,0 +1,206 @@
+{
+  "id": "venue_exception_form_app",
+  "title": "Ship Venue Exception Form as the Venue Exceptions app",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-forms",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "forms"
+  ],
+  "prompt": "Build a working Workspace experience for an execution analyst covering orders and venue quality. The workspace must cover record an execution venue exception. An analyst can adjust the relevant numeric scope. The user can enter the required details and submit the workflow. Leave the complete working workspace open for review. Keep these source-contract anchors: `exception` and `venue`. Choose the rest of the architecture and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "execution-desk-data__venue_exception_form",
+          "widget_id": "venue_exception_form",
+          "fields": [
+            "venue_exception_form_value"
+          ],
+          "path": "/venue-exception",
+          "payload": [
+            {
+              "venue_exception_form_value": 10.25
+            },
+            {
+              "venue_exception_form_value": 20.5
+            },
+            {
+              "venue_exception_form_value": 30.75
+            }
+          ],
+          "form_endpoint": "/venue-exception-submit"
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_venue-exception-form",
+        "datasets": [
+          "execution-desk-data__venue_exception_form"
+        ],
+        "widget_kind": "form",
+        "must_cover_fields": [
+          "venue_exception_form_value"
+        ],
+        "required_param_kinds": [
+          "button",
+          "form",
+          "number",
+          "text"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "venue_exception_form": {
+            "name": "Venue Exception Form",
+            "description": "Record an execution venue exception.",
+            "endpoint": "/venue-exception",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 10
+            },
+            "params": [
+              {
+                "paramName": "exception",
+                "type": "form",
+                "label": "Exception",
+                "endpoint": "/venue-exception-submit",
+                "method": "POST",
+                "inputParams": [
+                  {
+                    "paramName": "venue",
+                    "type": "text",
+                    "label": "Venue",
+                    "value": "ARCA"
+                  },
+                  {
+                    "paramName": "slippage_bps",
+                    "type": "number",
+                    "label": "Slippage bps",
+                    "value": 12,
+                    "min": 0
+                  },
+                  {
+                    "paramName": "record",
+                    "type": "button",
+                    "label": "Record"
+                  }
+                ]
+              }
+            ],
+            "data": {
+              "valueField": "venue_exception_form_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Venue Exceptions",
+            "description": "Capture venue exception records.",
+            "tabs": {
+              "exceptions": {
+                "id": "exceptions",
+                "name": "Exceptions",
+                "layout": [
+                  {
+                    "i": "venue_exception_form",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 10
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Venue Exceptions",
+        "dashboard_name": "Venue Exceptions Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "forms",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "exception",
+    "venue"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "test",
+  "novelty": "Unique forms/venue_exception_form_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_venue-exception-form:form:venue_exception_form_value."
+}

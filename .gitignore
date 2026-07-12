@@ -2,6 +2,8 @@
 .env
 .env.*
 !.env.example
+.workspace-bench-auth/
+*.workspace-auth.json
 __pycache__/
 *.py[cod]
 .pytest_cache/
@@ -14,7 +16,16 @@ traces/
 runs/*
 !runs/README.md
 !runs/comparison/
-!runs/exports/
 !runs/reports/
+# Per-episode transcript trees under every comparison board are regenerable and are the
+# bulk of the repo (100s of MB). Board-level summary JSON/markdown stay tracked; the trees
+# (runs/comparison/<board>/<model-slug>/...) and the rollout exports are ignored.
+runs/comparison/*/*/
+runs/exports/
+# Per-model resume checkpoints are runtime state, not evidence.
+runs/comparison/*/*.checkpoint.json
+# Superseded raw calibration (pre-fix) and the throwaway cost smoke: not committed at all.
+runs/comparison/build-calibration-202607/
+runs/comparison/phase9a-smoke/
 .DS_Store
 .coverage

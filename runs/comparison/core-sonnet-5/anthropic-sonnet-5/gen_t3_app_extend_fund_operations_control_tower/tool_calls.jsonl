@@ -1,7 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"backend_id": "backend_001", "dashboard_name": "Ops Control Room", "operation": "instantiate", "template_id": "fund-operations-control-tower"}, "tool": "manage_apps"}
-{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "recons"}, "tool": "navigate_workspace"}
-{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "fund_operations_control_tower_recons_break_aging"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_002", "data_args": {"fund": "Flagship Long/Short", "period": "YTD", "status": "Open"}, "origin": "Bench Stark Enterprise", "ui_args": {"tab_id": "recons"}, "widget_id": "fund_operations_control_tower_recons_break_aging"}, "tool": "create_widget"}

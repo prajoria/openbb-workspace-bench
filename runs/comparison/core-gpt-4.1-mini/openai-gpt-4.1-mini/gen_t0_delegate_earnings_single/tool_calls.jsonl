@@ -1,1 +1,0 @@
-{"args": {"task_requests": [{"assigned_agent_id": "coverage-analyst", "assigned_holder_url": "Bench Stark Enterprise", "description": "Review estimate revisions and transcript tone for earnings prep.", "id": "coverage-analyst"}]}, "tool": "assign_tasks_to_agents"}

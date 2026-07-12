@@ -1,2 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {"data": "Client 360 template id client-360", "origin": "Bench Stark Enterprise", "widget_type": "note"}, "tool": "add_generative_widget"}

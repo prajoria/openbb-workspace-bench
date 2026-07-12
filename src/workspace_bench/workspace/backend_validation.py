@@ -19,6 +19,9 @@ import re
 from typing import Any
 
 from workspace_bench.core.models import JsonDict
+from workspace_bench.workspace.geometry import rects_overlap
+from workspace_bench.workspace.naming import slugify
+from workspace_bench.workspace.widget_params import flatten_params
 
 # WidgetVizTypes — terminalpro src/lib/types/app.ts:543-563
 WIDGET_VIZ_TYPES = frozenset({
@@ -78,11 +81,6 @@ KNOWN_TEMPLATE_KEYS = frozenset({
 CRON_FIELDS = 5
 
 
-def slugify(value: str) -> str:
-    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
-    return slug or "app"
-
-
 def _is_number(value: Any) -> bool:
     return isinstance(value, (int, float)) and not isinstance(value, bool)
 
@@ -98,20 +96,6 @@ def _looks_like_single_widget(payload: JsonDict) -> bool:
 
 def _valid_cron(value: str) -> bool:
     return len(value.split()) == CRON_FIELDS
-
-
-def _iter_params(params: Any) -> list[Any]:
-    """Params may be a flat array or an array-of-arrays (row layout)."""
-
-    if not isinstance(params, list):
-        return []
-    flattened: list[Any] = []
-    for entry in params:
-        if isinstance(entry, list):
-            flattened.extend(entry)
-        else:
-            flattened.append(entry)
-    return flattened
 
 
 def _render_fn_list(value: Any) -> list[str] | None:
@@ -433,13 +417,19 @@ def validate_widgets_json(
             if not isinstance(params, list):
                 errors.append(f"{where}: params must be an array.")
             else:
-                for param in _iter_params(params):
+                for entry in params:
+                    entries = entry if isinstance(entry, list) else [entry]
+                    errors.extend(
+                        f"{where}: each param must be an object."
+                        for param in entries
+                        if not isinstance(param, dict)
+                    )
+                params_flat = flatten_params(definition, recurse=False)
+                for param in params_flat:
                     _validate_param(
                         where, param, seen_names, file_selector_count, errors
                     )
-                for param in _iter_params(params):
-                    if not isinstance(param, dict):
-                        continue
+                for param in params_flat:
                     options_params = param.get("optionsParams")
                     if isinstance(options_params, dict):
                         for ref in options_params.values():
@@ -457,7 +447,7 @@ def validate_widgets_json(
                 and param.get("type") == "endpoint"
                 and isinstance(param.get("roles"), list)
                 and "fileSelector" in param["roles"]
-                for param in _iter_params(params)
+                for param in flatten_params(definition, recurse=False)
             )
             if not has_file_selector:
                 errors.append(
@@ -506,15 +496,6 @@ def validate_widgets_json(
     if errors:
         return errors, warnings, {}
     return errors, warnings, normalized
-
-
-def _rects_overlap(a: JsonDict, b: JsonDict) -> bool:
-    return (
-        a["x"] < b["x"] + b["w"]
-        and b["x"] < a["x"] + a["w"]
-        and a["y"] < b["y"] + b["h"]
-        and b["y"] < a["y"] + a["h"]
-    )
 
 
 def validate_apps_json(
@@ -605,7 +586,7 @@ def validate_apps_json(
                     "x": item["x"], "y": item["y"], "w": item["w"], "h": item["h"],
                 }
                 for other in rects:
-                    if _rects_overlap(rect, other):
+                    if rects_overlap(rect, other):
                         warnings.append(
                             f"{tab_where}: layout items '{other['i']}' and "
                             f"'{widget_ref}' overlap."

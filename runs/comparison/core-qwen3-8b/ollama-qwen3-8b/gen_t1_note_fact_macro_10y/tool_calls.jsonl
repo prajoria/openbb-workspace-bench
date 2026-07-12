@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_data"}
-{"args": {"data": "Series ID: DGS10\nLatest Value: 4.12", "name": "10Y Series Note", "widget_type": "note"}, "tool": "add_generative_widget"}

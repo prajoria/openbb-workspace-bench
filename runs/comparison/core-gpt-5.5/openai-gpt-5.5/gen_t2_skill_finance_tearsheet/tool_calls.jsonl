@@ -1,4 +1,0 @@
-{"args": {"reason": "Capture workflow steps for the Tearsheet tab note", "slug": "finance-tearsheet"}, "tool": "get_skill_content"}
-{"args": {"operation": "add_tabs", "tabs": [{"name": "Tearsheet"}]}, "tool": "manage_navigation_bar"}
-{"args": {"operation": "tab", "tab_id": "tearsheet"}, "tool": "navigate_workspace"}
-{"args": {"data": "Tearsheet workflow: gather price action, fundamentals, valuation, catalysts, risks, ownership, and a short investment conclusion.", "description": "Workflow steps from finance-tearsheet skill", "inner_tab": "tearsheet", "name": "Finance Tearsheet Workflow", "widget_type": "note"}, "tool": "add_generative_widget"}

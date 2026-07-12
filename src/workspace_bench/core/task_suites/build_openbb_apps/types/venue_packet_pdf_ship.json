@@ -1,0 +1,338 @@
+{
+  "id": "venue_packet_pdf_ship",
+  "title": "Ship, open, and configure the Venue Packet Live app",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-types",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "types",
+    "orchestration"
+  ],
+  "prompt": "The desk needs a production-ready orders and venue quality workflow for an execution analyst. The workspace must cover monthly venue scorecard packet. The workspace must cover open execution exceptions. The workspace must cover live open orders blotter. Analysts need to inspect order ID, symbol, quantity, status. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Venue Packet Live', 'venue packet', 'Execution Desk Data', 'EDGX'. Use your judgment on the architecture and leave other work intact.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Venue Packet Live",
+          "venue packet",
+          "Execution Desk Data",
+          "EDGX"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "execution-desk-data__exception_metric",
+          "widget_id": "exception_metric",
+          "fields": [
+            "exception_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/exception-count",
+          "payload": {
+            "exception_metric_value": 10.25,
+            "label": "Exceptions",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "execution-desk-data__open_orders",
+          "widget_id": "open_orders",
+          "fields": [
+            "order_id",
+            "qty",
+            "status",
+            "symbol"
+          ],
+          "path": "/open-orders",
+          "payload": [
+            {
+              "order_id": "order_id-1",
+              "qty": 10.25,
+              "status": "Primary",
+              "symbol": "AAPL"
+            },
+            {
+              "order_id": "order_id-2",
+              "qty": 20.5,
+              "status": "Review",
+              "symbol": "MSFT"
+            },
+            {
+              "order_id": "order_id-3",
+              "qty": 30.75,
+              "status": "Approved",
+              "symbol": "NVDA"
+            }
+          ]
+        },
+        {
+          "name": "execution-desk-data__venue_packet_pdf",
+          "widget_id": "venue_packet_pdf",
+          "fields": [
+            "title",
+            "url",
+            "venue_packet_pdf_value"
+          ],
+          "path": "/venue-packet-pdf",
+          "payload": {
+            "title": "Venue Packet PDF",
+            "url": "https://fixtures.workspace-bench.invalid/venue_packet_pdf",
+            "venue_packet_pdf_value": 10.25
+          }
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_exception-metric",
+        "datasets": [
+          "execution-desk-data__exception_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "exception_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_venue-packet-pdf",
+        "datasets": [
+          "execution-desk-data__venue_packet_pdf"
+        ],
+        "widget_kind": "pdf",
+        "must_cover_fields": [
+          "venue_packet_pdf_value"
+        ],
+        "required_param_kinds": [
+          "endpoint"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "venue_packet_pdf": {
+            "name": "Venue Packet PDF",
+            "description": "Monthly venue scorecard packet.",
+            "endpoint": "/venue-packet-pdf",
+            "type": "pdf",
+            "gridData": {
+              "w": 16,
+              "h": 14
+            },
+            "params": [
+              {
+                "paramName": "venue",
+                "type": "endpoint",
+                "label": "Venue",
+                "value": "ARCA",
+                "optionsEndpoint": "/venue-options"
+              }
+            ],
+            "source": "/reports/venue-scorecard.pdf",
+            "staleTime": 900000,
+            "category": "Execution Reports",
+            "data": {
+              "valueField": "venue_packet_pdf_value"
+            }
+          },
+          "exception_metric": {
+            "name": "Exceptions",
+            "description": "Open execution exceptions.",
+            "endpoint": "/exception-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "staleTime": 900000,
+            "data": {
+              "valueField": "exception_metric_value"
+            }
+          },
+          "open_orders": {
+            "name": "Open Orders",
+            "description": "Live open orders blotter.",
+            "endpoint": "/open-orders",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "order_id",
+                    "headerName": "Order",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "symbol",
+                    "headerName": "Symbol",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "qty",
+                    "headerName": "Qty",
+                    "cellDataType": "number",
+                    "formatterFn": "int"
+                  },
+                  {
+                    "field": "status",
+                    "headerName": "Status",
+                    "cellDataType": "text",
+                    "renderFn": "titleCase"
+                  }
+                ]
+              }
+            },
+            "staleTime": 900000
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Venue Packet Live",
+            "description": "Venue PDF, exceptions, and open orders.",
+            "tabs": {
+              "venue": {
+                "id": "venue",
+                "name": "Venue",
+                "layout": [
+                  {
+                    "i": "venue_packet_pdf",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 12
+                  }
+                ]
+              },
+              "signals": {
+                "id": "signals",
+                "name": "Signals",
+                "layout": [
+                  {
+                    "i": "exception_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 8,
+                    "h": 5
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Venue Packet Live",
+        "dashboard_name": "Venue Packet Live Live",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "venue_packet_pdf",
+        "data_args": {
+          "venue": "EDGX"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Venue Packet Live",
+        "data": "Venue Packet Live is live from Execution Desk Data: venue packet ready. Configured venue=EDGX."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "types",
+  "capability": "widget-building",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [
+    "Venue Packet Live",
+    "venue packet",
+    "Execution Desk Data",
+    "EDGX"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "test",
+  "novelty": "Unique types/venue_packet_pdf_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_exception-metric:metric:exception_metric_value,capability_2_venue-packet-pdf:pdf:venue_packet_pdf_value; generated:note@*:Venue Packet Live,venue packet."
+}

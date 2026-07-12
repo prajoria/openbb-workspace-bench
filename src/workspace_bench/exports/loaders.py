@@ -58,9 +58,7 @@ def load_comparison_rollouts(
             task = task_by_id.get(item["id"])
             if task is None:
                 continue
-            output_path = _resolve_artifact_path(
-                item.get("output_path"), base_dir=comparison_dir
-            )
+            output_path = _resolve_artifact_path(item.get("output_path"), base_dir=comparison_dir)
             run_dir = _resolve_artifact_path(item.get("run_dir"), base_dir=comparison_dir)
             tool_calls = load_tool_calls(output_path)
             result = replay_tool_calls(task, tool_calls)
@@ -83,8 +81,7 @@ def load_comparison_rollouts(
                         "runner": item.get("runner"),
                         "repeat": item.get("repeat", 1),
                         "attempt_id": (
-                            f"{model.get('slug')}:{task.id}:"
-                            f"{item.get('repeat', 1)}"
+                            f"{model.get('slug')}:{task.qualified_id}:{item.get('repeat', 1)}"
                         ),
                         "result_path": str(result_path),
                         "run_dir": str(run_dir),
@@ -120,10 +117,7 @@ def load_trace_dir_rollouts(
             else {"schema_version": "workspace-bench-task-v1", "task": task_payload}
         )
         trace = payload.get("trace", [])
-        tool_calls = [
-            {"tool": event.get("tool"), "args": event.get("args", {})}
-            for event in trace
-        ]
+        tool_calls = [{"tool": event.get("tool"), "args": event.get("args", {})} for event in trace]
         tool_results = [
             {
                 "index": event.get("index"),
@@ -147,7 +141,8 @@ def load_trace_dir_rollouts(
                     "source": "trace_dir",
                     "task_id": task_id,
                     "category": task_payload.get("category"),
-                    "level": task_payload.get("level"),
+                    "family": task_payload.get("family"),
+                    "specification_level": task_payload.get("specification_level"),
                     "difficulty": task_payload.get("difficulty"),
                     "capability": task_payload.get("capability"),
                     "workflow": task_payload.get("workflow"),
@@ -186,16 +181,15 @@ def run_result_to_rollout(
 ) -> RolloutRecord:
     """Convert a graded run result into the canonical rollout schema."""
 
-    tool_calls = [
-        {"tool": event.call.name, "args": event.call.args}
-        for event in result.trace
-    ]
+    tool_calls = [{"tool": event.call.name, "args": event.call.args} for event in result.trace]
     grade = asdict(result.grade)
     combined_metadata = {
         **base_export_metadata(),
         "task_id": result.task.id,
+        "qualified_task_id": result.task.qualified_id,
         "category": result.task.category,
-        "level": result.task.level,
+        "family": result.task.family,
+        "specification_level": result.task.specification_level,
         "difficulty": result.task.difficulty,
         "split": result.task.split,
         "capability": result.task.capability,
@@ -204,6 +198,13 @@ def run_result_to_rollout(
         "subdomain": result.task.subdomain,
         "passed": result.grade.passed,
         "score": result.grade.score,
+        "state_score": result.grade.state_score,
+        "state_passed": result.grade.state_passed,
+        "trace_score": result.grade.trace_score,
+        "trace_passed": result.grade.trace_passed,
+        "runtime_score": result.grade.runtime_score,
+        "runtime_passed": result.grade.runtime_passed,
+        "polish_score": result.grade.polish_score,
     }
     combined_metadata.update(metadata or {})
     combined_metadata.update(process_metadata or {})

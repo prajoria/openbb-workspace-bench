@@ -1,2 +1,0 @@
-{"args": {"widget_id": "holdings_table"}, "tool": "read_widget"}
-{"args": {"data": "The Bench Portfolio holdings_table widget displays the current portfolio holdings. Review the holdings to assess portfolio composition and risk exposure.", "name": "Holdings Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,2 +1,0 @@
-{"args": {"task_requests": [{"assigned_agent_id": "rejects-analyst", "assigned_holder_url": "Delegation Board", "description": "Review rejected orders workflow", "id": "rejects-analyst"}, {"assigned_agent_id": "restricted-analyst", "assigned_holder_url": "Delegation Board", "description": "Review restricted list checks workflow", "id": "restricted-analyst"}]}, "tool": "assign_tasks_to_agents"}
-{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}

@@ -1,2 +1,0 @@
-{"action": {"args": {"data": "The FactSet feed is degraded and fallback pricing is active.", "name": "Vendor Outage", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\":false,\"tool\":\"add_generative_widget\",\"args\":{\"widget_type\":\"note\",\"name\":\"Vendor Outage\",\"data\":\"The FactSet feed is degraded and fallback pricing is active.\"}}", "turn": 1}
-{"action": {"done": true}, "content": "{\"done\":true}", "turn": 2}

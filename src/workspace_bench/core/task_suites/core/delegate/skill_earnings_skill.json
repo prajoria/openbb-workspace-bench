@@ -1,0 +1,160 @@
+{
+  "id": "skill_earnings_skill",
+  "title": "Delegate Per The Finance Earnings Prep Skill",
+  "capability": "mcp-tool-use",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-delegate",
+    "delegation",
+    "agents",
+    "mcp",
+    "skills"
+  ],
+  "prompt": "Call get_skill_content with slug finance-earnings-prep to understand the workflow. Then call assign_tasks_to_agents with two task_requests using ids coverage-analyst and model-analyst covering that workflow, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Delegation Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "workspace_data_control_center_overview_workflow_overview",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_skill_content",
+    "assign_tasks_to_agents",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "get_skill_content",
+        "args_contains": {
+          "slug": "finance-earnings-prep"
+        }
+      },
+      {
+        "tool": "assign_tasks_to_agents"
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_skill_content",
+        "data_contains": [
+          "Earnings prep workflow",
+          "surprise drivers",
+          "portfolio manager"
+        ]
+      },
+      {
+        "tool": "assign_tasks_to_agents",
+        "data_contains": [
+          "coverage-analyst",
+          "model-analyst"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "coverage analyst",
+          "model analyst",
+          "earnings prep"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    },
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "workspace_data_control_center_overview_workflow_overview",
+        "data_args": {},
+        "tab_id": "overview",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_skill_content",
+      "args": {
+        "slug": "finance-earnings-prep"
+      }
+    },
+    {
+      "tool": "assign_tasks_to_agents",
+      "args": {
+        "task_requests": [
+          {
+            "id": "coverage-analyst",
+            "description": "Review estimate revisions and transcript tone.",
+            "assigned_holder_url": "workspace://agents/coverage",
+            "assigned_agent_id": "coverage-agent"
+          },
+          {
+            "id": "model-analyst",
+            "description": "Check the internal versus street model bridge.",
+            "assigned_holder_url": "workspace://agents/model",
+            "assigned_agent_id": "model-agent"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Delegation Note",
+        "data": "coverage analyst; model analyst; earnings prep."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "delegate",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 7
+  },
+  "split": "train",
+  "novelty": "Unique delegate/skill_earnings_skill exercise using add_generative_widget, assign_tasks_to_agents, get_skill_content, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact tasks:coverage-analyst,model-analyst; widgets:Bench Stark Enterprise/workspace_data_control_center_overview_workflow_overview@overview; generated:note@*:coverage analyst,model analyst."
+}

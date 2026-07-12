@@ -1,0 +1,91 @@
+{
+  "allowed_tools": [
+    "filesystem",
+    "shell"
+  ],
+  "business_terms": [],
+  "capability": "build-real-backend",
+  "category": "platform",
+  "code_task": {
+    "command_timeout_ms": 120000,
+    "core_module": "app.py",
+    "health_path": "/health",
+    "install_command": [
+      "uv",
+      "sync",
+      "--quiet"
+    ],
+    "oracle_path": "fixtures/revenue_margin_chart/oracle",
+    "probes": [
+      {
+        "expected_values": {},
+        "field_types": {
+          "operating_margin": "number",
+          "quarter": "string",
+          "revenue": "number"
+        },
+        "json_body": {},
+        "method": "GET",
+        "minimum_items": 3,
+        "name": "quarterly chart series",
+        "path": "/revenue-trend",
+        "query": {},
+        "required_fields": [
+          "quarter",
+          "revenue",
+          "operating_margin"
+        ],
+        "widget_id": "revenue_trend"
+      }
+    ],
+    "request_timeout_ms": 3000,
+    "require_apps": false,
+    "schema_version": "workspace-bench-code-task/v0",
+    "start_command": [
+      "{python}",
+      "-m",
+      "uvicorn",
+      "app:app",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "{port}"
+    ],
+    "starter_path": "fixtures/revenue_margin_chart/starter",
+    "startup_timeout_ms": 20000,
+    "test_command": [
+      "{python}",
+      "-m",
+      "pytest",
+      "-q",
+      "--junitxml={junit}"
+    ]
+  },
+  "difficulty": "medium",
+  "domain": "engineering",
+  "family": "backend-code",
+  "fixtures": {
+    "backends": []
+  },
+  "id": "revenue_margin_chart",
+  "initial_state": {},
+  "limits": {
+    "max_turns": 24
+  },
+  "novelty": "Real-code backend task: revenue_margin_chart",
+  "oracle_tool_calls": [],
+  "prompt": "A finance leader needs a chart-ready quarterly view of revenue and operating margin. Complete the supplied backend so Workspace can construct both declared series from at least three ordered quarters. Retain the repository's interface and quality gates.",
+  "schema_version": "workspace-bench-task",
+  "source": "WorkspaceBench Phase 10 authored code track",
+  "split": "train",
+  "subdomain": "openbb-custom-backends",
+  "success": {},
+  "tags": [
+    "build-openbb-backends",
+    "experimental-v0",
+    "chart",
+    "implementation"
+  ],
+  "title": "Build a revenue and margin chart endpoint",
+  "workflow": "custom-backend-development"
+}

@@ -1,0 +1,7 @@
+{
+  "suite_id": "build-openbb-apps",
+  "visibility": "public",
+  "default_split": "train",
+  "content_sha256": "918559d34b1dc1ef0fd6813a262f67d05b48a54e9ca85a2a503e0710a726ecfb",
+  "description": "WorkspaceBench build-openbb-apps collection: agents receive open product briefs, choose from the full Workspace tool surface, build valid custom backends, and prove the result by placing widgets or instantiating apps. The 236 tasks are organized by product family and labeled independently by difficulty."
+}

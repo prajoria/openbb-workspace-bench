@@ -1,3 +1,0 @@
-{"action": {"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "done": false, "tool": "get_widget_data"}, "content": "{\"done\": false, \"tool\": \"get_widget_data\", \"args\": {\"origin\": \"Bench Equities\", \"widget_id\": \"price_performance\"}}", "turn": 1}
-{"action": {"args": {"data": "Latest AAPL Close: $196.10", "name": "Latest AAPL Close", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"data\": \"Latest AAPL Close: $196.10\", \"name\": \"Latest AAPL Close\", \"widget_type\": \"note\"}}", "turn": 2}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

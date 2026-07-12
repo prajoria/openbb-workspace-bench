@@ -1,2 +1,0 @@
-{"args": {"widget_id": "portfolio_command_center_overview_workflow_overview"}, "tool": "read_widget"}
-{"args": {"data": "This is a note mentioning stark.", "description": "Note about Stark", "widget_type": "note"}, "tool": "add_generative_widget"}

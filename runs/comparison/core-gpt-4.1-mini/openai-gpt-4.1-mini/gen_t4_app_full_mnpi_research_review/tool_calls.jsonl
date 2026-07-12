@@ -1,6 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"app_name": "MNPI & Research Review", "backend_id": "backend_001", "dashboard_name": "MNPI Control Desk", "operation": "instantiate", "template_id": "mnpi-research-review"}, "tool": "manage_apps"}
-{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "research"}, "tool": "navigate_workspace"}
-{"args": {"dashboard_id": "dash_002", "origin": "Bench Stark Enterprise", "ui_args": {"tab_id": "research"}, "widget_id": "mnpi_research_review_research_reviewer_comments"}, "tool": "create_widget"}
-{"args": {"data": "Reviewer comments have been reviewed and signed off.", "inner_tab": "research", "name": "Reviewer Comments Sign Off", "widget_type": "note"}, "tool": "add_generative_widget"}

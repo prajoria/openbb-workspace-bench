@@ -1,4 +1,0 @@
-{"action": {"args": {"origin": "Bench Portfolio"}, "done": false, "tool": "list_available_widgets"}, "content": "{\"done\":false,\"tool\":\"list_available_widgets\",\"args\":{\"origin\":\"Bench Portfolio\"}}", "turn": 1}
-{"action": {"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "done": false, "tool": "get_widget_schema"}, "content": "{\"done\":false,\"tool\":\"get_widget_schema\",\"args\":{\"origin\":\"Bench Portfolio\",\"widget_id\":\"sector_exposure\"}}", "turn": 2}
-{"action": {"args": {"data_args": {}, "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "done": false, "tool": "create_widget"}, "content": "{\"done\":false,\"tool\":\"create_widget\",\"args\":{\"origin\":\"Bench Portfolio\",\"widget_id\":\"sector_exposure\",\"data_args\":{}}}", "turn": 3}
-{"action": {"done": true}, "content": "{\"done\":true}", "turn": 4}

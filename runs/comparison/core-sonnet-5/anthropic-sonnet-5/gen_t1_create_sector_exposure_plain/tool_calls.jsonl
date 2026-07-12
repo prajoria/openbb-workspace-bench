@@ -1,4 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {}, "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}

@@ -1,2 +1,0 @@
-{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "YTD", "raw": true}, "origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_dashboard_var_trend"}, "tool": "get_widget_data"}
-{"args": {"data": "Widget ID: risk_exposure_monitor_dashboard_var_trend | Field: var_usd | Value: -222500", "inner_tab": "main", "name": "VaR Trend Data Note", "widget_type": "note"}, "tool": "add_generative_widget"}

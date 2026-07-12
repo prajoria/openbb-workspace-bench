@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"widget_id": "price_performance", "widget_uuid": "widget_001"}, "tool": "read_widget"}
-{"args": {"dashboard_id": "dash_001", "data": "The existing Price Performance widget tracks AAPL. This note highlights the AAPL symbol for quick reference.", "inner_tab": "", "name": "AAPL Note", "widget_type": "note"}, "tool": "add_generative_widget"}

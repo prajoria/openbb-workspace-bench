@@ -1,2 +1,0 @@
-{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "widget_id": "vendor_dataset_monitor_slas_latency_by_feed"}, "tool": "get_widget_data"}
-{"args": {"data": "Reviewed the data from vendor_dataset_monitor_slas_latency_by_feed for Flagship Long/Short YTD. The feed latency data shows FactSet at 727 ms and ICE at 91 ms; I reviewed the data.", "inner_tab": "main", "name": "Latency by Feed Review Note", "widget_type": "note"}, "tool": "add_generative_widget"}

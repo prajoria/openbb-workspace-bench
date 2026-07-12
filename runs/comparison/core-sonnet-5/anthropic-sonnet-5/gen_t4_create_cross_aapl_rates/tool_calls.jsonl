@@ -1,8 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "create_widget"}
-{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {"series": "DGS10"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
-{"args": {"data": "This dashboard combines AAPL price performance data from Bench Equities with DGS10 (10-Year Treasury Constant Maturity Rate) macro timeseries data from Bench Macro, providing a cross-backend view linking equity performance to interest rate trends.", "name": "Cross-Backend Note", "widget_type": "note"}, "tool": "add_generative_widget"}

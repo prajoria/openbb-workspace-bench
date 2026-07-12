@@ -1,3 +1,0 @@
-{"action": {"args": {"widget_id": "portfolio_command_center_overview_workflow_overview"}, "done": false, "tool": "read_widget"}, "content": "{\"done\":false,\"tool\":\"read_widget\",\"args\":{\"widget_id\":\"portfolio_command_center_overview_workflow_overview\"}}", "turn": 1}
-{"action": {"args": {"data": "stark", "description": "Note mentioning stark", "name": "Stark Note", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\":false,\"tool\":\"add_generative_widget\",\"args\":{\"widget_type\":\"note\",\"name\":\"Stark Note\",\"data\":\"stark\",\"description\":\"Note mentioning stark\"}}", "turn": 2}
-{"action": {"done": true}, "content": "{\"done\":true}", "turn": 3}

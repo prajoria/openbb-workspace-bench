@@ -1,3 +1,0 @@
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "quant_research_backtest_lab_signals_signal_metrics"}, "tool": "get_widget_data"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "quant_research_backtest_lab_backtest_backtest_performance"}, "tool": "get_widget_data"}
-{"args": {"data": "Signal Metrics primary (widget id quant_research_backtest_lab_signals_signal_metrics): 83.92.\nBacktest Performance score for Flagship Long/Short YTD (widget id quant_research_backtest_lab_backtest_backtest_performance): 35.41.", "inner_tab": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

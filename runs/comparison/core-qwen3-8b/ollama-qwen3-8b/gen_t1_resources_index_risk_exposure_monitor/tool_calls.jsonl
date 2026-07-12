@@ -1,2 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {"data": "Risk Exposure Monitor template id: risk-exposure-monitor", "origin": "Bench Stark Enterprise", "widget_type": "note"}, "tool": "add_generative_widget"}

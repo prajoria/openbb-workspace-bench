@@ -1,2 +1,0 @@
-{"args": {"reason": "Need workflow steps for analyst note", "slug": "finance-earnings-prep"}, "tool": "get_skill_content"}
-{"args": {"data": "Earnings prep workflow for an analyst:\n1. Compare internal estimates to street numbers.\n2. Identify surprise drivers.\n3. Review guidance.\n4. Inspect transcript tone.\n5. Produce action items for the portfolio manager.", "name": "Finance Earnings Prep Workflow", "widget_type": "note"}, "tool": "add_generative_widget"}

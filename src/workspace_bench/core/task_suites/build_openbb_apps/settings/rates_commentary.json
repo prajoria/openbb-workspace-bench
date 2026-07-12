@@ -1,0 +1,155 @@
+{
+  "id": "rates_commentary",
+  "title": "Build the Rates Commentary cached categorized markdown",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-settings",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "settings"
+  ],
+  "prompt": "Connect the backend and make its first widget usable on the current dashboard. Use 'Rates Watch Data' at http://localhost:7803. Implement the requested runtime and refresh behavior. The experience needs Rates Commentary (`rates_commentary`, markdown) using `/rates-commentary` for desk commentary on the rates day; user controls: Series (`series`, endpoint) from `/series-options`; cache for 30 minutes. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Rates Watch Data",
+        "widget_id": "rates_commentary",
+        "expect": {
+          "type": "markdown",
+          "endpoint": "/rates-commentary",
+          "staleTime": 1800000
+        },
+        "params_include": [
+          {
+            "paramName": "series",
+            "type": "endpoint",
+            "optionsEndpoint": "/series-options"
+          }
+        ],
+        "columns_include": []
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2,
+      "must_call_schema_before_create": true
+    },
+    "required_widgets": [
+      {
+        "origin": "Rates Watch Data",
+        "widget_id": "rates_commentary",
+        "min_count": 1
+      }
+    ],
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 0,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "rates-watch-data__rates_commentary",
+          "widget_id": "rates_commentary",
+          "fields": [],
+          "path": "/rates-commentary",
+          "payload": "Rates Commentary fixture-backed runtime summary."
+        }
+      ],
+      "pinned_paths": false
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Rates Watch Data",
+        "url": "http://localhost:7803",
+        "widgets_json": {
+          "rates_commentary": {
+            "name": "Rates Commentary",
+            "description": "Desk commentary on the rates day.",
+            "endpoint": "/rates-commentary",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "series",
+                "type": "endpoint",
+                "label": "Series",
+                "value": "DGS10",
+                "optionsEndpoint": "/series-options"
+              }
+            ],
+            "staleTime": 1800000,
+            "category": "Macro Notes"
+          }
+        }
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Rates Watch Data"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Rates Watch Data",
+        "widget_id": "rates_commentary"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Rates Watch Data",
+        "widget_id": "rates_commentary"
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "settings",
+  "capability": "widget-building",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "business_terms": [],
+  "limits": {
+    "max_turns": 7
+  },
+  "split": "validation",
+  "novelty": "Unique settings/rates_commentary building exercise using create_widget, get_widget_schema, list_available_widgets, manage_backends with checks missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/rates_commentary; widgets:Rates Watch Data/rates_commentary@*."
+}

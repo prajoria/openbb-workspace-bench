@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "name": "Earnings Week Planner", "operation": "update"}, "tool": "manage_dashboard"}
-{"args": {"dashboard_id": "dash_001", "operation": "rename_tabs", "rename_map": {"overview": "Calendar"}}, "tool": "manage_navigation_bar"}

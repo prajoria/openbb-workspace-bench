@@ -1,0 +1,378 @@
+{
+  "id": "repair_execution",
+  "title": "Repair, extend, open, and configure Execution Repair Live",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-extend",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "refresh",
+    "extend",
+    "orchestration"
+  ],
+  "prompt": "The desk needs a production-ready orders and venue quality workflow for an execution analyst. The workspace must cover live order activity. The workspace must cover open execution exceptions. Analysts need to inspect order ID, price. Large result sets must stay responsive while analysts filter and page through them. Leave the complete working workspace open for review. Preserve all working content while correcting the requested workflow. Add a short completion note that naturally includes the desk-required terms 'Execution Repair Live', 'execution repair', 'Execution Desk Data', 'EDGX'. Use your judgment on the architecture and leave other work intact.",
+  "fixtures": {},
+  "initial_state": {
+    "custom_backends": [
+      {
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "live_orders_grid": {
+            "name": "Live Orders Grid",
+            "description": "Streaming order blotter over websocket.",
+            "endpoint": "/live-orders",
+            "type": "live_grid",
+            "wsEndpoint": "live-orders-ws",
+            "gridData": {
+              "w": 24,
+              "h": 12
+            },
+            "data": {
+              "wsRowIdColumn": "order_id",
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "order_id",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "px",
+                    "headerName": "Price",
+                    "cellDataType": "number",
+                    "renderFn": "showCellChange",
+                    "renderFnParams": {
+                      "colorValueKey": "px_change"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Execution Repair Live",
+            "description": "Live orders and exceptions.",
+            "tabs": {
+              "orders": {
+                "id": "orders",
+                "name": "Orders",
+                "layout": [
+                  {
+                    "i": "live_orders_grid",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ],
+        "warnings": [
+          "workspace validation failed: 1 entry in the backend's served payload need fixing"
+        ]
+      }
+    ]
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Execution Repair Live",
+          "execution repair",
+          "Execution Desk Data",
+          "EDGX"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 0
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "execution-desk-data__exception_metric",
+          "widget_id": "exception_metric",
+          "fields": [
+            "exception_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/exception-count",
+          "payload": {
+            "exception_metric_value": 10.25,
+            "label": "Exceptions",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "execution-desk-data__live_orders_grid",
+          "widget_id": "live_orders_grid",
+          "fields": [
+            "order_id",
+            "px",
+            "px_change"
+          ],
+          "path": "/live-orders",
+          "payload": [
+            {
+              "order_id": "order_id-1",
+              "px": 10.25,
+              "px_change": 10.25
+            },
+            {
+              "order_id": "order_id-2",
+              "px": 20.5,
+              "px_change": 20.5
+            },
+            {
+              "order_id": "order_id-3",
+              "px": 30.75,
+              "px_change": 30.75
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_exception-metric",
+        "datasets": [
+          "execution-desk-data__exception_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "exception_metric_value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_live-orders-grid",
+        "datasets": [
+          "execution-desk-data__live_orders_grid"
+        ],
+        "widget_kind": "server-side-grid",
+        "must_cover_fields": [
+          "order_id",
+          "px",
+          "px_change"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "live_orders_grid": {
+            "name": "Live Orders Grid",
+            "description": "Streaming order blotter over websocket.",
+            "endpoint": "/live-orders",
+            "type": "live_grid",
+            "wsEndpoint": "live-orders-ws",
+            "gridData": {
+              "w": 24,
+              "h": 12
+            },
+            "data": {
+              "wsRowIdColumn": "order_id",
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "order_id",
+                    "headerName": "Order",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "px",
+                    "headerName": "Price",
+                    "cellDataType": "number",
+                    "renderFn": "showCellChange",
+                    "renderFnParams": {
+                      "colorValueKey": "px_change"
+                    }
+                  }
+                ]
+              }
+            },
+            "params": [
+              {
+                "paramName": "venue",
+                "type": "text",
+                "label": "Venue",
+                "value": "ARCA",
+                "description": "Execution venue filter."
+              }
+            ]
+          },
+          "exception_metric": {
+            "name": "Exceptions",
+            "description": "Open execution exceptions.",
+            "endpoint": "/exception-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "params": [
+              {
+                "paramName": "venue",
+                "type": "text",
+                "label": "Venue",
+                "value": "ARCA",
+                "description": "Execution venue."
+              }
+            ],
+            "data": {
+              "valueField": "exception_metric_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Execution Repair Live",
+            "description": "Live orders and exceptions.",
+            "tabs": {
+              "orders": {
+                "id": "orders",
+                "name": "Orders",
+                "layout": [
+                  {
+                    "i": "live_orders_grid",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "posture": {
+                "id": "posture",
+                "name": "Posture",
+                "layout": [
+                  {
+                    "i": "exception_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 8,
+                    "h": 5
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Execution Repair Live",
+        "dashboard_name": "Execution Repair Live Dashboard",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "live_orders_grid",
+        "data_args": {
+          "venue": "EDGX"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Execution Repair Live",
+        "data": "Execution Repair Live is live from Execution Desk Data: execution repair done. Configured venue=EDGX."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "repair",
+  "family": "extend",
+  "capability": "app-building",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [
+    "Execution Repair Live",
+    "execution repair",
+    "Execution Desk Data",
+    "EDGX"
+  ],
+  "limits": {
+    "max_turns": 9
+  },
+  "split": "train",
+  "novelty": "Unique extend/repair_execution building exercise using add_generative_widget, get_workspace_snapshot, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_exception-metric:metric:exception_metric_value,capability_2_live-orders-grid:server-side-grid:order_id,px,px_change; generated:note@*:Execution Repair Live,execution repair."
+}

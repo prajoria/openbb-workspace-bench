@@ -1,8 +1,0 @@
-{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
-{"args": {"cmd": ["bash", "-lc", "echo test"]}, "tool": "container.exec"}
-{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_schema"}
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "create_widget"}
-{"args": {"data_args": {"series": "CPIAUCSL"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
-{"args": {"data": "The holdings table shows current portfolio positions, while the CPIAUCSL macro time series tracks consumer price inflation.", "description": "Holdings and CPIAUCSL note", "widget_type": "note"}, "tool": "add_generative_widget"}

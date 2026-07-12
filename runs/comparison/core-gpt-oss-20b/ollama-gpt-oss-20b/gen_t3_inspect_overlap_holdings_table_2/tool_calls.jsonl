@@ -1,3 +1,0 @@
-{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
-{"args": {"args": {}}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "h": 10, "w": 16, "widget_uuid": "widget_002", "x": 24, "y": 0}, "tool": "update_widget_layout"}

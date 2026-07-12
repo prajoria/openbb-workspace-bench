@@ -1,0 +1,92 @@
+{
+  "allowed_tools": [
+    "filesystem",
+    "shell"
+  ],
+  "business_terms": [],
+  "capability": "build-real-backend",
+  "category": "repair",
+  "code_task": {
+    "command_timeout_ms": 120000,
+    "core_module": "app.py",
+    "health_path": "/health",
+    "install_command": [
+      "uv",
+      "sync",
+      "--quiet"
+    ],
+    "oracle_path": "fixtures/repair_trade_column_contract/oracle",
+    "probes": [
+      {
+        "expected_values": {},
+        "field_types": {
+          "client_name": "string",
+          "notional": "number",
+          "side": "string"
+        },
+        "json_body": {},
+        "method": "GET",
+        "minimum_items": 2,
+        "name": "client trade rows",
+        "path": "/client-trades",
+        "query": {},
+        "required_fields": [
+          "client_name",
+          "notional",
+          "side"
+        ],
+        "widget_id": "client_trades"
+      }
+    ],
+    "request_timeout_ms": 3000,
+    "require_apps": false,
+    "schema_version": "workspace-bench-code-task/v0",
+    "start_command": [
+      "{python}",
+      "-m",
+      "uvicorn",
+      "app:app",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "{port}"
+    ],
+    "starter_path": "fixtures/repair_trade_column_contract/starter",
+    "startup_timeout_ms": 20000,
+    "test_command": [
+      "{python}",
+      "-m",
+      "pytest",
+      "-q",
+      "--junitxml={junit}"
+    ]
+  },
+  "difficulty": "medium",
+  "domain": "engineering",
+  "family": "backend-code",
+  "fixtures": {
+    "backends": []
+  },
+  "id": "repair_trade_column_contract",
+  "initial_state": {},
+  "limits": {
+    "max_turns": 24
+  },
+  "novelty": "Real-code backend task: repair_trade_column_contract",
+  "oracle_tool_calls": [],
+  "prompt": "The client-trades widget declares business columns the endpoint never returns. Reconcile the implementation and manifest into one coherent contract for client name, notional, and side. Keep the public widget usable and the test suite meaningful.",
+  "schema_version": "workspace-bench-task",
+  "source": "WorkspaceBench Phase 10 authored code track",
+  "split": "test",
+  "subdomain": "openbb-custom-backends",
+  "success": {},
+  "tags": [
+    "build-openbb-backends",
+    "experimental-v0",
+    "repair",
+    "manifest",
+    "columns"
+  ],
+  "title": "Reconcile a trade table manifest and payload",
+  "workflow": "custom-backend-development"
+}

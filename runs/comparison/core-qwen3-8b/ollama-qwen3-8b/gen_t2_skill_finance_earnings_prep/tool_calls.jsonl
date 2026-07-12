@@ -1,6 +1,0 @@
-{"args": {"slug": "finance-earnings-prep"}, "tool": "get_skill_content"}
-{"args": {"dashboard_id": "workspace_data_control_center_ai_access_copilot_visibility_flags", "operation": "add_tabs", "tabs": [{"name": "Earnings Prep"}]}, "tool": "manage_navigation_bar"}
-{"args": {"dashboard_id": "Skill Review", "operation": "add_tabs", "tabs": [{"name": "Earnings Prep"}]}, "tool": "manage_navigation_bar"}
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Earnings Prep"}]}, "tool": "manage_navigation_bar"}
-{"args": {"dashboard_id": "dash_001", "data": "Earnings prep workflow: compare internal estimates to street numbers, identify surprise drivers, review guidance, inspect transcript tone, and produce action items for the portfolio manager.", "name": "Earnings Prep Workflow", "tab_id": "earnings-prep", "widget_type": "note"}, "tool": "add_generative_widget"}

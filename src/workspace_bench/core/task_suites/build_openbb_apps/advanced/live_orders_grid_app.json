@@ -1,0 +1,226 @@
+{
+  "id": "live_orders_grid_app",
+  "title": "Ship Live Orders Grid as Live Order Tape",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-advanced",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "advanced"
+  ],
+  "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Execution Desk Data' at http://localhost:7806. Implement the live or advanced interaction correctly. The experience needs Live Orders Grid (`live_orders_grid`, live_grid) using `/live-orders` for streaming order blotter over websocket; stream updates from `live-orders-ws`; stream row id `order_id`; columns: order_id (text), px (number, showCellChange). Organize it as app 'Live Order Tape' with tabs Orders (live_orders_grid). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_widget_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "widget_id": "live_orders_grid",
+        "expect": {
+          "type": "live_grid",
+          "endpoint": "/live-orders",
+          "wsEndpoint": "live-orders-ws"
+        },
+        "columns_include": [
+          {
+            "field": "order_id",
+            "cellDataType": "text"
+          },
+          {
+            "field": "px",
+            "cellDataType": "number",
+            "renderFn": "showCellChange"
+          }
+        ],
+        "params_include": []
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Execution Desk Data",
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "name_contains": "Live Order Tape",
+        "tabs_include": [
+          "orders"
+        ],
+        "tab_count": 1,
+        "widgets_on_tab": [
+          {
+            "tab_id": "orders",
+            "widget_id": "live_orders_grid"
+          }
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    },
+    "required_dashboard_name_contains": "Live Order Tape",
+    "required_widgets": [
+      {
+        "origin": "Execution Desk Data",
+        "widget_id": "live_orders_grid",
+        "tab_id": "orders",
+        "min_count": 1
+      }
+    ],
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "execution-desk-data__live_orders_grid",
+          "widget_id": "live_orders_grid",
+          "fields": [
+            "order_id",
+            "px",
+            "px_change"
+          ],
+          "path": "/live-orders",
+          "payload": [
+            {
+              "order_id": "order_id-1",
+              "px": 10.25,
+              "px_change": 10.25
+            },
+            {
+              "order_id": "order_id-2",
+              "px": 20.5,
+              "px_change": 20.5
+            },
+            {
+              "order_id": "order_id-3",
+              "px": 30.75,
+              "px_change": 30.75
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "live_orders_grid": {
+            "name": "Live Orders Grid",
+            "description": "Streaming order blotter over websocket.",
+            "endpoint": "/live-orders",
+            "type": "live_grid",
+            "wsEndpoint": "live-orders-ws",
+            "gridData": {
+              "w": 24,
+              "h": 12
+            },
+            "data": {
+              "wsRowIdColumn": "order_id",
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "order_id",
+                    "headerName": "Order",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "px",
+                    "headerName": "Price",
+                    "cellDataType": "number",
+                    "renderFn": "showCellChange",
+                    "renderFnParams": {
+                      "colorValueKey": "px_change"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Live Order Tape",
+            "description": "Streaming orders for the execution desk.",
+            "tabs": {
+              "orders": {
+                "id": "orders",
+                "name": "Orders",
+                "layout": [
+                  {
+                    "i": "live_orders_grid",
+                    "x": 0,
+                    "y": 0,
+                    "w": 24,
+                    "h": 12
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Live Order Tape",
+        "dashboard_name": "Live Order Tape Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "advanced",
+  "capability": "widget-building",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "business_terms": [],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique advanced/live_orders_grid_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks app_def, dashboard_name, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/live_orders_grid; appdefs:Execution Desk Data/Live Order Tape; widgets:Execution Desk Data/live_orders_grid@orders."
+}

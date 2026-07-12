@@ -1,0 +1,91 @@
+{
+  "allowed_tools": [
+    "filesystem",
+    "shell"
+  ],
+  "business_terms": [],
+  "capability": "build-real-backend",
+  "category": "platform",
+  "code_task": {
+    "command_timeout_ms": 120000,
+    "core_module": "app.py",
+    "health_path": "/health",
+    "install_command": [
+      "uv",
+      "sync",
+      "--quiet"
+    ],
+    "oracle_path": "fixtures/treasury_auctions_table/oracle",
+    "probes": [
+      {
+        "expected_values": {},
+        "field_types": {
+          "auction_date": "string",
+          "security": "string",
+          "size_billion": "number"
+        },
+        "json_body": {},
+        "method": "GET",
+        "minimum_items": 2,
+        "name": "auction rows",
+        "path": "/auctions",
+        "query": {},
+        "required_fields": [
+          "auction_date",
+          "security",
+          "size_billion"
+        ],
+        "widget_id": "auction_calendar"
+      }
+    ],
+    "request_timeout_ms": 3000,
+    "require_apps": false,
+    "schema_version": "workspace-bench-code-task/v0",
+    "start_command": [
+      "{python}",
+      "-m",
+      "uvicorn",
+      "app:app",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "{port}"
+    ],
+    "starter_path": "fixtures/treasury_auctions_table/starter",
+    "startup_timeout_ms": 20000,
+    "test_command": [
+      "{python}",
+      "-m",
+      "pytest",
+      "-q",
+      "--junitxml={junit}"
+    ]
+  },
+  "difficulty": "easy",
+  "domain": "engineering",
+  "family": "backend-code",
+  "fixtures": {
+    "backends": []
+  },
+  "id": "treasury_auctions_table",
+  "initial_state": {},
+  "limits": {
+    "max_turns": 24
+  },
+  "novelty": "Real-code backend task: treasury_auctions_table",
+  "oracle_tool_calls": [],
+  "prompt": "Complete the Treasury auction calendar backend. Keep the supplied OpenBB table manifest and return dated security rows with numeric auction size in billions from GET /auctions. Leave the health endpoint, CORS, and tests operational.",
+  "schema_version": "workspace-bench-task",
+  "source": "WorkspaceBench Phase 10 authored code track",
+  "split": "train",
+  "subdomain": "openbb-custom-backends",
+  "success": {},
+  "tags": [
+    "build-openbb-backends",
+    "experimental-v0",
+    "single-table",
+    "implementation"
+  ],
+  "title": "Implement a Treasury auction calendar",
+  "workflow": "custom-backend-development"
+}

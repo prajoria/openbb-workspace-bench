@@ -1,4 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {}, "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_data"}
-{"args": {"data_args": {"series": "CPIAUCSL"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_data"}
-{"args": {"dashboard_id": "dash_001", "data": "Largest sector weight: Technology at 0.86 (market_value 670000). Latest CPIAUCSL value: 322.4 on 2025-12-31.", "description": "Note combining sector exposure and CPI widget data.", "inner_tab": "", "name": "Exposure and CPI Note", "widget_type": "note"}, "tool": "add_generative_widget"}

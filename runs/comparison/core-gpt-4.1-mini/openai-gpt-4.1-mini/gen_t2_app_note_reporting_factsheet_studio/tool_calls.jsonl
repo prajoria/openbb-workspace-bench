@@ -1,5 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"app_name": "Reporting & Factsheet Studio", "backend_id": "backend_001", "dashboard_name": "Factsheet Control", "operation": "instantiate"}, "tool": "manage_apps"}
-{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "factsheets"}, "tool": "navigate_workspace"}
-{"args": {"data": "This note mentions factsheet and distribution.", "inner_tab": "factsheets", "name": "Factsheet Note", "widget_type": "note"}, "tool": "add_generative_widget"}

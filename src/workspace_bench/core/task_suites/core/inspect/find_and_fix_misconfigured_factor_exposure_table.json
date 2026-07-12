@@ -1,0 +1,107 @@
+{
+  "id": "find_and_fix_misconfigured_factor_exposure_table",
+  "title": "Find And Fix Misconfigured Factor Exposure Table",
+  "capability": "workspace-repair",
+  "workflow": "risk-review",
+  "subdomain": "risk",
+  "tags": [
+    "family-inspect",
+    "inspect",
+    "repair"
+  ],
+  "prompt": "Use read_widget with widget_id quant_research_backtest_lab_risk_model_factor_exposure_table to inspect the widget configured with sector=Technology, then update_widget so sector=Consumer Staples.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Inspect Repair",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "quant_research_backtest_lab_risk_model_factor_exposure_table",
+          "data_args": {
+            "sector": "Technology"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "quant_research_backtest_lab_risk_model_factor_exposure_table",
+        "data_args": {
+          "sector": "Consumer Staples"
+        }
+      }
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "read_widget"
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "read_widget",
+      "args": {
+        "widget_id": "quant_research_backtest_lab_risk_model_factor_exposure_table"
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "sector": "Consumer Staples"
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "single-widget",
+  "family": "inspect",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique inspect/find_and_fix_misconfigured_factor_exposure_table exercise using get_workspace_snapshot, read_widget, update_widget with checks layout_out_of_grid, missing_tool_call, missing_widget, repeated_snapshots, too_many_invalid_calls on stark-enterprise; artifact widgets:Bench Stark Enterprise/quant_research_backtest_lab_risk_model_factor_exposure_table@*."
+}

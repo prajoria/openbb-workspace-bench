@@ -1,0 +1,110 @@
+{
+  "allowed_tools": [
+    "filesystem",
+    "shell"
+  ],
+  "business_terms": [],
+  "capability": "build-real-backend",
+  "category": "platform",
+  "code_task": {
+    "command_timeout_ms": 120000,
+    "core_module": "app.py",
+    "health_path": "/health",
+    "install_command": [
+      "uv",
+      "sync",
+      "--quiet"
+    ],
+    "oracle_path": "fixtures/extend_equities_with_credit/oracle",
+    "probes": [
+      {
+        "expected_values": {
+          "symbol": "AAPL"
+        },
+        "field_types": {},
+        "json_body": {},
+        "method": "GET",
+        "minimum_items": 1,
+        "name": "preserved equities",
+        "path": "/equities",
+        "query": {},
+        "required_fields": [
+          "symbol",
+          "price",
+          "sector"
+        ],
+        "widget_id": "equity_snapshot"
+      },
+      {
+        "expected_values": {},
+        "field_types": {
+          "issuer": "string",
+          "rating": "string",
+          "spread_bps": "integer"
+        },
+        "json_body": {},
+        "method": "GET",
+        "minimum_items": 2,
+        "name": "new credit domain",
+        "path": "/credit-spreads",
+        "query": {},
+        "required_fields": [
+          "issuer",
+          "rating",
+          "spread_bps"
+        ],
+        "widget_id": "credit_spreads"
+      }
+    ],
+    "request_timeout_ms": 3000,
+    "require_apps": false,
+    "schema_version": "workspace-bench-code-task/v0",
+    "start_command": [
+      "{python}",
+      "-m",
+      "uvicorn",
+      "app:app",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "{port}"
+    ],
+    "starter_path": "fixtures/extend_equities_with_credit/starter",
+    "startup_timeout_ms": 20000,
+    "test_command": [
+      "{python}",
+      "-m",
+      "pytest",
+      "-q",
+      "--junitxml={junit}"
+    ]
+  },
+  "difficulty": "hard",
+  "domain": "engineering",
+  "family": "backend-code",
+  "fixtures": {
+    "backends": []
+  },
+  "id": "extend_equities_with_credit",
+  "initial_state": {},
+  "limits": {
+    "max_turns": 40
+  },
+  "novelty": "Real-code backend task: extend_equities_with_credit",
+  "oracle_tool_calls": [],
+  "prompt": "Extend the working equity backend for a cross-asset desk that now also needs issuer ratings and spread levels. Preserve every existing equity contract and test while adding a coherent second credit domain to widgets.json and the HTTP API.",
+  "schema_version": "workspace-bench-task",
+  "source": "WorkspaceBench Phase 10 authored code track",
+  "split": "test",
+  "subdomain": "openbb-custom-backends",
+  "success": {},
+  "tags": [
+    "build-openbb-backends",
+    "experimental-v0",
+    "extend",
+    "multi-domain",
+    "regression"
+  ],
+  "title": "Extend an equities backend with credit data",
+  "workflow": "custom-backend-development"
+}

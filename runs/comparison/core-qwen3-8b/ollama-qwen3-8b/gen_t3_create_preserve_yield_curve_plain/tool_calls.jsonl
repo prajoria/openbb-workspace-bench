@@ -1,4 +1,0 @@
-{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
-{"args": {"data_args": {}, "origin": "Bench Macro", "ui_args": {"layout": {"h": 12, "w": 20, "x": 20, "y": 0}}, "widget_id": "yield_curve"}, "tool": "create_widget"}
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"h": 12, "w": 20, "widget_id": "yield_curve", "x": 20, "y": 0}, "tool": "update_widget_layout"}

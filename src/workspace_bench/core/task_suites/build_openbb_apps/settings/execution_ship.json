@@ -1,0 +1,363 @@
+{
+  "id": "execution_ship",
+  "title": "Ship, open, and configure the Execution Config Live app",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-settings",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "settings",
+    "orchestration"
+  ],
+  "prompt": "The desk needs a production-ready orders and venue quality workflow for an execution analyst. The workspace must cover open execution exceptions. The workspace must cover live open orders blotter. The workspace must cover monthly venue scorecard document. Analysts need to inspect order ID, symbol, quantity, status. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Execution Config Live', 'on-demand updates', 'Execution Desk Data', 'urgent'. Use your judgment on the architecture and leave other work intact.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Execution Config Live",
+          "on-demand updates",
+          "Execution Desk Data",
+          "urgent"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "execution-desk-data__exception_metric",
+          "widget_id": "exception_metric",
+          "fields": [
+            "exception_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/exception-count",
+          "payload": {
+            "exception_metric_value": 10.25,
+            "label": "Exceptions",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "execution-desk-data__open_orders",
+          "widget_id": "open_orders",
+          "fields": [
+            "order_id",
+            "qty",
+            "status",
+            "symbol"
+          ],
+          "path": "/open-orders",
+          "payload": [
+            {
+              "order_id": "order_id-1",
+              "qty": 10.25,
+              "status": "Primary",
+              "symbol": "AAPL"
+            },
+            {
+              "order_id": "order_id-2",
+              "qty": 20.5,
+              "status": "Review",
+              "symbol": "MSFT"
+            },
+            {
+              "order_id": "order_id-3",
+              "qty": 30.75,
+              "status": "Approved",
+              "symbol": "NVDA"
+            }
+          ]
+        },
+        {
+          "name": "execution-desk-data__venue_pdf",
+          "widget_id": "venue_pdf",
+          "fields": [
+            "title",
+            "url",
+            "venue_pdf_value"
+          ],
+          "path": "/venue-scorecard",
+          "payload": {
+            "title": "Venue Scorecard",
+            "url": "https://fixtures.workspace-bench.invalid/venue_pdf",
+            "venue_pdf_value": 10.25
+          }
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_exception-metric",
+        "datasets": [
+          "execution-desk-data__exception_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "exception_metric_value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {
+          "runButton": true
+        }
+      },
+      {
+        "name": "capability_2_open-orders",
+        "datasets": [
+          "execution-desk-data__open_orders"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "order_id",
+          "qty",
+          "status",
+          "symbol"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    },
+    "polish": [
+      {
+        "code": "polish_refresh_policy",
+        "backend_name": "Execution Desk Data",
+        "widget_id": "exception_metric",
+        "path": "staleTime",
+        "expected": 900000
+      },
+      {
+        "code": "polish_refresh_policy",
+        "backend_name": "Execution Desk Data",
+        "widget_id": "exception_metric",
+        "path": "refetchInterval",
+        "expected": 45000
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "exception_metric": {
+            "name": "Exceptions",
+            "description": "Open execution exceptions.",
+            "endpoint": "/exception-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "runButton": true,
+            "refetchInterval": 45000,
+            "params": [
+              {
+                "paramName": "queue",
+                "type": "text",
+                "label": "Queue",
+                "value": "all",
+                "description": "Exception queue to inspect."
+              }
+            ],
+            "staleTime": 900000,
+            "data": {
+              "valueField": "exception_metric_value"
+            }
+          },
+          "open_orders": {
+            "name": "Open Orders",
+            "description": "Live open orders blotter.",
+            "endpoint": "/open-orders",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "order_id",
+                    "headerName": "Order",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "symbol",
+                    "headerName": "Symbol",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "qty",
+                    "headerName": "Qty",
+                    "cellDataType": "number",
+                    "formatterFn": "int"
+                  },
+                  {
+                    "field": "status",
+                    "headerName": "Status",
+                    "cellDataType": "text",
+                    "renderFn": "titleCase"
+                  }
+                ]
+              }
+            },
+            "runButton": true,
+            "refetchInterval": 45000,
+            "staleTime": 900000
+          },
+          "venue_pdf": {
+            "name": "Venue Scorecard",
+            "description": "Monthly venue scorecard PDF.",
+            "endpoint": "/venue-scorecard",
+            "type": "pdf",
+            "gridData": {
+              "w": 16,
+              "h": 14
+            },
+            "runButton": true,
+            "refetchInterval": 45000,
+            "staleTime": 900000,
+            "data": {
+              "valueField": "venue_pdf_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Execution Config Live",
+            "description": "Configured exceptions and orders.",
+            "tabs": {
+              "execution": {
+                "id": "execution",
+                "name": "Execution",
+                "layout": [
+                  {
+                    "i": "exception_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 8,
+                    "h": 5
+                  }
+                ]
+              },
+              "posture": {
+                "id": "posture",
+                "name": "Posture",
+                "layout": [
+                  {
+                    "i": "open_orders",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Execution Config Live",
+        "dashboard_name": "Execution Config Live Board",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "exception_metric",
+        "data_args": {
+          "queue": "urgent"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Execution Config Live",
+        "data": "Execution Config Live shipped from Execution Desk Data: on-demand updates. Configured queue=urgent."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "settings",
+  "capability": "widget-building",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [
+    "Execution Config Live",
+    "on-demand updates",
+    "Execution Desk Data",
+    "urgent"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique settings/execution_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_exception-metric:metric:exception_metric_value,capability_2_open-orders:table-like:order_id,qty,status,symbol; generated:note@*:Execution Config Live,on-demand updates."
+}

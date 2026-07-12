@@ -1,3 +1,0 @@
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_overview_portfolio_snapshot"}, "tool": "get_widget_data"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_overview_top_alerts"}, "tool": "get_widget_data"}
-{"args": {"data": "From widget portfolio_command_center_overview_portfolio_snapshot, the value for Portfolio Snapshot primary is 87.94.\nFrom widget portfolio_command_center_overview_top_alerts, the alert_count for Flagship Long/Short with period YTD and status Open is 71.", "name": "Portfolio Snapshot and Top Alerts Values", "tab_id": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

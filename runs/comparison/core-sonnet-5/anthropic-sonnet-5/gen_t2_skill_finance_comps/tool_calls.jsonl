@@ -1,4 +1,0 @@
-{"args": {"reason": "Retrieve workflow steps for finance comps skill to add to new tab note", "slug": "finance-comps"}, "tool": "get_skill_content"}
-{"args": {"operation": "add_tabs", "tabs": [{"name": "Comps"}]}, "tool": "manage_navigation_bar"}
-{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "comps"}, "tool": "navigate_workspace"}
-{"args": {"data": "Comps workflow: define the peer set, normalize metrics, compare valuation multiples, and explain why outliers deserve premium or discount.", "description": "Workflow steps for finance comps skill", "inner_tab": "comps", "name": "Finance Comps Workflow", "widget_type": "note"}, "tool": "add_generative_widget"}

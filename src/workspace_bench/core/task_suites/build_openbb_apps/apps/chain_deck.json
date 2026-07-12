@@ -1,0 +1,299 @@
+{
+  "id": "chain_deck",
+  "title": "Assemble the Chain Deck app from scratch",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "crypto",
+  "tags": [
+    "family-apps",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "multi-tab"
+  ],
+  "prompt": "Build a working Workspace experience for a digital-assets analyst covering chain activity and liquidity. The workspace must cover current TVL of all chains from the desk aggregator. The workspace must cover comparison of chain TVL. Analysts need to inspect name, TVL USD, change one-day. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Keep these source-contract anchors: `chain` and `name`. Choose the rest of the architecture and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "chain-tvl-data__chains_chart",
+          "widget_id": "chains_chart",
+          "fields": [
+            "chains_chart_value"
+          ],
+          "path": "/chains-chart",
+          "payload": [
+            {
+              "chains_chart_value": 10.25
+            },
+            {
+              "chains_chart_value": 20.5
+            },
+            {
+              "chains_chart_value": 30.75
+            }
+          ]
+        },
+        {
+          "name": "chain-tvl-data__chains_table",
+          "widget_id": "chains_table",
+          "fields": [
+            "change_1d",
+            "name",
+            "tvl_usd"
+          ],
+          "path": "/chains-table",
+          "payload": [
+            {
+              "change_1d": 10.25,
+              "name": "name-1",
+              "tvl_usd": 10.25
+            },
+            {
+              "change_1d": 20.5,
+              "name": "name-2",
+              "tvl_usd": 20.5
+            },
+            {
+              "change_1d": 30.75,
+              "name": "name-3",
+              "tvl_usd": 30.75
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_chains-chart",
+        "datasets": [
+          "chain-tvl-data__chains_chart"
+        ],
+        "widget_kind": "chart-like",
+        "must_cover_fields": [
+          "chains_chart_value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_chains-table",
+        "datasets": [
+          "chain-tvl-data__chains_table"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "change_1d",
+          "name",
+          "tvl_usd"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      }
+    ],
+    "capability_connections": [
+      {
+        "source": "capability_2_chains-table",
+        "target": "capability_1_chains-chart",
+        "param_kind": "text"
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Chain TVL Data",
+        "url": "http://localhost:7802",
+        "widgets_json": {
+          "chains_table": {
+            "name": "Top Chains by TVL",
+            "description": "Current TVL of all chains from the desk aggregator.",
+            "endpoint": "/chains-table",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "name",
+                    "headerName": "Chain",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "tvl_usd",
+                    "headerName": "TVL ($)",
+                    "cellDataType": "number",
+                    "formatterFn": "int"
+                  },
+                  {
+                    "field": "change_1d",
+                    "headerName": "1d Change",
+                    "cellDataType": "number",
+                    "formatterFn": "percent",
+                    "renderFn": "greenRed"
+                  }
+                ]
+              }
+            },
+            "params": [
+              {
+                "paramName": "chain",
+                "type": "text",
+                "label": "Chain",
+                "value": "Ethereum",
+                "description": "Chain the deck is focused on."
+              }
+            ]
+          },
+          "chains_chart": {
+            "name": "TVL by Chain",
+            "description": "Plotly bar chart of chain TVL.",
+            "endpoint": "/chains-chart",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "raw": true,
+            "params": [
+              {
+                "paramName": "chain",
+                "type": "text",
+                "label": "Chain",
+                "value": "Ethereum",
+                "description": "Chain the deck is focused on."
+              }
+            ],
+            "data": {
+              "valueField": "chains_chart_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Chain Deck",
+            "description": "TVL table and trend.",
+            "tabs": {
+              "table": {
+                "id": "table",
+                "name": "Table",
+                "layout": [
+                  {
+                    "i": "chains_table",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "trend": {
+                "id": "trend",
+                "name": "Trend",
+                "layout": [
+                  {
+                    "i": "chains_chart",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Chain Sync",
+                "type": "param",
+                "paramName": "chain",
+                "widgetIds": [
+                  "chains_table",
+                  "chains_chart"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Chain Deck",
+        "dashboard_name": "Chain Deck Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "apps",
+  "capability": "app-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "chain",
+    "name"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique apps/chain_deck building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Chain TVL Data; artifact capabilities:capability_1_chains-chart:chart-like:chains_chart_value,capability_2_chains-table:table-like:change_1d,name,tvl_usd."
+}

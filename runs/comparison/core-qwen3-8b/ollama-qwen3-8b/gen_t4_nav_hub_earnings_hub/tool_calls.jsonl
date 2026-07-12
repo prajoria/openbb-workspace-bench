@@ -1,5 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "name": "Earnings Hub", "operation": "update"}, "tool": "manage_dashboard"}
-{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Estimates"}]}, "tool": "manage_navigation_bar"}
-{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "estimates"}, "tool": "navigate_workspace"}
-{"args": {"chart_params": {"chartType": "estimate_history", "xKey": "date", "yKey": "estimate"}, "dashboard_id": "dash_001", "data": {"symbol": "AAPL"}, "widget_type": "chart"}, "tool": "add_generative_widget"}

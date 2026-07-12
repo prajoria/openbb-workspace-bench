@@ -1,8 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "Corporate Access Log", "operation": "instantiate", "template_id": "corporate-access-meeting-notes"}, "tool": "manage_apps"}
-{"args": {"operation": "tab", "tab_id": "meetings"}, "tool": "navigate_workspace"}
-{"args": {"dashboard_id": "dash_002", "data": "Meetings tab note: expert calls are tracked with the Expert Calls widget (corporate_access_meeting_notes_meetings_expert_calls), alongside the meeting calendar in corporate_access_meeting_notes_meetings_meeting_calendar for the Corporate Access Log.", "inner_tab": "meetings", "name": "Corporate Access Meeting Brief", "widget_type": "note"}, "tool": "add_generative_widget"}
-{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "corporate_access_meeting_notes_meetings_expert_calls"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_002", "data_args": {"sector": "Healthcare", "status": "Open", "ticker": "LLY"}, "origin": "Bench Stark Enterprise", "widget_id": "corporate_access_meeting_notes_meetings_expert_calls"}, "tool": "create_widget"}

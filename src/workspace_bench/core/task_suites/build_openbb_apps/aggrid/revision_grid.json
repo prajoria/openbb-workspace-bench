@@ -1,0 +1,201 @@
+{
+  "id": "revision_grid",
+  "title": "Compose the Revision Grid table from its rows and requirements",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-aggrid",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "aggrid",
+    "derivation",
+    "composed"
+  ],
+  "prompt": "Create a usable earnings and estimates workflow for an equity-research analyst. The workspace must cover street revision momentum by ticker. Analysts need to inspect ticker, revised up, revised down, momentum percentage. Large result sets must stay responsive while analysts filter and page through them. The source contract must retain `ticker` and `revised_up`; decide the remaining implementation and preserve unrelated workspace state.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2,
+      "must_call_schema_before_create": true
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 0,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "earnings-prep-data__revision_grid",
+          "widget_id": "revision_grid",
+          "fields": [
+            "momentum_pct",
+            "revised_down",
+            "revised_up",
+            "ticker"
+          ],
+          "path": "/revision-momentum",
+          "payload": {
+            "rows": [
+              {
+                "momentum_pct": 10.25,
+                "revised_down": 10.25,
+                "revised_up": 10.25,
+                "ticker": "AAPL"
+              },
+              {
+                "momentum_pct": 20.5,
+                "revised_down": 20.5,
+                "revised_up": 20.5,
+                "ticker": "MSFT"
+              },
+              {
+                "momentum_pct": 30.75,
+                "revised_down": 30.75,
+                "revised_up": 30.75,
+                "ticker": "NVDA"
+              }
+            ],
+            "lastRow": 3
+          }
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_revision-grid",
+        "datasets": [
+          "earnings-prep-data__revision_grid"
+        ],
+        "widget_kind": "server-side-grid",
+        "must_cover_fields": [
+          "momentum_pct",
+          "revised_down",
+          "revised_up",
+          "ticker"
+        ],
+        "required_param_kinds": [],
+        "required_config": {
+          "data.dataKey": "rows"
+        }
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Earnings Prep Data",
+        "url": "http://localhost:7805",
+        "widgets_json": {
+          "revision_grid": {
+            "name": "Revision Grid",
+            "description": "Street revision momentum by ticker.",
+            "endpoint": "/revision-momentum",
+            "type": "ssrm_table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "ticker",
+                    "headerName": "Ticker",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "revised_up",
+                    "headerName": "Revised Up",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "revised_down",
+                    "headerName": "Revised Down",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "momentum_pct",
+                    "headerName": "Momentum Pct",
+                    "cellDataType": "number",
+                    "formatterFn": "percent"
+                  }
+                ]
+              },
+              "dataKey": "rows"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Earnings Prep Data"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Earnings Prep Data",
+        "widget_id": "revision_grid"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Earnings Prep Data",
+        "widget_id": "revision_grid"
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "aggrid",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "medium",
+  "business_terms": [
+    "ticker",
+    "revised_up"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "test",
+  "novelty": "Unique aggrid/revision_grid building exercise using create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks capability, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_revision-grid:server-side-grid:momentum_pct,revised_down,revised_up,ticker."
+}

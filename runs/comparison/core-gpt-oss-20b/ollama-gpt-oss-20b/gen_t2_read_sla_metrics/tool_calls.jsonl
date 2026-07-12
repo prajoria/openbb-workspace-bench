@@ -1,3 +1,0 @@
-{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "vendor_dataset_monitor_vendors_sla_metrics"}, "tool": "get_widget_data"}
-{"args": {"data": "Vendor SLA Metrics (widget id: vendor_dataset_monitor_vendors_sla_metrics): Primary = 63.73, Secondary = 88.47, Threshold = 60.04.", "description": "SLA metrics summary", "widget_type": "note"}, "tool": "add_generative_widget"}

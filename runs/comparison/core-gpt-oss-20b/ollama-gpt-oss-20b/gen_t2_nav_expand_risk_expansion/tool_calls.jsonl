@@ -1,4 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "name": "Risk Command Center", "operation": "update"}, "tool": "manage_dashboard"}
-{"args": {"operation": "add_tabs", "tabs": [{"name": "Stress Results"}]}, "tool": "manage_navigation_bar"}
-{"args": {"data": "Stress results are pending.", "inner_tab": "stress-results", "widget_type": "note"}, "tool": "add_generative_widget"}

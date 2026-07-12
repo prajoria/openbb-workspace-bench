@@ -1,3 +1,0 @@
-{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\": false, \"tool\": \"get_workspace_snapshot\", \"args\": {}}", "turn": 1}
-{"action": {"args": {"dashboard_id": "dash_001", "data": "The FactSet feed is degraded and fallback pricing is active.", "name": "Vendor Outage", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\n  \"done\": false,\n  \"tool\": \"add_generative_widget\",\n  \"args\": {\n    \"dashboard_id\": \"dash_001\",\n    \"widget_type\": \"note\",\n    \"name\": \"Vendor Outage\",\n    \"data\": \"The FactSet feed is degraded and fallback pricing is active.\"\n  }\n}", "turn": 2}
-{"action": {"done": true}, "content": "{\n  \"done\": true\n}", "turn": 3}

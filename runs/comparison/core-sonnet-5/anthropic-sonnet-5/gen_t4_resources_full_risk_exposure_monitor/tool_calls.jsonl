@@ -1,7 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "dashboard_name": "Risk Resource Command", "operation": "instantiate", "template_id": "risk-exposure-monitor"}, "tool": "manage_apps"}
-{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "limits"}, "tool": "navigate_workspace"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_limits_limit_utilization"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_002", "data_args": {"period": "YTD", "portfolio": "Global Equity", "scenario": "Equity -10%"}, "origin": "Bench Stark Enterprise", "ui_args": {"tab_id": "limits"}, "widget_id": "risk_exposure_monitor_limits_limit_utilization"}, "tool": "create_widget"}
-{"args": {"dashboard_id": "dash_002", "data": "This note tracks limit utilization for the Risk Resource Command dashboard, monitoring how portfolio exposures consume allocated risk limits across the Flagship Long/Short, Global Opportunities, Credit Plus, Macro Absolute Return, and Healthcare Alpha resource books.", "inner_tab": "limits", "name": "Limit Utilization Note", "widget_type": "note"}, "tool": "add_generative_widget"}

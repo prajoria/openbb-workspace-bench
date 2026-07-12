@@ -1,3 +1,0 @@
-{"action": {"args": {"widget_id": "macro_timeseries"}, "done": false, "tool": "read_widget"}, "content": "{\"done\": false, \"tool\": \"read_widget\", \"args\": {\"widget_id\": \"macro_timeseries\"}}", "turn": 1}
-{"action": {"args": {"data": "DGS10", "description": "Note on DGS10 series", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"widget_type\":\"note\",\"data\":\"DGS10\",\"description\":\"Note on DGS10 series\"}}", "turn": 2}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

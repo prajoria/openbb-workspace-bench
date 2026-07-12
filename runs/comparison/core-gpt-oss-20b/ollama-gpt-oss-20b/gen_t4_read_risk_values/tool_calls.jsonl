@@ -1,4 +1,0 @@
-{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot"}, "tool": "get_widget_data"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_limits_limit_utilization"}, "tool": "get_widget_data"}
-{"args": {"data": "Risk Snapshot (risk_exposure_monitor_dashboard_risk_snapshot): 0.2878; Limit Utilization exposure (risk_exposure_monitor_limits_limit_utilization) for Flagship Long/Short: 0.0339.", "widget_type": "note"}, "tool": "add_generative_widget"}
