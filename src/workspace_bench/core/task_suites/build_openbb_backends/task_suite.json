@@ -1,0 +1,7 @@
+{
+  "content_sha256": "7490fc6a958d21f45bd37166cf1d9b78cb7a3cfc8c4702b4e1024f4a8d72913a",
+  "default_split": "train",
+  "description": "Experimental v0 real-code track: agents edit pinned FastAPI starter repositories; the evaluator launches their process and grades manifests, HTTP behavior, and tests.",
+  "suite_id": "build-openbb-backends",
+  "visibility": "public"
+}

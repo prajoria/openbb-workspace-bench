@@ -1,0 +1,112 @@
+{
+  "allowed_tools": [
+    "filesystem",
+    "shell"
+  ],
+  "business_terms": [],
+  "capability": "build-real-backend",
+  "category": "platform",
+  "code_task": {
+    "command_timeout_ms": 120000,
+    "core_module": "app.py",
+    "health_path": "/health",
+    "install_command": [
+      "uv",
+      "sync",
+      "--quiet"
+    ],
+    "oracle_path": "fixtures/portfolio_monitor_app/oracle",
+    "probes": [
+      {
+        "expected_values": {},
+        "field_types": {
+          "currency": "string",
+          "label": "string",
+          "value": "number"
+        },
+        "json_body": {},
+        "method": "GET",
+        "minimum_items": 1,
+        "name": "portfolio summary",
+        "path": "/portfolio/summary",
+        "query": {},
+        "required_fields": [
+          "label",
+          "value",
+          "currency"
+        ],
+        "widget_id": "portfolio_summary"
+      },
+      {
+        "expected_values": {},
+        "field_types": {
+          "market_value": "number",
+          "symbol": "string",
+          "weight": "number"
+        },
+        "json_body": {},
+        "method": "GET",
+        "minimum_items": 2,
+        "name": "portfolio positions",
+        "path": "/portfolio/positions",
+        "query": {},
+        "required_fields": [
+          "symbol",
+          "weight",
+          "market_value"
+        ],
+        "widget_id": "portfolio_positions"
+      }
+    ],
+    "request_timeout_ms": 3000,
+    "require_apps": true,
+    "schema_version": "workspace-bench-code-task/v0",
+    "start_command": [
+      "{python}",
+      "-m",
+      "uvicorn",
+      "app:app",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "{port}"
+    ],
+    "starter_path": "fixtures/portfolio_monitor_app/starter",
+    "startup_timeout_ms": 20000,
+    "test_command": [
+      "{python}",
+      "-m",
+      "pytest",
+      "-q",
+      "--junitxml={junit}"
+    ]
+  },
+  "difficulty": "medium",
+  "domain": "engineering",
+  "family": "backend-code",
+  "fixtures": {
+    "backends": []
+  },
+  "id": "portfolio_monitor_app",
+  "initial_state": {},
+  "limits": {
+    "max_turns": 24
+  },
+  "novelty": "Real-code backend task: portfolio_monitor_app",
+  "oracle_tool_calls": [],
+  "prompt": "A portfolio manager needs one installable app combining a portfolio-value summary and position detail. Finish both data contracts and apps.json so its non-overlapping layout references only widgets this backend actually serves.",
+  "schema_version": "workspace-bench-task",
+  "source": "WorkspaceBench Phase 10 authored code track",
+  "split": "train",
+  "subdomain": "openbb-custom-backends",
+  "success": {},
+  "tags": [
+    "build-openbb-backends",
+    "experimental-v0",
+    "apps-json",
+    "multi-widget",
+    "layout"
+  ],
+  "title": "Build a multi-widget portfolio app",
+  "workflow": "custom-backend-development"
+}

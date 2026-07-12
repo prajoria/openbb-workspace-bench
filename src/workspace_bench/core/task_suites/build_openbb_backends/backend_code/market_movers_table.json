@@ -1,0 +1,91 @@
+{
+  "allowed_tools": [
+    "filesystem",
+    "shell"
+  ],
+  "business_terms": [],
+  "capability": "build-real-backend",
+  "category": "platform",
+  "code_task": {
+    "command_timeout_ms": 120000,
+    "core_module": "app.py",
+    "health_path": "/health",
+    "install_command": [
+      "uv",
+      "sync",
+      "--quiet"
+    ],
+    "oracle_path": "fixtures/market_movers_table/oracle",
+    "probes": [
+      {
+        "expected_values": {},
+        "field_types": {
+          "change_pct": "number",
+          "symbol": "string",
+          "volume": "integer"
+        },
+        "json_body": {},
+        "method": "GET",
+        "minimum_items": 2,
+        "name": "market movers",
+        "path": "/movers",
+        "query": {},
+        "required_fields": [
+          "symbol",
+          "change_pct",
+          "volume"
+        ],
+        "widget_id": "market_movers"
+      }
+    ],
+    "request_timeout_ms": 3000,
+    "require_apps": false,
+    "schema_version": "workspace-bench-code-task/v0",
+    "start_command": [
+      "{python}",
+      "-m",
+      "uvicorn",
+      "app:app",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "{port}"
+    ],
+    "starter_path": "fixtures/market_movers_table/starter",
+    "startup_timeout_ms": 20000,
+    "test_command": [
+      "{python}",
+      "-m",
+      "pytest",
+      "-q",
+      "--junitxml={junit}"
+    ]
+  },
+  "difficulty": "easy",
+  "domain": "engineering",
+  "family": "backend-code",
+  "fixtures": {
+    "backends": []
+  },
+  "id": "market_movers_table",
+  "initial_state": {},
+  "limits": {
+    "max_turns": 24
+  },
+  "novelty": "Real-code backend task: market_movers_table",
+  "oracle_tool_calls": [],
+  "prompt": "Implement the existing Market Movers table contract. Serve widgets.json with the declared symbol, percentage-change, and volume columns; implement GET /movers with at least two typed, non-placeholder rows; preserve CORS, health, and the pinned tests.",
+  "schema_version": "workspace-bench-task",
+  "source": "WorkspaceBench Phase 10 authored code track",
+  "split": "train",
+  "subdomain": "openbb-custom-backends",
+  "success": {},
+  "tags": [
+    "build-openbb-backends",
+    "experimental-v0",
+    "single-table",
+    "implementation"
+  ],
+  "title": "Implement a market movers table backend",
+  "workflow": "custom-backend-development"
+}
