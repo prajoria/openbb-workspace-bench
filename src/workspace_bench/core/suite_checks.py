@@ -4,7 +4,8 @@ The generators certify a suite at generation time; the functions here re-verify
 the release-report subset from the shipped task JSON so that
 ``workspace-bench validate`` and ``workspace-bench report`` hold the same gates
 without rerunning generation. The build-suite constants are imported by
-``scripts/generate_build_apps_suite.py`` and ``scripts/build_apps_suite`` so
+``scripts/generators/generate_build_apps_suite.py`` and
+``scripts/generators/build_apps_suite`` so
 there is one source of truth for caps and ownership.
 
 Profiles apply only to the bundled suites. Private ``--task-dir`` suites are

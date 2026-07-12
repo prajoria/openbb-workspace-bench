@@ -51,7 +51,7 @@ from workspace_bench.core.models import TASK_SCHEMA_VERSION
 from workspace_bench.core.suite_checks import task_payload_digest
 from workspace_bench.workspace.fixtures import get_fixture_backend
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
 STARK = json.loads((REPO / "src/workspace_bench/workspace/data/stark_enterprise.json").read_text())
 BUNDLED_OUT_DIR = REPO / "src/workspace_bench/core/task_suites/core"
 OUT_DIRS = (BUNDLED_OUT_DIR,)

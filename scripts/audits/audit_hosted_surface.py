@@ -7,7 +7,7 @@ mutated.
 
 Usage:
 
-    uv run --extra live python scripts/audit_hosted_surface.py
+    uv run --extra live python scripts/audits/audit_hosted_surface.py
 
 Reads ``WORKSPACE_MCP_TOKEN`` from the environment first, then from a local
 ``.env`` file. Override the endpoint with ``WORKSPACE_MCP_URL``. Exits
@@ -75,7 +75,7 @@ async def fetch_surface(url: str, token: str) -> dict[str, object]:
     except ImportError as error:
         raise RuntimeError(
             "The hosted surface audit requires optional dependencies. "
-            "Run with `uv run --extra live python scripts/audit_hosted_surface.py`."
+            "Run with `uv run --extra live python scripts/audits/audit_hosted_surface.py`."
         ) from error
 
     headers = {"Authorization": f"Bearer {token}"}

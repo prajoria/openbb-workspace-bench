@@ -1,10 +1,10 @@
 # WorkspaceBench Task Catalog
 
 Auto-generated from the bundled task JSON files — regenerate with
-`python scripts/generate_task_catalog.py` after editing tasks.
+`python scripts/generators/generate_task_catalog.py` after editing tasks.
 The 12 experimental `build-openbb-backends` code tasks are excluded here; their
 filesystem/process criteria are documented in the README task schema and generated
-by `scripts/generate_backend_code_suite.py`.
+by `scripts/generators/generate_backend_code_suite.py`.
 
 ## How grading works
 

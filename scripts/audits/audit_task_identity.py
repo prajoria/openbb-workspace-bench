@@ -2,8 +2,8 @@
 """Audit public task identities, titles, prompts, and documentation references.
 
 Usage:
-    uv run python scripts/audit_task_identity.py
-    uv run python scripts/audit_task_identity.py --json
+    uv run python scripts/audits/audit_task_identity.py
+    uv run python scripts/audits/audit_task_identity.py --json
 """
 
 from __future__ import annotations
@@ -18,7 +18,7 @@ from typing import Any
 
 from workspace_bench.core.prompt_openness import prompt_openness_issues
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
 SUITE_DIRS = {
     "core": REPO / "src/workspace_bench/core/task_suites/core",
     "build-openbb-apps": REPO / "src/workspace_bench/core/task_suites/build_openbb_apps",

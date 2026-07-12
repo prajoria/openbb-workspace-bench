@@ -7,7 +7,7 @@ that yields on the shipped JSON, for the benchmark card and for anyone
 evaluating template-ness.
 
 Usage:
-    uv run python scripts/report_prompt_stats.py [--json]
+    uv run python scripts/audits/report_prompt_stats.py [--json]
 """
 
 from __future__ import annotations
@@ -18,7 +18,7 @@ import statistics
 from collections import Counter
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
 SUITES = {
     "core": REPO / "src/workspace_bench/core/task_suites/core",
     "build-openbb-apps": (REPO / "src/workspace_bench/core/task_suites/build_openbb_apps"),

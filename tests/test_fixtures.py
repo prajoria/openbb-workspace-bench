@@ -18,7 +18,7 @@ STARK_DATA_PATH = REPO / "src/workspace_bench/workspace/data/stark_enterprise.js
 
 
 def _load_stark_data_generator():
-    path = REPO / "scripts/generate_stark_data.py"
+    path = REPO / "scripts/generators/generate_stark_data.py"
     spec = importlib.util.spec_from_file_location("generate_stark_data", path)
     assert spec and spec.loader
     module = importlib.util.module_from_spec(spec)

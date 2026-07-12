@@ -11,7 +11,7 @@ import json
 import re
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
 PACK_DIR = REPO / "src/workspace_bench/core/task_suites/core"
 BUILD_PACK_DIR = REPO / "src/workspace_bench/core/task_suites/build_openbb_apps"
 REPORT = REPO / "runs/reports/benchmark-report.md"
@@ -236,10 +236,10 @@ def main() -> None:
         "# WorkspaceBench Task Catalog",
         "",
         "Auto-generated from the bundled task JSON files — regenerate with",
-        "`python scripts/generate_task_catalog.py` after editing tasks.",
+        "`python scripts/generators/generate_task_catalog.py` after editing tasks.",
         "The 12 experimental `build-openbb-backends` code tasks are excluded here; their",
         "filesystem/process criteria are documented in the README task schema and generated",
-        "by `scripts/generate_backend_code_suite.py`.",
+        "by `scripts/generators/generate_backend_code_suite.py`.",
         "",
         "## How grading works",
         "",

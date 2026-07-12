@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Any
 
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
 DEFAULT_DATA_PATH = REPO / "src/workspace_bench/workspace/data/stark_enterprise.json"
 
 VENDORS = ["Bloomberg", "FactSet", "Refinitiv", "S&P Global", "MSCI", "ICE"]

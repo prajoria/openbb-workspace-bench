@@ -9,7 +9,7 @@ from pathlib import Path
 
 from workspace_bench.core.adversarial import ADVERSARIAL_ARCHETYPES
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
 
 AUDITED_FILES = (
     REPO / "README.md",

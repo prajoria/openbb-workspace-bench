@@ -13,7 +13,7 @@ Retired core artifacts are marked historical/pre-rename and pending re-run;
 they are never joined or pooled. No model calls are made.
 
 Usage:
-    uv run python scripts/compute_significance.py
+    uv run python scripts/reports/compute_significance.py
 """
 
 from __future__ import annotations

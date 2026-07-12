@@ -30,7 +30,7 @@ from workspace_bench.workspace.runtime import declared_fields
 from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
 from workspace_bench.workspace.widget_params import flatten_params
 
-REPO = Path(__file__).resolve().parents[2]
+REPO = Path(__file__).resolve().parents[3]
 BUNDLED_OUT_DIR = REPO / "src/workspace_bench/core/task_suites/build_openbb_apps"
 
 RUNGS = ("r0", "r1", "r2", "r3", "r4")

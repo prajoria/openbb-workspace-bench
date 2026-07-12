@@ -21,8 +21,8 @@ outcome and the grader requires a usable widget/app in final Workspace state.
     236 tasks = 10 x 5 x 4 + 12 e2e capstones + 24 debug repairs
 
 Usage:
-    uv run python scripts/generate_build_apps_suite.py            # full build + certify + write
-    uv run python scripts/generate_build_apps_suite.py --partial  # build available families, certify, no write
+    uv run python scripts/generators/generate_build_apps_suite.py            # full build + certify + write
+    uv run python scripts/generators/generate_build_apps_suite.py --partial  # build available families, certify, no write
 """
 
 from __future__ import annotations
@@ -35,7 +35,7 @@ from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from build_apps_suite import common as c  # noqa: E402
 from workspace_bench.workspace.widget_params import flatten_params  # noqa: E402

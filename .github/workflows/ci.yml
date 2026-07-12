@@ -33,9 +33,9 @@ jobs:
 
       - name: Audit task identities and prompt openness
         run: |
-          uv run python scripts/audit_task_identity.py
-          uv run python scripts/report_prompt_stats.py
-          uv run python scripts/audit_release_consistency.py
+          uv run python scripts/audits/audit_task_identity.py
+          uv run python scripts/audits/report_prompt_stats.py
+          uv run python scripts/audits/audit_release_consistency.py
 
       - name: Validate the core suite
         run: uv run --extra dev workspace-bench validate --suite core --min-tasks 300

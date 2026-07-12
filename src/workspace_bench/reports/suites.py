@@ -7,7 +7,7 @@ ineligible for pooling; models without a current run are listed as pending.
 
 Usage (one --run per model per suite; the suite name is free-form,
 so a private suite joins the aggregate just by naming itself):
-  uv run python scripts/compile_suites_report.py \
+  uv run python scripts/reports/compile_suites_report.py \
       --run core=runs/comparison/core-gpt-4.1-mini \
       --run build-openbb-apps=runs/comparison/build-gpt-4.1-mini \
       --run my-desk-flows=runs/comparison/mydesk-gpt-4.1-mini \

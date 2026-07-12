@@ -185,9 +185,9 @@ valid-attempt pass rates are 94.3 / 93.7 / 77.4 / 70.3 / 64.0 / 53.2%.
 Full per-task results and traces are committed under `runs/comparison/`,
 portable rollout JSONL for all 1,800 episodes under `runs/exports/`, the
 compiled report at `runs/reports/calibration.json` (built by
-`scripts/compile_calibration.py`), and confidence intervals, held-out-split
+`scripts/reports/compile_calibration.py`), and confidence intervals, held-out-split
 slices, and all pairwise tests at `runs/reports/significance.json` (built by
-`scripts/compute_significance.py`). The current analysis script additionally
+`scripts/reports/compute_significance.py`). The current analysis script additionally
 reports family-cluster bootstrap intervals; task-IID Wilson and McNemar
 statistics are retained only as descriptive historical measures.
 
@@ -374,12 +374,12 @@ Compile a smoke or full result directory into family×difficulty and per-task
 calibration matrices:
 
 ```bash
-uv run python scripts/compile_calibration.py runs/comparison/<run-id> \
+uv run python scripts/reports/compile_calibration.py runs/comparison/<run-id> \
   --output runs/comparison/<run-id>/calibration.json
 ```
 
 After at least two model result sets exist,
-`scripts/propose_measured_difficulty.py` produces a raw band proposal and a
+`scripts/reports/propose_measured_difficulty.py` produces a raw band proposal and a
 conservatively approved override payload. `--apply-overrides` writes the
 approved table to `src/workspace_bench/core/measured_difficulty.json`; the
 generator consumes it and verifies the empirical counts.
@@ -475,7 +475,7 @@ run directory per model per suite:
 
 ```bash
 # each evaluator invocation writes one run directory per model
-uv run python scripts/compile_suites_report.py \
+uv run python scripts/reports/compile_suites_report.py \
   --run build-openbb-apps=runs/comparison/build-calibration-202607-regraded/openai-gpt-5.5.json \
   --historical-run core=runs/comparison/core-gpt-5.5 \
   --output /tmp/workspace-bench-suites-example.json
@@ -540,9 +540,9 @@ uv run --extra live workspace-bench smoke-workspace-mcp \
 
 The smoke command emulates the browser bridge with the benchmark simulator. It exercises the real streamable HTTP endpoint, tool schemas, server-side validation, websocket bridge, command translation layer, and session-context updates without requiring a Workspace browser tab. If a real browser is already connected, the command refuses to replace it unless `--replace-browser-session` is passed.
 
-For release audits, `scripts/audit_hosted_surface.py` compares full hosted input
+For release audits, `scripts/audits/audit_hosted_surface.py` compares full hosted input
 schemas against the committed compatibility baseline, and
-`scripts/audit_live_golden_tasks.py` replays a small cross-surface golden set
+`scripts/audits/audit_live_golden_tasks.py` replays a small cross-surface golden set
 through the real sidecar transport.
 
 ## Browser Certification
@@ -751,13 +751,11 @@ src/workspace_bench/
   rl/                    Gym-style env, action/observation/reward helpers
   __init__.py            Small public convenience surface
 scripts/
-  _authoring/              Shared deterministic suite-authoring harness
-  generate_gen_pack.py     Core suite generator (families x levels)
-  generate_build_apps_suite.py  build-openbb-apps suite generator + certifier
-  generate_backend_code_suite.py  12 real-code starters, oracles, and task specs
-  generate_stark_data.py   Seeded Stark fixture data baker
-  compile_calibration.py   Aggregates calibration runs into runs/reports/calibration.json
-  compile_suites_report.py  Pools suites into runs/reports/suites.json
+  generators/             Deterministic suite, catalog, matrix, and fixture generators
+    _authoring/            Shared deterministic suite-authoring harness
+    build_apps_suite/      build-openbb-apps family modules
+  audits/                 Local, release, hosted-surface, and prompt audits
+  reports/                Analysis and report compatibility entry points
 runs/
   comparison/              Historical boards plus the 2026-07 build calibration
   exports/                 Rollout JSONL for the 1,800 core episodes

@@ -51,5 +51,5 @@ comparison/
 
 with the per-episode transcript trees either kept only under `current/` or moved out of git
 entirely (summaries stay). Applying this touches example paths in `README.md`,
-`docs/private-task-suites.md`, `runs/README.md`, `scripts/compile_calibration.py`, and
-`scripts/compile_suites_report.py`.
+`docs/private-task-suites.md`, `runs/README.md`, `scripts/reports/compile_calibration.py`, and
+`scripts/reports/compile_suites_report.py`.

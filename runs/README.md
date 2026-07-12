@@ -47,7 +47,7 @@ one validation and one test task. Task ids, prompts, rubrics, and oracle
 traces were untouched, so all published outcomes remain valid. Artifacts
 inside `comparison/` record the split assignment that existed at run time;
 the shipped suite is canonical for split-sliced analysis — join per-task
-outcomes on task id, as `scripts/compute_significance.py` does for the
+outcomes on task id, as `scripts/reports/compute_significance.py` does for the
 held-out slices in `reports/significance.json`.
 
 ## Re-verifying
@@ -59,8 +59,8 @@ uv run workspace-bench export-rollouts \
   --output /tmp/mini-rollouts.jsonl
 
 # recompute the compiled reports from the committed run directories
-uv run python scripts/compile_calibration.py
-uv run python scripts/compute_significance.py
+uv run python scripts/reports/compile_calibration.py
+uv run python scripts/reports/compute_significance.py
 ```
 
 The exports in `exports/` were rebuilt this way on 2026-07-11; the replayed

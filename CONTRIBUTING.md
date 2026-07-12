@@ -41,13 +41,13 @@ must use `required_capabilities`, runtime datasets, generic app structure, and
 optional business names—not exact oracle widget/app definitions or layouts.
 
 ```bash
-uv run python scripts/generate_build_apps_suite.py
-uv run python scripts/audit_task_identity.py
-uv run python scripts/report_prompt_stats.py
+uv run python scripts/generators/generate_build_apps_suite.py
+uv run python scripts/audits/audit_task_identity.py
+uv run python scripts/audits/report_prompt_stats.py
 ```
 
 The core and build-suite generators share their deterministic assembly mechanics
-in `scripts/_authoring/`. Keep suite policy in small callbacks/configuration
+in `scripts/generators/_authoring/`. Keep suite policy in small callbacks/configuration
 (identity cleanup, artifact prefixes, exceptional cell sizes) rather than adding
 a second implementation of phrasing, difficulty, split, novelty, or matrix logic.
 After changing either generator, run it twice and verify that the bundled JSON is
@@ -63,7 +63,7 @@ an independent still-broken repair mutant.
 
 ## Author a real-code backend task
 
-Edit `scripts/generate_backend_code_suite.py`; never hand-edit its generated
+Edit `scripts/generators/generate_backend_code_suite.py`; never hand-edit its generated
 task JSON, starter repositories, or oracle overlays. A code task must include:
 
 - a unique business brief and provisional difficulty;
@@ -83,7 +83,7 @@ starters should retain at least one already-passing endpoint/test so they
 measure regression discipline.
 
 ```bash
-uv run python scripts/generate_backend_code_suite.py
+uv run python scripts/generators/generate_backend_code_suite.py
 uv run workspace-bench validate --suite build-openbb-backends --min-tasks 12
 uv run pytest -q tests/test_code_tasks.py
 ```
@@ -196,9 +196,9 @@ Run before submitting:
 uv run pytest -q
 uv run ruff check .
 uv run mypy src
-uv run python scripts/audit_task_identity.py
-uv run python scripts/report_prompt_stats.py
-uv run python scripts/audit_release_consistency.py
+uv run python scripts/audits/audit_task_identity.py
+uv run python scripts/audits/report_prompt_stats.py
+uv run python scripts/audits/audit_release_consistency.py
 uv run --extra dev workspace-bench validate --suite core --min-tasks 300
 uv run --extra dev workspace-bench validate --suite build-openbb-apps --min-tasks 236
 uv run --extra dev workspace-bench validate --suite build-openbb-backends --min-tasks 12
