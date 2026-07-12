@@ -751,6 +751,7 @@ src/workspace_bench/
   rl/                    Gym-style env, action/observation/reward helpers
   __init__.py            Small public convenience surface
 scripts/
+  _authoring/              Shared deterministic suite-authoring harness
   generate_gen_pack.py     Core suite generator (families x levels)
   generate_build_apps_suite.py  build-openbb-apps suite generator + certifier
   generate_backend_code_suite.py  12 real-code starters, oracles, and task specs
