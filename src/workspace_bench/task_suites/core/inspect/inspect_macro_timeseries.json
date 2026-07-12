@@ -1,14 +1,9 @@
 {
   "id": "inspect_macro_timeseries",
-  "title": "Inspect Macro Timeseries",
-  "capability": "workspace-inspection",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-inspect",
-    "inspect",
-    "read-widget"
-  ],
+  "category": "read",
+  "family": "inspect",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "Call read_widget with widget_id macro_timeseries for the existing Bench Macro/macro_timeseries widget, then add a note mentioning DGS10.",
   "fixtures": {
     "backends": [
@@ -94,15 +89,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "read",
-  "family": "inspect",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique inspect/inspect_macro_timeseries exercise using add_generative_widget, get_workspace_snapshot, read_widget with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, repeated_snapshots, too_many_invalid_calls on macro; artifact generated:note@*:DGS10."
+  }
 }

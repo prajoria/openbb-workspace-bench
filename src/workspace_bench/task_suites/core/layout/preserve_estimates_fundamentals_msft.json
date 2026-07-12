@@ -1,14 +1,9 @@
 {
   "id": "preserve_estimates_fundamentals_msft",
-  "title": "Move Without Disturbing: Estimates Fundamentals Msft",
-  "capability": "layout-management",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-layout",
-    "layout",
-    "preservation"
-  ],
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "Do not move the estimates widget; move the MSFT fundamentals widget beside it so it starts at column 24, row 0, keeping its size.",
   "fixtures": {
     "backends": [
@@ -108,15 +103,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "layout",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique layout/preserve_estimates_fundamentals_msft exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on equities; artifact layouts:estimate_history:::0:0:24:12,fundamental_metrics:::24:0:16:8."
+  }
 }

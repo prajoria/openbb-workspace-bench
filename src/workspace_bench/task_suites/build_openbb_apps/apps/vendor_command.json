@@ -1,16 +1,14 @@
 {
   "id": "vendor_command",
-  "title": "Compose the Vendor Command app",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "operations",
-  "tags": [
-    "family-apps",
-    "cell4",
-    "build-openbb-apps",
-    "apps-json",
-    "composed"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "medium",
+  "split": "validation",
   "prompt": "Build a working Workspace experience for a vendor-operations manager covering vendor service levels. The workspace must cover vendor SLA state with breach flags. The workspace must cover count of open SLA breaches. The workspace must cover vendor incident notices feed. Analysts need to inspect vendor, status, latency milliseconds, breach. Leave the complete working workspace open for review. Keep these source-contract anchors: `status` and `vendor`. Choose the rest of the architecture and avoid unrelated changes.",
+  "business_terms": [
+    "status",
+    "vendor"
+  ],
   "fixtures": {},
   "initial_state": {
     "custom_backends": [
@@ -326,21 +324,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "capability": "app-building",
-  "specification_level": "partially-specified",
-  "difficulty": "medium",
-  "business_terms": [
-    "status",
-    "vendor"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique apps/vendor_command building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Vendor SLA Data; artifact capabilities:capability_1_breach-metric:metric:breach_metric_value,capability_2_sla-newsfeed:newsfeed:sla_newsfeed_value,capability_3_vendor-sla-table:table-like:breach,latency_ms,status,vendor."
+    "max_turns": 13
+  }
 }

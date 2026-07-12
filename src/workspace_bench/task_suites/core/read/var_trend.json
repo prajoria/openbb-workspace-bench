@@ -1,15 +1,10 @@
 {
   "id": "var_trend",
-  "title": "Read Data: VaR Trend",
-  "capability": "data-reading",
-  "workflow": "risk-review",
-  "subdomain": "risk",
-  "tags": [
-    "family-read",
-    "data-reading",
-    "stark"
-  ],
-  "prompt": "Use get_widget_data for the Bench Stark Enterprise VaR Trend widget; find the exact var_usd for risk_exposure_monitor_dashboard_var_trend, then add a note that cites each widget id, the field name, and the exact value.",
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "medium",
+  "split": "test",
+  "prompt": "Use get_widget_data for the Bench Stark Enterprise VaR Trend widget; find the exact var_usd for risk_exposure_monitor_dashboard_var_trend, then add a HTML card that cites each widget id, the field name, and the exact value.",
   "fixtures": {
     "backends": [
       {
@@ -66,7 +61,6 @@
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "risk_exposure_monitor_dashboard_var_trend",
           "var_usd",
           "-222500"
         ]
@@ -74,7 +68,7 @@
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "risk_exposure_monitor_dashboard_var_trend",
           "var_usd",
@@ -109,21 +103,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Data Note",
-        "data": "risk_exposure_monitor_dashboard_var_trend var_usd is -222500."
+        "data": "<section>risk_exposure_monitor_dashboard_var_trend var_usd is -222500.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "read",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique read/var_trend exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:risk_exposure_monitor_dashboard_var_trend,var_usd."
+  }
 }

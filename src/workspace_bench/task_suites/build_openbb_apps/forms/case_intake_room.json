@@ -1,18 +1,15 @@
 {
   "id": "case_intake_room",
-  "title": "Assemble the Case Intake Room form app",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-forms",
-    "cell2",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "forms",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "forms",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Build a working Workspace experience for a surveillance analyst covering cases and compliance alerts. The workspace must cover escalate a surveillance case to a reviewer. The workspace must cover open surveillance alerts. Analysts need to inspect alert ID, desk, severity, age days. An analyst can choose the relevant business date. The user can enter the required details and submit the workflow. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Keep these source-contract anchors: `escalation` and `case_id`. Choose the rest of the architecture and avoid unrelated changes.",
+  "business_terms": [
+    "escalation",
+    "case_id"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -338,21 +335,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "forms",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "escalation",
-    "case_id"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique forms/case_intake_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_alert-queue:table-like:age_days,alert_id,desk,severity,capability_2_case-escalation-form:form:case_escalation_form_value."
+    "max_turns": 14
+  }
 }

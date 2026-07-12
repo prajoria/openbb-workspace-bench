@@ -1,14 +1,9 @@
 {
   "id": "refresh_backend_before_building_macro_timeseries",
-  "title": "Refresh Backend Before Building Macro Timeseries",
-  "capability": "dashboard-construction",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-backends",
-    "backends",
-    "refresh"
-  ],
+  "category": "dashboard",
+  "family": "backends",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Register Bench Macro with backend name macro, refresh it, then add Bench Macro/macro_timeseries with data_args {\"series\": \"DGS10\"} and document that the backend was refreshed.",
   "fixtures": {
     "backends": []
@@ -185,15 +180,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "backends",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 10
-  },
-  "split": "train",
-  "novelty": "Unique backends/refresh_backend_before_building_macro_timeseries exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on macro; artifact widgets:Bench Macro/macro_timeseries@*; generated:note@*:refreshed,Bench Macro."
+  }
 }

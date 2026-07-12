@@ -1,15 +1,10 @@
 {
   "id": "pipeline",
-  "title": "Read Data: Pipeline by Stage",
-  "capability": "data-reading",
-  "workflow": "client-meeting-prep",
-  "subdomain": "client-ir",
-  "tags": [
-    "family-read",
-    "data-reading",
-    "stark"
-  ],
-  "prompt": "On the Bench Stark Enterprise Pipeline by Stage widget, use get_widget_data, then add a short note that cites client_360_flows_pipeline_by_stage and says you reviewed the data.",
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "easy",
+  "split": "validation",
+  "prompt": "On the Bench Stark Enterprise Pipeline by Stage widget, use get_widget_data, then add a short HTML card that cites client_360_flows_pipeline_by_stage and says you reviewed the data.",
   "fixtures": {
     "backends": [
       {
@@ -66,13 +61,13 @@
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "client_360_flows_pipeline_by_stage"
+          "score"
         ]
       }
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "client_360_flows_pipeline_by_stage",
           "data"
@@ -106,21 +101,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Data Note",
-        "data": "Reviewed the data returned by client_360_flows_pipeline_by_stage."
+        "data": "<section>Reviewed the data returned by client_360_flows_pipeline_by_stage.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "read",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique read/pipeline exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:client_360_flows_pipeline_by_stage,data."
+  }
 }

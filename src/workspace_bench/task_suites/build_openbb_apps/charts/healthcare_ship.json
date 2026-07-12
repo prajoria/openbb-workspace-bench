@@ -1,18 +1,17 @@
 {
   "id": "healthcare_ship",
-  "title": "Ship, open, and configure the Pipeline Chart Live app",
-  "workflow": "healthcare-catalyst-review",
-  "subdomain": "healthcare",
-  "tags": [
-    "family-charts",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "charts",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "charts",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "A healthcare-research analyst needs a decision-ready Workspace for clinical catalysts and pipelines. The workspace must cover distribution of pipeline phase mix. The workspace must cover catalysts in the next 30 days. The workspace must cover upcoming clinical trial readouts. Analysts need to inspect ticker, phase, readout date. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Pipeline Chart Live', 'pipeline phases', 'Healthcare Research Data', 'III', 'ticker'. Choose an effective architecture and avoid unrelated changes.",
+  "business_terms": [
+    "Pipeline Chart Live",
+    "pipeline phases",
+    "Healthcare Research Data",
+    "III",
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -325,24 +324,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "charts",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Pipeline Chart Live",
-    "pipeline phases",
-    "Healthcare Research Data",
-    "III",
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique charts/healthcare_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_catalyst-metric:metric:catalyst_metric_value,capability_2_pipeline-vegalite:chart-like:pipeline_vegalite_value; generated:note@*:Pipeline Chart Live,pipeline phases."
+    "max_turns": 14
+  }
 }

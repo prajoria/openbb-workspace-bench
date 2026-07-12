@@ -5,7 +5,6 @@ from __future__ import annotations
 import copy
 
 from build_apps_suite import common as c
-from workspace_bench.core.models import TASK_SCHEMA_VERSION
 from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
 
 
@@ -250,7 +249,7 @@ def _broken_payload(
     elif archetype == "wrong_form_endpoint":
         broken_widgets["review_queue"]["params"][0]["endpoint"] = "/retired-intake"
     elif archetype == "wrong_live_row_id":
-        broken_widgets["review_queue"]["data"]["wsRowIdColumn"] = "legacy_id"
+        broken_widgets["review_queue"]["data"]["wsRowIdColumn"] = "retired_id"
     elif archetype == "silent_second_tab":
         broken_widgets["review_detail"]["endpoint"] = "/retired-detail"
     return broken_widgets, broken_apps, warnings
@@ -272,7 +271,7 @@ def _runtime_datasets(
     return datasets
 
 
-def _prompt(desk: dict, archetype: str) -> str:
+def _prompt_variants(desk: dict, archetype: str) -> list[str]:
     incident = {
         "invalid_widget": "one panel disappeared after a backend definition update",
         "data_mismatch": "the overview loads but a declared analyst field is absent",
@@ -283,14 +282,29 @@ def _prompt(desk: dict, archetype: str) -> str:
         "wrong_live_row_id": "live updates overwrite the wrong rows and make the queue unstable",
         "silent_second_tab": "the primary view works while a secondary view silently fails to load",
     }[archetype]
-    return (
-        f"{desk['role'].capitalize()} report that {incident} in {desk['app']}. "
-        f"Diagnose the existing {desk['backend']} connection, repair it in place, and retest "
-        "the affected workflow with live data before handing it back. Keep the Operations "
-        "Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. "
+    invariant = (
+        "Keep the Operations Handbook, the archive workspace, and every unrelated app "
+        "byte-for-byte unchanged. "
         f"Leave {desk['app']} open and add a short verification note that naturally mentions "
         f"{desk['app']}, {desk['backend']}, and repair verified."
     )
+    return [
+        (
+            f"{desk['role'].capitalize()} report that {incident} in {desk['app']}. "
+            f"Diagnose the existing {desk['backend']} connection, repair it in place, and "
+            f"retest the affected workflow with live data before handing it back. {invariant}"
+        ),
+        (
+            f"An incident in {desk['app']} means {incident}. Investigate the connected "
+            f"{desk['backend']} backend, make the smallest in-place repair, and prove the "
+            f"workflow against live data. {invariant}"
+        ),
+        (
+            f"Restore {desk['app']} for {desk['role']}: {incident}. Work through the existing "
+            f"{desk['backend']} connection, repair the root cause without replacing healthy "
+            f"content, and run a live-data retest. {invariant}"
+        ),
+    ]
 
 
 def _task(desk: dict, archetype: str, difficulty: str) -> dict:
@@ -331,11 +345,14 @@ def _task(desk: dict, archetype: str, difficulty: str) -> dict:
         primary_kind = "table-like"
     primary_fields = list(c.declared_fields(widgets["review_queue"]))
     detail_fields = list(c.declared_fields(widgets["review_detail"]))
-    required_config = (
-        {"data.wsRowIdColumn": f"{desk['entity']}_id"}
-        if archetype == "wrong_live_row_id"
-        else {}
-    )
+    if archetype == "wrong_live_row_id":
+        required_config = {"data.wsRowIdColumn": f"{desk['entity']}_id"}
+    elif archetype == "invalid_widget":
+        # The broken payload drops the required description; repairing it is
+        # only outcome-visible through the restored configuration value.
+        required_config = {"description": widgets["review_queue"]["description"]}
+    else:
+        required_config = {}
     capabilities = [
         {
             "name": f"incident-overview-{archetype}",
@@ -440,8 +457,7 @@ def _task(desk: dict, archetype: str, difficulty: str) -> dict:
             {"tool": "get_workspace_snapshot", "args": {}},
         ]
     )
-    return {
-        "schema_version": TASK_SCHEMA_VERSION,
+    task = {
         "id": task_id,
         "title": f"Repair {desk['app']} {archetype.replace('_', ' ')} incident",
         "category": "repair",
@@ -465,7 +481,7 @@ def _task(desk: dict, archetype: str, difficulty: str) -> dict:
         ],
         "source": "workspace-bench-build-apps-gen",
         "novelty": "assigned after generation",
-        "prompt": _prompt(desk, archetype),
+        "prompt": c.phrased(task_id, _prompt_variants(desk, archetype)),
         "business_terms": [
             desk["app"],
             desk["backend"],
@@ -500,6 +516,14 @@ def _task(desk: dict, archetype: str, difficulty: str) -> dict:
         "success": {
             "required_capabilities": capabilities,
             "capability_connections": connections,
+            # The duplicate-backend repair leaves no state-level trace once
+            # whole-workspace checks are out of scope; require the repair
+            # delete call itself.
+            "required_tool_calls": (
+                [{"tool": "manage_backends", "args_contains": {"operation": "delete"}}]
+                if archetype == "duplicate_backend"
+                else []
+            ),
             "business_names": [{"scope": "app", "contains": desk["app"]}],
             "app_structure": {
                 "required": True,
@@ -542,6 +566,8 @@ def _task(desk: dict, archetype: str, difficulty: str) -> dict:
         "_family": "debug",
         "_rung": "debug",
     }
+    c.diversify_generated_widget_proof(task, share=20, selected_buckets=7)
+    return task
 
 
 def build() -> None:

@@ -1,16 +1,9 @@
 {
   "id": "skill_tearsheet_skill",
-  "title": "Delegate Per The Finance Tearsheet Skill",
-  "capability": "mcp-tool-use",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-delegate",
-    "delegation",
-    "agents",
-    "mcp",
-    "skills"
-  ],
+  "category": "platform",
+  "family": "delegate",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "After calling get_skill_content with slug finance-tearsheet to understand the workflow, call assign_tasks_to_agents with two task_requests using ids valuation-analyst and catalyst-analyst covering that workflow, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
@@ -146,15 +139,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "delegate",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 7
-  },
-  "split": "test",
-  "novelty": "Unique delegate/skill_tearsheet_skill exercise using add_generative_widget, assign_tasks_to_agents, get_skill_content, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact tasks:catalyst-analyst,valuation-analyst; widgets:Bench Stark Enterprise/workspace_data_control_center_usage_export_activity@overview; generated:note@*:valuation analyst,catalyst analyst."
+  }
 }

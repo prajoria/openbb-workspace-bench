@@ -1,14 +1,9 @@
 {
   "id": "arrange_split_macro",
-  "title": "Arrange: Split Macro",
-  "capability": "layout-management",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-layout",
-    "layout",
-    "multi-widget"
-  ],
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Set the macro widgets side by side with the 10Y series on the left half and the yield curve on the right half; both should be 10 rows tall starting at row 0.",
   "fixtures": {
     "backends": [
@@ -116,15 +111,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "layout",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique layout/arrange_split_macro exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on macro; artifact layouts:macro_timeseries:::0:0:20:10,yield_curve:::20:0:20:10."
+  }
 }

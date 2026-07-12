@@ -1,13 +1,9 @@
 {
   "id": "set_macro_timeseries_series_to_dgs10",
-  "title": "Set Macro Timeseries series To DGS10",
-  "capability": "widget-update",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-update",
-    "update-widget"
-  ],
+  "category": "single-widget",
+  "family": "update",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "For the existing Macro Timeseries widget, set series to DGS10.",
   "fixtures": {
     "backends": [
@@ -82,15 +78,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "update",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique update/set_macro_timeseries_series_to_dgs10 exercise using get_workspace_snapshot, update_widget with checks layout_out_of_grid, missing_widget, repeated_snapshots, too_many_invalid_calls on macro; artifact widgets:Bench Macro/macro_timeseries@*."
+  }
 }

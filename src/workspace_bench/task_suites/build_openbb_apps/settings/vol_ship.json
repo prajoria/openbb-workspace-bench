@@ -1,18 +1,16 @@
 {
   "id": "vol_ship",
-  "title": "Ship, open, and configure the Vol Config Live app",
-  "workflow": "risk-review",
-  "subdomain": "volatility",
-  "tags": [
-    "family-settings",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "settings",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "settings",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "The desk needs a production-ready volatility and derivatives workflow for a volatility analyst. The workspace must cover current volatility regime score. The workspace must cover morning volatility commentary. The workspace must cover daily CBOE VIX closes with returns. Analysts need to inspect date, close, return percentage. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Vol Config Live', '15-minute cache', 'Vol Desk Data', 'stress'. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "Vol Config Live",
+    "15-minute cache",
+    "Vol Desk Data",
+    "stress"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -343,23 +341,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "settings",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Vol Config Live",
-    "15-minute cache",
-    "Vol Desk Data",
-    "stress"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique settings/vol_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact capabilities:capability_1_vol-commentary:markdown:vol_commentary_value,capability_2_vol-regime-metric:metric:vol_regime_metric_value; generated:note@*:Vol Config Live,15-minute cache."
+    "max_turns": 14
+  }
 }

@@ -1,14 +1,9 @@
 {
   "id": "register_backend_and_add_holdings_table",
-  "title": "Register Backend And Add Holdings Table",
-  "capability": "dashboard-construction",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-backends",
-    "backends",
-    "widget-creation"
-  ],
+  "category": "dashboard",
+  "family": "backends",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Call manage_backends with operation add and name portfolio to register Bench Portfolio; then discover holdings_table, fetch its schema, and add Bench Portfolio/holdings_table to the active dashboard.",
   "fixtures": {
     "backends": []
@@ -191,15 +186,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "backends",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique backends/register_backend_and_add_holdings_table exercise using create_widget, get_widget_schema, list_available_widgets, manage_backends with checks layout_out_of_grid, layout_overlap, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on portfolio; artifact widgets:Bench Portfolio/holdings_table@*."
+  }
 }

@@ -1,14 +1,9 @@
 {
   "id": "preserve_macro_pair",
-  "title": "Move Without Disturbing: Macro Pair",
-  "capability": "layout-management",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-layout",
-    "layout",
-    "preservation"
-  ],
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Move the yield curve widget beside the 10Y series widget: it should start at column 20, row 0, keeping its size. Do not move the series widget.",
   "fixtures": {
     "backends": [
@@ -106,15 +101,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "layout",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique layout/preserve_macro_pair exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on macro; artifact layouts:macro_timeseries:::0:0:20:10,yield_curve:::20:0:20:10."
+  }
 }

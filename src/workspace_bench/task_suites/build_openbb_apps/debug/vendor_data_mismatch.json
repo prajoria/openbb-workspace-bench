@@ -1,25 +1,10 @@
 {
-  "schema_version": "workspace-bench-task",
   "id": "vendor_data_mismatch",
-  "title": "Repair Vendor Recovery Room data mismatch incident",
   "category": "repair",
   "family": "debug",
-  "capability": "backend-repair",
-  "workflow": "diagnose-repair-retest",
-  "domain": "finance",
-  "subdomain": "vendor",
-  "specification_level": "partially-specified",
   "difficulty": "medium",
-  "tags": [
-    "build-openbb-apps",
-    "debug",
-    "repair",
-    "data_mismatch",
-    "long-oracle"
-  ],
-  "source": "workspace-bench-build-apps-gen",
-  "novelty": "Unique debug/vendor_data_mismatch building exercise using add_generative_widget, get_widget_data, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_apps, manage_backends, read_widget, read_workspace_resource with checks capability, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Vendor Repair Data, custom:Vendor Repair Data Archive; artifact capabilities:incident-detail-data_mismatch:table-like:age_days,record_id,updated_at,incident-overview-data_mismatch:table-like:owner,record_id,status; generated:note@*:Vendor Recovery Room,Vendor Repair Data.",
-  "prompt": "Vendor operations analysts report that the overview loads but a declared analyst field is absent in Vendor Recovery Room. Diagnose the existing Vendor Repair Data connection, repair it in place, and retest the affected workflow with live data before handing it back. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Vendor Recovery Room open and add a short verification note that naturally mentions Vendor Recovery Room, Vendor Repair Data, and repair verified.",
+  "split": "validation",
+  "prompt": "Restore Vendor Recovery Room for vendor operations analysts: the overview loads but a declared analyst field is absent. Work through the existing Vendor Repair Data connection, repair the root cause without replacing healthy content, and run a live-data retest. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Vendor Recovery Room open and add a short verification note that naturally mentions Vendor Recovery Room, Vendor Repair Data, and repair verified.",
   "business_terms": [
     "Vendor Recovery Room",
     "Vendor Repair Data",
@@ -336,6 +321,7 @@
       }
     ],
     "capability_connections": [],
+    "required_tool_calls": [],
     "business_names": [
       {
         "scope": "app",
@@ -734,6 +720,5 @@
   ],
   "limits": {
     "max_turns": 40
-  },
-  "split": "validation"
+  }
 }

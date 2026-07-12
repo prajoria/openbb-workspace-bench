@@ -1,17 +1,17 @@
 {
   "id": "healthcare_ship",
-  "title": "Ship, open, and configure the Trial Desk app",
-  "workflow": "healthcare-catalyst-review",
-  "subdomain": "healthcare",
-  "tags": [
-    "family-apps",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "A healthcare-research analyst needs a decision-ready Workspace for clinical catalysts and pipelines. The workspace must cover upcoming clinical trial readouts. The workspace must cover catalysts in the next 30 days. The workspace must cover pipeline distribution by phase. Analysts need to inspect ticker, phase, readout date. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Trial Desk', 'catalysts', 'Healthcare Research Data', 'MRNA', 'ticker'. Choose an effective architecture and avoid unrelated changes.",
+  "business_terms": [
+    "Trial Desk",
+    "catalysts",
+    "Healthcare Research Data",
+    "MRNA",
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -309,24 +309,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "capability": "app-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Trial Desk",
-    "catalysts",
-    "Healthcare Research Data",
-    "MRNA",
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique apps/healthcare_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_catalyst-metric:metric:catalyst_metric_value,capability_2_trial-catalysts:table-like:phase,readout_date,ticker; generated:note@*:Trial Desk,catalysts."
+    "max_turns": 14
+  }
 }

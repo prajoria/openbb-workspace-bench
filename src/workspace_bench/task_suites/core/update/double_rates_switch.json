@@ -1,15 +1,9 @@
 {
   "id": "double_rates_switch",
-  "title": "Double Repair: Rates Switch",
-  "capability": "workspace-repair",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-update",
-    "repair",
-    "update-widget",
-    "combo"
-  ],
+  "category": "repair",
+  "family": "update",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "On this dashboard, repair two macro series: the first widget should show DGS10 (not DGS2), and the second should show CPIAUCSL (not FEDFUNDS). Repair both existing widgets and add a note mentioning DGS10, CPIAUCSL, and the word repaired.",
   "fixtures": {
     "backends": [
@@ -151,15 +145,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "update",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique update/double_rates_switch exercise using add_generative_widget, get_workspace_snapshot, update_widget with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on macro; artifact widgets:Bench Macro/macro_timeseries@*,Bench Macro/macro_timeseries@*; generated:note@*:DGS10,CPIAUCSL."
+  }
 }

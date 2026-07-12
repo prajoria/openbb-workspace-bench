@@ -1,18 +1,15 @@
 {
   "id": "vol_cockpit",
-  "title": "Ship, open, and configure Vol Cockpit",
-  "workflow": "risk-review",
-  "subdomain": "volatility",
-  "tags": [
-    "family-e2e",
-    "cell8",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "e2e",
-    "orchestration"
+  "category": "platform",
+  "family": "e2e",
+  "difficulty": "hard",
+  "split": "test",
+  "prompt": "A volatility analyst needs a decision-ready Workspace for volatility and derivatives. The workspace must cover implied and realized volatility by tenor. The workspace must cover market history for VIX futures. Analysts need to inspect tenor, iv percentage, realized percentage, as of. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Vol Cockpit', 'Vol Desk Data', '3M'. Choose an effective architecture and avoid unrelated changes.",
+  "business_terms": [
+    "Vol Cockpit",
+    "Vol Desk Data",
+    "3M"
   ],
-  "prompt": "A volatility analyst needs a decision-ready Workspace for volatility and derivatives. The workspace must cover implied and realized volatility by tenor. The workspace must cover market history for VIX futures. Analysts need to inspect tenor, iv percentage, realized percentage, as of. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Vol Cockpit', 'Vol Desk Data', '3M'. Choose an effective architecture and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -40,7 +37,7 @@
   "success": {
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "Vol Cockpit",
           "vol cockpit",
@@ -292,28 +289,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Vol Cockpit",
-        "data": "Vol Cockpit is live from Vol Desk Data: vol cockpit ready. Configured tenor=3M."
+        "data": "<section>Vol Cockpit is live from Vol Desk Data: vol cockpit ready. Configured tenor=3M.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "e2e",
-  "capability": "backend-integration",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Vol Cockpit",
-    "Vol Desk Data",
-    "3M"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique e2e/vol_cockpit building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact capabilities:capability_1_vix-advanced:chart-like:vix_advanced_value,capability_2_vol-cockpit-table:table-like:as_of,iv_pct,realized_pct,tenor; generated:note@*:Vol Cockpit,vol cockpit."
+    "max_turns": 14
+  }
 }

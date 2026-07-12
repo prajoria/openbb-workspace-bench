@@ -1,16 +1,14 @@
 {
   "id": "vol_morning",
-  "title": "Compose the Vol Morning app",
-  "workflow": "risk-review",
-  "subdomain": "volatility",
-  "tags": [
-    "family-apps",
-    "cell2",
-    "build-openbb-apps",
-    "apps-json",
-    "composed"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "Deliver an analyst-ready Workspace solution for volatility and derivatives. The workspace must cover daily CBOE VIX closes with returns. The workspace must cover term structure for VIX futures by expiry. The workspace must cover current volatility regime score. Analysts need to inspect date, close, return percentage. An analyst can adjust the relevant numeric scope. Leave the complete working workspace open for review. Use `window` and `date` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
+  "business_terms": [
+    "window",
+    "date"
+  ],
   "fixtures": {},
   "initial_state": {
     "custom_backends": [
@@ -307,21 +305,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "capability": "app-building",
-  "specification_level": "partially-specified",
-  "difficulty": "medium",
-  "business_terms": [
-    "window",
-    "date"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique apps/vol_morning building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact capabilities:capability_1_vix-history:table-like:close,date,return_pct,capability_2_vix-term-structure:chart-like:vix_term_structure_value,capability_3_vol-regime-metric:metric:vol_regime_metric_value."
+    "max_turns": 13
+  }
 }

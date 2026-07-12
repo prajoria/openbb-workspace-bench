@@ -1,18 +1,16 @@
 {
   "id": "sla_newsfeed_ship",
-  "title": "Ship, open, and configure the Vendor Notice Room app",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "operations",
-  "tags": [
-    "family-types",
-    "cell2",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "types",
-    "orchestration"
+  "category": "platform",
+  "family": "types",
+  "difficulty": "hard",
+  "split": "validation",
+  "prompt": "Build a vendor-operations manager a dependable vendor service levels workspace. The workspace must cover vendor incident notices feed. The workspace must cover count of open SLA breaches. The workspace must cover vendor SLA state with breach flags. Analysts need to inspect vendor, status, latency milliseconds, breach. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Vendor Notice Room', 'notices', 'Vendor SLA Data', 'QuoteStream'. Decide how best to organize the experience and preserve unrelated work.",
+  "business_terms": [
+    "Vendor Notice Room",
+    "notices",
+    "Vendor SLA Data",
+    "QuoteStream"
   ],
-  "prompt": "Build a vendor-operations manager a dependable vendor service levels workspace. The workspace must cover vendor incident notices feed. The workspace must cover count of open SLA breaches. The workspace must cover vendor SLA state with breach flags. Analysts need to inspect vendor, status, latency milliseconds, breach. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Vendor Notice Room', 'notices', 'Vendor SLA Data', 'QuoteStream'. Decide how best to organize the experience and preserve unrelated work.",
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -40,7 +38,7 @@
   "success": {
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "Vendor Notice Room",
           "notices",
@@ -333,29 +331,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Vendor Notice Room",
-        "data": "Vendor Notice Room is live from Vendor SLA Data: notices ready. Configured vendor=QuoteStream."
+        "data": "<section>Vendor Notice Room is live from Vendor SLA Data: notices ready. Configured vendor=QuoteStream.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "types",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Vendor Notice Room",
-    "notices",
-    "Vendor SLA Data",
-    "QuoteStream"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "validation",
-  "novelty": "Unique types/sla_newsfeed_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Vendor SLA Data; artifact capabilities:capability_1_breach-metric:metric:breach_metric_value,capability_2_sla-newsfeed:newsfeed:sla_newsfeed_value; generated:note@*:Vendor Notice Room,notices."
+    "max_turns": 14
+  }
 }

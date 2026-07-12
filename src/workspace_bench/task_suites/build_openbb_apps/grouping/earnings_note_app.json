@@ -1,17 +1,14 @@
 {
   "id": "earnings_note_app",
-  "title": "Ship Earnings Preview with a grouping app",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-grouping",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "grouping"
-  ],
+  "category": "platform",
+  "family": "grouping",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Build a working Workspace experience for an equity-research analyst covering earnings and estimates. The workspace must cover preview note for the earnings call. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Keep these source-contract anchors: `symbol`. Choose the rest of the architecture and avoid unrelated changes.",
+  "business_terms": [
+    "symbol"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -161,20 +158,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "grouping",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "symbol"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique grouping/earnings_note_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_earnings-note:markdown:earnings_note_value."
+    "max_turns": 13
+  }
 }

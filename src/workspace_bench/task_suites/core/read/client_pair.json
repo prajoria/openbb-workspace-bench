@@ -1,14 +1,9 @@
 {
   "id": "client_pair",
-  "title": "Read Data: Client Accounts and Relationship Metrics",
-  "capability": "data-reading",
-  "workflow": "client-meeting-prep",
-  "subdomain": "client-ir",
-  "tags": [
-    "family-read",
-    "data-reading",
-    "stark"
-  ],
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "On the Bench Stark Enterprise Client Accounts and Relationship Metrics widgets, use get_widget_data, then add a short note that cites client_360_client_book_client_accounts and client_360_client_book_relationship_metrics and says you reviewed the data.",
   "fixtures": {
     "backends": [
@@ -88,13 +83,13 @@
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "client_360_client_book_client_accounts"
+          "count"
         ]
       },
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "client_360_client_book_relationship_metrics"
+          "value"
         ]
       }
     ],
@@ -153,15 +148,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "read",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 7
-  },
-  "split": "train",
-  "novelty": "Unique read/client_pair exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:client_360_client_book_client_accounts,client_360_client_book_relationship_metrics."
+  }
 }

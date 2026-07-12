@@ -1,18 +1,13 @@
 {
   "id": "click_season_desk",
-  "title": "Assemble the grouped Click Season Desk app",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-grouping",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "grouping",
-    "cell-click"
-  ],
+  "category": "platform",
+  "family": "grouping",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "The desk needs a production-ready earnings and estimates workflow for an equity-research analyst. The workspace must cover season rows whose ticker selection links to revisions. The workspace must cover street estimate revisions by quarter. The workspace must cover EPS beat and miss history. Analysts need to inspect symbol, revision percentage, quarter, EPS estimate, revenue estimate billions. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -374,20 +369,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "grouping",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique grouping/click_season_desk building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_click-season-table:table-like:revision_pct,symbol,capability_2_earnings-chart:chart-like:earnings_chart_value,capability_3_estimate-revisions:table-like:eps_estimate,quarter,revenue_estimate_b."
+    "max_turns": 14
+  }
 }

@@ -1,15 +1,10 @@
 {
   "id": "update_only_the_factset_vendor_sla_status",
-  "title": "Update Only The FactSet Vendor SLA Status",
-  "capability": "widget-update",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "data-platform",
-  "tags": [
-    "family-update",
-    "update-widget",
-    "distractors"
-  ],
-  "prompt": "Leave the Bloomberg Vendor SLA Status widget untouched, and update only the FactSet Vendor SLA Status widget to Refinitiv.",
+  "category": "single-widget",
+  "family": "update",
+  "difficulty": "medium",
+  "split": "train",
+  "prompt": "Leave the Bloomberg Vendor SLA Status widget untouched, and update only the FactSet Vendor SLA Status widget to S&P Global.",
   "fixtures": {
     "backends": [
       {
@@ -77,7 +72,7 @@
         "origin": "Bench Stark Enterprise",
         "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status",
         "data_args": {
-          "vendor": "Refinitiv"
+          "vendor": "S&P Global"
         },
         "min_count": 1,
         "max_count": 1
@@ -110,20 +105,12 @@
       "args": {
         "widget_uuid": "widget_002",
         "data_args": {
-          "vendor": "Refinitiv"
+          "vendor": "S&P Global"
         }
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "update",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique update/update_only_the_factset_vendor_sla_status exercise using get_workspace_snapshot, update_widget with checks layout_out_of_grid, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/vendor_dataset_monitor_slas_vendor_sla_status@*,Bench Stark Enterprise/vendor_dataset_monitor_slas_vendor_sla_status@*."
+  }
 }

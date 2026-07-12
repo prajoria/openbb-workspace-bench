@@ -1,14 +1,9 @@
 {
   "id": "remove_duplicate_fundamental_metrics_and_document",
-  "title": "Remove Duplicate Fundamental Metrics And Document",
-  "capability": "workspace-repair",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-delete",
-    "repair",
-    "delete-widget"
-  ],
+  "category": "repair",
+  "family": "delete",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Remove exactly one duplicate from the two identical Fundamental Metrics widgets, then add a note saying the duplicate was removed.",
   "fixtures": {
     "backends": [
@@ -117,15 +112,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "delete",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique delete/remove_duplicate_fundamental_metrics_and_document exercise using add_generative_widget, delete_widget, get_workspace_snapshot with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on equities; artifact widgets:Bench Equities/fundamental_metrics@*; generated:note@*:duplicate,removed."
+  }
 }

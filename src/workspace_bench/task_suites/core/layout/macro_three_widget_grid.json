@@ -1,15 +1,9 @@
 {
   "id": "macro_three_widget_grid",
-  "title": "Three-Widget Grid: Macro",
-  "capability": "layout-management",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-layout",
-    "layout",
-    "multi-widget",
-    "combo"
-  ],
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Arrange the three macro widgets into a grid: the 2Y series at columns 0-20 rows 0-10, the 10Y series at columns 20-40 rows 0-10, and the yield curve full-width below them (40 columns, 10 rows, starting at row 10).",
   "fixtures": {
     "backends": [
@@ -147,15 +141,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "layout",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique layout/macro_three_widget_grid exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on macro; artifact layouts::widget_001::0:0:20:10,:widget_002::20:0:20:10,:widget_003::0:10:40:10."
+  }
 }

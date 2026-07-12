@@ -1,16 +1,10 @@
 {
   "id": "curve_monitor_iframe_app",
-  "title": "Ship Curve Monitor App as the Curve Monitor app",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-types",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "types"
-  ],
+  "category": "platform",
+  "family": "types",
+  "specification_level": "explicit",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Rates Watch Data' at http://localhost:7803. Choose the native widget type that fits the content. The experience needs Curve Monitor App (`curve_monitor_iframe`, iframe) using `http://localhost:5173` for embedded standalone curve monitor application. Organize it as app 'Curve Monitor' with tabs Monitor (curve_monitor_iframe). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},
@@ -162,18 +156,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "types",
-  "capability": "widget-building",
-  "specification_level": "explicit",
-  "difficulty": "easy",
-  "business_terms": [],
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique types/curve_monitor_iframe_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks app_def, dashboard_name, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/curve_monitor_iframe; appdefs:Rates Watch Data/Curve Monitor; widgets:Rates Watch Data/curve_monitor_iframe@monitor."
+  }
 }

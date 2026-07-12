@@ -1,17 +1,14 @@
 {
   "id": "pipeline_vegalite_app",
-  "title": "Ship Pipeline Mix (Vega-Lite) as the Pipeline Vega App",
-  "workflow": "healthcare-catalyst-review",
-  "subdomain": "healthcare",
-  "tags": [
-    "family-charts",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "charts"
-  ],
+  "category": "platform",
+  "family": "charts",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "Create a usable clinical catalysts and pipelines workflow for a healthcare-research analyst. The workspace must cover distribution of pipeline phase mix. Leave the complete working workspace open for review. The source contract must retain `phase`; decide the remaining implementation and preserve unrelated workspace state.",
+  "business_terms": [
+    "phase"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -162,20 +159,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "charts",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "phase"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique charts/pipeline_vegalite_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_pipeline-vegalite:chart-like:pipeline_vegalite_value."
+    "max_turns": 13
+  }
 }

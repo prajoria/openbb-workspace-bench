@@ -1,13 +1,9 @@
 {
   "id": "latest_news_aapl",
-  "title": "Create Latest News",
-  "capability": "widget-creation",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-create",
-    "widget-creation"
-  ],
+  "category": "single-widget",
+  "family": "create",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "On the active dashboard, create a Latest News widget (widget_id latest_news) from the Bench Equities backend with data_args {\"symbol\": \"AAPL\", \"limit\": 5}.",
   "fixtures": {
     "backends": [
@@ -75,15 +71,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "create",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique create/latest_news_aapl exercise using create_widget, get_workspace_snapshot with checks layout_out_of_grid, layout_overlap, missing_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact widgets:Bench Equities/latest_news@*."
+  }
 }

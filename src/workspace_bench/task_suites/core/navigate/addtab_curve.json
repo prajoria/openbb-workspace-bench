@@ -1,15 +1,9 @@
 {
   "id": "addtab_curve",
-  "title": "Add The Missing Curve Tab",
-  "capability": "workspace-repair",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-navigate",
-    "repair",
-    "tabs",
-    "navigation"
-  ],
+  "category": "repair",
+  "family": "navigate",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Add the missing Curve tab to this dashboard and put the Yield Curve widget on it. Keep the existing Overview tab intact.",
   "fixtures": {
     "backends": [
@@ -137,15 +131,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "navigate",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 9
-  },
-  "split": "train",
-  "novelty": "Unique navigate/addtab_curve exercise using create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_navigation_bar, navigate_workspace with checks layout_out_of_grid, layout_overlap, missing_tab, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on macro; artifact widgets:Bench Macro/macro_timeseries@overview,Bench Macro/yield_curve@curve; tabs:curve,overview."
+  }
 }

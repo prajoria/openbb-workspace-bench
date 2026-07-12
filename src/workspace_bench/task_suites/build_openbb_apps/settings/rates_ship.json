@@ -1,18 +1,16 @@
 {
   "id": "rates_ship",
-  "title": "Ship, open, and configure the Rates Config Live app",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-settings",
-    "cell2",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "settings",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "settings",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "The desk needs a production-ready rates and Treasury markets workflow for a rates strategist. The workspace must cover current 2s10s spread in bps. The workspace must cover desk commentary on the rates day. The workspace must cover the Treasury yield curve. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Rates Config Live', 'Macro category', 'Rates Watch Data', '5s30s'. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "Rates Config Live",
+    "Macro category",
+    "Rates Watch Data",
+    "5s30s"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -305,23 +303,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "settings",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Rates Config Live",
-    "Macro category",
-    "Rates Watch Data",
-    "5s30s"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "validation",
-  "novelty": "Unique settings/rates_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact capabilities:capability_1_curve-spread-metric:metric:curve_spread_metric_value,capability_2_rates-commentary:markdown:rates_commentary_value; generated:note@*:Rates Config Live,Macro category."
+    "max_turns": 14
+  }
 }

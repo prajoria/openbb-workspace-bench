@@ -1,16 +1,10 @@
 {
   "id": "rates_commentary_app",
-  "title": "Ship Rates Commentary as the Series Commentary app",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-params",
-    "cell2",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "params"
-  ],
+  "category": "platform",
+  "family": "params",
+  "specification_level": "explicit",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Rates Watch Data' at http://localhost:7803. Make the user controls functional. The experience needs Rates Commentary (`rates_commentary`, markdown) using `/rates-commentary` for desk commentary on the rates day; user controls: Series (`series`, endpoint) from `/series-options`. Organize it as app 'Series Commentary' with tabs Commentary (rates_commentary). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},
@@ -171,18 +165,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "params",
-  "capability": "widget-building",
-  "specification_level": "explicit",
-  "difficulty": "easy",
-  "business_terms": [],
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique params/rates_commentary_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks app_def, dashboard_name, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/rates_commentary; appdefs:Rates Watch Data/Series Commentary; widgets:Rates Watch Data/rates_commentary@commentary."
+  }
 }

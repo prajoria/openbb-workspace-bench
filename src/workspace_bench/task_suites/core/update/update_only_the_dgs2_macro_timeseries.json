@@ -1,14 +1,9 @@
 {
   "id": "update_only_the_dgs2_macro_timeseries",
-  "title": "Update Only The DGS2 Macro Timeseries",
-  "capability": "widget-update",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-update",
-    "update-widget",
-    "distractors"
-  ],
+  "category": "single-widget",
+  "family": "update",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Two Macro Timeseries widgets are on this dashboard: one for DGS10 and one for DGS2. Only update the DGS2 one to FEDFUNDS; leave the DGS10 widget untouched.",
   "fixtures": {
     "backends": [
@@ -115,15 +110,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "update",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique update/update_only_the_dgs2_macro_timeseries exercise using get_workspace_snapshot, update_widget with checks layout_out_of_grid, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on macro; artifact widgets:Bench Macro/macro_timeseries@*,Bench Macro/macro_timeseries@*."
+  }
 }

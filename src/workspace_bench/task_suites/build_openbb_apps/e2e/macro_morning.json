@@ -1,18 +1,15 @@
 {
   "id": "macro_morning",
-  "title": "Ship, open, and configure Macro Morning",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-e2e",
-    "cell5",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "e2e",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "e2e",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Build a rates strategist a dependable rates and Treasury markets workspace. The workspace must cover rates morning levels and changes. The workspace must cover the Treasury yield curve. Analysts need to inspect series, level, change bp, as of. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Macro Morning', 'Rates Watch Data', 'DGS2'. Decide how best to organize the experience and preserve unrelated work.",
+  "business_terms": [
+    "Macro Morning",
+    "Rates Watch Data",
+    "DGS2"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -295,22 +292,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "e2e",
-  "capability": "backend-integration",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Macro Morning",
-    "Rates Watch Data",
-    "DGS2"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique e2e/macro_morning building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact capabilities:capability_1_macro-morning-table:table-like:as_of,change_bp,level,series,capability_2_yield-curve:chart-like:yield_curve_value; generated:note@*:Macro Morning,macro morning."
+    "max_turns": 14
+  }
 }

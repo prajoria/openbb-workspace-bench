@@ -1,13 +1,9 @@
 {
   "id": "yield_curve_plain",
-  "title": "Create Yield Curve",
-  "capability": "widget-creation",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-create",
-    "widget-creation"
-  ],
+  "category": "single-widget",
+  "family": "create",
+  "difficulty": "easy",
+  "split": "test",
   "prompt": "Create a Yield Curve widget (widget_id yield_curve) from the Bench Macro backend on the active dashboard.",
   "fixtures": {
     "backends": [
@@ -69,15 +65,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "create",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "test",
-  "novelty": "Unique create/yield_curve_plain exercise using create_widget, get_workspace_snapshot with checks layout_out_of_grid, layout_overlap, missing_widget, repeated_snapshots, too_many_invalid_calls on macro; artifact widgets:Bench Macro/yield_curve@*."
+  }
 }

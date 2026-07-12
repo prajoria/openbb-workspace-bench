@@ -1,18 +1,17 @@
 {
   "id": "vol_ship",
-  "title": "Ship, open, and configure the Vol Symbol Live parameter app",
-  "workflow": "risk-review",
-  "subdomain": "volatility",
-  "tags": [
-    "family-params",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "params",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "params",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "The desk needs a production-ready volatility and derivatives workflow for a volatility analyst. The workspace must cover volatility review filtered by symbol. The workspace must cover current volatility regime score. The workspace must cover daily CBOE VIX closes with returns. Analysts need to inspect date, close, return percentage. An analyst can filter the analysis by ticker. An analyst can toggle the relevant screening constraint. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Vol Symbol Live', 'vol symbol', 'Vol Desk Data', 'AAPL', 'ticker'. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "Vol Symbol Live",
+    "vol symbol",
+    "Vol Desk Data",
+    "AAPL",
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -330,24 +329,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "params",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Vol Symbol Live",
-    "vol symbol",
-    "Vol Desk Data",
-    "AAPL",
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique params/vol_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact capabilities:capability_1_vol-regime-metric:metric:vol_regime_metric_value,capability_2_vol-symbol-pack:table-like:vol_symbol_pack_value; generated:note@*:Vol Symbol Live,vol symbol."
+    "max_turns": 14
+  }
 }

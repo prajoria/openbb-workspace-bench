@@ -59,7 +59,7 @@ def propose(
     task_rates: dict[str, dict[str, float]] = defaultdict(dict)
     task_outcomes: dict[str, dict[str, list[bool]]] = defaultdict(dict)
     task_repeats: dict[str, dict[str, list[int]]] = defaultdict(dict)
-    metadata: dict[str, tuple[str, str]] = {}
+    metadata: dict[str, tuple[str, str, str]] = {}
     for slug, rows in model_rows.items():
         grouped: dict[str, list[tuple[int, bool]]] = defaultdict(list)
         for row in rows:
@@ -68,6 +68,14 @@ def propose(
             metadata[task_ref] = (
                 str(row.get("difficulty") or "medium"),
                 str(row.get("family") or "unknown"),
+                str(
+                    row.get("specification_level")
+                    or {
+                        "easy": "explicit",
+                        "medium": "partially-specified",
+                        "hard": "open-brief",
+                    }.get(str(row.get("difficulty") or "medium"), "partially-specified")
+                ),
             )
         for task_ref, repeat_outcomes in grouped.items():
             repeats = [repeat for repeat, _ in repeat_outcomes]
@@ -105,7 +113,7 @@ def propose(
         else:
             raw_proposed = "medium"
             reason = "mixed evidence does not meet the hard rule"
-        old, family = metadata[task_ref]
+        old, family, specification_level = metadata[task_ref]
         required_models = sorted(set(competent + frontier + small))
         complete_repeats = all(
             len(task_repeats[task_ref].get(slug, [])) >= minimum_repeats
@@ -143,6 +151,12 @@ def propose(
         elif raw_proposed == "easy" and all(competent_outcomes):
             proposed = "easy"
             decision = "approved: every competent-model repeat passed"
+        elif raw_proposed == "medium":
+            proposed = "medium"
+            decision = (
+                "approved: complete repeated evidence places the task in the "
+                "intermediate band"
+            )
         elif (
             raw_proposed == "hard"
             and not any(competent_outcomes)
@@ -160,6 +174,7 @@ def propose(
             {
                 "task_ref": task_ref,
                 "family": family,
+                "specification_level": specification_level,
                 "old": old,
                 "raw_proposed": raw_proposed,
                 "proposed": proposed,
@@ -181,13 +196,17 @@ def propose(
         )
     proposed_bands = Counter(row["proposed"] for row in rows)
     overrides = dict(config.get("overrides") or {})
-    overrides.update(
-        {
-            row["task_ref"]: row["proposed"]
-            for row in rows
-            if row["changed"]
-        }
-    )
+    structural_band = {
+        "explicit": "easy",
+        "partially-specified": "medium",
+        "open-brief": "hard",
+    }
+    for row in rows:
+        task_ref = row["task_ref"]
+        if row["proposed"] == structural_band[row["specification_level"]]:
+            overrides.pop(task_ref, None)
+        else:
+            overrides[task_ref] = row["proposed"]
     return {
         "schema_version": "workspace-bench-difficulty-proposal/v1",
         "models": all_models,

@@ -1,15 +1,10 @@
 {
   "id": "find_and_fix_misconfigured_factor_exposure_table",
-  "title": "Find And Fix Misconfigured Factor Exposure Table",
-  "capability": "workspace-repair",
-  "workflow": "risk-review",
-  "subdomain": "risk",
-  "tags": [
-    "family-inspect",
-    "inspect",
-    "repair"
-  ],
-  "prompt": "Use read_widget with widget_id quant_research_backtest_lab_risk_model_factor_exposure_table to inspect the widget configured with sector=Technology, then update_widget so sector=Consumer Staples.",
+  "category": "single-widget",
+  "family": "inspect",
+  "difficulty": "medium",
+  "split": "train",
+  "prompt": "Use read_widget with widget_id quant_research_backtest_lab_risk_model_factor_exposure_table to inspect the widget configured with universe=Liquid Crypto, then update_widget so universe=US Large Cap.",
   "fixtures": {
     "backends": [
       {
@@ -32,7 +27,7 @@
           "origin": "Bench Stark Enterprise",
           "widget_id": "quant_research_backtest_lab_risk_model_factor_exposure_table",
           "data_args": {
-            "sector": "Technology"
+            "universe": "Liquid Crypto"
           },
           "layout": {
             "x": 0,
@@ -55,7 +50,7 @@
         "origin": "Bench Stark Enterprise",
         "widget_id": "quant_research_backtest_lab_risk_model_factor_exposure_table",
         "data_args": {
-          "sector": "Consumer Staples"
+          "universe": "US Large Cap"
         }
       }
     ],
@@ -88,20 +83,12 @@
       "args": {
         "widget_uuid": "widget_001",
         "data_args": {
-          "sector": "Consumer Staples"
+          "universe": "US Large Cap"
         }
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "inspect",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique inspect/find_and_fix_misconfigured_factor_exposure_table exercise using get_workspace_snapshot, read_widget, update_widget with checks layout_out_of_grid, missing_tool_call, missing_widget, repeated_snapshots, too_many_invalid_calls on stark-enterprise; artifact widgets:Bench Stark Enterprise/quant_research_backtest_lab_risk_model_factor_exposure_table@*."
+  }
 }

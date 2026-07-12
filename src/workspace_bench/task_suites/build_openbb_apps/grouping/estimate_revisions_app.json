@@ -1,16 +1,10 @@
 {
   "id": "estimate_revisions_app",
-  "title": "Ship Estimate Revisions with a grouping app",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-grouping",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "grouping"
-  ],
+  "category": "platform",
+  "family": "grouping",
+  "specification_level": "explicit",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Earnings Prep Data' at http://localhost:7805. Make the cross-widget interaction work. The experience needs Estimate Revisions (`estimate_revisions`, table) using `/estimate-revisions` for street estimate revisions by quarter; user controls: Symbol (`symbol`, endpoint) from `/symbols`; columns: quarter (text), eps_estimate (number), revenue_estimate_b (number). Organize it as app 'Revision Group App' with tabs Revisions (estimate_revisions) with shared interactions Revision Symbol Group across estimate_revisions via `symbol`. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},
@@ -244,18 +238,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "grouping",
-  "capability": "widget-building",
-  "specification_level": "explicit",
-  "difficulty": "hard",
-  "business_terms": [],
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique grouping/estimate_revisions_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks app_def, dashboard_name, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/estimate_revisions; appdefs:Earnings Prep Data/Revision Group App; widgets:Earnings Prep Data/estimate_revisions@revisions."
+  }
 }

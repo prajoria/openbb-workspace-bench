@@ -1,14 +1,9 @@
 {
   "id": "strategy_health",
-  "title": "Read Data: Strategy Health Metrics",
-  "capability": "data-reading",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-read",
-    "data-reading",
-    "stark"
-  ],
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "Use get_widget_data for the Bench Stark Enterprise Strategy Health Metrics widget; then add a short note that cites strategy_health_monitor_performance_strategy_health_metrics and says you reviewed the data.",
   "fixtures": {
     "backends": [
@@ -66,7 +61,7 @@
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "strategy_health_monitor_performance_strategy_health_metrics"
+          "value"
         ]
       }
     ],
@@ -112,15 +107,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "read",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique read/strategy_health exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:strategy_health_monitor_performance_strategy_health_metrics,data."
+  }
 }

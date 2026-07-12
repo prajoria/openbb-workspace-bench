@@ -1,15 +1,9 @@
 {
   "id": "multi_equities_portfolio",
-  "title": "Multi-Backend Build: Equities Portfolio",
-  "capability": "dashboard-construction",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-backends",
-    "backends",
-    "cross-backend",
-    "note"
-  ],
+  "category": "dashboard",
+  "family": "backends",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "After registering backend names equities, portfolio, build a dashboard with Bench Equities/latest_news with data_args {\"limit\": 5, \"symbol\": \"NVDA\"} and Bench Portfolio/holdings_table, and add a note mentioning NVDA and holdings.",
   "fixtures": {
     "backends": []
@@ -358,15 +352,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "backends",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 12
-  },
-  "split": "train",
-  "novelty": "Unique backends/multi_equities_portfolio exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on equities, portfolio; artifact widgets:Bench Equities/latest_news@*,Bench Portfolio/holdings_table@*; generated:note@*:NVDA,holdings."
+  }
 }

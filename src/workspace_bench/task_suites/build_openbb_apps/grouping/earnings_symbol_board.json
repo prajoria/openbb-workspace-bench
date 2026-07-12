@@ -1,15 +1,10 @@
 {
   "id": "earnings_symbol_board",
-  "title": "Build the grouped Earnings Symbol Board app definition",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-grouping",
-    "cell1",
-    "build-openbb-apps",
-    "apps-json",
-    "grouping"
-  ],
+  "category": "platform",
+  "family": "grouping",
+  "specification_level": "explicit",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Earnings Prep Data' at http://localhost:7805. Make the cross-widget interaction work. The experience needs Estimate Revisions (`estimate_revisions`, table) using `/estimate-revisions` for street estimate revisions by quarter; user controls: Symbol (`symbol`, endpoint) from `/symbols`; columns: quarter (text), eps_estimate (number), revenue_estimate_b (number); EPS History (`earnings_chart`, chart) using `/eps-history` for plotly EPS beat/miss history; user controls: Symbol (`symbol`, endpoint) from `/symbols`; consume the raw backend payload. Organize it as app 'Earnings Symbol Board' with tabs Review (estimate_revisions, earnings_chart) with shared interactions Symbol Sync across estimate_revisions, earnings_chart via `symbol`. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {
@@ -281,18 +276,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "grouping",
-  "capability": "widget-building",
-  "specification_level": "explicit",
-  "difficulty": "hard",
-  "business_terms": [],
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique grouping/earnings_symbol_board building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks app_def, dashboard_name, missing_widget, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact appdefs:Earnings Prep Data/Earnings Symbol Board; widgets:Earnings Prep Data/earnings_chart@review,Earnings Prep Data/estimate_revisions@review."
+  }
 }

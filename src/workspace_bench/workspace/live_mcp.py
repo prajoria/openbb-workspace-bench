@@ -42,7 +42,24 @@ EXPECTED_MCP_TOOLS = set(WORKSPACE_TOOL_NAMES) - {
     "get_workspace_prompt",
 }
 EXPECTED_MCP_PROMPTS = {"workspace_tool_usage", "workspace_session_context"}
-EXPECTED_MCP_RESOURCES = {"openbb://workspace/app-builder/index"}
+EXPECTED_MCP_RESOURCES = {
+    "openbb://workspace/app-builder/index",
+    "openbb://workspace/overview/what-is-workspace",
+    "openbb://workspace/overview/ai-agent-contract",
+    "openbb://workspace/contract/backend",
+    "openbb://workspace/specs/widgets-json",
+    "openbb://workspace/specs/apps-json",
+    "openbb://workspace/specs/widget-types",
+    "openbb://workspace/specs/widget-parameters",
+    "openbb://workspace/specs/layout-grid",
+    "openbb://workspace/guides/build-an-app",
+    "openbb://workspace/guides/review-app",
+    "openbb://workspace/guides/debug-app",
+    "openbb://workspace/guides/convert-endpoint-to-widget",
+    "openbb://workspace/examples/generic-http/minimal",
+    "openbb://workspace/examples/python-fastapi/minimal",
+    "openbb://workspace/validation/common-errors",
+}
 
 
 @dataclass(frozen=True)

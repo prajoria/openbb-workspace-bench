@@ -19,130 +19,130 @@
       "models": {
         "openai-gpt-5.1": {
           "all": {
-            "passed": 47,
+            "passed": 36,
             "total": 472,
-            "rate": 0.0996,
-            "wilson_95_low": 0.0757,
-            "wilson_95_high": 0.1299,
-            "cluster_bootstrap_95_low": 0.0302,
-            "cluster_bootstrap_95_high": 0.1996
+            "rate": 0.0763,
+            "wilson_95_low": 0.0556,
+            "wilson_95_high": 0.1038,
+            "cluster_bootstrap_95_low": 0.028,
+            "cluster_bootstrap_95_high": 0.1488
           },
           "holdout": {
-            "passed": 20,
+            "passed": 14,
             "total": 236,
-            "rate": 0.0847,
-            "wilson_95_low": 0.0555,
-            "wilson_95_high": 0.1273,
-            "cluster_bootstrap_95_low": 0.0268,
-            "cluster_bootstrap_95_high": 0.1598
+            "rate": 0.0593,
+            "wilson_95_low": 0.0357,
+            "wilson_95_high": 0.0971,
+            "cluster_bootstrap_95_low": 0.0223,
+            "cluster_bootstrap_95_high": 0.1066
           },
           "test_only": {
-            "passed": 10,
+            "passed": 8,
             "total": 118,
-            "rate": 0.0847,
-            "wilson_95_low": 0.0467,
-            "wilson_95_high": 0.149,
-            "cluster_bootstrap_95_low": 0.0333,
-            "cluster_bootstrap_95_high": 0.1379
+            "rate": 0.0678,
+            "wilson_95_low": 0.0348,
+            "wilson_95_high": 0.1281,
+            "cluster_bootstrap_95_low": 0.025,
+            "cluster_bootstrap_95_high": 0.1148
           },
           "holdout_by_difficulty": {
             "easy": {
-              "passed": 15,
-              "total": 48
+              "passed": 8,
+              "total": 14
             },
             "hard": {
-              "passed": 2,
-              "total": 172
+              "passed": 0,
+              "total": 174
             },
             "medium": {
-              "passed": 3,
-              "total": 16
+              "passed": 6,
+              "total": 48
             }
           }
         },
         "openai-gpt-5.4-mini": {
           "all": {
-            "passed": 15,
+            "passed": 12,
             "total": 472,
-            "rate": 0.0318,
-            "wilson_95_low": 0.0194,
-            "wilson_95_high": 0.0518,
-            "cluster_bootstrap_95_low": 0.0159,
-            "cluster_bootstrap_95_high": 0.0491
+            "rate": 0.0254,
+            "wilson_95_low": 0.0146,
+            "wilson_95_high": 0.0439,
+            "cluster_bootstrap_95_low": 0.011,
+            "cluster_bootstrap_95_high": 0.041
           },
           "holdout": {
-            "passed": 6,
+            "passed": 5,
             "total": 236,
-            "rate": 0.0254,
-            "wilson_95_low": 0.0117,
-            "wilson_95_high": 0.0543,
-            "cluster_bootstrap_95_low": 0.0045,
-            "cluster_bootstrap_95_high": 0.0491
+            "rate": 0.0212,
+            "wilson_95_low": 0.0091,
+            "wilson_95_high": 0.0486,
+            "cluster_bootstrap_95_low": 0.0042,
+            "cluster_bootstrap_95_high": 0.041
           },
           "test_only": {
-            "passed": 2,
+            "passed": 1,
             "total": 118,
-            "rate": 0.0169,
-            "wilson_95_low": 0.0047,
-            "wilson_95_high": 0.0597,
+            "rate": 0.0085,
+            "wilson_95_low": 0.0015,
+            "wilson_95_high": 0.0464,
             "cluster_bootstrap_95_low": 0.0,
-            "cluster_bootstrap_95_high": 0.0417
+            "cluster_bootstrap_95_high": 0.0259
           },
           "holdout_by_difficulty": {
             "easy": {
-              "passed": 6,
-              "total": 48
+              "passed": 0,
+              "total": 14
             },
             "hard": {
               "passed": 0,
-              "total": 172
+              "total": 174
             },
             "medium": {
-              "passed": 0,
-              "total": 16
+              "passed": 5,
+              "total": 48
             }
           }
         },
         "openai-gpt-5.5": {
           "all": {
-            "passed": 128,
+            "passed": 105,
             "total": 472,
-            "rate": 0.2712,
-            "wilson_95_low": 0.233,
-            "wilson_95_high": 0.313,
-            "cluster_bootstrap_95_low": 0.1509,
-            "cluster_bootstrap_95_high": 0.4167
+            "rate": 0.2225,
+            "wilson_95_low": 0.1873,
+            "wilson_95_high": 0.2621,
+            "cluster_bootstrap_95_low": 0.1358,
+            "cluster_bootstrap_95_high": 0.3125
           },
           "holdout": {
-            "passed": 63,
+            "passed": 53,
             "total": 236,
-            "rate": 0.2669,
-            "wilson_95_low": 0.2146,
-            "wilson_95_high": 0.3268,
-            "cluster_bootstrap_95_low": 0.1466,
-            "cluster_bootstrap_95_high": 0.3975
+            "rate": 0.2246,
+            "wilson_95_low": 0.176,
+            "wilson_95_high": 0.282,
+            "cluster_bootstrap_95_low": 0.13,
+            "cluster_bootstrap_95_high": 0.3156
           },
           "test_only": {
-            "passed": 28,
+            "passed": 22,
             "total": 118,
-            "rate": 0.2373,
-            "wilson_95_low": 0.1696,
-            "wilson_95_high": 0.3216,
-            "cluster_bootstrap_95_low": 0.1271,
-            "cluster_bootstrap_95_high": 0.3443
+            "rate": 0.1864,
+            "wilson_95_low": 0.1265,
+            "wilson_95_high": 0.2662,
+            "cluster_bootstrap_95_low": 0.0932,
+            "cluster_bootstrap_95_high": 0.2857
           },
           "holdout_by_difficulty": {
             "easy": {
-              "passed": 45,
-              "total": 48
+              "passed": 11,
+              "total": 14
             },
             "hard": {
-              "passed": 8,
-              "total": 172
+              "passed": 0,
+              "total": 174
             },
             "medium": {
-              "passed": 10,
-              "total": 16
+              "passed": 42,
+              "total": 48
             }
           }
         }
@@ -151,44 +151,44 @@
         {
           "a": "openai-gpt-5.5",
           "b": "openai-gpt-5.1",
-          "a_pass_b_fail": 85,
+          "a_pass_b_fail": 73,
           "a_fail_b_pass": 4,
           "mcnemar_p": 0.0,
           "task_iid_test": "McNemar (descriptive; sibling tasks are clustered)",
           "cluster_bootstrap_difference_95": [
-            0.0975,
-            0.2398
+            0.0789,
+            0.2077
           ]
         },
         {
           "a": "openai-gpt-5.5",
           "b": "openai-gpt-5.4-mini",
-          "a_pass_b_fail": 115,
-          "a_fail_b_pass": 2,
+          "a_pass_b_fail": 94,
+          "a_fail_b_pass": 1,
           "mcnemar_p": 0.0,
           "task_iid_test": "McNemar (descriptive; sibling tasks are clustered)",
           "cluster_bootstrap_difference_95": [
-            0.1205,
-            0.3909
+            0.1099,
+            0.2923
           ]
         },
         {
           "a": "openai-gpt-5.1",
           "b": "openai-gpt-5.4-mini",
-          "a_pass_b_fail": 43,
-          "a_fail_b_pass": 11,
-          "mcnemar_p": 0.0,
+          "a_pass_b_fail": 32,
+          "a_fail_b_pass": 8,
+          "mcnemar_p": 0.0002,
           "task_iid_test": "McNemar (descriptive; sibling tasks are clustered)",
           "cluster_bootstrap_difference_95": [
             0.0,
-            0.1721
+            0.129
           ]
         }
       ],
       "git_commits": [
-        "fab4b7ef4bdba318eca7de6ec604813e96a60272"
+        "22f477c86823c26b67241e5a525169dc77041c6f"
       ],
-      "task_content_sha256": "918559d34b1dc1ef0fd6813a262f67d05b48a54e9ca85a2a503e0710a726ecfb",
+      "task_content_sha256": "1a4bfb86dad6d2fb78c789f7f97e14991e442470ef7eac65c594ecc66c0e9cec",
       "attempts_per_model": 472,
       "tasks_per_model": 236,
       "repeats": 2,

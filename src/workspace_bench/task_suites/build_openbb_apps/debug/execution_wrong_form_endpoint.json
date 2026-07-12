@@ -1,25 +1,11 @@
 {
-  "schema_version": "workspace-bench-task",
   "id": "execution_wrong_form_endpoint",
-  "title": "Repair Execution Recovery Room wrong form endpoint incident",
   "category": "repair",
   "family": "debug",
-  "capability": "backend-repair",
-  "workflow": "diagnose-repair-retest",
-  "domain": "finance",
-  "subdomain": "execution",
   "specification_level": "open-brief",
   "difficulty": "easy",
-  "tags": [
-    "build-openbb-apps",
-    "debug",
-    "repair",
-    "wrong_form_endpoint",
-    "long-oracle"
-  ],
-  "source": "workspace-bench-build-apps-gen",
-  "novelty": "Unique debug/execution_wrong_form_endpoint building exercise using add_generative_widget, get_widget_data, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_apps, manage_backends, read_widget, read_workspace_resource with checks capability, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Execution Repair Data, custom:Execution Repair Data Archive; artifact capabilities:incident-detail-wrong_form_endpoint:table-like:age_days,order_id,updated_at,incident-overview-wrong_form_endpoint:form:order_id,owner,status; generated:note@*:Execution Recovery Room,Execution Repair Data.",
-  "prompt": "Execution analysts report that the intake form accepts input but submission does nothing in Execution Recovery Room. Diagnose the existing Execution Repair Data connection, repair it in place, and retest the affected workflow with live data before handing it back. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Execution Recovery Room open and add a short verification note that naturally mentions Execution Recovery Room, Execution Repair Data, and repair verified.",
+  "split": "validation",
+  "prompt": "An incident in Execution Recovery Room means the intake form accepts input but submission does nothing. Investigate the connected Execution Repair Data backend, make the smallest in-place repair, and prove the workflow against live data. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Execution Recovery Room open and add a short verification note that naturally mentions Execution Recovery Room, Execution Repair Data, and repair verified.",
   "business_terms": [
     "Execution Recovery Room",
     "Execution Repair Data",
@@ -356,6 +342,7 @@
       }
     ],
     "capability_connections": [],
+    "required_tool_calls": [],
     "business_names": [
       {
         "scope": "app",
@@ -779,6 +766,5 @@
   ],
   "limits": {
     "max_turns": 40
-  },
-  "split": "validation"
+  }
 }

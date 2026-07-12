@@ -1,15 +1,10 @@
 {
   "id": "repair_series_fedfunds_cpi",
-  "title": "Repair Macro Timeseries",
-  "capability": "workspace-repair",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-update",
-    "repair",
-    "update-widget"
-  ],
-  "prompt": "This inflation dashboard mistakenly shows the FEDFUNDS series. Add a note saying what was repaired and mentioning both values after you repair the widget to CPIAUCSL.",
+  "category": "repair",
+  "family": "update",
+  "difficulty": "hard",
+  "split": "validation",
+  "prompt": "This inflation dashboard mistakenly shows the FEDFUNDS series. Add a HTML card saying what was repaired and mentioning both values after you repair the widget to CPIAUCSL.",
   "fixtures": {
     "backends": [
       {
@@ -72,7 +67,7 @@
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "FEDFUNDS",
           "CPIAUCSL",
@@ -111,21 +106,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Repair Note",
-        "data": "Repaired macro_timeseries from FEDFUNDS to CPIAUCSL."
+        "data": "<section>Repaired macro_timeseries from FEDFUNDS to CPIAUCSL.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "update",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 7
-  },
-  "split": "validation",
-  "novelty": "Unique update/repair_series_fedfunds_cpi exercise using add_generative_widget, get_workspace_snapshot, read_widget, update_widget with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on macro; artifact widgets:Bench Macro/macro_timeseries@*; generated:note@*:FEDFUNDS,CPIAUCSL."
+  }
 }

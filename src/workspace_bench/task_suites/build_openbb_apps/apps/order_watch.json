@@ -1,15 +1,11 @@
 {
   "id": "order_watch",
-  "title": "Build the Order Watch app definition",
-  "workflow": "execution-exception-review",
-  "subdomain": "execution",
-  "tags": [
-    "family-apps",
-    "cell3",
-    "build-openbb-apps",
-    "apps-json"
-  ],
-  "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Execution Desk Data' at http://localhost:7806. Treat the app layout and navigation as the product outcome. The experience needs Open Orders (`open_orders`, table) using `/open-orders` for live open orders blotter; columns: order_id (text), symbol (text), qty (number, int), status (text, titleCase); Exceptions (`exception_metric`, metric) using `/exception-count` for open execution exceptions. Organize it as app 'Order Watch' with tabs Orders (open_orders, exception_metric). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
+  "category": "platform",
+  "family": "apps",
+  "specification_level": "explicit",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Execution Desk Data' at http://localhost:7806. Treat the app layout and navigation as the product outcome. The experience needs Open Orders (`open_orders`, table) using `/open-orders` for live open orders blotter; columns: order_id (text), symbol (text), qty (number, int), status (text, titleCase); Exceptions (`exception_metric`, metric) using `/exception-count` for open execution exceptions. Organize it as app 'Order Watch' with tabs Orders (open_orders, exception_metric) with 2 starter prompt(s). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {
     "custom_backends": [
@@ -112,7 +108,8 @@
             "tab_id": "orders",
             "widget_id": "exception_metric"
           }
-        ]
+        ],
+        "prompts_min_count": 2
       }
     ],
     "trace_checks": {
@@ -225,7 +222,11 @@
                 ]
               }
             },
-            "groups": []
+            "groups": [],
+            "prompts": [
+              "Summarize the most important signal in Order Watch.",
+              "What needs attention in Order Watch right now?"
+            ]
           }
         ]
       }
@@ -241,18 +242,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "capability": "app-building",
-  "specification_level": "explicit",
-  "difficulty": "easy",
-  "business_terms": [],
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique apps/order_watch building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks app_def, dashboard_name, missing_widget, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact appdefs:Execution Desk Data/Order Watch; widgets:Execution Desk Data/exception_metric@orders,Execution Desk Data/open_orders@orders."
+  }
 }

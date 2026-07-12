@@ -1,16 +1,9 @@
 {
   "id": "skill_comps_skill",
-  "title": "Delegate Per The Finance Comps Skill",
-  "capability": "mcp-tool-use",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-delegate",
-    "delegation",
-    "agents",
-    "mcp",
-    "skills"
-  ],
+  "category": "platform",
+  "family": "delegate",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "After calling get_skill_content with slug finance-comps to understand the workflow, call assign_tasks_to_agents with two task_requests using ids peers-analyst and multiples-analyst covering that workflow, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
@@ -146,15 +139,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "delegate",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 7
-  },
-  "split": "train",
-  "novelty": "Unique delegate/skill_comps_skill exercise using add_generative_widget, assign_tasks_to_agents, get_skill_content, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact tasks:multiples-analyst,peers-analyst; widgets:Bench Stark Enterprise/workspace_data_control_center_entitlements_sensitive_dataset_flags@overview; generated:note@*:peers analyst,multiples analyst."
+  }
 }

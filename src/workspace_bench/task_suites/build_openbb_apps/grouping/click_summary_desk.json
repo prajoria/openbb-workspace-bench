@@ -1,18 +1,13 @@
 {
   "id": "click_summary_desk",
-  "title": "Assemble the grouped Click Summary Desk app",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-grouping",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "grouping",
-    "cell-click"
-  ],
+  "category": "platform",
+  "family": "grouping",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "The desk needs a production-ready earnings and estimates workflow for an equity-research analyst. The workspace must cover summary rows whose ticker selection stays linked across analysis. The workspace must cover EPS beat and miss history. The workspace must cover preview note for the earnings call. Analysts need to inspect symbol, revision percentage. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -336,20 +331,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "grouping",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique grouping/click_summary_desk building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_click-summary-table:table-like:revision_pct,symbol,capability_2_earnings-chart:chart-like:earnings_chart_value,capability_3_earnings-note:markdown:earnings_note_value."
+    "max_turns": 14
+  }
 }

@@ -56,7 +56,7 @@
       "oracle_backend": "Earnings Prep Data",
       "expected_widgets": ["estimates_ssrm"],
       "interactions": [{"op": "sort_column", "widget_id": "estimates_ssrm", "column": "category"}],
-      "expected_evidence": [{"widget_id": "estimates_ssrm", "fragments": ["Primary", "10.25"]}]
+      "expected_evidence": [{"widget_id": "estimates_ssrm", "fragments": ["category_00000_1f0de8", "987.1139"]}]
     },
     {
       "task_ref": "build-openbb-apps/aggrid/revision_grid",
@@ -202,10 +202,10 @@
       "task_ref": "build-openbb-apps/apps/rates_desk",
       "category": "multi_widget_apps",
       "rationale": "Covers navigation between table and chart tabs.",
-      "oracle_backend": "Rates Watch Data",
-      "expected_widgets": ["auction_calendar", "yield_curve"],
-      "interactions": [{"op": "switch_tab", "tab": "Curve"}],
-      "expected_evidence": [{"widget_id": "auction_calendar", "fragments": ["2026-01-13", "security-1"]}, {"widget_id": "yield_curve", "fragments": ["10.25", "30.75"]}]
+      "oracle_backend": "Bench Stark Enterprise",
+      "expected_widgets": ["portfolio_command_center_holdings_holdings_table", "portfolio_command_center_holdings_exposure_treemap"],
+      "interactions": [{"op": "switch_tab", "tab": "Exposure"}],
+      "expected_evidence": [{"widget_id": "portfolio_command_center_holdings_holdings_table", "fragments": ["company-1", "rating-1"]}, {"widget_id": "portfolio_command_center_holdings_exposure_treemap", "fragments": ["2026-01-13", "30.75"]}]
     },
     {
       "task_ref": "build-openbb-apps/apps/earnings_desk",

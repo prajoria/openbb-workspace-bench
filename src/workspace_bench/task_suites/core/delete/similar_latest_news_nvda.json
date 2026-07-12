@@ -1,14 +1,9 @@
 {
   "id": "similar_latest_news_nvda",
-  "title": "Remove Only The Duplicate NVDA Widget",
-  "capability": "widget-update",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-delete",
-    "delete-widget",
-    "distractors"
-  ],
+  "category": "single-widget",
+  "family": "delete",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Remove exactly one duplicate NVDA Latest News widget from the two identical NVDA copies, while keeping the other duplicate and the AAPL widget untouched.",
   "fixtures": {
     "backends": [
@@ -124,15 +119,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "delete",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique delete/similar_latest_news_nvda exercise using delete_widget, get_workspace_snapshot with checks layout_out_of_grid, layout_overlap, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on equities; artifact widgets:Bench Equities/latest_news@*,Bench Equities/latest_news@*."
+  }
 }

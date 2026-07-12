@@ -1,18 +1,16 @@
 {
   "id": "execution_ship",
-  "title": "Ship, open, and configure the Exception Intake Live form app",
-  "workflow": "execution-exception-review",
-  "subdomain": "execution",
-  "tags": [
-    "family-forms",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "forms",
-    "orchestration"
+  "category": "platform",
+  "family": "forms",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "The desk needs a production-ready orders and venue quality workflow for an execution analyst. The workspace must cover record an execution venue exception. The workspace must cover open execution exceptions. The workspace must cover live open orders blotter. Analysts need to inspect order ID, symbol, quantity, status. An analyst can adjust the relevant numeric scope. The user can enter the required details and submit the workflow. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Exception Intake Live', 'exception intake', 'Execution Desk Data', 'EDGX'. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "Exception Intake Live",
+    "exception intake",
+    "Execution Desk Data",
+    "EDGX"
   ],
-  "prompt": "The desk needs a production-ready orders and venue quality workflow for an execution analyst. The workspace must cover record an execution venue exception. The workspace must cover open execution exceptions. The workspace must cover live open orders blotter. Analysts need to inspect order ID, symbol, quantity, status. An analyst can adjust the relevant numeric scope. The user can enter the required details and submit the workflow. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Exception Intake Live', 'exception intake', 'Execution Desk Data', 'EDGX'. Use your judgment on the architecture and leave other work intact.",
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -40,7 +38,7 @@
   "success": {
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "Exception Intake Live",
           "exception intake",
@@ -343,29 +341,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Exception Intake Live",
-        "data": "Exception Intake Live is live from Execution Desk Data: exception intake ready. Configured venue_scope=EDGX."
+        "data": "<section>Exception Intake Live is live from Execution Desk Data: exception intake ready. Configured venue_scope=EDGX.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "forms",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Exception Intake Live",
-    "exception intake",
-    "Execution Desk Data",
-    "EDGX"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique forms/execution_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_exception-metric:metric:exception_metric_value,capability_2_venue-exception-form:form:venue_exception_form_value; generated:note@*:Exception Intake Live,exception intake."
+    "max_turns": 14
+  }
 }

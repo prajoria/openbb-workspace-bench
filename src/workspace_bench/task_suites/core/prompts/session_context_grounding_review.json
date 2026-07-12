@@ -1,15 +1,9 @@
 {
   "id": "session_context_grounding_review",
-  "title": "Fetch Prompt workspace_session_context",
-  "capability": "prompt-access",
-  "workflow": "workspace-guidance",
-  "domain": "workspace-usability",
-  "subdomain": "mcp-prompts",
-  "tags": [
-    "family-prompts",
-    "prompts",
-    "mcp"
-  ],
+  "category": "read",
+  "family": "prompts",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "After calling get_workspace_prompt with name workspace_session_context, add a note mentioning current-dashboard current-tab session grounding.",
   "fixtures": {
     "backends": [
@@ -114,14 +108,7 @@
       }
     }
   ],
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "read",
-  "family": "prompts",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique prompts/session_context_grounding_review exercise using add_generative_widget, get_workspace_prompt, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on equities, portfolio; artifact prompts:workspace_session_context; widgets:Bench Portfolio/sector_exposure@; generated:note@*:current-dashboard."
+  }
 }

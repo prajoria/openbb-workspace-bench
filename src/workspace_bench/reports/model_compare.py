@@ -253,10 +253,6 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--family", help="Optional task-family filter, e.g. create.")
     parser.add_argument("--category", help="Optional task-category filter, e.g. dashboard.")
-    parser.add_argument("--capability", help="Optional capability filter.")
-    parser.add_argument("--workflow", help="Optional workflow filter.")
-    parser.add_argument("--domain", help="Optional domain filter.")
-    parser.add_argument("--subdomain", help="Optional subdomain filter.")
     parser.add_argument(
         "--suite",
         dest="suite",
@@ -275,12 +271,6 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--task-dir",
         help="Directory of task JSON files. Defaults to the bundled benchmark.",
-    )
-    parser.add_argument(
-        "--tag",
-        action="append",
-        default=[],
-        help="Optional tag filter. Can be passed multiple times.",
     )
     parser.add_argument(
         "--task",
@@ -480,12 +470,7 @@ def main(argv: list[str] | None = None) -> int:
         difficulty=args.difficulty,
         family=args.family,
         category=args.category,
-        capability=args.capability,
-        workflow=args.workflow,
-        domain=args.domain,
-        subdomain=args.subdomain,
         split=args.split,
-        tags=args.tag,
         task_ids=args.task,
     )
     if not tasks:
@@ -758,12 +743,7 @@ def filter_tasks(
     difficulty: str,
     family: str | None,
     category: str | None,
-    capability: str | None,
-    workflow: str | None,
-    domain: str | None,
-    subdomain: str | None,
     split: str | None,
-    tags: list[str],
     task_ids: list[str] | None = None,
 ) -> list[Task]:
     if task_ids:
@@ -775,18 +755,8 @@ def filter_tasks(
         tasks = [task for task in tasks if task.family == family]
     if category:
         tasks = [task for task in tasks if task.category == category]
-    if capability:
-        tasks = [task for task in tasks if task.capability == capability]
-    if workflow:
-        tasks = [task for task in tasks if task.workflow == workflow]
-    if domain:
-        tasks = [task for task in tasks if task.domain == domain]
-    if subdomain:
-        tasks = [task for task in tasks if task.subdomain == subdomain]
     if split:
         tasks = [task for task in tasks if task.split == split]
-    for tag in tags:
-        tasks = [task for task in tasks if tag in task.tags]
     return tasks
 
 
@@ -823,9 +793,7 @@ def print_dry_run(
     for task in tasks:
         print(
             f"  - {task.qualified_id}\t"
-            f"{task.difficulty}\t{task.split}\t"
-            f"{task.capability}\t{task.workflow}\t"
-            f"{task.domain}\t{task.subdomain}"
+            f"{task.category}\t{task.difficulty}\t{task.split}"
         )
 
 
@@ -1353,12 +1321,7 @@ def build_interactive_messages(
     public_task = {
         "id": task["id"],
         "qualified_id": task["qualified_id"],
-        "title": task["title"],
         "family": task.get("family", "general"),
-        "capability": task["capability"],
-        "workflow": task["workflow"],
-        "domain": task["domain"],
-        "subdomain": task["subdomain"],
         "specification_level": task.get("specification_level"),
         "difficulty": task["difficulty"],
         "prompt": task["prompt"],
@@ -2042,10 +2005,10 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
         [
             "## Task Matrix",
             "",
-            "| Task | Difficulty | Capability | Workflow | Domain | Subdomain | "
+            "| Task | Category | Difficulty | "
             + " | ".join(payload["model"]["label"] for payload in model_payloads)
             + " |",
-            "| --- | --- | --- | --- | --- | --- | "
+            "| --- | --- | --- | "
             + " | ".join("---:" for _ in model_payloads)
             + " |",
         ]
@@ -2060,11 +2023,8 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
         lines.append(
             "| "
             f"{task_id} | "
-            f"{first['difficulty']} | "
-            f"{first['capability']} | "
-            f"{first['workflow']} | "
-            f"{first['domain']} | "
-            f"{first['subdomain']} | " + " | ".join(cells) + " |"
+            f"{first['category']} | "
+            f"{first['difficulty']} | " + " | ".join(cells) + " |"
         )
 
     lines.extend(
@@ -2151,6 +2111,14 @@ def summarize_runs(
     mean_score = sum(run.run_result.grade.score for run in runs) / total if total else 0.0
     state_passed = sum(run.run_result.grade.state_passed for run in valid_runs)
     trace_passed = sum(run.run_result.grade.trace_passed for run in valid_runs)
+    preservation_runs = [
+        run
+        for run in valid_runs
+        if run.run_result.grade.preservation_checks_total > 0
+    ]
+    preservation_passed = sum(
+        run.run_result.grade.preservation_passed for run in preservation_runs
+    )
     runtime_runs = [run for run in valid_runs if run.run_result.task.success.runtime is not None]
     runtime_passed = sum(run.run_result.grade.runtime_passed for run in runtime_runs)
     by_category: dict[str, dict[str, int]] = {}
@@ -2186,6 +2154,17 @@ def summarize_runs(
         ),
         "mean_trace_score": (
             sum(run.run_result.grade.trace_score for run in runs) / total if total else 0.0
+        ),
+        "preservation_task_count": len(preservation_runs),
+        "preservation_passed": preservation_passed,
+        "preservation_pass_rate": (
+            preservation_passed / len(preservation_runs) if preservation_runs else 1.0
+        ),
+        "mean_preservation_score": (
+            sum(run.run_result.grade.preservation_score for run in preservation_runs)
+            / len(preservation_runs)
+            if preservation_runs
+            else 1.0
         ),
         "runtime_task_count": len(runtime_runs),
         "runtime_passed": runtime_passed,
@@ -2233,10 +2212,6 @@ def agent_run_summary(run: ComparisonRun) -> dict:
         "specification_level": result.task.specification_level,
         "difficulty": result.task.difficulty,
         "split": result.task.split,
-        "capability": result.task.capability,
-        "workflow": result.task.workflow,
-        "domain": result.task.domain,
-        "subdomain": result.task.subdomain,
         "passed": agent_run_passed(run),
         "process_failed": agent_run_process_failed(run),
         "task_failed": not agent_run_process_failed(run) and not result.grade.passed,
@@ -2293,14 +2268,10 @@ def selected_filters(args: argparse.Namespace) -> dict:
         "track": getattr(args, "track", "guided"),
         "difficulty": args.difficulty,
         "family": args.family,
-        "capability": args.capability,
-        "workflow": args.workflow,
-        "domain": args.domain,
-        "subdomain": args.subdomain,
+        "category": getattr(args, "category", None),
         "suite": getattr(args, "suite", "core"),
         "split": getattr(args, "split", None),
         "task_dir": getattr(args, "task_dir", None),
-        "tags": args.tag,
     }
 
 

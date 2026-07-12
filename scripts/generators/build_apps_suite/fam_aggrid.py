@@ -1,7 +1,7 @@
 """Family AGGRID — tables & columnsDefs (onboarding tabs: AgGrid, Sparkline).
 
 EXEMPLAR MODULE for the v3 ladder: every widget-side family follows this shape.
-Owns widget types: table, ssrm_table (asserted by TYPE_OWNERSHIP at certify).
+Owns widget types: table, table_ssrm (asserted by TYPE_OWNERSHIP at certify).
 
 The v3 ladder (Didier alignment, 2026-07-08):
 - r0 one widget with the right schema — words-form requirements brief (the model builds the JSON), single add.
@@ -42,7 +42,7 @@ def build() -> None:
         ("vol", "vix_history"),
         ("execution", "open_orders"),
         ("rates", "auction_calendar"),
-        ("earnings", "estimates_ssrm"),  # owns ssrm_table at the base level
+        ("earnings", "estimates_ssrm"),  # owns table_ssrm at the base level
     ]
     for desk_key, widget_id in t0_specs:
         desk = c.desk(desk_key)
@@ -185,8 +185,8 @@ def build() -> None:
            "momentum_pct": 0.084},
           {"ticker": "MSFT", "revised_up": 11, "revised_down": 5,
            "momentum_pct": 0.041}],
-         {"type": "ssrm_table", "_data_key": "rows"},
-         "it is served as a server-side row-model grid — type ssrm_table — "
+         {"type": "table_ssrm", "_data_key": "rows"},
+         "it is served as a server-side row-model grid — type table_ssrm — "
          "whose rows are read from the response key \"rows\""),
     ]
     for desk_key, widget_id, name, endpoint, description, rows, dims, extra_text in t2_specs:

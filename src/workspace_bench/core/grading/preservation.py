@@ -29,7 +29,9 @@ def grade_workspace_preservation(
 
     if checks.preserve_other_dashboards:
         initial_active = str(
-            (initial_snapshot.get("workspace_state") or {}).get("current_dashboard_uuid", "")
+            (initial_snapshot.get("workspace_state") or {}).get(
+                "current_dashboard_uuid", ""
+            )
         )
         for dashboard_id, composition in initial_dashboards.items():
             if str(dashboard_id) == initial_active:
@@ -143,9 +145,7 @@ def grade_workspace_preservation(
         )
 
     if checks.max_custom_backend_delta is not None:
-        initial_count = len(initial_backends)
-        final_count = len(final_backends)
-        delta = final_count - initial_count
+        delta = len(final_backends) - len(initial_backends)
         builder.check(
             delta <= checks.max_custom_backend_delta,
             "unexpected_backend_created",

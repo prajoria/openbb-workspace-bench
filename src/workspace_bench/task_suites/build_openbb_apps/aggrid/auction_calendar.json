@@ -1,15 +1,10 @@
 {
   "id": "auction_calendar",
-  "title": "Build the Auction Calendar table definition",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-aggrid",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "aggrid"
-  ],
+  "category": "platform",
+  "family": "aggrid",
+  "specification_level": "explicit",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Make the requested backend widget available and working in the current view. Use 'Rates Watch Data' at http://localhost:7803. Make the data grid behavior and columns usable. The experience needs Auction Calendar (`auction_calendar`, table) using `/auction-calendar` for upcoming treasury auctions; columns: date (dateString), security (text), size_bn (number). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},
@@ -174,18 +169,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "aggrid",
-  "capability": "widget-building",
-  "specification_level": "explicit",
-  "difficulty": "easy",
-  "business_terms": [],
   "limits": {
     "max_turns": 7
-  },
-  "split": "train",
-  "novelty": "Unique aggrid/auction_calendar building exercise using create_widget, get_widget_schema, list_available_widgets, manage_backends with checks missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, widget_def on custom:Rates Watch Data; artifact widgetdefs:Rates Watch Data/auction_calendar; widgets:Rates Watch Data/auction_calendar@*."
+  }
 }

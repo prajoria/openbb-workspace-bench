@@ -1,13 +1,9 @@
 {
   "id": "remove_latest_news",
-  "title": "Remove Latest News",
-  "capability": "widget-update",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-delete",
-    "delete-widget"
-  ],
+  "category": "single-widget",
+  "family": "delete",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "This dashboard no longer needs the Latest News widget; remove it.",
   "fixtures": {
     "backends": [
@@ -79,15 +75,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "delete",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique delete/remove_latest_news exercise using delete_widget, get_workspace_snapshot with checks layout_out_of_grid, repeated_snapshots, too_many_invalid_calls, too_many_widgets on equities; artifact id:remove_latest_news."
+  }
 }

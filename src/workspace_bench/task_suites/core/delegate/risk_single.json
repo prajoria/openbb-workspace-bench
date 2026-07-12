@@ -1,15 +1,9 @@
 {
   "id": "risk_single",
-  "title": "Delegate One Task: Risk Single",
-  "capability": "mcp-tool-use",
-  "workflow": "risk-review",
-  "subdomain": "risk",
-  "tags": [
-    "family-delegate",
-    "delegation",
-    "agents",
-    "mcp"
-  ],
+  "category": "platform",
+  "family": "delegate",
+  "difficulty": "easy",
+  "split": "validation",
   "prompt": "Call assign_tasks_to_agents with one task_request using id stress-analyst for risk review work: Run the historical stress scenarios and summarize losses.",
   "fixtures": {
     "backends": [
@@ -98,15 +92,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "delegate",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "validation",
-  "novelty": "Unique delegate/risk_single exercise using assign_tasks_to_agents, get_workspace_snapshot with checks layout_out_of_grid, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact tasks:stress-analyst; widgets:Bench Stark Enterprise/workspace_data_control_center_entitlements_app_and_widget_permissions@overview."
+  }
 }

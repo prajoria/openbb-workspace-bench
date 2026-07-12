@@ -1,15 +1,9 @@
 {
   "id": "full_risk_exposure_monitor",
-  "title": "Index-Guided App Extension: Risk & Exposure Monitor",
-  "capability": "dashboard-construction",
-  "workflow": "risk-review",
-  "subdomain": "risk",
-  "tags": [
-    "family-resources",
-    "resources",
-    "apps",
-    "widget-creation"
-  ],
+  "category": "dashboard",
+  "family": "resources",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "Use the app-builder index resource openbb://workspace/app-builder/index, instantiate risk-exposure-monitor as Risk Resource Command, navigate to limits, add widget risk_exposure_monitor_limits_limit_utilization, and add a note mentioning limit utilization and resource.",
   "fixtures": {
     "backends": [
@@ -120,15 +114,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "resources",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 9
-  },
-  "split": "validation",
-  "novelty": "Unique resources/full_risk_exposure_monitor exercise using add_generative_widget, create_widget, get_widget_schema, manage_apps, manage_backends, navigate_workspace, read_workspace_resource with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_resource_read, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact resource:openbb://workspace/app-builder/index; apps:risk-exposure-monitor; widgets:Bench Stark Enterprise/risk_exposure_monitor_limits_limit_utilization@limits; generated:note@limits:limit utilization,resource."
+  }
 }

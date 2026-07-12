@@ -1,18 +1,13 @@
 {
   "id": "earnings_chart_room",
-  "title": "Assemble the Earnings Chart Room chart app",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-charts",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "charts",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "charts",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "The desk needs a production-ready earnings and estimates workflow for an equity-research analyst. The workspace must cover EPS beat and miss history. The workspace must cover street estimate revisions by quarter. The workspace must cover average EPS surprise last 4 quarters. Analysts need to inspect quarter, EPS estimate, revenue estimate billions. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -360,20 +355,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "charts",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique charts/earnings_chart_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_earnings-chart:chart-like:earnings_chart_value,capability_2_estimate-revisions:table-like:eps_estimate,quarter,revenue_estimate_b,capability_3_surprise-metric:metric:surprise_metric_value."
+    "max_turns": 14
+  }
 }

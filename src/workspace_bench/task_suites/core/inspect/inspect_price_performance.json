@@ -1,14 +1,9 @@
 {
   "id": "inspect_price_performance",
-  "title": "Inspect Price Performance",
-  "capability": "workspace-inspection",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-inspect",
-    "inspect",
-    "read-widget"
-  ],
+  "category": "read",
+  "family": "inspect",
+  "difficulty": "easy",
+  "split": "validation",
   "prompt": "After calling read_widget with widget_id price_performance for the existing Bench Equities/price_performance widget, add a note mentioning AAPL.",
   "fixtures": {
     "backends": [
@@ -94,15 +89,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "read",
-  "family": "inspect",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique inspect/inspect_price_performance exercise using add_generative_widget, get_workspace_snapshot, read_widget with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, repeated_snapshots, too_many_invalid_calls on equities; artifact generated:note@*:AAPL."
+  }
 }

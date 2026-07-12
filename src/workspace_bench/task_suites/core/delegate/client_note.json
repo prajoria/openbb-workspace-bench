@@ -1,16 +1,9 @@
 {
   "id": "client_note",
-  "title": "Delegate And Coordinate: Client Note",
-  "capability": "mcp-tool-use",
-  "workflow": "client-meeting-prep",
-  "subdomain": "client-ir",
-  "tags": [
-    "family-delegate",
-    "delegation",
-    "agents",
-    "mcp",
-    "note"
-  ],
+  "category": "platform",
+  "family": "delegate",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Call assign_tasks_to_agents with two task_requests using ids ir-analyst and portfolio-analyst for client meeting prep work. Then add a coordinator note naming both workstreams on the active dashboard; omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
@@ -125,15 +118,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "delegate",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique delegate/client_note exercise using add_generative_widget, assign_tasks_to_agents, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact tasks:ir-analyst,portfolio-analyst; widgets:Bench Stark Enterprise/strategy_health_monitor_watchlist_trade_ideas@overview; generated:note@*:ir analyst,portfolio analyst."
+  }
 }

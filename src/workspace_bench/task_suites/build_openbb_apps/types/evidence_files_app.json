@@ -1,17 +1,14 @@
 {
   "id": "evidence_files_app",
-  "title": "Ship Evidence Files as the Evidence Browser app",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-types",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "types"
-  ],
+  "category": "platform",
+  "family": "types",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "Create a usable cases and compliance alerts workflow for a surveillance analyst. The workspace must cover browse case evidence documents. Leave the complete working workspace open for review. The source contract must retain `file`; decide the remaining implementation and preserve unrelated workspace state.",
+  "business_terms": [
+    "file"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -162,20 +159,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "types",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "file"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique types/evidence_files_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_evidence-files:multi-file:evidence_files_value."
+    "max_turns": 13
+  }
 }

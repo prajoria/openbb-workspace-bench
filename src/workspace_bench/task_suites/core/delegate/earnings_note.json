@@ -1,16 +1,9 @@
 {
   "id": "earnings_note",
-  "title": "Delegate And Coordinate: Earnings Note",
-  "capability": "mcp-tool-use",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-delegate",
-    "delegation",
-    "agents",
-    "mcp",
-    "note"
-  ],
+  "category": "platform",
+  "family": "delegate",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Call assign_tasks_to_agents with two task_requests using ids coverage-analyst and model-analyst for earnings prep work. Then add a coordinator note naming both workstreams on the active dashboard; omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
@@ -125,15 +118,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "delegate",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique delegate/earnings_note exercise using add_generative_widget, assign_tasks_to_agents, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact tasks:coverage-analyst,model-analyst; widgets:Bench Stark Enterprise/stress_liquidity_lab_sign_off_approval_checklist@overview; generated:note@*:coverage analyst,model analyst."
+  }
 }

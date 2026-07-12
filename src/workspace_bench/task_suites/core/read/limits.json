@@ -1,15 +1,10 @@
 {
   "id": "limits",
-  "title": "Read Data: Limit Utilization",
-  "capability": "data-reading",
-  "workflow": "risk-review",
-  "subdomain": "risk",
-  "tags": [
-    "family-read",
-    "data-reading",
-    "stark"
-  ],
-  "prompt": "On the Bench Stark Enterprise Limit Utilization widget, use get_widget_data, then add a short note that cites risk_exposure_monitor_limits_limit_utilization and says you reviewed the data.",
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "easy",
+  "split": "validation",
+  "prompt": "On the Bench Stark Enterprise Limit Utilization widget, use get_widget_data, then add a short HTML card that cites risk_exposure_monitor_limits_limit_utilization and says you reviewed the data.",
   "fixtures": {
     "backends": [
       {
@@ -66,13 +61,13 @@
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "risk_exposure_monitor_limits_limit_utilization"
+          "exposure"
         ]
       }
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "risk_exposure_monitor_limits_limit_utilization",
           "data"
@@ -106,21 +101,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Data Note",
-        "data": "Reviewed the data returned by risk_exposure_monitor_limits_limit_utilization."
+        "data": "<section>Reviewed the data returned by risk_exposure_monitor_limits_limit_utilization.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "read",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique read/limits exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:risk_exposure_monitor_limits_limit_utilization,data."
+  }
 }

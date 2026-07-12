@@ -1,14 +1,9 @@
 {
   "id": "arrange_stack_price_news_nvda",
-  "title": "Arrange: Stack Price News Nvda",
-  "capability": "layout-management",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-layout",
-    "layout",
-    "multi-widget"
-  ],
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "Arrange the NVDA widgets full-width with price on top (rows 0-12, 40 columns) and news below it (10 rows tall starting at row 12, 40 columns).",
   "fixtures": {
     "backends": [
@@ -119,15 +114,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "layout",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique layout/arrange_stack_price_news_nvda exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on equities; artifact layouts:latest_news:::0:12:40:10,price_performance:::0:0:40:12."
+  }
 }

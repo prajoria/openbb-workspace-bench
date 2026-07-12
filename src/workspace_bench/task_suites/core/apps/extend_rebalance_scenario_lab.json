@@ -1,15 +1,9 @@
 {
   "id": "extend_rebalance_scenario_lab",
-  "title": "Instantiate And Extend Rebalance & Scenario Lab",
-  "capability": "app-instantiation",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-apps",
-    "apps",
-    "stark",
-    "widget-creation"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "medium",
+  "split": "validation",
   "prompt": "Instantiate the Rebalance & Scenario Lab app from the Bench Stark Enterprise backend as a new dashboard named Rebalance Studio. Then add the Drift by Sleeve widget (id Drift by Sleeve) to the Drift tab of the new dashboard.",
   "fixtures": {
     "backends": [
@@ -113,15 +107,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 9
-  },
-  "split": "validation",
-  "novelty": "Unique apps/extend_rebalance_scenario_lab exercise using create_widget, get_widget_schema, list_available_widgets, manage_apps, manage_backends, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_tab, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact apps:Rebalance & Scenario Lab; widgets:Bench Stark Enterprise/rebalance_scenario_lab_approval_approval_checklist@approval,Bench Stark Enterprise/rebalance_scenario_lab_drift_current_vs_target_weights@drift,Bench Stark Enterprise/rebalance_scenario_lab_drift_drift_by_sleeve@drift; tabs:approval,drift,overview."
+  }
 }

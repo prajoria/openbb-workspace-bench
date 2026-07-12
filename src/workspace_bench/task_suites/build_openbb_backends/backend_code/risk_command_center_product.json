@@ -3,8 +3,6 @@
     "filesystem",
     "shell"
   ],
-  "business_terms": [],
-  "capability": "build-real-backend",
   "category": "platform",
   "code_task": {
     "command_timeout_ms": 120000,
@@ -102,7 +100,6 @@
     ]
   },
   "difficulty": "hard",
-  "domain": "engineering",
   "family": "backend-code",
   "fixtures": {
     "backends": []
@@ -112,22 +109,8 @@
   "limits": {
     "max_turns": 40
   },
-  "novelty": "Real-code backend task: risk_command_center_product",
   "oracle_tool_calls": [],
   "prompt": "Ship a small risk command center for a portfolio team. It needs a production-style health contract, an at-a-glance risk utilization view, factor exposures with policy limits, and an installable Workspace app that lays out the experience cleanly. Leave real tests that protect the product behavior and keep the backend localhost-ready.",
-  "schema_version": "workspace-bench-task",
-  "source": "WorkspaceBench Phase 10 authored code track",
   "split": "test",
-  "subdomain": "openbb-custom-backends",
-  "success": {},
-  "tags": [
-    "build-openbb-backends",
-    "experimental-v0",
-    "mini-product",
-    "apps-json",
-    "health",
-    "browser-flagship"
-  ],
-  "title": "Build a complete risk command center backend",
-  "workflow": "custom-backend-development"
+  "success": {}
 }

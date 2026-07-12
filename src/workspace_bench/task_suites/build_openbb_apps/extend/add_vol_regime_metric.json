@@ -1,16 +1,10 @@
 {
   "id": "add_vol_regime_metric",
-  "title": "Refresh Vol Desk Data with Vol Regime",
-  "workflow": "risk-review",
-  "subdomain": "volatility",
-  "tags": [
-    "family-extend",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "refresh",
-    "extend"
-  ],
+  "category": "repair",
+  "family": "extend",
+  "specification_level": "explicit",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Connect the backend and make its first widget usable on the current dashboard. Use 'Vol Desk Data' at http://localhost:7801. Repair the existing backend without regressing working content. The experience needs VIX Term Structure (`vix_term_structure`, chart) using `/vix-term-structure` for plotly curve of VIX futures by expiry; consume the raw backend payload; Vol Regime (`vol_regime_metric`, metric) using `/vol-regime` for current volatility regime score; cache for 15 minutes. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {
@@ -198,18 +192,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "extend",
-  "capability": "app-building",
-  "specification_level": "explicit",
-  "difficulty": "hard",
-  "business_terms": [],
   "limits": {
     "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique extend/add_vol_regime_metric building exercise using create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vix_term_structure,Vol Desk Data/vol_regime_metric; widgets:Vol Desk Data/vix_term_structure@*."
+  }
 }

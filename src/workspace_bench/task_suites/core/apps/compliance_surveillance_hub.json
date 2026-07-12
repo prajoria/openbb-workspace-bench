@@ -1,14 +1,9 @@
 {
   "id": "compliance_surveillance_hub",
-  "title": "Instantiate Compliance Surveillance Hub (Checked)",
-  "capability": "app-instantiation",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-apps",
-    "apps",
-    "stark"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "Instantiate the Compliance Surveillance Hub app from the Bench Stark Enterprise backend as a new dashboard named Daily Surveillance Board.",
   "fixtures": {
     "backends": [
@@ -74,15 +69,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique apps/compliance_surveillance_hub exercise using manage_apps, manage_backends with checks dashboard_name, layout_out_of_grid, missing_tab, missing_widget, too_many_invalid_calls on stark-enterprise; artifact apps:Compliance Surveillance Hub; widgets:Bench Stark Enterprise/compliance_surveillance_hub_alerts_surveillance_alerts@alerts,Bench Stark Enterprise/compliance_surveillance_hub_audit_access_and_export_logs@audit; tabs:alerts,audit,overview."
+  }
 }

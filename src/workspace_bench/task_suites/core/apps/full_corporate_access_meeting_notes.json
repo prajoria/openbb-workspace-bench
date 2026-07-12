@@ -1,16 +1,9 @@
 {
   "id": "full_corporate_access_meeting_notes",
-  "title": "Instantiate, Extend, And Brief Corporate Access & Meeting Notes",
-  "capability": "app-instantiation",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-apps",
-    "apps",
-    "stark",
-    "widget-creation",
-    "note"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "From the Bench Stark Enterprise backend, instantiate the Corporate Access & Meeting Notes app as a new dashboard named Corporate Access Log. Then add the Expert Calls widget (id corporate_access_meeting_notes_meetings_expert_calls) to the Meetings tab, and add a note on the same tab mentioning expert calls and meeting calendar.",
   "fixtures": {
     "backends": [
@@ -134,15 +127,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 9
-  },
-  "split": "train",
-  "novelty": "Unique apps/full_corporate_access_meeting_notes exercise using add_generative_widget, create_widget, get_widget_schema, list_available_widgets, manage_apps, manage_backends, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_tab, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact apps:Corporate Access & Meeting Notes; widgets:Bench Stark Enterprise/corporate_access_meeting_notes_claims_management_claims_tracker@claims,Bench Stark Enterprise/corporate_access_meeting_notes_compliance_mnpi_attestation_status@compliance,Bench Stark Enterprise/corporate_access_meeting_notes_meetings_expert_calls@meetings; tabs:claims,compliance,meetings,overview; generated:note@meetings:expert calls,meeting calendar."
+  }
 }

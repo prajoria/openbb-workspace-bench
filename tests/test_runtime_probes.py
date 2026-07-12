@@ -17,18 +17,10 @@ from workspace_bench.workspace.runtime import (
 def _task(dataset: dict, *, pinned_paths: bool = False) -> Task:
     return Task.from_dict(
         {
-            "schema_version": "workspace-bench-task",
             "id": "runtime_probe_test",
-            "title": "Runtime probe test",
             "category": "platform",
             "family": "runtime",
-            "capability": "backend-integration",
-            "workflow": "runtime-verification",
-            "domain": "finance",
-            "subdomain": "testing",
             "difficulty": "easy",
-            "tags": ["runtime"],
-            "novelty": "Exercises one isolated runtime outcome.",
             "prompt": "Verify the runtime fixture.",
             "fixtures": {},
             "initial_state": {},
@@ -105,6 +97,36 @@ def test_runtime_probe_uses_a_bound_socket_and_reuses_server() -> None:
     assert first.passed and second.passed
     assert same_server is server
     assert server.request_count == before + 2
+
+
+def test_seeded_rows_ssrm_is_paged_sorted_filtered_and_counted() -> None:
+    dataset = _dataset(
+        payload=None,
+        fields=["symbol", "close"],
+        payload_spec={
+            "generator": "seeded_rows",
+            "seed": 17,
+            "n_rows": 10_000,
+            "schema": {"symbol": "string", "close": "number"},
+            "data_key": "rows",
+        },
+    )
+    task = _task(dataset)
+    snapshot = _snapshot(
+        {
+            "type": "table_ssrm",
+            "data": {
+                "dataKey": "rows",
+                "table": {"columnsDefs": [{"field": "symbol"}, {"field": "close"}]},
+            },
+        }
+    )
+    before = get_runtime_server().request_count
+
+    grade = grade_runtime(task, snapshot)
+
+    assert grade.passed
+    assert get_runtime_server().request_count == before + 3
 
 
 def test_dataset_binding_is_field_driven_with_identity_as_tiebreak() -> None:

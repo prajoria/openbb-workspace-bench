@@ -1,18 +1,15 @@
 {
   "id": "vendor_intake_room",
-  "title": "Assemble the Vendor Intake Room form app",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "operations",
-  "tags": [
-    "family-forms",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "forms",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "forms",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Build a working Workspace experience for a vendor-operations manager covering vendor service levels. The workspace must cover submit a new vendor record into the SLA register. The workspace must cover vendor SLA state with breach flags. Analysts need to inspect vendor, status, latency milliseconds, breach. An analyst can adjust the relevant numeric scope. The user can enter the required details and submit the workflow. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Keep these source-contract anchors: `intake` and `vendor`. Choose the rest of the architecture and avoid unrelated changes.",
+  "business_terms": [
+    "intake",
+    "vendor"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -335,21 +332,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "forms",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "intake",
-    "vendor"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique forms/vendor_intake_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Vendor SLA Data; artifact capabilities:capability_1_vendor-intake-form:form:vendor_intake_form_value,capability_2_vendor-sla-table:table-like:breach,latency_ms,status,vendor."
+    "max_turns": 14
+  }
 }

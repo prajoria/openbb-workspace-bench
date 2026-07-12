@@ -1,16 +1,10 @@
 {
   "id": "expand_risk_expansion",
-  "title": "Expand To Risk Command Center",
-  "capability": "workspace-navigation",
-  "workflow": "risk-review",
-  "subdomain": "risk",
-  "tags": [
-    "family-navigate",
-    "rename",
-    "tabs",
-    "navigation"
-  ],
-  "prompt": "Change the active dashboard's name to Risk Command Center; add a new tab named Stress Results; then add a note on the new tab that mentions stress results and says items are pending.",
+  "category": "single-widget",
+  "family": "navigate",
+  "difficulty": "medium",
+  "split": "validation",
+  "prompt": "Change the active dashboard's name to Risk Command Center; add a new tab named Stress Results; then add a HTML card on the new tab that mentions stress results and says items are pending.",
   "fixtures": {
     "backends": [
       {
@@ -59,7 +53,7 @@
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "stress results",
           "pending"
@@ -97,6 +91,7 @@
       "tool": "manage_dashboard",
       "args": {
         "operation": "update",
+        "dashboard_id": "dash_001",
         "name": "Risk Command Center"
       }
     },
@@ -121,21 +116,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Tab Note",
-        "data": "Tracking stress results: items are pending review."
+        "data": "<section>Tracking stress results: items are pending review.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "navigate",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 7
-  },
-  "split": "validation",
-  "novelty": "Unique navigate/expand_risk_expansion exercise using add_generative_widget, manage_dashboard, manage_navigation_bar, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_tab, missing_tool_call, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/stress_liquidity_lab_stress_tests_risk_snapshot@overview; tabs:overview,stress-results; generated:note@stress-results:stress results,pending."
+  }
 }

@@ -1,14 +1,9 @@
 {
   "id": "index_risk_exposure_monitor",
-  "title": "Read App Index For Risk Exposure Monitor",
-  "capability": "dashboard-construction",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-resources",
-    "resources",
-    "apps"
-  ],
+  "category": "dashboard",
+  "family": "resources",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "Call read_workspace_resource with uri openbb://workspace/app-builder/index and add a note naming the Risk Exposure Monitor template id risk-exposure-monitor.",
   "fixtures": {
     "backends": [
@@ -104,15 +99,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "resources",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique resources/index_risk_exposure_monitor exercise using add_generative_widget, get_workspace_snapshot, read_workspace_resource with checks layout_out_of_grid, missing_generated_widget, missing_resource_read, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact resource:openbb://workspace/app-builder/index; widgets:Bench Stark Enterprise/vendor_dataset_monitor_quality_validation_errors@; generated:note@*:Risk Exposure Monitor,risk-exposure-monitor."
+  }
 }

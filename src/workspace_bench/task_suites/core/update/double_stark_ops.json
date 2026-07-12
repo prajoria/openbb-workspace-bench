@@ -1,16 +1,10 @@
 {
   "id": "double_stark_ops",
-  "title": "Double Repair: Stark Ops",
-  "capability": "workspace-repair",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "data-platform",
-  "tags": [
-    "family-update",
-    "repair",
-    "update-widget",
-    "combo"
-  ],
-  "prompt": "The ops dashboard has two wrong settings: Vendor SLA Status is Open but should be Escalated, and Portfolio Snapshot is YTD but should be MTD. Repair both existing widgets and add a note mentioning Escalated, MTD, and the word repaired.",
+  "category": "repair",
+  "family": "update",
+  "difficulty": "hard",
+  "split": "test",
+  "prompt": "The ops dashboard has two wrong settings: Vendor SLA Status is Open but should be In Review, and Portfolio Snapshot is YTD but should be MTD. Repair both existing widgets and add a note mentioning In Review, MTD, and the word repaired.",
   "fixtures": {
     "backends": [
       {
@@ -73,7 +67,7 @@
         "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status",
         "data_args": {
           "vendor": "FactSet",
-          "status": "Escalated"
+          "status": "In Review"
         },
         "min_count": 1
       },
@@ -109,7 +103,7 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "Escalated",
+          "In Review",
           "MTD",
           "repaired"
         ]
@@ -133,7 +127,7 @@
       "args": {
         "widget_uuid": "widget_001",
         "data_args": {
-          "status": "Escalated"
+          "status": "In Review"
         }
       }
     },
@@ -151,19 +145,11 @@
       "args": {
         "widget_type": "note",
         "name": "Repair Note",
-        "data": "Repaired: Escalated, MTD, repaired."
+        "data": "Repaired: In Review, MTD, repaired."
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "update",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique update/double_stark_ops exercise using add_generative_widget, get_workspace_snapshot, update_widget with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/portfolio_command_center_overview_portfolio_snapshot@*,Bench Stark Enterprise/vendor_dataset_monitor_slas_vendor_sla_status@*; generated:note@*:Escalated,MTD."
+  }
 }

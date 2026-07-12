@@ -1,16 +1,9 @@
 {
   "id": "hub_rates_hub",
-  "title": "Build Out Rates Hub",
-  "capability": "workspace-navigation",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-navigate",
-    "rename",
-    "tabs",
-    "navigation",
-    "combo"
-  ],
+  "category": "dashboard",
+  "family": "navigate",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Set the active dashboard name to Rates Hub, add a new tab named Curve, put the Yield Curve widget on it, and add a note on the same tab mentioning curve and rates hub.",
   "fixtures": {
     "backends": [
@@ -86,6 +79,7 @@
       "tool": "manage_dashboard",
       "args": {
         "operation": "update",
+        "dashboard_id": "dash_001",
         "name": "Rates Hub"
       }
     },
@@ -137,15 +131,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "navigate",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 9
-  },
-  "split": "test",
-  "novelty": "Unique navigate/hub_rates_hub exercise using add_generative_widget, create_widget, get_widget_schema, list_available_widgets, manage_dashboard, manage_navigation_bar, navigate_workspace with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tab, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on macro; artifact widgets:Bench Macro/yield_curve@curve; tabs:curve,overview; generated:note@curve:curve,rates hub."
+  }
 }

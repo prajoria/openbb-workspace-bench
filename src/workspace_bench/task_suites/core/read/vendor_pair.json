@@ -1,14 +1,9 @@
 {
   "id": "vendor_pair",
-  "title": "Read Data: Vendor SLA Status and Latency by Feed",
-  "capability": "data-reading",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "data-platform",
-  "tags": [
-    "family-read",
-    "data-reading",
-    "stark"
-  ],
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Use get_widget_data for the Bench Stark Enterprise Vendor SLA Status and Latency by Feed widgets; then add a short note that cites vendor_dataset_monitor_slas_vendor_sla_status and vendor_dataset_monitor_slas_latency_by_feed and says you reviewed the data.",
   "fixtures": {
     "backends": [
@@ -88,13 +83,13 @@
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "vendor_dataset_monitor_slas_vendor_sla_status"
+          "score"
         ]
       },
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "vendor_dataset_monitor_slas_latency_by_feed"
+          "latency_ms"
         ]
       }
     ],
@@ -153,15 +148,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "read",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 7
-  },
-  "split": "test",
-  "novelty": "Unique read/vendor_pair exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:vendor_dataset_monitor_slas_vendor_sla_status,vendor_dataset_monitor_slas_latency_by_feed."
+  }
 }

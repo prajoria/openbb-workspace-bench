@@ -11,6 +11,7 @@ FIXTURE_ORIGINS = {
     "macro": "Bench Macro",
     "portfolio": "Bench Portfolio",
     "stark-enterprise": "Bench Stark Enterprise",
+    "daloopa": "Bench Daloopa",
 }
 WIDGET_HINTS = {
     "Bench Equities": {
@@ -85,16 +86,16 @@ WIDGET_HINTS = {
             "note": "Valuation tab.",
         },
         "execution_desk_blotter_live_orders": {
-            "data_args": {"desk": "US Equities", "status": "Open", "period": "YTD"},
-            "note": "Blotter tab.",
+            "data_args": {"desk": "US Equity", "period": "YTD"},
+            "note": "Blotter tab. Declared params: desk, period.",
         },
         "execution_desk_exceptions_rejected_orders": {
-            "data_args": {"desk": "US Equities", "status": "Open", "period": "YTD"},
-            "note": "Exceptions tab.",
+            "data_args": {"desk": "US Equity", "period": "YTD"},
+            "note": "Exceptions tab. Declared params: desk, period.",
         },
         "execution_desk_exceptions_restricted_list_checks": {
-            "data_args": {"desk": "US Equities", "status": "Open", "period": "YTD"},
-            "note": "Exceptions tab.",
+            "data_args": {"desk": "US Equity", "period": "YTD"},
+            "note": "Exceptions tab. Declared params: desk, period.",
         },
         "healthcare_research_dashboard_clinical_trial_catalyst_calendar": {
             "data_args": {},
@@ -125,6 +126,40 @@ WIDGET_HINTS = {
             "note": "Vendor SLA monitoring.",
         },
     },
+    "Bench Daloopa": {
+        "daloopa_company_directory": {
+            "data_args": {},
+            "note": "Company ids and latest_calendar_quarter; anchor period math here.",
+        },
+        "daloopa_company_fundamentals": {
+            "data_args": {"ticker": "AAPL", "period": "2026Q1"},
+            "note": "period is a calendar quarter such as 2026Q1; rows carry citation urls.",
+        },
+        "daloopa_kpi_metrics": {
+            "data_args": {"ticker": "AAPL", "period": "2026Q1"},
+            "note": "Operating KPIs per calendar quarter.",
+        },
+        "daloopa_segment_breakdown": {
+            "data_args": {"ticker": "AAPL", "period": "2026Q1"},
+            "note": "Segment revenue with YoY growth.",
+        },
+        "daloopa_management_guidance": {
+            "data_args": {"ticker": "AAPL"},
+            "note": "Guidance vs actuals; latest guided quarter is Pending.",
+        },
+        "daloopa_consensus_estimates": {
+            "data_args": {"ticker": "AAPL"},
+            "note": "Consensus vs actual revenue and EPS.",
+        },
+        "daloopa_document_search": {
+            "data_args": {"ticker": "AAPL", "doc_type": "10-Q"},
+            "note": "doc_type is one of 10-K, 10-Q, 8-K, Earnings Call Transcript.",
+        },
+        "daloopa_stock_prices": {
+            "data_args": {"ticker": "AAPL"},
+            "note": "Quarter-end plus most recent trading week OHLCV rows.",
+        },
+    },
 }
 
 
@@ -138,7 +173,7 @@ TOOL_REFERENCE = {
         "args": {
             "operation": "create|read|update",
             "name": "string, required for create/update",
-            "dashboard_id": "string, optional",
+            "dashboard_id": "string, required for update; optional otherwise",
             "activate": "boolean, optional for create",
         },
     },
@@ -252,7 +287,7 @@ TOOL_REFERENCE = {
             "widgets.json object map your backend serves (each widget definition "
             "REQUIRES name, description, and endpoint; optional type from the "
             "workspace enum table|markdown|chart|chart-highcharts|chart-vegalite|"
-            "metric|pdf|html|newsfeed|omni|live_grid|ssrm_table|multi_file_viewer|"
+            "metric|pdf|html|newsfeed|omni|live_grid|table_ssrm|multi_file_viewer|"
             "advanced_charting|iframe|youtube|note|file_viewer|ssrm_advanced "
             "(default table), gridData {w,h} on a 40-column grid, params "
             "[{paramName, type text|number|date|boolean|endpoint|ticker|button|"

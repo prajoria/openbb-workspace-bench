@@ -1,18 +1,17 @@
 {
   "id": "vix_advanced_ship",
-  "title": "Ship, open, and configure Vol Advanced Live",
-  "workflow": "risk-review",
-  "subdomain": "volatility",
-  "tags": [
-    "family-advanced",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "advanced",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "advanced",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Build a volatility analyst a dependable volatility and derivatives workspace. The workspace must cover market history for VIX futures. The workspace must cover current volatility regime score. The workspace must cover daily CBOE VIX closes with returns. Analysts need to inspect date, close, return percentage. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Vol Advanced Live', 'VIX futures', 'Vol Desk Data', 'VX2', 'ticker'. Decide how best to organize the experience and preserve unrelated work.",
+  "business_terms": [
+    "Vol Advanced Live",
+    "VIX futures",
+    "Vol Desk Data",
+    "VX2",
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -333,24 +332,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "advanced",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Vol Advanced Live",
-    "VIX futures",
-    "Vol Desk Data",
-    "VX2",
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique advanced/vix_advanced_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact capabilities:capability_1_vix-advanced:chart-like:vix_advanced_value,capability_2_vol-regime-metric:metric:vol_regime_metric_value; generated:note@*:Vol Advanced Live,VIX futures."
+    "max_turns": 14
+  }
 }

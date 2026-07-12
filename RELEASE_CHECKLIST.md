@@ -16,7 +16,7 @@ Use this checklist before announcing a public Workspace Bench release.
 - [ ] `uv run workspace-bench runtime-probe --suite core --family backends` passes 20/20 tasks.
 - [ ] `uv run workspace-bench runtime-probe --suite build-openbb-apps` passes every runtime-enabled task, including all 12 e2e capstones.
 - [ ] `uv run workspace-bench adversarial --suite core --family backends` reports zero survivors, wrong-reason failures, and dirty oracles (budget: 30 seconds).
-- [ ] `uv run workspace-bench adversarial --suite build-openbb-apps` reports zero survivors, wrong-reason failures, and dirty oracles across all 13 archetypes (currently 1,026 applicable candidates; 749 exercised with three runtime samples per applicable family/archetype; budget: 60 seconds).
+- [ ] `uv run workspace-bench adversarial --suite build-openbb-apps` reports zero survivors, wrong-reason failures, and dirty oracles across all 12 archetypes (currently 1,002 candidates; 727 exercised with three runtime samples per applicable family/archetype; budget: 60 seconds).
 - [ ] `uv run --extra browser workspace-bench browser-cert --dry-run` passes all 30 certification entries with the exact 4/4/4/4/4/4/3/3 category counts.
 - [ ] `uv run --extra browser workspace-bench browser-cert --self-test` passes all three marked tasks in real Chromium and writes PNG, trace ZIP, and verdict JSON artifacts.
 - [ ] Optional code flagship browser self-test passes by adding `--code-task-backend http://127.0.0.1:<port>` for an oracle/agent-built `risk_command_center_product` backend; terminate only that tracked backend PID afterward.
@@ -29,9 +29,9 @@ Use this checklist before announcing a public Workspace Bench release.
 - [ ] Stable task counts: exactly 300 in `core`, exactly 236 in `build-openbb-apps` (536 total); experimental `build-openbb-backends` is exactly 12 and reported separately.
 - [ ] Split counts are 150/75/75 (`core`) and 118/59/59 (`build-openbb-apps`) train/validation/test, with every family/level or debug-family allocation contributing validation and test tasks.
 - [ ] Novelty fingerprints and task ids are unique in both suites.
-- [ ] Coverage quotas pass in both suites via `validate` (core: backend, difficulty, widget-pair, dashboard-category, grader-check quotas; build-openbb-apps: widget/param ownership, 55/11/170 measured difficulty, 60/92/84 specification levels, and per-specification-level check caps).
+- [ ] Coverage quotas pass in both suites via `validate` (core: backend, difficulty, widget-pair, dashboard-category, grader-check quotas; build-openbb-apps: widget/param ownership, 17/43/176 measured difficulty, 60/92/84 specification levels, and per-specification-level check caps).
 - [ ] `runs/reports/calibration.json` is compiled from the three complete 2026-07 guided runs; OpenRouter credit failures appear only as excluded limitations.
-- [ ] Difficulty relabel review requires both repeats, retains one-episode knife edges, and forces zero-pass debug tasks hard; prompt+success hashes are unchanged for every relabel.
+- [ ] Difficulty relabel review requires both repeats, approves the intermediate band from complete repeated evidence, and forces zero-pass debug tasks hard; relabels do not alter task prompts or success criteria.
 - [ ] `runs/reports/suites.json` uses the three current build runs and marks core historical/pre-rename with a pending re-run, excluding cross-era pooling.
 - [ ] `runs/reports/significance.json` is recomputed (`workspace-bench compile significance`) and the README board notes match it; paired build episodes retain both repeats.
 - [ ] README quick start, suites table, and aggregate command are accurate.

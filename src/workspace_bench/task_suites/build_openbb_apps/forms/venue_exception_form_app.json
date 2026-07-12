@@ -1,17 +1,15 @@
 {
   "id": "venue_exception_form_app",
-  "title": "Ship Venue Exception Form as the Venue Exceptions app",
-  "workflow": "execution-exception-review",
-  "subdomain": "execution",
-  "tags": [
-    "family-forms",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "forms"
-  ],
+  "category": "platform",
+  "family": "forms",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Build a working Workspace experience for an execution analyst covering orders and venue quality. The workspace must cover record an execution venue exception. An analyst can adjust the relevant numeric scope. The user can enter the required details and submit the workflow. Leave the complete working workspace open for review. Keep these source-contract anchors: `exception` and `venue`. Choose the rest of the architecture and avoid unrelated changes.",
+  "business_terms": [
+    "exception",
+    "venue"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -186,21 +184,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "forms",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "exception",
-    "venue"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique forms/venue_exception_form_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_venue-exception-form:form:venue_exception_form_value."
+    "max_turns": 13
+  }
 }

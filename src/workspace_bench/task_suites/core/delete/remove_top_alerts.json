@@ -1,13 +1,9 @@
 {
   "id": "remove_top_alerts",
-  "title": "Remove Top Alerts",
-  "capability": "widget-update",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-delete",
-    "delete-widget"
-  ],
+  "category": "single-widget",
+  "family": "delete",
+  "difficulty": "easy",
+  "split": "test",
   "prompt": "This dashboard no longer needs the Top Alerts widget; remove it.",
   "fixtures": {
     "backends": [
@@ -76,15 +72,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "delete",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "test",
-  "novelty": "Unique delete/remove_top_alerts exercise using delete_widget, get_workspace_snapshot with checks layout_out_of_grid, repeated_snapshots, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact id:remove_top_alerts."
+  }
 }

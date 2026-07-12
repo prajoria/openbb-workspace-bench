@@ -1,14 +1,10 @@
 {
   "id": "outage",
-  "title": "Vendor Outage",
-  "capability": "workspace-inspection",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-note",
-    "note"
-  ],
-  "prompt": "On the dashboard, add a note named Vendor Outage stating that the FactSet feed is degraded and fallback pricing is active.",
+  "category": "single-widget",
+  "family": "note",
+  "difficulty": "easy",
+  "split": "train",
+  "prompt": "On the dashboard, add a HTML card named Vendor Outage stating that the FactSet feed is degraded and fallback pricing is active.",
   "fixtures": {
     "backends": [
       {
@@ -35,7 +31,7 @@
   "success": {
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "name_contains": "Vendor Outage",
         "data_contains": [
           "FactSet",
@@ -59,21 +55,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Vendor Outage",
-        "data": "FactSet feed degraded; fallback pricing is active."
+        "data": "<section>FactSet feed degraded; fallback pricing is active.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "note",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique note/outage exercise using add_generative_widget, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact generated:note@*:FactSet,fallback."
+  }
 }

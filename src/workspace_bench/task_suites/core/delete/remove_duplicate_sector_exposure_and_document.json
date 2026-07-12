@@ -1,14 +1,9 @@
 {
   "id": "remove_duplicate_sector_exposure_and_document",
-  "title": "Remove Duplicate Sector Exposure And Document",
-  "capability": "workspace-repair",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-delete",
-    "repair",
-    "delete-widget"
-  ],
+  "category": "repair",
+  "family": "delete",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Remove exactly one duplicate from the two identical Sector Exposure widgets, then add a note saying the duplicate was removed.",
   "fixtures": {
     "backends": [
@@ -111,15 +106,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "delete",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique delete/remove_duplicate_sector_exposure_and_document exercise using add_generative_widget, delete_widget, get_workspace_snapshot with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on portfolio; artifact widgets:Bench Portfolio/sector_exposure@*; generated:note@*:duplicate,removed."
+  }
 }

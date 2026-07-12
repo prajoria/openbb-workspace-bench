@@ -1,15 +1,9 @@
 {
   "id": "crossbackend_msft_vs_curve",
-  "title": "Cross-Backend Note: Msft Vs Curve",
-  "capability": "workspace-inspection",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-note",
-    "note",
-    "read-only",
-    "cross-backend"
-  ],
+  "category": "read",
+  "family": "note",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Review the MSFT fundamentals and yield curve widgets and add a note with the gross margin and the 30Y yield from the data.",
   "fixtures": {
     "backends": [
@@ -131,15 +125,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "read",
-  "family": "note",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique note/crossbackend_msft_vs_curve exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls on equities, macro; artifact widgets:Bench Equities/fundamental_metrics@*,Bench Macro/yield_curve@*; generated:note@*:MSFT,0.694."
+  }
 }

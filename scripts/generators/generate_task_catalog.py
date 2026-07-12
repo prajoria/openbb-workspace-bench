@@ -1,8 +1,8 @@
 """Generate runs/reports/task-catalog.md from the bundled task JSON files.
 
 Reads every task in both bundled suites and renders each one's prompt,
-setup, novelty note, and exact pass/fail criteria as the grader applies
-them. Regenerate after editing tasks so the catalog never drifts.
+setup, and exact pass/fail criteria as the grader applies them.
+Regenerate after editing tasks so the catalog never drifts.
 """
 
 from __future__ import annotations
@@ -151,38 +151,15 @@ def describe_success(success: dict) -> list[str]:
             "**No overlaps**: no two widgets on the same tab intersect → `layout_overlap`"
         )
 
-    trace = success.get("trace_checks", {})
-    max_invalid = trace.get("max_invalid_tool_calls")
-    if max_invalid is not None:
-        checks.append(
-            f"**Trace**: ≤{max_invalid} invalid tool call(s) in the whole episode "
-            "→ `too_many_invalid_calls`"
-        )
-    if trace.get("must_call_schema_before_create"):
-        checks.append(
-            "**Trace**: every `create_widget` must be preceded by a successful "
-            "`get_widget_schema` for that same origin/widget → `schema_not_called_before_create`"
-        )
-    if trace.get("forbid_invented_widget_ids"):
-        checks.append(
-            "**Trace**: schema/create calls may only use widget ids previously returned by "
-            "`list_available_widgets` → `unlisted_widget_id`"
-        )
-    if trace.get("max_repeated_snapshots") is not None:
-        checks.append(
-            f"**Trace**: ≤{trace['max_repeated_snapshots']} consecutive "
-            "`get_workspace_snapshot` call(s) → `repeated_snapshots`"
-        )
     return checks
 
 
 def render_task(task: dict, noop: dict[str, str]) -> str:
     sid = task["id"]
-    lines = [f"#### `{sid}` — {task.get('title', '')}", ""]
+    lines = [f"#### `{sid}`", ""]
     meta = (
-        f"**{task.get('difficulty')}** · specification: "
-        f"{task.get('specification_level', '-')} · {task.get('capability')} · "
-        f"workflow: {task.get('workflow')} · {task.get('subdomain')} · "
+        f"**{task.get('difficulty')}** · category: {task.get('category', '-')} · "
+        f"specification: {task.get('specification_level', '-')} · "
         f"split: {task.get('split', '-')}"
     )
     noop_score = noop.get(sid)
@@ -192,9 +169,6 @@ def render_task(task: dict, noop: dict[str, str]) -> str:
     lines.append("")
     lines.append(f"> {task.get('prompt', '').strip()}")
     lines.append("")
-    novelty = task.get("novelty", "").strip()
-    if novelty:
-        lines.append(f"- Novelty: {novelty}")
     for line in describe_initial_state(task):
         lines.append(f"- {line}")
     tools = task.get("allowed_tools", [])

@@ -1,18 +1,13 @@
 {
   "id": "pipeline_vegalite_room",
-  "title": "Assemble the Pipeline Chart Room chart app",
-  "workflow": "healthcare-catalyst-review",
-  "subdomain": "healthcare",
-  "tags": [
-    "family-charts",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "charts",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "charts",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "The desk needs a production-ready clinical catalysts and pipelines workflow for a healthcare-research analyst. The workspace must cover distribution of pipeline phase mix. The workspace must cover upcoming clinical trial readouts. The workspace must cover catalysts in the next 30 days. Analysts need to inspect ticker, phase, readout date. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -331,20 +326,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "charts",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique charts/pipeline_vegalite_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_catalyst-metric:metric:catalyst_metric_value,capability_2_pipeline-vegalite:chart-like:pipeline_vegalite_value,capability_3_trial-catalysts:table-like:phase,readout_date,ticker."
+    "max_turns": 14
+  }
 }

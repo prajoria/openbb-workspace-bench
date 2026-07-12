@@ -1,15 +1,9 @@
 {
   "id": "vendor_single",
-  "title": "Delegate One Task: Vendor Single",
-  "capability": "mcp-tool-use",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "data-platform",
-  "tags": [
-    "family-delegate",
-    "delegation",
-    "agents",
-    "mcp"
-  ],
+  "category": "platform",
+  "family": "delegate",
+  "difficulty": "easy",
+  "split": "test",
   "prompt": "Call assign_tasks_to_agents with one task_request using id triage-analyst for vendor sla monitoring work: Triage the open vendor incident log by severity.",
   "fixtures": {
     "backends": [
@@ -26,6 +20,20 @@
         {
           "id": "overview",
           "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "workspace_data_control_center_usage_prompt_audit",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
         }
       ]
     }
@@ -53,7 +61,17 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
+    },
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "workspace_data_control_center_usage_prompt_audit",
+        "data_args": {},
+        "tab_id": "overview",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ]
   },
   "oracle_tool_calls": [
     {
@@ -74,15 +92,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "delegate",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "test",
-  "novelty": "Unique delegate/vendor_single exercise using assign_tasks_to_agents, get_workspace_snapshot with checks layout_out_of_grid, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact tasks:triage-analyst."
+  }
 }

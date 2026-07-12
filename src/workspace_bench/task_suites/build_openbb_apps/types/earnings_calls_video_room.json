@@ -1,18 +1,13 @@
 {
   "id": "earnings_calls_video_room",
-  "title": "Assemble the Media Research Room content app",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-types",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "types",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "types",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Build an equity-research analyst a dependable earnings and estimates workspace. The workspace must cover replay library of earnings calls. The workspace must cover preview note for the earnings call. The workspace must cover average EPS surprise last 4 quarters. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Decide how best to organize the experience and preserve unrelated work.",
+  "business_terms": [
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -296,20 +291,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "types",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique types/earnings_calls_video_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_earnings-calls-video:youtube:earnings_calls_video_value,capability_2_earnings-note:markdown:earnings_note_value,capability_3_surprise-metric:metric:surprise_metric_value."
+    "max_turns": 14
+  }
 }

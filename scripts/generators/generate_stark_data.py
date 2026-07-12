@@ -252,7 +252,6 @@ def table_payload(widget_id: str, widget: dict[str, Any], rng: random.Random) ->
             "status": _param_default(widget, "status", "Open")
             if index == 0
             else _row_context(index, widget, first_field)["status"],
-            "widget_id": widget_id,
         }
         key = _text_key(widget_id, widget)
         if first_field != "fund" and any(token in key for token in ("fund", "portfolio", "nav")):
@@ -275,7 +274,6 @@ def metric_payload(widget_id: str, widget: dict[str, Any], rng: random.Random) -
             "metric": f"{widget.get('name', widget_id)} {labels[index]}",
             "value": values[index],
             "change": round(rng.uniform(-0.08, 0.09), 4),
-            "widget_id": widget_id,
         }
         for index in range(count)
     ]
@@ -287,7 +285,6 @@ def chart_payload(widget_id: str, widget: dict[str, Any], rng: random.Random) ->
     start = date(2026, 1, 2) + timedelta(days=rng.randint(0, 10))
     values = _series_values(rng, kind, count)
     return {
-        "widget_id": widget_id,
         "series": [
             {
                 "date": (start + timedelta(days=index)).isoformat(),

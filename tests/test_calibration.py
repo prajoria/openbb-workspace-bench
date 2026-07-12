@@ -143,13 +143,13 @@ def test_resume_manifest_rejects_incompatible_cells(tmp_path) -> None:
         ensure_run_manifest(path, {**manifest, "tasks": ["two"]}, resume=True)
     assert json.loads(path.read_text(encoding="utf-8")) == manifest
 
-    legacy = tmp_path / "legacy.manifest.json"
-    legacy.write_text(
+    repriced = tmp_path / "repriced.manifest.json"
+    repriced.write_text(
         json.dumps({**manifest, "pricing": {"input_per_million": 1.0}}),
         encoding="utf-8",
     )
-    ensure_run_manifest(legacy, manifest, resume=True)
-    assert json.loads(legacy.read_text(encoding="utf-8")) == manifest
+    ensure_run_manifest(repriced, manifest, resume=True)
+    assert json.loads(repriced.read_text(encoding="utf-8")) == manifest
 
 
 def test_empirical_difficulty_proposal_emits_reviewable_override_table() -> None:
@@ -205,11 +205,12 @@ def test_empirical_difficulty_proposal_emits_reviewable_override_table() -> None
     }
     assert proposed == {
         "build-openbb-apps/debug/hard": "hard",
-        "build-openbb-apps/forms/medium": "hard",
+        "build-openbb-apps/forms/medium": "medium",
         "build-openbb-apps/types/easy": "easy",
     }
-    assert proposal["override_table"]["bands"] == {"easy": 1, "medium": 0, "hard": 2}
+    assert proposal["override_table"]["bands"] == {"easy": 1, "medium": 1, "hard": 1}
     assert proposal["override_table"]["overrides"] == {
         "build-openbb-apps/charts/existing": "hard",
         "build-openbb-apps/debug/hard": "hard",
+        "build-openbb-apps/forms/medium": "medium",
     }

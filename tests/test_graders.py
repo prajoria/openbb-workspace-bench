@@ -39,7 +39,6 @@ def test_grader_detects_layout_overlap() -> None:
             required_widgets=(),
             required_layouts=(),
             layout=LayoutChecks(no_overlaps=True, within_grid=True, grid_width=40),
-            trace=SuccessCriteria().trace,
         ),
     )
     snapshot = {
@@ -157,41 +156,6 @@ def test_grader_matches_generated_widget_display_alias() -> None:
     grade = grade_task(task, snapshot, ())
 
     assert grade.passed is True
-
-
-def test_grader_keeps_generated_widget_data_equals_backwards_compatibility() -> None:
-    task = find_task("price_performance_aapl")
-    task = replace(
-        task,
-        success=SuccessCriteria(
-            required_generated_widgets=(
-                RequiredGeneratedWidget(
-                    widget_type="note",
-                    data_equals={"status": "ready"},
-                ),
-            )
-        ),
-    )
-    snapshot = {
-        "dashboard_composition": {
-            "name": "Workspace Bench",
-            "tabs": [{"id": "", "name": "", "layout": []}],
-            "widgets": [
-                {
-                    "generated": True,
-                    "type": "note",
-                    "generated_data": {"status": "wrong"},
-                    "layout": {"tab_id": "", "x": 0, "y": 0, "w": 20, "h": 8},
-                }
-            ],
-        }
-    }
-
-    assert not grade_task(task, snapshot, ()).passed
-    snapshot["dashboard_composition"]["widgets"][0]["generated_data"] = {
-        "status": "ready"
-    }
-    assert grade_task(task, snapshot, ()).passed
 
 
 def test_grader_dashboard_name_allows_stopwords_between_terms() -> None:

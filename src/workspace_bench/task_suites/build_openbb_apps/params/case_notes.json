@@ -1,15 +1,10 @@
 {
   "id": "case_notes",
-  "title": "Build the Case Notes parameter widget",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-params",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "params"
-  ],
+  "category": "platform",
+  "family": "params",
+  "specification_level": "explicit",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Connect the backend and make its first widget usable on the current dashboard. Use 'Surveillance Data' at http://localhost:7807. Make the user controls functional. The experience needs Case Notes (`case_notes`, markdown) using `/case-notes` for notes for one surveillance case; user controls: Case (`case_id`, text). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},
@@ -134,18 +129,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "params",
-  "capability": "widget-building",
-  "specification_level": "explicit",
-  "difficulty": "easy",
-  "business_terms": [],
   "limits": {
     "max_turns": 7
-  },
-  "split": "train",
-  "novelty": "Unique params/case_notes building exercise using create_widget, get_widget_schema, list_available_widgets, manage_backends with checks missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/case_notes; widgets:Surveillance Data/case_notes@*."
+  }
 }

@@ -1,14 +1,9 @@
 {
   "id": "register_backend_and_add_price_performance",
-  "title": "Register Backend And Add Price Performance",
-  "capability": "dashboard-construction",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-backends",
-    "backends",
-    "widget-creation"
-  ],
+  "category": "dashboard",
+  "family": "backends",
+  "difficulty": "easy",
+  "split": "test",
   "prompt": "After calling manage_backends with operation add and name equities for Bench Equities, discover price_performance, fetch its schema, and add Bench Equities/price_performance with data_args {\"symbol\": \"AAPL\"} to the active dashboard.",
   "fixtures": {
     "backends": []
@@ -218,15 +213,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "backends",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique backends/register_backend_and_add_price_performance exercise using create_widget, get_widget_schema, list_available_widgets, manage_backends with checks layout_out_of_grid, layout_overlap, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on equities; artifact widgets:Bench Equities/price_performance@*."
+  }
 }

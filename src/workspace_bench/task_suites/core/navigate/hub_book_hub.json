@@ -1,16 +1,9 @@
 {
   "id": "hub_book_hub",
-  "title": "Build Out Book Hub",
-  "capability": "workspace-navigation",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-navigate",
-    "rename",
-    "tabs",
-    "navigation",
-    "combo"
-  ],
+  "category": "dashboard",
+  "family": "navigate",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Set the active dashboard name to Book Hub, add a new tab named Exposure, put the Sector Exposure widget on it, and add a note on the same tab mentioning exposure and book hub.",
   "fixtures": {
     "backends": [
@@ -86,6 +79,7 @@
       "tool": "manage_dashboard",
       "args": {
         "operation": "update",
+        "dashboard_id": "dash_001",
         "name": "Book Hub"
       }
     },
@@ -137,15 +131,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "navigate",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 9
-  },
-  "split": "train",
-  "novelty": "Unique navigate/hub_book_hub exercise using add_generative_widget, create_widget, get_widget_schema, list_available_widgets, manage_dashboard, manage_navigation_bar, navigate_workspace with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tab, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on portfolio; artifact widgets:Bench Portfolio/sector_exposure@exposure; tabs:exposure,overview; generated:note@exposure:exposure,book hub."
+  }
 }

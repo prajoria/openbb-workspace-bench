@@ -1,18 +1,17 @@
 {
   "id": "chart_sync_live",
-  "title": "Ship, open, and configure the grouped Chart Sync Live app",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-grouping",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "grouping",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "grouping",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Build an equity-research analyst a dependable earnings and estimates workspace. The workspace must cover EPS beat and miss history. The workspace must cover preview note for the earnings call. The workspace must cover street estimate revisions by quarter. Analysts need to inspect quarter, EPS estimate, revenue estimate billions. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Chart Sync Live', 'linked earnings selection', 'Earnings Prep Data', 'MSFT', 'ticker'. Decide how best to organize the experience and preserve unrelated work.",
+  "business_terms": [
+    "Chart Sync Live",
+    "linked earnings selection",
+    "Earnings Prep Data",
+    "MSFT",
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -341,24 +340,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "grouping",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Chart Sync Live",
-    "linked earnings selection",
-    "Earnings Prep Data",
-    "MSFT",
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique grouping/chart_sync_live building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, capability_connection, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_earnings-chart:chart-like:earnings_chart_value,capability_2_earnings-note:markdown:earnings_note_value; generated:note@*:Chart Sync Live,linked earnings selection."
+    "max_turns": 14
+  }
 }

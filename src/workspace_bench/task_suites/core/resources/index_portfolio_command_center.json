@@ -1,14 +1,9 @@
 {
   "id": "index_portfolio_command_center",
-  "title": "Read App Index For Portfolio Command Center",
-  "capability": "dashboard-construction",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-resources",
-    "resources",
-    "apps"
-  ],
+  "category": "dashboard",
+  "family": "resources",
+  "difficulty": "easy",
+  "split": "validation",
   "prompt": "After calling read_workspace_resource with uri openbb://workspace/app-builder/index, add a note naming the Portfolio Command Center template id portfolio-command-center.",
   "fixtures": {
     "backends": [
@@ -104,15 +99,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "resources",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique resources/index_portfolio_command_center exercise using add_generative_widget, get_workspace_snapshot, read_workspace_resource with checks layout_out_of_grid, missing_generated_widget, missing_resource_read, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact resource:openbb://workspace/app-builder/index; widgets:Bench Stark Enterprise/vendor_dataset_monitor_quality_row_count_drift@; generated:note@*:Portfolio Command Center,portfolio-command-center."
+  }
 }

@@ -1,14 +1,9 @@
 {
   "id": "equity_research_workbench",
-  "title": "Instantiate Equity Research Workbench (Checked)",
-  "capability": "app-instantiation",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-apps",
-    "apps",
-    "stark"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "easy",
+  "split": "validation",
   "prompt": "From the Bench Stark Enterprise backend, instantiate the Equity Research Workbench app as a new dashboard named Coverage Workbench.",
   "fixtures": {
     "backends": [
@@ -74,15 +69,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "validation",
-  "novelty": "Unique apps/equity_research_workbench exercise using manage_apps, manage_backends with checks dashboard_name, layout_out_of_grid, missing_tab, missing_widget, too_many_invalid_calls on stark-enterprise; artifact apps:Equity Research Workbench; widgets:Bench Stark Enterprise/equity_research_workbench_company_company_tear_sheet@company,Bench Stark Enterprise/equity_research_workbench_coverage_coverage_universe@coverage; tabs:company,coverage,overview."
+  }
 }

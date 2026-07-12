@@ -279,6 +279,8 @@ class FixtureBackend:
         if widget_id in self.widgets:
             if self.slug == "stark-enterprise" and "data" in self.widgets[widget_id]:
                 return _stark_widget_data(self.widgets[widget_id]["data"], data_args)
+            if self.slug == "daloopa" and "data" in self.widgets[widget_id]:
+                return _daloopa_widget_data(self.widgets[widget_id]["data"], data_args)
             return _generic_widget_data(widget_id, self.widgets[widget_id], data_args)
         raise KeyError(f"Unknown widget data endpoint for {widget_id!r}")
 
@@ -503,7 +505,7 @@ def build_macro_backend(url: str = "http://127.0.0.1:9102") -> FixtureBackend:
 
 
 def build_portfolio_backend(url: str = "http://127.0.0.1:9103") -> FixtureBackend:
-    widgets = {
+    widgets: dict[str, JsonDict] = {
         "holdings_table": {
             "name": "Holdings",
             "description": "Portfolio holdings with market value, sector, weight, and daily return.",
@@ -529,7 +531,17 @@ def build_portfolio_backend(url: str = "http://127.0.0.1:9103") -> FixtureBacken
             "endpoint": "/sector-exposure",
             "category": "Portfolio",
             "gridData": {"w": 16, "h": 10},
-            "params": [],
+            "params": [
+                {
+                    "paramName": "sector",
+                    "type": "text",
+                    "value": "Technology",
+                    "label": "Sector",
+                    "options": [
+                        {"label": sector, "value": sector} for sector in SECTORS
+                    ],
+                }
+            ],
             "data": _table_columns(
                 [
                     ("sector", "Sector", "text"),
@@ -545,7 +557,17 @@ def build_portfolio_backend(url: str = "http://127.0.0.1:9103") -> FixtureBacken
             "endpoint": "/risk-metrics",
             "category": "Portfolio",
             "gridData": {"w": 16, "h": 8},
-            "params": [],
+            "params": [
+                {
+                    "paramName": "sector",
+                    "type": "text",
+                    "value": "Technology",
+                    "label": "Sector",
+                    "options": [
+                        {"label": sector, "value": sector} for sector in SECTORS
+                    ],
+                }
+            ],
         },
     }
     apps: list[JsonDict] = []
@@ -569,6 +591,26 @@ def build_stark_enterprise_backend(
     )
 
 
+def build_daloopa_backend(url: str = "http://127.0.0.1:9105") -> FixtureBackend:
+    """Build the deterministic Daloopa fundamentals fixture backend.
+
+    The catalog mirrors the data surface consumed by the Daloopa Claude
+    plugin skills (github.com/daloopa/daloopa-plugin-claude) and is authored
+    by scripts/generators/generate_daloopa_data.py.
+    """
+
+    data_path = resources.files("workspace_bench.workspace.data") / "daloopa.json"
+    with data_path.open("r", encoding="utf-8") as handle:
+        payload = json.load(handle)
+    return FixtureBackend(
+        "daloopa",
+        "Bench Daloopa",
+        payload["widgets"],
+        payload["apps"],
+        url,
+    )
+
+
 def _generic_widget_data(
     widget_id: str, definition: JsonDict, data_args: JsonDict
 ) -> Any:
@@ -583,15 +625,14 @@ def _generic_widget_data(
         if param.get("paramName")
     }
     value = round((sum(ord(char) for char in widget_id) % 9000) / 100, 2)
+    # Real backends return business rows only — never the widget id or other
+    # envelope metadata (verified against the live Workspace MCP bridge).
     base = {
-        "widget_id": widget_id,
-        "widget_name": name,
         "category": category,
         "status": params.get("status", "Open"),
         "period": params.get("period", "YTD"),
         "fund": params.get("fund", "Flagship Long/Short"),
         "ticker": params.get("ticker", params.get("symbol", "AAPL")),
-        "workflow": widget_id.rsplit("_", 1)[0],
         "value": value,
     }
     if widget_type == "markdown":
@@ -646,6 +687,36 @@ def _stark_widget_data(payload: Any, data_args: JsonDict) -> Any:
     return filtered or data
 
 
+# Daloopa param names mapped to the baked row fields they filter on.
+_DALOOPA_FILTER_FIELDS = {
+    "ticker": "ticker",
+    "period": "calendar_period",
+    "doc_type": "doc_type",
+    "category": "category",
+}
+
+
+def _daloopa_widget_data(payload: Any, data_args: JsonDict) -> Any:
+    data = copy.deepcopy(payload)
+    if not isinstance(data, list) or not all(isinstance(row, dict) for row in data):
+        return data
+
+    filters = {
+        field: data_args[param]
+        for param, field in _DALOOPA_FILTER_FIELDS.items()
+        if param in data_args and any(field in row for row in data)
+    }
+    if not filters:
+        return data
+
+    filtered = [
+        row
+        for row in data
+        if all(str(row.get(field)) == str(value) for field, value in filters.items())
+    ]
+    return filtered or data
+
+
 def default_fixture_backends() -> dict[str, FixtureBackend]:
     """Return all built-in fixture backends keyed by slug and display name."""
 
@@ -654,6 +725,7 @@ def default_fixture_backends() -> dict[str, FixtureBackend]:
         build_macro_backend(),
         build_portfolio_backend(),
         build_stark_enterprise_backend(),
+        build_daloopa_backend(),
     ]
     result: dict[str, FixtureBackend] = {}
     for backend in backends:

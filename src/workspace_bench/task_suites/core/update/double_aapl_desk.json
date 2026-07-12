@@ -1,16 +1,10 @@
 {
   "id": "double_aapl_desk",
-  "title": "Double Repair: Aapl Desk",
-  "capability": "workspace-repair",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-update",
-    "repair",
-    "update-widget",
-    "combo"
-  ],
-  "prompt": "This AAPL desk dashboard needs two repairs: the price widget should show AAPL, not MSFT, and the news widget should show 5 articles, not only 1. Repair both existing widgets and add a note mentioning AAPL and the word repaired.",
+  "category": "repair",
+  "family": "update",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "This AAPL desk dashboard needs two repairs: the price widget should show AAPL, not MSFT, and the news widget should show 5 articles, not only 1. Repair both existing widgets and add a HTML card mentioning AAPL and the word repaired.",
   "fixtures": {
     "backends": [
       {
@@ -105,7 +99,7 @@
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "AAPL",
           "repaired"
@@ -146,21 +140,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Repair Note",
-        "data": "Repaired: AAPL, repaired."
+        "data": "<section>Repaired: AAPL, repaired.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "update",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique update/double_aapl_desk exercise using add_generative_widget, get_workspace_snapshot, update_widget with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on equities; artifact widgets:Bench Equities/latest_news@*,Bench Equities/price_performance@*; generated:note@*:AAPL,repaired."
+  }
 }

@@ -1,18 +1,15 @@
 {
   "id": "earnings_param_review",
-  "title": "Assemble the Earnings Param Review app with shared parameters",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-params",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "params",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "params",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Create a usable earnings and estimates workflow for an equity-research analyst. The workspace must cover street estimate revisions by quarter. The workspace must cover EPS beat and miss history. Analysts need to inspect quarter, EPS estimate, revenue estimate billions. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. The source contract must retain `symbol` and `quarter`; decide the remaining implementation and preserve unrelated workspace state.",
+  "business_terms": [
+    "symbol",
+    "quarter"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -260,21 +257,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "params",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "symbol",
-    "quarter"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique params/earnings_param_review building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_earnings-chart:chart-like:earnings_chart_value,capability_2_estimate-revisions:table-like:eps_estimate,quarter,revenue_estimate_b."
+    "max_turns": 14
+  }
 }

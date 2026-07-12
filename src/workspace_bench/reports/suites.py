@@ -76,7 +76,7 @@ def summarize(
         if isinstance(issue, dict)
     )
 
-    def legacy_buckets(items: dict[str, dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    def bucket_rates(items: dict[str, dict[str, Any]]) -> dict[str, dict[str, Any]]:
         return {
             key: {
                 "passed": value["strict_passed"],
@@ -114,8 +114,8 @@ def summarize(
             if runtime_rows
             else None
         ),
-        "by_difficulty": legacy_buckets(slices["by_difficulty"]),
-        "by_family": legacy_buckets(slices["by_family"]),
+        "by_difficulty": bucket_rates(slices["by_difficulty"]),
+        "by_family": bucket_rates(slices["by_family"]),
         "issue_codes": dict(issues.most_common()),
     }
 

@@ -1,17 +1,14 @@
 {
   "id": "vendor_sla_table_app",
-  "title": "Ship Vendor SLA Status as the Vendor Filter Board app",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "operations",
-  "tags": [
-    "family-params",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "params"
-  ],
+  "category": "platform",
+  "family": "params",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "Create a usable vendor service levels workflow for a vendor-operations manager. The workspace must cover vendor SLA state with breach flags. Analysts need to inspect vendor, status, latency milliseconds, breach. Leave the complete working workspace open for review. The source contract must retain `status` and `vendor`; decide the remaining implementation and preserve unrelated workspace state.",
+  "business_terms": [
+    "status",
+    "vendor"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -214,21 +211,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "params",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "medium",
-  "business_terms": [
-    "status",
-    "vendor"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique params/vendor_sla_table_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Vendor SLA Data; artifact capabilities:capability_1_vendor-sla-table:table-like:breach,latency_ms,status,vendor."
+    "max_turns": 13
+  }
 }

@@ -1,15 +1,10 @@
 {
   "id": "skill_build_finance_comps",
-  "title": "Build From Skill Resource finance-comps",
-  "capability": "dashboard-construction",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-resources",
-    "resources",
-    "widget-creation"
-  ],
-  "prompt": "Read resource openbb://workspace/skills/finance-comps, add Bench Portfolio/sector_exposure, and add a note that mentions peer set.",
+  "category": "dashboard",
+  "family": "resources",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "Read resource openbb://workspace/specs/widget-parameters, add Bench Portfolio/sector_exposure, and add a note that mentions peer set.",
   "fixtures": {
     "backends": [
       {
@@ -40,9 +35,9 @@
   "success": {
     "required_resource_reads": [
       {
-        "uri": "openbb://workspace/skills/finance-comps",
+        "uri": "openbb://workspace/specs/widget-parameters",
         "data_contains": [
-          "peer set"
+          "Widget Parameters"
         ]
       }
     ],
@@ -84,7 +79,7 @@
     {
       "tool": "read_workspace_resource",
       "args": {
-        "uri": "openbb://workspace/skills/finance-comps"
+        "uri": "openbb://workspace/specs/widget-parameters"
       }
     },
     {
@@ -117,15 +112,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "resources",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 9
-  },
-  "split": "train",
-  "novelty": "Unique resources/skill_build_finance_comps exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, read_workspace_resource with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_resource_read, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on portfolio; artifact resource:openbb://workspace/skills/finance-comps; widgets:Bench Portfolio/sector_exposure@*; generated:note@*:peer set."
+  }
 }

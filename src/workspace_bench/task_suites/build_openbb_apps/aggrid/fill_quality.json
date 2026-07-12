@@ -1,18 +1,15 @@
 {
   "id": "fill_quality",
-  "title": "Compose the Fill Quality table from its rows and requirements",
-  "workflow": "execution-exception-review",
-  "subdomain": "execution",
-  "tags": [
-    "family-aggrid",
-    "cell2",
-    "build-openbb-apps",
-    "widgets-json",
-    "aggrid",
-    "derivation",
-    "composed"
-  ],
+  "category": "platform",
+  "family": "aggrid",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Build a working Workspace experience for an execution analyst covering orders and venue quality. The workspace must cover fill quality by venue. Analysts need to inspect venue, fills, slippage percentage, as of. Keep these source-contract anchors: `venue` and `fills`. Choose the rest of the architecture and avoid unrelated changes.",
+  "business_terms": [
+    "venue",
+    "fills"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -186,21 +183,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "aggrid",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "venue",
-    "fills"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique aggrid/fill_quality building exercise using create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks capability, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_fill-quality:table-like:as_of,fills,slippage_pct,venue."
+    "max_turns": 13
+  }
 }

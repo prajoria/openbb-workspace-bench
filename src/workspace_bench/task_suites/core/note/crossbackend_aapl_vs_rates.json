@@ -1,15 +1,9 @@
 {
   "id": "crossbackend_aapl_vs_rates",
-  "title": "Cross-Backend Note: Aapl Vs Rates",
-  "capability": "workspace-inspection",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-note",
-    "note",
-    "read-only",
-    "cross-backend"
-  ],
+  "category": "read",
+  "family": "note",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Add a note with the latest close and the latest 10Y value from the data after reviewing the AAPL price and 10Y Treasury widgets.",
   "fixtures": {
     "backends": [
@@ -137,15 +131,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "read",
-  "family": "note",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique note/crossbackend_aapl_vs_rates exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls on equities, macro; artifact widgets:Bench Equities/price_performance@*,Bench Macro/macro_timeseries@*; generated:note@*:AAPL,196.10."
+  }
 }

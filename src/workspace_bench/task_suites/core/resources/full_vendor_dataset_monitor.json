@@ -1,16 +1,10 @@
 {
   "id": "full_vendor_dataset_monitor",
-  "title": "Index-Guided App Extension: Vendor & Dataset Monitor",
-  "capability": "dashboard-construction",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "data-platform",
-  "tags": [
-    "family-resources",
-    "resources",
-    "apps",
-    "widget-creation"
-  ],
-  "prompt": "Read the app-builder index resource at openbb://workspace/app-builder/index, instantiate vendor-dataset-monitor as Vendor Resource Command, navigate to incidents, add widget vendor_dataset_monitor_incidents_incident_log, and add a note mentioning incident log and resource.",
+  "category": "dashboard",
+  "family": "resources",
+  "difficulty": "hard",
+  "split": "test",
+  "prompt": "Read the app-builder index resource at openbb://workspace/app-builder/index, instantiate vendor-dataset-monitor as Vendor Resource Command, navigate to incidents, add widget vendor_dataset_monitor_incidents_incident_log, and add a HTML card mentioning incident log and resource.",
   "fixtures": {
     "backends": [
       {
@@ -47,7 +41,7 @@
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "incident log",
           "resource"
@@ -114,21 +108,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Resource Extension Note",
-        "data": "incident log added from resource guidance."
+        "data": "<section>incident log added from resource guidance.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "resources",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 9
-  },
-  "split": "test",
-  "novelty": "Unique resources/full_vendor_dataset_monitor exercise using add_generative_widget, create_widget, get_widget_schema, manage_apps, manage_backends, navigate_workspace, read_workspace_resource with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_resource_read, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact resource:openbb://workspace/app-builder/index; apps:vendor-dataset-monitor; widgets:Bench Stark Enterprise/vendor_dataset_monitor_incidents_incident_log@incidents; generated:note@incidents:incident log,resource."
+  }
 }

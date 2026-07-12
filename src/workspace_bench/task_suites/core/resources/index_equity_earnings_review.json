@@ -1,14 +1,9 @@
 {
   "id": "index_equity_earnings_review",
-  "title": "Read App Index For Equity Earnings Review",
-  "capability": "dashboard-construction",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-resources",
-    "resources",
-    "apps"
-  ],
+  "category": "dashboard",
+  "family": "resources",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "After calling read_workspace_resource with uri openbb://workspace/app-builder/index, add a note naming the Equity Earnings Review template id equity-earnings-review.",
   "fixtures": {
     "backends": [
@@ -80,15 +75,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "resources",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique resources/index_equity_earnings_review exercise using add_generative_widget, get_workspace_snapshot, read_workspace_resource with checks layout_out_of_grid, missing_generated_widget, missing_resource_read, too_many_invalid_calls on equities; artifact resource:openbb://workspace/app-builder/index; generated:note@*:Equity Earnings Review,equity-earnings-review."
+  }
 }

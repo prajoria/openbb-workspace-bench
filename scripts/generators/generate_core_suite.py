@@ -44,10 +44,11 @@ from _assembly import (
     TaskAssembler,
     build_matrix,
     difficulty_for,
+    diversify_generated_widget_proof,
+    slim_task_payload,
     snap,
     uniform_four_way_pattern,
 )
-from workspace_bench.core.models import TASK_SCHEMA_VERSION
 from workspace_bench.core.suite_checks import task_payload_digest
 from workspace_bench.workspace.fixtures import get_fixture_backend
 
@@ -79,7 +80,7 @@ PROMPT_POOL_SIZES: dict[str, int] = {}
 # Curated public identities for tasks whose authored ids contain generator
 # coordinates, repeated stems, or overly long enterprise widget paths. Keep
 # this explicit: already-good ids must remain byte-identical, while future
-# audits can point directly at the legacy construction that needs cleanup.
+# audits can point directly at the generated construction that needs cleanup.
 PUBLIC_ID_RENAMES = {
     "add_widget_earnings_estimates_monitor_post_earnings_post_earnings_checklist_3":
         "register_backend_and_add_post_earnings_checklist",
@@ -112,7 +113,7 @@ PUBLIC_ID_RENAMES = {
     "performance_18": "remove_price_performance",
     "then_fix_news_aapl_12": "deduplicate_and_fix_latest_news",
     "then_fix_performance_nvda_18": "deduplicate_and_fix_price_performance",
-    "then_fix_status_escalated_48": "deduplicate_and_fix_vendor_sla_status",
+    "then_fix_status_mtd_48": "deduplicate_and_fix_vendor_sla_status",
     "then_fix_timeseries_dgs2_17": "deduplicate_and_fix_macro_timeseries",
     "timeseries_17": "remove_macro_timeseries",
     "deduplicate_latest_news_0": "find_duplicate_latest_news",
@@ -156,7 +157,7 @@ PUBLIC_ID_RENAMES = {
         "options_constrained_pair_for_macro_timeseries",
     "companion_symbol_price_performance_0":
         "options_constrained_pair_for_price_performance",
-    "place_sector_compliance_surveillance_hub_audit_access_and_export_logs_11":
+    "place_severity_compliance_surveillance_hub_audit_access_and_export_logs_11":
         "options_constrained_placement_for_access_and_export_logs",
     "place_sector_sector_exposure_10":
         "options_constrained_placement_for_sector_exposure",
@@ -164,7 +165,7 @@ PUBLIC_ID_RENAMES = {
         "options_constrained_placement_for_macro_timeseries",
     "place_symbol_price_performance_8":
         "options_constrained_placement_for_price_performance",
-    "schema_sector_client_360_portfolio_view_exposure_summary_7":
+    "schema_client_client_360_portfolio_view_exposure_summary_7":
         "discover_schema_then_options_for_exposure_summary",
     "schema_sector_sector_exposure_6":
         "discover_schema_then_options_for_sector_exposure",
@@ -172,8 +173,8 @@ PUBLIC_ID_RENAMES = {
         "discover_schema_then_options_for_macro_timeseries",
     "schema_symbol_price_performance_4":
         "discover_schema_then_options_for_price_performance",
-    "sector_client_360_meeting_prep_relationship_metrics_3":
-        "use_sector_options_for_relationship_metrics",
+    "client_client_360_meeting_prep_relationship_metrics_3":
+        "use_client_options_for_relationship_metrics",
     "sector_sector_exposure_2": "use_sector_options_for_sector_exposure",
     "series_macro_timeseries_1": "use_series_options_for_macro_timeseries",
     "symbol_price_performance_0": "use_symbol_options_for_price_performance",
@@ -196,7 +197,7 @@ PUBLIC_ID_RENAMES = {
     "pick_vendor_factset_48": "update_only_the_factset_vendor_sla_status",
     "series_dgs10_17": "set_macro_timeseries_series_to_dgs10",
     "series_fedfunds_17": "update_macro_timeseries_cpiaucsl_to_fedfunds",
-    "status_escalated_44": "update_rejected_orders_open_to_escalated",
+    "desk_credit_44": "update_rejected_orders_desk_to_credit",
     "symbol_aapl_18": "set_price_performance_symbol_to_aapl",
     "symbol_msft_12": "set_latest_news_symbol_to_msft",
     "symbol_nvda_17": "update_estimate_history_aapl_to_nvda",
@@ -451,13 +452,13 @@ def _finalize_core_task(task: dict, family: str, level: str, cell_index: int) ->
     _ensure_widget_discovery(task)
     if family == "backends":
         _attach_backend_runtime_checks(task)
+    diversify_generated_widget_proof(task)
 
 
 add = TaskAssembler(
     scenarios=SCENARIOS,
     cell_counts=CELL_COUNTS,
     source="workspace-bench-gen",
-    schema_version=TASK_SCHEMA_VERSION,
     rung_slack=RUNG_SLACK,
     set_category=_set_core_category,
     normalize_identity=_normalize_core_identity,
@@ -819,7 +820,7 @@ UPDATE_T1 = [
     (EQ, "fundamental_metrics", {"symbol": "MSFT"}, "symbol", "NVDA"),
     (MACRO, "macro_timeseries", {"series": "CPIAUCSL"}, "series", "FEDFUNDS"),
     (STK, "execution_desk_exceptions_rejected_orders",
-     {"desk": "US Equities", "status": "Open"}, "status", "Escalated"),
+     {"desk": "US Equity", "period": "YTD"}, "desk", "Credit"),
 ]
 for origin, widget_id, seed_args, param, new_value in UPDATE_T1:
     workflow, sub = wf(origin, widget_id)
@@ -870,7 +871,7 @@ UPDATE_T2 = [
     (MACRO, "macro_timeseries", "series", "DGS10", "DGS2", "FEDFUNDS"),
     (EQ, "latest_news", "symbol", "AAPL", "NVDA", "MSFT"),
     (STK, "vendor_dataset_monitor_slas_vendor_sla_status", "vendor",
-     "Bloomberg", "FactSet", "Refinitiv"),
+     "Bloomberg", "FactSet", "S&P Global"),
 ]
 for origin, widget_id, param, keep_value, target_value, new_value in UPDATE_T2:
     workflow, sub = wf(origin, widget_id)
@@ -927,9 +928,9 @@ UPDATE_T3 = [
      "This AAPL desk dashboard mistakenly shows MSFT news."),
     ("series_fedfunds_cpi", MACRO, "macro_timeseries", "series", "FEDFUNDS", "CPIAUCSL",
      "This inflation dashboard mistakenly shows the FEDFUNDS series."),
-    ("risk_fund", STK, "risk_exposure_monitor_dashboard_risk_snapshot", "fund",
-     "Global Macro", "Flagship Long/Short",
-     "This Flagship Long/Short risk dashboard has its snapshot configured for Global Macro."),
+    ("risk_portfolio", STK, "risk_exposure_monitor_dashboard_risk_snapshot", "portfolio",
+     "Macro Multi-Asset", "Long/Short Equity",
+     "This Long/Short Equity risk dashboard has its snapshot configured for Macro Multi-Asset."),
 ]
 for slug, origin, widget_id, param, old_value, new_value, context in UPDATE_T3:
     workflow, sub = wf(origin, widget_id)
@@ -1031,20 +1032,20 @@ UPDATE_T4: list[
      ]),
     ("stark_ops", STK,
      [("vendor_dataset_monitor_slas_vendor_sla_status",
-       {"vendor": "FactSet", "status": "Open"}, {"status": "Escalated"}),
+       {"vendor": "FactSet", "status": "Open"}, {"status": "In Review"}),
       ("portfolio_command_center_overview_portfolio_snapshot",
        {"fund": "Flagship Long/Short", "period": "YTD"}, {"period": "MTD"})],
-     ["Escalated", "MTD", "repaired"],
+     ["In Review", "MTD", "repaired"],
      [
-         "Two fixes on this ops dashboard: the Vendor SLA Status widget should show Escalated "
+         "Two fixes on this ops dashboard: the Vendor SLA Status widget should show In Review "
          "items (not Open), and the Portfolio Snapshot should show MTD (not YTD). Repair both "
-         "existing widgets and add a note mentioning Escalated, MTD, and the word repaired.",
-         "On this ops dashboard, repair the Vendor SLA Status widget to show Escalated items "
+         "existing widgets and add a note mentioning In Review, MTD, and the word repaired.",
+         "On this ops dashboard, repair the Vendor SLA Status widget to show In Review items "
          "(not Open) and the Portfolio Snapshot to show MTD (not YTD). Repair both existing "
-         "widgets and add a note mentioning Escalated, MTD, and the word repaired.",
+         "widgets and add a note mentioning In Review, MTD, and the word repaired.",
          "The ops dashboard has two wrong settings: Vendor SLA Status is Open but should be "
-         "Escalated, and Portfolio Snapshot is YTD but should be MTD. Repair both existing "
-         "widgets and add a note mentioning Escalated, MTD, and the word repaired.",
+         "In Review, and Portfolio Snapshot is YTD but should be MTD. Repair both existing "
+         "widgets and add a note mentioning In Review, MTD, and the word repaired.",
      ]),
 ]
 for slug, origin, updates, note_facts, prompt_variants in UPDATE_T4:
@@ -1229,7 +1230,7 @@ DELETE_T3 = [
     (EQ, "fundamental_metrics", {"symbol": "NVDA"}),
     (EQ, "estimate_history", {"symbol": "AAPL"}),
     (PF, "sector_exposure", {}),
-    (STK, "execution_desk_blotter_live_orders", {"status": "Open"}),
+    (STK, "execution_desk_blotter_live_orders", {"desk": "US Equity"}),
 ]
 for origin, widget_id, data_args in DELETE_T3:
     workflow, sub = wf(origin, widget_id)
@@ -1278,7 +1279,7 @@ DELETE_T4 = [
     (EQ, "price_performance", "symbol", "AAPL", "NVDA"),
     (EQ, "latest_news", "symbol", "NVDA", "AAPL"),
     (MACRO, "macro_timeseries", "series", "DGS10", "DGS2"),
-    (STK, "vendor_dataset_monitor_slas_vendor_sla_status", "status", "Open", "Escalated"),
+    (STK, "vendor_dataset_monitor_slas_vendor_sla_status", "period", "YTD", "MTD"),
 ]
 for origin, widget_id, param, dup_value, new_value in DELETE_T4:
     workflow, sub = wf(origin, widget_id)
@@ -2136,15 +2137,20 @@ def read_task(level: str, slug: str, widgets: list[str], facts_mode: str) -> Non
     result_checks = []
     value_facts: dict[str, tuple[str, str]] = {}
     for wid in widgets:
+        # Result checks grade returned data content only: the real backend
+        # never echoes the widget id in its data rows (live-parity finding),
+        # and the trace-call check above already pins which widget was read.
+        field, value = stark_fact(wid)
         if facts_mode == "id":
             note_facts.append(wid)
-            result_checks.append({"tool": "get_widget_data", "data_contains": [wid]})
+            result_checks.append(
+                {"tool": "get_widget_data", "data_contains": [field]}
+            )
         else:
-            field, value = stark_fact(wid)
             value_facts[wid] = (field, value)
             note_facts += [wid, field, value]
             result_checks.append(
-                {"tool": "get_widget_data", "data_contains": [wid, field, value]}
+                {"tool": "get_widget_data", "data_contains": [field, value]}
             )
     if facts_mode == "id":
         note_facts.append("data")
@@ -2589,7 +2595,8 @@ for slug, old_dash, new_dash, workflow, sub, fixture in NAV_T0:
             "trace_checks": {"max_invalid_tool_calls": 0},
         },
         "oracle_tool_calls": [
-            {"tool": "manage_dashboard", "args": {"operation": "update", "name": new_dash}}],
+            {"tool": "manage_dashboard",
+             "args": {"operation": "update", "dashboard_id": "dash_001", "name": new_dash}}],
     })
 
 NAV_T1 = [
@@ -2622,7 +2629,9 @@ for slug, old_dash, new_dash, old_tab, new_tab, workflow, sub, fixture in NAV_T1
                            "manage_navigation_bar", "navigate_workspace"],
         "success": {
             "required_dashboard_name_contains": new_dash,
-            "required_tabs": [slugify(new_tab)],
+            # Tab ids stay stable on rename (live-verified frontend behavior),
+            # so the rename outcome is graded on the tab's display name.
+            "required_tab_names": [new_tab],
             "required_tool_calls": [
                 {"tool": "manage_dashboard",
                  "args_contains": {"operation": "update", "name": new_dash}},
@@ -2631,7 +2640,8 @@ for slug, old_dash, new_dash, old_tab, new_tab, workflow, sub, fixture in NAV_T1
             "trace_checks": {"max_invalid_tool_calls": 0},
         },
         "oracle_tool_calls": [
-            {"tool": "manage_dashboard", "args": {"operation": "update", "name": new_dash}},
+            {"tool": "manage_dashboard",
+             "args": {"operation": "update", "dashboard_id": "dash_001", "name": new_dash}},
             {"tool": "manage_navigation_bar",
              "args": {"operation": "rename_tabs", "rename_map": {"overview": new_tab}}}],
     })
@@ -2680,7 +2690,8 @@ for slug, old_dash, new_dash, new_tab, workflow, sub, note_facts in NAV_T2:
             "trace_checks": {"max_invalid_tool_calls": 0},
         },
         "oracle_tool_calls": [
-            {"tool": "manage_dashboard", "args": {"operation": "update", "name": new_dash}},
+            {"tool": "manage_dashboard",
+             "args": {"operation": "update", "dashboard_id": "dash_001", "name": new_dash}},
             {"tool": "manage_navigation_bar",
              "args": {"operation": "add_tabs", "tabs": [{"name": new_tab}]}},
             {"tool": "navigate_workspace", "args": {"operation": "tab", "tab_id": tab_slug}},
@@ -2808,7 +2819,8 @@ for slug, origin, fixture, new_dash, tab_name, new_widget, new_args, note_facts,
             "layout": GRID, "trace_checks": TRACE_FULL,
         },
         "oracle_tool_calls": [
-            {"tool": "manage_dashboard", "args": {"operation": "update", "name": new_dash}},
+            {"tool": "manage_dashboard",
+             "args": {"operation": "update", "dashboard_id": "dash_001", "name": new_dash}},
             {"tool": "manage_navigation_bar",
              "args": {"operation": "add_tabs", "tabs": [{"name": tab_name}]}},
             {"tool": "navigate_workspace", "args": {"operation": "tab", "tab_id": tab_slug}},
@@ -3378,6 +3390,22 @@ for slug, workflow, sub, tasks, widget_id, note_facts in DELEGATE_T4:
 STARK_WIDGET_IDS = sorted(STARK["widgets"])
 
 
+def stark_option_pick(widget_id: str) -> tuple[str, str]:
+    """First declared non-period option parameter and its first non-default value."""
+    for param in STARK["widgets"][widget_id].get("params", []):
+        name = str(param.get("paramName", ""))
+        options = [
+            option.get("value") if isinstance(option, dict) else option
+            for option in (param.get("options") or [])
+        ]
+        if name and name != "period" and options:
+            default = param.get("value")
+            for value in options:
+                if value != default:
+                    return name, str(value)
+    raise KeyError(f"no option parameter declared on {widget_id!r}")
+
+
 def sw(index: int) -> str:
     return STARK_WIDGET_IDS[index % len(STARK_WIDGET_IDS)]
 
@@ -3394,7 +3422,7 @@ def params_case(index: int) -> tuple[str, str, str, str]:
         (EQ, "price_performance", "symbol", "AAPL"),
         (MACRO, "macro_timeseries", "series", "DGS10"),
         (PF, "sector_exposure", "sector", "Technology"),
-        (STK, sw(20 + index), "sector", "Consumer Staples"),
+        (STK, sw(20 + index), *stark_option_pick(sw(20 + index))),
     ]
     return cases[index % len(cases)]
 
@@ -3550,7 +3578,7 @@ PARAM_T3 = [
     (EQ, "price_performance", "symbol", "AAPL", "latest_news", {"symbol": "AAPL", "limit": 5}),
     (MACRO, "macro_timeseries", "series", "DGS2", "yield_curve", {}),
     (PF, "sector_exposure", "sector", "Technology", "risk_metrics", {}),
-    (STK, sw(44), "sector", "Communication Services", sw(45), {}),
+    (STK, sw(44), "sector", "Technology", sw(45), {}),
 ]
 for idx, (origin, widget_id, param, value, companion, companion_args) in enumerate(PARAM_T3):
     workflow, sub = wf(origin, widget_id)
@@ -3603,9 +3631,9 @@ PARAM_T4: list[tuple[str, list[tuple[str, str, str, str]], list[str]]] = [
     ("portfolio_sector", [(PF, "sector_exposure", "sector", "Technology"),
                           (MACRO, "macro_timeseries", "series", "CPIAUCSL")],
      ["Technology", "CPIAUCSL"]),
-    ("stark_sector", [(STK, sw(60), "sector", "Consumer Staples"),
+    ("stark_crypto", [(STK, sw(60), "crypto_asset", "ETH"),
                       (PF, "risk_metrics", "sector", "Consumer Staples")],
-     ["Consumer Staples", "options"]),
+     ["ETH", "options"]),
     ("nvda_rates", [(EQ, "estimate_history", "symbol", "NVDA"),
                     (MACRO, "macro_timeseries", "series", "FEDFUNDS")],
      ["NVDA", "FEDFUNDS"]),
@@ -4041,13 +4069,16 @@ for fixture, template_id, dash_name in RESOURCE_T2:
     })
 
 RESOURCE_T3 = [
-    ("finance-earnings-prep", EQ, "estimate_history", {"symbol": "AAPL"}, "surprise drivers"),
-    ("finance-tearsheet", EQ, "fundamental_metrics", {"symbol": "MSFT"}, "valuation"),
-    ("finance-comps", PF, "sector_exposure", {}, "peer set"),
-    ("finance-guidance-tracker", STK, sw(132), {}, "evidence gaps"),
+    ("finance-earnings-prep", "openbb://workspace/specs/widgets-json", "widgets.json",
+     EQ, "estimate_history", {"symbol": "AAPL"}, "surprise drivers"),
+    ("finance-tearsheet", "openbb://workspace/specs/widget-types", "table",
+     EQ, "fundamental_metrics", {"symbol": "MSFT"}, "valuation"),
+    ("finance-comps", "openbb://workspace/specs/widget-parameters", "Widget Parameters",
+     PF, "sector_exposure", {}, "peer set"),
+    ("finance-guidance-tracker", "openbb://workspace/guides/build-an-app", "Build an App",
+     STK, sw(132), {}, "evidence gaps"),
 ]
-for slug, origin, widget_id, data_args, fact in RESOURCE_T3:
-    uri = f"openbb://workspace/skills/{slug}"
+for slug, uri, resource_fact, origin, widget_id, data_args, fact in RESOURCE_T3:
     workflow, sub = wf(origin, widget_id)
     target_widget = widget_ref(origin, widget_id, data_args)
     add("resources", "r3", {
@@ -4069,7 +4100,9 @@ for slug, origin, widget_id, data_args, fact in RESOURCE_T3:
                            "list_available_widgets", "get_widget_schema", "create_widget",
                            "add_generative_widget"],
         "success": {
-            "required_resource_reads": [{"uri": uri, "data_contains": [fact]}],
+            "required_resource_reads": [
+                {"uri": uri, "data_contains": [resource_fact]}
+            ],
             "required_widgets": [
                 {"origin": origin, "widget_id": widget_id, "data_args": data_args}],
             "required_generated_widgets": [
@@ -4459,7 +4492,7 @@ INSPECT_T1 = [
     (EQ, "price_performance", "symbol", "MSFT", "AAPL"),
     (EQ, "estimate_history", "symbol", "AAPL", "NVDA"),
     (MACRO, "macro_timeseries", "series", "FEDFUNDS", "DGS10"),
-    (STK, sw(240), "sector", "Technology", "Consumer Staples"),
+    (STK, sw(240), "universe", "Liquid Crypto", "US Large Cap"),
 ]
 for idx, (origin, widget_id, param, wrong_value, right_value) in enumerate(INSPECT_T1):
     workflow, sub = wf(origin, widget_id)
@@ -4592,7 +4625,7 @@ INSPECT_T4 = [
     (EQ, "price_performance", "symbol", "MSFT", "AAPL", "latest_news", {"symbol": "AAPL", "limit": 5}),
     (MACRO, "macro_timeseries", "series", "DGS2", "DGS10", "yield_curve", {}),
     (PF, "sector_exposure", "sector", "Consumer Staples", "Technology", "risk_metrics", {}),
-    (STK, sw(270), "sector", "Consumer Staples", "Technology", sw(271), {}),
+    (STK, sw(270), "client", "Northstar Endowment", "Atlas Pension", sw(271), {}),
 ]
 for idx, (origin, wrong_widget, param, wrong_value, right_value, companion, companion_args) in enumerate(INSPECT_T4):
     workflow, sub = wf(origin, wrong_widget)
@@ -4700,6 +4733,8 @@ def check_type_counts(tasks: list[dict]) -> Counter:
             counts["dashboard_name"] += 1
         if success.get("required_tabs"):
             counts["missing_tab"] += 1
+        if success.get("required_tab_names"):
+            counts["missing_tab_name"] += 1
         for req in success.get("required_widgets", []):
             if int(req.get("min_count", 1)) > 0:
                 counts["missing_widget"] += 1
@@ -4735,6 +4770,7 @@ def check_type_counts(tasks: list[dict]) -> Counter:
 task_check_types = CheckTypePolicy(
     success_checks={
         "required_tabs": "missing_tab",
+        "required_tab_names": "missing_tab_name",
         "required_generated_widgets": "missing_generated_widget",
         "required_layouts": "layout_mismatch",
         "required_tool_calls": "missing_tool_call",
@@ -4851,8 +4887,17 @@ def quota_report(tasks: list[dict]) -> list[tuple[str, int | str, str, bool]]:
         ">= 120",
         len(widget_pairs) >= 120,
     ))
+    # Most check types must be exercised broadly; checks tied to one family's
+    # semantics carry their own explicit floor.
+    check_floors = {"missing_tab_name": 4}
     for check_name in sorted(checks):
-        report.append((f"grader check {check_name}", checks[check_name], ">= 10", checks[check_name] >= 10))
+        floor = check_floors.get(check_name, 10)
+        report.append((
+            f"grader check {check_name}",
+            checks[check_name],
+            f">= {floor}",
+            checks[check_name] >= floor,
+        ))
     report.append((
         "novelty fingerprints",
         unique_fingerprints,
@@ -4901,6 +4946,12 @@ def append_companion_widget(task: dict, origin: str, widget_id: str) -> None:
         "dashboard",
         {"name": "Coverage Board", "activate": True, "tabs": [{"id": "", "name": ""}]},
     )
+    if task.get("success", {}).get("required_layouts"):
+        # The real Workspace grid compacts vertical gaps and gives (0,0)
+        # precedence to the widget that held it first (live-verified), so an
+        # ambient companion always collides with exact layout requirements.
+        # Layout-graded tasks therefore carry no ambient companions.
+        return
     tabs = dashboard.setdefault("tabs", [{"id": "", "name": ""}])
     tab_id = str(tabs[0].get("id", ""))
     widgets = dashboard.setdefault("widgets", [])
@@ -5009,20 +5060,23 @@ def main() -> None:
     assert not failed, "quota failure(s): " + ", ".join(failed)
     prompt_sites, prompt_pool_sizes, distinct_prompts = prompt_pool_report(SCENARIOS)
 
+    shipped = []
     for task in SCENARIOS:
         task.pop("_family")
         task.pop("_rung")
+        payload = slim_task_payload(task)
+        shipped.append(payload)
         for directory in OUT_DIRS:
             family_dir = directory / task["family"]
             family_dir.mkdir(parents=True, exist_ok=True)
             (family_dir / f"{task['id']}.json").write_text(
-                json.dumps(task, indent=2) + "\n")
+                json.dumps(payload, indent=2) + "\n")
 
     manifest = {
         "suite_id": "core",
         "visibility": "public",
         "default_split": "train",
-        "content_sha256": task_payload_digest(SCENARIOS),
+        "content_sha256": task_payload_digest(shipped),
         "description": (
             "WorkspaceBench core collection: 15 MCP-surface families and 300 tasks. "
             "Splits are deterministic 150/75/75 train/validation/test; difficulty is "

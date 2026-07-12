@@ -1,14 +1,9 @@
 {
   "id": "rename_compliance_day",
-  "title": "Rename To Daily Compliance Control",
-  "capability": "workspace-navigation",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-navigate",
-    "rename",
-    "navigation"
-  ],
+  "category": "single-widget",
+  "family": "navigate",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "Set the active dashboard name to Daily Compliance Control.",
   "fixtures": {
     "backends": [
@@ -80,19 +75,12 @@
       "tool": "manage_dashboard",
       "args": {
         "operation": "update",
+        "dashboard_id": "dash_001",
         "name": "Daily Compliance Control"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "navigate",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 4
-  },
-  "split": "train",
-  "novelty": "Unique navigate/rename_compliance_day exercise using manage_dashboard with checks dashboard_name, layout_out_of_grid, missing_tool_call, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/workspace_data_control_center_ai_access_prompt_audit@overview."
+  }
 }

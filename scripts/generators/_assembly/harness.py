@@ -19,6 +19,90 @@ from typing import Any, Literal
 
 Task = dict[str, Any]
 CellCounts = dict[tuple[str, str], int]
+
+# The shipped task-file schema. Generators author richer intermediate payloads
+# (titles, taxonomy, novelty rationales) for their own asserts and reports;
+# only this projection is written to disk.
+TASK_EXPORT_FIELDS = (
+    "id",
+    "category",
+    "family",
+    "specification_level",
+    "difficulty",
+    "split",
+    "prompt",
+    "business_terms",
+    "fixtures",
+    "initial_state",
+    "allowed_tools",
+    "success",
+    "oracle_tool_calls",
+    "limits",
+    "code_task",
+)
+DEFAULT_SPECIFICATION_LEVEL = {
+    "easy": "explicit",
+    "medium": "partially-specified",
+    "hard": "open-brief",
+}
+# July 2026 guided calibration p95s were 13 calls for passing
+# partially-specified attempts and 14 for open briefs. These rung budgets are
+# intentionally independent of any one oracle architecture; the oracle-derived
+# budget remains only a safety floor.
+FLEXIBLE_RUNG_TURN_BUDGETS = {
+    "r0": 8,
+    "r1": 13,
+    "r2": 13,
+    "r3": 14,
+    "r4": 14,
+}
+
+
+def slim_task_payload(task: Task) -> Task:
+    """Project one authored task onto the shipped task-file schema."""
+
+    payload = {key: task[key] for key in TASK_EXPORT_FIELDS if key in task}
+    if payload.get("specification_level") == DEFAULT_SPECIFICATION_LEVEL.get(
+        str(payload.get("difficulty"))
+    ):
+        payload.pop("specification_level", None)
+    if not payload.get("business_terms"):
+        payload.pop("business_terms", None)
+    return payload
+
+
+def diversify_generated_widget_proof(
+    task: Task, *, share: int = 4, selected_buckets: int = 1
+) -> None:
+    """Deterministically turn roughly one ``note`` proof in ``share`` into HTML.
+
+    HTML remains a natural semantic evidence card for the same business facts,
+    but prevents the benchmark from teaching one memorized proof mechanism.
+    """
+
+    required = task.get("success", {}).get("required_generated_widgets", [])
+    bucket = int(hashlib.sha256(str(task["id"]).encode()).hexdigest(), 16) % share
+    if not required or bucket >= selected_buckets:
+        return
+    converted = False
+    for item in required:
+        if item.get("widget_type") == "note":
+            item["widget_type"] = "html"
+            converted = True
+            break
+    if not converted:
+        return
+    for call in task.get("oracle_tool_calls", []):
+        args = call.get("args", {})
+        if call.get("tool") == "add_generative_widget" and args.get("widget_type") == "note":
+            args["widget_type"] = "html"
+            if isinstance(args.get("data"), str):
+                args["data"] = f"<section>{args['data']}</section>"
+            break
+    prompt = str(task.get("prompt", ""))
+    prompt = re.sub(r"\bnotes\b", "HTML cards", prompt, flags=re.IGNORECASE)
+    prompt = re.sub(r"\bnote\b", "HTML card", prompt, flags=re.IGNORECASE)
+    task["prompt"] = prompt
 CategorySetter = Callable[[Task, str], None]
 IdentityNormalizer = Callable[[Task], None]
 TaskStage = Callable[[Task, str, str, int], None]
@@ -87,7 +171,6 @@ class TaskAssembler:
     scenarios: list[Task]
     cell_counts: CellCounts
     source: str
-    schema_version: str
     rung_slack: Mapping[str, int]
     set_category: CategorySetter
     normalize_identity: IdentityNormalizer
@@ -101,7 +184,6 @@ class TaskAssembler:
         cell_index = self.cell_counts[(family, level)]
         task.setdefault("domain", "finance")
         task.setdefault("source", self.source)
-        task["schema_version"] = self.schema_version
         self.set_category(task, family)
         task["family"] = family
         self.normalize_identity(task)
@@ -111,8 +193,12 @@ class TaskAssembler:
         tags = task.setdefault("tags", [])
         tags[0:0] = self.tag_prefixes(family, level, cell_index)
         self.finalize_task(task, family, level, cell_index)
+        oracle_floor = len(task["oracle_tool_calls"]) + self.rung_slack[level]
+        specification_level = str(task.get("specification_level", "explicit"))
         task.setdefault("limits", {})["max_turns"] = (
-            len(task["oracle_tool_calls"]) + self.rung_slack[level]
+            oracle_floor
+            if specification_level == "explicit"
+            else max(FLEXIBLE_RUNG_TURN_BUDGETS[level], oracle_floor)
         )
         task["_family"], task["_rung"] = family, level
         self.scenarios.append(task)

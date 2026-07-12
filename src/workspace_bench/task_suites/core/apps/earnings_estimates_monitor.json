@@ -1,14 +1,9 @@
 {
   "id": "earnings_estimates_monitor",
-  "title": "Instantiate Earnings & Estimates Monitor (Checked)",
-  "capability": "app-instantiation",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-apps",
-    "apps",
-    "stark"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "From the Bench Stark Enterprise backend, instantiate the Earnings & Estimates Monitor app as a new dashboard named Earnings Season Monitor.",
   "fixtures": {
     "backends": [
@@ -74,15 +69,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique apps/earnings_estimates_monitor exercise using manage_apps, manage_backends with checks dashboard_name, layout_out_of_grid, missing_tab, missing_widget, too_many_invalid_calls on stark-enterprise; artifact apps:Earnings & Estimates Monitor; widgets:Bench Stark Enterprise/earnings_estimates_monitor_calendar_upcoming_earnings@calendar,Bench Stark Enterprise/earnings_estimates_monitor_estimates_consensus_revisions@estimates; tabs:calendar,estimates,overview."
+  }
 }

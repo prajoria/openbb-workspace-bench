@@ -1,14 +1,9 @@
 {
   "id": "session_tab_rates_yield_curve",
-  "title": "Use Session Prompt On Rates",
-  "capability": "dashboard-construction",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-prompts",
-    "prompts",
-    "tabs"
-  ],
+  "category": "dashboard",
+  "family": "prompts",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "After fetching workspace_session_context, add a Rates tab, navigate to it, fetch the widget schema, create Bench Macro/yield_curve there, and add a note mentioning Rates on that tab.",
   "fixtures": {
     "backends": [
@@ -138,15 +133,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "prompts",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 10
-  },
-  "split": "test",
-  "novelty": "Unique prompts/session_tab_rates_yield_curve exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_prompt, list_available_widgets, manage_navigation_bar, navigate_workspace with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tab, missing_tool_result, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on macro; artifact prompts:workspace_session_context; widgets:Bench Macro/yield_curve@rates; tabs:overview,rates; generated:note@rates:Rates."
+  }
 }

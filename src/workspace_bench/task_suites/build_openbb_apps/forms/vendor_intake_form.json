@@ -1,15 +1,10 @@
 {
   "id": "vendor_intake_form",
-  "title": "Build the Vendor Intake Form widget",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "operations",
-  "tags": [
-    "family-forms",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "forms"
-  ],
+  "category": "platform",
+  "family": "forms",
+  "specification_level": "explicit",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Make the requested backend widget available and working in the current view. Use 'Vendor SLA Data' at http://localhost:7804. Make the submission workflow functional. The experience needs Vendor Intake Form (`vendor_intake_form`, table) using `/vendor-intake` for submit a new vendor record into the SLA register; user controls: New Vendor (`intake`, form) with Vendor, Tier, Add Vendor. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},
@@ -169,18 +164,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "forms",
-  "capability": "widget-building",
-  "specification_level": "explicit",
-  "difficulty": "hard",
-  "business_terms": [],
   "limits": {
     "max_turns": 7
-  },
-  "split": "test",
-  "novelty": "Unique forms/vendor_intake_form building exercise using create_widget, get_widget_schema, list_available_widgets, manage_backends with checks missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, widget_def on custom:Vendor SLA Data; artifact widgetdefs:Vendor SLA Data/vendor_intake_form; widgets:Vendor SLA Data/vendor_intake_form@*."
+  }
 }

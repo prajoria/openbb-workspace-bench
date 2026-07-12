@@ -1,15 +1,9 @@
 {
   "id": "portfolio_three_widget_grid",
-  "title": "Three-Widget Grid: Portfolio",
-  "capability": "layout-management",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-layout",
-    "layout",
-    "multi-widget",
-    "combo"
-  ],
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Arrange the three portfolio widgets into a grid: holdings at columns 0-24 rows 0-12, sector exposure at columns 24-40 rows 0-12, and risk metrics full-width below them (40 columns, 8 rows, starting at row 12).",
   "fixtures": {
     "backends": [
@@ -143,15 +137,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "layout",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique layout/portfolio_three_widget_grid exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on portfolio; artifact layouts::widget_001::0:0:24:12,:widget_002::24:0:16:12,:widget_003::0:12:40:8."
+  }
 }

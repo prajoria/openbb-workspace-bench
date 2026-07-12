@@ -1,14 +1,9 @@
 {
   "id": "repair_aapl_price_news_overlap",
-  "title": "Repair Overlap: Price News Aapl",
-  "capability": "workspace-repair",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-layout",
-    "repair",
-    "layout"
-  ],
+  "category": "repair",
+  "family": "layout",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "The AAPL news widget overlaps the price widget. Move the news widget to start at column 20 with its current size. Do not move the price widget.",
   "fixtures": {
     "backends": [
@@ -109,15 +104,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "layout",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique layout/repair_aapl_price_news_overlap exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on equities; artifact layouts:latest_news:::20:0:20:10,price_performance:::0:0:20:12."
+  }
 }

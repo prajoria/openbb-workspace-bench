@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit public task identities, titles, prompts, and documentation references.
+"""Audit public task identities, prompts, and documentation references.
 
 Usage:
     uv run python scripts/audits/audit_task_identity.py
@@ -33,7 +33,6 @@ REFERENCE_FILES = (
     *sorted((REPO / "docs").glob("*.md")),
 )
 
-TOKEN_RE = re.compile(r"[a-z0-9]+")
 TASK_ID_RE = re.compile(r"^[a-z0-9]+(?:_[a-z0-9]+)*$")
 NUMERIC_SCAR_RE = re.compile(r"_\d+$")
 JARGON_RE = re.compile(
@@ -52,7 +51,6 @@ QUALIFIED_ID_RE = re.compile(
     r"[a-z0-9]+(?:[-_][a-z0-9]+)*/"
     r"[a-z0-9]+(?:_[a-z0-9]+)*\b"
 )
-LEGACY_ID_RE = re.compile(r"\bgen_[a-z0-9_]+\b")
 
 
 @dataclass(frozen=True)
@@ -92,10 +90,8 @@ def audit_task(suite: str, family: str, task: dict[str, Any]) -> list[Finding]:
 
     findings: list[Finding] = []
     task_id = str(task.get("id", ""))
-    title = str(task.get("title", ""))
     prompt = str(task.get("prompt", ""))
     id_tokens = task_id.split("_")
-    title_tokens = TOKEN_RE.findall(title.lower())
 
     if not TASK_ID_RE.fullmatch(task_id):
         _add(
@@ -141,34 +137,6 @@ def audit_task(suite: str, family: str, task: dict[str, Any]) -> list[Finding]:
             task_id=task_id,
             field="id",
             reason="numeric generator suffix",
-        )
-
-    if "  " in title or re.search(r"\s+[,;:]", title):
-        _add(
-            findings,
-            suite=suite,
-            family=family,
-            task_id=task_id,
-            field="title",
-            reason="spacing scar",
-        )
-    if re.search(r"(?:\||/|:|;|,)\s*$", title):
-        _add(
-            findings,
-            suite=suite,
-            family=family,
-            task_id=task_id,
-            field="title",
-            reason="dangling separator",
-        )
-    if repeated := repeated_token_phrase(title_tokens):
-        _add(
-            findings,
-            suite=suite,
-            family=family,
-            task_id=task_id,
-            field="title",
-            reason=f"repeated word phrase: {repeated.replace('_', ' ')}",
         )
 
     prompt_checks = (
@@ -243,7 +211,6 @@ def audit_references(tasks: list[tuple[str, str, dict[str, Any]]]) -> list[Findi
             for reference in QUALIFIED_ID_RE.findall(text)
             if tuple(reference.split("/", 2)[:2]) in families
         )
-        references.update(LEGACY_ID_RE.findall(text))
         for reference in sorted(references):
             if "/" in reference:
                 valid = reference in qualified

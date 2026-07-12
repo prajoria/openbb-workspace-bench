@@ -9,6 +9,8 @@ from .harness import (
     TaskAssembler,
     build_matrix,
     difficulty_for,
+    diversify_generated_widget_proof,
+    slim_task_payload,
     snap,
     uniform_four_way_pattern,
 )
@@ -22,6 +24,8 @@ __all__ = [
     "TaskAssembler",
     "build_matrix",
     "difficulty_for",
+    "diversify_generated_widget_proof",
+    "slim_task_payload",
     "snap",
     "uniform_four_way_pattern",
 ]

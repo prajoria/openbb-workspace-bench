@@ -44,7 +44,7 @@ def widget_kinds(definition: JsonDict) -> set[str]:
         for param in flatten_params(definition, recurse=True)
     ):
         kinds.add("form")
-    if widget_type in {"ssrm_table", "live_grid"}:
+    if widget_type in {"table_ssrm", "ssrm_table", "live_grid"}:
         kinds.add("server-side-grid")
     elif widget_type == "table":
         kinds.add("table-like")
@@ -521,7 +521,7 @@ def grade_backend_building(
             count = len(prompts) if isinstance(prompts, list) else 0
             builder.check(
                 count >= required_app.prompts_min_count,
-                "app_def_mismatch",
+                "app_prompts_missing",
                 (
                     f"App {label!r}: expected at least {required_app.prompts_min_count} "
                     f"prompt(s), found {count}."

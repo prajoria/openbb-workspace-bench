@@ -1,18 +1,15 @@
 {
   "id": "chains_highchart_room",
-  "title": "Assemble the Chain Chart Room chart app",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "crypto",
-  "tags": [
-    "family-charts",
-    "cell2",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "charts",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "charts",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Deliver an analyst-ready Workspace solution for chain activity and liquidity. The workspace must cover comparisons of chain TVL. The workspace must cover current TVL of all chains from the desk aggregator. Analysts need to inspect name, TVL USD, change one-day. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Use `chain_scope` and `name` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
+  "business_terms": [
+    "chain_scope",
+    "name"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -279,21 +276,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "charts",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "chain_scope",
-    "name"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique charts/chains_highchart_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Chain TVL Data; artifact capabilities:capability_1_chains-highchart:chart-like:chains_highchart_value,capability_2_chains-table:table-like:change_1d,name,tvl_usd."
+    "max_turns": 14
+  }
 }

@@ -1,75 +1,232 @@
 {
   "id": "vol_overview",
-  "title": "Build the Vol Overview app definition",
-  "workflow": "risk-review",
-  "subdomain": "volatility",
-  "tags": [
-    "family-apps",
-    "cell1",
-    "build-openbb-apps",
-    "apps-json"
-  ],
-  "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Vol Desk Data' at http://localhost:7801. Treat the app layout and navigation as the product outcome. The experience needs VIX History (`vix_history`, table) using `/vix-history` for daily CBOE VIX closes with returns; user controls: Window (`window`, number); columns: date (dateString), close (number), return_pct (number, percent, greenRed); Vol Regime (`vol_regime_metric`, metric) using `/vol-regime` for current volatility regime score. Organize it as app 'Vol Overview' with tabs Overview (vix_history, vol_regime_metric). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
+  "category": "platform",
+  "family": "apps",
+  "specification_level": "explicit",
+  "difficulty": "hard",
+  "split": "test",
+  "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Bench Stark Enterprise' at http://localhost:7809. Treat the app layout and navigation as the product outcome. The experience needs Holdings Table (`portfolio_command_center_holdings_holdings_table`, table) using `/portfolio_command_center_holdings_holdings_table` for holdings Table for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows; user controls: Fund (`fund`, text), Period (`period`, text); columns: ticker (number, int), company (text), sector (text), weight (number, percent), active_weight (number, percent), pnl (number, int, greenRed), rating (text); Portfolio Snapshot (`portfolio_command_center_overview_portfolio_snapshot`, metric) using `/portfolio_command_center_overview_portfolio_snapshot` for portfolio Snapshot for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows; user controls: Fund (`fund`, text), Period (`period`, text). Organize it as app 'Enterprise Portfolio Control' with tabs Overview (portfolio_command_center_holdings_holdings_table, portfolio_command_center_overview_portfolio_snapshot) with 2 starter prompt(s). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {
     "custom_backends": [
       {
-        "name": "Vol Desk Data",
-        "url": "http://localhost:7801",
+        "name": "Bench Stark Enterprise",
+        "url": "http://localhost:7809",
         "backend_id": "backend_001",
         "widgets_json": {
-          "vix_history": {
-            "name": "VIX History",
-            "description": "Daily CBOE VIX closes with returns.",
-            "endpoint": "/vix-history",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "window",
-                "type": "number",
-                "label": "Window",
-                "value": 30,
-                "min": 5,
-                "max": 365
-              }
-            ],
+          "portfolio_command_center_holdings_holdings_table": {
+            "category": "Portfolio",
             "data": {
               "table": {
                 "columnsDefs": [
                   {
-                    "field": "date",
-                    "headerName": "Date",
-                    "cellDataType": "dateString"
-                  },
-                  {
-                    "field": "close",
-                    "headerName": "Close",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "return_pct",
-                    "headerName": "Return %",
                     "cellDataType": "number",
+                    "chartDataType": "series",
+                    "field": "ticker",
+                    "formatterFn": "int",
+                    "headerName": "Ticker",
+                    "pinned": "left",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "text",
+                    "chartDataType": "category",
+                    "field": "company",
+                    "headerName": "Company",
+                    "pinned": "left",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "text",
+                    "chartDataType": "category",
+                    "field": "sector",
+                    "headerName": "Sector",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "number",
+                    "chartDataType": "series",
+                    "field": "weight",
                     "formatterFn": "percent",
-                    "renderFn": "greenRed"
+                    "headerName": "Weight",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "number",
+                    "chartDataType": "series",
+                    "field": "active_weight",
+                    "formatterFn": "percent",
+                    "headerName": "Active Weight",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "number",
+                    "chartDataType": "series",
+                    "field": "pnl",
+                    "formatterFn": "int",
+                    "headerName": "Pnl",
+                    "renderFn": "greenRed",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "text",
+                    "chartDataType": "category",
+                    "field": "rating",
+                    "headerName": "Rating",
+                    "width": 150
                   }
-                ]
+                ],
+                "enableAdvanced": true,
+                "enableCharts": true,
+                "showAll": true
               }
-            }
-          },
-          "vol_regime_metric": {
-            "name": "Vol Regime",
-            "description": "Current volatility regime score.",
-            "endpoint": "/vol-regime",
-            "type": "metric",
+            },
+            "description": "Holdings Table for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows.",
+            "endpoint": "/portfolio_command_center_holdings_holdings_table",
             "gridData": {
-              "w": 6,
-              "h": 4
-            }
+              "h": 14,
+              "w": 20
+            },
+            "name": "Holdings Table",
+            "params": [
+              {
+                "description": "Fund or vehicle scope.",
+                "label": "Fund",
+                "options": [
+                  {
+                    "label": "Flagship Long/Short",
+                    "value": "Flagship Long/Short"
+                  },
+                  {
+                    "label": "Global Opportunities",
+                    "value": "Global Opportunities"
+                  },
+                  {
+                    "label": "Income Fund",
+                    "value": "Income Fund"
+                  },
+                  {
+                    "label": "Multi-Asset Fund",
+                    "value": "Multi-Asset Fund"
+                  }
+                ],
+                "paramName": "fund",
+                "type": "text",
+                "value": "Flagship Long/Short"
+              },
+              {
+                "description": "Reporting period.",
+                "label": "Period",
+                "options": [
+                  {
+                    "label": "1D",
+                    "value": "1D"
+                  },
+                  {
+                    "label": "MTD",
+                    "value": "MTD"
+                  },
+                  {
+                    "label": "QTD",
+                    "value": "QTD"
+                  },
+                  {
+                    "label": "YTD",
+                    "value": "YTD"
+                  },
+                  {
+                    "label": "1Y",
+                    "value": "1Y"
+                  }
+                ],
+                "paramName": "period",
+                "type": "text",
+                "value": "YTD"
+              }
+            ],
+            "source": [
+              "Aladdin Portfolio Master",
+              "Performance Book of Record"
+            ],
+            "subCategory": "Holdings & Performance",
+            "type": "table",
+            "widgetId": "portfolio_command_center_holdings_holdings_table"
+          },
+          "portfolio_command_center_overview_portfolio_snapshot": {
+            "category": "Portfolio",
+            "data": {
+              "valueField": "value"
+            },
+            "description": "Portfolio Snapshot for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows.",
+            "endpoint": "/portfolio_command_center_overview_portfolio_snapshot",
+            "gridData": {
+              "h": 5,
+              "w": 40
+            },
+            "name": "Portfolio Snapshot",
+            "params": [
+              {
+                "description": "Fund or vehicle scope.",
+                "label": "Fund",
+                "options": [
+                  {
+                    "label": "Flagship Long/Short",
+                    "value": "Flagship Long/Short"
+                  },
+                  {
+                    "label": "Global Opportunities",
+                    "value": "Global Opportunities"
+                  },
+                  {
+                    "label": "Income Fund",
+                    "value": "Income Fund"
+                  },
+                  {
+                    "label": "Multi-Asset Fund",
+                    "value": "Multi-Asset Fund"
+                  }
+                ],
+                "paramName": "fund",
+                "type": "text",
+                "value": "Flagship Long/Short"
+              },
+              {
+                "description": "Reporting period.",
+                "label": "Period",
+                "options": [
+                  {
+                    "label": "1D",
+                    "value": "1D"
+                  },
+                  {
+                    "label": "MTD",
+                    "value": "MTD"
+                  },
+                  {
+                    "label": "QTD",
+                    "value": "QTD"
+                  },
+                  {
+                    "label": "YTD",
+                    "value": "YTD"
+                  },
+                  {
+                    "label": "1Y",
+                    "value": "1Y"
+                  }
+                ],
+                "paramName": "period",
+                "type": "text",
+                "value": "YTD"
+              }
+            ],
+            "source": [
+              "Aladdin Portfolio Master",
+              "Performance Book of Record"
+            ],
+            "subCategory": "Holdings & Performance",
+            "type": "metric",
+            "widgetId": "portfolio_command_center_overview_portfolio_snapshot"
           }
         }
       }
@@ -100,10 +257,10 @@
   "success": {
     "required_app_defs": [
       {
-        "backend_name": "Vol Desk Data",
+        "backend_name": "Bench Stark Enterprise",
         "layout_refs_valid": true,
         "no_overlaps": true,
-        "name_contains": "Vol Overview",
+        "name_contains": "Enterprise Portfolio Control",
         "tabs_include": [
           "overview"
         ],
@@ -111,30 +268,31 @@
         "widgets_on_tab": [
           {
             "tab_id": "overview",
-            "widget_id": "vix_history"
+            "widget_id": "portfolio_command_center_holdings_holdings_table"
           },
           {
             "tab_id": "overview",
-            "widget_id": "vol_regime_metric"
+            "widget_id": "portfolio_command_center_overview_portfolio_snapshot"
           }
-        ]
+        ],
+        "prompts_min_count": 2
       }
     ],
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2
     },
-    "required_dashboard_name_contains": "Vol Overview",
+    "required_dashboard_name_contains": "Enterprise Portfolio Control",
     "required_widgets": [
       {
-        "origin": "Vol Desk Data",
-        "widget_id": "vix_history",
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_holdings_holdings_table",
         "tab_id": "overview",
         "min_count": 1
       },
       {
-        "origin": "Vol Desk Data",
-        "widget_id": "vol_regime_metric",
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_overview_portfolio_snapshot",
         "tab_id": "overview",
         "min_count": 1
       }
@@ -147,42 +305,58 @@
     "runtime_checks": {
       "datasets": [
         {
-          "name": "vol-desk-data__vix_history",
-          "widget_id": "vix_history",
+          "name": "bench-stark-enterprise__portfolio_command_center_holdings_holdings_table",
+          "widget_id": "portfolio_command_center_holdings_holdings_table",
           "fields": [
-            "close",
-            "date",
-            "return_pct"
+            "active_weight",
+            "company",
+            "pnl",
+            "rating",
+            "sector",
+            "ticker",
+            "weight"
           ],
-          "path": "/vix-history",
+          "path": "/portfolio_command_center_holdings_holdings_table",
           "payload": [
             {
-              "close": 10.25,
-              "date": "2026-01-13",
-              "return_pct": 10.25
+              "active_weight": 10.25,
+              "company": "company-1",
+              "pnl": 10.25,
+              "rating": "rating-1",
+              "sector": "sector-1",
+              "ticker": 10.25,
+              "weight": 10.25
             },
             {
-              "close": 20.5,
-              "date": "2026-01-14",
-              "return_pct": 20.5
+              "active_weight": 20.5,
+              "company": "company-2",
+              "pnl": 20.5,
+              "rating": "rating-2",
+              "sector": "sector-2",
+              "ticker": 20.5,
+              "weight": 20.5
             },
             {
-              "close": 30.75,
-              "date": "2026-01-15",
-              "return_pct": 30.75
+              "active_weight": 30.75,
+              "company": "company-3",
+              "pnl": 30.75,
+              "rating": "rating-3",
+              "sector": "sector-3",
+              "ticker": 30.75,
+              "weight": 30.75
             }
           ]
         },
         {
-          "name": "vol-desk-data__vol_regime_metric",
-          "widget_id": "vol_regime_metric",
+          "name": "bench-stark-enterprise__portfolio_command_center_overview_portfolio_snapshot",
+          "widget_id": "portfolio_command_center_overview_portfolio_snapshot",
           "fields": [
             "label",
             "value"
           ],
-          "path": "/vol-regime",
+          "path": "/portfolio_command_center_overview_portfolio_snapshot",
           "payload": {
-            "label": "Vol Regime",
+            "label": "Portfolio Snapshot",
             "value": 42.5
           }
         }
@@ -202,23 +376,23 @@
         "backend_id": "backend_001",
         "apps_json": [
           {
-            "name": "Vol Overview",
-            "description": "Vol level and regime.",
+            "name": "Enterprise Portfolio Control",
+            "description": "Holdings and portfolio posture.",
             "tabs": {
               "overview": {
                 "id": "overview",
                 "name": "Overview",
                 "layout": [
                   {
-                    "i": "vix_history",
+                    "i": "portfolio_command_center_holdings_holdings_table",
                     "x": 0,
                     "y": 0,
-                    "w": 20,
-                    "h": 9
+                    "w": 24,
+                    "h": 10
                   },
                   {
-                    "i": "vol_regime_metric",
-                    "x": 20,
+                    "i": "portfolio_command_center_overview_portfolio_snapshot",
+                    "x": 24,
                     "y": 0,
                     "w": 12,
                     "h": 6
@@ -226,7 +400,11 @@
                 ]
               }
             },
-            "groups": []
+            "groups": [],
+            "prompts": [
+              "Summarize the most important signal in Enterprise Portfolio Control.",
+              "What needs attention in Enterprise Portfolio Control right now?"
+            ]
           }
         ]
       }
@@ -236,24 +414,13 @@
       "args": {
         "operation": "instantiate",
         "backend_id": "backend_001",
-        "app_name": "Vol Overview",
-        "dashboard_name": "Vol Overview Live",
+        "app_name": "Enterprise Portfolio Control",
+        "dashboard_name": "Enterprise Portfolio Control Live",
         "activate": true
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "capability": "app-building",
-  "specification_level": "explicit",
-  "difficulty": "easy",
-  "business_terms": [],
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique apps/vol_overview building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks app_def, dashboard_name, missing_widget, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact appdefs:Vol Desk Data/Vol Overview; widgets:Vol Desk Data/vix_history@overview,Vol Desk Data/vol_regime_metric@overview."
+  }
 }

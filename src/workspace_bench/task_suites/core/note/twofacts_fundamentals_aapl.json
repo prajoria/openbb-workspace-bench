@@ -1,14 +1,9 @@
 {
   "id": "twofacts_fundamentals_aapl",
-  "title": "Two-Fact Note: Fundamentals Aapl",
-  "capability": "workspace-inspection",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-note",
-    "note",
-    "read-only"
-  ],
+  "category": "read",
+  "family": "note",
+  "difficulty": "medium",
+  "split": "validation",
   "prompt": "Use the existing AAPL fundamentals widget data to add a note on the overview tab with the gross margin and the net cash from the data.",
   "fixtures": {
     "backends": [
@@ -108,15 +103,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "read",
-  "family": "note",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique note/twofacts_fundamentals_aapl exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tab, missing_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact widgets:Bench Equities/fundamental_metrics@overview; tabs:overview; generated:note@overview:AAPL,0.462."
+  }
 }

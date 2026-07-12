@@ -1,25 +1,11 @@
 {
-  "schema_version": "workspace-bench-task",
   "id": "vendor_wrong_form_endpoint",
-  "title": "Repair Vendor Recovery Room wrong form endpoint incident",
   "category": "repair",
   "family": "debug",
-  "capability": "backend-repair",
-  "workflow": "diagnose-repair-retest",
-  "domain": "finance",
-  "subdomain": "vendor",
   "specification_level": "open-brief",
-  "difficulty": "hard",
-  "tags": [
-    "build-openbb-apps",
-    "debug",
-    "repair",
-    "wrong_form_endpoint",
-    "long-oracle"
-  ],
-  "source": "workspace-bench-build-apps-gen",
-  "novelty": "Unique debug/vendor_wrong_form_endpoint building exercise using add_generative_widget, get_widget_data, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_apps, manage_backends, read_widget, read_workspace_resource with checks capability, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Vendor Repair Data, custom:Vendor Repair Data Archive; artifact capabilities:incident-detail-wrong_form_endpoint:table-like:age_days,record_id,updated_at,incident-overview-wrong_form_endpoint:form:owner,record_id,status; generated:note@*:Vendor Recovery Room,Vendor Repair Data.",
-  "prompt": "Vendor operations analysts report that the intake form accepts input but submission does nothing in Vendor Recovery Room. Diagnose the existing Vendor Repair Data connection, repair it in place, and retest the affected workflow with live data before handing it back. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Vendor Recovery Room open and add a short verification note that naturally mentions Vendor Recovery Room, Vendor Repair Data, and repair verified.",
+  "difficulty": "medium",
+  "split": "validation",
+  "prompt": "An incident in Vendor Recovery Room means the intake form accepts input but submission does nothing. Investigate the connected Vendor Repair Data backend, make the smallest in-place repair, and prove the workflow against live data. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Vendor Recovery Room open and add a short verification note that naturally mentions Vendor Recovery Room, Vendor Repair Data, and repair verified.",
   "business_terms": [
     "Vendor Recovery Room",
     "Vendor Repair Data",
@@ -356,6 +342,7 @@
       }
     ],
     "capability_connections": [],
+    "required_tool_calls": [],
     "business_names": [
       {
         "scope": "app",
@@ -779,6 +766,5 @@
   ],
   "limits": {
     "max_turns": 40
-  },
-  "split": "validation"
+  }
 }

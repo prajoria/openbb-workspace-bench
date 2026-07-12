@@ -77,16 +77,6 @@ def task_metadata_issues(task: Task) -> list[str]:
         issues.append("difficulty must be one of easy, medium, hard")
     if task.split not in VALID_TASK_SPLITS:
         issues.append(f"split must be one of {', '.join(sorted(VALID_TASK_SPLITS))}")
-    if not task.capability:
-        issues.append("capability must be non-empty")
-    if not task.workflow:
-        issues.append("workflow must be non-empty")
-    if not task.domain:
-        issues.append("domain must be non-empty")
-    if not task.subdomain:
-        issues.append("subdomain must be non-empty")
-    if not task.tags:
-        issues.append("at least one tag is required")
     if not task.oracle_tool_calls and task.code_task is None:
         issues.append("oracle_tool_calls must be non-empty")
     if not task.allowed_tools:

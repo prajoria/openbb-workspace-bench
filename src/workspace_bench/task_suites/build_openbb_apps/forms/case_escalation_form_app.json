@@ -1,16 +1,10 @@
 {
   "id": "case_escalation_form_app",
-  "title": "Ship Case Escalation Form as the Case Escalation app",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-forms",
-    "cell2",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "forms"
-  ],
+  "category": "platform",
+  "family": "forms",
+  "specification_level": "explicit",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Surveillance Data' at http://localhost:7807. Make the submission workflow functional. The experience needs Case Escalation Form (`case_escalation_form`, table) using `/case-escalation` for escalate a surveillance case to a reviewer; user controls: Escalation (`escalation`, form) with Case, Due date, Escalate. Organize it as app 'Case Escalation' with tabs Cases (case_escalation_form). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},
@@ -206,18 +200,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "forms",
-  "capability": "widget-building",
-  "specification_level": "explicit",
-  "difficulty": "hard",
-  "business_terms": [],
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique forms/case_escalation_form_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks app_def, dashboard_name, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Surveillance Data; artifact widgetdefs:Surveillance Data/case_escalation_form; appdefs:Surveillance Data/Case Escalation; widgets:Surveillance Data/case_escalation_form@cases."
+  }
 }

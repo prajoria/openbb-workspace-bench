@@ -1,14 +1,9 @@
 {
   "id": "repair_macro_overlap",
-  "title": "Repair Overlap: Macro",
-  "capability": "workspace-repair",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-layout",
-    "repair",
-    "layout"
-  ],
+  "category": "repair",
+  "family": "layout",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Do not move the 10Y series widget; resolve the overlap by moving the yield curve widget to start at column 20 with its current size.",
   "fixtures": {
     "backends": [
@@ -106,15 +101,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "layout",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique layout/repair_macro_overlap exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on macro; artifact layouts:macro_timeseries:::0:0:20:10,yield_curve:::20:0:20:10."
+  }
 }

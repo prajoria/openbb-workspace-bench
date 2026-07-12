@@ -45,7 +45,7 @@ the separate experimental-v0 `build-openbb-backends` real-code track (12 tasks).
   - `build-openbb-backends` — 12 pinned FastAPI starter repositories graded by launching the agent's own server
 - generated families covering widgets, apps, prompts, resources, skills, delegation, inspection, repair, layout, and backend/app building
 - six archived pre-hardening model baselines with full traces and rollout exports
-- equities, macro, portfolio, and Stark enterprise fixture backends
+- equities, macro, portfolio, Stark enterprise, and Daloopa fixture backends
 - simulator-backed Workspace MCP runtime for fast local evals
 - live `workspace-mcp` sidecar smoke runner
 - optional Playwright browser-certification harness with a 30-task realism subset
@@ -126,26 +126,25 @@ in `runs/reports/significance.json`.
 
 | Model | Strict pass (95% Wilson CI) | State pass | Runtime pass |
 | --- | ---: | ---: | ---: |
-| OpenAI GPT-5.5 | 128/472 (27.1%; 23.3–31.3%) | 147/472 (31.1%) | 231/472 (48.9%) |
-| OpenAI GPT-5.1 | 47/472 (10.0%; 7.6–13.0%) | 98/472 (20.8%) | 275/472 (58.3%) |
-| OpenAI GPT-5.4 mini | 15/472 (3.2%; 1.9–5.2%) | 36/472 (7.6%) | 165/472 (35.0%) |
+| OpenAI GPT-5.5 | 105/472 (22.2%; 18.7–26.2%) | 137/472 (29.0%) | 224/472 (47.5%) |
+| OpenAI GPT-5.1 | 36/472 (7.6%; 5.6–10.4%) | 94/472 (19.9%) | 273/472 (57.8%) |
+| OpenAI GPT-5.4 mini | 12/472 (2.5%; 1.5–4.4%) | 35/472 (7.4%) | 164/472 (34.7%) |
 
 Every row above comes from the replay-only fixed-grader directory
 `runs/comparison/build-calibration-202607-regraded/`; each model records
 `resumed_cells=472` and `new_cells=0`. The before → after replay comparison is:
 
-| Model | Strict | State | Runtime |
-| --- | ---: | ---: | ---: |
-| OpenAI GPT-5.5 | 150 → 128 | 181 → 147 | 227 → 231 |
-| OpenAI GPT-5.1 | 50 → 47 | 104 → 98 | 271 → 275 |
-| OpenAI GPT-5.4 mini | 15 → 15 | 37 → 36 | 165 → 165 |
+| Model | Strict | Mean outcome | State | Runtime |
+| --- | ---: | ---: | ---: | ---: |
+| OpenAI GPT-5.5 | 150 → 105 | 0.731 → 0.653 | 181 → 137 | 227 → 224 |
+| OpenAI GPT-5.1 | 50 → 36 | 0.735 → 0.621 | 104 → 94 | 271 → 273 |
+| OpenAI GPT-5.4 mini | 15 → 12 | 0.513 → 0.261 | 37 → 35 | 165 → 164 |
 
-The conservative relabel review moved seven tasks from medium to hard:
-`advanced/case_qa_omni_app`, `aggrid/latency_history`,
-`apps/surprise_metric_wrap`, `apps/surveillance_morning`,
-`extend/place_alert_metric`, `extend/place_breach_metric`, and
-`types/policy_digest_pdf`. No task moved into easy or medium; the measured
-distribution is now 55/11/170.
+The replay removes vacuous preservation credit from the outcome numerator.
+Mean-outcome spread widens from 0.222 to 0.391 while strict-pass ordering stays
+GPT-5.5, GPT-5.1, GPT-5.4 mini. The repeated-evidence relabel review applies 44
+approved changes; the measured distribution is now 17/43/176, providing a
+material middle band without changing prompts to manufacture easier tasks.
 
 OpenRouter Claude Sonnet 5 and GLM-5.2 are excluded: credit exhaustion caused
 362/472 and 357/472 process failures, respectively, with 356 and 349 HTTP 402
@@ -387,8 +386,8 @@ generator consumes it and verifies the empirical counts.
 Use `--suite core|build-openbb-apps` for the stable interactive suites,
 `run-code-task` for `build-openbb-backends`, and `--task-dir`
 for a private task suite, and `--split train|validation|test` to select a
-split. Private suites may also use `dev`. You can also slice with `--capability`, `--workflow`,
-`--domain`, and `--subdomain`.
+split. Private suites may also use `dev`. You can also slice with `--family`,
+`--category`, and `--difficulty`.
 
 Export a task envelope without running an agent:
 
@@ -545,6 +544,29 @@ schemas against the committed compatibility baseline, and
 `scripts/audits/audit_live_golden_tasks.py` replays a small cross-surface golden set
 through the real sidecar transport.
 
+### Live Parity (hosted bridge)
+
+When the hosted Workspace MCP bridge is paired with a logged-in Workspace
+browser tab, one task can be run against the real product and the simulator
+back-to-back, graded by the same `grade_task`, and diffed check-by-check:
+
+```bash
+export WORKSPACE_MCP_TOKEN=...   # or put it in .env
+uv run --extra live workspace-bench live-parity --task core/read/alert_trend
+```
+
+The live leg reproduces the task's initial state through public tool calls on
+a dedicated marker-named dashboard, replays the oracle trace with origin
+translation (`"Bench Stark Enterprise" → "Stark Fund"` by default;
+`--origin-map` overrides), waits out the bridge's asynchronous write
+application, grades the normalized final state, then deletes everything it
+created and restores the previously active dashboard. Reports land in
+`runs/live-parity/<task>/parity.json` with per-leg grades, an agreement
+summary, and the live trace. Tasks the live surface cannot reproduce
+faithfully are refused with a reason. Live runs execute in a real user
+workspace: results are validation evidence for grader fidelity, never board
+numbers.
+
 ## Browser Certification
 
 Install the optional browser dependency and Chromium once:
@@ -615,7 +637,25 @@ The server exposes:
 The bundled `Bench Stark Enterprise` fixture packages widget and app metadata
 from the [Stark Industries demo](https://github.com/DidierRLopes/stark-industries-demo) into a stable local backend, with seeded
 deterministic data per widget. It is used for enterprise workflow coverage
-without depending on a live demo app.
+without depending on a live demo app. Serving it exposes the exact catalog and
+baked payloads the simulated workspace grades against (349 widgets, 23 apps):
+
+```bash
+uv run workspace-bench serve-fixture --backend stark-enterprise --port 9104
+```
+
+The bundled `Bench Daloopa` fixture mirrors the data surface consumed by the
+[Daloopa Claude plugin skills](https://github.com/daloopa/daloopa-plugin-claude):
+company discovery, series discovery, fundamentals with per-datapoint citation
+ids, operating KPIs, segment breakdowns, management guidance, consensus
+estimates, SEC document search, and daily stock prices across six covered
+companies. Unlike the Stark catalog (imported from a demo repo, then baked),
+the Daloopa catalog is fully authored and baked by
+`scripts/generators/generate_daloopa_data.py` (10 widgets, 2 apps):
+
+```bash
+uv run workspace-bench serve-fixture --backend daloopa --port 9105
+```
 
 Serve one build task's oracle-declared backend and task-owned runtime datasets:
 
@@ -686,12 +726,11 @@ parameters, preserve app integrity, and satisfy required interaction edges.
 Exact definitions and geometry remain appropriate when the explicit prompt or
 core layout outcome requires them.
 
-Grader soundness is certified against **thirteen archetypes** of invalid
+Grader soundness is certified against **twelve archetypes** of invalid
 solutions: shifted endpoint data, never-instantiated apps, missing widgets,
-incompatible values, broken forms, severed interactions, collateral damage,
-invalid gating settings, collapsed connected views, field-less contributors,
-self-linked connections, note-only proof, and duplicate-backend teardown and
-replacement. Each clean oracle must pass immediately before mutation; every
+incompatible values, broken forms, severed interactions, invalid gating
+settings, collapsed connected views, field-less contributors, self-linked
+connections, note-only proof, and apps with stripped starter prompts. Each clean oracle must pass immediately before mutation; every
 mutant must fail with the issue code attributable to the injected defect.
 Survivors, wrong-reason failures, or dirty oracles block release.
 
@@ -713,7 +752,7 @@ descriptive slug; generator mechanics are not part of the public identity.
 - `repair`: fix incorrect Workspace state or bad metadata assumptions
 
 **Difficulty** — `easy`, `medium`, or `hard`. For `build-openbb-apps` this is
-empirical metadata measured in July 2026: 55/11/170. It does not render prompts
+empirical metadata measured in July 2026: 17/43/176. It does not render prompts
 or select graders. **Specification level** is the structural axis that does:
 60 `explicit`, 92 `partially-specified`, and 84 `open-brief`. Core remains
 90/120/90 and the experimental code track is 3/6/3. Every manifest-track build
@@ -744,7 +783,7 @@ src/workspace_bench/
       create/ update/ ...                Family directories
     build_openbb_apps/                  Build suite families
   workspace/             Fixture backends, simulator, live workspace-mcp smoke bridge
-    data/                Packaged fixture metadata such as Stark widgets/apps
+    data/                Packaged fixture metadata such as Stark and Daloopa widgets/apps
   agents/                Oracle/noop agents, JSONL command protocol, model adapter helpers
   reports/               Model comparison, reliability metrics, charts, analysis reports
   exports/               Rollout, SFT, preference, and metadata export helpers
@@ -767,6 +806,10 @@ examples/
   ollama_agent.py           Local Ollama adapter template
   openai_gpt4_1.py          GPT-4.1 OpenAI API adapter template
   models.example.json       Model comparison adapter config example
+references/
+  openbb-backend-examples/  Vendored OpenBB backend reference implementations (MIT,
+                            pinned upstream commit) — ground truth for authoring
+                            widget-creation and backend-building tasks
 tests/
 ```
 

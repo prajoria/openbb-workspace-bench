@@ -1,15 +1,10 @@
 {
   "id": "sla_metrics",
-  "title": "Read Data: SLA Metrics",
-  "capability": "data-reading",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "data-platform",
-  "tags": [
-    "family-read",
-    "data-reading",
-    "stark"
-  ],
-  "prompt": "On the Bench Stark Enterprise SLA Metrics widget, use get_widget_data, find the exact value for vendor_dataset_monitor_vendors_sla_metrics, then add a note that cites each widget id, the field name, and the exact value.",
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "medium",
+  "split": "validation",
+  "prompt": "On the Bench Stark Enterprise SLA Metrics widget, use get_widget_data, find the exact value for vendor_dataset_monitor_vendors_sla_metrics, then add a HTML card that cites each widget id, the field name, and the exact value.",
   "fixtures": {
     "backends": [
       {
@@ -66,7 +61,6 @@
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "vendor_dataset_monitor_vendors_sla_metrics",
           "value",
           "63.73"
         ]
@@ -74,7 +68,7 @@
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "vendor_dataset_monitor_vendors_sla_metrics",
           "value",
@@ -109,21 +103,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Data Note",
-        "data": "vendor_dataset_monitor_vendors_sla_metrics value is 63.73."
+        "data": "<section>vendor_dataset_monitor_vendors_sla_metrics value is 63.73.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "read",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique read/sla_metrics exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:vendor_dataset_monitor_vendors_sla_metrics,value."
+  }
 }

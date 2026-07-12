@@ -1,17 +1,9 @@
 {
   "id": "diagnose_sla",
-  "title": "Diagnose and extend Vendor SLA Data",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "operations",
-  "tags": [
-    "family-extend",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "refresh",
-    "extend",
-    "diagnosis"
-  ],
+  "category": "repair",
+  "family": "extend",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Build a vendor-operations manager a dependable vendor service levels workspace. The workspace must cover vendor SLA state with breach flags. The workspace must cover count of open SLA breaches. The workspace must cover vendor incident notices feed. The workspace must cover runbook for SLA escalations. Analysts need to inspect vendor, status, latency milliseconds, breach. Preserve all working content while correcting the requested workflow. Decide how best to organize the experience and preserve unrelated work.",
   "fixtures": {},
   "initial_state": {
@@ -383,18 +375,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "extend",
-  "capability": "app-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique extend/diagnose_sla building exercise using create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks capability, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls on custom:Vendor SLA Data; artifact capabilities:capability_1_vendor-sla-table:table-like:breach,latency_ms,status,vendor."
+    "max_turns": 14
+  }
 }

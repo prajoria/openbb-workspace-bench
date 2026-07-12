@@ -1,18 +1,16 @@
 {
   "id": "catalyst_calendar",
-  "title": "Ship, open, and configure Catalyst Calendar",
-  "workflow": "healthcare-catalyst-review",
-  "subdomain": "healthcare",
-  "tags": [
-    "family-e2e",
-    "cell12",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "e2e",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "e2e",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Build a healthcare-research analyst a dependable clinical catalysts and pipelines workspace. The workspace must cover healthcare catalysts and impact scores. The workspace must cover catalysts in the next 30 days. Analysts need to inspect ticker, event, event date, impact score. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Catalyst Calendar', 'Healthcare Research Data', 'PFE', 'ticker'. Decide how best to organize the experience and preserve unrelated work.",
+  "business_terms": [
+    "Catalyst Calendar",
+    "Healthcare Research Data",
+    "PFE",
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -290,23 +288,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "e2e",
-  "capability": "backend-integration",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Catalyst Calendar",
-    "Healthcare Research Data",
-    "PFE",
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique e2e/catalyst_calendar building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_catalyst-calendar-table:table-like:event,event_date,impact_score,ticker,capability_2_catalyst-metric:metric:catalyst_metric_value; generated:note@*:Catalyst Calendar,catalyst calendar."
+    "max_turns": 14
+  }
 }

@@ -1,14 +1,9 @@
 {
   "id": "instantiate_vendor_dataset_monitor",
-  "title": "Read Index Then Instantiate Vendor & Dataset Monitor",
-  "capability": "dashboard-construction",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-resources",
-    "resources",
-    "apps"
-  ],
+  "category": "dashboard",
+  "family": "resources",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "After reading the app-builder index resource openbb://workspace/app-builder/index, instantiate template vendor-dataset-monitor as a dashboard named Vendor Resource Dashboard.",
   "fixtures": {
     "backends": [
@@ -72,15 +67,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "resources",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique resources/instantiate_vendor_dataset_monitor exercise using manage_apps, manage_backends, read_workspace_resource with checks dashboard_name, layout_out_of_grid, missing_resource_read, missing_tool_call, too_many_invalid_calls on stark-enterprise; artifact resource:openbb://workspace/app-builder/index; apps:vendor-dataset-monitor."
+  }
 }

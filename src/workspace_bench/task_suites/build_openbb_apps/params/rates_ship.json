@@ -1,18 +1,16 @@
 {
   "id": "rates_ship",
-  "title": "Ship, open, and configure the Rates Series Live parameter app",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-params",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "params",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "params",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "The desk needs a production-ready rates and Treasury markets workflow for a rates strategist. The workspace must cover rates commentary filtered by selected series. The workspace must cover current 2s10s spread in bps. The workspace must cover desk commentary on the rates day. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Rates Series Live', 'series preset', 'Rates Watch Data', 'DGS10'. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "Rates Series Live",
+    "series preset",
+    "Rates Watch Data",
+    "DGS10"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -275,23 +273,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "params",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Rates Series Live",
-    "series preset",
-    "Rates Watch Data",
-    "DGS10"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "validation",
-  "novelty": "Unique params/rates_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact capabilities:capability_1_curve-spread-metric:metric:curve_spread_metric_value,capability_2_rates-series-pack:markdown:rates_series_pack_value; generated:note@*:Rates Series Live,series preset."
+    "max_turns": 14
+  }
 }

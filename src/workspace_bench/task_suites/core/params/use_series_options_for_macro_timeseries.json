@@ -1,14 +1,9 @@
 {
   "id": "use_series_options_for_macro_timeseries",
-  "title": "Use Series Options For Macro Timeseries",
-  "capability": "parameter-discovery",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-params",
-    "params",
-    "options"
-  ],
+  "category": "single-widget",
+  "family": "params",
+  "difficulty": "easy",
+  "split": "validation",
   "prompt": "For Bench Macro/macro_timeseries, call get_params_options on parameter series, choose DGS10, and create that widget with series=DGS10.",
   "fixtures": {
     "backends": [
@@ -93,15 +88,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "params",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique params/use_series_options_for_macro_timeseries exercise using create_widget, get_params_options, get_workspace_snapshot with checks layout_out_of_grid, missing_tool_call, missing_tool_result, missing_widget, repeated_snapshots, too_many_invalid_calls on macro; artifact widgets:Bench Macro/macro_timeseries@*."
+  }
 }

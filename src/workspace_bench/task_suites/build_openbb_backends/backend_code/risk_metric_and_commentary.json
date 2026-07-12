@@ -3,8 +3,6 @@
     "filesystem",
     "shell"
   ],
-  "business_terms": [],
-  "capability": "build-real-backend",
   "category": "platform",
   "code_task": {
     "command_timeout_ms": 120000,
@@ -76,7 +74,6 @@
     ]
   },
   "difficulty": "easy",
-  "domain": "engineering",
   "family": "backend-code",
   "fixtures": {
     "backends": []
@@ -86,20 +83,8 @@
   "limits": {
     "max_turns": 24
   },
-  "novelty": "Real-code backend task: risk_metric_and_commentary",
   "oracle_tool_calls": [],
   "prompt": "Finish both supplied risk widgets. Put the shared portfolio-risk calculation in analytics.py, then serve a numeric metric from /risk/score and meaningful markdown from /risk/commentary. Both endpoints must use that shared module and keep CORS/tests green.",
-  "schema_version": "workspace-bench-task",
-  "source": "WorkspaceBench Phase 10 authored code track",
   "split": "train",
-  "subdomain": "openbb-custom-backends",
-  "success": {},
-  "tags": [
-    "build-openbb-backends",
-    "experimental-v0",
-    "multi-widget",
-    "shared-module"
-  ],
-  "title": "Build shared risk metric and commentary widgets",
-  "workflow": "custom-backend-development"
+  "success": {}
 }

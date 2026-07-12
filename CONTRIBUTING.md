@@ -9,9 +9,8 @@ generators, never by editing generated artifacts.
 
 1. Edit the relevant family generator for a bundled suite, or copy an existing
    task into a private task directory.
-2. Give it a stable `id`, title, family, capability, workflow, domain,
-   subdomain, specification level where applicable, difficulty, split, tags,
-   provenance, and novelty note.
+2. Give it a stable `id`, category, family, difficulty, split, and a
+   specification level where it deviates from the difficulty default.
 3. Keep fixture data deterministic and versioned.
 4. Add clear `success` criteria that grade durable Workspace state.
 5. Add a known-good `oracle_tool_calls` trace.

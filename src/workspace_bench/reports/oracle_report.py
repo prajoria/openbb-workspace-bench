@@ -25,18 +25,11 @@ def task_summary(task: Task) -> dict[str, Any]:
     return {
         "id": task.id,
         "qualified_id": task.qualified_id,
-        "title": task.title,
         "family": task.family,
-        "capability": task.capability,
-        "workflow": task.workflow,
-        "domain": task.domain,
-        "subdomain": task.subdomain,
+        "category": task.category,
         "specification_level": task.specification_level,
         "difficulty": task.difficulty,
         "split": task.split,
-        "tags": task.tags,
-        "source": task.source,
-        "novelty": task.novelty,
         "fixtures": [backend.name for backend in task.fixtures],
         "oracle_tool_call_count": len(task.oracle_tool_calls),
         "code_task": task.code_task is not None,
@@ -49,15 +42,9 @@ def result_summary(result: RunResult) -> dict[str, Any]:
         "qualified_id": result.task.qualified_id,
         "category": result.task.category,
         "family": result.task.family,
-        "capability": result.task.capability,
-        "workflow": result.task.workflow,
-        "domain": result.task.domain,
-        "subdomain": result.task.subdomain,
         "specification_level": result.task.specification_level,
         "difficulty": result.task.difficulty,
         "split": result.task.split,
-        "tags": result.task.tags,
-        "novelty": result.task.novelty,
         **grade_summary(result.grade),
     }
 
@@ -68,6 +55,12 @@ def results_summary(results: list[RunResult]) -> dict[str, Any]:
     mean_score = sum(result.grade.score for result in results) / total if total else 0.0
     state_passed = sum(result.grade.state_passed for result in results)
     trace_passed = sum(result.grade.trace_passed for result in results)
+    preservation_results = [
+        result for result in results if result.grade.preservation_checks_total > 0
+    ]
+    preservation_passed = sum(
+        result.grade.preservation_passed for result in preservation_results
+    )
     runtime_results = [result for result in results if result.task.success.runtime is not None]
     polish_results = [result for result in results if result.grade.polish_checks_total > 0]
     runtime_passed = sum(result.grade.runtime_passed for result in runtime_results)
@@ -91,6 +84,19 @@ def results_summary(results: list[RunResult]) -> dict[str, Any]:
         ),
         "mean_trace_score": (
             sum(result.grade.trace_score for result in results) / total if total else 0.0
+        ),
+        "preservation_task_count": len(preservation_results),
+        "preservation_passed": preservation_passed,
+        "preservation_pass_rate": (
+            preservation_passed / len(preservation_results)
+            if preservation_results
+            else 1.0
+        ),
+        "mean_preservation_score": (
+            sum(result.grade.preservation_score for result in preservation_results)
+            / len(preservation_results)
+            if preservation_results
+            else 1.0
         ),
         "runtime_task_count": len(runtime_results),
         "runtime_passed": runtime_passed,
@@ -125,14 +131,10 @@ def build_manifest(
         "redacted": redacted,
         "task_count": len(tasks),
         "families": sorted({task.family for task in tasks}),
-        "capabilities": sorted({task.capability for task in tasks}),
-        "workflows": sorted({task.workflow for task in tasks}),
-        "domains": sorted({task.domain for task in tasks}),
-        "subdomains": sorted({task.subdomain for task in tasks}),
+        "categories": sorted({task.category for task in tasks}),
         "specification_levels": sorted({task.specification_level for task in tasks}),
         "difficulties": sorted({task.difficulty for task in tasks}),
         "splits": sorted({task.split for task in tasks}),
-        "tags": sorted({tag for task in tasks for tag in task.tags}),
         "tasks": [task_summary(task) for task in tasks],
     }
     if task_suite:
@@ -190,14 +192,10 @@ def render_markdown_report(report: dict[str, Any]) -> str:
         "## Coverage",
         "",
         f"- Families: {', '.join(manifest['families'])}",
-        f"- Capabilities: {', '.join(manifest['capabilities'])}",
-        f"- Workflows: {', '.join(manifest['workflows'])}",
-        f"- Domains: {', '.join(manifest['domains'])}",
-        f"- Subdomains: {', '.join(manifest['subdomains'])}",
+        f"- Categories: {', '.join(manifest['categories'])}",
         f"- Specification levels: {', '.join(manifest['specification_levels'])}",
         f"- Difficulties: {', '.join(manifest['difficulties'])}",
         f"- Splits: {', '.join(manifest['splits'])}",
-        f"- Tags: {', '.join(manifest['tags'])}",
         "",
         "## Baselines",
         "",
@@ -216,8 +214,8 @@ def render_markdown_report(report: dict[str, Any]) -> str:
             "",
             "## Task Results",
             "",
-            "| Task | Split | Capability | Workflow | Domain | Subdomain | Specification | Difficulty | Oracle | Noop |",
-            "| --- | --- | --- | --- | --- | --- | --- | --- | ---: | ---: |",
+            "| Task | Split | Category | Specification | Difficulty | Oracle | Noop |",
+            "| --- | --- | --- | --- | --- | ---: | ---: |",
         ]
     )
     noop_by_id = {result["id"]: result for result in report["noop_results"]}
@@ -226,8 +224,7 @@ def render_markdown_report(report: dict[str, Any]) -> str:
         lines.append(
             "| "
             f"{oracle_result['id']} | {oracle_result['split']} | "
-            f"{oracle_result['capability']} | {oracle_result['workflow']} | "
-            f"{oracle_result['domain']} | {oracle_result['subdomain']} | "
+            f"{oracle_result['category']} | "
             f"{oracle_result['specification_level']} | {oracle_result['difficulty']} | "
             f"{oracle_result['score']:.3f} | {noop_result['score']:.3f} |"
         )
@@ -246,16 +243,10 @@ def write_trace_artifacts(
         task_payload: JsonDict = {
             "id": result.task.id,
             "qualified_id": result.task.qualified_id,
-            "title": result.task.title,
             "family": result.task.family,
-            "capability": result.task.capability,
-            "workflow": result.task.workflow,
-            "domain": result.task.domain,
-            "subdomain": result.task.subdomain,
+            "category": result.task.category,
             "difficulty": result.task.difficulty,
             "split": result.task.split,
-            "tags": result.task.tags,
-            "novelty": result.task.novelty,
         }
         task_payload["prompt_redacted" if redact_prompts else "prompt"] = (
             True if redact_prompts else result.task.prompt

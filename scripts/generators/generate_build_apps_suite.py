@@ -28,6 +28,7 @@ Usage:
 from __future__ import annotations
 
 import importlib
+import ast
 import json
 import re
 import sys
@@ -37,6 +38,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
+from _assembly import slim_task_payload  # noqa: E402
 from build_apps_suite import common as c  # noqa: E402
 from workspace_bench.workspace.widget_params import flatten_params  # noqa: E402
 
@@ -67,6 +69,27 @@ def build_families(partial: bool, only: list[str] | None = None) -> list[str]:
         for name in missing:
             print(f"  - {name}")
     return loaded
+
+
+def prompt_sites_use_phrased() -> bool:
+    """Return false if a family authors a task prompt without ``c.phrased``."""
+
+    family_dir = Path(__file__).with_name("build_apps_suite")
+    for path in sorted(family_dir.glob("fam_*.py")):
+        tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Dict):
+                continue
+            for key, value in zip(node.keys, node.values):
+                if not isinstance(key, ast.Constant) or key.value != "prompt":
+                    continue
+                if not (
+                    isinstance(value, ast.Call)
+                    and isinstance(value.func, ast.Attribute)
+                    and value.func.attr == "phrased"
+                ):
+                    return False
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -310,7 +333,9 @@ def certify(tasks: list[dict]) -> tuple[list[str], dict[str, int]]:
     failures: list[str] = []
     check_counts: dict[str, int] = {}
     for raw in tasks:
-        payload = {k: v for k, v in raw.items() if not k.startswith("_")}
+        payload = slim_task_payload(
+            {k: v for k, v in raw.items() if not k.startswith("_")}
+        )
         try:
             task = Task.from_dict(payload)
         except Exception as error:  # noqa: BLE001
@@ -368,6 +393,12 @@ def main() -> int:
         c.add_novelty(task)
 
     report = quota_report(tasks, partial)
+    report.append((
+        "all family prompt sites use phrased()",
+        prompt_sites_use_phrased(),
+        "= True",
+        prompt_sites_use_phrased(),
+    ))
     failed_quotas = [name for name, _, _, ok in report if not ok]
 
     print("\nCertifying (oracle passes, no-op fails)...")
@@ -431,7 +462,9 @@ def main() -> int:
         if candidate.is_dir() and not any(candidate.iterdir()):
             candidate.rmdir()
     payloads = [
-        {key: value for key, value in task.items() if not key.startswith("_")}
+        slim_task_payload(
+            {key: value for key, value in task.items() if not key.startswith("_")}
+        )
         for task in tasks
     ]
     for payload in payloads:

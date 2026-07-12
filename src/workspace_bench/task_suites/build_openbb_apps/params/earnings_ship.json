@@ -1,18 +1,17 @@
 {
   "id": "earnings_ship",
-  "title": "Ship, open, and configure the Earnings Symbol Live parameter app",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-params",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "params",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "params",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "An equity-research analyst needs a decision-ready Workspace for earnings and estimates. The workspace must cover street estimate revisions by quarter. The workspace must cover EPS beat and miss history. The workspace must cover average EPS surprise last 4 quarters. Analysts need to inspect quarter, EPS estimate, revenue estimate billions. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Earnings Symbol Live', 'symbol sync', 'Earnings Prep Data', 'MSFT', 'ticker'. Choose an effective architecture and avoid unrelated changes.",
+  "business_terms": [
+    "Earnings Symbol Live",
+    "symbol sync",
+    "Earnings Prep Data",
+    "MSFT",
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -326,24 +325,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "params",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Earnings Symbol Live",
-    "symbol sync",
-    "Earnings Prep Data",
-    "MSFT",
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique params/earnings_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_earnings-chart:chart-like:earnings_chart_value,capability_2_estimate-revisions:table-like:eps_estimate,quarter,revenue_estimate_b; generated:note@*:Earnings Symbol Live,symbol sync."
+    "max_turns": 14
+  }
 }

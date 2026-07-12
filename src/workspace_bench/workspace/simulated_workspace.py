@@ -11,6 +11,7 @@ from workspace_bench.workspace import backend_validation
 from workspace_bench.workspace.fixtures import FixtureBackend, default_fixture_backends
 from workspace_bench.workspace.naming import slugify
 from workspace_bench.workspace.runtime import task_widget_data
+from workspace_bench.workspace.widget_params import sanitize_data_args
 
 
 WORKSPACE_SKILLS: dict[str, JsonDict] = {
@@ -69,6 +70,23 @@ WORKSPACE_PROMPTS: dict[str, str] = {
 }
 
 APP_BUILDER_INDEX_URI = "openbb://workspace/app-builder/index"
+LIVE_WORKSPACE_RESOURCES = {
+    "openbb://workspace/overview/what-is-workspace": "What Workspace Is: dashboards, apps, widgets, prompts, and the AI Agent.",
+    "openbb://workspace/overview/ai-agent-contract": "AI Agent Contract: descriptions and response shapes make widgets agent-friendly.",
+    "openbb://workspace/contract/backend": "Backend Contract: HTTP, widgets.json, apps.json, endpoints, CORS, and authentication.",
+    "openbb://workspace/specs/widgets-json": "widgets.json Spec: object keyed by widget id with name, type, endpoint, params, and data.",
+    "openbb://workspace/specs/apps-json": "apps.json Spec: array of apps with tabs, layout, groups, prompts, and allowCustomization.",
+    "openbb://workspace/specs/widget-types": "Widget Types: table, table_ssrm, chart, metric, markdown, newsfeed, live_grid, html.",
+    "openbb://workspace/specs/widget-parameters": "Widget Parameters: text, number, boolean, date, endpoint, form, and button params.",
+    "openbb://workspace/specs/layout-grid": "Layout Grid and Groups: 40-column grid, tabs, layout items, and parameter groups.",
+    "openbb://workspace/guides/build-an-app": "Build an App: define sources, author widgets.json and apps.json, validate, and register.",
+    "openbb://workspace/guides/review-app": "Review an App: check contracts, widget and app shapes, layouts, endpoints, and UX.",
+    "openbb://workspace/guides/debug-app": "Debug an App: inspect contract, validation, endpoints, layout, groups, and state.",
+    "openbb://workspace/guides/convert-endpoint-to-widget": "Convert an Existing Endpoint to a Widget: select type, params, columns, and validate.",
+    "openbb://workspace/examples/generic-http/minimal": "Minimal Backend (Generic HTTP): routes, JSON response shapes, CORS, and auth.",
+    "openbb://workspace/examples/python-fastapi/minimal": "Minimal Backend (Python + FastAPI): recommended Python starter shape.",
+    "openbb://workspace/validation/common-errors": "Common Errors: widgets.json, apps.json, layout, group, and endpoint failures.",
+}
 
 
 @dataclass
@@ -354,7 +372,7 @@ class SimulatedWorkspace:
             widget_id=widget_id,
             name=schema["name"],
             widget_type=schema["type"],
-            data_args=spec.get("data_args", {}),
+            data_args=sanitize_data_args(schema, spec.get("data_args", {}) or {}, mode="create"),
             ui_args=spec.get("ui_args", {}),
             layout=LayoutItem(
                 x=float(layout_spec.get("x", 0)),
@@ -694,15 +712,16 @@ class SimulatedWorkspace:
             dashboard = self._dashboard(args.get("dashboard_id"))
             return self._ok("manage_dashboard", self._dashboard_payload(dashboard))
         if operation == "update":
-            dashboard = self._dashboard(args.get("dashboard_id"))
-            name = args.get("name")
-            if not isinstance(name, str):
+            # The live Workspace MCP rejects update without an explicit
+            # dashboard_id (no active-dashboard fallback); mirror its message.
+            if not args.get("dashboard_id") or not isinstance(args.get("name"), str):
                 return self._error(
                     "manage_dashboard",
                     "invalid_request",
-                    "manage_dashboard operation='update' requires name.",
+                    "manage_dashboard operation='update' requires dashboard_id and name.",
                 )
-            dashboard.name = name
+            dashboard = self._dashboard(args.get("dashboard_id"))
+            dashboard.name = str(args.get("name"))
             return self._ok("manage_dashboard", self._dashboard_payload(dashboard))
         return self._error(
             "manage_dashboard",
@@ -758,12 +777,11 @@ class SimulatedWorkspace:
                     "invalid_request",
                     "rename_tabs requires rename_map.",
                 )
+            # The real frontend keeps tab ids stable on rename — only the
+            # display name changes (verified against the live bridge).
             for old_tab_id, new_name in rename_map.items():
                 if old_tab_id in dashboard.tabs:
-                    tab = dashboard.tabs.pop(old_tab_id)
-                    tab.name = str(new_name)
-                    tab.tab_id = slugify(str(new_name), fallback="tab")
-                    dashboard.tabs[tab.tab_id] = tab
+                    dashboard.tabs[old_tab_id].name = str(new_name)
             return self._ok("manage_navigation_bar", self._dashboard_payload(dashboard))
         return self._error(
             "manage_navigation_bar",
@@ -831,7 +849,7 @@ class SimulatedWorkspace:
             widget_id=str(widget_id),
             name=schema["name"],
             widget_type=schema["type"],
-            data_args=data_args or {},
+            data_args=sanitize_data_args(schema, data_args or {}, mode="create"),
             ui_args=ui_args or {},
             layout=LayoutItem(
                 x=0,
@@ -860,6 +878,15 @@ class SimulatedWorkspace:
                 )
         widget = self._find_widget(args)
         if isinstance(data_args, dict):
+            definition: JsonDict | None = None
+            try:
+                definition = self._backend_by_origin(widget.origin).get_widget_schema(
+                    widget.widget_id
+                )
+            except Exception:  # noqa: BLE001 - generated widgets have no schema.
+                definition = None
+            if definition is not None:
+                data_args = sanitize_data_args(definition, data_args)
             widget.data_args.update(data_args)
         if isinstance(ui_args, dict):
             widget.ui_args.update(ui_args)
@@ -1079,6 +1106,15 @@ class SimulatedWorkspace:
                     "apps": self._app_builder_index(),
                 },
             )
+        if uri in LIVE_WORKSPACE_RESOURCES:
+            return self._ok(
+                "read_workspace_resource",
+                {
+                    "uri": uri,
+                    "mime_type": "text/markdown",
+                    "text": LIVE_WORKSPACE_RESOURCES[uri],
+                },
+            )
         skill_prefix = "openbb://workspace/skills/"
         if uri.startswith(skill_prefix):
             slug = uri.removeprefix(skill_prefix)
@@ -1295,6 +1331,7 @@ class SimulatedWorkspace:
     def _valid_resource_uris(self) -> list[str]:
         return [
             APP_BUILDER_INDEX_URI,
+            *sorted(LIVE_WORKSPACE_RESOURCES),
             *[
                 f"openbb://workspace/skills/{slug}"
                 for slug in sorted(WORKSPACE_SKILLS)

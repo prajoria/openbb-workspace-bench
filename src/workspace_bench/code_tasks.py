@@ -121,12 +121,10 @@ def build_code_task_envelope(task: Task) -> JsonDict:
         "task": {
             "id": task.id,
             "qualified_id": task.qualified_id,
-            "title": task.title,
             "prompt": task.prompt,
             "specification_level": task.specification_level,
             "difficulty": task.difficulty,
             "family": task.family,
-            "tags": list(task.tags),
         },
         "repository": {
             "start_command": list(spec.start_command),
@@ -152,7 +150,7 @@ def write_code_task_files(task: Task, workdir: Path) -> tuple[Path, Path]:
         encoding="utf-8",
     )
     brief_path.write_text(
-        f"# {task.title}\n\n{task.prompt.strip()}\n\n"
+        f"# {task.id}\n\n{task.prompt.strip()}\n\n"
         "## Evaluator contract\n\n"
         "Keep the task-local pinned environment and start command working. The evaluator "
         "will launch the backend on an injected ephemeral port, validate widgets.json and "
@@ -434,9 +432,7 @@ def validate_code_tasks(tasks: list[Task], *, min_tasks: int = 1) -> JsonDict:
     )}
     release_checks = {
         "task_count_is_12": len(tasks) == 12,
-        "all_tasks_are_experimental_v0_code_tasks": all(
-            task.code_task is not None and "experimental-v0" in task.tags for task in tasks
-        ),
+        "all_tasks_are_code_tasks": all(task.code_task is not None for task in tasks),
         "difficulty_spread_3_6_3": difficulties == {"easy": 3, "medium": 6, "hard": 3},
         "oracle_all_pass": oracle_passed == len(tasks),
         "starter_all_fail": noop_failed == len(tasks),
@@ -513,7 +509,11 @@ def _evaluate_manifests(
     for definition in widgets.values():
         endpoint = definition.get("endpoint")
         if isinstance(endpoint, str):
-            method = "POST" if definition.get("type") == "ssrm_table" else "GET"
+            method = (
+                "POST"
+                if definition.get("type") in {"table_ssrm", "ssrm_table"}
+                else "GET"
+            )
             declared.add((method, endpoint))
         for param in flatten_params(definition, recurse=True):
             if param.get("type") == "form" and isinstance(param.get("endpoint"), str):

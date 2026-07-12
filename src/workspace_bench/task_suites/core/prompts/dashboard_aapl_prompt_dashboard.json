@@ -1,14 +1,9 @@
 {
   "id": "dashboard_aapl_prompt_dashboard",
-  "title": "AAPL Prompt Dashboard",
-  "capability": "dashboard-construction",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-prompts",
-    "prompts",
-    "multi-widget"
-  ],
+  "category": "dashboard",
+  "family": "prompts",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Get workspace_tool_usage, create dashboard AAPL Prompt Dashboard, add Bench Equities/price_performance with data_args {\"symbol\": \"AAPL\"} and Bench Equities/latest_news with data_args {\"limit\": 5, \"symbol\": \"AAPL\"} with schema-first discipline, and add a note mentioning AAPL and schema.",
   "fixtures": {
     "backends": [
@@ -147,15 +142,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "prompts",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 12
-  },
-  "split": "train",
-  "novelty": "Unique prompts/dashboard_aapl_prompt_dashboard exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_prompt, list_available_widgets, manage_dashboard with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_result, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on equities; artifact prompts:workspace_tool_usage; widgets:Bench Equities/latest_news@*,Bench Equities/price_performance@*; generated:note@*:AAPL,schema."
+  }
 }

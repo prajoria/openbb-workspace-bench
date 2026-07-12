@@ -1,0 +1,27 @@
+{
+  "fetched_at": "2026-07-12",
+  "resource_sha256": "4f8b774b27e8fa5893c371f79736120d95a931541c9fed4e4988009293a78ccf",
+  "schema_version": "workspace-bench-live-widget-types/v1",
+  "types": [
+    "advanced_charting",
+    "chart",
+    "chart-highcharts",
+    "chart-vegalite",
+    "file_viewer",
+    "html",
+    "iframe",
+    "live_grid",
+    "markdown",
+    "metric",
+    "multi_file_viewer",
+    "newsfeed",
+    "note",
+    "omni",
+    "pdf",
+    "ssrm_advanced",
+    "table",
+    "table_ssrm",
+    "youtube"
+  ],
+  "uri": "openbb://workspace/specs/widget-types"
+}

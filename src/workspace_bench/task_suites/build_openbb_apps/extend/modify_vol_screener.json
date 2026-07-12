@@ -1,18 +1,15 @@
 {
   "id": "modify_vol_screener",
-  "title": "Modify Vol Screener without dropping siblings",
-  "workflow": "risk-review",
-  "subdomain": "volatility",
-  "tags": [
-    "family-extend",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "refresh",
-    "extend",
-    "composed"
-  ],
+  "category": "repair",
+  "family": "extend",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Deliver an analyst-ready Workspace solution for volatility and derivatives. The workspace must cover screen names by implied-vol criteria. The workspace must cover current volatility regime score. An analyst can filter the analysis by ticker. An analyst can choose the relevant business date. An analyst can toggle the relevant screening constraint. Use `ticker` and `as_of` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
+  "business_terms": [
+    "ticker",
+    "as_of"
+  ],
   "fixtures": {},
   "initial_state": {
     "custom_backends": [
@@ -249,21 +246,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "extend",
-  "capability": "app-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "ticker",
-    "as_of"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique extend/modify_vol_screener building exercise using create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks capability, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls on custom:Vol Desk Data; artifact capabilities:capability_1_vol-screener:table-like:vol_screener_value."
+    "max_turns": 13
+  }
 }

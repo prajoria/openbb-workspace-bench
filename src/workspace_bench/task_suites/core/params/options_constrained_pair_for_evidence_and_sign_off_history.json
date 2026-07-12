@@ -1,15 +1,10 @@
 {
   "id": "options_constrained_pair_for_evidence_and_sign_off_history",
-  "title": "Options-Constrained Pair For Evidence and Sign-Off History",
-  "capability": "dashboard-construction",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-params",
-    "params",
-    "multi-widget"
-  ],
-  "prompt": "After using get_params_options for Bench Stark Enterprise/corporate_access_meeting_notes_claims_evidence_and_sign_off_history sector=Communication Services, add companion widget corporate_access_meeting_notes_claims_management_claims_tracker and arrange both without overlap.",
+  "category": "dashboard",
+  "family": "params",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "After using get_params_options for Bench Stark Enterprise/corporate_access_meeting_notes_claims_evidence_and_sign_off_history sector=Technology, add companion widget corporate_access_meeting_notes_claims_management_claims_tracker and arrange both without overlap.",
   "fixtures": {
     "backends": [
       {
@@ -25,20 +20,6 @@
         {
           "id": "",
           "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "vendor_dataset_monitor_slas_sla_breach_history",
-          "data_args": {},
-          "tab_id": "",
-          "layout": {
-            "x": 0,
-            "y": 500,
-            "w": 8,
-            "h": 4
-          }
         }
       ]
     }
@@ -57,21 +38,13 @@
         "origin": "Bench Stark Enterprise",
         "widget_id": "corporate_access_meeting_notes_claims_evidence_and_sign_off_history",
         "data_args": {
-          "sector": "Communication Services"
+          "sector": "Technology"
         }
       },
       {
         "origin": "Bench Stark Enterprise",
         "widget_id": "corporate_access_meeting_notes_claims_management_claims_tracker",
         "data_args": {}
-      },
-      {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "vendor_dataset_monitor_slas_sla_breach_history",
-        "data_args": {},
-        "tab_id": "",
-        "min_count": 1,
-        "max_count": 1
       }
     ],
     "required_layouts": [
@@ -94,7 +67,7 @@
       {
         "tool": "get_params_options",
         "data_contains": [
-          "Communication Services"
+          "Technology"
         ]
       }
     ],
@@ -145,7 +118,7 @@
         "origin": "Bench Stark Enterprise",
         "widget_id": "corporate_access_meeting_notes_claims_evidence_and_sign_off_history",
         "data_args": {
-          "sector": "Communication Services"
+          "sector": "Technology"
         }
       }
     },
@@ -191,15 +164,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "params",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 13
-  },
-  "split": "train",
-  "novelty": "Unique params/options_constrained_pair_for_evidence_and_sign_off_history exercise using create_widget, get_params_options, get_widget_schema, get_workspace_snapshot, list_available_widgets, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, missing_tool_result, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, too_many_widgets, unlisted_widget_id on stark-enterprise; artifact widgets:Bench Stark Enterprise/corporate_access_meeting_notes_claims_evidence_and_sign_off_history@*,Bench Stark Enterprise/corporate_access_meeting_notes_claims_management_claims_tracker@*,Bench Stark Enterprise/vendor_dataset_monitor_slas_sla_breach_history@; layouts:corporate_access_meeting_notes_claims_evidence_and_sign_off_history:::0:0:20:10,corporate_access_meeting_notes_claims_management_claims_tracker:::20:0:20:10."
+  }
 }

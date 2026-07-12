@@ -1,17 +1,15 @@
 {
   "id": "trial_readout_form",
-  "title": "Compose the Trial Readout Form widget",
-  "workflow": "healthcare-catalyst-review",
-  "subdomain": "healthcare",
-  "tags": [
-    "family-forms",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "forms",
-    "composed"
-  ],
+  "category": "platform",
+  "family": "forms",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "Create a usable clinical catalysts and pipelines workflow for a healthcare-research analyst. The workspace must cover capture a clinical trial readout note. An analyst can filter the analysis by ticker. An analyst can choose the relevant business date. The user can enter the required details and submit the workflow. The source contract must retain `readout` and `ticker`; decide the remaining implementation and preserve unrelated workspace state.",
+  "business_terms": [
+    "readout",
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -171,21 +169,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "forms",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "readout",
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "validation",
-  "novelty": "Unique forms/trial_readout_form building exercise using create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks capability, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_trial-readout-form:form:trial_readout_form_value."
+    "max_turns": 13
+  }
 }

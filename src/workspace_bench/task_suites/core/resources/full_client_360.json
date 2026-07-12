@@ -1,15 +1,9 @@
 {
   "id": "full_client_360",
-  "title": "Index-Guided App Extension: Client 360",
-  "capability": "dashboard-construction",
-  "workflow": "client-meeting-prep",
-  "subdomain": "client-ir",
-  "tags": [
-    "family-resources",
-    "resources",
-    "apps",
-    "widget-creation"
-  ],
+  "category": "dashboard",
+  "family": "resources",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Read the app-builder index resource at openbb://workspace/app-builder/index, instantiate client-360 as Client Resource Command, navigate to flows, add widget client_360_flows_pipeline_by_stage, and add a note mentioning pipeline and resource.",
   "fixtures": {
     "backends": [
@@ -120,15 +114,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "resources",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 9
-  },
-  "split": "train",
-  "novelty": "Unique resources/full_client_360 exercise using add_generative_widget, create_widget, get_widget_schema, manage_apps, manage_backends, navigate_workspace, read_workspace_resource with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_resource_read, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact resource:openbb://workspace/app-builder/index; apps:client-360; widgets:Bench Stark Enterprise/client_360_flows_pipeline_by_stage@flows; generated:note@flows:pipeline,resource."
+  }
 }

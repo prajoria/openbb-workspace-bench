@@ -1,18 +1,14 @@
 {
   "id": "vol_commentary_room",
-  "title": "Assemble the Vol Settings Room configured app",
-  "workflow": "risk-review",
-  "subdomain": "volatility",
-  "tags": [
-    "family-settings",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "settings",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "settings",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Build a working Workspace experience for a volatility analyst covering volatility and derivatives. The workspace must cover morning volatility commentary. The workspace must cover current volatility regime score. Leave the complete working workspace open for review. Keep these source-contract anchors: `desk`. Choose the rest of the architecture and avoid unrelated changes.",
+  "business_terms": [
+    "desk"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -226,20 +222,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "settings",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "desk"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique settings/vol_commentary_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact capabilities:capability_1_vol-commentary:markdown:vol_commentary_value,capability_2_vol-regime-metric:metric:vol_regime_metric_value."
+    "max_turns": 14
+  }
 }

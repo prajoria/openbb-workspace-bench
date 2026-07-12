@@ -1,0 +1,918 @@
+{
+  "add_generative_widget": {
+    "additionalProperties": false,
+    "properties": {
+      "chart_params": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "dashboard_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "data": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "description": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "inner_tab": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "name": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "widget_type": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "widget_type"
+    ],
+    "type": "object"
+  },
+  "assign_tasks_to_agents": {
+    "additionalProperties": false,
+    "properties": {
+      "task_requests": {
+        "items": {
+          "additionalProperties": false,
+          "description": "One task delegated to an external Workspace agent.\n\nField names match the frontend Zod schema in\n``terminalpro/src/components/AI/.../ai.ts`` (``taskRequestsSchema``).",
+          "properties": {
+            "assigned_agent_id": {
+              "type": "string"
+            },
+            "assigned_holder_url": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "description",
+            "assigned_holder_url",
+            "assigned_agent_id"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      }
+    },
+    "required": [
+      "task_requests"
+    ],
+    "type": "object"
+  },
+  "create_widget": {
+    "additionalProperties": false,
+    "properties": {
+      "dashboard_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "data_args": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "origin": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "ui_args": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "widget_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "type": "object"
+  },
+  "delete_widget": {
+    "additionalProperties": false,
+    "properties": {
+      "dashboard_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "widget_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "widget_uuid": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "type": "object"
+  },
+  "get_params_options": {
+    "additionalProperties": false,
+    "properties": {
+      "data_args": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "origin": {
+        "type": "string"
+      },
+      "param_name": {
+        "type": "string"
+      },
+      "widget_id": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "origin",
+      "widget_id",
+      "param_name"
+    ],
+    "type": "object"
+  },
+  "get_skill_content": {
+    "additionalProperties": false,
+    "properties": {
+      "reason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "slug": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "slug"
+    ],
+    "type": "object"
+  },
+  "get_widget_data": {
+    "additionalProperties": false,
+    "properties": {
+      "data_args": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "origin": {
+        "type": "string"
+      },
+      "ssm_request": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "widget_id": {
+        "type": "string"
+      },
+      "widget_uuid": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "required": [
+      "origin",
+      "widget_id"
+    ],
+    "type": "object"
+  },
+  "get_widget_schema": {
+    "additionalProperties": false,
+    "properties": {
+      "origin": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "widget_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "type": "object"
+  },
+  "get_workspace_snapshot": {
+    "additionalProperties": false,
+    "properties": {},
+    "type": "object"
+  },
+  "list_available_widgets": {
+    "additionalProperties": false,
+    "properties": {
+      "backend_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "origin": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "type": "object"
+  },
+  "manage_apps": {
+    "additionalProperties": false,
+    "properties": {
+      "activate": {
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "app_name": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "backend_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "dashboard_name": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "operation": {
+        "type": "string"
+      },
+      "template_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "manage_backends": {
+    "additionalProperties": false,
+    "properties": {
+      "backend_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "endpoint_headers": {
+        "anyOf": [
+          {
+            "items": {
+              "additionalProperties": false,
+              "description": "One header or query parameter sent to a Workspace backend.",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "location": {
+                  "default": "headers",
+                  "enum": [
+                    "headers",
+                    "query"
+                  ],
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "is_openbb_platform": {
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "name": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "operation": {
+        "type": "string"
+      },
+      "url": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "validate_widgets": {
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "manage_dashboard": {
+    "additionalProperties": false,
+    "properties": {
+      "activate": {
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "dashboard_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "name": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "operation": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "manage_navigation_bar": {
+    "additionalProperties": false,
+    "properties": {
+      "dashboard_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "operation": {
+        "type": "string"
+      },
+      "rename_map": {
+        "anyOf": [
+          {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "tabs": {
+        "anyOf": [
+          {
+            "items": {
+              "additionalProperties": false,
+              "description": "One tab to create or remove on a navigation bar.\n\nThe frontend handler (``useManageNavigationBar``) reads only ``name`` and\nderives ``tab_id`` as the slug of ``name``. ``extra=\"forbid\"`` on the base\n``Model`` rejects accidental ``tab_id`` / ``tab_name`` fields, so the\ncommon LLM mistake fails validation instead of silently writing the wrong\nshape to the bridge.",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "navigate_workspace": {
+    "additionalProperties": false,
+    "properties": {
+      "dashboard_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "operation": {
+        "type": "string"
+      },
+      "tab_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "read_widget": {
+    "additionalProperties": false,
+    "properties": {
+      "dashboard_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "widget_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "widget_uuid": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "type": "object"
+  },
+  "update_widget": {
+    "additionalProperties": false,
+    "properties": {
+      "dashboard_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "data_args": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "ui_args": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "widget_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "widget_uuid": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "type": "object"
+  },
+  "update_widget_layout": {
+    "additionalProperties": false,
+    "properties": {
+      "dashboard_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "h": {
+        "type": "number"
+      },
+      "max_h": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "max_w": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "min_h": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "min_w": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "tab_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "w": {
+        "type": "number"
+      },
+      "widget_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "widget_uuid": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "x": {
+        "type": "number"
+      },
+      "y": {
+        "type": "number"
+      }
+    },
+    "required": [
+      "x",
+      "y",
+      "w",
+      "h"
+    ],
+    "type": "object"
+  }
+}

@@ -1,19 +1,17 @@
 {
   "id": "repair_vol",
-  "title": "Repair, extend, open, and configure Vol Repair Live",
-  "workflow": "risk-review",
-  "subdomain": "volatility",
-  "tags": [
-    "family-extend",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "refresh",
-    "extend",
-    "orchestration"
-  ],
+  "category": "repair",
+  "family": "extend",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "A volatility analyst needs a decision-ready Workspace for volatility and derivatives. The workspace must cover market history for VIX futures. The workspace must cover current volatility regime score. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Preserve all working content while correcting the requested workflow. Add a short completion note that naturally includes the desk-required terms 'Vol Repair Live', 'vol regime', 'Vol Desk Data', 'VX2', 'ticker'. Choose an effective architecture and avoid unrelated changes.",
+  "business_terms": [
+    "Vol Repair Live",
+    "vol regime",
+    "Vol Desk Data",
+    "VX2",
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {
     "custom_backends": [
@@ -312,24 +310,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "extend",
-  "capability": "app-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Vol Repair Live",
-    "vol regime",
-    "Vol Desk Data",
-    "VX2",
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 9
-  },
-  "split": "test",
-  "novelty": "Unique extend/repair_vol building exercise using add_generative_widget, get_workspace_snapshot, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact capabilities:capability_1_vix-advanced:chart-like:vix_advanced_value,capability_2_vol-regime-metric:metric:vol_regime_metric_value; generated:note@*:Vol Repair Live,vol regime."
+    "max_turns": 14
+  }
 }

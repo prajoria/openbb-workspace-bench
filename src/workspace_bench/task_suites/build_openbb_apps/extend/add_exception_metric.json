@@ -1,16 +1,9 @@
 {
   "id": "add_exception_metric",
-  "title": "Refresh Execution Desk Data with Exceptions",
-  "workflow": "execution-exception-review",
-  "subdomain": "execution",
-  "tags": [
-    "family-extend",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "refresh",
-    "extend"
-  ],
+  "category": "repair",
+  "family": "extend",
+  "difficulty": "easy",
+  "split": "validation",
   "prompt": "Make the requested backend widget available and working in the current view. Use 'Execution Desk Data' at http://localhost:7806. Repair the existing backend without regressing working content. The experience needs Open Orders (`open_orders`, table) using `/open-orders` for live open orders blotter; columns: order_id (text), symbol (text), qty (number, int), status (text, titleCase); Exceptions (`exception_metric`, metric) using `/exception-count` for open execution exceptions; cache for 15 minutes. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {
@@ -260,18 +253,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "extend",
-  "capability": "app-building",
-  "specification_level": "explicit",
-  "difficulty": "easy",
-  "business_terms": [],
   "limits": {
     "max_turns": 8
-  },
-  "split": "validation",
-  "novelty": "Unique extend/add_exception_metric building exercise using create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/exception_metric,Execution Desk Data/open_orders; widgets:Execution Desk Data/open_orders@*."
+  }
 }

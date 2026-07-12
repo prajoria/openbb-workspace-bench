@@ -1,13 +1,9 @@
 {
   "id": "add_macro",
-  "title": "Register Bench Macro",
-  "capability": "dashboard-construction",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-backends",
-    "backends"
-  ],
+  "category": "dashboard",
+  "family": "backends",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "Call manage_backends with operation add and name macro to register Bench Macro, then call manage_backends with operation list.",
   "fixtures": {
     "backends": []
@@ -131,15 +127,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "backends",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique backends/add_macro exercise using manage_backends with checks layout_out_of_grid, missing_tool_call, missing_tool_result, too_many_invalid_calls on macro; artifact id:add_macro."
+  }
 }

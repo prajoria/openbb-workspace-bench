@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import atexit
 import copy
+import hashlib
 import json
 import threading
 from dataclasses import dataclass
@@ -26,10 +27,11 @@ from workspace_bench.core.models import (
 from workspace_bench.workspace.widget_params import flatten_params
 
 
-TABLE_TYPES = {"table", "ssrm_table", "live_grid"}
+SSRM_TABLE_TYPES = {"table_ssrm", "ssrm_table"}
+TABLE_TYPES = {"table", "live_grid"} | SSRM_TABLE_TYPES
 CHART_TYPES = {"chart", "chart-highcharts", "chart-vegalite", "advanced_charting"}
 TEXT_TYPES = {"markdown", "html"}
-POST_TYPES = {"ssrm_table"}
+POST_TYPES = SSRM_TABLE_TYPES
 PLACEHOLDER_TEXT = {
     "placeholder",
     "todo",
@@ -98,11 +100,17 @@ class _RuntimeRequestHandler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:  # noqa: N802
         length = int(self.headers.get("Content-Length", "0"))
+        request_payload: JsonDict = {}
         if length:
-            self.rfile.read(length)
-        self._serve()
+            try:
+                parsed = json.loads(self.rfile.read(length))
+                if isinstance(parsed, dict):
+                    request_payload = parsed
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                request_payload = {}
+        self._serve(request_payload)
 
-    def _serve(self) -> None:
+    def _serve(self, request_payload: JsonDict | None = None) -> None:
         token = urlparse(self.path).path.rsplit("/", 1)[-1]
         with self.server.route_lock:
             route = self.server.routes.get(token)
@@ -114,7 +122,9 @@ class _RuntimeRequestHandler(BaseHTTPRequestHandler):
         if dataset.raw_body is not None:
             body = dataset.raw_body.encode("utf-8")
         else:
-            body = json.dumps(dataset.payload, sort_keys=True).encode("utf-8")
+            body = json.dumps(
+                materialize_dataset(dataset, request_payload or {}), sort_keys=True
+            ).encode("utf-8")
         self._send(body, dataset.status)
 
     def _send(self, body: bytes, status: int) -> None:
@@ -173,6 +183,10 @@ def declared_fields(definition: JsonDict) -> set[str]:
 
     fields: set[str] = set()
     data = definition.get("data")
+    if isinstance(data, list):
+        for row in data:
+            if isinstance(row, dict):
+                fields.update(str(key) for key in row)
     if isinstance(data, dict):
         table = data.get("table")
         if isinstance(table, dict):
@@ -311,7 +325,7 @@ def task_widget_data(
         except json.JSONDecodeError:
             return None, "The backend response was not valid JSON."
     else:
-        payload = copy.deepcopy(dataset.payload)
+        payload = materialize_dataset(dataset, {})
     if not compatible:
         missing = sorted(declared_fields(definition) - set(dataset.fields))
         return None, f"The backend response is missing declared fields: {missing}."
@@ -501,6 +515,14 @@ def grade_runtime(task: Task, final_snapshot: JsonDict) -> RuntimeGrade:
                     params,
                     timeout=checks.request_timeout_ms / 1000,
                 )
+                if failure is None and str(definition.get("type")) in SSRM_TABLE_TYPES:
+                    failure = _verify_ssrm_paging(
+                        probe_url,
+                        definition,
+                        params,
+                        dataset,
+                        timeout=checks.request_timeout_ms / 1000,
+                    )
             finally:
                 server.remove(probe_url)
             if failure is not None:
@@ -642,12 +664,16 @@ def _request_json(
     params: JsonDict,
     *,
     timeout: float,
+    ssm_request: JsonDict | None = None,
 ) -> tuple[Any, tuple[str, str] | None]:
     method = "POST" if _request_method(definition) == "POST" else "GET"
     if method == "POST":
         body_payload: JsonDict = dict(params)
-        if str(definition.get("type")) == "ssrm_table":
-            body_payload.update({"startRow": 0, "endRow": 100, "sortModel": [], "filterModel": {}})
+        if str(definition.get("type")) in SSRM_TABLE_TYPES:
+            body_payload.update(
+                ssm_request
+                or {"startRow": 0, "endRow": 100, "sortModel": [], "filterModel": {}}
+            )
         body = json.dumps(body_payload, sort_keys=True).encode("utf-8")
         request = Request(url, data=body, method="POST", headers={"Content-Type": "application/json"})
     else:
@@ -668,6 +694,130 @@ def _request_json(
         return json.loads(raw.decode("utf-8")), None
     except (UnicodeDecodeError, json.JSONDecodeError) as error:
         return None, ("endpoint_response_malformed", f"response is not parseable JSON: {error}.")
+
+
+def materialize_dataset(dataset: RuntimeDataset, request: JsonDict) -> Any:
+    """Materialize a compact fixture payload or deterministic generated page."""
+    spec = dataset.payload_spec
+    if spec is None:
+        return copy.deepcopy(dataset.payload)
+    rows = _seeded_rows(spec)
+    sort_model = request.get("sortModel")
+    filter_model = request.get("filterModel")
+    if isinstance(filter_model, dict):
+        rows = [row for row in rows if _ssrm_filter_match(row, filter_model)]
+    if isinstance(sort_model, list):
+        for sort in reversed(sort_model):
+            if not isinstance(sort, dict):
+                continue
+            field = sort.get("colId") or sort.get("field")
+            if isinstance(field, str):
+                rows.sort(key=lambda row: (row.get(field) is None, row.get(field)), reverse=sort.get("sort") == "desc")
+    if "startRow" in request or "endRow" in request:
+        start = max(0, int(request.get("startRow", 0)))
+        end = max(start, int(request.get("endRow", start + 100)))
+        data_key = str(spec.get("data_key", "rows"))
+        return {data_key: rows[start:end], "lastRow": len(rows)}
+    return rows
+
+
+def _seeded_rows(spec: JsonDict) -> list[JsonDict]:
+    seed = int(spec["seed"])
+    schema = spec["schema"]
+    assert isinstance(schema, dict)
+    return [
+        {
+            str(field): _seeded_value(seed, index, str(field), kind)
+            for field, kind in schema.items()
+        }
+        for index in range(int(spec["n_rows"]))
+    ]
+
+
+def _seeded_value(seed: int, index: int, field: str, kind: Any) -> Any:
+    digest = hashlib.sha256(f"{seed}:{index}:{field}".encode()).hexdigest()
+    if isinstance(kind, dict) and isinstance(kind.get("values"), list) and kind["values"]:
+        values = kind["values"]
+        return values[int(digest[:8], 16) % len(values)]
+    kind_name = str(kind)
+    if kind_name == "integer":
+        return int(digest[:8], 16) % 100_000
+    if kind_name == "number":
+        return round((int(digest[:10], 16) % 10_000_000) / 10_000, 4)
+    if kind_name == "boolean":
+        return bool(int(digest[0], 16) % 2)
+    if kind_name == "date":
+        day = int(digest[:8], 16) % 365
+        return f"2025-{day // 31 + 1:02d}-{day % 28 + 1:02d}"
+    return f"{field}_{index:05d}_{digest[:6]}"
+
+
+def _ssrm_filter_match(row: JsonDict, filters: JsonDict) -> bool:
+    for field, raw_filter in filters.items():
+        if not isinstance(raw_filter, dict):
+            continue
+        expected = raw_filter.get("filter")
+        actual = row.get(field)
+        operation = raw_filter.get("type", "equals")
+        if operation == "contains":
+            if str(expected).casefold() not in str(actual).casefold():
+                return False
+        elif actual != expected:
+            return False
+    return True
+
+
+def _verify_ssrm_paging(
+    url: str,
+    definition: JsonDict,
+    params: JsonDict,
+    dataset: RuntimeDataset,
+    *,
+    timeout: float,
+) -> tuple[str, str] | None:
+    spec = dataset.payload_spec
+    if spec is None:
+        return None
+    n_rows = int(spec["n_rows"])
+    data_key = str(spec.get("data_key", "rows"))
+    start = max(0, n_rows - 27)
+    partial, failure = _request_json(
+        url,
+        definition,
+        params,
+        timeout=timeout,
+        ssm_request={"startRow": start, "endRow": n_rows + 20, "sortModel": [], "filterModel": {}},
+    )
+    if failure is not None:
+        return failure
+    if not isinstance(partial, dict) or len(partial.get(data_key, [])) != 27 or partial.get("lastRow") != n_rows:
+        return "endpoint_response_incompatible", "SSRM partial page or total count is incorrect."
+    rows = _seeded_rows(spec)
+    field = next(iter(spec["schema"]))
+    expected = rows[0][field]
+    filtered, failure = _request_json(
+        url,
+        definition,
+        params,
+        timeout=timeout,
+        ssm_request={
+            "startRow": 0,
+            "endRow": 50,
+            "sortModel": [{"colId": field, "sort": "desc"}],
+            "filterModel": {field: {"type": "equals", "filter": expected}},
+        },
+    )
+    expected_rows = [row for row in rows if row[field] == expected]
+    observed = filtered.get(data_key, []) if isinstance(filtered, dict) else []
+    if (
+        failure is not None
+        or not isinstance(filtered, dict)
+        or filtered.get("lastRow") != len(expected_rows)
+        or any(row.get(field) != expected for row in observed)
+        or observed != sorted(observed, key=lambda row: row.get(field), reverse=True)
+    ):
+        return "endpoint_response_incompatible", "SSRM sort/filter passthrough is incorrect."
+    return None
 
 
 def _shape_error(definition: JsonDict, payload: Any) -> str | None:

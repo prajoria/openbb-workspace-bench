@@ -1,15 +1,9 @@
 {
   "id": "ambient_repair_and_brief_macro_timeseries",
-  "title": "Ambient Repair And Brief Macro Timeseries",
-  "capability": "workspace-repair",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-inspect",
-    "inspect",
-    "repair",
-    "note"
-  ],
+  "category": "repair",
+  "family": "inspect",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "After inspecting the dashboard, find the widget with series=DGS2, repair it to DGS10, keep the companion widget, and add a note mentioning the repair.",
   "fixtures": {
     "backends": [
@@ -144,15 +138,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "inspect",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique inspect/ambient_repair_and_brief_macro_timeseries exercise using add_generative_widget, get_workspace_snapshot, read_widget, update_widget with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on macro; artifact widgets:Bench Macro/macro_timeseries@*,Bench Macro/yield_curve@*; generated:note@*:DGS2,DGS10."
+  }
 }

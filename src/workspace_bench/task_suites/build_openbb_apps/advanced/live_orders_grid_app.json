@@ -1,16 +1,10 @@
 {
   "id": "live_orders_grid_app",
-  "title": "Ship Live Orders Grid as Live Order Tape",
-  "workflow": "execution-exception-review",
-  "subdomain": "execution",
-  "tags": [
-    "family-advanced",
-    "cell2",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "advanced"
-  ],
+  "category": "platform",
+  "family": "advanced",
+  "specification_level": "explicit",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Execution Desk Data' at http://localhost:7806. Implement the live or advanced interaction correctly. The experience needs Live Orders Grid (`live_orders_grid`, live_grid) using `/live-orders` for streaming order blotter over websocket; stream updates from `live-orders-ws`; stream row id `order_id`; columns: order_id (text), px (number, showCellChange). Organize it as app 'Live Order Tape' with tabs Orders (live_orders_grid). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},
@@ -209,18 +203,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "advanced",
-  "capability": "widget-building",
-  "specification_level": "explicit",
-  "difficulty": "easy",
-  "business_terms": [],
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique advanced/live_orders_grid_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks app_def, dashboard_name, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Execution Desk Data; artifact widgetdefs:Execution Desk Data/live_orders_grid; appdefs:Execution Desk Data/Live Order Tape; widgets:Execution Desk Data/live_orders_grid@orders."
+  }
 }

@@ -1,14 +1,9 @@
 {
   "id": "rename_both_pm_morning",
-  "title": "Rename Dashboard And Tab: PM Morning Review",
-  "capability": "workspace-navigation",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-navigate",
-    "rename",
-    "navigation"
-  ],
+  "category": "single-widget",
+  "family": "navigate",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "Set the active dashboard name to PM Morning Review and rename the Overview tab to Holdings View.",
   "fixtures": {
     "backends": [
@@ -37,8 +32,8 @@
   ],
   "success": {
     "required_dashboard_name_contains": "PM Morning Review",
-    "required_tabs": [
-      "holdings-view"
+    "required_tab_names": [
+      "Holdings View"
     ],
     "required_tool_calls": [
       {
@@ -67,6 +62,7 @@
       "tool": "manage_dashboard",
       "args": {
         "operation": "update",
+        "dashboard_id": "dash_001",
         "name": "PM Morning Review"
       }
     },
@@ -80,15 +76,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "navigate",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 5
-  },
-  "split": "test",
-  "novelty": "Unique navigate/rename_both_pm_morning exercise using manage_dashboard, manage_navigation_bar with checks dashboard_name, layout_out_of_grid, missing_tab, missing_tool_call, too_many_invalid_calls on portfolio; artifact tabs:holdings-view."
+  }
 }

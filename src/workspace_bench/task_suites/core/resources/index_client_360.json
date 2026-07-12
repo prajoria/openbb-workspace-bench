@@ -1,15 +1,10 @@
 {
   "id": "index_client_360",
-  "title": "Read App Index For Client 360",
-  "capability": "dashboard-construction",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-resources",
-    "resources",
-    "apps"
-  ],
-  "prompt": "After calling read_workspace_resource with uri openbb://workspace/app-builder/index, add a note naming the Client 360 template id client-360.",
+  "category": "dashboard",
+  "family": "resources",
+  "difficulty": "medium",
+  "split": "train",
+  "prompt": "After calling read_workspace_resource with uri openbb://workspace/app-builder/index, add a HTML card naming the Client 360 template id client-360.",
   "fixtures": {
     "backends": [
       {
@@ -60,7 +55,7 @@
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "Client 360",
           "client-360"
@@ -98,21 +93,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "App Index Note",
-        "data": "Client 360 uses template client-360."
+        "data": "<section>Client 360 uses template client-360.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "resources",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique resources/index_client_360 exercise using add_generative_widget, get_workspace_snapshot, read_workspace_resource with checks layout_out_of_grid, missing_generated_widget, missing_resource_read, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact resource:openbb://workspace/app-builder/index; widgets:Bench Stark Enterprise/vendor_dataset_monitor_quality_affected_apps@; generated:note@*:Client 360,client-360."
+  }
 }

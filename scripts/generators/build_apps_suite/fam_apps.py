@@ -19,6 +19,19 @@ from typing import Any, TypedDict
 from . import common as c
 
 
+STABLE_RETARGET_IDS = {
+    "enterprise_portfolio_control": "vol_overview",
+    "risk_exposure_monitor_dashboard_risk_snapshot_wrap": "gas_metric_wrap",
+    "enterprise_portfolio_command": "earnings_command",
+    "enterprise_holdings_desk": "rates_desk",
+    "stark_ship": "vol_ship",
+}
+
+
+def _stable_id(candidate: str) -> str:
+    return STABLE_RETARGET_IDS.get(candidate, candidate)
+
+
 class ComposedAppSpec(TypedDict):
     name: str
     desc: str
@@ -41,10 +54,12 @@ def build() -> None:
     # The backend already serves two widgets (seeded); build apps.json only.
     t0_specs = [
         # (desk, widget ids serving, app name, desc, tab_id, tab name, layout)
-        ("vol", ["vix_history", "vol_regime_metric"],
-         "Vol Overview", "Vol level and regime.",
+        ("stark", ["portfolio_command_center_holdings_holdings_table",
+                    "portfolio_command_center_overview_portfolio_snapshot"],
+         "Enterprise Portfolio Control", "Holdings and portfolio posture.",
          "overview", "Overview",
-         [("vix_history", 0, 0, 20, 9), ("vol_regime_metric", 20, 0, 12, 6)]),
+         [("portfolio_command_center_holdings_holdings_table", 0, 0, 24, 10),
+          ("portfolio_command_center_overview_portfolio_snapshot", 24, 0, 12, 6)]),
         ("rates", ["yield_curve", "curve_spread_metric"],
          "Rates Morning", "Curve and spread at the open.",
          "morning", "Morning",
@@ -58,14 +73,30 @@ def build() -> None:
          "vendors", "Vendors",
          [("vendor_sla_table", 0, 0, 20, 9), ("breach_metric", 20, 0, 12, 6)]),
     ]
-    for desk_key, widget_ids, app_name, app_desc, tab_id, tab_name, items in t0_specs:
+    for spec_index, (
+        desk_key,
+        widget_ids,
+        app_name,
+        app_desc,
+        tab_id,
+        tab_name,
+        items,
+    ) in enumerate(t0_specs):
         desk = c.desk(desk_key)
         widgets = {wid: c.desk_widget(desk_key, wid) for wid in widget_ids}
+        prompts = (
+            [
+                f"Summarize the most important signal in {app_name}.",
+                f"What needs attention in {app_name} right now?",
+            ]
+            if spec_index < 3
+            else None
+        )
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name,
              [c.layout_item(wid, x, y, w, h) for wid, x, y, w, h in items]),
-        ])
-        sid = f"{app_name.lower().replace(' ', '_')}"
+        ], prompts=prompts)
+        sid = _stable_id(f"{app_name.lower().replace(' ', '_')}")
         brief = c.app_requirements_text(app)
         c.add("apps", "r0", {
             "id": sid,
@@ -101,8 +132,9 @@ def build() -> None:
     # ------------------------------------------------------------------ r1
     # From scratch: one exact-JSON widget + the one-tab app wrapper in words.
     t1_specs = [
-        ("tvl", "gas_metric", "Gas Board", "Gas posture at a glance.",
-         "gas", "Gas", (0, 0, 12, 6)),
+        ("stark", "risk_exposure_monitor_dashboard_risk_snapshot",
+         "Enterprise Risk Board", "Portfolio risk posture at a glance.",
+         "risk", "Risk", (0, 0, 12, 6)),
         ("compliance", "alert_metric", "Alert Board", "Alert posture.",
          "alerts", "Alerts", (0, 0, 12, 6)),
         ("healthcare", "catalyst_metric", "Catalyst Board", "Catalyst count.",
@@ -117,7 +149,7 @@ def build() -> None:
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name, [c.layout_item(widget_id, x, y, w, h)]),
         ])
-        sid = f"{widget_id}_wrap"
+        sid = _stable_id(f"{widget_id}_wrap")
         brief = c.widget_requirements_text(widget_id, definition)
         wrap = (
             f"an app named \"{app_name}\" (description \"{app_desc}\") with one "
@@ -161,16 +193,24 @@ def build() -> None:
     # second dimension (param group / preset params / suggested prompts).
     t2_specs: list[tuple[str, list[str], ComposedAppSpec]] = [
         # (desk, served ids, app spec dict)
-        ("earnings", ["estimate_revisions", "earnings_chart", "surprise_metric"],
-         {"name": "Earnings Command", "desc": "Symbol-synced earnings review.",
+        ("stark", ["portfolio_command_center_holdings_holdings_table",
+                    "portfolio_command_center_holdings_sector_exposure",
+                    "portfolio_command_center_overview_portfolio_snapshot"],
+         {"name": "Enterprise Portfolio Command",
+          "desc": "Fund-synced holdings and exposure review.",
           "tab_id": "review", "tab_name": "Review",
-          "items": [("estimate_revisions", 0, 0, 20, 9, None),
-                     ("earnings_chart", 20, 0, 12, 9, {"symbol": "NVDA"}),
-                     ("surprise_metric", 32, 0, 8, 6, None)],
-          "groups": [{"name": "Symbol Sync", "type": "param",
-                       "paramName": "symbol",
-                       "widgetIds": ["estimate_revisions", "earnings_chart"]}],
-          "prompts": None}),
+          "items": [
+              ("portfolio_command_center_holdings_holdings_table", 0, 0, 20, 9, None),
+              ("portfolio_command_center_holdings_sector_exposure", 20, 0, 12, 9, None),
+              ("portfolio_command_center_overview_portfolio_snapshot", 32, 0, 8, 6, None),
+          ],
+          "groups": [{
+              "name": "Fund Sync", "type": "param", "paramName": "fund",
+              "widgetIds": ["portfolio_command_center_holdings_holdings_table",
+                            "portfolio_command_center_holdings_sector_exposure",
+                            "portfolio_command_center_overview_portfolio_snapshot"],
+          }],
+          "prompts": ["Where is enterprise portfolio risk concentrated?"]}),
         ("vol", ["vix_history", "vix_term_structure", "vol_regime_metric"],
          {"name": "Vol Morning", "desc": "Vol level, structure, regime.",
           "tab_id": "morning", "tab_name": "Morning",
@@ -209,7 +249,7 @@ def build() -> None:
             groups=spec["groups"] or None,
             prompts=spec["prompts"],
         )
-        sid = f"{spec['name'].lower().replace(' ', '_')}"
+        sid = _stable_id(f"{spec['name'].lower().replace(' ', '_')}")
         words = c.app_requirements_text(app)
         c.add("apps", "r2", {
             "id": sid,
@@ -259,11 +299,18 @@ def build() -> None:
                        "widgetIds": ["chains_table", "chains_chart"]}]},
          c.text_param("chain", "Chain", "Ethereum",
                        "Chain the deck is focused on.")),
-        ("rates", "auction_calendar", ["yield_curve"],
-         {"name": "Rates Desk", "desc": "Auctions and the curve.",
-          "tabs": [("auctions", "Auctions", [("auction_calendar", 0, 0, 20, 9)]),
-                    ("curve", "Curve", [("yield_curve", 0, 0, 20, 9)])],
-          "groups": []},
+        ("stark", "portfolio_command_center_holdings_holdings_table",
+         ["portfolio_command_center_holdings_exposure_treemap"],
+         {"name": "Enterprise Holdings Desk", "desc": "Holdings and exposure.",
+          "tabs": [("holdings", "Holdings", [
+                       ("portfolio_command_center_holdings_holdings_table", 0, 0, 20, 9)]),
+                    ("exposure", "Exposure", [
+                       ("portfolio_command_center_holdings_exposure_treemap", 0, 0, 20, 9)])],
+          "groups": [{
+              "name": "Fund Sync", "type": "param", "paramName": "fund",
+              "widgetIds": ["portfolio_command_center_holdings_holdings_table",
+                            "portfolio_command_center_holdings_exposure_treemap"],
+          }]},
          None),
         ("earnings", "earnings_chart", ["estimate_revisions", "surprise_metric"],
          {"name": "Earnings Desk", "desc": "Revisions, price, surprises.",
@@ -313,7 +360,7 @@ def build() -> None:
             convention = c.stamp_consistency(widgets)
             widget_words += f". Desk convention: {convention}"
         app_words = c.app_requirements_text(app)
-        sid = f"{multi_tab_spec['name'].lower().replace(' ', '_')}"
+        sid = _stable_id(f"{multi_tab_spec['name'].lower().replace(' ', '_')}")
         c.add("apps", "r3", {
             "id": sid,
             "title": f"Assemble the {multi_tab_spec['name']} app from scratch",
@@ -355,9 +402,12 @@ def build() -> None:
     t4_specs = [
         # (..., note_term, configure=(param|None to use an existing one,
         #  param_name, set_value))
-        ("vol", "vix_history", ["vol_regime_metric", "vol_commentary"],
-         ("Vol Command", "Vol level and regime.", "vol", "Vol"), "vol",
-         (None, "window", 60)),
+        ("stark", "portfolio_command_center_holdings_holdings_table",
+         ["portfolio_command_center_overview_portfolio_snapshot",
+          "portfolio_command_center_holdings_exposure_treemap"],
+         ("Enterprise Portfolio Live", "Holdings and risk posture.",
+          "portfolio", "Portfolio"), "enterprise portfolio",
+         (None, "fund", "Flagship Long/Short")),
         ("sla", "breach_metric", ["vendor_sla_table", "sla_newsfeed"],
          ("Vendor Live", "Vendors and breaches.", "vendors", "Vendors"),
          "vendors",
@@ -406,7 +456,7 @@ def build() -> None:
             f"`{focus_id}` widget"
         )
         app_words = c.app_requirements_text(app)
-        sid = f"{desk_key}_ship"
+        sid = _stable_id(f"{desk_key}_ship")
         c.add("apps", "r4", {
             "id": sid,
             "title": f"Ship, open, and configure the {app_name} app",

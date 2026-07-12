@@ -23,13 +23,18 @@ from workspace_bench.workspace.geometry import rects_overlap
 from workspace_bench.workspace.naming import slugify
 from workspace_bench.workspace.widget_params import flatten_params
 
-# WidgetVizTypes — terminalpro src/lib/types/app.ts:543-563
-WIDGET_VIZ_TYPES = frozenset({
+# Canonical live catalog from openbb://workspace/specs/widget-types (2026-07-12).
+# ``ssrm_table`` remains accepted as a legacy manifest alias because older
+# production backend examples still publish it; generators and oracles must
+# always emit the canonical ``table_ssrm`` spelling.
+CANONICAL_WIDGET_VIZ_TYPES = frozenset({
     "advanced_charting", "chart", "chart-highcharts", "chart-vegalite",
     "file_viewer", "html", "iframe", "live_grid", "markdown", "metric",
     "multi_file_viewer", "newsfeed", "note", "omni", "pdf", "table",
-    "ssrm_table", "ssrm_advanced", "youtube",
+    "table_ssrm", "ssrm_advanced", "youtube",
 })
+WIDGET_VIZ_TYPE_ALIASES = {"ssrm_table": "table_ssrm"}
+WIDGET_VIZ_TYPES = CANONICAL_WIDGET_VIZ_TYPES | frozenset(WIDGET_VIZ_TYPE_ALIASES)
 
 # ParamDefSchemaBase type enum + the form variant — app.ts:399-541
 PARAM_TYPES = frozenset({
@@ -118,8 +123,8 @@ def _validate_render_fn_params(where: str, column: JsonDict, errors: list[str]) 
     action = params.get("actionType")
     if action == "groupBy":
         group_by = params.get("groupBy")
-        legacy = params.get("groupByParamName")
-        has_param = bool(isinstance(legacy, str) and legacy)
+        flat_param_name = params.get("groupByParamName")
+        has_param = bool(isinstance(flat_param_name, str) and flat_param_name)
         if isinstance(group_by, dict) and isinstance(group_by.get("paramName"), str):
             has_param = has_param or bool(group_by["paramName"])
         if not has_param:

@@ -1,14 +1,9 @@
 {
   "id": "repair_msft_estimates_overlap",
-  "title": "Repair Overlap: Estimates Fund Msft",
-  "capability": "workspace-repair",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-layout",
-    "repair",
-    "layout"
-  ],
+  "category": "repair",
+  "family": "layout",
+  "difficulty": "medium",
+  "split": "validation",
   "prompt": "The MSFT fundamentals widget overlaps the estimates widget. Move the fundamentals widget to start at column 24 with its current size. Do not move the estimates widget.",
   "fixtures": {
     "backends": [
@@ -108,15 +103,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "layout",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 5
-  },
-  "split": "validation",
-  "novelty": "Unique layout/repair_msft_estimates_overlap exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on equities; artifact layouts:estimate_history:::0:0:24:12,fundamental_metrics:::24:0:16:8."
+  }
 }

@@ -1,14 +1,9 @@
 {
   "id": "find_and_fix_misconfigured_macro_timeseries",
-  "title": "Find And Fix Misconfigured Macro Timeseries",
-  "capability": "workspace-repair",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-inspect",
-    "inspect",
-    "repair"
-  ],
+  "category": "single-widget",
+  "family": "inspect",
+  "difficulty": "medium",
+  "split": "validation",
   "prompt": "After calling read_widget with widget_id macro_timeseries, update the widget configured with series=FEDFUNDS so series=DGS10.",
   "fixtures": {
     "backends": [
@@ -93,15 +88,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "inspect",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique inspect/find_and_fix_misconfigured_macro_timeseries exercise using get_workspace_snapshot, read_widget, update_widget with checks layout_out_of_grid, missing_tool_call, missing_widget, repeated_snapshots, too_many_invalid_calls on macro; artifact widgets:Bench Macro/macro_timeseries@*."
+  }
 }

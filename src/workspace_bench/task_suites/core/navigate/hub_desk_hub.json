@@ -1,16 +1,9 @@
 {
   "id": "hub_desk_hub",
-  "title": "Build Out Desk Hub",
-  "capability": "workspace-navigation",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-navigate",
-    "rename",
-    "tabs",
-    "navigation",
-    "combo"
-  ],
+  "category": "dashboard",
+  "family": "navigate",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Rename the active dashboard to Desk Hub, add a new tab named News, put the Latest News widget for NVDA on it, and add a note on the same tab mentioning news and desk hub.",
   "fixtures": {
     "backends": [
@@ -89,6 +82,7 @@
       "tool": "manage_dashboard",
       "args": {
         "operation": "update",
+        "dashboard_id": "dash_001",
         "name": "Desk Hub"
       }
     },
@@ -143,15 +137,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "navigate",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 9
-  },
-  "split": "train",
-  "novelty": "Unique navigate/hub_desk_hub exercise using add_generative_widget, create_widget, get_widget_schema, list_available_widgets, manage_dashboard, manage_navigation_bar, navigate_workspace with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tab, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on equities; artifact widgets:Bench Equities/latest_news@news; tabs:news,overview; generated:note@news:news,desk hub."
+  }
 }

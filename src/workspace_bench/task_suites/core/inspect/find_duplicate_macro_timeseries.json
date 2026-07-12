@@ -1,14 +1,9 @@
 {
   "id": "find_duplicate_macro_timeseries",
-  "title": "Find Duplicate Macro Timeseries",
-  "capability": "dashboard-construction",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-inspect",
-    "inspect",
-    "delete-widget"
-  ],
+  "category": "dashboard",
+  "family": "inspect",
+  "difficulty": "medium",
+  "split": "validation",
   "prompt": "After inspecting the dashboard, identify the duplicate macro_timeseries among the seeded widgets and remove exactly one duplicate while preserving the yield_curve widget.",
   "fixtures": {
     "backends": [
@@ -129,15 +124,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "inspect",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique inspect/find_duplicate_macro_timeseries exercise using delete_widget, get_workspace_snapshot, read_widget with checks layout_out_of_grid, layout_overlap, missing_tool_call, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on macro; artifact widgets:Bench Macro/macro_timeseries@*,Bench Macro/yield_curve@*."
+  }
 }

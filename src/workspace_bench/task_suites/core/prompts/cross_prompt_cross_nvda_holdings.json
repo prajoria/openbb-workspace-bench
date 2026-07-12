@@ -1,14 +1,9 @@
 {
   "id": "cross_prompt_cross_nvda_holdings",
-  "title": "Prompt Cross NVDA Holdings",
-  "capability": "dashboard-construction",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-prompts",
-    "prompts",
-    "cross-backend"
-  ],
+  "category": "dashboard",
+  "family": "prompts",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "Get workspace_tool_usage and workspace_session_context, create Prompt Cross NVDA Holdings, build the cross-backend dashboard with Bench Equities/estimate_history with data_args {\"symbol\": \"NVDA\"} and Bench Portfolio/holdings_table, and add a note mentioning NVDA and holdings and current-dashboard.",
   "fixtures": {
     "backends": [
@@ -157,15 +152,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "prompts",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 12
-  },
-  "split": "validation",
-  "novelty": "Unique prompts/cross_prompt_cross_nvda_holdings exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_prompt, list_available_widgets, manage_dashboard with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on equities, portfolio; artifact prompts:workspace_session_context,workspace_tool_usage; widgets:Bench Equities/estimate_history@*,Bench Portfolio/holdings_table@*; generated:note@*:NVDA,holdings."
+  }
 }

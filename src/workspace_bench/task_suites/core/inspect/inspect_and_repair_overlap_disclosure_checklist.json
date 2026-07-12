@@ -1,15 +1,9 @@
 {
   "id": "inspect_and_repair_overlap_disclosure_checklist",
-  "title": "Inspect And Repair Overlap Disclosure Checklist",
-  "capability": "workspace-repair",
-  "workflow": "client-meeting-prep",
-  "subdomain": "client-ir",
-  "tags": [
-    "family-inspect",
-    "inspect",
-    "layout",
-    "repair"
-  ],
+  "category": "repair",
+  "family": "inspect",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Move the overlapping reporting_factsheet_studio_commentary_pm_quote_bank widget to x=24, y=0, w=16, h=10 after inspecting the dashboard and finding it.",
   "fixtures": {
     "backends": [
@@ -117,15 +111,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "inspect",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique inspect/inspect_and_repair_overlap_disclosure_checklist exercise using get_workspace_snapshot, read_widget, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, missing_tool_call, repeated_snapshots, too_many_invalid_calls on stark-enterprise; artifact layouts::widget_001::0:0:24:10,:widget_002::24:0:16:10."
+  }
 }

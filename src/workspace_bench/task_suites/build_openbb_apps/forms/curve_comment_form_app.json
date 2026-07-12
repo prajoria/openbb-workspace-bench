@@ -1,17 +1,15 @@
 {
   "id": "curve_comment_form_app",
-  "title": "Ship Curve Comment Form as the Curve Comments app",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-forms",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "forms"
-  ],
+  "category": "platform",
+  "family": "forms",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Create a usable rates and Treasury markets workflow for a rates strategist. The workspace must cover submit a curve desk comment. The user can enter the required details and submit the workflow. Leave the complete working workspace open for review. The source contract must retain `comment` and `series`; decide the remaining implementation and preserve unrelated workspace state.",
+  "business_terms": [
+    "comment",
+    "series"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -174,21 +172,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "forms",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "comment",
-    "series"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique forms/curve_comment_form_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact capabilities:capability_1_curve-comment-form:form:curve_comment_form_value."
+    "max_turns": 13
+  }
 }

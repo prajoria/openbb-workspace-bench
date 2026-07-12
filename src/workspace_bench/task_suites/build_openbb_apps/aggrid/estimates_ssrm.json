@@ -1,16 +1,11 @@
 {
   "id": "estimates_ssrm",
-  "title": "Build the Estimates Explorer (SSRM) table definition",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-aggrid",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "aggrid"
-  ],
-  "prompt": "Register the backend and place the specified widget on the active dashboard. Use 'Earnings Prep Data' at http://localhost:7805. Make the data grid behavior and columns usable. The experience needs Estimates Explorer (SSRM) (`estimates_ssrm`, ssrm_table) using `/estimates-ssrm` for server-side sorted and filtered estimates dataset; user controls: Symbol (`symbol`, endpoint) from `/symbols`; data key `rows`. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
+  "category": "platform",
+  "family": "aggrid",
+  "specification_level": "explicit",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "Register the backend and place the specified widget on the active dashboard. Use 'Earnings Prep Data' at http://localhost:7805. Make the data grid behavior and columns usable. The experience needs Estimates Explorer (SSRM) (`estimates_ssrm`, table_ssrm) using `/estimates-ssrm` for server-side sorted and filtered estimates dataset; user controls: Symbol (`symbol`, endpoint) from `/symbols`; data key `rows`. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -41,7 +36,7 @@
         "backend_name": "Earnings Prep Data",
         "widget_id": "estimates_ssrm",
         "expect": {
-          "type": "ssrm_table",
+          "type": "table_ssrm",
           "endpoint": "/estimates-ssrm",
           "data.dataKey": "rows"
         },
@@ -82,22 +77,15 @@
             "value"
           ],
           "path": "/estimates-ssrm",
-          "payload": {
-            "rows": [
-              {
-                "category": "Primary",
-                "value": 10.25
-              },
-              {
-                "category": "Review",
-                "value": 20.5
-              },
-              {
-                "category": "Approved",
-                "value": 30.75
-              }
-            ],
-            "lastRow": 3
+          "payload_spec": {
+            "generator": "seeded_rows",
+            "seed": 3043099499,
+            "n_rows": 10000,
+            "schema": {
+              "category": "string",
+              "value": "number"
+            },
+            "data_key": "rows"
           }
         }
       ],
@@ -116,7 +104,7 @@
             "name": "Estimates Explorer (SSRM)",
             "description": "Server-side sorted and filtered estimates dataset.",
             "endpoint": "/estimates-ssrm",
-            "type": "ssrm_table",
+            "type": "table_ssrm",
             "gridData": {
               "w": 24,
               "h": 16
@@ -158,18 +146,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "aggrid",
-  "capability": "widget-building",
-  "specification_level": "explicit",
-  "difficulty": "easy",
-  "business_terms": [],
   "limits": {
     "max_turns": 7
-  },
-  "split": "train",
-  "novelty": "Unique aggrid/estimates_ssrm building exercise using create_widget, get_widget_schema, list_available_widgets, manage_backends with checks missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/estimates_ssrm; widgets:Earnings Prep Data/estimates_ssrm@*."
+  }
 }

@@ -1,19 +1,16 @@
 {
   "id": "repair_compliance",
-  "title": "Repair, extend, open, and configure Case Repair Live",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-extend",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "refresh",
-    "extend",
-    "orchestration"
-  ],
+  "category": "repair",
+  "family": "extend",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "The desk needs a production-ready cases and compliance alerts workflow for a surveillance analyst. The workspace must cover ask questions over the surveillance case corpus. The workspace must cover open alert count. Leave the complete working workspace open for review. Preserve all working content while correcting the requested workflow. Add a short completion note that naturally includes the desk-required terms 'Case Repair Live', 'case repair', 'Surveillance Data', 'Show high severity cases'. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "Case Repair Live",
+    "case repair",
+    "Surveillance Data",
+    "Show high severity cases"
+  ],
   "fixtures": {},
   "initial_state": {
     "custom_backends": [
@@ -326,23 +323,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "extend",
-  "capability": "app-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Case Repair Live",
-    "case repair",
-    "Surveillance Data",
-    "Show high severity cases"
-  ],
   "limits": {
-    "max_turns": 9
-  },
-  "split": "train",
-  "novelty": "Unique extend/repair_compliance building exercise using add_generative_widget, get_workspace_snapshot, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_alert-metric:metric:alert_metric_value,capability_2_case-qa-omni:any:case_qa_omni_value; generated:note@*:Case Repair Live,case repair."
+    "max_turns": 14
+  }
 }

@@ -1,14 +1,9 @@
 {
   "id": "quant_values",
-  "title": "Read Data: Signal Metrics and Backtest Performance",
-  "capability": "data-reading",
-  "workflow": "risk-review",
-  "subdomain": "risk",
-  "tags": [
-    "family-read",
-    "data-reading",
-    "stark"
-  ],
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Use get_widget_data on the Bench Stark Enterprise Signal Metrics and Backtest Performance widgets, find the exact value for quant_research_backtest_lab_signals_signal_metrics and score for Backtest Performance, then add a note that cites each widget id, the field name, and the exact value.",
   "fixtures": {
     "backends": [
@@ -88,7 +83,6 @@
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "quant_research_backtest_lab_signals_signal_metrics",
           "value",
           "83.92"
         ]
@@ -96,7 +90,6 @@
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "quant_research_backtest_lab_backtest_backtest_performance",
           "score",
           "35.41"
         ]
@@ -160,15 +153,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "read",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique read/quant_values exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:quant_research_backtest_lab_signals_signal_metrics,value."
+  }
 }

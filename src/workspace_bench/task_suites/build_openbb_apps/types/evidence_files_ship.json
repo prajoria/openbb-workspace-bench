@@ -1,18 +1,15 @@
 {
   "id": "evidence_files_ship",
-  "title": "Ship, open, and configure the Evidence Live app",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-types",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "types",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "types",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Build a surveillance analyst a dependable cases and compliance alerts workspace. The workspace must cover browse case evidence documents. The workspace must cover open alert count. The workspace must cover notes for one surveillance case. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Evidence Live', 'evidence', 'Surveillance Data'. Decide how best to organize the experience and preserve unrelated work.",
+  "business_terms": [
+    "Evidence Live",
+    "evidence",
+    "Surveillance Data"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -281,22 +278,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "types",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Evidence Live",
-    "evidence",
-    "Surveillance Data"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique types/evidence_files_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_alert-metric:metric:alert_metric_value,capability_2_evidence-files:multi-file:evidence_files_value; generated:note@*:Evidence Live,evidence."
+    "max_turns": 14
+  }
 }

@@ -1,14 +1,9 @@
 {
   "id": "skill_finance_comps",
-  "title": "Read Skill Resource finance-comps",
-  "capability": "resource-access",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-resources",
-    "resources",
-    "skills"
-  ],
+  "category": "read",
+  "family": "resources",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "Call read_workspace_resource with uri openbb://workspace/skills/finance-comps, then add a note mentioning peer set.",
   "fixtures": {
     "backends": [
@@ -78,15 +73,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "read",
-  "family": "resources",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique resources/skill_finance_comps exercise using add_generative_widget, get_workspace_snapshot, read_workspace_resource with checks layout_out_of_grid, missing_generated_widget, missing_resource_read, too_many_invalid_calls on equities; artifact resource:openbb://workspace/skills/finance-comps; generated:note@*:peer set."
+  }
 }

@@ -186,6 +186,39 @@ def main(argv: list[str] | None = None) -> int:
         help="Runtime-mutant sample per applicable family and archetype (default: 3).",
     )
 
+    parity_parser = subparsers.add_parser(
+        "live-parity",
+        help="Run one task mocked and live (hosted Workspace MCP bridge) and compare grades.",
+    )
+    parity_parser.add_argument("--task", required=True, help="Task id or qualified ref.")
+    parity_parser.add_argument(
+        "--suite", default="core", choices=list(BUILTIN_TASK_SUITE_ORDER)
+    )
+    parity_parser.add_argument(
+        "--url",
+        default=None,
+        help="Hosted Workspace MCP endpoint (default: the production bridge).",
+    )
+    parity_parser.add_argument(
+        "--origin-map",
+        action="append",
+        default=[],
+        metavar="SIM=LIVE",
+        help='Origin translation, repeatable (default: "Bench Stark Enterprise=Stark Fund").',
+    )
+    parity_parser.add_argument(
+        "--keep",
+        action="store_true",
+        help="Skip teardown and leave the parity dashboard in the live workspace.",
+    )
+    parity_parser.add_argument("--json", action="store_true", help="Emit the full report JSON.")
+    parity_parser.add_argument(
+        "--output-root",
+        type=Path,
+        default=Path("runs/live-parity"),
+        help="Directory where per-task parity reports are written.",
+    )
+
     smoke_parser = subparsers.add_parser(
         "smoke-workspace-mcp",
         help="Run one task through a live workspace-mcp sidecar.",
@@ -219,11 +252,6 @@ def main(argv: list[str] | None = None) -> int:
     export_parser.add_argument("--suite", default="core", choices=list(BUILTIN_TASK_SUITE_ORDER))
     export_parser.add_argument("--output", required=True)
 
-    migrate_parser = subparsers.add_parser(
-        "migrate-task", help="Migrate one pre-versioned task JSON to the strict schema."
-    )
-    migrate_parser.add_argument("--input", required=True)
-    migrate_parser.add_argument("--output", required=True)
 
     rollout_parser = subparsers.add_parser(
         "export-rollouts", help="Export normalized rollout JSONL."
@@ -308,12 +336,12 @@ def main(argv: list[str] | None = None) -> int:
         return _cmd_runtime_probe(args)
     if args.command == "adversarial":
         return _cmd_adversarial(args)
+    if args.command == "live-parity":
+        return _cmd_live_parity(args)
     if args.command == "smoke-workspace-mcp":
         return _cmd_smoke_workspace_mcp(args)
     if args.command == "export-task":
         return _cmd_export_task(args)
-    if args.command == "migrate-task":
-        return _cmd_migrate_task(args)
     if args.command == "export-rollouts":
         return _cmd_export_rollouts(args)
     if args.command == "export-sft":
@@ -334,17 +362,12 @@ def main(argv: list[str] | None = None) -> int:
 def _add_task_filters(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--family", help="Filter by task family, e.g. create or forms.")
     parser.add_argument("--category", help="Filter by task category, e.g. dashboard.")
-    parser.add_argument("--capability", help="Filter by agent/workspace capability.")
-    parser.add_argument("--workflow", help="Filter by business or finance workflow.")
-    parser.add_argument("--domain", help="Filter by broad domain.")
-    parser.add_argument("--subdomain", help="Filter by narrower domain area.")
     parser.add_argument("--difficulty", help="Filter by difficulty.")
     parser.add_argument(
         "--split",
         choices=sorted(VALID_TASK_SPLITS),
         help="Filter by task split.",
     )
-    parser.add_argument("--tag", action="append", default=[], help="Require a tag.")
 
 
 def _add_task_collection_args(parser: argparse.ArgumentParser) -> None:
@@ -395,12 +418,9 @@ def _cmd_list(args: argparse.Namespace) -> int:
         )
         return 0
     for task in tasks:
-        tags = ",".join(task.tags) if task.tags else "-"
         print(
-            f"{task.qualified_id}\t{task.difficulty}\t"
-            f"{task.split}\t"
-            f"{task.capability}\t{task.workflow}\t"
-            f"{task.domain}\t{task.subdomain}\t{tags}\t{task.title}"
+            f"{task.qualified_id}\t{task.category}\t"
+            f"{task.difficulty}\t{task.split}"
         )
     return 0
 
@@ -454,10 +474,8 @@ def _cmd_manifest(args: argparse.Namespace) -> int:
     print(f"name\t{manifest['name']}")
     print(f"task_count\t{manifest['task_count']}")
     print(f"git_commit\t{manifest['git_commit']}")
-    print(f"capabilities\t{','.join(manifest['capabilities'])}")
-    print(f"workflows\t{','.join(manifest['workflows'])}")
-    print(f"domains\t{','.join(manifest['domains'])}")
-    print(f"subdomains\t{','.join(manifest['subdomains'])}")
+    print(f"families\t{','.join(manifest['families'])}")
+    print(f"categories\t{','.join(manifest['categories'])}")
     print(f"difficulties\t{','.join(manifest['difficulties'])}")
     print(f"splits\t{','.join(manifest['splits'])}")
     print(f"canary\t{manifest['canary_guid']}")
@@ -673,23 +691,6 @@ def _cmd_export_task(args: argparse.Namespace) -> int:
     return 0
 
 
-def _cmd_migrate_task(args: argparse.Namespace) -> int:
-    input_path = Path(args.input)
-    payload = json.loads(input_path.read_text(encoding="utf-8"))
-    migrated = Task.migrate_legacy_payload(payload)
-    # Load before writing so migration never emits a task the strict loader
-    # would reject.
-    Task.from_dict(migrated, source_path=input_path)
-    output_path = Path(args.output)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(
-        json.dumps(migrated, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
-    print(f"Migrated {migrated['id']} to {output_path}")
-    return 0
-
-
 def _cmd_export_rollouts(args: argparse.Namespace) -> int:
     from workspace_bench.exports import write_rollouts_jsonl
 
@@ -835,6 +836,102 @@ def _cmd_run_code_task(args: argparse.Namespace) -> int:
     return 0 if passed else 1
 
 
+def _cmd_live_parity(args: argparse.Namespace) -> int:
+    from workspace_bench.workspace.live_parity import (
+        DEFAULT_LIVE_URL,
+        DEFAULT_ORIGIN_MAP,
+        LiveParityIneligible,
+        load_live_token,
+        run_live_parity,
+    )
+
+    token = load_live_token()
+    if not token:
+        print(
+            "Missing WORKSPACE_MCP_TOKEN (environment or .env).",
+            file=sys.stderr,
+        )
+        return 2
+    task = find_task(args.task, suite=args.suite)
+    origin_map = dict(DEFAULT_ORIGIN_MAP)
+    for spec in args.origin_map:
+        sim_name, _, live_name = spec.partition("=")
+        if not sim_name or not live_name:
+            print(f"Invalid --origin-map entry: {spec!r}", file=sys.stderr)
+            return 2
+        origin_map[sim_name] = live_name
+    try:
+        report = asyncio.run(
+            run_live_parity(
+                task,
+                url=args.url or DEFAULT_LIVE_URL,
+                token=token,
+                origin_map=origin_map,
+                keep=args.keep,
+            )
+        )
+    except LiveParityIneligible as reason:
+        print(f"INELIGIBLE\t{task.qualified_id}\t{reason}")
+        return 3
+    except Exception as error:  # noqa: BLE001 - live runs fail on infra, not code.
+        messages: list[str] = []
+
+        def collect(exc: BaseException) -> None:
+            nested = getattr(exc, "exceptions", None)
+            if nested:
+                for child in nested:
+                    collect(child)
+            else:
+                messages.append(str(exc))
+
+        collect(error)
+        print(f"LIVE RUN FAILED\t{task.qualified_id}", file=sys.stderr)
+        for message in messages:
+            print(f"  {message}", file=sys.stderr)
+        if any("browser disconnected" in m.lower() for m in messages):
+            print(
+                "  The bridge lost the Workspace browser session; open (or "
+                "refresh) your logged-in OpenBB Workspace tab and retry. "
+                "A partially seeded parity dashboard may need manual cleanup.",
+                file=sys.stderr,
+            )
+        return 4
+
+    output_dir = args.output_root / task.qualified_id.replace("/", "__")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_path = output_dir / "parity.json"
+    output_path.write_text(
+        json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    if args.json:
+        print(json.dumps(report, indent=2, sort_keys=True))
+    else:
+        mocked, live = report["mocked"], report["live"]
+        agreement = report["agreement"]
+        print(
+            f"MOCKED\t{'PASS' if mocked['passed'] else 'FAIL'}\t"
+            f"score={mocked['score']:.2f}\tchecks={mocked['checks_passed']}/{mocked['checks_total']}"
+        )
+        print(
+            f"LIVE\t{'PASS' if live['passed'] else 'FAIL'}\t"
+            f"score={live['score']:.2f}\tchecks={live['checks_passed']}/{live['checks_total']}"
+        )
+        print(
+            f"AGREE\t{agreement['verdict_agree']}"
+            f"\tstructural={agreement['structural_agree']}"
+        )
+        for issue in agreement["live_only_structural"]:
+            print(f"  live-only structural: {issue}")
+        for issue in agreement["live_only_data_content"]:
+            print(f"  live-only data-content (expected class): {issue}")
+        for issue in agreement["mocked_only_issues"]:
+            print(f"  mocked-only: {issue}")
+        for line in report["live_teardown"]:
+            print(f"  teardown: {line}")
+        print(f"Wrote {output_path}")
+    return 0 if report["agreement"]["structural_agree"] else 1
+
+
 def _cmd_smoke_workspace_mcp(args: argparse.Namespace) -> int:
     from workspace_bench.workspace.live_mcp import run_workspace_mcp_smoke
 
@@ -917,13 +1014,8 @@ def _filters_active(args: argparse.Namespace) -> bool:
         [
             getattr(args, "family", None),
             getattr(args, "category", None),
-            getattr(args, "capability", None),
-            getattr(args, "workflow", None),
-            getattr(args, "domain", None),
-            getattr(args, "subdomain", None),
             getattr(args, "difficulty", None),
             getattr(args, "split", None),
-            getattr(args, "tag", []),
         ]
     )
 
@@ -934,20 +1026,10 @@ def _filtered_tasks(args: argparse.Namespace) -> list[Task]:
         tasks = [task for task in tasks if task.family == args.family]
     if getattr(args, "category", None):
         tasks = [task for task in tasks if task.category == args.category]
-    if getattr(args, "capability", None):
-        tasks = [task for task in tasks if task.capability == args.capability]
-    if getattr(args, "workflow", None):
-        tasks = [task for task in tasks if task.workflow == args.workflow]
-    if getattr(args, "domain", None):
-        tasks = [task for task in tasks if task.domain == args.domain]
-    if getattr(args, "subdomain", None):
-        tasks = [task for task in tasks if task.subdomain == args.subdomain]
     if getattr(args, "difficulty", None):
         tasks = [task for task in tasks if task.difficulty == args.difficulty]
     if getattr(args, "split", None):
         tasks = [task for task in tasks if task.split == args.split]
-    for tag in getattr(args, "tag", []) or []:
-        tasks = [task for task in tasks if tag in task.tags]
     return tasks
 
 

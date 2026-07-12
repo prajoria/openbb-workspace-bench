@@ -1,18 +1,16 @@
 {
   "id": "execution_ship",
-  "title": "Ship, open, and configure the Execution Config Live app",
-  "workflow": "execution-exception-review",
-  "subdomain": "execution",
-  "tags": [
-    "family-settings",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "settings",
-    "orchestration"
+  "category": "platform",
+  "family": "settings",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "The desk needs a production-ready orders and venue quality workflow for an execution analyst. The workspace must cover open execution exceptions. The workspace must cover live open orders blotter. The workspace must cover monthly venue scorecard document. Analysts need to inspect order ID, symbol, quantity, status. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Execution Config Live', 'on-demand updates', 'Execution Desk Data', 'urgent'. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "Execution Config Live",
+    "on-demand updates",
+    "Execution Desk Data",
+    "urgent"
   ],
-  "prompt": "The desk needs a production-ready orders and venue quality workflow for an execution analyst. The workspace must cover open execution exceptions. The workspace must cover live open orders blotter. The workspace must cover monthly venue scorecard document. Analysts need to inspect order ID, symbol, quantity, status. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Execution Config Live', 'on-demand updates', 'Execution Desk Data', 'urgent'. Use your judgment on the architecture and leave other work intact.",
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -40,7 +38,7 @@
   "success": {
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "Execution Config Live",
           "on-demand updates",
@@ -335,29 +333,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Execution Config Live",
-        "data": "Execution Config Live shipped from Execution Desk Data: on-demand updates. Configured queue=urgent."
+        "data": "<section>Execution Config Live shipped from Execution Desk Data: on-demand updates. Configured queue=urgent.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "settings",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Execution Config Live",
-    "on-demand updates",
-    "Execution Desk Data",
-    "urgent"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique settings/execution_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_exception-metric:metric:exception_metric_value,capability_2_open-orders:table-like:order_id,qty,status,symbol; generated:note@*:Execution Config Live,on-demand updates."
+    "max_turns": 14
+  }
 }

@@ -1,17 +1,9 @@
 {
   "id": "exception_intake_room",
-  "title": "Assemble the Exception Intake Room form app",
-  "workflow": "execution-exception-review",
-  "subdomain": "execution",
-  "tags": [
-    "family-forms",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "forms",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "forms",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "An execution analyst needs a decision-ready Workspace for orders and venue quality. The workspace must cover record an execution venue exception. The workspace must cover live open orders blotter. The workspace must cover open execution exceptions. Analysts need to inspect order ID, symbol, quantity, status. An analyst can adjust the relevant numeric scope. The user can enter the required details and submit the workflow. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Choose an effective architecture and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},
@@ -366,18 +358,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "forms",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique forms/exception_intake_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_exception-metric:metric:exception_metric_value,capability_2_open-orders:table-like:order_id,qty,status,symbol,capability_3_venue-exception-form:form:venue_exception_form_value."
+    "max_turns": 14
+  }
 }

@@ -1,13 +1,10 @@
 {
   "id": "file_finance_guidance_tracker_under_its_own_tab",
-  "capability": "skill-access",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-skills",
-    "skills",
-    "mcp"
-  ],
+  "category": "single-widget",
+  "family": "skills",
+  "difficulty": "medium",
+  "split": "validation",
+  "prompt": "Call get_skill_content with slug finance-guidance-tracker. Add a new tab named Guidance and put a note on that tab capturing the workflow steps. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
       {
@@ -41,8 +38,6 @@
       ]
     }
   },
-  "title": "File Finance Guidance Tracker Under Its Own Tab",
-  "prompt": "Call get_skill_content with slug finance-guidance-tracker. Add a new tab named Guidance and put a note on that tab capturing the workflow steps. Omit dashboard_id when adding the note.",
   "allowed_tools": [
     "get_workspace_snapshot",
     "get_skill_content",
@@ -138,15 +133,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "skills",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 8
-  },
-  "split": "validation",
-  "novelty": "Unique skills/file_finance_guidance_tracker_under_its_own_tab exercise using add_generative_widget, get_skill_content, get_workspace_snapshot, manage_navigation_bar, navigate_workspace with checks layout_out_of_grid, missing_generated_widget, missing_tab, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/vendor_dataset_monitor_incidents_freshness_exceptions@overview; tabs:guidance,overview; generated:note@guidance:guidance,claims."
+  }
 }

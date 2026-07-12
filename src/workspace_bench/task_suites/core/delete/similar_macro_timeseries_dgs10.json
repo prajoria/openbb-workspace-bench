@@ -1,14 +1,9 @@
 {
   "id": "similar_macro_timeseries_dgs10",
-  "title": "Remove Only The Duplicate DGS10 Widget",
-  "capability": "widget-update",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-delete",
-    "delete-widget",
-    "distractors"
-  ],
+  "category": "single-widget",
+  "family": "delete",
+  "difficulty": "medium",
+  "split": "validation",
   "prompt": "This dashboard has three Macro Timeseries widgets: two identical ones for DGS10 and one for DGS2. Remove exactly one duplicate DGS10 widget; keep the other and keep the DGS2 widget untouched.",
   "fixtures": {
     "backends": [
@@ -121,15 +116,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "delete",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 5
-  },
-  "split": "validation",
-  "novelty": "Unique delete/similar_macro_timeseries_dgs10 exercise using delete_widget, get_workspace_snapshot with checks layout_out_of_grid, layout_overlap, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on macro; artifact widgets:Bench Macro/macro_timeseries@*,Bench Macro/macro_timeseries@*."
+  }
 }

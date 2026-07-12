@@ -1,14 +1,9 @@
 {
   "id": "use_symbol_options_for_price_performance",
-  "title": "Use Symbol Options For Price Performance",
-  "capability": "parameter-discovery",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-params",
-    "params",
-    "options"
-  ],
+  "category": "single-widget",
+  "family": "params",
+  "difficulty": "easy",
+  "split": "test",
   "prompt": "For Bench Equities/price_performance, call get_params_options on parameter symbol, choose AAPL, and create that widget with symbol=AAPL.",
   "fixtures": {
     "backends": [
@@ -93,15 +88,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "params",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique params/use_symbol_options_for_price_performance exercise using create_widget, get_params_options, get_workspace_snapshot with checks layout_out_of_grid, missing_tool_call, missing_tool_result, missing_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact widgets:Bench Equities/price_performance@*."
+  }
 }

@@ -1,17 +1,9 @@
 {
   "id": "evidence_files_room",
-  "title": "Assemble the Evidence Hub content app",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-types",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "types",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "types",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "Build a surveillance analyst a dependable cases and compliance alerts workspace. The workspace must cover browse case evidence documents. The workspace must cover notes for one surveillance case. The workspace must cover open alert count. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Decide how best to organize the experience and preserve unrelated work.",
   "fixtures": {},
   "initial_state": {},
@@ -300,18 +292,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "types",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique types/evidence_files_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_alert-metric:metric:alert_metric_value,capability_2_case-notes:markdown:case_notes_value,capability_3_evidence-files:multi-file:evidence_files_value."
+    "max_turns": 14
+  }
 }

@@ -1,14 +1,9 @@
 {
   "id": "rename_macro_watch",
-  "title": "Rename To Rates Watch",
-  "capability": "workspace-navigation",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-navigate",
-    "rename",
-    "navigation"
-  ],
+  "category": "single-widget",
+  "family": "navigate",
+  "difficulty": "easy",
+  "split": "test",
   "prompt": "Rename the active dashboard to Rates Watch.",
   "fixtures": {
     "backends": [
@@ -56,19 +51,12 @@
       "tool": "manage_dashboard",
       "args": {
         "operation": "update",
+        "dashboard_id": "dash_001",
         "name": "Rates Watch"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "navigate",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 4
-  },
-  "split": "test",
-  "novelty": "Unique navigate/rename_macro_watch exercise using manage_dashboard with checks dashboard_name, layout_out_of_grid, missing_tool_call, too_many_invalid_calls on macro; artifact id:rename_macro_watch."
+  }
 }

@@ -1,13 +1,10 @@
 {
   "id": "apply_finance_guidance_tracker_with_aapl",
-  "capability": "skill-access",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-skills",
-    "skills",
-    "mcp"
-  ],
+  "category": "single-widget",
+  "family": "skills",
+  "difficulty": "hard",
+  "split": "validation",
+  "prompt": "Call get_skill_content with slug finance-guidance-tracker. Following that workflow, add the Latest News widget for AAPL to the active dashboard, then add a note that applies the skill's workflow steps to this widget. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
       {
@@ -27,8 +24,6 @@
       ]
     }
   },
-  "title": "Apply Finance Guidance Tracker With AAPL",
-  "prompt": "Call get_skill_content with slug finance-guidance-tracker. Following that workflow, add the Latest News widget for AAPL to the active dashboard, then add a note that applies the skill's workflow steps to this widget. Omit dashboard_id when adding the note.",
   "allowed_tools": [
     "get_workspace_snapshot",
     "get_skill_content",
@@ -136,15 +131,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "skills",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 9
-  },
-  "split": "validation",
-  "novelty": "Unique skills/apply_finance_guidance_tracker_with_aapl exercise using add_generative_widget, create_widget, get_skill_content, get_widget_schema, get_workspace_snapshot, list_available_widgets with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on equities; artifact widgets:Bench Equities/latest_news@*; generated:note@*:guidance,claims."
+  }
 }

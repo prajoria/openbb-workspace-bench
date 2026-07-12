@@ -3,8 +3,6 @@
     "filesystem",
     "shell"
   ],
-  "business_terms": [],
-  "capability": "build-real-backend",
   "category": "platform",
   "code_task": {
     "command_timeout_ms": 120000,
@@ -77,7 +75,6 @@
     ]
   },
   "difficulty": "hard",
-  "domain": "engineering",
   "family": "backend-code",
   "fixtures": {
     "backends": []
@@ -87,21 +84,8 @@
   "limits": {
     "max_turns": 40
   },
-  "novelty": "Real-code backend task: server_side_order_grid",
   "oracle_tool_calls": [],
   "prompt": "Execution operations needs a responsive server-side order grid. Implement POST-backed pagination and single-column sorting from the supplied row-model request. Return the requested slice, total row count, page size, and first visible symbol accurately.",
-  "schema_version": "workspace-bench-task",
-  "source": "WorkspaceBench Phase 10 authored code track",
   "split": "test",
-  "subdomain": "openbb-custom-backends",
-  "success": {},
-  "tags": [
-    "build-openbb-backends",
-    "experimental-v0",
-    "ssrm",
-    "pagination",
-    "sorting"
-  ],
-  "title": "Implement server-side order pagination and sorting",
-  "workflow": "custom-backend-development"
+  "success": {}
 }

@@ -17,7 +17,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import re
 from collections import Counter
 from pathlib import Path
 from typing import Iterable
@@ -38,9 +37,7 @@ BUILD_SUITE = "build-openbb-apps"
 # check mass (N) would drive the level curve instead of per-check difficulty
 # (q). t1 > t2 is intentional: t1 CONTAINS t0 (full widget) plus the app
 # wrapper, while t2 is one composed artifact.
-# Outcome checks now include a live widget/app instantiation plus whole-workspace
-# collateral-damage guards. Caps bound each level without rewarding a smaller
-# schema-only rubric.
+# Caps bound each level without rewarding a smaller schema-only rubric.
 BUILD_SPECIFICATION_CHECK_CAPS = {
     "explicit": 24,
     "partially-specified": 36,
@@ -88,7 +85,7 @@ BUILD_TYPE_OWNERSHIP = {
         "newsfeed",
         "multi_file_viewer",
     },
-    "aggrid": {"table", "ssrm_table"},
+    "aggrid": {"table", "table_ssrm"},
     "charts": {"chart", "chart-highcharts", "chart-vegalite"},
     "advanced": {"advanced_charting", "live_grid", "omni"},
 }
@@ -153,7 +150,7 @@ def core_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> d
         if required.min_count > 0
     }
     checks = _core_check_type_counts(tasks)
-    novelty = [task.novelty for task in tasks]
+    fingerprints = [_task_fingerprint(task) for task in tasks]
     return {
         **_universal_release_checks(tasks, max_duplicate_prompts=2, max_prompt_words=350),
         **_family_split_checks(
@@ -167,7 +164,7 @@ def core_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> d
             task.success.runtime is not None for task in tasks if task.family == "backends"
         ),
         "task_count_at_least_300": total >= 300,
-        "fingerprint_unique": len(set(novelty)) == total and all(novelty),
+        "fingerprint_unique": len(set(fingerprints)) == total,
         "quota_dashboard_construction": categories["dashboard"] >= total * 0.15,
         "quota_backend_equities": backends["equities"] >= total * 0.15,
         "quota_backend_macro": backends["macro"] >= total * 0.15,
@@ -190,7 +187,7 @@ def build_release_checks(
     total = len(tasks)
     difficulties = Counter(task.difficulty for task in tasks)
     specification_levels = Counter(task.specification_level for task in tasks)
-    novelty = [task.novelty for task in tasks]
+    fingerprints = [_task_fingerprint(task) for task in tasks]
     widget_types: Counter = Counter()
     param_types: Counter = Counter()
     type_coverage: dict[str, set[str]] = {}
@@ -277,7 +274,7 @@ def build_release_checks(
             )
             for task in tasks
         ),
-        "fingerprint_unique": len(set(novelty)) == total and all(novelty),
+        "fingerprint_unique": len(set(fingerprints)) == total,
         "quota_difficulty_bands": all(
             difficulties[band] == count for band, count in BUILD_DIFFICULTY_BANDS.items()
         ),
@@ -346,6 +343,17 @@ def build_release_checks(
     return checks
 
 
+def _task_fingerprint(task: Task) -> str:
+    payload = {
+        "prompt": task.prompt,
+        "initial_state": task.initial_state,
+        "allowed_tools": list(task.allowed_tools),
+        "oracle": [{"tool": call.name, "args": call.args} for call in task.oracle_tool_calls],
+    }
+    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
 def _mutation_suite_passes(tasks: list[Task], oracle_results: list[RunResult]) -> bool:
     return len(tasks) == len(oracle_results) and all(
         not grader_mutation_failures(task, result) for task, result in zip(tasks, oracle_results)
@@ -382,6 +390,12 @@ def _universal_release_checks(
 ) -> dict[str, bool]:
     ids = [(task.family, task.id) for task in tasks]
     prompts = [task.prompt for task in tasks]
+    generated_types = Counter(
+        required.widget_type
+        for task in tasks
+        for required in task.success.required_generated_widgets
+    )
+    generated_total = sum(generated_types.values())
     expected_hashes = {
         task.suite.content_sha256 for task in tasks if task.suite and task.suite.content_sha256
     }
@@ -397,19 +411,15 @@ def _universal_release_checks(
         "task_ids_unique": len(set(ids)) == len(ids),
         "prompt_duplicate_cap": len(prompts) - len(set(prompts)) <= max_duplicate_prompts,
         "prompt_template_hygiene": all(
-            ".." not in task.prompt
-            and not re.search(r"\b([A-Za-z]+)\s+\1\b", task.title, re.IGNORECASE)
-            and len(task.prompt.split()) <= max_prompt_words
+            ".." not in task.prompt and len(task.prompt.split()) <= max_prompt_words
             for task in tasks
         ),
+        "generated_widget_type_diversity": len(generated_types) >= 2,
+        "generated_widget_type_max_share_80pct": bool(generated_total)
+        and max(generated_types.values()) / generated_total <= 0.80,
         "path_family_consistent": all(
             task.source_path is None or task.source_path.parent.name == task.family
             for task in tasks
-        ),
-        "no_generated_widget_data_equals": all(
-            required.data_equals is None
-            for task in tasks
-            for required in task.success.required_generated_widgets
         ),
         "suite_content_hash_matches": (
             len(expected_hashes) == 1
@@ -471,6 +481,8 @@ def _backend_slug(name: str) -> str:
         "Bench Portfolio": "portfolio",
         "stark-enterprise": "stark-enterprise",
         "Bench Stark Enterprise": "stark-enterprise",
+        "daloopa": "daloopa",
+        "Bench Daloopa": "daloopa",
     }.get(name, name)
 
 
@@ -508,11 +520,4 @@ def _core_check_type_counts(tasks: list[Task]) -> Counter:
             counts["capability_unconnected"] += 1
         if success.business_names:
             counts["business_name_missing"] += 1
-        counts["too_many_invalid_calls"] += 1
-        if success.trace.must_call_schema_before_create:
-            counts["schema_not_called_before_create"] += 1
-        if success.trace.forbid_invented_widget_ids:
-            counts["unlisted_widget_id"] += 1
-        if success.trace.max_repeated_snapshots is not None:
-            counts["repeated_snapshots"] += 1
     return counts

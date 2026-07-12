@@ -1,14 +1,9 @@
 {
   "id": "similar_estimate_history_msft",
-  "title": "Remove Only The Duplicate MSFT Widget",
-  "capability": "widget-update",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-delete",
-    "delete-widget",
-    "distractors"
-  ],
+  "category": "single-widget",
+  "family": "delete",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Remove exactly one duplicate MSFT Estimate History widget from the two identical MSFT copies, while keeping the other duplicate and the NVDA widget untouched.",
   "fixtures": {
     "backends": [
@@ -121,15 +116,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "delete",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique delete/similar_estimate_history_msft exercise using delete_widget, get_workspace_snapshot with checks layout_out_of_grid, layout_overlap, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on equities; artifact widgets:Bench Equities/estimate_history@*,Bench Equities/estimate_history@*."
+  }
 }

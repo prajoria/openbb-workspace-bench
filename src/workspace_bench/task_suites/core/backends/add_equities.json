@@ -1,13 +1,9 @@
 {
   "id": "add_equities",
-  "title": "Register Bench Equities",
-  "capability": "dashboard-construction",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-backends",
-    "backends"
-  ],
+  "category": "dashboard",
+  "family": "backends",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "With manage_backends, use operation add and name equities to register Bench Equities, then list it with operation list.",
   "fixtures": {
     "backends": []
@@ -187,15 +183,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "backends",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique backends/add_equities exercise using manage_backends with checks layout_out_of_grid, missing_tool_call, missing_tool_result, too_many_invalid_calls on equities; artifact id:add_equities."
+  }
 }

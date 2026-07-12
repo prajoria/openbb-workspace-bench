@@ -57,17 +57,12 @@ def test_builtin_tasks_have_terminal_bench_style_metadata() -> None:
     tasks = load_builtin_tasks()
 
     assert all(task.family for task in tasks)
-    assert all(task.capability for task in tasks)
-    assert all(task.workflow for task in tasks)
-    assert all(task.domain for task in tasks)
-    assert all(task.subdomain for task in tasks)
     assert all(
         task.specification_level
         in {"explicit", "partially-specified", "open-brief"}
         for task in tasks
     )
     assert all(task.difficulty in {"easy", "medium", "hard"} for task in tasks)
-    assert all(task.tags for task in tasks)
     assert all(task.source_path and task.source_path.parent.name == task.family for task in tasks)
 
 
@@ -171,8 +166,7 @@ def test_cli_manifest_resolves_core_suite(capsys) -> None:
     assert "create" in payload["families"]
     assert payload["task_suite"]["suite_id"] == "core"
     assert len(payload["task_suite"]["content_sha256"]) == 64
-    assert "skill-access" in payload["capabilities"]
-    assert "client-meeting-prep" in payload["workflows"]
+    assert "read" in payload["categories"]
 
 
 def test_cli_validate_fails_when_min_task_gate_is_not_met(capsys) -> None:
@@ -183,8 +177,8 @@ def test_cli_validate_fails_when_min_task_gate_is_not_met(capsys) -> None:
     assert "expected at least 300" in output
 
 
-def test_cli_filters_by_difficulty_and_tag(capsys) -> None:
-    exit_code = main(["list", "--difficulty", "medium", "--tag", "multi-widget"])
+def test_cli_filters_by_difficulty(capsys) -> None:
+    exit_code = main(["list", "--difficulty", "medium", "--family", "params"])
 
     output = capsys.readouterr().out
     assert exit_code == 0
@@ -210,9 +204,7 @@ def test_cli_manifest_json_includes_dataset_summary(capsys) -> None:
     assert "release_id" not in payload
     assert payload["task_count"] == len(load_builtin_tasks())
     assert payload["canary_guid"] == CANARY_GUID
-    assert "dashboard-construction" in payload["capabilities"]
-    assert "finance" in payload["domains"]
-    assert "equity-research" in payload["subdomains"]
+    assert "dashboard" in payload["categories"]
     assert payload["splits"] == ["test", "train", "validation"]
 
 
@@ -332,20 +324,11 @@ def test_runner_round_trips_workspace_resource_and_prompt_task(tmp_path) -> None
     task_path.write_text(
         json.dumps(
             {
-                "schema_version": "workspace-bench-task",
                 "id": "resource_prompt_round_trip",
-                "title": "Read Resource And Prompt",
                 "category": "read",
                 "family": "resources",
-                "capability": "resource-access",
-                "workflow": "app-builder-discovery",
-                "domain": "workspace-usability",
-                "subdomain": "mcp-resources",
                 "difficulty": "easy",
                 "split": "dev",
-                "tags": ["resources", "prompts"],
-                "source": "test",
-                "novelty": "resource and prompt round-trip fixture",
                 "prompt": "Read the app index and tool usage prompt.",
                 "fixtures": {"backends": [{"name": "equities"}]},
                 "initial_state": {},

@@ -1,15 +1,10 @@
 {
   "id": "kpi_tabs_table",
-  "title": "Build the KPI Tabs parameter widget",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-params",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "params"
-  ],
+  "category": "platform",
+  "family": "params",
+  "specification_level": "explicit",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Make the requested backend widget available and working in the current view. Use 'Earnings Prep Data' at http://localhost:7805. Make the user controls functional. The experience needs KPI Tabs (`kpi_tabs_table`, table) using `/kpi-tabs` for kPI table with static and dynamic tab views; user controls: View (`view`, tabs). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},
@@ -159,18 +154,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "params",
-  "capability": "widget-building",
-  "specification_level": "explicit",
-  "difficulty": "easy",
-  "business_terms": [],
   "limits": {
     "max_turns": 7
-  },
-  "split": "train",
-  "novelty": "Unique params/kpi_tabs_table building exercise using create_widget, get_widget_schema, list_available_widgets, manage_backends with checks missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, widget_def on custom:Earnings Prep Data; artifact widgetdefs:Earnings Prep Data/kpi_tabs_table; widgets:Earnings Prep Data/kpi_tabs_table@*."
+  }
 }

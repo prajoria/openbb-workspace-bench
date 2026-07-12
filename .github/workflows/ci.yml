@@ -59,7 +59,7 @@ jobs:
 
       - name: Reject adversarial candidates
         run: |
-          uv run workspace-bench adversarial --suite core --family backends
+          uv run workspace-bench adversarial --suite core
           uv run workspace-bench adversarial --suite build-openbb-apps
 
       - name: Install Chromium

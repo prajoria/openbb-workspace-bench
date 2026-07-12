@@ -120,14 +120,6 @@ def test_default_batch_adapter_prompts_accept_public_task_envelope(monkeypatch) 
         for prompt in prompts
     )
 
-    legacy_envelope = build_task_envelope(find_task("price_performance_aapl"))
-    legacy_task = legacy_envelope["task"]
-    legacy_task["level"] = legacy_task.pop("specification_level")
-    assert (
-        f'"specification_level": "{specification_level}"'
-        in ollama_agent.build_prompt(legacy_envelope)
-    )
-
 
 def test_batch_runner_executes_one_real_jsonl_agent_attempt(tmp_path) -> None:
     adapter = ModelAdapter(

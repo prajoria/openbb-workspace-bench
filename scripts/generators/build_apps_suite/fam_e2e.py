@@ -138,7 +138,7 @@ def build() -> None:
     specs: list[CapstoneSpec] = [
         {
             "slug": "research_room",
-            "desk_key": "earnings",
+            "desk_key": "stark",
             "table_id": "research_room_table",
             "table_name": "Research Room Table",
             "table_desc": "Analyst research actions by ticker.",
@@ -149,7 +149,7 @@ def build() -> None:
                 {"ticker": "MSFT", "analyst": "Lake Street",
                  "rating": "Hold", "upside_pct": 0.04},
             ],
-            "sibling_id": "earnings_note",
+            "sibling_id": "portfolio_command_center_holdings_sector_exposure",
             "app_name": "Research Room",
             "app_desc": "Analyst actions and earnings notes.",
             "tabs": (("research", "Research"), ("notes", "Notes")),

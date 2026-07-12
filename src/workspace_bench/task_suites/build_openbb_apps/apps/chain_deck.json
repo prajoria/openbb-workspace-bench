@@ -1,17 +1,15 @@
 {
   "id": "chain_deck",
-  "title": "Assemble the Chain Deck app from scratch",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "crypto",
-  "tags": [
-    "family-apps",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Build a working Workspace experience for a digital-assets analyst covering chain activity and liquidity. The workspace must cover current TVL of all chains from the desk aggregator. The workspace must cover comparison of chain TVL. Analysts need to inspect name, TVL USD, change one-day. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Keep these source-contract anchors: `chain` and `name`. Choose the rest of the architecture and avoid unrelated changes.",
+  "business_terms": [
+    "chain",
+    "name"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -279,21 +277,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "capability": "app-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "chain",
-    "name"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique apps/chain_deck building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Chain TVL Data; artifact capabilities:capability_1_chains-chart:chart-like:chains_chart_value,capability_2_chains-table:table-like:change_1d,name,tvl_usd."
+    "max_turns": 14
+  }
 }

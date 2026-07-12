@@ -20,7 +20,7 @@ WIDGETS: dict[str, Any] = {'order_search': {'data': {'dataKey': 'rows',
                   'endpoint': '/orders/search',
                   'gridData': {'h': 10, 'w': 20},
                   'name': 'Order Search',
-                  'type': 'ssrm_table'}}
+                  'type': 'table_ssrm'}}
 APPS: list[dict[str, Any]] = []
 HEALTH = {'ok': True}
 

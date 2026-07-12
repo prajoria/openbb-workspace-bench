@@ -1,13 +1,9 @@
 {
   "id": "halve_price_msft",
-  "title": "Layout: Halve Price Msft",
-  "capability": "layout-management",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-layout",
-    "layout"
-  ],
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "Resize the MSFT price widget to half width (20 columns). Keep its position.",
   "fixtures": {
     "backends": [
@@ -103,15 +99,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "layout",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique layout/halve_price_msft exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, missing_tab, missing_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact widgets:Bench Equities/price_performance@charts; layouts:price_performance::charts:0:2:20:12; tabs:charts."
+  }
 }

@@ -1,16 +1,9 @@
 {
   "id": "build_earnings_build",
-  "title": "Delegate And Equip: Earnings Build",
-  "capability": "mcp-tool-use",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-delegate",
-    "delegation",
-    "agents",
-    "mcp",
-    "widget-creation"
-  ],
+  "category": "platform",
+  "family": "delegate",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Use assign_tasks_to_agents with two task_requests using ids revisions-analyst and reaction-analyst. Then add the Consensus Revisions widget (id earnings_estimates_monitor_estimates_consensus_revisions) from the Bench Stark Enterprise backend so the workstreams have their data, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
@@ -163,15 +156,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "delegate",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique delegate/build_earnings_build exercise using add_generative_widget, assign_tasks_to_agents, create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, too_many_widgets, unlisted_widget_id on stark-enterprise; artifact tasks:reaction-analyst,revisions-analyst; widgets:Bench Stark Enterprise/earnings_estimates_monitor_estimates_consensus_revisions@*,Bench Stark Enterprise/strategy_health_monitor_themes_crowded_names@overview; generated:note@*:revisions analyst,reaction analyst."
+  }
 }

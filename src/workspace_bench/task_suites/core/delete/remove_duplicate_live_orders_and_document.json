@@ -1,14 +1,9 @@
 {
   "id": "remove_duplicate_live_orders_and_document",
-  "title": "Remove Duplicate Live Orders And Document",
-  "capability": "workspace-repair",
-  "workflow": "execution-exception-review",
-  "subdomain": "execution",
-  "tags": [
-    "family-delete",
-    "repair",
-    "delete-widget"
-  ],
+  "category": "repair",
+  "family": "delete",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "Remove exactly one duplicate from the two identical Live Orders widgets, then add a note saying the duplicate was removed.",
   "fixtures": {
     "backends": [
@@ -32,7 +27,7 @@
           "origin": "Bench Stark Enterprise",
           "widget_id": "execution_desk_blotter_live_orders",
           "data_args": {
-            "status": "Open"
+            "desk": "US Equity"
           },
           "layout": {
             "x": 0,
@@ -45,7 +40,7 @@
           "origin": "Bench Stark Enterprise",
           "widget_id": "execution_desk_blotter_live_orders",
           "data_args": {
-            "status": "Open"
+            "desk": "US Equity"
           },
           "layout": {
             "x": 20,
@@ -69,7 +64,7 @@
         "origin": "Bench Stark Enterprise",
         "widget_id": "execution_desk_blotter_live_orders",
         "data_args": {
-          "status": "Open"
+          "desk": "US Equity"
         },
         "min_count": 1,
         "max_count": 1
@@ -117,15 +112,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "delete",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique delete/remove_duplicate_live_orders_and_document exercise using add_generative_widget, delete_widget, get_workspace_snapshot with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/execution_desk_blotter_live_orders@*; generated:note@*:duplicate,removed."
+  }
 }

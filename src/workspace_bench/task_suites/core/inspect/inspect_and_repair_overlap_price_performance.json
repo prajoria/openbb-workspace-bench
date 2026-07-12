@@ -1,15 +1,9 @@
 {
   "id": "inspect_and_repair_overlap_price_performance",
-  "title": "Inspect And Repair Overlap Price Performance",
-  "capability": "workspace-repair",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-inspect",
-    "inspect",
-    "layout",
-    "repair"
-  ],
+  "category": "repair",
+  "family": "inspect",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "Inspect the dashboard, find the overlapping latest_news widget, and move it to x=24, y=0, w=16, h=10.",
   "fixtures": {
     "backends": [
@@ -122,15 +116,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "inspect",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique inspect/inspect_and_repair_overlap_price_performance exercise using get_workspace_snapshot, read_widget, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, missing_tool_call, repeated_snapshots, too_many_invalid_calls on equities; artifact layouts::widget_001::0:0:24:10,:widget_002::24:0:16:10."
+  }
 }

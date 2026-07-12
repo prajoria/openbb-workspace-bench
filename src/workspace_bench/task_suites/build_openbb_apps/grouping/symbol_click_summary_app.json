@@ -1,17 +1,14 @@
 {
   "id": "symbol_click_summary_app",
-  "title": "Ship Symbol Click Summary with a grouping app",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-grouping",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "grouping"
-  ],
+  "category": "platform",
+  "family": "grouping",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "Deliver an analyst-ready Workspace solution for earnings and estimates. The workspace must cover symbol rows that can drive a grouped app. Analysts need to inspect symbol, revision percentage. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Use `symbol` and `revision_pct` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
+  "business_terms": [
+    "symbol",
+    "revision_pct"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -199,21 +196,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "grouping",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "medium",
-  "business_terms": [
-    "symbol",
-    "revision_pct"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique grouping/symbol_click_summary_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_symbol-click-summary:table-like:revision_pct,symbol."
+    "max_turns": 13
+  }
 }

@@ -1,16 +1,10 @@
 {
   "id": "ambient_repair_and_brief_risk_stats",
-  "title": "Ambient Repair And Brief Risk Stats",
-  "capability": "workspace-repair",
-  "workflow": "client-meeting-prep",
-  "subdomain": "client-ir",
-  "tags": [
-    "family-inspect",
-    "inspect",
-    "repair",
-    "note"
-  ],
-  "prompt": "After inspecting the dashboard, find the widget with sector=Consumer Staples, repair it to Technology, keep the companion widget, and add a note mentioning the repair.",
+  "category": "repair",
+  "family": "inspect",
+  "difficulty": "hard",
+  "split": "validation",
+  "prompt": "After inspecting the dashboard, find the widget with client=Northstar Endowment, repair it to Atlas Pension, keep the companion widget, and add a HTML card mentioning the repair.",
   "fixtures": {
     "backends": [
       {
@@ -44,7 +38,7 @@
           "origin": "Bench Stark Enterprise",
           "widget_id": "reporting_factsheet_studio_factsheets_risk_stats",
           "data_args": {
-            "sector": "Consumer Staples"
+            "client": "Northstar Endowment"
           },
           "layout": {
             "x": 20,
@@ -73,14 +67,14 @@
         "origin": "Bench Stark Enterprise",
         "widget_id": "reporting_factsheet_studio_factsheets_risk_stats",
         "data_args": {
-          "sector": "Technology"
+          "client": "Atlas Pension"
         }
       },
       {
         "origin": "Bench Stark Enterprise",
         "widget_id": "reporting_factsheet_studio_factsheets_risk_stats",
         "data_args": {
-          "sector": "Consumer Staples"
+          "client": "Northstar Endowment"
         },
         "min_count": 0,
         "max_count": 0
@@ -94,10 +88,10 @@
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
-          "Consumer Staples",
-          "Technology",
+          "Northstar Endowment",
+          "Atlas Pension",
           "repair"
         ]
       }
@@ -131,28 +125,20 @@
       "args": {
         "widget_uuid": "widget_002",
         "data_args": {
-          "sector": "Technology"
+          "client": "Atlas Pension"
         }
       }
     },
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Inspect Repair Note",
-        "data": "Repair changed Consumer Staples to Technology."
+        "data": "<section>Repair changed Northstar Endowment to Atlas Pension.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "inspect",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique inspect/ambient_repair_and_brief_risk_stats exercise using add_generative_widget, get_workspace_snapshot, read_widget, update_widget with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/reporting_factsheet_studio_factsheets_risk_stats@*,Bench Stark Enterprise/reporting_factsheet_studio_overview_workflow_overview@*; generated:note@*:Consumer Staples,Technology."
+  }
 }

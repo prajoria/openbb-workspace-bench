@@ -37,3 +37,45 @@ def flatten_params(definition: JsonDict, *, recurse: bool = True) -> list[JsonDi
             for param in entries:
                 append_nested(param)
     return flattened
+
+
+def sanitize_data_args(
+    definition: JsonDict, data_args: JsonDict, *, mode: str = "update"
+) -> JsonDict:
+    """Apply the real Workspace frontend's data_args handling.
+
+    Verified against the live Workspace MCP bridge (2026-07-12), which is
+    asymmetric between the two paths:
+
+    - ``mode="create"``: keys that do not name a declared widget parameter are
+      silently dropped; declared keys keep whatever value was sent; missing
+      declared parameters are backfilled with their declared default value.
+    - ``mode="update"``: undeclared keys are dropped, and a parameter with a
+      declared options list only accepts values from that list.
+    """
+
+    declared: dict[str, JsonDict] = {}
+    for param in flatten_params(definition):
+        name = param.get("paramName")
+        if name:
+            declared.setdefault(str(name), param)
+    sanitized: JsonDict = {}
+    for key, value in data_args.items():
+        spec = declared.get(key)
+        if spec is None:
+            continue
+        if mode == "update":
+            options = spec.get("options")
+            if isinstance(options, list) and options:
+                values = {
+                    str(option.get("value") if isinstance(option, dict) else option)
+                    for option in options
+                }
+                if str(value) not in values:
+                    continue
+        sanitized[key] = value
+    if mode == "create":
+        for name, param in declared.items():
+            if name not in sanitized and param.get("value") is not None:
+                sanitized[name] = param.get("value")
+    return sanitized

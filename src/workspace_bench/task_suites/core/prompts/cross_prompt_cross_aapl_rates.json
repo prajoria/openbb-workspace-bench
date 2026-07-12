@@ -1,14 +1,9 @@
 {
   "id": "cross_prompt_cross_aapl_rates",
-  "title": "Prompt Cross AAPL Rates",
-  "capability": "dashboard-construction",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-prompts",
-    "prompts",
-    "cross-backend"
-  ],
+  "category": "dashboard",
+  "family": "prompts",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Get workspace_tool_usage and workspace_session_context, create Prompt Cross AAPL Rates, build the cross-backend dashboard with Bench Equities/price_performance with data_args {\"symbol\": \"AAPL\"} and Bench Macro/macro_timeseries with data_args {\"series\": \"DGS10\"}, and add a note mentioning AAPL and DGS10 and current-dashboard.",
   "fixtures": {
     "backends": [
@@ -161,15 +156,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "prompts",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 12
-  },
-  "split": "train",
-  "novelty": "Unique prompts/cross_prompt_cross_aapl_rates exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_prompt, list_available_widgets, manage_dashboard with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on equities, macro; artifact prompts:workspace_session_context,workspace_tool_usage; widgets:Bench Equities/price_performance@*,Bench Macro/macro_timeseries@*; generated:note@*:AAPL,DGS10."
+  }
 }

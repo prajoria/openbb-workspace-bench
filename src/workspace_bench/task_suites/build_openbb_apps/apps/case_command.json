@@ -1,16 +1,9 @@
 {
   "id": "case_command",
-  "title": "Assemble the Case Command app from scratch",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-apps",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "A surveillance analyst needs a decision-ready Workspace for cases and compliance alerts. The workspace must cover notes for one surveillance case. The workspace must cover open surveillance alerts. The workspace must cover open alert count. Analysts need to inspect alert ID, desk, severity, age days. Leave the complete working workspace open for review. Choose an effective architecture and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},
@@ -323,18 +316,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "capability": "app-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique apps/case_command building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_alert-metric:metric:alert_metric_value,capability_2_alert-queue:table-like:age_days,alert_id,desk,severity,capability_3_case-notes:markdown:case_notes_value."
+    "max_turns": 14
+  }
 }

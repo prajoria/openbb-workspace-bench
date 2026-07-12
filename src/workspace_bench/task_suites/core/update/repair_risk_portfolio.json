@@ -1,15 +1,10 @@
 {
-  "id": "repair_risk_fund",
-  "title": "Repair Risk Snapshot",
-  "capability": "workspace-repair",
-  "workflow": "risk-review",
-  "subdomain": "risk",
-  "tags": [
-    "family-update",
-    "repair",
-    "update-widget"
-  ],
-  "prompt": "This Flagship Long/Short risk dashboard has its snapshot configured for Global Macro. Repair the widget to Flagship Long/Short; then add a note saying what was repaired and mentioning both values.",
+  "id": "repair_risk_portfolio",
+  "category": "repair",
+  "family": "update",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "This Long/Short Equity risk dashboard has its snapshot configured for Macro Multi-Asset. Repair the widget to Long/Short Equity and add a HTML card saying what was repaired, mentioning both values.",
   "fixtures": {
     "backends": [
       {
@@ -32,7 +27,7 @@
           "origin": "Bench Stark Enterprise",
           "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot",
           "data_args": {
-            "fund": "Global Macro"
+            "portfolio": "Macro Multi-Asset"
           },
           "layout": {
             "x": 0,
@@ -56,7 +51,7 @@
         "origin": "Bench Stark Enterprise",
         "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot",
         "data_args": {
-          "fund": "Flagship Long/Short"
+          "portfolio": "Long/Short Equity"
         },
         "min_count": 1
       },
@@ -64,7 +59,7 @@
         "origin": "Bench Stark Enterprise",
         "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot",
         "data_args": {
-          "fund": "Global Macro"
+          "portfolio": "Macro Multi-Asset"
         },
         "min_count": 0,
         "max_count": 0
@@ -72,10 +67,10 @@
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
-          "Global Macro",
-          "Flagship Long/Short",
+          "Macro Multi-Asset",
+          "Long/Short Equity",
           "repaired"
         ]
       }
@@ -104,28 +99,20 @@
       "args": {
         "widget_uuid": "widget_001",
         "data_args": {
-          "fund": "Flagship Long/Short"
+          "portfolio": "Long/Short Equity"
         }
       }
     },
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Repair Note",
-        "data": "Repaired risk_exposure_monitor_dashboard_risk_snapshot from Global Macro to Flagship Long/Short."
+        "data": "<section>Repaired risk_exposure_monitor_dashboard_risk_snapshot from Macro Multi-Asset to Long/Short Equity.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "update",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 7
-  },
-  "split": "train",
-  "novelty": "Unique update/repair_risk_fund exercise using add_generative_widget, get_workspace_snapshot, read_widget, update_widget with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/risk_exposure_monitor_dashboard_risk_snapshot@*; generated:note@*:Global Macro,Flagship Long/Short."
+  }
 }

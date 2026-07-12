@@ -1,18 +1,15 @@
 {
   "id": "execution_monitor",
-  "title": "Ship, open, and configure Execution Monitor",
-  "workflow": "execution-exception-review",
-  "subdomain": "execution",
-  "tags": [
-    "family-e2e",
-    "cell2",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "e2e",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "e2e",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "An execution analyst needs a decision-ready Workspace for orders and venue quality. The workspace must cover venue execution quality and rejects. The workspace must cover open execution exceptions. Analysts need to inspect venue, orders, reject rate percentage, as of. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Execution Monitor', 'Execution Desk Data', 'EDGX'. Choose an effective architecture and avoid unrelated changes.",
+  "business_terms": [
+    "Execution Monitor",
+    "Execution Desk Data",
+    "EDGX"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -75,10 +72,16 @@
             "value"
           ],
           "path": "/exception-count",
-          "payload": {
-            "exception_metric_value": 10.25,
-            "label": "Exceptions",
-            "value": 42.5
+          "payload_spec": {
+            "generator": "seeded_rows",
+            "seed": 746815844,
+            "n_rows": 10000,
+            "schema": {
+              "exception_metric_value": "number",
+              "label": "string",
+              "value": "number"
+            },
+            "data_key": "rows"
           }
         },
         {
@@ -291,22 +294,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "e2e",
-  "capability": "backend-integration",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Execution Monitor",
-    "Execution Desk Data",
-    "EDGX"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique e2e/execution_monitor building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_exception-metric:metric:exception_metric_value,capability_2_execution-monitor-table:table-like:as_of,orders,reject_rate_pct,venue; generated:note@*:Execution Monitor,execution monitor."
+    "max_turns": 14
+  }
 }

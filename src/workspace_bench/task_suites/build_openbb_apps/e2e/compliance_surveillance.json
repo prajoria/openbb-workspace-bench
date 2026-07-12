@@ -1,18 +1,16 @@
 {
   "id": "compliance_surveillance",
-  "title": "Ship, open, and configure Compliance Surveillance",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-e2e",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "e2e",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "e2e",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "The desk needs a production-ready cases and compliance alerts workflow for a surveillance analyst. The workspace must cover open surveillance cases by severity. The workspace must cover open alert count. Analysts need to inspect case ID, desk, severity, age days. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Compliance Surveillance', 'surveillance', 'Surveillance Data', 'C-1044'. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "Compliance Surveillance",
+    "surveillance",
+    "Surveillance Data",
+    "C-1044"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -290,23 +288,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "e2e",
-  "capability": "backend-integration",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Compliance Surveillance",
-    "surveillance",
-    "Surveillance Data",
-    "C-1044"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique e2e/compliance_surveillance building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_alert-metric:metric:alert_metric_value,capability_2_surveillance-cases-table:table-like:age_days,case_id,desk,severity; generated:note@*:Compliance Surveillance,surveillance."
+    "max_turns": 14
+  }
 }

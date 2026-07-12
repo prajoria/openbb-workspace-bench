@@ -1,13 +1,9 @@
 {
   "id": "update_estimate_history_aapl_to_nvda",
-  "title": "Update Estimate History (AAPL To NVDA)",
-  "capability": "widget-update",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-update",
-    "update-widget"
-  ],
+  "category": "single-widget",
+  "family": "update",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "Update the existing Estimate History widget from AAPL to NVDA; do not create a new one and leave no widget showing the old value.",
   "fixtures": {
     "backends": [
@@ -97,15 +93,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "update",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique update/update_estimate_history_aapl_to_nvda exercise using get_workspace_snapshot, read_widget, update_widget with checks layout_out_of_grid, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on equities; artifact widgets:Bench Equities/estimate_history@*."
+  }
 }

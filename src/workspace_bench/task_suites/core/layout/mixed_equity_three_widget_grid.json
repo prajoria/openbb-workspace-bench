@@ -1,15 +1,9 @@
 {
   "id": "mixed_equity_three_widget_grid",
-  "title": "Three-Widget Grid: Eq Mixed",
-  "capability": "layout-management",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-layout",
-    "layout",
-    "multi-widget",
-    "combo"
-  ],
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "Arrange the three MSFT widgets: price full-width on top (40 columns, 10 rows), then estimates at columns 0-20 and fundamentals at columns 20-40, both 10 rows starting at row 10.",
   "fixtures": {
     "backends": [
@@ -149,15 +143,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "layout",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique layout/mixed_equity_three_widget_grid exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on equities; artifact layouts::widget_001::0:0:40:10,:widget_002::0:10:20:10,:widget_003::20:10:20:10."
+  }
 }

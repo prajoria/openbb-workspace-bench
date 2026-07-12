@@ -1,18 +1,16 @@
 {
   "id": "rates_ship",
-  "title": "Ship, open, and configure the Auction Desk app",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-aggrid",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "aggrid",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "aggrid",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "The desk needs a production-ready rates and Treasury markets workflow for a rates strategist. The workspace must cover upcoming treasury auctions. The workspace must cover current 2s10s spread in bps. The workspace must cover desk commentary on the rates day. Analysts need to inspect auction date, security, size billions. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Auction Desk', 'auctions', 'Rates Watch Data', '30Y Bond'. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "Auction Desk",
+    "auctions",
+    "Rates Watch Data",
+    "30Y Bond"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -317,23 +315,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "aggrid",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Auction Desk",
-    "auctions",
-    "Rates Watch Data",
-    "30Y Bond"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique aggrid/rates_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact capabilities:capability_1_auction-ladder:table-like:auction_date,security,size_bn,capability_2_curve-spread-metric:metric:curve_spread_metric_value; generated:note@*:Auction Desk,auctions."
+    "max_turns": 14
+  }
 }

@@ -3,8 +3,6 @@
     "filesystem",
     "shell"
   ],
-  "business_terms": [],
-  "capability": "build-real-backend",
   "category": "platform",
   "code_task": {
     "command_timeout_ms": 120000,
@@ -62,7 +60,6 @@
     ]
   },
   "difficulty": "medium",
-  "domain": "engineering",
   "family": "backend-code",
   "fixtures": {
     "backends": []
@@ -72,20 +69,8 @@
   "limits": {
     "max_turns": 24
   },
-  "novelty": "Real-code backend task: revenue_margin_chart",
   "oracle_tool_calls": [],
   "prompt": "A finance leader needs a chart-ready quarterly view of revenue and operating margin. Complete the supplied backend so Workspace can construct both declared series from at least three ordered quarters. Retain the repository's interface and quality gates.",
-  "schema_version": "workspace-bench-task",
-  "source": "WorkspaceBench Phase 10 authored code track",
   "split": "train",
-  "subdomain": "openbb-custom-backends",
-  "success": {},
-  "tags": [
-    "build-openbb-backends",
-    "experimental-v0",
-    "chart",
-    "implementation"
-  ],
-  "title": "Build a revenue and margin chart endpoint",
-  "workflow": "custom-backend-development"
+  "success": {}
 }

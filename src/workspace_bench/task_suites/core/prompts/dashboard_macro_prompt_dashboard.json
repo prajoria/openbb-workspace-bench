@@ -1,14 +1,9 @@
 {
   "id": "dashboard_macro_prompt_dashboard",
-  "title": "Macro Prompt Dashboard",
-  "capability": "dashboard-construction",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-prompts",
-    "prompts",
-    "multi-widget"
-  ],
+  "category": "dashboard",
+  "family": "prompts",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "After fetching workspace_tool_usage, create dashboard Macro Prompt Dashboard, add Bench Macro/macro_timeseries with data_args {\"series\": \"DGS2\"} and Bench Macro/yield_curve with schema-first discipline, and add a note mentioning DGS2 and schema.",
   "fixtures": {
     "backends": [
@@ -141,15 +136,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "prompts",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 12
-  },
-  "split": "train",
-  "novelty": "Unique prompts/dashboard_macro_prompt_dashboard exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_prompt, list_available_widgets, manage_dashboard with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_result, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on macro; artifact prompts:workspace_tool_usage; widgets:Bench Macro/macro_timeseries@*,Bench Macro/yield_curve@*; generated:note@*:DGS2,schema."
+  }
 }

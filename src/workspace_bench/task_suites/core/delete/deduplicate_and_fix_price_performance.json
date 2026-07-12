@@ -1,15 +1,9 @@
 {
   "id": "deduplicate_and_fix_price_performance",
-  "title": "Deduplicate And Fix Price Performance",
-  "capability": "workspace-repair",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-delete",
-    "repair",
-    "delete-widget",
-    "combo"
-  ],
+  "category": "repair",
+  "family": "delete",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "Remove exactly one duplicate from the two identical Price Performance widgets for AAPL; then update the remaining widget to NVDA and add a note mentioning NVDA and the word repaired.",
   "fixtures": {
     "backends": [
@@ -137,15 +131,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "delete",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique delete/deduplicate_and_fix_price_performance exercise using add_generative_widget, delete_widget, get_workspace_snapshot, update_widget with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on equities; artifact widgets:Bench Equities/price_performance@*; generated:note@*:NVDA,repaired."
+  }
 }

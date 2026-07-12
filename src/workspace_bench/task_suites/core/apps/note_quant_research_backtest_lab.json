@@ -1,15 +1,9 @@
 {
   "id": "note_quant_research_backtest_lab",
-  "title": "Instantiate Quant Research & Backtest Lab And Brief",
-  "capability": "app-instantiation",
-  "workflow": "risk-review",
-  "subdomain": "risk",
-  "tags": [
-    "family-apps",
-    "apps",
-    "stark",
-    "note"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Instantiate the Quant Research & Backtest Lab app from the Bench Stark Enterprise backend as a new dashboard named Signal Research Lab, then add a note on the Signals tab mentioning signal and decay.",
   "fixtures": {
     "backends": [
@@ -102,15 +96,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 7
-  },
-  "split": "train",
-  "novelty": "Unique apps/note_quant_research_backtest_lab exercise using add_generative_widget, manage_apps, manage_backends, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_tab, missing_widget, too_many_invalid_calls on stark-enterprise; artifact apps:Quant Research & Backtest Lab; widgets:Bench Stark Enterprise/quant_research_backtest_lab_backtest_backtest_performance@backtest,Bench Stark Enterprise/quant_research_backtest_lab_optimization_efficient_frontier@optimization; tabs:backtest,optimization,overview,signals; generated:note@signals:signal,decay."
+  }
 }

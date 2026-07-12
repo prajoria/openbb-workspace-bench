@@ -1,17 +1,9 @@
 {
   "id": "alert_metric_room",
-  "title": "Assemble the Surveillance Settings Room configured app",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-settings",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "settings",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "settings",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Build a surveillance analyst a dependable cases and compliance alerts workspace. The workspace must cover open alert count. The workspace must cover notes for one surveillance case. The workspace must cover latest surveillance policy digest. Leave the complete working workspace open for review. Decide how best to organize the experience and preserve unrelated work.",
   "fixtures": {},
   "initial_state": {},
@@ -268,18 +260,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "settings",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique settings/alert_metric_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_alert-metric:metric:alert_metric_value,capability_2_case-notes:markdown:case_notes_value,capability_3_policy-pdf:pdf:policy_pdf_value."
+    "max_turns": 14
+  }
 }

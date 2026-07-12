@@ -1,17 +1,16 @@
 {
   "id": "tvl_ship",
-  "title": "Ship, open, and configure the Chain Live app",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "crypto",
-  "tags": [
-    "family-apps",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "A digital-assets analyst needs a decision-ready Workspace for chain activity and liquidity. The workspace must cover current TVL of all chains from the desk aggregator. The workspace must cover current gas price snapshot. The workspace must cover comparison of chain TVL. Analysts need to inspect name, TVL USD, change one-day. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Chain Live', 'chains', 'Chain TVL Data', 'Solana'. Choose an effective architecture and avoid unrelated changes.",
+  "business_terms": [
+    "Chain Live",
+    "chains",
+    "Chain TVL Data",
+    "Solana"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -312,23 +311,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "capability": "app-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Chain Live",
-    "chains",
-    "Chain TVL Data",
-    "Solana"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "validation",
-  "novelty": "Unique apps/tvl_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Chain TVL Data; artifact capabilities:capability_1_chains-table:table-like:change_1d,name,tvl_usd,capability_2_gas-metric:metric:gas_metric_value; generated:note@*:Chain Live,chains."
+    "max_turns": 14
+  }
 }

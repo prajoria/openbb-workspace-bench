@@ -1,25 +1,10 @@
 {
-  "schema_version": "workspace-bench-task",
   "id": "vendor_broken_group",
-  "title": "Repair Vendor Recovery Room broken group incident",
   "category": "repair",
   "family": "debug",
-  "capability": "backend-repair",
-  "workflow": "diagnose-repair-retest",
-  "domain": "finance",
-  "subdomain": "vendor",
-  "specification_level": "open-brief",
   "difficulty": "hard",
-  "tags": [
-    "build-openbb-apps",
-    "debug",
-    "repair",
-    "broken_group",
-    "long-oracle"
-  ],
-  "source": "workspace-bench-build-apps-gen",
-  "novelty": "Unique debug/vendor_broken_group building exercise using add_generative_widget, get_widget_data, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_apps, manage_backends, read_widget, read_workspace_resource with checks capability, capability_connection, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Vendor Repair Data, custom:Vendor Repair Data Archive; artifact capabilities:incident-detail-broken_group:table-like:age_days,record_id,updated_at,incident-overview-broken_group:table-like:owner,record_id,status; generated:note@*:Vendor Recovery Room,Vendor Repair Data.",
-  "prompt": "Vendor operations analysts report that changing review scope no longer keeps the overview and detail aligned in Vendor Recovery Room. Diagnose the existing Vendor Repair Data connection, repair it in place, and retest the affected workflow with live data before handing it back. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Vendor Recovery Room open and add a short verification note that naturally mentions Vendor Recovery Room, Vendor Repair Data, and repair verified.",
+  "split": "train",
+  "prompt": "An incident in Vendor Recovery Room means changing review scope no longer keeps the overview and detail aligned. Investigate the connected Vendor Repair Data backend, make the smallest in-place repair, and prove the workflow against live data. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Vendor Recovery Room open and add a short verification HTML card that naturally mentions Vendor Recovery Room, Vendor Repair Data, and repair verified.",
   "business_terms": [
     "Vendor Recovery Room",
     "Vendor Repair Data",
@@ -337,6 +322,7 @@
         "param_kind": "text"
       }
     ],
+    "required_tool_calls": [],
     "business_names": [
       {
         "scope": "app",
@@ -350,7 +336,7 @@
     },
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "name_contains": "Verification",
         "data_contains": [
           "Vendor Recovery Room",
@@ -723,9 +709,9 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Vendor Recovery Room Verification",
-        "data": "Vendor Recovery Room on Vendor Repair Data: repair verified with a successful data retest."
+        "data": "<section>Vendor Recovery Room on Vendor Repair Data: repair verified with a successful data retest.</section>"
       }
     },
     {
@@ -735,6 +721,5 @@
   ],
   "limits": {
     "max_turns": 40
-  },
-  "split": "train"
+  }
 }

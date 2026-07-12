@@ -1,16 +1,9 @@
 {
   "id": "full_mnpi_research_review",
-  "title": "Instantiate, Extend, And Brief MNPI & Research Review",
-  "capability": "app-instantiation",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-apps",
-    "apps",
-    "stark",
-    "widget-creation",
-    "note"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Instantiate the MNPI & Research Review app from the Bench Stark Enterprise backend as a new dashboard named MNPI Control Desk. Then add the Reviewer Comments widget (id mnpi_research_review_research_reviewer_comments) to the Research tab, and add a note on the same tab mentioning reviewer comments and sign off.",
   "fixtures": {
     "backends": [
@@ -134,15 +127,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 9
-  },
-  "split": "test",
-  "novelty": "Unique apps/full_mnpi_research_review exercise using add_generative_widget, create_widget, get_widget_schema, list_available_widgets, manage_apps, manage_backends, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_tab, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact apps:MNPI & Research Review; widgets:Bench Stark Enterprise/mnpi_research_review_evidence_evidence_and_sign_off_history@evidence,Bench Stark Enterprise/mnpi_research_review_meetings_company_meeting_logs@meetings,Bench Stark Enterprise/mnpi_research_review_research_reviewer_comments@research; tabs:evidence,meetings,overview,research; generated:note@research:reviewer comments,sign off."
+  }
 }

@@ -1,18 +1,17 @@
 {
   "id": "click_sync_live",
-  "title": "Ship, open, and configure the grouped Click Sync Live app",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-grouping",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "grouping",
-    "orchestration"
+  "category": "platform",
+  "family": "grouping",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "Build an equity-research analyst a dependable earnings and estimates workspace. The workspace must cover clickable live symbol rows for grouped review. The workspace must cover EPS beat and miss history. The workspace must cover preview HTML card for the earnings call. Analysts need to inspect symbol, revision percentage. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Click Sync Live', 'click sync', 'Earnings Prep Data', 'AAPL', 'ticker'. Decide how best to organize the experience and preserve unrelated work.",
+  "business_terms": [
+    "Click Sync Live",
+    "click sync",
+    "Earnings Prep Data",
+    "AAPL",
+    "ticker"
   ],
-  "prompt": "Build an equity-research analyst a dependable earnings and estimates workspace. The workspace must cover clickable live symbol rows for grouped review. The workspace must cover EPS beat and miss history. The workspace must cover preview note for the earnings call. Analysts need to inspect symbol, revision percentage. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Click Sync Live', 'click sync', 'Earnings Prep Data', 'AAPL', 'ticker'. Decide how best to organize the experience and preserve unrelated work.",
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -40,7 +39,7 @@
   "success": {
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "Click Sync Live",
           "click sync",
@@ -337,30 +336,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Click Sync Live",
-        "data": "Click Sync Live is live from Earnings Prep Data: click sync ready. Configured symbol=AAPL."
+        "data": "<section>Click Sync Live is live from Earnings Prep Data: click sync ready. Configured symbol=AAPL.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "grouping",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Click Sync Live",
-    "click sync",
-    "Earnings Prep Data",
-    "AAPL",
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique grouping/click_sync_live building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, capability_connection, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_click-live-table:table-like:revision_pct,symbol,capability_2_earnings-chart:chart-like:earnings_chart_value; generated:note@*:Click Sync Live,click sync."
+    "max_turns": 14
+  }
 }

@@ -1,18 +1,16 @@
 {
   "id": "tvl_ship",
-  "title": "Ship, open, and configure the Chain Chart Live app",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "crypto",
-  "tags": [
-    "family-charts",
-    "cell2",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "charts",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "charts",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "A digital-assets analyst needs a decision-ready Workspace for chain activity and liquidity. The workspace must cover comparisons of chain TVL. The workspace must cover current gas price snapshot. The workspace must cover current TVL of all chains from the desk aggregator. Analysts need to inspect name, TVL USD, change one-day. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Chain Chart Live', 'chain TVL', 'Chain TVL Data', 'Solana'. Choose an effective architecture and avoid unrelated changes.",
+  "business_terms": [
+    "Chain Chart Live",
+    "chain TVL",
+    "Chain TVL Data",
+    "Solana"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -319,23 +317,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "charts",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Chain Chart Live",
-    "chain TVL",
-    "Chain TVL Data",
-    "Solana"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique charts/tvl_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Chain TVL Data; artifact capabilities:capability_1_chains-highchart:chart-like:chains_highchart_value,capability_2_gas-metric:metric:gas_metric_value; generated:note@*:Chain Chart Live,chain TVL."
+    "max_turns": 14
+  }
 }

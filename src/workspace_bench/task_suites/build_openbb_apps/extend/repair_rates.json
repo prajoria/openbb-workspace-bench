@@ -1,19 +1,16 @@
 {
   "id": "repair_rates",
-  "title": "Repair, extend, open, and configure Rates Repair Live",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-extend",
-    "cell2",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "refresh",
-    "extend",
-    "orchestration"
+  "category": "repair",
+  "family": "extend",
+  "difficulty": "hard",
+  "split": "validation",
+  "prompt": "The desk needs a production-ready rates and Treasury markets workflow for a rates strategist. The workspace must cover desk commentary on the rates day. The workspace must cover current 2s10s spread in bps. Leave the complete working workspace open for review. Preserve all working content while correcting the requested workflow. Add a short completion HTML card that naturally includes the desk-required terms 'Rates Repair Live', 'rates repair', 'Rates Watch Data', 'DGS2'. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "Rates Repair Live",
+    "rates repair",
+    "Rates Watch Data",
+    "DGS2"
   ],
-  "prompt": "The desk needs a production-ready rates and Treasury markets workflow for a rates strategist. The workspace must cover desk commentary on the rates day. The workspace must cover current 2s10s spread in bps. Leave the complete working workspace open for review. Preserve all working content while correcting the requested workflow. Add a short completion note that naturally includes the desk-required terms 'Rates Repair Live', 'rates repair', 'Rates Watch Data', 'DGS2'. Use your judgment on the architecture and leave other work intact.",
   "fixtures": {},
   "initial_state": {
     "custom_backends": [
@@ -95,7 +92,7 @@
   "success": {
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "Rates Repair Live",
           "rates repair",
@@ -299,29 +296,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Rates Repair Live",
-        "data": "Rates Repair Live is live from Rates Watch Data: rates repair done. Configured series=DGS2."
+        "data": "<section>Rates Repair Live is live from Rates Watch Data: rates repair done. Configured series=DGS2.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "extend",
-  "capability": "app-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Rates Repair Live",
-    "rates repair",
-    "Rates Watch Data",
-    "DGS2"
-  ],
   "limits": {
-    "max_turns": 9
-  },
-  "split": "validation",
-  "novelty": "Unique extend/repair_rates building exercise using add_generative_widget, get_workspace_snapshot, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact capabilities:capability_1_curve-spread-metric:metric:curve_spread_metric_value,capability_2_rates-commentary:markdown:rates_commentary_value; generated:note@*:Rates Repair Live,rates repair."
+    "max_turns": 14
+  }
 }

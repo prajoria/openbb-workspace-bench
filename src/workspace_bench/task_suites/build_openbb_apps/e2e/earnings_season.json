@@ -1,18 +1,16 @@
 {
   "id": "earnings_season",
-  "title": "Ship, open, and configure Earnings Season",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-e2e",
-    "cell7",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "e2e",
-    "orchestration"
+  "category": "platform",
+  "family": "e2e",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "An equity-research analyst needs a decision-ready Workspace for earnings and estimates. The workspace must cover earnings surprises and report dates. The workspace must cover average EPS surprise last 4 quarters. Analysts need to inspect ticker, EPS surprise percentage, revenue beat, report date. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Earnings Season', 'Earnings Prep Data', 'MSFT', 'ticker'. Choose an effective architecture and avoid unrelated changes.",
+  "business_terms": [
+    "Earnings Season",
+    "Earnings Prep Data",
+    "MSFT",
+    "ticker"
   ],
-  "prompt": "An equity-research analyst needs a decision-ready Workspace for earnings and estimates. The workspace must cover earnings surprises and report dates. The workspace must cover average EPS surprise last 4 quarters. Analysts need to inspect ticker, EPS surprise percentage, revenue beat, report date. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Earnings Season', 'Earnings Prep Data', 'MSFT', 'ticker'. Choose an effective architecture and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -40,7 +38,7 @@
   "success": {
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "Earnings Season",
           "earnings season",
@@ -285,29 +283,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Earnings Season",
-        "data": "Earnings Season is live from Earnings Prep Data: earnings season ready. Configured ticker=MSFT."
+        "data": "<section>Earnings Season is live from Earnings Prep Data: earnings season ready. Configured ticker=MSFT.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "e2e",
-  "capability": "backend-integration",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Earnings Season",
-    "Earnings Prep Data",
-    "MSFT",
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique e2e/earnings_season building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_earnings-season-table:table-like:eps_surprise_pct,report_date,revenue_beat,ticker,capability_2_surprise-metric:metric:surprise_metric_value; generated:note@*:Earnings Season,earnings season."
+    "max_turns": 14
+  }
 }

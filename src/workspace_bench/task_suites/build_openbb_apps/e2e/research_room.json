@@ -1,18 +1,16 @@
 {
   "id": "research_room",
-  "title": "Ship, open, and configure Research Room",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-e2e",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "e2e",
-    "orchestration"
+  "category": "platform",
+  "family": "e2e",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "Build an investment analyst a dependable the requested financial dataset workspace. The workspace must cover analyst research actions by ticker. The workspace must cover sector Exposure for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows. Analysts need to inspect ticker, analyst, rating, upside percentage, bucket, value. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Research Room', 'Bench Stark Enterprise', 'MSFT', 'ticker'. Decide how best to organize the experience and preserve unrelated work.",
+  "business_terms": [
+    "Research Room",
+    "Bench Stark Enterprise",
+    "MSFT",
+    "ticker"
   ],
-  "prompt": "Build an equity-research analyst a dependable earnings and estimates workspace. The workspace must cover analyst research actions by ticker. The workspace must cover preview note for the earnings call. Analysts need to inspect ticker, analyst, rating, upside percentage. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Research Room', 'Earnings Prep Data', 'MSFT', 'ticker'. Decide how best to organize the experience and preserve unrelated work.",
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -40,11 +38,11 @@
   "success": {
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "Research Room",
           "research room",
-          "Earnings Prep Data",
+          "Bench Stark Enterprise",
           "MSFT"
         ],
         "min_count": 1
@@ -67,16 +65,30 @@
     "runtime_checks": {
       "datasets": [
         {
-          "name": "earnings-prep-data__earnings_note",
-          "widget_id": "earnings_note",
+          "name": "bench-stark-enterprise__portfolio_command_center_holdings_sector_exposure",
+          "widget_id": "portfolio_command_center_holdings_sector_exposure",
           "fields": [
-            "earnings_note_value"
+            "bucket",
+            "value"
           ],
-          "path": "/earnings-preview",
-          "payload": "Earnings Preview fixture-backed runtime summary."
+          "path": "/portfolio_command_center_holdings_sector_exposure",
+          "payload": [
+            {
+              "bucket": "bucket-1",
+              "value": 10.25
+            },
+            {
+              "bucket": "bucket-2",
+              "value": 20.5
+            },
+            {
+              "bucket": "bucket-3",
+              "value": 30.75
+            }
+          ]
         },
         {
-          "name": "earnings-prep-data__research_room_table",
+          "name": "bench-stark-enterprise__research_room_table",
           "widget_id": "research_room_table",
           "fields": [
             "analyst",
@@ -105,29 +117,71 @@
               "upside_pct": 30.75
             }
           ]
+        },
+        {
+          "name": "capability-union__research_room",
+          "widget_id": "capability_union_research_room",
+          "fields": [
+            "analyst",
+            "bucket",
+            "rating",
+            "ticker",
+            "upside_pct",
+            "value"
+          ],
+          "path": "/capability-union",
+          "payload": [
+            {
+              "analyst": "analyst-1",
+              "bucket": "bucket-1",
+              "rating": "rating-1",
+              "ticker": "AAPL",
+              "upside_pct": 10.25,
+              "value": 10.25
+            },
+            {
+              "analyst": "analyst-2",
+              "bucket": "bucket-2",
+              "rating": "rating-2",
+              "ticker": "MSFT",
+              "upside_pct": 20.5,
+              "value": 20.5
+            },
+            {
+              "analyst": "analyst-3",
+              "bucket": "bucket-3",
+              "rating": "rating-3",
+              "ticker": "NVDA",
+              "upside_pct": 30.75,
+              "value": 30.75
+            }
+          ]
         }
       ],
       "pinned_paths": false
     },
     "required_capabilities": [
       {
-        "name": "capability_1_earnings-note",
+        "name": "capability_1_portfolio-command-center-holdings-sector-exposure",
         "datasets": [
-          "earnings-prep-data__earnings_note"
+          "bench-stark-enterprise__portfolio_command_center_holdings_sector_exposure",
+          "capability-union__research_room"
         ],
-        "widget_kind": "markdown",
+        "widget_kind": "table-like",
         "must_cover_fields": [
-          "earnings_note_value"
+          "bucket",
+          "value"
         ],
         "required_param_kinds": [
-          "ticker"
+          "text"
         ],
         "required_config": {}
       },
       {
         "name": "capability_2_research-room-table",
         "datasets": [
-          "earnings-prep-data__research_room_table"
+          "bench-stark-enterprise__research_room_table",
+          "capability-union__research_room"
         ],
         "widget_kind": "table-like",
         "must_cover_fields": [
@@ -159,8 +213,8 @@
       "tool": "manage_backends",
       "args": {
         "operation": "add",
-        "name": "Earnings Prep Data",
-        "url": "http://localhost:7805",
+        "name": "Bench Stark Enterprise",
+        "url": "http://localhost:7809",
         "widgets_json": {
           "research_room_table": {
             "name": "Research Room Table",
@@ -208,27 +262,147 @@
               }
             ]
           },
-          "earnings_note": {
-            "name": "Earnings Preview",
-            "description": "Preview note for the earnings call.",
-            "endpoint": "/earnings-preview",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
+          "portfolio_command_center_holdings_sector_exposure": {
+            "category": "Portfolio",
+            "data": {
+              "table": {
+                "chartView": {
+                  "cellRangeCols": {
+                    "area": [
+                      "bucket",
+                      "value"
+                    ],
+                    "column": [
+                      "bucket",
+                      "value"
+                    ],
+                    "groupedBar": [
+                      "bucket",
+                      "value"
+                    ],
+                    "groupedColumn": [
+                      "bucket",
+                      "value"
+                    ],
+                    "line": [
+                      "bucket",
+                      "value"
+                    ],
+                    "stackedArea": [
+                      "bucket",
+                      "value"
+                    ],
+                    "stackedBar": [
+                      "bucket",
+                      "value"
+                    ],
+                    "stackedColumn": [
+                      "bucket",
+                      "value"
+                    ],
+                    "treemap": [
+                      "bucket",
+                      "value"
+                    ]
+                  },
+                  "chartMiniChartEnabled": false,
+                  "chartNavigatorEnabled": false,
+                  "chartType": "treemap",
+                  "enabled": true,
+                  "ignoreCellRange": false
+                },
+                "columnsDefs": [
+                  {
+                    "cellDataType": "text",
+                    "chartDataType": "category",
+                    "field": "bucket",
+                    "headerName": "Bucket",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "number",
+                    "chartDataType": "series",
+                    "field": "value",
+                    "formatterFn": "int",
+                    "headerName": "Value",
+                    "width": 150
+                  }
+                ],
+                "enableAdvanced": true,
+                "enableCharts": true,
+                "showAll": false
+              }
             },
+            "description": "Sector Exposure for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows.",
+            "endpoint": "/portfolio_command_center_holdings_sector_exposure",
+            "gridData": {
+              "h": 14,
+              "w": 20
+            },
+            "name": "Sector Exposure",
             "params": [
               {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
+                "description": "Fund or vehicle scope.",
+                "label": "Fund",
+                "options": [
+                  {
+                    "label": "Flagship Long/Short",
+                    "value": "Flagship Long/Short"
+                  },
+                  {
+                    "label": "Global Opportunities",
+                    "value": "Global Opportunities"
+                  },
+                  {
+                    "label": "Income Fund",
+                    "value": "Income Fund"
+                  },
+                  {
+                    "label": "Multi-Asset Fund",
+                    "value": "Multi-Asset Fund"
+                  }
+                ],
+                "paramName": "fund",
+                "type": "text",
+                "value": "Flagship Long/Short"
+              },
+              {
+                "description": "Reporting period.",
+                "label": "Period",
+                "options": [
+                  {
+                    "label": "1D",
+                    "value": "1D"
+                  },
+                  {
+                    "label": "MTD",
+                    "value": "MTD"
+                  },
+                  {
+                    "label": "QTD",
+                    "value": "QTD"
+                  },
+                  {
+                    "label": "YTD",
+                    "value": "YTD"
+                  },
+                  {
+                    "label": "1Y",
+                    "value": "1Y"
+                  }
+                ],
+                "paramName": "period",
+                "type": "text",
+                "value": "YTD"
               }
             ],
-            "data": {
-              "valueField": "earnings_note_value"
-            }
+            "source": [
+              "Aladdin Portfolio Master",
+              "Performance Book of Record"
+            ],
+            "subCategory": "Holdings & Performance",
+            "type": "table",
+            "widgetId": "portfolio_command_center_holdings_sector_exposure"
           }
         },
         "apps_json": [
@@ -254,7 +428,7 @@
                 "name": "Notes",
                 "layout": [
                   {
-                    "i": "earnings_note",
+                    "i": "portfolio_command_center_holdings_sector_exposure",
                     "x": 0,
                     "y": 0,
                     "w": 20,
@@ -290,29 +464,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Research Room",
-        "data": "Research Room is live from Earnings Prep Data: research room ready. Configured ticker=MSFT."
+        "data": "<section>Research Room is live from Bench Stark Enterprise: research room ready. Configured ticker=MSFT.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "e2e",
-  "capability": "backend-integration",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Research Room",
-    "Earnings Prep Data",
-    "MSFT",
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique e2e/research_room building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_earnings-note:markdown:earnings_note_value,capability_2_research-room-table:table-like:analyst,rating,ticker,upside_pct; generated:note@*:Research Room,research room."
+    "max_turns": 14
+  }
 }

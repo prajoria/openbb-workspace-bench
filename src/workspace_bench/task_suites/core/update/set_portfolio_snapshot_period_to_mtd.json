@@ -1,13 +1,9 @@
 {
   "id": "set_portfolio_snapshot_period_to_mtd",
-  "title": "Set Portfolio Snapshot period To MTD",
-  "capability": "widget-update",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-update",
-    "update-widget"
-  ],
+  "category": "single-widget",
+  "family": "update",
+  "difficulty": "easy",
+  "split": "validation",
   "prompt": "For the existing Portfolio Snapshot widget, set period to MTD.",
   "fixtures": {
     "backends": [
@@ -84,15 +80,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "update",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "validation",
-  "novelty": "Unique update/set_portfolio_snapshot_period_to_mtd exercise using get_workspace_snapshot, update_widget with checks layout_out_of_grid, missing_widget, repeated_snapshots, too_many_invalid_calls on stark-enterprise; artifact widgets:Bench Stark Enterprise/portfolio_command_center_overview_portfolio_snapshot@*."
+  }
 }

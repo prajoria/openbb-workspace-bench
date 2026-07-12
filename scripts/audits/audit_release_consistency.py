@@ -34,9 +34,6 @@ COUNT_SCAN_EXCLUSIONS = {
 STALE_COUNT_RE = re.compile(r"\b(?:212|512)\b|60/80/72")
 STALE_CLAIMS = {
     "exact completion notes": re.compile(r"exact completion notes", re.IGNORECASE),
-    "data_equals as current contract": re.compile(
-        r"(?:current|build|bundled)[^.\n]{0,80}\bdata_equals\b", re.IGNORECASE
-    ),
     "runtime_verification_denial": re.compile(r"no runtime verification", re.IGNORECASE),
     "hand-assigned difficulty": re.compile(
         r"difficulty\s+(?:is|remains)\s+hand[- ]assigned", re.IGNORECASE
@@ -84,11 +81,11 @@ REQUIRED_FACTS = {
         "548 task identities",
         "536 deterministic tasks",
         "12 experimental code tasks",
-        "thirteen archetypes",
+        f"{ARCHETYPE_COUNT_WORD} archetypes",
     ),
     REPO / "RELEASE_CHECKLIST.md": (
         "548 tasks",
-        "55/11/170 measured difficulty",
+        "17/43/176 measured difficulty",
         "60/92/84 specification levels",
     ),
     REPO / "runs/README.md": (

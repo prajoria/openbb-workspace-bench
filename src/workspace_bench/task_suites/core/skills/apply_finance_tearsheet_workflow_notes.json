@@ -1,13 +1,10 @@
 {
   "id": "apply_finance_tearsheet_workflow_notes",
-  "capability": "skill-access",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-skills",
-    "skills",
-    "mcp"
-  ],
+  "category": "single-widget",
+  "family": "skills",
+  "difficulty": "easy",
+  "split": "test",
+  "prompt": "Call get_skill_content with slug finance-tearsheet, then add a note on the active dashboard that captures the workflow steps for an analyst. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
       {
@@ -41,8 +38,6 @@
       ]
     }
   },
-  "title": "Apply Finance Tearsheet Workflow Notes",
-  "prompt": "Call get_skill_content with slug finance-tearsheet, then add a note on the active dashboard that captures the workflow steps for an analyst. Omit dashboard_id when adding the note.",
   "allowed_tools": [
     "get_workspace_snapshot",
     "get_skill_content",
@@ -113,15 +108,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "skills",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique skills/apply_finance_tearsheet_workflow_notes exercise using add_generative_widget, get_skill_content, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/strategy_health_monitor_performance_sleeve_performance@overview; generated:note@*:tearsheet,valuation."
+  }
 }

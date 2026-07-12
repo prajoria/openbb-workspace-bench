@@ -127,6 +127,7 @@ def grade_task(
 
     state_builder = GradeBuilder(task.id)
     trace_builder = GradeBuilder(task.id)
+    preservation_builder = GradeBuilder(task.id)
     builder = state_builder
     composition = final_snapshot.get("dashboard_composition") or {}
     widgets = composition.get("widgets", [])
@@ -146,6 +147,14 @@ def grade_task(
             tab_id in tab_ids,
             "missing_tab",
             f"Expected tab {tab_id!r} in final dashboard.",
+        )
+
+    tab_names = [str(tab.get("name", "")) for tab in tabs]
+    for tab_name in task.success.required_tab_names:
+        state_builder.check(
+            any(_phrase_matches(name, tab_name) for name in tab_names),
+            "missing_tab_name",
+            f"Expected a tab named like {tab_name!r} in final dashboard.",
         )
 
     for required in task.success.required_widgets:
@@ -257,21 +266,42 @@ def grade_task(
     _grade_business_names(builder, task, final_snapshot)
     _grade_app_structure(builder, task, final_snapshot)
     _grade_workspace_preservation(
-        builder,
+        preservation_builder,
         task,
         initial_snapshot=initial_snapshot,
         final_snapshot=final_snapshot,
     )
-
     _grade_trace(trace_builder, task, trace)
     polish_builder = GradeBuilder(task.id)
     _grade_polish(polish_builder, task, final_snapshot)
-    issues = tuple(state_builder.issues + trace_builder.issues) + runtime_grade.issues
-    outcome_score = (
+    issues = (
+        tuple(state_builder.issues + trace_builder.issues + preservation_builder.issues)
+        + runtime_grade.issues
+    )
+    raw_outcome_score = (
         (state_builder.score + runtime_grade.score) / 2
         if task.success.runtime is not None
         else state_builder.score
     )
+    outcome_score = raw_outcome_score
+    if initial_snapshot is not None:
+        baseline = grade_task(task, initial_snapshot, (), initial_snapshot=None)
+        baseline_score = baseline.score
+        remaining = 1.0 - baseline_score
+        if remaining > 1e-12:
+            outcome_score = max(
+                0.0,
+                min(1.0, (raw_outcome_score - baseline_score) / remaining),
+            )
+        else:
+            # A trace-only contract has no state delta to score. It earns full
+            # outcome credit only when the strict behavioral contract passes.
+            outcome_score = float(
+                state_builder.passed_all
+                and trace_builder.passed_all
+                and preservation_builder.passed_all
+                and runtime_grade.passed
+            )
     return GradeResult(
         task_id=task.id,
         # Partial credit is outcome-based. Trace policy remains part of strict
@@ -280,12 +310,21 @@ def grade_task(
         passed=(
             state_builder.passed_all
             and trace_builder.passed_all
+            and preservation_builder.passed_all
             and runtime_grade.passed
         ),
         checks_passed=(
-            state_builder.passed + trace_builder.passed + runtime_grade.checks_passed
+            state_builder.passed
+            + trace_builder.passed
+            + preservation_builder.passed
+            + runtime_grade.checks_passed
         ),
-        checks_total=state_builder.total + trace_builder.total + runtime_grade.checks_total,
+        checks_total=(
+            state_builder.total
+            + trace_builder.total
+            + preservation_builder.total
+            + runtime_grade.checks_total
+        ),
         state_score=state_builder.score,
         state_passed=state_builder.passed_all,
         state_checks_passed=state_builder.passed,
@@ -294,6 +333,10 @@ def grade_task(
         trace_passed=trace_builder.passed_all,
         trace_checks_passed=trace_builder.passed,
         trace_checks_total=trace_builder.total,
+        preservation_score=preservation_builder.score,
+        preservation_passed=preservation_builder.passed_all,
+        preservation_checks_passed=preservation_builder.passed,
+        preservation_checks_total=preservation_builder.total,
         runtime_score=runtime_grade.score,
         runtime_passed=runtime_grade.passed,
         runtime_checks_passed=runtime_grade.checks_passed,
@@ -343,11 +386,6 @@ def _matching_generated_widgets(
         if (
             required.name_contains
             and required.name_contains.lower() not in str(widget.get("name", "")).lower()
-        ):
-            continue
-        if (
-            required.data_equals is not None
-            and widget.get("generated_data") != required.data_equals
         ):
             continue
         data_blob = " ".join(

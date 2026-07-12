@@ -7,8 +7,8 @@
     "suite": "build-openbb-apps",
     "track": "guided",
     "repeats": 2,
-    "harness_git_commit": "fab4b7ef4bdba318eca7de6ec604813e96a60272",
-    "suite_content_sha256": "ad2826fac83548fa89f59fdbef8ba05f406042db16caf0cb94cc21afafe87b0e"
+    "harness_git_commit": "22f477c86823c26b67241e5a525169dc77041c6f",
+    "suite_content_sha256": "1a4bfb86dad6d2fb78c789f7f97e14991e442470ef7eac65c594ecc66c0e9cec"
   },
   "review_policy": {
     "minimum_repeats": 2

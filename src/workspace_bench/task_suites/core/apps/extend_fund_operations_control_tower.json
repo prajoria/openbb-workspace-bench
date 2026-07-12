@@ -1,15 +1,9 @@
 {
   "id": "extend_fund_operations_control_tower",
-  "title": "Instantiate And Extend Fund Operations Control Tower",
-  "capability": "app-instantiation",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "data-platform",
-  "tags": [
-    "family-apps",
-    "apps",
-    "stark",
-    "widget-creation"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Instantiate the Fund Operations Control Tower app from the Bench Stark Enterprise backend as a new dashboard named Ops Control Room. Then add the Break Aging widget (id fund_operations_control_tower_recons_break_aging) to the Recons tab of the new dashboard.",
   "fixtures": {
     "backends": [
@@ -114,15 +108,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 9
-  },
-  "split": "train",
-  "novelty": "Unique apps/extend_fund_operations_control_tower exercise using create_widget, get_widget_schema, list_available_widgets, manage_apps, manage_backends, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_tab, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact apps:Fund Operations Control Tower; widgets:Bench Stark Enterprise/fund_operations_control_tower_corporate_actions_corporate_action_calendar@corporate_actions,Bench Stark Enterprise/fund_operations_control_tower_pricing_stale_prices@pricing,Bench Stark Enterprise/fund_operations_control_tower_recons_break_aging@recons; tabs:corporate_actions,overview,pricing,recons."
+  }
 }

@@ -1,18 +1,13 @@
 {
   "id": "symbol_param_desk",
-  "title": "Assemble the Symbol Param Desk app with shared parameters",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-params",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "params",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "params",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "An equity-research analyst needs a decision-ready Workspace for earnings and estimates. The workspace must cover preview note for the earnings call. The workspace must cover street estimate revisions by quarter. The workspace must cover EPS beat and miss history. Analysts need to inspect quarter, EPS estimate, revenue estimate billions. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Choose an effective architecture and avoid unrelated changes.",
+  "business_terms": [
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -312,20 +307,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "params",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique params/symbol_param_desk building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_earnings-chart:chart-like:earnings_chart_value,capability_2_earnings-note:markdown:earnings_note_value,capability_3_estimate-revisions:table-like:eps_estimate,quarter,revenue_estimate_b."
+    "max_turns": 14
+  }
 }

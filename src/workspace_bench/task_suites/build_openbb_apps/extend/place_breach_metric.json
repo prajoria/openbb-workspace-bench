@@ -1,18 +1,15 @@
 {
   "id": "place_breach_metric",
-  "title": "Add Open Breaches to Vendor Review",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "operations",
-  "tags": [
-    "family-extend",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "refresh",
-    "extend"
-  ],
+  "category": "repair",
+  "family": "extend",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Create a usable vendor service levels workflow for a vendor-operations manager. The workspace must cover vendor SLA state with breach flags. The workspace must cover count of open SLA breaches. Analysts need to inspect vendor, status, latency milliseconds, breach. Leave the complete working workspace open for review. The source contract must retain `status` and `vendor`; decide the remaining implementation and preserve unrelated workspace state.",
+  "business_terms": [
+    "status",
+    "vendor"
+  ],
   "fixtures": {},
   "initial_state": {
     "custom_backends": [
@@ -352,21 +349,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "extend",
-  "capability": "app-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "status",
-    "vendor"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique extend/place_breach_metric building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Vendor SLA Data; artifact capabilities:capability_1_breach-metric:metric:breach_metric_value,capability_2_vendor-sla-table:table-like:breach,latency_ms,status,vendor."
+    "max_turns": 13
+  }
 }

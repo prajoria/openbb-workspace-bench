@@ -1,14 +1,9 @@
 {
   "id": "dashboard_stark_prompt_dashboard",
-  "title": "Stark Prompt Dashboard",
-  "capability": "dashboard-construction",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-prompts",
-    "prompts",
-    "multi-widget"
-  ],
+  "category": "dashboard",
+  "family": "prompts",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Get workspace_tool_usage, create dashboard Stark Prompt Dashboard, add Bench Stark Enterprise/mnpi_research_review_research_draft_research_review and Bench Stark Enterprise/mnpi_research_review_research_evidence_and_sign_off_history with schema-first discipline, and add a note mentioning stark and schema.",
   "fixtures": {
     "backends": [
@@ -137,15 +132,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "prompts",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 12
-  },
-  "split": "test",
-  "novelty": "Unique prompts/dashboard_stark_prompt_dashboard exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_prompt, list_available_widgets, manage_dashboard with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_result, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on stark-enterprise; artifact prompts:workspace_tool_usage; widgets:Bench Stark Enterprise/mnpi_research_review_research_draft_research_review@*,Bench Stark Enterprise/mnpi_research_review_research_evidence_and_sign_off_history@*; generated:note@*:stark,schema."
+  }
 }

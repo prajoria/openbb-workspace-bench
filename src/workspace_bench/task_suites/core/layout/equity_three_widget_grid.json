@@ -1,15 +1,9 @@
 {
   "id": "equity_three_widget_grid",
-  "title": "Three-Widget Grid: Eq",
-  "capability": "layout-management",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-layout",
-    "layout",
-    "multi-widget",
-    "combo"
-  ],
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Arrange the three AAPL widgets into a grid: price at columns 0-20 rows 0-12, news at columns 20-40 rows 0-12, and estimates full-width below them (40 columns, 8 rows, starting at row 12).",
   "fixtures": {
     "backends": [
@@ -150,15 +144,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "layout",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique layout/equity_three_widget_grid exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, repeated_snapshots, too_many_invalid_calls on equities; artifact layouts::widget_001::0:0:20:12,:widget_002::20:0:20:12,:widget_003::0:12:40:8."
+  }
 }

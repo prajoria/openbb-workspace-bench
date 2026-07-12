@@ -1,15 +1,9 @@
 {
   "id": "ambient_repair_and_brief_price_performance",
-  "title": "Ambient Repair And Brief Price Performance",
-  "capability": "workspace-repair",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-inspect",
-    "inspect",
-    "repair",
-    "note"
-  ],
+  "category": "repair",
+  "family": "inspect",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Keep the companion widget while finding the widget with symbol=MSFT, repairing it to AAPL, and adding a note mentioning the repair after inspecting the dashboard.",
   "fixtures": {
     "backends": [
@@ -150,15 +144,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "inspect",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique inspect/ambient_repair_and_brief_price_performance exercise using add_generative_widget, get_workspace_snapshot, read_widget, update_widget with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on equities; artifact widgets:Bench Equities/latest_news@*,Bench Equities/price_performance@*; generated:note@*:MSFT,AAPL."
+  }
 }

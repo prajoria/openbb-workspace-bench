@@ -1,14 +1,9 @@
 {
   "id": "place_price_performance_nvda",
-  "title": "Add And Place Price Performance (NVDA)",
-  "capability": "widget-creation",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-create",
-    "widget-creation",
-    "layout"
-  ],
+  "category": "single-widget",
+  "family": "create",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "Fetch the widget schema and confirm the symbol value through the parameter options before creating the Price Performance widget for NVDA, then place it at exactly x=0, y=2, width 20, height 12.",
   "fixtures": {
     "backends": [
@@ -129,15 +124,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "create",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 9
-  },
-  "split": "test",
-  "novelty": "Unique create/place_price_performance_nvda exercise using create_widget, get_params_options, get_widget_schema, get_workspace_snapshot, list_available_widgets, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on equities; artifact widgets:Bench Equities/price_performance@*; layouts:price_performance:::0:2:20:12."
+  }
 }

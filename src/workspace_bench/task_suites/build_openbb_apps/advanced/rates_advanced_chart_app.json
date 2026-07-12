@@ -1,17 +1,14 @@
 {
   "id": "rates_advanced_chart_app",
-  "title": "Ship Rates Advanced Chart as Rates Advanced",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-advanced",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "advanced"
-  ],
+  "category": "platform",
+  "family": "advanced",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "Create a usable rates and Treasury markets workflow for a rates strategist. The workspace must cover market history for the 10Y yield future. Leave the complete working workspace open for review. The source contract must retain `Rates Watch Data`; decide the remaining implementation and preserve unrelated workspace state.",
+  "business_terms": [
+    "Rates Watch Data"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -153,20 +150,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "advanced",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "Rates Watch Data"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique advanced/rates_advanced_chart_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact capabilities:capability_1_rates-advanced-chart:chart-like:rates_advanced_chart_value."
+    "max_turns": 13
+  }
 }

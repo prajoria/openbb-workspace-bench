@@ -1,13 +1,9 @@
 {
   "id": "add_portfolio",
-  "title": "Register Bench Portfolio",
-  "capability": "dashboard-construction",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-backends",
-    "backends"
-  ],
+  "category": "dashboard",
+  "family": "backends",
+  "difficulty": "easy",
+  "split": "validation",
   "prompt": "With manage_backends, use operation add and name portfolio to register Bench Portfolio, then list it with operation list.",
   "fixtures": {
     "backends": []
@@ -164,15 +160,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "backends",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "validation",
-  "novelty": "Unique backends/add_portfolio exercise using manage_backends with checks layout_out_of_grid, missing_tool_call, missing_tool_result, too_many_invalid_calls on portfolio; artifact id:add_portfolio."
+  }
 }

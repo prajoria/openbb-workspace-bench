@@ -1,16 +1,10 @@
 {
   "id": "multi_portfolio_macro",
-  "title": "Multi-Backend Build: Portfolio Macro",
-  "capability": "dashboard-construction",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-backends",
-    "backends",
-    "cross-backend",
-    "note"
-  ],
-  "prompt": "Register backend names portfolio, macro, build a dashboard with Bench Portfolio/risk_metrics and Bench Macro/yield_curve, and add a note mentioning portfolio and yield curve.",
+  "category": "dashboard",
+  "family": "backends",
+  "difficulty": "hard",
+  "split": "validation",
+  "prompt": "Register backend names portfolio, macro, build a dashboard with Bench Portfolio/risk_metrics and Bench Macro/yield_curve, and add a HTML card mentioning portfolio and yield curve.",
   "fixtures": {
     "backends": []
   },
@@ -58,7 +52,7 @@
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "portfolio",
           "yield curve"
@@ -290,21 +284,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Backend Build Note",
-        "data": "Built with portfolio and yield curve."
+        "data": "<section>Built with portfolio and yield curve.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "backends",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 12
-  },
-  "split": "validation",
-  "novelty": "Unique backends/multi_portfolio_macro exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on macro, portfolio; artifact widgets:Bench Macro/yield_curve@*,Bench Portfolio/risk_metrics@*; generated:note@*:portfolio,yield curve."
+  }
 }

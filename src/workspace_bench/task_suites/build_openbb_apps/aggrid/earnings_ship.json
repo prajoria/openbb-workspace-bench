@@ -1,18 +1,17 @@
 {
   "id": "earnings_ship",
-  "title": "Ship, open, and configure the Season Tracker app",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-aggrid",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "aggrid",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "aggrid",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "An equity-research analyst needs a decision-ready Workspace for earnings and estimates. The workspace must cover beat/miss by ticker this season. The workspace must cover average EPS surprise last 4 quarters. The workspace must cover preview note for the earnings call. Analysts need to inspect ticker, EPS surprise percentage, revenue beat. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Season Tracker', 'season', 'Earnings Prep Data', 'MSFT', 'ticker'. Choose an effective architecture and avoid unrelated changes.",
+  "business_terms": [
+    "Season Tracker",
+    "season",
+    "Earnings Prep Data",
+    "MSFT",
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -318,24 +317,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "aggrid",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Season Tracker",
-    "season",
-    "Earnings Prep Data",
-    "MSFT",
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique aggrid/earnings_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_beat-miss-grid:table-like:eps_surprise_pct,revenue_beat,ticker,capability_2_surprise-metric:metric:surprise_metric_value; generated:note@*:Season Tracker,season."
+    "max_turns": 14
+  }
 }

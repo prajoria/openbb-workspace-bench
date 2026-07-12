@@ -1,14 +1,9 @@
 {
   "id": "order_status",
-  "title": "Read Data: Order Status Metrics",
-  "capability": "data-reading",
-  "workflow": "execution-exception-review",
-  "subdomain": "execution",
-  "tags": [
-    "family-read",
-    "data-reading",
-    "stark"
-  ],
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "easy",
+  "split": "test",
   "prompt": "On the Bench Stark Enterprise Order Status Metrics widget, use get_widget_data, then add a short note that cites execution_desk_blotter_order_status_metrics and says you reviewed the data.",
   "fixtures": {
     "backends": [
@@ -66,7 +61,7 @@
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "execution_desk_blotter_order_status_metrics"
+          "value"
         ]
       }
     ],
@@ -112,15 +107,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "read",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique read/order_status exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:execution_desk_blotter_order_status_metrics,data."
+  }
 }

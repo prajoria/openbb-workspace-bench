@@ -17,7 +17,7 @@ from workspace_bench.browser.mock_server import MockWorkspaceServer
 from workspace_bench.browser.task_backend import TaskBackendModel, TaskBackendServer
 from workspace_bench.core.models import JsonDict, RuntimeDataset, Task
 from workspace_bench.core.runner import find_task
-from workspace_bench.workspace.runtime import bind_dataset
+from workspace_bench.workspace.runtime import bind_dataset, materialize_dataset
 from workspace_bench.workspace.widget_params import flatten_params
 
 
@@ -274,7 +274,11 @@ def validate_entry(entry: CertificationEntry, *, probe_backend: bool = True) -> 
 
 
 def _dataset_text(dataset: RuntimeDataset) -> str:
-    value = dataset.raw_body if dataset.raw_body is not None else dataset.payload
+    value = (
+        dataset.raw_body
+        if dataset.raw_body is not None
+        else materialize_dataset(dataset, {"startRow": 0, "endRow": 10})
+    )
     return json.dumps(value, sort_keys=True).casefold()
 
 
@@ -354,7 +358,11 @@ def _probe_task_backend(server: TaskBackendServer) -> int:
         endpoint = definition.get("endpoint")
         if not isinstance(endpoint, str):
             raise ValueError(f"{server.model.task_ref}/{widget_id} has no endpoint")
-        method = "POST" if definition.get("type") == "ssrm_table" else "GET"
+        method = (
+            "POST"
+            if definition.get("type") in {"table_ssrm", "ssrm_table"}
+            else "GET"
+        )
         data = b'{"startRow":0,"endRow":100}' if method == "POST" else None
         request = Request(urljoin(server.base_url + "/", endpoint.lstrip("/")), data=data, method=method)
         request.add_header("Content-Type", "application/json")

@@ -1,13 +1,9 @@
 {
   "id": "risk_metrics_plain",
-  "title": "Create Risk Metrics",
-  "capability": "widget-creation",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-create",
-    "widget-creation"
-  ],
+  "category": "single-widget",
+  "family": "create",
+  "difficulty": "easy",
+  "split": "validation",
   "prompt": "Create a Risk Metrics widget (widget_id risk_metrics) from the Bench Portfolio backend on the active dashboard.",
   "fixtures": {
     "backends": [
@@ -69,15 +65,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "create",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "validation",
-  "novelty": "Unique create/risk_metrics_plain exercise using create_widget, get_workspace_snapshot with checks layout_out_of_grid, layout_overlap, missing_widget, repeated_snapshots, too_many_invalid_calls on portfolio; artifact widgets:Bench Portfolio/risk_metrics@*."
+  }
 }

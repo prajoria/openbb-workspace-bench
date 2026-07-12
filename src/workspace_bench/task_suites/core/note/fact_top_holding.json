@@ -1,14 +1,9 @@
 {
   "id": "fact_top_holding",
-  "title": "Grounded Note: Top Holding",
-  "capability": "workspace-inspection",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-note",
-    "note",
-    "read-only"
-  ],
+  "category": "read",
+  "family": "note",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "Use the existing holdings widget data to add a note naming the largest position and its exact weight from the data.",
   "fixtures": {
     "backends": [
@@ -95,15 +90,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "read",
-  "family": "note",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique note/fact_top_holding exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls on portfolio; artifact widgets:Bench Portfolio/holdings_table@*; generated:note@*:MSFT,0.34."
+  }
 }

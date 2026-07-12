@@ -1,15 +1,9 @@
 {
   "id": "cross_portfolio_sector",
-  "title": "Cross-Backend Options Build: Portfolio Sector",
-  "capability": "dashboard-construction",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-params",
-    "params",
-    "cross-backend",
-    "note"
-  ],
+  "category": "dashboard",
+  "family": "params",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "Build a two-widget dashboard using parameter options for both widgets: Bench Portfolio/sector_exposure sector=Technology; Bench Macro/macro_timeseries series=CPIAUCSL. Add a note mentioning Technology and CPIAUCSL.",
   "fixtures": {
     "backends": [
@@ -174,15 +168,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "params",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 12
-  },
-  "split": "validation",
-  "novelty": "Unique params/cross_portfolio_sector exercise using add_generative_widget, create_widget, get_params_options, get_widget_schema, get_workspace_snapshot, list_available_widgets with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on macro, portfolio; artifact widgets:Bench Macro/macro_timeseries@*,Bench Portfolio/sector_exposure@*; generated:note@*:Technology,CPIAUCSL."
+  }
 }

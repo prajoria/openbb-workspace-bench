@@ -1,13 +1,9 @@
 {
   "id": "set_price_performance_symbol_to_aapl",
-  "title": "Set Price Performance symbol To AAPL",
-  "capability": "widget-update",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-update",
-    "update-widget"
-  ],
+  "category": "single-widget",
+  "family": "update",
+  "difficulty": "easy",
+  "split": "test",
   "prompt": "For the existing Price Performance widget, set symbol to AAPL.",
   "fixtures": {
     "backends": [
@@ -82,15 +78,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "update",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "test",
-  "novelty": "Unique update/set_price_performance_symbol_to_aapl exercise using get_workspace_snapshot, update_widget with checks layout_out_of_grid, missing_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact widgets:Bench Equities/price_performance@*."
+  }
 }

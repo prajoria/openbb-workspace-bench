@@ -1,24 +1,9 @@
 {
-  "schema_version": "workspace-bench-task",
   "id": "surveillance_data_mismatch",
-  "title": "Repair Surveillance Recovery Room data mismatch incident",
   "category": "repair",
   "family": "debug",
-  "capability": "backend-repair",
-  "workflow": "diagnose-repair-retest",
-  "domain": "finance",
-  "subdomain": "surveillance",
-  "specification_level": "partially-specified",
   "difficulty": "medium",
-  "tags": [
-    "build-openbb-apps",
-    "debug",
-    "repair",
-    "data_mismatch",
-    "long-oracle"
-  ],
-  "source": "workspace-bench-build-apps-gen",
-  "novelty": "Unique debug/surveillance_data_mismatch building exercise using add_generative_widget, get_widget_data, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_apps, manage_backends, read_widget, read_workspace_resource with checks capability, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Repair Data, custom:Surveillance Repair Data Archive; artifact capabilities:incident-detail-data_mismatch:table-like:age_days,case_id,updated_at,incident-overview-data_mismatch:table-like:case_id,owner,status; generated:note@*:Surveillance Recovery Room,Surveillance Repair Data.",
+  "split": "validation",
   "prompt": "Surveillance analysts report that the overview loads but a declared analyst field is absent in Surveillance Recovery Room. Diagnose the existing Surveillance Repair Data connection, repair it in place, and retest the affected workflow with live data before handing it back. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Surveillance Recovery Room open and add a short verification note that naturally mentions Surveillance Recovery Room, Surveillance Repair Data, and repair verified.",
   "business_terms": [
     "Surveillance Recovery Room",
@@ -336,6 +321,7 @@
       }
     ],
     "capability_connections": [],
+    "required_tool_calls": [],
     "business_names": [
       {
         "scope": "app",
@@ -734,6 +720,5 @@
   ],
   "limits": {
     "max_turns": 40
-  },
-  "split": "validation"
+  }
 }

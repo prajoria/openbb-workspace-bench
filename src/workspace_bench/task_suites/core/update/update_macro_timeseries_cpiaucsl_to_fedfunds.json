@@ -1,13 +1,9 @@
 {
   "id": "update_macro_timeseries_cpiaucsl_to_fedfunds",
-  "title": "Update Macro Timeseries (CPIAUCSL To FEDFUNDS)",
-  "capability": "widget-update",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-update",
-    "update-widget"
-  ],
+  "category": "single-widget",
+  "family": "update",
+  "difficulty": "medium",
+  "split": "validation",
   "prompt": "The existing Macro Timeseries widget currently shows CPIAUCSL. Update that widget to FEDFUNDS; do not create a new one and leave no widget showing the old value.",
   "fixtures": {
     "backends": [
@@ -97,15 +93,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "update",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique update/update_macro_timeseries_cpiaucsl_to_fedfunds exercise using get_workspace_snapshot, read_widget, update_widget with checks layout_out_of_grid, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on macro; artifact widgets:Bench Macro/macro_timeseries@*."
+  }
 }

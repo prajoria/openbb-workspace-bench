@@ -1,13 +1,9 @@
 {
   "id": "standup",
-  "title": "Morning Standup",
-  "capability": "workspace-inspection",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-note",
-    "note"
-  ],
+  "category": "single-widget",
+  "family": "note",
+  "difficulty": "easy",
+  "split": "test",
   "prompt": "On the dashboard, add a note named Morning Standup stating that the desk meeting moved to 9am and the risk review is at noon.",
   "fixtures": {
     "backends": [
@@ -65,15 +61,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "note",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "test",
-  "novelty": "Unique note/standup exercise using add_generative_widget, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact generated:note@*:9am,noon."
+  }
 }

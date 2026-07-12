@@ -1,13 +1,9 @@
 {
   "id": "widen_fundamentals_aapl",
-  "title": "Layout: Widen Fundamentals Aapl",
-  "capability": "layout-management",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-layout",
-    "layout"
-  ],
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "easy",
+  "split": "test",
   "prompt": "Widen the AAPL fundamentals widget to 20 columns. Keep its position and height.",
   "fixtures": {
     "backends": [
@@ -103,15 +99,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "layout",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "test",
-  "novelty": "Unique layout/widen_fundamentals_aapl exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, missing_tab, missing_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact widgets:Bench Equities/fundamental_metrics@charts; layouts:fundamental_metrics::charts:0:0:20:8; tabs:charts."
+  }
 }

@@ -3,6 +3,8 @@
 from workspace_bench.core.episode import WorkspaceEpisode
 from workspace_bench.core.models import Task, ToolCall
 from workspace_bench.workspace.backend_validation import (
+    CANONICAL_WIDGET_VIZ_TYPES,
+    WIDGET_VIZ_TYPE_ALIASES,
     validate_apps_json,
     validate_widgets_json,
 )
@@ -57,6 +59,63 @@ def test_widgets_json_accepts_valid_payload():
     assert errors == []
     assert warnings == []
     assert normalized["vix_history"]["type"] == "table"
+
+
+def test_widget_type_catalog_matches_live_snapshot() -> None:
+    import json
+    from pathlib import Path
+
+    snapshot = json.loads(
+        Path("runs/hosted-surface/widget_types.json").read_text(encoding="utf-8")
+    )
+    assert snapshot["uri"] == "openbb://workspace/specs/widget-types"
+    assert set(snapshot["types"]) == CANONICAL_WIDGET_VIZ_TYPES
+    assert WIDGET_VIZ_TYPE_ALIASES == {"ssrm_table": "table_ssrm"}
+
+
+def test_widgets_json_accepts_legacy_ssrm_alias() -> None:
+    widget = {
+        "name": "Legacy SSRM",
+        "description": "Compatibility fixture.",
+        "endpoint": "/legacy",
+        "type": "ssrm_table",
+    }
+    errors, _, normalized = validate_widgets_json({"legacy": widget})
+    assert errors == []
+    assert normalized["legacy"]["type"] == "ssrm_table"
+
+
+def test_missing_app_prompts_has_distinct_issue_code() -> None:
+    from dataclasses import replace
+
+    from workspace_bench.core.models import RequiredAppDef, SuccessCriteria
+    from workspace_bench.core.runner import find_task
+    from workspace_bench.core.graders import grade_task
+
+    task = find_task("build-openbb-apps/apps/vol_morning")
+    task = replace(
+        task,
+        success=SuccessCriteria(
+            required_app_defs=(
+                RequiredAppDef(
+                    backend_name="Vol Desk Data",
+                    name_contains="Vol Morning",
+                    prompts_min_count=1,
+                ),
+            )
+        ),
+    )
+    snapshot = {
+        "custom_backends": {
+            "backend_001": {
+                "name": "Vol Desk Data",
+                "widgets_json": {},
+                "apps_json": [{"name": "Vol Morning", "tabs": {}}],
+            }
+        }
+    }
+    grade = grade_task(task, snapshot, ())
+    assert "app_prompts_missing" in {issue.code for issue in grade.issues}
 
 
 def test_widgets_json_rejects_array_and_bare_widget():
@@ -397,20 +456,11 @@ def test_debug_episode_surfaces_form_route_and_live_row_identity_faults():
 
 def _building_task() -> Task:
     return Task.from_dict({
-        "schema_version": "workspace-bench-task",
         "id": "auth_test_task",
-        "title": "Author a VIX backend",
         "category": "platform",
         "family": "backend-building",
-        "capability": "backend-building",
-        "workflow": "risk-review",
-        "domain": "finance",
-        "subdomain": "volatility",
         "difficulty": "medium",
         "split": "dev",
-        "tags": ["build-openbb-apps"],
-        "source": "test",
-        "novelty": "test-building",
         "prompt": "Author the VIX backend.",
         "fixtures": {},
         "initial_state": {},
@@ -433,7 +483,7 @@ def _building_task() -> Task:
                 "prompts_min_count": 1,
                 "widgets_on_tab": [{"tab_id": "main", "widget_id": "vix_history"}],
             }],
-            "trace_checks": {"max_invalid_tool_calls": 0},
+
         },
         "oracle_tool_calls": [
             {"tool": "get_workspace_snapshot", "args": {}},

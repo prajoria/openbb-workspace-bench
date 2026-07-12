@@ -3,8 +3,6 @@
     "filesystem",
     "shell"
   ],
-  "business_terms": [],
-  "capability": "build-real-backend",
   "category": "platform",
   "code_task": {
     "command_timeout_ms": 120000,
@@ -100,7 +98,6 @@
     ]
   },
   "difficulty": "medium",
-  "domain": "engineering",
   "family": "backend-code",
   "fixtures": {
     "backends": []
@@ -110,21 +107,8 @@
   "limits": {
     "max_turns": 24
   },
-  "novelty": "Real-code backend task: mutable_watchlist_form",
   "oracle_tool_calls": [],
   "prompt": "A research desk needs to add symbols and notes through a Workspace form and see each accepted submission in the table immediately afterward. Implement the declared POST contract with in-process state; normalize tickers and preserve existing entries.",
-  "schema_version": "workspace-bench-task",
-  "source": "WorkspaceBench Phase 10 authored code track",
   "split": "validation",
-  "subdomain": "openbb-custom-backends",
-  "success": {},
-  "tags": [
-    "build-openbb-backends",
-    "experimental-v0",
-    "form",
-    "post",
-    "state"
-  ],
-  "title": "Implement a stateful watchlist form",
-  "workflow": "custom-backend-development"
+  "success": {}
 }

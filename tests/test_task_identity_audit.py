@@ -34,7 +34,6 @@ def test_audit_task_flags_generator_identity_and_prompt_scars() -> None:
     reasons = {(finding.field, finding.reason.split(":", 1)[0]) for finding in findings}
     assert ("id", "repeated token phrase") in reasons
     assert ("id", "numeric generator suffix") in reasons
-    assert ("title", "repeated word phrase") in reasons
     assert ("prompt", "internal benchmark jargon") in reasons
     assert ("prompt", "placeholder residue") in reasons
     assert ("prompt", "repeated word") in reasons
@@ -66,7 +65,7 @@ def _open_prompt_task(specification_level: str, prompt: str, terms: list[str]) -
                     "url": "http://localhost:7805",
                     "widgets_json": {
                         "revision_grid": {
-                            "type": "ssrm_table",
+                            "type": "table_ssrm",
                             "endpoint": "/revision-momentum",
                             "refetchInterval": 30000,
                             "params": [{"paramName": "ticker", "type": "ticker"}],
@@ -102,7 +101,7 @@ def _open_prompt_task(specification_level: str, prompt: str, terms: list[str]) -
 def test_hard_prompt_openness_flags_oracle_implementation_details() -> None:
     task = _open_prompt_task(
         "open-brief",
-        "Build revision_grid as an ssrm_table at /revision-momentum with revised_up; "
+        "Build revision_grid as a table_ssrm at /revision-momentum with revised_up; "
         'place it at {"x": 0, "y": 0, "w": 20, "h": 8}.',
         [],
     )
@@ -162,5 +161,5 @@ def test_release_consistency_flags_cross_phase_claims() -> None:
 def test_release_consistency_rejects_wrong_archetype_count() -> None:
     findings = audit_text(Path("README.md"), "The matrix covers eight archetypes.\n")
     assert [finding.reason for finding in findings] == [
-        "wrong adversarial archetype count: eight (expected thirteen)"
+        "wrong adversarial archetype count: eight (expected twelve)"
     ]

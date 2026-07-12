@@ -1,13 +1,9 @@
 {
   "id": "remove_macro_timeseries",
-  "title": "Remove Macro Timeseries",
-  "capability": "widget-update",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-delete",
-    "delete-widget"
-  ],
+  "category": "single-widget",
+  "family": "delete",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "The Macro Timeseries widget is no longer needed on this dashboard. Remove it.",
   "fixtures": {
     "backends": [
@@ -78,15 +74,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "delete",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique delete/remove_macro_timeseries exercise using delete_widget, get_workspace_snapshot with checks layout_out_of_grid, repeated_snapshots, too_many_invalid_calls, too_many_widgets on macro; artifact id:remove_macro_timeseries."
+  }
 }

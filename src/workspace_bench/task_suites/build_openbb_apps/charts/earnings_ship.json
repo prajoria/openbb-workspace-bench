@@ -1,18 +1,17 @@
 {
   "id": "earnings_ship",
-  "title": "Ship, open, and configure the Earnings Chart Live app",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-charts",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "charts",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "charts",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "An equity-research analyst needs a decision-ready Workspace for earnings and estimates. The workspace must cover EPS beat and miss history. The workspace must cover average EPS surprise last 4 quarters. The workspace must cover street estimate revisions by quarter. Analysts need to inspect quarter, EPS estimate, revenue estimate billions. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Earnings Chart Live', 'earnings history', 'Earnings Prep Data', 'MSFT', 'ticker'. Choose an effective architecture and avoid unrelated changes.",
+  "business_terms": [
+    "Earnings Chart Live",
+    "earnings history",
+    "Earnings Prep Data",
+    "MSFT",
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -328,24 +327,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "charts",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Earnings Chart Live",
-    "earnings history",
-    "Earnings Prep Data",
-    "MSFT",
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique charts/earnings_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_earnings-chart:chart-like:earnings_chart_value,capability_2_surprise-metric:metric:surprise_metric_value; generated:note@*:Earnings Chart Live,earnings history."
+    "max_turns": 14
+  }
 }

@@ -1,17 +1,15 @@
 {
   "id": "exception_refresh_grid",
-  "title": "Compose the configured Exception Refresh Grid widget",
-  "workflow": "execution-exception-review",
-  "subdomain": "execution",
-  "tags": [
-    "family-settings",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "settings",
-    "composed"
-  ],
+  "category": "platform",
+  "family": "settings",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Deliver an analyst-ready Workspace solution for orders and venue quality. The workspace must cover execution exceptions with manual refresh. Analysts need to inspect order ID, symbol, age min. Use `order_id` and `symbol` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
+  "business_terms": [
+    "order_id",
+    "symbol"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -185,21 +183,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "settings",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "order_id",
-    "symbol"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique settings/exception_refresh_grid building exercise using create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks capability, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_exception-refresh-grid:table-like:age_min,order_id,symbol."
+    "max_turns": 13
+  }
 }

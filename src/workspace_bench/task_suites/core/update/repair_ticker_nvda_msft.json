@@ -1,14 +1,9 @@
 {
   "id": "repair_ticker_nvda_msft",
-  "title": "Repair Price Performance",
-  "capability": "workspace-repair",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-update",
-    "repair",
-    "update-widget"
-  ],
+  "category": "repair",
+  "family": "update",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "This MSFT review dashboard mistakenly shows NVDA in the price widget. Repair the widget to MSFT; then add a note saying what was repaired and mentioning both values.",
   "fixtures": {
     "backends": [
@@ -117,15 +112,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "update",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 7
-  },
-  "split": "test",
-  "novelty": "Unique update/repair_ticker_nvda_msft exercise using add_generative_widget, get_workspace_snapshot, read_widget, update_widget with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on equities; artifact widgets:Bench Equities/price_performance@*; generated:note@*:NVDA,MSFT."
+  }
 }

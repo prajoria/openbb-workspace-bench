@@ -1,13 +1,10 @@
 {
   "id": "read_the_finance_comps_skill",
-  "capability": "skill-access",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-skills",
-    "skills",
-    "mcp"
-  ],
+  "category": "single-widget",
+  "family": "skills",
+  "difficulty": "easy",
+  "split": "train",
+  "prompt": "Use get_skill_content with slug finance-comps, then add a note on the active dashboard naming the Finance Comps skill. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
       {
@@ -41,8 +38,6 @@
       ]
     }
   },
-  "title": "Read The Finance Comps Skill",
-  "prompt": "Use get_skill_content with slug finance-comps, then add a note on the active dashboard naming the Finance Comps skill. Omit dashboard_id when adding the note.",
   "allowed_tools": [
     "get_workspace_snapshot",
     "get_skill_content",
@@ -102,15 +97,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "skills",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique skills/read_the_finance_comps_skill exercise using add_generative_widget, get_skill_content, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/vendor_dataset_monitor_vendors_sla_metrics@overview; generated:note@*:Finance Comps."
+  }
 }

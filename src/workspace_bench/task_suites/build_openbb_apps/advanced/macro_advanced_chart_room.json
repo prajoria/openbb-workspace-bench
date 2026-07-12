@@ -1,17 +1,9 @@
 {
   "id": "macro_advanced_chart_room",
-  "title": "Assemble the Macro Chart Room",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-advanced",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "advanced",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "advanced",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Build a rates strategist a dependable rates and Treasury markets workspace. The workspace must cover market history for treasury futures. The workspace must cover the Treasury yield curve. The workspace must cover current 2s10s spread in bps. Leave the complete working workspace open for review. Decide how best to organize the experience and preserve unrelated work.",
   "fixtures": {},
   "initial_state": {},
@@ -275,18 +267,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "advanced",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique advanced/macro_advanced_chart_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact capabilities:capability_1_curve-spread-metric:metric:curve_spread_metric_value,capability_2_macro-advanced-chart:chart-like:macro_advanced_chart_value,capability_3_yield-curve:chart-like:yield_curve_value."
+    "max_turns": 14
+  }
 }

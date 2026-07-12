@@ -8,6 +8,7 @@ offers the complete tool surface, and requires the result to be placed or opened
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -23,9 +24,9 @@ from _assembly import (
     TaskAssembler,
     build_matrix as build_matrix,
     difficulty_for,
+    diversify_generated_widget_proof,
     snap as snap,
 )
-from workspace_bench.core.models import TASK_SCHEMA_VERSION
 from workspace_bench.workspace.runtime import declared_fields
 from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
 from workspace_bench.workspace.widget_params import flatten_params
@@ -92,6 +93,11 @@ from workspace_bench.core.suite_checks import (  # noqa: E402, F401 - re-exporte
 SCENARIOS: list[dict] = []
 CELL_COUNTS: dict[tuple[str, str], int] = {}
 PROMPT_POOL_SIZES: dict[str, int] = {}
+VOLUME_TASKS = {
+    ("aggrid", "estimates_ssrm"),
+    ("advanced", "orders_stream"),
+    ("e2e", "execution_monitor"),
+}
 
 # Building is a validation-loop workflow by design: the simulator's rejections are
 # specific and actionable (mirroring the real product), so one rejected round-trip is
@@ -168,15 +174,16 @@ def _finalize_build_task(
     _functionalize_task(task, family=family, level=level)
     _ensure_behavioral_field_contracts(task)
     _attach_runtime_checks(task)
+    _apply_volume_tier(task, family=family)
     _migrate_behavioral_requirements(task, family=family)
     _render_prompt_contract(task, family=family, level=level)
+    diversify_generated_widget_proof(task, share=20, selected_buckets=7)
 
 
 add = TaskAssembler(
     scenarios=SCENARIOS,
     cell_counts=CELL_COUNTS,
     source="workspace-bench-build-apps-gen",
-    schema_version=TASK_SCHEMA_VERSION,
     rung_slack=RUNG_SLACK,
     set_category=_set_build_category,
     normalize_identity=_noop_identity,
@@ -218,6 +225,44 @@ def _attach_runtime_checks(task: dict) -> None:
     }
 
 
+def _apply_volume_tier(task: dict, *, family: str) -> None:
+    """Upgrade three existing tasks to compact 10k-row deterministic data."""
+
+    if (family, str(task.get("id"))) not in VOLUME_TASKS:
+        return
+    datasets = task.get("success", {}).get("runtime_checks", {}).get("datasets", [])
+    if not datasets:
+        return
+    dataset = datasets[0]
+    fields = [str(field) for field in dataset.get("fields", [])]
+    schema: dict[str, str] = {}
+    for field in fields:
+        lowered = field.casefold()
+        if "date" in lowered or lowered.endswith("_at"):
+            schema[field] = "date"
+        elif any(token in lowered for token in ("count", "days", "rank", "id")):
+            schema[field] = "integer"
+        elif any(token in lowered for token in ("price", "value", "pct", "rate", "amount")):
+            schema[field] = "number"
+        else:
+            schema[field] = "string"
+    widgets, _ = _authored_payload(task)
+    definition = widgets.get(str(dataset.get("widget_id")), {})
+    data_key = (
+        (definition.get("data") or {}).get("dataKey", "rows")
+        if definition.get("type") == "table_ssrm"
+        else "rows"
+    )
+    dataset.pop("payload", None)
+    dataset["payload_spec"] = {
+        "generator": "seeded_rows",
+        "seed": int(hashlib.sha256(str(task["id"]).encode()).hexdigest()[:8], 16),
+        "n_rows": 10_000,
+        "schema": schema,
+        "data_key": data_key,
+    }
+
+
 def runtime_dataset(backend_name: str, widget_id: str, definition: dict) -> dict:
     """Build stable, typed fixture data from one authored widget contract."""
 
@@ -225,7 +270,7 @@ def runtime_dataset(backend_name: str, widget_id: str, definition: dict) -> dict
     widget_type = str(definition.get("type", "table"))
     if not fields and widget_type in {
         "table",
-        "ssrm_table",
+        "table_ssrm",
         "live_grid",
         "chart",
         "chart-highcharts",
@@ -237,7 +282,7 @@ def runtime_dataset(backend_name: str, widget_id: str, definition: dict) -> dict
         {field: _field_value(field, definition, row_index) for field in fields}
         for row_index in range(1, 4)
     ]
-    if widget_type == "ssrm_table":
+    if widget_type == "table_ssrm":
         data_key = (definition.get("data") or {}).get("dataKey", "rows")
         payload: object = {data_key: rows, "lastRow": len(rows)}
     elif widget_type in {
@@ -338,7 +383,7 @@ def _capability_widget_kind(definition: dict) -> str:
         for param in flatten_params(definition, recurse=True)
     ):
         return "form"
-    if widget_type in {"ssrm_table", "live_grid"}:
+    if widget_type in {"table_ssrm", "live_grid"}:
         return "server-side-grid"
     if widget_type == "table":
         return "table-like"
@@ -534,9 +579,11 @@ def _migrate_behavioral_requirements(task: dict, *, family: str) -> None:
 
 def _field_value(field: str, definition: dict, row_index: int) -> object:
     lower = field.lower()
+    data = definition.get("data")
+    table = data.get("table") if isinstance(data, dict) else None
     column_types = {
         str(column.get("field")): str(column.get("cellDataType", ""))
-        for column in ((definition.get("data") or {}).get("table") or {}).get("columnsDefs", [])
+        for column in (table or {}).get("columnsDefs", [])
         if isinstance(column, dict)
     }
     cell_type = column_types.get(field, "").lower()
@@ -622,7 +669,6 @@ def _bind_generated_evidence(task: dict) -> None:
             if isinstance(value, (str, int, float, bool)):
                 configured_facts.append((str(key), str(value)))
     for required in task.get("success", {}).get("required_generated_widgets", []):
-        required.pop("data_equals", None)
         match = next(
             (
                 args
@@ -878,6 +924,8 @@ def _widget_outcome(widget_id: str, definition: dict, *, detailed: bool) -> str:
     if definition.get("raw"):
         text += "; consume the raw backend payload"
     advanced_data = definition.get("data") or {}
+    if not isinstance(advanced_data, dict):
+        advanced_data = {}
     for key, label in (
         ("defaultSymbol", "default symbol"),
         ("updateFrequency", "update frequency"),
@@ -886,7 +934,7 @@ def _widget_outcome(widget_id: str, definition: dict, *, detailed: bool) -> str:
     ):
         if key in advanced_data:
             text += f"; {label} `{advanced_data[key]}`"
-    columns = ((definition.get("data") or {}).get("table") or {}).get("columnsDefs") or []
+    columns = _columns_for_definition(definition)
     if columns:
         column_summaries = []
         for column in columns:
@@ -902,6 +950,13 @@ def _widget_outcome(widget_id: str, definition: dict, *, detailed: bool) -> str:
             column_summaries.append(summary)
         text += "; columns: " + ", ".join(column_summaries)
     return text
+
+
+def _columns_for_definition(definition: dict) -> list[dict]:
+    data = definition.get("data")
+    table = data.get("table") if isinstance(data, dict) else None
+    columns = table.get("columnsDefs") if isinstance(table, dict) else None
+    return [column for column in (columns or []) if isinstance(column, dict)]
 
 
 def _app_outcome(app: dict) -> str:
@@ -1021,7 +1076,7 @@ def _medium_anchors(task: dict, widgets: dict[str, dict]) -> list[str]:
     candidates.extend(
         str(column.get("field"))
         for definition in widgets.values()
-        for column in (((definition.get("data") or {}).get("table") or {}).get("columnsDefs") or [])
+        for column in _columns_for_definition(definition)
         if column.get("field")
     )
     candidates = _unique_strings(candidates)
@@ -1063,9 +1118,7 @@ def _brief_requirements(task: dict, widgets: dict[str, dict]) -> list[str]:
         [
             _human_field(str(column.get("field")))
             for definition in widgets.values()
-            for column in (
-                ((definition.get("data") or {}).get("table") or {}).get("columnsDefs") or []
-            )
+            for column in _columns_for_definition(definition)
             if column.get("field")
         ]
     )
@@ -2008,7 +2061,20 @@ APP_TOOLS = BUILD_TOOLS + ["manage_apps"]
 # Inspired by backend-examples-for-openbb-workspace variety + Stark concepts.
 # ---------------------------------------------------------------------------
 
+STARK_ENTERPRISE = json.loads(
+    (REPO / "src/workspace_bench/workspace/data/stark_enterprise.json").read_text(
+        encoding="utf-8"
+    )
+)
+
 DESKS: dict[str, dict] = {
+    "stark": {
+        "backend": "Bench Stark Enterprise",
+        "url": "http://localhost:7809",
+        "workflow": "enterprise-portfolio-review",
+        "subdomain": "enterprise-asset-management",
+        "widgets": STARK_ENTERPRISE["widgets"],
+    },
     "vol": {
         "backend": "Vol Desk Data",
         "url": "http://localhost:7801",
@@ -2301,7 +2367,7 @@ DESKS: dict[str, dict] = {
                 grid=(6, 4),
             ),
             "estimates_ssrm": simple_def(
-                "ssrm_table",
+                "table_ssrm",
                 "Estimates Explorer (SSRM)",
                 "Server-side sorted and filtered estimates dataset.",
                 "/estimates-ssrm",
@@ -2541,7 +2607,35 @@ def desk(key: str) -> dict:
 
 
 def desk_widget(key: str, widget_id: str) -> dict:
-    return json.loads(json.dumps(DESKS[key]["widgets"][widget_id]))
+    definition = json.loads(json.dumps(DESKS[key]["widgets"][widget_id]))
+    if key != "stark":
+        return definition
+    # The fixture stores response samples under ``data`` and the production
+    # widget contract under ``schema_data``. Build tasks author widgets.json,
+    # so emit the latter and never mistake sample rows for widget metadata.
+    schema_data = definition.pop("schema_data", None)
+    widget_type = str(definition.get("type", "table"))
+    if isinstance(schema_data, dict):
+        definition["data"] = schema_data
+    elif widget_type == "metric":
+        definition["data"] = {"valueField": "value"}
+    elif widget_type == "chart":
+        definition["data"] = {
+            "categoryField": "date",
+            "series": [{"field": "value"}],
+        }
+    elif isinstance(definition.get("data"), list):
+        rows = definition["data"]
+        fields = list(rows[0]) if rows and isinstance(rows[0], dict) else ["value"]
+        definition["data"] = {
+            "table": {
+                "columnsDefs": [
+                    {"field": field, "headerName": _human_field(str(field))}
+                    for field in fields
+                ]
+            }
+        }
+    return definition
 
 
 # ---------------------------------------------------------------------------

@@ -1,18 +1,16 @@
 {
   "id": "venue_packet_pdf_ship",
-  "title": "Ship, open, and configure the Venue Packet Live app",
-  "workflow": "execution-exception-review",
-  "subdomain": "execution",
-  "tags": [
-    "family-types",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "types",
-    "orchestration"
+  "category": "platform",
+  "family": "types",
+  "difficulty": "hard",
+  "split": "test",
+  "prompt": "The desk needs a production-ready orders and venue quality workflow for an execution analyst. The workspace must cover monthly venue scorecard packet. The workspace must cover open execution exceptions. The workspace must cover live open orders blotter. Analysts need to inspect order ID, symbol, quantity, status. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Venue Packet Live', 'venue packet', 'Execution Desk Data', 'EDGX'. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "Venue Packet Live",
+    "venue packet",
+    "Execution Desk Data",
+    "EDGX"
   ],
-  "prompt": "The desk needs a production-ready orders and venue quality workflow for an execution analyst. The workspace must cover monthly venue scorecard packet. The workspace must cover open execution exceptions. The workspace must cover live open orders blotter. Analysts need to inspect order ID, symbol, quantity, status. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Venue Packet Live', 'venue packet', 'Execution Desk Data', 'EDGX'. Use your judgment on the architecture and leave other work intact.",
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -40,7 +38,7 @@
   "success": {
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "Venue Packet Live",
           "venue packet",
@@ -310,29 +308,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Venue Packet Live",
-        "data": "Venue Packet Live is live from Execution Desk Data: venue packet ready. Configured venue=EDGX."
+        "data": "<section>Venue Packet Live is live from Execution Desk Data: venue packet ready. Configured venue=EDGX.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "types",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Venue Packet Live",
-    "venue packet",
-    "Execution Desk Data",
-    "EDGX"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique types/venue_packet_pdf_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_exception-metric:metric:exception_metric_value,capability_2_venue-packet-pdf:pdf:venue_packet_pdf_value; generated:note@*:Venue Packet Live,venue packet."
+    "max_turns": 14
+  }
 }

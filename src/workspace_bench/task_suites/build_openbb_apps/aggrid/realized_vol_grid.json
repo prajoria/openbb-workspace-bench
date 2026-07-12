@@ -1,17 +1,9 @@
 {
   "id": "realized_vol_grid",
-  "title": "Assemble the Vol Cockpit app around Realized Vol Grid",
-  "workflow": "risk-review",
-  "subdomain": "volatility",
-  "tags": [
-    "family-aggrid",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "aggrid",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "aggrid",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Build a volatility analyst a dependable volatility and derivatives workspace. The workspace must cover realized volatility by tenor. The workspace must cover term structure for VIX futures by expiry. The workspace must cover current volatility regime score. Analysts need to inspect tenor, realized percentage, as of. Leave the complete working workspace open for review. Decide how best to organize the experience and preserve unrelated work.",
   "fixtures": {},
   "initial_state": {},
@@ -298,18 +290,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "aggrid",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique aggrid/realized_vol_grid building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact capabilities:capability_1_realized-vol-grid:table-like:as_of,realized_pct,tenor,capability_2_vix-term-structure:chart-like:vix_term_structure_value,capability_3_vol-regime-metric:metric:vol_regime_metric_value."
+    "max_turns": 14
+  }
 }

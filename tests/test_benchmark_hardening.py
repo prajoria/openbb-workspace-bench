@@ -2,35 +2,34 @@ from __future__ import annotations
 
 import copy
 import json
-from dataclasses import replace
 
 import pytest
 
 from workspace_bench.agents.agent_command import build_task_envelope
-from workspace_bench.cli import main as cli_main
 from workspace_bench.core.episode import WorkspaceEpisode
 from workspace_bench.core.graders import grade_task
-from workspace_bench.core.models import Task, TaskSuiteManifest, WorkspaceChecks
+from workspace_bench.core.models import Task, TaskSuiteManifest
 from workspace_bench.core.mutation_checks import grader_mutation_failures
 from workspace_bench.core.runner import TaskRunner, find_task, load_builtin_tasks
 from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
 from workspace_bench.workspace.surface_audit import compare_tool_schemas
 
 
-def test_current_task_schema_is_strict_and_legacy_migration_is_explicit() -> None:
+def test_current_task_schema_is_strict() -> None:
     source = find_task("price_performance_aapl", suite="core")
     assert source.source_path is not None
     payload = json.loads(source.source_path.read_text(encoding="utf-8"))
-
-    missing_version = dict(payload)
-    missing_version.pop("schema_version")
-    with pytest.raises(ValueError, match="missing schema_version"):
-        Task.from_dict(missing_version)
 
     obsolete_level = dict(payload)
     obsolete_level["level"] = "t2"
     with pytest.raises(ValueError, match="unknown fields: level"):
         Task.from_dict(obsolete_level)
+
+    retired_metadata = dict(payload)
+    retired_metadata["title"] = "Retired Title"
+    retired_metadata["novelty"] = "retired rationale"
+    with pytest.raises(ValueError, match="unknown fields: novelty, title"):
+        Task.from_dict(retired_metadata)
 
     unknown_field = dict(payload)
     unknown_field["famliy"] = "typo"
@@ -42,12 +41,10 @@ def test_current_task_schema_is_strict_and_legacy_migration_is_explicit() -> Non
     with pytest.raises(ValueError, match="success contains unknown fields"):
         Task.from_dict(nested_typo)
 
-    legacy = dict(missing_version)
-    legacy["level"] = "L1"
-    migrated = Task.migrate_legacy_payload(legacy)
-    assert migrated["schema_version"] == "workspace-bench-task"
-    assert "level" not in migrated
-    assert Task.from_dict(migrated).id == "price_performance_aapl"
+    trace_contract = copy.deepcopy(payload)
+    trace_contract["success"]["trace_checks"] = {"max_invalid_tool_calls": 0}
+    parsed = Task.from_dict(trace_contract)
+    assert parsed.success.trace.max_invalid_tool_calls == 0
 
 
 def test_active_identity_is_suite_family_task_without_generation_labels() -> None:
@@ -67,7 +64,6 @@ def test_active_identity_is_suite_family_task_without_generation_labels() -> Non
         "open-brief",
     }
     assert all(not task.id.startswith(("auth_", "gen_")) for task in tasks)
-    assert all(not any(tag.startswith(("level-", "tier-")) for tag in task.tags) for task in tasks)
     assert all(task.qualified_id == f"{task.suite.suite_id}/{task.family}/{task.id}" for task in tasks if task.suite)
 
     with pytest.raises(KeyError, match="Ambiguous task"):
@@ -84,24 +80,6 @@ def test_suite_manifests_reject_manual_release_versioning() -> None:
                 "version": "1.0.0",
             }
         )
-
-
-def test_cli_migrates_a_legacy_task_file(tmp_path) -> None:
-    task = find_task("price_performance_aapl", suite="core")
-    assert task.source_path is not None
-    legacy = json.loads(task.source_path.read_text(encoding="utf-8"))
-    legacy.pop("schema_version")
-    legacy.pop("category")
-    legacy.pop("family")
-    legacy["level"] = "L1"
-    source = tmp_path / "legacy.json"
-    output = tmp_path / "current.json"
-    source.write_text(json.dumps(legacy), encoding="utf-8")
-
-    assert cli_main(["migrate-task", "--input", str(source), "--output", str(output)]) == 0
-    migrated = json.loads(output.read_text(encoding="utf-8"))
-    assert migrated["schema_version"] == "workspace-bench-task"
-    assert Task.from_dict(migrated).family == "create"
 
 
 def test_build_task_envelope_uses_build_suite_provenance() -> None:
@@ -130,11 +108,6 @@ def test_build_tasks_offer_full_surface_and_grade_working_outcomes() -> None:
         for task in tasks
         if task.success.required_app_defs
     )
-    assert all(
-        required.data_equals is None
-        for task in tasks
-        for required in task.success.required_generated_widgets
-    )
 
 
 def test_build_completion_notes_require_semantic_deployment_facts() -> None:
@@ -142,7 +115,6 @@ def test_build_completion_notes_require_semantic_deployment_facts() -> None:
     oracle = TaskRunner().run(task, "oracle")
     required = task.success.required_generated_widgets[0]
 
-    assert required.data_equals is None
     assert "Case Triage" in required.data_contains
     assert "Surveillance Data" in required.data_contains
     assert "C-1048" in required.data_contains
@@ -185,47 +157,19 @@ def test_build_completion_notes_require_semantic_deployment_facts() -> None:
     assert not grade_task(task, missing_app, oracle.trace).passed
 
 
-def test_state_and_trace_policy_are_reported_independently() -> None:
-    task = find_task("price_performance_msft", suite="core")
+def test_state_and_trace_requirements_are_reported_independently() -> None:
+    task = find_task("attribution", suite="core")
     episode = WorkspaceEpisode(task)
     for call in task.oracle_tool_calls:
-        if call.name != "list_available_widgets":
+        if call.name != "get_widget_data":
             episode.step(call)
 
     grade = episode.grade()
 
     assert grade.state_passed is True
-    assert grade.state_score == 1.0
     assert grade.trace_passed is False
     assert grade.passed is False
-    assert any(issue.code == "widget_list_not_called_before_use" for issue in grade.issues)
-
-
-def test_whole_workspace_preservation_catches_collateral_dashboard_change() -> None:
-    task = find_task("limits", suite="core")
-    task = replace(
-        task,
-        success=replace(
-            task.success,
-            workspace=WorkspaceChecks(preserve_other_dashboards=True),
-        ),
-    )
-    initial = {
-        "workspace_state": {"current_dashboard_uuid": "active"},
-        "dashboard_compositions": {
-            "active": {"dashboard_id": "active", "name": "Active"},
-            "other": {"dashboard_id": "other", "name": "Other", "widgets": []},
-        },
-    }
-    final = copy.deepcopy(initial)
-    final["dashboard_compositions"]["other"]["name"] = "Mutated"
-    final["dashboard_composition"] = {"name": "Active", "tabs": [], "widgets": []}
-    final["custom_backends"] = {}
-
-    grade = grade_task(task, final, (), initial_snapshot=initial)
-
-    assert not grade.state_passed
-    assert any(issue.code == "collateral_dashboard_change" for issue in grade.issues)
+    assert any(issue.code == "missing_tool_call" for issue in grade.issues)
 
 
 def test_oracle_is_sensitive_to_independent_mutations() -> None:

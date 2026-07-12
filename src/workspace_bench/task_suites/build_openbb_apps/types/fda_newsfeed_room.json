@@ -1,18 +1,14 @@
 {
   "id": "fda_newsfeed_room",
-  "title": "Assemble the Catalyst Wire content app",
-  "workflow": "healthcare-catalyst-review",
-  "subdomain": "healthcare",
-  "tags": [
-    "family-types",
-    "cell2",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "types",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "types",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Build a working Workspace experience for a healthcare-research analyst covering clinical catalysts and pipelines. The workspace must cover FDA decision and notice feed. The workspace must cover catalysts in the next 30 days. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Keep these source-contract anchors: `therapy_area`. Choose the rest of the architecture and avoid unrelated changes.",
+  "business_terms": [
+    "therapy_area"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -244,20 +240,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "types",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "therapy_area"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique types/fda_newsfeed_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_catalyst-metric:metric:catalyst_metric_value,capability_2_fda-newsfeed:newsfeed:fda_newsfeed_value."
+    "max_turns": 14
+  }
 }

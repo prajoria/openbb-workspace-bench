@@ -1,14 +1,9 @@
 {
   "id": "inspect_workflow_overview",
-  "title": "Inspect Workflow Overview",
-  "capability": "workspace-inspection",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-inspect",
-    "inspect",
-    "read-widget"
-  ],
+  "category": "read",
+  "family": "inspect",
+  "difficulty": "easy",
+  "split": "test",
   "prompt": "Call read_widget with widget_id portfolio_command_center_overview_workflow_overview for the existing Bench Stark Enterprise/portfolio_command_center_overview_workflow_overview widget, then add a note mentioning stark.",
   "fixtures": {
     "backends": [
@@ -114,15 +109,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "read",
-  "family": "inspect",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique inspect/inspect_workflow_overview exercise using add_generative_widget, get_workspace_snapshot, read_widget with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/vendor_dataset_monitor_slas_freshness_exceptions@; generated:note@*:stark."
+  }
 }

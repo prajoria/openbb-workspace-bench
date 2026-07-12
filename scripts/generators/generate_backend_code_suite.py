@@ -13,7 +13,6 @@ from typing import Any
 
 REPO = Path(__file__).resolve().parents[2]
 OUTPUT = REPO / "src/workspace_bench/task_suites/build_openbb_backends/backend_code"
-SCHEMA_VERSION = "workspace-bench-task"
 CODE_SCHEMA_VERSION = "workspace-bench-code-task/v0"
 INSTALL = ["uv", "sync", "--quiet"]
 START = [
@@ -399,7 +398,7 @@ def add_watchlist(payload: dict):
         ("price", "Price"),
         ("status", "Status"),
     )
-    orders = _widget("Order Search", "/orders/search", "ssrm_table", fields=order_fields)
+    orders = _widget("Order Search", "/orders/search", "table_ssrm", fields=order_fields)
     orders["data"]["dataKey"] = "rows"
     order_rows = [
         {"order_id": "O-1", "symbol": "AAPL", "price": 185.0, "status": "open"},
@@ -1151,22 +1150,12 @@ Read `TASK_BRIEF.md` in an instantiated run for the business brief.
 def _task_payload(definition: Definition) -> JsonDict:
     fixture_root = f"fixtures/{definition.task_id}"
     return {
-        "schema_version": SCHEMA_VERSION,
         "id": definition.task_id,
-        "title": definition.title,
         "category": "repair" if "repair" in definition.tags else "platform",
         "family": "backend-code",
-        "capability": "build-real-backend",
-        "workflow": "custom-backend-development",
-        "domain": "engineering",
-        "subdomain": "openbb-custom-backends",
         "difficulty": definition.difficulty,
         "split": definition.split,
-        "tags": ["build-openbb-backends", "experimental-v0", *definition.tags],
-        "source": "WorkspaceBench Phase 10 authored code track",
-        "novelty": f"Real-code backend task: {definition.task_id}",
         "prompt": definition.prompt,
-        "business_terms": [],
         "fixtures": {"backends": []},
         "initial_state": {},
         "allowed_tools": ["filesystem", "shell"],

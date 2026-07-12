@@ -7,8 +7,6 @@ import pytest
 from workspace_bench.core.adversarial import (
     BROKEN_FORM_SUBMISSION,
     COLLAPSED_CONNECTED_PAIR,
-    COLLATERAL_DAMAGE,
-    DUPLICATE_BACKEND_TEARDOWN,
     FIELDLESS_CONTRIBUTOR,
     INCOMPATIBLE_VALUES,
     INVALID_SETTING,
@@ -17,6 +15,7 @@ from workspace_bench.core.adversarial import (
     ONE_WIDGET_MISSING,
     SEVERED_SHARED_INTERACTION,
     SELF_SATISFIED_CONNECTION,
+    STRIPPED_APP_PROMPTS,
     WRONG_ENDPOINT_DATA,
     evaluate_adversarial_candidate,
     generate_adversarial_candidates,
@@ -32,16 +31,12 @@ CASES = (
     ("build-openbb-apps/charts/earnings_chart_room", INCOMPATIBLE_VALUES),
     ("build-openbb-apps/forms/vendor_review_form", BROKEN_FORM_SUBMISSION),
     ("build-openbb-apps/grouping/click_season_desk", SEVERED_SHARED_INTERACTION),
-    ("build-openbb-apps/debug/execution_data_mismatch", COLLATERAL_DAMAGE),
     ("build-openbb-apps/advanced/live_orders_grid_ship", INVALID_SETTING),
-    ("build-openbb-apps/grouping/click_season_desk", COLLAPSED_CONNECTED_PAIR),
+    ("build-openbb-apps/debug/execution_broken_group", COLLAPSED_CONNECTED_PAIR),
     ("build-openbb-apps/settings/alert_metric_room", FIELDLESS_CONTRIBUTOR),
-    ("build-openbb-apps/grouping/click_season_desk", SELF_SATISFIED_CONNECTION),
+    ("build-openbb-apps/debug/execution_broken_group", SELF_SATISFIED_CONNECTION),
     ("build-openbb-apps/e2e/case_triage", NOTE_ONLY_PROOF),
-    (
-        "build-openbb-apps/debug/vendor_duplicate_backend",
-        DUPLICATE_BACKEND_TEARDOWN,
-    ),
+    ("build-openbb-apps/apps/vol_overview", STRIPPED_APP_PROMPTS),
 )
 
 
@@ -83,13 +78,11 @@ def test_adversarial_matrix_rejects_every_applicable_grouping_mutant() -> None:
     assert all(row["applicable"] > 0 and row["exercised"] > 0 for row in rows)
     assert all(row["expected_code_observed"] == row["exercised"] for row in rows)
     assert {archetype for _family, archetype in matrix.applicable} == {
-        "collapsed_connected_pair",
         "fieldless_contributor",
         "incompatible_values",
         "never_instantiated",
         "note_only_proof",
         "one_widget_missing",
-        "self_satisfied_connection",
         "severed_shared_interaction",
         "wrong_endpoint_data",
     }

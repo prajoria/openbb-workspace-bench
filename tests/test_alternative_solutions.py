@@ -362,11 +362,6 @@ def test_explicit_business_name_is_gating_but_free_tab_names_are_not() -> None:
     snapshot["dashboard_composition"]["name"] = "Unrelated dashboard"
     active_id = snapshot["workspace_state"]["current_dashboard_uuid"]
     snapshot["dashboard_compositions"][active_id]["name"] = "Unrelated dashboard"
-    grade = grade_task(
-        task,
-        snapshot,
-        tuple(episode.trace),
-        initial_snapshot=episode.initial_snapshot,
-    )
+    grade = grade_task(task, snapshot, tuple(episode.trace))
     assert not grade.passed
     assert "business_name_missing" in {issue.code for issue in grade.issues}

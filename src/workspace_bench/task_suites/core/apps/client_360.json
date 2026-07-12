@@ -1,14 +1,9 @@
 {
   "id": "client_360",
-  "title": "Instantiate Client 360",
-  "capability": "app-instantiation",
-  "workflow": "client-meeting-prep",
-  "subdomain": "client-ir",
-  "tags": [
-    "family-apps",
-    "apps",
-    "stark"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "From the Bench Stark Enterprise backend, instantiate the Client 360 app as a new dashboard named Client Review Workspace.",
   "fixtures": {
     "backends": [
@@ -58,15 +53,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique apps/client_360 exercise using manage_apps, manage_backends with checks dashboard_name, layout_out_of_grid, missing_tool_call, too_many_invalid_calls on stark-enterprise; artifact apps:Client 360."
+  }
 }

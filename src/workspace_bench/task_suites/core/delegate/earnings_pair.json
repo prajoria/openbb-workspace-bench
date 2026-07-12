@@ -1,15 +1,9 @@
 {
   "id": "earnings_pair",
-  "title": "Delegate Two Tasks: Earnings Pair",
-  "capability": "mcp-tool-use",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-delegate",
-    "delegation",
-    "agents",
-    "mcp"
-  ],
+  "category": "platform",
+  "family": "delegate",
+  "difficulty": "easy",
+  "split": "validation",
   "prompt": "For earnings prep work, call assign_tasks_to_agents with two task_requests using ids coverage-analyst and model-analyst.",
   "fixtures": {
     "backends": [
@@ -105,15 +99,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "delegate",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "validation",
-  "novelty": "Unique delegate/earnings_pair exercise using assign_tasks_to_agents, get_workspace_snapshot with checks layout_out_of_grid, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact tasks:coverage-analyst,model-analyst; widgets:Bench Stark Enterprise/stress_liquidity_lab_sign_off_residual_risk_actions@overview."
+  }
 }

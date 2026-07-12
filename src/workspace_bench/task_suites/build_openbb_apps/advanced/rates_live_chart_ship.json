@@ -1,18 +1,16 @@
 {
   "id": "rates_live_chart_ship",
-  "title": "Ship, open, and configure Rates Advanced Live",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-advanced",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "advanced",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "advanced",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "The desk needs a production-ready rates and Treasury markets workflow for a rates strategist. The workspace must cover market history for treasury futures. The workspace must cover the Treasury yield curve. The workspace must cover current 2s10s spread in bps. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Rates Advanced Live', 'Treasury futures', 'Rates Watch Data', 'ZB'. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "Rates Advanced Live",
+    "Treasury futures",
+    "Rates Watch Data",
+    "ZB"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -297,23 +295,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "advanced",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Rates Advanced Live",
-    "Treasury futures",
-    "Rates Watch Data",
-    "ZB"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "validation",
-  "novelty": "Unique advanced/rates_live_chart_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact capabilities:capability_1_rates-live-chart:chart-like:rates_live_chart_value,capability_2_yield-curve:chart-like:yield_curve_value; generated:note@*:Rates Advanced Live,Treasury futures."
+    "max_turns": 14
+  }
 }

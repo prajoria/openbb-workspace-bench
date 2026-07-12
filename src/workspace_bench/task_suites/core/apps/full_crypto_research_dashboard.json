@@ -1,16 +1,9 @@
 {
   "id": "full_crypto_research_dashboard",
-  "title": "Instantiate, Extend, And Brief Crypto Research Dashboard",
-  "capability": "app-instantiation",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-apps",
-    "apps",
-    "stark",
-    "widget-creation",
-    "note"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "From the Bench Stark Enterprise backend, instantiate the Crypto Research Dashboard app as a new dashboard named Digital Assets Desk. Then add the Crypto Market Metrics widget (id crypto_research_dashboard_market_crypto_market_metrics) to the Market tab, and add a note on the same tab mentioning market metrics and token.",
   "fixtures": {
     "backends": [
@@ -133,15 +126,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 9
-  },
-  "split": "train",
-  "novelty": "Unique apps/full_crypto_research_dashboard exercise using add_generative_widget, create_widget, get_widget_schema, list_available_widgets, manage_apps, manage_backends, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_tab, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact apps:Crypto Research Dashboard; widgets:Bench Stark Enterprise/crypto_research_dashboard_derivatives_crypto_volatility_surface@derivatives,Bench Stark Enterprise/crypto_research_dashboard_market_crypto_market_metrics@market,Bench Stark Enterprise/crypto_research_dashboard_market_crypto_market_metrics@market; tabs:derivatives,market,overview; generated:note@market:market metrics,token."
+  }
 }

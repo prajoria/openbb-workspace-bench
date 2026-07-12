@@ -1,15 +1,10 @@
 {
   "id": "attribution",
-  "title": "Read Data: Attribution Summary",
-  "capability": "data-reading",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-read",
-    "data-reading",
-    "stark"
-  ],
-  "prompt": "Use get_widget_data on the Bench Stark Enterprise Attribution Summary widget, then add a short note that cites Attribution Summary and says you reviewed the data.",
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "easy",
+  "split": "train",
+  "prompt": "Use get_widget_data on the Bench Stark Enterprise Attribution Summary widget, then add a short HTML card that cites Attribution Summary and says you reviewed the data.",
   "fixtures": {
     "backends": [
       {
@@ -66,13 +61,13 @@
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "portfolio_command_center_attribution_attribution_summary"
+          "score"
         ]
       }
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "portfolio_command_center_attribution_attribution_summary",
           "data"
@@ -106,21 +101,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Data Note",
-        "data": "Reviewed the data returned by portfolio_command_center_attribution_attribution_summary."
+        "data": "<section>Reviewed the data returned by portfolio_command_center_attribution_attribution_summary.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "read",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique read/attribution exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:portfolio_command_center_attribution_attribution_summary,data."
+  }
 }

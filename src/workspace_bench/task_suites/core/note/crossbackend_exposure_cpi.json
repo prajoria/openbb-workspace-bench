@@ -1,15 +1,9 @@
 {
   "id": "crossbackend_exposure_cpi",
-  "title": "Cross-Backend Note: Exposure Cpi",
-  "capability": "workspace-inspection",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-note",
-    "note",
-    "read-only",
-    "cross-backend"
-  ],
+  "category": "read",
+  "family": "note",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "Review the sector exposure and CPI widgets and add a note with the largest sector weight and the latest CPI value from the data.",
   "fixtures": {
     "backends": [
@@ -131,15 +125,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "read",
-  "family": "note",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique note/crossbackend_exposure_cpi exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls on macro, portfolio; artifact widgets:Bench Macro/macro_timeseries@*,Bench Portfolio/sector_exposure@*; generated:note@*:Technology,0.86."
+  }
 }

@@ -1,17 +1,15 @@
 {
   "id": "rates_desk",
-  "title": "Assemble the Rates Desk app from scratch",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-apps",
-    "cell2",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "multi-tab"
+  "category": "platform",
+  "family": "apps",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "test",
+  "prompt": "Deliver an analyst-ready Workspace solution for the requested financial dataset. The workspace must cover holdings dataset for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows. The workspace must cover exposure Treemap for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows. Analysts need to inspect ticker, company, sector, weight, active weight, pnl, rating. An analyst can toggle the relevant screening constraint. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Use `fund` and `period` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
+  "business_terms": [
+    "fund",
+    "period"
   ],
-  "prompt": "Deliver an analyst-ready Workspace solution for rates and Treasury markets. The workspace must cover upcoming treasury auctions. The workspace must cover the Treasury yield curve. Analysts need to inspect date, security, size billions. Leave the complete working workspace open for review. Use `date` and `security` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -49,48 +47,68 @@
     "runtime_checks": {
       "datasets": [
         {
-          "name": "rates-watch-data__auction_calendar",
-          "widget_id": "auction_calendar",
+          "name": "bench-stark-enterprise__portfolio_command_center_holdings_exposure_treemap",
+          "widget_id": "portfolio_command_center_holdings_exposure_treemap",
           "fields": [
             "date",
-            "security",
-            "size_bn"
+            "value"
           ],
-          "path": "/auction-calendar",
+          "path": "/portfolio_command_center_holdings_exposure_treemap",
           "payload": [
             {
               "date": "2026-01-13",
-              "security": "security-1",
-              "size_bn": 10.25
+              "value": 10.25
             },
             {
               "date": "2026-01-14",
-              "security": "security-2",
-              "size_bn": 20.5
+              "value": 20.5
             },
             {
               "date": "2026-01-15",
-              "security": "security-3",
-              "size_bn": 30.75
+              "value": 30.75
             }
           ]
         },
         {
-          "name": "rates-watch-data__yield_curve",
-          "widget_id": "yield_curve",
+          "name": "bench-stark-enterprise__portfolio_command_center_holdings_holdings_table",
+          "widget_id": "portfolio_command_center_holdings_holdings_table",
           "fields": [
-            "yield_curve_value"
+            "active_weight",
+            "company",
+            "pnl",
+            "rating",
+            "sector",
+            "ticker",
+            "weight"
           ],
-          "path": "/yield-curve",
+          "path": "/portfolio_command_center_holdings_holdings_table",
           "payload": [
             {
-              "yield_curve_value": 10.25
+              "active_weight": 10.25,
+              "company": "company-1",
+              "pnl": 10.25,
+              "rating": "rating-1",
+              "sector": "sector-1",
+              "ticker": 10.25,
+              "weight": 10.25
             },
             {
-              "yield_curve_value": 20.5
+              "active_weight": 20.5,
+              "company": "company-2",
+              "pnl": 20.5,
+              "rating": "rating-2",
+              "sector": "sector-2",
+              "ticker": 20.5,
+              "weight": 20.5
             },
             {
-              "yield_curve_value": 30.75
+              "active_weight": 30.75,
+              "company": "company-3",
+              "pnl": 30.75,
+              "rating": "rating-3",
+              "sector": "sector-3",
+              "ticker": 30.75,
+              "weight": 30.75
             }
           ]
         }
@@ -99,30 +117,47 @@
     },
     "required_capabilities": [
       {
-        "name": "capability_1_auction-calendar",
+        "name": "capability_1_portfolio-command-center-holdings-exposure-treemap",
         "datasets": [
-          "rates-watch-data__auction_calendar"
-        ],
-        "widget_kind": "table-like",
-        "must_cover_fields": [
-          "date",
-          "security",
-          "size_bn"
-        ],
-        "required_param_kinds": [],
-        "required_config": {}
-      },
-      {
-        "name": "capability_2_yield-curve",
-        "datasets": [
-          "rates-watch-data__yield_curve"
+          "bench-stark-enterprise__portfolio_command_center_holdings_exposure_treemap"
         ],
         "widget_kind": "chart-like",
         "must_cover_fields": [
-          "yield_curve_value"
+          "date",
+          "value"
         ],
-        "required_param_kinds": [],
+        "required_param_kinds": [
+          "boolean",
+          "text"
+        ],
         "required_config": {}
+      },
+      {
+        "name": "capability_2_portfolio-command-center-holdings-holdings-table",
+        "datasets": [
+          "bench-stark-enterprise__portfolio_command_center_holdings_holdings_table"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "active_weight",
+          "company",
+          "pnl",
+          "rating",
+          "sector",
+          "ticker",
+          "weight"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      }
+    ],
+    "capability_connections": [
+      {
+        "source": "capability_2_portfolio-command-center-holdings-holdings-table",
+        "target": "capability_1_portfolio-command-center-holdings-exposure-treemap",
+        "param_kind": "text"
       }
     ],
     "app_structure": {
@@ -140,68 +175,249 @@
       "tool": "manage_backends",
       "args": {
         "operation": "add",
-        "name": "Rates Watch Data",
-        "url": "http://localhost:7803",
+        "name": "Bench Stark Enterprise",
+        "url": "http://localhost:7809",
         "widgets_json": {
-          "auction_calendar": {
-            "name": "Auction Calendar",
-            "description": "Upcoming treasury auctions.",
-            "endpoint": "/auction-calendar",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
+          "portfolio_command_center_holdings_holdings_table": {
+            "category": "Portfolio",
             "data": {
               "table": {
                 "columnsDefs": [
                   {
-                    "field": "date",
-                    "headerName": "Date",
-                    "cellDataType": "dateString"
+                    "cellDataType": "number",
+                    "chartDataType": "series",
+                    "field": "ticker",
+                    "formatterFn": "int",
+                    "headerName": "Ticker",
+                    "pinned": "left",
+                    "width": 150
                   },
                   {
-                    "field": "security",
-                    "headerName": "Security",
-                    "cellDataType": "text"
+                    "cellDataType": "text",
+                    "chartDataType": "category",
+                    "field": "company",
+                    "headerName": "Company",
+                    "pinned": "left",
+                    "width": 150
                   },
                   {
-                    "field": "size_bn",
-                    "headerName": "Size ($B)",
-                    "cellDataType": "number"
+                    "cellDataType": "text",
+                    "chartDataType": "category",
+                    "field": "sector",
+                    "headerName": "Sector",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "number",
+                    "chartDataType": "series",
+                    "field": "weight",
+                    "formatterFn": "percent",
+                    "headerName": "Weight",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "number",
+                    "chartDataType": "series",
+                    "field": "active_weight",
+                    "formatterFn": "percent",
+                    "headerName": "Active Weight",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "number",
+                    "chartDataType": "series",
+                    "field": "pnl",
+                    "formatterFn": "int",
+                    "headerName": "Pnl",
+                    "renderFn": "greenRed",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "text",
+                    "chartDataType": "category",
+                    "field": "rating",
+                    "headerName": "Rating",
+                    "width": 150
                   }
-                ]
+                ],
+                "enableAdvanced": true,
+                "enableCharts": true,
+                "showAll": true
               }
             },
-            "staleTime": 900000
-          },
-          "yield_curve": {
-            "name": "Yield Curve",
-            "description": "Plotly treasury yield curve snapshot.",
-            "endpoint": "/yield-curve",
-            "type": "chart",
+            "description": "Holdings Table for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows.",
+            "endpoint": "/portfolio_command_center_holdings_holdings_table",
             "gridData": {
-              "w": 20,
-              "h": 9
+              "h": 14,
+              "w": 20
             },
-            "raw": true,
-            "staleTime": 900000,
+            "name": "Holdings Table",
+            "params": [
+              {
+                "description": "Fund or vehicle scope.",
+                "label": "Fund",
+                "options": [
+                  {
+                    "label": "Flagship Long/Short",
+                    "value": "Flagship Long/Short"
+                  },
+                  {
+                    "label": "Global Opportunities",
+                    "value": "Global Opportunities"
+                  },
+                  {
+                    "label": "Income Fund",
+                    "value": "Income Fund"
+                  },
+                  {
+                    "label": "Multi-Asset Fund",
+                    "value": "Multi-Asset Fund"
+                  }
+                ],
+                "paramName": "fund",
+                "type": "text",
+                "value": "Flagship Long/Short"
+              },
+              {
+                "description": "Reporting period.",
+                "label": "Period",
+                "options": [
+                  {
+                    "label": "1D",
+                    "value": "1D"
+                  },
+                  {
+                    "label": "MTD",
+                    "value": "MTD"
+                  },
+                  {
+                    "label": "QTD",
+                    "value": "QTD"
+                  },
+                  {
+                    "label": "YTD",
+                    "value": "YTD"
+                  },
+                  {
+                    "label": "1Y",
+                    "value": "1Y"
+                  }
+                ],
+                "paramName": "period",
+                "type": "text",
+                "value": "YTD"
+              }
+            ],
+            "source": [
+              "Aladdin Portfolio Master",
+              "Performance Book of Record"
+            ],
+            "subCategory": "Holdings & Performance",
+            "type": "table",
+            "widgetId": "portfolio_command_center_holdings_holdings_table"
+          },
+          "portfolio_command_center_holdings_exposure_treemap": {
+            "category": "Portfolio",
             "data": {
-              "valueField": "yield_curve_value"
-            }
+              "categoryField": "date",
+              "series": [
+                {
+                  "field": "value"
+                }
+              ]
+            },
+            "description": "Exposure Treemap for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows.",
+            "endpoint": "/portfolio_command_center_holdings_exposure_treemap",
+            "gridData": {
+              "h": 14,
+              "w": 20
+            },
+            "name": "Exposure Treemap",
+            "params": [
+              {
+                "description": "Fund or vehicle scope.",
+                "label": "Fund",
+                "options": [
+                  {
+                    "label": "Flagship Long/Short",
+                    "value": "Flagship Long/Short"
+                  },
+                  {
+                    "label": "Global Opportunities",
+                    "value": "Global Opportunities"
+                  },
+                  {
+                    "label": "Income Fund",
+                    "value": "Income Fund"
+                  },
+                  {
+                    "label": "Multi-Asset Fund",
+                    "value": "Multi-Asset Fund"
+                  }
+                ],
+                "paramName": "fund",
+                "type": "text",
+                "value": "Flagship Long/Short"
+              },
+              {
+                "description": "Reporting period.",
+                "label": "Period",
+                "options": [
+                  {
+                    "label": "1D",
+                    "value": "1D"
+                  },
+                  {
+                    "label": "MTD",
+                    "value": "MTD"
+                  },
+                  {
+                    "label": "QTD",
+                    "value": "QTD"
+                  },
+                  {
+                    "label": "YTD",
+                    "value": "YTD"
+                  },
+                  {
+                    "label": "1Y",
+                    "value": "1Y"
+                  }
+                ],
+                "paramName": "period",
+                "type": "text",
+                "value": "YTD"
+              },
+              {
+                "description": "Hidden OpenBB raw-data toggle for Plotly chart widgets.",
+                "label": "Raw Data",
+                "paramName": "raw",
+                "show": false,
+                "type": "boolean",
+                "value": false
+              }
+            ],
+            "raw": true,
+            "source": [
+              "Aladdin Portfolio Master",
+              "Performance Book of Record"
+            ],
+            "subCategory": "Holdings & Performance",
+            "type": "chart",
+            "widgetId": "portfolio_command_center_holdings_exposure_treemap"
           }
         },
         "apps_json": [
           {
-            "name": "Rates Desk",
-            "description": "Auctions and the curve.",
+            "name": "Enterprise Holdings Desk",
+            "description": "Holdings and exposure.",
             "tabs": {
-              "auctions": {
-                "id": "auctions",
-                "name": "Auctions",
+              "holdings": {
+                "id": "holdings",
+                "name": "Holdings",
                 "layout": [
                   {
-                    "i": "auction_calendar",
+                    "i": "portfolio_command_center_holdings_holdings_table",
                     "x": 0,
                     "y": 0,
                     "w": 20,
@@ -209,12 +425,12 @@
                   }
                 ]
               },
-              "curve": {
-                "id": "curve",
-                "name": "Curve",
+              "exposure": {
+                "id": "exposure",
+                "name": "Exposure",
                 "layout": [
                   {
-                    "i": "yield_curve",
+                    "i": "portfolio_command_center_holdings_exposure_treemap",
                     "x": 0,
                     "y": 0,
                     "w": 20,
@@ -223,7 +439,17 @@
                 ]
               }
             },
-            "groups": []
+            "groups": [
+              {
+                "name": "Fund Sync",
+                "type": "param",
+                "paramName": "fund",
+                "widgetIds": [
+                  "portfolio_command_center_holdings_holdings_table",
+                  "portfolio_command_center_holdings_exposure_treemap"
+                ]
+              }
+            ]
           }
         ]
       }
@@ -233,27 +459,13 @@
       "args": {
         "operation": "instantiate",
         "backend_id": "backend_001",
-        "app_name": "Rates Desk",
-        "dashboard_name": "Rates Desk Live",
+        "app_name": "Enterprise Holdings Desk",
+        "dashboard_name": "Enterprise Holdings Desk Live",
         "activate": true
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "capability": "app-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "date",
-    "security"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique apps/rates_desk building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact capabilities:capability_1_auction-calendar:table-like:date,security,size_bn,capability_2_yield-curve:chart-like:yield_curve_value."
+    "max_turns": 14
+  }
 }

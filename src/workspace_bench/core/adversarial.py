@@ -31,13 +31,12 @@ ONE_WIDGET_MISSING = "one_widget_missing"
 INCOMPATIBLE_VALUES = "incompatible_values"
 BROKEN_FORM_SUBMISSION = "broken_form_submission"
 SEVERED_SHARED_INTERACTION = "severed_shared_interaction"
-COLLATERAL_DAMAGE = "collateral_damage"
 INVALID_SETTING = "invalid_setting"
 COLLAPSED_CONNECTED_PAIR = "collapsed_connected_pair"
 FIELDLESS_CONTRIBUTOR = "fieldless_contributor"
 SELF_SATISFIED_CONNECTION = "self_satisfied_connection"
 NOTE_ONLY_PROOF = "note_only_proof"
-DUPLICATE_BACKEND_TEARDOWN = "duplicate_backend_teardown"
+STRIPPED_APP_PROMPTS = "stripped_app_prompts"
 
 ADVERSARIAL_ARCHETYPES = (
     WRONG_ENDPOINT_DATA,
@@ -46,13 +45,12 @@ ADVERSARIAL_ARCHETYPES = (
     INCOMPATIBLE_VALUES,
     BROKEN_FORM_SUBMISSION,
     SEVERED_SHARED_INTERACTION,
-    COLLATERAL_DAMAGE,
     INVALID_SETTING,
     COLLAPSED_CONNECTED_PAIR,
     FIELDLESS_CONTRIBUTOR,
     SELF_SATISFIED_CONNECTION,
     NOTE_ONLY_PROOF,
-    DUPLICATE_BACKEND_TEARDOWN,
+    STRIPPED_APP_PROMPTS,
 )
 RUNTIME_ARCHETYPES = frozenset(
     {WRONG_ENDPOINT_DATA, INCOMPATIBLE_VALUES, BROKEN_FORM_SUBMISSION}
@@ -296,11 +294,12 @@ def generate_adversarial_candidates(
     if _has_instantiate_call(context.trace) and _instantiated_custom_widgets(
         context.final_snapshot
     ):
-        expected_codes: tuple[str, ...] = (
-            ("missing_capability",)
-            if task.success.required_capabilities
-            else ("missing_widget",)
-        )
+        if task.success.required_capabilities:
+            expected_codes: tuple[str, ...] = ("missing_capability",)
+        elif task.success.required_widgets:
+            expected_codes = ("missing_widget",)
+        else:
+            expected_codes = ("missing_tool_call",)
         candidates.append(
             AdversarialCandidate(
                 name="published-app-never-opened",
@@ -370,26 +369,6 @@ def generate_adversarial_candidates(
                 expected_codes=("capability_unconnected",),
                 mutation_level="trace",
                 description="Keep every widget valid but delete apps.json shared-param groups.",
-            )
-        )
-
-    collateral_target = _collateral_target(context)
-    if collateral_target is not None:
-        kind, identifier = collateral_target
-        code = (
-            "collateral_dashboard_change"
-            if kind == "dashboard"
-            else "collateral_app_change"
-        )
-        candidates.append(
-            AdversarialCandidate(
-                name=f"damage-unrelated-{kind}-{identifier}",
-                archetype=COLLATERAL_DAMAGE,
-                mutate=partial(_damage_collateral, target=collateral_target),
-                primary_code=code,
-                expected_codes=(code,),
-                mutation_level="state",
-                description=f"Keep the target solution but mutate unrelated {kind} {identifier!r}.",
             )
         )
 
@@ -492,27 +471,45 @@ def generate_adversarial_candidates(
             )
         )
 
-    if _is_duplicate_backend_repair(task):
+    if any(
+        required.prompts_min_count is not None
+        for required in task.success.required_app_defs
+    ):
         candidates.append(
             AdversarialCandidate(
-                name="delete-every-backend-and-rebuild-one",
-                archetype=DUPLICATE_BACKEND_TEARDOWN,
-                mutate=_teardown_duplicate_backends,
-                primary_code="custom_backend_replaced",
-                expected_codes=("custom_backend_replaced", "collateral_app_change"),
+                name="published-app-with-prompts-stripped",
+                archetype=STRIPPED_APP_PROMPTS,
+                mutate=_strip_app_prompts,
+                primary_code="app_prompts_missing",
+                expected_codes=("app_prompts_missing",),
                 mutation_level="state",
-                description="Delete the canonical and archive ids, then recreate only the target.",
+                description="Keep the app and layout but remove its shipped starter prompts.",
             )
         )
 
     return tuple(candidates)
 
 
+def _strip_app_prompts(context: AdversarialContext) -> AdversarialContext:
+    snapshot = copy.deepcopy(context.final_snapshot)
+    for backend in (snapshot.get("custom_backends") or {}).values():
+        if not isinstance(backend, dict):
+            continue
+        for app in backend.get("apps_json") or []:
+            if isinstance(app, dict) and app.get("prompts"):
+                app.pop("prompts", None)
+                return replace(context, final_snapshot=snapshot)
+    return context
+
+
 def _connected_pair_target(
     context: AdversarialContext,
 ) -> tuple[str, str, str] | None:
     checks = context.task.success.runtime
-    if checks is None:
+    # The collapsed-pair mutation is isolated only for a single required edge.
+    # In a three-node clique, removing one node can leave alternate edges that
+    # legitimately satisfy every connection, so the archetype is inapplicable.
+    if checks is None or len(context.task.success.capability_connections) != 1:
         return None
     capabilities = {
         capability.name: capability
@@ -698,22 +695,6 @@ def _make_widget_fieldless(
     return replace(replayed, final_snapshot=snapshot)
 
 
-def _is_duplicate_backend_repair(task: Task) -> bool:
-    return task.family == "debug" and task.id.endswith("_duplicate_backend")
-
-
-def _teardown_duplicate_backends(context: AdversarialContext) -> AdversarialContext:
-    snapshot = copy.deepcopy(context.final_snapshot)
-    backends = snapshot.get("custom_backends") or {}
-    target = backends.get("debug_target")
-    if not isinstance(target, dict):
-        return context
-    rebuilt = copy.deepcopy(target)
-    rebuilt["backend_id"] = "adversarial_rebuilt"
-    snapshot["custom_backends"] = {"adversarial_rebuilt": rebuilt}
-    return replace(context, final_snapshot=snapshot)
-
-
 def _runtime_data_candidates(
     context: AdversarialContext,
 ) -> list[AdversarialCandidate]:
@@ -890,14 +871,32 @@ def _instantiated_custom_widgets(snapshot: JsonDict) -> list[JsonDict]:
 
 
 def _never_instantiate(context: AdversarialContext) -> AdversarialContext:
-    calls = [
-        event.call
-        for event in context.trace
-        if not (
-            event.call.name == "manage_apps"
-            and event.call.args.get("operation") == "instantiate"
-        )
-    ]
+    calls: list[ToolCall] = []
+    for event in context.trace:
+        call = event.call
+        if call.name == "manage_apps" and call.args.get("operation") == "instantiate":
+            # Preserve the dashboard side effect and requested name so this
+            # mutant injects exactly one semantic defect: the app itself was
+            # never instantiated. Without this replacement the active
+            # dashboard falls back to the seed and ``dashboard_name`` masks
+            # the intended missing-widget/capability/tool-call attribution.
+            calls.append(
+                ToolCall(
+                    name="manage_dashboard",
+                    args={
+                        "operation": "create",
+                        "name": str(
+                            call.args.get("dashboard_name")
+                            or call.args.get("app_name")
+                            or call.args.get("template_id")
+                            or "Adversarial uninstantiated app"
+                        ),
+                        "activate": bool(call.args.get("activate", True)),
+                    },
+                )
+            )
+        else:
+            calls.append(call)
     return _replay(context, calls)
 
 
@@ -986,61 +985,6 @@ def _sever_groups(context: AdversarialContext) -> AdversarialContext:
                 app["groups"] = []
 
     return _mutate_backend_calls(context, mutate)
-
-
-def _collateral_target(context: AdversarialContext) -> tuple[str, str] | None:
-    checks = context.task.success.workspace
-    initial_dashboards = context.initial_snapshot.get("dashboard_compositions") or {}
-    initial_active = str(
-        (context.initial_snapshot.get("workspace_state") or {}).get(
-            "current_dashboard_uuid", ""
-        )
-    )
-    if checks.preserve_other_dashboards and isinstance(initial_dashboards, dict):
-        candidate = next(
-            (str(key) for key in sorted(initial_dashboards) if str(key) != initial_active),
-            None,
-        )
-        if candidate is not None:
-            return "dashboard", candidate
-    if checks.preserve_other_apps:
-        mutable = set(checks.mutable_app_ids)
-        for backend_id, backend in sorted(
-            (context.initial_snapshot.get("custom_backends") or {}).items()
-        ):
-            if not isinstance(backend, dict):
-                continue
-            for app in backend.get("apps_json") or []:
-                if not isinstance(app, dict):
-                    continue
-                app_id = str(app.get("template_id") or app.get("id") or app.get("name"))
-                if app_id and app_id not in mutable:
-                    return "app", f"{backend_id}:{app_id}"
-    return None
-
-
-def _damage_collateral(
-    context: AdversarialContext,
-    target: tuple[str, str],
-) -> AdversarialContext:
-    snapshot = copy.deepcopy(context.final_snapshot)
-    kind, identifier = target
-    if kind == "dashboard":
-        dashboard = (snapshot.get("dashboard_compositions") or {}).get(identifier)
-        if isinstance(dashboard, dict):
-            dashboard["name"] = "Adversarial collateral damage"
-    else:
-        backend_id, app_id = identifier.split(":", 1)
-        backend = (snapshot.get("custom_backends") or {}).get(backend_id)
-        if isinstance(backend, dict):
-            backend["apps_json"] = [
-                app
-                for app in backend.get("apps_json") or []
-                if not isinstance(app, dict)
-                or str(app.get("template_id") or app.get("id") or app.get("name"))
-                != app_id
-            ]
-    return replace(context, final_snapshot=snapshot)
 
 
 def _setting_target(

@@ -1,15 +1,9 @@
 {
   "id": "earnings_single",
-  "title": "Delegate One Task: Earnings Single",
-  "capability": "mcp-tool-use",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-delegate",
-    "delegation",
-    "agents",
-    "mcp"
-  ],
+  "category": "platform",
+  "family": "delegate",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "Use assign_tasks_to_agents with one task_request using id coverage-analyst for earnings prep work: Review estimate revisions and transcript tone for earnings prep.",
   "fixtures": {
     "backends": [
@@ -98,15 +92,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "delegate",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique delegate/earnings_single exercise using assign_tasks_to_agents, get_workspace_snapshot with checks layout_out_of_grid, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact tasks:coverage-analyst; widgets:Bench Stark Enterprise/stress_liquidity_lab_sign_off_risk_committee_comments@overview."
+  }
 }

@@ -1,17 +1,10 @@
 {
   "id": "place_vol_regime_metric",
-  "title": "Add Vol Regime to Vol Review",
-  "workflow": "risk-review",
-  "subdomain": "volatility",
-  "tags": [
-    "family-extend",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "refresh",
-    "extend"
-  ],
+  "category": "repair",
+  "family": "extend",
+  "specification_level": "explicit",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Vol Desk Data' at http://localhost:7801. Repair the existing backend without regressing working content. The experience needs VIX History (`vix_history`, table) using `/vix-history` for daily CBOE VIX closes with returns; user controls: Window (`window`, number); columns: date (dateString), close (number), return_pct (number, percent, greenRed); Vol Regime (`vol_regime_metric`, metric) using `/vol-regime` for current volatility regime score. Organize it as app 'Vol Review' with tabs Overview (vix_history, vol_regime_metric). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {
@@ -324,18 +317,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "extend",
-  "capability": "app-building",
-  "specification_level": "explicit",
-  "difficulty": "easy",
-  "business_terms": [],
   "limits": {
     "max_turns": 6
-  },
-  "split": "test",
-  "novelty": "Unique extend/place_vol_regime_metric building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks app_def, dashboard_name, missing_widget, repeated_snapshots, too_many_invalid_calls, widget_def on custom:Vol Desk Data; artifact widgetdefs:Vol Desk Data/vol_regime_metric; appdefs:Vol Desk Data/Vol Review; widgets:Vol Desk Data/vix_history@overview,Vol Desk Data/vol_regime_metric@overview."
+  }
 }

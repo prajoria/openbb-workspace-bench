@@ -1,18 +1,16 @@
 {
   "id": "policy_digest_pdf_ship",
-  "title": "Ship, open, and configure the Policy Digest Live app",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-types",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "types",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "types",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "A surveillance analyst needs a decision-ready Workspace for cases and compliance alerts. The workspace must cover current surveillance policy digest. The workspace must cover open surveillance alerts. The workspace must cover notes for one surveillance case. Analysts need to inspect alert ID, desk, severity, age days. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Policy Digest Live', 'policy digest', 'Surveillance Data', 'C-2099'. Choose an effective architecture and avoid unrelated changes.",
+  "business_terms": [
+    "Policy Digest Live",
+    "policy digest",
+    "Surveillance Data",
+    "C-2099"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -346,23 +344,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "types",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Policy Digest Live",
-    "policy digest",
-    "Surveillance Data",
-    "C-2099"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique types/policy_digest_pdf_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_alert-queue:table-like:age_days,alert_id,desk,severity,capability_2_policy-digest-pdf:pdf:policy_digest_pdf_value; generated:note@*:Policy Digest Live,policy digest."
+    "max_turns": 14
+  }
 }

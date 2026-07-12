@@ -1,15 +1,10 @@
 {
   "id": "cross_prompt_cross_book_cpi",
-  "title": "Prompt Cross Book CPI",
-  "capability": "dashboard-construction",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-prompts",
-    "prompts",
-    "cross-backend"
-  ],
-  "prompt": "Get workspace_tool_usage and workspace_session_context, create Prompt Cross Book CPI, build the cross-backend dashboard with Bench Portfolio/sector_exposure and Bench Macro/macro_timeseries with data_args {\"series\": \"CPIAUCSL\"}, and add a note mentioning sector and CPIAUCSL and current-dashboard.",
+  "category": "dashboard",
+  "family": "prompts",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "Get workspace_tool_usage and workspace_session_context, create Prompt Cross Book CPI, build the cross-backend dashboard with Bench Portfolio/sector_exposure and Bench Macro/macro_timeseries with data_args {\"series\": \"CPIAUCSL\"}, and add a HTML card mentioning sector and CPIAUCSL and current-dashboard.",
   "fixtures": {
     "backends": [
       {
@@ -61,7 +56,7 @@
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "sector",
           "CPIAUCSL",
@@ -151,21 +146,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Prompt Cross Note",
-        "data": "Prompt cross build: sector, CPIAUCSL, current-dashboard."
+        "data": "<section>Prompt cross build: sector, CPIAUCSL, current-dashboard.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "prompts",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 12
-  },
-  "split": "train",
-  "novelty": "Unique prompts/cross_prompt_cross_book_cpi exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_prompt, list_available_widgets, manage_dashboard with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on macro, portfolio; artifact prompts:workspace_session_context,workspace_tool_usage; widgets:Bench Macro/macro_timeseries@*,Bench Portfolio/sector_exposure@*; generated:note@*:sector,CPIAUCSL."
+  }
 }

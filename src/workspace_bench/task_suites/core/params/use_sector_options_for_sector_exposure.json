@@ -1,14 +1,9 @@
 {
   "id": "use_sector_options_for_sector_exposure",
-  "title": "Use Sector Options For Sector Exposure",
-  "capability": "parameter-discovery",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-params",
-    "params",
-    "options"
-  ],
+  "category": "single-widget",
+  "family": "params",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "Call get_params_options for Bench Portfolio/sector_exposure parameter sector, choose Technology, and create that widget with sector=Technology.",
   "fixtures": {
     "backends": [
@@ -93,15 +88,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "params",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique params/use_sector_options_for_sector_exposure exercise using create_widget, get_params_options, get_workspace_snapshot with checks layout_out_of_grid, missing_tool_call, missing_tool_result, missing_widget, repeated_snapshots, too_many_invalid_calls on portfolio; artifact widgets:Bench Portfolio/sector_exposure@*."
+  }
 }

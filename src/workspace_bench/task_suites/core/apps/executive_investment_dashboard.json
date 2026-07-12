@@ -1,14 +1,9 @@
 {
   "id": "executive_investment_dashboard",
-  "title": "Instantiate Executive Investment Dashboard (Checked)",
-  "capability": "app-instantiation",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-apps",
-    "apps",
-    "stark"
-  ],
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "medium",
+  "split": "test",
   "prompt": "From the Bench Stark Enterprise backend, instantiate the Executive Investment Dashboard app as a new dashboard named Executive Morning Brief.",
   "fixtures": {
     "backends": [
@@ -74,15 +69,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 5
-  },
-  "split": "test",
-  "novelty": "Unique apps/executive_investment_dashboard exercise using manage_apps, manage_backends with checks dashboard_name, layout_out_of_grid, missing_tab, missing_widget, too_many_invalid_calls on stark-enterprise; artifact apps:Executive Investment Dashboard; widgets:Bench Stark Enterprise/executive_investment_dashboard_firm_overview_firm_snapshot@firm_overview,Bench Stark Enterprise/executive_investment_dashboard_issues_major_open_issues@issues; tabs:firm_overview,issues,overview."
+  }
 }

@@ -3,8 +3,6 @@
     "filesystem",
     "shell"
   ],
-  "business_terms": [],
-  "capability": "build-real-backend",
   "category": "repair",
   "code_task": {
     "command_timeout_ms": 120000,
@@ -62,7 +60,6 @@
     ]
   },
   "difficulty": "medium",
-  "domain": "engineering",
   "family": "backend-code",
   "fixtures": {
     "backends": []
@@ -72,21 +69,8 @@
   "limits": {
     "max_turns": 24
   },
-  "novelty": "Real-code backend task: repair_trade_column_contract",
   "oracle_tool_calls": [],
   "prompt": "The client-trades widget declares business columns the endpoint never returns. Reconcile the implementation and manifest into one coherent contract for client name, notional, and side. Keep the public widget usable and the test suite meaningful.",
-  "schema_version": "workspace-bench-task",
-  "source": "WorkspaceBench Phase 10 authored code track",
   "split": "test",
-  "subdomain": "openbb-custom-backends",
-  "success": {},
-  "tags": [
-    "build-openbb-backends",
-    "experimental-v0",
-    "repair",
-    "manifest",
-    "columns"
-  ],
-  "title": "Reconcile a trade table manifest and payload",
-  "workflow": "custom-backend-development"
+  "success": {}
 }

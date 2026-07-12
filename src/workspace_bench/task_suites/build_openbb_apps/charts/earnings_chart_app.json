@@ -1,17 +1,14 @@
 {
   "id": "earnings_chart_app",
-  "title": "Ship EPS History as the EPS Chart App",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-charts",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "charts"
-  ],
+  "category": "platform",
+  "family": "charts",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Build a working Workspace experience for an equity-research analyst covering earnings and estimates. The workspace must cover EPS beat and miss history. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Keep these source-contract anchors: `symbol`. Choose the rest of the architecture and avoid unrelated changes.",
+  "business_terms": [
+    "symbol"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -165,20 +162,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "charts",
-  "capability": "widget-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "symbol"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique charts/earnings_chart_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_earnings-chart:chart-like:earnings_chart_value."
+    "max_turns": 13
+  }
 }

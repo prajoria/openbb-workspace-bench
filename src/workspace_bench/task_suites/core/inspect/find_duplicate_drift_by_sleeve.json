@@ -1,14 +1,9 @@
 {
   "id": "find_duplicate_drift_by_sleeve",
-  "title": "Find Duplicate Drift by Sleeve",
-  "capability": "dashboard-construction",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-inspect",
-    "inspect",
-    "delete-widget"
-  ],
+  "category": "dashboard",
+  "family": "inspect",
+  "difficulty": "medium",
+  "split": "train",
   "prompt": "Inspect the dashboard, identify the duplicate Drift by Sleeve among the seeded widgets, and remove exactly one duplicate while preserving the Workflow Overview widget.",
   "fixtures": {
     "backends": [
@@ -123,15 +118,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "inspect",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique inspect/find_duplicate_drift_by_sleeve exercise using delete_widget, get_workspace_snapshot, read_widget with checks layout_out_of_grid, layout_overlap, missing_tool_call, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/rebalance_scenario_lab_drift_drift_by_sleeve@*,Bench Stark Enterprise/rebalance_scenario_lab_overview_workflow_overview@*."
+  }
 }

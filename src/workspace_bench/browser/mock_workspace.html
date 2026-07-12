@@ -195,7 +195,7 @@
     }
 
     async function loadWidget(root, definition) {
-      const method = definition.type === "ssrm_table" ? "POST" : "GET";
+      const method = ["table_ssrm", "ssrm_table"].includes(definition.type) ? "POST" : "GET";
       const options = method === "POST" ? {method, headers: {"content-type": "application/json"}, body: JSON.stringify({startRow: 0, endRow: 100})} : {};
       const response = await fetch(backendUrl + definition.endpoint, options);
       if (!response.ok) throw new Error("widget request failed: " + response.status);
@@ -207,7 +207,7 @@
       target.replaceChildren();
       const rows = Array.isArray(payload) ? payload : (Array.isArray(payload?.rows) ? payload.rows : null);
       const type = definition.type || "table";
-      if (rows && ["table", "ssrm_table", "live_grid"].includes(type)) {
+      if (rows && ["table", "table_ssrm", "ssrm_table", "live_grid"].includes(type)) {
         drawTable(target, rows);
       } else if (rows && ["chart", "chart-highcharts", "chart-vegalite", "advanced_charting"].includes(type)) {
         const chart = document.createElement("div");

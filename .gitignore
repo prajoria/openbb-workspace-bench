@@ -17,6 +17,10 @@ runs/*
 !runs/README.md
 !runs/comparison/
 !runs/reports/
+!runs/hosted-surface/
+!runs/hosted-surface/tool_schemas.json
+!runs/hosted-surface/resource_catalog.json
+!runs/hosted-surface/widget_types.json
 # Per-episode transcript trees under every comparison board are regenerable and are the
 # bulk of the repo (100s of MB). Board-level summary JSON/markdown stay tracked; the trees
 # (runs/comparison/<board>/<model-slug>/...) and the rollout exports are ignored.

@@ -45,7 +45,7 @@ def test_code_suite_release_driver_passes_every_release_check() -> None:
     assert result["issues"] == []
     assert set(result["release_checks"]) == {
         "task_count_is_12",
-        "all_tasks_are_experimental_v0_code_tasks",
+        "all_tasks_are_code_tasks",
         "difficulty_spread_3_6_3",
         "oracle_all_pass",
         "starter_all_fail",

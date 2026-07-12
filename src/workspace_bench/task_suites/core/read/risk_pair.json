@@ -1,15 +1,10 @@
 {
   "id": "risk_pair",
-  "title": "Read Data: VaR Trend and Drawdown",
-  "capability": "data-reading",
-  "workflow": "risk-review",
-  "subdomain": "risk",
-  "tags": [
-    "family-read",
-    "data-reading",
-    "stark"
-  ],
-  "prompt": "Use get_widget_data on the Bench Stark Enterprise VaR Trend and Drawdown widgets, then add a short note that cites risk_exposure_monitor_dashboard_var_trend and risk_exposure_monitor_dashboard_drawdown and says you reviewed the data.",
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "medium",
+  "split": "validation",
+  "prompt": "Use get_widget_data on the Bench Stark Enterprise VaR Trend and Drawdown widgets, then add a short HTML card that cites risk_exposure_monitor_dashboard_var_trend and risk_exposure_monitor_dashboard_drawdown and says you reviewed the data.",
   "fixtures": {
     "backends": [
       {
@@ -88,19 +83,19 @@
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "risk_exposure_monitor_dashboard_var_trend"
+          "var_usd"
         ]
       },
       {
         "tool": "get_widget_data",
         "data_contains": [
-          "risk_exposure_monitor_dashboard_drawdown"
+          "drawdown_usd"
         ]
       }
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "risk_exposure_monitor_dashboard_var_trend",
           "risk_exposure_monitor_dashboard_drawdown",
@@ -147,21 +142,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Data Note",
-        "data": "Reviewed the data returned by risk_exposure_monitor_dashboard_var_trend and risk_exposure_monitor_dashboard_drawdown."
+        "data": "<section>Reviewed the data returned by risk_exposure_monitor_dashboard_var_trend and risk_exposure_monitor_dashboard_drawdown.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "read",
-  "difficulty": "medium",
   "limits": {
     "max_turns": 7
-  },
-  "split": "validation",
-  "novelty": "Unique read/risk_pair exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:risk_exposure_monitor_dashboard_var_trend,risk_exposure_monitor_dashboard_drawdown."
+  }
 }

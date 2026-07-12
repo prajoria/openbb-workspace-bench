@@ -1,18 +1,16 @@
 {
   "id": "sla_ship",
-  "title": "Ship, open, and configure the Vendor Intake Live form app",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "operations",
-  "tags": [
-    "family-forms",
-    "cell1",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "forms",
-    "orchestration"
-  ],
+  "category": "platform",
+  "family": "forms",
+  "difficulty": "hard",
+  "split": "test",
   "prompt": "Build a vendor-operations manager a dependable vendor service levels workspace. The workspace must cover submit a new vendor record into the SLA register. The workspace must cover count of open SLA breaches. The workspace must cover vendor SLA state with breach flags. Analysts need to inspect vendor, status, latency milliseconds, breach. An analyst can adjust the relevant numeric scope. The user can enter the required details and submit the workflow. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Vendor Intake Live', 'vendor intake', 'Vendor SLA Data', 'QuoteStream'. Decide how best to organize the experience and preserve unrelated work.",
+  "business_terms": [
+    "Vendor Intake Live",
+    "vendor intake",
+    "Vendor SLA Data",
+    "QuoteStream"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -367,23 +365,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "forms",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Vendor Intake Live",
-    "vendor intake",
-    "Vendor SLA Data",
-    "QuoteStream"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique forms/sla_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Vendor SLA Data; artifact capabilities:capability_1_breach-metric:metric:breach_metric_value,capability_2_vendor-intake-form:form:vendor_intake_form_value; generated:note@*:Vendor Intake Live,vendor intake."
+    "max_turns": 14
+  }
 }

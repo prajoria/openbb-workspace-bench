@@ -1,13 +1,9 @@
 {
   "id": "remove_duplicate_price_performance",
-  "title": "Remove Duplicate Price Performance",
-  "capability": "widget-update",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-delete",
-    "delete-widget"
-  ],
+  "category": "single-widget",
+  "family": "delete",
+  "difficulty": "easy",
+  "split": "validation",
   "prompt": "There are two identical Price Performance widgets on the dashboard. Remove exactly one so a single copy remains; do not change the one that stays.",
   "fixtures": {
     "backends": [
@@ -98,15 +94,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "delete",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "validation",
-  "novelty": "Unique delete/remove_duplicate_price_performance exercise using delete_widget, get_workspace_snapshot with checks layout_out_of_grid, layout_overlap, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on equities; artifact widgets:Bench Equities/price_performance@*."
+  }
 }

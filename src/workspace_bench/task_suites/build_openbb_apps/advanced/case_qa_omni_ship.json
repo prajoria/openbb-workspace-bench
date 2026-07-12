@@ -1,18 +1,16 @@
 {
   "id": "case_qa_omni_ship",
-  "title": "Ship, open, and configure Surveillance QA",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-advanced",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "advanced",
-    "orchestration"
+  "category": "platform",
+  "family": "advanced",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "Build a surveillance analyst a dependable cases and compliance alerts workspace. The workspace must cover ask questions over the surveillance case corpus. The workspace must cover open surveillance alerts. The workspace must cover open alert count. Analysts need to inspect alert ID, desk, severity, age days. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Surveillance QA', 'case QA', 'Surveillance Data', 'Show high severity cases'. Decide how best to organize the experience and preserve unrelated work.",
+  "business_terms": [
+    "Surveillance QA",
+    "case QA",
+    "Surveillance Data",
+    "Show high severity cases"
   ],
-  "prompt": "Build a surveillance analyst a dependable cases and compliance alerts workspace. The workspace must cover ask questions over the surveillance case corpus. The workspace must cover open surveillance alerts. The workspace must cover open alert count. Analysts need to inspect alert ID, desk, severity, age days. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Surveillance QA', 'case QA', 'Surveillance Data', 'Show high severity cases'. Decide how best to organize the experience and preserve unrelated work.",
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -40,7 +38,7 @@
   "success": {
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "Surveillance QA",
           "case QA",
@@ -346,29 +344,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Surveillance QA",
-        "data": "Surveillance QA is live from Surveillance Data: case QA ready. Configured prompt=Show high severity cases."
+        "data": "<section>Surveillance QA is live from Surveillance Data: case QA ready. Configured prompt=Show high severity cases.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "advanced",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Surveillance QA",
-    "case QA",
-    "Surveillance Data",
-    "Show high severity cases"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique advanced/case_qa_omni_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_alert-queue:table-like:age_days,alert_id,desk,severity,capability_2_case-qa-omni:any:case_qa_omni_value; generated:note@*:Surveillance QA,case QA."
+    "max_turns": 14
+  }
 }

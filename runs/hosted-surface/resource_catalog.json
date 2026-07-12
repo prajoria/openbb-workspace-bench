@@ -1,0 +1,24 @@
+{
+  "fetched_at": "2026-07-12",
+  "hash_contract": "sha256 of canonical JSON {description,mime_type,name,uri}",
+  "resources": [
+    {"uri": "openbb://workspace/app-builder/index", "catalog_sha256": "7cff2a60f5e37befaecc22fb9d16ade81ebf55594e27459f0734a97885e4b834"},
+    {"uri": "openbb://workspace/overview/what-is-workspace", "catalog_sha256": "71d2f1efb006d03bc58153bcb72188fd891843b8408fb8b054dea32b81296605"},
+    {"uri": "openbb://workspace/overview/ai-agent-contract", "catalog_sha256": "a32711f12636369e88484c7f52caeb1d45f6cdcec62636913289df295b12f568"},
+    {"uri": "openbb://workspace/contract/backend", "catalog_sha256": "14da2a25c7b742d7d14eef47967c07ab31c27a8582c5a704f13cbd8f7d1fbae1"},
+    {"uri": "openbb://workspace/specs/widgets-json", "catalog_sha256": "47ccbdb97802e07feef7246b9575d0a60504d468b681de9aa90292520e7825bb"},
+    {"uri": "openbb://workspace/specs/apps-json", "catalog_sha256": "e687adca6559b3477b64618dddc4abbcdc0021fbda51a4e9564af41adc8fe3cf"},
+    {"uri": "openbb://workspace/specs/widget-types", "catalog_sha256": "ae6a7940af9af38139d81cca26af9d4c2e54cd0e8d0d4ed2b053bc1d10309f90"},
+    {"uri": "openbb://workspace/specs/widget-parameters", "catalog_sha256": "9e0bda23d8a705138aa3547deb8d3e8ad714989d443783fb7abc22fbed76c324"},
+    {"uri": "openbb://workspace/specs/layout-grid", "catalog_sha256": "1939ed52547cb8c87beaf88a3010e12023bf7157cb888478a9062824f027a585"},
+    {"uri": "openbb://workspace/guides/build-an-app", "catalog_sha256": "7cc29b4a7e580245a54a24fbf7753d671aa2e2421145aee92d61e256bb0ec945"},
+    {"uri": "openbb://workspace/guides/review-app", "catalog_sha256": "a3361aac75000bdc4a5caebb12bd6fb753bd26d9b7d295f42bc2eb45f83ad2c1"},
+    {"uri": "openbb://workspace/guides/debug-app", "catalog_sha256": "6d252fd63c3e638e8e8f89faa694cb8ba9a9e6a5431697cdbee8621e38bf64d5"},
+    {"uri": "openbb://workspace/guides/convert-endpoint-to-widget", "catalog_sha256": "9ec0851ed05090b4fa8966116d15210524ef95f883876f90bdfbdb168524f2a3"},
+    {"uri": "openbb://workspace/examples/generic-http/minimal", "catalog_sha256": "846d59f50c1dc7e5c4d205594b568fcbd39f8e533c1619a44e6e90a4a3a7fa57"},
+    {"uri": "openbb://workspace/examples/python-fastapi/minimal", "catalog_sha256": "577d12995971e83dd53d521288a2eabc7eac5af860aaeb331e5ceb9e8ad81584"},
+    {"uri": "openbb://workspace/validation/common-errors", "catalog_sha256": "e33f433eae63ed38bc1cc428228a548598fb43a9eeede9e02055528cf085f1cd"}
+  ],
+  "schema_version": "workspace-bench-live-resource-catalog/v1",
+  "server": "OpenBB Workspace MCP v3.4.2"
+}

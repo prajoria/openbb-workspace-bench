@@ -1,15 +1,9 @@
 {
   "id": "deduplicate_and_fix_macro_timeseries",
-  "title": "Deduplicate And Fix Macro Timeseries",
-  "capability": "workspace-repair",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-delete",
-    "repair",
-    "delete-widget",
-    "combo"
-  ],
+  "category": "repair",
+  "family": "delete",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "This dashboard has two identical Macro Timeseries widgets for DGS10, and the desk actually needs DGS2. Remove exactly one duplicate, update the remaining widget to DGS2, and add a note mentioning DGS2 and the word repaired.",
   "fixtures": {
     "backends": [
@@ -137,15 +131,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "repair",
-  "family": "delete",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique delete/deduplicate_and_fix_macro_timeseries exercise using add_generative_widget, delete_widget, get_workspace_snapshot, update_widget with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on macro; artifact widgets:Bench Macro/macro_timeseries@*; generated:note@*:DGS2,repaired."
+  }
 }

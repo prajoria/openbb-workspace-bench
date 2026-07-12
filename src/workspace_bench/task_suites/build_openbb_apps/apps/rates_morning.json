@@ -1,15 +1,11 @@
 {
   "id": "rates_morning",
-  "title": "Build the Rates Morning app definition",
-  "workflow": "macro-rates-review",
-  "subdomain": "macro",
-  "tags": [
-    "family-apps",
-    "cell2",
-    "build-openbb-apps",
-    "apps-json"
-  ],
-  "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Rates Watch Data' at http://localhost:7803. Treat the app layout and navigation as the product outcome. The experience needs Yield Curve (`yield_curve`, chart) using `/yield-curve` for plotly treasury yield curve snapshot; consume the raw backend payload; 2s10s Spread (`curve_spread_metric`, metric) using `/curve-spread` for current 2s10s spread in bps. Organize it as app 'Rates Morning' with tabs Morning (yield_curve, curve_spread_metric). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
+  "category": "platform",
+  "family": "apps",
+  "specification_level": "explicit",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Rates Watch Data' at http://localhost:7803. Treat the app layout and navigation as the product outcome. The experience needs Yield Curve (`yield_curve`, chart) using `/yield-curve` for plotly treasury yield curve snapshot; consume the raw backend payload; 2s10s Spread (`curve_spread_metric`, metric) using `/curve-spread` for current 2s10s spread in bps. Organize it as app 'Rates Morning' with tabs Morning (yield_curve, curve_spread_metric) with 2 starter prompt(s). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {
     "custom_backends": [
@@ -85,7 +81,8 @@
             "tab_id": "morning",
             "widget_id": "curve_spread_metric"
           }
-        ]
+        ],
+        "prompts_min_count": 2
       }
     ],
     "trace_checks": {
@@ -190,7 +187,11 @@
                 ]
               }
             },
-            "groups": []
+            "groups": [],
+            "prompts": [
+              "Summarize the most important signal in Rates Morning.",
+              "What needs attention in Rates Morning right now?"
+            ]
           }
         ]
       }
@@ -206,18 +207,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "capability": "app-building",
-  "specification_level": "explicit",
-  "difficulty": "easy",
-  "business_terms": [],
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique apps/rates_morning building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks app_def, dashboard_name, missing_widget, repeated_snapshots, too_many_invalid_calls on custom:Rates Watch Data; artifact appdefs:Rates Watch Data/Rates Morning; widgets:Rates Watch Data/curve_spread_metric@morning,Rates Watch Data/yield_curve@morning."
+  }
 }

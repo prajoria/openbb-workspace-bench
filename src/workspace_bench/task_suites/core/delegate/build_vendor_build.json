@@ -1,17 +1,10 @@
 {
   "id": "build_vendor_build",
-  "title": "Delegate And Equip: Vendor Build",
-  "capability": "mcp-tool-use",
-  "workflow": "vendor-sla-monitoring",
-  "subdomain": "data-platform",
-  "tags": [
-    "family-delegate",
-    "delegation",
-    "agents",
-    "mcp",
-    "widget-creation"
-  ],
-  "prompt": "Call assign_tasks_to_agents with two task_requests using ids triage-analyst and sla-analyst. Then add the Incident Log widget (id vendor_dataset_monitor_incidents_incident_log) from the Bench Stark Enterprise backend so the workstreams have their data, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.",
+  "category": "platform",
+  "family": "delegate",
+  "difficulty": "hard",
+  "split": "test",
+  "prompt": "Call assign_tasks_to_agents with two task_requests using ids triage-analyst and sla-analyst. Then add the Incident Log widget (id vendor_dataset_monitor_incidents_incident_log) from the Bench Stark Enterprise backend so the workstreams have their data, and add a coordinator HTML card naming both workstreams. Omit dashboard_id when adding the HTML card.",
   "fixtures": {
     "backends": [
       {
@@ -86,7 +79,7 @@
     ],
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "triage analyst",
           "sla analyst",
@@ -157,21 +150,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Delegation Note",
-        "data": "triage analyst; sla analyst; incident log."
+        "data": "<section>triage analyst; sla analyst; incident log.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "delegate",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 8
-  },
-  "split": "test",
-  "novelty": "Unique delegate/build_vendor_build exercise using add_generative_widget, assign_tasks_to_agents, create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets with checks layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, too_many_widgets, unlisted_widget_id on stark-enterprise; artifact tasks:sla-analyst,triage-analyst; widgets:Bench Stark Enterprise/strategy_health_monitor_watchlist_names_near_action_levels@overview,Bench Stark Enterprise/vendor_dataset_monitor_incidents_incident_log@*; generated:note@*:triage analyst,sla analyst."
+  }
 }

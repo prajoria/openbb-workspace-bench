@@ -1,13 +1,9 @@
 {
   "id": "shorten_estimates_nvda",
-  "title": "Layout: Shorten Estimates Nvda",
-  "capability": "layout-management",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-layout",
-    "layout"
-  ],
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "easy",
+  "split": "validation",
   "prompt": "Keep the NVDA estimates widget's position and width, but reduce its height to 8 rows.",
   "fixtures": {
     "backends": [
@@ -103,15 +99,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "layout",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "validation",
-  "novelty": "Unique layout/shorten_estimates_nvda exercise using get_workspace_snapshot, update_widget_layout with checks layout_mismatch, layout_out_of_grid, layout_overlap, missing_tab, missing_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact widgets:Bench Equities/estimate_history@charts; layouts:estimate_history::charts:0:0:20:8; tabs:charts."
+  }
 }

@@ -1,99 +1,378 @@
 {
   "id": "earnings_command",
-  "title": "Compose the Earnings Command app",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-apps",
-    "cell1",
-    "build-openbb-apps",
-    "apps-json",
-    "composed"
+  "category": "platform",
+  "family": "apps",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "Create a usable the requested financial dataset workflow for an investment analyst. The workspace must cover holdings dataset for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows. The workspace must cover sector Exposure for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows. The workspace must cover portfolio Snapshot for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows. Analysts need to inspect ticker, company, sector, weight, active weight, pnl, rating, bucket, value. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. The source contract must retain `fund` and `period`; decide the remaining implementation and preserve unrelated workspace state.",
+  "business_terms": [
+    "fund",
+    "period"
   ],
-  "prompt": "Create a usable earnings and estimates workflow for an equity-research analyst. The workspace must cover street estimate revisions by quarter. The workspace must cover EPS beat and miss history. The workspace must cover average EPS surprise last 4 quarters. Analysts need to inspect quarter, EPS estimate, revenue estimate billions. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. The source contract must retain `symbol` and `quarter`; decide the remaining implementation and preserve unrelated workspace state.",
   "fixtures": {},
   "initial_state": {
     "custom_backends": [
       {
-        "name": "Earnings Prep Data",
-        "url": "http://localhost:7805",
+        "name": "Bench Stark Enterprise",
+        "url": "http://localhost:7809",
         "backend_id": "backend_001",
         "widgets_json": {
-          "estimate_revisions": {
-            "name": "Estimate Revisions",
-            "description": "Street estimate revisions by quarter.",
-            "endpoint": "/estimate-revisions",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
+          "portfolio_command_center_holdings_holdings_table": {
+            "category": "Portfolio",
             "data": {
               "table": {
                 "columnsDefs": [
                   {
-                    "field": "quarter",
-                    "headerName": "Quarter",
-                    "cellDataType": "text"
+                    "cellDataType": "number",
+                    "chartDataType": "series",
+                    "field": "ticker",
+                    "formatterFn": "int",
+                    "headerName": "Ticker",
+                    "pinned": "left",
+                    "width": 150
                   },
                   {
-                    "field": "eps_estimate",
-                    "headerName": "EPS Est",
-                    "cellDataType": "number"
+                    "cellDataType": "text",
+                    "chartDataType": "category",
+                    "field": "company",
+                    "headerName": "Company",
+                    "pinned": "left",
+                    "width": 150
                   },
                   {
-                    "field": "revenue_estimate_b",
-                    "headerName": "Revenue Est ($B)",
-                    "cellDataType": "number"
+                    "cellDataType": "text",
+                    "chartDataType": "category",
+                    "field": "sector",
+                    "headerName": "Sector",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "number",
+                    "chartDataType": "series",
+                    "field": "weight",
+                    "formatterFn": "percent",
+                    "headerName": "Weight",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "number",
+                    "chartDataType": "series",
+                    "field": "active_weight",
+                    "formatterFn": "percent",
+                    "headerName": "Active Weight",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "number",
+                    "chartDataType": "series",
+                    "field": "pnl",
+                    "formatterFn": "int",
+                    "headerName": "Pnl",
+                    "renderFn": "greenRed",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "text",
+                    "chartDataType": "category",
+                    "field": "rating",
+                    "headerName": "Rating",
+                    "width": 150
                   }
-                ]
+                ],
+                "enableAdvanced": true,
+                "enableCharts": true,
+                "showAll": true
               }
-            }
-          },
-          "earnings_chart": {
-            "name": "EPS History",
-            "description": "Plotly EPS beat/miss history.",
-            "endpoint": "/eps-history",
-            "type": "chart",
-            "gridData": {
-              "w": 20,
-              "h": 9
             },
+            "description": "Holdings Table for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows.",
+            "endpoint": "/portfolio_command_center_holdings_holdings_table",
+            "gridData": {
+              "h": 14,
+              "w": 20
+            },
+            "name": "Holdings Table",
             "params": [
               {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
+                "description": "Fund or vehicle scope.",
+                "label": "Fund",
+                "options": [
+                  {
+                    "label": "Flagship Long/Short",
+                    "value": "Flagship Long/Short"
+                  },
+                  {
+                    "label": "Global Opportunities",
+                    "value": "Global Opportunities"
+                  },
+                  {
+                    "label": "Income Fund",
+                    "value": "Income Fund"
+                  },
+                  {
+                    "label": "Multi-Asset Fund",
+                    "value": "Multi-Asset Fund"
+                  }
+                ],
+                "paramName": "fund",
+                "type": "text",
+                "value": "Flagship Long/Short"
+              },
+              {
+                "description": "Reporting period.",
+                "label": "Period",
+                "options": [
+                  {
+                    "label": "1D",
+                    "value": "1D"
+                  },
+                  {
+                    "label": "MTD",
+                    "value": "MTD"
+                  },
+                  {
+                    "label": "QTD",
+                    "value": "QTD"
+                  },
+                  {
+                    "label": "YTD",
+                    "value": "YTD"
+                  },
+                  {
+                    "label": "1Y",
+                    "value": "1Y"
+                  }
+                ],
+                "paramName": "period",
+                "type": "text",
+                "value": "YTD"
               }
             ],
-            "raw": true,
-            "data": {
-              "valueField": "earnings_chart_value"
-            }
+            "source": [
+              "Aladdin Portfolio Master",
+              "Performance Book of Record"
+            ],
+            "subCategory": "Holdings & Performance",
+            "type": "table",
+            "widgetId": "portfolio_command_center_holdings_holdings_table"
           },
-          "surprise_metric": {
-            "name": "Avg Surprise",
-            "description": "Average EPS surprise last 4 quarters.",
-            "endpoint": "/avg-surprise",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
+          "portfolio_command_center_holdings_sector_exposure": {
+            "category": "Portfolio",
             "data": {
-              "valueField": "surprise_metric_value"
-            }
+              "table": {
+                "chartView": {
+                  "cellRangeCols": {
+                    "area": [
+                      "bucket",
+                      "value"
+                    ],
+                    "column": [
+                      "bucket",
+                      "value"
+                    ],
+                    "groupedBar": [
+                      "bucket",
+                      "value"
+                    ],
+                    "groupedColumn": [
+                      "bucket",
+                      "value"
+                    ],
+                    "line": [
+                      "bucket",
+                      "value"
+                    ],
+                    "stackedArea": [
+                      "bucket",
+                      "value"
+                    ],
+                    "stackedBar": [
+                      "bucket",
+                      "value"
+                    ],
+                    "stackedColumn": [
+                      "bucket",
+                      "value"
+                    ],
+                    "treemap": [
+                      "bucket",
+                      "value"
+                    ]
+                  },
+                  "chartMiniChartEnabled": false,
+                  "chartNavigatorEnabled": false,
+                  "chartType": "treemap",
+                  "enabled": true,
+                  "ignoreCellRange": false
+                },
+                "columnsDefs": [
+                  {
+                    "cellDataType": "text",
+                    "chartDataType": "category",
+                    "field": "bucket",
+                    "headerName": "Bucket",
+                    "width": 150
+                  },
+                  {
+                    "cellDataType": "number",
+                    "chartDataType": "series",
+                    "field": "value",
+                    "formatterFn": "int",
+                    "headerName": "Value",
+                    "width": 150
+                  }
+                ],
+                "enableAdvanced": true,
+                "enableCharts": true,
+                "showAll": false
+              }
+            },
+            "description": "Sector Exposure for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows.",
+            "endpoint": "/portfolio_command_center_holdings_sector_exposure",
+            "gridData": {
+              "h": 14,
+              "w": 20
+            },
+            "name": "Sector Exposure",
+            "params": [
+              {
+                "description": "Fund or vehicle scope.",
+                "label": "Fund",
+                "options": [
+                  {
+                    "label": "Flagship Long/Short",
+                    "value": "Flagship Long/Short"
+                  },
+                  {
+                    "label": "Global Opportunities",
+                    "value": "Global Opportunities"
+                  },
+                  {
+                    "label": "Income Fund",
+                    "value": "Income Fund"
+                  },
+                  {
+                    "label": "Multi-Asset Fund",
+                    "value": "Multi-Asset Fund"
+                  }
+                ],
+                "paramName": "fund",
+                "type": "text",
+                "value": "Flagship Long/Short"
+              },
+              {
+                "description": "Reporting period.",
+                "label": "Period",
+                "options": [
+                  {
+                    "label": "1D",
+                    "value": "1D"
+                  },
+                  {
+                    "label": "MTD",
+                    "value": "MTD"
+                  },
+                  {
+                    "label": "QTD",
+                    "value": "QTD"
+                  },
+                  {
+                    "label": "YTD",
+                    "value": "YTD"
+                  },
+                  {
+                    "label": "1Y",
+                    "value": "1Y"
+                  }
+                ],
+                "paramName": "period",
+                "type": "text",
+                "value": "YTD"
+              }
+            ],
+            "source": [
+              "Aladdin Portfolio Master",
+              "Performance Book of Record"
+            ],
+            "subCategory": "Holdings & Performance",
+            "type": "table",
+            "widgetId": "portfolio_command_center_holdings_sector_exposure"
+          },
+          "portfolio_command_center_overview_portfolio_snapshot": {
+            "category": "Portfolio",
+            "data": {
+              "valueField": "value"
+            },
+            "description": "Portfolio Snapshot for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows.",
+            "endpoint": "/portfolio_command_center_overview_portfolio_snapshot",
+            "gridData": {
+              "h": 5,
+              "w": 40
+            },
+            "name": "Portfolio Snapshot",
+            "params": [
+              {
+                "description": "Fund or vehicle scope.",
+                "label": "Fund",
+                "options": [
+                  {
+                    "label": "Flagship Long/Short",
+                    "value": "Flagship Long/Short"
+                  },
+                  {
+                    "label": "Global Opportunities",
+                    "value": "Global Opportunities"
+                  },
+                  {
+                    "label": "Income Fund",
+                    "value": "Income Fund"
+                  },
+                  {
+                    "label": "Multi-Asset Fund",
+                    "value": "Multi-Asset Fund"
+                  }
+                ],
+                "paramName": "fund",
+                "type": "text",
+                "value": "Flagship Long/Short"
+              },
+              {
+                "description": "Reporting period.",
+                "label": "Period",
+                "options": [
+                  {
+                    "label": "1D",
+                    "value": "1D"
+                  },
+                  {
+                    "label": "MTD",
+                    "value": "MTD"
+                  },
+                  {
+                    "label": "QTD",
+                    "value": "QTD"
+                  },
+                  {
+                    "label": "YTD",
+                    "value": "YTD"
+                  },
+                  {
+                    "label": "1Y",
+                    "value": "1Y"
+                  }
+                ],
+                "paramName": "period",
+                "type": "text",
+                "value": "YTD"
+              }
+            ],
+            "source": [
+              "Aladdin Portfolio Master",
+              "Performance Book of Record"
+            ],
+            "subCategory": "Holdings & Performance",
+            "type": "metric",
+            "widgetId": "portfolio_command_center_overview_portfolio_snapshot"
           }
         }
       }
@@ -134,63 +413,81 @@
     "runtime_checks": {
       "datasets": [
         {
-          "name": "earnings-prep-data__earnings_chart",
-          "widget_id": "earnings_chart",
+          "name": "bench-stark-enterprise__portfolio_command_center_holdings_holdings_table",
+          "widget_id": "portfolio_command_center_holdings_holdings_table",
           "fields": [
-            "earnings_chart_value"
+            "active_weight",
+            "company",
+            "pnl",
+            "rating",
+            "sector",
+            "ticker",
+            "weight"
           ],
-          "path": "/eps-history",
+          "path": "/portfolio_command_center_holdings_holdings_table",
           "payload": [
             {
-              "earnings_chart_value": 10.25
+              "active_weight": 10.25,
+              "company": "company-1",
+              "pnl": 10.25,
+              "rating": "rating-1",
+              "sector": "sector-1",
+              "ticker": 10.25,
+              "weight": 10.25
             },
             {
-              "earnings_chart_value": 20.5
+              "active_weight": 20.5,
+              "company": "company-2",
+              "pnl": 20.5,
+              "rating": "rating-2",
+              "sector": "sector-2",
+              "ticker": 20.5,
+              "weight": 20.5
             },
             {
-              "earnings_chart_value": 30.75
+              "active_weight": 30.75,
+              "company": "company-3",
+              "pnl": 30.75,
+              "rating": "rating-3",
+              "sector": "sector-3",
+              "ticker": 30.75,
+              "weight": 30.75
             }
           ]
         },
         {
-          "name": "earnings-prep-data__estimate_revisions",
-          "widget_id": "estimate_revisions",
+          "name": "bench-stark-enterprise__portfolio_command_center_holdings_sector_exposure",
+          "widget_id": "portfolio_command_center_holdings_sector_exposure",
           "fields": [
-            "eps_estimate",
-            "quarter",
-            "revenue_estimate_b"
-          ],
-          "path": "/estimate-revisions",
-          "payload": [
-            {
-              "eps_estimate": 10.25,
-              "quarter": "quarter-1",
-              "revenue_estimate_b": 10.25
-            },
-            {
-              "eps_estimate": 20.5,
-              "quarter": "quarter-2",
-              "revenue_estimate_b": 20.5
-            },
-            {
-              "eps_estimate": 30.75,
-              "quarter": "quarter-3",
-              "revenue_estimate_b": 30.75
-            }
-          ]
-        },
-        {
-          "name": "earnings-prep-data__surprise_metric",
-          "widget_id": "surprise_metric",
-          "fields": [
-            "label",
-            "surprise_metric_value",
+            "bucket",
             "value"
           ],
-          "path": "/avg-surprise",
+          "path": "/portfolio_command_center_holdings_sector_exposure",
+          "payload": [
+            {
+              "bucket": "bucket-1",
+              "value": 10.25
+            },
+            {
+              "bucket": "bucket-2",
+              "value": 20.5
+            },
+            {
+              "bucket": "bucket-3",
+              "value": 30.75
+            }
+          ]
+        },
+        {
+          "name": "bench-stark-enterprise__portfolio_command_center_overview_portfolio_snapshot",
+          "widget_id": "portfolio_command_center_overview_portfolio_snapshot",
+          "fields": [
+            "label",
+            "value"
+          ],
+          "path": "/portfolio_command_center_overview_portfolio_snapshot",
           "payload": {
-            "label": "Avg Surprise",
-            "surprise_metric_value": 10.25,
+            "label": "Portfolio Snapshot",
             "value": 42.5
           }
         }
@@ -199,53 +496,70 @@
     },
     "required_capabilities": [
       {
-        "name": "capability_1_earnings-chart",
+        "name": "capability_1_portfolio-command-center-holdings-holdings-table",
         "datasets": [
-          "earnings-prep-data__earnings_chart"
-        ],
-        "widget_kind": "chart-like",
-        "must_cover_fields": [
-          "earnings_chart_value"
-        ],
-        "required_param_kinds": [
-          "ticker"
-        ],
-        "required_config": {}
-      },
-      {
-        "name": "capability_2_estimate-revisions",
-        "datasets": [
-          "earnings-prep-data__estimate_revisions"
+          "bench-stark-enterprise__portfolio_command_center_holdings_holdings_table"
         ],
         "widget_kind": "table-like",
         "must_cover_fields": [
-          "eps_estimate",
-          "quarter",
-          "revenue_estimate_b"
+          "active_weight",
+          "company",
+          "pnl",
+          "rating",
+          "sector",
+          "ticker",
+          "weight"
         ],
         "required_param_kinds": [
-          "ticker"
+          "text"
         ],
         "required_config": {}
       },
       {
-        "name": "capability_3_surprise-metric",
+        "name": "capability_2_portfolio-command-center-holdings-sector-exposure",
         "datasets": [
-          "earnings-prep-data__surprise_metric"
+          "bench-stark-enterprise__portfolio_command_center_holdings_sector_exposure"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "bucket",
+          "value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_3_portfolio-command-center-overview-portfolio-snapshot",
+        "datasets": [
+          "bench-stark-enterprise__portfolio_command_center_overview_portfolio_snapshot"
         ],
         "widget_kind": "metric",
         "must_cover_fields": [
-          "surprise_metric_value"
+          "value"
         ],
-        "required_param_kinds": [],
+        "required_param_kinds": [
+          "text"
+        ],
         "required_config": {}
       }
     ],
     "capability_connections": [
       {
-        "source": "capability_2_estimate-revisions",
-        "target": "capability_1_earnings-chart",
-        "param_kind": "ticker"
+        "source": "capability_1_portfolio-command-center-holdings-holdings-table",
+        "target": "capability_2_portfolio-command-center-holdings-sector-exposure",
+        "param_kind": "text"
+      },
+      {
+        "source": "capability_1_portfolio-command-center-holdings-holdings-table",
+        "target": "capability_3_portfolio-command-center-overview-portfolio-snapshot",
+        "param_kind": "text"
+      },
+      {
+        "source": "capability_2_portfolio-command-center-holdings-sector-exposure",
+        "target": "capability_3_portfolio-command-center-overview-portfolio-snapshot",
+        "param_kind": "text"
       }
     ],
     "app_structure": {
@@ -266,34 +580,29 @@
         "backend_id": "backend_001",
         "apps_json": [
           {
-            "name": "Earnings Command",
-            "description": "Symbol-synced earnings review.",
+            "name": "Enterprise Portfolio Command",
+            "description": "Fund-synced holdings and exposure review.",
             "tabs": {
               "review": {
                 "id": "review",
                 "name": "Review",
                 "layout": [
                   {
-                    "i": "estimate_revisions",
+                    "i": "portfolio_command_center_holdings_holdings_table",
                     "x": 0,
                     "y": 0,
                     "w": 20,
                     "h": 9
                   },
                   {
-                    "i": "earnings_chart",
+                    "i": "portfolio_command_center_holdings_sector_exposure",
                     "x": 20,
                     "y": 0,
                     "w": 12,
-                    "h": 9,
-                    "state": {
-                      "params": {
-                        "symbol": "NVDA"
-                      }
-                    }
+                    "h": 9
                   },
                   {
-                    "i": "surprise_metric",
+                    "i": "portfolio_command_center_overview_portfolio_snapshot",
                     "x": 32,
                     "y": 0,
                     "w": 8,
@@ -304,14 +613,18 @@
             },
             "groups": [
               {
-                "name": "Symbol Sync",
+                "name": "Fund Sync",
                 "type": "param",
-                "paramName": "symbol",
+                "paramName": "fund",
                 "widgetIds": [
-                  "estimate_revisions",
-                  "earnings_chart"
+                  "portfolio_command_center_holdings_holdings_table",
+                  "portfolio_command_center_holdings_sector_exposure",
+                  "portfolio_command_center_overview_portfolio_snapshot"
                 ]
               }
+            ],
+            "prompts": [
+              "Where is enterprise portfolio risk concentrated?"
             ]
           }
         ]
@@ -322,27 +635,13 @@
       "args": {
         "operation": "instantiate",
         "backend_id": "backend_001",
-        "app_name": "Earnings Command",
-        "dashboard_name": "Earnings Command Live",
+        "app_name": "Enterprise Portfolio Command",
+        "dashboard_name": "Enterprise Portfolio Command Live",
         "activate": true
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "apps",
-  "capability": "app-building",
-  "specification_level": "partially-specified",
-  "difficulty": "hard",
-  "business_terms": [
-    "symbol",
-    "quarter"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique apps/earnings_command building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_earnings-chart:chart-like:earnings_chart_value,capability_2_estimate-revisions:table-like:eps_estimate,quarter,revenue_estimate_b,capability_3_surprise-metric:metric:surprise_metric_value."
+    "max_turns": 13
+  }
 }

@@ -1,13 +1,10 @@
 {
   "id": "apply_finance_earnings_prep_workflow_notes",
-  "capability": "skill-access",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-skills",
-    "skills",
-    "mcp"
-  ],
+  "category": "single-widget",
+  "family": "skills",
+  "difficulty": "easy",
+  "split": "train",
+  "prompt": "After calling get_skill_content with slug finance-earnings-prep, add a note on the active dashboard that captures the workflow steps for an analyst. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
       {
@@ -41,8 +38,6 @@
       ]
     }
   },
-  "title": "Apply Finance Earnings Prep Workflow Notes",
-  "prompt": "After calling get_skill_content with slug finance-earnings-prep, add a note on the active dashboard that captures the workflow steps for an analyst. Omit dashboard_id when adding the note.",
   "allowed_tools": [
     "get_workspace_snapshot",
     "get_skill_content",
@@ -113,15 +108,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "skills",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique skills/apply_finance_earnings_prep_workflow_notes exercise using add_generative_widget, get_skill_content, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/strategy_health_monitor_overview_workflow_overview@overview; generated:note@*:earnings prep,surprise drivers."
+  }
 }

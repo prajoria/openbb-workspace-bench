@@ -1,18 +1,13 @@
 {
   "id": "surprise_metric_room",
-  "title": "Assemble the Earnings Settings Room configured app",
-  "workflow": "earnings-prep",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-settings",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "settings",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "settings",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "The desk needs a production-ready earnings and estimates workflow for an equity-research analyst. The workspace must cover average EPS surprise last 4 quarters. The workspace must cover preview note for the earnings call. The workspace must cover EPS beat and miss history. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "ticker"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -286,20 +281,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "settings",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "ticker"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique settings/surprise_metric_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_earnings-chart:chart-like:earnings_chart_value,capability_2_earnings-note:markdown:earnings_note_value,capability_3_surprise-metric:metric:surprise_metric_value."
+    "max_turns": 14
+  }
 }

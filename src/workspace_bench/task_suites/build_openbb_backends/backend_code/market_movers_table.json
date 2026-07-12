@@ -3,8 +3,6 @@
     "filesystem",
     "shell"
   ],
-  "business_terms": [],
-  "capability": "build-real-backend",
   "category": "platform",
   "code_task": {
     "command_timeout_ms": 120000,
@@ -62,7 +60,6 @@
     ]
   },
   "difficulty": "easy",
-  "domain": "engineering",
   "family": "backend-code",
   "fixtures": {
     "backends": []
@@ -72,20 +69,8 @@
   "limits": {
     "max_turns": 24
   },
-  "novelty": "Real-code backend task: market_movers_table",
   "oracle_tool_calls": [],
   "prompt": "Implement the existing Market Movers table contract. Serve widgets.json with the declared symbol, percentage-change, and volume columns; implement GET /movers with at least two typed, non-placeholder rows; preserve CORS, health, and the pinned tests.",
-  "schema_version": "workspace-bench-task",
-  "source": "WorkspaceBench Phase 10 authored code track",
   "split": "train",
-  "subdomain": "openbb-custom-backends",
-  "success": {},
-  "tags": [
-    "build-openbb-backends",
-    "experimental-v0",
-    "single-table",
-    "implementation"
-  ],
-  "title": "Implement a market movers table backend",
-  "workflow": "custom-backend-development"
+  "success": {}
 }

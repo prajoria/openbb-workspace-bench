@@ -1,18 +1,16 @@
 {
   "id": "execution_ship",
-  "title": "Ship, open, and configure the Execution Room app",
-  "workflow": "execution-exception-review",
-  "subdomain": "execution",
-  "tags": [
-    "family-aggrid",
-    "cell2",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "aggrid",
-    "orchestration"
+  "category": "platform",
+  "family": "aggrid",
+  "difficulty": "hard",
+  "split": "train",
+  "prompt": "The desk needs a production-ready orders and venue quality workflow for an execution analyst. The workspace must cover execution quality by venue. The workspace must cover open execution exceptions. The workspace must cover slippage distribution by venue. Analysts need to inspect venue, fills, slippage percentage. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Execution Room', 'venues', 'Execution Desk Data', 'EDGX'. Use your judgment on the architecture and leave other work intact.",
+  "business_terms": [
+    "Execution Room",
+    "venues",
+    "Execution Desk Data",
+    "EDGX"
   ],
-  "prompt": "The desk needs a production-ready orders and venue quality workflow for an execution analyst. The workspace must cover execution quality by venue. The workspace must cover open execution exceptions. The workspace must cover slippage distribution by venue. Analysts need to inspect venue, fills, slippage percentage. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Execution Room', 'venues', 'Execution Desk Data', 'EDGX'. Use your judgment on the architecture and leave other work intact.",
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -40,7 +38,7 @@
   "success": {
     "required_generated_widgets": [
       {
-        "widget_type": "note",
+        "widget_type": "html",
         "data_contains": [
           "Execution Room",
           "venues",
@@ -314,29 +312,13 @@
     {
       "tool": "add_generative_widget",
       "args": {
-        "widget_type": "note",
+        "widget_type": "html",
         "name": "Execution Room",
-        "data": "Execution Room is live from Execution Desk Data: venues on tap. Configured venue=EDGX."
+        "data": "<section>Execution Room is live from Execution Desk Data: venues on tap. Configured venue=EDGX.</section>"
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "aggrid",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "Execution Room",
-    "venues",
-    "Execution Desk Data",
-    "EDGX"
-  ],
   "limits": {
-    "max_turns": 8
-  },
-  "split": "train",
-  "novelty": "Unique aggrid/execution_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_exception-metric:metric:exception_metric_value,capability_2_venue-scorecard:table-like:fills,slippage_pct,venue; generated:note@*:Execution Room,venues."
+    "max_turns": 14
+  }
 }

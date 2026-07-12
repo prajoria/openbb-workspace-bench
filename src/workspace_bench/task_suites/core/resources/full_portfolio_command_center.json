@@ -1,15 +1,9 @@
 {
   "id": "full_portfolio_command_center",
-  "title": "Index-Guided App Extension: Portfolio Command Center",
-  "capability": "dashboard-construction",
-  "workflow": "portfolio-morning-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-resources",
-    "resources",
-    "apps",
-    "widget-creation"
-  ],
+  "category": "dashboard",
+  "family": "resources",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "Read the app-builder index resource at openbb://workspace/app-builder/index, instantiate portfolio-command-center as PM Resource Command, navigate to holdings, add widget portfolio_command_center_holdings_sector_exposure, and add a note mentioning sector exposure and resource.",
   "fixtures": {
     "backends": [
@@ -120,15 +114,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "resources",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 9
-  },
-  "split": "train",
-  "novelty": "Unique resources/full_portfolio_command_center exercise using add_generative_widget, create_widget, get_widget_schema, manage_apps, manage_backends, navigate_workspace, read_workspace_resource with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_resource_read, missing_widget, schema_not_called_before_create, too_many_invalid_calls on stark-enterprise; artifact resource:openbb://workspace/app-builder/index; apps:portfolio-command-center; widgets:Bench Stark Enterprise/portfolio_command_center_holdings_sector_exposure@holdings; generated:note@holdings:sector exposure,resource."
+  }
 }

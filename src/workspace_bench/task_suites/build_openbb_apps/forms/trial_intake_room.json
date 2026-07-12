@@ -1,18 +1,14 @@
 {
   "id": "trial_intake_room",
-  "title": "Assemble the Trial Intake Room form app",
-  "workflow": "healthcare-catalyst-review",
-  "subdomain": "healthcare",
-  "tags": [
-    "family-forms",
-    "cell4",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "forms",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "forms",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "Build a healthcare-research analyst a dependable clinical catalysts and pipelines workspace. The workspace must cover capture a clinical trial readout note. The workspace must cover upcoming clinical trial readouts. The workspace must cover catalysts in the next 30 days. Analysts need to inspect ticker, phase, readout date. An analyst can filter the analysis by ticker. An analyst can choose the relevant business date. The user can enter the required details and submit the workflow. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Decide how best to organize the experience and preserve unrelated work.",
+  "business_terms": [
+    "ticker",
+    "date"
+  ],
   "fixtures": {},
   "initial_state": {},
   "allowed_tools": [
@@ -363,21 +359,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "forms",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [
-    "ticker",
-    "date"
-  ],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "validation",
-  "novelty": "Unique forms/trial_intake_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_catalyst-metric:metric:catalyst_metric_value,capability_2_trial-catalysts:table-like:phase,readout_date,ticker,capability_3_trial-readout-form:form:trial_readout_form_value."
+    "max_turns": 14
+  }
 }

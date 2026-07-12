@@ -1,14 +1,9 @@
 {
   "id": "dashboard_portfolio_prompt_dashboard",
-  "title": "Portfolio Prompt Dashboard",
-  "capability": "dashboard-construction",
-  "workflow": "portfolio-risk-review",
-  "subdomain": "portfolio-management",
-  "tags": [
-    "family-prompts",
-    "prompts",
-    "multi-widget"
-  ],
+  "category": "dashboard",
+  "family": "prompts",
+  "difficulty": "hard",
+  "split": "validation",
   "prompt": "After fetching workspace_tool_usage, create dashboard Portfolio Prompt Dashboard, add Bench Portfolio/holdings_table and Bench Portfolio/risk_metrics with schema-first discipline, and add a note mentioning holdings and schema.",
   "fixtures": {
     "backends": [
@@ -137,15 +132,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "dashboard",
-  "family": "prompts",
-  "difficulty": "hard",
   "limits": {
     "max_turns": 12
-  },
-  "split": "validation",
-  "novelty": "Unique prompts/dashboard_portfolio_prompt_dashboard exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_prompt, list_available_widgets, manage_dashboard with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_result, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on portfolio; artifact prompts:workspace_tool_usage; widgets:Bench Portfolio/holdings_table@*,Bench Portfolio/risk_metrics@*; generated:note@*:holdings,schema."
+  }
 }

@@ -1,17 +1,9 @@
 {
   "id": "case_room_omni_room",
-  "title": "Assemble the Case QA Room",
-  "workflow": "compliance-surveillance",
-  "subdomain": "compliance",
-  "tags": [
-    "family-advanced",
-    "cell3",
-    "build-openbb-apps",
-    "widgets-json",
-    "apps-json",
-    "advanced",
-    "multi-tab"
-  ],
+  "category": "platform",
+  "family": "advanced",
+  "difficulty": "hard",
+  "split": "train",
   "prompt": "The desk needs a production-ready cases and compliance alerts workflow for a surveillance analyst. The workspace must cover question answering over surveillance cases. The workspace must cover open surveillance alerts. The workspace must cover open alert count. Analysts need to inspect alert ID, desk, severity, age days. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Use your judgment on the architecture and leave other work intact.",
   "fixtures": {},
   "initial_state": {},
@@ -387,18 +379,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-build-apps-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "platform",
-  "family": "advanced",
-  "capability": "widget-building",
-  "specification_level": "open-brief",
-  "difficulty": "hard",
-  "business_terms": [],
   "limits": {
-    "max_turns": 6
-  },
-  "split": "train",
-  "novelty": "Unique advanced/case_room_omni_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_alert-metric:metric:alert_metric_value,capability_2_alert-queue:table-like:age_days,alert_id,desk,severity,capability_3_case-room-omni:any:case_room_omni_value."
+    "max_turns": 14
+  }
 }

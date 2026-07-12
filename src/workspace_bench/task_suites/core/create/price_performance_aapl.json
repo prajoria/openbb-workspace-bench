@@ -1,13 +1,9 @@
 {
   "id": "price_performance_aapl",
-  "title": "Create Price Performance",
-  "capability": "widget-creation",
-  "workflow": "equity-tearsheet",
-  "subdomain": "equity-research",
-  "tags": [
-    "family-create",
-    "widget-creation"
-  ],
+  "category": "single-widget",
+  "family": "create",
+  "difficulty": "easy",
+  "split": "train",
   "prompt": "On the active dashboard, create a Price Performance widget (widget_id price_performance) from the Bench Equities backend with data_args {\"symbol\": \"AAPL\"}.",
   "fixtures": {
     "backends": [
@@ -73,15 +69,7 @@
       }
     }
   ],
-  "domain": "finance",
-  "source": "workspace-bench-gen",
-  "schema_version": "workspace-bench-task",
-  "category": "single-widget",
-  "family": "create",
-  "difficulty": "easy",
   "limits": {
     "max_turns": 5
-  },
-  "split": "train",
-  "novelty": "Unique create/price_performance_aapl exercise using create_widget, get_workspace_snapshot with checks layout_out_of_grid, layout_overlap, missing_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact widgets:Bench Equities/price_performance@*."
+  }
 }
