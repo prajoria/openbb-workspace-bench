@@ -25,5 +25,3 @@ WORKSPACE_TOOL_NAMES = (
     "get_workspace_prompt",
     "assign_tasks_to_agents",
 )
-
-WORKSPACE_TOOL_NAME_SET = frozenset(WORKSPACE_TOOL_NAMES)

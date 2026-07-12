@@ -1591,15 +1591,6 @@ def cache_policy(minutes: int) -> tuple[dict, str]:
     )
 
 
-def refresh_policy(seconds: int) -> tuple[dict, str]:
-    """(config dict, policy clause) for an auto-refresh policy in seconds."""
-
-    return (
-        {"refetchInterval": seconds * 1000},
-        f"it auto-refreshes every {seconds} seconds",
-    )
-
-
 DERIVATION_RULES = (
     "Derive the table columns from the served rows using the workspace "
     "conventions: every field in the rows becomes a column, in row order; "
@@ -1807,28 +1798,6 @@ def widget_brief_text(widget_id: str, definition: dict) -> str:
     for key in ("dataKey", "defaultSymbol", "updateFrequency", "wsRowIdColumn"):
         if key in data:
             parts.append(f"data.{key} {json.dumps(data[key])}")
-    return ", ".join(parts)
-
-
-def app_brief_text(app: dict) -> str:
-    parts = [f'app "{app["name"]}"']
-    if app.get("description"):
-        parts.append(f'description "{app["description"]}"')
-    if "template_id" in app:
-        parts.append(f"template_id {app['template_id']}")
-    if "allowCustomization" in app:
-        parts.append(f"allowCustomization {json.dumps(app['allowCustomization'])}")
-    for tab_id, tab in app.get("tabs", {}).items():
-        parts.append(
-            f'tab `{tab_id}` named "{tab["name"]}" with layout (exact JSON): '
-            f"{_compact_json(tab.get('layout', []))}"
-        )
-    groups = app.get("groups") or []
-    if groups:
-        parts.append(f"groups (exact JSON): {_compact_json(groups)}")
-    prompts = app.get("prompts")
-    if prompts:
-        parts.append("suggested prompts: " + "; ".join(f'"{prompt}"' for prompt in prompts))
     return ", ".join(parts)
 
 

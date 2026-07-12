@@ -14,6 +14,7 @@ from workspace_bench.reports.model_compare import (
     ensure_run_manifest,
     finalize_usage,
     openai_usage,
+    summarize_runs,
 )
 
 PROPOSE = runpy.run_path(
@@ -71,6 +72,21 @@ def test_calibration_metrics_include_variance_recovery_and_cost() -> None:
     forms = next(item for item in matrix if item["family"] == "forms")
     assert forms["outcomes"] == [True, False]
     assert forms["flip_rate"] == 1.0
+
+
+def test_run_summary_builds_family_difficulty_matrix_from_result_rows() -> None:
+    rows = [
+        {**_row("build-openbb-apps/forms/easy", 1, True), "difficulty": "easy"},
+        {**_row("build-openbb-apps/forms/hard", 1, False), "difficulty": "hard"},
+        {**_row("build-openbb-apps/debug/hard", 1, True), "difficulty": "hard"},
+    ]
+
+    summary = summarize_runs([], result_rows=rows)
+
+    assert list(summary["family_difficulty_matrix"]) == ["debug", "forms"]
+    assert list(summary["family_difficulty_matrix"]["forms"]) == ["easy", "hard"]
+    assert summary["family_difficulty_matrix"]["forms"]["easy"]["strict_pass_rate"] == 1.0
+    assert summary["family_difficulty_matrix"]["forms"]["hard"]["strict_pass_rate"] == 0.0
 
 
 def test_openai_usage_prefers_provider_cost_and_can_estimate() -> None:

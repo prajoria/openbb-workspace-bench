@@ -739,8 +739,6 @@ def export_png(svg_path: Path, png_path: Path) -> bool:
     magick = shutil.which("magick") or shutil.which("convert")
     if magick:
         command = [magick, str(svg_path), str(png_path)]
-        if Path(magick).name == "convert":
-            command = [magick, str(svg_path), str(png_path)]
         completed = subprocess.run(
             command,
             capture_output=True,
@@ -2207,23 +2205,21 @@ def summarize_runs(
     by_family_metrics: dict[str, dict[str, Any]] = {}
     by_difficulty_metrics: dict[str, dict[str, Any]] = {}
     family_difficulty_matrix: dict[str, dict[str, dict[str, Any]]] = {}
-    for row in rows:
-        family = str(row.get("family") or "unknown")
-        difficulty = str(row.get("difficulty") or "unknown")
-        family_difficulty_matrix.setdefault(family, {}).setdefault(difficulty, {})
     for family in sorted({str(row.get("family") or "unknown") for row in rows}):
         family_rows = [row for row in rows if str(row.get("family") or "unknown") == family]
         by_family_metrics[family] = summarize_result_rows(family_rows)
+        difficulty_metrics: dict[str, dict[str, Any]] = {}
         for difficulty in sorted(
             {str(row.get("difficulty") or "unknown") for row in family_rows}
         ):
-            family_difficulty_matrix[family][difficulty] = summarize_result_rows(
+            difficulty_metrics[difficulty] = summarize_result_rows(
                 [
                     row
                     for row in family_rows
                     if str(row.get("difficulty") or "unknown") == difficulty
                 ]
             )
+        family_difficulty_matrix[family] = difficulty_metrics
     for difficulty in sorted(
         {str(row.get("difficulty") or "unknown") for row in rows}
     ):

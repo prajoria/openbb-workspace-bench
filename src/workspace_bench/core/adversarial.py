@@ -507,17 +507,6 @@ def generate_adversarial_candidates(
     return tuple(candidates)
 
 
-def candidate_applicable(task: Task, oracle: RunResult, archetype: str) -> bool:
-    """Return whether the generator can express an archetype for this task."""
-
-    if archetype not in ADVERSARIAL_ARCHETYPES:
-        raise ValueError(f"unknown adversarial archetype {archetype!r}")
-    return any(
-        candidate.archetype == archetype
-        for candidate in generate_adversarial_candidates(task, oracle)
-    )
-
-
 def _connected_pair_target(
     context: AdversarialContext,
 ) -> tuple[str, str, str] | None:

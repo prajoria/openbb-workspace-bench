@@ -1152,7 +1152,7 @@ class Task:
             if schema_version is None:
                 raise ValueError(
                     "task is missing schema_version; migrate legacy tasks with "
-                    "Task.from_legacy_dict() before loading"
+                    "Task.migrate_legacy_payload() before loading"
                 )
             raise ValueError(
                 f"unsupported task schema_version {schema_version!r}; "
@@ -1244,26 +1244,6 @@ class Task:
 
         suite = self.suite.suite_id if self.suite else "local"
         return f"{suite}/{self.family}/{self.id}"
-
-    @classmethod
-    def from_legacy_dict(
-        cls,
-        payload: JsonDict,
-        source_path: Path | None = None,
-        default_split: str = "dev",
-    ) -> "Task":
-        """Explicitly migrate a pre-versioned task and load the strict result.
-
-        Legacy inference is intentionally isolated here: current task loading
-        never turns a misspelled category into a valid task.
-        """
-
-        migrated = cls.migrate_legacy_payload(payload)
-        return cls.from_dict(
-            migrated,
-            source_path=source_path,
-            default_split=default_split,
-        )
 
     @staticmethod
     def migrate_legacy_payload(payload: JsonDict) -> JsonDict:

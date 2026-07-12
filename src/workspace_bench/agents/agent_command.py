@@ -8,8 +8,8 @@ import subprocess
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
 
+from workspace_bench.core._proc import decode_output, truncate_output
 from workspace_bench.core.episode import WorkspaceEpisode
 from workspace_bench.core.models import (
     BENCHMARK_NAME,
@@ -177,8 +177,8 @@ def run_agent_command(
     except subprocess.TimeoutExpired as error:
         timed_out = True
         exit_code = None
-        stdout = _decode_timeout_output(error.stdout)
-        stderr = _decode_timeout_output(error.stderr)
+        stdout = decode_output(error.stdout)
+        stderr = decode_output(error.stderr)
 
     try:
         tool_calls = load_tool_calls(output_path)
@@ -206,23 +206,9 @@ def run_agent_command(
         command=command,
         exit_code=exit_code,
         timed_out=timed_out,
-        stdout=_truncate(stdout),
-        stderr=_truncate(stderr),
+        stdout=truncate_output(stdout),
+        stderr=truncate_output(stderr),
         run_dir=resolved_run_dir,
         task_path=task_path,
         output_path=output_path,
     )
-
-
-def _decode_timeout_output(value: Any) -> str:
-    if value is None:
-        return ""
-    if isinstance(value, bytes):
-        return value.decode("utf-8", errors="replace")
-    return str(value)
-
-
-def _truncate(value: str, max_chars: int = 4000) -> str:
-    if len(value) <= max_chars:
-        return value
-    return value[:max_chars] + "\n...[truncated]"

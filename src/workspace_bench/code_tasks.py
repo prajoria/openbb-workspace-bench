@@ -18,6 +18,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
+from workspace_bench.core._proc import decode_output, truncate_output
 from workspace_bench.core.models import CodeProbe, CodeTaskSpec, JsonDict, Task
 from workspace_bench.workspace.backend_validation import validate_apps_json, validate_widgets_json
 from workspace_bench.workspace.runtime import contains_placeholder, response_shape_error
@@ -203,16 +204,16 @@ def run_code_task(
     except subprocess.TimeoutExpired as error:
         timed_out = True
         exit_code = None
-        stdout = _decode_output(error.stdout)
-        stderr = _decode_output(error.stderr)
+        stdout = decode_output(error.stdout)
+        stderr = decode_output(error.stderr)
     evaluation = evaluate_code_repository(task, resolved)
     return CodeAgentRun(
         evaluation=evaluation,
         command=agent_command,
         exit_code=exit_code,
         timed_out=timed_out,
-        stdout=_truncate(stdout),
-        stderr=_truncate(stderr),
+        stdout=truncate_output(stdout),
+        stderr=truncate_output(stderr),
         task_path=task_path,
         brief_path=brief_path,
     )
@@ -859,18 +860,6 @@ def _ephemeral_port() -> int:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.bind(("127.0.0.1", 0))
         return int(sock.getsockname()[1])
-
-
-def _decode_output(value: Any) -> str:
-    if value is None:
-        return ""
-    if isinstance(value, bytes):
-        return value.decode("utf-8", errors="replace")
-    return str(value)
-
-
-def _truncate(value: str, max_chars: int = 4000) -> str:
-    return value if len(value) <= max_chars else value[:max_chars] + "\n...[truncated]"
 
 
 def _tail(value: str, max_chars: int = 1200) -> str:

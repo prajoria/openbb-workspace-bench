@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 from urllib.error import HTTPError, URLError
-from urllib.parse import parse_qs, urlencode, urljoin, urlparse
+from urllib.parse import urlencode, urljoin, urlparse
 from urllib.request import Request, urlopen
 
 from workspace_bench.core.models import (
@@ -848,12 +848,3 @@ def _form_endpoint_error(
         "The form submission route does not match the backend contract; "
         f"expected {dataset.form_endpoint!r}."
     )
-
-
-def request_query(path: str) -> JsonDict:
-    """Parse a query string for tests and fixture diagnostics."""
-
-    return {
-        key: values[-1] if len(values) == 1 else values
-        for key, values in parse_qs(urlparse(path).query).items()
-    }
