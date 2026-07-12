@@ -13,7 +13,7 @@ Retired core artifacts are marked historical/pre-rename and pending re-run;
 they are never joined or pooled. No model calls are made.
 
 Usage:
-    uv run python scripts/reports/compute_significance.py
+    uv run workspace-bench compile significance
 """
 
 from __future__ import annotations
@@ -27,9 +27,9 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[3]
 SUITE_DIRS = {
-    "core": REPO / "src/workspace_bench/core/task_suites/core",
+    "core": REPO / "src/workspace_bench/task_suites/core",
     "build-openbb-apps": (
-        REPO / "src/workspace_bench/core/task_suites/build_openbb_apps"
+        REPO / "src/workspace_bench/task_suites/build_openbb_apps"
     ),
 }
 BUILD_CALIBRATION_RUNS = (

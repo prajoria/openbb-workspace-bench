@@ -95,6 +95,21 @@ def main(argv: list[str] | None = None) -> int:
     report_parser.add_argument("--json", action="store_true", help="Emit JSON.")
     report_parser.add_argument("--output", help="Write report to a file.")
 
+    compile_parser = subparsers.add_parser(
+        "compile",
+        help="Compile analysis reports from stored run results.",
+    )
+    compile_parser.add_argument(
+        "kind",
+        choices=["calibration", "suites", "significance", "difficulty"],
+        help="Which report to compile.",
+    )
+    compile_parser.add_argument(
+        "compile_args",
+        nargs=argparse.REMAINDER,
+        help="Arguments forwarded to the report compiler (see its --help).",
+    )
+
     run_parser = subparsers.add_parser("run", help="Run tasks.")
     run_parser.add_argument("--task", help="Task id. Runs all when omitted.")
     run_parser.add_argument("--task-file", help="Run one task JSON file.")
@@ -279,6 +294,8 @@ def main(argv: list[str] | None = None) -> int:
         return _cmd_manifest(args)
     if args.command == "report":
         return _cmd_report(args)
+    if args.command == "compile":
+        return _cmd_compile(args)
     if args.command == "run":
         return _cmd_run(args)
     if args.command == "serve-fixture":
@@ -466,6 +483,18 @@ def _cmd_report(args: argparse.Namespace) -> int:
     else:
         print(rendered)
     return 0
+
+
+def _cmd_compile(args: argparse.Namespace) -> int:
+    if args.kind == "calibration":
+        from workspace_bench.reports.calibration import main as compile_main
+    elif args.kind == "suites":
+        from workspace_bench.reports.suites import main as compile_main
+    elif args.kind == "significance":
+        from workspace_bench.reports.significance import main as compile_main
+    else:
+        from workspace_bench.reports.difficulty import main as compile_main
+    return compile_main(list(args.compile_args))
 
 
 def _cmd_run(args: argparse.Namespace) -> int:

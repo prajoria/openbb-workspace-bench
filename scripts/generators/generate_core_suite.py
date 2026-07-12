@@ -1,11 +1,11 @@
-"""Generate the bundled WorkspaceBench task pack (tool-centric ladders).
+"""Generate the bundled WorkspaceBench core suite (tool-centric ladders).
 
 TMax-style compositional generation, restructured so that **every family is
 anchored on one MCP tool and carries a complete r0-r4 ladder**:
 
     15 tool families x 5 levels x 4 tasks = 300
 
-Tiers are structural (composition, pathology, discovery pressure, budget),
+Levels are structural (composition, pathology, discovery pressure, budget),
 never adjectives. Difficulty labels are balanced across the suite rather than
 used as level names: r0 is easy, r2 is medium, r4 is hard, while each r1 cell
 splits 2 easy / 2 medium and each r3 cell splits 2 medium / 2 hard. This yields
@@ -35,7 +35,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
-from _authoring import (
+from _assembly import (
     ArtifactDiscriminator,
     CheckTypePolicy,
     NoveltyPolicy,
@@ -53,7 +53,7 @@ from workspace_bench.workspace.fixtures import get_fixture_backend
 
 REPO = Path(__file__).resolve().parents[2]
 STARK = json.loads((REPO / "src/workspace_bench/workspace/data/stark_enterprise.json").read_text())
-BUNDLED_OUT_DIR = REPO / "src/workspace_bench/core/task_suites/core"
+BUNDLED_OUT_DIR = REPO / "src/workspace_bench/task_suites/core"
 OUT_DIRS = (BUNDLED_OUT_DIR,)
 
 STK = "Bench Stark Enterprise"
@@ -4645,7 +4645,7 @@ for idx, (origin, wrong_widget, param, wrong_value, right_value, companion, comp
 
 
 # ===========================================================================
-# Write the pack + print the distribution matrix
+# Write the suite + print the distribution matrix
 # ===========================================================================
 
 RUNGS = ["r0", "r1", "r2", "r3", "r4"]

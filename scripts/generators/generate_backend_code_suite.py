@@ -12,7 +12,7 @@ from typing import Any
 
 
 REPO = Path(__file__).resolve().parents[2]
-OUTPUT = REPO / "src/workspace_bench/core/task_suites/build_openbb_backends/backend_code"
+OUTPUT = REPO / "src/workspace_bench/task_suites/build_openbb_backends/backend_code"
 SCHEMA_VERSION = "workspace-bench-task"
 CODE_SCHEMA_VERSION = "workspace-bench-code-task/v0"
 INSTALL = ["uv", "sync", "--quiet"]

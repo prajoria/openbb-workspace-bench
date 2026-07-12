@@ -14,9 +14,9 @@ from workspace_bench.core.models import RunResult, Task, TaskSuiteManifest
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
-CORE_TASKS_PACKAGE = "workspace_bench.core.task_suites.core"
-BUILD_APPS_TASKS_PACKAGE = "workspace_bench.core.task_suites.build_openbb_apps"
-BUILD_BACKENDS_TASKS_PACKAGE = "workspace_bench.core.task_suites.build_openbb_backends"
+CORE_TASKS_PACKAGE = "workspace_bench.task_suites.core"
+BUILD_APPS_TASKS_PACKAGE = "workspace_bench.task_suites.build_openbb_apps"
+BUILD_BACKENDS_TASKS_PACKAGE = "workspace_bench.task_suites.build_openbb_backends"
 TASK_SUITE_MANIFEST = "task_suite.json"
 BUILTIN_TASK_SUITES = {
     "core": CORE_TASKS_PACKAGE,

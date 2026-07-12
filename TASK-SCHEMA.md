@@ -4,7 +4,7 @@ Reference for authoring `workspace-bench-task` JSON. See [README](README.md) for
 project overview and [CONTRIBUTING](CONTRIBUTING.md) for the authoring workflow.
 
 Tasks are strict `workspace-bench-task` JSON objects under
-`src/workspace_bench/core/task_suites/<suite>/<family>/`; private
+`src/workspace_bench/task_suites/<suite>/<family>/`; private
 `--task-dir` trees use the same schema. Unknown fields are rejected.
 
 ## Task fields

@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any, cast
 from urllib.parse import urlparse
 
-from _authoring import (
+from _assembly import (
     ArtifactDiscriminator,
     CheckTypePolicy,
     NoveltyPolicy,
@@ -31,7 +31,7 @@ from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
 from workspace_bench.workspace.widget_params import flatten_params
 
 REPO = Path(__file__).resolve().parents[3]
-BUNDLED_OUT_DIR = REPO / "src/workspace_bench/core/task_suites/build_openbb_apps"
+BUNDLED_OUT_DIR = REPO / "src/workspace_bench/task_suites/build_openbb_apps"
 
 RUNGS = ("r0", "r1", "r2", "r3", "r4")
 # r4 slack is wider than part 1's because building oracles are SHORT (a 2-call

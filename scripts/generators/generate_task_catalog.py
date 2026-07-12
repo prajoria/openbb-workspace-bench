@@ -12,8 +12,8 @@ import re
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-PACK_DIR = REPO / "src/workspace_bench/core/task_suites/core"
-BUILD_PACK_DIR = REPO / "src/workspace_bench/core/task_suites/build_openbb_apps"
+PACK_DIR = REPO / "src/workspace_bench/task_suites/core"
+BUILD_PACK_DIR = REPO / "src/workspace_bench/task_suites/build_openbb_apps"
 REPORT = REPO / "runs/reports/benchmark-report.md"
 OUT = REPO / "runs/reports/task-catalog.md"
 

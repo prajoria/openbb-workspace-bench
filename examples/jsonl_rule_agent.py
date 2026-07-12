@@ -1,6 +1,6 @@
 """Repo-checkout wrapper for the packaged demo agent."""
 
-from workspace_bench.examples.jsonl_rule_agent import main
+from workspace_bench.agents.rule_agent import main
 
 
 if __name__ == "__main__":

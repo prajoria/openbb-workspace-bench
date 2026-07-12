@@ -135,7 +135,7 @@ def test_batch_runner_executes_one_real_jsonl_agent_attempt(tmp_path) -> None:
         label="JSONL rule agent",
         command=(
             f"{shlex.quote(sys.executable)} "
-            "-m workspace_bench.examples.jsonl_rule_agent"
+            "-m workspace_bench.agents.rule_agent"
         ),
         env={},
         provider="custom",

@@ -20,8 +20,8 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 SUITES = {
-    "core": REPO / "src/workspace_bench/core/task_suites/core",
-    "build-openbb-apps": (REPO / "src/workspace_bench/core/task_suites/build_openbb_apps"),
+    "core": REPO / "src/workspace_bench/task_suites/core",
+    "build-openbb-apps": (REPO / "src/workspace_bench/task_suites/build_openbb_apps"),
 }
 EXPECTED_TASKS = {"core": 300, "build-openbb-apps": 236}
 PROMPT_WORD_CAPS = {"core": 350, "build-openbb-apps": 180}

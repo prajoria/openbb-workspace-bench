@@ -47,7 +47,7 @@ uv run python scripts/audits/report_prompt_stats.py
 ```
 
 The core and build-suite generators share their deterministic assembly mechanics
-in `scripts/generators/_authoring/`. Keep suite policy in small callbacks/configuration
+in `scripts/generators/_assembly/`. Keep suite policy in small callbacks/configuration
 (identity cleanup, artifact prefixes, exceptional cell sizes) rather than adding
 a second implementation of phrasing, difficulty, split, novelty, or matrix logic.
 After changing either generator, run it twice and verify that the bundled JSON is

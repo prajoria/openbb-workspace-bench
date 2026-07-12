@@ -13,8 +13,8 @@ import json
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-PACK = REPO / "src/workspace_bench/core/task_suites/core"
-BUILD_PACK = REPO / "src/workspace_bench/core/task_suites/build_openbb_apps"
+PACK = REPO / "src/workspace_bench/task_suites/core"
+BUILD_PACK = REPO / "src/workspace_bench/task_suites/build_openbb_apps"
 OUT_MD = REPO / "runs/reports/tool-coverage-matrix.md"
 OUT_JSON = REPO / "runs/reports/tool-matrix-data.json"
 

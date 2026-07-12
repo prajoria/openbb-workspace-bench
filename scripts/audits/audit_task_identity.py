@@ -20,10 +20,10 @@ from workspace_bench.core.prompt_openness import prompt_openness_issues
 
 REPO = Path(__file__).resolve().parents[2]
 SUITE_DIRS = {
-    "core": REPO / "src/workspace_bench/core/task_suites/core",
-    "build-openbb-apps": REPO / "src/workspace_bench/core/task_suites/build_openbb_apps",
+    "core": REPO / "src/workspace_bench/task_suites/core",
+    "build-openbb-apps": REPO / "src/workspace_bench/task_suites/build_openbb_apps",
     "build-openbb-backends": (
-        REPO / "src/workspace_bench/core/task_suites/build_openbb_backends"
+        REPO / "src/workspace_bench/task_suites/build_openbb_backends"
     ),
 }
 REFERENCE_FILES = (

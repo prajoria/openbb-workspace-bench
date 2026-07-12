@@ -56,9 +56,9 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 "workspace_bench.core" = ["*.json"]
-"workspace_bench.core.task_suites.core" = ["*.json", "**/*.json"]
-"workspace_bench.core.task_suites.build_openbb_apps" = ["*.json", "**/*.json"]
-"workspace_bench.core.task_suites.build_openbb_backends" = [
+"workspace_bench.task_suites.core" = ["*.json", "**/*.json"]
+"workspace_bench.task_suites.build_openbb_apps" = ["*.json", "**/*.json"]
+"workspace_bench.task_suites.build_openbb_backends" = [
   "*.json", "**/*.json", "**/*.py", "**/*.toml", "**/*.md"
 ]
 "workspace_bench.workspace.data" = ["*.json"]

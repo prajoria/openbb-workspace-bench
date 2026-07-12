@@ -23,7 +23,7 @@ Use this checklist before announcing a public Workspace Bench release.
 - [ ] `uv run workspace-bench run --agent oracle` passes all core tasks; the two other stable/code suites use their suite-specific commands above.
 - [ ] `uv run workspace-bench run --agent noop` fails every core task; the suite validations prove their own no-op baselines.
 - [ ] `uv run --extra dev workspace-bench export-task --task core/create/price_performance_aapl --output /tmp/workspace-task.json` succeeds.
-- [ ] `uv run --extra dev workspace-bench run-agent-command --task core/create/price_performance_aapl --agent-command "python -m workspace_bench.examples.jsonl_rule_agent"` passes.
+- [ ] `uv run --extra dev workspace-bench run-agent-command --task core/create/price_performance_aapl --agent-command "python -m workspace_bench.agents.rule_agent"` passes.
 - [ ] `uv run workspace-bench report --suite core --output runs/reports/benchmark-report.md` succeeds.
 - [ ] `uv run --extra live python scripts/audits/audit_hosted_surface.py` reports no missing tools, prompts, or resources against the hosted Workspace MCP (needs `WORKSPACE_MCP_TOKEN` in `.env`).
 - [ ] Stable task counts: exactly 300 in `core`, exactly 236 in `build-openbb-apps` (536 total); experimental `build-openbb-backends` is exactly 12 and reported separately.
@@ -33,7 +33,7 @@ Use this checklist before announcing a public Workspace Bench release.
 - [ ] `runs/reports/calibration.json` is compiled from the three complete 2026-07 guided runs; OpenRouter credit failures appear only as excluded limitations.
 - [ ] Difficulty relabel review requires both repeats, retains one-episode knife edges, and forces zero-pass debug tasks hard; prompt+success hashes are unchanged for every relabel.
 - [ ] `runs/reports/suites.json` uses the three current build runs and marks core historical/pre-rename with a pending re-run, excluding cross-era pooling.
-- [ ] `runs/reports/significance.json` is recomputed (`scripts/reports/compute_significance.py`) and the README board notes match it; paired build episodes retain both repeats.
+- [ ] `runs/reports/significance.json` is recomputed (`workspace-bench compile significance`) and the README board notes match it; paired build episodes retain both repeats.
 - [ ] README quick start, suites table, and aggregate command are accurate.
 - [ ] `runs/reports/task-catalog.md` is regenerated and covers both stable simulator suites (536 entries); `tool-coverage-matrix.md` and `tool-matrix-data.json` are regenerated beside it.
 - [ ] `uv run python scripts/generators/generate_backend_code_suite.py` is deterministic across two runs; starter/oracle fixtures are generator-owned and excluded from the Workspace MCP tool matrix.

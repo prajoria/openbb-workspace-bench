@@ -74,7 +74,7 @@ jobs:
         run: uv run --extra dev workspace-bench export-task --task core/create/price_performance_aapl --output /tmp/workspace-task.json
 
       - name: Run demo external agent
-        run: uv run --extra dev workspace-bench run-agent-command --task core/create/price_performance_aapl --agent-command "python -m workspace_bench.examples.jsonl_rule_agent"
+        run: uv run --extra dev workspace-bench run-agent-command --task core/create/price_performance_aapl --agent-command "python -m workspace_bench.agents.rule_agent"
 
       - name: Build manifests
         run: |

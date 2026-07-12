@@ -185,9 +185,9 @@ valid-attempt pass rates are 94.3 / 93.7 / 77.4 / 70.3 / 64.0 / 53.2%.
 Full per-task results and traces are committed under `runs/comparison/`,
 portable rollout JSONL for all 1,800 episodes under `runs/exports/`, the
 compiled report at `runs/reports/calibration.json` (built by
-`scripts/reports/compile_calibration.py`), and confidence intervals, held-out-split
+`workspace-bench compile calibration`), and confidence intervals, held-out-split
 slices, and all pairwise tests at `runs/reports/significance.json` (built by
-`scripts/reports/compute_significance.py`). The current analysis script additionally
+`workspace-bench compile significance`). The current analysis script additionally
 reports family-cluster bootstrap intervals; task-IID Wilson and McNemar
 statistics are retained only as descriptive historical measures.
 
@@ -232,7 +232,7 @@ Run the included demo agent:
 ```bash
 uv run workspace-bench run-agent-command \
   --task core/create/price_performance_aapl \
-  --agent-command "python -m workspace_bench.examples.jsonl_rule_agent" \
+  --agent-command "python -m workspace_bench.agents.rule_agent" \
   --json
 ```
 
@@ -323,7 +323,7 @@ Use `--track cold` to remove both; the track is recorded in run metadata and
 guided/cold scores must be reported separately.
 
 The task's rubric lives next to its prompt in the task JSON
-(`src/workspace_bench/core/task_suites/<suite>/<family>/<id>.json`) — the
+(`src/workspace_bench/task_suites/<suite>/<family>/<id>.json`) — the
 `success` block is exactly what the grader checks, and `oracle_tool_calls` is
 a known-good solution to diff against.
 
@@ -374,12 +374,12 @@ Compile a smoke or full result directory into family×difficulty and per-task
 calibration matrices:
 
 ```bash
-uv run python scripts/reports/compile_calibration.py runs/comparison/<run-id> \
+uv run workspace-bench compile calibration runs/comparison/<run-id> \
   --output runs/comparison/<run-id>/calibration.json
 ```
 
 After at least two model result sets exist,
-`scripts/reports/propose_measured_difficulty.py` produces a raw band proposal and a
+`workspace-bench compile difficulty` produces a raw band proposal and a
 conservatively approved override payload. `--apply-overrides` writes the
 approved table to `src/workspace_bench/core/measured_difficulty.json`; the
 generator consumes it and verifies the empirical counts.
@@ -475,7 +475,7 @@ run directory per model per suite:
 
 ```bash
 # each evaluator invocation writes one run directory per model
-uv run python scripts/reports/compile_suites_report.py \
+uv run workspace-bench compile suites \
   --run build-openbb-apps=runs/comparison/build-calibration-202607-regraded/openai-gpt-5.5.json \
   --historical-run core=runs/comparison/core-gpt-5.5 \
   --output /tmp/workspace-bench-suites-example.json
@@ -738,11 +738,11 @@ For readers arriving from other benchmarks:
 ```text
 src/workspace_bench/
   cli.py                 Command line interface
-  core/                  Task dataclasses, bundled tasks, episodes, runner, graders
-    task_suites/         Bundled suites, organized as suite/family/task:
-      core/                               Core operating suite
-        create/ update/ ...                Family directories
-      build_openbb_apps/                  Build suite families
+  core/                  Task dataclasses, episodes, runner, graders
+  task_suites/           Bundled suites, organized as suite/family/task:
+    core/                               Core operating suite
+      create/ update/ ...                Family directories
+    build_openbb_apps/                  Build suite families
   workspace/             Fixture backends, simulator, live workspace-mcp smoke bridge
     data/                Packaged fixture metadata such as Stark widgets/apps
   agents/                Oracle/noop agents, JSONL command protocol, model adapter helpers
@@ -752,10 +752,9 @@ src/workspace_bench/
   __init__.py            Small public convenience surface
 scripts/
   generators/             Deterministic suite, catalog, matrix, and fixture generators
-    _authoring/            Shared deterministic suite-authoring harness
+    _assembly/             Shared deterministic suite-assembly harness
     build_apps_suite/      build-openbb-apps family modules
   audits/                 Local, release, hosted-surface, and prompt audits
-  reports/                Analysis and report compatibility entry points
 runs/
   comparison/              Historical boards plus the 2026-07 build calibration
   exports/                 Rollout JSONL for the 1,800 core episodes
