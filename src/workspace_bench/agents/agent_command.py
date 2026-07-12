@@ -13,14 +13,14 @@ from typing import Any
 from workspace_bench.core.episode import WorkspaceEpisode
 from workspace_bench.core.models import (
     BENCHMARK_NAME,
-    BENCHMARK_RELEASE_ID,
-    BENCHMARK_VERSION,
     CANARY_GUID,
+    TASK_SCHEMA_VERSION,
     JsonDict,
     RunResult,
     Task,
     ToolCall,
 )
+from workspace_bench.core.provenance import git_provenance
 
 
 @dataclass(frozen=True)
@@ -41,28 +41,34 @@ class AgentCommandRun:
 def build_task_envelope(task: Task) -> JsonDict:
     """Build the public task payload handed to external agents."""
 
+    suite = task.suite
     return {
-        "schema_version": "workspace-bench-task-v2",
+        "schema_version": "workspace-bench-envelope",
         "benchmark": {
             "name": BENCHMARK_NAME,
-            "version": BENCHMARK_VERSION,
-            "release_id": BENCHMARK_RELEASE_ID,
+            "suite_id": suite.suite_id if suite else "local",
+            "content_sha256": suite.content_sha256 if suite else None,
+            **git_provenance(source_paths=[task.source_path] if task.source_path else None),
             "canary_guid": CANARY_GUID,
         },
         "task": {
+            "schema_version": TASK_SCHEMA_VERSION,
             "id": task.id,
+            "qualified_id": task.qualified_id,
             "title": task.title,
             "category": task.category,
-            "level": task.level,
+            "family": task.family,
             "capability": task.capability,
             "workflow": task.workflow,
             "domain": task.domain,
             "subdomain": task.subdomain,
+            "specification_level": task.specification_level,
             "difficulty": task.difficulty,
             "split": task.split,
             "tags": list(task.tags),
             "source": task.source,
             "prompt": task.prompt,
+            "business_terms": list(task.business_terms),
             "fixtures": {
                 "backends": [
                     {
