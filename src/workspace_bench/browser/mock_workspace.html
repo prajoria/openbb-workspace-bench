@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WorkspaceBench Mock Workspace</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, system-ui, sans-serif; }
+    body { margin: 0; background: #0b0f14; color: #e8edf3; }
+    header { display: flex; gap: 12px; align-items: center; padding: 16px 22px; border-bottom: 1px solid #263241; }
+    button, input { border: 1px solid #43536a; border-radius: 6px; background: #131b26; color: inherit; padding: 8px 10px; }
+    button { cursor: pointer; }
+    main { padding: 18px 22px; }
+    #backend-form { display: none; gap: 8px; margin: 12px 0; }
+    #catalog { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 18px; }
+    #tabs { display: flex; gap: 7px; margin-bottom: 14px; }
+    .tab.active { border-color: #26c6a5; color: #70ead0; }
+    .panel { display: none; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 14px; }
+    .panel.active { display: grid; }
+    .widget { min-height: 150px; background: #111925; border: 1px solid #2b3a4c; border-radius: 10px; padding: 14px; overflow: auto; }
+    .widget h2 { font-size: 15px; margin: 0 0 10px; }
+    .controls { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; margin-bottom: 10px; }
+    .controls label { font-size: 12px; color: #a9b7c8; }
+    .content { color: #d9e3ee; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td { text-align: left; padding: 6px; border-bottom: 1px solid #2b3a4c; }
+    th { cursor: pointer; color: #70ead0; }
+    .chart { min-height: 92px; border-left: 3px solid #26c6a5; padding: 8px 12px; background: #0d141d; }
+    .metric { font-size: 28px; color: #70ead0; }
+    [data-state='backend-ready'] { color: #70ead0; }
+    .status { font-size: 12px; color: #a9b7c8; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>WorkspaceBench Mock Workspace</strong>
+    <button data-action="add-backend">Add backend</button>
+    <span id="ready"></span>
+  </header>
+  <main>
+    <div id="backend-form">
+      <input data-field="backend-url" aria-label="Backend URL" placeholder="http://127.0.0.1:9102">
+      <button data-action="connect-backend">Connect</button>
+    </div>
+    <div id="catalog"></div>
+    <nav id="tabs"></nav>
+    <section id="workspace"></section>
+  </main>
+  <script>
+    let backendUrl = "";
+    let widgets = {};
+    let apps = [];
+
+    const by = (selector) => document.querySelector(selector);
+    by("[data-action='add-backend']").onclick = () => by("#backend-form").style.display = "flex";
+    by("[data-action='connect-backend']").onclick = connectBackend;
+
+    async function connectBackend() {
+      backendUrl = by("[data-field='backend-url']").value.replace(/\/$/, "");
+      const [widgetResponse, appResponse] = await Promise.all([
+        fetch(backendUrl + "/widgets.json"),
+        fetch(backendUrl + "/apps.json")
+      ]);
+      if (!widgetResponse.ok || !appResponse.ok) throw new Error("backend metadata request failed");
+      widgets = await widgetResponse.json();
+      apps = await appResponse.json();
+      const ready = by("#ready");
+      ready.dataset.state = "backend-ready";
+      ready.textContent = "Backend connected";
+      renderCatalog();
+    }
+
+    function renderCatalog() {
+      const catalog = by("#catalog");
+      catalog.replaceChildren();
+      for (const app of apps) {
+        const button = document.createElement("button");
+        button.dataset.appId = app.template_id;
+        button.textContent = "Add app: " + app.name;
+        button.onclick = () => instantiateApp(app);
+        catalog.append(button);
+      }
+      if (!apps.length) {
+        for (const [id, definition] of Object.entries(widgets)) {
+          const button = document.createElement("button");
+          button.dataset.addWidget = id;
+          button.textContent = "Add widget: " + definition.name;
+          button.onclick = () => addStandaloneWidget(id);
+          catalog.append(button);
+        }
+      }
+    }
+
+    function addStandaloneWidget(widgetId) {
+      by("#tabs").replaceChildren();
+      const workspace = by("#workspace");
+      let panel = by("#standalone");
+      if (!panel) {
+        panel = document.createElement("div");
+        panel.id = "standalone";
+        panel.className = "panel active";
+        workspace.replaceChildren(panel);
+      }
+      if (!panel.querySelector(`[data-widget-id='${widgetId}']`)) panel.append(renderWidget(widgetId));
+    }
+
+    function instantiateApp(app) {
+      const tabs = by("#tabs");
+      const workspace = by("#workspace");
+      tabs.replaceChildren();
+      workspace.replaceChildren();
+      const entries = Object.entries(app.tabs || {});
+      entries.forEach(([tabId, tab], index) => {
+        const button = document.createElement("button");
+        button.className = "tab" + (index === 0 ? " active" : "");
+        button.dataset.tabId = tabId;
+        button.dataset.tabName = tab.name;
+        button.textContent = tab.name;
+        button.onclick = () => activateTab(tabId);
+        tabs.append(button);
+        const panel = document.createElement("div");
+        panel.className = "panel" + (index === 0 ? " active" : "");
+        panel.dataset.tabPanel = tabId;
+        for (const item of tab.layout || []) panel.append(renderWidget(item.i));
+        workspace.append(panel);
+      });
+    }
+
+    function activateTab(tabId) {
+      document.querySelectorAll(".tab").forEach(item => item.classList.toggle("active", item.dataset.tabId === tabId));
+      document.querySelectorAll(".panel").forEach(item => item.classList.toggle("active", item.dataset.tabPanel === tabId));
+    }
+
+    function renderWidget(widgetId) {
+      const definition = widgets[widgetId];
+      const root = document.createElement("article");
+      root.className = "widget";
+      root.dataset.widgetId = widgetId;
+      const heading = document.createElement("h2");
+      heading.textContent = definition.name || widgetId;
+      root.append(heading);
+      const controls = document.createElement("div");
+      controls.className = "controls";
+      for (const param of definition.params || []) {
+        if (param.type === "form") renderFormControls(root, controls, param);
+        else renderParamControl(controls, param);
+      }
+      const refresh = document.createElement("button");
+      refresh.dataset.action = "refresh-widget";
+      refresh.textContent = "Refresh";
+      refresh.onclick = () => loadWidget(root, definition);
+      controls.append(refresh);
+      root.append(controls);
+      const content = document.createElement("div");
+      content.className = "content";
+      content.textContent = "Loading…";
+      root.append(content);
+      loadWidget(root, definition);
+      return root;
+    }
+
+    function renderParamControl(controls, param) {
+      const label = document.createElement("label");
+      label.textContent = param.label || param.paramName;
+      const input = document.createElement("input");
+      input.dataset.paramName = param.paramName;
+      input.value = Array.isArray(param.value) ? param.value.join(",") : (param.value ?? "");
+      label.append(input);
+      controls.append(label);
+    }
+
+    function renderFormControls(root, controls, param) {
+      for (const child of param.inputParams || []) {
+        if (child.type === "button") continue;
+        renderParamControl(controls, child);
+      }
+      const submit = document.createElement("button");
+      submit.dataset.formParam = param.paramName;
+      submit.textContent = "Submit " + (param.label || param.paramName);
+      submit.onclick = async () => {
+        const payload = {};
+        root.querySelectorAll("[data-param-name]").forEach(input => payload[input.dataset.paramName] = input.value);
+        const response = await fetch(backendUrl + param.endpoint, {
+          method: param.method || "POST",
+          headers: {"content-type": "application/json"},
+          body: JSON.stringify(payload)
+        });
+        if (!response.ok) throw new Error("form submission failed");
+        const status = document.createElement("span");
+        status.className = "status";
+        status.textContent = "Submitted";
+        controls.append(status);
+      };
+      controls.append(submit);
+    }
+
+    async function loadWidget(root, definition) {
+      const method = definition.type === "ssrm_table" ? "POST" : "GET";
+      const options = method === "POST" ? {method, headers: {"content-type": "application/json"}, body: JSON.stringify({startRow: 0, endRow: 100})} : {};
+      const response = await fetch(backendUrl + definition.endpoint, options);
+      if (!response.ok) throw new Error("widget request failed: " + response.status);
+      const payload = await response.json();
+      drawPayload(root.querySelector(".content"), definition, payload);
+    }
+
+    function drawPayload(target, definition, payload) {
+      target.replaceChildren();
+      const rows = Array.isArray(payload) ? payload : (Array.isArray(payload?.rows) ? payload.rows : null);
+      const type = definition.type || "table";
+      if (rows && ["table", "ssrm_table", "live_grid"].includes(type)) {
+        drawTable(target, rows);
+      } else if (rows && ["chart", "chart-highcharts", "chart-vegalite", "advanced_charting"].includes(type)) {
+        const chart = document.createElement("div");
+        chart.className = "chart";
+        chart.setAttribute("role", "img");
+        chart.setAttribute("aria-label", definition.name + " chart");
+        chart.textContent = rows.map(row => Object.values(row).join(" ")).join(" | ");
+        target.append(chart);
+      } else if (type === "metric" && payload && typeof payload === "object") {
+        const label = document.createElement("div");
+        label.textContent = payload.label;
+        const value = document.createElement("div");
+        value.className = "metric";
+        value.textContent = payload.value;
+        target.append(label, value);
+      } else if (type === "html" && typeof payload === "string") {
+        target.innerHTML = payload;
+      } else if (typeof payload === "string") {
+        target.textContent = payload;
+      } else if (payload && typeof payload === "object") {
+        const block = document.createElement("div");
+        block.textContent = Object.values(payload).join(" ");
+        target.append(block);
+      }
+    }
+
+    function drawTable(target, rows) {
+      const table = document.createElement("table");
+      const fields = rows.length ? Object.keys(rows[0]) : [];
+      const head = document.createElement("tr");
+      fields.forEach(field => {
+        const th = document.createElement("th");
+        th.dataset.column = field;
+        th.textContent = field;
+        th.onclick = () => {
+          rows.sort((a, b) => String(a[field]).localeCompare(String(b[field])));
+          target.replaceChildren();
+          drawTable(target, rows);
+        };
+        head.append(th);
+      });
+      table.append(head);
+      rows.forEach(row => {
+        const tr = document.createElement("tr");
+        fields.forEach(field => {
+          const td = document.createElement("td");
+          td.textContent = row[field];
+          tr.append(td);
+        });
+        table.append(tr);
+      });
+      target.append(table);
+    }
+  </script>
+</body>
+</html>
