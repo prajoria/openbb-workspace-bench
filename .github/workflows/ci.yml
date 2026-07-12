@@ -1,5 +1,8 @@
 name: Workspace Bench CI
 
+# Expected on a GitHub-hosted Ubuntu runner: roughly 3–5 minutes, including
+# Chromium installation and the 12 real-code backend certifications.
+
 on:
   pull_request:
   push:
@@ -28,11 +31,20 @@ jobs:
       - name: Run tests with coverage
         run: uv run --extra dev pytest --cov=workspace_bench --cov-report=term --cov-fail-under=65
 
+      - name: Audit task identities and prompt openness
+        run: |
+          uv run python scripts/audit_task_identity.py
+          uv run python scripts/report_prompt_stats.py
+          uv run python scripts/audit_release_consistency.py
+
       - name: Validate the core suite
         run: uv run --extra dev workspace-bench validate --suite core --min-tasks 300
 
       - name: Validate the build-openbb-apps suite
-        run: uv run --extra dev workspace-bench validate --suite build-openbb-apps --min-tasks 212
+        run: uv run --extra dev workspace-bench validate --suite build-openbb-apps --min-tasks 236
+
+      - name: Validate the experimental build-openbb-backends suite
+        run: uv run --extra dev workspace-bench validate --suite build-openbb-backends --min-tasks 12
 
       - name: Run oracle baseline (core)
         run: uv run --extra dev workspace-bench run --suite core --agent oracle
@@ -40,16 +52,35 @@ jobs:
       - name: Run oracle baseline (build-openbb-apps)
         run: uv run --extra dev workspace-bench run --suite build-openbb-apps --agent oracle
 
+      - name: Probe runtime endpoints
+        run: |
+          uv run workspace-bench runtime-probe --suite core --family backends
+          uv run workspace-bench runtime-probe --suite build-openbb-apps
+
+      - name: Reject adversarial candidates
+        run: |
+          uv run workspace-bench adversarial --suite core --family backends
+          uv run workspace-bench adversarial --suite build-openbb-apps
+
+      - name: Install Chromium
+        run: uv run --extra browser playwright install chromium
+
+      - name: Certify the browser harness
+        run: |
+          uv run --extra browser workspace-bench browser-cert --dry-run
+          uv run --extra browser workspace-bench browser-cert --self-test
+
       - name: Export agent task envelope
-        run: uv run --extra dev workspace-bench export-task --task gen_t0_create_price_performance_aapl --output /tmp/workspace-task.json
+        run: uv run --extra dev workspace-bench export-task --task core/create/price_performance_aapl --output /tmp/workspace-task.json
 
       - name: Run demo external agent
-        run: uv run --extra dev workspace-bench run-agent-command --task gen_t0_create_price_performance_aapl --agent-command "python -m workspace_bench.examples.jsonl_rule_agent"
+        run: uv run --extra dev workspace-bench run-agent-command --task core/create/price_performance_aapl --agent-command "python -m workspace_bench.examples.jsonl_rule_agent"
 
       - name: Build manifests
         run: |
           uv run --extra dev workspace-bench manifest --suite core --json > /dev/null
           uv run --extra dev workspace-bench manifest --suite build-openbb-apps --json > /dev/null
+          uv run --extra dev workspace-bench manifest --suite build-openbb-backends --json > /dev/null
 
       - name: Build release reports
         run: |
@@ -61,3 +92,6 @@ jobs:
 
       - name: Build package
         run: uv build
+
+      - name: Verify lockfile
+        run: uv lock --check

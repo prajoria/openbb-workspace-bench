@@ -20,23 +20,57 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 SUITES = {
-    "core": REPO / "src/workspace_bench/core/task_suites/workspace_bench_v1",
-    "build-openbb-apps": (
-        REPO / "src/workspace_bench/core/task_suites/workspace_bench_v2_build_openbb_apps"
-    ),
+    "core": REPO / "src/workspace_bench/core/task_suites/core",
+    "build-openbb-apps": (REPO / "src/workspace_bench/core/task_suites/build_openbb_apps"),
 }
+EXPECTED_TASKS = {"core": 300, "build-openbb-apps": 236}
+PROMPT_WORD_CAPS = {"core": 350, "build-openbb-apps": 180}
+BUILD_SPECIFICATION_LEVEL_COUNTS = {
+    "explicit": 60,
+    "partially-specified": 92,
+    "open-brief": 84,
+}
+BUILD_DIFFICULTY_COUNTS = json.loads(
+    (REPO / "src/workspace_bench/core/measured_difficulty.json").read_text()
+)["bands"]
 
 
 def suite_stats(suite_dir: Path) -> dict:
-    prompts: list[str] = []
-    for path in sorted(suite_dir.glob("*.json")):
+    tasks: list[dict] = []
+    for path in sorted(suite_dir.rglob("*.json"), key=lambda item: item.name):
         if path.name == "task_suite.json":
             continue
-        prompts.append(json.loads(path.read_text())["prompt"])
+        tasks.append(json.loads(path.read_text()))
+    prompts = [str(task["prompt"]) for task in tasks]
     word_counts = [len(prompt.split()) for prompt in prompts]
-    duplicates = [
-        prompt for prompt, count in Counter(prompts).items() if count > 1
-    ]
+    duplicates = [prompt for prompt, count in Counter(prompts).items() if count > 1]
+    by_difficulty = {}
+    for difficulty in ("easy", "medium", "hard"):
+        counts = [
+            len(str(task["prompt"]).split())
+            for task in tasks
+            if task.get("difficulty") == difficulty
+        ]
+        by_difficulty[difficulty] = {
+            "tasks": len(counts),
+            "prompt_words_min": min(counts),
+            "prompt_words_median": int(statistics.median(counts)),
+            "prompt_words_max": max(counts),
+        }
+    by_specification_level = {}
+    for level in ("explicit", "partially-specified", "open-brief"):
+        counts = [
+            len(str(task["prompt"]).split())
+            for task in tasks
+            if task.get("specification_level") == level
+        ]
+        if counts:
+            by_specification_level[level] = {
+                "tasks": len(counts),
+                "prompt_words_min": min(counts),
+                "prompt_words_median": int(statistics.median(counts)),
+                "prompt_words_max": max(counts),
+            }
     return {
         "tasks": len(prompts),
         "distinct_prompts": len(set(prompts)),
@@ -44,6 +78,8 @@ def suite_stats(suite_dir: Path) -> dict:
         "prompt_words_min": min(word_counts),
         "prompt_words_median": int(statistics.median(word_counts)),
         "prompt_words_max": max(word_counts),
+        "by_difficulty": by_difficulty,
+        "by_specification_level": by_specification_level,
     }
 
 
@@ -53,16 +89,42 @@ def main() -> int:
     args = parser.parse_args()
 
     report = {name: suite_stats(path) for name, path in SUITES.items()}
+    passed = all(
+        stats["tasks"] == EXPECTED_TASKS[name]
+        and stats["distinct_prompts"] == stats["tasks"]
+        and stats["prompt_words_max"] <= PROMPT_WORD_CAPS[name]
+        for name, stats in report.items()
+    ) and all(
+        report["build-openbb-apps"]["by_difficulty"][difficulty]["tasks"] == count
+        for difficulty, count in BUILD_DIFFICULTY_COUNTS.items()
+    ) and all(
+        report["build-openbb-apps"]["by_specification_level"][level]["tasks"]
+        == count
+        for level, count in BUILD_SPECIFICATION_LEVEL_COUNTS.items()
+    )
     if args.json:
         print(json.dumps(report, indent=2))
-        return 0
+        return 0 if passed else 1
     for name, stats in report.items():
         print(
             f"{name}: {stats['distinct_prompts']}/{stats['tasks']} distinct prompts; "
             f"words min/median/max {stats['prompt_words_min']}/"
             f"{stats['prompt_words_median']}/{stats['prompt_words_max']}"
         )
-    return 0
+        if name == "build-openbb-apps":
+            for difficulty, values in stats["by_difficulty"].items():
+                print(
+                    f"  {difficulty}: {values['tasks']} tasks; words min/median/max "
+                    f"{values['prompt_words_min']}/{values['prompt_words_median']}/"
+                    f"{values['prompt_words_max']}"
+                )
+            for level, values in stats["by_specification_level"].items():
+                print(
+                    f"  specification {level}: {values['tasks']} tasks; words "
+                    f"min/median/max {values['prompt_words_min']}/"
+                    f"{values['prompt_words_median']}/{values['prompt_words_max']}"
+                )
+    return 0 if passed else 1
 
 
 if __name__ == "__main__":

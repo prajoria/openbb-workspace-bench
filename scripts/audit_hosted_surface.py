@@ -28,10 +28,12 @@ from workspace_bench.workspace.live_mcp import (
     EXPECTED_MCP_RESOURCES,
     EXPECTED_MCP_TOOLS,
 )
+from workspace_bench.workspace.surface_audit import compare_tool_schemas
 
 
 DEFAULT_URL = "https://backend.openbb.dev/mcp"
 TOKEN_KEYS = ("WORKSPACE_MCP_TOKEN", "OPENBB_MCP_TOKEN")
+DEFAULT_SCHEMA_BASELINE = Path("runs/hosted-surface/tool_schemas.json")
 
 
 def main() -> int:
@@ -105,6 +107,16 @@ def report(url: str, surface: dict[str, object]) -> int:
         "prompt": EXPECTED_MCP_PROMPTS,
         "resource": EXPECTED_MCP_RESOURCES,
     }
+    baseline_path = Path(
+        os.environ.get("WORKSPACE_MCP_SCHEMA_BASELINE", str(DEFAULT_SCHEMA_BASELINE))
+    )
+    if not baseline_path.exists():
+        print(f"Missing tool-schema baseline: {baseline_path}", file=sys.stderr)
+        return 2
+    baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
+    if not isinstance(baseline, dict):
+        print(f"Invalid tool-schema baseline: {baseline_path}", file=sys.stderr)
+        return 2
 
     print(f"Audited {surface['server']} at {url}")
     failed = False
@@ -121,12 +133,19 @@ def report(url: str, surface: dict[str, object]) -> int:
             print(f", new (informational): {', '.join(added)}", end="")
         print()
 
+    schema_issues = compare_tool_schemas(baseline, tools)
+    if schema_issues:
+        failed = True
+        print(f"tool schema compatibility: FAIL ({len(schema_issues)} issue(s))")
+        for issue in schema_issues[:30]:
+            print(f"  - {issue}")
+    else:
+        print("tool schema compatibility: OK")
+
     run_dir = Path("runs/hosted-surface")
     run_dir.mkdir(parents=True, exist_ok=True)
-    schema_path = run_dir / "tool_schemas.json"
-    schema_path.write_text(
-        json.dumps(tools, indent=2, sort_keys=True), encoding="utf-8"
-    )
+    schema_path = run_dir / "latest_tool_schemas.json"
+    schema_path.write_text(json.dumps(tools, indent=2, sort_keys=True), encoding="utf-8")
     instructions_path = run_dir / "instructions.txt"
     instructions_path.write_text(str(surface["instructions"]), encoding="utf-8")
     print(f"Wrote {schema_path} and {instructions_path}")
