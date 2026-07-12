@@ -117,6 +117,48 @@ def summarize_result_rows(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     }
 
 
+def result_row_metric_slices(
+    rows: Sequence[Mapping[str, Any]],
+) -> dict[str, dict[str, Any]]:
+    """Summarize rows by family, difficulty, and their cross-product."""
+
+    by_family: dict[str, dict[str, Any]] = {}
+    by_difficulty: dict[str, dict[str, Any]] = {}
+    family_difficulty: dict[str, dict[str, dict[str, Any]]] = {}
+    for family in sorted({str(row.get("family") or "unknown") for row in rows}):
+        family_rows = [
+            row for row in rows if str(row.get("family") or "unknown") == family
+        ]
+        by_family[family] = summarize_result_rows(family_rows)
+        family_difficulty[family] = {
+            difficulty: summarize_result_rows(
+                [
+                    row
+                    for row in family_rows
+                    if str(row.get("difficulty") or "unknown") == difficulty
+                ]
+            )
+            for difficulty in sorted(
+                {str(row.get("difficulty") or "unknown") for row in family_rows}
+            )
+        }
+    for difficulty in sorted(
+        {str(row.get("difficulty") or "unknown") for row in rows}
+    ):
+        by_difficulty[difficulty] = summarize_result_rows(
+            [
+                row
+                for row in rows
+                if str(row.get("difficulty") or "unknown") == difficulty
+            ]
+        )
+    return {
+        "by_family": by_family,
+        "by_difficulty": by_difficulty,
+        "family_difficulty_matrix": family_difficulty,
+    }
+
+
 def task_reliability_matrix(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     """Build per-task outcomes and repeat variance for calibration review."""
 

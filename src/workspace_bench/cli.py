@@ -20,8 +20,6 @@ from workspace_bench.workspace.fixtures import get_fixture_backend, make_fixture
 from workspace_bench.core.models import (
     BENCHMARK_NAME,
     CANARY_GUID,
-    JsonDict,
-    RunResult,
     Task,
     TaskSuiteManifest,
     VALID_TASK_SPLITS,
@@ -37,7 +35,16 @@ from workspace_bench.core.runner import (
     load_task_file,
     load_task_suite_manifest,
 )
-from workspace_bench.core.suite_checks import release_checks_for_suite
+from workspace_bench.reports.oracle_report import (
+    build_manifest,
+    build_report,
+    render_markdown_report as _render_markdown_report,
+    result_summary as _result_summary,
+    results_summary as _results_summary,
+    task_summary as _task_summary,
+    write_trace_artifacts as _write_trace_artifacts,
+)
+from workspace_bench.reports.validation import validate_tasks
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -461,70 +468,6 @@ def _cmd_report(args: argparse.Namespace) -> int:
     return 0
 
 
-def build_manifest(
-    tasks: list[Task],
-    task_suite: TaskSuiteManifest | None = None,
-) -> dict:
-    """Build a machine-readable dataset manifest."""
-
-    redacted = _task_suite_is_hidden(task_suite)
-    payload = {
-        "name": BENCHMARK_NAME,
-        **git_provenance(
-            source_paths=[task.source_path for task in tasks if task.source_path]
-        ),
-        "canary_guid": CANARY_GUID,
-        "redacted": redacted,
-        "task_count": len(tasks),
-        "families": sorted({task.family for task in tasks}),
-        "capabilities": sorted({task.capability for task in tasks}),
-        "workflows": sorted({task.workflow for task in tasks}),
-        "domains": sorted({task.domain for task in tasks}),
-        "subdomains": sorted({task.subdomain for task in tasks}),
-        "specification_levels": sorted({task.specification_level for task in tasks}),
-        "difficulties": sorted({task.difficulty for task in tasks}),
-        "splits": sorted({task.split for task in tasks}),
-        "tags": sorted({tag for task in tasks for tag in task.tags}),
-        "tasks": [_task_summary(task) for task in tasks],
-    }
-    if task_suite:
-        payload["task_suite"] = {
-            "suite_id": task_suite.suite_id,
-            "content_sha256": task_suite.content_sha256,
-            "visibility": task_suite.visibility,
-            "default_split": task_suite.default_split,
-            "description": task_suite.description,
-        }
-    return payload
-
-
-def build_report(
-    tasks: list[Task],
-    task_suite: TaskSuiteManifest | None = None,
-    release_profile: str | None = None,
-) -> dict:
-    """Run built-in baselines and return a release-style report payload."""
-
-    runner = TaskRunner()
-    oracle_results = [runner.run(task, "oracle") for task in tasks]
-    noop_results = [runner.run(task, "noop") for task in tasks]
-    release_checks = {
-        "oracle_all_pass": all(result.grade.passed for result in oracle_results),
-        "noop_all_fail": all(not result.grade.passed for result in noop_results),
-    }
-    release_checks.update(release_checks_for_suite(release_profile, tasks, oracle_results))
-    return {
-        "manifest": build_manifest(tasks, task_suite),
-        "baselines": {
-            "oracle": _results_summary(oracle_results),
-            "noop": _results_summary(noop_results),
-        },
-        "oracle_results": [_result_summary(result) for result in oracle_results],
-        "noop_results": [_result_summary(result) for result in noop_results],
-        "release_checks": release_checks,
-    }
-
-
 def _cmd_run(args: argparse.Namespace) -> int:
     tasks = _selected_tasks(args)
     agent = build_agent(args.agent)
@@ -926,153 +869,6 @@ def _cmd_smoke_workspace_mcp(args: argparse.Namespace) -> int:
     return 0 if run_result.grade.passed and not result.surface_issues else 1
 
 
-def _render_markdown_report(report: dict) -> str:
-    manifest = report["manifest"]
-    oracle = report["baselines"]["oracle"]
-    noop = report["baselines"]["noop"]
-    checks = report["release_checks"]
-    lines = [
-        "# OpenBB Workspace Bench Report",
-        "",
-        f"Git commit: `{manifest['git_commit']}`",
-        f"Git dirty: `{manifest['git_dirty']}`",
-        f"Tasks: `{manifest['task_count']}`",
-        f"Canary: `{manifest['canary_guid']}`",
-        f"Redacted: `{manifest.get('redacted', False)}`",
-        "",
-        "## Coverage",
-        "",
-        f"- Families: {', '.join(manifest['families'])}",
-        f"- Capabilities: {', '.join(manifest['capabilities'])}",
-        f"- Workflows: {', '.join(manifest['workflows'])}",
-        f"- Domains: {', '.join(manifest['domains'])}",
-        f"- Subdomains: {', '.join(manifest['subdomains'])}",
-        f"- Specification levels: {', '.join(manifest['specification_levels'])}",
-        f"- Difficulties: {', '.join(manifest['difficulties'])}",
-        f"- Splits: {', '.join(manifest['splits'])}",
-        f"- Tags: {', '.join(manifest['tags'])}",
-        "",
-        "## Baselines",
-        "",
-        "| Baseline | Passed | Total | Mean Score |",
-        "| --- | ---: | ---: | ---: |",
-        (f"| oracle | {oracle['passed']} | {oracle['total']} | {oracle['mean_score']:.3f} |"),
-        (f"| noop | {noop['passed']} | {noop['total']} | {noop['mean_score']:.3f} |"),
-        "",
-        "## Release Checks",
-        "",
-    ]
-    for check_name, passed in checks.items():
-        status = "PASS" if passed else "FAIL"
-        lines.append(f"- {status}: `{check_name}`")
-    lines.extend(
-        [
-            "",
-            "## Task Results",
-            "",
-            "| Task | Split | Capability | Workflow | Domain | Subdomain | Specification | Difficulty | Oracle | Noop |",
-            "| --- | --- | --- | --- | --- | --- | --- | --- | ---: | ---: |",
-        ]
-    )
-    noop_by_id = {result["id"]: result for result in report["noop_results"]}
-    for oracle_result in report["oracle_results"]:
-        noop_result = noop_by_id[oracle_result["id"]]
-        lines.append(
-            "| "
-            f"{oracle_result['id']} | "
-            f"{oracle_result['split']} | "
-            f"{oracle_result['capability']} | "
-            f"{oracle_result['workflow']} | "
-            f"{oracle_result['domain']} | "
-            f"{oracle_result['subdomain']} | "
-            f"{oracle_result['specification_level']} | "
-            f"{oracle_result['difficulty']} | "
-            f"{oracle_result['score']:.3f} | "
-            f"{noop_result['score']:.3f} |"
-        )
-    return "\n".join(lines)
-
-
-def validate_tasks(
-    tasks: list[Task],
-    min_tasks: int = 1,
-    release_profile: str | None = None,
-) -> dict:
-    """Validate task loadability, metadata, oracle pass, and noop failure.
-
-    ``release_profile`` names a bundled suite whose coverage quotas should
-    also be enforced; private task directories pass ``None`` and are only
-    held to the universal gates.
-    """
-
-    if tasks and all(task.code_task is not None for task in tasks):
-        from workspace_bench.code_tasks import validate_code_tasks
-
-        return validate_code_tasks(tasks, min_tasks=min_tasks)
-    if any(task.code_task is not None for task in tasks):
-        raise ValueError("cannot mix real-code and simulated Workspace tasks in one validation")
-
-    runner = TaskRunner()
-    oracle_results = [runner.run(task, "oracle") for task in tasks]
-    noop_results = [runner.run(task, "noop") for task in tasks]
-    issues = []
-    seen_ids: set[tuple[str, str]] = set()
-    duplicate_ids: set[tuple[str, str]] = set()
-    for task in tasks:
-        identity = (task.family, task.id)
-        if identity in seen_ids:
-            duplicate_ids.add(identity)
-        seen_ids.add(identity)
-    for family, task_id in sorted(duplicate_ids):
-        issues.append(
-            {
-                "task_id": f"{family}/{task_id}",
-                "message": "task id must be unique within its family",
-            }
-        )
-    if len(tasks) < min_tasks:
-        issues.append(
-            {
-                "task_id": "benchmark",
-                "message": (f"expected at least {min_tasks} task(s), found {len(tasks)}"),
-            }
-        )
-    release_checks = release_checks_for_suite(release_profile, tasks, oracle_results)
-    for check_name, passed in release_checks.items():
-        if not passed:
-            issues.append(
-                {
-                    "task_id": "benchmark",
-                    "message": f"release check failed: {check_name}",
-                }
-            )
-    for task, oracle_result, noop_result in zip(tasks, oracle_results, noop_results):
-        for message in _task_metadata_issues(task):
-            issues.append({"task_id": task.id, "message": message})
-        if not oracle_result.grade.passed:
-            issues.append(
-                {
-                    "task_id": task.id,
-                    "message": "oracle trace does not pass task grader",
-                }
-            )
-        if noop_result.grade.passed:
-            issues.append(
-                {
-                    "task_id": task.id,
-                    "message": "noop baseline passed; task is too weak",
-                }
-            )
-    return {
-        "passed": not issues,
-        "task_count": len(tasks),
-        "oracle_passed": sum(result.grade.passed for result in oracle_results),
-        "noop_failed": sum(not result.grade.passed for result in noop_results),
-        "release_checks": release_checks,
-        "issues": issues,
-    }
-
-
 def _release_profile(args: argparse.Namespace) -> str | None:
     """Resolve which bundled suite's release quotas apply, if any.
 
@@ -1101,31 +897,6 @@ def _filters_active(args: argparse.Namespace) -> bool:
             getattr(args, "tag", []),
         ]
     )
-
-
-def _task_metadata_issues(task: Task) -> list[str]:
-    issues = []
-    if not task.family:
-        issues.append("family must be non-empty")
-    if task.difficulty not in {"easy", "medium", "hard"}:
-        issues.append("difficulty must be one of easy, medium, hard")
-    if task.split not in VALID_TASK_SPLITS:
-        issues.append(f"split must be one of {', '.join(sorted(VALID_TASK_SPLITS))}")
-    if not task.capability:
-        issues.append("capability must be non-empty")
-    if not task.workflow:
-        issues.append("workflow must be non-empty")
-    if not task.domain:
-        issues.append("domain must be non-empty")
-    if not task.subdomain:
-        issues.append("subdomain must be non-empty")
-    if not task.tags:
-        issues.append("at least one tag is required")
-    if not task.oracle_tool_calls and task.code_task is None:
-        issues.append("oracle_tool_calls must be non-empty")
-    if not task.allowed_tools:
-        issues.append("allowed_tools must be non-empty")
-    return issues
 
 
 def _filtered_tasks(args: argparse.Namespace) -> list[Task]:
@@ -1244,125 +1015,6 @@ def _load_task_file_with_suite(path: Path) -> Task:
     return load_task_file(path, task_suite=manifest)
 
 
-def _task_summary(task: Task) -> dict:
-    return {
-        "id": task.id,
-        "qualified_id": task.qualified_id,
-        "title": task.title,
-        "family": task.family,
-        "capability": task.capability,
-        "workflow": task.workflow,
-        "domain": task.domain,
-        "subdomain": task.subdomain,
-        "specification_level": task.specification_level,
-        "difficulty": task.difficulty,
-        "split": task.split,
-        "tags": task.tags,
-        "source": task.source,
-        "novelty": task.novelty,
-        "fixtures": [backend.name for backend in task.fixtures],
-        "oracle_tool_call_count": len(task.oracle_tool_calls),
-        "code_task": task.code_task is not None,
-    }
-
-
-def _result_summary(result: RunResult) -> dict:
-    return {
-        "id": result.task.id,
-        "qualified_id": result.task.qualified_id,
-        "category": result.task.category,
-        "family": result.task.family,
-        "capability": result.task.capability,
-        "workflow": result.task.workflow,
-        "domain": result.task.domain,
-        "subdomain": result.task.subdomain,
-        "specification_level": result.task.specification_level,
-        "difficulty": result.task.difficulty,
-        "split": result.task.split,
-        "tags": result.task.tags,
-        "novelty": result.task.novelty,
-        "score": result.grade.score,
-        "passed": result.grade.passed,
-        "state_score": result.grade.state_score,
-        "state_passed": result.grade.state_passed,
-        "state_checks_passed": result.grade.state_checks_passed,
-        "state_checks_total": result.grade.state_checks_total,
-        "trace_score": result.grade.trace_score,
-        "trace_passed": result.grade.trace_passed,
-        "trace_checks_passed": result.grade.trace_checks_passed,
-        "trace_checks_total": result.grade.trace_checks_total,
-        "runtime_score": result.grade.runtime_score,
-        "runtime_passed": result.grade.runtime_passed,
-        "runtime_checks_passed": result.grade.runtime_checks_passed,
-        "runtime_checks_total": result.grade.runtime_checks_total,
-        "deployment_receipt": (
-            asdict(result.grade.deployment_receipt)
-            if result.grade.deployment_receipt is not None
-            else None
-        ),
-        "polish_score": result.grade.polish_score,
-        "polish_checks_passed": result.grade.polish_checks_passed,
-        "polish_checks_total": result.grade.polish_checks_total,
-        "polish_issues": [
-            {"code": issue.code, "message": issue.message}
-            for issue in result.grade.polish_issues
-        ],
-        "checks_passed": result.grade.checks_passed,
-        "checks_total": result.grade.checks_total,
-        "issues": [{"code": issue.code, "message": issue.message} for issue in result.grade.issues],
-    }
-
-
-def _results_summary(results: list[RunResult]) -> dict:
-    total = len(results)
-    passed = sum(result.grade.passed for result in results)
-    mean_score = sum(result.grade.score for result in results) / total if total else 0.0
-    state_passed = sum(result.grade.state_passed for result in results)
-    trace_passed = sum(result.grade.trace_passed for result in results)
-    runtime_results = [result for result in results if result.task.success.runtime is not None]
-    polish_results = [result for result in results if result.grade.polish_checks_total > 0]
-    runtime_passed = sum(result.grade.runtime_passed for result in runtime_results)
-    by_difficulty: dict[str, dict[str, int]] = {}
-    for result in results:
-        bucket = by_difficulty.setdefault(result.task.difficulty, {"passed": 0, "total": 0})
-        bucket["total"] += 1
-        if result.grade.passed:
-            bucket["passed"] += 1
-    return {
-        "total": total,
-        "passed": passed,
-        "failed": total - passed,
-        "mean_score": mean_score,
-        "state_passed": state_passed,
-        "state_pass_rate": state_passed / total if total else 0.0,
-        "trace_passed": trace_passed,
-        "trace_pass_rate": trace_passed / total if total else 0.0,
-        "mean_state_score": (
-            sum(result.grade.state_score for result in results) / total if total else 0.0
-        ),
-        "mean_trace_score": (
-            sum(result.grade.trace_score for result in results) / total if total else 0.0
-        ),
-        "runtime_task_count": len(runtime_results),
-        "runtime_passed": runtime_passed,
-        "runtime_pass_rate": (
-            runtime_passed / len(runtime_results) if runtime_results else 1.0
-        ),
-        "mean_runtime_score": (
-            sum(result.grade.runtime_score for result in runtime_results) / len(runtime_results)
-            if runtime_results
-            else 1.0
-        ),
-        "polish_task_count": len(polish_results),
-        "mean_polish_score": (
-            sum(result.grade.polish_score for result in polish_results) / len(polish_results)
-            if polish_results
-            else 1.0
-        ),
-        "by_difficulty": by_difficulty,
-    }
-
-
 def _agent_run_passed(run: AgentCommandRun) -> bool:
     return run.run_result.grade.passed and run.exit_code == 0 and not run.timed_out
 
@@ -1393,63 +1045,6 @@ def _agent_runs_summary(runs: list[AgentCommandRun]) -> dict:
     summary["failed"] = len(runs) - summary["passed"]
     summary["process_failures"] = sum(run.exit_code != 0 or run.timed_out for run in runs)
     return summary
-
-
-def _write_trace_artifacts(
-    trace_dir: Path,
-    results: list[RunResult],
-    *,
-    redact_prompts: bool = False,
-) -> None:
-    trace_dir.mkdir(parents=True, exist_ok=True)
-    id_counts = {
-        task_id: sum(result.task.id == task_id for result in results)
-        for task_id in {result.task.id for result in results}
-    }
-    for result in results:
-        task_payload: JsonDict = {
-            "id": result.task.id,
-            "qualified_id": result.task.qualified_id,
-            "title": result.task.title,
-            "family": result.task.family,
-            "capability": result.task.capability,
-            "workflow": result.task.workflow,
-            "domain": result.task.domain,
-            "subdomain": result.task.subdomain,
-            "difficulty": result.task.difficulty,
-            "split": result.task.split,
-            "tags": result.task.tags,
-            "novelty": result.task.novelty,
-        }
-        if redact_prompts:
-            task_payload["prompt_redacted"] = True
-        else:
-            task_payload["prompt"] = result.task.prompt
-        payload = {
-            "task": task_payload,
-            "grade": asdict(result.grade),
-            "trace": [
-                {
-                    "index": event.index,
-                    "tool": event.call.name,
-                    "args": event.call.args,
-                    "ok": event.ok,
-                    "result": event.result,
-                }
-                for event in result.trace
-            ],
-            "final_snapshot": result.final_snapshot,
-        }
-        filename = (
-            f"{result.task.family}__{result.task.id}.json"
-            if id_counts[result.task.id] > 1
-            else f"{result.task.id}.json"
-        )
-        output_path = trace_dir / filename
-        output_path.write_text(
-            json.dumps(payload, indent=2, sort_keys=True),
-            encoding="utf-8",
-        )
 
 
 def _cmd_serve_fixture(backend_name: str, host: str, port: int) -> int:

@@ -19,7 +19,7 @@ import time
 import urllib.error
 import urllib.request
 from contextlib import contextmanager
-from dataclasses import asdict, dataclass, field, replace
+from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
 from pathlib import Path
 from functools import lru_cache
@@ -49,9 +49,11 @@ from workspace_bench.core.models import (
 from workspace_bench.core.provenance import git_provenance
 from workspace_bench.reports.metrics import (
     compute_reliability_metrics,
+    result_row_metric_slices,
     summarize_result_rows,
     task_reliability_matrix,
 )
+from workspace_bench.reports.serialization import grade_summary
 from workspace_bench.core.runner import BUILTIN_TASK_SUITE_ORDER
 from workspace_bench.core.runner import load_builtin_tasks, load_task_directory
 from workspace_bench.core.runner import load_builtin_task_suite_manifest, load_task_suite_manifest
@@ -2202,37 +2204,10 @@ def summarize_runs(
     calibration = summarize_result_rows(rows)
     summary.update(calibration)
     summary["pass_rate"] = calibration["strict_pass_rate"]
-    by_family_metrics: dict[str, dict[str, Any]] = {}
-    by_difficulty_metrics: dict[str, dict[str, Any]] = {}
-    family_difficulty_matrix: dict[str, dict[str, dict[str, Any]]] = {}
-    for family in sorted({str(row.get("family") or "unknown") for row in rows}):
-        family_rows = [row for row in rows if str(row.get("family") or "unknown") == family]
-        by_family_metrics[family] = summarize_result_rows(family_rows)
-        difficulty_metrics: dict[str, dict[str, Any]] = {}
-        for difficulty in sorted(
-            {str(row.get("difficulty") or "unknown") for row in family_rows}
-        ):
-            difficulty_metrics[difficulty] = summarize_result_rows(
-                [
-                    row
-                    for row in family_rows
-                    if str(row.get("difficulty") or "unknown") == difficulty
-                ]
-            )
-        family_difficulty_matrix[family] = difficulty_metrics
-    for difficulty in sorted(
-        {str(row.get("difficulty") or "unknown") for row in rows}
-    ):
-        by_difficulty_metrics[difficulty] = summarize_result_rows(
-            [
-                row
-                for row in rows
-                if str(row.get("difficulty") or "unknown") == difficulty
-            ]
-        )
-    summary["by_family_metrics"] = by_family_metrics
-    summary["by_difficulty_metrics"] = by_difficulty_metrics
-    summary["family_difficulty_matrix"] = family_difficulty_matrix
+    slices = result_row_metric_slices(rows)
+    summary["by_family_metrics"] = slices["by_family"]
+    summary["by_difficulty_metrics"] = slices["by_difficulty"]
+    summary["family_difficulty_matrix"] = slices["family_difficulty_matrix"]
     return summary
 
 
@@ -2266,33 +2241,7 @@ def agent_run_summary(run: ComparisonRun) -> dict:
         "process_failed": agent_run_process_failed(run),
         "task_failed": not agent_run_process_failed(run) and not result.grade.passed,
         "grade_passed": result.grade.passed,
-        "score": result.grade.score,
-        "state_score": result.grade.state_score,
-        "state_passed": result.grade.state_passed,
-        "state_checks_passed": result.grade.state_checks_passed,
-        "state_checks_total": result.grade.state_checks_total,
-        "trace_score": result.grade.trace_score,
-        "trace_passed": result.grade.trace_passed,
-        "trace_checks_passed": result.grade.trace_checks_passed,
-        "trace_checks_total": result.grade.trace_checks_total,
-        "runtime_score": result.grade.runtime_score,
-        "runtime_passed": result.grade.runtime_passed,
-        "runtime_checks_passed": result.grade.runtime_checks_passed,
-        "runtime_checks_total": result.grade.runtime_checks_total,
-        "deployment_receipt": (
-            asdict(result.grade.deployment_receipt)
-            if result.grade.deployment_receipt is not None
-            else None
-        ),
-        "polish_score": result.grade.polish_score,
-        "polish_checks_passed": result.grade.polish_checks_passed,
-        "polish_checks_total": result.grade.polish_checks_total,
-        "polish_issues": [
-            {"code": issue.code, "message": issue.message} for issue in result.grade.polish_issues
-        ],
-        "checks_passed": result.grade.checks_passed,
-        "checks_total": result.grade.checks_total,
-        "issues": [{"code": issue.code, "message": issue.message} for issue in result.grade.issues],
+        **grade_summary(result.grade, include_passed=False),
         "tool_call_count": tool_call_count,
         "failed_tool_call_count": failed_tool_call_count,
         "browser_verdict": browser,

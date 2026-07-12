@@ -3,12 +3,11 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
-import runpy
 
 import pytest
 
 from workspace_bench.reports.metrics import summarize_result_rows, task_reliability_matrix
+from workspace_bench.reports.difficulty import propose
 from workspace_bench.reports.model_compare import (
     ModelAdapter,
     ensure_run_manifest,
@@ -16,11 +15,6 @@ from workspace_bench.reports.model_compare import (
     openai_usage,
     summarize_runs,
 )
-
-PROPOSE = runpy.run_path(
-    str(Path(__file__).resolve().parents[1] / "scripts/propose_measured_difficulty.py")
-)["propose"]
-
 
 def _row(
     task_ref: str,
@@ -192,7 +186,7 @@ def test_empirical_difficulty_proposal_emits_reviewable_override_table() -> None
             for repeat in (1, 2)
         ],
     }
-    proposal = PROPOSE(
+    proposal = propose(
         [model_a, model_b],
         {
             "competent_models": ["frontier", "small"],
