@@ -1,0 +1,94 @@
+{
+  "id": "rename_both_pm_morning",
+  "title": "Rename Dashboard And Tab: PM Morning Review",
+  "capability": "workspace-navigation",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-navigate",
+    "rename",
+    "navigation"
+  ],
+  "prompt": "Set the active dashboard name to PM Morning Review and rename the Overview tab to Holdings View.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "portfolio"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "PM Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "PM Morning Review",
+    "required_tabs": [
+      "holdings-view"
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "manage_dashboard",
+        "args_contains": {
+          "operation": "update",
+          "name": "PM Morning Review"
+        }
+      },
+      {
+        "tool": "manage_navigation_bar",
+        "args_contains": {
+          "operation": "rename_tabs"
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "update",
+        "name": "PM Morning Review"
+      }
+    },
+    {
+      "tool": "manage_navigation_bar",
+      "args": {
+        "operation": "rename_tabs",
+        "rename_map": {
+          "overview": "Holdings View"
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "single-widget",
+  "family": "navigate",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "test",
+  "novelty": "Unique navigate/rename_both_pm_morning exercise using manage_dashboard, manage_navigation_bar with checks dashboard_name, layout_out_of_grid, missing_tab, missing_tool_call, too_many_invalid_calls on portfolio; artifact tabs:holdings-view."
+}

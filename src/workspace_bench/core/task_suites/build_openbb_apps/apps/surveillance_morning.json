@@ -1,0 +1,348 @@
+{
+  "id": "surveillance_morning",
+  "title": "Compose the Surveillance Morning app",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-apps",
+    "cell3",
+    "build-openbb-apps",
+    "apps-json",
+    "composed"
+  ],
+  "prompt": "Build a working Workspace experience for a surveillance analyst covering cases and compliance alerts. The workspace must cover open surveillance alerts. The workspace must cover notes for one surveillance case. The workspace must cover open alert count. Analysts need to inspect alert ID, desk, severity, age days. Leave the complete working workspace open for review. Keep these source-contract anchors: `severity` and `case_id`. Choose the rest of the architecture and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {
+    "custom_backends": [
+      {
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "backend_id": "backend_001",
+        "widgets_json": {
+          "alert_queue": {
+            "name": "Alert Queue",
+            "description": "Open surveillance alerts.",
+            "endpoint": "/alert-queue",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "severity",
+                "type": "text",
+                "label": "Severity",
+                "value": "high",
+                "options": [
+                  {
+                    "label": "High",
+                    "value": "high"
+                  },
+                  {
+                    "label": "Medium",
+                    "value": "medium"
+                  },
+                  {
+                    "label": "Low",
+                    "value": "low"
+                  }
+                ]
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "alert_id",
+                    "headerName": "Alert",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "desk",
+                    "headerName": "Desk",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "severity",
+                    "headerName": "Severity",
+                    "cellDataType": "text",
+                    "renderFn": "titleCase"
+                  },
+                  {
+                    "field": "age_days",
+                    "headerName": "Age (d)",
+                    "cellDataType": "number",
+                    "formatterFn": "int"
+                  }
+                ]
+              }
+            }
+          },
+          "case_notes": {
+            "name": "Case Notes",
+            "description": "Notes for one surveillance case.",
+            "endpoint": "/case-notes",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "case_id",
+                "type": "text",
+                "label": "Case",
+                "value": "C-1042",
+                "description": "Case identifier."
+              }
+            ],
+            "data": {
+              "valueField": "case_notes_value"
+            }
+          },
+          "alert_metric": {
+            "name": "Open Alerts",
+            "description": "Open alert count.",
+            "endpoint": "/alert-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "data": {
+              "valueField": "alert_metric_value"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 0
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "surveillance-data__alert_metric",
+          "widget_id": "alert_metric",
+          "fields": [
+            "alert_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/alert-count",
+          "payload": {
+            "alert_metric_value": 10.25,
+            "label": "Open Alerts",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "surveillance-data__alert_queue",
+          "widget_id": "alert_queue",
+          "fields": [
+            "age_days",
+            "alert_id",
+            "desk",
+            "severity"
+          ],
+          "path": "/alert-queue",
+          "payload": [
+            {
+              "age_days": 10.25,
+              "alert_id": "alert_id-1",
+              "desk": "Primary",
+              "severity": "Primary"
+            },
+            {
+              "age_days": 20.5,
+              "alert_id": "alert_id-2",
+              "desk": "Review",
+              "severity": "Review"
+            },
+            {
+              "age_days": 30.75,
+              "alert_id": "alert_id-3",
+              "desk": "Approved",
+              "severity": "Approved"
+            }
+          ]
+        },
+        {
+          "name": "surveillance-data__case_notes",
+          "widget_id": "case_notes",
+          "fields": [
+            "case_notes_value"
+          ],
+          "path": "/case-notes",
+          "payload": "Case Notes fixture-backed runtime summary."
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_alert-metric",
+        "datasets": [
+          "surveillance-data__alert_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "alert_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_alert-queue",
+        "datasets": [
+          "surveillance-data__alert_queue"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "age_days",
+          "alert_id",
+          "desk",
+          "severity"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_3_case-notes",
+        "datasets": [
+          "surveillance-data__case_notes"
+        ],
+        "widget_kind": "markdown",
+        "must_cover_fields": [
+          "case_notes_value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "backend_001",
+        "apps_json": [
+          {
+            "name": "Surveillance Morning",
+            "description": "Alerts and case notes.",
+            "tabs": {
+              "alerts": {
+                "id": "alerts",
+                "name": "Alerts",
+                "layout": [
+                  {
+                    "i": "alert_queue",
+                    "x": 0,
+                    "y": 0,
+                    "w": 24,
+                    "h": 10,
+                    "state": {
+                      "params": {
+                        "severity": "high"
+                      }
+                    }
+                  },
+                  {
+                    "i": "case_notes",
+                    "x": 24,
+                    "y": 0,
+                    "w": 12,
+                    "h": 10
+                  },
+                  {
+                    "i": "alert_metric",
+                    "x": 0,
+                    "y": 10,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              }
+            },
+            "groups": [],
+            "prompts": [
+              "Which high-severity alerts are unassigned?"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Surveillance Morning",
+        "dashboard_name": "Surveillance Morning Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "apps",
+  "capability": "app-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "severity",
+    "case_id"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique apps/surveillance_morning building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_alert-metric:metric:alert_metric_value,capability_2_alert-queue:table-like:age_days,alert_id,desk,severity,capability_3_case-notes:markdown:case_notes_value."
+}

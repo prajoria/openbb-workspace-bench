@@ -1,0 +1,341 @@
+{
+  "id": "vol_ship",
+  "title": "Ship, open, and configure the Vol Command app",
+  "workflow": "risk-review",
+  "subdomain": "volatility",
+  "tags": [
+    "family-apps",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "orchestration"
+  ],
+  "prompt": "The desk needs a production-ready volatility and derivatives workflow for a volatility analyst. The workspace must cover daily CBOE VIX closes with returns. The workspace must cover current volatility regime score. The workspace must cover morning volatility commentary. Analysts need to inspect date, close, return percentage. An analyst can adjust the relevant numeric scope. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Vol Command', 'vol', 'Vol Desk Data', '60'. Use your judgment on the architecture and leave other work intact.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Vol Command",
+          "vol",
+          "Vol Desk Data",
+          "60"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "vol-desk-data__vix_history",
+          "widget_id": "vix_history",
+          "fields": [
+            "close",
+            "date",
+            "return_pct"
+          ],
+          "path": "/vix-history",
+          "payload": [
+            {
+              "close": 10.25,
+              "date": "2026-01-13",
+              "return_pct": 10.25
+            },
+            {
+              "close": 20.5,
+              "date": "2026-01-14",
+              "return_pct": 20.5
+            },
+            {
+              "close": 30.75,
+              "date": "2026-01-15",
+              "return_pct": 30.75
+            }
+          ]
+        },
+        {
+          "name": "vol-desk-data__vol_commentary",
+          "widget_id": "vol_commentary",
+          "fields": [
+            "vol_commentary_value"
+          ],
+          "path": "/vol-commentary",
+          "payload": "Vol Commentary fixture-backed runtime summary."
+        },
+        {
+          "name": "vol-desk-data__vol_regime_metric",
+          "widget_id": "vol_regime_metric",
+          "fields": [
+            "label",
+            "value",
+            "vol_regime_metric_value"
+          ],
+          "path": "/vol-regime",
+          "payload": {
+            "label": "Vol Regime",
+            "value": 42.5,
+            "vol_regime_metric_value": 10.25
+          }
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_vix-history",
+        "datasets": [
+          "vol-desk-data__vix_history"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "close",
+          "date",
+          "return_pct"
+        ],
+        "required_param_kinds": [
+          "number"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_vol-regime-metric",
+        "datasets": [
+          "vol-desk-data__vol_regime_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "vol_regime_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Vol Desk Data",
+        "url": "http://localhost:7801",
+        "widgets_json": {
+          "vix_history": {
+            "name": "VIX History",
+            "description": "Daily CBOE VIX closes with returns.",
+            "endpoint": "/vix-history",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "window",
+                "type": "number",
+                "label": "Window",
+                "value": 30,
+                "min": 5,
+                "max": 365
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "date",
+                    "headerName": "Date",
+                    "cellDataType": "dateString"
+                  },
+                  {
+                    "field": "close",
+                    "headerName": "Close",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "return_pct",
+                    "headerName": "Return %",
+                    "cellDataType": "number",
+                    "formatterFn": "percent",
+                    "renderFn": "greenRed"
+                  }
+                ]
+              }
+            },
+            "staleTime": 900000
+          },
+          "vol_regime_metric": {
+            "name": "Vol Regime",
+            "description": "Current volatility regime score.",
+            "endpoint": "/vol-regime",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            },
+            "staleTime": 900000,
+            "data": {
+              "valueField": "vol_regime_metric_value"
+            }
+          },
+          "vol_commentary": {
+            "name": "Vol Commentary",
+            "description": "Morning volatility commentary.",
+            "endpoint": "/vol-commentary",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "desk",
+                "type": "text",
+                "label": "Desk",
+                "value": "index",
+                "options": [
+                  {
+                    "label": "Index",
+                    "value": "index"
+                  },
+                  {
+                    "label": "Single Stock",
+                    "value": "single"
+                  }
+                ]
+              }
+            ],
+            "staleTime": 900000,
+            "data": {
+              "valueField": "vol_commentary_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Vol Command",
+            "description": "Vol level and regime.",
+            "tabs": {
+              "vol": {
+                "id": "vol",
+                "name": "Vol",
+                "layout": [
+                  {
+                    "i": "vix_history",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "posture": {
+                "id": "posture",
+                "name": "Posture",
+                "layout": [
+                  {
+                    "i": "vol_regime_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Vol Command",
+        "dashboard_name": "Vol Command Board",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "vix_history",
+        "data_args": {
+          "window": 60
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Vol Command",
+        "data": "Vol Command shipped from Vol Desk Data: vol live. Configured window=60."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "apps",
+  "capability": "app-building",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [
+    "Vol Command",
+    "vol",
+    "Vol Desk Data",
+    "60"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "test",
+  "novelty": "Unique apps/vol_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Vol Desk Data; artifact capabilities:capability_1_vix-history:table-like:close,date,return_pct,capability_2_vol-regime-metric:metric:vol_regime_metric_value; generated:note@*:Vol Command,vol."
+}

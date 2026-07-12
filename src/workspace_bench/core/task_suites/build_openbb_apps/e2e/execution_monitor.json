@@ -1,0 +1,312 @@
+{
+  "id": "execution_monitor",
+  "title": "Ship, open, and configure Execution Monitor",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-e2e",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "e2e",
+    "orchestration"
+  ],
+  "prompt": "An execution analyst needs a decision-ready Workspace for orders and venue quality. The workspace must cover venue execution quality and rejects. The workspace must cover open execution exceptions. Analysts need to inspect venue, orders, reject rate percentage, as of. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Execution Monitor', 'Execution Desk Data', 'EDGX'. Choose an effective architecture and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Execution Monitor",
+          "execution monitor",
+          "Execution Desk Data",
+          "EDGX"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "execution-desk-data__exception_metric",
+          "widget_id": "exception_metric",
+          "fields": [
+            "exception_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/exception-count",
+          "payload": {
+            "exception_metric_value": 10.25,
+            "label": "Exceptions",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "execution-desk-data__execution_monitor_table",
+          "widget_id": "execution_monitor_table",
+          "fields": [
+            "as_of",
+            "orders",
+            "reject_rate_pct",
+            "venue"
+          ],
+          "path": "/execution-monitor-table",
+          "payload": [
+            {
+              "as_of": "2026-01-13",
+              "orders": 10.25,
+              "reject_rate_pct": 10.25,
+              "venue": "Primary"
+            },
+            {
+              "as_of": "2026-01-14",
+              "orders": 20.5,
+              "reject_rate_pct": 20.5,
+              "venue": "Review"
+            },
+            {
+              "as_of": "2026-01-15",
+              "orders": 30.75,
+              "reject_rate_pct": 30.75,
+              "venue": "Approved"
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_exception-metric",
+        "datasets": [
+          "execution-desk-data__exception_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "exception_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_execution-monitor-table",
+        "datasets": [
+          "execution-desk-data__execution_monitor_table"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "as_of",
+          "orders",
+          "reject_rate_pct",
+          "venue"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    },
+    "business_names": [
+      {
+        "scope": "dashboard",
+        "contains": "Execution Monitor"
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "execution_monitor_table": {
+            "name": "Execution Monitor Table",
+            "description": "Venue execution quality and rejects.",
+            "endpoint": "/execution-monitor-table",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "venue",
+                    "headerName": "Venue",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "orders",
+                    "headerName": "Orders",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "reject_rate_pct",
+                    "headerName": "Reject Rate Pct",
+                    "cellDataType": "number",
+                    "formatterFn": "percent"
+                  },
+                  {
+                    "field": "as_of",
+                    "headerName": "As Of",
+                    "cellDataType": "dateString"
+                  }
+                ]
+              }
+            },
+            "params": [
+              {
+                "paramName": "venue",
+                "type": "text",
+                "label": "Venue",
+                "value": "ARCA",
+                "description": "Execution Monitor Table focus field."
+              }
+            ]
+          },
+          "exception_metric": {
+            "name": "Exceptions",
+            "description": "Open execution exceptions.",
+            "endpoint": "/exception-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "data": {
+              "valueField": "exception_metric_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Execution Monitor",
+            "description": "Execution venue quality and exceptions.",
+            "tabs": {
+              "venues": {
+                "id": "venues",
+                "name": "Venues",
+                "layout": [
+                  {
+                    "i": "execution_monitor_table",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "exceptions": {
+                "id": "exceptions",
+                "name": "Exceptions",
+                "layout": [
+                  {
+                    "i": "exception_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Execution Monitor",
+        "dashboard_name": "Execution Monitor Live",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "execution_monitor_table",
+        "data_args": {
+          "venue": "EDGX"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Execution Monitor",
+        "data": "Execution Monitor is live from Execution Desk Data: execution monitor ready. Configured venue=EDGX."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "e2e",
+  "capability": "backend-integration",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [
+    "Execution Monitor",
+    "Execution Desk Data",
+    "EDGX"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique e2e/execution_monitor building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_exception-metric:metric:exception_metric_value,capability_2_execution-monitor-table:table-like:as_of,orders,reject_rate_pct,venue; generated:note@*:Execution Monitor,execution monitor."
+}

@@ -1,0 +1,207 @@
+{
+  "id": "auction_watch",
+  "title": "Compose the Auction Watch table from its rows and requirements",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-aggrid",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "aggrid",
+    "derivation",
+    "composed"
+  ],
+  "prompt": "Create a usable rates and Treasury markets workflow for a rates strategist. The workspace must cover upcoming treasury auctions. Analysts need to inspect auction date, security, size billions, bid to cover. The source contract must retain `auction_date` and `security`; decide the remaining implementation and preserve unrelated workspace state.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2,
+      "must_call_schema_before_create": true
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 0,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "rates-watch-data__auction_watch",
+          "widget_id": "auction_watch",
+          "fields": [
+            "auction_date",
+            "bid_to_cover",
+            "security",
+            "size_bn"
+          ],
+          "path": "/auction-watch",
+          "payload": [
+            {
+              "auction_date": "2026-01-13",
+              "bid_to_cover": 10.25,
+              "security": "security-1",
+              "size_bn": 10.25
+            },
+            {
+              "auction_date": "2026-01-14",
+              "bid_to_cover": 20.5,
+              "security": "security-2",
+              "size_bn": 20.5
+            },
+            {
+              "auction_date": "2026-01-15",
+              "bid_to_cover": 30.75,
+              "security": "security-3",
+              "size_bn": 30.75
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_auction-watch",
+        "datasets": [
+          "rates-watch-data__auction_watch"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "auction_date",
+          "bid_to_cover",
+          "security",
+          "size_bn"
+        ],
+        "required_param_kinds": [],
+        "required_config": {
+          "runButton": true
+        }
+      }
+    ],
+    "polish": [
+      {
+        "code": "polish_refresh_policy",
+        "backend_name": "Rates Watch Data",
+        "widget_id": "auction_watch",
+        "path": "staleTime",
+        "expected": 900000
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Rates Watch Data",
+        "url": "http://localhost:7803",
+        "widgets_json": {
+          "auction_watch": {
+            "name": "Auction Watch",
+            "description": "Upcoming treasury auctions.",
+            "endpoint": "/auction-watch",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "auction_date",
+                    "headerName": "Auction Date",
+                    "cellDataType": "dateString"
+                  },
+                  {
+                    "field": "security",
+                    "headerName": "Security",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "size_bn",
+                    "headerName": "Size Bn",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "bid_to_cover",
+                    "headerName": "Bid To Cover",
+                    "cellDataType": "number"
+                  }
+                ]
+              }
+            },
+            "staleTime": 900000,
+            "runButton": true
+          }
+        }
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Rates Watch Data"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Rates Watch Data",
+        "widget_id": "auction_watch"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Rates Watch Data",
+        "widget_id": "auction_watch"
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "aggrid",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "auction_date",
+    "security"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique aggrid/auction_watch building exercise using create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks capability, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls on custom:Rates Watch Data; artifact capabilities:capability_1_auction-watch:table-like:auction_date,bid_to_cover,security,size_bn."
+}

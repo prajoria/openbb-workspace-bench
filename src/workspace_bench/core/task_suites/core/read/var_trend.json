@@ -1,0 +1,129 @@
+{
+  "id": "var_trend",
+  "title": "Read Data: VaR Trend",
+  "capability": "data-reading",
+  "workflow": "risk-review",
+  "subdomain": "risk",
+  "tags": [
+    "family-read",
+    "data-reading",
+    "stark"
+  ],
+  "prompt": "Use get_widget_data for the Bench Stark Enterprise VaR Trend widget; find the exact var_usd for risk_exposure_monitor_dashboard_var_trend, then add a note that cites each widget id, the field name, and the exact value.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Data Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "main",
+          "name": "Main"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "period": "YTD"
+          },
+          "tab_id": "main",
+          "layout": {
+            "x": 0,
+            "y": 2,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_widget_data",
+    "read_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "get_widget_data",
+        "args_contains": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "risk_exposure_monitor_dashboard_var_trend"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_widget_data",
+        "data_contains": [
+          "risk_exposure_monitor_dashboard_var_trend",
+          "var_usd",
+          "-222500"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "risk_exposure_monitor_dashboard_var_trend",
+          "var_usd",
+          "-222500"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "fund": "Flagship Long/Short",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Data Note",
+        "data": "risk_exposure_monitor_dashboard_var_trend var_usd is -222500."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "test",
+  "novelty": "Unique read/var_trend exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:risk_exposure_monitor_dashboard_var_trend,var_usd."
+}

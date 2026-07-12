@@ -1,0 +1,167 @@
+{
+  "id": "client_pair",
+  "title": "Read Data: Client Accounts and Relationship Metrics",
+  "capability": "data-reading",
+  "workflow": "client-meeting-prep",
+  "subdomain": "client-ir",
+  "tags": [
+    "family-read",
+    "data-reading",
+    "stark"
+  ],
+  "prompt": "On the Bench Stark Enterprise Client Accounts and Relationship Metrics widgets, use get_widget_data, then add a short note that cites client_360_client_book_client_accounts and client_360_client_book_relationship_metrics and says you reviewed the data.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Data Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "main",
+          "name": "Main"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "client_360_client_book_client_accounts",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "period": "YTD"
+          },
+          "tab_id": "main",
+          "layout": {
+            "x": 0,
+            "y": 2,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "client_360_client_book_relationship_metrics",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "period": "YTD"
+          },
+          "tab_id": "main",
+          "layout": {
+            "x": 20,
+            "y": 2,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_widget_data",
+    "read_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "get_widget_data",
+        "args_contains": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "client_360_client_book_client_accounts"
+        }
+      },
+      {
+        "tool": "get_widget_data",
+        "args_contains": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "client_360_client_book_relationship_metrics"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_widget_data",
+        "data_contains": [
+          "client_360_client_book_client_accounts"
+        ]
+      },
+      {
+        "tool": "get_widget_data",
+        "data_contains": [
+          "client_360_client_book_relationship_metrics"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "client_360_client_book_client_accounts",
+          "client_360_client_book_relationship_metrics",
+          "data"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_client_book_client_accounts",
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "fund": "Flagship Long/Short",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_client_book_relationship_metrics",
+        "widget_uuid": "widget_002",
+        "data_args": {
+          "fund": "Flagship Long/Short",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Data Note",
+        "data": "Reviewed the data returned by client_360_client_book_client_accounts and client_360_client_book_relationship_metrics."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 7
+  },
+  "split": "train",
+  "novelty": "Unique read/client_pair exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:client_360_client_book_client_accounts,client_360_client_book_relationship_metrics."
+}

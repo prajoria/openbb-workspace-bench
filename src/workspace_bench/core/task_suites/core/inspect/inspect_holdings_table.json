@@ -1,0 +1,106 @@
+{
+  "id": "inspect_holdings_table",
+  "title": "Inspect Holdings Table",
+  "capability": "workspace-inspection",
+  "workflow": "portfolio-risk-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-inspect",
+    "inspect",
+    "read-widget"
+  ],
+  "prompt": "After calling read_widget with widget_id holdings_table for the existing Bench Portfolio/holdings_table widget, add a note mentioning holdings.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "portfolio"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Inspect Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "holdings_table",
+          "data_args": {},
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "read_widget",
+        "args_contains": {
+          "widget_id": "holdings_table"
+        }
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "holdings"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "read_widget",
+      "args": {
+        "widget_id": "holdings_table"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Inspect Note",
+        "data": "Inspected holdings_table: holdings."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "read",
+  "family": "inspect",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique inspect/inspect_holdings_table exercise using add_generative_widget, get_workspace_snapshot, read_widget with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, repeated_snapshots, too_many_invalid_calls on portfolio; artifact generated:note@*:holdings."
+}

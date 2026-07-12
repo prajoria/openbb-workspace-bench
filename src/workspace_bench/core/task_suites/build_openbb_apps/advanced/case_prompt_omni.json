@@ -1,0 +1,174 @@
+{
+  "id": "case_prompt_omni",
+  "title": "Compose the Case Prompt Omni widget",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-advanced",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "advanced",
+    "composed"
+  ],
+  "prompt": "Create a usable cases and compliance alerts workflow for a surveillance analyst. The workspace must cover hidden-prompt question answering over case evidence. The source contract must retain `prompt`; decide the remaining implementation and preserve unrelated workspace state.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2,
+      "must_call_schema_before_create": true
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 0,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "surveillance-data__case_prompt_omni",
+          "widget_id": "case_prompt_omni",
+          "fields": [
+            "answer",
+            "case_prompt_omni_value",
+            "sources"
+          ],
+          "path": "/case-prompt-qa",
+          "payload": {
+            "answer": "Verified fixture-backed result.",
+            "case_prompt_omni_value": 10.25,
+            "sources": [
+              "task-dataset"
+            ]
+          }
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_case-prompt-omni",
+        "datasets": [
+          "surveillance-data__case_prompt_omni"
+        ],
+        "widget_kind": "any",
+        "must_cover_fields": [
+          "case_prompt_omni_value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      }
+    ],
+    "polish": [
+      {
+        "code": "polish_refresh_policy",
+        "backend_name": "Surveillance Data",
+        "widget_id": "case_prompt_omni",
+        "path": "staleTime",
+        "expected": 900000
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "case_prompt_omni": {
+            "name": "Case Prompt Omni",
+            "description": "Hidden-prompt Omni search over case evidence.",
+            "endpoint": "/case-prompt-qa",
+            "type": "omni",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "prompt",
+                "type": "text",
+                "label": "Prompt",
+                "description": "Question to run over the case corpus.",
+                "show": false
+              }
+            ],
+            "category": "Compliance",
+            "staleTime": 900000,
+            "data": {
+              "valueField": "case_prompt_omni_value"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Surveillance Data"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Surveillance Data",
+        "widget_id": "case_prompt_omni"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Surveillance Data",
+        "widget_id": "case_prompt_omni"
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "advanced",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "prompt"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique advanced/case_prompt_omni building exercise using create_widget, get_widget_schema, get_workspace_snapshot, list_available_widgets, manage_backends with checks capability, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_case-prompt-omni:any:case_prompt_omni_value."
+}

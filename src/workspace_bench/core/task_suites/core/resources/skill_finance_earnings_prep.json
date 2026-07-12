@@ -1,0 +1,92 @@
+{
+  "id": "skill_finance_earnings_prep",
+  "title": "Read Skill Resource finance-earnings-prep",
+  "capability": "resource-access",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-resources",
+    "resources",
+    "skills"
+  ],
+  "prompt": "Call read_workspace_resource with uri openbb://workspace/skills/finance-earnings-prep, then add a note mentioning surprise drivers.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Resource Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_workspace_resource",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_resource_reads": [
+      {
+        "uri": "openbb://workspace/skills/finance-earnings-prep",
+        "data_contains": [
+          "Earnings prep workflow"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "surprise drivers"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "read_workspace_resource",
+      "args": {
+        "uri": "openbb://workspace/skills/finance-earnings-prep"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Resource Note",
+        "data": "Resource guidance: surprise drivers."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "read",
+  "family": "resources",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique resources/skill_finance_earnings_prep exercise using add_generative_widget, get_workspace_snapshot, read_workspace_resource with checks layout_out_of_grid, missing_generated_widget, missing_resource_read, too_many_invalid_calls on equities; artifact resource:openbb://workspace/skills/finance-earnings-prep; generated:note@*:surprise drivers."
+}

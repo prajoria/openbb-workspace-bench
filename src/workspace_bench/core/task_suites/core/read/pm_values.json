@@ -1,0 +1,174 @@
+{
+  "id": "pm_values",
+  "title": "Read Data: Portfolio Snapshot and Top Alerts",
+  "capability": "data-reading",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-read",
+    "data-reading",
+    "stark"
+  ],
+  "prompt": "Use get_widget_data for the Bench Stark Enterprise Portfolio Snapshot and Top Alerts widgets; find the exact value for portfolio_command_center_overview_portfolio_snapshot and alert_count for portfolio_command_center_overview_top_alerts, then add a note that cites each widget id, the field name, and the exact value.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Data Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "main",
+          "name": "Main"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "portfolio_command_center_overview_portfolio_snapshot",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "period": "YTD"
+          },
+          "tab_id": "main",
+          "layout": {
+            "x": 0,
+            "y": 2,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "portfolio_command_center_overview_top_alerts",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "period": "YTD"
+          },
+          "tab_id": "main",
+          "layout": {
+            "x": 20,
+            "y": 2,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_widget_data",
+    "read_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "get_widget_data",
+        "args_contains": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "portfolio_command_center_overview_portfolio_snapshot"
+        }
+      },
+      {
+        "tool": "get_widget_data",
+        "args_contains": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "portfolio_command_center_overview_top_alerts"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_widget_data",
+        "data_contains": [
+          "portfolio_command_center_overview_portfolio_snapshot",
+          "value",
+          "87.94"
+        ]
+      },
+      {
+        "tool": "get_widget_data",
+        "data_contains": [
+          "portfolio_command_center_overview_top_alerts",
+          "alert_count",
+          "193"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "portfolio_command_center_overview_portfolio_snapshot",
+          "value",
+          "87.94",
+          "portfolio_command_center_overview_top_alerts",
+          "alert_count",
+          "193"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_overview_portfolio_snapshot",
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "fund": "Flagship Long/Short",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_overview_top_alerts",
+        "widget_uuid": "widget_002",
+        "data_args": {
+          "fund": "Flagship Long/Short",
+          "period": "YTD"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Data Note",
+        "data": "portfolio_command_center_overview_portfolio_snapshot value is 87.94; portfolio_command_center_overview_top_alerts alert_count is 193."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "single-widget",
+  "family": "read",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique read/pm_values exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_tool_call, missing_tool_result, too_many_invalid_calls on stark-enterprise; artifact generated:note@*:portfolio_command_center_overview_portfolio_snapshot,value."
+}

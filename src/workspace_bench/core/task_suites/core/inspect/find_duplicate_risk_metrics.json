@@ -1,0 +1,137 @@
+{
+  "id": "find_duplicate_risk_metrics",
+  "title": "Find Duplicate Risk Metrics",
+  "capability": "dashboard-construction",
+  "workflow": "portfolio-risk-review",
+  "subdomain": "portfolio-management",
+  "tags": [
+    "family-inspect",
+    "inspect",
+    "delete-widget"
+  ],
+  "prompt": "Preserve the holdings_table widget while inspecting the dashboard, identifying the duplicate risk_metrics among the seeded widgets, and removing exactly one duplicate.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "portfolio"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Inspect Deduplicate",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "risk_metrics",
+          "data_args": {},
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "risk_metrics",
+          "data_args": {},
+          "layout": {
+            "x": 20,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "holdings_table",
+          "data_args": {},
+          "layout": {
+            "x": 0,
+            "y": 10,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "delete_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics",
+        "data_args": {},
+        "min_count": 1,
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "holdings_table",
+        "data_args": {},
+        "min_count": 1,
+        "max_count": 1
+      }
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "read_widget",
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "read_widget",
+      "args": {
+        "widget_uuid": "widget_002"
+      }
+    },
+    {
+      "tool": "delete_widget",
+      "args": {
+        "widget_uuid": "widget_002"
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "dashboard",
+  "family": "inspect",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "test",
+  "novelty": "Unique inspect/find_duplicate_risk_metrics exercise using delete_widget, get_workspace_snapshot, read_widget with checks layout_out_of_grid, layout_overlap, missing_tool_call, missing_widget, repeated_snapshots, too_many_invalid_calls, too_many_widgets on portfolio; artifact widgets:Bench Portfolio/holdings_table@*,Bench Portfolio/risk_metrics@*."
+}

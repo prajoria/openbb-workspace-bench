@@ -1,0 +1,141 @@
+{
+  "id": "expand_client_expansion",
+  "title": "Expand To Client Command Center",
+  "capability": "workspace-navigation",
+  "workflow": "client-meeting-prep",
+  "subdomain": "client-ir",
+  "tags": [
+    "family-navigate",
+    "rename",
+    "tabs",
+    "navigation"
+  ],
+  "prompt": "Set the active dashboard name to Client Command Center, add a new tab named Open Requests, and add a note on the new tab that mentions open requests and says items are pending.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Client Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "stress_liquidity_lab_sign_off_sign_off_tracker",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Client Command Center",
+    "required_tabs": [
+      "overview",
+      "open-requests"
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "open requests",
+          "pending"
+        ],
+        "tab_id": "open-requests"
+      }
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "manage_navigation_bar",
+        "args_contains": {
+          "operation": "add_tabs"
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    },
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "stress_liquidity_lab_sign_off_sign_off_tracker",
+        "data_args": {},
+        "tab_id": "overview",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "update",
+        "name": "Client Command Center"
+      }
+    },
+    {
+      "tool": "manage_navigation_bar",
+      "args": {
+        "operation": "add_tabs",
+        "tabs": [
+          {
+            "name": "Open Requests"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "open-requests"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Tab Note",
+        "data": "Tracking open requests: items are pending review."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "single-widget",
+  "family": "navigate",
+  "difficulty": "medium",
+  "limits": {
+    "max_turns": 7
+  },
+  "split": "train",
+  "novelty": "Unique navigate/expand_client_expansion exercise using add_generative_widget, manage_dashboard, manage_navigation_bar, navigate_workspace with checks dashboard_name, layout_out_of_grid, missing_generated_widget, missing_tab, missing_tool_call, missing_widget, too_many_invalid_calls, too_many_widgets on stark-enterprise; artifact widgets:Bench Stark Enterprise/stress_liquidity_lab_sign_off_sign_off_tracker@overview; tabs:open-requests,overview; generated:note@open-requests:open requests,pending."
+}

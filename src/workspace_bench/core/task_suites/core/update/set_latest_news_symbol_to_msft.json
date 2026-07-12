@@ -1,0 +1,98 @@
+{
+  "id": "set_latest_news_symbol_to_msft",
+  "title": "Set Latest News symbol To MSFT",
+  "capability": "widget-update",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-update",
+    "update-widget"
+  ],
+  "prompt": "For the existing Latest News widget, set symbol to MSFT.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Update Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "latest_news",
+          "data_args": {
+            "symbol": "NVDA",
+            "limit": 5
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 12
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "latest_news",
+        "data_args": {
+          "symbol": "MSFT",
+          "limit": 5
+        },
+        "min_count": 1
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "symbol": "MSFT"
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "single-widget",
+  "family": "update",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique update/set_latest_news_symbol_to_msft exercise using get_workspace_snapshot, update_widget with checks layout_out_of_grid, missing_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact widgets:Bench Equities/latest_news@*."
+}

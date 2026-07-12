@@ -1,0 +1,96 @@
+{
+  "id": "set_macro_timeseries_series_to_dgs10",
+  "title": "Set Macro Timeseries series To DGS10",
+  "capability": "widget-update",
+  "workflow": "macro-rates-review",
+  "subdomain": "macro",
+  "tags": [
+    "family-update",
+    "update-widget"
+  ],
+  "prompt": "For the existing Macro Timeseries widget, set series to DGS10.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "macro"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Update Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Macro",
+          "widget_id": "macro_timeseries",
+          "data_args": {
+            "series": "DGS2"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 12
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS10"
+        },
+        "min_count": 1
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "series": "DGS10"
+        }
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "single-widget",
+  "family": "update",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 5
+  },
+  "split": "train",
+  "novelty": "Unique update/set_macro_timeseries_series_to_dgs10 exercise using get_workspace_snapshot, update_widget with checks layout_out_of_grid, missing_widget, repeated_snapshots, too_many_invalid_calls on macro; artifact widgets:Bench Macro/macro_timeseries@*."
+}

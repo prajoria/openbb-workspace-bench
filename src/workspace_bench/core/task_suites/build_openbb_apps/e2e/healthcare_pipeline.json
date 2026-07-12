@@ -1,0 +1,318 @@
+{
+  "id": "healthcare_pipeline",
+  "title": "Ship, open, and configure Healthcare Pipeline",
+  "workflow": "healthcare-catalyst-review",
+  "subdomain": "healthcare",
+  "tags": [
+    "family-e2e",
+    "cell6",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "e2e",
+    "orchestration"
+  ],
+  "prompt": "Build a healthcare-research analyst a dependable clinical catalysts and pipelines workspace. The workspace must cover healthcare pipeline programs by phase. The workspace must cover pipeline distribution by phase. Analysts need to inspect ticker, phase, programs, readout date. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Healthcare Pipeline', 'pipeline', 'Healthcare Research Data', 'MRNA', 'ticker'. Decide how best to organize the experience and preserve unrelated work.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Healthcare Pipeline",
+          "pipeline",
+          "Healthcare Research Data",
+          "MRNA"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "healthcare-research-data__pipeline_chart",
+          "widget_id": "pipeline_chart",
+          "fields": [
+            "pipeline_chart_value"
+          ],
+          "path": "/pipeline-by-phase",
+          "payload": [
+            {
+              "pipeline_chart_value": 10.25
+            },
+            {
+              "pipeline_chart_value": 20.5
+            },
+            {
+              "pipeline_chart_value": 30.75
+            }
+          ]
+        },
+        {
+          "name": "healthcare-research-data__pipeline_status_table",
+          "widget_id": "pipeline_status_table",
+          "fields": [
+            "phase",
+            "programs",
+            "readout_date",
+            "ticker"
+          ],
+          "path": "/pipeline-status-table",
+          "payload": [
+            {
+              "phase": "Primary",
+              "programs": 10.25,
+              "readout_date": "2026-01-13",
+              "ticker": "AAPL"
+            },
+            {
+              "phase": "Review",
+              "programs": 20.5,
+              "readout_date": "2026-01-14",
+              "ticker": "MSFT"
+            },
+            {
+              "phase": "Approved",
+              "programs": 30.75,
+              "readout_date": "2026-01-15",
+              "ticker": "NVDA"
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_pipeline-chart",
+        "datasets": [
+          "healthcare-research-data__pipeline_chart"
+        ],
+        "widget_kind": "chart-like",
+        "must_cover_fields": [
+          "pipeline_chart_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_pipeline-status-table",
+        "datasets": [
+          "healthcare-research-data__pipeline_status_table"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "phase",
+          "programs",
+          "readout_date",
+          "ticker"
+        ],
+        "required_param_kinds": [
+          "ticker"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    },
+    "business_names": [
+      {
+        "scope": "dashboard",
+        "contains": "Healthcare Pipeline"
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Healthcare Research Data",
+        "url": "http://localhost:7808",
+        "widgets_json": {
+          "pipeline_status_table": {
+            "name": "Pipeline Status Table",
+            "description": "Healthcare pipeline programs by phase.",
+            "endpoint": "/pipeline-status-table",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "ticker",
+                    "headerName": "Ticker",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "phase",
+                    "headerName": "Phase",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "programs",
+                    "headerName": "Programs",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "readout_date",
+                    "headerName": "Readout Date",
+                    "cellDataType": "dateString"
+                  }
+                ]
+              }
+            },
+            "params": [
+              {
+                "paramName": "ticker",
+                "type": "text",
+                "label": "Ticker",
+                "value": "PFE",
+                "description": "Pipeline Status Table focus field."
+              }
+            ]
+          },
+          "pipeline_chart": {
+            "name": "Pipeline by Phase",
+            "description": "Plotly pipeline distribution by phase.",
+            "endpoint": "/pipeline-by-phase",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "raw": true,
+            "data": {
+              "valueField": "pipeline_chart_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Healthcare Pipeline",
+            "description": "Pipeline table and phase chart.",
+            "tabs": {
+              "pipeline": {
+                "id": "pipeline",
+                "name": "Pipeline",
+                "layout": [
+                  {
+                    "i": "pipeline_status_table",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "phase": {
+                "id": "phase",
+                "name": "Phase",
+                "layout": [
+                  {
+                    "i": "pipeline_chart",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Healthcare Pipeline",
+        "dashboard_name": "Healthcare Pipeline Live",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "pipeline_status_table",
+        "data_args": {
+          "ticker": "MRNA"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Healthcare Pipeline",
+        "data": "Healthcare Pipeline is live from Healthcare Research Data: pipeline ready. Configured ticker=MRNA."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "e2e",
+  "capability": "backend-integration",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [
+    "Healthcare Pipeline",
+    "pipeline",
+    "Healthcare Research Data",
+    "MRNA",
+    "ticker"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "validation",
+  "novelty": "Unique e2e/healthcare_pipeline building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_pipeline-chart:chart-like:pipeline_chart_value,capability_2_pipeline-status-table:table-like:phase,programs,readout_date,ticker; generated:note@*:Healthcare Pipeline,pipeline."
+}

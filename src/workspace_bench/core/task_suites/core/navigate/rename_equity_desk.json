@@ -1,0 +1,74 @@
+{
+  "id": "rename_equity_desk",
+  "title": "Rename To Equity Desk Monitor",
+  "capability": "workspace-navigation",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-navigate",
+    "rename",
+    "navigation"
+  ],
+  "prompt": "Set the active dashboard name to Equity Desk Monitor.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Desk View",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Equity Desk Monitor",
+    "required_tool_calls": [
+      {
+        "tool": "manage_dashboard",
+        "args_contains": {
+          "operation": "update",
+          "name": "Equity Desk Monitor"
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "update",
+        "name": "Equity Desk Monitor"
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "single-widget",
+  "family": "navigate",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 4
+  },
+  "split": "train",
+  "novelty": "Unique navigate/rename_equity_desk exercise using manage_dashboard with checks dashboard_name, layout_out_of_grid, missing_tool_call, too_many_invalid_calls on equities; artifact id:rename_equity_desk."
+}

@@ -1,0 +1,381 @@
+{
+  "id": "live_orders_grid_ship",
+  "title": "Ship, open, and configure Execution Live Grid",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-advanced",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "advanced",
+    "orchestration"
+  ],
+  "prompt": "Build an execution analyst a dependable orders and venue quality workspace. The workspace must cover live order activity. The workspace must cover open execution exceptions. The workspace must cover live open orders blotter. Analysts need to inspect order ID, price, symbol, quantity, status. Large result sets must stay responsive while analysts filter and page through them. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Execution Live Grid', 'live stream', 'Execution Desk Data', 'EDGX'. Decide how best to organize the experience and preserve unrelated work.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Execution Live Grid",
+          "live stream",
+          "Execution Desk Data",
+          "EDGX"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "execution-desk-data__exception_metric",
+          "widget_id": "exception_metric",
+          "fields": [
+            "exception_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/exception-count",
+          "payload": {
+            "exception_metric_value": 10.25,
+            "label": "Exceptions",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "execution-desk-data__live_orders_grid",
+          "widget_id": "live_orders_grid",
+          "fields": [
+            "order_id",
+            "px",
+            "px_change"
+          ],
+          "path": "/live-orders",
+          "payload": [
+            {
+              "order_id": "order_id-1",
+              "px": 10.25,
+              "px_change": 10.25
+            },
+            {
+              "order_id": "order_id-2",
+              "px": 20.5,
+              "px_change": 20.5
+            },
+            {
+              "order_id": "order_id-3",
+              "px": 30.75,
+              "px_change": 30.75
+            }
+          ]
+        },
+        {
+          "name": "execution-desk-data__open_orders",
+          "widget_id": "open_orders",
+          "fields": [
+            "order_id",
+            "qty",
+            "status",
+            "symbol"
+          ],
+          "path": "/open-orders",
+          "payload": [
+            {
+              "order_id": "order_id-1",
+              "qty": 10.25,
+              "status": "Primary",
+              "symbol": "AAPL"
+            },
+            {
+              "order_id": "order_id-2",
+              "qty": 20.5,
+              "status": "Review",
+              "symbol": "MSFT"
+            },
+            {
+              "order_id": "order_id-3",
+              "qty": 30.75,
+              "status": "Approved",
+              "symbol": "NVDA"
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_exception-metric",
+        "datasets": [
+          "execution-desk-data__exception_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "exception_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_live-orders-grid",
+        "datasets": [
+          "execution-desk-data__live_orders_grid"
+        ],
+        "widget_kind": "server-side-grid",
+        "must_cover_fields": [
+          "order_id",
+          "px",
+          "px_change"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {
+          "wsEndpoint": "live-orders-ws",
+          "data.wsRowIdColumn": "order_id"
+        }
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    },
+    "polish": [
+      {
+        "code": "polish_refresh_policy",
+        "backend_name": "Execution Desk Data",
+        "widget_id": "live_orders_grid",
+        "path": "staleTime",
+        "expected": 900000
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "live_orders_grid": {
+            "name": "Live Orders Grid",
+            "description": "Streaming order blotter over websocket.",
+            "endpoint": "/live-orders",
+            "type": "live_grid",
+            "wsEndpoint": "live-orders-ws",
+            "gridData": {
+              "w": 24,
+              "h": 12
+            },
+            "data": {
+              "wsRowIdColumn": "order_id",
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "order_id",
+                    "headerName": "Order",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "px",
+                    "headerName": "Price",
+                    "cellDataType": "number",
+                    "renderFn": "showCellChange",
+                    "renderFnParams": {
+                      "colorValueKey": "px_change"
+                    }
+                  }
+                ]
+              }
+            },
+            "params": [
+              {
+                "paramName": "venue",
+                "type": "text",
+                "label": "Venue",
+                "value": "ARCA",
+                "description": "Execution venue filter."
+              }
+            ],
+            "staleTime": 900000
+          },
+          "exception_metric": {
+            "name": "Exceptions",
+            "description": "Open execution exceptions.",
+            "endpoint": "/exception-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "staleTime": 900000,
+            "data": {
+              "valueField": "exception_metric_value"
+            }
+          },
+          "open_orders": {
+            "name": "Open Orders",
+            "description": "Live open orders blotter.",
+            "endpoint": "/open-orders",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "order_id",
+                    "headerName": "Order",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "symbol",
+                    "headerName": "Symbol",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "qty",
+                    "headerName": "Qty",
+                    "cellDataType": "number",
+                    "formatterFn": "int"
+                  },
+                  {
+                    "field": "status",
+                    "headerName": "Status",
+                    "cellDataType": "text",
+                    "renderFn": "titleCase"
+                  }
+                ]
+              }
+            },
+            "staleTime": 900000
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Execution Live Grid",
+            "description": "Streaming order grid and exceptions.",
+            "tabs": {
+              "orders": {
+                "id": "orders",
+                "name": "Orders",
+                "layout": [
+                  {
+                    "i": "live_orders_grid",
+                    "x": 0,
+                    "y": 0,
+                    "w": 24,
+                    "h": 12
+                  }
+                ]
+              },
+              "signals": {
+                "id": "signals",
+                "name": "Signals",
+                "layout": [
+                  {
+                    "i": "exception_metric",
+                    "x": 24,
+                    "y": 0,
+                    "w": 8,
+                    "h": 5
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Execution Live Grid",
+        "dashboard_name": "Execution Live Grid Dashboard",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "live_orders_grid",
+        "data_args": {
+          "venue": "EDGX"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Execution Live Grid",
+        "data": "Execution Live Grid is live from Execution Desk Data: live stream ready. Configured venue=EDGX."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "advanced",
+  "capability": "widget-building",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [
+    "Execution Live Grid",
+    "live stream",
+    "Execution Desk Data",
+    "EDGX"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique advanced/live_orders_grid_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_exception-metric:metric:exception_metric_value,capability_2_live-orders-grid:server-side-grid:order_id,px,px_change; generated:note@*:Execution Live Grid,live stream."
+}

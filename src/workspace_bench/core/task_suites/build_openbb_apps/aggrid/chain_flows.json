@@ -1,0 +1,274 @@
+{
+  "id": "chain_flows",
+  "title": "Assemble the Flow Monitor app around Chain Flows",
+  "workflow": "portfolio-morning-review",
+  "subdomain": "crypto",
+  "tags": [
+    "family-aggrid",
+    "cell2",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "aggrid",
+    "multi-tab"
+  ],
+  "prompt": "Build a working Workspace experience for a digital-assets analyst covering chain activity and liquidity. The workspace must cover net flows by chain. The workspace must cover current gas price snapshot. Analysts need to inspect chain, inflow USD, outflow USD, net percentage. Leave the complete working workspace open for review. Keep these source-contract anchors: `chain` and `inflow_usd`. Choose the rest of the architecture and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "chain-tvl-data__chain_flows",
+          "widget_id": "chain_flows",
+          "fields": [
+            "chain",
+            "inflow_usd",
+            "net_pct",
+            "outflow_usd"
+          ],
+          "path": "/chain-flows",
+          "payload": [
+            {
+              "chain": "chain-1",
+              "inflow_usd": 10.25,
+              "net_pct": 10.25,
+              "outflow_usd": 10.25
+            },
+            {
+              "chain": "chain-2",
+              "inflow_usd": 20.5,
+              "net_pct": 20.5,
+              "outflow_usd": 20.5
+            },
+            {
+              "chain": "chain-3",
+              "inflow_usd": 30.75,
+              "net_pct": 30.75,
+              "outflow_usd": 30.75
+            }
+          ]
+        },
+        {
+          "name": "chain-tvl-data__gas_metric",
+          "widget_id": "gas_metric",
+          "fields": [
+            "gas_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/gas-now",
+          "payload": {
+            "gas_metric_value": 10.25,
+            "label": "Gas Now",
+            "value": 42.5
+          }
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_chain-flows",
+        "datasets": [
+          "chain-tvl-data__chain_flows"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "chain",
+          "inflow_usd",
+          "net_pct",
+          "outflow_usd"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_gas-metric",
+        "datasets": [
+          "chain-tvl-data__gas_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "gas_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    },
+    "polish": [
+      {
+        "code": "polish_refresh_policy",
+        "backend_name": "Chain TVL Data",
+        "widget_id": "chain_flows",
+        "path": "staleTime",
+        "expected": 900000
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Chain TVL Data",
+        "url": "http://localhost:7802",
+        "widgets_json": {
+          "chain_flows": {
+            "name": "Chain Flows",
+            "description": "Net flows by chain.",
+            "endpoint": "/chain-flows",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "chain",
+                    "headerName": "Chain",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "inflow_usd",
+                    "headerName": "Inflow Usd",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "outflow_usd",
+                    "headerName": "Outflow Usd",
+                    "cellDataType": "number"
+                  },
+                  {
+                    "field": "net_pct",
+                    "headerName": "Net Pct",
+                    "cellDataType": "number",
+                    "formatterFn": "percent"
+                  }
+                ]
+              }
+            },
+            "staleTime": 900000
+          },
+          "gas_metric": {
+            "name": "Gas Now",
+            "description": "Current gas price snapshot.",
+            "endpoint": "/gas-now",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "data": {
+              "valueField": "gas_metric_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Flow Monitor",
+            "description": "Chain flows and gas.",
+            "tabs": {
+              "flows": {
+                "id": "flows",
+                "name": "Flows",
+                "layout": [
+                  {
+                    "i": "chain_flows",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              },
+              "gas": {
+                "id": "gas",
+                "name": "Gas",
+                "layout": [
+                  {
+                    "i": "gas_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 6
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Flow Monitor",
+        "dashboard_name": "Flow Monitor Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "aggrid",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "chain",
+    "inflow_usd"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique aggrid/chain_flows building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Chain TVL Data; artifact capabilities:capability_1_chain-flows:table-like:chain,inflow_usd,net_pct,outflow_usd,capability_2_gas-metric:metric:gas_metric_value."
+}

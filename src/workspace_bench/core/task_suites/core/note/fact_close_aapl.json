@@ -1,0 +1,115 @@
+{
+  "id": "fact_close_aapl",
+  "title": "Grounded Note: Close Aapl",
+  "capability": "workspace-inspection",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-note",
+    "note",
+    "read-only"
+  ],
+  "prompt": "Review the existing AAPL price widget and add a note with the latest close from the data.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Existing Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "price_performance",
+          "data_args": {
+            "symbol": "AAPL"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 12
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_widget_data",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        },
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "AAPL",
+          "196.10"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Answer Note",
+        "data": "Latest AAPL close is 196.10."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "read",
+  "family": "note",
+  "difficulty": "easy",
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique note/fact_close_aapl exercise using add_generative_widget, get_widget_data, get_workspace_snapshot with checks layout_out_of_grid, missing_generated_widget, missing_widget, repeated_snapshots, too_many_invalid_calls on equities; artifact widgets:Bench Equities/price_performance@*; generated:note@*:AAPL,196.10."
+}

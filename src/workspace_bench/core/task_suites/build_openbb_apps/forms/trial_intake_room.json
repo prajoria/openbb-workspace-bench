@@ -1,0 +1,383 @@
+{
+  "id": "trial_intake_room",
+  "title": "Assemble the Trial Intake Room form app",
+  "workflow": "healthcare-catalyst-review",
+  "subdomain": "healthcare",
+  "tags": [
+    "family-forms",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "forms",
+    "multi-tab"
+  ],
+  "prompt": "Build a healthcare-research analyst a dependable clinical catalysts and pipelines workspace. The workspace must cover capture a clinical trial readout note. The workspace must cover upcoming clinical trial readouts. The workspace must cover catalysts in the next 30 days. Analysts need to inspect ticker, phase, readout date. An analyst can filter the analysis by ticker. An analyst can choose the relevant business date. The user can enter the required details and submit the workflow. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Decide how best to organize the experience and preserve unrelated work.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "healthcare-research-data__catalyst_metric",
+          "widget_id": "catalyst_metric",
+          "fields": [
+            "catalyst_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/catalyst-count",
+          "payload": {
+            "catalyst_metric_value": 10.25,
+            "label": "Catalysts 30d",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "healthcare-research-data__trial_catalysts",
+          "widget_id": "trial_catalysts",
+          "fields": [
+            "phase",
+            "readout_date",
+            "ticker"
+          ],
+          "path": "/trial-catalysts",
+          "payload": [
+            {
+              "phase": "Primary",
+              "readout_date": "2026-01-13",
+              "ticker": "AAPL"
+            },
+            {
+              "phase": "Review",
+              "readout_date": "2026-01-14",
+              "ticker": "MSFT"
+            },
+            {
+              "phase": "Approved",
+              "readout_date": "2026-01-15",
+              "ticker": "NVDA"
+            }
+          ]
+        },
+        {
+          "name": "healthcare-research-data__trial_readout_form",
+          "widget_id": "trial_readout_form",
+          "fields": [
+            "trial_readout_form_value"
+          ],
+          "path": "/trial-readout-form",
+          "payload": [
+            {
+              "trial_readout_form_value": 10.25
+            },
+            {
+              "trial_readout_form_value": 20.5
+            },
+            {
+              "trial_readout_form_value": 30.75
+            }
+          ],
+          "form_endpoint": "/trial-readout-submit"
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_catalyst-metric",
+        "datasets": [
+          "healthcare-research-data__catalyst_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "catalyst_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_trial-catalysts",
+        "datasets": [
+          "healthcare-research-data__trial_catalysts"
+        ],
+        "widget_kind": "table-like",
+        "must_cover_fields": [
+          "phase",
+          "readout_date",
+          "ticker"
+        ],
+        "required_param_kinds": [
+          "endpoint",
+          "ticker"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_3_trial-readout-form",
+        "datasets": [
+          "healthcare-research-data__trial_readout_form"
+        ],
+        "widget_kind": "form",
+        "must_cover_fields": [
+          "trial_readout_form_value"
+        ],
+        "required_param_kinds": [
+          "button",
+          "date",
+          "endpoint",
+          "form",
+          "ticker"
+        ],
+        "required_config": {}
+      }
+    ],
+    "capability_connections": [
+      {
+        "source": "capability_3_trial-readout-form",
+        "target": "capability_2_trial-catalysts",
+        "param_kind": "endpoint"
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Healthcare Research Data",
+        "url": "http://localhost:7808",
+        "widgets_json": {
+          "trial_readout_form": {
+            "name": "Trial Readout Form",
+            "description": "Capture a clinical trial readout note.",
+            "endpoint": "/trial-readout-form",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 10
+            },
+            "params": [
+              {
+                "paramName": "readout",
+                "type": "form",
+                "label": "Readout",
+                "endpoint": "/trial-readout-submit",
+                "method": "POST",
+                "inputParams": [
+                  {
+                    "paramName": "ticker",
+                    "type": "text",
+                    "label": "Ticker",
+                    "value": "PFE"
+                  },
+                  {
+                    "paramName": "readout_date",
+                    "type": "date",
+                    "label": "Readout date",
+                    "value": "2026-08-19"
+                  },
+                  {
+                    "paramName": "save",
+                    "type": "button",
+                    "label": "Save"
+                  }
+                ]
+              },
+              {
+                "paramName": "trial_ticker",
+                "type": "endpoint",
+                "label": "Trial ticker",
+                "value": "PFE",
+                "optionsEndpoint": "/tickers"
+              }
+            ],
+            "category": "Research",
+            "data": {
+              "valueField": "trial_readout_form_value"
+            }
+          },
+          "trial_catalysts": {
+            "name": "Trial Catalysts",
+            "description": "Upcoming clinical trial readouts.",
+            "endpoint": "/trial-catalysts",
+            "type": "table",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "ticker",
+                "type": "endpoint",
+                "label": "Ticker",
+                "value": "PFE",
+                "optionsEndpoint": "/tickers"
+              },
+              {
+                "paramName": "trial_ticker",
+                "type": "endpoint",
+                "label": "Trial ticker",
+                "value": "PFE",
+                "optionsEndpoint": "/tickers"
+              }
+            ],
+            "data": {
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "ticker",
+                    "headerName": "Ticker",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "phase",
+                    "headerName": "Phase",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "readout_date",
+                    "headerName": "Readout",
+                    "cellDataType": "dateString"
+                  }
+                ]
+              }
+            }
+          },
+          "catalyst_metric": {
+            "name": "Catalysts 30d",
+            "description": "Catalysts in the next 30 days.",
+            "endpoint": "/catalyst-count",
+            "type": "metric",
+            "gridData": {
+              "w": 6,
+              "h": 4
+            },
+            "data": {
+              "valueField": "catalyst_metric_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Trial Intake Room",
+            "description": "Trial readouts and catalyst status.",
+            "tabs": {
+              "intake": {
+                "id": "intake",
+                "name": "Intake",
+                "layout": [
+                  {
+                    "i": "trial_readout_form",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 10
+                  },
+                  {
+                    "i": "catalyst_metric",
+                    "x": 20,
+                    "y": 0,
+                    "w": 8,
+                    "h": 6
+                  }
+                ]
+              },
+              "status": {
+                "id": "status",
+                "name": "Status",
+                "layout": [
+                  {
+                    "i": "trial_catalysts",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Trial Sync",
+                "type": "param",
+                "paramName": "trial_ticker",
+                "widgetIds": [
+                  "trial_readout_form",
+                  "trial_catalysts"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Trial Intake Room",
+        "dashboard_name": "Trial Intake Room Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "forms",
+  "capability": "widget-building",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [
+    "ticker",
+    "date"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "validation",
+  "novelty": "Unique forms/trial_intake_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Healthcare Research Data; artifact capabilities:capability_1_catalyst-metric:metric:catalyst_metric_value,capability_2_trial-catalysts:table-like:phase,readout_date,ticker,capability_3_trial-readout-form:form:trial_readout_form_value."
+}

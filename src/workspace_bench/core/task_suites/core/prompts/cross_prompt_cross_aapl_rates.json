@@ -1,0 +1,175 @@
+{
+  "id": "cross_prompt_cross_aapl_rates",
+  "title": "Prompt Cross AAPL Rates",
+  "capability": "dashboard-construction",
+  "workflow": "equity-tearsheet",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-prompts",
+    "prompts",
+    "cross-backend"
+  ],
+  "prompt": "Get workspace_tool_usage and workspace_session_context, create Prompt Cross AAPL Rates, build the cross-backend dashboard with Bench Equities/price_performance with data_args {\"symbol\": \"AAPL\"} and Bench Macro/macro_timeseries with data_args {\"series\": \"DGS10\"}, and add a note mentioning AAPL and DGS10 and current-dashboard.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      },
+      {
+        "name": "macro"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_prompt",
+    "manage_dashboard",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Prompt Cross AAPL Rates",
+    "required_tool_calls": [
+      {
+        "tool": "get_workspace_prompt",
+        "args_contains": {
+          "name": "workspace_tool_usage"
+        }
+      },
+      {
+        "tool": "get_workspace_prompt",
+        "args_contains": {
+          "name": "workspace_session_context"
+        }
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      },
+      {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS10"
+        }
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "AAPL",
+          "DGS10",
+          "current-dashboard"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_prompt",
+      "args": {
+        "name": "workspace_tool_usage"
+      }
+    },
+    {
+      "tool": "get_workspace_prompt",
+      "args": {
+        "name": "workspace_session_context"
+      }
+    },
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "create",
+        "name": "Prompt Cross AAPL Rates"
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Equities"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "price_performance",
+        "data_args": {
+          "symbol": "AAPL"
+        }
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Macro"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS10"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Prompt Cross Note",
+        "data": "Prompt cross build: AAPL, DGS10, current-dashboard."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "dashboard",
+  "family": "prompts",
+  "difficulty": "hard",
+  "limits": {
+    "max_turns": 12
+  },
+  "split": "train",
+  "novelty": "Unique prompts/cross_prompt_cross_aapl_rates exercise using add_generative_widget, create_widget, get_widget_schema, get_workspace_prompt, list_available_widgets, manage_dashboard with checks dashboard_name, layout_out_of_grid, layout_overlap, missing_generated_widget, missing_tool_call, missing_widget, repeated_snapshots, schema_not_called_before_create, too_many_invalid_calls, unlisted_widget_id on equities, macro; artifact prompts:workspace_session_context,workspace_tool_usage; widgets:Bench Equities/price_performance@*,Bench Macro/macro_timeseries@*; generated:note@*:AAPL,DGS10."
+}

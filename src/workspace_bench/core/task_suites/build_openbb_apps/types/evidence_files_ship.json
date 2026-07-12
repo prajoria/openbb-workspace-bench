@@ -1,0 +1,302 @@
+{
+  "id": "evidence_files_ship",
+  "title": "Ship, open, and configure the Evidence Live app",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-types",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "types",
+    "orchestration"
+  ],
+  "prompt": "Build a surveillance analyst a dependable cases and compliance alerts workspace. The workspace must cover browse case evidence documents. The workspace must cover open alert count. The workspace must cover notes for one surveillance case. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Evidence Live', 'evidence', 'Surveillance Data'. Decide how best to organize the experience and preserve unrelated work.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "Evidence Live",
+          "evidence",
+          "Surveillance Data"
+        ],
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "surveillance-data__alert_metric",
+          "widget_id": "alert_metric",
+          "fields": [
+            "alert_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/alert-count",
+          "payload": {
+            "alert_metric_value": 10.25,
+            "label": "Open Alerts",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "surveillance-data__case_notes",
+          "widget_id": "case_notes",
+          "fields": [
+            "case_notes_value"
+          ],
+          "path": "/case-notes",
+          "payload": "Case Notes fixture-backed runtime summary."
+        },
+        {
+          "name": "surveillance-data__evidence_files",
+          "widget_id": "evidence_files",
+          "fields": [
+            "evidence_files_value",
+            "title",
+            "url"
+          ],
+          "path": "/evidence-files",
+          "payload": {
+            "evidence_files_value": 10.25,
+            "title": "Evidence Files",
+            "url": "https://fixtures.workspace-bench.invalid/evidence_files"
+          }
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_alert-metric",
+        "datasets": [
+          "surveillance-data__alert_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "alert_metric_value"
+        ],
+        "required_param_kinds": [],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_evidence-files",
+        "datasets": [
+          "surveillance-data__evidence_files"
+        ],
+        "widget_kind": "multi-file",
+        "must_cover_fields": [
+          "evidence_files_value"
+        ],
+        "required_param_kinds": [
+          "endpoint"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "evidence_files": {
+            "name": "Evidence Files",
+            "description": "Browse case evidence documents.",
+            "endpoint": "/evidence-files",
+            "type": "multi_file_viewer",
+            "gridData": {
+              "w": 20,
+              "h": 14
+            },
+            "params": [
+              {
+                "paramName": "file",
+                "type": "endpoint",
+                "label": "File",
+                "optionsEndpoint": "/evidence-file-options",
+                "roles": [
+                  "fileSelector"
+                ],
+                "multiSelect": true,
+                "value": []
+              }
+            ],
+            "staleTime": 900000,
+            "data": {
+              "valueField": "evidence_files_value"
+            }
+          },
+          "alert_metric": {
+            "name": "Open Alerts",
+            "description": "Open alert count.",
+            "endpoint": "/alert-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "staleTime": 900000,
+            "data": {
+              "valueField": "alert_metric_value"
+            }
+          },
+          "case_notes": {
+            "name": "Case Notes",
+            "description": "Notes for one surveillance case.",
+            "endpoint": "/case-notes",
+            "type": "markdown",
+            "gridData": {
+              "w": 12,
+              "h": 8
+            },
+            "params": [
+              {
+                "paramName": "case_id",
+                "type": "text",
+                "label": "Case",
+                "value": "C-1042",
+                "description": "Case identifier."
+              }
+            ],
+            "staleTime": 900000,
+            "data": {
+              "valueField": "case_notes_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Evidence Live",
+            "description": "Evidence files, alerts, and notes.",
+            "tabs": {
+              "evidence": {
+                "id": "evidence",
+                "name": "Evidence",
+                "layout": [
+                  {
+                    "i": "evidence_files",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 12
+                  }
+                ]
+              },
+              "signals": {
+                "id": "signals",
+                "name": "Signals",
+                "layout": [
+                  {
+                    "i": "alert_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 8,
+                    "h": 5
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Evidence Live",
+        "dashboard_name": "Evidence Live Live",
+        "activate": true
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_id": "evidence_files",
+        "data_args": {
+          "file": [
+            "case-pack.pdf"
+          ]
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Evidence Live",
+        "data": "Evidence Live is live from Surveillance Data: evidence ready."
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "types",
+  "capability": "widget-building",
+  "specification_level": "open-brief",
+  "difficulty": "hard",
+  "business_terms": [
+    "Evidence Live",
+    "evidence",
+    "Surveillance Data"
+  ],
+  "limits": {
+    "max_turns": 8
+  },
+  "split": "train",
+  "novelty": "Unique types/evidence_files_ship building exercise using add_generative_widget, manage_apps, manage_backends, update_widget with checks capability, layout_out_of_grid, layout_overlap, missing_generated_widget, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_alert-metric:metric:alert_metric_value,capability_2_evidence-files:multi-file:evidence_files_value; generated:note@*:Evidence Live,evidence."
+}

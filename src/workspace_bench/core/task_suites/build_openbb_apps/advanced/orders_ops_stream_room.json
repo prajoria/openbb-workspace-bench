@@ -1,0 +1,308 @@
+{
+  "id": "orders_ops_stream_room",
+  "title": "Assemble the Execution Stream Room",
+  "workflow": "execution-exception-review",
+  "subdomain": "execution",
+  "tags": [
+    "family-advanced",
+    "cell1",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "advanced",
+    "multi-tab"
+  ],
+  "prompt": "Deliver an analyst-ready Workspace solution for orders and venue quality. The workspace must cover streaming order tape for the ops room. The workspace must cover open execution exceptions. Analysts need to inspect order ID, price. Large result sets must stay responsive while analysts filter and page through them. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Use `venue_scope` and `order_id` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 2,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "execution-desk-data__exception_metric",
+          "widget_id": "exception_metric",
+          "fields": [
+            "exception_metric_value",
+            "label",
+            "value"
+          ],
+          "path": "/exception-count",
+          "payload": {
+            "exception_metric_value": 10.25,
+            "label": "Exceptions",
+            "value": 42.5
+          }
+        },
+        {
+          "name": "execution-desk-data__orders_ops_stream",
+          "widget_id": "orders_ops_stream",
+          "fields": [
+            "order_id",
+            "px",
+            "px_change"
+          ],
+          "path": "/orders-ops-stream",
+          "payload": [
+            {
+              "order_id": "order_id-1",
+              "px": 10.25,
+              "px_change": 10.25
+            },
+            {
+              "order_id": "order_id-2",
+              "px": 20.5,
+              "px_change": 20.5
+            },
+            {
+              "order_id": "order_id-3",
+              "px": 30.75,
+              "px_change": 30.75
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_exception-metric",
+        "datasets": [
+          "execution-desk-data__exception_metric"
+        ],
+        "widget_kind": "metric",
+        "must_cover_fields": [
+          "exception_metric_value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      },
+      {
+        "name": "capability_2_orders-ops-stream",
+        "datasets": [
+          "execution-desk-data__orders_ops_stream"
+        ],
+        "widget_kind": "server-side-grid",
+        "must_cover_fields": [
+          "order_id",
+          "px",
+          "px_change"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {
+          "wsEndpoint": "wss://execution.example/ops-orders",
+          "data.updateFrequency": 1000,
+          "data.wsRowIdColumn": "order_id"
+        }
+      }
+    ],
+    "capability_connections": [
+      {
+        "source": "capability_2_orders-ops-stream",
+        "target": "capability_1_exception-metric",
+        "param_kind": "text"
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    },
+    "polish": [
+      {
+        "code": "polish_refresh_policy",
+        "backend_name": "Execution Desk Data",
+        "widget_id": "orders_ops_stream",
+        "path": "refetchInterval",
+        "expected": false
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Execution Desk Data",
+        "url": "http://localhost:7806",
+        "widgets_json": {
+          "orders_ops_stream": {
+            "name": "Orders Ops Stream",
+            "description": "Streaming order tape for the ops room.",
+            "endpoint": "/orders-ops-stream",
+            "type": "live_grid",
+            "wsEndpoint": "wss://execution.example/ops-orders",
+            "gridData": {
+              "w": 24,
+              "h": 10
+            },
+            "data": {
+              "wsRowIdColumn": "order_id",
+              "table": {
+                "columnsDefs": [
+                  {
+                    "field": "order_id",
+                    "headerName": "Order",
+                    "cellDataType": "text"
+                  },
+                  {
+                    "field": "px",
+                    "headerName": "Price",
+                    "cellDataType": "number",
+                    "renderFn": "showCellChange",
+                    "renderFnParams": {
+                      "colorValueKey": "px_change"
+                    }
+                  }
+                ]
+              },
+              "updateFrequency": 1000
+            },
+            "refetchInterval": false,
+            "params": [
+              {
+                "paramName": "venue_scope",
+                "type": "text",
+                "label": "Venue scope",
+                "value": "ARCA",
+                "description": "Venue reviewed across the stream room."
+              }
+            ]
+          },
+          "exception_metric": {
+            "name": "Exceptions",
+            "description": "Open execution exceptions.",
+            "endpoint": "/exception-count",
+            "type": "metric",
+            "gridData": {
+              "w": 5,
+              "h": 4
+            },
+            "params": [
+              {
+                "paramName": "venue_scope",
+                "type": "text",
+                "label": "Venue scope",
+                "value": "ARCA",
+                "description": "Venue reviewed across the stream room."
+              }
+            ],
+            "data": {
+              "valueField": "exception_metric_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Execution Stream Room",
+            "description": "Live orders and exception posture.",
+            "tabs": {
+              "stream": {
+                "id": "stream",
+                "name": "Stream",
+                "layout": [
+                  {
+                    "i": "orders_ops_stream",
+                    "x": 0,
+                    "y": 0,
+                    "w": 24,
+                    "h": 10
+                  }
+                ]
+              },
+              "exceptions": {
+                "id": "exceptions",
+                "name": "Exceptions",
+                "layout": [
+                  {
+                    "i": "exception_metric",
+                    "x": 0,
+                    "y": 0,
+                    "w": 8,
+                    "h": 5
+                  }
+                ]
+              }
+            },
+            "groups": [
+              {
+                "name": "Venue Sync",
+                "type": "param",
+                "paramName": "venue_scope",
+                "widgetIds": [
+                  "orders_ops_stream",
+                  "exception_metric"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Execution Stream Room",
+        "dashboard_name": "Execution Stream Room Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "advanced",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "venue_scope",
+    "order_id"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "validation",
+  "novelty": "Unique advanced/orders_ops_stream_room building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, capability_connection, repeated_snapshots, too_many_invalid_calls on custom:Execution Desk Data; artifact capabilities:capability_1_exception-metric:metric:exception_metric_value,capability_2_orders-ops-stream:server-side-grid:order_id,px,px_change."
+}

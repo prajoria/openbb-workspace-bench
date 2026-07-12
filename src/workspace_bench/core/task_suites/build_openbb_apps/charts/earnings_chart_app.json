@@ -1,0 +1,184 @@
+{
+  "id": "earnings_chart_app",
+  "title": "Ship EPS History as the EPS Chart App",
+  "workflow": "earnings-prep",
+  "subdomain": "equity-research",
+  "tags": [
+    "family-charts",
+    "cell4",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "charts"
+  ],
+  "prompt": "Build a working Workspace experience for an equity-research analyst covering earnings and estimates. The workspace must cover EPS beat and miss history. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Keep these source-contract anchors: `symbol`. Choose the rest of the architecture and avoid unrelated changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "earnings-prep-data__earnings_chart",
+          "widget_id": "earnings_chart",
+          "fields": [
+            "earnings_chart_value"
+          ],
+          "path": "/eps-history",
+          "payload": [
+            {
+              "earnings_chart_value": 10.25
+            },
+            {
+              "earnings_chart_value": 20.5
+            },
+            {
+              "earnings_chart_value": 30.75
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_earnings-chart",
+        "datasets": [
+          "earnings-prep-data__earnings_chart"
+        ],
+        "widget_kind": "chart-like",
+        "must_cover_fields": [
+          "earnings_chart_value"
+        ],
+        "required_param_kinds": [
+          "ticker"
+        ],
+        "required_config": {
+          "raw": true
+        }
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Earnings Prep Data",
+        "url": "http://localhost:7805",
+        "widgets_json": {
+          "earnings_chart": {
+            "name": "EPS History",
+            "description": "Plotly EPS beat/miss history.",
+            "endpoint": "/eps-history",
+            "type": "chart",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "symbol",
+                "type": "endpoint",
+                "label": "Symbol",
+                "value": "AAPL",
+                "optionsEndpoint": "/symbols"
+              }
+            ],
+            "raw": true,
+            "data": {
+              "valueField": "earnings_chart_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "EPS Chart App",
+            "description": "EPS history chart.",
+            "tabs": {
+              "eps": {
+                "id": "eps",
+                "name": "EPS",
+                "layout": [
+                  {
+                    "i": "earnings_chart",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "EPS Chart App",
+        "dashboard_name": "EPS Chart App Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "charts",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "symbol"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique charts/earnings_chart_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Earnings Prep Data; artifact capabilities:capability_1_earnings-chart:chart-like:earnings_chart_value."
+}

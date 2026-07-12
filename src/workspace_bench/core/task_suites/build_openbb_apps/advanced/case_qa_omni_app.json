@@ -1,0 +1,179 @@
+{
+  "id": "case_qa_omni_app",
+  "title": "Ship Case Q&A as Case QA",
+  "workflow": "compliance-surveillance",
+  "subdomain": "compliance",
+  "tags": [
+    "family-advanced",
+    "cell3",
+    "build-openbb-apps",
+    "widgets-json",
+    "apps-json",
+    "advanced"
+  ],
+  "prompt": "Deliver an analyst-ready Workspace solution for cases and compliance alerts. The workspace must cover ask questions over the surveillance case corpus. Leave the complete working workspace open for review. Use `prompt` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "trace_checks": {
+      "max_invalid_tool_calls": 1,
+      "max_repeated_snapshots": 2
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true,
+      "max_dashboard_delta": 1,
+      "max_custom_backend_delta": 1
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "surveillance-data__case_qa_omni",
+          "widget_id": "case_qa_omni",
+          "fields": [
+            "answer",
+            "case_qa_omni_value",
+            "sources"
+          ],
+          "path": "/case-qa",
+          "payload": {
+            "answer": "Verified fixture-backed result.",
+            "case_qa_omni_value": 10.25,
+            "sources": [
+              "task-dataset"
+            ]
+          }
+        }
+      ],
+      "pinned_paths": false
+    },
+    "required_capabilities": [
+      {
+        "name": "capability_1_case-qa-omni",
+        "datasets": [
+          "surveillance-data__case_qa_omni"
+        ],
+        "widget_kind": "any",
+        "must_cover_fields": [
+          "case_qa_omni_value"
+        ],
+        "required_param_kinds": [
+          "text"
+        ],
+        "required_config": {}
+      }
+    ],
+    "app_structure": {
+      "required": true,
+      "layout_refs_valid": true,
+      "no_overlaps": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "Surveillance Data",
+        "url": "http://localhost:7807",
+        "widgets_json": {
+          "case_qa_omni": {
+            "name": "Case Q&A",
+            "description": "Ask questions over the surveillance case corpus.",
+            "endpoint": "/case-qa",
+            "type": "omni",
+            "gridData": {
+              "w": 20,
+              "h": 9
+            },
+            "params": [
+              {
+                "paramName": "prompt",
+                "type": "text",
+                "label": "Prompt",
+                "description": "Question to run over the case corpus.",
+                "show": false
+              }
+            ],
+            "data": {
+              "valueField": "case_qa_omni_value"
+            }
+          }
+        },
+        "apps_json": [
+          {
+            "name": "Case QA",
+            "description": "Ask over the surveillance corpus.",
+            "tabs": {
+              "qa": {
+                "id": "qa",
+                "name": "Q&A",
+                "layout": [
+                  {
+                    "i": "case_qa_omni",
+                    "x": 0,
+                    "y": 0,
+                    "w": 20,
+                    "h": 9
+                  }
+                ]
+              }
+            },
+            "groups": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Case QA",
+        "dashboard_name": "Case QA Live",
+        "activate": true
+      }
+    }
+  ],
+  "domain": "finance",
+  "source": "workspace-bench-build-apps-gen",
+  "schema_version": "workspace-bench-task",
+  "category": "platform",
+  "family": "advanced",
+  "capability": "widget-building",
+  "specification_level": "partially-specified",
+  "difficulty": "hard",
+  "business_terms": [
+    "prompt"
+  ],
+  "limits": {
+    "max_turns": 6
+  },
+  "split": "train",
+  "novelty": "Unique advanced/case_qa_omni_app building exercise using get_workspace_snapshot, manage_apps, manage_backends with checks capability, repeated_snapshots, too_many_invalid_calls on custom:Surveillance Data; artifact capabilities:capability_1_case-qa-omni:any:case_qa_omni_value."
+}
