@@ -1,8 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "name": "Book Hub", "operation": "update"}, "tool": "manage_dashboard"}
-{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Exposure"}]}, "tool": "manage_navigation_bar"}
-{"args": {"dashboard_id": "dash_001", "operation": "tab", "tab_id": "exposure"}, "tool": "navigate_workspace"}
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_001", "data_args": {}, "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
-{"args": {"dashboard_id": "dash_001", "data": "Book Hub exposure note: review portfolio exposure on this Exposure tab for the book hub.", "inner_tab": "exposure", "name": "Exposure Note", "widget_type": "note"}, "tool": "add_generative_widget"}

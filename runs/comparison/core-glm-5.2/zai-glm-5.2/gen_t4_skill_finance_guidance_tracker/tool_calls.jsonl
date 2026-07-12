@@ -1,6 +1,0 @@
-{"args": {"slug": "finance-guidance-tracker"}, "tool": "get_skill_content"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
-{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_data"}
-{"args": {"data": "NVDA Estimate History: For 2026Q1, the eps_estimate is 1.18 and revenue_estimate_b is 39.4. For 2026Q2, the eps_estimate is 1.26 and revenue_estimate_b is 42.1. For 2026Q3, the eps_estimate is 1.33 and revenue_estimate_b is 45.7. Key value: eps_estimate for 2026Q1 = 1.18.", "inner_tab": "overview", "name": "NVDA Guidance Tracker Note", "widget_type": "note"}, "tool": "add_generative_widget"}

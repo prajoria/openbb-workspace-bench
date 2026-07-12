@@ -1,9 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {"limit": 5, "symbol": "AAPL"}, "origin": "Bench Equities", "param_name": "symbol", "widget_id": "latest_news"}, "tool": "get_params_options"}
-{"args": {"dashboard_id": "dash_001", "data_args": {"limit": 5, "symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "create_widget"}
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_001", "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
-{"args": {"dashboard_id": "dash_001", "data": "This dashboard combines the Latest News for MSFT from Bench Equities with the Sector Exposure widget from Bench Portfolio. Use the MSFT news feed to monitor recent developments for Microsoft, and cross-reference with the portfolio's sector exposure to understand how MSFT-related sector allocations may impact overall portfolio risk.", "name": "MSFT Sector Exposure Note", "widget_type": "note"}, "tool": "add_generative_widget"}

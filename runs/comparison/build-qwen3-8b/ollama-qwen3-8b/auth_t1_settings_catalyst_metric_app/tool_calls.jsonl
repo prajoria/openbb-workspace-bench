@@ -1,2 +1,0 @@
-{"tool": "get_workspace_snapshot", "args": {}}
-{"tool": "manage_backends", "args": {"operation": "add", "name": "Healthcare Research Data", "url": "http://localhost:7808", "widgets_json": {"catalyst_metric": {"name": "Catalysts 30d", "description": "Catalysts in the next 30 days.", "endpoint": "/catalyst-count", "type": "metric", "w": 6, "h": 4, "runButton": true, "refetchInterval": 30000}}, "apps_json": [{"name": "Catalyst Settings", "tabs": {"catalysts": {"id": "catalysts", "name": "Catalysts", "layout": [{"i": "catalyst_metric", "x": 0, "y": 0, "w": 6, "h": 4}]}}}]}}

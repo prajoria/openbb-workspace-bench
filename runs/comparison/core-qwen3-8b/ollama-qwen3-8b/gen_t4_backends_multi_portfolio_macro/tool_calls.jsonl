@@ -1,7 +1,0 @@
-{"args": {"name": "portfolio", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"name": "macro", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Macro"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "create_widget"}
-{"args": {"origin": "Bench Macro", "widget_id": "yield_curve"}, "tool": "create_widget"}
-{"args": {"data": "Portfolio risk metrics and yield curve analysis", "widget_type": "note"}, "tool": "add_generative_widget"}

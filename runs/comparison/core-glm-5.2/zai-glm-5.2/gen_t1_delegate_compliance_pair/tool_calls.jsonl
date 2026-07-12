@@ -1,4 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {}, "tool": "assign_tasks_to_agents"}
-{"args": {}, "tool": "assign_tasks_to_agents"}
-{"args": {"task_requests": [{"assigned_agent_id": "alerts-analyst", "assigned_holder_url": "http://127.0.0.1:9104", "description": "Compliance surveillance work: monitor and analyze alerts for compliance violations.", "id": "alerts-analyst"}, {"assigned_agent_id": "restricted-analyst", "assigned_holder_url": "http://127.0.0.1:9104", "description": "Compliance surveillance work: review restricted securities and ensure compliance with trading restrictions.", "id": "restricted-analyst"}]}, "tool": "assign_tasks_to_agents"}

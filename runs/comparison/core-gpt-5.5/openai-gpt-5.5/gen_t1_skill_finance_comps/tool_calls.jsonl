@@ -1,2 +1,0 @@
-{"args": {"reason": "Need workflow steps for analyst note", "slug": "finance-comps"}, "tool": "get_skill_content"}
-{"args": {"data": "Finance Comps workflow for an analyst:\n\n1. Define the peer set.\n2. Normalize metrics.\n3. Compare valuation multiples.\n4. Explain why outliers deserve premium or discount.", "description": "Workflow steps from finance-comps skill content", "inner_tab": "overview", "name": "Finance Comps Workflow Notes", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,3 +1,0 @@
-{"args": {"slug": "finance-comps"}, "tool": "get_skill_content"}
-{"args": {"task_requests": [{"assigned_agent_id": "peers-analyst", "assigned_holder_url": "", "description": "Define peer set and normalize metrics per Finance Comps workflow.", "id": "peers-analyst"}, {"assigned_agent_id": "multiples-analyst", "assigned_holder_url": "", "description": "Compare valuation multiples and explain outliers per Finance Comps workflow.", "id": "multiples-analyst"}]}, "tool": "assign_tasks_to_agents"}
-{"args": {"data": "Coordinator Note: Delegating workstreams to peers-analyst and multiples-analyst for Finance Comps workflow.", "description": "Delegation Coordinator Note", "widget_type": "note"}, "tool": "add_generative_widget"}

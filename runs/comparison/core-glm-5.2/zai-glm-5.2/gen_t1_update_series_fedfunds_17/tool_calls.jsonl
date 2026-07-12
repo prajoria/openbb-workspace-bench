@@ -1,2 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {"series": "FEDFUNDS"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}

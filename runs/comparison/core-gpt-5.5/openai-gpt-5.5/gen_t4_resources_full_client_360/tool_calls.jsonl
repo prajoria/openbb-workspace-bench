@@ -1,7 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "Client Resource Command", "operation": "instantiate", "template_id": "client-360"}, "tool": "manage_apps"}
-{"args": {"operation": "tab", "tab_id": "flows"}, "tool": "navigate_workspace"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "client_360_flows_pipeline_by_stage"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_002", "data_args": {"client": "Atlas Pension", "period": "YTD", "region": "Americas"}, "origin": "Bench Stark Enterprise", "widget_id": "client_360_flows_pipeline_by_stage"}, "tool": "create_widget"}
-{"args": {"dashboard_id": "dash_002", "data": "Pipeline resource note: The Client Resource Command flows tab includes client_360_flows_pipeline_by_stage for the Atlas Pension YTD pipeline view, using Bench Stark Enterprise resource data from Salesforce CRM and Investor Reporting Mart.", "inner_tab": "flows", "name": "Pipeline Resource Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_attribution_attribution_summary"}, "tool": "get_widget_data"}
-{"args": {"data": "I reviewed the data from portfolio_command_center_attribution_attribution_summary.", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,2 +1,0 @@
-{"args": {"widget_id": "price_performance"}, "tool": "read_widget"}
-{"args": {"data": "This note mentions the AAPL symbol from the Price Performance widget.", "name": "AAPL Mention Note", "widget_type": "note"}, "tool": "add_generative_widget"}

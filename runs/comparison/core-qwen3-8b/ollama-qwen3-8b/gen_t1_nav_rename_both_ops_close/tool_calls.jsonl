@@ -1,2 +1,0 @@
-{"args": {"name": "Fund Close Control", "operation": "update"}, "tool": "manage_dashboard"}
-{"args": {"operation": "rename_tabs", "rename_map": {"Overview": "Close Checklist"}}, "tool": "manage_navigation_bar"}

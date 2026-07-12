@@ -1,6 +1,0 @@
-{
-  "exit_code": 0,
-  "stderr": "",
-  "stdout": "turn 4 retry 1/4 after model timeout: timed out\ndone at turn 4",
-  "timed_out": false
-}

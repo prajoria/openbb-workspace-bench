@@ -1,7 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "Biotech Catalyst Desk", "operation": "instantiate", "template_id": "healthcare-research-dashboard"}, "tool": "manage_apps"}
-{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "healthcare_research_dashboard_clinical_regulatory_timeline"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_002", "data_args": {"period": "YTD", "therapeutic_area": "Obesity / Metabolic", "ticker": "LLY"}, "origin": "Bench Stark Enterprise", "ui_args": {}, "widget_id": "healthcare_research_dashboard_clinical_regulatory_timeline"}, "tool": "create_widget"}
-{"args": {"dashboard_id": "dash_002", "data": "Regulatory timeline and catalysts: use the Regulatory Timeline widget to track LLY Obesity / Metabolic YTD regulatory milestones alongside clinical catalysts for the Biotech Catalyst Desk.", "description": "Clinical tab note on regulatory timeline and catalysts", "inner_tab": "clinical", "name": "Regulatory Catalyst Note", "widget_type": "note"}, "tool": "add_generative_widget"}

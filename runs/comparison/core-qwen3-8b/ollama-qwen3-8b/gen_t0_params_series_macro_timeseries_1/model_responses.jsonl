@@ -1,3 +1,0 @@
-{"action": {"args": {"origin": "Bench Macro", "param_name": "macro_timeseries", "widget_id": "macro_timeseries"}, "done": false, "tool": "get_params_options"}, "content": "{\"done\": false, \"tool\": \"get_params_options\", \"args\": {\"origin\": \"Bench Macro\", \"param_name\": \"macro_timeseries\", \"widget_id\": \"macro_timeseries\"}}", "turn": 1}
-{"action": {"args": {"data_args": {"series": "DGS10"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "done": false, "tool": "create_widget"}, "content": "{\"done\": false, \"tool\": \"create_widget\", \"args\": {\"origin\": \"Bench Macro\", \"widget_id\": \"macro_timeseries\", \"data_args\": {\"series\": \"DGS10\"}}}", "turn": 2}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

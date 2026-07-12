@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Equities", "widget_id": "price_performance"}, "tool": "get_widget_data"}
-{"args": {"data": "MSFT closed at $196.1 on 2026-01-15.", "description": "Latest close for MSFT", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,2 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"task_requests": [{"assigned_agent_id": "triage-analyst", "assigned_holder_url": "http://127.0.0.1:9104", "description": "Triage the open vendor incident log by severity.", "id": "triage-analyst"}]}, "tool": "assign_tasks_to_agents"}

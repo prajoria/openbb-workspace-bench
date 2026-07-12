@@ -1,4 +1,0 @@
-{"action": {"args": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "done": false, "tool": "manage_dashboard"}, "content": "{\"args\": {\"args\": {}, \"done\": false, \"tool\": \"get_workspace_snapshot\"}, \"done\": false, \"tool\": \"manage_dashboard\"}", "turn": 1}
-{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\": false, \"tool\": \"get_workspace_snapshot\", \"args\": {}}", "turn": 2}
-{"action": {"args": {"dashboard_id": "dash_001", "name": "Daily Compliance Control", "operation": "update"}, "done": false, "tool": "manage_dashboard"}, "content": "{\"done\": false, \"tool\": \"manage_dashboard\", \"args\": {\"operation\":\"update\",\"dashboard_id\":\"dash_001\",\"name\":\"Daily Compliance Control\"}}", "turn": 3}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 4}

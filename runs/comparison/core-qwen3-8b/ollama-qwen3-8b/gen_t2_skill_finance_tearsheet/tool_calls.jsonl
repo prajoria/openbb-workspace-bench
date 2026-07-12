@@ -1,6 +1,0 @@
-{"args": {"slug": "finance-tearsheet"}, "tool": "get_skill_content"}
-{"args": {"dashboard_id": "Skill Review", "operation": "add_tabs", "tabs": [{"name": "Tearsheet"}]}, "tool": "manage_navigation_bar"}
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "operation": "add_tabs", "tabs": [{"name": "Tearsheet"}]}, "tool": "manage_navigation_bar"}
-{"args": {"data": "Tearsheet workflow: gather price action, fundamentals, valuation, catalysts, risks, ownership, and a short investment conclusion.", "name": "Workflow Steps", "tab_id": "tearsheet", "widget_type": "note"}, "tool": "add_generative_widget"}
-{"args": {"operation": "tab", "tab_id": "tearsheet"}, "tool": "navigate_workspace"}

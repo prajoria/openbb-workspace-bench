@@ -1,1 +1,0 @@
-{"action": {"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "done": false, "tool": "container.exec"}, "content": "{\"args\": {\"cmd\": [\"bash\", \"-lc\", \"python - << 'PY'\\nprint('test')\\nPY\"]}, \"done\": false, \"tool\": \"container.exec\"}", "turn": 1}

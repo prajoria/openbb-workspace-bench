@@ -1,1 +1,0 @@
-{"tool": "manage_backends", "args": {"operation": "add", "name": "Chain TVL Data", "url": "http://localhost:7802", "widgets_json": {"gas_metric": {"name": "Gas Now", "description": "Current gas price snapshot.", "endpoint": "/gas-now", "type": "metric", "gridData": {"w": 5, "h": 4}, "category": "Network Ops", "refetchInterval": 30000}}}}

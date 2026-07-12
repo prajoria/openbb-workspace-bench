@@ -1,3 +1,0 @@
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "client_360_client_book_client_accounts"}, "tool": "get_widget_data"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "client_360_client_book_relationship_metrics"}, "tool": "get_widget_data"}
-{"args": {"data": "Reviewed data from widgets client_360_client_book_client_accounts and client_360_client_book_relationship_metrics.", "inner_tab": "main", "name": "Data Review Note", "widget_type": "note"}, "tool": "add_generative_widget"}

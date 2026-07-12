@@ -1,4 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "widget_uuid": "widget_002"}, "tool": "delete_widget"}
-{"args": {"dashboard_id": "dash_001", "data_args": {"limit": 5, "symbol": "AAPL"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
-{"args": {"dashboard_id": "dash_001", "data": "AAPL latest_news repaired: removed one duplicate NVDA Latest News widget and updated the remaining widget to AAPL.", "inner_tab": "", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

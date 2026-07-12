@@ -1,3 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "Data Vendor Watch", "operation": "instantiate", "template_id": "vendor-dataset-monitor"}, "tool": "manage_apps"}

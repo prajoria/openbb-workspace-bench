@@ -1,4 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"app_name": "Strategy Health Monitor", "dashboard_name": "Strategy Health Desk", "operation": "instantiate", "template_id": "strategy-health-monitor"}, "tool": "manage_apps"}
-{"args": {"app_name": "Strategy Health Monitor", "backend_id": "backend_001", "dashboard_name": "Strategy Health Desk", "operation": "instantiate", "template_id": "strategy-health-monitor"}, "tool": "manage_apps"}

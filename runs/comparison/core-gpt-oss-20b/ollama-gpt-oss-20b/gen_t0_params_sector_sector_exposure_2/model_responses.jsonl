@@ -1,3 +1,0 @@
-{"action": {"args": {"origin": "Bench Portfolio", "param_name": "sector", "widget_id": "sector_exposure"}, "done": false, "tool": "get_params_options"}, "content": "{\"done\": false, \"tool\": \"get_params_options\", \"args\": {\"origin\": \"Bench Portfolio\", \"widget_id\": \"sector_exposure\", \"param_name\": \"sector\"}}", "turn": 1}
-{"action": {"args": {"data_args": {"sector": "Technology"}, "origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "done": false, "tool": "create_widget"}, "content": "{\"args\": {\"data_args\": {\"sector\": \"Technology\"}, \"origin\": \"Bench Portfolio\", \"widget_id\": \"sector_exposure\"}, \"done\": false, \"tool\": \"create_widget\"}", "turn": 2}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

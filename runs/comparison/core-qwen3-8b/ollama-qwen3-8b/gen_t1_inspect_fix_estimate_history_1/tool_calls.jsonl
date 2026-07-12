@@ -1,2 +1,0 @@
-{"args": {"widget_id": "estimate_history"}, "tool": "read_widget"}
-{"args": {"data_args": {"symbol": "NVDA"}, "widget_id": "estimate_history", "widget_uuid": "widget_001"}, "tool": "update_widget"}

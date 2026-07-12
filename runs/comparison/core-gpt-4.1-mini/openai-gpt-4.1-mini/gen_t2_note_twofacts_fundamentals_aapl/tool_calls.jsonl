@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_data"}
-{"args": {"data": "Apple's gross margin is 0.462 and its net cash is 54.0 billion USD.", "inner_tab": "overview", "name": "AAPL Fundamentals Note", "widget_type": "note"}, "tool": "add_generative_widget"}

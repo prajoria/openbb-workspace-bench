@@ -1,4 +1,0 @@
-{"action": {"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('')\nPY"]}, "done": false, "tool": "container.exec"}, "content": "{\"args\": {\"cmd\": [\"bash\", \"-lc\", \"python - << 'PY'\\nprint('')\\nPY\"]}, \"done\": false, \"tool\": \"container.exec\"}", "turn": 1}
-{"action": {"args": {"args": {}}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"args\": {\"args\": {}}, \"done\": false, \"tool\": \"get_workspace_snapshot\"}", "turn": 2}
-{"action": {"args": {"dashboard_id": "", "h": 10, "tab_id": "", "w": 20, "widget_uuid": "widget_002", "x": 20, "y": 0}, "done": false, "tool": "update_widget_layout"}, "content": "{\"done\": false, \"tool\": \"update_widget_layout\", \"args\": {\"dashboard_id\": \"\", \"widget_uuid\": \"widget_002\", \"x\": 20, \"y\": 0, \"w\": 20, \"h\": 10, \"tab_id\": \"\"}}", "turn": 3}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 4}

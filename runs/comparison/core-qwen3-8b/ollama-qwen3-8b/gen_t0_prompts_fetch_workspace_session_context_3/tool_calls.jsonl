@@ -1,3 +1,0 @@
-{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
-{"args": {"dashboard_id": "Prompt Review", "data": "current-dashboard current-tab session grounding.", "description": "Workspace session context grounding note", "inner_tab": "", "widget_type": "note"}, "tool": "add_generative_widget"}
-{"args": {"data": "current-dashboard current-tab session grounding.", "description": "Workspace session context grounding note", "inner_tab": "", "widget_type": "note"}, "tool": "add_generative_widget"}

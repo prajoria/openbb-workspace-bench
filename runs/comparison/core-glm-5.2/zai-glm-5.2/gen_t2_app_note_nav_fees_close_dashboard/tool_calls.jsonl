@@ -1,7 +1,0 @@
-{"args": {}, "tool": "manage_backends"}
-{"args": {}, "tool": "manage_backends"}
-{"args": {}, "tool": "manage_backends"}
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"backend_id": "backend_001", "dashboard_name": "Monthly Close Control", "operation": "instantiate", "template_id": "nav-fees-close-dashboard"}, "tool": "manage_apps"}
-{"args": {"operation": "tab", "tab_id": "close"}, "tool": "navigate_workspace"}

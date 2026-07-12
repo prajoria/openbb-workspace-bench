@@ -1,3 +1,0 @@
-{"action": {"args": {"name": "macro", "operation": "add"}, "done": false, "tool": "manage_backends"}, "content": "{\n  \"done\": false,\n  \"tool\": \"manage_backends\",\n  \"args\": {\n    \"operation\": \"add\",\n    \"name\": \"macro\"\n  }\n}", "turn": 1}
-{"action": {"args": {"operation": "list"}, "done": false, "tool": "manage_backends"}, "content": "{\"done\": false, \"tool\": \"manage_backends\", \"args\": {\"operation\": \"list\"}}", "turn": 2}
-{"action": {"done": true}, "content": "{\n  \"done\": true\n}", "turn": 3}

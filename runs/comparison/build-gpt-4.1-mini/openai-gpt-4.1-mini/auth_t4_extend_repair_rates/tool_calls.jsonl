@@ -1,8 +1,0 @@
-{"tool": "manage_backends", "args": {"backend_id": "backend_001", "operation": "refresh", "widgets_json": {"rates_commentary": {"name": "Rates Commentary", "description": "Desk commentary on the rates day.", "endpoint": "/rates-commentary", "gridData": {"w": 12, "h": 8}, "params": [{"paramName": "series", "type": "endpoint", "label": "Series", "optionsEndpoint": "/series-options", "value": "DGS10"}], "type": "markdown"}, "curve_spread_metric": {"name": "2s10s Spread", "description": "Current 2s10s spread in bps.", "endpoint": "/curve-spread", "type": "metric", "gridData": {"w": 6, "h": 4}, "params": [{"paramName": "series", "type": "endpoint", "label": "Series", "optionsEndpoint": "/series-options", "value": "DGS10"}]}}}}
-{"tool": "manage_apps", "args": {"backend_id": "backend_001", "operation": "read"}}
-{"tool": "manage_apps", "args": {"backend_id": "backend_001", "operation": "list"}}
-{"tool": "manage_apps", "args": {"backend_id": "backend_001", "app_name": "Rates Repair Live", "operation": "instantiate", "dashboard_name": "Rates Repair Live Dashboard"}}
-{"tool": "add_generative_widget", "args": {"dashboard_id": "dash_002", "inner_tab": "posture", "name": "2s10s Spread", "widget_type": "metric", "data": [], "description": "Current 2s10s spread in bps.", "chart_params": null}}
-{"tool": "update_widget", "args": {"dashboard_id": "dash_002", "widget_id": "widget_001", "data_args": {"series": "DGS2"}}}
-{"tool": "update_widget", "args": {"dashboard_id": "dash_002", "widget_uuid": "widget_001", "data_args": {"series": "DGS2"}}}
-{"tool": "add_generative_widget", "args": {"dashboard_id": "dash_002", "inner_tab": "rates", "widget_type": "note", "name": "Rates Repair Live", "data": "Rates Repair Live is live from Rates Watch Data: rates repair done."}}

@@ -1,2 +1,0 @@
-{"args": {"name": "workspace_session_context"}, "tool": "get_workspace_prompt"}
-{"args": {"data": "Workspace session context guidance: use the current dashboard and tab from session context, create or navigate tabs deliberately, and keep generated notes tied to durable dashboard artifacts. Stable phrase: current-dashboard current-tab session grounding.", "name": "Workspace Session Context", "widget_type": "note"}, "tool": "add_generative_widget"}

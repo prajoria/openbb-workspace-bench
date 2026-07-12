@@ -1,7 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "Risk Resource Command", "operation": "instantiate", "template_id": "risk-exposure-monitor"}, "tool": "manage_apps"}
-{"args": {"operation": "tab", "tab_id": "limits"}, "tool": "navigate_workspace"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_limits_limit_utilization"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {"period": "YTD", "portfolio": "Global Equity", "scenario": "Equity -10%"}, "origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_limits_limit_utilization"}, "tool": "create_widget"}
-{"args": {"data": "Resource note: the limits tab includes risk_exposure_monitor_limits_limit_utilization for limit utilization review in Risk Resource Command. Use this resource to monitor limit utilization for Global Equity, scenario Equity -10%, period YTD.", "inner_tab": "limits", "name": "Limit Utilization Resource Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,4 +1,0 @@
-{"args": {"data_args": {"symbol": "NVDA"}, "widget_id": "price_performance"}, "tool": "update_widget"}
-{"args": {"data_args": {"symbol": "NVDA"}, "widget_id": "estimate_history"}, "tool": "update_widget"}
-{"args": {"dashboard_id": "dashboard_001", "data": "NVDA and repaired", "name": "NVDA Repaired Note", "widget_type": "note"}, "tool": "add_generative_widget"}
-{"args": {"data": "NVDA and repaired", "name": "NVDA Repaired Note", "widget_type": "note"}, "tool": "add_generative_widget"}

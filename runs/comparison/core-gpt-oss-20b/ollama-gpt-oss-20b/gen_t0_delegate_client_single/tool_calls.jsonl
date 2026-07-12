@@ -1,1 +1,0 @@
-{"args": {"task_requests": [{"assigned_agent_id": "ir-analyst", "assigned_holder_url": "Delegation Board", "description": "Prepare talking points and open requests for the client meeting.", "id": "client-meeting-prep-task"}]}, "tool": "assign_tasks_to_agents"}

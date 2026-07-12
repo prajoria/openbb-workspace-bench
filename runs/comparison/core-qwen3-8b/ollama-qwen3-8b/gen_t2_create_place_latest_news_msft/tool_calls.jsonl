@@ -1,4 +1,0 @@
-{"args": {"origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "get_widget_schema"}
-{"args": {"origin": "Bench Equities", "param_name": "symbol", "widget_id": "latest_news"}, "tool": "get_params_options"}
-{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "create_widget"}
-{"args": {"h": 10, "w": 20, "widget_uuid": "widget_001", "x": 20, "y": 0}, "tool": "update_widget_layout"}

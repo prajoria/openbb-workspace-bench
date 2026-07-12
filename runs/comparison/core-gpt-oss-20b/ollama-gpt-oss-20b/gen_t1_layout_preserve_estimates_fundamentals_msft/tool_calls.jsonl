@@ -1,2 +1,0 @@
-{"args": {"cmd": ["bash", "-lc", "python - << 'PY'\nprint('test')\nPY"]}, "tool": "container.exec"}
-{"args": {"h": 8, "w": 16, "widget_id": "fundamental_metrics", "x": 24, "y": 0}, "tool": "update_widget_layout"}

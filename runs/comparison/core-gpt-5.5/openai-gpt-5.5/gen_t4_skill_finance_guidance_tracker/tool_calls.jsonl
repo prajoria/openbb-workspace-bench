@@ -1,6 +1,0 @@
-{"args": {"reason": "Follow the required guidance tracker workflow before adding NVDA Estimate History and grounded note.", "slug": "finance-guidance-tracker"}, "tool": "get_skill_content"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
-{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_data"}
-{"args": {"data": "Guidance tracker workflow: extract management claims, compare them with prior guidance, flag changed assumptions, and list evidence gaps. For NVDA estimate_history, the exact key value is eps_estimate: 1.18 for quarter 2026Q1; revenue_estimate_b is 39.4 for 2026Q1. Evidence gap: compare these estimates against management guidance and prior assumptions before flagging a guidance change.", "name": "NVDA Guidance Tracker Note", "widget_type": "note"}, "tool": "add_generative_widget"}

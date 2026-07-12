@@ -1,2 +1,0 @@
-{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_data"}
-{"args": {"data": "AAPL fundamentals: Gross margin is 0.462 and net cash is 54.0 billion.", "inner_tab": "overview", "name": "AAPL Fundamentals Note", "widget_type": "note"}, "tool": "add_generative_widget"}

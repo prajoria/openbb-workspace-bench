@@ -1,8 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "MNPI Control Desk", "operation": "instantiate", "template_id": "mnpi-research-review"}, "tool": "manage_apps"}
-{"args": {"dashboard_id": "dash_002", "operation": "tab", "tab_id": "research"}, "tool": "navigate_workspace"}
-{"args": {"origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "mnpi_research_review_research_reviewer_comments"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_002", "data_args": {"period": "YTD", "severity": "High", "status": "Open"}, "origin": "Bench Stark Enterprise", "ui_args": {}, "widget_id": "mnpi_research_review_research_reviewer_comments"}, "tool": "create_widget"}
-{"args": {"dashboard_id": "dash_002", "data": "Research tab follow-up: reviewer comments are captured in mnpi_research_review_research_reviewer_comments for status Open, severity High, period YTD. Compliance reviewer comments should be reviewed and sign off recorded before approval.", "inner_tab": "research", "name": "Reviewer Comments Sign Off Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,3 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-tearsheet"}, "tool": "read_workspace_resource"}
-{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "create_widget"}
-{"args": {"data": "Valuation metrics for MSFT show a price-to-earnings ratio of 35.2x, indicating potential overvaluation relative to industry peers.", "widget_type": "note"}, "tool": "add_generative_widget"}

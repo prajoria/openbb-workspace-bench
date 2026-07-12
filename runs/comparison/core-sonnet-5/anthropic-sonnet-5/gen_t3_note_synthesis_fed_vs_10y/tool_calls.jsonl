@@ -1,4 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {"series": "FEDFUNDS"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_data"}
-{"args": {"data_args": {"series": "DGS10"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_data"}
-{"args": {"data": "Latest Fed Funds Rate (FEDFUNDS): 4.12 as of 2025-12-31.\nLatest 10-Year Treasury Yield (DGS10): 4.16 as of 2026-01-15.\n\nThe 10-Year Treasury yield (4.16) is currently slightly above the Fed Funds Rate (4.12), a difference of 0.04 percentage points, indicating a near-flat spread between short-term policy rates and long-term Treasury yields.", "description": "Synthesis of latest Fed Funds and 10Y Treasury values from macro widgets.", "name": "Synthesis Note: Fed Vs 10Y", "widget_type": "note"}, "tool": "add_generative_widget"}

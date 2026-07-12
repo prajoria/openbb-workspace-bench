@@ -1,4 +1,0 @@
-{"args": {"reason": "Retrieve earnings prep workflow before adding widgets", "slug": "finance-earnings-prep"}, "tool": "get_skill_content"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}

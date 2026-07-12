@@ -1,3 +1,0 @@
-{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "create_widget"}
-{"args": {"data_args": {"series": "CPIAUCSL"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}
-{"args": {"data": "Holdings and CPIAUCSL data are displayed in the respective widgets.", "widget_type": "note"}, "tool": "add_generative_widget"}

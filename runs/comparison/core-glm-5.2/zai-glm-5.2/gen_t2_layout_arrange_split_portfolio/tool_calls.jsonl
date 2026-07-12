@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"h": 12, "w": 24, "widget_uuid": "widget_001", "x": 0, "y": 0}, "tool": "update_widget_layout"}
-{"args": {"h": 12, "w": 16, "widget_uuid": "widget_002", "x": 24, "y": 0}, "tool": "update_widget_layout"}

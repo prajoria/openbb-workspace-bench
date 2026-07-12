@@ -1,3 +1,0 @@
-{"action": {"args": {"operation": "list"}, "done": false, "tool": "manage_backends"}, "content": "{\"args\": {\"operation\": \"list\"}, \"done\": false, \"tool\": \"manage_backends\"}", "turn": 1}
-{"action": {"args": {"app_name": "Executive Investment Dashboard", "backend_id": "backend_001", "dashboard_name": "Executive Morning Brief", "operation": "instantiate"}, "done": false, "tool": "manage_apps"}, "content": "{\"args\": {\"app_name\": \"Executive Investment Dashboard\", \"backend_id\": \"backend_001\", \"dashboard_name\": \"Executive Morning Brief\", \"operation\": \"instantiate\"}, \"done\": false, \"tool\": \"manage_apps\"}", "turn": 2}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

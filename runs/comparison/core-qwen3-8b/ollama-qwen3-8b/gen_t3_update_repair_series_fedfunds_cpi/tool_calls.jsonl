@@ -1,2 +1,0 @@
-{"args": {"data_args": {"series": "CPIAUCSL"}, "widget_id": "macro_timeseries"}, "tool": "update_widget"}
-{"args": {"data": "The widget was repaired to show the CPIAUCSL series instead of FEDFUNDS. FEDFUNDS represents the Federal Funds Rate, while CPIAUCSL is the Consumer Price Index for All Urban Consumers, which measures inflation.", "inner_tab": "", "name": "Repaired Note", "widget_type": "note"}, "tool": "add_generative_widget"}

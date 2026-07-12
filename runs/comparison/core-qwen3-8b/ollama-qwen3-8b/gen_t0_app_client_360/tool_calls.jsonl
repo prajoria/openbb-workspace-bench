@@ -1,4 +1,0 @@
-{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_002", "dashboard_name": "Client Review Workspace", "operation": "instantiate", "template_id": "Client 360"}, "tool": "manage_apps"}
-{"args": {"backend_id": "backend_002", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"backend_id": "backend_002", "dashboard_name": "Client Review Workspace", "operation": "instantiate", "template_id": "client-360"}, "tool": "manage_apps"}

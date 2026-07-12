@@ -1,5 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-earnings-prep"}, "tool": "read_workspace_resource"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {"symbol": "AAPL"}, "origin": "Bench Equities", "widget_id": "estimate_history"}, "tool": "create_widget"}
-{"args": {"data": "Earnings Prep Workflow for AAPL: Compare internal estimates to street numbers, identify surprise drivers, review guidance, inspect transcript tone, and produce action items for the portfolio manager. Key surprise drivers to monitor include product segment revenue mix, gross margin trends, services growth, and any commentary on China demand or regulatory headwinds.", "name": "Earnings Prep Notes", "widget_type": "note"}, "tool": "add_generative_widget"}

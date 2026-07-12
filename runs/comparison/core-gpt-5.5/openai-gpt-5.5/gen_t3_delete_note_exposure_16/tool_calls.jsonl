@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "widget_uuid": "widget_002"}, "tool": "delete_widget"}
-{"args": {"dashboard_id": "dash_001", "data": "Duplicate Sector Exposure widget removed. One Sector Exposure widget remains on the Duplicate Repair dashboard.", "inner_tab": "", "name": "Duplicate Removal Note", "widget_type": "note"}, "tool": "add_generative_widget"}

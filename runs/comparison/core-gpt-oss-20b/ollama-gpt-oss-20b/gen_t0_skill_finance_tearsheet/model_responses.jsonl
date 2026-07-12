@@ -1,3 +1,0 @@
-{"action": {"args": {"slug": "finance-tearsheet"}, "done": false, "tool": "get_skill_content"}, "content": "{\"args\": {\"slug\": \"finance-tearsheet\"}, \"done\": false, \"tool\": \"get_skill_content\"}", "turn": 1}
-{"action": {"args": {"data": "Finance Tearsheet", "name": "Finance Tearsheet", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"widget_type\":\"note\",\"data\":\"Finance Tearsheet\",\"name\":\"Finance Tearsheet\"}}", "turn": 2}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

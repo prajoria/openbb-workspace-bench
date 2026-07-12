@@ -1,3 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"app_name": "Fund Operations Control Tower", "backend_id": "backend_001", "dashboard_name": "Ops Control Room", "operation": "instantiate"}, "tool": "manage_apps"}

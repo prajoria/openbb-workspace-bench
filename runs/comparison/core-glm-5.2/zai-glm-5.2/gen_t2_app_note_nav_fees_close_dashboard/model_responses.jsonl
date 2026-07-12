@@ -1,7 +1,0 @@
-{"action": {"args": {}, "done": false, "tool": "manage_backends"}, "content": "{\"done\": false, \"tool\": \"manage_backends\"}", "turn": 1}
-{"action": {"args": {}, "done": false, "tool": "manage_backends"}, "content": "{\"done\": false, \"tool\": \"manage_backends\"}", "turn": 2}
-{"action": {"args": {}, "done": false, "tool": "manage_backends"}, "content": "{\"done\": false, \"tool\": \"manage_backends\"}", "turn": 3}
-{"action": {"args": {"operation": "list"}, "done": false, "tool": "manage_backends"}, "content": "{\"done\": false, \"tool\": \"manage_backends\", \"args\": {\"operation\": \"list\"}}", "turn": 4}
-{"action": {"args": {"backend_id": "backend_001", "operation": "list"}, "done": false, "tool": "manage_apps"}, "content": "{\"done\": false, \"tool\": \"manage_apps\", \"args\": {\"backend_id\": \"backend_001\", \"operation\": \"list\"}}", "turn": 5}
-{"action": {"args": {"backend_id": "backend_001", "dashboard_name": "Monthly Close Control", "operation": "instantiate", "template_id": "nav-fees-close-dashboard"}, "done": false, "tool": "manage_apps"}, "content": "{\"done\": false, \"tool\": \"manage_apps\", \"args\": {\"backend_id\": \"backend_001\", \"operation\": \"instantiate\", \"template_id\": \"nav-fees-close-dashboard\", \"dashboard_name\": \"Monthly Close Control\"}}", "turn": 6}
-{"action": {"args": {"operation": "tab", "tab_id": "close"}, "done": false, "tool": "navigate_workspace"}, "content": "{\"done\": false, \"tool\": \"navigate_workspace\", \"args\": {\"operation\": \"tab\", \"tab_id\": \"close\"}}", "turn": 7}

@@ -1,3 +1,0 @@
-{"args": {"data_args": {"symbol": "MSFT"}, "origin": "Bench Equities", "widget_id": "latest_news"}, "tool": "create_widget"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
-{"args": {"data": "MSFT sector exposure analysis indicates significant weightage in the Technology sector.", "name": "MSFT Sector Exposure Note", "widget_type": "note"}, "tool": "add_generative_widget"}

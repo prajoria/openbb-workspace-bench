@@ -1,6 +1,0 @@
-{"args": {"slug": "finance-comps"}, "tool": "get_skill_content"}
-{"args": {"origin": "Bench Equities"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_schema"}
-{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "create_widget"}
-{"args": {"data_args": {"symbol": "NVDA"}, "origin": "Bench Equities", "widget_id": "fundamental_metrics"}, "tool": "get_widget_data"}
-{"args": {"data": "Per the Finance Comps workflow, NVDA's gross_margin stands at 0.742, reflecting a significant premium valuation multiple relative to peers. This outlier margin supports a premium in any comparable company analysis.", "inner_tab": "overview", "name": "NVDA Comps Note", "widget_type": "note"}, "tool": "add_generative_widget"}

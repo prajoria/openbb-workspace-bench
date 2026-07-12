@@ -1,3 +1,0 @@
-{"action": {"args": {"widget_id": "price_performance"}, "done": false, "tool": "read_widget"}, "content": "{\"done\":false,\"tool\":\"read_widget\",\"args\":{\"widget_id\":\"price_performance\"}}", "turn": 1}
-{"action": {"args": {"data": "This note mentions the AAPL symbol from the Price Performance widget.", "name": "AAPL Mention Note", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\":false,\"tool\":\"add_generative_widget\",\"args\":{\"widget_type\":\"note\",\"data\":\"This note mentions the AAPL symbol from the Price Performance widget.\",\"name\":\"AAPL Mention Note\"}}", "turn": 2}
-{"action": {"done": true}, "content": "{\"done\":true}", "turn": 3}

@@ -1,3 +1,0 @@
-{"action": {"args": {"data_args": {"series": "CPIAUCSL"}, "widget_id": "macro_timeseries"}, "done": false, "tool": "update_widget"}, "content": "{\"done\": false, \"tool\": \"update_widget\", \"args\": {\"widget_id\": \"macro_timeseries\", \"data_args\": {\"series\": \"CPIAUCSL\"}}}", "turn": 1}
-{"action": {"args": {"data": "Repaired widget series from FEDFUNDS to CPIAUCSL.", "name": "Repair Note", "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"widget_type\": \"note\", \"data\": \"Repaired widget series from FEDFUNDS to CPIAUCSL.\", \"name\": \"Repair Note\"}}", "turn": 2}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 3}

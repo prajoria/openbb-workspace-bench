@@ -1,4 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "data_args": {"symbol": "AAPL"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
-{"args": {"dashboard_id": "dash_001", "data_args": {"limit": 5, "symbol": "AAPL"}, "widget_uuid": "widget_002"}, "tool": "update_widget"}
-{"args": {"dashboard_id": "dash_001", "data": "AAPL desk dashboard repaired: price_performance now uses AAPL and latest_news now uses limit 5.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

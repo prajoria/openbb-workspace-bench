@@ -1,5 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-comps"}, "tool": "read_workspace_resource"}
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
-{"args": {"data": "Comps workflow: define the peer set, normalize metrics, compare valuation multiples, and explain why outliers deserve premium or discount. Use the Sector Exposure widget to identify portfolio concentrations by sector, then select a peer set of comparable companies within those sectors for valuation comparison.", "name": "Comps Peer Set Note", "widget_type": "note"}, "tool": "add_generative_widget"}

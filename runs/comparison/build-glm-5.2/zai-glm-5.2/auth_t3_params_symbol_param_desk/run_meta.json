@@ -1,6 +1,0 @@
-{
-  "exit_code": 0,
-  "stderr": "",
-  "stdout": "turn 2: malformed action recovered (Expecting ',' delimiter: line 1 column 1758 (char 1757))\ndone at turn 4",
-  "timed_out": false
-}

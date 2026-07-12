@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "strategy_health_monitor_performance_strategy_health_metrics"}, "tool": "get_widget_data"}
-{"args": {"data": "I reviewed the data from strategy_health_monitor_performance_strategy_health_metrics.", "inner_tab": "main", "widget_type": "note"}, "tool": "add_generative_widget"}

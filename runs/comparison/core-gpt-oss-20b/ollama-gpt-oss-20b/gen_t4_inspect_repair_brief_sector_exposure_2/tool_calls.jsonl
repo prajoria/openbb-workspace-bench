@@ -1,4 +1,0 @@
-{"args": {"args": {}}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {"sector": "Technology"}, "widget_uuid": "widget_002"}, "tool": "update_widget"}
-{"args": {"data_args": {"text": "Sector exposure updated from Consumer Staples to Technology."}, "ui_args": {}, "widget_type": "note"}, "tool": "add_generative_widget"}
-{"args": {"data": "Sector exposure updated from Consumer Staples to Technology.", "description": null, "widget_type": "note"}, "tool": "add_generative_widget"}

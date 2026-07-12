@@ -1,6 +1,0 @@
-{
-  "exit_code": 1,
-  "stderr": "model API request failed: HTTP 500: {\"error\":\"error parsing tool call: raw='{\\\"args\\\": {}}, \\\"done\\\": false, \\\"tool\\\": \\\"get_workspace_snapshot\\\"}', err=invalid character ',' after top-level value\"}",
-  "stdout": "turn 4 retry 1/4 after transient model error: model API request failed: HTTP 500: {\"error\":\"error parsing tool call: raw='{\\\"args\\\": {}}, \\\"done\\\": false, \\\"tool\\\": \\\"get_workspace_snapshot\\\"}', err=invalid character ',' after top-level value\"}\nturn 4 retry 2/4 after transient model error: model API request failed: HTTP 500: {\"error\":\"error parsing tool call: raw='{\\\"args\\\": {}}, \\\"done\\\": false, \\\"tool\\\": \\\"get_workspace_snapshot\\\"}', err=invalid character ',' after top-level value\"}\nturn 4 retry 3/4 after transient model error: model API request failed: HTTP 500: {\"error\":\"error parsing tool call: raw='{\\\"args\\\": {}}, \\\"done\\\": false, \\\"tool\\\": \\\"get_workspace_snapshot\\\"}', err=invalid character ',' after top-level value\"}\nturn 4 retry 4/4 after transient model error: model API request failed: HTTP 500: {\"error\":\"error parsing tool call: raw='{\\\"args\\\": {}}, \\\"done\\\": false, \\\"tool\\\": \\\"get_workspace_snapshot\\\"}', err=invalid character ',' after top-level value\"}",
-  "timed_out": false
-}

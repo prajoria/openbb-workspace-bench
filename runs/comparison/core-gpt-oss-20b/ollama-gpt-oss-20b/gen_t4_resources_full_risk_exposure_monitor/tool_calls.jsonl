@@ -1,3 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {"backend_id": "backend_001", "dashboard_name": "Risk Resource Command", "operation": "instantiate", "template_id": "risk-exposure-monitor"}, "tool": "manage_apps"}
-{"args": {"data": "This note highlights the current limit utilization for the portfolio's risk limits.", "inner_tab": "limits", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "holdings_table"}, "tool": "get_widget_data"}
-{"args": {"dashboard_id": "dash_001", "data": "The largest position in the portfolio is MSFT with a weight of 0.34.", "name": "Top Holding", "widget_type": "note"}, "tool": "add_generative_widget"}

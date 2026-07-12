@@ -1,2 +1,0 @@
-{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "widget_id": "quant_research_backtest_lab_signals_signal_metrics"}, "tool": "get_widget_data"}
-{"args": {"data_args": {"fund": "Flagship Long/Short", "period": "YTD"}, "origin": "Bench Stark Enterprise", "widget_id": "quant_research_backtest_lab_backtest_backtest_performance"}, "tool": "get_widget_data"}

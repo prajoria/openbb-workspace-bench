@@ -1,4 +1,0 @@
-{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_002", "dashboard_name": "Risk Watch", "operation": "instantiate", "template_id": "Risk & Exposure Monitor"}, "tool": "manage_apps"}
-{"args": {"backend_id": "backend_002", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"backend_id": "backend_002", "dashboard_name": "Risk Watch", "operation": "instantiate", "template_id": "risk-exposure-monitor"}, "tool": "manage_apps"}

@@ -1,3 +1,0 @@
-{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_data"}
-{"args": {"data_args": {"series": "DGS10"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_data"}
-{"args": {"data": "As of the latest data, the Federal Funds rate stands at 4.12% (as of 2025-12-31), while the 10-Year Treasury yield is at 4.16% (as of 2026-01-15). This indicates that the 10-Year Treasury yield is slightly higher than the Federal Funds rate, reflecting market expectations for future interest rates and economic conditions.", "description": "Synthesis note comparing latest Fed Funds rate and 10Y Treasury yield.", "name": "Synthesis Note: Fed Vs 10Y", "widget_type": "note"}, "tool": "add_generative_widget"}

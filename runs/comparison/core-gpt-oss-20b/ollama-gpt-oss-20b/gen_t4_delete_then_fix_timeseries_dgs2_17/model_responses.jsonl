@@ -1,5 +1,0 @@
-{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\": false, \"tool\": \"get_workspace_snapshot\", \"args\": {}}", "turn": 1}
-{"action": {"args": {"widget_uuid": "widget_002"}, "done": false, "tool": "delete_widget"}, "content": "{\"done\": false, \"tool\": \"delete_widget\", \"args\": {\"widget_uuid\": \"widget_002\"}}", "turn": 2}
-{"action": {"args": {"data_args": {"series": "DGS2"}, "widget_uuid": "widget_001"}, "done": false, "tool": "update_widget"}, "content": "{\"done\": false, \"tool\": \"update_widget\", \"args\": {\"widget_uuid\": \"widget_001\", \"data_args\": {\"series\": \"DGS2\"}}}", "turn": 3}
-{"action": {"args": {"data": "DGS2 repaired", "description": null, "widget_type": "note"}, "done": false, "tool": "add_generative_widget"}, "content": "{\"done\": false, \"tool\": \"add_generative_widget\", \"args\": {\"widget_type\": \"note\", \"data\": \"DGS2 repaired\", \"description\": null}}", "turn": 4}
-{"action": {"done": true}, "content": "{\"done\": true}", "turn": 5}

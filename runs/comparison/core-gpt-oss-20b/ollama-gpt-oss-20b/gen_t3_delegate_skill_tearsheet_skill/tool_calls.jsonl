@@ -1,3 +1,0 @@
-{"args": {"slug": "finance-tearsheet"}, "tool": "get_skill_content"}
-{"args": {"task_requests": [{"assigned_agent_id": "valuation-analyst", "assigned_holder_url": "", "description": "Finance Tearsheet workflow: valuation workstream.", "id": "task-valuation"}, {"assigned_agent_id": "catalyst-analyst", "assigned_holder_url": "", "description": "Finance Tearsheet workflow: catalysts workstream.", "id": "task-catalyst"}]}, "tool": "assign_tasks_to_agents"}
-{"args": {"data": "Coordinator: Valuation workstream (valuation-analyst) and Catalyst workstream (catalyst-analyst).", "name": "Coordinator Note", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,4 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {"symbol": "AAPL"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
-{"args": {"data_args": {"limit": 5, "symbol": "AAPL"}, "widget_uuid": "widget_002"}, "tool": "update_widget"}
-{"args": {"dashboard_id": "dash_001", "data": "AAPL desk has been repaired: price widget symbol corrected to AAPL and news widget limit set to 5 articles.", "name": "AAPL Desk Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

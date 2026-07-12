@@ -1,4 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-comps"}, "tool": "read_workspace_resource"}
-{"args": {"origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
-{"args": {"data": "Peer set definition: Comps workflow starts with defining the peer set, normalizing metrics, comparing valuation multiples, and explaining outliers.", "widget_type": "note"}, "tool": "add_generative_widget"}

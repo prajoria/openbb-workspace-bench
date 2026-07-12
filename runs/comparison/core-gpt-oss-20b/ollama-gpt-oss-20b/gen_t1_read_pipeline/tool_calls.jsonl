@@ -1,2 +1,0 @@
-{"args": {"origin": "Bench Stark Enterprise", "widget_id": "client_360_flows_pipeline_by_stage"}, "tool": "get_widget_data"}
-{"args": {"data": "Reviewed data from client_360_flows_pipeline_by_stage.", "name": "Pipeline Review Note", "widget_type": "note"}, "tool": "add_generative_widget"}

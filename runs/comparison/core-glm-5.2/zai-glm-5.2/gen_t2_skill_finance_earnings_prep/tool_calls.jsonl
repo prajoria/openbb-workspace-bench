@@ -1,4 +1,0 @@
-{"args": {"slug": "finance-earnings-prep"}, "tool": "get_skill_content"}
-{"args": {"operation": "add_tabs", "tabs": [{"name": "Earnings Prep"}]}, "tool": "manage_navigation_bar"}
-{"args": {"operation": "tab", "tab_id": "earnings-prep"}, "tool": "navigate_workspace"}
-{"args": {"data": "Earnings prep workflow: compare internal estimates to street numbers, identify surprise drivers, review guidance, inspect transcript tone, and produce action items for the portfolio manager.", "inner_tab": "earnings-prep", "name": "Finance Earnings Prep Workflow", "widget_type": "note"}, "tool": "add_generative_widget"}

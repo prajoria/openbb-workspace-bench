@@ -1,8 +1,0 @@
-{"args": {"name": "portfolio", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"name": "macro", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "origin": "Bench Portfolio"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "get_widget_schema"}
-{"args": {"backend_id": "backend_002", "origin": "Bench Macro"}, "tool": "list_available_widgets"}
-{"args": {"origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_schema"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "sector_exposure"}, "tool": "create_widget"}
-{"args": {"data_args": {"series": "FEDFUNDS"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "create_widget"}

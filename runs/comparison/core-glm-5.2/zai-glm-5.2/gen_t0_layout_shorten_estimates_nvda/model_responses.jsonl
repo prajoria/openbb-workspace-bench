@@ -1,3 +1,0 @@
-{"action": {"args": {}, "done": false, "tool": "get_workspace_snapshot"}, "content": "{\"done\": false, \"tool\": \"get_workspace_snapshot\", \"args\": {}}", "turn": 1}
-{"action": {"args": {"h": 8, "w": 20, "widget_uuid": "widget_001", "x": 0, "y": 0}, "done": false, "tool": "update_widget_layout"}, "content": "{\n  \"done\": false,\n  \"tool\": \"update_widget_layout\",\n  \"args\": {\n    \"widget_uuid\": \"widget_001\",\n    \"x\": 0,\n    \"y\": 0,\n    \"w\": 20,\n    \"h\": 8\n  }\n}", "turn": 2}
-{"action": {"done": true}, "content": "{\n  \"done\": true\n}", "turn": 3}

@@ -1,4 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {"backend_id": "backend_001", "operation": "instantiate", "template_id": "client-360"}, "tool": "manage_apps"}
-{"args": {"operation": "tab", "tab_id": "flows"}, "tool": "navigate_workspace"}
-{"args": {"dashboard_id": "dash_002", "data": "Pipeline and resource information.", "tab_id": "flows", "widget_type": "note"}, "tool": "add_generative_widget"}

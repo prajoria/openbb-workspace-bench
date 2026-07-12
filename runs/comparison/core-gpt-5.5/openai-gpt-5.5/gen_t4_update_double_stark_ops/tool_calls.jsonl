@@ -1,4 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "data_args": {"status": "Escalated", "vendor": "FactSet"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
-{"args": {"dashboard_id": "dash_001", "data_args": {"fund": "Flagship Long/Short", "period": "MTD"}, "widget_uuid": "widget_002"}, "tool": "update_widget"}
-{"args": {"dashboard_id": "dash_001", "data": "Repaired ops dashboard: Vendor SLA Status set to Escalated and Portfolio Snapshot period set to MTD.", "inner_tab": "", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

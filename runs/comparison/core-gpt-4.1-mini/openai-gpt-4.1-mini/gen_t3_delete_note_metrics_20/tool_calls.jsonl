@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "widget_uuid": "widget_002"}, "tool": "delete_widget"}
-{"args": {"data": "Removed one duplicate Fundamental Metrics widget to avoid redundancy.", "name": "Duplicate Removal Note", "widget_type": "note"}, "tool": "add_generative_widget"}

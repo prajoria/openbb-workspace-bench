@@ -1,3 +1,0 @@
-{"action": {"args": {"name": "stark-enterprise", "operation": "add"}, "done": false, "tool": "manage_backends"}, "content": "{\"args\": {\"name\": \"stark-enterprise\", \"operation\": \"add\"}, \"done\": false, \"tool\": \"manage_backends\"}", "turn": 1}
-{"action": {"args": {"backend_id": "backend_001", "operation": "refresh"}, "done": false, "tool": "manage_backends"}, "content": "{\"args\": {\"backend_id\": \"backend_001\", \"operation\": \"refresh\"}, \"done\": false, \"tool\": \"manage_backends\"}", "turn": 2}
-{"action": {"args": {"origin": "Bench Stark Enterprise"}, "done": false, "tool": "list_available_widgets"}, "content": "{\"done\": false, \"tool\": \"list_available_widgets\", \"args\": {\"origin\": \"Bench Stark Enterprise\"}}", "turn": 3}

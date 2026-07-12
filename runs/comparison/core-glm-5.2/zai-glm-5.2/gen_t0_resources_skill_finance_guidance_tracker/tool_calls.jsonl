@@ -1,2 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-guidance-tracker"}, "tool": "read_workspace_resource"}
-{"args": {"data": "Finance Guidance Tracker: Track company guidance changes, management claims, and follow-up evidence. The guidance tracker workflow involves extracting management claims, comparing them with prior guidance, flagging changed assumptions, and listing evidence gaps.", "name": "Finance Guidance Tracker Note", "widget_type": "note"}, "tool": "add_generative_widget"}

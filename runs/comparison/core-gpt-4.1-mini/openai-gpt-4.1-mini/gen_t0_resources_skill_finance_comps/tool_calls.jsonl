@@ -1,2 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-comps"}, "tool": "read_workspace_resource"}
-{"args": {"data": "The peer set is a key part of the comps workflow, which involves defining the peer set, normalizing metrics, comparing valuation multiples, and explaining why outliers deserve premium or discount.", "name": "Peer Set Note", "widget_type": "note"}, "tool": "add_generative_widget"}

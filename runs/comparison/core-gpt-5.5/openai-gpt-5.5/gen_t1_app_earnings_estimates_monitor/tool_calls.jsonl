@@ -1,3 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"activate": true, "backend_id": "backend_001", "dashboard_name": "Earnings Season Monitor", "operation": "instantiate", "template_id": "earnings-estimates-monitor"}, "tool": "manage_apps"}

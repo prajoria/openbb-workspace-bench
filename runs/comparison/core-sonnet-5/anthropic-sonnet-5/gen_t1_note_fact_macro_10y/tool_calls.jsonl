@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {"series": "DGS10"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_data"}
-{"args": {"data": "Series: DGS10\nLatest value: 4.16 (as of 2026-01-15)", "description": "Latest DGS10 value pulled from macro_timeseries widget data.", "name": "Macro 10Y Latest", "widget_type": "note"}, "tool": "add_generative_widget"}

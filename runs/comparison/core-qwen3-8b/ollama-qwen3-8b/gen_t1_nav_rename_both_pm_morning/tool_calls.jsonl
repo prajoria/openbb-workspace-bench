@@ -1,2 +1,0 @@
-{"args": {"name": "PM Morning Review", "operation": "update"}, "tool": "manage_dashboard"}
-{"args": {"operation": "rename_tabs", "rename_map": {"overview": "Holdings View"}}, "tool": "manage_navigation_bar"}

@@ -1,3 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {"series": "CPIAUCSL"}, "widget_uuid": "widget_001"}, "tool": "update_widget"}
-{"args": {"data": "The inflation dashboard's macro_timeseries widget was mistakenly configured with series FEDFUNDS. It has been repaired to use series CPIAUCSL so the dashboard now correctly displays CPI data instead of the Federal Funds Rate.", "name": "Repair Note", "widget_type": "note"}, "tool": "add_generative_widget"}

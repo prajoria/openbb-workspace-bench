@@ -1,2 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"dashboard_id": "dash_001", "data": "EU book is flat. US open checklist is complete.", "name": "Desk Handover", "widget_type": "note"}, "tool": "add_generative_widget"}

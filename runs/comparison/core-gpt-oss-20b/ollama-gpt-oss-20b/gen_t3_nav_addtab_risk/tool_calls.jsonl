@@ -1,7 +1,0 @@
-{"args": {"operation": "add_tabs", "tabs": [{"name": "Risk"}]}, "tool": "manage_navigation_bar"}
-{"args": {"dashboard_id": "dash_001", "origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "create_widget"}
-{"args": {"origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "get_widget_schema"}
-{"args": {"dashboard_id": "dash_001", "data_args": {}, "origin": "Bench Portfolio", "ui_args": {}, "widget_id": "risk_metrics"}, "tool": "create_widget"}
-{"args": {"dashboard_id": "dash_001", "data_args": {}, "origin": "Bench Portfolio", "ui_args": {"layout": {"tab_id": "risk"}}, "widget_id": "risk_metrics"}, "tool": "create_widget"}
-{"args": {"operation": "tab", "tab_id": "risk"}, "tool": "navigate_workspace"}
-{"args": {"dashboard_id": "dash_001", "origin": "Bench Portfolio", "ui_args": {"layout": {"tab_id": "risk"}}, "widget_id": "risk_metrics"}, "tool": "create_widget"}

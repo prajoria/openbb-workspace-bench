@@ -1,2 +1,0 @@
-{"args": {"widget_id": "macro_timeseries"}, "tool": "read_widget"}
-{"args": {"data": "The macro_timeseries widget displays the DGS10 series (10-Year Treasury Constant Maturity Rate) from the Bench Macro backend.", "widget_type": "note"}, "tool": "add_generative_widget"}

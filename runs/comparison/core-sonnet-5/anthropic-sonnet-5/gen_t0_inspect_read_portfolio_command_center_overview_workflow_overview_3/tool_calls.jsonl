@@ -1,2 +1,0 @@
-{"args": {"widget_id": "portfolio_command_center_overview_workflow_overview"}, "tool": "read_widget"}
-{"args": {"data": "Read widget portfolio_command_center_overview_workflow_overview from stark. This widget is named 'Workflow Overview', originates from Bench Stark Enterprise, and is of type markdown with layout x=0, y=0, w=20, h=10.", "name": "Stark Widget Inspection Note", "widget_type": "note"}, "tool": "add_generative_widget"}

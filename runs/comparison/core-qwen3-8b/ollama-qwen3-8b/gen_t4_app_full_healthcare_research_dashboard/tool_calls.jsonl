@@ -1,4 +1,0 @@
-{"args": {"name": "stark-enterprise", "operation": "add"}, "tool": "manage_backends"}
-{"args": {"dashboard_name": "Biotech Catalyst Desk", "operation": "instantiate", "template_id": "healthcare_research_dashboard"}, "tool": "manage_apps"}
-{"args": {"backend_id": "backend_002", "dashboard_name": "Biotech Catalyst Desk", "operation": "instantiate", "template_id": "healthcare_research_dashboard"}, "tool": "manage_apps"}
-{"args": {"backend_id": "backend_002", "origin": "Bench Stark Enterprise"}, "tool": "list_available_widgets"}

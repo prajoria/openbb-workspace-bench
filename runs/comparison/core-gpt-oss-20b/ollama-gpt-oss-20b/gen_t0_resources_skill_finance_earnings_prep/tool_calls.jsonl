@@ -1,2 +1,0 @@
-{"args": {"uri": "openbb://workspace/skills/finance-earnings-prep"}, "tool": "read_workspace_resource"}
-{"args": {"data": "Surprise drivers identified in earnings prep workflow.", "description": "Note on surprise drivers from finance-earnings-prep skill.", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,4 +1,0 @@
-{"args": {}, "tool": "get_workspace_snapshot"}
-{"args": {"data_args": {}, "origin": "Bench Portfolio", "widget_id": "risk_metrics"}, "tool": "get_widget_data"}
-{"args": {"data_args": {"series": "FEDFUNDS"}, "origin": "Bench Macro", "widget_id": "macro_timeseries"}, "tool": "get_widget_data"}
-{"args": {"dashboard_id": "dash_001", "data": "Portfolio risk metrics show portfolio_beta of 1.18. The latest FEDFUNDS value from the macro_timeseries data is 4.12 on 2025-12-31.", "description": "Portfolio beta and latest FEDFUNDS summary", "inner_tab": "", "name": "Book Vs Fed Note", "widget_type": "note"}, "tool": "add_generative_widget"}

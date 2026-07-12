@@ -1,2 +1,0 @@
-{"args": {"uri": "openbb://workspace/app-builder/index"}, "tool": "read_workspace_resource"}
-{"args": {"data": "Portfolio Command Center template id: portfolio-command-center", "name": "Portfolio Command Center Template ID", "widget_type": "note"}, "tool": "add_generative_widget"}

@@ -1,4 +1,0 @@
-{"args": {"operation": "list"}, "tool": "manage_backends"}
-{"args": {"backend_id": "backend_001", "operation": "list"}, "tool": "manage_apps"}
-{"args": {"backend_id": "backend_001", "dashboard_name": "MNPI Control Desk", "operation": "instantiate", "template_id": "mnpi-research-review"}, "tool": "manage_apps"}
-{"args": {"data": "Reviewer comments have been reviewed and signed off.", "description": "Sign-off note", "inner_tab": "research", "widget_type": "note"}, "tool": "add_generative_widget"}

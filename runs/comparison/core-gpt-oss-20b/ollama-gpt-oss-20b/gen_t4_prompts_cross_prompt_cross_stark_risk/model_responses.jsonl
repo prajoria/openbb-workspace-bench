@@ -1,1 +1,0 @@
-{"action": {"args": {"name": "workspace_tool_usage"}, "done": false, "tool": "get_workspace_prompt"}, "content": "{\"args\": {\"name\": \"workspace_tool_usage\"}, \"done\": false, \"tool\": \"get_workspace_prompt\"}", "turn": 1}
