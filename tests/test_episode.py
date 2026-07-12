@@ -6,7 +6,7 @@ from workspace_bench.core.runner import find_task
 
 
 def test_episode_step_api_supports_incremental_tool_execution() -> None:
-    task = find_task("gen_t0_create_price_performance_aapl")
+    task = find_task("price_performance_aapl")
     episode = WorkspaceEpisode(task)
 
     for call in task.oracle_tool_calls:
@@ -19,7 +19,7 @@ def test_episode_step_api_supports_incremental_tool_execution() -> None:
 
 
 def test_episode_records_disallowed_tool_as_invalid_step() -> None:
-    task = find_task("gen_t0_create_price_performance_aapl")
+    task = find_task("price_performance_aapl")
     episode = WorkspaceEpisode(task)
 
     result = episode.step(ToolCall("manage_apps", {"operation": "list"}))

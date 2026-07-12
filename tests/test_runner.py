@@ -2,9 +2,16 @@ from __future__ import annotations
 
 import json
 
+import pytest
+
 from workspace_bench.cli import main
 from workspace_bench.core.models import CANARY_GUID
-from workspace_bench.core.runner import TaskRunner, load_builtin_tasks, load_task_file
+from workspace_bench.core.runner import (
+    TaskRunner,
+    load_builtin_tasks,
+    load_task_directory,
+    load_task_file,
+)
 
 
 def test_oracle_passes_all_builtin_tasks() -> None:
@@ -28,7 +35,7 @@ def test_cli_can_write_trace_artifacts(tmp_path) -> None:
         [
             "run",
             "--task",
-            "gen_t0_create_price_performance_aapl",
+            "price_performance_aapl",
             "--agent",
             "oracle",
             "--trace-dir",
@@ -37,10 +44,11 @@ def test_cli_can_write_trace_artifacts(tmp_path) -> None:
         ]
     )
 
-    artifact = tmp_path / "gen_t0_create_price_performance_aapl.json"
+    artifact = tmp_path / "price_performance_aapl.json"
     payload = json.loads(artifact.read_text(encoding="utf-8"))
     assert exit_code == 0
     assert payload["grade"]["passed"] is True
+    assert payload["task"]["family"] == "create"
     assert payload["task"]["difficulty"] == "easy"
     assert payload["trace"][0]["tool"] == "get_workspace_snapshot"
 
@@ -48,12 +56,37 @@ def test_cli_can_write_trace_artifacts(tmp_path) -> None:
 def test_builtin_tasks_have_terminal_bench_style_metadata() -> None:
     tasks = load_builtin_tasks()
 
+    assert all(task.family for task in tasks)
     assert all(task.capability for task in tasks)
     assert all(task.workflow for task in tasks)
     assert all(task.domain for task in tasks)
     assert all(task.subdomain for task in tasks)
+    assert all(
+        task.specification_level
+        in {"explicit", "partially-specified", "open-brief"}
+        for task in tasks
+    )
     assert all(task.difficulty in {"easy", "medium", "hard"} for task in tasks)
     assert all(task.tags for task in tasks)
+    assert all(task.source_path and task.source_path.parent.name == task.family for task in tasks)
+
+
+def test_task_directory_rejects_missing_explicit_family(tmp_path) -> None:
+    source = next(
+        task for task in load_builtin_tasks() if task.id == "price_performance_aapl"
+    )
+    assert source.source_path is not None
+    family_dir = tmp_path / source.family
+    family_dir.mkdir()
+    payload = json.loads(source.source_path.read_text(encoding="utf-8"))
+    payload.pop("family")
+    (family_dir / source.source_path.name).write_text(
+        json.dumps(payload),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="requires non-empty family"):
+        load_task_directory(tmp_path)
 
 
 def test_cli_validate_passes_for_builtin_tasks() -> None:
@@ -61,40 +94,47 @@ def test_cli_validate_passes_for_builtin_tasks() -> None:
 
 
 def test_cli_validate_passes_for_build_suite(capsys) -> None:
-    exit_code = main(
-        ["validate", "--suite", "build-openbb-apps", "--min-tasks", "212", "--json"]
-    )
+    exit_code = main(["validate", "--suite", "build-openbb-apps", "--min-tasks", "236", "--json"])
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["release_checks"], "build suite must carry release quotas"
-    assert payload["release_checks"]["per_level_graded_check_caps"] is True
+    assert payload["release_checks"]["per_specification_level_graded_check_caps"] is True
+    assert payload["release_checks"]["prompt_specification_lint_236"] is True
     assert payload["release_checks"]["ownership_aggrid_widget_types"] is True
     assert all(payload["release_checks"].values())
 
 
 def test_cli_validate_skips_bundled_quotas_for_filtered_slices(capsys) -> None:
-    exit_code = main(["validate", "--level", "t0", "--json"])
+    exit_code = main(["validate", "--difficulty", "easy", "--json"])
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["release_checks"] == {}
 
 
+def test_cli_filters_by_first_class_family(capsys) -> None:
+    exit_code = main(["list", "--family", "create", "--json"])
+
+    payload = json.loads(capsys.readouterr().out)
+    assert exit_code == 0
+    assert len(payload) == 20
+    assert {task["family"] for task in payload} == {"create"}
+
+
 def test_find_task_searches_all_bundled_suites() -> None:
     from workspace_bench.core.runner import find_task
 
-    assert find_task("gen_t0_create_price_performance_aapl").id == (
-        "gen_t0_create_price_performance_aapl"
+    assert find_task("price_performance_aapl").id == (
+        "price_performance_aapl"
     )
-    assert find_task("auth_t2_aggrid_revision_grid").id == (
-        "auth_t2_aggrid_revision_grid"
+    assert find_task("revision_grid").id == ("revision_grid")
+    assert (
+        find_task("revision_grid", suite="build-openbb-apps").id
+        == "revision_grid"
     )
-    assert find_task(
-        "auth_t2_aggrid_revision_grid", suite="build-openbb-apps"
-    ).id == "auth_t2_aggrid_revision_grid"
     try:
-        find_task("auth_t2_aggrid_revision_grid", suite="core")
+        find_task("revision_grid", suite="core")
     except KeyError:
         pass
     else:
@@ -113,7 +153,7 @@ def test_cli_smoke_workspace_mcp_wires_task_and_suite(monkeypatch) -> None:
         [
             "smoke-workspace-mcp",
             "--task",
-            "gen_t0_create_price_performance_aapl",
+            "price_performance_aapl",
             "--suite",
             "core",
         ]
@@ -128,7 +168,9 @@ def test_cli_manifest_resolves_core_suite(capsys) -> None:
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["task_count"] == 300
-    assert payload["release_id"] == "workspace-bench-v1"
+    assert "create" in payload["families"]
+    assert payload["task_suite"]["suite_id"] == "core"
+    assert len(payload["task_suite"]["content_sha256"]) == 64
     assert "skill-access" in payload["capabilities"]
     assert "client-meeting-prep" in payload["workflows"]
 
@@ -141,13 +183,13 @@ def test_cli_validate_fails_when_min_task_gate_is_not_met(capsys) -> None:
     assert "expected at least 300" in output
 
 
-def test_cli_filters_by_level_and_tag(capsys) -> None:
-    exit_code = main(["list", "--level", "t3", "--tag", "multi-widget"])
+def test_cli_filters_by_difficulty_and_tag(capsys) -> None:
+    exit_code = main(["list", "--difficulty", "medium", "--tag", "multi-widget"])
 
     output = capsys.readouterr().out
     assert exit_code == 0
-    assert "gen_t3_params_companion_symbol_price_performance_0" in output
-    assert "gen_t0_create_price_performance_aapl" not in output
+    assert "options_constrained_pair_for_price_performance" in output
+    assert "price_performance_aapl" not in output
 
 
 def test_cli_canary_command(capsys) -> None:
@@ -164,7 +206,8 @@ def test_cli_manifest_json_includes_dataset_summary(capsys) -> None:
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["name"] == "openbb-workspace-bench"
-    assert payload["release_id"] == "workspace-bench-v1"
+    assert payload["task_suite"]["suite_id"] == "core"
+    assert "release_id" not in payload
     assert payload["task_count"] == len(load_builtin_tasks())
     assert payload["canary_guid"] == CANARY_GUID
     assert "dashboard-construction" in payload["capabilities"]
@@ -199,7 +242,7 @@ def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
         [
             "run",
             "--task",
-            "gen_t0_create_price_performance_aapl",
+            "price_performance_aapl",
             "--agent",
             "oracle",
             "--json",
@@ -219,7 +262,7 @@ def test_cli_run_resolves_build_suite_task_without_suite_flag(capsys) -> None:
         [
             "run",
             "--task",
-            "auth_t2_aggrid_revision_grid",
+            "revision_grid",
             "--agent",
             "oracle",
             "--json",
@@ -229,22 +272,42 @@ def test_cli_run_resolves_build_suite_task_without_suite_flag(capsys) -> None:
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["summary"]["passed"] == 1
-    assert payload["results"][0]["id"] == "auth_t2_aggrid_revision_grid"
+    assert payload["results"][0]["id"] == "revision_grid"
+
+
+def test_cli_runtime_result_row_includes_deployment_receipt(capsys) -> None:
+    exit_code = main(
+        [
+            "run",
+            "--task",
+            "build-openbb-apps/e2e/case_triage",
+            "--agent",
+            "oracle",
+            "--json",
+        ]
+    )
+
+    payload = json.loads(capsys.readouterr().out)
+    receipt = payload["results"][0]["deployment_receipt"]
+    assert exit_code == 0
+    assert receipt["backend_names"] == ["Surveillance Data"]
+    assert receipt["app_ids"] == ["case-triage"]
+    assert receipt["instantiated_dashboard_ids"] == ["dash_002"]
+    assert receipt["counts"]["widget_probes"] == 2
+    assert all(probe["outcome"] == "passed" for probe in receipt["widget_probes"])
 
 
 def test_cli_can_run_private_task_directory(tmp_path, capsys) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "gen_t0_create_price_performance_aapl"
+        item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
     )
-    task_path = tmp_path / "gen_t0_create_price_performance_aapl.json"
+    task_path = tmp_path / "price_performance_aapl.json"
     task_path.write_text(
         task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
     )
 
-    validate_exit = main(
-        ["validate", "--task-dir", str(tmp_path), "--min-tasks", "1"]
-    )
+    validate_exit = main(["validate", "--task-dir", str(tmp_path), "--min-tasks", "1"])
     capsys.readouterr()
     run_exit = main(
         [
@@ -269,9 +332,11 @@ def test_runner_round_trips_workspace_resource_and_prompt_task(tmp_path) -> None
     task_path.write_text(
         json.dumps(
             {
+                "schema_version": "workspace-bench-task",
                 "id": "resource_prompt_round_trip",
                 "title": "Read Resource And Prompt",
-                "level": "L0",
+                "category": "read",
+                "family": "resources",
                 "capability": "resource-access",
                 "workflow": "app-builder-discovery",
                 "domain": "workspace-usability",
@@ -280,6 +345,7 @@ def test_runner_round_trips_workspace_resource_and_prompt_task(tmp_path) -> None
                 "split": "dev",
                 "tags": ["resources", "prompts"],
                 "source": "test",
+                "novelty": "resource and prompt round-trip fixture",
                 "prompt": "Read the app index and tool usage prompt.",
                 "fixtures": {"backends": [{"name": "equities"}]},
                 "initial_state": {},
@@ -303,9 +369,7 @@ def test_runner_round_trips_workspace_resource_and_prompt_task(tmp_path) -> None
                     "required_tool_results": [
                         {
                             "tool": "get_workspace_prompt",
-                            "data_contains": [
-                                "schema-before-create workspace tool discipline"
-                            ],
+                            "data_contains": ["schema-before-create workspace tool discipline"],
                         }
                     ],
                 },
@@ -337,14 +401,12 @@ def test_runner_round_trips_workspace_resource_and_prompt_task(tmp_path) -> None
 
 def test_cli_private_task_suite_manifest_sets_default_split(tmp_path, capsys) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "gen_t0_create_price_performance_aapl"
+        item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
     )
     (tmp_path / "task_suite.json").write_text(
         json.dumps(
             {
                 "suite_id": "private-pack",
-                "release_id": "private-pack-v1",
-                "version": "1.0.0",
                 "visibility": "private",
                 "default_split": "validation",
             }
@@ -353,7 +415,7 @@ def test_cli_private_task_suite_manifest_sets_default_split(tmp_path, capsys) ->
     )
     payload = json.loads(task.source_path.read_text(encoding="utf-8"))
     payload.pop("split", None)
-    (tmp_path / "gen_t0_create_price_performance_aapl.json").write_text(
+    (tmp_path / "price_performance_aapl.json").write_text(
         json.dumps(payload),
         encoding="utf-8",
     )
@@ -369,7 +431,7 @@ def test_cli_private_task_suite_manifest_sets_default_split(tmp_path, capsys) ->
 
 def test_cli_hidden_task_suite_redacts_trace_prompts(tmp_path, capsys) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "gen_t0_create_price_performance_aapl"
+        item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
     )
     task_dir = tmp_path / "hidden_pack"
     trace_dir = tmp_path / "traces"
@@ -378,7 +440,7 @@ def test_cli_hidden_task_suite_redacts_trace_prompts(tmp_path, capsys) -> None:
         json.dumps({"visibility": "hidden"}),
         encoding="utf-8",
     )
-    (task_dir / "gen_t0_create_price_performance_aapl.json").write_text(
+    (task_dir / "price_performance_aapl.json").write_text(
         task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
     )
@@ -398,7 +460,7 @@ def test_cli_hidden_task_suite_redacts_trace_prompts(tmp_path, capsys) -> None:
         ]
     )
 
-    payload = json.loads((trace_dir / "gen_t0_create_price_performance_aapl.json").read_text())
+    payload = json.loads((trace_dir / "price_performance_aapl.json").read_text())
     assert manifest_exit == 0
     assert run_exit == 0
     assert manifest["redacted"] is True
@@ -408,13 +470,13 @@ def test_cli_hidden_task_suite_redacts_trace_prompts(tmp_path, capsys) -> None:
 
 def test_cli_filters_by_split_for_private_task_suite(tmp_path, capsys) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "gen_t0_create_price_performance_aapl"
+        item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
     )
     (tmp_path / "task_suite.json").write_text(
         json.dumps({"default_split": "validation"}),
         encoding="utf-8",
     )
-    (tmp_path / "gen_t0_create_price_performance_aapl.json").write_text(
+    (tmp_path / "price_performance_aapl.json").write_text(
         task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
     )
@@ -442,7 +504,7 @@ def test_cli_export_task_writes_public_agent_envelope(tmp_path) -> None:
         [
             "export-task",
             "--task",
-            "gen_t0_create_price_performance_aapl",
+            "price_performance_aapl",
             "--output",
             str(output),
         ]
@@ -450,10 +512,13 @@ def test_cli_export_task_writes_public_agent_envelope(tmp_path) -> None:
 
     payload = json.loads(output.read_text(encoding="utf-8"))
     assert exit_code == 0
-    assert payload["schema_version"] == "workspace-bench-task-v2"
-    assert payload["benchmark"]["release_id"] == "workspace-bench-v1"
-    assert payload["task"]["id"] == "gen_t0_create_price_performance_aapl"
+    assert payload["schema_version"] == "workspace-bench-envelope"
+    assert payload["benchmark"]["suite_id"] == "core"
+    assert payload["task"]["qualified_id"] == "core/create/price_performance_aapl"
+    assert payload["task"]["id"] == "price_performance_aapl"
+    assert payload["task"]["family"] == "create"
     assert payload["task"]["split"] == "train"
+    assert payload["task"]["business_terms"] == []
     assert "oracle_tool_calls" not in payload["task"]
     assert "success" not in payload["task"]
 
@@ -466,20 +531,17 @@ def test_cli_export_rollouts_writes_oracle_record(tmp_path) -> None:
             "export-rollouts",
             "--oracle",
             "--task",
-            "gen_t0_create_price_performance_aapl",
+            "price_performance_aapl",
             "--output",
             str(output),
         ]
     )
 
-    records = [
-        json.loads(line)
-        for line in output.read_text(encoding="utf-8").splitlines()
-    ]
+    records = [json.loads(line) for line in output.read_text(encoding="utf-8").splitlines()]
     assert exit_code == 0
     assert len(records) == 1
     assert records[0]["schema_version"] == "workspace-bench-rollout-v1"
-    assert records[0]["metadata"]["benchmark_release_id"] == "workspace-bench-v1"
+    assert "git_commit" in records[0]["metadata"]
     assert records[0]["metadata"]["export_schema_version"] == "workspace-bench-rollout-v1"
     assert records[0]["metadata"]["exported_at"].endswith("Z")
     assert records[0]["metadata"]["passed"] is True
@@ -495,7 +557,7 @@ def test_cli_export_sft_defaults_to_passing_oracle_attempts(tmp_path) -> None:
             "export-sft",
             "--oracle",
             "--task",
-            "gen_t0_create_price_performance_aapl",
+            "price_performance_aapl",
             "--format",
             "openai_messages",
             "--output",
@@ -503,10 +565,7 @@ def test_cli_export_sft_defaults_to_passing_oracle_attempts(tmp_path) -> None:
         ]
     )
 
-    records = [
-        json.loads(line)
-        for line in output.read_text(encoding="utf-8").splitlines()
-    ]
+    records = [json.loads(line) for line in output.read_text(encoding="utf-8").splitlines()]
     assert exit_code == 0
     assert len(records) == 1
     assert records[0]["metadata"]["passed"] is True
@@ -518,7 +577,7 @@ def test_cli_run_agent_command_uses_jsonl_contract(tmp_path, capsys) -> None:
         [
             "run-agent-command",
             "--task",
-            "gen_t0_create_price_performance_aapl",
+            "price_performance_aapl",
             "--agent-command",
             "python -m workspace_bench.examples.jsonl_rule_agent",
             "--run-dir",
@@ -529,7 +588,7 @@ def test_cli_run_agent_command_uses_jsonl_contract(tmp_path, capsys) -> None:
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
-    assert payload["benchmark"]["release_id"] == "workspace-bench-v1"
+    assert "git_commit" in payload["benchmark"]
     assert payload["summary"]["passed"] == 1
     assert payload["results"][0]["passed"] is True
     assert payload["results"][0]["agent_exit_code"] == 0
@@ -541,7 +600,7 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
         [
             "run-agent-command",
             "--task",
-            "gen_t0_create_price_performance_aapl",
+            "price_performance_aapl",
             "--agent-command",
             "python -m workspace_bench.examples.jsonl_rule_agent",
             "--run-dir",
@@ -555,9 +614,9 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
         [
             "run-agent-command",
             "--task",
-            "gen_t0_create_price_performance_aapl",
+            "price_performance_aapl",
             "--agent-command",
-            "python -c \"raise SystemExit(2)\"",
+            'python -c "raise SystemExit(2)"',
             "--run-dir",
             str(run_dir),
             "--json",
@@ -573,7 +632,7 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
 
 def test_task_loader_rejects_invalid_split(tmp_path) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "gen_t0_create_price_performance_aapl"
+        item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
     )
     payload = json.loads(task.source_path.read_text(encoding="utf-8"))
     payload["split"] = "prod"
@@ -590,7 +649,7 @@ def test_task_loader_rejects_invalid_split(tmp_path) -> None:
 
 def test_task_loader_rejects_malformed_allowed_tools(tmp_path) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "gen_t0_create_price_performance_aapl"
+        item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
     )
     payload = json.loads(task.source_path.read_text(encoding="utf-8"))
     payload["allowed_tools"] = "create_widget"
@@ -607,15 +666,13 @@ def test_task_loader_rejects_malformed_allowed_tools(tmp_path) -> None:
 
 def test_validate_reports_duplicate_task_ids(tmp_path, capsys) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "gen_t0_create_price_performance_aapl"
+        item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
     )
     source = task.source_path.read_text(encoding="utf-8")
     (tmp_path / "one.json").write_text(source, encoding="utf-8")
     (tmp_path / "two.json").write_text(source, encoding="utf-8")
 
-    exit_code = main(
-        ["validate", "--task-dir", str(tmp_path), "--min-tasks", "1"]
-    )
+    exit_code = main(["validate", "--task-dir", str(tmp_path), "--min-tasks", "1"])
 
     output = capsys.readouterr().out
     assert exit_code == 1

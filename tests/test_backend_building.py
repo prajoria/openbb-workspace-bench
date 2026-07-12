@@ -291,14 +291,117 @@ def test_seeded_custom_backend_and_broken_instantiate():
     assert "widgets are unavailable" in result["error"]["message"]
 
 
+def test_delete_reconciles_seeded_duplicate_custom_backend_names():
+    workspace = SimulatedWorkspace()
+    workspace.reset(
+        initial_state={
+            "custom_backends": [
+                {
+                    "backend_id": backend_id,
+                    "name": "Duplicate Desk",
+                    "url": "http://localhost:7779",
+                    "widgets_json": {"vix_history": VALID_WIDGET},
+                }
+                for backend_id in ("keep_backend", "remove_backend")
+            ]
+        }
+    )
+
+    result = workspace.call_tool(
+        "manage_backends",
+        {"operation": "delete", "backend_id": "remove_backend"},
+    )
+
+    assert result["ok"]
+    listed = workspace.call_tool("manage_backends", {"operation": "list"})
+    assert [item["name"] for item in listed["data"]["backends"]] == ["Duplicate Desk"]
+    assert workspace.call_tool(
+        "get_widget_schema",
+        {"origin": "Duplicate Desk", "widget_id": "vix_history"},
+    )["ok"]
+
+
+def test_debug_episode_exposes_fault_then_returns_data_after_refresh():
+    from workspace_bench.core.runner import find_task
+
+    task = find_task("build-openbb-apps/debug/execution_data_mismatch")
+    episode = WorkspaceEpisode(task)
+    probe = ToolCall(
+        "get_widget_data",
+        {"origin": "Execution Repair Data", "widget_id": "review_queue"},
+    )
+
+    broken = episode.step(probe)
+    assert not broken["ok"]
+    assert "missing declared fields" in broken["error"]["message"]
+
+    refresh = next(
+        call
+        for call in task.oracle_tool_calls
+        if call.name == "manage_backends" and call.args.get("operation") == "refresh"
+    )
+    assert episode.step(refresh)["ok"]
+    repaired = episode.step(probe)
+    assert repaired["ok"]
+    assert repaired["data"]["data"][0]["order_id"] == "order_id-1"
+
+
+def test_debug_read_widget_surfaces_custom_backend_data_preview():
+    from workspace_bench.core.runner import find_task
+
+    task = find_task("build-openbb-apps/debug/vendor_wrong_form_endpoint")
+    episode = WorkspaceEpisode(task)
+    for call in task.oracle_tool_calls:
+        episode.step(call)
+        if call.name == "manage_apps":
+            break
+
+    result = episode.step(ToolCall("read_widget", {"widget_id": "review_queue"}))
+
+    assert result["ok"]
+    assert result["data"]["widget"]["data_preview"][0]["record_id"] == "record_id-1"
+
+
+def test_debug_episode_surfaces_form_route_and_live_row_identity_faults():
+    from workspace_bench.core.runner import find_task
+
+    cases = (
+        ("vendor_wrong_form_endpoint", "form submission route"),
+        ("execution_wrong_live_row_id", "live-grid row identifier"),
+    )
+    for task_id, expected in cases:
+        episode = WorkspaceEpisode(find_task(f"build-openbb-apps/debug/{task_id}"))
+        result = episode.step(
+            ToolCall(
+                "get_widget_data",
+                {
+                    "origin": (
+                        "Vendor Repair Data"
+                        if task_id.startswith("vendor")
+                        else "Execution Repair Data"
+                    ),
+                    "widget_id": "review_queue",
+                },
+            )
+        )
+        assert not result["ok"]
+        assert expected in result["error"]["message"]
+        assert set(episode.initial_snapshot["dashboard_compositions"]) == {
+            "incident_triage",
+            "archive_workspace",
+        }
+
+
 # ---------------------------------------------------------------- grading
 
 
 def _building_task() -> Task:
     return Task.from_dict({
+        "schema_version": "workspace-bench-task",
         "id": "auth_test_task",
         "title": "Author a VIX backend",
-        "level": "L3",
+        "category": "platform",
+        "family": "backend-building",
         "capability": "backend-building",
         "workflow": "risk-review",
         "domain": "finance",

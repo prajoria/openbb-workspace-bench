@@ -15,7 +15,7 @@ from workspace_bench.core.runner import TaskRunner, find_task
 
 
 def test_grader_detects_missing_required_widget() -> None:
-    task = find_task("gen_t0_create_price_performance_aapl")
+    task = find_task("price_performance_aapl")
     snapshot = {
         "dashboard_composition": {
             "name": "Empty",
@@ -31,7 +31,7 @@ def test_grader_detects_missing_required_widget() -> None:
 
 
 def test_grader_detects_layout_overlap() -> None:
-    task = find_task("gen_t0_create_price_performance_aapl")
+    task = find_task("price_performance_aapl")
     task = replace(
         task,
         success=replace(
@@ -72,7 +72,7 @@ def test_grader_detects_layout_overlap() -> None:
 
 
 def test_grader_matches_generated_percent_equivalent() -> None:
-    task = find_task("gen_t1_note_fact_top_holding")
+    task = find_task("fact_top_holding")
     snapshot = {
         "dashboard_composition": {
             "name": "Existing Portfolio Review",
@@ -113,7 +113,7 @@ def test_grader_matches_generated_percent_equivalent() -> None:
 
 
 def test_grader_requires_tool_results_for_skill_task() -> None:
-    task = find_task("gen_t1_skill_finance_earnings_prep")
+    task = find_task("core/skills/read_the_finance_earnings_prep_skill")
     result = TaskRunner().run(task, "oracle")
 
     assert result.grade.passed is True
@@ -121,7 +121,7 @@ def test_grader_requires_tool_results_for_skill_task() -> None:
 
 
 def test_grader_matches_generated_widget_display_alias() -> None:
-    task = find_task("gen_t0_create_price_performance_aapl")
+    task = find_task("price_performance_aapl")
     task = replace(
         task,
         success=SuccessCriteria(
@@ -159,8 +159,43 @@ def test_grader_matches_generated_widget_display_alias() -> None:
     assert grade.passed is True
 
 
+def test_grader_keeps_generated_widget_data_equals_backwards_compatibility() -> None:
+    task = find_task("price_performance_aapl")
+    task = replace(
+        task,
+        success=SuccessCriteria(
+            required_generated_widgets=(
+                RequiredGeneratedWidget(
+                    widget_type="note",
+                    data_equals={"status": "ready"},
+                ),
+            )
+        ),
+    )
+    snapshot = {
+        "dashboard_composition": {
+            "name": "Workspace Bench",
+            "tabs": [{"id": "", "name": "", "layout": []}],
+            "widgets": [
+                {
+                    "generated": True,
+                    "type": "note",
+                    "generated_data": {"status": "wrong"},
+                    "layout": {"tab_id": "", "x": 0, "y": 0, "w": 20, "h": 8},
+                }
+            ],
+        }
+    }
+
+    assert not grade_task(task, snapshot, ()).passed
+    snapshot["dashboard_composition"]["widgets"][0]["generated_data"] = {
+        "status": "ready"
+    }
+    assert grade_task(task, snapshot, ()).passed
+
+
 def test_grader_dashboard_name_allows_stopwords_between_terms() -> None:
-    task = find_task("gen_t0_create_price_performance_aapl")
+    task = find_task("price_performance_aapl")
     task = replace(
         task,
         success=SuccessCriteria(
@@ -181,7 +216,7 @@ def test_grader_dashboard_name_allows_stopwords_between_terms() -> None:
 
 
 def test_grader_detects_missing_required_resource_read() -> None:
-    task = find_task("gen_t0_create_price_performance_aapl")
+    task = find_task("price_performance_aapl")
     task = replace(
         task,
         success=SuccessCriteria(
@@ -208,7 +243,7 @@ def test_grader_detects_missing_required_resource_read() -> None:
 
 
 def test_grader_matches_required_resource_read() -> None:
-    task = find_task("gen_t0_create_price_performance_aapl")
+    task = find_task("price_performance_aapl")
     task = replace(
         task,
         success=SuccessCriteria(
