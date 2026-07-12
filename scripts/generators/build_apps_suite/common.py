@@ -887,6 +887,13 @@ def _widget_outcome(widget_id: str, definition: dict, *, detailed: bool) -> str:
     widget_type = str(definition.get("type", "table"))
     endpoint = str(definition.get("endpoint", ""))
     purpose = str(definition.get("description", "")).rstrip(".")
+    # Catalog descriptions often open with the widget's own name; gluing that
+    # after the name again reads machine-generated and trips the identity
+    # audit, so the redundant prefix is dropped.
+    if purpose.lower().startswith(name.lower()):
+        purpose = purpose[len(name):].lstrip(" ,-")
+        if purpose.lower().startswith("for "):
+            purpose = purpose[4:]
     text = f"{name} (`{widget_id}`, {widget_type})"
     if endpoint:
         text += f" using `{endpoint}`"

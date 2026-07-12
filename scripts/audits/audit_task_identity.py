@@ -17,6 +17,16 @@ from pathlib import Path
 from typing import Any
 
 from workspace_bench.core.prompt_openness import prompt_openness_issues
+from workspace_bench.workspace.fixtures import default_fixture_backends
+
+# Verbatim fixture-catalog widget ids are ground truth, not generator output;
+# some legitimately repeat a token (a "holdings" tab holding a
+# "holdings_table" widget), so the machine-glue heuristic must not flag them.
+CATALOG_WIDGET_IDS = frozenset(
+    widget_id
+    for backend in default_fixture_backends().values()
+    for widget_id in backend.widgets
+)
 
 REPO = Path(__file__).resolve().parents[2]
 SUITE_DIRS = {
@@ -157,6 +167,8 @@ def audit_task(suite: str, family: str, task: dict[str, Any]) -> list[Finding]:
                 reason=f"{reason}: {match.group(0)!r}",
             )
     for identifier in re.findall(r"\b[a-z0-9]+(?:_[a-z0-9]+){2,}\b", prompt):
+        if identifier in CATALOG_WIDGET_IDS:
+            continue
         if repeated := repeated_token_phrase(identifier.split("_")):
             _add(
                 findings,
