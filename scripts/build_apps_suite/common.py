@@ -19,6 +19,7 @@ from urllib.parse import urlparse
 from workspace_bench.core.models import TASK_SCHEMA_VERSION
 from workspace_bench.workspace.runtime import declared_fields
 from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
+from workspace_bench.workspace.widget_params import flatten_params
 
 REPO = Path(__file__).resolve().parents[2]
 BUNDLED_OUT_DIR = REPO / "src/workspace_bench/core/task_suites/build_openbb_apps"
@@ -293,7 +294,7 @@ def runtime_dataset(backend_name: str, widget_id: str, definition: dict) -> dict
     form_endpoint = next(
         (
             str(param["endpoint"])
-            for param in _flat_definition_params(definition)
+            for param in flatten_params(definition, recurse=True)
             if str(param.get("method", "GET")).upper() == "POST"
             and param.get("endpoint")
         ),
@@ -302,20 +303,6 @@ def runtime_dataset(backend_name: str, widget_id: str, definition: dict) -> dict
     if form_endpoint is not None:
         dataset["form_endpoint"] = urlparse(form_endpoint).path or "/"
     return dataset
-
-
-def _flat_definition_params(definition: dict) -> list[dict]:
-    flattened: list[dict] = []
-    for entry in definition.get("params", []) or []:
-        entries = entry if isinstance(entry, list) else [entry]
-        for param in entries:
-            if not isinstance(param, dict):
-                continue
-            flattened.append(param)
-            nested = param.get("inputParams") or []
-            if nested:
-                flattened.extend(item for item in nested if isinstance(item, dict))
-    return flattened
 
 
 def _capability_param_kind(param: dict) -> str:
@@ -335,7 +322,7 @@ def _capability_widget_kind(definition: dict) -> str:
     widget_type = str(definition.get("type", "table"))
     if any(
         str(param.get("type")) in {"form", "button"}
-        for param in _flat_definition_params(definition)
+        for param in flatten_params(definition, recurse=True)
     ):
         return "form"
     if widget_type in {"ssrm_table", "live_grid"}:
@@ -415,7 +402,10 @@ def _migrate_behavioral_requirements(task: dict, *, family: str) -> None:
         capability_name = f"capability_{index}_{_slug(widget_id)}"
         capability_by_widget[widget_id] = capability_name
         param_kinds = sorted(
-            {_capability_param_kind(param) for param in _flat_definition_params(definition)}
+            {
+                _capability_param_kind(param)
+                for param in flatten_params(definition, recurse=True)
+            }
         )
         capabilities.append(
             {
@@ -449,7 +439,9 @@ def _migrate_behavioral_requirements(task: dict, *, family: str) -> None:
                 matching = next(
                     (
                         param
-                        for param in _flat_definition_params(behavioral_widgets[widget_id])
+                        for param in flatten_params(
+                            behavioral_widgets[widget_id], recurse=True
+                        )
                         if str(param.get("paramName", "")) == param_name
                     ),
                     None,
@@ -1010,7 +1002,7 @@ def _medium_anchors(task: dict, widgets: dict[str, dict]) -> list[str]:
     candidates = [
         str(param.get("paramName"))
         for definition in widgets.values()
-        for param in _flat_definition_params(definition)
+        for param in flatten_params(definition, recurse=True)
         if param.get("paramName")
     ]
     candidates.extend(
@@ -1040,7 +1032,7 @@ def _hard_business_terms(task: dict, widgets: dict[str, dict]) -> list[str]:
     param_kinds = {
         _capability_param_kind(param)
         for definition in widgets.values()
-        for param in _flat_definition_params(definition)
+        for param in flatten_params(definition, recurse=True)
     }
     if "ticker" in param_kinds:
         terms.append("ticker")

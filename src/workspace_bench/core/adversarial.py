@@ -21,6 +21,7 @@ from workspace_bench.core.models import (
 )
 from workspace_bench.workspace.runtime import bind_dataset, declared_fields
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
+from workspace_bench.workspace.widget_params import flatten_params
 
 
 WRONG_ENDPOINT_DATA = "wrong_endpoint_data"
@@ -600,7 +601,8 @@ def _collapse_connected_pair(
         source.setdefault("data", {}).setdefault("table", {})["columnsDefs"] = columns
         source_params = source.setdefault("params", [])
         source_param_names = {
-            str(param.get("paramName", "")) for param in _flat_params(source)
+            str(param.get("paramName", ""))
+            for param in flatten_params(source, recurse=True)
         }
         source_params.extend(
             copy.deepcopy(param)
@@ -982,7 +984,7 @@ def _form_target(context: AdversarialContext) -> tuple[str, str] | None:
 
 
 def _break_form_contract(definition: JsonDict) -> None:
-    for param in _flat_params(definition):
+    for param in flatten_params(definition, recurse=True):
         if str(param.get("method", "GET")).upper() == "POST":
             param["endpoint"] = "/adversarial-wrong-submit"
 
@@ -1230,20 +1232,3 @@ def _widget_definitions(snapshot: JsonDict) -> list[tuple[str, str, JsonDict]]:
             if isinstance(definition, dict):
                 definitions.append((backend_name, str(widget_id), definition))
     return definitions
-
-
-def _flat_params(definition: JsonDict) -> list[JsonDict]:
-    params = definition.get("params")
-    if not isinstance(params, list):
-        return []
-    flattened: list[JsonDict] = []
-    for entry in params:
-        entries = entry if isinstance(entry, list) else [entry]
-        for param in entries:
-            if not isinstance(param, dict):
-                continue
-            flattened.append(param)
-            nested = param.get("inputParams")
-            if isinstance(nested, list):
-                flattened.extend(item for item in nested if isinstance(item, dict))
-    return flattened

@@ -18,6 +18,7 @@ from workspace_bench.browser.task_backend import TaskBackendModel, TaskBackendSe
 from workspace_bench.core.models import JsonDict, RuntimeDataset, Task
 from workspace_bench.core.runner import find_task
 from workspace_bench.workspace.runtime import bind_dataset
+from workspace_bench.workspace.widget_params import flatten_params
 
 
 MANIFEST_SCHEMA_VERSION = "workspace-bench-browser-subset/v1"
@@ -303,7 +304,7 @@ def _validate_interaction(
     definition = model.widgets[interaction.widget_id]
     if interaction.op == "refresh_widget":
         return
-    params = _flatten_params(definition)
+    params = flatten_params(definition, recurse=True)
     if interaction.op == "set_param":
         if interaction.param not in {param.get("paramName") for param in params}:
             raise ValueError(
@@ -334,18 +335,6 @@ def _validate_interaction(
             raise ValueError(
                 f"{entry.task_ref}/{interaction.widget_id} has no column {interaction.column!r}"
             )
-
-
-def _flatten_params(definition: JsonDict) -> list[JsonDict]:
-    flattened: list[JsonDict] = []
-    for param in definition.get("params", []):
-        if not isinstance(param, dict):
-            continue
-        flattened.append(param)
-        children = param.get("inputParams")
-        if isinstance(children, list):
-            flattened.extend(child for child in children if isinstance(child, dict))
-    return flattened
 
 
 def _app_tabs(app: JsonDict) -> list[JsonDict]:

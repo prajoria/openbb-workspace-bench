@@ -23,6 +23,7 @@ from workspace_bench.core.models import (
     RuntimeDataset,
     Task,
 )
+from workspace_bench.workspace.widget_params import flatten_params
 
 
 TABLE_TYPES = {"table", "ssrm_table", "live_grid"}
@@ -246,7 +247,7 @@ def synthesize_params(definition: JsonDict) -> JsonDict:
     """Build deterministic representative values from a widget param schema."""
 
     result: JsonDict = {}
-    for param in _flat_params(definition):
+    for param in flatten_params(definition, recurse=True):
         name = param.get("paramName")
         param_type = param.get("type")
         if not isinstance(name, str) or not name or not isinstance(param_type, str):
@@ -794,39 +795,12 @@ def _fixed_param_value(param_type: str, name: str, multi_select: bool) -> Any:
     raise ValueError(f"unsupported parameter type {param_type!r}")
 
 
-def _flat_params(definition: JsonDict) -> list[JsonDict]:
-    params = definition.get("params")
-    if not isinstance(params, list):
-        return []
-    flat: list[JsonDict] = []
-    for entry in params:
-        if isinstance(entry, list):
-            entries = [item for item in entry if isinstance(item, dict)]
-            flat.extend(entries)
-            for item in entries:
-                flat.extend(_nested_params(item))
-        elif isinstance(entry, dict):
-            flat.append(entry)
-            flat.extend(_nested_params(entry))
-    return flat
-
-
-def _nested_params(param: JsonDict) -> list[JsonDict]:
-    nested = param.get("inputParams")
-    if not isinstance(nested, list):
-        return []
-    result = [item for item in nested if isinstance(item, dict)]
-    for item in tuple(result):
-        result.extend(_nested_params(item))
-    return result
-
-
 def _request_method(definition: JsonDict) -> str:
     if str(definition.get("type")) in POST_TYPES:
         return "POST"
     methods = {
         str(param.get("method", "GET")).upper()
-        for param in _flat_params(definition)
+        for param in flatten_params(definition, recurse=True)
         if param.get("method")
     }
     return "POST" if "POST" in methods else "GET"
@@ -864,7 +838,7 @@ def _form_endpoint_error(
         return None
     submitted = {
         _endpoint_path(param.get("endpoint"))
-        for param in _flat_params(definition)
+        for param in flatten_params(definition, recurse=True)
         if str(param.get("method", "GET")).upper() == "POST"
         and param.get("endpoint")
     }

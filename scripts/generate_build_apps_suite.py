@@ -38,6 +38,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from build_apps_suite import common as c  # noqa: E402
+from workspace_bench.workspace.widget_params import flatten_params  # noqa: E402
 
 FAMILY_MODULES = [
     "fam_types", "fam_settings", "fam_params", "fam_forms",
@@ -90,16 +91,8 @@ def authored_param_types(tasks: list[dict]) -> Counter:
             if call.get("tool") != "manage_backends":
                 continue
             for definition in (call.get("args", {}).get("widgets_json") or {}).values():
-                params = definition.get("params") or []
-                flat = []
-                for entry in params:
-                    flat.extend(entry if isinstance(entry, list) else [entry])
-                for param in flat:
-                    if isinstance(param, dict):
-                        ptypes[param.get("type", "text")] += 1
-                        for inner in param.get("inputParams") or []:
-                            if isinstance(inner, dict):
-                                ptypes[inner.get("type", "text")] += 1
+                for param in flatten_params(definition, recurse=True):
+                    ptypes[param.get("type", "text")] += 1
     return ptypes
 
 
@@ -142,18 +135,8 @@ def family_param_coverage(tasks: list[dict]) -> dict[str, set]:
             if call.get("tool") != "manage_backends":
                 continue
             for definition in (call.get("args", {}).get("widgets_json") or {}).values():
-                params = definition.get("params") or []
-                flat = []
-                for entry in params:
-                    flat.extend(entry if isinstance(entry, list) else [entry])
-                for param in flat:
-                    if isinstance(param, dict):
-                        coverage.setdefault(family, set()).add(param.get("type", "text"))
-                        for inner in param.get("inputParams") or []:
-                            if isinstance(inner, dict):
-                                coverage.setdefault(family, set()).add(
-                                    inner.get("type", "text")
-                                )
+                for param in flatten_params(definition, recurse=True):
+                    coverage.setdefault(family, set()).add(param.get("type", "text"))
     return coverage
 
 

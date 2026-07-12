@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import re
-from typing import Iterable
 
 from workspace_bench.core.models import JsonDict, Task
+from workspace_bench.workspace.widget_params import flatten_params
 
 
 @dataclass(frozen=True)
@@ -38,18 +38,6 @@ def _definitions(payload: JsonDict) -> tuple[list[tuple[str, JsonDict]], list[Js
     return widgets, apps
 
 
-def _flat_params(definition: JsonDict) -> Iterable[JsonDict]:
-    for entry in definition.get("params", []) or []:
-        params = entry if isinstance(entry, list) else [entry]
-        for param in params:
-            if not isinstance(param, dict):
-                continue
-            yield param
-            for nested in param.get("inputParams", []) or []:
-                if isinstance(nested, dict):
-                    yield nested
-
-
 def _duration_phrases(milliseconds: object) -> set[str]:
     if not isinstance(milliseconds, (int, float)):
         return set()
@@ -78,7 +66,7 @@ def _implementation_identifiers(payload: JsonDict) -> list[tuple[str, str]]:
         for key in ("staleTime", "refetchInterval"):
             for phrase in _duration_phrases(definition.get(key)):
                 identifiers.add(("refresh interval", phrase))
-        for param in _flat_params(definition):
+        for param in flatten_params(definition, recurse=True):
             param_name = str(param.get("paramName", ""))
             if "_" in param_name:
                 identifiers.add(("parameter id", param_name))

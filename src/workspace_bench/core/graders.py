@@ -22,6 +22,7 @@ from workspace_bench.core.models import (
     ToolTraceEvent,
 )
 from workspace_bench.workspace.runtime import grade_runtime
+from workspace_bench.workspace.widget_params import flatten_params
 
 
 STATE_CHANGING_TOOLS = {
@@ -688,32 +689,6 @@ def _subset_matches(spec: JsonDict, candidate: JsonDict) -> bool:
     return True
 
 
-def _flat_params(definition: JsonDict) -> list[JsonDict]:
-    params = definition.get("params")
-    flattened: list[JsonDict] = []
-    if isinstance(params, list):
-        for entry in params:
-            if isinstance(entry, list):
-                entries = [item for item in entry if isinstance(item, dict)]
-                flattened.extend(entries)
-                for item in entries:
-                    flattened.extend(_nested_params(item))
-            elif isinstance(entry, dict):
-                flattened.append(entry)
-                flattened.extend(_nested_params(entry))
-    return flattened
-
-
-def _nested_params(param: JsonDict) -> list[JsonDict]:
-    nested = param.get("inputParams")
-    if not isinstance(nested, list):
-        return []
-    result = [item for item in nested if isinstance(item, dict)]
-    for item in tuple(result):
-        result.extend(_nested_params(item))
-    return result
-
-
 def _app_layout_items(app: JsonDict) -> list[tuple[str, JsonDict]]:
     items: list[tuple[str, JsonDict]] = []
     for tab_key, tab in (app.get("tabs") or {}).items():
@@ -748,7 +723,8 @@ def _widget_kinds(definition: JsonDict) -> set[str]:
     widget_type = str(definition.get("type", "table"))
     kinds: set[str] = set()
     if widget_type == "form" or any(
-        str(param.get("type")) in {"form", "button"} for param in _flat_params(definition)
+        str(param.get("type")) in {"form", "button"}
+        for param in flatten_params(definition, recurse=True)
     ):
         kinds.add("form")
     if widget_type in {"ssrm_table", "live_grid"}:
@@ -787,7 +763,9 @@ def _param_kind(param: JsonDict) -> str:
 
 
 def _definition_param_kinds(definition: JsonDict) -> set[str]:
-    return {_param_kind(param) for param in _flat_params(definition)}
+    return {
+        _param_kind(param) for param in flatten_params(definition, recurse=True)
+    }
 
 
 def _declared_backend_widgets(
@@ -957,7 +935,7 @@ def _shared_param_graph(
                     and any(
                         str(param.get("paramName", "")) == param_name
                         and _param_kind(param) == param_kind
-                        for param in _flat_params(definitions[key])
+                        for param in flatten_params(definitions[key], recurse=True)
                     )
                 ]
                 for key in eligible:
@@ -1149,7 +1127,7 @@ def _grade_backend_building(builder: GradeBuilder, task: Task, final_snapshot: J
                     f"Widget def {required.widget_id!r}: missing {path} (expected {expected!r})."
                 )
             builder.check(found and actual == expected, "widget_def_mismatch", message)
-        params = _flat_params(definition)
+        params = flatten_params(definition, recurse=True)
         for spec in required.params_include:
             builder.check(
                 any(_subset_matches(spec, param) for param in params),

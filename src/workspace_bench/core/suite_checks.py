@@ -25,6 +25,7 @@ from workspace_bench.core.models import JsonDict, RunResult, Task
 from workspace_bench.core.mutation_checks import grader_mutation_failures
 from workspace_bench.core.prompt_openness import task_prompt_openness_issues
 from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
+from workspace_bench.workspace.widget_params import flatten_params
 
 CORE_SUITE = "core"
 BUILD_SUITE = "build-openbb-apps"
@@ -216,7 +217,7 @@ def build_release_checks(
             widget_types[widget_type] += 1
             if family:
                 type_coverage.setdefault(family, set()).add(widget_type)
-            for param in _flat_params(definition):
+            for param in flatten_params(definition, recurse=True):
                 for param_type in _param_type_names(param):
                     param_types[param_type] += 1
                     if family:
@@ -445,25 +446,8 @@ def _authored_definitions(task: Task) -> Iterable[JsonDict]:
                 yield definition
 
 
-def _flat_params(definition: JsonDict) -> list[JsonDict]:
-    params = definition.get("params")
-    flat: list[JsonDict] = []
-    if not isinstance(params, list):
-        return flat
-    for entry in params:
-        if isinstance(entry, list):
-            flat.extend(item for item in entry if isinstance(item, dict))
-        elif isinstance(entry, dict):
-            flat.append(entry)
-    return flat
-
-
 def _param_type_names(param: JsonDict) -> list[str]:
-    names = [str(param.get("type", "text"))]
-    for inner in param.get("inputParams") or []:
-        if isinstance(inner, dict):
-            names.append(str(inner.get("type", "text")))
-    return names
+    return [str(param.get("type", "text"))]
 
 
 def _task_backend_slugs(task: Task) -> set[str]:

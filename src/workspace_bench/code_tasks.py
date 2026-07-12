@@ -21,6 +21,7 @@ from urllib.request import Request, urlopen
 from workspace_bench.core.models import CodeProbe, CodeTaskSpec, JsonDict, Task
 from workspace_bench.workspace.backend_validation import validate_apps_json, validate_widgets_json
 from workspace_bench.workspace.runtime import contains_placeholder, response_shape_error
+from workspace_bench.workspace.widget_params import flatten_params
 
 
 CODE_RECEIPT_SCHEMA_VERSION = "workspace-bench-code-receipt/v0"
@@ -513,7 +514,7 @@ def _evaluate_manifests(
         if isinstance(endpoint, str):
             method = "POST" if definition.get("type") == "ssrm_table" else "GET"
             declared.add((method, endpoint))
-        for param in _flat_params(definition):
+        for param in flatten_params(definition, recurse=True):
             if param.get("type") == "form" and isinstance(param.get("endpoint"), str):
                 declared.add((str(param.get("method", "POST")), str(param["endpoint"])))
     covered = {(probe.method, probe.path) for probe in spec.probes}
@@ -829,19 +830,6 @@ def _matches_type(value: Any, expected: str) -> bool:
     if expected == "array":
         return isinstance(value, list) and bool(value)
     return False
-
-
-def _flat_params(definition: JsonDict) -> list[JsonDict]:
-    params = definition.get("params")
-    if not isinstance(params, list):
-        return []
-    flattened: list[JsonDict] = []
-    for item in params:
-        if isinstance(item, list):
-            flattened.extend(value for value in item if isinstance(value, dict))
-        elif isinstance(item, dict):
-            flattened.append(item)
-    return flattened
 
 
 def _garbage_fastapi_module() -> str:
