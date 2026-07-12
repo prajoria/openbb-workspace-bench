@@ -7,9 +7,10 @@ import re
 from dataclasses import dataclass, field
 from typing import Any
 
+from workspace_bench.core.models import FixtureBackendRef, JsonDict, RuntimeChecks, ToolCall
 from workspace_bench.workspace import backend_validation
 from workspace_bench.workspace.fixtures import FixtureBackend, default_fixture_backends
-from workspace_bench.core.models import FixtureBackendRef, JsonDict, ToolCall
+from workspace_bench.workspace.runtime import task_widget_data
 
 
 WORKSPACE_SKILLS: dict[str, JsonDict] = {
@@ -174,6 +175,7 @@ class SimulatedWorkspace:
         self,
         backends: tuple[FixtureBackendRef, ...] | list[FixtureBackendRef] = (),
         initial_state: JsonDict | None = None,
+        runtime_checks: RuntimeChecks | None = None,
     ) -> None:
         self._dash_counter = 0
         self._widget_counter = 0
@@ -185,6 +187,8 @@ class SimulatedWorkspace:
         self.backends: dict[str, FixtureBackend] = {}
         self.backend_ids_by_name: dict[str, str] = {}
         self.custom_backends: dict[str, JsonDict] = {}
+        self.declared_backends: dict[str, JsonDict] = {}
+        self.runtime_checks = runtime_checks
 
         for backend_ref in backends:
             self.register_backend(backend_ref.name, backend_ref.backend_id, backend_ref.url)
@@ -192,8 +196,12 @@ class SimulatedWorkspace:
         initial_state = initial_state or {}
         for custom_spec in initial_state.get("custom_backends", []) or []:
             self._seed_custom_backend(custom_spec)
-        dashboard_spec = initial_state.get("dashboard")
-        if dashboard_spec:
+        dashboard_specs = initial_state.get("dashboards")
+        if isinstance(dashboard_specs, list) and dashboard_specs:
+            for dashboard_spec in dashboard_specs:
+                if isinstance(dashboard_spec, dict):
+                    self.seed_dashboard(dashboard_spec)
+        elif dashboard_spec := initial_state.get("dashboard"):
             self.seed_dashboard(dashboard_spec)
         else:
             dashboard = self.create_dashboard("Workspace Bench", activate=True)
@@ -403,6 +411,12 @@ class SimulatedWorkspace:
             if "widgets_json" in args or "apps_json" in args:
                 return self._add_custom_backend(args, name)
             backend_id = self.register_backend(name, args.get("backend_id"), args.get("url"))
+            backend = self.backends[backend_id]
+            self.declared_backends[backend_id] = {
+                "name": backend.name,
+                "url": backend.default_url,
+                "warnings": [],
+            }
             return self._ok(
                 "manage_backends",
                 {"backend_id": backend_id, "backends": self._backend_list()},
@@ -414,10 +428,34 @@ class SimulatedWorkspace:
             if "widgets_json" in args or "apps_json" in args:
                 return self._refresh_custom_backend(args, str(refresh_backend_id))
             return self._ok("manage_backends", {"backend_id": refresh_backend_id})
+        if operation == "delete":
+            delete_backend_id = args.get("backend_id")
+            if delete_backend_id not in self.custom_backends:
+                return self._error(
+                    "manage_backends",
+                    "invalid_request",
+                    "manage_backends delete requires a custom backend_id.",
+                )
+            deleted = self.backends.pop(str(delete_backend_id))
+            self.custom_backends.pop(str(delete_backend_id), None)
+            self.declared_backends.pop(str(delete_backend_id), None)
+            remaining = [
+                candidate_id
+                for candidate_id, backend in self.backends.items()
+                if backend.name == deleted.name
+            ]
+            if remaining:
+                self.backend_ids_by_name[deleted.name] = remaining[-1]
+            else:
+                self.backend_ids_by_name.pop(deleted.name, None)
+            return self._ok(
+                "manage_backends",
+                {"message": "Backend deleted.", "backend_id": delete_backend_id},
+            )
         return self._error(
             "manage_backends",
             "invalid_request",
-            "manage_backends supports list, add, and refresh in the simulator.",
+            "manage_backends supports list, add, refresh, and delete in the simulator.",
         )
 
     @staticmethod
@@ -613,7 +651,32 @@ class SimulatedWorkspace:
                 "get_widget_data", "invalid_request", "data_args must be an object."
             )
         backend = self._backend_by_origin(str(origin))
-        data = backend.fetch_widget_data(str(widget_id), data_args)
+        resolved_widget_id = str(widget_id)
+        backend_id = self.backend_ids_by_name.get(str(origin))
+        if (
+            backend_id in self.custom_backends
+            and self.runtime_checks is not None
+        ):
+            definition = backend.widgets.get(resolved_widget_id)
+            if definition is None:
+                return self._error(
+                    "get_widget_data",
+                    "invalid_request",
+                    f"Unknown widget_id {resolved_widget_id!r}.",
+                )
+            data, error = task_widget_data(
+                definition,
+                resolved_widget_id,
+                self.runtime_checks,
+            )
+            if error is not None:
+                return self._error(
+                    "get_widget_data",
+                    "backend_response_invalid",
+                    error,
+                )
+        else:
+            data = backend.fetch_widget_data(resolved_widget_id, data_args)
         return self._ok("get_widget_data", {"data": data})
 
     def _tool_manage_dashboard(self, args: JsonDict) -> JsonDict:
@@ -805,7 +868,21 @@ class SimulatedWorkspace:
 
     def _tool_read_widget(self, args: JsonDict) -> JsonDict:
         widget = self._find_widget(args)
-        return self._ok("read_widget", {"widget": widget.to_dict()})
+        payload = widget.to_dict()
+        backend_id = self.backend_ids_by_name.get(widget.origin)
+        if backend_id in self.custom_backends and self.runtime_checks is not None:
+            response = self._tool_get_widget_data(
+                {
+                    "origin": widget.origin,
+                    "widget_id": widget.widget_id,
+                    "data_args": widget.data_args,
+                }
+            )
+            if response.get("ok"):
+                payload["data_preview"] = (response.get("data") or {}).get("data")
+            else:
+                payload["data_error"] = (response.get("error") or {}).get("message")
+        return self._ok("read_widget", {"widget": payload})
 
     def _tool_delete_widget(self, args: JsonDict) -> JsonDict:
         dashboard = self._dashboard(args.get("dashboard_id"))
@@ -1105,6 +1182,13 @@ class SimulatedWorkspace:
                 {"dashboard_id": dash.dashboard_id, "name": dash.name}
                 for dash in self.dashboards.values()
             ],
+            # Full compositions make collateral workspace mutations observable
+            # to deterministic graders; dashboard_composition remains the
+            # backwards-compatible active-dashboard view.
+            "dashboard_compositions": {
+                dashboard_id: self._dashboard_composition(dashboard)
+                for dashboard_id, dashboard in self.dashboards.items()
+            },
             "dashboard_composition": self._dashboard_composition(active),
             "backends": self._backend_list(),
             "custom_backends": {
@@ -1115,7 +1199,10 @@ class SimulatedWorkspace:
                     "apps_json": self.backends[backend_id].apps_json(),
                     "warnings": list(meta.get("warnings", [])),
                 }
-                for backend_id, meta in self.custom_backends.items()
+                for backend_id, meta in {
+                    **self.declared_backends,
+                    **self.custom_backends,
+                }.items()
                 if backend_id in self.backends
             },
             "skills": [
