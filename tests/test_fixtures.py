@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import re
 import threading
 from pathlib import Path
 from urllib.request import urlopen
@@ -129,7 +130,9 @@ def test_daloopa_backend_exposes_skill_data_surface() -> None:
     backend = build_daloopa_backend()
 
     assert len(backend.widgets) == 10
-    assert len(backend.apps) == 2
+    # Standalone vendor feed by design: composition is exercised through the
+    # daloopa-* workspace skills, not pre-built app templates.
+    assert backend.apps == []
 
     schema = backend.get_widget_schema("daloopa_company_fundamentals")
     assert schema["origin"] == "Bench Daloopa"
@@ -174,6 +177,29 @@ def test_daloopa_backend_exposes_skill_data_surface() -> None:
     note = backend.fetch_widget_data("daloopa_coverage_note", {})
     assert isinstance(note, str)
     assert "daloopa.com/src/" in note
+
+
+def test_daloopa_skills_reference_only_existing_widgets() -> None:
+    from workspace_bench.workspace.simulated_workspace import WORKSPACE_SKILLS
+
+    backend = build_daloopa_backend()
+    daloopa_skills = {
+        slug: skill for slug, skill in WORKSPACE_SKILLS.items() if slug.startswith("daloopa-")
+    }
+    assert set(daloopa_skills) == {
+        "daloopa-tearsheet",
+        "daloopa-earnings-review",
+        "daloopa-guidance-tracker",
+        "daloopa-inflection",
+        "daloopa-capital-allocation",
+        "daloopa-industry",
+    }
+    for skill in daloopa_skills.values():
+        referenced = set(re.findall(r"daloopa_[a-z_]+", skill["content"]))
+        assert referenced, skill["slug"]
+        assert referenced.issubset(backend.widgets), skill["slug"]
+        # Every workflow enforces the plugin's mandatory citation rule.
+        assert "source_url" in skill["content"], skill["slug"]
 
 
 def test_daloopa_baked_data_is_deterministic_and_internally_consistent() -> None:

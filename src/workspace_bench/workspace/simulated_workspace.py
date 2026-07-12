@@ -52,6 +52,89 @@ WORKSPACE_SKILLS: dict[str, JsonDict] = {
             "valuation multiples, and explain why outliers deserve premium or discount."
         ),
     },
+    # Daloopa skills mirror the Daloopa Claude plugin workflows
+    # (github.com/daloopa/daloopa-plugin-claude) rewritten against the
+    # standalone Bench Daloopa fixture widgets instead of the Daloopa MCP.
+    "daloopa-tearsheet": {
+        "slug": "daloopa-tearsheet",
+        "name": "Daloopa Tearsheet",
+        "description": "Build a cited one-page company snapshot from Bench Daloopa fundamentals, KPIs, segments, and prices.",
+        "content": (
+            "Daloopa tearsheet workflow: on the Bench Daloopa origin, read "
+            "daloopa_company_directory and anchor all period math on "
+            "latest_calendar_quarter, never the wall clock. Pull "
+            "daloopa_stock_prices for the latest close, "
+            "daloopa_company_fundamentals for revenue through free cash flow, "
+            "daloopa_kpi_metrics for business drivers, and "
+            "daloopa_segment_breakdown for mix. Cite every Daloopa-sourced "
+            "figure with its source_url and label single-company periods with "
+            "fiscal_period."
+        ),
+    },
+    "daloopa-earnings-review": {
+        "slug": "daloopa-earnings-review",
+        "name": "Daloopa Earnings Review",
+        "description": "Review an earnings print: consensus beat/miss, guidance verdicts, filings, and price reaction.",
+        "content": (
+            "Daloopa earnings review workflow: on the Bench Daloopa origin, "
+            "compare actuals against consensus in daloopa_consensus_estimates "
+            "for the latest quarter, check daloopa_management_guidance "
+            "verdicts for the same period, read the matching transcript from "
+            "daloopa_document_search, and use daloopa_stock_prices "
+            "quarter-end rows for the reaction. Consensus rows are not "
+            "Daloopa-sourced and carry no citations; cite every Daloopa "
+            "figure via source_url."
+        ),
+    },
+    "daloopa-guidance-tracker": {
+        "slug": "daloopa-guidance-tracker",
+        "name": "Daloopa Guidance Tracker",
+        "description": "Score management guidance accuracy across the covered quarters.",
+        "content": (
+            "Daloopa guidance tracker workflow: pull "
+            "daloopa_management_guidance for one ticker, tally Beat, In Line, "
+            "and Missed verdicts across reported quarters, treat the Pending "
+            "row as the open guide for the next quarter, and cite each "
+            "quoted range via its source_url."
+        ),
+    },
+    "daloopa-inflection": {
+        "slug": "daloopa-inflection",
+        "name": "Daloopa Inflection",
+        "description": "Detect metric accelerations and decelerations across quarters.",
+        "content": (
+            "Daloopa inflection workflow: pull daloopa_company_fundamentals "
+            "and daloopa_kpi_metrics across all covered quarters for one "
+            "ticker, compute quarter-over-quarter and year-over-year growth "
+            "per series, flag growth-rate reversals as inflections, and cite "
+            "the underlying inputs via source_url for every flagged move."
+        ),
+    },
+    "daloopa-capital-allocation": {
+        "slug": "daloopa-capital-allocation",
+        "name": "Daloopa Capital Allocation",
+        "description": "Assess buybacks, dividends, and free cash flow coverage.",
+        "content": (
+            "Daloopa capital allocation workflow: from "
+            "daloopa_company_fundamentals, compare Share Buybacks plus "
+            "Dividends Paid against Free Cash Flow per quarter, use Diluted "
+            "Weighted Average Shares drift as buyback evidence, and cite "
+            "every figure via source_url."
+        ),
+    },
+    "daloopa-industry": {
+        "slug": "daloopa-industry",
+        "name": "Daloopa Industry Comparison",
+        "description": "Compare covered companies on normalized calendar quarters.",
+        "content": (
+            "Daloopa industry workflow: list peers from "
+            "daloopa_company_directory, pull daloopa_company_fundamentals for "
+            "each ticker, normalize on calendar_period labels when comparing "
+            "across different fiscal year ends, compare revenue growth and "
+            "margins side by side, and cite each company's figures via "
+            "source_url."
+        ),
+    },
 }
 
 WORKSPACE_PROMPTS: dict[str, str] = {

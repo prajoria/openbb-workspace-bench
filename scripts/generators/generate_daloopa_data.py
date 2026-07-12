@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Author the deterministic Daloopa fixture catalog (widgets, apps, baked data).
+"""Author the deterministic Daloopa fixture catalog (widgets plus baked data).
 
 The Bench Daloopa fixture mirrors the data surface consumed by the Daloopa
 Claude plugin skills (https://github.com/daloopa/daloopa-plugin-claude):
@@ -979,120 +979,12 @@ def build_widgets() -> dict[str, JsonDict]:
     }
 
 
-def build_apps() -> list[JsonDict]:
-    def item(widget_id: str, x: int, y: int, w: int, h: int, params: JsonDict) -> JsonDict:
-        entry: JsonDict = {"i": widget_id, "x": x, "y": y, "w": w, "h": h}
-        if params:
-            entry["state"] = {"params": params}
-        return entry
-
-    ticker = {"ticker": "AAPL"}
-    ticker_period = {"ticker": "AAPL", "period": LATEST_CALENDAR_QUARTER}
-    return [
-        {
-            "name": "Daloopa Company Tearsheet",
-            "template_id": "daloopa-company-tearsheet",
-            "description": "One-page company snapshot: price, cited fundamentals, "
-            "operating KPIs, segments, and latest filings.",
-            "allowCustomization": True,
-            "tabs": {
-                "snapshot": {
-                    "id": "snapshot",
-                    "name": "Snapshot",
-                    "layout": [
-                        item("daloopa_company_directory", 0, 2, 40, 8, {}),
-                        item("daloopa_stock_prices", 0, 10, 20, 12, ticker),
-                        item("daloopa_company_fundamentals", 20, 10, 20, 12, ticker_period),
-                    ],
-                },
-                "drivers": {
-                    "id": "drivers",
-                    "name": "Drivers",
-                    "layout": [
-                        item("daloopa_kpi_metrics", 0, 2, 20, 12, ticker_period),
-                        item("daloopa_segment_breakdown", 20, 2, 20, 12, ticker_period),
-                    ],
-                },
-                "filings": {
-                    "id": "filings",
-                    "name": "Filings",
-                    "layout": [
-                        item("daloopa_document_search", 0, 2, 26, 12, ticker),
-                        item("daloopa_coverage_note", 26, 2, 14, 12, {}),
-                    ],
-                },
-            },
-            "groups": [
-                {
-                    "name": "Group 1",
-                    "type": "param",
-                    "paramName": "ticker",
-                    "widgetIds": [
-                        "daloopa_stock_prices",
-                        "daloopa_company_fundamentals",
-                        "daloopa_kpi_metrics",
-                        "daloopa_segment_breakdown",
-                        "daloopa_document_search",
-                    ],
-                    "defaultValue": "AAPL",
-                }
-            ],
-            "prompts": [
-                "Build a one-page tearsheet for AAPL with cited figures.",
-                "Which operating KPI inflected most in the latest quarter?",
-                "Summarize the latest filings ahead of the next earnings call.",
-            ],
-        },
-        {
-            "name": "Daloopa Earnings Review",
-            "template_id": "daloopa-earnings-review",
-            "description": "Earnings analysis: consensus beat/miss, guidance "
-            "accuracy, and the post-earnings price reaction.",
-            "allowCustomization": True,
-            "tabs": {
-                "flash": {
-                    "id": "flash",
-                    "name": "Flash",
-                    "layout": [
-                        item("daloopa_consensus_estimates", 0, 2, 20, 12, ticker),
-                        item("daloopa_management_guidance", 20, 2, 20, 12, ticker),
-                    ],
-                },
-                "reaction": {
-                    "id": "reaction",
-                    "name": "Reaction",
-                    "layout": [
-                        item("daloopa_stock_prices", 0, 2, 20, 12, ticker),
-                        item("daloopa_document_search", 20, 2, 20, 12, ticker),
-                    ],
-                },
-            },
-            "groups": [
-                {
-                    "name": "Group 1",
-                    "type": "param",
-                    "paramName": "ticker",
-                    "widgetIds": [
-                        "daloopa_consensus_estimates",
-                        "daloopa_management_guidance",
-                        "daloopa_stock_prices",
-                        "daloopa_document_search",
-                    ],
-                    "defaultValue": "AAPL",
-                }
-            ],
-            "prompts": [
-                "Did the company beat consensus in the latest quarter?",
-                "Track guidance accuracy over the last eight quarters.",
-                "How did the stock trade after the latest print?",
-            ],
-        },
-    ]
-
-
 def build_daloopa_catalog() -> JsonDict:
+    # Apps are intentionally empty: the fixture is a standalone vendor data
+    # feed, and dashboard composition is exercised through the daloopa-*
+    # workspace skills instead of pre-built app templates.
     return {
-        "apps": build_apps(),
+        "apps": [],
         "source": {
             "repo": "daloopa-plugin-claude",
             "url": "https://github.com/daloopa/daloopa-plugin-claude",

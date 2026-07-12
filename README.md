@@ -651,7 +651,13 @@ ids, operating KPIs, segment breakdowns, management guidance, consensus
 estimates, SEC document search, and daily stock prices across six covered
 companies. Unlike the Stark catalog (imported from a demo repo, then baked),
 the Daloopa catalog is fully authored and baked by
-`scripts/generators/generate_daloopa_data.py` (10 widgets, 2 apps):
+`scripts/generators/generate_daloopa_data.py`. It is deliberately a
+standalone vendor feed — 10 widgets and no app templates — because the
+matching `daloopa-*` workspace skills (tearsheet, earnings review, guidance
+tracker, inflection, capital allocation, industry comparison; served through
+`get_skill_content`) are what drive dashboard composition against it. Pair it
+with `stark-enterprise` in a task's fixture backends to test Daloopa skill
+workflows inside the enterprise workspace:
 
 ```bash
 uv run workspace-bench serve-fixture --backend daloopa --port 9105
