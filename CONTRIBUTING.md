@@ -46,6 +46,13 @@ uv run python scripts/audit_task_identity.py
 uv run python scripts/report_prompt_stats.py
 ```
 
+The core and build-suite generators share their deterministic assembly mechanics
+in `scripts/_authoring/`. Keep suite policy in small callbacks/configuration
+(identity cleanup, artifact prefixes, exceptional cell sizes) rather than adding
+a second implementation of phrasing, difficulty, split, novelty, or matrix logic.
+After changing either generator, run it twice and verify that the bundled JSON is
+unchanged on the second run.
+
 The `debug` family is a fixed 24-task long-repair allocation rather than a
 four-task ladder cell. Each task must seed a genuinely broken custom backend,
 use task-owned runtime datasets for an agent-visible failed probe and repaired

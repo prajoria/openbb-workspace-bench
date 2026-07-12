@@ -29,14 +29,25 @@ must report oracle pass and no-op fail for every task.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import re
-import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
+from _authoring import (
+    ArtifactDiscriminator,
+    CheckTypePolicy,
+    NoveltyPolicy,
+    PhrasingSelector,
+    SplitAssigner,
+    TaskAssembler,
+    build_matrix,
+    difficulty_for,
+    snap,
+    uniform_four_way_pattern,
+)
+from workspace_bench.core.models import TASK_SCHEMA_VERSION
 from workspace_bench.core.suite_checks import task_payload_digest
 from workspace_bench.workspace.fixtures import get_fixture_backend
 
@@ -231,19 +242,7 @@ def clean_prompt(prompt: str) -> str:
     return prompt
 
 
-def phrased(task_id: str, variants: list[str]) -> str:
-    """Select a prompt variant by stable task-id hash and record pool coverage."""
-    assert isinstance(variants, list), f"{task_id} prompt pool must be a list"
-    assert len(variants) >= 3, f"{task_id} prompt pool has {len(variants)} variants"
-    frame = sys._getframe(1)
-    site = f"{Path(frame.f_code.co_filename).name}:{frame.f_lineno}"
-    previous = PROMPT_POOL_SIZES.setdefault(site, len(variants))
-    assert previous == len(variants), (
-        f"prompt site {site} used pool sizes {previous} and {len(variants)}"
-    )
-    stable_id = public_id(task_id)
-    index = int(hashlib.md5(stable_id.encode()).hexdigest(), 16) % len(variants)
-    return variants[index]
+phrased = PhrasingSelector(PROMPT_POOL_SIZES, normalize_id=public_id)
 
 
 def stark_value(widget_id: str) -> float:
@@ -344,50 +343,10 @@ def wf(origin: str, widget_id: str = "") -> tuple[str, str]:
     return stark_family(widget_id) if origin == STK else core_workflow(origin)
 
 
-def difficulty_for(level: str, cell_index: int) -> str:
-    if level == "r0":
-        return "easy"
-    if level == "r1":
-        return "easy" if cell_index <= 2 else "medium"
-    if level == "r2":
-        return "medium"
-    if level == "r3":
-        return "medium" if cell_index <= 2 else "hard"
-    return "hard"
-
-
 _CATEGORY_CODE_TO_CATEGORY = {
     "L0": "read", "L1": "single-widget", "L2": "dashboard",
     "L3": "platform", "L4": "repair", "L5": "platform",
 }
-
-
-def add(family: str, level: str, task: dict) -> None:
-    CELL_COUNTS[(family, level)] += 1
-    cell_index = CELL_COUNTS[(family, level)]
-    task.setdefault("domain", "finance")
-    task.setdefault("source", "workspace-bench-gen")
-    task["schema_version"] = "workspace-bench-task"
-    # Templates declare a category code; map it to the public category axis.
-    task["category"] = _CATEGORY_CODE_TO_CATEGORY[task.pop("category_code", "L1")]
-    task["family"] = family
-    task["id"] = public_id(task["id"])
-    task["title"] = clean_title(task["title"])
-    task["prompt"] = clean_prompt(task["prompt"])
-    assert re.fullmatch(r"[a-z0-9]+(?:_[a-z0-9]+)*", task["id"]), task["id"]
-    task["difficulty"] = difficulty_for(level, cell_index)
-    tags = task.setdefault("tags", [])
-    tags.insert(0, f"family-{family}")
-    task.setdefault("success", {}).setdefault("workspace_checks", {})[
-        "preserve_other_dashboards"
-    ] = True
-    _ensure_widget_discovery(task)
-    if family == "backends":
-        _attach_backend_runtime_checks(task)
-    task.setdefault("limits", {})["max_turns"] = (
-        len(task["oracle_tool_calls"]) + RUNG_SLACK[level])
-    task["_family"], task["_rung"] = family, level
-    SCENARIOS.append(task)
 
 
 def _attach_backend_runtime_checks(task: dict) -> None:
@@ -458,6 +417,57 @@ def _ensure_widget_discovery(task: dict) -> None:
     task["oracle_tool_calls"] = calls
 
 
+def _set_core_category(task: dict, family: str) -> None:
+    del family
+    # Templates declare a category code; map it to the public category axis.
+    task["category"] = _CATEGORY_CODE_TO_CATEGORY[task.pop("category_code", "L1")]
+
+
+def _normalize_core_identity(task: dict) -> None:
+    task["id"] = public_id(task["id"])
+    task["title"] = clean_title(task["title"])
+    task["prompt"] = clean_prompt(task["prompt"])
+
+
+def _noop_task_stage(task: dict, family: str, level: str, cell_index: int) -> None:
+    del task, family, level, cell_index
+
+
+def _set_core_difficulty(task: dict, family: str, level: str, cell_index: int) -> None:
+    del family
+    task["difficulty"] = difficulty_for(level, cell_index)
+
+
+def _core_tag_prefixes(family: str, level: str, cell_index: int) -> tuple[str]:
+    del level, cell_index
+    return (f"family-{family}",)
+
+
+def _finalize_core_task(task: dict, family: str, level: str, cell_index: int) -> None:
+    del level, cell_index
+    task.setdefault("success", {}).setdefault("workspace_checks", {})[
+        "preserve_other_dashboards"
+    ] = True
+    _ensure_widget_discovery(task)
+    if family == "backends":
+        _attach_backend_runtime_checks(task)
+
+
+add = TaskAssembler(
+    scenarios=SCENARIOS,
+    cell_counts=CELL_COUNTS,
+    source="workspace-bench-gen",
+    schema_version=TASK_SCHEMA_VERSION,
+    rung_slack=RUNG_SLACK,
+    set_category=_set_core_category,
+    normalize_identity=_normalize_core_identity,
+    after_identity=_noop_task_stage,
+    set_difficulty=_set_core_difficulty,
+    tag_prefixes=_core_tag_prefixes,
+    finalize_task=_finalize_core_task,
+).add
+
+
 def seeded(name: str, widgets: list[dict], tabs: list[dict] | None = None) -> dict:
     dash: dict = {"name": name, "activate": True, "tabs": tabs or [{"id": "", "name": ""}]}
     if widgets:
@@ -468,10 +478,6 @@ def seeded(name: str, widgets: list[dict], tabs: list[dict] | None = None) -> di
 def note_call(name: str, text: str) -> dict:
     return {"tool": "add_generative_widget",
             "args": {"widget_type": "note", "name": name, "data": text}}
-
-
-def snap() -> dict:
-    return {"tool": "get_workspace_snapshot", "args": {}}
 
 
 def discovery(origin: str, widget_id: str, data_args: dict,
@@ -4726,11 +4732,23 @@ def check_type_counts(tasks: list[dict]) -> Counter:
     return counts
 
 
-def task_check_types(task: dict) -> tuple[str, ...]:
-    return tuple(sorted(check_type_counts([task])))
+task_check_types = CheckTypePolicy(
+    success_checks={
+        "required_tabs": "missing_tab",
+        "required_generated_widgets": "missing_generated_widget",
+        "required_layouts": "layout_mismatch",
+        "required_tool_calls": "missing_tool_call",
+        "required_tool_results": "missing_tool_result",
+        "required_resource_reads": "missing_resource_read",
+    },
+    widget_mode="cardinality",
+    within_grid_default=True,
+    max_invalid_tool_calls_default=0,
+    include_forbid_invented_widget_ids=True,
+)
 
 
-def artifact_discriminator(task: dict) -> str:
+def _core_artifact_parts(task: dict) -> list[str]:
     success = task.get("success", {})
     parts: list[str] = []
     for req in success.get("required_resource_reads", []):
@@ -4756,76 +4774,26 @@ def artifact_discriminator(task: dict) -> str:
                 task_ids.append(str(task.get("id")))
     if task_ids:
         parts.append("tasks:" + ",".join(sorted(task_ids)))
-    widgets = [
-        f"{req.get('origin')}/{req.get('widget_id')}@{req.get('tab_id', '*')}"
-        for req in success.get("required_widgets", [])
-        if int(req.get("min_count", 1)) > 0
-    ]
-    if widgets:
-        parts.append("widgets:" + ",".join(sorted(widgets)))
-    layouts = [
-        ":".join(str(req.get(key, "")) for key in ("widget_id", "widget_uuid", "tab_id", "x", "y", "w", "h"))
-        for req in success.get("required_layouts", [])
-    ]
-    if layouts:
-        parts.append("layouts:" + ",".join(sorted(layouts)))
-    tabs = success.get("required_tabs", [])
-    if tabs:
-        parts.append("tabs:" + ",".join(sorted(tabs)))
-    generated = [
-        f"{req.get('widget_type')}@{req.get('tab_id', '*')}:{','.join(req.get('data_contains', [])[:2])}"
-        for req in success.get("required_generated_widgets", [])
-    ]
-    if generated:
-        parts.append("generated:" + ",".join(sorted(generated)))
-    if not parts:
-        parts.append("id:" + task["id"])
-    return "|".join(parts)
+    return parts
 
 
-def novelty_fingerprint(task: dict) -> tuple:
-    family = task["_family"]
-    level = task["_rung"]
-    oracle_tools = tuple(sorted({call["tool"] for call in task["oracle_tool_calls"]}))
-    checks = task_check_types(task)
-    backends = tuple(sorted(task_backends(task)))
-    return (family, level, oracle_tools, checks, backends, artifact_discriminator(task))
+artifact_discriminator = ArtifactDiscriminator(
+    leading_parts=_core_artifact_parts,
+    include_layouts=True,
+)
+_NOVELTY = NoveltyPolicy(
+    check_types=task_check_types,
+    task_backends=task_backends,
+    artifact_discriminator=artifact_discriminator,
+)
+novelty_fingerprint = _NOVELTY.fingerprint
+add_novelty = _NOVELTY.add_description
 
-
-def add_novelty(task: dict) -> None:
-    family = task["_family"]
-    tools = ", ".join(sorted({call["tool"] for call in task["oracle_tool_calls"]}))
-    checks = ", ".join(task_check_types(task))
-    backends = ", ".join(sorted(task_backends(task))) or "no preloaded backend"
-    artifact = artifact_discriminator(task).replace("|", "; ")
-    task["novelty"] = (
-        f"Unique {family}/{task['id']} exercise using {tools} with checks "
-        f"{checks} on {backends}; artifact {artifact}."
-    )
-
-
-def assign_splits(tasks: list[dict]) -> None:
-    # Uniform per-cell pattern so every (family, level) cell contributes one
-    # validation and one test task: per-level curves stay computable on the
-    # held-out splits (the earlier level-skewed patterns left r0 absent from
-    # test and r4 absent from validation).
-    grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)
-    for task in tasks:
-        grouped[(task["_family"], task["_rung"])].append(task)
-    pattern = ("train", "train", "validation", "test")
-    for key, cell in grouped.items():
-        cell.sort(key=lambda item: item["id"])
-        assert len(cell) == 4, f"split assignment expects 4 tasks in {key}"
-        for task, split in zip(cell, pattern):
-            task["split"] = split
-
-
-def build_matrix(tasks: list[dict]) -> dict[str, dict[str, int]]:
-    matrix: dict[str, dict[str, int]] = {}
-    for task in tasks:
-        family, level = task["_family"], task["_rung"]
-        matrix.setdefault(family, {})[level] = matrix.setdefault(family, {}).get(level, 0) + 1
-    return matrix
+# Uniform per-cell pattern so every (family, level) cell contributes one
+# validation and one test task: per-level curves stay computable on the
+# held-out splits (the earlier level-skewed patterns left r0 absent from
+# test and r4 absent from validation).
+assign_splits = SplitAssigner(uniform_four_way_pattern)
 
 
 def assert_lattice(matrix: dict[str, dict[str, int]]) -> None:

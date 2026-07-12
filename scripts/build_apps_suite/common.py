@@ -8,15 +8,23 @@ offers the complete tool surface, and requires the result to be placed or opened
 
 from __future__ import annotations
 
-import hashlib
 import json
 import re
-import sys
-from collections import defaultdict
 from pathlib import Path
 from typing import Any, cast
 from urllib.parse import urlparse
 
+from _authoring import (
+    ArtifactDiscriminator,
+    CheckTypePolicy,
+    NoveltyPolicy,
+    PhrasingSelector,
+    SplitAssigner,
+    TaskAssembler,
+    build_matrix as build_matrix,
+    difficulty_for,
+    snap as snap,
+)
 from workspace_bench.core.models import TASK_SCHEMA_VERSION
 from workspace_bench.workspace.runtime import declared_fields
 from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
@@ -82,7 +90,7 @@ from workspace_bench.core.suite_checks import (  # noqa: E402, F401 - re-exporte
 )
 
 SCENARIOS: list[dict] = []
-CELL_COUNTS: dict[tuple[str, str], int] = defaultdict(int)
+CELL_COUNTS: dict[tuple[str, str], int] = {}
 PROMPT_POOL_SIZES: dict[str, int] = {}
 
 # Building is a validation-loop workflow by design: the simulator's rejections are
@@ -95,31 +103,7 @@ TRACE_ZERO = {"max_invalid_tool_calls": 1, "max_repeated_snapshots": 2}
 TRACE_T4 = {"max_invalid_tool_calls": 2, "max_repeated_snapshots": 2}
 
 
-def phrased(task_id: str, variants: list[str]) -> str:
-    """Select a prompt variant by stable task-id hash (part-1 convention)."""
-
-    assert isinstance(variants, list), f"{task_id} prompt pool must be a list"
-    assert len(variants) >= 3, f"{task_id} prompt pool has {len(variants)} variants"
-    frame = sys._getframe(1)
-    site = f"{Path(frame.f_code.co_filename).name}:{frame.f_lineno}"
-    previous = PROMPT_POOL_SIZES.setdefault(site, len(variants))
-    assert previous == len(variants), (
-        f"prompt site {site} used pool sizes {previous} and {len(variants)}"
-    )
-    index = int(hashlib.md5(task_id.encode()).hexdigest(), 16) % len(variants)
-    return variants[index]
-
-
-def difficulty_for(level: str, cell_index: int) -> str:
-    if level == "r0":
-        return "easy"
-    if level == "r1":
-        return "easy" if cell_index <= 2 else "medium"
-    if level == "r2":
-        return "medium"
-    if level == "r3":
-        return "medium" if cell_index <= 2 else "hard"
-    return "hard"
+phrased = PhrasingSelector(PROMPT_POOL_SIZES)
 
 
 def specification_level_for(level: str, cell_index: int) -> str:
@@ -138,16 +122,24 @@ def category_for(family: str) -> str:
     return "repair" if family == "extend" else "platform"
 
 
-def add(family: str, level: str, task: dict) -> None:
-    CELL_COUNTS[(family, level)] += 1
-    cell_index = CELL_COUNTS[(family, level)]
-    task.setdefault("domain", "finance")
-    task.setdefault("source", "workspace-bench-build-apps-gen")
-    task["schema_version"] = TASK_SCHEMA_VERSION
+def _set_build_category(task: dict, family: str) -> None:
     task.setdefault("category", category_for(family))
-    task["family"] = family
-    assert re.fullmatch(r"[a-z0-9]+(?:_[a-z0-9]+)*", task["id"]), task["id"]
+
+
+def _noop_identity(task: dict) -> None:
+    del task
+
+
+def _set_build_capability(
+    task: dict, family: str, level: str, cell_index: int
+) -> None:
+    del level, cell_index
     task.setdefault("capability", CAPABILITY[family])
+
+
+def _set_build_difficulty(
+    task: dict, family: str, level: str, cell_index: int
+) -> None:
     task_ref = f"build-openbb-apps/{family}/{task['id']}"
     structural_difficulty = difficulty_for(level, cell_index)
     task["specification_level"] = specification_level_for(level, cell_index)
@@ -162,17 +154,37 @@ def add(family: str, level: str, task: dict) -> None:
         trace = task.get("success", {}).setdefault("trace_checks", {})
         if trace.get("max_invalid_tool_calls", 0) < 2:
             trace["max_invalid_tool_calls"] = 2
-    tags = task.setdefault("tags", [])
-    tags.insert(0, f"cell{cell_index}")
-    tags.insert(0, f"family-{family}")
+
+
+def _build_tag_prefixes(family: str, level: str, cell_index: int) -> tuple[str, str]:
+    del level
+    return (f"family-{family}", f"cell{cell_index}")
+
+
+def _finalize_build_task(
+    task: dict, family: str, level: str, cell_index: int
+) -> None:
+    del cell_index
     _functionalize_task(task, family=family, level=level)
     _ensure_behavioral_field_contracts(task)
     _attach_runtime_checks(task)
     _migrate_behavioral_requirements(task, family=family)
     _render_prompt_contract(task, family=family, level=level)
-    task.setdefault("limits", {})["max_turns"] = len(task["oracle_tool_calls"]) + RUNG_SLACK[level]
-    task["_family"], task["_rung"] = family, level
-    SCENARIOS.append(task)
+
+
+add = TaskAssembler(
+    scenarios=SCENARIOS,
+    cell_counts=CELL_COUNTS,
+    source="workspace-bench-build-apps-gen",
+    schema_version=TASK_SCHEMA_VERSION,
+    rung_slack=RUNG_SLACK,
+    set_category=_set_build_category,
+    normalize_identity=_noop_identity,
+    after_identity=_set_build_capability,
+    set_difficulty=_set_build_difficulty,
+    tag_prefixes=_build_tag_prefixes,
+    finalize_task=_finalize_build_task,
+).add
 
 
 def _ensure_behavioral_field_contracts(task: dict) -> None:
@@ -1940,10 +1952,6 @@ def app_def_checks(backend_name: str, app: dict) -> dict:
 # ---------------------------------------------------------------------------
 
 
-def snap() -> dict:
-    return {"tool": "get_workspace_snapshot", "args": {}}
-
-
 def add_backend_call(name: str, url: str, widgets: dict, apps: list | None = None) -> dict:
     args = {"operation": "add", "name": name, "url": url, "widgets_json": widgets}
     if apps is not None:
@@ -2541,12 +2549,9 @@ def desk_widget(key: str, widget_id: str) -> dict:
 # ---------------------------------------------------------------------------
 
 
-def task_check_types(task: dict) -> tuple:
-    success = task.get("success", {})
-    kinds = set()
-    mapping = {
+task_check_types = CheckTypePolicy(
+    success_checks={
         "required_tabs": "missing_tab",
-        "required_widgets": "missing_widget",
         "required_generated_widgets": "missing_generated_widget",
         "required_layouts": "layout_mismatch",
         "required_tool_calls": "missing_tool_call",
@@ -2556,25 +2561,11 @@ def task_check_types(task: dict) -> tuple:
         "required_app_defs": "app_def",
         "required_capabilities": "capability",
         "capability_connections": "capability_connection",
-    }
-    for key, kind in mapping.items():
-        if success.get(key):
-            kinds.add(kind)
-    if success.get("required_dashboard_name_contains"):
-        kinds.add("dashboard_name")
-    layout = success.get("layout", {})
-    if layout.get("within_grid"):
-        kinds.add("layout_out_of_grid")
-    if layout.get("no_overlaps"):
-        kinds.add("layout_overlap")
-    trace = success.get("trace_checks", {})
-    if trace.get("max_invalid_tool_calls") is not None:
-        kinds.add("too_many_invalid_calls")
-    if trace.get("must_call_schema_before_create"):
-        kinds.add("schema_not_called_before_create")
-    if trace.get("max_repeated_snapshots") is not None:
-        kinds.add("repeated_snapshots")
-    return tuple(sorted(kinds))
+    },
+    widget_mode="collection",
+    within_grid_default=False,
+    max_invalid_tool_calls_default=None,
+)
 
 
 def task_backends(task: dict) -> set[str]:
@@ -2593,7 +2584,7 @@ def task_backends(task: dict) -> set[str]:
     return cast(set[str], backends)
 
 
-def artifact_discriminator(task: dict) -> str:
+def _build_artifact_parts(task: dict) -> list[str]:
     success = task.get("success", {})
     parts: list[str] = []
     widget_defs = [
@@ -2614,48 +2605,18 @@ def artifact_discriminator(task: dict) -> str:
     ]
     if app_defs:
         parts.append("appdefs:" + ",".join(sorted(app_defs)))
-    widgets = [
-        f"{req.get('origin')}/{req.get('widget_id')}@{req.get('tab_id', '*')}"
-        for req in success.get("required_widgets", [])
-        if int(req.get("min_count", 1)) > 0
-    ]
-    if widgets:
-        parts.append("widgets:" + ",".join(sorted(widgets)))
-    tabs = success.get("required_tabs", [])
-    if tabs:
-        parts.append("tabs:" + ",".join(sorted(tabs)))
-    generated = [
-        f"{req.get('widget_type')}@{req.get('tab_id', '*')}:{','.join(req.get('data_contains', [])[:2])}"
-        for req in success.get("required_generated_widgets", [])
-    ]
-    if generated:
-        parts.append("generated:" + ",".join(sorted(generated)))
-    if not parts:
-        parts.append("id:" + task["id"])
-    return "|".join(parts)
+    return parts
 
 
-def novelty_fingerprint(task: dict) -> tuple:
-    oracle_tools = tuple(sorted({call["tool"] for call in task["oracle_tool_calls"]}))
-    return (
-        task["_family"],
-        task["_rung"],
-        oracle_tools,
-        task_check_types(task),
-        tuple(sorted(task_backends(task))),
-        artifact_discriminator(task),
-    )
-
-
-def add_novelty(task: dict) -> None:
-    tools = ", ".join(sorted({call["tool"] for call in task["oracle_tool_calls"]}))
-    checks = ", ".join(task_check_types(task))
-    backends = ", ".join(sorted(task_backends(task))) or "no preloaded backend"
-    artifact = artifact_discriminator(task).replace("|", "; ")
-    task["novelty"] = (
-        f"Unique {task['_family']}/{task['id']} building exercise using "
-        f"{tools} with checks {checks} on {backends}; artifact {artifact}."
-    )
+artifact_discriminator = ArtifactDiscriminator(leading_parts=_build_artifact_parts)
+_NOVELTY = NoveltyPolicy(
+    check_types=task_check_types,
+    task_backends=task_backends,
+    artifact_discriminator=artifact_discriminator,
+    exercise_label="building exercise",
+)
+novelty_fingerprint = _NOVELTY.fingerprint
+add_novelty = _NOVELTY.add_description
 
 
 # Uniform per-cell pattern so every (family, level) cell contributes one
@@ -2671,33 +2632,22 @@ SPLIT_PATTERNS = {
 }
 
 
-def assign_splits(tasks: list[dict]) -> None:
-    grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)
-    for task in tasks:
-        grouped[(task["_family"], task["_rung"])].append(task)
-    for (family, level), cell in grouped.items():
-        cell.sort(key=lambda item: item["id"])
-        if family == DEBUG_FAMILY:
-            assert len(cell) == DEBUG_COUNT, (
-                f"{family}/{level} expected {DEBUG_COUNT}, got {len(cell)}"
-            )
-            pattern = ("train", "train", "validation", "test") * (DEBUG_COUNT // 4)
-        elif family == CAPSTONE_FAMILY:
-            assert len(cell) == E2E_COUNT, f"{family}/{level} expected {E2E_COUNT}, got {len(cell)}"
-            pattern = ("train", "train", "validation", "test") * (E2E_COUNT // 4)
-        else:
-            assert len(cell) == 4, f"split assignment expects 4 tasks in {family}/{level}"
-            pattern = SPLIT_PATTERNS[level]
-        for task, split in zip(cell, pattern):
-            task["split"] = split
+def _build_split_pattern(family: str, level: str, cell: list[dict]) -> tuple[str, ...]:
+    if family == DEBUG_FAMILY:
+        assert len(cell) == DEBUG_COUNT, (
+            f"{family}/{level} expected {DEBUG_COUNT}, got {len(cell)}"
+        )
+        return ("train", "train", "validation", "test") * (DEBUG_COUNT // 4)
+    if family == CAPSTONE_FAMILY:
+        assert len(cell) == E2E_COUNT, (
+            f"{family}/{level} expected {E2E_COUNT}, got {len(cell)}"
+        )
+        return ("train", "train", "validation", "test") * (E2E_COUNT // 4)
+    assert len(cell) == 4, f"split assignment expects 4 tasks in {family}/{level}"
+    return SPLIT_PATTERNS[level]
 
 
-def build_matrix(tasks: list[dict]) -> dict[str, dict[str, int]]:
-    matrix: dict[str, dict[str, int]] = {}
-    for task in tasks:
-        family, level = task["_family"], task["_rung"]
-        matrix.setdefault(family, {})[level] = matrix.setdefault(family, {}).get(level, 0) + 1
-    return matrix
+assign_splits = SplitAssigner(_build_split_pattern)
 
 
 def assert_lattice(matrix: dict[str, dict[str, int]]) -> None:
