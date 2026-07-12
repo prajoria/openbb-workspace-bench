@@ -2,6 +2,8 @@
 .env
 .env.*
 !.env.example
+.workspace-bench-auth/
+*.workspace-auth.json
 __pycache__/
 *.py[cod]
 .pytest_cache/
@@ -16,5 +18,10 @@ runs/*
 !runs/comparison/
 !runs/exports/
 !runs/reports/
+# Raw calibration episode trees are regenerable local artifacts (100s of MB);
+# the committed evidence is the summary set under runs/reports/.
+runs/comparison/build-calibration-202607/
+runs/comparison/build-calibration-202607-regraded/
+runs/comparison/phase9a-smoke/
 .DS_Store
 .coverage
