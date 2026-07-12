@@ -146,6 +146,7 @@ def test_metric_with_dummy_form_controls_cannot_satisfy_form_capability() -> Non
     grade = _run(task, _oracle_calls_with_widgets(task, replace_form))
 
     assert not grade.passed
+    assert "missing_capability" in {issue.code for issue in grade.issues}
 
 
 def test_duplicate_backend_teardown_rebuild_exploit_is_rejected() -> None:

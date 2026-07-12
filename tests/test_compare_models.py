@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import importlib
+import shlex
+import sys
 from types import SimpleNamespace
 import urllib.error
 
@@ -24,6 +27,7 @@ from workspace_bench.reports.model_compare import (
     post_json,
     process_failure_rows,
     resolve_repo_root,
+    run_adapter,
     validate_adapters_for_runner,
 )
 from workspace_bench.core.runner import find_task
@@ -94,6 +98,71 @@ def test_widget_hints_can_be_ablated() -> None:
     system = messages[0]["content"]
     assert "Before create_widget" not in system
     assert "origin_hints" not in system
+
+
+def test_default_batch_adapter_prompts_accept_public_task_envelope(monkeypatch) -> None:
+    examples_dir = resolve_repo_root() / "examples"
+    monkeypatch.syspath_prepend(str(examples_dir))
+    monkeypatch.delitem(sys.modules, "ollama_agent", raising=False)
+    monkeypatch.delitem(sys.modules, "openai_gpt4_1", raising=False)
+    ollama_agent = importlib.import_module("ollama_agent")
+    openai_agent = importlib.import_module("openai_gpt4_1")
+    envelope = build_task_envelope(find_task("price_performance_aapl"))
+    specification_level = envelope["task"]["specification_level"]
+
+    prompts = (
+        ollama_agent.build_prompt(envelope),
+        openai_agent.build_prompt(envelope),
+    )
+
+    assert all(
+        f'"specification_level": "{specification_level}"' in prompt
+        for prompt in prompts
+    )
+
+    legacy_envelope = build_task_envelope(find_task("price_performance_aapl"))
+    legacy_task = legacy_envelope["task"]
+    legacy_task["level"] = legacy_task.pop("specification_level")
+    assert (
+        f'"specification_level": "{specification_level}"'
+        in ollama_agent.build_prompt(legacy_envelope)
+    )
+
+
+def test_batch_runner_executes_one_real_jsonl_agent_attempt(tmp_path) -> None:
+    adapter = ModelAdapter(
+        slug="jsonl-rule-agent",
+        label="JSONL rule agent",
+        command=(
+            f"{shlex.quote(sys.executable)} "
+            "-m workspace_bench.examples.jsonl_rule_agent"
+        ),
+        env={},
+        provider="custom",
+        model="rule-agent",
+    )
+    task = find_task("price_performance_aapl")
+
+    runs, metadata = run_adapter(
+        adapter,
+        [task],
+        tmp_path,
+        timeout=5,
+        episode_timeout=30,
+        runner="batch",
+        max_turns_override=None,
+        repeats=1,
+        model_retries=0,
+        retry_backoff=0,
+        color=False,
+    )
+
+    assert metadata["completed_cells"] == 1
+    assert len(runs) == 1
+    assert runs[0].runner == "batch"
+    assert runs[0].exit_code == 0
+    assert runs[0].run_result.grade.passed
+    assert runs[0].output_path.read_text(encoding="utf-8").strip()
 
 
 def test_run_metadata_snapshot_records_effective_settings(monkeypatch) -> None:

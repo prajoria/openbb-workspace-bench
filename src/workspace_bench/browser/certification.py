@@ -373,7 +373,7 @@ def dry_run_subset(entries: tuple[CertificationEntry, ...]) -> JsonDict:
     results = [validate_entry(entry) for entry in entries]
     return {
         "mode": "dry-run",
-        "passed": True,
+        "passed": bool(results) and all(bool(result["passed"]) for result in results),
         "task_count": len(results),
         "category_counts": {
             category: sum(result["category"] == category for result in results)
@@ -501,7 +501,7 @@ def browser_certify(
             mock_server.close()
     return {
         "mode": "self-test" if self_test else "workspace",
-        "passed": all(bool(result["passed"]) for result in results),
+        "passed": bool(results) and all(bool(result["passed"]) for result in results),
         "task_count": len(results),
         "passed_count": sum(bool(result["passed"]) for result in results),
         "results": results,

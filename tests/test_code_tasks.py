@@ -12,6 +12,7 @@ from workspace_bench.code_tasks import (
     evaluate_code_repository,
     instantiate_code_task,
     run_code_task,
+    validate_code_tasks,
 )
 from workspace_bench.core.runner import find_task, load_builtin_tasks
 
@@ -29,6 +30,33 @@ def test_code_suite_has_twelve_typed_fixture_backed_tasks() -> None:
         assert (root / task.code_task.starter_path / "pyproject.toml").is_file()
         assert (root / task.code_task.starter_path / "tests" / "test_backend.py").is_file()
         assert (root / task.code_task.oracle_path / "app.py").is_file()
+
+
+def test_code_suite_release_driver_passes_every_release_check() -> None:
+    result = validate_code_tasks(
+        load_builtin_tasks("build-openbb-backends"),
+        min_tasks=12,
+    )
+
+    assert result["passed"] is True
+    assert result["task_count"] == 12
+    assert result["oracle_passed"] == 12
+    assert result["noop_failed"] == 12
+    assert result["issues"] == []
+    assert set(result["release_checks"]) == {
+        "task_count_is_12",
+        "all_tasks_are_experimental_v0_code_tasks",
+        "difficulty_spread_3_6_3",
+        "oracle_all_pass",
+        "starter_all_fail",
+        "oracle_http_probes_all_pass",
+        "oracle_test_suites_non_empty",
+        "oracle_process_cleanup",
+        "starter_process_cleanup",
+        "mutation_removed_endpoint_rejected",
+        "mutation_placeholder_payload_rejected",
+    }
+    assert all(result["release_checks"].values())
 
 
 def test_oracle_runs_real_server_tests_and_leaves_no_process(tmp_path: Path) -> None:

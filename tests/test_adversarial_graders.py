@@ -20,8 +20,9 @@ from workspace_bench.core.adversarial import (
     WRONG_ENDPOINT_DATA,
     evaluate_adversarial_candidate,
     generate_adversarial_candidates,
+    run_adversarial_matrix,
 )
-from workspace_bench.core.runner import TaskRunner, find_task
+from workspace_bench.core.runner import TaskRunner, find_task, load_builtin_tasks
 
 
 CASES = (
@@ -65,3 +66,41 @@ def test_invalid_candidate_fails_for_its_isolated_intended_reason(
     assert candidate.primary_code in result.observed_codes
     assert result.expected_code_observed
     assert result.passed
+
+
+def test_adversarial_matrix_rejects_every_applicable_grouping_mutant() -> None:
+    tasks = [
+        task
+        for task in load_builtin_tasks("build-openbb-apps")
+        if task.family == "grouping"
+    ]
+
+    matrix = run_adversarial_matrix(tasks, runtime_sample_per_family=1)
+    rows = matrix.rows()
+
+    assert tasks
+    assert rows
+    assert all(row["applicable"] > 0 and row["exercised"] > 0 for row in rows)
+    assert all(row["expected_code_observed"] == row["exercised"] for row in rows)
+    assert {archetype for _family, archetype in matrix.applicable} == {
+        "collapsed_connected_pair",
+        "fieldless_contributor",
+        "incompatible_values",
+        "never_instantiated",
+        "note_only_proof",
+        "one_widget_missing",
+        "self_satisfied_connection",
+        "severed_shared_interaction",
+        "wrong_endpoint_data",
+    }
+    assert {result.candidate.archetype for result in matrix.results} == {
+        archetype for _family, archetype in matrix.applicable
+    }
+    assert matrix.survivors == ()
+    assert matrix.wrong_reason == ()
+    assert matrix.dirty_oracles == ()
+    assert all(
+        result.candidate.primary_code in result.observed_codes
+        for result in matrix.results
+    )
+    assert matrix.passed
