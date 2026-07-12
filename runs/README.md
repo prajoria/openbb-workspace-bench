@@ -18,7 +18,8 @@ because the simulator is deterministic.
 - `reports/` — compiled views: `calibration.json` (core per-level/per-family
   detail), `suites.json` (per-suite and pooled boards),
   `significance.json` (Wilson intervals, held-out slices, pairwise McNemar
-  tests), and `benchmark-report.md` (oracle/no-op release report).
+  tests), `benchmark-report.md` (oracle/no-op release report), plus the
+  generated task catalog and Workspace MCP tool-coverage matrix.
 
 ## Provenance
 
@@ -35,14 +36,13 @@ because the simulator is deterministic.
   so their result files do not record provider-reported model fingerprints.
   Runs made with the current harness record effective settings, timestamps,
   the harness git commit, and the provider-reported model identity.
-- gpt-4.1-mini is the calibration model: the build-openbb-apps ladder was
-  accepted only when its pass rate fell strictly across levels, so its build
-  curve is a design target rather than an independent measurement.
+- The current regraded build board uses GPT-5.1, GPT-5.4 mini, and GPT-5.5;
+  all three are replayed against the fixed current grader.
 
 ## Split provenance
 
 Split assignments were rebalanced on 2026-07-11 to 150/75/75 (`core`) and
-106/53/53 (`build-openbb-apps`) so that every family/level cell contributes
+118/59/59 (`build-openbb-apps`) so that every family/level cell contributes
 one validation and one test task. Task ids, prompts, rubrics, and oracle
 traces were untouched, so all published outcomes remain valid. Artifacts
 inside `comparison/` record the split assignment that existed at run time;
