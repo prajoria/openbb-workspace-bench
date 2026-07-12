@@ -22,6 +22,8 @@ runs/*
 # (runs/comparison/<board>/<model-slug>/...) and the rollout exports are ignored.
 runs/comparison/*/*/
 runs/exports/
+# Per-model resume checkpoints are runtime state, not evidence.
+runs/comparison/*/*.checkpoint.json
 # Superseded raw calibration (pre-fix) and the throwaway cost smoke: not committed at all.
 runs/comparison/build-calibration-202607/
 runs/comparison/phase9a-smoke/
