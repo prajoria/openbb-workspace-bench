@@ -26,7 +26,9 @@ class WorkspaceEpisode:
         self.workspace.reset(
             backends=task.fixtures,
             initial_state=task.initial_state,
+            runtime_checks=task.success.runtime,
         )
+        self.initial_snapshot = self.workspace.snapshot()
 
     def step(self, call: ToolCall) -> JsonDict:
         """Execute one tool call and append it to the episode trace."""
@@ -50,7 +52,12 @@ class WorkspaceEpisode:
     def grade(self) -> GradeResult:
         """Grade the current episode state."""
 
-        return grade_task(self.task, self.snapshot(), tuple(self.trace))
+        return grade_task(
+            self.task,
+            self.snapshot(),
+            tuple(self.trace),
+            initial_snapshot=self.initial_snapshot,
+        )
 
     def _execute_allowed(self, call: ToolCall) -> JsonDict:
         if self.task.allowed_tools and call.name not in self.task.allowed_tools:
@@ -67,4 +74,3 @@ class WorkspaceEpisode:
                 },
             }
         return self.workspace.call_tool(call)
-

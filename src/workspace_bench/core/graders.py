@@ -7,6 +7,7 @@ import re
 from collections import defaultdict
 
 from workspace_bench.core.models import (
+    DeploymentReceipt,
     GradeIssue,
     GradeResult,
     JsonDict,
@@ -16,9 +17,11 @@ from workspace_bench.core.models import (
     RequiredToolCall,
     RequiredToolResult,
     RequiredWidget,
+    RequiredCapability,
     Task,
     ToolTraceEvent,
 )
+from workspace_bench.workspace.runtime import grade_runtime
 
 
 STATE_CHANGING_TOOLS = {
@@ -56,32 +59,43 @@ class GradeBuilder:
         self.passed = 0
         self.total = 0
         self.issues: list[GradeIssue] = []
+        self.by_code: dict[str, list[int]] = defaultdict(lambda: [0, 0])
 
     def check(self, condition: bool, code: str, message: str) -> None:
         self.total += 1
+        self.by_code[code][1] += 1
         if condition:
             self.passed += 1
+            self.by_code[code][0] += 1
         else:
             self.issues.append(GradeIssue(code=code, message=message))
 
-    def result(self) -> GradeResult:
-        score = self.passed / self.total if self.total else 1.0
-        return GradeResult(
-            task_id=self.task_id,
-            score=score,
-            passed=not self.issues,
-            checks_passed=self.passed,
-            checks_total=self.total,
-            issues=tuple(self.issues),
-        )
+    @property
+    def score(self) -> float:
+        if not self.by_code:
+            return 1.0
+        # Each semantic rubric dimension has equal influence. Repeated widget
+        # or layout instances refine that dimension instead of silently giving
+        # long tasks more partial-credit weight.
+        return sum(passed / total for passed, total in self.by_code.values()) / len(self.by_code)
+
+    @property
+    def passed_all(self) -> bool:
+        return not self.issues
 
 
 def grade_task(
-    task: Task, final_snapshot: JsonDict, trace: tuple[ToolTraceEvent, ...]
+    task: Task,
+    final_snapshot: JsonDict,
+    trace: tuple[ToolTraceEvent, ...],
+    *,
+    initial_snapshot: JsonDict | None = None,
 ) -> GradeResult:
     """Grade one task run against final state and trace checks."""
 
-    builder = GradeBuilder(task.id)
+    state_builder = GradeBuilder(task.id)
+    trace_builder = GradeBuilder(task.id)
+    builder = state_builder
     composition = final_snapshot.get("dashboard_composition") or {}
     widgets = composition.get("widgets", [])
     tabs = composition.get("tabs", [])
@@ -89,14 +103,14 @@ def grade_task(
 
     name_contains = task.success.required_dashboard_name_contains
     if name_contains:
-        builder.check(
+        state_builder.check(
             _phrase_matches(str(composition.get("name", "")), name_contains),
             "dashboard_name",
             f"Active dashboard name should contain {name_contains!r}.",
         )
 
     for tab_id in task.success.required_tabs:
-        builder.check(
+        state_builder.check(
             tab_id in tab_ids,
             "missing_tab",
             f"Expected tab {tab_id!r} in final dashboard.",
@@ -104,7 +118,7 @@ def grade_task(
 
     for required in task.success.required_widgets:
         matches = _matching_required_widgets(required, widgets)
-        builder.check(
+        state_builder.check(
             len(matches) >= required.min_count,
             "missing_widget",
             (
@@ -126,7 +140,7 @@ def grade_task(
 
     for required_generated in task.success.required_generated_widgets:
         generated_matches = _matching_generated_widgets(required_generated, widgets)
-        builder.check(
+        state_builder.check(
             len(generated_matches) >= required_generated.min_count,
             "missing_generated_widget",
             (
@@ -138,7 +152,7 @@ def grade_task(
 
     for required_layout in task.success.required_layouts:
         layout_matches = _matching_layouts(required_layout, widgets)
-        builder.check(
+        state_builder.check(
             bool(layout_matches),
             "layout_mismatch",
             f"No widget layout matched {required_layout}.",
@@ -146,7 +160,7 @@ def grade_task(
 
     for required_call in task.success.required_tool_calls:
         call_matches = _matching_tool_calls(required_call, trace)
-        builder.check(
+        trace_builder.check(
             len(call_matches) >= required_call.min_count,
             "missing_tool_call",
             (
@@ -158,7 +172,7 @@ def grade_task(
 
     for required_result in task.success.required_tool_results:
         result_matches = _matching_tool_results(required_result, trace)
-        builder.check(
+        trace_builder.check(
             len(result_matches) >= required_result.min_count,
             "missing_tool_result",
             (
@@ -170,7 +184,7 @@ def grade_task(
 
     for required_read in task.success.required_resource_reads:
         read_matches = _matching_resource_reads(required_read, trace)
-        builder.check(
+        trace_builder.check(
             len(read_matches) >= required_read.min_count,
             "missing_resource_read",
             (
@@ -199,15 +213,214 @@ def grade_task(
                 f"Tab {tab_id!r} has overlapping widgets: {overlaps}.",
             )
 
+    runtime_grade = grade_runtime(task, final_snapshot)
     _grade_backend_building(builder, task, final_snapshot)
+    capability_matches = _grade_capabilities(
+        builder,
+        task,
+        final_snapshot,
+        runtime_grade.deployment_receipt,
+    )
+    _grade_capability_connections(builder, task, final_snapshot, capability_matches)
+    _grade_business_names(builder, task, final_snapshot)
+    _grade_app_structure(builder, task, final_snapshot)
+    _grade_workspace_preservation(
+        builder,
+        task,
+        initial_snapshot=initial_snapshot,
+        final_snapshot=final_snapshot,
+    )
 
-    _grade_trace(builder, task, trace)
-    return builder.result()
+    _grade_trace(trace_builder, task, trace)
+    polish_builder = GradeBuilder(task.id)
+    _grade_polish(polish_builder, task, final_snapshot)
+    issues = tuple(state_builder.issues + trace_builder.issues) + runtime_grade.issues
+    outcome_score = (
+        (state_builder.score + runtime_grade.score) / 2
+        if task.success.runtime is not None
+        else state_builder.score
+    )
+    return GradeResult(
+        task_id=task.id,
+        # Partial credit is outcome-based. Trace policy remains part of strict
+        # pass/fail but cannot inflate or dilute state achievement.
+        score=outcome_score,
+        passed=(
+            state_builder.passed_all
+            and trace_builder.passed_all
+            and runtime_grade.passed
+        ),
+        checks_passed=(
+            state_builder.passed + trace_builder.passed + runtime_grade.checks_passed
+        ),
+        checks_total=state_builder.total + trace_builder.total + runtime_grade.checks_total,
+        state_score=state_builder.score,
+        state_passed=state_builder.passed_all,
+        state_checks_passed=state_builder.passed,
+        state_checks_total=state_builder.total,
+        trace_score=trace_builder.score,
+        trace_passed=trace_builder.passed_all,
+        trace_checks_passed=trace_builder.passed,
+        trace_checks_total=trace_builder.total,
+        runtime_score=runtime_grade.score,
+        runtime_passed=runtime_grade.passed,
+        runtime_checks_passed=runtime_grade.checks_passed,
+        runtime_checks_total=runtime_grade.checks_total,
+        deployment_receipt=runtime_grade.deployment_receipt,
+        polish_score=polish_builder.score,
+        polish_checks_passed=polish_builder.passed,
+        polish_checks_total=polish_builder.total,
+        polish_issues=tuple(polish_builder.issues),
+        issues=issues,
+    )
 
 
-def _matching_required_widgets(
-    required: RequiredWidget, widgets: list[JsonDict]
-) -> list[JsonDict]:
+def _grade_workspace_preservation(
+    builder: GradeBuilder,
+    task: Task,
+    *,
+    initial_snapshot: JsonDict | None,
+    final_snapshot: JsonDict,
+) -> None:
+    checks = task.success.workspace
+    if initial_snapshot is None:
+        return
+
+    initial_dashboards = initial_snapshot.get("dashboard_compositions") or {}
+    final_dashboards = final_snapshot.get("dashboard_compositions") or {}
+    if not isinstance(initial_dashboards, dict) or not isinstance(final_dashboards, dict):
+        return
+
+    if checks.preserve_other_dashboards:
+        initial_active = str(
+            (initial_snapshot.get("workspace_state") or {}).get("current_dashboard_uuid", "")
+        )
+        for dashboard_id, composition in initial_dashboards.items():
+            if str(dashboard_id) == initial_active:
+                continue
+            builder.check(
+                final_dashboards.get(dashboard_id) == composition,
+                "collateral_dashboard_change",
+                f"Unrelated dashboard {dashboard_id!r} changed or was deleted.",
+            )
+
+    initial_backends = initial_snapshot.get("custom_backends") or {}
+    final_backends = final_snapshot.get("custom_backends") or {}
+    if not isinstance(initial_backends, dict):
+        initial_backends = {}
+    if not isinstance(final_backends, dict):
+        final_backends = {}
+
+    if checks.preserve_custom_backend_ids:
+        for backend_id, initial_backend in initial_backends.items():
+            builder.check(
+                backend_id in final_backends,
+                "custom_backend_replaced",
+                (
+                    f"Existing custom backend {backend_id!r} "
+                    f"({initial_backend.get('name')!r}) was replaced or deleted."
+                ),
+            )
+
+    for backend_id in checks.required_custom_backend_ids:
+        initial_backend = initial_backends.get(backend_id)
+        builder.check(
+            initial_backend is not None and backend_id in final_backends,
+            "custom_backend_replaced",
+            f"Required custom backend {backend_id!r} was replaced or deleted.",
+        )
+
+    if checks.unique_custom_backend_names:
+        names = [
+            str(backend.get("name", ""))
+            for backend in final_backends.values()
+            if isinstance(backend, dict)
+        ]
+        builder.check(
+            len(names) == len(set(names)),
+            "duplicate_custom_backend_name",
+            "Custom backend names must be unique.",
+        )
+
+    if checks.require_no_backend_warnings:
+        for backend_id, backend in final_backends.items():
+            warnings = backend.get("warnings") or [] if isinstance(backend, dict) else []
+            builder.check(
+                not warnings,
+                "backend_validation_warnings",
+                f"Custom backend {backend_id!r} still has validation warnings: {warnings}.",
+            )
+
+    if checks.preserve_other_apps:
+        mutable = set(checks.mutable_app_ids)
+        for backend_id, initial_backend in initial_backends.items():
+            if not isinstance(initial_backend, dict):
+                continue
+            final_backend = final_backends.get(backend_id)
+            if not isinstance(final_backend, dict) and checks.unique_custom_backend_names:
+                initial_name = str(initial_backend.get("name", ""))
+                final_backend = next(
+                    (
+                        backend
+                        for backend in final_backends.values()
+                        if isinstance(backend, dict)
+                        and str(backend.get("name", "")) == initial_name
+                    ),
+                    None,
+                )
+            initial_apps = initial_backend.get("apps_json") or []
+            final_apps = (
+                final_backend.get("apps_json") or []
+                if isinstance(final_backend, dict)
+                else []
+            )
+            final_by_id = {
+                str(app.get("template_id") or app.get("id") or app.get("name")): app
+                for app in final_apps
+                if isinstance(app, dict)
+            }
+            for initial_app in initial_apps:
+                if not isinstance(initial_app, dict):
+                    continue
+                app_id = str(
+                    initial_app.get("template_id")
+                    or initial_app.get("id")
+                    or initial_app.get("name")
+                )
+                if app_id in mutable:
+                    continue
+                builder.check(
+                    final_by_id.get(app_id) == initial_app,
+                    "collateral_app_change",
+                    f"Unrelated app {app_id!r} changed or was deleted.",
+                )
+
+    if checks.max_dashboard_delta is not None:
+        delta = len(final_dashboards) - len(initial_dashboards)
+        builder.check(
+            delta <= checks.max_dashboard_delta,
+            "unexpected_dashboard_created",
+            (
+                f"Expected at most {checks.max_dashboard_delta} new dashboard(s), "
+                f"observed delta {delta}."
+            ),
+        )
+
+    if checks.max_custom_backend_delta is not None:
+        initial_count = len(initial_backends)
+        final_count = len(final_backends)
+        delta = final_count - initial_count
+        builder.check(
+            delta <= checks.max_custom_backend_delta,
+            "unexpected_backend_created",
+            (
+                f"Expected at most {checks.max_custom_backend_delta} new custom "
+                f"backend(s), observed delta {delta}."
+            ),
+        )
+
+
+def _matching_required_widgets(required: RequiredWidget, widgets: list[JsonDict]) -> list[JsonDict]:
     matches = []
     for widget in widgets:
         if widget.get("generated"):
@@ -240,9 +453,15 @@ def _matching_generated_widgets(
             layout = widget.get("layout") or {}
             if layout.get("tab_id") != required.tab_id:
                 continue
-        if required.name_contains and required.name_contains.lower() not in str(
-            widget.get("name", "")
-        ).lower():
+        if (
+            required.name_contains
+            and required.name_contains.lower() not in str(widget.get("name", "")).lower()
+        ):
+            continue
+        if (
+            required.data_equals is not None
+            and widget.get("generated_data") != required.data_equals
+        ):
             continue
         data_blob = " ".join(
             [
@@ -252,10 +471,7 @@ def _matching_generated_widgets(
                 str((widget.get("layout") or {}).get("tab_id", "")),
             ]
         )
-        if any(
-            not _generated_text_contains(data_blob, text)
-            for text in required.data_contains
-        ):
+        if any(not _generated_text_contains(data_blob, text) for text in required.data_contains):
             continue
         matches.append(widget)
     return matches
@@ -305,11 +521,7 @@ def _phrase_matches(actual: str, expected: str) -> bool:
 
 
 def _meaningful_tokens(text: str) -> list[str]:
-    return [
-        token
-        for token in re.findall(r"[a-z0-9]+", text.lower())
-        if token not in STOPWORDS
-    ]
+    return [token for token in re.findall(r"[a-z0-9]+", text.lower()) if token not in STOPWORDS]
 
 
 def _normalized_text(text: str) -> str:
@@ -319,7 +531,10 @@ def _normalized_text(text: str) -> str:
 def _matching_layouts(required: RequiredLayout, widgets: list[JsonDict]) -> list[JsonDict]:
     matches = []
     expected_values = (
-        ("x", required.x), ("y", required.y), ("w", required.w), ("h", required.h),
+        ("x", required.x),
+        ("y", required.y),
+        ("w", required.w),
+        ("h", required.h),
     )
     for widget in widgets:
         if required.widget_uuid and widget.get("widget_uuid") != required.widget_uuid:
@@ -364,7 +579,8 @@ def _matching_tool_calls(
     return [
         event
         for event in trace
-        if event.call.name == required.name
+        if event.ok
+        and event.call.name == required.name
         and _dict_contains(event.call.args, required.args_contains)
     ]
 
@@ -374,7 +590,7 @@ def _matching_tool_results(
 ) -> list[ToolTraceEvent]:
     matches = []
     for event in trace:
-        if event.call.name != required.name:
+        if event.call.name != required.name or not event.ok:
             continue
         data_blob = json.dumps(event.result, sort_keys=True)
         if all(_generated_text_contains(data_blob, text) for text in required.data_contains):
@@ -478,10 +694,24 @@ def _flat_params(definition: JsonDict) -> list[JsonDict]:
     if isinstance(params, list):
         for entry in params:
             if isinstance(entry, list):
-                flattened.extend(item for item in entry if isinstance(item, dict))
+                entries = [item for item in entry if isinstance(item, dict)]
+                flattened.extend(entries)
+                for item in entries:
+                    flattened.extend(_nested_params(item))
             elif isinstance(entry, dict):
                 flattened.append(entry)
+                flattened.extend(_nested_params(entry))
     return flattened
+
+
+def _nested_params(param: JsonDict) -> list[JsonDict]:
+    nested = param.get("inputParams")
+    if not isinstance(nested, list):
+        return []
+    result = [item for item in nested if isinstance(item, dict)]
+    for item in tuple(result):
+        result.extend(_nested_params(item))
+    return result
 
 
 def _app_layout_items(app: JsonDict) -> list[tuple[str, JsonDict]]:
@@ -514,9 +744,376 @@ def _find_custom_backend(snapshot: JsonDict, backend_name: str) -> JsonDict | No
     return None
 
 
-def _grade_backend_building(
-    builder: GradeBuilder, task: Task, final_snapshot: JsonDict
+def _widget_kinds(definition: JsonDict) -> set[str]:
+    widget_type = str(definition.get("type", "table"))
+    kinds: set[str] = set()
+    if widget_type == "form" or any(
+        str(param.get("type")) in {"form", "button"} for param in _flat_params(definition)
+    ):
+        kinds.add("form")
+    if widget_type in {"ssrm_table", "live_grid"}:
+        kinds.add("server-side-grid")
+    elif widget_type == "table":
+        kinds.add("table-like")
+    elif widget_type in {
+        "chart",
+        "chart-highcharts",
+        "chart-vegalite",
+        "advanced_charting",
+    }:
+        kinds.add("chart-like")
+    elif widget_type == "metric":
+        kinds.add("metric")
+    elif widget_type == "multi_file_viewer":
+        kinds.add("multi-file")
+    elif widget_type in {"html", "iframe", "markdown", "newsfeed", "pdf", "youtube"}:
+        kinds.add(widget_type)
+    return kinds or {"any"}
+
+
+def _param_kind(param: JsonDict) -> str:
+    name = str(param.get("paramName", "")).casefold()
+    param_type = str(param.get("type", "text")).casefold()
+    roles = {str(role).casefold() for role in param.get("roles", []) or []}
+    if param_type == "ticker" or name in {"symbol", "ticker", "tickers"} or "ticker" in roles:
+        return "ticker"
+    if param_type == "date" or "date" in name:
+        return "date"
+    if param_type == "endpoint":
+        return "endpoint"
+    if param_type in {"number", "boolean", "tabs", "form", "button"}:
+        return param_type
+    return "text"
+
+
+def _definition_param_kinds(definition: JsonDict) -> set[str]:
+    return {_param_kind(param) for param in _flat_params(definition)}
+
+
+def _declared_backend_widgets(
+    final_snapshot: JsonDict,
+) -> dict[tuple[str, str], JsonDict]:
+    result: dict[tuple[str, str], JsonDict] = {}
+    for backend in (final_snapshot.get("custom_backends") or {}).values():
+        if not isinstance(backend, dict):
+            continue
+        backend_name = str(backend.get("name", ""))
+        for widget_id, definition in (backend.get("widgets_json") or {}).items():
+            if isinstance(definition, dict):
+                result[(backend_name, str(widget_id))] = definition
+    return result
+
+
+def _instantiated_widget_keys(final_snapshot: JsonDict) -> set[tuple[str, str]]:
+    dashboards = final_snapshot.get("dashboard_compositions") or {}
+    keys: set[tuple[str, str]] = set()
+    if isinstance(dashboards, dict):
+        compositions = list(dashboards.values())
+    else:
+        compositions = [final_snapshot.get("dashboard_composition") or {}]
+    for composition in compositions:
+        if not isinstance(composition, dict):
+            continue
+        for widget in composition.get("widgets", []) or []:
+            if isinstance(widget, dict) and not widget.get("generated"):
+                keys.add((str(widget.get("origin", "")), str(widget.get("widget_id", ""))))
+    return keys
+
+
+def _runtime_valid_widget_datasets(
+    receipt: DeploymentReceipt | None,
+) -> dict[tuple[str, str], str]:
+    if receipt is None:
+        return {}
+    return {
+        (outcome.backend_name, outcome.widget_id): str(outcome.dataset_name)
+        for outcome in receipt.widget_probes
+        if outcome.passed and outcome.dataset_name is not None
+    }
+
+
+def _capability_candidates(
+    capability: RequiredCapability,
+    definitions: dict[tuple[str, str], JsonDict],
+    instantiated: set[tuple[str, str]],
+    runtime_valid: set[tuple[str, str]],
+    task: Task,
+) -> dict[tuple[str, str], JsonDict]:
+    from workspace_bench.workspace.runtime import bind_dataset
+
+    accepted: dict[tuple[str, str], JsonDict] = {}
+    allowed_datasets = tuple(
+        dataset
+        for dataset in (task.success.runtime.datasets if task.success.runtime else ())
+        if dataset.name in capability.datasets
+    )
+    for key, definition in definitions.items():
+        if key not in instantiated or key not in runtime_valid:
+            continue
+        actual_kinds = _widget_kinds(definition)
+        if capability.widget_kind != "any" and capability.widget_kind not in actual_kinds:
+            continue
+        if bind_dataset(definition, key[1], allowed_datasets) is None:
+            continue
+        accepted[key] = definition
+    return accepted
+
+
+def _grade_capabilities(
+    builder: GradeBuilder,
+    task: Task,
+    final_snapshot: JsonDict,
+    receipt: DeploymentReceipt | None,
+) -> dict[str, set[tuple[str, str]]]:
+    from workspace_bench.workspace.runtime import declared_fields
+
+    definitions = _declared_backend_widgets(final_snapshot)
+    instantiated = _instantiated_widget_keys(final_snapshot)
+    runtime_valid = set(_runtime_valid_widget_datasets(receipt))
+    contributors: dict[str, set[tuple[str, str]]] = {}
+    for capability in task.success.required_capabilities:
+        candidates = _capability_candidates(
+            capability, definitions, instantiated, runtime_valid, task
+        )
+        builder.check(
+            bool(candidates),
+            "missing_capability",
+            (
+                f"Capability {capability.name!r} needs an instantiated, runtime-valid "
+                f"{capability.widget_kind} widget bound to {list(capability.datasets)}."
+            ),
+        )
+        required_fields = set(capability.must_cover_fields)
+        contributing = {
+            key
+            for key, definition in candidates.items()
+            if not required_fields or declared_fields(definition) & required_fields
+        }
+        covered = set().union(
+            *(declared_fields(candidates[key]) for key in contributing)
+        ) if contributing else set()
+        builder.check(
+            required_fields.issubset(covered),
+            "capability_fields_uncovered",
+            (
+                f"Capability {capability.name!r} leaves fields "
+                f"{sorted(required_fields - covered)} uncovered by runtime-valid widgets."
+            ),
+        )
+        contributors[capability.name] = contributing
+        param_kinds = set().union(
+            *(_definition_param_kinds(candidates[key]) for key in contributors[capability.name])
+        ) if contributors[capability.name] else set()
+        for required_kind in capability.required_param_kinds:
+            builder.check(
+                required_kind in param_kinds,
+                "capability_param_missing",
+                (
+                    f"Capability {capability.name!r} covering widgets do not expose a "
+                    f"{required_kind!r} parameter."
+                ),
+            )
+        for path, expected in capability.required_config.items():
+            matches = []
+            for key in contributors[capability.name]:
+                found, actual = _lookup_path(candidates[key], path)
+                matches.append(found and actual == expected)
+            builder.check(
+                any(matches),
+                "capability_config_missing",
+                (
+                    f"Capability {capability.name!r} covering widgets do not provide "
+                    f"required configuration {path}={expected!r}."
+                ),
+            )
+    return contributors
+
+
+def _shared_param_graph(
+    final_snapshot: JsonDict,
+    definitions: dict[tuple[str, str], JsonDict],
+    param_kind: str,
+) -> dict[tuple[str, str], set[tuple[str, str]]]:
+    graph: dict[tuple[str, str], set[tuple[str, str]]] = defaultdict(set)
+    for backend in (final_snapshot.get("custom_backends") or {}).values():
+        if not isinstance(backend, dict):
+            continue
+        backend_name = str(backend.get("name", ""))
+        for app in backend.get("apps_json", []) or []:
+            if not isinstance(app, dict):
+                continue
+            for group in app.get("groups", []) or []:
+                if not isinstance(group, dict) or group.get("type", "param") != "param":
+                    continue
+                param_name = str(group.get("paramName", ""))
+                keys = [
+                    (backend_name, str(widget_id))
+                    for widget_id in group.get("widgetIds", []) or []
+                ]
+                eligible = [
+                    key
+                    for key in keys
+                    if key in definitions
+                    and any(
+                        str(param.get("paramName", "")) == param_name
+                        and _param_kind(param) == param_kind
+                        for param in _flat_params(definitions[key])
+                    )
+                ]
+                for key in eligible:
+                    graph.setdefault(key, set())
+                for index, left in enumerate(eligible):
+                    for right in eligible[index + 1 :]:
+                        graph[left].add(right)
+                        graph[right].add(left)
+    return graph
+
+
+def _sets_connected(
+    graph: dict[tuple[str, str], set[tuple[str, str]]],
+    sources: set[tuple[str, str]],
+    targets: set[tuple[str, str]],
+) -> bool:
+    return any(
+        target != source and target in graph.get(source, set())
+        for source in sources
+        for target in targets
+    )
+
+
+def _grade_capability_connections(
+    builder: GradeBuilder,
+    task: Task,
+    final_snapshot: JsonDict,
+    contributors: dict[str, set[tuple[str, str]]],
 ) -> None:
+    definitions = _declared_backend_widgets(final_snapshot)
+    for connection in task.success.capability_connections:
+        graph = _shared_param_graph(final_snapshot, definitions, connection.param_kind)
+        connected = _sets_connected(
+            graph,
+            contributors.get(connection.source, set()),
+            contributors.get(connection.target, set()),
+        )
+        builder.check(
+            connected,
+            "capability_unconnected",
+            (
+                f"Capabilities {connection.source!r} and {connection.target!r} are not "
+                f"connected through a shared {connection.param_kind!r} parameter graph."
+            ),
+        )
+
+
+def _grade_business_names(builder: GradeBuilder, task: Task, final_snapshot: JsonDict) -> None:
+    composition = final_snapshot.get("dashboard_composition") or {}
+    app_names: list[str] = []
+    tab_names: list[str] = [
+        str(tab.get("name", "")) for tab in composition.get("tabs", []) if isinstance(tab, dict)
+    ]
+    for backend in (final_snapshot.get("custom_backends") or {}).values():
+        if not isinstance(backend, dict):
+            continue
+        for app in backend.get("apps_json", []) or []:
+            if not isinstance(app, dict):
+                continue
+            app_names.append(str(app.get("name", "")))
+            tab_names.extend(
+                str(tab.get("name", ""))
+                for tab in (app.get("tabs") or {}).values()
+                if isinstance(tab, dict)
+            )
+    values = {
+        "dashboard": [str(composition.get("name", ""))],
+        "app": app_names,
+        "tab": tab_names,
+    }
+    for requirement in task.success.business_names:
+        builder.check(
+            any(_phrase_matches(value, requirement.contains) for value in values[requirement.scope]),
+            "business_name_missing",
+            (
+                f"No {requirement.scope} name satisfies business requirement "
+                f"{requirement.contains!r}."
+            ),
+        )
+
+
+def _grade_app_structure(builder: GradeBuilder, task: Task, final_snapshot: JsonDict) -> None:
+    checks = task.success.app_structure
+    apps: list[tuple[str, JsonDict, set[str]]] = []
+    for backend in (final_snapshot.get("custom_backends") or {}).values():
+        if not isinstance(backend, dict):
+            continue
+        widget_ids = set(backend.get("widgets_json") or {})
+        for app in backend.get("apps_json", []) or []:
+            if isinstance(app, dict):
+                apps.append((str(app.get("name", "app")), app, widget_ids))
+    if checks.required:
+        builder.check(bool(apps), "missing_capability", "A published app is required.")
+    for label, app, widget_ids in apps:
+        items = _app_layout_items(app)
+        if checks.layout_refs_valid:
+            dangling = sorted(
+                str(item.get("i"))
+                for _, item in items
+                if str(item.get("i")) not in widget_ids
+                and str(item.get("i")) != "navigation_bar"
+            )
+            builder.check(
+                not dangling,
+                "app_layout_ref_invalid",
+                f"App {label!r} has dangling widget references: {dangling}.",
+            )
+        if checks.no_overlaps:
+            overlaps: list[tuple[str, str, str]] = []
+            by_tab: dict[str, list[JsonDict]] = defaultdict(list)
+            for tab_id, item in items:
+                by_tab[tab_id].append(item)
+            for tab_id, tab_items in by_tab.items():
+                for index, first in enumerate(tab_items):
+                    for second in tab_items[index + 1 :]:
+                        if _layout_items_overlap(first, second):
+                            overlaps.append((tab_id, str(first.get("i")), str(second.get("i"))))
+            builder.check(
+                not overlaps,
+                "app_layout_overlap",
+                f"App {label!r} has overlapping layout items: {overlaps}.",
+            )
+
+
+def _grade_polish(builder: GradeBuilder, task: Task, final_snapshot: JsonDict) -> None:
+    for check in task.success.polish:
+        backend = _find_custom_backend(final_snapshot, check.backend_name)
+        definition = (
+            (backend.get("widgets_json") or {}).get(check.widget_id)
+            if backend is not None
+            else None
+        )
+        found, actual = _lookup_path(definition, check.path) if isinstance(definition, dict) else (False, None)
+        builder.check(
+            found and actual == check.expected,
+            check.code,
+            (
+                f"Polish check {check.backend_name}/{check.widget_id} {check.path} expected "
+                f"{check.expected!r}, found {actual!r}."
+            ),
+        )
+
+
+def _grade_backend_building(builder: GradeBuilder, task: Task, final_snapshot: JsonDict) -> None:
+    backend_names = {required.backend_name for required in task.success.required_widget_defs} | {
+        required.backend_name for required in task.success.required_app_defs
+    }
+    for backend_name in sorted(backend_names):
+        backend = _find_custom_backend(final_snapshot, backend_name)
+        if backend is not None:
+            warnings = backend.get("warnings") or []
+            builder.check(
+                not warnings,
+                "backend_validation_warnings",
+                f"Custom backend {backend_name!r} has validation warnings: {warnings}.",
+            )
     for required in task.success.required_widget_defs:
         backend = _find_custom_backend(final_snapshot, required.backend_name)
         if backend is None:
@@ -549,8 +1146,7 @@ def _grade_backend_building(
                 )
             else:
                 message = (
-                    f"Widget def {required.widget_id!r}: missing {path} "
-                    f"(expected {expected!r})."
+                    f"Widget def {required.widget_id!r}: missing {path} (expected {expected!r})."
                 )
             builder.check(found and actual == expected, "widget_def_mismatch", message)
         params = _flat_params(definition)
@@ -569,10 +1165,7 @@ def _grade_backend_building(
                     for column in column_entries
                 ),
                 "widget_def_mismatch",
-                (
-                    f"Widget def {required.widget_id!r}: no columnsDefs entry "
-                    f"matching {spec}."
-                ),
+                (f"Widget def {required.widget_id!r}: no columnsDefs entry matching {spec}."),
             )
 
     for required_app in task.success.required_app_defs:
@@ -592,12 +1185,16 @@ def _grade_backend_building(
         for candidate in backend.get("apps_json") or []:
             if not isinstance(candidate, dict):
                 continue
-            if required_app.template_id and candidate.get("template_id") == required_app.template_id:
+            if (
+                required_app.template_id
+                and candidate.get("template_id") == required_app.template_id
+            ):
                 app = candidate
                 break
-            if required_app.name_contains and required_app.name_contains.lower() in str(
-                candidate.get("name", "")
-            ).lower():
+            if (
+                required_app.name_contains
+                and required_app.name_contains.lower() in str(candidate.get("name", "")).lower()
+            ):
                 app = candidate
                 break
         builder.check(
@@ -613,10 +1210,7 @@ def _grade_backend_building(
         for path, expected in required_app.expect.items():
             found, actual = _lookup_path(app, path)
             if found:
-                message = (
-                    f"App {label!r}: expected {path} == {expected!r}, "
-                    f"found {actual!r}."
-                )
+                message = f"App {label!r}: expected {path} == {expected!r}, found {actual!r}."
             else:
                 message = f"App {label!r}: missing {path} (expected {expected!r})."
             builder.check(found and actual == expected, "app_def_mismatch", message)
@@ -647,12 +1241,14 @@ def _grade_backend_building(
         items = _app_layout_items(app)
         if required_app.layout_refs_valid:
             widget_ids = set(backend.get("widgets_json") or {})
-            dangling = sorted({
-                str(item.get("i"))
-                for _, item in items
-                if str(item.get("i")) not in widget_ids
-                and str(item.get("i")) != "navigation_bar"
-            })
+            dangling = sorted(
+                {
+                    str(item.get("i"))
+                    for _, item in items
+                    if str(item.get("i")) not in widget_ids
+                    and str(item.get("i")) != "navigation_bar"
+                }
+            )
             builder.check(
                 not dangling,
                 "app_layout_ref_invalid",
@@ -668,11 +1264,9 @@ def _grade_backend_building(
             overlaps = []
             for tab_key, tab_items in by_tab.items():
                 for index, first in enumerate(tab_items):
-                    for second in tab_items[index + 1:]:
+                    for second in tab_items[index + 1 :]:
                         if _layout_items_overlap(first, second):
-                            overlaps.append(
-                                (tab_key, str(first.get("i")), str(second.get("i")))
-                            )
+                            overlaps.append((tab_key, str(first.get("i")), str(second.get("i"))))
             builder.check(
                 not overlaps,
                 "app_layout_overlap",
@@ -682,8 +1276,7 @@ def _grade_backend_building(
             tab_id = str(placement.get("tab_id"))
             widget_id = str(placement.get("widget_id"))
             present = any(
-                tab_key == tab_id and str(item.get("i")) == widget_id
-                for tab_key, item in items
+                tab_key == tab_id and str(item.get("i")) == widget_id for tab_key, item in items
             )
             builder.check(
                 present,
@@ -693,11 +1286,7 @@ def _grade_backend_building(
         groups = app.get("groups") or []
         for spec in required_app.groups_include:
             widget_ids_include = spec.get("widgetIds_include", [])
-            base_spec = {
-                key: value
-                for key, value in spec.items()
-                if key != "widgetIds_include"
-            }
+            base_spec = {key: value for key, value in spec.items() if key != "widgetIds_include"}
             matched = False
             for group in groups:
                 if not isinstance(group, dict):
@@ -715,9 +1304,7 @@ def _grade_backend_building(
             )
 
 
-def _grade_trace(
-    builder: GradeBuilder, task: Task, trace: tuple[ToolTraceEvent, ...]
-) -> None:
+def _grade_trace(builder: GradeBuilder, task: Task, trace: tuple[ToolTraceEvent, ...]) -> None:
     checks = task.success.trace
     invalid_count = sum(1 for event in trace if not event.ok)
     builder.check(
@@ -746,23 +1333,34 @@ def _grade_trace(
 
     if checks.forbid_invented_widget_ids:
         listed_widgets: set[tuple[str, str]] = set()
+        listed_origins: set[str] = set()
+        listing_required = "list_available_widgets" in task.allowed_tools
         for event in trace:
             if event.call.name == "list_available_widgets" and event.ok:
+                listed_origin = str(event.call.args.get("origin", ""))
+                if listed_origin:
+                    listed_origins.add(listed_origin)
                 for widget in (event.result.get("data") or {}).get("widgets", []):
                     listed_widgets.add((widget.get("origin"), widget.get("widget_id")))
             if event.call.name in {"get_widget_schema", "create_widget"}:
-                used_origin = (
-                    event.call.args.get("origin") or event.call.args.get("backend_name")
+                used_origin = str(
+                    event.call.args.get("origin") or event.call.args.get("backend_name") or ""
                 )
                 used_widget_id = event.call.args.get("widget_id")
-                if listed_widgets:
+                if listing_required:
+                    builder.check(
+                        used_origin in listed_origins,
+                        "widget_list_not_called_before_use",
+                        (
+                            f"{event.call.name} used {used_origin}/{used_widget_id} "
+                            "before list_available_widgets for that origin."
+                        ),
+                    )
+                if used_origin in listed_origins:
                     builder.check(
                         (used_origin, used_widget_id) in listed_widgets,
                         "unlisted_widget_id",
-                        (
-                            f"{event.call.name} used unlisted widget "
-                            f"{used_origin}/{used_widget_id}."
-                        ),
+                        (f"{event.call.name} used unlisted widget {used_origin}/{used_widget_id}."),
                     )
 
     if checks.max_repeated_snapshots is not None:

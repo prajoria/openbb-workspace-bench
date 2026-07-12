@@ -14,27 +14,78 @@ never held to the bundled suites' coverage quotas.
 
 from __future__ import annotations
 
+import hashlib
+import json
+import re
 from collections import Counter
+from pathlib import Path
 from typing import Iterable
 
 from workspace_bench.core.models import JsonDict, RunResult, Task
+from workspace_bench.core.mutation_checks import grader_mutation_failures
+from workspace_bench.core.prompt_openness import task_prompt_openness_issues
+from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
 
 CORE_SUITE = "core"
 BUILD_SUITE = "build-openbb-apps"
 
 # build-openbb-apps ladder constants.
 #
-# Per-task graded-check caps per level: strict pass ~= q^N, so uncontrolled
+# Per-task graded-check caps per structural specification level: strict pass ~= q^N,
+# so uncontrolled
 # check mass (N) would drive the level curve instead of per-check difficulty
 # (q). t1 > t2 is intentional: t1 CONTAINS t0 (full widget) plus the app
 # wrapper, while t2 is one composed artifact.
-BUILD_CHECK_CAPS = {"t0": 12, "t1": 20, "t2": 16, "t3": 26, "t4": 30}
-BUILD_DIFFICULTY_BANDS = {"easy": 60, "medium": 80, "hard": 72}
+# Outcome checks now include a live widget/app instantiation plus whole-workspace
+# collateral-damage guards. Caps bound each level without rewarding a smaller
+# schema-only rubric.
+BUILD_SPECIFICATION_CHECK_CAPS = {
+    "explicit": 24,
+    "partially-specified": 36,
+    "open-brief": 36,
+}
+BUILD_SPECIFICATION_LEVEL_BANDS = {
+    "explicit": 60,
+    "partially-specified": 92,
+    "open-brief": 84,
+}
+
+
+def _load_measured_difficulty() -> tuple[dict[str, int], dict[str, str]]:
+    path = Path(__file__).with_name("measured_difficulty.json")
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    bands = payload.get("bands")
+    overrides = payload.get("overrides")
+    if (
+        payload.get("schema_version") != "workspace-bench-measured-difficulty/v1"
+        or not isinstance(bands, dict)
+        or set(bands) != {"easy", "medium", "hard"}
+        or not all(isinstance(value, int) and value >= 0 for value in bands.values())
+        or not isinstance(overrides, dict)
+        or not all(
+            isinstance(task_ref, str) and difficulty in {"easy", "medium", "hard"}
+            for task_ref, difficulty in overrides.items()
+        )
+    ):
+        raise ValueError(f"invalid measured difficulty table: {path}")
+    return dict(bands), dict(overrides)
+
+
+BUILD_DIFFICULTY_BANDS, BUILD_MEASURED_DIFFICULTY_OVERRIDES = _load_measured_difficulty()
+BUILD_DEBUG_CHECK_CAP = 42
 # Widget-type / param-type ownership per family: every owned key must appear
 # in that family's authored payloads.
 BUILD_TYPE_OWNERSHIP = {
-    "types": {"markdown", "metric", "pdf", "html", "iframe", "youtube",
-              "newsfeed", "multi_file_viewer"},
+    "types": {
+        "markdown",
+        "metric",
+        "pdf",
+        "html",
+        "iframe",
+        "youtube",
+        "newsfeed",
+        "multi_file_viewer",
+    },
     "aggrid": {"table", "ssrm_table"},
     "charts": {"chart", "chart-highcharts", "chart-vegalite"},
     "advanced": {"advanced_charting", "live_grid", "omni"},
@@ -42,6 +93,35 @@ BUILD_TYPE_OWNERSHIP = {
 BUILD_PARAM_OWNERSHIP = {
     "params": {"text", "date", "ticker", "number", "boolean", "endpoint", "tabs"},
     "forms": {"form", "button"},
+}
+CORE_FAMILIES = {
+    "apps",
+    "backends",
+    "create",
+    "delegate",
+    "delete",
+    "inspect",
+    "layout",
+    "navigate",
+    "note",
+    "params",
+    "prompts",
+    "read",
+    "resources",
+    "skills",
+    "update",
+}
+BUILD_LADDER_FAMILIES = {
+    "advanced",
+    "aggrid",
+    "apps",
+    "charts",
+    "extend",
+    "forms",
+    "grouping",
+    "params",
+    "settings",
+    "types",
 }
 
 
@@ -53,19 +133,17 @@ def release_checks_for_suite(
     """Return the release checks for a bundled suite; {} for private suites."""
 
     if suite == CORE_SUITE:
-        return core_release_checks(tasks)
+        return core_release_checks(tasks, oracle_results)
     if suite == BUILD_SUITE:
         return build_release_checks(tasks, oracle_results)
     return {}
 
 
-def core_release_checks(tasks: list[Task]) -> dict[str, bool]:
+def core_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> dict[str, bool]:
     total = len(tasks)
     categories = Counter(task.category for task in tasks)
     difficulties = Counter(task.difficulty for task in tasks)
-    backends = Counter(
-        backend for task in tasks for backend in _task_backend_slugs(task)
-    )
+    backends = Counter(backend for task in tasks for backend in _task_backend_slugs(task))
     widget_pairs = {
         (required.origin, required.widget_id)
         for task in tasks
@@ -75,6 +153,17 @@ def core_release_checks(tasks: list[Task]) -> dict[str, bool]:
     checks = _core_check_type_counts(tasks)
     novelty = [task.novelty for task in tasks]
     return {
+        **_universal_release_checks(tasks, max_duplicate_prompts=2, max_prompt_words=350),
+        **_family_split_checks(
+            tasks,
+            expected={
+                family: {"train": 10, "validation": 5, "test": 5} for family in CORE_FAMILIES
+            },
+        ),
+        "grader_mutation_sensitive": _mutation_suite_passes(tasks, oracle_results),
+        "runtime_all_backend_tasks": all(
+            task.success.runtime is not None for task in tasks if task.family == "backends"
+        ),
         "task_count_at_least_300": total >= 300,
         "fingerprint_unique": len(set(novelty)) == total and all(novelty),
         "quota_dashboard_construction": categories["dashboard"] >= total * 0.15,
@@ -88,8 +177,7 @@ def core_release_checks(tasks: list[Task]) -> dict[str, bool]:
             and abs(difficulties["hard"] - total * 0.30) <= total * 0.05
         ),
         "quota_required_widget_pairs": len(widget_pairs) >= 120,
-        "quota_grader_check_types": bool(checks)
-        and all(count >= 10 for count in checks.values()),
+        "quota_grader_check_types": bool(checks) and all(count >= 10 for count in checks.values()),
     }
 
 
@@ -99,6 +187,7 @@ def build_release_checks(
 ) -> dict[str, bool]:
     total = len(tasks)
     difficulties = Counter(task.difficulty for task in tasks)
+    specification_levels = Counter(task.specification_level for task in tasks)
     novelty = [task.novelty for task in tasks]
     widget_types: Counter = Counter()
     param_types: Counter = Counter()
@@ -107,6 +196,8 @@ def build_release_checks(
     ops: Counter = Counter()
     widget_def_tasks = sum(1 for task in tasks if task.success.required_widget_defs)
     app_def_tasks = sum(1 for task in tasks if task.success.required_app_defs)
+    capability_tasks = sum(1 for task in tasks if task.success.required_capabilities)
+    app_structure_tasks = sum(1 for task in tasks if task.success.app_structure.required)
 
     for task in tasks:
         family = _task_family(task)
@@ -116,9 +207,7 @@ def build_release_checks(
             operation = call.args.get("operation")
             if operation == "add" and "widgets_json" in call.args:
                 ops["add_custom"] += 1
-            if operation == "refresh" and (
-                "widgets_json" in call.args or "apps_json" in call.args
-            ):
+            if operation == "refresh" and ("widgets_json" in call.args or "apps_json" in call.args):
                 ops["refresh_payload"] += 1
             if "apps_json" in call.args:
                 ops["apps_payload"] += 1
@@ -134,24 +223,117 @@ def build_release_checks(
                         param_coverage.setdefault(family, set()).add(param_type)
 
     caps_ok = all(
-        result.grade.checks_total <= BUILD_CHECK_CAPS.get(task.level, 0)
+        result.grade.checks_total - result.grade.runtime_checks_total
+        <= (
+            BUILD_DEBUG_CHECK_CAP
+            if task.family == "debug"
+            else BUILD_SPECIFICATION_CHECK_CAPS.get(task.specification_level, 0)
+        )
         for task, result in zip(tasks, oracle_results)
     )
+    expected_family_splits = {
+        family: {"train": 10, "validation": 5, "test": 5} for family in BUILD_LADDER_FAMILIES
+    }
+    expected_family_splits["e2e"] = {
+        "train": 6,
+        "validation": 3,
+        "test": 3,
+    }
+    expected_family_splits["debug"] = {
+        "train": 12,
+        "validation": 6,
+        "test": 6,
+    }
     checks = {
-        "task_count_is_212": total == 212,
+        **_universal_release_checks(tasks, max_duplicate_prompts=0, max_prompt_words=180),
+        **_family_split_checks(tasks, expected=expected_family_splits),
+        "grader_mutation_sensitive": _mutation_suite_passes(tasks, oracle_results),
+        "prompt_specification_lint_236": total == 236
+        and all(not task_prompt_openness_issues(task) for task in tasks),
+        "open_prompts_use_capability_grading": all(
+            task.specification_level == "explicit"
+            or (
+                task.success.required_capabilities
+                and not task.success.required_widget_defs
+                and not task.success.required_app_defs
+                and not task.success.required_tabs
+                and not task.success.required_layouts
+            )
+            for task in tasks
+        ),
+        "task_count_is_236": total == 236,
+        "full_tool_surface_available": all(
+            task.allowed_tools == WORKSPACE_TOOL_NAMES for task in tasks
+        ),
+        "functional_workspace_outcome": all(
+            (task.success.required_widgets or task.success.required_capabilities)
+            and (
+                not (task.success.required_app_defs or task.success.app_structure.required)
+                or task.success.required_dashboard_name_contains
+                or task.success.business_names
+                or task.success.required_capabilities
+            )
+            for task in tasks
+        ),
         "fingerprint_unique": len(set(novelty)) == total and all(novelty),
         "quota_difficulty_bands": all(
-            difficulties[band] == count
-            for band, count in BUILD_DIFFICULTY_BANDS.items()
+            difficulties[band] == count for band, count in BUILD_DIFFICULTY_BANDS.items()
+        ),
+        "quota_specification_level_bands": all(
+            specification_levels[level] == count
+            for level, count in BUILD_SPECIFICATION_LEVEL_BANDS.items()
         ),
         "quota_widget_types_at_least_16": len(widget_types) >= 16,
         "quota_param_types_at_least_9": len(param_types) >= 9,
         "quota_custom_adds_at_least_120": ops["add_custom"] >= 120,
         "quota_payload_refreshes_at_least_16": ops["refresh_payload"] >= 16,
         "quota_apps_payloads_at_least_100": ops["apps_payload"] >= 100,
-        "quota_widget_def_tasks_at_least_160": widget_def_tasks >= 160,
-        "quota_app_def_tasks_at_least_100": app_def_tasks >= 100,
-        "per_level_graded_check_caps": caps_ok,
+        "quota_exact_widget_def_tasks_at_least_40": widget_def_tasks >= 40,
+        "quota_exact_app_def_tasks_at_least_20": app_def_tasks >= 20,
+        "quota_capability_tasks_at_least_140": capability_tasks >= 140,
+        "quota_app_structure_tasks_at_least_70": app_structure_tasks >= 70,
+        "runtime_all_behavioral_widget_tasks": all(
+            task.success.runtime is not None
+            for task in tasks
+            if task.success.required_widget_defs or task.success.required_capabilities
+        ),
+        "capability_contracts_non_empty": all(
+            capability.must_cover_fields
+            or capability.required_param_kinds
+            or capability.required_config
+            for task in tasks
+            for capability in task.success.required_capabilities
+        ),
+        "form_capabilities_have_submission_contract": all(
+            capability.widget_kind != "form"
+            or (
+                "form" in capability.required_param_kinds
+                and task.success.runtime is not None
+                and any(
+                    dataset.name in capability.datasets
+                    and dataset.form_endpoint is not None
+                    for dataset in task.success.runtime.datasets
+                )
+            )
+            for task in tasks
+            for capability in task.success.required_capabilities
+        ),
+        "runtime_all_e2e_tasks": all(
+            task.success.runtime is not None for task in tasks if task.family == "e2e"
+        ),
+        "completion_notes_have_live_evidence": all(
+            task.success.runtime is not None
+            and task.success.required_capabilities
+            and task.success.app_structure.required
+            for task in tasks
+            if task.success.required_generated_widgets
+        ),
+        "completion_notes_have_semantic_deployment_facts": all(
+            _completion_notes_have_deployment_facts(task)
+            for task in tasks
+            if task.success.required_generated_widgets
+        ),
+        "per_specification_level_graded_check_caps": caps_ok,
     }
     for family, owned in sorted(BUILD_TYPE_OWNERSHIP.items()):
         observed = type_coverage.get(family, set())
@@ -162,11 +344,96 @@ def build_release_checks(
     return checks
 
 
+def _mutation_suite_passes(tasks: list[Task], oracle_results: list[RunResult]) -> bool:
+    return len(tasks) == len(oracle_results) and all(
+        not grader_mutation_failures(task, result) for task, result in zip(tasks, oracle_results)
+    )
+
+
+def _completion_notes_have_deployment_facts(task: Task) -> bool:
+    expected = {required.backend_name.casefold() for required in task.success.required_app_defs}
+    if task.success.required_dashboard_name_contains:
+        expected.add(task.success.required_dashboard_name_contains.casefold())
+    if not expected:
+        return all(required.data_contains for required in task.success.required_generated_widgets)
+    return all(
+        expected.issubset({fragment.casefold() for fragment in required.data_contains})
+        for required in task.success.required_generated_widgets
+    )
+
+
+def task_payload_digest(payloads: Iterable[JsonDict]) -> str:
+    """Stable digest of a suite's authored task payloads."""
+
+    canonical = [
+        json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+        for payload in sorted(
+            payloads,
+            key=lambda item: (str(item.get("family", "")), str(item.get("id", ""))),
+        )
+    ]
+    return hashlib.sha256("\n".join(canonical).encode("utf-8")).hexdigest()
+
+
+def _universal_release_checks(
+    tasks: list[Task], *, max_duplicate_prompts: int, max_prompt_words: int
+) -> dict[str, bool]:
+    ids = [(task.family, task.id) for task in tasks]
+    prompts = [task.prompt for task in tasks]
+    expected_hashes = {
+        task.suite.content_sha256 for task in tasks if task.suite and task.suite.content_sha256
+    }
+    observed_hash: str | None = None
+    if tasks and all(task.source_path and task.source_path.exists() for task in tasks):
+        payloads = [
+            json.loads(task.source_path.read_text(encoding="utf-8"))
+            for task in tasks
+            if task.source_path
+        ]
+        observed_hash = task_payload_digest(payloads)
+    return {
+        "task_ids_unique": len(set(ids)) == len(ids),
+        "prompt_duplicate_cap": len(prompts) - len(set(prompts)) <= max_duplicate_prompts,
+        "prompt_template_hygiene": all(
+            ".." not in task.prompt
+            and not re.search(r"\b([A-Za-z]+)\s+\1\b", task.title, re.IGNORECASE)
+            and len(task.prompt.split()) <= max_prompt_words
+            for task in tasks
+        ),
+        "path_family_consistent": all(
+            task.source_path is None or task.source_path.parent.name == task.family
+            for task in tasks
+        ),
+        "no_generated_widget_data_equals": all(
+            required.data_equals is None
+            for task in tasks
+            for required in task.success.required_generated_widgets
+        ),
+        "suite_content_hash_matches": (
+            len(expected_hashes) == 1
+            and observed_hash is not None
+            and observed_hash in expected_hashes
+        ),
+    }
+
+
+def _family_split_checks(
+    tasks: list[Task],
+    *,
+    expected: dict[str, dict[str, int]],
+) -> dict[str, bool]:
+    observed: dict[str, Counter[str]] = {}
+    for task in tasks:
+        observed.setdefault(task.family, Counter())[task.split] += 1
+    return {
+        "exact_family_coverage": set(observed) == set(expected),
+        "exact_per_family_split_counts": set(observed) == set(expected)
+        and all(dict(observed[family]) == counts for family, counts in expected.items()),
+    }
+
+
 def _task_family(task: Task) -> str | None:
-    for tag in task.tags:
-        if tag.startswith("family-"):
-            return tag[len("family-"):]
-    return None
+    return task.family
 
 
 def _authored_definitions(task: Task) -> Iterable[JsonDict]:
@@ -249,6 +516,13 @@ def _core_check_type_counts(tasks: list[Task]) -> Counter:
             counts["layout_out_of_grid"] += 1
         if success.layout.no_overlaps:
             counts["layout_overlap"] += 1
+        if success.required_capabilities:
+            counts["missing_capability"] += 1
+            counts["capability_fields_uncovered"] += 1
+        if success.capability_connections:
+            counts["capability_unconnected"] += 1
+        if success.business_names:
+            counts["business_name_missing"] += 1
         counts["too_many_invalid_calls"] += 1
         if success.trace.must_call_schema_before_create:
             counts["schema_not_called_before_create"] += 1
