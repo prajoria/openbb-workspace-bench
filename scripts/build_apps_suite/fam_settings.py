@@ -1,8 +1,13 @@
 """Family SETTINGS — widget configuration hygiene."""
 
 import json
+from typing import Any
 
 from . import common as c
+
+JsonObject = dict[str, Any]
+LayoutItemSpec = tuple[str, int, int, int, int]
+TabSpec = tuple[str, str, list[LayoutItemSpec]]
 
 
 def _copy_with(definition: dict, **updates) -> dict:
@@ -39,7 +44,7 @@ def _policy_requirements(widget_id: str, definition: dict) -> str:
 def build() -> None:
     # ------------------------------------------------------------------ r0
     # Exact JSON briefs, each carrying at least two configuration keys.
-    t0_specs = [
+    t0_specs: list[tuple[str, str, JsonObject, str]] = [
         ("vol", "vol_regime_metric",
          {"staleTime": 900000, "runButton": True},
          "cached run-button metric"),
@@ -89,7 +94,9 @@ def build() -> None:
 
     # ------------------------------------------------------------------ r1
     # Configured widget plus one-tab app wrapper.
-    t1_specs = [
+    t1_specs: list[
+        tuple[str, str, JsonObject, str, str, str, str, tuple[int, int, int, int]]
+    ] = [
         ("compliance", "alert_metric",
          {"staleTime": 900000, "category": "Surveillance"},
          "Alert Settings", "Cached alert posture.", "alerts", "Alerts", (0, 0, 6, 4)),
@@ -156,7 +163,18 @@ def build() -> None:
     # ------------------------------------------------------------------ r2
     # Words-only composed settings: base widget plus two or more config
     # dimensions. Tables derive columns from stated rows.
-    t2_specs = [
+    t2_specs: list[
+        tuple[
+            str,
+            str,
+            str | None,
+            str | None,
+            str | None,
+            list[JsonObject] | None,
+            JsonObject,
+            str,
+        ]
+    ] = [
         ("rates", "auction_cache_grid", "Auction Cache Grid", "/auction-cache",
          "Cached auction watchlist.",
          [{"auction_date": "2026-07-14", "security": "10Y Note", "size_bn": 42},
@@ -192,6 +210,7 @@ def build() -> None:
             definition = spec_or_dims
             words = _policy_requirements(widget_id, definition)
         else:
+            assert name is not None and endpoint is not None and description is not None
             definition = c.derive_table_def(name, description, endpoint, rows,
                                             **spec_or_dims)
             words = (
@@ -232,7 +251,15 @@ def build() -> None:
 
     # ------------------------------------------------------------------ r3
     # Multi-widget apps where the shared config convention is stated once.
-    t3_specs = [
+    t3_specs: list[
+        tuple[
+            str,
+            list[tuple[str, JsonObject]],
+            str,
+            str,
+            tuple[str, str, list[TabSpec]],
+        ]
+    ] = [
         ("vol",
          [("vol_commentary", {"staleTime": 900000}),
           ("vol_regime_metric", {"staleTime": 900000})],
@@ -327,7 +354,16 @@ def build() -> None:
 
     # ------------------------------------------------------------------ r4
     # Configured pack + app + instantiate + configure + note.
-    t4_specs = [
+    t4_specs: list[
+        tuple[
+            str,
+            list[tuple[str, JsonObject]],
+            str,
+            tuple[str, str, str, str],
+            str,
+            tuple[JsonObject, str, str],
+        ]
+    ] = [
         ("vol",
          [("vol_regime_metric", {"staleTime": 900000, "runButton": True}),
           ("vol_commentary", {"staleTime": 900000, "runButton": True}),
@@ -370,7 +406,7 @@ def build() -> None:
                        "Catalyst window in focus."),
           "window", "60d")),
     ]
-    for desk_key, widget_specs, focus_id, app_spec, note_term, configure in t4_specs:
+    for desk_key, widget_specs, focus_id, t4_app_spec, note_term, configure in t4_specs:
         desk = c.desk(desk_key)
         widgets = {
             wid: _copy_with(c.desk_widget(desk_key, wid), **updates)
@@ -382,7 +418,7 @@ def build() -> None:
         )
         sibling_ids = [wid for wid in widgets if wid != focus_id]
         sibling_id = sibling_ids[0]
-        app_name, app_desc, tab_id, tab_name = app_spec
+        app_name, app_desc, tab_id, tab_name = t4_app_spec
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name, [c.layout_item(focus_id, 0, 0, 8, 5)]),
             ("posture", "Posture", [c.layout_item(sibling_id, 0, 0, 20, 9)]),

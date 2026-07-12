@@ -26,7 +26,7 @@ jobs:
         run: uv run --extra dev ruff check src tests scripts examples
 
       - name: Type-check
-        run: uv run --extra dev mypy src/workspace_bench
+        run: uv run --extra dev mypy src scripts examples
 
       - name: Run tests with coverage
         run: uv run --extra dev pytest --cov=workspace_bench --cov-report=term --cov-fail-under=65

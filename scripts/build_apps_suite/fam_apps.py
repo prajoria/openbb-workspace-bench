@@ -14,8 +14,26 @@ deliberately simple so grading breadth tracks the app skill:
 """
 
 import json
+from typing import Any, TypedDict
 
 from . import common as c
+
+
+class ComposedAppSpec(TypedDict):
+    name: str
+    desc: str
+    tab_id: str
+    tab_name: str
+    items: list[tuple[str, int, int, int, int, dict[str, Any] | None]]
+    groups: list[dict[str, Any]]
+    prompts: list[str] | None
+
+
+class MultiTabAppSpec(TypedDict):
+    name: str
+    desc: str
+    tabs: list[tuple[str, str, list[tuple[str, int, int, int, int]]]]
+    groups: list[dict[str, Any]]
 
 
 def build() -> None:
@@ -141,7 +159,7 @@ def build() -> None:
     # ------------------------------------------------------------------ r2
     # Composed app requirements in words over seeded widgets: placements plus a
     # second dimension (param group / preset params / suggested prompts).
-    t2_specs = [
+    t2_specs: list[tuple[str, list[str], ComposedAppSpec]] = [
         # (desk, served ids, app spec dict)
         ("earnings", ["estimate_revisions", "earnings_chart", "surprise_metric"],
          {"name": "Earnings Command", "desc": "Symbol-synced earnings review.",
@@ -228,7 +246,9 @@ def build() -> None:
     # cell carries a composition dimension: a param group where the widgets
     # share a param (added to the defs when needed), or a desk convention
     # stated once and fanned out (proxy r2 hardening).
-    t3_specs = [
+    t3_specs: list[
+        tuple[str, str, list[str], MultiTabAppSpec, dict[str, Any] | None]
+    ] = [
         # (desk, focus widget id, sibling ids, app spec, shared_param)
         ("tvl", "chains_table", ["chains_chart"],
          {"name": "Chain Deck", "desc": "TVL table and trend.",
@@ -263,7 +283,7 @@ def build() -> None:
           "groups": []},
          None),
     ]
-    for desk_key, focus_id, sibling_ids, spec, shared_param in t3_specs:
+    for desk_key, focus_id, sibling_ids, multi_tab_spec, shared_param in t3_specs:
         desk = c.desk(desk_key)
         focus = c.desk_widget(desk_key, focus_id)
         widgets = {focus_id: focus}
@@ -271,17 +291,17 @@ def build() -> None:
             widgets[sib] = c.desk_widget(desk_key, sib)
         shared_note = ""
         if shared_param is not None:
-            grouped_ids = spec["groups"][0]["widgetIds"]
+            grouped_ids = multi_tab_spec["groups"][0]["widgetIds"]
             for wid in grouped_ids:
                 widgets[wid].setdefault("params", []).append(
                     json.loads(json.dumps(shared_param))
                 )
             shared_note = " " + c.shared_param_note(shared_param, grouped_ids)
-        app = c.app_def(spec["name"], spec["desc"], tabs=[
+        app = c.app_def(multi_tab_spec["name"], multi_tab_spec["desc"], tabs=[
             (tab_id, tab_name,
              [c.layout_item(wid, x, y, w, h) for wid, x, y, w, h in items])
-            for tab_id, tab_name, items in spec["tabs"]
-        ], groups=spec["groups"] or None)
+            for tab_id, tab_name, items in multi_tab_spec["tabs"]
+        ], groups=multi_tab_spec["groups"] or None)
         omit = {shared_param["paramName"]} if shared_param else set()
         widget_words = "; ".join(
             c.widget_requirements_text(wid, definition, omit_params=omit)
@@ -289,14 +309,14 @@ def build() -> None:
         )
         widget_words += shared_note
         convention = ""
-        if shared_param is None and not spec["groups"]:
+        if shared_param is None and not multi_tab_spec["groups"]:
             convention = c.stamp_consistency(widgets)
             widget_words += f". Desk convention: {convention}"
         app_words = c.app_requirements_text(app)
-        sid = f"{spec['name'].lower().replace(' ', '_')}"
+        sid = f"{multi_tab_spec['name'].lower().replace(' ', '_')}"
         c.add("apps", "r3", {
             "id": sid,
-            "title": f"Assemble the {spec['name']} app from scratch",
+            "title": f"Assemble the {multi_tab_spec['name']} app from scratch",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
             "tags": ["build-openbb-apps", "widgets-json", "apps-json", "multi-tab"],
             "prompt": c.phrased(sid, [

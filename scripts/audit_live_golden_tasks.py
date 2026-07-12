@@ -35,10 +35,10 @@ async def audit(url: str, goldens: list[tuple[str, str]]) -> int:
         failed = failed or not passed
         status = "PASS" if passed else "FAIL"
         print(f"{status} {suite}/{task_id}")
-        for issue in result.surface_issues:
-            print(f"  surface: {issue}")
-        for issue in result.run_result.grade.issues:
-            print(f"  grade: {issue.code}: {issue.message}")
+        for surface_issue in result.surface_issues:
+            print(f"  surface: {surface_issue}")
+        for grade_issue in result.run_result.grade.issues:
+            print(f"  grade: {grade_issue.code}: {grade_issue.message}")
     return 1 if failed else 0
 
 

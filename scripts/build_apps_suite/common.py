@@ -14,6 +14,7 @@ import re
 import sys
 from collections import defaultdict
 from pathlib import Path
+from typing import Any, cast
 from urllib.parse import urlparse
 
 from workspace_bench.core.models import TASK_SCHEMA_VERSION
@@ -811,7 +812,7 @@ def _expected_backend_delta(task: dict) -> int:
     return 0
 
 
-def _human_duration(milliseconds: object) -> str:
+def _human_duration(milliseconds: Any) -> str:
     try:
         value = int(milliseconds)
     except (TypeError, ValueError):
@@ -1209,7 +1210,7 @@ def _explicit_prompt(task: dict, *, family: str, level: str) -> str:
     for call in task.get("oracle_tool_calls", []):
         if call.get("tool") == "add_generative_widget":
             args = call.get("args", {})
-            required = next(
+            generated_required: dict = next(
                 (
                     item
                     for item in task.get("success", {}).get("required_generated_widgets", [])
@@ -1221,7 +1222,10 @@ def _explicit_prompt(task: dict, *, family: str, level: str) -> str:
                 ),
                 {},
             )
-            facts = ", ".join(repr(str(fragment)) for fragment in required.get("data_contains", []))
+            facts = ", ".join(
+                repr(str(fragment))
+                for fragment in generated_required.get("data_contains", [])
+            )
             pieces.append(
                 phrased(
                     str(task.get("id", "completion-note")),
@@ -1258,7 +1262,7 @@ def table_def(
     grid: tuple[int, int] = (20, 9),
     **extra,
 ) -> dict:
-    definition = {
+    definition: dict[str, Any] = {
         "name": name,
         "description": description,
         "endpoint": endpoint,
@@ -1289,7 +1293,7 @@ def simple_def(
     grid: tuple[int, int] = (12, 6),
     **extra,
 ) -> dict:
-    definition = {
+    definition: dict[str, Any] = {
         "name": name,
         "description": description,
         "endpoint": endpoint,
@@ -1359,7 +1363,7 @@ def app_def(
     # grade) it when a task explicitly opts in — proxy round 1 (v3): every
     # words-brief r1 failed solely on "missing allowCustomization (expected
     # True)" that no prompt ever stated.
-    app = {
+    app: dict[str, Any] = {
         "name": name,
         "description": description,
         "tabs": {
@@ -1522,7 +1526,8 @@ def widget_requirements_text(
             "table columns required (field → header (type, extras)): "
             + "; ".join(_column_requirement(col) for col in columns)
         )
-    data = definition.get("data") if isinstance(definition.get("data"), dict) else {}
+    raw_data = definition.get("data")
+    data = raw_data if isinstance(raw_data, dict) else {}
     if "dataKey" in data:
         parts.append(f"rows are read from the response key {json.dumps(data['dataKey'])}")
     for key in ("defaultSymbol", "updateFrequency", "wsRowIdColumn"):
@@ -1649,7 +1654,7 @@ def derive_table_def(
         if field.endswith("_pct"):
             column["formatterFn"] = "percent"
         columns.append(column)
-    definition = {
+    definition: dict[str, Any] = {
         "name": name,
         "description": description,
         "endpoint": endpoint,
@@ -1794,7 +1799,8 @@ def widget_brief_text(widget_id: str, definition: dict) -> str:
         parts.append(
             f"columnsDefs (exact JSON, under data.table.columnsDefs): {_compact_json(columns)}"
         )
-    data = definition.get("data") if isinstance(definition.get("data"), dict) else {}
+    raw_data = definition.get("data")
+    data = raw_data if isinstance(raw_data, dict) else {}
     for key in ("dataKey", "defaultSymbol", "updateFrequency", "wsRowIdColumn"):
         if key in data:
             parts.append(f"data.{key} {json.dumps(data[key])}")
@@ -1818,7 +1824,8 @@ def widget_def_checks(backend_name: str, widget_id: str, definition: dict) -> di
     for key in ("category", "staleTime", "runButton", "raw", "wsEndpoint", "refetchInterval"):
         if key in definition:
             expect[key] = definition[key]
-    data = definition.get("data") if isinstance(definition.get("data"), dict) else {}
+    raw_data = definition.get("data")
+    data = raw_data if isinstance(raw_data, dict) else {}
     if "dataKey" in data:
         expect["data.dataKey"] = data["dataKey"]
     check: dict = {
@@ -2583,7 +2590,7 @@ def task_backends(task: dict) -> set[str]:
             if "widgets_json" in call.get("args", {}):
                 backends.add(f"custom:{call['args'].get('name')}")
     backends.discard(None)
-    return backends
+    return cast(set[str], backends)
 
 
 def artifact_discriminator(task: dict) -> str:

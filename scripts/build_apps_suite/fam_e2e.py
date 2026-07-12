@@ -3,8 +3,25 @@
 from __future__ import annotations
 
 import json
+from typing import TypedDict
 
 from . import common as c
+
+
+class CapstoneSpec(TypedDict):
+    slug: str
+    desk_key: str
+    table_id: str
+    table_name: str
+    table_desc: str
+    endpoint: str
+    rows: list[dict]
+    sibling_id: str
+    app_name: str
+    app_desc: str
+    tabs: tuple[tuple[str, str], tuple[str, str]]
+    dashboard_name: str
+    note_term: str
 
 
 def _add_capstone(
@@ -118,7 +135,7 @@ def _add_capstone(
 
 
 def build() -> None:
-    specs = [
+    specs: list[CapstoneSpec] = [
         {
             "slug": "research_room",
             "desk_key": "earnings",

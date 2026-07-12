@@ -35,6 +35,7 @@ import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
+from typing import Any
 
 from workspace_bench.core.suite_checks import task_payload_digest
 from workspace_bench.workspace.fixtures import get_fixture_backend
@@ -428,10 +429,10 @@ def _response_fields(payload: object) -> set[str]:
             fields.update(_response_fields(value))
         return fields
     if isinstance(payload, list):
-        fields: set[str] = set()
+        list_fields: set[str] = set()
         for value in payload:
-            fields.update(_response_fields(value))
-        return fields
+            list_fields.update(_response_fields(value))
+        return list_fields
     return set()
 
 
@@ -520,7 +521,7 @@ def joined(items: list[str]) -> str:
 # Family CREATE — anchor: create_widget
 # ===========================================================================
 
-CREATE_T0 = [
+CREATE_T0: list[tuple[str, str, dict[str, Any]]] = [
     (EQ, "price_performance", {"symbol": "AAPL"}),
     (EQ, "latest_news", {"symbol": "AAPL", "limit": 5}),
     (MACRO, "yield_curve", {}),
@@ -558,7 +559,7 @@ for origin, widget_id, data_args in CREATE_T0:
                                                   "data_args": data_args}}],
     })
 
-CREATE_T1 = [
+CREATE_T1: list[tuple[str, str, dict[str, Any]]] = [
     (EQ, "price_performance", {"symbol": "MSFT"}),
     (EQ, "estimate_history", {"symbol": "NVDA"}),
     (MACRO, "macro_timeseries", {"series": "DGS10"}),
@@ -599,7 +600,7 @@ for origin, widget_id, data_args in CREATE_T1:
         "oracle_tool_calls": [snap()] + discovery(origin, widget_id, data_args),
     })
 
-CREATE_T2 = [
+CREATE_T2: list[tuple[str, str, dict[str, Any], str, tuple[int, int, int, int]]] = [
     (EQ, "price_performance", {"symbol": "NVDA"}, "symbol", (0, 2, 20, 12)),
     (EQ, "latest_news", {"symbol": "MSFT", "limit": 5}, "symbol", (20, 0, 20, 10)),
     (EQ, "fundamental_metrics", {"symbol": "AAPL"}, "symbol", (0, 0, 10, 8)),
@@ -643,7 +644,7 @@ for origin, widget_id, data_args, param, (x, y, w, h) in CREATE_T2:
              "args": {"widget_id": widget_id, "x": x, "y": y, "w": w, "h": h}}],
     })
 
-CREATE_T3 = [
+CREATE_T3: list[tuple[str, str, dict[str, Any], str, dict[str, Any]]] = [
     (EQ, "price_performance", {"symbol": "AAPL"}, "latest_news",
      {"symbol": "AAPL", "limit": 5}),
     (MACRO, "macro_timeseries", {"series": "DGS10"}, "yield_curve", {}),
@@ -696,7 +697,9 @@ for origin, seed_id, seed_args, new_id, new_args in CREATE_T3:
              "args": {"widget_id": new_id, "x": 20, "y": 0, "w": 20, "h": 10}}],
     })
 
-CREATE_T4 = [
+CREATE_T4: list[
+    tuple[str, list[tuple[str, str, dict[str, Any]]], list[str], str]
+] = [
     ("aapl_rates", [(EQ, "price_performance", {"symbol": "AAPL"}),
                      (MACRO, "macro_timeseries", {"series": "DGS10"})],
      ["AAPL", "DGS10"], "AAPL price against the DGS10 rates backdrop."),
@@ -763,7 +766,7 @@ for slug, widgets, note_facts, note_text in CREATE_T4:
 # Family UPDATE — anchor: update_widget
 # ===========================================================================
 
-UPDATE_T0 = [
+UPDATE_T0: list[tuple[str, str, dict[str, Any], str, str]] = [
     (EQ, "price_performance", {"symbol": "MSFT"}, "symbol", "AAPL"),
     (EQ, "latest_news", {"symbol": "NVDA", "limit": 5}, "symbol", "MSFT"),
     (MACRO, "macro_timeseries", {"series": "DGS2"}, "series", "DGS10"),
@@ -966,7 +969,15 @@ for slug, origin, widget_id, param, old_value, new_value, context in UPDATE_T3:
                                          f"{new_value}.")],
     })
 
-UPDATE_T4 = [
+UPDATE_T4: list[
+    tuple[
+        str,
+        str,
+        list[tuple[str, dict[str, Any], dict[str, Any]]],
+        list[str],
+        list[str],
+    ]
+] = [
     ("aapl_desk", EQ,
      [("price_performance", {"symbol": "MSFT"}, {"symbol": "AAPL"}),
       ("latest_news", {"symbol": "AAPL", "limit": 1}, {"limit": 5})],
@@ -1073,7 +1084,7 @@ for slug, origin, updates, note_facts, prompt_variants in UPDATE_T4:
 # Family DELETE — anchor: delete_widget
 # ===========================================================================
 
-DELETE_T0 = [
+DELETE_T0: list[tuple[str, str, dict[str, Any]]] = [
     (EQ, "latest_news", {"symbol": "AAPL", "limit": 5}),
     (EQ, "price_performance", {"symbol": "NVDA"}),
     (MACRO, "macro_timeseries", {"series": "DGS2"}),
@@ -1112,7 +1123,7 @@ for origin, widget_id, data_args in DELETE_T0:
                                         "args": {"widget_uuid": "widget_001"}}],
     })
 
-DELETE_T1 = [
+DELETE_T1: list[tuple[str, str, dict[str, Any]]] = [
     (EQ, "latest_news", {"symbol": "MSFT", "limit": 5}),
     (EQ, "price_performance", {"symbol": "AAPL"}),
     (MACRO, "macro_timeseries", {"series": "DGS10"}),
@@ -1324,7 +1335,9 @@ for origin, widget_id, param, dup_value, new_value in DELETE_T4:
 # Family LAYOUT — anchor: update_widget_layout
 # ===========================================================================
 
-LAYOUT_T0 = [
+LAYOUT_T0: list[
+    tuple[str, str, dict[str, Any], dict[str, int], dict[str, int], list[str]]
+] = [
     ("halve_price_msft", "price_performance", {"symbol": "MSFT"},
      {"x": 0, "y": 2, "w": 40, "h": 12}, {"x": 0, "y": 2, "w": 20, "h": 12},
      [
@@ -1617,7 +1630,9 @@ for slug, origin, (wid_a, args_a, layout_a), (wid_b, args_b, seed_b, target_b), 
                                 "args": {"widget_id": wid_b, **target_b}}],
     })
 
-LAYOUT_T4 = [
+LAYOUT_T4: list[
+    tuple[str, str, list[tuple[str, dict[str, Any], dict[str, int]]], list[str]]
+] = [
     ("grid_eq", EQ,
      [("price_performance", {"symbol": "AAPL"}, {"x": 0, "y": 0, "w": 20, "h": 12}),
       ("latest_news", {"symbol": "AAPL", "limit": 5}, {"x": 20, "y": 0, "w": 20, "h": 12}),
@@ -1923,7 +1938,9 @@ for slug, widget_id, data_args, prompt_variants, facts, text in NOTE_T2:
                                note_call("Answer Note", text)],
     })
 
-NOTE_T3 = [
+NOTE_T3: list[
+    tuple[str, str, list[tuple[str, dict[str, Any]]], list[str], list[str], str]
+] = [
     ("aapl_msft_closes", EQ,
      [("price_performance", {"symbol": "AAPL"}), ("price_performance", {"symbol": "MSFT"})],
      [
@@ -1974,15 +1991,15 @@ NOTE_T3 = [
      ["MSFT", "0.34", "1.18"],
      "MSFT largest at 0.34; portfolio beta 1.18."),
 ]
-for slug, origin, widgets, prompt_variants, facts, text in NOTE_T3:
+for slug, origin, note_widgets, prompt_variants, facts, text in NOTE_T3:
     workflow, sub = wf(origin)
     seeds = [
         {"origin": origin, "widget_id": wid, "data_args": args,
          "layout": {"x": (i % 2) * 20, "y": (i // 2) * 12, "w": 20, "h": 10}}
-        for i, (wid, args) in enumerate(widgets)
+        for i, (wid, args) in enumerate(note_widgets)
     ]
     oracle = [snap()]
-    for wid, args in widgets:
+    for wid, args in note_widgets:
         oracle.append({"tool": "get_widget_data",
                         "args": {"origin": origin, "widget_id": wid, "data_args": args}})
     oracle.append(note_call("Answer Note", text))
@@ -1999,7 +2016,7 @@ for slug, origin, widgets, prompt_variants, facts, text in NOTE_T3:
         "success": {
             "required_widgets": [
                 {"origin": origin, "widget_id": wid, "data_args": args, "min_count": 1}
-                for wid, args in widgets],
+                for wid, args in note_widgets],
             "required_generated_widgets": [
                 {"widget_type": "note", "data_contains": facts}],
             "trace_checks": TRACE_BASIC,
@@ -2726,7 +2743,9 @@ for slug, origin, fixture, tab_name, new_widget, new_args, (seed_widget, seed_ar
         + discovery(origin, new_widget, new_args),
     })
 
-NAV_T4 = [
+NAV_T4: list[
+    tuple[str, str, str, str, str, str, dict[str, Any], list[str], str]
+] = [
     ("earnings_hub", EQ, "equities", "Earnings Hub", "Estimates",
      "estimate_history", {"symbol": "AAPL"}, ["estimates", "earnings hub"],
      "Earnings hub: estimates tab tracks the numbers into the print."),
@@ -2861,7 +2880,7 @@ for slug in SKILL_SLUGS:
 
 for slug in SKILL_SLUGS:
     skill_name, result_facts, note_facts = SKILLS[slug]
-    extra = {
+    skill_extra: dict[str, Any] = {
         "title": f"Apply {skill_name} Workflow Notes",
         "prompt": phrased(f"{slug.replace('-', '_')}", [
             (f"Call get_skill_content with slug {slug}, then add a note on the active "
@@ -2891,7 +2910,7 @@ for slug in SKILL_SLUGS:
                                          f"{skill_name} workflow: "
                                          + "; ".join(note_facts) + ".")],
     }
-    skill_task("r1", slug, extra)
+    skill_task("r1", slug, skill_extra)
 
 SKILL_T2_TABS = {"finance-earnings-prep": "Earnings Prep", "finance-tearsheet": "Tearsheet",
                   "finance-guidance-tracker": "Guidance", "finance-comps": "Comps"}
@@ -2937,7 +2956,7 @@ for slug in SKILL_SLUGS:
                                          + "; ".join(note_facts) + ".")],
     })
 
-SKILL_T3 = [
+SKILL_T3: list[tuple[str, str, str, dict[str, Any]]] = [
     ("finance-tearsheet", EQ, "price_performance", {"symbol": "MSFT"}),
     ("finance-earnings-prep", EQ, "estimate_history", {"symbol": "AAPL"}),
     ("finance-guidance-tracker", EQ, "latest_news", {"symbol": "AAPL", "limit": 5}),
@@ -3571,7 +3590,7 @@ for idx, (origin, widget_id, param, value, companion, companion_args) in enumera
         ],
     })
 
-PARAM_T4 = [
+PARAM_T4: list[tuple[str, list[tuple[str, str, str, str]], list[str]]] = [
     ("aapl_macro", [(EQ, "price_performance", "symbol", "AAPL"),
                     (MACRO, "macro_timeseries", "series", "DGS10")],
      ["AAPL", "DGS10"]),
@@ -3585,17 +3604,17 @@ PARAM_T4 = [
                     (MACRO, "macro_timeseries", "series", "FEDFUNDS")],
      ["NVDA", "FEDFUNDS"]),
 ]
-for slug, widgets, facts in PARAM_T4:
-    origins = sorted({origin for origin, *_ in widgets})
+for slug, param_widgets, facts in PARAM_T4:
+    origins = sorted({origin for origin, *_ in param_widgets})
     oracle = [snap()]
     required_widgets = []
-    for origin, widget_id, param, value in widgets:
+    for origin, widget_id, param, value in param_widgets:
         oracle += discovery(origin, widget_id, {param: value}, param)
         required_widgets.append(
             {"origin": origin, "widget_id": widget_id, "data_args": {param: value}}
         )
     oracle.append(note_call("Options Note", "Options used: " + ", ".join(facts) + "."))
-    workflow, sub = wf(widgets[0][0], widgets[0][1])
+    workflow, sub = wf(param_widgets[0][0], param_widgets[0][1])
     add("params", "r4", {
         "id": f"cross_{slug}",
         "title": f"Cross-Backend Options Build: {slug.replace('_', ' ').title()}",
@@ -3605,20 +3624,20 @@ for slug, widgets, facts in PARAM_T4:
             ("Build a two-widget dashboard using parameter options for both widgets: "
              + "; ".join(
                  f"{origin}/{widget_id} {param}={value}"
-                 for origin, widget_id, param, value in widgets
+                 for origin, widget_id, param, value in param_widgets
              )
              + ". Add a note mentioning " + " and ".join(facts) + "."),
             ("Using parameter options for both widgets, build a two-widget dashboard with "
              + "; ".join(
                  f"{origin}/{widget_id} {param}={value}"
-                 for origin, widget_id, param, value in widgets
+                 for origin, widget_id, param, value in param_widgets
              )
              + ". Add a note mentioning " + " and ".join(facts) + "."),
             ("Build a dashboard with these two widgets after using parameter options for "
              "both: "
              + "; ".join(
                  f"{origin}/{widget_id} {param}={value}"
-                 for origin, widget_id, param, value in widgets
+                 for origin, widget_id, param, value in param_widgets
              )
              + ". Add a note mentioning " + " and ".join(facts) + "."),
         ]),
@@ -3632,7 +3651,7 @@ for slug, widgets, facts in PARAM_T4:
             "required_tool_calls": [
                 {"tool": "get_params_options",
                  "args_contains": {"widget_id": widget_id, "param_name": param}}
-                for origin, widget_id, param, value in widgets],
+                for origin, widget_id, param, value in param_widgets],
             "required_generated_widgets": [
                 {"widget_type": "note", "data_contains": facts}],
             "layout": GRID, "trace_checks": TRACE_FULL,
@@ -3727,7 +3746,9 @@ for idx, (fixture, origin, widget_id, data_args) in enumerate(BACKEND_CASES):
         "oracle_tool_calls": backend_build_oracle(fixture, origin, widget_id, data_args),
     })
 
-BACKEND_T2 = [
+BACKEND_T2: list[
+    tuple[str, str, str, dict[str, Any], str, str, str, dict[str, Any]]
+] = [
     ("equities", EQ, "latest_news", {"symbol": "MSFT", "limit": 5}, "macro", MACRO,
      "yield_curve", {}),
     ("portfolio", PF, "sector_exposure", {}, "macro", MACRO, "macro_timeseries",
@@ -3817,7 +3838,9 @@ for idx, (fixture, origin, widget_id, data_args) in enumerate(BACKEND_CASES):
         + [note_call("Backend Note", f"{origin} backend refreshed before build.")],
     })
 
-BACKEND_T4 = [
+BACKEND_T4: list[
+    tuple[str, list[tuple[str, str, str, dict[str, Any]]], list[str]]
+] = [
     ("equities_macro", [("equities", EQ, "price_performance", {"symbol": "AAPL"}),
                         ("macro", MACRO, "macro_timeseries", {"series": "DGS10"})],
      ["AAPL", "DGS10"]),
@@ -3831,19 +3854,19 @@ BACKEND_T4 = [
                             ("portfolio", PF, "holdings_table", {})],
      ["NVDA", "holdings"]),
 ]
-for slug, widgets, facts in BACKEND_T4:
+for slug, backend_widgets, facts in BACKEND_T4:
     oracle = []
-    for fixture, origin, widget_id, args in widgets:
+    for fixture, origin, widget_id, args in backend_widgets:
         oracle.append({"tool": "manage_backends", "args": {"operation": "add", "name": fixture}})
     oracle.append(snap())
-    for _, origin, widget_id, args in widgets:
+    for _fixture_name, origin, widget_id, args in backend_widgets:
         oracle += discovery(origin, widget_id, args)
     oracle.append(note_call("Backend Build Note", "Built with " + " and ".join(facts) + "."))
-    workflow, sub = wf(widgets[0][1], widgets[0][2])
-    backend_names = ", ".join(fixture for fixture, _, _, _ in widgets)
+    workflow, sub = wf(backend_widgets[0][1], backend_widgets[0][2])
+    backend_names = ", ".join(fixture for fixture, _, _, _ in backend_widgets)
     widget_refs = joined([
         widget_ref(origin, widget_id, args)
-        for _, origin, widget_id, args in widgets
+        for _fixture_name, origin, widget_id, args in backend_widgets
     ])
     add("backends", "r4", {
         "id": f"multi_{slug}",
@@ -3866,7 +3889,7 @@ for slug, widgets, facts in BACKEND_T4:
         "success": {
             "required_widgets": [
                 {"origin": origin, "widget_id": widget_id, "data_args": args}
-                for _, origin, widget_id, args in widgets],
+                for _fixture_name, origin, widget_id, args in backend_widgets],
             "required_tool_calls": [
                 {"tool": "manage_backends", "args_contains": {"operation": "add"},
                  "min_count": 2}],
@@ -4252,7 +4275,9 @@ for tab_name, origin, widget_id, data_args in PROMPT_T2:
         + [note_call("Session Prompt Note", f"{tab_name} built using current tab guidance.")],
     })
 
-PROMPT_T3 = [
+PROMPT_T3: list[
+    tuple[str, list[tuple[str, str, dict[str, Any]]], list[str]]
+] = [
     ("AAPL Prompt Dashboard", [(EQ, "price_performance", {"symbol": "AAPL"}),
                                (EQ, "latest_news", {"symbol": "AAPL", "limit": 5})],
      ["AAPL", "schema"]),
@@ -4265,22 +4290,22 @@ PROMPT_T3 = [
     ("Stark Prompt Dashboard", [(STK, sw(190), {}), (STK, sw(191), {})],
      ["stark", "schema"]),
 ]
-for dash_name, widgets, facts in PROMPT_T3:
-    origins = sorted({origin for origin, _, _ in widgets})
+for dash_name, prompt_widgets, facts in PROMPT_T3:
+    origins = sorted({origin for origin, _, _ in prompt_widgets})
     oracle = [
         {"tool": "get_workspace_prompt", "args": {"name": "workspace_tool_usage"}},
         {"tool": "manage_dashboard", "args": {"operation": "create", "name": dash_name}},
     ]
     required_widgets = []
-    for origin, widget_id, data_args in widgets:
+    for origin, widget_id, data_args in prompt_widgets:
         oracle += discovery(origin, widget_id, data_args)
         required_widgets.append(
             {"origin": origin, "widget_id": widget_id, "data_args": data_args}
         )
     oracle.append(note_call("Prompt Build Note", "Prompt build used " + " and ".join(facts) + "."))
-    workflow, sub = wf(widgets[0][0], widgets[0][1])
+    workflow, sub = wf(prompt_widgets[0][0], prompt_widgets[0][1])
     widget_refs = joined([widget_ref(origin, widget_id, data_args)
-                          for origin, widget_id, data_args in widgets])
+                          for origin, widget_id, data_args in prompt_widgets])
     add("prompts", "r3", {
         "id": f"dashboard_{slugify(dash_name).replace('-', '_')}",
         "title": dash_name,
@@ -4313,7 +4338,9 @@ for dash_name, widgets, facts in PROMPT_T3:
         "oracle_tool_calls": oracle,
     })
 
-PROMPT_T4 = [
+PROMPT_T4: list[
+    tuple[str, list[tuple[str, str, dict[str, Any]]], list[str]]
+] = [
     ("Prompt Cross AAPL Rates", [(EQ, "price_performance", {"symbol": "AAPL"}),
                                  (MACRO, "macro_timeseries", {"series": "DGS10"})],
      ["AAPL", "DGS10", "current-dashboard"]),
@@ -4326,23 +4353,23 @@ PROMPT_T4 = [
                                     (PF, "holdings_table", {})],
      ["NVDA", "holdings", "current-dashboard"]),
 ]
-for dash_name, widgets, facts in PROMPT_T4:
-    origins = sorted({origin for origin, _, _ in widgets})
+for dash_name, prompt_widgets, facts in PROMPT_T4:
+    origins = sorted({origin for origin, _, _ in prompt_widgets})
     oracle = [
         {"tool": "get_workspace_prompt", "args": {"name": "workspace_tool_usage"}},
         {"tool": "get_workspace_prompt", "args": {"name": "workspace_session_context"}},
         {"tool": "manage_dashboard", "args": {"operation": "create", "name": dash_name}},
     ]
     required_widgets = []
-    for origin, widget_id, data_args in widgets:
+    for origin, widget_id, data_args in prompt_widgets:
         oracle += discovery(origin, widget_id, data_args)
         required_widgets.append(
             {"origin": origin, "widget_id": widget_id, "data_args": data_args}
         )
     oracle.append(note_call("Prompt Cross Note", "Prompt cross build: " + ", ".join(facts) + "."))
-    workflow, sub = wf(widgets[0][0], widgets[0][1])
+    workflow, sub = wf(prompt_widgets[0][0], prompt_widgets[0][1])
     widget_refs = joined([widget_ref(origin, widget_id, data_args)
-                          for origin, widget_id, data_args in widgets])
+                          for origin, widget_id, data_args in prompt_widgets])
     add("prompts", "r4", {
         "id": f"cross_{slugify(dash_name).replace('-', '_')}",
         "title": dash_name,

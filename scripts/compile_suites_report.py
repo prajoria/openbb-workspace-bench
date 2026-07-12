@@ -173,7 +173,8 @@ def main() -> int:
     aggregate: dict[str, dict] = {}
     for slug in all_slugs:
         pooled_passed = pooled_total = 0
-        included, pending = [], [f"{name} (pending re-run)" for name in historical_suites]
+        included: list[str] = []
+        pending = [f"{name} (pending re-run)" for name in historical_suites]
         for name, bucket in current_suites.items():
             summary = bucket["models"].get(slug)
             if summary:
@@ -197,10 +198,14 @@ def main() -> int:
     output.write_text(json.dumps(report, indent=2) + "\n")
     print(f"Wrote {output}")
     for slug, agg in aggregate.items():
-        pending = f" (pending: {', '.join(agg['suites_pending'])})" if agg["suites_pending"] else ""
+        pending_text = (
+            f" (pending: {', '.join(agg['suites_pending'])})"
+            if agg["suites_pending"]
+            else ""
+        )
         print(
             f"  {slug}: {agg['passed']}/{agg['total']} = "
-            f"{100 * agg['strict_pass_rate']:.1f}%{pending}"
+            f"{100 * agg['strict_pass_rate']:.1f}%{pending_text}"
         )
     return 0
 

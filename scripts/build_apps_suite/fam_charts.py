@@ -337,7 +337,7 @@ def build() -> None:
          "earnings history",
          (None, "symbol", "MSFT")),
     ]
-    for desk_key, focus_id, sibling_ids, app_spec, note_term, configure in t4_specs:
+    for desk_key, focus_id, sibling_ids, t4_app_spec, note_term, configure in t4_specs:
         desk = c.desk(desk_key)
         focus = c.desk_widget(desk_key, focus_id)
         widgets = {focus_id: focus}
@@ -347,7 +347,7 @@ def build() -> None:
         new_param, param_name, set_value = configure
         if new_param is not None:
             focus.setdefault("params", []).append(json.loads(json.dumps(new_param)))
-        app_name, app_desc, tab_id, tab_name = app_spec
+        app_name, app_desc, tab_id, tab_name = t4_app_spec
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name, [c.layout_item(focus_id, 0, 0, 20, 9)]),
             ("signals", "Signals", [c.layout_item(sibling_id, 0, 0, 8, 5)]),

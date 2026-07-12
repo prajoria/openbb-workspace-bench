@@ -365,7 +365,7 @@ def build() -> None:
             params=[c.endpoint_param("series", "Series", "DGS2", "/series-options")],
         ),
     }
-    for desk_key, focus_id, sibling_ids, app_spec, note_term, configure in t4_specs:
+    for desk_key, focus_id, sibling_ids, t4_app_spec, note_term, configure in t4_specs:
         desk = c.desk(desk_key)
         focus = custom_t4.get(focus_id) or c.desk_widget(desk_key, focus_id)
         widgets = {focus_id: focus}
@@ -373,7 +373,7 @@ def build() -> None:
             widgets[sibling_id] = c.desk_widget(desk_key, sibling_id)
         sibling_id = sibling_ids[0]
         param_name, set_value = configure
-        app_name, app_desc, tab_id, tab_name, preset = app_spec
+        app_name, app_desc, tab_id, tab_name, preset = t4_app_spec
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name, [
                 c.layout_item(focus_id, 0, 0, 20, 9, params=preset),
@@ -383,11 +383,11 @@ def build() -> None:
         dashboard_name = f"{app_name} Board"
         note_text = f"{app_name} is live from {desk['backend']}: {note_term} ready."
         convention = c.stamp_consistency(widgets)
-        widget_words = "; ".join(
-            c.widget_requirements_text(wid, definition)
-            for wid, definition in widgets.items()
+        t4_widget_words = "; ".join(
+            c.widget_requirements_text(wid, widget_definition)
+            for wid, widget_definition in widgets.items()
         )
-        widget_words += f". Desk convention: {convention}"
+        t4_widget_words += f". Desk convention: {convention}"
         configure_words = (
             f"set {param_name} to {json.dumps(set_value)} on the opened "
             f"`{focus_id}` widget"
@@ -401,17 +401,17 @@ def build() -> None:
             "tags": ["build-openbb-apps", "widgets-json", "apps-json", "params", "orchestration"],
             "prompt": c.phrased(sid, [
                 (f"End to end. Publish \"{desk['backend']}\" at {desk['url']} - "
-                 f"widgets.json: {widget_words}. apps.json: {app_words}. Then "
+                 f"widgets.json: {t4_widget_words}. apps.json: {app_words}. Then "
                  f"instantiate \"{app_name}\" from that backend into a dashboard "
                  f"named \"{dashboard_name}\", {configure_words}, and leave a note titled "
                  f"\"{app_name}\" that says exactly: \"{note_text}\""),
                 (f"Build, publish, open, configure, document. \"{desk['backend']}\" "
-                 f"({desk['url']}) serves {widget_words} and ships {app_words}. "
+                 f"({desk['url']}) serves {t4_widget_words} and ships {app_words}. "
                  f"Open it as \"{dashboard_name}\" via manage_apps, "
                  f"{configure_words}, then add a "
                  f"note \"{app_name}\" saying: \"{note_text}\""),
                 (f"Four steps: add \"{desk['backend']}\" at {desk['url']} with "
-                 f"{widget_words} and {app_words}; instantiate \"{app_name}\" as "
+                 f"{t4_widget_words} and {app_words}; instantiate \"{app_name}\" as "
                  f"\"{dashboard_name}\"; {configure_words}; add a note titled \"{app_name}\" with "
                  f"the text \"{note_text}\"."),
             ]),

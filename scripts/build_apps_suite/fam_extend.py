@@ -3,8 +3,24 @@
 from __future__ import annotations
 
 import json
+from typing import Any
 
 from . import common as c
+
+JsonObject = dict[str, Any]
+RepairSpec = tuple[
+    str,
+    str,
+    JsonObject,
+    JsonObject,
+    str,
+    JsonObject,
+    JsonObject,
+    str,
+    tuple[str, str, str, str],
+    str,
+    tuple[JsonObject | None, str, str],
+]
 
 
 def _copy(definition: dict) -> dict:
@@ -250,7 +266,7 @@ def build() -> None:
     # ------------------------------------------------------------------ r2
     # Words-only modifications over served state; each cell applies a policy
     # config change and fixes a bad parameter type while preserving a sibling.
-    t2_specs = [
+    t2_specs: list[tuple[str, str, JsonObject, str, str, str, str, str]] = [
         ("vol", "vol_screener",
          {"staleTime": 600000, "category": "Volatility"},
          "vol_regime_metric",
@@ -538,7 +554,7 @@ def build() -> None:
 
     # ------------------------------------------------------------------ r4
     # Diagnose, repair, extend the served app, instantiate, configure, and document.
-    t4_specs = []
+    t4_specs: list[RepairSpec] = []
 
     vol_focus = c.desk_widget("vol", "vix_advanced")
     vol_add = _with_config(

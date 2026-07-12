@@ -152,8 +152,8 @@ def _values(rng: random.Random, kind: str, count: int) -> list[int | float]:
 
 def _series_values(rng: random.Random, kind: str, count: int) -> list[int | float]:
     if kind == "negative_dollars":
-        current = -rng.randrange(40_000, 160_001, 500)
-        values = []
+        current: int | float = -rng.randrange(40_000, 160_001, 500)
+        values: list[int | float] = []
         for _ in range(count):
             current += rng.randrange(-12_000, 12_001, 500)
             values.append(min(-5_000, max(-250_000, current)))

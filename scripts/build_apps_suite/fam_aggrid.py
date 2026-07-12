@@ -18,8 +18,13 @@ The v3 ladder (Didier alignment, 2026-07-08):
 """
 
 import json
+from typing import Any
 
 from . import common as c
+
+JsonObject = dict[str, Any]
+LayoutItemSpec = tuple[str, int, int, int, int]
+TabSpec = tuple[str, str, list[LayoutItemSpec]]
 
 
 def _strip(definition: dict, *keys: str) -> dict:
@@ -143,7 +148,9 @@ def build() -> None:
     # ------------------------------------------------------------------ r2
     # Composed requirements in words: columns derived from served rows PLUS a
     # second stated dimension (settings / type / render extras). No JSON given.
-    t2_specs = [
+    t2_specs: list[
+        tuple[str, str, str, str, str, list[JsonObject], JsonObject, str]
+    ] = [
         # (desk, widget_id, name, endpoint, description, rows, extra_dims,
         #  extra_text) — extra_dims patches the derived def; extra_text states
         #  the composed requirement in words.
@@ -239,7 +246,15 @@ def build() -> None:
     # ------------------------------------------------------------------ r3
     # The app takes shape: 2-3 widgets + a multi-tab app, all in words. The
     # derived table is the graded focus; siblings anchor; the app grades fully.
-    t3_specs = [
+    t3_specs: list[
+        tuple[
+            str,
+            tuple[str, str, str, str, list[JsonObject], JsonObject],
+            list[str],
+            tuple[str, str, list[TabSpec]],
+            bool,
+        ]
+    ] = [
         # (desk, focus=(widget_id, name, endpoint, description, rows, dims),
         #  siblings=[widget_id, ...], app=(name, desc,
         #  [(tab_id, tab_name, [(wid, x, y, w, h), ...]), ...]), hard)
@@ -370,7 +385,16 @@ def build() -> None:
     # Operate what you built: build + publish + instantiate + CONFIGURE +
     # document (proxy r5: without the configure step, r4's operate legs were
     # nearly free and r4 tied r3).
-    t4_specs = [
+    t4_specs: list[
+        tuple[
+            str,
+            tuple[str, str, str, str, list[JsonObject]],
+            list[str],
+            tuple[str, str, str, str],
+            str,
+            tuple[JsonObject, str],
+        ]
+    ] = [
         # (desk, focus=(widget_id, name, endpoint, description, rows), sibling,
         #  app=(name, desc, tab_id, tab_name), note_term,
         #  configure=(param, set_value))
@@ -412,9 +436,9 @@ def build() -> None:
          "season",
          (c.text_param("ticker", "Ticker", "AAPL", "Ticker in focus."), "MSFT")),
     ]
-    for desk_key, focus_spec, sibling_ids, app_spec, note_term, configure in t4_specs:
+    for desk_key, t4_focus_spec, sibling_ids, t4_app_spec, note_term, configure in t4_specs:
         desk = c.desk(desk_key)
-        widget_id, name, endpoint, description, rows = focus_spec
+        widget_id, name, endpoint, description, rows = t4_focus_spec
         config_param, set_value = configure
         focus = c.derive_table_def(name, description, endpoint, rows,
                                    params=[config_param])
@@ -422,7 +446,7 @@ def build() -> None:
         for sib in sibling_ids:
             widgets[sib] = c.desk_widget(desk_key, sib)
         sibling_id = sibling_ids[0]
-        app_name, app_desc, tab_id, tab_name = app_spec
+        app_name, app_desc, tab_id, tab_name = t4_app_spec
         # r4 writes what r3 writes (two tabs + a fanned-out convention) and
         # then OPERATES it — proxy r3 found a r3/r4 inversion when r4's
         # built content was lighter than r3's.

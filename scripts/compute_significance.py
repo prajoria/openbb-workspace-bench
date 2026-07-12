@@ -217,7 +217,7 @@ def main() -> int:
                 ),
             }
         ranked = sorted(outcomes, key=lambda slug: -models[slug]["all"]["passed"])
-        pairs = []
+        pairs: list[dict[str, object]] = []
         for i, a in enumerate(ranked):
             for b_slug in ranked[i + 1 :]:
                 shared = set(outcomes[a]) & set(outcomes[b_slug])
@@ -278,7 +278,10 @@ def main() -> int:
             )
         for i in range(len(ranked) - 1):
             pair = next(p for p in pairs if p["a"] == ranked[i] and p["b"] == ranked[i + 1])
-            verdict = "separable" if pair["mcnemar_p"] < 0.05 else "NOT separable"
+            p_value_raw = pair["mcnemar_p"]
+            assert isinstance(p_value_raw, (int, float))
+            p_value = float(p_value_raw)
+            verdict = "separable" if p_value < 0.05 else "NOT separable"
             print(
                 f"    {pair['a']} vs {pair['b']}: "
                 f"+{pair['a_pass_b_fail']}/-{pair['a_fail_b_pass']} discordant, "

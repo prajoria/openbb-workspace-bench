@@ -454,7 +454,7 @@ def build() -> None:
                        "Trial readout ticker filter."),
           "ticker_scope", "MRNA")),
     ]
-    for desk_key, focus_id, focus, sibling_ids, app_spec, note_term, configure in t4_specs:
+    for desk_key, focus_id, focus, sibling_ids, t4_app_spec, note_term, configure in t4_specs:
         desk = c.desk(desk_key)
         focus = json.loads(json.dumps(focus))
         widgets = {focus_id: focus}
@@ -463,7 +463,7 @@ def build() -> None:
         sibling_id = sibling_ids[0]
         config_param, param_name, set_value = configure
         focus.setdefault("params", []).append(json.loads(json.dumps(config_param)))
-        app_name, app_desc, tab_id, tab_name = app_spec
+        app_name, app_desc, tab_id, tab_name = t4_app_spec
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name, [c.layout_item(focus_id, 0, 0, 20, 10)]),
             ("status", "Status", [c.layout_item(sibling_id, 0, 0, 8, 6)]),

@@ -43,7 +43,8 @@ def _widget_checks(backend_name: str, widget_id: str, definition: dict) -> dict:
 
     check = c.widget_def_checks(backend_name, widget_id, definition)
     expect = check.setdefault("expect", {})
-    data = definition.get("data") if isinstance(definition.get("data"), dict) else {}
+    raw_data = definition.get("data")
+    data = raw_data if isinstance(raw_data, dict) else {}
     for key in ("defaultSymbol", "updateFrequency", "wsRowIdColumn"):
         if key in data:
             expect[f"data.{key}"] = data[key]
@@ -393,7 +394,7 @@ def build() -> None:
             c.widget_requirements_text(wid, definition, omit_params=omit)
             for wid, definition in widgets.items()
         )
-        if shared_param:
+        if shared_param and grouped_ids is not None:
             widget_words += " " + c.shared_param_note(shared_param, grouped_ids)
         else:
             convention = c.stamp_consistency(widgets)

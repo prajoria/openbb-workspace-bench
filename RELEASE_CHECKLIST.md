@@ -5,7 +5,7 @@ Use this checklist before announcing a public Workspace Bench release.
 ## Required
 
 - [ ] `uv run --extra dev ruff check src tests scripts examples` passes.
-- [ ] `uv run --extra dev mypy src/workspace_bench` passes.
+- [ ] `uv run --extra dev mypy src scripts examples` passes.
 - [ ] `uv run --extra dev pytest` passes.
 - [ ] `uv run python scripts/audit_task_identity.py` reports 0 findings across 548 tasks, including the 236/236 build-prompt specification lint and 12 experimental code-task identities.
 - [ ] `uv run python scripts/report_prompt_stats.py` reports unique prompts within the documented 180-word cap plus current specification-level and measured-difficulty statistics.
