@@ -1,20 +1,20 @@
 """Generate the bundled WorkspaceBench task pack (tool-centric ladders).
 
 TMax-style compositional generation, restructured so that **every family is
-anchored on one MCP tool and carries a complete t0-t4 ladder**:
+anchored on one MCP tool and carries a complete r0-r4 ladder**:
 
     15 tool families x 5 levels x 4 tasks = 300
 
 Tiers are structural (composition, pathology, discovery pressure, budget),
 never adjectives. Difficulty labels are balanced across the suite rather than
-used as level names: t0 is easy, t2 is medium, t4 is hard, while each t1 cell
-splits 2 easy / 2 medium and each t3 cell splits 2 medium / 2 hard. This yields
+used as level names: r0 is easy, r2 is medium, r4 is hard, while each r1 cell
+splits 2 easy / 2 medium and each r3 cell splits 2 medium / 2 hard. This yields
 90 easy / 120 medium / 90 hard for the 300-task lattice. Higher levels
-*compose* the anchor tool with others, so a t4 run requires several MCP tools in
+*compose* the anchor tool with others, so a r4 run requires several MCP tools in
 a single episode while the anchor stays central.
 
-Discipline rule: where a task enforces schema-before-create, levels t0-t2
-instruct the discipline explicitly in the prompt; levels t3-t4 expect it
+Discipline rule: where a task enforces schema-before-create, levels r0-r2
+instruct the discipline explicitly in the prompt; levels r3-r4 expect it
 unprompted — looking before touching without being told is part of what makes
 the upper levels hard.
 
@@ -36,9 +36,12 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from workspace_bench.core.suite_checks import task_payload_digest
+from workspace_bench.workspace.fixtures import get_fixture_backend
+
 REPO = Path(__file__).resolve().parents[1]
 STARK = json.loads((REPO / "src/workspace_bench/workspace/data/stark_enterprise.json").read_text())
-BUNDLED_OUT_DIR = REPO / "src/workspace_bench/core/task_suites/workspace_bench_v1"
+BUNDLED_OUT_DIR = REPO / "src/workspace_bench/core/task_suites/core"
 OUT_DIRS = (BUNDLED_OUT_DIR,)
 
 STK = "Bench Stark Enterprise"
@@ -53,12 +56,178 @@ TRACE_FULL = {
 }
 TRACE_BASIC = {"max_invalid_tool_calls": 0, "max_repeated_snapshots": 1}
 
-TIER_DIFFICULTY = {"t0": "easy", "t1": "easy", "t2": "medium", "t3": "hard", "t4": "hard"}
-LEVEL_SLACK = {"t0": 3, "t1": 3, "t2": 3, "t3": 3, "t4": 2}
+RUNG_DIFFICULTY = {"r0": "easy", "r1": "easy", "r2": "medium", "r3": "hard", "r4": "hard"}
+RUNG_SLACK = {"r0": 3, "r1": 3, "r2": 3, "r3": 3, "r4": 2}
 
 SCENARIOS: list[dict] = []
 CELL_COUNTS: dict[tuple[str, str], int] = defaultdict(int)
 PROMPT_POOL_SIZES: dict[str, int] = {}
+
+
+# Curated public identities for tasks whose authored ids contain generator
+# coordinates, repeated stems, or overly long enterprise widget paths. Keep
+# this explicit: already-good ids must remain byte-identical, while future
+# audits can point directly at the legacy construction that needs cleanup.
+PUBLIC_ID_RENAMES = {
+    "add_widget_earnings_estimates_monitor_post_earnings_post_earnings_checklist_3":
+        "register_backend_and_add_post_earnings_checklist",
+    "add_widget_holdings_table_2": "register_backend_and_add_holdings_table",
+    "add_widget_macro_timeseries_1": "register_backend_and_add_macro_timeseries",
+    "add_widget_price_performance_0": "register_backend_and_add_price_performance",
+    "cross_equity_research_workbench_company_ownership_snapshot_risk_metrics_2":
+        "register_two_backends_ownership_snapshot_and_risk_metrics",
+    "cross_fundamental_metrics_holdings_table_3":
+        "register_two_backends_fundamental_metrics_and_holdings_table",
+    "cross_latest_news_yield_curve_0":
+        "register_two_backends_latest_news_and_yield_curve",
+    "cross_sector_exposure_macro_timeseries_1":
+        "register_two_backends_sector_exposure_and_macro_timeseries",
+    "refresh_earnings_estimates_monitor_post_earnings_post_earnings_checklist_3":
+        "refresh_backend_before_building_post_earnings_checklist",
+    "refresh_holdings_table_2": "refresh_backend_before_building_holdings_table",
+    "refresh_macro_timeseries_1": "refresh_backend_before_building_macro_timeseries",
+    "refresh_price_performance_0": "refresh_backend_before_building_price_performance",
+    "alerts_47": "remove_top_alerts",
+    "dup_news_12": "remove_duplicate_latest_news",
+    "dup_performance_18": "remove_duplicate_price_performance",
+    "dup_status_48": "remove_duplicate_vendor_sla_status",
+    "dup_timeseries_17": "remove_duplicate_macro_timeseries",
+    "news_12": "remove_latest_news",
+    "note_exposure_16": "remove_duplicate_sector_exposure_and_document",
+    "note_history_17": "remove_duplicate_estimate_history_and_document",
+    "note_metrics_20": "remove_duplicate_fundamental_metrics_and_document",
+    "note_orders_36": "remove_duplicate_live_orders_and_document",
+    "performance_18": "remove_price_performance",
+    "then_fix_news_aapl_12": "deduplicate_and_fix_latest_news",
+    "then_fix_performance_nvda_18": "deduplicate_and_fix_price_performance",
+    "then_fix_status_escalated_48": "deduplicate_and_fix_vendor_sla_status",
+    "then_fix_timeseries_dgs2_17": "deduplicate_and_fix_macro_timeseries",
+    "timeseries_17": "remove_macro_timeseries",
+    "deduplicate_latest_news_0": "find_duplicate_latest_news",
+    "deduplicate_macro_timeseries_1": "find_duplicate_macro_timeseries",
+    "deduplicate_rebalance_scenario_lab_drift_drift_by_sleeve_3":
+        "find_duplicate_drift_by_sleeve",
+    "deduplicate_risk_metrics_2": "find_duplicate_risk_metrics",
+    "fix_estimate_history_1": "find_and_fix_misconfigured_estimate_history",
+    "fix_macro_timeseries_2": "find_and_fix_misconfigured_macro_timeseries",
+    "fix_price_performance_0": "find_and_fix_misconfigured_price_performance",
+    "fix_quant_research_backtest_lab_risk_model_factor_exposure_table_3":
+        "find_and_fix_misconfigured_factor_exposure_table",
+    "overlap_holdings_table_2": "inspect_and_repair_overlap_holdings_table",
+    "overlap_macro_timeseries_1": "inspect_and_repair_overlap_macro_timeseries",
+    "overlap_price_performance_0": "inspect_and_repair_overlap_price_performance",
+    "overlap_reporting_factsheet_studio_commentary_disclosure_checklist_3":
+        "inspect_and_repair_overlap_disclosure_checklist",
+    "read_holdings_table_2": "inspect_holdings_table",
+    "read_macro_timeseries_1": "inspect_macro_timeseries",
+    "read_portfolio_command_center_overview_workflow_overview_3":
+        "inspect_workflow_overview",
+    "read_price_performance_0": "inspect_price_performance",
+    "repair_brief_macro_timeseries_1": "ambient_repair_and_brief_macro_timeseries",
+    "repair_brief_price_performance_0": "ambient_repair_and_brief_price_performance",
+    "repair_brief_reporting_factsheet_studio_factsheets_risk_stats_3":
+        "ambient_repair_and_brief_risk_stats",
+    "repair_brief_sector_exposure_2": "ambient_repair_and_brief_sector_exposure",
+    "grid_grid_eq": "equity_three_widget_grid",
+    "grid_grid_eq_mixed": "mixed_equity_three_widget_grid",
+    "grid_grid_macro": "macro_three_widget_grid",
+    "grid_grid_portfolio": "portfolio_three_widget_grid",
+    "overlap_overlap_estimates_fund_msft": "repair_msft_estimates_overlap",
+    "overlap_overlap_macro": "repair_macro_overlap",
+    "overlap_overlap_portfolio": "repair_portfolio_overlap",
+    "overlap_overlap_price_news_aapl": "repair_aapl_price_news_overlap",
+    "companion_sector_corporate_access_meeting_notes_claims_evidence_and_sign_off_history_3":
+        "options_constrained_pair_for_evidence_and_sign_off_history",
+    "companion_sector_sector_exposure_2":
+        "options_constrained_pair_for_sector_exposure",
+    "companion_series_macro_timeseries_1":
+        "options_constrained_pair_for_macro_timeseries",
+    "companion_symbol_price_performance_0":
+        "options_constrained_pair_for_price_performance",
+    "place_sector_compliance_surveillance_hub_audit_access_and_export_logs_11":
+        "options_constrained_placement_for_access_and_export_logs",
+    "place_sector_sector_exposure_10":
+        "options_constrained_placement_for_sector_exposure",
+    "place_series_macro_timeseries_9":
+        "options_constrained_placement_for_macro_timeseries",
+    "place_symbol_price_performance_8":
+        "options_constrained_placement_for_price_performance",
+    "schema_sector_client_360_portfolio_view_exposure_summary_7":
+        "discover_schema_then_options_for_exposure_summary",
+    "schema_sector_sector_exposure_6":
+        "discover_schema_then_options_for_sector_exposure",
+    "schema_series_macro_timeseries_5":
+        "discover_schema_then_options_for_macro_timeseries",
+    "schema_symbol_price_performance_4":
+        "discover_schema_then_options_for_price_performance",
+    "sector_client_360_meeting_prep_relationship_metrics_3":
+        "use_sector_options_for_relationship_metrics",
+    "sector_sector_exposure_2": "use_sector_options_for_sector_exposure",
+    "series_macro_timeseries_1": "use_series_options_for_macro_timeseries",
+    "symbol_price_performance_0": "use_symbol_options_for_price_performance",
+    "fetch_workspace_session_context_1": "session_context_grounding_note",
+    "fetch_workspace_session_context_3": "session_context_grounding_review",
+    "fetch_workspace_tool_usage_0": "tool_usage_schema_note",
+    "fetch_workspace_tool_usage_2": "tool_usage_schema_summary",
+    "session_tab_ops_liquidity_tca_workbench_tca_slippage_by_algo":
+        "session_prompt_ops_slippage",
+    "tool_usage_healthcare_research_dashboard_documents_healthcare_thesis_note_3":
+        "follow_tool_usage_prompt_for_healthcare_thesis_note",
+    "tool_usage_macro_timeseries_1": "follow_tool_usage_prompt_for_macro_timeseries",
+    "tool_usage_price_performance_0":
+        "follow_tool_usage_prompt_for_price_performance",
+    "tool_usage_risk_metrics_2": "follow_tool_usage_prompt_for_risk_metrics",
+    "period_mtd_56": "set_portfolio_snapshot_period_to_mtd",
+    "pick_series_dgs2_17": "update_only_the_dgs2_macro_timeseries",
+    "pick_symbol_msft_18": "update_only_the_msft_price_performance",
+    "pick_symbol_nvda_12": "update_only_the_nvda_latest_news",
+    "pick_vendor_factset_48": "update_only_the_factset_vendor_sla_status",
+    "series_dgs10_17": "set_macro_timeseries_series_to_dgs10",
+    "series_fedfunds_17": "update_macro_timeseries_cpiaucsl_to_fedfunds",
+    "status_escalated_44": "update_rejected_orders_open_to_escalated",
+    "symbol_aapl_18": "set_price_performance_symbol_to_aapl",
+    "symbol_msft_12": "set_latest_news_symbol_to_msft",
+    "symbol_nvda_17": "update_estimate_history_aapl_to_nvda",
+    "symbol_nvda_20": "update_fundamental_metrics_msft_to_nvda",
+}
+
+
+def public_id(task_id: str) -> str:
+    """Return the durable public identity for an authored task id."""
+
+    return PUBLIC_ID_RENAMES.get(task_id, task_id)
+
+
+def clean_title(title: str) -> str:
+    """Remove adjacent repeated words introduced by joined title stems."""
+
+    words = title.split()
+    cleaned: list[str] = []
+    for word in words:
+        normalized = re.sub(r"[^a-z0-9]", "", word.lower())
+        previous = re.sub(r"[^a-z0-9]", "", cleaned[-1].lower()) if cleaned else ""
+        if normalized and normalized == previous:
+            continue
+        cleaned.append(word)
+    return " ".join(cleaned)
+
+
+def clean_prompt(prompt: str) -> str:
+    """Replace known machine-glued enterprise ids with business names."""
+
+    replacements = {
+        "earnings_estimates_monitor_post_earnings_post_earnings_checklist":
+            "Post-Earnings Checklist",
+        "rebalance_scenario_lab_drift_drift_by_sleeve": "Drift by Sleeve",
+        "rebalance_scenario_lab_overview_workflow_overview": "Workflow Overview",
+        "portfolio_command_center_attribution_attribution_summary": "Attribution Summary",
+        "execution_desk_fills_fills_table": "Fills Table",
+        "quant_research_backtest_lab_backtest_backtest_performance":
+            "Backtest Performance",
+    }
+    for scar, replacement in replacements.items():
+        prompt = prompt.replace(scar, replacement)
+    return prompt
 
 
 def phrased(task_id: str, variants: list[str]) -> str:
@@ -71,7 +240,8 @@ def phrased(task_id: str, variants: list[str]) -> str:
     assert previous == len(variants), (
         f"prompt site {site} used pool sizes {previous} and {len(variants)}"
     )
-    index = int(hashlib.md5(task_id.encode()).hexdigest(), 16) % len(variants)
+    stable_id = public_id(task_id)
+    index = int(hashlib.md5(stable_id.encode()).hexdigest(), 16) % len(variants)
     return variants[index]
 
 
@@ -174,18 +344,18 @@ def wf(origin: str, widget_id: str = "") -> tuple[str, str]:
 
 
 def difficulty_for(level: str, cell_index: int) -> str:
-    if level == "t0":
+    if level == "r0":
         return "easy"
-    if level == "t1":
+    if level == "r1":
         return "easy" if cell_index <= 2 else "medium"
-    if level == "t2":
+    if level == "r2":
         return "medium"
-    if level == "t3":
+    if level == "r3":
         return "medium" if cell_index <= 2 else "hard"
     return "hard"
 
 
-_LEVEL_TO_CATEGORY = {
+_CATEGORY_CODE_TO_CATEGORY = {
     "L0": "read", "L1": "single-widget", "L2": "dashboard",
     "L3": "platform", "L4": "repair", "L5": "platform",
 }
@@ -196,18 +366,95 @@ def add(family: str, level: str, task: dict) -> None:
     cell_index = CELL_COUNTS[(family, level)]
     task.setdefault("domain", "finance")
     task.setdefault("source", "workspace-bench-gen")
-    # tasks in this module declare the legacy L-code; map it to the category
-    # axis and carry the difficulty level as the t-code.
-    task["category"] = _LEVEL_TO_CATEGORY[task.pop("level", "L1")]
-    task["level"] = level
+    task["schema_version"] = "workspace-bench-task"
+    # Templates declare a category code; map it to the public category axis.
+    task["category"] = _CATEGORY_CODE_TO_CATEGORY[task.pop("category_code", "L1")]
+    task["family"] = family
+    task["id"] = public_id(task["id"])
+    task["title"] = clean_title(task["title"])
+    task["prompt"] = clean_prompt(task["prompt"])
+    assert re.fullmatch(r"[a-z0-9]+(?:_[a-z0-9]+)*", task["id"]), task["id"]
     task["difficulty"] = difficulty_for(level, cell_index)
     tags = task.setdefault("tags", [])
-    tags.insert(0, f"level-{level}")
     tags.insert(0, f"family-{family}")
+    task.setdefault("success", {}).setdefault("workspace_checks", {})[
+        "preserve_other_dashboards"
+    ] = True
+    _ensure_widget_discovery(task)
+    if family == "backends":
+        _attach_backend_runtime_checks(task)
     task.setdefault("limits", {})["max_turns"] = (
-        len(task["oracle_tool_calls"]) + LEVEL_SLACK[level])
-    task["_family"], task["_level"] = family, level
+        len(task["oracle_tool_calls"]) + RUNG_SLACK[level])
+    task["_family"], task["_rung"] = family, level
     SCENARIOS.append(task)
+
+
+def _attach_backend_runtime_checks(task: dict) -> None:
+    """Embed the deterministic catalogs registered by core backend tasks."""
+
+    fixture_names = []
+    for call in task.get("oracle_tool_calls", []):
+        args = call.get("args", {})
+        if call.get("tool") == "manage_backends" and args.get("operation") == "add":
+            name = args.get("name")
+            if isinstance(name, str) and name not in fixture_names:
+                fixture_names.append(name)
+    datasets = []
+    for fixture_name in fixture_names:
+        backend = get_fixture_backend(fixture_name)
+        for widget_id, definition in sorted(backend.widgets_json().items()):
+            payload = backend.fetch_widget_data(widget_id, {})
+            fields = sorted(_response_fields(payload))
+            datasets.append(
+                {
+                    "name": f"{backend.slug}__{widget_id}",
+                    "widget_id": widget_id,
+                    "fields": fields,
+                    "path": str(definition.get("endpoint", "/")),
+                    "payload": payload,
+                }
+            )
+    if datasets:
+        task.setdefault("success", {})["runtime_checks"] = {
+            "datasets": datasets,
+            "pinned_paths": False,
+        }
+
+
+def _response_fields(payload: object) -> set[str]:
+    if isinstance(payload, dict):
+        fields = set(payload)
+        for value in payload.values():
+            fields.update(_response_fields(value))
+        return fields
+    if isinstance(payload, list):
+        fields: set[str] = set()
+        for value in payload:
+            fields.update(_response_fields(value))
+        return fields
+    return set()
+
+
+def _ensure_widget_discovery(task: dict) -> None:
+    """Insert a same-origin list before schema/create use when listing is available."""
+
+    if "list_available_widgets" not in task.get("allowed_tools", []):
+        return
+    listed: set[str] = set()
+    calls: list[dict] = []
+    for call in task.get("oracle_tool_calls", []):
+        name = call.get("tool")
+        args = call.get("args", {})
+        origin = str(args.get("origin") or args.get("backend_name") or "")
+        if name in {"get_widget_schema", "create_widget"} and origin not in listed:
+            calls.append(
+                {"tool": "list_available_widgets", "args": {"origin": origin}}
+            )
+            listed.add(origin)
+        calls.append(call)
+        if name == "list_available_widgets" and origin:
+            listed.add(origin)
+    task["oracle_tool_calls"] = calls
 
 
 def seeded(name: str, widgets: list[dict], tabs: list[dict] | None = None) -> dict:
@@ -282,12 +529,12 @@ CREATE_T0 = [
 for origin, widget_id, data_args in CREATE_T0:
     workflow, sub = wf(origin, widget_id)
     slug = f"{widget_id}_{str(data_args.get('symbol', data_args.get('series', 'plain'))).lower()}"
-    add("create", "t0", {
-        "id": f"gen_t0_create_{slug}",
+    add("create", "r0", {
+        "id": f"{slug}",
         "title": f"Create {wname(origin, widget_id)}",
-        "level": "L1", "capability": "widget-creation", "workflow": workflow,
+        "category_code": "L1", "capability": "widget-creation", "workflow": workflow,
         "subdomain": sub, "tags": ["widget-creation"],
-        "prompt": phrased(f"gen_t0_create_{slug}", [
+        "prompt": phrased(f"{slug}", [
             (f"Create a {wname(origin, widget_id)} widget (widget_id {widget_id}) from "
              f"the {origin} backend on the active dashboard"
              + (f" with data_args {json.dumps(data_args)}." if data_args else ".")),
@@ -321,12 +568,12 @@ for origin, widget_id, data_args in CREATE_T1:
     workflow, sub = wf(origin, widget_id)
     slug = f"{widget_id}_{str(data_args.get('symbol', data_args.get('series', 'plain'))).lower()}"
     value = data_args.get("symbol") or data_args.get("series")
-    add("create", "t1", {
-        "id": f"gen_t1_create_{slug}",
+    add("create", "r1", {
+        "id": f"{slug}",
         "title": f"Add {wname(origin, widget_id)} With Discovery",
-        "level": "L1", "capability": "widget-creation", "workflow": workflow,
+        "category_code": "L1", "capability": "widget-creation", "workflow": workflow,
         "subdomain": sub, "tags": ["widget-creation", "schema-discovery"],
-        "prompt": phrased(f"gen_t1_create_{slug}", [
+        "prompt": phrased(f"{slug}", [
             (f"Add the {wname(origin, widget_id)} widget"
              + (f" for {value}" if value else "")
              + " to the active dashboard. Discover the widget catalog and its schema "
@@ -361,12 +608,12 @@ CREATE_T2 = [
 for origin, widget_id, data_args, param, (x, y, w, h) in CREATE_T2:
     workflow, sub = wf(origin, widget_id)
     value = data_args[param]
-    add("create", "t2", {
-        "id": f"gen_t2_create_place_{widget_id}_{str(value).lower()}",
+    add("create", "r2", {
+        "id": f"place_{widget_id}_{str(value).lower()}",
         "title": f"Add And Place {wname(origin, widget_id)} ({value})",
-        "level": "L1", "capability": "widget-creation", "workflow": workflow,
+        "category_code": "L1", "capability": "widget-creation", "workflow": workflow,
         "subdomain": sub, "tags": ["widget-creation", "layout"],
-        "prompt": phrased(f"gen_t2_create_place_{widget_id}_{str(value).lower()}", [
+        "prompt": phrased(f"place_{widget_id}_{str(value).lower()}", [
             (f"Add the {wname(origin, widget_id)} widget for {value} and place it at "
              f"exactly x={x}, y={y}, width {w}, height {h}. Fetch the widget schema and "
              f"confirm the {param} value through the parameter options before creating."),
@@ -405,13 +652,13 @@ CREATE_T3 = [
 ]
 for origin, seed_id, seed_args, new_id, new_args in CREATE_T3:
     workflow, sub = wf(origin, new_id)
-    add("create", "t3", {
-        "id": f"gen_t3_create_preserve_{new_id}_{str(new_args.get('symbol', 'plain')).lower()}",
+    add("create", "r3", {
+        "id": f"preserve_{new_id}_{str(new_args.get('symbol', 'plain')).lower()}",
         "title": f"Extend Dashboard With {wname(origin, new_id)}",
-        "level": "L1", "capability": "widget-creation", "workflow": workflow,
+        "category_code": "L1", "capability": "widget-creation", "workflow": workflow,
         "subdomain": sub, "tags": ["widget-creation", "preservation"],
         "prompt": phrased(
-            f"gen_t3_create_preserve_{new_id}_{str(new_args.get('symbol', 'plain')).lower()}",
+            f"preserve_{new_id}_{str(new_args.get('symbol', 'plain')).lower()}",
             [
                 (f"This dashboard already has a {wname(origin, seed_id)} widget. Add the "
                  f"{wname(origin, new_id)} widget"
@@ -470,12 +717,12 @@ for slug, widgets, note_facts, note_text in CREATE_T4:
     for origin, widget_id, data_args in widgets:
         oracle += discovery(origin, widget_id, data_args)
     oracle.append(note_call("Build Note", note_text))
-    add("create", "t4", {
-        "id": f"gen_t4_create_cross_{slug}",
+    add("create", "r4", {
+        "id": f"cross_{slug}",
         "title": f"Cross-Backend Build: {slug.replace('_', ' ').title()}",
-        "level": "L2", "capability": "widget-creation", "workflow": workflow,
+        "category_code": "L2", "capability": "widget-creation", "workflow": workflow,
         "subdomain": sub, "tags": ["widget-creation", "cross-backend"],
-        "prompt": phrased(f"gen_t4_create_cross_{slug}", [
+        "prompt": phrased(f"cross_{slug}", [
             ("Add these two widgets to the active dashboard: "
              + " and ".join(f"the {wname(o, wid)} widget from {o}"
                              + (f" for {a.get('symbol') or a.get('series')}"
@@ -525,13 +772,13 @@ UPDATE_T0 = [
 ]
 for origin, widget_id, seed_args, param, new_value in UPDATE_T0:
     workflow, sub = wf(origin, widget_id)
-    add("update", "t0", {
-        "id": f"gen_t0_update_{param}_{str(new_value).lower().replace(' ', '_')}_{stark_value(widget_id):.0f}",
+    add("update", "r0", {
+        "id": f"{param}_{str(new_value).lower().replace(' ', '_')}_{stark_value(widget_id):.0f}",
         "title": f"Set {wname(origin, widget_id)} {param} To {new_value}",
-        "level": "L1", "capability": "widget-update", "workflow": workflow,
+        "category_code": "L1", "capability": "widget-update", "workflow": workflow,
         "subdomain": sub, "tags": ["update-widget"],
         "prompt": phrased(
-            f"gen_t0_update_{param}_{str(new_value).lower().replace(' ', '_')}_{stark_value(widget_id):.0f}",
+            f"{param}_{str(new_value).lower().replace(' ', '_')}_{stark_value(widget_id):.0f}",
             [
                 (f"Set the {wname(origin, widget_id)} widget's {param} to {new_value}. "
                  "Update the existing widget."),
@@ -568,13 +815,13 @@ UPDATE_T1 = [
 for origin, widget_id, seed_args, param, new_value in UPDATE_T1:
     workflow, sub = wf(origin, widget_id)
     old_value = seed_args[param]
-    add("update", "t1", {
-        "id": f"gen_t1_update_{param}_{str(new_value).lower().replace(' ', '_')}_{stark_value(widget_id):.0f}",
+    add("update", "r1", {
+        "id": f"{param}_{str(new_value).lower().replace(' ', '_')}_{stark_value(widget_id):.0f}",
         "title": f"Update {wname(origin, widget_id)} ({old_value} To {new_value})",
-        "level": "L1", "capability": "widget-update", "workflow": workflow,
+        "category_code": "L1", "capability": "widget-update", "workflow": workflow,
         "subdomain": sub, "tags": ["update-widget"],
         "prompt": phrased(
-            f"gen_t1_update_{param}_{str(new_value).lower().replace(' ', '_')}_{stark_value(widget_id):.0f}",
+            f"{param}_{str(new_value).lower().replace(' ', '_')}_{stark_value(widget_id):.0f}",
             [
                 (f"The {wname(origin, widget_id)} widget currently shows {old_value}. "
                  f"Update the existing widget to {new_value}; do not create a new one and "
@@ -619,13 +866,13 @@ UPDATE_T2 = [
 for origin, widget_id, param, keep_value, target_value, new_value in UPDATE_T2:
     workflow, sub = wf(origin, widget_id)
     extra = {"limit": 5} if widget_id == "latest_news" else {}
-    add("update", "t2", {
-        "id": f"gen_t2_update_pick_{param}_{str(target_value).lower()}_{stark_value(widget_id):.0f}",
+    add("update", "r2", {
+        "id": f"pick_{param}_{str(target_value).lower()}_{stark_value(widget_id):.0f}",
         "title": f"Update Only The {target_value} {wname(origin, widget_id)}",
-        "level": "L1", "capability": "widget-update", "workflow": workflow,
+        "category_code": "L1", "capability": "widget-update", "workflow": workflow,
         "subdomain": sub, "tags": ["update-widget", "distractors"],
         "prompt": phrased(
-            f"gen_t2_update_pick_{param}_{str(target_value).lower()}_{stark_value(widget_id):.0f}",
+            f"pick_{param}_{str(target_value).lower()}_{stark_value(widget_id):.0f}",
             [
                 (f"This dashboard has two {wname(origin, widget_id)} widgets: one for "
                  f"{keep_value} and one for {target_value}. Update only the {target_value} "
@@ -677,12 +924,12 @@ UPDATE_T3 = [
 ]
 for slug, origin, widget_id, param, old_value, new_value, context in UPDATE_T3:
     workflow, sub = wf(origin, widget_id)
-    add("update", "t3", {
-        "id": f"gen_t3_update_repair_{slug}",
+    add("update", "r3", {
+        "id": f"repair_{slug}",
         "title": f"Repair {wname(origin, widget_id)}",
-        "level": "L4", "capability": "workspace-repair", "workflow": workflow,
+        "category_code": "L4", "capability": "workspace-repair", "workflow": workflow,
         "subdomain": sub, "tags": ["repair", "update-widget"],
-        "prompt": phrased(f"gen_t3_update_repair_{slug}", [
+        "prompt": phrased(f"repair_{slug}", [
             (f"{context} Repair the widget to {new_value} and add a note saying what "
              "was repaired, mentioning both values."),
             (f"{context} Repair the widget to {new_value}; then add a note saying what "
@@ -802,12 +1049,12 @@ for slug, origin, updates, note_facts, prompt_variants in UPDATE_T4:
                         "data_args": {changed_key: seed_args[changed_key]},
                         "min_count": 0, "max_count": 0})
     oracle.append(note_call("Repair Note", "Repaired: " + ", ".join(note_facts) + "."))
-    add("update", "t4", {
-        "id": f"gen_t4_update_double_{slug}",
+    add("update", "r4", {
+        "id": f"double_{slug}",
         "title": f"Double Repair: {slug.replace('_', ' ').title()}",
-        "level": "L4", "capability": "workspace-repair", "workflow": workflow,
+        "category_code": "L4", "capability": "workspace-repair", "workflow": workflow,
         "subdomain": sub, "tags": ["repair", "update-widget", "combo"],
-        "prompt": phrased(f"gen_t4_update_double_{slug}", prompt_variants),
+        "prompt": phrased(f"double_{slug}", prompt_variants),
         "fixtures": {"backends": [{"name": fixture_for(origin)}]},
         "initial_state": seeded("Double Repair Task", seeds),
         "allowed_tools": ["get_workspace_snapshot", "read_widget", "update_widget",
@@ -834,13 +1081,13 @@ DELETE_T0 = [
 ]
 for origin, widget_id, data_args in DELETE_T0:
     workflow, sub = wf(origin, widget_id)
-    add("delete", "t0", {
-        "id": f"gen_t0_delete_{widget_id.rsplit('_', 1)[-1]}_{stark_value(widget_id):.0f}",
+    add("delete", "r0", {
+        "id": f"{widget_id.rsplit('_', 1)[-1]}_{stark_value(widget_id):.0f}",
         "title": f"Remove {wname(origin, widget_id)}",
-        "level": "L1", "capability": "widget-update", "workflow": workflow,
+        "category_code": "L1", "capability": "widget-update", "workflow": workflow,
         "subdomain": sub, "tags": ["delete-widget"],
         "prompt": phrased(
-            f"gen_t0_delete_{widget_id.rsplit('_', 1)[-1]}_{stark_value(widget_id):.0f}",
+            f"{widget_id.rsplit('_', 1)[-1]}_{stark_value(widget_id):.0f}",
             [
                 (f"The {wname(origin, widget_id)} widget is no longer needed on this "
                  "dashboard. Remove it."),
@@ -873,13 +1120,13 @@ DELETE_T1 = [
 ]
 for origin, widget_id, data_args in DELETE_T1:
     workflow, sub = wf(origin, widget_id)
-    add("delete", "t1", {
-        "id": f"gen_t1_delete_dup_{widget_id.rsplit('_', 1)[-1]}_{stark_value(widget_id):.0f}",
+    add("delete", "r1", {
+        "id": f"dup_{widget_id.rsplit('_', 1)[-1]}_{stark_value(widget_id):.0f}",
         "title": f"Remove Duplicate {wname(origin, widget_id)}",
-        "level": "L1", "capability": "widget-update", "workflow": workflow,
+        "category_code": "L1", "capability": "widget-update", "workflow": workflow,
         "subdomain": sub, "tags": ["delete-widget"],
         "prompt": phrased(
-            f"gen_t1_delete_dup_{widget_id.rsplit('_', 1)[-1]}_{stark_value(widget_id):.0f}",
+            f"dup_{widget_id.rsplit('_', 1)[-1]}_{stark_value(widget_id):.0f}",
             [
                 (f"The dashboard has two identical {wname(origin, widget_id)} widgets. "
                  "Remove exactly one so a single copy remains; do not change the one that "
@@ -917,12 +1164,12 @@ DELETE_T2 = [
 for origin, widget_id, param, dup_value, keep_value in DELETE_T2:
     workflow, sub = wf(origin, widget_id)
     extra = {"limit": 5} if widget_id == "latest_news" else {}
-    add("delete", "t2", {
-        "id": f"gen_t2_delete_similar_{widget_id}_{dup_value.lower()}",
+    add("delete", "r2", {
+        "id": f"similar_{widget_id}_{dup_value.lower()}",
         "title": f"Remove Only The Duplicate {dup_value} Widget",
-        "level": "L1", "capability": "widget-update", "workflow": workflow,
+        "category_code": "L1", "capability": "widget-update", "workflow": workflow,
         "subdomain": sub, "tags": ["delete-widget", "distractors"],
-        "prompt": phrased(f"gen_t2_delete_similar_{widget_id}_{dup_value.lower()}", [
+        "prompt": phrased(f"similar_{widget_id}_{dup_value.lower()}", [
             (f"This dashboard has three {wname(origin, widget_id)} widgets: two "
              f"identical ones for {dup_value} and one for {keep_value}. Remove exactly "
              f"one duplicate {dup_value} widget; keep the other and keep the "
@@ -969,13 +1216,13 @@ DELETE_T3 = [
 ]
 for origin, widget_id, data_args in DELETE_T3:
     workflow, sub = wf(origin, widget_id)
-    add("delete", "t3", {
-        "id": f"gen_t3_delete_note_{widget_id.rsplit('_', 1)[-1]}_{stark_value(widget_id):.0f}",
+    add("delete", "r3", {
+        "id": f"note_{widget_id.rsplit('_', 1)[-1]}_{stark_value(widget_id):.0f}",
         "title": f"Remove Duplicate {wname(origin, widget_id)} And Document",
-        "level": "L4", "capability": "workspace-repair", "workflow": workflow,
+        "category_code": "L4", "capability": "workspace-repair", "workflow": workflow,
         "subdomain": sub, "tags": ["repair", "delete-widget"],
         "prompt": phrased(
-            f"gen_t3_delete_note_{widget_id.rsplit('_', 1)[-1]}_{stark_value(widget_id):.0f}",
+            f"note_{widget_id.rsplit('_', 1)[-1]}_{stark_value(widget_id):.0f}",
             [
                 (f"This dashboard has two identical {wname(origin, widget_id)} widgets. "
                  "Remove exactly one duplicate, then add a note saying the duplicate was "
@@ -1019,13 +1266,13 @@ DELETE_T4 = [
 for origin, widget_id, param, dup_value, new_value in DELETE_T4:
     workflow, sub = wf(origin, widget_id)
     extra = {"limit": 5} if widget_id == "latest_news" else {}
-    add("delete", "t4", {
-        "id": f"gen_t4_delete_then_fix_{widget_id.rsplit('_', 1)[-1]}_{str(new_value).lower()}_{stark_value(widget_id):.0f}",
+    add("delete", "r4", {
+        "id": f"then_fix_{widget_id.rsplit('_', 1)[-1]}_{str(new_value).lower()}_{stark_value(widget_id):.0f}",
         "title": f"Deduplicate And Fix {wname(origin, widget_id)}",
-        "level": "L4", "capability": "workspace-repair", "workflow": workflow,
+        "category_code": "L4", "capability": "workspace-repair", "workflow": workflow,
         "subdomain": sub, "tags": ["repair", "delete-widget", "combo"],
         "prompt": phrased(
-            f"gen_t4_delete_then_fix_{widget_id.rsplit('_', 1)[-1]}_{str(new_value).lower()}_{stark_value(widget_id):.0f}",
+            f"then_fix_{widget_id.rsplit('_', 1)[-1]}_{str(new_value).lower()}_{stark_value(widget_id):.0f}",
             [
                 (f"This dashboard has two identical {wname(origin, widget_id)} widgets for "
                  f"{dup_value}, and the desk actually needs {new_value}. Remove exactly one "
@@ -1108,13 +1355,13 @@ LAYOUT_T0 = [
      ]),
 ]
 for slug, widget_id, data_args, seed_layout, target, prompt_variants in LAYOUT_T0:
-    add("layout", "t0", {
-        "id": f"gen_t0_layout_{slug}",
+    add("layout", "r0", {
+        "id": f"{slug}",
         "title": f"Layout: {slug.replace('_', ' ').title()}",
-        "level": "L1", "capability": "layout-management",
+        "category_code": "L1", "capability": "layout-management",
         "workflow": "equity-tearsheet", "subdomain": "equity-research",
         "tags": ["layout"],
-        "prompt": phrased(f"gen_t0_layout_{slug}", prompt_variants),
+        "prompt": phrased(f"{slug}", prompt_variants),
         "fixtures": {"backends": [{"name": "equities"}]},
         "initial_state": seeded("Layout Task",
                                  [{"origin": EQ, "widget_id": widget_id,
@@ -1190,12 +1437,12 @@ LAYOUT_T1_ORIGINS = {"price_news_aapl": EQ, "estimates_fundamentals_msft": EQ,
 for slug, (wid_a, args_a, layout_a), (wid_b, args_b, seed_b, target_b), prompt_variants in LAYOUT_T1:
     origin = LAYOUT_T1_ORIGINS[slug]
     workflow, sub = wf(origin)
-    add("layout", "t1", {
-        "id": f"gen_t1_layout_preserve_{slug}",
+    add("layout", "r1", {
+        "id": f"preserve_{slug}",
         "title": f"Move Without Disturbing: {slug.replace('_', ' ').title()}",
-        "level": "L1", "capability": "layout-management", "workflow": workflow,
+        "category_code": "L1", "capability": "layout-management", "workflow": workflow,
         "subdomain": sub, "tags": ["layout", "preservation"],
-        "prompt": phrased(f"gen_t1_layout_preserve_{slug}", prompt_variants),
+        "prompt": phrased(f"preserve_{slug}", prompt_variants),
         "fixtures": {"backends": [{"name": fixture_for(origin)}]},
         "initial_state": seeded("Preserve Layout Task", [
             {"origin": origin, "widget_id": wid_a, "data_args": args_a,
@@ -1264,12 +1511,12 @@ LAYOUT_T2 = [
 ]
 for slug, origin, (wid_a, args_a, target_a), (wid_b, args_b, target_b), prompt_variants in LAYOUT_T2:
     workflow, sub = wf(origin)
-    add("layout", "t2", {
-        "id": f"gen_t2_layout_arrange_{slug}",
+    add("layout", "r2", {
+        "id": f"arrange_{slug}",
         "title": f"Arrange: {slug.replace('_', ' ').title()}",
-        "level": "L1", "capability": "layout-management", "workflow": workflow,
+        "category_code": "L1", "capability": "layout-management", "workflow": workflow,
         "subdomain": sub, "tags": ["layout", "multi-widget"],
-        "prompt": phrased(f"gen_t2_layout_arrange_{slug}", prompt_variants),
+        "prompt": phrased(f"arrange_{slug}", prompt_variants),
         "fixtures": {"backends": [{"name": fixture_for(origin)}]},
         "initial_state": seeded("Arrangement Task", [
             {"origin": origin, "widget_id": wid_a, "data_args": args_a,
@@ -1344,12 +1591,12 @@ LAYOUT_T3 = [
 ]
 for slug, origin, (wid_a, args_a, layout_a), (wid_b, args_b, seed_b, target_b), prompt_variants in LAYOUT_T3:
     workflow, sub = wf(origin)
-    add("layout", "t3", {
-        "id": f"gen_t3_layout_overlap_{slug}",
+    add("layout", "r3", {
+        "id": f"overlap_{slug}",
         "title": f"Repair Overlap: {slug.replace('_', ' ').title()}",
-        "level": "L4", "capability": "workspace-repair", "workflow": workflow,
+        "category_code": "L4", "capability": "workspace-repair", "workflow": workflow,
         "subdomain": sub, "tags": ["repair", "layout"],
-        "prompt": phrased(f"gen_t3_layout_overlap_{slug}", prompt_variants),
+        "prompt": phrased(f"overlap_{slug}", prompt_variants),
         "fixtures": {"backends": [{"name": fixture_for(origin)}]},
         "initial_state": seeded("Overlap Repair", [
             {"origin": origin, "widget_id": wid_a, "data_args": args_a,
@@ -1440,12 +1687,12 @@ for slug, origin, targets, prompt_variants in LAYOUT_T4:
          "layout": {"x": 2 + i * 4, "y": 2 + i * 11, "w": 16, "h": 9}}
         for i, (wid, args, _) in enumerate(targets)
     ]
-    add("layout", "t4", {
-        "id": f"gen_t4_layout_grid_{slug}",
+    add("layout", "r4", {
+        "id": f"grid_{slug}",
         "title": f"Three-Widget Grid: {slug.replace('_', ' ').title()}",
-        "level": "L1", "capability": "layout-management", "workflow": workflow,
+        "category_code": "L1", "capability": "layout-management", "workflow": workflow,
         "subdomain": sub, "tags": ["layout", "multi-widget", "combo"],
-        "prompt": phrased(f"gen_t4_layout_grid_{slug}", prompt_variants),
+        "prompt": phrased(f"grid_{slug}", prompt_variants),
         "fixtures": {"backends": [{"name": fixture_for(origin)}]},
         "initial_state": seeded("Grid Task", seeds),
         "allowed_tools": ["get_workspace_snapshot", "read_widget", "update_widget_layout"],
@@ -1511,13 +1758,13 @@ NOTE_T0 = [
      "FactSet feed degraded; fallback pricing is active."),
 ]
 for slug, name, prompt_variants, facts, text in NOTE_T0:
-    add("note", "t0", {
-        "id": f"gen_t0_note_{slug}",
+    add("note", "r0", {
+        "id": f"{slug}",
         "title": name,
-        "level": "L1", "capability": "workspace-inspection",
+        "category_code": "L1", "capability": "workspace-inspection",
         "workflow": "portfolio-morning-review", "subdomain": "portfolio-management",
         "tags": ["note"],
-        "prompt": phrased(f"gen_t0_note_{slug}", prompt_variants),
+        "prompt": phrased(f"{slug}", prompt_variants),
         "fixtures": {"backends": [{"name": "equities"}]},
         "initial_state": seeded("Notes Board", []),
         "allowed_tools": ["get_workspace_snapshot", "add_generative_widget"],
@@ -1571,12 +1818,12 @@ NOTE_T1 = [
 ]
 for slug, origin, widget_id, data_args, prompt_variants, facts, text in NOTE_T1:
     workflow, sub = wf(origin)
-    add("note", "t1", {
-        "id": f"gen_t1_note_fact_{slug}",
+    add("note", "r1", {
+        "id": f"fact_{slug}",
         "title": f"Grounded Note: {slug.replace('_', ' ').title()}",
-        "level": "L0", "capability": "workspace-inspection", "workflow": workflow,
+        "category_code": "L0", "capability": "workspace-inspection", "workflow": workflow,
         "subdomain": sub, "tags": ["note", "read-only"],
-        "prompt": phrased(f"gen_t1_note_fact_{slug}", prompt_variants),
+        "prompt": phrased(f"fact_{slug}", prompt_variants),
         "fixtures": {"backends": [{"name": fixture_for(origin)}]},
         "initial_state": seeded("Existing Review",
                                  [{"origin": origin, "widget_id": widget_id,
@@ -1645,13 +1892,13 @@ NOTE_T2 = [
      f"AAPL: gross margin {MARGIN['AAPL']}, net cash 54.0B."),
 ]
 for slug, widget_id, data_args, prompt_variants, facts, text in NOTE_T2:
-    add("note", "t2", {
-        "id": f"gen_t2_note_twofacts_{slug}",
+    add("note", "r2", {
+        "id": f"twofacts_{slug}",
         "title": f"Two-Fact Note: {slug.replace('_', ' ').title()}",
-        "level": "L0", "capability": "workspace-inspection",
+        "category_code": "L0", "capability": "workspace-inspection",
         "workflow": "equity-tearsheet", "subdomain": "equity-research",
         "tags": ["note", "read-only"],
-        "prompt": phrased(f"gen_t2_note_twofacts_{slug}", prompt_variants),
+        "prompt": phrased(f"twofacts_{slug}", prompt_variants),
         "fixtures": {"backends": [{"name": "equities"}]},
         "initial_state": seeded("Existing Review",
                                  [{"origin": EQ, "widget_id": widget_id,
@@ -1739,12 +1986,12 @@ for slug, origin, widgets, prompt_variants, facts, text in NOTE_T3:
         oracle.append({"tool": "get_widget_data",
                         "args": {"origin": origin, "widget_id": wid, "data_args": args}})
     oracle.append(note_call("Answer Note", text))
-    add("note", "t3", {
-        "id": f"gen_t3_note_synthesis_{slug}",
+    add("note", "r3", {
+        "id": f"synthesis_{slug}",
         "title": f"Synthesis Note: {slug.replace('_', ' ').title()}",
-        "level": "L0", "capability": "workspace-inspection", "workflow": workflow,
+        "category_code": "L0", "capability": "workspace-inspection", "workflow": workflow,
         "subdomain": sub, "tags": ["note", "read-only", "multi-widget"],
-        "prompt": phrased(f"gen_t3_note_synthesis_{slug}", prompt_variants),
+        "prompt": phrased(f"synthesis_{slug}", prompt_variants),
         "fixtures": {"backends": [{"name": fixture_for(origin)}]},
         "initial_state": seeded("Existing Review", seeds),
         "allowed_tools": ["get_workspace_snapshot", "get_widget_data",
@@ -1823,13 +2070,13 @@ for slug, widgets, prompt_variants, facts, text in NOTE_T4:
         oracle.append({"tool": "get_widget_data",
                         "args": {"origin": o, "widget_id": wid, "data_args": args}})
     oracle.append(note_call("Answer Note", text))
-    add("note", "t4", {
-        "id": f"gen_t4_note_crossbackend_{slug}",
+    add("note", "r4", {
+        "id": f"crossbackend_{slug}",
         "title": f"Cross-Backend Note: {slug.replace('_', ' ').title()}",
-        "level": "L0", "capability": "workspace-inspection",
+        "category_code": "L0", "capability": "workspace-inspection",
         "workflow": "portfolio-risk-review", "subdomain": "portfolio-management",
         "tags": ["note", "read-only", "cross-backend"],
-        "prompt": phrased(f"gen_t4_note_crossbackend_{slug}", prompt_variants),
+        "prompt": phrased(f"crossbackend_{slug}", prompt_variants),
         "fixtures": {"backends": [{"name": fixture_for(o)} for o in origins]},
         "initial_state": seeded("Existing Review", seeds),
         "allowed_tools": ["get_workspace_snapshot", "get_widget_data",
@@ -1906,11 +2153,11 @@ def read_task(level: str, slug: str, widgets: list[str], facts_mode: str) -> Non
             "the field name, and the exact value."
         )
     add("read", level, {
-        "id": f"gen_{level}_read_{slug}",
+        "id": slug,
         "title": f"Read Data: {names}",
-        "level": "L1", "capability": "data-reading", "workflow": workflow,
+        "category_code": "L1", "capability": "data-reading", "workflow": workflow,
         "subdomain": sub, "tags": ["data-reading", "stark"],
-        "prompt": phrased(f"gen_{level}_read_{slug}", [
+        "prompt": phrased(slug, [
             (f"Use get_widget_data on the Bench Stark Enterprise "
              f"{names} widget{'s' if len(widgets) > 1 else ''}, {ask}"),
             (f"On the Bench Stark Enterprise {names} "
@@ -1943,7 +2190,7 @@ for slug, wid in [
     ("order_status", "execution_desk_blotter_order_status_metrics"),
     ("latency", "vendor_dataset_monitor_slas_latency_by_feed"),
 ]:
-    read_task("t0", slug, [wid], "id")
+    read_task("r0", slug, [wid], "id")
 
 for slug, wid in [
     ("alert_trend", "compliance_surveillance_hub_alerts_alert_trend"),
@@ -1951,7 +2198,7 @@ for slug, wid in [
     ("strategy_health", "strategy_health_monitor_performance_strategy_health_metrics"),
     ("break_aging", "fund_operations_control_tower_recons_break_aging"),
 ]:
-    read_task("t1", slug, [wid], "id")
+    read_task("r1", slug, [wid], "id")
 
 for slug, wid in [
     ("var_trend", "risk_exposure_monitor_dashboard_var_trend"),
@@ -1959,7 +2206,7 @@ for slug, wid in [
     ("broker_scorecard", "execution_desk_fills_broker_scorecard"),
     ("sla_metrics", "vendor_dataset_monitor_vendors_sla_metrics"),
 ]:
-    read_task("t2", slug, [wid], "value")
+    read_task("r2", slug, [wid], "value")
 
 for slug, wids in [
     ("risk_pair", ["risk_exposure_monitor_dashboard_var_trend",
@@ -1971,7 +2218,7 @@ for slug, wids in [
     ("client_pair", ["client_360_client_book_client_accounts",
                        "client_360_client_book_relationship_metrics"]),
 ]:
-    read_task("t3", slug, wids, "id")
+    read_task("r3", slug, wids, "id")
 
 for slug, wids in [
     ("risk_values", ["risk_exposure_monitor_dashboard_risk_snapshot",
@@ -1983,7 +2230,7 @@ for slug, wids in [
     ("stress_values", ["stress_liquidity_lab_liquidity_days_to_liquidate",
                          "stress_liquidity_lab_stress_tests_risk_snapshot"]),
 ]:
-    read_task("t4", slug, wids, "value")
+    read_task("r4", slug, wids, "value")
 
 
 # ===========================================================================
@@ -2026,12 +2273,12 @@ APPS_T0 = [
 for template_id, dash_name in APPS_T0:
     app = APPS_BY_TEMPLATE[template_id]
     workflow, sub = stark_family(template_id)
-    add("apps", "t0", {
-        "id": f"gen_t0_app_{template_id.replace('-', '_')}",
+    add("apps", "r0", {
+        "id": f"{template_id.replace('-', '_')}",
         "title": f"Instantiate {app['name']}",
-        "level": "L3", "capability": "app-instantiation", "workflow": workflow,
+        "category_code": "L3", "capability": "app-instantiation", "workflow": workflow,
         "subdomain": sub, "tags": ["apps", "stark"],
-        "prompt": phrased(f"gen_t0_app_{template_id.replace('-', '_')}", [
+        "prompt": phrased(f"{template_id.replace('-', '_')}", [
             (f"Instantiate the {app['name']} app from the Bench Stark Enterprise "
              f"backend as a new dashboard named {dash_name}."),
             (f"From the Bench Stark Enterprise backend, instantiate the {app['name']} app "
@@ -2061,12 +2308,12 @@ for template_id, dash_name in APPS_T1:
     app = APPS_BY_TEMPLATE[template_id]
     workflow, sub = stark_family(template_id)
     check_tabs, check_widgets = app_checks(app)
-    add("apps", "t1", {
-        "id": f"gen_t1_app_{template_id.replace('-', '_')}",
+    add("apps", "r1", {
+        "id": f"{template_id.replace('-', '_')}",
         "title": f"Instantiate {app['name']} (Checked)",
-        "level": "L3", "capability": "app-instantiation", "workflow": workflow,
+        "category_code": "L3", "capability": "app-instantiation", "workflow": workflow,
         "subdomain": sub, "tags": ["apps", "stark"],
-        "prompt": phrased(f"gen_t1_app_{template_id.replace('-', '_')}", [
+        "prompt": phrased(f"{template_id.replace('-', '_')}", [
             (f"Instantiate the {app['name']} app from the Bench Stark Enterprise "
              f"backend as a new dashboard named {dash_name}."),
             (f"From the Bench Stark Enterprise backend, instantiate the {app['name']} app "
@@ -2106,12 +2353,12 @@ for template_id, dash_name, note_tab, note_facts, note_text in APPS_T2:
     check_tabs, check_widgets = app_checks(app)
     if note_tab not in check_tabs:
         check_tabs = sorted(set(check_tabs + [note_tab]))
-    add("apps", "t2", {
-        "id": f"gen_t2_app_note_{template_id.replace('-', '_')}",
+    add("apps", "r2", {
+        "id": f"note_{template_id.replace('-', '_')}",
         "title": f"Instantiate {app['name']} And Brief",
-        "level": "L3", "capability": "app-instantiation", "workflow": workflow,
+        "category_code": "L3", "capability": "app-instantiation", "workflow": workflow,
         "subdomain": sub, "tags": ["apps", "stark", "note"],
-        "prompt": phrased(f"gen_t2_app_note_{template_id.replace('-', '_')}", [
+        "prompt": phrased(f"note_{template_id.replace('-', '_')}", [
             (f"Instantiate the {app['name']} app from the Bench Stark Enterprise "
              f"backend as a new dashboard named {dash_name}, then add a note on the "
              f"{note_tab.replace('_', ' ').title()} tab mentioning {note_facts[0]} "
@@ -2161,12 +2408,12 @@ for template_id, dash_name, target_tab, extra_widget in APPS_T3:
     check_tabs, check_widgets = app_checks(app)
     if target_tab not in check_tabs:
         check_tabs = sorted(set(check_tabs + [target_tab]))
-    add("apps", "t3", {
-        "id": f"gen_t3_app_extend_{template_id.replace('-', '_')}",
+    add("apps", "r3", {
+        "id": f"extend_{template_id.replace('-', '_')}",
         "title": f"Instantiate And Extend {app['name']}",
-        "level": "L3", "capability": "app-instantiation", "workflow": workflow,
+        "category_code": "L3", "capability": "app-instantiation", "workflow": workflow,
         "subdomain": sub, "tags": ["apps", "stark", "widget-creation"],
-        "prompt": phrased(f"gen_t3_app_extend_{template_id.replace('-', '_')}", [
+        "prompt": phrased(f"extend_{template_id.replace('-', '_')}", [
             (f"Instantiate the {app['name']} app from the Bench Stark Enterprise "
              f"backend as a new dashboard named {dash_name}. Then add the "
              f"{STARK['widgets'][extra_widget]['name']} widget (id {extra_widget}) to "
@@ -2230,12 +2477,12 @@ for template_id, dash_name, target_tab, extra_widget, note_facts, note_text in A
     check_tabs, check_widgets = app_checks(app)
     if target_tab not in check_tabs:
         check_tabs = sorted(set(check_tabs + [target_tab]))
-    add("apps", "t4", {
-        "id": f"gen_t4_app_full_{template_id.replace('-', '_')}",
+    add("apps", "r4", {
+        "id": f"full_{template_id.replace('-', '_')}",
         "title": f"Instantiate, Extend, And Brief {app['name']}",
-        "level": "L3", "capability": "app-instantiation", "workflow": workflow,
+        "category_code": "L3", "capability": "app-instantiation", "workflow": workflow,
         "subdomain": sub, "tags": ["apps", "stark", "widget-creation", "note"],
-        "prompt": phrased(f"gen_t4_app_full_{template_id.replace('-', '_')}", [
+        "prompt": phrased(f"full_{template_id.replace('-', '_')}", [
             (f"Instantiate the {app['name']} app from the Bench Stark Enterprise "
              f"backend as a new dashboard named {dash_name}. Then add the "
              f"{STARK['widgets'][extra_widget]['name']} widget (id {extra_widget}) to "
@@ -2298,12 +2545,12 @@ NAV_T0 = [
      "macro-rates-review", "macro", "macro"),
 ]
 for slug, old_dash, new_dash, workflow, sub, fixture in NAV_T0:
-    add("navigate", "t0", {
-        "id": f"gen_t0_nav_rename_{slug}",
+    add("navigate", "r0", {
+        "id": f"rename_{slug}",
         "title": f"Rename To {new_dash}",
-        "level": "L1", "capability": "workspace-navigation", "workflow": workflow,
+        "category_code": "L1", "capability": "workspace-navigation", "workflow": workflow,
         "subdomain": sub, "tags": ["rename", "navigation"],
-        "prompt": phrased(f"gen_t0_nav_rename_{slug}", [
+        "prompt": phrased(f"rename_{slug}", [
             f"Rename the active dashboard to {new_dash}.",
             f"Set the active dashboard name to {new_dash}.",
             f"Change the active dashboard's name to {new_dash}.",
@@ -2333,12 +2580,12 @@ NAV_T1 = [
      "earnings-prep", "equity-research", "equities"),
 ]
 for slug, old_dash, new_dash, old_tab, new_tab, workflow, sub, fixture in NAV_T1:
-    add("navigate", "t1", {
-        "id": f"gen_t1_nav_rename_both_{slug}",
+    add("navigate", "r1", {
+        "id": f"rename_both_{slug}",
         "title": f"Rename Dashboard And Tab: {new_dash}",
-        "level": "L1", "capability": "workspace-navigation", "workflow": workflow,
+        "category_code": "L1", "capability": "workspace-navigation", "workflow": workflow,
         "subdomain": sub, "tags": ["rename", "navigation"],
-        "prompt": phrased(f"gen_t1_nav_rename_both_{slug}", [
+        "prompt": phrased(f"rename_both_{slug}", [
             (f"Rename the active dashboard to {new_dash} and rename the {old_tab} tab "
              f"to {new_tab}."),
             (f"Set the active dashboard name to {new_dash} and rename the {old_tab} tab "
@@ -2378,12 +2625,12 @@ NAV_T2 = [
 ]
 for slug, old_dash, new_dash, new_tab, workflow, sub, note_facts in NAV_T2:
     tab_slug = slugify(new_tab)
-    add("navigate", "t2", {
-        "id": f"gen_t2_nav_expand_{slug}",
+    add("navigate", "r2", {
+        "id": f"expand_{slug}",
         "title": f"Expand To {new_dash}",
-        "level": "L1", "capability": "workspace-navigation", "workflow": workflow,
+        "category_code": "L1", "capability": "workspace-navigation", "workflow": workflow,
         "subdomain": sub, "tags": ["rename", "tabs", "navigation"],
-        "prompt": phrased(f"gen_t2_nav_expand_{slug}", [
+        "prompt": phrased(f"expand_{slug}", [
             (f"Rename the active dashboard to {new_dash}, add a new tab named "
              f"{new_tab}, and add a note on the new tab that mentions {note_facts[0]} "
              "and says items are pending."),
@@ -2432,12 +2679,12 @@ NAV_T3 = [
 for slug, origin, fixture, tab_name, new_widget, new_args, (seed_widget, seed_args) in NAV_T3:
     workflow, sub = wf(origin)
     tab_slug = slugify(tab_name)
-    add("navigate", "t3", {
-        "id": f"gen_t3_nav_addtab_{slug}",
+    add("navigate", "r3", {
+        "id": f"addtab_{slug}",
         "title": f"Add The Missing {tab_name} Tab",
-        "level": "L4", "capability": "workspace-repair", "workflow": workflow,
+        "category_code": "L4", "capability": "workspace-repair", "workflow": workflow,
         "subdomain": sub, "tags": ["repair", "tabs", "navigation"],
-        "prompt": phrased(f"gen_t3_nav_addtab_{slug}", [
+        "prompt": phrased(f"addtab_{slug}", [
             (f"This dashboard is missing its {tab_name} tab. Add a tab named "
              f"{tab_name} and put the {wname(origin, new_widget)} widget"
              + (f" for {new_args.get('symbol')}" if new_args.get("symbol") else "")
@@ -2496,12 +2743,12 @@ NAV_T4 = [
 for slug, origin, fixture, new_dash, tab_name, new_widget, new_args, note_facts, note_text in NAV_T4:
     workflow, sub = wf(origin)
     tab_slug = slugify(tab_name)
-    add("navigate", "t4", {
-        "id": f"gen_t4_nav_hub_{slug}",
+    add("navigate", "r4", {
+        "id": f"hub_{slug}",
         "title": f"Build Out {new_dash}",
-        "level": "L2", "capability": "workspace-navigation", "workflow": workflow,
+        "category_code": "L2", "capability": "workspace-navigation", "workflow": workflow,
         "subdomain": sub, "tags": ["rename", "tabs", "navigation", "combo"],
-        "prompt": phrased(f"gen_t4_nav_hub_{slug}", [
+        "prompt": phrased(f"hub_{slug}", [
             (f"Rename the active dashboard to {new_dash}, add a new tab named "
              f"{tab_name}, put the {wname(origin, new_widget)} widget"
              + (f" for {new_args.get('symbol')}" if new_args.get("symbol") else "")
@@ -2570,8 +2817,8 @@ SKILL_SLUGS = list(SKILLS)
 def skill_task(level: str, slug: str, extra: dict) -> None:
     skill_name, result_facts, note_facts = SKILLS[slug]
     base = {
-        "id": f"gen_{level}_skill_{slug.replace('-', '_')}",
-        "level": "L1", "capability": "skill-access",
+        "id": slug.replace("-", "_"),
+        "category_code": "L1", "capability": "skill-access",
         "workflow": "earnings-prep" if "earnings" in slug else "equity-tearsheet",
         "subdomain": "equity-research", "tags": ["skills", "mcp"],
         "fixtures": {"backends": [{"name": "stark-enterprise"}]},
@@ -2584,9 +2831,9 @@ def skill_task(level: str, slug: str, extra: dict) -> None:
 
 for slug in SKILL_SLUGS:
     skill_name, result_facts, note_facts = SKILLS[slug]
-    skill_task("t0", slug, {
+    skill_task("r0", slug, {
         "title": f"Read The {skill_name} Skill",
-        "prompt": phrased(f"gen_t0_skill_{slug.replace('-', '_')}", [
+        "prompt": phrased(f"{slug.replace('-', '_')}", [
             (f"Call get_skill_content with slug {slug}, then add a note on the active "
              f"dashboard naming the {skill_name} skill. Omit dashboard_id when adding "
              "the note."),
@@ -2616,7 +2863,7 @@ for slug in SKILL_SLUGS:
     skill_name, result_facts, note_facts = SKILLS[slug]
     extra = {
         "title": f"Apply {skill_name} Workflow Notes",
-        "prompt": phrased(f"gen_t1_skill_{slug.replace('-', '_')}", [
+        "prompt": phrased(f"{slug.replace('-', '_')}", [
             (f"Call get_skill_content with slug {slug}, then add a note on the active "
              "dashboard that captures the workflow steps for an analyst. Omit "
              "dashboard_id when adding the note."),
@@ -2644,7 +2891,7 @@ for slug in SKILL_SLUGS:
                                          f"{skill_name} workflow: "
                                          + "; ".join(note_facts) + ".")],
     }
-    skill_task("t1", slug, extra)
+    skill_task("r1", slug, extra)
 
 SKILL_T2_TABS = {"finance-earnings-prep": "Earnings Prep", "finance-tearsheet": "Tearsheet",
                   "finance-guidance-tracker": "Guidance", "finance-comps": "Comps"}
@@ -2652,9 +2899,9 @@ for slug in SKILL_SLUGS:
     skill_name, result_facts, note_facts = SKILLS[slug]
     tab_name = SKILL_T2_TABS[slug]
     tab_slug = slugify(tab_name)
-    skill_task("t2", slug, {
+    skill_task("r2", slug, {
         "title": f"File {skill_name} Under Its Own Tab",
-        "prompt": phrased(f"gen_t2_skill_{slug.replace('-', '_')}", [
+        "prompt": phrased(f"{slug.replace('-', '_')}", [
             (f"Call get_skill_content with slug {slug}. Add a new tab named "
              f"{tab_name} and put a note on that tab capturing the workflow steps. "
              "Omit dashboard_id when adding the note."),
@@ -2699,10 +2946,10 @@ SKILL_T3 = [
 for slug, origin, widget_id, data_args in SKILL_T3:
     skill_name, result_facts, note_facts = SKILLS[slug]
     value = data_args.get("symbol", "")
-    skill_task("t3", slug, {
+    skill_task("r3", slug, {
         "title": f"Apply {skill_name} With {value}",
         "fixtures": {"backends": [{"name": "equities"}]},
-        "prompt": phrased(f"gen_t3_skill_{slug.replace('-', '_')}", [
+        "prompt": phrased(f"{slug.replace('-', '_')}", [
             (f"Call get_skill_content with slug {slug}. Following that workflow, add "
              f"the {wname(origin, widget_id)} widget for {value} to the active "
              "dashboard, then add a note that applies the skill's workflow steps to "
@@ -2755,10 +3002,10 @@ SKILL_T4 = [
 for slug, widget_id, data_args, note_facts, note_text in SKILL_T4:
     skill_name, result_facts, _ = SKILLS[slug]
     value = data_args["symbol"]
-    skill_task("t4", slug, {
+    skill_task("r4", slug, {
         "title": f"Grounded {skill_name} For {value}",
         "fixtures": {"backends": [{"name": "equities"}]},
-        "prompt": phrased(f"gen_t4_skill_{slug.replace('-', '_')}", [
+        "prompt": phrased(f"{slug.replace('-', '_')}", [
             (f"Call get_skill_content with slug {slug}. Following that workflow, add "
              f"the {wname(EQ, widget_id)} widget for {value}, read its data, and add "
              "a note that cites the exact key value from the data. Omit dashboard_id "
@@ -2823,12 +3070,12 @@ DELEGATE_T0 = [
      "vendor-sla-monitoring", "data-platform"),
 ]
 for slug, tid, desc, workflow, sub in DELEGATE_T0:
-    add("delegate", "t0", {
-        "id": f"gen_t0_delegate_{slug}",
+    add("delegate", "r0", {
+        "id": f"{slug}",
         "title": f"Delegate One Task: {slug.replace('_', ' ').title()}",
-        "level": "L3", "capability": "mcp-tool-use", "workflow": workflow,
+        "category_code": "L3", "capability": "mcp-tool-use", "workflow": workflow,
         "subdomain": sub, "tags": ["delegation", "agents", "mcp"],
-        "prompt": phrased(f"gen_t0_delegate_{slug}", [
+        "prompt": phrased(f"{slug}", [
             (f"Call assign_tasks_to_agents with one task_request using id {tid} for "
              f"{workflow.replace('-', ' ')} work: {desc}"),
             (f"Use assign_tasks_to_agents with one task_request using id {tid} for "
@@ -2867,12 +3114,12 @@ DELEGATE_T1 = [
 ]
 for slug, workflow, sub, tasks in DELEGATE_T1:
     task_ids = [tid for tid, _ in tasks]
-    add("delegate", "t1", {
-        "id": f"gen_t1_delegate_{slug}",
+    add("delegate", "r1", {
+        "id": f"{slug}",
         "title": f"Delegate Two Tasks: {slug.replace('_', ' ').title()}",
-        "level": "L3", "capability": "mcp-tool-use", "workflow": workflow,
+        "category_code": "L3", "capability": "mcp-tool-use", "workflow": workflow,
         "subdomain": sub, "tags": ["delegation", "agents", "mcp"],
-        "prompt": phrased(f"gen_t1_delegate_{slug}", [
+        "prompt": phrased(f"{slug}", [
             (f"Call assign_tasks_to_agents with two task_requests using ids "
              f"{task_ids[0]} and {task_ids[1]} for {workflow.replace('-', ' ')} work."),
             (f"Use assign_tasks_to_agents with two task_requests using ids {task_ids[0]} "
@@ -2916,12 +3163,12 @@ DELEGATE_T2 = [
 ]
 for slug, workflow, sub, tasks, note_facts in DELEGATE_T2:
     task_ids = [tid for tid, _ in tasks]
-    add("delegate", "t2", {
-        "id": f"gen_t2_delegate_{slug}",
+    add("delegate", "r2", {
+        "id": f"{slug}",
         "title": f"Delegate And Coordinate: {slug.replace('_', ' ').title()}",
-        "level": "L3", "capability": "mcp-tool-use", "workflow": workflow,
+        "category_code": "L3", "capability": "mcp-tool-use", "workflow": workflow,
         "subdomain": sub, "tags": ["delegation", "agents", "mcp", "note"],
-        "prompt": phrased(f"gen_t2_delegate_{slug}", [
+        "prompt": phrased(f"{slug}", [
             (f"Call assign_tasks_to_agents with two task_requests using ids "
              f"{task_ids[0]} and {task_ids[1]} for {workflow.replace('-', ' ')} work. "
              "Then add a coordinator note naming both workstreams on the active "
@@ -2977,14 +3224,14 @@ DELEGATE_T3 = [
 for slug, skill_slug, tasks, note_facts in DELEGATE_T3:
     skill_name, result_facts, _ = SKILLS[skill_slug]
     task_ids = [tid for tid, _ in tasks]
-    add("delegate", "t3", {
-        "id": f"gen_t3_delegate_skill_{slug}",
+    add("delegate", "r3", {
+        "id": f"skill_{slug}",
         "title": f"Delegate Per The {skill_name} Skill",
-        "level": "L3", "capability": "mcp-tool-use",
+        "category_code": "L3", "capability": "mcp-tool-use",
         "workflow": "earnings-prep" if "earnings" in skill_slug else "equity-tearsheet",
         "subdomain": "equity-research",
         "tags": ["delegation", "agents", "mcp", "skills"],
-        "prompt": phrased(f"gen_t3_delegate_skill_{slug}", [
+        "prompt": phrased(f"skill_{slug}", [
             (f"Call get_skill_content with slug {skill_slug} to understand the "
              f"workflow. Then call assign_tasks_to_agents with two task_requests "
              f"using ids {task_ids[0]} and {task_ids[1]} covering that workflow, and "
@@ -3050,12 +3297,12 @@ DELEGATE_T4 = [
 ]
 for slug, workflow, sub, tasks, widget_id, note_facts in DELEGATE_T4:
     task_ids = [tid for tid, _ in tasks]
-    add("delegate", "t4", {
-        "id": f"gen_t4_delegate_build_{slug}",
+    add("delegate", "r4", {
+        "id": f"build_{slug}",
         "title": f"Delegate And Equip: {slug.replace('_', ' ').title()}",
-        "level": "L3", "capability": "mcp-tool-use", "workflow": workflow,
+        "category_code": "L3", "capability": "mcp-tool-use", "workflow": workflow,
         "subdomain": sub, "tags": ["delegation", "agents", "mcp", "widget-creation"],
-        "prompt": phrased(f"gen_t4_delegate_build_{slug}", [
+        "prompt": phrased(f"build_{slug}", [
             (f"Call assign_tasks_to_agents with two task_requests using ids "
              f"{task_ids[0]} and {task_ids[1]}. Then add the "
              f"{STARK['widgets'][widget_id]['name']} widget (id {widget_id}) from the "
@@ -3172,12 +3419,12 @@ def params_oracle(
 for idx in range(4):
     origin, widget_id, param, value = params_case(idx)
     workflow, sub = wf(origin, widget_id)
-    add("params", "t0", {
-        "id": f"gen_t0_params_{param}_{widget_id}_{idx}",
+    add("params", "r0", {
+        "id": f"{param}_{widget_id}_{idx}",
         "title": f"Use {param.title()} Options For {wname(origin, widget_id)}",
-        "level": "L1", "capability": "parameter-discovery", "workflow": workflow,
+        "category_code": "L1", "capability": "parameter-discovery", "workflow": workflow,
         "subdomain": sub, "tags": ["params", "options"],
-        "prompt": phrased(f"gen_t0_params_{param}_{widget_id}_{idx}", [
+        "prompt": phrased(f"{param}_{widget_id}_{idx}", [
             (f"Call get_params_options for {origin}/{widget_id} parameter {param}, "
              f"choose {value}, and create that widget with {param}={value}."),
             (f"Use get_params_options for {origin}/{widget_id} parameter {param}, choose "
@@ -3205,12 +3452,12 @@ for idx in range(4):
 for idx in range(4, 8):
     origin, widget_id, param, value = params_case(idx)
     workflow, sub = wf(origin, widget_id)
-    add("params", "t1", {
-        "id": f"gen_t1_params_schema_{param}_{widget_id}_{idx}",
+    add("params", "r1", {
+        "id": f"schema_{param}_{widget_id}_{idx}",
         "title": f"Discover Schema Then Options For {wname(origin, widget_id)}",
-        "level": "L1", "capability": "parameter-discovery", "workflow": workflow,
+        "category_code": "L1", "capability": "parameter-discovery", "workflow": workflow,
         "subdomain": sub, "tags": ["params", "schema-discovery"],
-        "prompt": phrased(f"gen_t1_params_schema_{param}_{widget_id}_{idx}", [
+        "prompt": phrased(f"schema_{param}_{widget_id}_{idx}", [
             (f"Discover the catalog and schema for {origin}/{widget_id}, call "
              f"get_params_options for {param}, then create it with {param}={value}."),
             (f"For {origin}/{widget_id}, discover the catalog and schema, call "
@@ -3240,12 +3487,12 @@ for idx in range(8, 12):
     origin, widget_id, param, value = params_case(idx)
     workflow, sub = wf(origin, widget_id)
     target = {"x": (idx % 2) * 20, "y": 0, "w": 20, "h": 10}
-    add("params", "t2", {
-        "id": f"gen_t2_params_place_{param}_{widget_id}_{idx}",
+    add("params", "r2", {
+        "id": f"place_{param}_{widget_id}_{idx}",
         "title": f"Options-Constrained Placement For {wname(origin, widget_id)}",
-        "level": "L2", "capability": "dashboard-construction", "workflow": workflow,
+        "category_code": "L2", "capability": "dashboard-construction", "workflow": workflow,
         "subdomain": sub, "tags": ["params", "layout"],
-        "prompt": phrased(f"gen_t2_params_place_{param}_{widget_id}_{idx}", [
+        "prompt": phrased(f"place_{param}_{widget_id}_{idx}", [
             (f"Use get_params_options to choose {value} for {param}, fetch the widget "
              f"schema, create {origin}/{widget_id}, and place it at x={target['x']}, "
              "y=0, width 20, height 10."),
@@ -3282,12 +3529,12 @@ PARAM_T3 = [
 ]
 for idx, (origin, widget_id, param, value, companion, companion_args) in enumerate(PARAM_T3):
     workflow, sub = wf(origin, widget_id)
-    add("params", "t3", {
-        "id": f"gen_t3_params_companion_{param}_{widget_id}_{idx}",
+    add("params", "r3", {
+        "id": f"companion_{param}_{widget_id}_{idx}",
         "title": f"Options-Constrained Pair For {wname(origin, widget_id)}",
-        "level": "L2", "capability": "dashboard-construction", "workflow": workflow,
+        "category_code": "L2", "capability": "dashboard-construction", "workflow": workflow,
         "subdomain": sub, "tags": ["params", "multi-widget"],
-        "prompt": phrased(f"gen_t3_params_companion_{param}_{widget_id}_{idx}", [
+        "prompt": phrased(f"companion_{param}_{widget_id}_{idx}", [
             (f"Use get_params_options to set {origin}/{widget_id} {param}={value}, "
              f"then add companion widget {companion}. Arrange both without overlap."),
             (f"Set {origin}/{widget_id} {param}={value} using get_params_options, then "
@@ -3349,12 +3596,12 @@ for slug, widgets, facts in PARAM_T4:
         )
     oracle.append(note_call("Options Note", "Options used: " + ", ".join(facts) + "."))
     workflow, sub = wf(widgets[0][0], widgets[0][1])
-    add("params", "t4", {
-        "id": f"gen_t4_params_cross_{slug}",
+    add("params", "r4", {
+        "id": f"cross_{slug}",
         "title": f"Cross-Backend Options Build: {slug.replace('_', ' ').title()}",
-        "level": "L2", "capability": "dashboard-construction", "workflow": workflow,
+        "category_code": "L2", "capability": "dashboard-construction", "workflow": workflow,
         "subdomain": sub, "tags": ["params", "cross-backend", "note"],
-        "prompt": phrased(f"gen_t4_params_cross_{slug}", [
+        "prompt": phrased(f"cross_{slug}", [
             ("Build a two-widget dashboard using parameter options for both widgets: "
              + "; ".join(
                  f"{origin}/{widget_id} {param}={value}"
@@ -3415,12 +3662,12 @@ def backend_build_oracle(fixture: str, origin: str, widget_id: str, data_args: d
 
 for idx, (fixture, origin, widget_id, data_args) in enumerate(BACKEND_CASES):
     workflow, sub = wf(origin, widget_id)
-    add("backends", "t0", {
-        "id": f"gen_t0_backends_add_{fixture.replace('-', '_')}",
+    add("backends", "r0", {
+        "id": f"add_{fixture.replace('-', '_')}",
         "title": f"Register {origin}",
-        "level": "L2", "capability": "dashboard-construction", "workflow": workflow,
+        "category_code": "L2", "capability": "dashboard-construction", "workflow": workflow,
         "subdomain": sub, "tags": ["backends"],
-        "prompt": phrased(f"gen_t0_backends_add_{fixture.replace('-', '_')}", [
+        "prompt": phrased(f"add_{fixture.replace('-', '_')}", [
             (f"Call manage_backends with operation add and name {fixture} to register "
              f"{origin}, then call manage_backends with operation list."),
             (f"Use manage_backends with operation add and name {fixture} for {origin}; "
@@ -3449,12 +3696,12 @@ for idx, (fixture, origin, widget_id, data_args) in enumerate(BACKEND_CASES):
 for idx, (fixture, origin, widget_id, data_args) in enumerate(BACKEND_CASES):
     workflow, sub = wf(origin, widget_id)
     target_widget = widget_ref(origin, widget_id, data_args)
-    add("backends", "t1", {
-        "id": f"gen_t1_backends_add_widget_{widget_id}_{idx}",
+    add("backends", "r1", {
+        "id": f"add_widget_{widget_id}_{idx}",
         "title": f"Register Backend And Add {wname(origin, widget_id)}",
-        "level": "L2", "capability": "dashboard-construction", "workflow": workflow,
+        "category_code": "L2", "capability": "dashboard-construction", "workflow": workflow,
         "subdomain": sub, "tags": ["backends", "widget-creation"],
-        "prompt": phrased(f"gen_t1_backends_add_widget_{widget_id}_{idx}", [
+        "prompt": phrased(f"add_widget_{widget_id}_{idx}", [
             (f"Call manage_backends with operation add and name {fixture} to register "
              f"{origin}; then discover {widget_id}, fetch its schema, and add "
              f"{target_widget} to the active dashboard."),
@@ -3493,12 +3740,12 @@ for idx, (fixture_a, origin_a, widget_a, args_a, fixture_b, origin_b, widget_b, 
     workflow, sub = wf(origin_a, widget_a)
     widget_a_ref = widget_ref(origin_a, widget_a, args_a)
     widget_b_ref = widget_ref(origin_b, widget_b, args_b)
-    add("backends", "t2", {
-        "id": f"gen_t2_backends_cross_{widget_a}_{widget_b}_{idx}",
+    add("backends", "r2", {
+        "id": f"cross_{widget_a}_{widget_b}_{idx}",
         "title": f"Register Two Backends: {wname(origin_a, widget_a)} And {wname(origin_b, widget_b)}",
-        "level": "L2", "capability": "dashboard-construction", "workflow": workflow,
+        "category_code": "L2", "capability": "dashboard-construction", "workflow": workflow,
         "subdomain": sub, "tags": ["backends", "cross-backend"],
-        "prompt": phrased(f"gen_t2_backends_cross_{widget_a}_{widget_b}_{idx}", [
+        "prompt": phrased(f"cross_{widget_a}_{widget_b}_{idx}", [
             (f"Register backend names {fixture_a} and {fixture_b}; then fetch each "
              f"widget's schema and add {widget_a_ref} and {widget_b_ref} to the active "
              "dashboard."),
@@ -3534,12 +3781,12 @@ for idx, (fixture_a, origin_a, widget_a, args_a, fixture_b, origin_b, widget_b, 
 for idx, (fixture, origin, widget_id, data_args) in enumerate(BACKEND_CASES):
     workflow, sub = wf(origin, widget_id)
     target_widget = widget_ref(origin, widget_id, data_args)
-    add("backends", "t3", {
-        "id": f"gen_t3_backends_refresh_{widget_id}_{idx}",
+    add("backends", "r3", {
+        "id": f"refresh_{widget_id}_{idx}",
         "title": f"Refresh Backend Before Building {wname(origin, widget_id)}",
-        "level": "L2", "capability": "dashboard-construction", "workflow": workflow,
+        "category_code": "L2", "capability": "dashboard-construction", "workflow": workflow,
         "subdomain": sub, "tags": ["backends", "refresh"],
-        "prompt": phrased(f"gen_t3_backends_refresh_{widget_id}_{idx}", [
+        "prompt": phrased(f"refresh_{widget_id}_{idx}", [
             (f"Register backend name {fixture} for {origin}, refresh it, then add "
              f"{target_widget} and document that the backend was refreshed."),
             (f"After registering backend name {fixture} and refreshing {origin}, add "
@@ -3598,12 +3845,12 @@ for slug, widgets, facts in BACKEND_T4:
         widget_ref(origin, widget_id, args)
         for _, origin, widget_id, args in widgets
     ])
-    add("backends", "t4", {
-        "id": f"gen_t4_backends_multi_{slug}",
+    add("backends", "r4", {
+        "id": f"multi_{slug}",
         "title": f"Multi-Backend Build: {slug.replace('_', ' ').title()}",
-        "level": "L2", "capability": "dashboard-construction", "workflow": workflow,
+        "category_code": "L2", "capability": "dashboard-construction", "workflow": workflow,
         "subdomain": sub, "tags": ["backends", "cross-backend", "note"],
-        "prompt": phrased(f"gen_t4_backends_multi_{slug}", [
+        "prompt": phrased(f"multi_{slug}", [
             (f"Register backend names {backend_names}, build a dashboard with "
              f"{widget_refs}, and add a note mentioning {joined(facts)}."),
             (f"After registering backend names {backend_names}, build a dashboard with "
@@ -3644,12 +3891,12 @@ RESOURCE_SKILLS = [
 
 for idx, (slug, phrase, note_fact) in enumerate(RESOURCE_SKILLS):
     uri = f"openbb://workspace/skills/{slug}"
-    add("resources", "t0", {
-        "id": f"gen_t0_resources_skill_{slug.replace('-', '_')}",
+    add("resources", "r0", {
+        "id": f"skill_{slug.replace('-', '_')}",
         "title": f"Read Skill Resource {slug}",
-        "level": "L0", "capability": "resource-access", "workflow": "equity-tearsheet",
+        "category_code": "L0", "capability": "resource-access", "workflow": "equity-tearsheet",
         "subdomain": "equity-research", "tags": ["resources", "skills"],
-        "prompt": phrased(f"gen_t0_resources_skill_{slug.replace('-', '_')}", [
+        "prompt": phrased(f"skill_{slug.replace('-', '_')}", [
             (f"Call read_workspace_resource with uri {uri}, then add a note mentioning "
              f"{note_fact}."),
             (f"Use read_workspace_resource with uri {uri} and add a note mentioning "
@@ -3680,13 +3927,13 @@ RESOURCE_INDEX_CASES = [
     ("stark-enterprise", "Client 360", "client-360"),
 ]
 for idx, (fixture, app_name, template_id) in enumerate(RESOURCE_INDEX_CASES):
-    add("resources", "t1", {
-        "id": f"gen_t1_resources_index_{template_id.replace('-', '_')}",
+    add("resources", "r1", {
+        "id": f"index_{template_id.replace('-', '_')}",
         "title": f"Read App Index For {app_name}",
-        "level": "L2", "capability": "dashboard-construction",
+        "category_code": "L2", "capability": "dashboard-construction",
         "workflow": "portfolio-morning-review", "subdomain": "portfolio-management",
         "tags": ["resources", "apps"],
-        "prompt": phrased(f"gen_t1_resources_index_{template_id.replace('-', '_')}", [
+        "prompt": phrased(f"index_{template_id.replace('-', '_')}", [
             ("Call read_workspace_resource with uri openbb://workspace/app-builder/index "
              f"and add a note naming the {app_name} template id {template_id}."),
             ("Use read_workspace_resource with uri openbb://workspace/app-builder/index "
@@ -3725,14 +3972,14 @@ for fixture, template_id, dash_name in RESOURCE_T2:
     app = APPS_BY_TEMPLATE[template_id] if template_id in APPS_BY_TEMPLATE else {
         "name": "Equity Earnings Review"
     }
-    add("resources", "t2", {
-        "id": f"gen_t2_resources_instantiate_{template_id.replace('-', '_')}",
+    add("resources", "r2", {
+        "id": f"instantiate_{template_id.replace('-', '_')}",
         "title": f"Read Index Then Instantiate {app['name']}",
-        "level": "L2", "capability": "dashboard-construction",
+        "category_code": "L2", "capability": "dashboard-construction",
         "workflow": "earnings-prep" if fixture == "equities" else "portfolio-morning-review",
         "subdomain": "equity-research" if fixture == "equities" else "portfolio-management",
         "tags": ["resources", "apps"],
-        "prompt": phrased(f"gen_t2_resources_instantiate_{template_id.replace('-', '_')}", [
+        "prompt": phrased(f"instantiate_{template_id.replace('-', '_')}", [
             ("Read the app-builder index resource at openbb://workspace/app-builder/index, "
              f"then instantiate template {template_id} as a dashboard named {dash_name}."),
             ("After reading the app-builder index resource "
@@ -3774,12 +4021,12 @@ for slug, origin, widget_id, data_args, fact in RESOURCE_T3:
     uri = f"openbb://workspace/skills/{slug}"
     workflow, sub = wf(origin, widget_id)
     target_widget = widget_ref(origin, widget_id, data_args)
-    add("resources", "t3", {
-        "id": f"gen_t3_resources_skill_build_{slug.replace('-', '_')}",
+    add("resources", "r3", {
+        "id": f"skill_build_{slug.replace('-', '_')}",
         "title": f"Build From Skill Resource {slug}",
-        "level": "L2", "capability": "dashboard-construction", "workflow": workflow,
+        "category_code": "L2", "capability": "dashboard-construction", "workflow": workflow,
         "subdomain": sub, "tags": ["resources", "widget-creation"],
-        "prompt": phrased(f"gen_t3_resources_skill_build_{slug.replace('-', '_')}", [
+        "prompt": phrased(f"skill_build_{slug.replace('-', '_')}", [
             (f"Read resource {uri}, add {target_widget}, and add a note that "
              f"mentions {fact}."),
             (f"After reading resource {uri}, add {target_widget} and add a note that "
@@ -3818,13 +4065,13 @@ RESOURCE_T4 = [
 ]
 for template_id, dash_name, tab_id, extra_widget, facts in RESOURCE_T4:
     app = APPS_BY_TEMPLATE[template_id]
-    add("resources", "t4", {
-        "id": f"gen_t4_resources_full_{template_id.replace('-', '_')}",
+    add("resources", "r4", {
+        "id": f"full_{template_id.replace('-', '_')}",
         "title": f"Index-Guided App Extension: {app['name']}",
-        "level": "L2", "capability": "dashboard-construction",
+        "category_code": "L2", "capability": "dashboard-construction",
         "workflow": stark_family(template_id)[0], "subdomain": stark_family(template_id)[1],
         "tags": ["resources", "apps", "widget-creation"],
-        "prompt": phrased(f"gen_t4_resources_full_{template_id.replace('-', '_')}", [
+        "prompt": phrased(f"full_{template_id.replace('-', '_')}", [
             ("Read the app-builder index resource at openbb://workspace/app-builder/index, "
              f"instantiate {template_id} as {dash_name}, navigate to {tab_id}, add widget "
              f"{extra_widget}, and add a note mentioning {facts[0]} and resource."),
@@ -3880,13 +4127,13 @@ for idx, name in enumerate(PROMPT_NAMES * 2):
     phrase = ("schema-before-create workspace tool discipline"
               if name == "workspace_tool_usage"
               else "current-dashboard current-tab session grounding")
-    add("prompts", "t0", {
-        "id": f"gen_t0_prompts_fetch_{name}_{idx}",
+    add("prompts", "r0", {
+        "id": f"fetch_{name}_{idx}",
         "title": f"Fetch Prompt {name}",
-        "level": "L0", "capability": "prompt-access", "workflow": "workspace-guidance",
+        "category_code": "L0", "capability": "prompt-access", "workflow": "workspace-guidance",
         "domain": "workspace-usability", "subdomain": "mcp-prompts",
         "tags": ["prompts", "mcp"],
-        "prompt": phrased(f"gen_t0_prompts_fetch_{name}_{idx}", [
+        "prompt": phrased(f"fetch_{name}_{idx}", [
             (f"Call get_workspace_prompt with name {name} and add a note mentioning "
              f"{phrase}."),
             (f"Use get_workspace_prompt with name {name}, then add a note mentioning "
@@ -3921,13 +4168,13 @@ PROMPT_T1 = [
 for idx, (origin, widget_id, data_args) in enumerate(PROMPT_T1):
     workflow, sub = wf(origin, widget_id)
     target_widget = widget_ref(origin, widget_id, data_args)
-    add("prompts", "t1", {
-        "id": f"gen_t1_prompts_tool_usage_{widget_id}_{idx}",
+    add("prompts", "r1", {
+        "id": f"tool_usage_{widget_id}_{idx}",
         "title": f"Follow Tool Usage Prompt For {wname(origin, widget_id)}",
-        "level": "L2", "capability": "dashboard-construction", "workflow": workflow,
+        "category_code": "L2", "capability": "dashboard-construction", "workflow": workflow,
         "domain": "workspace-usability" if origin == STK else "finance",
         "subdomain": sub, "tags": ["prompts", "schema-discovery"],
-        "prompt": phrased(f"gen_t1_prompts_tool_usage_{widget_id}_{idx}", [
+        "prompt": phrased(f"tool_usage_{widget_id}_{idx}", [
             ("Call get_workspace_prompt with name workspace_tool_usage, then follow it "
              f"by discovering schema before creating {target_widget}."),
             ("Use get_workspace_prompt with name workspace_tool_usage, then follow it "
@@ -3963,12 +4210,12 @@ for tab_name, origin, widget_id, data_args in PROMPT_T2:
     workflow, sub = wf(origin, widget_id)
     tab_slug = slugify(tab_name)
     target_widget = widget_ref(origin, widget_id, data_args)
-    add("prompts", "t2", {
-        "id": f"gen_t2_prompts_session_tab_{tab_slug}_{widget_id}",
+    add("prompts", "r2", {
+        "id": f"session_tab_{tab_slug}_{widget_id}",
         "title": f"Use Session Prompt On {tab_name}",
-        "level": "L2", "capability": "dashboard-construction", "workflow": workflow,
+        "category_code": "L2", "capability": "dashboard-construction", "workflow": workflow,
         "subdomain": sub, "tags": ["prompts", "tabs"],
-        "prompt": phrased(f"gen_t2_prompts_session_tab_{tab_slug}_{widget_id}", [
+        "prompt": phrased(f"session_tab_{tab_slug}_{widget_id}", [
             (f"Fetch workspace_session_context, add a {tab_name} tab, navigate to it, "
              f"fetch the widget schema, create {target_widget} there, and add a note "
              f"mentioning {tab_name} on that tab."),
@@ -4034,12 +4281,12 @@ for dash_name, widgets, facts in PROMPT_T3:
     workflow, sub = wf(widgets[0][0], widgets[0][1])
     widget_refs = joined([widget_ref(origin, widget_id, data_args)
                           for origin, widget_id, data_args in widgets])
-    add("prompts", "t3", {
-        "id": f"gen_t3_prompts_dashboard_{slugify(dash_name).replace('-', '_')}",
+    add("prompts", "r3", {
+        "id": f"dashboard_{slugify(dash_name).replace('-', '_')}",
         "title": dash_name,
-        "level": "L2", "capability": "dashboard-construction", "workflow": workflow,
+        "category_code": "L2", "capability": "dashboard-construction", "workflow": workflow,
         "subdomain": sub, "tags": ["prompts", "multi-widget"],
-        "prompt": phrased(f"gen_t3_prompts_dashboard_{slugify(dash_name).replace('-', '_')}", [
+        "prompt": phrased(f"dashboard_{slugify(dash_name).replace('-', '_')}", [
             (f"Fetch workspace_tool_usage, create dashboard {dash_name}, add {widget_refs} "
              f"with schema-first discipline, and add a note mentioning {joined(facts)}."),
             (f"Get workspace_tool_usage, create dashboard {dash_name}, add {widget_refs} "
@@ -4096,12 +4343,12 @@ for dash_name, widgets, facts in PROMPT_T4:
     workflow, sub = wf(widgets[0][0], widgets[0][1])
     widget_refs = joined([widget_ref(origin, widget_id, data_args)
                           for origin, widget_id, data_args in widgets])
-    add("prompts", "t4", {
-        "id": f"gen_t4_prompts_cross_{slugify(dash_name).replace('-', '_')}",
+    add("prompts", "r4", {
+        "id": f"cross_{slugify(dash_name).replace('-', '_')}",
         "title": dash_name,
-        "level": "L2", "capability": "dashboard-construction", "workflow": workflow,
+        "category_code": "L2", "capability": "dashboard-construction", "workflow": workflow,
         "subdomain": sub, "tags": ["prompts", "cross-backend"],
-        "prompt": phrased(f"gen_t4_prompts_cross_{slugify(dash_name).replace('-', '_')}", [
+        "prompt": phrased(f"cross_{slugify(dash_name).replace('-', '_')}", [
             (f"Fetch workspace_tool_usage and workspace_session_context, create "
              f"{dash_name}, build the cross-backend dashboard with {widget_refs}, and "
              f"add a note mentioning {joined(facts)}."),
@@ -4145,12 +4392,12 @@ INSPECT_T0 = [
 for idx, (origin, widget_id, data_args, facts) in enumerate(INSPECT_T0):
     workflow, sub = wf(origin, widget_id)
     facts_text = joined(facts)
-    add("inspect", "t0", {
-        "id": f"gen_t0_inspect_read_{widget_id}_{idx}",
+    add("inspect", "r0", {
+        "id": f"read_{widget_id}_{idx}",
         "title": f"Inspect {wname(origin, widget_id)}",
-        "level": "L0", "capability": "workspace-inspection", "workflow": workflow,
+        "category_code": "L0", "capability": "workspace-inspection", "workflow": workflow,
         "subdomain": sub, "tags": ["inspect", "read-widget"],
-        "prompt": phrased(f"gen_t0_inspect_read_{widget_id}_{idx}", [
+        "prompt": phrased(f"read_{widget_id}_{idx}", [
             (f"Call read_widget with widget_id {widget_id} for the existing "
              f"{origin}/{widget_id} widget, then add a note mentioning {facts_text}."),
             (f"Use read_widget with widget_id {widget_id} to inspect the existing "
@@ -4183,12 +4430,12 @@ INSPECT_T1 = [
 ]
 for idx, (origin, widget_id, param, wrong_value, right_value) in enumerate(INSPECT_T1):
     workflow, sub = wf(origin, widget_id)
-    add("inspect", "t1", {
-        "id": f"gen_t1_inspect_fix_{widget_id}_{idx}",
+    add("inspect", "r1", {
+        "id": f"fix_{widget_id}_{idx}",
         "title": f"Find And Fix Misconfigured {wname(origin, widget_id)}",
-        "level": "L1", "capability": "workspace-repair", "workflow": workflow,
+        "category_code": "L1", "capability": "workspace-repair", "workflow": workflow,
         "subdomain": sub, "tags": ["inspect", "repair"],
-        "prompt": phrased(f"gen_t1_inspect_fix_{widget_id}_{idx}", [
+        "prompt": phrased(f"fix_{widget_id}_{idx}", [
             (f"Call read_widget with widget_id {widget_id}, find the widget configured "
              f"with {param}={wrong_value}, and update_widget so {param}={right_value}."),
             (f"Use read_widget with widget_id {widget_id} to inspect the widget configured "
@@ -4223,12 +4470,12 @@ INSPECT_T2 = [
 ]
 for idx, (origin, dup_widget, dup_args, keep_widget, keep_args) in enumerate(INSPECT_T2):
     workflow, sub = wf(origin, dup_widget)
-    add("inspect", "t2", {
-        "id": f"gen_t2_inspect_deduplicate_{dup_widget}_{idx}",
+    add("inspect", "r2", {
+        "id": f"deduplicate_{dup_widget}_{idx}",
         "title": f"Find Duplicate {wname(origin, dup_widget)}",
-        "level": "L2", "capability": "dashboard-construction", "workflow": workflow,
+        "category_code": "L2", "capability": "dashboard-construction", "workflow": workflow,
         "subdomain": sub, "tags": ["inspect", "delete-widget"],
-        "prompt": phrased(f"gen_t2_inspect_deduplicate_{dup_widget}_{idx}", [
+        "prompt": phrased(f"deduplicate_{dup_widget}_{idx}", [
             (f"Inspect the dashboard, identify the duplicate {dup_widget} among the "
              "seeded widgets, and remove exactly one duplicate while preserving the "
              f"{keep_widget} widget."),
@@ -4272,12 +4519,12 @@ INSPECT_T3 = [
 ]
 for idx, (origin, left_widget, left_args, right_widget, right_args) in enumerate(INSPECT_T3):
     workflow, sub = wf(origin, left_widget)
-    add("inspect", "t3", {
-        "id": f"gen_t3_inspect_overlap_{left_widget}_{idx}",
+    add("inspect", "r3", {
+        "id": f"overlap_{left_widget}_{idx}",
         "title": f"Inspect And Repair Overlap {wname(origin, left_widget)}",
-        "level": "L4", "capability": "workspace-repair", "workflow": workflow,
+        "category_code": "L4", "capability": "workspace-repair", "workflow": workflow,
         "subdomain": sub, "tags": ["inspect", "layout", "repair"],
-        "prompt": phrased(f"gen_t3_inspect_overlap_{left_widget}_{idx}", [
+        "prompt": phrased(f"overlap_{left_widget}_{idx}", [
             (f"Inspect the dashboard, find the overlapping {right_widget} widget, and move "
              "it to x=24, y=0, w=16, h=10."),
             (f"Find the overlapping {right_widget} widget after inspecting the dashboard, "
@@ -4316,12 +4563,12 @@ INSPECT_T4 = [
 ]
 for idx, (origin, wrong_widget, param, wrong_value, right_value, companion, companion_args) in enumerate(INSPECT_T4):
     workflow, sub = wf(origin, wrong_widget)
-    add("inspect", "t4", {
-        "id": f"gen_t4_inspect_repair_brief_{wrong_widget}_{idx}",
+    add("inspect", "r4", {
+        "id": f"repair_brief_{wrong_widget}_{idx}",
         "title": f"Ambient Repair And Brief {wname(origin, wrong_widget)}",
-        "level": "L4", "capability": "workspace-repair", "workflow": workflow,
+        "category_code": "L4", "capability": "workspace-repair", "workflow": workflow,
         "subdomain": sub, "tags": ["inspect", "repair", "note"],
-        "prompt": phrased(f"gen_t4_inspect_repair_brief_{wrong_widget}_{idx}", [
+        "prompt": phrased(f"repair_brief_{wrong_widget}_{idx}", [
             (f"Inspect the dashboard, find the widget with {param}={wrong_value}, "
              f"repair it to {right_value}, keep the companion widget, and add a note "
              "mentioning the repair."),
@@ -4368,7 +4615,7 @@ for idx, (origin, wrong_widget, param, wrong_value, right_value, companion, comp
 # Write the pack + print the distribution matrix
 # ===========================================================================
 
-LEVELS = ["t0", "t1", "t2", "t3", "t4"]
+RUNGS = ["r0", "r1", "r2", "r3", "r4"]
 EXPECTED_FAMILIES = {
     "apps", "backends", "create", "delegate", "delete", "inspect", "layout",
     "navigate", "note", "params", "prompts", "read", "resources", "skills",
@@ -4511,7 +4758,7 @@ def artifact_discriminator(task: dict) -> str:
 
 def novelty_fingerprint(task: dict) -> tuple:
     family = task["_family"]
-    level = task["_level"]
+    level = task["_rung"]
     oracle_tools = tuple(sorted({call["tool"] for call in task["oracle_tool_calls"]}))
     checks = task_check_types(task)
     backends = tuple(sorted(task_backends(task)))
@@ -4520,13 +4767,12 @@ def novelty_fingerprint(task: dict) -> tuple:
 
 def add_novelty(task: dict) -> None:
     family = task["_family"]
-    level = task["_level"]
     tools = ", ".join(sorted({call["tool"] for call in task["oracle_tool_calls"]}))
     checks = ", ".join(task_check_types(task))
     backends = ", ".join(sorted(task_backends(task))) or "no preloaded backend"
     artifact = artifact_discriminator(task).replace("|", "; ")
     task["novelty"] = (
-        f"Unique {family}/{level} exercise using {tools} with checks "
+        f"Unique {family}/{task['id']} exercise using {tools} with checks "
         f"{checks} on {backends}; artifact {artifact}."
     )
 
@@ -4534,11 +4780,11 @@ def add_novelty(task: dict) -> None:
 def assign_splits(tasks: list[dict]) -> None:
     # Uniform per-cell pattern so every (family, level) cell contributes one
     # validation and one test task: per-level curves stay computable on the
-    # held-out splits (the earlier level-skewed patterns left t0 absent from
-    # test and t4 absent from validation).
+    # held-out splits (the earlier level-skewed patterns left r0 absent from
+    # test and r4 absent from validation).
     grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for task in tasks:
-        grouped[(task["_family"], task["_level"])].append(task)
+        grouped[(task["_family"], task["_rung"])].append(task)
     pattern = ("train", "train", "validation", "test")
     for key, cell in grouped.items():
         cell.sort(key=lambda item: item["id"])
@@ -4550,7 +4796,7 @@ def assign_splits(tasks: list[dict]) -> None:
 def build_matrix(tasks: list[dict]) -> dict[str, dict[str, int]]:
     matrix: dict[str, dict[str, int]] = {}
     for task in tasks:
-        family, level = task["_family"], task["_level"]
+        family, level = task["_family"], task["_rung"]
         matrix.setdefault(family, {})[level] = matrix.setdefault(family, {}).get(level, 0) + 1
     return matrix
 
@@ -4560,7 +4806,7 @@ def assert_lattice(matrix: dict[str, dict[str, int]]) -> None:
         f"expected families {sorted(EXPECTED_FAMILIES)}, got {sorted(matrix)}"
     )
     for family in EXPECTED_FAMILIES:
-        for level in LEVELS:
+        for level in RUNGS:
             assert matrix[family].get(level, 0) == 4, (
                 f"{family}/{level} expected 4, got {matrix[family].get(level, 0)}"
             )
@@ -4689,7 +4935,7 @@ def add_diversity_companions(tasks: list[dict]) -> None:
     portfolio_widgets = ["holdings_table", "sector_exposure", "risk_metrics", "holdings_table"]
     prompt_t0 = [
         task for task in tasks
-        if task["_family"] == "prompts" and task["_level"] == "t0"
+        if task["_family"] == "prompts" and task["_rung"] == "r0"
     ]
     for task, widget_id in zip(sorted(prompt_t0, key=lambda item: item["id"]), portfolio_widgets):
         append_fixture(task, "portfolio")
@@ -4742,10 +4988,19 @@ def prompt_pool_report(tasks: list[dict]) -> tuple[int, Counter, int]:
 def main() -> None:
     for directory in OUT_DIRS:
         directory.mkdir(parents=True, exist_ok=True)
-        for stale in directory.glob("*.json"):
-            stale.unlink()
-    ids = [s["id"] for s in SCENARIOS]
-    dupes = sorted({i for i in ids if ids.count(i) > 1})
+        for stale in directory.rglob("*.json"):
+            if stale.name != "task_suite.json":
+                stale.unlink()
+        for candidate in sorted(directory.rglob("*"), reverse=True):
+            if candidate.is_dir() and not any(candidate.iterdir()):
+                candidate.rmdir()
+    pairs = [(task["family"], task["id"]) for task in SCENARIOS]
+    duplicate_pairs = {pair for pair in pairs if pairs.count(pair) > 1}
+    for task in SCENARIOS:
+        if (task["family"], task["id"]) in duplicate_pairs:
+            task["id"] = re.sub(r"[^a-z0-9]+", "_", task["title"].lower()).strip("_")
+    pairs = [(task["family"], task["id"]) for task in SCENARIOS]
+    dupes = sorted({pair for pair in pairs if pairs.count(pair) > 1})
     assert not dupes, f"duplicate ids: {dupes}"
 
     add_diversity_companions(SCENARIOS)
@@ -4761,22 +5016,22 @@ def main() -> None:
 
     for task in SCENARIOS:
         task.pop("_family")
-        task.pop("_level")
+        task.pop("_rung")
         for directory in OUT_DIRS:
-            (directory / f"{task['id']}.json").write_text(
+            family_dir = directory / task["family"]
+            family_dir.mkdir(parents=True, exist_ok=True)
+            (family_dir / f"{task['id']}.json").write_text(
                 json.dumps(task, indent=2) + "\n")
 
     manifest = {
-        "suite_id": "workspace-bench-v1",
-        "release_id": "workspace-bench-v1",
-        "version": "1.0.0",
+        "suite_id": "core",
         "visibility": "public",
         "default_split": "train",
+        "content_sha256": task_payload_digest(SCENARIOS),
         "description": (
-            "Unified WorkspaceBench v1 generated benchmark: 15 MCP-surface families, "
-            "each with a complete t0-t4 structural-difficulty ladder (4 tasks per "
-            "cell, 300 total). Splits are deterministic 150/75/75 train/validation/test, "
-            "with every family/level cell contributing one validation and one test task."
+            "WorkspaceBench core collection: 15 MCP-surface families and 300 tasks. "
+            "Splits are deterministic 150/75/75 train/validation/test; difficulty is "
+            "recorded independently as easy, medium, or hard."
         ),
     }
     for directory in OUT_DIRS:
@@ -4788,13 +5043,13 @@ def main() -> None:
         f"{prompt_sites} sites; pool sizes {dict(sorted(prompt_pool_sizes.items()))}"
     )
     print(f"Distinct surface prompt phrasings used: {distinct_prompts}/{len(SCENARIOS)}\n")
-    print(f"{'family':12s}" + "".join(f"{t:>5s}" for t in LEVELS) + f"{'total':>7s}")
+    print(f"{'family':12s}" + "".join(f"{t:>5s}" for t in RUNGS) + f"{'total':>7s}")
     for family in sorted(matrix):
         row = matrix[family]
-        print(f"{family:12s}" + "".join(f"{row.get(t, 0):5d}" for t in LEVELS)
+        print(f"{family:12s}" + "".join(f"{row.get(t, 0):5d}" for t in RUNGS)
               + f"{sum(row.values()):7d}")
-    totals = {t: sum(row.get(t, 0) for row in matrix.values()) for t in LEVELS}
-    print(f"{'TOTAL':12s}" + "".join(f"{totals[t]:5d}" for t in LEVELS)
+    totals = {t: sum(row.get(t, 0) for row in matrix.values()) for t in RUNGS}
+    print(f"{'TOTAL':12s}" + "".join(f"{totals[t]:5d}" for t in RUNGS)
           + f"{sum(totals.values()):7d}")
     print("\nQuota report")
     for name, observed, expected, ok in report:

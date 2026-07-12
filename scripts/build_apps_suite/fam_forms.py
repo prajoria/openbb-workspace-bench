@@ -174,7 +174,7 @@ def _custom_forms() -> dict[str, dict]:
 def build() -> None:
     custom = _custom_forms()
 
-    # ------------------------------------------------------------------ t0
+    # ------------------------------------------------------------------ r0
     # Exact widgets.json briefs for form and button param shapes.
     t0_specs = [
         ("sla", "vendor_intake_form", c.desk_widget("sla", "vendor_intake_form")),
@@ -186,9 +186,9 @@ def build() -> None:
         desk = c.desk(desk_key)
         definition = json.loads(json.dumps(definition))
         definition["category"] = "Workflow Forms"
-        sid = f"auth_t0_forms_{widget_id}"
+        sid = f"{widget_id}"
         brief = c.widget_requirements_text(widget_id, definition)
-        c.add("forms", "t0", {
+        c.add("forms", "r0", {
             "id": sid,
             "title": f"Build the {definition['name']} form widget",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -216,7 +216,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t1
+    # ------------------------------------------------------------------ r1
     # Exact form widget plus a one-tab app wrapper in words.
     t1_specs = [
         ("sla", "vendor_intake_form", c.desk_widget("sla", "vendor_intake_form"),
@@ -237,14 +237,14 @@ def build() -> None:
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name, [c.layout_item(widget_id, x, y, w, h)]),
         ])
-        sid = f"auth_t1_forms_{widget_id}_app"
+        sid = f"{widget_id}_app"
         brief = c.widget_requirements_text(widget_id, definition)
         wrap = (
             f"an app named \"{app_name}\" (description \"{app_desc}\") with one "
             f"tab `{tab_id}` named \"{tab_name}\" placing `{widget_id}` at "
             f"x={x} y={y} w={w} h={h}"
         )
-        c.add("forms", "t1", {
+        c.add("forms", "r1", {
             "id": sid,
             "title": f"Ship {definition['name']} as the {app_name} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -275,7 +275,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t2
+    # ------------------------------------------------------------------ r2
     # Words-only form requirements, field by field, plus one config dimension.
     t2_specs = [
         ("sla", "vendor_review_form", custom["vendor_review_form"],
@@ -292,8 +292,8 @@ def build() -> None:
         definition = json.loads(json.dumps(definition))
         definition.update(extra)
         words = _policy_requirements(widget_id, definition)
-        sid = f"auth_t2_forms_{widget_id}"
-        c.add("forms", "t2", {
+        sid = f"{widget_id}"
+        c.add("forms", "r2", {
             "id": sid,
             "title": f"Compose the {definition['name']} form widget",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -321,7 +321,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t3
+    # ------------------------------------------------------------------ r3
     # Form focus plus status siblings in a two-tab app.
     t3_specs = [
         ("sla", "vendor_intake_form", c.desk_widget("sla", "vendor_intake_form"),
@@ -387,8 +387,8 @@ def build() -> None:
         )
         widget_words += " " + c.shared_param_note(shared_param, grouped_ids)
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t3_forms_{app_name.lower().replace(' ', '_')}"
-        c.add("forms", "t3", {
+        sid = f"{app_name.lower().replace(' ', '_')}"
+        c.add("forms", "r3", {
             "id": sid,
             "title": f"Assemble the {app_name} form app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -421,7 +421,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t4
+    # ------------------------------------------------------------------ r4
     # Build, publish, instantiate, configure, and document a form pack.
     t4_specs = [
         ("sla", "vendor_intake_form", c.desk_widget("sla", "vendor_intake_form"),
@@ -481,8 +481,8 @@ def build() -> None:
             f"`{focus_id}` widget"
         )
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t4_forms_{desk_key}_ship"
-        c.add("forms", "t4", {
+        sid = f"{desk_key}_ship"
+        c.add("forms", "r4", {
             "id": sid,
             "title": f"Ship, open, and configure the {app_name} form app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],

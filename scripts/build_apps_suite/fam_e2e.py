@@ -1,4 +1,4 @@
-"""Family E2E - t4-only building capstones."""
+"""Family E2E - r4-only building capstones."""
 
 from __future__ import annotations
 
@@ -56,8 +56,8 @@ def _add_capstone(
         f"set {focus_field} to {json.dumps(set_value)} on the opened "
         f"`{table_id}` widget"
     )
-    sid = f"auth_t4_e2e_{slug}"
-    c.add("e2e", "t4", {
+    sid = f"{slug}"
+    c.add("e2e", "r4", {
         "id": sid,
         "title": f"Ship, open, and configure {app_name}",
         "workflow": desk["workflow"], "subdomain": desk["subdomain"],

@@ -105,7 +105,7 @@ def _policy_requirements(widget_id: str, definition: dict) -> str:
 
 
 def build() -> None:
-    # ------------------------------------------------------------------ t0
+    # ------------------------------------------------------------------ r0
     # Seed one widget, then refresh widgets_json with the served widget plus
     # one exact-JSON addition.
     t0_specs = [
@@ -124,9 +124,9 @@ def build() -> None:
         )
         initial_widgets = {seeded_id: seeded}
         final_widgets = {seeded_id: seeded, added_id: added}
-        sid = f"auth_t0_extend_add_{added_id}"
+        sid = f"add_{added_id}"
         brief = c.widget_requirements_text(added_id, added)
-        c.add("extend", "t0", {
+        c.add("extend", "r0", {
             "id": sid,
             "title": f"Refresh {desk['backend']} with {added['name']}",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -160,7 +160,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t1
+    # ------------------------------------------------------------------ r1
     # Seed widgets and a one-tab app. Add a briefed widget and update the app
     # placement in the same refresh.
     t1_specs = [
@@ -203,14 +203,14 @@ def build() -> None:
         ])
         final_widgets = dict(seeded_widgets)
         final_widgets[added_id] = added
-        sid = f"auth_t1_extend_place_{added_id}"
+        sid = f"place_{added_id}"
         brief = c.widget_requirements_text(added_id, added)
         edit_words = (
             f"keep app \"{app_name}\" on tab `{tab_id}` named \"{tab_name}\" and "
             f"add `{added_id}` at x={ax} y={ay} w={aw} h={ah}; preserve the "
             "existing placement"
         )
-        c.add("extend", "t1", {
+        c.add("extend", "r1", {
             "id": sid,
             "title": f"Add {added['name']} to {app_name}",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -247,7 +247,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t2
+    # ------------------------------------------------------------------ r2
     # Words-only modifications over served state; each cell applies a policy
     # config change and fixes a bad parameter type while preserving a sibling.
     t2_specs = [
@@ -287,9 +287,9 @@ def build() -> None:
         sibling = c.desk_widget(desk_key, sibling_id)
         initial_widgets = {modified_id: broken, sibling_id: sibling}
         final_widgets = {modified_id: modified, sibling_id: sibling}
-        sid = f"auth_t2_extend_modify_{modified_id}"
+        sid = f"modify_{modified_id}"
         req = _policy_requirements(modified_id, modified)
-        c.add("extend", "t2", {
+        c.add("extend", "r2", {
             "id": sid,
             "title": f"Modify {modified['name']} without dropping siblings",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -327,7 +327,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t3
+    # ------------------------------------------------------------------ r3
     # Diagnosis scans: broken seed carries only a count badge; prompts state the
     # conventions, then the refresh fixes flagged entries and adds one widget.
     t3_specs = []
@@ -498,9 +498,9 @@ def build() -> None:
     for desk_key, broken_widgets, final_widgets, checks, conventions, added_id in t3_specs:
         desk = c.desk(desk_key)
         added = final_widgets[added_id]
-        sid = f"auth_t3_extend_diagnose_{desk_key}"
+        sid = f"diagnose_{desk_key}"
         add_brief = c.widget_requirements_text(added_id, added)
-        c.add("extend", "t3", {
+        c.add("extend", "r3", {
             "id": sid,
             "title": f"Diagnose and extend {desk['backend']}",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -536,7 +536,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t4
+    # ------------------------------------------------------------------ r4
     # Diagnose, repair, extend the served app, instantiate, configure, and document.
     t4_specs = []
 
@@ -643,13 +643,13 @@ def build() -> None:
         final_widgets = {focus_id: fixed_focus, added_id: added}
         dashboard_name = f"{app_name} Dashboard"
         note_text = f"{app_name} is live from {desk['backend']}: {note_term} done."
-        sid = f"auth_t4_extend_repair_{desk_key}"
+        sid = f"repair_{desk_key}"
         add_words = c.widget_requirements_text(added_id, added)
         configure_words = (
             f"set {param_name} to {json.dumps(set_value)} on the opened "
             f"`{focus_id}` widget"
         )
-        c.add("extend", "t4", {
+        c.add("extend", "r4", {
             "id": sid,
             "title": f"Repair, extend, open, and configure {app_name}",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],

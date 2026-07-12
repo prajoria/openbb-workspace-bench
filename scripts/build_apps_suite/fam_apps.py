@@ -2,15 +2,15 @@
 
 The apps.json file IS the artifact under test at every level; widgets stay
 deliberately simple so grading breadth tracks the app skill:
-- t0 one app with the right schema — the backend is SEEDED with widgets; the
+- r0 one app with the right schema — the backend is SEEDED with widgets; the
   model writes apps.json from a words-form requirements brief, shipped via refresh.
-- t1 ship it as an app — build widgets.json (one widget, words) AND the
+- r1 ship it as an app — build widgets.json (one widget, words) AND the
   one-tab apps.json wrapper (words) from scratch in one add.
-- t2 one app, >=2 composed requirements — seeded widgets; the app is stated in
+- r2 one app, >=2 composed requirements — seeded widgets; the app is stated in
   words and composes placements + a param group / preset params / prompts.
-- t3 the app takes shape — 2-3 widgets (words) + a multi-tab app in one add;
+- r3 the app takes shape — 2-3 widgets (words) + a multi-tab app in one add;
   focus widget full, siblings anchored, app full.
-- t4 operate what you built — build, publish, instantiate, document.
+- r4 operate what you built — build, publish, instantiate, document.
 """
 
 import json
@@ -19,7 +19,7 @@ from . import common as c
 
 
 def build() -> None:
-    # ------------------------------------------------------------------ t0
+    # ------------------------------------------------------------------ r0
     # The backend already serves two widgets (seeded); build apps.json only.
     t0_specs = [
         # (desk, widget ids serving, app name, desc, tab_id, tab name, layout)
@@ -47,9 +47,9 @@ def build() -> None:
             (tab_id, tab_name,
              [c.layout_item(wid, x, y, w, h) for wid, x, y, w, h in items]),
         ])
-        sid = f"auth_t0_apps_{app_name.lower().replace(' ', '_')}"
+        sid = f"{app_name.lower().replace(' ', '_')}"
         brief = c.app_requirements_text(app)
-        c.add("apps", "t0", {
+        c.add("apps", "r0", {
             "id": sid,
             "title": f"Build the {app_name} app definition",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -80,7 +80,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t1
+    # ------------------------------------------------------------------ r1
     # From scratch: one exact-JSON widget + the one-tab app wrapper in words.
     t1_specs = [
         ("tvl", "gas_metric", "Gas Board", "Gas posture at a glance.",
@@ -99,14 +99,14 @@ def build() -> None:
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name, [c.layout_item(widget_id, x, y, w, h)]),
         ])
-        sid = f"auth_t1_apps_{widget_id}_wrap"
+        sid = f"{widget_id}_wrap"
         brief = c.widget_requirements_text(widget_id, definition)
         wrap = (
             f"an app named \"{app_name}\" (description \"{app_desc}\") with one "
             f"tab `{tab_id}` named \"{tab_name}\" placing `{widget_id}` at "
             f"x={x} y={y} w={w} h={h}"
         )
-        c.add("apps", "t1", {
+        c.add("apps", "r1", {
             "id": sid,
             "title": f"Ship {definition['name']} inside the {app_name} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -138,7 +138,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t2
+    # ------------------------------------------------------------------ r2
     # Composed app requirements in words over seeded widgets: placements plus a
     # second dimension (param group / preset params / suggested prompts).
     t2_specs = [
@@ -191,9 +191,9 @@ def build() -> None:
             groups=spec["groups"] or None,
             prompts=spec["prompts"],
         )
-        sid = f"auth_t2_apps_{spec['name'].lower().replace(' ', '_')}"
+        sid = f"{spec['name'].lower().replace(' ', '_')}"
         words = c.app_requirements_text(app)
-        c.add("apps", "t2", {
+        c.add("apps", "r2", {
             "id": sid,
             "title": f"Compose the {spec['name']} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -223,7 +223,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t3
+    # ------------------------------------------------------------------ r3
     # From scratch: 2-3 widgets in words + a multi-tab app in one add. Every
     # cell carries a composition dimension: a param group where the widgets
     # share a param (added to the defs when needed), or a desk convention
@@ -293,8 +293,8 @@ def build() -> None:
             convention = c.stamp_consistency(widgets)
             widget_words += f". Desk convention: {convention}"
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t3_apps_{spec['name'].lower().replace(' ', '_')}"
-        c.add("apps", "t3", {
+        sid = f"{spec['name'].lower().replace(' ', '_')}"
+        c.add("apps", "r3", {
             "id": sid,
             "title": f"Assemble the {spec['name']} app from scratch",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -329,9 +329,9 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t4
+    # ------------------------------------------------------------------ r4
     # Build + publish + instantiate + CONFIGURE + document (proxy r5:
-    # without the configure step t4's operate legs were nearly free).
+    # without the configure step r4's operate legs were nearly free).
     t4_specs = [
         # (..., note_term, configure=(param|None to use an existing one,
         #  param_name, set_value))
@@ -365,7 +365,7 @@ def build() -> None:
                 json.loads(json.dumps(new_param))
             )
         app_name, app_desc, tab_id, tab_name = app_spec
-        # t4 writes t3-grade content (two tabs + fanned-out convention) and
+        # r4 writes r3-grade content (two tabs + fanned-out convention) and
         # then operates it (proxy r3 inversion fix).
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name, [c.layout_item(focus_id, 0, 0, 20, 9)]),
@@ -386,8 +386,8 @@ def build() -> None:
             f"`{focus_id}` widget"
         )
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t4_apps_{desk_key}_ship"
-        c.add("apps", "t4", {
+        sid = f"{desk_key}_ship"
+        c.add("apps", "r4", {
             "id": sid,
             "title": f"Ship, open, and configure the {app_name} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -416,8 +416,8 @@ def build() -> None:
                                               "update_widget"],
             "success": {
                 # the apps family's focus artifact IS the app, so it stays
-                # fully graded at t4 while all widgets anchor (widget-side
-                # families do the inverse — see fam_aggrid t4).
+                # fully graded at r4 while all widgets anchor (widget-side
+                # families do the inverse — see fam_aggrid r4).
                 "required_widget_defs": [
                     c.widget_def_anchor_checks(desk["backend"], wid, widgets[wid])
                     for wid in widgets

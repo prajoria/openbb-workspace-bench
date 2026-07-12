@@ -120,7 +120,7 @@ def _omni_def(
 
 
 def build() -> None:
-    # ------------------------------------------------------------------ t0
+    # ------------------------------------------------------------------ r0
     # One exact-JSON widget per owned surface, plus one advanced-chart repeat
     # with a different default symbol.
     t0_specs = [
@@ -137,9 +137,9 @@ def build() -> None:
     for desk_key, widget_id, definition in t0_specs:
         desk = c.desk(desk_key)
         definition = _copy(definition)
-        sid = f"auth_t0_advanced_{widget_id}"
+        sid = f"{widget_id}"
         brief = c.widget_requirements_text(widget_id, definition)
-        c.add("advanced", "t0", {
+        c.add("advanced", "r0", {
             "id": sid,
             "title": f"Build the {definition['name']} advanced widget",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -167,7 +167,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t1
+    # ------------------------------------------------------------------ r1
     # Exact widget brief plus a one-tab app wrapper in words. The last two apps
         # stays at the same widget class plus a one-tab app wrapper.
     t1_specs = [
@@ -201,7 +201,7 @@ def build() -> None:
             tabs=[(tab_id, tab_name, [c.layout_item(widget_id, x, y, w, h)])],
             prompts=prompts,
         )
-        sid = f"auth_t1_advanced_{widget_id}_app"
+        sid = f"{widget_id}_app"
         brief = c.widget_requirements_text(widget_id, definition)
         wrap = (
             f"an app named \"{app_name}\" (description \"{app_desc}\") with a "
@@ -210,7 +210,7 @@ def build() -> None:
         )
         if prompts:
             wrap += "; suggested prompt " + "; ".join(f"\"{p}\"" for p in prompts)
-        c.add("advanced", "t1", {
+        c.add("advanced", "r1", {
             "id": sid,
             "title": f"Ship {definition['name']} as {app_name}",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -242,7 +242,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t2
+    # ------------------------------------------------------------------ r2
     # Words-only composed requirements, focused on type-specific advanced fields.
     t2_specs = [
         ("execution", "orders_stream",
@@ -280,9 +280,9 @@ def build() -> None:
     ]
     for desk_key, widget_id, definition, composed_note in t2_specs:
         desk = c.desk(desk_key)
-        sid = f"auth_t2_advanced_{widget_id}"
+        sid = f"{widget_id}"
         words = _policy_requirements(widget_id, definition)
-        c.add("advanced", "t2", {
+        c.add("advanced", "r2", {
             "id": sid,
             "title": f"Compose the {definition['name']} widget",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -314,7 +314,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t3
+    # ------------------------------------------------------------------ r3
     # Multi-widget advanced rooms: focus full, siblings anchored, app full.
     t3_specs = [
         ("execution", "orders_ops_stream",
@@ -399,8 +399,8 @@ def build() -> None:
             convention = c.stamp_consistency(widgets)
             widget_words += f". Desk convention: {convention}"
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t3_advanced_{focus_id}_room"
-        c.add("advanced", "t3", {
+        sid = f"{focus_id}_room"
+        c.add("advanced", "r3", {
             "id": sid,
             "title": f"Assemble the {app_name}",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -438,7 +438,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t4
+    # ------------------------------------------------------------------ r4
     # Build, publish, instantiate, configure, and document each advanced surface.
     t4_specs = [
         ("vol", "vix_advanced", c.desk_widget("vol", "vix_advanced"),
@@ -446,7 +446,7 @@ def build() -> None:
          ("Vol Advanced Live", "VIX TradingView chart and regime.",
           [("vol", "Vol", [("vix_advanced", 0, 0, 20, 20),
                             ("vol_regime_metric", 20, 0, 8, 5)])]),
-         "advanced chart",
+         "VIX futures",
          (c.text_param("symbol", "Symbol", "VX1",
                        "Advanced chart symbol."),
           "symbol", "VX2")),
@@ -479,7 +479,7 @@ def build() -> None:
          ("Rates Advanced Live", "TradingView rates chart and curve.",
           [("chart", "Chart", [("rates_live_chart", 0, 0, 20, 18)]),
            ("curve", "Curve", [("yield_curve", 0, 0, 20, 9)])]),
-         "rates chart",
+         "Treasury futures",
          (c.text_param("contract", "Contract", "ZN",
                        "Treasury futures contract."),
           "contract", "ZB")),
@@ -518,8 +518,8 @@ def build() -> None:
             f"`{focus_id}` widget"
         )
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t4_advanced_{focus_id}_ship"
-        c.add("advanced", "t4", {
+        sid = f"{focus_id}_ship"
+        c.add("advanced", "r4", {
             "id": sid,
             "title": f"Ship, open, and configure {app_name}",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],

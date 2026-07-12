@@ -37,7 +37,7 @@ def _policy_requirements(widget_id: str, definition: dict) -> str:
 
 
 def build() -> None:
-    # ------------------------------------------------------------------ t0
+    # ------------------------------------------------------------------ r0
     # Exact JSON briefs, each carrying at least two configuration keys.
     t0_specs = [
         ("vol", "vol_regime_metric",
@@ -56,9 +56,9 @@ def build() -> None:
     for desk_key, widget_id, updates, label in t0_specs:
         desk = c.desk(desk_key)
         definition = _copy_with(c.desk_widget(desk_key, widget_id), **updates)
-        sid = f"auth_t0_settings_{widget_id}"
+        sid = f"{widget_id}"
         brief = c.widget_requirements_text(widget_id, definition)
-        c.add("settings", "t0", {
+        c.add("settings", "r0", {
             "id": sid,
             "title": f"Build the {definition['name']} {label}",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -87,7 +87,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t1
+    # ------------------------------------------------------------------ r1
     # Configured widget plus one-tab app wrapper.
     t1_specs = [
         ("compliance", "alert_metric",
@@ -113,14 +113,14 @@ def build() -> None:
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name, [c.layout_item(widget_id, x, y, w, h)]),
         ])
-        sid = f"auth_t1_settings_{widget_id}_app"
+        sid = f"{widget_id}_app"
         brief = c.widget_requirements_text(widget_id, definition)
         wrap = (
             f"an app named \"{app_name}\" (description \"{app_desc}\") with one "
             f"tab `{tab_id}` named \"{tab_name}\" placing `{widget_id}` at "
             f"x={x} y={y} w={w} h={h}"
         )
-        c.add("settings", "t1", {
+        c.add("settings", "r1", {
             "id": sid,
             "title": f"Ship the configured {definition['name']} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -153,7 +153,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t2
+    # ------------------------------------------------------------------ r2
     # Words-only composed settings: base widget plus two or more config
     # dimensions. Tables derive columns from stated rows.
     t2_specs = [
@@ -200,8 +200,8 @@ def build() -> None:
                 f"{extra_text}. {c.CONFIG_RULES} The endpoint returns rows like {c.rows_text(rows)} — "
                 f"{c.DERIVATION_RULES} {c.DERIVATION_EXAMPLE}"
             )
-        sid = f"auth_t2_settings_{widget_id}"
-        c.add("settings", "t2", {
+        sid = f"{widget_id}"
+        c.add("settings", "r2", {
             "id": sid,
             "title": f"Compose the configured {definition['name']} widget",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -230,7 +230,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t3
+    # ------------------------------------------------------------------ r3
     # Multi-widget apps where the shared config convention is stated once.
     t3_specs = [
         ("vol",
@@ -288,8 +288,8 @@ def build() -> None:
             for wid, definition in widgets.items()
         )
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t3_settings_{focus_id}_room"
-        c.add("settings", "t3", {
+        sid = f"{focus_id}_room"
+        c.add("settings", "r3", {
             "id": sid,
             "title": f"Assemble the {app_name} configured app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -325,7 +325,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t4
+    # ------------------------------------------------------------------ r4
     # Configured pack + app + instantiate + configure + note.
     t4_specs = [
         ("vol",
@@ -334,7 +334,7 @@ def build() -> None:
           ("vix_history", {"staleTime": 900000, "runButton": True})],
          "vol_regime_metric",
          ("Vol Config Live", "Configured vol metric and commentary.", "vol", "Vol"),
-         "staleTime 900000",
+         "15-minute cache",
          (c.text_param("regime_view", "Regime View", "summary",
                        "Vol regime view to show."),
           "regime_view", "stress")),
@@ -354,7 +354,7 @@ def build() -> None:
           ("venue_pdf", {"runButton": True, "refetchInterval": 45000})],
          "exception_metric",
          ("Execution Config Live", "Configured exceptions and orders.", "execution", "Execution"),
-         "runButton true",
+         "on-demand updates",
          (c.text_param("queue", "Queue", "all",
                        "Exception queue to inspect."),
           "queue", "urgent")),
@@ -400,8 +400,8 @@ def build() -> None:
             f"`{focus_id}` widget"
         )
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t4_settings_{desk_key}_ship"
-        c.add("settings", "t4", {
+        sid = f"{desk_key}_ship"
+        c.add("settings", "r4", {
             "id": sid,
             "title": f"Ship, open, and configure the {app_name} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],

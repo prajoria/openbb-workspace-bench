@@ -4,16 +4,16 @@ EXEMPLAR MODULE for the v3 ladder: every widget-side family follows this shape.
 Owns widget types: table, ssrm_table (asserted by TYPE_OWNERSHIP at certify).
 
 The v3 ladder (Didier alignment, 2026-07-08):
-- t0 one widget with the right schema — words-form requirements brief (the model builds the JSON), single add.
-- t1 ship it as an app — the widget (words) plus a one-tab apps.json wrapper
+- r0 one widget with the right schema — words-form requirements brief (the model builds the JSON), single add.
+- r1 ship it as an app — the widget (words) plus a one-tab apps.json wrapper
   described in words; the widget grades as a 3-check anchor (skill proven at
-  t0), the app block grades fully.
-- t2 one widget, >=2 composed requirements — requirements in words, never JSON;
+  r0), the app block grades fully.
+- r2 one widget, >=2 composed requirements — requirements in words, never JSON;
   columns DERIVED from served rows; a second dimension (settings/type/extras)
   composed on top.
-- t3 the app takes shape — 2-3 widgets + a multi-tab app with placements in
+- r3 the app takes shape — 2-3 widgets + a multi-tab app with placements in
   words; focus widget full, siblings anchored, app full.
-- t4 operate what you built — build, publish, instantiate the built app,
+- r4 operate what you built — build, publish, instantiate the built app,
   document; TRACE_T4 budget.
 """
 
@@ -27,10 +27,10 @@ def _strip(definition: dict, *keys: str) -> dict:
 
 
 def build() -> None:
-    # ------------------------------------------------------------------ t0
+    # ------------------------------------------------------------------ r0
     # One table definition with the right schema; exact-JSON brief; one add.
     t0_specs = [
-        # (desk, widget_id) — every t0 def keeps its full schema surface
+        # (desk, widget_id) — every r0 def keeps its full schema surface
         # (params + columns where the type carries them): "the right schema"
         # must include the structured elements, or the level is a giveaway
         # (proxy r3: bare defs kept the floor model at 100%).
@@ -43,14 +43,14 @@ def build() -> None:
         desk = c.desk(desk_key)
         definition = c.desk_widget(desk_key, widget_id)
         if widget_id == "estimates_ssrm":
-            # the served ssrm def is bare — t0 requires a real schema surface
+            # the served ssrm def is bare — r0 requires a real schema surface
             definition["params"] = [
                 c.endpoint_param("symbol", "Symbol", "AAPL", "/symbols")
             ]
             definition.setdefault("data", {})["dataKey"] = "rows"
-        sid = f"auth_t0_aggrid_{widget_id}"
+        sid = f"{widget_id}"
         brief = c.widget_requirements_text(widget_id, definition)
-        c.add("aggrid", "t0", {
+        c.add("aggrid", "r0", {
             "id": sid,
             "title": f"Build the {definition['name']} table definition",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -79,7 +79,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t1
+    # ------------------------------------------------------------------ r1
     # Ship it as an app: the widget (exact JSON, graded in full) plus a
     # one-tab apps.json wrapper stated in words.
     t1_specs = [
@@ -99,14 +99,14 @@ def build() -> None:
         x, y, w, h = pos
         app = c.app_def(app_name, app_desc,
                         tabs=[(tab_id, tab_name, [c.layout_item(widget_id, x, y, w, h)])])
-        sid = f"auth_t1_aggrid_{widget_id}_app"
+        sid = f"{widget_id}_app"
         brief = c.widget_requirements_text(widget_id, definition)
         wrap = (
             f"an app named \"{app_name}\" (description \"{app_desc}\") with a "
             f"single tab `{tab_id}` named \"{tab_name}\" that places "
             f"`{widget_id}` at x={x} y={y} w={w} h={h}"
         )
-        c.add("aggrid", "t1", {
+        c.add("aggrid", "r1", {
             "id": sid,
             "title": f"Ship {definition['name']} as the {app_name} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -140,7 +140,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t2
+    # ------------------------------------------------------------------ r2
     # Composed requirements in words: columns derived from served rows PLUS a
     # second stated dimension (settings / type / render extras). No JSON given.
     t2_specs = [
@@ -194,13 +194,13 @@ def build() -> None:
                     column["renderFn"] = render_fn
         if data_key:
             definition["data"]["dataKey"] = data_key
-        sid = f"auth_t2_aggrid_{widget_id}"
+        sid = f"{widget_id}"
         surface = (
             f"`{widget_id}`: name \"{name}\", description \"{description}\", "
             f"endpoint {endpoint}, "
             f"type {definition.get('type', 'table')}, gridData w=20 h=9"
         )
-        c.add("aggrid", "t2", {
+        c.add("aggrid", "r2", {
             "id": sid,
             "title": f"Compose the {name} table from its rows and requirements",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -236,7 +236,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t3
+    # ------------------------------------------------------------------ r3
     # The app takes shape: 2-3 widgets + a multi-tab app, all in words. The
     # derived table is the graded focus; siblings anchor; the app grades fully.
     t3_specs = [
@@ -327,8 +327,8 @@ def build() -> None:
         if convention:
             focus_surface += f". Desk convention: {convention}"
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t3_aggrid_{widget_id}"
-        c.add("aggrid", "t3", {
+        sid = f"{widget_id}"
+        c.add("aggrid", "r3", {
             "id": sid,
             "title": f"Assemble the {app_name} app around {name}",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -366,10 +366,10 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t4
+    # ------------------------------------------------------------------ r4
     # Operate what you built: build + publish + instantiate + CONFIGURE +
-    # document (proxy r5: without the configure step, t4's operate legs were
-    # nearly free and t4 tied t3).
+    # document (proxy r5: without the configure step, r4's operate legs were
+    # nearly free and r4 tied r3).
     t4_specs = [
         # (desk, focus=(widget_id, name, endpoint, description, rows), sibling,
         #  app=(name, desc, tab_id, tab_name), note_term,
@@ -423,9 +423,9 @@ def build() -> None:
             widgets[sib] = c.desk_widget(desk_key, sib)
         sibling_id = sibling_ids[0]
         app_name, app_desc, tab_id, tab_name = app_spec
-        # t4 writes what t3 writes (two tabs + a fanned-out convention) and
-        # then OPERATES it — proxy r3 found a t3/t4 inversion when t4's
-        # built content was lighter than t3's.
+        # r4 writes what r3 writes (two tabs + a fanned-out convention) and
+        # then OPERATES it — proxy r3 found a r3/r4 inversion when r4's
+        # built content was lighter than r3's.
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name, [c.layout_item(widget_id, 0, 0, 20, 9)]),
             ("signals", "Signals", [c.layout_item(sibling_id, 0, 0, 12, 6)]),
@@ -450,8 +450,8 @@ def build() -> None:
             "widget"
         )
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t4_aggrid_{desk_key}_ship"
-        c.add("aggrid", "t4", {
+        sid = f"{desk_key}_ship"
+        c.add("aggrid", "r4", {
             "id": sid,
             "title": f"Ship, open, and configure the {app_name} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -487,10 +487,10 @@ def build() -> None:
                     c.widget_def_anchor_checks(desk["backend"], sib, widgets[sib])
                     for sib in sibling_ids
                 ],
-                # the app-building skill is graded fully at t1-t3; t4 grades
+                # the app-building skill is graded fully at r1-r3; r4 grades
                 # its marginal skill (the operate chain), so the app anchors
-                # (proxy full-r6: full app grading left t4's building lighter
-                # than t3's and the levels tied).
+                # (proxy full-r6: full app grading left r4's building lighter
+                # than r3's and the levels tied).
                 "required_app_defs": [
                     c.app_def_anchor_checks(desk["backend"], app)
                 ],

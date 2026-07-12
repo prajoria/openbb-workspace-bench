@@ -1,8 +1,8 @@
-"""Generate docs/tool-coverage-matrix.md and docs/tool-matrix-data.json.
+"""Generate the tool coverage reports under runs/reports/.
 
 For every task in both bundled suites, mark which of the 20 Workspace MCP
 tools its oracle trace uses -- the ground-truth minimal solution path --
-along with its family, level, and difficulty. The markdown table answers
+along with its family and difficulty. The markdown table answers
 "which tools does task N require?"; the JSON feeds the blog's interactive
 matrix (tool usage encoded as a 20-bit mask).
 """
@@ -13,32 +13,68 @@ import json
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-PACK = REPO / "src/workspace_bench/core/task_suites/workspace_bench_v1"
-BUILD_PACK = (
-    REPO / "src/workspace_bench/core/task_suites/workspace_bench_v2_build_openbb_apps"
-)
-OUT_MD = REPO / "docs/tool-coverage-matrix.md"
-OUT_JSON = REPO / "docs/tool-matrix-data.json"
+PACK = REPO / "src/workspace_bench/core/task_suites/core"
+BUILD_PACK = REPO / "src/workspace_bench/core/task_suites/build_openbb_apps"
+OUT_MD = REPO / "runs/reports/tool-coverage-matrix.md"
+OUT_JSON = REPO / "runs/reports/tool-matrix-data.json"
 
 TOOLS = [
-    "get_workspace_snapshot", "manage_dashboard", "manage_navigation_bar",
-    "navigate_workspace", "list_available_widgets", "get_widget_schema",
-    "get_params_options", "get_widget_data", "create_widget", "update_widget",
-    "update_widget_layout", "delete_widget", "add_generative_widget", "read_widget",
-    "manage_backends", "manage_apps", "get_skill_content", "read_workspace_resource",
-    "get_workspace_prompt", "assign_tasks_to_agents",
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents",
 ]
-SHORT = ["snap", "dash", "nav_bar", "nav", "list_w", "schema", "params", "data",
-         "create", "update", "layout", "delete", "note", "read_w", "backends",
-         "apps", "skill", "resource", "prompt", "agents"]
+SHORT = [
+    "snap",
+    "dash",
+    "nav_bar",
+    "nav",
+    "list_w",
+    "schema",
+    "params",
+    "data",
+    "create",
+    "update",
+    "layout",
+    "delete",
+    "note",
+    "read_w",
+    "backends",
+    "apps",
+    "skill",
+    "resource",
+    "prompt",
+    "agents",
+]
 
 
 def load(directory: Path) -> list[dict]:
-    return [json.loads(f.read_text())
-            for f in sorted(directory.glob("*.json")) if f.name != "task_suite.json"]
+    return [
+        json.loads(f.read_text())
+        for f in sorted(directory.rglob("*.json"), key=lambda path: path.name)
+        if f.name != "task_suite.json"
+    ]
 
 
 def family_of(task: dict) -> str:
+    if task.get("family"):
+        return str(task["family"])
     for tag in task.get("tags", []):
         if tag.startswith("family-"):
             return tag.removeprefix("family-")
@@ -50,20 +86,24 @@ def rows_for(tasks: list[dict], suite: str) -> list[dict]:
     for index, task in enumerate(tasks, start=1):
         used = {call["tool"] for call in task.get("oracle_tool_calls", [])}
         mask = sum(1 << i for i, tool in enumerate(TOOLS) if tool in used)
-        rows.append({
-            "n": index, "id": task["id"], "suite": suite,
-            "family": family_of(task),
-            "difficulty": task.get("difficulty", "-"),
-            "level": task.get("level", "-"),
-            "mask": mask, "tool_count": bin(mask).count("1"),
-        })
+        rows.append(
+            {
+                "n": index,
+                "id": task["id"],
+                "suite": suite,
+                "family": family_of(task),
+                "difficulty": task.get("difficulty", "-"),
+                "mask": mask,
+                "tool_count": bin(mask).count("1"),
+            }
+        )
     return rows
 
 
 def main() -> None:
     packs = [
-        ("core (workspace-bench-v1)", load(PACK)),
-        ("build-openbb-apps (workspace-bench-v2-build-openbb-apps)", load(BUILD_PACK)),
+        ("core", load(PACK)),
+        ("build-openbb-apps", load(BUILD_PACK)),
     ]
 
     all_rows: list[dict] = []
@@ -74,12 +114,11 @@ def main() -> None:
         "an `x` marks each Workspace MCP tool the **oracle trace** uses — the",
         "ground-truth minimal solution path. `allowed_tools` in each task is a",
         "superset (agents may explore), and grader `required_tool_calls` are a subset",
-        "(behaviors checked explicitly). Level is the structural difficulty rung for",
-        "generated tasks (t0 single action -> t4 multi-intent composition);",
-        "difficulty derives from level.",
+        "(behaviors checked explicitly). Difficulty is the public complexity label.",
+        "The experimental `build-openbb-backends` suite is excluded because it uses",
+        "filesystem/shell coding agents rather than the Workspace MCP tool surface.",
         "",
-        "Column key: " + ", ".join(f"`{short}`={tool}"
-                                     for short, tool in zip(SHORT, TOOLS)),
+        "Column key: " + ", ".join(f"`{short}`={tool}" for short, tool in zip(SHORT, TOOLS)),
         "",
     ]
 
@@ -88,19 +127,20 @@ def main() -> None:
         all_rows.extend(rows)
         lines.append(f"## {suite_name} ({len(rows)} tasks)")
         lines.append("")
-        header = "| # | task | " + " | ".join(SHORT) + " | tools | level | difficulty |"
-        sep = "|--:|:---------|" + "|".join([":-:"] * len(SHORT)) + "|--:|:-:|:-----------|"
+        header = "| # | task | " + " | ".join(SHORT) + " | tools | difficulty |"
+        sep = "|--:|:---------|" + "|".join([":-:"] * len(SHORT)) + "|--:|:-----------|"
         lines += [header, sep]
         for row in rows:
-            marks = " | ".join("x" if row["mask"] & (1 << i) else " "
-                                for i in range(len(TOOLS)))
+            marks = " | ".join("x" if row["mask"] & (1 << i) else " " for i in range(len(TOOLS)))
             lines.append(
                 f"| {row['n']} | `{row['id']}` | {marks} | {row['tool_count']} "
-                f"| {row['level']} | {row['difficulty']} |")
+                f"| {row['difficulty']} |"
+            )
         lines.append("")
 
-    per_tool = {tool: sum(1 for row in all_rows if row["mask"] & (1 << i))
-                for i, tool in enumerate(TOOLS)}
+    per_tool = {
+        tool: sum(1 for row in all_rows if row["mask"] & (1 << i)) for i, tool in enumerate(TOOLS)
+    }
     lines.append("## Per-tool task counts")
     lines.append("")
     lines.append("| tool | tasks |")
@@ -110,11 +150,25 @@ def main() -> None:
     lines.append("")
     OUT_MD.write_text("\n".join(lines))
 
-    OUT_JSON.write_text(json.dumps({
-        "tools": TOOLS, "short": SHORT,
-        "rows": [[row["id"], row["suite"], row["family"], row["level"],
-                   row["difficulty"], row["mask"]] for row in all_rows],
-    }, separators=(",", ":")))
+    OUT_JSON.write_text(
+        json.dumps(
+            {
+                "tools": TOOLS,
+                "short": SHORT,
+                "rows": [
+                    [
+                        row["id"],
+                        row["suite"],
+                        row["family"],
+                        row["difficulty"],
+                        row["mask"],
+                    ]
+                    for row in all_rows
+                ],
+            },
+            separators=(",", ":"),
+        )
+    )
     print(f"Wrote {OUT_MD} and {OUT_JSON}: {len(all_rows)} rows")
     worst = min(per_tool.items(), key=lambda kv: kv[1])
     print(f"per-tool floor: {worst[0]} in {worst[1]} tasks")

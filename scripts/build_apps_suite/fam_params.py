@@ -48,7 +48,7 @@ def _policy_requirements(widget_id: str, definition: dict) -> str:
 
 
 def build() -> None:
-    # ------------------------------------------------------------------ t0
+    # ------------------------------------------------------------------ r0
     # Exact widgets.json briefs, one single-param widget per task.
     t0_specs = [
         ("vol", "vix_history", ["window"]),
@@ -64,9 +64,9 @@ def build() -> None:
             param for param in definition.get("params", [])
             if param.get("paramName") in keep
         ]
-        sid = f"auth_t0_params_{widget_id}"
+        sid = f"{widget_id}"
         brief = c.widget_requirements_text(widget_id, definition)
-        c.add("params", "t0", {
+        c.add("params", "r0", {
             "id": sid,
             "title": f"Build the {definition['name']} parameter widget",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -94,7 +94,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t1
+    # ------------------------------------------------------------------ r1
     # Param-carrying widget plus a one-tab app wrapper, from scratch.
     t1_specs = [
         ("healthcare", "trial_catalysts", "Catalyst Filter",
@@ -117,14 +117,14 @@ def build() -> None:
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name, [c.layout_item(widget_id, x, y, w, h)]),
         ])
-        sid = f"auth_t1_params_{widget_id}_app"
+        sid = f"{widget_id}_app"
         brief = c.widget_requirements_text(widget_id, definition)
         wrap = (
             f"an app named \"{app_name}\" (description \"{app_desc}\") with one "
             f"tab `{tab_id}` named \"{tab_name}\" placing `{widget_id}` at "
             f"x={x} y={y} w={w} h={h}"
         )
-        c.add("params", "t1", {
+        c.add("params", "r1", {
             "id": sid,
             "title": f"Ship {definition['name']} as the {app_name} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -155,7 +155,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t2
+    # ------------------------------------------------------------------ r2
     # Words-only composed widget requirements: params plus one config dimension.
     t2_specs = [
         ("vol", "vol_screener",
@@ -202,8 +202,8 @@ def build() -> None:
     for desk_key, widget_id, definition in t2_specs:
         desk = c.desk(desk_key)
         words = _policy_requirements(widget_id, definition)
-        sid = f"auth_t2_params_{widget_id}"
-        c.add("params", "t2", {
+        sid = f"{widget_id}"
+        c.add("params", "r2", {
             "id": sid,
             "title": f"Compose the {definition['name']} parameter widget",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -232,7 +232,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t3
+    # ------------------------------------------------------------------ r3
     # Multi-widget apps with param-carrying siblings. Shared params are stated once.
     t3_specs = [
         ("earnings",
@@ -290,8 +290,8 @@ def build() -> None:
             convention = c.stamp_consistency(widgets)
             widget_surface += f". Desk convention: {convention}"
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t3_params_{app_name.lower().replace(' ', '_')}"
-        c.add("params", "t3", {
+        sid = f"{app_name.lower().replace(' ', '_')}"
+        c.add("params", "r3", {
             "id": sid,
             "title": f"Assemble the {app_name} app with shared parameters",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -324,7 +324,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t4
+    # ------------------------------------------------------------------ r4
     # Build, publish, instantiate, configure, and document a param-aware app.
     t4_specs = [
         ("earnings", "estimate_revisions", ["earnings_chart", "surprise_metric"],
@@ -393,8 +393,8 @@ def build() -> None:
             f"`{focus_id}` widget"
         )
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t4_params_{desk_key}_ship"
-        c.add("params", "t4", {
+        sid = f"{desk_key}_ship"
+        c.add("params", "r4", {
             "id": sid,
             "title": f"Ship, open, and configure the {app_name} parameter app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],

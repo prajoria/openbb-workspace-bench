@@ -33,7 +33,7 @@ def _policy_requirements(widget_id: str, definition: dict) -> str:
 
 
 def build() -> None:
-    # ------------------------------------------------------------------ t0
+    # ------------------------------------------------------------------ r0
     # Exact JSON briefs for all chart dialects, plus one extra Plotly chart.
     t0_specs = [
         ("rates", "yield_curve"),
@@ -52,9 +52,9 @@ def build() -> None:
             definition.update({"staleTime": 1800000, "category": "Pipeline Charts"})
         elif widget_id == "earnings_chart":
             definition["staleTime"] = 900000
-        sid = f"auth_t0_charts_{widget_id}"
+        sid = f"{widget_id}"
         brief = c.widget_requirements_text(widget_id, definition)
-        c.add("charts", "t0", {
+        c.add("charts", "r0", {
             "id": sid,
             "title": f"Build the {definition['name']} chart definition",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -82,7 +82,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t1
+    # ------------------------------------------------------------------ r1
     # One chart plus a one-tab app wrapper. Widget anchored; app full.
     t1_specs = [
         ("rates", "yield_curve", {}, "Yield Curve App", "Treasury curve chart.",
@@ -103,14 +103,14 @@ def build() -> None:
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name, [c.layout_item(widget_id, x, y, w, h)]),
         ])
-        sid = f"auth_t1_charts_{widget_id}_app"
+        sid = f"{widget_id}_app"
         brief = c.widget_requirements_text(widget_id, definition)
         wrap = (
             f"an app named \"{app_name}\" (description \"{app_desc}\") with a "
             f"single tab `{tab_id}` named \"{tab_name}\" placing `{widget_id}` at "
             f"x={x} y={y} w={w} h={h}"
         )
-        c.add("charts", "t1", {
+        c.add("charts", "r1", {
             "id": sid,
             "title": f"Ship {definition['name']} as the {app_name} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -141,7 +141,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t2
+    # ------------------------------------------------------------------ r2
     # Words-only composed chart requirements: dialect + param + config.
     t2_specs = [
         ("earnings", "symbol_momentum_chart",
@@ -180,9 +180,9 @@ def build() -> None:
     ]
     for desk_key, widget_id, definition in t2_specs:
         desk = c.desk(desk_key)
-        sid = f"auth_t2_charts_{widget_id}"
+        sid = f"{widget_id}"
         words = _policy_requirements(widget_id, definition)
-        c.add("charts", "t2", {
+        c.add("charts", "r2", {
             "id": sid,
             "title": f"Compose the {definition['name']} chart widget",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -211,7 +211,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t3
+    # ------------------------------------------------------------------ r3
     # Chart-led multi-tab apps: chart focus full, table/metric siblings anchor.
     t3_specs = [
         ("rates", "yield_curve", ["curve_spread_metric"],
@@ -274,8 +274,8 @@ def build() -> None:
         )
         widget_words += " " + c.shared_param_note(shared_param, grouped_ids)
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t3_charts_{focus_id}_room"
-        c.add("charts", "t3", {
+        sid = f"{focus_id}_room"
+        c.add("charts", "r3", {
             "id": sid,
             "title": f"Assemble the {app_name} chart app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -310,7 +310,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t4
+    # ------------------------------------------------------------------ r4
     # Chart pack + app + instantiate + configure + note.
     t4_specs = [
         ("rates", "yield_curve", ["curve_spread_metric", "rates_commentary"],
@@ -321,20 +321,20 @@ def build() -> None:
           "curve_view", "5s30s")),
         ("tvl", "chains_highchart", ["gas_metric", "chains_table"],
          ("Chain Chart Live", "Highcharts chain view and gas.", "chains", "Chains"),
-         "Highcharts",
+         "chain TVL",
          (c.text_param("chain", "Chain", "Ethereum",
                        "Chain to chart."),
           "chain", "Solana")),
         ("healthcare", "pipeline_vegalite", ["catalyst_metric", "trial_catalysts"],
          ("Pipeline Chart Live", "Vega-Lite pipeline and catalysts.",
           "pipeline", "Pipeline"),
-         "Vega-Lite",
+         "pipeline phases",
          (c.text_param("phase", "Phase", "all",
                        "Pipeline phase to chart."),
           "phase", "III")),
         ("earnings", "earnings_chart", ["surprise_metric", "estimate_revisions"],
          ("Earnings Chart Live", "EPS chart and surprise metric.", "earnings", "Earnings"),
-         "EPS chart",
+         "earnings history",
          (None, "symbol", "MSFT")),
     ]
     for desk_key, focus_id, sibling_ids, app_spec, note_term, configure in t4_specs:
@@ -365,8 +365,8 @@ def build() -> None:
             f"`{focus_id}` widget"
         )
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t4_charts_{desk_key}_ship"
-        c.add("charts", "t4", {
+        sid = f"{desk_key}_ship"
+        c.add("charts", "r4", {
             "id": sid,
             "title": f"Ship, open, and configure the {app_name} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],

@@ -37,7 +37,7 @@ def _policy_requirements(widget_id: str, definition: dict) -> str:
 
 
 def build() -> None:
-    # ------------------------------------------------------------------ t0
+    # ------------------------------------------------------------------ r0
     # Exact widget-definition briefs for four owned content/embed types.
     t0_specs = [
         ("vol", "vol_commentary"),
@@ -56,9 +56,9 @@ def build() -> None:
             definition.update({"staleTime": 1800000, "category": "Execution Reports"})
         elif widget_id == "chains_heatmap_html":
             definition.update({"staleTime": 900000, "category": "Network Ops"})
-        sid = f"auth_t0_types_{widget_id}"
+        sid = f"{widget_id}"
         brief = c.widget_requirements_text(widget_id, definition)
-        c.add("types", "t0", {
+        c.add("types", "r0", {
             "id": sid,
             "title": f"Build the {definition['name']} {definition.get('type', 'table')} widget",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -87,7 +87,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t1
+    # ------------------------------------------------------------------ r1
     # Four more owned types shipped as one-tab apps. The widget is anchored;
     # the app wrapper is fully graded.
     t1_specs = [
@@ -107,14 +107,14 @@ def build() -> None:
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name, [c.layout_item(widget_id, x, y, w, h)]),
         ])
-        sid = f"auth_t1_types_{widget_id}_app"
+        sid = f"{widget_id}_app"
         brief = c.widget_requirements_text(widget_id, definition)
         wrap = (
             f"an app named \"{app_name}\" (description \"{app_desc}\") with a "
             f"single tab `{tab_id}` named \"{tab_name}\" that places "
             f"`{widget_id}` at x={x} y={y} w={w} h={h}"
         )
-        c.add("types", "t1", {
+        c.add("types", "r1", {
             "id": sid,
             "title": f"Ship {definition['name']} as the {app_name} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -148,7 +148,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t2
+    # ------------------------------------------------------------------ r2
     # Words-only composed widget requirements. Each cell keeps one artifact but
     # composes type + params/settings/source dimensions.
     t2_specs = [
@@ -185,9 +185,9 @@ def build() -> None:
     ]
     for desk_key, widget_id, definition in t2_specs:
         desk = c.desk(desk_key)
-        sid = f"auth_t2_types_{widget_id}"
+        sid = f"{widget_id}"
         words = _policy_requirements(widget_id, definition)
-        c.add("types", "t2", {
+        c.add("types", "r2", {
             "id": sid,
             "title": f"Compose the {definition['name']} content widget",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -218,10 +218,10 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t3
+    # ------------------------------------------------------------------ r3
     # Multi-widget, multi-tab content apps in words. Focus is full; siblings
     # anchor; app is full. Each room adds a factored shared param group as the
-    # t3 composition dimension.
+    # r3 composition dimension.
     t3_specs = [
         ("compliance", "case_notes", ["policy_pdf"],
          ("Case Research Room", "Case notes and policy digest.",
@@ -283,8 +283,8 @@ def build() -> None:
         )
         widget_words += " " + c.shared_param_note(shared_param, grouped_ids)
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t3_types_{focus_id}_room"
-        c.add("types", "t3", {
+        sid = f"{focus_id}_room"
+        c.add("types", "r3", {
             "id": sid,
             "title": f"Assemble the {app_name} content app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -320,7 +320,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t4
+    # ------------------------------------------------------------------ r4
     # Build a content pack, instantiate the app, configure it, and add the exact note.
     t4_specs = [
         ("compliance", "evidence_files", ["alert_metric", "case_notes"],
@@ -390,8 +390,8 @@ def build() -> None:
             f"`{focus_id}` widget"
         )
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t4_types_{focus_id}_ship"
-        c.add("types", "t4", {
+        sid = f"{focus_id}_ship"
+        c.add("types", "r4", {
             "id": sid,
             "title": f"Ship, open, and configure the {app_name} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],

@@ -51,7 +51,7 @@ def _symbol_click_table(
 
 
 def build() -> None:
-    # ------------------------------------------------------------------ t0
+    # ------------------------------------------------------------------ r0
     # Seeded earnings widgets; build only apps.json with an exact group brief.
     t0_specs = [
         (["estimate_revisions", "earnings_chart"],
@@ -76,9 +76,9 @@ def build() -> None:
                 c.layout_item(widget_ids[1], 20, 0, 12, 9),
             ]),
         ], groups=[_group(group_name, "symbol", widget_ids)])
-        sid = f"auth_t0_grouping_{app_name.lower().replace(' ', '_')}"
+        sid = f"{app_name.lower().replace(' ', '_')}"
         brief = c.app_requirements_text(app)
-        c.add("grouping", "t0", {
+        c.add("grouping", "r0", {
             "id": sid,
             "title": f"Build the grouped {app_name} app definition",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -107,7 +107,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t1
+    # ------------------------------------------------------------------ r1
     # Build one widget and wrap it in a one-tab app with a group.
     t1_widgets = [
         ("estimate_revisions", c.desk_widget("earnings", "estimate_revisions"),
@@ -133,10 +133,10 @@ def build() -> None:
         app = c.app_def(app_name, app_desc, tabs=[
             (tab_id, tab_name, [c.layout_item(widget_id, 0, 0, 20, 9)]),
         ], groups=[_group(group_name, "symbol", [widget_id])])
-        sid = f"auth_t1_grouping_{widget_id}_app"
+        sid = f"{widget_id}_app"
         brief = c.widget_requirements_text(widget_id, definition)
         app_words = c.app_requirements_text(app)
-        c.add("grouping", "t1", {
+        c.add("grouping", "r1", {
             "id": sid,
             "title": f"Ship {definition['name']} with a grouping app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -167,7 +167,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t2
+    # ------------------------------------------------------------------ r2
     # Seeded widgets; words-only app requirements always include a group and preset.
     t2_specs = [
         (["estimate_revisions", "earnings_chart"], "Earnings Review Sync",
@@ -209,9 +209,9 @@ def build() -> None:
                 for index, wid in enumerate(widget_ids)
             ]),
         ], groups=[_group(group_name, "symbol", widget_ids)], prompts=[prompt])
-        sid = f"auth_t2_grouping_{app_name.lower().replace(' ', '_')}"
+        sid = f"{app_name.lower().replace(' ', '_')}"
         app_words = c.app_requirements_text(app)
-        c.add("grouping", "t2", {
+        c.add("grouping", "r2", {
             "id": sid,
             "title": f"Compose the grouped {app_name} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -249,7 +249,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t3
+    # ------------------------------------------------------------------ r3
     # Multi-widget, two-tab apps with a group spanning tabs and a cell-click table.
     t3_specs = [
         ("click_revision_table",
@@ -313,8 +313,8 @@ def build() -> None:
             for sibling_id in sibling_ids
         )
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t3_grouping_{app_name.lower().replace(' ', '_')}"
-        c.add("grouping", "t3", {
+        sid = f"{app_name.lower().replace(' ', '_')}"
+        c.add("grouping", "r3", {
             "id": sid,
             "title": f"Assemble the grouped {app_name} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],
@@ -347,7 +347,7 @@ def build() -> None:
             ],
         })
 
-    # ------------------------------------------------------------------ t4
+    # ------------------------------------------------------------------ r4
     # Publish a grouped app, instantiate it, configure it, and leave a note.
     t4_specs = [
         ("estimate_revisions", c.desk_widget("earnings", "estimate_revisions"),
@@ -366,7 +366,7 @@ def build() -> None:
          ["earnings_note", "estimate_revisions"],
          ("Chart Sync Live", "Live grouped chart and preview.",
           "chart", "Chart", "Chart Symbol Sync"),
-         "chart sync",
+         "linked earnings selection",
          ("symbol", "MSFT")),
         ("click_live_table",
          _symbol_click_table("Click Live Table",
@@ -403,8 +403,8 @@ def build() -> None:
             f"`{focus_id}` widget"
         )
         app_words = c.app_requirements_text(app)
-        sid = f"auth_t4_grouping_{app_name.lower().replace(' ', '_')}"
-        c.add("grouping", "t4", {
+        sid = f"{app_name.lower().replace(' ', '_')}"
+        c.add("grouping", "r4", {
             "id": sid,
             "title": f"Ship, open, and configure the grouped {app_name} app",
             "workflow": desk["workflow"], "subdomain": desk["subdomain"],

@@ -1,4 +1,4 @@
-"""Generate docs/task-catalog.md from the bundled task JSON files.
+"""Generate runs/reports/task-catalog.md from the bundled task JSON files.
 
 Reads every task in both bundled suites and renders each one's prompt,
 setup, novelty note, and exact pass/fail criteria as the grader applies
@@ -12,12 +12,11 @@ import re
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-PACK_DIR = REPO / "src/workspace_bench/core/task_suites/workspace_bench_v1"
-BUILD_PACK_DIR = (
-    REPO / "src/workspace_bench/core/task_suites/workspace_bench_v2_build_openbb_apps"
-)
+PACK_DIR = REPO / "src/workspace_bench/core/task_suites/core"
+BUILD_PACK_DIR = REPO / "src/workspace_bench/core/task_suites/build_openbb_apps"
 REPORT = REPO / "runs/reports/benchmark-report.md"
-OUT = REPO / "docs/task-catalog.md"
+OUT = REPO / "runs/reports/task-catalog.md"
+
 
 def load_noop_scores() -> dict[str, str]:
     """Parse the release report's task table for noop baseline scores."""
@@ -25,9 +24,10 @@ def load_noop_scores() -> dict[str, str]:
     if not REPORT.exists():
         return scores
     for line in REPORT.read_text().splitlines():
-        match = re.match(r"\| (\w+) \| \w+ \| t\d \|", line)
-        if match:
-            cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        if not line.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        if len(cells) >= 3 and re.fullmatch(r"\d+\.\d+", cells[-1]):
             scores[cells[0]] = cells[-1]
     return scores
 
@@ -48,7 +48,7 @@ def describe_initial_state(task: dict) -> list[str]:
     tabs = dash.get("tabs", [])
     widgets = dash.get("widgets", [])
     generated = dash.get("generated_widgets", [])
-    parts = [f"dashboard \"{dash.get('name', '')}\""]
+    parts = [f'dashboard "{dash.get("name", "")}"']
     if tabs and any(t.get("id") for t in tabs):
         parts.append(f"{len(tabs)} tab(s): " + ", ".join(t.get("id") or "(unnamed)" for t in tabs))
     if widgets:
@@ -61,7 +61,7 @@ def describe_initial_state(task: dict) -> list[str]:
     if generated:
         parts.append(
             f"{len(generated)} seeded generated widget(s): "
-            + ", ".join(f"{g.get('widget_type')} \"{g.get('name')}\"" for g in generated)
+            + ", ".join(f'{g.get("widget_type")} "{g.get("name")}"' for g in generated)
         )
     lines.append("Initial workspace: " + "; ".join(parts))
     return lines
@@ -74,7 +74,7 @@ def describe_success(success: dict) -> list[str]:
     name_contains = success.get("required_dashboard_name_contains")
     if name_contains:
         checks.append(
-            f"**Dashboard name** must contain \"{name_contains}\" "
+            f'**Dashboard name** must contain "{name_contains}" '
             "(case-insensitive phrase or in-order word match, stopwords ignored) "
             "→ `dashboard_name`"
         )
@@ -98,14 +98,10 @@ def describe_success(success: dict) -> list[str]:
     for req in success.get("required_generated_widgets", []):
         min_count = req.get("min_count", 1)
         where = f" on tab `{req['tab_id']}`" if req.get("tab_id") else ""
-        name_part = (
-            f" named ~\"{req['name_contains']}\"" if req.get("name_contains") else ""
-        )
+        name_part = f' named ~"{req["name_contains"]}"' if req.get("name_contains") else ""
         content = req.get("data_contains", [])
         content_part = (
-            " whose content mentions " + ", ".join(f"\"{c}\"" for c in content)
-            if content
-            else ""
+            " whose content mentions " + ", ".join(f'"{c}"' for c in content) if content else ""
         )
         checks.append(
             f"**Generated {req.get('widget_type')}** ≥{min_count}×{name_part}{content_part}{where} "
@@ -115,9 +111,7 @@ def describe_success(success: dict) -> list[str]:
 
     for req in success.get("required_layouts", []):
         target = req.get("widget_uuid") or req.get("widget_id")
-        coords = ", ".join(
-            f"{k}={req[k]}" for k in ("x", "y", "w", "h") if req.get(k) is not None
-        )
+        coords = ", ".join(f"{k}={req[k]}" for k in ("x", "y", "w", "h") if req.get(k) is not None)
         where = f" on tab `{req['tab_id']}`" if req.get("tab_id") else ""
         checks.append(
             f"**Layout** `{target}` must sit at exactly {coords}{where} → `layout_mismatch`"
@@ -125,25 +119,21 @@ def describe_success(success: dict) -> list[str]:
 
     for req in success.get("required_tool_calls", []):
         min_count = req.get("min_count", 1)
-        args = (
-            f" with args ⊇ {fmt_args(req['args_contains'])}"
-            if req.get("args_contains")
-            else ""
-        )
+        args = f" with args ⊇ {fmt_args(req['args_contains'])}" if req.get("args_contains") else ""
         checks.append(
             f"**Tool call** ≥{min_count}× `{req.get('tool')}`{args} must appear in the trace "
             "→ `missing_tool_call`"
         )
 
     for req in success.get("required_tool_results", []):
-        content = ", ".join(f"\"{c}\"" for c in req.get("data_contains", []))
+        content = ", ".join(f'"{c}"' for c in req.get("data_contains", []))
         checks.append(
             f"**Tool result** of `{req.get('tool')}` must contain {content} "
             "(agent must actually retrieve the data) → `missing_tool_result`"
         )
 
     for req in success.get("required_resource_reads", []):
-        content = ", ".join(f"\"{c}\"" for c in req.get("data_contains", []))
+        content = ", ".join(f'"{c}"' for c in req.get("data_contains", []))
         checks.append(
             f"**Resource read** of `{req.get('uri')}` must contain {content} "
             "(agent must actually retrieve the resource) → `missing_resource_read`"
@@ -157,7 +147,9 @@ def describe_success(success: dict) -> list[str]:
             "(x≥0, y≥0, w>0, h>0, x+w≤{0}) → `layout_out_of_grid`".format(width)
         )
     if layout.get("no_overlaps"):
-        checks.append("**No overlaps**: no two widgets on the same tab intersect → `layout_overlap`")
+        checks.append(
+            "**No overlaps**: no two widgets on the same tab intersect → `layout_overlap`"
+        )
 
     trace = success.get("trace_checks", {})
     max_invalid = trace.get("max_invalid_tool_calls")
@@ -188,9 +180,10 @@ def render_task(task: dict, noop: dict[str, str]) -> str:
     sid = task["id"]
     lines = [f"#### `{sid}` — {task.get('title', '')}", ""]
     meta = (
-        f"**{task.get('level')}** · {task.get('capability')} · "
+        f"**{task.get('difficulty')}** · specification: "
+        f"{task.get('specification_level', '-')} · {task.get('capability')} · "
         f"workflow: {task.get('workflow')} · {task.get('subdomain')} · "
-        f"difficulty: {task.get('difficulty')} · split: {task.get('split', '-')}"
+        f"split: {task.get('split', '-')}"
     )
     noop_score = noop.get(sid)
     if noop_score:
@@ -210,7 +203,9 @@ def render_task(task: dict, noop: dict[str, str]) -> str:
     oracle_steps = len(task.get("oracle_tool_calls", []))
     lines.append(f"- Turn budget: {max_turns} · oracle reference trace: {oracle_steps} calls")
     lines.append("")
-    lines.append("**Passes only if all of these checks hold** (each failure emits the issue code shown):")
+    lines.append(
+        "**Passes only if all of these checks hold** (each failure emits the issue code shown):"
+    )
     lines.append("")
     for check in describe_success(task.get("success", {})):
         lines.append(f"- {check}")
@@ -220,19 +215,31 @@ def render_task(task: dict, noop: dict[str, str]) -> str:
 
 def main() -> None:
     noop = load_noop_scores()
-    packs = [(
-        "core (workspace-bench-v1)",
-        sorted(p for p in PACK_DIR.glob("*.json") if p.name != "task_suite.json"),
-    ), (
-        "build-openbb-apps (workspace-bench-v2-build-openbb-apps)",
-        sorted(p for p in BUILD_PACK_DIR.glob("*.json") if p.name != "task_suite.json"),
-    )]
+    packs = [
+        (
+            "core",
+            sorted(
+                (p for p in PACK_DIR.rglob("*.json") if p.name != "task_suite.json"),
+                key=lambda path: path.name,
+            ),
+        ),
+        (
+            "build-openbb-apps",
+            sorted(
+                (p for p in BUILD_PACK_DIR.rglob("*.json") if p.name != "task_suite.json"),
+                key=lambda path: path.name,
+            ),
+        ),
+    ]
 
     out = [
         "# WorkspaceBench Task Catalog",
         "",
         "Auto-generated from the bundled task JSON files — regenerate with",
         "`python scripts/generate_task_catalog.py` after editing tasks.",
+        "The 12 experimental `build-openbb-backends` code tasks are excluded here; their",
+        "filesystem/process criteria are documented in the README task schema and generated",
+        "by `scripts/generate_backend_code_suite.py`.",
         "",
         "## How grading works",
         "",
@@ -240,7 +247,8 @@ def main() -> None:
         "(`src/workspace_bench/core/graders.py`):",
         "",
         "- **Strict pass** requires *every* check to pass. One failed check fails the task.",
-        "- **Score** is partial credit: `checks_passed / checks_total`.",
+        "- **Score** is outcome partial credit: the mean pass fraction across semantic state-check codes.",
+        "  Trace-policy checks are reported separately and join state success for strict pass/fail.",
         "- Each failed check emits a stable **issue code** (shown per criterion below), so",
         "  failures aggregate meaningfully across runs.",
         "- For external agent runs, a **process failure** (non-zero exit, timeout, unparseable",
@@ -248,7 +256,7 @@ def main() -> None:
         "- Widget `data_args` use **nested subset matching**: extra args are fine, expected keys",
         "  must match exactly.",
         "- Generated-widget and tool-result content checks are **case-insensitive** and accept",
-        "  widget-name aliases (\"price_performance\" ≈ \"price performance\") and numeric",
+        '  widget-name aliases ("price_performance" ≈ "price performance") and numeric',
         "  equivalence (0.5 ≈ 50%).",
         "- The **no-op baseline score** shown per task is the partial credit an agent gets for",
         "  doing nothing — the gap to 1.0 is what the task actually demands. Release gates",
@@ -262,12 +270,12 @@ def main() -> None:
         total += len(tasks)
         out.append(f"## Suite: {suite_name} ({len(tasks)} tasks)")
         out.append("")
-        by_level: dict[str, list[dict]] = {}
+        by_family: dict[str, list[dict]] = {}
         for task in tasks:
-            by_level.setdefault(task.get("level", "?"), []).append(task)
-        for level in sorted(by_level):
-            group = by_level[level]
-            out.append(f"### {level} ({len(group)})")
+            by_family.setdefault(task["family"], []).append(task)
+        for family in sorted(by_family):
+            group = by_family[family]
+            out.append(f"### {family} ({len(group)})")
             out.append("")
             for task in group:
                 out.append(render_task(task, noop))
