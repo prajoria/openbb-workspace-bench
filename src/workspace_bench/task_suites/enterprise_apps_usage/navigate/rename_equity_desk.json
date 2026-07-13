@@ -1,0 +1,61 @@
+{
+  "id": "rename_equity_desk",
+  "category": "single-widget",
+  "family": "navigate",
+  "difficulty": "easy",
+  "prompt": "Set the active dashboard name to Equity Desk Monitor.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Desk View",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Equity Desk Monitor",
+    "required_tool_calls": [
+      {
+        "tool": "manage_dashboard",
+        "args_contains": {
+          "operation": "update",
+          "name": "Equity Desk Monitor"
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "update",
+        "dashboard_id": "dash_001",
+        "name": "Equity Desk Monitor"
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 4
+  }
+}

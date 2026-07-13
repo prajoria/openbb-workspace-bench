@@ -1,0 +1,91 @@
+{
+ "id": "risk_exposure_monitor_p3",
+ "category": "read",
+ "family": "risk_exposure_monitor",
+ "difficulty": "medium",
+ "prompt": "Explain which limits are closest to escalation and what portfolio changes would reduce utilization.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Risk & Exposure Monitor"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "utilization",
+     "escalation",
+     "0.0339",
+     "0.0137",
+     "0.0732"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "risk_exposure_monitor_limits_limit_utilization",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "risk_exposure_monitor_limits_breaches_and_warnings",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "risk_exposure_monitor_limits_limit_breach_trend",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Risk & Exposure Monitor Note",
+    "data": "Explain which limits are closest to escalation and what portfolio changes would reduce utilization: utilization exposure is 0.0339; warnings exposure is 0.0137; trend exposure is 0.0732. Anchors: utilization, escalation."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

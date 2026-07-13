@@ -91,6 +91,5 @@
   },
   "oracle_tool_calls": [],
   "prompt": "A portfolio manager needs one installable app combining a portfolio-value summary and position detail. Finish both data contracts and apps.json so its non-overlapping layout references only widgets this backend actually serves.",
-  "split": "train",
   "success": {}
 }

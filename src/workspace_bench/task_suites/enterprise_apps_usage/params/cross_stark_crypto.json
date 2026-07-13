@@ -1,0 +1,195 @@
+{
+  "id": "cross_stark_crypto",
+  "category": "dashboard",
+  "family": "params",
+  "difficulty": "hard",
+  "prompt": "Build a dashboard with these two widgets after using parameter options for both: Bench Stark Enterprise/crypto_research_dashboard_derivatives_liquidation_heatmap crypto_asset=ETH; Bench Portfolio/risk_metrics sector=Consumer Staples. Add a note mentioning ETH and options.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "portfolio"
+      },
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Cross Options",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "stress_liquidity_lab_scenarios_portfolio_impact",
+          "data_args": {},
+          "tab_id": "",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "crypto_research_dashboard_derivatives_liquidation_heatmap",
+        "data_args": {
+          "crypto_asset": "ETH"
+        }
+      },
+      {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics",
+        "data_args": {
+          "sector": "Consumer Staples"
+        }
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "stress_liquidity_lab_scenarios_portfolio_impact",
+        "data_args": {},
+        "tab_id": "",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "get_params_options",
+        "args_contains": {
+          "widget_id": "crypto_research_dashboard_derivatives_liquidation_heatmap",
+          "param_name": "crypto_asset"
+        }
+      },
+      {
+        "tool": "get_params_options",
+        "args_contains": {
+          "widget_id": "risk_metrics",
+          "param_name": "sector"
+        }
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "ETH",
+          "options"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Stark Enterprise"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "crypto_research_dashboard_derivatives_liquidation_heatmap"
+      }
+    },
+    {
+      "tool": "get_params_options",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "crypto_research_dashboard_derivatives_liquidation_heatmap",
+        "param_name": "crypto_asset"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "crypto_research_dashboard_derivatives_liquidation_heatmap",
+        "data_args": {
+          "crypto_asset": "ETH"
+        }
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Portfolio"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics"
+      }
+    },
+    {
+      "tool": "get_params_options",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics",
+        "param_name": "sector"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Portfolio",
+        "widget_id": "risk_metrics",
+        "data_args": {
+          "sector": "Consumer Staples"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Options Note",
+        "data": "Options used: ETH, options."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 12
+  }
+}

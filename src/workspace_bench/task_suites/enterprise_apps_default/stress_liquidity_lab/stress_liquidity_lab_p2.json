@@ -1,0 +1,78 @@
+{
+ "id": "stress_liquidity_lab_p2",
+ "category": "read",
+ "family": "stress_liquidity_lab",
+ "difficulty": "medium",
+ "prompt": "Find assumptions that should be challenged before the risk committee signs off.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Stress & Liquidity Lab"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "assumptions",
+     "committee",
+     "87.8",
+     "62.96"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "stress_liquidity_lab_scenarios_scenario_builder_assumptions",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "stress_liquidity_lab_liquidity_days_to_liquidate",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Stress & Liquidity Lab Note",
+    "data": "Find assumptions that should be challenged before the risk committee signs off: assumptions score is 87.8; liquidate score is 62.96. Anchors: assumptions, committee."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 12
+ }
+}

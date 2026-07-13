@@ -1,0 +1,138 @@
+{
+  "id": "file_finance_earnings_prep_under_its_own_tab",
+  "category": "single-widget",
+  "family": "skills",
+  "difficulty": "medium",
+  "prompt": "After calling get_skill_content with slug finance-earnings-prep, add a new tab named Earnings Prep and put a note on that tab capturing the workflow steps. Omit dashboard_id when adding the note.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Skill Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "vendor_dataset_monitor_incidents_blast_radius_summary",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_skill_content",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tabs": [
+      "overview",
+      "earnings-prep"
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "get_skill_content",
+        "args_contains": {
+          "slug": "finance-earnings-prep"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_skill_content",
+        "data_contains": [
+          "Earnings prep workflow",
+          "surprise drivers",
+          "portfolio manager"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "earnings prep",
+          "surprise drivers"
+        ],
+        "tab_id": "earnings-prep"
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    },
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "vendor_dataset_monitor_incidents_blast_radius_summary",
+        "data_args": {},
+        "tab_id": "overview",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_skill_content",
+      "args": {
+        "slug": "finance-earnings-prep"
+      }
+    },
+    {
+      "tool": "manage_navigation_bar",
+      "args": {
+        "operation": "add_tabs",
+        "tabs": [
+          {
+            "name": "Earnings Prep"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "earnings-prep"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Finance Earnings Prep Note",
+        "data": "Finance Earnings Prep workflow: earnings prep; surprise drivers."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 8
+  }
+}

@@ -300,6 +300,16 @@ class SimulatedWorkspace:
         else:
             dashboard = self.create_dashboard("Workspace Bench", activate=True)
             self.active_dashboard_id = dashboard.dashboard_id
+        if active_name := initial_state.get("active_dashboard"):
+            for dashboard_id, seeded in self.dashboards.items():
+                if seeded.name == str(active_name):
+                    self.active_dashboard_id = dashboard_id
+                    self.active_tab_id = next(iter(seeded.tabs), "")
+                    break
+            else:
+                raise KeyError(
+                    f"initial_state.active_dashboard {active_name!r} matches no seeded dashboard"
+                )
 
     def register_backend(
         self, name: str, backend_id: str | None = None, url: str | None = None
@@ -490,7 +500,7 @@ class SimulatedWorkspace:
         )
 
     def _tool_get_workspace_snapshot(self, args: JsonDict) -> JsonDict:
-        return self._ok("get_workspace_snapshot", self._workspace_snapshot())
+        return self._ok("get_workspace_snapshot", self._agent_snapshot())
 
     def _tool_manage_backends(self, args: JsonDict) -> JsonDict:
         operation = args.get("operation")
@@ -1286,6 +1296,45 @@ class SimulatedWorkspace:
         dashboard.ensure_tab(instance.layout.tab_id, instance.layout.tab_id)
         dashboard.widgets[widget_uuid] = instance
         return instance
+
+    def _agent_snapshot(self) -> JsonDict:
+        """The model-visible snapshot, matching the live server's shape.
+
+        The real Workspace MCP returns dashboard summaries plus the current
+        dashboard's composition only (verified against the hosted bridge,
+        2026-07-12); backend catalogs are discovered through manage_backends
+        and list_available_widgets, never embedded here. The full internal
+        state remains available to graders via ``snapshot()``.
+        """
+
+        self._snapshot_counter += 1
+        active = self._dashboard(self.active_dashboard_id)
+        return {
+            "generated_at": self._snapshot_counter,
+            "workspace_state": {
+                "current_dashboard_uuid": active.dashboard_id,
+                "current_tab_id": self.active_tab_id,
+            },
+            "dashboards": [
+                {
+                    "dashboard_id": dash.dashboard_id,
+                    "name": dash.name,
+                    "is_active": dash.dashboard_id == active.dashboard_id,
+                    "tab_count": len(dash.tabs),
+                    "widget_count": len(dash.widgets),
+                }
+                for dash in self.dashboards.values()
+            ],
+            "dashboard_composition": self._dashboard_composition(active),
+            "skills": [
+                {
+                    "slug": skill["slug"],
+                    "name": skill["name"],
+                    "description": skill["description"],
+                }
+                for skill in WORKSPACE_SKILLS.values()
+            ],
+        }
 
     def _workspace_snapshot(self) -> JsonDict:
         self._snapshot_counter += 1

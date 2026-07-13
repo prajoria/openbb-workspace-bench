@@ -1,0 +1,78 @@
+{
+ "id": "client_360_p3",
+ "category": "read",
+ "family": "client_360",
+ "difficulty": "medium",
+ "prompt": "Draft a concise response to the client using only approved commentary and current portfolio context.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Client 360"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "commentary",
+     "portfolio",
+     "85.23",
+     "0.0157"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "client_360_portfolio_view_client_portfolio_summary",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD",
+     "region": "Americas"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "client_360_portfolio_view_client_returns",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD",
+     "region": "Americas"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Client 360 Note",
+    "data": "Draft a concise response to the client using only approved commentary and current portfolio context: summary value is 85.23; returns return is 0.0157. Anchors: commentary, portfolio."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 12
+ }
+}

@@ -4,7 +4,6 @@
   "family": "debug",
   "specification_level": "open-brief",
   "difficulty": "medium",
-  "split": "train",
   "prompt": "Execution analysts report that changing review scope no longer keeps the overview and detail aligned in Execution Recovery Room. Diagnose the existing Execution Repair Data connection, repair it in place, and retest the affected workflow with live data before handing it back. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Execution Recovery Room open and add a short verification note that naturally mentions Execution Recovery Room, Execution Repair Data, and repair verified.",
   "business_terms": [
     "Execution Recovery Room",

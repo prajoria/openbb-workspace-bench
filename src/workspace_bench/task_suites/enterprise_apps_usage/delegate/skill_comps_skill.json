@@ -1,0 +1,144 @@
+{
+  "id": "skill_comps_skill",
+  "category": "platform",
+  "family": "delegate",
+  "difficulty": "hard",
+  "prompt": "After calling get_skill_content with slug finance-comps to understand the workflow, call assign_tasks_to_agents with two task_requests using ids peers-analyst and multiples-analyst covering that workflow, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Delegation Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "workspace_data_control_center_entitlements_sensitive_dataset_flags",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_skill_content",
+    "assign_tasks_to_agents",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "get_skill_content",
+        "args_contains": {
+          "slug": "finance-comps"
+        }
+      },
+      {
+        "tool": "assign_tasks_to_agents"
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_skill_content",
+        "data_contains": [
+          "Comps workflow",
+          "peer set",
+          "valuation multiples"
+        ]
+      },
+      {
+        "tool": "assign_tasks_to_agents",
+        "data_contains": [
+          "peers-analyst",
+          "multiples-analyst"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "peers analyst",
+          "multiples analyst",
+          "comps"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    },
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "workspace_data_control_center_entitlements_sensitive_dataset_flags",
+        "data_args": {},
+        "tab_id": "overview",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_skill_content",
+      "args": {
+        "slug": "finance-comps"
+      }
+    },
+    {
+      "tool": "assign_tasks_to_agents",
+      "args": {
+        "task_requests": [
+          {
+            "id": "peers-analyst",
+            "description": "Define the peer set and normalize metrics.",
+            "assigned_holder_url": "workspace://agents/peers",
+            "assigned_agent_id": "peers-agent"
+          },
+          {
+            "id": "multiples-analyst",
+            "description": "Compare valuation multiples and flag outliers.",
+            "assigned_holder_url": "workspace://agents/multiples",
+            "assigned_agent_id": "multiples-agent"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Delegation Note",
+        "data": "peers analyst; multiples analyst; comps."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 7
+  }
+}

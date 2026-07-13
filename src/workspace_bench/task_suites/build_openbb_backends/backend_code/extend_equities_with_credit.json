@@ -89,6 +89,5 @@
   },
   "oracle_tool_calls": [],
   "prompt": "Extend the working equity backend for a cross-asset desk that now also needs issuer ratings and spread levels. Preserve every existing equity contract and test while adding a coherent second credit domain to widgets.json and the HTTP API.",
-  "split": "test",
   "success": {}
 }

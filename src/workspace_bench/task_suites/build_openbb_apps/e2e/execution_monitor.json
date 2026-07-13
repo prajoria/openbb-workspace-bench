@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "e2e",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "An execution analyst needs a decision-ready Workspace for orders and venue quality. The workspace must cover venue execution quality and rejects. The workspace must cover open execution exceptions. Analysts need to inspect venue, orders, reject rate percentage, as of. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Execution Monitor', 'Execution Desk Data', 'EDGX'. Choose an effective architecture and avoid unrelated changes.",
   "business_terms": [
     "Execution Monitor",

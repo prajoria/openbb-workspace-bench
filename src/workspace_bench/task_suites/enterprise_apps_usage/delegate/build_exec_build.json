@@ -1,0 +1,161 @@
+{
+  "id": "build_exec_build",
+  "category": "platform",
+  "family": "delegate",
+  "difficulty": "hard",
+  "prompt": "Use assign_tasks_to_agents with two task_requests using ids rejects-analyst and restricted-analyst. Then add the Rejected Orders widget (id execution_desk_exceptions_rejected_orders) from the Bench Stark Enterprise backend so the workstreams have their data, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Delegation Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "strategy_health_monitor_themes_factor_tilts",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "assign_tasks_to_agents",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "assign_tasks_to_agents"
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "assign_tasks_to_agents",
+        "data_contains": [
+          "rejects-analyst",
+          "restricted-analyst"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_exceptions_rejected_orders",
+        "data_args": {},
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "strategy_health_monitor_themes_factor_tilts",
+        "data_args": {},
+        "tab_id": "overview",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "rejects analyst",
+          "restricted analyst",
+          "rejected orders"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "assign_tasks_to_agents",
+      "args": {
+        "task_requests": [
+          {
+            "id": "rejects-analyst",
+            "description": "Investigate rejected orders on the desk.",
+            "assigned_holder_url": "workspace://agents/rejects",
+            "assigned_agent_id": "rejects-agent"
+          },
+          {
+            "id": "restricted-analyst",
+            "description": "Cross-check restricted list checks against fills.",
+            "assigned_holder_url": "workspace://agents/restricted",
+            "assigned_agent_id": "restricted-agent"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Stark Enterprise"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_exceptions_rejected_orders"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_exceptions_rejected_orders",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Delegation Note",
+        "data": "rejects analyst; restricted analyst; rejected orders."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 8
+  }
+}

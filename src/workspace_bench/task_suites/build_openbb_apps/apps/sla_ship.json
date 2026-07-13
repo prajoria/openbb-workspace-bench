@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "apps",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build a vendor-operations manager a dependable vendor service levels workspace. The workspace must cover count of open SLA breaches. The workspace must cover vendor SLA state with breach flags. The workspace must cover vendor incident notices feed. Analysts need to inspect vendor, status, latency milliseconds, breach. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Vendor Live', 'vendors', 'Vendor SLA Data', 'detail'. Decide how best to organize the experience and preserve unrelated work.",
   "business_terms": [
     "Vendor Live",

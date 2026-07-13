@@ -4,7 +4,6 @@
   "family": "apps",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build a working Workspace experience for a surveillance analyst covering cases and compliance alerts. The workspace must cover open surveillance alerts. The workspace must cover notes for one surveillance case. The workspace must cover open alert count. Analysts need to inspect alert ID, desk, severity, age days. Leave the complete working workspace open for review. Keep these source-contract anchors: `severity` and `case_id`. Choose the rest of the architecture and avoid unrelated changes.",
   "business_terms": [
     "severity",

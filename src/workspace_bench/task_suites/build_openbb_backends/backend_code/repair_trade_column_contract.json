@@ -71,6 +71,5 @@
   },
   "oracle_tool_calls": [],
   "prompt": "The client-trades widget declares business columns the endpoint never returns. Reconcile the implementation and manifest into one coherent contract for client name, notional, and side. Keep the public widget usable and the test suite meaningful.",
-  "split": "test",
   "success": {}
 }

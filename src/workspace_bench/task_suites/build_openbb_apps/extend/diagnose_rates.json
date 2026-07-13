@@ -3,7 +3,6 @@
   "category": "repair",
   "family": "extend",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "The desk needs a production-ready rates and Treasury markets workflow for a rates strategist. The workspace must cover upcoming treasury auctions. The workspace must cover desk commentary on the rates day. The workspace must cover current 2s10s spread in bps. The workspace must cover the Treasury yield curve. Analysts need to inspect date, security, size billions. Preserve all working content while correcting the requested workflow. Use your judgment on the architecture and leave other work intact.",
   "fixtures": {},
   "initial_state": {

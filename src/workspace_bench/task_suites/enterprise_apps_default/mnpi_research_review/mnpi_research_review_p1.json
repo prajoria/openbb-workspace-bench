@@ -1,0 +1,91 @@
+{
+ "id": "mnpi_research_review_p1",
+ "category": "read",
+ "family": "mnpi_research_review",
+ "difficulty": "medium",
+ "prompt": "Review the MNPI case file: wall crossings, meetings, research drafts, target changes, and sign-off history.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "MNPI & Research Review"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "crossings",
+     "meetings",
+     "99.08",
+     "74.8",
+     "31.85"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "mnpi_research_review_mnpi_log_wall_crossings",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "mnpi_research_review_meetings_company_meeting_logs",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "mnpi_research_review_research_draft_research_review",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "MNPI & Research Review Note",
+    "data": "Review the MNPI case file: wall crossings, meetings, research drafts, target changes, and sign-off history: crossings score is 99.08; logs score is 74.8; review score is 31.85. Anchors: crossings, meetings."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

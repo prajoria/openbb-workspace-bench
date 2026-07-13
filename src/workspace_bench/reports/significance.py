@@ -1,11 +1,11 @@
 """Compute uncertainty and pairwise significance for the published boards.
 
 Reads the three complete 2026-07 build calibration runs, joins their repeated
-per-task outcomes with the current build suite for split/difficulty slicing,
+per-task outcomes with the current build suite for difficulty slicing,
 and writes runs/reports/significance.json with, per suite and model:
 
 - strict pass counts with 95% Wilson confidence intervals
-- the same for the held-out slice (validation + test splits) and test-only
+- the same broken down by task difficulty
 - exact two-sided McNemar tests for every model pair (paired by task), so
   board ranks can be read with separability in mind
 
@@ -27,7 +27,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[3]
 SUITE_DIRS = {
-    "core": REPO / "src/workspace_bench/task_suites/core",
+    "core": REPO / "src/workspace_bench/task_suites/enterprise_apps_usage",
     "build-openbb-apps": (
         REPO / "src/workspace_bench/task_suites/build_openbb_apps"
     ),
@@ -63,10 +63,9 @@ def mcnemar_exact(b: int, c: int) -> float:
 
 def load_task_fields(
     suite_dir: Path,
-) -> tuple[dict[str, str], dict[str, str], dict[str, str]]:
-    """Return task split, difficulty, and family cluster maps."""
+) -> tuple[dict[str, str], dict[str, str]]:
+    """Return task difficulty and family cluster maps."""
 
-    splits: dict[str, str] = {}
     difficulties: dict[str, str] = {}
     clusters: dict[str, str] = {}
     for path in sorted(suite_dir.rglob("*.json"), key=lambda item: item.name):
@@ -78,10 +77,9 @@ def load_task_fields(
         suite = suite_dir.name.replace("_", "-")
         keys = (task_id, f"{suite}/{family}/{task_id}")
         for key in keys:
-            splits[key] = task.get("split", "train")
             difficulties[key] = task.get("difficulty", "?")
             clusters[key] = family
-    return splits, difficulties, clusters
+    return difficulties, clusters
 
 
 def cluster_bootstrap_interval(
@@ -139,15 +137,9 @@ def task_ref(episode_ref: str) -> str:
 
 def slice_summary(
     outcomes: dict[str, bool],
-    splits: dict[str, str],
-    wanted: set[str] | None,
     clusters: dict[str, str],
 ) -> dict:
-    ids = [
-        episode_ref
-        for episode_ref in outcomes
-        if wanted is None or splits.get(task_ref(episode_ref)) in wanted
-    ]
+    ids = list(outcomes)
     passed = sum(outcomes[task_id] for task_id in ids)
     total = len(ids)
     low, high = wilson(passed, total)
@@ -169,16 +161,13 @@ def slice_summary(
     }
 
 
-def holdout_difficulties(
+def difficulty_breakdown(
     outcomes: dict[str, bool],
-    splits: dict[str, str],
     difficulties: dict[str, str],
 ) -> dict[str, dict]:
     by_difficulty: dict[str, list[bool]] = defaultdict(list)
     for episode_ref, ok in outcomes.items():
-        ref = task_ref(episode_ref)
-        if splits.get(ref) in {"validation", "test"}:
-            by_difficulty[difficulties.get(ref, "?")].append(ok)
+        by_difficulty[difficulties.get(task_ref(episode_ref), "?")].append(ok)
     return {
         difficulty: {"passed": sum(oks), "total": len(oks)}
         for difficulty, oks in sorted(by_difficulty.items())
@@ -210,7 +199,7 @@ def main(
     run_filenames = tuple(args.build_runs or BUILD_CALIBRATION_RUNS)
     report: dict = {"suites": {}}
     for suite, suite_dir in (suite_dirs or SUITE_DIRS).items():
-        splits, difficulties, clusters = load_task_fields(suite_dir)
+        difficulties, clusters = load_task_fields(suite_dir)
         if suite == "core":
             historical_dirs = sorted(
                 str(path.relative_to(repo))
@@ -233,12 +222,8 @@ def main(
         models: dict[str, dict] = {}
         for slug, per_task in sorted(outcomes.items()):
             models[slug] = {
-                "all": slice_summary(per_task, splits, None, clusters),
-                "holdout": slice_summary(per_task, splits, {"validation", "test"}, clusters),
-                "test_only": slice_summary(per_task, splits, {"test"}, clusters),
-                "holdout_by_difficulty": holdout_difficulties(
-                    per_task, splits, difficulties
-                ),
+                "all": slice_summary(per_task, clusters),
+                "by_difficulty": difficulty_breakdown(per_task, difficulties),
             }
         ranked = sorted(outcomes, key=lambda slug: -models[slug]["all"]["passed"])
         pairs: list[dict[str, object]] = []
@@ -285,7 +270,7 @@ def main(
             "note": (
                 "Intervals describe the three replay-regraded complete 2026-07 "
                 "guided-track runs. "
-                "Current measured difficulty and split metadata are joined by qualified "
+                "Current measured difficulty metadata is joined by qualified "
                 "task id; repeats remain distinct paired episodes."
             ),
         }
@@ -296,9 +281,7 @@ def main(
             print(
                 f"  {slug:24s} strict {m['all']['passed']:3d}/{m['all']['total']} "
                 f"({100 * m['all']['rate']:.1f}%, 95% CI "
-                f"{100 * m['all']['wilson_95_low']:.1f}-{100 * m['all']['wilson_95_high']:.1f}) | "
-                f"holdout {m['holdout']['passed']:3d}/{m['holdout']['total']} | "
-                f"test {m['test_only']['passed']:2d}/{m['test_only']['total']}"
+                f"{100 * m['all']['wilson_95_low']:.1f}-{100 * m['all']['wilson_95_high']:.1f})"
             )
         for i in range(len(ranked) - 1):
             pair = next(p for p in pairs if p["a"] == ranked[i] and p["b"] == ranked[i + 1])

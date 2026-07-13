@@ -112,7 +112,7 @@ def test_grader_matches_generated_percent_equivalent() -> None:
 
 
 def test_grader_requires_tool_results_for_skill_task() -> None:
-    task = find_task("core/skills/read_the_finance_earnings_prep_skill")
+    task = find_task("enterprise-apps-usage/skills/read_the_finance_earnings_prep_skill")
     result = TaskRunner().run(task, "oracle")
 
     assert result.grade.passed is True

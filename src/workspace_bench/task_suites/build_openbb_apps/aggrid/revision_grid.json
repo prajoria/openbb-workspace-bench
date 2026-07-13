@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "aggrid",
   "difficulty": "medium",
-  "split": "test",
   "prompt": "Create a usable earnings and estimates workflow for an equity-research analyst. The workspace must cover street revision momentum by ticker. Analysts need to inspect ticker, revised up, revised down, momentum percentage. Large result sets must stay responsive while analysts filter and page through them. The source contract must retain `ticker` and `revised_up`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "ticker",

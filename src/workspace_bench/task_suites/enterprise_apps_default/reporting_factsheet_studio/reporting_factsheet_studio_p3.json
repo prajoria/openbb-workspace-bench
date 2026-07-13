@@ -1,0 +1,88 @@
+{
+ "id": "reporting_factsheet_studio_p3",
+ "category": "read",
+ "family": "reporting_factsheet_studio",
+ "difficulty": "medium",
+ "prompt": "Summarize what changed in returns, attribution, risk, and client-facing commentary for the selected period.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Reporting & Factsheet Studio"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "attribution",
+     "commentary",
+     "0.1015",
+     "36.9",
+     "8.82"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "reporting_factsheet_studio_performance_monthly_returns",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "reporting_factsheet_studio_performance_attribution_summary",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "reporting_factsheet_studio_commentary_approved_commentary_library",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Reporting & Factsheet Studio Note",
+    "data": "Summarize what changed in returns, attribution, risk, and client-facing commentary for the selected period: returns return is 0.1015; summary score is 36.9; library score is 8.82. Anchors: attribution, commentary."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

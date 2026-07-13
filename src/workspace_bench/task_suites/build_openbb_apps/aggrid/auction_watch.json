@@ -4,7 +4,6 @@
   "family": "aggrid",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Create a usable rates and Treasury markets workflow for a rates strategist. The workspace must cover upcoming treasury auctions. Analysts need to inspect auction date, security, size billions, bid to cover. The source contract must retain `auction_date` and `security`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "auction_date",

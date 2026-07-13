@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "aggrid",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "An equity-research analyst needs a decision-ready Workspace for earnings and estimates. The workspace must cover beat/miss by ticker this season. The workspace must cover average EPS surprise last 4 quarters. The workspace must cover preview note for the earnings call. Analysts need to inspect ticker, EPS surprise percentage, revenue beat. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Season Tracker', 'season', 'Earnings Prep Data', 'MSFT', 'ticker'. Choose an effective architecture and avoid unrelated changes.",
   "business_terms": [
     "Season Tracker",

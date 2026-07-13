@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "settings",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "The desk needs a production-ready earnings and estimates workflow for an equity-research analyst. The workspace must cover average EPS surprise last 4 quarters. The workspace must cover preview note for the earnings call. The workspace must cover EPS beat and miss history. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Use your judgment on the architecture and leave other work intact.",
   "business_terms": [
     "ticker"

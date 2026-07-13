@@ -49,7 +49,7 @@ sensitivity, cleanup, and final grade.
 `export-rollouts` writes one `workspace-bench-rollout-v1` JSONL object per
 episode with `task`, `messages`, `tool_calls`, `tool_results`,
 `final_snapshot`, `grade`, and `metadata`. Metadata includes export schema and
-time, Git state, suite hash, taxonomy, difficulty, and split; private/hidden
+time, Git state, suite hash, taxonomy, and difficulty; private/hidden
 suite metadata is retained when available. `export-sft` converts the same
 record to `openai_messages`, `sharegpt`, or `tool_call_jsonl`, while
 `export-preferences` selects chosen/rejected attempts for the same model/task.

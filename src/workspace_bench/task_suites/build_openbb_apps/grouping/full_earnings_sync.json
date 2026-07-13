@@ -4,7 +4,6 @@
   "family": "grouping",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "Create a usable earnings and estimates workflow for an equity-research analyst. The workspace must cover street estimate revisions by quarter. The workspace must cover EPS beat and miss history. The workspace must cover preview note for the earnings call. Analysts need to inspect quarter, EPS estimate, revenue estimate billions. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. The source contract must retain `symbol` and `quarter`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "symbol",

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from workspace_bench.core.graders import grade_task
 from workspace_bench.core.models import GradeResult, JsonDict, Task, ToolCall, ToolTraceEvent
+from workspace_bench.workspace.default_setup import apply_workspace_baseline
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
@@ -23,9 +24,14 @@ class WorkspaceEpisode:
         self.task = task
         self.workspace = workspace or SimulatedWorkspace()
         self.trace: list[ToolTraceEvent] = []
+        fixtures, initial_state = apply_workspace_baseline(
+            task.suite,
+            task.fixtures,
+            task.initial_state,
+        )
         self.workspace.reset(
-            backends=task.fixtures,
-            initial_state=task.initial_state,
+            backends=fixtures,
+            initial_state=initial_state,
             runtime_checks=task.success.runtime,
         )
         self.initial_snapshot = self.workspace.snapshot()

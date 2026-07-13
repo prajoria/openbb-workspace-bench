@@ -1,0 +1,35 @@
+{
+  "id": "smoke_manage_apps",
+  "category": "dashboard",
+  "family": "manage_apps",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "prompt": "Instantiate the Stark Portfolio Command Center as Smoke Instantiated App.",
+  "business_terms": [],
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "manage_apps"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Smoke Instantiated App",
+    "layout": {
+      "within_grid": false
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "template_id": "portfolio-command-center",
+        "dashboard_name": "Smoke Instantiated App",
+        "activate": true
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 1
+  }
+}

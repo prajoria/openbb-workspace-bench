@@ -3,7 +3,6 @@
   "category": "repair",
   "family": "extend",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "A volatility analyst needs a decision-ready Workspace for volatility and derivatives. The workspace must cover market history for VIX futures. The workspace must cover current volatility regime score. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Preserve all working content while correcting the requested workflow. Add a short completion note that naturally includes the desk-required terms 'Vol Repair Live', 'vol regime', 'Vol Desk Data', 'VX2', 'ticker'. Choose an effective architecture and avoid unrelated changes.",
   "business_terms": [
     "Vol Repair Live",

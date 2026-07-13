@@ -4,7 +4,6 @@
   "family": "settings",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Deliver an analyst-ready Workspace solution for orders and venue quality. The workspace must cover execution exceptions with manual refresh. Analysts need to inspect order ID, symbol, age min. Use `order_id` and `symbol` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
   "business_terms": [
     "order_id",

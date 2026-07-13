@@ -1,0 +1,91 @@
+{
+ "id": "earnings_estimates_monitor_p2",
+ "category": "read",
+ "family": "earnings_estimates_monitor",
+ "difficulty": "medium",
+ "prompt": "Summarize post-earnings action items from price reaction, transcript tone, rating changes, and checklist status.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Earnings & Estimates Monitor"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "transcript",
+     "checklist",
+     "55747.2",
+     "81.37",
+     "54.14"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "earnings_estimates_monitor_post_earnings_price_reaction",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "earnings_estimates_monitor_transcript_management_tone",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Earnings & Estimates Monitor Note",
+    "data": "Summarize post-earnings action items from price reaction, transcript tone, rating changes, and checklist status: reaction price_usd is 55747.2; tone score is 81.37; checklist score is 54.14. Anchors: transcript, checklist."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

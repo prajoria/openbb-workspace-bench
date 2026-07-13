@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "grouping",
   "difficulty": "medium",
-  "split": "test",
   "prompt": "Deliver an analyst-ready Workspace solution for earnings and estimates. The workspace must cover symbol rows that can drive a grouped app. Analysts need to inspect symbol, revision percentage. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Use `symbol` and `revision_pct` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
   "business_terms": [
     "symbol",

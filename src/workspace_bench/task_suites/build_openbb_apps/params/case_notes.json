@@ -4,7 +4,6 @@
   "family": "params",
   "specification_level": "explicit",
   "difficulty": "medium",
-  "split": "train",
   "prompt": "Connect the backend and make its first widget usable on the current dashboard. Use 'Surveillance Data' at http://localhost:7807. Make the user controls functional. The experience needs Case Notes (`case_notes`, markdown) using `/case-notes` for notes for one surveillance case; user controls: Case (`case_id`, text). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

@@ -4,7 +4,6 @@
   "family": "forms",
   "specification_level": "explicit",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Register the backend and place the specified widget on the active dashboard. Use 'Vendor SLA Data' at http://localhost:7804. Make the submission workflow functional. The experience needs Incident Triage Form (`incident_triage_form`, table) using `/incident-triage` for submit an incident triage record for review; user controls: Triage (`triage`, form) with Incident, Review date, Submit. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

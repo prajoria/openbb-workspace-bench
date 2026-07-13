@@ -1,0 +1,91 @@
+{
+ "id": "risk_exposure_monitor_p2",
+ "category": "read",
+ "family": "risk_exposure_monitor",
+ "difficulty": "medium",
+ "prompt": "Identify positions contributing disproportionate marginal VaR or stress P&L relative to their portfolio weight.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Risk & Exposure Monitor"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "positions",
+     "VaR",
+     "0.0187",
+     "-56000",
+     "0.0833"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "risk_exposure_monitor_drilldown_position_risk_contribution",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "risk_exposure_monitor_drilldown_marginal_var",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "risk_exposure_monitor_exposures_exposure_table",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Risk & Exposure Monitor Note",
+    "data": "Identify positions contributing disproportionate marginal VaR or stress P&L relative to their portfolio weight: contribution exposure is 0.0187; var var_usd is -56000; table exposure is 0.0833. Anchors: positions, VaR."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

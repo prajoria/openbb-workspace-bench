@@ -44,7 +44,6 @@ def annotate_rollouts(
                 "suite_id": task_suite.suite_id,
                 "content_sha256": task_suite.content_sha256,
                 "visibility": task_suite.visibility,
-                "default_split": task_suite.default_split,
             }
         annotated.append(replace(record, metadata=metadata))
     return annotated

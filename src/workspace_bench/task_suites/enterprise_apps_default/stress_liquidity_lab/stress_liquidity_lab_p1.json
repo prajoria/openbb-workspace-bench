@@ -1,0 +1,92 @@
+{
+ "id": "stress_liquidity_lab_p1",
+ "category": "read",
+ "family": "stress_liquidity_lab",
+ "difficulty": "medium",
+ "prompt": "Summarize the selected stress scenario with portfolio loss, liquidation days, crowded names, and redemption impact.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Stress & Liquidity Lab"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "liquidation",
+     "redemption",
+     "-49500",
+     "62.96",
+     "54.69"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "stress_liquidity_lab_stress_tests_scenario_loss_waterfall",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "raw": false,
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "stress_liquidity_lab_liquidity_days_to_liquidate",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "stress_liquidity_lab_liquidity_redemption_stress",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Stress & Liquidity Lab Note",
+    "data": "Summarize the selected stress scenario with portfolio loss, liquidation days, crowded names, and redemption impact: waterfall value is -49500; liquidate score is 62.96; stress score is 54.69. Anchors: liquidation, redemption."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

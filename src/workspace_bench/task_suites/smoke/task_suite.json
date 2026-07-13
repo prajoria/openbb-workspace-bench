@@ -1,0 +1,6 @@
+{
+  "suite_id": "workspace-bench-smoke",
+  "visibility": "public",
+  "workspace_baseline": "default-v1",
+  "description": "One minimal round-trip task for every Workspace MCP tool and knowledge surface."
+}

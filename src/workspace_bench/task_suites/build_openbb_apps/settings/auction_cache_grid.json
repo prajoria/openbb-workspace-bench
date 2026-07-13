@@ -4,7 +4,6 @@
   "family": "settings",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Deliver an analyst-ready Workspace solution for rates and Treasury markets. The workspace must cover cached auction watchlist. Analysts need to inspect auction date, security, size billions. Use `auction_date` and `security` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
   "business_terms": [
     "auction_date",

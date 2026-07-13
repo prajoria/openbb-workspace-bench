@@ -4,7 +4,6 @@
   "family": "settings",
   "specification_level": "explicit",
   "difficulty": "medium",
-  "split": "validation",
   "prompt": "Connect the backend and make its first widget usable on the current dashboard. Use 'Rates Watch Data' at http://localhost:7803. Implement the requested runtime and refresh behavior. The experience needs Rates Commentary (`rates_commentary`, markdown) using `/rates-commentary` for desk commentary on the rates day; user controls: Series (`series`, endpoint) from `/series-options`; cache for 30 minutes. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

@@ -1,0 +1,91 @@
+{
+ "id": "corporate_access_meeting_notes_p3",
+ "category": "read",
+ "family": "corporate_access_meeting_notes",
+ "difficulty": "medium",
+ "prompt": "Summarize management claims that changed the investment thesis and list the evidence still required.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Corporate Access & Meeting Notes"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "management",
+     "evidence",
+     "21.22",
+     "49.26",
+     "45.91"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_claims_management_claims_tracker",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_claims_thesis_change_log",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_claims_evidence_and_sign_off_history",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Corporate Access & Meeting Notes Note",
+    "data": "Summarize management claims that changed the investment thesis and list the evidence still required: tracker score is 21.22; log score is 49.26; history score is 45.91. Anchors: management, evidence."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "params",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "A healthcare-research analyst needs a decision-ready Workspace for clinical catalysts and pipelines. The workspace must cover trial review filtered by symbol. The workspace must cover catalysts in the next 30 days. The workspace must cover upcoming clinical trial readouts. Analysts need to inspect ticker, phase, readout date. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Trial Symbol Live', 'trial symbol', 'Healthcare Research Data', 'PFE', 'ticker'. Choose an effective architecture and avoid unrelated changes.",
   "business_terms": [
     "Trial Symbol Live",

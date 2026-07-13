@@ -1,0 +1,136 @@
+{
+  "id": "deduplicate_and_fix_vendor_sla_status",
+  "category": "repair",
+  "family": "delete",
+  "difficulty": "hard",
+  "prompt": "The dashboard contains two identical Vendor SLA Status widgets for YTD, but the desk actually needs MTD. Remove exactly one duplicate, update the remaining widget to MTD, and add a note mentioning MTD and the word repaired.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Dedup And Fix",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status",
+          "data_args": {
+            "period": "YTD"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status",
+          "data_args": {
+            "period": "YTD"
+          },
+          "layout": {
+            "x": 20,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "delete_widget",
+    "update_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status",
+        "data_args": {
+          "period": "MTD"
+        },
+        "min_count": 1,
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status",
+        "data_args": {
+          "period": "YTD"
+        },
+        "min_count": 0,
+        "max_count": 0
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "MTD",
+          "repaired"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "delete_widget",
+      "args": {
+        "widget_uuid": "widget_002"
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "period": "MTD"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Repair Note",
+        "data": "Removed the duplicate and repaired to MTD."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 6
+  }
+}

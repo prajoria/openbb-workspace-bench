@@ -1,0 +1,127 @@
+{
+  "id": "expand_vendor_expansion",
+  "category": "single-widget",
+  "family": "navigate",
+  "difficulty": "medium",
+  "prompt": "Set the active dashboard name to Vendor Control Center, add a new tab named Incident Log, and add a note on the new tab that mentions incident log and says items are pending.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Vendor Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "stress_liquidity_lab_stress_tests_scenario_loss_waterfall",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Vendor Control Center",
+    "required_tabs": [
+      "overview",
+      "incident-log"
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "incident log",
+          "pending"
+        ],
+        "tab_id": "incident-log"
+      }
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "manage_navigation_bar",
+        "args_contains": {
+          "operation": "add_tabs"
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    },
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "stress_liquidity_lab_stress_tests_scenario_loss_waterfall",
+        "data_args": {},
+        "tab_id": "overview",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "update",
+        "dashboard_id": "dash_001",
+        "name": "Vendor Control Center"
+      }
+    },
+    {
+      "tool": "manage_navigation_bar",
+      "args": {
+        "operation": "add_tabs",
+        "tabs": [
+          {
+            "name": "Incident Log"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "incident-log"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Tab Note",
+        "data": "Tracking incident log: items are pending review."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 7
+  }
+}

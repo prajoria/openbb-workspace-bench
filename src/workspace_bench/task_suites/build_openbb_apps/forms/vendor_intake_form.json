@@ -4,7 +4,6 @@
   "family": "forms",
   "specification_level": "explicit",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "Make the requested backend widget available and working in the current view. Use 'Vendor SLA Data' at http://localhost:7804. Make the submission workflow functional. The experience needs Vendor Intake Form (`vendor_intake_form`, table) using `/vendor-intake` for submit a new vendor record into the SLA register; user controls: New Vendor (`intake`, form) with Vendor, Tier, Add Vendor. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

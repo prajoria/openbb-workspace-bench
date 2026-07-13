@@ -22,7 +22,6 @@ from workspace_bench.core.models import (
     CANARY_GUID,
     Task,
     TaskSuiteManifest,
-    VALID_TASK_SPLITS,
 )
 from workspace_bench.core.provenance import git_provenance
 from workspace_bench.core.runner import (
@@ -69,7 +68,7 @@ def main(argv: list[str] | None = None) -> int:
     show_parser = subparsers.add_parser("show", help="Show a task JSON summary.")
     show_parser.add_argument("task_id")
     show_parser.add_argument("--task-file", help="Show a task JSON file.")
-    show_parser.add_argument("--suite", default="core", choices=list(BUILTIN_TASK_SUITE_ORDER))
+    show_parser.add_argument("--suite", default="enterprise-apps-usage", choices=list(BUILTIN_TASK_SUITE_ORDER))
 
     validate_parser = subparsers.add_parser(
         "validate", help="Validate task metadata, oracle traces, and noop baseline."
@@ -192,7 +191,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parity_parser.add_argument("--task", required=True, help="Task id or qualified ref.")
     parity_parser.add_argument(
-        "--suite", default="core", choices=list(BUILTIN_TASK_SUITE_ORDER)
+        "--suite", default=None, choices=list(BUILTIN_TASK_SUITE_ORDER)
     )
     parity_parser.add_argument(
         "--url",
@@ -226,11 +225,11 @@ def main(argv: list[str] | None = None) -> int:
     smoke_parser.add_argument("--url", default="http://127.0.0.1:8787")
     smoke_parser.add_argument(
         "--suite",
-        default="core",
+        default="enterprise-apps-usage",
         choices=list(BUILTIN_TASK_SUITE_ORDER),
         help="Bundled task suite used to resolve --task.",
     )
-    smoke_parser.add_argument("--task", default="core/create/price_performance_aapl")
+    smoke_parser.add_argument("--task", default="enterprise-apps-usage/create/price_performance_aapl")
     smoke_parser.add_argument("--agent", default="oracle", choices=["oracle", "noop"])
     smoke_parser.add_argument("--json", action="store_true", help="Emit JSON.")
     smoke_parser.add_argument(
@@ -249,7 +248,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     export_parser.add_argument("--task")
     export_parser.add_argument("--task-file", help="Export a task JSON file.")
-    export_parser.add_argument("--suite", default="core", choices=list(BUILTIN_TASK_SUITE_ORDER))
+    export_parser.add_argument("--suite", default="enterprise-apps-usage", choices=list(BUILTIN_TASK_SUITE_ORDER))
     export_parser.add_argument("--output", required=True)
 
 
@@ -363,18 +362,13 @@ def _add_task_filters(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--family", help="Filter by task family, e.g. create or forms.")
     parser.add_argument("--category", help="Filter by task category, e.g. dashboard.")
     parser.add_argument("--difficulty", help="Filter by difficulty.")
-    parser.add_argument(
-        "--split",
-        choices=sorted(VALID_TASK_SPLITS),
-        help="Filter by task split.",
-    )
 
 
 def _add_task_collection_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--suite",
         dest="suite",
-        default="core",
+        default="enterprise-apps-usage",
         choices=list(BUILTIN_TASK_SUITE_ORDER),
         help=(
             "Bundled task suite. core = operating the workspace "
@@ -418,10 +412,7 @@ def _cmd_list(args: argparse.Namespace) -> int:
         )
         return 0
     for task in tasks:
-        print(
-            f"{task.qualified_id}\t{task.category}\t"
-            f"{task.difficulty}\t{task.split}"
-        )
+        print(f"{task.qualified_id}\t{task.category}\t{task.difficulty}")
     return 0
 
 
@@ -477,7 +468,6 @@ def _cmd_manifest(args: argparse.Namespace) -> int:
     print(f"families\t{','.join(manifest['families'])}")
     print(f"categories\t{','.join(manifest['categories'])}")
     print(f"difficulties\t{','.join(manifest['difficulties'])}")
-    print(f"splits\t{','.join(manifest['splits'])}")
     print(f"canary\t{manifest['canary_guid']}")
     return 0
 
@@ -684,7 +674,7 @@ def _cmd_export_task(args: argparse.Namespace) -> int:
         write_task_envelope(Path(args.output), task)
         print(f"Wrote task envelope for {task.id} to {args.output}")
         return 0
-    task_id = args.task or "core/create/price_performance_aapl"
+    task_id = args.task or "enterprise-apps-usage/create/price_performance_aapl"
     task = _task_from_file_or_builtin(task_id, args.task_file, args.suite)
     write_task_envelope(Path(args.output), task)
     print(f"Wrote task envelope for {task.id} to {args.output}")
@@ -1006,7 +996,7 @@ def _release_profile(args: argparse.Namespace) -> str | None:
         return None
     if _filters_active(args):
         return None
-    return getattr(args, "suite", "core")
+    return getattr(args, "suite", "enterprise-apps-usage")
 
 
 def _filters_active(args: argparse.Namespace) -> bool:
@@ -1015,7 +1005,6 @@ def _filters_active(args: argparse.Namespace) -> bool:
             getattr(args, "family", None),
             getattr(args, "category", None),
             getattr(args, "difficulty", None),
-            getattr(args, "split", None),
         ]
     )
 
@@ -1028,8 +1017,6 @@ def _filtered_tasks(args: argparse.Namespace) -> list[Task]:
         tasks = [task for task in tasks if task.category == args.category]
     if getattr(args, "difficulty", None):
         tasks = [task for task in tasks if task.difficulty == args.difficulty]
-    if getattr(args, "split", None):
-        tasks = [task for task in tasks if task.split == args.split]
     return tasks
 
 
@@ -1043,7 +1030,7 @@ def _selected_tasks(args: argparse.Namespace) -> list[Task]:
         if (
             not tasks
             and not getattr(args, "task_dir", None)
-            and getattr(args, "suite", "core") == "core"
+            and getattr(args, "suite", "enterprise-apps-usage") == "enterprise-apps-usage"
         ):
             # A task id should just work without naming the suite (mirrors
             # the evaluator): fall back to searching every bundled suite.
@@ -1087,14 +1074,14 @@ def _load_export_rollouts(args: argparse.Namespace):
 def _task_collection(args: argparse.Namespace) -> list[Task]:
     task_dir = getattr(args, "task_dir", None)
     if not task_dir:
-        return load_builtin_tasks(getattr(args, "suite", "core"))
+        return load_builtin_tasks(getattr(args, "suite", "enterprise-apps-usage"))
     return load_task_directory(Path(task_dir))
 
 
 def _task_suite_manifest(args: argparse.Namespace) -> TaskSuiteManifest | None:
     task_dir = getattr(args, "task_dir", None)
     if not task_dir:
-        return load_builtin_task_suite_manifest(getattr(args, "suite", "core"))
+        return load_builtin_task_suite_manifest(getattr(args, "suite", "enterprise-apps-usage"))
     return load_task_suite_manifest(Path(task_dir))
 
 
@@ -1106,7 +1093,7 @@ def _task_suite_is_hidden(task_suite: TaskSuiteManifest | None) -> bool:
     return task_suite is not None and task_suite.visibility == "hidden"
 
 
-def _task_from_file_or_builtin(task_id: str, task_file: str | None, suite: str = "core") -> Task:
+def _task_from_file_or_builtin(task_id: str, task_file: str | None, suite: str = "enterprise-apps-usage") -> Task:
     if task_file:
         task = _load_task_file_with_suite(Path(task_file))
         if task_id and task.id != task_id:

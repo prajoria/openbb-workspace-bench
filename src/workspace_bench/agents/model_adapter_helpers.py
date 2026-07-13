@@ -165,7 +165,7 @@ WIDGET_HINTS = {
 
 TOOL_REFERENCE = {
     "get_workspace_snapshot": {
-        "description": "Inspect current dashboard, tabs, widgets, layouts, and backends.",
+        "description": "Inspect the current dashboard composition, dashboard summaries, and skills. Discover backends via manage_backends or list_available_widgets.",
         "args": {},
     },
     "manage_dashboard": {

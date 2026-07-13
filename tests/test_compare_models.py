@@ -188,9 +188,9 @@ def test_release_run_requires_repeated_attempts(capsys) -> None:
 
 
 def test_comparison_metadata_uses_core_suite_content_provenance() -> None:
-    metadata = benchmark_metadata(SimpleNamespace(task_dir=None, suite="core"))
+    metadata = benchmark_metadata(SimpleNamespace(task_dir=None, suite="enterprise-apps-usage"))
 
-    assert metadata["suite_id"] == "core"
+    assert metadata["suite_id"] == "enterprise-apps-usage"
     assert len(metadata["content_sha256"]) == 64
     assert "git_commit" in metadata
 

@@ -4,7 +4,6 @@
   "family": "charts",
   "specification_level": "explicit",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Register the backend and place the specified widget on the active dashboard. Use 'Earnings Prep Data' at http://localhost:7805. Choose a working chart representation for the data. The experience needs EPS History (`earnings_chart`, chart) using `/eps-history` for plotly EPS beat/miss history; user controls: Symbol (`symbol`, endpoint) from `/symbols`; cache for 15 minutes; consume the raw backend payload. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

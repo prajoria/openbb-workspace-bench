@@ -14,16 +14,26 @@ from workspace_bench.core.models import RunResult, Task, TaskSuiteManifest
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
-CORE_TASKS_PACKAGE = "workspace_bench.task_suites.core"
+USAGE_TASKS_PACKAGE = "workspace_bench.task_suites.enterprise_apps_usage"
 BUILD_APPS_TASKS_PACKAGE = "workspace_bench.task_suites.build_openbb_apps"
 BUILD_BACKENDS_TASKS_PACKAGE = "workspace_bench.task_suites.build_openbb_backends"
+APPS_DEFAULT_TASKS_PACKAGE = "workspace_bench.task_suites.enterprise_apps_default"
+SMOKE_TASKS_PACKAGE = "workspace_bench.task_suites.smoke"
 TASK_SUITE_MANIFEST = "task_suite.json"
 BUILTIN_TASK_SUITES = {
-    "core": CORE_TASKS_PACKAGE,
+    "enterprise-apps-usage": USAGE_TASKS_PACKAGE,
     "build-openbb-apps": BUILD_APPS_TASKS_PACKAGE,
     "build-openbb-backends": BUILD_BACKENDS_TASKS_PACKAGE,
+    "enterprise-apps-default": APPS_DEFAULT_TASKS_PACKAGE,
+    "smoke": SMOKE_TASKS_PACKAGE,
 }
-BUILTIN_TASK_SUITE_ORDER = ("core", "build-openbb-apps", "build-openbb-backends")
+BUILTIN_TASK_SUITE_ORDER = (
+    "enterprise-apps-usage",
+    "enterprise-apps-default",
+    "build-openbb-apps",
+    "build-openbb-backends",
+    "smoke",
+)
 
 
 def _resource_task_files(root: Traversable) -> list[Traversable]:
@@ -70,7 +80,7 @@ class TaskRunner:
         )
 
 
-def load_builtin_tasks(suite: str = "core") -> list[Task]:
+def load_builtin_tasks(suite: str = "enterprise-apps-usage") -> list[Task]:
     """Load bundled JSON tasks for a named suite."""
 
     try:
@@ -80,18 +90,13 @@ def load_builtin_tasks(suite: str = "core") -> list[Task]:
         raise KeyError(f"Unknown built-in task suite {suite!r}. Available: {available}") from error
     task_files = _resource_task_files(resources.files(package))
     manifest = load_builtin_task_suite_manifest(suite)
-    default_split = manifest.default_split if manifest else "dev"
     return [
-        load_task_file(
-            Path(str(path)),
-            default_split=default_split,
-            task_suite=manifest,
-        )
+        load_task_file(Path(str(path)), task_suite=manifest)
         for path in task_files
     ]
 
 
-def load_builtin_task_suite_manifest(suite: str = "core") -> TaskSuiteManifest | None:
+def load_builtin_task_suite_manifest(suite: str = "enterprise-apps-usage") -> TaskSuiteManifest | None:
     """Load a bundled task-suite manifest when one exists."""
 
     package = BUILTIN_TASK_SUITES[suite]
@@ -107,12 +112,11 @@ def load_builtin_task_suite_manifest(suite: str = "core") -> TaskSuiteManifest |
 
 def load_task_file(
     path: Path,
-    default_split: str = "dev",
     task_suite: TaskSuiteManifest | None = None,
 ) -> Task:
     with path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
-    task = Task.from_dict(payload, source_path=path, default_split=default_split)
+    task = Task.from_dict(payload, source_path=path)
     return replace(task, suite=task_suite) if task_suite else task
 
 
@@ -133,17 +137,12 @@ def load_task_directory(path: Path) -> list[Task]:
     if not path.is_dir():
         raise NotADirectoryError(f"task directory is not a directory: {path}")
     manifest = load_task_suite_manifest(path)
-    default_split = manifest.default_split if manifest else "dev"
     task_paths = sorted(
         (candidate for candidate in path.rglob("*.json") if candidate.name != TASK_SUITE_MANIFEST),
         key=lambda candidate: candidate.name,
     )
     return [
-        load_task_file(
-            task_path,
-            default_split=default_split,
-            task_suite=manifest,
-        )
+        load_task_file(task_path, task_suite=manifest)
         for task_path in task_paths
     ]
 

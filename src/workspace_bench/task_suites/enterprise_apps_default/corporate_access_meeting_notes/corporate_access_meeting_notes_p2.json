@@ -1,0 +1,91 @@
+{
+ "id": "corporate_access_meeting_notes_p2",
+ "category": "read",
+ "family": "corporate_access_meeting_notes",
+ "difficulty": "medium",
+ "prompt": "Flag meetings or notes that require compliance review before research can be distributed.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Corporate Access & Meeting Notes"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "meetings",
+     "compliance",
+     "20.04",
+     "26.71",
+     "57.19"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_compliance_mnpi_attestation_status",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_compliance_restricted_tags",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_compliance_compliance_follow_ups",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Corporate Access & Meeting Notes Note",
+    "data": "Flag meetings or notes that require compliance review before research can be distributed: status score is 20.04; tags score is 26.71; ups score is 57.19. Anchors: meetings, compliance."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

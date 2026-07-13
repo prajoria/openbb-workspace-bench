@@ -1,0 +1,78 @@
+{
+ "id": "compliance_surveillance_hub_p3",
+ "category": "read",
+ "family": "compliance_surveillance_hub",
+ "difficulty": "medium",
+ "prompt": "Draft the investigation summary with evidence, next owner, and remediation status.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Compliance Surveillance Hub"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "investigation",
+     "remediation",
+     "64.75",
+     "19"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "compliance_surveillance_hub_audit_investigation_evidence",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Compliance Surveillance Hub Note",
+    "data": "Draft the investigation summary with evidence, next owner, and remediation status: evidence score is 64.75; breaches breach_count is 19. Anchors: investigation, remediation."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 12
+ }
+}

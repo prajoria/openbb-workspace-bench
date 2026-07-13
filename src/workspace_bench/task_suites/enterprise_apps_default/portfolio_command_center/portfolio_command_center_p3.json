@@ -1,0 +1,88 @@
+{
+ "id": "portfolio_command_center_p3",
+ "category": "read",
+ "family": "portfolio_command_center",
+ "difficulty": "medium",
+ "prompt": "Explain which alerts should be escalated to the CIO before the opening risk meeting.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Portfolio Command Center"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "alerts",
+     "escalated",
+     "193",
+     "85.25",
+     "86.16"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "portfolio_command_center_overview_top_alerts",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "portfolio_command_center_overview_limit_utilization",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "portfolio_command_center_actions_approval_checklist",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Portfolio Command Center Note",
+    "data": "Explain which alerts should be escalated to the CIO before the opening risk meeting: alerts alert_count is 193; utilization score is 85.25; checklist score is 86.16. Anchors: alerts, escalated."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

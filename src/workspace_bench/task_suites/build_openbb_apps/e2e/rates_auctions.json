@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "e2e",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "The desk needs a production-ready rates and Treasury markets workflow for a rates strategist. The workspace must cover upcoming auctions and demand metrics. The workspace must cover current 2s10s spread in bps. Analysts need to inspect auction date, security, size billions, bid to cover. An analyst can choose the relevant business date. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Rates Auctions', 'Rates Watch Data', '2026-07-15', 'date'. Use your judgment on the architecture and leave other work intact.",
   "business_terms": [
     "Rates Auctions",

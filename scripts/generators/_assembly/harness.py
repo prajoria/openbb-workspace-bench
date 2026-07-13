@@ -2,7 +2,7 @@
 
 These helpers deliberately live under ``scripts``: they author bundled data but
 are not part of the runtime package. Suite policy (identity cleanup, categories,
-special split cells, and suite-specific artifacts) is supplied through callbacks
+and suite-specific artifacts) is supplied through callbacks
 instead of being copied into parallel harnesses.
 """
 
@@ -11,7 +11,6 @@ from __future__ import annotations
 import hashlib
 import re
 import sys
-from collections import defaultdict
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
@@ -29,7 +28,6 @@ TASK_EXPORT_FIELDS = (
     "family",
     "specification_level",
     "difficulty",
-    "split",
     "prompt",
     "business_terms",
     "fixtures",
@@ -110,7 +108,6 @@ DifficultySetter = Callable[[Task, str, str, int], None]
 TagPrefixes = Callable[[str, str, int], Sequence[str]]
 ArtifactParts = Callable[[Task], list[str]]
 TaskInspector = Callable[[Task], Any]
-CellPattern = Callable[[str, str, list[Task]], Sequence[str]]
 
 
 def difficulty_for(level: str, cell_index: int) -> str:
@@ -327,33 +324,3 @@ class NoveltyPolicy:
             f"Unique {task['_family']}/{task['id']} {self.exercise_label} using "
             f"{tools} with checks {checks} on {backends}; artifact {artifact}."
         )
-
-
-def uniform_four_way_pattern(
-    family: str, level: str, cell: Sequence[Task]
-) -> tuple[str, ...]:
-    """Return the standard 2/1/1 train/validation/test cell pattern."""
-
-    assert len(cell) == 4, f"split assignment expects 4 tasks in {(family, level)}"
-    return ("train", "train", "validation", "test")
-
-
-@dataclass(frozen=True)
-class SplitAssigner:
-    """Group, sort, and assign deterministic suite splits by authored cell."""
-
-    pattern_for_cell: CellPattern
-
-    def __call__(self, tasks: list[Task]) -> None:
-        grouped: dict[tuple[str, str], list[Task]] = defaultdict(list)
-        for task in tasks:
-            grouped[(task["_family"], task["_rung"])].append(task)
-        for (family, level), cell in grouped.items():
-            cell.sort(key=lambda item: item["id"])
-            pattern = self.pattern_for_cell(family, level, cell)
-            assert len(pattern) == len(cell), (
-                f"split pattern for {family}/{level} has {len(pattern)} entries "
-                f"for {len(cell)} tasks"
-            )
-            for task, split in zip(cell, pattern):
-                task["split"] = split

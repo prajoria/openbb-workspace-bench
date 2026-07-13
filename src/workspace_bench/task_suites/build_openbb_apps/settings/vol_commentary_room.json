@@ -4,7 +4,6 @@
   "family": "settings",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "Build a working Workspace experience for a volatility analyst covering volatility and derivatives. The workspace must cover morning volatility commentary. The workspace must cover current volatility regime score. Leave the complete working workspace open for review. Keep these source-contract anchors: `desk`. Choose the rest of the architecture and avoid unrelated changes.",
   "business_terms": [
     "desk"

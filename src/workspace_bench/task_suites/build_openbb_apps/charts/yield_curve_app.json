@@ -4,7 +4,6 @@
   "family": "charts",
   "specification_level": "explicit",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Rates Watch Data' at http://localhost:7803. Choose a working chart representation for the data. The experience needs Yield Curve (`yield_curve`, chart) using `/yield-curve` for plotly treasury yield curve snapshot; consume the raw backend payload. Organize it as app 'Yield Curve App' with tabs Curve (yield_curve). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

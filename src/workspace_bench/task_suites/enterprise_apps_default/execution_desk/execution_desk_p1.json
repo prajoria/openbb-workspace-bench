@@ -1,0 +1,88 @@
+{
+ "id": "execution_desk_p1",
+ "category": "read",
+ "family": "execution_desk",
+ "difficulty": "medium",
+ "prompt": "Prioritize the live blotter by liquidity, rejection risk, restricted-list status, and expected slippage.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Execution Desk"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "liquidity",
+     "slippage",
+     "14",
+     "202",
+     "41.08"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "execution_desk_blotter_order_risk_queue",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "execution_desk_exceptions_restricted_list_checks",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "execution_desk_fills_vwap_and_arrival_slippage",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Execution Desk Note",
+    "data": "Prioritize the live blotter by liquidity, rejection risk, restricted-list status, and expected slippage: queue order_count is 14; checks exception_count is 202; slippage score is 41.08. Anchors: liquidity, slippage."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

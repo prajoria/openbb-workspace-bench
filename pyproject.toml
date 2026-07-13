@@ -56,10 +56,12 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 "workspace_bench.core" = ["*.json"]
-"workspace_bench.task_suites.core" = ["*.json", "**/*.json"]
-"workspace_bench.task_suites.build_openbb_apps" = ["*.json", "**/*.json"]
+"workspace_bench.task_suites.enterprise_apps_usage" = ["*.json", "**/*.json", "*.md"]
+"workspace_bench.task_suites.build_openbb_apps" = ["*.json", "**/*.json", "*.md"]
+"workspace_bench.task_suites.enterprise_apps_default" = ["*.json", "**/*.json", "*.md"]
+"workspace_bench.task_suites.smoke" = ["*.json", "**/*.json", "*.md"]
 "workspace_bench.task_suites.build_openbb_backends" = [
-  "*.json", "**/*.json", "**/*.py", "**/*.toml", "**/*.md"
+  "*.json", "**/*.json", "**/*.py", "**/*.toml", "*.md", "**/*.md"
 ]
 "workspace_bench.workspace.data" = ["*.json"]
 "workspace_bench.browser" = ["*.json", "*.html"]

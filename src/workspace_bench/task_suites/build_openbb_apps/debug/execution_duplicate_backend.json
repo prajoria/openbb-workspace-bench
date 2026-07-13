@@ -4,7 +4,6 @@
   "family": "debug",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "An incident in Execution Recovery Room means two identically named backend connections now compete for the app. Investigate the connected Execution Repair Data backend, make the smallest in-place repair, and prove the workflow against live data. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Execution Recovery Room open and add a short verification note that naturally mentions Execution Recovery Room, Execution Repair Data, and repair verified.",
   "business_terms": [
     "Execution Recovery Room",

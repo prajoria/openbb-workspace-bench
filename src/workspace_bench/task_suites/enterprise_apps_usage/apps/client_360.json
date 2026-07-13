@@ -1,0 +1,58 @@
+{
+  "id": "client_360",
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "easy",
+  "prompt": "From the Bench Stark Enterprise backend, instantiate the Client 360 app as a new dashboard named Client Review Workspace.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Client Review Workspace",
+    "required_tool_calls": [
+      {
+        "tool": "manage_apps",
+        "args_contains": {
+          "operation": "instantiate"
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Client 360",
+        "dashboard_name": "Client Review Workspace",
+        "activate": true
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 5
+  }
+}

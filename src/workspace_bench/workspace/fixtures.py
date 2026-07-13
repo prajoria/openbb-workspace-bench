@@ -591,6 +591,40 @@ def build_stark_enterprise_backend(
     )
 
 
+def build_getting_started_backend(
+    url: str = "http://127.0.0.1:9106",
+) -> FixtureBackend:
+    """Build the transcribed OpenBB getting-started fixture backend."""
+
+    data_path = resources.files("workspace_bench.workspace.data") / "getting_started.json"
+    with data_path.open("r", encoding="utf-8") as handle:
+        payload = json.load(handle)
+    return FixtureBackend(
+        "getting-started",
+        "Getting Started",
+        payload["widgets"],
+        payload["apps"],
+        url,
+    )
+
+
+def build_widget_examples_backend(
+    url: str = "http://127.0.0.1:9107",
+) -> FixtureBackend:
+    """Build the transcribed OpenBB widget-examples fixture backend."""
+
+    data_path = resources.files("workspace_bench.workspace.data") / "widget_examples.json"
+    with data_path.open("r", encoding="utf-8") as handle:
+        payload = json.load(handle)
+    return FixtureBackend(
+        "widget-examples",
+        "Widget Examples",
+        payload["widgets"],
+        payload["apps"],
+        url,
+    )
+
+
 def build_daloopa_backend(url: str = "http://127.0.0.1:9105") -> FixtureBackend:
     """Build the deterministic Daloopa fundamentals fixture backend.
 
@@ -726,6 +760,8 @@ def default_fixture_backends() -> dict[str, FixtureBackend]:
         build_portfolio_backend(),
         build_stark_enterprise_backend(),
         build_daloopa_backend(),
+        build_getting_started_backend(),
+        build_widget_examples_backend(),
     ]
     result: dict[str, FixtureBackend] = {}
     for backend in backends:

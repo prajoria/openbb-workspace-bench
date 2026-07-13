@@ -44,7 +44,6 @@ from workspace_bench.core.models import (
     TASK_CATEGORIES,
     Task,
     ToolCall,
-    VALID_TASK_SPLITS,
 )
 from workspace_bench.core.provenance import git_provenance
 from workspace_bench.reports.metrics import (
@@ -256,17 +255,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--suite",
         dest="suite",
-        default="core",
+        default="enterprise-apps-usage",
         choices=list(BUILTIN_TASK_SUITE_ORDER),
         help=(
             "Bundled task suite. core = operating the workspace; "
             "build-openbb-apps = building custom backend apps."
         ),
-    )
-    parser.add_argument(
-        "--split",
-        choices=sorted(VALID_TASK_SPLITS),
-        help="Optional task split filter.",
     )
     parser.add_argument(
         "--task-dir",
@@ -470,7 +464,6 @@ def main(argv: list[str] | None = None) -> int:
         difficulty=args.difficulty,
         family=args.family,
         category=args.category,
-        split=args.split,
         task_ids=args.task,
     )
     if not tasks:
@@ -743,7 +736,6 @@ def filter_tasks(
     difficulty: str,
     family: str | None,
     category: str | None,
-    split: str | None,
     task_ids: list[str] | None = None,
 ) -> list[Task]:
     if task_ids:
@@ -755,8 +747,6 @@ def filter_tasks(
         tasks = [task for task in tasks if task.family == family]
     if category:
         tasks = [task for task in tasks if task.category == category]
-    if split:
-        tasks = [task for task in tasks if task.split == split]
     return tasks
 
 
@@ -764,11 +754,11 @@ def load_task_source(args: argparse.Namespace) -> list[Task]:
     task_dir = getattr(args, "task_dir", None)
     if task_dir:
         return load_task_directory(Path(task_dir))
-    suite = getattr(args, "suite", "core")
+    suite = getattr(args, "suite", "enterprise-apps-usage")
     # `--task <id>` should just work without naming the suite: when ids are
     # given and the suite was left at its default, search every bundled
     # suite for them.
-    if getattr(args, "task", None) and suite == "core":
+    if getattr(args, "task", None) and suite == "enterprise-apps-usage":
         tasks: list[Task] = []
         seen: set[str] = set()
         for name in BUILTIN_TASK_SUITE_ORDER:
@@ -791,10 +781,7 @@ def print_dry_run(
         print(f"  - {adapter.slug}: {adapter.label}")
     print(f"Tasks ({len(tasks)}) for filters {selected_filters(args)}:")
     for task in tasks:
-        print(
-            f"  - {task.qualified_id}\t"
-            f"{task.category}\t{task.difficulty}\t{task.split}"
-        )
+        print(f"  - {task.qualified_id}\t{task.category}\t{task.difficulty}")
 
 
 def build_run_manifest(
@@ -2211,7 +2198,6 @@ def agent_run_summary(run: ComparisonRun) -> dict:
         "family": result.task.family,
         "specification_level": result.task.specification_level,
         "difficulty": result.task.difficulty,
-        "split": result.task.split,
         "passed": agent_run_passed(run),
         "process_failed": agent_run_process_failed(run),
         "task_failed": not agent_run_process_failed(run) and not result.grade.passed,
@@ -2269,8 +2255,7 @@ def selected_filters(args: argparse.Namespace) -> dict:
         "difficulty": args.difficulty,
         "family": args.family,
         "category": getattr(args, "category", None),
-        "suite": getattr(args, "suite", "core"),
-        "split": getattr(args, "split", None),
+        "suite": getattr(args, "suite", "enterprise-apps-usage"),
         "task_dir": getattr(args, "task_dir", None),
     }
 
@@ -2280,7 +2265,7 @@ def benchmark_metadata(args: argparse.Namespace) -> dict:
     if getattr(args, "task_dir", None):
         task_suite = load_task_suite_manifest(Path(args.task_dir))
     else:
-        task_suite = load_builtin_task_suite_manifest(getattr(args, "suite", "core"))
+        task_suite = load_builtin_task_suite_manifest(getattr(args, "suite", "enterprise-apps-usage"))
     return {
         "name": BENCHMARK_NAME,
         "suite_id": task_suite.suite_id if task_suite else "local",

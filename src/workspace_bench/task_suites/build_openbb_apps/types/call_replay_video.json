@@ -4,7 +4,6 @@
   "family": "types",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Create a usable earnings and estimates workflow for an equity-research analyst. The workspace must cover selected earnings replay video. The source contract must retain `video`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "video"

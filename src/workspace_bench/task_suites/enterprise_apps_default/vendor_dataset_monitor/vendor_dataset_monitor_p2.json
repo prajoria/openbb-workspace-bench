@@ -1,0 +1,91 @@
+{
+ "id": "vendor_dataset_monitor_p2",
+ "category": "read",
+ "family": "vendor_dataset_monitor",
+ "difficulty": "medium",
+ "prompt": "Identify data quality issues that create trading, risk, reporting, or compliance impact.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Vendor & Dataset Monitor"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "compliance",
+     "reporting",
+     "59.16",
+     "188",
+     "94.16"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "vendor_dataset_monitor_quality_validation_errors",
+    "data_args": {
+     "period": "YTD",
+     "status": "Open",
+     "vendor": "FactSet"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "vendor_dataset_monitor_quality_row_count_drift",
+    "data_args": {
+     "period": "YTD",
+     "status": "Open",
+     "vendor": "FactSet"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "vendor_dataset_monitor_quality_affected_apps",
+    "data_args": {
+     "period": "YTD",
+     "status": "Open",
+     "vendor": "FactSet"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Vendor & Dataset Monitor Note",
+    "data": "Identify data quality issues that create trading, risk, reporting, or compliance impact: errors score is 59.16; drift count is 188; apps score is 94.16. Anchors: compliance, reporting."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

@@ -4,7 +4,6 @@
   "family": "charts",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "Create a usable orders and venue quality workflow for an execution analyst. The workspace must cover plotly slippage analysis by venue. The source contract must retain `venue`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "venue"

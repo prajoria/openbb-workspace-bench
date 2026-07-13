@@ -4,7 +4,6 @@
   "family": "forms",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "Create a usable clinical catalysts and pipelines workflow for a healthcare-research analyst. The workspace must cover capture a clinical trial readout note. An analyst can filter the analysis by ticker. An analyst can choose the relevant business date. The user can enter the required details and submit the workflow. The source contract must retain `readout` and `ticker`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "readout",

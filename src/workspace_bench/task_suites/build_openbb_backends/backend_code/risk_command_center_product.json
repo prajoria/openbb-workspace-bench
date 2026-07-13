@@ -111,6 +111,5 @@
   },
   "oracle_tool_calls": [],
   "prompt": "Ship a small risk command center for a portfolio team. It needs a production-style health contract, an at-a-glance risk utilization view, factor exposures with policy limits, and an installable Workspace app that lays out the experience cleanly. Leave real tests that protect the product behavior and keep the backend localhost-ready.",
-  "split": "test",
   "success": {}
 }

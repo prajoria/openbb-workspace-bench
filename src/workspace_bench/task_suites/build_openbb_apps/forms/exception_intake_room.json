@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "forms",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "An execution analyst needs a decision-ready Workspace for orders and venue quality. The workspace must cover record an execution venue exception. The workspace must cover live open orders blotter. The workspace must cover open execution exceptions. Analysts need to inspect order ID, symbol, quantity, status. An analyst can adjust the relevant numeric scope. The user can enter the required details and submit the workflow. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Choose an effective architecture and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

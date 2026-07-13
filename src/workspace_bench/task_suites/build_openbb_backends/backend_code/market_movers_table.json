@@ -71,6 +71,5 @@
   },
   "oracle_tool_calls": [],
   "prompt": "Implement the existing Market Movers table contract. Serve widgets.json with the declared symbol, percentage-change, and volume columns; implement GET /movers with at least two typed, non-placeholder rows; preserve CORS, health, and the pinned tests.",
-  "split": "train",
   "success": {}
 }

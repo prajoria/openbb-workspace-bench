@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "e2e",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build an investment analyst a dependable the requested financial dataset workspace. The workspace must cover analyst research actions by ticker. The workspace must cover sector Exposure for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows. Analysts need to inspect ticker, analyst, rating, upside percentage, bucket, value. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Research Room', 'Bench Stark Enterprise', 'MSFT', 'ticker'. Decide how best to organize the experience and preserve unrelated work.",
   "business_terms": [
     "Research Room",

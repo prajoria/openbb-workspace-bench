@@ -1,0 +1,76 @@
+{
+ "id": "reporting_factsheet_studio_p2",
+ "category": "read",
+ "family": "reporting_factsheet_studio",
+ "difficulty": "medium",
+ "prompt": "Find factsheet language that needs approval before external distribution.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Reporting & Factsheet Studio"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "distribution",
+     "factsheet",
+     "26.04",
+     "8.82"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "reporting_factsheet_studio_factsheets_factsheet_distribution_status",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "reporting_factsheet_studio_commentary_approved_commentary_library",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Reporting & Factsheet Studio Note",
+    "data": "Find factsheet language that needs approval before external distribution: status score is 26.04; library score is 8.82. Anchors: distribution, factsheet."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 12
+ }
+}

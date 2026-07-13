@@ -4,7 +4,6 @@
   "family": "forms",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "Build a working Workspace experience for an execution analyst covering orders and venue quality. The workspace must cover record an execution venue exception. An analyst can adjust the relevant numeric scope. The user can enter the required details and submit the workflow. Leave the complete working workspace open for review. Keep these source-contract anchors: `exception` and `venue`. Choose the rest of the architecture and avoid unrelated changes.",
   "business_terms": [
     "exception",

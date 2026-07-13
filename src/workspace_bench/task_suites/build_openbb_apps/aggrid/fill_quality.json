@@ -4,7 +4,6 @@
   "family": "aggrid",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build a working Workspace experience for an execution analyst covering orders and venue quality. The workspace must cover fill quality by venue. Analysts need to inspect venue, fills, slippage percentage, as of. Keep these source-contract anchors: `venue` and `fills`. Choose the rest of the architecture and avoid unrelated changes.",
   "business_terms": [
     "venue",

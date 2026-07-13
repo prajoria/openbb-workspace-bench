@@ -38,28 +38,33 @@ jobs:
           uv run python scripts/audits/audit_release_consistency.py
 
       - name: Validate the core suite
-        run: uv run --extra dev workspace-bench validate --suite core --min-tasks 300
+        run: uv run --extra dev workspace-bench validate --suite enterprise-apps-usage --min-tasks 300
 
       - name: Validate the build-openbb-apps suite
         run: uv run --extra dev workspace-bench validate --suite build-openbb-apps --min-tasks 236
+      - name: Validate enterprise-apps-default suite
+        run: uv run --extra dev workspace-bench validate --suite enterprise-apps-default --min-tasks 69
 
       - name: Validate the experimental build-openbb-backends suite
         run: uv run --extra dev workspace-bench validate --suite build-openbb-backends --min-tasks 12
 
+      - name: Validate the smoke suite
+        run: uv run --extra dev workspace-bench validate --suite smoke --min-tasks 20
+
       - name: Run oracle baseline (core)
-        run: uv run --extra dev workspace-bench run --suite core --agent oracle
+        run: uv run --extra dev workspace-bench run --suite enterprise-apps-usage --agent oracle
 
       - name: Run oracle baseline (build-openbb-apps)
         run: uv run --extra dev workspace-bench run --suite build-openbb-apps --agent oracle
 
       - name: Probe runtime endpoints
         run: |
-          uv run workspace-bench runtime-probe --suite core --family backends
+          uv run workspace-bench runtime-probe --suite enterprise-apps-usage --family backends
           uv run workspace-bench runtime-probe --suite build-openbb-apps
 
       - name: Reject adversarial candidates
         run: |
-          uv run workspace-bench adversarial --suite core
+          uv run workspace-bench adversarial --suite enterprise-apps-usage
           uv run workspace-bench adversarial --suite build-openbb-apps
 
       - name: Install Chromium
@@ -71,20 +76,20 @@ jobs:
           uv run --extra browser workspace-bench browser-cert --self-test
 
       - name: Export agent task envelope
-        run: uv run --extra dev workspace-bench export-task --task core/create/price_performance_aapl --output /tmp/workspace-task.json
+        run: uv run --extra dev workspace-bench export-task --task enterprise-apps-usage/create/price_performance_aapl --output /tmp/workspace-task.json
 
       - name: Run demo external agent
-        run: uv run --extra dev workspace-bench run-agent-command --task core/create/price_performance_aapl --agent-command "python -m workspace_bench.agents.rule_agent"
+        run: uv run --extra dev workspace-bench run-agent-command --task enterprise-apps-usage/create/price_performance_aapl --agent-command "python -m workspace_bench.agents.rule_agent"
 
       - name: Build manifests
         run: |
-          uv run --extra dev workspace-bench manifest --suite core --json > /dev/null
+          uv run --extra dev workspace-bench manifest --suite enterprise-apps-usage --json > /dev/null
           uv run --extra dev workspace-bench manifest --suite build-openbb-apps --json > /dev/null
           uv run --extra dev workspace-bench manifest --suite build-openbb-backends --json > /dev/null
 
       - name: Build release reports
         run: |
-          uv run --extra dev workspace-bench report --suite core --json > /dev/null
+          uv run --extra dev workspace-bench report --suite enterprise-apps-usage --json > /dev/null
           uv run --extra dev workspace-bench report --suite build-openbb-apps --json > /dev/null
 
       - name: Smoke the evaluator dispatch

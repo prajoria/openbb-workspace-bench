@@ -4,7 +4,6 @@
   "family": "aggrid",
   "specification_level": "explicit",
   "difficulty": "medium",
-  "split": "test",
   "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Vendor SLA Data' at http://localhost:7804. Make the data grid behavior and columns usable. The experience needs Vendor SLA Status (`vendor_sla_table`, table) using `/vendor-sla` for vendor SLA state with breach flags; user controls: Status (`status`, text); columns: vendor (text), status (text, titleCase), latency_ms (number), breach (boolean). Organize it as app 'Vendor Ops' with tabs Vendors (vendor_sla_table). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

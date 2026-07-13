@@ -4,7 +4,6 @@
   "family": "settings",
   "specification_level": "explicit",
   "difficulty": "medium",
-  "split": "train",
   "prompt": "Register the backend and place the specified widget on the active dashboard. Use 'Execution Desk Data' at http://localhost:7806. Implement the requested runtime and refresh behavior. The experience needs Exceptions (`exception_metric`, metric) using `/exception-count` for open execution exceptions; refresh every 45 seconds; run on demand. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

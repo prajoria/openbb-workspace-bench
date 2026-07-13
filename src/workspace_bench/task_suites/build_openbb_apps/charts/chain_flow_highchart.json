@@ -4,7 +4,6 @@
   "family": "charts",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Create a usable chain activity and liquidity workflow for a digital-assets analyst. The workspace must cover highcharts chain flow analysis. The source contract must retain `chain`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "chain"

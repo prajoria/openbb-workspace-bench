@@ -1,0 +1,76 @@
+{
+ "id": "executive_investment_dashboard_p2",
+ "category": "read",
+ "family": "executive_investment_dashboard",
+ "difficulty": "medium",
+ "prompt": "Identify which issues require CEO, CIO, COO, or CRO attention this week.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Executive Investment Dashboard"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "issues",
+     "CIO",
+     "54.46",
+     "45.63"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "executive_investment_dashboard_issues_major_open_issues",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "executive_investment_dashboard_issues_decision_log",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Executive Investment Dashboard Note",
+    "data": "Identify which issues require CEO, CIO, COO, or CRO attention this week: issues score is 54.46; log score is 45.63. Anchors: issues, CIO."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 12
+ }
+}

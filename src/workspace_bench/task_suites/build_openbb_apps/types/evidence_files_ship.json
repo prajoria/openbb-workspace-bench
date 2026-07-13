@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "types",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build a surveillance analyst a dependable cases and compliance alerts workspace. The workspace must cover browse case evidence documents. The workspace must cover open alert count. The workspace must cover notes for one surveillance case. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Evidence Live', 'evidence', 'Surveillance Data'. Decide how best to organize the experience and preserve unrelated work.",
   "business_terms": [
     "Evidence Live",

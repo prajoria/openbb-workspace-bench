@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "advanced",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build a surveillance analyst a dependable cases and compliance alerts workspace. The workspace must cover ask questions over the surveillance case corpus. The workspace must cover open surveillance alerts. The workspace must cover open alert count. Analysts need to inspect alert ID, desk, severity, age days. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Surveillance QA', 'case QA', 'Surveillance Data', 'Show high severity cases'. Decide how best to organize the experience and preserve unrelated work.",
   "business_terms": [
     "Surveillance QA",

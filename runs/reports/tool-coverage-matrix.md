@@ -10,7 +10,106 @@ filesystem/shell coding agents rather than the Workspace MCP tool surface.
 
 Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=manage_navigation_bar, `nav`=navigate_workspace, `list_w`=list_available_widgets, `schema`=get_widget_schema, `params`=get_params_options, `data`=get_widget_data, `create`=create_widget, `update`=update_widget, `layout`=update_widget_layout, `delete`=delete_widget, `note`=add_generative_widget, `read_w`=read_widget, `backends`=manage_backends, `apps`=manage_apps, `skill`=get_skill_content, `resource`=read_workspace_resource, `prompt`=get_workspace_prompt, `agents`=assign_tasks_to_agents
 
-## core (300 tasks)
+## smoke (20 tasks)
+
+| # | task | snap | dash | nav_bar | nav | list_w | schema | params | data | create | update | layout | delete | note | read_w | backends | apps | skill | resource | prompt | agents | tools | difficulty |
+|--:|:---------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|--:|:-----------|
+| 1 | `smoke_add_generative_widget` |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 1 | easy |
+| 2 | `smoke_assign_tasks_to_agents` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 1 | easy |
+| 3 | `smoke_create_widget` |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
+| 4 | `smoke_delete_widget` |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 1 | easy |
+| 5 | `smoke_get_params_options` |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
+| 6 | `smoke_get_skill_content` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | 1 | easy |
+| 7 | `smoke_get_widget_data` |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
+| 8 | `smoke_get_widget_schema` |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
+| 9 | `smoke_get_workspace_prompt` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   | 1 | easy |
+| 10 | `smoke_get_workspace_snapshot` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
+| 11 | `smoke_list_available_widgets` |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
+| 12 | `smoke_manage_apps` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | 1 | easy |
+| 13 | `smoke_manage_backends` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | easy |
+| 14 | `smoke_manage_dashboard` |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
+| 15 | `smoke_manage_navigation_bar` |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
+| 16 | `smoke_navigate_workspace` |   |   |   | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 2 | easy |
+| 17 | `smoke_read_widget` |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   | 1 | easy |
+| 18 | `smoke_read_workspace_resource` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   | 1 | easy |
+| 19 | `smoke_update_widget` |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 1 | easy |
+| 20 | `smoke_update_widget_layout` |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 1 | easy |
+
+## enterprise-apps-default (69 tasks)
+
+| # | task | snap | dash | nav_bar | nav | list_w | schema | params | data | create | update | layout | delete | note | read_w | backends | apps | skill | resource | prompt | agents | tools | difficulty |
+|--:|:---------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|--:|:-----------|
+| 1 | `cio_investment_committee_pack_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 2 | `cio_investment_committee_pack_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 3 | `cio_investment_committee_pack_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 4 | `client_360_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 5 | `client_360_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 6 | `client_360_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 7 | `compliance_surveillance_hub_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 8 | `compliance_surveillance_hub_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 9 | `compliance_surveillance_hub_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 10 | `corporate_access_meeting_notes_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 11 | `corporate_access_meeting_notes_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 12 | `corporate_access_meeting_notes_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 13 | `crypto_research_dashboard_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 14 | `crypto_research_dashboard_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 15 | `crypto_research_dashboard_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 16 | `earnings_estimates_monitor_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 17 | `earnings_estimates_monitor_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 18 | `earnings_estimates_monitor_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 19 | `equity_research_workbench_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 20 | `equity_research_workbench_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 21 | `equity_research_workbench_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 22 | `execution_desk_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 23 | `execution_desk_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 24 | `execution_desk_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 25 | `executive_investment_dashboard_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 26 | `executive_investment_dashboard_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 27 | `executive_investment_dashboard_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 28 | `fund_operations_control_tower_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 29 | `fund_operations_control_tower_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 30 | `fund_operations_control_tower_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 31 | `healthcare_research_dashboard_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 32 | `healthcare_research_dashboard_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 33 | `healthcare_research_dashboard_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 34 | `liquidity_tca_workbench_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 35 | `liquidity_tca_workbench_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 36 | `liquidity_tca_workbench_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 37 | `mnpi_research_review_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 38 | `mnpi_research_review_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 39 | `mnpi_research_review_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 40 | `nav_fees_close_dashboard_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 41 | `nav_fees_close_dashboard_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 42 | `nav_fees_close_dashboard_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 43 | `portfolio_command_center_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 44 | `portfolio_command_center_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 45 | `portfolio_command_center_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 46 | `quant_research_backtest_lab_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 47 | `quant_research_backtest_lab_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 48 | `quant_research_backtest_lab_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 49 | `rebalance_scenario_lab_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 50 | `rebalance_scenario_lab_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 51 | `rebalance_scenario_lab_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 52 | `reporting_factsheet_studio_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 53 | `reporting_factsheet_studio_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 54 | `reporting_factsheet_studio_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 55 | `risk_exposure_monitor_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 56 | `risk_exposure_monitor_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 57 | `risk_exposure_monitor_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 58 | `strategy_health_monitor_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 59 | `strategy_health_monitor_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 60 | `strategy_health_monitor_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 61 | `stress_liquidity_lab_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 62 | `stress_liquidity_lab_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 63 | `stress_liquidity_lab_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 64 | `vendor_dataset_monitor_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 65 | `vendor_dataset_monitor_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 66 | `vendor_dataset_monitor_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 67 | `workspace_data_control_center_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 68 | `workspace_data_control_center_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 69 | `workspace_data_control_center_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+
+## enterprise-apps-usage (300 tasks)
 
 | # | task | snap | dash | nav_bar | nav | list_w | schema | params | data | create | update | layout | delete | note | read_w | backends | apps | skill | resource | prompt | agents | tools | difficulty |
 |--:|:---------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|--:|:-----------|
@@ -64,7 +163,7 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 48 | `cross_prompt_cross_book_cpi` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
 | 49 | `cross_prompt_cross_nvda_holdings` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
 | 50 | `cross_prompt_cross_stark_risk` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
-| 51 | `cross_stark_sector` | x |   |   |   | x | x | x |   | x |   |   |   | x |   |   |   |   |   |   |   | 6 | hard |
+| 51 | `cross_stark_crypto` | x |   |   |   | x | x | x |   | x |   |   |   | x |   |   |   |   |   |   |   | 6 | hard |
 | 52 | `crossbackend_aapl_vs_rates` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
 | 53 | `crossbackend_book_vs_fed` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
 | 54 | `crossbackend_exposure_cpi` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
@@ -244,7 +343,7 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 228 | `repair_msft_estimates_overlap` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | medium |
 | 229 | `repair_news_msft_aapl` | x |   |   |   |   |   |   |   |   | x |   |   | x | x |   |   |   |   |   |   | 4 | medium |
 | 230 | `repair_portfolio_overlap` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | hard |
-| 231 | `repair_risk_fund` | x |   |   |   |   |   |   |   |   | x |   |   | x | x |   |   |   |   |   |   | 4 | hard |
+| 231 | `repair_risk_portfolio` | x |   |   |   |   |   |   |   |   | x |   |   | x | x |   |   |   |   |   |   | 4 | hard |
 | 232 | `repair_series_fedfunds_cpi` | x |   |   |   |   |   |   |   |   | x |   |   | x | x |   |   |   |   |   |   | 4 | hard |
 | 233 | `repair_ticker_nvda_msft` | x |   |   |   |   |   |   |   |   | x |   |   | x | x |   |   |   |   |   |   | 4 | medium |
 | 234 | `risk_exposure_monitor` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | easy |
@@ -303,8 +402,8 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 287 | `update_only_the_factset_vendor_sla_status` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | medium |
 | 288 | `update_only_the_msft_price_performance` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | medium |
 | 289 | `update_only_the_nvda_latest_news` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | medium |
-| 290 | `update_rejected_orders_open_to_escalated` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | medium |
-| 291 | `use_sector_options_for_relationship_metrics` | x |   |   |   |   |   | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 3 | easy |
+| 290 | `update_rejected_orders_desk_to_credit` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | medium |
+| 291 | `use_client_options_for_relationship_metrics` | x |   |   |   |   |   | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 3 | easy |
 | 292 | `use_sector_options_for_sector_exposure` | x |   |   |   |   |   | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 3 | easy |
 | 293 | `use_series_options_for_macro_timeseries` | x |   |   |   |   |   | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 3 | easy |
 | 294 | `use_symbol_options_for_price_performance` | x |   |   |   |   |   | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 3 | easy |
@@ -319,8 +418,8 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 
 | # | task | snap | dash | nav_bar | nav | list_w | schema | params | data | create | update | layout | delete | note | read_w | backends | apps | skill | resource | prompt | agents | tools | difficulty |
 |--:|:---------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|--:|:-----------|
-| 1 | `access_review_form` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
-| 2 | `add_catalyst_metric` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | easy |
+| 1 | `access_review_form` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
+| 2 | `add_catalyst_metric` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | medium |
 | 3 | `add_curve_spread_metric` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | easy |
 | 4 | `add_exception_metric` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | easy |
 | 5 | `add_vol_regime_metric` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
@@ -329,35 +428,35 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 8 | `alert_metric_wrap` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
 | 9 | `alert_queue_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 10 | `auction_cache_grid` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 11 | `auction_calendar` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 11 | `auction_calendar` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
 | 12 | `auction_watch` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 13 | `call_replay_video` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 14 | `case_aging` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 15 | `case_command` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 16 | `case_escalation_form_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 17 | `case_intake_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 18 | `case_notes` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 18 | `case_notes` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
 | 19 | `case_notes_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 20 | `case_notes_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 21 | `case_prompt_omni` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 22 | `case_qa_omni` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 22 | `case_qa_omni` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
 | 23 | `case_qa_omni_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 24 | `case_qa_omni_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 25 | `case_room_omni_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 26 | `case_triage` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 27 | `catalyst_calendar` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 28 | `catalyst_metric_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
+| 28 | `catalyst_metric_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
 | 29 | `catalyst_metric_wrap` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 30 | `chain_deck` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 31 | `chain_flow_highchart` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 32 | `chain_flows` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 33 | `chain_flows` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 34 | `chains_heatmap_html` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
-| 35 | `chains_highchart` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
-| 36 | `chains_highchart_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
+| 34 | `chains_heatmap_html` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
+| 35 | `chains_highchart` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
+| 36 | `chains_highchart_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
 | 37 | `chains_highchart_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 38 | `chains_table_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
-| 39 | `chart_note_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
+| 38 | `chains_table_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
+| 39 | `chart_note_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
 | 40 | `chart_preview_sync` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 41 | `chart_sync_live` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 42 | `click_preview_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
@@ -368,7 +467,7 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 47 | `compliance_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 48 | `compliance_surveillance` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 49 | `curve_comment_form_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 50 | `curve_monitor_iframe_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
+| 50 | `curve_monitor_iframe_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
 | 51 | `diagnose_earnings` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 52 | `diagnose_healthcare` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 53 | `diagnose_rates` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
@@ -391,18 +490,18 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 70 | `earnings_symbol_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 71 | `earnings_sync_live` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 72 | `estimate_revisions_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 73 | `estimates_ssrm` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 73 | `estimates_ssrm` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | hard |
 | 74 | `evidence_files_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 75 | `evidence_files_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 76 | `evidence_files_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 77 | `exception_intake_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 78 | `exception_metric` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 78 | `exception_metric` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
 | 79 | `exception_refresh_grid` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 80 | `execution_broken_group` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
+| 80 | `execution_broken_group` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | medium |
 | 81 | `execution_dangling_app` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | easy |
-| 82 | `execution_data_mismatch` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | easy |
+| 82 | `execution_data_mismatch` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
 | 83 | `execution_duplicate_backend` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
-| 84 | `execution_invalid_widget` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | medium |
+| 84 | `execution_invalid_widget` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
 | 85 | `execution_monitor` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 86 | `execution_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 87 | `execution_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
@@ -413,10 +512,10 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 92 | `fda_newsfeed_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 93 | `fill_quality` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 94 | `full_earnings_sync` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 95 | `gas_metric` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
-| 96 | `gas_metric` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 95 | `gas_metric` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
+| 96 | `gas_metric` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
 | 97 | `gas_metric_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 98 | `gas_metric_wrap` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
+| 98 | `gas_metric_wrap` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 99 | `gas_priority_metric` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 100 | `gas_refresh_metric` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 101 | `healthcare_pipeline` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
@@ -428,10 +527,10 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 107 | `healthcare_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 108 | `incident_triage_form` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | hard |
 | 109 | `kpi_param_tabs` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 110 | `kpi_tabs_table` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 110 | `kpi_tabs_table` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
 | 111 | `latency_history` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 112 | `live_orders_grid` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
-| 113 | `live_orders_grid_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
+| 113 | `live_orders_grid_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
 | 114 | `live_orders_grid_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 115 | `macro_advanced_chart_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 116 | `macro_morning` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
@@ -440,30 +539,30 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 119 | `modify_trial_catalysts` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 120 | `modify_vol_screener` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 121 | `nvda_review_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 122 | `open_orders` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
-| 123 | `order_watch` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
+| 122 | `open_orders` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
+| 123 | `order_watch` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 124 | `orders_ops_stream_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 125 | `orders_stream` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 126 | `phase_mix_vegalite` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 127 | `pipeline_vegalite` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 127 | `pipeline_vegalite` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
 | 128 | `pipeline_vegalite_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 129 | `pipeline_vegalite_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 130 | `place_alert_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 131 | `place_breach_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 132 | `place_curve_spread_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
-| 133 | `place_vol_regime_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
+| 132 | `place_curve_spread_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
+| 133 | `place_vol_regime_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
 | 134 | `policy_digest_pdf` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 135 | `policy_digest_pdf_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 136 | `policy_exception_form` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 137 | `preview_sync_live` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 138 | `rates_advanced_chart` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 138 | `rates_advanced_chart` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
 | 139 | `rates_advanced_chart_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 140 | `rates_auctions` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 141 | `rates_commentary` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
-| 142 | `rates_commentary_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
+| 141 | `rates_commentary` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
+| 142 | `rates_commentary_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
 | 143 | `rates_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 144 | `rates_live_chart_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 145 | `rates_morning` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
+| 145 | `rates_morning` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 146 | `rates_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 147 | `rates_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 148 | `rates_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
@@ -493,25 +592,25 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 172 | `surveillance_dangling_app` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | easy |
 | 173 | `surveillance_data_mismatch` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | medium |
 | 174 | `surveillance_duplicate_backend` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
-| 175 | `surveillance_invalid_widget` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | medium |
+| 175 | `surveillance_invalid_widget` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
 | 176 | `surveillance_morning` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 177 | `surveillance_silent_second_tab` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
-| 178 | `surveillance_wrong_form_endpoint` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
+| 178 | `surveillance_wrong_form_endpoint` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | medium |
 | 179 | `surveillance_wrong_live_row_id` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | easy |
 | 180 | `symbol_click_summary_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
 | 181 | `symbol_momentum_chart` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 182 | `symbol_param_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 183 | `threshold_update_form` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | hard |
 | 184 | `trade_break_form` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 185 | `trial_catalysts` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 185 | `trial_catalysts` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
 | 186 | `trial_catalysts_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 187 | `trial_catalysts_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
+| 187 | `trial_catalysts_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
 | 188 | `trial_intake_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 189 | `trial_param_review` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 190 | `trial_readout_form` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 191 | `tvl_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 192 | `tvl_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 193 | `vendor_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
+| 193 | `vendor_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
 | 194 | `vendor_broken_group` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
 | 195 | `vendor_command` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
 | 196 | `vendor_dangling_app` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | easy |
@@ -520,29 +619,29 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 199 | `vendor_intake_form` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | hard |
 | 200 | `vendor_intake_form_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 201 | `vendor_intake_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 202 | `vendor_invalid_widget` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | medium |
+| 202 | `vendor_invalid_widget` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
 | 203 | `vendor_ops` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 204 | `vendor_review_form` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 205 | `vendor_silent_second_tab` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | easy |
-| 206 | `vendor_sla_table_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
+| 206 | `vendor_sla_table_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
 | 207 | `vendor_sla_table_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 208 | `vendor_wrong_form_endpoint` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
+| 208 | `vendor_wrong_form_endpoint` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | medium |
 | 209 | `vendor_wrong_live_row_id` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
 | 210 | `venue_exception_form_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 211 | `venue_packet_pdf_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 212 | `venue_pdf` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 212 | `venue_pdf` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
 | 213 | `venue_slippage_chart` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 214 | `vix_advanced` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 214 | `vix_advanced` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
 | 215 | `vix_advanced_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
 | 216 | `vix_advanced_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 217 | `vix_history` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
-| 218 | `vix_history` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 217 | `vix_history` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
+| 218 | `vix_history` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
 | 219 | `vix_room_chart_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 220 | `vol_cockpit` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
 | 221 | `vol_commentary` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
 | 222 | `vol_commentary_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 223 | `vol_morning` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 224 | `vol_overview` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
+| 224 | `vol_overview` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 225 | `vol_param_cockpit` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
 | 226 | `vol_playbook_note` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
 | 227 | `vol_regime_metric` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
@@ -560,23 +659,23 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 
 | tool | tasks |
 |:-----|----------:|
-| `get_workspace_snapshot` | 396 |
-| `manage_backends` | 284 |
-| `add_generative_widget` | 236 |
-| `manage_apps` | 196 |
-| `get_widget_schema` | 192 |
-| `list_available_widgets` | 188 |
-| `create_widget` | 176 |
-| `update_widget` | 84 |
-| `get_widget_data` | 64 |
-| `read_widget` | 52 |
-| `read_workspace_resource` | 44 |
-| `update_widget_layout` | 40 |
-| `navigate_workspace` | 36 |
-| `manage_dashboard` | 24 |
-| `manage_navigation_bar` | 24 |
-| `get_params_options` | 24 |
-| `delete_widget` | 24 |
-| `get_skill_content` | 24 |
-| `get_workspace_prompt` | 20 |
-| `assign_tasks_to_agents` | 20 |
+| `get_workspace_snapshot` | 466 |
+| `add_generative_widget` | 307 |
+| `manage_backends` | 285 |
+| `manage_apps` | 197 |
+| `get_widget_schema` | 193 |
+| `list_available_widgets` | 189 |
+| `create_widget` | 177 |
+| `get_widget_data` | 134 |
+| `update_widget` | 85 |
+| `read_widget` | 53 |
+| `read_workspace_resource` | 45 |
+| `update_widget_layout` | 41 |
+| `navigate_workspace` | 37 |
+| `manage_dashboard` | 25 |
+| `manage_navigation_bar` | 25 |
+| `get_params_options` | 25 |
+| `delete_widget` | 25 |
+| `get_skill_content` | 25 |
+| `get_workspace_prompt` | 21 |
+| `assign_tasks_to_agents` | 21 |

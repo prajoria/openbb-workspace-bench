@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "aggrid",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "A healthcare-research analyst needs a decision-ready Workspace for clinical catalysts and pipelines. The workspace must cover upcoming trial readouts. The workspace must cover catalysts in the next 30 days. The workspace must cover FDA decision and notice feed. Analysts need to inspect ticker, phase, readout. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Readout Desk', 'readouts', 'Healthcare Research Data', 'II'. Choose an effective architecture and avoid unrelated changes.",
   "business_terms": [
     "Readout Desk",

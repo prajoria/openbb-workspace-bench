@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "types",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "Build a surveillance analyst a dependable cases and compliance alerts workspace. The workspace must cover browse case evidence documents. The workspace must cover notes for one surveillance case. The workspace must cover open alert count. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Decide how best to organize the experience and preserve unrelated work.",
   "fixtures": {},
   "initial_state": {},

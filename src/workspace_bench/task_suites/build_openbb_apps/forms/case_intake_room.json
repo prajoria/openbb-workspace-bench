@@ -4,7 +4,6 @@
   "family": "forms",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build a working Workspace experience for a surveillance analyst covering cases and compliance alerts. The workspace must cover escalate a surveillance case to a reviewer. The workspace must cover open surveillance alerts. Analysts need to inspect alert ID, desk, severity, age days. An analyst can choose the relevant business date. The user can enter the required details and submit the workflow. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Keep these source-contract anchors: `escalation` and `case_id`. Choose the rest of the architecture and avoid unrelated changes.",
   "business_terms": [
     "escalation",

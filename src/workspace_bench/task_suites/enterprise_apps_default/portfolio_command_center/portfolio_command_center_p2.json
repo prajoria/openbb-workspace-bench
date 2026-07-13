@@ -1,0 +1,87 @@
+{
+ "id": "portfolio_command_center_p2",
+ "category": "read",
+ "family": "portfolio_command_center",
+ "difficulty": "medium",
+ "prompt": "Find holdings where conviction, liquidity, and risk contribution disagree with the current portfolio weight.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Portfolio Command Center"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "contribution",
+     "conviction",
+     "85.65",
+     "29.38",
+     "20.59"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "portfolio_command_center_actions_analyst_conviction",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "portfolio_command_center_holdings_holdings_table",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "portfolio_command_center_holdings_slow_portfolio_marks",
+    "data_args": {
+     "symbol": "AAPL,NVDA,MSFT"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Portfolio Command Center Note",
+    "data": "Find holdings where conviction, liquidity, and risk contribution disagree with the current portfolio weight: conviction score is 85.65; table score is 29.38; marks score is 20.59. Anchors: contribution, conviction."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

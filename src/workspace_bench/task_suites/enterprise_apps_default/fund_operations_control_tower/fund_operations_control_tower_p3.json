@@ -1,0 +1,91 @@
+{
+ "id": "fund_operations_control_tower_p3",
+ "category": "read",
+ "family": "fund_operations_control_tower",
+ "difficulty": "medium",
+ "prompt": "Explain which operational issues need escalation before market open or NAV strike.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Fund Operations Control Tower"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "operational",
+     "escalation",
+     "61",
+     "67",
+     "79.97"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_trade_lifecycle_settlement_exceptions",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_pricing_nav_exceptions",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_corporate_actions_election_deadlines",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Fund Operations Control Tower Note",
+    "data": "Explain which operational issues need escalation before market open or NAV strike: exceptions exception_count is 61; exceptions exception_count is 67; deadlines score is 79.97. Anchors: operational, escalation."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

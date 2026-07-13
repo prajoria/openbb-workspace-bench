@@ -1,0 +1,88 @@
+{
+ "id": "execution_desk_p2",
+ "category": "read",
+ "family": "execution_desk",
+ "difficulty": "medium",
+ "prompt": "Explain which fills underperformed arrival price and whether broker, venue, or algo choice drove the outcome.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Execution Desk"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "fills",
+     "arrival",
+     "41.08",
+     "68.41",
+     "9.92"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "execution_desk_fills_vwap_and_arrival_slippage",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "execution_desk_fills_broker_scorecard",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "execution_desk_fills_fills_table",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Execution Desk Note",
+    "data": "Explain which fills underperformed arrival price and whether broker, venue, or algo choice drove the outcome: slippage score is 41.08; scorecard score is 68.41; table score is 9.92. Anchors: fills, arrival."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

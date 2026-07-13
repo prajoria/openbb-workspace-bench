@@ -1,0 +1,3259 @@
+{
+  "apps": [
+    {
+      "allowCustomization": true,
+      "description": "This is a template app that demonstrates how to create a simple app with the OpenBB Workspace. It highlights the different types of widgets that can be used in the OpenBB Workspace, the different ways to customize the widgets and the different ways to use parameters.",
+      "groups": [
+        {
+          "defaultValue": "TM",
+          "name": "Group 1",
+          "paramName": "company",
+          "type": "endpointParam"
+        },
+        {
+          "defaultValue": "2024",
+          "name": "Group 2",
+          "paramName": "year",
+          "type": "param"
+        },
+        {
+          "defaultValue": "AAPL",
+          "name": "Group 3",
+          "paramName": "symbol",
+          "type": "endpointParam"
+        }
+      ],
+      "img": "https://repository-images.githubusercontent.com/323048702/4659bbdb-ae11-4f51-8a16-860fa9dfc551",
+      "img_dark": "https://repository-images.githubusercontent.com/323048702/4659bbdb-ae11-4f51-8a16-860fa9dfc551",
+      "img_light": "https://repository-images.githubusercontent.com/323048702/4659bbdb-ae11-4f51-8a16-860fa9dfc551",
+      "name": "Onboarding App for Devs",
+      "tabs": {
+        "aggrid": {
+          "id": "aggrid",
+          "layout": [
+            {
+              "groups": [],
+              "h": 7,
+              "i": "table_widget_with_hover_card",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                },
+                "columnState": {
+                  "default": {
+                    "columnPinning": {
+                      "leftColIds": [
+                        "name"
+                      ],
+                      "rightColIds": []
+                    }
+                  }
+                }
+              },
+              "w": 13,
+              "x": 27,
+              "y": 2
+            },
+            {
+              "groups": [],
+              "h": 7,
+              "i": "table_widget_with_render_functions",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                },
+                "columnState": {
+                  "default": {
+                    "columnOrder": {
+                      "orderedColIds": [
+                        "name",
+                        "tvl",
+                        "change_1d",
+                        "change_7d"
+                      ]
+                    },
+                    "columnPinning": {
+                      "leftColIds": [
+                        "name"
+                      ],
+                      "rightColIds": []
+                    }
+                  }
+                }
+              },
+              "w": 15,
+              "x": 12,
+              "y": 2
+            },
+            {
+              "groups": [],
+              "h": 7,
+              "i": "table_widget_with_column_definitions",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                }
+              },
+              "w": 12,
+              "x": 0,
+              "y": 2
+            },
+            {
+              "groups": [],
+              "h": 12,
+              "i": "table_to_chart_widget",
+              "state": {
+                "chartModel": {
+                  "cellRange": {
+                    "columns": [
+                      "category",
+                      "value",
+                      "target"
+                    ]
+                  },
+                  "chartOptions": {},
+                  "chartType": "column",
+                  "modelType": "range",
+                  "suppressChartRanges": true
+                },
+                "chartView": {
+                  "chartType": "column",
+                  "enabled": true
+                }
+              },
+              "w": 20,
+              "x": 0,
+              "y": 9
+            },
+            {
+              "groups": [],
+              "h": 12,
+              "i": "table_to_time_series_widget",
+              "state": {
+                "chartModel": {
+                  "cellRange": {
+                    "columns": [
+                      "date",
+                      "revenue",
+                      "profit"
+                    ]
+                  },
+                  "chartOptions": {},
+                  "chartType": "line",
+                  "modelType": "range",
+                  "suppressChartRanges": true
+                },
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": true
+                }
+              },
+              "w": 20,
+              "x": 20,
+              "y": 9
+            }
+          ],
+          "name": "AgGrid"
+        },
+        "grouping": {
+          "id": "grouping",
+          "layout": [
+            {
+              "groups": [
+                "Group 1",
+                "Group 2"
+              ],
+              "h": 9,
+              "i": "company_details",
+              "w": 19,
+              "x": 0,
+              "y": 2
+            },
+            {
+              "groups": [
+                "Group 1",
+                "Group 2"
+              ],
+              "h": 9,
+              "i": "company_performance",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                },
+                "columnState": {
+                  "default": {
+                    "columnOrder": {
+                      "orderedColIds": [
+                        "metric",
+                        "value",
+                        "change"
+                      ]
+                    }
+                  }
+                }
+              },
+              "w": 21,
+              "x": 19,
+              "y": 2
+            },
+            {
+              "groups": [
+                "Group 3"
+              ],
+              "h": 9,
+              "i": "widget_managed_by_parameter_from_cell_click_on_table_widget",
+              "w": 21,
+              "x": 19,
+              "y": 11
+            },
+            {
+              "groups": [
+                "Group 3"
+              ],
+              "h": 9,
+              "i": "table_widget_with_grouping_by_cell_click",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                },
+                "columnState": {
+                  "default": {
+                    "columnOrder": {
+                      "orderedColIds": [
+                        "symbol",
+                        "price",
+                        "change",
+                        "volume"
+                      ]
+                    },
+                    "columnPinning": {
+                      "leftColIds": [
+                        "symbol"
+                      ],
+                      "rightColIds": []
+                    },
+                    "rowSelection": [
+                      "1"
+                    ]
+                  }
+                }
+              },
+              "w": 19,
+              "x": 0,
+              "y": 11
+            }
+          ],
+          "name": "Grouping"
+        },
+        "highcharts": {
+          "id": "highcharts",
+          "layout": [
+            {
+              "groups": [],
+              "h": 14,
+              "i": "chains_highchart",
+              "w": 40,
+              "x": 0,
+              "y": 2
+            }
+          ],
+          "name": "Highcharts"
+        },
+        "input-form": {
+          "id": "input-form",
+          "layout": [
+            {
+              "groups": [],
+              "h": 10,
+              "i": "all_forms",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                }
+              },
+              "w": 40,
+              "x": 0,
+              "y": 2
+            }
+          ],
+          "name": "Input Form"
+        },
+        "input-params": {
+          "id": "input-params",
+          "layout": [
+            {
+              "groups": [],
+              "h": 4,
+              "i": "markdown_widget_with_boolean",
+              "state": {
+                "params": {
+                  "condition": "true"
+                }
+              },
+              "w": 20,
+              "x": 0,
+              "y": 6
+            },
+            {
+              "groups": [],
+              "h": 4,
+              "i": "markdown_widget_with_date_picker",
+              "state": {
+                "params": {
+                  "date": "2026-02-20"
+                }
+              },
+              "w": 20,
+              "x": 20,
+              "y": 6
+            },
+            {
+              "groups": [],
+              "h": 4,
+              "i": "markdown_widget_with_number_input",
+              "w": 20,
+              "x": 20,
+              "y": 2
+            },
+            {
+              "groups": [],
+              "h": 4,
+              "i": "markdown_widget_with_text_input",
+              "w": 20,
+              "x": 0,
+              "y": 2
+            },
+            {
+              "groups": [],
+              "h": 5,
+              "i": "dropdown_dependent_widget",
+              "state": {
+                "params": {
+                  "document_type": "Investor Presentation"
+                }
+              },
+              "w": 20,
+              "x": 0,
+              "y": 23
+            },
+            {
+              "groups": [],
+              "h": 9,
+              "i": "markdown_widget_with_organized_params",
+              "state": {
+                "params": {
+                  "enable_feature": "true",
+                  "lookback_period": "32",
+                  "selected_date": "2026-02-20"
+                }
+              },
+              "w": 40,
+              "x": 0,
+              "y": 28
+            },
+            {
+              "groups": [],
+              "h": 4,
+              "i": "markdown_widget_with_dropdown",
+              "w": 20,
+              "x": 0,
+              "y": 10
+            },
+            {
+              "groups": [],
+              "h": 4,
+              "i": "markdown_widget_with_multi_select_dropdown",
+              "state": {
+                "params": {
+                  "stock_picker": [
+                    "AAPL",
+                    "MSFT"
+                  ]
+                }
+              },
+              "w": 20,
+              "x": 20,
+              "y": 10
+            },
+            {
+              "groups": [],
+              "h": 4,
+              "i": "markdown_widget_with_multi_select_advanced_dropdown",
+              "state": {
+                "params": {
+                  "stock_picker": [
+                    "AAPL",
+                    "MSFT"
+                  ]
+                }
+              },
+              "w": 20,
+              "x": 20,
+              "y": 14
+            },
+            {
+              "groups": [],
+              "h": 4,
+              "i": "markdown_widget_with_multi_text_input",
+              "w": 20,
+              "x": 0,
+              "y": 14
+            },
+            {
+              "groups": [],
+              "h": 5,
+              "i": "markdown_widget_with_str_and_int",
+              "w": 20,
+              "x": 0,
+              "y": 18
+            },
+            {
+              "groups": [],
+              "h": 10,
+              "i": "table_widget_with_str_filter_param",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                }
+              },
+              "w": 20,
+              "x": 20,
+              "y": 18
+            }
+          ],
+          "name": "Input Params"
+        },
+        "live-grid": {
+          "id": "live-grid",
+          "layout": [
+            {
+              "groups": [],
+              "h": 11,
+              "i": "live_grid_data",
+              "state": {
+                "columnState": {
+                  "default": {
+                    "columnOrder": {
+                      "orderedColIds": [
+                        "symbol",
+                        "price",
+                        "change_percent",
+                        "volume",
+                        "date",
+                        "change",
+                        "market_cap"
+                      ]
+                    }
+                  }
+                },
+                "params": {
+                  "symbol": [
+                    "TSLA",
+                    "MSFT",
+                    "AMZN"
+                  ]
+                }
+              },
+              "w": 40,
+              "x": 0,
+              "y": 2
+            }
+          ],
+          "name": "Live Grid"
+        },
+        "omni-sql-python": {
+          "id": "omni-sql-python",
+          "layout": [
+            {
+              "groups": [],
+              "h": 13,
+              "i": "omni_widget",
+              "state": {
+                "params": {
+                  "prompt": "Hello",
+                  "type": "markdown"
+                }
+              },
+              "w": 13,
+              "x": 0,
+              "y": 2
+            },
+            {
+              "groups": [],
+              "h": 18,
+              "i": "omni_sql_widget",
+              "state": {
+                "params": {
+                  "prompt": "SELECT \n    *\nFROM\n    DATA\nLIMIT\n    3"
+                }
+              },
+              "w": 20,
+              "x": 0,
+              "y": 15
+            },
+            {
+              "groups": [],
+              "h": 18,
+              "i": "omni_python_widget",
+              "w": 20,
+              "x": 20,
+              "y": 15
+            },
+            {
+              "groups": [],
+              "h": 13,
+              "i": "omni_widget",
+              "state": {
+                "params": {
+                  "prompt": "Hello World",
+                  "type": "table"
+                }
+              },
+              "w": 14,
+              "x": 13,
+              "y": 2
+            },
+            {
+              "groups": [],
+              "h": 13,
+              "i": "omni_widget",
+              "state": {
+                "params": {
+                  "prompt": "Hello World",
+                  "type": "chart"
+                }
+              },
+              "w": 13,
+              "x": 27,
+              "y": 2
+            }
+          ],
+          "name": "Omni SQL Python"
+        },
+        "plotly": {
+          "id": "plotly",
+          "layout": [
+            {
+              "groups": [],
+              "h": 15,
+              "i": "plotly_chart",
+              "w": 40,
+              "x": 0,
+              "y": 2
+            },
+            {
+              "groups": [],
+              "h": 15,
+              "i": "plotly_chart_with_theme",
+              "w": 40,
+              "x": 0,
+              "y": 17
+            },
+            {
+              "groups": [],
+              "h": 15,
+              "i": "plotly_chart_with_theme_and_toolbar",
+              "w": 40,
+              "x": 0,
+              "y": 32
+            },
+            {
+              "groups": [],
+              "h": 15,
+              "i": "plotly_chart_with_theme_and_toolbar_using_config_file",
+              "w": 40,
+              "x": 0,
+              "y": 47
+            },
+            {
+              "groups": [],
+              "h": 15,
+              "i": "plotly_heatmap",
+              "w": 40,
+              "x": 0,
+              "y": 62
+            },
+            {
+              "groups": [],
+              "h": 15,
+              "i": "plotly_heatmap_with_raw_data",
+              "state": {
+                "params": {
+                  "color_scale": "Plasma"
+                }
+              },
+              "w": 40,
+              "x": 0,
+              "y": 77
+            }
+          ],
+          "name": "Plotly"
+        },
+        "settings": {
+          "id": "settings",
+          "layout": [
+            {
+              "groups": [],
+              "h": 5,
+              "i": "markdown_widget_with_run_button",
+              "w": 20,
+              "x": 0,
+              "y": 12
+            },
+            {
+              "groups": [],
+              "h": 5,
+              "i": "markdown_widget_with_refetch_interval_and_shorter_stale_time",
+              "w": 40,
+              "x": 0,
+              "y": 7
+            },
+            {
+              "groups": [],
+              "h": 7,
+              "i": "markdown_widget_with_cron_refetch_only",
+              "w": 40,
+              "x": 0,
+              "y": 17
+            },
+            {
+              "groups": [],
+              "h": 7,
+              "i": "markdown_widget_with_cron_refetch_interval",
+              "w": 20,
+              "x": 0,
+              "y": 24
+            },
+            {
+              "groups": [],
+              "h": 7,
+              "i": "markdown_widget_with_data_update_display_only",
+              "w": 20,
+              "x": 20,
+              "y": 24
+            },
+            {
+              "groups": [],
+              "h": 5,
+              "i": "markdown_widget_with_short_refetch_interval",
+              "w": 20,
+              "x": 20,
+              "y": 2
+            },
+            {
+              "groups": [],
+              "h": 5,
+              "i": "markdown_widget_with_short_refetch_interval_and_run_button",
+              "w": 20,
+              "x": 20,
+              "y": 12
+            },
+            {
+              "groups": [],
+              "h": 5,
+              "i": "markdown_widget_with_stale_time",
+              "w": 20,
+              "x": 0,
+              "y": 2
+            }
+          ],
+          "name": "Settings"
+        },
+        "sparkline": {
+          "id": "sparkline",
+          "layout": [
+            {
+              "groups": [],
+              "h": 7,
+              "i": "sparkline",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                },
+                "columnState": {
+                  "default": {
+                    "columnOrder": {
+                      "orderedColIds": [
+                        "symbol",
+                        "name",
+                        "lastPrice",
+                        "marketCap",
+                        "volume",
+                        "sector",
+                        "rateOfChange"
+                      ]
+                    }
+                  }
+                }
+              },
+              "w": 40,
+              "x": 0,
+              "y": 9
+            },
+            {
+              "groups": [],
+              "h": 8,
+              "i": "sparkline_bar",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                },
+                "columnState": {
+                  "default": {
+                    "columnOrder": {
+                      "orderedColIds": [
+                        "symbol",
+                        "name",
+                        "ytdReturn",
+                        "monthlyReturns",
+                        "bestMonth"
+                      ]
+                    }
+                  }
+                }
+              },
+              "w": 40,
+              "x": 0,
+              "y": 36
+            },
+            {
+              "groups": [],
+              "h": 6,
+              "i": "sparkline_line",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                },
+                "columnState": {
+                  "default": {
+                    "columnOrder": {
+                      "orderedColIds": [
+                        "symbol",
+                        "name",
+                        "currentPrice",
+                        "priceTrend",
+                        "changePercent"
+                      ]
+                    }
+                  }
+                }
+              },
+              "w": 40,
+              "x": 0,
+              "y": 16
+            },
+            {
+              "groups": [],
+              "h": 7,
+              "i": "sparkline_column",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                },
+                "columnState": {
+                  "default": {
+                    "columnOrder": {
+                      "orderedColIds": [
+                        "symbol",
+                        "name",
+                        "marketCap",
+                        "quarterlyEps",
+                        "epsGrowth"
+                      ]
+                    }
+                  }
+                }
+              },
+              "w": 40,
+              "x": 0,
+              "y": 29
+            },
+            {
+              "groups": [],
+              "h": 7,
+              "i": "sparkline_area",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                },
+                "columnState": {
+                  "default": {
+                    "columnOrder": {
+                      "orderedColIds": [
+                        "symbol",
+                        "name",
+                        "avgVolume",
+                        "volumeTrend",
+                        "volumeChangePercent"
+                      ]
+                    }
+                  }
+                }
+              },
+              "w": 40,
+              "x": 0,
+              "y": 22
+            },
+            {
+              "groups": [],
+              "h": 7,
+              "i": "table_widget_basic_sparklines",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                },
+                "columnState": {
+                  "default": {
+                    "columnPinning": {
+                      "leftColIds": [
+                        "stock"
+                      ],
+                      "rightColIds": []
+                    }
+                  }
+                }
+              },
+              "w": 40,
+              "x": 0,
+              "y": 2
+            },
+            {
+              "groups": [],
+              "h": 9,
+              "i": "table_widget_custom_formatter",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                },
+                "columnState": {
+                  "default": {
+                    "columnPinning": {
+                      "leftColIds": [
+                        "company"
+                      ],
+                      "rightColIds": []
+                    }
+                  }
+                }
+              },
+              "w": 40,
+              "x": 0,
+              "y": 44
+            }
+          ],
+          "name": "Sparkline"
+        },
+        "tradingview": {
+          "id": "tradingview",
+          "layout": [
+            {
+              "groups": [],
+              "h": 21,
+              "i": "udf",
+              "w": 40,
+              "x": 0,
+              "y": 2
+            }
+          ],
+          "name": "TradingView"
+        },
+        "types": {
+          "id": "types",
+          "layout": [
+            {
+              "groups": [],
+              "h": 5,
+              "i": "metric_widget",
+              "w": 40,
+              "x": 0,
+              "y": 2
+            },
+            {
+              "groups": [],
+              "h": 4,
+              "i": "markdown_widget",
+              "w": 12,
+              "x": 0,
+              "y": 7
+            },
+            {
+              "groups": [],
+              "h": 8,
+              "i": "markdown_widget_with_error_handling",
+              "w": 16,
+              "x": 0,
+              "y": 15
+            },
+            {
+              "groups": [],
+              "h": 15,
+              "i": "pdf_widget_base64",
+              "w": 20,
+              "x": 0,
+              "y": 39
+            },
+            {
+              "groups": [],
+              "h": 15,
+              "i": "pdf_widget_url",
+              "w": 20,
+              "x": 20,
+              "y": 39
+            },
+            {
+              "groups": [],
+              "h": 8,
+              "i": "table_widget",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                }
+              },
+              "w": 13,
+              "x": 12,
+              "y": 7
+            },
+            {
+              "groups": [],
+              "h": 8,
+              "i": "table_widget_from_api_endpoint",
+              "state": {
+                "chartView": {
+                  "chartType": "line",
+                  "enabled": false
+                }
+              },
+              "w": 15,
+              "x": 25,
+              "y": 7
+            },
+            {
+              "groups": [],
+              "h": 16,
+              "i": "markdown_widget_with_local_image",
+              "w": 20,
+              "x": 0,
+              "y": 23
+            },
+            {
+              "groups": [],
+              "h": 16,
+              "i": "markdown_widget_with_image_from_url",
+              "w": 20,
+              "x": 20,
+              "y": 23
+            },
+            {
+              "groups": [],
+              "h": 15,
+              "i": "multi_pdf_base64",
+              "state": {
+                "params": {
+                  "pdf_name": [
+                    "Sample"
+                  ]
+                }
+              },
+              "w": 20,
+              "x": 0,
+              "y": 54
+            },
+            {
+              "groups": [],
+              "h": 15,
+              "i": "multi_pdf_url",
+              "state": {
+                "params": {
+                  "pdf_name": [
+                    "Sample"
+                  ]
+                }
+              },
+              "w": 20,
+              "x": 20,
+              "y": 54
+            },
+            {
+              "groups": [],
+              "h": 8,
+              "i": "sample_newsfeed",
+              "w": 24,
+              "x": 16,
+              "y": 15
+            },
+            {
+              "groups": [],
+              "h": 22,
+              "i": "html_widget",
+              "w": 40,
+              "x": 0,
+              "y": 69
+            },
+            {
+              "groups": [],
+              "h": 4,
+              "i": "markdown_widget_with_category_and_subcategory",
+              "w": 12,
+              "x": 0,
+              "y": 11
+            }
+          ],
+          "name": "Types"
+        },
+        "vegalite": {
+          "id": "vegalite",
+          "layout": [
+            {
+              "groups": [],
+              "h": 12,
+              "i": "vega_bar",
+              "w": 20,
+              "x": 0,
+              "y": 2
+            },
+            {
+              "groups": [],
+              "h": 12,
+              "i": "vega_line",
+              "w": 20,
+              "x": 20,
+              "y": 2
+            },
+            {
+              "groups": [],
+              "h": 12,
+              "i": "vega_scatter",
+              "w": 20,
+              "x": 10,
+              "y": 14
+            }
+          ],
+          "name": "Vega-Lite"
+        },
+        "youtube": {
+          "id": "youtube",
+          "layout": [
+            {
+              "groups": [],
+              "h": 14,
+              "i": "get_video",
+              "w": 20,
+              "x": 0,
+              "y": 2
+            },
+            {
+              "groups": [],
+              "h": 14,
+              "i": "get_video_with_transcript",
+              "state": {
+                "params": {
+                  "video_name": "Open Data Platform Demo"
+                }
+              },
+              "w": 20,
+              "x": 20,
+              "y": 2
+            }
+          ],
+          "name": "YouTube"
+        }
+      }
+    }
+  ],
+  "widgets": {
+    "all_forms": {
+      "category": "forms",
+      "description": "Example of a more complex entry form",
+      "endpoint": "all_forms",
+      "gridData": {
+        "h": 9,
+        "w": 20
+      },
+      "name": "Entry Form",
+      "params": [
+        {
+          "description": "Form example",
+          "endpoint": "form_submit",
+          "inputParams": [
+            {
+              "description": "Client's first name",
+              "label": "First Name",
+              "paramName": "client_first_name",
+              "type": "text",
+              "value": ""
+            },
+            {
+              "description": "Client's last name",
+              "label": "Last Name",
+              "paramName": "client_last_name",
+              "type": "text",
+              "value": ""
+            },
+            {
+              "description": "Selected investment vehicles",
+              "label": "Investment Types",
+              "multiSelect": true,
+              "options": [
+                {
+                  "label": "Stocks",
+                  "value": "stocks"
+                },
+                {
+                  "label": "Bonds",
+                  "value": "bonds"
+                },
+                {
+                  "label": "Mutual Funds",
+                  "value": "mutual_funds"
+                },
+                {
+                  "label": "ETFs",
+                  "value": "etfs"
+                }
+              ],
+              "paramName": "investment_types",
+              "type": "text",
+              "value": null
+            },
+            {
+              "description": "Client risk tolerance assessment",
+              "label": "Risk Profile",
+              "paramName": "risk_profile",
+              "type": "text",
+              "value": ""
+            },
+            {
+              "description": "Add client record",
+              "label": "Add Client",
+              "paramName": "add_record",
+              "type": "button",
+              "value": true
+            },
+            {
+              "description": "Update client record",
+              "label": "Update Client",
+              "paramName": "update_record",
+              "type": "button",
+              "value": true
+            }
+          ],
+          "paramName": "form",
+          "type": "form"
+        }
+      ],
+      "subCategory": "form",
+      "type": "table"
+    },
+    "chains_highchart": {
+      "category": "crypto",
+      "description": "Get current TVL of all chains using Defi Llama and plot with Highcharts",
+      "endpoint": "chains_highchart",
+      "gridData": {
+        "h": 9,
+        "w": 20
+      },
+      "name": "Chains TVL Highcharts",
+      "type": "chart-highcharts"
+    },
+    "company_details": {
+      "description": "Displays detailed information about the selected car manufacturer",
+      "endpoint": "company_details",
+      "gridData": {
+        "h": 8,
+        "w": 16
+      },
+      "name": "Car Manufacturer Details",
+      "params": [
+        {
+          "description": "Select a car manufacturer to view details",
+          "label": "Manufacturer",
+          "optionsEndpoint": "/company_options",
+          "paramName": "company",
+          "type": "endpoint",
+          "value": "TM"
+        },
+        {
+          "description": "Select model year to view details",
+          "label": "Model Year",
+          "options": [
+            {
+              "label": "2024",
+              "value": "2024"
+            },
+            {
+              "label": "2023",
+              "value": "2023"
+            },
+            {
+              "label": "2022",
+              "value": "2022"
+            }
+          ],
+          "paramName": "year",
+          "type": "text",
+          "value": "2024"
+        }
+      ],
+      "type": "markdown"
+    },
+    "company_list": {
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "field": "companyName",
+              "headerName": "Company",
+              "renderFn": "cellOnClick",
+              "renderFnParams": {
+                "actionType": "groupBy",
+                "groupBy": {
+                  "paramName": "companyId",
+                  "valueField": "companyId"
+                }
+              },
+              "width": 200
+            },
+            {
+              "cellDataType": "number",
+              "field": "price",
+              "formatterFn": "none",
+              "headerName": "Price",
+              "width": 120
+            }
+          ],
+          "showAll": true
+        }
+      },
+      "description": "Table showing company names but passing IDs on click",
+      "endpoint": "company_list",
+      "name": "Company List with ID Mapping",
+      "params": [
+        {
+          "description": "Company identifier",
+          "label": "Company ID",
+          "optionsEndpoint": "/company_options",
+          "paramName": "companyId",
+          "show": true,
+          "type": "endpoint",
+          "value": "AAPL"
+        }
+      ],
+      "type": "table"
+    },
+    "company_performance": {
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "field": "metric",
+              "headerName": "Metric",
+              "width": 150
+            },
+            {
+              "cellDataType": "text",
+              "field": "value",
+              "headerName": "Value",
+              "width": 150
+            },
+            {
+              "cellDataType": "number",
+              "field": "change",
+              "formatterFn": "percent",
+              "headerName": "Change",
+              "renderFn": "greenRed",
+              "width": 150
+            }
+          ],
+          "showAll": true
+        }
+      },
+      "description": "Displays performance metrics for the selected car manufacturer",
+      "endpoint": "company_performance",
+      "gridData": {
+        "h": 8,
+        "w": 16
+      },
+      "name": "Car Manufacturer Performance",
+      "params": [
+        {
+          "description": "Select a car manufacturer to view performance",
+          "label": "Manufacturer",
+          "optionsEndpoint": "/company_options",
+          "paramName": "company",
+          "type": "endpoint",
+          "value": "TM"
+        },
+        {
+          "description": "Select model year to view performance",
+          "label": "Model Year",
+          "options": [
+            {
+              "label": "2024",
+              "value": "2024"
+            },
+            {
+              "label": "2023",
+              "value": "2023"
+            },
+            {
+              "label": "2022",
+              "value": "2022"
+            }
+          ],
+          "paramName": "year",
+          "type": "text",
+          "value": "2024"
+        }
+      ],
+      "type": "table"
+    },
+    "dropdown_dependent_widget": {
+      "description": "A simple widget with a dropdown depending on another dropdown",
+      "endpoint": "dropdown_dependent_widget",
+      "gridData": {
+        "h": 6,
+        "w": 16
+      },
+      "name": "Dropdown Dependent Widget",
+      "params": [
+        {
+          "description": "Category of documents to fetch",
+          "label": "Category",
+          "options": [
+            {
+              "label": "All",
+              "value": "all"
+            },
+            {
+              "label": "Reports",
+              "value": "reports"
+            },
+            {
+              "label": "Presentations",
+              "value": "presentations"
+            }
+          ],
+          "paramName": "category",
+          "type": "text",
+          "value": "all"
+        },
+        {
+          "description": "Document to display",
+          "label": "Select Document",
+          "optionsEndpoint": "/document_options",
+          "optionsParams": {
+            "category": "$category"
+          },
+          "paramName": "document_type",
+          "type": "endpoint"
+        }
+      ],
+      "type": "markdown"
+    },
+    "get_video": {
+      "description": "View YouTube videos",
+      "endpoint": "/get_video",
+      "gridData": {
+        "h": 12,
+        "w": 20
+      },
+      "name": "Video Library",
+      "params": [
+        {
+          "description": "Video to display",
+          "label": "Video",
+          "optionsEndpoint": "/get_video_options",
+          "paramName": "video_name",
+          "type": "endpoint",
+          "value": "OpenBB Workspace Demo"
+        }
+      ],
+      "type": "youtube"
+    },
+    "get_video_with_transcript": {
+      "description": "View YouTube videos with transcript support for AI",
+      "endpoint": "/get_video_with_transcript",
+      "gridData": {
+        "h": 12,
+        "w": 20
+      },
+      "name": "Video Library with Transcript",
+      "params": [
+        {
+          "description": "Video to display",
+          "label": "Video",
+          "optionsEndpoint": "/get_video_options",
+          "paramName": "video_name",
+          "type": "endpoint",
+          "value": "OpenBB Workspace Demo"
+        }
+      ],
+      "raw": true,
+      "type": "youtube"
+    },
+    "html_widget": {
+      "description": "A HTML widget with interactive dashboard",
+      "endpoint": "html_widget",
+      "gridData": {
+        "h": 20,
+        "w": 40
+      },
+      "name": "HTML Widget",
+      "raw": true,
+      "type": "html"
+    },
+    "live_grid_data": {
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "field": "symbol",
+              "headerName": "Symbol"
+            },
+            {
+              "field": "price",
+              "headerName": "Price",
+              "renderFn": "showCellChange",
+              "renderFnParams": {
+                "colorValueKey": "change"
+              }
+            },
+            {
+              "field": "change_percent",
+              "headerName": "Change %",
+              "renderFn": "greenRed"
+            },
+            {
+              "enableCellChangeWs": false,
+              "field": "volume",
+              "headerName": "Volume"
+            }
+          ],
+          "showAll": true
+        },
+        "wsRowIdColumn": "symbol"
+      },
+      "description": "Live Grid with real-time WebSocket updates",
+      "endpoint": "live_grid_data",
+      "gridData": {
+        "h": 9,
+        "w": 20
+      },
+      "name": "Live Grid",
+      "params": [
+        {
+          "description": "The symbol to get details for",
+          "label": "Symbol",
+          "multiSelect": true,
+          "options": [
+            {
+              "label": "AAPL",
+              "value": "AAPL"
+            },
+            {
+              "label": "GOOGL",
+              "value": "GOOGL"
+            },
+            {
+              "label": "MSFT",
+              "value": "MSFT"
+            },
+            {
+              "label": "AMZN",
+              "value": "AMZN"
+            },
+            {
+              "label": "TSLA",
+              "value": "TSLA"
+            }
+          ],
+          "paramName": "symbol",
+          "type": "text",
+          "value": "TSLA"
+        }
+      ],
+      "type": "live_grid",
+      "wsEndpoint": "live_grid_ws"
+    },
+    "markdown_widget": {
+      "description": "A markdown widget",
+      "endpoint": "markdown_widget",
+      "gridData": {
+        "h": 4,
+        "w": 12
+      },
+      "name": "Markdown Widget",
+      "type": "markdown"
+    },
+    "markdown_widget_with_boolean": {
+      "description": "A markdown widget with a boolean toggle parameter",
+      "endpoint": "markdown_widget_with_boolean",
+      "gridData": {
+        "h": 5,
+        "w": 20
+      },
+      "name": "Markdown Widget with Boolean",
+      "params": [
+        {
+          "description": "Enable or disable the condition",
+          "label": "Condition",
+          "paramName": "condition",
+          "type": "boolean",
+          "value": true
+        }
+      ],
+      "type": "markdown"
+    },
+    "markdown_widget_with_category_and_subcategory": {
+      "category": "Widgets",
+      "description": "A markdown widget with category and subcategory",
+      "endpoint": "markdown_widget_with_category_and_subcategory",
+      "gridData": {
+        "h": 4,
+        "w": 12
+      },
+      "name": "Markdown Widget with Category and Subcategory",
+      "subCategory": "Markdown Widgets",
+      "type": "markdown"
+    },
+    "markdown_widget_with_cron_refetch_interval": {
+      "dataUpdateDisplay": "*/1 * * * *",
+      "description": "A markdown widget that auto-refreshes on cron schedule boundaries and displays its data update schedule in widget metadata.",
+      "endpoint": "markdown_widget_with_cron_refetch_interval",
+      "gridData": {
+        "h": 6,
+        "w": 20
+      },
+      "name": "Markdown Widget with Cron Refetch Interval",
+      "refetchInterval": "*/1 * * * *",
+      "type": "markdown"
+    },
+    "markdown_widget_with_cron_refetch_only": {
+      "description": "A markdown widget that auto-refreshes on cron schedule boundaries without displaying a separate data update schedule.",
+      "endpoint": "markdown_widget_with_cron_refetch_only",
+      "gridData": {
+        "h": 6,
+        "w": 20
+      },
+      "name": "Markdown Widget with Cron Refetch Only",
+      "refetchInterval": "*/1 * * * *",
+      "type": "markdown"
+    },
+    "markdown_widget_with_data_update_display_only": {
+      "dataUpdateDisplay": "0 10 * * *",
+      "description": "A markdown widget that displays a data update schedule without configuring automatic refresh.",
+      "endpoint": "markdown_widget_with_data_update_display_only",
+      "gridData": {
+        "h": 6,
+        "w": 20
+      },
+      "name": "Markdown Widget with Data Update Display Only",
+      "type": "markdown"
+    },
+    "markdown_widget_with_date_picker": {
+      "description": "A markdown widget with a date picker parameter",
+      "endpoint": "markdown_widget_with_date_picker",
+      "gridData": {
+        "h": 5,
+        "w": 20
+      },
+      "name": "Markdown Widget with Date Picker",
+      "params": [
+        {
+          "description": "Select a date",
+          "label": "Date",
+          "paramName": "date",
+          "type": "date",
+          "value": "$currentDate-1d"
+        }
+      ],
+      "type": "markdown"
+    },
+    "markdown_widget_with_dropdown": {
+      "description": "A markdown widget with a dropdown parameter",
+      "endpoint": "markdown_widget_with_dropdown",
+      "gridData": {
+        "h": 5,
+        "w": 20
+      },
+      "name": "Markdown Widget with Dropdown",
+      "params": [
+        {
+          "description": "Select number of days",
+          "label": "Days",
+          "options": [
+            {
+              "label": "1 Day",
+              "value": "1"
+            },
+            {
+              "label": "7 Days",
+              "value": "7"
+            },
+            {
+              "label": "30 Days",
+              "value": "30"
+            },
+            {
+              "label": "90 Days",
+              "value": "90"
+            }
+          ],
+          "paramName": "days_picker",
+          "type": "text",
+          "value": "1"
+        }
+      ],
+      "type": "markdown"
+    },
+    "markdown_widget_with_error_handling": {
+      "description": "A markdown widget with error handling",
+      "endpoint": "markdown_widget_with_error_handling",
+      "gridData": {
+        "h": 4,
+        "w": 12
+      },
+      "name": "Markdown Widget with Error Handling",
+      "type": "markdown"
+    },
+    "markdown_widget_with_image_from_url": {
+      "description": "A markdown widget with an image from a URL",
+      "endpoint": "markdown_widget_with_image_from_url",
+      "gridData": {
+        "h": 20,
+        "w": 20
+      },
+      "name": "Markdown Widget with Image from URL",
+      "type": "markdown"
+    },
+    "markdown_widget_with_local_image": {
+      "description": "A markdown widget with a local image",
+      "endpoint": "markdown_widget_with_local_image",
+      "gridData": {
+        "h": 20,
+        "w": 20
+      },
+      "name": "Markdown Widget with Local Image",
+      "type": "markdown"
+    },
+    "markdown_widget_with_multi_select_advanced_dropdown": {
+      "description": "A markdown widget with a multi select advanced dropdown parameter",
+      "endpoint": "markdown_widget_with_multi_select_advanced_dropdown",
+      "gridData": {
+        "h": 6,
+        "w": 16
+      },
+      "name": "Markdown Widget with Multi Select Advanced Dropdown",
+      "params": [
+        {
+          "description": "Select a stock to analyze",
+          "label": "Select Stock",
+          "multiSelect": true,
+          "optionsEndpoint": "/advanced_dropdown_options",
+          "paramName": "stock_picker",
+          "style": {
+            "popupWidth": 450
+          },
+          "type": "endpoint",
+          "value": "AAPL"
+        }
+      ],
+      "type": "markdown"
+    },
+    "markdown_widget_with_multi_select_dropdown": {
+      "description": "A markdown widget with a multi-select dropdown parameter",
+      "endpoint": "markdown_widget_with_multi_select_dropdown",
+      "gridData": {
+        "h": 6,
+        "w": 20
+      },
+      "name": "Markdown Widget with Multi-Select Dropdown",
+      "params": [
+        {
+          "description": "Select stocks",
+          "label": "Stocks",
+          "multiSelect": true,
+          "options": [
+            {
+              "label": "Apple Inc.",
+              "value": "AAPL"
+            },
+            {
+              "label": "Microsoft Corporation",
+              "value": "MSFT"
+            },
+            {
+              "label": "Amazon.com Inc.",
+              "value": "AMZN"
+            },
+            {
+              "label": "Alphabet Inc.",
+              "value": "GOOGL"
+            },
+            {
+              "label": "NVIDIA Corporation",
+              "value": "NVDA"
+            }
+          ],
+          "paramName": "stock_picker",
+          "type": "text",
+          "value": "AAPL"
+        }
+      ],
+      "type": "markdown"
+    },
+    "markdown_widget_with_multi_text_input": {
+      "description": "A markdown widget with a text input parameter",
+      "endpoint": "markdown_widget_with_multi_text_input",
+      "gridData": {
+        "h": 6,
+        "w": 16
+      },
+      "name": "Markdown Widget with Multi Text Input",
+      "params": [
+        {
+          "description": "Type something to display",
+          "label": "Enter Text",
+          "multiple": true,
+          "paramName": "text_box",
+          "type": "text",
+          "value": "var1,var2,var3"
+        }
+      ],
+      "type": "markdown"
+    },
+    "markdown_widget_with_number_input": {
+      "description": "A markdown widget with a number input parameter",
+      "endpoint": "markdown_widget_with_number_input",
+      "gridData": {
+        "h": 5,
+        "w": 20
+      },
+      "name": "Markdown Widget with Number Input",
+      "params": [
+        {
+          "description": "Enter the amount",
+          "label": "Amount",
+          "paramName": "value",
+          "type": "number",
+          "value": 100
+        }
+      ],
+      "type": "markdown"
+    },
+    "markdown_widget_with_organized_params": {
+      "description": "A markdown widget demonstrating various parameter types organized in a clean way",
+      "endpoint": "markdown_widget_with_organized_params",
+      "gridData": {
+        "h": 13,
+        "w": 40
+      },
+      "name": "Markdown Widget with Organized Parameters",
+      "params": [
+        [
+          {
+            "description": "Enable or disable the main feature",
+            "label": "Enable Feature",
+            "paramName": "enable_feature",
+            "type": "boolean",
+            "value": true
+          }
+        ],
+        [
+          {
+            "description": "Select a date for analysis",
+            "label": "Analysis Date",
+            "paramName": "selected_date",
+            "type": "date",
+            "value": "$currentDate-1d"
+          },
+          {
+            "description": "Select the type of analysis to perform",
+            "label": "Analysis Type",
+            "options": [
+              {
+                "label": "Technical Analysis",
+                "value": "technical"
+              },
+              {
+                "label": "Fundamental Analysis",
+                "value": "fundamental"
+              },
+              {
+                "label": "Sentiment Analysis",
+                "value": "sentiment"
+              },
+              {
+                "label": "Risk Analysis",
+                "value": "risk"
+              }
+            ],
+            "paramName": "analysis_type",
+            "type": "text",
+            "value": "technical"
+          },
+          {
+            "description": "Number of days to look back",
+            "label": "Lookback Period (days)",
+            "max": 365,
+            "min": 1,
+            "paramName": "lookback_period",
+            "type": "number",
+            "value": 30
+          }
+        ],
+        [
+          {
+            "description": "Additional notes for the analysis",
+            "label": "Analysis Notes",
+            "paramName": "analysis_notes",
+            "type": "text",
+            "value": ""
+          }
+        ]
+      ],
+      "type": "markdown"
+    },
+    "markdown_widget_with_refetch_interval_and_shorter_stale_time": {
+      "description": "A markdown widget with both refetch interval and shorter stale time",
+      "endpoint": "markdown_widget_with_refetch_interval_and_shorter_stale_time",
+      "gridData": {
+        "h": 5,
+        "w": 20
+      },
+      "name": "Markdown Widget with Refetch Interval and Shorter Stale Time",
+      "refetchInterval": 10000,
+      "staleTime": 5000,
+      "type": "markdown"
+    },
+    "markdown_widget_with_run_button": {
+      "description": "A markdown widget with a run button that requires manual execution",
+      "endpoint": "markdown_widget_with_run_button",
+      "gridData": {
+        "h": 5,
+        "w": 20
+      },
+      "name": "Markdown Widget with Run Button",
+      "runButton": true,
+      "type": "markdown"
+    },
+    "markdown_widget_with_short_refetch_interval": {
+      "description": "A markdown widget that auto-refreshes at a short interval",
+      "endpoint": "markdown_widget_with_short_refetch_interval",
+      "gridData": {
+        "h": 5,
+        "w": 20
+      },
+      "name": "Markdown Widget with Short Refetch Interval",
+      "refetchInterval": 5000,
+      "type": "markdown"
+    },
+    "markdown_widget_with_short_refetch_interval_and_run_button": {
+      "description": "A markdown widget with both short refetch interval and a run button",
+      "endpoint": "markdown_widget_with_short_refetch_interval_and_run_button",
+      "gridData": {
+        "h": 5,
+        "w": 20
+      },
+      "name": "Markdown Widget with Short Refetch Interval and Run Button",
+      "refetchInterval": 5000,
+      "runButton": true,
+      "type": "markdown"
+    },
+    "markdown_widget_with_stale_time": {
+      "description": "A markdown widget with stale time. The widget will show stale data before fetching new data.",
+      "endpoint": "markdown_widget_with_stale_time",
+      "gridData": {
+        "h": 5,
+        "w": 20
+      },
+      "name": "Markdown Widget with Stale Time",
+      "staleTime": 10000,
+      "type": "markdown"
+    },
+    "markdown_widget_with_str_and_int": {
+      "description": "Markdown widget with string and integer parameters",
+      "endpoint": "markdown_widget_with_str_and_int",
+      "gridData": {
+        "h": 8,
+        "w": 20
+      },
+      "name": "Markdown Widget with String and Int",
+      "params": [
+        {
+          "description": "A text parameter",
+          "label": "Text",
+          "paramName": "text_param",
+          "type": "text",
+          "value": "Hello"
+        },
+        {
+          "description": "A number parameter",
+          "label": "Number",
+          "paramName": "number_param",
+          "type": "number",
+          "value": 42
+        }
+      ],
+      "type": "markdown"
+    },
+    "markdown_widget_with_text_input": {
+      "description": "A markdown widget with a text input parameter",
+      "endpoint": "markdown_widget_with_text_input",
+      "gridData": {
+        "h": 6,
+        "w": 20
+      },
+      "name": "Markdown Widget with Text Input",
+      "params": [
+        {
+          "description": "Enter your name",
+          "label": "Name",
+          "paramName": "name",
+          "type": "text",
+          "value": "OpenBB"
+        }
+      ],
+      "type": "markdown"
+    },
+    "metric_widget": {
+      "description": "A metric widget",
+      "endpoint": "metric_widget",
+      "gridData": {
+        "h": 5,
+        "w": 5
+      },
+      "name": "Metric Widget",
+      "type": "metric"
+    },
+    "multi_pdf_base64": {
+      "description": "View multiple PDF files using base64 encoding",
+      "endpoint": "/multi_pdf_base64",
+      "gridData": {
+        "h": 10,
+        "w": 20
+      },
+      "name": "Multi PDF Viewer - Base64",
+      "params": [
+        {
+          "description": "PDF file to display",
+          "label": "PDF File",
+          "multiSelect": true,
+          "optionsEndpoint": "/get_pdf_options",
+          "paramName": "pdf_name",
+          "roles": [
+            "fileSelector"
+          ],
+          "show": false,
+          "type": "endpoint",
+          "value": [
+            "Bitcoin Whitepaper"
+          ]
+        }
+      ],
+      "type": "multi_file_viewer"
+    },
+    "multi_pdf_url": {
+      "description": "View multiple PDF files using URLs",
+      "endpoint": "/multi_pdf_url",
+      "gridData": {
+        "h": 10,
+        "w": 20
+      },
+      "name": "Multi PDF Viewer - URL",
+      "params": [
+        {
+          "description": "PDF file to display",
+          "label": "PDF File",
+          "multiSelect": true,
+          "optionsEndpoint": "/get_pdf_options",
+          "paramName": "pdf_name",
+          "roles": [
+            "fileSelector"
+          ],
+          "show": false,
+          "type": "endpoint",
+          "value": [
+            "Sample"
+          ]
+        }
+      ],
+      "type": "multi_file_viewer"
+    },
+    "omni_python_widget": {
+      "category": "General",
+      "description": "Write Python code to create Plotly charts. Use 'fig' as the figure variable.",
+      "endpoint": "omni-python-widget",
+      "gridData": {
+        "h": 12,
+        "w": 30
+      },
+      "name": "Python Chart Widget",
+      "params": [
+        {
+          "description": "Enter Python code to create a Plotly chart. Use 'go' for plotly.graph_objects and assign your figure to 'fig'.",
+          "label": "Python Code",
+          "language": "python",
+          "paramName": "prompt",
+          "show": false,
+          "type": "text",
+          "value": "# Create a simple bar chart\nfig = go.Figure()\n\nfig.add_trace(go.Bar(\n    x=[\"Q1\", \"Q2\", \"Q3\", \"Q4\"],\n    y=[100, 150, 130, 180],\n    name=\"Revenue\",\n    marker_color=\"#26a69a\"\n))\n\nfig.add_trace(go.Bar(\n    x=[\"Q1\", \"Q2\", \"Q3\", \"Q4\"],\n    y=[80, 120, 110, 150],\n    name=\"Profit\",\n    marker_color=\"#ef5350\"\n))\n\nfig.update_layout(\n    title=\"Quarterly Performance\",\n    barmode=\"group\",\n    xaxis_title=\"Quarter\",\n    yaxis_title=\"Amount ($M)\"\n)"
+        }
+      ],
+      "type": "omni"
+    },
+    "omni_sql_widget": {
+      "category": "General",
+      "description": "Execute SQL queries against mock stock data. Use 'DATA' as the table name.",
+      "endpoint": "omni-sql-widget",
+      "gridData": {
+        "h": 12,
+        "w": 30
+      },
+      "name": "SQL Query Widget",
+      "params": [
+        {
+          "description": "Enter a SQL query to execute against the mock data. Use 'DATA' as the table name. Available columns: id, symbol, name, price, volume, sector",
+          "label": "SQL Query",
+          "language": "sql",
+          "paramName": "prompt",
+          "show": false,
+          "type": "text",
+          "value": "SELECT * FROM DATA LIMIT 5"
+        }
+      ],
+      "type": "omni"
+    },
+    "omni_widget": {
+      "category": "General",
+      "description": "A versatile omni widget that can display multiple types of content",
+      "endpoint": "omni-widget",
+      "gridData": {
+        "h": 12,
+        "w": 30
+      },
+      "name": "Basic Omni Widget",
+      "params": [
+        {
+          "description": "The prompt to send to the widget to make queries, ask questions or simply interact with it. This is required in order to get a response.",
+          "label": "Prompt",
+          "paramName": "prompt",
+          "show": false,
+          "type": "text"
+        },
+        {
+          "description": "Type of content to return",
+          "label": "Content Type",
+          "options": [
+            {
+              "label": "Markdown",
+              "value": "markdown"
+            },
+            {
+              "label": "Chart",
+              "value": "chart"
+            },
+            {
+              "label": "Table",
+              "value": "table"
+            }
+          ],
+          "paramName": "type",
+          "show": true,
+          "type": "text"
+        }
+      ],
+      "type": "omni"
+    },
+    "pdf_widget_base64": {
+      "description": "Display a PDF file with base64 encoding",
+      "endpoint": "pdf_widget_base64",
+      "gridData": {
+        "h": 20,
+        "w": 20
+      },
+      "name": "PDF Widget with Base64",
+      "type": "pdf"
+    },
+    "pdf_widget_url": {
+      "description": "Display a PDF file",
+      "endpoint": "pdf_widget_url",
+      "gridData": {
+        "h": 20,
+        "w": 20
+      },
+      "name": "PDF Widget with URL",
+      "type": "pdf"
+    },
+    "plotly_chart": {
+      "description": "A basic Plotly chart widget",
+      "endpoint": "plotly_chart",
+      "gridData": {
+        "h": 15,
+        "w": 40
+      },
+      "name": "Plotly Chart",
+      "type": "chart"
+    },
+    "plotly_chart_with_raw_data": {
+      "description": "Plotly chart with raw data support for AI analysis",
+      "endpoint": "plotly_chart_with_raw_data",
+      "gridData": {
+        "h": 15,
+        "w": 40
+      },
+      "name": "Plotly Chart with Raw Data",
+      "raw": true,
+      "type": "chart"
+    },
+    "plotly_chart_with_theme": {
+      "description": "Plotly chart with theme support",
+      "endpoint": "plotly_chart_with_theme",
+      "gridData": {
+        "h": 15,
+        "w": 40
+      },
+      "name": "Plotly Chart with Theme",
+      "type": "chart"
+    },
+    "plotly_chart_with_theme_and_toolbar": {
+      "description": "Plotly chart with Theme and toolbar",
+      "endpoint": "plotly_chart_with_theme_and_toolbar",
+      "gridData": {
+        "h": 15,
+        "w": 40
+      },
+      "name": "Plotly Chart with Theme and Toolbar",
+      "type": "chart"
+    },
+    "plotly_chart_with_theme_and_toolbar_using_config_file": {
+      "description": "Plotly chart with theme and toolbar using config file",
+      "endpoint": "plotly_chart_with_theme_and_toolbar_using_config_file",
+      "gridData": {
+        "h": 15,
+        "w": 40
+      },
+      "name": "Plotly Chart with Theme and Toolbar using Config File",
+      "type": "chart"
+    },
+    "plotly_heatmap": {
+      "description": "Plotly heatmap",
+      "endpoint": "plotly_heatmap",
+      "gridData": {
+        "h": 15,
+        "w": 40
+      },
+      "name": "Plotly Heatmap",
+      "params": [
+        {
+          "description": "Select the color scale for the heatmap",
+          "label": "Color Scale",
+          "options": [
+            {
+              "label": "Red-Blue (RdBu_r)",
+              "value": "RdBu_r"
+            },
+            {
+              "label": "Viridis",
+              "value": "Viridis"
+            },
+            {
+              "label": "Plasma",
+              "value": "Plasma"
+            },
+            {
+              "label": "Inferno",
+              "value": "Inferno"
+            },
+            {
+              "label": "Magma",
+              "value": "Magma"
+            },
+            {
+              "label": "Greens",
+              "value": "Greens"
+            },
+            {
+              "label": "Blues",
+              "value": "Blues"
+            },
+            {
+              "label": "Reds",
+              "value": "Reds"
+            }
+          ],
+          "paramName": "color_scale",
+          "show": true,
+          "type": "text",
+          "value": "RdBu_r"
+        }
+      ],
+      "type": "chart"
+    },
+    "plotly_heatmap_with_raw_data": {
+      "description": "Plotly heatmap with raw data",
+      "endpoint": "plotly_heatmap_with_raw_data",
+      "gridData": {
+        "h": 15,
+        "w": 40
+      },
+      "name": "Plotly Heatmap with Raw Data",
+      "params": [
+        {
+          "description": "Select the color scale for the heatmap",
+          "label": "Color Scale",
+          "options": [
+            {
+              "label": "Red-Blue (RdBu_r)",
+              "value": "RdBu_r"
+            },
+            {
+              "label": "Viridis",
+              "value": "Viridis"
+            },
+            {
+              "label": "Plasma",
+              "value": "Plasma"
+            },
+            {
+              "label": "Inferno",
+              "value": "Inferno"
+            },
+            {
+              "label": "Magma",
+              "value": "Magma"
+            },
+            {
+              "label": "Greens",
+              "value": "Greens"
+            },
+            {
+              "label": "Blues",
+              "value": "Blues"
+            },
+            {
+              "label": "Reds",
+              "value": "Reds"
+            }
+          ],
+          "paramName": "color_scale",
+          "show": true,
+          "type": "text",
+          "value": "RdBu_r"
+        }
+      ],
+      "raw": true,
+      "type": "chart"
+    },
+    "sample_newsfeed": {
+      "description": "A simple newsfeed widget with example articles",
+      "endpoint": "sample_newsfeed",
+      "gridData": {
+        "h": 20,
+        "w": 40
+      },
+      "name": "Sample News Feed",
+      "params": [
+        {
+          "description": "Filter news by category",
+          "label": "Category",
+          "options": [
+            {
+              "label": "All",
+              "value": "all"
+            },
+            {
+              "label": "Technology",
+              "value": "tech"
+            },
+            {
+              "label": "Business",
+              "value": "business"
+            },
+            {
+              "label": "Science",
+              "value": "science"
+            }
+          ],
+          "paramName": "category",
+          "type": "text",
+          "value": "all"
+        },
+        {
+          "description": "Maximum number of articles to display",
+          "label": "Number of Articles",
+          "paramName": "limit",
+          "type": "number",
+          "value": "5"
+        }
+      ],
+      "source": "example",
+      "type": "newsfeed"
+    },
+    "sparkline": {
+      "category": "Widgets",
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "symbol",
+              "headerName": "Symbol"
+            },
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "name",
+              "headerName": "Company Name"
+            },
+            {
+              "cellDataType": "text",
+              "chartDataType": "series",
+              "field": "lastPrice",
+              "headerName": "Last Price"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "marketCap",
+              "headerName": "Market Cap"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "volume",
+              "headerName": "Volume"
+            },
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "sector",
+              "headerName": "Sector"
+            },
+            {
+              "cellDataType": "object",
+              "chartDataType": "excluded",
+              "field": "rateOfChange",
+              "headerName": "Rate of Change Trend",
+              "sparkline": {
+                "options": {
+                  "fill": "rgba(34, 197, 94, 0.2)",
+                  "markers": {
+                    "enabled": true,
+                    "fill": "#22c55e",
+                    "shape": "circle",
+                    "size": 2
+                  },
+                  "padding": {
+                    "bottom": 5,
+                    "left": 5,
+                    "right": 5,
+                    "top": 5
+                  },
+                  "pointsOfInterest": {
+                    "maximum": {
+                      "fill": "#ffd700",
+                      "size": 6,
+                      "stroke": "#ffb000",
+                      "strokeWidth": 2
+                    },
+                    "minimum": {
+                      "fill": "#ef4444",
+                      "size": 6,
+                      "stroke": "#dc2626",
+                      "strokeWidth": 2
+                    }
+                  },
+                  "stroke": "#22c55e",
+                  "strokeWidth": 2,
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "type": "line"
+              }
+            }
+          ],
+          "showAll": true
+        }
+      },
+      "defaultViz": "table",
+      "description": "Display stock data with sparkline charts highlighting minimum and maximum values",
+      "endpoint": "sparkline",
+      "gridData": {
+        "h": 10,
+        "w": 18
+      },
+      "name": "Stock Sparkline Data - With Min/Max Points",
+      "subCategory": "sparkline",
+      "type": "table"
+    },
+    "sparkline_area": {
+      "category": "Widgets",
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "symbol",
+              "headerName": "Symbol"
+            },
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "name",
+              "headerName": "Company Name"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "avgVolume",
+              "headerName": "Avg Volume (M)"
+            },
+            {
+              "cellDataType": "object",
+              "chartDataType": "excluded",
+              "field": "volumeTrend",
+              "headerName": "30-Day Volume Trend",
+              "sparkline": {
+                "options": {
+                  "fill": "rgba(34, 197, 94, 0.3)",
+                  "markers": {
+                    "enabled": true,
+                    "fill": "#22c55e",
+                    "size": 2
+                  },
+                  "padding": {
+                    "bottom": 5,
+                    "left": 5,
+                    "right": 5,
+                    "top": 5
+                  },
+                  "pointsOfInterest": {
+                    "maximum": {
+                      "fill": "#fbbf24",
+                      "size": 6,
+                      "stroke": "#f59e0b",
+                      "strokeWidth": 2
+                    }
+                  },
+                  "stroke": "#22c55e",
+                  "strokeWidth": 2
+                },
+                "type": "area"
+              }
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "volumeChangePercent",
+              "headerName": "Volume Change %"
+            }
+          ],
+          "showAll": true
+        }
+      },
+      "defaultViz": "table",
+      "description": "Display trading volume data using area sparklines with maximum point highlighting",
+      "endpoint": "sparkline-area",
+      "gridData": {
+        "h": 10,
+        "w": 16
+      },
+      "name": "Trading Volume - Area Sparklines",
+      "subCategory": "sparkline-area",
+      "type": "table"
+    },
+    "sparkline_bar": {
+      "category": "Widgets",
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "symbol",
+              "headerName": "Symbol"
+            },
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "name",
+              "headerName": "Company Name"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "ytdReturn",
+              "headerName": "YTD Return %"
+            },
+            {
+              "cellDataType": "object",
+              "chartDataType": "excluded",
+              "field": "monthlyReturns",
+              "headerName": "Monthly Returns",
+              "sparkline": {
+                "options": {
+                  "direction": "vertical",
+                  "fill": "#8b5cf6",
+                  "padding": {
+                    "bottom": 5,
+                    "left": 5,
+                    "right": 5,
+                    "top": 5
+                  },
+                  "pointsOfInterest": {
+                    "positiveNegative": {
+                      "negative": {
+                        "fill": "#ef4444",
+                        "stroke": "#dc2626"
+                      },
+                      "positive": {
+                        "fill": "#22c55e",
+                        "stroke": "#16a34a"
+                      }
+                    }
+                  },
+                  "stroke": "#7c3aed",
+                  "strokeWidth": 1,
+                  "xKey": "x",
+                  "yKey": "y"
+                },
+                "type": "bar"
+              }
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "bestMonth",
+              "headerName": "Best Month %"
+            }
+          ],
+          "showAll": true
+        }
+      },
+      "defaultViz": "table",
+      "description": "Display monthly performance data using bar sparklines with positive/negative styling",
+      "endpoint": "sparkline-bar",
+      "gridData": {
+        "h": 10,
+        "w": 16
+      },
+      "name": "Monthly Performance - Bar Sparklines with Positive/Negative",
+      "subCategory": "sparkline-bar",
+      "type": "table"
+    },
+    "sparkline_column": {
+      "category": "Widgets",
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "symbol",
+              "headerName": "Symbol"
+            },
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "name",
+              "headerName": "Company Name"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "marketCap",
+              "headerName": "Market Cap"
+            },
+            {
+              "cellDataType": "object",
+              "chartDataType": "excluded",
+              "field": "quarterlyEps",
+              "headerName": "8-Quarter EPS",
+              "sparkline": {
+                "options": {
+                  "direction": "horizontal",
+                  "fill": "#f59e0b",
+                  "highlightStyle": {
+                    "fill": "#fbbf24",
+                    "stroke": "#f59e0b"
+                  },
+                  "padding": {
+                    "bottom": 5,
+                    "left": 5,
+                    "right": 5,
+                    "top": 5
+                  },
+                  "stroke": "#d97706",
+                  "strokeWidth": 1
+                },
+                "type": "bar"
+              }
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "epsGrowth",
+              "headerName": "EPS Growth %"
+            }
+          ],
+          "showAll": true
+        }
+      },
+      "defaultViz": "table",
+      "description": "Display quarterly earnings data using column sparklines",
+      "endpoint": "sparkline-column",
+      "gridData": {
+        "h": 10,
+        "w": 16
+      },
+      "name": "Quarterly Earnings - Column Sparklines",
+      "subCategory": "sparkline-column",
+      "type": "table"
+    },
+    "sparkline_line": {
+      "category": "Widgets",
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "symbol",
+              "headerName": "Symbol"
+            },
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "name",
+              "headerName": "Company Name"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "currentPrice",
+              "headerName": "Current Price"
+            },
+            {
+              "cellDataType": "object",
+              "chartDataType": "excluded",
+              "field": "priceTrend",
+              "headerName": "90-Day Price Trend",
+              "sparkline": {
+                "options": {
+                  "markers": {
+                    "enabled": true,
+                    "fill": "#3b82f6",
+                    "size": 2
+                  },
+                  "padding": {
+                    "bottom": 5,
+                    "left": 5,
+                    "right": 5,
+                    "top": 5
+                  },
+                  "pointsOfInterest": {
+                    "firstLast": {
+                      "fill": "#8b5cf6",
+                      "size": 6,
+                      "stroke": "#7c3aed",
+                      "strokeWidth": 2
+                    }
+                  },
+                  "stroke": "#3b82f6",
+                  "strokeWidth": 2
+                },
+                "type": "line"
+              }
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "changePercent",
+              "headerName": "Change %"
+            }
+          ],
+          "showAll": true
+        }
+      },
+      "defaultViz": "table",
+      "description": "Display stock price trends using line sparklines highlighting first and last points",
+      "endpoint": "sparkline-line",
+      "gridData": {
+        "h": 10,
+        "w": 16
+      },
+      "name": "Stock Price Trends - Line Sparklines with First/Last Points",
+      "subCategory": "sparkline-line",
+      "type": "table"
+    },
+    "table_to_chart_widget": {
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "category",
+              "headerName": "Category"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "value",
+              "headerName": "Value"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "target",
+              "headerName": "Target"
+            }
+          ],
+          "enableCharts": true,
+          "showAll": true
+        }
+      },
+      "description": "A table widget that can be converted to a chart view",
+      "endpoint": "table_to_chart_widget",
+      "gridData": {
+        "h": 12,
+        "w": 20
+      },
+      "name": "Table to Chart Widget",
+      "type": "table"
+    },
+    "table_to_time_series_widget": {
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "dateString",
+              "chartDataType": "category",
+              "field": "date",
+              "headerName": "Date"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "revenue",
+              "headerName": "Revenue"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "profit",
+              "headerName": "Profit"
+            }
+          ],
+          "enableCharts": true,
+          "showAll": true
+        }
+      },
+      "description": "A table widget with time series data for line chart conversion",
+      "endpoint": "table_to_time_series_widget",
+      "gridData": {
+        "h": 12,
+        "w": 20
+      },
+      "name": "Table to Time Series Widget",
+      "type": "table"
+    },
+    "table_widget": {
+      "description": "A table widget",
+      "endpoint": "table_widget",
+      "gridData": {
+        "h": 4,
+        "w": 12
+      },
+      "name": "Table Widget",
+      "type": "table"
+    },
+    "table_widget_basic_sparklines": {
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "field": "stock",
+              "headerName": "Stock",
+              "pinned": "left",
+              "width": 120
+            },
+            {
+              "field": "price_history",
+              "headerName": "Price History",
+              "sparkline": {
+                "options": {
+                  "markers": {
+                    "enabled": true,
+                    "size": 3
+                  },
+                  "pointsOfInterest": {
+                    "maximum": {
+                      "fill": "#22c55e",
+                      "size": 6,
+                      "stroke": "#16a34a"
+                    },
+                    "minimum": {
+                      "fill": "#ef4444",
+                      "size": 6,
+                      "stroke": "#dc2626"
+                    }
+                  },
+                  "stroke": "#2563eb",
+                  "strokeWidth": 2
+                },
+                "type": "line"
+              },
+              "width": 200
+            },
+            {
+              "field": "volume",
+              "headerName": "Volume",
+              "sparkline": {
+                "options": {
+                  "fill": "#6b7280",
+                  "pointsOfInterest": {
+                    "maximum": {
+                      "fill": "#22c55e",
+                      "stroke": "#16a34a"
+                    },
+                    "minimum": {
+                      "fill": "#ef4444",
+                      "stroke": "#dc2626"
+                    }
+                  },
+                  "stroke": "#4b5563"
+                },
+                "type": "bar"
+              },
+              "width": 150
+            }
+          ]
+        }
+      },
+      "description": "A table widget with basic sparklines showing min/max points",
+      "endpoint": "table_widget_basic_sparklines",
+      "gridData": {
+        "h": 6,
+        "w": 20
+      },
+      "name": "Table Widget with Basic Sparklines",
+      "type": "table"
+    },
+    "table_widget_custom_formatter": {
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "field": "company",
+              "headerName": "Company",
+              "pinned": "left",
+              "width": 150
+            },
+            {
+              "field": "profit_loss",
+              "headerName": "P&L Trend",
+              "sparkline": {
+                "options": {
+                  "customFormatter": "(params) => ({ fill: params.yValue >= 0 ? '#22c55e' : '#ef4444', stroke: params.yValue >= 0 ? '#16a34a' : '#dc2626' })"
+                },
+                "type": "bar"
+              },
+              "width": 200
+            },
+            {
+              "field": "revenue_growth",
+              "headerName": "Revenue Growth",
+              "sparkline": {
+                "options": {
+                  "customFormatter": "(params) => ({ fill: params.yValue > 10 ? '#22c55e' : params.yValue < 0 ? '#ef4444' : '#f59e0b', fillOpacity: 0.3, stroke: params.yValue > 10 ? '#16a34a' : params.yValue < 0 ? '#dc2626' : '#d97706' })"
+                },
+                "type": "bar"
+              },
+              "width": 200
+            }
+          ]
+        }
+      },
+      "description": "A table widget with custom sparkline formatter for profit/loss",
+      "endpoint": "table_widget_custom_formatter",
+      "gridData": {
+        "h": 6,
+        "w": 20
+      },
+      "name": "Table Widget with Custom Formatter",
+      "type": "table"
+    },
+    "table_widget_from_api_endpoint": {
+      "description": "A table widget from an API endpoint",
+      "endpoint": "table_widget_from_api_endpoint",
+      "gridData": {
+        "h": 4,
+        "w": 12
+      },
+      "name": "Table Widget from API Endpoint",
+      "type": "table"
+    },
+    "table_widget_with_column_definitions": {
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "stock",
+              "headerName": "Stock"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "price",
+              "headerName": "Price ($)"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "change",
+              "headerName": "24h Change"
+            }
+          ]
+        }
+      },
+      "description": "A table widget with custom column definitions",
+      "endpoint": "table_widget_with_column_definitions",
+      "gridData": {
+        "h": 6,
+        "w": 20
+      },
+      "name": "Table Widget with Column Definitions",
+      "type": "table"
+    },
+    "table_widget_with_grouping_by_cell_click": {
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "field": "symbol",
+              "headerName": "Symbol",
+              "pinned": "left",
+              "renderFn": "cellOnClick",
+              "renderFnParams": {
+                "actionType": "groupBy",
+                "groupBy": {
+                  "paramName": "symbol"
+                }
+              },
+              "width": 120
+            },
+            {
+              "cellDataType": "number",
+              "field": "price",
+              "formatterFn": "none",
+              "headerName": "Price",
+              "width": 120
+            },
+            {
+              "cellDataType": "number",
+              "field": "change",
+              "formatterFn": "percent",
+              "headerName": "Change",
+              "renderFn": "greenRed",
+              "width": 120
+            },
+            {
+              "cellDataType": "number",
+              "field": "volume",
+              "formatterFn": "int",
+              "headerName": "Volume",
+              "width": 150
+            }
+          ],
+          "showAll": true
+        }
+      },
+      "description": "A table widget that groups data when clicking on symbols. Click on a symbol to update all related widgets.",
+      "endpoint": "table_widget_with_grouping_by_cell_click",
+      "gridData": {
+        "h": 9,
+        "w": 20
+      },
+      "name": "Table widget with grouping by cell click",
+      "params": [
+        {
+          "description": "Select stocks to display",
+          "label": "Symbol",
+          "multiSelect": false,
+          "optionsEndpoint": "/get_tickers_list",
+          "paramName": "symbol",
+          "show": true,
+          "type": "endpoint",
+          "value": "AAPL"
+        }
+      ],
+      "type": "table"
+    },
+    "table_widget_with_hover_card": {
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "field": "name",
+              "formatterFn": "none",
+              "headerName": "Asset",
+              "pinned": "left",
+              "renderFn": "hoverCard",
+              "renderFnParams": {
+                "hoverCard": {
+                  "cellField": "value",
+                  "markdown": "### {value} (since {foundedDate})\n**Description:** {description}",
+                  "title": "Project Details"
+                }
+              },
+              "width": 120
+            },
+            {
+              "cellDataType": "number",
+              "field": "tvl",
+              "formatterFn": "int",
+              "headerName": "TVL (USD)",
+              "headerTooltip": "Total Value Locked",
+              "renderFn": "columnColor",
+              "width": 150
+            },
+            {
+              "cellDataType": "number",
+              "field": "change_1d",
+              "formatterFn": "percent",
+              "headerName": "24h Change",
+              "maxWidth": 150,
+              "minWidth": 70,
+              "renderFn": "greenRed",
+              "width": 120
+            },
+            {
+              "cellDataType": "number",
+              "field": "change_7d",
+              "formatterFn": "percent",
+              "headerName": "7d Change",
+              "maxWidth": 150,
+              "minWidth": 70,
+              "renderFn": "greenRed",
+              "width": 120
+            }
+          ]
+        }
+      },
+      "description": "A table widget with a hover card for expandable content",
+      "endpoint": "table_widget_with_hover_card",
+      "gridData": {
+        "h": 6,
+        "w": 20
+      },
+      "name": "Table Widget with Hover Card",
+      "type": "table"
+    },
+    "table_widget_with_render_functions": {
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "field": "name",
+              "formatterFn": "none",
+              "headerName": "Asset",
+              "pinned": "left",
+              "renderFn": "titleCase",
+              "width": 120
+            },
+            {
+              "cellDataType": "number",
+              "field": "tvl",
+              "formatterFn": "int",
+              "headerName": "TVL (USD)",
+              "headerTooltip": "Total Value Locked",
+              "renderFn": "columnColor",
+              "renderFnParams": {
+                "colorRules": [
+                  {
+                    "color": "blue",
+                    "condition": "between",
+                    "fill": false,
+                    "range": {
+                      "max": 40000000000,
+                      "min": 30000000000
+                    }
+                  },
+                  {
+                    "color": "#FFA500",
+                    "condition": "lt",
+                    "fill": false,
+                    "value": 10000000000
+                  },
+                  {
+                    "color": "green",
+                    "condition": "gt",
+                    "fill": true,
+                    "value": 40000000000
+                  }
+                ]
+              },
+              "width": 150
+            },
+            {
+              "cellDataType": "number",
+              "field": "change_1d",
+              "formatterFn": "percent",
+              "headerName": "24h Change",
+              "maxWidth": 150,
+              "minWidth": 70,
+              "renderFn": "greenRed",
+              "width": 120
+            },
+            {
+              "cellDataType": "number",
+              "field": "change_7d",
+              "formatterFn": "percent",
+              "headerName": "7d Change",
+              "maxWidth": 150,
+              "minWidth": 70,
+              "renderFn": "greenRed",
+              "width": 120
+            }
+          ]
+        }
+      },
+      "description": "A table widget with render functions",
+      "endpoint": "table_widget_with_render_functions",
+      "gridData": {
+        "h": 6,
+        "w": 20
+      },
+      "name": "Table Widget with Render Functions",
+      "type": "table"
+    },
+    "table_widget_with_str_filter_param": {
+      "description": "Table widget with a string filter parameter",
+      "endpoint": "table_widget_with_str_filter_param",
+      "gridData": {
+        "h": 8,
+        "w": 20
+      },
+      "name": "Table Widget with String Filter",
+      "params": [
+        {
+          "description": "Filter by category",
+          "label": "Filter",
+          "paramName": "filter_text",
+          "type": "text",
+          "value": ""
+        }
+      ],
+      "type": "table"
+    },
+    "udf": {
+      "category": "Finance",
+      "data": {
+        "chartConfig": {
+          "borderDownColor": "#ef5350",
+          "borderUpColor": "#26a69a",
+          "downColor": "#ef5350",
+          "showVolume": true,
+          "upColor": "#26a69a",
+          "volumeDownColor": "#ef5350",
+          "volumeUpColor": "#26a69a",
+          "wickDownColor": "#ef5350",
+          "wickUpColor": "#26a69a"
+        },
+        "defaultSymbol": "AAPL",
+        "updateFrequency": 60000
+      },
+      "description": "Advanced charting with TradingView using mock data",
+      "endpoint": "/udf",
+      "gridData": {
+        "h": 20,
+        "w": 20
+      },
+      "name": "TradingView Chart",
+      "type": "advanced_charting"
+    },
+    "vega_bar": {
+      "category": "crypto",
+      "description": "A minimal Vega-Lite bar chart showing top chains by TVL (mock data).",
+      "endpoint": "vega_bar",
+      "gridData": {
+        "h": 12,
+        "w": 20
+      },
+      "name": "Vega-Lite Bar Demo",
+      "type": "chart-vegalite"
+    },
+    "vega_line": {
+      "category": "crypto",
+      "description": "Time-series line chart rendered from a Vega-Lite spec.",
+      "endpoint": "vega_line",
+      "gridData": {
+        "h": 12,
+        "w": 20
+      },
+      "name": "Vega-Lite Line Demo",
+      "type": "chart-vegalite"
+    },
+    "vega_scatter": {
+      "category": "crypto",
+      "description": "Scatter plot with 200 points rendered from a Vega-Lite spec.",
+      "endpoint": "vega_scatter",
+      "gridData": {
+        "h": 12,
+        "w": 20
+      },
+      "name": "Vega-Lite Scatter Demo",
+      "type": "chart-vegalite"
+    },
+    "widget_managed_by_parameter_from_cell_click_on_table_widget": {
+      "description": "This widget demonstrates how to use the grouped symbol parameter from a table widget. When a symbol is clicked in the table, this widget will automatically update to show details for the selected symbol.",
+      "endpoint": "widget_managed_by_parameter_from_cell_click_on_table_widget",
+      "gridData": {
+        "h": 6,
+        "w": 20
+      },
+      "name": "Widget managed by parameter from cell click on table widget",
+      "params": [
+        {
+          "description": "The symbol to get details for",
+          "label": "Symbol",
+          "optionsEndpoint": "/get_tickers_list",
+          "paramName": "symbol",
+          "show": true,
+          "type": "endpoint",
+          "value": "AAPL"
+        }
+      ],
+      "type": "markdown"
+    }
+  }
+}

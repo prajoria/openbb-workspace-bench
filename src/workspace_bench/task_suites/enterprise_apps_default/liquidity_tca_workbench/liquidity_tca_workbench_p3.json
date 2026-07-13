@@ -1,0 +1,88 @@
+{
+ "id": "liquidity_tca_workbench_p3",
+ "category": "read",
+ "family": "liquidity_tca_workbench",
+ "difficulty": "medium",
+ "prompt": "Summarize post-trade review items that require broker follow-up or algo parameter changes.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Liquidity & TCA Workbench"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "broker",
+     "parameter",
+     "24.1",
+     "119",
+     "53.77"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "liquidity_tca_workbench_notes_post_trade_review_queue",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "liquidity_tca_workbench_notes_broker_exception_follow_ups",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "liquidity_tca_workbench_tca_slippage_by_algo",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Liquidity & TCA Workbench Note",
+    "data": "Summarize post-trade review items that require broker follow-up or algo parameter changes: queue score is 24.1; ups exception_count is 119; algo score is 53.77. Anchors: broker, parameter."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

@@ -16,7 +16,7 @@ from workspace_bench.workspace.surface_audit import compare_tool_schemas
 
 
 def test_current_task_schema_is_strict() -> None:
-    source = find_task("price_performance_aapl", suite="core")
+    source = find_task("price_performance_aapl", suite="enterprise-apps-usage")
     assert source.source_path is not None
     payload = json.loads(source.source_path.read_text(encoding="utf-8"))
 
@@ -49,7 +49,7 @@ def test_current_task_schema_is_strict() -> None:
 
 def test_active_identity_is_suite_family_task_without_generation_labels() -> None:
     tasks = [
-        *load_builtin_tasks("core"),
+        *load_builtin_tasks("enterprise-apps-usage"),
         *load_builtin_tasks("build-openbb-apps"),
     ]
 
@@ -158,7 +158,7 @@ def test_build_completion_notes_require_semantic_deployment_facts() -> None:
 
 
 def test_state_and_trace_requirements_are_reported_independently() -> None:
-    task = find_task("attribution", suite="core")
+    task = find_task("attribution", suite="enterprise-apps-usage")
     episode = WorkspaceEpisode(task)
     for call in task.oracle_tool_calls:
         if call.name != "get_widget_data":

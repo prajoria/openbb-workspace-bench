@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "e2e",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "A digital-assets analyst needs a decision-ready Workspace for chain activity and liquidity. The workspace must cover net chain flows and fee share. The workspace must cover current gas price snapshot. Analysts need to inspect chain, net flow USD, fee percentage, as of. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Chain Flows', 'Chain TVL Data', 'Solana'. Choose an effective architecture and avoid unrelated changes.",
   "business_terms": [
     "Chain Flows",

@@ -4,7 +4,6 @@
   "family": "types",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "Create a usable cases and compliance alerts workflow for a surveillance analyst. The workspace must cover browse case evidence documents. Leave the complete working workspace open for review. The source contract must retain `file`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "file"

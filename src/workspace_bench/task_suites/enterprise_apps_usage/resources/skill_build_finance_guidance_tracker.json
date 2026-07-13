@@ -1,0 +1,139 @@
+{
+  "id": "skill_build_finance_guidance_tracker",
+  "category": "dashboard",
+  "family": "resources",
+  "difficulty": "hard",
+  "prompt": "After reading resource openbb://workspace/guides/build-an-app, add Bench Stark Enterprise/executive_investment_dashboard_risk_limit_utilization and add a note that mentions evidence gaps.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Resource Build",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "workspace_data_control_center_entitlements_role_coverage",
+          "data_args": {},
+          "tab_id": "",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_workspace_resource",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_resource_reads": [
+      {
+        "uri": "openbb://workspace/guides/build-an-app",
+        "data_contains": [
+          "Build an App"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "executive_investment_dashboard_risk_limit_utilization",
+        "data_args": {}
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "workspace_data_control_center_entitlements_role_coverage",
+        "data_args": {},
+        "tab_id": "",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "evidence gaps"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "read_workspace_resource",
+      "args": {
+        "uri": "openbb://workspace/guides/build-an-app"
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Stark Enterprise"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "executive_investment_dashboard_risk_limit_utilization"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "executive_investment_dashboard_risk_limit_utilization",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Resource Build Note",
+        "data": "Built from resource guidance: evidence gaps."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 9
+  }
+}

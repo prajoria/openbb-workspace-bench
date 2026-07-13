@@ -4,7 +4,6 @@
   "family": "apps",
   "specification_level": "explicit",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Rates Watch Data' at http://localhost:7803. Treat the app layout and navigation as the product outcome. The experience needs Yield Curve (`yield_curve`, chart) using `/yield-curve` for plotly treasury yield curve snapshot; consume the raw backend payload; 2s10s Spread (`curve_spread_metric`, metric) using `/curve-spread` for current 2s10s spread in bps. Organize it as app 'Rates Morning' with tabs Morning (yield_curve, curve_spread_metric) with 2 starter prompt(s). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {

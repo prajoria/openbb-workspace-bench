@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "e2e",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "The desk needs a production-ready vendor service levels workflow for a vendor-operations manager. The workspace must cover vendor uptime and latency posture. The workspace must cover count of open SLA breaches. Analysts need to inspect vendor, uptime percentage, latency milliseconds, status. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Vendor Ops', 'Vendor SLA Data', 'QuoteStream'. Use your judgment on the architecture and leave other work intact.",
   "business_terms": [
     "Vendor Ops",

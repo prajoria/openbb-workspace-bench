@@ -1,0 +1,92 @@
+{
+ "id": "healthcare_research_dashboard_p1",
+ "category": "read",
+ "family": "healthcare_research_dashboard",
+ "difficulty": "medium",
+ "prompt": "Prepare the healthcare analyst brief: coverage, clinical catalysts, probability funnel, TAM, prescriptions, and research documents.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Healthcare Research Dashboard"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "prescriptions",
+     "probability",
+     "68.96",
+     "7.43",
+     "40.91"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_clinical_clinical_probability_funnel",
+    "data_args": {
+     "period": "YTD",
+     "raw": false,
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_commercial_tam_scenarios",
+    "data_args": {
+     "period": "YTD",
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_commercial_prescription_trend",
+    "data_args": {
+     "period": "YTD",
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Healthcare Research Dashboard Note",
+    "data": "Prepare the healthcare analyst brief: coverage, clinical catalysts, probability funnel, TAM, prescriptions, and research documents: funnel value is 68.96; scenarios score is 7.43; trend score is 40.91. Anchors: prescriptions, probability."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

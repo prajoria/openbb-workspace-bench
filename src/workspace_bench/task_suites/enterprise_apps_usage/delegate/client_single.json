@@ -1,0 +1,97 @@
+{
+  "id": "client_single",
+  "category": "platform",
+  "family": "delegate",
+  "difficulty": "easy",
+  "prompt": "Use assign_tasks_to_agents with one task_request using id ir-analyst for client meeting prep work: Prepare talking points and open requests for the client meeting.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Delegation Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "stress_liquidity_lab_liquidity_redemption_stress",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "assign_tasks_to_agents"
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "assign_tasks_to_agents",
+        "data_contains": [
+          "ir-analyst"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    },
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "stress_liquidity_lab_liquidity_redemption_stress",
+        "data_args": {},
+        "tab_id": "overview",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "assign_tasks_to_agents",
+      "args": {
+        "task_requests": [
+          {
+            "id": "ir-analyst",
+            "description": "Prepare talking points and open requests for the client meeting.",
+            "assigned_holder_url": "workspace://agents/ir",
+            "assigned_agent_id": "ir-agent"
+          }
+        ]
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 5
+  }
+}

@@ -4,7 +4,6 @@
   "family": "debug",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Restore Execution Recovery Room for execution analysts: one panel disappeared after a backend definition update. Work through the existing Execution Repair Data connection, repair the root cause without replacing healthy content, and run a live-data retest. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Execution Recovery Room open and add a short verification note that naturally mentions Execution Recovery Room, Execution Repair Data, and repair verified.",
   "business_terms": [
     "Execution Recovery Room",

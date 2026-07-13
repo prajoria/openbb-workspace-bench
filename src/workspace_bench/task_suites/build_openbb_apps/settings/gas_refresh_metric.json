@@ -4,7 +4,6 @@
   "family": "settings",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "Create a usable chain activity and liquidity workflow for a digital-assets analyst. The workspace must cover auto-refreshing gas snapshot. The source contract must retain `Chain TVL Data`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "Chain TVL Data"

@@ -1,0 +1,92 @@
+{
+ "id": "equity_research_workbench_p3",
+ "category": "read",
+ "family": "equity_research_workbench",
+ "difficulty": "medium",
+ "prompt": "Draft the analyst call prep note with catalysts, risks, research approvals, and open evidence gaps.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Equity Research Workbench"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "catalysts",
+     "approvals",
+     "39.25",
+     "81.07",
+     "7.98"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "equity_research_workbench_thesis_catalysts_and_risks",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "equity_research_workbench_thesis_draft_research_review",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "equity_research_workbench_thesis_sell_side_research_pdfs",
+    "data_args": {
+     "pdf_name": [
+      "Ipsos GLP-1 Healthcare Revolution",
+      "MassHPC GLP-1 Utilization & Spending"
+     ]
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Equity Research Workbench Note",
+    "data": "Draft the analyst call prep note with catalysts, risks, research approvals, and open evidence gaps: risks score is 39.25; review score is 81.07; pdfs score is 7.98. Anchors: catalysts, approvals."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

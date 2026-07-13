@@ -1,0 +1,35 @@
+{
+  "id": "smoke_list_available_widgets",
+  "category": "read",
+  "family": "list_available_widgets",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "prompt": "List the widgets available from Bench Stark Enterprise.",
+  "business_terms": [],
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "list_available_widgets"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "list_available_widgets",
+        "args_contains": {
+          "origin": "Bench Stark Enterprise"
+        }
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Stark Enterprise"
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 1
+  }
+}

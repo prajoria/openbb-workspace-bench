@@ -4,7 +4,6 @@
   "family": "apps",
   "specification_level": "explicit",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Bench Stark Enterprise' at http://localhost:7809. Treat the app layout and navigation as the product outcome. The experience needs Risk Snapshot (`risk_exposure_monitor_dashboard_risk_snapshot`, metric) using `/risk_exposure_monitor_dashboard_risk_snapshot` for risk & Exposure Monitor (Risk User). Institutional demo view modeled on fund operating workflows; user controls: Portfolio (`portfolio`, text), Scenario (`scenario`, text), Period (`period`, text). Organize it as app 'Enterprise Risk Board' with tabs Risk (risk_exposure_monitor_dashboard_risk_snapshot). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

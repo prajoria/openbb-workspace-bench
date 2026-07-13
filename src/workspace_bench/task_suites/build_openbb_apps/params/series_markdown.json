@@ -4,7 +4,6 @@
   "family": "params",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build a working Workspace experience for a rates strategist covering rates and Treasury markets. The workspace must cover rates note for the selected time series. Keep these source-contract anchors: `series`. Choose the rest of the architecture and avoid unrelated changes.",
   "business_terms": [
     "series"

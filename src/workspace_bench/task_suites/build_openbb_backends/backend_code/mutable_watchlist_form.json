@@ -109,6 +109,5 @@
   },
   "oracle_tool_calls": [],
   "prompt": "A research desk needs to add symbols and notes through a Workspace form and see each accepted submission in the table immediately afterward. Implement the declared POST contract with in-process state; normalize tickers and preserve existing entries.",
-  "split": "validation",
   "success": {}
 }

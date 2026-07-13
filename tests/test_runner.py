@@ -129,7 +129,7 @@ def test_find_task_searches_all_bundled_suites() -> None:
         == "revision_grid"
     )
     try:
-        find_task("revision_grid", suite="core")
+        find_task("revision_grid", suite="enterprise-apps-usage")
     except KeyError:
         pass
     else:
@@ -150,7 +150,7 @@ def test_cli_smoke_workspace_mcp_wires_task_and_suite(monkeypatch) -> None:
             "--task",
             "price_performance_aapl",
             "--suite",
-            "core",
+            "enterprise-apps-usage",
         ]
     )
 
@@ -158,13 +158,13 @@ def test_cli_smoke_workspace_mcp_wires_task_and_suite(monkeypatch) -> None:
 
 
 def test_cli_manifest_resolves_core_suite(capsys) -> None:
-    exit_code = main(["manifest", "--suite", "core", "--json"])
+    exit_code = main(["manifest", "--suite", "enterprise-apps-usage", "--json"])
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["task_count"] == 300
     assert "create" in payload["families"]
-    assert payload["task_suite"]["suite_id"] == "core"
+    assert payload["task_suite"]["suite_id"] == "enterprise-apps-usage"
     assert len(payload["task_suite"]["content_sha256"]) == 64
     assert "read" in payload["categories"]
 
@@ -200,12 +200,11 @@ def test_cli_manifest_json_includes_dataset_summary(capsys) -> None:
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["name"] == "openbb-workspace-bench"
-    assert payload["task_suite"]["suite_id"] == "core"
+    assert payload["task_suite"]["suite_id"] == "enterprise-apps-usage"
     assert "release_id" not in payload
     assert payload["task_count"] == len(load_builtin_tasks())
     assert payload["canary_guid"] == CANARY_GUID
     assert "dashboard" in payload["categories"]
-    assert payload["splits"] == ["test", "train", "validation"]
 
 
 def test_cli_report_json_includes_release_checks(capsys) -> None:
@@ -246,7 +245,6 @@ def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
     assert payload["summary"]["passed"] == 1
     assert payload["results"][0]["category"] == "single-widget"
     assert payload["results"][0]["difficulty"] == "easy"
-    assert payload["results"][0]["split"] == "train"
 
 
 def test_cli_run_resolves_build_suite_task_without_suite_flag(capsys) -> None:
@@ -328,7 +326,6 @@ def test_runner_round_trips_workspace_resource_and_prompt_task(tmp_path) -> None
                 "category": "read",
                 "family": "resources",
                 "difficulty": "easy",
-                "split": "dev",
                 "prompt": "Read the app index and tool usage prompt.",
                 "fixtures": {"backends": [{"name": "equities"}]},
                 "initial_state": {},
@@ -382,7 +379,7 @@ def test_runner_round_trips_workspace_resource_and_prompt_task(tmp_path) -> None
     ]
 
 
-def test_cli_private_task_suite_manifest_sets_default_split(tmp_path, capsys) -> None:
+def test_cli_private_task_suite_manifest_applies(tmp_path, capsys) -> None:
     task = next(
         item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
     )
@@ -391,15 +388,12 @@ def test_cli_private_task_suite_manifest_sets_default_split(tmp_path, capsys) ->
             {
                 "suite_id": "private-pack",
                 "visibility": "private",
-                "default_split": "validation",
             }
         ),
         encoding="utf-8",
     )
-    payload = json.loads(task.source_path.read_text(encoding="utf-8"))
-    payload.pop("split", None)
     (tmp_path / "price_performance_aapl.json").write_text(
-        json.dumps(payload),
+        task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
     )
 
@@ -407,9 +401,8 @@ def test_cli_private_task_suite_manifest_sets_default_split(tmp_path, capsys) ->
 
     payload = json.loads(capsys.readouterr().out)
     assert manifest_exit == 0
-    assert payload["splits"] == ["validation"]
     assert payload["task_suite"]["suite_id"] == "private-pack"
-    assert payload["tasks"][0]["split"] == "validation"
+    assert payload["task_suite"]["visibility"] == "private"
 
 
 def test_cli_hidden_task_suite_redacts_trace_prompts(tmp_path, capsys) -> None:
@@ -451,35 +444,6 @@ def test_cli_hidden_task_suite_redacts_trace_prompts(tmp_path, capsys) -> None:
     assert payload["task"]["prompt_redacted"] is True
 
 
-def test_cli_filters_by_split_for_private_task_suite(tmp_path, capsys) -> None:
-    task = next(
-        item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
-    )
-    (tmp_path / "task_suite.json").write_text(
-        json.dumps({"default_split": "validation"}),
-        encoding="utf-8",
-    )
-    (tmp_path / "price_performance_aapl.json").write_text(
-        task.source_path.read_text(encoding="utf-8"),
-        encoding="utf-8",
-    )
-
-    exit_code = main(
-        [
-            "list",
-            "--task-dir",
-            str(tmp_path),
-            "--split",
-            "test",
-            "--json",
-        ]
-    )
-
-    payload = json.loads(capsys.readouterr().out)
-    assert exit_code == 0
-    assert payload == []
-
-
 def test_cli_export_task_writes_public_agent_envelope(tmp_path) -> None:
     output = tmp_path / "task.json"
 
@@ -496,11 +460,10 @@ def test_cli_export_task_writes_public_agent_envelope(tmp_path) -> None:
     payload = json.loads(output.read_text(encoding="utf-8"))
     assert exit_code == 0
     assert payload["schema_version"] == "workspace-bench-envelope"
-    assert payload["benchmark"]["suite_id"] == "core"
-    assert payload["task"]["qualified_id"] == "core/create/price_performance_aapl"
+    assert payload["benchmark"]["suite_id"] == "enterprise-apps-usage"
+    assert payload["task"]["qualified_id"] == "enterprise-apps-usage/create/price_performance_aapl"
     assert payload["task"]["id"] == "price_performance_aapl"
     assert payload["task"]["family"] == "create"
-    assert payload["task"]["split"] == "train"
     assert payload["task"]["business_terms"] == []
     assert "oracle_tool_calls" not in payload["task"]
     assert "success" not in payload["task"]
@@ -613,21 +576,21 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
     assert payload["summary"]["process_failures"] == 1
 
 
-def test_task_loader_rejects_invalid_split(tmp_path) -> None:
+def test_task_loader_rejects_legacy_split_field(tmp_path) -> None:
     task = next(
         item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
     )
     payload = json.loads(task.source_path.read_text(encoding="utf-8"))
-    payload["split"] = "prod"
-    task_path = tmp_path / "bad_split.json"
+    payload["split"] = "train"
+    task_path = tmp_path / "legacy_split.json"
     task_path.write_text(json.dumps(payload), encoding="utf-8")
 
     try:
         load_task_file(task_path)
     except ValueError as error:
-        assert "split must be one of" in str(error)
+        assert "unknown fields" in str(error)
     else:
-        raise AssertionError("invalid task split should fail")
+        raise AssertionError("legacy split field should be rejected")
 
 
 def test_task_loader_rejects_malformed_allowed_tools(tmp_path) -> None:

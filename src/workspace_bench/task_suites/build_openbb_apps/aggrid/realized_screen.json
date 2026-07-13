@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "aggrid",
   "difficulty": "medium",
-  "split": "validation",
   "prompt": "Deliver an analyst-ready Workspace solution for volatility and derivatives. The workspace must cover realized volatility by tenor. Analysts need to inspect tenor, realized percentage, as of. Use `tenor` and `realized_pct` as the only fixed contract anchors, and make the other implementation choices yourself without collateral changes.",
   "business_terms": [
     "tenor",

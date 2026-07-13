@@ -85,6 +85,5 @@
   },
   "oracle_tool_calls": [],
   "prompt": "Finish both supplied risk widgets. Put the shared portfolio-risk calculation in analytics.py, then serve a numeric metric from /risk/score and meaningful markdown from /risk/commentary. Both endpoints must use that shared module and keep CORS/tests green.",
-  "split": "train",
   "success": {}
 }

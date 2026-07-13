@@ -27,36 +27,18 @@
             "cluster_bootstrap_95_low": 0.028,
             "cluster_bootstrap_95_high": 0.1488
           },
-          "holdout": {
-            "passed": 14,
-            "total": 236,
-            "rate": 0.0593,
-            "wilson_95_low": 0.0357,
-            "wilson_95_high": 0.0971,
-            "cluster_bootstrap_95_low": 0.0223,
-            "cluster_bootstrap_95_high": 0.1066
-          },
-          "test_only": {
-            "passed": 8,
-            "total": 118,
-            "rate": 0.0678,
-            "wilson_95_low": 0.0348,
-            "wilson_95_high": 0.1281,
-            "cluster_bootstrap_95_low": 0.025,
-            "cluster_bootstrap_95_high": 0.1148
-          },
-          "holdout_by_difficulty": {
+          "by_difficulty": {
             "easy": {
-              "passed": 8,
-              "total": 14
+              "passed": 24,
+              "total": 34
             },
             "hard": {
               "passed": 0,
-              "total": 174
+              "total": 352
             },
             "medium": {
-              "passed": 6,
-              "total": 48
+              "passed": 12,
+              "total": 86
             }
           }
         },
@@ -70,36 +52,18 @@
             "cluster_bootstrap_95_low": 0.011,
             "cluster_bootstrap_95_high": 0.041
           },
-          "holdout": {
-            "passed": 5,
-            "total": 236,
-            "rate": 0.0212,
-            "wilson_95_low": 0.0091,
-            "wilson_95_high": 0.0486,
-            "cluster_bootstrap_95_low": 0.0042,
-            "cluster_bootstrap_95_high": 0.041
-          },
-          "test_only": {
-            "passed": 1,
-            "total": 118,
-            "rate": 0.0085,
-            "wilson_95_low": 0.0015,
-            "wilson_95_high": 0.0464,
-            "cluster_bootstrap_95_low": 0.0,
-            "cluster_bootstrap_95_high": 0.0259
-          },
-          "holdout_by_difficulty": {
+          "by_difficulty": {
             "easy": {
-              "passed": 0,
-              "total": 14
+              "passed": 2,
+              "total": 34
             },
             "hard": {
               "passed": 0,
-              "total": 174
+              "total": 352
             },
             "medium": {
-              "passed": 5,
-              "total": 48
+              "passed": 10,
+              "total": 86
             }
           }
         },
@@ -113,36 +77,18 @@
             "cluster_bootstrap_95_low": 0.1358,
             "cluster_bootstrap_95_high": 0.3125
           },
-          "holdout": {
-            "passed": 53,
-            "total": 236,
-            "rate": 0.2246,
-            "wilson_95_low": 0.176,
-            "wilson_95_high": 0.282,
-            "cluster_bootstrap_95_low": 0.13,
-            "cluster_bootstrap_95_high": 0.3156
-          },
-          "test_only": {
-            "passed": 22,
-            "total": 118,
-            "rate": 0.1864,
-            "wilson_95_low": 0.1265,
-            "wilson_95_high": 0.2662,
-            "cluster_bootstrap_95_low": 0.0932,
-            "cluster_bootstrap_95_high": 0.2857
-          },
-          "holdout_by_difficulty": {
+          "by_difficulty": {
             "easy": {
-              "passed": 11,
-              "total": 14
+              "passed": 29,
+              "total": 34
             },
             "hard": {
               "passed": 0,
-              "total": 174
+              "total": 352
             },
             "medium": {
-              "passed": 42,
-              "total": 48
+              "passed": 76,
+              "total": 86
             }
           }
         }
@@ -188,11 +134,11 @@
       "git_commits": [
         "22f477c86823c26b67241e5a525169dc77041c6f"
       ],
-      "task_content_sha256": "1a4bfb86dad6d2fb78c789f7f97e14991e442470ef7eac65c594ecc66c0e9cec",
+      "task_content_sha256": "36ec08102b333cbea5d00dff853cb9f87329366f1fe8c08a91b56eeafe4bb17b",
       "attempts_per_model": 472,
       "tasks_per_model": 236,
       "repeats": 2,
-      "note": "Intervals describe the three replay-regraded complete 2026-07 guided-track runs. Current measured difficulty and split metadata are joined by qualified task id; repeats remain distinct paired episodes."
+      "note": "Intervals describe the three replay-regraded complete 2026-07 guided-track runs. Current measured difficulty metadata is joined by qualified task id; repeats remain distinct paired episodes."
     }
   }
 }

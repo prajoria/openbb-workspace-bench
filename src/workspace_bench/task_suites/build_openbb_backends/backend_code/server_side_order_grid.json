@@ -86,6 +86,5 @@
   },
   "oracle_tool_calls": [],
   "prompt": "Execution operations needs a responsive server-side order grid. Implement POST-backed pagination and single-column sorting from the supplied row-model request. Return the requested slice, total row count, page size, and first visible symbol accurately.",
-  "split": "test",
   "success": {}
 }

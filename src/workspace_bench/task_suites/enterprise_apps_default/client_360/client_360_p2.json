@@ -1,0 +1,91 @@
+{
+ "id": "client_360_p2",
+ "category": "read",
+ "family": "client_360",
+ "difficulty": "medium",
+ "prompt": "Identify client accounts with redemption risk or unresolved service issues.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Client 360"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "redemption",
+     "unresolved",
+     "11.13",
+     "16.22",
+     "77.48"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "client_360_flows_subscriptions_and_redemptions",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD",
+     "region": "Americas"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "client_360_meeting_prep_open_requests",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD",
+     "region": "Americas"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "client_360_client_book_relationship_metrics",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD",
+     "region": "Americas"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Client 360 Note",
+    "data": "Identify client accounts with redemption risk or unresolved service issues: redemptions score is 11.13; requests score is 16.22; metrics value is 77.48. Anchors: redemption, unresolved."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

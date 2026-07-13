@@ -9,7 +9,7 @@ generators, never by editing generated artifacts.
 
 1. Edit the relevant family generator for a bundled suite, or copy an existing
    task into a private task directory.
-2. Give it a stable `id`, category, family, difficulty, split, and a
+2. Give it a stable `id`, category, family, difficulty, and a
    specification level where it deviates from the difficulty default.
 3. Keep fixture data deterministic and versioned.
 4. Add clear `success` criteria that grade durable Workspace state.
@@ -48,7 +48,7 @@ uv run python scripts/audits/report_prompt_stats.py
 The core and build-suite generators share their deterministic assembly mechanics
 in `scripts/generators/_assembly/`. Keep suite policy in small callbacks/configuration
 (identity cleanup, artifact prefixes, exceptional cell sizes) rather than adding
-a second implementation of phrasing, difficulty, split, novelty, or matrix logic.
+a second implementation of phrasing, difficulty, novelty, or matrix logic.
 After changing either generator, run it twice and verify that the bundled JSON is
 unchanged on the second run.
 
@@ -130,7 +130,7 @@ cleanly immediately before the mutation, then the invalid candidate must fail
 with its expected code. Add a representative test and run:
 
 ```bash
-uv run workspace-bench adversarial --suite core --family backends
+uv run workspace-bench adversarial --suite enterprise-apps-usage --family backends
 uv run workspace-bench adversarial --suite build-openbb-apps
 ```
 
@@ -144,7 +144,7 @@ Prefer the external JSONL command protocol first:
 
 ```bash
 uv run workspace-bench run-agent-command \
-  --task core/create/price_performance_aapl \
+  --task enterprise-apps-usage/create/price_performance_aapl \
   --agent-command "python my_agent.py" \
   --json
 ```
@@ -198,10 +198,10 @@ uv run mypy src
 uv run python scripts/audits/audit_task_identity.py
 uv run python scripts/audits/report_prompt_stats.py
 uv run python scripts/audits/audit_release_consistency.py
-uv run --extra dev workspace-bench validate --suite core --min-tasks 300
+uv run --extra dev workspace-bench validate --suite enterprise-apps-usage --min-tasks 300
 uv run --extra dev workspace-bench validate --suite build-openbb-apps --min-tasks 236
 uv run --extra dev workspace-bench validate --suite build-openbb-backends --min-tasks 12
-uv run workspace-bench runtime-probe --suite core --family backends
+uv run workspace-bench runtime-probe --suite enterprise-apps-usage --family backends
 uv run workspace-bench runtime-probe --suite build-openbb-apps
 ```
 

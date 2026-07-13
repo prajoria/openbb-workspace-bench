@@ -71,6 +71,5 @@
   },
   "oracle_tool_calls": [],
   "prompt": "A finance leader needs a chart-ready quarterly view of revenue and operating margin. Complete the supplied backend so Workspace can construct both declared series from at least three ordered quarters. Retain the repository's interface and quality gates.",
-  "split": "train",
   "success": {}
 }

@@ -1,0 +1,91 @@
+{
+ "id": "earnings_estimates_monitor_p1",
+ "category": "read",
+ "family": "earnings_estimates_monitor",
+ "difficulty": "medium",
+ "prompt": "Prepare the earnings preview: internal versus street estimates, expected surprise drivers, and trade setup.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Earnings & Estimates Monitor"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "estimates",
+     "earnings",
+     "63.14",
+     "8.82",
+     "27.63"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "earnings_estimates_monitor_estimates_internal_vs_street_bridge",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "earnings_estimates_monitor_calendar_surprise_history",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Earnings & Estimates Monitor Note",
+    "data": "Prepare the earnings preview: internal versus street estimates, expected surprise drivers, and trade setup: bridge score is 63.14; history score is 8.82; earnings score is 27.63. Anchors: estimates, earnings."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

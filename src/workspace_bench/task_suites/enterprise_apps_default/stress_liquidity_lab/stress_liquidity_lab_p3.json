@@ -1,0 +1,78 @@
+{
+ "id": "stress_liquidity_lab_p3",
+ "category": "read",
+ "family": "stress_liquidity_lab",
+ "difficulty": "medium",
+ "prompt": "Create the committee sign-off note with unresolved actions and owners.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Stress & Liquidity Lab"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "unresolved",
+     "committee",
+     "76.26",
+     "8.67"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "stress_liquidity_lab_sign_off_sign_off_tracker",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "stress_liquidity_lab_sign_off_residual_risk_actions",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Stress & Liquidity Lab Note",
+    "data": "Create the committee sign-off note with unresolved actions and owners: tracker score is 76.26; actions score is 8.67. Anchors: unresolved, committee."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 12
+ }
+}

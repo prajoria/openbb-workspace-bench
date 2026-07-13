@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "forms",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "Build a vendor-operations manager a dependable vendor service levels workspace. The workspace must cover submit a new vendor record into the SLA register. The workspace must cover count of open SLA breaches. The workspace must cover vendor SLA state with breach flags. Analysts need to inspect vendor, status, latency milliseconds, breach. An analyst can adjust the relevant numeric scope. The user can enter the required details and submit the workflow. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Vendor Intake Live', 'vendor intake', 'Vendor SLA Data', 'QuoteStream'. Decide how best to organize the experience and preserve unrelated work.",
   "business_terms": [
     "Vendor Intake Live",

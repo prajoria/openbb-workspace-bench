@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "aggrid",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "The desk needs a production-ready cases and compliance alerts workflow for a surveillance analyst. The workspace must cover open surveillance cases by age bucket. The workspace must cover open surveillance alerts. The workspace must cover open alert count. Analysts need to inspect case ID, desk, age days, alert ID, severity. Leave the complete working workspace open for review. Use your judgment on the architecture and leave other work intact.",
   "fixtures": {},
   "initial_state": {},

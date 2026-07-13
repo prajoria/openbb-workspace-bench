@@ -57,7 +57,6 @@ def build_task_envelope(task: Task) -> JsonDict:
             "family": task.family,
             "specification_level": task.specification_level,
             "difficulty": task.difficulty,
-            "split": task.split,
             "prompt": task.prompt,
             "business_terms": list(task.business_terms),
             "fixtures": {

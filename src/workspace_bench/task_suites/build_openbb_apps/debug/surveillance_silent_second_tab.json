@@ -3,7 +3,6 @@
   "category": "repair",
   "family": "debug",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Restore Surveillance Recovery Room for surveillance analysts: the primary view works while a secondary view silently fails to load. Work through the existing Surveillance Repair Data connection, repair the root cause without replacing healthy content, and run a live-data retest. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Surveillance Recovery Room open and add a short verification HTML card that naturally mentions Surveillance Recovery Room, Surveillance Repair Data, and repair verified.",
   "business_terms": [
     "Surveillance Recovery Room",

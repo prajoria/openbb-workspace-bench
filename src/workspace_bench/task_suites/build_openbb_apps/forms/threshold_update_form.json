@@ -4,7 +4,6 @@
   "family": "forms",
   "specification_level": "explicit",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "Register the backend and place the specified widget on the active dashboard. Use 'Execution Desk Data' at http://localhost:7806. Make the submission workflow functional. The experience needs Threshold Update Form (`threshold_update_form`, table) using `/threshold-update` for submit a threshold change for operations; user controls: Threshold (`threshold`, form) with Limit, Owner, Apply. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

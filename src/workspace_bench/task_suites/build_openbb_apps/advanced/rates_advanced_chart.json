@@ -4,7 +4,6 @@
   "family": "advanced",
   "specification_level": "explicit",
   "difficulty": "medium",
-  "split": "validation",
   "prompt": "Register the backend and place the specified widget on the active dashboard. Use 'Rates Watch Data' at http://localhost:7803. Implement the live or advanced interaction correctly. The experience needs Rates Advanced Chart (`rates_advanced_chart`, advanced_charting) using `/rates-udf` for tradingView advanced charting for the 10Y yield future; default symbol `US10Y`; update frequency `30000`. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

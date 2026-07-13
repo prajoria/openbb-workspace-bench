@@ -1,0 +1,151 @@
+{
+  "id": "grounded_finance_comps_for_nvda",
+  "category": "single-widget",
+  "family": "skills",
+  "difficulty": "hard",
+  "prompt": "Use get_skill_content with slug finance-comps. Following that workflow, add the Fundamental Metrics widget for NVDA, read its data, and add a note that cites the exact key value from the data. Omit dashboard_id when adding the note.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Skill Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_skill_content",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "get_widget_data",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "get_skill_content",
+        "args_contains": {
+          "slug": "finance-comps"
+        }
+      },
+      {
+        "tool": "get_widget_data",
+        "args_contains": {
+          "widget_id": "fundamental_metrics"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_skill_content",
+        "data_contains": [
+          "Comps workflow",
+          "peer set",
+          "valuation multiples"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "fundamental_metrics",
+        "data_args": {
+          "symbol": "NVDA"
+        },
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "NVDA",
+          "0.742",
+          "peer set"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_skill_content",
+      "args": {
+        "slug": "finance-comps"
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Equities"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "fundamental_metrics"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "fundamental_metrics",
+        "data_args": {
+          "symbol": "NVDA"
+        }
+      }
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "fundamental_metrics",
+        "data_args": {
+          "symbol": "NVDA"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Skill Note",
+        "data": "NVDA comps: gross margin 0.742 against the peer set."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 9
+  }
+}

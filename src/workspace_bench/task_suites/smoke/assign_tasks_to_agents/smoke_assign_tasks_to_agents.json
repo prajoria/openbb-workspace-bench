@@ -1,0 +1,45 @@
+{
+  "id": "smoke_assign_tasks_to_agents",
+  "category": "platform",
+  "family": "assign_tasks_to_agents",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "prompt": "Round-trip one bounded task request through the agent envelope.",
+  "business_terms": [],
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "assign_tasks_to_agents"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "assign_tasks_to_agents",
+        "args_contains": {
+          "task_requests": [
+            {
+              "id": "smoke-envelope",
+              "task": "Return the Workspace smoke envelope."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "assign_tasks_to_agents",
+      "args": {
+        "task_requests": [
+          {
+            "id": "smoke-envelope",
+            "task": "Return the Workspace smoke envelope."
+          }
+        ]
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 1
+  }
+}

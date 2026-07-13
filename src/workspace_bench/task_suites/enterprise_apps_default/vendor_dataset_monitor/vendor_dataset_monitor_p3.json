@@ -1,0 +1,91 @@
+{
+ "id": "vendor_dataset_monitor_p3",
+ "category": "read",
+ "family": "vendor_dataset_monitor",
+ "difficulty": "medium",
+ "prompt": "Draft the vendor escalation note with affected datasets, app impact, and owner actions.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Vendor & Dataset Monitor"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "escalation",
+     "affected",
+     "94.16",
+     "18.67",
+     "24.33"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "vendor_dataset_monitor_quality_affected_apps",
+    "data_args": {
+     "period": "YTD",
+     "status": "Open",
+     "vendor": "FactSet"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "vendor_dataset_monitor_incidents_incident_log",
+    "data_args": {
+     "period": "YTD",
+     "status": "Open",
+     "vendor": "FactSet"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "vendor_dataset_monitor_incidents_blast_radius_summary",
+    "data_args": {
+     "period": "YTD",
+     "status": "Open",
+     "vendor": "FactSet"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Vendor & Dataset Monitor Note",
+    "data": "Draft the vendor escalation note with affected datasets, app impact, and owner actions: apps score is 94.16; log score is 18.67; summary score is 24.33. Anchors: escalation, affected."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

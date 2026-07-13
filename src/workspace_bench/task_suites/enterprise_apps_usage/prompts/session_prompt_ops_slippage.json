@@ -1,0 +1,160 @@
+{
+  "id": "session_prompt_ops_slippage",
+  "category": "dashboard",
+  "family": "prompts",
+  "difficulty": "medium",
+  "prompt": "Fetch workspace_session_context, add a Ops tab, navigate to it, fetch the widget schema, create Bench Stark Enterprise/liquidity_tca_workbench_tca_slippage_by_algo there, and add a HTML card mentioning Ops on that tab.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Prompt Session",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "workspace_data_control_center_entitlements_copilot_visibility_flags",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_prompt",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_tabs": [
+      "overview",
+      "ops"
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_workspace_prompt",
+        "data_contains": [
+          "current-dashboard current-tab session grounding"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "liquidity_tca_workbench_tca_slippage_by_algo",
+        "data_args": {},
+        "tab_id": "ops"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "workspace_data_control_center_entitlements_copilot_visibility_flags",
+        "data_args": {},
+        "tab_id": "overview",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "html",
+        "data_contains": [
+          "Ops"
+        ],
+        "tab_id": "ops"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_prompt",
+      "args": {
+        "name": "workspace_session_context"
+      }
+    },
+    {
+      "tool": "manage_navigation_bar",
+      "args": {
+        "operation": "add_tabs",
+        "tabs": [
+          {
+            "name": "Ops"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "ops"
+      }
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Stark Enterprise"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "liquidity_tca_workbench_tca_slippage_by_algo"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "liquidity_tca_workbench_tca_slippage_by_algo",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "html",
+        "name": "Session Prompt Note",
+        "data": "<section>Ops built using current tab guidance.</section>"
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 10
+  }
+}

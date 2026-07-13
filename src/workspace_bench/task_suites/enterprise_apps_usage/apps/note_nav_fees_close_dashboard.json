@@ -1,0 +1,100 @@
+{
+  "id": "note_nav_fees_close_dashboard",
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "medium",
+  "prompt": "Create a new dashboard named Monthly Close Control by instantiating the NAV, Fees & Close Dashboard app from the Bench Stark Enterprise backend, then add a note on the Close tab mentioning close checklist and exceptions.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Monthly Close Control",
+    "required_tabs": [
+      "overview",
+      "cash",
+      "close"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "nav_fees_close_dashboard_cash_cash_movements",
+        "tab_id": "cash",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "nav_fees_close_dashboard_close_close_exceptions",
+        "tab_id": "close",
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "close checklist",
+          "exceptions"
+        ],
+        "tab_id": "close"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "NAV, Fees & Close Dashboard",
+        "dashboard_name": "Monthly Close Control",
+        "activate": true
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "close"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Brief Note",
+        "data": "Close checklist in progress; NAV exceptions open."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 7
+  }
+}

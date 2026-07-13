@@ -4,7 +4,6 @@
   "family": "charts",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "Create a usable clinical catalysts and pipelines workflow for a healthcare-research analyst. The workspace must cover distribution of pipeline phase mix. Leave the complete working workspace open for review. The source contract must retain `phase`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "phase"

@@ -9,9 +9,11 @@ The benchmark asks a simple question: can an agent inspect, build, update, and r
 
 Motivation: a [NY Tech Week talk](https://youtu.be/7fDTDYh2NJ4?t=1210) showed agents driving real financial work in OpenBB Workspace over MCP, on the [Stark Industries demo](https://github.com/DidierRLopes/stark-industries-demo). A demo shows work can happen once; this benchmark measures how reliably agents actually drive it. The Stark demo is also where the enterprise tasks come from.
 
-Three suites ship bundled: `core` (operating the workspace, 300 tasks),
-`build-openbb-apps` (building and debugging custom backend apps, 236 tasks), and
-the separate experimental-v0 `build-openbb-backends` real-code track (12 tasks).
+Five suites ship bundled in a capability ladder: `smoke` checks one round trip
+per Workspace MCP surface (20 tasks), `enterprise-apps-default` answers the
+default apps' product prompts (69), `enterprise-apps-usage` operates Workspace
+state (300), `build-openbb-apps` builds and repairs custom apps (236), and the
+experimental-v0 `build-openbb-backends` track executes real backend code (12).
 
 ## Contents
 
@@ -37,12 +39,16 @@ the separate experimental-v0 `build-openbb-backends` real-code track (12 tasks).
 
 ## What Is Included
 
-- 548 task identities: two stable simulator suites with 536 deterministic tasks,
-  plus 12 experimental code tasks:
-  - `core` — 300 operating tasks across 15 tool-anchored families, with deterministic 150/75/75 train/validation/test splits
-  - `build-openbb-apps` — 236 specification-tiered app-building tasks across 12 families,
+- 637 task identities: 625 deterministic simulator tasks plus 12 experimental code tasks:
+  - `smoke` — 20 minimal round-trip tasks covering every Workspace MCP surface
+  - `enterprise-apps-default` — 69 byte-verbatim product prompts across 23 default apps
+  - `enterprise-apps-usage` — 300 operating tasks across 15 tool-anchored families
+  - `build-openbb-apps` — 236 specification-level app-building tasks across 12 families,
     including 24 long diagnosis/repair/retest incidents
   - `build-openbb-backends` — 12 pinned FastAPI starter repositories graded by launching the agent's own server
+
+  Each suite directory under `src/workspace_bench/task_suites/` has a README
+  explaining how it is generated and how its tasks are categorized.
 - generated families covering widgets, apps, prompts, resources, skills, delegation, inspection, repair, layout, and backend/app building
 - six archived pre-hardening model baselines with full traces and rollout exports
 - equities, macro, portfolio, Stark enterprise, and Daloopa fixture backends
@@ -94,7 +100,9 @@ Install dependencies and inspect the benchmark:
 ```bash
 uv run workspace-bench list
 uv run workspace-bench manifest --json
-uv run workspace-bench validate --suite core --min-tasks 300
+uv run workspace-bench validate --suite smoke --min-tasks 20
+uv run workspace-bench validate --suite enterprise-apps-default --min-tasks 69
+uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 300
 uv run workspace-bench validate --suite build-openbb-apps --min-tasks 236
 uv run workspace-bench validate --suite build-openbb-backends --min-tasks 12
 ```
@@ -184,7 +192,7 @@ valid-attempt pass rates are 94.3 / 93.7 / 77.4 / 70.3 / 64.0 / 53.2%.
 Full per-task results and traces are committed under `runs/comparison/`,
 portable rollout JSONL for all 1,800 episodes under `runs/exports/`, the
 compiled report at `runs/reports/calibration.json` (built by
-`workspace-bench compile calibration`), and confidence intervals, held-out-split
+`workspace-bench compile calibration`), and confidence intervals, difficulty
 slices, and all pairwise tests at `runs/reports/significance.json` (built by
 `workspace-bench compile significance`). The current analysis script additionally
 reports family-cluster bootstrap intervals; task-IID Wilson and McNemar
@@ -230,7 +238,7 @@ Run the included demo agent:
 
 ```bash
 uv run workspace-bench run-agent-command \
-  --task core/create/price_performance_aapl \
+  --task enterprise-apps-usage/create/price_performance_aapl \
   --agent-command "python -m workspace_bench.agents.rule_agent" \
   --json
 ```
@@ -242,7 +250,7 @@ Run a local Ollama model:
 ```bash
 OLLAMA_MODEL=gpt-oss:20b \
 uv run workspace-bench run-agent-command \
-  --task core/create/price_performance_aapl \
+  --task enterprise-apps-usage/create/price_performance_aapl \
   --agent-command "python examples/ollama_agent.py" \
   --run-dir runs/ollama \
   --json
@@ -257,7 +265,7 @@ cp .env.example .env
 # edit .env and set OPENAI_API_KEY
 
 uv run workspace-bench run-agent-command \
-  --task core/create/price_performance_aapl \
+  --task enterprise-apps-usage/create/price_performance_aapl \
   --agent-command "python examples/openai_gpt4_1.py" \
   --run-dir runs/openai-gpt-4.1 \
   --json
@@ -282,7 +290,7 @@ Compare only one difficulty slice:
 
 ```bash
 uv run workspace-bench \
-  --suite core \
+  --suite enterprise-apps-usage \
   --difficulty easy \
   --timeout 240
 ```
@@ -291,7 +299,7 @@ Run repeated attempts for a more stable comparison:
 
 ```bash
 uv run workspace-bench \
-  --suite core \
+  --suite enterprise-apps-usage \
   --release-run \
   --repeats 3 \
   --metric pass-at-k \
@@ -331,7 +339,7 @@ Run models from a JSON adapter config:
 ```bash
 uv run workspace-bench \
   --models-file examples/models.example.json \
-  --suite core \
+  --suite enterprise-apps-usage \
   --timeout 240
 ```
 
@@ -383,17 +391,16 @@ conservatively approved override payload. `--apply-overrides` writes the
 approved table to `src/workspace_bench/core/measured_difficulty.json`; the
 generator consumes it and verifies the empirical counts.
 
-Use `--suite core|build-openbb-apps` for the stable interactive suites,
+Use `--suite enterprise-apps-usage|build-openbb-apps` for the stable interactive suites,
 `run-code-task` for `build-openbb-backends`, and `--task-dir`
-for a private task suite, and `--split train|validation|test` to select a
-split. Private suites may also use `dev`. You can also slice with `--family`,
-`--category`, and `--difficulty`.
+for a private task suite. You can slice with `--family`, `--category`, and
+`--difficulty`.
 
 Export a task envelope without running an agent:
 
 ```bash
 uv run workspace-bench export-task \
-  --task core/create/price_performance_aapl \
+  --task enterprise-apps-usage/create/price_performance_aapl \
   --output task.json
 ```
 
@@ -402,12 +409,12 @@ Export rollouts or SFT data explicitly:
 ```bash
 uv run workspace-bench export-rollouts \
   --oracle \
-  --task core/create/price_performance_aapl \
+  --task enterprise-apps-usage/create/price_performance_aapl \
   --output runs/exports/oracle-rollouts.jsonl
 
 uv run workspace-bench export-sft \
   --oracle \
-  --task core/create/price_performance_aapl \
+  --task enterprise-apps-usage/create/price_performance_aapl \
   --format openai_messages \
   --output runs/exports/oracle-sft.jsonl
 ```
@@ -437,10 +444,9 @@ interactive. Use `workspace-bench --model ...` when the agent must observe each
 tool result before selecting its next action.
 
 Training exports are explicit downstream artifacts. Preserve their Git commit,
-dirty-worktree flag, suite content hash, schema version, task identity, split,
-and model/runner metadata. Prefer passing attempts for SFT, keep failed attempts
-only with grade metadata, and do not mix train, validation, test, or hidden
-answer data.
+dirty-worktree flag, suite content hash, schema version, task identity, and
+model/runner metadata. Prefer passing attempts for SFT, keep failed attempts
+only with grade metadata, and do not mix in hidden answer data.
 
 ## Suites
 
@@ -449,7 +455,9 @@ be added independently and reported separately or in aggregate. Bundled today:
 
 | suite | tasks | what it measures |
 | --- | --- | --- |
-| `core` | 300 | operating the workspace (widgets, dashboards, apps, skills, repair) |
+| `smoke` | 20 | minimal round trips across every Workspace MCP tool and knowledge surface |
+| `enterprise-apps-default` | 69 | answering byte-verbatim product prompts from the seeded default apps |
+| `enterprise-apps-usage` | 300 | operating the workspace across widgets, dashboards, apps, skills, and repair |
 | `build-openbb-apps` | 236 | building, diagnosing, repairing, retesting, and opening custom-backend widgets and apps |
 | `build-openbb-backends` | 12 | editing, testing, launching, and probing real custom-backend code (experimental v0) |
 
@@ -460,13 +468,12 @@ uv run workspace-bench validate --suite build-openbb-backends --min-tasks 12
 uv run workspace-bench --models-file examples/models.example.json --suite build-openbb-apps
 ```
 
-Every suite has to clear the same gates before it counts: the reference
-solution passes every task (oracle 100%), a do-nothing agent fails every
-task (no-op 0%), independent rubric mutations fail, suite content hashes and the
-family/split coverage matches, prompts pass specification-aware linting,
-generation-time quotas hold (coverage, empirical difficulty, and structural
-specification bands), and graded-check counts stay within per-specification-level
-caps so rubric breadth remains anchored to prompt structure.
+Every suite requires the reference solution to pass every task and a
+do-nothing agent to fail every task. Additional generation and validation gates
+are suite-specific: they include prompt provenance, outcome-only rubric review,
+coverage and difficulty quotas, mutation sensitivity, check caps, live-process
+tests, and clean teardown where applicable. Each suite README records its exact
+generation method, axes, gates, and limitations.
 
 Per-suite results roll up into one pooled aggregate — task counts are
 added across suites, never averaged percentages. Point the report at one
@@ -502,8 +509,8 @@ Private task suites use the same task schema as the bundled benchmark. This is
 the main BYO-data path: teams can point tasks at deterministic internal
 Workspace backends and keep graders local. Discovery is recursive, so
 `<family>/<task>.json` is the recommended layout. An optional
-`task_suite.json` can declare `suite_id`, `visibility` (`private` or `hidden`),
-and `default_split`. Hidden suites redact prompts from trace artifacts while
+`task_suite.json` can declare `suite_id` and `visibility` (`private` or
+`hidden`). Hidden suites redact prompts from trace artifacts while
 retaining ids, scores, calls, results, and final snapshots. The public agent
 envelope always excludes `success`, `oracle_tool_calls`, and hidden grader
 logic. Good private tasks use deterministic versioned data, require tool use
@@ -522,7 +529,7 @@ Then smoke-test the real MCP endpoint and browser bridge protocol:
 ```bash
 uv run --extra live workspace-bench smoke-workspace-mcp \
   --url http://127.0.0.1:8787 \
-  --task core/create/price_performance_aapl \
+  --task enterprise-apps-usage/create/price_performance_aapl \
   --json
 ```
 
@@ -531,8 +538,8 @@ Check the broader live MCP surface against a workflow task:
 ```bash
 uv run --extra live workspace-bench smoke-workspace-mcp \
   --url http://127.0.0.1:8787 \
-  --suite core \
-  --task core/skills/read_the_finance_earnings_prep_skill \
+  --suite enterprise-apps-usage \
+  --task enterprise-apps-usage/skills/read_the_finance_earnings_prep_skill \
   --check-surface \
   --json
 ```
@@ -552,7 +559,7 @@ back-to-back, graded by the same `grade_task`, and diffed check-by-check:
 
 ```bash
 export WORKSPACE_MCP_TOKEN=...   # or put it in .env
-uv run --extra live workspace-bench live-parity --task core/read/alert_trend
+uv run --extra live workspace-bench live-parity --task enterprise-apps-usage/read/alert_trend
 ```
 
 The live leg reproduces the task's initial state through public tool calls on
@@ -746,7 +753,7 @@ See [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) for release gates and
 ## Task Organization
 
 Every active task has the canonical identity `suite/family/task`, for example
-`core/create/price_performance_aapl`. The local task id contains only the
+`enterprise-apps-usage/create/price_performance_aapl`. The local task id contains only the
 descriptive slug; generator mechanics are not part of the public identity.
 
 **Category** — what kind of workflow the task is:
@@ -785,9 +792,12 @@ src/workspace_bench/
   cli.py                 Command line interface
   core/                  Task dataclasses, episodes, runner, graders
   task_suites/           Bundled suites, organized as suite/family/task:
-    core/                               Core operating suite
+    smoke/                              MCP-surface round trips
+    enterprise_apps_default/            Default-app product prompts
+    enterprise_apps_usage/              Workspace operating families
       create/ update/ ...                Family directories
-    build_openbb_apps/                  Build suite families
+    build_openbb_apps/                  Custom-app building families
+    build_openbb_backends/              Experimental real-code backend tasks
   workspace/             Fixture backends, simulator, live workspace-mcp smoke bridge
     data/                Packaged fixture metadata such as Stark and Daloopa widgets/apps
   agents/                Oracle/noop agents, JSONL command protocol, model adapter helpers
@@ -804,7 +814,7 @@ runs/
   comparison/              Historical boards plus the 2026-07 build calibration
   exports/                 Rollout JSONL for the 1,800 core episodes
   reports/                 Compiled reports and generated catalogs/matrices
-    task-catalog.md         All 536 stable simulator tasks; code track noted separately
+    task-catalog.md         All 625 deterministic simulator tasks; code track noted separately
     tool-coverage-matrix.md Per-task x Workspace MCP oracle-tool matrix
     tool-matrix-data.json   Machine-readable data behind the tool matrix
 examples/
@@ -814,7 +824,7 @@ examples/
   models.example.json       Model comparison adapter config example
 references/
   openbb-backend-examples/  Vendored OpenBB backend reference implementations (MIT,
-                            pinned upstream commit) — ground truth for authoring
+                            pinned upstream commit) — ground truth for building
                             widget-creation and backend-building tasks
 tests/
 ```
@@ -829,4 +839,4 @@ Benchmark data should not appear in model training corpora unless explicitly rel
 
 ## Release Notes
 
-This is an alpha benchmark package. It is ready for local evals, private task suites, CI regression testing, `workspace-mcp` sidecar smoke tests, and local browser-harness self-testing, and it ships with six real model baselines. Before a broader public leaderboard: held-out/hidden task splits and a completed browser-certification run against a real authenticated Workspace.
+This is an alpha benchmark package. It is ready for local evals, private task suites, CI regression testing, `workspace-mcp` sidecar smoke tests, and local browser-harness self-testing, and it ships with six real model baselines. Before a broader public leaderboard: hidden task suites and a completed browser-certification run against a real authenticated Workspace.

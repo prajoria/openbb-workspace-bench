@@ -1,0 +1,44 @@
+{
+  "id": "smoke_create_widget",
+  "category": "single-widget",
+  "family": "create_widget",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "prompt": "Create the Stark Alert Trend widget on Home.",
+  "business_terms": [],
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "create_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+        "data_args": {
+          "severity": "High",
+          "status": "Open",
+          "period": "YTD"
+        }
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+        "data_args": {
+          "severity": "High",
+          "status": "Open",
+          "period": "YTD"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 1
+  }
+}

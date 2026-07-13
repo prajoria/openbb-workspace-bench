@@ -1,6 +1,6 @@
-"""Generate runs/reports/task-catalog.md from the bundled task JSON files.
+"""Generate runs/reports/task-catalog.md from the simulator task JSON files.
 
-Reads every task in both bundled suites and renders each one's prompt,
+Reads every task in the four bundled simulator suites and renders each one's prompt,
 setup, and exact pass/fail criteria as the grader applies them.
 Regenerate after editing tasks so the catalog never drifts.
 """
@@ -12,7 +12,9 @@ import re
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-PACK_DIR = REPO / "src/workspace_bench/task_suites/core"
+SMOKE_DIR = REPO / "src/workspace_bench/task_suites/smoke"
+APPS_DEFAULT_DIR = REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
+PACK_DIR = REPO / "src/workspace_bench/task_suites/enterprise_apps_usage"
 BUILD_PACK_DIR = REPO / "src/workspace_bench/task_suites/build_openbb_apps"
 REPORT = REPO / "runs/reports/benchmark-report.md"
 OUT = REPO / "runs/reports/task-catalog.md"
@@ -159,8 +161,7 @@ def render_task(task: dict, noop: dict[str, str]) -> str:
     lines = [f"#### `{sid}`", ""]
     meta = (
         f"**{task.get('difficulty')}** · category: {task.get('category', '-')} · "
-        f"specification: {task.get('specification_level', '-')} · "
-        f"split: {task.get('split', '-')}"
+        f"specification: {task.get('specification_level', '-')}"
     )
     noop_score = noop.get(sid)
     if noop_score:
@@ -191,7 +192,25 @@ def main() -> None:
     noop = load_noop_scores()
     packs = [
         (
-            "core",
+            "smoke",
+            sorted(
+                (p for p in SMOKE_DIR.rglob("*.json") if p.name != "task_suite.json"),
+                key=lambda path: path.name,
+            ),
+        ),
+        (
+            "enterprise-apps-default",
+            sorted(
+                (
+                    p
+                    for p in APPS_DEFAULT_DIR.rglob("*.json")
+                    if p.name != "task_suite.json"
+                ),
+                key=lambda path: path.name,
+            ),
+        ),
+        (
+            "enterprise-apps-usage",
             sorted(
                 (p for p in PACK_DIR.rglob("*.json") if p.name != "task_suite.json"),
                 key=lambda path: path.name,
@@ -211,7 +230,8 @@ def main() -> None:
         "",
         "Auto-generated from the bundled task JSON files — regenerate with",
         "`python scripts/generators/generate_task_catalog.py` after editing tasks.",
-        "The 12 experimental `build-openbb-backends` code tasks are excluded here; their",
+        "The four deterministic simulator suites are included. The 12 experimental",
+        "`build-openbb-backends` code tasks are excluded; their",
         "filesystem/process criteria are documented in the README task schema and generated",
         "by `scripts/generators/generate_backend_code_suite.py`.",
         "",

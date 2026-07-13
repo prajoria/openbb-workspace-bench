@@ -1,0 +1,92 @@
+{
+ "id": "healthcare_research_dashboard_p3",
+ "category": "read",
+ "family": "healthcare_research_dashboard",
+ "difficulty": "medium",
+ "prompt": "Draft the KOL follow-up plan with open questions and evidence needed for the investment committee.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Healthcare Research Dashboard"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "KOL",
+     "follow-up",
+     "22.38",
+     "44.47",
+     "68.96"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_clinical_kol_meeting_notes",
+    "data_args": {
+     "period": "YTD",
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_documents_research_document_checklist",
+    "data_args": {
+     "period": "YTD",
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_clinical_clinical_probability_funnel",
+    "data_args": {
+     "period": "YTD",
+     "raw": false,
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Healthcare Research Dashboard Note",
+    "data": "Draft the KOL follow-up plan with open questions and evidence needed for the investment committee: notes score is 22.38; checklist score is 44.47; funnel value is 68.96. Anchors: KOL, follow-up."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

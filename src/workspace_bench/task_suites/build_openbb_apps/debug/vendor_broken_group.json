@@ -3,7 +3,6 @@
   "category": "repair",
   "family": "debug",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "An incident in Vendor Recovery Room means changing review scope no longer keeps the overview and detail aligned. Investigate the connected Vendor Repair Data backend, make the smallest in-place repair, and prove the workflow against live data. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Vendor Recovery Room open and add a short verification HTML card that naturally mentions Vendor Recovery Room, Vendor Repair Data, and repair verified.",
   "business_terms": [
     "Vendor Recovery Room",

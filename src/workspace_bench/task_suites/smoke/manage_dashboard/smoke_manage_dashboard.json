@@ -1,0 +1,30 @@
+{
+  "id": "smoke_manage_dashboard",
+  "category": "dashboard",
+  "family": "manage_dashboard",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "prompt": "Rename the Home dashboard to Smoke Home Dashboard.",
+  "business_terms": [],
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "manage_dashboard"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Smoke Home Dashboard"
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "update",
+        "dashboard_id": "dash_001",
+        "name": "Smoke Home Dashboard"
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 1
+  }
+}

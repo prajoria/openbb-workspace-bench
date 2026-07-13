@@ -4,7 +4,6 @@
   "family": "advanced",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "Create a usable rates and Treasury markets workflow for a rates strategist. The workspace must cover market history for the 10Y yield future. Leave the complete working workspace open for review. The source contract must retain `Rates Watch Data`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "Rates Watch Data"

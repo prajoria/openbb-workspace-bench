@@ -71,6 +71,5 @@
   },
   "oracle_tool_calls": [],
   "prompt": "Complete the Treasury auction calendar backend. Keep the supplied OpenBB table manifest and return dated security rows with numeric auction size in billions from GET /auctions. Leave the health endpoint, CORS, and tests operational.",
-  "split": "train",
   "success": {}
 }

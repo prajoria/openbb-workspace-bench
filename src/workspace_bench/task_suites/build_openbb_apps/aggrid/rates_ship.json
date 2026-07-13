@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "aggrid",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "The desk needs a production-ready rates and Treasury markets workflow for a rates strategist. The workspace must cover upcoming treasury auctions. The workspace must cover current 2s10s spread in bps. The workspace must cover desk commentary on the rates day. Analysts need to inspect auction date, security, size billions. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Auction Desk', 'auctions', 'Rates Watch Data', '30Y Bond'. Use your judgment on the architecture and leave other work intact.",
   "business_terms": [
     "Auction Desk",

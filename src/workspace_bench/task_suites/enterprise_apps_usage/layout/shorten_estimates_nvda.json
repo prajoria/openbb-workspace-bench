@@ -1,0 +1,104 @@
+{
+  "id": "shorten_estimates_nvda",
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "easy",
+  "prompt": "Keep the NVDA estimates widget's position and width, but reduce its height to 8 rows.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Layout Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "charts",
+          "name": "Charts"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "estimate_history",
+          "data_args": {
+            "symbol": "NVDA"
+          },
+          "tab_id": "charts",
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 12
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget_layout"
+  ],
+  "success": {
+    "required_tabs": [
+      "charts"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "estimate_history",
+        "data_args": {
+          "symbol": "NVDA"
+        },
+        "tab_id": "charts"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_id": "estimate_history",
+        "tab_id": "charts",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_id": "estimate_history",
+        "tab_id": "charts",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 8
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 5
+  }
+}

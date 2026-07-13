@@ -1,0 +1,47 @@
+{
+  "id": "smoke_get_widget_data",
+  "category": "read",
+  "family": "get_widget_data",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "prompt": "Fetch open high-severity YTD data from the Stark Alert Trend widget.",
+  "business_terms": [],
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_widget_data"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "get_widget_data",
+        "args_contains": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+          "data_args": {
+            "severity": "High",
+            "status": "Open",
+            "period": "YTD"
+          }
+        }
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+        "data_args": {
+          "severity": "High",
+          "status": "Open",
+          "period": "YTD"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 1
+  }
+}

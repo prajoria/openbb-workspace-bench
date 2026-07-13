@@ -191,7 +191,6 @@ def run_result_to_rollout(
         "family": result.task.family,
         "specification_level": result.task.specification_level,
         "difficulty": result.task.difficulty,
-        "split": result.task.split,
         "passed": result.grade.passed,
         "score": result.grade.score,
         "state_score": result.grade.state_score,

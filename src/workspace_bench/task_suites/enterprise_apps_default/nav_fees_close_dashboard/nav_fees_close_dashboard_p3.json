@@ -1,0 +1,91 @@
+{
+ "id": "nav_fees_close_dashboard_p3",
+ "category": "read",
+ "family": "nav_fees_close_dashboard",
+ "difficulty": "medium",
+ "prompt": "Summarize fee, cash, and pricing exceptions that require fund controller approval.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "NAV, Fees & Close Dashboard"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "exceptions",
+     "controller",
+     "93.49",
+     "51.07",
+     "225"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "nav_fees_close_dashboard_fees_fee_accruals",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "nav_fees_close_dashboard_cash_cash_break_aging",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "nav_fees_close_dashboard_close_close_exceptions",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "NAV, Fees & Close Dashboard Note",
+    "data": "Summarize fee, cash, and pricing exceptions that require fund controller approval: accruals score is 93.49; aging score is 51.07; exceptions exception_count is 225. Anchors: exceptions, controller."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

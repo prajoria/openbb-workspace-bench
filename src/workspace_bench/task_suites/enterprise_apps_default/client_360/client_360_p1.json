@@ -1,0 +1,91 @@
+{
+ "id": "client_360_p1",
+ "category": "read",
+ "family": "client_360",
+ "difficulty": "medium",
+ "prompt": "Prepare an investor meeting brief with mandate context, performance, exposure, flows, requests, and approved talking points.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Client 360"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "performance",
+     "investor",
+     "0.0157",
+     "0.0811",
+     "11.13"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "client_360_portfolio_view_client_returns",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD",
+     "region": "Americas"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "client_360_portfolio_view_exposure_summary",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD",
+     "region": "Americas"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "client_360_flows_subscriptions_and_redemptions",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD",
+     "region": "Americas"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Client 360 Note",
+    "data": "Prepare an investor meeting brief with mandate context, performance, exposure, flows, requests, and approved talking points: returns return is 0.0157; summary exposure is 0.0811; redemptions score is 11.13. Anchors: performance, investor."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

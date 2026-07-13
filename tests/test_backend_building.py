@@ -460,7 +460,6 @@ def _building_task() -> Task:
         "category": "platform",
         "family": "backend-building",
         "difficulty": "medium",
-        "split": "dev",
         "prompt": "Author the VIX backend.",
         "fixtures": {},
         "initial_state": {},

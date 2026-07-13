@@ -4,7 +4,6 @@
   "family": "forms",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build a working Workspace experience for a surveillance analyst covering cases and compliance alerts. The workspace must cover submit a policy exception request. The user can enter the required details and submit the workflow. Keep these source-contract anchors: `exception` and `policy_id`. Choose the rest of the architecture and avoid unrelated changes.",
   "business_terms": [
     "exception",

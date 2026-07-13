@@ -4,7 +4,6 @@
   "family": "settings",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Create a usable chain activity and liquidity workflow for a digital-assets analyst. The workspace must cover current gas price snapshot. The workspace must cover written details for one protocol. Leave the complete working workspace open for review. The source contract must retain `protocol`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "protocol"

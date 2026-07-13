@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "apps",
   "difficulty": "medium",
-  "split": "validation",
   "prompt": "Build a working Workspace experience for a vendor-operations manager covering vendor service levels. The workspace must cover vendor SLA state with breach flags. The workspace must cover count of open SLA breaches. The workspace must cover vendor incident notices feed. Analysts need to inspect vendor, status, latency milliseconds, breach. Leave the complete working workspace open for review. Keep these source-contract anchors: `status` and `vendor`. Choose the rest of the architecture and avoid unrelated changes.",
   "business_terms": [
     "status",

@@ -22,7 +22,7 @@ from workspace_bench.workspace.live_parity import (
 
 @pytest.fixture()
 def stark_read_task() -> Task:
-    return find_task("core/read/alert_trend")
+    return find_task("enterprise-apps-usage/read/alert_trend")
 
 
 def test_map_origin_values_rewrites_only_origin_keys() -> None:
@@ -74,7 +74,7 @@ def test_eligibility_rejects_unmapped_origin(stark_read_task: Task) -> None:
 
 
 def test_eligibility_rejects_unreplayable_oracle_tool() -> None:
-    task = find_task("core/backends/add_stark_enterprise")
+    task = find_task("enterprise-apps-usage/backends/add_stark_enterprise")
     with pytest.raises(LiveParityIneligible):
         check_eligibility(task, DEFAULT_ORIGIN_MAP)
 

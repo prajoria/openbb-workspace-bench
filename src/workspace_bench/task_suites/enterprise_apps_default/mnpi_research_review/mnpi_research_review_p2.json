@@ -1,0 +1,91 @@
+{
+ "id": "mnpi_research_review_p2",
+ "category": "read",
+ "family": "mnpi_research_review",
+ "difficulty": "medium",
+ "prompt": "Identify research items that cannot be published until compliance evidence is complete.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "MNPI & Research Review"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "research",
+     "evidence",
+     "31.85",
+     "5.45",
+     "64.44"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "mnpi_research_review_research_draft_research_review",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "mnpi_research_review_evidence_research_approval_evidence",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "mnpi_research_review_evidence_evidence_and_sign_off_history",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "MNPI & Research Review Note",
+    "data": "Identify research items that cannot be published until compliance evidence is complete: review score is 31.85; evidence score is 5.45; history score is 64.44. Anchors: research, evidence."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

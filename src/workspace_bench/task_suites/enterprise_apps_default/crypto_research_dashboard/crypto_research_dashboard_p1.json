@@ -1,0 +1,91 @@
+{
+ "id": "crypto_research_dashboard_p1",
+ "category": "read",
+ "family": "crypto_research_dashboard",
+ "difficulty": "medium",
+ "prompt": "Summarize crypto market structure: price action, liquidity, on-chain activity, funding, basis, and liquidation risk.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Crypto Research Dashboard"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "liquidity",
+     "liquidation",
+     "40.83",
+     "172896",
+     "67.84"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "crypto_research_dashboard_derivatives_funding_and_basis",
+    "data_args": {
+     "chain": "Ethereum",
+     "crypto_asset": "BTC",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "crypto_research_dashboard_market_price_and_volume",
+    "data_args": {
+     "chain": "Ethereum",
+     "crypto_asset": "BTC",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "crypto_research_dashboard_on_chain_on_chain_activity",
+    "data_args": {
+     "chain": "Ethereum",
+     "crypto_asset": "BTC",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Crypto Research Dashboard Note",
+    "data": "Summarize crypto market structure: price action, liquidity, on-chain activity, funding, basis, and liquidation risk: basis score is 40.83; volume price_usd is 172896; activity score is 67.84. Anchors: liquidity, liquidation."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

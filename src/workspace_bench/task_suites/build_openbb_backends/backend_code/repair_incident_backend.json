@@ -88,6 +88,5 @@
   },
   "oracle_tool_calls": [],
   "prompt": "Diagnose and repair the supplied incident backend. The incident queue currently fails and browser access is broken, while service status already works. Restore typed incident rows and CORS without regressing the healthy status endpoint or changing public ids.",
-  "split": "validation",
   "success": {}
 }

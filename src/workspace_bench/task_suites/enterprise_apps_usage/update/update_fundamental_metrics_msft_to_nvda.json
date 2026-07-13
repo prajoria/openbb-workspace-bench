@@ -1,0 +1,98 @@
+{
+  "id": "update_fundamental_metrics_msft_to_nvda",
+  "category": "single-widget",
+  "family": "update",
+  "difficulty": "easy",
+  "prompt": "The Fundamental Metrics widget currently shows MSFT. Update the existing widget to NVDA; do not create a new one and leave no widget showing the old value.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Update Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "fundamental_metrics",
+          "data_args": {
+            "symbol": "MSFT"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 12
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "fundamental_metrics",
+        "data_args": {
+          "symbol": "NVDA"
+        },
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Equities",
+        "widget_id": "fundamental_metrics",
+        "data_args": {
+          "symbol": "MSFT"
+        },
+        "min_count": 0,
+        "max_count": 0
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "read_widget",
+      "args": {
+        "widget_id": "fundamental_metrics"
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "symbol": "NVDA"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 6
+  }
+}

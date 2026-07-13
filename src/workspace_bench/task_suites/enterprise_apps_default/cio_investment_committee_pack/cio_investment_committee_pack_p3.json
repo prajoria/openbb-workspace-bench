@@ -1,0 +1,88 @@
+{
+ "id": "cio_investment_committee_pack_p3",
+ "category": "read",
+ "family": "cio_investment_committee_pack",
+ "difficulty": "medium",
+ "prompt": "Draft the decision log update after committee review.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "CIO / Investment Committee Pack"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "committee",
+     "decision",
+     "61.24",
+     "88.24",
+     "52.01"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "cio_investment_committee_pack_decisions_decision_log",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "cio_investment_committee_pack_agenda_ic_agenda",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "cio_investment_committee_pack_agenda_decisions_required",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "CIO / Investment Committee Pack Note",
+    "data": "Draft the decision log update after committee review: log score is 61.24; agenda score is 88.24; required value is 52.01. Anchors: committee, decision."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

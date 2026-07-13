@@ -1,0 +1,88 @@
+{
+ "id": "cio_investment_committee_pack_p2",
+ "category": "read",
+ "family": "cio_investment_committee_pack",
+ "difficulty": "medium",
+ "prompt": "Identify recommendations where risk, liquidity, or research evidence conflicts with the proposed allocation.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "CIO / Investment Committee Pack"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "recommendations",
+     "allocation",
+     "50.48",
+     "37.8",
+     "97.02"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "cio_investment_committee_pack_allocations_recommended_changes",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "cio_investment_committee_pack_allocations_capacity",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "cio_investment_committee_pack_research_changed_ratings",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "CIO / Investment Committee Pack Note",
+    "data": "Identify recommendations where risk, liquidity, or research evidence conflicts with the proposed allocation: changes score is 50.48; capacity value is 37.8; ratings score is 97.02. Anchors: recommendations, allocation."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

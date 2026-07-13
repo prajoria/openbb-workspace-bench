@@ -1,0 +1,106 @@
+{
+  "id": "repair_macro_overlap",
+  "category": "repair",
+  "family": "layout",
+  "difficulty": "hard",
+  "prompt": "Do not move the 10Y series widget; resolve the overlap by moving the yield curve widget to start at column 20 with its current size.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "macro"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Overlap Repair",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Macro",
+          "widget_id": "macro_timeseries",
+          "data_args": {
+            "series": "DGS10"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Macro",
+          "widget_id": "yield_curve",
+          "data_args": {},
+          "layout": {
+            "x": 15,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget_layout"
+  ],
+  "success": {
+    "required_layouts": [
+      {
+        "widget_id": "macro_timeseries",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 10
+      },
+      {
+        "widget_id": "yield_curve",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 10
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_id": "yield_curve",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 10
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 5
+  }
+}

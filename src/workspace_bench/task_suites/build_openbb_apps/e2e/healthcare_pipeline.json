@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "e2e",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "Build a healthcare-research analyst a dependable clinical catalysts and pipelines workspace. The workspace must cover healthcare pipeline programs by phase. The workspace must cover pipeline distribution by phase. Analysts need to inspect ticker, phase, programs, readout date. An analyst can filter the analysis by ticker. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Healthcare Pipeline', 'pipeline', 'Healthcare Research Data', 'MRNA', 'ticker'. Decide how best to organize the experience and preserve unrelated work.",
   "business_terms": [
     "Healthcare Pipeline",

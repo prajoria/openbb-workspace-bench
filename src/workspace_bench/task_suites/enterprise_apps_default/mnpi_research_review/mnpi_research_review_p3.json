@@ -1,0 +1,91 @@
+{
+ "id": "mnpi_research_review_p3",
+ "category": "read",
+ "family": "mnpi_research_review",
+ "difficulty": "medium",
+ "prompt": "Create the approval narrative for legal review with unresolved risks and required attestations.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "MNPI & Research Review"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "attestations",
+     "unresolved",
+     "5.45",
+     "97.4",
+     "64.44"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "mnpi_research_review_evidence_research_approval_evidence",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "mnpi_research_review_research_reviewer_comments",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "mnpi_research_review_evidence_evidence_and_sign_off_history",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "MNPI & Research Review Note",
+    "data": "Create the approval narrative for legal review with unresolved risks and required attestations: evidence score is 5.45; comments score is 97.4; history score is 64.44. Anchors: attestations, unresolved."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

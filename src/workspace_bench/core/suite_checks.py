@@ -27,7 +27,7 @@ from workspace_bench.core.prompt_openness import task_prompt_openness_issues
 from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
 from workspace_bench.workspace.widget_params import flatten_params
 
-CORE_SUITE = "core"
+USAGE_SUITE = "enterprise-apps-usage"
 BUILD_SUITE = "build-openbb-apps"
 
 # build-openbb-apps ladder constants.
@@ -131,7 +131,7 @@ def release_checks_for_suite(
 ) -> dict[str, bool]:
     """Return the release checks for a bundled suite; {} for private suites."""
 
-    if suite == CORE_SUITE:
+    if suite == USAGE_SUITE:
         return core_release_checks(tasks, oracle_results)
     if suite == BUILD_SUITE:
         return build_release_checks(tasks, oracle_results)
@@ -153,11 +153,9 @@ def core_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> d
     fingerprints = [_task_fingerprint(task) for task in tasks]
     return {
         **_universal_release_checks(tasks, max_duplicate_prompts=2, max_prompt_words=350),
-        **_family_split_checks(
+        **_family_count_checks(
             tasks,
-            expected={
-                family: {"train": 10, "validation": 5, "test": 5} for family in CORE_FAMILIES
-            },
+            expected={family: 20 for family in CORE_FAMILIES},
         ),
         "grader_mutation_sensitive": _mutation_suite_passes(tasks, oracle_results),
         "runtime_all_backend_tasks": all(
@@ -230,22 +228,12 @@ def build_release_checks(
         )
         for task, result in zip(tasks, oracle_results)
     )
-    expected_family_splits = {
-        family: {"train": 10, "validation": 5, "test": 5} for family in BUILD_LADDER_FAMILIES
-    }
-    expected_family_splits["e2e"] = {
-        "train": 6,
-        "validation": 3,
-        "test": 3,
-    }
-    expected_family_splits["debug"] = {
-        "train": 12,
-        "validation": 6,
-        "test": 6,
-    }
+    expected_family_counts = {family: 20 for family in BUILD_LADDER_FAMILIES}
+    expected_family_counts["e2e"] = 12
+    expected_family_counts["debug"] = 24
     checks = {
         **_universal_release_checks(tasks, max_duplicate_prompts=0, max_prompt_words=180),
-        **_family_split_checks(tasks, expected=expected_family_splits),
+        **_family_count_checks(tasks, expected=expected_family_counts),
         "grader_mutation_sensitive": _mutation_suite_passes(tasks, oracle_results),
         "prompt_specification_lint_236": total == 236
         and all(not task_prompt_openness_issues(task) for task in tasks),
@@ -429,18 +417,15 @@ def _universal_release_checks(
     }
 
 
-def _family_split_checks(
+def _family_count_checks(
     tasks: list[Task],
     *,
-    expected: dict[str, dict[str, int]],
+    expected: dict[str, int],
 ) -> dict[str, bool]:
-    observed: dict[str, Counter[str]] = {}
-    for task in tasks:
-        observed.setdefault(task.family, Counter())[task.split] += 1
+    observed = Counter(task.family for task in tasks)
     return {
         "exact_family_coverage": set(observed) == set(expected),
-        "exact_per_family_split_counts": set(observed) == set(expected)
-        and all(dict(observed[family]) == counts for family, counts in expected.items()),
+        "exact_per_family_counts": dict(observed) == expected,
     }
 
 

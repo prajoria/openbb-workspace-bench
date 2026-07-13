@@ -4,7 +4,6 @@
   "family": "forms",
   "specification_level": "explicit",
   "difficulty": "medium",
-  "split": "train",
   "prompt": "Register the backend and place the specified widget on the active dashboard. Use 'Surveillance Data' at http://localhost:7807. Make the submission workflow functional. The experience needs Access Review Form (`access_review_form`, markdown) using `/access-review` for capture an access review decision; user controls: Access Review (`review`, form) with User, Approved, Save. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

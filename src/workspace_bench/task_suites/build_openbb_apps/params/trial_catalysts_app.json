@@ -4,7 +4,6 @@
   "family": "params",
   "specification_level": "explicit",
   "difficulty": "medium",
-  "split": "validation",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Healthcare Research Data' at http://localhost:7808. Make the user controls functional. The experience needs Trial Catalysts (`trial_catalysts`, table) using `/trial-catalysts` for upcoming clinical trial readouts; user controls: Ticker (`ticker`, endpoint) from `/tickers`; columns: ticker (text), phase (text), readout_date (dateString). Organize it as app 'Catalyst Filter' with tabs Catalysts (trial_catalysts). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

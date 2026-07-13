@@ -4,7 +4,6 @@
   "family": "extend",
   "specification_level": "explicit",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "Connect the backend and make its first widget usable on the current dashboard. Use 'Vol Desk Data' at http://localhost:7801. Repair the existing backend without regressing working content. The experience needs VIX Term Structure (`vix_term_structure`, chart) using `/vix-term-structure` for plotly curve of VIX futures by expiry; consume the raw backend payload; Vol Regime (`vol_regime_metric`, metric) using `/vol-regime` for current volatility regime score; cache for 15 minutes. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {

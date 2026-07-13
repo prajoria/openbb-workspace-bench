@@ -3,7 +3,6 @@
   "category": "repair",
   "family": "debug",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "Restore Execution Recovery Room for execution analysts: live updates overwrite the wrong rows and make the queue unstable. Work through the existing Execution Repair Data connection, repair the root cause without replacing healthy content, and run a live-data retest. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Execution Recovery Room open and add a short verification HTML card that naturally mentions Execution Recovery Room, Execution Repair Data, and repair verified.",
   "business_terms": [
     "Execution Recovery Room",

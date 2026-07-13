@@ -4,7 +4,6 @@
   "family": "advanced",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Create a usable cases and compliance alerts workflow for a surveillance analyst. The workspace must cover hidden-prompt question answering over case evidence. The source contract must retain `prompt`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "prompt"

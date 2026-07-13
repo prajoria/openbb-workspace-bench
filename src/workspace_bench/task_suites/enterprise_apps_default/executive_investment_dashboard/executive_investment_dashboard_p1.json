@@ -1,0 +1,88 @@
+{
+ "id": "executive_investment_dashboard_p1",
+ "category": "read",
+ "family": "executive_investment_dashboard",
+ "difficulty": "medium",
+ "prompt": "Write the executive briefing: firm AUM, flows, strategy returns, drawdown, stress risk, and major open issues.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Executive Investment Dashboard"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "AUM",
+     "stress",
+     "90111.5",
+     "83.06",
+     "54.46"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "executive_investment_dashboard_firm_overview_aum_by_strategy",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "executive_investment_dashboard_firm_overview_net_flows",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "executive_investment_dashboard_issues_major_open_issues",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Executive Investment Dashboard Note",
+    "data": "Write the executive briefing: firm AUM, flows, strategy returns, drawdown, stress risk, and major open issues: strategy aum_usd is 90111.5; flows score is 83.06; issues score is 54.46. Anchors: AUM, stress."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

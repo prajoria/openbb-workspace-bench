@@ -4,7 +4,6 @@
   "family": "debug",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "Restore Vendor Recovery Room for vendor operations analysts: two identically named backend connections now compete for the app. Work through the existing Vendor Repair Data connection, repair the root cause without replacing healthy content, and run a live-data retest. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Vendor Recovery Room open and add a short verification HTML card that naturally mentions Vendor Recovery Room, Vendor Repair Data, and repair verified.",
   "business_terms": [
     "Vendor Recovery Room",

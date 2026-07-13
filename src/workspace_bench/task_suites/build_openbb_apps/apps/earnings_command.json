@@ -4,7 +4,6 @@
   "family": "apps",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Create a usable the requested financial dataset workflow for an investment analyst. The workspace must cover holdings dataset for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows. The workspace must cover sector Exposure for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows. The workspace must cover portfolio Snapshot for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows. Analysts need to inspect ticker, company, sector, weight, active weight, pnl, rating, bucket, value. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. The source contract must retain `fund` and `period`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "fund",

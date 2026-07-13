@@ -3,7 +3,6 @@
   "category": "repair",
   "family": "extend",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "Build a vendor-operations manager a dependable vendor service levels workspace. The workspace must cover vendor SLA state with breach flags. The workspace must cover count of open SLA breaches. The workspace must cover vendor incident notices feed. The workspace must cover runbook for SLA escalations. Analysts need to inspect vendor, status, latency milliseconds, breach. Preserve all working content while correcting the requested workflow. Decide how best to organize the experience and preserve unrelated work.",
   "fixtures": {},
   "initial_state": {

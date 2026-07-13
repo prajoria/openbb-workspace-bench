@@ -4,7 +4,6 @@
   "family": "types",
   "specification_level": "explicit",
   "difficulty": "medium",
-  "split": "validation",
   "prompt": "Connect the backend and make its first widget usable on the current dashboard. Use 'Execution Desk Data' at http://localhost:7806. Choose the native widget type that fits the content. The experience needs Venue Scorecard (`venue_pdf`, pdf) using `/venue-scorecard` for monthly venue scorecard PDF; cache for 30 minutes. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

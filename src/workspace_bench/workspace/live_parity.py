@@ -66,6 +66,12 @@ REPLAYABLE_TOOLS = frozenset(
         "delete_widget",
         "add_generative_widget",
         "read_widget",
+        # Read-only knowledge surfaces are safe to replay against the live
+        # bridge; registry-mutating tools (manage_backends/manage_apps) and
+        # envelope echoes stay excluded.
+        "get_skill_content",
+        "read_workspace_resource",
+        "get_workspace_prompt",
     }
 )
 

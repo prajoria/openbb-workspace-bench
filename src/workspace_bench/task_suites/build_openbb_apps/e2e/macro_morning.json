@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "e2e",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "Build a rates strategist a dependable rates and Treasury markets workspace. The workspace must cover rates morning levels and changes. The workspace must cover the Treasury yield curve. Analysts need to inspect series, level, change bp, as of. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Macro Morning', 'Rates Watch Data', 'DGS2'. Decide how best to organize the experience and preserve unrelated work.",
   "business_terms": [
     "Macro Morning",

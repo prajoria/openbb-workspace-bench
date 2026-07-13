@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "types",
   "difficulty": "easy",
-  "split": "test",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Vendor SLA Data' at http://localhost:7804. Choose the native widget type that fits the content. The experience needs Vendor Notices (`sla_newsfeed`, newsfeed) using `/vendor-notices` for vendor incident notices feed. Organize it as app 'Vendor Notices' with tabs Notices (sla_newsfeed). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

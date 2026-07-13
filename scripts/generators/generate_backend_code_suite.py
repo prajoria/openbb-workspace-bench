@@ -37,7 +37,6 @@ class Definition:
     title: str
     prompt: str
     difficulty: str
-    split: str
     tags: tuple[str, ...]
     starter_app: str
     oracle_files: JsonDict
@@ -639,7 +638,6 @@ def risk_exposures():
             "declared symbol, percentage-change, and volume columns; implement GET /movers with "
             "at least two typed, non-placeholder rows; preserve CORS, health, and the pinned tests.",
             "easy",
-            "train",
             ("single-table", "implementation"),
             task1_starter,
             {"app.py": task1_oracle},
@@ -672,7 +670,6 @@ def test_market_movers_contract():
             "manifest and return dated security rows with numeric auction size in billions from "
             "GET /auctions. Leave the health endpoint, CORS, and tests operational.",
             "easy",
-            "train",
             ("single-table", "implementation"),
             task2_starter,
             {"app.py": task2_oracle},
@@ -704,7 +701,6 @@ def test_auction_contract():
             "analytics.py, then serve a numeric metric from /risk/score and meaningful markdown "
             "from /risk/commentary. Both endpoints must use that shared module and keep CORS/tests green.",
             "easy",
-            "train",
             ("multi-widget", "shared-module"),
             task3_starter,
             {
@@ -753,7 +749,6 @@ def test_shared_risk_outputs():
             "Complete the supplied backend so Workspace can construct both declared series from "
             "at least three ordered quarters. Retain the repository's interface and quality gates.",
             "medium",
-            "train",
             ("chart", "implementation"),
             task4_starter,
             {"app.py": task4_oracle},
@@ -784,7 +779,6 @@ def test_chart_series_are_constructable():
             "Honor the supplied ticker, start_date, and end_date query contract at the HTTP layer; "
             "the response must make the selected instrument and date boundaries unambiguous.",
             "medium",
-            "validation",
             ("parameters", "dates", "ticker"),
             task5_starter,
             {"app.py": task5_oracle},
@@ -826,7 +820,6 @@ def test_query_parameters_drive_payload():
             "accepted submission in the table immediately afterward. Implement the declared POST "
             "contract with in-process state; normalize tickers and preserve existing entries.",
             "medium",
-            "validation",
             ("form", "post", "state"),
             task6_starter,
             {"app.py": task6_oracle},
@@ -873,7 +866,6 @@ def test_submission_mutates_watchlist():
             "pagination and single-column sorting from the supplied row-model request. Return the "
             "requested slice, total row count, page size, and first visible symbol accurately.",
             "hard",
-            "test",
             ("ssrm", "pagination", "sorting"),
             task7_starter,
             {"app.py": task7_oracle},
@@ -909,7 +901,6 @@ def test_grid_honors_sort_and_page():
             "position detail. Finish both data contracts and apps.json so its non-overlapping layout "
             "references only widgets this backend actually serves.",
             "medium",
-            "train",
             ("apps-json", "multi-widget", "layout"),
             task8_starter,
             {"app.py": task8_oracle},
@@ -950,7 +941,6 @@ def test_app_references_served_widgets():
             "and browser access is broken, while service status already works. Restore typed incident "
             "rows and CORS without regressing the healthy status endpoint or changing public ids.",
             "medium",
-            "validation",
             ("repair", "cors", "regression"),
             task9_starter,
             {"app.py": task9_oracle},
@@ -990,7 +980,6 @@ def test_incident_queue_is_repaired():
             "the implementation and manifest into one coherent contract for client name, notional, "
             "and side. Keep the public widget usable and the test suite meaningful.",
             "medium",
-            "test",
             ("repair", "manifest", "columns"),
             task10_starter,
             {"app.py": task10_oracle},
@@ -1022,7 +1011,6 @@ def test_manifest_columns_exist_in_payload():
             "ratings and spread levels. Preserve every existing equity contract and test while adding "
             "a coherent second credit domain to widgets.json and the HTTP API.",
             "hard",
-            "test",
             ("extend", "multi-domain", "regression"),
             task11_starter,
             {"app.py": task11_oracle},
@@ -1065,7 +1053,6 @@ def test_credit_domain_is_added():
             "an installable Workspace app that lays out the experience cleanly. Leave real tests that "
             "protect the product behavior and keep the backend localhost-ready.",
             "hard",
-            "test",
             ("mini-product", "apps-json", "health", "browser-flagship"),
             task12_starter,
             {"app.py": task12_oracle},
@@ -1154,7 +1141,6 @@ def _task_payload(definition: Definition) -> JsonDict:
         "category": "repair" if "repair" in definition.tags else "platform",
         "family": "backend-code",
         "difficulty": definition.difficulty,
-        "split": definition.split,
         "prompt": definition.prompt,
         "fixtures": {"backends": []},
         "initial_state": {},
@@ -1223,7 +1209,6 @@ def main() -> None:
     manifest = {
         "suite_id": "build-openbb-backends",
         "visibility": "public",
-        "default_split": "train",
         "description": (
             "Experimental v0 real-code track: agents edit pinned FastAPI starter repositories; "
             "the evaluator launches their process and grades manifests, HTTP behavior, and tests."

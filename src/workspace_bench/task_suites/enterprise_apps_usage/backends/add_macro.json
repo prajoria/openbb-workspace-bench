@@ -1,0 +1,132 @@
+{
+  "id": "add_macro",
+  "category": "dashboard",
+  "family": "backends",
+  "difficulty": "easy",
+  "prompt": "Call manage_backends with operation add and name macro to register Bench Macro, then call manage_backends with operation list.",
+  "fixtures": {
+    "backends": []
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Backend Registration",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "manage_backends"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "manage_backends",
+        "args_contains": {
+          "operation": "add"
+        }
+      },
+      {
+        "tool": "manage_backends",
+        "args_contains": {
+          "operation": "list"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "manage_backends",
+        "data_contains": [
+          "Bench Macro"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "macro__macro_timeseries",
+          "widget_id": "macro_timeseries",
+          "fields": [
+            "date",
+            "value"
+          ],
+          "path": "/macro-timeseries",
+          "payload": [
+            {
+              "date": "2025-10-31",
+              "value": 4.38
+            },
+            {
+              "date": "2025-11-30",
+              "value": 4.25
+            },
+            {
+              "date": "2025-12-31",
+              "value": 4.12
+            }
+          ]
+        },
+        {
+          "name": "macro__yield_curve",
+          "widget_id": "yield_curve",
+          "fields": [
+            "tenor",
+            "yield"
+          ],
+          "path": "/yield-curve",
+          "payload": [
+            {
+              "tenor": "3M",
+              "yield": 4.02
+            },
+            {
+              "tenor": "2Y",
+              "yield": 3.75
+            },
+            {
+              "tenor": "5Y",
+              "yield": 3.92
+            },
+            {
+              "tenor": "10Y",
+              "yield": 4.16
+            },
+            {
+              "tenor": "30Y",
+              "yield": 4.48
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "macro"
+      }
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 5
+  }
+}

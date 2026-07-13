@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "advanced",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "The desk needs a production-ready cases and compliance alerts workflow for a surveillance analyst. The workspace must cover question answering over surveillance cases. The workspace must cover open surveillance alerts. The workspace must cover open alert count. Analysts need to inspect alert ID, desk, severity, age days. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Use your judgment on the architecture and leave other work intact.",
   "fixtures": {},
   "initial_state": {},

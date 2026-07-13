@@ -20,7 +20,6 @@ from _assembly import (
     CheckTypePolicy,
     NoveltyPolicy,
     PhrasingSelector,
-    SplitAssigner,
     TaskAssembler,
     build_matrix as build_matrix,
     difficulty_for,
@@ -2646,7 +2645,7 @@ def desk_widget(key: str, widget_id: str) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Novelty, splits, lattice, quotas
+# Novelty, lattice, quotas
 # ---------------------------------------------------------------------------
 
 
@@ -2718,37 +2717,6 @@ _NOVELTY = NoveltyPolicy(
 )
 novelty_fingerprint = _NOVELTY.fingerprint
 add_novelty = _NOVELTY.add_description
-
-
-# Uniform per-cell pattern so every (family, level) cell contributes one
-# validation and one test task: per-level curves stay computable on the
-# held-out splits (the earlier level-skewed patterns left r0 absent from
-# test and r4 absent from validation).
-SPLIT_PATTERNS = {
-    "r0": ("train", "train", "validation", "test"),
-    "r1": ("train", "train", "validation", "test"),
-    "r2": ("train", "train", "validation", "test"),
-    "r3": ("train", "train", "validation", "test"),
-    "r4": ("train", "train", "validation", "test"),
-}
-
-
-def _build_split_pattern(family: str, level: str, cell: list[dict]) -> tuple[str, ...]:
-    if family == DEBUG_FAMILY:
-        assert len(cell) == DEBUG_COUNT, (
-            f"{family}/{level} expected {DEBUG_COUNT}, got {len(cell)}"
-        )
-        return ("train", "train", "validation", "test") * (DEBUG_COUNT // 4)
-    if family == CAPSTONE_FAMILY:
-        assert len(cell) == E2E_COUNT, (
-            f"{family}/{level} expected {E2E_COUNT}, got {len(cell)}"
-        )
-        return ("train", "train", "validation", "test") * (E2E_COUNT // 4)
-    assert len(cell) == 4, f"split assignment expects 4 tasks in {family}/{level}"
-    return SPLIT_PATTERNS[level]
-
-
-assign_splits = SplitAssigner(_build_split_pattern)
 
 
 def assert_lattice(matrix: dict[str, dict[str, int]]) -> None:

@@ -1,0 +1,93 @@
+{
+  "id": "use_series_options_for_macro_timeseries",
+  "category": "single-widget",
+  "family": "params",
+  "difficulty": "easy",
+  "prompt": "For Bench Macro/macro_timeseries, call get_params_options on parameter series, choose DGS10, and create that widget with series=DGS10.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "macro"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Parameter Options",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_params_options",
+    "create_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS10"
+        }
+      }
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "get_params_options",
+        "args_contains": {
+          "widget_id": "macro_timeseries",
+          "param_name": "series"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_params_options",
+        "data_contains": [
+          "DGS10"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_params_options",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "param_name": "series"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS10"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 6
+  }
+}

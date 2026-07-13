@@ -4,7 +4,6 @@
   "family": "extend",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Create a usable cases and compliance alerts workflow for a surveillance analyst. The workspace must cover open surveillance alerts. The workspace must cover open alert count. Analysts need to inspect alert ID, desk, severity, age days. Leave the complete working workspace open for review. The source contract must retain `severity` and `alert_id`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "severity",

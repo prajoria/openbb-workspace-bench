@@ -4,7 +4,6 @@
   "family": "types",
   "specification_level": "explicit",
   "difficulty": "medium",
-  "split": "train",
   "prompt": "Connect the backend and make its first widget usable on the current dashboard. Use 'Chain TVL Data' at http://localhost:7802. Choose the native widget type that fits the content. The experience needs Chain Heatmap (`chains_heatmap_html`, html) using `/chains-heatmap` for raw HTML heatmap of chain flows; cache for 15 minutes. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

@@ -4,7 +4,6 @@
   "family": "params",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "Create a usable volatility and derivatives workflow for a volatility analyst. The workspace must cover VIX analysis for a selected window and as-of date. An analyst can choose the relevant business date. An analyst can adjust the relevant numeric scope. The source contract must retain `window` and `as_of`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "window",

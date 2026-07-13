@@ -1,0 +1,69 @@
+{
+  "id": "smoke_update_widget",
+  "category": "single-widget",
+  "family": "update_widget",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "prompt": "Change the seeded Stark Alert Trend widget period to MTD.",
+  "business_terms": [],
+  "fixtures": {},
+  "initial_state": {
+    "dashboard": {
+      "name": "Smoke update_widget",
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+          "tab_id": "overview",
+          "data_args": {
+            "severity": "High",
+            "status": "Open",
+            "period": "YTD"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 14
+          }
+        }
+      ],
+      "activate": true
+    }
+  },
+  "allowed_tools": [
+    "update_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+        "data_args": {
+          "period": "MTD"
+        }
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "update_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+        "data_args": {
+          "period": "MTD"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 1
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "id": "crossbackend_msft_vs_curve",
+  "category": "read",
+  "family": "note",
+  "difficulty": "hard",
+  "prompt": "Review the MSFT fundamentals and yield curve widgets and add a note with the gross margin and the 30Y yield from the data.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      },
+      {
+        "name": "macro"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Existing Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "fundamental_metrics",
+          "data_args": {
+            "symbol": "MSFT"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        },
+        {
+          "origin": "Bench Macro",
+          "widget_id": "yield_curve",
+          "data_args": {},
+          "layout": {
+            "x": 20,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_widget_data",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Equities",
+        "widget_id": "fundamental_metrics",
+        "data_args": {
+          "symbol": "MSFT"
+        },
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve",
+        "data_args": {},
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "MSFT",
+          "0.694",
+          "4.48"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Equities",
+        "widget_id": "fundamental_metrics",
+        "data_args": {
+          "symbol": "MSFT"
+        }
+      }
+    },
+    {
+      "tool": "get_widget_data",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "yield_curve",
+        "data_args": {}
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Answer Note",
+        "data": "MSFT gross margin 0.694; 30Y yield 4.48."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 6
+  }
+}

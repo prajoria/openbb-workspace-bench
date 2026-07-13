@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "charts",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "A digital-assets analyst needs a decision-ready Workspace for chain activity and liquidity. The workspace must cover comparisons of chain TVL. The workspace must cover current gas price snapshot. The workspace must cover current TVL of all chains from the desk aggregator. Analysts need to inspect name, TVL USD, change one-day. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Chain Chart Live', 'chain TVL', 'Chain TVL Data', 'Solana'. Choose an effective architecture and avoid unrelated changes.",
   "business_terms": [
     "Chain Chart Live",

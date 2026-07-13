@@ -4,7 +4,6 @@
   "family": "params",
   "specification_level": "explicit",
   "difficulty": "medium",
-  "split": "train",
   "prompt": "Make the requested backend widget available and working in the current view. Use 'Earnings Prep Data' at http://localhost:7805. Make the user controls functional. The experience needs KPI Tabs (`kpi_tabs_table`, table) using `/kpi-tabs` for kPI table with static and dynamic tab views; user controls: View (`view`, tabs). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

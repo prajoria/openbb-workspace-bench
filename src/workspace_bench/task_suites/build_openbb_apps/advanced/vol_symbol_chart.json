@@ -4,7 +4,6 @@
   "family": "advanced",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "Build a working Workspace experience for a volatility analyst covering volatility and derivatives. The workspace must cover market history for volatility futures. Keep these source-contract anchors: `venue`. Choose the rest of the architecture and avoid unrelated changes.",
   "business_terms": [
     "venue"

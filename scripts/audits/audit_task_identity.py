@@ -30,7 +30,11 @@ CATALOG_WIDGET_IDS = frozenset(
 
 REPO = Path(__file__).resolve().parents[2]
 SUITE_DIRS = {
-    "core": REPO / "src/workspace_bench/task_suites/core",
+    "smoke": REPO / "src/workspace_bench/task_suites/smoke",
+    "enterprise-apps-default": (
+        REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
+    ),
+    "enterprise-apps-usage": REPO / "src/workspace_bench/task_suites/enterprise_apps_usage",
     "build-openbb-apps": REPO / "src/workspace_bench/task_suites/build_openbb_apps",
     "build-openbb-backends": (
         REPO / "src/workspace_bench/task_suites/build_openbb_backends"
@@ -57,7 +61,8 @@ REPEATED_WORD_RE = re.compile(r"(?i)\b([a-z][a-z0-9-]*)\s+\1\b")
 REPEATED_BIGRAM_RE = re.compile(r"(?i)\b([a-z][a-z0-9-]*\s+[a-z][a-z0-9-]*)\s+\1\b")
 TASK_ARG_RE = re.compile(r"--task\s+([^\s`\"']+)")
 QUALIFIED_ID_RE = re.compile(
-    r"\b(?:core|build-openbb-apps|build-openbb-backends)/"
+    r"\b(?:smoke|enterprise-apps-default|enterprise-apps-usage|"
+    r"build-openbb-apps|build-openbb-backends)/"
     r"[a-z0-9]+(?:[-_][a-z0-9]+)*/"
     r"[a-z0-9]+(?:_[a-z0-9]+)*\b"
 )

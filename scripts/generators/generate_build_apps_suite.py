@@ -388,7 +388,6 @@ def main() -> int:
     matrix = c.build_matrix(tasks)
     if not partial:
         c.assert_lattice(matrix)
-    c.assign_splits(tasks)
     for task in tasks:
         c.add_novelty(task)
 
@@ -476,7 +475,6 @@ def main() -> int:
     manifest = {
         "suite_id": "build-openbb-apps",
         "visibility": "public",
-        "default_split": "train",
         "content_sha256": task_payload_digest(payloads),
         "description": (
             "WorkspaceBench build-openbb-apps collection: agents receive open product "

@@ -1,0 +1,74 @@
+{
+  "id": "earnings_estimates_monitor",
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "medium",
+  "prompt": "From the Bench Stark Enterprise backend, instantiate the Earnings & Estimates Monitor app as a new dashboard named Earnings Season Monitor.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Earnings Season Monitor",
+    "required_tabs": [
+      "overview",
+      "calendar",
+      "estimates"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
+        "tab_id": "calendar",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "earnings_estimates_monitor_estimates_consensus_revisions",
+        "tab_id": "estimates",
+        "min_count": 1
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Earnings & Estimates Monitor",
+        "dashboard_name": "Earnings Season Monitor",
+        "activate": true
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 5
+  }
+}

@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "settings",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "The desk needs a production-ready volatility and derivatives workflow for a volatility analyst. The workspace must cover current volatility regime score. The workspace must cover morning volatility commentary. The workspace must cover daily CBOE VIX closes with returns. Analysts need to inspect date, close, return percentage. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Vol Config Live', '15-minute cache', 'Vol Desk Data', 'stress'. Use your judgment on the architecture and leave other work intact.",
   "business_terms": [
     "Vol Config Live",

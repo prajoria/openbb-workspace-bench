@@ -101,6 +101,5 @@
   },
   "oracle_tool_calls": [],
   "prompt": "An equity analyst needs historical prices filtered by ticker and inclusive date range. Honor the supplied ticker, start_date, and end_date query contract at the HTTP layer; the response must make the selected instrument and date boundaries unambiguous.",
-  "split": "validation",
   "success": {}
 }

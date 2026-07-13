@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "grouping",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build an equity-research analyst a dependable earnings and estimates workspace. The workspace must cover clickable live symbol rows for grouped review. The workspace must cover EPS beat and miss history. The workspace must cover preview HTML card for the earnings call. Analysts need to inspect symbol, revision percentage. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Click Sync Live', 'click sync', 'Earnings Prep Data', 'AAPL', 'ticker'. Decide how best to organize the experience and preserve unrelated work.",
   "business_terms": [
     "Click Sync Live",

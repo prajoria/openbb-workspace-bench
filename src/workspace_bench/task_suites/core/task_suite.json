@@ -1,7 +1,0 @@
-{
-  "suite_id": "core",
-  "visibility": "public",
-  "default_split": "train",
-  "content_sha256": "cf471aa30a35996dfc2ecb470b799bb615ee2b950a137b2a33c7d2ae0e3e23ee",
-  "description": "WorkspaceBench core collection: 15 MCP-surface families and 300 tasks. Splits are deterministic 150/75/75 train/validation/test; difficulty is recorded independently as easy, medium, or hard."
-}

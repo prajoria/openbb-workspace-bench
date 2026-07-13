@@ -4,7 +4,6 @@
   "family": "apps",
   "specification_level": "explicit",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Execution Desk Data' at http://localhost:7806. Treat the app layout and navigation as the product outcome. The experience needs Open Orders (`open_orders`, table) using `/open-orders` for live open orders blotter; columns: order_id (text), symbol (text), qty (number, int), status (text, titleCase); Exceptions (`exception_metric`, metric) using `/exception-count` for open execution exceptions. Organize it as app 'Order Watch' with tabs Orders (open_orders, exception_metric) with 2 starter prompt(s). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {

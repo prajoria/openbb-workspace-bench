@@ -1,0 +1,91 @@
+{
+ "id": "rebalance_scenario_lab_p3",
+ "category": "read",
+ "family": "rebalance_scenario_lab",
+ "difficulty": "medium",
+ "prompt": "Create an approval memo with implementation risk, residual drift, and the decision needed from the PM.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Rebalance & Scenario Lab"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "implementation",
+     "approval",
+     "36.17",
+     "22.05",
+     "19.65"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "rebalance_scenario_lab_approval_implementation_readiness",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "rebalance_scenario_lab_drift_drift_by_sleeve",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "rebalance_scenario_lab_approval_approval_checklist",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Rebalance & Scenario Lab Note",
+    "data": "Create an approval memo with implementation risk, residual drift, and the decision needed from the PM: readiness score is 36.17; sleeve score is 22.05; checklist score is 19.65. Anchors: implementation, approval."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

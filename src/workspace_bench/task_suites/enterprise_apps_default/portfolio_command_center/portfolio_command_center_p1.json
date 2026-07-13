@@ -1,0 +1,88 @@
+{
+ "id": "portfolio_command_center_p1",
+ "category": "read",
+ "family": "portfolio_command_center",
+ "difficulty": "medium",
+ "prompt": "Prepare the PM morning note: overnight P&L, largest active exposures, limit pressure, and trade actions by urgency.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Portfolio Command Center"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "overnight",
+     "exposures",
+     "0.0389",
+     "85.25",
+     "62.35"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "portfolio_command_center_holdings_sector_exposure",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "portfolio_command_center_overview_limit_utilization",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "portfolio_command_center_actions_trade_ideas",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Portfolio Command Center Note",
+    "data": "Prepare the PM morning note: overnight P&L, largest active exposures, limit pressure, and trade actions by urgency: exposure exposure is 0.0389; utilization score is 85.25; ideas score is 62.35. Anchors: overnight, exposures."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

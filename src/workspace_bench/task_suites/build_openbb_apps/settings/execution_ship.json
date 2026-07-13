@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "settings",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "The desk needs a production-ready orders and venue quality workflow for an execution analyst. The workspace must cover open execution exceptions. The workspace must cover live open orders blotter. The workspace must cover monthly venue scorecard document. Analysts need to inspect order ID, symbol, quantity, status. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Execution Config Live', 'on-demand updates', 'Execution Desk Data', 'urgent'. Use your judgment on the architecture and leave other work intact.",
   "business_terms": [
     "Execution Config Live",

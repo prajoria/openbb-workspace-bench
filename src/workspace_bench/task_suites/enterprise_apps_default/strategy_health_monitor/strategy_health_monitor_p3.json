@@ -1,0 +1,88 @@
+{
+ "id": "strategy_health_monitor_p3",
+ "category": "read",
+ "family": "strategy_health_monitor",
+ "difficulty": "medium",
+ "prompt": "Build the weekly strategy-health brief for the CIO with watchlist names and catalyst risk.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Strategy Health Monitor"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "watchlist",
+     "catalyst",
+     "14.24",
+     "62.05",
+     "43.5"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "strategy_health_monitor_watchlist_names_near_action_levels",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "strategy_health_monitor_watchlist_catalyst_calendar",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "strategy_health_monitor_themes_crowded_names",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Strategy Health Monitor Note",
+    "data": "Build the weekly strategy-health brief for the CIO with watchlist names and catalyst risk: levels score is 14.24; calendar score is 62.05; names score is 43.5. Anchors: watchlist, catalyst."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

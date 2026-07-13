@@ -4,7 +4,6 @@
   "family": "extend",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Create a usable rates and Treasury markets workflow for a rates strategist. The workspace must cover desk commentary on the rates day. The workspace must cover current 2s10s spread in bps. The source contract must retain `series`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "series"

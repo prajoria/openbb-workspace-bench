@@ -4,7 +4,6 @@
   "family": "apps",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Create a usable clinical catalysts and pipelines workflow for a healthcare-research analyst. The workspace must cover catalysts in the next 30 days. Leave the complete working workspace open for review. The source contract must retain `Healthcare Research Data`; decide the remaining implementation and preserve unrelated workspace state.",
   "business_terms": [
     "Healthcare Research Data"

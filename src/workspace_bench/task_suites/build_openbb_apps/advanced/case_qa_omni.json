@@ -4,7 +4,6 @@
   "family": "advanced",
   "specification_level": "explicit",
   "difficulty": "medium",
-  "split": "train",
   "prompt": "Register the backend and place the specified widget on the active dashboard. Use 'Surveillance Data' at http://localhost:7807. Implement the live or advanced interaction correctly. The experience needs Case Q&A (`case_qa_omni`, omni) using `/case-qa` for ask questions over the surveillance case corpus; user controls: Prompt (`prompt`, text). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

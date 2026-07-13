@@ -4,7 +4,6 @@
   "family": "extend",
   "specification_level": "explicit",
   "difficulty": "medium",
-  "split": "validation",
   "prompt": "Publish the requested app and open it in Workspace to verify it works. Use 'Rates Watch Data' at http://localhost:7803. Repair the existing backend without regressing working content. The experience needs Auction Calendar (`auction_calendar`, table) using `/auction-calendar` for upcoming treasury auctions; columns: date (dateString), security (text), size_bn (number); 2s10s Spread (`curve_spread_metric`, metric) using `/curve-spread` for current 2s10s spread in bps. Organize it as app 'Auction Review' with tabs Auctions (auction_calendar, curve_spread_metric). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {

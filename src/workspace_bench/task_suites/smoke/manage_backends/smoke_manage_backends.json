@@ -1,0 +1,35 @@
+{
+  "id": "smoke_manage_backends",
+  "category": "platform",
+  "family": "manage_backends",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "prompt": "List connected Workspace backends once.",
+  "business_terms": [],
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "manage_backends"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "manage_backends",
+        "args_contains": {
+          "operation": "list"
+        }
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 1
+  }
+}

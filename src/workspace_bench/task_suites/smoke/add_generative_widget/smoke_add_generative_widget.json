@@ -1,0 +1,35 @@
+{
+  "id": "smoke_add_generative_widget",
+  "category": "single-widget",
+  "family": "add_generative_widget",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "prompt": "Add a minimal generated note to Home.",
+  "business_terms": [],
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Smoke Note"
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Smoke Note",
+        "data": "Smoke round trip complete."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 1
+  }
+}

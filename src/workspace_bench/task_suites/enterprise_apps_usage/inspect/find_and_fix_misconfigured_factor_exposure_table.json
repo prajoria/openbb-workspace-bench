@@ -1,0 +1,93 @@
+{
+  "id": "find_and_fix_misconfigured_factor_exposure_table",
+  "category": "single-widget",
+  "family": "inspect",
+  "difficulty": "medium",
+  "prompt": "Use read_widget with widget_id quant_research_backtest_lab_risk_model_factor_exposure_table to inspect the widget configured with universe=Liquid Crypto, then update_widget so universe=US Large Cap.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Inspect Repair",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "quant_research_backtest_lab_risk_model_factor_exposure_table",
+          "data_args": {
+            "universe": "Liquid Crypto"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 10
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "quant_research_backtest_lab_risk_model_factor_exposure_table",
+        "data_args": {
+          "universe": "US Large Cap"
+        }
+      }
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "read_widget"
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "read_widget",
+      "args": {
+        "widget_id": "quant_research_backtest_lab_risk_model_factor_exposure_table"
+      }
+    },
+    {
+      "tool": "update_widget",
+      "args": {
+        "widget_uuid": "widget_001",
+        "data_args": {
+          "universe": "US Large Cap"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 6
+  }
+}

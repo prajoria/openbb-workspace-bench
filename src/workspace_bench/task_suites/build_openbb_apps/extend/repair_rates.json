@@ -3,7 +3,6 @@
   "category": "repair",
   "family": "extend",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "The desk needs a production-ready rates and Treasury markets workflow for a rates strategist. The workspace must cover desk commentary on the rates day. The workspace must cover current 2s10s spread in bps. Leave the complete working workspace open for review. Preserve all working content while correcting the requested workflow. Add a short completion HTML card that naturally includes the desk-required terms 'Rates Repair Live', 'rates repair', 'Rates Watch Data', 'DGS2'. Use your judgment on the architecture and leave other work intact.",
   "business_terms": [
     "Rates Repair Live",

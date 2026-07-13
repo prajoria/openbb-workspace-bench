@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "apps",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "The desk needs a production-ready the requested financial dataset workflow for an investment analyst. The workspace must cover holdings dataset for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows. The workspace must cover portfolio Snapshot for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows. The workspace must cover exposure Treemap for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows. Analysts need to inspect ticker, company, sector, weight, active weight, pnl, rating. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Enterprise Portfolio Live', 'enterprise portfolio', 'Bench Stark Enterprise', 'Flagship Long/Short'. Use your judgment on the architecture and leave other work intact.",
   "business_terms": [
     "Enterprise Portfolio Live",

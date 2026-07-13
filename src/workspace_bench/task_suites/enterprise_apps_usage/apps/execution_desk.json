@@ -1,0 +1,58 @@
+{
+  "id": "execution_desk",
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "easy",
+  "prompt": "Create a new dashboard named AM Execution Desk by instantiating the Execution Desk app from the Bench Stark Enterprise backend.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "AM Execution Desk",
+    "required_tool_calls": [
+      {
+        "tool": "manage_apps",
+        "args_contains": {
+          "operation": "instantiate"
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Execution Desk",
+        "dashboard_name": "AM Execution Desk",
+        "activate": true
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 5
+  }
+}

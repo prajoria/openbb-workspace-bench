@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "aggrid",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "The desk needs a production-ready orders and venue quality workflow for an execution analyst. The workspace must cover execution quality by venue. The workspace must cover open execution exceptions. The workspace must cover slippage distribution by venue. Analysts need to inspect venue, fills, slippage percentage. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Execution Room', 'venues', 'Execution Desk Data', 'EDGX'. Use your judgment on the architecture and leave other work intact.",
   "business_terms": [
     "Execution Room",

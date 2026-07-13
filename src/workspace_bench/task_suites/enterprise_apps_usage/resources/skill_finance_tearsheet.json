@@ -1,0 +1,78 @@
+{
+  "id": "skill_finance_tearsheet",
+  "category": "read",
+  "family": "resources",
+  "difficulty": "easy",
+  "prompt": "Use read_workspace_resource with uri openbb://workspace/skills/finance-tearsheet and add a note mentioning valuation.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Resource Review",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_workspace_resource",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_resource_reads": [
+      {
+        "uri": "openbb://workspace/skills/finance-tearsheet",
+        "data_contains": [
+          "Tearsheet workflow"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "valuation"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "read_workspace_resource",
+      "args": {
+        "uri": "openbb://workspace/skills/finance-tearsheet"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Resource Note",
+        "data": "Resource guidance: valuation."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 6
+  }
+}

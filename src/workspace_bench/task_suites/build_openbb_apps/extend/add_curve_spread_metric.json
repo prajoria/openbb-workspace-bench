@@ -3,7 +3,6 @@
   "category": "repair",
   "family": "extend",
   "difficulty": "easy",
-  "split": "train",
   "prompt": "Make the requested backend widget available and working in the current view. Use 'Rates Watch Data' at http://localhost:7803. Repair the existing backend without regressing working content. The experience needs Yield Curve (`yield_curve`, chart) using `/yield-curve` for plotly treasury yield curve snapshot; consume the raw backend payload; 2s10s Spread (`curve_spread_metric`, metric) using `/curve-spread` for current 2s10s spread in bps; cache for 15 minutes. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {

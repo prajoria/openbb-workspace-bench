@@ -3,7 +3,6 @@
   "category": "repair",
   "family": "extend",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "The desk needs a production-ready cases and compliance alerts workflow for a surveillance analyst. The workspace must cover ask questions over the surveillance case corpus. The workspace must cover open alert count. Leave the complete working workspace open for review. Preserve all working content while correcting the requested workflow. Add a short completion note that naturally includes the desk-required terms 'Case Repair Live', 'case repair', 'Surveillance Data', 'Show high severity cases'. Use your judgment on the architecture and leave other work intact.",
   "business_terms": [
     "Case Repair Live",

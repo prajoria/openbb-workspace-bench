@@ -1,0 +1,91 @@
+{
+ "id": "workspace_data_control_center_p3",
+ "category": "read",
+ "family": "workspace_data_control_center",
+ "difficulty": "medium",
+ "prompt": "Summarize usage, export, and prompt-audit activity for the platform owner.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Workspace Data Control Center"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "usage",
+     "prompt-audit",
+     "58.09",
+     "86.66",
+     "34.77"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "workspace_data_control_center_usage_app_usage",
+    "data_args": {
+     "backend": "Research Lake",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "workspace_data_control_center_usage_export_activity",
+    "data_args": {
+     "backend": "Research Lake",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "workspace_data_control_center_ai_access_prompt_audit",
+    "data_args": {
+     "backend": "Research Lake",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Workspace Data Control Center Note",
+    "data": "Summarize usage, export, and prompt-audit activity for the platform owner: usage score is 58.09; activity score is 86.66; audit score is 34.77. Anchors: usage, prompt-audit."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

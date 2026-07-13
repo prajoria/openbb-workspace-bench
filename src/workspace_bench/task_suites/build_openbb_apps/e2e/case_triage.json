@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "e2e",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "A surveillance analyst needs a decision-ready Workspace for cases and compliance alerts. The workspace must cover case owners, priorities, and SLA days. The workspace must cover notes for one surveillance case. Analysts need to inspect case ID, owner, priority, SLA days. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Case Triage', 'Surveillance Data', 'C-1048'. Choose an effective architecture and avoid unrelated changes.",
   "business_terms": [
     "Case Triage",

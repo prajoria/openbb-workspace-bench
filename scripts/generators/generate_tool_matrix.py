@@ -1,6 +1,6 @@
 """Generate the tool coverage reports under runs/reports/.
 
-For every task in both bundled suites, mark which of the 20 Workspace MCP
+For every task in the four bundled simulator suites, mark which of the 20 Workspace MCP
 tools its oracle trace uses -- the ground-truth minimal solution path --
 along with its family and difficulty. The markdown table answers
 "which tools does task N require?"; the JSON feeds the blog's interactive
@@ -13,7 +13,9 @@ import json
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-PACK = REPO / "src/workspace_bench/task_suites/core"
+SMOKE = REPO / "src/workspace_bench/task_suites/smoke"
+APPS_DEFAULT = REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
+PACK = REPO / "src/workspace_bench/task_suites/enterprise_apps_usage"
 BUILD_PACK = REPO / "src/workspace_bench/task_suites/build_openbb_apps"
 OUT_MD = REPO / "runs/reports/tool-coverage-matrix.md"
 OUT_JSON = REPO / "runs/reports/tool-matrix-data.json"
@@ -102,7 +104,9 @@ def rows_for(tasks: list[dict], suite: str) -> list[dict]:
 
 def main() -> None:
     packs = [
-        ("core", load(PACK)),
+        ("smoke", load(SMOKE)),
+        ("enterprise-apps-default", load(APPS_DEFAULT)),
+        ("enterprise-apps-usage", load(PACK)),
         ("build-openbb-apps", load(BUILD_PACK)),
     ]
 

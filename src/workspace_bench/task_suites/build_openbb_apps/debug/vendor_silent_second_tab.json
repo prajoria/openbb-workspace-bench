@@ -4,7 +4,6 @@
   "family": "debug",
   "specification_level": "open-brief",
   "difficulty": "easy",
-  "split": "train",
   "prompt": "An incident in Vendor Recovery Room means the primary view works while a secondary view silently fails to load. Investigate the connected Vendor Repair Data backend, make the smallest in-place repair, and prove the workflow against live data. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Vendor Recovery Room open and add a short verification note that naturally mentions Vendor Recovery Room, Vendor Repair Data, and repair verified.",
   "business_terms": [
     "Vendor Recovery Room",

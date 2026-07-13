@@ -1,0 +1,78 @@
+{
+ "id": "equity_research_workbench_p1",
+ "category": "read",
+ "family": "equity_research_workbench",
+ "difficulty": "medium",
+ "prompt": "Summarize what changed in coverage, estimates, valuation, ownership, and thesis since the last review.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Equity Research Workbench"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "estimates",
+     "valuation",
+     "97.51",
+     "8.1"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "equity_research_workbench_company_consensus_revisions",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "equity_research_workbench_valuation_valuation_assumption_log",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Equity Research Workbench Note",
+    "data": "Summarize what changed in coverage, estimates, valuation, ownership, and thesis since the last review: revisions score is 97.51; log score is 8.1. Anchors: estimates, valuation."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 12
+ }
+}

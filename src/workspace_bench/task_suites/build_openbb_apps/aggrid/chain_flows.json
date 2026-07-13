@@ -4,7 +4,6 @@
   "family": "aggrid",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build a working Workspace experience for a digital-assets analyst covering chain activity and liquidity. The workspace must cover net flows by chain. The workspace must cover current gas price snapshot. Analysts need to inspect chain, inflow USD, outflow USD, net percentage. Leave the complete working workspace open for review. Keep these source-contract anchors: `chain` and `inflow_usd`. Choose the rest of the architecture and avoid unrelated changes.",
   "business_terms": [
     "chain",

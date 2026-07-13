@@ -1,0 +1,66 @@
+{
+  "id": "smoke_read_widget",
+  "category": "read",
+  "family": "read_widget",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "prompt": "Read the seeded Stark Alert Trend widget once.",
+  "business_terms": [],
+  "fixtures": {},
+  "initial_state": {
+    "dashboard": {
+      "name": "Smoke read_widget",
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+          "tab_id": "overview",
+          "data_args": {
+            "severity": "High",
+            "status": "Open",
+            "period": "YTD"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 14
+          }
+        }
+      ],
+      "activate": true
+    }
+  },
+  "allowed_tools": [
+    "read_widget"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "read_widget",
+        "args_contains": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "compliance_surveillance_hub_alerts_alert_trend"
+        }
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "read_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "compliance_surveillance_hub_alerts_alert_trend"
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 1
+  }
+}

@@ -95,7 +95,7 @@ def test_suite_summary_reuses_shared_metrics_with_metadata_slices() -> None:
     }
 
 
-def _write_task(suite_dir: Path, family: str, task_id: str, split: str) -> None:
+def _write_task(suite_dir: Path, family: str, task_id: str) -> None:
     path = suite_dir / family / f"{task_id}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -103,7 +103,6 @@ def _write_task(suite_dir: Path, family: str, task_id: str, split: str) -> None:
             {
                 "id": task_id,
                 "family": family,
-                "split": split,
                 "difficulty": "easy" if task_id == "a" else "hard",
             }
         ),
@@ -133,8 +132,8 @@ def test_significance_compiler_accepts_explicit_runs_and_counts(tmp_path: Path) 
     (suite_dir / "task_suite.json").write_text(
         json.dumps({"content_sha256": "f" * 64}), encoding="utf-8"
     )
-    _write_task(suite_dir, "alpha", "a", "validation")
-    _write_task(suite_dir, "beta", "b", "test")
+    _write_task(suite_dir, "alpha", "a")
+    _write_task(suite_dir, "beta", "b")
     run_dir = tmp_path / "runs"
     run_dir.mkdir()
     a_ref = "build-openbb-apps/alpha/a"

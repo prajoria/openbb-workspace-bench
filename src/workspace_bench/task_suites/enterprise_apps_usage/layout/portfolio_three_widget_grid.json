@@ -1,0 +1,142 @@
+{
+  "id": "portfolio_three_widget_grid",
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "hard",
+  "prompt": "Arrange the three portfolio widgets into a grid: holdings at columns 0-24 rows 0-12, sector exposure at columns 24-40 rows 0-12, and risk metrics full-width below them (40 columns, 8 rows, starting at row 12).",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "portfolio"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Grid Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "holdings_table",
+          "data_args": {},
+          "layout": {
+            "x": 2,
+            "y": 2,
+            "w": 16,
+            "h": 9
+          }
+        },
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "sector_exposure",
+          "data_args": {},
+          "layout": {
+            "x": 6,
+            "y": 13,
+            "w": 16,
+            "h": 9
+          }
+        },
+        {
+          "origin": "Bench Portfolio",
+          "widget_id": "risk_metrics",
+          "data_args": {},
+          "layout": {
+            "x": 10,
+            "y": 24,
+            "w": 16,
+            "h": 9
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget_layout"
+  ],
+  "success": {
+    "required_layouts": [
+      {
+        "widget_uuid": "widget_001",
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 12
+      },
+      {
+        "widget_uuid": "widget_002",
+        "x": 24,
+        "y": 0,
+        "w": 16,
+        "h": 12
+      },
+      {
+        "widget_uuid": "widget_003",
+        "x": 0,
+        "y": 12,
+        "w": 40,
+        "h": 8
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_uuid": "widget_001",
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 12
+      }
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_uuid": "widget_002",
+        "x": 24,
+        "y": 0,
+        "w": 16,
+        "h": 12
+      }
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_uuid": "widget_003",
+        "x": 0,
+        "y": 12,
+        "w": 40,
+        "h": 8
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 6
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "smoke_get_workspace_prompt",
+  "category": "read",
+  "family": "get_workspace_prompt",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "prompt": "Read the Workspace tool-usage prompt once.",
+  "business_terms": [],
+  "fixtures": {},
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_prompt"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "get_workspace_prompt",
+        "args_contains": {
+          "name": "workspace_tool_usage"
+        }
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_prompt",
+      "args": {
+        "name": "workspace_tool_usage"
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 1
+  }
+}

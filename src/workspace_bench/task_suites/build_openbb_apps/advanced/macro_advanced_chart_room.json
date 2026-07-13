@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "advanced",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build a rates strategist a dependable rates and Treasury markets workspace. The workspace must cover market history for treasury futures. The workspace must cover the Treasury yield curve. The workspace must cover current 2s10s spread in bps. Leave the complete working workspace open for review. Decide how best to organize the experience and preserve unrelated work.",
   "fixtures": {},
   "initial_state": {},

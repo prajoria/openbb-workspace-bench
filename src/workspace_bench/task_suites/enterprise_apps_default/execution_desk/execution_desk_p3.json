@@ -1,0 +1,88 @@
+{
+ "id": "execution_desk_p3",
+ "category": "read",
+ "family": "execution_desk",
+ "difficulty": "medium",
+ "prompt": "Draft an end-of-day execution exception report for the PM and COO.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Execution Desk"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "execution",
+     "exception",
+     "167",
+     "202",
+     "215"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "execution_desk_exceptions_rejected_orders",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "execution_desk_exceptions_restricted_list_checks",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "execution_desk_exceptions_surveillance_alerts",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Execution Desk Note",
+    "data": "Draft an end-of-day execution exception report for the PM and COO: orders exception_count is 167; checks exception_count is 202; alerts alert_count is 215. Anchors: execution, exception."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

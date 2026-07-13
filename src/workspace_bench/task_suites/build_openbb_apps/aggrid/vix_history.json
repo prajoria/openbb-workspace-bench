@@ -4,7 +4,6 @@
   "family": "aggrid",
   "specification_level": "explicit",
   "difficulty": "medium",
-  "split": "test",
   "prompt": "Register the backend and place the specified widget on the active dashboard. Use 'Vol Desk Data' at http://localhost:7801. Make the data grid behavior and columns usable. The experience needs VIX History (`vix_history`, table) using `/vix-history` for daily CBOE VIX closes with returns; user controls: Window (`window`, number); columns: date (dateString), close (number), return_pct (number, percent, greenRed). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

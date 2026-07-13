@@ -1,0 +1,148 @@
+{
+  "id": "mixed_equity_three_widget_grid",
+  "category": "single-widget",
+  "family": "layout",
+  "difficulty": "hard",
+  "prompt": "Arrange the three MSFT widgets: price full-width on top (40 columns, 10 rows), then estimates at columns 0-20 and fundamentals at columns 20-40, both 10 rows starting at row 10.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "equities"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Grid Task",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Equities",
+          "widget_id": "price_performance",
+          "data_args": {
+            "symbol": "MSFT"
+          },
+          "layout": {
+            "x": 2,
+            "y": 2,
+            "w": 16,
+            "h": 9
+          }
+        },
+        {
+          "origin": "Bench Equities",
+          "widget_id": "estimate_history",
+          "data_args": {
+            "symbol": "MSFT"
+          },
+          "layout": {
+            "x": 6,
+            "y": 13,
+            "w": 16,
+            "h": 9
+          }
+        },
+        {
+          "origin": "Bench Equities",
+          "widget_id": "fundamental_metrics",
+          "data_args": {
+            "symbol": "MSFT"
+          },
+          "layout": {
+            "x": 10,
+            "y": 24,
+            "w": 16,
+            "h": 9
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "read_widget",
+    "update_widget_layout"
+  ],
+  "success": {
+    "required_layouts": [
+      {
+        "widget_uuid": "widget_001",
+        "x": 0,
+        "y": 0,
+        "w": 40,
+        "h": 10
+      },
+      {
+        "widget_uuid": "widget_002",
+        "x": 0,
+        "y": 10,
+        "w": 20,
+        "h": 10
+      },
+      {
+        "widget_uuid": "widget_003",
+        "x": 20,
+        "y": 10,
+        "w": 20,
+        "h": 10
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_uuid": "widget_001",
+        "x": 0,
+        "y": 0,
+        "w": 40,
+        "h": 10
+      }
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_uuid": "widget_002",
+        "x": 0,
+        "y": 10,
+        "w": 20,
+        "h": 10
+      }
+    },
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "widget_uuid": "widget_003",
+        "x": 20,
+        "y": 10,
+        "w": 20,
+        "h": 10
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 6
+  }
+}

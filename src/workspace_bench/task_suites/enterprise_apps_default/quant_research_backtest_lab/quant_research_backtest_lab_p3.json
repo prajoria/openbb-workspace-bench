@@ -1,0 +1,91 @@
+{
+ "id": "quant_research_backtest_lab_p3",
+ "category": "read",
+ "family": "quant_research_backtest_lab",
+ "difficulty": "medium",
+ "prompt": "Draft the model review memo for PM and risk approval.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Quant Research & Backtest Lab"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "approval",
+     "model",
+     "83.92",
+     "35.41",
+     "0.0342"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "quant_research_backtest_lab_signals_signal_metrics",
+    "data_args": {
+     "model": "Multi-Factor Alpha v4",
+     "period": "YTD",
+     "universe": "US Large Cap"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "quant_research_backtest_lab_backtest_backtest_performance",
+    "data_args": {
+     "model": "Multi-Factor Alpha v4",
+     "period": "YTD",
+     "universe": "US Large Cap"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "quant_research_backtest_lab_risk_model_factor_exposure_table",
+    "data_args": {
+     "model": "Multi-Factor Alpha v4",
+     "period": "YTD",
+     "universe": "US Large Cap"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Quant Research & Backtest Lab Note",
+    "data": "Draft the model review memo for PM and risk approval: metrics value is 83.92; performance score is 35.41; table exposure is 0.0342. Anchors: approval, model."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

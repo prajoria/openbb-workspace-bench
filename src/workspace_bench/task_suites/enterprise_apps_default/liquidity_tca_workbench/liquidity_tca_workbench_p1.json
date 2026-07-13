@@ -1,0 +1,88 @@
+{
+ "id": "liquidity_tca_workbench_p1",
+ "category": "read",
+ "family": "liquidity_tca_workbench",
+ "difficulty": "medium",
+ "prompt": "Recommend execution tactics by order size, volume profile, venue flow, and expected implementation shortfall.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Liquidity & TCA Workbench"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "execution",
+     "shortfall",
+     "21",
+     "40.06",
+     "31.3"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "liquidity_tca_workbench_liquidity_adv_and_order_size",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "liquidity_tca_workbench_liquidity_volume_profile",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "liquidity_tca_workbench_tca_implementation_shortfall",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Liquidity & TCA Workbench Note",
+    "data": "Recommend execution tactics by order size, volume profile, venue flow, and expected implementation shortfall: size order_count is 21; profile score is 40.06; shortfall score is 31.3. Anchors: execution, shortfall."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

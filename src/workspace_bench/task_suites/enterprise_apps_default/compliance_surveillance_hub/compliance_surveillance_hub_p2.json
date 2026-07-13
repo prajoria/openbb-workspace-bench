@@ -1,0 +1,91 @@
+{
+ "id": "compliance_surveillance_hub_p2",
+ "category": "read",
+ "family": "compliance_surveillance_hub",
+ "difficulty": "medium",
+ "prompt": "Identify employee trades or research activity that should be escalated to compliance leadership.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Compliance Surveillance Hub"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "compliance",
+     "leadership",
+     "29.14",
+     "19",
+     "119"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "compliance_surveillance_hub_personal_trading_employee_trades",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "compliance_surveillance_hub_alerts_surveillance_alerts",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Compliance Surveillance Hub Note",
+    "data": "Identify employee trades or research activity that should be escalated to compliance leadership: trades score is 29.14; breaches breach_count is 19; alerts alert_count is 119. Anchors: compliance, leadership."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

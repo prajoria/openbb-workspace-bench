@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "forms",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "The desk needs a production-ready cases and compliance alerts workflow for a surveillance analyst. The workspace must cover escalate a surveillance case to a reviewer. The workspace must cover open alert count. The workspace must cover open surveillance alerts. Analysts need to inspect alert ID, desk, severity, age days. An analyst can choose the relevant business date. The user can enter the required details and submit the workflow. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Case Intake Live', 'case intake', 'Surveillance Data', 'C-1044', 'date'. Use your judgment on the architecture and leave other work intact.",
   "business_terms": [
     "Case Intake Live",

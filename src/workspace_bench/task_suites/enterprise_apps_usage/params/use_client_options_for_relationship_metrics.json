@@ -1,0 +1,115 @@
+{
+  "id": "use_client_options_for_relationship_metrics",
+  "category": "single-widget",
+  "family": "params",
+  "difficulty": "easy",
+  "prompt": "Use get_params_options for Bench Stark Enterprise/client_360_meeting_prep_relationship_metrics parameter client, choose Northstar Endowment, and create that widget with client=Northstar Endowment.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Parameter Options",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "workspace_data_control_center_usage_export_review_queue",
+          "data_args": {},
+          "tab_id": "",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "get_params_options",
+    "create_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_meeting_prep_relationship_metrics",
+        "data_args": {
+          "client": "Northstar Endowment"
+        }
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "workspace_data_control_center_usage_export_review_queue",
+        "data_args": {},
+        "tab_id": "",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "get_params_options",
+        "args_contains": {
+          "widget_id": "client_360_meeting_prep_relationship_metrics",
+          "param_name": "client"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "get_params_options",
+        "data_contains": [
+          "Northstar Endowment"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "get_params_options",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_meeting_prep_relationship_metrics",
+        "param_name": "client"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_meeting_prep_relationship_metrics",
+        "data_args": {
+          "client": "Northstar Endowment"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 6
+  }
+}

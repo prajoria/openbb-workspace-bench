@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "advanced",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build an execution analyst a dependable orders and venue quality workspace. The workspace must cover live order activity. The workspace must cover open execution exceptions. The workspace must cover live open orders blotter. Analysts need to inspect order ID, price, symbol, quantity, status. Large result sets must stay responsive while analysts filter and page through them. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Execution Live Grid', 'live stream', 'Execution Desk Data', 'EDGX'. Decide how best to organize the experience and preserve unrelated work.",
   "business_terms": [
     "Execution Live Grid",

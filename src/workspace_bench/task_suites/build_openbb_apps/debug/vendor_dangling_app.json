@@ -4,7 +4,6 @@
   "family": "debug",
   "specification_level": "partially-specified",
   "difficulty": "easy",
-  "split": "train",
   "prompt": "Restore Vendor Recovery Room for vendor operations analysts: the detail tab opens to an empty space after a retired panel was removed. Work through the existing Vendor Repair Data connection, repair the root cause without replacing healthy content, and run a live-data retest. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Vendor Recovery Room open and add a short verification note that naturally mentions Vendor Recovery Room, Vendor Repair Data, and repair verified.",
   "business_terms": [
     "Vendor Recovery Room",

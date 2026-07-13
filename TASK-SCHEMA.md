@@ -15,7 +15,6 @@ Tasks are strict JSON objects under
 | `category`, `family` | Required workflow kind (`read`, `single-widget`, `dashboard`, `platform`, or `repair`) and generator/verifier family. Neither is inferred from paths or tags. |
 | `specification_level` | Structural prompt level: `explicit`, `partially-specified`, or `open-brief`. Written only when it deviates from the difficulty default (easy→explicit, medium→partially-specified, hard→open-brief). |
 | `difficulty` | Measured `easy`, `medium`, or `hard` reporting label. |
-| `split` | `train`, `validation`, `test`, or private-suite `dev`; otherwise the suite default, then `dev`. |
 | `business_terms` | Optional declared allowlist of genuine verbatim business identifiers in less-specified prompts; omitted when empty. |
 | `prompt` | Analyst-facing instruction. |
 | `fixtures`, `initial_state` | Deterministic backend references and optional seeded dashboards, tabs, widgets, apps, generated widgets, or repair state. |

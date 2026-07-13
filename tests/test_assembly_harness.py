@@ -13,13 +13,11 @@ from _assembly import (  # noqa: E402
     CheckTypePolicy,
     NoveltyPolicy,
     PhrasingSelector,
-    SplitAssigner,
     TaskAssembler,
     build_matrix,
     difficulty_for,
     diversify_generated_widget_proof,
     snap,
-    uniform_four_way_pattern,
 )
 
 
@@ -152,7 +150,7 @@ def test_artifact_and_novelty_policies_share_mechanics_with_suite_prefixes() -> 
     assert task["novelty"].startswith("Unique widgets/task_one exercise using create_widget")
 
 
-def test_task_assembly_split_assignment_and_matrix_are_policy_driven() -> None:
+def test_task_assembly_and_matrix_are_policy_driven() -> None:
     scenarios: list[dict] = []
     counts: dict[tuple[str, str], int] = {}
 
@@ -201,15 +199,8 @@ def test_task_assembly_split_assignment_and_matrix_are_policy_driven() -> None:
             {"id": task_id, "oracle_tool_calls": [{"tool": "noop", "args": {}}]},
         )
 
-    SplitAssigner(uniform_four_way_pattern)(scenarios)
-
     by_id = {task["id"]: task for task in scenarios}
-    assert [by_id[task_id]["split"] for task_id in ("alpha", "bravo", "charlie", "delta")] == [
-        "train",
-        "train",
-        "validation",
-        "test",
-    ]
+    assert sorted(by_id) == ["alpha", "bravo", "charlie", "delta"]
     assert by_id["delta"]["source"] == "test-generator"
     assert by_id["delta"]["tags"] == ["family-sample", "cell1"]
     assert by_id["delta"]["limits"] == {"max_turns": 4}

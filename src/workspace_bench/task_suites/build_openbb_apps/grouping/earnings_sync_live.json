@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "grouping",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "Build an equity-research analyst a dependable earnings and estimates workspace. The workspace must cover street estimate revisions by quarter. The workspace must cover EPS beat and miss history. The workspace must cover preview note for the earnings call. Analysts need to inspect quarter, EPS estimate, revenue estimate billions. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Earnings Sync Live', 'symbol sync', 'Earnings Prep Data', 'MSFT', 'ticker'. Decide how best to organize the experience and preserve unrelated work.",
   "business_terms": [
     "Earnings Sync Live",

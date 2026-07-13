@@ -1,0 +1,91 @@
+{
+ "id": "vendor_dataset_monitor_p1",
+ "category": "read",
+ "family": "vendor_dataset_monitor",
+ "difficulty": "medium",
+ "prompt": "Prepare the vendor SLA report by latency, freshness, validation failures, incidents, and affected fund apps.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Vendor & Dataset Monitor"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "validation",
+     "freshness",
+     "727",
+     "124",
+     "59.16"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "vendor_dataset_monitor_slas_latency_by_feed",
+    "data_args": {
+     "period": "YTD",
+     "status": "Open",
+     "vendor": "FactSet"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "vendor_dataset_monitor_slas_freshness_exceptions",
+    "data_args": {
+     "period": "YTD",
+     "status": "Open",
+     "vendor": "FactSet"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "vendor_dataset_monitor_quality_validation_errors",
+    "data_args": {
+     "period": "YTD",
+     "status": "Open",
+     "vendor": "FactSet"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Vendor & Dataset Monitor Note",
+    "data": "Prepare the vendor SLA report by latency, freshness, validation failures, incidents, and affected fund apps: feed latency_ms is 727; exceptions exception_count is 124; errors score is 59.16. Anchors: validation, freshness."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

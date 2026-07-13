@@ -1,0 +1,92 @@
+{
+ "id": "healthcare_research_dashboard_p2",
+ "category": "read",
+ "family": "healthcare_research_dashboard",
+ "difficulty": "medium",
+ "prompt": "Identify names where clinical probability and commercial revenue scenarios imply a thesis change.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Healthcare Research Dashboard"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "probability",
+     "commercial",
+     "68.96",
+     "93.24",
+     "7.43"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_clinical_clinical_probability_funnel",
+    "data_args": {
+     "period": "YTD",
+     "raw": false,
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_commercial_drug_revenue_bridge",
+    "data_args": {
+     "period": "YTD",
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_commercial_tam_scenarios",
+    "data_args": {
+     "period": "YTD",
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Healthcare Research Dashboard Note",
+    "data": "Identify names where clinical probability and commercial revenue scenarios imply a thesis change: funnel value is 68.96; bridge score is 93.24; scenarios score is 7.43. Anchors: probability, commercial."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

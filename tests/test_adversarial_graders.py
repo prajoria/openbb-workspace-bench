@@ -25,7 +25,7 @@ from workspace_bench.core.runner import TaskRunner, find_task, load_builtin_task
 
 
 CASES = (
-    ("core/backends/add_equities", WRONG_ENDPOINT_DATA),
+    ("enterprise-apps-usage/backends/add_equities", WRONG_ENDPOINT_DATA),
     ("build-openbb-apps/apps/earnings_desk", NEVER_INSTANTIATED),
     ("build-openbb-apps/e2e/case_triage", ONE_WIDGET_MISSING),
     ("build-openbb-apps/charts/earnings_chart_room", INCOMPATIBLE_VALUES),

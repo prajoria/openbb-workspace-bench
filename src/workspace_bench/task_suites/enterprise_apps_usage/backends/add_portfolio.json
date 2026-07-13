@@ -1,0 +1,165 @@
+{
+  "id": "add_portfolio",
+  "category": "dashboard",
+  "family": "backends",
+  "difficulty": "easy",
+  "prompt": "With manage_backends, use operation add and name portfolio to register Bench Portfolio, then list it with operation list.",
+  "fixtures": {
+    "backends": []
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Backend Registration",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "manage_backends"
+  ],
+  "success": {
+    "required_tool_calls": [
+      {
+        "tool": "manage_backends",
+        "args_contains": {
+          "operation": "add"
+        }
+      },
+      {
+        "tool": "manage_backends",
+        "args_contains": {
+          "operation": "list"
+        }
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "manage_backends",
+        "data_contains": [
+          "Bench Portfolio"
+        ]
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "portfolio__holdings_table",
+          "widget_id": "holdings_table",
+          "fields": [
+            "day_return",
+            "market_value",
+            "sector",
+            "symbol",
+            "weight"
+          ],
+          "path": "/holdings",
+          "payload": [
+            {
+              "symbol": "AAPL",
+              "sector": "Technology",
+              "market_value": 220000,
+              "weight": 0.28,
+              "day_return": 0.014
+            },
+            {
+              "symbol": "MSFT",
+              "sector": "Technology",
+              "market_value": 265000,
+              "weight": 0.34,
+              "day_return": 0.011
+            },
+            {
+              "symbol": "NVDA",
+              "sector": "Technology",
+              "market_value": 185000,
+              "weight": 0.24,
+              "day_return": 0.036
+            },
+            {
+              "symbol": "KO",
+              "sector": "Consumer Staples",
+              "market_value": 110000,
+              "weight": 0.14,
+              "day_return": -0.003
+            }
+          ]
+        },
+        {
+          "name": "portfolio__risk_metrics",
+          "widget_id": "risk_metrics",
+          "fields": [
+            "metric",
+            "value"
+          ],
+          "path": "/risk-metrics",
+          "payload": [
+            {
+              "metric": "portfolio_beta",
+              "value": 1.18
+            },
+            {
+              "metric": "one_day_var_95",
+              "value": -18200
+            },
+            {
+              "metric": "top_position_weight",
+              "value": 0.34
+            }
+          ]
+        },
+        {
+          "name": "portfolio__sector_exposure",
+          "widget_id": "sector_exposure",
+          "fields": [
+            "market_value",
+            "sector",
+            "weight"
+          ],
+          "path": "/sector-exposure",
+          "payload": [
+            {
+              "sector": "Technology",
+              "weight": 0.86,
+              "market_value": 670000
+            },
+            {
+              "sector": "Consumer Staples",
+              "weight": 0.14,
+              "market_value": 110000
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "portfolio"
+      }
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 5
+  }
+}

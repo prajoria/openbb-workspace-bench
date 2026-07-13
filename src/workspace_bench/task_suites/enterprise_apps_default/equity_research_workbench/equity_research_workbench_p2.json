@@ -1,0 +1,92 @@
+{
+ "id": "equity_research_workbench_p2",
+ "category": "read",
+ "family": "equity_research_workbench",
+ "difficulty": "medium",
+ "prompt": "Compare internal target price, street range, upside, and valuation sensitivity for the selected ticker.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Equity Research Workbench"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "sensitivity",
+     "valuation",
+     "249629",
+     "80700.4",
+     "27.29"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "equity_research_workbench_coverage_price_target_upside",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "equity_research_workbench_coverage_price_target_history",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "equity_research_workbench_valuation_dcf_sensitivity",
+    "data_args": {
+     "period": "YTD",
+     "raw": false,
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Equity Research Workbench Note",
+    "data": "Compare internal target price, street range, upside, and valuation sensitivity for the selected ticker: upside price_usd is 249629; history price_usd is 80700.4; sensitivity value is 27.29. Anchors: sensitivity, valuation."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

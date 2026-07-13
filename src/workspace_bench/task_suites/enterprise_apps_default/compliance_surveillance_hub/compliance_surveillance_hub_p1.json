@@ -1,0 +1,91 @@
+{
+ "id": "compliance_surveillance_hub_p1",
+ "category": "read",
+ "family": "compliance_surveillance_hub",
+ "difficulty": "medium",
+ "prompt": "Triage open surveillance alerts by severity, age, restricted-list overlap, and audit evidence.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Compliance Surveillance Hub"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "surveillance",
+     "severity",
+     "119",
+     "18.98",
+     "64.75"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "compliance_surveillance_hub_alerts_surveillance_alerts",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "compliance_surveillance_hub_restricted_list_restricted_and_watch_list",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "compliance_surveillance_hub_audit_investigation_evidence",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Compliance Surveillance Hub Note",
+    "data": "Triage open surveillance alerts by severity, age, restricted-list overlap, and audit evidence: alerts alert_count is 119; list score is 18.98; evidence score is 64.75. Anchors: surveillance, severity."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

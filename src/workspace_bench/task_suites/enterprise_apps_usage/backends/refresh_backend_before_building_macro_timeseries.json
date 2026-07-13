@@ -1,0 +1,185 @@
+{
+  "id": "refresh_backend_before_building_macro_timeseries",
+  "category": "dashboard",
+  "family": "backends",
+  "difficulty": "medium",
+  "prompt": "Register Bench Macro with backend name macro, refresh it, then add Bench Macro/macro_timeseries with data_args {\"series\": \"DGS10\"} and document that the backend was refreshed.",
+  "fixtures": {
+    "backends": []
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Backend Refresh Build",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "",
+          "name": ""
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "manage_backends",
+    "get_workspace_snapshot",
+    "list_available_widgets",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_widgets": [
+      {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS10"
+        }
+      }
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "manage_backends",
+        "args_contains": {
+          "operation": "refresh"
+        }
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "refreshed",
+          "Bench Macro"
+        ]
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "no_overlaps": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true,
+      "forbid_invented_widget_ids": true,
+      "max_repeated_snapshots": 1
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    },
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "macro__macro_timeseries",
+          "widget_id": "macro_timeseries",
+          "fields": [
+            "date",
+            "value"
+          ],
+          "path": "/macro-timeseries",
+          "payload": [
+            {
+              "date": "2025-10-31",
+              "value": 4.38
+            },
+            {
+              "date": "2025-11-30",
+              "value": 4.25
+            },
+            {
+              "date": "2025-12-31",
+              "value": 4.12
+            }
+          ]
+        },
+        {
+          "name": "macro__yield_curve",
+          "widget_id": "yield_curve",
+          "fields": [
+            "tenor",
+            "yield"
+          ],
+          "path": "/yield-curve",
+          "payload": [
+            {
+              "tenor": "3M",
+              "yield": 4.02
+            },
+            {
+              "tenor": "2Y",
+              "yield": 3.75
+            },
+            {
+              "tenor": "5Y",
+              "yield": 3.92
+            },
+            {
+              "tenor": "10Y",
+              "yield": 4.16
+            },
+            {
+              "tenor": "30Y",
+              "yield": 4.48
+            }
+          ]
+        }
+      ],
+      "pinned_paths": false
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "add",
+        "name": "macro"
+      }
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "refresh",
+        "backend_id": "backend_001"
+      }
+    },
+    {
+      "tool": "get_workspace_snapshot",
+      "args": {}
+    },
+    {
+      "tool": "list_available_widgets",
+      "args": {
+        "origin": "Bench Macro"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Macro",
+        "widget_id": "macro_timeseries",
+        "data_args": {
+          "series": "DGS10"
+        }
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Backend Note",
+        "data": "Bench Macro backend refreshed before build."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 10
+  }
+}

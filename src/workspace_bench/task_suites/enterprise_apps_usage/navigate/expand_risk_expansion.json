@@ -1,0 +1,127 @@
+{
+  "id": "expand_risk_expansion",
+  "category": "single-widget",
+  "family": "navigate",
+  "difficulty": "medium",
+  "prompt": "Change the active dashboard's name to Risk Command Center; add a new tab named Stress Results; then add a HTML card on the new tab that mentions stress results and says items are pending.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {
+    "dashboard": {
+      "name": "Risk Board",
+      "activate": true,
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "stress_liquidity_lab_stress_tests_risk_snapshot",
+          "data_args": {},
+          "tab_id": "overview",
+          "layout": {
+            "x": 0,
+            "y": 500,
+            "w": 8,
+            "h": 4
+          }
+        }
+      ]
+    }
+  },
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Risk Command Center",
+    "required_tabs": [
+      "overview",
+      "stress-results"
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "html",
+        "data_contains": [
+          "stress results",
+          "pending"
+        ],
+        "tab_id": "stress-results"
+      }
+    ],
+    "required_tool_calls": [
+      {
+        "tool": "manage_navigation_bar",
+        "args_contains": {
+          "operation": "add_tabs"
+        }
+      }
+    ],
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    },
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "stress_liquidity_lab_stress_tests_risk_snapshot",
+        "data_args": {},
+        "tab_id": "overview",
+        "min_count": 1,
+        "max_count": 1
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_dashboard",
+      "args": {
+        "operation": "update",
+        "dashboard_id": "dash_001",
+        "name": "Risk Command Center"
+      }
+    },
+    {
+      "tool": "manage_navigation_bar",
+      "args": {
+        "operation": "add_tabs",
+        "tabs": [
+          {
+            "name": "Stress Results"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "stress-results"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "html",
+        "name": "Tab Note",
+        "data": "<section>Tracking stress results: items are pending review.</section>"
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 7
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "id": "full_vendor_dataset_monitor",
+  "category": "dashboard",
+  "family": "resources",
+  "difficulty": "hard",
+  "prompt": "Read the app-builder index resource at openbb://workspace/app-builder/index, instantiate vendor-dataset-monitor as Vendor Resource Command, navigate to incidents, add widget vendor_dataset_monitor_incidents_incident_log, and add a HTML card mentioning incident log and resource.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "read_workspace_resource",
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace",
+    "get_widget_schema",
+    "create_widget",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Vendor Resource Command",
+    "required_resource_reads": [
+      {
+        "uri": "openbb://workspace/app-builder/index",
+        "data_contains": [
+          "vendor-dataset-monitor"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "vendor_dataset_monitor_incidents_incident_log",
+        "tab_id": "incidents"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "html",
+        "data_contains": [
+          "incident log",
+          "resource"
+        ],
+        "tab_id": "incidents"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0,
+      "must_call_schema_before_create": true
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "read_workspace_resource",
+      "args": {
+        "uri": "openbb://workspace/app-builder/index"
+      }
+    },
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "template_id": "vendor-dataset-monitor",
+        "dashboard_name": "Vendor Resource Command",
+        "activate": true
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "incidents"
+      }
+    },
+    {
+      "tool": "get_widget_schema",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "vendor_dataset_monitor_incidents_incident_log"
+      }
+    },
+    {
+      "tool": "create_widget",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "vendor_dataset_monitor_incidents_incident_log"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "html",
+        "name": "Resource Extension Note",
+        "data": "<section>incident log added from resource guidance.</section>"
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 9
+  }
+}

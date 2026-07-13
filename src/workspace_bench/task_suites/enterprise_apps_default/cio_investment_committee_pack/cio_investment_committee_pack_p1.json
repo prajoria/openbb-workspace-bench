@@ -1,0 +1,88 @@
+{
+ "id": "cio_investment_committee_pack_p1",
+ "category": "read",
+ "family": "cio_investment_committee_pack",
+ "difficulty": "medium",
+ "prompt": "Create the investment committee packet summary with decisions required, allocation changes, capacity, research, and follow-ups.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "CIO / Investment Committee Pack"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "investment",
+     "allocation",
+     "52.01",
+     "40.63",
+     "6.21"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "cio_investment_committee_pack_agenda_decisions_required",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "cio_investment_committee_pack_decisions_follow_ups",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "cio_investment_committee_pack_allocations_capital_allocation",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "CIO / Investment Committee Pack Note",
+    "data": "Create the investment committee packet summary with decisions required, allocation changes, capacity, research, and follow-ups: required value is 52.01; ups score is 40.63; allocation score is 6.21. Anchors: investment, allocation."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

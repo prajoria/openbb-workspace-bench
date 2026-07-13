@@ -8,8 +8,14 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from workspace_bench.core.adversarial import ADVERSARIAL_ARCHETYPES
+from workspace_bench.core.runner import BUILTIN_TASK_SUITES
 
 REPO = Path(__file__).resolve().parents[2]
+TASK_SUITE_ROOT = REPO / "src/workspace_bench/task_suites"
+BUILTIN_SUITE_READMES = {
+    suite: TASK_SUITE_ROOT / package.rsplit(".", 1)[-1] / "README.md"
+    for suite, package in BUILTIN_TASK_SUITES.items()
+}
 
 AUDITED_FILES = (
     REPO / "README.md",
@@ -21,6 +27,7 @@ AUDITED_FILES = (
     REPO / "runs/README.md",
     REPO / "runs/reports/task-catalog.md",
     REPO / "runs/reports/tool-coverage-matrix.md",
+    *BUILTIN_SUITE_READMES.values(),
     *sorted((REPO / "tests").glob("test_*.py")),
 )
 
@@ -75,16 +82,20 @@ ARCHETYPE_COUNT_RE = re.compile(
     r"(?:adversarial(?:-candidate)?\s+)?archetypes?\b",
     re.IGNORECASE,
 )
+SUITE_TASK_COUNT_RE = re.compile(r"^Tasks: (?P<count>\d+)$", re.MULTILINE)
+SUITE_TERMINOLOGY_RE = re.compile(
+    r"\b(?:scenarios?|collections?|tiers?|packs?|authoring)\b", re.IGNORECASE
+)
 
 REQUIRED_FACTS = {
     REPO / "README.md": (
-        "548 task identities",
-        "536 deterministic tasks",
+        "637 task identities",
+        "625 deterministic simulator tasks",
         "12 experimental code tasks",
         f"{ARCHETYPE_COUNT_WORD} archetypes",
     ),
     REPO / "RELEASE_CHECKLIST.md": (
-        "548 tasks",
+        "637 tasks",
         "17/43/176 measured difficulty",
         "60/92/84 specification levels",
     ),
@@ -154,8 +165,37 @@ def audit_release_consistency() -> list[Finding]:
 
     findings: list[Finding] = []
     for path in AUDITED_FILES:
+        if not path.is_file():
+            findings.append(Finding(path, 0, "required release-facing file is missing"))
+            continue
         content = path.read_text(encoding="utf-8")
         findings.extend(audit_text(path, content))
+        if path in BUILTIN_SUITE_READMES.values():
+            for line_number, line in enumerate(content.splitlines(), start=1):
+                if SUITE_TERMINOLOGY_RE.search(line):
+                    findings.append(
+                        Finding(path, line_number, f"non-canonical suite terminology: {line.strip()}")
+                    )
+    for suite, readme in BUILTIN_SUITE_READMES.items():
+        if not readme.is_file():
+            continue
+        content = readme.read_text(encoding="utf-8")
+        match = SUITE_TASK_COUNT_RE.search(content)
+        if match is None:
+            findings.append(Finding(readme, 0, "missing required `Tasks: <N>` line"))
+            continue
+        actual = sum(
+            path.name != "task_suite.json" for path in readme.parent.rglob("*.json")
+        )
+        stated = int(match.group("count"))
+        if stated != actual:
+            findings.append(
+                Finding(
+                    readme,
+                    content[: match.start()].count("\n") + 1,
+                    f"stated task count {stated} does not match {actual} files for {suite}",
+                )
+            )
     for path, required in REQUIRED_FACTS.items():
         content = path.read_text(encoding="utf-8")
         for fact in required:

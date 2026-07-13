@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "e2e",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "A volatility analyst needs a decision-ready Workspace for volatility and derivatives. The workspace must cover implied and realized volatility by tenor. The workspace must cover market history for VIX futures. Analysts need to inspect tenor, iv percentage, realized percentage, as of. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Vol Cockpit', 'Vol Desk Data', '3M'. Choose an effective architecture and avoid unrelated changes.",
   "business_terms": [
     "Vol Cockpit",

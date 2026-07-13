@@ -1,0 +1,91 @@
+{
+ "id": "fund_operations_control_tower_p2",
+ "category": "read",
+ "family": "fund_operations_control_tower",
+ "difficulty": "medium",
+ "prompt": "Prioritize breaks by age, dollar impact, settlement risk, and downstream NAV impact.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Fund Operations Control Tower"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "breaks",
+     "settlement",
+     "1.67",
+     "30.55",
+     "61"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_recons_custodian_breaks",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_recons_break_aging",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_trade_lifecycle_settlement_exceptions",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Fund Operations Control Tower Note",
+    "data": "Prioritize breaks by age, dollar impact, settlement risk, and downstream NAV impact: breaks score is 1.67; aging score is 30.55; exceptions exception_count is 61. Anchors: breaks, settlement."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

@@ -1,0 +1,1165 @@
+{
+  "apps": [],
+  "widgets": {
+    "base64_pdf": {
+      "category": "Other",
+      "description": "Display a PDF file",
+      "endpoint": "files-base64",
+      "gridData": {
+        "h": 20,
+        "w": 20
+      },
+      "name": "Base 64 PDF",
+      "params": [
+        {
+          "description": "Name of the file",
+          "label": "Name",
+          "paramName": "name",
+          "type": "text",
+          "value": "sample.pdf"
+        }
+      ],
+      "type": "pdf"
+    },
+    "chains_highchart": {
+      "category": "Crypto",
+      "description": "Get current TVL of all chains and plot it with Highchart",
+      "endpoint": "chains-highchart",
+      "gridData": {
+        "h": 9,
+        "w": 40
+      },
+      "name": "Chains chart example Highchart",
+      "type": "chart-highcharts"
+    },
+    "chains_plotly": {
+      "category": "Crypto",
+      "description": "Get current TVL of all chains and plot it with Plotly",
+      "endpoint": "chains",
+      "gridData": {
+        "h": 9,
+        "w": 40
+      },
+      "name": "Chains chart example Plotly with raw data",
+      "raw": true,
+      "type": "chart"
+    },
+    "chart_widget_chains_table": {
+      "category": "Crypto",
+      "data": {
+        "table": {
+          "chartView": {
+            "chartType": "bar",
+            "enabled": true
+          },
+          "columnsDefs": [
+            {
+              "chartDataType": "category",
+              "field": "name",
+              "headerName": "Name"
+            },
+            {
+              "field": "tvl",
+              "headerName": "Total Value Locked"
+            },
+            {
+              "chartDataType": "category",
+              "field": "tokenSymbol",
+              "headerName": "Token Symbol"
+            }
+          ],
+          "showAll": false
+        }
+      },
+      "description": "A built in chart widget example",
+      "endpoint": "chains_table",
+      "gridData": {
+        "h": 9,
+        "w": 20
+      },
+      "name": "Chains Chart example",
+      "type": "table"
+    },
+    "coindesk_news": {
+      "description": "Get the latest crypto news from CoinDesk",
+      "endpoint": "/news",
+      "gridData": {
+        "h": 20,
+        "w": 40
+      },
+      "name": "CoinDesk News",
+      "params": [
+        {
+          "description": "The number of news articles to fetch",
+          "label": "Limit",
+          "paramName": "limit",
+          "type": "number",
+          "value": "10"
+        },
+        {
+          "description": "The language of the news articles",
+          "label": "Language",
+          "options": [
+            {
+              "label": "English",
+              "value": "EN"
+            },
+            {
+              "label": "Spanish",
+              "value": "ES"
+            }
+          ],
+          "paramName": "lang",
+          "type": "text",
+          "value": "EN"
+        }
+      ],
+      "source": "coindesk",
+      "type": "newsfeed"
+    },
+    "custom_widget": {
+      "data": {
+        "dataKey": "stocks",
+        "table": {
+          "columnsDefs": [
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "ticker",
+              "formatterFn": "none",
+              "headerName": "Ticker",
+              "maxWidth": 600,
+              "pinned": "left",
+              "renderFn": "titleCase"
+            },
+            {
+              "cellDataType": "text",
+              "chartDataType": "category",
+              "field": "name",
+              "headerName": "Name"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "price",
+              "headerName": "Price",
+              "prefix": "$"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "marketCap",
+              "formatterFn": "none",
+              "headerName": "Market Cap"
+            },
+            {
+              "cellDataType": "number",
+              "chartDataType": "series",
+              "field": "change",
+              "formatterFn": "percent",
+              "headerName": "Change %",
+              "renderFn": "greenRed"
+            }
+          ]
+        }
+      },
+      "description": "A widget to demonstrate custom configuration",
+      "endpoint": "json-data",
+      "name": "Custom Widget Example",
+      "type": "table"
+    },
+    "defi_llama_protocol_details": {
+      "category": "Crypto",
+      "description": "Details for a given protocol",
+      "endpoint": "defi_llama_protocol_details",
+      "gridData": {
+        "h": 9,
+        "w": 20
+      },
+      "name": "Defi Llama Protocol Details",
+      "params": [
+        {
+          "description": "Defi Llama ID of the protocol",
+          "label": "Protocol",
+          "paramName": "protocol_id",
+          "type": "text",
+          "value": "aave"
+        }
+      ],
+      "source": "Defi Llama",
+      "type": "markdown"
+    },
+    "demo_data_ssrm": {
+      "category": "demo-data",
+      "description": "Display demo financial dataset with server-side sorting, filtering, pagination, and grouping with aggregation",
+      "endpoint": "data-ssrm",
+      "gridData": {
+        "h": 16,
+        "w": 24
+      },
+      "name": "Demo Financial Data (SSRM)",
+      "searchCategory": "demo-data",
+      "type": "table_ssrm"
+    },
+    "form_submit_widget": {
+      "category": "forms",
+      "description": "Example of a financial data entry form",
+      "endpoint": "all_forms",
+      "gridData": {
+        "h": 9,
+        "w": 20
+      },
+      "name": "Financial Entry Form",
+      "params": [
+        {
+          "description": "Form example",
+          "endpoint": "form_submit",
+          "inputParams": [
+            {
+              "description": "Client's first name",
+              "label": "First Name",
+              "paramName": "client_first_name",
+              "type": "text",
+              "value": ""
+            },
+            {
+              "description": "Client's last name",
+              "label": "Last Name",
+              "paramName": "client_last_name",
+              "type": "text",
+              "value": ""
+            },
+            {
+              "description": "Selected investment vehicles",
+              "label": "Investment Types",
+              "multiSelect": true,
+              "options": [
+                {
+                  "label": "Stocks",
+                  "value": "stocks"
+                },
+                {
+                  "label": "Bonds",
+                  "value": "bonds"
+                },
+                {
+                  "label": "Mutual Funds",
+                  "value": "mutual_funds"
+                },
+                {
+                  "label": "ETFs",
+                  "value": "etfs"
+                },
+                {
+                  "label": "Real Estate",
+                  "value": "real_estate"
+                },
+                {
+                  "label": "Commodities",
+                  "value": "commodities"
+                },
+                {
+                  "label": "Cryptocurrency",
+                  "value": "cryptocurrency"
+                },
+                {
+                  "label": "Options",
+                  "value": "options"
+                },
+                {
+                  "label": "Futures",
+                  "value": "futures"
+                },
+                {
+                  "label": "Retirement Accounts",
+                  "value": "retirement_accounts"
+                },
+                {
+                  "label": "CDs",
+                  "value": "cds"
+                }
+              ],
+              "paramName": "investment_types",
+              "type": "text",
+              "value": null
+            },
+            {
+              "description": "Client risk tolerance assessment",
+              "label": "Risk Profile",
+              "paramName": "risk_profile",
+              "type": "text",
+              "value": ""
+            },
+            {
+              "description": "Add client record",
+              "label": "Add Client",
+              "paramName": "add_record",
+              "type": "button",
+              "value": true
+            },
+            {
+              "description": "Update client record",
+              "label": "Update Client",
+              "paramName": "update_record",
+              "type": "button",
+              "value": true
+            }
+          ],
+          "paramName": "form",
+          "type": "form"
+        }
+      ],
+      "searchCategory": "form",
+      "type": "table"
+    },
+    "grouping_widgets_historical_chains_table": {
+      "category": "crypto",
+      "description": "Get historical TVL of a chain using Defi LLama",
+      "endpoint": "historical_chains",
+      "gridData": {
+        "h": 9,
+        "w": 20
+      },
+      "name": "Chains Historical table example",
+      "params": [
+        {
+          "description": "Select a chain to get historical TVL",
+          "label": "Chain",
+          "optionsEndpoint": "get_chains_list",
+          "paramName": "chain",
+          "type": "endpoint",
+          "value": "Ethereum"
+        },
+        {
+          "description": "Select a type to get historical TVL",
+          "label": "Type",
+          "options": [
+            {
+              "label": "test1",
+              "value": "test1"
+            },
+            {
+              "label": "test2",
+              "value": "test2"
+            },
+            {
+              "label": "test3",
+              "value": "test3"
+            },
+            {
+              "label": "test4",
+              "value": "test4"
+            }
+          ],
+          "paramName": "test",
+          "type": "text",
+          "value": "all"
+        }
+      ],
+      "searchCategory": "crypto",
+      "type": "table"
+    },
+    "historical_chains_table_advanced_dropdown": {
+      "category": "crypto",
+      "description": "Get historical TVL of a chain using Defi LLama",
+      "endpoint": "historical_chains",
+      "gridData": {
+        "h": 9,
+        "w": 20
+      },
+      "name": "Chains Historical table example with advanced dropdown",
+      "params": [
+        {
+          "description": "Select a chain to get historical TVL",
+          "label": "Chain",
+          "optionsEndpoint": "get_chains_list",
+          "paramName": "chain",
+          "type": "endpoint",
+          "value": "Ethereum"
+        },
+        {
+          "description": "Select a type to get historical TVL",
+          "label": "Type",
+          "options": [
+            {
+              "label": "test1",
+              "value": "test1"
+            },
+            {
+              "label": "test2",
+              "value": "test2"
+            },
+            {
+              "label": "test3",
+              "value": "test3"
+            },
+            {
+              "label": "test4",
+              "value": "test4"
+            }
+          ],
+          "paramName": "test",
+          "type": "text",
+          "value": "all"
+        }
+      ],
+      "searchCategory": "crypto",
+      "type": "table"
+    },
+    "html_binance_ohlc": {
+      "category": "Crypto",
+      "description": "Displays OHLC for a given symbol with real-time updates",
+      "endpoint": "html_binance_ohlc",
+      "gridData": {
+        "h": 14,
+        "w": 40
+      },
+      "name": "Binance OHLC",
+      "params": [
+        {
+          "options": [
+            {
+              "label": "BTCUSDT",
+              "value": "btcusdt"
+            },
+            {
+              "label": "ETHUSDT",
+              "value": "ethusdt"
+            }
+          ],
+          "paramName": "symbol",
+          "value": "BTCUSDT"
+        },
+        {
+          "options": [
+            {
+              "label": "1m",
+              "value": "1m"
+            },
+            {
+              "label": "30m",
+              "value": "30m"
+            }
+          ],
+          "paramName": "interval",
+          "value": "30m"
+        },
+        {
+          "options": [
+            {
+              "label": "BinanceUS",
+              "value": "BinanceUS"
+            },
+            {
+              "label": "Binance Futures",
+              "value": "binancef"
+            }
+          ],
+          "paramName": "exchange",
+          "value": "BinanceUS"
+        }
+      ],
+      "raw": false,
+      "source": "Binance",
+      "type": "html"
+    },
+    "live_grid_example": {
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "field": "symbol",
+              "headerName": "Symbol"
+            },
+            {
+              "field": "price",
+              "headerName": "Price",
+              "renderFn": "showCellChange",
+              "renderFnParams": {
+                "colorValueKey": "change"
+              }
+            },
+            {
+              "field": "change_percent",
+              "headerName": "Change %",
+              "renderFn": "greenRed"
+            },
+            {
+              "enableCellChangeWs": false,
+              "field": "volume",
+              "headerName": "Volume"
+            }
+          ],
+          "showAll": true
+        },
+        "wsRowIdColumn": "symbol"
+      },
+      "description": "Live Grid",
+      "endpoint": "test_websocket",
+      "gridData": {
+        "h": 9,
+        "w": 20
+      },
+      "name": "Live Grid",
+      "params": [
+        {
+          "description": "The symbol to get details for",
+          "label": "Symbol",
+          "multiSelect": true,
+          "options": [
+            {
+              "label": "AAPL",
+              "value": "AAPL"
+            },
+            {
+              "label": "GOOGL",
+              "value": "GOOGL"
+            },
+            {
+              "label": "MSFT",
+              "value": "MSFT"
+            },
+            {
+              "label": "AMZN",
+              "value": "AMZN"
+            },
+            {
+              "label": "TSLA",
+              "value": "TSLA"
+            }
+          ],
+          "paramName": "symbol",
+          "type": "text",
+          "value": "TSLA"
+        }
+      ],
+      "type": "live_grid",
+      "wsEndpoint": "ws"
+    },
+    "llm_widget": {
+      "category": "tools",
+      "description": "Use to query Google's Gemini LLM.",
+      "endpoint": "ask",
+      "gridData": {
+        "h": 9,
+        "w": 20
+      },
+      "name": "Gemini",
+      "params": [
+        {
+          "description": "The prompt to send to the LLM to make queries or ask questions.",
+          "label": "Prompt",
+          "paramName": "prompt",
+          "show": false,
+          "type": "text"
+        }
+      ],
+      "searchCategory": "tools",
+      "type": "omni"
+    },
+    "moving_parameters_example": {
+      "category": "New Category",
+      "description": "Show example of moving parameter positions",
+      "endpoint": "moving_parameters_example",
+      "gridData": {
+        "h": 9,
+        "w": 20
+      },
+      "name": "Moving Parameters Example",
+      "params": [
+        [],
+        [
+          {
+            "description": "I'm a Date Picker!",
+            "label": "Param 1",
+            "paramName": "datePicker1",
+            "type": "date",
+            "value": "$currentDate-1d"
+          },
+          {
+            "description": "I'm a text input box!",
+            "label": "Param 2",
+            "paramName": "textBox1",
+            "type": "text",
+            "value": "Hello!"
+          },
+          {
+            "description": "I'm a True/False selector!",
+            "label": "True/False",
+            "paramName": "TrueFalse",
+            "type": "boolean",
+            "value": true
+          },
+          {
+            "description": "Number of days to look back",
+            "label": "Days",
+            "multiSelect": true,
+            "options": [
+              {
+                "label": "1",
+                "value": "1"
+              },
+              {
+                "label": "5",
+                "value": "5"
+              },
+              {
+                "label": "10",
+                "value": "10"
+              },
+              {
+                "label": "20",
+                "value": "20"
+              },
+              {
+                "label": "30",
+                "value": "30"
+              }
+            ],
+            "paramName": "daysPicker1",
+            "type": "text",
+            "value": "1"
+          }
+        ]
+      ],
+      "searchCategory": "Custom",
+      "type": "table"
+    },
+    "omni_widget": {
+      "category": "General",
+      "description": "A versatile omni widget that can display multiple types of content",
+      "endpoint": "omni-widget",
+      "gridData": {
+        "h": 12,
+        "w": 30
+      },
+      "name": "Basic Omni Widget",
+      "params": [
+        {
+          "description": "The prompt to send to the LLM to make queries or ask questions.",
+          "label": "Prompt",
+          "paramName": "prompt",
+          "show": false,
+          "type": "text"
+        },
+        {
+          "description": "Type of content to return",
+          "label": "Content Type",
+          "options": [
+            {
+              "label": "Markdown",
+              "value": "markdown"
+            },
+            {
+              "label": "Chart",
+              "value": "chart"
+            },
+            {
+              "label": "Table",
+              "value": "table"
+            }
+          ],
+          "paramName": "type",
+          "show": true,
+          "type": "text"
+        }
+      ],
+      "type": "omni"
+    },
+    "omni_widget_with_citations": {
+      "category": "General",
+      "description": "An omni widget that includes citation information for data tracking",
+      "endpoint": "omni-widget-with-citations",
+      "gridData": {
+        "h": 15,
+        "w": 30
+      },
+      "name": "Omni Widget with Citations",
+      "params": [
+        {
+          "description": "The prompt to send to the LLM to make queries or ask questions.",
+          "label": "Prompt",
+          "paramName": "prompt",
+          "show": false,
+          "type": "text"
+        },
+        {
+          "description": "Type of content to return",
+          "label": "Content Type",
+          "options": [
+            {
+              "label": "Markdown",
+              "value": "markdown"
+            },
+            {
+              "label": "Chart",
+              "value": "chart"
+            },
+            {
+              "label": "Table",
+              "value": "table"
+            }
+          ],
+          "paramName": "type",
+          "show": true,
+          "type": "text"
+        },
+        {
+          "description": "Include metadata in response",
+          "label": "Include Metadata",
+          "paramName": "include_metadata",
+          "show": true,
+          "type": "boolean",
+          "value": true
+        }
+      ],
+      "type": "omni"
+    },
+    "parameters_example_historical_chains_table": {
+      "category": "crypto",
+      "description": "Get historical TVL of a chain using Defi LLama",
+      "endpoint": "historical_chains",
+      "gridData": {
+        "h": 9,
+        "w": 20
+      },
+      "name": "Chains Historical table example",
+      "params": [
+        {
+          "description": "Select a chain to get historical TVL11",
+          "label": "Chain",
+          "optionsEndpoint": "get_chains_list",
+          "paramName": "chain",
+          "style": {
+            "popupWidth": 950
+          },
+          "type": "endpoint",
+          "value": "Ethereum"
+        },
+        {
+          "description": "Select a chain to get historical TVL22",
+          "label": "Chain",
+          "optionsEndpoint": "get_chains_list_advanced",
+          "paramName": "chain2",
+          "style": {
+            "popupWidth": 200
+          },
+          "type": "endpoint",
+          "value": "Ethereum"
+        },
+        {
+          "description": "I'm a Ticker Picker!",
+          "label": "Ticker",
+          "paramName": "tickerPicker",
+          "type": "ticker",
+          "value": "AAPL"
+        }
+      ],
+      "searchCategory": "crypto",
+      "type": "table"
+    },
+    "show_example_params": {
+      "category": "New Category",
+      "description": "Show example param options",
+      "endpoint": "show_example_params",
+      "gridData": {
+        "h": 9,
+        "w": 20
+      },
+      "name": "Example Backend Params",
+      "params": [
+        {
+          "description": "I'm a Date Picker!",
+          "label": "Param 1",
+          "paramName": "datePicker1",
+          "type": "date",
+          "value": "$currentDate-1d"
+        },
+        {
+          "description": "I'm a text input box!",
+          "label": "Param 2",
+          "paramName": "textBox1",
+          "type": "text",
+          "value": "Hello!"
+        },
+        {
+          "description": "I'm a text input box!",
+          "editable": true,
+          "label": "Param 2",
+          "paramName": "textBox2",
+          "type": "text",
+          "value": "var1,var2,var3"
+        },
+        {
+          "description": "I'm a True/False selector!",
+          "label": "True/False",
+          "paramName": "TrueFalse",
+          "type": "boolean",
+          "value": true
+        },
+        {
+          "description": "Number of days to look back",
+          "label": "Days",
+          "multiSelect": true,
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "5",
+              "value": "5"
+            },
+            {
+              "label": "10",
+              "value": "10"
+            },
+            {
+              "label": "20",
+              "value": "20"
+            },
+            {
+              "label": "30",
+              "value": "30"
+            }
+          ],
+          "paramName": "daysPicker1",
+          "type": "text",
+          "value": "1"
+        }
+      ],
+      "searchCategory": "Custom",
+      "type": "table"
+    },
+    "table_widget_chains_table": {
+      "description": "Get current TVL of all chains using Defi LLama",
+      "endpoint": "chains_table",
+      "name": "Top 100 Chains by TVL",
+      "type": "table"
+    },
+    "tabs_dynamic_columns": {
+      "category": "Tabs Examples",
+      "description": "Columns CHANGE when switching tabs. Each tab returns different metrics with random data. No columnsDefs defined - columns auto-generate from data.",
+      "endpoint": "financial_ratios_dynamic",
+      "gridData": {
+        "h": 12,
+        "w": 45
+      },
+      "name": "[MOCK DATA] Tabs with Dynamic Columns",
+      "params": [
+        {
+          "description": "Select the financial ratio category - each tab shows DIFFERENT columns",
+          "label": "Ratio Category",
+          "options": [
+            {
+              "label": "Liquidity",
+              "value": "liquidity"
+            },
+            {
+              "label": "Efficiency",
+              "value": "efficiency"
+            },
+            {
+              "label": "Profitability",
+              "value": "profitability"
+            },
+            {
+              "label": "Leverage",
+              "value": "leverage"
+            }
+          ],
+          "paramName": "category",
+          "type": "tabs",
+          "value": "liquidity"
+        }
+      ],
+      "searchCategory": "Custom",
+      "type": "table"
+    },
+    "tabs_static_columns": {
+      "category": "Tabs Examples",
+      "data": {
+        "table": {
+          "columnsDefs": [
+            {
+              "field": "symbol",
+              "headerName": "Symbol",
+              "pinned": "left"
+            },
+            {
+              "field": "company",
+              "headerName": "Company"
+            },
+            {
+              "field": "category",
+              "headerName": "Selected Category"
+            },
+            {
+              "field": "metric_1",
+              "headerName": "Metric 1"
+            },
+            {
+              "field": "metric_2",
+              "headerName": "Metric 2"
+            },
+            {
+              "field": "metric_3",
+              "headerName": "Metric 3"
+            }
+          ]
+        }
+      },
+      "description": "Same columns for ALL tabs - only data values change. Uses fixed columnsDefs.",
+      "endpoint": "financial_ratios_static",
+      "gridData": {
+        "h": 12,
+        "w": 40
+      },
+      "name": "[MOCK DATA] Tabs with Static Columns",
+      "params": [
+        {
+          "description": "Select category - columns stay the same, only values change",
+          "label": "Category",
+          "options": [
+            {
+              "label": "Liquidity",
+              "value": "liquidity"
+            },
+            {
+              "label": "Efficiency",
+              "value": "efficiency"
+            },
+            {
+              "label": "Profitability",
+              "value": "profitability"
+            },
+            {
+              "label": "Leverage",
+              "value": "leverage"
+            }
+          ],
+          "paramName": "category",
+          "type": "tabs",
+          "value": "liquidity"
+        }
+      ],
+      "searchCategory": "Custom",
+      "type": "table"
+    },
+    "tabs_with_dropdown": {
+      "category": "Tabs Examples",
+      "description": "Example showing tabs combined with a dropdown parameter. Tabs control the category (changes columns), dropdown controls the period.",
+      "endpoint": "comparison_with_period",
+      "gridData": {
+        "h": 14,
+        "w": 50
+      },
+      "name": "[MOCK DATA] Tabs + Dropdown Combined",
+      "params": [
+        {
+          "description": "Select the reporting period",
+          "label": "Period",
+          "options": [
+            {
+              "label": "Annual",
+              "value": "annual"
+            },
+            {
+              "label": "Quarterly",
+              "value": "quarterly"
+            }
+          ],
+          "paramName": "period",
+          "type": "text",
+          "value": "annual"
+        },
+        {
+          "description": "Select the financial ratio category - columns change per tab",
+          "label": "Category",
+          "options": [
+            {
+              "label": "Liquidity",
+              "value": "liquidity"
+            },
+            {
+              "label": "Efficiency",
+              "value": "efficiency"
+            },
+            {
+              "label": "Profitability",
+              "value": "profitability"
+            },
+            {
+              "label": "Leverage",
+              "value": "leverage"
+            }
+          ],
+          "paramName": "category",
+          "type": "tabs",
+          "value": "liquidity"
+        }
+      ],
+      "searchCategory": "Custom",
+      "type": "table"
+    },
+    "test_metric": {
+      "category": "Test",
+      "description": "A metric widget example",
+      "endpoint": "test_metric",
+      "gridData": {
+        "h": 5,
+        "w": 5
+      },
+      "name": "Metric Widget",
+      "type": "metric"
+    },
+    "udf_kraken": {
+      "category": "Finance",
+      "data": {
+        "defaultSymbol": "XBTUSDC",
+        "updateFrequency": 60000
+      },
+      "description": "Advanced charting for Kraken, historical data from any Kraken asset",
+      "endpoint": "/udf",
+      "gridData": {
+        "h": 20,
+        "w": 20
+      },
+      "name": "Advanced Charting - Kraken",
+      "type": "advanced_charting"
+    },
+    "url_pdf": {
+      "category": "Other",
+      "description": "Display a PDF file",
+      "endpoint": "files-url",
+      "gridData": {
+        "h": 20,
+        "w": 20
+      },
+      "name": "URL PDF files",
+      "params": [
+        {
+          "description": "Name of the file",
+          "label": "Name",
+          "options": [
+            {
+              "label": "OpenBB Story",
+              "value": "openbb-story.pdf"
+            },
+            {
+              "label": "Sample",
+              "value": "sample.pdf"
+            }
+          ],
+          "paramName": "name",
+          "value": "openbb-story.pdf"
+        }
+      ],
+      "type": "pdf"
+    },
+    "vega_bar_demo": {
+      "category": "Demo",
+      "description": "A minimal Vega-Lite bar chart to validate the chart-vegalite widget type.",
+      "endpoint": "vega_bar",
+      "gridData": {
+        "h": 12,
+        "w": 20
+      },
+      "name": "Vega-Lite Bar Demo",
+      "source": [
+        "Vega-Lite Demo"
+      ],
+      "subCategory": "Vega-Lite",
+      "type": "chart-vegalite"
+    },
+    "vega_line_demo": {
+      "category": "Demo",
+      "description": "Time-series line chart rendered from a Vega-Lite spec.",
+      "endpoint": "vega_line",
+      "gridData": {
+        "h": 12,
+        "w": 20
+      },
+      "name": "Vega-Lite Line Demo",
+      "source": [
+        "Vega-Lite Demo"
+      ],
+      "subCategory": "Vega-Lite",
+      "type": "chart-vegalite"
+    },
+    "vega_scatter_demo": {
+      "category": "Demo",
+      "description": "Scatter plot with 200 points rendered from a Vega-Lite spec.",
+      "endpoint": "vega_scatter",
+      "gridData": {
+        "h": 12,
+        "w": 20
+      },
+      "name": "Vega-Lite Scatter Demo",
+      "source": [
+        "Vega-Lite Demo"
+      ],
+      "subCategory": "Vega-Lite",
+      "type": "chart-vegalite"
+    },
+    "whitepapers": {
+      "description": "A collection of crypto whitepapers.",
+      "endpoint": "/whitepapers/base64",
+      "gridData": {
+        "h": 10,
+        "w": 40
+      },
+      "name": "Whitepapers",
+      "params": [
+        {
+          "description": "Whitepaper filenames.",
+          "label": "Filenames",
+          "multiSelect": true,
+          "optionsEndpoint": "/options",
+          "optionsParams": {
+            "category": "$category"
+          },
+          "paramName": "filenames",
+          "roles": [
+            "fileSelector"
+          ],
+          "show": false,
+          "type": "endpoint",
+          "value": [
+            "bitcoin.pdf"
+          ]
+        },
+        {
+          "description": "Category of whitepaper to fetch.",
+          "label": "Category",
+          "options": [
+            {
+              "label": "All",
+              "value": "all"
+            },
+            {
+              "label": "L1",
+              "value": "l1"
+            },
+            {
+              "label": "L2",
+              "value": "l2"
+            },
+            {
+              "label": "Oracles",
+              "value": "oracles"
+            },
+            {
+              "label": "Defi",
+              "value": "defi"
+            }
+          ],
+          "paramName": "category",
+          "type": "text",
+          "value": "all"
+        }
+      ],
+      "type": "multi_file_viewer"
+    }
+  }
+}

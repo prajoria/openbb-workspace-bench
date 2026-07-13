@@ -29,7 +29,6 @@ def task_summary(task: Task) -> dict[str, Any]:
         "category": task.category,
         "specification_level": task.specification_level,
         "difficulty": task.difficulty,
-        "split": task.split,
         "fixtures": [backend.name for backend in task.fixtures],
         "oracle_tool_call_count": len(task.oracle_tool_calls),
         "code_task": task.code_task is not None,
@@ -44,7 +43,6 @@ def result_summary(result: RunResult) -> dict[str, Any]:
         "family": result.task.family,
         "specification_level": result.task.specification_level,
         "difficulty": result.task.difficulty,
-        "split": result.task.split,
         **grade_summary(result.grade),
     }
 
@@ -134,7 +132,6 @@ def build_manifest(
         "categories": sorted({task.category for task in tasks}),
         "specification_levels": sorted({task.specification_level for task in tasks}),
         "difficulties": sorted({task.difficulty for task in tasks}),
-        "splits": sorted({task.split for task in tasks}),
         "tasks": [task_summary(task) for task in tasks],
     }
     if task_suite:
@@ -142,7 +139,6 @@ def build_manifest(
             "suite_id": task_suite.suite_id,
             "content_sha256": task_suite.content_sha256,
             "visibility": task_suite.visibility,
-            "default_split": task_suite.default_split,
             "description": task_suite.description,
         }
     return payload
@@ -195,7 +191,6 @@ def render_markdown_report(report: dict[str, Any]) -> str:
         f"- Categories: {', '.join(manifest['categories'])}",
         f"- Specification levels: {', '.join(manifest['specification_levels'])}",
         f"- Difficulties: {', '.join(manifest['difficulties'])}",
-        f"- Splits: {', '.join(manifest['splits'])}",
         "",
         "## Baselines",
         "",
@@ -214,8 +209,8 @@ def render_markdown_report(report: dict[str, Any]) -> str:
             "",
             "## Task Results",
             "",
-            "| Task | Split | Category | Specification | Difficulty | Oracle | Noop |",
-            "| --- | --- | --- | --- | --- | ---: | ---: |",
+            "| Task | Category | Specification | Difficulty | Oracle | Noop |",
+            "| --- | --- | --- | --- | ---: | ---: |",
         ]
     )
     noop_by_id = {result["id"]: result for result in report["noop_results"]}
@@ -223,7 +218,7 @@ def render_markdown_report(report: dict[str, Any]) -> str:
         noop_result = noop_by_id[oracle_result["id"]]
         lines.append(
             "| "
-            f"{oracle_result['id']} | {oracle_result['split']} | "
+            f"{oracle_result['id']} | "
             f"{oracle_result['category']} | "
             f"{oracle_result['specification_level']} | {oracle_result['difficulty']} | "
             f"{oracle_result['score']:.3f} | {noop_result['score']:.3f} |"
@@ -246,7 +241,6 @@ def write_trace_artifacts(
             "family": result.task.family,
             "category": result.task.category,
             "difficulty": result.task.difficulty,
-            "split": result.task.split,
         }
         task_payload["prompt_redacted" if redact_prompts else "prompt"] = (
             True if redact_prompts else result.task.prompt

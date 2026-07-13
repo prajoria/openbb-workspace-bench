@@ -1,0 +1,91 @@
+{
+ "id": "rebalance_scenario_lab_p1",
+ "category": "read",
+ "family": "rebalance_scenario_lab",
+ "difficulty": "medium",
+ "prompt": "Draft a rebalance recommendation that balances target drift, liquidity cost, restricted-list checks, and scenario downside.",
+ "fixtures": {
+  "backends": [
+   {
+    "name": "stark-enterprise"
+   }
+  ]
+ },
+ "initial_state": {
+  "active_dashboard": "Rebalance & Scenario Lab"
+ },
+ "allowed_tools": [
+  "get_workspace_snapshot",
+  "navigate_workspace",
+  "get_widget_data",
+  "read_widget",
+  "add_generative_widget"
+ ],
+ "success": {
+  "required_generated_widgets": [
+   {
+    "widget_type": "note",
+    "data_contains": [
+     "rebalance",
+     "drift",
+     "0.0471",
+     "10.55",
+     "31.12"
+    ]
+   }
+  ]
+ },
+ "oracle_tool_calls": [
+  {
+   "tool": "get_workspace_snapshot",
+   "args": {}
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "rebalance_scenario_lab_drift_current_vs_target_weights",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "rebalance_scenario_lab_rebalance_liquidity_impact",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "rebalance_scenario_lab_rebalance_restricted_list_checks",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "add_generative_widget",
+   "args": {
+    "widget_type": "note",
+    "name": "Rebalance & Scenario Lab Note",
+    "data": "Draft a rebalance recommendation that balances target drift, liquidity cost, restricted-list checks, and scenario downside: weights weight is 0.0471; impact score is 10.55; checks score is 31.12. Anchors: rebalance, drift."
+   }
+  }
+ ],
+ "limits": {
+  "max_turns": 14
+ }
+}

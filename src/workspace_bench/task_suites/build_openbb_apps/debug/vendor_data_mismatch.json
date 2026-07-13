@@ -3,7 +3,6 @@
   "category": "repair",
   "family": "debug",
   "difficulty": "medium",
-  "split": "validation",
   "prompt": "Restore Vendor Recovery Room for vendor operations analysts: the overview loads but a declared analyst field is absent. Work through the existing Vendor Repair Data connection, repair the root cause without replacing healthy content, and run a live-data retest. Keep the Operations Handbook, the archive workspace, and every unrelated app byte-for-byte unchanged. Leave Vendor Recovery Room open and add a short verification note that naturally mentions Vendor Recovery Room, Vendor Repair Data, and repair verified.",
   "business_terms": [
     "Vendor Recovery Room",

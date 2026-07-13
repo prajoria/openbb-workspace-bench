@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "grouping",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "The desk needs a production-ready earnings and estimates workflow for an equity-research analyst. The workspace must cover preview HTML card for the earnings call. The workspace must cover street estimate revisions by quarter. The workspace must cover EPS beat and miss history. Analysts need to inspect quarter, EPS estimate, revenue estimate billions. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Add a short completion HTML card that naturally includes the desk-required terms 'Preview Sync Live', 'preview sync', 'Earnings Prep Data', 'AAPL', 'ticker'. Use your judgment on the architecture and leave other work intact.",
   "business_terms": [
     "Preview Sync Live",

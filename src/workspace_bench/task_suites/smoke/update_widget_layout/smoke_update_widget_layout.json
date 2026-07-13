@@ -1,0 +1,72 @@
+{
+  "id": "smoke_update_widget_layout",
+  "category": "single-widget",
+  "family": "update_widget_layout",
+  "specification_level": "explicit",
+  "difficulty": "easy",
+  "prompt": "Resize the seeded Stark Alert Trend widget to 20 by 10.",
+  "business_terms": [],
+  "fixtures": {},
+  "initial_state": {
+    "dashboard": {
+      "name": "Smoke update_widget_layout",
+      "tabs": [
+        {
+          "id": "overview",
+          "name": "Overview"
+        }
+      ],
+      "widgets": [
+        {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+          "tab_id": "overview",
+          "data_args": {
+            "severity": "High",
+            "status": "Open",
+            "period": "YTD"
+          },
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 20,
+            "h": 14
+          }
+        }
+      ],
+      "activate": true
+    }
+  },
+  "allowed_tools": [
+    "update_widget_layout"
+  ],
+  "success": {
+    "required_layouts": [
+      {
+        "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+        "tab_id": "overview",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 10
+      }
+    ]
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "update_widget_layout",
+      "args": {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 10,
+        "tab_id": "overview"
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 1
+  }
+}

@@ -4,7 +4,6 @@
   "family": "forms",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "test",
   "prompt": "Build a working Workspace experience for a vendor-operations manager covering vendor service levels. The workspace must cover submit a new vendor record into the SLA register. The workspace must cover vendor SLA state with breach flags. Analysts need to inspect vendor, status, latency milliseconds, breach. An analyst can adjust the relevant numeric scope. The user can enter the required details and submit the workflow. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Keep these source-contract anchors: `intake` and `vendor`. Choose the rest of the architecture and avoid unrelated changes.",
   "business_terms": [
     "intake",

@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "settings",
   "difficulty": "easy",
-  "split": "test",
   "prompt": "Make the requested backend widget available and working in the current view. Use 'Vol Desk Data' at http://localhost:7801. Implement the requested runtime and refresh behavior. The experience needs Vol Regime (`vol_regime_metric`, metric) using `/vol-regime` for current volatility regime score; cache for 15 minutes; run on demand. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
   "fixtures": {},
   "initial_state": {},

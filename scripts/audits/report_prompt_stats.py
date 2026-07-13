@@ -20,11 +20,30 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 SUITES = {
-    "core": REPO / "src/workspace_bench/task_suites/core",
+    "smoke": REPO / "src/workspace_bench/task_suites/smoke",
+    "enterprise-apps-default": (
+        REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
+    ),
+    "enterprise-apps-usage": REPO / "src/workspace_bench/task_suites/enterprise_apps_usage",
     "build-openbb-apps": (REPO / "src/workspace_bench/task_suites/build_openbb_apps"),
+    "build-openbb-backends": (
+        REPO / "src/workspace_bench/task_suites/build_openbb_backends"
+    ),
 }
-EXPECTED_TASKS = {"core": 300, "build-openbb-apps": 236}
-PROMPT_WORD_CAPS = {"core": 350, "build-openbb-apps": 180}
+EXPECTED_TASKS = {
+    "smoke": 20,
+    "enterprise-apps-default": 69,
+    "enterprise-apps-usage": 300,
+    "build-openbb-apps": 236,
+    "build-openbb-backends": 12,
+}
+PROMPT_WORD_CAPS = {
+    "smoke": 100,
+    "enterprise-apps-default": 1_000,
+    "enterprise-apps-usage": 350,
+    "build-openbb-apps": 180,
+    "build-openbb-backends": 350,
+}
 BUILD_SPECIFICATION_LEVEL_COUNTS = {
     "explicit": 60,
     "partially-specified": 92,
@@ -65,12 +84,13 @@ def suite_stats(suite_dir: Path) -> dict:
             for task in tasks
             if task.get("difficulty") == difficulty
         ]
-        by_difficulty[difficulty] = {
-            "tasks": len(counts),
-            "prompt_words_min": min(counts),
-            "prompt_words_median": int(statistics.median(counts)),
-            "prompt_words_max": max(counts),
-        }
+        if counts:
+            by_difficulty[difficulty] = {
+                "tasks": len(counts),
+                "prompt_words_min": min(counts),
+                "prompt_words_median": int(statistics.median(counts)),
+                "prompt_words_max": max(counts),
+            }
     by_specification_level = {}
     for level in ("explicit", "partially-specified", "open-brief"):
         counts = [

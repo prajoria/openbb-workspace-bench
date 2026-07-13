@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "charts",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "The desk needs a production-ready clinical catalysts and pipelines workflow for a healthcare-research analyst. The workspace must cover distribution of pipeline phase mix. The workspace must cover upcoming clinical trial readouts. The workspace must cover catalysts in the next 30 days. Analysts need to inspect ticker, phase, readout date. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Use your judgment on the architecture and leave other work intact.",
   "business_terms": [
     "ticker"

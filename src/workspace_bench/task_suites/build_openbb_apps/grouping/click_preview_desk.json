@@ -4,7 +4,6 @@
   "family": "grouping",
   "specification_level": "partially-specified",
   "difficulty": "hard",
-  "split": "train",
   "prompt": "Build a working Workspace experience for an equity-research analyst covering earnings and estimates. The workspace must cover preview rows whose symbol cell syncs the app. The workspace must cover preview note for the earnings call. Analysts need to inspect symbol, revision percentage. An analyst can filter the analysis by ticker. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Keep these source-contract anchors: `symbol` and `revision_pct`. Choose the rest of the architecture and avoid unrelated changes.",
   "business_terms": [
     "symbol",

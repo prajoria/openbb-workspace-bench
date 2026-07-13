@@ -1,0 +1,101 @@
+{
+  "id": "note_reporting_factsheet_studio",
+  "category": "platform",
+  "family": "apps",
+  "difficulty": "medium",
+  "prompt": "Create a new dashboard named Factsheet Control by instantiating the Reporting & Factsheet Studio app from the Bench Stark Enterprise backend, then add a note on the Factsheets tab mentioning factsheet and distribution.",
+  "fixtures": {
+    "backends": [
+      {
+        "name": "stark-enterprise"
+      }
+    ]
+  },
+  "initial_state": {},
+  "allowed_tools": [
+    "get_workspace_snapshot",
+    "manage_backends",
+    "manage_apps",
+    "navigate_workspace",
+    "add_generative_widget"
+  ],
+  "success": {
+    "required_dashboard_name_contains": "Factsheet Control",
+    "required_tabs": [
+      "overview",
+      "commentary",
+      "ddqs",
+      "factsheets"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "reporting_factsheet_studio_commentary_approved_commentary_library",
+        "tab_id": "commentary",
+        "min_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "reporting_factsheet_studio_ddqs_ddq_and_rfp_tracker",
+        "tab_id": "ddqs",
+        "min_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "data_contains": [
+          "factsheet",
+          "distribution"
+        ],
+        "tab_id": "factsheets"
+      }
+    ],
+    "layout": {
+      "within_grid": true,
+      "grid_width": 40
+    },
+    "trace_checks": {
+      "max_invalid_tool_calls": 0
+    },
+    "workspace_checks": {
+      "preserve_other_dashboards": true
+    }
+  },
+  "oracle_tool_calls": [
+    {
+      "tool": "manage_backends",
+      "args": {
+        "operation": "list"
+      }
+    },
+    {
+      "tool": "manage_apps",
+      "args": {
+        "operation": "instantiate",
+        "backend_id": "backend_001",
+        "app_name": "Reporting & Factsheet Studio",
+        "dashboard_name": "Factsheet Control",
+        "activate": true
+      }
+    },
+    {
+      "tool": "navigate_workspace",
+      "args": {
+        "operation": "tab",
+        "tab_id": "factsheets"
+      }
+    },
+    {
+      "tool": "add_generative_widget",
+      "args": {
+        "widget_type": "note",
+        "name": "Brief Note",
+        "data": "Factsheet preview done; distribution status pending."
+      }
+    }
+  ],
+  "limits": {
+    "max_turns": 7
+  }
+}

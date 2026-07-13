@@ -3,7 +3,6 @@
   "category": "platform",
   "family": "settings",
   "difficulty": "hard",
-  "split": "validation",
   "prompt": "The desk needs a production-ready rates and Treasury markets workflow for a rates strategist. The workspace must cover current 2s10s spread in bps. The workspace must cover desk commentary on the rates day. The workspace must cover the Treasury yield curve. Leave the complete working workspace open for review. Add a short completion note that naturally includes the desk-required terms 'Rates Config Live', 'Macro category', 'Rates Watch Data', '5s30s'. Use your judgment on the architecture and leave other work intact.",
   "business_terms": [
     "Rates Config Live",
