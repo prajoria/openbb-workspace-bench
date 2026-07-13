@@ -33,7 +33,8 @@
      "20.04"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,39 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_compliance_compliance_follow_ups",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_notes_follow_ups",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Corporate Access & Meeting Notes Note",
-    "data": "Create a pre-meeting brief with prior claims, open follow-ups, expert-call context, and MNPI controls: tracker score is 21.22; calls score is 4.24; status score is 20.04. Anchors: MNPI, follow-ups."
+    "data": "The pre‑meeting brief for Flagship Long/Short carries forward the open management‑claims score of 21.22 and the expert‑calls score of 4.24, both from widget Management Claims Tracker and Expert Calls respectively. MNPI attestation status is 20.04 from widget MNPI Attestation Status, so compliance clearance cannot be assumed until the attestation is resolved. Explicit follow‑ups are required for the open management‑claims item: a detailed explanation of the 0.0358 change and confirmation that the claim has been verified by senior analysts. Additional open follow‑ups come from Compliance Follow‑Ups (score 57.19) and Notes Follow‑Ups (score 37.51), which must also be addressed before proceeding. The brief states that research distribution will be withheld until MNPI attestation and all follow‑up items are closed, keeping the conclusion conditional on reconciliation of these open elements while retaining follow‑ups as source evidence, while retaining follow-ups as source evidence."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 18
  }
 }

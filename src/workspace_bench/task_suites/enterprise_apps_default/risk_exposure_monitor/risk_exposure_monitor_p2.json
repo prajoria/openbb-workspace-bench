@@ -33,7 +33,8 @@
      "0.0833"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,27 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "risk_exposure_monitor_exposures_issuer_concentration",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Risk & Exposure Monitor Note",
-    "data": "Identify positions contributing disproportionate marginal VaR or stress P&L relative to their portfolio weight: contribution exposure is 0.0187; var var_usd is -56000; table exposure is 0.0833. Anchors: positions, VaR."
+    "data": "Screening positions for disproportionate marginal VaR or stress P&L against weight: the served rows cannot attribute either measure to individual positions. Marginal VaR of -56000 USD, the position-risk-contribution exposure of 0.0187, and the exposure-table reading of 0.0833 are all fund-level Flagship Long/Short rows with no security identifiers, and stress P&L is served only as a portfolio series. The issuer-concentration widget names AAPL at 0.0359, but that is a weight reading, not a VaR or stress attribution, so it cannot support a disproportionality call. No position can be identified from this data; a per-position extract joining weight, marginal VaR, and stress P&L is required to complete the screen."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 16
  }
 }

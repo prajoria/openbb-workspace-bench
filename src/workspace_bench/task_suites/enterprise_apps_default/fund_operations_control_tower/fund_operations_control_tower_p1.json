@@ -33,7 +33,8 @@
      "67"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,51 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_corporate_actions_corporate_action_calendar",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_pricing_stale_prices",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_pricing_vendor_price_differences",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Fund Operations Control Tower Note",
-    "data": "Create the operations morning checklist: failed trades, recon breaks, corporate actions, pricing exceptions, and owners: trades value is 50.74; breaks score is 1.67; exceptions exception_count is 67. Anchors: operations, exceptions."
+    "data": "Operations morning checklist for Flagship Long/Short: failed trades stand at 50.74 on the primary metric; custodian recon breaks score 1.67 and stay Open; the corporate-action calendar holds one Open item at 28.47; pricing exceptions cover an Open stale price at 3114.00 USD and a Bloomberg vendor difference of 246075.96 USD; and there are 67 open NAV exceptions. The served rows carry no owner names, so assign by desk — trade support owns the fails, reconciliations owns the breaks and corporate actions, and pricing owns the stale-price, vendor-difference, and NAV queues — and record named owners at the morning stand-up."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 20
  }
 }

@@ -4,7 +4,7 @@
   "family": "manage_dashboard",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Rename the Home dashboard to Smoke Home Dashboard.",
+  "prompt": "Use manage_dashboard operation='update' with dashboard_id 'dash_001' to rename the Home dashboard to 'Smoke Home Dashboard'.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},

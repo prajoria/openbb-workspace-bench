@@ -4,7 +4,7 @@
   "family": "read_widget",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Read the seeded Stark Alert Trend widget once.",
+  "prompt": "Call read_widget for the seeded widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise'.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {

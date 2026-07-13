@@ -33,7 +33,8 @@
      "79.97"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,63 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_corporate_actions_corporate_action_calendar",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_pricing_stale_prices",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_pricing_vendor_price_differences",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_recons_custodian_breaks",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Fund Operations Control Tower Note",
-    "data": "Explain which operational issues need escalation before market open or NAV strike: exceptions exception_count is 61; exceptions exception_count is 67; deadlines score is 79.97. Anchors: operational, escalation."
+    "data": "Start an operational escalation with 61 Open settlement exceptions and two Open custodian-break readings of 1.67 and 59.91, since those items threaten market-open processing. Corporate actions also need attention: Election Deadlines is Open at 79.97 and the Corporate Action Calendar is Open at 28.47. Before the NAV strike, reconcile 67 Open NAV exceptions, stale-price rows of 3114 and 243359.62 USD, and vendor-price rows of 246075.96 for Bloomberg and 209032.42 for ICE. The vendor and stale-price values are source records rather than quantified differences, so their exact pricing impact still requires a security-level match. Escalate the deadline and settlement queues before market open, and keep pricing and NAV queues open through strike reconciliation."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 22
  }
 }

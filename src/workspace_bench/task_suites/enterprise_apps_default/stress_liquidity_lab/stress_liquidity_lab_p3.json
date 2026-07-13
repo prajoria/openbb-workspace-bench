@@ -32,7 +32,8 @@
      "8.67"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -68,7 +69,7 @@
    "args": {
     "widget_type": "note",
     "name": "Stress & Liquidity Lab Note",
-    "data": "Create the committee sign-off note with unresolved actions and owners: tracker score is 76.26; actions score is 8.67. Anchors: unresolved, committee."
+    "data": "The committee sign-off note has two unresolved Sign-Off Tracker rows for Flagship Long/Short, both Open, including scores of 76.26 and 33.62. Residual Risk Actions also has two Open rows, scored 8.67 and 41.3, so those actions remain part of the approval record. Neither widget supplies an owner field, and the available data therefore cannot name the owners requested by the ask. The committee should keep sign-off open until an owner register maps each action to an accountable person and the unresolved items receive documented dispositions."
    }
   }
  ],

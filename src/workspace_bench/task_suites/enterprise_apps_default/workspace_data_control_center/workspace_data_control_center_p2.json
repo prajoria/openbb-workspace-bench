@@ -33,7 +33,8 @@
      "96.33"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -81,7 +82,7 @@
    "args": {
     "widget_type": "note",
     "name": "Workspace Data Control Center Note",
-    "data": "Identify apps or widgets whose data or AI access should be restricted before a fund demo or production rollout: permissions score is 3.14; flags score is 61.17; flags score is 96.33. Anchors: restricted, production."
+    "data": "Restrict three surfaces before the fund demo or production rollout. First, every app and widget governed by the entitlements permissions widget: its Flagship Long/Short coverage score is 3.14, far too low to trust defaults, so those apps stay restricted until permissions are mapped. Second, the Bloomberg-flagged sensitive datasets (flag score 61.17, Open): exclude them from any demo tenant. Third, Copilot visibility for flagged content: the 96.33 Open flag means AI access must be disabled for those widgets until visibility rules are approved. The rows expose scores rather than app IDs, so attach the entitlement export listing the affected app identifiers when circulating this restriction list."
    }
   }
  ],

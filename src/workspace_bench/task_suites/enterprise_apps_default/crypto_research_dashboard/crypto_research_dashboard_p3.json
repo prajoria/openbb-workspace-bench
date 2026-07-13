@@ -33,7 +33,8 @@
      "40.83"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,28 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "crypto_research_dashboard_research_crypto_research_pdfs",
+    "data_args": {
+     "pdf_name": [
+      "Bank of Canada Crypto Market Structure",
+      "CoinGecko 2024 Crypto Industry"
+     ]
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Crypto Research Dashboard Note",
-    "data": "Draft the token thesis update using market, on-chain, derivatives, and research-document context: volume price_usd is 172896; activity score is 67.84; basis score is 40.83. Anchors: thesis, on-chain."
+    "data": "The BTC token thesis remains under review with a market price of 172896. On‑chain activity is strong at 67.84, and derivatives funding/basis scores are 40.83, indicating active participation across layers. These indicators should be reconciled with the research PDFs score of 85.25 before adjusting conviction or position size. The thesis synthesis calls for a cautious approach until directional flow and liquidity data become available to confirm alignment between on‑chain behavior and derivatives exposure, while retaining on-chain as decision evidence."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 16
  }
 }

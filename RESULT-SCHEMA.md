@@ -20,8 +20,9 @@ grade exposes these dimensions:
 | outcome/state | `score`, `state_score`, `state_passed`, state check counts | Correct durable workspace or code outcome. For runtime tasks, primary partial credit averages state and runtime dimension scores rather than raw checks. |
 | trace | `trace_score`, `trace_passed`, trace check counts | Required retrieval/tool behavior and workflow-policy discipline. |
 | runtime | `runtime_score`, `runtime_passed`, runtime check counts | Real evaluator-owned HTTP usability; neutral defaults when unconfigured. |
+| answer judge | `judge_passed`, `judge_pending`, judge check counts | Binary answer quality for tasks that require it. Pending is explicit and does not change the deterministic grade; a supplied verdict gates strict pass. |
 | polish | `polish_score`, polish check counts, `polish_issues` | Non-gating authored quality diagnostics. |
-| combined | `passed`, total check counts, `issues` | Strict pass requires state, trace, and every configured runtime check; polish is excluded. |
+| combined | `passed`, total check counts, `issues` | Strict pass requires state, trace, every configured runtime check, and every supplied required answer verdict; polish is excluded. |
 
 Runtime-enabled rows carry an evaluator-generated `deployment_receipt` (and
 other rows use `null`). It records observed backend names, app ids,
@@ -37,6 +38,11 @@ identity, strict/state/runtime/browser summaries, invalid-call and recovery
 metrics, turns, tokens, cost, per-task repeats/pass@k/pass^k, durable manifests,
 and checkpoints. Resume is accepted only when model, provider, temperature,
 harness revision, suite hash, track, repeats, and ordered task manifest match.
+Rows also carry `judge_status`, `judge_model`, `judge_template_sha`, and
+`judge_raw_reason`. A required row is `pending` when no judge was configured;
+completed judgments pin the model and prompt-template hash. Stored re-judgment
+adds `judge_attempts`, `judged_at`, `judged_at_model`, and `judge_provenance`.
+Summaries report deterministic pass counts separately from judged pass counts.
 
 The real-code command emits `workspace-bench-code-result/v0`, containing task,
 agent process, strict code grade, artifact paths, and an evaluator-owned

@@ -4,7 +4,7 @@
   "family": "navigate_workspace",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Navigate to Details and leave a small marker there.",
+  "prompt": "Use navigate_workspace operation='tab' to switch to tab_id 'details', then use add_generative_widget to add a note named 'Navigation Marker' on that tab.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {

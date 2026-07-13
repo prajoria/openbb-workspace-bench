@@ -4,7 +4,7 @@
   "family": "get_widget_data",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Fetch open high-severity YTD data from the Stark Alert Trend widget.",
+  "prompt": "Call get_widget_data for origin 'Bench Stark Enterprise' and widget_id 'compliance_surveillance_hub_alerts_alert_trend' with data_args severity 'High', status 'Open', period 'YTD'.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},

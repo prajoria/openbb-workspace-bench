@@ -27,7 +27,9 @@ Family is the source enterprise app, with exactly three product prompts per fami
 
 ## Gates
 
-Generation verifies that every prompt is byte-verbatim from the product catalog, every success contract contains only the required generated-note outcome, reviewed anchor counts stay capped, every reference trace passes, every no-op trace fails, task ids are unique, and all 69 product prompts are represented. `workspace-bench validate --suite enterprise-apps-default` rechecks task loading, reference success, and no-op failure against `default-v1`.
+This suite uses two grading keys: deterministic grounding verifies the required workspace evidence, and judged answerness verifies that the note consults the competent-analyst data, reflects it with the right analytical mindset, and answers the product prompt. Strict task pass requires both keys. The open-weight judge model and prompt-template hash are pinned and recorded per run; replay uses the cached verdict and never calls a model. CI and `workspace-bench validate --suite enterprise-apps-default` certify the deterministic key only, while judge calibration is a separate local gate.
+
+Generation verifies that every prompt is byte-verbatim from the product catalog, every success contract contains only the required generated-note outcome, reviewed anchor counts stay capped, every reference trace passes, every no-op trace fails, task ids are unique, and all 69 product prompts are represented. Validation rechecks task loading, reference success, and no-op failure against `default-v1`.
 
 ## Limitations
 

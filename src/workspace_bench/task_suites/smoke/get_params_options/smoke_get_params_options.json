@@ -4,7 +4,7 @@
   "family": "get_params_options",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Read valid period options for the Stark Alert Trend widget.",
+  "prompt": "Call get_params_options for param_name 'period' of widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise'.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},

@@ -33,7 +33,8 @@
      "68.96"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -78,15 +79,63 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_clinical_trial_catalyst_calendar",
+    "data_args": {
+     "period": "YTD",
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_commercial_tam_scenarios",
+    "data_args": {
+     "period": "YTD",
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_commercial_prescription_trend",
+    "data_args": {
+     "period": "YTD",
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_coverage_healthcare_coverage_universe",
+    "data_args": {
+     "period": "YTD",
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Healthcare Research Dashboard Note",
-    "data": "Draft the KOL follow-up plan with open questions and evidence needed for the investment committee: notes score is 22.38; checklist score is 44.47; funnel value is 68.96. Anchors: KOL, follow-up."
+    "data": "The KOL follow‑up plan includes the following open questions for the investment committee: (1) What specific evidence supports the clinical probability reading of 68.96 from the Clinical Probability Funnel widget (Clinical Probability Funnel)? (2) How does the current coverage status from the Healthcare Coverage Universe widget (Healthcare Coverage Universe) impact our recommendation? (3) What are the latest clinical catalysts identified in the Trial Catalyst Calendar widget (Trial Catalyst Calendar)? (4) Which research documents remain incomplete according to the Research Document Checklist widget (Research Document Checklist)? The plan requires evidence items: the Clinical Probability Funnel score of 68.96, the TAM scenario score of 7.43 from the TAM Scenarios widget (TAM Scenarios), and the Prescription Trend score of 40.91 from the Prescription Trend widget (Prescription Trend). The KOL Meeting Notes widget (KOL Meeting Notes) provides a current score of 22.38 for Flagship Long/Short, which will be documented in the meeting record. All requested evidence must be collected and logged before committee review to ensure a comprehensive decision framework, while retaining follow-up and 44.47 as source evidence."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 22
  }
 }

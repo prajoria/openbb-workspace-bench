@@ -4,7 +4,7 @@
   "family": "get_widget_schema",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Read the schema for the Stark Alert Trend widget.",
+  "prompt": "Call get_widget_schema for origin 'Bench Stark Enterprise' and widget_id 'compliance_surveillance_hub_alerts_alert_trend'.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},

@@ -33,7 +33,8 @@
      "22.35"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,27 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "rebalance_scenario_lab_rebalance_restricted_list_checks",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Rebalance & Scenario Lab Note",
-    "data": "Identify proposed trades that should be resized or delayed because of ADV usage, constraints, or compliance blockers: trades score is 13.46; impact score is 10.55; utilization score is 22.35. Anchors: constraints, compliance."
+    "data": "Two Flagship Long/Short proposed-trade rows remain Open, with scores of 13.46 and 13.01, but the rows do not name the securities or trade sizes. ADV usage is not supplied by the Proposed Trades or Liquidity Impact data, so resizing cannot be justified on that dimension without trade size and ADV percentage. The available constraints readings are 22.35 and 13.02, while liquidity-impact readings are 10.55 and 80.62; no limits or trade-level mapping are provided. The compliance check is also Open at 31.12, but its row does not identify a specific restricted security or a cleared blocker. Both proposed trades should therefore stay under review rather than be conclusively resized or delayed until ADV, limit, security, and compliance-blocker details are available."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 16
  }
 }

@@ -33,7 +33,8 @@
      "52.01"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -78,7 +79,7 @@
    "args": {
     "widget_type": "note",
     "name": "CIO / Investment Committee Pack Note",
-    "data": "Draft the decision log update after committee review: log score is 61.24; agenda score is 88.24; required value is 52.01. Anchors: committee, decision."
+    "data": "The committee reviewed the Flagship Long/Short fund and recorded a decision score of 61.24, with the status remaining Open as indicated in the Decision Log data. The IC Agenda score of 88.24 is still pending and its status is Open, so no final disposition has been applied to that metric. The Decisions Required primary value of 52.01 meets the threshold, satisfying that requirement. Because the decision log entry shows status Open, the conclusion that the decision was closed is unsupported by the available data; therefore the record remains open until further action. No additional fields or entities are required beyond those cited."
    }
   }
  ],

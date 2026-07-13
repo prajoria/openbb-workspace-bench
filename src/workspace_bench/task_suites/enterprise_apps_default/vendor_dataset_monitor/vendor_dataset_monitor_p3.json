@@ -33,7 +33,8 @@
      "24.33"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,51 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "vendor_dataset_monitor_overview_workflow_overview",
+    "data_args": {
+     "period": "YTD",
+     "status": "Open",
+     "vendor": "FactSet"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "vendor_dataset_monitor_quality_validation_errors",
+    "data_args": {
+     "period": "YTD",
+     "status": "Open",
+     "vendor": "FactSet"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "vendor_dataset_monitor_quality_row_count_drift",
+    "data_args": {
+     "period": "YTD",
+     "status": "Open",
+     "vendor": "FactSet"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Vendor & Dataset Monitor Note",
-    "data": "Draft the vendor escalation note with affected datasets, app impact, and owner actions: apps score is 94.16; log score is 18.67; summary score is 24.33. Anchors: escalation, affected."
+    "data": "An escalation has been sent to FactSet regarding the open incident, with an incident log score of 18.67 and a blast radius score of 24.33. The affected apps score is 94.16, indicating that almost all relevant applications are impacted by this issue. The data owner must identify which datasets are affected and document remediation steps. Validation should be re‑run after remediation to ensure the incident can be closed. Until validation passes, the incident remains open."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 20
  }
 }

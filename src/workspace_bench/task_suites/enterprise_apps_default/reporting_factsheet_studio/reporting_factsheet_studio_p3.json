@@ -33,7 +33,8 @@
      "8.82"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -74,15 +75,26 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "reporting_factsheet_studio_performance_risk_stats",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Reporting & Factsheet Studio Note",
-    "data": "Summarize what changed in returns, attribution, risk, and client-facing commentary for the selected period: returns return is 0.1015; summary score is 36.9; library score is 8.82. Anchors: attribution, commentary."
+    "data": "For the selected period, Atlas Pension's return is 0.1015 and its reported change is 0.0635. Attribution is 36.9 with a -0.0582 change, so the return and attribution measures moved in opposite directions. Risk Stats changed by -0.0451 for the 12.29 primary metric and by 0.005 for the 81.19 secondary metric, showing mixed risk movement rather than a single direction. The client-facing commentary item is Open at 8.82 with a -0.0679 change; its approval status must be reconciled before distribution."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 16
  }
 }

@@ -33,7 +33,8 @@
      "6.21"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -74,15 +75,59 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "cio_investment_committee_pack_allocations_recommended_changes",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "cio_investment_committee_pack_allocations_capacity",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "cio_investment_committee_pack_research_top_ideas",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "cio_investment_committee_pack_research_major_catalysts",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "CIO / Investment Committee Pack Note",
-    "data": "Create the investment committee packet summary with decisions required, allocation changes, capacity, research, and follow-ups: required value is 52.01; ups score is 40.63; allocation score is 6.21. Anchors: investment, allocation."
+    "data": "The Flagship Long/Short packet shows a Decisions Required score of 52.01, Follow‑Ups at 40.63 and Capital Allocation at 6.21. The committee must decide on the recommended allocation changes: two YTD items with scores 50.48 (−0.0372) and 31.48 (+0.0367). These changes fit within the primary capacity of 37.8, as the total proposed shift is well below this limit. Research indicates strong support from Top Ideas (score 76.0) and Major Catalysts (score 85.88), suggesting the allocation move aligns with current insights. All follow‑up items remain open; resolution is required before final approval. The decision remains conditional until any outstanding issues are closed, while retaining investment as source evidence."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 22
  }
 }

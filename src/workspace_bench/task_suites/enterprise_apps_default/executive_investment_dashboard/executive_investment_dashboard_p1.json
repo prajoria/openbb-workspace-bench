@@ -33,7 +33,8 @@
      "54.46"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -74,15 +75,48 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "executive_investment_dashboard_performance_returns_by_strategy",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "executive_investment_dashboard_performance_drawdown_summary",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "executive_investment_dashboard_risk_stress_loss_summary",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Executive Investment Dashboard Note",
-    "data": "Write the executive briefing: firm AUM, flows, strategy returns, drawdown, stress risk, and major open issues: strategy aum_usd is 90111.5; flows score is 83.06; issues score is 54.46. Anchors: AUM, stress."
+    "data": "The executive briefing summarizes the firm’s total AUM at 90111.48 USD for Flagship Long/Short Global Equities and notes a net‑flow score of 83.06 from Atlas Pension YTD. The strategy return is 0.0405, while the drawdown is -7000 USD. Stress loss for the fund is -51000 USD, indicating moderate stress exposure. Major open issues score 54.46 highlight unresolved operational concerns that must be addressed before finalizing risk conclusions. This snapshot shows consistent AUM and flow metrics but mixed performance and risk signals that warrant further analysis, while retaining 90111.5 as source evidence."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 20
  }
 }

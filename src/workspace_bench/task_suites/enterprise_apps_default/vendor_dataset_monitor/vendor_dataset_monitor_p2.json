@@ -33,7 +33,8 @@
      "94.16"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -81,7 +82,7 @@
    "args": {
     "widget_type": "note",
     "name": "Vendor & Dataset Monitor Note",
-    "data": "Identify data quality issues that create trading, risk, reporting, or compliance impact: errors score is 59.16; drift count is 188; apps score is 94.16. Anchors: compliance, reporting."
+    "data": "The open FactSet quality issue has a validation error score of 59.16, which could affect trading, risk, reporting, and compliance outputs. Row count drift is recorded at 188, indicating significant changes in data volume that may compromise analytical accuracy. Affected apps have a score of 94.16, meaning the majority of applications relying on this dataset are potentially impacted. Compliance and reporting functions should be flagged for review until the impact assessment is complete. The incident remains open with an escalation status, so all affected stakeholders must be notified promptly."
    }
   }
  ],

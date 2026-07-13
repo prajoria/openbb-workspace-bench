@@ -32,7 +32,8 @@
      "45.63"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -66,7 +67,7 @@
    "args": {
     "widget_type": "note",
     "name": "Executive Investment Dashboard Note",
-    "data": "Identify which issues require CEO, CIO, COO, or CRO attention this week: issues score is 54.46; log score is 45.63. Anchors: issues, CIO."
+    "data": "Major Open Issues contains two Open Flagship Long/Short entries, scored 54.46 and 79.57, so both require executive triage this week. The Decision Log also contains two Open entries, including 45.63 and 18.43, that need disposition. However, neither widget describes the issues or supplies an owner, function, or executive-role field. The available data therefore cannot support assigning a specific item to the CEO, CIO, COO, or CRO without inventing role semantics. Issue descriptions and role ownership are required before the four-way attention list can be completed."
    }
   }
  ],

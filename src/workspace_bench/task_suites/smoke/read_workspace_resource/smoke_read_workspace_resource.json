@@ -4,7 +4,7 @@
   "family": "read_workspace_resource",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Read the Workspace widget-types resource once.",
+  "prompt": "Call read_workspace_resource with uri 'openbb://workspace/specs/widget-types'.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},

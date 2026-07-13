@@ -4,7 +4,7 @@
   "family": "list_available_widgets",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "List the widgets available from Bench Stark Enterprise.",
+  "prompt": "Call list_available_widgets for origin 'Bench Stark Enterprise'.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},

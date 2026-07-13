@@ -33,7 +33,8 @@
      "0.0137"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -78,15 +79,51 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "risk_exposure_monitor_drilldown_marginal_var",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "risk_exposure_monitor_limits_limit_utilization",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Risk & Exposure Monitor Note",
-    "data": "Prepare the risk officer briefing: VaR drivers, stress losses, concentration, breaches, and recommended actions: surface value is -103000; concentration exposure is 0.0359; warnings exposure is 0.0137. Anchors: concentration, breaches."
+    "data": "Risk officer briefing for Flagship Long/Short (YTD). VaR drivers: portfolio VaR is -222,500 USD with an Open marginal-VaR reading of -56,000 USD; the rows are fund-level, so position attribution needs the drill-down extract. Stress losses: the scenario surface shows -103000 and -95,500 USD on consecutive dates. Concentration: AAPL is the largest named issuer at 0.0359 exposure and is easing (-2.0%). Breaches: the warnings widget holds one Open exposure at 0.0137 against limit utilization of 0.0339, so nothing is at limit today. Recommended actions: obtain position-level attribution for the marginal VaR, keep the AAPL concentration under watch, and close the open warning before the next stress cycle."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 20
  }
 }

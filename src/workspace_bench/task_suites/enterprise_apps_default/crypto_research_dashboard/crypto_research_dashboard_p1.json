@@ -33,7 +33,8 @@
      "67.84"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,28 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "crypto_research_dashboard_derivatives_liquidation_heatmap",
+    "data_args": {
+     "chain": "Ethereum",
+     "crypto_asset": "BTC",
+     "period": "YTD",
+     "raw": false
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Crypto Research Dashboard Note",
-    "data": "Summarize crypto market structure: price action, liquidity, on-chain activity, funding, basis, and liquidation risk: basis score is 40.83; volume price_usd is 172896; activity score is 67.84. Anchors: liquidity, liquidation."
+    "data": "BTC’s market-structure review records funding and basis at 40.83, spot price at 172896, and on-chain activity at 67.84. The available widgets do not expose order-book depth, so liquidity cannot be quantified without bid-ask and depth data. The liquidation heatmap begins at 38.74, then 39.71 and 40.35, showing movement but no supplied risk threshold. Accordingly, liquidation risk cannot be labeled high or low until threshold and position-level data are provided. Keep the market-structure conclusion conditional while liquidity and liquidation evidence is completed."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 16
  }
 }

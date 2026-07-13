@@ -32,7 +32,8 @@
      "0.0157"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -64,15 +65,27 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "client_360_meeting_prep_approved_talking_points",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD",
+     "region": "Americas"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Client 360 Note",
-    "data": "Draft a concise response to the client using only approved commentary and current portfolio context: summary value is 85.23; returns return is 0.0157. Anchors: commentary, portfolio."
+    "data": "Approved Talking Points summarizes the Client & IR workflow for YTD. The synthetic score reading is 29.91, seeded from the widget id. The current portfolio summary reads 85.23, reflecting a solid baseline performance metric. The Flagship Long/Short fund’s open YTD return is 0.0157, which aligns with the overall portfolio strength. This response remains strictly factual and limited to these data points until further approval is obtained for any additional interpretation. The conclusion is conditional until the cited open items and missing detail are reconciled, while retaining commentary as source evidence."
    }
   }
  ],
  "limits": {
-  "max_turns": 12
+  "max_turns": 14
  }
 }

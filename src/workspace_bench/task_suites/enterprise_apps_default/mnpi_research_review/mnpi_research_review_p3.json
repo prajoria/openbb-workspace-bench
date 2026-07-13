@@ -33,7 +33,8 @@
      "64.44"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -81,7 +82,7 @@
    "args": {
     "widget_type": "note",
     "name": "MNPI & Research Review Note",
-    "data": "Create the approval narrative for legal review with unresolved risks and required attestations: evidence score is 5.45; comments score is 97.4; history score is 64.44. Anchors: attestations, unresolved."
+    "data": "Legal approval should remain pending because required attestations are unresolved. The research‑approval evidence score of 5.45 is from mnpi_research_review_research_approval_evidence and indicates that the Flagship Long/Short fund’s attestation has not been completed; the reviewer comments score of 97.4 comes from mnpi_research_review_reviewer_comments, showing significant concerns that have not yet been addressed. Evidence/sign‑off history scores 64.44 are in Evidence and Sign-Off History and confirm that the overall evidence gap is still open. Until these attestations and reviewer comments are resolved, sign‑off cannot occur."
    }
   }
  ],

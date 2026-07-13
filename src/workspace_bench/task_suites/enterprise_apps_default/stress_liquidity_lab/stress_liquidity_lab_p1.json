@@ -33,7 +33,8 @@
      "54.69"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -78,15 +79,27 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "stress_liquidity_lab_liquidity_crowded_names",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Stress & Liquidity Lab Note",
-    "data": "Summarize the selected stress scenario with portfolio loss, liquidation days, crowded names, and redemption impact: waterfall value is -49500; liquidate score is 62.96; stress score is 54.69. Anchors: liquidation, redemption."
+    "data": "The selected stress scenario records a portfolio loss of -49500 as shown in the Scenario Loss Waterfall widget (Scenario Loss Waterfall). Flagship Long/Short has a Days to Liquidate score of 62.96 and a Redemption Stress score of 54.69, both from their respective widgets. The scenario does not list any crowded names for this fund; the Crowded Names widget shows a score of 27.28 but no specific holdings are named. Because liquidation and redemption indicators are material inputs, the scenario remains open for committee review. No other crowded holdings are identified in the current data."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 16
  }
 }

@@ -33,7 +33,8 @@
      "92.83"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -79,7 +80,7 @@
    "args": {
     "widget_type": "note",
     "name": "Strategy Health Monitor Note",
-    "data": "Highlight themes where factor tilt or liquidity capacity is inconsistent with PM conviction: curve score is 29.82; tilts value is 82.47; utilization value is 92.83. Anchors: conviction, capacity."
+    "data": "Put Global Equities on the PM review list: its liquidity-capacity score is 29.82 from the Liquidity Capacity Curve widget. The factor-tilt series reads 82.47 from the Factor Tilts widget and capacity utilization reads 92.83 from the Capacity Utilization widget. However, the data does not map either value to stated PM conviction, so treat the mismatch as a question to resolve, not as evidence for increasing the sleeve. Keep the conclusion conditional until the cited open items and missing detail are reconciled."
    }
   }
  ],

@@ -33,7 +33,8 @@
      "27.63"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,27 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "earnings_estimates_monitor_calendar_catalyst_calendar",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Earnings & Estimates Monitor Note",
-    "data": "Prepare the earnings preview: internal versus street estimates, expected surprise drivers, and trade setup: bridge score is 63.14; history score is 8.82; earnings score is 27.63. Anchors: estimates, earnings."
+    "data": "The LLY earnings preview shows an internal versus street bridge score of 63.14, indicating a modest upside relative to consensus. Surprise history is low at 8.82, suggesting limited volatility potential. Catalyst Calendar scores 64.09 highlight upcoming events that could materially affect earnings. The Upcoming Earnings score of 27.63 confirms analysts expect a moderate earnings beat. Based on these metrics, a trade setup would involve taking a long position in LLY ahead of the earnings announcement, with an entry near current levels and a target aligned with the modest upside implied by the internal vs street bridge. A stop‑loss could be placed below recent support to manage risk. Unsupported: specific price targets or stop levels are not provided in the SERVED data; they would require additional market context or historical price points that are not present here, while retaining estimates as source evidence."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 16
  }
 }

@@ -33,7 +33,8 @@
      "31.12"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,28 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "rebalance_scenario_lab_scenarios_scenario_p_l_waterfall",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "raw": false,
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Rebalance & Scenario Lab Note",
-    "data": "Draft a rebalance recommendation that balances target drift, liquidity cost, restricted-list checks, and scenario downside: weights weight is 0.0471; impact score is 10.55; checks score is 31.12. Anchors: rebalance, drift."
+    "data": "The rebalance recommendation for Flagship Long/Short must account for the current drift of 0.0471, which is reflected in the Current vs Target Weights widget. The liquidity impact score of 10.55 and the restricted-list checks score of 31.12 indicate that neither control has cleared automatically. Scenario downside analysis shows a potential P&L drop to 71.92 on 2026-01-04 from the Scenario P&L Waterfall, underscoring the need for caution. Therefore, a conditional rebalance should be pursued only after a thorough review of these controls to confirm residual drift is acceptable and scenario downside risk is within tolerance. This approach balances target drift, liquidity cost, restricted-list checks, and scenario downside by ensuring all thresholds are explicitly addressed before execution."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 16
  }
 }

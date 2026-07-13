@@ -33,7 +33,8 @@
      "81.37"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -81,7 +82,7 @@
    "args": {
     "widget_type": "note",
     "name": "Earnings & Estimates Monitor Note",
-    "data": "Identify companies where estimate revisions and management commentary create a material thesis change: log score is 4.89; revisions score is 33.55; tone score is 81.37. Anchors: management, commentary."
+    "data": "LLY is the one company where estimate revisions and management commentary combine into a material thesis change: consensus revisions are Open at 33.55 (+8.5%), management tone — the served management commentary signal — reads 81.37 and is deteriorating (-4.9%), and the thesis change log has collapsed to 4.89, so the thesis review should be opened now. AAPL's rows are QTD and In Review across the same widgets, so it cannot be flagged on current-period evidence. No other ticker has rows in all three widgets, so no further flags are supportable."
    }
   }
  ],

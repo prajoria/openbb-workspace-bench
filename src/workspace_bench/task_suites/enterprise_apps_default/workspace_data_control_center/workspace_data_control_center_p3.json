@@ -33,7 +33,8 @@
      "34.77"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,27 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "workspace_data_control_center_usage_export_review_queue",
+    "data_args": {
+     "backend": "Research Lake",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Workspace Data Control Center Note",
-    "data": "Summarize usage, export, and prompt-audit activity for the platform owner: usage score is 58.09; activity score is 86.66; audit score is 34.77. Anchors: usage, prompt-audit."
+    "data": "Platform activity summary for the owner, covering the Flagship Long/Short rows the platform serves. Usage: app usage is Open at 58.09 — steady engagement, no anomaly. Exports: export activity is high at 86.66 and the export review queue holds two open items at 99.14 and 46.02, so the export trail is the owner's first stop. Prompt-audit: activity is Open at 34.77, meaning AI prompts are being logged without unusual volume. Priority: work the 99.14 queue item and reconcile the export volume against entitlements before the next access review."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 16
  }
 }

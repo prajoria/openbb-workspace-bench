@@ -33,7 +33,8 @@
      "26.45"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -81,7 +82,7 @@
    "args": {
     "widget_type": "note",
     "name": "Quant Research & Backtest Lab Note",
-    "data": "Identify signals with attractive IC but unacceptable turnover, crowding, or liquidity cost: metrics value is 83.92; leaderboard score is 55.65; decay score is 26.45. Anchors: signals, turnover."
+    "data": "The available data cannot identify signals with attractive IC and unacceptable turnover because neither field is exposed by the selected rows. Signal metrics read 83.92, the leaderboard score is 55.65, and signal decay scores 26.45. To evaluate turnover, crowding, or liquidity cost, we need explicit signal‑level IC, turnover, crowding, and liquidity‑cost data. Without these details, the candidate set must remain in research review pending additional information."
    }
   }
  ],

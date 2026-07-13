@@ -33,7 +33,8 @@
      "53.77"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -78,7 +79,7 @@
    "args": {
     "widget_type": "note",
     "name": "Liquidity & TCA Workbench Note",
-    "data": "Rank brokers by fill quality, commission, latency, and slippage for the selected desk: scorecard score is 16.9; broker score is 27.81; algo score is 53.77. Anchors: commission, slippage."
+    "data": "Goldman Sachs ranks ahead of Barclays on the two comparable execution metrics: fill quality is 27.81 versus 3.83, and slippage is lower at 53.77 versus 77.99. The Broker Scorecard adds a 16.9 reading for Goldman Sachs, but supplies no Barclays counterpart or definition that would make it a commission measure. Neither the scorecard nor the other served rows contains commission or latency figures, so those two requested dimensions cannot be ranked. On the documented fill-quality and slippage evidence, Goldman Sachs is first and Barclays second; a complete four-factor broker ranking requires commission and latency data for both."
    }
   }
  ],

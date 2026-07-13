@@ -33,7 +33,8 @@
      "-7000"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -74,15 +75,48 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "executive_investment_dashboard_risk_top_risks",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "executive_investment_dashboard_risk_stress_loss_summary",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "executive_investment_dashboard_risk_limit_utilization",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Executive Investment Dashboard Note",
-    "data": "Explain whether performance, flows, and risk are moving consistently across strategies: flows score is 83.06; strategy return is 0.0405; summary drawdown_usd is -7000. Anchors: performance, flows."
+    "data": "Within the one strategy reported for the current period — Flagship Long/Short in Global Equities (YTD, Open) — performance, flows, and risk are moving consistently: the strategy returns 0.0405, net flows from Atlas Pension score a strong 83.06, the drawdown summary shows only -7000 USD, and risk is contained with limit utilization at 16.9 and top risks at 39.42 against a -51,000 USD stress loss. The Global Opportunities rows are QTD and In Review, so they are not on a comparable period; a true cross-strategy consistency read needs current-period Open rows for the remaining strategies. On the evidence served, there is no divergence to escalate."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 20
  }
 }

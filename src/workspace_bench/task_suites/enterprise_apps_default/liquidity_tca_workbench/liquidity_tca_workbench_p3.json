@@ -33,7 +33,8 @@
      "53.77"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -78,7 +79,7 @@
    "args": {
     "widget_type": "note",
     "name": "Liquidity & TCA Workbench Note",
-    "data": "Summarize post-trade review items that require broker follow-up or algo parameter changes: queue score is 24.1; ups exception_count is 119; algo score is 53.77. Anchors: broker, parameter."
+    "data": "Post‑trade review for Goldman Sachs shows a queue score of 24.1 and 119 broker exceptions, while slippage by algo is 53.77. The data does not specify which algorithmic parameter should be adjusted; therefore, a follow‑up with the broker is required to identify the specific setting that needs modification. Until that detail is obtained, no parameter changes can be recommended. Keep the conclusion conditional until the cited open items and missing detail are reconciled."
    }
   }
  ],

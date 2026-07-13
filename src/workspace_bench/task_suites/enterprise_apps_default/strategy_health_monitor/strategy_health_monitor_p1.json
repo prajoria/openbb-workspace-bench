@@ -33,7 +33,8 @@
      "92.83"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -78,7 +79,7 @@
    "args": {
     "widget_type": "note",
     "name": "Strategy Health Monitor Note",
-    "data": "Rank strategy sleeves by return quality, drawdown behavior, crowding, and remaining capacity: performance score is 15.3; names score is 43.5; utilization value is 92.83. Anchors: drawdown, capacity."
+    "data": "The ranking of strategy sleeves by return quality can be determined only for the Global Equities sleeve, which has a Sleeve Performance score of 15.3 (strategy_health_monitor_performance_sleeve_performance). Return quality for Credit and Macro sleeves is unavailable because no Sleeve Performance data exist for those strategies in the served widgets. Drawdown behavior cannot be ranked as no drawdown information is present in any widget for these sleeves. Crowding can be assessed only for Global Equities, which has a Crowded Names score of 43.5 (strategy_health_monitor_themes_crowded_names). Remaining capacity is reported by the Capacity Utilization widget: Global Equities shows a primary utilization of 92.83 percent (strategy_health_monitor_capacity_capacity_utilization). Credit and Macro sleeves have no capacity utilization data in the served widgets, so their remaining capacity cannot be evaluated."
    }
   }
  ],

@@ -4,7 +4,7 @@
   "family": "get_skill_content",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Read the Finance Tearsheet skill content once.",
+  "prompt": "Call get_skill_content with slug 'finance-tearsheet'.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},

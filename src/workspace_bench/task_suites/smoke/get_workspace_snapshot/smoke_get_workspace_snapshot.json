@@ -4,7 +4,7 @@
   "family": "get_workspace_snapshot",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Read the current Workspace snapshot once.",
+  "prompt": "Call get_workspace_snapshot once.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},

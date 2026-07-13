@@ -4,7 +4,7 @@
   "family": "assign_tasks_to_agents",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Round-trip one bounded task request through the agent envelope.",
+  "prompt": "Call assign_tasks_to_agents with one task request having id 'smoke-envelope' and task text 'Return the Workspace smoke envelope.'",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},

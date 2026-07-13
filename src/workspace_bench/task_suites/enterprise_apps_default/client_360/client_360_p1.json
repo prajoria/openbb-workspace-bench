@@ -33,7 +33,8 @@
      "11.13"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,51 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "client_360_client_book_mandate_terms",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD",
+     "region": "Americas"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "client_360_meeting_prep_open_requests",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD",
+     "region": "Americas"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "client_360_meeting_prep_approved_talking_points",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD",
+     "region": "Americas"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Client 360 Note",
-    "data": "Prepare an investor meeting brief with mandate context, performance, exposure, flows, requests, and approved talking points: returns return is 0.0157; summary exposure is 0.0811; redemptions score is 11.13. Anchors: performance, investor."
+    "data": "For the investor meeting, Atlas Pension's mandate context is an Open YTD row with a score of 68.84 and a -0.0657 change; the data do not state whether the mandate is being met. Performance is a 0.0157 YTD return for Flagship Long/Short with a -0.0119 change, and no benchmark row is available for a relative-performance claim. Exposure to that fund is 0.0811 with a 0.0284 change. The subscriptions-and-redemptions row is Open at 11.13 with a 0.04 change, while Open Requests is Open at 16.22 and should be covered in the meeting. Client-facing interpretation should remain within Approved Talking Points, whose supplied note carries a synthetic reading of 29.91, without adding unsupported flow or mandate conclusions."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 20
  }
 }

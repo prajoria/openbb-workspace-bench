@@ -122,6 +122,7 @@ def grade_task(
     trace: tuple[ToolTraceEvent, ...],
     *,
     initial_snapshot: JsonDict | None = None,
+    judge_verdict: bool | None = None,
 ) -> GradeResult:
     """Grade one task run against final state and trace checks."""
 
@@ -278,6 +279,21 @@ def grade_task(
         tuple(state_builder.issues + trace_builder.issues + preservation_builder.issues)
         + runtime_grade.issues
     )
+    judge_checks_total = int(task.success.required_answer_judgment)
+    judge_pending = task.success.required_answer_judgment and judge_verdict is None
+    judge_passed = (
+        not task.success.required_answer_judgment or judge_verdict is not False
+    )
+    judge_checks_passed = int(
+        task.success.required_answer_judgment and judge_verdict is True
+    )
+    if task.success.required_answer_judgment and judge_verdict is False:
+        issues += (
+            GradeIssue(
+                code="answer_judgment",
+                message="The answer did not pass the configured LLM judge.",
+            ),
+        )
     raw_outcome_score = (
         (state_builder.score + runtime_grade.score) / 2
         if task.success.runtime is not None
@@ -312,18 +328,21 @@ def grade_task(
             and trace_builder.passed_all
             and preservation_builder.passed_all
             and runtime_grade.passed
+            and judge_passed
         ),
         checks_passed=(
             state_builder.passed
             + trace_builder.passed
             + preservation_builder.passed
             + runtime_grade.checks_passed
+            + judge_checks_passed
         ),
         checks_total=(
             state_builder.total
             + trace_builder.total
             + preservation_builder.total
             + runtime_grade.checks_total
+            + judge_checks_total
         ),
         state_score=state_builder.score,
         state_passed=state_builder.passed_all,
@@ -341,6 +360,10 @@ def grade_task(
         runtime_passed=runtime_grade.passed,
         runtime_checks_passed=runtime_grade.checks_passed,
         runtime_checks_total=runtime_grade.checks_total,
+        judge_passed=judge_passed,
+        judge_pending=judge_pending,
+        judge_checks_passed=judge_checks_passed,
+        judge_checks_total=judge_checks_total,
         deployment_receipt=runtime_grade.deployment_receipt,
         polish_score=polish_builder.score,
         polish_checks_passed=polish_builder.passed,

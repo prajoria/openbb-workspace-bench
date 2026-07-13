@@ -33,7 +33,8 @@
      "7.98"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -82,7 +83,7 @@
    "args": {
     "widget_type": "note",
     "name": "Equity Research Workbench Note",
-    "data": "Draft the analyst call prep note with catalysts, risks, research approvals, and open evidence gaps: risks score is 39.25; review score is 81.07; pdfs score is 7.98. Anchors: catalysts, approvals."
+    "data": "The call-prep data contain an Open catalysts reading of 39.25 with a -0.0403 change for Flagship Long/Short, but do not name the underlying catalysts, so their details must be confirmed on the call. The same widget contains an Open risk reading of 83.43 with a 0.0527 change, making risk follow-up explicit even though the individual risk factors are not supplied. Research approvals are not complete: Draft Research Review is Open at 81.07 and the Sell-Side Research PDFs item is Open at 7.98. Those Open records are evidence gaps, not endorsements or rejections, because the scores have no approval threshold. The analyst should resolve the named catalysts, risks, approvals, and missing research documents before finalizing the call position."
    }
   }
  ],

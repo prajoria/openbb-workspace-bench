@@ -33,7 +33,8 @@
      "97.02"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -74,15 +75,26 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "cio_investment_committee_pack_research_major_catalysts",
+    "data_args": {
+     "period": "YTD",
+     "strategy": "Global Equities"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "CIO / Investment Committee Pack Note",
-    "data": "Identify recommendations where risk, liquidity, or research evidence conflicts with the proposed allocation: changes score is 50.48; capacity value is 37.8; ratings score is 97.02. Anchors: recommendations, allocation."
+    "data": "The two Open allocation recommendations for Flagship Long/Short have scores of 50.48 and 31.48 and proposed changes of -0.0372 and 0.0367. Capacity is reported separately as 37.8 primary, 14.0 secondary, and 99.59 threshold, but the units do not map to either recommendation, so no capacity conflict can be inferred. Research evidence is also Open: Changed Ratings includes 97.02 with a -0.0077 change, and Major Catalysts includes 85.88 with a -0.0176 change, without a link to a specific recommendation. No risk or liquidity rows are supplied, so those conflict tests cannot be performed. Accordingly, neither recommendation can be identified as conclusively conflicting with risk, liquidity, or research evidence until allocation units, recommendation mappings, and the missing risk and liquidity measures are provided."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 16
  }
 }

@@ -33,7 +33,8 @@
      "86.16"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -78,7 +79,7 @@
    "args": {
     "widget_type": "note",
     "name": "Portfolio Command Center Note",
-    "data": "Explain which alerts should be escalated to the CIO before the opening risk meeting: alerts alert_count is 193; utilization score is 85.25; checklist score is 86.16. Anchors: alerts, escalated."
+    "data": "The alerts that should be escalated to the CIO before the opening risk meeting are those with the highest counts and scores. The Top Alerts widget reports 193 alerts for Flagship Long/Short, which is the maximum among the funds. Limit utilization is at 85.25 from the Limit Utilization widget, and the Approval Checklist score is 86.16 from the Approval Checklist widget; all three indicators should be escalated together before the risk meeting. Keep the conclusion conditional until the cited open items and missing detail are reconciled."
    }
   }
  ],

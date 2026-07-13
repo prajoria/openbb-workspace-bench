@@ -4,7 +4,7 @@
   "family": "create_widget",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Create the Stark Alert Trend widget on Home.",
+  "prompt": "Use create_widget to add widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise' to the current dashboard with data_args severity 'High', status 'Open', period 'YTD'.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},

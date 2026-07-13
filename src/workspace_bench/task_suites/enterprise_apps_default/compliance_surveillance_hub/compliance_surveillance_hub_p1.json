@@ -33,7 +33,8 @@
      "64.75"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -81,7 +82,7 @@
    "args": {
     "widget_type": "note",
     "name": "Compliance Surveillance Hub Note",
-    "data": "Triage open surveillance alerts by severity, age, restricted-list overlap, and audit evidence: alerts alert_count is 119; list score is 18.98; evidence score is 64.75. Anchors: surveillance, severity."
+    "data": "The Flagship Long/Short fund has 119 open surveillance alerts as shown in the Surveillance Alerts widget (Surveillance Alerts). The Restricted and Watch List score for this fund is 18.98, indicating significant overlap with restricted entities. Investigation Evidence for the same fund reports a score of 64.75, reflecting substantial audit findings. The triage matrix requires an age metric, but no explicit age field is present in the SERVED data; therefore the medium‑age classification cannot be confirmed from the available data and is unsupported. Based on severity (119 alerts), restricted-list overlap (18.98) and audit evidence (64.75), the alert set is classified as unresolved high‑severity work; all evidence must be preserved before any case closure or downgrade. The next step is to maintain the current status and schedule a review by compliance leadership."
    }
   }
  ],

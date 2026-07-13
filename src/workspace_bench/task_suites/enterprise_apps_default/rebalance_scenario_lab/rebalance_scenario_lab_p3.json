@@ -33,7 +33,8 @@
      "19.65"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -81,7 +82,7 @@
    "args": {
     "widget_type": "note",
     "name": "Rebalance & Scenario Lab Note",
-    "data": "Create an approval memo with implementation risk, residual drift, and the decision needed from the PM: readiness score is 36.17; sleeve score is 22.05; checklist score is 19.65. Anchors: implementation, approval."
+    "data": "The implementation readiness score for Flagship Long/Short is 36.17, indicating that the portfolio is not yet ready for execution. The drift-by-sleeve score of 22.05 and the approval-checklist score of 19.65 further highlight outstanding risks and compliance items. Therefore, an approval memo should state that implementation cannot proceed until these scores are resolved. The PM must decide to keep the rebalance on hold until readiness, residual drift, and the checklist are fully addressed."
    }
   }
  ],

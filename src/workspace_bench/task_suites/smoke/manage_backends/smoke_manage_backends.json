@@ -4,7 +4,7 @@
   "family": "manage_backends",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "List connected Workspace backends once.",
+  "prompt": "Call manage_backends operation='list' once.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},

@@ -4,7 +4,7 @@
   "family": "manage_navigation_bar",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Create Overview and Details tabs on Home.",
+  "prompt": "Use manage_navigation_bar operation='create' on the current dashboard with tabs named 'Overview' and 'Details'.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},

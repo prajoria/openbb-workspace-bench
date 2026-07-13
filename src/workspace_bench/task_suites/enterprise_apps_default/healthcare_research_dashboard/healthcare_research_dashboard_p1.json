@@ -33,7 +33,8 @@
      "40.91"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -78,15 +79,51 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_clinical_trial_catalyst_calendar",
+    "data_args": {
+     "period": "YTD",
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_coverage_healthcare_coverage_universe",
+    "data_args": {
+     "period": "YTD",
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "healthcare_research_dashboard_documents_research_document_checklist",
+    "data_args": {
+     "period": "YTD",
+     "therapeutic_area": "Obesity / Metabolic",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Healthcare Research Dashboard Note",
-    "data": "Prepare the healthcare analyst brief: coverage, clinical catalysts, probability funnel, TAM, prescriptions, and research documents: funnel value is 68.96; scenarios score is 7.43; trend score is 40.91. Anchors: prescriptions, probability."
+    "data": "The healthcare analyst brief begins with a clinical probability reading of 68.96 from the Clinical Probability Funnel widget (Clinical Probability Funnel). The TAM scenario score is 7.43, sourced from the TAM Scenarios widget (TAM Scenarios). Prescription trend scores 40.91 are taken from the Prescription Trend widget (Prescription Trend). Coverage remains under review; the Healthcare Coverage Universe widget (Healthcare Coverage Universe) shows a current score of 40.0 for Flagship Long/Short, indicating coverage status is open and requires reconciliation with clinical catalysts. Clinical catalysts are identified in the Trial Catalyst Calendar widget (Trial Catalyst Calendar), where the Flagship Long/Short fund has an open catalyst score of 87.53. Research documents must be verified against the Research Document Checklist widget (Research Document Checklist) which reports a current score of 44.47 for Flagship Long/Short, confirming that all required research items are present before any position change. The brief explicitly references these widget facts and notes that no synthetic thresholds or causal claims are introduced, while retaining prescriptions as decision evidence."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 20
  }
 }

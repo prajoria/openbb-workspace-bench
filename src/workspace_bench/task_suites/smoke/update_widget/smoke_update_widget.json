@@ -4,7 +4,7 @@
   "family": "update_widget",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Change the seeded Stark Alert Trend widget period to MTD.",
+  "prompt": "Use update_widget on the seeded widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise' to set data_args period to 'MTD'.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {

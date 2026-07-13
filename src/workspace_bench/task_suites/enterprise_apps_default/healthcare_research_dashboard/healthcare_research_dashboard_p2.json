@@ -33,7 +33,8 @@
      "7.43"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -82,7 +83,7 @@
    "args": {
     "widget_type": "note",
     "name": "Healthcare Research Dashboard Note",
-    "data": "Identify names where clinical probability and commercial revenue scenarios imply a thesis change: funnel value is 68.96; bridge score is 93.24; scenarios score is 7.43. Anchors: probability, commercial."
+    "data": "No individual names can be identified from the served data: the clinical and commercial widgets carry no security identifiers, so a name-level list is not producible until the coverage-universe extract with tickers is pulled. What the data does establish is a book-level thesis change signal for the Flagship Long/Short healthcare sleeve: clinical probability is rising (68.96 to 70.58 across the funnel dates) while the commercial legs disagree — the drug revenue bridge is strong at 93.24 but TAM scenarios score only 7.43, so improving approval odds feed a market-size assumption the scenario work does not support. Reopen the commercial side of the thesis now and attach the ticker extract so the change can be pinned to specific names."
    }
   }
  ],

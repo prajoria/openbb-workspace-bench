@@ -4,7 +4,7 @@
   "family": "delete_widget",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Delete the seeded Stark Alert Trend widget.",
+  "prompt": "Use delete_widget to remove the seeded widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise'.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {

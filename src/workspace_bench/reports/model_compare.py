@@ -23,7 +23,7 @@ from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
 from pathlib import Path
 from functools import lru_cache
-from typing import Any, Iterator
+from typing import Any, Callable, Iterator, Literal, cast
 
 from workspace_bench.agents.model_adapter_helpers import (
     TOOL_REFERENCE,
@@ -37,6 +37,15 @@ from workspace_bench.agents.agent_command import (
     run_agent_command,
 )
 from workspace_bench.core.episode import WorkspaceEpisode
+from workspace_bench.core.graders import grade_task
+from workspace_bench.core.judge import (
+    JUDGE_TEMPLATE_SHA,
+    JudgeConfig,
+    JudgeVerdict,
+    build_judge_context,
+    judge_episode,
+    stark_app_catalog_entry,
+)
 from workspace_bench.core.models import (
     BENCHMARK_NAME,
     JsonDict,
@@ -125,6 +134,7 @@ class ComparisonRun:
     usage: JsonDict = field(default_factory=dict)
     wall_time_seconds: float = 0.0
     resumed: bool = False
+    judge_verdict: JudgeVerdict | None = None
 
 
 class TransientModelError(RuntimeError):
@@ -188,6 +198,10 @@ def effective_settings(args: argparse.Namespace) -> JsonDict:
         "ollama_temperature": os.environ.get("OLLAMA_TEMPERATURE", "0"),
         "openai_response_format": os.environ.get("OPENAI_RESPONSE_FORMAT", "json_schema"),
         "ollama_format": os.environ.get("OLLAMA_FORMAT", "schema"),
+        "judge_model": getattr(args, "judge_model", None)
+        or os.environ.get("WORKSPACE_BENCH_JUDGE_MODEL"),
+        "judge_base_url": getattr(args, "judge_base_url", None)
+        or os.environ.get("WORKSPACE_BENCH_JUDGE_BASE_URL"),
     }
 
 
@@ -365,6 +379,13 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--timeout", type=float, default=240)
     parser.add_argument(
+        "--judge-model",
+        help="OpenAI-compatible model used for required answer judgment.",
+    )
+    parser.add_argument("--judge-base-url")
+    parser.add_argument("--judge-api-key")
+    parser.add_argument("--judge-timeout", type=float, default=60.0)
+    parser.add_argument(
         "--episode-timeout",
         type=float,
         default=900,
@@ -409,8 +430,8 @@ def main(argv: list[str] | None = None) -> int:
     if args.retry_backoff < 0:
         print("--retry-backoff must be >= 0", file=sys.stderr)
         return 2
-    if args.timeout <= 0 or args.episode_timeout <= 0:
-        print("--timeout and --episode-timeout must be > 0", file=sys.stderr)
+    if args.timeout <= 0 or args.episode_timeout <= 0 or args.judge_timeout <= 0:
+        print("--timeout, --episode-timeout, and --judge-timeout must be > 0", file=sys.stderr)
         return 2
     if args.concurrency < 1:
         print("--concurrency must be >= 1", file=sys.stderr)
@@ -518,6 +539,9 @@ def main(argv: list[str] | None = None) -> int:
             manifest=manifest,
             args=args,
         )
+        judge_config = configured_judge(args)
+        if judge_config is not None:
+            runs = [judge_comparison_run(run, judge_config) for run in runs]
         result_payload = model_result_payload(adapter, tasks, runs, args, run_metadata)
         result_path = output_dir / f"{adapter.slug}.json"
         result_path.write_text(
@@ -1815,6 +1839,8 @@ def model_result_payload(
     args: argparse.Namespace,
     run_metadata: JsonDict | None = None,
 ) -> dict:
+    for run in runs:
+        persist_judge_input(run)
     result_rows = [agent_run_summary(run) for run in runs]
     return {
         "schema_version": RESULT_SCHEMA_VERSION,
@@ -1841,6 +1867,178 @@ def model_result_payload(
         "task_matrix": task_reliability_matrix(result_rows),
         "tasks": [task.qualified_id for task in tasks],
     }
+
+
+def configured_judge(args: argparse.Namespace) -> JudgeConfig | None:
+    """Resolve a judge only when its model was explicitly configured."""
+
+    model = getattr(args, "judge_model", None)
+    if not model and not os.environ.get("WORKSPACE_BENCH_JUDGE_MODEL"):
+        return None
+    return JudgeConfig.resolve(
+        model=model,
+        base_url=getattr(args, "judge_base_url", None),
+        api_key=getattr(args, "judge_api_key", None),
+        timeout=getattr(args, "judge_timeout", None),
+    )
+
+
+def judge_comparison_run(
+    run: ComparisonRun,
+    config: JudgeConfig,
+    *,
+    judge_callable: Callable[[JudgeConfig, str], JudgeVerdict] = judge_episode,
+) -> ComparisonRun:
+    """Judge a completed required episode and replace its cached grade."""
+
+    result = run.run_result
+    if not result.task.success.required_answer_judgment:
+        return run
+    cached = load_cached_judge_verdict(run.run_dir) if run.resumed else None
+    if cached is not None:
+        grade = grade_task(
+            result.task,
+            result.final_snapshot,
+            result.trace,
+            judge_verdict=cached.passed if cached.passed is not None else False,
+        )
+        return replace(
+            run,
+            run_result=replace(result, grade=grade),
+            judge_verdict=cached,
+        )
+    try:
+        context = build_judge_context(
+            result.task,
+            stark_app_catalog_entry(result.task),
+            result.trace,
+            answer_note_text(result.final_snapshot),
+        )
+        verdict = judge_callable(config, context)
+    except Exception as error:  # noqa: BLE001 - surfaced in the result row.
+        verdict = JudgeVerdict(
+            passed=None,
+            status="error",
+            raw=f"{type(error).__name__}: {error}",
+            model=config.model,
+            template_sha=JUDGE_TEMPLATE_SHA,
+            attempts=0,
+        )
+    write_json_atomic(
+        run.run_dir / "judge_verdict.json",
+        {
+            "passed": verdict.passed,
+            "status": verdict.status,
+            "raw": verdict.raw,
+            "model": verdict.model,
+            "template_sha": verdict.template_sha,
+            "attempts": verdict.attempts,
+        },
+    )
+    grade = grade_task(
+        result.task,
+        result.final_snapshot,
+        result.trace,
+        judge_verdict=verdict.passed if verdict.passed is not None else False,
+    )
+    return replace(
+        run,
+        run_result=replace(result, grade=grade),
+        judge_verdict=verdict,
+    )
+
+
+def load_cached_judge_verdict(run_dir: Path) -> JudgeVerdict | None:
+    path = run_dir / "judge_verdict.json"
+    if not path.is_file():
+        return None
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        status = str(payload["status"])
+        if status not in {"pass", "fail", "error"}:
+            return None
+        return JudgeVerdict(
+            passed=payload.get("passed"),
+            status=cast(Literal["pass", "fail", "error"], status),
+            raw=str(payload.get("raw", "")),
+            model=str(payload["model"]),
+            template_sha=str(payload["template_sha"]),
+            attempts=int(payload["attempts"]),
+        )
+    except (KeyError, OSError, TypeError, ValueError):
+        return None
+
+
+def answer_note_text(snapshot: JsonDict) -> str:
+    """Extract the last generated note from a completed workspace snapshot."""
+
+    composition = snapshot.get("dashboard_composition") or {}
+    notes = [
+        widget
+        for widget in composition.get("widgets", [])
+        if widget.get("generated") and widget.get("type") == "note"
+    ]
+    if not notes:
+        return ""
+    value = notes[-1].get("generated_data")
+    if isinstance(value, str):
+        return value
+    return json.dumps(value, sort_keys=True, ensure_ascii=False)
+
+
+def judge_reason_line(verdict: JudgeVerdict) -> str:
+    lines = [line.strip() for line in verdict.raw.splitlines() if line.strip()]
+    if verdict.status in {"pass", "fail"} and lines and lines[0].casefold() in {
+        "pass",
+        "fail",
+    }:
+        lines = lines[1:]
+    return lines[0] if lines else ""
+
+
+def persist_judge_input(run: ComparisonRun) -> None:
+    """Store the bounded inputs needed to judge without replaying an agent."""
+
+    task = run.run_result.task
+    if not task.success.required_answer_judgment:
+        return
+    payload = {
+        "task": {
+            "id": task.id,
+            "category": task.category,
+            "family": task.family,
+            "specification_level": task.specification_level,
+            "difficulty": task.difficulty,
+            "prompt": task.prompt,
+            "business_terms": list(task.business_terms),
+            "fixtures": {
+                "backends": [
+                    {
+                        "name": backend.name,
+                        "backend_id": backend.backend_id,
+                        "url": backend.url,
+                    }
+                    for backend in task.fixtures
+                ]
+            },
+            "initial_state": task.initial_state,
+            "allowed_tools": list(task.allowed_tools),
+            "success": {"required_answer_judgment": True},
+            "oracle_tool_calls": [],
+            "limits": task.limits,
+        },
+        "trace": [
+            {
+                "index": event.index,
+                "tool": event.call.name,
+                "args": event.call.args,
+                "ok": event.ok,
+            }
+            for event in run.run_result.trace
+        ],
+        "note_text": answer_note_text(run.run_result.final_snapshot),
+    }
+    write_json_atomic(run.run_dir / "judge_input.json", payload)
 
 
 def render_analysis_report(comparison: dict, output_dir: Path) -> str:
@@ -2108,6 +2306,23 @@ def summarize_runs(
     )
     runtime_runs = [run for run in valid_runs if run.run_result.task.success.runtime is not None]
     runtime_passed = sum(run.run_result.grade.runtime_passed for run in runtime_runs)
+    deterministic_passed = sum(
+        run.run_result.grade.state_passed
+        and run.run_result.grade.trace_passed
+        and run.run_result.grade.preservation_passed
+        and run.run_result.grade.runtime_passed
+        for run in valid_runs
+    )
+    judged_runs = [
+        run
+        for run in valid_runs
+        if run.run_result.task.success.required_answer_judgment
+        and run.judge_verdict is not None
+    ]
+    judged_passed = sum(
+        run.judge_verdict is not None and run.judge_verdict.passed is True
+        for run in judged_runs
+    )
     by_category: dict[str, dict[str, int]] = {}
     by_difficulty: dict[str, dict[str, int]] = {}
     outcomes_by_task: dict[str, list[bool]] = {}
@@ -2156,6 +2371,15 @@ def summarize_runs(
         "runtime_task_count": len(runtime_runs),
         "runtime_passed": runtime_passed,
         "runtime_pass_rate": (runtime_passed / len(runtime_runs) if runtime_runs else 1.0),
+        "deterministic_passed": deterministic_passed,
+        "deterministic_pass_rate": (
+            deterministic_passed / len(valid_runs) if valid_runs else 0.0
+        ),
+        "judged_task_count": len(judged_runs),
+        "judged_passed": judged_passed,
+        "judged_pass_rate": (
+            judged_passed / len(judged_runs) if judged_runs else 1.0
+        ),
         "mean_runtime_score": (
             sum(run.run_result.grade.runtime_score for run in runtime_runs) / len(runtime_runs)
             if runtime_runs
@@ -2190,6 +2414,12 @@ def agent_run_summary(run: ComparisonRun) -> dict:
     tool_call_count = len(result.trace)
     failed_tool_call_count = sum(not event.ok for event in result.trace)
     browser = browser_verdict_for_task(result.task.qualified_id)
+    verdict = run.judge_verdict
+    judge_status: str
+    if result.task.success.required_answer_judgment:
+        judge_status = verdict.status if verdict is not None else "pending"
+    else:
+        judge_status = "not_required"
     return {
         "id": result.task.id,
         "qualified_id": result.task.qualified_id,
@@ -2203,6 +2433,14 @@ def agent_run_summary(run: ComparisonRun) -> dict:
         "task_failed": not agent_run_process_failed(run) and not result.grade.passed,
         "grade_passed": result.grade.passed,
         **grade_summary(result.grade, include_passed=False),
+        "judge_passed": result.grade.judge_passed,
+        "judge_pending": result.grade.judge_pending,
+        "judge_checks_passed": result.grade.judge_checks_passed,
+        "judge_checks_total": result.grade.judge_checks_total,
+        "judge_status": judge_status,
+        "judge_model": verdict.model if verdict is not None else None,
+        "judge_template_sha": verdict.template_sha if verdict is not None else None,
+        "judge_raw_reason": judge_reason_line(verdict) if verdict is not None else "",
         "tool_call_count": tool_call_count,
         "failed_tool_call_count": failed_tool_call_count,
         "browser_verdict": browser,

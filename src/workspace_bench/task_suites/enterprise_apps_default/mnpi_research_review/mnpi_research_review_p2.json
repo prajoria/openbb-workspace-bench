@@ -33,7 +33,8 @@
      "64.44"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -81,7 +82,7 @@
    "args": {
     "widget_type": "note",
     "name": "MNPI & Research Review Note",
-    "data": "Identify research items that cannot be published until compliance evidence is complete: review score is 31.85; evidence score is 5.45; history score is 64.44. Anchors: research, evidence."
+    "data": "The only research item that cannot be published until compliance evidence is complete is the Flagship Long/Short research. In the mnpi_research_review_evidence_research_approval_evidence widget this fund has a score of 5.45 and its status is Open, indicating that approval evidence remains incomplete. The same fund also appears in the mnpi_research_review_research_draft_research_review widget with a score of 31.85 and an Open status, further confirming that it is blocked from publication until the compliance evidence is closed. No other research items in the provided widgets have an Open status; therefore they are not currently blocked. The scores 64.44 (from Evidence and Sign‑Off History) and 78.45 (from Case Summary) are noted as source evidence but do not affect publication status."
    }
   }
  ],

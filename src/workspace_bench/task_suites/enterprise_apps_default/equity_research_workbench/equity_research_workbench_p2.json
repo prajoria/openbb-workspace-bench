@@ -33,7 +33,8 @@
      "27.29"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -82,7 +83,7 @@
    "args": {
     "widget_type": "note",
     "name": "Equity Research Workbench Note",
-    "data": "Compare internal target price, street range, upside, and valuation sensitivity for the selected ticker: upside price_usd is 249629; history price_usd is 80700.4; sensitivity value is 27.29. Anchors: sensitivity, valuation."
+    "data": "For the covered Flagship Long/Short name, the served target-price record is Open at 80700.42 USD in Price Target History, and Price Target Upside carries an Open price of 249629.32 USD; valuation sensitivity from the DCF grid runs 27.29 to 27.97 across the first sensitivity steps. The served fields do not label which figure is the internal target versus the street range, and no current price or upside percentage is exposed, so the internal-versus-street comparison cannot be completed from these rows alone. Pull the labeled internal target, street low/high, and spot price to finish the comparison; the sensitivity axis definitions are also needed before the valuation range is quotable."
    }
   }
  ],

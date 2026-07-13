@@ -32,7 +32,8 @@
      "62.96"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -68,7 +69,7 @@
    "args": {
     "widget_type": "note",
     "name": "Stress & Liquidity Lab Note",
-    "data": "Find assumptions that should be challenged before the risk committee signs off: assumptions score is 87.8; liquidate score is 62.96. Anchors: assumptions, committee."
+    "data": "The risk committee should challenge the assumptions that drive the Flagship Long/Short scenario score of 87.8, as reported by the Scenario Builder Assumptions widget. This high score masks specific assumption definitions such as liquidity thresholds and stress test parameters, which are not disclosed in the widget data; without them the committee cannot gauge exposure accurately. Additionally, the Days to Liquidate widget shows a score of 62.96 for Flagship Long/Short, indicating that the fund may take longer than acceptable to liquidate positions under stress, thereby affecting liquidity assumptions. The committee must therefore scrutinize both the scenario definition and the liquidation timeline, verify that all underlying parameters are documented, and confirm that the liquidity threshold aligns with regulatory limits before signing off."
    }
   }
  ],

@@ -33,7 +33,8 @@
      "0.0732"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -81,7 +82,7 @@
    "args": {
     "widget_type": "note",
     "name": "Risk & Exposure Monitor Note",
-    "data": "Explain which limits are closest to escalation and what portfolio changes would reduce utilization: utilization exposure is 0.0339; warnings exposure is 0.0137; trend exposure is 0.0732. Anchors: utilization, escalation."
+    "data": "Limit Utilization for Flagship Long/Short is at 0.0339, the highest utilization among open limits and closest to escalation. Breaches and Warnings exposure of 0.0137 indicates that the fund is nearing breach thresholds. The Limit Breach Trend shows an exposure of 0.0732, confirming a rising trend toward limit breaches. To reduce utilization, portfolio changes should target the largest eligible exposures identified in the Limit Utilization widget. Reducing these exposures will lower both utilization and breach risk, moving the fund away from escalation."
    }
   }
  ],

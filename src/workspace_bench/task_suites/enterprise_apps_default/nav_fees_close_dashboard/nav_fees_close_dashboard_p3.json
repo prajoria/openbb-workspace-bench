@@ -33,7 +33,8 @@
      "225"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,51 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "nav_fees_close_dashboard_cash_cash_movements",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "nav_fees_close_dashboard_cash_fx_cash_and_overdrafts",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "nav_fees_close_dashboard_nav_nav_exceptions",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "NAV, Fees & Close Dashboard Note",
-    "data": "Summarize fee, cash, and pricing exceptions that require fund controller approval: accruals score is 93.49; aging score is 51.07; exceptions exception_count is 225. Anchors: exceptions, controller."
+    "data": "The controller's fee review includes two Open Fee Accruals rows, led by 93.49, so accrual reconciliation remains outstanding. Cash exceptions include Open Cash Break Aging at 51.07, Cash Movements at 97.6 and 41.1, and FX Cash and Overdrafts at 72.91 and 60.5. Pricing review must include the NAV Exceptions widget, which reports 36 and 118 Open exceptions for Flagship Long/Short. The close queue separately contains 225 Open exceptions, but that count should not be mislabeled as the pricing-exception measure. Fee, cash, pricing, and close exceptions all require reconciliation before fund controller approval."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 20
  }
 }

@@ -32,7 +32,8 @@
      "8.82"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -66,7 +67,7 @@
    "args": {
     "widget_type": "note",
     "name": "Reporting & Factsheet Studio Note",
-    "data": "Find factsheet language that needs approval before external distribution: status score is 26.04; library score is 8.82. Anchors: distribution, factsheet."
+    "data": "The Atlas Pension factsheet must be held back from external distribution until the distribution status score of 26.04, as shown in the Factsheet Distribution Status widget, is approved. The approved commentary library provides a score of 8.82, which confirms that the language aligns with internal standards. Before release, reconcile any draft language against this approved library to ensure consistency and obtain final approval from the distribution committee. Keep the conclusion conditional until the cited open items and missing detail are reconciled."
    }
   }
  ],

@@ -33,7 +33,8 @@
      "31.85"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,39 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "mnpi_research_review_evidence_evidence_and_sign_off_history",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "mnpi_research_review_research_price_target_approval",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "MNPI & Research Review Note",
-    "data": "Review the MNPI case file: wall crossings, meetings, research drafts, target changes, and sign-off history: crossings score is 99.08; logs score is 74.8; review score is 31.85. Anchors: crossings, meetings."
+    "data": "The MNPI file has two Open Flagship Long/Short wall crossings, including a 99.08 score, so the crossing history remains unresolved. Company meetings are also Open, with AAPL at 74.8 and XOM at 19.94. Draft Research Review has Open Flagship rows at 31.85 and 91.13, which establishes draft status without implying approval quality. Price Target Approval contains two Open targets, 238372.51 and 220248.41 USD, with changes of -0.0166 and -0.0733. Evidence and Sign-Off History remains Open at 64.44, so meetings, research drafts, target changes, and sign-off evidence must be reconciled before the case closes."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 18
  }
 }

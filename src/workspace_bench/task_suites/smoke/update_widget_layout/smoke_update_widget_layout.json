@@ -4,7 +4,7 @@
   "family": "update_widget_layout",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Resize the seeded Stark Alert Trend widget to 20 by 10.",
+  "prompt": "Use update_widget_layout on the seeded widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise' to place it at x 0, y 0, w 20, h 10 on tab_id 'overview'.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {

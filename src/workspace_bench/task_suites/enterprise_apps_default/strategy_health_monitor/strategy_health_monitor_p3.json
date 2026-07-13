@@ -33,7 +33,8 @@
      "43.5"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -78,7 +79,7 @@
    "args": {
     "widget_type": "note",
     "name": "Strategy Health Monitor Note",
-    "data": "Build the weekly strategy-health brief for the CIO with watchlist names and catalyst risk: levels score is 14.24; calendar score is 62.05; names score is 43.5. Anchors: watchlist, catalyst."
+    "data": "Add Global Equities to the CIO watchlist, with its open action-level score at 14.24 from the Names Near Action Levels widget. Its catalyst-calendar score is 62.05 from the Catalyst Calendar widget and crowded-names score is 43.5 from the Crowded Names widget. Review the catalyst and crowding entries before changing exposure, since all three items remain open. Keep the conclusion conditional until the cited open items and missing detail are reconciled."
    }
   }
  ],

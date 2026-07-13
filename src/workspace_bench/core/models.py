@@ -977,8 +977,9 @@ class RuntimeChecks:
 
 @dataclass(frozen=True)
 class SuccessCriteria:
-    """All deterministic checks for a task."""
+    """All success checks for a task."""
 
+    required_answer_judgment: bool = False
     required_tabs: tuple[str, ...] = ()
     required_tab_names: tuple[str, ...] = ()
     required_widgets: tuple[RequiredWidget, ...] = ()
@@ -1008,6 +1009,7 @@ class SuccessCriteria:
         _reject_unknown_fields(
             payload,
             {
+                "required_answer_judgment",
                 "required_tabs",
                 "required_tab_names",
                 "required_widgets",
@@ -1076,6 +1078,7 @@ class SuccessCriteria:
                     f"capability connection references unknown capabilities: {sorted(unknown)}"
                 )
         return cls(
+            required_answer_judgment=bool(payload.get("required_answer_judgment", False)),
             required_tabs=tuple(required_tabs),
             required_tab_names=tuple(required_tab_names),
             required_widgets=tuple(RequiredWidget.from_dict(item) for item in required_widgets),
@@ -1266,7 +1269,7 @@ class DeploymentReceipt:
 
 @dataclass(frozen=True)
 class GradeResult:
-    """Deterministic grade for one task run."""
+    """Grade for one task run."""
 
     task_id: str
     score: float
@@ -1289,6 +1292,10 @@ class GradeResult:
     runtime_passed: bool = True
     runtime_checks_passed: int = 0
     runtime_checks_total: int = 0
+    judge_passed: bool = True
+    judge_pending: bool = False
+    judge_checks_passed: int = 0
+    judge_checks_total: int = 0
     deployment_receipt: DeploymentReceipt | None = None
     polish_score: float = 1.0
     polish_checks_passed: int = 0

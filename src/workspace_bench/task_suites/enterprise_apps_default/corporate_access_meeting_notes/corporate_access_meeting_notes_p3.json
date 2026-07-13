@@ -33,7 +33,8 @@
      "45.91"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,39 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_compliance_mnpi_attestation_status",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_meetings_expert_calls",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Corporate Access & Meeting Notes Note",
-    "data": "Summarize management claims that changed the investment thesis and list the evidence still required: tracker score is 21.22; log score is 49.26; history score is 45.91. Anchors: management, evidence."
+    "data": "Management claims that altered the investment thesis for Flagship Long/Short include a 0.0358 change in the management‑claims tracker (score 21.22) and a 0.0157 change in the thesis change log (score 49.26). Evidence still required consists of: (1) a signed confirmation from the fund manager that the claim is accurate, sourced from widget corporate_access_meeting_notes_evidence_and_sign_off_history with score 45.91; (2) documentation of any material risk factors identified during the expert call, referenced in widget Expert Calls; and (3) a compliance attestation confirming no MNPI exposure, from widget MNPI Attestation Status. Until these items are completed and signed off, the thesis remains unchanged. Keep the conclusion conditional until the cited facts and any named data gaps are reconciled."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 18
  }
 }

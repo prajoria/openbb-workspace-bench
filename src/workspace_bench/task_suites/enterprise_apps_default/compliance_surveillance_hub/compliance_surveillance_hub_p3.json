@@ -32,7 +32,8 @@
      "19"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -68,7 +69,7 @@
    "args": {
     "widget_type": "note",
     "name": "Compliance Surveillance Hub Note",
-    "data": "Draft the investigation summary with evidence, next owner, and remediation status: evidence score is 64.75; breaches breach_count is 19. Anchors: investigation, remediation."
+    "data": "The investigation remains open with an Investigation Evidence score of 64.75, indicating significant audit findings for the Flagship Long/Short fund. The file contains 19 policy breaches, as shown in the Policy Breaches widget (Policy Breaches). The next owner must validate each breach against the evidence and document remediation dispositions. Closure of the case is contingent upon mapping all breaches to evidence and obtaining owner sign‑off. Until that process completes, the investigation status remains unresolved; the next owner cannot be determined at this time."
    }
   }
  ],

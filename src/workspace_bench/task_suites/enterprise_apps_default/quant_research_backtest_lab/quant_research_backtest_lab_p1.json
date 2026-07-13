@@ -33,7 +33,8 @@
      "0.0342"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -81,7 +82,7 @@
    "args": {
     "widget_type": "note",
     "name": "Quant Research & Backtest Lab Note",
-    "data": "Evaluate whether the selected model is production-ready using signal quality, backtest path, risk exposures, and capacity: metrics value is 83.92; performance score is 35.41; table exposure is 0.0342. Anchors: signal, exposures."
+    "data": "The model is not yet production‑ready because its signal quality reads 83.92, which meets the required threshold but does not compensate for other deficiencies. Backtest performance scores 35.41, indicating that the backtest path has not achieved an acceptable level of risk‑adjusted return. Factor exposures are 0.0342, showing a modest exposure to the Flagship Long/Short factor but still requiring further control validation. Capacity evidence is unavailable; we need detailed capacity metrics to determine if the model can scale without compromising performance. Until the backtest path, exposure limits, and capacity evidence are approved, the model should remain in review."
    }
   }
  ],

@@ -7,8 +7,10 @@ import asyncio
 import json
 import sys
 from dataclasses import asdict
+from datetime import datetime, timezone
 from pathlib import Path
 from threading import Event
+from typing import Any, Callable
 
 from workspace_bench.agents.agent_command import (
     AgentCommandRun,
@@ -22,6 +24,17 @@ from workspace_bench.core.models import (
     CANARY_GUID,
     Task,
     TaskSuiteManifest,
+    ToolCall,
+    ToolTraceEvent,
+)
+from workspace_bench.core.judge import (
+    JUDGE_TEMPLATE_SHA,
+    JUDGE_TEMPLATE_VERSION,
+    JudgeConfig,
+    JudgeVerdict,
+    build_judge_context,
+    judge_episode,
+    stark_app_catalog_entry,
 )
 from workspace_bench.core.provenance import git_provenance
 from workspace_bench.core.runner import (
@@ -170,6 +183,15 @@ def main(argv: list[str] | None = None) -> int:
     _add_task_collection_args(runtime_parser)
     _add_task_filters(runtime_parser)
     runtime_parser.add_argument("--json", action="store_true", help="Emit JSON.")
+
+    judge_parser = subparsers.add_parser(
+        "judge", help="Judge pending or errored answer rows in a stored evaluator run."
+    )
+    judge_parser.add_argument("--run-dir", type=Path, required=True)
+    judge_parser.add_argument("--judge-model", required=True)
+    judge_parser.add_argument("--judge-base-url")
+    judge_parser.add_argument("--judge-api-key")
+    judge_parser.add_argument("--judge-timeout", type=float, default=60.0)
 
     adversarial_parser = subparsers.add_parser(
         "adversarial",
@@ -333,6 +355,8 @@ def main(argv: list[str] | None = None) -> int:
         return _cmd_browser_cert(args)
     if args.command == "runtime-probe":
         return _cmd_runtime_probe(args)
+    if args.command == "judge":
+        return _cmd_judge(args)
     if args.command == "adversarial":
         return _cmd_adversarial(args)
     if args.command == "live-parity":
@@ -1143,6 +1167,257 @@ def _agent_runs_summary(runs: list[AgentCommandRun]) -> dict:
     summary["failed"] = len(runs) - summary["passed"]
     summary["process_failures"] = sum(run.exit_code != 0 or run.timed_out for run in runs)
     return summary
+
+
+def _cmd_judge(args: argparse.Namespace) -> int:
+    from workspace_bench.reports.metrics import (
+        summarize_result_rows,
+        task_reliability_matrix,
+    )
+    from workspace_bench.reports.model_compare import judge_reason_line
+
+    if args.judge_timeout <= 0:
+        print("--judge-timeout must be > 0", file=sys.stderr)
+        return 2
+    config = JudgeConfig.resolve(
+        model=args.judge_model,
+        base_url=args.judge_base_url,
+        api_key=args.judge_api_key,
+        timeout=args.judge_timeout,
+    )
+    result_paths = [
+        path
+        for path in sorted(args.run_dir.glob("*.json"))
+        if path.name not in {"comparison.json"} and not path.name.endswith(".manifest.json")
+    ]
+    judged = 0
+    errors = 0
+    updated_payloads: dict[str, dict] = {}
+    for result_path in result_paths:
+        try:
+            payload = json.loads(result_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        rows = payload.get("results")
+        if not isinstance(rows, list):
+            continue
+        changed = False
+        for row in rows:
+            if not isinstance(row, dict) or row.get("judge_status") not in {
+                "pending",
+                "error",
+            }:
+                continue
+            if int(row.get("judge_checks_total", 0)) != 1:
+                continue
+            try:
+                stored, stored_path = _load_judge_input(args.run_dir, result_path, row)
+                task = Task.from_dict(stored["task"])
+                trace = tuple(
+                    ToolTraceEvent(
+                        index=int(event["index"]),
+                        call=ToolCall(str(event["tool"]), dict(event.get("args", {}))),
+                        ok=bool(event["ok"]),
+                        result={},
+                    )
+                    for event in stored["trace"]
+                )
+                context = build_judge_context(
+                    task,
+                    stark_app_catalog_entry(task),
+                    trace,
+                    str(stored.get("note_text", "")),
+                )
+                verdict = judge_episode(config, context)
+            except Exception as error:  # noqa: BLE001 - persisted as row output.
+                verdict = JudgeVerdict(
+                    passed=None,
+                    status="error",
+                    raw=f"{type(error).__name__}: {error}",
+                    model=config.model,
+                    template_sha=JUDGE_TEMPLATE_SHA,
+                    attempts=0,
+                )
+                stored_path = None
+            if stored_path is not None:
+                (stored_path.parent / "judge_verdict.json").write_text(
+                    json.dumps(asdict(verdict), indent=2, sort_keys=True) + "\n",
+                    encoding="utf-8",
+                )
+            _apply_stored_judge_verdict(row, verdict, judge_reason_line(verdict))
+            judged += 1
+            errors += int(verdict.status == "error")
+            changed = True
+        if changed:
+            _refresh_stored_summary(payload, summarize_result_rows, task_reliability_matrix)
+            result_path.write_text(
+                json.dumps(payload, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            model = payload.get("model", {})
+            if isinstance(model, dict) and isinstance(model.get("slug"), str):
+                updated_payloads[model["slug"]] = payload
+    _refresh_comparison_summary(args.run_dir, updated_payloads)
+    print(f"Judged {judged} row(s); errors={errors}.")
+    return 1 if errors else 0
+
+
+def _load_judge_input(run_dir: Path, result_path: Path, row: dict) -> tuple[dict, Path]:
+    stored_run_dir = Path(str(row.get("run_dir", "")))
+    candidates = [
+        stored_run_dir / "judge_input.json",
+        run_dir / stored_run_dir / "judge_input.json",
+        result_path.parent / stored_run_dir / "judge_input.json",
+    ]
+    for candidate in candidates:
+        if candidate.is_file():
+            return json.loads(candidate.read_text(encoding="utf-8")), candidate
+    task_id = str(row.get("qualified_id") or row.get("id", "")).replace("/", "__")
+    repeat = int(row.get("repeat", 1))
+    matches = list(run_dir.rglob("judge_input.json"))
+    for candidate in matches:
+        parent_text = str(candidate.parent)
+        if task_id in parent_text and (repeat == 1 or f"repeat_{repeat:02d}" in parent_text):
+            return json.loads(candidate.read_text(encoding="utf-8")), candidate
+    raise FileNotFoundError(f"stored judge input not found for {row.get('id')}")
+
+
+def _apply_stored_judge_verdict(row: dict, verdict: JudgeVerdict, reason: str) -> None:
+    passed = verdict.passed is True
+    deterministic = all(
+        bool(row.get(field, True))
+        for field in (
+            "state_passed",
+            "trace_passed",
+            "preservation_passed",
+            "runtime_passed",
+        )
+    )
+    previous_total = int(row.get("judge_checks_total", 0))
+    deterministic_checks_passed = int(row.get("checks_passed", 0)) - int(
+        row.get("judge_checks_passed", 0)
+    )
+    deterministic_checks_total = int(row.get("checks_total", 0)) - previous_total
+    row.update(
+        {
+            "judge_passed": passed,
+            "judge_pending": False,
+            "judge_checks_passed": int(passed),
+            "judge_checks_total": 1,
+            "judge_status": verdict.status,
+            "judge_model": verdict.model,
+            "judge_template_sha": verdict.template_sha,
+            "judge_raw_reason": reason,
+            "judge_attempts": verdict.attempts,
+            "judged_at_model": verdict.model,
+            "judged_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+            "judge_provenance": {
+                "template_version": JUDGE_TEMPLATE_VERSION,
+                "template_sha": verdict.template_sha,
+                "attempts": verdict.attempts,
+            },
+            "checks_passed": deterministic_checks_passed + int(passed),
+            "checks_total": deterministic_checks_total + 1,
+            "grade_passed": deterministic and passed,
+        }
+    )
+    row["passed"] = bool(row["grade_passed"] and not row.get("process_failed", False))
+    row["task_failed"] = bool(not row.get("process_failed", False) and not row["grade_passed"])
+    issues = [
+        issue for issue in row.get("issues", []) if issue.get("code") != "answer_judgment"
+    ]
+    if not passed:
+        issues.append(
+            {
+                "code": "answer_judgment",
+                "message": (
+                    "The answer judge returned an error."
+                    if verdict.status == "error"
+                    else "The answer did not pass the configured LLM judge."
+                ),
+            }
+        )
+    row["issues"] = issues
+
+
+def _refresh_stored_summary(
+    payload: dict,
+    summarize: Callable[[list[dict]], dict[str, Any]],
+    matrix: Callable[[list[dict]], list[dict[str, Any]]],
+) -> None:
+    rows = payload["results"]
+    summary = payload.setdefault("summary", {})
+    valid = [row for row in rows if not row.get("process_failed", False)]
+    deterministic_passed = sum(
+        all(
+            bool(row.get(field, True))
+            for field in (
+                "state_passed",
+                "trace_passed",
+                "preservation_passed",
+                "runtime_passed",
+            )
+        )
+        for row in valid
+    )
+    judged_rows = [row for row in valid if row.get("judge_status") in {"pass", "fail", "error"}]
+    judged_passed = sum(row.get("judge_status") == "pass" for row in judged_rows)
+    calibration = summarize(rows)
+    strict_passed = sum(bool(row.get("passed")) for row in rows)
+    task_passed = sum(bool(row.get("grade_passed")) for row in valid)
+    by_category = _stored_result_buckets(rows, "category")
+    by_difficulty = _stored_result_buckets(rows, "difficulty")
+    summary.update(calibration)
+    summary.update(
+        {
+            "passed": strict_passed,
+            "failed": len(rows) - strict_passed,
+            "pass_rate": strict_passed / len(rows) if rows else 0.0,
+            "task_passed": task_passed,
+            "task_failures": len(valid) - task_passed,
+            "task_pass_rate": task_passed / len(valid) if valid else 0.0,
+            "deterministic_passed": deterministic_passed,
+            "deterministic_pass_rate": deterministic_passed / len(valid) if valid else 0.0,
+            "judged_task_count": len(judged_rows),
+            "judged_passed": judged_passed,
+            "judged_pass_rate": judged_passed / len(judged_rows) if judged_rows else 1.0,
+            "by_category": by_category,
+            "by_difficulty": by_difficulty,
+        }
+    )
+    payload["task_matrix"] = matrix(rows)
+
+
+def _stored_result_buckets(rows: list[dict], field: str) -> dict[str, dict[str, int]]:
+    buckets: dict[str, dict[str, int]] = {}
+    for row in rows:
+        key = str(row.get(field, ""))
+        bucket = buckets.setdefault(key, {"passed": 0, "total": 0})
+        bucket["total"] += 1
+        bucket["passed"] += int(bool(row.get("passed")))
+    return buckets
+
+
+def _refresh_comparison_summary(run_dir: Path, updated: dict[str, dict]) -> None:
+    path = run_dir / "comparison.json"
+    if not path.is_file() or not updated:
+        return
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    for model in payload.get("models", []):
+        result = updated.get(model.get("slug"))
+        if result is None:
+            continue
+        result_path = model.get("result_path")
+        model.clear()
+        model.update(
+            {
+                "model": result.get("model", {}).get("label"),
+                "slug": result.get("model", {}).get("slug"),
+                **result["summary"],
+                "result_path": result_path,
+            }
+        )
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def _cmd_serve_fixture(backend_name: str, host: str, port: int) -> int:

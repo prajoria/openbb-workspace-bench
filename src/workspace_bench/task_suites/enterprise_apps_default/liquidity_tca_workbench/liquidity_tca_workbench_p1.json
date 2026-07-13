@@ -33,7 +33,8 @@
      "31.3"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -74,15 +75,27 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "liquidity_tca_workbench_tca_venue_flow_sankey",
+    "data_args": {
+     "desk": "US Equity",
+     "period": "YTD",
+     "raw": false
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Liquidity & TCA Workbench Note",
-    "data": "Recommend execution tactics by order size, volume profile, venue flow, and expected implementation shortfall: size order_count is 21; profile score is 40.06; shortfall score is 31.3. Anchors: execution, shortfall."
+    "data": "Execution tactics for the US Equity desk should begin with an order size of 21 as indicated by the ADV and Order Size widget. The Volume Profile score of 40.06 from the Volume Profile widget suggests moderate liquidity, so a staged execution approach is recommended until the profile stabilizes. Expected implementation shortfall is 31.3 per the Implementation Shortfall widget, indicating that careful venue selection will be required to mitigate cost. Venue Flow Sankey shows recent daily flow values of 24.19, 20.32, and 20.85, so prioritize venues with higher flow during those periods to reduce slippage. Execution should therefore focus on venues with the highest observed flow while monitoring real‑time volume to adjust order pacing accordingly."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 16
  }
 }

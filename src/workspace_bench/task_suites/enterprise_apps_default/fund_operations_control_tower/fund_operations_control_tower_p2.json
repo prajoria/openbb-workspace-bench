@@ -33,7 +33,8 @@
      "61"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,27 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_pricing_nav_exceptions",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Fund Operations Control Tower Note",
-    "data": "Prioritize breaks by age, dollar impact, settlement risk, and downstream NAV impact: breaks score is 1.67; aging score is 30.55; exceptions exception_count is 61. Anchors: breaks, settlement."
+    "data": "Settlement risk is explicit in 61 Open Settlement Exceptions for Flagship Long/Short, while downstream NAV impact is represented by Open NAV exception counts of 67 and 210. Break Aging has two Open readings, 30.55 and 51.16, and Custodian Breaks has readings of 1.67 and 59.91. The rows do not contain break identifiers that map an age reading to a custodian break, so individual breaks cannot be ordered from those scores alone. They also contain no currency or dollar-impact field; exception counts are not a valid substitute for dollar impact. Prioritize the settlement queue for review, but complete the requested break ranking only after break-level age, dollar impact, settlement status, and NAV-impact fields are joined."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 16
  }
 }

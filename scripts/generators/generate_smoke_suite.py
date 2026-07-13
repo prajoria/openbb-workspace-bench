@@ -135,13 +135,13 @@ def build_tasks() -> list[JsonDict]:
     tasks = [
         _task(
             "get_workspace_snapshot",
-            "Read the current Workspace snapshot once.",
+            "Call get_workspace_snapshot once.",
             [_call("get_workspace_snapshot", {})],
             _required_call("get_workspace_snapshot", {}),
         ),
         _task(
             "manage_dashboard",
-            "Rename the Home dashboard to Smoke Home Dashboard.",
+            "Use manage_dashboard operation='update' with dashboard_id 'dash_001' to rename the Home dashboard to 'Smoke Home Dashboard'.",
             [
                 _call(
                     "manage_dashboard",
@@ -156,7 +156,7 @@ def build_tasks() -> list[JsonDict]:
         ),
         _task(
             "manage_navigation_bar",
-            "Create Overview and Details tabs on Home.",
+            "Use manage_navigation_bar operation='create' on the current dashboard with tabs named 'Overview' and 'Details'.",
             [
                 _call(
                     "manage_navigation_bar",
@@ -170,7 +170,7 @@ def build_tasks() -> list[JsonDict]:
         ),
         _task(
             "navigate_workspace",
-            "Navigate to Details and leave a small marker there.",
+            "Use navigate_workspace operation='tab' to switch to tab_id 'details', then use add_generative_widget to add a note named 'Navigation Marker' on that tab.",
             [
                 _call("navigate_workspace", {"operation": "tab", "tab_id": "details"}),
                 _call(
@@ -201,13 +201,13 @@ def build_tasks() -> list[JsonDict]:
         ),
         _task(
             "list_available_widgets",
-            "List the widgets available from Bench Stark Enterprise.",
+            "Call list_available_widgets for origin 'Bench Stark Enterprise'.",
             [_call("list_available_widgets", {"origin": ORIGIN})],
             _required_call("list_available_widgets", {"origin": ORIGIN}),
         ),
         _task(
             "get_widget_schema",
-            "Read the schema for the Stark Alert Trend widget.",
+            "Call get_widget_schema for origin 'Bench Stark Enterprise' and widget_id 'compliance_surveillance_hub_alerts_alert_trend'.",
             [_call("get_widget_schema", {"origin": ORIGIN, "widget_id": WIDGET_ID})],
             _required_call(
                 "get_widget_schema", {"origin": ORIGIN, "widget_id": WIDGET_ID}
@@ -215,7 +215,7 @@ def build_tasks() -> list[JsonDict]:
         ),
         _task(
             "get_params_options",
-            "Read valid period options for the Stark Alert Trend widget.",
+            "Call get_params_options for param_name 'period' of widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise'.",
             [
                 _call(
                     "get_params_options",
@@ -238,7 +238,7 @@ def build_tasks() -> list[JsonDict]:
         ),
         _task(
             "get_widget_data",
-            "Fetch open high-severity YTD data from the Stark Alert Trend widget.",
+            "Call get_widget_data for origin 'Bench Stark Enterprise' and widget_id 'compliance_surveillance_hub_alerts_alert_trend' with data_args severity 'High', status 'Open', period 'YTD'.",
             [
                 _call(
                     "get_widget_data",
@@ -260,7 +260,7 @@ def build_tasks() -> list[JsonDict]:
         ),
         _task(
             "create_widget",
-            "Create the Stark Alert Trend widget on Home.",
+            "Use create_widget to add widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise' to the current dashboard with data_args severity 'High', status 'Open', period 'YTD'.",
             [
                 _call(
                     "create_widget",
@@ -283,7 +283,7 @@ def build_tasks() -> list[JsonDict]:
         ),
         _task(
             "update_widget",
-            "Change the seeded Stark Alert Trend widget period to MTD.",
+            "Use update_widget on the seeded widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise' to set data_args period to 'MTD'.",
             [
                 _call(
                     "update_widget",
@@ -307,7 +307,7 @@ def build_tasks() -> list[JsonDict]:
         ),
         _task(
             "update_widget_layout",
-            "Resize the seeded Stark Alert Trend widget to 20 by 10.",
+            "Use update_widget_layout on the seeded widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise' to place it at x 0, y 0, w 20, h 10 on tab_id 'overview'.",
             [
                 _call(
                     "update_widget_layout",
@@ -338,7 +338,7 @@ def build_tasks() -> list[JsonDict]:
         ),
         _task(
             "delete_widget",
-            "Delete the seeded Stark Alert Trend widget.",
+            "Use delete_widget to remove the seeded widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise'.",
             [_call("delete_widget", {"origin": ORIGIN, "widget_id": WIDGET_ID})],
             {
                 "required_widgets": [
@@ -354,7 +354,7 @@ def build_tasks() -> list[JsonDict]:
         ),
         _task(
             "add_generative_widget",
-            "Add a minimal generated note to Home.",
+            "Use add_generative_widget to add a note named 'Smoke Note' with any short text.",
             [
                 _call(
                     "add_generative_widget",
@@ -373,20 +373,20 @@ def build_tasks() -> list[JsonDict]:
         ),
         _task(
             "read_widget",
-            "Read the seeded Stark Alert Trend widget once.",
+            "Call read_widget for the seeded widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise'.",
             [_call("read_widget", {"origin": ORIGIN, "widget_id": WIDGET_ID})],
             _required_call("read_widget", {"origin": ORIGIN, "widget_id": WIDGET_ID}),
             initial_state=_seed_dashboard("read_widget", with_widget=True),
         ),
         _task(
             "manage_backends",
-            "List connected Workspace backends once.",
+            "Call manage_backends operation='list' once.",
             [_call("manage_backends", {"operation": "list"})],
             _required_call("manage_backends", {"operation": "list"}),
         ),
         _task(
             "manage_apps",
-            "Instantiate the Stark Portfolio Command Center as Smoke Instantiated App.",
+            "Use manage_apps operation='instantiate' with backend_id 'backend_001', template_id 'portfolio-command-center', dashboard_name 'Smoke Instantiated App', and activate true.",
             [
                 _call(
                     "manage_apps",
@@ -406,13 +406,13 @@ def build_tasks() -> list[JsonDict]:
         ),
         _task(
             "get_skill_content",
-            "Read the Finance Tearsheet skill content once.",
+            "Call get_skill_content with slug 'finance-tearsheet'.",
             [_call("get_skill_content", {"slug": "finance-tearsheet"})],
             _required_call("get_skill_content", {"slug": "finance-tearsheet"}),
         ),
         _task(
             "read_workspace_resource",
-            "Read the Workspace widget-types resource once.",
+            "Call read_workspace_resource with uri 'openbb://workspace/specs/widget-types'.",
             [
                 _call(
                     "read_workspace_resource",
@@ -426,13 +426,13 @@ def build_tasks() -> list[JsonDict]:
         ),
         _task(
             "get_workspace_prompt",
-            "Read the Workspace tool-usage prompt once.",
+            "Call get_workspace_prompt with name 'workspace_tool_usage'.",
             [_call("get_workspace_prompt", {"name": "workspace_tool_usage"})],
             _required_call("get_workspace_prompt", {"name": "workspace_tool_usage"}),
         ),
         _task(
             "assign_tasks_to_agents",
-            "Round-trip one bounded task request through the agent envelope.",
+            "Call assign_tasks_to_agents with one task request having id 'smoke-envelope' and task text 'Return the Workspace smoke envelope.'",
             [
                 _call(
                     "assign_tasks_to_agents",

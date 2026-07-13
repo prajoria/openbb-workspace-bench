@@ -33,7 +33,8 @@
      "57.19"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,87 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_meetings_meeting_calendar",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_meetings_expert_calls",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_notes_meeting_notes_index",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_claims_management_claims_tracker",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_claims_thesis_change_log",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "corporate_access_meeting_notes_claims_evidence_and_sign_off_history",
+    "data_args": {
+     "sector": "Healthcare",
+     "status": "Open",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Corporate Access & Meeting Notes Note",
-    "data": "Flag meetings or notes that require compliance review before research can be distributed: status score is 20.04; tags score is 26.71; ups score is 57.19. Anchors: meetings, compliance."
+    "data": "Flag all open Flagship Long/Short meetings and research notes for compliance review before distribution, because all three compliance gates are Open: MNPI attestation at 20.04, restricted tags at 26.71, and compliance follow-ups at 57.19. Behind those gates sit the Open calendar meeting (91.82), the Open expert call (4.24), the Open meeting-notes index entry (83.08), and the open claims records — management claims tracker at 21.22, thesis change log at 49.26, and evidence sign-off history at 45.91 — none of which should be released until the attestation, tag, and follow-up gates are cleared."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 26
  }
 }

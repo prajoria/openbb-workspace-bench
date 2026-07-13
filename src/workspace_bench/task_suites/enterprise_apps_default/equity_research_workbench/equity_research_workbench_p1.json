@@ -32,7 +32,8 @@
      "8.1"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -64,15 +65,75 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "equity_research_workbench_company_ownership_snapshot",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "equity_research_workbench_coverage_coverage_universe",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "equity_research_workbench_coverage_price_target_history",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "equity_research_workbench_coverage_price_target_upside",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "equity_research_workbench_thesis_bull_base_bear",
+    "data_args": {
+     "period": "YTD",
+     "sector": "Healthcare",
+     "ticker": "LLY"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Equity Research Workbench Note",
-    "data": "Summarize what changed in coverage, estimates, valuation, ownership, and thesis since the last review: revisions score is 97.51; log score is 8.1. Anchors: estimates, valuation."
+    "data": "The coverage universe has shifted slightly with a change of -0.0065 for Flagship Long/Short, indicating a modest contraction in the portfolio’s focus. The consensus revisions score now stands at 97.51, reflecting an updated view on earnings expectations that aligns with the latest analyst estimates. Valuation assumptions have been tightened, as shown by the valuation assumption log score of 8.1, which narrows the discount‑rate range used in the DCF model. Ownership snapshot data reveal a change of -0.0063 for Flagship Long/Short, confirming that institutional holdings remain stable but slightly reduced compared to the prior review. The price target history shows an updated internal target of 80700.42 USD and an upside target of 249629.32 USD, illustrating a significant upward revision in the research view. In addition, the thesis has become more bullish: the Bull Base Bear score for Flagship Long/Short increased to 97.5 with a change of 0.0794, indicating a stronger positive outlook compared to the previous review."
    }
   }
  ],
  "limits": {
-  "max_turns": 12
+  "max_turns": 22
  }
 }

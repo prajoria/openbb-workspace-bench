@@ -33,7 +33,8 @@
      "119"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -77,15 +78,51 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "compliance_surveillance_hub_personal_trading_pre_clearance_queue",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "compliance_surveillance_hub_restricted_list_restricted_and_watch_list",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "compliance_surveillance_hub_audit_access_and_export_logs",
+    "data_args": {
+     "period": "YTD",
+     "severity": "High",
+     "status": "Open"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Compliance Surveillance Hub Note",
-    "data": "Identify employee trades or research activity that should be escalated to compliance leadership: trades score is 29.14; breaches breach_count is 19; alerts alert_count is 119. Anchors: compliance, leadership."
+    "data": "Escalate to compliance leadership on both fronts. Employee trading: the Flagship Long/Short employee-trade review is Open at 29.14 with 19 open policy breaches, 119 open surveillance alerts, and two open pre-clearance items at 15.89 and 15.57 — the breaches and alerts are the immediate escalation. Research activity: the restricted-and-watch list is Open at 18.98 and the access-and-export log review is Open at 37.01, so research touching restricted names and the export trail should be escalated alongside the trades until both reviews close."
    }
   }
  ],
  "limits": {
-  "max_turns": 14
+  "max_turns": 20
  }
 }

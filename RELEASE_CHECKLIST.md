@@ -41,6 +41,7 @@ Use this checklist before announcing a public Workspace Bench release.
 - [ ] `uv run pytest -q tests/test_code_tasks.py` proves real HTTP execution, non-empty/test-sensitive pytest enforcement, agent workdir envelopes, and no orphan process.
 - [ ] Root `CONTRIBUTING.md` explains how to add tasks and suites.
 - [ ] Repository URL in `pyproject.toml` is correct.
+- [ ] The answer judge is calibrated against the pinned local judge model: `uv run python scripts/audits/audit_judge_calibration.py --repeats 3` passes (all exemplars PASS; shallow, off-topic, and injection mutants FAIL; verdicts stable). Local gate — CI stays deterministic-only.
 - [ ] License decision is made before open-source publication.
 - [ ] `uv lock --check` passes and `uv build` produces both sdist and wheel.
 - [ ] CI is green.

@@ -33,7 +33,8 @@
      "9.92"
     ]
    }
-  ]
+  ],
+  "required_answer_judgment": true
  },
  "oracle_tool_calls": [
   {
@@ -78,7 +79,7 @@
    "args": {
     "widget_type": "note",
     "name": "Execution Desk Note",
-    "data": "Explain which fills underperformed arrival price and whether broker, venue, or algo choice drove the outcome: slippage score is 41.08; scorecard score is 68.41; table score is 9.92. Anchors: fills, arrival."
+    "data": "The VWAP and Arrival Slippage widget shows a score of 41.08 for Goldman Sachs on the US Equity desk (VWAP and Arrival Slippage). The Fills Table widget lists a score of 9.92 for Goldman Sachs (Fills Table). Because the arrival slippage score is higher than the fills score, the Goldman Sachs fills underperformed arrival price. No venue or algo data are provided in the widgets, so causality cannot be determined from the available information, while retaining 68.41 as source evidence."
    }
   }
  ],

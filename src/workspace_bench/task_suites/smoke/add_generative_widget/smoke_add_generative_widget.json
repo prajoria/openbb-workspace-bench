@@ -4,7 +4,7 @@
   "family": "add_generative_widget",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Add a minimal generated note to Home.",
+  "prompt": "Use add_generative_widget to add a note named 'Smoke Note' with any short text.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},

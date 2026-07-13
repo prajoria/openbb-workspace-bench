@@ -4,7 +4,7 @@
   "family": "manage_apps",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Instantiate the Stark Portfolio Command Center as Smoke Instantiated App.",
+  "prompt": "Use manage_apps operation='instantiate' with backend_id 'backend_001', template_id 'portfolio-command-center', dashboard_name 'Smoke Instantiated App', and activate true.",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},
