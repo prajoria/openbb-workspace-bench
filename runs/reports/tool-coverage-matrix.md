@@ -5,8 +5,6 @@ an `x` marks each Workspace MCP tool the **oracle trace** uses — the
 ground-truth minimal solution path. `allowed_tools` in each task is a
 superset (agents may explore), and grader `required_tool_calls` are a subset
 (behaviors checked explicitly). Difficulty is the public complexity label.
-The experimental `build-openbb-backends` suite is excluded because it uses
-filesystem/shell coding agents rather than the Workspace MCP tool surface.
 
 Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=manage_navigation_bar, `nav`=navigate_workspace, `list_w`=list_available_widgets, `schema`=get_widget_schema, `params`=get_params_options, `data`=get_widget_data, `create`=create_widget, `update`=update_widget, `layout`=update_widget_layout, `delete`=delete_widget, `note`=add_generative_widget, `read_w`=read_widget, `backends`=manage_backends, `apps`=manage_apps, `skill`=get_skill_content, `resource`=read_workspace_resource, `prompt`=get_workspace_prompt, `agents`=assign_tasks_to_agents
 

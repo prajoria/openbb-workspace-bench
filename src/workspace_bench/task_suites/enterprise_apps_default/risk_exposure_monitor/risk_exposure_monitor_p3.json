@@ -82,7 +82,7 @@
    "args": {
     "widget_type": "note",
     "name": "Risk & Exposure Monitor Note",
-    "data": "Limit Utilization for Flagship Long/Short is at 0.0339, the highest utilization among open limits and closest to escalation. Breaches and Warnings exposure of 0.0137 indicates that the fund is nearing breach thresholds. The Limit Breach Trend shows an exposure of 0.0732, confirming a rising trend toward limit breaches. To reduce utilization, portfolio changes should target the largest eligible exposures identified in the Limit Utilization widget. Reducing these exposures will lower both utilization and breach risk, moving the fund away from escalation."
+    "data": "Limit Utilization contains one Open exposure of 0.0339 with a -0.0755 change. Breaches and Warnings contains higher and lower Open exposures of 0.0746 and 0.0137, with changes of 0.0254 and 0.0195. Limit Breach Trend contains 0.0732 with a 0.0763 change and 0.053 with a 0.0048 change. None of the rows supplies a limit name, threshold, or exposure-to-limit ratio, so they do not establish which limit is closest to escalation; 0.0746 is only the largest displayed exposure. Specific portfolio changes also cannot be named because no positions map to these rows; first join each limit to its threshold and contributing positions, then reduce eligible contributors to the highest verified utilization."
    }
   }
  ],

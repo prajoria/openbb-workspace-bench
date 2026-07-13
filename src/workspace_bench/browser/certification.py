@@ -90,20 +90,6 @@ class CertificationEntry:
     self_test: bool = False
 
 
-@dataclass(frozen=True)
-class _ExternalBackend:
-    """Already-running agent backend adapted to the browser harness interface."""
-
-    base_url: str
-    model: TaskBackendModel
-
-    def __enter__(self) -> "_ExternalBackend":
-        return self
-
-    def __exit__(self, *_args: Any) -> None:
-        return None
-
-
 def load_certification_subset(path: Path | None = None) -> tuple[CertificationEntry, ...]:
     """Load and structurally validate the committed certification manifest."""
 
@@ -135,26 +121,6 @@ def load_certification_subset(path: Path | None = None) -> tuple[CertificationEn
     if sum(entry.self_test for entry in entries) < 3:
         raise ValueError("browser subset must mark at least three self-test entries")
     return entries
-
-
-def load_code_certification_entry(path: Path | None = None) -> CertificationEntry:
-    """Load the single optional code-track flagship browser entry."""
-
-    raw = (
-        resources.files("workspace_bench.browser")
-        .joinpath("code_cert_subset.json")
-        .read_text(encoding="utf-8")
-        if path is None
-        else path.read_text(encoding="utf-8")
-    )
-    payload = json.loads(raw)
-    if (
-        not isinstance(payload, dict)
-        or payload.get("schema_version") != "workspace-bench-browser-code-subset/v0"
-        or payload.get("optional") is not True
-    ):
-        raise ValueError("code browser subset must be an optional v0 manifest")
-    return _parse_entry(payload.get("entry"))
 
 
 def _parse_entry(payload: Any) -> CertificationEntry:
@@ -448,7 +414,6 @@ def browser_certify(
     dry_run: bool = False,
     selectors_path: Path | None = None,
     output_root: Path = Path("runs/browser-cert"),
-    code_task_backend: str | None = None,
 ) -> JsonDict:
     """Run dry validation or real Playwright certification for selected tasks."""
 
@@ -459,11 +424,7 @@ def browser_certify(
         dry_run=dry_run,
     )
     if dry_run:
-        if code_task_backend is not None:
-            raise ValueError("the code-task browser entry is a Chromium self-test, not a dry-run")
         return dry_run_subset(entries)
-    if code_task_backend is not None and not self_test:
-        raise ValueError("--code-task-backend requires --self-test")
     selectors = load_selectors(selectors_path)
     sync_playwright = _sync_playwright()
     output_root.mkdir(parents=True, exist_ok=True)
@@ -487,21 +448,6 @@ def browser_certify(
                         output_root=output_root,
                     )
                     results.append(result)
-                if code_task_backend is not None:
-                    code_entry = load_code_certification_entry()
-                    code_model = _external_backend_model(code_entry, code_task_backend)
-                    results.append(
-                        _run_browser_entry(
-                            browser,
-                            code_entry,
-                            selectors,
-                            workspace_url=target_url,
-                            auth_state=None,
-                            self_test=True,
-                            output_root=output_root,
-                            external_backend=_ExternalBackend(code_task_backend, code_model),
-                        )
-                    )
             finally:
                 browser.close()
     finally:
@@ -525,7 +471,6 @@ def _run_browser_entry(
     auth_state: Path | None,
     self_test: bool,
     output_root: Path,
-    external_backend: _ExternalBackend | None = None,
 ) -> JsonDict:
     started_at = datetime.now(UTC)
     started = time.monotonic()
@@ -549,12 +494,8 @@ def _run_browser_entry(
     page: Any = None
     trace_started = False
 
-    backend_manager: TaskBackendServer | _ExternalBackend
-    if external_backend is None:
-        task = find_task(entry.task_ref)
-        backend_manager = TaskBackendServer(task, backend_name=entry.oracle_backend)
-    else:
-        backend_manager = external_backend
+    task = find_task(entry.task_ref)
+    backend_manager = TaskBackendServer(task, backend_name=entry.oracle_backend)
     with backend_manager as backend:
         try:
             context_args: JsonDict = {"viewport": {"width": 1440, "height": 1000}}
@@ -679,28 +620,6 @@ def _run_browser_entry(
     }
     verdict_path.write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return {**verdict, "verdict": str(verdict_path)}
-
-
-def _external_backend_model(entry: CertificationEntry, base_url: str) -> TaskBackendModel:
-    """Read widgets/apps metadata from an already-running agent backend."""
-
-    with urlopen(base_url.rstrip("/") + "/widgets.json", timeout=3) as response:
-        widgets = json.load(response)
-    with urlopen(base_url.rstrip("/") + "/apps.json", timeout=3) as response:
-        apps = json.load(response)
-    if not isinstance(widgets, dict) or not isinstance(apps, list):
-        raise ValueError("code-task browser backend returned malformed manifests")
-    missing = set(entry.expected_widgets) - set(widgets)
-    if missing:
-        raise ValueError(f"code-task browser backend is missing widgets: {sorted(missing)}")
-    return TaskBackendModel(
-        task_ref=entry.task_ref,
-        backend_name=entry.oracle_backend,
-        widgets=widgets,
-        apps=[app for app in apps if isinstance(app, dict)],
-        datasets_by_path={},
-        auxiliary_payloads={},
-    )
 
 
 def _perform_interaction(

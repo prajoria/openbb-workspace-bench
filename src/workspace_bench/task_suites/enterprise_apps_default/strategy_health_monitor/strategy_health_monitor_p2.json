@@ -80,7 +80,7 @@
    "args": {
     "widget_type": "note",
     "name": "Strategy Health Monitor Note",
-    "data": "Put Global Equities on the PM review list: its liquidity-capacity score is 29.82 from the Liquidity Capacity Curve widget. The factor-tilt series reads 82.47 from the Factor Tilts widget and capacity utilization reads 92.83 from the Capacity Utilization widget. However, the data does not map either value to stated PM conviction, so treat the mismatch as a question to resolve, not as evidence for increasing the sleeve. Keep the conclusion conditional until the cited open items and missing detail are reconciled."
+    "data": "The retrieved data cannot identify a specific theme whose factor tilt or liquidity capacity conflicts with PM conviction because no PM-conviction row or theme-level join key is supplied. Global Equities has an Open liquidity capacity score of 29.82, while Capacity Utilization reports primary and secondary values of 92.83 and 81.06 without a strategy or theme label. The factor-tilt series starts at 82.47 and later ranges from 76.33 to 83.12, but it also contains no factor or theme name. These unjoined values do not prove an inconsistency with conviction and should not be used to increase or reduce the sleeve. Add theme identifiers, PM-conviction values, and strategy mappings before naming a conflict."
    }
   }
  ],

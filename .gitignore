@@ -33,3 +33,6 @@ runs/comparison/build-calibration-202607/
 runs/comparison/phase9a-smoke/
 .DS_Store
 .coverage
+
+# Local reference clones for catalog transcription
+references/

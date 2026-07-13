@@ -2,10 +2,7 @@
 
 Auto-generated from the bundled task JSON files — regenerate with
 `python scripts/generators/generate_task_catalog.py` after editing tasks.
-The four deterministic simulator suites are included. The 12 experimental
-`build-openbb-backends` code tasks are excluded; their
-filesystem/process criteria are documented in the README task schema and generated
-by `scripts/generators/generate_backend_code_suite.py`.
+All four deterministic simulator suites are included.
 
 ## How grading works
 
@@ -36,7 +33,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: single-widget · specification: explicit
 
-> Add a minimal generated note to Home.
+> Use add_generative_widget to add a note named 'Smoke Note' with any short text.
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `add_generative_widget`
@@ -52,7 +49,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: platform · specification: explicit
 
-> Round-trip one bounded task request through the agent envelope.
+> Call assign_tasks_to_agents with one task request having id 'smoke-envelope' and description 'Return the Workspace smoke envelope.'
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `assign_tasks_to_agents`
@@ -60,7 +57,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `assign_tasks_to_agents` with args ⊇ {"task_requests": [{"id": "smoke-envelope", "task": "Return the Workspace smoke envelope."}]} must appear in the trace → `missing_tool_call`
+- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
 
 ### create_widget (1)
 
@@ -68,7 +65,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: single-widget · specification: explicit
 
-> Create the Stark Alert Trend widget on Home.
+> Use create_widget to add widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise' to the current dashboard with data_args severity 'High', status 'Open', period 'YTD'.
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `create_widget`
@@ -84,7 +81,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: single-widget · specification: explicit
 
-> Delete the seeded Stark Alert Trend widget.
+> Use delete_widget to remove the seeded widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise'.
 
 - Initial workspace: dashboard "Smoke delete_widget"; 1 tab(s): overview; 1 seeded widget(s): compliance_surveillance_hub_alerts_alert_trend({"severity": "High", "status": "Open", "period": "YTD"})
 - Allowed tools (1): `delete_widget`
@@ -100,7 +97,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: read · specification: explicit
 
-> Read valid period options for the Stark Alert Trend widget.
+> Call get_params_options for param_name 'period' of widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise'.
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `get_params_options`
@@ -116,7 +113,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: read · specification: explicit
 
-> Read the Finance Tearsheet skill content once.
+> Call get_skill_content with slug 'finance-tearsheet'.
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `get_skill_content`
@@ -132,7 +129,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: read · specification: explicit
 
-> Fetch open high-severity YTD data from the Stark Alert Trend widget.
+> Call get_widget_data for origin 'Bench Stark Enterprise' and widget_id 'compliance_surveillance_hub_alerts_alert_trend' with data_args severity 'High', status 'Open', period 'YTD'.
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `get_widget_data`
@@ -148,7 +145,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: read · specification: explicit
 
-> Read the schema for the Stark Alert Trend widget.
+> Call get_widget_schema for origin 'Bench Stark Enterprise' and widget_id 'compliance_surveillance_hub_alerts_alert_trend'.
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `get_widget_schema`
@@ -164,7 +161,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: read · specification: explicit
 
-> Read the Workspace tool-usage prompt once.
+> Call get_workspace_prompt with name 'workspace_tool_usage'.
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `get_workspace_prompt`
@@ -180,7 +177,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: read · specification: explicit
 
-> Read the current Workspace snapshot once.
+> Call get_workspace_snapshot once.
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `get_workspace_snapshot`
@@ -196,7 +193,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: read · specification: explicit
 
-> List the widgets available from Bench Stark Enterprise.
+> Call list_available_widgets for origin 'Bench Stark Enterprise'.
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `list_available_widgets`
@@ -212,7 +209,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: dashboard · specification: explicit
 
-> Instantiate the Stark Portfolio Command Center as Smoke Instantiated App.
+> Use manage_apps operation='instantiate' with backend_id 'backend_001', template_id 'portfolio-command-center', dashboard_name 'Smoke Instantiated App', and activate true.
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `manage_apps`
@@ -228,7 +225,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: platform · specification: explicit
 
-> List connected Workspace backends once.
+> Call manage_backends operation='list' once.
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `manage_backends`
@@ -244,7 +241,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: dashboard · specification: explicit
 
-> Rename the Home dashboard to Smoke Home Dashboard.
+> Use manage_dashboard operation='update' with dashboard_id 'dash_001' to rename the Home dashboard to 'Smoke Home Dashboard'.
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `manage_dashboard`
@@ -260,7 +257,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: dashboard · specification: explicit
 
-> Create Overview and Details tabs on Home.
+> Use manage_navigation_bar operation='create' on the current dashboard with tabs named 'Overview' and 'Details'.
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `manage_navigation_bar`
@@ -277,7 +274,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: dashboard · specification: explicit
 
-> Navigate to Details and leave a small marker there.
+> Use navigate_workspace operation='tab' to switch to tab_id 'details', then use add_generative_widget to add a note named 'Navigation Marker' on that tab.
 
 - Initial workspace: dashboard "Smoke navigate_workspace"; 2 tab(s): overview, details
 - Allowed tools (2): `navigate_workspace`, `add_generative_widget`
@@ -293,7 +290,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: read · specification: explicit
 
-> Read the seeded Stark Alert Trend widget once.
+> Call read_widget for the seeded widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise'.
 
 - Initial workspace: dashboard "Smoke read_widget"; 1 tab(s): overview; 1 seeded widget(s): compliance_surveillance_hub_alerts_alert_trend({"severity": "High", "status": "Open", "period": "YTD"})
 - Allowed tools (1): `read_widget`
@@ -301,7 +298,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `read_widget` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "compliance_surveillance_hub_alerts_alert_trend"} must appear in the trace → `missing_tool_call`
+- **Tool call** ≥1× `read_widget` with args ⊇ {"widget_id": "compliance_surveillance_hub_alerts_alert_trend"} must appear in the trace → `missing_tool_call`
 
 ### read_workspace_resource (1)
 
@@ -309,7 +306,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: read · specification: explicit
 
-> Read the Workspace widget-types resource once.
+> Call read_workspace_resource with uri 'openbb://workspace/specs/widget-types'.
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (1): `read_workspace_resource`
@@ -325,7 +322,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: single-widget · specification: explicit
 
-> Change the seeded Stark Alert Trend widget period to MTD.
+> Use update_widget on the seeded widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise' to set data_args period to 'MTD'.
 
 - Initial workspace: dashboard "Smoke update_widget"; 1 tab(s): overview; 1 seeded widget(s): compliance_surveillance_hub_alerts_alert_trend({"severity": "High", "status": "Open", "period": "YTD"})
 - Allowed tools (1): `update_widget`
@@ -341,7 +338,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **easy** · category: single-widget · specification: explicit
 
-> Resize the seeded Stark Alert Trend widget to 20 by 10.
+> Use update_widget_layout on the seeded widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise' to place it at x 0, y 0, w 20, h 10 on tab_id 'overview'.
 
 - Initial workspace: dashboard "Smoke update_widget_layout"; 1 tab(s): overview; 1 seeded widget(s): compliance_surveillance_hub_alerts_alert_trend({"severity": "High", "status": "Open", "period": "YTD"})
 - Allowed tools (1): `update_widget_layout`
@@ -365,7 +362,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 22 · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -380,7 +377,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 16 · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -412,7 +409,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 20 · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -431,7 +428,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Generated note** ≥1× whose content mentions "redemption", "unresolved", "11.13", "16.22", "77.48" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Generated note** ≥1× whose content mentions "redemption", "service", "11.13", "16.22", "77.48" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `client_360_p3`
 
@@ -442,7 +439,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 12 · oracle reference trace: 4 calls
+- Turn budget: 14 · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -474,7 +471,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 20 · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -506,7 +503,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 18 · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -521,7 +518,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 26 · oracle reference trace: 11 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -536,7 +533,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 18 · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -553,7 +550,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 16 · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -583,7 +580,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 16 · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -600,7 +597,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 16 · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -615,7 +612,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 18 · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -647,7 +644,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 12 · oracle reference trace: 4 calls
+- Turn budget: 18 · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -694,7 +691,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 20 · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -741,7 +738,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 20 · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -771,7 +768,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 20 · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -788,7 +785,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 20 · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -803,7 +800,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 16 · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -818,7 +815,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 24 · oracle reference trace: 10 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -835,7 +832,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 20 · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -865,7 +862,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 22 · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -882,7 +879,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 16 · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -929,7 +926,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 18 · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -963,7 +960,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Generated note** ≥1× whose content mentions "attestations", "unresolved", "5.45", "97.4", "64.44" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Generated note** ≥1× whose content mentions "attestations", "approval", "5.45", "97.4", "64.44" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 ### nav_fees_close_dashboard (3)
 
@@ -976,7 +973,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 18 · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1006,7 +1003,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 20 · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1057,7 +1054,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Generated note** ≥1× whose content mentions "alerts", "escalated", "193", "85.25", "86.16" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Generated note** ≥1× whose content mentions "alerts", "meeting", "193", "85.25", "86.16" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 ### quant_research_backtest_lab (3)
 
@@ -1100,7 +1097,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 18 · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1117,7 +1114,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 16 · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1132,7 +1129,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 16 · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1164,7 +1161,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 20 · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1194,7 +1191,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 16 · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1211,7 +1208,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 22 · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1226,7 +1223,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 16 · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1305,7 +1302,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 16 · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1339,7 +1336,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Generated note** ≥1× whose content mentions "unresolved", "committee", "76.26", "8.67" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Generated note** ≥1× whose content mentions "committee", "actions", "76.26", "8.67" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 ### vendor_dataset_monitor (3)
 
@@ -1352,7 +1349,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 20 · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1382,11 +1379,11 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 20 · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Generated note** ≥1× whose content mentions "escalation", "affected", "94.16", "18.67", "24.33" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Generated note** ≥1× whose content mentions "escalation", "datasets", "94.16", "18.67", "24.33" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 ### workspace_data_control_center (3)
 
@@ -1399,7 +1396,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 22 · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1418,7 +1415,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Generated note** ≥1× whose content mentions "restricted", "production", "3.14", "61.17", "96.33" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Generated note** ≥1× whose content mentions "rollout", "production", "3.14", "61.17", "96.33" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `workspace_data_control_center_p3`
 
@@ -1429,7 +1426,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `navigate_workspace`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: 16 · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 

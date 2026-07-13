@@ -79,7 +79,7 @@
    "args": {
     "widget_type": "note",
     "name": "CIO / Investment Committee Pack Note",
-    "data": "The committee reviewed the Flagship Long/Short fund and recorded a decision score of 61.24, with the status remaining Open as indicated in the Decision Log data. The IC Agenda score of 88.24 is still pending and its status is Open, so no final disposition has been applied to that metric. The Decisions Required primary value of 52.01 meets the threshold, satisfying that requirement. Because the decision log entry shows status Open, the conclusion that the decision was closed is unsupported by the available data; therefore the record remains open until further action. No additional fields or entities are required beyond those cited."
+    "data": "Decision log update after committee review: the two Flagship Long/Short decision records remain Open at 61.24 with a 0.0492 change and 24.88 with a -0.0282 change. The IC Agenda also remains Open at 88.24 with a -0.0369 change. Decisions Required records 52.01 primary, 2.45 secondary, 63.1 threshold, and 78.04 watchlist, with the primary value below the displayed threshold. No approved or rejected disposition, owner, due date, or rationale appears in the retrieved rows, so record the outcome as Open with no disposition captured rather than closed. Carry the item forward for an explicit committee decision, owner assignment, and dated follow-up."
    }
   }
  ],

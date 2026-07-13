@@ -26,23 +26,18 @@ SUITES = {
     ),
     "enterprise-apps-usage": REPO / "src/workspace_bench/task_suites/enterprise_apps_usage",
     "build-openbb-apps": (REPO / "src/workspace_bench/task_suites/build_openbb_apps"),
-    "build-openbb-backends": (
-        REPO / "src/workspace_bench/task_suites/build_openbb_backends"
-    ),
 }
 EXPECTED_TASKS = {
     "smoke": 20,
     "enterprise-apps-default": 69,
     "enterprise-apps-usage": 300,
     "build-openbb-apps": 236,
-    "build-openbb-backends": 12,
 }
 PROMPT_WORD_CAPS = {
     "smoke": 100,
     "enterprise-apps-default": 1_000,
     "enterprise-apps-usage": 350,
     "build-openbb-apps": 180,
-    "build-openbb-backends": 350,
 }
 BUILD_SPECIFICATION_LEVEL_COUNTS = {
     "explicit": 60,

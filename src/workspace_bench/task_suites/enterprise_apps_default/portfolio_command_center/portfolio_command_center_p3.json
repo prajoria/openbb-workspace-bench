@@ -27,7 +27,7 @@
     "widget_type": "note",
     "data_contains": [
      "alerts",
-     "escalated",
+     "meeting",
      "193",
      "85.25",
      "86.16"
@@ -79,7 +79,7 @@
    "args": {
     "widget_type": "note",
     "name": "Portfolio Command Center Note",
-    "data": "The alerts that should be escalated to the CIO before the opening risk meeting are those with the highest counts and scores. The Top Alerts widget reports 193 alerts for Flagship Long/Short, which is the maximum among the funds. Limit utilization is at 85.25 from the Limit Utilization widget, and the Approval Checklist score is 86.16 from the Approval Checklist widget; all three indicators should be escalated together before the risk meeting. Keep the conclusion conditional until the cited open items and missing detail are reconciled."
+    "data": "Top Alerts contains two unnamed Open rows with counts of 193 and 71 for Flagship Long/Short. Escalate the 193-count row first and the 71-count row second before the opening risk meeting, while requesting the missing alert types, owners, and severity. Limit Utilization scores of 85.25 and 1.89 and Approval Checklist scores of 86.16 and 62.54 are Open contextual indicators, not specific alerts, so they should not be presented as alert identities. The CIO briefing should pair the ranked alert counts with those control readings but defer alert-specific action until the descriptions and thresholds are available."
    }
   }
  ],

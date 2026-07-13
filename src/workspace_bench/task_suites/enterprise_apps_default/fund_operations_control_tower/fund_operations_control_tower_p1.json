@@ -118,7 +118,7 @@
    "args": {
     "widget_type": "note",
     "name": "Fund Operations Control Tower Note",
-    "data": "Operations morning checklist for Flagship Long/Short: failed trades stand at 50.74 on the primary metric; custodian recon breaks score 1.67 and stay Open; the corporate-action calendar holds one Open item at 28.47; pricing exceptions cover an Open stale price at 3114.00 USD and a Bloomberg vendor difference of 246075.96 USD; and there are 67 open NAV exceptions. The served rows carry no owner names, so assign by desk — trade support owns the fails, reconciliations owns the breaks and corporate actions, and pricing owns the stale-price, vendor-difference, and NAV queues — and record named owners at the morning stand-up."
+    "data": "Operations morning checklist for Flagship Long/Short: failed trades stand at 50.74 on the primary metric; custodian recon breaks show two Open rows at 1.67 and 59.91; the corporate-action calendar holds one Open item at 28.47; pricing exceptions span both Open stale prices at 3114.00 USD and 243359.62 USD, vendor price differences from Bloomberg at 246075.96 USD and from ICE at 209032.42 USD, and two Open NAV exception rows counting 67 and 210 exceptions. The served rows carry no owner names, so assign by desk — trade support owns the fails, reconciliations owns the breaks and corporate actions, and pricing owns the stale-price, vendor-difference, and NAV queues — and record named owners at the morning stand-up."
    }
   }
  ],

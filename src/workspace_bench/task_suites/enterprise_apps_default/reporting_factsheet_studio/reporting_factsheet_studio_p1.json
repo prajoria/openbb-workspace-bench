@@ -89,6 +89,17 @@
    "tool": "get_widget_data",
    "args": {
     "origin": "Bench Stark Enterprise",
+    "widget_id": "reporting_factsheet_studio_commentary_disclosure_checklist",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
     "widget_id": "reporting_factsheet_studio_performance_risk_stats",
     "data_args": {
      "client": "Atlas Pension",
@@ -101,11 +112,11 @@
    "args": {
     "widget_type": "note",
     "name": "Reporting & Factsheet Studio Note",
-    "data": "The Atlas Pension monthly reporting checklist begins with the performance review, noting a return of 0.1015 from the Monthly Returns widget (Monthly Returns). Attribution analysis follows, showing a score of 36.9 from the Attribution Summary widget (Attribution Summary). Risk statistics are incorporated next, citing the primary risk metric value of 12.29 and secondary value of 81.19 from the Risk Stats widget (Risk Stats). DDQ blockers are identified with a score of 1.39 from the DDQ and RFP Tracker widget (DDQ and RFP Tracker), which must be resolved before proceeding to commentary. The commentary section is drafted using approved language from the Approved Commentary Library widget (Approved Commentary Library). Finally, disclosures are verified against the Disclosure Checklist widget (Disclosure Checklist) with a score of 93.86, confirming compliance, while retaining attribution as source evidence."
+    "data": "The Atlas Pension monthly checklist records Open performance of 0.1015 with a 0.0635 change and Open attribution of 36.9 with a -0.0582 change. Risk Stats reports a primary value of 12.29 with a -0.0451 change and a secondary value of 81.19 with a 0.005 change. The commentary library is Open at 8.82 with a -0.0679 change, so the row does not by itself confirm final commentary approval. The Disclosure Checklist is Open at 93.86 with a -0.0691 change, so disclosures still require completion rather than being treated as compliant. The DDQ and RFP Tracker is Open at 1.39 with a -0.0694 change and remains the visible DDQ blocker. Complete the checklist only after the Open commentary, disclosure, and DDQ records have documented dispositions."
    }
   }
  ],
  "limits": {
-  "max_turns": 18
+  "max_turns": 20
  }
 }

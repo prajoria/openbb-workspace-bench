@@ -112,6 +112,19 @@ PREFERRED_FACT_FIELDS = (
     "value",
 )
 
+# Graded anchor words must be inflection-stable: a model writing "Escalate"
+# fails a check demanding "escalated" on morphology, not content. Derivation
+# excludes -ed participles; these reviewed replacements fix shipped anchors,
+# each chosen from words present in both the prompt and the exemplar.
+ANCHOR_REPLACEMENTS: dict[tuple[str, int], dict[str, str]] = {
+    ("workspace_data_control_center", 2): {"restricted": "rollout"},
+    ("vendor_dataset_monitor", 3): {"affected": "datasets"},
+    ("stress_liquidity_lab", 3): {"unresolved": "sign-off"},
+    ("portfolio_command_center", 3): {"escalated": "meeting"},
+    ("client_360", 2): {"unresolved": "service"},
+    ("mnpi_research_review", 3): {"unresolved": "approval"},
+}
+
 # Reviewed rubric adjustments, keyed by (app_slug, prompt_index). Supported
 # keys: "widgets" (ordered widget ids to read/cite), "prompt_terms" (verbatim
 # anchor words from the prompt). Derivation fills anything not overridden.
@@ -515,15 +528,14 @@ class ExemplarAnswer(TypedDict):
 EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     ("portfolio_command_center", 1): {
         "text": (
-            "The overnight PM note cannot report overnight P&L because the served rows do "
-            "not provide an overnight return or profit-and-loss figure. Flagship Long/Short "
-            "has an open sector exposure of 0.0389, but the filtered data do not show "
-            "comparable active exposures, so a largest exposure cannot be identified "
-            "without security- or sector-level peers. Limit utilization is 85.25, so limit "
-            "pressure should be reviewed before acting. The trade-ideas score is 62.35, and "
-            "trade actions should remain conditional until the underlying ideas and limit "
-            "headroom are reviewed. This keeps overnight results, exposures, limit "
-            "pressure, and action urgency explicit without overstating the filtered data."
+            "The served rows contain no overnight return or P&L field, so overnight P&L "
+            "cannot be reported. The two Open active exposures are 0.0389 and 0.0742, "
+            "making 0.0742 the largest displayed exposure. Limit-utilization scores are "
+            "85.25 and 1.89, so 85.25 is the higher displayed pressure reading, although no "
+            "limit threshold is supplied. Trade-idea scores are 62.35 and 74.79; by score, "
+            "the 74.79 row ranks first in urgency and the 62.35 row ranks second. Because "
+            "neither row names a trade action, map those ranked readings to actual trades "
+            "and available limit headroom before execution."
         ),
         "reads": [
             "portfolio_command_center_holdings_sector_exposure",
@@ -551,14 +563,15 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("portfolio_command_center", 3): {
         "text": (
-            "The alerts that should be escalated to the CIO before the opening risk meeting "
-            "are those with the highest counts and scores. The Top Alerts widget reports "
-            "193 alerts for Flagship Long/Short, which is the maximum among the funds. "
-            "Limit utilization is at 85.25 from the Limit Utilization widget, and the "
-            "Approval Checklist score is 86.16 from the Approval Checklist widget; all "
-            "three indicators should be escalated together before the risk meeting. Keep "
-            "the conclusion conditional until the cited open items and missing detail are "
-            "reconciled."
+            "Top Alerts contains two unnamed Open rows with counts of 193 and 71 for "
+            "Flagship Long/Short. Escalate the 193-count row first and the 71-count row "
+            "second before the opening risk meeting, while requesting the missing alert "
+            "types, owners, and severity. Limit Utilization scores of 85.25 and 1.89 and "
+            "Approval Checklist scores of 86.16 and 62.54 are Open contextual indicators, "
+            "not specific alerts, so they should not be presented as alert identities. The "
+            "CIO briefing should pair the ranked alert counts with those control readings "
+            "but defer alert-specific action until the descriptions and thresholds are "
+            "available."
         ),
         "reads": [
             "portfolio_command_center_actions_approval_checklist",
@@ -568,17 +581,18 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("rebalance_scenario_lab", 1): {
         "text": (
-            "The rebalance recommendation for Flagship Long/Short must account for the "
-            "current drift of 0.0471, which is reflected in the Current vs Target Weights "
-            "widget. The liquidity impact score of 10.55 and the restricted-list checks "
-            "score of 31.12 indicate that neither control has cleared automatically. "
-            "Scenario downside analysis shows a potential P&L drop to 71.92 on 2026-01-04 "
-            "from the Scenario P&L Waterfall, underscoring the need for caution. Therefore, "
-            "a conditional rebalance should be pursued only after a thorough review of "
-            "these controls to confirm residual drift is acceptable and scenario downside "
-            "risk is within tolerance. This approach balances target drift, liquidity cost, "
-            "restricted-list checks, and scenario downside by ensuring all thresholds are "
-            "explicitly addressed before execution."
+            "Recommendation: hold execution and revise the rebalance to address the larger "
+            "absolute target-drift change of -0.0431 on the 0.0865 weight before the -0.0114 "
+            "change on the 0.0471 weight. Liquidity-impact scores are 80.62 and 10.55, so "
+            "the higher-cost row should be mapped to its proposed trade and resized first; "
+            "the rows do not provide cost units or that trade mapping. The restricted-list "
+            "check remains Open at 31.12 and must be cleared at security level before any "
+            "trade is released. Scenario values decline from 76.82 to 65.22 and then "
+            "rebound to 68.04 in the retrieved series, so the revised trade set needs a "
+            "documented "
+            "downside limit. Approve execution only after the larger drift is addressed, "
+            "the 80.62 liquidity-impact row is resized, the restriction is cleared, and the "
+            "scenario trough is within tolerance."
         ),
         "reads": [
             "rebalance_scenario_lab_drift_current_vs_target_weights",
@@ -589,16 +603,17 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("rebalance_scenario_lab", 2): {
         "text": (
-            "Two Flagship Long/Short proposed-trade rows remain Open, with scores of 13.46 "
-            "and 13.01, but the rows do not name the securities or trade sizes. ADV usage "
-            "is not supplied by the Proposed Trades or Liquidity Impact data, so resizing "
-            "cannot be justified on that dimension without trade size and ADV percentage. "
-            "The available constraints readings are 22.35 and 13.02, while liquidity-impact "
-            "readings are 10.55 and 80.62; no limits or trade-level mapping are provided. "
-            "The compliance check is also Open at 31.12, but its row does not identify a "
-            "specific restricted security or a cleared blocker. Both proposed trades should "
-            "therefore stay under review rather than be conclusively resized or delayed "
-            "until ADV, limit, security, and compliance-blocker details are available."
+            "Delay both Open proposed-trade rows, identified by scores of 13.46 and 13.01, "
+            "because the restricted-list compliance check remains Open at 31.12 and does "
+            "not clear either trade. For resizing, the 80.62 liquidity-impact row and the "
+            "22.35 constraint-utilization row are the higher displayed review priorities, "
+            "ahead of 10.55 and 13.02. The data do not map those impact and constraint rows "
+            "to either proposed-trade score, so do not invent which of the 13.46 or 13.01 "
+            "trades they represent. ADV usage, trade size, and security identifiers are "
+            "absent, so no ADV-based resize can yet be calculated. Once the mapping is "
+            "supplied, resize the trade tied to 80.62 liquidity impact or 22.35 constraint "
+            "utilization, and release only trades whose constraints and compliance blocker "
+            "are clear."
         ),
         "reads": [
             "rebalance_scenario_lab_drift_constraint_utilization",
@@ -647,13 +662,16 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("strategy_health_monitor", 2): {
         "text": (
-            "Put Global Equities on the PM review list: its liquidity-capacity score is "
-            "29.82 from the Liquidity Capacity Curve widget. The factor-tilt series reads "
-            "82.47 from the Factor Tilts widget and capacity utilization reads 92.83 from "
-            "the Capacity Utilization widget. However, the data does not map either value "
-            "to stated PM conviction, so treat the mismatch as a question to resolve, not "
-            "as evidence for increasing the sleeve. Keep the conclusion conditional until "
-            "the cited open items and missing detail are reconciled."
+            "The retrieved data cannot identify a specific theme whose factor tilt or "
+            "liquidity capacity conflicts with PM conviction because no PM-conviction row "
+            "or theme-level join key is supplied. Global Equities has an Open liquidity "
+            "capacity score of 29.82, while Capacity Utilization reports primary and "
+            "secondary values of 92.83 and 81.06 without a strategy or theme label. The "
+            "factor-tilt series starts at 82.47 and later ranges from 76.33 to 83.12, but it "
+            "also contains no factor or theme name. These unjoined values do not prove an "
+            "inconsistency with conviction and should not be used to increase or reduce the "
+            "sleeve. Add theme identifiers, PM-conviction values, and strategy mappings "
+            "before naming a conflict."
         ),
         "reads": [
             "strategy_health_monitor_capacity_capacity_utilization",
@@ -678,27 +696,21 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("equity_research_workbench", 1): {
         "text": (
-            "The coverage universe has shifted slightly with a change of -0.0065 for "
-            "Flagship Long/Short, indicating a modest contraction in the portfolio’s focus. "
-            "The consensus revisions score now stands at 97.51, reflecting an updated view "
-            "on earnings expectations that aligns with the latest analyst estimates. "
-            "Valuation assumptions have been tightened, as shown by the valuation "
-            "assumption log score of 8.1, which narrows the discount‑rate range used in the "
-            "DCF model. Ownership snapshot data reveal a change of -0.0063 for Flagship "
-            "Long/Short, confirming that institutional holdings remain stable but slightly "
-            "reduced compared to the prior review. The price target history shows an "
-            "updated internal target of 80700.42 USD and an upside target of 249629.32 USD, "
-            "illustrating a significant upward revision in the research view. In addition, "
-            "the thesis has become more bullish: the Bull Base Bear score for Flagship "
-            "Long/Short increased to 97.5 with a change of 0.0794, indicating a stronger "
-            "positive outlook compared to the previous review."
+            "Coverage changed in both directions: the two Open universe rows are 0.78 with "
+            "a -0.0065 change and 48.95 with a 0.0475 change. For estimates, consensus "
+            "revisions are 97.51 with a -0.0575 change for LLY and 99.74 with a -0.0363 "
+            "change for XOM. The valuation assumption log contains 8.1 with a -0.0362 "
+            "change and 91.67 with a 0.0353 change, but it does not name the assumptions. "
+            "The ownership snapshot supplies one LLY row at 39.69 with a -0.0063 change. "
+            "For the thesis, Bull Base Bear has rows at 97.5 with a 0.0794 change and 68.86 "
+            "with a -0.0354 change, without labels mapping them to bull, base, or bear. "
+            "These figures summarize what moved while avoiding unsupported causal or "
+            "directional labels where the rows do not provide them."
         ),
         "reads": [
             "equity_research_workbench_company_ownership_snapshot",
             "equity_research_workbench_company_consensus_revisions",
             "equity_research_workbench_coverage_coverage_universe",
-            "equity_research_workbench_coverage_price_target_history",
-            "equity_research_workbench_coverage_price_target_upside",
             "equity_research_workbench_thesis_bull_base_bear",
             "equity_research_workbench_valuation_valuation_assumption_log",
         ],
@@ -766,16 +778,17 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("earnings_estimates_monitor", 2): {
         "text": (
-            "LLY's post-earnings price-reaction row is Open at 55747.15, rounded to 55747.2, "
-            "with a positive change of 0.0069. Its transcript Management Tone reading is "
-            "81.37 but changed by -0.0487, so the transcript should be reviewed for the "
-            "language behind that deterioration rather than labeled positive from the score "
-            "alone. Rating and Target Changes is Open at 27.83 with a 0.0433 change, which "
-            "calls for reconciling the proposed rating action with the transcript and price "
-            "reaction. The checklist is still Open at 54.14, so completing and documenting "
-            "it is the immediate action item. The available transcript data cover LLY only; "
-            "a complete four-part action plan for any other ticker requires its transcript "
-            "tone before comparison."
+            "LLY's Open price reaction is 55747.15, rounded to 55747.2, with a 0.0069 "
+            "change; its Management Tone is 81.37 with a -0.0487 change and Transcript "
+            "Theme Extraction is 45.78 with a 0.0529 change. Reconcile LLY's Open Rating "
+            "and Target Changes score of 27.83 with its transcript, then complete its Open "
+            "checklist at 54.14. XOM's Open price reaction is 39311.13 with a 0.0179 change, "
+            "its Rating and Target Changes score is 35.98 with a 0.0759 change, and its "
+            "checklist is Open at 63.76 with a -0.0484 change. No XOM transcript-tone or "
+            "theme row is retrieved, so its transcript action item is to obtain and review "
+            "that missing evidence before finalizing the rating response. Close neither "
+            "ticker's post-earnings review until the rating reconciliation and checklist "
+            "items are documented."
         ),
         "reads": [
             "earnings_estimates_monitor_post_earnings_price_reaction",
@@ -894,13 +907,16 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("execution_desk", 2): {
         "text": (
-            "The VWAP and Arrival Slippage widget shows a score of 41.08 for Goldman Sachs "
-            "on the US Equity desk (VWAP and Arrival Slippage). The Fills Table widget "
-            "lists a score of 9.92 for Goldman Sachs (Fills Table). Because the arrival "
-            "slippage score is higher than the fills score, the Goldman Sachs fills "
-            "underperformed arrival price. No venue or algo data are provided in the "
-            "widgets, so causality cannot be determined from the available information, "
-            "while retaining 68.41 as source evidence."
+            "For Goldman Sachs on the US Equity desk, VWAP and Arrival Slippage is Open at "
+            "41.08 with a 0.0799 change, the Fills Table is Open at 9.92 with a 0.0718 "
+            "change, and the Broker Scorecard is Open at 68.41 with a 0.0668 change. These "
+            "are distinct unlabeled scores rather than fill prices or arrival shortfalls, "
+            "so comparing them does not establish that any fills underperformed arrival "
+            "price. The rows contain no fill identifiers, execution prices, or arrival "
+            "benchmarks, so the underperforming fills cannot be named. Goldman Sachs is the "
+            "common broker, but there is no benchmark or causal mapping showing that broker "
+            "choice drove the outcome. No venue or algo fields are retrieved, so venue and "
+            "algo effects also cannot be determined."
         ),
         "reads": [
             "execution_desk_fills_fills_table",
@@ -963,13 +979,16 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("liquidity_tca_workbench", 3): {
         "text": (
-            "Post‑trade review for Goldman Sachs shows a queue score of 24.1 and 119 broker "
-            "exceptions, while slippage by algo is 53.77. The data does not specify which "
-            "algorithmic parameter should be adjusted; therefore, a follow‑up with the "
-            "broker is required to identify the specific setting that needs modification. "
-            "Until that detail is obtained, no parameter changes can be recommended. Keep "
-            "the conclusion conditional until the cited open items and missing detail are "
-            "reconciled."
+            "Goldman Sachs requires broker follow-up because its post-trade queue is Open at "
+            "24.1, it has 119 Open exceptions, and its slippage row is Open at 53.77 with a "
+            "0.0293 change. Barclays also requires follow-up because its Open slippage score "
+            "is 77.99 with a -0.0361 change, although no Barclays queue or exception row is "
+            "provided. The higher displayed slippage score is Barclays at 77.99, but neither "
+            "row names the algo or defines the score as a cost measure. No parameter names, "
+            "settings, or outcome mapping are available, so a specific algo parameter "
+            "change cannot be recommended. Ask both brokers for the algo-level execution "
+            "detail, and reconcile Goldman Sachs's exception queue before approving any "
+            "change."
         ),
         "reads": [
             "liquidity_tca_workbench_notes_post_trade_review_queue",
@@ -980,16 +999,15 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     ("risk_exposure_monitor", 1): {
         "text": (
             "Flagship Long/Short has YTD VaR of -222500 and two Open marginal VaR readings "
-            "of -56000 and -102500, but those rows do not identify positions or factors, so "
-            "the exact VaR drivers are unavailable. The factor-exposure preview is 0.1522, "
-            "0.1179, and 0.1221, while AAPL is the only named concentration at 0.0359 with a "
-            "-0.0198 change; neither source proves which exposure drives VaR. The available "
-            "stress losses are -103000, -95500, and -103000, establishing scenario downside "
-            "without a position-level cause. Breaches and Warnings contains Open exposures "
-            "of 0.0137 and 0.0746 but no limits, so threshold proximity is unsupported. The "
-            "recommended actions are to identify the positions behind marginal VaR, review "
-            "AAPL concentration, and reconcile stress losses and breaches against documented "
-            "limits."
+            "of -56000 and -102500, but the rows name no positions or factors, so the VaR "
+            "drivers cannot be identified. The stress-loss surface starts at -103000, moves "
+            "to -95500 and back to -103000, and reaches -155000 on 2026-01-22. AAPL is the "
+            "only named concentration at 0.0359 exposure with a -0.0198 change. Breaches "
+            "and Warnings contains two Open exposures, 0.0137 with a 0.0195 change and "
+            "0.0746 with a 0.0254 change, but supplies no corresponding limits. Recommended "
+            "actions are to obtain position-level VaR attribution, investigate the stress "
+            "path, review AAPL concentration, and reconcile both breaches against their "
+            "documented thresholds."
         ),
         "reads": [
             "risk_exposure_monitor_dashboard_var_trend",
@@ -1022,14 +1040,16 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("risk_exposure_monitor", 3): {
         "text": (
-            "Limit Utilization for Flagship Long/Short is at 0.0339, the highest "
-            "utilization among open limits and closest to escalation. Breaches and Warnings "
-            "exposure of 0.0137 indicates that the fund is nearing breach thresholds. The "
-            "Limit Breach Trend shows an exposure of 0.0732, confirming a rising trend "
-            "toward limit breaches. To reduce utilization, portfolio changes should target "
-            "the largest eligible exposures identified in the Limit Utilization widget. "
-            "Reducing these exposures will lower both utilization and breach risk, moving "
-            "the fund away from escalation."
+            "Limit Utilization contains one Open exposure of 0.0339 with a -0.0755 change. "
+            "Breaches and Warnings contains higher and lower Open exposures of 0.0746 and "
+            "0.0137, with changes of 0.0254 and 0.0195. Limit Breach Trend contains 0.0732 "
+            "with a 0.0763 change and 0.053 with a 0.0048 change. None of the rows supplies "
+            "a limit name, threshold, or exposure-to-limit ratio, so they do not establish "
+            "which limit is closest to escalation; 0.0746 is only the largest displayed "
+            "exposure. Specific portfolio changes also cannot be named because no positions "
+            "map to these rows; first join each limit to its threshold and contributing "
+            "positions, then reduce eligible contributors to the highest verified "
+            "utilization."
         ),
         "reads": [
             "risk_exposure_monitor_limits_limit_utilization",
@@ -1115,18 +1135,17 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("client_360", 2): {
         "text": (
-            "Atlas Pension has a subscriptions and redemptions score of 11.13, indicating "
-            "notable outflows that raise redemption risk. The client also shows an open "
-            "requests score of 16.22, which signals unresolved service issues that must be "
-            "addressed before confirming flight‑risk status. Relationship metrics for Atlas "
-            "show a primary value of 77.48, above the threshold of 73.73, suggesting strong "
-            "engagement despite these concerns. Northstar Endowment’s subscriptions and "
-            "redemptions score is 85.31, indicating significant redemption risk. However, "
-            "no open requests score is available in the current data set for Northstar, so "
-            "we cannot confirm unresolved service issues for that account. Immediate "
-            "resolution of outstanding requests for Atlas Pension is required to mitigate "
-            "redemption exposure; further investigation is needed for Northstar Endowment "
-            "to determine if any unresolved service issues exist."
+            "Subscriptions and Redemptions is Open at 11.13 with a 0.04 change for Atlas "
+            "Pension and 85.31 with a -0.0718 change for Northstar Endowment. Those scores "
+            "have no net-flow direction or risk threshold, so they do not establish which "
+            "account has redemption risk. Atlas is the only account with a visible Open "
+            "Requests row, scored 16.22 with a -0.0278 change, making it the only identified "
+            "account with an unresolved service item; the request itself is not described. "
+            "Relationship Metrics reports 77.48 primary, 82.24 secondary, 73.73 threshold, "
+            "and 61.83 watchlist, but has no client field and cannot be attributed to Atlas "
+            "or Northstar. Northstar has no retrieved service-request row. Obtain signed "
+            "subscription and redemption flows, account-level relationship metrics, and "
+            "request details before assigning redemption or broader service risk."
         ),
         "reads": [
             "client_360_client_book_relationship_metrics",
@@ -1136,15 +1155,12 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("client_360", 3): {
         "text": (
-            "Approved Talking Points summarizes the Client & IR workflow for YTD. The "
-            "synthetic score reading is 29.91, seeded from the widget id. The current "
-            "portfolio summary reads 85.23, reflecting a solid baseline performance metric. "
-            "The Flagship Long/Short fund’s open YTD return is 0.0157, which aligns with "
-            "the overall portfolio strength. This response remains strictly factual and "
-            "limited to these data points until further approval is obtained for any "
-            "additional interpretation. The conclusion is conditional until the cited open "
-            "items and missing detail are reconciled, while retaining commentary as source "
-            "evidence."
+            "Approved Talking Points summarizes the Client & IR workflow for YTD and gives "
+            "the approved commentary a synthetic score reading of 29.91 seeded from the "
+            "widget id. Current portfolio context shows Client Portfolio Summary values of "
+            "85.23 with a -0.0598 change and 62.78 with a 0.0279 change. Atlas Pension's "
+            "Open Flagship Long/Short return is 0.0157 with a -0.0119 change. Northstar "
+            "Endowment's Open return for the same fund is 0.0844 with a -0.0245 change."
         ),
         "reads": [
             "client_360_meeting_prep_approved_talking_points",
@@ -1154,22 +1170,20 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("reporting_factsheet_studio", 1): {
         "text": (
-            "The Atlas Pension monthly reporting checklist begins with the performance "
-            "review, noting a return of 0.1015 from the Monthly Returns widget (Monthly "
-            "Returns). Attribution analysis follows, showing a score of 36.9 from the "
-            "Attribution Summary widget (Attribution Summary). Risk statistics are "
-            "incorporated next, citing the primary risk metric value of 12.29 and secondary "
-            "value of 81.19 from the Risk Stats widget (Risk Stats). DDQ blockers are "
-            "identified with a score of 1.39 from the DDQ and RFP Tracker widget (DDQ and "
-            "RFP Tracker), which must be resolved before proceeding to commentary. The "
-            "commentary section is drafted using approved language from the Approved "
-            "Commentary Library widget (Approved Commentary Library). Finally, disclosures "
-            "are verified against the Disclosure Checklist widget (Disclosure Checklist) "
-            "with a score of 93.86, confirming compliance, while retaining attribution as "
-            "source evidence."
+            "The Atlas Pension monthly checklist records Open performance of 0.1015 with a "
+            "0.0635 change and Open attribution of 36.9 with a -0.0582 change. Risk Stats "
+            "reports a primary value of 12.29 with a -0.0451 change and a secondary value "
+            "of 81.19 with a 0.005 change. The commentary library is Open at 8.82 with a "
+            "-0.0679 change, so the row does not by itself confirm final commentary "
+            "approval. The Disclosure Checklist is Open at 93.86 with a -0.0691 change, so "
+            "disclosures still require completion rather than being treated as compliant. "
+            "The DDQ and RFP Tracker is Open at 1.39 with a -0.0694 change and remains the "
+            "visible DDQ blocker. Complete the checklist only after the Open commentary, "
+            "disclosure, and DDQ records have documented dispositions."
         ),
         "reads": [
             "reporting_factsheet_studio_commentary_approved_commentary_library",
+            "reporting_factsheet_studio_commentary_disclosure_checklist",
             "reporting_factsheet_studio_ddqs_ddq_and_rfp_tracker",
             "reporting_factsheet_studio_performance_monthly_returns",
             "reporting_factsheet_studio_performance_attribution_summary",
@@ -1178,17 +1192,26 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("reporting_factsheet_studio", 2): {
         "text": (
-            "The Atlas Pension factsheet must be held back from external distribution until "
-            "the distribution status score of 26.04, as shown in the Factsheet Distribution "
-            "Status widget, is approved. The approved commentary library provides a score "
-            "of 8.82, which confirms that the language aligns with internal standards. "
-            "Before release, reconcile any draft language against this approved library to "
-            "ensure consistency and obtain final approval from the distribution committee. "
-            "Keep the conclusion conditional until the cited open items and missing detail "
-            "are reconciled."
+            "The factsheet language needing approval before external distribution is the "
+            "client-facing text behind three Open items: the Approved Commentary Library "
+            "entry at 8.82, which is still Open rather than in an approved state, so its "
+            "commentary cannot ship as-is; the PM Quote Bank language reading 63.32; and "
+            "the Factsheet Preview text at 97.21. Gate each of them on the compliance "
+            "queue: the Disclosure Checklist for Atlas Pension is Open at 93.86, and "
+            "Disclosure Exceptions count 45 for Atlas Pension and 119 for Northstar "
+            "Endowment. Distribution context supports the hold — Factsheet Distribution "
+            "Status is 26.04 for Atlas Pension against 75.0 for Northstar Endowment. The "
+            "served rows expose scores and statuses rather than the sentences themselves, "
+            "so route the named Open items — commentary, PM quotes, preview text, and the "
+            "disclosure exceptions — to compliance sign-off and hold external distribution "
+            "until they close."
         ),
         "reads": [
             "reporting_factsheet_studio_commentary_approved_commentary_library",
+            "reporting_factsheet_studio_commentary_pm_quote_bank",
+            "reporting_factsheet_studio_commentary_disclosure_checklist",
+            "reporting_factsheet_studio_ddqs_disclosure_exceptions",
+            "reporting_factsheet_studio_factsheets_factsheet_preview",
             "reporting_factsheet_studio_factsheets_factsheet_distribution_status",
         ],
     },
@@ -1366,16 +1389,18 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("fund_operations_control_tower", 3): {
         "text": (
-            "Start an operational escalation with 61 Open settlement exceptions and two "
-            "Open custodian-break readings of 1.67 and 59.91, since those items threaten "
-            "market-open processing. Corporate actions also need attention: Election "
-            "Deadlines is Open at 79.97 and the Corporate Action Calendar is Open at 28.47. "
-            "Before the NAV strike, reconcile 67 Open NAV exceptions, stale-price rows of "
-            "3114 and 243359.62 USD, and vendor-price rows of 246075.96 for Bloomberg and "
-            "209032.42 for ICE. The vendor and stale-price values are source records rather "
-            "than quantified differences, so their exact pricing impact still requires a "
-            "security-level match. Escalate the deadline and settlement queues before market "
-            "open, and keep pricing and NAV queues open through strike reconciliation."
+            "Before market open, escalate Failed Trades for owner review: its primary and "
+            "secondary values are 50.74 and 39.13 against a displayed threshold of 35.88. "
+            "The 61 Open settlement exceptions and two Open custodian-break readings of "
+            "1.67 and 59.91 also require market-open escalation. Corporate actions need "
+            "attention because Election Deadlines is Open at 79.97 and 67.02, while the "
+            "Corporate Action Calendar is Open at 28.47. Before the NAV strike, reconcile "
+            "both Open NAV-exception counts, 67 and 210. Stale-price rows of 3114 and "
+            "243359.62 USD and vendor-price rows of 246075.96 for Bloomberg and 209032.42 "
+            "for ICE also remain Open, although their exact pricing impact requires a "
+            "security-level match. This operational escalation should prioritize failed "
+            "trades, settlement, custodian breaks, and election deadlines before market "
+            "open, while pricing and NAV items stay open through strike reconciliation."
         ),
         "reads": [
             "fund_operations_control_tower_corporate_actions_corporate_action_calendar",
@@ -1384,6 +1409,7 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
             "fund_operations_control_tower_pricing_vendor_price_differences",
             "fund_operations_control_tower_pricing_nav_exceptions",
             "fund_operations_control_tower_recons_custodian_breaks",
+            "fund_operations_control_tower_trade_lifecycle_failed_trades",
             "fund_operations_control_tower_trade_lifecycle_settlement_exceptions",
         ],
     },
@@ -1426,14 +1452,16 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("nav_fees_close_dashboard", 3): {
         "text": (
-            "The controller's fee review includes two Open Fee Accruals rows, led by 93.49, "
-            "so accrual reconciliation remains outstanding. Cash exceptions include Open "
-            "Cash Break Aging at 51.07, Cash Movements at 97.6 and 41.1, and FX Cash and "
-            "Overdrafts at 72.91 and 60.5. Pricing review must include the NAV Exceptions "
-            "widget, which reports 36 and 118 Open exceptions for Flagship Long/Short. The "
-            "close queue separately contains 225 Open exceptions, but that count should not "
-            "be mislabeled as the pricing-exception measure. Fee, cash, pricing, and close "
-            "exceptions all require reconciliation before fund controller approval."
+            "The fund controller's fee review includes both Open Fee Accruals rows, 93.49 "
+            "with a 0.0756 change and 72.78 with a 0.028 change. Cash exceptions include "
+            "Open Cash Break Aging at 51.07 and 95.03, Cash Movements at 97.6 and 41.1, and "
+            "FX Cash and Overdrafts at 72.91 and 60.5. The available pricing-related NAV "
+            "Exceptions are two Open counts, 36 and 118, but the rows do not identify the "
+            "underlying securities or price differences. The Close Exceptions queue is "
+            "separate and contains two Open counts, 225 and 178, which must not be mislabeled "
+            "as pricing exceptions. Reconcile both fee rows, both cash-break rows, the cash "
+            "and FX records, both NAV-exception counts, and both close counts before fund "
+            "controller approval."
         ),
         "reads": [
             "nav_fees_close_dashboard_cash_cash_movements",
@@ -1483,23 +1511,19 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("executive_investment_dashboard", 3): {
         "text": (
-            "Across the available widgets, performance, flows, and risk do not move "
-            "consistently across strategies. The Returns by Strategy widget shows a YTD "
-            "return of 0.0405 for Flagship Long/Short in Global Equities, while the Net "
-            "Flows widget reports a score of 83.06 from Atlas Pension, indicating strong "
-            "inflows that have not yet translated into improved risk metrics. The Drawdown "
-            "Summary widget lists a drawdown of -7000 USD for the same fund and strategy, "
-            "showing a modest downside relative to the return. Risk widgets (Top Risks, "
-            "Stress Loss Summary, Limit Utilization) all report elevated scores or losses "
-            "for Flagship Long/Short, suggesting that higher returns are accompanied by "
-            "higher risk exposure. Because no other strategies appear in the provided data, "
-            "we cannot assess consistency across multiple strategies; the analysis is "
-            "limited to the single strategy shown. Unsupported parts: The prompt asks "
-            "whether performance, flows, and risk are moving consistently across "
-            "*strategies*, but only one strategy (Flagship Long/Short – Global Equities) "
-            "appears in the SERVED widgets. Needed fields: additional strategy entries with "
-            "corresponding returns, net flow scores, drawdowns, and risk metrics would be "
-            "required to fully answer the question."
+            "A cross-strategy consistency conclusion is not available because both return "
+            "rows are labeled Global Equities and the flows and risk rows contain no strategy "
+            "field. Within Global Equities, performance is mixed: the two Open returns are "
+            "0.0405 with a -0.0386 change and 0.1031 with a 0.044 change. Client flow scores "
+            "are 83.06 with a 0.071 change for Atlas Pension and 25.88 with a 0.0264 change "
+            "for Northstar Endowment, but neither row maps flows to a strategy or identifies "
+            "inflows versus outflows. Risk is also mixed: drawdowns are -7000 with a 0.0653 "
+            "change and -248500 with a -0.04 change, while stress losses are -51000 with a "
+            "-0.0593 change and -134500 with a 0.0138 change. Top Risks is Open at 39.42, and "
+            "Limit Utilization has Open scores of 16.9 and 94.28, again without strategy "
+            "keys. Additional named strategies and a common strategy identifier across "
+            "performance, flows, and risk are required before their movements can be "
+            "compared consistently."
         ),
         "reads": [
             "executive_investment_dashboard_firm_overview_net_flows",
@@ -1512,16 +1536,18 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("cio_investment_committee_pack", 1): {
         "text": (
-            "The Flagship Long/Short packet shows a Decisions Required score of 52.01, "
-            "Follow‑Ups at 40.63 and Capital Allocation at 6.21. The committee must decide "
-            "on the recommended allocation changes: two YTD items with scores 50.48 "
-            "(−0.0372) and 31.48 (+0.0367). These changes fit within the primary capacity "
-            "of 37.8, as the total proposed shift is well below this limit. Research "
-            "indicates strong support from Top Ideas (score 76.0) and Major Catalysts "
-            "(score 85.88), suggesting the allocation move aligns with current insights. "
-            "All follow‑up items remain open; resolution is required before final approval. "
-            "The decision remains conditional until any outstanding issues are closed, "
-            "while retaining investment as source evidence."
+            "The investment committee packet should show Decisions Required values of "
+            "52.01 primary, 2.45 secondary, 63.1 threshold, and 78.04 watchlist; the primary "
+            "value is below the displayed threshold. Capital Allocation has Open scores of "
+            "6.21 and 40.72, while the two Open recommended allocation changes score 50.48 "
+            "with a -0.0372 change and 31.48 with a 0.0367 change. Capacity is 37.8 primary, "
+            "14.0 secondary, and 99.59 threshold, but its units do not map to either "
+            "recommendation, so capacity clearance cannot be inferred. Research remains "
+            "Open: Top Ideas is 76.0 with a -0.0007 change, and Major Catalysts has rows at "
+            "85.88 with a -0.0176 change and 82.79 with a 0.0641 change. Follow-Ups also has "
+            "two Open rows, 40.63 with a 0.0874 change and 64.99 with a -0.0574 change. The "
+            "packet should keep the allocation decision open until recommendation units, "
+            "capacity mapping, research disposition, and both follow-ups are resolved."
         ),
         "reads": [
             "cio_investment_committee_pack_agenda_decisions_required",
@@ -1556,15 +1582,15 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("cio_investment_committee_pack", 3): {
         "text": (
-            "The committee reviewed the Flagship Long/Short fund and recorded a decision "
-            "score of 61.24, with the status remaining Open as indicated in the Decision "
-            "Log data. The IC Agenda score of 88.24 is still pending and its status is "
-            "Open, so no final disposition has been applied to that metric. The Decisions "
-            "Required primary value of 52.01 meets the threshold, satisfying that "
-            "requirement. Because the decision log entry shows status Open, the conclusion "
-            "that the decision was closed is unsupported by the available data; therefore "
-            "the record remains open until further action. No additional fields or entities "
-            "are required beyond those cited."
+            "Decision log update after committee review: the two Flagship Long/Short "
+            "decision records remain Open at 61.24 with a 0.0492 change and 24.88 with a "
+            "-0.0282 change. The IC Agenda also remains Open at 88.24 with a -0.0369 change. "
+            "Decisions Required records 52.01 primary, 2.45 secondary, 63.1 threshold, and "
+            "78.04 watchlist, with the primary value below the displayed threshold. No "
+            "approved or rejected disposition, owner, due date, or rationale appears in "
+            "the retrieved rows, so record the outcome as Open with no disposition captured "
+            "rather than closed. Carry the item forward for an explicit committee decision, "
+            "owner assignment, and dated follow-up."
         ),
         "reads": [
             "cio_investment_committee_pack_agenda_ic_agenda",
@@ -1675,13 +1701,15 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("vendor_dataset_monitor", 3): {
         "text": (
-            "An escalation has been sent to FactSet regarding the open incident, with an "
-            "incident log score of 18.67 and a blast radius score of 24.33. The affected "
-            "apps score is 94.16, indicating that almost all relevant applications are "
-            "impacted by this issue. The data owner must identify which datasets are "
-            "affected and document remediation steps. Validation should be re‑run after "
-            "remediation to ensure the incident can be closed. Until validation passes, the "
-            "incident remains open."
+            "The FactSet escalation remains Open, with an Incident Log score of 18.67 and a "
+            "Blast Radius score of 24.33. The retrieved rows contain no dataset names or "
+            "identifiers, so the specific affected datasets cannot be listed; the data "
+            "owner must provide the feed-to-dataset inventory. App impact is Open at 94.16, "
+            "but that row also supplies no application names, so it does not establish which "
+            "apps are affected. Validation Errors is Open at 59.16 and Row Count Drift is "
+            "Open at 188, providing the available remediation evidence. Owner actions are to "
+            "identify the affected datasets and apps, correct the validation and row-count "
+            "issues, rerun validation, and document the result before closing the incident."
         ),
         "reads": [
             "vendor_dataset_monitor_incidents_incident_log",
@@ -1911,13 +1939,15 @@ EXEMPLAR_ANSWERS[("earnings_estimates_monitor", 3)] = {
         "earnings_estimates_monitor_transcript_management_tone",
     ],
     "text": (
-        "LLY is the one company where estimate revisions and management commentary combine "
-        "into a material thesis change: consensus revisions are Open at 33.55 (+8.5%), "
-        "management tone — the served management commentary signal — reads 81.37 and is "
-        "deteriorating (-4.9%), and the thesis change log has collapsed to 4.89, so the "
-        "thesis review should be opened now. AAPL's rows are QTD and In Review across the "
-        "same widgets, so it cannot be flagged on current-period evidence. No other ticker "
-        "has rows in all three widgets, so no further flags are supportable."
+        "LLY is the only company with retrieved evidence across estimate revisions, "
+        "management commentary, and the thesis log. Its Consensus Revisions row is Open at "
+        "33.55 with a 0.0847 change, Management Tone is Open at 81.37 with a -0.0487 change, "
+        "and Thesis Change Log is Open at 4.89 with a -0.068 change. Those three movements "
+        "warrant a material-thesis review for LLY, although the data supply no threshold that "
+        "would prove materiality automatically. XOM has Open Consensus Revisions at 24.68 "
+        "with a 0.017 change and an Open Thesis Change Log at 66.81 with a 0.077 change, but "
+        "no management-tone row is retrieved for XOM. XOM therefore cannot be identified as "
+        "meeting the requested combination until its commentary evidence is available."
     ),
 }
 EXEMPLAR_ANSWERS[("equity_research_workbench", 2)] = {
@@ -1949,13 +1979,14 @@ EXEMPLAR_ANSWERS[("fund_operations_control_tower", 1)] = {
     ],
     "text": (
         "Operations morning checklist for Flagship Long/Short: failed trades stand at 50.74 "
-        "on the primary metric; custodian recon breaks score 1.67 and stay Open; the "
-        "corporate-action calendar holds one Open item at 28.47; pricing exceptions cover an "
-        "Open stale price at 3114.00 USD and a Bloomberg vendor difference of 246075.96 USD; "
-        "and there are 67 open NAV exceptions. The served rows carry no owner names, so "
-        "assign by desk — trade support owns the fails, reconciliations owns the breaks and "
-        "corporate actions, and pricing owns the stale-price, vendor-difference, and NAV "
-        "queues — and record named owners at the morning stand-up."
+        "on the primary metric; custodian recon breaks show two Open rows at 1.67 and 59.91; "
+        "the corporate-action calendar holds one Open item at 28.47; pricing exceptions span "
+        "both Open stale prices at 3114.00 USD and 243359.62 USD, vendor price differences "
+        "from Bloomberg at 246075.96 USD and from ICE at 209032.42 USD, and two Open NAV "
+        "exception rows counting 67 and 210 exceptions. The served rows carry no owner "
+        "names, so assign by desk — trade support owns the fails, reconciliations owns the "
+        "breaks and corporate actions, and pricing owns the stale-price, vendor-difference, "
+        "and NAV queues — and record named owners at the morning stand-up."
     ),
 }
 EXEMPLAR_ANSWERS[("quant_research_backtest_lab", 3)] = {
@@ -1983,20 +2014,22 @@ EXEMPLAR_ANSWERS[("risk_exposure_monitor", 1)] = {
         "risk_exposure_monitor_dashboard_var_trend",
         "risk_exposure_monitor_dashboard_stress_loss_surface",
         "risk_exposure_monitor_drilldown_marginal_var",
+        "risk_exposure_monitor_drilldown_position_risk_contribution",
         "risk_exposure_monitor_exposures_issuer_concentration",
         "risk_exposure_monitor_limits_breaches_and_warnings",
         "risk_exposure_monitor_limits_limit_utilization",
     ],
     "text": (
-        "Risk officer briefing for Flagship Long/Short (YTD). VaR drivers: portfolio VaR is "
-        "-222,500 USD with an Open marginal-VaR reading of -56,000 USD; the rows are "
-        "fund-level, so position attribution needs the drill-down extract. Stress losses: "
-        "the scenario surface shows -103000 and -95,500 USD on consecutive dates. "
-        "Concentration: AAPL is the largest named issuer at 0.0359 exposure and is easing "
-        "(-2.0%). Breaches: the warnings widget holds one Open exposure at 0.0137 against "
-        "limit utilization of 0.0339, so nothing is at limit today. Recommended actions: "
-        "obtain position-level attribution for the marginal VaR, keep the AAPL concentration "
-        "under watch, and close the open warning before the next stress cycle."
+        "Flagship Long/Short has YTD VaR of -222500, Open marginal VaR readings of -56000 "
+        "and -102500, and Open position-risk-contribution exposures of 0.0187 and 0.4227. "
+        "Those rows name no positions or factors, so the VaR drivers cannot be identified. "
+        "The retrieved stress-loss surface starts at -103000, moves "
+        "to -95500 and back to -103000, and reaches -116500 by 2026-01-17. AAPL is the only "
+        "named concentration at 0.0359 exposure with a -0.0198 change. Breaches and Warnings "
+        "contains two Open exposures, 0.0137 with a 0.0195 change and 0.0746 with a 0.0254 "
+        "change, but supplies no corresponding limits. Recommended actions are to obtain "
+        "position-level VaR attribution, investigate the stress path, review AAPL "
+        "concentration, and reconcile both breaches against their documented thresholds."
     ),
 }
 EXEMPLAR_ANSWERS[("risk_exposure_monitor", 2)] = {
@@ -2074,13 +2107,14 @@ EXEMPLAR_ANSWERS[("compliance_surveillance_hub", 2)] = {
         "compliance_surveillance_hub_audit_access_and_export_logs",
     ],
     "text": (
-        "Escalate to compliance leadership on both fronts. Employee trading: the Flagship "
-        "Long/Short employee-trade review is Open at 29.14 with 19 open policy breaches, "
-        "119 open surveillance alerts, and two open pre-clearance items at 15.89 and "
-        "15.57 — the breaches and alerts are the immediate escalation. Research activity: "
-        "the restricted-and-watch list is Open at 18.98 and the access-and-export log "
-        "review is Open at 37.01, so research touching restricted names and the export "
-        "trail should be escalated alongside the trades until both reviews close."
+        "Escalate both Open employee-trade rows, scored 29.14 and 88.88, to compliance "
+        "leadership because the retrieved records do not identify the employees or cleared "
+        "dispositions. The supporting Open controls show policy-breach counts of 19 and 3, "
+        "surveillance-alert counts of 119 and 210, and pre-clearance scores of 15.89 and "
+        "15.57. Research activity also needs escalation: Restricted and Watch List is Open "
+        "at 18.98, while Access and Export Logs has two Open rows at 37.01 and 50.11. Keep "
+        "both employee trades and the research/export activity open until compliance maps "
+        "the rows to people, research items, and final dispositions."
     ),
 }
 EXEMPLAR_ANSWERS[("executive_investment_dashboard", 3)] = {
@@ -2093,15 +2127,17 @@ EXEMPLAR_ANSWERS[("executive_investment_dashboard", 3)] = {
         "executive_investment_dashboard_risk_limit_utilization",
     ],
     "text": (
-        "Within the one strategy reported for the current period — Flagship Long/Short in "
-        "Global Equities (YTD, Open) — performance, flows, and risk are moving "
-        "consistently: the strategy returns 0.0405, net flows from Atlas Pension score a "
-        "strong 83.06, the drawdown summary shows only -7000 USD, and risk is contained "
-        "with limit utilization at 16.9 and top risks at 39.42 against a -51,000 USD "
-        "stress loss. The Global Opportunities rows are QTD and In Review, so they are not "
-        "on a comparable period; a true cross-strategy consistency read needs "
-        "current-period Open rows for the remaining strategies. On the evidence served, "
-        "there is no divergence to escalate."
+        "A cross-strategy consistency conclusion is not supported because both return rows "
+        "are labeled Global Equities and the flows and risk rows contain no strategy field. "
+        "Within the available performance rows, returns are 0.0405 with a -0.0386 change and "
+        "0.1031 with a 0.044 change, so even the one named strategy has mixed movement. "
+        "Client flows are 83.06 with a 0.071 change for Atlas Pension and 25.88 with a "
+        "0.0264 change for Northstar Endowment, but neither score states inflow versus "
+        "outflow or maps to a strategy. Risk is also mixed: drawdowns are -7000 and -248500, "
+        "stress losses are -51000 and -134500, Top Risks is 39.42, and Limit Utilization is "
+        "16.9 and 94.28, all without strategy keys. Additional named strategies and a common "
+        "strategy identifier across performance, flows, and risk are required before their "
+        "movements can be compared consistently."
     ),
 }
 EXEMPLAR_ANSWERS[("healthcare_research_dashboard", 2)] = {
@@ -2228,7 +2264,11 @@ def _fact_value(value: float | int) -> str:
 def derive_prompt_terms(prompt: str, count: int = 2) -> list[str]:
     """The prompt's most distinctive words, kept verbatim for note anchoring."""
 
-    tokens = [token for token in tokenize(prompt) if "-" not in token and "&" not in token]
+    tokens = [
+        token
+        for token in tokenize(prompt)
+        if "-" not in token and "&" not in token and not token.endswith("ed")
+    ]
     ranked = sorted(set(tokens), key=lambda token: (-len(token), tokens.index(token)))
     return ranked[:count]
 
@@ -2255,6 +2295,8 @@ def build_tasks() -> list[dict]:
             override = RUBRIC_OVERRIDES.get((app_slug, index), {})
             chosen = override.get("widgets") or derive_widgets(app, widgets, prompt)
             prompt_terms = override.get("prompt_terms") or derive_prompt_terms(prompt)
+            replacements = ANCHOR_REPLACEMENTS.get((app_slug, index), {})
+            prompt_terms = [replacements.get(term, term) for term in prompt_terms]
             facts: list[tuple[str, str]] = []
             fact_sources: list[str] = []
             for widget_id in chosen:
@@ -2335,6 +2377,12 @@ def certify(tasks: list[dict], catalog: dict) -> None:
             "required_answer_judgment",
         }, f"{payload['id']}: rubric must stay outcomes-only plus the judge key"
         terms = payload["success"]["required_generated_widgets"][0]["data_contains"]
+        inflected = [
+            term for term in terms if term[0].isalpha() and term.endswith("ed")
+        ]
+        assert not inflected, (
+            f"{payload['id']}: anchor terms must be inflection-stable, got {inflected}"
+        )
         assert 2 <= len(terms) <= MAX_GRADED_TERMS, (
             f"{payload['id']}: graded terms out of range ({len(terms)})"
         )

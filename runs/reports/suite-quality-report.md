@@ -198,3 +198,12 @@ full mini gate remains where stronger models land.
    distractor-sensitivity comparison is a publishable result on its own).
 4. Retire the invented Bench fixtures in favor of transcription-grade
    catalogs, extending live-parity eligibility beyond Stark.
+
+## Addendum: build-openbb-backends removed (2026-07-13)
+
+The experimental real-code track was removed from the benchmark the same day
+this report was written, by owner decision, to keep the benchmark simpler: it
+executed agent code without a sandbox, carried only 12 tasks in one family,
+and its graders had never faced a real model. The section above is retained
+as the historical record of its state at evaluation time. The benchmark is
+now four suites and 625 tasks; git history preserves the track in full.

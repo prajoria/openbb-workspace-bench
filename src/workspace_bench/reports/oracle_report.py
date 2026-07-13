@@ -36,7 +36,6 @@ def task_summary(task: Task) -> dict[str, Any]:
         "workspace_baseline": task_workspace_baseline(task),
         "fixtures": [backend.name for backend in task.fixtures],
         "oracle_tool_call_count": len(task.oracle_tool_calls),
-        "code_task": task.code_task is not None,
     }
 
 

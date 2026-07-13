@@ -12,8 +12,7 @@ Motivation: a [NY Tech Week talk](https://youtu.be/7fDTDYh2NJ4?t=1210) showed ag
 Five suites ship bundled in a capability ladder: `smoke` checks one round trip
 per Workspace MCP surface (20 tasks), `enterprise-apps-default` answers the
 default apps' product prompts (69), `enterprise-apps-usage` operates Workspace
-state (300), `build-openbb-apps` builds and repairs custom apps (236), and the
-experimental-v0 `build-openbb-backends` track executes real backend code (12).
+state (300), and `build-openbb-apps` builds and repairs custom apps (236).
 
 ## Contents
 
@@ -28,7 +27,6 @@ experimental-v0 `build-openbb-backends` track executes real backend code (12).
 - [Live Workspace MCP Smoke](#live-workspace-mcp-smoke)
 - [Browser Certification](#browser-certification)
 - [Serve Fixture Backends](#serve-fixture-backends)
-- [Real-Code Backend Track](#real-code-backend-track)
 - [Reference](#reference) — [TASK-SCHEMA.md](TASK-SCHEMA.md) · [RESULT-SCHEMA.md](RESULT-SCHEMA.md)
 - [Grading Model](#grading-model)
 - [Task Organization](#task-organization)
@@ -39,13 +37,12 @@ experimental-v0 `build-openbb-backends` track executes real backend code (12).
 
 ## What Is Included
 
-- 637 task identities: 625 deterministic simulator tasks plus 12 experimental code tasks:
+- 625 deterministic simulator tasks across four certified suites:
   - `smoke` — 20 minimal round-trip tasks covering every Workspace MCP surface
   - `enterprise-apps-default` — 69 byte-verbatim product prompts across 23 default apps
   - `enterprise-apps-usage` — 300 operating tasks across 15 tool-anchored families
   - `build-openbb-apps` — 236 specification-level app-building tasks across 12 families,
     including 24 long diagnosis/repair/retest incidents
-  - `build-openbb-backends` — 12 pinned FastAPI starter repositories graded by launching the agent's own server
 
   Each suite directory under `src/workspace_bench/task_suites/` has a README
   explaining how it is generated and how its tasks are categorized.
@@ -104,7 +101,6 @@ uv run workspace-bench validate --suite smoke --min-tasks 20
 uv run workspace-bench validate --suite enterprise-apps-default --min-tasks 69
 uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 300
 uv run workspace-bench validate --suite build-openbb-apps --min-tasks 236
-uv run workspace-bench validate --suite build-openbb-backends --min-tasks 12
 ```
 
 Run built-in baselines:
@@ -391,8 +387,7 @@ conservatively approved override payload. `--apply-overrides` writes the
 approved table to `src/workspace_bench/core/measured_difficulty.json`; the
 generator consumes it and verifies the empirical counts.
 
-Use `--suite enterprise-apps-usage|build-openbb-apps` for the stable interactive suites,
-`run-code-task` for `build-openbb-backends`, and `--task-dir`
+Use `--suite enterprise-apps-usage|build-openbb-apps` for the stable interactive suites, and `--task-dir`
 for a private task suite. You can slice with `--family`, `--category`, and
 `--difficulty`.
 
@@ -459,12 +454,10 @@ be added independently and reported separately or in aggregate. Bundled today:
 | `enterprise-apps-default` | 69 | answering byte-verbatim product prompts from the seeded default apps |
 | `enterprise-apps-usage` | 300 | operating the workspace across widgets, dashboards, apps, skills, and repair |
 | `build-openbb-apps` | 236 | building, diagnosing, repairing, retesting, and opening custom-backend widgets and apps |
-| `build-openbb-backends` | 12 | editing, testing, launching, and probing real custom-backend code (experimental v0) |
 
 ```bash
 # run or validate one suite
 uv run workspace-bench validate --suite build-openbb-apps --min-tasks 236
-uv run workspace-bench validate --suite build-openbb-backends --min-tasks 12
 uv run workspace-bench --models-file examples/models.example.json --suite build-openbb-apps
 ```
 
@@ -693,33 +686,6 @@ uv run workspace-bench serve-task-backend \
 This exposes that task's `widgets.json`, `apps.json`, widget data, parameter
 options, and form-submit endpoints with CORS enabled.
 
-## Real-Code Backend Track
-
-Install the optional authoring environment if you want the same packages in
-the repository environment (each starter also pins and installs its own):
-
-```bash
-uv sync --extra dev --extra codetrack
-```
-
-Run any external CLI coding agent in an instantiated starter repository:
-
-```bash
-uv run workspace-bench run-code-task \
-  --task build-openbb-backends/backend-code/market_movers_table \
-  --agent-command "your-agent-command" \
-  --timeout 300
-```
-
-The command sets `WORKSPACE_BENCH_WORKDIR`, `WORKSPACE_BENCH_TASK_BRIEF`,
-`WORKSPACE_BENCH_TASK_JSON`, and `WORKSPACE_BENCH_TASK_ID`. After the agent
-exits, the evaluator installs the pinned task environment, starts its FastAPI
-process on an ephemeral localhost port, strictly validates manifests and CORS,
-probes all declared endpoint/parameter cases, runs non-empty pytest tests, and
-checks those tests reject a garbage endpoint implementation. The exact spawned
-process is terminated and a `deployment-receipt.json` is left under
-`.workspace-bench/` in the task workdir.
-
 ## Reference
 
 Two focused reference documents sit at the repository root:
@@ -809,7 +775,6 @@ src/workspace_bench/
     enterprise_apps_usage/              Workspace operating families
       create/ update/ ...                Family directories
     build_openbb_apps/                  Custom-app building families
-    build_openbb_backends/              Experimental real-code backend tasks
   workspace/             Fixture backends, simulator, live workspace-mcp smoke bridge
     data/                Packaged fixture metadata such as Stark and Daloopa widgets/apps
   agents/                Oracle/noop agents, JSONL command protocol, model adapter helpers

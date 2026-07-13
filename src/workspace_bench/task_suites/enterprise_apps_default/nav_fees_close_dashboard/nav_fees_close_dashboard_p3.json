@@ -118,7 +118,7 @@
    "args": {
     "widget_type": "note",
     "name": "NAV, Fees & Close Dashboard Note",
-    "data": "The controller's fee review includes two Open Fee Accruals rows, led by 93.49, so accrual reconciliation remains outstanding. Cash exceptions include Open Cash Break Aging at 51.07, Cash Movements at 97.6 and 41.1, and FX Cash and Overdrafts at 72.91 and 60.5. Pricing review must include the NAV Exceptions widget, which reports 36 and 118 Open exceptions for Flagship Long/Short. The close queue separately contains 225 Open exceptions, but that count should not be mislabeled as the pricing-exception measure. Fee, cash, pricing, and close exceptions all require reconciliation before fund controller approval."
+    "data": "The fund controller's fee review includes both Open Fee Accruals rows, 93.49 with a 0.0756 change and 72.78 with a 0.028 change. Cash exceptions include Open Cash Break Aging at 51.07 and 95.03, Cash Movements at 97.6 and 41.1, and FX Cash and Overdrafts at 72.91 and 60.5. The available pricing-related NAV Exceptions are two Open counts, 36 and 118, but the rows do not identify the underlying securities or price differences. The Close Exceptions queue is separate and contains two Open counts, 225 and 178, which must not be mislabeled as pricing exceptions. Reconcile both fee rows, both cash-break rows, the cash and FX records, both NAV-exception counts, and both close counts before fund controller approval."
    }
   }
  ],

@@ -92,30 +92,6 @@
    "tool": "get_widget_data",
    "args": {
     "origin": "Bench Stark Enterprise",
-    "widget_id": "equity_research_workbench_coverage_price_target_history",
-    "data_args": {
-     "period": "YTD",
-     "sector": "Healthcare",
-     "ticker": "LLY"
-    }
-   }
-  },
-  {
-   "tool": "get_widget_data",
-   "args": {
-    "origin": "Bench Stark Enterprise",
-    "widget_id": "equity_research_workbench_coverage_price_target_upside",
-    "data_args": {
-     "period": "YTD",
-     "sector": "Healthcare",
-     "ticker": "LLY"
-    }
-   }
-  },
-  {
-   "tool": "get_widget_data",
-   "args": {
-    "origin": "Bench Stark Enterprise",
     "widget_id": "equity_research_workbench_thesis_bull_base_bear",
     "data_args": {
      "period": "YTD",
@@ -129,11 +105,11 @@
    "args": {
     "widget_type": "note",
     "name": "Equity Research Workbench Note",
-    "data": "The coverage universe has shifted slightly with a change of -0.0065 for Flagship Long/Short, indicating a modest contraction in the portfolio’s focus. The consensus revisions score now stands at 97.51, reflecting an updated view on earnings expectations that aligns with the latest analyst estimates. Valuation assumptions have been tightened, as shown by the valuation assumption log score of 8.1, which narrows the discount‑rate range used in the DCF model. Ownership snapshot data reveal a change of -0.0063 for Flagship Long/Short, confirming that institutional holdings remain stable but slightly reduced compared to the prior review. The price target history shows an updated internal target of 80700.42 USD and an upside target of 249629.32 USD, illustrating a significant upward revision in the research view. In addition, the thesis has become more bullish: the Bull Base Bear score for Flagship Long/Short increased to 97.5 with a change of 0.0794, indicating a stronger positive outlook compared to the previous review."
+    "data": "Coverage changed in both directions: the two Open universe rows are 0.78 with a -0.0065 change and 48.95 with a 0.0475 change. For estimates, consensus revisions are 97.51 with a -0.0575 change for LLY and 99.74 with a -0.0363 change for XOM. The valuation assumption log contains 8.1 with a -0.0362 change and 91.67 with a 0.0353 change, but it does not name the assumptions. The ownership snapshot supplies one LLY row at 39.69 with a -0.0063 change. For the thesis, Bull Base Bear has rows at 97.5 with a 0.0794 change and 68.86 with a -0.0354 change, without labels mapping them to bull, base, or bear. These figures summarize what moved while avoiding unsupported causal or directional labels where the rows do not provide them."
    }
   }
  ],
  "limits": {
-  "max_turns": 22
+  "max_turns": 18
  }
 }

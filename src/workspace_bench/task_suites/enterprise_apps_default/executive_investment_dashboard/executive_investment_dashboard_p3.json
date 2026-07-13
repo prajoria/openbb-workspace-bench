@@ -112,7 +112,7 @@
    "args": {
     "widget_type": "note",
     "name": "Executive Investment Dashboard Note",
-    "data": "Within the one strategy reported for the current period — Flagship Long/Short in Global Equities (YTD, Open) — performance, flows, and risk are moving consistently: the strategy returns 0.0405, net flows from Atlas Pension score a strong 83.06, the drawdown summary shows only -7000 USD, and risk is contained with limit utilization at 16.9 and top risks at 39.42 against a -51,000 USD stress loss. The Global Opportunities rows are QTD and In Review, so they are not on a comparable period; a true cross-strategy consistency read needs current-period Open rows for the remaining strategies. On the evidence served, there is no divergence to escalate."
+    "data": "A cross-strategy consistency conclusion is not supported because both return rows are labeled Global Equities and the flows and risk rows contain no strategy field. Within the available performance rows, returns are 0.0405 with a -0.0386 change and 0.1031 with a 0.044 change, so even the one named strategy has mixed movement. Client flows are 83.06 with a 0.071 change for Atlas Pension and 25.88 with a 0.0264 change for Northstar Endowment, but neither score states inflow versus outflow or maps to a strategy. Risk is also mixed: drawdowns are -7000 and -248500, stress losses are -51000 and -134500, Top Risks is 39.42, and Limit Utilization is 16.9 and 94.28, all without strategy keys. Additional named strategies and a common strategy identifier across performance, flows, and risk are required before their movements can be compared consistently."
    }
   }
  ],

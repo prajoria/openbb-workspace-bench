@@ -15,7 +15,7 @@ from workspace_bench.core.models import JsonDict, Task, ToolTraceEvent
 from workspace_bench.workspace.fixtures import build_stark_enterprise_backend
 
 
-JUDGE_TEMPLATE_VERSION = "workspace-bench-answer-judge/v2"
+JUDGE_TEMPLATE_VERSION = "workspace-bench-answer-judge/v3"
 AVAILABLE_DATA_CHAR_CAP = 12_000
 JUDGE_TEMPLATE = """You are a pragmatic senior reviewer of an analyst agent's answer.
 An analyst note is a SUMMARY: selecting the salient figures is correct behavior,
@@ -33,6 +33,12 @@ App description: {app_description}
 === END AVAILABLE DATA ===
 
 === WHAT THE AGENT DID ===
+Each data read below includes the rows the agent actually retrieved
+("retrieved"). Verify the answer's figures against BOTH the retrieved rows
+and AVAILABLE DATA; a figure present in either is genuine, not fabricated.
+The agent may legitimately read widgets beyond this app (the backend serves
+many); a widget appearing in the reads below is a genuine source even if it
+is not listed under AVAILABLE DATA.
 {trace_digest}
 === END WHAT THE AGENT DID ===
 
@@ -47,6 +53,7 @@ Decision rule — PASS only if ALL hold:
 1. The trace shows the agent read data a competent analyst would consult for this ask.
 2. Every part of the ask is addressed with at least one relevant, data-backed statement — or an explicit statement that the available data cannot support that part. Silent omission of a part fails; selective citation within a part is fine.
 3. The conclusions follow from the cited figures (right analytical mindset for the role the ask implies).
+The answer need not enumerate every retrieved row or widget; judge whether each part of the ask is addressed with correct figures, not whether the data was exhaustively transcribed.
 FAIL if any part is silently unaddressed, the note is off-topic, figures are not in AVAILABLE DATA, or the note is a bare list of numbers with no reasoning.
 Do not fail an answer for omitting rows, metrics, or widgets it did not need.
 
@@ -288,8 +295,22 @@ def _preview_data(value: Any) -> Any:
     return value
 
 
+RETRIEVED_DATA_ROW_CAP = 6
+RETRIEVED_DATA_CHAR_CAP = 9_000
+
+
 def _trace_digest(trace: tuple[ToolTraceEvent, ...]) -> str:
+    """Digest the trace including the data each read actually returned.
+
+    Agents may legitimately read beyond the bounded AVAILABLE DATA previews
+    (other rows, funds, or periods), so citation verification must run
+    against what the agent retrieved, not only against the previews — a
+    strong model was wrongly failed for citing a real retrieved figure
+    before this section existed.
+    """
+
     lines: list[str] = []
+    budget = RETRIEVED_DATA_CHAR_CAP
     for event in trace:
         detail: JsonDict = {"tool": event.call.name, "ok": event.ok}
         if event.call.name in {
@@ -297,9 +318,32 @@ def _trace_digest(trace: tuple[ToolTraceEvent, ...]) -> str:
             "get_widget_schema",
             "get_params_options",
             "read_workspace_resource",
+            "read_widget",
         }:
             if "widget_id" in event.call.args:
                 detail["widget_id"] = event.call.args["widget_id"]
             detail["args"] = event.call.args
+        if event.call.name in {"get_widget_data", "read_widget"} and event.ok:
+            data = (event.result or {}).get("data")
+            rows = data if isinstance(data, list) else (
+                data.get("series") if isinstance(data, dict) else None
+            )
+            if isinstance(rows, list):
+                retrieved = rows[:RETRIEVED_DATA_ROW_CAP]
+                rendered = json.dumps(retrieved, sort_keys=True)
+                if len(rows) > RETRIEVED_DATA_ROW_CAP:
+                    rendered += f" (+{len(rows) - RETRIEVED_DATA_ROW_CAP} more rows)"
+                if budget - len(rendered) >= 0:
+                    detail["retrieved"] = retrieved
+                    if len(rows) > RETRIEVED_DATA_ROW_CAP:
+                        detail["retrieved_truncated"] = len(rows) - RETRIEVED_DATA_ROW_CAP
+                    budget -= len(rendered)
+                else:
+                    detail["retrieved"] = "(omitted: retrieved-data budget reached)"
+            elif data is not None:
+                rendered = json.dumps(data, sort_keys=True)[:400]
+                if budget - len(rendered) >= 0:
+                    detail["retrieved"] = rendered
+                    budget -= len(rendered)
         lines.append(f"{event.index}. {json.dumps(detail, sort_keys=True)}")
     return "\n".join(lines) or "(no tool calls)"

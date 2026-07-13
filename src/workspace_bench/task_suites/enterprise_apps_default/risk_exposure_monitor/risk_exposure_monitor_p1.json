@@ -106,6 +106,18 @@
    "tool": "get_widget_data",
    "args": {
     "origin": "Bench Stark Enterprise",
+    "widget_id": "risk_exposure_monitor_drilldown_position_risk_contribution",
+    "data_args": {
+     "period": "YTD",
+     "portfolio": "Global Equity",
+     "scenario": "Equity -10%"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
     "widget_id": "risk_exposure_monitor_limits_limit_utilization",
     "data_args": {
      "period": "YTD",
@@ -119,11 +131,11 @@
    "args": {
     "widget_type": "note",
     "name": "Risk & Exposure Monitor Note",
-    "data": "Risk officer briefing for Flagship Long/Short (YTD). VaR drivers: portfolio VaR is -222,500 USD with an Open marginal-VaR reading of -56,000 USD; the rows are fund-level, so position attribution needs the drill-down extract. Stress losses: the scenario surface shows -103000 and -95,500 USD on consecutive dates. Concentration: AAPL is the largest named issuer at 0.0359 exposure and is easing (-2.0%). Breaches: the warnings widget holds one Open exposure at 0.0137 against limit utilization of 0.0339, so nothing is at limit today. Recommended actions: obtain position-level attribution for the marginal VaR, keep the AAPL concentration under watch, and close the open warning before the next stress cycle."
+    "data": "Flagship Long/Short has YTD VaR of -222500, Open marginal VaR readings of -56000 and -102500, and Open position-risk-contribution exposures of 0.0187 and 0.4227. Those rows name no positions or factors, so the VaR drivers cannot be identified. The retrieved stress-loss surface starts at -103000, moves to -95500 and back to -103000, and reaches -116500 by 2026-01-17. AAPL is the only named concentration at 0.0359 exposure with a -0.0198 change. Breaches and Warnings contains two Open exposures, 0.0137 with a 0.0195 change and 0.0746 with a 0.0254 change, but supplies no corresponding limits. Recommended actions are to obtain position-level VaR attribution, investigate the stress path, review AAPL concentration, and reconcile both breaches against their documented thresholds."
    }
   }
  ],
  "limits": {
-  "max_turns": 20
+  "max_turns": 22
  }
 }

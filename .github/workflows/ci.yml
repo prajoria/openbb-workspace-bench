@@ -45,9 +45,6 @@ jobs:
       - name: Validate enterprise-apps-default suite
         run: uv run --extra dev workspace-bench validate --suite enterprise-apps-default --min-tasks 69
 
-      - name: Validate the experimental build-openbb-backends suite
-        run: uv run --extra dev workspace-bench validate --suite build-openbb-backends --min-tasks 12
-
       - name: Validate the smoke suite
         run: uv run --extra dev workspace-bench validate --suite smoke --min-tasks 20
 
@@ -85,7 +82,6 @@ jobs:
         run: |
           uv run --extra dev workspace-bench manifest --suite enterprise-apps-usage --json > /dev/null
           uv run --extra dev workspace-bench manifest --suite build-openbb-apps --json > /dev/null
-          uv run --extra dev workspace-bench manifest --suite build-openbb-backends --json > /dev/null
 
       - name: Build release reports
         run: |
