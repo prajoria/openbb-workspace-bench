@@ -63,15 +63,59 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "reporting_factsheet_studio_commentary_pm_quote_bank",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "reporting_factsheet_studio_commentary_disclosure_checklist",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "reporting_factsheet_studio_ddqs_disclosure_exceptions",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD"
+    }
+   }
+  },
+  {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "reporting_factsheet_studio_factsheets_factsheet_preview",
+    "data_args": {
+     "client": "Atlas Pension",
+     "period": "YTD"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Reporting & Factsheet Studio Note",
-    "data": "The Atlas Pension factsheet must be held back from external distribution until the distribution status score of 26.04, as shown in the Factsheet Distribution Status widget, is approved. The approved commentary library provides a score of 8.82, which confirms that the language aligns with internal standards. Before release, reconcile any draft language against this approved library to ensure consistency and obtain final approval from the distribution committee. Keep the conclusion conditional until the cited open items and missing detail are reconciled."
+    "data": "The factsheet language needing approval before external distribution is the client-facing text behind three Open items: the Approved Commentary Library entry at 8.82, which is still Open rather than in an approved state, so its commentary cannot ship as-is; the PM Quote Bank language reading 63.32; and the Factsheet Preview text at 97.21. Gate each of them on the compliance queue: the Disclosure Checklist for Atlas Pension is Open at 93.86, and Disclosure Exceptions count 45 for Atlas Pension and 119 for Northstar Endowment. Distribution context supports the hold — Factsheet Distribution Status is 26.04 for Atlas Pension against 75.0 for Northstar Endowment. The served rows expose scores and statuses rather than the sentences themselves, so route the named Open items — commentary, PM quotes, preview text, and the disclosure exceptions — to compliance sign-off and hold external distribution until they close."
    }
   }
  ],
  "limits": {
-  "max_turns": 12
+  "max_turns": 20
  }
 }

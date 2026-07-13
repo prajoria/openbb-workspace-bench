@@ -1192,17 +1192,26 @@ EXEMPLAR_ANSWERS: dict[tuple[str, int], ExemplarAnswer] = {
     },
     ("reporting_factsheet_studio", 2): {
         "text": (
-            "The Atlas Pension factsheet must be held back from external distribution until "
-            "the distribution status score of 26.04, as shown in the Factsheet Distribution "
-            "Status widget, is approved. The approved commentary library provides a score "
-            "of 8.82, which confirms that the language aligns with internal standards. "
-            "Before release, reconcile any draft language against this approved library to "
-            "ensure consistency and obtain final approval from the distribution committee. "
-            "Keep the conclusion conditional until the cited open items and missing detail "
-            "are reconciled."
+            "The factsheet language needing approval before external distribution is the "
+            "client-facing text behind three Open items: the Approved Commentary Library "
+            "entry at 8.82, which is still Open rather than in an approved state, so its "
+            "commentary cannot ship as-is; the PM Quote Bank language reading 63.32; and "
+            "the Factsheet Preview text at 97.21. Gate each of them on the compliance "
+            "queue: the Disclosure Checklist for Atlas Pension is Open at 93.86, and "
+            "Disclosure Exceptions count 45 for Atlas Pension and 119 for Northstar "
+            "Endowment. Distribution context supports the hold — Factsheet Distribution "
+            "Status is 26.04 for Atlas Pension against 75.0 for Northstar Endowment. The "
+            "served rows expose scores and statuses rather than the sentences themselves, "
+            "so route the named Open items — commentary, PM quotes, preview text, and the "
+            "disclosure exceptions — to compliance sign-off and hold external distribution "
+            "until they close."
         ),
         "reads": [
             "reporting_factsheet_studio_commentary_approved_commentary_library",
+            "reporting_factsheet_studio_commentary_pm_quote_bank",
+            "reporting_factsheet_studio_commentary_disclosure_checklist",
+            "reporting_factsheet_studio_ddqs_disclosure_exceptions",
+            "reporting_factsheet_studio_factsheets_factsheet_preview",
             "reporting_factsheet_studio_factsheets_factsheet_distribution_status",
         ],
     },
@@ -1970,13 +1979,14 @@ EXEMPLAR_ANSWERS[("fund_operations_control_tower", 1)] = {
     ],
     "text": (
         "Operations morning checklist for Flagship Long/Short: failed trades stand at 50.74 "
-        "on the primary metric; custodian recon breaks score 1.67 and stay Open; the "
-        "corporate-action calendar holds one Open item at 28.47; pricing exceptions cover an "
-        "Open stale price at 3114.00 USD and a Bloomberg vendor difference of 246075.96 USD; "
-        "and there are 67 open NAV exceptions. The served rows carry no owner names, so "
-        "assign by desk — trade support owns the fails, reconciliations owns the breaks and "
-        "corporate actions, and pricing owns the stale-price, vendor-difference, and NAV "
-        "queues — and record named owners at the morning stand-up."
+        "on the primary metric; custodian recon breaks show two Open rows at 1.67 and 59.91; "
+        "the corporate-action calendar holds one Open item at 28.47; pricing exceptions span "
+        "both Open stale prices at 3114.00 USD and 243359.62 USD, vendor price differences "
+        "from Bloomberg at 246075.96 USD and from ICE at 209032.42 USD, and two Open NAV "
+        "exception rows counting 67 and 210 exceptions. The served rows carry no owner "
+        "names, so assign by desk — trade support owns the fails, reconciliations owns the "
+        "breaks and corporate actions, and pricing owns the stale-price, vendor-difference, "
+        "and NAV queues — and record named owners at the morning stand-up."
     ),
 }
 EXEMPLAR_ANSWERS[("quant_research_backtest_lab", 3)] = {
