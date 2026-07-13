@@ -14,8 +14,6 @@ The suite runs on the default Workspace (`default-v1` in the manifest): Home plu
 uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 300
 ```
 
-A 2026-07-13 gpt-4.1-mini measurement of the retired minimal-baseline variant scored within one point of the crowded run (54.0% vs 53.0%), so the empty-room mode carried no separate signal and was removed.
-
 ## Generation method
 
 `template-scaled-from-basis`. Fifteen tool-anchored families are expanded into five levels with four tasks per cell by `scripts/generators/generate_usage_suite.py`; generation-time quotas and adversarial certification are release gates. The deterministic phrasing and task assembly mechanics live in `scripts/generators/_assembly/`.
