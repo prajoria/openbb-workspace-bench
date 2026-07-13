@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "create",
   "difficulty": "easy",
-  "prompt": "Create a Yield Curve widget (widget_id yield_curve) from the Bench Macro backend on the active dashboard.",
+  "prompt": "Create a Metric Widget (widget_id test_metric) from the Widget Examples backend on the active dashboard.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "widget-examples"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_yield_curve_plain_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -31,8 +32,8 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {},
         "min_count": 1
       }
@@ -58,8 +59,8 @@
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
       }
     }

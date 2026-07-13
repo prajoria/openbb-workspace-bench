@@ -3,11 +3,11 @@
   "category": "read",
   "family": "inspect",
   "difficulty": "easy",
-  "prompt": "Call read_widget with widget_id macro_timeseries for the existing Bench Macro/macro_timeseries widget, then add a note mentioning DGS10.",
+  "prompt": "Call read_widget with widget_id company_performance for the existing Getting Started/company_performance widget, then add a note mentioning GM.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,19 +23,22 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "DGS10"
+            "company": "GM",
+            "year": "2024"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_inspect_macro_timeseries_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_inspect_macro_timeseries_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -48,7 +51,7 @@
       {
         "tool": "read_widget",
         "args_contains": {
-          "widget_id": "macro_timeseries"
+          "widget_id": "company_performance"
         }
       }
     ],
@@ -56,7 +59,7 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "DGS10"
+          "GM"
         ]
       }
     ],
@@ -76,7 +79,7 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_id": "macro_timeseries"
+        "widget_id": "company_performance"
       }
     },
     {
@@ -84,7 +87,7 @@
       "args": {
         "widget_type": "note",
         "name": "Inspect Note",
-        "data": "Inspected macro_timeseries: DGS10."
+        "data": "Inspected company_performance: GM."
       }
     }
   ],

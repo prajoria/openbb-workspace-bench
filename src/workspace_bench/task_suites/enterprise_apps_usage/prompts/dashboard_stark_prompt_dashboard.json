@@ -102,12 +102,6 @@
       }
     },
     {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Stark Enterprise"
-      }
-    },
-    {
       "tool": "get_widget_schema",
       "args": {
         "origin": "Bench Stark Enterprise",
@@ -132,6 +126,6 @@
     }
   ],
   "limits": {
-    "max_turns": 12
+    "max_turns": 11
   }
 }

@@ -1,0 +1,94 @@
+{
+  "historical_chains_table": {
+    "name": "Chains Historical table example",
+    "description": "Get historical TVL of a chain using Defi LLama",
+    "category": "crypto",
+    "searchCategory": "crypto",
+    "endpoint": "historical_chains",
+    "gridData": {
+      "w": 20,
+      "h": 9
+    },
+    "params": [
+      {
+        "paramName": "chain",
+        "description": "Select a chain to get historical TVL",
+        "value": "Ethereum",
+        "label": "Chain",
+        "type": "endpoint",
+        "optionsEndpoint": "get_chains_list"
+      },
+      {
+        "paramName": "test",
+        "description": "Select a type to get historical TVL",
+        "value": "all",
+        "label": "Type",
+        "type": "text",
+        "options": [
+          {
+            "label": "test1",
+            "value": "test1"
+          },
+          {
+            "label": "test2",
+            "value": "test2"
+          },
+          {
+            "label": "test3",
+            "value": "test3"
+          },
+          {
+            "label": "test4",
+            "value": "test4"
+          }
+        ]
+      }
+    ]
+  },
+  "historical_chains_table_advanced_dropdown": {
+    "name": "Chains Historical table example with advanced dropdown",
+    "description": "Get historical TVL of a chain using Defi LLama",
+    "category": "crypto",
+    "searchCategory": "crypto",
+    "endpoint": "historical_chains",
+    "gridData": {
+      "w": 20,
+      "h": 9
+    },
+    "params": [
+      {
+        "paramName": "chain",
+        "description": "Select a chain to get historical TVL",
+        "value": "Ethereum",
+        "label": "Chain",
+        "type": "endpoint",
+        "optionsEndpoint": "get_chains_list"
+      },
+      {
+        "paramName": "test",
+        "description": "Select a type to get historical TVL",
+        "value": "all",
+        "label": "Type",
+        "type": "text",
+        "options": [
+          {
+            "label": "test1",
+            "value": "test1"
+          },
+          {
+            "label": "test2",
+            "value": "test2"
+          },
+          {
+            "label": "test3",
+            "value": "test3"
+          },
+          {
+            "label": "test4",
+            "value": "test4"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "skills",
   "difficulty": "hard",
-  "prompt": "Call get_skill_content with slug finance-guidance-tracker. Following that workflow, add the Estimate History widget for NVDA, read its data, and add a note that cites the exact key value from the data. Omit dashboard_id when adding the note.",
+  "prompt": "Call get_skill_content with slug finance-guidance-tracker. Following that workflow, add the Live Grid widget for TSLA, read its data, and add a note that cites the exact key value from the data. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "overview",
           "name": "Overview"
         }
-      ]
+      ],
+      "dashboard_id": "usage_grounded_finance_guidance_tracker_for_nvda_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -43,7 +44,7 @@
       {
         "tool": "get_widget_data",
         "args_contains": {
-          "widget_id": "estimate_history"
+          "widget_id": "live_grid_data"
         }
       }
     ],
@@ -59,10 +60,10 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         },
         "min_count": 1
       }
@@ -71,8 +72,8 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "NVDA",
-          "1.18",
+          "TSLA",
+          "245.0",
           "claims"
         ]
       }
@@ -106,33 +107,33 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history"
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         }
       }
     },
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         }
       }
     },
@@ -141,7 +142,7 @@
       "args": {
         "widget_type": "note",
         "name": "Skill Note",
-        "data": "NVDA guidance: 2026Q1 EPS 1.18; management claims tracked."
+        "data": "TSLA guidance: live-grid price 245.0; claims tracked."
       }
     }
   ],

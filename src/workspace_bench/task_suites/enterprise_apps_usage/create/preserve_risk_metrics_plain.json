@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "create",
   "difficulty": "hard",
-  "prompt": "This dashboard already has a Holdings Table widget. Add the Risk Metrics widget next to it without disturbing the existing widget or overlapping it.",
+  "prompt": "This dashboard already has a Metric Widget. Add the Whitepapers widget next to it without disturbing the existing widget or overlapping it.",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,17 +23,19 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "holdings_table",
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
           "data_args": {},
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_preserve_risk_metrics_plain_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_preserve_risk_metrics_plain_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -48,16 +50,20 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "holdings_table",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {},
         "min_count": 1,
         "max_count": 1
       },
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {},
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        },
         "min_count": 1
       }
     ],
@@ -84,28 +90,32 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Portfolio"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics"
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {}
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        }
       }
     },
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "risk_metrics",
+        "widget_id": "whitepapers",
         "x": 20,
         "y": 0,
         "w": 20,

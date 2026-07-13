@@ -21,6 +21,7 @@
           "name": "Overview"
         }
       ],
+      "dashboard_id": "usage_build_risk_build_dashboard_001",
       "widgets": [
         {
           "origin": "Bench Stark Enterprise",
@@ -32,7 +33,8 @@
             "y": 500,
             "w": 8,
             "h": 4
-          }
+          },
+          "widget_uuid": "usage_build_risk_build_widget_001"
         }
       ]
     }

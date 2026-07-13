@@ -21,20 +21,7 @@
           "name": "Overview"
         }
       ],
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "vendor_dataset_monitor_vendors_vendor_contract_terms",
-          "data_args": {},
-          "tab_id": "overview",
-          "layout": {
-            "x": 0,
-            "y": 500,
-            "w": 8,
-            "h": 4
-          }
-        }
-      ]
+      "dashboard_id": "usage_read_the_finance_earnings_prep_skill_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -64,17 +51,7 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    },
-    "required_widgets": [
-      {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "vendor_dataset_monitor_vendors_vendor_contract_terms",
-        "data_args": {},
-        "tab_id": "overview",
-        "min_count": 1,
-        "max_count": 1
-      }
-    ]
+    }
   },
   "oracle_tool_calls": [
     {

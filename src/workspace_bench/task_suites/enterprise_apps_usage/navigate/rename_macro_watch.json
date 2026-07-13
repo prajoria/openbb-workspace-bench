@@ -7,7 +7,7 @@
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "overview",
           "name": "Overview"
         }
-      ]
+      ],
+      "dashboard_id": "usage_rename_macro_watch_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -50,7 +51,7 @@
       "tool": "manage_dashboard",
       "args": {
         "operation": "update",
-        "dashboard_id": "dash_001",
+        "dashboard_id": "usage_rename_macro_watch_dashboard_001",
         "name": "Rates Watch"
       }
     }

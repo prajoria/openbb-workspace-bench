@@ -16,7 +16,11 @@ from workspace_bench.core.models import (
     TaskSuiteManifest,
 )
 from workspace_bench.core.provenance import git_provenance
-from workspace_bench.core.runner import TaskRunner
+from workspace_bench.core.runner import (
+    TaskRunner,
+    task_workspace_baseline,
+    tasks_workspace_baseline,
+)
 from workspace_bench.core.suite_checks import release_checks_for_suite
 from workspace_bench.reports.serialization import grade_summary
 
@@ -29,6 +33,7 @@ def task_summary(task: Task) -> dict[str, Any]:
         "category": task.category,
         "specification_level": task.specification_level,
         "difficulty": task.difficulty,
+        "workspace_baseline": task_workspace_baseline(task),
         "fixtures": [backend.name for backend in task.fixtures],
         "oracle_tool_call_count": len(task.oracle_tool_calls),
         "code_task": task.code_task is not None,
@@ -43,6 +48,7 @@ def result_summary(result: RunResult) -> dict[str, Any]:
         "family": result.task.family,
         "specification_level": result.task.specification_level,
         "difficulty": result.task.difficulty,
+        "workspace_baseline": task_workspace_baseline(result.task),
         **grade_summary(result.grade),
     }
 
@@ -69,6 +75,9 @@ def results_summary(results: list[RunResult]) -> dict[str, Any]:
         if result.grade.passed:
             bucket["passed"] += 1
     return {
+        "workspace_baseline": tasks_workspace_baseline(
+            [result.task for result in results]
+        ),
         "total": total,
         "passed": passed,
         "failed": total - passed,
@@ -140,6 +149,7 @@ def build_manifest(
             "content_sha256": task_suite.content_sha256,
             "visibility": task_suite.visibility,
             "description": task_suite.description,
+            "workspace_baseline": task_suite.workspace_baseline or "minimal",
         }
     return payload
 
@@ -182,6 +192,7 @@ def render_markdown_report(report: dict[str, Any]) -> str:
         f"Git commit: `{manifest['git_commit']}`",
         f"Git dirty: `{manifest['git_dirty']}`",
         f"Tasks: `{manifest['task_count']}`",
+        f"Workspace baseline: `{(manifest.get('task_suite') or {}).get('workspace_baseline', 'minimal')}`",
         f"Canary: `{manifest['canary_guid']}`",
         f"Redacted: `{manifest.get('redacted', False)}`",
         "",
@@ -241,6 +252,7 @@ def write_trace_artifacts(
             "family": result.task.family,
             "category": result.task.category,
             "difficulty": result.task.difficulty,
+            "workspace_baseline": task_workspace_baseline(result.task),
         }
         task_payload["prompt_redacted" if redact_prompts else "prompt"] = (
             True if redact_prompts else result.task.prompt

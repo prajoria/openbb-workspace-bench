@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "update",
   "difficulty": "easy",
-  "prompt": "For the existing Latest News widget, set symbol to MSFT.",
+  "prompt": "For the existing Sample News Feed widget, set symbol to business.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,10 +23,10 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "latest_news",
+          "origin": "Getting Started",
+          "widget_id": "sample_newsfeed",
           "data_args": {
-            "symbol": "NVDA",
+            "category": "science",
             "limit": 5
           },
           "layout": {
@@ -34,9 +34,11 @@
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_set_latest_news_symbol_to_msft_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_set_latest_news_symbol_to_msft_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -47,10 +49,10 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "MSFT",
+          "category": "business",
           "limit": 5
         },
         "min_count": 1
@@ -72,9 +74,9 @@
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_set_latest_news_symbol_to_msft_widget_001",
         "data_args": {
-          "symbol": "MSFT"
+          "category": "business"
         }
       }
     }

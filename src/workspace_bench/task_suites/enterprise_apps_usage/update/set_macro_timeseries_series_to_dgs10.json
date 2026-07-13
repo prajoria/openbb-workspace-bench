@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "update",
   "difficulty": "easy",
-  "prompt": "For the existing Macro Timeseries widget, set series to DGS10.",
+  "prompt": "For the existing Car Manufacturer Performance widget, set series to GM.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,19 +23,22 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "DGS2"
+            "company": "VWAGY",
+            "year": "2024"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_set_macro_timeseries_series_to_dgs10_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_set_macro_timeseries_series_to_dgs10_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -46,10 +49,11 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         },
         "min_count": 1
       }
@@ -70,9 +74,10 @@
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_set_macro_timeseries_series_to_dgs10_widget_001",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         }
       }
     }

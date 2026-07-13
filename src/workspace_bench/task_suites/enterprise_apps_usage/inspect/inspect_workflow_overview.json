@@ -31,21 +31,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
-        },
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "vendor_dataset_monitor_slas_freshness_exceptions",
-          "data_args": {},
-          "tab_id": "",
-          "layout": {
-            "x": 0,
-            "y": 506,
-            "w": 8,
-            "h": 4
-          }
+          },
+          "widget_uuid": "usage_inspect_workflow_overview_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_inspect_workflow_overview_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -76,17 +66,7 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    },
-    "required_widgets": [
-      {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "vendor_dataset_monitor_slas_freshness_exceptions",
-        "data_args": {},
-        "tab_id": "",
-        "min_count": 1,
-        "max_count": 1
-      }
-    ]
+    }
   },
   "oracle_tool_calls": [
     {

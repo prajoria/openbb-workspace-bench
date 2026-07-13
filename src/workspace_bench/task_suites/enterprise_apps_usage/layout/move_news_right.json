@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "layout",
   "difficulty": "easy",
-  "prompt": "Keep the AAPL news widget's size and move it to start at column 20.",
+  "prompt": "Keep the tech news widget's size and move it to start at column 20.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,10 +23,10 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "latest_news",
+          "origin": "Getting Started",
+          "widget_id": "sample_newsfeed",
           "data_args": {
-            "symbol": "AAPL",
+            "category": "tech",
             "limit": 5
           },
           "tab_id": "charts",
@@ -35,9 +35,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_move_news_right_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_move_news_right_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -51,10 +53,10 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "AAPL",
+          "category": "tech",
           "limit": 5
         },
         "tab_id": "charts"
@@ -62,7 +64,7 @@
     ],
     "required_layouts": [
       {
-        "widget_id": "latest_news",
+        "widget_id": "sample_newsfeed",
         "tab_id": "charts",
         "x": 20,
         "y": 0,
@@ -91,7 +93,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "latest_news",
+        "widget_id": "sample_newsfeed",
         "tab_id": "charts",
         "x": 20,
         "y": 0,

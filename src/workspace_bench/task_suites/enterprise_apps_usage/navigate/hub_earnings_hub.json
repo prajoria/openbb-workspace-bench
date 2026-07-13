@@ -3,11 +3,11 @@
   "category": "dashboard",
   "family": "navigate",
   "difficulty": "hard",
-  "prompt": "Set the active dashboard name to Earnings Hub, add a new tab named Estimates, put the Estimate History widget for AAPL on it, and add a note on the same tab mentioning estimates and earnings hub.",
+  "prompt": "Set the active dashboard name to Earnings Hub, add a new tab named Estimates, put the Live Grid widget for AAPL on it, and add a note on the same tab mentioning estimates and earnings hub.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "overview",
           "name": "Overview"
         }
-      ]
+      ],
+      "dashboard_id": "usage_hub_earnings_hub_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -41,8 +42,8 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
           "symbol": "AAPL"
         },
@@ -80,7 +81,7 @@
       "tool": "manage_dashboard",
       "args": {
         "operation": "update",
-        "dashboard_id": "dash_001",
+        "dashboard_id": "usage_hub_earnings_hub_dashboard_001",
         "name": "Earnings Hub"
       }
     },
@@ -105,21 +106,21 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history"
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
           "symbol": "AAPL"
         }

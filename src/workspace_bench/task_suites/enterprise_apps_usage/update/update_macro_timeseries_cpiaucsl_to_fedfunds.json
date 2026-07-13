@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "update",
   "difficulty": "medium",
-  "prompt": "The existing Macro Timeseries widget currently shows CPIAUCSL. Update that widget to FEDFUNDS; do not create a new one and leave no widget showing the old value.",
+  "prompt": "The existing Car Manufacturer Performance widget currently shows F. Update that widget to TM; do not create a new one and leave no widget showing the old value.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,19 +23,22 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "CPIAUCSL"
+            "company": "F",
+            "year": "2024"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_update_macro_timeseries_cpiaucsl_to_fedfunds_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_update_macro_timeseries_cpiaucsl_to_fedfunds_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -46,18 +49,20 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "FEDFUNDS"
+          "company": "TM",
+          "year": "2024"
         },
         "min_count": 1
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "CPIAUCSL"
+          "company": "F",
+          "year": "2024"
         },
         "min_count": 0,
         "max_count": 0
@@ -79,15 +84,16 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_id": "macro_timeseries"
+        "widget_id": "company_performance"
       }
     },
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_update_macro_timeseries_cpiaucsl_to_fedfunds_widget_001",
         "data_args": {
-          "series": "FEDFUNDS"
+          "company": "TM",
+          "year": "2024"
         }
       }
     }

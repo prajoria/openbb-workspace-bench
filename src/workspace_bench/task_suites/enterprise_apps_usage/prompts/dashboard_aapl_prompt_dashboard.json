@@ -3,11 +3,11 @@
   "category": "dashboard",
   "family": "prompts",
   "difficulty": "medium",
-  "prompt": "Get workspace_tool_usage, create dashboard AAPL Prompt Dashboard, add Bench Equities/price_performance with data_args {\"symbol\": \"AAPL\"} and Bench Equities/latest_news with data_args {\"limit\": 5, \"symbol\": \"AAPL\"} with schema-first discipline, and add a note mentioning AAPL and schema.",
+  "prompt": "Get workspace_tool_usage, create dashboard AAPL Prompt Dashboard, add Getting Started/table_widget_with_grouping_by_cell_click with data_args {\"symbol\": \"AAPL\"} and Getting Started/sample_newsfeed with data_args {\"limit\": 5, \"symbol\": \"AAPL\"} with schema-first discipline, and add a note mentioning AAPL and schema.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -32,17 +32,17 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         }
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "AAPL",
+          "category": "tech",
           "limit": 5
         }
       }
@@ -88,46 +88,40 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance"
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         }
       }
     },
     {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Equities"
-      }
-    },
-    {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news"
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "AAPL",
+          "category": "tech",
           "limit": 5
         }
       }
@@ -142,6 +136,6 @@
     }
   ],
   "limits": {
-    "max_turns": 12
+    "max_turns": 11
   }
 }

@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "skills",
   "difficulty": "hard",
-  "prompt": "Call get_skill_content with slug finance-tearsheet. Following that workflow, add the Price Performance widget for AAPL, read its data, and add a note that cites the exact key value from the data. Omit dashboard_id when adding the note.",
+  "prompt": "Call get_skill_content with slug finance-tearsheet. Following that workflow, add the Table widget with grouping by cell click widget for AAPL, read its data, and add a note that cites the exact key value from the data. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "overview",
           "name": "Overview"
         }
-      ]
+      ],
+      "dashboard_id": "usage_grounded_finance_tearsheet_for_aapl_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -43,7 +44,7 @@
       {
         "tool": "get_widget_data",
         "args_contains": {
-          "widget_id": "price_performance"
+          "widget_id": "table_widget_with_grouping_by_cell_click"
         }
       }
     ],
@@ -59,8 +60,8 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         },
@@ -72,7 +73,7 @@
         "widget_type": "note",
         "data_contains": [
           "AAPL",
-          "196.10",
+          "150.25",
           "valuation"
         ]
       }
@@ -106,21 +107,21 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance"
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         }
@@ -129,8 +130,8 @@
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         }
@@ -141,7 +142,7 @@
       "args": {
         "widget_type": "note",
         "name": "Skill Note",
-        "data": "AAPL tearsheet: close 196.10; valuation next."
+        "data": "AAPL tearsheet: price 150.25; valuation next."
       }
     }
   ],

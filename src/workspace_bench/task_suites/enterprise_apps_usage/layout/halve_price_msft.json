@@ -7,7 +7,7 @@
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,8 +23,8 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
             "symbol": "MSFT"
           },
@@ -34,9 +34,11 @@
             "y": 2,
             "w": 40,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_halve_price_msft_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_halve_price_msft_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -50,8 +52,8 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "MSFT"
         },
@@ -60,7 +62,7 @@
     ],
     "required_layouts": [
       {
-        "widget_id": "price_performance",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "tab_id": "charts",
         "x": 0,
         "y": 2,
@@ -89,7 +91,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "price_performance",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "tab_id": "charts",
         "x": 0,
         "y": 2,

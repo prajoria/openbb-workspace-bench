@@ -3,11 +3,11 @@
   "category": "read",
   "family": "inspect",
   "difficulty": "easy",
-  "prompt": "After calling read_widget with widget_id price_performance for the existing Bench Equities/price_performance widget, add a note mentioning AAPL.",
+  "prompt": "After calling read_widget with widget_id table_widget_with_grouping_by_cell_click for the existing Getting Started/table_widget_with_grouping_by_cell_click widget, add a note mentioning AAPL.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,8 +23,8 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
             "symbol": "AAPL"
           },
@@ -33,9 +33,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_inspect_price_performance_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_inspect_price_performance_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -48,7 +50,7 @@
       {
         "tool": "read_widget",
         "args_contains": {
-          "widget_id": "price_performance"
+          "widget_id": "table_widget_with_grouping_by_cell_click"
         }
       }
     ],
@@ -76,7 +78,7 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_id": "price_performance"
+        "widget_id": "table_widget_with_grouping_by_cell_click"
       }
     },
     {
@@ -84,7 +86,7 @@
       "args": {
         "widget_type": "note",
         "name": "Inspect Note",
-        "data": "Inspected price_performance: AAPL."
+        "data": "Inspected table_widget_with_grouping_by_cell_click: AAPL."
       }
     }
   ],

@@ -3,11 +3,14 @@
   "category": "repair",
   "family": "inspect",
   "difficulty": "hard",
-  "prompt": "After inspecting the dashboard, find the widget with series=DGS2, repair it to DGS10, keep the companion widget, and add a note mentioning the repair.",
+  "prompt": "After inspecting the dashboard, find the widget with series=VWAGY, repair it to GM, keep the companion widget, and add a note mentioning the repair.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
+      },
+      {
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,30 +26,34 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Macro",
-          "widget_id": "yield_curve",
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
           "data_args": {},
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_ambient_repair_and_brief_macro_timeseries_widget_001"
         },
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "DGS2"
+            "company": "VWAGY",
+            "year": "2024"
           },
           "layout": {
             "x": 20,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_ambient_repair_and_brief_macro_timeseries_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_ambient_repair_and_brief_macro_timeseries_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -58,22 +65,24 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         }
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS2"
+          "company": "VWAGY",
+          "year": "2024"
         },
         "min_count": 0,
         "max_count": 0
@@ -89,8 +98,8 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "DGS2",
-          "DGS10",
+          "VWAGY",
+          "GM",
           "repair"
         ]
       }
@@ -116,15 +125,16 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_ambient_repair_and_brief_macro_timeseries_widget_002"
       }
     },
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_ambient_repair_and_brief_macro_timeseries_widget_002",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         }
       }
     },
@@ -133,7 +143,7 @@
       "args": {
         "widget_type": "note",
         "name": "Inspect Repair Note",
-        "data": "Repair changed DGS2 to DGS10."
+        "data": "Repair changed VWAGY to GM."
       }
     }
   ],

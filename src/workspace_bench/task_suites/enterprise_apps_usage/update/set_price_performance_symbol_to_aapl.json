@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "update",
   "difficulty": "easy",
-  "prompt": "For the existing Price Performance widget, set symbol to AAPL.",
+  "prompt": "For the existing Table widget with grouping by cell click widget, set symbol to AAPL.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,8 +23,8 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
             "symbol": "MSFT"
           },
@@ -33,9 +33,11 @@
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_set_price_performance_symbol_to_aapl_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_set_price_performance_symbol_to_aapl_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -46,8 +48,8 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         },
@@ -70,7 +72,7 @@
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_set_price_performance_symbol_to_aapl_widget_001",
         "data_args": {
           "symbol": "AAPL"
         }

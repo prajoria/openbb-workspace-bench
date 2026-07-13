@@ -3,11 +3,11 @@
   "category": "read",
   "family": "note",
   "difficulty": "easy",
-  "prompt": "Review the existing AAPL price widget and add a note with the latest close from the data.",
+  "prompt": "Review the existing AAPL price widget and add a note with the exact price from the data.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,8 +23,8 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
             "symbol": "AAPL"
           },
@@ -33,9 +33,11 @@
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_fact_close_aapl_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_fact_close_aapl_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -46,8 +48,8 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         },
@@ -59,7 +61,7 @@
         "widget_type": "note",
         "data_contains": [
           "AAPL",
-          "196.10"
+          "150.25"
         ]
       }
     ],
@@ -79,8 +81,8 @@
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         }
@@ -91,7 +93,7 @@
       "args": {
         "widget_type": "note",
         "name": "Answer Note",
-        "data": "Latest AAPL close is 196.10."
+        "data": "AAPL price is 150.25."
       }
     }
   ],

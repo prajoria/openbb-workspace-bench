@@ -45,10 +45,19 @@ def propose(
     if minimum_repeats < 2:
         raise ValueError("review_policy.minimum_repeats must be at least 2")
     model_rows: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    workspace_baselines: set[str] = set()
     for payload in result_payloads:
         model = payload.get("model") or {}
         slug = str(model.get("slug") or model.get("id") or "unknown")
         model_rows[slug].extend(payload.get("results") or [])
+        workspace_baselines.add(
+            str((payload.get("benchmark") or {}).get("workspace_baseline") or "unknown")
+        )
+    if len(workspace_baselines) > 1:
+        raise ValueError(
+            "difficulty proposals cannot mix workspace baselines: "
+            f"{sorted(workspace_baselines)}"
+        )
     if len(model_rows) < 2:
         raise ValueError("difficulty proposals require at least two distinct model result sets")
 
@@ -209,6 +218,7 @@ def propose(
             overrides[task_ref] = row["proposed"]
     return {
         "schema_version": "workspace-bench-difficulty-proposal/v1",
+        "workspace_baseline": next(iter(workspace_baselines), "unknown"),
         "models": all_models,
         "roles": {
             "competent": competent,
@@ -277,6 +287,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "# Measured difficulty proposal",
         "",
         "> Review only. No generated task has been relabeled by this output.",
+        f"> Workspace baseline: `{payload.get('workspace_baseline', 'unknown')}`.",
         "",
         "| Task ref | Family | Old | Raw band | Approved | Evidence |",
         "| --- | --- | --- | --- | --- | --- |",

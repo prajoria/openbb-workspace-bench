@@ -3,11 +3,11 @@
   "category": "read",
   "family": "inspect",
   "difficulty": "easy",
-  "prompt": "After calling read_widget with widget_id holdings_table for the existing Bench Portfolio/holdings_table widget, add a note mentioning holdings.",
+  "prompt": "After calling read_widget with widget_id test_metric for the existing Widget Examples/test_metric widget, add a note mentioning holdings.",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,17 +23,19 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "holdings_table",
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
           "data_args": {},
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_inspect_holdings_table_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_inspect_holdings_table_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -46,7 +48,7 @@
       {
         "tool": "read_widget",
         "args_contains": {
-          "widget_id": "holdings_table"
+          "widget_id": "test_metric"
         }
       }
     ],
@@ -74,7 +76,7 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_id": "holdings_table"
+        "widget_id": "test_metric"
       }
     },
     {
@@ -82,7 +84,7 @@
       "args": {
         "widget_type": "note",
         "name": "Inspect Note",
-        "data": "Inspected holdings_table: holdings."
+        "data": "Inspected test_metric: holdings."
       }
     }
   ],

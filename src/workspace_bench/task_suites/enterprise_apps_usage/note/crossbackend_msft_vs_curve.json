@@ -3,14 +3,14 @@
   "category": "read",
   "family": "note",
   "difficulty": "hard",
-  "prompt": "Review the MSFT fundamentals and yield curve widgets and add a note with the gross margin and the 30Y yield from the data.",
+  "prompt": "Review the company-list and metric widgets and add a note with Microsoft's exact price and the first metric label and value from the data.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       },
       {
-        "name": "macro"
+        "name": "widget-examples"
       }
     ]
   },
@@ -26,30 +26,33 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "fundamental_metrics",
+          "origin": "Getting Started",
+          "widget_id": "company_list",
           "data_args": {
-            "symbol": "MSFT"
+            "companyId": "VWAGY"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_crossbackend_msft_vs_curve_widget_001"
         },
         {
-          "origin": "Bench Macro",
-          "widget_id": "yield_curve",
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
           "data_args": {},
           "layout": {
             "x": 20,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_crossbackend_msft_vs_curve_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_crossbackend_msft_vs_curve_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -60,16 +63,16 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "MSFT"
+          "companyId": "VWAGY"
         },
         "min_count": 1
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {},
         "min_count": 1
       }
@@ -78,9 +81,10 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "MSFT",
-          "0.694",
-          "4.48"
+          "VWAGY",
+          "350.5",
+          "Example Label",
+          "12345"
         ]
       }
     ],
@@ -100,18 +104,18 @@
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "MSFT"
+          "companyId": "VWAGY"
         }
       }
     },
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
       }
     },
@@ -120,7 +124,7 @@
       "args": {
         "widget_type": "note",
         "name": "Answer Note",
-        "data": "MSFT gross margin 0.694; 30Y yield 4.48."
+        "data": "VWAGY price 350.5; first metric Example Label is 12345."
       }
     }
   ],

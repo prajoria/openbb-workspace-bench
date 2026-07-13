@@ -15,6 +15,7 @@ from workspace_bench.code_tasks import (
     validate_code_tasks,
 )
 from workspace_bench.core.runner import find_task, load_builtin_tasks
+from workspace_bench.reports.validation import validate_tasks
 
 
 def test_code_suite_has_twelve_typed_fixture_backed_tasks() -> None:
@@ -30,6 +31,24 @@ def test_code_suite_has_twelve_typed_fixture_backed_tasks() -> None:
         assert (root / task.code_task.starter_path / "pyproject.toml").is_file()
         assert (root / task.code_task.starter_path / "tests" / "test_backend.py").is_file()
         assert (root / task.code_task.oracle_path / "app.py").is_file()
+
+
+def test_code_validation_records_workspace_baseline(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        "workspace_bench.code_tasks.validate_code_tasks",
+        lambda tasks, min_tasks: {
+            "passed": True,
+            "task_count": len(tasks),
+            "oracle_passed": len(tasks),
+            "noop_failed": len(tasks),
+            "release_checks": {},
+            "issues": [],
+        },
+    )
+
+    result = validate_tasks(load_builtin_tasks("build-openbb-backends"), min_tasks=12)
+
+    assert result["workspace_baseline"] == "minimal"
 
 
 def test_code_suite_release_driver_passes_every_release_check() -> None:

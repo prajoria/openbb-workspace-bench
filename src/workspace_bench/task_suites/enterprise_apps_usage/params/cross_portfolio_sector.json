@@ -3,14 +3,14 @@
   "category": "dashboard",
   "family": "params",
   "difficulty": "hard",
-  "prompt": "Build a two-widget dashboard using parameter options for both widgets: Bench Portfolio/sector_exposure sector=Technology; Bench Macro/macro_timeseries series=CPIAUCSL. Add a note mentioning Technology and CPIAUCSL.",
+  "prompt": "Build a two-widget dashboard using parameter options for both widgets: Widget Examples/live_grid_example sector=AAPL; Getting Started/company_performance series=F. Add a note mentioning AAPL and F.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       },
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,7 +23,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_cross_portfolio_sector_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -37,17 +38,18 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {
-          "sector": "Technology"
+          "symbol": "AAPL"
         }
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "CPIAUCSL"
+          "company": "F",
+          "year": "2024"
         }
       }
     ],
@@ -55,15 +57,15 @@
       {
         "tool": "get_params_options",
         "args_contains": {
-          "widget_id": "sector_exposure",
-          "param_name": "sector"
+          "widget_id": "live_grid_example",
+          "param_name": "symbol"
         }
       },
       {
         "tool": "get_params_options",
         "args_contains": {
-          "widget_id": "macro_timeseries",
-          "param_name": "series"
+          "widget_id": "company_performance",
+          "param_name": "company"
         }
       }
     ],
@@ -71,8 +73,8 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "Technology",
-          "CPIAUCSL"
+          "AAPL",
+          "F"
         ]
       }
     ],
@@ -99,62 +101,63 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Portfolio"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure"
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
-        "param_name": "sector"
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
+        "param_name": "symbol"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {
-          "sector": "Technology"
+          "symbol": "AAPL"
         }
       }
     },
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Macro"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries"
+        "origin": "Getting Started",
+        "widget_id": "company_performance"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
-        "param_name": "series"
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
+        "param_name": "company"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "CPIAUCSL"
+          "company": "F",
+          "year": "2024"
         }
       }
     },
@@ -163,7 +166,7 @@
       "args": {
         "widget_type": "note",
         "name": "Options Note",
-        "data": "Options used: Technology, CPIAUCSL."
+        "data": "Options used: AAPL, F."
       }
     }
   ],

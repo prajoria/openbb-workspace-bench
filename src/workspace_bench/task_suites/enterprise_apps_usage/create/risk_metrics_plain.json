@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "create",
   "difficulty": "easy",
-  "prompt": "Create a Risk Metrics widget (widget_id risk_metrics) from the Bench Portfolio backend on the active dashboard.",
+  "prompt": "Create a Whitepapers widget (widget_id whitepapers) from the Widget Examples backend on the active dashboard.",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_risk_metrics_plain_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -31,9 +32,13 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {},
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        },
         "min_count": 1
       }
     ],
@@ -58,9 +63,13 @@
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {}
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        }
       }
     }
   ],

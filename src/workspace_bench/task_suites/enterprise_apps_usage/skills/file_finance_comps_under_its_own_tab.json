@@ -21,6 +21,7 @@
           "name": "Overview"
         }
       ],
+      "dashboard_id": "usage_file_finance_comps_under_its_own_tab_dashboard_001",
       "widgets": [
         {
           "origin": "Bench Stark Enterprise",
@@ -32,7 +33,8 @@
             "y": 500,
             "w": 8,
             "h": 4
-          }
+          },
+          "widget_uuid": "usage_file_finance_comps_under_its_own_tab_widget_001"
         }
       ]
     }

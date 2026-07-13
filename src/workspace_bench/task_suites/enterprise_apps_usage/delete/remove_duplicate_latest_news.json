@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "delete",
   "difficulty": "easy",
-  "prompt": "The dashboard has two identical Latest News widgets. Remove exactly one so a single copy remains; do not change the one that stays.",
+  "prompt": "The dashboard has two identical Sample News Feed widgets. Remove exactly one so a single copy remains; do not change the one that stays.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,10 +23,10 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "latest_news",
+          "origin": "Getting Started",
+          "widget_id": "sample_newsfeed",
           "data_args": {
-            "symbol": "MSFT",
+            "category": "business",
             "limit": 5
           },
           "layout": {
@@ -34,13 +34,14 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_remove_duplicate_latest_news_widget_001"
         },
         {
-          "origin": "Bench Equities",
-          "widget_id": "latest_news",
+          "origin": "Getting Started",
+          "widget_id": "sample_newsfeed",
           "data_args": {
-            "symbol": "MSFT",
+            "category": "business",
             "limit": 5
           },
           "layout": {
@@ -48,9 +49,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_remove_duplicate_latest_news_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_remove_duplicate_latest_news_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -61,10 +64,10 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "MSFT",
+          "category": "business",
           "limit": 5
         },
         "min_count": 1,
@@ -92,7 +95,7 @@
     {
       "tool": "delete_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_remove_duplicate_latest_news_widget_002"
       }
     }
   ],

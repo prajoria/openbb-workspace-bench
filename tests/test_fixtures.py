@@ -33,15 +33,23 @@ def _load_stark_data_generator():
     return _load_generator("generate_stark_data")
 
 
-def test_equities_backend_catalog_and_data_are_deterministic() -> None:
+def test_legacy_equities_alias_uses_transcribed_getting_started_data() -> None:
     backend = build_equities_backend()
 
     widgets = backend.widgets_json()
-    assert "price_performance" in widgets
-    assert widgets["price_performance"]["params"][0]["requires_options_lookup"] is True
+    assert backend.slug == "getting-started"
+    assert "price_performance" not in widgets
+    assert "table_widget_with_grouping_by_cell_click" in widgets
 
-    rows = backend.fetch_widget_data("price_performance", {"symbol": "AAPL"})
-    assert rows[-1] == {"date": "2026-01-15", "close": 196.10, "return_pct": 0.014}
+    rows = backend.fetch_widget_data(
+        "table_widget_with_grouping_by_cell_click", {"symbol": "AAPL"}
+    )
+    assert rows[0] == {
+        "change": 2.5,
+        "price": 150.25,
+        "symbol": "AAPL",
+        "volume": 45_000_000,
+    }
 
 
 def test_fixture_backend_http_server_serves_workspace_contract() -> None:
@@ -54,19 +62,20 @@ def test_fixture_backend_http_server_serves_workspace_contract() -> None:
         with urlopen(f"http://{host}:{port}/widgets.json", timeout=5) as response:
             widgets = json.loads(response.read().decode("utf-8"))
         with urlopen(
-            f"http://{host}:{port}/price-performance?symbol=AAPL", timeout=5
+            f"http://{host}:{port}/table_widget_with_grouping_by_cell_click?symbol=AAPL",
+            timeout=5,
         ) as response:
             rows = json.loads(response.read().decode("utf-8"))
-        with urlopen(f"http://{host}:{port}/symbols", timeout=5) as response:
+        with urlopen(f"http://{host}:{port}/get_tickers_list", timeout=5) as response:
             symbols = json.loads(response.read().decode("utf-8"))
     finally:
         server.shutdown()
         server.server_close()
         thread.join(timeout=5)
 
-    assert "estimate_history" in widgets
-    assert rows[-1]["close"] == 196.10
-    assert symbols[0] == {"label": "AAPL", "value": "AAPL"}
+    assert "company_performance" in widgets
+    assert rows[0]["price"] == 150.25
+    assert symbols[0] == {"label": "Apple Inc.", "value": "AAPL"}
 
 
 def test_stark_enterprise_backend_exposes_demo_catalog() -> None:

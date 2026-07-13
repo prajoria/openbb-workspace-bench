@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "create",
   "difficulty": "easy",
-  "prompt": "On the active dashboard, create a Latest News widget (widget_id latest_news) from the Bench Equities backend with data_args {\"symbol\": \"AAPL\", \"limit\": 5}.",
+  "prompt": "On the active dashboard, create a Sample News Feed widget (widget_id sample_newsfeed) from the Getting Started backend with data_args {\"symbol\": \"tech\", \"limit\": 5}.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_latest_news_aapl_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -31,10 +32,10 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "AAPL",
+          "category": "tech",
           "limit": 5
         },
         "min_count": 1
@@ -61,10 +62,10 @@
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "AAPL",
+          "category": "tech",
           "limit": 5
         }
       }

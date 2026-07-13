@@ -58,6 +58,108 @@ OUT_DIRS = (BUNDLED_OUT_DIR,)
 STK = "Bench Stark Enterprise"
 EQ, MACRO, PF = "Bench Equities", "Bench Macro", "Bench Portfolio"
 
+GETTING_STARTED = "Getting Started"
+WIDGET_EXAMPLES = "Widget Examples"
+_TRANSCRIBED_WIDGETS: dict[tuple[str, str], dict[str, Any]] = {
+    (EQ, "price_performance"): {
+        "origin": GETTING_STARTED,
+        "fixture": "getting-started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
+        "params": {"symbol": "symbol"},
+        "values": {"AAPL": "AAPL", "MSFT": "MSFT", "NVDA": "TSLA"},
+    },
+    (EQ, "latest_news"): {
+        "origin": GETTING_STARTED,
+        "fixture": "getting-started",
+        "widget_id": "sample_newsfeed",
+        "params": {"symbol": "category", "limit": "limit"},
+        "values": {"AAPL": "tech", "MSFT": "business", "NVDA": "science"},
+    },
+    (EQ, "estimate_history"): {
+        "origin": GETTING_STARTED,
+        "fixture": "getting-started",
+        "widget_id": "live_grid_data",
+        "params": {"symbol": "symbol"},
+        "values": {"AAPL": "AAPL", "MSFT": "MSFT", "NVDA": "TSLA"},
+    },
+    (EQ, "fundamental_metrics"): {
+        "origin": GETTING_STARTED,
+        "fixture": "getting-started",
+        "widget_id": "company_list",
+        "params": {"symbol": "companyId"},
+        "values": {"AAPL": "TM", "MSFT": "VWAGY", "NVDA": "GM"},
+    },
+    (MACRO, "macro_timeseries"): {
+        "origin": GETTING_STARTED,
+        "fixture": "getting-started",
+        "widget_id": "company_performance",
+        "params": {"series": "company"},
+        "values": {"FEDFUNDS": "TM", "DGS2": "VWAGY", "DGS10": "GM", "CPIAUCSL": "F"},
+        "defaults": {"year": "2024"},
+    },
+    (MACRO, "yield_curve"): {
+        "origin": WIDGET_EXAMPLES,
+        "fixture": "widget-examples",
+        "widget_id": "test_metric",
+        "params": {},
+        "values": {},
+    },
+    (PF, "holdings_table"): {
+        "origin": WIDGET_EXAMPLES,
+        "fixture": "widget-examples",
+        "widget_id": "test_metric",
+        "params": {},
+        "values": {},
+    },
+    (PF, "sector_exposure"): {
+        "origin": WIDGET_EXAMPLES,
+        "fixture": "widget-examples",
+        "widget_id": "live_grid_example",
+        "params": {"sector": "symbol"},
+        "values": {
+            "Technology": "AAPL",
+            "Communication Services": "MSFT",
+            "Consumer Staples": "TSLA",
+        },
+    },
+    (PF, "risk_metrics"): {
+        "origin": WIDGET_EXAMPLES,
+        "fixture": "widget-examples",
+        "widget_id": "whitepapers",
+        "params": {"sector": "category"},
+        "values": {
+            "Technology": "l1",
+            "Communication Services": "oracles",
+            "Consumer Staples": "defi",
+        },
+        "defaults": {"filenames": ["bitcoin.pdf"]},
+    },
+}
+_LOGICAL_WIDGET_TARGETS = {
+    widget_id: target for (_, widget_id), target in _TRANSCRIBED_WIDGETS.items()
+}
+_TRANSCRIBED_WIDGET_NAMES = {
+    "table_widget_with_grouping_by_cell_click": "Table widget with grouping by cell click",
+    "live_grid_data": "Live Grid",
+    "live_grid_example": "Live Grid",
+    "company_list": "Company List with ID Mapping",
+    "company_performance": "Car Manufacturer Performance",
+    "sample_newsfeed": "Sample News Feed",
+    "whitepapers": "Whitepapers",
+    "table_to_time_series_widget": "Table to Time Series Widget",
+    "table_widget_with_column_definitions": "Table Widget with Column Definitions",
+    "test_metric": "Metric Widget",
+}
+_TRANSCRIBED_FIXTURE_URLS = {
+    "getting-started": "http://127.0.0.1:9106",
+    "widget-examples": "http://127.0.0.1:9107",
+}
+_LEGACY_FIXTURE_TARGETS = {
+    "equities": "getting-started",
+    "macro": "getting-started",
+    "portfolio": "widget-examples",
+}
+
 GRID = {"within_grid": True, "no_overlaps": True, "grid_width": 40}
 TRACE_FULL = {
     "max_invalid_tool_calls": 0,
@@ -80,6 +182,12 @@ PROMPT_POOL_SIZES: dict[str, int] = {}
 # this explicit: already-good ids must remain byte-identical, while future
 # audits can point directly at the generated construction that needs cleanup.
 PUBLIC_ID_RENAMES = {
+    "apply_finance_comps_with_tm": "apply_finance_comps_with_aapl",
+    "apply_finance_guidance_tracker_with_tech":
+        "apply_finance_guidance_tracker_with_aapl",
+    "grounded_finance_comps_for_gm": "grounded_finance_comps_for_nvda",
+    "grounded_finance_guidance_tracker_for_tsla":
+        "grounded_finance_guidance_tracker_for_nvda",
     "add_widget_earnings_estimates_monitor_post_earnings_post_earnings_checklist_3":
         "register_backend_and_add_post_earnings_checklist",
     "add_widget_holdings_table_2": "register_backend_and_add_holdings_table",
@@ -360,8 +468,18 @@ def _attach_backend_runtime_checks(task: dict) -> None:
                 fixture_names.append(name)
     datasets = []
     for fixture_name in fixture_names:
-        backend = get_fixture_backend(fixture_name)
+        lookup_name = fixture_name
+        for candidate in (GETTING_STARTED, WIDGET_EXAMPLES):
+            if fixture_name.startswith(f"Usage {candidate} "):
+                lookup_name = candidate
+                break
+        backend = get_fixture_backend(lookup_name)
         for widget_id, definition in sorted(backend.widgets_json().items()):
+            if (
+                backend.slug in {"getting-started", "widget-examples"}
+                and widget_id not in _TRANSCRIBED_WIDGET_NAMES
+            ):
+                continue
             payload = backend.fetch_widget_data(widget_id, {})
             fields = sorted(_response_fields(payload))
             datasets.append(
@@ -376,8 +494,67 @@ def _attach_backend_runtime_checks(task: dict) -> None:
     if datasets:
         task.setdefault("success", {})["runtime_checks"] = {
             "datasets": datasets,
-            "pinned_paths": False,
+            "pinned_paths": True,
         }
+
+
+def _pin_transcribed_backend_catalogs(task: dict) -> None:
+    """Register only the source-backed widget surface exercised by usage tasks."""
+
+    registered_names: set[str] = set()
+    origin_replacements: dict[str, str] = {}
+    for call in task.get("oracle_tool_calls", []):
+        if call.get("tool") != "manage_backends":
+            continue
+        args = call.get("args", {})
+        if args.get("operation") != "add":
+            continue
+        try:
+            backend = get_fixture_backend(str(args.get("name")))
+        except KeyError:
+            continue
+        if backend.slug not in {"getting-started", "widget-examples"}:
+            continue
+        registered_names.update({backend.slug, backend.name})
+        widgets = {
+            widget_id: definition
+            for widget_id, definition in backend.widgets_json().items()
+            if widget_id in _TRANSCRIBED_WIDGET_NAMES
+        }
+        custom_name = f"Usage {backend.name} {task['id']}"
+        origin_replacements[backend.name] = custom_name
+        args.update(
+            {
+                "name": custom_name,
+                "url": backend.default_url,
+                "widgets_json": widgets,
+                "apps_json": [],
+            }
+        )
+    fixture_entries = task.setdefault("fixtures", {}).setdefault("backends", [])
+    task["fixtures"]["backends"] = [
+        entry
+        for entry in fixture_entries
+        if str(entry.get("name")) not in registered_names
+    ]
+
+    def replace_origins(value: object) -> object:
+        if isinstance(value, str):
+            text = value
+            for old, new in origin_replacements.items():
+                if new not in text:
+                    text = text.replace(old, new)
+            return text
+        if isinstance(value, dict):
+            return {key: replace_origins(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [replace_origins(item) for item in value]
+        return value
+
+    rewritten = replace_origins(task)
+    assert isinstance(rewritten, dict)
+    task.clear()
+    task.update(rewritten)
 
 
 def _response_fields(payload: object) -> set[str]:
@@ -442,15 +619,344 @@ def _core_tag_prefixes(family: str, level: str, cell_index: int) -> tuple[str]:
     return (f"family-{family}",)
 
 
+def _replace_exact_values(value: object, replacements: dict[str, str]) -> None:
+    if isinstance(value, dict):
+        for key, item in value.items():
+            if isinstance(item, str) and item in replacements:
+                value[key] = replacements[item]
+            else:
+                _replace_exact_values(item, replacements)
+    elif isinstance(value, list):
+        for index, item in enumerate(value):
+            if isinstance(item, str) and item in replacements:
+                value[index] = replacements[item]
+            else:
+                _replace_exact_values(item, replacements)
+
+
+def _namespace_task_artifacts(task: dict) -> None:
+    """Give seeded task artifacts stable ids independent of the suite baseline."""
+
+    initial_state = task.get("initial_state", {})
+    raw_dashboards = initial_state.get("dashboards")
+    if isinstance(raw_dashboards, list):
+        dashboards = [item for item in raw_dashboards if isinstance(item, dict)]
+    elif isinstance(initial_state.get("dashboard"), dict):
+        dashboards = [initial_state["dashboard"]]
+    else:
+        dashboards = []
+    if not dashboards:
+        return
+
+    replacements: dict[str, str] = {}
+    task_slug = re.sub(r"[^a-z0-9]+", "_", task["id"].lower()).strip("_")
+    widget_index = 0
+    for dashboard_index, dashboard in enumerate(dashboards, start=1):
+        dashboard_id = f"usage_{task_slug}_dashboard_{dashboard_index:03d}"
+        dashboard["dashboard_id"] = dashboard_id
+        replacements[f"dash_{dashboard_index:03d}"] = dashboard_id
+        seeded_widgets = [
+            *dashboard.get("widgets", []),
+            *dashboard.get("generated_widgets", []),
+        ]
+        for widget in seeded_widgets:
+            if not isinstance(widget, dict):
+                continue
+            widget_index += 1
+            widget_uuid = f"usage_{task_slug}_widget_{widget_index:03d}"
+            widget["widget_uuid"] = widget_uuid
+            replacements[f"widget_{widget_index:03d}"] = widget_uuid
+
+    _replace_exact_values(task.get("success", {}), replacements)
+    _replace_exact_values(task.get("oracle_tool_calls", []), replacements)
+
+
+def _logical_targets_in_task(task: dict) -> list[dict[str, Any]]:
+    targets: list[dict[str, Any]] = []
+
+    def visit(value: object) -> None:
+        if isinstance(value, dict):
+            origin = value.get("origin")
+            widget_id = value.get("widget_id")
+            target = _TRANSCRIBED_WIDGETS.get((str(origin), str(widget_id)))
+            if target is not None and all(target is not item for item in targets):
+                targets.append(target)
+            for item in value.values():
+                visit(item)
+        elif isinstance(value, list):
+            for item in value:
+                visit(item)
+
+    visit(task)
+    return targets
+
+
+def _map_data_args(data_args: dict, target: dict[str, Any]) -> None:
+    params = target["params"]
+    values = target["values"]
+    mapped = {}
+    for key, value in data_args.items():
+        try:
+            mapped_value = values.get(value, value)
+        except TypeError:
+            mapped_value = value
+        mapped_key = params.get(str(key), str(key))
+        if mapped_key is not None:
+            mapped[mapped_key] = mapped_value
+    mapped.update(target.get("defaults", {}))
+    data_args.clear()
+    data_args.update(mapped)
+
+
+def _transcribe_task_widgets(task: dict) -> None:
+    """Point legacy logical widget roles at source-transcribed widgets."""
+
+    task_id = task["id"]
+    targets = _logical_targets_in_task(task)
+    target_fixtures = {str(target["fixture"]) for target in targets}
+    logical_fixture_targets: dict[str, set[str]] = {
+        "equities": set(),
+        "macro": set(),
+        "portfolio": set(),
+    }
+
+    def collect_logical_fixtures(value: object) -> None:
+        if isinstance(value, dict):
+            origin = str(value.get("origin"))
+            target = _TRANSCRIBED_WIDGETS.get(
+                (origin, str(value.get("widget_id")))
+            )
+            source_slug = {EQ: "equities", MACRO: "macro", PF: "portfolio"}.get(
+                origin
+            )
+            if target is not None and source_slug is not None:
+                logical_fixture_targets[source_slug].add(str(target["fixture"]))
+            for item in value.values():
+                collect_logical_fixtures(item)
+        elif isinstance(value, list):
+            for item in value:
+                collect_logical_fixtures(item)
+
+    collect_logical_fixtures(task)
+
+    initial_state = task.get("initial_state", {})
+    raw_dashboards = initial_state.get("dashboards")
+    if isinstance(raw_dashboards, list):
+        dashboards = [item for item in raw_dashboards if isinstance(item, dict)]
+    elif isinstance(initial_state.get("dashboard"), dict):
+        dashboards = [initial_state["dashboard"]]
+    else:
+        dashboards = []
+    uuid_targets: dict[str, dict[str, Any]] = {}
+    option_targets = [
+        target
+        for call in task.get("oracle_tool_calls", [])
+        if call.get("tool") == "get_params_options"
+        if (
+            target := _TRANSCRIBED_WIDGETS.get(
+                (
+                    str(call.get("args", {}).get("origin")),
+                    str(call.get("args", {}).get("widget_id")),
+                )
+            )
+        )
+        is not None
+    ]
+    widget_index = 0
+    for dashboard in dashboards:
+        for widget in [
+            *dashboard.get("widgets", []),
+            *dashboard.get("generated_widgets", []),
+        ]:
+            if not isinstance(widget, dict):
+                continue
+            widget_index += 1
+            target = _TRANSCRIBED_WIDGETS.get(
+                (str(widget.get("origin")), str(widget.get("widget_id")))
+            )
+            if target is not None:
+                uuid_targets[f"widget_{widget_index:03d}"] = target
+
+    def visit(value: object) -> None:
+        if isinstance(value, dict):
+            origin = value.get("origin")
+            widget_id = value.get("widget_id")
+            target = _TRANSCRIBED_WIDGETS.get((str(origin), str(widget_id)))
+            if target is None and str(widget_id) in _LOGICAL_WIDGET_TARGETS:
+                target = _LOGICAL_WIDGET_TARGETS[str(widget_id)]
+            if target is None:
+                target = uuid_targets.get(str(value.get("widget_uuid")))
+            if target is not None:
+                if "origin" in value:
+                    value["origin"] = target["origin"]
+                if "widget_id" in value:
+                    value["widget_id"] = target["widget_id"]
+                if isinstance(value.get("data_args"), dict):
+                    _map_data_args(value["data_args"], target)
+                if isinstance(value.get("param_name"), str):
+                    value["param_name"] = target["params"].get(
+                        value["param_name"], value["param_name"]
+                    )
+            for item in value.values():
+                visit(item)
+        elif isinstance(value, list):
+            for item in value:
+                visit(item)
+
+    task["oracle_tool_calls"] = [
+        call
+        for call in task.get("oracle_tool_calls", [])
+        if call.get("tool") != "list_available_widgets"
+    ]
+    visit(task)
+    option_requirements = [
+        requirement
+        for requirement in task.get("success", {}).get("required_tool_results", [])
+        if requirement.get("tool") == "get_params_options"
+    ]
+    for requirement, target in zip(option_requirements, option_targets, strict=False):
+        _replace_exact_values(requirement, target["values"])
+
+    fixture_entries = task.setdefault("fixtures", {}).setdefault("backends", [])
+    fixture_legacy_names = {str(item.get("name")) for item in fixture_entries}
+    manage_legacy_names = {
+        str(call.get("args", {}).get("name"))
+        for call in task.get("oracle_tool_calls", [])
+        if call.get("tool") == "manage_backends"
+        and call.get("args", {}).get("operation") == "add"
+        and str(call.get("args", {}).get("name")) in _LEGACY_FIXTURE_TARGETS
+    }
+    legacy_names = fixture_legacy_names | manage_legacy_names
+    kept_fixtures = [
+        item
+        for item in fixture_entries
+        if str(item.get("name")) not in {"equities", "macro", "portfolio"}
+    ]
+    if not target_fixtures:
+        for legacy_name in fixture_legacy_names:
+            if legacy_name in _LEGACY_FIXTURE_TARGETS:
+                target_fixtures.add(_LEGACY_FIXTURE_TARGETS[legacy_name])
+    for fixture_name in sorted(target_fixtures):
+        if not any(item.get("name") == fixture_name for item in kept_fixtures):
+            kept_fixtures.append({"name": fixture_name})
+    task["fixtures"]["backends"] = kept_fixtures
+
+    fixture_origins = {
+        "getting-started": GETTING_STARTED,
+        "widget-examples": WIDGET_EXAMPLES,
+    }
+    old_names = {"equities", "macro", "portfolio", EQ, MACRO, PF}
+    for call in task.get("oracle_tool_calls", []):
+        if call.get("tool") != "manage_backends":
+            continue
+        args = call.get("args", {})
+        if args.get("operation") == "add" and args.get("name") in old_names:
+            old_name = str(args["name"])
+            source_targets = logical_fixture_targets.get(old_name, set())
+            fixture_name = (
+                next(iter(source_targets))
+                if len(source_targets) == 1
+                else _LEGACY_FIXTURE_TARGETS.get(
+                    old_name, sorted(target_fixtures or {"getting-started"})[0]
+                )
+            )
+            args["name"] = fixture_name
+            args["url"] = _TRANSCRIBED_FIXTURE_URLS[fixture_name]
+    required_backends = task.get("success", {}).get("required_backends", [])
+    for requirement in required_backends:
+        if requirement.get("name") in old_names:
+            fixture_name = sorted(target_fixtures or {"getting-started"})[0]
+            requirement["name"] = fixture_origins[fixture_name]
+
+    text_targets = [
+        (logical_origin, logical_widget, target)
+        for (logical_origin, logical_widget), target in _TRANSCRIBED_WIDGETS.items()
+        if any(target is item for item in targets)
+    ]
+
+    def replace_text(value: object) -> object:
+        if isinstance(value, str):
+            text = value
+            mentioned_origins: set[str] = set()
+            for logical_origin, logical_widget, target in text_targets:
+                if logical_widget in text:
+                    mentioned_origins.add(str(target["origin"]))
+                logical_name = EQ_NAME.get(
+                    logical_widget, logical_widget.replace("_", " ").title()
+                )
+                text = text.replace(
+                    f"{logical_origin}/{logical_widget}",
+                    f"{target['origin']}/{target['widget_id']}",
+                )
+                text = text.replace(
+                    logical_name,
+                    _TRANSCRIBED_WIDGET_NAMES[str(target["widget_id"])],
+                )
+                text = text.replace(logical_widget, str(target["widget_id"]))
+            del mentioned_origins
+            for logical_origin in (EQ, MACRO, PF):
+                actual_origins = sorted(
+                    {
+                        str(target["origin"])
+                        for source, _, target in text_targets
+                        if source == logical_origin
+                    }
+                )
+                if actual_origins:
+                    text = text.replace(logical_origin, " and ".join(actual_origins))
+            legacy_text_targets = {
+                "equities": ("getting-started", GETTING_STARTED),
+                "macro": ("getting-started", GETTING_STARTED),
+                "portfolio": ("widget-examples", WIDGET_EXAMPLES),
+            }
+            for legacy_name in legacy_names:
+                if legacy_name not in legacy_text_targets:
+                    continue
+                actual_slug, actual_name = legacy_text_targets[legacy_name]
+                text = text.replace(
+                    {"equities": EQ, "macro": MACRO, "portfolio": PF}[legacy_name],
+                    actual_name,
+                )
+                text = re.sub(
+                    rf"(?<![\w-]){re.escape(legacy_name)}(?![\w-])",
+                    actual_slug,
+                    text,
+                )
+            value_replacements: dict[str, set[str]] = defaultdict(set)
+            for _, _, target in text_targets:
+                for old_value, new_value in target["values"].items():
+                    value_replacements[str(old_value)].add(str(new_value))
+            for old_value, new_values in value_replacements.items():
+                if len(new_values) == 1:
+                    text = text.replace(old_value, next(iter(new_values)))
+            text = text.replace("Widget widget", "Widget")
+            text = text.replace("widget widget", "widget")
+            return text
+        if isinstance(value, dict):
+            return {key: replace_text(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [replace_text(item) for item in value]
+        return value
+
+    rewritten = replace_text(task)
+    assert isinstance(rewritten, dict)
+    task.clear()
+    task.update(rewritten)
+    task["id"] = task_id
+
+
 def _finalize_core_task(task: dict, family: str, level: str, cell_index: int) -> None:
     del level, cell_index
     task.setdefault("success", {}).setdefault("workspace_checks", {})[
         "preserve_other_dashboards"
     ] = True
+    _transcribe_task_widgets(task)
     _ensure_widget_discovery(task)
     if family == "backends":
+        _pin_transcribed_backend_catalogs(task)
         _attach_backend_runtime_checks(task)
     diversify_generated_widget_proof(task)
+    _namespace_task_artifacts(task)
 
 
 add = TaskAssembler(
@@ -494,12 +1000,13 @@ def discovery(origin: str, widget_id: str, data_args: dict,
     return calls
 
 
-# Fixture fact tables (mirror workspace_bench.workspace.fixtures)
-CLOSES = {"AAPL": "196.10", "MSFT": "451.25", "NVDA": "179.45"}
-EPS_Q1 = {"AAPL": "2.31", "MSFT": "3.42", "NVDA": "1.18"}
-REV_Q1 = {"AAPL": "94.8", "MSFT": "71.2", "NVDA": "39.4"}
-MARGIN = {"AAPL": "0.462", "MSFT": "0.694", "NVDA": "0.742"}
-MACRO_LATEST = {"FEDFUNDS": "4.12", "DGS2": "3.75", "DGS10": "4.16", "CPIAUCSL": "322.4"}
+# Exact facts transcribed from the OpenBB backend-examples responses.
+GROUPING_PRICES = {"AAPL": "150.25", "MSFT": "350.5", "TSLA": "245.8"}
+LIVE_GRID_PRICES = {"AAPL": "150.0", "MSFT": "350.0", "TSLA": "245.0"}
+LIVE_GRID_VOLUMES = {"AAPL": "1000000", "MSFT": "1200000", "TSLA": "1500000"}
+COMPANY_PRICES = {"AAPL": "150.25", "MSFT": "350.5"}
+COMPANY_SALES = {"TM": "10.5M", "VWAGY": "9.2M", "GM": "6.8M", "F": "4.2M"}
+COMPANY_MARGINS = {"TM": "8.5%", "VWAGY": "7.8%", "GM": "8.2%", "F": "7.5%"}
 EQ_NAME = {"price_performance": "Price Performance", "latest_news": "Latest News",
            "estimate_history": "Estimate History", "fundamental_metrics": "Fundamental Metrics"}
 
@@ -1799,42 +2306,44 @@ for slug, name, prompt_variants, facts, text in NOTE_T0:
 NOTE_T1 = [
     ("close_aapl", EQ, "price_performance", {"symbol": "AAPL"},
      [
-         "Review the existing AAPL price widget and add a note with the latest close from the "
+         "Review the existing AAPL price widget and add a note with the exact price from the "
          "data.",
-         "Use the existing AAPL price widget data to add a note with the latest close from the "
+         "Use the existing AAPL price widget data to add a note with the exact price from the "
          "data.",
-         "Add a note with the latest close from the data after reviewing the existing AAPL "
+         "Add a note with the exact price from the data after reviewing the existing AAPL "
          "price widget.",
-     ], ["AAPL", CLOSES["AAPL"]], f"Latest AAPL close is {CLOSES['AAPL']}."),
+     ], ["AAPL", GROUPING_PRICES["AAPL"]],
+     f"AAPL price is {GROUPING_PRICES['AAPL']}."),
     ("close_msft", EQ, "price_performance", {"symbol": "MSFT"},
      [
-         "Review the existing MSFT price widget and add a note with the latest close from the "
+         "Review the existing MSFT price widget and add a note with the exact price from the "
          "data.",
-         "Use the existing MSFT price widget data to add a note with the latest close from the "
+         "Use the existing MSFT price widget data to add a note with the exact price from the "
          "data.",
-         "Add a note with the latest close from the data after reviewing the existing MSFT "
+         "Add a note with the exact price from the data after reviewing the existing MSFT "
          "price widget.",
-     ], ["MSFT", CLOSES["MSFT"]], f"Latest MSFT close is {CLOSES['MSFT']}."),
+     ], ["MSFT", GROUPING_PRICES["MSFT"]],
+     f"MSFT price is {GROUPING_PRICES['MSFT']}."),
     ("macro_10y", MACRO, "macro_timeseries", {"series": "DGS10"},
      [
-         "Review the existing 10Y series widget and add a note with the series id and its "
-         "latest value from the data.",
-         "Use the existing 10Y series widget data to add a note with the series id and its "
-         "latest value from the data.",
-         "Add a note with the series id and its latest value from the data after reviewing "
-         "the existing 10Y series widget.",
-     ], ["DGS10", MACRO_LATEST["DGS10"]],
-     f"Latest DGS10 value is {MACRO_LATEST['DGS10']}."),
+         "Review the existing GM performance widget and add a note with the manufacturer "
+         "and its exact 2024 global sales from the data.",
+         "Use the existing GM performance widget data to add a note with the manufacturer "
+         "and its exact 2024 global sales from the data.",
+         "Add a note with the manufacturer and exact 2024 global sales from the data after "
+         "reviewing the existing GM performance widget.",
+     ], ["GM", COMPANY_SALES["GM"]],
+     f"GM 2024 global sales are {COMPANY_SALES['GM']}."),
     ("top_holding", PF, "holdings_table", {},
      [
-         "Review the existing holdings widget and add a note naming the largest position and "
-         "its exact weight from the data.",
-         "Use the existing holdings widget data to add a note naming the largest position and "
-         "its exact weight from the data.",
-         "Add a note naming the largest position and its exact weight from the data after "
-         "reviewing the existing holdings widget.",
-     ], ["MSFT", "0.34"],
-     "Largest position: MSFT at 0.34."),
+         "Review the existing metric widget and add a note with the first label and its exact "
+         "value from the data.",
+         "Use the existing metric widget data to add a note with the first label and its exact "
+         "value from the data.",
+         "Add a note with the first label and its exact value from the data after reviewing "
+         "the existing metric widget.",
+     ], ["Example Label", "12345"],
+     "First metric: Example Label is 12345."),
 ]
 for slug, origin, widget_id, data_args, prompt_variants, facts, text in NOTE_T1:
     workflow, sub = wf(origin)
@@ -1868,48 +2377,50 @@ for slug, origin, widget_id, data_args, prompt_variants, facts, text in NOTE_T1:
 NOTE_T2 = [
     ("estimates_aapl", "estimate_history", {"symbol": "AAPL"},
      [
-         "Review the existing AAPL estimates widget and add a note on the overview tab with the "
-         "2026Q1 EPS estimate and the revenue estimate from the data.",
-         "Use the existing AAPL estimates widget data to add a note on the overview tab with "
-         "the 2026Q1 EPS estimate and the revenue estimate from the data.",
-         "Add a note on the overview tab with the 2026Q1 EPS estimate and the revenue estimate "
-         "from the data after reviewing the existing AAPL estimates widget.",
+         "Review the existing AAPL live-grid widget and add a note on the overview tab with "
+         "the exact price and volume from the data.",
+         "Use the existing AAPL live-grid widget data to add a note on the overview tab with "
+         "the exact price and volume from the data.",
+         "Add a note on the overview tab with the exact price and volume from the data after "
+         "reviewing the existing AAPL live-grid widget.",
      ],
-     ["AAPL", EPS_Q1["AAPL"], REV_Q1["AAPL"]],
-     f"AAPL 2026Q1: EPS {EPS_Q1['AAPL']}, revenue {REV_Q1['AAPL']}B."),
+     ["AAPL", LIVE_GRID_PRICES["AAPL"], LIVE_GRID_VOLUMES["AAPL"]],
+     f"AAPL live grid: price {LIVE_GRID_PRICES['AAPL']}, "
+     f"volume {LIVE_GRID_VOLUMES['AAPL']}."),
     ("estimates_msft", "estimate_history", {"symbol": "MSFT"},
      [
-         "Review the existing MSFT estimates widget and add a note on the overview tab with the "
-         "2026Q1 EPS estimate and the revenue estimate from the data.",
-         "Use the existing MSFT estimates widget data to add a note on the overview tab with "
-         "the 2026Q1 EPS estimate and the revenue estimate from the data.",
-         "Add a note on the overview tab with the 2026Q1 EPS estimate and the revenue estimate "
-         "from the data after reviewing the existing MSFT estimates widget.",
+         "Review the existing MSFT live-grid widget and add a note on the overview tab with "
+         "the exact price and volume from the data.",
+         "Use the existing MSFT live-grid widget data to add a note on the overview tab with "
+         "the exact price and volume from the data.",
+         "Add a note on the overview tab with the exact price and volume from the data after "
+         "reviewing the existing MSFT live-grid widget.",
      ],
-     ["MSFT", EPS_Q1["MSFT"], REV_Q1["MSFT"]],
-     f"MSFT 2026Q1: EPS {EPS_Q1['MSFT']}, revenue {REV_Q1['MSFT']}B."),
+     ["MSFT", LIVE_GRID_PRICES["MSFT"], LIVE_GRID_VOLUMES["MSFT"]],
+     f"MSFT live grid: price {LIVE_GRID_PRICES['MSFT']}, "
+     f"volume {LIVE_GRID_VOLUMES['MSFT']}."),
     ("fundamentals_nvda", "fundamental_metrics", {"symbol": "NVDA"},
      [
-         "Review the existing NVDA fundamentals widget and add a note on the overview tab with "
-         "the gross margin and the buyback yield from the data.",
-         "Use the existing NVDA fundamentals widget data to add a note on the overview tab "
-         "with the gross margin and the buyback yield from the data.",
-         "Add a note on the overview tab with the gross margin and the buyback yield from the "
-         "data after reviewing the existing NVDA fundamentals widget.",
+         "Review the existing company-list widget and add a note on the overview tab with "
+         "Microsoft's company id and exact price from the data.",
+         "Use the existing company-list widget data to add a note on the overview tab with "
+         "Microsoft's company id and exact price from the data.",
+         "Add a note on the overview tab with Microsoft's company id and exact price from the "
+         "data after reviewing the existing company-list widget.",
      ],
-     ["NVDA", MARGIN["NVDA"], "0.004"],
-     f"NVDA: gross margin {MARGIN['NVDA']}, buyback yield 0.004."),
+     ["MSFT", COMPANY_PRICES["MSFT"]],
+     f"Microsoft company id MSFT has price {COMPANY_PRICES['MSFT']}."),
     ("fundamentals_aapl", "fundamental_metrics", {"symbol": "AAPL"},
      [
-         "Review the existing AAPL fundamentals widget and add a note on the overview tab with "
-         "the gross margin and the net cash from the data.",
-         "Use the existing AAPL fundamentals widget data to add a note on the overview tab "
-         "with the gross margin and the net cash from the data.",
-         "Add a note on the overview tab with the gross margin and the net cash from the data "
-         "after reviewing the existing AAPL fundamentals widget.",
+         "Review the existing company-list widget and add a note on the overview tab with "
+         "Apple's company id and exact price from the data.",
+         "Use the existing company-list widget data to add a note on the overview tab with "
+         "Apple's company id and exact price from the data.",
+         "Add a note on the overview tab with Apple's company id and exact price from the data "
+         "after reviewing the existing company-list widget.",
      ],
-     ["AAPL", MARGIN["AAPL"], "54.0"],
-     f"AAPL: gross margin {MARGIN['AAPL']}, net cash 54.0B."),
+     ["AAPL", COMPANY_PRICES["AAPL"]],
+     f"Apple company id AAPL has price {COMPANY_PRICES['AAPL']}."),
 ]
 for slug, widget_id, data_args, prompt_variants, facts, text in NOTE_T2:
     add("note", "r2", {
@@ -1949,52 +2460,54 @@ NOTE_T3: list[
     ("aapl_msft_closes", EQ,
      [("price_performance", {"symbol": "AAPL"}), ("price_performance", {"symbol": "MSFT"})],
      [
-         "Compare the existing AAPL and MSFT price widgets and add a note with each latest "
-         "close from the data.",
-         "Use the existing AAPL and MSFT price widget data to add a note with each latest "
-         "close from the data.",
-         "Add a note with each latest close from the data after comparing the existing AAPL "
+         "Compare the existing AAPL and MSFT price widgets and add a note with each exact "
+         "price from the data.",
+         "Use the existing AAPL and MSFT price widget data to add a note with each exact "
+         "price from the data.",
+         "Add a note with each exact price from the data after comparing the existing AAPL "
          "and MSFT price widgets.",
      ],
-     ["AAPL", CLOSES["AAPL"], "MSFT", CLOSES["MSFT"]],
-     f"Latest closes: AAPL {CLOSES['AAPL']}, MSFT {CLOSES['MSFT']}."),
+     ["AAPL", GROUPING_PRICES["AAPL"], "MSFT", GROUPING_PRICES["MSFT"]],
+     f"Table prices: AAPL {GROUPING_PRICES['AAPL']}, "
+     f"MSFT {GROUPING_PRICES['MSFT']}."),
     ("nvda_close_eps", EQ,
      [("price_performance", {"symbol": "NVDA"}), ("estimate_history", {"symbol": "NVDA"})],
      [
-         "Review the NVDA price and estimates widgets and add a note with the latest close and "
-         "the 2026Q1 EPS estimate from the data.",
-         "Use the NVDA price and estimates widget data to add a note with the latest close "
-         "and the 2026Q1 EPS estimate from the data.",
-         "Add a note with the latest close and the 2026Q1 EPS estimate from the data after "
-         "reviewing the NVDA price and estimates widgets.",
+         "Review the TSLA grouping-table and live-grid widgets and add a note with the exact "
+         "price from each response.",
+         "Use the TSLA grouping-table and live-grid widget data to add a note with the exact "
+         "price from each response.",
+         "Add a note with the exact price from each response after reviewing the TSLA "
+         "grouping-table and live-grid widgets.",
      ],
-     ["NVDA", CLOSES["NVDA"], EPS_Q1["NVDA"]],
-     f"NVDA: close {CLOSES['NVDA']}; 2026Q1 EPS {EPS_Q1['NVDA']}."),
+     ["TSLA", GROUPING_PRICES["TSLA"], LIVE_GRID_PRICES["TSLA"]],
+     f"TSLA grouping-table price {GROUPING_PRICES['TSLA']}; "
+     f"live-grid price {LIVE_GRID_PRICES['TSLA']}."),
     ("fed_vs_10y", MACRO,
      [("macro_timeseries", {"series": "FEDFUNDS"}),
       ("macro_timeseries", {"series": "DGS10"})],
      [
-         "Review the Fed Funds and 10Y Treasury widgets and add a note with both latest values "
-         "from the data.",
-         "Use the Fed Funds and 10Y Treasury widget data to add a note with both latest values "
-         "from the data.",
-         "Add a note with both latest values from the data after reviewing the Fed Funds and "
-         "10Y Treasury widgets.",
+         "Review the TM and GM performance widgets and add a note with each manufacturer's "
+         "exact 2024 global sales from the data.",
+         "Use the TM and GM performance widget data to add a note with each manufacturer's "
+         "exact 2024 global sales from the data.",
+         "Add a note with both exact 2024 global-sales values from the data after reviewing "
+         "the TM and GM performance widgets.",
      ],
-     ["FEDFUNDS", MACRO_LATEST["FEDFUNDS"], "DGS10", MACRO_LATEST["DGS10"]],
-     f"FEDFUNDS latest {MACRO_LATEST['FEDFUNDS']}; DGS10 latest {MACRO_LATEST['DGS10']}."),
+     ["TM", COMPANY_SALES["TM"], "GM", COMPANY_SALES["GM"]],
+     f"2024 global sales: TM {COMPANY_SALES['TM']}; GM {COMPANY_SALES['GM']}."),
     ("holdings_beta", PF,
      [("holdings_table", {}), ("risk_metrics", {})],
      [
-         "Review the holdings and risk metrics widgets and add a note with the largest position "
-         "weight and the portfolio beta from the data.",
-         "Use the holdings and risk metrics widget data to add a note with the largest "
-         "position weight and the portfolio beta from the data.",
-         "Add a note with the largest position weight and the portfolio beta from the data "
-         "after reviewing the holdings and risk metrics widgets.",
+         "Review the metric and whitepapers widgets and add a note with the first metric label, "
+         "its exact value, and the returned filename from the data.",
+         "Use the metric and whitepapers widget data to add a note with the first metric label, "
+         "its exact value, and the returned filename from the data.",
+         "Add a note with the first metric label, its exact value, and the returned filename "
+         "after reviewing the metric and whitepapers widgets.",
      ],
-     ["MSFT", "0.34", "1.18"],
-     "MSFT largest at 0.34; portfolio beta 1.18."),
+     ["Example Label", "12345", "bitcoin.pdf"],
+     "First metric Example Label is 12345; returned whitepaper bitcoin.pdf."),
 ]
 for slug, origin, note_widgets, prompt_variants, facts, text in NOTE_T3:
     workflow, sub = wf(origin)
@@ -2033,52 +2546,53 @@ NOTE_T4 = [
     ("exposure_cpi",
      [(PF, "sector_exposure", {}), (MACRO, "macro_timeseries", {"series": "CPIAUCSL"})],
      [
-         "Review the sector exposure and CPI widgets and add a note with the largest sector "
-         "weight and the latest CPI value from the data.",
-         "Use the sector exposure and CPI widget data to add a note with the largest sector "
-         "weight and the latest CPI value from the data.",
-         "Add a note with the largest sector weight and the latest CPI value from the data "
-         "after reviewing the sector exposure and CPI widgets.",
+         "Review the AAPL live-grid and F performance widgets and add a note with the exact "
+         "AAPL price and F's 2024 global sales from the data.",
+         "Use the AAPL live-grid and F performance widget data to add a note with the exact "
+         "AAPL price and F's 2024 global sales from the data.",
+         "Add a note with the exact AAPL price and F's 2024 global sales from the data after "
+         "reviewing the live-grid and performance widgets.",
      ],
-     ["Technology", "0.86", MACRO_LATEST["CPIAUCSL"]],
-     f"Technology exposure 0.86; latest CPI {MACRO_LATEST['CPIAUCSL']}."),
+     ["AAPL", "150.0", "F", COMPANY_SALES["F"]],
+     f"AAPL live-grid price 150.0; F 2024 global sales {COMPANY_SALES['F']}."),
     ("aapl_vs_rates",
      [(EQ, "price_performance", {"symbol": "AAPL"}),
       (MACRO, "macro_timeseries", {"series": "DGS10"})],
      [
-         "Review the AAPL price and 10Y Treasury widgets and add a note with the latest close "
-         "and the latest 10Y value from the data.",
-         "Use the AAPL price and 10Y Treasury widget data to add a note with the latest close "
-         "and the latest 10Y value from the data.",
-         "Add a note with the latest close and the latest 10Y value from the data after "
-         "reviewing the AAPL price and 10Y Treasury widgets.",
+         "Review the AAPL grouping-table and GM performance widgets and add a note with the "
+         "exact AAPL price and GM's 2024 operating margin from the data.",
+         "Use the AAPL grouping-table and GM performance widget data to add a note with the "
+         "exact AAPL price and GM's 2024 operating margin from the data.",
+         "Add a note with the exact AAPL price and GM's 2024 operating margin from the data "
+         "after reviewing both widgets.",
      ],
-     ["AAPL", CLOSES["AAPL"], MACRO_LATEST["DGS10"]],
-     f"AAPL close {CLOSES['AAPL']} against the 10Y at {MACRO_LATEST['DGS10']}."),
+     ["AAPL", GROUPING_PRICES["AAPL"], "GM", COMPANY_MARGINS["GM"]],
+     f"AAPL grouping-table price {GROUPING_PRICES['AAPL']}; "
+     f"GM 2024 operating margin {COMPANY_MARGINS['GM']}."),
     ("book_vs_fed",
      [(PF, "risk_metrics", {}), (MACRO, "macro_timeseries", {"series": "FEDFUNDS"})],
      [
-         "Review the risk metrics and Fed Funds widgets and add a note with the portfolio beta "
-         "and the latest FEDFUNDS value from the data.",
-         "Use the risk metrics and Fed Funds widget data to add a note with the portfolio beta "
-         "and the latest FEDFUNDS value from the data.",
-         "Add a note with the portfolio beta and the latest FEDFUNDS value from the data after "
-         "reviewing the risk metrics and Fed Funds widgets.",
+         "Review the whitepapers and TM performance widgets and add a note with the returned "
+         "filename and TM's exact 2024 global sales from the data.",
+         "Use the whitepapers and TM performance widget data to add a note with the returned "
+         "filename and TM's exact 2024 global sales from the data.",
+         "Add a note with the returned filename and TM's exact 2024 global sales from the data "
+         "after reviewing both widgets.",
      ],
-     ["1.18", MACRO_LATEST["FEDFUNDS"]],
-     f"Portfolio beta 1.18 with Fed Funds at {MACRO_LATEST['FEDFUNDS']}."),
+     ["bitcoin.pdf", "TM", COMPANY_SALES["TM"]],
+     f"Returned whitepaper bitcoin.pdf; TM 2024 global sales {COMPANY_SALES['TM']}."),
     ("msft_vs_curve",
      [(EQ, "fundamental_metrics", {"symbol": "MSFT"}), (MACRO, "yield_curve", {})],
      [
-         "Review the MSFT fundamentals and yield curve widgets and add a note with the gross "
-         "margin and the 30Y yield from the data.",
-         "Use the MSFT fundamentals and yield curve widget data to add a note with the gross "
-         "margin and the 30Y yield from the data.",
-         "Add a note with the gross margin and the 30Y yield from the data after reviewing "
-         "the MSFT fundamentals and yield curve widgets.",
+         "Review the company-list and metric widgets and add a note with Microsoft's exact "
+         "price and the first metric label and value from the data.",
+         "Use the company-list and metric widget data to add a note with Microsoft's exact "
+         "price and the first metric label and value from the data.",
+         "Add a note with Microsoft's exact price and the first metric label and value from "
+         "the data after reviewing both widgets.",
      ],
-     ["MSFT", MARGIN["MSFT"], "4.48"],
-     f"MSFT gross margin {MARGIN['MSFT']}; 30Y yield 4.48."),
+     ["MSFT", COMPANY_PRICES["MSFT"], "Example Label", "12345"],
+     f"MSFT price {COMPANY_PRICES['MSFT']}; first metric Example Label is 12345."),
 ]
 for slug, widgets, prompt_variants, facts, text in NOTE_T4:
     origins = sorted({o for o, _, _ in widgets})
@@ -3022,17 +3536,18 @@ for slug, origin, widget_id, data_args in SKILL_T3:
 
 SKILL_T4 = [
     ("finance-tearsheet", "price_performance", {"symbol": "AAPL"},
-     ["AAPL", CLOSES["AAPL"], "valuation"],
-     f"AAPL tearsheet: close {CLOSES['AAPL']}; valuation next."),
+     ["AAPL", GROUPING_PRICES["AAPL"], "valuation"],
+     f"AAPL tearsheet: price {GROUPING_PRICES['AAPL']}; valuation next."),
     ("finance-earnings-prep", "estimate_history", {"symbol": "MSFT"},
-     ["MSFT", EPS_Q1["MSFT"], "surprise drivers"],
-     f"MSFT earnings prep: 2026Q1 EPS {EPS_Q1['MSFT']}; surprise drivers listed."),
+     ["MSFT", LIVE_GRID_PRICES["MSFT"], "surprise drivers"],
+     f"MSFT earnings prep: live-grid price {LIVE_GRID_PRICES['MSFT']}; "
+     "surprise drivers listed."),
     ("finance-comps", "fundamental_metrics", {"symbol": "NVDA"},
-     ["NVDA", MARGIN["NVDA"], "peer set"],
-     f"NVDA comps: gross margin {MARGIN['NVDA']} against the peer set."),
+     ["MSFT", COMPANY_PRICES["MSFT"], "peer set"],
+     f"Company-list comps: MSFT price {COMPANY_PRICES['MSFT']} against the peer set."),
     ("finance-guidance-tracker", "estimate_history", {"symbol": "NVDA"},
-     ["NVDA", EPS_Q1["NVDA"], "claims"],
-     f"NVDA guidance: 2026Q1 EPS {EPS_Q1['NVDA']}; management claims tracked."),
+     ["TSLA", LIVE_GRID_PRICES["TSLA"], "claims"],
+     f"TSLA guidance: live-grid price {LIVE_GRID_PRICES['TSLA']}; claims tracked."),
 ]
 for slug, widget_id, data_args, note_facts, note_text in SKILL_T4:
     skill_name, result_facts, _ = SKILLS[slug]
@@ -3873,12 +4388,12 @@ for idx, (fixture, origin, widget_id, data_args) in enumerate(BACKEND_CASES):
 BACKEND_T4: list[
     tuple[str, list[tuple[str, str, str, dict[str, Any]]], list[str]]
 ] = [
-    ("equities_macro", [("equities", EQ, "price_performance", {"symbol": "AAPL"}),
-                        ("macro", MACRO, "macro_timeseries", {"series": "DGS10"})],
-     ["AAPL", "DGS10"]),
+    ("equities_macro", [("equities", EQ, "latest_news", {"symbol": "AAPL", "limit": 5}),
+                        ("macro", MACRO, "yield_curve", {})],
+     ["AAPL", "yield curve"]),
     ("portfolio_macro", [("portfolio", PF, "risk_metrics", {}),
-                         ("macro", MACRO, "yield_curve", {})],
-     ["portfolio", "yield curve"]),
+                         ("macro", MACRO, "macro_timeseries", {"series": "DGS10"})],
+     ["portfolio", "DGS10"]),
     ("stark_portfolio", [("stark-enterprise", STK, sw(104), {}),
                          ("portfolio", PF, "sector_exposure", {})],
      ["stark", "sector exposure"]),
@@ -3976,26 +4491,51 @@ for idx, (slug, phrase, note_fact) in enumerate(RESOURCE_SKILLS):
     })
 
 RESOURCE_INDEX_CASES = [
-    ("equities", "Equity Earnings Review", "equity-earnings-review"),
-    ("stark-enterprise", "Portfolio Command Center", "portfolio-command-center"),
-    ("stark-enterprise", "Risk Exposure Monitor", "risk-exposure-monitor"),
-    ("stark-enterprise", "Client 360", "client-360"),
+    (
+        "getting-started",
+        "Onboarding App for Devs",
+        "onboarding-app-for-devs",
+        "equity-earnings-review",
+    ),
+    (
+        "stark-enterprise",
+        "Portfolio Command Center",
+        "portfolio-command-center",
+        "portfolio-command-center",
+    ),
+    (
+        "stark-enterprise",
+        "Risk Exposure Monitor",
+        "risk-exposure-monitor",
+        "risk-exposure-monitor",
+    ),
+    ("stark-enterprise", "Client 360", "client-360", "client-360"),
 ]
-for idx, (fixture, app_name, template_id) in enumerate(RESOURCE_INDEX_CASES):
+for idx, (fixture, app_name, template_id, id_token) in enumerate(RESOURCE_INDEX_CASES):
+    index_facts = (
+        [app_name, "tabs=aggrid"]
+        if fixture == "getting-started"
+        else [app_name, template_id]
+    )
+    index_instruction = (
+        f"the {app_name} app and its aggrid tab"
+        if fixture == "getting-started"
+        else f"the {app_name} template id {template_id}"
+    )
     add("resources", "r1", {
-        "id": f"index_{template_id.replace('-', '_')}",
+        "id": f"index_{id_token.replace('-', '_')}",
         "title": f"Read App Index For {app_name}",
         "category_code": "L2", "capability": "dashboard-construction",
         "workflow": "portfolio-morning-review", "subdomain": "portfolio-management",
         "tags": ["resources", "apps"],
         "prompt": phrased(f"index_{template_id.replace('-', '_')}", [
             ("Call read_workspace_resource with uri openbb://workspace/app-builder/index "
-             f"and add a note naming the {app_name} template id {template_id}."),
+             f"and add a note naming {index_instruction}."),
             ("Use read_workspace_resource with uri openbb://workspace/app-builder/index "
-             f"and add a note naming the {app_name} template id {template_id}."),
+             f"and add a note naming {index_instruction}."),
             ("After calling read_workspace_resource with uri "
-             "openbb://workspace/app-builder/index, add a note naming the "
-             f"{app_name} template id {template_id}."),
+             "openbb://workspace/app-builder/index, add a note naming "
+             f"{index_instruction}."),
         ]),
         "fixtures": {"backends": [{"name": fixture}]},
         "initial_state": seeded("App Index Review", []),
@@ -4004,35 +4544,75 @@ for idx, (fixture, app_name, template_id) in enumerate(RESOURCE_INDEX_CASES):
         "success": {
             "required_resource_reads": [
                 {"uri": "openbb://workspace/app-builder/index",
-                 "data_contains": [app_name, template_id]}],
+                 "data_contains": index_facts}],
             "required_generated_widgets": [
-                {"widget_type": "note", "data_contains": [app_name, template_id]}],
+                {"widget_type": "note", "data_contains": index_facts}],
             "trace_checks": {"max_invalid_tool_calls": 0},
         },
         "oracle_tool_calls": [
             snap(),
             {"tool": "read_workspace_resource",
              "args": {"uri": "openbb://workspace/app-builder/index"}},
-            note_call("App Index Note", f"{app_name} uses template {template_id}."),
+            note_call("App Index Note", f"{app_name}; {index_facts[1]}."),
         ],
     })
 
 RESOURCE_T2 = [
-    ("equities", "equity-earnings-review", "Equity Resource Dashboard"),
-    ("stark-enterprise", "vendor-dataset-monitor", "Vendor Resource Dashboard"),
-    ("stark-enterprise", "execution-desk", "Execution Resource Dashboard"),
-    ("stark-enterprise", "compliance-surveillance-hub", "Compliance Resource Dashboard"),
+    (
+        "getting-started",
+        "onboarding-app-for-devs",
+        "Equity Resource Dashboard",
+        "equity-earnings-review",
+    ),
+    (
+        "stark-enterprise",
+        "vendor-dataset-monitor",
+        "Vendor Resource Dashboard",
+        "vendor-dataset-monitor",
+    ),
+    (
+        "stark-enterprise",
+        "execution-desk",
+        "Execution Resource Dashboard",
+        "execution-desk",
+    ),
+    (
+        "stark-enterprise",
+        "compliance-surveillance-hub",
+        "Compliance Resource Dashboard",
+        "compliance-surveillance-hub",
+    ),
 ]
-for fixture, template_id, dash_name in RESOURCE_T2:
+for fixture, template_id, dash_name, id_token in RESOURCE_T2:
     app = APPS_BY_TEMPLATE[template_id] if template_id in APPS_BY_TEMPLATE else {
-        "name": "Equity Earnings Review"
+        "name": "Onboarding App for Devs"
     }
+    backend_id = (
+        "backend_003"
+        if fixture == "getting-started"
+        else "backend_001"
+    )
+    fixture_ref = {"name": fixture}
+    if fixture == "getting-started":
+        fixture_ref["backend_id"] = backend_id
+    resource_app_fact = app["name"] if fixture == "getting-started" else template_id
+    app_selector = (
+        {"app_name": app["name"]}
+        if fixture == "getting-started"
+        else {"template_id": template_id}
+    )
     add("resources", "r2", {
-        "id": f"instantiate_{template_id.replace('-', '_')}",
+        "id": f"instantiate_{id_token.replace('-', '_')}",
         "title": f"Read Index Then Instantiate {app['name']}",
         "category_code": "L2", "capability": "dashboard-construction",
-        "workflow": "earnings-prep" if fixture == "equities" else "portfolio-morning-review",
-        "subdomain": "equity-research" if fixture == "equities" else "portfolio-management",
+        "workflow": (
+            "earnings-prep" if fixture == "getting-started" else "portfolio-morning-review"
+        ),
+        "subdomain": (
+            "equity-research"
+            if fixture == "getting-started"
+            else "portfolio-management"
+        ),
         "tags": ["resources", "apps"],
         "prompt": phrased(f"instantiate_{template_id.replace('-', '_')}", [
             ("Read the app-builder index resource at openbb://workspace/app-builder/index, "
@@ -4043,14 +4623,14 @@ for fixture, template_id, dash_name in RESOURCE_T2:
             ("Use the app-builder index resource openbb://workspace/app-builder/index, "
              f"then instantiate template {template_id} as a dashboard named {dash_name}."),
         ]),
-        "fixtures": {"backends": [{"name": fixture}]},
+        "fixtures": {"backends": [fixture_ref]},
         "initial_state": {},
         "allowed_tools": ["read_workspace_resource", "manage_backends", "manage_apps"],
         "success": {
             "required_dashboard_name_contains": dash_name,
             "required_resource_reads": [
                 {"uri": "openbb://workspace/app-builder/index",
-                 "data_contains": [template_id]}],
+                 "data_contains": [resource_app_fact]}],
             "required_tool_calls": [
                 {"tool": "manage_apps", "args_contains": {"operation": "instantiate"}}],
             "trace_checks": {"max_invalid_tool_calls": 0},
@@ -4060,8 +4640,8 @@ for fixture, template_id, dash_name in RESOURCE_T2:
              "args": {"uri": "openbb://workspace/app-builder/index"}},
             {"tool": "manage_backends", "args": {"operation": "list"}},
             {"tool": "manage_apps",
-             "args": {"operation": "instantiate", "backend_id": "backend_001",
-                       "template_id": template_id, "dashboard_name": dash_name,
+             "args": {"operation": "instantiate", "backend_id": backend_id,
+                       **app_selector, "dashboard_name": dash_name,
                        "activate": True}},
         ],
     })
@@ -4689,12 +5269,14 @@ EXPECTED_FAMILIES = {
 
 def backend_slug(name: str) -> str:
     return {
-        "equities": "equities",
-        EQ: "equities",
-        "macro": "macro",
-        MACRO: "macro",
-        "portfolio": "portfolio",
-        PF: "portfolio",
+        "equities": "getting-started",
+        EQ: "getting-started",
+        "macro": "getting-started",
+        MACRO: "getting-started",
+        "portfolio": "getting-started",
+        PF: "getting-started",
+        GETTING_STARTED: "getting-started",
+        WIDGET_EXAMPLES: "widget-examples",
         "stark-enterprise": "stark-enterprise",
         STK: "stark-enterprise",
     }.get(name, name)
@@ -4854,7 +5436,7 @@ def quota_report(tasks: list[dict]) -> list[tuple[str, int | str, str, bool]]:
         f">= {int(total * 0.15)}",
         categories["dashboard"] >= total * 0.15,
     ))
-    for backend in ("equities", "macro", "portfolio", "stark-enterprise"):
+    for backend in ("getting-started", "widget-examples", "stark-enterprise"):
         report.append((
             f"{backend} backend coverage",
             backend_counts[backend],
@@ -5035,12 +5617,19 @@ def main() -> None:
     duplicate_pairs = {pair for pair in pairs if pairs.count(pair) > 1}
     for task in SCENARIOS:
         if (task["family"], task["id"]) in duplicate_pairs:
-            task["id"] = re.sub(r"[^a-z0-9]+", "_", task["title"].lower()).strip("_")
+            derived_id = re.sub(
+                r"[^a-z0-9]+", "_", task["title"].lower()
+            ).strip("_")
+            task["id"] = public_id(derived_id)
     pairs = [(task["family"], task["id"]) for task in SCENARIOS]
     dupes = sorted({pair for pair in pairs if pairs.count(pair) > 1})
     assert not dupes, f"duplicate ids: {dupes}"
 
     add_diversity_companions(SCENARIOS)
+    for task in SCENARIOS:
+        _transcribe_task_widgets(task)
+        _ensure_widget_discovery(task)
+        _namespace_task_artifacts(task)
     matrix = build_matrix(SCENARIOS)
     assert_lattice(matrix)
     for task in SCENARIOS:
@@ -5063,11 +5652,11 @@ def main() -> None:
                 json.dumps(payload, indent=2) + "\n")
 
     manifest = {
-        "suite_id": "core",
+        "suite_id": "enterprise-apps-usage",
         "visibility": "public",
         "content_sha256": task_payload_digest(shipped),
         "description": (
-            "WorkspaceBench core collection: 15 MCP-surface families and 300 tasks; "
+            "Operating the workspace: 15 MCP-surface families and 300 tasks; "
             "difficulty is recorded independently as easy, medium, or hard."
         ),
     }

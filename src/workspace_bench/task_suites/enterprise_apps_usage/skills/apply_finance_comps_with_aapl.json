@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "skills",
   "difficulty": "hard",
-  "prompt": "Use get_skill_content with slug finance-comps. Following that workflow, add the Fundamental Metrics widget for AAPL to the active dashboard, then add a note that applies the skill's workflow steps to this widget. Omit dashboard_id when adding the note.",
+  "prompt": "Use get_skill_content with slug finance-comps. Following that workflow, add the Company List with ID Mapping widget for TM to the active dashboard, then add a note that applies the skill's workflow steps to this widget. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "overview",
           "name": "Overview"
         }
-      ]
+      ],
+      "dashboard_id": "usage_apply_finance_comps_with_aapl_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -52,10 +53,10 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "AAPL"
+          "companyId": "TM"
         },
         "min_count": 1
       }
@@ -66,7 +67,7 @@
         "data_contains": [
           "comps",
           "peer set",
-          "AAPL"
+          "TM"
         ]
       }
     ],
@@ -99,23 +100,23 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics"
+        "origin": "Getting Started",
+        "widget_id": "company_list"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "AAPL"
+          "companyId": "TM"
         }
       }
     },
@@ -124,7 +125,7 @@
       "args": {
         "widget_type": "note",
         "name": "Skill Note",
-        "data": "AAPL comps: comps; peer set."
+        "data": "TM comps: comps; peer set."
       }
     }
   ],

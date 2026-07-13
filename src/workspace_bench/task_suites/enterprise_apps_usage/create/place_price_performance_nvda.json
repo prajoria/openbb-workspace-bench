@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "create",
   "difficulty": "medium",
-  "prompt": "Fetch the widget schema and confirm the symbol value through the parameter options before creating the Price Performance widget for NVDA, then place it at exactly x=0, y=2, width 20, height 12.",
+  "prompt": "Fetch the widget schema and confirm the symbol value through the parameter options before creating the Table widget with grouping by cell click widget for TSLA, then place it at exactly x=0, y=2, width 20, height 12.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_place_price_performance_nvda_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -35,17 +36,17 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         },
         "min_count": 1
       }
     ],
     "required_layouts": [
       {
-        "widget_id": "price_performance",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "x": 0,
         "y": 2,
         "w": 20,
@@ -56,7 +57,7 @@
       {
         "tool": "get_params_options",
         "args_contains": {
-          "widget_id": "price_performance",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "param_name": "symbol"
         }
       }
@@ -84,38 +85,38 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance"
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "param_name": "symbol"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         }
       }
     },
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "price_performance",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "x": 0,
         "y": 2,
         "w": 20,

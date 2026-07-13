@@ -3,11 +3,11 @@
   "category": "dashboard",
   "family": "prompts",
   "difficulty": "medium",
-  "prompt": "Use get_workspace_prompt with name workspace_tool_usage, then follow it by discovering schema before creating Bench Portfolio/risk_metrics.",
+  "prompt": "Use get_workspace_prompt with name workspace_tool_usage, then follow it by discovering schema before creating Widget Examples/whitepapers.",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_follow_tool_usage_prompt_for_risk_metrics_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -41,9 +42,13 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {}
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        }
       }
     ],
     "layout": {
@@ -75,22 +80,26 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Portfolio"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics"
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {}
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        }
       }
     }
   ],

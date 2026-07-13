@@ -21,20 +21,7 @@
           "name": ""
         }
       ],
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "workspace_data_control_center_usage_export_review_queue",
-          "data_args": {},
-          "tab_id": "",
-          "layout": {
-            "x": 0,
-            "y": 500,
-            "w": 8,
-            "h": 4
-          }
-        }
-      ]
+      "dashboard_id": "usage_use_client_options_for_relationship_metrics_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -50,14 +37,6 @@
         "data_args": {
           "client": "Northstar Endowment"
         }
-      },
-      {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "workspace_data_control_center_usage_export_review_queue",
-        "data_args": {},
-        "tab_id": "",
-        "min_count": 1,
-        "max_count": 1
       }
     ],
     "required_tool_calls": [

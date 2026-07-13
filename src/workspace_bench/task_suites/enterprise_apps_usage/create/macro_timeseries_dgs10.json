@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "create",
   "difficulty": "medium",
-  "prompt": "To the active dashboard, add the Macro Timeseries widget for DGS10. Discover the widget catalog and its schema before creating.",
+  "prompt": "To the active dashboard, add the Car Manufacturer Performance widget for GM. Discover the widget catalog and its schema before creating.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_macro_timeseries_dgs10_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -34,10 +35,11 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         },
         "min_count": 1
       }
@@ -65,23 +67,24 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Macro"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries"
+        "origin": "Getting Started",
+        "widget_id": "company_performance"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         }
       }
     }

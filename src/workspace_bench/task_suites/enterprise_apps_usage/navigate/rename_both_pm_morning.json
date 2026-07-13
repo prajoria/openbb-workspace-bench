@@ -7,7 +7,7 @@
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "overview",
           "name": "Overview"
         }
-      ]
+      ],
+      "dashboard_id": "usage_rename_both_pm_morning_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -61,7 +62,7 @@
       "tool": "manage_dashboard",
       "args": {
         "operation": "update",
-        "dashboard_id": "dash_001",
+        "dashboard_id": "usage_rename_both_pm_morning_dashboard_001",
         "name": "PM Morning Review"
       }
     },

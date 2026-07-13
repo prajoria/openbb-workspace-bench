@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "delete",
   "difficulty": "easy",
-  "prompt": "There are two identical Price Performance widgets on the dashboard. Remove exactly one so a single copy remains; do not change the one that stays.",
+  "prompt": "There are two identical Table widget with grouping by cell click widgets on the dashboard. Remove exactly one so a single copy remains; do not change the one that stays.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,8 +23,8 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
             "symbol": "AAPL"
           },
@@ -33,11 +33,12 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_remove_duplicate_price_performance_widget_001"
         },
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
             "symbol": "AAPL"
           },
@@ -46,9 +47,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_remove_duplicate_price_performance_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_remove_duplicate_price_performance_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -59,8 +62,8 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         },
@@ -89,7 +92,7 @@
     {
       "tool": "delete_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_remove_duplicate_price_performance_widget_002"
       }
     }
   ],

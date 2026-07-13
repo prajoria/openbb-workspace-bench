@@ -3,11 +3,11 @@
   "category": "repair",
   "family": "delete",
   "difficulty": "hard",
-  "prompt": "Remove exactly one duplicate from the two identical Sector Exposure widgets, then add a note saying the duplicate was removed.",
+  "prompt": "Remove exactly one duplicate from the two identical Live Grid widgets, then add a note saying the duplicate was removed.",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,28 +23,31 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "sector_exposure",
+          "origin": "Widget Examples",
+          "widget_id": "live_grid_example",
           "data_args": {},
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_remove_duplicate_sector_exposure_and_document_widget_001"
         },
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "sector_exposure",
+          "origin": "Widget Examples",
+          "widget_id": "live_grid_example",
           "data_args": {},
           "layout": {
             "x": 20,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_remove_duplicate_sector_exposure_and_document_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_remove_duplicate_sector_exposure_and_document_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -56,8 +59,8 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {},
         "min_count": 1,
         "max_count": 1
@@ -93,7 +96,7 @@
     {
       "tool": "delete_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_remove_duplicate_sector_exposure_and_document_widget_002"
       }
     },
     {

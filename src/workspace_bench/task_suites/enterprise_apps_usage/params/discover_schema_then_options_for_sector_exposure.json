@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "params",
   "difficulty": "medium",
-  "prompt": "Before creating Bench Portfolio/sector_exposure with sector=Technology, discover the catalog and schema and call get_params_options for sector.",
+  "prompt": "Before creating Widget Examples/live_grid_example with sector=AAPL, discover the catalog and schema and call get_params_options for sector.",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_discover_schema_then_options_for_sector_exposure_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -33,10 +34,10 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {
-          "sector": "Technology"
+          "symbol": "AAPL"
         }
       }
     ],
@@ -44,8 +45,8 @@
       {
         "tool": "get_params_options",
         "args_contains": {
-          "widget_id": "sector_exposure",
-          "param_name": "sector"
+          "widget_id": "live_grid_example",
+          "param_name": "symbol"
         }
       }
     ],
@@ -53,7 +54,7 @@
       {
         "tool": "get_params_options",
         "data_contains": [
-          "Technology"
+          "AAPL"
         ]
       }
     ],
@@ -80,31 +81,31 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Portfolio"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure"
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
-        "param_name": "sector"
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
+        "param_name": "symbol"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {
-          "sector": "Technology"
+          "symbol": "AAPL"
         }
       }
     }

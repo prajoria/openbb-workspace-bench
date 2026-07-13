@@ -3,6 +3,11 @@ from __future__ import annotations
 import pytest
 
 from workspace_bench.core.models import FixtureBackendRef, TaskSuiteManifest
+from workspace_bench.core.runner import (
+    load_builtin_tasks,
+    override_tasks_workspace_baseline,
+    task_workspace_baseline,
+)
 from workspace_bench.workspace.default_setup import (
     DEFAULT_WORKSPACE_VERSION,
     apply_workspace_baseline,
@@ -41,6 +46,21 @@ def test_task_suite_manifest_validates_workspace_baseline() -> None:
         TaskSuiteManifest.from_dict(
             {"suite_id": "baseline-test", "workspace_baseline": "default-v2"}
         )
+
+
+def test_workspace_baseline_override_preserves_manifest_default() -> None:
+    usage_task = load_builtin_tasks("enterprise-apps-usage")[0]
+    default_task = load_builtin_tasks("enterprise-apps-default")[0]
+
+    assert task_workspace_baseline(usage_task) == "minimal"
+    assert task_workspace_baseline(default_task) == DEFAULT_WORKSPACE_VERSION
+    overridden = override_tasks_workspace_baseline(
+        [usage_task], DEFAULT_WORKSPACE_VERSION
+    )[0]
+    restored = override_tasks_workspace_baseline([default_task], "minimal")[0]
+    assert task_workspace_baseline(overridden) == DEFAULT_WORKSPACE_VERSION
+    assert task_workspace_baseline(restored) == "minimal"
+    assert overridden.source_path == usage_task.source_path
 
 
 def test_default_workspace_maps_all_stark_apps_and_declared_params() -> None:

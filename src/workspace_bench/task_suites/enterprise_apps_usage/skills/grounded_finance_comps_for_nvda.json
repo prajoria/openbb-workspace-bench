@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "skills",
   "difficulty": "hard",
-  "prompt": "Use get_skill_content with slug finance-comps. Following that workflow, add the Fundamental Metrics widget for NVDA, read its data, and add a note that cites the exact key value from the data. Omit dashboard_id when adding the note.",
+  "prompt": "Use get_skill_content with slug finance-comps. Following that workflow, add the Company List with ID Mapping widget for GM, read its data, and add a note that cites the exact key value from the data. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "overview",
           "name": "Overview"
         }
-      ]
+      ],
+      "dashboard_id": "usage_grounded_finance_comps_for_nvda_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -43,7 +44,7 @@
       {
         "tool": "get_widget_data",
         "args_contains": {
-          "widget_id": "fundamental_metrics"
+          "widget_id": "company_list"
         }
       }
     ],
@@ -59,10 +60,10 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "NVDA"
+          "companyId": "GM"
         },
         "min_count": 1
       }
@@ -71,8 +72,8 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "NVDA",
-          "0.742",
+          "VWAGY",
+          "350.5",
           "peer set"
         ]
       }
@@ -106,33 +107,33 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics"
+        "origin": "Getting Started",
+        "widget_id": "company_list"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "NVDA"
+          "companyId": "GM"
         }
       }
     },
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "NVDA"
+          "companyId": "GM"
         }
       }
     },
@@ -141,7 +142,7 @@
       "args": {
         "widget_type": "note",
         "name": "Skill Note",
-        "data": "NVDA comps: gross margin 0.742 against the peer set."
+        "data": "Company-list comps: VWAGY price 350.5 against the peer set."
       }
     }
   ],

@@ -20,6 +20,7 @@ from workspace_bench.core.models import (
     ToolCall,
 )
 from workspace_bench.core.provenance import git_provenance
+from workspace_bench.core.runner import task_workspace_baseline
 
 
 @dataclass(frozen=True)
@@ -47,6 +48,7 @@ def build_task_envelope(task: Task) -> JsonDict:
             "name": BENCHMARK_NAME,
             "suite_id": suite.suite_id if suite else "local",
             "content_sha256": suite.content_sha256 if suite else None,
+            "workspace_baseline": task_workspace_baseline(task),
             **git_provenance(source_paths=[task.source_path] if task.source_path else None),
             "canary_guid": CANARY_GUID,
         },

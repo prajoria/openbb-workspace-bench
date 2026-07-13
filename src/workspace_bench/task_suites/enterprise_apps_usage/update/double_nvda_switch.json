@@ -3,11 +3,11 @@
   "category": "repair",
   "family": "update",
   "difficulty": "hard",
-  "prompt": "Repair the existing widgets on this NVDA dashboard: change the price widget from AAPL to NVDA and the estimates widget from MSFT to NVDA, then add a note mentioning NVDA and the word repaired.",
+  "prompt": "Repair the existing widgets on this TSLA dashboard: change the price widget from AAPL to TSLA and the estimates widget from MSFT to TSLA, then add a note mentioning TSLA and the word repaired.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,8 +23,8 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
             "symbol": "AAPL"
           },
@@ -33,11 +33,12 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_double_nvda_switch_widget_001"
         },
         {
-          "origin": "Bench Equities",
-          "widget_id": "estimate_history",
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
           "data_args": {
             "symbol": "MSFT"
           },
@@ -46,9 +47,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_double_nvda_switch_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_double_nvda_switch_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -60,16 +63,16 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         },
         "min_count": 1
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         },
@@ -77,16 +80,16 @@
         "max_count": 0
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         },
         "min_count": 1
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
           "symbol": "MSFT"
         },
@@ -98,7 +101,7 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "NVDA",
+          "TSLA",
           "repaired"
         ]
       }
@@ -119,18 +122,18 @@
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_double_nvda_switch_widget_001",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         }
       }
     },
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_double_nvda_switch_widget_002",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         }
       }
     },
@@ -139,7 +142,7 @@
       "args": {
         "widget_type": "note",
         "name": "Repair Note",
-        "data": "Repaired: NVDA, repaired."
+        "data": "Repaired: TSLA, repaired."
       }
     }
   ],

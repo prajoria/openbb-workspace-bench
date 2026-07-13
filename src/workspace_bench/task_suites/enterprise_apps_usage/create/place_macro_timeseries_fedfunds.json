@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "create",
   "difficulty": "medium",
-  "prompt": "Fetch the widget schema and confirm the series value through the parameter options before creating the Macro Timeseries widget for FEDFUNDS, then place it at exactly x=0, y=2, width 20, height 10.",
+  "prompt": "Fetch the widget schema and confirm the series value through the parameter options before creating the Car Manufacturer Performance widget for TM, then place it at exactly x=0, y=2, width 20, height 10.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_place_macro_timeseries_fedfunds_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -35,17 +36,18 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "FEDFUNDS"
+          "company": "TM",
+          "year": "2024"
         },
         "min_count": 1
       }
     ],
     "required_layouts": [
       {
-        "widget_id": "macro_timeseries",
+        "widget_id": "company_performance",
         "x": 0,
         "y": 2,
         "w": 20,
@@ -56,8 +58,8 @@
       {
         "tool": "get_params_options",
         "args_contains": {
-          "widget_id": "macro_timeseries",
-          "param_name": "series"
+          "widget_id": "company_performance",
+          "param_name": "company"
         }
       }
     ],
@@ -84,38 +86,39 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Macro"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries"
+        "origin": "Getting Started",
+        "widget_id": "company_performance"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
-        "param_name": "series"
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
+        "param_name": "company"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "FEDFUNDS"
+          "company": "TM",
+          "year": "2024"
         }
       }
     },
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "macro_timeseries",
+        "widget_id": "company_performance",
         "x": 0,
         "y": 2,
         "w": 20,

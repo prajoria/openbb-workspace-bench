@@ -21,20 +21,7 @@
           "name": ""
         }
       ],
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "workspace_data_control_center_entitlements_role_coverage",
-          "data_args": {},
-          "tab_id": "",
-          "layout": {
-            "x": 0,
-            "y": 500,
-            "w": 8,
-            "h": 4
-          }
-        }
-      ]
+      "dashboard_id": "usage_skill_build_finance_guidance_tracker_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -59,14 +46,6 @@
         "origin": "Bench Stark Enterprise",
         "widget_id": "executive_investment_dashboard_risk_limit_utilization",
         "data_args": {}
-      },
-      {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "workspace_data_control_center_entitlements_role_coverage",
-        "data_args": {},
-        "tab_id": "",
-        "min_count": 1,
-        "max_count": 1
       }
     ],
     "required_generated_widgets": [

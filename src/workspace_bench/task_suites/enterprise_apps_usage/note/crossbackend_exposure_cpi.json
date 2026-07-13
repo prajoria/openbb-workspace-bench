@@ -3,14 +3,14 @@
   "category": "read",
   "family": "note",
   "difficulty": "hard",
-  "prompt": "Review the sector exposure and CPI widgets and add a note with the largest sector weight and the latest CPI value from the data.",
+  "prompt": "Review the AAPL live-grid and F performance widgets and add a note with the exact AAPL price and F's 2024 global sales from the data.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       },
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -26,30 +26,34 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "sector_exposure",
+          "origin": "Widget Examples",
+          "widget_id": "live_grid_example",
           "data_args": {},
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_crossbackend_exposure_cpi_widget_001"
         },
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "CPIAUCSL"
+            "company": "F",
+            "year": "2024"
           },
           "layout": {
             "x": 20,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_crossbackend_exposure_cpi_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_crossbackend_exposure_cpi_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -60,16 +64,17 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {},
         "min_count": 1
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "CPIAUCSL"
+          "company": "F",
+          "year": "2024"
         },
         "min_count": 1
       }
@@ -78,9 +83,10 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "Technology",
-          "0.86",
-          "322.4"
+          "AAPL",
+          "150.0",
+          "F",
+          "4.2M"
         ]
       }
     ],
@@ -100,18 +106,19 @@
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {}
       }
     },
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "CPIAUCSL"
+          "company": "F",
+          "year": "2024"
         }
       }
     },
@@ -120,7 +127,7 @@
       "args": {
         "widget_type": "note",
         "name": "Answer Note",
-        "data": "Technology exposure 0.86; latest CPI 322.4."
+        "data": "AAPL live-grid price 150.0; F 2024 global sales 4.2M."
       }
     }
   ],

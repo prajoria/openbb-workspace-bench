@@ -7,7 +7,7 @@
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,10 +23,10 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "latest_news",
+          "origin": "Getting Started",
+          "widget_id": "sample_newsfeed",
           "data_args": {
-            "symbol": "AAPL",
+            "category": "tech",
             "limit": 5
           },
           "layout": {
@@ -34,11 +34,12 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_ambient_repair_and_brief_price_performance_widget_001"
         },
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
             "symbol": "MSFT"
           },
@@ -47,9 +48,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_ambient_repair_and_brief_price_performance_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_ambient_repair_and_brief_price_performance_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -61,23 +64,23 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "AAPL",
+          "category": "tech",
           "limit": 5
         }
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         }
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "MSFT"
         },
@@ -122,13 +125,13 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_ambient_repair_and_brief_price_performance_widget_002"
       }
     },
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_ambient_repair_and_brief_price_performance_widget_002",
         "data_args": {
           "symbol": "AAPL"
         }

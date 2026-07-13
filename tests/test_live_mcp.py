@@ -66,12 +66,12 @@ def test_bridge_command_maps_browser_options_shape() -> None:
 
 def test_execute_bridge_command_preserves_real_command_name_for_layout() -> None:
     workspace = SimulatedWorkspace()
-    workspace.reset(backends=[FixtureBackendRef(name="Bench Equities")])
+    workspace.reset(backends=[FixtureBackendRef(name="getting-started")])
     workspace.call_tool(
         "create_widget",
         {
-            "origin": "Bench Equities",
-            "widget_id": "price_performance",
+            "origin": "Getting Started",
+            "widget_id": "table_widget_with_grouping_by_cell_click",
             "data_args": {"symbol": "AAPL"},
         },
     )
@@ -81,7 +81,7 @@ def test_execute_bridge_command_preserves_real_command_name_for_layout() -> None
         {
             "command": "update_dashboard_layout",
             "request_id": "request-2",
-            "widget_id": "price_performance",
+            "widget_id": "table_widget_with_grouping_by_cell_click",
             "x": 0,
             "y": 0,
             "w": 20,
@@ -97,7 +97,7 @@ def test_execute_bridge_command_preserves_real_command_name_for_layout() -> None
 
 def test_execute_bridge_snapshot_strips_simulator_only_fields() -> None:
     workspace = SimulatedWorkspace()
-    workspace.reset(backends=[FixtureBackendRef(name="Bench Equities")])
+    workspace.reset(backends=[FixtureBackendRef(name="getting-started")])
 
     result = execute_bridge_command(
         workspace,

@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "params",
   "difficulty": "easy",
-  "prompt": "Call get_params_options for Bench Portfolio/sector_exposure parameter sector, choose Technology, and create that widget with sector=Technology.",
+  "prompt": "Call get_params_options for Widget Examples/live_grid_example parameter sector, choose AAPL, and create that widget with sector=AAPL.",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_use_sector_options_for_sector_exposure_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -31,10 +32,10 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {
-          "sector": "Technology"
+          "symbol": "AAPL"
         }
       }
     ],
@@ -42,8 +43,8 @@
       {
         "tool": "get_params_options",
         "args_contains": {
-          "widget_id": "sector_exposure",
-          "param_name": "sector"
+          "widget_id": "live_grid_example",
+          "param_name": "symbol"
         }
       }
     ],
@@ -51,7 +52,7 @@
       {
         "tool": "get_params_options",
         "data_contains": [
-          "Technology"
+          "AAPL"
         ]
       }
     ],
@@ -71,18 +72,18 @@
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
-        "param_name": "sector"
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
+        "param_name": "symbol"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {
-          "sector": "Technology"
+          "symbol": "AAPL"
         }
       }
     }

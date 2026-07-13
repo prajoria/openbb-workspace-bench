@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "delete",
   "difficulty": "medium",
-  "prompt": "This dashboard has three Macro Timeseries widgets: two identical ones for DGS10 and one for DGS2. Remove exactly one duplicate DGS10 widget; keep the other and keep the DGS2 widget untouched.",
+  "prompt": "This dashboard has three Car Manufacturer Performance widgets: two identical ones for GM and one for VWAGY. Remove exactly one duplicate GM widget; keep the other and keep the VWAGY widget untouched.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,45 +23,52 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "DGS10"
+            "company": "GM",
+            "year": "2024"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_similar_macro_timeseries_dgs10_widget_001"
         },
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "DGS10"
+            "company": "GM",
+            "year": "2024"
           },
           "layout": {
             "x": 20,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_similar_macro_timeseries_dgs10_widget_002"
         },
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "DGS2"
+            "company": "VWAGY",
+            "year": "2024"
           },
           "layout": {
             "x": 0,
             "y": 10,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_similar_macro_timeseries_dgs10_widget_003"
         }
-      ]
+      ],
+      "dashboard_id": "usage_similar_macro_timeseries_dgs10_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -72,19 +79,21 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         },
         "min_count": 1,
         "max_count": 1
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS2"
+          "company": "VWAGY",
+          "year": "2024"
         },
         "min_count": 1,
         "max_count": 1
@@ -111,7 +120,7 @@
     {
       "tool": "delete_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_similar_macro_timeseries_dgs10_widget_002"
       }
     }
   ],

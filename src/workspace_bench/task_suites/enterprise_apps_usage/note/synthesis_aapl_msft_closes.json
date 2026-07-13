@@ -3,11 +3,11 @@
   "category": "read",
   "family": "note",
   "difficulty": "medium",
-  "prompt": "Compare the existing AAPL and MSFT price widgets and add a note with each latest close from the data.",
+  "prompt": "Compare the existing AAPL and MSFT price widgets and add a note with each exact price from the data.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,8 +23,8 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
             "symbol": "AAPL"
           },
@@ -33,11 +33,12 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_synthesis_aapl_msft_closes_widget_001"
         },
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
             "symbol": "MSFT"
           },
@@ -46,9 +47,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_synthesis_aapl_msft_closes_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_synthesis_aapl_msft_closes_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -59,16 +62,16 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         },
         "min_count": 1
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "MSFT"
         },
@@ -80,9 +83,9 @@
         "widget_type": "note",
         "data_contains": [
           "AAPL",
-          "196.10",
+          "150.25",
           "MSFT",
-          "451.25"
+          "350.5"
         ]
       }
     ],
@@ -102,8 +105,8 @@
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         }
@@ -112,8 +115,8 @@
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "MSFT"
         }
@@ -124,7 +127,7 @@
       "args": {
         "widget_type": "note",
         "name": "Answer Note",
-        "data": "Latest closes: AAPL 196.10, MSFT 451.25."
+        "data": "Table prices: AAPL 150.25, MSFT 350.5."
       }
     }
   ],

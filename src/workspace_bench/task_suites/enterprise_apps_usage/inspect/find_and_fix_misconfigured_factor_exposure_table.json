@@ -33,9 +33,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_find_and_fix_misconfigured_factor_exposure_table_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_find_and_fix_misconfigured_factor_exposure_table_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -80,7 +82,7 @@
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_find_and_fix_misconfigured_factor_exposure_table_widget_001",
         "data_args": {
           "universe": "US Large Cap"
         }

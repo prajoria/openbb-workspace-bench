@@ -3,11 +3,11 @@
   "category": "dashboard",
   "family": "prompts",
   "difficulty": "hard",
-  "prompt": "After fetching workspace_tool_usage, create dashboard Portfolio Prompt Dashboard, add Bench Portfolio/holdings_table and Bench Portfolio/risk_metrics with schema-first discipline, and add a note mentioning holdings and schema.",
+  "prompt": "After fetching workspace_tool_usage, create dashboard Portfolio Prompt Dashboard, add Widget Examples/test_metric and Widget Examples/whitepapers with schema-first discipline, and add a note mentioning holdings and schema.",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -32,14 +32,18 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "holdings_table",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
       },
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {}
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        }
       }
     ],
     "required_generated_widgets": [
@@ -83,43 +87,41 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Portfolio"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "holdings_table"
+        "origin": "Widget Examples",
+        "widget_id": "test_metric"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "holdings_table",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Portfolio"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics"
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {}
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        }
       }
     },
     {
@@ -132,6 +134,6 @@
     }
   ],
   "limits": {
-    "max_turns": 12
+    "max_turns": 11
   }
 }

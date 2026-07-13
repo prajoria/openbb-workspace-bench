@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "create",
   "difficulty": "easy",
-  "prompt": "To the active dashboard, add the Price Performance widget for MSFT. Discover the widget catalog and its schema before creating.",
+  "prompt": "To the active dashboard, add the Table widget with grouping by cell click widget for MSFT. Discover the widget catalog and its schema before creating.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_price_performance_msft_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -34,8 +35,8 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "MSFT"
         },
@@ -65,21 +66,21 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance"
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "MSFT"
         }

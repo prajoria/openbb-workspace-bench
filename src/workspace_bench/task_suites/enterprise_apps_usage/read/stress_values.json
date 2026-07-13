@@ -35,7 +35,8 @@
             "y": 2,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_stress_values_widget_001"
         },
         {
           "origin": "Bench Stark Enterprise",
@@ -50,9 +51,11 @@
             "y": 2,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_stress_values_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_stress_values_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -124,7 +127,7 @@
       "args": {
         "origin": "Bench Stark Enterprise",
         "widget_id": "stress_liquidity_lab_liquidity_days_to_liquidate",
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_stress_values_widget_001",
         "data_args": {
           "fund": "Flagship Long/Short",
           "period": "YTD"
@@ -136,7 +139,7 @@
       "args": {
         "origin": "Bench Stark Enterprise",
         "widget_id": "stress_liquidity_lab_stress_tests_risk_snapshot",
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_stress_values_widget_002",
         "data_args": {
           "fund": "Flagship Long/Short",
           "period": "YTD"

@@ -3,11 +3,11 @@
   "category": "read",
   "family": "note",
   "difficulty": "hard",
-  "prompt": "Add a note with both latest values from the data after reviewing the Fed Funds and 10Y Treasury widgets.",
+  "prompt": "Add a note with both exact 2024 global-sales values from the data after reviewing the TM and GM performance widgets.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,32 +23,37 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "FEDFUNDS"
+            "company": "TM",
+            "year": "2024"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_synthesis_fed_vs_10y_widget_001"
         },
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "DGS10"
+            "company": "GM",
+            "year": "2024"
           },
           "layout": {
             "x": 20,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_synthesis_fed_vs_10y_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_synthesis_fed_vs_10y_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -59,18 +64,20 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "FEDFUNDS"
+          "company": "TM",
+          "year": "2024"
         },
         "min_count": 1
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         },
         "min_count": 1
       }
@@ -79,10 +86,10 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "FEDFUNDS",
-          "4.12",
-          "DGS10",
-          "4.16"
+          "TM",
+          "10.5M",
+          "GM",
+          "6.8M"
         ]
       }
     ],
@@ -102,20 +109,22 @@
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "FEDFUNDS"
+          "company": "TM",
+          "year": "2024"
         }
       }
     },
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         }
       }
     },
@@ -124,7 +133,7 @@
       "args": {
         "widget_type": "note",
         "name": "Answer Note",
-        "data": "FEDFUNDS latest 4.12; DGS10 latest 4.16."
+        "data": "2024 global sales: TM 10.5M; GM 6.8M."
       }
     }
   ],

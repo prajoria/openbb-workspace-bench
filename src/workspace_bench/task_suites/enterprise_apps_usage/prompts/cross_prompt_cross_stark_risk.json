@@ -3,14 +3,14 @@
   "category": "dashboard",
   "family": "prompts",
   "difficulty": "hard",
-  "prompt": "Fetch workspace_tool_usage and workspace_session_context, create Prompt Cross Stark Risk, build the cross-backend dashboard with Bench Stark Enterprise/portfolio_command_center_actions_analyst_conviction and Bench Portfolio/risk_metrics, and add a HTML card mentioning stark and risk and current-dashboard.",
+  "prompt": "Fetch workspace_tool_usage and workspace_session_context, create Prompt Cross Stark Risk, build the cross-backend dashboard with Bench Stark Enterprise/portfolio_command_center_actions_analyst_conviction and Widget Examples/whitepapers, and add a HTML card mentioning stark and risk and current-dashboard.",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "stark-enterprise"
       },
       {
-        "name": "stark-enterprise"
+        "name": "widget-examples"
       }
     ]
   },
@@ -46,9 +46,13 @@
         "data_args": {}
       },
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {}
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        }
       }
     ],
     "required_generated_widgets": [
@@ -120,22 +124,26 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Portfolio"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics"
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {}
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        }
       }
     },
     {

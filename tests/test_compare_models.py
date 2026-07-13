@@ -195,6 +195,18 @@ def test_comparison_metadata_uses_core_suite_content_provenance() -> None:
     assert "git_commit" in metadata
 
 
+def test_comparison_metadata_records_workspace_baseline_override() -> None:
+    metadata = benchmark_metadata(
+        SimpleNamespace(
+            task_dir=None,
+            suite="enterprise-apps-usage",
+            workspace_baseline="default-v1",
+        )
+    )
+
+    assert metadata["workspace_baseline"] == "default-v1"
+
+
 def test_colorize_wraps_enabled_status() -> None:
     assert colorize("[PASS]", "green", enabled=True) == "\033[32m[PASS]\033[0m"
     assert colorize("[FAIL]", "red", enabled=False) == "[FAIL]"

@@ -35,9 +35,11 @@
             "y": 2,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_break_aging_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_break_aging_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -90,7 +92,7 @@
       "args": {
         "origin": "Bench Stark Enterprise",
         "widget_id": "fund_operations_control_tower_recons_break_aging",
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_break_aging_widget_001",
         "data_args": {
           "fund": "Flagship Long/Short",
           "period": "YTD"

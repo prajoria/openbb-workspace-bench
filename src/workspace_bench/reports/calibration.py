@@ -54,10 +54,11 @@ def compile_payload(
     expected_tasks: int = 0,
     current_metadata: dict[str, tuple[str, str]] | None = None,
 ) -> dict[str, Any]:
-    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    identities: dict[str, dict[str, Any]] = {}
-    sources: dict[str, list[str]] = defaultdict(list)
+    grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    identities: dict[tuple[str, str], dict[str, Any]] = {}
+    sources: dict[tuple[str, str], list[str]] = defaultdict(list)
     suite_hashes: set[str] = set()
+    workspace_baselines: set[str] = set()
     for path in paths:
         payload = json.loads(path.read_text(encoding="utf-8"))
         rows = [dict(row) for row in payload.get("results", [])]
@@ -68,11 +69,16 @@ def compile_payload(
                     row["family"], row["difficulty"] = current_metadata[task_ref]
         model = payload.get("model") or {}
         slug = str(model.get("slug") or path.stem)
+        workspace_baseline = str(
+            (payload.get("benchmark") or {}).get("workspace_baseline") or "unknown"
+        )
         if expected_tasks and len({row.get("qualified_id") or row.get("id") for row in rows}) != expected_tasks:
             continue
-        grouped[slug].extend(rows)
-        identities[slug] = model
-        sources[slug].append(str(path))
+        key = (slug, workspace_baseline)
+        grouped[key].extend(rows)
+        identities[key] = model
+        sources[key].append(str(path))
+        workspace_baselines.add(workspace_baseline)
         content_hash = (payload.get("benchmark") or {}).get("content_sha256")
         if isinstance(content_hash, str):
             suite_hashes.add(content_hash)
@@ -80,7 +86,15 @@ def compile_payload(
     models = []
     per_task: dict[str, dict[str, Any]] = defaultdict(dict)
     task_metadata: dict[str, tuple[str, str]] = {}
-    for slug, rows in sorted(grouped.items()):
+    baselines_per_slug: dict[str, set[str]] = defaultdict(set)
+    for slug, workspace_baseline in grouped:
+        baselines_per_slug[slug].add(workspace_baseline)
+    for (slug, workspace_baseline), rows in sorted(grouped.items()):
+        report_slug = (
+            f"{slug}@{workspace_baseline}"
+            if len(baselines_per_slug[slug]) > 1
+            else slug
+        )
         summary = summarize_result_rows(rows)
         process_failures = sum(bool(row.get("process_failed")) for row in rows)
         valid_rows = [row for row in rows if not row.get("process_failed")]
@@ -105,14 +119,15 @@ def compile_payload(
                 str(task.get("family") or "unknown"),
                 str(task.get("difficulty") or "unknown"),
             )
-            per_task[task_ref][slug] = task
+            per_task[task_ref][report_slug] = task
         models.append(
             {
-                "slug": slug,
-                "label": identities[slug].get("label", slug),
-                "provider": identities[slug].get("provider"),
-                "model_id": identities[slug].get("id"),
-                "sources": sorted(sources[slug]),
+                "slug": report_slug,
+                "label": identities[(slug, workspace_baseline)].get("label", slug),
+                "provider": identities[(slug, workspace_baseline)].get("provider"),
+                "model_id": identities[(slug, workspace_baseline)].get("id"),
+                "workspace_baseline": workspace_baseline,
+                "sources": sorted(sources[(slug, workspace_baseline)]),
                 "summary": summary,
                 "families": slices["by_family"],
                 "difficulties": slices["by_difficulty"],
@@ -135,6 +150,7 @@ def compile_payload(
         "schema_version": "workspace-bench-calibration/v2",
         **git_provenance(REPO),
         "suite_content_sha256": sorted(suite_hashes),
+        "workspace_baselines": sorted(workspace_baselines),
         "model_count": len(models),
         "task_count": len(tasks),
         "models": models,
@@ -179,6 +195,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "The empirical difficulty labels use only the three complete guided-track "
         "runs below (236 tasks × 2 repeats). Process failures caused by malformed "
         "model output remain strict failures. Provider-credit failures are excluded.",
+        f"Workspace baselines: `{', '.join(payload.get('workspace_baselines', ['unknown']))}`.",
         "",
         "## Clean-run summary",
         "",

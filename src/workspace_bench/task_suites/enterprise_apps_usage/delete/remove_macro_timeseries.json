@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "delete",
   "difficulty": "easy",
-  "prompt": "The Macro Timeseries widget is no longer needed on this dashboard. Remove it.",
+  "prompt": "The Car Manufacturer Performance widget is no longer needed on this dashboard. Remove it.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,19 +23,22 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "DGS2"
+            "company": "VWAGY",
+            "year": "2024"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_remove_macro_timeseries_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_remove_macro_timeseries_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -46,9 +49,11 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
-        "data_args": {},
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
+        "data_args": {
+          "year": "2024"
+        },
         "min_count": 0,
         "max_count": 0
       }
@@ -69,7 +74,7 @@
     {
       "tool": "delete_widget",
       "args": {
-        "widget_uuid": "widget_001"
+        "widget_uuid": "usage_remove_macro_timeseries_widget_001"
       }
     }
   ],

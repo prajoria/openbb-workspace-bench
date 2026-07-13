@@ -7,7 +7,7 @@
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,30 +23,37 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "risk_metrics",
-          "data_args": {},
+          "origin": "Widget Examples",
+          "widget_id": "whitepapers",
+          "data_args": {
+            "filenames": [
+              "bitcoin.pdf"
+            ]
+          },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_ambient_repair_and_brief_sector_exposure_widget_001"
         },
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "sector_exposure",
+          "origin": "Widget Examples",
+          "widget_id": "live_grid_example",
           "data_args": {
-            "sector": "Consumer Staples"
+            "symbol": "TSLA"
           },
           "layout": {
             "x": 20,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_ambient_repair_and_brief_sector_exposure_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_ambient_repair_and_brief_sector_exposure_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -58,22 +65,26 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {}
-      },
-      {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
         "data_args": {
-          "sector": "Technology"
+          "filenames": [
+            "bitcoin.pdf"
+          ]
         }
       },
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {
-          "sector": "Consumer Staples"
+          "symbol": "AAPL"
+        }
+      },
+      {
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
+        "data_args": {
+          "symbol": "TSLA"
         },
         "min_count": 0,
         "max_count": 0
@@ -116,15 +127,15 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_ambient_repair_and_brief_sector_exposure_widget_002"
       }
     },
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_ambient_repair_and_brief_sector_exposure_widget_002",
         "data_args": {
-          "sector": "Technology"
+          "symbol": "AAPL"
         }
       }
     },

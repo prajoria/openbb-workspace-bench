@@ -31,7 +31,8 @@
             "y": 0,
             "w": 24,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_inspect_and_repair_overlap_disclosure_checklist_widget_001"
         },
         {
           "origin": "Bench Stark Enterprise",
@@ -42,9 +43,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_inspect_and_repair_overlap_disclosure_checklist_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_inspect_and_repair_overlap_disclosure_checklist_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -55,14 +58,14 @@
   "success": {
     "required_layouts": [
       {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_inspect_and_repair_overlap_disclosure_checklist_widget_001",
         "x": 0,
         "y": 0,
         "w": 24,
         "h": 10
       },
       {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_inspect_and_repair_overlap_disclosure_checklist_widget_002",
         "x": 24,
         "y": 0,
         "w": 16,
@@ -96,13 +99,13 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_inspect_and_repair_overlap_disclosure_checklist_widget_002"
       }
     },
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_inspect_and_repair_overlap_disclosure_checklist_widget_002",
         "x": 24,
         "y": 0,
         "w": 16,

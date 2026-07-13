@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "layout",
   "difficulty": "easy",
-  "prompt": "Widen the AAPL fundamentals widget to 20 columns. Keep its position and height.",
+  "prompt": "Widen the TM fundamentals widget to 20 columns. Keep its position and height.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,10 +23,10 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "fundamental_metrics",
+          "origin": "Getting Started",
+          "widget_id": "company_list",
           "data_args": {
-            "symbol": "AAPL"
+            "companyId": "TM"
           },
           "tab_id": "charts",
           "layout": {
@@ -34,9 +34,11 @@
             "y": 0,
             "w": 10,
             "h": 8
-          }
+          },
+          "widget_uuid": "usage_widen_fundamentals_aapl_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_widen_fundamentals_aapl_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -50,17 +52,17 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "AAPL"
+          "companyId": "TM"
         },
         "tab_id": "charts"
       }
     ],
     "required_layouts": [
       {
-        "widget_id": "fundamental_metrics",
+        "widget_id": "company_list",
         "tab_id": "charts",
         "x": 0,
         "y": 0,
@@ -89,7 +91,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "fundamental_metrics",
+        "widget_id": "company_list",
         "tab_id": "charts",
         "x": 0,
         "y": 0,

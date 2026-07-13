@@ -7,7 +7,7 @@
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,28 +23,31 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "holdings_table",
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
           "data_args": {},
           "layout": {
             "x": 0,
             "y": 0,
             "w": 24,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_repair_portfolio_overlap_widget_001"
         },
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "sector_exposure",
+          "origin": "Widget Examples",
+          "widget_id": "live_grid_example",
           "data_args": {},
           "layout": {
             "x": 20,
             "y": 0,
             "w": 16,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_repair_portfolio_overlap_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_repair_portfolio_overlap_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -55,14 +58,14 @@
   "success": {
     "required_layouts": [
       {
-        "widget_id": "holdings_table",
+        "widget_id": "test_metric",
         "x": 0,
         "y": 0,
         "w": 24,
         "h": 12
       },
       {
-        "widget_id": "sector_exposure",
+        "widget_id": "live_grid_example",
         "x": 24,
         "y": 0,
         "w": 16,
@@ -90,7 +93,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "sector_exposure",
+        "widget_id": "live_grid_example",
         "x": 24,
         "y": 0,
         "w": 16,

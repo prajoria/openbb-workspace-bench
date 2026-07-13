@@ -1,5 +1,14 @@
 {
   "apps": [],
+  "provenance": {
+    "method": "JSON and literal AST transcription",
+    "paths": [
+      "widget-types/",
+      "parameters-types/",
+      "ssrm_mode/"
+    ],
+    "source": "https://github.com/OpenBB-finance/backend-examples-for-openbb-workspace"
+  },
   "widgets": {
     "base64_pdf": {
       "category": "Other",
@@ -533,6 +542,83 @@
           "value": "TSLA"
         }
       ],
+      "sampleDataByArgs": [
+        {
+          "data": [
+            {
+              "change": 4.46,
+              "change_percent": 0.03,
+              "prev_close": 145.54,
+              "price": 150.0,
+              "symbol": "AAPL",
+              "volume": 1000000
+            }
+          ],
+          "dataArgs": {
+            "symbol": "AAPL"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": -50.0,
+              "change_percent": -0.01,
+              "prev_close": 3450.0,
+              "price": 3400.0,
+              "symbol": "AMZN",
+              "volume": 1000000
+            }
+          ],
+          "dataArgs": {
+            "symbol": "AMZN"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 50.0,
+              "change_percent": 0.01,
+              "prev_close": 2850.0,
+              "price": 2900.0,
+              "symbol": "GOOGL",
+              "volume": 1000000
+            }
+          ],
+          "dataArgs": {
+            "symbol": "GOOGL"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": -95.0,
+              "change_percent": -0.12,
+              "prev_close": 305.0,
+              "price": 300.0,
+              "symbol": "MSFT",
+              "volume": 1000000
+            }
+          ],
+          "dataArgs": {
+            "symbol": "MSFT"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 100.0,
+              "change_percent": 0.12,
+              "prev_close": 795.0,
+              "price": 700.0,
+              "symbol": "TSLA",
+              "volume": 1000000
+            }
+          ],
+          "dataArgs": {
+            "symbol": "TSLA"
+          }
+        }
+      ],
       "type": "live_grid",
       "wsEndpoint": "ws"
     },
@@ -943,6 +1029,7 @@
           "value": "liquidity"
         }
       ],
+      "sampleData": [],
       "searchCategory": "Custom",
       "type": "table"
     },
@@ -1011,6 +1098,32 @@
         "w": 5
       },
       "name": "Metric Widget",
+      "sampleData": [
+        {
+          "delta": "0.01",
+          "label": "Example Label",
+          "value": "12345"
+        },
+        {
+          "delta": "-0.01",
+          "label": "Example Label 2",
+          "value": "12345"
+        },
+        {
+          "delta": "5.67",
+          "label": "Example Label 3",
+          "value": "12345"
+        },
+        {
+          "delta": "0.00",
+          "label": "Example Label 4",
+          "value": "12345"
+        },
+        {
+          "label": "Example Label 4",
+          "value": "12345"
+        }
+      ],
       "type": "metric"
     },
     "udf_kraken": {
@@ -1115,6 +1228,24 @@
           "description": "Whitepaper filenames.",
           "label": "Filenames",
           "multiSelect": true,
+          "options": [
+            {
+              "label": "Bitcoin",
+              "value": "bitcoin.pdf"
+            },
+            {
+              "label": "Ethereum",
+              "value": "ethereum.pdf"
+            },
+            {
+              "label": "Chainlink",
+              "value": "chainlink.pdf"
+            },
+            {
+              "label": "Solana",
+              "value": "solana.pdf"
+            }
+          ],
           "optionsEndpoint": "/options",
           "optionsParams": {
             "category": "$category"
@@ -1157,6 +1288,72 @@
           "paramName": "category",
           "type": "text",
           "value": "all"
+        }
+      ],
+      "sampleDataByArgs": [
+        {
+          "data": [
+            {
+              "content": "$base64:bitcoin.pdf",
+              "data_format": {
+                "data_type": "pdf",
+                "filename": "bitcoin.pdf"
+              }
+            }
+          ],
+          "dataArgs": {
+            "filenames": [
+              "bitcoin.pdf"
+            ]
+          }
+        },
+        {
+          "data": [
+            {
+              "content": "$base64:chainlink.pdf",
+              "data_format": {
+                "data_type": "pdf",
+                "filename": "chainlink.pdf"
+              }
+            }
+          ],
+          "dataArgs": {
+            "filenames": [
+              "chainlink.pdf"
+            ]
+          }
+        },
+        {
+          "data": [
+            {
+              "content": "$base64:ethereum.pdf",
+              "data_format": {
+                "data_type": "pdf",
+                "filename": "ethereum.pdf"
+              }
+            }
+          ],
+          "dataArgs": {
+            "filenames": [
+              "ethereum.pdf"
+            ]
+          }
+        },
+        {
+          "data": [
+            {
+              "content": "$base64:solana.pdf",
+              "data_format": {
+                "data_type": "pdf",
+                "filename": "solana.pdf"
+              }
+            }
+          ],
+          "dataArgs": {
+            "filenames": [
+              "solana.pdf"
+            ]
+          }
         }
       ],
       "type": "multi_file_viewer"

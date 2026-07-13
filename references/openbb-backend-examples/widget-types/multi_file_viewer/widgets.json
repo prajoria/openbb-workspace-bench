@@ -1,0 +1,57 @@
+{
+  "whitepapers": {
+    "type": "multi_file_viewer",
+    "name": "Whitepapers",
+    "description": "A collection of crypto whitepapers.",
+    "endpoint": "/whitepapers/base64",
+    "gridData": {
+      "w": 40,
+      "h": 10
+    },
+    "params": [
+      {
+        "type": "endpoint",
+        "paramName": "filenames",
+        "value": ["bitcoin.pdf"],
+        "label": "Filenames",
+        "description": "Whitepaper filenames.",
+        "optionsEndpoint": "/options",
+        "show": false,
+        "optionsParams": {
+          "category": "$category"
+        },
+        "multiSelect": true,
+        "roles": ["fileSelector"]
+      },
+      {
+        "type": "text",
+        "paramName": "category",
+        "value": "all",
+        "label": "Category",
+        "description": "Category of whitepaper to fetch.",
+        "options": [
+          {
+            "label": "All",
+            "value": "all"
+          },
+          {
+            "label": "L1",
+            "value": "l1"
+          },
+          {
+            "label": "L2",
+            "value": "l2"
+          },
+          {
+            "label": "Oracles",
+            "value": "oracles"
+          },
+          {
+            "label": "Defi",
+            "value": "defi"
+          }
+        ]
+      }
+    ]
+  }
+}

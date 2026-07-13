@@ -5,7 +5,7 @@ import importlib.util
 import json
 from pathlib import Path
 from types import ModuleType
-from typing import Callable
+from typing import Any, Callable
 
 import pytest
 
@@ -69,25 +69,36 @@ def test_reference_catalogs_preserve_types_and_param_defaults(
 
 
 @pytest.mark.parametrize(
-    "backend",
-    [build_getting_started_backend(), build_widget_examples_backend()],
+    ("backend", "sample_id", "data_args", "expected_field"),
+    [
+        (
+            build_getting_started_backend(),
+            "company_performance",
+            {"company": "TM", "year": "2024"},
+            "metric",
+        ),
+        (
+            build_widget_examples_backend(),
+            "live_grid_example",
+            {"symbol": "AAPL"},
+            "symbol",
+        ),
+    ],
 )
-def test_reference_backends_expose_schema_and_generic_table_data(
+def test_reference_backends_expose_schema_and_transcribed_sample_data(
     backend: FixtureBackend,
+    sample_id: str,
+    data_args: dict[str, Any],
+    expected_field: str,
 ) -> None:
-    sample_id = next(iter(backend.widgets))
     schema = backend.get_widget_schema(sample_id)
     assert schema["widget_id"] == sample_id
     assert schema["origin"] == backend.name
 
-    table_id = next(
-        widget_id
-        for widget_id, definition in backend.widgets.items()
-        if definition["type"] == "table"
-    )
-    rows = backend.fetch_widget_data(table_id, {})
+    rows = backend.fetch_widget_data(sample_id, data_args)
     assert isinstance(rows, list)
     assert rows
+    assert expected_field in rows[0]
 
 
 def test_reference_fixture_registry_uses_slug_and_display_name() -> None:
@@ -95,6 +106,9 @@ def test_reference_fixture_registry_uses_slug_and_display_name() -> None:
 
     assert registry["getting-started"] is registry["Getting Started"]
     assert registry["widget-examples"] is registry["Widget Examples"]
+    assert registry["equities"] is registry["getting-started"]
+    assert registry["macro"] is registry["getting-started"]
+    assert registry["portfolio"] is registry["widget-examples"]
 
 
 @pytest.mark.skipif(

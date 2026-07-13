@@ -45,7 +45,11 @@ from workspace_bench.workspace.fixtures import get_fixture_backend
 from workspace_bench.workspace.naming import slugify
 
 DEFAULT_LIVE_URL = "https://backend.openbb.co/mcp"
-DEFAULT_ORIGIN_MAP = {"Bench Stark Enterprise": "Stark Fund"}
+DEFAULT_ORIGIN_MAP = {
+    "Bench Stark Enterprise": "Stark Fund",
+    "Getting Started": "Getting Started",
+    "Widget Examples": "Widget Examples",
+}
 PARITY_MARKER = "workspace-bench parity"
 
 # Tools the live replay knows how to execute faithfully. Registry-mutating and

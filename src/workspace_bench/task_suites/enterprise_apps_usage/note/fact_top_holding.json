@@ -3,11 +3,11 @@
   "category": "read",
   "family": "note",
   "difficulty": "medium",
-  "prompt": "Use the existing holdings widget data to add a note naming the largest position and its exact weight from the data.",
+  "prompt": "Use the existing metric widget data to add a note with the first label and its exact value from the data.",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,17 +23,19 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "holdings_table",
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
           "data_args": {},
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_fact_top_holding_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_fact_top_holding_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -44,8 +46,8 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "holdings_table",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {},
         "min_count": 1
       }
@@ -54,8 +56,8 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "MSFT",
-          "0.34"
+          "Example Label",
+          "12345"
         ]
       }
     ],
@@ -75,8 +77,8 @@
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "holdings_table",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
       }
     },
@@ -85,7 +87,7 @@
       "args": {
         "widget_type": "note",
         "name": "Answer Note",
-        "data": "Largest position: MSFT at 0.34."
+        "data": "First metric: Example Label is 12345."
       }
     }
   ],

@@ -3,11 +3,11 @@
   "category": "dashboard",
   "family": "resources",
   "difficulty": "hard",
-  "prompt": "Read resource openbb://workspace/specs/widget-parameters, add Bench Portfolio/sector_exposure, and add a note that mentions peer set.",
+  "prompt": "Read resource openbb://workspace/specs/widget-parameters, add Widget Examples/live_grid_example, and add a note that mentions peer set.",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_skill_build_finance_comps_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -42,8 +43,8 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {}
       }
     ],
@@ -84,21 +85,21 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Portfolio"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure"
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {}
       }
     },

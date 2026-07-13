@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "layout",
   "difficulty": "hard",
-  "prompt": "Arrange the three portfolio widgets into a grid: holdings at columns 0-24 rows 0-12, sector exposure at columns 24-40 rows 0-12, and risk metrics full-width below them (40 columns, 8 rows, starting at row 12).",
+  "prompt": "Arrange the three widget-examples widgets into a grid: holdings at columns 0-24 rows 0-12, sector exposure at columns 24-40 rows 0-12, and risk metrics full-width below them (40 columns, 8 rows, starting at row 12).",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,39 +23,47 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "holdings_table",
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
           "data_args": {},
           "layout": {
             "x": 2,
             "y": 2,
             "w": 16,
             "h": 9
-          }
+          },
+          "widget_uuid": "usage_portfolio_three_widget_grid_widget_001"
         },
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "sector_exposure",
+          "origin": "Widget Examples",
+          "widget_id": "live_grid_example",
           "data_args": {},
           "layout": {
             "x": 6,
             "y": 13,
             "w": 16,
             "h": 9
-          }
+          },
+          "widget_uuid": "usage_portfolio_three_widget_grid_widget_002"
         },
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "risk_metrics",
-          "data_args": {},
+          "origin": "Widget Examples",
+          "widget_id": "whitepapers",
+          "data_args": {
+            "filenames": [
+              "bitcoin.pdf"
+            ]
+          },
           "layout": {
             "x": 10,
             "y": 24,
             "w": 16,
             "h": 9
-          }
+          },
+          "widget_uuid": "usage_portfolio_three_widget_grid_widget_003"
         }
-      ]
+      ],
+      "dashboard_id": "usage_portfolio_three_widget_grid_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -66,21 +74,21 @@
   "success": {
     "required_layouts": [
       {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_portfolio_three_widget_grid_widget_001",
         "x": 0,
         "y": 0,
         "w": 24,
         "h": 12
       },
       {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_portfolio_three_widget_grid_widget_002",
         "x": 24,
         "y": 0,
         "w": 16,
         "h": 12
       },
       {
-        "widget_uuid": "widget_003",
+        "widget_uuid": "usage_portfolio_three_widget_grid_widget_003",
         "x": 0,
         "y": 12,
         "w": 40,
@@ -108,7 +116,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_portfolio_three_widget_grid_widget_001",
         "x": 0,
         "y": 0,
         "w": 24,
@@ -118,7 +126,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_portfolio_three_widget_grid_widget_002",
         "x": 24,
         "y": 0,
         "w": 16,
@@ -128,7 +136,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_uuid": "widget_003",
+        "widget_uuid": "usage_portfolio_three_widget_grid_widget_003",
         "x": 0,
         "y": 12,
         "w": 40,

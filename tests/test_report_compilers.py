@@ -34,6 +34,8 @@ def test_cli_and_model_comparison_share_grade_serialization(tmp_path: Path) -> N
 
     assert {key: cli_row[key] for key in canonical} == canonical
     assert comparison_row["passed"] is canonical["passed"]
+    assert cli_row["workspace_baseline"] == "minimal"
+    assert comparison_row["workspace_baseline"] == "minimal"
     assert {
         key: comparison_row[key] for key in canonical if key != "passed"
     } == {key: value for key, value in canonical.items() if key != "passed"}

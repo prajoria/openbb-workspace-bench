@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "update",
   "difficulty": "medium",
-  "prompt": "Two Macro Timeseries widgets are on this dashboard: one for DGS10 and one for DGS2. Only update the DGS2 one to FEDFUNDS; leave the DGS10 widget untouched.",
+  "prompt": "Two Car Manufacturer Performance widgets are on this dashboard: one for GM and one for VWAGY. Only update the VWAGY one to TM; leave the GM widget untouched.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,32 +23,37 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "DGS10"
+            "company": "GM",
+            "year": "2024"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_update_only_the_dgs2_macro_timeseries_widget_001"
         },
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "DGS2"
+            "company": "VWAGY",
+            "year": "2024"
           },
           "layout": {
             "x": 20,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_update_only_the_dgs2_macro_timeseries_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_update_only_the_dgs2_macro_timeseries_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -59,28 +64,31 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         },
         "min_count": 1,
         "max_count": 1
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "FEDFUNDS"
+          "company": "TM",
+          "year": "2024"
         },
         "min_count": 1,
         "max_count": 1
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS2"
+          "company": "VWAGY",
+          "year": "2024"
         },
         "min_count": 0,
         "max_count": 0
@@ -102,9 +110,10 @@
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_update_only_the_dgs2_macro_timeseries_widget_002",
         "data_args": {
-          "series": "FEDFUNDS"
+          "company": "TM",
+          "year": "2024"
         }
       }
     }

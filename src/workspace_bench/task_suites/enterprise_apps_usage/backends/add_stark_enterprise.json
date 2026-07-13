@@ -16,7 +16,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_add_stark_enterprise_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -19690,7 +19691,7 @@
           ]
         }
       ],
-      "pinned_paths": false
+      "pinned_paths": true
     }
   },
   "oracle_tool_calls": [

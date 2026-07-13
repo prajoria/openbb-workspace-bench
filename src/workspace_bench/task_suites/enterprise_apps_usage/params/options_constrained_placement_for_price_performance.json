@@ -3,11 +3,11 @@
   "category": "dashboard",
   "family": "params",
   "difficulty": "medium",
-  "prompt": "Choose AAPL for symbol with get_params_options, fetch the widget schema, create Bench Equities/price_performance, and place it at x=0, y=0, width 20, height 10.",
+  "prompt": "Choose AAPL for symbol with get_params_options, fetch the widget schema, create Getting Started/table_widget_with_grouping_by_cell_click, and place it at x=0, y=0, width 20, height 10.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_options_constrained_placement_for_price_performance_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -34,8 +35,8 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         }
@@ -43,7 +44,7 @@
     ],
     "required_layouts": [
       {
-        "widget_id": "price_performance",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "x": 0,
         "y": 0,
         "w": 20,
@@ -81,29 +82,29 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance"
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "param_name": "symbol"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         }
@@ -112,7 +113,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "price_performance",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "x": 0,
         "y": 0,
         "w": 20,

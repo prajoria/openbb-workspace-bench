@@ -68,6 +68,17 @@ def test_eligibility_accepts_stark_read_task(stark_read_task: Task) -> None:
     check_eligibility(stark_read_task, DEFAULT_ORIGIN_MAP)
 
 
+@pytest.mark.parametrize(
+    "task_ref",
+    [
+        "enterprise-apps-usage/create/price_performance_aapl",
+        "enterprise-apps-usage/create/sector_exposure_plain",
+    ],
+)
+def test_eligibility_accepts_transcribed_production_origins(task_ref: str) -> None:
+    check_eligibility(find_task(task_ref), DEFAULT_ORIGIN_MAP)
+
+
 def test_eligibility_rejects_unmapped_origin(stark_read_task: Task) -> None:
     with pytest.raises(LiveParityIneligible, match="without a live mapping"):
         check_eligibility(stark_read_task, {"Some Other Backend": "X"})

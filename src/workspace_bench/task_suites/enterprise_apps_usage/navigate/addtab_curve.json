@@ -3,11 +3,14 @@
   "category": "repair",
   "family": "navigate",
   "difficulty": "hard",
-  "prompt": "Add the missing Curve tab to this dashboard and put the Yield Curve widget on it. Keep the existing Overview tab intact.",
+  "prompt": "Add the missing Curve tab to this dashboard and put the Metric Widget on it. Keep the existing Overview tab intact.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
+      },
+      {
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,10 +26,11 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "DGS10"
+            "company": "GM",
+            "year": "2024"
           },
           "tab_id": "overview",
           "layout": {
@@ -34,9 +38,11 @@
             "y": 2,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_addtab_curve_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_addtab_curve_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -54,17 +60,18 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         },
         "tab_id": "overview",
         "min_count": 1
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {},
         "tab_id": "curve",
         "min_count": 1
@@ -111,21 +118,21 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Macro"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve"
+        "origin": "Widget Examples",
+        "widget_id": "test_metric"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
       }
     }

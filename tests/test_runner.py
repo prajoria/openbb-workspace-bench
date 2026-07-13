@@ -247,6 +247,26 @@ def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
     assert payload["results"][0]["difficulty"] == "easy"
 
 
+def test_cli_workspace_baseline_override_is_recorded(capsys) -> None:
+    exit_code = main(
+        [
+            "run",
+            "--task",
+            "price_performance_aapl",
+            "--workspace-baseline",
+            "default-v1",
+            "--agent",
+            "oracle",
+            "--json",
+        ]
+    )
+
+    payload = json.loads(capsys.readouterr().out)
+    assert exit_code == 0
+    assert payload["summary"]["workspace_baseline"] == "default-v1"
+    assert payload["results"][0]["workspace_baseline"] == "default-v1"
+
+
 def test_cli_run_resolves_build_suite_task_without_suite_flag(capsys) -> None:
     exit_code = main(
         [
@@ -327,7 +347,7 @@ def test_runner_round_trips_workspace_resource_and_prompt_task(tmp_path) -> None
                 "family": "resources",
                 "difficulty": "easy",
                 "prompt": "Read the app index and tool usage prompt.",
-                "fixtures": {"backends": [{"name": "equities"}]},
+                    "fixtures": {"backends": [{"name": "getting-started"}]},
                 "initial_state": {},
                 "allowed_tools": [
                     "read_workspace_resource",
@@ -337,7 +357,7 @@ def test_runner_round_trips_workspace_resource_and_prompt_task(tmp_path) -> None
                     "required_resource_reads": [
                         {
                             "uri": "openbb://workspace/app-builder/index",
-                            "data_contains": ["Equity Earnings Review"],
+                                "data_contains": ["Onboarding App for Devs"],
                         }
                     ],
                     "required_tool_calls": [

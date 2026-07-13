@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "inspect",
   "difficulty": "medium",
-  "prompt": "After calling read_widget with widget_id macro_timeseries, update the widget configured with series=FEDFUNDS so series=DGS10.",
+  "prompt": "After calling read_widget with widget_id company_performance, update the widget configured with series=TM so series=GM.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,19 +23,22 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "FEDFUNDS"
+            "company": "TM",
+            "year": "2024"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_find_and_fix_misconfigured_macro_timeseries_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_find_and_fix_misconfigured_macro_timeseries_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -46,10 +49,11 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         }
       }
     ],
@@ -74,15 +78,16 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_id": "macro_timeseries"
+        "widget_id": "company_performance"
       }
     },
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_find_and_fix_misconfigured_macro_timeseries_widget_001",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         }
       }
     }

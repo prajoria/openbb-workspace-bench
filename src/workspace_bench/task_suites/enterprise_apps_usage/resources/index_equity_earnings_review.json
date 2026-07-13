@@ -3,11 +3,11 @@
   "category": "dashboard",
   "family": "resources",
   "difficulty": "easy",
-  "prompt": "After calling read_workspace_resource with uri openbb://workspace/app-builder/index, add a note naming the Equity Earnings Review template id equity-earnings-review.",
+  "prompt": "Call read_workspace_resource with uri openbb://workspace/app-builder/index and add a note naming the Onboarding App for Devs app and its aggrid tab.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_index_equity_earnings_review_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -33,8 +34,8 @@
       {
         "uri": "openbb://workspace/app-builder/index",
         "data_contains": [
-          "Equity Earnings Review",
-          "equity-earnings-review"
+          "Onboarding App for Devs",
+          "tabs=aggrid"
         ]
       }
     ],
@@ -42,8 +43,8 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "Equity Earnings Review",
-          "equity-earnings-review"
+          "Onboarding App for Devs",
+          "tabs=aggrid"
         ]
       }
     ],
@@ -70,7 +71,7 @@
       "args": {
         "widget_type": "note",
         "name": "App Index Note",
-        "data": "Equity Earnings Review uses template equity-earnings-review."
+        "data": "Onboarding App for Devs; tabs=aggrid."
       }
     }
   ],

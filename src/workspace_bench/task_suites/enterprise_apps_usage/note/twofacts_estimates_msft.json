@@ -3,11 +3,11 @@
   "category": "read",
   "family": "note",
   "difficulty": "medium",
-  "prompt": "Add a note on the overview tab with the 2026Q1 EPS estimate and the revenue estimate from the data after reviewing the existing MSFT estimates widget.",
+  "prompt": "Add a note on the overview tab with the exact price and volume from the data after reviewing the existing MSFT live-grid widget.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,8 +23,8 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "estimate_history",
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
           "data_args": {
             "symbol": "MSFT"
           },
@@ -34,9 +34,11 @@
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_twofacts_estimates_msft_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_twofacts_estimates_msft_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -50,8 +52,8 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
           "symbol": "MSFT"
         },
@@ -64,8 +66,8 @@
         "widget_type": "note",
         "data_contains": [
           "MSFT",
-          "3.42",
-          "71.2"
+          "350.0",
+          "1200000"
         ],
         "tab_id": "overview"
       }
@@ -86,8 +88,8 @@
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
           "symbol": "MSFT"
         }
@@ -98,7 +100,7 @@
       "args": {
         "widget_type": "note",
         "name": "Answer Note",
-        "data": "MSFT 2026Q1: EPS 3.42, revenue 71.2B."
+        "data": "MSFT live grid: price 350.0, volume 1200000."
       }
     }
   ],

@@ -31,7 +31,8 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_find_duplicate_drift_by_sleeve_widget_001"
         },
         {
           "origin": "Bench Stark Enterprise",
@@ -42,7 +43,8 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_find_duplicate_drift_by_sleeve_widget_002"
         },
         {
           "origin": "Bench Stark Enterprise",
@@ -53,9 +55,11 @@
             "y": 10,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_find_duplicate_drift_by_sleeve_widget_003"
         }
-      ]
+      ],
+      "dashboard_id": "usage_find_duplicate_drift_by_sleeve_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -107,13 +111,13 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_find_duplicate_drift_by_sleeve_widget_002"
       }
     },
     {
       "tool": "delete_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_find_duplicate_drift_by_sleeve_widget_002"
       }
     }
   ],

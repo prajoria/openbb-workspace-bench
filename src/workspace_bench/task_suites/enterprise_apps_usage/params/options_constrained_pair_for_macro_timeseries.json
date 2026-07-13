@@ -3,11 +3,14 @@
   "category": "dashboard",
   "family": "params",
   "difficulty": "medium",
-  "prompt": "Set Bench Macro/macro_timeseries series=DGS2 using get_params_options, then add companion widget yield_curve. Arrange both without overlap.",
+  "prompt": "Set Getting Started/company_performance series=VWAGY using get_params_options, then add companion widget test_metric. Arrange both without overlap.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
+      },
+      {
+        "name": "widget-examples"
       }
     ]
   },
@@ -20,7 +23,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_options_constrained_pair_for_macro_timeseries_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -34,28 +38,29 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS2"
+          "company": "VWAGY",
+          "year": "2024"
         }
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
       }
     ],
     "required_layouts": [
       {
-        "widget_id": "macro_timeseries",
+        "widget_id": "company_performance",
         "x": 0,
         "y": 0,
         "w": 20,
         "h": 10
       },
       {
-        "widget_id": "yield_curve",
+        "widget_id": "test_metric",
         "x": 20,
         "y": 0,
         "w": 20,
@@ -66,7 +71,7 @@
       {
         "tool": "get_params_options",
         "data_contains": [
-          "DGS2"
+          "VWAGY"
         ]
       }
     ],
@@ -93,59 +98,60 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Macro"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries"
+        "origin": "Getting Started",
+        "widget_id": "company_performance"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
-        "param_name": "series"
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
+        "param_name": "company"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS2"
+          "company": "VWAGY",
+          "year": "2024"
         }
       }
     },
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Macro"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve"
+        "origin": "Widget Examples",
+        "widget_id": "test_metric"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
       }
     },
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "macro_timeseries",
+        "widget_id": "company_performance",
         "x": 0,
         "y": 0,
         "w": 20,
@@ -155,7 +161,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "yield_curve",
+        "widget_id": "test_metric",
         "x": 20,
         "y": 0,
         "w": 20,

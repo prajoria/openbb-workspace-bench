@@ -16,7 +16,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_register_backend_and_add_post_earnings_checklist_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -19695,7 +19696,7 @@
           ]
         }
       ],
-      "pinned_paths": false
+      "pinned_paths": true
     }
   },
   "oracle_tool_calls": [

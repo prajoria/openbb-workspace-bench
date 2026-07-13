@@ -34,7 +34,8 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_double_stark_ops_widget_001"
         },
         {
           "origin": "Bench Stark Enterprise",
@@ -48,9 +49,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_double_stark_ops_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_double_stark_ops_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -124,7 +127,7 @@
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_double_stark_ops_widget_001",
         "data_args": {
           "status": "In Review"
         }
@@ -133,7 +136,7 @@
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_double_stark_ops_widget_002",
         "data_args": {
           "period": "MTD"
         }

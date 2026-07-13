@@ -3,11 +3,11 @@
   "category": "repair",
   "family": "update",
   "difficulty": "medium",
-  "prompt": "This AAPL desk dashboard mistakenly shows MSFT news. Repair the widget to AAPL and add a note saying what was repaired, mentioning both values.",
+  "prompt": "This tech desk dashboard mistakenly shows business news. Repair the widget to tech and add a note saying what was repaired, mentioning both values.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,19 +23,21 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "latest_news",
+          "origin": "Getting Started",
+          "widget_id": "sample_newsfeed",
           "data_args": {
-            "symbol": "MSFT"
+            "category": "business"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_repair_news_msft_aapl_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_repair_news_msft_aapl_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -47,18 +49,18 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "AAPL"
+          "category": "tech"
         },
         "min_count": 1
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "MSFT"
+          "category": "business"
         },
         "min_count": 0,
         "max_count": 0
@@ -68,8 +70,8 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "MSFT",
-          "AAPL",
+          "business",
+          "tech",
           "repaired"
         ]
       }
@@ -90,15 +92,15 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_id": "latest_news"
+        "widget_id": "sample_newsfeed"
       }
     },
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_repair_news_msft_aapl_widget_001",
         "data_args": {
-          "symbol": "AAPL"
+          "category": "tech"
         }
       }
     },
@@ -107,7 +109,7 @@
       "args": {
         "widget_type": "note",
         "name": "Repair Note",
-        "data": "Repaired latest_news from MSFT to AAPL."
+        "data": "Repaired sample_newsfeed from business to tech."
       }
     }
   ],

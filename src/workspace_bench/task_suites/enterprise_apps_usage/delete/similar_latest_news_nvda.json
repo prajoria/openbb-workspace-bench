@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "delete",
   "difficulty": "medium",
-  "prompt": "Remove exactly one duplicate NVDA Latest News widget from the two identical NVDA copies, while keeping the other duplicate and the AAPL widget untouched.",
+  "prompt": "Remove exactly one duplicate science Sample News Feed widget from the two identical science copies, while keeping the other duplicate and the tech widget untouched.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,10 +23,10 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "latest_news",
+          "origin": "Getting Started",
+          "widget_id": "sample_newsfeed",
           "data_args": {
-            "symbol": "NVDA",
+            "category": "science",
             "limit": 5
           },
           "layout": {
@@ -34,13 +34,14 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_similar_latest_news_nvda_widget_001"
         },
         {
-          "origin": "Bench Equities",
-          "widget_id": "latest_news",
+          "origin": "Getting Started",
+          "widget_id": "sample_newsfeed",
           "data_args": {
-            "symbol": "NVDA",
+            "category": "science",
             "limit": 5
           },
           "layout": {
@@ -48,13 +49,14 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_similar_latest_news_nvda_widget_002"
         },
         {
-          "origin": "Bench Equities",
-          "widget_id": "latest_news",
+          "origin": "Getting Started",
+          "widget_id": "sample_newsfeed",
           "data_args": {
-            "symbol": "AAPL",
+            "category": "tech",
             "limit": 5
           },
           "layout": {
@@ -62,9 +64,11 @@
             "y": 10,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_similar_latest_news_nvda_widget_003"
         }
-      ]
+      ],
+      "dashboard_id": "usage_similar_latest_news_nvda_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -75,19 +79,19 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "NVDA"
+          "category": "science"
         },
         "min_count": 1,
         "max_count": 1
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "AAPL"
+          "category": "tech"
         },
         "min_count": 1,
         "max_count": 1
@@ -114,7 +118,7 @@
     {
       "tool": "delete_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_similar_latest_news_nvda_widget_002"
       }
     }
   ],

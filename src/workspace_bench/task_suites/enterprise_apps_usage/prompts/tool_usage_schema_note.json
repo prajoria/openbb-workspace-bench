@@ -7,10 +7,10 @@
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       },
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -24,18 +24,24 @@
           "name": ""
         }
       ],
+      "dashboard_id": "usage_tool_usage_schema_note_dashboard_001",
       "widgets": [
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "risk_metrics",
-          "data_args": {},
+          "origin": "Widget Examples",
+          "widget_id": "whitepapers",
+          "data_args": {
+            "filenames": [
+              "bitcoin.pdf"
+            ]
+          },
           "tab_id": "",
           "layout": {
             "x": 0,
             "y": 500,
             "w": 8,
             "h": 4
-          }
+          },
+          "widget_uuid": "usage_tool_usage_schema_note_widget_001"
         }
       ]
     }
@@ -78,9 +84,13 @@
     },
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {},
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        },
         "tab_id": "",
         "min_count": 1,
         "max_count": 1

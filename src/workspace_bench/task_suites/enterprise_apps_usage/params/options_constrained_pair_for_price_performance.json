@@ -3,11 +3,11 @@
   "category": "dashboard",
   "family": "params",
   "difficulty": "medium",
-  "prompt": "Set Bench Equities/price_performance symbol=AAPL using get_params_options, then add companion widget latest_news. Arrange both without overlap.",
+  "prompt": "Set Getting Started/table_widget_with_grouping_by_cell_click symbol=AAPL using get_params_options, then add companion widget sample_newsfeed. Arrange both without overlap.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_options_constrained_pair_for_price_performance_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -34,31 +35,31 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         }
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "AAPL",
+          "category": "tech",
           "limit": 5
         }
       }
     ],
     "required_layouts": [
       {
-        "widget_id": "price_performance",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "x": 0,
         "y": 0,
         "w": 20,
         "h": 10
       },
       {
-        "widget_id": "latest_news",
+        "widget_id": "sample_newsfeed",
         "x": 20,
         "y": 0,
         "w": 20,
@@ -96,54 +97,48 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance"
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "param_name": "symbol"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         }
       }
     },
     {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Equities"
-      }
-    },
-    {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news"
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "AAPL",
+          "category": "tech",
           "limit": 5
         }
       }
@@ -151,7 +146,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "price_performance",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "x": 0,
         "y": 0,
         "w": 20,
@@ -161,7 +156,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "latest_news",
+        "widget_id": "sample_newsfeed",
         "x": 20,
         "y": 0,
         "w": 20,
@@ -170,6 +165,6 @@
     }
   ],
   "limits": {
-    "max_turns": 13
+    "max_turns": 12
   }
 }

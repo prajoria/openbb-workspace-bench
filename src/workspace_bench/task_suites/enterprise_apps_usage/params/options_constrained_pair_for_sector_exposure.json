@@ -3,11 +3,11 @@
   "category": "dashboard",
   "family": "params",
   "difficulty": "hard",
-  "prompt": "After using get_params_options for Bench Portfolio/sector_exposure sector=Technology, add companion widget risk_metrics and arrange both without overlap.",
+  "prompt": "After using get_params_options for Widget Examples/live_grid_example sector=Technology, add companion widget whitepapers and arrange both without overlap.",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_options_constrained_pair_for_sector_exposure_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -34,28 +35,32 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {
-          "sector": "Technology"
+          "symbol": "AAPL"
         }
       },
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {}
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        }
       }
     ],
     "required_layouts": [
       {
-        "widget_id": "sector_exposure",
+        "widget_id": "live_grid_example",
         "x": 0,
         "y": 0,
         "w": 20,
         "h": 10
       },
       {
-        "widget_id": "risk_metrics",
+        "widget_id": "whitepapers",
         "x": 20,
         "y": 0,
         "w": 20,
@@ -66,7 +71,7 @@
       {
         "tool": "get_params_options",
         "data_contains": [
-          "Technology"
+          "AAPL"
         ]
       }
     ],
@@ -93,59 +98,57 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Portfolio"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure"
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
-        "param_name": "sector"
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
+        "param_name": "symbol"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {
-          "sector": "Technology"
+          "symbol": "AAPL"
         }
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Portfolio"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics"
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {}
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        }
       }
     },
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "sector_exposure",
+        "widget_id": "live_grid_example",
         "x": 0,
         "y": 0,
         "w": 20,
@@ -155,7 +158,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "risk_metrics",
+        "widget_id": "whitepapers",
         "x": 20,
         "y": 0,
         "w": 20,
@@ -164,6 +167,6 @@
     }
   ],
   "limits": {
-    "max_turns": 13
+    "max_turns": 12
   }
 }

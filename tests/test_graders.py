@@ -72,34 +72,29 @@ def test_grader_detects_layout_overlap() -> None:
 
 def test_grader_matches_generated_percent_equivalent() -> None:
     task = find_task("fact_top_holding")
+    task = replace(
+        task,
+        success=SuccessCriteria(
+            required_generated_widgets=(
+                RequiredGeneratedWidget(
+                    widget_type="note",
+                    data_contains=("largest weight", "0.34"),
+                ),
+            )
+        ),
+    )
     snapshot = {
         "dashboard_composition": {
-            "name": "Existing Portfolio Review",
+            "name": "Existing Review",
             "tabs": [{"id": "overview", "name": "Overview", "layout": []}],
             "widgets": [
                 {
                     "widget_uuid": "widget_001",
-                    "widget_id": "holdings_table",
-                    "origin": "Bench Portfolio",
-                    "generated": False,
-                    "data_args": {},
-                    "layout": {"tab_id": "overview", "x": 0, "y": 2, "w": 24, "h": 12},
-                },
-                {
-                    "widget_uuid": "widget_002",
-                    "widget_id": "sector_exposure",
-                    "origin": "Bench Portfolio",
-                    "generated": False,
-                    "data_args": {},
-                    "layout": {"tab_id": "overview", "x": 24, "y": 2, "w": 16, "h": 10},
-                },
-                {
-                    "widget_uuid": "widget_003",
                     "widget_id": "generated_note",
                     "origin": "generated",
                     "generated": True,
                     "type": "note",
-                    "generated_data": "MSFT is largest at 34%. Technology is largest at 86%.",
+                    "generated_data": "The largest weight is 34%.",
                     "layout": {"tab_id": "overview", "x": 0, "y": 14, "w": 20, "h": 8},
                 },
             ],

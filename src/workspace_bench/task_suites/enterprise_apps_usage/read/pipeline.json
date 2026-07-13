@@ -35,9 +35,11 @@
             "y": 2,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_pipeline_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_pipeline_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -90,7 +92,7 @@
       "args": {
         "origin": "Bench Stark Enterprise",
         "widget_id": "client_360_flows_pipeline_by_stage",
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_pipeline_widget_001",
         "data_args": {
           "fund": "Flagship Long/Short",
           "period": "YTD"

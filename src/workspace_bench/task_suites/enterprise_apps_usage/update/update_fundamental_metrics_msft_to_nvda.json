@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "update",
   "difficulty": "easy",
-  "prompt": "The Fundamental Metrics widget currently shows MSFT. Update the existing widget to NVDA; do not create a new one and leave no widget showing the old value.",
+  "prompt": "The Company List with ID Mapping widget currently shows VWAGY. Update the existing widget to GM; do not create a new one and leave no widget showing the old value.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,19 +23,21 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "fundamental_metrics",
+          "origin": "Getting Started",
+          "widget_id": "company_list",
           "data_args": {
-            "symbol": "MSFT"
+            "companyId": "VWAGY"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_update_fundamental_metrics_msft_to_nvda_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_update_fundamental_metrics_msft_to_nvda_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -46,18 +48,18 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "NVDA"
+          "companyId": "GM"
         },
         "min_count": 1
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "MSFT"
+          "companyId": "VWAGY"
         },
         "min_count": 0,
         "max_count": 0
@@ -79,15 +81,15 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_id": "fundamental_metrics"
+        "widget_id": "company_list"
       }
     },
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_update_fundamental_metrics_msft_to_nvda_widget_001",
         "data_args": {
-          "symbol": "NVDA"
+          "companyId": "GM"
         }
       }
     }

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binance OHLC Chart</title>
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #131722;
+            color: #d1d4dc;
+        }
+
+        #chart {
+            width: 100%;
+            height: 100vh;
+        }
+
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(19, 23, 34, 0.8);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 1000;
+        }
+
+        #status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+
+        .connected {
+            background: rgba(0, 150, 0, 0.8);
+        }
+
+        .disconnected {
+            background: rgba(150, 0, 0, 0.8);
+        }
+
+        .loading {
+            background: rgba(150, 150, 0, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="info"></div>
+    <div id="status" class="loading">Loading...</div>
+    <div id="chart"></div>
+
+    <script>
+        // These values are injected server-side
+        const symbol = '{{SYMBOL}}';
+        const interval = '{{INTERVAL}}';
+        const exchange = '{{EXCHANGE}}';
+        const theme = '{{THEME}}';
+
+        // Theme colors
+        const themes = {
+            dark: {
+                background: '#131722',
+                textColor: '#d1d4dc',
+                vertLines: '#1e222d',
+                horzLines: '#1e222d',
+                borderColor: '#2B2B43',
+                bodyBg: '#131722'
+            },
+            light: {
+                background: '#ffffff',
+                textColor: '#191919',
+                vertLines: '#e1e3e6',
+                horzLines: '#e1e3e6',
+                borderColor: '#e1e3e6',
+                bodyBg: '#ffffff'
+            }
+        };
+
+        const currentTheme = themes[theme] || themes.dark;
+
+        // Apply body background
+        document.body.style.backgroundColor = currentTheme.bodyBg;
+        document.body.style.color = currentTheme.textColor;
+
+        // Update info display
+        const exchangeLabel = exchange === 'binancef' ? 'Binance Futures' : 'BinanceUS';
+        document.getElementById('info').textContent = `${exchangeLabel} - ${symbol} - ${interval}`;
+
+        // Create chart with theme
+        const chart = LightweightCharts.createChart(document.getElementById('chart'), {
+            layout: {
+                background: { color: currentTheme.background },
+                textColor: currentTheme.textColor,
+            },
+            grid: {
+                vertLines: { color: currentTheme.vertLines },
+                horzLines: { color: currentTheme.horzLines },
+            },
+            crosshair: {
+                mode: LightweightCharts.CrosshairMode.Normal,
+            },
+            rightPriceScale: {
+                borderColor: currentTheme.borderColor,
+            },
+            timeScale: {
+                borderColor: currentTheme.borderColor,
+                timeVisible: true,
+                secondsVisible: false,
+            },
+        });
+
+        const candlestickSeries = chart.addSeries(LightweightCharts.CandlestickSeries, {
+            upColor: '#26a69a',
+            downColor: '#ef5350',
+            borderVisible: false,
+            wickUpColor: '#26a69a',
+            wickDownColor: '#ef5350',
+        });
+
+        let ws;
+        let reconnectTimeout;
+
+        function connectWebSocket() {
+            // Hardcoded backend URL for development
+            const wsUrl = `ws://localhost:8000/ws/binance?symbol=${symbol}&interval=${interval}&exchange=${exchange}`;
+
+            document.getElementById('status').textContent = 'Connecting...';
+            document.getElementById('status').className = 'loading';
+
+            ws = new WebSocket(wsUrl);
+
+            ws.onopen = () => {
+                console.log('WebSocket connected to Python backend');
+            };
+
+            ws.onmessage = (event) => {
+                const message = JSON.parse(event.data);
+
+                // Handle historical data
+                if (message.type === 'historical') {
+                    console.log('Received historical data:', message.data.length, 'candles');
+                    candlestickSeries.setData(message.data);
+
+                    // Send data to parent window for AI
+                    window.parent.postMessage({
+                        type: 'aiData',
+                        data: message.data
+                    }, '*');
+
+                    document.getElementById('status').textContent = 'Live';
+                    document.getElementById('status').className = 'connected';
+                }
+                // Handle real-time updates
+                else if (message.time) {
+                    candlestickSeries.update(message);
+                }
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+                document.getElementById('status').textContent = 'Connection error';
+                document.getElementById('status').className = 'disconnected';
+            };
+
+            ws.onclose = () => {
+                console.log('WebSocket disconnected');
+                document.getElementById('status').textContent = 'Reconnecting...';
+                document.getElementById('status').className = 'loading';
+
+                // Attempt to reconnect after 5 seconds
+                clearTimeout(reconnectTimeout);
+                reconnectTimeout = setTimeout(() => {
+                    connectWebSocket();
+                }, 5000);
+            };
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            chart.applyOptions({
+                width: document.getElementById('chart').clientWidth,
+            });
+        });
+
+        // Start the application by connecting to Python WebSocket
+        connectWebSocket();
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (ws) {
+                ws.close();
+            }
+            clearTimeout(reconnectTimeout);
+        });
+    </script>
+</body>
+
+</html>

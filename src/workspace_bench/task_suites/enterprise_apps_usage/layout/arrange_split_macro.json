@@ -3,11 +3,14 @@
   "category": "single-widget",
   "family": "layout",
   "difficulty": "medium",
-  "prompt": "Set the macro widgets side by side with the 10Y series on the left half and the yield curve on the right half; both should be 10 rows tall starting at row 0.",
+  "prompt": "Set the getting-started widgets side by side with the 10Y series on the left half and the yield curve on the right half; both should be 10 rows tall starting at row 0.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
+      },
+      {
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,30 +26,34 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "DGS10"
+            "company": "GM",
+            "year": "2024"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 18,
             "h": 9
-          }
+          },
+          "widget_uuid": "usage_arrange_split_macro_widget_001"
         },
         {
-          "origin": "Bench Macro",
-          "widget_id": "yield_curve",
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
           "data_args": {},
           "layout": {
             "x": 0,
             "y": 9,
             "w": 18,
             "h": 9
-          }
+          },
+          "widget_uuid": "usage_arrange_split_macro_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_arrange_split_macro_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -57,14 +64,14 @@
   "success": {
     "required_layouts": [
       {
-        "widget_id": "macro_timeseries",
+        "widget_id": "company_performance",
         "x": 0,
         "y": 0,
         "w": 20,
         "h": 10
       },
       {
-        "widget_id": "yield_curve",
+        "widget_id": "test_metric",
         "x": 20,
         "y": 0,
         "w": 20,
@@ -92,7 +99,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "macro_timeseries",
+        "widget_id": "company_performance",
         "x": 0,
         "y": 0,
         "w": 20,
@@ -102,7 +109,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "yield_curve",
+        "widget_id": "test_metric",
         "x": 20,
         "y": 0,
         "w": 20,

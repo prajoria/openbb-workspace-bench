@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "inspect",
   "difficulty": "easy",
-  "prompt": "Use read_widget with widget_id estimate_history to inspect the widget configured with symbol=AAPL, then update_widget so symbol=NVDA.",
+  "prompt": "Use read_widget with widget_id live_grid_data to inspect the widget configured with symbol=AAPL, then update_widget so symbol=TSLA.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,8 +23,8 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "estimate_history",
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
           "data_args": {
             "symbol": "AAPL"
           },
@@ -33,9 +33,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_find_and_fix_misconfigured_estimate_history_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_find_and_fix_misconfigured_estimate_history_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -46,10 +48,10 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         }
       }
     ],
@@ -74,15 +76,15 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_id": "estimate_history"
+        "widget_id": "live_grid_data"
       }
     },
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_find_and_fix_misconfigured_estimate_history_widget_001",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         }
       }
     }

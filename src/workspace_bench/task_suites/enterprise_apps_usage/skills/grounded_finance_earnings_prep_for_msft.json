@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "skills",
   "difficulty": "hard",
-  "prompt": "After calling get_skill_content with slug finance-earnings-prep, follow that workflow by adding the Estimate History widget for MSFT, reading its data, and adding a note that cites the exact key value from the data. Omit dashboard_id when adding the note.",
+  "prompt": "After calling get_skill_content with slug finance-earnings-prep, follow that workflow by adding the Live Grid widget for MSFT, reading its data, and adding a note that cites the exact key value from the data. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "overview",
           "name": "Overview"
         }
-      ]
+      ],
+      "dashboard_id": "usage_grounded_finance_earnings_prep_for_msft_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -43,7 +44,7 @@
       {
         "tool": "get_widget_data",
         "args_contains": {
-          "widget_id": "estimate_history"
+          "widget_id": "live_grid_data"
         }
       }
     ],
@@ -59,8 +60,8 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
           "symbol": "MSFT"
         },
@@ -72,7 +73,7 @@
         "widget_type": "note",
         "data_contains": [
           "MSFT",
-          "3.42",
+          "350.0",
           "surprise drivers"
         ]
       }
@@ -106,21 +107,21 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history"
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
           "symbol": "MSFT"
         }
@@ -129,8 +130,8 @@
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
           "symbol": "MSFT"
         }
@@ -141,7 +142,7 @@
       "args": {
         "widget_type": "note",
         "name": "Skill Note",
-        "data": "MSFT earnings prep: 2026Q1 EPS 3.42; surprise drivers listed."
+        "data": "MSFT earnings prep: live-grid price 350.0; surprise drivers listed."
       }
     }
   ],

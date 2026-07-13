@@ -164,9 +164,8 @@ def core_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> d
         "task_count_at_least_300": total >= 300,
         "fingerprint_unique": len(set(fingerprints)) == total,
         "quota_dashboard_construction": categories["dashboard"] >= total * 0.15,
-        "quota_backend_equities": backends["equities"] >= total * 0.15,
-        "quota_backend_macro": backends["macro"] >= total * 0.15,
-        "quota_backend_portfolio": backends["portfolio"] >= total * 0.15,
+        "quota_backend_getting_started": backends["getting-started"] >= total * 0.15,
+        "quota_backend_widget_examples": backends["widget-examples"] >= total * 0.15,
         "quota_backend_stark_enterprise": backends["stark-enterprise"] >= total * 0.15,
         "quota_difficulty_bands": (
             abs(difficulties["easy"] - total * 0.30) <= total * 0.05

@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "update",
   "difficulty": "medium",
-  "prompt": "Two Price Performance widgets are on this dashboard: one for AAPL and one for MSFT. Only update the MSFT one to NVDA; leave the AAPL widget untouched.",
+  "prompt": "Two Table widget with grouping by cell click widgets are on this dashboard: one for AAPL and one for MSFT. Only update the MSFT one to TSLA; leave the AAPL widget untouched.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,8 +23,8 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
             "symbol": "AAPL"
           },
@@ -33,11 +33,12 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_update_only_the_msft_price_performance_widget_001"
         },
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
             "symbol": "MSFT"
           },
@@ -46,9 +47,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_update_only_the_msft_price_performance_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_update_only_the_msft_price_performance_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -59,8 +62,8 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         },
@@ -68,17 +71,17 @@
         "max_count": 1
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         },
         "min_count": 1,
         "max_count": 1
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "MSFT"
         },
@@ -102,9 +105,9 @@
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_update_only_the_msft_price_performance_widget_002",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         }
       }
     }

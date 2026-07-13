@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "create",
   "difficulty": "medium",
-  "prompt": "Add the Latest News widget for MSFT and place it at exactly x=20, y=0, width 20, height 10. Fetch the widget schema and confirm the symbol value through the parameter options before creating.",
+  "prompt": "Add the Sample News Feed widget for business and place it at exactly x=20, y=0, width 20, height 10. Fetch the widget schema and confirm the symbol value through the parameter options before creating.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_place_latest_news_msft_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -35,10 +36,10 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "MSFT",
+          "category": "business",
           "limit": 5
         },
         "min_count": 1
@@ -46,7 +47,7 @@
     ],
     "required_layouts": [
       {
-        "widget_id": "latest_news",
+        "widget_id": "sample_newsfeed",
         "x": 20,
         "y": 0,
         "w": 20,
@@ -57,8 +58,8 @@
       {
         "tool": "get_params_options",
         "args_contains": {
-          "widget_id": "latest_news",
-          "param_name": "symbol"
+          "widget_id": "sample_newsfeed",
+          "param_name": "category"
         }
       }
     ],
@@ -85,31 +86,31 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news"
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
-        "param_name": "symbol"
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
+        "param_name": "category"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "MSFT",
+          "category": "business",
           "limit": 5
         }
       }
@@ -117,7 +118,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "latest_news",
+        "widget_id": "sample_newsfeed",
         "x": 20,
         "y": 0,
         "w": 20,

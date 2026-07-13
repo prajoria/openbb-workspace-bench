@@ -3,11 +3,11 @@
   "category": "dashboard",
   "family": "resources",
   "difficulty": "medium",
-  "prompt": "Read resource openbb://workspace/specs/widget-types, add Bench Equities/fundamental_metrics with data_args {\"symbol\": \"MSFT\"}, and add a note that mentions valuation.",
+  "prompt": "Read resource openbb://workspace/specs/widget-types, add Getting Started/company_list with data_args {\"symbol\": \"VWAGY\"}, and add a note that mentions valuation.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_skill_build_finance_tearsheet_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -42,10 +43,10 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "MSFT"
+          "companyId": "VWAGY"
         }
       }
     ],
@@ -86,23 +87,23 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics"
+        "origin": "Getting Started",
+        "widget_id": "company_list"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "MSFT"
+          "companyId": "VWAGY"
         }
       }
     },

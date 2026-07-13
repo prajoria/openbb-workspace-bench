@@ -31,7 +31,8 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_ambient_repair_and_brief_risk_stats_widget_001"
         },
         {
           "origin": "Bench Stark Enterprise",
@@ -44,9 +45,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_ambient_repair_and_brief_risk_stats_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_ambient_repair_and_brief_risk_stats_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -116,13 +119,13 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_ambient_repair_and_brief_risk_stats_widget_002"
       }
     },
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_ambient_repair_and_brief_risk_stats_widget_002",
         "data_args": {
           "client": "Atlas Pension"
         }

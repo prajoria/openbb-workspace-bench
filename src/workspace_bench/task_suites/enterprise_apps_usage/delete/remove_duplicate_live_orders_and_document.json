@@ -33,7 +33,8 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_remove_duplicate_live_orders_and_document_widget_001"
         },
         {
           "origin": "Bench Stark Enterprise",
@@ -46,9 +47,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_remove_duplicate_live_orders_and_document_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_remove_duplicate_live_orders_and_document_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -99,7 +102,7 @@
     {
       "tool": "delete_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_remove_duplicate_live_orders_and_document_widget_002"
       }
     },
     {

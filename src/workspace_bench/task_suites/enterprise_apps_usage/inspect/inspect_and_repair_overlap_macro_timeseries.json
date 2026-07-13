@@ -3,11 +3,14 @@
   "category": "repair",
   "family": "inspect",
   "difficulty": "medium",
-  "prompt": "Find the overlapping yield_curve widget after inspecting the dashboard, and move it to x=24, y=0, w=16, h=10.",
+  "prompt": "Find the overlapping test_metric widget after inspecting the dashboard, and move it to x=24, y=0, w=16, h=10.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
+      },
+      {
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,30 +26,34 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "DGS10"
+            "company": "GM",
+            "year": "2024"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 24,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_inspect_and_repair_overlap_macro_timeseries_widget_001"
         },
         {
-          "origin": "Bench Macro",
-          "widget_id": "yield_curve",
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
           "data_args": {},
           "layout": {
             "x": 10,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_inspect_and_repair_overlap_macro_timeseries_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_inspect_and_repair_overlap_macro_timeseries_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -57,14 +64,14 @@
   "success": {
     "required_layouts": [
       {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_inspect_and_repair_overlap_macro_timeseries_widget_001",
         "x": 0,
         "y": 0,
         "w": 24,
         "h": 10
       },
       {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_inspect_and_repair_overlap_macro_timeseries_widget_002",
         "x": 24,
         "y": 0,
         "w": 16,
@@ -98,13 +105,13 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_inspect_and_repair_overlap_macro_timeseries_widget_002"
       }
     },
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_inspect_and_repair_overlap_macro_timeseries_widget_002",
         "x": 24,
         "y": 0,
         "w": 16,

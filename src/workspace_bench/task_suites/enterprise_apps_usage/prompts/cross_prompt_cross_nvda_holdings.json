@@ -3,14 +3,14 @@
   "category": "dashboard",
   "family": "prompts",
   "difficulty": "hard",
-  "prompt": "Get workspace_tool_usage and workspace_session_context, create Prompt Cross NVDA Holdings, build the cross-backend dashboard with Bench Equities/estimate_history with data_args {\"symbol\": \"NVDA\"} and Bench Portfolio/holdings_table, and add a note mentioning NVDA and holdings and current-dashboard.",
+  "prompt": "Get workspace_tool_usage and workspace_session_context, create Prompt Cross TSLA Holdings, build the cross-backend dashboard with Getting Started/live_grid_data with data_args {\"symbol\": \"TSLA\"} and Widget Examples/test_metric, and add a note mentioning TSLA and holdings and current-dashboard.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       },
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -24,7 +24,7 @@
     "add_generative_widget"
   ],
   "success": {
-    "required_dashboard_name_contains": "Prompt Cross NVDA Holdings",
+    "required_dashboard_name_contains": "Prompt Cross TSLA Holdings",
     "required_tool_calls": [
       {
         "tool": "get_workspace_prompt",
@@ -41,15 +41,15 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         }
       },
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "holdings_table",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
       }
     ],
@@ -57,7 +57,7 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "NVDA",
+          "TSLA",
           "holdings",
           "current-dashboard"
         ]
@@ -95,50 +95,50 @@
       "tool": "manage_dashboard",
       "args": {
         "operation": "create",
-        "name": "Prompt Cross NVDA Holdings"
+        "name": "Prompt Cross TSLA Holdings"
       }
     },
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history"
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         }
       }
     },
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Portfolio"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "holdings_table"
+        "origin": "Widget Examples",
+        "widget_id": "test_metric"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "holdings_table",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
       }
     },
@@ -147,7 +147,7 @@
       "args": {
         "widget_type": "note",
         "name": "Prompt Cross Note",
-        "data": "Prompt cross build: NVDA, holdings, current-dashboard."
+        "data": "Prompt cross build: TSLA, holdings, current-dashboard."
       }
     }
   ],

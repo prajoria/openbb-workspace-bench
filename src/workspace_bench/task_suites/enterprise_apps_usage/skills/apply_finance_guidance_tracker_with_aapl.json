@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "skills",
   "difficulty": "hard",
-  "prompt": "Call get_skill_content with slug finance-guidance-tracker. Following that workflow, add the Latest News widget for AAPL to the active dashboard, then add a note that applies the skill's workflow steps to this widget. Omit dashboard_id when adding the note.",
+  "prompt": "Call get_skill_content with slug finance-guidance-tracker. Following that workflow, add the Sample News Feed widget for tech to the active dashboard, then add a note that applies the skill's workflow steps to this widget. Omit dashboard_id when adding the note.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "overview",
           "name": "Overview"
         }
-      ]
+      ],
+      "dashboard_id": "usage_apply_finance_guidance_tracker_with_aapl_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -52,10 +53,10 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "AAPL",
+          "category": "tech",
           "limit": 5
         },
         "min_count": 1
@@ -67,7 +68,7 @@
         "data_contains": [
           "guidance",
           "claims",
-          "AAPL"
+          "tech"
         ]
       }
     ],
@@ -100,23 +101,23 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news"
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "AAPL",
+          "category": "tech",
           "limit": 5
         }
       }
@@ -126,7 +127,7 @@
       "args": {
         "widget_type": "note",
         "name": "Skill Note",
-        "data": "AAPL guidance: guidance; claims."
+        "data": "tech guidance: guidance; claims."
       }
     }
   ],

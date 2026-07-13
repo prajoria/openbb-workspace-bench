@@ -3,11 +3,11 @@
   "category": "repair",
   "family": "inspect",
   "difficulty": "hard",
-  "prompt": "Inspect the dashboard, find the overlapping sector_exposure widget, and move it to x=24, y=0, w=16, h=10.",
+  "prompt": "Inspect the dashboard, find the overlapping live_grid_example widget, and move it to x=24, y=0, w=16, h=10.",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,28 +23,31 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "holdings_table",
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
           "data_args": {},
           "layout": {
             "x": 0,
             "y": 0,
             "w": 24,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_inspect_and_repair_overlap_holdings_table_widget_001"
         },
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "sector_exposure",
+          "origin": "Widget Examples",
+          "widget_id": "live_grid_example",
           "data_args": {},
           "layout": {
             "x": 10,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_inspect_and_repair_overlap_holdings_table_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_inspect_and_repair_overlap_holdings_table_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -55,14 +58,14 @@
   "success": {
     "required_layouts": [
       {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_inspect_and_repair_overlap_holdings_table_widget_001",
         "x": 0,
         "y": 0,
         "w": 24,
         "h": 10
       },
       {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_inspect_and_repair_overlap_holdings_table_widget_002",
         "x": 24,
         "y": 0,
         "w": 16,
@@ -96,13 +99,13 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_inspect_and_repair_overlap_holdings_table_widget_002"
       }
     },
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_inspect_and_repair_overlap_holdings_table_widget_002",
         "x": 24,
         "y": 0,
         "w": 16,

@@ -120,6 +120,22 @@ def summarize(
     }
 
 
+def result_workspace_baseline(payload: dict[str, Any]) -> str:
+    """Return the recorded baseline for one model result payload."""
+
+    recorded = (payload.get("benchmark") or {}).get("workspace_baseline")
+    if isinstance(recorded, str) and recorded:
+        return recorded
+    baselines = {
+        str(row["workspace_baseline"])
+        for row in payload.get("results", [])
+        if isinstance(row, dict) and row.get("workspace_baseline")
+    }
+    if len(baselines) == 1:
+        return baselines.pop()
+    return "mixed" if baselines else "unknown"
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -166,15 +182,22 @@ def main(argv: list[str] | None = None) -> int:
             },
         )
         commits = set(bucket.get("git_commits", []))
+        workspace_baselines = set(bucket.get("workspace_baselines", []))
         for slug, payload in models.items():
             commit = (payload.get("benchmark") or {}).get("git_commit")
             if commit:
                 commits.add(str(commit))
             summary = summarize(payload["results"], task_metadata)
-            bucket["models"][slug] = summary
+            workspace_baseline = result_workspace_baseline(payload)
+            workspace_baselines.add(workspace_baseline)
+            bucket["models"][slug] = {
+                **summary,
+                "workspace_baseline": workspace_baseline,
+            }
             bucket["tasks"] = summary["unique_tasks"]
             bucket["attempts"] = summary["total"]
         bucket["git_commits"] = sorted(commits)
+        bucket["workspace_baselines"] = sorted(workspace_baselines)
 
     current_suites = {
         name: bucket

@@ -7,7 +7,7 @@
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,8 +23,8 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
             "symbol": "MSFT"
           },
@@ -33,11 +33,12 @@
             "y": 2,
             "w": 16,
             "h": 9
-          }
+          },
+          "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_001"
         },
         {
-          "origin": "Bench Equities",
-          "widget_id": "estimate_history",
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
           "data_args": {
             "symbol": "MSFT"
           },
@@ -46,22 +47,25 @@
             "y": 13,
             "w": 16,
             "h": 9
-          }
+          },
+          "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_002"
         },
         {
-          "origin": "Bench Equities",
-          "widget_id": "fundamental_metrics",
+          "origin": "Getting Started",
+          "widget_id": "company_list",
           "data_args": {
-            "symbol": "MSFT"
+            "companyId": "VWAGY"
           },
           "layout": {
             "x": 10,
             "y": 24,
             "w": 16,
             "h": 9
-          }
+          },
+          "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_003"
         }
-      ]
+      ],
+      "dashboard_id": "usage_mixed_equity_three_widget_grid_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -72,21 +76,21 @@
   "success": {
     "required_layouts": [
       {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_001",
         "x": 0,
         "y": 0,
         "w": 40,
         "h": 10
       },
       {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_002",
         "x": 0,
         "y": 10,
         "w": 20,
         "h": 10
       },
       {
-        "widget_uuid": "widget_003",
+        "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_003",
         "x": 20,
         "y": 10,
         "w": 20,
@@ -114,7 +118,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_001",
         "x": 0,
         "y": 0,
         "w": 40,
@@ -124,7 +128,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_002",
         "x": 0,
         "y": 10,
         "w": 20,
@@ -134,7 +138,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_uuid": "widget_003",
+        "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_003",
         "x": 20,
         "y": 10,
         "w": 20,

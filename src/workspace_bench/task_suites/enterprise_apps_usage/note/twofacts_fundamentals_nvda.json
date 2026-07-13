@@ -3,11 +3,11 @@
   "category": "read",
   "family": "note",
   "difficulty": "medium",
-  "prompt": "Add a note on the overview tab with the gross margin and the buyback yield from the data after reviewing the existing NVDA fundamentals widget.",
+  "prompt": "Add a note on the overview tab with Microsoft's company id and exact price from the data after reviewing the existing company-list widget.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,10 +23,10 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "fundamental_metrics",
+          "origin": "Getting Started",
+          "widget_id": "company_list",
           "data_args": {
-            "symbol": "NVDA"
+            "companyId": "GM"
           },
           "tab_id": "overview",
           "layout": {
@@ -34,9 +34,11 @@
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_twofacts_fundamentals_nvda_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_twofacts_fundamentals_nvda_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -50,10 +52,10 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "NVDA"
+          "companyId": "GM"
         },
         "tab_id": "overview",
         "min_count": 1
@@ -63,9 +65,8 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "NVDA",
-          "0.742",
-          "0.004"
+          "VWAGY",
+          "350.5"
         ],
         "tab_id": "overview"
       }
@@ -86,10 +87,10 @@
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "NVDA"
+          "companyId": "GM"
         }
       }
     },
@@ -98,7 +99,7 @@
       "args": {
         "widget_type": "note",
         "name": "Answer Note",
-        "data": "NVDA: gross margin 0.742, buyback yield 0.004."
+        "data": "Microsoft company id VWAGY has price 350.5."
       }
     }
   ],

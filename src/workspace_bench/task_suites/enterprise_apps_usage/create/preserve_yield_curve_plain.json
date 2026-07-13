@@ -3,11 +3,14 @@
   "category": "single-widget",
   "family": "create",
   "difficulty": "medium",
-  "prompt": "Keep the existing Macro Timeseries widget undisturbed and non-overlapped while adding the Yield Curve widget next to it.",
+  "prompt": "Keep the existing Car Manufacturer Performance widget undisturbed and non-overlapped while adding the Metric Widget next to it.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
+      },
+      {
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,19 +26,22 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "DGS10"
+            "company": "GM",
+            "year": "2024"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_preserve_yield_curve_plain_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_preserve_yield_curve_plain_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -50,17 +56,18 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         },
         "min_count": 1,
         "max_count": 1
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {},
         "min_count": 1
       }
@@ -88,28 +95,28 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Macro"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve"
+        "origin": "Widget Examples",
+        "widget_id": "test_metric"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
       }
     },
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "yield_curve",
+        "widget_id": "test_metric",
         "x": 20,
         "y": 0,
         "w": 20,

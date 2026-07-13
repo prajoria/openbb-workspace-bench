@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "create",
   "difficulty": "medium",
-  "prompt": "Place a Fundamental Metrics widget for AAPL at exactly x=0, y=0, width 10, height 8. Fetch the widget schema and confirm the symbol value through the parameter options before creating.",
+  "prompt": "Place a Company List with ID Mapping widget for TM at exactly x=0, y=0, width 10, height 8. Fetch the widget schema and confirm the symbol value through the parameter options before creating.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_place_fundamental_metrics_aapl_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -35,17 +36,17 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "AAPL"
+          "companyId": "TM"
         },
         "min_count": 1
       }
     ],
     "required_layouts": [
       {
-        "widget_id": "fundamental_metrics",
+        "widget_id": "company_list",
         "x": 0,
         "y": 0,
         "w": 10,
@@ -56,8 +57,8 @@
       {
         "tool": "get_params_options",
         "args_contains": {
-          "widget_id": "fundamental_metrics",
-          "param_name": "symbol"
+          "widget_id": "company_list",
+          "param_name": "companyId"
         }
       }
     ],
@@ -84,38 +85,38 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics"
+        "origin": "Getting Started",
+        "widget_id": "company_list"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
-        "param_name": "symbol"
+        "origin": "Getting Started",
+        "widget_id": "company_list",
+        "param_name": "companyId"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "fundamental_metrics",
+        "origin": "Getting Started",
+        "widget_id": "company_list",
         "data_args": {
-          "symbol": "AAPL"
+          "companyId": "TM"
         }
       }
     },
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "fundamental_metrics",
+        "widget_id": "company_list",
         "x": 0,
         "y": 0,
         "w": 10,

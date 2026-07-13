@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "inspect",
   "difficulty": "easy",
-  "prompt": "After calling read_widget with widget_id price_performance, update the widget configured with symbol=MSFT so symbol=AAPL.",
+  "prompt": "After calling read_widget with widget_id table_widget_with_grouping_by_cell_click, update the widget configured with symbol=MSFT so symbol=AAPL.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,8 +23,8 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
             "symbol": "MSFT"
           },
@@ -33,9 +33,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_find_and_fix_misconfigured_price_performance_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_find_and_fix_misconfigured_price_performance_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -46,8 +48,8 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         }
@@ -74,13 +76,13 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_id": "price_performance"
+        "widget_id": "table_widget_with_grouping_by_cell_click"
       }
     },
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_find_and_fix_misconfigured_price_performance_widget_001",
         "data_args": {
           "symbol": "AAPL"
         }

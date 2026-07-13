@@ -3,14 +3,14 @@
   "category": "dashboard",
   "family": "params",
   "difficulty": "hard",
-  "prompt": "Build a dashboard with these two widgets after using parameter options for both: Bench Stark Enterprise/crypto_research_dashboard_derivatives_liquidation_heatmap crypto_asset=ETH; Bench Portfolio/risk_metrics sector=Consumer Staples. Add a note mentioning ETH and options.",
+  "prompt": "Build a dashboard with these two widgets after using parameter options for both: Bench Stark Enterprise/crypto_research_dashboard_derivatives_liquidation_heatmap crypto_asset=ETH; Widget Examples/whitepapers sector=defi. Add a note mentioning ETH and options.",
   "fixtures": {
     "backends": [
       {
-        "name": "portfolio"
+        "name": "stark-enterprise"
       },
       {
-        "name": "stark-enterprise"
+        "name": "widget-examples"
       }
     ]
   },
@@ -24,6 +24,7 @@
           "name": ""
         }
       ],
+      "dashboard_id": "usage_cross_stark_crypto_dashboard_001",
       "widgets": [
         {
           "origin": "Bench Stark Enterprise",
@@ -35,7 +36,8 @@
             "y": 500,
             "w": 8,
             "h": 4
-          }
+          },
+          "widget_uuid": "usage_cross_stark_crypto_widget_001"
         }
       ]
     }
@@ -58,10 +60,13 @@
         }
       },
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
         "data_args": {
-          "sector": "Consumer Staples"
+          "category": "defi",
+          "filenames": [
+            "bitcoin.pdf"
+          ]
         }
       },
       {
@@ -84,8 +89,8 @@
       {
         "tool": "get_params_options",
         "args_contains": {
-          "widget_id": "risk_metrics",
-          "param_name": "sector"
+          "widget_id": "whitepapers",
+          "param_name": "category"
         }
       }
     ],
@@ -152,31 +157,34 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Portfolio"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics"
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "param_name": "sector"
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "param_name": "category"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
         "data_args": {
-          "sector": "Consumer Staples"
+          "category": "defi",
+          "filenames": [
+            "bitcoin.pdf"
+          ]
         }
       }
     },

@@ -3,14 +3,14 @@
   "category": "read",
   "family": "note",
   "difficulty": "hard",
-  "prompt": "Add a note with the portfolio beta and the latest FEDFUNDS value from the data after reviewing the risk metrics and Fed Funds widgets.",
+  "prompt": "Add a note with the returned filename and TM's exact 2024 global sales from the data after reviewing both widgets.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       },
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -26,30 +26,38 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "risk_metrics",
-          "data_args": {},
+          "origin": "Widget Examples",
+          "widget_id": "whitepapers",
+          "data_args": {
+            "filenames": [
+              "bitcoin.pdf"
+            ]
+          },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_crossbackend_book_vs_fed_widget_001"
         },
         {
-          "origin": "Bench Macro",
-          "widget_id": "macro_timeseries",
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
           "data_args": {
-            "series": "FEDFUNDS"
+            "company": "TM",
+            "year": "2024"
           },
           "layout": {
             "x": 20,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_crossbackend_book_vs_fed_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_crossbackend_book_vs_fed_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -60,16 +68,21 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {},
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        },
         "min_count": 1
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "FEDFUNDS"
+          "company": "TM",
+          "year": "2024"
         },
         "min_count": 1
       }
@@ -78,8 +91,9 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "1.18",
-          "4.12"
+          "bitcoin.pdf",
+          "TM",
+          "10.5M"
         ]
       }
     ],
@@ -99,18 +113,23 @@
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "risk_metrics",
-        "data_args": {}
+        "origin": "Widget Examples",
+        "widget_id": "whitepapers",
+        "data_args": {
+          "filenames": [
+            "bitcoin.pdf"
+          ]
+        }
       }
     },
     {
       "tool": "get_widget_data",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "FEDFUNDS"
+          "company": "TM",
+          "year": "2024"
         }
       }
     },
@@ -119,7 +138,7 @@
       "args": {
         "widget_type": "note",
         "name": "Answer Note",
-        "data": "Portfolio beta 1.18 with Fed Funds at 4.12."
+        "data": "Returned whitepaper bitcoin.pdf; TM 2024 global sales 10.5M."
       }
     }
   ],

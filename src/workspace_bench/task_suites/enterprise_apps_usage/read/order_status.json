@@ -35,9 +35,11 @@
             "y": 2,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_order_status_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_order_status_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -90,7 +92,7 @@
       "args": {
         "origin": "Bench Stark Enterprise",
         "widget_id": "execution_desk_blotter_order_status_metrics",
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_order_status_widget_001",
         "data_args": {
           "fund": "Flagship Long/Short",
           "period": "YTD"

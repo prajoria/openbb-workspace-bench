@@ -3,11 +3,11 @@
   "category": "dashboard",
   "family": "navigate",
   "difficulty": "hard",
-  "prompt": "Rename the active dashboard to Desk Hub, add a new tab named News, put the Latest News widget for NVDA on it, and add a note on the same tab mentioning news and desk hub.",
+  "prompt": "Rename the active dashboard to Desk Hub, add a new tab named News, put the Sample News Feed widget for science on it, and add a note on the same tab mentioning news and desk hub.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "overview",
           "name": "Overview"
         }
-      ]
+      ],
+      "dashboard_id": "usage_hub_desk_hub_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -41,10 +42,10 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "NVDA",
+          "category": "science",
           "limit": 5
         },
         "tab_id": "news",
@@ -81,7 +82,7 @@
       "tool": "manage_dashboard",
       "args": {
         "operation": "update",
-        "dashboard_id": "dash_001",
+        "dashboard_id": "usage_hub_desk_hub_dashboard_001",
         "name": "Desk Hub"
       }
     },
@@ -106,23 +107,23 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news"
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "NVDA",
+          "category": "science",
           "limit": 5
         }
       }
@@ -132,7 +133,7 @@
       "args": {
         "widget_type": "note",
         "name": "Hub Note",
-        "data": "Desk hub: news tab tracks the NVDA tape."
+        "data": "Desk hub: news tab tracks the science tape."
       }
     }
   ],

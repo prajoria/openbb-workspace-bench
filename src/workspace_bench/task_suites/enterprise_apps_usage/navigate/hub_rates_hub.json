@@ -3,11 +3,11 @@
   "category": "dashboard",
   "family": "navigate",
   "difficulty": "hard",
-  "prompt": "Set the active dashboard name to Rates Hub, add a new tab named Curve, put the Yield Curve widget on it, and add a note on the same tab mentioning curve and rates hub.",
+  "prompt": "Set the active dashboard name to Rates Hub, add a new tab named Curve, put the Metric Widget on it, and add a note on the same tab mentioning curve and rates hub.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "widget-examples"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "overview",
           "name": "Overview"
         }
-      ]
+      ],
+      "dashboard_id": "usage_hub_rates_hub_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -41,8 +42,8 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {},
         "tab_id": "curve",
         "min_count": 1
@@ -78,7 +79,7 @@
       "tool": "manage_dashboard",
       "args": {
         "operation": "update",
-        "dashboard_id": "dash_001",
+        "dashboard_id": "usage_hub_rates_hub_dashboard_001",
         "name": "Rates Hub"
       }
     },
@@ -103,21 +104,21 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Macro"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve"
+        "origin": "Widget Examples",
+        "widget_id": "test_metric"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
       }
     },

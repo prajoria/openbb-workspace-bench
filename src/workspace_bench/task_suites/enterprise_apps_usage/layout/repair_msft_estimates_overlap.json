@@ -7,7 +7,7 @@
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,8 +23,8 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "estimate_history",
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
           "data_args": {
             "symbol": "MSFT"
           },
@@ -33,22 +33,25 @@
             "y": 0,
             "w": 24,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_repair_msft_estimates_overlap_widget_001"
         },
         {
-          "origin": "Bench Equities",
-          "widget_id": "fundamental_metrics",
+          "origin": "Getting Started",
+          "widget_id": "company_list",
           "data_args": {
-            "symbol": "MSFT"
+            "companyId": "VWAGY"
           },
           "layout": {
             "x": 20,
             "y": 0,
             "w": 16,
             "h": 8
-          }
+          },
+          "widget_uuid": "usage_repair_msft_estimates_overlap_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_repair_msft_estimates_overlap_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -59,14 +62,14 @@
   "success": {
     "required_layouts": [
       {
-        "widget_id": "estimate_history",
+        "widget_id": "live_grid_data",
         "x": 0,
         "y": 0,
         "w": 24,
         "h": 12
       },
       {
-        "widget_id": "fundamental_metrics",
+        "widget_id": "company_list",
         "x": 24,
         "y": 0,
         "w": 16,
@@ -94,7 +97,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "fundamental_metrics",
+        "widget_id": "company_list",
         "x": 24,
         "y": 0,
         "w": 16,

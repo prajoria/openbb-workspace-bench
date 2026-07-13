@@ -20,8 +20,8 @@ def main() -> int:
             {
                 "tool": "create_widget",
                 "args": {
-                    "origin": "Bench Equities",
-                    "widget_id": "price_performance",
+                    "origin": "Getting Started",
+                    "widget_id": "table_widget_with_grouping_by_cell_click",
                     "data_args": {"symbol": "AAPL"},
                 },
             },

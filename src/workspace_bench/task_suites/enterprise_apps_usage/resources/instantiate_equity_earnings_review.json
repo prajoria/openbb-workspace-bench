@@ -3,11 +3,12 @@
   "category": "dashboard",
   "family": "resources",
   "difficulty": "medium",
-  "prompt": "Read the app-builder index resource at openbb://workspace/app-builder/index, then instantiate template equity-earnings-review as a dashboard named Equity Resource Dashboard.",
+  "prompt": "Read the app-builder index resource at openbb://workspace/app-builder/index, then instantiate template onboarding-app-for-devs as a dashboard named Equity Resource Dashboard.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started",
+        "backend_id": "backend_003"
       }
     ]
   },
@@ -23,7 +24,7 @@
       {
         "uri": "openbb://workspace/app-builder/index",
         "data_contains": [
-          "equity-earnings-review"
+          "Onboarding App for Devs"
         ]
       }
     ],
@@ -59,8 +60,8 @@
       "tool": "manage_apps",
       "args": {
         "operation": "instantiate",
-        "backend_id": "backend_001",
-        "template_id": "equity-earnings-review",
+        "backend_id": "backend_003",
+        "app_name": "Onboarding App for Devs",
         "dashboard_name": "Equity Resource Dashboard",
         "activate": true
       }

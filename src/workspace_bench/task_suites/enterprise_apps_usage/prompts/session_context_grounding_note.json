@@ -7,10 +7,10 @@
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       },
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -24,10 +24,11 @@
           "name": ""
         }
       ],
+      "dashboard_id": "usage_session_context_grounding_note_dashboard_001",
       "widgets": [
         {
-          "origin": "Bench Portfolio",
-          "widget_id": "holdings_table",
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
           "data_args": {},
           "tab_id": "",
           "layout": {
@@ -35,7 +36,8 @@
             "y": 500,
             "w": 8,
             "h": 4
-          }
+          },
+          "widget_uuid": "usage_session_context_grounding_note_widget_001"
         }
       ]
     }
@@ -78,8 +80,8 @@
     },
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "holdings_table",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {},
         "tab_id": "",
         "min_count": 1,

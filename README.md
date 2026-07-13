@@ -51,7 +51,7 @@ experimental-v0 `build-openbb-backends` track executes real backend code (12).
   explaining how it is generated and how its tasks are categorized.
 - generated families covering widgets, apps, prompts, resources, skills, delegation, inspection, repair, layout, and backend/app building
 - six archived pre-hardening model baselines with full traces and rollout exports
-- equities, macro, portfolio, Stark enterprise, and Daloopa fixture backends
+- transcription-grade Getting Started, Widget Examples, Stark enterprise, and Daloopa fixture backends
 - simulator-backed Workspace MCP runtime for fast local evals
 - live `workspace-mcp` sidecar smoke runner
 - optional Playwright browser-certification harness with a 30-task realism subset
@@ -564,7 +564,8 @@ uv run --extra live workspace-bench live-parity --task enterprise-apps-usage/rea
 
 The live leg reproduces the task's initial state through public tool calls on
 a dedicated marker-named dashboard, replays the oracle trace with origin
-translation (`"Bench Stark Enterprise" → "Stark Fund"` by default;
+translation (`"Bench Stark Enterprise" → "Stark Fund"`, with identity mappings
+for `Getting Started` and `Widget Examples`, by default;
 `--origin-map` overrides), waits out the bridge's asynchronous write
 application, grades the normalized final state, then deletes everything it
 created and restores the previously active dashboard. Reports land in
@@ -573,6 +574,10 @@ summary, and the live trace. Tasks the live surface cannot reproduce
 faithfully are refused with a reason. Live runs execute in a real user
 workspace: results are validation evidence for grader fidelity, never board
 numbers.
+
+For `enterprise-apps-usage`, 232/300 tasks are eligible for structural parity
+replay. The 68 refused tasks use backend/app mutation or delegation tools that
+the conservative replay does not execute.
 
 ## Browser Certification
 
@@ -632,14 +637,21 @@ passes and its verdicts are reviewed.
 Serve a deterministic fixture as a Workspace backend:
 
 ```bash
-uv run workspace-bench serve-fixture --backend equities --port 9101
+uv run workspace-bench serve-fixture --backend getting-started --port 9106
 ```
 
 The server exposes:
 
 - `GET /widgets.json`
 - `GET /apps.json`
-- widget data endpoints such as `/price-performance?symbol=AAPL&raw=true`
+- widget data endpoints such as `/company_performance?company=TM&year=2024`
+
+`Getting Started` and `Widget Examples` are transcribed from the real
+[OpenBB backend examples repository](https://github.com/OpenBB-finance/backend-examples-for-openbb-workspace),
+including widget ids, names, parameters, data shapes, literal samples, and the
+Getting Started app. The historical `equities`, `macro`, and `portfolio` slugs
+remain CLI lookup aliases for compatibility; they no longer expose separate
+invented data.
 
 The bundled `Bench Stark Enterprise` fixture packages widget and app metadata
 from the [Stark Industries demo](https://github.com/DidierRLopes/stark-industries-demo) into a stable local backend, with seeded

@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from workspace_bench.core.models import Task
-from workspace_bench.core.runner import TaskRunner
+from workspace_bench.core.runner import TaskRunner, tasks_workspace_baseline
 from workspace_bench.core.suite_checks import release_checks_for_suite
 
 
@@ -17,7 +17,9 @@ def validate_tasks(
     if tasks and all(task.code_task is not None for task in tasks):
         from workspace_bench.code_tasks import validate_code_tasks
 
-        return validate_code_tasks(tasks, min_tasks=min_tasks)
+        result = validate_code_tasks(tasks, min_tasks=min_tasks)
+        result["workspace_baseline"] = tasks_workspace_baseline(tasks)
+        return result
     if any(task.code_task is not None for task in tasks):
         raise ValueError("cannot mix real-code and simulated Workspace tasks in one validation")
     runner = TaskRunner()
@@ -61,6 +63,7 @@ def validate_tasks(
             )
     return {
         "passed": not issues,
+        "workspace_baseline": tasks_workspace_baseline(tasks),
         "task_count": len(tasks),
         "oracle_passed": sum(result.grade.passed for result in oracle_results),
         "noop_failed": sum(not result.grade.passed for result in noop_results),

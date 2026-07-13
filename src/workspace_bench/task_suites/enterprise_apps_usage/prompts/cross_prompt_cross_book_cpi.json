@@ -3,14 +3,14 @@
   "category": "dashboard",
   "family": "prompts",
   "difficulty": "hard",
-  "prompt": "Get workspace_tool_usage and workspace_session_context, create Prompt Cross Book CPI, build the cross-backend dashboard with Bench Portfolio/sector_exposure and Bench Macro/macro_timeseries with data_args {\"series\": \"CPIAUCSL\"}, and add a HTML card mentioning sector and CPIAUCSL and current-dashboard.",
+  "prompt": "Get workspace_tool_usage and workspace_session_context, create Prompt Cross Book CPI, build the cross-backend dashboard with Widget Examples/live_grid_example and Getting Started/company_performance with data_args {\"series\": \"F\"}, and add a HTML card mentioning sector and F and current-dashboard.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       },
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -41,15 +41,16 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {}
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "CPIAUCSL"
+          "company": "F",
+          "year": "2024"
         }
       }
     ],
@@ -58,7 +59,7 @@
         "widget_type": "html",
         "data_contains": [
           "sector",
-          "CPIAUCSL",
+          "F",
           "current-dashboard"
         ]
       }
@@ -101,44 +102,45 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Portfolio"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure"
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {}
       }
     },
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Macro"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries"
+        "origin": "Getting Started",
+        "widget_id": "company_performance"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "CPIAUCSL"
+          "company": "F",
+          "year": "2024"
         }
       }
     },
@@ -147,7 +149,7 @@
       "args": {
         "widget_type": "html",
         "name": "Prompt Cross Note",
-        "data": "<section>Prompt cross build: sector, CPIAUCSL, current-dashboard.</section>"
+        "data": "<section>Prompt cross build: sector, F, current-dashboard.</section>"
       }
     }
   ],

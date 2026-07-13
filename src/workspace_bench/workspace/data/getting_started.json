@@ -1075,6 +1075,14 @@
       }
     }
   ],
+  "provenance": {
+    "method": "literal AST transcription",
+    "paths": [
+      "reference-backend/apps.json",
+      "reference-backend/widgets_*.py"
+    ],
+    "source": "https://github.com/OpenBB-finance/backend-examples-for-openbb-workspace"
+  },
   "widgets": {
     "all_forms": {
       "category": "forms",
@@ -1182,6 +1190,28 @@
         {
           "description": "Select a car manufacturer to view details",
           "label": "Manufacturer",
+          "options": [
+            {
+              "label": "Toyota Motor Corporation",
+              "value": "TM"
+            },
+            {
+              "label": "Volkswagen Group",
+              "value": "VWAGY"
+            },
+            {
+              "label": "General Motors",
+              "value": "GM"
+            },
+            {
+              "label": "Ford Motor Company",
+              "value": "F"
+            },
+            {
+              "label": "Tesla Inc.",
+              "value": "TSLA"
+            }
+          ],
           "optionsEndpoint": "/company_options",
           "paramName": "company",
           "type": "endpoint",
@@ -1247,11 +1277,45 @@
         {
           "description": "Company identifier",
           "label": "Company ID",
+          "options": [
+            {
+              "label": "Toyota Motor Corporation",
+              "value": "TM"
+            },
+            {
+              "label": "Volkswagen Group",
+              "value": "VWAGY"
+            },
+            {
+              "label": "General Motors",
+              "value": "GM"
+            },
+            {
+              "label": "Ford Motor Company",
+              "value": "F"
+            },
+            {
+              "label": "Tesla Inc.",
+              "value": "TSLA"
+            }
+          ],
           "optionsEndpoint": "/company_options",
           "paramName": "companyId",
           "show": true,
           "type": "endpoint",
           "value": "AAPL"
+        }
+      ],
+      "sampleData": [
+        {
+          "companyId": "AAPL",
+          "companyName": "Apple Inc.",
+          "price": 150.25
+        },
+        {
+          "companyId": "MSFT",
+          "companyName": "Microsoft Corporation",
+          "price": 350.5
         }
       ],
       "type": "table"
@@ -1295,6 +1359,28 @@
         {
           "description": "Select a car manufacturer to view performance",
           "label": "Manufacturer",
+          "options": [
+            {
+              "label": "Toyota Motor Corporation",
+              "value": "TM"
+            },
+            {
+              "label": "Volkswagen Group",
+              "value": "VWAGY"
+            },
+            {
+              "label": "General Motors",
+              "value": "GM"
+            },
+            {
+              "label": "Ford Motor Company",
+              "value": "F"
+            },
+            {
+              "label": "Tesla Inc.",
+              "value": "TSLA"
+            }
+          ],
           "optionsEndpoint": "/company_options",
           "paramName": "company",
           "type": "endpoint",
@@ -1320,6 +1406,428 @@
           "paramName": "year",
           "type": "text",
           "value": "2024"
+        }
+      ],
+      "sampleDataByArgs": [
+        {
+          "data": [
+            {
+              "change": 0.5,
+              "metric": "Global Sales",
+              "value": "4.02M"
+            },
+            {
+              "change": 25.8,
+              "metric": "EV Sales",
+              "value": "0.31M"
+            },
+            {
+              "change": -0.8,
+              "metric": "Operating Margin",
+              "value": "5.0%"
+            },
+            {
+              "change": 8.9,
+              "metric": "R&D Investment",
+              "value": "$6.24B"
+            }
+          ],
+          "dataArgs": {
+            "company": "F",
+            "year": "2022"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 1.5,
+              "metric": "Global Sales",
+              "value": "4.08M"
+            },
+            {
+              "change": 35.2,
+              "metric": "EV Sales",
+              "value": "0.42M"
+            },
+            {
+              "change": 1.0,
+              "metric": "Operating Margin",
+              "value": "6.0%"
+            },
+            {
+              "change": 13.5,
+              "metric": "R&D Investment",
+              "value": "$7.08B"
+            }
+          ],
+          "dataArgs": {
+            "company": "F",
+            "year": "2023"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 2.8,
+              "metric": "Global Sales",
+              "value": "4.2M"
+            },
+            {
+              "change": 42.5,
+              "metric": "EV Sales",
+              "value": "0.6M"
+            },
+            {
+              "change": 1.5,
+              "metric": "Operating Margin",
+              "value": "7.5%"
+            },
+            {
+              "change": 15.8,
+              "metric": "R&D Investment",
+              "value": "$8.2B"
+            }
+          ],
+          "dataArgs": {
+            "company": "F",
+            "year": "2024"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 0.8,
+              "metric": "Global Sales",
+              "value": "6.43M"
+            },
+            {
+              "change": 28.7,
+              "metric": "EV Sales",
+              "value": "0.39M"
+            },
+            {
+              "change": -0.5,
+              "metric": "Operating Margin",
+              "value": "5.2%"
+            },
+            {
+              "change": 9.8,
+              "metric": "R&D Investment",
+              "value": "$7.13B"
+            }
+          ],
+          "dataArgs": {
+            "company": "GM",
+            "year": "2022"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 2.1,
+              "metric": "Global Sales",
+              "value": "6.57M"
+            },
+            {
+              "change": 38.5,
+              "metric": "EV Sales",
+              "value": "0.54M"
+            },
+            {
+              "change": 1.2,
+              "metric": "Operating Margin",
+              "value": "6.4%"
+            },
+            {
+              "change": 14.2,
+              "metric": "R&D Investment",
+              "value": "$8.15B"
+            }
+          ],
+          "dataArgs": {
+            "company": "GM",
+            "year": "2023"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 3.5,
+              "metric": "Global Sales",
+              "value": "6.8M"
+            },
+            {
+              "change": 48.2,
+              "metric": "EV Sales",
+              "value": "0.8M"
+            },
+            {
+              "change": 1.8,
+              "metric": "Operating Margin",
+              "value": "8.2%"
+            },
+            {
+              "change": 16.5,
+              "metric": "R&D Investment",
+              "value": "$9.5B"
+            }
+          ],
+          "dataArgs": {
+            "company": "GM",
+            "year": "2024"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 1.2,
+              "metric": "Global Sales",
+              "value": "9.67M"
+            },
+            {
+              "change": 25.4,
+              "metric": "EV Sales",
+              "value": "0.61M"
+            },
+            {
+              "change": -0.5,
+              "metric": "Operating Margin",
+              "value": "6.5%"
+            },
+            {
+              "change": 8.7,
+              "metric": "R&D Investment",
+              "value": "$9.6B"
+            }
+          ],
+          "dataArgs": {
+            "company": "TM",
+            "year": "2022"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 3.1,
+              "metric": "Global Sales",
+              "value": "9.98M"
+            },
+            {
+              "change": 35.2,
+              "metric": "EV Sales",
+              "value": "0.82M"
+            },
+            {
+              "change": 0.8,
+              "metric": "Operating Margin",
+              "value": "7.3%"
+            },
+            {
+              "change": 12.5,
+              "metric": "R&D Investment",
+              "value": "$10.8B"
+            }
+          ],
+          "dataArgs": {
+            "company": "TM",
+            "year": "2023"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 5.2,
+              "metric": "Global Sales",
+              "value": "10.5M"
+            },
+            {
+              "change": 45.8,
+              "metric": "EV Sales",
+              "value": "1.2M"
+            },
+            {
+              "change": 1.2,
+              "metric": "Operating Margin",
+              "value": "8.5%"
+            },
+            {
+              "change": 15.3,
+              "metric": "R&D Investment",
+              "value": "$12.5B"
+            }
+          ],
+          "dataArgs": {
+            "company": "TM",
+            "year": "2024"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 21.8,
+              "metric": "Global Sales",
+              "value": "1.21M"
+            },
+            {
+              "change": 21.8,
+              "metric": "EV Sales",
+              "value": "1.21M"
+            },
+            {
+              "change": 1.8,
+              "metric": "Operating Margin",
+              "value": "9.3%"
+            },
+            {
+              "change": 18.5,
+              "metric": "R&D Investment",
+              "value": "$2.93B"
+            }
+          ],
+          "dataArgs": {
+            "company": "TSLA",
+            "year": "2022"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 28.5,
+              "metric": "Global Sales",
+              "value": "1.55M"
+            },
+            {
+              "change": 28.5,
+              "metric": "EV Sales",
+              "value": "1.55M"
+            },
+            {
+              "change": 2.5,
+              "metric": "Operating Margin",
+              "value": "11.8%"
+            },
+            {
+              "change": 22.3,
+              "metric": "R&D Investment",
+              "value": "$3.58B"
+            }
+          ],
+          "dataArgs": {
+            "company": "TSLA",
+            "year": "2023"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 35.2,
+              "metric": "Global Sales",
+              "value": "2.1M"
+            },
+            {
+              "change": 35.2,
+              "metric": "EV Sales",
+              "value": "2.1M"
+            },
+            {
+              "change": 3.7,
+              "metric": "Operating Margin",
+              "value": "15.5%"
+            },
+            {
+              "change": 25.8,
+              "metric": "R&D Investment",
+              "value": "$4.5B"
+            }
+          ],
+          "dataArgs": {
+            "company": "TSLA",
+            "year": "2024"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 1.8,
+              "metric": "Global Sales",
+              "value": "8.5M"
+            },
+            {
+              "change": 32.5,
+              "metric": "EV Sales",
+              "value": "0.69M"
+            },
+            {
+              "change": -0.7,
+              "metric": "Operating Margin",
+              "value": "5.4%"
+            },
+            {
+              "change": 10.8,
+              "metric": "R&D Investment",
+              "value": "$11.1B"
+            }
+          ],
+          "dataArgs": {
+            "company": "VWAGY",
+            "year": "2022"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 3.2,
+              "metric": "Global Sales",
+              "value": "8.78M"
+            },
+            {
+              "change": 42.1,
+              "metric": "EV Sales",
+              "value": "0.98M"
+            },
+            {
+              "change": 0.9,
+              "metric": "Operating Margin",
+              "value": "6.3%"
+            },
+            {
+              "change": 15.2,
+              "metric": "R&D Investment",
+              "value": "$12.8B"
+            }
+          ],
+          "dataArgs": {
+            "company": "VWAGY",
+            "year": "2023"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 4.8,
+              "metric": "Global Sales",
+              "value": "9.2M"
+            },
+            {
+              "change": 52.3,
+              "metric": "EV Sales",
+              "value": "1.5M"
+            },
+            {
+              "change": 1.5,
+              "metric": "Operating Margin",
+              "value": "7.8%"
+            },
+            {
+              "change": 18.5,
+              "metric": "R&D Investment",
+              "value": "$15.2B"
+            }
+          ],
+          "dataArgs": {
+            "company": "VWAGY",
+            "year": "2024"
+          }
         }
       ],
       "type": "table"
@@ -1417,6 +1925,7 @@
       },
       "name": "HTML Widget",
       "raw": true,
+      "sampleData": "\n<!DOCTYPE html>\n<html>\n<head>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;\n            padding: 20px;\n            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n            margin: 0;\n        }\n        .container { max-width: 1200px; margin: 0 auto; }\n        .header { text-align: center; color: white; margin-bottom: 30px; }\n        .stats-grid {\n            display: grid;\n            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n            gap: 20px;\n            margin-bottom: 30px;\n        }\n        .stat-card {\n            background: white;\n            border-radius: 10px;\n            padding: 20px;\n            box-shadow: 0 4px 6px rgba(0,0,0,0.1);\n            transition: transform 0.2s;\n        }\n        .stat-card:hover {\n            transform: translateY(-5px);\n            box-shadow: 0 8px 12px rgba(0,0,0,0.15);\n        }\n        .stat-value { font-size: 2em; font-weight: bold; color: #333; }\n        .stat-label { color: #666; margin-top: 5px; }\n        .stat-change {\n            display: inline-block;\n            padding: 4px 8px;\n            border-radius: 4px;\n            font-size: 0.85em;\n            margin-top: 10px;\n        }\n        .positive { background: #d4edda; color: #155724; }\n        .negative { background: #f8d7da; color: #721c24; }\n        .chart-container {\n            background: white;\n            border-radius: 10px;\n            padding: 20px;\n            margin-bottom: 20px;\n            box-shadow: 0 4px 6px rgba(0,0,0,0.1);\n        }\n        .progress-bar {\n            width: 100%;\n            height: 20px;\n            background: #e0e0e0;\n            border-radius: 10px;\n            overflow: hidden;\n            margin-top: 10px;\n        }\n        .progress-fill {\n            height: 100%;\n            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);\n            transition: width 1s ease;\n            animation: fillAnimation 2s ease-out;\n        }\n        @keyframes fillAnimation { from { width: 0%; } }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <div class=\"header\"><h1>Portfolio Dashboard</h1></div>\n        <div class=\"stats-grid\">\n            <div class=\"stat-card\">\n                <div class=\"stat-value\">$124,563</div>\n                <div class=\"stat-label\">Total Portfolio Value</div>\n                <span class=\"stat-change positive\">+5.4% today</span>\n            </div>\n            <div class=\"stat-card\">\n                <div class=\"stat-value\">42</div>\n                <div class=\"stat-label\">Active Positions</div>\n                <span class=\"stat-change positive\">+3 this week</span>\n            </div>\n            <div class=\"stat-card\">\n                <div class=\"stat-value\">$8,421</div>\n                <div class=\"stat-label\">Daily P&L</div>\n                <span class=\"stat-change positive\">+12.3%</span>\n            </div>\n            <div class=\"stat-card\">\n                <div class=\"stat-value\">0.87</div>\n                <div class=\"stat-label\">Sharpe Ratio</div>\n                <span class=\"stat-change negative\">-0.05</span>\n            </div>\n        </div>\n        <div class=\"chart-container\">\n            <h3>Performance Overview</h3>\n            <div style=\"display: flex; justify-content: space-between; margin-top: 20px;\">\n                <div style=\"flex: 1; margin-right: 20px;\">\n                    <div>Tech Stocks (68%)</div>\n                    <div class=\"progress-bar\"><div class=\"progress-fill\" style=\"width: 68%;\"></div></div>\n                </div>\n                <div style=\"flex: 1;\">\n                    <div>Fixed Income (32%)</div>\n                    <div class=\"progress-bar\"><div class=\"progress-fill\" style=\"width: 32%;\"></div></div>\n                </div>\n            </div>\n        </div>\n        <div class=\"chart-container\">\n            <h3>Recent Activity</h3>\n            <ul style=\"list-style: none; padding: 0;\">\n                <li style=\"padding: 10px 0; border-bottom: 1px solid #eee;\">\n                    <strong>AAPL</strong> - Bought 100 shares @ $182.50\n                    <span style=\"float: right; color: #666;\">2 hours ago</span>\n                </li>\n                <li style=\"padding: 10px 0; border-bottom: 1px solid #eee;\">\n                    <strong>GOOGL</strong> - Sold 50 shares @ $141.20\n                    <span style=\"float: right; color: #666;\">5 hours ago</span>\n                </li>\n                <li style=\"padding: 10px 0;\">\n                    <strong>MSFT</strong> - Bought 75 shares @ $378.80\n                    <span style=\"float: right; color: #666;\">Yesterday</span>\n                </li>\n            </ul>\n        </div>\n    </div>\n    <script>\n        document.querySelectorAll('.stat-card').forEach(card => {\n            card.addEventListener('click', function() {\n                this.style.transform = 'scale(1.05)';\n                setTimeout(() => { this.style.transform = ''; }, 200);\n            });\n        });\n    </script>\n</body>\n</html>\n",
       "type": "html"
     },
     "live_grid_data": {
@@ -1489,6 +1998,83 @@
           "value": "TSLA"
         }
       ],
+      "sampleDataByArgs": [
+        {
+          "data": [
+            {
+              "change": 4.46,
+              "change_percent": 0.03,
+              "prev_close": 145.54,
+              "price": 150.0,
+              "symbol": "AAPL",
+              "volume": 1000000
+            }
+          ],
+          "dataArgs": {
+            "symbol": "AAPL"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 2.5,
+              "change_percent": 0.014,
+              "prev_close": 175.5,
+              "price": 178.0,
+              "symbol": "AMZN",
+              "volume": 900000
+            }
+          ],
+          "dataArgs": {
+            "symbol": "AMZN"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 1.8,
+              "change_percent": 0.013,
+              "prev_close": 138.2,
+              "price": 140.0,
+              "symbol": "GOOGL",
+              "volume": 800000
+            }
+          ],
+          "dataArgs": {
+            "symbol": "GOOGL"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 5.0,
+              "change_percent": 0.014,
+              "prev_close": 345.0,
+              "price": 350.0,
+              "symbol": "MSFT",
+              "volume": 1200000
+            }
+          ],
+          "dataArgs": {
+            "symbol": "MSFT"
+          }
+        },
+        {
+          "data": [
+            {
+              "change": 5.0,
+              "change_percent": 0.021,
+              "prev_close": 240.0,
+              "price": 245.0,
+              "symbol": "TSLA",
+              "volume": 1500000
+            }
+          ],
+          "dataArgs": {
+            "symbol": "TSLA"
+          }
+        }
+      ],
       "type": "live_grid",
       "wsEndpoint": "live_grid_ws"
     },
@@ -1500,6 +2086,7 @@
         "w": 12
       },
       "name": "Markdown Widget",
+      "sampleData": "# Markdown Widget",
       "type": "markdown"
     },
     "markdown_widget_with_boolean": {
@@ -1519,6 +2106,7 @@
           "value": true
         }
       ],
+      "sampleData": "**Toggle:** disabled",
       "type": "markdown"
     },
     "markdown_widget_with_category_and_subcategory": {
@@ -1530,6 +2118,7 @@
         "w": 12
       },
       "name": "Markdown Widget with Category and Subcategory",
+      "sampleData": "Markdown Widget with Category and Subcategory",
       "subCategory": "Markdown Widgets",
       "type": "markdown"
     },
@@ -1666,6 +2255,32 @@
           "description": "Select a stock to analyze",
           "label": "Select Stock",
           "multiSelect": true,
+          "options": [
+            {
+              "extraInfo": {
+                "description": "Technology Company",
+                "rightOfDescription": "NASDAQ"
+              },
+              "label": "Apple Inc.",
+              "value": "AAPL"
+            },
+            {
+              "extraInfo": {
+                "description": "Software Company",
+                "rightOfDescription": "NASDAQ"
+              },
+              "label": "Microsoft Corporation",
+              "value": "MSFT"
+            },
+            {
+              "extraInfo": {
+                "description": "Search Engine",
+                "rightOfDescription": "NASDAQ"
+              },
+              "label": "Google",
+              "value": "GOOGL"
+            }
+          ],
           "optionsEndpoint": "/advanced_dropdown_options",
           "paramName": "stock_picker",
           "style": {
@@ -1941,6 +2556,33 @@
         "w": 5
       },
       "name": "Metric Widget",
+      "sampleData": [
+        {
+          "delta": "12.5",
+          "label": "Total Users",
+          "value": "1,234,567"
+        },
+        {
+          "delta": "-2.3",
+          "label": "Active Sessions",
+          "value": "45,678"
+        },
+        {
+          "delta": "8.9",
+          "label": "Revenue (USD)",
+          "value": "$89,432"
+        },
+        {
+          "delta": "0.0",
+          "label": "Conversion Rate",
+          "value": "3.2%"
+        },
+        {
+          "delta": "3.5",
+          "label": "Avg. Session Duration",
+          "value": "4m 32s"
+        }
+      ],
       "type": "metric"
     },
     "multi_pdf_base64": {
@@ -1968,6 +2610,7 @@
           ]
         }
       ],
+      "sampleData": [],
       "type": "multi_file_viewer"
     },
     "multi_pdf_url": {
@@ -1995,6 +2638,7 @@
           ]
         }
       ],
+      "sampleData": [],
       "type": "multi_file_viewer"
     },
     "omni_python_widget": {
@@ -2100,6 +2744,13 @@
         "w": 20
       },
       "name": "PDF Widget with URL",
+      "sampleData": {
+        "data_format": {
+          "data_type": "pdf",
+          "filename": "Sample.pdf"
+        },
+        "url": "https://openbb-assets.s3.us-east-1.amazonaws.com/testing/sample.pdf"
+      },
       "type": "pdf"
     },
     "plotly_chart": {
@@ -2304,6 +2955,113 @@
           "value": "5"
         }
       ],
+      "sampleDataByArgs": [
+        {
+          "data": [
+            {
+              "author": "Robert Williams",
+              "body": "# Global Markets Rally on Positive Economic Data\n\nStock markets worldwide experienced significant gains today.\n\n## Market Performance\n- S&P 500: +2.3%\n- NASDAQ: +2.8%\n- FTSE 100: +1.9%\n- Nikkei 225: +2.1%",
+              "date": "$currentDate-1h",
+              "excerpt": "Stock markets across the globe surged today...",
+              "title": "Global Markets Rally on Positive Economic Data"
+            },
+            {
+              "author": "Lisa Anderson",
+              "body": "# E-commerce Giant Announces Major Expansion into Southeast Asia\n\nMegaShop today unveiled ambitious plans to expand its presence across Southeast Asia with a $2 billion investment.\n\nThe expansion includes:\n- New fulfillment centers in 5 countries\n- Partnership with 10,000 local merchants\n- Same-day delivery in major metropolitan areas",
+              "date": "$currentDate-4h",
+              "excerpt": "MegaShop reveals plans to invest $2 billion...",
+              "title": "E-commerce Giant Announces Major Expansion into Southeast Asia"
+            }
+          ],
+          "dataArgs": {
+            "category": "business"
+          }
+        },
+        {
+          "data": [
+            {
+              "author": "Dr. Emily Rogers",
+              "body": "# Scientists Discover New Earth-like Exoplanet in Habitable Zone\n\nA team of international astronomers has announced the discovery of an Earth-like exoplanet.\n\n## Planet Characteristics\n- **Size**: 1.2 times Earth's radius\n- **Orbital period**: 385 days\n- **Surface temperature**: Estimated 15°C average\n- **Atmosphere**: Preliminary data suggests presence of water vapor",
+              "date": "$currentDate-3h",
+              "excerpt": "Astronomers using the James Webb Space Telescope have identified...",
+              "title": "Scientists Discover New Earth-like Exoplanet in Habitable Zone"
+            },
+            {
+              "author": "Dr. James Martinez",
+              "body": "# Breakthrough in Cancer Treatment: New Immunotherapy Shows Promise\n\nResearchers at the National Cancer Institute have reported extraordinary results from Phase II clinical trials.\n\n## Trial Results\n- 78% response rate in patients with advanced melanoma\n- 65% showed tumor reduction within 3 months\n- Minimal side effects compared to traditional chemotherapy",
+              "date": "$currentDate-6h",
+              "excerpt": "Clinical trials reveal remarkable success rates...",
+              "title": "Breakthrough in Cancer Treatment: New Immunotherapy Shows Promise"
+            }
+          ],
+          "dataArgs": {
+            "category": "science"
+          }
+        },
+        {
+          "data": [
+            {
+              "author": "Sarah Johnson",
+              "body": "# AI Breakthrough: New Model Achieves Human-Level Reasoning\n\nResearchers at TechLab have unveiled a groundbreaking AI model that demonstrates unprecedented reasoning capabilities.\n\n## Key Features\n- **Advanced reasoning**: The model can solve complex logical problems\n- **Multimodal understanding**: Processes text, images, and audio simultaneously\n- **Energy efficient**: Uses 40% less computational resources than previous models",
+              "date": "$currentDate-2h",
+              "excerpt": "Researchers at TechLab have unveiled a groundbreaking AI model...",
+              "title": "AI Breakthrough: New Model Achieves Human-Level Reasoning"
+            },
+            {
+              "author": "Michael Chen",
+              "body": "# Quantum Computing Startup Raises $500M in Series C Funding\n\nQuantumLeap Technologies announced today that it has secured $500 million in Series C funding.\n\nThe company plans to use the funding to:\n1. Scale manufacturing capabilities\n2. Expand research team by 200 engineers\n3. Develop partnerships with major cloud providers",
+              "date": "$currentDate-5h",
+              "excerpt": "QuantumLeap Technologies secures major funding round...",
+              "title": "Quantum Computing Startup Raises $500M in Series C Funding"
+            }
+          ],
+          "dataArgs": {
+            "category": "tech"
+          }
+        },
+        {
+          "data": [
+            {
+              "author": "Robert Williams",
+              "body": "# Global Markets Rally on Positive Economic Data\n\nStock markets worldwide experienced significant gains today.\n\n## Market Performance\n- S&P 500: +2.3%\n- NASDAQ: +2.8%\n- FTSE 100: +1.9%\n- Nikkei 225: +2.1%",
+              "date": "$currentDate-1h",
+              "excerpt": "Stock markets across the globe surged today...",
+              "title": "Global Markets Rally on Positive Economic Data"
+            },
+            {
+              "author": "Sarah Johnson",
+              "body": "# AI Breakthrough: New Model Achieves Human-Level Reasoning\n\nResearchers at TechLab have unveiled a groundbreaking AI model that demonstrates unprecedented reasoning capabilities.\n\n## Key Features\n- **Advanced reasoning**: The model can solve complex logical problems\n- **Multimodal understanding**: Processes text, images, and audio simultaneously\n- **Energy efficient**: Uses 40% less computational resources than previous models",
+              "date": "$currentDate-2h",
+              "excerpt": "Researchers at TechLab have unveiled a groundbreaking AI model...",
+              "title": "AI Breakthrough: New Model Achieves Human-Level Reasoning"
+            },
+            {
+              "author": "Dr. Emily Rogers",
+              "body": "# Scientists Discover New Earth-like Exoplanet in Habitable Zone\n\nA team of international astronomers has announced the discovery of an Earth-like exoplanet.\n\n## Planet Characteristics\n- **Size**: 1.2 times Earth's radius\n- **Orbital period**: 385 days\n- **Surface temperature**: Estimated 15°C average\n- **Atmosphere**: Preliminary data suggests presence of water vapor",
+              "date": "$currentDate-3h",
+              "excerpt": "Astronomers using the James Webb Space Telescope have identified...",
+              "title": "Scientists Discover New Earth-like Exoplanet in Habitable Zone"
+            },
+            {
+              "author": "Lisa Anderson",
+              "body": "# E-commerce Giant Announces Major Expansion into Southeast Asia\n\nMegaShop today unveiled ambitious plans to expand its presence across Southeast Asia with a $2 billion investment.\n\nThe expansion includes:\n- New fulfillment centers in 5 countries\n- Partnership with 10,000 local merchants\n- Same-day delivery in major metropolitan areas",
+              "date": "$currentDate-4h",
+              "excerpt": "MegaShop reveals plans to invest $2 billion...",
+              "title": "E-commerce Giant Announces Major Expansion into Southeast Asia"
+            },
+            {
+              "author": "Michael Chen",
+              "body": "# Quantum Computing Startup Raises $500M in Series C Funding\n\nQuantumLeap Technologies announced today that it has secured $500 million in Series C funding.\n\nThe company plans to use the funding to:\n1. Scale manufacturing capabilities\n2. Expand research team by 200 engineers\n3. Develop partnerships with major cloud providers",
+              "date": "$currentDate-5h",
+              "excerpt": "QuantumLeap Technologies secures major funding round...",
+              "title": "Quantum Computing Startup Raises $500M in Series C Funding"
+            }
+          ],
+          "dataArgs": {
+            "category": "all"
+          }
+        }
+      ],
       "source": "example",
       "type": "newsfeed"
     },
@@ -2403,6 +3161,168 @@
         "w": 18
       },
       "name": "Stock Sparkline Data - With Min/Max Points",
+      "sampleData": [
+        {
+          "lastPrice": "173.50",
+          "marketCap": 2675150000000,
+          "name": "Apple Inc.",
+          "rateOfChange": [
+            2.1,
+            5.3,
+            -3.2,
+            8.7,
+            1.4,
+            -5.1,
+            12.3,
+            -2.8,
+            4.6,
+            -1.9
+          ],
+          "sector": "Technology",
+          "symbol": "AAPL",
+          "volume": 57807909
+        },
+        {
+          "lastPrice": "2891.70",
+          "marketCap": 1834250000000,
+          "name": "Alphabet Inc. Class A",
+          "rateOfChange": [
+            3.8,
+            -2.1,
+            6.4,
+            2.5,
+            -4.3,
+            9.2,
+            -1.7,
+            5.1,
+            -6.8,
+            3.3
+          ],
+          "sector": "Technology",
+          "symbol": "GOOGL",
+          "volume": 28967543
+        },
+        {
+          "lastPrice": "414.67",
+          "marketCap": 3086420000000,
+          "name": "Microsoft Corporation",
+          "rateOfChange": [
+            1.8,
+            4.2,
+            -2.9,
+            3.5,
+            7.1,
+            -3.4,
+            2.7,
+            -1.2,
+            6.8,
+            0.9
+          ],
+          "sector": "Technology",
+          "symbol": "MSFT",
+          "volume": 32145678
+        },
+        {
+          "lastPrice": "3307.04",
+          "marketCap": 1702830000000,
+          "name": "Amazon.com Inc.",
+          "rateOfChange": [
+            5.2,
+            -3.8,
+            8.1,
+            1.9,
+            -7.3,
+            4.6,
+            -2.1,
+            9.4,
+            -1.5,
+            3.2
+          ],
+          "sector": "Consumer Services",
+          "symbol": "AMZN",
+          "volume": 45678901
+        },
+        {
+          "lastPrice": "248.42",
+          "marketCap": 788960000000,
+          "name": "Tesla Inc.",
+          "rateOfChange": [
+            8.5,
+            -12.3,
+            15.7,
+            -4.2,
+            6.8,
+            -8.9,
+            11.2,
+            -2.6,
+            4.1,
+            -6.7
+          ],
+          "sector": "Consumer Durables",
+          "symbol": "TSLA",
+          "volume": 89123456
+        },
+        {
+          "lastPrice": "485.34",
+          "marketCap": 1247650000000,
+          "name": "Meta Platforms Inc.",
+          "rateOfChange": [
+            6.3,
+            2.8,
+            -9.1,
+            4.7,
+            8.2,
+            -3.5,
+            1.9,
+            -5.4,
+            10.6,
+            -2.3
+          ],
+          "sector": "Technology",
+          "symbol": "META",
+          "volume": 34567890
+        },
+        {
+          "lastPrice": "421.73",
+          "marketCap": 187450000000,
+          "name": "Netflix Inc.",
+          "rateOfChange": [
+            4.1,
+            -6.8,
+            9.3,
+            2.7,
+            -4.9,
+            7.5,
+            -1.8,
+            5.6,
+            -8.2,
+            3.4
+          ],
+          "sector": "Consumer Services",
+          "symbol": "NFLX",
+          "volume": 23456789
+        },
+        {
+          "lastPrice": "875.28",
+          "marketCap": 2158730000000,
+          "name": "NVIDIA Corporation",
+          "rateOfChange": [
+            12.8,
+            -5.4,
+            18.2,
+            7.3,
+            -11.6,
+            9.1,
+            -3.7,
+            16.9,
+            -8.2,
+            5.8
+          ],
+          "sector": "Technology",
+          "symbol": "NVDA",
+          "volume": 67890123
+        }
+      ],
       "subCategory": "sparkline",
       "type": "table"
     },
@@ -2480,6 +3400,108 @@
         "w": 16
       },
       "name": "Trading Volume - Area Sparklines",
+      "sampleData": [
+        {
+          "avgVolume": 50.2,
+          "name": "Apple Inc.",
+          "symbol": "AAPL",
+          "volumeChangePercent": 3.45,
+          "volumeTrend": [
+            48.5,
+            52.1,
+            49.8,
+            51.3,
+            50.9,
+            48.7,
+            53.2,
+            50.2,
+            49.6,
+            51.8,
+            55.3,
+            52.4
+          ]
+        },
+        {
+          "avgVolume": 29.0,
+          "name": "Alphabet Inc. Class A",
+          "symbol": "GOOGL",
+          "volumeChangePercent": 4.21,
+          "volumeTrend": [
+            27.8,
+            29.5,
+            28.2,
+            30.1,
+            29.0,
+            27.6,
+            31.2,
+            29.8,
+            28.5,
+            29.3,
+            32.1,
+            30.4
+          ]
+        },
+        {
+          "avgVolume": 32.1,
+          "name": "Microsoft Corporation",
+          "symbol": "MSFT",
+          "volumeChangePercent": 2.98,
+          "volumeTrend": [
+            31.2,
+            33.1,
+            32.8,
+            30.9,
+            32.1,
+            33.5,
+            31.7,
+            32.4,
+            33.2,
+            32.8,
+            35.2,
+            33.9
+          ]
+        },
+        {
+          "avgVolume": 45.7,
+          "name": "Amazon.com Inc.",
+          "symbol": "AMZN",
+          "volumeChangePercent": 3.15,
+          "volumeTrend": [
+            44.2,
+            47.3,
+            45.1,
+            46.8,
+            45.7,
+            44.9,
+            48.2,
+            46.5,
+            45.3,
+            47.1,
+            49.8,
+            47.6
+          ]
+        },
+        {
+          "avgVolume": 89.1,
+          "name": "Tesla Inc.",
+          "symbol": "TSLA",
+          "volumeChangePercent": 4.32,
+          "volumeTrend": [
+            85.6,
+            92.8,
+            87.9,
+            91.2,
+            89.1,
+            86.4,
+            93.5,
+            88.7,
+            90.8,
+            89.5,
+            96.2,
+            91.8
+          ]
+        }
+      ],
       "subCategory": "sparkline-area",
       "type": "table"
     },
@@ -2559,6 +3581,288 @@
         "w": 16
       },
       "name": "Monthly Performance - Bar Sparklines with Positive/Negative",
+      "sampleData": [
+        {
+          "bestMonth": 3.5,
+          "monthlyReturns": [
+            {
+              "x": "Jan",
+              "y": 2.1
+            },
+            {
+              "x": "Feb",
+              "y": -1.5
+            },
+            {
+              "x": "Mar",
+              "y": 3.2
+            },
+            {
+              "x": "Apr",
+              "y": 1.8
+            },
+            {
+              "x": "May",
+              "y": -0.7
+            },
+            {
+              "x": "Jun",
+              "y": 2.8
+            },
+            {
+              "x": "Jul",
+              "y": 1.2
+            },
+            {
+              "x": "Aug",
+              "y": -2.1
+            },
+            {
+              "x": "Sep",
+              "y": 3.5
+            },
+            {
+              "x": "Oct",
+              "y": 1.7
+            },
+            {
+              "x": "Nov",
+              "y": 2.3
+            },
+            {
+              "x": "Dec",
+              "y": 0.9
+            }
+          ],
+          "name": "Apple Inc.",
+          "symbol": "AAPL",
+          "ytdReturn": 15.23
+        },
+        {
+          "bestMonth": 4.1,
+          "monthlyReturns": [
+            {
+              "x": "Jan",
+              "y": 3.2
+            },
+            {
+              "x": "Feb",
+              "y": 1.8
+            },
+            {
+              "x": "Mar",
+              "y": -1.2
+            },
+            {
+              "x": "Apr",
+              "y": 4.1
+            },
+            {
+              "x": "May",
+              "y": 2.3
+            },
+            {
+              "x": "Jun",
+              "y": -0.9
+            },
+            {
+              "x": "Jul",
+              "y": 3.7
+            },
+            {
+              "x": "Aug",
+              "y": 1.5
+            },
+            {
+              "x": "Sep",
+              "y": -2.3
+            },
+            {
+              "x": "Oct",
+              "y": 2.9
+            },
+            {
+              "x": "Nov",
+              "y": 1.6
+            },
+            {
+              "x": "Dec",
+              "y": 2.1
+            }
+          ],
+          "name": "Alphabet Inc. Class A",
+          "symbol": "GOOGL",
+          "ytdReturn": 18.67
+        },
+        {
+          "bestMonth": 2.7,
+          "monthlyReturns": [
+            {
+              "x": "Jan",
+              "y": 1.8
+            },
+            {
+              "x": "Feb",
+              "y": 2.3
+            },
+            {
+              "x": "Mar",
+              "y": -0.5
+            },
+            {
+              "x": "Apr",
+              "y": 2.1
+            },
+            {
+              "x": "May",
+              "y": 1.2
+            },
+            {
+              "x": "Jun",
+              "y": -1.8
+            },
+            {
+              "x": "Jul",
+              "y": 2.7
+            },
+            {
+              "x": "Aug",
+              "y": 0.9
+            },
+            {
+              "x": "Sep",
+              "y": -1.2
+            },
+            {
+              "x": "Oct",
+              "y": 2.4
+            },
+            {
+              "x": "Nov",
+              "y": 1.3
+            },
+            {
+              "x": "Dec",
+              "y": 1.2
+            }
+          ],
+          "name": "Microsoft Corporation",
+          "symbol": "MSFT",
+          "ytdReturn": 12.45
+        },
+        {
+          "bestMonth": 9.2,
+          "monthlyReturns": [
+            {
+              "x": "Jan",
+              "y": 8.5
+            },
+            {
+              "x": "Feb",
+              "y": -5.2
+            },
+            {
+              "x": "Mar",
+              "y": 6.3
+            },
+            {
+              "x": "Apr",
+              "y": 3.7
+            },
+            {
+              "x": "May",
+              "y": -2.8
+            },
+            {
+              "x": "Jun",
+              "y": 7.9
+            },
+            {
+              "x": "Jul",
+              "y": 4.2
+            },
+            {
+              "x": "Aug",
+              "y": -6.1
+            },
+            {
+              "x": "Sep",
+              "y": 9.2
+            },
+            {
+              "x": "Oct",
+              "y": 5.3
+            },
+            {
+              "x": "Nov",
+              "y": 6.7
+            },
+            {
+              "x": "Dec",
+              "y": 3.2
+            }
+          ],
+          "name": "Tesla Inc.",
+          "symbol": "TSLA",
+          "ytdReturn": 45.67
+        },
+        {
+          "bestMonth": 13.7,
+          "monthlyReturns": [
+            {
+              "x": "Jan",
+              "y": 12.3
+            },
+            {
+              "x": "Feb",
+              "y": -6.8
+            },
+            {
+              "x": "Mar",
+              "y": 9.4
+            },
+            {
+              "x": "Apr",
+              "y": 7.2
+            },
+            {
+              "x": "May",
+              "y": -3.9
+            },
+            {
+              "x": "Jun",
+              "y": 11.6
+            },
+            {
+              "x": "Jul",
+              "y": 8.1
+            },
+            {
+              "x": "Aug",
+              "y": -9.2
+            },
+            {
+              "x": "Sep",
+              "y": 13.7
+            },
+            {
+              "x": "Oct",
+              "y": 9.8
+            },
+            {
+              "x": "Nov",
+              "y": 11.2
+            },
+            {
+              "x": "Dec",
+              "y": 7.9
+            }
+          ],
+          "name": "NVIDIA Corporation",
+          "symbol": "NVDA",
+          "ytdReturn": 87.23
+        }
+      ],
       "subCategory": "sparkline-bar",
       "type": "table"
     },
@@ -2628,6 +3932,136 @@
         "w": 16
       },
       "name": "Quarterly Earnings - Column Sparklines",
+      "sampleData": [
+        {
+          "epsGrowth": 6.85,
+          "marketCap": 2675150000000,
+          "name": "Apple Inc.",
+          "quarterlyEps": [
+            1.46,
+            1.52,
+            1.29,
+            1.88,
+            1.56,
+            1.64,
+            1.39,
+            1.97
+          ],
+          "symbol": "AAPL"
+        },
+        {
+          "epsGrowth": 8.57,
+          "marketCap": 1834250000000,
+          "name": "Alphabet Inc. Class A",
+          "quarterlyEps": [
+            1.05,
+            1.21,
+            1.06,
+            1.33,
+            1.17,
+            1.32,
+            1.15,
+            1.44
+          ],
+          "symbol": "GOOGL"
+        },
+        {
+          "epsGrowth": 6.9,
+          "marketCap": 3086420000000,
+          "name": "Microsoft Corporation",
+          "quarterlyEps": [
+            2.32,
+            2.45,
+            2.51,
+            2.72,
+            2.48,
+            2.62,
+            2.69,
+            2.93
+          ],
+          "symbol": "MSFT"
+        },
+        {
+          "epsGrowth": 25.0,
+          "marketCap": 1702830000000,
+          "name": "Amazon.com Inc.",
+          "quarterlyEps": [
+            0.31,
+            0.42,
+            0.52,
+            0.68,
+            0.45,
+            0.58,
+            0.71,
+            0.85
+          ],
+          "symbol": "AMZN"
+        },
+        {
+          "epsGrowth": 24.66,
+          "marketCap": 788960000000,
+          "name": "Tesla Inc.",
+          "quarterlyEps": [
+            0.73,
+            0.85,
+            1.05,
+            1.19,
+            0.91,
+            1.12,
+            1.29,
+            1.45
+          ],
+          "symbol": "TSLA"
+        },
+        {
+          "epsGrowth": 9.27,
+          "marketCap": 1247650000000,
+          "name": "Meta Platforms Inc.",
+          "quarterlyEps": [
+            2.72,
+            2.88,
+            3.03,
+            3.67,
+            2.98,
+            3.21,
+            3.35,
+            4.01
+          ],
+          "symbol": "META"
+        },
+        {
+          "epsGrowth": 17.5,
+          "marketCap": 187450000000,
+          "name": "Netflix Inc.",
+          "quarterlyEps": [
+            2.8,
+            3.19,
+            3.53,
+            4.28,
+            3.29,
+            3.75,
+            4.13,
+            4.82
+          ],
+          "symbol": "NFLX"
+        },
+        {
+          "epsGrowth": 324.75,
+          "marketCap": 2158730000000,
+          "name": "NVIDIA Corporation",
+          "quarterlyEps": [
+            1.01,
+            1.36,
+            2.48,
+            5.16,
+            4.28,
+            6.12,
+            8.92,
+            12.96
+          ],
+          "symbol": "NVDA"
+        }
+      ],
       "subCategory": "sparkline-column",
       "type": "table"
     },
@@ -2704,6 +4138,160 @@
         "w": 16
       },
       "name": "Stock Price Trends - Line Sparklines with First/Last Points",
+      "sampleData": [
+        {
+          "changePercent": 5.04,
+          "currentPrice": 173.5,
+          "name": "Apple Inc.",
+          "priceTrend": [
+            165.2,
+            167.1,
+            169.3,
+            171.2,
+            168.9,
+            170.4,
+            172.1,
+            173.5,
+            175.2,
+            174.8,
+            173.1,
+            173.5
+          ],
+          "symbol": "AAPL"
+        },
+        {
+          "changePercent": 5.14,
+          "currentPrice": 2891.7,
+          "name": "Alphabet Inc. Class A",
+          "priceTrend": [
+            2750.3,
+            2780.1,
+            2820.4,
+            2865.2,
+            2840.7,
+            2890.1,
+            2910.3,
+            2885.6,
+            2901.4,
+            2889.2,
+            2891.7
+          ],
+          "symbol": "GOOGL"
+        },
+        {
+          "changePercent": 4.13,
+          "currentPrice": 414.67,
+          "name": "Microsoft Corporation",
+          "priceTrend": [
+            398.2,
+            405.3,
+            411.8,
+            406.9,
+            409.7,
+            412.5,
+            408.3,
+            415.1,
+            418.4,
+            416.2,
+            414.7
+          ],
+          "symbol": "MSFT"
+        },
+        {
+          "changePercent": 3.98,
+          "currentPrice": 3307.04,
+          "name": "Amazon.com Inc.",
+          "priceTrend": [
+            3180.5,
+            3210.2,
+            3245.8,
+            3201.3,
+            3230.7,
+            3275.4,
+            3290.1,
+            3315.6,
+            3298.3,
+            3307.0
+          ],
+          "symbol": "AMZN"
+        },
+        {
+          "changePercent": 12.86,
+          "currentPrice": 248.42,
+          "name": "Tesla Inc.",
+          "priceTrend": [
+            220.1,
+            235.6,
+            242.8,
+            238.2,
+            245.9,
+            251.3,
+            246.7,
+            248.4,
+            252.1,
+            249.8,
+            248.4
+          ],
+          "symbol": "TSLA"
+        },
+        {
+          "changePercent": 5.24,
+          "currentPrice": 485.34,
+          "name": "Meta Platforms Inc.",
+          "priceTrend": [
+            461.2,
+            468.9,
+            475.3,
+            472.6,
+            479.1,
+            483.7,
+            481.2,
+            485.3,
+            488.9,
+            486.1,
+            485.3
+          ],
+          "symbol": "META"
+        },
+        {
+          "changePercent": 6.54,
+          "currentPrice": 421.73,
+          "name": "Netflix Inc.",
+          "priceTrend": [
+            395.8,
+            402.3,
+            408.7,
+            405.2,
+            412.6,
+            418.9,
+            415.3,
+            421.7,
+            424.2,
+            422.8,
+            421.7
+          ],
+          "symbol": "NFLX"
+        },
+        {
+          "changePercent": 10.86,
+          "currentPrice": 875.28,
+          "name": "NVIDIA Corporation",
+          "priceTrend": [
+            789.5,
+            812.3,
+            845.6,
+            863.2,
+            851.7,
+            869.4,
+            872.8,
+            875.3,
+            881.2,
+            878.5,
+            875.3
+          ],
+          "symbol": "NVDA"
+        }
+      ],
       "subCategory": "sparkline-line",
       "type": "table"
     },
@@ -2741,6 +4329,28 @@
         "w": 20
       },
       "name": "Table to Chart Widget",
+      "sampleData": [
+        {
+          "category": "Q1",
+          "target": 120000,
+          "value": 125000
+        },
+        {
+          "category": "Q2",
+          "target": 140000,
+          "value": 148000
+        },
+        {
+          "category": "Q3",
+          "target": 160000,
+          "value": 167000
+        },
+        {
+          "category": "Q4",
+          "target": 180000,
+          "value": 195000
+        }
+      ],
       "type": "table"
     },
     "table_to_time_series_widget": {
@@ -2777,6 +4387,38 @@
         "w": 20
       },
       "name": "Table to Time Series Widget",
+      "sampleData": [
+        {
+          "date": "2024-01-01",
+          "profit": 25000,
+          "revenue": 100000
+        },
+        {
+          "date": "2024-02-01",
+          "profit": 28000,
+          "revenue": 115000
+        },
+        {
+          "date": "2024-03-01",
+          "profit": 32000,
+          "revenue": 125000
+        },
+        {
+          "date": "2024-04-01",
+          "profit": 35000,
+          "revenue": 140000
+        },
+        {
+          "date": "2024-05-01",
+          "profit": 40000,
+          "revenue": 155000
+        },
+        {
+          "date": "2024-06-01",
+          "profit": 45000,
+          "revenue": 170000
+        }
+      ],
       "type": "table"
     },
     "table_widget": {
@@ -2787,6 +4429,26 @@
         "w": 12
       },
       "name": "Table Widget",
+      "sampleData": [
+        {
+          "change_1d": 2.5,
+          "change_7d": 5.2,
+          "name": "Ethereum",
+          "tvl": 45000000000
+        },
+        {
+          "change_1d": 1.2,
+          "change_7d": 4.8,
+          "name": "Bitcoin",
+          "tvl": 35000000000
+        },
+        {
+          "change_1d": -0.5,
+          "change_7d": 2.1,
+          "name": "Solana",
+          "tvl": 8000000000
+        }
+      ],
       "type": "table"
     },
     "table_widget_basic_sparklines": {
@@ -2860,6 +4522,71 @@
         "w": 20
       },
       "name": "Table Widget with Basic Sparklines",
+      "sampleData": [
+        {
+          "price_history": [
+            150,
+            155,
+            148,
+            162,
+            158,
+            165,
+            170
+          ],
+          "stock": "AAPL",
+          "volume": [
+            1000,
+            1200,
+            900,
+            1500,
+            1100,
+            1300,
+            1800
+          ]
+        },
+        {
+          "price_history": [
+            2800,
+            2750,
+            2900,
+            2850,
+            2950,
+            3000,
+            2980
+          ],
+          "stock": "GOOGL",
+          "volume": [
+            800,
+            950,
+            700,
+            1200,
+            850,
+            1100,
+            1400
+          ]
+        },
+        {
+          "price_history": [
+            340,
+            335,
+            350,
+            345,
+            360,
+            355,
+            365
+          ],
+          "stock": "MSFT",
+          "volume": [
+            900,
+            1100,
+            800,
+            1300,
+            950,
+            1200,
+            1600
+          ]
+        }
+      ],
       "type": "table"
     },
     "table_widget_custom_formatter": {
@@ -2905,6 +4632,71 @@
         "w": 20
       },
       "name": "Table Widget with Custom Formatter",
+      "sampleData": [
+        {
+          "company": "TechCorp",
+          "profit_loss": [
+            5,
+            -2,
+            8,
+            -3,
+            12,
+            7,
+            -1
+          ],
+          "revenue_growth": [
+            15,
+            8,
+            -5,
+            20,
+            -8,
+            25,
+            18
+          ]
+        },
+        {
+          "company": "DataSoft",
+          "profit_loss": [
+            10,
+            -5,
+            15,
+            -8,
+            20,
+            12,
+            -3
+          ],
+          "revenue_growth": [
+            12,
+            5,
+            8,
+            -2,
+            15,
+            10,
+            22
+          ]
+        },
+        {
+          "company": "CloudInc",
+          "profit_loss": [
+            8,
+            -15,
+            25,
+            12,
+            -5,
+            18,
+            28
+          ],
+          "revenue_growth": [
+            8,
+            -3,
+            12,
+            18,
+            6,
+            14,
+            9
+          ]
+        }
+      ],
       "type": "table"
     },
     "table_widget_from_api_endpoint": {
@@ -2949,6 +4741,23 @@
         "w": 20
       },
       "name": "Table Widget with Column Definitions",
+      "sampleData": [
+        {
+          "change": 2.5,
+          "price": 150.25,
+          "stock": "AAPL"
+        },
+        {
+          "change": -1.2,
+          "price": 2800.75,
+          "stock": "GOOGL"
+        },
+        {
+          "change": 0.8,
+          "price": 340.5,
+          "stock": "MSFT"
+        }
+      ],
       "type": "table"
     },
     "table_widget_with_grouping_by_cell_click": {
@@ -3007,11 +4816,65 @@
           "description": "Select stocks to display",
           "label": "Symbol",
           "multiSelect": false,
+          "options": [
+            {
+              "label": "Apple Inc.",
+              "value": "AAPL"
+            },
+            {
+              "label": "Microsoft Corporation",
+              "value": "MSFT"
+            },
+            {
+              "label": "Google",
+              "value": "GOOGL"
+            },
+            {
+              "label": "Amazon",
+              "value": "AMZN"
+            },
+            {
+              "label": "Tesla",
+              "value": "TSLA"
+            }
+          ],
           "optionsEndpoint": "/get_tickers_list",
           "paramName": "symbol",
           "show": true,
           "type": "endpoint",
           "value": "AAPL"
+        }
+      ],
+      "sampleData": [
+        {
+          "change": 2.5,
+          "price": 150.25,
+          "symbol": "AAPL",
+          "volume": 45000000
+        },
+        {
+          "change": 1.8,
+          "price": 350.5,
+          "symbol": "MSFT",
+          "volume": 32000000
+        },
+        {
+          "change": -0.5,
+          "price": 140.75,
+          "symbol": "GOOGL",
+          "volume": 28000000
+        },
+        {
+          "change": 3.2,
+          "price": 178.25,
+          "symbol": "AMZN",
+          "volume": 38000000
+        },
+        {
+          "change": -1.2,
+          "price": 245.8,
+          "symbol": "TSLA",
+          "volume": 52000000
         }
       ],
       "type": "table"
@@ -3075,6 +4938,38 @@
         "w": 20
       },
       "name": "Table Widget with Hover Card",
+      "sampleData": [
+        {
+          "change_1d": 2.5,
+          "change_7d": 5.2,
+          "name": {
+            "description": "A decentralized, open-source blockchain with smart contract functionality",
+            "foundedDate": "2015-07-30",
+            "value": "Ethereum"
+          },
+          "tvl": 45000000000
+        },
+        {
+          "change_1d": 1.2,
+          "change_7d": 4.8,
+          "name": {
+            "description": "The first decentralized cryptocurrency",
+            "foundedDate": "2009-01-03",
+            "value": "Bitcoin"
+          },
+          "tvl": 35000000000
+        },
+        {
+          "change_1d": -0.5,
+          "change_7d": 2.1,
+          "name": {
+            "description": "A high-performance blockchain supporting builders around the world",
+            "foundedDate": "2020-03-16",
+            "value": "Solana"
+          },
+          "tvl": 8000000000
+        }
+      ],
       "type": "table"
     },
     "table_widget_with_render_functions": {
@@ -3154,6 +5049,26 @@
         "w": 20
       },
       "name": "Table Widget with Render Functions",
+      "sampleData": [
+        {
+          "change_1d": 2.5,
+          "change_7d": 5.2,
+          "name": "Ethereum",
+          "tvl": 45000000000
+        },
+        {
+          "change_1d": 1.2,
+          "change_7d": 4.8,
+          "name": "Bitcoin",
+          "tvl": 35000000000
+        },
+        {
+          "change_1d": -0.5,
+          "change_7d": 2.1,
+          "name": "Solana",
+          "tvl": 8000000000
+        }
+      ],
       "type": "table"
     },
     "table_widget_with_str_filter_param": {
@@ -3171,6 +5086,28 @@
           "paramName": "filter_text",
           "type": "text",
           "value": ""
+        }
+      ],
+      "sampleData": [
+        {
+          "category": "A",
+          "name": "Alpha",
+          "value": 100
+        },
+        {
+          "category": "B",
+          "name": "Beta",
+          "value": 200
+        },
+        {
+          "category": "C",
+          "name": "Charlie",
+          "value": 150
+        },
+        {
+          "category": "A",
+          "name": "Delta",
+          "value": 300
         }
       ],
       "type": "table"
@@ -3246,6 +5183,28 @@
         {
           "description": "The symbol to get details for",
           "label": "Symbol",
+          "options": [
+            {
+              "label": "Apple Inc.",
+              "value": "AAPL"
+            },
+            {
+              "label": "Microsoft Corporation",
+              "value": "MSFT"
+            },
+            {
+              "label": "Google",
+              "value": "GOOGL"
+            },
+            {
+              "label": "Amazon",
+              "value": "AMZN"
+            },
+            {
+              "label": "Tesla",
+              "value": "TSLA"
+            }
+          ],
           "optionsEndpoint": "/get_tickers_list",
           "paramName": "symbol",
           "show": true,

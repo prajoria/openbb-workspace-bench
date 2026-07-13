@@ -3,11 +3,11 @@
   "category": "dashboard",
   "family": "prompts",
   "difficulty": "medium",
-  "prompt": "After fetching workspace_session_context, add a Rates tab, navigate to it, fetch the widget schema, create Bench Macro/yield_curve there, and add a note mentioning Rates on that tab.",
+  "prompt": "After fetching workspace_session_context, add a Rates tab, navigate to it, fetch the widget schema, create Widget Examples/test_metric there, and add a note mentioning Rates on that tab.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "widget-examples"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "overview",
           "name": "Overview"
         }
-      ]
+      ],
+      "dashboard_id": "usage_session_tab_rates_yield_curve_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -47,8 +48,8 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {},
         "tab_id": "rates"
       }
@@ -105,21 +106,21 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Macro"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve"
+        "origin": "Widget Examples",
+        "widget_id": "test_metric"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "yield_curve",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
       }
     },

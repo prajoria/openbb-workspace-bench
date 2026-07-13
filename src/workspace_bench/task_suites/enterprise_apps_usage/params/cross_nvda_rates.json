@@ -3,14 +3,11 @@
   "category": "dashboard",
   "family": "params",
   "difficulty": "hard",
-  "prompt": "Build a dashboard with these two widgets after using parameter options for both: Bench Equities/estimate_history symbol=NVDA; Bench Macro/macro_timeseries series=FEDFUNDS. Add a note mentioning NVDA and FEDFUNDS.",
+  "prompt": "Build a dashboard with these two widgets after using parameter options for both: Getting Started/live_grid_data symbol=TSLA; Getting Started/company_performance series=TM. Add a note mentioning TSLA and TM.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
-      },
-      {
-        "name": "macro"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_cross_nvda_rates_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -37,17 +35,18 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         }
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "FEDFUNDS"
+          "company": "TM",
+          "year": "2024"
         }
       }
     ],
@@ -55,15 +54,15 @@
       {
         "tool": "get_params_options",
         "args_contains": {
-          "widget_id": "estimate_history",
+          "widget_id": "live_grid_data",
           "param_name": "symbol"
         }
       },
       {
         "tool": "get_params_options",
         "args_contains": {
-          "widget_id": "macro_timeseries",
-          "param_name": "series"
+          "widget_id": "company_performance",
+          "param_name": "company"
         }
       }
     ],
@@ -71,8 +70,8 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "NVDA",
-          "FEDFUNDS"
+          "TSLA",
+          "TM"
         ]
       }
     ],
@@ -99,62 +98,57 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history"
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "param_name": "symbol"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         }
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Macro"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries"
+        "origin": "Getting Started",
+        "widget_id": "company_performance"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
-        "param_name": "series"
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
+        "param_name": "company"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "FEDFUNDS"
+          "company": "TM",
+          "year": "2024"
         }
       }
     },
@@ -163,11 +157,11 @@
       "args": {
         "widget_type": "note",
         "name": "Options Note",
-        "data": "Options used: NVDA, FEDFUNDS."
+        "data": "Options used: TSLA, TM."
       }
     }
   ],
   "limits": {
-    "max_turns": 12
+    "max_turns": 11
   }
 }

@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "delete",
   "difficulty": "easy",
-  "prompt": "This dashboard no longer needs the Price Performance widget; remove it.",
+  "prompt": "This dashboard no longer needs the Table widget with grouping by cell click widget; remove it.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,19 +23,21 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "price_performance",
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "data_args": {
-            "symbol": "NVDA"
+            "symbol": "TSLA"
           },
           "layout": {
             "x": 0,
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_remove_price_performance_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_remove_price_performance_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -46,8 +48,8 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {},
         "min_count": 0,
         "max_count": 0
@@ -69,7 +71,7 @@
     {
       "tool": "delete_widget",
       "args": {
-        "widget_uuid": "widget_001"
+        "widget_uuid": "usage_remove_price_performance_widget_001"
       }
     }
   ],

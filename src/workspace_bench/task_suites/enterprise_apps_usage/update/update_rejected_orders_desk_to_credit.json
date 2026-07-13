@@ -34,9 +34,11 @@
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_update_rejected_orders_desk_to_credit_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_update_rejected_orders_desk_to_credit_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -87,7 +89,7 @@
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_update_rejected_orders_desk_to_credit_widget_001",
         "data_args": {
           "desk": "Credit"
         }

@@ -16,7 +16,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_refresh_backend_before_building_post_earnings_checklist_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -19705,7 +19706,7 @@
           ]
         }
       ],
-      "pinned_paths": false
+      "pinned_paths": true
     }
   },
   "oracle_tool_calls": [

@@ -461,6 +461,7 @@ class SimulatedWorkspace:
         layout_spec = spec.get("layout", {})
         self._add_widget_instance(
             dashboard=dashboard,
+            widget_uuid=spec.get("widget_uuid"),
             origin=origin,
             widget_id=widget_id,
             name=schema["name"],
@@ -482,6 +483,7 @@ class SimulatedWorkspace:
         layout_spec = spec.get("layout", {})
         self._add_widget_instance(
             dashboard=dashboard,
+            widget_uuid=spec.get("widget_uuid"),
             origin="generated",
             widget_id=f"generated_{spec.get('widget_type', 'note')}",
             name=str(spec.get("name", spec.get("widget_type", "Generated"))),
@@ -1265,6 +1267,7 @@ class SimulatedWorkspace:
         self,
         *,
         dashboard: Dashboard,
+        widget_uuid: str | None = None,
         origin: str,
         widget_id: str,
         name: str,
@@ -1278,9 +1281,11 @@ class SimulatedWorkspace:
         layout: LayoutItem | None = None,
     ) -> WidgetInstance:
         self._widget_counter += 1
-        widget_uuid = f"widget_{self._widget_counter:03d}"
+        resolved_widget_uuid = widget_uuid or f"widget_{self._widget_counter:03d}"
+        if resolved_widget_uuid in dashboard.widgets:
+            raise ValueError(f"duplicate widget_uuid {resolved_widget_uuid!r}")
         instance = WidgetInstance(
-            widget_uuid=widget_uuid,
+            widget_uuid=resolved_widget_uuid,
             widget_id=widget_id,
             origin=origin,
             name=name,
@@ -1294,7 +1299,7 @@ class SimulatedWorkspace:
             layout=layout or LayoutItem(0, self._next_y(dashboard, ""), 20, 10),
         )
         dashboard.ensure_tab(instance.layout.tab_id, instance.layout.tab_id)
-        dashboard.widgets[widget_uuid] = instance
+        dashboard.widgets[resolved_widget_uuid] = instance
         return instance
 
     def _agent_snapshot(self) -> JsonDict:

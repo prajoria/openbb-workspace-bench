@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "update",
   "difficulty": "easy",
-  "prompt": "Update the existing Estimate History widget from AAPL to NVDA; do not create a new one and leave no widget showing the old value.",
+  "prompt": "Update the existing Live Grid widget from AAPL to TSLA; do not create a new one and leave no widget showing the old value.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,8 +23,8 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "estimate_history",
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
           "data_args": {
             "symbol": "AAPL"
           },
@@ -33,9 +33,11 @@
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_update_estimate_history_aapl_to_nvda_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_update_estimate_history_aapl_to_nvda_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -46,16 +48,16 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         },
         "min_count": 1
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
           "symbol": "AAPL"
         },
@@ -79,15 +81,15 @@
     {
       "tool": "read_widget",
       "args": {
-        "widget_id": "estimate_history"
+        "widget_id": "live_grid_data"
       }
     },
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_update_estimate_history_aapl_to_nvda_widget_001",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         }
       }
     }

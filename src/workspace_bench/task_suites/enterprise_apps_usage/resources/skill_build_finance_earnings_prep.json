@@ -3,11 +3,11 @@
   "category": "dashboard",
   "family": "resources",
   "difficulty": "medium",
-  "prompt": "Read resource openbb://workspace/specs/widgets-json, add Bench Equities/estimate_history with data_args {\"symbol\": \"AAPL\"}, and add a note that mentions surprise drivers.",
+  "prompt": "Read resource openbb://workspace/specs/widgets-json, add Getting Started/live_grid_data with data_args {\"symbol\": \"AAPL\"}, and add a note that mentions surprise drivers.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_skill_build_finance_earnings_prep_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -42,8 +43,8 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
           "symbol": "AAPL"
         }
@@ -86,21 +87,21 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history"
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
           "symbol": "AAPL"
         }

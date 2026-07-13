@@ -3,6 +3,7 @@ from __future__ import annotations
 from workspace_bench.exports import RolloutRecord, build_preference_pairs
 from workspace_bench.exports.metadata import annotate_rollouts
 from workspace_bench.exports.schema import ROLLOUT_SCHEMA_VERSION
+from workspace_bench.core.models import TaskSuiteManifest
 from workspace_bench.exports.sft import format_sft_record
 
 
@@ -42,6 +43,21 @@ def test_annotate_rollouts_adds_benchmark_metadata() -> None:
     assert "benchmark_release_id" not in annotated[0].metadata
     assert annotated[0].metadata["export_schema_version"] == ROLLOUT_SCHEMA_VERSION
     assert annotated[0].metadata["exported_at"] == "2026-06-19T00:00:00Z"
+
+
+def test_annotate_rollouts_records_workspace_baseline() -> None:
+    record = _record("task_1", passed=True, score=1.0, repeat=1)
+    manifest = TaskSuiteManifest(
+        suite_id="usage-test", workspace_baseline="default-v1"
+    )
+
+    annotated = annotate_rollouts(
+        [record],
+        task_suite=manifest,
+        exported_at="2026-06-19T00:00:00Z",
+    )
+
+    assert annotated[0].metadata["task_suite"]["workspace_baseline"] == "default-v1"
 
 
 def _record(

@@ -3,14 +3,14 @@
   "category": "dashboard",
   "family": "create",
   "difficulty": "hard",
-  "prompt": "Add these two widgets to the active dashboard: the Latest News widget from Bench Equities for MSFT and the Sector Exposure widget from Bench Portfolio. Then add a note mentioning MSFT and sector exposure.",
+  "prompt": "Add these two widgets to the active dashboard: the Sample News Feed widget from Getting Started for business and the Live Grid widget from Widget Examples. Then add a note mentioning business and sector exposure.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       },
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,7 +23,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_cross_msft_exposure_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -38,17 +39,17 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "MSFT",
+          "category": "business",
           "limit": 5
         },
         "min_count": 1
       },
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {},
         "min_count": 1
       }
@@ -57,7 +58,7 @@
       {
         "widget_type": "note",
         "data_contains": [
-          "MSFT",
+          "business",
           "sector exposure"
         ]
       }
@@ -85,23 +86,23 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news"
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "MSFT",
+          "category": "business",
           "limit": 5
         }
       }
@@ -109,21 +110,21 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Portfolio"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure"
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "sector_exposure",
+        "origin": "Widget Examples",
+        "widget_id": "live_grid_example",
         "data_args": {}
       }
     },
@@ -132,7 +133,7 @@
       "args": {
         "widget_type": "note",
         "name": "Build Note",
-        "data": "MSFT news next to the book's sector exposure."
+        "data": "business news next to the book's sector exposure."
       }
     }
   ],

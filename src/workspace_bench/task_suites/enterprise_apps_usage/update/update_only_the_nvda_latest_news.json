@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "update",
   "difficulty": "medium",
-  "prompt": "Leave the AAPL Latest News widget untouched, and update only the NVDA Latest News widget to MSFT.",
+  "prompt": "Leave the tech Sample News Feed widget untouched, and update only the science Sample News Feed widget to business.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,10 +23,10 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "latest_news",
+          "origin": "Getting Started",
+          "widget_id": "sample_newsfeed",
           "data_args": {
-            "symbol": "AAPL",
+            "category": "tech",
             "limit": 5
           },
           "layout": {
@@ -34,13 +34,14 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_update_only_the_nvda_latest_news_widget_001"
         },
         {
-          "origin": "Bench Equities",
-          "widget_id": "latest_news",
+          "origin": "Getting Started",
+          "widget_id": "sample_newsfeed",
           "data_args": {
-            "symbol": "NVDA",
+            "category": "science",
             "limit": 5
           },
           "layout": {
@@ -48,9 +49,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_update_only_the_nvda_latest_news_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_update_only_the_nvda_latest_news_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -61,28 +64,28 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "AAPL"
+          "category": "tech"
         },
         "min_count": 1,
         "max_count": 1
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "MSFT"
+          "category": "business"
         },
         "min_count": 1,
         "max_count": 1
       },
       {
-        "origin": "Bench Equities",
-        "widget_id": "latest_news",
+        "origin": "Getting Started",
+        "widget_id": "sample_newsfeed",
         "data_args": {
-          "symbol": "NVDA"
+          "category": "science"
         },
         "min_count": 0,
         "max_count": 0
@@ -104,9 +107,9 @@
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_002",
+        "widget_uuid": "usage_update_only_the_nvda_latest_news_widget_002",
         "data_args": {
-          "symbol": "MSFT"
+          "category": "business"
         }
       }
     }

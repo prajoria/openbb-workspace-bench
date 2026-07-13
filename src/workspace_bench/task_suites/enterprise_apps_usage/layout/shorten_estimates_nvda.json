@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "layout",
   "difficulty": "easy",
-  "prompt": "Keep the NVDA estimates widget's position and width, but reduce its height to 8 rows.",
+  "prompt": "Keep the TSLA estimates widget's position and width, but reduce its height to 8 rows.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,10 +23,10 @@
       ],
       "widgets": [
         {
-          "origin": "Bench Equities",
-          "widget_id": "estimate_history",
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
           "data_args": {
-            "symbol": "NVDA"
+            "symbol": "TSLA"
           },
           "tab_id": "charts",
           "layout": {
@@ -34,9 +34,11 @@
             "y": 0,
             "w": 20,
             "h": 12
-          }
+          },
+          "widget_uuid": "usage_shorten_estimates_nvda_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_shorten_estimates_nvda_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -50,17 +52,17 @@
     ],
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "estimate_history",
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
         "data_args": {
-          "symbol": "NVDA"
+          "symbol": "TSLA"
         },
         "tab_id": "charts"
       }
     ],
     "required_layouts": [
       {
-        "widget_id": "estimate_history",
+        "widget_id": "live_grid_data",
         "tab_id": "charts",
         "x": 0,
         "y": 0,
@@ -89,7 +91,7 @@
     {
       "tool": "update_widget_layout",
       "args": {
-        "widget_id": "estimate_history",
+        "widget_id": "live_grid_data",
         "tab_id": "charts",
         "x": 0,
         "y": 0,

@@ -9,18 +9,21 @@ def test_simulator_runs_schema_first_widget_creation_flow() -> None:
     workspace.reset(backends=(FixtureBackendRef(name="equities"),), initial_state={})
 
     listed = workspace.call_tool(
-        ToolCall("list_available_widgets", {"origin": "Bench Equities"})
+        ToolCall("list_available_widgets", {"origin": "Getting Started"})
     )
     assert listed["ok"] is True
     assert any(
-        widget["widget_id"] == "price_performance"
+        widget["widget_id"] == "table_widget_with_grouping_by_cell_click"
         for widget in listed["data"]["widgets"]
     )
 
     schema = workspace.call_tool(
         ToolCall(
             "get_widget_schema",
-            {"origin": "Bench Equities", "widget_id": "price_performance"},
+            {
+                "origin": "Getting Started",
+                "widget_id": "table_widget_with_grouping_by_cell_click",
+            },
         )
     )
     assert schema["data"]["schema"]["grid_data"]["w"] == 20
@@ -29,8 +32,8 @@ def test_simulator_runs_schema_first_widget_creation_flow() -> None:
         ToolCall(
             "create_widget",
             {
-                "origin": "Bench Equities",
-                "widget_id": "price_performance",
+                "origin": "Getting Started",
+                "widget_id": "table_widget_with_grouping_by_cell_click",
                 "data_args": {"symbol": "AAPL"},
             },
         )
@@ -46,8 +49,8 @@ def test_simulator_rejects_layout_changes_via_update_widget() -> None:
         ToolCall(
             "create_widget",
             {
-                "origin": "Bench Equities",
-                "widget_id": "price_performance",
+                "origin": "Getting Started",
+                "widget_id": "table_widget_with_grouping_by_cell_click",
                 "data_args": {"symbol": "AAPL"},
             },
         )
@@ -57,7 +60,7 @@ def test_simulator_rejects_layout_changes_via_update_widget() -> None:
         ToolCall(
             "update_widget",
             {
-                "widget_id": "price_performance",
+                "widget_id": "table_widget_with_grouping_by_cell_click",
                 "config": {"ui_args": {"x": 0, "w": 20}},
             },
         )
@@ -93,7 +96,7 @@ def test_simulator_reads_workspace_resources_and_prompts() -> None:
     assert index["ok"] is True
     assert index["data"]["uri"] == "openbb://workspace/app-builder/index"
     assert "Workspace app builder index" in index["data"]["text"]
-    assert any(app["template_id"] for app in index["data"]["apps"])
+    assert any(app["name"] == "Onboarding App for Devs" for app in index["data"]["apps"])
     assert skill["ok"] is True
     assert "Earnings prep workflow" in skill["data"]["content"]
     assert skill["data"]["content"] in skill["data"]["text"]

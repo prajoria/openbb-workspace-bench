@@ -21,20 +21,7 @@
           "name": "Overview"
         }
       ],
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "workspace_data_control_center_data_health_latency_and_freshness",
-          "data_args": {},
-          "tab_id": "overview",
-          "layout": {
-            "x": 0,
-            "y": 500,
-            "w": 8,
-            "h": 4
-          }
-        }
-      ]
+      "dashboard_id": "usage_risk_pair_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -61,17 +48,7 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    },
-    "required_widgets": [
-      {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "workspace_data_control_center_data_health_latency_and_freshness",
-        "data_args": {},
-        "tab_id": "overview",
-        "min_count": 1,
-        "max_count": 1
-      }
-    ]
+    }
   },
   "oracle_tool_calls": [
     {

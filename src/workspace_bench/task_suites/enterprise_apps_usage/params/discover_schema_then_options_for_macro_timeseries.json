@@ -3,11 +3,11 @@
   "category": "single-widget",
   "family": "params",
   "difficulty": "easy",
-  "prompt": "Discover the catalog and schema for Bench Macro/macro_timeseries, call get_params_options for series, then create it with series=DGS10.",
+  "prompt": "Discover the catalog and schema for Getting Started/company_performance, call get_params_options for series, then create it with series=GM.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       }
     ]
   },
@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_discover_schema_then_options_for_macro_timeseries_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -33,10 +34,11 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         }
       }
     ],
@@ -44,8 +46,8 @@
       {
         "tool": "get_params_options",
         "args_contains": {
-          "widget_id": "macro_timeseries",
-          "param_name": "series"
+          "widget_id": "company_performance",
+          "param_name": "company"
         }
       }
     ],
@@ -53,7 +55,7 @@
       {
         "tool": "get_params_options",
         "data_contains": [
-          "DGS10"
+          "GM"
         ]
       }
     ],
@@ -80,31 +82,32 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Macro"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries"
+        "origin": "Getting Started",
+        "widget_id": "company_performance"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
-        "param_name": "series"
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
+        "param_name": "company"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         }
       }
     }

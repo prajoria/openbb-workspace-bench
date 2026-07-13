@@ -3,14 +3,14 @@
   "category": "dashboard",
   "family": "create",
   "difficulty": "hard",
-  "prompt": "Build the active dashboard with these two widgets: the Holdings Table widget from Bench Portfolio and the Macro Timeseries widget from Bench Macro for CPIAUCSL. Add a note mentioning holdings and CPIAUCSL.",
+  "prompt": "Build the active dashboard with these two widgets: the Metric Widget from Widget Examples and the Car Manufacturer Performance widget from Getting Started for F. Add a note mentioning holdings and F.",
   "fixtures": {
     "backends": [
       {
-        "name": "macro"
+        "name": "getting-started"
       },
       {
-        "name": "portfolio"
+        "name": "widget-examples"
       }
     ]
   },
@@ -23,7 +23,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_cross_book_inflation_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -38,16 +39,17 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Portfolio",
-        "widget_id": "holdings_table",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {},
         "min_count": 1
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "CPIAUCSL"
+          "company": "F",
+          "year": "2024"
         },
         "min_count": 1
       }
@@ -57,7 +59,7 @@
         "widget_type": "note",
         "data_contains": [
           "holdings",
-          "CPIAUCSL"
+          "F"
         ]
       }
     ],
@@ -84,44 +86,45 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Portfolio"
+        "origin": "Widget Examples"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "holdings_table"
+        "origin": "Widget Examples",
+        "widget_id": "test_metric"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Portfolio",
-        "widget_id": "holdings_table",
+        "origin": "Widget Examples",
+        "widget_id": "test_metric",
         "data_args": {}
       }
     },
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Macro"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries"
+        "origin": "Getting Started",
+        "widget_id": "company_performance"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "CPIAUCSL"
+          "company": "F",
+          "year": "2024"
         }
       }
     },
@@ -130,7 +133,7 @@
       "args": {
         "widget_type": "note",
         "name": "Build Note",
-        "data": "Holdings reviewed against the CPIAUCSL inflation series."
+        "data": "Holdings reviewed against the F inflation series."
       }
     }
   ],

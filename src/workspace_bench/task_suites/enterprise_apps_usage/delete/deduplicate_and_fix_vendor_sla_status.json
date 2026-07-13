@@ -33,7 +33,8 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_deduplicate_and_fix_vendor_sla_status_widget_001"
         },
         {
           "origin": "Bench Stark Enterprise",
@@ -46,9 +47,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_deduplicate_and_fix_vendor_sla_status_widget_002"
         }
-      ]
+      ],
+      "dashboard_id": "usage_deduplicate_and_fix_vendor_sla_status_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -109,13 +112,13 @@
     {
       "tool": "delete_widget",
       "args": {
-        "widget_uuid": "widget_002"
+        "widget_uuid": "usage_deduplicate_and_fix_vendor_sla_status_widget_002"
       }
     },
     {
       "tool": "update_widget",
       "args": {
-        "widget_uuid": "widget_001",
+        "widget_uuid": "usage_deduplicate_and_fix_vendor_sla_status_widget_001",
         "data_args": {
           "period": "MTD"
         }

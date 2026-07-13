@@ -3,14 +3,11 @@
   "category": "dashboard",
   "family": "params",
   "difficulty": "hard",
-  "prompt": "Build a dashboard with these two widgets after using parameter options for both: Bench Equities/price_performance symbol=AAPL; Bench Macro/macro_timeseries series=DGS10. Add a note mentioning AAPL and DGS10.",
+  "prompt": "Build a dashboard with these two widgets after using parameter options for both: Getting Started/table_widget_with_grouping_by_cell_click symbol=AAPL; Getting Started/company_performance series=GM. Add a note mentioning AAPL and GM.",
   "fixtures": {
     "backends": [
       {
-        "name": "equities"
-      },
-      {
-        "name": "macro"
+        "name": "getting-started"
       }
     ]
   },
@@ -23,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_cross_aapl_macro_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -37,17 +35,18 @@
   "success": {
     "required_widgets": [
       {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         }
       },
       {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         }
       }
     ],
@@ -55,15 +54,15 @@
       {
         "tool": "get_params_options",
         "args_contains": {
-          "widget_id": "price_performance",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
           "param_name": "symbol"
         }
       },
       {
         "tool": "get_params_options",
         "args_contains": {
-          "widget_id": "macro_timeseries",
-          "param_name": "series"
+          "widget_id": "company_performance",
+          "param_name": "company"
         }
       }
     ],
@@ -72,7 +71,7 @@
         "widget_type": "note",
         "data_contains": [
           "AAPL",
-          "DGS10"
+          "GM"
         ]
       }
     ],
@@ -99,62 +98,57 @@
     {
       "tool": "list_available_widgets",
       "args": {
-        "origin": "Bench Equities"
+        "origin": "Getting Started"
       }
     },
     {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance"
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "param_name": "symbol"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Equities",
-        "widget_id": "price_performance",
+        "origin": "Getting Started",
+        "widget_id": "table_widget_with_grouping_by_cell_click",
         "data_args": {
           "symbol": "AAPL"
         }
       }
     },
     {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Macro"
-      }
-    },
-    {
       "tool": "get_widget_schema",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries"
+        "origin": "Getting Started",
+        "widget_id": "company_performance"
       }
     },
     {
       "tool": "get_params_options",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
-        "param_name": "series"
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
+        "param_name": "company"
       }
     },
     {
       "tool": "create_widget",
       "args": {
-        "origin": "Bench Macro",
-        "widget_id": "macro_timeseries",
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
         "data_args": {
-          "series": "DGS10"
+          "company": "GM",
+          "year": "2024"
         }
       }
     },
@@ -163,11 +157,11 @@
       "args": {
         "widget_type": "note",
         "name": "Options Note",
-        "data": "Options used: AAPL, DGS10."
+        "data": "Options used: AAPL, GM."
       }
     }
   ],
   "limits": {
-    "max_turns": 12
+    "max_turns": 11
   }
 }

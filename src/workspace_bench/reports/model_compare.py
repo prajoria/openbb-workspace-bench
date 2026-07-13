@@ -62,9 +62,18 @@ from workspace_bench.reports.metrics import (
     task_reliability_matrix,
 )
 from workspace_bench.reports.serialization import grade_summary
-from workspace_bench.core.runner import BUILTIN_TASK_SUITE_ORDER
-from workspace_bench.core.runner import load_builtin_tasks, load_task_directory
-from workspace_bench.core.runner import load_builtin_task_suite_manifest, load_task_suite_manifest
+from workspace_bench.core.runner import (
+    BUILTIN_TASK_SUITE_ORDER,
+    WORKSPACE_BASELINE_CHOICES,
+    load_builtin_task_suite_manifest,
+    load_builtin_tasks,
+    load_task_directory,
+    load_task_suite_manifest,
+    override_task_suite_manifest,
+    override_tasks_workspace_baseline,
+    task_workspace_baseline,
+    tasks_workspace_baseline,
+)
 
 
 INTERACTIVE_PROVIDERS = {"openai", "openrouter", "ollama"}
@@ -189,6 +198,7 @@ def effective_settings(args: argparse.Namespace) -> JsonDict:
         "track": getattr(args, "track", "guided"),
         "release_run": getattr(args, "release_run", False),
         "malformed_retries": getattr(args, "malformed_retries", 2),
+        "workspace_baseline": getattr(args, "workspace_baseline", None),
         "openai_base_url": os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"),
         "openrouter_base_url": os.environ.get(
             "OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1"
@@ -279,6 +289,16 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--task-dir",
         help="Directory of task JSON files. Defaults to the bundled benchmark.",
+    )
+    parser.add_argument(
+        "--workspace-baseline",
+        choices=list(WORKSPACE_BASELINE_CHOICES),
+        default=None,
+        help=(
+            "Workspace baseline override. Defaults to the suite manifest; "
+            "minimal starts with only task fixtures and default-v1 adds the "
+            "versioned default workspace."
+        ),
     )
     parser.add_argument(
         "--task",
@@ -777,21 +797,29 @@ def filter_tasks(
 def load_task_source(args: argparse.Namespace) -> list[Task]:
     task_dir = getattr(args, "task_dir", None)
     if task_dir:
-        return load_task_directory(Path(task_dir))
+        tasks = load_task_directory(Path(task_dir))
+        return override_tasks_workspace_baseline(
+            tasks, getattr(args, "workspace_baseline", None)
+        )
     suite = getattr(args, "suite", "enterprise-apps-usage")
     # `--task <id>` should just work without naming the suite: when ids are
     # given and the suite was left at its default, search every bundled
     # suite for them.
     if getattr(args, "task", None) and suite == "enterprise-apps-usage":
-        tasks: list[Task] = []
+        tasks = []
         seen: set[str] = set()
         for name in BUILTIN_TASK_SUITE_ORDER:
             for task in load_builtin_tasks(name):
                 if task.qualified_id not in seen:
                     seen.add(task.qualified_id)
                     tasks.append(task)
-        return tasks
-    return load_builtin_tasks(suite)
+        return override_tasks_workspace_baseline(
+            tasks, getattr(args, "workspace_baseline", None)
+        )
+    return override_tasks_workspace_baseline(
+        load_builtin_tasks(suite),
+        getattr(args, "workspace_baseline", None),
+    )
 
 
 def print_dry_run(
@@ -829,6 +857,7 @@ def build_run_manifest(
         "harness_git_dirty": harness_metadata().get("git_dirty"),
         "suite_id": benchmark.get("suite_id"),
         "suite_content_sha256": benchmark.get("content_sha256"),
+        "workspace_baseline": benchmark.get("workspace_baseline"),
         "runner": args.runner,
         "track": getattr(args, "track", "guided"),
         "repeats": args.repeats,
@@ -1000,6 +1029,7 @@ def run_adapter(
         "started_at": started_at,
         "finished_at": _utc_now(),
         "harness": harness_metadata(),
+        "workspace_baseline": tasks_workspace_baseline(tasks),
         "settings": settings,
         "requested_cells": total_attempts,
         "completed_cells": len(runs),
@@ -2108,6 +2138,7 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
         f"- Benchmark: `{comparison['benchmark']['name']}`",
         f"- Git commit: `{comparison['benchmark']['git_commit']}`",
         f"- Git dirty: `{comparison['benchmark']['git_dirty']}`",
+        f"- Workspace baseline: `{comparison['benchmark']['workspace_baseline']}`",
         f"- Tasks: `{comparison['task_count']}`",
         f"- Attempts: `{comparison.get('attempt_count', comparison['task_count'])}`",
         f"- Filters: `{json.dumps(comparison['filters'], sort_keys=True)}`",
@@ -2481,6 +2512,7 @@ def agent_run_summary(run: ComparisonRun) -> dict:
         "family": result.task.family,
         "specification_level": result.task.specification_level,
         "difficulty": result.task.difficulty,
+        "workspace_baseline": task_workspace_baseline(result.task),
         "passed": agent_run_passed(run),
         "process_failed": agent_run_process_failed(run),
         "task_failed": not agent_run_process_failed(run) and not result.grade.passed,
@@ -2548,6 +2580,7 @@ def selected_filters(args: argparse.Namespace) -> dict:
         "category": getattr(args, "category", None),
         "suite": getattr(args, "suite", "enterprise-apps-usage"),
         "task_dir": getattr(args, "task_dir", None),
+        "workspace_baseline": getattr(args, "workspace_baseline", None),
     }
 
 
@@ -2556,11 +2589,27 @@ def benchmark_metadata(args: argparse.Namespace) -> dict:
     if getattr(args, "task_dir", None):
         task_suite = load_task_suite_manifest(Path(args.task_dir))
     else:
-        task_suite = load_builtin_task_suite_manifest(getattr(args, "suite", "enterprise-apps-usage"))
+        task_suite = load_builtin_task_suite_manifest(
+            getattr(args, "suite", "enterprise-apps-usage")
+        )
+    task_suite = override_task_suite_manifest(
+        task_suite,
+        getattr(args, "workspace_baseline", None),
+        suite_id=(
+            getattr(args, "suite", "local")
+            if not getattr(args, "task_dir", None)
+            else "local"
+        ),
+    )
     return {
         "name": BENCHMARK_NAME,
         "suite_id": task_suite.suite_id if task_suite else "local",
         "content_sha256": task_suite.content_sha256 if task_suite else None,
+        "workspace_baseline": (
+            task_suite.workspace_baseline
+            if task_suite and task_suite.workspace_baseline is not None
+            else "minimal"
+        ),
         **git_provenance(Path(__file__).resolve()),
     }
 

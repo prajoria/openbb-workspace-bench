@@ -21,6 +21,7 @@
           "name": ""
         }
       ],
+      "dashboard_id": "usage_discover_schema_then_options_for_exposure_summary_dashboard_001",
       "widgets": [
         {
           "origin": "Bench Stark Enterprise",
@@ -32,7 +33,8 @@
             "y": 500,
             "w": 8,
             "h": 4
-          }
+          },
+          "widget_uuid": "usage_discover_schema_then_options_for_exposure_summary_widget_001"
         }
       ]
     }

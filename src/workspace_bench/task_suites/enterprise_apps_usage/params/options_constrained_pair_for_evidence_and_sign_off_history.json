@@ -20,7 +20,8 @@
           "id": "",
           "name": ""
         }
-      ]
+      ],
+      "dashboard_id": "usage_options_constrained_pair_for_evidence_and_sign_off_history_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -122,12 +123,6 @@
       }
     },
     {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Stark Enterprise"
-      }
-    },
-    {
       "tool": "get_widget_schema",
       "args": {
         "origin": "Bench Stark Enterprise",
@@ -164,6 +159,6 @@
     }
   ],
   "limits": {
-    "max_turns": 13
+    "max_turns": 12
   }
 }

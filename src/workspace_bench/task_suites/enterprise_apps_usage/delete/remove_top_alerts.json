@@ -31,9 +31,11 @@
             "y": 0,
             "w": 20,
             "h": 10
-          }
+          },
+          "widget_uuid": "usage_remove_top_alerts_widget_001"
         }
-      ]
+      ],
+      "dashboard_id": "usage_remove_top_alerts_dashboard_001"
     }
   },
   "allowed_tools": [
@@ -67,7 +69,7 @@
     {
       "tool": "delete_widget",
       "args": {
-        "widget_uuid": "widget_001"
+        "widget_uuid": "usage_remove_top_alerts_widget_001"
       }
     }
   ],
