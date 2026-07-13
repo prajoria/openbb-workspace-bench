@@ -10,7 +10,7 @@ Use this checklist before announcing a public Workspace Bench release.
 - [ ] `uv run python scripts/audits/audit_task_identity.py` reports 0 findings across 625 tasks, including the 236/236 build-prompt specification lint.
 - [ ] `uv run python scripts/audits/report_prompt_stats.py` reports unique prompts within the documented 180-word cap plus current specification-level and measured-difficulty statistics.
 - [ ] `uv run python scripts/audits/audit_release_consistency.py` reports zero stale active counts or cross-phase claims across release-facing docs, metadata, CLI text, CI, and tests.
-- [ ] Dual-baseline usage validation passes with release checks green: run `uv run workspace-bench validate --suite enterprise-apps-usage --workspace-baseline minimal --min-tasks 300` and again with `--workspace-baseline default-v1`.
+- [ ] Usage validation passes on the default Workspace with release checks green: `uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 300`.
 - [ ] `uv run workspace-bench validate --suite build-openbb-apps --min-tasks 236` passes with release checks green.
 - [ ] `uv run workspace-bench runtime-probe --suite enterprise-apps-usage --family backends` passes 20/20 tasks.
 - [ ] `uv run workspace-bench runtime-probe --suite build-openbb-apps` passes every runtime-enabled task, including all 12 e2e capstones.

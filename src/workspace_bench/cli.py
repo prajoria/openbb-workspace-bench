@@ -39,7 +39,6 @@ from workspace_bench.core.judge import (
 from workspace_bench.core.provenance import git_provenance
 from workspace_bench.core.runner import (
     BUILTIN_TASK_SUITE_ORDER,
-    WORKSPACE_BASELINE_CHOICES,
     TaskRunner,
     find_task,
     load_builtin_task_suite_manifest,
@@ -47,8 +46,6 @@ from workspace_bench.core.runner import (
     load_task_directory,
     load_task_file,
     load_task_suite_manifest,
-    override_task_suite_manifest,
-    override_tasks_workspace_baseline,
     tasks_workspace_baseline,
 )
 from workspace_bench.reports.oracle_report import (
@@ -390,16 +387,6 @@ def _add_task_collection_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--task-dir",
         help="Directory of task JSON files. Overrides --suite.",
-    )
-    parser.add_argument(
-        "--workspace-baseline",
-        choices=list(WORKSPACE_BASELINE_CHOICES),
-        default=None,
-        help=(
-            "Workspace baseline override. Defaults to the suite manifest; "
-            "minimal starts with only task fixtures and default-v1 adds the "
-            "versioned default workspace."
-        ),
     )
 
 
@@ -990,10 +977,7 @@ def _filtered_tasks(args: argparse.Namespace) -> list[Task]:
 
 def _selected_tasks(args: argparse.Namespace) -> list[Task]:
     if getattr(args, "task_file", None):
-        return override_tasks_workspace_baseline(
-            [_load_task_file_with_suite(Path(args.task_file))],
-            getattr(args, "workspace_baseline", None),
-        )
+        return [_load_task_file_with_suite(Path(args.task_file))]
     tasks = _filtered_tasks(args)
     task_id = getattr(args, "task", None)
     if task_id:
@@ -1005,10 +989,7 @@ def _selected_tasks(args: argparse.Namespace) -> list[Task]:
         ):
             # A task id should just work without naming the suite (mirrors
             # the evaluator): fall back to searching every bundled suite.
-            return override_tasks_workspace_baseline(
-                [find_task(task_id)],
-                getattr(args, "workspace_baseline", None),
-            )
+            return [find_task(task_id)]
         if not tasks:
             raise KeyError(f"Unknown task {task_id!r}")
     return tasks
@@ -1051,10 +1032,7 @@ def _task_collection(args: argparse.Namespace) -> list[Task]:
         tasks = load_builtin_tasks(getattr(args, "suite", "enterprise-apps-usage"))
     else:
         tasks = load_task_directory(Path(task_dir))
-    return override_tasks_workspace_baseline(
-        tasks,
-        getattr(args, "workspace_baseline", None),
-    )
+    return tasks
 
 
 def _task_suite_manifest(args: argparse.Namespace) -> TaskSuiteManifest | None:
@@ -1063,15 +1041,9 @@ def _task_suite_manifest(args: argparse.Namespace) -> TaskSuiteManifest | None:
         manifest = load_builtin_task_suite_manifest(
             getattr(args, "suite", "enterprise-apps-usage")
         )
-        suite_id = getattr(args, "suite", "enterprise-apps-usage")
     else:
         manifest = load_task_suite_manifest(Path(task_dir))
-        suite_id = "local"
-    return override_task_suite_manifest(
-        manifest,
-        getattr(args, "workspace_baseline", None),
-        suite_id=suite_id,
-    )
+    return manifest
 
 
 def _should_redact_task_suite(args: argparse.Namespace) -> bool:

@@ -31,7 +31,6 @@ BUILTIN_TASK_SUITE_ORDER = (
     "build-openbb-apps",
     "smoke",
 )
-WORKSPACE_BASELINE_CHOICES = ("minimal", "default-v1")
 
 
 def _resource_task_files(root: Traversable) -> list[Traversable]:
@@ -158,47 +157,6 @@ def tasks_workspace_baseline(tasks: list[Task]) -> str:
     if len(baselines) == 1:
         return baselines.pop()
     return "mixed"
-
-
-def override_task_suite_manifest(
-    manifest: TaskSuiteManifest | None,
-    workspace_baseline: str | None,
-    *,
-    suite_id: str = "local",
-) -> TaskSuiteManifest | None:
-    """Apply a CLI baseline label to a suite manifest without changing task files."""
-
-    if workspace_baseline is None:
-        return manifest
-    if workspace_baseline not in WORKSPACE_BASELINE_CHOICES:
-        raise ValueError(
-            "workspace baseline must be one of "
-            f"{', '.join(WORKSPACE_BASELINE_CHOICES)}"
-        )
-    resolved = None if workspace_baseline == "minimal" else workspace_baseline
-    if manifest is None:
-        return TaskSuiteManifest(suite_id=suite_id, workspace_baseline=resolved)
-    return replace(manifest, workspace_baseline=resolved)
-
-
-def override_tasks_workspace_baseline(
-    tasks: list[Task], workspace_baseline: str | None
-) -> list[Task]:
-    """Attach an effective baseline manifest to every selected task."""
-
-    if workspace_baseline is None:
-        return tasks
-    return [
-        replace(
-            task,
-            suite=override_task_suite_manifest(
-                task.suite,
-                workspace_baseline,
-                suite_id=task.suite.suite_id if task.suite else "local",
-            ),
-        )
-        for task in tasks
-    ]
 
 
 def find_task(task_id: str, suite: str | None = None, family: str | None = None) -> Task:

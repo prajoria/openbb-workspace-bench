@@ -8,19 +8,13 @@ A pass means the agent can operate a Workspace through the MCP surface: inspect 
 
 ## Workspace baseline
 
-The manifest default is `minimal`, but the same 300 task files are certified with both `minimal` and `default-v1`. This is an ablation axis for measuring how much a crowded, realistic workspace costs a model. The baseline override changes only the in-memory suite manifest; it does not copy or alter task files.
+The suite runs on the default Workspace (`default-v1` in the manifest): Home plus all 23 enterprise apps instantiated and the stark-enterprise, daloopa, getting-started, and widget-examples backends connected, with each task's fixtures seeded on top. Real workspaces are never empty, so every episode starts in a realistic, crowded one; certification (oracle 300/300 pass, no-op 300/300 fail) holds on exactly this state.
 
 ```bash
-uv run workspace-bench validate --suite enterprise-apps-usage --workspace-baseline minimal --min-tasks 300
-uv run workspace-bench validate --suite enterprise-apps-usage --workspace-baseline default-v1 --min-tasks 300
+uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 300
 ```
 
-| Workspace baseline | Oracle | No-op | Status |
-| --- | ---: | ---: | --- |
-| `minimal` | 300/300 pass | 300/300 fail | certified |
-| `default-v1` | 300/300 pass | 300/300 fail | certified |
-
-Model runs use the same `--workspace-baseline` flag. The effective value is recorded in run manifests, result rows, trace metadata, exports, and compiled reports.
+A 2026-07-13 gpt-4.1-mini measurement of the retired minimal-baseline variant scored within one point of the crowded run (54.0% vs 53.0%), so the empty-room mode carried no separate signal and was removed.
 
 ## Generation method
 

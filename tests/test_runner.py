@@ -247,26 +247,6 @@ def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
     assert payload["results"][0]["difficulty"] == "easy"
 
 
-def test_cli_workspace_baseline_override_is_recorded(capsys) -> None:
-    exit_code = main(
-        [
-            "run",
-            "--task",
-            "price_performance_aapl",
-            "--workspace-baseline",
-            "default-v1",
-            "--agent",
-            "oracle",
-            "--json",
-        ]
-    )
-
-    payload = json.loads(capsys.readouterr().out)
-    assert exit_code == 0
-    assert payload["summary"]["workspace_baseline"] == "default-v1"
-    assert payload["results"][0]["workspace_baseline"] == "default-v1"
-
-
 def test_cli_run_resolves_build_suite_task_without_suite_flag(capsys) -> None:
     exit_code = main(
         [

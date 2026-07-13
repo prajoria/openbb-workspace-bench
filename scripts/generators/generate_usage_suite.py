@@ -5654,10 +5654,12 @@ def main() -> None:
     manifest = {
         "suite_id": "enterprise-apps-usage",
         "visibility": "public",
+        "workspace_baseline": "default-v1",
         "content_sha256": task_payload_digest(shipped),
         "description": (
-            "Operating the workspace: 15 MCP-surface families and 300 tasks; "
-            "difficulty is recorded independently as easy, medium, or hard."
+            "Operating the workspace: 15 MCP-surface families and 300 tasks "
+            "on the default Workspace; difficulty is recorded independently "
+            "as easy, medium, or hard."
         ),
     }
     for directory in OUT_DIRS:
