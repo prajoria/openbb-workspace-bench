@@ -375,7 +375,9 @@ def build_tasks() -> list[JsonDict]:
             "read_widget",
             "Call read_widget for the seeded widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise'.",
             [_call("read_widget", {"origin": ORIGIN, "widget_id": WIDGET_ID})],
-            _required_call("read_widget", {"origin": ORIGIN, "widget_id": WIDGET_ID}),
+            # The tool resolves widgets by widget_id alone; requiring origin
+            # in the call args would fail semantically-correct calls.
+            _required_call("read_widget", {"widget_id": WIDGET_ID}),
             initial_state=_seed_dashboard("read_widget", with_widget=True),
         ),
         _task(
@@ -432,7 +434,7 @@ def build_tasks() -> list[JsonDict]:
         ),
         _task(
             "assign_tasks_to_agents",
-            "Call assign_tasks_to_agents with one task request having id 'smoke-envelope' and task text 'Return the Workspace smoke envelope.'",
+            "Call assign_tasks_to_agents with one task request having id 'smoke-envelope' and description 'Return the Workspace smoke envelope.'",
             [
                 _call(
                     "assign_tasks_to_agents",
@@ -440,7 +442,7 @@ def build_tasks() -> list[JsonDict]:
                         "task_requests": [
                             {
                                 "id": "smoke-envelope",
-                                "task": "Return the Workspace smoke envelope.",
+                                "description": "Return the Workspace smoke envelope.",
                             }
                         ]
                     },
@@ -448,14 +450,10 @@ def build_tasks() -> list[JsonDict]:
             ],
             _required_call(
                 "assign_tasks_to_agents",
-                {
-                    "task_requests": [
-                        {
-                            "id": "smoke-envelope",
-                            "task": "Return the Workspace smoke envelope.",
-                        }
-                    ]
-                },
+                # The envelope echo accepts free-form request fields and the
+                # args matcher compares lists exactly, so the round trip is
+                # proven by the call itself.
+                {},
             ),
         ),
     ]

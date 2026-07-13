@@ -45,7 +45,6 @@
       {
         "tool": "read_widget",
         "args_contains": {
-          "origin": "Bench Stark Enterprise",
           "widget_id": "compliance_surveillance_hub_alerts_alert_trend"
         }
       }

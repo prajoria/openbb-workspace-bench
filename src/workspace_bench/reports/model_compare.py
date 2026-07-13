@@ -1227,6 +1227,21 @@ def run_interactive_agent(
         messages.append({"role": "assistant", "content": content})
 
         if action.get("done") is True:
+            # Models often send their final action and done together
+            # ({"done": true, "tool": ..., "args": ...}); honoring done while
+            # discarding the call would silently drop the final mutation, so
+            # execute it first.
+            final_tool = action.get("tool")
+            final_args = action.get("args", {})
+            if isinstance(final_tool, str) and final_tool and isinstance(final_args, dict):
+                final_call = ToolCall(
+                    normalize_tool_name(final_tool),
+                    normalize_interactive_args(final_args, origin_hints),
+                )
+                episode.step(final_call)
+                append_jsonl(
+                    output_path, {"tool": final_call.name, "args": final_call.args}
+                )
             stdout_lines.append(f"done at turn {turn}")
             break
 
@@ -1246,10 +1261,18 @@ def run_interactive_agent(
         call = ToolCall(tool_name, args)
         result = episode.step(call)
         append_jsonl(output_path, {"tool": call.name, "args": call.args})
+        done_rule = None
+        if task.success.required_answer_judgment:
+            done_rule = (
+                "Choose the next single tool call. Return {\"done\": true} only "
+                "after you have called add_generative_widget with a note "
+                "containing your full final answer and exact figures from the "
+                "data you read."
+            )
         messages.append(
             {
                 "role": "user",
-                "content": tool_result_prompt(turn, call, result),
+                "content": tool_result_prompt(turn, call, result, done_rule=done_rule),
             }
         )
     else:
@@ -1382,13 +1405,34 @@ def build_interactive_messages(
             "Task:",
             json.dumps(public_task, indent=2, sort_keys=True),
             "",
+            *(
+                [
+                    "Completion rule for this task: the workspace must hold your "
+                    "final written answer. After reading the relevant widget data, "
+                    "call add_generative_widget with widget_type 'note' containing "
+                    "your full answer with exact figures copied from the data. The "
+                    'task is NOT complete — do not return {"done": true} — until '
+                    "that note exists.",
+                    "",
+                ]
+                if "enterprise-apps-default/" in str(task.get("qualified_id", ""))
+                else []
+            ),
             "Choose the first tool call.",
         ]
     )
     return [{"role": "system", "content": system}, {"role": "user", "content": user}]
 
 
-def tool_result_prompt(turn: int, call: ToolCall, result: JsonDict) -> str:
+def tool_result_prompt(
+    turn: int, call: ToolCall, result: JsonDict, *, done_rule: str | None = None
+) -> str:
+    # The closing line sits in the recency position models weight most, so
+    # judged tasks restate their completion criterion here instead of only in
+    # the opening message.
+    closing = done_rule or (
+        'Choose the next single tool call, or return {"done": true} if the task is complete.'
+    )
     return "\n".join(
         [
             f"Tool result for turn {turn}:",
@@ -1402,7 +1446,7 @@ def tool_result_prompt(turn: int, call: ToolCall, result: JsonDict) -> str:
                 sort_keys=True,
             ),
             "",
-            'Choose the next single tool call, or return {"done": true} if the task is complete.',
+            closing,
         ]
     )
 
@@ -1691,7 +1735,16 @@ def parse_interactive_action(content: str) -> JsonDict:
     if not isinstance(payload, dict):
         raise ValueError("model output must be a JSON object")
     if payload.get("done") is True:
-        return {"done": True}
+        # Preserve a final action sent together with done so the loop can
+        # execute it before terminating.
+        action: JsonDict = {"done": True}
+        if isinstance(payload.get("tool"), str) and payload["tool"]:
+            final_args = payload.get("args", payload.get("arguments", {}))
+            if isinstance(final_args, str):
+                final_args = json.loads(final_args)
+            action["tool"] = payload["tool"]
+            action["args"] = final_args if isinstance(final_args, dict) else {}
+        return action
     if "tool_calls" in payload and isinstance(payload["tool_calls"], list):
         if not payload["tool_calls"]:
             raise ValueError("tool_calls must not be empty")

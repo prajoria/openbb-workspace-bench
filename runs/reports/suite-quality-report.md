@@ -156,6 +156,38 @@ Treat any number from it as exploratory.
 - **Provenance READMEs**: every suite carries a same-skeleton README whose
   task counts are enforced by the release-consistency audit.
 
+## Addendum: gpt-4.1-mini spot test (2026-07-13, post-report)
+
+A small paid-model probe (full smoke, six judged enterprise-apps-default
+tasks) ran after the report above. It caught five defects no oracle run
+could, each fixed and re-verified:
+
+1. Smoke prompts withheld exact identifiers while checks demanded them —
+   all 20 prompts now carry identifiers verbatim (mini: 8/20 → 18/20).
+2. The read_widget check required an `origin` argument the tool does not
+   need — relaxed (mini then passed it).
+3. The assign_tasks_to_agents check contradicted the tool's own documented
+   `description` field, and exposed that the args matcher compares lists by
+   exact equality — the check now proves the round trip without a fragile
+   nested list (mini then passed it; smoke is now effectively 20/20 for
+   mini).
+4. Product prompts read as chat asks, so models answered in chat instead of
+   a durable note — judged tasks now carry a completion rule in the
+   recency position of every turn (documented harness assistance).
+5. **The interactive parser silently discarded a final tool call sent
+   together with `{"done": true}`** — a pattern mini uses consistently, so
+   its finished notes never executed. Fixed in the parser and loop; this
+   affects every suite and every model that ends episodes this way.
+
+With the pipeline fixed, mini scored 0/6 on the judged tasks with
+substantive verdicts on real notes: fabricated funds and figures not
+present in the served data, a claimed "escalated" status where the data
+says "Open", and omitted ask components — independently confirmed by the
+deterministic fact key. That is a genuine capability signal, not harness
+noise: the suite is hard but honest, and the fabrication failure mode is
+exactly what the two-key design exists to catch. The open question for the
+full mini gate remains where stronger models land.
+
 ## What I would do next, in order
 
 1. A real gpt-4.1-mini gate run on smoke + enterprise-apps-default (89

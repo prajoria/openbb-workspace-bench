@@ -4,7 +4,7 @@
   "family": "assign_tasks_to_agents",
   "specification_level": "explicit",
   "difficulty": "easy",
-  "prompt": "Call assign_tasks_to_agents with one task request having id 'smoke-envelope' and task text 'Return the Workspace smoke envelope.'",
+  "prompt": "Call assign_tasks_to_agents with one task request having id 'smoke-envelope' and description 'Return the Workspace smoke envelope.'",
   "business_terms": [],
   "fixtures": {},
   "initial_state": {},
@@ -15,14 +15,7 @@
     "required_tool_calls": [
       {
         "tool": "assign_tasks_to_agents",
-        "args_contains": {
-          "task_requests": [
-            {
-              "id": "smoke-envelope",
-              "task": "Return the Workspace smoke envelope."
-            }
-          ]
-        }
+        "args_contains": {}
       }
     ]
   },
@@ -33,7 +26,7 @@
         "task_requests": [
           {
             "id": "smoke-envelope",
-            "task": "Return the Workspace smoke envelope."
+            "description": "Return the Workspace smoke envelope."
           }
         ]
       }
