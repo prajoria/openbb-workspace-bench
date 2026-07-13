@@ -97,6 +97,10 @@ def test_reference_fixture_registry_uses_slug_and_display_name() -> None:
     assert registry["widget-examples"] is registry["Widget Examples"]
 
 
+@pytest.mark.skipif(
+    not (REPO / "references/openbb-backend-examples").exists(),
+    reason="reference source repo is local-only material; committed catalogs are still validated",
+)
 def test_reference_generator_is_byte_deterministic(tmp_path: Path) -> None:
     generator = _load_generator()
     first_dir = tmp_path / "first"
