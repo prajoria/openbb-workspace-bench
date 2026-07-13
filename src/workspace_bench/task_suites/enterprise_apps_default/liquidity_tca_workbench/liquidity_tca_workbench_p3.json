@@ -79,7 +79,7 @@
    "args": {
     "widget_type": "note",
     "name": "Liquidity & TCA Workbench Note",
-    "data": "Post‑trade review for Goldman Sachs shows a queue score of 24.1 and 119 broker exceptions, while slippage by algo is 53.77. The data does not specify which algorithmic parameter should be adjusted; therefore, a follow‑up with the broker is required to identify the specific setting that needs modification. Until that detail is obtained, no parameter changes can be recommended. Keep the conclusion conditional until the cited open items and missing detail are reconciled."
+    "data": "Goldman Sachs requires broker follow-up because its post-trade queue is Open at 24.1, it has 119 Open exceptions, and its slippage row is Open at 53.77 with a 0.0293 change. Barclays also requires follow-up because its Open slippage score is 77.99 with a -0.0361 change, although no Barclays queue or exception row is provided. The higher displayed slippage score is Barclays at 77.99, but neither row names the algo or defines the score as a cost measure. No parameter names, settings, or outcome mapping are available, so a specific algo parameter change cannot be recommended. Ask both brokers for the algo-level execution detail, and reconcile Goldman Sachs's exception queue before approving any change."
    }
   }
  ],

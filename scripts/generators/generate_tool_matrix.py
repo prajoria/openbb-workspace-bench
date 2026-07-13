@@ -119,8 +119,6 @@ def main() -> None:
         "ground-truth minimal solution path. `allowed_tools` in each task is a",
         "superset (agents may explore), and grader `required_tool_calls` are a subset",
         "(behaviors checked explicitly). Difficulty is the public complexity label.",
-        "The experimental `build-openbb-backends` suite is excluded because it uses",
-        "filesystem/shell coding agents rather than the Workspace MCP tool surface.",
         "",
         "Column key: " + ", ".join(f"`{short}`={tool}" for short, tool in zip(SHORT, TOOLS)),
         "",

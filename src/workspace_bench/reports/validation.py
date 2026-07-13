@@ -14,12 +14,6 @@ def validate_tasks(
 ) -> dict[str, Any]:
     """Validate task loadability, metadata, oracle pass, and noop failure."""
 
-    if tasks and all(task.code_task is not None for task in tasks):
-        from workspace_bench.code_tasks import validate_code_tasks
-
-        return validate_code_tasks(tasks, min_tasks=min_tasks)
-    if any(task.code_task is not None for task in tasks):
-        raise ValueError("cannot mix real-code and simulated Workspace tasks in one validation")
     runner = TaskRunner()
     oracle_results = [runner.run(task, "oracle") for task in tasks]
     noop_results = [runner.run(task, "noop") for task in tasks]
@@ -75,7 +69,7 @@ def task_metadata_issues(task: Task) -> list[str]:
         issues.append("family must be non-empty")
     if task.difficulty not in {"easy", "medium", "hard"}:
         issues.append("difficulty must be one of easy, medium, hard")
-    if not task.oracle_tool_calls and task.code_task is None:
+    if not task.oracle_tool_calls:
         issues.append("oracle_tool_calls must be non-empty")
     if not task.allowed_tools:
         issues.append("allowed_tools must be non-empty")

@@ -51,7 +51,7 @@ This is a harness-fidelity suite, not broad workflow coverage. Pure reads have n
 | `delete_widget` | yes | |
 | `add_generative_widget` | yes | |
 | `read_widget` | yes | |
-| `manage_backends` | no | backend registry mutation and listing are not replayed |
+| `manage_backends` | yes | list operation is read-only against a production workspace |
 | `manage_apps` | no | app registry changes and instantiation are not replayed |
 | `get_skill_content` | yes | |
 | `read_workspace_resource` | yes | |

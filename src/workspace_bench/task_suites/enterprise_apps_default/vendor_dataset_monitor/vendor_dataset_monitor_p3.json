@@ -27,7 +27,7 @@
     "widget_type": "note",
     "data_contains": [
      "escalation",
-     "affected",
+     "datasets",
      "94.16",
      "18.67",
      "24.33"
@@ -118,7 +118,7 @@
    "args": {
     "widget_type": "note",
     "name": "Vendor & Dataset Monitor Note",
-    "data": "An escalation has been sent to FactSet regarding the open incident, with an incident log score of 18.67 and a blast radius score of 24.33. The affected apps score is 94.16, indicating that almost all relevant applications are impacted by this issue. The data owner must identify which datasets are affected and document remediation steps. Validation should be re‑run after remediation to ensure the incident can be closed. Until validation passes, the incident remains open."
+    "data": "The FactSet escalation remains Open, with an Incident Log score of 18.67 and a Blast Radius score of 24.33. The retrieved rows contain no dataset names or identifiers, so the specific affected datasets cannot be listed; the data owner must provide the feed-to-dataset inventory. App impact is Open at 94.16, but that row also supplies no application names, so it does not establish which apps are affected. Validation Errors is Open at 59.16 and Row Count Drift is Open at 188, providing the available remediation evidence. Owner actions are to identify the affected datasets and apps, correct the validation and row-count issues, rerun validation, and document the result before closing the incident."
    }
   }
  ],

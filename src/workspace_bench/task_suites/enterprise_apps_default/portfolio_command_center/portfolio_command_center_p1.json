@@ -79,7 +79,7 @@
    "args": {
     "widget_type": "note",
     "name": "Portfolio Command Center Note",
-    "data": "The overnight PM note cannot report overnight P&L because the served rows do not provide an overnight return or profit-and-loss figure. Flagship Long/Short has an open sector exposure of 0.0389, but the filtered data do not show comparable active exposures, so a largest exposure cannot be identified without security- or sector-level peers. Limit utilization is 85.25, so limit pressure should be reviewed before acting. The trade-ideas score is 62.35, and trade actions should remain conditional until the underlying ideas and limit headroom are reviewed. This keeps overnight results, exposures, limit pressure, and action urgency explicit without overstating the filtered data."
+    "data": "The served rows contain no overnight return or P&L field, so overnight P&L cannot be reported. The two Open active exposures are 0.0389 and 0.0742, making 0.0742 the largest displayed exposure. Limit-utilization scores are 85.25 and 1.89, so 85.25 is the higher displayed pressure reading, although no limit threshold is supplied. Trade-idea scores are 62.35 and 74.79; by score, the 74.79 row ranks first in urgency and the 62.35 row ranks second. Because neither row names a trade action, map those ranked readings to actual trades and available limit headroom before execution."
    }
   }
  ],

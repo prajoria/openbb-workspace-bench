@@ -167,10 +167,6 @@ def main(argv: list[str] | None = None) -> int:
     browser_parser.add_argument("--dry-run", action="store_true")
     browser_parser.add_argument("--selectors", type=Path, help="Local selector JSON override.")
     browser_parser.add_argument(
-        "--code-task-backend",
-        help="Optional running flagship backend URL to add to --self-test.",
-    )
-    browser_parser.add_argument(
         "--output-root",
         type=Path,
         default=Path("runs/browser-cert"),
@@ -319,16 +315,6 @@ def main(argv: list[str] | None = None) -> int:
     agent_parser.add_argument("--trace-dir", help="Write per-task traces.")
     agent_parser.add_argument("--run-dir", help="Directory for task/output files.")
 
-    code_parser = subparsers.add_parser(
-        "run-code-task",
-        help="Run an external coding agent in a real backend starter repository.",
-    )
-    code_parser.add_argument("--task", required=True, help="Code task id or qualified ref.")
-    code_parser.add_argument("--agent-command", required=True)
-    code_parser.add_argument("--timeout", type=float, default=300)
-    code_parser.add_argument("--run-dir", type=Path)
-    code_parser.add_argument("--json", action="store_true", help="Emit the result and receipt JSON.")
-
     subparsers.add_parser("canary", help="Print the benchmark contamination canary.")
 
     args = parser.parse_args(raw_argv)
@@ -373,8 +359,6 @@ def main(argv: list[str] | None = None) -> int:
         return _cmd_export_preferences(args)
     if args.command == "run-agent-command":
         return _cmd_run_agent_command(args)
-    if args.command == "run-code-task":
-        return _cmd_run_code_task(args)
     if args.command == "canary":
         print(CANARY_GUID)
         return 0
@@ -396,8 +380,7 @@ def _add_task_collection_args(parser: argparse.ArgumentParser) -> None:
         choices=list(BUILTIN_TASK_SUITE_ORDER),
         help=(
             "Bundled task suite. core = operating the workspace "
-            "(300); build-openbb-apps = building and debugging custom backend apps (236); "
-            "build-openbb-backends = experimental real-code FastAPI tasks (12)."
+            "(300); build-openbb-apps = building and debugging custom backend apps (236)."
         ),
     )
     parser.add_argument(
@@ -793,61 +776,6 @@ def _cmd_run_agent_command(args: argparse.Namespace) -> int:
             f"mean_score={summary['mean_score']:.3f}"
         )
     return 0 if all(_agent_run_passed(run) for run in runs) else 1
-
-
-def _cmd_run_code_task(args: argparse.Namespace) -> int:
-    from workspace_bench.code_tasks import run_code_task
-
-    task = find_task(args.task, suite="build-openbb-backends")
-    run = run_code_task(
-        task=task,
-        agent_command=args.agent_command,
-        timeout_seconds=args.timeout,
-        workdir=args.run_dir,
-    )
-    grade = run.evaluation.grade
-    process_ok = run.exit_code == 0 and not run.timed_out
-    passed = process_ok and grade.passed
-    receipt_path = run.evaluation.workdir / ".workspace-bench" / "deployment-receipt.json"
-    payload = {
-        "schema_version": "workspace-bench-code-result/v0",
-        "task": {
-            "id": task.id,
-            "qualified_id": task.qualified_id,
-            "specification_level": task.specification_level,
-            "difficulty": task.difficulty,
-        },
-        "agent": {
-            "command": run.command,
-            "exit_code": run.exit_code,
-            "timed_out": run.timed_out,
-            "stdout": run.stdout,
-            "stderr": run.stderr,
-        },
-        "passed": passed,
-        "grade": asdict(grade),
-        "deployment_receipt": run.evaluation.receipt,
-        "artifacts": {
-            "workdir": str(run.evaluation.workdir),
-            "task_json": str(run.task_path),
-            "task_brief": str(run.brief_path),
-            "receipt": str(receipt_path),
-        },
-    }
-    if args.json:
-        print(json.dumps(payload, indent=2, sort_keys=True))
-    else:
-        status = "PASS" if passed else "FAIL"
-        print(
-            f"{status}\t{task.id}\t{grade.score:.2f}\t"
-            f"{grade.checks_passed}/{grade.checks_total}\t"
-            f"exit={run.exit_code}\ttimeout={run.timed_out}"
-        )
-        print(f"  workdir: {run.evaluation.workdir}")
-        print(f"  receipt: {receipt_path}")
-        for issue in grade.issues:
-            print(f"  - {issue.code}: {issue.message}")
-    return 0 if passed else 1
 
 
 def _cmd_live_parity(args: argparse.Namespace) -> int:
@@ -1477,7 +1405,6 @@ def _cmd_browser_cert(args: argparse.Namespace) -> int:
         dry_run=args.dry_run,
         selectors_path=args.selectors,
         output_root=args.output_root,
-        code_task_backend=args.code_task_backend,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0 if result["passed"] else 1

@@ -5,10 +5,6 @@ resolution-markers = [
     "python_full_version >= '3.15'",
     "python_full_version < '3.15'",
 ]
-conflicts = [[
-    { package = "openbb-workspace-bench", extra = "codetrack" },
-    { package = "openbb-workspace-bench", extra = "live" },
-]]
 
 [manifest]
 constraints = [
@@ -16,15 +12,6 @@ constraints = [
     { name = "sse-starlette", specifier = "<=3.4.4" },
     { name = "starlette", specifier = "<=1.2.1" },
     { name = "uvicorn", specifier = "<=0.49.0" },
-]
-
-[[package]]
-name = "annotated-doc"
-version = "0.0.4"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/57/ba/046ceea27344560984e26a590f90bc7f4a75b06701f653222458922b558c/annotated_doc-0.0.4.tar.gz", hash = "sha256:fbcda96e87e9c92ad167c2e53839e57503ecfda18804ea28102353485033faa4", size = 7288, upload-time = "2025-11-10T22:07:42.062Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/1e/d3/26bf1008eb3d2daa8ef4cacc7f3bfdc11818d111f7e2d0201bc6e3b49d45/annotated_doc-0.0.4-py3-none-any.whl", hash = "sha256:571ac1dc6991c450b25a9c2d84a3705e2ae7a53467b5d111c24fa8baabbed320", size = 5303, upload-time = "2025-11-10T22:07:40.673Z" },
 ]
 
 [[package]]
@@ -285,7 +272,7 @@ wheels = [
 
 [package.optional-dependencies]
 toml = [
-    { name = "tomli", marker = "python_full_version <= '3.11' or (extra == 'extra-22-openbb-workspace-bench-codetrack' and extra == 'extra-22-openbb-workspace-bench-live')" },
+    { name = "tomli", marker = "python_full_version <= '3.11'" },
 ]
 
 [[package]]
@@ -345,22 +332,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/3b/f2/5a72274ca9f1b2a8b44a662ee0bf1b435909deb473d6f97bcd035bcdbc71/cryptography-48.0.0-pp311-pypy311_pp73-manylinux_2_34_aarch64.whl", hash = "sha256:ecde28a596bead48b0cfd2a1b4416c3d43074c2d785e3a398d7ec1fc4d0f7fbb", size = 4636797, upload-time = "2026-05-04T22:59:24.912Z" },
     { url = "https://files.pythonhosted.org/packages/b4/e1/48cedb2fe63626e91ded1edad159e2a4fb8b6906c4425eb7749673077ce7/cryptography-48.0.0-pp311-pypy311_pp73-manylinux_2_34_x86_64.whl", hash = "sha256:4defde8685ae324a9eb9d818717e93b4638ef67070ac9bc15b8ca85f63048355", size = 4666800, upload-time = "2026-05-04T22:59:27.474Z" },
     { url = "https://files.pythonhosted.org/packages/a2/ca/7e8365deec19afb2b2c7be7c1c0aa8f99633b54e90c570999acda93260fc/cryptography-48.0.0-pp311-pypy311_pp73-win_amd64.whl", hash = "sha256:db63bf618e5dea46c07de12e900fe1cdd2541e6dc9dbae772a70b7d4d4765f6a", size = 3739536, upload-time = "2026-05-04T22:59:29.61Z" },
-]
-
-[[package]]
-name = "fastapi"
-version = "0.138.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "annotated-doc" },
-    { name = "pydantic" },
-    { name = "starlette" },
-    { name = "typing-extensions" },
-    { name = "typing-inspection" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/5b/58/ff455d9fe47c60abadb34b9e05a304b1f05f5ab8000ac01565156b6f5e43/fastapi-0.138.0.tar.gz", hash = "sha256:d445a4877636ad191e7053e08c9bf98cb921a6756776848400bb773d1740c061", size = 419240, upload-time = "2026-06-20T01:18:05.259Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/6c/ff/8496d9847a5fedae775eb49460722d3efaa80487854273e9647ae876218c/fastapi-0.138.0-py3-none-any.whl", hash = "sha256:b6f54fd1bd72c80b0f899f172c61a600f6f7af9b43d4d772a018f35624048cb0", size = 126779, upload-time = "2026-06-20T01:18:03.483Z" },
 ]
 
 [[package]]
@@ -617,7 +588,7 @@ dependencies = [
     { name = "jsonschema" },
     { name = "pydantic" },
     { name = "pydantic-settings" },
-    { name = "pyjwt", extra = ["crypto"], marker = "extra == 'extra-22-openbb-workspace-bench-live'" },
+    { name = "pyjwt", extra = ["crypto"] },
     { name = "python-multipart" },
     { name = "pywin32", marker = "sys_platform == 'win32'" },
     { name = "sse-starlette" },
@@ -637,7 +608,7 @@ version = "2.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "ast-serialize" },
-    { name = "librt", marker = "platform_python_implementation != 'PyPy' or (extra == 'extra-22-openbb-workspace-bench-codetrack' and extra == 'extra-22-openbb-workspace-bench-live')" },
+    { name = "librt", marker = "platform_python_implementation != 'PyPy'" },
     { name = "mypy-extensions" },
     { name = "pathspec" },
     { name = "typing-extensions" },
@@ -701,12 +672,6 @@ source = { editable = "." }
 browser = [
     { name = "playwright" },
 ]
-codetrack = [
-    { name = "fastapi" },
-    { name = "httpx" },
-    { name = "pytest" },
-    { name = "uvicorn" },
-]
 dev = [
     { name = "mypy" },
     { name = "pytest" },
@@ -721,20 +686,16 @@ live = [
 
 [package.metadata]
 requires-dist = [
-    { name = "fastapi", marker = "extra == 'codetrack'", specifier = "==0.138.0" },
-    { name = "httpx", marker = "extra == 'codetrack'", specifier = ">=0.28" },
     { name = "httpx", marker = "extra == 'live'", specifier = ">=0.28" },
     { name = "mcp", marker = "extra == 'live'", specifier = ">=1.27.0" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.10" },
     { name = "playwright", marker = "extra == 'browser'", specifier = ">=1.48" },
-    { name = "pytest", marker = "extra == 'codetrack'", specifier = "==9.0.3" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.6" },
-    { name = "uvicorn", marker = "extra == 'codetrack'", specifier = "==0.49.0" },
     { name = "websockets", marker = "extra == 'live'", specifier = ">=16.0" },
 ]
-provides-extras = ["dev", "live", "browser", "codetrack"]
+provides-extras = ["dev", "live", "browser"]
 
 [[package]]
 name = "packaging"
@@ -962,7 +923,7 @@ name = "pytest"
 version = "9.0.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-22-openbb-workspace-bench-codetrack' and extra == 'extra-22-openbb-workspace-bench-live')" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
     { name = "iniconfig" },
     { name = "packaging" },
     { name = "pluggy" },

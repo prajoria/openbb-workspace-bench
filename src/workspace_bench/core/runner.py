@@ -16,14 +16,12 @@ from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 USAGE_TASKS_PACKAGE = "workspace_bench.task_suites.enterprise_apps_usage"
 BUILD_APPS_TASKS_PACKAGE = "workspace_bench.task_suites.build_openbb_apps"
-BUILD_BACKENDS_TASKS_PACKAGE = "workspace_bench.task_suites.build_openbb_backends"
 APPS_DEFAULT_TASKS_PACKAGE = "workspace_bench.task_suites.enterprise_apps_default"
 SMOKE_TASKS_PACKAGE = "workspace_bench.task_suites.smoke"
 TASK_SUITE_MANIFEST = "task_suite.json"
 BUILTIN_TASK_SUITES = {
     "enterprise-apps-usage": USAGE_TASKS_PACKAGE,
     "build-openbb-apps": BUILD_APPS_TASKS_PACKAGE,
-    "build-openbb-backends": BUILD_BACKENDS_TASKS_PACKAGE,
     "enterprise-apps-default": APPS_DEFAULT_TASKS_PACKAGE,
     "smoke": SMOKE_TASKS_PACKAGE,
 }
@@ -31,7 +29,6 @@ BUILTIN_TASK_SUITE_ORDER = (
     "enterprise-apps-usage",
     "enterprise-apps-default",
     "build-openbb-apps",
-    "build-openbb-backends",
     "smoke",
 )
 
@@ -59,10 +56,6 @@ class TaskRunner:
         self.workspace = workspace or SimulatedWorkspace()
 
     def run(self, task: Task, agent: BenchAgent | str = "oracle") -> RunResult:
-        if task.code_task is not None:
-            raise ValueError(
-                "real-code tasks require run-code-task or validate, not the simulated TaskRunner"
-            )
         if isinstance(agent, str):
             agent = build_agent(agent)
 

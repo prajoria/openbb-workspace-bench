@@ -41,12 +41,6 @@ live = [
 browser = [
   "playwright>=1.48"
 ]
-codetrack = [
-  "fastapi==0.138.0",
-  "httpx>=0.28",
-  "pytest==9.0.3",
-  "uvicorn==0.49.0"
-]
 
 [project.scripts]
 workspace-bench = "workspace_bench.cli:main"
@@ -60,9 +54,6 @@ where = ["src"]
 "workspace_bench.task_suites.build_openbb_apps" = ["*.json", "**/*.json", "*.md"]
 "workspace_bench.task_suites.enterprise_apps_default" = ["*.json", "**/*.json", "*.md"]
 "workspace_bench.task_suites.smoke" = ["*.json", "**/*.json", "*.md"]
-"workspace_bench.task_suites.build_openbb_backends" = [
-  "*.json", "**/*.json", "**/*.py", "**/*.toml", "*.md", "**/*.md"
-]
 "workspace_bench.workspace.data" = ["*.json"]
 "workspace_bench.browser" = ["*.json", "*.html"]
 
@@ -88,10 +79,4 @@ constraint-dependencies = [
   "sse-starlette<=3.4.4",
   "starlette<=1.2.1",
   "uvicorn<=0.49.0"
-]
-conflicts = [
-  [
-    { extra = "codetrack" },
-    { extra = "live" }
-  ]
 ]

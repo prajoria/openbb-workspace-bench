@@ -106,7 +106,7 @@
    "args": {
     "widget_type": "note",
     "name": "Earnings & Estimates Monitor Note",
-    "data": "LLY's post-earnings price-reaction row is Open at 55747.15, rounded to 55747.2, with a positive change of 0.0069. Its transcript Management Tone reading is 81.37 but changed by -0.0487, so the transcript should be reviewed for the language behind that deterioration rather than labeled positive from the score alone. Rating and Target Changes is Open at 27.83 with a 0.0433 change, which calls for reconciling the proposed rating action with the transcript and price reaction. The checklist is still Open at 54.14, so completing and documenting it is the immediate action item. The available transcript data cover LLY only; a complete four-part action plan for any other ticker requires its transcript tone before comparison."
+    "data": "LLY's Open price reaction is 55747.15, rounded to 55747.2, with a 0.0069 change; its Management Tone is 81.37 with a -0.0487 change and Transcript Theme Extraction is 45.78 with a 0.0529 change. Reconcile LLY's Open Rating and Target Changes score of 27.83 with its transcript, then complete its Open checklist at 54.14. XOM's Open price reaction is 39311.13 with a 0.0179 change, its Rating and Target Changes score is 35.98 with a 0.0759 change, and its checklist is Open at 63.76 with a -0.0484 change. No XOM transcript-tone or theme row is retrieved, so its transcript action item is to obtain and review that missing evidence before finalizing the rating response. Close neither ticker's post-earnings review until the rating reconciliation and checklist items are documented."
    }
   }
  ],

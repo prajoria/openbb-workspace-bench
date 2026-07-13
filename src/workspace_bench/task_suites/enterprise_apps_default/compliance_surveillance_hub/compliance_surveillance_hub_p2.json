@@ -118,7 +118,7 @@
    "args": {
     "widget_type": "note",
     "name": "Compliance Surveillance Hub Note",
-    "data": "Escalate to compliance leadership on both fronts. Employee trading: the Flagship Long/Short employee-trade review is Open at 29.14 with 19 open policy breaches, 119 open surveillance alerts, and two open pre-clearance items at 15.89 and 15.57 — the breaches and alerts are the immediate escalation. Research activity: the restricted-and-watch list is Open at 18.98 and the access-and-export log review is Open at 37.01, so research touching restricted names and the export trail should be escalated alongside the trades until both reviews close."
+    "data": "Escalate both Open employee-trade rows, scored 29.14 and 88.88, to compliance leadership because the retrieved records do not identify the employees or cleared dispositions. The supporting Open controls show policy-breach counts of 19 and 3, surveillance-alert counts of 119 and 210, and pre-clearance scores of 15.89 and 15.57. Research activity also needs escalation: Restricted and Watch List is Open at 18.98, while Access and Export Logs has two Open rows at 37.01 and 50.11. Keep both employee trades and the research/export activity open until compliance maps the rows to people, research items, and final dispositions."
    }
   }
  ],

@@ -242,8 +242,6 @@ class SeedPlan:
 def check_eligibility(task: Task, origin_map: dict[str, str]) -> None:
     """Refuse tasks the live replay cannot reproduce faithfully."""
 
-    if task.code_task is not None:
-        raise LiveParityIneligible("real-code tasks have no live-bridge replay")
     initial = task.initial_state or {}
     unsupported = sorted(set(initial) - {"dashboard"})
     if unsupported:
@@ -271,6 +269,14 @@ def check_eligibility(task: Task, origin_map: dict[str, str]) -> None:
     for widget_spec in dashboard.get("widgets") or []:
         origins.add(str(widget_spec.get("origin", "")))
     for call in task.oracle_tool_calls:
+        if call.name == "manage_backends":
+            # The registry list is read-only and safe against a production
+            # workspace; mutating operations (add/refresh/remove) are not.
+            if call.args.get("operation") == "list":
+                continue
+            raise LiveParityIneligible(
+                "oracle uses manage_backends with a mutating operation"
+            )
         if call.name not in REPLAYABLE_TOOLS:
             raise LiveParityIneligible(f"oracle uses non-replayable tool {call.name!r}")
         for key in ORIGIN_KEYS:

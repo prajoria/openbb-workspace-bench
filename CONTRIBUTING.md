@@ -60,37 +60,6 @@ the oracle length. Grade the repaired capability and preservation outcome, not
 the oracle's inspection sequence. New failure archetypes need a no-op proof and
 an independent still-broken repair mutant.
 
-## Author a real-code backend task
-
-Edit `scripts/generators/generate_backend_code_suite.py`; never hand-edit its generated
-task JSON, starter repositories, or oracle overlays. A code task must include:
-
-- a unique business brief and provisional difficulty;
-- a minimal pinned FastAPI `pyproject.toml`, README, start command, and pytest
-  scaffold under its starter fixture;
-- an oracle solved-file overlay that does not replace starter tests merely to
-  make them pass;
-- typed GET/POST probes for every widget and form endpoint, including multiple
-  requests where parameter behavior is the capability;
-- business fields/types and request-reflecting `expected_values`;
-- `require_apps: true` when the task promises an installable app.
-
-Starter tests must fail before implementation; oracle tests must be green and
-non-empty. The evaluator also temporarily replaces `app.py` with a garbage
-FastAPI catch-all, and repository tests must reject it. Repair and extension
-starters should retain at least one already-passing endpoint/test so they
-measure regression discipline.
-
-```bash
-uv run python scripts/generators/generate_backend_code_suite.py
-uv run workspace-bench validate --suite build-openbb-backends --min-tasks 12
-uv run pytest -q tests/test_code_tasks.py
-```
-
-Run the generator twice and compare hashes. Code tasks are excluded from the
-Workspace MCP tool-coverage matrix because their agent surface is filesystem
-and process execution, not the simulated tool surface.
-
 ## Add a grader check
 
 1. Add the check to `workspace_bench.core.graders` or the relevant runtime/code
@@ -200,7 +169,6 @@ uv run python scripts/audits/report_prompt_stats.py
 uv run python scripts/audits/audit_release_consistency.py
 uv run --extra dev workspace-bench validate --suite enterprise-apps-usage --min-tasks 300
 uv run --extra dev workspace-bench validate --suite build-openbb-apps --min-tasks 236
-uv run --extra dev workspace-bench validate --suite build-openbb-backends --min-tasks 12
 uv run workspace-bench runtime-probe --suite enterprise-apps-usage --family backends
 uv run workspace-bench runtime-probe --suite build-openbb-apps
 ```

@@ -79,7 +79,7 @@
    "args": {
     "widget_type": "note",
     "name": "Execution Desk Note",
-    "data": "The VWAP and Arrival Slippage widget shows a score of 41.08 for Goldman Sachs on the US Equity desk (VWAP and Arrival Slippage). The Fills Table widget lists a score of 9.92 for Goldman Sachs (Fills Table). Because the arrival slippage score is higher than the fills score, the Goldman Sachs fills underperformed arrival price. No venue or algo data are provided in the widgets, so causality cannot be determined from the available information, while retaining 68.41 as source evidence."
+    "data": "For Goldman Sachs on the US Equity desk, VWAP and Arrival Slippage is Open at 41.08 with a 0.0799 change, the Fills Table is Open at 9.92 with a 0.0718 change, and the Broker Scorecard is Open at 68.41 with a 0.0668 change. These are distinct unlabeled scores rather than fill prices or arrival shortfalls, so comparing them does not establish that any fills underperformed arrival price. The rows contain no fill identifiers, execution prices, or arrival benchmarks, so the underperforming fills cannot be named. Goldman Sachs is the common broker, but there is no benchmark or causal mapping showing that broker choice drove the outcome. No venue or algo fields are retrieved, so venue and algo effects also cannot be determined."
    }
   }
  ],

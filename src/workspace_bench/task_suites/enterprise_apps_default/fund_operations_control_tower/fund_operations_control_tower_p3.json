@@ -126,15 +126,27 @@
    }
   },
   {
+   "tool": "get_widget_data",
+   "args": {
+    "origin": "Bench Stark Enterprise",
+    "widget_id": "fund_operations_control_tower_trade_lifecycle_failed_trades",
+    "data_args": {
+     "fund": "Flagship Long/Short",
+     "period": "YTD",
+     "status": "Open"
+    }
+   }
+  },
+  {
    "tool": "add_generative_widget",
    "args": {
     "widget_type": "note",
     "name": "Fund Operations Control Tower Note",
-    "data": "Start an operational escalation with 61 Open settlement exceptions and two Open custodian-break readings of 1.67 and 59.91, since those items threaten market-open processing. Corporate actions also need attention: Election Deadlines is Open at 79.97 and the Corporate Action Calendar is Open at 28.47. Before the NAV strike, reconcile 67 Open NAV exceptions, stale-price rows of 3114 and 243359.62 USD, and vendor-price rows of 246075.96 for Bloomberg and 209032.42 for ICE. The vendor and stale-price values are source records rather than quantified differences, so their exact pricing impact still requires a security-level match. Escalate the deadline and settlement queues before market open, and keep pricing and NAV queues open through strike reconciliation."
+    "data": "Before market open, escalate Failed Trades for owner review: its primary and secondary values are 50.74 and 39.13 against a displayed threshold of 35.88. The 61 Open settlement exceptions and two Open custodian-break readings of 1.67 and 59.91 also require market-open escalation. Corporate actions need attention because Election Deadlines is Open at 79.97 and 67.02, while the Corporate Action Calendar is Open at 28.47. Before the NAV strike, reconcile both Open NAV-exception counts, 67 and 210. Stale-price rows of 3114 and 243359.62 USD and vendor-price rows of 246075.96 for Bloomberg and 209032.42 for ICE also remain Open, although their exact pricing impact requires a security-level match. This operational escalation should prioritize failed trades, settlement, custodian breaks, and election deadlines before market open, while pricing and NAV items stay open through strike reconciliation."
    }
   }
  ],
  "limits": {
-  "max_turns": 22
+  "max_turns": 24
  }
 }

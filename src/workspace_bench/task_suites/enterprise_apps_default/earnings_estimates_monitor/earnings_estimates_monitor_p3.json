@@ -82,7 +82,7 @@
    "args": {
     "widget_type": "note",
     "name": "Earnings & Estimates Monitor Note",
-    "data": "LLY is the one company where estimate revisions and management commentary combine into a material thesis change: consensus revisions are Open at 33.55 (+8.5%), management tone — the served management commentary signal — reads 81.37 and is deteriorating (-4.9%), and the thesis change log has collapsed to 4.89, so the thesis review should be opened now. AAPL's rows are QTD and In Review across the same widgets, so it cannot be flagged on current-period evidence. No other ticker has rows in all three widgets, so no further flags are supportable."
+    "data": "LLY is the only company with retrieved evidence across estimate revisions, management commentary, and the thesis log. Its Consensus Revisions row is Open at 33.55 with a 0.0847 change, Management Tone is Open at 81.37 with a -0.0487 change, and Thesis Change Log is Open at 4.89 with a -0.068 change. Those three movements warrant a material-thesis review for LLY, although the data supply no threshold that would prove materiality automatically. XOM has Open Consensus Revisions at 24.68 with a 0.017 change and an Open Thesis Change Log at 66.81 with a 0.077 change, but no management-tone row is retrieved for XOM. XOM therefore cannot be identified as meeting the requested combination until its commentary evidence is available."
    }
   }
  ],

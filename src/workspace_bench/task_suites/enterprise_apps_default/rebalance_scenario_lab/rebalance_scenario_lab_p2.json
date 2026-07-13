@@ -94,7 +94,7 @@
    "args": {
     "widget_type": "note",
     "name": "Rebalance & Scenario Lab Note",
-    "data": "Two Flagship Long/Short proposed-trade rows remain Open, with scores of 13.46 and 13.01, but the rows do not name the securities or trade sizes. ADV usage is not supplied by the Proposed Trades or Liquidity Impact data, so resizing cannot be justified on that dimension without trade size and ADV percentage. The available constraints readings are 22.35 and 13.02, while liquidity-impact readings are 10.55 and 80.62; no limits or trade-level mapping are provided. The compliance check is also Open at 31.12, but its row does not identify a specific restricted security or a cleared blocker. Both proposed trades should therefore stay under review rather than be conclusively resized or delayed until ADV, limit, security, and compliance-blocker details are available."
+    "data": "Delay both Open proposed-trade rows, identified by scores of 13.46 and 13.01, because the restricted-list compliance check remains Open at 31.12 and does not clear either trade. For resizing, the 80.62 liquidity-impact row and the 22.35 constraint-utilization row are the higher displayed review priorities, ahead of 10.55 and 13.02. The data do not map those impact and constraint rows to either proposed-trade score, so do not invent which of the 13.46 or 13.01 trades they represent. ADV usage, trade size, and security identifiers are absent, so no ADV-based resize can yet be calculated. Once the mapping is supplied, resize the trade tied to 80.62 liquidity impact or 22.35 constraint utilization, and release only trades whose constraints and compliance blocker are clear."
    }
   }
  ],

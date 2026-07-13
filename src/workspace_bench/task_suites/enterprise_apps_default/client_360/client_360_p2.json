@@ -27,7 +27,7 @@
     "widget_type": "note",
     "data_contains": [
      "redemption",
-     "unresolved",
+     "service",
      "11.13",
      "16.22",
      "77.48"
@@ -82,7 +82,7 @@
    "args": {
     "widget_type": "note",
     "name": "Client 360 Note",
-    "data": "Atlas Pension has a subscriptions and redemptions score of 11.13, indicating notable outflows that raise redemption risk. The client also shows an open requests score of 16.22, which signals unresolved service issues that must be addressed before confirming flight‑risk status. Relationship metrics for Atlas show a primary value of 77.48, above the threshold of 73.73, suggesting strong engagement despite these concerns. Northstar Endowment’s subscriptions and redemptions score is 85.31, indicating significant redemption risk. However, no open requests score is available in the current data set for Northstar, so we cannot confirm unresolved service issues for that account. Immediate resolution of outstanding requests for Atlas Pension is required to mitigate redemption exposure; further investigation is needed for Northstar Endowment to determine if any unresolved service issues exist."
+    "data": "Subscriptions and Redemptions is Open at 11.13 with a 0.04 change for Atlas Pension and 85.31 with a -0.0718 change for Northstar Endowment. Those scores have no net-flow direction or risk threshold, so they do not establish which account has redemption risk. Atlas is the only account with a visible Open Requests row, scored 16.22 with a -0.0278 change, making it the only identified account with an unresolved service item; the request itself is not described. Relationship Metrics reports 77.48 primary, 82.24 secondary, 73.73 threshold, and 61.83 watchlist, but has no client field and cannot be attributed to Atlas or Northstar. Northstar has no retrieved service-request row. Obtain signed subscription and redemption flows, account-level relationship metrics, and request details before assigning redemption or broader service risk."
    }
   }
  ],

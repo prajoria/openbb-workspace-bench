@@ -95,7 +95,7 @@
    "args": {
     "widget_type": "note",
     "name": "Rebalance & Scenario Lab Note",
-    "data": "The rebalance recommendation for Flagship Long/Short must account for the current drift of 0.0471, which is reflected in the Current vs Target Weights widget. The liquidity impact score of 10.55 and the restricted-list checks score of 31.12 indicate that neither control has cleared automatically. Scenario downside analysis shows a potential P&L drop to 71.92 on 2026-01-04 from the Scenario P&L Waterfall, underscoring the need for caution. Therefore, a conditional rebalance should be pursued only after a thorough review of these controls to confirm residual drift is acceptable and scenario downside risk is within tolerance. This approach balances target drift, liquidity cost, restricted-list checks, and scenario downside by ensuring all thresholds are explicitly addressed before execution."
+    "data": "Recommendation: hold execution and revise the rebalance to address the larger absolute target-drift change of -0.0431 on the 0.0865 weight before the -0.0114 change on the 0.0471 weight. Liquidity-impact scores are 80.62 and 10.55, so the higher-cost row should be mapped to its proposed trade and resized first; the rows do not provide cost units or that trade mapping. The restricted-list check remains Open at 31.12 and must be cleared at security level before any trade is released. Scenario values decline from 76.82 to 65.22 and then rebound to 68.04 in the retrieved series, so the revised trade set needs a documented downside limit. Approve execution only after the larger drift is addressed, the 80.62 liquidity-impact row is resized, the restriction is cleared, and the scenario trough is within tolerance."
    }
   }
  ],
