@@ -6,5 +6,5 @@
   "difficulty": "medium"
  },
  "description": "69 byte-verbatim enterprise-app product prompts, each run twice as an _x/_y pair on the stark-enterprise-x and stark-enterprise-y data worlds, graded by the suite judge against a reference trajectory with a deterministic final-answer gate.",
- "content_sha256": "ba5a0cea43f01e4445217fcfe953c3976db779a56a3d444c2c88ebccd699868f"
+ "content_sha256": "0c08d23b52a5a6be70be23d17189ec56ed0624e87ba12b2a0aa305f2e035e641"
 }

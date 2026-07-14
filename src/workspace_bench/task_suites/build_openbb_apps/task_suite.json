@@ -1,6 +1,18 @@
 {
   "suite_id": "build-openbb-apps",
   "visibility": "public",
+  "workspace_skills": [
+    "daloopa-capital-allocation",
+    "daloopa-earnings-review",
+    "daloopa-guidance-tracker",
+    "daloopa-industry",
+    "daloopa-inflection",
+    "daloopa-tearsheet",
+    "finance-comps",
+    "finance-earnings-prep",
+    "finance-guidance-tracker",
+    "finance-tearsheet"
+  ],
   "content_sha256": "3d111de145d5052fa7c168b9bcbd2d42d21fd1beb2d55a018f746e602e166997",
   "description": "WorkspaceBench build-openbb-apps collection: agents receive open product briefs, choose from the full Workspace tool surface, build valid custom backends, and prove the result by placing widgets or instantiating apps. The 236 tasks are organized by product family and labeled independently by difficulty."
 }

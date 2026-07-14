@@ -33,6 +33,7 @@ from workspace_bench.workspace.fixtures import (  # noqa: E402
     build_stark_enterprise_y_backend,
 )
 from workspace_bench.core.models import WORKSPACE_TOOL_NAMES  # noqa: E402
+from workspace_bench.workspace.simulated_workspace import WORKSPACE_SKILLS  # noqa: E402
 
 OUT_DIR = REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
 REFERENCE_ANSWERS_PATH = OUT_DIR / "reference_answers.json"
@@ -579,6 +580,7 @@ def build_tasks(
                     "setup": {
                         "workspace_baseline": WORKSPACE_BASELINE,
                         "workspace_backends": [backend.slug],
+                        "workspace_skills": sorted(WORKSPACE_SKILLS),
                         "default_selected_dashboard": app["name"],
                         "allowed_tools": list(ALLOWED_TOOLS),
                     },
@@ -703,6 +705,7 @@ def certify(
     expected_setup = [
         "workspace_baseline",
         "workspace_backends",
+        "workspace_skills",
         "default_selected_dashboard",
         "allowed_tools",
     ]

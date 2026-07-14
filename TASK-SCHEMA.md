@@ -19,7 +19,7 @@ under `src/workspace_bench/data/` in one folder per axis
 | `workspace_baseline` | Versioned initial state (which dashboards exist at episode start): `all-stark-enterprise-apps` (Home plus all 23 Stark apps), `stark-onboard-a` (PM/research desk: Home, three opened apps, three personal cross-app dashboards), `stark-onboard-b` (trading/ops desk with a different composition of the same shape), or `""` for explicitly none (bare workspace). A task-level `""` clears a suite baseline; omitting the field inherits it. |
 | `workspace_backends` | Fixture backends connected to the Workspace. Omitted, it falls back to the baseline version's default set; overriding must still include the backends the baseline requires. The Stark data worlds `stark-enterprise` / `stark-enterprise-x` (canonical data) / `stark-enterprise-y` (same catalog; deterministically different row counts, entities, and values, always within each widget's declared schema and options) are interchangeable here — at most one may be connected per episode. |
 
-| `workspace_skills` | Platform skills exposed to the agent, by slug (files under `data/skills/`). Omitted, all skills are available. |
+| `workspace_skills` | Platform skills exposed to the agent, by slug (files under `data/skills/`). Explicit axis: when neither the task nor the suite manifest declares it, no skills are loaded. |
 
 Tasks may override any axis with the optional task fields of the same names
 (state-variant tasks: same prompt, different world); a task value wins over

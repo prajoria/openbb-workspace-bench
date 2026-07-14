@@ -2,6 +2,18 @@
   "suite_id": "enterprise-apps-usage",
   "visibility": "public",
   "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_skills": [
+    "daloopa-capital-allocation",
+    "daloopa-earnings-review",
+    "daloopa-guidance-tracker",
+    "daloopa-industry",
+    "daloopa-inflection",
+    "daloopa-tearsheet",
+    "finance-comps",
+    "finance-earnings-prep",
+    "finance-guidance-tracker",
+    "finance-tearsheet"
+  ],
   "content_sha256": "3d275626dc4e853f43d3019514ba2bb829335f0dc747fbef3b36b4a0af2ccd80",
   "description": "Operating the workspace: 15 MCP-surface families and 300 tasks on the default Workspace; difficulty is recorded independently as easy, medium, or hard."
 }

@@ -48,11 +48,15 @@ class WorkspaceEpisode:
             baseline_override=task.workspace_baseline,
             backends_override=task.workspace_backends,
         )
+        # Skills are an explicit axis: a task (or its suite manifest) must
+        # declare workspace_skills to have any loaded — no hidden default.
         skills = (
             task.workspace_skills
             if task.workspace_skills is not None
             else (task.suite.workspace_skills if task.suite else None)
         )
+        if skills is None:
+            skills = ()
         self.workspace.reset(
             backends=fixtures,
             initial_state=initial_state,

@@ -6,6 +6,18 @@
   "workspace_backends": [
    "stark-enterprise-x"
   ],
+  "workspace_skills": [
+   "daloopa-capital-allocation",
+   "daloopa-earnings-review",
+   "daloopa-guidance-tracker",
+   "daloopa-industry",
+   "daloopa-inflection",
+   "daloopa-tearsheet",
+   "finance-comps",
+   "finance-earnings-prep",
+   "finance-guidance-tracker",
+   "finance-tearsheet"
+  ],
   "default_selected_dashboard": "NAV, Fees & Close Dashboard",
   "allowed_tools": [
    "get_workspace_snapshot",
