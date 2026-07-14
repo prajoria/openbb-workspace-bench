@@ -27,7 +27,7 @@ from _assembly import (
     snap as snap,
 )
 from workspace_bench.workspace.runtime import declared_fields
-from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
+from workspace_bench.core.models import WORKSPACE_TOOL_NAMES
 from workspace_bench.workspace.widget_params import flatten_params
 
 REPO = Path(__file__).resolve().parents[3]

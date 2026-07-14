@@ -11,8 +11,8 @@ from workspace_bench.core.graders import grade_task
 from workspace_bench.core.models import Task, TaskSuiteManifest
 from workspace_bench.core.mutation_checks import grader_mutation_failures
 from workspace_bench.core.runner import TaskRunner, find_task, load_builtin_tasks
-from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
-from workspace_bench.workspace.surface_audit import compare_tool_schemas
+from workspace_bench.core.models import WORKSPACE_TOOL_NAMES
+from workspace_bench.workspace.live_mcp import compare_tool_schemas
 
 
 def test_current_task_schema_is_strict() -> None:

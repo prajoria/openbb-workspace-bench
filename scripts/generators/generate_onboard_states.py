@@ -19,7 +19,7 @@ from pathlib import Path
 from workspace_bench.core.models import JsonDict
 from workspace_bench.workspace.default_setup import _home_dashboard, _instantiate_app
 from workspace_bench.workspace.fixtures import FixtureBackend, build_stark_enterprise_backend
-from workspace_bench.workspace.geometry import rects_overlap
+from workspace_bench.workspace.widget_params import rects_overlap
 from workspace_bench.workspace.widget_params import sanitize_data_args
 
 OUTPUT_DIR = (

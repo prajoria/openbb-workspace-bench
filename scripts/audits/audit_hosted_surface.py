@@ -36,7 +36,7 @@ from workspace_bench.workspace.live_mcp import (
     EXPECTED_MCP_RESOURCES,
     EXPECTED_MCP_TOOLS,
 )
-from workspace_bench.workspace.surface_audit import compare_tool_schemas
+from workspace_bench.workspace.live_mcp import compare_tool_schemas
 
 
 DEFAULT_URL = "https://backend.openbb.dev/mcp"

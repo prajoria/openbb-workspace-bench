@@ -14,6 +14,29 @@ CANARY_GUID = "workspace-bench-canary-2026-06-08-1d5c7f8f-4a64-4c33-99b8-6f83d5f
 # workspace, and it completes the episode. Suites that grade a reply list it
 # in allowed_tools so the answer channel is visible to agents.
 FINAL_ANSWER_TOOL = "final_answer"
+# Canonical Workspace tool surface used by tasks, runners, and audits.
+WORKSPACE_TOOL_NAMES = (
+    "get_workspace_snapshot",
+    "manage_dashboard",
+    "manage_navigation_bar",
+    "navigate_workspace",
+    "list_available_widgets",
+    "get_widget_schema",
+    "get_params_options",
+    "get_widget_data",
+    "create_widget",
+    "update_widget",
+    "update_widget_layout",
+    "delete_widget",
+    "add_generative_widget",
+    "read_widget",
+    "manage_backends",
+    "manage_apps",
+    "get_skill_content",
+    "read_workspace_resource",
+    "get_workspace_prompt",
+    "assign_tasks_to_agents",
+)
 # workflow-kind axis (formerly the L0-L4 "level" codes)
 TASK_CATEGORIES = ("read", "single-widget", "dashboard", "platform", "repair")
 # Measured labels (easy/medium/hard) plus the smoke execution-context ladder:

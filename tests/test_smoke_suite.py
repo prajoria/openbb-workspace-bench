@@ -18,7 +18,7 @@ from workspace_bench.workspace.live_parity import (
     LiveParityIneligible,
     check_eligibility,
 )
-from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
+from workspace_bench.core.models import WORKSPACE_TOOL_NAMES
 
 
 def _tasks_by_id() -> dict[str, Task]:

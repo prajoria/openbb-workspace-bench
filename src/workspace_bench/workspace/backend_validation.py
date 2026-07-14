@@ -19,8 +19,8 @@ import re
 from typing import Any
 
 from workspace_bench.core.models import JsonDict
-from workspace_bench.workspace.geometry import rects_overlap
-from workspace_bench.workspace.naming import slugify
+from workspace_bench.workspace.widget_params import rects_overlap
+from workspace_bench.workspace.widget_params import slugify
 from workspace_bench.workspace.widget_params import flatten_params
 
 # Canonical live catalog from openbb://workspace/specs/widget-types (2026-07-12).

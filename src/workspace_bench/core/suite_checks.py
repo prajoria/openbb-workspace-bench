@@ -24,7 +24,7 @@ from typing import Iterable
 from workspace_bench.core.models import FINAL_ANSWER_TOOL, JsonDict, RunResult, Task
 from workspace_bench.core.mutation_checks import grader_mutation_failures
 from workspace_bench.core.prompt_openness import task_prompt_openness_issues
-from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
+from workspace_bench.core.models import WORKSPACE_TOOL_NAMES
 from workspace_bench.workspace.widget_params import flatten_params
 
 USAGE_SUITE = "enterprise-apps-usage"

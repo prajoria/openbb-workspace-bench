@@ -37,7 +37,7 @@ from workspace_bench.core.models import (  # noqa: E402
     Task,
     TaskSuiteManifest,
 )
-from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES  # noqa: E402
+from workspace_bench.core.models import WORKSPACE_TOOL_NAMES  # noqa: E402
 
 OUTPUT_DIR = REPO / "src" / "workspace_bench" / "task_suites" / "smoke"
 

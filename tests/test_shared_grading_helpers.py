@@ -6,10 +6,10 @@ from workspace_bench.core.grading.state import (
 )
 from workspace_bench.core.grading.matching import subset_matches
 from workspace_bench.workspace import backend_validation
-from workspace_bench.workspace.geometry import rects_overlap
+from workspace_bench.workspace.widget_params import rects_overlap
 from workspace_bench.workspace.live_mcp import EXPECTED_MCP_TOOLS
-from workspace_bench.workspace.naming import slugify
-from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
+from workspace_bench.workspace.widget_params import slugify
+from workspace_bench.core.models import WORKSPACE_TOOL_NAMES
 
 
 def test_all_layout_paths_share_numeric_rectangle_overlap() -> None:

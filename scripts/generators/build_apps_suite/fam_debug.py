@@ -5,7 +5,7 @@ from __future__ import annotations
 import copy
 
 from build_apps_suite import common as c
-from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES
+from workspace_bench.core.models import WORKSPACE_TOOL_NAMES
 
 
 DESKS = (

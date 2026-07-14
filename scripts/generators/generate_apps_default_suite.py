@@ -32,7 +32,7 @@ from workspace_bench.workspace.fixtures import (  # noqa: E402
     build_stark_enterprise_backend,
     build_stark_enterprise_y_backend,
 )
-from workspace_bench.workspace.tool_surface import WORKSPACE_TOOL_NAMES  # noqa: E402
+from workspace_bench.core.models import WORKSPACE_TOOL_NAMES  # noqa: E402
 
 OUT_DIR = REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
 REFERENCE_ANSWERS_PATH = OUT_DIR / "reference_answers.json"

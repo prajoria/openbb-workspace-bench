@@ -42,7 +42,7 @@ from workspace_bench.core.models import (
     ToolTraceEvent,
 )
 from workspace_bench.workspace.fixtures import get_fixture_backend
-from workspace_bench.workspace.naming import slugify
+from workspace_bench.workspace.widget_params import slugify
 
 DEFAULT_LIVE_URL = "https://backend.openbb.co/mcp"
 DEFAULT_ORIGIN_MAP = {

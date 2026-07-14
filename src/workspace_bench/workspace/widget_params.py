@@ -1,8 +1,30 @@
-"""Shared traversal for widget parameter definitions."""
+"""Shared widget-parameter, layout-geometry, and naming helpers."""
 
 from __future__ import annotations
 
+import re
+from collections.abc import Mapping
+from typing import Any
+
 from workspace_bench.core.models import JsonDict
+
+
+def rects_overlap(a: Mapping[str, Any], b: Mapping[str, Any]) -> bool:
+    """Return whether two axis-aligned Workspace layout rectangles overlap."""
+
+    try:
+        ax, ay, aw, ah = (float(a.get(key, 0)) for key in ("x", "y", "w", "h"))
+        bx, by, bw, bh = (float(b.get(key, 0)) for key in ("x", "y", "w", "h"))
+    except (TypeError, ValueError):
+        return False
+    return ax < bx + bw and ax + aw > bx and ay < by + bh and ay + ah > by
+
+
+def slugify(value: str, *, fallback: str = "app") -> str:
+    """Convert a display name to a lowercase slug with a caller-selected fallback."""
+
+    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    return slug or fallback
 
 
 def flatten_params(definition: JsonDict, *, recurse: bool = True) -> list[JsonDict]:

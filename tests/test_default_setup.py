@@ -17,7 +17,7 @@ from workspace_bench.workspace.default_setup import (
     default_workspace_hash,
     required_baseline_backends,
 )
-from workspace_bench.workspace.geometry import rects_overlap
+from workspace_bench.workspace.widget_params import rects_overlap
 from workspace_bench.workspace.fixtures import (
     build_stark_enterprise_backend,
     build_stark_enterprise_x_backend,

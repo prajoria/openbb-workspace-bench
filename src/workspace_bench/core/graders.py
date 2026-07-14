@@ -44,7 +44,7 @@ from workspace_bench.core.models import (
     Task,
     ToolTraceEvent,
 )
-from workspace_bench.workspace.geometry import rects_overlap
+from workspace_bench.workspace.widget_params import rects_overlap
 from workspace_bench.workspace.runtime import grade_runtime
 from workspace_bench.workspace.widget_params import flatten_params
 

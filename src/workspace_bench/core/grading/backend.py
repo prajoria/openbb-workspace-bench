@@ -8,7 +8,7 @@ from typing import Protocol
 from workspace_bench.core.grading.matching import phrase_matches, subset_matches
 from workspace_bench.core.grading.state import declared_backend_widgets, lookup_path
 from workspace_bench.core.models import DeploymentReceipt, JsonDict, RequiredCapability, Task
-from workspace_bench.workspace.geometry import rects_overlap
+from workspace_bench.workspace.widget_params import rects_overlap
 from workspace_bench.workspace.widget_params import flatten_params
 
 

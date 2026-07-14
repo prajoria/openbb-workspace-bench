@@ -11,7 +11,7 @@ from typing import Any
 from workspace_bench.core.models import FixtureBackendRef, JsonDict, RuntimeChecks, ToolCall
 from workspace_bench.workspace import backend_validation
 from workspace_bench.workspace.fixtures import FixtureBackend, default_fixture_backends
-from workspace_bench.workspace.naming import slugify
+from workspace_bench.workspace.widget_params import slugify
 from workspace_bench.workspace.runtime import task_widget_data
 from workspace_bench.workspace.widget_params import sanitize_data_args
 

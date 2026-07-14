@@ -9,7 +9,6 @@ import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
-from workspace_bench.core._proc import decode_output, truncate_output
 from workspace_bench.core.episode import WorkspaceEpisode
 from workspace_bench.core.models import (
     BENCHMARK_NAME,
@@ -25,6 +24,24 @@ from workspace_bench.core.runner import (
     task_workspace_baseline,
     task_workspace_skills,
 )
+
+
+def decode_output(value: object) -> str:
+    """Normalize optional text or byte subprocess output to text."""
+
+    if value is None:
+        return ""
+    if isinstance(value, bytes):
+        return value.decode("utf-8", errors="replace")
+    return str(value)
+
+
+def truncate_output(value: str, max_chars: int = 4000) -> str:
+    """Limit captured subprocess output while marking truncated values."""
+
+    if len(value) <= max_chars:
+        return value
+    return value[:max_chars] + "\n...[truncated]"
 
 
 @dataclass(frozen=True)
