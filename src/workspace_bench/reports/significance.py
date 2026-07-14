@@ -69,11 +69,12 @@ def load_task_fields(
     difficulties: dict[str, str] = {}
     clusters: dict[str, str] = {}
     for path in sorted(suite_dir.rglob("*.json"), key=lambda item: item.name):
-        if path.name == "task_suite.json":
+        # Suite-root JSON (manifest, reference answer corpora) is metadata.
+        if path.parent == suite_dir:
             continue
         task = json.loads(path.read_text())
         task_id = str(task["id"])
-        family = str(task.get("family", "?"))
+        family = str(task.get("family", path.parent.name))
         suite = suite_dir.name.replace("_", "-")
         keys = (task_id, f"{suite}/{family}/{task_id}")
         for key in keys:

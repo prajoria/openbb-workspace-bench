@@ -23,10 +23,10 @@ jobs:
         run: uv python install 3.11
 
       - name: Lint
-        run: uv run --extra dev ruff check src tests scripts examples
+        run: uv run --extra dev ruff check src tests scripts
 
       - name: Type-check
-        run: uv run --extra dev mypy src scripts examples
+        run: uv run --extra dev mypy src scripts
 
       - name: Run tests with coverage
         run: uv run --extra dev pytest --cov=workspace_bench --cov-report=term --cov-fail-under=65
@@ -89,7 +89,9 @@ jobs:
           uv run --extra dev workspace-bench report --suite build-openbb-apps --json > /dev/null
 
       - name: Smoke the evaluator dispatch
-        run: uv run --extra dev workspace-bench --models-file examples/models.example.json --difficulty easy --dry-run
+        run: |
+          printf '{"models": [{"slug": "rule", "label": "Rule agent", "provider": "command", "command": "python -m workspace_bench.agents.rule_agent"}]}' > /tmp/models.json
+          uv run --extra dev workspace-bench --models-file /tmp/models.json --difficulty easy --dry-run
 
       - name: Build package
         run: uv build

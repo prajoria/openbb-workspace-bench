@@ -26,7 +26,7 @@ class _MockHandler(BaseHTTPRequestHandler):
             self.send_error(404)
             return
         body = (
-            resources.files("workspace_bench.browser")
+            resources.files("workspace_bench.workspace.browser")
             .joinpath("mock_workspace.html")
             .read_bytes()
         )

@@ -33,6 +33,7 @@ from workspace_bench.core.judge import (
     JudgeConfig,
     JudgeVerdict,
     build_judge_context,
+    resolve_judge_template,
     judge_episode,
     stark_app_catalog_entry,
 )
@@ -271,37 +272,6 @@ def main(argv: list[str] | None = None) -> int:
     export_parser.add_argument("--output", required=True)
 
 
-    rollout_parser = subparsers.add_parser(
-        "export-rollouts", help="Export normalized rollout JSONL."
-    )
-    _add_rollout_source_args(rollout_parser)
-    _add_task_selection_args(rollout_parser)
-
-    sft_parser = subparsers.add_parser(
-        "export-sft", help="Export rollout data in an SFT-friendly JSONL format."
-    )
-    _add_rollout_source_args(sft_parser)
-    _add_task_selection_args(sft_parser)
-    sft_parser.add_argument(
-        "--format",
-        choices=["sharegpt", "openai_messages", "tool_call_jsonl"],
-        default="openai_messages",
-        help="SFT output format.",
-    )
-    sft_parser.add_argument(
-        "--include-failures",
-        action="store_true",
-        help="Include failed attempts. By default only passing attempts are exported.",
-    )
-
-    preference_parser = subparsers.add_parser(
-        "export-preferences",
-        help="Export chosen/rejected preference pairs from repeated attempts.",
-    )
-    preference_parser.add_argument("--comparison-dir", required=True)
-    preference_parser.add_argument("--output", required=True)
-    _add_task_selection_args(preference_parser)
-
     agent_parser = subparsers.add_parser(
         "run-agent-command",
         help="Run an external command that emits JSONL Workspace tool calls.",
@@ -352,12 +322,6 @@ def main(argv: list[str] | None = None) -> int:
         return _cmd_smoke_workspace_mcp(args)
     if args.command == "export-task":
         return _cmd_export_task(args)
-    if args.command == "export-rollouts":
-        return _cmd_export_rollouts(args)
-    if args.command == "export-sft":
-        return _cmd_export_sft(args)
-    if args.command == "export-preferences":
-        return _cmd_export_preferences(args)
     if args.command == "run-agent-command":
         return _cmd_run_agent_command(args)
     if args.command == "canary":
@@ -395,17 +359,6 @@ def _add_task_selection_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--task-file", help="Use one task JSON file.")
     _add_task_collection_args(parser)
     _add_task_filters(parser)
-
-
-def _add_rollout_source_args(parser: argparse.ArgumentParser) -> None:
-    parser.add_argument("--output", required=True)
-    parser.add_argument("--comparison-dir", help="Read an evaluator output directory.")
-    parser.add_argument("--trace-dir", help="Read trace artifacts from this directory.")
-    parser.add_argument(
-        "--oracle",
-        action="store_true",
-        help="Export oracle traces for the selected tasks.",
-    )
 
 
 def _cmd_list(args: argparse.Namespace) -> int:
@@ -690,38 +643,6 @@ def _cmd_export_task(args: argparse.Namespace) -> int:
     return 0
 
 
-def _cmd_export_rollouts(args: argparse.Namespace) -> int:
-    from workspace_bench.exports import write_rollouts_jsonl
-
-    records = _load_export_rollouts(args)
-    count = write_rollouts_jsonl(records, Path(args.output))
-    print(f"Wrote {count} rollout record(s) to {args.output}")
-    return 0
-
-
-def _cmd_export_sft(args: argparse.Namespace) -> int:
-    from workspace_bench.exports import write_sft_jsonl
-
-    records = _load_export_rollouts(args)
-    count = write_sft_jsonl(
-        records,
-        Path(args.output),
-        fmt=args.format,
-        include_failures=args.include_failures,
-    )
-    print(f"Wrote {count} SFT record(s) to {args.output}")
-    return 0
-
-
-def _cmd_export_preferences(args: argparse.Namespace) -> int:
-    from workspace_bench.exports import write_preferences_jsonl
-
-    records = _load_export_rollouts(args)
-    count = write_preferences_jsonl(records, Path(args.output))
-    print(f"Wrote {count} preference pair(s) to {args.output}")
-    return 0
-
-
 def _cmd_run_agent_command(args: argparse.Namespace) -> int:
     tasks = _selected_tasks(args)
     base_run_dir = Path(args.run_dir) if args.run_dir else None
@@ -995,37 +916,6 @@ def _selected_tasks(args: argparse.Namespace) -> list[Task]:
     return tasks
 
 
-def _load_export_rollouts(args: argparse.Namespace):
-    from workspace_bench.exports import annotate_rollouts
-    from workspace_bench.exports import (
-        load_comparison_rollouts,
-        load_trace_dir_rollouts,
-        rollouts_from_oracle,
-    )
-
-    source_count = sum(
-        [
-            bool(getattr(args, "comparison_dir", None)),
-            bool(getattr(args, "trace_dir", None)),
-            bool(getattr(args, "oracle", False)),
-        ]
-    )
-    if source_count != 1:
-        raise SystemExit(
-            "Choose exactly one rollout source: --oracle, --comparison-dir, or --trace-dir"
-        )
-
-    tasks = _selected_tasks(args)
-    if getattr(args, "oracle", False):
-        records = rollouts_from_oracle(tasks)
-        return annotate_rollouts(records, task_suite=_task_suite_manifest(args))
-    if getattr(args, "comparison_dir", None):
-        records = load_comparison_rollouts(Path(args.comparison_dir), tasks)
-        return annotate_rollouts(records, task_suite=_task_suite_manifest(args))
-    records = load_trace_dir_rollouts(Path(args.trace_dir), tasks)
-    return annotate_rollouts(records, task_suite=_task_suite_manifest(args))
-
-
 def _task_collection(args: argparse.Namespace) -> list[Task]:
     task_dir = getattr(args, "task_dir", None)
     if not task_dir:
@@ -1163,9 +1053,13 @@ def _cmd_judge(args: argparse.Namespace) -> int:
                     task,
                     stark_app_catalog_entry(task),
                     trace,
-                    str(stored.get("note_text", "")),
+                    str(stored.get("final_answer", "")),
                 )
-                verdict = judge_episode(config, context)
+                verdict = judge_episode(
+                    config,
+                    context,
+                    template_sha=resolve_judge_template(task)[1],
+                )
             except Exception as error:  # noqa: BLE001 - persisted as row output.
                 verdict = JudgeVerdict(
                     passed=None,
@@ -1373,7 +1267,7 @@ def _cmd_serve_fixture(backend_name: str, host: str, port: int) -> int:
 
 
 def _cmd_serve_task_backend(args: argparse.Namespace) -> int:
-    from workspace_bench.browser.task_backend import TaskBackendServer
+    from workspace_bench.workspace.browser.task_backend import TaskBackendServer
 
     task = find_task(args.task)
     server = TaskBackendServer(
@@ -1396,7 +1290,7 @@ def _cmd_serve_task_backend(args: argparse.Namespace) -> int:
 
 
 def _cmd_browser_cert(args: argparse.Namespace) -> int:
-    from workspace_bench.browser.certification import browser_certify, setup_browser_auth
+    from workspace_bench.workspace.browser.certification import browser_certify, setup_browser_auth
 
     if args.setup_auth:
         if args.auth_state is None:

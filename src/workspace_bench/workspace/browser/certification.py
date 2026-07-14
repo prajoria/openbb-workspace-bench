@@ -13,8 +13,8 @@ from typing import Any, Literal
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 
-from workspace_bench.browser.mock_server import MockWorkspaceServer
-from workspace_bench.browser.task_backend import TaskBackendModel, TaskBackendServer
+from workspace_bench.workspace.browser.mock_server import MockWorkspaceServer
+from workspace_bench.workspace.browser.task_backend import TaskBackendModel, TaskBackendServer
 from workspace_bench.core.models import JsonDict, RuntimeDataset, Task
 from workspace_bench.core.runner import find_task
 from workspace_bench.workspace.runtime import bind_dataset, materialize_dataset
@@ -95,7 +95,7 @@ def load_certification_subset(path: Path | None = None) -> tuple[CertificationEn
 
     if path is None:
         raw = (
-            resources.files("workspace_bench.browser")
+            resources.files("workspace_bench.workspace.browser")
             .joinpath("cert_subset.json")
             .read_text(encoding="utf-8")
         )
@@ -363,7 +363,7 @@ def load_selectors(path: Path | None = None) -> dict[str, str]:
     """Load default selectors, optionally replacing values from a local override."""
 
     default_payload = json.loads(
-        resources.files("workspace_bench.browser")
+        resources.files("workspace_bench.workspace.browser")
         .joinpath("selectors.json")
         .read_text(encoding="utf-8")
     )

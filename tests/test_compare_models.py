@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import importlib
 import shlex
 import sys
 from types import SimpleNamespace
@@ -100,27 +99,6 @@ def test_widget_hints_can_be_ablated() -> None:
     assert "origin_hints" not in system
 
 
-def test_default_batch_adapter_prompts_accept_public_task_envelope(monkeypatch) -> None:
-    examples_dir = resolve_repo_root() / "examples"
-    monkeypatch.syspath_prepend(str(examples_dir))
-    monkeypatch.delitem(sys.modules, "ollama_agent", raising=False)
-    monkeypatch.delitem(sys.modules, "openai_gpt4_1", raising=False)
-    ollama_agent = importlib.import_module("ollama_agent")
-    openai_agent = importlib.import_module("openai_gpt4_1")
-    envelope = build_task_envelope(find_task("price_performance_aapl"))
-    specification_level = envelope["task"]["specification_level"]
-
-    prompts = (
-        ollama_agent.build_prompt(envelope),
-        openai_agent.build_prompt(envelope),
-    )
-
-    assert all(
-        f'"specification_level": "{specification_level}"' in prompt
-        for prompt in prompts
-    )
-
-
 def test_batch_runner_executes_one_real_jsonl_agent_attempt(tmp_path) -> None:
     adapter = ModelAdapter(
         slug="jsonl-rule-agent",
@@ -200,11 +178,11 @@ def test_comparison_metadata_records_workspace_baseline_override() -> None:
         SimpleNamespace(
             task_dir=None,
             suite="enterprise-apps-usage",
-            workspace_baseline="default-v1",
+            workspace_baseline="all-stark-enterprise-apps",
         )
     )
 
-    assert metadata["workspace_baseline"] == "default-v1"
+    assert metadata["workspace_baseline"] == "all-stark-enterprise-apps"
 
 
 def test_colorize_wraps_enabled_status() -> None:
@@ -363,7 +341,7 @@ def test_resolve_repo_root_finds_checkout_from_nested_path() -> None:
     root = resolve_repo_root()
 
     assert (root / "pyproject.toml").exists()
-    assert (root / "examples" / "openai_gpt4_1.py").exists()
+    assert (root / "src" / "workspace_bench" / "task_suites").exists()
 
 
 def test_validate_adapters_for_runner_rejects_unsupported_interactive_provider() -> None:

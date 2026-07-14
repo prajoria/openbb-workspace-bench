@@ -8,14 +8,14 @@ from types import SimpleNamespace
 from urllib.request import Request, urlopen
 
 
-from workspace_bench.browser.certification import (
+from workspace_bench.workspace.browser.certification import (
     CATEGORY_COUNTS,
     browser_certify,
     dry_run_subset,
     load_certification_subset,
     validate_entry,
 )
-from workspace_bench.browser.task_backend import TaskBackendServer
+from workspace_bench.workspace.browser.task_backend import TaskBackendServer
 from workspace_bench.core.runner import find_task
 
 
@@ -73,7 +73,7 @@ def test_browser_certification_fails_closed_when_no_tasks_are_selected(
     monkeypatch,
     tmp_path: Path,
 ) -> None:
-    from workspace_bench.browser import certification
+    from workspace_bench.workspace.browser import certification
 
     monkeypatch.setattr(certification, "load_certification_subset", lambda: ())
 

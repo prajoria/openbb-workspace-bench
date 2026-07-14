@@ -54,8 +54,8 @@ where = ["src"]
 "workspace_bench.task_suites.build_openbb_apps" = ["*.json", "**/*.json", "*.md"]
 "workspace_bench.task_suites.enterprise_apps_default" = ["*.json", "**/*.json", "*.md"]
 "workspace_bench.task_suites.smoke" = ["*.json", "**/*.json", "*.md"]
-"workspace_bench.workspace.data" = ["*.json"]
-"workspace_bench.browser" = ["*.json", "*.html"]
+"workspace_bench.data" = ["*.json", "**/*.json"]
+"workspace_bench.workspace.browser" = ["*.json", "*.html"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -71,7 +71,7 @@ target-version = "py311"
 [tool.mypy]
 python_version = "3.11"
 ignore_missing_imports = true
-files = ["src", "scripts", "examples"]
+files = ["src", "scripts"]
 
 [tool.uv]
 constraint-dependencies = [

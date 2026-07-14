@@ -11,7 +11,6 @@ import json
 import os
 import shutil
 import subprocess
-import shlex
 import ssl
 import sys
 import threading
@@ -47,6 +46,7 @@ from workspace_bench.core.judge import (
     stark_app_catalog_entry,
 )
 from workspace_bench.core.models import (
+    final_answer_from_trace,
     BENCHMARK_NAME,
     JsonDict,
     RunResult,
@@ -79,15 +79,14 @@ RUN_MANIFEST_SCHEMA_VERSION = "workspace-bench-run-manifest/v1"
 
 
 def resolve_repo_root(start: Path | None = None) -> Path:
-    """Find the checkout root used for repo-local example adapters."""
+    """Find the checkout root of the benchmark repository."""
 
     start = start or Path.cwd()
     candidates = [start, *start.parents, *Path(__file__).resolve().parents]
     for candidate in candidates:
         if (
             (candidate / "pyproject.toml").exists()
-            and (candidate / "examples" / "openai_gpt4_1.py").exists()
-            and (candidate / "examples" / "ollama_agent.py").exists()
+            and (candidate / "src" / "workspace_bench" / "task_suites").exists()
         ):
             return candidate
     return Path.cwd()
@@ -212,13 +211,14 @@ def effective_settings(args: argparse.Namespace) -> JsonDict:
 
 
 def default_adapters() -> dict[str, ModelAdapter]:
-    repo_root = resolve_repo_root()
-    python = shlex.quote(sys.executable)
+    # The bundled batch example adapters were removed with examples/; the
+    # defaults now serve the interactive runner (provider/model), and batch
+    # runs require an explicit --models-file.
     return {
         "openai-gpt-4.1": ModelAdapter(
             slug="openai-gpt-4.1",
             label="OpenAI GPT-4.1",
-            command=f"{python} {shlex.quote(str(repo_root / 'examples' / 'openai_gpt4_1.py'))}",
+            command="",
             env={},
             provider="openai",
             model="gpt-4.1",
@@ -226,7 +226,7 @@ def default_adapters() -> dict[str, ModelAdapter]:
         "ollama-gpt-oss-20b": ModelAdapter(
             slug="ollama-gpt-oss-20b",
             label="Ollama gpt-oss:20b",
-            command=f"{python} {shlex.quote(str(repo_root / 'examples' / 'ollama_agent.py'))}",
+            command="",
             env={"OLLAMA_MODEL": "gpt-oss:20b"},
             provider="ollama",
             model="gpt-oss:20b",
@@ -918,7 +918,9 @@ def run_adapter(
             repeats=repeats,
         )
         if resume and runner == "interactive":
-            replayed = replay_completed_run(adapter, task, run_dir, repeat=repeat)
+            replayed = replay_completed_run(
+                adapter, task, run_dir, repeat=repeat, max_turns_override=max_turns_override
+            )
             if replayed is not None:
                 return replayed
         if runner == "batch":
@@ -1035,6 +1037,7 @@ def replay_completed_run(
     run_dir: Path,
     *,
     repeat: int = 1,
+    max_turns_override: int | None = None,
 ) -> ComparisonRun | None:
     """Rebuild a ComparisonRun from a completed episode already on disk.
 
@@ -1060,7 +1063,10 @@ def replay_completed_run(
         meta: JsonDict = json.loads(meta_path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return None
-    episode = WorkspaceEpisode(task=task)
+    episode = WorkspaceEpisode(
+        task=task,
+        max_turns_override=max_turns_override or int(task.limits.get("max_turns", 12)),
+    )
     if output_path.exists():
         for line in output_path.read_text(encoding="utf-8").splitlines():
             line = line.strip()
@@ -1145,9 +1151,9 @@ def run_interactive_agent(
     if responses_path.exists():
         responses_path.unlink()
 
-    episode = WorkspaceEpisode(task=task)
-    messages = build_interactive_messages(task_payload, include_widget_hints=include_widget_hints)
     max_turns = max_turns_override or int(task.limits.get("max_turns", 12))
+    episode = WorkspaceEpisode(task=task, max_turns_override=max_turns)
+    messages = build_interactive_messages(task_payload, include_widget_hints=include_widget_hints)
     stdout_lines: list[str] = []
     stderr = ""
     exit_code: int | None = 0
@@ -1269,13 +1275,14 @@ def run_interactive_agent(
         call = ToolCall(tool_name, args)
         result = episode.step(call)
         append_jsonl(output_path, {"tool": call.name, "args": call.args})
+        if episode.answered:
+            break
         done_rule = None
         if task.success.required_answer_judgment:
             done_rule = (
-                "Choose the next single tool call. Return {\"done\": true} only "
-                "after you have called add_generative_widget with a note "
-                "containing your full final answer and exact figures from the "
-                "data you read."
+                "Choose the next single tool call. The task completes when you "
+                "call final_answer with your full answer text, quoting exact "
+                "figures from the data you read."
             )
         messages.append(
             {
@@ -1415,12 +1422,11 @@ def build_interactive_messages(
             "",
             *(
                 [
-                    "Completion rule for this task: the workspace must hold your "
-                    "final written answer. After reading the relevant widget data, "
-                    "call add_generative_widget with widget_type 'note' containing "
-                    "your full answer with exact figures copied from the data. The "
-                    'task is NOT complete — do not return {"done": true} — until '
-                    "that note exists.",
+                    "Completion rule for this task: you must submit your answer "
+                    "through the final_answer tool. After reading the relevant "
+                    "widget data, call final_answer with your full answer text, "
+                    "quoting exact figures copied from the data. Calling "
+                    "final_answer completes the episode.",
                     "",
                 ]
                 if "enterprise-apps-default/" in str(task.get("qualified_id", ""))
@@ -1973,7 +1979,7 @@ def judge_comparison_run(
             result.task,
             stark_app_catalog_entry(result.task),
             result.trace,
-            answer_note_text(result.final_snapshot),
+            final_answer_from_trace(result.trace) or "",
         )
         verdict = judge_callable(config, context)
     except Exception as error:  # noqa: BLE001 - surfaced in the result row.
@@ -2030,23 +2036,6 @@ def load_cached_judge_verdict(run_dir: Path) -> JudgeVerdict | None:
         return None
 
 
-def answer_note_text(snapshot: JsonDict) -> str:
-    """Extract the last generated note from a completed workspace snapshot."""
-
-    composition = snapshot.get("dashboard_composition") or {}
-    notes = [
-        widget
-        for widget in composition.get("widgets", [])
-        if widget.get("generated") and widget.get("type") == "note"
-    ]
-    if not notes:
-        return ""
-    value = notes[-1].get("generated_data")
-    if isinstance(value, str):
-        return value
-    return json.dumps(value, sort_keys=True, ensure_ascii=False)
-
-
 def judge_reason_line(verdict: JudgeVerdict) -> str:
     lines = [line.strip() for line in verdict.raw.splitlines() if line.strip()]
     if verdict.status in {"pass", "fail"} and lines and lines[0].casefold() in {
@@ -2063,30 +2052,40 @@ def persist_judge_input(run: ComparisonRun) -> None:
     task = run.run_result.task
     if not task.success.required_answer_judgment:
         return
+    setup: JsonDict = {
+        "initial_state": task.initial_state,
+        "allowed_tools": list(task.allowed_tools),
+    }
+    if task.workspace_baseline is not None:
+        setup["workspace_baseline"] = task.workspace_baseline
+    if task.workspace_backends:
+        setup["workspace_backends"] = list(task.workspace_backends)
+    if task.workspace_skills:
+        setup["workspace_skills"] = list(task.workspace_skills)
+    if task.fixtures:
+        setup["fixtures"] = {
+            "backends": [
+                {
+                    "name": backend.name,
+                    "backend_id": backend.backend_id,
+                    "url": backend.url,
+                }
+                for backend in task.fixtures
+            ]
+        }
     payload = {
         "task": {
             "id": task.id,
             "category": task.category,
             "family": task.family,
-            "specification_level": task.specification_level,
             "difficulty": task.difficulty,
             "prompt": task.prompt,
-            "business_terms": list(task.business_terms),
-            "fixtures": {
-                "backends": [
-                    {
-                        "name": backend.name,
-                        "backend_id": backend.backend_id,
-                        "url": backend.url,
-                    }
-                    for backend in task.fixtures
-                ]
+            "setup": setup,
+            "eval": {
+                "judge_evaluation": True,
+                "reference_trace": [],
+                "limits": task.limits,
             },
-            "initial_state": task.initial_state,
-            "allowed_tools": list(task.allowed_tools),
-            "success": {"required_answer_judgment": True},
-            "oracle_tool_calls": [],
-            "limits": task.limits,
         },
         "trace": [
             {
@@ -2097,7 +2096,7 @@ def persist_judge_input(run: ComparisonRun) -> None:
             }
             for event in run.run_result.trace
         ],
-        "note_text": answer_note_text(run.run_result.final_snapshot),
+        "final_answer": final_answer_from_trace(run.run_result.trace) or "",
     }
     write_json_atomic(run.run_dir / "judge_input.json", payload)
 

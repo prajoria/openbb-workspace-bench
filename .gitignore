@@ -36,3 +36,4 @@ runs/comparison/phase9a-smoke/
 
 # Local reference clones for catalog transcription
 references/
+*.egg-info/

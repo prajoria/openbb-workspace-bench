@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from workspace_bench.core.models import Task
+from workspace_bench.core.models import TASK_DIFFICULTIES, Task
 from workspace_bench.core.runner import TaskRunner, tasks_workspace_baseline
 from workspace_bench.core.suite_checks import release_checks_for_suite
 
@@ -68,8 +68,8 @@ def task_metadata_issues(task: Task) -> list[str]:
     issues = []
     if not task.family:
         issues.append("family must be non-empty")
-    if task.difficulty not in {"easy", "medium", "hard"}:
-        issues.append("difficulty must be one of easy, medium, hard")
+    if task.difficulty not in TASK_DIFFICULTIES:
+        issues.append(f"difficulty must be one of {', '.join(TASK_DIFFICULTIES)}")
     if not task.oracle_tool_calls:
         issues.append("oracle_tool_calls must be non-empty")
     if not task.allowed_tools:
