@@ -1,0 +1,48 @@
+{
+  "id": "smoke_get_params_options_level0",
+  "family": "get_params_options",
+  "difficulty": "level0",
+  "prompt": "Call get_params_options for param_name 'period' of widget_id 'earnings_estimates_monitor_calendar_upcoming_earnings' from origin 'Bench Stark Enterprise'.",
+  "setup": {
+    "workspace_baseline": "",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "allowed_tools": [
+      "get_params_options"
+    ]
+  },
+  "eval": {
+    "required_tool_calls": [
+      {
+        "tool": "get_params_options",
+        "args_contains": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
+          "param_name": "period"
+        }
+      }
+    ],
+    "reference_trace": [
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
+          "param_name": "period"
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 1
+    }
+  }
+}

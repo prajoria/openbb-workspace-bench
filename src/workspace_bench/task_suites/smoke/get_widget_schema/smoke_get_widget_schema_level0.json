@@ -1,0 +1,46 @@
+{
+  "id": "smoke_get_widget_schema_level0",
+  "family": "get_widget_schema",
+  "difficulty": "level0",
+  "prompt": "Call get_widget_schema for origin 'Bench Stark Enterprise' and widget_id 'portfolio_command_center_actions_trade_ideas'.",
+  "setup": {
+    "workspace_baseline": "",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "allowed_tools": [
+      "get_widget_schema"
+    ]
+  },
+  "eval": {
+    "required_tool_calls": [
+      {
+        "tool": "get_widget_schema",
+        "args_contains": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "portfolio_command_center_actions_trade_ideas"
+        }
+      }
+    ],
+    "reference_trace": [
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "portfolio_command_center_actions_trade_ideas"
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 1
+    }
+  }
+}

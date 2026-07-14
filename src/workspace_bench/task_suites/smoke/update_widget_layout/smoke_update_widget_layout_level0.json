@@ -1,0 +1,82 @@
+{
+  "id": "smoke_update_widget_layout_level0",
+  "family": "update_widget_layout",
+  "difficulty": "level0",
+  "prompt": "Use update_widget_layout on the seeded widget_id 'vendor_dataset_monitor_incidents_incident_log' from origin 'Bench Stark Enterprise' to place it at x 0, y 0, w 20, h 10 on tab_id 'overview'.",
+  "setup": {
+    "workspace_baseline": "",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Smoke update_widget_layout",
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "activate": true,
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "vendor_dataset_monitor_incidents_incident_log",
+            "tab_id": "overview",
+            "data_args": {
+              "vendor": "FactSet",
+              "status": "Open",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          }
+        ]
+      }
+    },
+    "allowed_tools": [
+      "update_widget_layout"
+    ]
+  },
+  "eval": {
+    "required_layouts": [
+      {
+        "widget_id": "vendor_dataset_monitor_incidents_incident_log",
+        "tab_id": "overview",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 10
+      }
+    ],
+    "reference_trace": [
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "vendor_dataset_monitor_incidents_incident_log",
+          "x": 0,
+          "y": 0,
+          "w": 20,
+          "h": 10,
+          "tab_id": "overview"
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 1
+    }
+  }
+}

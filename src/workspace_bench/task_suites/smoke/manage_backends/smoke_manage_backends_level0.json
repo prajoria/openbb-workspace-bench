@@ -1,0 +1,44 @@
+{
+  "id": "smoke_manage_backends_level0",
+  "family": "manage_backends",
+  "difficulty": "level0",
+  "prompt": "Call manage_backends operation='list' once.",
+  "setup": {
+    "workspace_baseline": "",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "allowed_tools": [
+      "manage_backends"
+    ]
+  },
+  "eval": {
+    "required_tool_calls": [
+      {
+        "tool": "manage_backends",
+        "args_contains": {
+          "operation": "list"
+        }
+      }
+    ],
+    "reference_trace": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "list"
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 1
+    }
+  }
+}

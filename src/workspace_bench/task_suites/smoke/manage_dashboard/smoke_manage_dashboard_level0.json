@@ -1,0 +1,39 @@
+{
+  "id": "smoke_manage_dashboard_level0",
+  "family": "manage_dashboard",
+  "difficulty": "level0",
+  "prompt": "Use manage_dashboard operation='update' with dashboard_id 'dash_001' to rename the current dashboard to 'Smoke Renamed Dashboard'.",
+  "setup": {
+    "workspace_baseline": "",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "allowed_tools": [
+      "manage_dashboard"
+    ]
+  },
+  "eval": {
+    "required_dashboard_name_contains": "Smoke Renamed Dashboard",
+    "reference_trace": [
+      {
+        "tool": "manage_dashboard",
+        "args": {
+          "operation": "update",
+          "dashboard_id": "dash_001",
+          "name": "Smoke Renamed Dashboard"
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 1
+    }
+  }
+}

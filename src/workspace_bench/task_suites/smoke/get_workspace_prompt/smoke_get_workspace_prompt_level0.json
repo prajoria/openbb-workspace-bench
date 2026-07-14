@@ -1,0 +1,44 @@
+{
+  "id": "smoke_get_workspace_prompt_level0",
+  "family": "get_workspace_prompt",
+  "difficulty": "level0",
+  "prompt": "Call get_workspace_prompt with name 'workspace_tool_usage'.",
+  "setup": {
+    "workspace_baseline": "",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "allowed_tools": [
+      "get_workspace_prompt"
+    ]
+  },
+  "eval": {
+    "required_tool_calls": [
+      {
+        "tool": "get_workspace_prompt",
+        "args_contains": {
+          "name": "workspace_tool_usage"
+        }
+      }
+    ],
+    "reference_trace": [
+      {
+        "tool": "get_workspace_prompt",
+        "args": {
+          "name": "workspace_tool_usage"
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 1
+    }
+  }
+}

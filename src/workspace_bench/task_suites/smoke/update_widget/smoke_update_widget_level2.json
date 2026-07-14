@@ -1,0 +1,97 @@
+{
+  "id": "smoke_update_widget_level2",
+  "family": "update_widget",
+  "difficulty": "level2",
+  "prompt": "Use update_widget on the seeded widget_id 'strategy_health_monitor_capacity_capacity_utilization' from origin 'Bench Stark Enterprise' to set data_args period to 'MTD'.",
+  "setup": {
+    "workspace_baseline": "stark-onboard-a",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Smoke update_widget",
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "activate": true,
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "strategy_health_monitor_capacity_capacity_utilization",
+            "tab_id": "overview",
+            "data_args": {
+              "strategy": "Global Equities",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          }
+        ]
+      }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "strategy_health_monitor_capacity_capacity_utilization",
+        "data_args": {
+          "period": "MTD"
+        }
+      }
+    ],
+    "reference_trace": [
+      {
+        "tool": "update_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "strategy_health_monitor_capacity_capacity_utilization",
+          "data_args": {
+            "period": "MTD"
+          }
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 2
+    }
+  }
+}

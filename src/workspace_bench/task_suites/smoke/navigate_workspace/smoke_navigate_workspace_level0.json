@@ -1,0 +1,63 @@
+{
+  "id": "smoke_navigate_workspace_level0",
+  "family": "navigate_workspace",
+  "difficulty": "level0",
+  "prompt": "Use navigate_workspace operation='tab' to switch to tab_id 'details'.",
+  "setup": {
+    "workspace_baseline": "",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Smoke navigate_workspace",
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          },
+          {
+            "id": "details",
+            "name": "Details"
+          }
+        ],
+        "activate": true,
+        "widgets": []
+      }
+    },
+    "allowed_tools": [
+      "navigate_workspace"
+    ]
+  },
+  "eval": {
+    "required_tool_calls": [
+      {
+        "tool": "navigate_workspace",
+        "args_contains": {
+          "operation": "tab",
+          "tab_id": "details"
+        }
+      }
+    ],
+    "reference_trace": [
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "tab",
+          "tab_id": "details"
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 1
+    }
+  }
+}

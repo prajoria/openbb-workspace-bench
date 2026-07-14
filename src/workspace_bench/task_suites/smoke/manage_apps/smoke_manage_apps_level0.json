@@ -1,0 +1,44 @@
+{
+  "id": "smoke_manage_apps_level0",
+  "family": "manage_apps",
+  "difficulty": "level0",
+  "prompt": "Use manage_apps operation='instantiate' with backend_id 'backend_001', template_id 'portfolio-command-center', dashboard_name 'Smoke Instantiated App', and activate true.",
+  "setup": {
+    "workspace_baseline": "",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "allowed_tools": [
+      "manage_apps"
+    ]
+  },
+  "eval": {
+    "required_dashboard_name_contains": "Smoke Instantiated App",
+    "layout": {
+      "within_grid": false
+    },
+    "reference_trace": [
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "template_id": "portfolio-command-center",
+          "dashboard_name": "Smoke Instantiated App",
+          "activate": true
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 1
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "smoke_manage_navigation_bar_level0",
+  "family": "manage_navigation_bar",
+  "difficulty": "level0",
+  "prompt": "Use manage_navigation_bar operation='create' on the current dashboard with tabs named 'Overview' and 'Details'.",
+  "setup": {
+    "workspace_baseline": "",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "allowed_tools": [
+      "manage_navigation_bar"
+    ]
+  },
+  "eval": {
+    "required_tabs": [
+      "overview",
+      "details"
+    ],
+    "reference_trace": [
+      {
+        "tool": "manage_navigation_bar",
+        "args": {
+          "operation": "create",
+          "tabs": [
+            {
+              "name": "Overview"
+            },
+            {
+              "name": "Details"
+            }
+          ]
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 1
+    }
+  }
+}

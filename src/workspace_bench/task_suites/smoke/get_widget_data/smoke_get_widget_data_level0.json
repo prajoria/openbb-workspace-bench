@@ -1,0 +1,54 @@
+{
+  "id": "smoke_get_widget_data_level0",
+  "family": "get_widget_data",
+  "difficulty": "level0",
+  "prompt": "Call get_widget_data for origin 'Bench Stark Enterprise' and widget_id 'risk_exposure_monitor_dashboard_var_trend' with data_args portfolio 'Global Equity' and period 'YTD'.",
+  "setup": {
+    "workspace_baseline": "",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "allowed_tools": [
+      "get_widget_data"
+    ]
+  },
+  "eval": {
+    "required_tool_calls": [
+      {
+        "tool": "get_widget_data",
+        "args_contains": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+          "data_args": {
+            "portfolio": "Global Equity",
+            "period": "YTD"
+          }
+        }
+      }
+    ],
+    "reference_trace": [
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+          "data_args": {
+            "portfolio": "Global Equity",
+            "period": "YTD"
+          }
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 1
+    }
+  }
+}

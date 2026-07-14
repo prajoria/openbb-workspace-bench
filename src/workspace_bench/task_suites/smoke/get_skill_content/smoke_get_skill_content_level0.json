@@ -1,0 +1,44 @@
+{
+  "id": "smoke_get_skill_content_level0",
+  "family": "get_skill_content",
+  "difficulty": "level0",
+  "prompt": "Call get_skill_content with slug 'daloopa-tearsheet'.",
+  "setup": {
+    "workspace_baseline": "",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "allowed_tools": [
+      "get_skill_content"
+    ]
+  },
+  "eval": {
+    "required_tool_calls": [
+      {
+        "tool": "get_skill_content",
+        "args_contains": {
+          "slug": "daloopa-tearsheet"
+        }
+      }
+    ],
+    "reference_trace": [
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-tearsheet"
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 1
+    }
+  }
+}

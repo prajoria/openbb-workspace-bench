@@ -1,0 +1,63 @@
+{
+  "id": "smoke_read_workspace_resource_level3",
+  "family": "read_workspace_resource",
+  "difficulty": "level3",
+  "prompt": "Open the workspace documentation resource that lists the supported widget types.",
+  "setup": {
+    "workspace_baseline": "stark-onboard-a",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
+    "required_tool_calls": [
+      {
+        "tool": "read_workspace_resource",
+        "args_contains": {
+          "uri": "openbb://workspace/specs/widget-types"
+        }
+      }
+    ],
+    "reference_trace": [
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widget-types"
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 4
+    }
+  }
+}

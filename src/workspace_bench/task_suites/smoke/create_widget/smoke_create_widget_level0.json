@@ -1,0 +1,53 @@
+{
+  "id": "smoke_create_widget_level0",
+  "family": "create_widget",
+  "difficulty": "level0",
+  "prompt": "Use create_widget to add widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise' to the current dashboard with data_args severity 'High', status 'Open', period 'YTD'.",
+  "setup": {
+    "workspace_baseline": "",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "allowed_tools": [
+      "create_widget"
+    ]
+  },
+  "eval": {
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+        "data_args": {
+          "severity": "High",
+          "status": "Open",
+          "period": "YTD"
+        }
+      }
+    ],
+    "reference_trace": [
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+          "data_args": {
+            "severity": "High",
+            "status": "Open",
+            "period": "YTD"
+          }
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 1
+    }
+  }
+}

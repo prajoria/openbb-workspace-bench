@@ -1,0 +1,78 @@
+{
+  "id": "smoke_create_widget_level2",
+  "family": "create_widget",
+  "difficulty": "level2",
+  "prompt": "Use create_widget to add widget_id 'compliance_surveillance_hub_alerts_alert_trend' from origin 'Bench Stark Enterprise' to the current dashboard with data_args severity 'High', status 'Open', period 'YTD'.",
+  "setup": {
+    "workspace_baseline": "stark-onboard-a",
+    "workspace_backends": [
+      "stark-enterprise-x"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet"
+    ],
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+        "data_args": {
+          "severity": "High",
+          "status": "Open",
+          "period": "YTD"
+        }
+      }
+    ],
+    "reference_trace": [
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+          "data_args": {
+            "severity": "High",
+            "status": "Open",
+            "period": "YTD"
+          }
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 2
+    }
+  }
+}
