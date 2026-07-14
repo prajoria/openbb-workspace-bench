@@ -1,0 +1,83 @@
+{
+ "id": "mnpi_research_review_p3_y",
+ "prompt": "Create the approval narrative for legal review with unresolved risks and required attestations.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "MNPI & Research Review",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "mnpi_research_review_evidence_evidence_and_sign_off_history",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "mnpi_research_review_evidence_research_approval_evidence",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "mnpi_research_review_research_reviewer_comments",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Macro Absolute Return is not ready for legal approval because evidence/sign-off is Open at 29.54 and research-approval evidence is Open at 84.29, even though its reviewer-comment row is Closed at 13.95. Flagship Long/Short has an Open reviewer comment at 88.49; its approval-evidence rows are Closed at 8.26 and Approved at 133.28 for different periods, so the comment still requires reconciliation. Healthcare Alpha approval evidence remains In Review at 70.76. Global Opportunities has an In Review reviewer comment at 37.65 despite Closed approval evidence at 122.72. Legal should require fund- and period-matched attestations, comment dispositions, and sign-off records before granting approval.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

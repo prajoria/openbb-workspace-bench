@@ -1,0 +1,80 @@
+{
+ "id": "portfolio_command_center_p3_y",
+ "prompt": "Explain which alerts should be escalated to the CIO before the opening risk meeting.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Portfolio Command Center",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "portfolio_command_center_actions_approval_checklist",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "portfolio_command_center_overview_top_alerts",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "portfolio_command_center_overview_limit_utilization",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Escalate Global Opportunities first because its 77-alert queue is explicitly Escalated; its limit-utilization records are Open at 124.12 and In Review at 40.48. Multi-Asset Fund has 161 Open alerts and an Escalated limit reading of 30.66, making it the next control priority despite the periods not matching. Flagship Long/Short has 56 Open alerts and 156 In Review alerts, alongside Open approval-checklist readings of 61.52 and 90.0 and Open limit utilization at 2.74. Income Fund's 127-alert row is Approved, but its approval checklist is Escalated at 19.11 and should be raised as a separate governance item. Alert descriptions, severity, and row-level links are absent, so the CIO should receive these as queue-level escalations rather than named incidents.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

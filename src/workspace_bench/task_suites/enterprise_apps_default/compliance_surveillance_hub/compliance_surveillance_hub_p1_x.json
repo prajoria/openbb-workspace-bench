@@ -1,0 +1,83 @@
+{
+ "id": "compliance_surveillance_hub_p1_x",
+ "prompt": "Triage open surveillance alerts by severity, age, restricted-list overlap, and audit evidence.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Compliance Surveillance Hub",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_alerts_surveillance_alerts",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_audit_investigation_evidence",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_restricted_list_restricted_and_watch_list",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Flagship Long/Short has Open alert groups of 210 and 119, so the 210-count group is the larger queue and should be reviewed first. Restricted-list overlap is also Open at 18.98, and investigation evidence remains Open at 64.75. Those records support escalation and evidence preservation, but neither alert row contains an explicit severity or age field. The data also lack an alert-level join to the restricted-list and audit rows, so they cannot rank individual alerts by overlap or evidence. Triage the larger open queue first while obtaining alert age, severity, and linked-evidence details before assigning case-level priority.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

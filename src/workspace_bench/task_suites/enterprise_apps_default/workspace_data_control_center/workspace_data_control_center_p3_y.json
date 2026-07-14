@@ -1,0 +1,95 @@
+{
+ "id": "workspace_data_control_center_p3_y",
+ "prompt": "Summarize usage, export, and prompt-audit activity for the platform owner.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Workspace Data Control Center",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_ai_access_prompt_audit",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_usage_app_usage",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_usage_export_activity",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_usage_export_review_queue",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Global Opportunities app usage is Open at 67.64 with a -0.0331 change, and its prompt-audit activity is Open at 54.45 with a -0.009 change. Credit Plus export activity is Open at 122.15 with a -0.0668 change. Its export-review queue is also Open at 18.0 with a 0.0838 change. Because usage and prompt audit concern Global Opportunities while export work concerns Credit Plus, the platform owner should maintain separate review tracks. User, app, export, and prompt identifiers are not served and must be obtained before the open records can be investigated or closed.",
+  "limits": {
+   "max_turns": 8
+  }
+ }
+}

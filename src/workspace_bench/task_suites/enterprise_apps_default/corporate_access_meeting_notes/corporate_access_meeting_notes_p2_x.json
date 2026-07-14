@@ -1,0 +1,155 @@
+{
+ "id": "corporate_access_meeting_notes_p2_x",
+ "prompt": "Flag meetings or notes that require compliance review before research can be distributed.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Corporate Access & Meeting Notes",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "corporate_access_meeting_notes_compliance_mnpi_attestation_status",
+     "data_args": {
+      "sector": "Healthcare",
+      "status": "Open",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "corporate_access_meeting_notes_compliance_restricted_tags",
+     "data_args": {
+      "sector": "Healthcare",
+      "status": "Open",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "corporate_access_meeting_notes_compliance_compliance_follow_ups",
+     "data_args": {
+      "sector": "Healthcare",
+      "status": "Open",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "corporate_access_meeting_notes_meetings_meeting_calendar",
+     "data_args": {
+      "sector": "Healthcare",
+      "status": "Open",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "corporate_access_meeting_notes_meetings_expert_calls",
+     "data_args": {
+      "sector": "Healthcare",
+      "status": "Open",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "corporate_access_meeting_notes_notes_meeting_notes_index",
+     "data_args": {
+      "sector": "Healthcare",
+      "status": "Open",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "corporate_access_meeting_notes_claims_management_claims_tracker",
+     "data_args": {
+      "sector": "Healthcare",
+      "status": "Open",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "corporate_access_meeting_notes_claims_thesis_change_log",
+     "data_args": {
+      "sector": "Healthcare",
+      "status": "Open",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "corporate_access_meeting_notes_claims_evidence_and_sign_off_history",
+     "data_args": {
+      "sector": "Healthcare",
+      "status": "Open",
+      "ticker": "LLY"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Flag every served Flagship Long/Short meeting and note for compliance review because the meeting-calendar rows at 91.82 and 81.89, expert-call rows at 4.24 and 26.51, and meeting-notes row at 83.08 are all Open. The same fund has Open MNPI attestations at 20.04 and 56.63 and Open restricted-tag rows at 26.71 and 36.6. Compliance follow-ups are Open at 57.19 and 92.28, so those controls have not been closed. Claims and thesis records are also Open at 21.22 and 49.26, while evidence/sign-off remains Open at 45.91 and 84.06. Hold research distribution until the relevant meeting or note is linked to completed attestations, cleared restrictions, resolved follow-ups, and documented sign-off.",
+  "limits": {
+   "max_turns": 13
+  }
+ }
+}

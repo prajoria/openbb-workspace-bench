@@ -1,0 +1,113 @@
+{
+ "id": "executive_investment_dashboard_p1_x",
+ "prompt": "Write the executive briefing: firm AUM, flows, strategy returns, drawdown, stress risk, and major open issues.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Executive Investment Dashboard",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_firm_overview_aum_by_strategy",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_firm_overview_net_flows",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_issues_major_open_issues",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_performance_returns_by_strategy",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_performance_drawdown_summary",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_risk_stress_loss_summary",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The dashboard shows Open Global Equities AUM rows of 90111.48 and 120274.16 for Flagship Long/Short, but no firm-total row, so firm AUM should not be derived by summing them. Net-flow readings are Open at 83.06 for Atlas Pension and 25.88 for Northstar Endowment, although these are scores rather than currency flows. Global Equities returns remain Open at 0.0405 and 0.1031, with changes of -0.0386 and 0.044. Drawdowns are -7000 and -248500, while stress losses are -51000 and -134500; all risk rows remain Open. Major open-issue readings are 54.46 and 79.57, so leadership should obtain issue descriptions and owners while keeping the performance and risk observations under review.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

@@ -1,0 +1,83 @@
+{
+ "id": "mnpi_research_review_p2_x",
+ "prompt": "Identify research items that cannot be published until compliance evidence is complete.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "MNPI & Research Review",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "mnpi_research_review_evidence_evidence_and_sign_off_history",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "mnpi_research_review_evidence_research_approval_evidence",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "mnpi_research_review_research_draft_research_review",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Both Flagship Long/Short research drafts, scored 31.85 and 91.13, remain Open and cannot be published. Research-approval evidence is also Open at 5.45 and 89.99. Evidence and sign-off history remains Open at 64.44, confirming that compliance documentation is incomplete. Hold all Flagship Long/Short draft research until each draft is linked to completed approval evidence and a closed sign-off record. The scores have no approval threshold, so status rather than score magnitude drives the publication hold.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

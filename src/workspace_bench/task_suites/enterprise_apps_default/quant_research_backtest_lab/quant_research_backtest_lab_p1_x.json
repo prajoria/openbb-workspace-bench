@@ -1,0 +1,83 @@
+{
+ "id": "quant_research_backtest_lab_p1_x",
+ "prompt": "Evaluate whether the selected model is production-ready using signal quality, backtest path, risk exposures, and capacity.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Quant Research & Backtest Lab",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "quant_research_backtest_lab_backtest_backtest_performance",
+     "data_args": {
+      "model": "Multi-Factor Alpha v4",
+      "period": "YTD",
+      "universe": "US Large Cap"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "quant_research_backtest_lab_risk_model_factor_exposure_table",
+     "data_args": {
+      "model": "Multi-Factor Alpha v4",
+      "period": "YTD",
+      "universe": "US Large Cap"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "quant_research_backtest_lab_signals_signal_metrics",
+     "data_args": {
+      "model": "Multi-Factor Alpha v4",
+      "period": "YTD",
+      "universe": "US Large Cap"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Signal quality is mixed: the primary reading of 83.92 is above the 35.59 threshold, while the secondary reading of 30.95 is below it. Flagship Long/Short backtest-performance rows remain Open at 35.41 and 11.51, with negative changes of -0.0574 and -0.0708. Factor exposures are also Open at 0.0342 and 0.1608, with changes of 0.0489 and -0.0417. The served data do not provide exposure limits, a labeled backtest path, or any capacity measure. The selected model is therefore not demonstrably production-ready and should remain in review until the secondary signal, open backtest, risk limits, and capacity are resolved.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

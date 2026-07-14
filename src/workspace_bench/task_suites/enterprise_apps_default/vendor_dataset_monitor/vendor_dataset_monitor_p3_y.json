@@ -1,0 +1,119 @@
+{
+ "id": "vendor_dataset_monitor_p3_y",
+ "prompt": "Draft the vendor escalation note with affected datasets, app impact, and owner actions.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Vendor & Dataset Monitor",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_incidents_incident_log",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_incidents_blast_radius_summary",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_overview_workflow_overview",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_quality_validation_errors",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_quality_row_count_drift",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_quality_affected_apps",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Bloomberg is the primary vendor escalation because validation errors are Open at 49.89 and 64.35, affected-app readings are Open at 117.42, 74.8, and 3.46, and blast-radius readings are Open at 47.07, 133.21, and 5.97. FactSet also has Open incident readings of 24.87 and 41.3, while S&P Global quality and app-impact records remain In Review. MSCI has Open row-count drift of 114 and 124 despite Approved validation records. The workflow overview is generic at 0.4 and does not name datasets, applications, or owners. Vendor owners should supply feed identifiers and remediation plans, while internal app owners validate blast radius and downstream recovery. Keep each escalation open or in review until named dataset-to-app lineage and accountable actions are documented.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

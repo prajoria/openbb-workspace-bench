@@ -1,0 +1,83 @@
+{
+ "id": "risk_exposure_monitor_p3_x",
+ "prompt": "Explain which limits are closest to escalation and what portfolio changes would reduce utilization.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Risk & Exposure Monitor",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "risk_exposure_monitor_limits_limit_utilization",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "risk_exposure_monitor_limits_breaches_and_warnings",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "risk_exposure_monitor_limits_limit_breach_trend",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   }
+  ],
+  "reference_answer": "All served limit records are Open, but the rows do not name the limits or provide escalation thresholds. The largest displayed breach-or-warning exposure is 0.0746, ahead of 0.0137, while the larger breach-trend exposure is 0.0732 versus 0.053. Limit utilization is 0.0339 with a -0.0755 change. Without thresholds, none can be proven closest to escalation even though the 0.0746 warning and 0.0732 trend warrant first review. Map those rows to positions and limits, then reduce or hedge the matched exposures; no specific portfolio trade is supported by the aggregate data.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

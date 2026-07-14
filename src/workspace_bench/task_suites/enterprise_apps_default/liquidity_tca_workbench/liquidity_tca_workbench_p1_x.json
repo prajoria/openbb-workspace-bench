@@ -1,0 +1,92 @@
+{
+ "id": "liquidity_tca_workbench_p1_x",
+ "prompt": "Recommend execution tactics by order size, volume profile, venue flow, and expected implementation shortfall.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Liquidity & TCA Workbench",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "liquidity_tca_workbench_liquidity_adv_and_order_size",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "liquidity_tca_workbench_liquidity_volume_profile",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "liquidity_tca_workbench_tca_implementation_shortfall",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "liquidity_tca_workbench_tca_venue_flow_sankey",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD",
+      "raw": false
+     }
+    }
+   }
+  ],
+  "reference_answer": "The US Equity liquidity row shows 21 Open orders with a 0.0895 change, but no individual order size or ADV is supplied. Goldman Sachs's volume-profile reading is Open at 40.06, while implementation-shortfall readings are Open at 31.3 for Goldman Sachs and 72.74 for Barclays. The venue-flow series moves between 17.75 and 24.19, but it contains no venue names or flow units. Because shortfall score direction is undefined and the orders are not linked to brokers or venues, those values cannot determine an optimal route. Use a cautious staged execution plan only after obtaining order sizes, ADV participation limits, named venue flows, and broker-linked shortfall definitions.",
+  "limits": {
+   "max_turns": 8
+  }
+ }
+}

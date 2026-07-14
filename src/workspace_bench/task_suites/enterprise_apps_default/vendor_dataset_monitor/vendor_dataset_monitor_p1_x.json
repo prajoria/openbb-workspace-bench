@@ -1,0 +1,119 @@
+{
+ "id": "vendor_dataset_monitor_p1_x",
+ "prompt": "Prepare the vendor SLA report by latency, freshness, validation failures, incidents, and affected fund apps.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Vendor & Dataset Monitor",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_incidents_incident_log",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_incidents_blast_radius_summary",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_quality_validation_errors",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_quality_affected_apps",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_slas_latency_by_feed",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_slas_freshness_exceptions",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   }
+  ],
+  "reference_answer": "FactSet latency is Open at 727 ms with a -0.0029 change. Freshness has 124 Open exceptions with a 0.0579 change, and validation failures remain Open at 59.16. The incident log is Open at 18.67, while blast radius is Open at 24.33. Affected-app impact is Open at 94.16, but the served row does not name any fund app or dataset. The SLA report should keep FactSet escalated until feed-level freshness and validation issues are mapped to named apps and the incident is closed.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

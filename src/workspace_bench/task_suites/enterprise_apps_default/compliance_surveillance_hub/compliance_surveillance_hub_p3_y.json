@@ -1,0 +1,71 @@
+{
+ "id": "compliance_surveillance_hub_p3_y",
+ "prompt": "Draft the investigation summary with evidence, next owner, and remediation status.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Compliance Surveillance Hub",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_audit_investigation_evidence",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The Flagship Long/Short investigation evidence remains Open at 51.93 with a 0.0725 change. Its breach records are In Review at 25 and Approved at 5, so remediation is not uniformly closed for that fund. Macro Absolute Return separately has 12 Open breaches, while Healthcare Alpha has 271 In Review; these records require their own dispositions and should not be folded into the Flagship investigation without a case link. The served rows do not identify a next owner or map the evidence to individual breaches, so compliance leadership must assign ownership and document remediation status before closure.",
+  "limits": {
+   "max_turns": 6
+  }
+ }
+}

@@ -1,0 +1,96 @@
+{
+ "id": "rebalance_scenario_lab_p1_y",
+ "prompt": "Draft a rebalance recommendation that balances target drift, liquidity cost, restricted-list checks, and scenario downside.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Rebalance & Scenario Lab",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "rebalance_scenario_lab_drift_current_vs_target_weights",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "rebalance_scenario_lab_rebalance_liquidity_impact",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "rebalance_scenario_lab_rebalance_restricted_list_checks",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "rebalance_scenario_lab_scenarios_scenario_p_l_waterfall",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "raw": false,
+      "scenario": "Equity -10%"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Hold the Flagship Long/Short rebalance because its 0.127 weight row is Escalated with a -0.0176 drift change. The same fund has Open liquidity-impact readings of 11.49 and 119.8 across different periods and an Open restricted-list reading of 48.58. The scenario path falls to 65.22 before recovering to 87.38, but it is not linked to a fund or defined downside limit. Income Fund has a separate Escalated liquidity-impact reading of 45.11 while its restricted-list row is Approved at 27.08, so it needs period-matched review rather than being combined with Flagship. Approve neither rebalance from these aggregates until trade-level drift, liquidity, restriction, and scenario links are supplied.",
+  "limits": {
+   "max_turns": 8
+  }
+ }
+}

@@ -1,0 +1,83 @@
+{
+ "id": "risk_exposure_monitor_p3_y",
+ "prompt": "Explain which limits are closest to escalation and what portfolio changes would reduce utilization.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Risk & Exposure Monitor",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "risk_exposure_monitor_limits_limit_utilization",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "risk_exposure_monitor_limits_breaches_and_warnings",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "risk_exposure_monitor_limits_limit_breach_trend",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Flagship Long/Short limit utilization is Open at 0.0347 with a -0.0679 change, and its breach-or-warning exposure is Open at 0.0127 with a 0.0292 change. Global Opportunities has limit-breach-trend exposures In Review at 0.0287 and 0.0343, both with positive changes of 0.1013 and 0.0579. No limit names or thresholds are served, so closeness to escalation cannot be calculated across the funds. Review the rising Global Opportunities trend and the open Flagship control first on status and direction. Any exposure reduction or hedge should wait until the underlying positions, limit definitions, and current headroom are identified.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

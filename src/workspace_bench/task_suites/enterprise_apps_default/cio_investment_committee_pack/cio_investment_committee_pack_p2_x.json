@@ -1,0 +1,91 @@
+{
+ "id": "cio_investment_committee_pack_p2_x",
+ "prompt": "Identify recommendations where risk, liquidity, or research evidence conflicts with the proposed allocation.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "CIO / Investment Committee Pack",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_allocations_recommended_changes",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_allocations_capacity",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_research_changed_ratings",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_research_major_catalysts",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Both proposed-allocation rows for Flagship Long/Short are Open, with scores of 50.48 and 31.48, so neither is ready to implement. Capacity reads 37.8 primary and 14.0 secondary against a 99.59 threshold, but the data do not map either capacity reading to a specific recommendation or define liquidity units. Research is unresolved as well: changed-rating rows are Open at 97.02 and 33.61, and major-catalyst rows are Open at 85.88 and 82.79. These open indicators warrant holding both recommendations for review, but they do not prove a risk, liquidity, or research conflict because the served rows lack proposal-level joins and risk measures. The committee should obtain that mapping before rejecting, resizing, or approving either allocation.",
+  "limits": {
+   "max_turns": 8
+  }
+ }
+}

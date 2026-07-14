@@ -1,0 +1,84 @@
+{
+ "id": "equity_research_workbench_p2_x",
+ "prompt": "Compare internal target price, street range, upside, and valuation sensitivity for the selected ticker.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Equity Research Workbench",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "equity_research_workbench_coverage_price_target_history",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "equity_research_workbench_coverage_price_target_upside",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "equity_research_workbench_valuation_dcf_sensitivity",
+     "data_args": {
+      "period": "YTD",
+      "raw": false,
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Price-target history provides one Open value of 80700.42 with a 0.0331 change, but it does not label that value as the internal target. The target-upside widget contains Open price values of 249629.32 and 114219.55 with changes of 0.0377 and -0.0664, yet it does not identify a street low, street high, current price, or upside percentage. Valuation sensitivity varies between a displayed high of 31.43 and a displayed low of 24.83, with intermediate readings including 27.29 and 30.82. The sensitivity axis and valuation assumptions are not defined. A valid comparison therefore requires ticker labels, internal-versus-street labels, current price, and sensitivity assumptions; no upside should be calculated from these unclassified values.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

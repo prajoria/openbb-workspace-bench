@@ -1,0 +1,119 @@
+{
+ "id": "client_360_p1_x",
+ "prompt": "Prepare an investor meeting brief with mandate context, performance, exposure, flows, requests, and approved talking points.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Client 360",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_client_book_mandate_terms",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_flows_subscriptions_and_redemptions",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_meeting_prep_open_requests",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_meeting_prep_approved_talking_points",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_portfolio_view_client_returns",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_portfolio_view_exposure_summary",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Atlas Pension and Northstar Endowment both have Open mandate records, scored 68.84 and 57.43 respectively. Their Flagship Long/Short returns are 0.0157 and 0.0844, while exposures are 0.0811 and 0.2994; all portfolio rows remain Open. Flow readings are Open at 11.13 for Atlas Pension and 85.31 for Northstar Endowment, with changes of 0.04 and -0.0718. Atlas Pension also has an Open request at 16.22 that should be addressed in the meeting. Approved talking points cover the YTD client workflow and carry the fixture reading 29.91, but the served text contains no more specific approved commentary. The meeting brief should therefore use these current figures, resolve Atlas Pension's request, and avoid attributing causes or mandate details that the rows do not supply.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

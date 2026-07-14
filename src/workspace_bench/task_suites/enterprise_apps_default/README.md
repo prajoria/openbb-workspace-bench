@@ -1,36 +1,67 @@
 # `enterprise-apps-default` task suite
 
-Tasks: 69
+Tasks: 138
 
 ## Purpose
 
-A pass means the agent can answer every bundled Stark enterprise-app product prompt from the seeded default workspace and leave the required evidence note, graded only on the resulting artifact rather than on a prescribed tool sequence.
+These tasks measure whether an agent can answer each bundled enterprise-app
+product prompt from the active dashboard and deliver a data-grounded reply.
 
-## Workspace baseline
+## Two data worlds
 
-The manifest declares `default-v1` because every task depends on the complete default workspace: 23 seeded enterprise apps and their deterministic reference widgets provide the product context and data the verbatim prompts assume.
+Each of the 69 product prompts appears twice with identical wording and
+reference read calls. The matching `_x` and `_y` ids run on
+`stark-enterprise-x` and `stark-enterprise-y`, respectively. Both backends
+expose the same apps, widgets, parameters, and display name, while their served
+rows differ in entities, values, and row counts. Each task selects
+`all-stark-enterprise-apps`, its data world, and its starting dashboard in
+`setup`.
 
-## Generation method
+## Tools and turns
 
-`product-verbatim-prompts + reviewed-derived-rubrics`. `scripts/generators/generate_apps_default_suite.py` copies prompts byte-for-byte from the Stark app catalog. Widget targets and note anchors are derived from the product definitions and then reviewed through explicit `RUBRIC_OVERRIDES`; grading remains outcomes-only. Difficulty is a placeholder pending empirical measurement.
+Every task exposes all 20 canonical Workspace tools in canonical order, plus
+the harness-level `final_answer` action appended last in `allowed_tools`. That
+action delivers the reply and completes the episode; subsequent calls are
+refused. It does not create a note widget. The turn budget is the number of
+calls in that task's reference plus two. Agents see only the prompt and the
+setup block: grading criteria, the reference trajectory, and the turn budget
+live in the sealed `eval` block and are never exported — the harness enforces
+the budget and refuses calls past it.
 
-## Axes
+## Provenance
 
-Family is the source enterprise app, with exactly three product prompts per family. Category is uniformly read because tasks synthesize seeded information into an evidence note. All tasks currently carry the medium difficulty placeholder; the suite does not declare a separate specification-level field.
+Prompts remain byte-verbatim from the Stark product catalog. Read paths for
+each product prompt were selected and reviewed during the July exemplar round
+over the app catalogs. Each reference trace consists of a workspace snapshot,
+the reviewed `get_widget_data` reads only; the reply lives in
+`reference_answer`, and the reference replay synthesizes its `final_answer`
+submission from that field. Matching X/Y
+pairs share identical reads and differ only in the data world serving those
+reads.
 
-| Axis | File-derived counts |
-| --- | --- |
-| `family` | 23 families, 3 tasks each: `cio_investment_committee_pack`, `client_360`, `compliance_surveillance_hub`, `corporate_access_meeting_notes`, `crypto_research_dashboard`, `earnings_estimates_monitor`, `equity_research_workbench`, `execution_desk`, `executive_investment_dashboard`, `fund_operations_control_tower`, `healthcare_research_dashboard`, `liquidity_tca_workbench`, `mnpi_research_review`, `nav_fees_close_dashboard`, `portfolio_command_center`, `quant_research_backtest_lab`, `rebalance_scenario_lab`, `reporting_factsheet_studio`, `risk_exposure_monitor`, `strategy_health_monitor`, `stress_liquidity_lab`, `vendor_dataset_monitor`, `workspace_data_control_center` |
-| `category` | `read` 69 |
-| `difficulty` | `medium` 69 (placeholder) |
-| `specification_level` | omitted 69 |
+Each of the 138 reference answers was written by gpt-5.6sol via codex from that
+task's prompt and the exact rows returned by its reference reads in its data
+world. Generation machine-certifies numeric groundedness: every cited figure
+must appear literally in those served rows. Category `read` and difficulty
+`medium` are declared once in the suite manifest; family is derived from each
+task directory.
 
-## Gates
+## Grading
 
-This suite uses two grading keys: deterministic grounding verifies the required workspace evidence, and judged answerness verifies that the note consults the competent-analyst data, reflects it with the right analytical mindset, and answers the product prompt. Strict task pass requires both keys. The open-weight judge model and prompt-template hash are pinned and recorded per run; replay uses the cached verdict and never calls a model. CI and `workspace-bench validate --suite enterprise-apps-default` certify the deterministic key only, while judge calibration is a separate local gate.
+`judge.md` compares an agent's retrieved data and reply with one
+known-good reference trajectory for the same prompt and data world. The judge
+accepts other valid analyses when their reads, figures, and conclusions support
+the ask.
 
-Generation verifies that every prompt is byte-verbatim from the product catalog, every success contract contains only the required generated-note outcome, reviewed anchor counts stay capped, every reference trace passes, every no-op trace fails, task ids are unique, and all 69 product prompts are represented. Validation rechecks task loading, reference success, and no-op failure against `default-v1`.
+The deterministic grader requires a submitted `final_answer` in the trace.
+This `missing_final_answer` gate makes a no-op fail and the reference pass even
+when no judge is configured. Generation certifies reference success, no-op
+failure, product-verbatim prompts, unique ids, identical X/Y read calls,
+different X/Y reference-answer text for every pair, reference-answer equality
+with the final reply, and numeric groundedness.
 
 ## Limitations
 
-Rubric widgets and note anchors are derived from product definitions and reviewed, not product-verbatim ground truth. Fixture data makes results deterministic but does not establish live-data or browser parity. The uniform medium label has not been measured empirically and should not be interpreted as calibrated difficulty.
+Fixture data makes replay deterministic but does not establish live-data or
+browser parity. The uniform medium label is not an empirically calibrated
+difficulty measurement.

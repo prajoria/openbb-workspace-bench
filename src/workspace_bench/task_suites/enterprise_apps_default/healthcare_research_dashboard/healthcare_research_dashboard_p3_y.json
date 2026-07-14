@@ -1,0 +1,132 @@
+{
+ "id": "healthcare_research_dashboard_p3_y",
+ "prompt": "Draft the KOL follow-up plan with open questions and evidence needed for the investment committee.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Healthcare Research Dashboard",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "healthcare_research_dashboard_clinical_trial_catalyst_calendar",
+     "data_args": {
+      "period": "YTD",
+      "therapeutic_area": "Obesity / Metabolic",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "healthcare_research_dashboard_clinical_clinical_probability_funnel",
+     "data_args": {
+      "period": "YTD",
+      "raw": false,
+      "therapeutic_area": "Obesity / Metabolic",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "healthcare_research_dashboard_clinical_kol_meeting_notes",
+     "data_args": {
+      "period": "YTD",
+      "therapeutic_area": "Obesity / Metabolic",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "healthcare_research_dashboard_commercial_tam_scenarios",
+     "data_args": {
+      "period": "YTD",
+      "therapeutic_area": "Obesity / Metabolic",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "healthcare_research_dashboard_commercial_prescription_trend",
+     "data_args": {
+      "period": "YTD",
+      "therapeutic_area": "Obesity / Metabolic",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "healthcare_research_dashboard_coverage_healthcare_coverage_universe",
+     "data_args": {
+      "period": "YTD",
+      "therapeutic_area": "Obesity / Metabolic",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "healthcare_research_dashboard_documents_research_document_checklist",
+     "data_args": {
+      "period": "YTD",
+      "therapeutic_area": "Obesity / Metabolic",
+      "ticker": "LLY"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The KOL note for Global Opportunities is In Review at 43.29 and should be completed with its open questions and source evidence. Flagship Long/Short has separate Open catalyst readings of 135.15 and 110.24, while the unlabeled clinical funnel peaks at 74.9 and ends at 65.52; the follow-up must establish whether these items are related. Credit Plus prescription trends are Escalated at 133.27 and 2.37, whereas Macro Absolute Return's TAM reading is Approved at 0.39. Healthcare Alpha coverage and document records are Closed at 117.42 and 61.12, so they do not close evidence gaps for the other funds. The investment committee package needs fund- and asset-level joins, named clinical stages, commercial assumptions, and a completed Global Opportunities KOL note before drawing a consolidated conclusion.",
+  "limits": {
+   "max_turns": 11
+  }
+ }
+}

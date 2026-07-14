@@ -1,0 +1,96 @@
+{
+ "id": "stress_liquidity_lab_p1_y",
+ "prompt": "Summarize the selected stress scenario with portfolio loss, liquidation days, crowded names, and redemption impact.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Stress & Liquidity Lab",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "stress_liquidity_lab_liquidity_days_to_liquidate",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "stress_liquidity_lab_liquidity_crowded_names",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "stress_liquidity_lab_liquidity_redemption_stress",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "stress_liquidity_lab_stress_tests_scenario_loss_waterfall",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "raw": false,
+      "scenario": "Equity -10%"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The loss waterfall reaches a displayed low of -66500 and ends at -64000, but it has no fund label. Credit Plus has Escalated days-to-liquidate and crowded-name readings of 22.02 and 13.49, both requiring immediate liquidity review. Flagship Long/Short separately has an Open redemption-stress reading of 80.0 with a -0.0216 change. The served scores do not provide actual liquidation days, security names, or redemption cash impact. Because the loss, liquidity, crowding, and redemption records are not joined to one portfolio, the scenario should remain segmented by fund pending matched evidence.",
+  "limits": {
+   "max_turns": 8
+  }
+ }
+}

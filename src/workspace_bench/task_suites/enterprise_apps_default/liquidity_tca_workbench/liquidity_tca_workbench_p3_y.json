@@ -1,0 +1,80 @@
+{
+ "id": "liquidity_tca_workbench_p3_y",
+ "prompt": "Summarize post-trade review items that require broker follow-up or algo parameter changes.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Liquidity & TCA Workbench",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "liquidity_tca_workbench_notes_post_trade_review_queue",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "liquidity_tca_workbench_notes_broker_exception_follow_ups",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "liquidity_tca_workbench_tca_slippage_by_algo",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   }
+  ],
+  "reference_answer": "J.P. Morgan is the highest-status broker follow-up because its post-trade review is Escalated at 129.75 with a 0.0466 change. Goldman Sachs has an Open review at 22.9, while Morgan Stanley remains In Review at 48.76; each needs a documented disposition. UBS's review at 29.44 and its 16 broker exceptions are Closed, so they do not require new action on the served status. Barclays has an Open algo-slippage reading of 64.11 with a -0.0429 change, but no matching review or exception row. Algo names, benchmark units, and parameters are missing, so changes should wait until Barclays's slippage is linked to an executable configuration.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

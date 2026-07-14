@@ -1,0 +1,80 @@
+{
+ "id": "liquidity_tca_workbench_p2_x",
+ "prompt": "Rank brokers by fill quality, commission, latency, and slippage for the selected desk.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Liquidity & TCA Workbench",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "liquidity_tca_workbench_brokers_broker_scorecard",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "liquidity_tca_workbench_brokers_fill_quality_by_broker",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "liquidity_tca_workbench_tca_slippage_by_algo",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   }
+  ],
+  "reference_answer": "On displayed fill-quality score, Goldman Sachs at 27.81 ranks above Barclays at 3.83, although the data do not define whether a higher score means better fills. On displayed slippage score, Barclays at 77.99 ranks above Goldman Sachs at 53.77, but the preferred direction and units are again unspecified. Goldman Sachs also has an Open broker-scorecard reading of 16.9; no comparable Barclays scorecard row is served. Commission and latency fields are entirely absent. A defensible overall broker ranking therefore cannot be produced until score direction, commission, latency, and comparable broker coverage are supplied.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

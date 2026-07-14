@@ -1,0 +1,96 @@
+{
+ "id": "crypto_research_dashboard_p1_x",
+ "prompt": "Summarize crypto market structure: price action, liquidity, on-chain activity, funding, basis, and liquidation risk.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Crypto Research Dashboard",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "crypto_research_dashboard_derivatives_funding_and_basis",
+     "data_args": {
+      "chain": "Ethereum",
+      "crypto_asset": "BTC",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "crypto_research_dashboard_derivatives_liquidation_heatmap",
+     "data_args": {
+      "chain": "Ethereum",
+      "crypto_asset": "BTC",
+      "period": "YTD",
+      "raw": false
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "crypto_research_dashboard_market_price_and_volume",
+     "data_args": {
+      "chain": "Ethereum",
+      "crypto_asset": "BTC",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "crypto_research_dashboard_on_chain_on_chain_activity",
+     "data_args": {
+      "chain": "Ethereum",
+      "crypto_asset": "BTC",
+      "period": "YTD"
+     }
+    }
+   }
+  ],
+  "reference_answer": "BTC price rows are Open at 172895.99 and 53169.04, with changes of 0.0135 and -0.0402, so the served price action is mixed and the duplicate observations are not distinguished. On-chain activity is also Open, with scores of 67.84 and 16.94 and negative changes of -0.0587 and -0.024. Funding-and-basis rows are Open at 40.83 and 10.21, with opposing changes of 0.0466 and -0.0468, but the rows do not label which reading is funding or basis. The liquidation series rises from 38.74 to 41.05 before falling to 21.49, indicating that the displayed risk measure eased after its peak. No explicit volume, depth, spread, or other liquidity field is served, so liquidity cannot be assessed from these reads.",
+  "limits": {
+   "max_turns": 8
+  }
+ }
+}

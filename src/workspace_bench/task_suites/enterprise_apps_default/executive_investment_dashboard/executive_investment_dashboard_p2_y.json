@@ -1,0 +1,69 @@
+{
+ "id": "executive_investment_dashboard_p2_y",
+ "prompt": "Identify which issues require CEO, CIO, COO, or CRO attention this week.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Executive Investment Dashboard",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_issues_major_open_issues",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_issues_decision_log",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Healthcare Alpha's only major-issue record is Closed at 48.68, so it does not require new escalation on the evidence served. Flagship Long/Short has one Open decision-log item at 17.49 with a 0.0472 change, and that is the sole unresolved record in these reads. The item should receive leadership attention this week, but its subject and severity are not provided. Without an issue description or functional owner, the data cannot determine whether it belongs with the CEO, CIO, COO, or CRO.",
+  "limits": {
+   "max_turns": 6
+  }
+ }
+}

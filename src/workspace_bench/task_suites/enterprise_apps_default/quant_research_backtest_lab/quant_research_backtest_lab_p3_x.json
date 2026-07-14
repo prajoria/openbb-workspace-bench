@@ -1,0 +1,107 @@
+{
+ "id": "quant_research_backtest_lab_p3_x",
+ "prompt": "Draft the model review memo for PM and risk approval.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Quant Research & Backtest Lab",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "quant_research_backtest_lab_backtest_backtest_performance",
+     "data_args": {
+      "model": "Multi-Factor Alpha v4",
+      "period": "YTD",
+      "universe": "US Large Cap"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "quant_research_backtest_lab_backtest_drawdown_path",
+     "data_args": {
+      "model": "Multi-Factor Alpha v4",
+      "period": "YTD",
+      "universe": "US Large Cap"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "quant_research_backtest_lab_backtest_trade_simulation",
+     "data_args": {
+      "model": "Multi-Factor Alpha v4",
+      "period": "YTD",
+      "universe": "US Large Cap"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "quant_research_backtest_lab_risk_model_factor_exposure_table",
+     "data_args": {
+      "model": "Multi-Factor Alpha v4",
+      "period": "YTD",
+      "universe": "US Large Cap"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "quant_research_backtest_lab_signals_signal_metrics",
+     "data_args": {
+      "model": "Multi-Factor Alpha v4",
+      "period": "YTD",
+      "universe": "US Large Cap"
+     }
+    }
+   }
+  ],
+  "reference_answer": "PM and risk approval should remain on hold for Flagship Long/Short. Backtest-performance readings are Open at 35.41 and 11.51, and the drawdown path is Open at -172500. Trade-simulation readings are Open at 80.5 and 7.26, while factor exposures remain Open at 0.0342 and 0.1608. Signal quality is mixed because 83.92 is above the 35.59 threshold but 30.95 is below it. Approval requires closed validation items, defined exposure limits, drawdown tolerance, and evidence explaining the weaker secondary signal.",
+  "limits": {
+   "max_turns": 9
+  }
+ }
+}

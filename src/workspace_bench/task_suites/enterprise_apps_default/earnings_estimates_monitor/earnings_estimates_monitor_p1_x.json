@@ -1,0 +1,95 @@
+{
+ "id": "earnings_estimates_monitor_p1_x",
+ "prompt": "Prepare the earnings preview: internal versus street estimates, expected surprise drivers, and trade setup.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Earnings & Estimates Monitor",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_calendar_surprise_history",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_calendar_catalyst_calendar",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_estimates_internal_vs_street_bridge",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   }
+  ],
+  "reference_answer": "LLY's internal-versus-street bridge is Open at 63.14 with a 0.0633 change, while XOM's is Open at 33.07 with a 0.0196 change. Upcoming-earnings readings are 27.63 for LLY and 81.33 for XOM, and surprise-history readings are 8.82 and 38.96 respectively. LLY also has an Open catalyst reading of 64.09 with a -0.0039 change, but the row does not name the driver. The scores do not expose actual internal or street estimates, estimate units, or expected surprise direction, so they cannot support a beat-or-miss forecast. No market price, entry, target, or risk limit is served; keep both names on an earnings watchlist rather than asserting a directional trade setup.",
+  "limits": {
+   "max_turns": 8
+  }
+ }
+}

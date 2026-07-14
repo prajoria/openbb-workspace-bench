@@ -1,0 +1,95 @@
+{
+ "id": "risk_exposure_monitor_p2_x",
+ "prompt": "Identify positions contributing disproportionate marginal VaR or stress P&L relative to their portfolio weight.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Risk & Exposure Monitor",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "risk_exposure_monitor_drilldown_position_risk_contribution",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "risk_exposure_monitor_drilldown_marginal_var",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "risk_exposure_monitor_exposures_exposure_table",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "risk_exposure_monitor_exposures_issuer_concentration",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   }
+  ],
+  "reference_answer": "No position can be identified as disproportionate because the position-risk and marginal-VaR rows contain no security identifiers or row-level join. Flagship Long/Short risk-contribution exposures are Open at 0.0187 and 0.4227, while marginal VaR is Open at -56000 and -102500. The exposure table contains a separate Open exposure of 0.0833, but it is not labeled as portfolio weight or linked to either VaR row. AAPL concentration is Open at 0.0359, yet no AAPL marginal VaR or stress P&L is served. Position identifiers, actual weights, matched marginal VaR, and matched stress P&L are required before calling any contribution disproportionate.",
+  "limits": {
+   "max_turns": 8
+  }
+ }
+}

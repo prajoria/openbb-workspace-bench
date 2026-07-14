@@ -1,0 +1,83 @@
+{
+ "id": "vendor_dataset_monitor_p2_x",
+ "prompt": "Identify data quality issues that create trading, risk, reporting, or compliance impact.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Vendor & Dataset Monitor",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_quality_validation_errors",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_quality_row_count_drift",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_quality_affected_apps",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   }
+  ],
+  "reference_answer": "FactSet has an Open validation-error reading of 59.16 and Open row-count drift of 188. Affected-app impact is also Open at 94.16, establishing that the quality issue reaches applications. However, the served data do not name the dataset, app, or business workflow. Trading, risk, reporting, and compliance impact therefore cannot be distinguished from these generic records. Keep the issue open and obtain dataset-to-app lineage plus business owners before classifying and remediating the impact.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

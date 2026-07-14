@@ -1,0 +1,80 @@
+{
+ "id": "execution_desk_p2_y",
+ "prompt": "Explain which fills underperformed arrival price and whether broker, venue, or algo choice drove the outcome.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Execution Desk",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_fills_fills_table",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_fills_vwap_and_arrival_slippage",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_fills_broker_scorecard",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The Escalated fills-table row belongs to J.P. Morgan at 94.86 with a 0.0532 change, while the Approved slippage row belongs to Citi at 51.35 with a 0.0861 change. Because those records concern different brokers, they cannot establish whether the J.P. Morgan fill underperformed arrival. The J.P. Morgan broker scorecard is Escalated at 23.99, and Citi's scorecard is Approved at 36.23, but neither supplies arrival price or signed slippage. Venue and algo fields are entirely absent. The outcome therefore cannot be attributed to broker, venue, or algo choice without fill-level benchmark and routing data.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

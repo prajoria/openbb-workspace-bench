@@ -1,0 +1,119 @@
+{
+ "id": "compliance_surveillance_hub_p2_y",
+ "prompt": "Identify employee trades or research activity that should be escalated to compliance leadership.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Compliance Surveillance Hub",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_alerts_surveillance_alerts",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_personal_trading_employee_trades",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_personal_trading_pre_clearance_queue",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_restricted_list_restricted_and_watch_list",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_audit_access_and_export_logs",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Escalate the Credit Plus employee-trade row, which is Open at 1.45, together with its In Review restricted-list reading of 48.56 and its Open access/export reading of 80.88. Credit Plus also has an In Review access/export row at 62.21, while its breach count of 263 is Closed, so the closed breach should not be described as unresolved. Flagship Long/Short has 168 Open alerts and an Open pre-clearance reading of 9.5, but no served employee-trade row connects those items. Macro Absolute Return has 12 Open policy breaches, and Global Opportunities has an Open restricted-list reading of 23.23 with an Open access/export reading of 62.3; both merit separate review. No row explicitly identifies research activity, so a research escalation cannot be substantiated from the served evidence.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

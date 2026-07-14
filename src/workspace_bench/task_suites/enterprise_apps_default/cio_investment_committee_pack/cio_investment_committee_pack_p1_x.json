@@ -1,0 +1,124 @@
+{
+ "id": "cio_investment_committee_pack_p1_x",
+ "prompt": "Create the investment committee packet summary with decisions required, allocation changes, capacity, research, and follow-ups.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "CIO / Investment Committee Pack",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_agenda_decisions_required",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_allocations_capital_allocation",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_allocations_recommended_changes",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_allocations_capacity",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_decisions_follow_ups",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_research_top_ideas",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_research_major_catalysts",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The committee packet should keep the decision agenda open: the primary reading is 52.01 against a threshold of 63.1, while the watchlist is 78.04. Capital-allocation rows for Flagship Long/Short remain Open at 6.21 and 40.72, and the recommended-change rows are also Open at 50.48 and 31.48, so no allocation is yet recorded as approved. Capacity is 37.8 primary and 14.0 secondary versus the displayed 99.59 threshold, although the rows do not define units or available headroom. Research shows a top-idea score of 76.0 and major-catalyst scores of 85.88 and 82.79, all still Open. Follow-ups remain Open at 40.63 and 64.99; the committee should assign owners and resolve those items before implementing the recommendations.",
+  "limits": {
+   "max_turns": 11
+  }
+ }
+}

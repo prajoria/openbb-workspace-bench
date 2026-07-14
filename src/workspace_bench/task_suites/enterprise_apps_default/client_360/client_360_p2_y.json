@@ -1,0 +1,83 @@
+{
+ "id": "client_360_p2_y",
+ "prompt": "Identify client accounts with redemption risk or unresolved service issues.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Client 360",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_client_book_relationship_metrics",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_flows_subscriptions_and_redemptions",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_meeting_prep_open_requests",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Horizon Sovereign requires the strongest flow escalation: its MTD record is Escalated at 87.7 with a -0.0537 change. Northstar Endowment remains Open at 15.82, while Meridian Family Office is In Review at 128.46; neither row explicitly labels a redemption. Atlas Pension's flow is Approved at 52.31, but its service request is Escalated at 81.9 and therefore remains unresolved. Relationship Metrics show 88.82 secondary, a 50.21 threshold, and a 58.24 watchlist reading without client identifiers. Escalate Horizon Sovereign's adverse flow and Atlas Pension's service issue, but do not assign the unjoined relationship metrics to a specific account.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

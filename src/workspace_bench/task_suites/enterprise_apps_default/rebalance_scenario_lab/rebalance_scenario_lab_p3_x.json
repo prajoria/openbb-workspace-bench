@@ -1,0 +1,83 @@
+{
+ "id": "rebalance_scenario_lab_p3_x",
+ "prompt": "Create an approval memo with implementation risk, residual drift, and the decision needed from the PM.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Rebalance & Scenario Lab",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "rebalance_scenario_lab_approval_approval_checklist",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "rebalance_scenario_lab_approval_implementation_readiness",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "rebalance_scenario_lab_drift_drift_by_sleeve",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "scenario": "Equity -10%"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Approval should remain on hold because Flagship Long/Short implementation-readiness readings are Open at 36.17 and 90.3. Residual drift by sleeve is Open at 22.05 with a -0.0237 change. Approval-checklist readings are also Open at 19.65 and 17.59. These statuses show unresolved implementation risk and drift, but the rows do not describe the actual blockers or tolerance. The PM decision should be to defer implementation until readiness, sleeve drift, and checklist items are documented and closed.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

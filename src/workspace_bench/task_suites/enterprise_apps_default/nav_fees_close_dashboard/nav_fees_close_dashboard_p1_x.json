@@ -1,0 +1,108 @@
+{
+ "id": "nav_fees_close_dashboard_p1_x",
+ "prompt": "Prepare the close package: NAV bridge, tolerance exceptions, fee accruals, cash breaks, and unresolved dependencies.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "NAV, Fees & Close Dashboard",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "nav_fees_close_dashboard_cash_cash_break_aging",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "nav_fees_close_dashboard_close_close_dependency_register",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "nav_fees_close_dashboard_fees_fee_accruals",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "nav_fees_close_dashboard_nav_nav_bridge",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "raw": false,
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "nav_fees_close_dashboard_nav_nav_exceptions",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The NAV bridge moves from 29.76 through a high of 36.75 and ends at 29.5, but the series does not label bridge components or units. Tolerance work remains unresolved through Open NAV-exception counts of 36 and 118, with no tolerance threshold provided. Fee-accrual rows are Open at 93.49 and 72.78. Cash-break aging is Open at 51.07 and 95.03, and the age units and break identities are missing. Close dependencies also remain Open at 45.09 and 86.81. The close package should remain pending until exceptions, accruals, cash breaks, and dependencies are matched to owners and documented dispositions.",
+  "limits": {
+   "max_turns": 9
+  }
+ }
+}

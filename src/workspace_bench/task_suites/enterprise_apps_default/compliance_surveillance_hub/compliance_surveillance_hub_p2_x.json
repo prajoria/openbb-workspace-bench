@@ -1,0 +1,119 @@
+{
+ "id": "compliance_surveillance_hub_p2_x",
+ "prompt": "Identify employee trades or research activity that should be escalated to compliance leadership.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Compliance Surveillance Hub",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_alerts_surveillance_alerts",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_personal_trading_employee_trades",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_personal_trading_pre_clearance_queue",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_restricted_list_restricted_and_watch_list",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_audit_access_and_export_logs",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Escalate the Flagship Long/Short employee-trade rows because both remain Open at 29.14 and 88.88. The same fund has Open policy-breach counts of 19 and 3, plus Open pre-clearance readings of 15.89 and 15.57, confirming incomplete personal-trading review. Open surveillance queues of 119 and 210, an Open restricted-list reading of 18.98, and Open access/export readings of 37.01 and 50.11 add compliance context but are not joined to a particular trade. The served records do not identify any research activity, so no research item can be named for escalation. Leadership should review the open employee trades and require trade-level links to breaches, pre-clearance, restricted-list, and audit evidence.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

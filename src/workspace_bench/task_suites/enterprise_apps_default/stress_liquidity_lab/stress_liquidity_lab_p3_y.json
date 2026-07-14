@@ -1,0 +1,71 @@
+{
+ "id": "stress_liquidity_lab_p3_y",
+ "prompt": "Create the committee sign-off note with unresolved actions and owners.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Stress & Liquidity Lab",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "stress_liquidity_lab_sign_off_sign_off_tracker",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "stress_liquidity_lab_sign_off_residual_risk_actions",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Macro Absolute Return's sign-off tracker is Approved at 95.32 with a 0.01 change. Global Opportunities separately has residual-risk actions In Review at 18.09 and 88.34, so those actions remain unresolved but are not evidence against the Macro approval without a fund link. The served rows do not name the actions or owners. Preserve Macro Absolute Return's approved status while keeping Global Opportunities pending action descriptions, ownership, due dates, and completion evidence. A consolidated committee sign-off cannot be asserted across the funds from these unjoined records.",
+  "limits": {
+   "max_turns": 6
+  }
+ }
+}

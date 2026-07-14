@@ -1,0 +1,95 @@
+{
+ "id": "earnings_estimates_monitor_p1_y",
+ "prompt": "Prepare the earnings preview: internal versus street estimates, expected surprise drivers, and trade setup.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Earnings & Estimates Monitor",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_calendar_surprise_history",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_calendar_catalyst_calendar",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_estimates_internal_vs_street_bridge",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   }
+  ],
+  "reference_answer": "JPM is the only upcoming-earnings row, Open at 107.36 with a 0.0307 change, while its internal-versus-street bridge is Closed at 17.82 with a -0.0419 change. The remaining evidence is not company-matched: surprise history is Closed at 34.02 for XOM and 37.11 for AAPL, and the catalyst row is Closed at 62.81 for MSFT. MSFT also has a Closed bridge reading of 64.0, but no upcoming-earnings row in the served data. Actual estimates, named surprise drivers, prices, targets, and risk limits are absent. JPM can be monitored for its open event, but the data do not support a directional preview or trade setup.",
+  "limits": {
+   "max_turns": 8
+  }
+ }
+}

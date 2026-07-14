@@ -1,0 +1,107 @@
+{
+ "id": "earnings_estimates_monitor_p2_x",
+ "prompt": "Summarize post-earnings action items from price reaction, transcript tone, rating changes, and checklist status.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Earnings & Estimates Monitor",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_post_earnings_price_reaction",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_post_earnings_rating_and_target_changes",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_transcript_transcript_theme_extraction",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_transcript_management_tone",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   }
+  ],
+  "reference_answer": "LLY's price-reaction row is Open at 55747.15 with a 0.0069 change; review it alongside the Open management-tone score of 81.37 and theme-extraction score of 45.78. Its rating-and-target-change reading is Open at 27.83, and its checklist remains Open at 54.14, so the action is to reconcile the transcript, rating decision, and checklist before closing the review. XOM's price-reaction row is Open at 39311.13 with a 0.0179 change, while rating-and-target changes are Open at 35.98. XOM's checklist is also Open at 63.76, but no XOM transcript-tone or theme row is served. Keep both post-earnings reviews open and obtain XOM commentary before drawing a full thesis conclusion.",
+  "limits": {
+   "max_turns": 9
+  }
+ }
+}

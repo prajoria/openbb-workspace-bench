@@ -1,0 +1,96 @@
+{
+ "id": "crypto_research_dashboard_p1_y",
+ "prompt": "Summarize crypto market structure: price action, liquidity, on-chain activity, funding, basis, and liquidation risk.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Crypto Research Dashboard",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "crypto_research_dashboard_derivatives_funding_and_basis",
+     "data_args": {
+      "chain": "Ethereum",
+      "crypto_asset": "BTC",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "crypto_research_dashboard_derivatives_liquidation_heatmap",
+     "data_args": {
+      "chain": "Ethereum",
+      "crypto_asset": "BTC",
+      "period": "YTD",
+      "raw": false
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "crypto_research_dashboard_market_price_and_volume",
+     "data_args": {
+      "chain": "Ethereum",
+      "crypto_asset": "BTC",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "crypto_research_dashboard_on_chain_on_chain_activity",
+     "data_args": {
+      "chain": "Ethereum",
+      "crypto_asset": "BTC",
+      "period": "YTD"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The only spot row is Approved for XRP at 295770.25 with a -0.0133 change, while XRP's on-chain score is Closed at 1.15 with a 0.0026 change. AVAX has a separate In Review on-chain score of 34.04, so it cannot be used to explain XRP price action. The only funding-and-basis row belongs to ADA, Closed at 65.47 with a -0.0265 change, and therefore does not provide derivatives context for XRP or AVAX. The liquidation series peaks at 41.05 and later falls to 21.49, but it has no token label. Explicit liquidity measures and token-matched funding, basis, and liquidation data are absent, preventing a unified market-structure conclusion.",
+  "limits": {
+   "max_turns": 8
+  }
+ }
+}

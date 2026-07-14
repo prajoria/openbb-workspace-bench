@@ -1,0 +1,114 @@
+{
+ "id": "execution_desk_p1_y",
+ "prompt": "Prioritize the live blotter by liquidity, rejection risk, restricted-list status, and expected slippage.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Execution Desk",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_blotter_order_risk_queue",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_exceptions_rejected_orders",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_exceptions_restricted_list_checks",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_fills_vwap_and_arrival_slippage",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_market_context_spread_and_depth",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_market_context_order_book_depth",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD",
+      "raw": false
+     }
+    }
+   }
+  ],
+  "reference_answer": "US Equity is the strongest control priority because its order-risk queues are Escalated at 90 and 70, restricted-list exceptions are Open at 282 and 178, and rejected orders are In Review at 288. Credit also needs escalation: restricted-list counts of 54 and 46 are Escalated, rejected orders are Open at 135, and spread-and-depth is Escalated at 113.4. EU Equity has 98 Escalated rejected orders, restricted checks In Review at 85 and 18, and an Open spread-and-depth reading of 51.77. Macro has 144 orders In Review and 219 Open rejected orders, although its 127 restricted checks and 8.03 spread-and-depth reading are Approved. Citi's US Equity slippage reading is Approved at 51.35, but it is not joined to a blotter order; order-level liquidity, venue, and expected-slippage ranking remains unsupported.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

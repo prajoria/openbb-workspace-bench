@@ -1,0 +1,71 @@
+{
+ "id": "compliance_surveillance_hub_p3_x",
+ "prompt": "Draft the investigation summary with evidence, next owner, and remediation status.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Compliance Surveillance Hub",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_audit_investigation_evidence",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The Flagship Long/Short investigation remains Open, with evidence scored 64.75 and a 0.0739 change. The related policy-breach rows are also Open, with counts of 19 and 3 and changes of 0.0896 and 0.0407. Remediation is therefore unresolved and should focus on mapping each breach to the investigation evidence and documenting its disposition. The served data name no next owner, so ownership must be assigned by compliance leadership rather than inferred.",
+  "limits": {
+   "max_turns": 6
+  }
+ }
+}

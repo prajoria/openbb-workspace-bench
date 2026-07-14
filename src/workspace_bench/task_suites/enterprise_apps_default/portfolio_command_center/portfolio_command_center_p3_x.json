@@ -1,0 +1,80 @@
+{
+ "id": "portfolio_command_center_p3_x",
+ "prompt": "Explain which alerts should be escalated to the CIO before the opening risk meeting.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Portfolio Command Center",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "portfolio_command_center_actions_approval_checklist",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "portfolio_command_center_overview_top_alerts",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "portfolio_command_center_overview_limit_utilization",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Escalate both Flagship Long/Short alert queues before the risk meeting because they remain Open at 193 and 71 alerts. The 193-count queue is larger and should be reviewed first, but neither row provides alert type or severity. Limit-utilization readings of 85.25 and 1.89 are Open, and approval-checklist readings of 86.16 and 62.54 are also Open. These control readings add context but are not linked to a specific alert and have no threshold. The CIO briefing should request alert identities, severity, owners, limit headroom, and checklist dispositions rather than infer them from aggregate scores.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

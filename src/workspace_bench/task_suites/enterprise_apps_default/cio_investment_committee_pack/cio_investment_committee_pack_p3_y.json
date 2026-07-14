@@ -1,0 +1,80 @@
+{
+ "id": "cio_investment_committee_pack_p3_y",
+ "prompt": "Draft the decision log update after committee review.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "CIO / Investment Committee Pack",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_agenda_ic_agenda",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_agenda_decisions_required",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_decisions_decision_log",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The committee agenda for Global Opportunities is still In Review at 103.02. Decisions required show a primary reading of 32.4 against a 45.8 threshold, with the watchlist at 48.78. The decision log contains a single Global Opportunities entry, In Review at 55.28 with a 0.0013 change. Update the log as pending committee disposition and request the missing decision, owner, and due date rather than inferring an outcome.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

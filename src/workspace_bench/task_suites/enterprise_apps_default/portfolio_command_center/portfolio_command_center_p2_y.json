@@ -1,0 +1,79 @@
+{
+ "id": "portfolio_command_center_p2_y",
+ "prompt": "Find holdings where conviction, liquidity, and risk contribution disagree with the current portfolio weight.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Portfolio Command Center",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "portfolio_command_center_actions_analyst_conviction",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "portfolio_command_center_holdings_holdings_table",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "portfolio_command_center_holdings_slow_portfolio_marks",
+     "data_args": {
+      "symbol": "AAPL,NVDA,MSFT"
+     }
+    }
+   }
+  ],
+  "reference_answer": "No holding can be identified because security names, current weights, liquidity, and risk-contribution fields are absent. Flagship Long/Short conviction is Open at 97.44, while its holdings-table row is Approved at 80.94 for a different period and its slow-mark row is Open at 3.19. Those records are not enough to establish a disagreement or prescribe resizing. Income Fund has Open holdings-table readings of 31.32 and 11.37, but no matching conviction or slow-mark row. Credit Plus slow marks are Escalated at 87.88 and 138.17, yet they likewise lack matched holding and conviction evidence.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

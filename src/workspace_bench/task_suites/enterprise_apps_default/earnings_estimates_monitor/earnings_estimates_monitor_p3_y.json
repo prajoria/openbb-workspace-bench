@@ -1,0 +1,83 @@
+{
+ "id": "earnings_estimates_monitor_p3_y",
+ "prompt": "Identify companies where estimate revisions and management commentary create a material thesis change.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Earnings & Estimates Monitor",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_estimates_consensus_revisions",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_post_earnings_thesis_change_log",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "earnings_estimates_monitor_transcript_management_tone",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   }
+  ],
+  "reference_answer": "No company is represented across estimate revisions, management commentary, and the thesis-change log, so the requested material thesis change cannot be attributed. ASML and JPM have In Review consensus-revision scores of 8.76 and 5.43, both with negative changes of -0.0553 and -0.0278. MSFT's management-tone reading is Approved at 84.88 with a -0.0997 change, but it has no served revision or thesis-change row. XOM's thesis-change entry is Closed at 80.4 with a 0.0409 change, but it has no served revision or commentary row. Obtain ticker-matched evidence and a materiality threshold before naming a company.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

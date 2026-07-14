@@ -1,0 +1,80 @@
+{
+ "id": "execution_desk_p3_y",
+ "prompt": "Draft an end-of-day execution exception report for the PM and COO.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Execution Desk",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_exceptions_rejected_orders",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_exceptions_restricted_list_checks",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_exceptions_surveillance_alerts",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Immediate escalations are EU Equity's 98 rejected orders, Credit's restricted-list queues of 54 and 46, and Macro's 154 surveillance alerts. Open queues also remain material: Macro has 219 rejected orders, Credit has 135 rejected orders, US Equity has restricted-list counts of 282 and 178, EU Equity has 263 surveillance alerts, and Credit has 137 surveillance alerts. US Equity rejected orders are In Review at 288, while Macro has another 180 In Review rejected orders and 232 In Review surveillance alerts. EU Equity restricted checks at 85 and 18 are In Review; these should remain controlled until dispositions are documented. The PM and COO should assign desk owners and reconcile order-level links because the served aggregate queues cannot show whether the same order appears in more than one exception type.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

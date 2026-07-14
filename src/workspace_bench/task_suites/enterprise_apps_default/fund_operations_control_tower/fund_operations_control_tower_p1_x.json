@@ -1,0 +1,119 @@
+{
+ "id": "fund_operations_control_tower_p1_x",
+ "prompt": "Create the operations morning checklist: failed trades, recon breaks, corporate actions, pricing exceptions, and owners.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Fund Operations Control Tower",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "fund_operations_control_tower_trade_lifecycle_failed_trades",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "fund_operations_control_tower_recons_custodian_breaks",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "fund_operations_control_tower_corporate_actions_corporate_action_calendar",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "fund_operations_control_tower_pricing_stale_prices",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "fund_operations_control_tower_pricing_nav_exceptions",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "fund_operations_control_tower_pricing_vendor_price_differences",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Failed-trade readings are 50.74 primary and 39.13 secondary against a 35.88 threshold, so both displayed readings need morning review. Flagship Long/Short custodian breaks remain Open at 1.67 and 59.91, and its corporate-action calendar remains Open at 28.47. Pricing work includes Open stale-price rows of 3114.0 and 243359.62, Open NAV-exception counts of 67 and 210, and Open vendor prices of 246075.96 from Bloomberg and 209032.42 from ICE. The rows do not identify securities or show whether the stale and vendor observations refer to the same instrument. Assign trade lifecycle, reconciliation, corporate actions, and pricing owners outside the served data, because no owner field is provided.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

@@ -1,0 +1,83 @@
+{
+ "id": "vendor_dataset_monitor_p2_y",
+ "prompt": "Identify data quality issues that create trading, risk, reporting, or compliance impact.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Vendor & Dataset Monitor",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_quality_validation_errors",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_quality_row_count_drift",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_quality_affected_apps",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Bloomberg has Open validation-error readings of 49.89 and 64.35 and Open affected-app readings of 117.42, 74.8, and 3.46, making it the clearest active quality issue. MSCI has Open row-count drift of 114 and 124, although its validation and affected-app records are Approved. S&P Global validation readings of 51.35, 90.9, and 84.06 and affected-app readings of 44.8, 28.51, and 130.03 remain In Review. FactSet row-count drift is In Review at 59 and 184, while its validation and affected-app rows are Closed. None of the records names datasets, apps, or trading, risk, reporting, and compliance workflows, so business impact must remain unclassified pending lineage.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "workspace_data_control_center_p1_x",
+ "prompt": "Audit data platform readiness: failed jobs, stale feeds, entitlements, exports, and Copilot visibility flags.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Workspace Data Control Center",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_ai_access_copilot_visibility_flags",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_data_health_feed_status",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_data_health_failed_jobs_trend",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_entitlements_app_and_widget_permissions",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_entitlements_role_coverage",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_entitlements_sensitive_dataset_flags",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_usage_export_activity",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Platform readiness is not complete because failed-job readings remain Open at 99.15 and 35.05. Feed-status readings are Open at 13.62 for Bloomberg and 53.19 for ICE, although the rows do not explicitly label the feeds as stale. Entitlement review remains Open for app/widget permissions at 3.14 and 79.88, role coverage at 2.7 and 75.55, and Bloomberg's sensitive-dataset flag at 61.17. Export activity is Open at 86.66 and 53.01. Copilot visibility flags are also Open at 96.33 and 45.01. Resolve each open control with named jobs, feeds, apps, widgets, roles, exports, and visibility settings before production readiness is certified.",
+  "limits": {
+   "max_turns": 11
+  }
+ }
+}

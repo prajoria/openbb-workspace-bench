@@ -1,0 +1,113 @@
+{
+ "id": "executive_investment_dashboard_p3_y",
+ "prompt": "Explain whether performance, flows, and risk are moving consistently across strategies.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Executive Investment Dashboard",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_firm_overview_net_flows",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_performance_returns_by_strategy",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_performance_drawdown_summary",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_risk_top_risks",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_risk_stress_loss_summary",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_risk_limit_utilization",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The data do not support a complete cross-strategy comparison because the only strategy named in returns is Quant and the flow row has no strategy label. Within Quant, Global Opportunities has a 0.0585 return with a 0.0635 change, while Credit Plus has a 0.0393 return with a -0.0195 change, so performance changes are inconsistent. Global Opportunities limit utilization is In Review at 49.04 with a 0.0469 change, moving in the same direction as its return change. Credit Plus drawdown is Escalated at -139772 with a 0.0742 change, which does not align directionally with its negative return change. Meridian Family Office flows are Escalated at 67.07 with a 0.0606 change, while Flagship Long/Short stress-loss changes are mixed at -0.0814 and 0.0084; neither can be assigned to Quant from the served rows.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

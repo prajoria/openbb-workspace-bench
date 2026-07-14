@@ -1,0 +1,107 @@
+{
+ "id": "corporate_access_meeting_notes_p1_y",
+ "prompt": "Create a pre-meeting brief with prior claims, open follow-ups, expert-call context, and MNPI controls.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Corporate Access & Meeting Notes",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "corporate_access_meeting_notes_claims_management_claims_tracker",
+     "data_args": {
+      "sector": "Healthcare",
+      "status": "Open",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "corporate_access_meeting_notes_compliance_mnpi_attestation_status",
+     "data_args": {
+      "sector": "Healthcare",
+      "status": "Open",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "corporate_access_meeting_notes_compliance_compliance_follow_ups",
+     "data_args": {
+      "sector": "Healthcare",
+      "status": "Open",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "corporate_access_meeting_notes_meetings_expert_calls",
+     "data_args": {
+      "sector": "Healthcare",
+      "status": "Open",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "corporate_access_meeting_notes_notes_follow_ups",
+     "data_args": {
+      "sector": "Healthcare",
+      "status": "Open",
+      "ticker": "LLY"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Macro Absolute Return has an Open prior-claims record at 65.1 and an Open expert-call record at 48.31. Its note follow-up remains Open at 79.94, and its MNPI attestation is Open at 42.8. Credit Plus has another Open MNPI attestation at 6.09, while Flagship Long/Short has Open compliance follow-ups at 44.04 and 142.94. The rows do not contain the claim text, call subject, follow-up owner, or attestation details. Keep the Macro Absolute Return meeting within MNPI controls, resolve its open note and attestation, and treat the other funds' items as separate compliance work.",
+  "limits": {
+   "max_turns": 9
+  }
+ }
+}

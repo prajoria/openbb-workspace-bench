@@ -1,0 +1,80 @@
+{
+ "id": "strategy_health_monitor_p3_x",
+ "prompt": "Build the weekly strategy-health brief for the CIO with watchlist names and catalyst risk.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Strategy Health Monitor",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "strategy_health_monitor_themes_crowded_names",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "strategy_health_monitor_watchlist_names_near_action_levels",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "strategy_health_monitor_watchlist_catalyst_calendar",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Global Equities should remain on the CIO watchlist because names-near-action-level readings are Open at 14.24 and 21.29. Catalyst-calendar readings are also Open at 62.05 and 18.18, with negative changes of -0.0473 and -0.0291. Crowded-name readings remain Open at 43.5 and 97.14, creating additional concentration context. The rows do not identify the watchlist names or catalysts, so they cannot support security-specific actions. The weekly brief should request those names, event details, owners, and thresholds before changing exposure.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

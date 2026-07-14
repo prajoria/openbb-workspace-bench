@@ -1,0 +1,95 @@
+{
+ "id": "workspace_data_control_center_p3_x",
+ "prompt": "Summarize usage, export, and prompt-audit activity for the platform owner.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Workspace Data Control Center",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_ai_access_prompt_audit",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_usage_app_usage",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_usage_export_activity",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_usage_export_review_queue",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Flagship Long/Short app-usage readings remain Open at 58.09 and 77.68, with changes of -0.0306 and 0.0895. Export activity is Open at 86.66 and 53.01, moving by 0.0611 and -0.0733. The export-review queue is also Open at 99.14 and 46.02. Prompt-audit readings remain Open at 34.77 and 33.86, both with positive changes of 0.0814 and 0.0553. The platform owner should obtain app, user, export, and prompt identifiers and assign dispositions because the served records are aggregate scores rather than auditable events.",
+  "limits": {
+   "max_turns": 8
+  }
+ }
+}

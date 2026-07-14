@@ -1,0 +1,114 @@
+{
+ "id": "execution_desk_p1_x",
+ "prompt": "Prioritize the live blotter by liquidity, rejection risk, restricted-list status, and expected slippage.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Execution Desk",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_blotter_order_risk_queue",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_exceptions_rejected_orders",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_exceptions_restricted_list_checks",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_fills_vwap_and_arrival_slippage",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_market_context_spread_and_depth",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "execution_desk_market_context_order_book_depth",
+     "data_args": {
+      "desk": "US Equity",
+      "period": "YTD",
+      "raw": false
+     }
+    }
+   }
+  ],
+  "reference_answer": "The US Equity blotter has 14 Open orders in the risk queue. Restricted-list checks are the largest Open exception queue at 202, ahead of 167 Open rejected orders, so restrictions should be cleared before release and rejections reviewed next. Expected-slippage context is Open at 41.08 for Goldman Sachs, while spread-and-depth context is Open at 83.81. The order-book series spans a displayed low of 24 and high of 102, showing materially variable depth across the served observations. Because no order identifiers join these aggregate records, individual blotter orders cannot be ranked by liquidity, rejection risk, restriction status, or slippage from the served data.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

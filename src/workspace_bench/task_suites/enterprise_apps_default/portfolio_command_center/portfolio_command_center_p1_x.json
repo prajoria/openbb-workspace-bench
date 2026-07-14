@@ -1,0 +1,80 @@
+{
+ "id": "portfolio_command_center_p1_x",
+ "prompt": "Prepare the PM morning note: overnight P&L, largest active exposures, limit pressure, and trade actions by urgency.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Portfolio Command Center",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "portfolio_command_center_holdings_sector_exposure",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "portfolio_command_center_overview_limit_utilization",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "portfolio_command_center_actions_trade_ideas",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The served rows contain no overnight P&L or return field, so overnight performance cannot be reported. Flagship Long/Short has Open active exposures of 0.0389 and 0.0742, making 0.0742 the larger displayed exposure. Limit-utilization readings remain Open at 85.25 and 1.89, but no limit threshold or exposure link is supplied. Trade-idea readings are Open at 62.35 and 74.79, with the 74.79 row carrying the higher displayed score. Because the ideas are unnamed and score direction is not defined as urgency, obtain trade actions, owners, and limit headroom before setting the execution order.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

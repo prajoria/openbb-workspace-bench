@@ -1,0 +1,119 @@
+{
+ "id": "client_360_p1_y",
+ "prompt": "Prepare an investor meeting brief with mandate context, performance, exposure, flows, requests, and approved talking points.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Client 360",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_client_book_mandate_terms",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_flows_subscriptions_and_redemptions",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_meeting_prep_open_requests",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_meeting_prep_approved_talking_points",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_portfolio_view_client_returns",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "client_360_portfolio_view_exposure_summary",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD",
+      "region": "Americas"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Mandate context remains In Review for Horizon Sovereign at 68.65 and Atlas Pension at 89.03. The only return row is an Approved -0.0078 for Meridian Family Office in Macro Absolute Return, while the only exposure row is an Approved 0.1685 for Northstar Endowment in that fund, so performance and exposure cannot be paired by client. Flows range from an Open Northstar Endowment reading of 15.82 to an In Review Meridian Family Office reading of 128.46, with Horizon Sovereign Escalated at 87.7 and Atlas Pension Approved at 52.31. Atlas Pension nevertheless has an Escalated open-request reading of 81.9 that requires direct follow-up. Approved talking points cover the YTD client workflow at 29.91 but provide no client-specific language. Use the approved workflow framing, separate the unjoined portfolio rows, and prioritize the escalated Horizon Sovereign flow and Atlas Pension request.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

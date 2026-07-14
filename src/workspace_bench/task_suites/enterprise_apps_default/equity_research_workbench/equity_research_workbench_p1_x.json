@@ -1,0 +1,107 @@
+{
+ "id": "equity_research_workbench_p1_x",
+ "prompt": "Summarize what changed in coverage, estimates, valuation, ownership, and thesis since the last review.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Equity Research Workbench",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "equity_research_workbench_company_ownership_snapshot",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "equity_research_workbench_company_consensus_revisions",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "equity_research_workbench_coverage_coverage_universe",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "equity_research_workbench_thesis_bull_base_bear",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "equity_research_workbench_valuation_valuation_assumption_log",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Coverage changed in both directions, with Open universe readings of 0.78 at -0.0065 and 48.95 at 0.0475. Consensus revisions weakened for LLY and XOM: their Open scores are 97.51 and 99.74 with changes of -0.0575 and -0.0363. Valuation assumptions are also mixed, with Open readings of 8.1 at -0.0362 and 91.67 at 0.0353, although the assumptions are not named. LLY's ownership snapshot is Open at 39.69 with a -0.0063 change. Bull/base/bear thesis rows are Open at 97.5 with a 0.0794 change and 68.86 with a -0.0354 change, but the scenarios are not labeled, so the thesis direction cannot be assigned more specifically.",
+  "limits": {
+   "max_turns": 9
+  }
+ }
+}

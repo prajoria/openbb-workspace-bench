@@ -1,0 +1,119 @@
+{
+ "id": "vendor_dataset_monitor_p1_y",
+ "prompt": "Prepare the vendor SLA report by latency, freshness, validation failures, incidents, and affected fund apps.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Vendor & Dataset Monitor",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_incidents_incident_log",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_incidents_blast_radius_summary",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_quality_validation_errors",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_quality_affected_apps",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_slas_latency_by_feed",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "vendor_dataset_monitor_slas_freshness_exceptions",
+     "data_args": {
+      "period": "YTD",
+      "status": "Open",
+      "vendor": "FactSet"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Bloomberg has Open latency readings of 1015 ms and 1020 ms, Open validation readings of 49.89 and 64.35, and Open affected-app readings of 117.42, 74.8, and 3.46. Its incident is In Review at 55.4, while blast-radius records remain Open at 47.07, 133.21, and 5.97. S&P Global latency is In Review at 86 ms and 80 ms, with validation and app-impact records also In Review. FactSet has 106 Open freshness exceptions and Open incident readings of 24.87 and 41.3, although its served latency is Closed at 29 ms and its validation rows are Closed. The rows do not name feeds, incidents, or affected fund apps. Prioritize Bloomberg's open latency and quality work, then resolve FactSet freshness and S&P Global reviews with dataset-to-app mappings.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

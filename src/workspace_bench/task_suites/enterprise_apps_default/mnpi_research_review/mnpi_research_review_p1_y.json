@@ -1,0 +1,107 @@
+{
+ "id": "mnpi_research_review_p1_y",
+ "prompt": "Review the MNPI case file: wall crossings, meetings, research drafts, target changes, and sign-off history.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "MNPI & Research Review",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "mnpi_research_review_evidence_evidence_and_sign_off_history",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "mnpi_research_review_meetings_company_meeting_logs",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "mnpi_research_review_mnpi_log_wall_crossings",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "mnpi_research_review_research_draft_research_review",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "mnpi_research_review_research_price_target_approval",
+     "data_args": {
+      "period": "YTD",
+      "severity": "High",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Global Opportunities has an Open wall-crossing record at 24.09 and an Open research draft at 63.12. Its target records are Open at 360267.88 and In Review at 126907.65, so target approval is incomplete. Open meeting logs exist for ORCL at 40.12 and TSM at 102.1, with NFLX and COST still In Review at 22.38 and 53.19; no fund link connects these meetings to the crossing or draft. Macro Absolute Return evidence and sign-off remains Open at 29.54 even though its draft is Approved at 92.97 and its target is Approved at 18439.57. Keep the case segmented by fund and obtain meeting-to-fund links, target dispositions, and completed sign-off before closure.",
+  "limits": {
+   "max_turns": 9
+  }
+ }
+}

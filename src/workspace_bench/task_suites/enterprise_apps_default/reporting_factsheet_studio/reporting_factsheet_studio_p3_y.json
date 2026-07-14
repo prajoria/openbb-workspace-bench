@@ -1,0 +1,91 @@
+{
+ "id": "reporting_factsheet_studio_p3_y",
+ "prompt": "Summarize what changed in returns, attribution, risk, and client-facing commentary for the selected period.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Reporting & Factsheet Studio",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_commentary_approved_commentary_library",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_performance_monthly_returns",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_performance_attribution_summary",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_performance_risk_stats",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Meridian Family Office's return is In Review at 0.0681 with a 0.0185 change. Attribution declined by -0.0832 for Horizon Sovereign at 54.7 and increased by 0.0152 for Atlas Pension at 14.54; neither attribution row belongs to Meridian Family Office. Risk moved in opposite directions, with the 9.65 primary metric changing by -0.0674 and the 76.48 secondary metric changing by 0.008. Macro Absolute Return commentary is Approved at 72.19 with a 0.0253 change. Because the return, attribution, and commentary records refer to different entities, the selected-period summary should preserve those distinctions rather than imply a common driver.",
+  "limits": {
+   "max_turns": 8
+  }
+ }
+}

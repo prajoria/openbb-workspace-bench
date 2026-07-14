@@ -1,0 +1,119 @@
+{
+ "id": "nav_fees_close_dashboard_p3_y",
+ "prompt": "Summarize fee, cash, and pricing exceptions that require fund controller approval.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "NAV, Fees & Close Dashboard",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "nav_fees_close_dashboard_cash_cash_movements",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "nav_fees_close_dashboard_cash_fx_cash_and_overdrafts",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "nav_fees_close_dashboard_cash_cash_break_aging",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "nav_fees_close_dashboard_close_close_exceptions",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "nav_fees_close_dashboard_fees_fee_accruals",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "nav_fees_close_dashboard_nav_nav_exceptions",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Multi-Asset Fund needs controller review for Open cash movements at 60.9 and 66.61, an Open cash-break reading of 53.98, fee accruals In Review at 122.66 and 110.01, and NAV exceptions In Review at 156 and 130. Income Fund has Open FX/cash-and-overdraft readings of 69.56, 128.67, 64.14, and 79.43, Open fee accruals at 27.07 and 124.9, and Open NAV-exception counts of 196 and 138. Global Opportunities has Open close-exception counts of 179, 58, 174, and 62 even though its served NAV exceptions are Closed. Flagship Long/Short cash movements remain In Review at 60.18 and 60.6, while its fee and NAV rows are Approved. Fund controllers should resolve the open and in-review records by fund and period because the aggregates lack item identifiers, currencies, and explicit approval owners.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

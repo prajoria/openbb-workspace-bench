@@ -1,0 +1,81 @@
+{
+ "id": "strategy_health_monitor_p2_y",
+ "prompt": "Highlight themes where factor tilt or liquidity capacity is inconsistent with PM conviction.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Strategy Health Monitor",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "strategy_health_monitor_capacity_capacity_utilization",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "strategy_health_monitor_capacity_liquidity_capacity_curve",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "strategy_health_monitor_themes_factor_tilts",
+     "data_args": {
+      "period": "YTD",
+      "raw": false,
+      "strategy": "Global Equities"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The requested inconsistency cannot be assigned to a theme because neither the factor series nor capacity-utilization rows carry theme names, and PM conviction is absent. The factor-tilt series spans 76.33 to 83.12. Macro has an Open liquidity-capacity reading of 18.07 with a 0.02 change. Capacity utilization reads 100.35 primary and 93.06 secondary without a strategy mapping or scale definition. Obtain theme-level factor tilts, liquidity capacity, and PM-conviction values before flagging a conflict.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

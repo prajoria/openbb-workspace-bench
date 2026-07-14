@@ -1,0 +1,131 @@
+{
+ "id": "workspace_data_control_center_p1_y",
+ "prompt": "Audit data platform readiness: failed jobs, stale feeds, entitlements, exports, and Copilot visibility flags.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Workspace Data Control Center",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_ai_access_copilot_visibility_flags",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_data_health_feed_status",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_data_health_failed_jobs_trend",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_entitlements_app_and_widget_permissions",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_entitlements_role_coverage",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_entitlements_sensitive_dataset_flags",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "workspace_data_control_center_usage_export_activity",
+     "data_args": {
+      "backend": "Research Lake",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Open data-health work includes S&P Global feed status at 39.52, FactSet feed status at 89.0, Macro Absolute Return failed jobs at 40.43, and Credit Plus failed jobs at 13.32. Entitlement gaps remain Open for Global Opportunities app/widget permissions at 42.79 and role coverage at 9.12, plus Flagship Long/Short role coverage at 56.66. Refinitiv's sensitive-dataset flag is Open at 103.74, while S&P Global remains In Review at 42.06. Credit Plus export activity is Open at 122.15, and Healthcare Alpha Copilot visibility is Open at 100.72. The rows omit exact jobs, feeds, apps, widgets, exports, and visibility policies, so readiness should remain pending item-level identification and closure.",
+  "limits": {
+   "max_turns": 11
+  }
+ }
+}

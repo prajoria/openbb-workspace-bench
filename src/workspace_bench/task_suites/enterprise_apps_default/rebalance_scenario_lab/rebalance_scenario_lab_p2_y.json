@@ -1,0 +1,95 @@
+{
+ "id": "rebalance_scenario_lab_p2_y",
+ "prompt": "Identify proposed trades that should be resized or delayed because of ADV usage, constraints, or compliance blockers.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Rebalance & Scenario Lab",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "rebalance_scenario_lab_drift_constraint_utilization",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "rebalance_scenario_lab_rebalance_proposed_trades",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "rebalance_scenario_lab_rebalance_liquidity_impact",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "rebalance_scenario_lab_rebalance_restricted_list_checks",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "scenario": "Equity -10%"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Delay the Flagship Long/Short trade In Review at 84.8 because constraint utilization is Open at 13.97, restricted-list review is Open at 48.58, and liquidity-impact rows are Open at 11.49 and 119.8, albeit across different periods. Global Opportunities has an Escalated proposed trade at 44.77 with an In Review restriction at 2.64 and In Review liquidity impact at 18.84, so it also requires delay and period matching. Income Fund's proposed trade is Approved at 59.91, but its liquidity impact is Escalated at 45.11 while its restriction is Approved at 27.08; review it for resizing before relying on the approval. Multi-Asset Fund has an Escalated proposed trade at 16.53 even though its restriction is Closed at 58.1 and liquidity impact is Approved at 5.43, so the cause of escalation is not supplied. ADV usage, order size, and row-level trade links are absent, preventing a calculated resize.",
+  "limits": {
+   "max_turns": 8
+  }
+ }
+}

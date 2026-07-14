@@ -1,0 +1,96 @@
+{
+ "id": "crypto_research_dashboard_p3_y",
+ "prompt": "Draft the token thesis update using market, on-chain, derivatives, and research-document context.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Crypto Research Dashboard",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "crypto_research_dashboard_derivatives_funding_and_basis",
+     "data_args": {
+      "chain": "Ethereum",
+      "crypto_asset": "BTC",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "crypto_research_dashboard_market_price_and_volume",
+     "data_args": {
+      "chain": "Ethereum",
+      "crypto_asset": "BTC",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "crypto_research_dashboard_on_chain_on_chain_activity",
+     "data_args": {
+      "chain": "Ethereum",
+      "crypto_asset": "BTC",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "crypto_research_dashboard_research_crypto_research_pdfs",
+     "data_args": {
+      "pdf_name": [
+       "Bank of Canada Crypto Market Structure",
+       "CoinGecko 2024 Crypto Industry"
+      ]
+     }
+    }
+   }
+  ],
+  "reference_answer": "A unified token thesis is not supported because the market, on-chain, derivatives, and document rows do not align on one asset. XRP has an Approved market price of 295770.25 with a -0.0133 change and a Closed on-chain score of 1.15 with a 0.0026 change, but its research document is still Open at 68.55 and no XRP derivatives row is served. AVAX has In Review on-chain activity at 34.04 and an Open research document at 52.6, but no market or derivatives row. ADA has a Closed derivatives reading of 65.47 and an In Review document at 74.7, again without matching market or on-chain context. Keep the thesis segmented by token and pending until the missing cross-market links and open documents are resolved.",
+  "limits": {
+   "max_turns": 8
+  }
+ }
+}

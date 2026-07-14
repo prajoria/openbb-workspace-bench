@@ -1,0 +1,113 @@
+{
+ "id": "reporting_factsheet_studio_p1_y",
+ "prompt": "Build the monthly reporting checklist: performance, attribution, risk stats, commentary, disclosures, and DDQ blockers.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Reporting & Factsheet Studio",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_commentary_approved_commentary_library",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_commentary_disclosure_checklist",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_ddqs_ddq_and_rfp_tracker",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_performance_monthly_returns",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_performance_attribution_summary",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_performance_risk_stats",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Meridian Family Office's monthly return is In Review at 0.0681 with a 0.0185 change. Attribution remains Open at 54.7 for Horizon Sovereign and 14.54 for Atlas Pension, so those records cannot be paired with the Meridian return. Risk Stats show 9.65 primary with a -0.0674 change and 76.48 secondary with a 0.008 change. Macro Absolute Return commentary is Approved at 72.19, but Atlas Pension's disclosure checklist is Escalated at 30.5. Horizon Sovereign's DDQ/RFP item remains In Review at 11.9. Complete client-level matching and resolve the escalated disclosure and in-review DDQ before closing the monthly checklist.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

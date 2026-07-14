@@ -1,0 +1,124 @@
+{
+ "id": "cio_investment_committee_pack_p1_y",
+ "prompt": "Create the investment committee packet summary with decisions required, allocation changes, capacity, research, and follow-ups.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "CIO / Investment Committee Pack",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_agenda_decisions_required",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_allocations_capital_allocation",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_allocations_recommended_changes",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_allocations_capacity",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_decisions_follow_ups",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_research_top_ideas",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_research_major_catalysts",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The committee packet should flag that decisions remain active, with a primary reading of 32.4, a threshold of 45.8, and a watchlist reading of 48.78. Credit Plus capital allocation is Escalated at 92.34, while the recommended change for Macro Absolute Return is Approved at 1.43; the served rows do not show that these are the same proposal. Capacity reads 44.5 primary and 15.3 secondary against a displayed threshold of 130.96, without units that would establish usable headroom. Research requires mixed handling: Credit Plus's top idea is Escalated at 77.67, while major catalysts are Open at 114.65 for Flagship Long/Short and In Review at 60.4 for Global Opportunities. The Credit Plus follow-up is Escalated at 9.2, so it needs an owner and disposition alongside the allocation escalation.",
+  "limits": {
+   "max_turns": 11
+  }
+ }
+}

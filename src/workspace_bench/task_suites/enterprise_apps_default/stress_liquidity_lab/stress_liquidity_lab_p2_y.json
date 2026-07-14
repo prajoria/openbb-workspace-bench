@@ -1,0 +1,71 @@
+{
+ "id": "stress_liquidity_lab_p2_y",
+ "prompt": "Find assumptions that should be challenged before the risk committee signs off.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Stress & Liquidity Lab",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "stress_liquidity_lab_liquidity_days_to_liquidate",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "stress_liquidity_lab_scenarios_scenario_builder_assumptions",
+     "data_args": {
+      "period": "YTD",
+      "portfolio": "Global Equity",
+      "scenario": "Equity -10%"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Credit Plus has an Escalated days-to-liquidate reading of 22.02 with a 0.0715 change, which should be challenged before sign-off. The only scenario-assumption row belongs to Macro Absolute Return and is Approved at 28.41 with a -0.0933 change. Because the assumption and liquidity records concern different funds, the approved Macro assumption cannot validate Credit Plus liquidity. The rows also omit assumption names and actual liquidation-day units. Require fund-matched scenario assumptions, position-level liquidity, and accepted tolerances before committee approval.",
+  "limits": {
+   "max_turns": 6
+  }
+ }
+}

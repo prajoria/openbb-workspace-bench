@@ -1,0 +1,119 @@
+{
+ "id": "fund_operations_control_tower_p1_y",
+ "prompt": "Create the operations morning checklist: failed trades, recon breaks, corporate actions, pricing exceptions, and owners.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Fund Operations Control Tower",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "fund_operations_control_tower_trade_lifecycle_failed_trades",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "fund_operations_control_tower_recons_custodian_breaks",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "fund_operations_control_tower_corporate_actions_corporate_action_calendar",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "fund_operations_control_tower_pricing_stale_prices",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "fund_operations_control_tower_pricing_nav_exceptions",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "fund_operations_control_tower_pricing_vendor_price_differences",
+     "data_args": {
+      "fund": "Flagship Long/Short",
+      "period": "YTD",
+      "status": "Open"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Failed-trade readings of 58.05 and 50.95 are both above the displayed 23.0 threshold and should lead the morning checklist. Income Fund has Open custodian-break readings of 114.23 and 52.6, while Multi-Asset Fund has an Open corporate-action item at 57.45. Pricing exceptions include Open Income Fund stale-price rows at 201763.98, 176230.47, and 2930.3, plus an Open Refinitiv vendor-price row of 257924.23 for Multi-Asset Fund. Flagship Long/Short also has 18 Open NAV exceptions. The served data provide no owners or security-level joins, so trade, reconciliation, corporate-action, and pricing owners must be assigned and the exceptions matched before clearance.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

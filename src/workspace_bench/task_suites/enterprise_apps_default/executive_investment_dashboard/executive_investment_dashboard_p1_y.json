@@ -1,0 +1,113 @@
+{
+ "id": "executive_investment_dashboard_p1_y",
+ "prompt": "Write the executive briefing: firm AUM, flows, strategy returns, drawdown, stress risk, and major open issues.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Executive Investment Dashboard",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_firm_overview_aum_by_strategy",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_firm_overview_net_flows",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_issues_major_open_issues",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_performance_returns_by_strategy",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_performance_drawdown_summary",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "executive_investment_dashboard_risk_stress_loss_summary",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The dashboard shows Escalated Macro AUM rows of 253708.17 and 236242.75 for Credit Plus, but no firm-total AUM is served. Meridian Family Office net flows are Escalated at 67.07 with a 0.0606 change, expressed as a score rather than a cash amount. Quant returns are In Review at 0.0585 for Global Opportunities and Escalated at 0.0393 for Credit Plus. Credit Plus drawdown is Escalated at -139772, while Flagship Long/Short stress losses remain Open at -66657 and -165435. The only major-issues row is Closed at 48.68 for Healthcare Alpha, so no issue is explicitly Open there; the AUM, flow, return, drawdown, and stress escalations still require their respective owners.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

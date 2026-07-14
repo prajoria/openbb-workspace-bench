@@ -1,0 +1,113 @@
+{
+ "id": "reporting_factsheet_studio_p2_x",
+ "prompt": "Find factsheet language that needs approval before external distribution.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Reporting & Factsheet Studio",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_commentary_approved_commentary_library",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_commentary_pm_quote_bank",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_commentary_disclosure_checklist",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_ddqs_disclosure_exceptions",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_factsheets_factsheet_preview",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "reporting_factsheet_studio_factsheets_factsheet_distribution_status",
+     "data_args": {
+      "client": "Atlas Pension",
+      "period": "YTD"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The Flagship Long/Short commentary-library item needs approval because it remains Open at 8.82. The PM Quote Bank and Factsheet Preview provide only generic fixture prose with readings of 63.32 and 97.21; they do not expose the actual client-facing sentences or an approval status. Atlas Pension's disclosure checklist is Open at 93.86, with 45 Open disclosure exceptions, while Northstar Endowment has 119 Open disclosure exceptions. Distribution status remains Open at 26.04 for Atlas Pension and 75.0 for Northstar Endowment. Hold external distribution and route the actual commentary, quote, preview, and disclosure language for approval because the served rows identify the items but not the language itself.",
+  "limits": {
+   "max_turns": 10
+  }
+ }
+}

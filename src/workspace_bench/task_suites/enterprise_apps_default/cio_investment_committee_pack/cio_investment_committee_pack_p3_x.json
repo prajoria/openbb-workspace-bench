@@ -1,0 +1,80 @@
+{
+ "id": "cio_investment_committee_pack_p3_x",
+ "prompt": "Draft the decision log update after committee review.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "CIO / Investment Committee Pack",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_agenda_ic_agenda",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_agenda_decisions_required",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "cio_investment_committee_pack_decisions_decision_log",
+     "data_args": {
+      "period": "YTD",
+      "strategy": "Global Equities"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The committee agenda for Flagship Long/Short remains Open at 88.24. Decisions required show a primary reading of 52.01, a threshold of 63.1, and a watchlist reading of 78.04, so the review still contains unresolved decision pressure. The decision log itself has Open entries at 61.24 and 24.88, with changes of 0.0492 and -0.0282. Record both entries as pending, assign owners and due dates outside the served data, and do not describe an approval or rejection that the rows do not show.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

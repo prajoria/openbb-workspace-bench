@@ -1,0 +1,84 @@
+{
+ "id": "equity_research_workbench_p3_y",
+ "prompt": "Draft the analyst call prep note with catalysts, risks, research approvals, and open evidence gaps.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-y"
+  ],
+  "default_selected_dashboard": "Equity Research Workbench",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "equity_research_workbench_thesis_catalysts_and_risks",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "equity_research_workbench_thesis_sell_side_research_pdfs",
+     "data_args": {
+      "pdf_name": [
+       "Ipsos GLP-1 Healthcare Revolution",
+       "MassHPC GLP-1 Utilization & Spending"
+      ]
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "equity_research_workbench_thesis_draft_research_review",
+     "data_args": {
+      "period": "YTD",
+      "sector": "Healthcare",
+      "ticker": "LLY"
+     }
+    }
+   }
+  ],
+  "reference_answer": "Global Opportunities has an In Review catalyst-and-risk reading of 50.91 with a -0.0184 change, but the row does not distinguish the catalyst from the risk. Its sell-side documents remain In Review at 28.1 and 83.3, so evidence is not complete. Flagship Long/Short documents are Open at 11.79 and 47.57, and Credit Plus documents are Escalated at 40.46 and 17.1; those queues should be handled separately. The only draft-research record is Closed for Healthcare Alpha at 34.04, so it does not establish approval for Global Opportunities. Call prep should remain conditional on named catalyst/risk detail and fund-matched research approval.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}

@@ -1,0 +1,83 @@
+{
+ "id": "quant_research_backtest_lab_p2_x",
+ "prompt": "Identify signals with attractive IC but unacceptable turnover, crowding, or liquidity cost.",
+ "setup": {
+  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_backends": [
+   "stark-enterprise-x"
+  ],
+  "default_selected_dashboard": "Quant Research & Backtest Lab",
+  "allowed_tools": [
+   "get_workspace_snapshot",
+   "manage_dashboard",
+   "manage_navigation_bar",
+   "navigate_workspace",
+   "list_available_widgets",
+   "get_widget_schema",
+   "get_params_options",
+   "get_widget_data",
+   "create_widget",
+   "update_widget",
+   "update_widget_layout",
+   "delete_widget",
+   "add_generative_widget",
+   "read_widget",
+   "manage_backends",
+   "manage_apps",
+   "get_skill_content",
+   "read_workspace_resource",
+   "get_workspace_prompt",
+   "assign_tasks_to_agents",
+   "final_answer"
+  ]
+ },
+ "eval": {
+  "judge_evaluation": true,
+  "reference_trace": [
+   {
+    "tool": "get_workspace_snapshot",
+    "args": {}
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "quant_research_backtest_lab_signals_signal_metrics",
+     "data_args": {
+      "model": "Multi-Factor Alpha v4",
+      "period": "YTD",
+      "universe": "US Large Cap"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "quant_research_backtest_lab_signals_signal_leaderboard",
+     "data_args": {
+      "model": "Multi-Factor Alpha v4",
+      "period": "YTD",
+      "universe": "US Large Cap"
+     }
+    }
+   },
+   {
+    "tool": "get_widget_data",
+    "args": {
+     "origin": "Bench Stark Enterprise",
+     "widget_id": "quant_research_backtest_lab_signals_signal_decay",
+     "data_args": {
+      "model": "Multi-Factor Alpha v4",
+      "period": "YTD",
+      "universe": "US Large Cap"
+     }
+    }
+   }
+  ],
+  "reference_answer": "The served data do not identify individual signals, so no signal can be named. Signal Metrics show a primary value of 83.92 and a secondary value of 30.95 against a 35.59 threshold, but neither metric is labeled as information coefficient. Open leaderboard readings are 55.65 and 22.12, and signal decay is Open at 26.45. Turnover, crowding, and liquidity-cost fields are absent. Attractive IC paired with unacceptable implementation characteristics therefore cannot be established without signal identities and the requested measures.",
+  "limits": {
+   "max_turns": 7
+  }
+ }
+}
