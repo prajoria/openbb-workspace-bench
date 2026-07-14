@@ -11,7 +11,10 @@ FIXTURE_ORIGINS = {
     "macro": "Bench Macro",
     "portfolio": "Bench Portfolio",
     "stark-enterprise": "Bench Stark Enterprise",
+    "stark-enterprise-x": "Bench Stark Enterprise",
+    "stark-enterprise-y": "Bench Stark Enterprise",
     "daloopa": "Bench Daloopa",
+    "support-daloopa-skills": "Bench Daloopa",
 }
 WIDGET_HINTS = {
     "Bench Equities": {

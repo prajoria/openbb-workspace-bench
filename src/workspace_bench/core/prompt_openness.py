@@ -17,10 +17,24 @@ class PromptOpennessIssue:
     detail: str
 
 
+def _reference_calls(payload: JsonDict) -> list[JsonDict]:
+    eval_block = payload.get("eval")
+    if isinstance(eval_block, dict):
+        return list(eval_block.get("reference_trace") or eval_block.get("reference") or [])
+    return list(payload.get("oracle_tool_calls") or [])
+
+
+def _initial_state(payload: JsonDict) -> JsonDict:
+    setup = payload.get("setup")
+    if isinstance(setup, dict):
+        return setup.get("initial_state") or {}
+    return payload.get("initial_state") or {}
+
+
 def _definitions(payload: JsonDict) -> tuple[list[tuple[str, JsonDict]], list[JsonDict]]:
     widgets: list[tuple[str, JsonDict]] = []
     apps: list[JsonDict] = []
-    for call in payload.get("oracle_tool_calls", []):
+    for call in _reference_calls(payload):
         if not isinstance(call, dict) or call.get("tool") != "manage_backends":
             continue
         args = call.get("args") or {}
@@ -28,7 +42,7 @@ def _definitions(payload: JsonDict) -> tuple[list[tuple[str, JsonDict]], list[Js
             if isinstance(definition, dict):
                 widgets.append((str(widget_id), definition))
         apps.extend(app for app in (args.get("apps_json") or []) if isinstance(app, dict))
-    for backend in (payload.get("initial_state") or {}).get("custom_backends", []) or []:
+    for backend in _initial_state(payload).get("custom_backends", []) or []:
         if not isinstance(backend, dict):
             continue
         for widget_id, definition in (backend.get("widgets_json") or {}).items():
@@ -83,7 +97,7 @@ def _implementation_identifiers(payload: JsonDict) -> list[tuple[str, str]]:
             identifiers.add(("app name", str(app["name"])))
         if app.get("template_id"):
             identifiers.add(("app id", str(app["template_id"])))
-    for call in payload.get("oracle_tool_calls", []):
+    for call in _reference_calls(payload):
         if not isinstance(call, dict) or call.get("tool") != "manage_backends":
             continue
         args = call.get("args") or {}

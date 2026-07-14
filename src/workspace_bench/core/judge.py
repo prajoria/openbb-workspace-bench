@@ -12,7 +12,10 @@ from typing import Any, Callable, Literal
 import urllib.request
 
 from workspace_bench.core.models import JsonDict, Task, ToolTraceEvent
-from workspace_bench.workspace.fixtures import build_stark_enterprise_backend
+from workspace_bench.workspace.fixtures import (
+    build_stark_enterprise_backend,
+    build_stark_enterprise_y_backend,
+)
 
 
 JUDGE_TEMPLATE_VERSION = "workspace-bench-answer-judge/v3"
@@ -113,11 +116,26 @@ class JudgeVerdict:
 JudgeTransport = Callable[[JudgeConfig, str], str]
 
 
+def _stark_world_backend(task: Task):
+    """Resolve the Stark data world a task runs against.
+
+    Y-variant tasks must be judged against Y's data, or every genuine Y
+    figure would look fabricated next to the canonical previews.
+    """
+
+    backends = task.workspace_backends or (
+        task.suite.workspace_backends if task.suite else None
+    ) or ()
+    if "stark-enterprise-y" in backends:
+        return build_stark_enterprise_y_backend()
+    return build_stark_enterprise_backend()
+
+
 def stark_app_catalog_entry(task: Task) -> JsonDict:
     """Return the active Stark app plus the data served by its widgets."""
 
     active_dashboard = str(task.initial_state.get("active_dashboard", ""))
-    backend = build_stark_enterprise_backend()
+    backend = _stark_world_backend(task)
     app = next(
         (entry for entry in backend.apps if entry.get("name") == active_dashboard),
         None,
@@ -156,33 +174,91 @@ def stark_app_catalog_entry(task: Task) -> JsonDict:
     return entry
 
 
+def resolve_judge_template(task: Task | None) -> tuple[str, str]:
+    """Return the judge template and its sha for a task.
+
+    A suite may define its own judge in a ``judge.md`` beside its task
+    families (e.g. ``task_suites/enterprise_apps_default/judge.md``); tasks
+    without one use the fixed default template.
+    """
+
+    if task is not None and task.source_path is not None:
+        candidate = task.source_path.parent.parent / "judge.md"
+        if candidate.is_file():
+            template = candidate.read_text(encoding="utf-8")
+            return template, hashlib.sha256(template.encode("utf-8")).hexdigest()
+    return JUDGE_TEMPLATE, JUDGE_TEMPLATE_SHA
+
+
+def _reference_digest(task: Task) -> str:
+    lines = []
+    for call in task.oracle_tool_calls:
+        args = json.dumps(call.args, sort_keys=True, ensure_ascii=False)
+        if len(args) > 400:
+            args = args[:400] + "…"
+        lines.append(f"- {call.name} {args}")
+    return "\n".join(lines) if lines else "(no reference trace)"
+
+
+def _reference_note(task: Task) -> str:
+    if task.reference_answer:
+        return task.reference_answer
+    for call in reversed(task.oracle_tool_calls):
+        if call.name == "final_answer":
+            return str(call.args.get("text", "")).strip()
+        if call.name == "add_generative_widget":
+            name = str(call.args.get("name", ""))
+            data = str(call.args.get("data", ""))
+            return f"{name}\n{data}".strip()
+    return "(no reference answer artifact)"
+
+
 def build_judge_context(
     task: Task,
     app_catalog_entry: JsonDict,
     trace: tuple[ToolTraceEvent, ...],
     note_text: str,
 ) -> str:
-    """Render the fixed judge prompt from supplied, immutable episode data."""
+    """Render the judge prompt from supplied, immutable episode data."""
 
-    return JUDGE_TEMPLATE.format(
+    template, _ = resolve_judge_template(task)
+    return template.format(
         prompt=task.prompt,
         app_name=str(app_catalog_entry.get("name", "")),
         app_description=str(app_catalog_entry.get("description", "")),
         available_data=_available_data_section(app_catalog_entry),
         trace_digest=_trace_digest(trace),
         note_text=note_text,
+        reference_digest=_reference_digest(task),
+        reference_note=_reference_note(task),
     )
 
 
 def parse_judge_output(raw: str) -> bool | None:
-    """Parse an exact PASS/FAIL word from the first non-empty output line."""
+    """Parse the judge verdict from its output.
 
-    first_line = next((line.strip() for line in raw.splitlines() if line.strip()), "")
-    normalized = first_line.casefold()
-    if normalized == "pass":
+    Two protocols are accepted: the default template's exact PASS/FAIL on
+    the first non-empty line, and the reason-then-verdict templates' final
+    ``VERDICT: PASS`` / ``VERDICT: FAIL`` line (last occurrence wins).
+    """
+
+    lines = [line.strip() for line in raw.splitlines() if line.strip()]
+    if not lines:
+        return None
+    first = lines[0].casefold()
+    if first == "pass":
         return True
-    if normalized == "fail":
+    if first == "fail":
         return False
+    for line in reversed(lines):
+        normalized = line.casefold()
+        if normalized.startswith("verdict:"):
+            verdict = normalized.removeprefix("verdict:").strip()
+            if verdict == "pass":
+                return True
+            if verdict == "fail":
+                return False
+            return None
     return None
 
 
@@ -191,6 +267,7 @@ def judge_episode(
     context: str,
     *,
     transport: JudgeTransport | None = None,
+    template_sha: str = JUDGE_TEMPLATE_SHA,
 ) -> JudgeVerdict:
     """Call and parse the judge, retrying malformed or failed responses."""
 
@@ -206,7 +283,7 @@ def judge_episode(
                     status="pass" if parsed else "fail",
                     raw=raw,
                     model=config.model,
-                    template_sha=JUDGE_TEMPLATE_SHA,
+                    template_sha=template_sha,
                     attempts=attempt,
                 )
             raw = f"Malformed judge output: {raw}"
@@ -219,7 +296,7 @@ def judge_episode(
         status="error",
         raw=raw,
         model=config.model,
-        template_sha=JUDGE_TEMPLATE_SHA,
+        template_sha=template_sha,
         attempts=3,
     )
 

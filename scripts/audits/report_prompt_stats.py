@@ -28,10 +28,17 @@ SUITES = {
     "build-openbb-apps": (REPO / "src/workspace_bench/task_suites/build_openbb_apps"),
 }
 EXPECTED_TASKS = {
-    "smoke": 20,
-    "enterprise-apps-default": 69,
+    "smoke": 80,
+    "enterprise-apps-default": 138,
     "enterprise-apps-usage": 300,
     "build-openbb-apps": 236,
+}
+# The smoke ladder repeats each family's declarative prompt across levels
+# 0-2 on purpose (same instruction, different execution context) and adds
+# one open prompt per family: 2 distinct prompts x 20 families.
+EXPECTED_DISTINCT_PROMPTS = {
+    "smoke": 40,
+    "enterprise-apps-default": 69,
 }
 PROMPT_WORD_CAPS = {
     "smoke": 100,
@@ -66,7 +73,8 @@ BUILD_DIFFICULTY_COUNTS = json.loads(
 def suite_stats(suite_dir: Path) -> dict:
     tasks: list[dict] = []
     for path in sorted(suite_dir.rglob("*.json"), key=lambda item: item.name):
-        if path.name == "task_suite.json":
+        # Suite-root JSON (manifest, reference answer corpora) is metadata.
+        if path.parent == suite_dir:
             continue
         tasks.append(json.loads(path.read_text()))
     prompts = [str(task["prompt"]) for task in tasks]
@@ -120,7 +128,8 @@ def main() -> int:
     report = {name: suite_stats(path) for name, path in SUITES.items()}
     passed = all(
         stats["tasks"] == EXPECTED_TASKS[name]
-        and stats["distinct_prompts"] == stats["tasks"]
+        and stats["distinct_prompts"]
+        == EXPECTED_DISTINCT_PROMPTS.get(name, stats["tasks"])
         and stats["prompt_words_max"] <= PROMPT_WORD_CAPS[name]
         for name, stats in report.items()
     ) and all(

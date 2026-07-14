@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Protocol
 
-from workspace_bench.core.models import Task, ToolCall
+from workspace_bench.core.models import FINAL_ANSWER_TOOL, Task, ToolCall
 
 
 class BenchAgent(Protocol):
@@ -22,12 +22,25 @@ class BenchAgent(Protocol):
 
 @dataclass(frozen=True)
 class OracleAgent:
-    """Replays the task's reference tool-call trace."""
+    """Replays the task's reference tool-call trace.
+
+    The reference trace holds only the workspace interactions; for reply
+    tasks the answer lives in ``eval.reference_answer``, so the oracle
+    synthesizes the ``final_answer`` submission at the end of its replay.
+    """
 
     name: str = "oracle"
 
     def tool_calls(self, task: Task) -> tuple[ToolCall, ...]:
-        return task.oracle_tool_calls
+        calls = task.oracle_tool_calls
+        if task.reference_answer and not any(
+            call.name == FINAL_ANSWER_TOOL for call in calls
+        ):
+            calls = (
+                *calls,
+                ToolCall(name=FINAL_ANSWER_TOOL, args={"text": task.reference_answer}),
+            )
+        return calls
 
 
 @dataclass(frozen=True)

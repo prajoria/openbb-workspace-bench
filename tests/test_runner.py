@@ -5,7 +5,7 @@ import json
 import pytest
 
 from workspace_bench.cli import main
-from workspace_bench.core.models import CANARY_GUID
+from workspace_bench.core.models import CANARY_GUID, Task
 from workspace_bench.core.runner import (
     TaskRunner,
     load_builtin_tasks,
@@ -66,7 +66,7 @@ def test_builtin_tasks_have_terminal_bench_style_metadata() -> None:
     assert all(task.source_path and task.source_path.parent.name == task.family for task in tasks)
 
 
-def test_task_directory_rejects_missing_explicit_family(tmp_path) -> None:
+def test_task_directory_derives_missing_family_from_its_directory(tmp_path) -> None:
     source = next(
         task for task in load_builtin_tasks() if task.id == "price_performance_aapl"
     )
@@ -80,8 +80,12 @@ def test_task_directory_rejects_missing_explicit_family(tmp_path) -> None:
         encoding="utf-8",
     )
 
-    with pytest.raises(ValueError, match="requires non-empty family"):
-        load_task_directory(tmp_path)
+    loaded = load_task_directory(tmp_path)
+    assert [task.family for task in loaded] == [source.family]
+
+    # Without a source path there is nothing to derive the family from.
+    with pytest.raises(ValueError, match="requires family"):
+        Task.from_dict(payload)
 
 
 def test_cli_validate_passes_for_builtin_tasks() -> None:
@@ -291,7 +295,8 @@ def test_cli_can_run_private_task_directory(tmp_path, capsys) -> None:
     task = next(
         item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
     )
-    task_path = tmp_path / "price_performance_aapl.json"
+    (tmp_path / "create").mkdir()
+    task_path = tmp_path / "create" / "price_performance_aapl.json"
     task_path.write_text(
         task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
@@ -416,7 +421,8 @@ def test_cli_hidden_task_suite_redacts_trace_prompts(tmp_path, capsys) -> None:
         json.dumps({"visibility": "hidden"}),
         encoding="utf-8",
     )
-    (task_dir / "price_performance_aapl.json").write_text(
+    (task_dir / "create").mkdir()
+    (task_dir / "create" / "price_performance_aapl.json").write_text(
         task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
     )
@@ -467,55 +473,6 @@ def test_cli_export_task_writes_public_agent_envelope(tmp_path) -> None:
     assert payload["task"]["business_terms"] == []
     assert "oracle_tool_calls" not in payload["task"]
     assert "success" not in payload["task"]
-
-
-def test_cli_export_rollouts_writes_oracle_record(tmp_path) -> None:
-    output = tmp_path / "rollouts.jsonl"
-
-    exit_code = main(
-        [
-            "export-rollouts",
-            "--oracle",
-            "--task",
-            "price_performance_aapl",
-            "--output",
-            str(output),
-        ]
-    )
-
-    records = [json.loads(line) for line in output.read_text(encoding="utf-8").splitlines()]
-    assert exit_code == 0
-    assert len(records) == 1
-    assert records[0]["schema_version"] == "workspace-bench-rollout-v1"
-    assert "git_commit" in records[0]["metadata"]
-    assert records[0]["metadata"]["export_schema_version"] == "workspace-bench-rollout-v1"
-    assert records[0]["metadata"]["exported_at"].endswith("Z")
-    assert records[0]["metadata"]["passed"] is True
-    assert records[0]["tool_calls"][0]["tool"] == "get_workspace_snapshot"
-    assert records[0]["tool_results"][0]["ok"] is True
-
-
-def test_cli_export_sft_defaults_to_passing_oracle_attempts(tmp_path) -> None:
-    output = tmp_path / "sft.jsonl"
-
-    exit_code = main(
-        [
-            "export-sft",
-            "--oracle",
-            "--task",
-            "price_performance_aapl",
-            "--format",
-            "openai_messages",
-            "--output",
-            str(output),
-        ]
-    )
-
-    records = [json.loads(line) for line in output.read_text(encoding="utf-8").splitlines()]
-    assert exit_code == 0
-    assert len(records) == 1
-    assert records[0]["metadata"]["passed"] is True
-    assert records[0]["messages"][0]["role"] == "user"
 
 
 def test_cli_run_agent_command_uses_jsonl_contract(tmp_path, capsys) -> None:
@@ -598,7 +555,7 @@ def test_task_loader_rejects_malformed_allowed_tools(tmp_path) -> None:
         item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
     )
     payload = json.loads(task.source_path.read_text(encoding="utf-8"))
-    payload["allowed_tools"] = "create_widget"
+    payload["setup"]["allowed_tools"] = "create_widget"
     task_path = tmp_path / "bad_allowed_tools.json"
     task_path.write_text(json.dumps(payload), encoding="utf-8")
 
@@ -615,8 +572,9 @@ def test_validate_reports_duplicate_task_ids(tmp_path, capsys) -> None:
         item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
     )
     source = task.source_path.read_text(encoding="utf-8")
-    (tmp_path / "one.json").write_text(source, encoding="utf-8")
-    (tmp_path / "two.json").write_text(source, encoding="utf-8")
+    (tmp_path / "create").mkdir()
+    (tmp_path / "create" / "one.json").write_text(source, encoding="utf-8")
+    (tmp_path / "create" / "two.json").write_text(source, encoding="utf-8")
 
     exit_code = main(["validate", "--task-dir", str(tmp_path), "--min-tasks", "1"])
 

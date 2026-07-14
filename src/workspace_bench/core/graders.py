@@ -31,6 +31,7 @@ from workspace_bench.core.grading.trace import (
     max_consecutive_snapshots as _max_consecutive_snapshots,
 )
 from workspace_bench.core.models import (
+    final_answer_from_trace,
     GradeIssue,
     GradeResult,
     JsonDict,
@@ -190,6 +191,17 @@ def grade_task(
                 f"{required_generated.widget_type} widget(s), "
                 f"found {len(generated_matches)}."
             ),
+        )
+
+    if task.success.required_answer_judgment:
+        # Judge-graded tasks answer by reply: they still gate
+        # deterministically on a submitted final answer, so no-op baselines
+        # fail without a judge and the judge only ever scores a real answer.
+        submitted = final_answer_from_trace(trace)
+        state_builder.check(
+            bool(submitted and submitted.strip()),
+            "missing_final_answer",
+            "Expected the episode to end with a final_answer submission.",
         )
 
     for required_layout in task.success.required_layouts:

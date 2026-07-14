@@ -37,12 +37,17 @@ def test_current_task_schema_is_strict() -> None:
         Task.from_dict(unknown_field)
 
     nested_typo = copy.deepcopy(payload)
-    nested_typo["success"]["trace_cheks"] = {}
-    with pytest.raises(ValueError, match="success contains unknown fields"):
+    nested_typo["eval"]["trace_cheks"] = {}
+    with pytest.raises(ValueError, match="eval contains unknown fields"):
         Task.from_dict(nested_typo)
 
+    mixed_schemas = copy.deepcopy(payload)
+    mixed_schemas["success"] = {"required_tabs": ["overview"]}
+    with pytest.raises(ValueError, match="mixes the eval block"):
+        Task.from_dict(mixed_schemas)
+
     trace_contract = copy.deepcopy(payload)
-    trace_contract["success"]["trace_checks"] = {"max_invalid_tool_calls": 0}
+    trace_contract["eval"]["trace_checks"] = {"max_invalid_tool_calls": 0}
     parsed = Task.from_dict(trace_contract)
     assert parsed.success.trace.max_invalid_tool_calls == 0
 

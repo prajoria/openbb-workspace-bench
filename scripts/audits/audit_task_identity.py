@@ -16,6 +16,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
+from workspace_bench.core.models import task_payload_conditions
 from workspace_bench.core.prompt_openness import prompt_openness_issues
 from workspace_bench.workspace.fixtures import default_fixture_backends
 
@@ -252,16 +253,32 @@ def run_audit() -> list[Finding]:
             audit_task(suite, family, task) + audit_prompt_openness(suite, family, task)
         )
     ]
-    prompts = Counter(str(task["prompt"]) for _, _, task in tasks)
+    # State-variant tasks may repeat a prompt byte-for-byte on purpose: the
+    # same instruction is graded under a different execution context (the
+    # workspace axes and allowed tool surface). Only a duplicate prompt in an
+    # identical context is an identity defect.
+    def _identity_key(task: dict[str, Any]) -> tuple[str, str]:
+        conditions = task_payload_conditions(task)
+        context = {
+            "workspace_baseline": conditions.get("workspace_baseline"),
+            "workspace_backends": conditions.get("workspace_backends"),
+            "workspace_skills": conditions.get("workspace_skills"),
+            "allowed_tools": conditions.get("allowed_tools"),
+            "initial_state": conditions.get("initial_state"),
+        }
+        return str(task["prompt"]), json.dumps(context, sort_keys=True)
+
+    prompts = Counter(_identity_key(task) for _, _, task in tasks)
     for suite, family, task in tasks:
-        if prompts[str(task["prompt"])] > 1:
+        if prompts[_identity_key(task)] > 1:
             findings.append(
                 Finding(
                     suite,
                     family,
                     str(task["id"]),
                     "prompt",
-                    "prompt is not unique across bundled tasks",
+                    "prompt is not unique across bundled tasks with the same "
+                    "execution context",
                 )
             )
     findings.extend(audit_references(tasks))

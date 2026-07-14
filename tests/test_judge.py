@@ -84,6 +84,19 @@ def test_parse_judge_output_is_exact_and_case_insensitive() -> None:
     assert parse_judge_output("garbage\nPASS") is None
 
 
+def test_parse_judge_output_accepts_reason_then_verdict_protocol() -> None:
+    reasoned = (
+        "STEP 1 - KEY POINTS\n- decisions required\n- allocations\n"
+        "STEP 2 - COVERAGE\n- decisions required: ADDRESSED\n- allocations: ADDRESSED\n"
+        "VERDICT: PASS"
+    )
+    assert parse_judge_output(reasoned) is True
+    assert parse_judge_output("analysis...\nverdict: fail") is False
+    # The last verdict line wins; a malformed verdict stays unparsed.
+    assert parse_judge_output("VERDICT: PASS\nmore\nVERDICT: FAIL") is False
+    assert parse_judge_output("thinking\nVERDICT: maybe") is None
+
+
 def test_judge_episode_retries_malformed_output() -> None:
     outputs = iter(["maybe", "\nPASS\nGrounded in the relevant rows."])
 
@@ -112,10 +125,24 @@ def test_judge_episode_errors_after_three_transport_failures() -> None:
 
 def test_grade_task_required_judge_true_false_and_pending() -> None:
     task = make_task()
+    # Judge-graded tasks answer by reply: they gate deterministically on a
+    # submitted final answer in the trace.
+    answered_trace = (
+        ToolTraceEvent(
+            index=1,
+            call=ToolCall(name="final_answer", args={"text": "The largest risk is X."}),
+            ok=True,
+            result={"ok": True, "command": "final_answer"},
+        ),
+    )
 
-    passing = grade_task(task, {}, (), judge_verdict=True)
-    failing = grade_task(task, {}, (), judge_verdict=False)
-    pending = grade_task(task, {}, ())
+    passing = grade_task(task, {}, answered_trace, judge_verdict=True)
+    failing = grade_task(task, {}, answered_trace, judge_verdict=False)
+    pending = grade_task(task, {}, answered_trace)
+
+    no_answer = grade_task(task, {}, (), judge_verdict=True)
+    assert not no_answer.passed
+    assert any(issue.code == "missing_final_answer" for issue in no_answer.issues)
 
     assert passing.passed
     assert passing.judge_passed
@@ -152,11 +179,22 @@ def test_model_compare_uses_injected_judge_callable(tmp_path) -> None:
             ]
         }
     }
+    answered = (
+        ToolTraceEvent(
+            index=1,
+            call=ToolCall(
+                name="final_answer",
+                args={"text": "Risk is concentrated; reduce the largest exposure."},
+            ),
+            ok=True,
+            result={"ok": True, "command": "final_answer"},
+        ),
+    )
     run = ComparisonRun(
         run_result=RunResult(
             task=task,
-            grade=grade_task(task, snapshot, ()),
-            trace=(),
+            grade=grade_task(task, snapshot, answered),
+            trace=answered,
             final_snapshot=snapshot,
         ),
         command="test",

@@ -34,18 +34,23 @@ BUILTIN_TASK_SUITE_ORDER = (
 
 
 def _resource_task_files(root: Traversable) -> list[Traversable]:
-    """Return task JSON resources recursively, preserving filename ordering."""
+    """Return task JSON resources recursively, preserving filename ordering.
+
+    Tasks live only in family subdirectories; JSON files at the suite root
+    (the manifest, reference answer corpora, and other suite metadata) are
+    never tasks.
+    """
 
     files: list[Traversable] = []
 
-    def visit(directory: Traversable) -> None:
+    def visit(directory: Traversable, at_root: bool) -> None:
         for child in directory.iterdir():
             if child.is_dir():
-                visit(child)
-            elif child.name.endswith(".json") and child.name != TASK_SUITE_MANIFEST:
+                visit(child, False)
+            elif not at_root and child.name.endswith(".json"):
                 files.append(child)
 
-    visit(root)
+    visit(root, True)
     return sorted(files, key=lambda path: path.name)
 
 
@@ -109,6 +114,9 @@ def load_task_file(
 ) -> Task:
     with path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
+    if task_suite and task_suite.task_defaults:
+        # Suite-wide labels apply only where the task file omits the field.
+        payload = {**task_suite.task_defaults, **payload}
     task = Task.from_dict(payload, source_path=path)
     return replace(task, suite=task_suite) if task_suite else task
 
@@ -130,8 +138,14 @@ def load_task_directory(path: Path) -> list[Task]:
     if not path.is_dir():
         raise NotADirectoryError(f"task directory is not a directory: {path}")
     manifest = load_task_suite_manifest(path)
+    # Tasks live only in family subdirectories; suite-root JSON files (the
+    # manifest, reference answer corpora, and other metadata) are never tasks.
     task_paths = sorted(
-        (candidate for candidate in path.rglob("*.json") if candidate.name != TASK_SUITE_MANIFEST),
+        (
+            candidate
+            for candidate in path.rglob("*.json")
+            if candidate.parent != path
+        ),
         key=lambda candidate: candidate.name,
     )
     return [
@@ -143,9 +157,31 @@ def load_task_directory(path: Path) -> list[Task]:
 def task_workspace_baseline(task: Task) -> str:
     """Return the explicit label for the baseline applied to a task."""
 
-    if task.suite is None or task.suite.workspace_baseline is None:
+    if task.workspace_baseline is not None:
+        return task.workspace_baseline or "minimal"
+    if task.suite is None or not task.suite.workspace_baseline:
         return "minimal"
     return task.suite.workspace_baseline
+
+
+def task_workspace_backends(task: Task) -> tuple[str, ...] | None:
+    """Return the explicit backend set applied to a task, if any was chosen."""
+
+    if task.workspace_backends is not None:
+        return task.workspace_backends
+    if task.suite is None:
+        return None
+    return task.suite.workspace_backends
+
+
+def task_workspace_skills(task: Task) -> tuple[str, ...] | None:
+    """Return the explicit skill selection applied to a task, if any."""
+
+    if task.workspace_skills is not None:
+        return task.workspace_skills
+    if task.suite is None:
+        return None
+    return task.suite.workspace_skills
 
 
 def tasks_workspace_baseline(tasks: list[Task]) -> str:
