@@ -90,8 +90,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 2
-    }
+    "max_turns": 2
   }
 }

@@ -37,8 +37,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 1
-    }
+    "max_turns": 1
   }
 }

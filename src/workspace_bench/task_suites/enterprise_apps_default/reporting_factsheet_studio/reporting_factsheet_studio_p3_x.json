@@ -96,8 +96,6 @@
    }
   ],
   "reference_answer": "Returns increased for both served clients: Atlas Pension is Open at 0.1015 with a 0.0635 change, and Northstar Endowment is Open at 0.1106 with a 0.0759 change. Attribution moved differently, declining by -0.0582 at an Open 36.9 for Atlas Pension and increasing by 0.0101 at an Open 9.86 for Northstar Endowment. Risk is mixed, with the 12.29 primary metric changing by -0.0451 and the 81.19 secondary metric changing by 0.005. Client-facing commentary remains Open at 8.82 with a -0.0679 change. The commentary is fund-level rather than client-linked, so approval and mapping are needed before distribution.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

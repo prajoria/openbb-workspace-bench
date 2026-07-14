@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "J.P. Morgan is the highest-status broker follow-up because its post-trade review is Escalated at 129.75 with a 0.0466 change. Goldman Sachs has an Open review at 22.9, while Morgan Stanley remains In Review at 48.76; each needs a documented disposition. UBS's review at 29.44 and its 16 broker exceptions are Closed, so they do not require new action on the served status. Barclays has an Open algo-slippage reading of 64.11 with a -0.0429 change, but no matching review or exception row. Algo names, benchmark units, and parameters are missing, so changes should wait until Barclays's slippage is linked to an executable configuration.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

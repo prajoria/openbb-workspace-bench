@@ -124,8 +124,6 @@
    }
   ],
   "reference_answer": "Flagship Long/Short fee-accrual readings are Open at 93.49 and 72.78 and require controller disposition. Cash exceptions include Open cash-movement readings of 97.6 and 41.1, FX/overdraft readings of 72.91 and 60.5, and cash-break aging readings of 51.07 and 95.03. Close-exception counts remain Open at 225 and 178. NAV pricing exceptions are also Open at 36 and 118. The served rows lack security, currency, and owner details, so controller approval should wait for item-level reconciliation rather than rely on aggregate scores and counts.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

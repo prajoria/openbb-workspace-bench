@@ -40,14 +40,7 @@
     ]
   },
   "eval": {
-    "required_tool_calls": [
-      {
-        "tool": "read_workspace_resource",
-        "args_contains": {
-          "uri": "openbb://workspace/specs/widget-types"
-        }
-      }
-    ],
+    "calls_match_reference": true,
     "reference_trace": [
       {
         "tool": "read_workspace_resource",
@@ -56,8 +49,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 2
-    }
+    "max_turns": 2
   }
 }

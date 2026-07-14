@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Flagship Long/Short has Open alert groups of 210 and 119, so the 210-count group is the larger queue and should be reviewed first. Restricted-list overlap is also Open at 18.98, and investigation evidence remains Open at 64.75. Those records support escalation and evidence preservation, but neither alert row contains an explicit severity or age field. The data also lack an alert-level join to the restricted-list and audit rows, so they cannot rank individual alerts by overlap or evidence. Triage the larger open queue first while obtaining alert age, severity, and linked-evidence details before assigning case-level priority.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

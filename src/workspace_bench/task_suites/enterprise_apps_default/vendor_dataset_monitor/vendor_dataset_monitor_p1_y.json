@@ -124,8 +124,6 @@
    }
   ],
   "reference_answer": "Bloomberg has Open latency readings of 1015 ms and 1020 ms, Open validation readings of 49.89 and 64.35, and Open affected-app readings of 117.42, 74.8, and 3.46. Its incident is In Review at 55.4, while blast-radius records remain Open at 47.07, 133.21, and 5.97. S&P Global latency is In Review at 86 ms and 80 ms, with validation and app-impact records also In Review. FactSet has 106 Open freshness exceptions and Open incident readings of 24.87 and 41.3, although its served latency is Closed at 29 ms and its validation rows are Closed. The rows do not name feeds, incidents, or affected fund apps. Prioritize Bloomberg's open latency and quality work, then resolve FactSet freshness and S&P Global reviews with dataset-to-app mappings.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

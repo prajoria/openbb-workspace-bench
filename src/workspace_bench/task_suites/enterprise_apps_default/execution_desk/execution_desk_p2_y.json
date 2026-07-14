@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "The Escalated fills-table row belongs to J.P. Morgan at 94.86 with a 0.0532 change, while the Approved slippage row belongs to Citi at 51.35 with a 0.0861 change. Because those records concern different brokers, they cannot establish whether the J.P. Morgan fill underperformed arrival. The J.P. Morgan broker scorecard is Escalated at 23.99, and Citi's scorecard is Approved at 36.23, but neither supplies arrival price or signed slippage. Venue and algo fields are entirely absent. The outcome therefore cannot be attributed to broker, venue, or algo choice without fill-level benchmark and routing data.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

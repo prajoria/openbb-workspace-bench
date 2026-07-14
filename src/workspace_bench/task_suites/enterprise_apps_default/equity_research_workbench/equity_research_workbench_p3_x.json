@@ -89,8 +89,6 @@
    }
   ],
   "reference_answer": "Flagship Long/Short has Open catalyst-and-risk readings of 39.25 and 83.43, with changes of -0.0403 and 0.0527, but the rows do not say which is the catalyst or the risk. Draft research review is still Open at 81.07 and 31.82. Sell-side research documents for the fund are also Open at 7.98 and 48.64, so research approval is incomplete. Credit Plus documents are Escalated at 36.03 and 12.12, while Global Opportunities documents remain In Review at 19.49 and 72.2; these are separate evidence queues. Before the call, identify the catalyst and risk, resolve the Flagship draft and document gaps, and avoid treating generic scores as approved conclusions.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

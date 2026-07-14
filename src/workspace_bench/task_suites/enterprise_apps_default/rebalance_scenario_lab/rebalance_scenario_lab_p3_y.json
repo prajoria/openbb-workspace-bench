@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Flagship Long/Short implementation readiness remains Open at 104.0, and its checklist is Escalated at 63.18, so the PM should hold that implementation despite an Approved drift row of 24.3 from another period. Income Fund has Open checklist readings of 17.74 and 19.72 and an In Review sleeve-drift reading of 67.0, also requiring a hold. Multi-Asset Fund has an In Review checklist at 52.56 and an Escalated sleeve-drift reading of 20.55. Global Opportunities has an Approved checklist at 34.01 but no served readiness or matched drift record. The PM should make fund-specific hold decisions for unresolved statuses and request period-matched readiness, drift, and checklist evidence before approval.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

@@ -76,8 +76,6 @@
    }
   ],
   "reference_answer": "Committee sign-off should remain pending because Flagship Long/Short tracker readings are Open at 76.26 and 33.62. Residual-risk actions also remain Open at 8.67 and 41.3, with positive changes of 0.0385 and 0.0505. The served rows do not describe the actions, completion criteria, or owners. Assign accountable owners and due dates, document each residual risk, and close both tracker and action records before sign-off. Score magnitude alone should not be treated as evidence of completion.",
-  "limits": {
-   "max_turns": 6
-  }
+  "max_turns": 6
  }
 }

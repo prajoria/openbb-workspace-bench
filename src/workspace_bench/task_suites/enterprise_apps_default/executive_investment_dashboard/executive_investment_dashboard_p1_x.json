@@ -118,8 +118,6 @@
    }
   ],
   "reference_answer": "The dashboard shows Open Global Equities AUM rows of 90111.48 and 120274.16 for Flagship Long/Short, but no firm-total row, so firm AUM should not be derived by summing them. Net-flow readings are Open at 83.06 for Atlas Pension and 25.88 for Northstar Endowment, although these are scores rather than currency flows. Global Equities returns remain Open at 0.0405 and 0.1031, with changes of -0.0386 and 0.044. Drawdowns are -7000 and -248500, while stress losses are -51000 and -134500; all risk rows remain Open. Major open-issue readings are 54.46 and 79.57, so leadership should obtain issue descriptions and owners while keeping the performance and risk observations under review.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

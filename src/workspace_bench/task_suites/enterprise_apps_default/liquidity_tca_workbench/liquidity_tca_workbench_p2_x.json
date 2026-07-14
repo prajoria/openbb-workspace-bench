@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "On displayed fill-quality score, Goldman Sachs at 27.81 ranks above Barclays at 3.83, although the data do not define whether a higher score means better fills. On displayed slippage score, Barclays at 77.99 ranks above Goldman Sachs at 53.77, but the preferred direction and units are again unspecified. Goldman Sachs also has an Open broker-scorecard reading of 16.9; no comparable Barclays scorecard row is served. Commission and latency fields are entirely absent. A defensible overall broker ranking therefore cannot be produced until score direction, commission, latency, and comparable broker coverage are supplied.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

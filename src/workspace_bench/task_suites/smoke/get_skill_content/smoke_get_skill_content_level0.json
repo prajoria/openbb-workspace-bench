@@ -21,14 +21,7 @@
     ]
   },
   "eval": {
-    "required_tool_calls": [
-      {
-        "tool": "get_skill_content",
-        "args_contains": {
-          "slug": "daloopa-tearsheet"
-        }
-      }
-    ],
+    "calls_match_reference": true,
     "reference_trace": [
       {
         "tool": "get_skill_content",
@@ -37,8 +30,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 1
-    }
+    "max_turns": 1
   }
 }

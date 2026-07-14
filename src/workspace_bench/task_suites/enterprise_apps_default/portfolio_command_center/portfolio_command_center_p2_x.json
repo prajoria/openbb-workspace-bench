@@ -84,8 +84,6 @@
    }
   ],
   "reference_answer": "The served data do not identify individual holdings or current portfolio weights, so no holding-level mismatch can be named. Flagship Long/Short analyst-conviction readings are Open at 85.65 and 73.99, while holdings-table readings are Open at 29.38 and 11.22. Its slow-portfolio-mark readings are Open at 20.59 and 3.65, but a slow mark is not a supplied liquidity or risk-contribution measure. Credit Plus separately has Escalated slow-mark readings of 94.19 and 93.23. Security identifiers, weights, liquidity, risk contribution, and row-level joins are required before concluding that conviction disagrees with a position.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

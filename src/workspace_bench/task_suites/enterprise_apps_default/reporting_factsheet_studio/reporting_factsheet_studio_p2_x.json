@@ -118,8 +118,6 @@
    }
   ],
   "reference_answer": "The Flagship Long/Short commentary-library item needs approval because it remains Open at 8.82. The PM Quote Bank and Factsheet Preview provide only generic fixture prose with readings of 63.32 and 97.21; they do not expose the actual client-facing sentences or an approval status. Atlas Pension's disclosure checklist is Open at 93.86, with 45 Open disclosure exceptions, while Northstar Endowment has 119 Open disclosure exceptions. Distribution status remains Open at 26.04 for Atlas Pension and 75.0 for Northstar Endowment. Hold external distribution and route the actual commentary, quote, preview, and disclosure language for approval because the served rows identify the items but not the language itself.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

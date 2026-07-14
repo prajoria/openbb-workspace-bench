@@ -100,8 +100,6 @@
    }
   ],
   "reference_answer": "Both Flagship Long/Short proposed-trade rows, scored 13.46 and 13.01, remain Open and should be delayed. The compliance blocker is an Open restricted-list check at 31.12. Constraint-utilization readings are Open at 22.35 and 13.02, while liquidity-impact readings are Open at 10.55 and 80.62. The records do not map a constraint or liquidity reading to either proposed trade, and ADV usage and trade size are absent. Delay both trades for compliance clearance and resize only after trade-level ADV, constraint, and liquidity mappings are provided.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

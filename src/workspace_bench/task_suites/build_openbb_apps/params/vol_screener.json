@@ -88,7 +88,7 @@
         "required_config": {}
       }
     ],
-    "reference": [
+    "reference_trace": [
       {
         "tool": "get_workspace_snapshot",
         "args": {}
@@ -159,8 +159,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 13
-    }
+    "max_turns": 13
   }
 }

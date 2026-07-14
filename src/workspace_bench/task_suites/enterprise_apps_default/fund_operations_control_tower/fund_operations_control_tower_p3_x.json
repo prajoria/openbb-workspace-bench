@@ -148,8 +148,6 @@
    }
   ],
   "reference_answer": "Before market open, escalate failed-trade readings of 50.74 and 39.13 because both exceed the displayed threshold of 35.88. Also address 61 Open settlement exceptions and Open custodian-break readings of 1.67 and 59.91. Corporate-action timing requires review of the Open calendar reading at 28.47 and Open election-deadline readings at 79.97 and 67.02. Before NAV strike, resolve Open NAV-exception counts of 67 and 210, stale-price rows of 3114.0 and 243359.62, and vendor-price rows of 246075.96 and 209032.42. The pricing rows lack security-level links, so their exact NAV impact must be confirmed rather than inferred.",
-  "limits": {
-   "max_turns": 12
-  }
+  "max_turns": 12
  }
 }

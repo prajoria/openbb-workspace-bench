@@ -40,14 +40,7 @@
     ]
   },
   "eval": {
-    "required_tool_calls": [
-      {
-        "tool": "get_workspace_prompt",
-        "args_contains": {
-          "name": "workspace_tool_usage"
-        }
-      }
-    ],
+    "calls_match_reference": true,
     "reference_trace": [
       {
         "tool": "get_workspace_prompt",
@@ -56,8 +49,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 2
-    }
+    "max_turns": 2
   }
 }

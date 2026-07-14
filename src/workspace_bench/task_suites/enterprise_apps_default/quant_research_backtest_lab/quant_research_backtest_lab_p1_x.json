@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Signal quality is mixed: the primary reading of 83.92 is above the 35.59 threshold, while the secondary reading of 30.95 is below it. Flagship Long/Short backtest-performance rows remain Open at 35.41 and 11.51, with negative changes of -0.0574 and -0.0708. Factor exposures are also Open at 0.0342 and 0.1608, with changes of 0.0489 and -0.0417. The served data do not provide exposure limits, a labeled backtest path, or any capacity measure. The selected model is therefore not demonstrably production-ready and should remain in review until the secondary signal, open backtest, risk limits, and capacity are resolved.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

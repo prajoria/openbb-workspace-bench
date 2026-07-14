@@ -124,8 +124,6 @@
    }
   ],
   "reference_answer": "Multi-Asset Fund needs controller review for Open cash movements at 60.9 and 66.61, an Open cash-break reading of 53.98, fee accruals In Review at 122.66 and 110.01, and NAV exceptions In Review at 156 and 130. Income Fund has Open FX/cash-and-overdraft readings of 69.56, 128.67, 64.14, and 79.43, Open fee accruals at 27.07 and 124.9, and Open NAV-exception counts of 196 and 138. Global Opportunities has Open close-exception counts of 179, 58, 174, and 62 even though its served NAV exceptions are Closed. Flagship Long/Short cash movements remain In Review at 60.18 and 60.6, while its fee and NAV rows are Approved. Fund controllers should resolve the open and in-review records by fund and period because the aggregates lack item identifiers, currencies, and explicit approval owners.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

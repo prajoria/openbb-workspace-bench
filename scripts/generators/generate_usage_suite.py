@@ -50,6 +50,7 @@ from _assembly import (
 from workspace_bench.core.models import task_payload_to_eval_schema
 from workspace_bench.core.suite_checks import task_payload_digest
 from workspace_bench.workspace.fixtures import get_fixture_backend
+from workspace_bench.workspace.simulated_workspace import WORKSPACE_SKILLS
 
 REPO = Path(__file__).resolve().parents[2]
 STARK = json.loads((REPO / "src/workspace_bench/data/backends/stark_enterprise_x.json").read_text())
@@ -5644,18 +5645,21 @@ def main() -> None:
     for task in SCENARIOS:
         task.pop("_family")
         task.pop("_rung")
-        payload = slim_task_payload(task)
+        payload = task_payload_to_eval_schema(slim_task_payload(task))
         shipped.append(payload)
         for directory in OUT_DIRS:
             family_dir = directory / task["family"]
             family_dir.mkdir(parents=True, exist_ok=True)
             (family_dir / f"{task['id']}.json").write_text(
-                json.dumps(task_payload_to_eval_schema(payload), indent=2) + "\n")
+                json.dumps(payload, indent=2) + "\n")
 
     manifest = {
         "suite_id": "enterprise-apps-usage",
         "visibility": "public",
         "workspace_baseline": "all-stark-enterprise-apps",
+        # Skills stay declared suite-wide until the usage conformance round
+        # moves them per task; without this the explicit-axis default is none.
+        "workspace_skills": sorted(WORKSPACE_SKILLS),
         "content_sha256": task_payload_digest(shipped),
         "description": (
             "Operating the workspace: 15 MCP-surface families and 300 tasks "

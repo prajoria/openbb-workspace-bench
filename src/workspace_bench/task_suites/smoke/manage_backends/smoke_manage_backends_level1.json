@@ -40,14 +40,7 @@
     ]
   },
   "eval": {
-    "required_tool_calls": [
-      {
-        "tool": "manage_backends",
-        "args_contains": {
-          "operation": "list"
-        }
-      }
-    ],
+    "calls_match_reference": true,
     "reference_trace": [
       {
         "tool": "manage_backends",
@@ -56,8 +49,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 2
-    }
+    "max_turns": 2
   }
 }

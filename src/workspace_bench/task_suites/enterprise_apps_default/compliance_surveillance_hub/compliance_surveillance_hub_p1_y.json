@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Flagship Long/Short has 168 Open surveillance alerts and Open investigation evidence at 51.93, making that fund the immediate review queue. Its restricted-list row is Closed at 27.41, so the served data do not show a current restricted-list overlap for the same fund. Global Opportunities has a separate Open restricted-list reading of 23.23, but no matching alert or investigation-evidence row is served. Explicit severity and age fields are absent, and the records are not joined at alert level. Escalate the Flagship alert queue on its open status and evidence, while treating age, severity, and restricted overlap as unsupported until linked details arrive.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

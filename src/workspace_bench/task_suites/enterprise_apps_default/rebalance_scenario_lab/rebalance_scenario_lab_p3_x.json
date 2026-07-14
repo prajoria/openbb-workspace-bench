@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Approval should remain on hold because Flagship Long/Short implementation-readiness readings are Open at 36.17 and 90.3. Residual drift by sleeve is Open at 22.05 with a -0.0237 change. Approval-checklist readings are also Open at 19.65 and 17.59. These statuses show unresolved implementation risk and drift, but the rows do not describe the actual blockers or tolerance. The PM decision should be to defer implementation until readiness, sleeve drift, and checklist items are documented and closed.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

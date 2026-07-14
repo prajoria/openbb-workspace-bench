@@ -118,8 +118,6 @@
    }
   ],
   "reference_answer": "Macro Absolute Return's commentary-library record is Approved at 72.19 and does not need another approval on the served status. The PM Quote Bank and Factsheet Preview contain only generic fixture prose at 63.32 and 97.21, with no actual factsheet sentences or approval states. Atlas Pension's disclosure checklist is Escalated at 30.5, and its distribution status is In Review at 75.54. Northstar Endowment distribution is Escalated at 44.75, while the served disclosure exceptions for Meridian Family Office at 102 and Horizon Sovereign at 108 are Closed. Hold Atlas Pension and Northstar Endowment distribution and obtain the specific quote, preview, and disclosure language for approval.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

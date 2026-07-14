@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "The committee agenda for Flagship Long/Short remains Open at 88.24. Decisions required show a primary reading of 52.01, a threshold of 63.1, and a watchlist reading of 78.04, so the review still contains unresolved decision pressure. The decision log itself has Open entries at 61.24 and 24.88, with changes of 0.0492 and -0.0282. Record both entries as pending, assign owners and due dates outside the served data, and do not describe an approval or rejection that the rows do not show.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

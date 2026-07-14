@@ -124,8 +124,6 @@
    }
   ],
   "reference_answer": "Mandate context remains In Review for Horizon Sovereign at 68.65 and Atlas Pension at 89.03. The only return row is an Approved -0.0078 for Meridian Family Office in Macro Absolute Return, while the only exposure row is an Approved 0.1685 for Northstar Endowment in that fund, so performance and exposure cannot be paired by client. Flows range from an Open Northstar Endowment reading of 15.82 to an In Review Meridian Family Office reading of 128.46, with Horizon Sovereign Escalated at 87.7 and Atlas Pension Approved at 52.31. Atlas Pension nevertheless has an Escalated open-request reading of 81.9 that requires direct follow-up. Approved talking points cover the YTD client workflow at 29.91 but provide no client-specific language. Use the approved workflow framing, separate the unjoined portfolio rows, and prioritize the escalated Horizon Sovereign flow and Atlas Pension request.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

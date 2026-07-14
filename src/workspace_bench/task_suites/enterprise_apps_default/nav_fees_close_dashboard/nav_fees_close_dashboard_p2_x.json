@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Flagship Long/Short has 225 and 178 Open close exceptions that could delay sign-off. The close dependency register is also Open at 45.09 and 86.81. NAV sign-off tasks remain Open at 12.67 and 78.53, confirming that approval work is incomplete. The rows do not distinguish daily from monthly tasks or identify owners and due times. Treat all served records as blockers until exceptions and dependencies are cleared and the sign-off tasks are closed.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

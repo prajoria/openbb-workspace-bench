@@ -74,8 +74,6 @@
    }
   ],
   "reference_answer": "Healthcare Alpha's only major-issue record is Closed at 48.68, so it does not require new escalation on the evidence served. Flagship Long/Short has one Open decision-log item at 17.49 with a 0.0472 change, and that is the sole unresolved record in these reads. The item should receive leadership attention this week, but its subject and severity are not provided. Without an issue description or functional owner, the data cannot determine whether it belongs with the CEO, CIO, COO, or CRO.",
-  "limits": {
-   "max_turns": 6
-  }
+  "max_turns": 6
  }
 }

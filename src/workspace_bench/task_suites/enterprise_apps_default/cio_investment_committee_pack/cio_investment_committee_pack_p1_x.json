@@ -129,8 +129,6 @@
    }
   ],
   "reference_answer": "The committee packet should keep the decision agenda open: the primary reading is 52.01 against a threshold of 63.1, while the watchlist is 78.04. Capital-allocation rows for Flagship Long/Short remain Open at 6.21 and 40.72, and the recommended-change rows are also Open at 50.48 and 31.48, so no allocation is yet recorded as approved. Capacity is 37.8 primary and 14.0 secondary versus the displayed 99.59 threshold, although the rows do not define units or available headroom. Research shows a top-idea score of 76.0 and major-catalyst scores of 85.88 and 82.79, all still Open. Follow-ups remain Open at 40.63 and 64.99; the committee should assign owners and resolve those items before implementing the recommendations.",
-  "limits": {
-   "max_turns": 11
-  }
+  "max_turns": 11
  }
 }

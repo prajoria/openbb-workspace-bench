@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Northstar Endowment is the clearest redemption-risk candidate because its Open flow reading is 85.31 with a -0.0718 change. Atlas Pension's flow remains Open at 11.13 with a 0.04 change, and it also has an unresolved Open request at 16.22. Relationship Metrics show primary and secondary values of 77.48 and 82.24 against a 73.73 threshold, with the watchlist at 61.83. Those relationship readings have no client labels, so they cannot be assigned to either account or used to prove redemption risk. Follow up with Northstar Endowment on the negative flow and with Atlas Pension on the service request, while obtaining client-linked relationship evidence.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

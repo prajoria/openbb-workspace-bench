@@ -86,8 +86,6 @@
    }
   ],
   "reference_answer": "No theme can be highlighted because the factor-tilt series contains no theme or factor name and the served rows contain no PM-conviction measure. The factor series ranges from 76.33 to 83.12 across the displayed observations. Global Equities has an Open liquidity-capacity reading of 29.82 with a 0.02 change. Capacity utilization is 92.83 primary and 81.06 secondary, but those readings have no strategy or theme label. Without theme identifiers, PM conviction, and joins between tilt and capacity, an inconsistency cannot be established.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

@@ -76,8 +76,6 @@
    }
   ],
   "reference_answer": "Both Flagship Long/Short scenario-assumption readings remain Open at 87.8 and 84.32. Their changes move in opposite directions at -0.0775 and 0.0463, but the assumptions themselves are not named. Days-to-liquidate readings are also Open at 62.96 and 79.81, without actual day units or links to the assumptions. The committee should challenge the liquidity horizon, scenario inputs, and their mapping to positions before sign-off. Exact assumption revisions cannot be prescribed until the underlying labels, units, and tolerances are supplied.",
-  "limits": {
-   "max_turns": 6
-  }
+  "max_turns": 6
  }
 }

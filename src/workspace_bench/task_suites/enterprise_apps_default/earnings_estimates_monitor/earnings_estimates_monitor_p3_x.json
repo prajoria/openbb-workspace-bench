@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "LLY is the only company represented in estimate revisions, management commentary, and the thesis-change log. Its consensus-revision row is Open at 33.55 with a 0.0847 change, management tone is Open at 81.37 with a -0.0487 change, and the thesis-change entry is Open at 4.89 with a -0.068 change. Those mixed directions justify reviewing LLY as a potential thesis change, although no materiality threshold or commentary text is supplied. XOM has an Open consensus-revision score of 24.68 and an Open thesis-change score of 66.81, but no XOM management-tone row. Treat LLY as the complete review candidate and keep XOM pending commentary evidence.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

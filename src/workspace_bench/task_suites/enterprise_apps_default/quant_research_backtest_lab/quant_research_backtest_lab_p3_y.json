@@ -112,8 +112,6 @@
    }
   ],
   "reference_answer": "Macro Absolute Return has Approved backtest performance at 13.74, Approved trade simulation at 19.9, and Approved factor exposure at 0.1527. Signal readings of 104.48 and 43.11 are above the displayed 38.01 threshold, although the metrics are not explicitly linked to the fund. The only drawdown record belongs to Global Opportunities and remains In Review at -337801, so it cannot establish Macro Absolute Return's drawdown risk. The served evidence supports PM review of the approved Macro records but not final risk approval. Obtain a fund-matched drawdown path, exposure limit, capacity analysis, and model linkage for the signal metrics before production release.",
-  "limits": {
-   "max_turns": 9
-  }
+  "max_turns": 9
  }
 }

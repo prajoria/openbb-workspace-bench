@@ -40,21 +40,14 @@
     ]
   },
   "eval": {
-    "required_tool_calls": [
-      {
-        "tool": "get_widget_schema",
-        "args_contains": {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "portfolio_command_center_actions_trade_ideas"
-        }
-      }
-    ],
+    "calls_match_reference": true,
     "reference_trace": [
       {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
-        }
+        },
+        "optional": true
       },
       {
         "tool": "get_widget_schema",
@@ -64,8 +57,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 2
-    }
+    "max_turns": 2
   }
 }

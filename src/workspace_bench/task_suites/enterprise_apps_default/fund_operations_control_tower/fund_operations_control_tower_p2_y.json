@@ -100,8 +100,6 @@
    }
   ],
   "reference_answer": "Multi-Asset Fund has Open break-aging readings of 72.81 and 93.17, making it the only fund with explicitly Open aging rows. Income Fund instead has Open custodian-break readings of 114.23 and 52.6, plus 72 settlement exceptions In Review. Global Opportunities has 34 Open settlement exceptions, while Flagship Long/Short has 18 Open NAV exceptions but an Approved custodian-break reading of 48.72 and Closed settlement exceptions at 10. These records are not joined at break level, and no dollar-impact field or age unit is supplied. Prioritize the Open Multi-Asset aging queue and Global Opportunities settlement queue for review, while separately resolving the Income Fund breaks and Flagship NAV exceptions.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

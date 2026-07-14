@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Approved commentary covers the YTD client workflow and carries a fixture reading of 29.91. Current portfolio context shows summary values of 79.78 and 58.13, with respective changes of -0.0544 and 0.0197. Meridian Family Office's Macro Absolute Return row is Approved at -0.0078 with a -0.0412 change; no other client return is served, so the response should not generalize beyond that account.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

@@ -129,8 +129,6 @@
    }
   ],
   "reference_answer": "The committee packet should flag that decisions remain active, with a primary reading of 32.4, a threshold of 45.8, and a watchlist reading of 48.78. Credit Plus capital allocation is Escalated at 92.34, while the recommended change for Macro Absolute Return is Approved at 1.43; the served rows do not show that these are the same proposal. Capacity reads 44.5 primary and 15.3 secondary against a displayed threshold of 130.96, without units that would establish usable headroom. Research requires mixed handling: Credit Plus's top idea is Escalated at 77.67, while major catalysts are Open at 114.65 for Flagship Long/Short and In Review at 60.4 for Global Opportunities. The Credit Plus follow-up is Escalated at 9.2, so it needs an owner and disposition alongside the allocation escalation.",
-  "limits": {
-   "max_turns": 11
-  }
+  "max_turns": 11
  }
 }

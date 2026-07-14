@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "Credit Plus in Global Equities is the immediate watchlist escalation because its names-near-action-level reading is Escalated at 73.2 with a 0.1003 change. Flagship Long/Short has a separate Open Global Equities watchlist reading of 9.71. In Credit, crowded-name readings are Open at 55.0 for Flagship Long/Short and In Review at 49.7 for Global Opportunities. Quant catalyst-calendar readings for Flagship Long/Short remain Open at 50.76 and 18.43. The actual security names, catalysts, and action thresholds are absent, so the CIO should treat these as strategy-level queues pending item detail.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

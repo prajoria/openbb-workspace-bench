@@ -100,8 +100,6 @@
    }
   ],
   "reference_answer": "Delay the Flagship Long/Short trade In Review at 84.8 because constraint utilization is Open at 13.97, restricted-list review is Open at 48.58, and liquidity-impact rows are Open at 11.49 and 119.8, albeit across different periods. Global Opportunities has an Escalated proposed trade at 44.77 with an In Review restriction at 2.64 and In Review liquidity impact at 18.84, so it also requires delay and period matching. Income Fund's proposed trade is Approved at 59.91, but its liquidity impact is Escalated at 45.11 while its restriction is Approved at 27.08; review it for resizing before relying on the approval. Multi-Asset Fund has an Escalated proposed trade at 16.53 even though its restriction is Closed at 58.1 and liquidity impact is Approved at 5.43, so the cause of escalation is not supplied. ADV usage, order size, and row-level trade links are absent, preventing a calculated resize.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

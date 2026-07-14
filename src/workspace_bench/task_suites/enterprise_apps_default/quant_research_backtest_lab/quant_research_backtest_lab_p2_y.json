@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "No specific signal can be identified because the leaderboard and decay rows contain fund names rather than signal names. The primary and secondary Signal Metrics are 104.48 and 43.11 against a 38.01 threshold, but the rows do not label either measure as information coefficient. Flagship Long/Short is Open at 74.4 on the leaderboard and 22.22 on signal decay, while Credit Plus signal decay is Escalated at 62.33. Turnover, crowding, and liquidity cost are not served. Credit Plus warrants implementation follow-up on status, but the requested attractive-IC versus unacceptable-cost classification is unsupported.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

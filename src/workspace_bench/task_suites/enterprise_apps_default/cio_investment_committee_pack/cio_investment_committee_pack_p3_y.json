@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "The committee agenda for Global Opportunities is still In Review at 103.02. Decisions required show a primary reading of 32.4 against a 45.8 threshold, with the watchlist at 48.78. The decision log contains a single Global Opportunities entry, In Review at 55.28 with a 0.0013 change. Update the log as pending committee disposition and request the missing decision, owner, and due date rather than inferring an outcome.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

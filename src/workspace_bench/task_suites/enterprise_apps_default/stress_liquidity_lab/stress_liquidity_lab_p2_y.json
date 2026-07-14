@@ -76,8 +76,6 @@
    }
   ],
   "reference_answer": "Credit Plus has an Escalated days-to-liquidate reading of 22.02 with a 0.0715 change, which should be challenged before sign-off. The only scenario-assumption row belongs to Macro Absolute Return and is Approved at 28.41 with a -0.0933 change. Because the assumption and liquidity records concern different funds, the approved Macro assumption cannot validate Credit Plus liquidity. The rows also omit assumption names and actual liquidation-day units. Require fund-matched scenario assumptions, position-level liquidity, and accepted tolerances before committee approval.",
-  "limits": {
-   "max_turns": 6
-  }
+  "max_turns": 6
  }
 }

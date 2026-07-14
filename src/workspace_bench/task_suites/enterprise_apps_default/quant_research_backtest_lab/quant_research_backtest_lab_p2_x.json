@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "The served data do not identify individual signals, so no signal can be named. Signal Metrics show a primary value of 83.92 and a secondary value of 30.95 against a 35.59 threshold, but neither metric is labeled as information coefficient. Open leaderboard readings are 55.65 and 22.12, and signal decay is Open at 26.45. Turnover, crowding, and liquidity-cost fields are absent. Attractive IC paired with unacceptable implementation characteristics therefore cannot be established without signal identities and the requested measures.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

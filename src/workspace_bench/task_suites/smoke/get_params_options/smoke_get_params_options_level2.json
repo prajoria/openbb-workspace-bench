@@ -40,16 +40,7 @@
     ]
   },
   "eval": {
-    "required_tool_calls": [
-      {
-        "tool": "get_params_options",
-        "args_contains": {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
-          "param_name": "period"
-        }
-      }
-    ],
+    "calls_match_reference": true,
     "reference_trace": [
       {
         "tool": "get_params_options",
@@ -60,8 +51,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 2
-    }
+    "max_turns": 2
   }
 }

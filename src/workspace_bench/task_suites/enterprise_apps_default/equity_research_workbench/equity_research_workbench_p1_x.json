@@ -112,8 +112,6 @@
    }
   ],
   "reference_answer": "Coverage changed in both directions, with Open universe readings of 0.78 at -0.0065 and 48.95 at 0.0475. Consensus revisions weakened for LLY and XOM: their Open scores are 97.51 and 99.74 with changes of -0.0575 and -0.0363. Valuation assumptions are also mixed, with Open readings of 8.1 at -0.0362 and 91.67 at 0.0353, although the assumptions are not named. LLY's ownership snapshot is Open at 39.69 with a -0.0063 change. Bull/base/bear thesis rows are Open at 97.5 with a 0.0794 change and 68.86 with a -0.0354 change, but the scenarios are not labeled, so the thesis direction cannot be assigned more specifically.",
-  "limits": {
-   "max_turns": 9
-  }
+  "max_turns": 9
  }
 }

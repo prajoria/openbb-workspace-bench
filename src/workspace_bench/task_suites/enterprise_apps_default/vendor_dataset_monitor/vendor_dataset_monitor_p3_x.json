@@ -124,8 +124,6 @@
    }
   ],
   "reference_answer": "Escalate FactSet because its incident remains Open at 18.67 and its blast-radius reading is Open at 24.33. Validation errors are Open at 59.16, row-count drift is Open at 188, and affected-app impact is Open at 94.16. The workflow overview supplies only a generic Data Platform note at 0.4 and does not identify a dataset, app, or owner. The vendor owner should identify the failing feeds, validate row counts, remediate errors, and map every affected app. Internal owners and due dates must be assigned outside the served data before the incident can close.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

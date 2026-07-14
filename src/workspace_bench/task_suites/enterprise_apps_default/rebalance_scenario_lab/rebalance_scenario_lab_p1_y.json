@@ -101,8 +101,6 @@
    }
   ],
   "reference_answer": "Hold the Flagship Long/Short rebalance because its 0.127 weight row is Escalated with a -0.0176 drift change. The same fund has Open liquidity-impact readings of 11.49 and 119.8 across different periods and an Open restricted-list reading of 48.58. The scenario path falls to 65.22 before recovering to 87.38, but it is not linked to a fund or defined downside limit. Income Fund has a separate Escalated liquidity-impact reading of 45.11 while its restricted-list row is Approved at 27.08, so it needs period-matched review rather than being combined with Flagship. Approve neither rebalance from these aggregates until trade-level drift, liquidity, restriction, and scenario links are supplied.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

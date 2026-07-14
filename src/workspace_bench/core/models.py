@@ -164,8 +164,8 @@ def task_payload_to_eval_schema(payload: JsonDict) -> JsonDict:
     Generators may keep authoring the legacy keys internally; this converts
     them at the write boundary: condition fields group into a ``setup`` block
     at the first condition key's position, and success/oracle_tool_calls/
-    limits become the ``eval`` block with ``reference`` and ``limits`` as its
-    last entries.
+    limits become the ``eval`` block with ``reference_trace`` and a flat
+    ``max_turns`` as its last entries.
     """
 
     if "eval" in payload and "setup" in payload:
@@ -179,16 +179,91 @@ def task_payload_to_eval_schema(payload: JsonDict) -> JsonDict:
             if "setup" not in result:
                 result["setup"] = setup
         elif key == "success":
-            result["eval"] = {
+            evaluation: JsonDict = {
                 **value,
-                "reference": payload.get("oracle_tool_calls", []),
-                "limits": payload.get("limits", {}),
+                "reference_trace": payload.get("oracle_tool_calls", []),
             }
+            limits = payload.get("limits", {})
+            if limits.get("max_turns"):
+                evaluation["max_turns"] = limits["max_turns"]
+            result["eval"] = evaluation
         elif key in ("oracle_tool_calls", "limits"):
             continue
         else:
             result[key] = value
     return result
+
+
+def _apply_reference_call_grading(
+    task_id: str,
+    success: JsonDict,
+    reference_items: list[JsonDict],
+) -> tuple[JsonDict, list[JsonDict]]:
+    """Expand ``calls_match_reference`` into required_tool_calls criteria.
+
+    When the eval block sets ``calls_match_reference: true``, every
+    reference-trace call becomes a graded required call (args_contains =
+    its args), except calls annotated ``"optional": true`` (legitimate to
+    skip, e.g. discovery) or narrowed via ``"graded_args": [...]`` (only
+    the named args are graded, e.g. free-form fields the agent phrases
+    itself). Annotations are stripped from the replayed reference.
+    """
+
+    annotated = any(
+        isinstance(item, dict) and ("optional" in item or "graded_args" in item)
+        for item in reference_items
+    )
+    match_reference = bool(success.pop("calls_match_reference", False))
+    if annotated and not match_reference:
+        raise ValueError(
+            f"task {task_id} reference-call annotations require "
+            "calls_match_reference"
+        )
+    if not match_reference:
+        return success, reference_items
+    if success.get("required_tool_calls"):
+        raise ValueError(
+            f"task {task_id} mixes calls_match_reference with explicit "
+            "required_tool_calls"
+        )
+    required: list[JsonDict] = []
+    stripped: list[JsonDict] = []
+    for item in reference_items:
+        entry = dict(item)
+        optional = bool(entry.pop("optional", False))
+        graded_args = entry.pop("graded_args", None)
+        stripped.append(entry)
+        if optional:
+            if graded_args is not None:
+                raise ValueError(
+                    f"task {task_id} reference call marks both optional "
+                    "and graded_args"
+                )
+            continue
+        args = entry.get("args") or {}
+        if graded_args is None:
+            contains = dict(args)
+        else:
+            if not isinstance(graded_args, list) or not all(
+                isinstance(key, str) for key in graded_args
+            ):
+                raise ValueError(
+                    f"task {task_id} graded_args must be a list of arg names"
+                )
+            missing = sorted(set(graded_args) - set(args))
+            if missing:
+                raise ValueError(
+                    f"task {task_id} graded_args name absent call args: {missing}"
+                )
+            contains = {key: args[key] for key in graded_args}
+        tool_name = entry.get("tool") or entry.get("name")
+        required.append({"tool": tool_name, "args_contains": contains})
+    if not required:
+        raise ValueError(
+            f"task {task_id} calls_match_reference requires at least one "
+            "graded reference call"
+        )
+    return {**success, "required_tool_calls": required}, stripped
 
 
 def task_payload_conditions(payload: JsonDict) -> JsonDict:
@@ -1305,7 +1380,19 @@ class Task:
                 raise ValueError(
                     f"task {task_id} eval.reference_answer must be a non-empty string"
                 )
+            max_turns = eval_payload.pop("max_turns", None)
             limits = _optional_object(eval_payload.pop("limits", {}), "eval.limits")
+            if max_turns is not None:
+                if limits:
+                    raise ValueError(
+                        f"task {task_id} mixes eval.max_turns with the legacy "
+                        "limits block"
+                    )
+                if not isinstance(max_turns, int) or max_turns <= 0:
+                    raise ValueError(
+                        f"task {task_id} eval.max_turns must be a positive integer"
+                    )
+                limits = {"max_turns": max_turns}
             success = eval_payload
             oracle_tool_calls = _object_list(oracle_source, "eval.reference")
         else:
@@ -1316,6 +1403,9 @@ class Task:
             )
             reference_answer = None
             limits = _optional_object(payload.get("limits", {}), "limits")
+        success, oracle_tool_calls = _apply_reference_call_grading(
+            task_id, dict(success), oracle_tool_calls
+        )
         raw_category = payload.get("category")
         if raw_category is None:
             raw_category = TOOL_FAMILY_CATEGORIES.get(raw_family)

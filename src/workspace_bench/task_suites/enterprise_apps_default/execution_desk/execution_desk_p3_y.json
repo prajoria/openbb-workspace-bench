@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "Immediate escalations are EU Equity's 98 rejected orders, Credit's restricted-list queues of 54 and 46, and Macro's 154 surveillance alerts. Open queues also remain material: Macro has 219 rejected orders, Credit has 135 rejected orders, US Equity has restricted-list counts of 282 and 178, EU Equity has 263 surveillance alerts, and Credit has 137 surveillance alerts. US Equity rejected orders are In Review at 288, while Macro has another 180 In Review rejected orders and 232 In Review surveillance alerts. EU Equity restricted checks at 85 and 18 are In Review; these should remain controlled until dispositions are documented. The PM and COO should assign desk owners and reconcile order-level links because the served aggregate queues cannot show whether the same order appears in more than one exception type.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

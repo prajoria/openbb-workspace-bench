@@ -119,8 +119,6 @@
    }
   ],
   "reference_answer": "The US Equity blotter has 14 Open orders in the risk queue. Restricted-list checks are the largest Open exception queue at 202, ahead of 167 Open rejected orders, so restrictions should be cleared before release and rejections reviewed next. Expected-slippage context is Open at 41.08 for Goldman Sachs, while spread-and-depth context is Open at 83.81. The order-book series spans a displayed low of 24 and high of 102, showing materially variable depth across the served observations. Because no order identifiers join these aggregate records, individual blotter orders cannot be ranked by liquidity, rejection risk, restriction status, or slippage from the served data.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

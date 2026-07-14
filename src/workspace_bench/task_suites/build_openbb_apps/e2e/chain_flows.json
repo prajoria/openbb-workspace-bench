@@ -155,7 +155,7 @@
         "contains": "Chain Flows"
       }
     ],
-    "reference": [
+    "reference_trace": [
       {
         "tool": "manage_backends",
         "args": {
@@ -288,8 +288,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 14
-    }
+    "max_turns": 14
   }
 }

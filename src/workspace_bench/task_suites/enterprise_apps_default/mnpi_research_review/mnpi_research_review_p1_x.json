@@ -112,8 +112,6 @@
    }
   ],
   "reference_answer": "Flagship Long/Short has unresolved wall crossings, with Open readings of 99.08 and 88.06. Company meeting logs are Open for AAPL at 74.8 and XOM at 19.94, but they are not linked to a particular wall crossing. Research drafts remain Open at 31.85 and 91.13. Price-target approvals are also Open at 238372.51 and 220248.41, with changes of -0.0166 and -0.0733. Evidence and sign-off history remains Open at 64.44, so the case should not close until crossings, meetings, drafts, target changes, and sign-off are reconciled at item level.",
-  "limits": {
-   "max_turns": 9
-  }
+  "max_turns": 9
  }
 }

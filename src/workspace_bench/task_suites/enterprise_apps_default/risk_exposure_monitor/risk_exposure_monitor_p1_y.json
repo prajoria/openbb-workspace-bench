@@ -137,8 +137,6 @@
    }
   ],
   "reference_answer": "Credit Plus VaR is Escalated at -162432 with a -0.0306 change and requires immediate risk-officer review. The stress surface worsens from -103000 to -155000, but it has no fund label and cannot be assigned to Credit Plus. Flagship Long/Short separately has Open marginal VaR of -85792 and Open position-risk contribution of 0.4045. Its breach/warning exposure is Open at 0.0127 and its limit utilization is Open at 0.0347. GOOGL concentration is Approved at 0.0159 and does not constitute an open concentration breach on the served status. Escalate Credit Plus VaR, investigate the unnamed Flagship driver, and obtain fund-linked stress and threshold data before prescribing portfolio changes.",
-  "limits": {
-   "max_turns": 11
-  }
+  "max_turns": 11
  }
 }

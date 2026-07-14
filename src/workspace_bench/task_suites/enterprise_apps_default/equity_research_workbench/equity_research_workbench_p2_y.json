@@ -89,8 +89,6 @@
    }
   ],
   "reference_answer": "Price-target history shows an Open Flagship Long/Short value of 109671.87 with a 0.0508 change. The target-upside rows instead belong to Credit Plus and are Escalated at 144180.57 and 138199.36, so they cannot be treated as a street range for the same selected position without a ticker and fund match. The sensitivity series reaches 31.43 and falls to 24.83, but it provides no assumption labels or linkage to either fund. Actual upside is not served and cannot be calculated without a current price and confirmed target identities. Obtain the selected ticker, aligned internal and street targets, and sensitivity-axis definitions before making the comparison.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

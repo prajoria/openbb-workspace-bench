@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Legal approval should remain pending for Flagship Long/Short because evidence and sign-off history is Open at 64.44. Research-approval evidence is also Open at 5.45 and 89.99, leaving the required attestations incomplete. Reviewer comments remain Open at 97.4 and 84.76 and must be answered or formally disposed. The served rows do not state the underlying risks or attestation text, so legal should request item-level descriptions and accountable signatories. Approval can proceed only after the evidence, attestations, and reviewer comments are documented as complete.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

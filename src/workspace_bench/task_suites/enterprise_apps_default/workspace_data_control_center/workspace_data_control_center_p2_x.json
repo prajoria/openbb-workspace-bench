@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Restrict Flagship Long/Short data and AI access before a demo or rollout because its Copilot visibility flags remain Open at 96.33 and 45.01. Its app-and-widget permission records are also Open at 3.14 and 79.88. Bloomberg has an Open sensitive-dataset flag at 61.17 that should be excluded until entitlement review is complete. The served records do not name the affected apps, widgets, datasets, roles, or visibility settings. Apply a scope-level restriction to these open controls and lift it only after item-level access is identified, reviewed, and closed.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

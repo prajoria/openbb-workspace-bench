@@ -119,8 +119,6 @@
    }
   ],
   "reference_answer": "US Equity is the strongest control priority because its order-risk queues are Escalated at 90 and 70, restricted-list exceptions are Open at 282 and 178, and rejected orders are In Review at 288. Credit also needs escalation: restricted-list counts of 54 and 46 are Escalated, rejected orders are Open at 135, and spread-and-depth is Escalated at 113.4. EU Equity has 98 Escalated rejected orders, restricted checks In Review at 85 and 18, and an Open spread-and-depth reading of 51.77. Macro has 144 orders In Review and 219 Open rejected orders, although its 127 restricted checks and 8.03 spread-and-depth reading are Approved. Citi's US Equity slippage reading is Approved at 51.35, but it is not joined to a blotter order; order-level liquidity, venue, and expected-slippage ranking remains unsupported.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

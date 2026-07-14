@@ -136,8 +136,6 @@
    }
   ],
   "reference_answer": "Open data-health work includes S&P Global feed status at 39.52, FactSet feed status at 89.0, Macro Absolute Return failed jobs at 40.43, and Credit Plus failed jobs at 13.32. Entitlement gaps remain Open for Global Opportunities app/widget permissions at 42.79 and role coverage at 9.12, plus Flagship Long/Short role coverage at 56.66. Refinitiv's sensitive-dataset flag is Open at 103.74, while S&P Global remains In Review at 42.06. Credit Plus export activity is Open at 122.15, and Healthcare Alpha Copilot visibility is Open at 100.72. The rows omit exact jobs, feeds, apps, widgets, exports, and visibility policies, so readiness should remain pending item-level identification and closure.",
-  "limits": {
-   "max_turns": 11
-  }
+  "max_turns": 11
  }
 }

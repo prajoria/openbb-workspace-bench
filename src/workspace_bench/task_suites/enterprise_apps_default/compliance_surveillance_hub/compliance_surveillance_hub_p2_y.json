@@ -124,8 +124,6 @@
    }
   ],
   "reference_answer": "Escalate the Credit Plus employee-trade row, which is Open at 1.45, together with its In Review restricted-list reading of 48.56 and its Open access/export reading of 80.88. Credit Plus also has an In Review access/export row at 62.21, while its breach count of 263 is Closed, so the closed breach should not be described as unresolved. Flagship Long/Short has 168 Open alerts and an Open pre-clearance reading of 9.5, but no served employee-trade row connects those items. Macro Absolute Return has 12 Open policy breaches, and Global Opportunities has an Open restricted-list reading of 23.23 with an Open access/export reading of 62.3; both merit separate review. No row explicitly identifies research activity, so a research escalation cannot be substantiated from the served evidence.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

@@ -325,6 +325,7 @@ from workspace_bench.core.suite_checks import (  # noqa: E402
     BUILD_SPECIFICATION_LEVEL_BANDS,
     task_payload_digest,
 )
+from workspace_bench.workspace.simulated_workspace import WORKSPACE_SKILLS  # noqa: E402
 
 
 def certify(tasks: list[dict]) -> tuple[list[str], dict[str, int]]:
@@ -467,15 +468,19 @@ def main() -> int:
         )
         for task in tasks
     ]
+    payloads = [task_payload_to_eval_schema(payload) for payload in payloads]
     for payload in payloads:
         family_dir = out_dir / payload["family"]
         family_dir.mkdir(parents=True, exist_ok=True)
         (family_dir / f"{payload['id']}.json").write_text(
-            json.dumps(task_payload_to_eval_schema(payload), indent=2) + "\n"
+            json.dumps(payload, indent=2) + "\n"
         )
     manifest = {
         "suite_id": "build-openbb-apps",
         "visibility": "public",
+        # Skills stay declared suite-wide until a build conformance round
+        # moves them per task; without this the explicit-axis default is none.
+        "workspace_skills": sorted(WORKSPACE_SKILLS),
         "content_sha256": task_payload_digest(payloads),
         "description": (
             "WorkspaceBench build-openbb-apps collection: agents receive open product "

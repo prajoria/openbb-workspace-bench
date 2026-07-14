@@ -96,8 +96,6 @@
    }
   ],
   "reference_answer": "The only proposed allocation is Macro Absolute Return, Approved at 1.43 with a 0.0646 change. Capacity reads 44.5 primary and 15.3 secondary against a 130.96 threshold, but it is unlabeled by fund and cannot establish a liquidity conflict with that proposal. The research exceptions concern other funds: Credit Plus changed ratings are Escalated at 53.04 and 47.0, while major catalysts are Open at 114.65 for Flagship Long/Short and In Review at 60.4 for Global Opportunities. Because the served evidence does not join those rows to Macro Absolute Return and supplies no risk measure, no conflict with the approved recommendation can be substantiated. Keep the other funds' research escalations active, but do not use them to reverse this allocation without proposal-linked evidence.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

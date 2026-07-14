@@ -74,8 +74,6 @@
    }
   ],
   "reference_answer": "Flagship Long/Short has major-issue rows Open at 54.46 and 79.57, with changes of -0.0349 and 0.0548. Its decision-log rows are also Open at 45.63 and 18.43, both with positive changes of 0.0693 and 0.0462. These records require leadership triage this week because neither the issues nor decisions are closed. However, the served rows contain no issue descriptions, functional categories, owners, or severity thresholds. They therefore cannot support a defensible assignment among the CEO, CIO, COO, or CRO; route them for classification before assigning executive ownership.",
-  "limits": {
-   "max_turns": 6
-  }
+  "max_turns": 6
  }
 }

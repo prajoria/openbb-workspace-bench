@@ -133,7 +133,7 @@
       ],
       "pinned_paths": false
     },
-    "reference": [
+    "reference_trace": [
       {
         "tool": "get_workspace_snapshot",
         "args": {}
@@ -191,8 +191,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 8
-    }
+    "max_turns": 8
   }
 }

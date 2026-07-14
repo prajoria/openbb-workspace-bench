@@ -112,8 +112,6 @@
    }
   ],
   "reference_answer": "The served records do not identify a management claim that changed a thesis: Macro Absolute Return's Open claims reading is 65.1, while the Open thesis-change reading of 138.1 belongs to Global Opportunities. Evidence/sign-off rows belong to Flagship Long/Short at 58.95 and Healthcare Alpha at 86.99, so neither supports a joined claim-to-thesis conclusion. Macro Absolute Return does have an Open expert-call record at 48.31 and an Open MNPI attestation at 42.8, which are required context for its claim. Credit Plus has another Open MNPI attestation at 6.09. Obtain fund-matched claim text, thesis-change rationale, expert-call evidence, attestations, and sign-off before attributing or distributing any thesis change.",
-  "limits": {
-   "max_turns": 9
-  }
+  "max_turns": 9
  }
 }

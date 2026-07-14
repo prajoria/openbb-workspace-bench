@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "Goldman Sachs requires broker follow-up because its post-trade review remains Open at 24.1 and it has 119 Open broker exceptions. Its algo-slippage reading is also Open at 53.77 with a 0.0293 change, so the review should determine whether parameter changes are warranted. Barclays has a separate Open algo-slippage reading of 77.99 with a -0.0361 change and should be reviewed even though no broker-exception row is served. The score direction, algo names, and parameter settings are absent, so no specific parameter change can yet be prescribed. Close the broker exceptions and link each slippage record to an algo and benchmark before tuning.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

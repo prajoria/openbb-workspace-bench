@@ -118,8 +118,6 @@
    }
   ],
   "reference_answer": "Monthly returns remain Open at 0.1015 for Atlas Pension and 0.1106 for Northstar Endowment. Attribution is also Open at 36.9 for Atlas Pension and 9.86 for Northstar Endowment, with changes of -0.0582 and 0.0101. Risk Stats show a primary value of 12.29 with a -0.0451 change and a secondary value of 81.19 with a 0.005 change. The commentary-library item remains Open at 8.82, so it is not yet approved despite the widget name. Atlas Pension's disclosure checklist is Open at 93.86 and its DDQ/RFP tracker is Open at 1.39. The report should remain blocked until performance, attribution, commentary, disclosure, and DDQ items have documented dispositions.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

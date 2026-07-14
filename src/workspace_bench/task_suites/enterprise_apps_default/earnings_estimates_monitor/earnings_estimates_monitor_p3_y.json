@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "No company is represented across estimate revisions, management commentary, and the thesis-change log, so the requested material thesis change cannot be attributed. ASML and JPM have In Review consensus-revision scores of 8.76 and 5.43, both with negative changes of -0.0553 and -0.0278. MSFT's management-tone reading is Approved at 84.88 with a -0.0997 change, but it has no served revision or thesis-change row. XOM's thesis-change entry is Closed at 80.4 with a 0.0409 change, but it has no served revision or commentary row. Obtain ticker-matched evidence and a materiality threshold before naming a company.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

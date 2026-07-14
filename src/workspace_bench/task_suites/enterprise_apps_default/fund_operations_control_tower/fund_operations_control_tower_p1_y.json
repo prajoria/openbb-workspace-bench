@@ -124,8 +124,6 @@
    }
   ],
   "reference_answer": "Failed-trade readings of 58.05 and 50.95 are both above the displayed 23.0 threshold and should lead the morning checklist. Income Fund has Open custodian-break readings of 114.23 and 52.6, while Multi-Asset Fund has an Open corporate-action item at 57.45. Pricing exceptions include Open Income Fund stale-price rows at 201763.98, 176230.47, and 2930.3, plus an Open Refinitiv vendor-price row of 257924.23 for Multi-Asset Fund. Flagship Long/Short also has 18 Open NAV exceptions. The served data provide no owners or security-level joins, so trade, reconciliation, corporate-action, and pricing owners must be assigned and the exceptions matched before clearance.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

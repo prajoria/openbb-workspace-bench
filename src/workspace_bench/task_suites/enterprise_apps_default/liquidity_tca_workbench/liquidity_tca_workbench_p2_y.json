@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "The inputs do not support a broker ranking because every metric belongs to a different broker. Morgan Stanley has an In Review broker-scorecard reading of 53.6, Citi has an Approved fill-quality reading of 24.17, and Barclays has an Open slippage reading of 64.11. No broker can be compared with another on the same complete set of measures. Commission and latency are not served at all, and slippage-score direction is undefined. Obtain aligned broker rows for all requested metrics before ranking the selected desk.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

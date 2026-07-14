@@ -100,8 +100,6 @@
    }
   ],
   "reference_answer": "LLY's internal-versus-street bridge is Open at 63.14 with a 0.0633 change, while XOM's is Open at 33.07 with a 0.0196 change. Upcoming-earnings readings are 27.63 for LLY and 81.33 for XOM, and surprise-history readings are 8.82 and 38.96 respectively. LLY also has an Open catalyst reading of 64.09 with a -0.0039 change, but the row does not name the driver. The scores do not expose actual internal or street estimates, estimate units, or expected surprise direction, so they cannot support a beat-or-miss forecast. No market price, entry, target, or risk limit is served; keep both names on an earnings watchlist rather than asserting a directional trade setup.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

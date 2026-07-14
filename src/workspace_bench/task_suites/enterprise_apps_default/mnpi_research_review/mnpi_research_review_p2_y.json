@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Macro Absolute Return research should remain unpublished despite its Approved draft reading of 92.97 because evidence/sign-off is Open at 29.54 and research-approval evidence is Open at 84.29. Healthcare Alpha's draft is Closed at 74.96, but its approval evidence remains In Review at 70.76, so any intended publication still needs compliance completion. Global Opportunities has an Open draft at 63.12, while its approval evidence is Closed at 122.72 for a different period; the mismatch must be reconciled before release. Credit Plus has an In Review draft at 5.37 and no served approval-evidence row. Publication decisions should be held wherever the draft or matched compliance evidence is not complete.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

@@ -118,8 +118,6 @@
    }
   ],
   "reference_answer": "The data do not support a complete cross-strategy comparison because the only strategy named in returns is Quant and the flow row has no strategy label. Within Quant, Global Opportunities has a 0.0585 return with a 0.0635 change, while Credit Plus has a 0.0393 return with a -0.0195 change, so performance changes are inconsistent. Global Opportunities limit utilization is In Review at 49.04 with a 0.0469 change, moving in the same direction as its return change. Credit Plus drawdown is Escalated at -139772 with a 0.0742 change, which does not align directionally with its negative return change. Meridian Family Office flows are Escalated at 67.07 with a 0.0606 change, while Flagship Long/Short stress-loss changes are mixed at -0.0814 and 0.0084; neither can be assigned to Quant from the served rows.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

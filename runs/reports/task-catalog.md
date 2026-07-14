@@ -37,7 +37,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (1): `add_generative_widget`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -51,7 +51,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -65,7 +65,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -79,7 +79,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -95,11 +95,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (1): `assign_tasks_to_agents`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
 
 #### `smoke_assign_tasks_to_agents_level1`
 
@@ -109,11 +108,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
 
 #### `smoke_assign_tasks_to_agents_level2`
 
@@ -123,11 +121,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
 
 #### `smoke_assign_tasks_to_agents_level3`
 
@@ -137,11 +134,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
 
 ### create_widget (4)
 
@@ -153,7 +149,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (1): `create_widget`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -167,7 +163,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -181,7 +177,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -195,7 +191,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -211,7 +207,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke delete_widget"; 1 tab(s): overview; 1 seeded widget(s): nav_fees_close_dashboard_close_close_exceptions({"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"})
 - Allowed tools (1): `delete_widget`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -225,7 +221,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke delete_widget"; 1 tab(s): overview; 1 seeded widget(s): nav_fees_close_dashboard_close_close_exceptions({"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -239,7 +235,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke delete_widget"; 1 tab(s): overview; 1 seeded widget(s): nav_fees_close_dashboard_close_close_exceptions({"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -253,7 +249,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke delete_widget"; 1 tab(s): overview; 1 seeded widget(s): nav_fees_close_dashboard_close_close_exceptions({"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -269,11 +265,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (1): `get_params_options`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings", "param_name": "period"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_params_options_level1`
 
@@ -283,11 +278,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings", "param_name": "period"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_params_options_level2`
 
@@ -297,11 +291,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings", "param_name": "period"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_params_options_level3`
 
@@ -311,11 +304,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings", "param_name": "period"} must appear in the trace → `missing_tool_call`
 
 ### get_skill_content (4)
 
@@ -327,11 +319,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (1): `get_skill_content`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "daloopa-tearsheet"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_skill_content_level1`
 
@@ -341,11 +332,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "daloopa-tearsheet"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_skill_content_level2`
 
@@ -355,11 +345,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "daloopa-tearsheet"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_skill_content_level3`
 
@@ -369,11 +358,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "daloopa-tearsheet"} must appear in the trace → `missing_tool_call`
 
 ### get_widget_data (4)
 
@@ -385,11 +373,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (1): `get_widget_data`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_dashboard_var_trend", "data_args": {"portfolio": "Global Equity", "period": "YTD"}} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_widget_data_level1`
 
@@ -399,11 +386,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_dashboard_var_trend", "data_args": {"portfolio": "Global Equity", "period": "YTD"}} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_widget_data_level2`
 
@@ -413,11 +399,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_dashboard_var_trend", "data_args": {"portfolio": "Global Equity", "period": "YTD"}} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_widget_data_level3`
 
@@ -427,11 +412,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_dashboard_var_trend", "data_args": {"portfolio": "Global Equity", "period": "YTD"}} must appear in the trace → `missing_tool_call`
 
 ### get_widget_schema (4)
 
@@ -443,11 +427,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (1): `get_widget_schema`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_widget_schema` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_actions_trade_ideas"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_widget_schema_level1`
 
@@ -457,11 +440,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_widget_schema` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_actions_trade_ideas"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_widget_schema_level2`
 
@@ -471,11 +453,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_widget_schema` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_actions_trade_ideas"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_widget_schema_level3`
 
@@ -485,11 +466,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_widget_schema` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_actions_trade_ideas"} must appear in the trace → `missing_tool_call`
 
 ### get_workspace_prompt (4)
 
@@ -501,11 +481,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (1): `get_workspace_prompt`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_tool_usage"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_workspace_prompt_level1`
 
@@ -515,11 +494,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_tool_usage"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_workspace_prompt_level2`
 
@@ -529,11 +507,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_tool_usage"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_workspace_prompt_level3`
 
@@ -543,11 +520,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_tool_usage"} must appear in the trace → `missing_tool_call`
 
 ### get_workspace_snapshot (4)
 
@@ -559,11 +535,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (1): `get_workspace_snapshot`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_workspace_snapshot` must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_workspace_snapshot_level1`
 
@@ -573,11 +548,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_workspace_snapshot` must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_workspace_snapshot_level2`
 
@@ -587,11 +561,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_workspace_snapshot` must appear in the trace → `missing_tool_call`
 
 #### `smoke_get_workspace_snapshot_level3`
 
@@ -601,11 +574,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `get_workspace_snapshot` must appear in the trace → `missing_tool_call`
 
 ### list_available_widgets (4)
 
@@ -617,11 +589,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`, `getting-started`
 - Allowed tools (1): `list_available_widgets`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `list_available_widgets` with args ⊇ {"origin": "Getting Started"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_list_available_widgets_level1`
 
@@ -631,11 +602,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`, `getting-started`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `list_available_widgets` with args ⊇ {"origin": "Getting Started"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_list_available_widgets_level2`
 
@@ -645,11 +615,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`, `getting-started`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `list_available_widgets` with args ⊇ {"origin": "Getting Started"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_list_available_widgets_level3`
 
@@ -659,11 +628,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`, `getting-started`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `list_available_widgets` with args ⊇ {"origin": "Getting Started"} must appear in the trace → `missing_tool_call`
 
 ### manage_apps (4)
 
@@ -675,7 +643,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (1): `manage_apps`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -689,7 +657,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -703,7 +671,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -717,7 +685,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -733,11 +701,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (1): `manage_backends`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "list"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_manage_backends_level1`
 
@@ -747,11 +714,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "list"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_manage_backends_level2`
 
@@ -761,11 +727,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "list"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_manage_backends_level3`
 
@@ -775,11 +740,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "list"} must appear in the trace → `missing_tool_call`
 
 ### manage_dashboard (4)
 
@@ -791,7 +755,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (1): `manage_dashboard`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -805,7 +769,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -819,7 +783,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -833,7 +797,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -849,7 +813,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (1): `manage_navigation_bar`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -864,7 +828,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -879,7 +843,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -894,7 +858,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -911,11 +875,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke navigate_workspace"; 2 tab(s): overview, details
 - Allowed tools (1): `navigate_workspace`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `navigate_workspace` with args ⊇ {"operation": "tab", "tab_id": "details"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_navigate_workspace_level1`
 
@@ -925,11 +888,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke navigate_workspace"; 2 tab(s): overview, details
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `navigate_workspace` with args ⊇ {"operation": "tab", "tab_id": "details"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_navigate_workspace_level2`
 
@@ -939,11 +901,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke navigate_workspace"; 2 tab(s): overview, details
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `navigate_workspace` with args ⊇ {"operation": "tab", "tab_id": "details"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_navigate_workspace_level3`
 
@@ -953,11 +914,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke navigate_workspace"; 2 tab(s): overview, details
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `navigate_workspace` with args ⊇ {"operation": "tab", "tab_id": "details"} must appear in the trace → `missing_tool_call`
 
 ### read_widget (4)
 
@@ -969,11 +929,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke read_widget"; 1 tab(s): overview; 1 seeded widget(s): client_360_client_book_client_accounts({"client": "Atlas Pension", "region": "Americas", "period": "YTD"})
 - Allowed tools (1): `read_widget`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `read_widget` with args ⊇ {"widget_id": "client_360_client_book_client_accounts"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_read_widget_level1`
 
@@ -983,11 +942,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke read_widget"; 1 tab(s): overview; 1 seeded widget(s): client_360_client_book_client_accounts({"client": "Atlas Pension", "region": "Americas", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `read_widget` with args ⊇ {"widget_id": "client_360_client_book_client_accounts"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_read_widget_level2`
 
@@ -997,11 +955,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke read_widget"; 1 tab(s): overview; 1 seeded widget(s): client_360_client_book_client_accounts({"client": "Atlas Pension", "region": "Americas", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `read_widget` with args ⊇ {"widget_id": "client_360_client_book_client_accounts"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_read_widget_level3`
 
@@ -1011,11 +968,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke read_widget"; 1 tab(s): overview; 1 seeded widget(s): client_360_client_book_client_accounts({"client": "Atlas Pension", "region": "Americas", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `read_widget` with args ⊇ {"widget_id": "client_360_client_book_client_accounts"} must appear in the trace → `missing_tool_call`
 
 ### read_workspace_resource (4)
 
@@ -1027,11 +983,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (1): `read_workspace_resource`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `read_workspace_resource` with args ⊇ {"uri": "openbb://workspace/specs/widget-types"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_read_workspace_resource_level1`
 
@@ -1041,11 +996,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: bare workspace; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `read_workspace_resource` with args ⊇ {"uri": "openbb://workspace/specs/widget-types"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_read_workspace_resource_level2`
 
@@ -1055,11 +1009,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `read_workspace_resource` with args ⊇ {"uri": "openbb://workspace/specs/widget-types"} must appear in the trace → `missing_tool_call`
 
 #### `smoke_read_workspace_resource_level3`
 
@@ -1069,11 +1022,10 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `stark-onboard-a`; backends `stark-enterprise-x`
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Tool call** ≥1× `read_workspace_resource` with args ⊇ {"uri": "openbb://workspace/specs/widget-types"} must appear in the trace → `missing_tool_call`
 
 ### update_widget (4)
 
@@ -1085,7 +1037,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke update_widget"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_capacity_capacity_utilization({"strategy": "Global Equities", "period": "YTD"})
 - Allowed tools (1): `update_widget`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1099,7 +1051,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke update_widget"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_capacity_capacity_utilization({"strategy": "Global Equities", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1113,7 +1065,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke update_widget"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_capacity_capacity_utilization({"strategy": "Global Equities", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1127,7 +1079,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke update_widget"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_capacity_capacity_utilization({"strategy": "Global Equities", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1143,7 +1095,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke update_widget_layout"; 1 tab(s): overview; 1 seeded widget(s): vendor_dataset_monitor_incidents_incident_log({"vendor": "FactSet", "status": "Open", "period": "YTD"})
 - Allowed tools (1): `update_widget_layout`
-- Turn budget: 1 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1157,7 +1109,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke update_widget_layout"; 1 tab(s): overview; 1 seeded widget(s): vendor_dataset_monitor_incidents_incident_log({"vendor": "FactSet", "status": "Open", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1171,7 +1123,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke update_widget_layout"; 1 tab(s): overview; 1 seeded widget(s): vendor_dataset_monitor_incidents_incident_log({"vendor": "FactSet", "status": "Open", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 2 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1185,7 +1137,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Smoke update_widget_layout"; 1 tab(s): overview; 1 seeded widget(s): vendor_dataset_monitor_incidents_incident_log({"vendor": "FactSet", "status": "Open", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 4 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1204,7 +1156,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "CIO / Investment Committee Pack"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 11 · oracle reference trace: 8 calls
+- Turn budget: None · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1217,7 +1169,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "CIO / Investment Committee Pack"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 11 · oracle reference trace: 8 calls
+- Turn budget: None · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1230,7 +1182,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "CIO / Investment Committee Pack"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1243,7 +1195,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "CIO / Investment Committee Pack"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1256,7 +1208,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "CIO / Investment Committee Pack"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1269,7 +1221,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "CIO / Investment Committee Pack"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1284,7 +1236,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Client 360"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1297,7 +1249,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Client 360"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1310,7 +1262,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Client 360"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1323,7 +1275,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Client 360"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1336,7 +1288,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Client 360"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1349,7 +1301,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Client 360"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1364,7 +1316,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Compliance Surveillance Hub"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1377,7 +1329,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Compliance Surveillance Hub"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1390,7 +1342,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Compliance Surveillance Hub"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1403,7 +1355,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Compliance Surveillance Hub"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1416,7 +1368,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Compliance Surveillance Hub"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1429,7 +1381,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Compliance Surveillance Hub"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1444,7 +1396,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Corporate Access & Meeting Notes"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1457,7 +1409,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Corporate Access & Meeting Notes"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1470,7 +1422,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Corporate Access & Meeting Notes"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 13 · oracle reference trace: 10 calls
+- Turn budget: None · oracle reference trace: 10 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1483,7 +1435,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Corporate Access & Meeting Notes"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 13 · oracle reference trace: 10 calls
+- Turn budget: None · oracle reference trace: 10 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1496,7 +1448,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Corporate Access & Meeting Notes"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1509,7 +1461,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Corporate Access & Meeting Notes"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1524,7 +1476,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Crypto Research Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1537,7 +1489,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Crypto Research Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1550,7 +1502,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Crypto Research Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1563,7 +1515,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Crypto Research Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1576,7 +1528,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Crypto Research Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1589,7 +1541,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Crypto Research Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1604,7 +1556,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Earnings & Estimates Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1617,7 +1569,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Earnings & Estimates Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1630,7 +1582,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Earnings & Estimates Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1643,7 +1595,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Earnings & Estimates Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1656,7 +1608,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Earnings & Estimates Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1669,7 +1621,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Earnings & Estimates Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1684,7 +1636,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Equity Research Workbench"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1697,7 +1649,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Equity Research Workbench"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1710,7 +1662,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Equity Research Workbench"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1723,7 +1675,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Equity Research Workbench"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1736,7 +1688,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Equity Research Workbench"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1749,7 +1701,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Equity Research Workbench"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1764,7 +1716,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Execution Desk"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1777,7 +1729,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Execution Desk"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1790,7 +1742,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Execution Desk"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1803,7 +1755,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Execution Desk"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1816,7 +1768,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Execution Desk"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1829,7 +1781,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Execution Desk"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1844,7 +1796,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Executive Investment Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1857,7 +1809,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Executive Investment Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1870,7 +1822,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Executive Investment Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1883,7 +1835,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Executive Investment Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1896,7 +1848,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Executive Investment Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1909,7 +1861,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Executive Investment Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1924,7 +1876,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Fund Operations Control Tower"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1937,7 +1889,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Fund Operations Control Tower"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1950,7 +1902,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Fund Operations Control Tower"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1963,7 +1915,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Fund Operations Control Tower"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1976,7 +1928,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Fund Operations Control Tower"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 12 · oracle reference trace: 9 calls
+- Turn budget: None · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -1989,7 +1941,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Fund Operations Control Tower"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 12 · oracle reference trace: 9 calls
+- Turn budget: None · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2004,7 +1956,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Healthcare Research Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2017,7 +1969,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Healthcare Research Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2030,7 +1982,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Healthcare Research Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2043,7 +1995,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Healthcare Research Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2056,7 +2008,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Healthcare Research Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 11 · oracle reference trace: 8 calls
+- Turn budget: None · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2069,7 +2021,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Healthcare Research Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 11 · oracle reference trace: 8 calls
+- Turn budget: None · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2084,7 +2036,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Liquidity & TCA Workbench"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2097,7 +2049,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Liquidity & TCA Workbench"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2110,7 +2062,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Liquidity & TCA Workbench"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2123,7 +2075,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Liquidity & TCA Workbench"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2136,7 +2088,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Liquidity & TCA Workbench"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2149,7 +2101,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Liquidity & TCA Workbench"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2164,7 +2116,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "MNPI & Research Review"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2177,7 +2129,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "MNPI & Research Review"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2190,7 +2142,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "MNPI & Research Review"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2203,7 +2155,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "MNPI & Research Review"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2216,7 +2168,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "MNPI & Research Review"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2229,7 +2181,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "MNPI & Research Review"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2244,7 +2196,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "NAV, Fees & Close Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2257,7 +2209,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "NAV, Fees & Close Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2270,7 +2222,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "NAV, Fees & Close Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2283,7 +2235,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "NAV, Fees & Close Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2296,7 +2248,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "NAV, Fees & Close Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2309,7 +2261,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "NAV, Fees & Close Dashboard"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2324,7 +2276,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Portfolio Command Center"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2337,7 +2289,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Portfolio Command Center"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2350,7 +2302,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Portfolio Command Center"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2363,7 +2315,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Portfolio Command Center"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2376,7 +2328,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Portfolio Command Center"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2389,7 +2341,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Portfolio Command Center"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2404,7 +2356,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Quant Research & Backtest Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2417,7 +2369,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Quant Research & Backtest Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2430,7 +2382,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Quant Research & Backtest Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2443,7 +2395,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Quant Research & Backtest Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2456,7 +2408,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Quant Research & Backtest Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2469,7 +2421,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Quant Research & Backtest Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2484,7 +2436,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Rebalance & Scenario Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2497,7 +2449,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Rebalance & Scenario Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2510,7 +2462,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Rebalance & Scenario Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2523,7 +2475,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Rebalance & Scenario Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2536,7 +2488,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Rebalance & Scenario Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2549,7 +2501,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Rebalance & Scenario Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2564,7 +2516,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Reporting & Factsheet Studio"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2577,7 +2529,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Reporting & Factsheet Studio"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2590,7 +2542,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Reporting & Factsheet Studio"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2603,7 +2555,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Reporting & Factsheet Studio"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2616,7 +2568,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Reporting & Factsheet Studio"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2629,7 +2581,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Reporting & Factsheet Studio"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2644,7 +2596,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Risk & Exposure Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 11 · oracle reference trace: 8 calls
+- Turn budget: None · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2657,7 +2609,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Risk & Exposure Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 11 · oracle reference trace: 8 calls
+- Turn budget: None · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2670,7 +2622,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Risk & Exposure Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2683,7 +2635,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Risk & Exposure Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2696,7 +2648,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Risk & Exposure Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2709,7 +2661,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Risk & Exposure Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2724,7 +2676,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Strategy Health Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2737,7 +2689,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Strategy Health Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2750,7 +2702,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Strategy Health Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2763,7 +2715,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Strategy Health Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2776,7 +2728,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Strategy Health Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2789,7 +2741,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Strategy Health Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2804,7 +2756,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Stress & Liquidity Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2817,7 +2769,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Stress & Liquidity Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2830,7 +2782,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Stress & Liquidity Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2843,7 +2795,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Stress & Liquidity Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2856,7 +2808,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Stress & Liquidity Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2869,7 +2821,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Stress & Liquidity Lab"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2884,7 +2836,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Vendor & Dataset Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2897,7 +2849,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Vendor & Dataset Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2910,7 +2862,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Vendor & Dataset Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2923,7 +2875,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Vendor & Dataset Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2936,7 +2888,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Vendor & Dataset Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2949,7 +2901,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Vendor & Dataset Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2964,7 +2916,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Workspace Data Control Center"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 11 · oracle reference trace: 8 calls
+- Turn budget: None · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2977,7 +2929,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Workspace Data Control Center"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 11 · oracle reference trace: 8 calls
+- Turn budget: None · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -2990,7 +2942,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Workspace Data Control Center"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3003,7 +2955,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Workspace Data Control Center"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3016,7 +2968,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-x`; active dashboard "Workspace Data Control Center"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3029,7 +2981,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: baseline `all-stark-enterprise-apps`; backends `stark-enterprise-y`; active dashboard "Workspace Data Control Center"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3048,7 +3000,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (3): `get_workspace_snapshot`, `manage_backends`, `manage_apps`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3064,7 +3016,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (4): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3085,7 +3037,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (4): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3106,7 +3058,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (4): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3127,7 +3079,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (3): `get_workspace_snapshot`, `manage_backends`, `manage_apps`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3143,7 +3095,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (4): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3164,7 +3116,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (7): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3187,7 +3139,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (7): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3210,7 +3162,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (7): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3232,7 +3184,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (7): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3255,7 +3207,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (8): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3279,7 +3231,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (8): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3302,7 +3254,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (8): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3325,7 +3277,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (8): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3349,7 +3301,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3371,7 +3323,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3394,7 +3346,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3417,7 +3369,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3440,7 +3392,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (3): `get_workspace_snapshot`, `manage_backends`, `manage_apps`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3456,7 +3408,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (3): `get_workspace_snapshot`, `manage_backends`, `manage_apps`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3473,7 +3425,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Backend Registration"
 - Allowed tools (1): `manage_backends`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3489,7 +3441,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Backend Registration"
 - Allowed tools (1): `manage_backends`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3505,7 +3457,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Backend Registration"
 - Allowed tools (1): `manage_backends`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3521,7 +3473,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Backend Registration"
 - Allowed tools (1): `manage_backends`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3537,7 +3489,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Multi Backend Build"
 - Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 12 · oracle reference trace: 10 calls
+- Turn budget: None · oracle reference trace: 10 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3556,7 +3508,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Multi Backend Build"
 - Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 12 · oracle reference trace: 10 calls
+- Turn budget: None · oracle reference trace: 10 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3575,7 +3527,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Multi Backend Build"
 - Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 12 · oracle reference trace: 10 calls
+- Turn budget: None · oracle reference trace: 10 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3594,7 +3546,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Multi Backend Build"
 - Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 12 · oracle reference trace: 10 calls
+- Turn budget: None · oracle reference trace: 10 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3613,7 +3565,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Backend Refresh Build"
 - Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3631,7 +3583,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Backend Refresh Build"
 - Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3649,7 +3601,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Backend Refresh Build"
 - Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3667,7 +3619,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Backend Refresh Build"
 - Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3685,7 +3637,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Backend Build"
 - Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3702,7 +3654,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Backend Build"
 - Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3719,7 +3671,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Backend Build"
 - Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3736,7 +3688,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Backend Build"
 - Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3753,7 +3705,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Cross Backend Build"
 - Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 12 · oracle reference trace: 9 calls
+- Turn budget: None · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3771,7 +3723,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Cross Backend Build"
 - Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 12 · oracle reference trace: 9 calls
+- Turn budget: None · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3789,7 +3741,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Cross Backend Build"
 - Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 12 · oracle reference trace: 9 calls
+- Turn budget: None · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3807,7 +3759,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: dashboard "Cross Backend Build"
 - Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 12 · oracle reference trace: 9 calls
+- Turn budget: None · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3828,7 +3780,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Cross-Backend Task"
 - Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3847,7 +3799,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Cross-Backend Task"
 - Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `add_generative_widget`
-- Turn budget: 10 · oracle reference trace: 8 calls
+- Turn budget: None · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3866,7 +3818,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Cross-Backend Task"
 - Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `add_generative_widget`
-- Turn budget: 10 · oracle reference trace: 8 calls
+- Turn budget: None · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3885,7 +3837,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Cross-Backend Task"
 - Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `add_generative_widget`
-- Turn budget: 10 · oracle reference trace: 8 calls
+- Turn budget: None · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3904,7 +3856,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Creation Task"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `read_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3921,7 +3873,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Creation Task"
 - Allowed tools (3): `get_workspace_snapshot`, `create_widget`, `read_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3938,7 +3890,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Creation Task"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `read_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3955,7 +3907,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Placement Task"
 - Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3974,7 +3926,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Placement Task"
 - Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -3993,7 +3945,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Placement Task"
 - Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4012,7 +3964,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Placement Task"
 - Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4031,7 +3983,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): live_grid_data({"symbol": "MSFT"})
 - Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4049,7 +4001,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"})
 - Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4067,7 +4019,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): test_metric({})
 - Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4085,7 +4037,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): company_performance({"company": "GM", "year": "2024"})
 - Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4103,7 +4055,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Creation Task"
 - Allowed tools (3): `get_workspace_snapshot`, `create_widget`, `read_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4120,7 +4072,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Creation Task"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `read_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4137,7 +4089,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Creation Task"
 - Allowed tools (3): `get_workspace_snapshot`, `create_widget`, `read_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4154,7 +4106,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Creation Task"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `read_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4171,7 +4123,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Creation Task"
 - Allowed tools (3): `get_workspace_snapshot`, `create_widget`, `read_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4190,7 +4142,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_themes_crowded_names({})
 - Allowed tools (6): `get_workspace_snapshot`, `assign_tasks_to_agents`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 8 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4211,7 +4163,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_themes_factor_tilts({})
 - Allowed tools (6): `get_workspace_snapshot`, `assign_tasks_to_agents`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 8 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4232,7 +4184,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_themes_thematic_baskets({})
 - Allowed tools (6): `get_workspace_snapshot`, `assign_tasks_to_agents`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 8 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4253,7 +4205,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_watchlist_names_near_action_levels({})
 - Allowed tools (6): `get_workspace_snapshot`, `assign_tasks_to_agents`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 8 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4274,7 +4226,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_watchlist_trade_ideas({})
 - Allowed tools (3): `get_workspace_snapshot`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4292,7 +4244,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_liquidity_crowded_names({})
 - Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4309,7 +4261,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_liquidity_redemption_stress({})
 - Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4326,7 +4278,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_overview_workflow_overview({})
 - Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4343,7 +4295,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_sign_off_approval_checklist({})
 - Allowed tools (3): `get_workspace_snapshot`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4361,7 +4313,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_sign_off_residual_risk_actions({})
 - Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4378,7 +4330,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_sign_off_risk_committee_comments({})
 - Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4395,7 +4347,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
 - Allowed tools (3): `get_workspace_snapshot`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4412,7 +4364,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
 - Allowed tools (3): `get_workspace_snapshot`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4429,7 +4381,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
 - Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4445,7 +4397,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
 - Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4461,7 +4413,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
 - Allowed tools (4): `get_workspace_snapshot`, `get_skill_content`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4480,7 +4432,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
 - Allowed tools (4): `get_workspace_snapshot`, `get_skill_content`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4499,7 +4451,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
 - Allowed tools (4): `get_workspace_snapshot`, `get_skill_content`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4518,7 +4470,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
 - Allowed tools (4): `get_workspace_snapshot`, `get_skill_content`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4537,7 +4489,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
 - Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4555,7 +4507,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Dedup And Fix"; 2 seeded widget(s): sample_newsfeed({"category": "science", "limit": 5}), sample_newsfeed({"category": "science", "limit": 5})
 - Allowed tools (5): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4574,7 +4526,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Dedup And Fix"; 2 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), company_performance({"company": "GM", "year": "2024"})
 - Allowed tools (5): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4593,7 +4545,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Dedup And Fix"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), table_widget_with_grouping_by_cell_click({"symbol": "AAPL"})
 - Allowed tools (5): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4612,7 +4564,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Dedup And Fix"; 2 seeded widget(s): vendor_dataset_monitor_slas_vendor_sla_status({"period": "YTD"}), vendor_dataset_monitor_slas_vendor_sla_status({"period": "YTD"})
 - Allowed tools (5): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4631,7 +4583,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Duplicate Repair"; 2 seeded widget(s): live_grid_data({"symbol": "AAPL"}), live_grid_data({"symbol": "AAPL"})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4649,7 +4601,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Duplicate Repair"; 2 seeded widget(s): company_list({"companyId": "GM"}), company_list({"companyId": "GM"})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4667,7 +4619,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Duplicate Cleanup"; 2 seeded widget(s): sample_newsfeed({"category": "business", "limit": 5}), sample_newsfeed({"category": "business", "limit": 5})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4684,7 +4636,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Duplicate Repair"; 2 seeded widget(s): execution_desk_blotter_live_orders({"desk": "US Equity"}), execution_desk_blotter_live_orders({"desk": "US Equity"})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4702,7 +4654,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Duplicate Cleanup"; 2 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), company_performance({"company": "GM", "year": "2024"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4719,7 +4671,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Duplicate Cleanup"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), table_widget_with_grouping_by_cell_click({"symbol": "AAPL"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4736,7 +4688,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Duplicate Repair"; 2 seeded widget(s): live_grid_example({}), live_grid_example({})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4754,7 +4706,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Duplicate Cleanup"; 2 seeded widget(s): vendor_dataset_monitor_slas_vendor_sla_status({"vendor": "FactSet"}), vendor_dataset_monitor_slas_vendor_sla_status({"vendor": "FactSet"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4771,7 +4723,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Removal Task"; 1 seeded widget(s): sample_newsfeed({"category": "tech", "limit": 5})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4786,7 +4738,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Removal Task"; 1 seeded widget(s): company_performance({"company": "VWAGY", "year": "2024"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4801,7 +4753,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Removal Task"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "TSLA"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4816,7 +4768,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Removal Task"; 1 seeded widget(s): portfolio_command_center_overview_top_alerts({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4831,7 +4783,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Similar Cleanup"; 3 seeded widget(s): live_grid_data({"symbol": "MSFT"}), live_grid_data({"symbol": "MSFT"}), live_grid_data({"symbol": "TSLA"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4849,7 +4801,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Similar Cleanup"; 3 seeded widget(s): sample_newsfeed({"category": "science", "limit": 5}), sample_newsfeed({"category": "science", "limit": 5}), sample_newsfeed({"category": "tech", "limit": 5})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4867,7 +4819,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Similar Cleanup"; 3 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), company_performance({"company": "GM", "year": "2024"}), company_performance({"company": "VWAGY", "year": "2024"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4885,7 +4837,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Similar Cleanup"; 3 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4905,7 +4857,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Inspect Full Repair"; 2 seeded widget(s): test_metric({}), company_performance({"company": "VWAGY", "year": "2024"})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4926,7 +4878,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Inspect Full Repair"; 2 seeded widget(s): sample_newsfeed({"category": "tech", "limit": 5}), table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4947,7 +4899,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Inspect Full Repair"; 2 seeded widget(s): reporting_factsheet_studio_overview_workflow_overview({}), reporting_factsheet_studio_factsheets_risk_stats({"client": "Northstar Endowment"})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4968,7 +4920,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Inspect Full Repair"; 2 seeded widget(s): whitepapers({"filenames": ["bitcoin.pdf"]}), live_grid_example({"symbol": "TSLA"})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -4989,7 +4941,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Inspect Repair"; 1 seeded widget(s): live_grid_data({"symbol": "AAPL"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5005,7 +4957,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Inspect Repair"; 1 seeded widget(s): quant_research_backtest_lab_risk_model_factor_exposure_table({"universe": "Liquid Crypto"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5021,7 +4973,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Inspect Repair"; 1 seeded widget(s): company_performance({"company": "TM", "year": "2024"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5037,7 +4989,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Inspect Repair"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5053,7 +5005,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Inspect Deduplicate"; 3 seeded widget(s): rebalance_scenario_lab_drift_drift_by_sleeve({}), rebalance_scenario_lab_drift_drift_by_sleeve({}), rebalance_scenario_lab_overview_workflow_overview({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5072,7 +5024,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Inspect Deduplicate"; 3 seeded widget(s): sample_newsfeed({"category": "tech", "limit": 5}), sample_newsfeed({"category": "tech", "limit": 5}), table_widget_with_grouping_by_cell_click({"symbol": "AAPL"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5091,7 +5043,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Inspect Deduplicate"; 3 seeded widget(s): company_performance({"company": "VWAGY", "year": "2024"}), company_performance({"company": "VWAGY", "year": "2024"}), test_metric({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5110,7 +5062,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Inspect Deduplicate"; 3 seeded widget(s): whitepapers({"filenames": ["bitcoin.pdf"]}), whitepapers({"filenames": ["bitcoin.pdf"]}), test_metric({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5129,7 +5081,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Inspect Overlap"; 2 seeded widget(s): reporting_factsheet_studio_commentary_disclosure_checklist({}), reporting_factsheet_studio_commentary_pm_quote_bank({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5148,7 +5100,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Inspect Overlap"; 2 seeded widget(s): test_metric({}), live_grid_example({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5167,7 +5119,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Inspect Overlap"; 2 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), test_metric({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5186,7 +5138,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Inspect Overlap"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), sample_newsfeed({"category": "tech", "limit": 5})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5205,7 +5157,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Inspect Board"; 1 seeded widget(s): test_metric({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5221,7 +5173,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Inspect Board"; 1 seeded widget(s): company_performance({"company": "GM", "year": "2024"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5237,7 +5189,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Inspect Board"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5253,7 +5205,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Inspect Board"; 1 seeded widget(s): portfolio_command_center_overview_workflow_overview({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5271,7 +5223,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Arrangement Task"; 2 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), test_metric({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5289,7 +5241,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Arrangement Task"; 2 seeded widget(s): test_metric({}), live_grid_example({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5307,7 +5259,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Arrangement Task"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), sample_newsfeed({"category": "tech", "limit": 5})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5325,7 +5277,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Arrangement Task"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "TSLA"}), sample_newsfeed({"category": "science", "limit": 5})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5343,7 +5295,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Grid Task"; 3 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), sample_newsfeed({"category": "tech", "limit": 5}), live_grid_data({"symbol": "AAPL"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5362,7 +5314,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Layout Task"; 1 tab(s): charts; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5381,7 +5333,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Grid Task"; 3 seeded widget(s): company_performance({"company": "VWAGY", "year": "2024"}), company_performance({"company": "GM", "year": "2024"}), test_metric({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5400,7 +5352,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Grid Task"; 3 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "MSFT"}), live_grid_data({"symbol": "MSFT"}), company_list({"companyId": "VWAGY"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5419,7 +5371,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Layout Task"; 1 tab(s): charts; 1 seeded widget(s): sample_newsfeed({"category": "tech", "limit": 5})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5438,7 +5390,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Grid Task"; 3 seeded widget(s): test_metric({}), live_grid_example({}), whitepapers({"filenames": ["bitcoin.pdf"]})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5457,7 +5409,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Preserve Layout Task"; 2 seeded widget(s): live_grid_data({"symbol": "MSFT"}), company_list({"companyId": "VWAGY"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5475,7 +5427,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Preserve Layout Task"; 2 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), test_metric({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5493,7 +5445,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Preserve Layout Task"; 2 seeded widget(s): test_metric({}), live_grid_example({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5511,7 +5463,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Preserve Layout Task"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), sample_newsfeed({"category": "tech", "limit": 5})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5529,7 +5481,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Overlap Repair"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), sample_newsfeed({"category": "tech", "limit": 5})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5547,7 +5499,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Overlap Repair"; 2 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), test_metric({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5565,7 +5517,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Overlap Repair"; 2 seeded widget(s): live_grid_data({"symbol": "MSFT"}), company_list({"companyId": "VWAGY"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5583,7 +5535,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Overlap Repair"; 2 seeded widget(s): test_metric({}), live_grid_example({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5601,7 +5553,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Layout Task"; 1 tab(s): charts; 1 seeded widget(s): live_grid_data({"symbol": "TSLA"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5620,7 +5572,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Layout Task"; 1 tab(s): charts; 1 seeded widget(s): company_list({"companyId": "TM"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5641,7 +5593,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Incomplete Review"; 1 tab(s): overview; 1 seeded widget(s): company_performance({"company": "GM", "year": "2024"})
 - Allowed tools (6): `get_workspace_snapshot`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5661,7 +5613,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Incomplete Review"; 1 tab(s): overview; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
 - Allowed tools (6): `get_workspace_snapshot`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5681,7 +5633,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Incomplete Review"; 1 tab(s): overview; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"})
 - Allowed tools (6): `get_workspace_snapshot`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5701,7 +5653,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Incomplete Review"; 1 tab(s): overview; 1 seeded widget(s): test_metric({})
 - Allowed tools (6): `get_workspace_snapshot`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5721,7 +5673,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Client Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_sign_off_sign_off_tracker({})
 - Allowed tools (5): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5741,7 +5693,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Research Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_stress_tests_historical_shocks({})
 - Allowed tools (5): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5761,7 +5713,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Risk Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_stress_tests_risk_snapshot({})
 - Allowed tools (5): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5781,7 +5733,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Vendor Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_stress_tests_scenario_loss_waterfall({})
 - Allowed tools (5): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5801,7 +5753,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Starter Board"; 1 tab(s): overview
 - Allowed tools (8): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5822,7 +5774,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Starter Board"; 1 tab(s): overview
 - Allowed tools (8): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5843,7 +5795,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Starter Board"; 1 tab(s): overview
 - Allowed tools (8): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5864,7 +5816,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Starter Board"; 1 tab(s): overview
 - Allowed tools (8): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5885,7 +5837,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Client Prep"; 1 tab(s): overview
 - Allowed tools (4): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5902,7 +5854,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Earnings Board"; 1 tab(s): overview
 - Allowed tools (4): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5919,7 +5871,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Ops Board"; 1 tab(s): overview
 - Allowed tools (4): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5936,7 +5888,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "PM Board"; 1 tab(s): overview
 - Allowed tools (4): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5953,7 +5905,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Alert Triage"; 1 tab(s): overview
 - Allowed tools (2): `get_workspace_snapshot`, `manage_dashboard`
-- Turn budget: 4 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5969,7 +5921,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Desk View"; 1 tab(s): overview
 - Allowed tools (2): `get_workspace_snapshot`, `manage_dashboard`
-- Turn budget: 4 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -5985,7 +5937,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Desk Board"; 1 tab(s): overview
 - Allowed tools (2): `get_workspace_snapshot`, `manage_dashboard`
-- Turn budget: 4 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6001,7 +5953,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Macro Board"; 1 tab(s): overview
 - Allowed tools (2): `get_workspace_snapshot`, `manage_dashboard`
-- Turn budget: 4 · oracle reference trace: 1 calls
+- Turn budget: None · oracle reference trace: 1 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6019,7 +5971,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), company_performance({"company": "GM", "year": "2024"})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6036,7 +5988,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): whitepapers({"filenames": ["bitcoin.pdf"]}), company_performance({"company": "TM", "year": "2024"})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6053,7 +6005,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): live_grid_example({}), company_performance({"company": "F", "year": "2024"})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6070,7 +6022,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): company_list({"companyId": "VWAGY"}), test_metric({})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6087,7 +6039,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6103,7 +6055,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6119,7 +6071,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): company_performance({"company": "GM", "year": "2024"})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6135,7 +6087,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): test_metric({})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6151,7 +6103,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Notes Board"
 - Allowed tools (2): `get_workspace_snapshot`, `add_generative_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6166,7 +6118,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Notes Board"
 - Allowed tools (2): `get_workspace_snapshot`, `add_generative_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6181,7 +6133,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Notes Board"
 - Allowed tools (2): `get_workspace_snapshot`, `add_generative_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6196,7 +6148,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Notes Board"
 - Allowed tools (2): `get_workspace_snapshot`, `add_generative_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6211,7 +6163,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6228,7 +6180,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): company_performance({"company": "TM", "year": "2024"}), company_performance({"company": "GM", "year": "2024"})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6245,7 +6197,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): test_metric({}), whitepapers({"filenames": ["bitcoin.pdf"]})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6262,7 +6214,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "TSLA"}), live_grid_data({"symbol": "TSLA"})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6279,7 +6231,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Existing Review"; 1 tab(s): overview; 1 seeded widget(s): live_grid_data({"symbol": "AAPL"})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6296,7 +6248,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Existing Review"; 1 tab(s): overview; 1 seeded widget(s): live_grid_data({"symbol": "MSFT"})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6313,7 +6265,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Existing Review"; 1 tab(s): overview; 1 seeded widget(s): company_list({"companyId": "TM"})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6330,7 +6282,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Existing Review"; 1 tab(s): overview; 1 seeded widget(s): company_list({"companyId": "GM"})
 - Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6349,7 +6301,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Cross Options"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `add_generative_widget`
-- Turn budget: 11 · oracle reference trace: 9 calls
+- Turn budget: None · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6370,7 +6322,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Cross Options"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `add_generative_widget`
-- Turn budget: 11 · oracle reference trace: 9 calls
+- Turn budget: None · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6391,7 +6343,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Cross Options"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `add_generative_widget`
-- Turn budget: 12 · oracle reference trace: 10 calls
+- Turn budget: None · oracle reference trace: 10 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6412,7 +6364,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise, widget-examples
 - Initial workspace: dashboard "Cross Options"; 1 seeded widget(s): stress_liquidity_lab_scenarios_portfolio_impact({})
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `add_generative_widget`
-- Turn budget: 12 · oracle reference trace: 10 calls
+- Turn budget: None · oracle reference trace: 10 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6434,7 +6386,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Parameter Options"; 1 seeded widget(s): stress_liquidity_lab_scenarios_position_impact_table({})
 - Allowed tools (5): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6454,7 +6406,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Parameter Options"
 - Allowed tools (5): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6473,7 +6425,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Parameter Options"
 - Allowed tools (5): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6492,7 +6444,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Parameter Options"
 - Allowed tools (5): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6511,7 +6463,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Parameter Pair"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: 12 · oracle reference trace: 9 calls
+- Turn budget: None · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6532,7 +6484,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Parameter Pair"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: 13 · oracle reference trace: 10 calls
+- Turn budget: None · oracle reference trace: 10 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6553,7 +6505,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Parameter Pair"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: 12 · oracle reference trace: 9 calls
+- Turn budget: None · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6574,7 +6526,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Parameter Pair"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: 12 · oracle reference trace: 9 calls
+- Turn budget: None · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6595,7 +6547,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Parameter Placement"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6614,7 +6566,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Parameter Placement"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6633,7 +6585,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Parameter Placement"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6652,7 +6604,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Parameter Placement"
 - Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6671,7 +6623,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Parameter Options"
 - Allowed tools (3): `get_workspace_snapshot`, `get_params_options`, `create_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6688,7 +6640,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Parameter Options"
 - Allowed tools (3): `get_workspace_snapshot`, `get_params_options`, `create_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6705,7 +6657,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Parameter Options"
 - Allowed tools (3): `get_workspace_snapshot`, `get_params_options`, `create_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6722,7 +6674,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Parameter Options"
 - Allowed tools (3): `get_workspace_snapshot`, `get_params_options`, `create_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6741,7 +6693,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 11 · oracle reference trace: 9 calls
+- Turn budget: None · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6763,7 +6715,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 12 · oracle reference trace: 10 calls
+- Turn budget: None · oracle reference trace: 10 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6785,7 +6737,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 12 · oracle reference trace: 10 calls
+- Turn budget: None · oracle reference trace: 10 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6807,7 +6759,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise, widget-examples
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 12 · oracle reference trace: 10 calls
+- Turn budget: None · oracle reference trace: 10 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6829,7 +6781,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 11 · oracle reference trace: 8 calls
+- Turn budget: None · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6850,7 +6802,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 12 · oracle reference trace: 9 calls
+- Turn budget: None · oracle reference trace: 9 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6871,7 +6823,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 11 · oracle reference trace: 8 calls
+- Turn budget: None · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6892,7 +6844,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 11 · oracle reference trace: 8 calls
+- Turn budget: None · oracle reference trace: 8 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6913,7 +6865,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Prompt Build"; 1 seeded widget(s): vendor_dataset_monitor_overview_workflow_overview({})
 - Allowed tools (5): `get_workspace_snapshot`, `get_workspace_prompt`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6932,7 +6884,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Prompt Build"
 - Allowed tools (5): `get_workspace_snapshot`, `get_workspace_prompt`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6950,7 +6902,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Prompt Build"
 - Allowed tools (5): `get_workspace_snapshot`, `get_workspace_prompt`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6968,7 +6920,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Prompt Build"
 - Allowed tools (5): `get_workspace_snapshot`, `get_workspace_prompt`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -6986,7 +6938,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Prompt Review"; 1 seeded widget(s): test_metric({})
 - Allowed tools (3): `get_workspace_snapshot`, `get_workspace_prompt`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7004,7 +6956,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Prompt Review"; 1 seeded widget(s): live_grid_example({})
 - Allowed tools (3): `get_workspace_snapshot`, `get_workspace_prompt`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7022,7 +6974,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Prompt Session"; 1 tab(s): overview
 - Allowed tools (7): `get_workspace_prompt`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7043,7 +6995,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Prompt Session"; 1 tab(s): overview
 - Allowed tools (7): `get_workspace_prompt`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7064,7 +7016,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Prompt Session"; 1 tab(s): overview
 - Allowed tools (7): `get_workspace_prompt`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7085,7 +7037,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Prompt Session"; 1 tab(s): overview
 - Allowed tools (7): `get_workspace_prompt`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 10 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7106,7 +7058,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Prompt Review"; 1 seeded widget(s): whitepapers({"filenames": ["bitcoin.pdf"]})
 - Allowed tools (3): `get_workspace_snapshot`, `get_workspace_prompt`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7124,7 +7076,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started, widget-examples
 - Initial workspace: dashboard "Prompt Review"; 1 seeded widget(s): test_metric({})
 - Allowed tools (3): `get_workspace_snapshot`, `get_workspace_prompt`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7144,7 +7096,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): compliance_surveillance_hub_alerts_alert_trend({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7161,7 +7113,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): portfolio_command_center_attribution_attribution_summary({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7178,7 +7130,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): fund_operations_control_tower_recons_break_aging({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7195,7 +7147,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): execution_desk_fills_broker_scorecard({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7212,7 +7164,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): client_360_client_book_client_accounts({"fund": "Flagship Long/Short", "period": "YTD"}), client_360_client_book_relationship_metrics({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7231,7 +7183,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): execution_desk_fills_fills_table({"fund": "Flagship Long/Short", "period": "YTD"}), execution_desk_fills_broker_scorecard({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7250,7 +7202,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): portfolio_command_center_holdings_issuer_concentration({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7267,7 +7219,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): vendor_dataset_monitor_slas_latency_by_feed({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7284,7 +7236,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): risk_exposure_monitor_limits_limit_utilization({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7301,7 +7253,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): execution_desk_blotter_order_status_metrics({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7318,7 +7270,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): client_360_flows_pipeline_by_stage({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7335,7 +7287,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): portfolio_command_center_overview_portfolio_snapshot({"fund": "Flagship Long/Short", "period": "YTD"}), portfolio_command_center_overview_top_alerts({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7354,7 +7306,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): quant_research_backtest_lab_signals_signal_metrics({"fund": "Flagship Long/Short", "period": "YTD"}), quant_research_backtest_lab_backtest_backtest_performance({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7373,7 +7325,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): risk_exposure_monitor_dashboard_var_trend({"fund": "Flagship Long/Short", "period": "YTD"}), risk_exposure_monitor_dashboard_drawdown({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7392,7 +7344,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): risk_exposure_monitor_dashboard_risk_snapshot({"fund": "Flagship Long/Short", "period": "YTD"}), risk_exposure_monitor_limits_limit_utilization({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7411,7 +7363,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): vendor_dataset_monitor_vendors_sla_metrics({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7428,7 +7380,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): strategy_health_monitor_performance_strategy_health_metrics({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7445,7 +7397,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): stress_liquidity_lab_liquidity_days_to_liquidate({"fund": "Flagship Long/Short", "period": "YTD"}), stress_liquidity_lab_stress_tests_risk_snapshot({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7464,7 +7416,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): risk_exposure_monitor_dashboard_var_trend({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7481,7 +7433,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): vendor_dataset_monitor_slas_vendor_sla_status({"fund": "Flagship Long/Short", "period": "YTD"}), vendor_dataset_monitor_slas_latency_by_feed({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7502,7 +7454,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (7): `read_workspace_resource`, `manage_backends`, `manage_apps`, `navigate_workspace`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7521,7 +7473,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (7): `read_workspace_resource`, `manage_backends`, `manage_apps`, `navigate_workspace`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7540,7 +7492,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (7): `read_workspace_resource`, `manage_backends`, `manage_apps`, `navigate_workspace`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7559,7 +7511,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (7): `read_workspace_resource`, `manage_backends`, `manage_apps`, `navigate_workspace`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7578,7 +7530,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "App Index Review"; 1 seeded widget(s): vendor_dataset_monitor_quality_affected_apps({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7595,7 +7547,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "App Index Review"
 - Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7611,7 +7563,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "App Index Review"; 1 seeded widget(s): vendor_dataset_monitor_quality_row_count_drift({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7628,7 +7580,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "App Index Review"; 1 seeded widget(s): vendor_dataset_monitor_quality_validation_errors({})
 - Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7645,7 +7597,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (3): `read_workspace_resource`, `manage_backends`, `manage_apps`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7662,7 +7614,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (3): `read_workspace_resource`, `manage_backends`, `manage_apps`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7679,7 +7631,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (3): `read_workspace_resource`, `manage_backends`, `manage_apps`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7696,7 +7648,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (3): `read_workspace_resource`, `manage_backends`, `manage_apps`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7713,7 +7665,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: widget-examples
 - Initial workspace: dashboard "Resource Build"
 - Allowed tools (6): `get_workspace_snapshot`, `read_workspace_resource`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7732,7 +7684,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Resource Build"
 - Allowed tools (6): `get_workspace_snapshot`, `read_workspace_resource`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7751,7 +7703,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Resource Build"
 - Allowed tools (6): `get_workspace_snapshot`, `read_workspace_resource`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7770,7 +7722,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Resource Build"
 - Allowed tools (6): `get_workspace_snapshot`, `read_workspace_resource`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7789,7 +7741,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Resource Review"
 - Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7805,7 +7757,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Resource Review"
 - Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7821,7 +7773,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Resource Review"
 - Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7837,7 +7789,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Resource Review"
 - Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7855,7 +7807,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
 - Allowed tools (6): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7875,7 +7827,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_capacity_liquidity_capacity_curve({})
 - Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7893,7 +7845,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
 - Allowed tools (6): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7913,7 +7865,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_overview_workflow_overview({})
 - Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7931,7 +7883,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
 - Allowed tools (6): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7951,7 +7903,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_performance_gross_and_net_exposure({})
 - Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7969,7 +7921,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
 - Allowed tools (6): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 6 calls
+- Turn budget: None · oracle reference trace: 6 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -7989,7 +7941,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_performance_sleeve_performance({})
 - Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8007,7 +7959,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): vendor_dataset_monitor_incidents_affected_apps({})
 - Allowed tools (5): `get_workspace_snapshot`, `get_skill_content`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8027,7 +7979,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): vendor_dataset_monitor_incidents_blast_radius_summary({})
 - Allowed tools (5): `get_workspace_snapshot`, `get_skill_content`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8047,7 +7999,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): vendor_dataset_monitor_incidents_freshness_exceptions({})
 - Allowed tools (5): `get_workspace_snapshot`, `get_skill_content`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8067,7 +8019,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): vendor_dataset_monitor_incidents_incident_timeline({})
 - Allowed tools (5): `get_workspace_snapshot`, `get_skill_content`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8087,7 +8039,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
 - Allowed tools (7): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8108,7 +8060,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
 - Allowed tools (7): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8129,7 +8081,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
 - Allowed tools (7): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8150,7 +8102,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
 - Allowed tools (7): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `get_widget_data`, `add_generative_widget`
-- Turn budget: 9 · oracle reference trace: 7 calls
+- Turn budget: None · oracle reference trace: 7 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8171,7 +8123,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
 - Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8187,7 +8139,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
 - Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8203,7 +8155,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
 - Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8219,7 +8171,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
 - Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8237,7 +8189,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Double Repair Task"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "MSFT"}), sample_newsfeed({"category": "tech", "limit": 1})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8256,7 +8208,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Double Repair Task"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), live_grid_data({"symbol": "MSFT"})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8275,7 +8227,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Double Repair Task"; 2 seeded widget(s): company_performance({"company": "VWAGY", "year": "2024"}), company_performance({"company": "TM", "year": "2024"})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8294,7 +8246,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Double Repair Task"; 2 seeded widget(s): vendor_dataset_monitor_slas_vendor_sla_status({"vendor": "FactSet", "status": "Open"}), portfolio_command_center_overview_portfolio_snapshot({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 6 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8313,7 +8265,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Repair Task"; 1 seeded widget(s): sample_newsfeed({"category": "business"})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8330,7 +8282,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Repair Task"; 1 seeded widget(s): risk_exposure_monitor_dashboard_risk_snapshot({"portfolio": "Macro Multi-Asset"})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8347,7 +8299,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Repair Task"; 1 seeded widget(s): company_performance({"company": "TM", "year": "2024"})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8364,7 +8316,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Repair Task"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "TSLA"})
 - Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8381,7 +8333,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Update Task"; 1 seeded widget(s): sample_newsfeed({"category": "science", "limit": 5})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8396,7 +8348,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Update Task"; 1 seeded widget(s): company_performance({"company": "VWAGY", "year": "2024"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8411,7 +8363,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Update Task"; 1 seeded widget(s): portfolio_command_center_overview_portfolio_snapshot({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8426,7 +8378,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Update Task"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8441,7 +8393,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Update Task"; 1 seeded widget(s): live_grid_data({"symbol": "AAPL"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8457,7 +8409,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Update Task"; 1 seeded widget(s): company_list({"companyId": "VWAGY"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8473,7 +8425,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Update Task"; 1 seeded widget(s): company_performance({"company": "F", "year": "2024"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8489,7 +8441,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Selective Update Task"; 2 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), company_performance({"company": "VWAGY", "year": "2024"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8506,7 +8458,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Selective Update Task"; 2 seeded widget(s): vendor_dataset_monitor_slas_vendor_sla_status({"vendor": "Bloomberg"}), vendor_dataset_monitor_slas_vendor_sla_status({"vendor": "FactSet"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8523,7 +8475,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Selective Update Task"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8540,7 +8492,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: getting-started
 - Initial workspace: dashboard "Selective Update Task"; 2 seeded widget(s): sample_newsfeed({"category": "tech", "limit": 5}), sample_newsfeed({"category": "science", "limit": 5})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 5 · oracle reference trace: 2 calls
+- Turn budget: None · oracle reference trace: 2 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8557,7 +8509,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - Fixture backends: stark-enterprise
 - Initial workspace: dashboard "Update Task"; 1 seeded widget(s): execution_desk_exceptions_rejected_orders({"desk": "US Equity", "period": "YTD"})
 - Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8577,7 +8529,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8590,7 +8542,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8604,7 +8556,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8617,7 +8569,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8633,7 +8585,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8646,7 +8598,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8660,7 +8612,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8675,7 +8627,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8691,7 +8643,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8704,7 +8656,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8717,7 +8669,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8730,7 +8682,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8744,7 +8696,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8757,7 +8709,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8773,7 +8725,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8786,7 +8738,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8800,7 +8752,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8815,7 +8767,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8831,7 +8783,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8844,7 +8796,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8859,7 +8811,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8872,7 +8824,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8886,7 +8838,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8899,7 +8851,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8912,7 +8864,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8925,7 +8877,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8940,7 +8892,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8956,7 +8908,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8970,7 +8922,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8986,7 +8938,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -8999,7 +8951,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9015,7 +8967,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9028,7 +8980,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9042,7 +8994,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9058,7 +9010,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9071,7 +9023,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9084,7 +9036,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9097,7 +9049,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9110,7 +9062,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9125,7 +9077,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9141,7 +9093,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9156,7 +9108,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9169,7 +9121,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9182,7 +9134,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9195,7 +9147,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9208,7 +9160,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9221,7 +9173,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9236,7 +9188,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9252,7 +9204,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9268,7 +9220,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9281,7 +9233,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9297,7 +9249,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9313,7 +9265,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9326,7 +9278,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9339,7 +9291,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9355,7 +9307,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9371,7 +9323,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9384,7 +9336,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9397,7 +9349,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9413,7 +9365,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9431,7 +9383,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9444,7 +9396,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9458,7 +9410,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9473,7 +9425,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9486,7 +9438,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9500,7 +9452,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9513,7 +9465,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9526,7 +9478,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9542,7 +9494,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9558,7 +9510,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9571,7 +9523,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9585,7 +9537,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9598,7 +9550,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9611,7 +9563,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9627,7 +9579,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9640,7 +9592,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9656,7 +9608,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9669,7 +9621,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9683,7 +9635,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9698,7 +9650,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9713,7 +9665,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9727,7 +9679,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9741,7 +9693,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9755,7 +9707,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9770,7 +9722,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9784,7 +9736,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 42 · oracle reference trace: 17 calls
+- Turn budget: None · oracle reference trace: 17 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9798,7 +9750,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9812,7 +9764,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9826,7 +9778,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9840,7 +9792,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9854,7 +9806,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9868,7 +9820,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9883,7 +9835,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9897,7 +9849,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 42 · oracle reference trace: 17 calls
+- Turn budget: None · oracle reference trace: 17 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9911,7 +9863,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9925,7 +9877,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9939,7 +9891,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9953,7 +9905,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9967,7 +9919,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9981,7 +9933,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -9996,7 +9948,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10010,7 +9962,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 42 · oracle reference trace: 17 calls
+- Turn budget: None · oracle reference trace: 17 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10024,7 +9976,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10038,7 +9990,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 40 · oracle reference trace: 16 calls
+- Turn budget: None · oracle reference trace: 16 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10054,7 +10006,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10070,7 +10022,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10086,7 +10038,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10102,7 +10054,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10118,7 +10070,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10134,7 +10086,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10150,7 +10102,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10166,7 +10118,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10182,7 +10134,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10198,7 +10150,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10214,7 +10166,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10230,7 +10182,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10248,7 +10200,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10262,7 +10214,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10276,7 +10228,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10290,7 +10242,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 8 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10304,7 +10256,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10317,7 +10269,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10330,7 +10282,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10343,7 +10295,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10356,7 +10308,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10369,7 +10321,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10382,7 +10334,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10395,7 +10347,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10408,7 +10360,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10421,7 +10373,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10434,7 +10386,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10450,7 +10402,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10466,7 +10418,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10482,7 +10434,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10498,7 +10450,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10514,7 +10466,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10532,7 +10484,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10546,7 +10498,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10561,7 +10513,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10574,7 +10526,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10590,7 +10542,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10603,7 +10555,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10616,7 +10568,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10632,7 +10584,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10648,7 +10600,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10662,7 +10614,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10675,7 +10627,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10691,7 +10643,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10705,7 +10657,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10718,7 +10670,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10731,7 +10683,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10744,7 +10696,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10758,7 +10710,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10773,7 +10725,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10786,7 +10738,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10799,7 +10751,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10814,7 +10766,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10830,7 +10782,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10843,7 +10795,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10859,7 +10811,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10872,7 +10824,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10885,7 +10837,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10898,7 +10850,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10911,7 +10863,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10927,7 +10879,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10942,7 +10894,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10955,7 +10907,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10968,7 +10920,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -10984,7 +10936,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11000,7 +10952,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11015,7 +10967,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11028,7 +10980,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11044,7 +10996,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11060,7 +11012,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11076,7 +11028,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11089,7 +11041,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11104,7 +11056,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11118,7 +11070,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11131,7 +11083,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11144,7 +11096,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11160,7 +11112,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11176,7 +11128,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11189,7 +11141,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11203,7 +11155,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11218,7 +11170,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11234,7 +11186,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11247,7 +11199,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11260,7 +11212,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11274,7 +11226,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11289,7 +11241,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11302,7 +11254,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11315,7 +11267,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11329,7 +11281,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11342,7 +11294,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11355,7 +11307,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11371,7 +11323,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11386,7 +11338,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11401,7 +11353,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11414,7 +11366,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11427,7 +11379,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11442,7 +11394,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11456,7 +11408,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11469,7 +11421,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11485,7 +11437,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11499,7 +11451,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11512,7 +11464,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11525,7 +11477,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11541,7 +11493,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11555,7 +11507,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11571,7 +11523,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11584,7 +11536,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11597,7 +11549,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11610,7 +11562,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11623,7 +11575,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11636,7 +11588,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11650,7 +11602,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11668,7 +11620,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11681,7 +11633,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11694,7 +11646,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11708,7 +11660,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11723,7 +11675,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11736,7 +11688,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11749,7 +11701,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11762,7 +11714,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11775,7 +11727,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11791,7 +11743,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11804,7 +11756,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11818,7 +11770,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11831,7 +11783,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11844,7 +11796,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11860,7 +11812,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 6 · oracle reference trace: 3 calls
+- Turn budget: None · oracle reference trace: 3 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11875,7 +11827,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11891,7 +11843,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 14 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11907,7 +11859,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11921,7 +11873,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 7 · oracle reference trace: 4 calls
+- Turn budget: None · oracle reference trace: 4 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
@@ -11935,7 +11887,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - Initial workspace: empty (no seeded dashboard)
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: 13 · oracle reference trace: 5 calls
+- Turn budget: None · oracle reference trace: 5 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 

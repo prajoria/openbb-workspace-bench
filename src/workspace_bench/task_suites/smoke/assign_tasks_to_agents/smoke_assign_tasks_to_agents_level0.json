@@ -21,12 +21,7 @@
     ]
   },
   "eval": {
-    "required_tool_calls": [
-      {
-        "tool": "assign_tasks_to_agents",
-        "args_contains": {}
-      }
-    ],
+    "calls_match_reference": true,
     "reference_trace": [
       {
         "tool": "assign_tasks_to_agents",
@@ -37,11 +32,10 @@
               "description": "Return the Workspace smoke envelope."
             }
           ]
-        }
+        },
+        "graded_args": []
       }
     ],
-    "limits": {
-      "max_turns": 1
-    }
+    "max_turns": 1
   }
 }

@@ -101,8 +101,6 @@
    }
   ],
   "reference_answer": "BTC price rows are Open at 172895.99 and 53169.04, with changes of 0.0135 and -0.0402, so the served price action is mixed and the duplicate observations are not distinguished. On-chain activity is also Open, with scores of 67.84 and 16.94 and negative changes of -0.0587 and -0.024. Funding-and-basis rows are Open at 40.83 and 10.21, with opposing changes of 0.0466 and -0.0468, but the rows do not label which reading is funding or basis. The liquidation series rises from 38.74 to 41.05 before falling to 21.49, indicating that the displayed risk measure eased after its peak. No explicit volume, depth, spread, or other liquidity field is served, so liquidity cannot be assessed from these reads.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

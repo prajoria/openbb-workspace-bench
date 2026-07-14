@@ -101,8 +101,6 @@
    }
   ],
   "reference_answer": "The only spot row is Approved for XRP at 295770.25 with a -0.0133 change, while XRP's on-chain score is Closed at 1.15 with a 0.0026 change. AVAX has a separate In Review on-chain score of 34.04, so it cannot be used to explain XRP price action. The only funding-and-basis row belongs to ADA, Closed at 65.47 with a -0.0265 change, and therefore does not provide derivatives context for XRP or AVAX. The liquidation series peaks at 41.05 and later falls to 21.49, but it has no token label. Explicit liquidity measures and token-matched funding, basis, and liquidation data are absent, preventing a unified market-structure conclusion.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

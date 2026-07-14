@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "BTC is the only asset represented across derivatives, spot, and on-chain reads. Its funding-and-basis changes conflict internally at 0.0466 and -0.0468, while on-chain changes are both negative at -0.0587 and -0.024. Spot behavior is mixed as well, with changes of 0.0135 and -0.0402 on Open price rows of 172895.99 and 53169.04. The positive derivatives change and positive spot change do not establish a conflict, but each contrasts with the uniformly negative on-chain changes. Because duplicate rows are unlabeled and funding is not separated from basis, BTC should be flagged for reconciliation rather than declared a definitive positioning divergence.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

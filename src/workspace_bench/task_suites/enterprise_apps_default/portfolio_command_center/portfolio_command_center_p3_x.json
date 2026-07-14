@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "Escalate both Flagship Long/Short alert queues before the risk meeting because they remain Open at 193 and 71 alerts. The 193-count queue is larger and should be reviewed first, but neither row provides alert type or severity. Limit-utilization readings of 85.25 and 1.89 are Open, and approval-checklist readings of 86.16 and 62.54 are also Open. These control readings add context but are not linked to a specific alert and have no threshold. The CIO briefing should request alert identities, severity, owners, limit headroom, and checklist dispositions rather than infer them from aggregate scores.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

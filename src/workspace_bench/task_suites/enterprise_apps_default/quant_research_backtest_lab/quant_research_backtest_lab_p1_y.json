@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Macro Absolute Return backtest performance is Approved at 13.74 despite a -0.0256 change, and its factor exposure is Approved at 0.1527 with a -0.023 change. Signal readings of 104.48 and 43.11 are both above the displayed 38.01 threshold. These statuses support continued advancement of the model, but the score meanings and acceptable factor-exposure limit are not defined. No capacity field or detailed backtest path is served. Production readiness should therefore remain conditional on capacity testing, exposure-limit confirmation, and model-linked validation of the signal metrics.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

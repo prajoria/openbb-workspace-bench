@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "Escalate Global Opportunities first because its 77-alert queue is explicitly Escalated; its limit-utilization records are Open at 124.12 and In Review at 40.48. Multi-Asset Fund has 161 Open alerts and an Escalated limit reading of 30.66, making it the next control priority despite the periods not matching. Flagship Long/Short has 56 Open alerts and 156 In Review alerts, alongside Open approval-checklist readings of 61.52 and 90.0 and Open limit utilization at 2.74. Income Fund's 127-alert row is Approved, but its approval checklist is Escalated at 19.11 and should be raised as a separate governance item. Alert descriptions, severity, and row-level links are absent, so the CIO should receive these as queue-level escalations rather than named incidents.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

@@ -112,8 +112,6 @@
    }
   ],
   "reference_answer": "Flagship Long/Short has an Open management-claims reading of 21.22 and an Open thesis-change reading of 49.26, but neither row states the claim or how it changed the thesis. Evidence and sign-off remain Open at 45.91 and 84.06, so the thesis change is not fully substantiated. The required compliance evidence also includes Open MNPI attestations at 20.04 and 56.63. Expert-call records are Open at 4.24 and 26.51 and should be linked to the claim and change log. Obtain the actual claim text, thesis rationale, source materials, call record, completed attestations, and sign-off before treating the thesis change as supported.",
-  "limits": {
-   "max_turns": 9
-  }
+  "max_turns": 9
  }
 }

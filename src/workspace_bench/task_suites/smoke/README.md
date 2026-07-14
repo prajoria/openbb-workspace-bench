@@ -34,8 +34,12 @@ Task files hold to the smoke field profile: only `id`, `family`,
 `difficulty`, `prompt`, `setup` (the workspace axes, `allowed_tools`, and —
 solely in tasks that seed a mutation target — `initial_state`), and `eval`
 (grading criteria plus the `reference_trace` trajectory and the
-harness-enforced `limits`). `category` is derived from the family by the loader; `fixtures`,
-`business_terms`, and `specification_level` never appear.
+harness-enforced `max_turns`). Call-graded families set
+`calls_match_reference: true` instead of duplicating the reference as
+explicit required calls: each reference call is graded as written except
+steps annotated `optional` (skippable discovery) or narrowed by
+`graded_args`. `category` is derived from the family by the loader;
+`fixtures`, `business_terms`, and `specification_level` never appear.
 
 Agents see only the prompt and the setup block. The entire `eval` block is
 sealed: grading criteria, the reference trajectory, and the turn budget are

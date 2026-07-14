@@ -62,7 +62,7 @@
     "runtime_checks": {
       "datasets": [
         {
-          "name": "stark-enterprise__cio_investment_committee_pack_agenda_decisions_required",
+          "name": "stark-enterprise-x__cio_investment_committee_pack_agenda_decisions_required",
           "widget_id": "cio_investment_committee_pack_agenda_decisions_required",
           "fields": [
             "change",
@@ -94,7 +94,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__cio_investment_committee_pack_agenda_ic_agenda",
+          "name": "stark-enterprise-x__cio_investment_committee_pack_agenda_ic_agenda",
           "widget_id": "cio_investment_committee_pack_agenda_ic_agenda",
           "fields": [
             "change",
@@ -143,7 +143,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__cio_investment_committee_pack_agenda_major_open_issues",
+          "name": "stark-enterprise-x__cio_investment_committee_pack_agenda_major_open_issues",
           "widget_id": "cio_investment_committee_pack_agenda_major_open_issues",
           "fields": [
             "change",
@@ -220,7 +220,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__cio_investment_committee_pack_allocations_capacity",
+          "name": "stark-enterprise-x__cio_investment_committee_pack_allocations_capacity",
           "widget_id": "cio_investment_committee_pack_allocations_capacity",
           "fields": [
             "change",
@@ -247,7 +247,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__cio_investment_committee_pack_allocations_capital_allocation",
+          "name": "stark-enterprise-x__cio_investment_committee_pack_allocations_capital_allocation",
           "widget_id": "cio_investment_committee_pack_allocations_capital_allocation",
           "fields": [
             "change",
@@ -317,7 +317,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__cio_investment_committee_pack_allocations_recommended_changes",
+          "name": "stark-enterprise-x__cio_investment_committee_pack_allocations_recommended_changes",
           "widget_id": "cio_investment_committee_pack_allocations_recommended_changes",
           "fields": [
             "change",
@@ -373,7 +373,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__cio_investment_committee_pack_decisions_approval_checklist",
+          "name": "stark-enterprise-x__cio_investment_committee_pack_decisions_approval_checklist",
           "widget_id": "cio_investment_committee_pack_decisions_approval_checklist",
           "fields": [
             "change",
@@ -429,7 +429,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__cio_investment_committee_pack_decisions_decision_log",
+          "name": "stark-enterprise-x__cio_investment_committee_pack_decisions_decision_log",
           "widget_id": "cio_investment_committee_pack_decisions_decision_log",
           "fields": [
             "change",
@@ -513,7 +513,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__cio_investment_committee_pack_decisions_follow_ups",
+          "name": "stark-enterprise-x__cio_investment_committee_pack_decisions_follow_ups",
           "widget_id": "cio_investment_committee_pack_decisions_follow_ups",
           "fields": [
             "change",
@@ -576,14 +576,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__cio_investment_committee_pack_overview_workflow_overview",
+          "name": "stark-enterprise-x__cio_investment_committee_pack_overview_workflow_overview",
           "widget_id": "cio_investment_committee_pack_overview_workflow_overview",
           "fields": [],
           "path": "/cio_investment_committee_pack_overview_workflow_overview",
           "payload": "cio_investment_committee_pack_overview_workflow_overview: Workflow Overview summarizes the Portfolio workflow for YTD. The synthetic score reading is 10.6, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__cio_investment_committee_pack_research_changed_ratings",
+          "name": "stark-enterprise-x__cio_investment_committee_pack_research_changed_ratings",
           "widget_id": "cio_investment_committee_pack_research_changed_ratings",
           "fields": [
             "change",
@@ -660,7 +660,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__cio_investment_committee_pack_research_major_catalysts",
+          "name": "stark-enterprise-x__cio_investment_committee_pack_research_major_catalysts",
           "widget_id": "cio_investment_committee_pack_research_major_catalysts",
           "fields": [
             "change",
@@ -730,7 +730,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__cio_investment_committee_pack_research_top_ideas",
+          "name": "stark-enterprise-x__cio_investment_committee_pack_research_top_ideas",
           "widget_id": "cio_investment_committee_pack_research_top_ideas",
           "fields": [
             "change",
@@ -779,7 +779,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__client_360_client_book_client_accounts",
+          "name": "stark-enterprise-x__client_360_client_book_client_accounts",
           "widget_id": "client_360_client_book_client_accounts",
           "fields": [
             "change",
@@ -849,7 +849,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__client_360_client_book_mandate_terms",
+          "name": "stark-enterprise-x__client_360_client_book_mandate_terms",
           "widget_id": "client_360_client_book_mandate_terms",
           "fields": [
             "change",
@@ -919,7 +919,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__client_360_client_book_open_requests",
+          "name": "stark-enterprise-x__client_360_client_book_open_requests",
           "widget_id": "client_360_client_book_open_requests",
           "fields": [
             "change",
@@ -975,7 +975,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__client_360_client_book_relationship_metrics",
+          "name": "stark-enterprise-x__client_360_client_book_relationship_metrics",
           "widget_id": "client_360_client_book_relationship_metrics",
           "fields": [
             "change",
@@ -1007,7 +1007,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__client_360_flows_client_flow_sankey",
+          "name": "stark-enterprise-x__client_360_flows_client_flow_sankey",
           "widget_id": "client_360_flows_client_flow_sankey",
           "fields": [
             "date",
@@ -1053,7 +1053,7 @@
           }
         },
         {
-          "name": "stark-enterprise__client_360_flows_pipeline_by_stage",
+          "name": "stark-enterprise-x__client_360_flows_pipeline_by_stage",
           "widget_id": "client_360_flows_pipeline_by_stage",
           "fields": [
             "change",
@@ -1123,7 +1123,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__client_360_flows_subscriptions_and_redemptions",
+          "name": "stark-enterprise-x__client_360_flows_subscriptions_and_redemptions",
           "widget_id": "client_360_flows_subscriptions_and_redemptions",
           "fields": [
             "change",
@@ -1186,14 +1186,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__client_360_meeting_prep_approved_talking_points",
+          "name": "stark-enterprise-x__client_360_meeting_prep_approved_talking_points",
           "widget_id": "client_360_meeting_prep_approved_talking_points",
           "fields": [],
           "path": "/client_360_meeting_prep_approved_talking_points",
           "payload": "client_360_meeting_prep_approved_talking_points: Approved Talking Points summarizes the Client & IR workflow for YTD. The synthetic score reading is 29.91, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__client_360_meeting_prep_meeting_agenda",
+          "name": "stark-enterprise-x__client_360_meeting_prep_meeting_agenda",
           "widget_id": "client_360_meeting_prep_meeting_agenda",
           "fields": [
             "change",
@@ -1277,7 +1277,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__client_360_meeting_prep_open_requests",
+          "name": "stark-enterprise-x__client_360_meeting_prep_open_requests",
           "widget_id": "client_360_meeting_prep_open_requests",
           "fields": [
             "change",
@@ -1326,7 +1326,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__client_360_meeting_prep_relationship_metrics",
+          "name": "stark-enterprise-x__client_360_meeting_prep_relationship_metrics",
           "widget_id": "client_360_meeting_prep_relationship_metrics",
           "fields": [
             "change",
@@ -1348,14 +1348,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__client_360_overview_workflow_overview",
+          "name": "stark-enterprise-x__client_360_overview_workflow_overview",
           "widget_id": "client_360_overview_workflow_overview",
           "fields": [],
           "path": "/client_360_overview_workflow_overview",
           "payload": "client_360_overview_workflow_overview: Workflow Overview summarizes the Client & IR workflow for YTD. The synthetic score reading is 70.36, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__client_360_portfolio_view_client_portfolio_summary",
+          "name": "stark-enterprise-x__client_360_portfolio_view_client_portfolio_summary",
           "widget_id": "client_360_portfolio_view_client_portfolio_summary",
           "fields": [
             "change",
@@ -1377,7 +1377,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__client_360_portfolio_view_client_returns",
+          "name": "stark-enterprise-x__client_360_portfolio_view_client_returns",
           "widget_id": "client_360_portfolio_view_client_returns",
           "fields": [
             "change",
@@ -1448,7 +1448,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__client_360_portfolio_view_exposure_summary",
+          "name": "stark-enterprise-x__client_360_portfolio_view_exposure_summary",
           "widget_id": "client_360_portfolio_view_exposure_summary",
           "fields": [
             "change",
@@ -1511,7 +1511,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_alerts_alert_trend",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_alerts_alert_trend",
           "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
           "fields": [
             "alert_count",
@@ -1574,7 +1574,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_alerts_open_alert_metrics",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_alerts_open_alert_metrics",
           "widget_id": "compliance_surveillance_hub_alerts_open_alert_metrics",
           "fields": [
             "change",
@@ -1596,7 +1596,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_alerts_surveillance_alerts",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_alerts_surveillance_alerts",
           "widget_id": "compliance_surveillance_hub_alerts_surveillance_alerts",
           "fields": [
             "alert_count",
@@ -1680,7 +1680,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_audit_access_and_export_logs",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_audit_access_and_export_logs",
           "widget_id": "compliance_surveillance_hub_audit_access_and_export_logs",
           "fields": [
             "change",
@@ -1750,7 +1750,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_audit_investigation_evidence",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_audit_investigation_evidence",
           "widget_id": "compliance_surveillance_hub_audit_investigation_evidence",
           "fields": [
             "change",
@@ -1799,14 +1799,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_audit_investigation_notes",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_audit_investigation_notes",
           "widget_id": "compliance_surveillance_hub_audit_investigation_notes",
           "fields": [],
           "path": "/compliance_surveillance_hub_audit_investigation_notes",
           "payload": "compliance_surveillance_hub_audit_investigation_notes: Investigation Notes summarizes the Compliance workflow for YTD. The synthetic score reading is 76.97, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_audit_surveillance_alerts",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_audit_surveillance_alerts",
           "widget_id": "compliance_surveillance_hub_audit_surveillance_alerts",
           "fields": [
             "alert_count",
@@ -1890,14 +1890,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_overview_workflow_overview",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_overview_workflow_overview",
           "widget_id": "compliance_surveillance_hub_overview_workflow_overview",
           "fields": [],
           "path": "/compliance_surveillance_hub_overview_workflow_overview",
           "payload": "compliance_surveillance_hub_overview_workflow_overview: Workflow Overview summarizes the Compliance workflow for YTD. The synthetic score reading is 1.38, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_personal_trading_access_and_export_logs",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_personal_trading_access_and_export_logs",
           "widget_id": "compliance_surveillance_hub_personal_trading_access_and_export_logs",
           "fields": [
             "change",
@@ -1953,7 +1953,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_personal_trading_employee_trades",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_personal_trading_employee_trades",
           "widget_id": "compliance_surveillance_hub_personal_trading_employee_trades",
           "fields": [
             "change",
@@ -2016,7 +2016,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_personal_trading_policy_breaches",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_personal_trading_policy_breaches",
           "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
           "fields": [
             "breach_count",
@@ -2072,7 +2072,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_personal_trading_pre_clearance_queue",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_personal_trading_pre_clearance_queue",
           "widget_id": "compliance_surveillance_hub_personal_trading_pre_clearance_queue",
           "fields": [
             "change",
@@ -2156,7 +2156,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_restricted_list_issuer_status_mix",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_restricted_list_issuer_status_mix",
           "widget_id": "compliance_surveillance_hub_restricted_list_issuer_status_mix",
           "fields": [
             "change",
@@ -2212,7 +2212,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_restricted_list_restricted_alert_trend",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_restricted_list_restricted_alert_trend",
           "widget_id": "compliance_surveillance_hub_restricted_list_restricted_alert_trend",
           "fields": [
             "alert_count",
@@ -2268,7 +2268,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_restricted_list_restricted_and_watch_list",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_restricted_list_restricted_and_watch_list",
           "widget_id": "compliance_surveillance_hub_restricted_list_restricted_and_watch_list",
           "fields": [
             "change",
@@ -2317,7 +2317,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__compliance_surveillance_hub_restricted_list_restricted_list_changes",
+          "name": "stark-enterprise-x__compliance_surveillance_hub_restricted_list_restricted_list_changes",
           "widget_id": "compliance_surveillance_hub_restricted_list_restricted_list_changes",
           "fields": [
             "change",
@@ -2394,7 +2394,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__corporate_access_meeting_notes_claims_evidence_and_sign_off_history",
+          "name": "stark-enterprise-x__corporate_access_meeting_notes_claims_evidence_and_sign_off_history",
           "widget_id": "corporate_access_meeting_notes_claims_evidence_and_sign_off_history",
           "fields": [
             "change",
@@ -2450,7 +2450,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__corporate_access_meeting_notes_claims_management_claims_tracker",
+          "name": "stark-enterprise-x__corporate_access_meeting_notes_claims_management_claims_tracker",
           "widget_id": "corporate_access_meeting_notes_claims_management_claims_tracker",
           "fields": [
             "change",
@@ -2499,7 +2499,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__corporate_access_meeting_notes_claims_thesis_change_log",
+          "name": "stark-enterprise-x__corporate_access_meeting_notes_claims_thesis_change_log",
           "widget_id": "corporate_access_meeting_notes_claims_thesis_change_log",
           "fields": [
             "change",
@@ -2548,7 +2548,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__corporate_access_meeting_notes_compliance_compliance_follow_ups",
+          "name": "stark-enterprise-x__corporate_access_meeting_notes_compliance_compliance_follow_ups",
           "widget_id": "corporate_access_meeting_notes_compliance_compliance_follow_ups",
           "fields": [
             "change",
@@ -2611,7 +2611,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__corporate_access_meeting_notes_compliance_mnpi_attestation_status",
+          "name": "stark-enterprise-x__corporate_access_meeting_notes_compliance_mnpi_attestation_status",
           "widget_id": "corporate_access_meeting_notes_compliance_mnpi_attestation_status",
           "fields": [
             "change",
@@ -2695,7 +2695,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__corporate_access_meeting_notes_compliance_restricted_tags",
+          "name": "stark-enterprise-x__corporate_access_meeting_notes_compliance_restricted_tags",
           "widget_id": "corporate_access_meeting_notes_compliance_restricted_tags",
           "fields": [
             "change",
@@ -2758,7 +2758,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__corporate_access_meeting_notes_compliance_wall_crossings",
+          "name": "stark-enterprise-x__corporate_access_meeting_notes_compliance_wall_crossings",
           "widget_id": "corporate_access_meeting_notes_compliance_wall_crossings",
           "fields": [
             "change",
@@ -2814,7 +2814,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__corporate_access_meeting_notes_meetings_expert_calls",
+          "name": "stark-enterprise-x__corporate_access_meeting_notes_meetings_expert_calls",
           "widget_id": "corporate_access_meeting_notes_meetings_expert_calls",
           "fields": [
             "change",
@@ -2877,7 +2877,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__corporate_access_meeting_notes_meetings_meeting_calendar",
+          "name": "stark-enterprise-x__corporate_access_meeting_notes_meetings_meeting_calendar",
           "widget_id": "corporate_access_meeting_notes_meetings_meeting_calendar",
           "fields": [
             "change",
@@ -2947,7 +2947,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__corporate_access_meeting_notes_meetings_upcoming_access_metrics",
+          "name": "stark-enterprise-x__corporate_access_meeting_notes_meetings_upcoming_access_metrics",
           "widget_id": "corporate_access_meeting_notes_meetings_upcoming_access_metrics",
           "fields": [
             "change",
@@ -2969,7 +2969,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__corporate_access_meeting_notes_notes_follow_ups",
+          "name": "stark-enterprise-x__corporate_access_meeting_notes_notes_follow_ups",
           "widget_id": "corporate_access_meeting_notes_notes_follow_ups",
           "fields": [
             "change",
@@ -3025,7 +3025,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__corporate_access_meeting_notes_notes_meeting_notes_index",
+          "name": "stark-enterprise-x__corporate_access_meeting_notes_notes_meeting_notes_index",
           "widget_id": "corporate_access_meeting_notes_notes_meeting_notes_index",
           "fields": [
             "change",
@@ -3074,7 +3074,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__corporate_access_meeting_notes_notes_tagged_topics",
+          "name": "stark-enterprise-x__corporate_access_meeting_notes_notes_tagged_topics",
           "widget_id": "corporate_access_meeting_notes_notes_tagged_topics",
           "fields": [
             "change",
@@ -3144,14 +3144,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__corporate_access_meeting_notes_overview_workflow_overview",
+          "name": "stark-enterprise-x__corporate_access_meeting_notes_overview_workflow_overview",
           "widget_id": "corporate_access_meeting_notes_overview_workflow_overview",
           "fields": [],
           "path": "/corporate_access_meeting_notes_overview_workflow_overview",
           "payload": "corporate_access_meeting_notes_overview_workflow_overview: Workflow Overview summarizes the Research workflow for YTD. The synthetic score reading is 82.72, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__crypto_research_dashboard_derivatives_crypto_volatility_surface",
+          "name": "stark-enterprise-x__crypto_research_dashboard_derivatives_crypto_volatility_surface",
           "widget_id": "crypto_research_dashboard_derivatives_crypto_volatility_surface",
           "fields": [
             "date",
@@ -3209,7 +3209,7 @@
           }
         },
         {
-          "name": "stark-enterprise__crypto_research_dashboard_derivatives_funding_and_basis",
+          "name": "stark-enterprise-x__crypto_research_dashboard_derivatives_funding_and_basis",
           "widget_id": "crypto_research_dashboard_derivatives_funding_and_basis",
           "fields": [
             "change",
@@ -3280,7 +3280,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__crypto_research_dashboard_derivatives_liquidation_heatmap",
+          "name": "stark-enterprise-x__crypto_research_dashboard_derivatives_liquidation_heatmap",
           "widget_id": "crypto_research_dashboard_derivatives_liquidation_heatmap",
           "fields": [
             "date",
@@ -3338,7 +3338,7 @@
           }
         },
         {
-          "name": "stark-enterprise__crypto_research_dashboard_market_crypto_market_metrics",
+          "name": "stark-enterprise-x__crypto_research_dashboard_market_crypto_market_metrics",
           "widget_id": "crypto_research_dashboard_market_crypto_market_metrics",
           "fields": [
             "change",
@@ -3370,7 +3370,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__crypto_research_dashboard_market_live_crypto_tape",
+          "name": "stark-enterprise-x__crypto_research_dashboard_market_live_crypto_tape",
           "widget_id": "crypto_research_dashboard_market_live_crypto_tape",
           "fields": [
             "change",
@@ -3454,7 +3454,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__crypto_research_dashboard_market_price_and_volume",
+          "name": "stark-enterprise-x__crypto_research_dashboard_market_price_and_volume",
           "widget_id": "crypto_research_dashboard_market_price_and_volume",
           "fields": [
             "change",
@@ -3517,7 +3517,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__crypto_research_dashboard_on_chain_on_chain_activity",
+          "name": "stark-enterprise-x__crypto_research_dashboard_on_chain_on_chain_activity",
           "widget_id": "crypto_research_dashboard_on_chain_on_chain_activity",
           "fields": [
             "change",
@@ -3601,7 +3601,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__crypto_research_dashboard_on_chain_protocol_flow_sankey",
+          "name": "stark-enterprise-x__crypto_research_dashboard_on_chain_protocol_flow_sankey",
           "widget_id": "crypto_research_dashboard_on_chain_protocol_flow_sankey",
           "fields": [
             "date",
@@ -3651,7 +3651,7 @@
           }
         },
         {
-          "name": "stark-enterprise__crypto_research_dashboard_on_chain_tvl_trend",
+          "name": "stark-enterprise-x__crypto_research_dashboard_on_chain_tvl_trend",
           "widget_id": "crypto_research_dashboard_on_chain_tvl_trend",
           "fields": [
             "change",
@@ -3721,14 +3721,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__crypto_research_dashboard_overview_workflow_overview",
+          "name": "stark-enterprise-x__crypto_research_dashboard_overview_workflow_overview",
           "widget_id": "crypto_research_dashboard_overview_workflow_overview",
           "fields": [],
           "path": "/crypto_research_dashboard_overview_workflow_overview",
           "payload": "crypto_research_dashboard_overview_workflow_overview: Workflow Overview summarizes the Digital Assets workflow for YTD. The synthetic score reading is 23.05, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__crypto_research_dashboard_research_crypto_research_pdfs",
+          "name": "stark-enterprise-x__crypto_research_dashboard_research_crypto_research_pdfs",
           "widget_id": "crypto_research_dashboard_research_crypto_research_pdfs",
           "fields": [
             "change",
@@ -3791,7 +3791,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__crypto_research_dashboard_research_funding_and_basis",
+          "name": "stark-enterprise-x__crypto_research_dashboard_research_funding_and_basis",
           "widget_id": "crypto_research_dashboard_research_funding_and_basis",
           "fields": [
             "change",
@@ -3886,7 +3886,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__crypto_research_dashboard_research_token_risk_checklist",
+          "name": "stark-enterprise-x__crypto_research_dashboard_research_token_risk_checklist",
           "widget_id": "crypto_research_dashboard_research_token_risk_checklist",
           "fields": [
             "change",
@@ -3956,14 +3956,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__crypto_research_dashboard_research_token_thesis",
+          "name": "stark-enterprise-x__crypto_research_dashboard_research_token_thesis",
           "widget_id": "crypto_research_dashboard_research_token_thesis",
           "fields": [],
           "path": "/crypto_research_dashboard_research_token_thesis",
           "payload": "crypto_research_dashboard_research_token_thesis: Token Thesis summarizes the Digital Assets workflow for YTD. The synthetic score reading is 83.84, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_calendar_catalyst_calendar",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_calendar_catalyst_calendar",
           "widget_id": "earnings_estimates_monitor_calendar_catalyst_calendar",
           "fields": [
             "change",
@@ -4012,7 +4012,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_calendar_surprise_history",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_calendar_surprise_history",
           "widget_id": "earnings_estimates_monitor_calendar_surprise_history",
           "fields": [
             "change",
@@ -4096,7 +4096,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_calendar_upcoming_earnings",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_calendar_upcoming_earnings",
           "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
           "fields": [
             "change",
@@ -4159,7 +4159,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_estimates_consensus_revisions",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_estimates_consensus_revisions",
           "widget_id": "earnings_estimates_monitor_estimates_consensus_revisions",
           "fields": [
             "change",
@@ -4236,7 +4236,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_estimates_estimate_revision_breadth",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_estimates_estimate_revision_breadth",
           "widget_id": "earnings_estimates_monitor_estimates_estimate_revision_breadth",
           "fields": [
             "change",
@@ -4306,7 +4306,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_estimates_internal_vs_street_bridge",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_estimates_internal_vs_street_bridge",
           "widget_id": "earnings_estimates_monitor_estimates_internal_vs_street_bridge",
           "fields": [
             "change",
@@ -4390,7 +4390,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_estimates_rating_and_target_changes",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_estimates_rating_and_target_changes",
           "widget_id": "earnings_estimates_monitor_estimates_rating_and_target_changes",
           "fields": [
             "change",
@@ -4446,14 +4446,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_overview_workflow_overview",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_overview_workflow_overview",
           "widget_id": "earnings_estimates_monitor_overview_workflow_overview",
           "fields": [],
           "path": "/earnings_estimates_monitor_overview_workflow_overview",
           "payload": "earnings_estimates_monitor_overview_workflow_overview: Workflow Overview summarizes the Research workflow for YTD. The synthetic score reading is 65.94, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_post_earnings_post_earnings_checklist",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_post_earnings_post_earnings_checklist",
           "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist",
           "fields": [
             "change",
@@ -4509,7 +4509,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_post_earnings_price_reaction",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_post_earnings_price_reaction",
           "widget_id": "earnings_estimates_monitor_post_earnings_price_reaction",
           "fields": [
             "change",
@@ -4579,7 +4579,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_post_earnings_rating_and_target_changes",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_post_earnings_rating_and_target_changes",
           "widget_id": "earnings_estimates_monitor_post_earnings_rating_and_target_changes",
           "fields": [
             "change",
@@ -4663,7 +4663,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_post_earnings_thesis_change_log",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_post_earnings_thesis_change_log",
           "widget_id": "earnings_estimates_monitor_post_earnings_thesis_change_log",
           "fields": [
             "change",
@@ -4740,7 +4740,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_transcript_management_tone",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_transcript_management_tone",
           "widget_id": "earnings_estimates_monitor_transcript_management_tone",
           "fields": [
             "change",
@@ -4789,14 +4789,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_transcript_q_a_highlights",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_transcript_q_a_highlights",
           "widget_id": "earnings_estimates_monitor_transcript_q_a_highlights",
           "fields": [],
           "path": "/earnings_estimates_monitor_transcript_q_a_highlights",
           "payload": "earnings_estimates_monitor_transcript_q_a_highlights: Q&A Highlights summarizes the Research workflow for YTD. The synthetic score reading is 8.47, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__earnings_estimates_monitor_transcript_transcript_theme_extraction",
+          "name": "stark-enterprise-x__earnings_estimates_monitor_transcript_transcript_theme_extraction",
           "widget_id": "earnings_estimates_monitor_transcript_transcript_theme_extraction",
           "fields": [
             "change",
@@ -4845,7 +4845,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_company_company_tear_sheet",
+          "name": "stark-enterprise-x__equity_research_workbench_company_company_tear_sheet",
           "widget_id": "equity_research_workbench_company_company_tear_sheet",
           "fields": [
             "change",
@@ -4872,7 +4872,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_company_consensus_revisions",
+          "name": "stark-enterprise-x__equity_research_workbench_company_consensus_revisions",
           "widget_id": "equity_research_workbench_company_consensus_revisions",
           "fields": [
             "change",
@@ -4943,7 +4943,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_company_fundamentals_trend",
+          "name": "stark-enterprise-x__equity_research_workbench_company_fundamentals_trend",
           "widget_id": "equity_research_workbench_company_fundamentals_trend",
           "fields": [
             "change",
@@ -5022,7 +5022,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_company_ownership_snapshot",
+          "name": "stark-enterprise-x__equity_research_workbench_company_ownership_snapshot",
           "widget_id": "equity_research_workbench_company_ownership_snapshot",
           "fields": [
             "change",
@@ -5077,7 +5077,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_coverage_coverage_universe",
+          "name": "stark-enterprise-x__equity_research_workbench_coverage_coverage_universe",
           "widget_id": "equity_research_workbench_coverage_coverage_universe",
           "fields": [
             "change",
@@ -5147,7 +5147,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_coverage_price_target_fan_chart",
+          "name": "stark-enterprise-x__equity_research_workbench_coverage_price_target_fan_chart",
           "widget_id": "equity_research_workbench_coverage_price_target_fan_chart",
           "fields": [
             "date",
@@ -5197,7 +5197,7 @@
           }
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_coverage_price_target_history",
+          "name": "stark-enterprise-x__equity_research_workbench_coverage_price_target_history",
           "widget_id": "equity_research_workbench_coverage_price_target_history",
           "fields": [
             "change",
@@ -5246,7 +5246,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_coverage_price_target_upside",
+          "name": "stark-enterprise-x__equity_research_workbench_coverage_price_target_upside",
           "widget_id": "equity_research_workbench_coverage_price_target_upside",
           "fields": [
             "change",
@@ -5316,7 +5316,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_coverage_recommendation_mix",
+          "name": "stark-enterprise-x__equity_research_workbench_coverage_recommendation_mix",
           "widget_id": "equity_research_workbench_coverage_recommendation_mix",
           "fields": [
             "change",
@@ -5372,21 +5372,21 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_overview_workflow_overview",
+          "name": "stark-enterprise-x__equity_research_workbench_overview_workflow_overview",
           "widget_id": "equity_research_workbench_overview_workflow_overview",
           "fields": [],
           "path": "/equity_research_workbench_overview_workflow_overview",
           "payload": "equity_research_workbench_overview_workflow_overview: Workflow Overview summarizes the Portfolio workflow for YTD. The synthetic score reading is 35.04, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_thesis_analyst_thesis_note",
+          "name": "stark-enterprise-x__equity_research_workbench_thesis_analyst_thesis_note",
           "widget_id": "equity_research_workbench_thesis_analyst_thesis_note",
           "fields": [],
           "path": "/equity_research_workbench_thesis_analyst_thesis_note",
           "payload": "equity_research_workbench_thesis_analyst_thesis_note: Analyst Thesis Note summarizes the Research workflow for YTD. The synthetic score reading is 25.34, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_thesis_bull_base_bear",
+          "name": "stark-enterprise-x__equity_research_workbench_thesis_bull_base_bear",
           "widget_id": "equity_research_workbench_thesis_bull_base_bear",
           "fields": [
             "change",
@@ -5470,7 +5470,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_thesis_catalysts_and_risks",
+          "name": "stark-enterprise-x__equity_research_workbench_thesis_catalysts_and_risks",
           "widget_id": "equity_research_workbench_thesis_catalysts_and_risks",
           "fields": [
             "change",
@@ -5547,7 +5547,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_thesis_draft_research_review",
+          "name": "stark-enterprise-x__equity_research_workbench_thesis_draft_research_review",
           "widget_id": "equity_research_workbench_thesis_draft_research_review",
           "fields": [
             "change",
@@ -5610,7 +5610,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_thesis_sell_side_research_pdfs",
+          "name": "stark-enterprise-x__equity_research_workbench_thesis_sell_side_research_pdfs",
           "widget_id": "equity_research_workbench_thesis_sell_side_research_pdfs",
           "fields": [
             "change",
@@ -5680,7 +5680,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_valuation_comps_table",
+          "name": "stark-enterprise-x__equity_research_workbench_valuation_comps_table",
           "widget_id": "equity_research_workbench_valuation_comps_table",
           "fields": [
             "change",
@@ -5757,7 +5757,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_valuation_dcf_sensitivity",
+          "name": "stark-enterprise-x__equity_research_workbench_valuation_dcf_sensitivity",
           "widget_id": "equity_research_workbench_valuation_dcf_sensitivity",
           "fields": [
             "date",
@@ -5811,7 +5811,7 @@
           }
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_valuation_football_field",
+          "name": "stark-enterprise-x__equity_research_workbench_valuation_football_field",
           "widget_id": "equity_research_workbench_valuation_football_field",
           "fields": [
             "change",
@@ -5895,7 +5895,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_valuation_price_target_upside",
+          "name": "stark-enterprise-x__equity_research_workbench_valuation_price_target_upside",
           "widget_id": "equity_research_workbench_valuation_price_target_upside",
           "fields": [
             "change",
@@ -5958,7 +5958,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__equity_research_workbench_valuation_valuation_assumption_log",
+          "name": "stark-enterprise-x__equity_research_workbench_valuation_valuation_assumption_log",
           "widget_id": "equity_research_workbench_valuation_valuation_assumption_log",
           "fields": [
             "change",
@@ -6028,7 +6028,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__execution_desk_blotter_live_orders",
+          "name": "stark-enterprise-x__execution_desk_blotter_live_orders",
           "widget_id": "execution_desk_blotter_live_orders",
           "fields": [
             "change",
@@ -6105,7 +6105,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__execution_desk_blotter_order_risk_queue",
+          "name": "stark-enterprise-x__execution_desk_blotter_order_risk_queue",
           "widget_id": "execution_desk_blotter_order_risk_queue",
           "fields": [
             "change",
@@ -6175,7 +6175,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__execution_desk_blotter_order_status_metrics",
+          "name": "stark-enterprise-x__execution_desk_blotter_order_status_metrics",
           "widget_id": "execution_desk_blotter_order_status_metrics",
           "fields": [
             "change",
@@ -6197,7 +6197,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__execution_desk_blotter_rejected_orders",
+          "name": "stark-enterprise-x__execution_desk_blotter_rejected_orders",
           "widget_id": "execution_desk_blotter_rejected_orders",
           "fields": [
             "change",
@@ -6274,7 +6274,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__execution_desk_exceptions_rejected_orders",
+          "name": "stark-enterprise-x__execution_desk_exceptions_rejected_orders",
           "widget_id": "execution_desk_exceptions_rejected_orders",
           "fields": [
             "change",
@@ -6344,7 +6344,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__execution_desk_exceptions_restricted_list_checks",
+          "name": "stark-enterprise-x__execution_desk_exceptions_restricted_list_checks",
           "widget_id": "execution_desk_exceptions_restricted_list_checks",
           "fields": [
             "change",
@@ -6414,7 +6414,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__execution_desk_exceptions_surveillance_alerts",
+          "name": "stark-enterprise-x__execution_desk_exceptions_surveillance_alerts",
           "widget_id": "execution_desk_exceptions_surveillance_alerts",
           "fields": [
             "alert_count",
@@ -6484,7 +6484,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__execution_desk_fills_broker_scorecard",
+          "name": "stark-enterprise-x__execution_desk_fills_broker_scorecard",
           "widget_id": "execution_desk_fills_broker_scorecard",
           "fields": [
             "broker",
@@ -6555,7 +6555,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__execution_desk_fills_fills_table",
+          "name": "stark-enterprise-x__execution_desk_fills_fills_table",
           "widget_id": "execution_desk_fills_fills_table",
           "fields": [
             "broker",
@@ -6610,7 +6610,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__execution_desk_fills_vwap_and_arrival_slippage",
+          "name": "stark-enterprise-x__execution_desk_fills_vwap_and_arrival_slippage",
           "widget_id": "execution_desk_fills_vwap_and_arrival_slippage",
           "fields": [
             "broker",
@@ -6689,14 +6689,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__execution_desk_market_context_market_hours",
+          "name": "stark-enterprise-x__execution_desk_market_context_market_hours",
           "widget_id": "execution_desk_market_context_market_hours",
           "fields": [],
           "path": "/execution_desk_market_context_market_hours",
           "payload": "execution_desk_market_context_market_hours: Market Hours summarizes the Trading workflow for YTD. The synthetic score reading is 4.44, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__execution_desk_market_context_order_book_depth",
+          "name": "stark-enterprise-x__execution_desk_market_context_order_book_depth",
           "widget_id": "execution_desk_market_context_order_book_depth",
           "fields": [
             "date",
@@ -6746,7 +6746,7 @@
           }
         },
         {
-          "name": "stark-enterprise__execution_desk_market_context_price_and_volume",
+          "name": "stark-enterprise-x__execution_desk_market_context_price_and_volume",
           "widget_id": "execution_desk_market_context_price_and_volume",
           "fields": [
             "change",
@@ -6830,7 +6830,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__execution_desk_market_context_spread_and_depth",
+          "name": "stark-enterprise-x__execution_desk_market_context_spread_and_depth",
           "widget_id": "execution_desk_market_context_spread_and_depth",
           "fields": [
             "change",
@@ -6886,14 +6886,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__execution_desk_overview_workflow_overview",
+          "name": "stark-enterprise-x__execution_desk_overview_workflow_overview",
           "widget_id": "execution_desk_overview_workflow_overview",
           "fields": [],
           "path": "/execution_desk_overview_workflow_overview",
           "payload": "execution_desk_overview_workflow_overview: Workflow Overview summarizes the Trading workflow for YTD. The synthetic score reading is 10.06, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__executive_investment_dashboard_firm_overview_aum_by_strategy",
+          "name": "stark-enterprise-x__executive_investment_dashboard_firm_overview_aum_by_strategy",
           "widget_id": "executive_investment_dashboard_firm_overview_aum_by_strategy",
           "fields": [
             "aum_usd",
@@ -6972,7 +6972,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__executive_investment_dashboard_firm_overview_firm_snapshot",
+          "name": "stark-enterprise-x__executive_investment_dashboard_firm_overview_firm_snapshot",
           "widget_id": "executive_investment_dashboard_firm_overview_firm_snapshot",
           "fields": [
             "change",
@@ -7004,7 +7004,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__executive_investment_dashboard_firm_overview_net_flows",
+          "name": "stark-enterprise-x__executive_investment_dashboard_firm_overview_net_flows",
           "widget_id": "executive_investment_dashboard_firm_overview_net_flows",
           "fields": [
             "change",
@@ -7060,7 +7060,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__executive_investment_dashboard_issues_decision_log",
+          "name": "stark-enterprise-x__executive_investment_dashboard_issues_decision_log",
           "widget_id": "executive_investment_dashboard_issues_decision_log",
           "fields": [
             "change",
@@ -7123,14 +7123,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__executive_investment_dashboard_issues_executive_briefing_note",
+          "name": "stark-enterprise-x__executive_investment_dashboard_issues_executive_briefing_note",
           "widget_id": "executive_investment_dashboard_issues_executive_briefing_note",
           "fields": [],
           "path": "/executive_investment_dashboard_issues_executive_briefing_note",
           "payload": "executive_investment_dashboard_issues_executive_briefing_note: Executive Briefing Note summarizes the Portfolio workflow for YTD. The synthetic score reading is 19.9, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__executive_investment_dashboard_issues_major_open_issues",
+          "name": "stark-enterprise-x__executive_investment_dashboard_issues_major_open_issues",
           "widget_id": "executive_investment_dashboard_issues_major_open_issues",
           "fields": [
             "change",
@@ -7193,14 +7193,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__executive_investment_dashboard_overview_workflow_overview",
+          "name": "stark-enterprise-x__executive_investment_dashboard_overview_workflow_overview",
           "widget_id": "executive_investment_dashboard_overview_workflow_overview",
           "fields": [],
           "path": "/executive_investment_dashboard_overview_workflow_overview",
           "payload": "executive_investment_dashboard_overview_workflow_overview: Workflow Overview summarizes the Portfolio workflow for YTD. The synthetic score reading is 66.69, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__executive_investment_dashboard_performance_attribution_summary",
+          "name": "stark-enterprise-x__executive_investment_dashboard_performance_attribution_summary",
           "widget_id": "executive_investment_dashboard_performance_attribution_summary",
           "fields": [
             "change",
@@ -7256,7 +7256,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__executive_investment_dashboard_performance_drawdown_summary",
+          "name": "stark-enterprise-x__executive_investment_dashboard_performance_drawdown_summary",
           "widget_id": "executive_investment_dashboard_performance_drawdown_summary",
           "fields": [
             "change",
@@ -7312,7 +7312,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__executive_investment_dashboard_performance_returns_by_strategy",
+          "name": "stark-enterprise-x__executive_investment_dashboard_performance_returns_by_strategy",
           "widget_id": "executive_investment_dashboard_performance_returns_by_strategy",
           "fields": [
             "change",
@@ -7399,7 +7399,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__executive_investment_dashboard_risk_limit_utilization",
+          "name": "stark-enterprise-x__executive_investment_dashboard_risk_limit_utilization",
           "widget_id": "executive_investment_dashboard_risk_limit_utilization",
           "fields": [
             "change",
@@ -7483,7 +7483,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__executive_investment_dashboard_risk_stress_loss_summary",
+          "name": "stark-enterprise-x__executive_investment_dashboard_risk_stress_loss_summary",
           "widget_id": "executive_investment_dashboard_risk_stress_loss_summary",
           "fields": [
             "change",
@@ -7560,7 +7560,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__executive_investment_dashboard_risk_top_risks",
+          "name": "stark-enterprise-x__executive_investment_dashboard_risk_top_risks",
           "widget_id": "executive_investment_dashboard_risk_top_risks",
           "fields": [
             "change",
@@ -7609,7 +7609,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__fund_operations_control_tower_corporate_actions_corporate_action_calendar",
+          "name": "stark-enterprise-x__fund_operations_control_tower_corporate_actions_corporate_action_calendar",
           "widget_id": "fund_operations_control_tower_corporate_actions_corporate_action_calendar",
           "fields": [
             "change",
@@ -7658,7 +7658,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__fund_operations_control_tower_corporate_actions_election_deadlines",
+          "name": "stark-enterprise-x__fund_operations_control_tower_corporate_actions_election_deadlines",
           "widget_id": "fund_operations_control_tower_corporate_actions_election_deadlines",
           "fields": [
             "change",
@@ -7742,7 +7742,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__fund_operations_control_tower_corporate_actions_election_exposure",
+          "name": "stark-enterprise-x__fund_operations_control_tower_corporate_actions_election_exposure",
           "widget_id": "fund_operations_control_tower_corporate_actions_election_exposure",
           "fields": [
             "change",
@@ -7798,7 +7798,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__fund_operations_control_tower_corporate_actions_vendor_price_differences",
+          "name": "stark-enterprise-x__fund_operations_control_tower_corporate_actions_vendor_price_differences",
           "widget_id": "fund_operations_control_tower_corporate_actions_vendor_price_differences",
           "fields": [
             "change",
@@ -7853,14 +7853,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__fund_operations_control_tower_overview_workflow_overview",
+          "name": "stark-enterprise-x__fund_operations_control_tower_overview_workflow_overview",
           "widget_id": "fund_operations_control_tower_overview_workflow_overview",
           "fields": [],
           "path": "/fund_operations_control_tower_overview_workflow_overview",
           "payload": "fund_operations_control_tower_overview_workflow_overview: Workflow Overview summarizes the Portfolio workflow for YTD. The synthetic score reading is 66.02, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__fund_operations_control_tower_pricing_nav_exceptions",
+          "name": "stark-enterprise-x__fund_operations_control_tower_pricing_nav_exceptions",
           "widget_id": "fund_operations_control_tower_pricing_nav_exceptions",
           "fields": [
             "change",
@@ -7944,7 +7944,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__fund_operations_control_tower_pricing_stale_prices",
+          "name": "stark-enterprise-x__fund_operations_control_tower_pricing_stale_prices",
           "widget_id": "fund_operations_control_tower_pricing_stale_prices",
           "fields": [
             "change",
@@ -8028,7 +8028,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__fund_operations_control_tower_pricing_vendor_price_differences",
+          "name": "stark-enterprise-x__fund_operations_control_tower_pricing_vendor_price_differences",
           "widget_id": "fund_operations_control_tower_pricing_vendor_price_differences",
           "fields": [
             "change",
@@ -8091,7 +8091,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__fund_operations_control_tower_recons_break_aging",
+          "name": "stark-enterprise-x__fund_operations_control_tower_recons_break_aging",
           "widget_id": "fund_operations_control_tower_recons_break_aging",
           "fields": [
             "change",
@@ -8147,7 +8147,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__fund_operations_control_tower_recons_close_checklist",
+          "name": "stark-enterprise-x__fund_operations_control_tower_recons_close_checklist",
           "widget_id": "fund_operations_control_tower_recons_close_checklist",
           "fields": [
             "change",
@@ -8203,7 +8203,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__fund_operations_control_tower_recons_custodian_breaks",
+          "name": "stark-enterprise-x__fund_operations_control_tower_recons_custodian_breaks",
           "widget_id": "fund_operations_control_tower_recons_custodian_breaks",
           "fields": [
             "change",
@@ -8259,7 +8259,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__fund_operations_control_tower_trade_lifecycle_confirms_and_allocations",
+          "name": "stark-enterprise-x__fund_operations_control_tower_trade_lifecycle_confirms_and_allocations",
           "widget_id": "fund_operations_control_tower_trade_lifecycle_confirms_and_allocations",
           "fields": [
             "change",
@@ -8343,7 +8343,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__fund_operations_control_tower_trade_lifecycle_failed_trades",
+          "name": "stark-enterprise-x__fund_operations_control_tower_trade_lifecycle_failed_trades",
           "widget_id": "fund_operations_control_tower_trade_lifecycle_failed_trades",
           "fields": [
             "change",
@@ -8370,7 +8370,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__fund_operations_control_tower_trade_lifecycle_settlement_exceptions",
+          "name": "stark-enterprise-x__fund_operations_control_tower_trade_lifecycle_settlement_exceptions",
           "widget_id": "fund_operations_control_tower_trade_lifecycle_settlement_exceptions",
           "fields": [
             "change",
@@ -8419,7 +8419,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_clinical_clinical_probability_funnel",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_clinical_clinical_probability_funnel",
           "widget_id": "healthcare_research_dashboard_clinical_clinical_probability_funnel",
           "fields": [
             "date",
@@ -8477,7 +8477,7 @@
           }
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_clinical_kol_meeting_notes",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_clinical_kol_meeting_notes",
           "widget_id": "healthcare_research_dashboard_clinical_kol_meeting_notes",
           "fields": [
             "change",
@@ -8533,7 +8533,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_clinical_regulatory_timeline",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_clinical_regulatory_timeline",
           "widget_id": "healthcare_research_dashboard_clinical_regulatory_timeline",
           "fields": [
             "change",
@@ -8610,7 +8610,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_clinical_trial_catalyst_calendar",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_clinical_trial_catalyst_calendar",
           "widget_id": "healthcare_research_dashboard_clinical_trial_catalyst_calendar",
           "fields": [
             "change",
@@ -8694,7 +8694,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_commercial_drug_revenue_bridge",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_commercial_drug_revenue_bridge",
           "widget_id": "healthcare_research_dashboard_commercial_drug_revenue_bridge",
           "fields": [
             "change",
@@ -8750,7 +8750,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_commercial_prescription_trend",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_commercial_prescription_trend",
           "widget_id": "healthcare_research_dashboard_commercial_prescription_trend",
           "fields": [
             "change",
@@ -8827,7 +8827,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_commercial_tam_scenarios",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_commercial_tam_scenarios",
           "widget_id": "healthcare_research_dashboard_commercial_tam_scenarios",
           "fields": [
             "change",
@@ -8883,7 +8883,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_coverage_healthcare_coverage_universe",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_coverage_healthcare_coverage_universe",
           "widget_id": "healthcare_research_dashboard_coverage_healthcare_coverage_universe",
           "fields": [
             "change",
@@ -8953,7 +8953,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_coverage_price_target_history",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_coverage_price_target_history",
           "widget_id": "healthcare_research_dashboard_coverage_price_target_history",
           "fields": [
             "change",
@@ -9023,7 +9023,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_coverage_recommendation_mix",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_coverage_recommendation_mix",
           "widget_id": "healthcare_research_dashboard_coverage_recommendation_mix",
           "fields": [
             "change",
@@ -9086,7 +9086,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_documents_clinical_trial_catalyst_calendar",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_documents_clinical_trial_catalyst_calendar",
           "widget_id": "healthcare_research_dashboard_documents_clinical_trial_catalyst_calendar",
           "fields": [
             "change",
@@ -9149,14 +9149,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_documents_healthcare_thesis_note",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_documents_healthcare_thesis_note",
           "widget_id": "healthcare_research_dashboard_documents_healthcare_thesis_note",
           "fields": [],
           "path": "/healthcare_research_dashboard_documents_healthcare_thesis_note",
           "payload": "healthcare_research_dashboard_documents_healthcare_thesis_note: Healthcare Thesis Note summarizes the Equity Research workflow for YTD. The synthetic score reading is 86.26, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_documents_research_document_checklist",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_documents_research_document_checklist",
           "widget_id": "healthcare_research_dashboard_documents_research_document_checklist",
           "fields": [
             "change",
@@ -9219,7 +9219,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_documents_sell_side_research_pdfs",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_documents_sell_side_research_pdfs",
           "widget_id": "healthcare_research_dashboard_documents_sell_side_research_pdfs",
           "fields": [
             "change",
@@ -9296,14 +9296,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__healthcare_research_dashboard_overview_workflow_overview",
+          "name": "stark-enterprise-x__healthcare_research_dashboard_overview_workflow_overview",
           "widget_id": "healthcare_research_dashboard_overview_workflow_overview",
           "fields": [],
           "path": "/healthcare_research_dashboard_overview_workflow_overview",
           "payload": "healthcare_research_dashboard_overview_workflow_overview: Workflow Overview summarizes the Equity Research workflow for YTD. The synthetic score reading is 66.14, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__liquidity_tca_workbench_brokers_broker_coverage_matrix",
+          "name": "stark-enterprise-x__liquidity_tca_workbench_brokers_broker_coverage_matrix",
           "widget_id": "liquidity_tca_workbench_brokers_broker_coverage_matrix",
           "fields": [
             "broker",
@@ -9352,7 +9352,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__liquidity_tca_workbench_brokers_broker_scorecard",
+          "name": "stark-enterprise-x__liquidity_tca_workbench_brokers_broker_scorecard",
           "widget_id": "liquidity_tca_workbench_brokers_broker_scorecard",
           "fields": [
             "broker",
@@ -9401,7 +9401,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__liquidity_tca_workbench_brokers_fill_quality_by_broker",
+          "name": "stark-enterprise-x__liquidity_tca_workbench_brokers_fill_quality_by_broker",
           "widget_id": "liquidity_tca_workbench_brokers_fill_quality_by_broker",
           "fields": [
             "broker",
@@ -9457,7 +9457,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__liquidity_tca_workbench_brokers_slippage_by_algo",
+          "name": "stark-enterprise-x__liquidity_tca_workbench_brokers_slippage_by_algo",
           "widget_id": "liquidity_tca_workbench_brokers_slippage_by_algo",
           "fields": [
             "broker",
@@ -9520,7 +9520,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__liquidity_tca_workbench_liquidity_adv_and_order_size",
+          "name": "stark-enterprise-x__liquidity_tca_workbench_liquidity_adv_and_order_size",
           "widget_id": "liquidity_tca_workbench_liquidity_adv_and_order_size",
           "fields": [
             "broker",
@@ -9575,7 +9575,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__liquidity_tca_workbench_liquidity_liquidity_buckets",
+          "name": "stark-enterprise-x__liquidity_tca_workbench_liquidity_liquidity_buckets",
           "widget_id": "liquidity_tca_workbench_liquidity_liquidity_buckets",
           "fields": [
             "broker",
@@ -9631,7 +9631,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__liquidity_tca_workbench_liquidity_volume_profile",
+          "name": "stark-enterprise-x__liquidity_tca_workbench_liquidity_volume_profile",
           "widget_id": "liquidity_tca_workbench_liquidity_volume_profile",
           "fields": [
             "broker",
@@ -9680,7 +9680,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__liquidity_tca_workbench_notes_broker_exception_follow_ups",
+          "name": "stark-enterprise-x__liquidity_tca_workbench_notes_broker_exception_follow_ups",
           "widget_id": "liquidity_tca_workbench_notes_broker_exception_follow_ups",
           "fields": [
             "broker",
@@ -9729,14 +9729,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__liquidity_tca_workbench_notes_execution_rationale",
+          "name": "stark-enterprise-x__liquidity_tca_workbench_notes_execution_rationale",
           "widget_id": "liquidity_tca_workbench_notes_execution_rationale",
           "fields": [],
           "path": "/liquidity_tca_workbench_notes_execution_rationale",
           "payload": "liquidity_tca_workbench_notes_execution_rationale: Execution Rationale summarizes the Trading workflow for YTD. The synthetic score reading is 37.74, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__liquidity_tca_workbench_notes_post_trade_review_queue",
+          "name": "stark-enterprise-x__liquidity_tca_workbench_notes_post_trade_review_queue",
           "widget_id": "liquidity_tca_workbench_notes_post_trade_review_queue",
           "fields": [
             "broker",
@@ -9785,14 +9785,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__liquidity_tca_workbench_overview_workflow_overview",
+          "name": "stark-enterprise-x__liquidity_tca_workbench_overview_workflow_overview",
           "widget_id": "liquidity_tca_workbench_overview_workflow_overview",
           "fields": [],
           "path": "/liquidity_tca_workbench_overview_workflow_overview",
           "payload": "liquidity_tca_workbench_overview_workflow_overview: Workflow Overview summarizes the Trading workflow for YTD. The synthetic score reading is 29.16, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__liquidity_tca_workbench_tca_implementation_shortfall",
+          "name": "stark-enterprise-x__liquidity_tca_workbench_tca_implementation_shortfall",
           "widget_id": "liquidity_tca_workbench_tca_implementation_shortfall",
           "fields": [
             "broker",
@@ -9862,7 +9862,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__liquidity_tca_workbench_tca_slippage_by_algo",
+          "name": "stark-enterprise-x__liquidity_tca_workbench_tca_slippage_by_algo",
           "widget_id": "liquidity_tca_workbench_tca_slippage_by_algo",
           "fields": [
             "broker",
@@ -9925,7 +9925,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__liquidity_tca_workbench_tca_venue_flow_sankey",
+          "name": "stark-enterprise-x__liquidity_tca_workbench_tca_venue_flow_sankey",
           "widget_id": "liquidity_tca_workbench_tca_venue_flow_sankey",
           "fields": [
             "date",
@@ -9971,14 +9971,14 @@
           }
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_evidence_case_summary",
+          "name": "stark-enterprise-x__mnpi_research_review_evidence_case_summary",
           "widget_id": "mnpi_research_review_evidence_case_summary",
           "fields": [],
           "path": "/mnpi_research_review_evidence_case_summary",
           "payload": "mnpi_research_review_evidence_case_summary: Case Summary summarizes the Compliance workflow for YTD. The synthetic score reading is 78.45, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_evidence_evidence_and_sign_off_history",
+          "name": "stark-enterprise-x__mnpi_research_review_evidence_evidence_and_sign_off_history",
           "widget_id": "mnpi_research_review_evidence_evidence_and_sign_off_history",
           "fields": [
             "change",
@@ -10027,7 +10027,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_evidence_price_target_approval",
+          "name": "stark-enterprise-x__mnpi_research_review_evidence_price_target_approval",
           "widget_id": "mnpi_research_review_evidence_price_target_approval",
           "fields": [
             "change",
@@ -10104,7 +10104,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_evidence_research_approval_evidence",
+          "name": "stark-enterprise-x__mnpi_research_review_evidence_research_approval_evidence",
           "widget_id": "mnpi_research_review_evidence_research_approval_evidence",
           "fields": [
             "change",
@@ -10167,7 +10167,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_meetings_attendee_coverage",
+          "name": "stark-enterprise-x__mnpi_research_review_meetings_attendee_coverage",
           "widget_id": "mnpi_research_review_meetings_attendee_coverage",
           "fields": [
             "change",
@@ -10237,7 +10237,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_meetings_attendee_review_queue",
+          "name": "stark-enterprise-x__mnpi_research_review_meetings_attendee_review_queue",
           "widget_id": "mnpi_research_review_meetings_attendee_review_queue",
           "fields": [
             "change",
@@ -10321,7 +10321,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_meetings_company_meeting_logs",
+          "name": "stark-enterprise-x__mnpi_research_review_meetings_company_meeting_logs",
           "widget_id": "mnpi_research_review_meetings_company_meeting_logs",
           "fields": [
             "change",
@@ -10398,7 +10398,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_meetings_mnpi_attestation_status",
+          "name": "stark-enterprise-x__mnpi_research_review_meetings_mnpi_attestation_status",
           "widget_id": "mnpi_research_review_meetings_mnpi_attestation_status",
           "fields": [
             "change",
@@ -10447,7 +10447,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_mnpi_log_expert_calls",
+          "name": "stark-enterprise-x__mnpi_research_review_mnpi_log_expert_calls",
           "widget_id": "mnpi_research_review_mnpi_log_expert_calls",
           "fields": [
             "change",
@@ -10510,7 +10510,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_mnpi_log_restricted_and_watch_list",
+          "name": "stark-enterprise-x__mnpi_research_review_mnpi_log_restricted_and_watch_list",
           "widget_id": "mnpi_research_review_mnpi_log_restricted_and_watch_list",
           "fields": [
             "change",
@@ -10594,7 +10594,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_mnpi_log_wall_crossings",
+          "name": "stark-enterprise-x__mnpi_research_review_mnpi_log_wall_crossings",
           "widget_id": "mnpi_research_review_mnpi_log_wall_crossings",
           "fields": [
             "change",
@@ -10650,14 +10650,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_overview_workflow_overview",
+          "name": "stark-enterprise-x__mnpi_research_review_overview_workflow_overview",
           "widget_id": "mnpi_research_review_overview_workflow_overview",
           "fields": [],
           "path": "/mnpi_research_review_overview_workflow_overview",
           "payload": "mnpi_research_review_overview_workflow_overview: Workflow Overview summarizes the Compliance workflow for YTD. The synthetic score reading is 57.47, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_research_draft_research_review",
+          "name": "stark-enterprise-x__mnpi_research_review_research_draft_research_review",
           "widget_id": "mnpi_research_review_research_draft_research_review",
           "fields": [
             "change",
@@ -10720,7 +10720,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_research_evidence_and_sign_off_history",
+          "name": "stark-enterprise-x__mnpi_research_review_research_evidence_and_sign_off_history",
           "widget_id": "mnpi_research_review_research_evidence_and_sign_off_history",
           "fields": [
             "change",
@@ -10769,7 +10769,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_research_price_target_approval",
+          "name": "stark-enterprise-x__mnpi_research_review_research_price_target_approval",
           "widget_id": "mnpi_research_review_research_price_target_approval",
           "fields": [
             "change",
@@ -10853,7 +10853,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__mnpi_research_review_research_reviewer_comments",
+          "name": "stark-enterprise-x__mnpi_research_review_research_reviewer_comments",
           "widget_id": "mnpi_research_review_research_reviewer_comments",
           "fields": [
             "change",
@@ -10916,7 +10916,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_cash_cash_break_aging",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_cash_cash_break_aging",
           "widget_id": "nav_fees_close_dashboard_cash_cash_break_aging",
           "fields": [
             "change",
@@ -10972,7 +10972,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_cash_cash_movements",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_cash_cash_movements",
           "widget_id": "nav_fees_close_dashboard_cash_cash_movements",
           "fields": [
             "change",
@@ -11042,7 +11042,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_cash_fx_cash_and_overdrafts",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_cash_fx_cash_and_overdrafts",
           "widget_id": "nav_fees_close_dashboard_cash_fx_cash_and_overdrafts",
           "fields": [
             "change",
@@ -11126,7 +11126,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_close_close_checklist",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_close_close_checklist",
           "widget_id": "nav_fees_close_dashboard_close_close_checklist",
           "fields": [
             "change",
@@ -11182,7 +11182,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_close_close_dependency_register",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_close_close_dependency_register",
           "widget_id": "nav_fees_close_dashboard_close_close_dependency_register",
           "fields": [
             "change",
@@ -11259,7 +11259,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_close_close_exceptions",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_close_close_exceptions",
           "widget_id": "nav_fees_close_dashboard_close_close_exceptions",
           "fields": [
             "change",
@@ -11343,14 +11343,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_close_close_notes",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_close_close_notes",
           "widget_id": "nav_fees_close_dashboard_close_close_notes",
           "fields": [],
           "path": "/nav_fees_close_dashboard_close_close_notes",
           "payload": "nav_fees_close_dashboard_close_close_notes: Close Notes summarizes the Operations workflow for YTD. The synthetic score reading is 5.29, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_close_nav_exceptions",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_close_nav_exceptions",
           "widget_id": "nav_fees_close_dashboard_close_nav_exceptions",
           "fields": [
             "change",
@@ -11434,7 +11434,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_fees_expense_ratio_metrics",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_fees_expense_ratio_metrics",
           "widget_id": "nav_fees_close_dashboard_fees_expense_ratio_metrics",
           "fields": [
             "change",
@@ -11456,7 +11456,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_fees_fee_accruals",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_fees_fee_accruals",
           "widget_id": "nav_fees_close_dashboard_fees_fee_accruals",
           "fields": [
             "change",
@@ -11519,7 +11519,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_fees_fee_run_rate",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_fees_fee_run_rate",
           "widget_id": "nav_fees_close_dashboard_fees_fee_run_rate",
           "fields": [
             "change",
@@ -11574,7 +11574,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_nav_close_checklist",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_nav_close_checklist",
           "widget_id": "nav_fees_close_dashboard_nav_close_checklist",
           "fields": [
             "change",
@@ -11623,7 +11623,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_nav_nav_bridge",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_nav_nav_bridge",
           "widget_id": "nav_fees_close_dashboard_nav_nav_bridge",
           "fields": [
             "date",
@@ -11673,7 +11673,7 @@
           }
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_nav_nav_exceptions",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_nav_nav_exceptions",
           "widget_id": "nav_fees_close_dashboard_nav_nav_exceptions",
           "fields": [
             "change",
@@ -11743,7 +11743,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_nav_nav_sign_off_tasks",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_nav_nav_sign_off_tasks",
           "widget_id": "nav_fees_close_dashboard_nav_nav_sign_off_tasks",
           "fields": [
             "change",
@@ -11820,14 +11820,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__nav_fees_close_dashboard_overview_workflow_overview",
+          "name": "stark-enterprise-x__nav_fees_close_dashboard_overview_workflow_overview",
           "widget_id": "nav_fees_close_dashboard_overview_workflow_overview",
           "fields": [],
           "path": "/nav_fees_close_dashboard_overview_workflow_overview",
           "payload": "nav_fees_close_dashboard_overview_workflow_overview: Workflow Overview summarizes the Operations workflow for YTD. The synthetic score reading is 77.8, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_actions_analyst_conviction",
+          "name": "stark-enterprise-x__portfolio_command_center_actions_analyst_conviction",
           "widget_id": "portfolio_command_center_actions_analyst_conviction",
           "fields": [
             "change",
@@ -11904,7 +11904,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_actions_approval_checklist",
+          "name": "stark-enterprise-x__portfolio_command_center_actions_approval_checklist",
           "widget_id": "portfolio_command_center_actions_approval_checklist",
           "fields": [
             "change",
@@ -11960,14 +11960,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_actions_pm_decision_notes",
+          "name": "stark-enterprise-x__portfolio_command_center_actions_pm_decision_notes",
           "widget_id": "portfolio_command_center_actions_pm_decision_notes",
           "fields": [],
           "path": "/portfolio_command_center_actions_pm_decision_notes",
           "payload": "portfolio_command_center_actions_pm_decision_notes: PM Decision Notes summarizes the Portfolio workflow for YTD. The synthetic score reading is 72.69, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_actions_trade_ideas",
+          "name": "stark-enterprise-x__portfolio_command_center_actions_trade_ideas",
           "widget_id": "portfolio_command_center_actions_trade_ideas",
           "fields": [
             "change",
@@ -12037,7 +12037,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_attribution_active_return_bridge",
+          "name": "stark-enterprise-x__portfolio_command_center_attribution_active_return_bridge",
           "widget_id": "portfolio_command_center_attribution_active_return_bridge",
           "fields": [
             "change",
@@ -12121,7 +12121,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_attribution_attribution_summary",
+          "name": "stark-enterprise-x__portfolio_command_center_attribution_attribution_summary",
           "widget_id": "portfolio_command_center_attribution_attribution_summary",
           "fields": [
             "change",
@@ -12177,7 +12177,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_attribution_benchmark_drift",
+          "name": "stark-enterprise-x__portfolio_command_center_attribution_benchmark_drift",
           "widget_id": "portfolio_command_center_attribution_benchmark_drift",
           "fields": [
             "change",
@@ -12226,7 +12226,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_attribution_brinson_attribution",
+          "name": "stark-enterprise-x__portfolio_command_center_attribution_brinson_attribution",
           "widget_id": "portfolio_command_center_attribution_brinson_attribution",
           "fields": [
             "date",
@@ -12272,7 +12272,7 @@
           }
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_attribution_factor_attribution",
+          "name": "stark-enterprise-x__portfolio_command_center_attribution_factor_attribution",
           "widget_id": "portfolio_command_center_attribution_factor_attribution",
           "fields": [
             "date",
@@ -12326,7 +12326,7 @@
           }
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_attribution_portfolio_metrics_sql",
+          "name": "stark-enterprise-x__portfolio_command_center_attribution_portfolio_metrics_sql",
           "widget_id": "portfolio_command_center_attribution_portfolio_metrics_sql",
           "fields": [
             "change",
@@ -12382,7 +12382,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_holdings_exposure_treemap",
+          "name": "stark-enterprise-x__portfolio_command_center_holdings_exposure_treemap",
           "widget_id": "portfolio_command_center_holdings_exposure_treemap",
           "fields": [
             "date",
@@ -12444,7 +12444,7 @@
           }
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_holdings_holdings_table",
+          "name": "stark-enterprise-x__portfolio_command_center_holdings_holdings_table",
           "widget_id": "portfolio_command_center_holdings_holdings_table",
           "fields": [
             "change",
@@ -12528,7 +12528,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_holdings_issuer_concentration",
+          "name": "stark-enterprise-x__portfolio_command_center_holdings_issuer_concentration",
           "widget_id": "portfolio_command_center_holdings_issuer_concentration",
           "fields": [
             "change",
@@ -12623,7 +12623,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_holdings_sector_exposure",
+          "name": "stark-enterprise-x__portfolio_command_center_holdings_sector_exposure",
           "widget_id": "portfolio_command_center_holdings_sector_exposure",
           "fields": [
             "change",
@@ -12693,7 +12693,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_holdings_slow_portfolio_marks",
+          "name": "stark-enterprise-x__portfolio_command_center_holdings_slow_portfolio_marks",
           "widget_id": "portfolio_command_center_holdings_slow_portfolio_marks",
           "fields": [
             "change",
@@ -12770,7 +12770,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_holdings_top_contributors_and_detractors",
+          "name": "stark-enterprise-x__portfolio_command_center_holdings_top_contributors_and_detractors",
           "widget_id": "portfolio_command_center_holdings_top_contributors_and_detractors",
           "fields": [
             "change",
@@ -12819,7 +12819,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_overview_limit_utilization",
+          "name": "stark-enterprise-x__portfolio_command_center_overview_limit_utilization",
           "widget_id": "portfolio_command_center_overview_limit_utilization",
           "fields": [
             "change",
@@ -12896,7 +12896,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_overview_portfolio_snapshot",
+          "name": "stark-enterprise-x__portfolio_command_center_overview_portfolio_snapshot",
           "widget_id": "portfolio_command_center_overview_portfolio_snapshot",
           "fields": [
             "change",
@@ -12928,7 +12928,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_overview_return_vs_benchmark",
+          "name": "stark-enterprise-x__portfolio_command_center_overview_return_vs_benchmark",
           "widget_id": "portfolio_command_center_overview_return_vs_benchmark",
           "fields": [
             "change",
@@ -13005,7 +13005,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_overview_top_alerts",
+          "name": "stark-enterprise-x__portfolio_command_center_overview_top_alerts",
           "widget_id": "portfolio_command_center_overview_top_alerts",
           "fields": [
             "alert_count",
@@ -13061,14 +13061,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__portfolio_command_center_overview_workflow_overview",
+          "name": "stark-enterprise-x__portfolio_command_center_overview_workflow_overview",
           "widget_id": "portfolio_command_center_overview_workflow_overview",
           "fields": [],
           "path": "/portfolio_command_center_overview_workflow_overview",
           "payload": "portfolio_command_center_overview_workflow_overview: Workflow Overview summarizes the Portfolio workflow for YTD. The synthetic score reading is 42.46, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__quant_research_backtest_lab_backtest_backtest_performance",
+          "name": "stark-enterprise-x__quant_research_backtest_lab_backtest_backtest_performance",
           "widget_id": "quant_research_backtest_lab_backtest_backtest_performance",
           "fields": [
             "change",
@@ -13124,7 +13124,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__quant_research_backtest_lab_backtest_drawdown_path",
+          "name": "stark-enterprise-x__quant_research_backtest_lab_backtest_drawdown_path",
           "widget_id": "quant_research_backtest_lab_backtest_drawdown_path",
           "fields": [
             "change",
@@ -13173,7 +13173,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__quant_research_backtest_lab_backtest_trade_simulation",
+          "name": "stark-enterprise-x__quant_research_backtest_lab_backtest_trade_simulation",
           "widget_id": "quant_research_backtest_lab_backtest_trade_simulation",
           "fields": [
             "change",
@@ -13250,7 +13250,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__quant_research_backtest_lab_optimization_capital_flow_sankey",
+          "name": "stark-enterprise-x__quant_research_backtest_lab_optimization_capital_flow_sankey",
           "widget_id": "quant_research_backtest_lab_optimization_capital_flow_sankey",
           "fields": [
             "date",
@@ -13300,7 +13300,7 @@
           }
         },
         {
-          "name": "stark-enterprise__quant_research_backtest_lab_optimization_efficient_frontier",
+          "name": "stark-enterprise-x__quant_research_backtest_lab_optimization_efficient_frontier",
           "widget_id": "quant_research_backtest_lab_optimization_efficient_frontier",
           "fields": [
             "date",
@@ -13358,7 +13358,7 @@
           }
         },
         {
-          "name": "stark-enterprise__quant_research_backtest_lab_optimization_live_portfolio_pivot",
+          "name": "stark-enterprise-x__quant_research_backtest_lab_optimization_live_portfolio_pivot",
           "widget_id": "quant_research_backtest_lab_optimization_live_portfolio_pivot",
           "fields": [
             "change",
@@ -13414,7 +13414,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__quant_research_backtest_lab_optimization_portfolio_sql_analyst",
+          "name": "stark-enterprise-x__quant_research_backtest_lab_optimization_portfolio_sql_analyst",
           "widget_id": "quant_research_backtest_lab_optimization_portfolio_sql_analyst",
           "fields": [
             "change",
@@ -13470,14 +13470,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__quant_research_backtest_lab_overview_workflow_overview",
+          "name": "stark-enterprise-x__quant_research_backtest_lab_overview_workflow_overview",
           "widget_id": "quant_research_backtest_lab_overview_workflow_overview",
           "fields": [],
           "path": "/quant_research_backtest_lab_overview_workflow_overview",
           "payload": "quant_research_backtest_lab_overview_workflow_overview: Workflow Overview summarizes the Quant Analytics workflow for YTD. The synthetic score reading is 88.39, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__quant_research_backtest_lab_risk_model_factor_correlation_matrix",
+          "name": "stark-enterprise-x__quant_research_backtest_lab_risk_model_factor_correlation_matrix",
           "widget_id": "quant_research_backtest_lab_risk_model_factor_correlation_matrix",
           "fields": [
             "date",
@@ -13523,7 +13523,7 @@
           }
         },
         {
-          "name": "stark-enterprise__quant_research_backtest_lab_risk_model_factor_exposure_table",
+          "name": "stark-enterprise-x__quant_research_backtest_lab_risk_model_factor_exposure_table",
           "widget_id": "quant_research_backtest_lab_risk_model_factor_exposure_table",
           "fields": [
             "change",
@@ -13579,7 +13579,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__quant_research_backtest_lab_risk_model_vol_forecast_surface",
+          "name": "stark-enterprise-x__quant_research_backtest_lab_risk_model_vol_forecast_surface",
           "widget_id": "quant_research_backtest_lab_risk_model_vol_forecast_surface",
           "fields": [
             "date",
@@ -13633,7 +13633,7 @@
           }
         },
         {
-          "name": "stark-enterprise__quant_research_backtest_lab_signals_signal_decay",
+          "name": "stark-enterprise-x__quant_research_backtest_lab_signals_signal_decay",
           "widget_id": "quant_research_backtest_lab_signals_signal_decay",
           "fields": [
             "change",
@@ -13682,7 +13682,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__quant_research_backtest_lab_signals_signal_leaderboard",
+          "name": "stark-enterprise-x__quant_research_backtest_lab_signals_signal_leaderboard",
           "widget_id": "quant_research_backtest_lab_signals_signal_leaderboard",
           "fields": [
             "change",
@@ -13766,7 +13766,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__quant_research_backtest_lab_signals_signal_metrics",
+          "name": "stark-enterprise-x__quant_research_backtest_lab_signals_signal_metrics",
           "widget_id": "quant_research_backtest_lab_signals_signal_metrics",
           "fields": [
             "change",
@@ -13793,7 +13793,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__rebalance_scenario_lab_approval_approval_checklist",
+          "name": "stark-enterprise-x__rebalance_scenario_lab_approval_approval_checklist",
           "widget_id": "rebalance_scenario_lab_approval_approval_checklist",
           "fields": [
             "change",
@@ -13849,14 +13849,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__rebalance_scenario_lab_approval_decision_memo",
+          "name": "stark-enterprise-x__rebalance_scenario_lab_approval_decision_memo",
           "widget_id": "rebalance_scenario_lab_approval_decision_memo",
           "fields": [],
           "path": "/rebalance_scenario_lab_approval_decision_memo",
           "payload": "rebalance_scenario_lab_approval_decision_memo: Decision Memo summarizes the Risk workflow for YTD. The synthetic score reading is 12.42, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__rebalance_scenario_lab_approval_implementation_readiness",
+          "name": "stark-enterprise-x__rebalance_scenario_lab_approval_implementation_readiness",
           "widget_id": "rebalance_scenario_lab_approval_implementation_readiness",
           "fields": [
             "change",
@@ -13933,7 +13933,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__rebalance_scenario_lab_drift_constraint_utilization",
+          "name": "stark-enterprise-x__rebalance_scenario_lab_drift_constraint_utilization",
           "widget_id": "rebalance_scenario_lab_drift_constraint_utilization",
           "fields": [
             "change",
@@ -14003,7 +14003,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__rebalance_scenario_lab_drift_current_vs_target_weights",
+          "name": "stark-enterprise-x__rebalance_scenario_lab_drift_current_vs_target_weights",
           "widget_id": "rebalance_scenario_lab_drift_current_vs_target_weights",
           "fields": [
             "change",
@@ -14087,7 +14087,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__rebalance_scenario_lab_drift_drift_by_sleeve",
+          "name": "stark-enterprise-x__rebalance_scenario_lab_drift_drift_by_sleeve",
           "widget_id": "rebalance_scenario_lab_drift_drift_by_sleeve",
           "fields": [
             "change",
@@ -14136,14 +14136,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__rebalance_scenario_lab_overview_workflow_overview",
+          "name": "stark-enterprise-x__rebalance_scenario_lab_overview_workflow_overview",
           "widget_id": "rebalance_scenario_lab_overview_workflow_overview",
           "fields": [],
           "path": "/rebalance_scenario_lab_overview_workflow_overview",
           "payload": "rebalance_scenario_lab_overview_workflow_overview: Workflow Overview summarizes the Risk workflow for YTD. The synthetic score reading is 47.48, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__rebalance_scenario_lab_rebalance_liquidity_impact",
+          "name": "stark-enterprise-x__rebalance_scenario_lab_rebalance_liquidity_impact",
           "widget_id": "rebalance_scenario_lab_rebalance_liquidity_impact",
           "fields": [
             "change",
@@ -14199,7 +14199,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__rebalance_scenario_lab_rebalance_proposed_trades",
+          "name": "stark-enterprise-x__rebalance_scenario_lab_rebalance_proposed_trades",
           "widget_id": "rebalance_scenario_lab_rebalance_proposed_trades",
           "fields": [
             "change",
@@ -14283,7 +14283,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__rebalance_scenario_lab_rebalance_restricted_list_checks",
+          "name": "stark-enterprise-x__rebalance_scenario_lab_rebalance_restricted_list_checks",
           "widget_id": "rebalance_scenario_lab_rebalance_restricted_list_checks",
           "fields": [
             "change",
@@ -14332,7 +14332,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__rebalance_scenario_lab_rebalance_turnover_and_cost_estimate",
+          "name": "stark-enterprise-x__rebalance_scenario_lab_rebalance_turnover_and_cost_estimate",
           "widget_id": "rebalance_scenario_lab_rebalance_turnover_and_cost_estimate",
           "fields": [
             "change",
@@ -14359,7 +14359,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__rebalance_scenario_lab_scenarios_position_impact_table",
+          "name": "stark-enterprise-x__rebalance_scenario_lab_scenarios_position_impact_table",
           "widget_id": "rebalance_scenario_lab_scenarios_position_impact_table",
           "fields": [
             "change",
@@ -14443,7 +14443,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__rebalance_scenario_lab_scenarios_scenario_builder_assumptions",
+          "name": "stark-enterprise-x__rebalance_scenario_lab_scenarios_scenario_builder_assumptions",
           "widget_id": "rebalance_scenario_lab_scenarios_scenario_builder_assumptions",
           "fields": [
             "change",
@@ -14520,7 +14520,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__rebalance_scenario_lab_scenarios_scenario_p_l_waterfall",
+          "name": "stark-enterprise-x__rebalance_scenario_lab_scenarios_scenario_p_l_waterfall",
           "widget_id": "rebalance_scenario_lab_scenarios_scenario_p_l_waterfall",
           "fields": [
             "date",
@@ -14582,7 +14582,7 @@
           }
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_commentary_approved_commentary_library",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_commentary_approved_commentary_library",
           "widget_id": "reporting_factsheet_studio_commentary_approved_commentary_library",
           "fields": [
             "change",
@@ -14631,7 +14631,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_commentary_disclosure_checklist",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_commentary_disclosure_checklist",
           "widget_id": "reporting_factsheet_studio_commentary_disclosure_checklist",
           "fields": [
             "change",
@@ -14680,14 +14680,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_commentary_pm_quote_bank",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_commentary_pm_quote_bank",
           "widget_id": "reporting_factsheet_studio_commentary_pm_quote_bank",
           "fields": [],
           "path": "/reporting_factsheet_studio_commentary_pm_quote_bank",
           "payload": "reporting_factsheet_studio_commentary_pm_quote_bank: PM Quote Bank summarizes the Client & IR workflow for YTD. The synthetic score reading is 63.32, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_ddqs_approved_commentary_library",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_ddqs_approved_commentary_library",
           "widget_id": "reporting_factsheet_studio_ddqs_approved_commentary_library",
           "fields": [
             "change",
@@ -14743,7 +14743,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_ddqs_ddq_and_rfp_tracker",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_ddqs_ddq_and_rfp_tracker",
           "widget_id": "reporting_factsheet_studio_ddqs_ddq_and_rfp_tracker",
           "fields": [
             "change",
@@ -14792,7 +14792,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_ddqs_ddq_evidence_library",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_ddqs_ddq_evidence_library",
           "widget_id": "reporting_factsheet_studio_ddqs_ddq_evidence_library",
           "fields": [
             "change",
@@ -14848,7 +14848,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_ddqs_disclosure_checklist",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_ddqs_disclosure_checklist",
           "widget_id": "reporting_factsheet_studio_ddqs_disclosure_checklist",
           "fields": [
             "change",
@@ -14925,7 +14925,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_ddqs_disclosure_exceptions",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_ddqs_disclosure_exceptions",
           "widget_id": "reporting_factsheet_studio_ddqs_disclosure_exceptions",
           "fields": [
             "change",
@@ -15009,7 +15009,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_factsheets_factsheet_chart_pack",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_factsheets_factsheet_chart_pack",
           "widget_id": "reporting_factsheet_studio_factsheets_factsheet_chart_pack",
           "fields": [
             "change",
@@ -15058,7 +15058,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_factsheets_factsheet_distribution_status",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_factsheets_factsheet_distribution_status",
           "widget_id": "reporting_factsheet_studio_factsheets_factsheet_distribution_status",
           "fields": [
             "change",
@@ -15128,14 +15128,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_factsheets_factsheet_preview",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_factsheets_factsheet_preview",
           "widget_id": "reporting_factsheet_studio_factsheets_factsheet_preview",
           "fields": [],
           "path": "/reporting_factsheet_studio_factsheets_factsheet_preview",
           "payload": "reporting_factsheet_studio_factsheets_factsheet_preview: Factsheet Preview summarizes the Client & IR workflow for YTD. The synthetic score reading is 97.21, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_factsheets_risk_stats",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_factsheets_risk_stats",
           "widget_id": "reporting_factsheet_studio_factsheets_risk_stats",
           "fields": [
             "change",
@@ -15157,14 +15157,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_overview_workflow_overview",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_overview_workflow_overview",
           "widget_id": "reporting_factsheet_studio_overview_workflow_overview",
           "fields": [],
           "path": "/reporting_factsheet_studio_overview_workflow_overview",
           "payload": "reporting_factsheet_studio_overview_workflow_overview: Workflow Overview summarizes the Client & IR workflow for YTD. The synthetic score reading is 38.0, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_performance_attribution_summary",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_performance_attribution_summary",
           "widget_id": "reporting_factsheet_studio_performance_attribution_summary",
           "fields": [
             "change",
@@ -15248,7 +15248,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_performance_monthly_returns",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_performance_monthly_returns",
           "widget_id": "reporting_factsheet_studio_performance_monthly_returns",
           "fields": [
             "change",
@@ -15318,7 +15318,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__reporting_factsheet_studio_performance_risk_stats",
+          "name": "stark-enterprise-x__reporting_factsheet_studio_performance_risk_stats",
           "widget_id": "reporting_factsheet_studio_performance_risk_stats",
           "fields": [
             "change",
@@ -15340,7 +15340,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__risk_exposure_monitor_dashboard_drawdown",
+          "name": "stark-enterprise-x__risk_exposure_monitor_dashboard_drawdown",
           "widget_id": "risk_exposure_monitor_dashboard_drawdown",
           "fields": [
             "change",
@@ -15417,7 +15417,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__risk_exposure_monitor_dashboard_risk_snapshot",
+          "name": "stark-enterprise-x__risk_exposure_monitor_dashboard_risk_snapshot",
           "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot",
           "fields": [
             "change",
@@ -15439,7 +15439,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__risk_exposure_monitor_dashboard_stress_loss_surface",
+          "name": "stark-enterprise-x__risk_exposure_monitor_dashboard_stress_loss_surface",
           "widget_id": "risk_exposure_monitor_dashboard_stress_loss_surface",
           "fields": [
             "date",
@@ -15497,7 +15497,7 @@
           }
         },
         {
-          "name": "stark-enterprise__risk_exposure_monitor_dashboard_var_trend",
+          "name": "stark-enterprise-x__risk_exposure_monitor_dashboard_var_trend",
           "widget_id": "risk_exposure_monitor_dashboard_var_trend",
           "fields": [
             "change",
@@ -15546,7 +15546,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__risk_exposure_monitor_drilldown_marginal_var",
+          "name": "stark-enterprise-x__risk_exposure_monitor_drilldown_marginal_var",
           "widget_id": "risk_exposure_monitor_drilldown_marginal_var",
           "fields": [
             "change",
@@ -15609,7 +15609,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__risk_exposure_monitor_drilldown_position_risk_contribution",
+          "name": "stark-enterprise-x__risk_exposure_monitor_drilldown_position_risk_contribution",
           "widget_id": "risk_exposure_monitor_drilldown_position_risk_contribution",
           "fields": [
             "change",
@@ -15665,7 +15665,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__risk_exposure_monitor_drilldown_risk_sql_analyst",
+          "name": "stark-enterprise-x__risk_exposure_monitor_drilldown_risk_sql_analyst",
           "widget_id": "risk_exposure_monitor_drilldown_risk_sql_analyst",
           "fields": [
             "change",
@@ -15721,7 +15721,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__risk_exposure_monitor_exposures_exposure_table",
+          "name": "stark-enterprise-x__risk_exposure_monitor_exposures_exposure_table",
           "widget_id": "risk_exposure_monitor_exposures_exposure_table",
           "fields": [
             "change",
@@ -15770,7 +15770,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__risk_exposure_monitor_exposures_factor_exposure_heatmap",
+          "name": "stark-enterprise-x__risk_exposure_monitor_exposures_factor_exposure_heatmap",
           "widget_id": "risk_exposure_monitor_exposures_factor_exposure_heatmap",
           "fields": [
             "date",
@@ -15816,7 +15816,7 @@
           }
         },
         {
-          "name": "stark-enterprise__risk_exposure_monitor_exposures_issuer_concentration",
+          "name": "stark-enterprise-x__risk_exposure_monitor_exposures_issuer_concentration",
           "widget_id": "risk_exposure_monitor_exposures_issuer_concentration",
           "fields": [
             "change",
@@ -15865,7 +15865,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__risk_exposure_monitor_limits_breaches_and_warnings",
+          "name": "stark-enterprise-x__risk_exposure_monitor_limits_breaches_and_warnings",
           "widget_id": "risk_exposure_monitor_limits_breaches_and_warnings",
           "fields": [
             "change",
@@ -15935,7 +15935,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__risk_exposure_monitor_limits_limit_breach_trend",
+          "name": "stark-enterprise-x__risk_exposure_monitor_limits_limit_breach_trend",
           "widget_id": "risk_exposure_monitor_limits_limit_breach_trend",
           "fields": [
             "change",
@@ -16005,7 +16005,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__risk_exposure_monitor_limits_limit_utilization",
+          "name": "stark-enterprise-x__risk_exposure_monitor_limits_limit_utilization",
           "widget_id": "risk_exposure_monitor_limits_limit_utilization",
           "fields": [
             "change",
@@ -16054,14 +16054,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__risk_exposure_monitor_overview_workflow_overview",
+          "name": "stark-enterprise-x__risk_exposure_monitor_overview_workflow_overview",
           "widget_id": "risk_exposure_monitor_overview_workflow_overview",
           "fields": [],
           "path": "/risk_exposure_monitor_overview_workflow_overview",
           "payload": "risk_exposure_monitor_overview_workflow_overview: Workflow Overview summarizes the Risk workflow for YTD. The synthetic exposure reading is 0.693, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__strategy_health_monitor_capacity_adv_and_order_size",
+          "name": "stark-enterprise-x__strategy_health_monitor_capacity_adv_and_order_size",
           "widget_id": "strategy_health_monitor_capacity_adv_and_order_size",
           "fields": [
             "change",
@@ -16124,7 +16124,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__strategy_health_monitor_capacity_capacity_utilization",
+          "name": "stark-enterprise-x__strategy_health_monitor_capacity_capacity_utilization",
           "widget_id": "strategy_health_monitor_capacity_capacity_utilization",
           "fields": [
             "change",
@@ -16146,7 +16146,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__strategy_health_monitor_capacity_liquidity_capacity_curve",
+          "name": "stark-enterprise-x__strategy_health_monitor_capacity_liquidity_capacity_curve",
           "widget_id": "strategy_health_monitor_capacity_liquidity_capacity_curve",
           "fields": [
             "change",
@@ -16201,14 +16201,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__strategy_health_monitor_overview_workflow_overview",
+          "name": "stark-enterprise-x__strategy_health_monitor_overview_workflow_overview",
           "widget_id": "strategy_health_monitor_overview_workflow_overview",
           "fields": [],
           "path": "/strategy_health_monitor_overview_workflow_overview",
           "payload": "strategy_health_monitor_overview_workflow_overview: Workflow Overview summarizes the Portfolio workflow for YTD. The synthetic score reading is 21.69, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__strategy_health_monitor_performance_gross_and_net_exposure",
+          "name": "stark-enterprise-x__strategy_health_monitor_performance_gross_and_net_exposure",
           "widget_id": "strategy_health_monitor_performance_gross_and_net_exposure",
           "fields": [
             "change",
@@ -16295,7 +16295,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__strategy_health_monitor_performance_sleeve_performance",
+          "name": "stark-enterprise-x__strategy_health_monitor_performance_sleeve_performance",
           "widget_id": "strategy_health_monitor_performance_sleeve_performance",
           "fields": [
             "change",
@@ -16374,7 +16374,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__strategy_health_monitor_performance_strategy_health_metrics",
+          "name": "stark-enterprise-x__strategy_health_monitor_performance_strategy_health_metrics",
           "widget_id": "strategy_health_monitor_performance_strategy_health_metrics",
           "fields": [
             "change",
@@ -16401,7 +16401,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__strategy_health_monitor_themes_crowded_names",
+          "name": "stark-enterprise-x__strategy_health_monitor_themes_crowded_names",
           "widget_id": "strategy_health_monitor_themes_crowded_names",
           "fields": [
             "change",
@@ -16496,7 +16496,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__strategy_health_monitor_themes_factor_tilts",
+          "name": "stark-enterprise-x__strategy_health_monitor_themes_factor_tilts",
           "widget_id": "strategy_health_monitor_themes_factor_tilts",
           "fields": [
             "date",
@@ -16546,7 +16546,7 @@
           }
         },
         {
-          "name": "stark-enterprise__strategy_health_monitor_themes_thematic_baskets",
+          "name": "stark-enterprise-x__strategy_health_monitor_themes_thematic_baskets",
           "widget_id": "strategy_health_monitor_themes_thematic_baskets",
           "fields": [
             "change",
@@ -16625,7 +16625,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__strategy_health_monitor_watchlist_catalyst_calendar",
+          "name": "stark-enterprise-x__strategy_health_monitor_watchlist_catalyst_calendar",
           "widget_id": "strategy_health_monitor_watchlist_catalyst_calendar",
           "fields": [
             "change",
@@ -16712,7 +16712,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__strategy_health_monitor_watchlist_names_near_action_levels",
+          "name": "stark-enterprise-x__strategy_health_monitor_watchlist_names_near_action_levels",
           "widget_id": "strategy_health_monitor_watchlist_names_near_action_levels",
           "fields": [
             "change",
@@ -16791,7 +16791,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__strategy_health_monitor_watchlist_trade_ideas",
+          "name": "stark-enterprise-x__strategy_health_monitor_watchlist_trade_ideas",
           "widget_id": "strategy_health_monitor_watchlist_trade_ideas",
           "fields": [
             "change",
@@ -16846,7 +16846,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__stress_liquidity_lab_liquidity_crowded_names",
+          "name": "stark-enterprise-x__stress_liquidity_lab_liquidity_crowded_names",
           "widget_id": "stress_liquidity_lab_liquidity_crowded_names",
           "fields": [
             "change",
@@ -16895,7 +16895,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__stress_liquidity_lab_liquidity_days_to_liquidate",
+          "name": "stark-enterprise-x__stress_liquidity_lab_liquidity_days_to_liquidate",
           "widget_id": "stress_liquidity_lab_liquidity_days_to_liquidate",
           "fields": [
             "change",
@@ -16958,7 +16958,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__stress_liquidity_lab_liquidity_redemption_stress",
+          "name": "stark-enterprise-x__stress_liquidity_lab_liquidity_redemption_stress",
           "widget_id": "stress_liquidity_lab_liquidity_redemption_stress",
           "fields": [
             "change",
@@ -17028,14 +17028,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__stress_liquidity_lab_overview_workflow_overview",
+          "name": "stark-enterprise-x__stress_liquidity_lab_overview_workflow_overview",
           "widget_id": "stress_liquidity_lab_overview_workflow_overview",
           "fields": [],
           "path": "/stress_liquidity_lab_overview_workflow_overview",
           "payload": "stress_liquidity_lab_overview_workflow_overview: Workflow Overview summarizes the Trading workflow for YTD. The synthetic score reading is 24.11, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__stress_liquidity_lab_scenarios_portfolio_impact",
+          "name": "stark-enterprise-x__stress_liquidity_lab_scenarios_portfolio_impact",
           "widget_id": "stress_liquidity_lab_scenarios_portfolio_impact",
           "fields": [
             "change",
@@ -17091,7 +17091,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__stress_liquidity_lab_scenarios_position_impact_table",
+          "name": "stark-enterprise-x__stress_liquidity_lab_scenarios_position_impact_table",
           "widget_id": "stress_liquidity_lab_scenarios_position_impact_table",
           "fields": [
             "change",
@@ -17168,7 +17168,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__stress_liquidity_lab_scenarios_scenario_builder_assumptions",
+          "name": "stark-enterprise-x__stress_liquidity_lab_scenarios_scenario_builder_assumptions",
           "widget_id": "stress_liquidity_lab_scenarios_scenario_builder_assumptions",
           "fields": [
             "change",
@@ -17231,7 +17231,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__stress_liquidity_lab_sign_off_approval_checklist",
+          "name": "stark-enterprise-x__stress_liquidity_lab_sign_off_approval_checklist",
           "widget_id": "stress_liquidity_lab_sign_off_approval_checklist",
           "fields": [
             "change",
@@ -17315,7 +17315,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__stress_liquidity_lab_sign_off_residual_risk_actions",
+          "name": "stark-enterprise-x__stress_liquidity_lab_sign_off_residual_risk_actions",
           "widget_id": "stress_liquidity_lab_sign_off_residual_risk_actions",
           "fields": [
             "change",
@@ -17385,14 +17385,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__stress_liquidity_lab_sign_off_risk_committee_comments",
+          "name": "stark-enterprise-x__stress_liquidity_lab_sign_off_risk_committee_comments",
           "widget_id": "stress_liquidity_lab_sign_off_risk_committee_comments",
           "fields": [],
           "path": "/stress_liquidity_lab_sign_off_risk_committee_comments",
           "payload": "stress_liquidity_lab_sign_off_risk_committee_comments: Risk Committee Comments summarizes the Trading workflow for YTD. The synthetic score reading is 88.07, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__stress_liquidity_lab_sign_off_sign_off_tracker",
+          "name": "stark-enterprise-x__stress_liquidity_lab_sign_off_sign_off_tracker",
           "widget_id": "stress_liquidity_lab_sign_off_sign_off_tracker",
           "fields": [
             "change",
@@ -17469,7 +17469,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__stress_liquidity_lab_stress_tests_historical_shocks",
+          "name": "stark-enterprise-x__stress_liquidity_lab_stress_tests_historical_shocks",
           "widget_id": "stress_liquidity_lab_stress_tests_historical_shocks",
           "fields": [
             "change",
@@ -17553,7 +17553,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__stress_liquidity_lab_stress_tests_risk_snapshot",
+          "name": "stark-enterprise-x__stress_liquidity_lab_stress_tests_risk_snapshot",
           "widget_id": "stress_liquidity_lab_stress_tests_risk_snapshot",
           "fields": [
             "change",
@@ -17580,7 +17580,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__stress_liquidity_lab_stress_tests_scenario_loss_waterfall",
+          "name": "stark-enterprise-x__stress_liquidity_lab_stress_tests_scenario_loss_waterfall",
           "widget_id": "stress_liquidity_lab_stress_tests_scenario_loss_waterfall",
           "fields": [
             "date",
@@ -17630,7 +17630,7 @@
           }
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_incidents_affected_apps",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_incidents_affected_apps",
           "widget_id": "vendor_dataset_monitor_incidents_affected_apps",
           "fields": [
             "change",
@@ -17686,7 +17686,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_incidents_blast_radius_summary",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_incidents_blast_radius_summary",
           "widget_id": "vendor_dataset_monitor_incidents_blast_radius_summary",
           "fields": [
             "change",
@@ -17763,7 +17763,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_incidents_freshness_exceptions",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_incidents_freshness_exceptions",
           "widget_id": "vendor_dataset_monitor_incidents_freshness_exceptions",
           "fields": [
             "change",
@@ -17826,7 +17826,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_incidents_incident_log",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_incidents_incident_log",
           "widget_id": "vendor_dataset_monitor_incidents_incident_log",
           "fields": [
             "change",
@@ -17896,7 +17896,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_incidents_incident_timeline",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_incidents_incident_timeline",
           "widget_id": "vendor_dataset_monitor_incidents_incident_timeline",
           "fields": [
             "change",
@@ -17945,14 +17945,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_overview_workflow_overview",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_overview_workflow_overview",
           "widget_id": "vendor_dataset_monitor_overview_workflow_overview",
           "fields": [],
           "path": "/vendor_dataset_monitor_overview_workflow_overview",
           "payload": "vendor_dataset_monitor_overview_workflow_overview: Workflow Overview summarizes the Data Platform workflow for YTD. The synthetic score reading is 0.4, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_quality_affected_apps",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_quality_affected_apps",
           "widget_id": "vendor_dataset_monitor_quality_affected_apps",
           "fields": [
             "change",
@@ -18029,7 +18029,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_quality_row_count_drift",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_quality_row_count_drift",
           "widget_id": "vendor_dataset_monitor_quality_row_count_drift",
           "fields": [
             "change",
@@ -18106,7 +18106,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_quality_validation_errors",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_quality_validation_errors",
           "widget_id": "vendor_dataset_monitor_quality_validation_errors",
           "fields": [
             "change",
@@ -18183,7 +18183,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_slas_freshness_exceptions",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_slas_freshness_exceptions",
           "widget_id": "vendor_dataset_monitor_slas_freshness_exceptions",
           "fields": [
             "change",
@@ -18260,7 +18260,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_slas_latency_by_feed",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_slas_latency_by_feed",
           "widget_id": "vendor_dataset_monitor_slas_latency_by_feed",
           "fields": [
             "change",
@@ -18337,7 +18337,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_slas_sla_breach_history",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_slas_sla_breach_history",
           "widget_id": "vendor_dataset_monitor_slas_sla_breach_history",
           "fields": [
             "breach_count",
@@ -18400,7 +18400,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_slas_vendor_sla_status",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_slas_vendor_sla_status",
           "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status",
           "fields": [
             "change",
@@ -18484,7 +18484,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_vendors_incident_log",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_vendors_incident_log",
           "widget_id": "vendor_dataset_monitor_vendors_incident_log",
           "fields": [
             "change",
@@ -18540,7 +18540,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_vendors_sla_metrics",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_vendors_sla_metrics",
           "widget_id": "vendor_dataset_monitor_vendors_sla_metrics",
           "fields": [
             "change",
@@ -18567,7 +18567,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_vendors_vendor_contract_terms",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_vendors_vendor_contract_terms",
           "widget_id": "vendor_dataset_monitor_vendors_vendor_contract_terms",
           "fields": [
             "change",
@@ -18637,7 +18637,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__vendor_dataset_monitor_vendors_vendor_sla_status",
+          "name": "stark-enterprise-x__vendor_dataset_monitor_vendors_vendor_sla_status",
           "widget_id": "vendor_dataset_monitor_vendors_vendor_sla_status",
           "fields": [
             "change",
@@ -18700,7 +18700,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_ai_access_ai_usage_by_role",
+          "name": "stark-enterprise-x__workspace_data_control_center_ai_access_ai_usage_by_role",
           "widget_id": "workspace_data_control_center_ai_access_ai_usage_by_role",
           "fields": [
             "change",
@@ -18784,7 +18784,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_ai_access_app_usage",
+          "name": "stark-enterprise-x__workspace_data_control_center_ai_access_app_usage",
           "widget_id": "workspace_data_control_center_ai_access_app_usage",
           "fields": [
             "change",
@@ -18847,7 +18847,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_ai_access_copilot_visibility_flags",
+          "name": "stark-enterprise-x__workspace_data_control_center_ai_access_copilot_visibility_flags",
           "widget_id": "workspace_data_control_center_ai_access_copilot_visibility_flags",
           "fields": [
             "change",
@@ -18924,7 +18924,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_ai_access_prompt_audit",
+          "name": "stark-enterprise-x__workspace_data_control_center_ai_access_prompt_audit",
           "widget_id": "workspace_data_control_center_ai_access_prompt_audit",
           "fields": [
             "change",
@@ -19008,7 +19008,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_data_health_failed_jobs_trend",
+          "name": "stark-enterprise-x__workspace_data_control_center_data_health_failed_jobs_trend",
           "widget_id": "workspace_data_control_center_data_health_failed_jobs_trend",
           "fields": [
             "change",
@@ -19085,7 +19085,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_data_health_feed_status",
+          "name": "stark-enterprise-x__workspace_data_control_center_data_health_feed_status",
           "widget_id": "workspace_data_control_center_data_health_feed_status",
           "fields": [
             "change",
@@ -19162,7 +19162,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_data_health_latency_and_freshness",
+          "name": "stark-enterprise-x__workspace_data_control_center_data_health_latency_and_freshness",
           "widget_id": "workspace_data_control_center_data_health_latency_and_freshness",
           "fields": [
             "change",
@@ -19194,7 +19194,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_entitlements_app_and_widget_permissions",
+          "name": "stark-enterprise-x__workspace_data_control_center_entitlements_app_and_widget_permissions",
           "widget_id": "workspace_data_control_center_entitlements_app_and_widget_permissions",
           "fields": [
             "change",
@@ -19271,7 +19271,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_entitlements_copilot_visibility_flags",
+          "name": "stark-enterprise-x__workspace_data_control_center_entitlements_copilot_visibility_flags",
           "widget_id": "workspace_data_control_center_entitlements_copilot_visibility_flags",
           "fields": [
             "change",
@@ -19327,7 +19327,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_entitlements_role_coverage",
+          "name": "stark-enterprise-x__workspace_data_control_center_entitlements_role_coverage",
           "widget_id": "workspace_data_control_center_entitlements_role_coverage",
           "fields": [
             "change",
@@ -19383,7 +19383,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_entitlements_sensitive_dataset_flags",
+          "name": "stark-enterprise-x__workspace_data_control_center_entitlements_sensitive_dataset_flags",
           "widget_id": "workspace_data_control_center_entitlements_sensitive_dataset_flags",
           "fields": [
             "change",
@@ -19432,14 +19432,14 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_overview_workflow_overview",
+          "name": "stark-enterprise-x__workspace_data_control_center_overview_workflow_overview",
           "widget_id": "workspace_data_control_center_overview_workflow_overview",
           "fields": [],
           "path": "/workspace_data_control_center_overview_workflow_overview",
           "payload": "workspace_data_control_center_overview_workflow_overview: Workflow Overview summarizes the Data Platform workflow for YTD. The synthetic score reading is 8.88, seeded from the widget id. Use this note as deterministic fixture prose for Stark data-reading tasks."
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_usage_app_usage",
+          "name": "stark-enterprise-x__workspace_data_control_center_usage_app_usage",
           "widget_id": "workspace_data_control_center_usage_app_usage",
           "fields": [
             "change",
@@ -19502,7 +19502,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_usage_export_activity",
+          "name": "stark-enterprise-x__workspace_data_control_center_usage_export_activity",
           "widget_id": "workspace_data_control_center_usage_export_activity",
           "fields": [
             "change",
@@ -19572,7 +19572,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_usage_export_review_queue",
+          "name": "stark-enterprise-x__workspace_data_control_center_usage_export_review_queue",
           "widget_id": "workspace_data_control_center_usage_export_review_queue",
           "fields": [
             "change",
@@ -19628,7 +19628,7 @@
           ]
         },
         {
-          "name": "stark-enterprise__workspace_data_control_center_usage_prompt_audit",
+          "name": "stark-enterprise-x__workspace_data_control_center_usage_prompt_audit",
           "widget_id": "workspace_data_control_center_usage_prompt_audit",
           "fields": [
             "change",
@@ -19700,7 +19700,7 @@
       ],
       "pinned_paths": true
     },
-    "reference": [
+    "reference_trace": [
       {
         "tool": "manage_backends",
         "args": {
@@ -19736,8 +19736,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 8
-    }
+    "max_turns": 8
   }
 }

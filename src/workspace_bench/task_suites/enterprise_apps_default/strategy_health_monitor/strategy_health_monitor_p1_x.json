@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "A cross-sleeve ranking is not possible because Global Equities is the only strategy named in the served performance and crowding rows. Its Open sleeve-performance readings are 15.3 and 58.92, with changes of 0.0624 and -0.0432, so even the displayed performance direction is mixed. Its Open crowded-names readings are 43.5 and 97.14, also moving in opposite directions at -0.0314 and 0.0623. Capacity utilization is 92.83 primary and 81.06 secondary, but the rows do not identify a strategy or translate utilization into remaining capacity. Drawdown behavior is absent entirely, so additional sleeve-level performance, drawdown, crowding, and capacity data are required for ranking.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

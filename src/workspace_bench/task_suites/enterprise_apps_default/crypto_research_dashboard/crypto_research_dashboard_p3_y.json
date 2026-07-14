@@ -101,8 +101,6 @@
    }
   ],
   "reference_answer": "A unified token thesis is not supported because the market, on-chain, derivatives, and document rows do not align on one asset. XRP has an Approved market price of 295770.25 with a -0.0133 change and a Closed on-chain score of 1.15 with a 0.0026 change, but its research document is still Open at 68.55 and no XRP derivatives row is served. AVAX has In Review on-chain activity at 34.04 and an Open research document at 52.6, but no market or derivatives row. ADA has a Closed derivatives reading of 65.47 and an In Review document at 74.7, again without matching market or on-chain context. Keep the thesis segmented by token and pending until the missing cross-market links and open documents are resolved.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

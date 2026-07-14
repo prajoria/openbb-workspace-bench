@@ -148,8 +148,6 @@
    }
   ],
   "reference_answer": "Before market open, escalate failed-trade readings of 58.05 and 50.95 because both exceed the 23.0 threshold. Income Fund custodian breaks remain Open at 114.23 and 52.6, Multi-Asset Fund has an Open corporate-action reading of 57.45, and Flagship Long/Short has Open election-deadline readings of 44.18 and 90.2. Global Opportunities also has 34 Open settlement exceptions, while Income Fund has 72 In Review. Before NAV strike, resolve the 18 Open Flagship Long/Short NAV exceptions, Open Income Fund stale-price rows at 201763.98, 176230.47, and 2930.3, and the Open Multi-Asset Fund Refinitiv row at 257924.23. Security-level matching and owner fields are absent, so escalation should preserve each fund and queue separately until those details are supplied.",
-  "limits": {
-   "max_turns": 12
-  }
+  "max_turns": 12
  }
 }

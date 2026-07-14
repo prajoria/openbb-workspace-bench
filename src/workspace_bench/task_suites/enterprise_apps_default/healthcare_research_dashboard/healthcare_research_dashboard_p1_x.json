@@ -125,8 +125,6 @@
    }
   ],
   "reference_answer": "Coverage remains Open for Flagship Long/Short at 40.0 and 17.55, with changes of 0.0693 and -0.0137. Clinical catalyst readings are Open at 87.53 and 75.56, while the probability funnel rises as high as 74.9 before ending at 65.52 in the served series. TAM readings are Open at 7.43 and 64.31 and both declined, changing by -0.0343 and -0.0068. Prescription-trend readings are Open at 40.91 and 85.42 and also declined, by -0.0061 and -0.0393. Research-document checklist rows remain Open at 44.47 and 91.82, so the brief should remain provisional until the unnamed coverage, catalysts, probability stages, commercial assumptions, and documents are identified.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

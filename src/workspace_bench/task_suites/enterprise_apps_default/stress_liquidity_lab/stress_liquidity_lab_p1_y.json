@@ -101,8 +101,6 @@
    }
   ],
   "reference_answer": "The loss waterfall reaches a displayed low of -66500 and ends at -64000, but it has no fund label. Credit Plus has Escalated days-to-liquidate and crowded-name readings of 22.02 and 13.49, both requiring immediate liquidity review. Flagship Long/Short separately has an Open redemption-stress reading of 80.0 with a -0.0216 change. The served scores do not provide actual liquidation days, security names, or redemption cash impact. Because the loss, liquidity, crowding, and redemption records are not joined to one portfolio, the scenario should remain segmented by fund pending matched evidence.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

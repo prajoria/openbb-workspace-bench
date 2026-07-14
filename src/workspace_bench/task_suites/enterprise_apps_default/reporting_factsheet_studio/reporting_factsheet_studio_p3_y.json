@@ -96,8 +96,6 @@
    }
   ],
   "reference_answer": "Meridian Family Office's return is In Review at 0.0681 with a 0.0185 change. Attribution declined by -0.0832 for Horizon Sovereign at 54.7 and increased by 0.0152 for Atlas Pension at 14.54; neither attribution row belongs to Meridian Family Office. Risk moved in opposite directions, with the 9.65 primary metric changing by -0.0674 and the 76.48 secondary metric changing by 0.008. Macro Absolute Return commentary is Approved at 72.19 with a 0.0253 change. Because the return, attribution, and commentary records refer to different entities, the selected-period summary should preserve those distinctions rather than imply a common driver.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

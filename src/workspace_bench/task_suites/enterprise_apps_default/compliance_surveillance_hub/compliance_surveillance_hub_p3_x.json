@@ -76,8 +76,6 @@
    }
   ],
   "reference_answer": "The Flagship Long/Short investigation remains Open, with evidence scored 64.75 and a 0.0739 change. The related policy-breach rows are also Open, with counts of 19 and 3 and changes of 0.0896 and 0.0407. Remediation is therefore unresolved and should focus on mapping each breach to the investigation evidence and documenting its disposition. The served data name no next owner, so ownership must be assigned by compliance leadership rather than inferred.",
-  "limits": {
-   "max_turns": 6
-  }
+  "max_turns": 6
  }
 }

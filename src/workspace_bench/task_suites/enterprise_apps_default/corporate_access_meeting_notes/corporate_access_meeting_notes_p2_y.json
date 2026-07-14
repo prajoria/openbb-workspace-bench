@@ -160,8 +160,6 @@
    }
   ],
   "reference_answer": "Flag the Macro Absolute Return expert call at 48.31 and meeting-notes entry at 15.19 because both are Open and the same fund has an Open MNPI attestation at 42.8 and an Open restricted tag at 94.49. Its claims record is also Open at 65.1, reinforcing the need for review before distribution. Credit Plus's Open meeting-calendar entry at 83.41 should be checked against its Open MNPI attestation at 6.09, although no row-level join confirms they concern the same meeting. Global Opportunities has an Open meeting entry at 5.16 and an Open thesis-change record at 138.1, but no fund-matched compliance control is served. Flag these records for matching and sign-off; do not distribute research until the applicable MNPI, restriction, and evidence requirements are resolved.",
-  "limits": {
-   "max_turns": 13
-  }
+  "max_turns": 13
  }
 }

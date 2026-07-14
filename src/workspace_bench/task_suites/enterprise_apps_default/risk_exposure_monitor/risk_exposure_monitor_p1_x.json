@@ -137,8 +137,6 @@
    }
   ],
   "reference_answer": "Flagship Long/Short VaR is Open at -222500 with a -0.0302 change, while marginal-VaR rows are Open at -56000 and -102500. The underlying VaR drivers are unnamed, so the larger displayed loss contribution of -102500 must be mapped to a position before action. The stress surface deteriorates from -103000 to -155000 across the served series. Position-risk contribution is Open at 0.0187 and 0.4227, and AAPL issuer concentration is Open at 0.0359, but these rows are not joined. Breaches and warnings remain Open at 0.0137 and 0.0746, with limit utilization Open at 0.0339. Preserve the open controls, identify the positions behind the larger marginal VaR and risk contribution, and reduce exposure only after confirming their links and limits.",
-  "limits": {
-   "max_turns": 11
-  }
+  "max_turns": 11
  }
 }

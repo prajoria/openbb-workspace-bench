@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "No asset has matched derivatives, spot, and on-chain rows, so a positioning conflict cannot be established. ADA's derivatives reading is Closed at 65.47 with a -0.0265 change, but there is no ADA spot or on-chain row. XRP has an Approved spot price of 295770.25 with a -0.0133 change and a Closed on-chain score of 1.15 with a 0.0026 change, but no XRP derivatives evidence. AVAX appears only in on-chain activity, In Review at 34.04. The opposing XRP spot and on-chain changes merit follow-up, but they do not answer the derivatives-conflict question without matched positioning data.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

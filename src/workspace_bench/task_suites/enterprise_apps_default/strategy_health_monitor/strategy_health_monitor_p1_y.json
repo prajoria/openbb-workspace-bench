@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "The served metrics do not cover the same sleeves, so a complete ranking cannot be produced. Global Equities performance is Escalated at 5.31 and 18.92, with negative changes of -0.05 and -0.0137. Credit crowding is Open at 55.0 for Flagship Long/Short and In Review at 49.7 for Global Opportunities. Capacity utilization is 100.35 primary and 93.06 secondary but carries no strategy label, and remaining capacity cannot be inferred without a scale definition. No drawdown data are served, leaving the requested cross-sleeve comparison incomplete.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

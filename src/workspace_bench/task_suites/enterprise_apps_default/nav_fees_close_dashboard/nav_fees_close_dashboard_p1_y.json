@@ -113,8 +113,6 @@
    }
   ],
   "reference_answer": "The NAV bridge reaches 36.75 and ends at 29.5, but its components and units are not supplied. Income Fund has Open NAV-exception counts of 196 and 138 and Open fee-accrual readings of 27.07 and 124.9. Multi-Asset Fund has NAV exceptions In Review at 156 and 130, fee accruals In Review at 122.66 and 110.01, and an Open cash-break reading of 53.98. Unresolved dependencies include Open Income Fund readings of 71.83, 66.18, and 14.62 and In Review Multi-Asset Fund readings of 0.51, 88.55, and 58.08. No tolerance threshold or owner is served, so the package should hold these funds' open and in-review items for assignment and resolution.",
-  "limits": {
-   "max_turns": 9
-  }
+  "max_turns": 9
  }
 }

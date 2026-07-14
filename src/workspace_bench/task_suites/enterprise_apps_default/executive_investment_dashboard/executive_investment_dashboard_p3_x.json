@@ -118,8 +118,6 @@
    }
   ],
   "reference_answer": "Cross-strategy consistency cannot be established because performance is served only for Global Equities, flows are labeled by client, and risk is labeled only by fund. Within Global Equities, returns are both positive at 0.0405 and 0.1031, but their changes move in opposite directions at -0.0386 and 0.044. Client flow changes are both positive at 0.071 and 0.0264, yet they cannot be mapped to the strategy. Risk is mixed: drawdown changes are 0.0653 and -0.04, stress-loss changes are -0.0593 and 0.0138, and limit-utilization changes are -0.0164 and -0.022. The top-risk reading is Open at 39.42 with a 0.0871 change, reinforcing that performance, flows, and risk do not provide a consistently joined directional signal.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

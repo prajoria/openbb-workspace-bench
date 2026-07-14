@@ -86,8 +86,6 @@
    }
   ],
   "reference_answer": "The requested inconsistency cannot be assigned to a theme because neither the factor series nor capacity-utilization rows carry theme names, and PM conviction is absent. The factor-tilt series spans 76.33 to 83.12. Macro has an Open liquidity-capacity reading of 18.07 with a 0.02 change. Capacity utilization reads 100.35 primary and 93.06 secondary without a strategy mapping or scale definition. Obtain theme-level factor tilts, liquidity capacity, and PM-conviction values before flagging a conflict.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

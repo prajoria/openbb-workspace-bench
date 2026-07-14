@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Bloomberg has Open validation-error readings of 49.89 and 64.35 and Open affected-app readings of 117.42, 74.8, and 3.46, making it the clearest active quality issue. MSCI has Open row-count drift of 114 and 124, although its validation and affected-app records are Approved. S&P Global validation readings of 51.35, 90.9, and 84.06 and affected-app readings of 44.8, 28.51, and 130.03 remain In Review. FactSet row-count drift is In Review at 59 and 184, while its validation and affected-app rows are Closed. None of the records names datasets, apps, or trading, risk, reporting, and compliance workflows, so business impact must remain unclassified pending lineage.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

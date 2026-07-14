@@ -100,8 +100,6 @@
    }
   ],
   "reference_answer": "Settlement risk is visible in 61 Open exceptions for Flagship Long/Short, and downstream NAV exposure is represented by Open exception counts of 67 and 210. Custodian-break readings are Open at 1.67 and 59.91, while break-aging readings are Open at 30.55 and 51.16. The records do not contain break identifiers, so the larger aging reading cannot be mapped to a particular custodian break, settlement exception, or NAV exception. No dollar-impact field or age unit is served, and exception counts cannot substitute for monetary impact. Review the settlement queue and the 210-count NAV queue first at aggregate level, but defer break-level prioritization until the records are joined with age and dollar impact.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

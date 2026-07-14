@@ -112,8 +112,6 @@
    }
   ],
   "reference_answer": "Macro Absolute Return has an Open prior-claims record at 65.1 and an Open expert-call record at 48.31. Its note follow-up remains Open at 79.94, and its MNPI attestation is Open at 42.8. Credit Plus has another Open MNPI attestation at 6.09, while Flagship Long/Short has Open compliance follow-ups at 44.04 and 142.94. The rows do not contain the claim text, call subject, follow-up owner, or attestation details. Keep the Macro Absolute Return meeting within MNPI controls, resolve its open note and attestation, and treat the other funds' items as separate compliance work.",
-  "limits": {
-   "max_turns": 9
-  }
+  "max_turns": 9
  }
 }

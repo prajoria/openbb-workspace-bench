@@ -112,8 +112,6 @@
    }
   ],
   "reference_answer": "PM and risk approval should remain on hold for Flagship Long/Short. Backtest-performance readings are Open at 35.41 and 11.51, and the drawdown path is Open at -172500. Trade-simulation readings are Open at 80.5 and 7.26, while factor exposures remain Open at 0.0342 and 0.1608. Signal quality is mixed because 83.92 is above the 35.59 threshold but 30.95 is below it. Approval requires closed validation items, defined exposure limits, drawdown tolerance, and evidence explaining the weaker secondary signal.",
-  "limits": {
-   "max_turns": 9
-  }
+  "max_turns": 9
  }
 }

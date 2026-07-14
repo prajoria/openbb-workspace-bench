@@ -76,8 +76,6 @@
    }
   ],
   "reference_answer": "The Flagship Long/Short investigation evidence remains Open at 51.93 with a 0.0725 change. Its breach records are In Review at 25 and Approved at 5, so remediation is not uniformly closed for that fund. Macro Absolute Return separately has 12 Open breaches, while Healthcare Alpha has 271 In Review; these records require their own dispositions and should not be folded into the Flagship investigation without a case link. The served rows do not identify a next owner or map the evidence to individual breaches, so compliance leadership must assign ownership and document remediation status before closure.",
-  "limits": {
-   "max_turns": 6
-  }
+  "max_turns": 6
  }
 }

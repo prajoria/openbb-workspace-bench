@@ -57,19 +57,12 @@
     ]
   },
   "eval": {
-    "required_tool_calls": [
-      {
-        "tool": "navigate_workspace",
-        "args_contains": {
-          "operation": "tab",
-          "tab_id": "details"
-        }
-      }
-    ],
+    "calls_match_reference": true,
     "reference_trace": [
       {
         "tool": "get_workspace_snapshot",
-        "args": {}
+        "args": {},
+        "optional": true
       },
       {
         "tool": "navigate_workspace",
@@ -79,8 +72,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 4
-    }
+    "max_turns": 4
   }
 }

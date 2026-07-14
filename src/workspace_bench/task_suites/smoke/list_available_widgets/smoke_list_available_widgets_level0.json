@@ -22,14 +22,7 @@
     ]
   },
   "eval": {
-    "required_tool_calls": [
-      {
-        "tool": "list_available_widgets",
-        "args_contains": {
-          "origin": "Getting Started"
-        }
-      }
-    ],
+    "calls_match_reference": true,
     "reference_trace": [
       {
         "tool": "list_available_widgets",
@@ -38,8 +31,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 1
-    }
+    "max_turns": 1
   }
 }

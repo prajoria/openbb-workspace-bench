@@ -112,8 +112,6 @@
    }
   ],
   "reference_answer": "MSFT has an Open price-reaction row at 53070.03 with a 0.0195 change and an Approved management-tone reading of 84.88, so those records should be reconciled in its post-earnings note. JPM has a separate Open price-reaction row at 55078.18, but no served transcript, rating, or checklist record. AAPL's rating-and-target item is Escalated at 32.79 and should be assigned for immediate review. XOM's rating item is In Review at 113.21 while its checklist is Closed at 22.35, requiring confirmation that the rating review does not reopen checklist work. NVDA's transcript themes remain In Review at 62.69, and the lack of ticker-matched records prevents a single cross-company action sequence.",
-  "limits": {
-   "max_turns": 9
-  }
+  "max_turns": 9
  }
 }

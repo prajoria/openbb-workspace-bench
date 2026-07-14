@@ -160,8 +160,6 @@
    }
   ],
   "reference_answer": "Flag every served Flagship Long/Short meeting and note for compliance review because the meeting-calendar rows at 91.82 and 81.89, expert-call rows at 4.24 and 26.51, and meeting-notes row at 83.08 are all Open. The same fund has Open MNPI attestations at 20.04 and 56.63 and Open restricted-tag rows at 26.71 and 36.6. Compliance follow-ups are Open at 57.19 and 92.28, so those controls have not been closed. Claims and thesis records are also Open at 21.22 and 49.26, while evidence/sign-off remains Open at 45.91 and 84.06. Hold research distribution until the relevant meeting or note is linked to completed attestations, cleared restrictions, resolved follow-ups, and documented sign-off.",
-  "limits": {
-   "max_turns": 13
-  }
+  "max_turns": 13
  }
 }

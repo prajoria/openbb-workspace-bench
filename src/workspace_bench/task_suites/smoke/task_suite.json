@@ -2,5 +2,5 @@
   "suite_id": "workspace-bench-smoke",
   "visibility": "public",
   "description": "A four-level execution ladder with one task per Workspace MCP tool and knowledge surface per level: level0 isolates the tool on a bare workspace, level1 adds the full 20-tool surface, level2 the lived-in stark-onboard-a workspace, and level3 an open prompt that requires discovery.",
-  "content_sha256": "924d49b6e8a595830a8704ffd6d83e96308780605b5e6f9a1f0f09620a362bcd"
+  "content_sha256": "3edabac901e0f7493765fe31a3381fcdcaad380cbc38b303c41d79fe1a090fa1"
 }

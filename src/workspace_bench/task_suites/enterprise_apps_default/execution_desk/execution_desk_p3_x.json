@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "The end-of-day US Equity exception report remains fully Open. Rejected orders total 167 with a 0.0402 change, restricted-list checks total 202 with a 0.0551 change, and surveillance alerts total 215 with a 0.0623 change. Restricted checks and surveillance alerts exceed the rejected-order count, but the queues are not linked at order level and should not be added together. The PM and COO should require owners, order identifiers, and dispositions for each queue before the next release cycle.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

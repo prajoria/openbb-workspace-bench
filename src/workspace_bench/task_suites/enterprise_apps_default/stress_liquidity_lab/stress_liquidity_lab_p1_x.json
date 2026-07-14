@@ -101,8 +101,6 @@
    }
   ],
   "reference_answer": "The selected loss waterfall starts at -49500, reaches a displayed low of -66500, and ends at -64000. Flagship Long/Short days-to-liquidate readings remain Open at 62.96 and 79.81, but the values are scores rather than explicit day counts. Crowded names are Open at 27.28, without security names or position sizes. Redemption-stress readings are Open at 54.69 and 74.01, both with negative changes of -0.0429 and -0.0277. The scenario indicates unresolved loss and liquidity risk, but item-level names, day units, and redemption cash impact are needed before a liquidation plan can be approved.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

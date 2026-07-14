@@ -588,7 +588,7 @@ def build_tasks(
                         "judge_evaluation": True,
                         "reference_trace": reference,
                         "reference_answer": answer,
-                        "limits": {"max_turns": len(reference) + 3},
+                        "max_turns": len(reference) + 3,
                     },
                 }
                 pair.append(payload)
@@ -713,7 +713,7 @@ def certify(
         "judge_evaluation",
         "reference_trace",
         "reference_answer",
-        "limits",
+        "max_turns",
     ]
     for family, payload in tasks:
         task_id = str(payload["id"])
@@ -730,11 +730,9 @@ def certify(
         )
         reference = evaluation["reference_trace"]
         reference_answer = evaluation["reference_answer"]
-        limits = evaluation["limits"]
         assert isinstance(reference, list)
         assert isinstance(reference_answer, str)
-        assert isinstance(limits, dict)
-        assert limits["max_turns"] == len(reference) + 3
+        assert evaluation["max_turns"] == len(reference) + 3
         assert all(
             isinstance(call, dict) and call.get("tool") != "final_answer"
             for call in reference

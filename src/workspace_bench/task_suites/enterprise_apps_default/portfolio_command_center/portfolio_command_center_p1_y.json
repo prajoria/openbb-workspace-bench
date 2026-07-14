@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "No overnight P&L or return field is served, so the morning note cannot quantify overnight performance. Flagship Long/Short has one active exposure, In Review at 0.0867 with a -0.0365 change. Limit pressure needs status-based triage: Multi-Asset Fund is Escalated at 30.66, Global Opportunities is Open at 124.12, and Flagship Long/Short is Open at 2.74. The sole trade idea belongs to Flagship Long/Short and is In Review at 20.42 with a -0.0731 change. The rows do not link the trade to an exposure or limit record and provide no urgency definition, so execution priority remains pending that mapping.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

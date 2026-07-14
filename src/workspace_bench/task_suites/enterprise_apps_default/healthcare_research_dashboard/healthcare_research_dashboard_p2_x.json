@@ -89,8 +89,6 @@
    }
   ],
   "reference_answer": "No company or drug name is present, so the served data cannot identify a specific name with a thesis change. The clinical probability funnel reaches 74.9 and later falls to 65.52, but its stages and underlying asset are unlabeled. Flagship Long/Short revenue-bridge readings are Open at 93.24 and 17.36 with positive changes of 0.0198 and 0.0146. Its TAM readings are Open at 7.43 and 64.31 with negative changes of -0.0343 and -0.0068, creating a directional tension between revenue and TAM indicators. That tension merits review, but naming a thesis change requires company-level links, scenario definitions, and a materiality threshold.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

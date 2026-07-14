@@ -137,8 +137,6 @@
    }
   ],
   "reference_answer": "The KOL note for Global Opportunities is In Review at 43.29 and should be completed with its open questions and source evidence. Flagship Long/Short has separate Open catalyst readings of 135.15 and 110.24, while the unlabeled clinical funnel peaks at 74.9 and ends at 65.52; the follow-up must establish whether these items are related. Credit Plus prescription trends are Escalated at 133.27 and 2.37, whereas Macro Absolute Return's TAM reading is Approved at 0.39. Healthcare Alpha coverage and document records are Closed at 117.42 and 61.12, so they do not close evidence gaps for the other funds. The investment committee package needs fund- and asset-level joins, named clinical stages, commercial assumptions, and a completed Global Opportunities KOL note before drawing a consolidated conclusion.",
-  "limits": {
-   "max_turns": 11
-  }
+  "max_turns": 11
  }
 }

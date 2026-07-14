@@ -89,8 +89,6 @@
    }
   ],
   "reference_answer": "The clinical funnel reaches 74.9 and later ends at 65.52, but it has no company, drug, fund, or stage label. The Open revenue-bridge reading of 19.79 belongs to Flagship Long/Short and changed by 0.0099. The TAM reading belongs to Macro Absolute Return, is Approved at 0.39, and changed by 0.018. Because the commercial records are attached to different funds and neither is linked to the clinical series, they do not identify any name or demonstrate a thesis change. Company-level probability and revenue joins plus defined scenario meanings are required.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

@@ -1380,7 +1380,6 @@ def build_interactive_messages(
         "widget_hints": widget_hints,
         "initial_state": task["initial_state"],
         "allowed_tools": allowed_tools,
-        "limits": task.get("limits", {}),
     }
     base_instructions = [
         "You are controlling OpenBB Workspace through tool calls.",
@@ -2084,7 +2083,11 @@ def persist_judge_input(run: ComparisonRun) -> None:
             "eval": {
                 "judge_evaluation": True,
                 "reference_trace": [],
-                "limits": task.limits,
+                **(
+                    {"max_turns": task.limits["max_turns"]}
+                    if task.limits.get("max_turns")
+                    else {}
+                ),
             },
         },
         "trace": [

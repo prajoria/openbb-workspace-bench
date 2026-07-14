@@ -70,25 +70,19 @@
     ]
   },
   "eval": {
-    "required_tool_calls": [
-      {
-        "tool": "read_widget",
-        "args_contains": {
-          "widget_id": "client_360_client_book_client_accounts"
-        }
-      }
-    ],
+    "calls_match_reference": true,
     "reference_trace": [
       {
         "tool": "read_widget",
         "args": {
           "origin": "Bench Stark Enterprise",
           "widget_id": "client_360_client_book_client_accounts"
-        }
+        },
+        "graded_args": [
+          "widget_id"
+        ]
       }
     ],
-    "limits": {
-      "max_turns": 2
-    }
+    "max_turns": 2
   }
 }

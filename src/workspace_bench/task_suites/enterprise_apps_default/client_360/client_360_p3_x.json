@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Approved commentary covers the YTD client workflow and carries a fixture reading of 29.91. Current portfolio context shows primary and secondary summary values of 85.23 and 62.78, with changes of -0.0598 and 0.0279. Flagship Long/Short returns remain Open at 0.0157 for Atlas Pension and 0.0844 for Northstar Endowment, so these figures can be shared as current context but should not be presented as finalized or causally explained.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

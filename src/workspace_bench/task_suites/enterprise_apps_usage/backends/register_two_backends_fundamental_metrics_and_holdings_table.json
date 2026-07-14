@@ -368,7 +368,7 @@
       ],
       "pinned_paths": true
     },
-    "reference": [
+    "reference_trace": [
       {
         "tool": "manage_backends",
         "args": {
@@ -1901,8 +1901,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 12
-    }
+    "max_turns": 12
   }
 }

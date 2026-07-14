@@ -80,7 +80,7 @@
       ],
       "pinned_paths": false
     },
-    "reference": [
+    "reference_trace": [
       {
         "tool": "manage_backends",
         "args": {
@@ -133,8 +133,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 7
-    }
+    "max_turns": 7
   }
 }

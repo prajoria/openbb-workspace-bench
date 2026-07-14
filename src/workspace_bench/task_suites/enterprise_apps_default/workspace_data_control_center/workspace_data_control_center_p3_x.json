@@ -100,8 +100,6 @@
    }
   ],
   "reference_answer": "Flagship Long/Short app-usage readings remain Open at 58.09 and 77.68, with changes of -0.0306 and 0.0895. Export activity is Open at 86.66 and 53.01, moving by 0.0611 and -0.0733. The export-review queue is also Open at 99.14 and 46.02. Prompt-audit readings remain Open at 34.77 and 33.86, both with positive changes of 0.0814 and 0.0553. The platform owner should obtain app, user, export, and prompt identifiers and assign dispositions because the served records are aggregate scores rather than auditable events.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

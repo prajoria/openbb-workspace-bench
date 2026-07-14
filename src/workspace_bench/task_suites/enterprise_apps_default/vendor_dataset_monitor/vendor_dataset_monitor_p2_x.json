@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "FactSet has an Open validation-error reading of 59.16 and Open row-count drift of 188. Affected-app impact is also Open at 94.16, establishing that the quality issue reaches applications. However, the served data do not name the dataset, app, or business workflow. Trading, risk, reporting, and compliance impact therefore cannot be distinguished from these generic records. Keep the issue open and obtain dataset-to-app lineage plus business owners before classifying and remediating the impact.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

@@ -89,8 +89,6 @@
    }
   ],
   "reference_answer": "Global Opportunities has an In Review catalyst-and-risk reading of 50.91 with a -0.0184 change, but the row does not distinguish the catalyst from the risk. Its sell-side documents remain In Review at 28.1 and 83.3, so evidence is not complete. Flagship Long/Short documents are Open at 11.79 and 47.57, and Credit Plus documents are Escalated at 40.46 and 17.1; those queues should be handled separately. The only draft-research record is Closed for Healthcare Alpha at 34.04, so it does not establish approval for Global Opportunities. Call prep should remain conditional on named catalyst/risk detail and fund-matched research approval.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

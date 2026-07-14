@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "The served fills table contains one Open Goldman Sachs reading of 9.92 with a 0.0718 change. Its VWAP-and-arrival-slippage record is Open at 41.08 with a 0.0799 change, and the Goldman Sachs broker scorecard is Open at 68.41 with a 0.0668 change. None of these fields supplies arrival price, fill price, signed slippage units, or an underperformance threshold, so the fill cannot be classified as underperforming arrival. Broker names align, but venue and algo are absent and the scores do not establish broker causality. Obtain benchmark prices, signed slippage, venue, and algo identifiers before attributing the outcome.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

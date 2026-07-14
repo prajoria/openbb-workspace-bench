@@ -76,8 +76,6 @@
    }
   ],
   "reference_answer": "Macro Absolute Return's sign-off tracker is Approved at 95.32 with a 0.01 change. Global Opportunities separately has residual-risk actions In Review at 18.09 and 88.34, so those actions remain unresolved but are not evidence against the Macro approval without a fund link. The served rows do not name the actions or owners. Preserve Macro Absolute Return's approved status while keeping Global Opportunities pending action descriptions, ownership, due dates, and completion evidence. A consolidated committee sign-off cannot be asserted across the funds from these unjoined records.",
-  "limits": {
-   "max_turns": 6
-  }
+  "max_turns": 6
  }
 }

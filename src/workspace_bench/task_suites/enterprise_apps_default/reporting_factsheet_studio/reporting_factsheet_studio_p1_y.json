@@ -118,8 +118,6 @@
    }
   ],
   "reference_answer": "Meridian Family Office's monthly return is In Review at 0.0681 with a 0.0185 change. Attribution remains Open at 54.7 for Horizon Sovereign and 14.54 for Atlas Pension, so those records cannot be paired with the Meridian return. Risk Stats show 9.65 primary with a -0.0674 change and 76.48 secondary with a 0.008 change. Macro Absolute Return commentary is Approved at 72.19, but Atlas Pension's disclosure checklist is Escalated at 30.5. Horizon Sovereign's DDQ/RFP item remains In Review at 11.9. Complete client-level matching and resolve the escalated disclosure and in-review DDQ before closing the monthly checklist.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

@@ -84,8 +84,6 @@
    }
   ],
   "reference_answer": "No holding can be identified because security names, current weights, liquidity, and risk-contribution fields are absent. Flagship Long/Short conviction is Open at 97.44, while its holdings-table row is Approved at 80.94 for a different period and its slow-mark row is Open at 3.19. Those records are not enough to establish a disagreement or prescribe resizing. Income Fund has Open holdings-table readings of 31.32 and 11.37, but no matching conviction or slow-mark row. Credit Plus slow marks are Escalated at 87.88 and 138.17, yet they likewise lack matched holding and conviction evidence.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

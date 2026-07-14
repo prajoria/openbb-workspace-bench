@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Flagship Long/Short has an Open NAV sign-off task at 6.36, making it the direct unresolved sign-off item. Global Opportunities has Open close-exception counts of 179, 58, 174, and 62 across served periods. Income Fund has close exceptions In Review at 324, 250, 6, and 106 and Open dependencies at 71.83, 66.18, and 14.62. Multi-Asset Fund dependencies remain In Review at 0.51, 88.55, and 58.08, even though its close-exception rows are Approved. The exact daily-versus-monthly linkage and due times are absent, so these open or in-review records should be mapped to the applicable sign-off cycle before release.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

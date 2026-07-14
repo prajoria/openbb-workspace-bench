@@ -112,8 +112,6 @@
    }
   ],
   "reference_answer": "The prior-claims record for Flagship Long/Short is Open at 21.22, but the served row does not include the actual management claim. Note follow-ups remain Open at 37.51 and 46.78, while compliance follow-ups remain Open at 57.19 and 92.28. Expert-call context is also unresolved, with Open readings of 4.24 and 26.51. MNPI attestation records are Open at 20.04 and 56.63, so the meeting should proceed only within approved boundaries and with no distribution implied. The brief should request the missing claim text, close or assign the follow-ups, document the expert-call context, and complete the attestations.",
-  "limits": {
-   "max_turns": 9
-  }
+  "max_turns": 9
  }
 }

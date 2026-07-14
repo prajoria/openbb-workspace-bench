@@ -76,7 +76,7 @@
     "workspace_checks": {
       "preserve_other_dashboards": true
     },
-    "reference": [
+    "reference_trace": [
       {
         "tool": "get_workspace_snapshot",
         "args": {}
@@ -101,8 +101,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 6
-    }
+    "max_turns": 6
   }
 }

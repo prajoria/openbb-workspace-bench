@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Flagship Long/Short limit utilization is Open at 0.0347 with a -0.0679 change, and its breach-or-warning exposure is Open at 0.0127 with a 0.0292 change. Global Opportunities has limit-breach-trend exposures In Review at 0.0287 and 0.0343, both with positive changes of 0.1013 and 0.0579. No limit names or thresholds are served, so closeness to escalation cannot be calculated across the funds. Review the rising Global Opportunities trend and the open Flagship control first on status and direction. Any exposure reduction or hedge should wait until the underlying positions, limit definitions, and current headroom are identified.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

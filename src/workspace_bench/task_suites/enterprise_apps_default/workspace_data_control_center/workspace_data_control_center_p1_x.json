@@ -136,8 +136,6 @@
    }
   ],
   "reference_answer": "Platform readiness is not complete because failed-job readings remain Open at 99.15 and 35.05. Feed-status readings are Open at 13.62 for Bloomberg and 53.19 for ICE, although the rows do not explicitly label the feeds as stale. Entitlement review remains Open for app/widget permissions at 3.14 and 79.88, role coverage at 2.7 and 75.55, and Bloomberg's sensitive-dataset flag at 61.17. Export activity is Open at 86.66 and 53.01. Copilot visibility flags are also Open at 96.33 and 45.01. Resolve each open control with named jobs, feeds, apps, widgets, roles, exports, and visibility settings before production readiness is certified.",
-  "limits": {
-   "max_turns": 11
-  }
+  "max_turns": 11
  }
 }

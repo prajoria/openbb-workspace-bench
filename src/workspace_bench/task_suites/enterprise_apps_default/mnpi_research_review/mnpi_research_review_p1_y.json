@@ -112,8 +112,6 @@
    }
   ],
   "reference_answer": "Global Opportunities has an Open wall-crossing record at 24.09 and an Open research draft at 63.12. Its target records are Open at 360267.88 and In Review at 126907.65, so target approval is incomplete. Open meeting logs exist for ORCL at 40.12 and TSM at 102.1, with NFLX and COST still In Review at 22.38 and 53.19; no fund link connects these meetings to the crossing or draft. Macro Absolute Return evidence and sign-off remains Open at 29.54 even though its draft is Approved at 92.97 and its target is Approved at 18439.57. Keep the case segmented by fund and obtain meeting-to-fund links, target dispositions, and completed sign-off before closure.",
-  "limits": {
-   "max_turns": 9
-  }
+  "max_turns": 9
  }
 }

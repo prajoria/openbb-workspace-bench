@@ -457,7 +457,7 @@
       "max_invalid_tool_calls": 3,
       "max_repeated_snapshots": 4
     },
-    "reference": [
+    "reference_trace": [
       {
         "tool": "get_workspace_snapshot",
         "args": {}
@@ -718,8 +718,6 @@
         "args": {}
       }
     ],
-    "limits": {
-      "max_turns": 40
-    }
+    "max_turns": 40
   }
 }

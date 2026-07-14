@@ -137,8 +137,6 @@
    }
   ],
   "reference_answer": "The KOL follow-up should first clarify the Open catalyst readings of 87.53 and 75.56 and identify the events behind them. Ask which clinical assumptions explain the probability funnel reaching 74.9 and then ending at 65.52, because the served series does not label stages. Commercial questions should address Open TAM readings of 7.43 and 64.31 and declining prescription-trend readings of 40.91 at -0.0061 and 85.42 at -0.0393. KOL notes themselves remain Open at 22.38 and 75.0, so their unresolved questions must be captured explicitly. Before the investment committee, obtain named assets, stage definitions, source evidence, and closure of document-checklist rows at 44.47 and 91.82.",
-  "limits": {
-   "max_turns": 11
-  }
+  "max_turns": 11
  }
 }

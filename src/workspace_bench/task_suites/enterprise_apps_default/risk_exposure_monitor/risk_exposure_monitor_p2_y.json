@@ -100,8 +100,6 @@
    }
   ],
   "reference_answer": "The served records do not join a position to its weight, marginal VaR, and stress P&L, so disproportionality cannot be established. Flagship Long/Short has an Open risk-contribution exposure of 0.4045 and Open marginal VaR of -85792, but neither row names a position. Credit Plus has an Escalated exposure-table value of 0.097, which belongs to a different fund. GOOGL concentration is Approved at 0.0159 and lacks corresponding VaR or stress data. Obtain position-level joins and portfolio weights before identifying an outlier.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

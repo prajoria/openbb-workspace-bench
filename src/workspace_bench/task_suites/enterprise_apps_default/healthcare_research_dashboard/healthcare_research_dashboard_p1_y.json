@@ -125,8 +125,6 @@
    }
   ],
   "reference_answer": "Healthcare Alpha coverage is Closed at 117.42, and its research-document checklist is also Closed at 61.12. Flagship Long/Short separately has Open clinical catalyst readings of 135.15 and 110.24. The probability funnel reaches 74.9 and later ends at 65.52, but it has no fund, asset, or stage label. Macro Absolute Return has an Approved TAM reading of 0.39, while Credit Plus prescription trends are Escalated at 133.27 and 2.37 with negative changes of -0.0359 and -0.03. Because these records concern different funds and contain no drug or company identifiers, they cannot form a single healthcare thesis without additional joins.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

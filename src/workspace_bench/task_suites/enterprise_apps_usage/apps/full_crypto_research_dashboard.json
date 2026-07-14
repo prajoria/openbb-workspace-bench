@@ -72,7 +72,7 @@
     "workspace_checks": {
       "preserve_other_dashboards": true
     },
-    "reference": [
+    "reference_trace": [
       {
         "tool": "manage_backends",
         "args": {
@@ -126,8 +126,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 9
-    }
+    "max_turns": 9
   }
 }

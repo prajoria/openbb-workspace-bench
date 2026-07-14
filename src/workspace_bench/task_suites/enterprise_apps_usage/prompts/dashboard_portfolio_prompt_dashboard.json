@@ -71,7 +71,7 @@
     "workspace_checks": {
       "preserve_other_dashboards": true
     },
-    "reference": [
+    "reference_trace": [
       {
         "tool": "get_workspace_prompt",
         "args": {
@@ -134,8 +134,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 11
-    }
+    "max_turns": 11
   }
 }

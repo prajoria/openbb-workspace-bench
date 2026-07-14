@@ -112,8 +112,6 @@
    }
   ],
   "reference_answer": "Coverage for Macro Absolute Return is Approved at 91.24 but declined by -0.0666. MSFT consensus revisions for Credit Plus are Escalated at 64.66 with a -0.055 change, while JPM ownership for Healthcare Alpha is Closed at 2.17 with a -0.0445 change. Macro Absolute Return's valuation-assumption row is Approved at 32.37 with a -0.0826 change. Thesis readings are Escalated for Credit Plus at 23.02 with a 0.019 change and Approved for Macro Absolute Return at 84.43 with a -0.0013 change. Because the served rows span different funds and mostly omit ticker or scenario labels, they describe separate changes rather than one joined company review.",
-  "limits": {
-   "max_turns": 9
-  }
+  "max_turns": 9
  }
 }

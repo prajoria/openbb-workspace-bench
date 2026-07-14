@@ -80,8 +80,10 @@ def _call(tool: str, args: JsonDict) -> JsonDict:
     return {"tool": tool, "args": args}
 
 
-def _required_call(tool: str, args_contains: JsonDict) -> JsonDict:
-    return {"required_tool_calls": [{"tool": tool, "args_contains": args_contains}]}
+def _optional_call(tool: str, args: JsonDict) -> JsonDict:
+    """A reference step agents may legitimately skip (not graded)."""
+
+    return {"tool": tool, "args": args, "optional": True}
 
 
 def _seed(
@@ -134,7 +136,7 @@ def _family_specs() -> list[FamilySpec]:
             prompt="Call get_workspace_snapshot once.",
             open_prompt="Get a complete picture of what is currently in this workspace.",
             oracle=[_call("get_workspace_snapshot", {})],
-            success=_required_call("get_workspace_snapshot", {}),
+            success={"calls_match_reference": True},
         ),
         FamilySpec(
             tool="manage_dashboard",
@@ -197,12 +199,10 @@ def _family_specs() -> list[FamilySpec]:
             open_prompt="Switch over to the Details tab of the current dashboard.",
             oracle=[_call("navigate_workspace", {"operation": "tab", "tab_id": "details"})],
             open_oracle=[
-                _call("get_workspace_snapshot", {}),
+                _optional_call("get_workspace_snapshot", {}),
                 _call("navigate_workspace", {"operation": "tab", "tab_id": "details"}),
             ],
-            success=_required_call(
-                "navigate_workspace", {"operation": "tab", "tab_id": "details"}
-            ),
+            success={"calls_match_reference": True},
             initial_state=_seed(
                 "navigate_workspace",
                 tabs=[
@@ -216,7 +216,7 @@ def _family_specs() -> list[FamilySpec]:
             prompt="Call list_available_widgets for origin 'Getting Started'.",
             open_prompt="See which widgets the Getting Started backend offers.",
             oracle=[_call("list_available_widgets", {"origin": "Getting Started"})],
-            success=_required_call("list_available_widgets", {"origin": "Getting Started"}),
+            success={"calls_match_reference": True},
             backends=["stark-enterprise-x", "getting-started"],
         ),
         FamilySpec(
@@ -239,7 +239,7 @@ def _family_specs() -> list[FamilySpec]:
                 )
             ],
             open_oracle=[
-                _call("list_available_widgets", {"origin": STARK}),
+                _optional_call("list_available_widgets", {"origin": STARK}),
                 _call(
                     "get_widget_schema",
                     {
@@ -249,7 +249,7 @@ def _family_specs() -> list[FamilySpec]:
                 ),
             ],
             listed_oracle=[
-                _call("list_available_widgets", {"origin": STARK}),
+                _optional_call("list_available_widgets", {"origin": STARK}),
                 _call(
                     "get_widget_schema",
                     {
@@ -258,13 +258,7 @@ def _family_specs() -> list[FamilySpec]:
                     },
                 ),
             ],
-            success=_required_call(
-                "get_widget_schema",
-                {
-                    "origin": STARK,
-                    "widget_id": "portfolio_command_center_actions_trade_ideas",
-                },
-            ),
+            success={"calls_match_reference": True},
         ),
         FamilySpec(
             tool="get_params_options",
@@ -288,7 +282,7 @@ def _family_specs() -> list[FamilySpec]:
                 )
             ],
             open_oracle=[
-                _call("list_available_widgets", {"origin": STARK}),
+                _optional_call("list_available_widgets", {"origin": STARK}),
                 _call(
                     "get_params_options",
                     {
@@ -298,14 +292,7 @@ def _family_specs() -> list[FamilySpec]:
                     },
                 ),
             ],
-            success=_required_call(
-                "get_params_options",
-                {
-                    "origin": STARK,
-                    "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
-                    "param_name": "period",
-                },
-            ),
+            success={"calls_match_reference": True},
         ),
         FamilySpec(
             tool="get_widget_data",
@@ -329,7 +316,7 @@ def _family_specs() -> list[FamilySpec]:
                 )
             ],
             open_oracle=[
-                _call("list_available_widgets", {"origin": STARK}),
+                _optional_call("list_available_widgets", {"origin": STARK}),
                 _call(
                     "get_widget_data",
                     {
@@ -339,14 +326,7 @@ def _family_specs() -> list[FamilySpec]:
                     },
                 ),
             ],
-            success=_required_call(
-                "get_widget_data",
-                {
-                    "origin": STARK,
-                    "widget_id": "risk_exposure_monitor_dashboard_var_trend",
-                    "data_args": {"portfolio": "Global Equity", "period": "YTD"},
-                },
-            ),
+            success={"calls_match_reference": True},
         ),
         FamilySpec(
             tool="read_widget",
@@ -360,28 +340,31 @@ def _family_specs() -> list[FamilySpec]:
                 "'Smoke read_widget' dashboard."
             ),
             oracle=[
-                _call(
-                    "read_widget",
-                    {
-                        "origin": STARK,
-                        "widget_id": "client_360_client_book_client_accounts",
-                    },
-                )
+                {
+                    **_call(
+                        "read_widget",
+                        {
+                            "origin": STARK,
+                            "widget_id": "client_360_client_book_client_accounts",
+                        },
+                    ),
+                    "graded_args": ["widget_id"],
+                }
             ],
             open_oracle=[
-                _call("get_workspace_snapshot", {}),
-                _call(
-                    "read_widget",
-                    {
-                        "origin": STARK,
-                        "widget_id": "client_360_client_book_client_accounts",
-                    },
-                ),
+                _optional_call("get_workspace_snapshot", {}),
+                {
+                    **_call(
+                        "read_widget",
+                        {
+                            "origin": STARK,
+                            "widget_id": "client_360_client_book_client_accounts",
+                        },
+                    ),
+                    "graded_args": ["widget_id"],
+                },
             ],
-            success=_required_call(
-                "read_widget",
-                {"widget_id": "client_360_client_book_client_accounts"},
-            ),
+            success={"calls_match_reference": True},
             initial_state=_seed(
                 "read_widget",
                 widget_id="client_360_client_book_client_accounts",
@@ -393,7 +376,7 @@ def _family_specs() -> list[FamilySpec]:
             prompt="Call get_skill_content with slug 'daloopa-tearsheet'.",
             open_prompt="Pull up the Daloopa tearsheet workflow skill.",
             oracle=[_call("get_skill_content", {"slug": "daloopa-tearsheet"})],
-            success=_required_call("get_skill_content", {"slug": "daloopa-tearsheet"}),
+            success={"calls_match_reference": True},
         ),
         FamilySpec(
             tool="read_workspace_resource",
@@ -411,19 +394,14 @@ def _family_specs() -> list[FamilySpec]:
                     {"uri": "openbb://workspace/specs/widget-types"},
                 )
             ],
-            success=_required_call(
-                "read_workspace_resource",
-                {"uri": "openbb://workspace/specs/widget-types"},
-            ),
+            success={"calls_match_reference": True},
         ),
         FamilySpec(
             tool="get_workspace_prompt",
             prompt="Call get_workspace_prompt with name 'workspace_tool_usage'.",
             open_prompt="Fetch the workspace guidance prompt about disciplined tool usage.",
             oracle=[_call("get_workspace_prompt", {"name": "workspace_tool_usage"})],
-            success=_required_call(
-                "get_workspace_prompt", {"name": "workspace_tool_usage"}
-            ),
+            success={"calls_match_reference": True},
         ),
         FamilySpec(
             tool="create_widget",
@@ -704,7 +682,7 @@ def _family_specs() -> list[FamilySpec]:
             prompt="Call manage_backends operation='list' once.",
             open_prompt="Check which data backends this workspace is connected to.",
             oracle=[_call("manage_backends", {"operation": "list"})],
-            success=_required_call("manage_backends", {"operation": "list"}),
+            success={"calls_match_reference": True},
         ),
         FamilySpec(
             tool="assign_tasks_to_agents",
@@ -718,22 +696,25 @@ def _family_specs() -> list[FamilySpec]:
                 "return the Workspace smoke envelope."
             ),
             oracle=[
-                _call(
-                    "assign_tasks_to_agents",
-                    {
-                        "task_requests": [
-                            {
-                                "id": "smoke-envelope",
-                                "description": "Return the Workspace smoke envelope.",
-                            }
-                        ]
-                    },
-                )
+                {
+                    **_call(
+                        "assign_tasks_to_agents",
+                        {
+                            "task_requests": [
+                                {
+                                    "id": "smoke-envelope",
+                                    "description": "Return the Workspace smoke envelope.",
+                                }
+                            ]
+                        },
+                    ),
+                    # The envelope echo accepts free-form request fields and
+                    # the args matcher compares lists exactly, so the round
+                    # trip is proven by the call itself.
+                    "graded_args": [],
+                }
             ],
-            # The envelope echo accepts free-form request fields and the args
-            # matcher compares lists exactly, so the round trip is proven by
-            # the call itself.
-            success=_required_call("assign_tasks_to_agents", {}),
+            success={"calls_match_reference": True},
         ),
     ]
 
@@ -770,7 +751,7 @@ def _level_task(spec: FamilySpec, level: str) -> JsonDict:
         "eval": {
             **copy.deepcopy(spec.success),
             "reference_trace": oracle,
-            "limits": {"max_turns": LEVEL_TURNS[level]},
+            "max_turns": LEVEL_TURNS[level],
         },
     }
     unknown = set(payload) - TASK_SPEC_FIELDS

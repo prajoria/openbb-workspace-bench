@@ -97,8 +97,6 @@
    }
   ],
   "reference_answer": "The US Equity order row is Escalated at 173 orders with a -0.0276 change and is attributed to J.P. Morgan. Volume profile and implementation shortfall instead belong to Citi and are Approved at 17.9 and 63.25. The venue-flow series ranges from 17.75 to 24.19 but has no venue labels or units. Because the order queue is not joined to Citi and no per-order size or ADV is served, the approved Citi readings cannot justify routing the J.P. Morgan queue. Hold the escalation for order-level sizing and obtain broker-matched volume, venue, and shortfall data before selecting tactics.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

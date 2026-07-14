@@ -124,8 +124,6 @@
    }
   ],
   "reference_answer": "Escalate the Flagship Long/Short employee-trade rows because both remain Open at 29.14 and 88.88. The same fund has Open policy-breach counts of 19 and 3, plus Open pre-clearance readings of 15.89 and 15.57, confirming incomplete personal-trading review. Open surveillance queues of 119 and 210, an Open restricted-list reading of 18.98, and Open access/export readings of 37.01 and 50.11 add compliance context but are not joined to a particular trade. The served records do not identify any research activity, so no research item can be named for escalation. Leadership should review the open employee trades and require trade-level links to breaches, pre-clearance, restricted-list, and audit evidence.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

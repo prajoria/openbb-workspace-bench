@@ -100,8 +100,6 @@
    }
   ],
   "reference_answer": "Global Opportunities app usage is Open at 67.64 with a -0.0331 change, and its prompt-audit activity is Open at 54.45 with a -0.009 change. Credit Plus export activity is Open at 122.15 with a -0.0668 change. Its export-review queue is also Open at 18.0 with a 0.0838 change. Because usage and prompt audit concern Global Opportunities while export work concerns Credit Plus, the platform owner should maintain separate review tracks. User, app, export, and prompt identifiers are not served and must be obtained before the open records can be investigated or closed.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }

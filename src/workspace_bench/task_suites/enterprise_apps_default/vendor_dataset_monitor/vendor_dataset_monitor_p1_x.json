@@ -124,8 +124,6 @@
    }
   ],
   "reference_answer": "FactSet latency is Open at 727 ms with a -0.0029 change. Freshness has 124 Open exceptions with a 0.0579 change, and validation failures remain Open at 59.16. The incident log is Open at 18.67, while blast radius is Open at 24.33. Affected-app impact is Open at 94.16, but the served row does not name any fund app or dataset. The SLA report should keep FactSet escalated until feed-level freshness and validation issues are mapped to named apps and the incident is closed.",
-  "limits": {
-   "max_turns": 10
-  }
+  "max_turns": 10
  }
 }

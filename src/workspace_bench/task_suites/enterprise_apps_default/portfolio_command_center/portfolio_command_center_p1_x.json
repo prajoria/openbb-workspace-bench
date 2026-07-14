@@ -85,8 +85,6 @@
    }
   ],
   "reference_answer": "The served rows contain no overnight P&L or return field, so overnight performance cannot be reported. Flagship Long/Short has Open active exposures of 0.0389 and 0.0742, making 0.0742 the larger displayed exposure. Limit-utilization readings remain Open at 85.25 and 1.89, but no limit threshold or exposure link is supplied. Trade-idea readings are Open at 62.35 and 74.79, with the 74.79 row carrying the higher displayed score. Because the ideas are unnamed and score direction is not defined as urgency, obtain trade actions, owners, and limit headroom before setting the execution order.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

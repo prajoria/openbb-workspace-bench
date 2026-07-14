@@ -21,19 +21,7 @@
     ]
   },
   "eval": {
-    "required_tool_calls": [
-      {
-        "tool": "get_widget_data",
-        "args_contains": {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "risk_exposure_monitor_dashboard_var_trend",
-          "data_args": {
-            "portfolio": "Global Equity",
-            "period": "YTD"
-          }
-        }
-      }
-    ],
+    "calls_match_reference": true,
     "reference_trace": [
       {
         "tool": "get_widget_data",
@@ -47,8 +35,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 1
-    }
+    "max_turns": 1
   }
 }

@@ -55,8 +55,6 @@
         }
       }
     ],
-    "limits": {
-      "max_turns": 4
-    }
+    "max_turns": 4
   }
 }

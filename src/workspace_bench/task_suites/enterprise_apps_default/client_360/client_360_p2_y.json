@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Horizon Sovereign requires the strongest flow escalation: its MTD record is Escalated at 87.7 with a -0.0537 change. Northstar Endowment remains Open at 15.82, while Meridian Family Office is In Review at 128.46; neither row explicitly labels a redemption. Atlas Pension's flow is Approved at 52.31, but its service request is Escalated at 81.9 and therefore remains unresolved. Relationship Metrics show 88.82 secondary, a 50.21 threshold, and a 58.24 watchlist reading without client identifiers. Escalate Horizon Sovereign's adverse flow and Atlas Pension's service issue, but do not assign the unjoined relationship metrics to a specific account.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

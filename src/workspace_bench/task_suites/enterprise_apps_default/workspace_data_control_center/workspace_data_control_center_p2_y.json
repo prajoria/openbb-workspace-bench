@@ -88,8 +88,6 @@
    }
   ],
   "reference_answer": "Restrict Healthcare Alpha's Copilot-visible scope because its visibility flag remains Open at 100.72. Restrict the unresolved Global Opportunities app/widget permission scope, which is Open at 42.79. Refinitiv's sensitive-dataset flag is Open at 103.74 and should remain unavailable, while S&P Global's flag is In Review at 42.06 and should remain controlled pending disposition. FactSet is Closed at 47.17 and MSCI is Approved at 108.09, so those flags do not require the same hold on status alone. Exact apps, widgets, datasets, and roles are absent, so the restriction must be refined once item-level mappings are supplied.",
-  "limits": {
-   "max_turns": 7
-  }
+  "max_turns": 7
  }
 }

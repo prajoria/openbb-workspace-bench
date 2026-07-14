@@ -100,8 +100,6 @@
    }
   ],
   "reference_answer": "JPM is the only upcoming-earnings row, Open at 107.36 with a 0.0307 change, while its internal-versus-street bridge is Closed at 17.82 with a -0.0419 change. The remaining evidence is not company-matched: surprise history is Closed at 34.02 for XOM and 37.11 for AAPL, and the catalyst row is Closed at 62.81 for MSFT. MSFT also has a Closed bridge reading of 64.0, but no upcoming-earnings row in the served data. Actual estimates, named surprise drivers, prices, targets, and risk limits are absent. JPM can be monitored for its open event, but the data do not support a directional preview or trade setup.",
-  "limits": {
-   "max_turns": 8
-  }
+  "max_turns": 8
  }
 }
