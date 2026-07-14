@@ -11,7 +11,7 @@ Motivation: a [NY Tech Week talk](https://youtu.be/7fDTDYh2NJ4?t=1210) showed ag
 
 Five suites ship bundled in a capability ladder: `smoke` checks one round trip
 per Workspace MCP surface (20 tasks), `enterprise-apps-default` answers the
-default apps' product prompts (69), `enterprise-apps-usage` operates Workspace
+default apps' product prompts in two data worlds (138), `enterprise-apps-usage` operates Workspace
 state (300), and `build-openbb-apps` builds and repairs custom apps (236).
 
 ## Contents
@@ -37,9 +37,9 @@ state (300), and `build-openbb-apps` builds and repairs custom apps (236).
 
 ## What Is Included
 
-- 625 deterministic simulator tasks across four certified suites:
-  - `smoke` — 20 minimal round-trip tasks covering every Workspace MCP surface
-  - `enterprise-apps-default` — 69 byte-verbatim product prompts across 23 default apps
+- 754 deterministic simulator tasks across four certified suites:
+  - `smoke` — 80 tasks: a four-level execution ladder over every Workspace MCP surface
+  - `enterprise-apps-default` — 138 tasks pairing 69 byte-verbatim product prompts across two data worlds
   - `enterprise-apps-usage` — 300 operating tasks across 15 tool-anchored families
   - `build-openbb-apps` — 236 specification-level app-building tasks across 12 families,
     including 24 long diagnosis/repair/retest incidents
@@ -47,7 +47,6 @@ state (300), and `build-openbb-apps` builds and repairs custom apps (236).
   Each suite directory under `src/workspace_bench/task_suites/` has a README
   explaining how it is generated and how its tasks are categorized.
 - generated families covering widgets, apps, prompts, resources, skills, delegation, inspection, repair, layout, and backend/app building
-- six archived pre-hardening model baselines with full traces and rollout exports
 - transcription-grade Getting Started, Widget Examples, Stark enterprise, and Daloopa fixture backends
 - simulator-backed Workspace MCP runtime for fast local evals
 - live `workspace-mcp` sidecar smoke runner
@@ -81,8 +80,7 @@ same benchmark core. Other important boundaries:
   private suites for held-out evaluation and never train on their answers.
 - Runtime-enabled simulator tasks make real localhost HTTP probes against
   evaluator-owned deterministic data, but do not execute agent-authored backend
-  code. The experimental code track does execute agent code and is not a
-  security sandbox.
+  code.
 - `assign_tasks_to_agents` is an envelope echo in the simulator, not proof of
   downstream multi-agent work. Completion-note semantics and cosmetic polish
   are narrower than human review.
@@ -97,8 +95,8 @@ Install dependencies and inspect the benchmark:
 ```bash
 uv run workspace-bench list
 uv run workspace-bench manifest --json
-uv run workspace-bench validate --suite smoke --min-tasks 20
-uv run workspace-bench validate --suite enterprise-apps-default --min-tasks 69
+uv run workspace-bench validate --suite smoke --min-tasks 80
+uv run workspace-bench validate --suite enterprise-apps-default --min-tasks 138
 uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 300
 uv run workspace-bench validate --suite build-openbb-apps --min-tasks 236
 ```
@@ -134,9 +132,10 @@ in `runs/reports/significance.json`.
 | OpenAI GPT-5.1 | 36/472 (7.6%; 5.6–10.4%) | 94/472 (19.9%) | 273/472 (57.8%) |
 | OpenAI GPT-5.4 mini | 12/472 (2.5%; 1.5–4.4%) | 35/472 (7.4%) | 164/472 (34.7%) |
 
-Every row above comes from the replay-only fixed-grader directory
-`runs/comparison/build-calibration-202607-regraded/`; each model records
-`resumed_cells=472` and `new_cells=0`. The before → after replay comparison is:
+Every row above comes from the July 2026 replay-only fixed-grader run
+(each model recorded `resumed_cells=472` and `new_cells=0`); the compiled
+boards in `runs/reports/` are the retained evidence — the raw run
+directories are not committed. The before → after replay comparison is:
 
 | Model | Strict | Mean outcome | State | Runtime |
 | --- | ---: | ---: | ---: | ---: |
@@ -185,9 +184,9 @@ failures as failures — core process failures: Sonnet 5 15, gpt-oss:20b 22,
 Qwen3 8B 20, GLM-5.2 4, GPT-5.5 1, gpt-4.1-mini 0; excluding them, the
 valid-attempt pass rates are 94.3 / 93.7 / 77.4 / 70.3 / 64.0 / 53.2%.
 
-Full per-task results and traces are committed under `runs/comparison/`,
-portable rollout JSONL for all 1,800 episodes under `runs/exports/`, the
-compiled report at `runs/reports/calibration.json` (built by
+The raw per-task traces from those runs predate the 2026-07 schema resets and
+were removed from the repository as non-comparable; the compiled evidence
+remains at `runs/reports/calibration.json` (built by
 `workspace-bench compile calibration`), and confidence intervals, difficulty
 slices, and all pairwise tests at `runs/reports/significance.json` (built by
 `workspace-bench compile significance`). The current analysis script additionally
@@ -241,29 +240,15 @@ uv run workspace-bench run-agent-command \
 
 The harness writes a task envelope JSON file, sets environment variables for the agent command, reads the agent's emitted `tool_calls.jsonl`, executes those calls in the Workspace simulator, and grades the final state.
 
-Run a local Ollama model:
+Run any external agent command (it receives the task envelope via
+`WORKSPACE_BENCH_TASK_JSON` and writes tool calls to
+`WORKSPACE_BENCH_OUTPUT_JSONL`):
 
 ```bash
-OLLAMA_MODEL=gpt-oss:20b \
 uv run workspace-bench run-agent-command \
   --task enterprise-apps-usage/create/price_performance_aapl \
-  --agent-command "python examples/ollama_agent.py" \
-  --run-dir runs/ollama \
-  --json
-```
-
-The Ollama adapter writes `ollama_prompt.txt`, `ollama_response.txt`, and `tool_calls.jsonl` inside the task run directory so you can debug what the model saw and emitted.
-
-Run GPT-4.1 through the OpenAI API:
-
-```bash
-cp .env.example .env
-# edit .env and set OPENAI_API_KEY
-
-uv run workspace-bench run-agent-command \
-  --task enterprise-apps-usage/create/price_performance_aapl \
-  --agent-command "python examples/openai_gpt4_1.py" \
-  --run-dir runs/openai-gpt-4.1 \
+  --agent-command "python -m workspace_bench.agents.rule_agent" \
+  --run-dir runs/rule-agent \
   --json
 ```
 
@@ -334,7 +319,7 @@ Run models from a JSON adapter config:
 
 ```bash
 uv run workspace-bench \
-  --models-file examples/models.example.json \
+  --models-file my-models.json \
   --suite enterprise-apps-usage \
   --timeout 240
 ```
@@ -399,26 +384,6 @@ uv run workspace-bench export-task \
   --output task.json
 ```
 
-Export rollouts or SFT data explicitly:
-
-```bash
-uv run workspace-bench export-rollouts \
-  --oracle \
-  --task enterprise-apps-usage/create/price_performance_aapl \
-  --output runs/exports/oracle-rollouts.jsonl
-
-uv run workspace-bench export-sft \
-  --oracle \
-  --task enterprise-apps-usage/create/price_performance_aapl \
-  --format openai_messages \
-  --output runs/exports/oracle-sft.jsonl
-```
-
-You can also export from an evaluator output directory with
-`--comparison-dir runs/comparison/<run-id>`. SFT export includes only passing
-attempts by default; add `--include-failures` to keep failed attempts with grade
-metadata.
-
 ### External command contract
 
 For each task, `run-agent-command` creates an isolated run directory, writes the
@@ -450,15 +415,15 @@ be added independently and reported separately or in aggregate. Bundled today:
 
 | suite | tasks | what it measures |
 | --- | --- | --- |
-| `smoke` | 20 | minimal round trips across every Workspace MCP tool and knowledge surface |
-| `enterprise-apps-default` | 69 | answering byte-verbatim product prompts from the seeded default apps |
+| `smoke` | 80 | four-level execution ladder across every Workspace MCP tool and knowledge surface |
+| `enterprise-apps-default` | 138 | answering 69 byte-verbatim product prompts across two seeded data worlds |
 | `enterprise-apps-usage` | 300 | operating the workspace across widgets, dashboards, apps, skills, and repair |
 | `build-openbb-apps` | 236 | building, diagnosing, repairing, retesting, and opening custom-backend widgets and apps |
 
 ```bash
 # run or validate one suite
 uv run workspace-bench validate --suite build-openbb-apps --min-tasks 236
-uv run workspace-bench --models-file examples/models.example.json --suite build-openbb-apps
+uv run workspace-bench --models-file my-models.json --suite build-openbb-apps
 ```
 
 Every suite requires the reference solution to pass every task and a
@@ -475,8 +440,8 @@ run directory per model per suite:
 ```bash
 # each evaluator invocation writes one run directory per model
 uv run workspace-bench compile suites \
-  --run build-openbb-apps=runs/comparison/build-calibration-202607-regraded/openai-gpt-5.5.json \
-  --historical-run core=runs/comparison/core-gpt-5.5 \
+  --run build-openbb-apps=runs/comparison/<run-id>/<model>.json \
+  --historical-run core=runs/comparison/<historical-run-id> \
   --output /tmp/workspace-bench-suites-example.json
 ```
 
@@ -618,7 +583,7 @@ uv run --extra browser workspace-bench browser-cert \
 ```
 
 Workspace UI selectors are externalized in
-`src/workspace_bench/browser/selectors.json`. If the live product differs,
+`src/workspace_bench/workspace/browser/selectors.json`. If the live product differs,
 copy that file outside the repository, edit only the selectors, and pass it
 with `--selectors PATH`. The local self-test proves the browser, backend, and
 artifact layers; it does **not** prove live-product selector or rendering
@@ -746,8 +711,8 @@ descriptive slug; generator mechanics are not part of the public identity.
 empirical metadata measured in July 2026: 17/43/176. It does not render prompts
 or select graders. **Specification level** is the structural axis that does:
 60 `explicit`, 92 `partially-specified`, and 84 `open-brief`. Core remains
-90/120/90 and the experimental code track is 3/6/3. Every manifest-track build
-task exposes the full tool surface, so selecting the right path is evaluated.
+90/120/90. Every build task exposes the full tool surface, so selecting the
+right path is evaluated.
 
 ## Terminology
 
@@ -788,17 +753,10 @@ scripts/
     build_apps_suite/      build-openbb-apps family modules
   audits/                 Local, release, hosted-surface, and prompt audits
 runs/
-  comparison/              Historical boards plus the 2026-07 build calibration
-  exports/                 Rollout JSONL for the 1,800 core episodes
   reports/                 Compiled reports and generated catalogs/matrices
-    task-catalog.md         All 625 deterministic simulator tasks; code track noted separately
+    task-catalog.md         All 754 deterministic simulator tasks
     tool-coverage-matrix.md Per-task x Workspace MCP oracle-tool matrix
     tool-matrix-data.json   Machine-readable data behind the tool matrix
-examples/
-  jsonl_rule_agent.py       Repo-checkout wrapper for the packaged demo agent
-  ollama_agent.py           Local Ollama adapter template
-  openai_gpt4_1.py          GPT-4.1 OpenAI API adapter template
-  models.example.json       Model comparison adapter config example
 references/
   openbb-backend-examples/  Vendored OpenBB backend reference implementations (MIT,
                             pinned upstream commit) — ground truth for building

@@ -1,7 +1,7 @@
 # Result & Output Schema
 
 Reference for evaluator output — result rows, grade dimensions, receipts,
-exports, and issue codes. See [README](README.md) for the project overview and
+and issue codes. See [README](README.md) for the project overview and
 [TASK-SCHEMA](TASK-SCHEMA.md) for the input side.
 
 All result issues are `{code, message}` objects. A built-in `run --json` emits
@@ -44,24 +44,6 @@ completed judgments pin the model and prompt-template hash. Stored re-judgment
 adds `judge_attempts`, `judged_at`, `judged_at_model`, and `judge_provenance`.
 Summaries report deterministic pass counts separately from judged pass counts.
 
-The real-code command emits `workspace-bench-code-result/v0`, containing task,
-agent process, strict code grade, artifact paths, and an evaluator-owned
-`workspace-bench-code-receipt/v0`. The receipt covers install, server pid/log
-tails, manifests, HTTP probes, non-empty pytest results, garbage-mutation test
-sensitivity, cleanup, and final grade.
-
-## Rollouts and trace artifacts
-
-`export-rollouts` writes one `workspace-bench-rollout-v1` JSONL object per
-episode with `task`, `messages`, `tool_calls`, `tool_results`,
-`final_snapshot`, `grade`, and `metadata`. Metadata includes export schema and
-time, Git state, suite hash, taxonomy, and difficulty; private/hidden
-suite metadata is retained when available. `export-sft` converts the same
-record to `openai_messages`, `sharegpt`, or `tool_call_jsonl`, while
-`export-preferences` selects chosen/rejected attempts for the same model/task.
-Per-task trace artifacts retain task metadata and prompt, grade, ordered calls
-and results, and final snapshot.
-
 ## Issue-code catalog
 
 - State and definition: `dashboard_name`, `missing_tab`, `missing_widget`,
@@ -81,11 +63,9 @@ and results, and final snapshot.
 - Repair/preservation: `backend_validation_warnings`,
   `custom_backend_replaced`, `duplicate_custom_backend_name`,
   `collateral_app_change`, and `collateral_dashboard_change`.
-- Code track: `code_install_failed`, `code_server_startup_failed`,
-  `code_widgets_invalid`, `code_apps_invalid`, `code_cors_missing`,
-  `code_probe_coverage_missing`, `code_endpoint_unreachable`,
-  `code_endpoint_incompatible`, `code_endpoint_placeholder`,
-  `code_tests_failed`, `code_tests_insensitive`, and `code_server_orphaned`.
+- Answer judge: `missing_final_answer` (a judge-graded task ended without a
+  `final_answer` submission; deterministic, fails the task before any judge
+  verdict is consulted).
 
 Polish codes are task-authored (bundled tasks currently use
 `polish_refresh_policy`) and appear only in `polish_issues`.

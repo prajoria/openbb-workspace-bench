@@ -1,7 +1,7 @@
 # Contributing to WorkspaceBench
 
 WorkspaceBench should stay benchmark-first. Contributions must preserve the
-same task, simulator, trace, and grader contracts used by the CLI, exports, and
+same task, simulator, trace, and grader contracts used by the CLI and
 RL adapter. Generated task suites and reports are changed through their
 generators, never by editing generated artifacts.
 
@@ -135,27 +135,6 @@ approved evidence, then use `--apply-overrides` to generate
 labels directly. Relabeling difficulty must not alter specification level,
 prompt text, or success criteria.
 
-## Add an export format
-
-1. Keep canonical rollout records unchanged.
-2. Add conversion logic under `workspace_bench.exports`.
-3. Preserve Git/content provenance, export schema, task, and suite metadata.
-4. Add tests in `tests/test_exports.py`.
-5. Document the format in the README's
-   [Result & Output Schema](README.md#result--output-schema).
-
-## Add RL behavior
-
-Keep RL code as an adapter over the benchmark core:
-
-- actions in `workspace_bench.rl.actions`;
-- observations in `workspace_bench.rl.observations`;
-- rewards in `workspace_bench.rl.rewards`;
-- rollout helpers in `workspace_bench.rl.rollouts`;
-- environment wiring in `workspace_bench.rl.env`.
-
-Do not duplicate simulator or grader logic inside the RL package.
-
 ## Required checks
 
 Run before submitting:
@@ -176,8 +155,9 @@ uv run workspace-bench runtime-probe --suite build-openbb-apps
 For evaluator changes, also run the relevant adversarial gates and:
 
 ```bash
+printf '{"models": [{"slug": "rule", "label": "Rule agent", "provider": "command", "command": "python -m workspace_bench.agents.rule_agent"}]}' > /tmp/models.json
 uv run workspace-bench \
-  --models-file examples/models.example.json \
+  --models-file /tmp/models.json \
   --difficulty easy \
   --dry-run
 ```

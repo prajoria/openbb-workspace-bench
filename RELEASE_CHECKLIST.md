@@ -4,10 +4,10 @@ Use this checklist before announcing a public Workspace Bench release.
 
 ## Required
 
-- [ ] `uv run --extra dev ruff check src tests scripts examples` passes.
-- [ ] `uv run --extra dev mypy src scripts examples` passes.
+- [ ] `uv run --extra dev ruff check src tests scripts` passes.
+- [ ] `uv run --extra dev mypy src scripts` passes.
 - [ ] `uv run --extra dev pytest` passes.
-- [ ] `uv run python scripts/audits/audit_task_identity.py` reports 0 findings across 625 tasks, including the 236/236 build-prompt specification lint.
+- [ ] `uv run python scripts/audits/audit_task_identity.py` reports 0 findings across 754 tasks, including the 236/236 build-prompt specification lint.
 - [ ] `uv run python scripts/audits/report_prompt_stats.py` reports unique prompts within the documented 180-word cap plus current specification-level and measured-difficulty statistics.
 - [ ] `uv run python scripts/audits/audit_release_consistency.py` reports zero stale active counts or cross-phase claims across release-facing docs, metadata, CLI text, CI, and tests.
 - [ ] Usage validation passes on the default Workspace with release checks green: `uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 300`.
@@ -18,28 +18,23 @@ Use this checklist before announcing a public Workspace Bench release.
 - [ ] `uv run workspace-bench adversarial --suite build-openbb-apps` reports zero survivors, wrong-reason failures, and dirty oracles across all 12 archetypes (currently 1,002 candidates; 727 exercised with three runtime samples per applicable family/archetype; budget: 60 seconds).
 - [ ] `uv run --extra browser workspace-bench browser-cert --dry-run` passes all 30 certification entries with the exact 4/4/4/4/4/4/3/3 category counts.
 - [ ] `uv run --extra browser workspace-bench browser-cert --self-test` passes all three marked tasks in real Chromium and writes PNG, trace ZIP, and verdict JSON artifacts.
-- [ ] Optional code flagship browser self-test passes by adding `--code-task-backend http://127.0.0.1:<port>` for an oracle/agent-built `risk_command_center_product` backend; terminate only that tracked backend PID afterward.
-- [ ] `uv run workspace-bench run --agent oracle` passes all core tasks; the two other stable/code suites use their suite-specific commands above.
+- [ ] `uv run workspace-bench run --agent oracle` passes all core tasks; the other suites prove oracle pass through their `validate` commands above.
 - [ ] `uv run workspace-bench run --agent noop` fails every core task; the suite validations prove their own no-op baselines.
 - [ ] `uv run --extra dev workspace-bench export-task --task enterprise-apps-usage/create/price_performance_aapl --output /tmp/workspace-task.json` succeeds.
 - [ ] `uv run --extra dev workspace-bench run-agent-command --task enterprise-apps-usage/create/price_performance_aapl --agent-command "python -m workspace_bench.agents.rule_agent"` passes.
 - [ ] `uv run workspace-bench report --suite enterprise-apps-usage --output runs/reports/benchmark-report.md` succeeds.
 - [ ] `uv run --extra live python scripts/audits/audit_hosted_surface.py` reports no missing tools, prompts, or resources against the hosted Workspace MCP (needs `WORKSPACE_MCP_TOKEN` in `.env`).
-- [ ] Stable task counts: exactly 300 in `core`, exactly 236 in `build-openbb-apps` (536 total).
-- [ ] Split counts are 150/75/75 (`core`) and 118/59/59 (`build-openbb-apps`) train/validation/test, with every family/level or debug-family allocation contributing validation and test tasks.
-- [ ] Novelty fingerprints and task ids are unique in both suites.
+- [ ] Stable task counts: 80 in `smoke`, 138 in `enterprise-apps-default`, exactly 300 in `enterprise-apps-usage`, exactly 236 in `build-openbb-apps` (754 total).
+- [ ] Novelty fingerprints and task ids are unique in both quota-checked suites.
 - [ ] Coverage quotas pass in both suites via `validate` (core: backend, difficulty, widget-pair, dashboard-category, grader-check quotas; build-openbb-apps: widget/param ownership, 17/43/176 measured difficulty, 60/92/84 specification levels, and per-specification-level check caps).
-- [ ] `runs/reports/calibration.json` is compiled from the three complete 2026-07 guided runs; OpenRouter credit failures appear only as excluded limitations.
+- [ ] `runs/reports/calibration.json`, `suites.json`, and `significance.json` match the README board notes. These are the retained compiled boards from the July 2026 runs (raw run directories are not committed); any recomputation requires re-running the models against the current suites, and pre-reset boards must not be pooled with new runs.
 - [ ] Difficulty relabel review requires both repeats, approves the intermediate band from complete repeated evidence, and forces zero-pass debug tasks hard; relabels do not alter task prompts or success criteria.
-- [ ] `runs/reports/suites.json` uses the three current build runs and marks core historical/pre-rename with a pending re-run, excluding cross-era pooling.
-- [ ] `runs/reports/significance.json` is recomputed (`workspace-bench compile significance`) and the README board notes match it; paired build episodes retain both repeats.
 - [ ] README quick start, suites table, and aggregate command are accurate.
 - [ ] Per-suite READMEs are present, use the shared structure, and state task counts verified by `audit_release_consistency.py`.
-- [ ] `runs/reports/task-catalog.md` is regenerated and covers both stable simulator suites (536 entries); `tool-coverage-matrix.md` and `tool-matrix-data.json` are regenerated beside it.
-- [ ] `uv run python scripts/generators/generate_backend_code_suite.py` is deterministic across two runs; starter/oracle fixtures are generator-owned and excluded from the Workspace MCP tool matrix.
+- [ ] `runs/reports/task-catalog.md` is regenerated and covers all four deterministic simulator suites (754 entries); `tool-coverage-matrix.md` and `tool-matrix-data.json` are regenerated beside it.
 - [ ] Root `CONTRIBUTING.md` explains how to add tasks and suites.
 - [ ] Repository URL in `pyproject.toml` is correct.
-- [ ] The smoke suite sweeps green through live-parity against the hosted Workspace MCP bridge (`uv run --extra live workspace-bench live-parity --task smoke/get_widget_data/smoke_get_widget_data` per eligible task) — the strongest harness-fidelity evidence the repo produces.
+- [ ] The smoke suite sweeps green through live-parity against the hosted Workspace MCP bridge (`uv run --extra live workspace-bench live-parity --task smoke/get_widget_data/smoke_get_widget_data_level0` per eligible task) — the strongest harness-fidelity evidence the repo produces.
 - [ ] The answer judge is calibrated against the pinned local judge model: `uv run python scripts/audits/audit_judge_calibration.py --repeats 3` passes (all exemplars PASS; shallow, off-topic, and injection mutants FAIL; verdicts stable). Local gate — CI stays deterministic-only.
 - [ ] License decision is made before open-source publication.
 - [ ] `uv lock --check` passes and `uv build` produces both sdist and wheel.
@@ -62,7 +57,7 @@ Use this checklist before announcing a public Workspace Bench release.
     --auth-state ~/.config/workspace-bench/openbb.workspace-auth.json
   ```
 
-  If selectors have drifted, copy `src/workspace_bench/browser/selectors.json`
+  If selectors have drifted, copy `src/workspace_bench/workspace/browser/selectors.json`
   outside the repository and add `--selectors PATH` to the second command.
 - [ ] Add a hidden task suite.
 - [ ] Add an optional Docker or compose workflow for fixture backend serving.

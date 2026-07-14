@@ -89,11 +89,11 @@ SUITE_TERMINOLOGY_RE = re.compile(
 
 REQUIRED_FACTS = {
     REPO / "README.md": (
-        "625 deterministic simulator tasks",
+        "754 deterministic simulator tasks",
         f"{ARCHETYPE_COUNT_WORD} archetypes",
     ),
     REPO / "RELEASE_CHECKLIST.md": (
-        "625 tasks",
+        "754 tasks",
         "17/43/176 measured difficulty",
         "60/92/84 specification levels",
     ),
@@ -181,8 +181,10 @@ def audit_release_consistency() -> list[Finding]:
         if match is None:
             findings.append(Finding(readme, 0, "missing required `Tasks: <N>` line"))
             continue
+        # Suite-root JSON (manifest, reference answer corpora) is metadata,
+        # not a task; tasks live only in family subdirectories.
         actual = sum(
-            path.name != "task_suite.json" for path in readme.parent.rglob("*.json")
+            path.parent != readme.parent for path in readme.parent.rglob("*.json")
         )
         stated = int(match.group("count"))
         if stated != actual:
