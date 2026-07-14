@@ -4,58 +4,60 @@
   "family": "layout",
   "difficulty": "medium",
   "prompt": "Move the sector exposure widget beside the holdings widget: it should start at column 24, row 0, keeping its size. Do not move the holdings widget.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "widget-examples"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "widget-examples"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Preserve Layout Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Widget Examples",
+            "widget_id": "test_metric",
+            "data_args": {},
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 24,
+              "h": 12
+            },
+            "widget_uuid": "usage_preserve_portfolio_pair_widget_001"
+          },
+          {
+            "origin": "Widget Examples",
+            "widget_id": "live_grid_example",
+            "data_args": {},
+            "layout": {
+              "x": 0,
+              "y": 12,
+              "w": 16,
+              "h": 10
+            },
+            "widget_uuid": "usage_preserve_portfolio_pair_widget_002"
+          }
+        ],
+        "dashboard_id": "usage_preserve_portfolio_pair_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget_layout"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Preserve Layout Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Widget Examples",
-          "widget_id": "test_metric",
-          "data_args": {},
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 24,
-            "h": 12
-          },
-          "widget_uuid": "usage_preserve_portfolio_pair_widget_001"
-        },
-        {
-          "origin": "Widget Examples",
-          "widget_id": "live_grid_example",
-          "data_args": {},
-          "layout": {
-            "x": 0,
-            "y": 12,
-            "w": 16,
-            "h": 10
-          },
-          "widget_uuid": "usage_preserve_portfolio_pair_widget_002"
-        }
-      ],
-      "dashboard_id": "usage_preserve_portfolio_pair_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget_layout"
-  ],
-  "success": {
+  "eval": {
     "required_layouts": [
       {
         "widget_id": "test_metric",
@@ -83,25 +85,25 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_id": "live_grid_example",
-        "x": 24,
-        "y": 0,
-        "w": 16,
-        "h": 10
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "live_grid_example",
+          "x": 24,
+          "y": 0,
+          "w": 16,
+          "h": 10
+        }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

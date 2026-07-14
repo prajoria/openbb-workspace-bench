@@ -4,31 +4,33 @@
   "family": "navigate",
   "difficulty": "easy",
   "prompt": "Set the active dashboard name to Daily Compliance Control.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Alert Triage",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "dashboard_id": "usage_rename_compliance_day_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Alert Triage",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "dashboard_id": "usage_rename_compliance_day_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard"
-  ],
-  "success": {
+  "eval": {
     "required_dashboard_name_contains": "Daily Compliance Control",
     "required_tool_calls": [
       {
@@ -44,19 +46,19 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_dashboard",
-      "args": {
-        "operation": "update",
-        "dashboard_id": "usage_rename_compliance_day_dashboard_001",
-        "name": "Daily Compliance Control"
+    },
+    "reference": [
+      {
+        "tool": "manage_dashboard",
+        "args": {
+          "operation": "update",
+          "dashboard_id": "usage_rename_compliance_day_dashboard_001",
+          "name": "Daily Compliance Control"
+        }
       }
+    ],
+    "limits": {
+      "max_turns": 4
     }
-  ],
-  "limits": {
-    "max_turns": 4
   }
 }

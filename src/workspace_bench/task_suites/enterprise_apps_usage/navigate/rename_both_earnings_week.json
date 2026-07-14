@@ -4,33 +4,35 @@
   "family": "navigate",
   "difficulty": "medium",
   "prompt": "Rename the active dashboard to Earnings Week Planner and rename the Overview tab to Calendar.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Earnings Board",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "dashboard_id": "usage_rename_both_earnings_week_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Earnings Board",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "dashboard_id": "usage_rename_both_earnings_week_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace"
-  ],
-  "success": {
+  "eval": {
     "required_dashboard_name_contains": "Earnings Week Planner",
     "required_tab_names": [
       "Calendar"
@@ -55,28 +57,28 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_dashboard",
-      "args": {
-        "operation": "update",
-        "dashboard_id": "usage_rename_both_earnings_week_dashboard_001",
-        "name": "Earnings Week Planner"
-      }
     },
-    {
-      "tool": "manage_navigation_bar",
-      "args": {
-        "operation": "rename_tabs",
-        "rename_map": {
-          "overview": "Calendar"
+    "reference": [
+      {
+        "tool": "manage_dashboard",
+        "args": {
+          "operation": "update",
+          "dashboard_id": "usage_rename_both_earnings_week_dashboard_001",
+          "name": "Earnings Week Planner"
+        }
+      },
+      {
+        "tool": "manage_navigation_bar",
+        "args": {
+          "operation": "rename_tabs",
+          "rename_map": {
+            "overview": "Calendar"
+          }
         }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

@@ -4,64 +4,66 @@
   "family": "inspect",
   "difficulty": "hard",
   "prompt": "Keep the companion widget while finding the widget with symbol=MSFT, repairing it to AAPL, and adding a note mentioning the repair after inspecting the dashboard.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Inspect Full Repair",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "sample_newsfeed",
+            "data_args": {
+              "category": "tech",
+              "limit": 5
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_ambient_repair_and_brief_price_performance_widget_001"
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "table_widget_with_grouping_by_cell_click",
+            "data_args": {
+              "symbol": "MSFT"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_ambient_repair_and_brief_price_performance_widget_002"
+          }
+        ],
+        "dashboard_id": "usage_ambient_repair_and_brief_price_performance_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Inspect Full Repair",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "sample_newsfeed",
-          "data_args": {
-            "category": "tech",
-            "limit": 5
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_ambient_repair_and_brief_price_performance_widget_001"
-        },
-        {
-          "origin": "Getting Started",
-          "widget_id": "table_widget_with_grouping_by_cell_click",
-          "data_args": {
-            "symbol": "MSFT"
-          },
-          "layout": {
-            "x": 20,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_ambient_repair_and_brief_price_performance_widget_002"
-        }
-      ],
-      "dashboard_id": "usage_ambient_repair_and_brief_price_performance_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Getting Started",
@@ -115,38 +117,38 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "read_widget",
-      "args": {
-        "widget_uuid": "usage_ambient_repair_and_brief_price_performance_widget_002"
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_uuid": "usage_ambient_repair_and_brief_price_performance_widget_002",
-        "data_args": {
-          "symbol": "AAPL"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "read_widget",
+        "args": {
+          "widget_uuid": "usage_ambient_repair_and_brief_price_performance_widget_002"
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "usage_ambient_repair_and_brief_price_performance_widget_002",
+          "data_args": {
+            "symbol": "AAPL"
+          }
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Inspect Repair Note",
+          "data": "Repair changed MSFT to AAPL."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Inspect Repair Note",
-        "data": "Repair changed MSFT to AAPL."
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

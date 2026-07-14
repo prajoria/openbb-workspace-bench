@@ -4,61 +4,63 @@
   "family": "inspect",
   "difficulty": "hard",
   "prompt": "After inspecting the dashboard, find the widget with client=Northstar Endowment, repair it to Atlas Pension, keep the companion widget, and add a HTML card mentioning the repair.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Inspect Full Repair",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "reporting_factsheet_studio_overview_workflow_overview",
+            "data_args": {},
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_ambient_repair_and_brief_risk_stats_widget_001"
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "reporting_factsheet_studio_factsheets_risk_stats",
+            "data_args": {
+              "client": "Northstar Endowment"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_ambient_repair_and_brief_risk_stats_widget_002"
+          }
+        ],
+        "dashboard_id": "usage_ambient_repair_and_brief_risk_stats_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Inspect Full Repair",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "reporting_factsheet_studio_overview_workflow_overview",
-          "data_args": {},
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_ambient_repair_and_brief_risk_stats_widget_001"
-        },
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "reporting_factsheet_studio_factsheets_risk_stats",
-          "data_args": {
-            "client": "Northstar Endowment"
-          },
-          "layout": {
-            "x": 20,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_ambient_repair_and_brief_risk_stats_widget_002"
-        }
-      ],
-      "dashboard_id": "usage_ambient_repair_and_brief_risk_stats_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Bench Stark Enterprise",
@@ -109,38 +111,38 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "read_widget",
-      "args": {
-        "widget_uuid": "usage_ambient_repair_and_brief_risk_stats_widget_002"
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_uuid": "usage_ambient_repair_and_brief_risk_stats_widget_002",
-        "data_args": {
-          "client": "Atlas Pension"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "read_widget",
+        "args": {
+          "widget_uuid": "usage_ambient_repair_and_brief_risk_stats_widget_002"
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "usage_ambient_repair_and_brief_risk_stats_widget_002",
+          "data_args": {
+            "client": "Atlas Pension"
+          }
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "html",
+          "name": "Inspect Repair Note",
+          "data": "<section>Repair changed Northstar Endowment to Atlas Pension.</section>"
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "html",
-        "name": "Inspect Repair Note",
-        "data": "<section>Repair changed Northstar Endowment to Atlas Pension.</section>"
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

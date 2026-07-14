@@ -8,31 +8,33 @@
     "symbol",
     "revision_pct"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2
@@ -91,111 +93,111 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Earnings Prep Data",
-        "url": "http://localhost:7805",
-        "widgets_json": {
-          "symbol_click_summary": {
-            "name": "Symbol Click Summary",
-            "description": "Symbol rows that can drive a grouped app.",
-            "endpoint": "/symbol-click-summary",
-            "type": "table",
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "symbol",
-                    "headerName": "Symbol",
-                    "cellDataType": "text",
-                    "renderFn": "cellOnClick",
-                    "renderFnParams": {
-                      "actionType": "groupBy",
-                      "groupByParamName": "symbol"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Earnings Prep Data",
+          "url": "http://localhost:7805",
+          "widgets_json": {
+            "symbol_click_summary": {
+              "name": "Symbol Click Summary",
+              "description": "Symbol rows that can drive a grouped app.",
+              "endpoint": "/symbol-click-summary",
+              "type": "table",
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "symbol",
+                      "headerName": "Symbol",
+                      "cellDataType": "text",
+                      "renderFn": "cellOnClick",
+                      "renderFnParams": {
+                        "actionType": "groupBy",
+                        "groupByParamName": "symbol"
+                      },
+                      "cellOnClick": {
+                        "actionType": "groupBy",
+                        "groupByParamName": "symbol"
+                      }
                     },
-                    "cellOnClick": {
-                      "actionType": "groupBy",
-                      "groupByParamName": "symbol"
+                    {
+                      "field": "revision_pct",
+                      "headerName": "Revision %",
+                      "cellDataType": "number",
+                      "formatterFn": "percent"
                     }
-                  },
-                  {
-                    "field": "revision_pct",
-                    "headerName": "Revision %",
-                    "cellDataType": "number",
-                    "formatterFn": "percent"
-                  }
-                ]
+                  ]
+                }
+              },
+              "gridData": {
+                "w": 20,
+                "h": 9
               }
-            },
-            "gridData": {
-              "w": 20,
-              "h": 9
             }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Click Group App",
-            "description": "Clickable symbol rows in a grouped app.",
-            "tabs": {
-              "clicks": {
-                "id": "clicks",
-                "name": "Clicks",
-                "layout": [
-                  {
-                    "i": "symbol_click_summary",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
-            },
-            "groups": [
-              {
-                "name": "Click Symbol Group",
-                "type": "param",
-                "paramName": "symbol",
-                "widgetIds": [
-                  "symbol_click_summary"
-                ]
-              }
-            ]
-          }
-        ]
+          },
+          "apps_json": [
+            {
+              "name": "Click Group App",
+              "description": "Clickable symbol rows in a grouped app.",
+              "tabs": {
+                "clicks": {
+                  "id": "clicks",
+                  "name": "Clicks",
+                  "layout": [
+                    {
+                      "i": "symbol_click_summary",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": [
+                {
+                  "name": "Click Symbol Group",
+                  "type": "param",
+                  "paramName": "symbol",
+                  "widgetIds": [
+                    "symbol_click_summary"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Click Group App",
+          "dashboard_name": "Click Group App Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Click Group App",
-        "dashboard_name": "Click Group App Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

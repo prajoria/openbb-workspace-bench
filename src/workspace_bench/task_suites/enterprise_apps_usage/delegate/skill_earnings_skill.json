@@ -4,33 +4,35 @@
   "family": "delegate",
   "difficulty": "medium",
   "prompt": "Call get_skill_content with slug finance-earnings-prep to understand the workflow. Then call assign_tasks_to_agents with two task_requests using ids coverage-analyst and model-analyst covering that workflow, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Delegation Board",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "dashboard_id": "usage_skill_earnings_skill_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "get_skill_content",
+      "assign_tasks_to_agents",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Delegation Board",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "dashboard_id": "usage_skill_earnings_skill_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "get_skill_content",
-    "assign_tasks_to_agents",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_tool_calls": [
       {
         "tool": "get_skill_content",
@@ -74,48 +76,48 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
+    },
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-earnings-prep"
+        }
+      },
+      {
+        "tool": "assign_tasks_to_agents",
+        "args": {
+          "task_requests": [
+            {
+              "id": "coverage-analyst",
+              "description": "Review estimate revisions and transcript tone.",
+              "assigned_holder_url": "workspace://agents/coverage",
+              "assigned_agent_id": "coverage-agent"
+            },
+            {
+              "id": "model-analyst",
+              "description": "Check the internal versus street model bridge.",
+              "assigned_holder_url": "workspace://agents/model",
+              "assigned_agent_id": "model-agent"
+            }
+          ]
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Delegation Note",
+          "data": "coverage analyst; model analyst; earnings prep."
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 7
     }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "get_skill_content",
-      "args": {
-        "slug": "finance-earnings-prep"
-      }
-    },
-    {
-      "tool": "assign_tasks_to_agents",
-      "args": {
-        "task_requests": [
-          {
-            "id": "coverage-analyst",
-            "description": "Review estimate revisions and transcript tone.",
-            "assigned_holder_url": "workspace://agents/coverage",
-            "assigned_agent_id": "coverage-agent"
-          },
-          {
-            "id": "model-analyst",
-            "description": "Check the internal versus street model bridge.",
-            "assigned_holder_url": "workspace://agents/model",
-            "assigned_agent_id": "model-agent"
-          }
-        ]
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Delegation Note",
-        "data": "coverage analyst; model analyst; earnings prep."
-      }
-    }
-  ],
-  "limits": {
-    "max_turns": 7
   }
 }

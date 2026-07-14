@@ -9,100 +9,102 @@
     "symbol",
     "quarter"
   ],
-  "fixtures": {},
-  "initial_state": {
-    "custom_backends": [
-      {
-        "name": "Earnings Prep Data",
-        "url": "http://localhost:7805",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "estimate_revisions": {
-            "name": "Estimate Revisions",
-            "description": "Street estimate revisions by quarter.",
-            "endpoint": "/estimate-revisions",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
+  "setup": {
+    "fixtures": {},
+    "initial_state": {
+      "custom_backends": [
+        {
+          "name": "Earnings Prep Data",
+          "url": "http://localhost:7805",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "estimate_revisions": {
+              "name": "Estimate Revisions",
+              "description": "Street estimate revisions by quarter.",
+              "endpoint": "/estimate-revisions",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "quarter",
+                      "headerName": "Quarter",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "eps_estimate",
+                      "headerName": "EPS Est",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "revenue_estimate_b",
+                      "headerName": "Revenue Est ($B)",
+                      "cellDataType": "number"
+                    }
+                  ]
+                }
+              }
             },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "quarter",
-                    "headerName": "Quarter",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "eps_estimate",
-                    "headerName": "EPS Est",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "revenue_estimate_b",
-                    "headerName": "Revenue Est ($B)",
-                    "cellDataType": "number"
-                  }
-                ]
-              }
+            "earnings_note": {
+              "name": "Earnings Preview",
+              "description": "Preview note for the earnings call.",
+              "endpoint": "/earnings-preview",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ]
             }
-          },
-          "earnings_note": {
-            "name": "Earnings Preview",
-            "description": "Preview note for the earnings call.",
-            "endpoint": "/earnings-preview",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ]
           }
         }
-      }
+      ]
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
     ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2
@@ -196,144 +198,144 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "refresh",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "estimate_revisions": {
-            "name": "Estimate Revisions",
-            "description": "Street estimate revisions by quarter.",
-            "endpoint": "/estimate-revisions",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "estimate_revisions": {
+              "name": "Estimate Revisions",
+              "description": "Street estimate revisions by quarter.",
+              "endpoint": "/estimate-revisions",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "quarter",
+                      "headerName": "Quarter",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "eps_estimate",
+                      "headerName": "EPS Est",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "revenue_estimate_b",
+                      "headerName": "Revenue Est ($B)",
+                      "cellDataType": "number"
+                    }
+                  ]
+                }
+              },
+              "staleTime": 900000
             },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
+            "earnings_note": {
+              "name": "Earnings Preview",
+              "description": "Preview note for the earnings call.",
+              "endpoint": "/earnings-preview",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "data": {
+                "valueField": "earnings_note_value"
               }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "quarter",
-                    "headerName": "Quarter",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "eps_estimate",
-                    "headerName": "EPS Est",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "revenue_estimate_b",
-                    "headerName": "Revenue Est ($B)",
-                    "cellDataType": "number"
-                  }
-                ]
-              }
-            },
-            "staleTime": 900000
-          },
-          "earnings_note": {
-            "name": "Earnings Preview",
-            "description": "Preview note for the earnings call.",
-            "endpoint": "/earnings-preview",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "data": {
-              "valueField": "earnings_note_value"
             }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Revision Preview Sync",
-            "description": "Preset preview note with synced revisions.",
-            "tabs": {
-              "preview": {
-                "id": "preview",
-                "name": "Preview",
-                "layout": [
-                  {
-                    "i": "estimate_revisions",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  },
-                  {
-                    "i": "earnings_note",
-                    "x": 20,
-                    "y": 0,
-                    "w": 12,
-                    "h": 9,
-                    "state": {
-                      "params": {
-                        "symbol": "MSFT"
+          },
+          "apps_json": [
+            {
+              "name": "Revision Preview Sync",
+              "description": "Preset preview note with synced revisions.",
+              "tabs": {
+                "preview": {
+                  "id": "preview",
+                  "name": "Preview",
+                  "layout": [
+                    {
+                      "i": "estimate_revisions",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    },
+                    {
+                      "i": "earnings_note",
+                      "x": 20,
+                      "y": 0,
+                      "w": 12,
+                      "h": 9,
+                      "state": {
+                        "params": {
+                          "symbol": "MSFT"
+                        }
                       }
                     }
-                  }
-                ]
-              }
-            },
-            "groups": [
-              {
-                "name": "Preview Symbol Sync",
-                "type": "param",
-                "paramName": "symbol",
-                "widgetIds": [
-                  "estimate_revisions",
-                  "earnings_note"
-                ]
-              }
-            ],
-            "prompts": [
-              "Draft a preview note for the synced symbol."
-            ]
-          }
-        ]
+                  ]
+                }
+              },
+              "groups": [
+                {
+                  "name": "Preview Symbol Sync",
+                  "type": "param",
+                  "paramName": "symbol",
+                  "widgetIds": [
+                    "estimate_revisions",
+                    "earnings_note"
+                  ]
+                }
+              ],
+              "prompts": [
+                "Draft a preview note for the synced symbol."
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Revision Preview Sync",
+          "dashboard_name": "Revision Preview Sync Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Revision Preview Sync",
-        "dashboard_name": "Revision Preview Sync Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

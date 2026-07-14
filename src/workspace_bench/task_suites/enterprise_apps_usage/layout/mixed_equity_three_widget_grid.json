@@ -4,76 +4,78 @@
   "family": "layout",
   "difficulty": "hard",
   "prompt": "Arrange the three MSFT widgets: price full-width on top (40 columns, 10 rows), then estimates at columns 0-20 and fundamentals at columns 20-40, both 10 rows starting at row 10.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Grid Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "table_widget_with_grouping_by_cell_click",
+            "data_args": {
+              "symbol": "MSFT"
+            },
+            "layout": {
+              "x": 2,
+              "y": 2,
+              "w": 16,
+              "h": 9
+            },
+            "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_001"
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "live_grid_data",
+            "data_args": {
+              "symbol": "MSFT"
+            },
+            "layout": {
+              "x": 6,
+              "y": 13,
+              "w": 16,
+              "h": 9
+            },
+            "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_002"
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "company_list",
+            "data_args": {
+              "companyId": "VWAGY"
+            },
+            "layout": {
+              "x": 10,
+              "y": 24,
+              "w": 16,
+              "h": 9
+            },
+            "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_003"
+          }
+        ],
+        "dashboard_id": "usage_mixed_equity_three_widget_grid_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget_layout"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Grid Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "table_widget_with_grouping_by_cell_click",
-          "data_args": {
-            "symbol": "MSFT"
-          },
-          "layout": {
-            "x": 2,
-            "y": 2,
-            "w": 16,
-            "h": 9
-          },
-          "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_001"
-        },
-        {
-          "origin": "Getting Started",
-          "widget_id": "live_grid_data",
-          "data_args": {
-            "symbol": "MSFT"
-          },
-          "layout": {
-            "x": 6,
-            "y": 13,
-            "w": 16,
-            "h": 9
-          },
-          "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_002"
-        },
-        {
-          "origin": "Getting Started",
-          "widget_id": "company_list",
-          "data_args": {
-            "companyId": "VWAGY"
-          },
-          "layout": {
-            "x": 10,
-            "y": 24,
-            "w": 16,
-            "h": 9
-          },
-          "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_003"
-        }
-      ],
-      "dashboard_id": "usage_mixed_equity_three_widget_grid_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget_layout"
-  ],
-  "success": {
+  "eval": {
     "required_layouts": [
       {
         "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_001",
@@ -108,45 +110,45 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
+    },
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_001",
+          "x": 0,
+          "y": 0,
+          "w": 40,
+          "h": 10
+        }
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_002",
+          "x": 0,
+          "y": 10,
+          "w": 20,
+          "h": 10
+        }
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_003",
+          "x": 20,
+          "y": 10,
+          "w": 20,
+          "h": 10
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_001",
-        "x": 0,
-        "y": 0,
-        "w": 40,
-        "h": 10
-      }
-    },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_002",
-        "x": 0,
-        "y": 10,
-        "w": 20,
-        "h": 10
-      }
-    },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_uuid": "usage_mixed_equity_three_widget_grid_widget_003",
-        "x": 20,
-        "y": 10,
-        "w": 20,
-        "h": 10
-      }
-    }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

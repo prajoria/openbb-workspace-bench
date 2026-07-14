@@ -8,31 +8,33 @@
   "business_terms": [
     "desk"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 2,
       "max_repeated_snapshots": 2
@@ -112,116 +114,116 @@
         "path": "staleTime",
         "expected": 900000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Vol Desk Data",
-        "url": "http://localhost:7801",
-        "widgets_json": {
-          "vol_commentary": {
-            "name": "Vol Commentary",
-            "description": "Morning volatility commentary.",
-            "endpoint": "/vol-commentary",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "desk",
-                "type": "text",
-                "label": "Desk",
-                "value": "index",
-                "options": [
-                  {
-                    "label": "Index",
-                    "value": "index"
-                  },
-                  {
-                    "label": "Single Stock",
-                    "value": "single"
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Vol Desk Data",
+          "url": "http://localhost:7801",
+          "widgets_json": {
+            "vol_commentary": {
+              "name": "Vol Commentary",
+              "description": "Morning volatility commentary.",
+              "endpoint": "/vol-commentary",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "desk",
+                  "type": "text",
+                  "label": "Desk",
+                  "value": "index",
+                  "options": [
+                    {
+                      "label": "Index",
+                      "value": "index"
+                    },
+                    {
+                      "label": "Single Stock",
+                      "value": "single"
+                    }
+                  ]
+                }
+              ],
+              "staleTime": 900000,
+              "data": {
+                "valueField": "vol_commentary_value"
               }
-            ],
-            "staleTime": 900000,
-            "data": {
-              "valueField": "vol_commentary_value"
+            },
+            "vol_regime_metric": {
+              "name": "Vol Regime",
+              "description": "Current volatility regime score.",
+              "endpoint": "/vol-regime",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "staleTime": 900000,
+              "data": {
+                "valueField": "vol_regime_metric_value"
+              }
             }
           },
-          "vol_regime_metric": {
-            "name": "Vol Regime",
-            "description": "Current volatility regime score.",
-            "endpoint": "/vol-regime",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "staleTime": 900000,
-            "data": {
-              "valueField": "vol_regime_metric_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Vol Settings Room",
-            "description": "Cached commentary and regime.",
-            "tabs": {
-              "commentary": {
-                "id": "commentary",
-                "name": "Commentary",
-                "layout": [
-                  {
-                    "i": "vol_commentary",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 8
-                  }
-                ]
+          "apps_json": [
+            {
+              "name": "Vol Settings Room",
+              "description": "Cached commentary and regime.",
+              "tabs": {
+                "commentary": {
+                  "id": "commentary",
+                  "name": "Commentary",
+                  "layout": [
+                    {
+                      "i": "vol_commentary",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 8
+                    }
+                  ]
+                },
+                "regime": {
+                  "id": "regime",
+                  "name": "Regime",
+                  "layout": [
+                    {
+                      "i": "vol_regime_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 6,
+                      "h": 4
+                    }
+                  ]
+                }
               },
-              "regime": {
-                "id": "regime",
-                "name": "Regime",
-                "layout": [
-                  {
-                    "i": "vol_regime_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 6,
-                    "h": 4
-                  }
-                ]
-              }
-            },
-            "groups": []
-          }
-        ]
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Vol Settings Room",
+          "dashboard_name": "Vol Settings Room Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Vol Settings Room",
-        "dashboard_name": "Vol Settings Room Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

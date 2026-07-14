@@ -4,26 +4,28 @@
   "family": "prompts",
   "difficulty": "medium",
   "prompt": "After fetching workspace_tool_usage, create dashboard Macro Prompt Dashboard, add Getting Started/company_performance with data_args {\"series\": \"VWAGY\"} and Widget Examples/test_metric with schema-first discipline, and add a note mentioning VWAGY and schema.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
-      },
-      {
-        "name": "widget-examples"
-      }
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        },
+        {
+          "name": "widget-examples"
+        }
+      ]
+    },
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_prompt",
+      "manage_dashboard",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_prompt",
-    "manage_dashboard",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_dashboard_name_contains": "Macro Prompt Dashboard",
     "required_tool_results": [
       {
@@ -70,77 +72,77 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_prompt",
-      "args": {
-        "name": "workspace_tool_usage"
-      }
     },
-    {
-      "tool": "manage_dashboard",
-      "args": {
-        "operation": "create",
-        "name": "Macro Prompt Dashboard"
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Getting Started"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "company_performance"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "company_performance",
-        "data_args": {
-          "company": "VWAGY",
-          "year": "2024"
+    "reference": [
+      {
+        "tool": "get_workspace_prompt",
+        "args": {
+          "name": "workspace_tool_usage"
+        }
+      },
+      {
+        "tool": "manage_dashboard",
+        "args": {
+          "operation": "create",
+          "name": "Macro Prompt Dashboard"
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "company_performance"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
+          "data_args": {
+            "company": "VWAGY",
+            "year": "2024"
+          }
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Widget Examples"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "test_metric"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
+          "data_args": {}
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Prompt Build Note",
+          "data": "Prompt build used VWAGY and schema."
         }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Widget Examples"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "test_metric"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "test_metric",
-        "data_args": {}
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Prompt Build Note",
-        "data": "Prompt build used VWAGY and schema."
-      }
+    ],
+    "limits": {
+      "max_turns": 12
     }
-  ],
-  "limits": {
-    "max_turns": 12
   }
 }

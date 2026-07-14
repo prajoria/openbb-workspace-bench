@@ -4,31 +4,33 @@
   "family": "apps",
   "difficulty": "easy",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Surveillance Data' at http://localhost:7807. Treat the app layout and navigation as the product outcome. The experience needs Open Alerts (`alert_metric`, metric) using `/alert-count` for open alert count. Organize it as app 'Alert Board' with tabs Alerts (alert_metric). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_widget_defs": [
       {
         "backend_name": "Surveillance Data",
@@ -94,67 +96,67 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Surveillance Data",
-        "url": "http://localhost:7807",
-        "widgets_json": {
-          "alert_metric": {
-            "name": "Open Alerts",
-            "description": "Open alert count.",
-            "endpoint": "/alert-count",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Alert Board",
-            "description": "Alert posture.",
-            "tabs": {
-              "alerts": {
-                "id": "alerts",
-                "name": "Alerts",
-                "layout": [
-                  {
-                    "i": "alert_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 6
-                  }
-                ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Surveillance Data",
+          "url": "http://localhost:7807",
+          "widgets_json": {
+            "alert_metric": {
+              "name": "Open Alerts",
+              "description": "Open alert count.",
+              "endpoint": "/alert-count",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
               }
-            },
-            "groups": []
-          }
-        ]
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Alert Board",
+              "description": "Alert posture.",
+              "tabs": {
+                "alerts": {
+                  "id": "alerts",
+                  "name": "Alerts",
+                  "layout": [
+                    {
+                      "i": "alert_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 6
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Alert Board",
+          "dashboard_name": "Alert Board Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Alert Board",
-        "dashboard_name": "Alert Board Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

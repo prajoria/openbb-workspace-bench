@@ -4,31 +4,33 @@
   "family": "backends",
   "difficulty": "hard",
   "prompt": "After registering backend name stark-enterprise and refreshing Bench Stark Enterprise, add Bench Stark Enterprise/Post-Earnings Checklist and document that the backend was refreshed.",
-  "fixtures": {
-    "backends": []
+  "setup": {
+    "fixtures": {
+      "backends": []
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Backend Refresh Build",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "dashboard_id": "usage_refresh_backend_before_building_post_earnings_checklist_dashboard_001"
+      }
+    },
+    "allowed_tools": [
+      "manage_backends",
+      "get_workspace_snapshot",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget",
+      "add_generative_widget"
+    ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Backend Refresh Build",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "dashboard_id": "usage_refresh_backend_before_building_post_earnings_checklist_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "manage_backends",
-    "get_workspace_snapshot",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Bench Stark Enterprise",
@@ -19707,58 +19709,58 @@
         }
       ],
       "pinned_paths": true
+    },
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "stark-enterprise"
+        }
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_001"
+        }
+      },
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist",
+          "data_args": {}
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Backend Note",
+          "data": "Bench Stark Enterprise backend refreshed before build."
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 10
     }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "stark-enterprise"
-      }
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "refresh",
-        "backend_id": "backend_001"
-      }
-    },
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Stark Enterprise"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist",
-        "data_args": {}
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Backend Note",
-        "data": "Bench Stark Enterprise backend refreshed before build."
-      }
-    }
-  ],
-  "limits": {
-    "max_turns": 10
   }
 }

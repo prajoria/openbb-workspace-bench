@@ -4,63 +4,65 @@
   "family": "layout",
   "difficulty": "easy",
   "prompt": "Keeping its size, move the AAPL news widget up beside the price widget at column 20, row 0. Do not move the price widget.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Preserve Layout Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "table_widget_with_grouping_by_cell_click",
+            "data_args": {
+              "symbol": "AAPL"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            },
+            "widget_uuid": "usage_preserve_price_news_aapl_widget_001"
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "sample_newsfeed",
+            "data_args": {
+              "category": "tech",
+              "limit": 5
+            },
+            "layout": {
+              "x": 0,
+              "y": 12,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_preserve_price_news_aapl_widget_002"
+          }
+        ],
+        "dashboard_id": "usage_preserve_price_news_aapl_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget_layout"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Preserve Layout Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "table_widget_with_grouping_by_cell_click",
-          "data_args": {
-            "symbol": "AAPL"
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 12
-          },
-          "widget_uuid": "usage_preserve_price_news_aapl_widget_001"
-        },
-        {
-          "origin": "Getting Started",
-          "widget_id": "sample_newsfeed",
-          "data_args": {
-            "category": "tech",
-            "limit": 5
-          },
-          "layout": {
-            "x": 0,
-            "y": 12,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_preserve_price_news_aapl_widget_002"
-        }
-      ],
-      "dashboard_id": "usage_preserve_price_news_aapl_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget_layout"
-  ],
-  "success": {
+  "eval": {
     "required_layouts": [
       {
         "widget_id": "table_widget_with_grouping_by_cell_click",
@@ -88,25 +90,25 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_id": "sample_newsfeed",
-        "x": 20,
-        "y": 0,
-        "w": 20,
-        "h": 10
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "sample_newsfeed",
+          "x": 20,
+          "y": 0,
+          "w": 20,
+          "h": 10
+        }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

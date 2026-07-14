@@ -9,31 +9,33 @@
     "exception",
     "venue"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2
@@ -91,99 +93,99 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Execution Desk Data",
-        "url": "http://localhost:7806",
-        "widgets_json": {
-          "venue_exception_form": {
-            "name": "Venue Exception Form",
-            "description": "Record an execution venue exception.",
-            "endpoint": "/venue-exception",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 10
-            },
-            "params": [
-              {
-                "paramName": "exception",
-                "type": "form",
-                "label": "Exception",
-                "endpoint": "/venue-exception-submit",
-                "method": "POST",
-                "inputParams": [
-                  {
-                    "paramName": "venue",
-                    "type": "text",
-                    "label": "Venue",
-                    "value": "ARCA"
-                  },
-                  {
-                    "paramName": "slippage_bps",
-                    "type": "number",
-                    "label": "Slippage bps",
-                    "value": 12,
-                    "min": 0
-                  },
-                  {
-                    "paramName": "record",
-                    "type": "button",
-                    "label": "Record"
-                  }
-                ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Execution Desk Data",
+          "url": "http://localhost:7806",
+          "widgets_json": {
+            "venue_exception_form": {
+              "name": "Venue Exception Form",
+              "description": "Record an execution venue exception.",
+              "endpoint": "/venue-exception",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 10
+              },
+              "params": [
+                {
+                  "paramName": "exception",
+                  "type": "form",
+                  "label": "Exception",
+                  "endpoint": "/venue-exception-submit",
+                  "method": "POST",
+                  "inputParams": [
+                    {
+                      "paramName": "venue",
+                      "type": "text",
+                      "label": "Venue",
+                      "value": "ARCA"
+                    },
+                    {
+                      "paramName": "slippage_bps",
+                      "type": "number",
+                      "label": "Slippage bps",
+                      "value": 12,
+                      "min": 0
+                    },
+                    {
+                      "paramName": "record",
+                      "type": "button",
+                      "label": "Record"
+                    }
+                  ]
+                }
+              ],
+              "data": {
+                "valueField": "venue_exception_form_value"
               }
-            ],
-            "data": {
-              "valueField": "venue_exception_form_value"
             }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Venue Exceptions",
-            "description": "Capture venue exception records.",
-            "tabs": {
-              "exceptions": {
-                "id": "exceptions",
-                "name": "Exceptions",
-                "layout": [
-                  {
-                    "i": "venue_exception_form",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 10
-                  }
-                ]
-              }
-            },
-            "groups": []
-          }
-        ]
+          },
+          "apps_json": [
+            {
+              "name": "Venue Exceptions",
+              "description": "Capture venue exception records.",
+              "tabs": {
+                "exceptions": {
+                  "id": "exceptions",
+                  "name": "Exceptions",
+                  "layout": [
+                    {
+                      "i": "venue_exception_form",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 10
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Venue Exceptions",
+          "dashboard_name": "Venue Exceptions Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Venue Exceptions",
-        "dashboard_name": "Venue Exceptions Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

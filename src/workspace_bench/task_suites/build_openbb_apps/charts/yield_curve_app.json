@@ -5,31 +5,33 @@
   "specification_level": "explicit",
   "difficulty": "hard",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Rates Watch Data' at http://localhost:7803. Choose a working chart representation for the data. The experience needs Yield Curve (`yield_curve`, chart) using `/yield-curve` for plotly treasury yield curve snapshot; consume the raw backend payload. Organize it as app 'Yield Curve App' with tabs Curve (yield_curve). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_widget_defs": [
       {
         "backend_name": "Rates Watch Data",
@@ -106,68 +108,68 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Rates Watch Data",
-        "url": "http://localhost:7803",
-        "widgets_json": {
-          "yield_curve": {
-            "name": "Yield Curve",
-            "description": "Plotly treasury yield curve snapshot.",
-            "endpoint": "/yield-curve",
-            "type": "chart",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "raw": true
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Yield Curve App",
-            "description": "Treasury curve chart.",
-            "tabs": {
-              "curve": {
-                "id": "curve",
-                "name": "Curve",
-                "layout": [
-                  {
-                    "i": "yield_curve",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
-            },
-            "groups": []
-          }
-        ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Rates Watch Data",
+          "url": "http://localhost:7803",
+          "widgets_json": {
+            "yield_curve": {
+              "name": "Yield Curve",
+              "description": "Plotly treasury yield curve snapshot.",
+              "endpoint": "/yield-curve",
+              "type": "chart",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "raw": true
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Yield Curve App",
+              "description": "Treasury curve chart.",
+              "tabs": {
+                "curve": {
+                  "id": "curve",
+                  "name": "Curve",
+                  "layout": [
+                    {
+                      "i": "yield_curve",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Yield Curve App",
+          "dashboard_name": "Yield Curve App Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Yield Curve App",
-        "dashboard_name": "Yield Curve App Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

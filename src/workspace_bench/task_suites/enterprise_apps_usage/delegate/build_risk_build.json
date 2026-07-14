@@ -4,50 +4,52 @@
   "family": "delegate",
   "difficulty": "hard",
   "prompt": "Use assign_tasks_to_agents with two task_requests using ids var-analyst and stress-analyst. Then add the VaR Trend widget (id risk_exposure_monitor_dashboard_var_trend) from the Bench Stark Enterprise backend so the workstreams have their data, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
-      }
-    ]
-  },
-  "initial_state": {
-    "dashboard": {
-      "name": "Delegation Board",
-      "activate": true,
-      "tabs": [
+  "setup": {
+    "fixtures": {
+      "backends": [
         {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "dashboard_id": "usage_build_risk_build_dashboard_001",
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "strategy_health_monitor_themes_thematic_baskets",
-          "data_args": {},
-          "tab_id": "overview",
-          "layout": {
-            "x": 0,
-            "y": 500,
-            "w": 8,
-            "h": 4
-          },
-          "widget_uuid": "usage_build_risk_build_widget_001"
+          "name": "stark-enterprise"
         }
       ]
-    }
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Delegation Board",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "dashboard_id": "usage_build_risk_build_dashboard_001",
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "strategy_health_monitor_themes_thematic_baskets",
+            "data_args": {},
+            "tab_id": "overview",
+            "layout": {
+              "x": 0,
+              "y": 500,
+              "w": 8,
+              "h": 4
+            },
+            "widget_uuid": "usage_build_risk_build_widget_001"
+          }
+        ]
+      }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "assign_tasks_to_agents",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget",
+      "add_generative_widget"
+    ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "assign_tasks_to_agents",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_tool_calls": [
       {
         "tool": "assign_tasks_to_agents"
@@ -101,63 +103,63 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
+    },
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "assign_tasks_to_agents",
+        "args": {
+          "task_requests": [
+            {
+              "id": "var-analyst",
+              "description": "Summarize the VaR trend for the committee.",
+              "assigned_holder_url": "workspace://agents/var",
+              "assigned_agent_id": "var-agent"
+            },
+            {
+              "id": "stress-analyst",
+              "description": "Prepare the stress loss summary.",
+              "assigned_holder_url": "workspace://agents/stress",
+              "assigned_agent_id": "stress-agent"
+            }
+          ]
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "risk_exposure_monitor_dashboard_var_trend"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+          "data_args": {}
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Delegation Note",
+          "data": "var analyst; stress analyst; var trend."
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 8
     }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "assign_tasks_to_agents",
-      "args": {
-        "task_requests": [
-          {
-            "id": "var-analyst",
-            "description": "Summarize the VaR trend for the committee.",
-            "assigned_holder_url": "workspace://agents/var",
-            "assigned_agent_id": "var-agent"
-          },
-          {
-            "id": "stress-analyst",
-            "description": "Prepare the stress loss summary.",
-            "assigned_holder_url": "workspace://agents/stress",
-            "assigned_agent_id": "stress-agent"
-          }
-        ]
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Stark Enterprise"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "risk_exposure_monitor_dashboard_var_trend"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "risk_exposure_monitor_dashboard_var_trend",
-        "data_args": {}
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Delegation Note",
-        "data": "var analyst; stress analyst; var trend."
-      }
-    }
-  ],
-  "limits": {
-    "max_turns": 8
   }
 }

@@ -4,50 +4,52 @@
   "family": "navigate",
   "difficulty": "hard",
   "prompt": "This dashboard is missing its Risk tab. Add a tab named Risk and put the Whitepapers widget on it. Keep the existing Overview tab intact.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "widget-examples"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "widget-examples"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Incomplete Review",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Widget Examples",
+            "widget_id": "test_metric",
+            "data_args": {},
+            "tab_id": "overview",
+            "layout": {
+              "x": 0,
+              "y": 2,
+              "w": 20,
+              "h": 12
+            },
+            "widget_uuid": "usage_addtab_risk_widget_001"
+          }
+        ],
+        "dashboard_id": "usage_addtab_risk_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Incomplete Review",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Widget Examples",
-          "widget_id": "test_metric",
-          "data_args": {},
-          "tab_id": "overview",
-          "layout": {
-            "x": 0,
-            "y": 2,
-            "w": 20,
-            "h": 12
-          },
-          "widget_uuid": "usage_addtab_risk_widget_001"
-        }
-      ],
-      "dashboard_id": "usage_addtab_risk_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget"
-  ],
-  "success": {
+  "eval": {
     "required_tabs": [
       "overview",
       "risk"
@@ -85,58 +87,58 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_navigation_bar",
-      "args": {
-        "operation": "add_tabs",
-        "tabs": [
-          {
-            "name": "Risk"
-          }
-        ]
-      }
-    },
-    {
-      "tool": "navigate_workspace",
-      "args": {
-        "operation": "tab",
-        "tab_id": "risk"
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Widget Examples"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "whitepapers"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "whitepapers",
-        "data_args": {
-          "filenames": [
-            "bitcoin.pdf"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_navigation_bar",
+        "args": {
+          "operation": "add_tabs",
+          "tabs": [
+            {
+              "name": "Risk"
+            }
           ]
         }
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "tab",
+          "tab_id": "risk"
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Widget Examples"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "whitepapers"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "whitepapers",
+          "data_args": {
+            "filenames": [
+              "bitcoin.pdf"
+            ]
+          }
+        }
       }
+    ],
+    "limits": {
+      "max_turns": 9
     }
-  ],
-  "limits": {
-    "max_turns": 9
   }
 }

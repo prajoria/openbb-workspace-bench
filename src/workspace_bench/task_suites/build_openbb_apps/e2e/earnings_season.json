@@ -10,31 +10,33 @@
     "MSFT",
     "ticker"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "html",
@@ -153,142 +155,142 @@
         "scope": "dashboard",
         "contains": "Earnings Season"
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Earnings Prep Data",
-        "url": "http://localhost:7805",
-        "widgets_json": {
-          "earnings_season_table": {
-            "name": "Earnings Season Table",
-            "description": "Earnings surprises and report dates.",
-            "endpoint": "/earnings-season-table",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "ticker",
-                    "headerName": "Ticker",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "eps_surprise_pct",
-                    "headerName": "Eps Surprise Pct",
-                    "cellDataType": "number",
-                    "formatterFn": "percent"
-                  },
-                  {
-                    "field": "revenue_beat",
-                    "headerName": "Revenue Beat",
-                    "cellDataType": "boolean"
-                  },
-                  {
-                    "field": "report_date",
-                    "headerName": "Report Date",
-                    "cellDataType": "dateString"
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "ticker",
-                "type": "text",
-                "label": "Ticker",
-                "value": "AAPL",
-                "description": "Earnings Season Table focus field."
-              }
-            ]
-          },
-          "surprise_metric": {
-            "name": "Avg Surprise",
-            "description": "Average EPS surprise last 4 quarters.",
-            "endpoint": "/avg-surprise",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "data": {
-              "valueField": "surprise_metric_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Earnings Season",
-            "description": "Season surprises and headline metric.",
-            "tabs": {
-              "season": {
-                "id": "season",
-                "name": "Season",
-                "layout": [
-                  {
-                    "i": "earnings_season_table",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Earnings Prep Data",
+          "url": "http://localhost:7805",
+          "widgets_json": {
+            "earnings_season_table": {
+              "name": "Earnings Season Table",
+              "description": "Earnings surprises and report dates.",
+              "endpoint": "/earnings-season-table",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "surprise": {
-                "id": "surprise",
-                "name": "Surprise",
-                "layout": [
-                  {
-                    "i": "surprise_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "ticker",
+                      "headerName": "Ticker",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "eps_surprise_pct",
+                      "headerName": "Eps Surprise Pct",
+                      "cellDataType": "number",
+                      "formatterFn": "percent"
+                    },
+                    {
+                      "field": "revenue_beat",
+                      "headerName": "Revenue Beat",
+                      "cellDataType": "boolean"
+                    },
+                    {
+                      "field": "report_date",
+                      "headerName": "Report Date",
+                      "cellDataType": "dateString"
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "ticker",
+                  "type": "text",
+                  "label": "Ticker",
+                  "value": "AAPL",
+                  "description": "Earnings Season Table focus field."
+                }
+              ]
             },
-            "groups": []
+            "surprise_metric": {
+              "name": "Avg Surprise",
+              "description": "Average EPS surprise last 4 quarters.",
+              "endpoint": "/avg-surprise",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "data": {
+                "valueField": "surprise_metric_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Earnings Season",
+              "description": "Season surprises and headline metric.",
+              "tabs": {
+                "season": {
+                  "id": "season",
+                  "name": "Season",
+                  "layout": [
+                    {
+                      "i": "earnings_season_table",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "surprise": {
+                  "id": "surprise",
+                  "name": "Surprise",
+                  "layout": [
+                    {
+                      "i": "surprise_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Earnings Season",
+          "dashboard_name": "Earnings Season Live",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "earnings_season_table",
+          "data_args": {
+            "ticker": "MSFT"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Earnings Season",
-        "dashboard_name": "Earnings Season Live",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "earnings_season_table",
-        "data_args": {
-          "ticker": "MSFT"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "html",
+          "name": "Earnings Season",
+          "data": "<section>Earnings Season is live from Earnings Prep Data: earnings season ready. Configured ticker=MSFT.</section>"
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "html",
-        "name": "Earnings Season",
-        "data": "<section>Earnings Season is live from Earnings Prep Data: earnings season ready. Configured ticker=MSFT.</section>"
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

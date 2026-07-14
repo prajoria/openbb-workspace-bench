@@ -4,49 +4,51 @@
   "family": "update",
   "difficulty": "easy",
   "prompt": "For the existing Portfolio Snapshot widget, set period to MTD.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Update Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "portfolio_command_center_overview_portfolio_snapshot",
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            },
+            "widget_uuid": "usage_set_portfolio_snapshot_period_to_mtd_widget_001"
+          }
+        ],
+        "dashboard_id": "usage_set_portfolio_snapshot_period_to_mtd_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Update Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "portfolio_command_center_overview_portfolio_snapshot",
-          "data_args": {
-            "fund": "Flagship Long/Short",
-            "period": "YTD"
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 12
-          },
-          "widget_uuid": "usage_set_portfolio_snapshot_period_to_mtd_widget_001"
-        }
-      ],
-      "dashboard_id": "usage_set_portfolio_snapshot_period_to_mtd_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Bench Stark Enterprise",
@@ -64,24 +66,24 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_uuid": "usage_set_portfolio_snapshot_period_to_mtd_widget_001",
-        "data_args": {
-          "period": "MTD"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "usage_set_portfolio_snapshot_period_to_mtd_widget_001",
+          "data_args": {
+            "period": "MTD"
+          }
         }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

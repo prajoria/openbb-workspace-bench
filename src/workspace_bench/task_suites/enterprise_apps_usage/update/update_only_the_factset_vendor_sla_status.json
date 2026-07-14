@@ -4,62 +4,64 @@
   "family": "update",
   "difficulty": "medium",
   "prompt": "Leave the Bloomberg Vendor SLA Status widget untouched, and update only the FactSet Vendor SLA Status widget to S&P Global.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Selective Update Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status",
+            "data_args": {
+              "vendor": "Bloomberg"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_update_only_the_factset_vendor_sla_status_widget_001"
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status",
+            "data_args": {
+              "vendor": "FactSet"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_update_only_the_factset_vendor_sla_status_widget_002"
+          }
+        ],
+        "dashboard_id": "usage_update_only_the_factset_vendor_sla_status_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Selective Update Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status",
-          "data_args": {
-            "vendor": "Bloomberg"
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_update_only_the_factset_vendor_sla_status_widget_001"
-        },
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status",
-          "data_args": {
-            "vendor": "FactSet"
-          },
-          "layout": {
-            "x": 20,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_update_only_the_factset_vendor_sla_status_widget_002"
-        }
-      ],
-      "dashboard_id": "usage_update_only_the_factset_vendor_sla_status_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Bench Stark Enterprise",
@@ -95,24 +97,24 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_uuid": "usage_update_only_the_factset_vendor_sla_status_widget_002",
-        "data_args": {
-          "vendor": "S&P Global"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "usage_update_only_the_factset_vendor_sla_status_widget_002",
+          "data_args": {
+            "vendor": "S&P Global"
+          }
         }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

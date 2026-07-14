@@ -8,31 +8,33 @@
   "business_terms": [
     "symbol"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2,
@@ -94,71 +96,71 @@
         "path": "staleTime",
         "expected": 900000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Rates Watch Data",
-        "url": "http://localhost:7803",
-        "widgets_json": {
-          "rates_symbol_chart": {
-            "name": "Rates Symbol Chart",
-            "description": "TradingView chart with a selectable symbol.",
-            "endpoint": "/rates-symbol-udf",
-            "type": "advanced_charting",
-            "gridData": {
-              "w": 20,
-              "h": 18
-            },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "US10Y",
-                "optionsEndpoint": "/rates-symbols"
-              }
-            ],
-            "data": {
-              "defaultSymbol": "US10Y",
-              "updateFrequency": 30000,
-              "valueField": "rates_symbol_chart_value"
-            },
-            "category": "Macro",
-            "staleTime": 900000
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Rates Watch Data",
+          "url": "http://localhost:7803",
+          "widgets_json": {
+            "rates_symbol_chart": {
+              "name": "Rates Symbol Chart",
+              "description": "TradingView chart with a selectable symbol.",
+              "endpoint": "/rates-symbol-udf",
+              "type": "advanced_charting",
+              "gridData": {
+                "w": 20,
+                "h": 18
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "US10Y",
+                  "optionsEndpoint": "/rates-symbols"
+                }
+              ],
+              "data": {
+                "defaultSymbol": "US10Y",
+                "updateFrequency": 30000,
+                "valueField": "rates_symbol_chart_value"
+              },
+              "category": "Macro",
+              "staleTime": 900000
+            }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Rates Watch Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Rates Watch Data",
+          "widget_id": "rates_symbol_chart"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Rates Watch Data",
+          "widget_id": "rates_symbol_chart"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Rates Watch Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Rates Watch Data",
-        "widget_id": "rates_symbol_chart"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Rates Watch Data",
-        "widget_id": "rates_symbol_chart"
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

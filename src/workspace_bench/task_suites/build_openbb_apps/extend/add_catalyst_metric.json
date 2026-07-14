@@ -5,52 +5,54 @@
   "specification_level": "explicit",
   "difficulty": "medium",
   "prompt": "Register the backend and place the specified widget on the active dashboard. Use 'Healthcare Research Data' at http://localhost:7808. Repair the existing backend without regressing working content. The experience needs Pipeline by Phase (`pipeline_chart`, chart) using `/pipeline-by-phase` for plotly pipeline distribution by phase; consume the raw backend payload; Catalysts 30d (`catalyst_metric`, metric) using `/catalyst-count` for catalysts in the next 30 days; cache for 15 minutes. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {
-    "custom_backends": [
-      {
-        "name": "Healthcare Research Data",
-        "url": "http://localhost:7808",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "pipeline_chart": {
-            "name": "Pipeline by Phase",
-            "description": "Plotly pipeline distribution by phase.",
-            "endpoint": "/pipeline-by-phase",
-            "type": "chart",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "raw": true
+  "setup": {
+    "fixtures": {},
+    "initial_state": {
+      "custom_backends": [
+        {
+          "name": "Healthcare Research Data",
+          "url": "http://localhost:7808",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "pipeline_chart": {
+              "name": "Pipeline by Phase",
+              "description": "Plotly pipeline distribution by phase.",
+              "endpoint": "/pipeline-by-phase",
+              "type": "chart",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "raw": true
+            }
           }
         }
-      }
+      ]
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
     ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "eval": {
     "required_widget_defs": [
       {
         "backend_name": "Healthcare Research Data",
@@ -131,67 +133,67 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "refresh",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "pipeline_chart": {
-            "name": "Pipeline by Phase",
-            "description": "Plotly pipeline distribution by phase.",
-            "endpoint": "/pipeline-by-phase",
-            "type": "chart",
-            "gridData": {
-              "w": 20,
-              "h": 9
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "pipeline_chart": {
+              "name": "Pipeline by Phase",
+              "description": "Plotly pipeline distribution by phase.",
+              "endpoint": "/pipeline-by-phase",
+              "type": "chart",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "raw": true
             },
-            "raw": true
-          },
-          "catalyst_metric": {
-            "name": "Catalysts 30d",
-            "description": "Catalysts in the next 30 days.",
-            "endpoint": "/catalyst-count",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "staleTime": 900000,
-            "category": "Desk Extensions"
+            "catalyst_metric": {
+              "name": "Catalysts 30d",
+              "description": "Catalysts in the next 30 days.",
+              "endpoint": "/catalyst-count",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "staleTime": 900000,
+              "category": "Desk Extensions"
+            }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Healthcare Research Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Healthcare Research Data",
+          "widget_id": "pipeline_chart"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Healthcare Research Data",
+          "widget_id": "pipeline_chart"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Healthcare Research Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Healthcare Research Data",
-        "widget_id": "pipeline_chart"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Healthcare Research Data",
-        "widget_id": "pipeline_chart"
-      }
+    ],
+    "limits": {
+      "max_turns": 8
     }
-  ],
-  "limits": {
-    "max_turns": 8
   }
 }

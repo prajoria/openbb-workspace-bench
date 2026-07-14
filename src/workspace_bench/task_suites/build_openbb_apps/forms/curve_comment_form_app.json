@@ -9,31 +9,33 @@
     "comment",
     "series"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2
@@ -80,98 +82,98 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Rates Watch Data",
-        "url": "http://localhost:7803",
-        "widgets_json": {
-          "curve_comment_form": {
-            "name": "Curve Comment Form",
-            "description": "Submit a curve desk comment.",
-            "endpoint": "/curve-comment",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "comment",
-                "type": "form",
-                "label": "Comment",
-                "endpoint": "/curve-comment-submit",
-                "method": "POST",
-                "inputParams": [
-                  {
-                    "paramName": "series",
-                    "type": "text",
-                    "label": "Series",
-                    "value": "DGS10"
-                  },
-                  {
-                    "paramName": "commentary",
-                    "type": "text",
-                    "label": "Commentary",
-                    "value": "Steeper bias."
-                  },
-                  {
-                    "paramName": "post",
-                    "type": "button",
-                    "label": "Post"
-                  }
-                ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Rates Watch Data",
+          "url": "http://localhost:7803",
+          "widgets_json": {
+            "curve_comment_form": {
+              "name": "Curve Comment Form",
+              "description": "Submit a curve desk comment.",
+              "endpoint": "/curve-comment",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "comment",
+                  "type": "form",
+                  "label": "Comment",
+                  "endpoint": "/curve-comment-submit",
+                  "method": "POST",
+                  "inputParams": [
+                    {
+                      "paramName": "series",
+                      "type": "text",
+                      "label": "Series",
+                      "value": "DGS10"
+                    },
+                    {
+                      "paramName": "commentary",
+                      "type": "text",
+                      "label": "Commentary",
+                      "value": "Steeper bias."
+                    },
+                    {
+                      "paramName": "post",
+                      "type": "button",
+                      "label": "Post"
+                    }
+                  ]
+                }
+              ],
+              "data": {
+                "valueField": "curve_comment_form_value"
               }
-            ],
-            "data": {
-              "valueField": "curve_comment_form_value"
             }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Curve Comments",
-            "description": "Submit curve desk comments.",
-            "tabs": {
-              "comments": {
-                "id": "comments",
-                "name": "Comments",
-                "layout": [
-                  {
-                    "i": "curve_comment_form",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 8
-                  }
-                ]
-              }
-            },
-            "groups": []
-          }
-        ]
+          },
+          "apps_json": [
+            {
+              "name": "Curve Comments",
+              "description": "Submit curve desk comments.",
+              "tabs": {
+                "comments": {
+                  "id": "comments",
+                  "name": "Comments",
+                  "layout": [
+                    {
+                      "i": "curve_comment_form",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 8
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Curve Comments",
+          "dashboard_name": "Curve Comments Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Curve Comments",
-        "dashboard_name": "Curve Comments Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

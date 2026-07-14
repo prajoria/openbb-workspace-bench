@@ -5,31 +5,33 @@
   "specification_level": "explicit",
   "difficulty": "hard",
   "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Surveillance Data' at http://localhost:7807. Make the submission workflow functional. The experience needs Case Escalation Form (`case_escalation_form`, table) using `/case-escalation` for escalate a surveillance case to a reviewer; user controls: Escalation (`escalation`, form) with Case, Due date, Escalate. Organize it as app 'Case Escalation' with tabs Cases (case_escalation_form). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_widget_defs": [
       {
         "backend_name": "Surveillance Data",
@@ -111,95 +113,95 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Surveillance Data",
-        "url": "http://localhost:7807",
-        "widgets_json": {
-          "case_escalation_form": {
-            "name": "Case Escalation Form",
-            "description": "Escalate a surveillance case to a reviewer.",
-            "endpoint": "/case-escalation",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 10
-            },
-            "params": [
-              {
-                "paramName": "escalation",
-                "type": "form",
-                "label": "Escalation",
-                "endpoint": "/case-escalation-submit",
-                "method": "POST",
-                "inputParams": [
-                  {
-                    "paramName": "case_id",
-                    "type": "text",
-                    "label": "Case",
-                    "value": "C-1042"
-                  },
-                  {
-                    "paramName": "due_date",
-                    "type": "date",
-                    "label": "Due date",
-                    "value": "$currentDate+2d"
-                  },
-                  {
-                    "paramName": "escalate",
-                    "type": "button",
-                    "label": "Escalate"
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Case Escalation",
-            "description": "Escalate surveillance cases.",
-            "tabs": {
-              "cases": {
-                "id": "cases",
-                "name": "Cases",
-                "layout": [
-                  {
-                    "i": "case_escalation_form",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 10
-                  }
-                ]
-              }
-            },
-            "groups": []
-          }
-        ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Surveillance Data",
+          "url": "http://localhost:7807",
+          "widgets_json": {
+            "case_escalation_form": {
+              "name": "Case Escalation Form",
+              "description": "Escalate a surveillance case to a reviewer.",
+              "endpoint": "/case-escalation",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 10
+              },
+              "params": [
+                {
+                  "paramName": "escalation",
+                  "type": "form",
+                  "label": "Escalation",
+                  "endpoint": "/case-escalation-submit",
+                  "method": "POST",
+                  "inputParams": [
+                    {
+                      "paramName": "case_id",
+                      "type": "text",
+                      "label": "Case",
+                      "value": "C-1042"
+                    },
+                    {
+                      "paramName": "due_date",
+                      "type": "date",
+                      "label": "Due date",
+                      "value": "$currentDate+2d"
+                    },
+                    {
+                      "paramName": "escalate",
+                      "type": "button",
+                      "label": "Escalate"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Case Escalation",
+              "description": "Escalate surveillance cases.",
+              "tabs": {
+                "cases": {
+                  "id": "cases",
+                  "name": "Cases",
+                  "layout": [
+                    {
+                      "i": "case_escalation_form",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 10
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Case Escalation",
+          "dashboard_name": "Case Escalation Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Case Escalation",
-        "dashboard_name": "Case Escalation Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

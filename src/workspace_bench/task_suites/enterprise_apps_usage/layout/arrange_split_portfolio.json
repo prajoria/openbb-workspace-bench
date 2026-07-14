@@ -4,58 +4,60 @@
   "family": "layout",
   "difficulty": "medium",
   "prompt": "Arrange the widget-examples widgets: holdings on the left with width 24 and sector exposure to its right with width 16, both 12 rows tall starting at row 0.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "widget-examples"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "widget-examples"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Arrangement Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Widget Examples",
+            "widget_id": "test_metric",
+            "data_args": {},
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 18,
+              "h": 9
+            },
+            "widget_uuid": "usage_arrange_split_portfolio_widget_001"
+          },
+          {
+            "origin": "Widget Examples",
+            "widget_id": "live_grid_example",
+            "data_args": {},
+            "layout": {
+              "x": 0,
+              "y": 9,
+              "w": 18,
+              "h": 9
+            },
+            "widget_uuid": "usage_arrange_split_portfolio_widget_002"
+          }
+        ],
+        "dashboard_id": "usage_arrange_split_portfolio_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget_layout"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Arrangement Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Widget Examples",
-          "widget_id": "test_metric",
-          "data_args": {},
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 18,
-            "h": 9
-          },
-          "widget_uuid": "usage_arrange_split_portfolio_widget_001"
-        },
-        {
-          "origin": "Widget Examples",
-          "widget_id": "live_grid_example",
-          "data_args": {},
-          "layout": {
-            "x": 0,
-            "y": 9,
-            "w": 18,
-            "h": 9
-          },
-          "widget_uuid": "usage_arrange_split_portfolio_widget_002"
-        }
-      ],
-      "dashboard_id": "usage_arrange_split_portfolio_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget_layout"
-  ],
-  "success": {
+  "eval": {
     "required_layouts": [
       {
         "widget_id": "test_metric",
@@ -83,35 +85,35 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_id": "test_metric",
-        "x": 0,
-        "y": 0,
-        "w": 24,
-        "h": 12
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "test_metric",
+          "x": 0,
+          "y": 0,
+          "w": 24,
+          "h": 12
+        }
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "live_grid_example",
+          "x": 24,
+          "y": 0,
+          "w": 16,
+          "h": 12
+        }
       }
-    },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_id": "live_grid_example",
-        "x": 24,
-        "y": 0,
-        "w": 16,
-        "h": 12
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

@@ -4,26 +4,28 @@
   "family": "backends",
   "difficulty": "easy",
   "prompt": "With manage_backends, use operation add and name stark-enterprise to register Bench Stark Enterprise, then list it with operation list.",
-  "fixtures": {
-    "backends": []
+  "setup": {
+    "fixtures": {
+      "backends": []
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Backend Registration",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "dashboard_id": "usage_add_stark_enterprise_dashboard_001"
+      }
+    },
+    "allowed_tools": [
+      "manage_backends"
+    ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Backend Registration",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "dashboard_id": "usage_add_stark_enterprise_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "manage_backends"
-  ],
-  "success": {
+  "eval": {
     "required_tool_calls": [
       {
         "tool": "manage_backends",
@@ -19692,24 +19694,24 @@
         }
       ],
       "pinned_paths": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "stark-enterprise"
-      }
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "list"
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "stark-enterprise"
+        }
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "list"
+        }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

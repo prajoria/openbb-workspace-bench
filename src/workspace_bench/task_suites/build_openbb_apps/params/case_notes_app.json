@@ -8,31 +8,33 @@
   "business_terms": [
     "case_id"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2
@@ -76,79 +78,79 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Surveillance Data",
-        "url": "http://localhost:7807",
-        "widgets_json": {
-          "case_notes": {
-            "name": "Case Notes",
-            "description": "Notes for one surveillance case.",
-            "endpoint": "/case-notes",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "case_id",
-                "type": "text",
-                "label": "Case",
-                "value": "C-1042",
-                "description": "Case identifier."
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Surveillance Data",
+          "url": "http://localhost:7807",
+          "widgets_json": {
+            "case_notes": {
+              "name": "Case Notes",
+              "description": "Notes for one surveillance case.",
+              "endpoint": "/case-notes",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "case_id",
+                  "type": "text",
+                  "label": "Case",
+                  "value": "C-1042",
+                  "description": "Case identifier."
+                }
+              ],
+              "data": {
+                "valueField": "case_notes_value"
               }
-            ],
-            "data": {
-              "valueField": "case_notes_value"
             }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Case Note Filter",
-            "description": "Case notes by entered case id.",
-            "tabs": {
-              "notes": {
-                "id": "notes",
-                "name": "Notes",
-                "layout": [
-                  {
-                    "i": "case_notes",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 8
-                  }
-                ]
-              }
-            },
-            "groups": []
-          }
-        ]
+          },
+          "apps_json": [
+            {
+              "name": "Case Note Filter",
+              "description": "Case notes by entered case id.",
+              "tabs": {
+                "notes": {
+                  "id": "notes",
+                  "name": "Notes",
+                  "layout": [
+                    {
+                      "i": "case_notes",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 8
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Case Note Filter",
+          "dashboard_name": "Case Note Filter Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Case Note Filter",
-        "dashboard_name": "Case Note Filter Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

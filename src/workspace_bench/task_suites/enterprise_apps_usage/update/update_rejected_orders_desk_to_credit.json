@@ -4,49 +4,51 @@
   "family": "update",
   "difficulty": "medium",
   "prompt": "The existing Rejected Orders widget currently shows US Equity. Update that widget to Credit; do not create a new one and leave no widget showing the old value.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Update Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "execution_desk_exceptions_rejected_orders",
+            "data_args": {
+              "desk": "US Equity",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            },
+            "widget_uuid": "usage_update_rejected_orders_desk_to_credit_widget_001"
+          }
+        ],
+        "dashboard_id": "usage_update_rejected_orders_desk_to_credit_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Update Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "execution_desk_exceptions_rejected_orders",
-          "data_args": {
-            "desk": "US Equity",
-            "period": "YTD"
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 12
-          },
-          "widget_uuid": "usage_update_rejected_orders_desk_to_credit_widget_001"
-        }
-      ],
-      "dashboard_id": "usage_update_rejected_orders_desk_to_credit_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Bench Stark Enterprise",
@@ -73,30 +75,30 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "read_widget",
-      "args": {
-        "widget_id": "execution_desk_exceptions_rejected_orders"
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_uuid": "usage_update_rejected_orders_desk_to_credit_widget_001",
-        "data_args": {
-          "desk": "Credit"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "read_widget",
+        "args": {
+          "widget_id": "execution_desk_exceptions_rejected_orders"
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "usage_update_rejected_orders_desk_to_credit_widget_001",
+          "data_args": {
+            "desk": "Credit"
+          }
         }
       }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

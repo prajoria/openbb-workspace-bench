@@ -9,31 +9,33 @@
     "exception",
     "policy_id"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2,
@@ -86,89 +88,89 @@
         ],
         "required_config": {}
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Surveillance Data",
-        "url": "http://localhost:7807",
-        "widgets_json": {
-          "policy_exception_form": {
-            "name": "Policy Exception Form",
-            "description": "Submit a policy exception request.",
-            "endpoint": "/policy-exception",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 10
-            },
-            "params": [
-              {
-                "paramName": "exception",
-                "type": "form",
-                "label": "Exception",
-                "endpoint": "/policy-exception-submit",
-                "method": "POST",
-                "inputParams": [
-                  {
-                    "paramName": "policy_id",
-                    "type": "text",
-                    "label": "Policy",
-                    "value": "POL-7"
-                  },
-                  {
-                    "paramName": "owner",
-                    "type": "text",
-                    "label": "Owner",
-                    "value": "compliance"
-                  },
-                  {
-                    "paramName": "request",
-                    "type": "button",
-                    "label": "Request"
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Surveillance Data",
+          "url": "http://localhost:7807",
+          "widgets_json": {
+            "policy_exception_form": {
+              "name": "Policy Exception Form",
+              "description": "Submit a policy exception request.",
+              "endpoint": "/policy-exception",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 10
+              },
+              "params": [
+                {
+                  "paramName": "exception",
+                  "type": "form",
+                  "label": "Exception",
+                  "endpoint": "/policy-exception-submit",
+                  "method": "POST",
+                  "inputParams": [
+                    {
+                      "paramName": "policy_id",
+                      "type": "text",
+                      "label": "Policy",
+                      "value": "POL-7"
+                    },
+                    {
+                      "paramName": "owner",
+                      "type": "text",
+                      "label": "Owner",
+                      "value": "compliance"
+                    },
+                    {
+                      "paramName": "request",
+                      "type": "button",
+                      "label": "Request"
+                    }
+                  ]
+                }
+              ],
+              "runButton": true,
+              "category": "Surveillance",
+              "staleTime": 900000,
+              "data": {
+                "valueField": "policy_exception_form_value"
               }
-            ],
-            "runButton": true,
-            "category": "Surveillance",
-            "staleTime": 900000,
-            "data": {
-              "valueField": "policy_exception_form_value"
             }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Surveillance Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Surveillance Data",
+          "widget_id": "policy_exception_form"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Surveillance Data",
+          "widget_id": "policy_exception_form"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Surveillance Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Surveillance Data",
-        "widget_id": "policy_exception_form"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Surveillance Data",
-        "widget_id": "policy_exception_form"
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

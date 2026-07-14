@@ -4,31 +4,33 @@
   "family": "settings",
   "difficulty": "hard",
   "prompt": "Build a surveillance analyst a dependable cases and compliance alerts workspace. The workspace must cover open alert count. The workspace must cover notes for one surveillance case. The workspace must cover latest surveillance policy digest. Leave the complete working workspace open for review. Decide how best to organize the experience and preserve unrelated work.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 2,
       "max_repeated_snapshots": 2
@@ -135,131 +137,131 @@
         "path": "staleTime",
         "expected": 1800000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Surveillance Data",
-        "url": "http://localhost:7807",
-        "widgets_json": {
-          "alert_metric": {
-            "name": "Open Alerts",
-            "description": "Open alert count.",
-            "endpoint": "/alert-count",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
-            },
-            "category": "Surveillance",
-            "staleTime": 1800000,
-            "data": {
-              "valueField": "alert_metric_value"
-            }
-          },
-          "case_notes": {
-            "name": "Case Notes",
-            "description": "Notes for one surveillance case.",
-            "endpoint": "/case-notes",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "case_id",
-                "type": "text",
-                "label": "Case",
-                "value": "C-1042",
-                "description": "Case identifier."
-              }
-            ],
-            "category": "Surveillance",
-            "staleTime": 1800000,
-            "data": {
-              "valueField": "case_notes_value"
-            }
-          },
-          "policy_pdf": {
-            "name": "Policy Digest",
-            "description": "Latest surveillance policy digest.",
-            "endpoint": "/policy-digest",
-            "type": "pdf",
-            "gridData": {
-              "w": 16,
-              "h": 14
-            },
-            "category": "Surveillance",
-            "staleTime": 1800000,
-            "data": {
-              "valueField": "policy_pdf_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Surveillance Settings Room",
-            "description": "Alerts, notes, and policy settings.",
-            "tabs": {
-              "alerts": {
-                "id": "alerts",
-                "name": "Alerts",
-                "layout": [
-                  {
-                    "i": "alert_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 6,
-                    "h": 4
-                  },
-                  {
-                    "i": "case_notes",
-                    "x": 6,
-                    "y": 0,
-                    "w": 12,
-                    "h": 8
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Surveillance Data",
+          "url": "http://localhost:7807",
+          "widgets_json": {
+            "alert_metric": {
+              "name": "Open Alerts",
+              "description": "Open alert count.",
+              "endpoint": "/alert-count",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
               },
-              "policy": {
-                "id": "policy",
-                "name": "Policy",
-                "layout": [
-                  {
-                    "i": "policy_pdf",
-                    "x": 0,
-                    "y": 0,
-                    "w": 16,
-                    "h": 14
-                  }
-                ]
+              "category": "Surveillance",
+              "staleTime": 1800000,
+              "data": {
+                "valueField": "alert_metric_value"
               }
             },
-            "groups": []
-          }
-        ]
+            "case_notes": {
+              "name": "Case Notes",
+              "description": "Notes for one surveillance case.",
+              "endpoint": "/case-notes",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "case_id",
+                  "type": "text",
+                  "label": "Case",
+                  "value": "C-1042",
+                  "description": "Case identifier."
+                }
+              ],
+              "category": "Surveillance",
+              "staleTime": 1800000,
+              "data": {
+                "valueField": "case_notes_value"
+              }
+            },
+            "policy_pdf": {
+              "name": "Policy Digest",
+              "description": "Latest surveillance policy digest.",
+              "endpoint": "/policy-digest",
+              "type": "pdf",
+              "gridData": {
+                "w": 16,
+                "h": 14
+              },
+              "category": "Surveillance",
+              "staleTime": 1800000,
+              "data": {
+                "valueField": "policy_pdf_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Surveillance Settings Room",
+              "description": "Alerts, notes, and policy settings.",
+              "tabs": {
+                "alerts": {
+                  "id": "alerts",
+                  "name": "Alerts",
+                  "layout": [
+                    {
+                      "i": "alert_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 6,
+                      "h": 4
+                    },
+                    {
+                      "i": "case_notes",
+                      "x": 6,
+                      "y": 0,
+                      "w": 12,
+                      "h": 8
+                    }
+                  ]
+                },
+                "policy": {
+                  "id": "policy",
+                  "name": "Policy",
+                  "layout": [
+                    {
+                      "i": "policy_pdf",
+                      "x": 0,
+                      "y": 0,
+                      "w": 16,
+                      "h": 14
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Surveillance Settings Room",
+          "dashboard_name": "Surveillance Settings Room Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Surveillance Settings Room",
-        "dashboard_name": "Surveillance Settings Room Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

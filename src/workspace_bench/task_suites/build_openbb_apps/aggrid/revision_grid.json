@@ -8,31 +8,33 @@
     "ticker",
     "revised_up"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2,
@@ -100,83 +102,83 @@
           "data.dataKey": "rows"
         }
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Earnings Prep Data",
-        "url": "http://localhost:7805",
-        "widgets_json": {
-          "revision_grid": {
-            "name": "Revision Grid",
-            "description": "Street revision momentum by ticker.",
-            "endpoint": "/revision-momentum",
-            "type": "table_ssrm",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "ticker",
-                    "headerName": "Ticker",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "revised_up",
-                    "headerName": "Revised Up",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "revised_down",
-                    "headerName": "Revised Down",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "momentum_pct",
-                    "headerName": "Momentum Pct",
-                    "cellDataType": "number",
-                    "formatterFn": "percent"
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Earnings Prep Data",
+          "url": "http://localhost:7805",
+          "widgets_json": {
+            "revision_grid": {
+              "name": "Revision Grid",
+              "description": "Street revision momentum by ticker.",
+              "endpoint": "/revision-momentum",
+              "type": "table_ssrm",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "dataKey": "rows"
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "ticker",
+                      "headerName": "Ticker",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "revised_up",
+                      "headerName": "Revised Up",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "revised_down",
+                      "headerName": "Revised Down",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "momentum_pct",
+                      "headerName": "Momentum Pct",
+                      "cellDataType": "number",
+                      "formatterFn": "percent"
+                    }
+                  ]
+                },
+                "dataKey": "rows"
+              }
             }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Earnings Prep Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Earnings Prep Data",
+          "widget_id": "revision_grid"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Earnings Prep Data",
+          "widget_id": "revision_grid"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Earnings Prep Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Earnings Prep Data",
-        "widget_id": "revision_grid"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Earnings Prep Data",
-        "widget_id": "revision_grid"
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

@@ -9,31 +9,33 @@
     "chain",
     "inflow_usd"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 2,
       "max_repeated_snapshots": 2
@@ -136,121 +138,121 @@
         "path": "staleTime",
         "expected": 900000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Chain TVL Data",
-        "url": "http://localhost:7802",
-        "widgets_json": {
-          "chain_flows": {
-            "name": "Chain Flows",
-            "description": "Net flows by chain.",
-            "endpoint": "/chain-flows",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "chain",
-                    "headerName": "Chain",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "inflow_usd",
-                    "headerName": "Inflow Usd",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "outflow_usd",
-                    "headerName": "Outflow Usd",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "net_pct",
-                    "headerName": "Net Pct",
-                    "cellDataType": "number",
-                    "formatterFn": "percent"
-                  }
-                ]
-              }
-            },
-            "staleTime": 900000
-          },
-          "gas_metric": {
-            "name": "Gas Now",
-            "description": "Current gas price snapshot.",
-            "endpoint": "/gas-now",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
-            },
-            "data": {
-              "valueField": "gas_metric_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Flow Monitor",
-            "description": "Chain flows and gas.",
-            "tabs": {
-              "flows": {
-                "id": "flows",
-                "name": "Flows",
-                "layout": [
-                  {
-                    "i": "chain_flows",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Chain TVL Data",
+          "url": "http://localhost:7802",
+          "widgets_json": {
+            "chain_flows": {
+              "name": "Chain Flows",
+              "description": "Net flows by chain.",
+              "endpoint": "/chain-flows",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "gas": {
-                "id": "gas",
-                "name": "Gas",
-                "layout": [
-                  {
-                    "i": "gas_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 6
-                  }
-                ]
-              }
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "chain",
+                      "headerName": "Chain",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "inflow_usd",
+                      "headerName": "Inflow Usd",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "outflow_usd",
+                      "headerName": "Outflow Usd",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "net_pct",
+                      "headerName": "Net Pct",
+                      "cellDataType": "number",
+                      "formatterFn": "percent"
+                    }
+                  ]
+                }
+              },
+              "staleTime": 900000
             },
-            "groups": []
-          }
-        ]
+            "gas_metric": {
+              "name": "Gas Now",
+              "description": "Current gas price snapshot.",
+              "endpoint": "/gas-now",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
+              },
+              "data": {
+                "valueField": "gas_metric_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Flow Monitor",
+              "description": "Chain flows and gas.",
+              "tabs": {
+                "flows": {
+                  "id": "flows",
+                  "name": "Flows",
+                  "layout": [
+                    {
+                      "i": "chain_flows",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "gas": {
+                  "id": "gas",
+                  "name": "Gas",
+                  "layout": [
+                    {
+                      "i": "gas_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 6
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Flow Monitor",
+          "dashboard_name": "Flow Monitor Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Flow Monitor",
-        "dashboard_name": "Flow Monitor Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

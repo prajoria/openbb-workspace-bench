@@ -4,21 +4,23 @@
   "family": "apps",
   "difficulty": "medium",
   "prompt": "From the Bench Stark Enterprise backend, instantiate the Executive Investment Dashboard app as a new dashboard named Executive Morning Brief.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
-      }
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_backends",
+      "manage_apps",
+      "navigate_workspace"
     ]
   },
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_backends",
-    "manage_apps",
-    "navigate_workspace"
-  ],
-  "success": {
+  "eval": {
     "required_dashboard_name_contains": "Executive Morning Brief",
     "required_tabs": [
       "overview",
@@ -48,27 +50,27 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "list"
-      }
     },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Executive Investment Dashboard",
-        "dashboard_name": "Executive Morning Brief",
-        "activate": true
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "list"
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Executive Investment Dashboard",
+          "dashboard_name": "Executive Morning Brief",
+          "activate": true
+        }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

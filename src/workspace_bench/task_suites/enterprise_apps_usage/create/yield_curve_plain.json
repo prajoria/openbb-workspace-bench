@@ -4,32 +4,34 @@
   "family": "create",
   "difficulty": "easy",
   "prompt": "Create a Metric Widget (widget_id test_metric) from the Widget Examples backend on the active dashboard.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "widget-examples"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "widget-examples"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Creation Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "dashboard_id": "usage_yield_curve_plain_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "create_widget",
+      "read_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Creation Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "dashboard_id": "usage_yield_curve_plain_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "create_widget",
-    "read_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Widget Examples",
@@ -49,23 +51,23 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "test_metric",
-        "data_args": {}
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
+          "data_args": {}
+        }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

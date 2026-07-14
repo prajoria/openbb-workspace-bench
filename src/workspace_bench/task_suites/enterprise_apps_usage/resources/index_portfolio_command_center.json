@@ -4,47 +4,49 @@
   "family": "resources",
   "difficulty": "easy",
   "prompt": "After calling read_workspace_resource with uri openbb://workspace/app-builder/index, add a note naming the Portfolio Command Center template id portfolio-command-center.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
-      }
-    ]
-  },
-  "initial_state": {
-    "dashboard": {
-      "name": "App Index Review",
-      "activate": true,
-      "tabs": [
+  "setup": {
+    "fixtures": {
+      "backends": [
         {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "dashboard_id": "usage_index_portfolio_command_center_dashboard_001",
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "vendor_dataset_monitor_quality_row_count_drift",
-          "data_args": {},
-          "tab_id": "",
-          "layout": {
-            "x": 0,
-            "y": 500,
-            "w": 8,
-            "h": 4
-          },
-          "widget_uuid": "usage_index_portfolio_command_center_widget_001"
+          "name": "stark-enterprise"
         }
       ]
-    }
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "App Index Review",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "dashboard_id": "usage_index_portfolio_command_center_dashboard_001",
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "vendor_dataset_monitor_quality_row_count_drift",
+            "data_args": {},
+            "tab_id": "",
+            "layout": {
+              "x": 0,
+              "y": 500,
+              "w": 8,
+              "h": 4
+            },
+            "widget_uuid": "usage_index_portfolio_command_center_widget_001"
+          }
+        ]
+      }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_workspace_resource",
+      "add_generative_widget"
+    ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_workspace_resource",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_resource_reads": [
       {
         "uri": "openbb://workspace/app-builder/index",
@@ -78,29 +80,29 @@
         "min_count": 1,
         "max_count": 1
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "read_workspace_resource",
-      "args": {
-        "uri": "openbb://workspace/app-builder/index"
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/app-builder/index"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "App Index Note",
+          "data": "Portfolio Command Center; portfolio-command-center."
+        }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "App Index Note",
-        "data": "Portfolio Command Center; portfolio-command-center."
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

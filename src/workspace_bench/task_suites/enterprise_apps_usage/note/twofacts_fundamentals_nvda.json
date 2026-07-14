@@ -4,49 +4,51 @@
   "family": "note",
   "difficulty": "medium",
   "prompt": "Add a note on the overview tab with Microsoft's company id and exact price from the data after reviewing the existing company-list widget.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Existing Review",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "company_list",
+            "data_args": {
+              "companyId": "GM"
+            },
+            "tab_id": "overview",
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            },
+            "widget_uuid": "usage_twofacts_fundamentals_nvda_widget_001"
+          }
+        ],
+        "dashboard_id": "usage_twofacts_fundamentals_nvda_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "get_widget_data",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Existing Review",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "company_list",
-          "data_args": {
-            "companyId": "GM"
-          },
-          "tab_id": "overview",
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 12
-          },
-          "widget_uuid": "usage_twofacts_fundamentals_nvda_widget_001"
-        }
-      ],
-      "dashboard_id": "usage_twofacts_fundamentals_nvda_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "get_widget_data",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_tabs": [
       "overview"
     ],
@@ -77,33 +79,33 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "get_widget_data",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "company_list",
-        "data_args": {
-          "companyId": "GM"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "company_list",
+          "data_args": {
+            "companyId": "GM"
+          }
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Answer Note",
+          "data": "Microsoft company id VWAGY has price 350.5."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Answer Note",
-        "data": "Microsoft company id VWAGY has price 350.5."
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

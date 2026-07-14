@@ -4,62 +4,64 @@
   "family": "layout",
   "difficulty": "easy",
   "prompt": "Do not move the estimates widget; move the MSFT fundamentals widget beside it so it starts at column 24, row 0, keeping its size.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Preserve Layout Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "live_grid_data",
+            "data_args": {
+              "symbol": "MSFT"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 24,
+              "h": 12
+            },
+            "widget_uuid": "usage_preserve_estimates_fundamentals_msft_widget_001"
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "company_list",
+            "data_args": {
+              "companyId": "VWAGY"
+            },
+            "layout": {
+              "x": 0,
+              "y": 12,
+              "w": 16,
+              "h": 8
+            },
+            "widget_uuid": "usage_preserve_estimates_fundamentals_msft_widget_002"
+          }
+        ],
+        "dashboard_id": "usage_preserve_estimates_fundamentals_msft_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget_layout"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Preserve Layout Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "live_grid_data",
-          "data_args": {
-            "symbol": "MSFT"
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 24,
-            "h": 12
-          },
-          "widget_uuid": "usage_preserve_estimates_fundamentals_msft_widget_001"
-        },
-        {
-          "origin": "Getting Started",
-          "widget_id": "company_list",
-          "data_args": {
-            "companyId": "VWAGY"
-          },
-          "layout": {
-            "x": 0,
-            "y": 12,
-            "w": 16,
-            "h": 8
-          },
-          "widget_uuid": "usage_preserve_estimates_fundamentals_msft_widget_002"
-        }
-      ],
-      "dashboard_id": "usage_preserve_estimates_fundamentals_msft_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget_layout"
-  ],
-  "success": {
+  "eval": {
     "required_layouts": [
       {
         "widget_id": "live_grid_data",
@@ -87,25 +89,25 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_id": "company_list",
-        "x": 24,
-        "y": 0,
-        "w": 16,
-        "h": 8
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "company_list",
+          "x": 24,
+          "y": 0,
+          "w": 16,
+          "h": 8
+        }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

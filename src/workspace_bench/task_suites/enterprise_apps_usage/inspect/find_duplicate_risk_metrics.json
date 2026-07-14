@@ -4,78 +4,80 @@
   "family": "inspect",
   "difficulty": "medium",
   "prompt": "Preserve the test_metric widget while inspecting the dashboard, identifying the duplicate whitepapers among the seeded widgets, and removing exactly one duplicate.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "widget-examples"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "widget-examples"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Inspect Deduplicate",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Widget Examples",
+            "widget_id": "whitepapers",
+            "data_args": {
+              "filenames": [
+                "bitcoin.pdf"
+              ]
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_find_duplicate_risk_metrics_widget_001"
+          },
+          {
+            "origin": "Widget Examples",
+            "widget_id": "whitepapers",
+            "data_args": {
+              "filenames": [
+                "bitcoin.pdf"
+              ]
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_find_duplicate_risk_metrics_widget_002"
+          },
+          {
+            "origin": "Widget Examples",
+            "widget_id": "test_metric",
+            "data_args": {},
+            "layout": {
+              "x": 0,
+              "y": 10,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_find_duplicate_risk_metrics_widget_003"
+          }
+        ],
+        "dashboard_id": "usage_find_duplicate_risk_metrics_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "delete_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Inspect Deduplicate",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Widget Examples",
-          "widget_id": "whitepapers",
-          "data_args": {
-            "filenames": [
-              "bitcoin.pdf"
-            ]
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_find_duplicate_risk_metrics_widget_001"
-        },
-        {
-          "origin": "Widget Examples",
-          "widget_id": "whitepapers",
-          "data_args": {
-            "filenames": [
-              "bitcoin.pdf"
-            ]
-          },
-          "layout": {
-            "x": 20,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_find_duplicate_risk_metrics_widget_002"
-        },
-        {
-          "origin": "Widget Examples",
-          "widget_id": "test_metric",
-          "data_args": {},
-          "layout": {
-            "x": 0,
-            "y": 10,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_find_duplicate_risk_metrics_widget_003"
-        }
-      ],
-      "dashboard_id": "usage_find_duplicate_risk_metrics_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "delete_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Widget Examples",
@@ -113,27 +115,27 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "read_widget",
-      "args": {
-        "widget_uuid": "usage_find_duplicate_risk_metrics_widget_002"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "read_widget",
+        "args": {
+          "widget_uuid": "usage_find_duplicate_risk_metrics_widget_002"
+        }
+      },
+      {
+        "tool": "delete_widget",
+        "args": {
+          "widget_uuid": "usage_find_duplicate_risk_metrics_widget_002"
+        }
       }
-    },
-    {
-      "tool": "delete_widget",
-      "args": {
-        "widget_uuid": "usage_find_duplicate_risk_metrics_widget_002"
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

@@ -9,31 +9,33 @@
     "review",
     "vendor_name"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2,
@@ -87,88 +89,88 @@
         ],
         "required_config": {}
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Vendor SLA Data",
-        "url": "http://localhost:7804",
-        "widgets_json": {
-          "vendor_review_form": {
-            "name": "Vendor Review Form",
-            "description": "Create a vendor review item.",
-            "endpoint": "/vendor-review",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 10
-            },
-            "params": [
-              {
-                "paramName": "review",
-                "type": "form",
-                "label": "Review",
-                "endpoint": "/vendor-review-submit",
-                "method": "POST",
-                "inputParams": [
-                  {
-                    "paramName": "vendor_name",
-                    "type": "text",
-                    "label": "Vendor",
-                    "value": "AlphaFeed"
-                  },
-                  {
-                    "paramName": "review_date",
-                    "type": "date",
-                    "label": "Review date",
-                    "value": "$currentDate"
-                  },
-                  {
-                    "paramName": "submit",
-                    "type": "button",
-                    "label": "Submit"
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Vendor SLA Data",
+          "url": "http://localhost:7804",
+          "widgets_json": {
+            "vendor_review_form": {
+              "name": "Vendor Review Form",
+              "description": "Create a vendor review item.",
+              "endpoint": "/vendor-review",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 10
+              },
+              "params": [
+                {
+                  "paramName": "review",
+                  "type": "form",
+                  "label": "Review",
+                  "endpoint": "/vendor-review-submit",
+                  "method": "POST",
+                  "inputParams": [
+                    {
+                      "paramName": "vendor_name",
+                      "type": "text",
+                      "label": "Vendor",
+                      "value": "AlphaFeed"
+                    },
+                    {
+                      "paramName": "review_date",
+                      "type": "date",
+                      "label": "Review date",
+                      "value": "$currentDate"
+                    },
+                    {
+                      "paramName": "submit",
+                      "type": "button",
+                      "label": "Submit"
+                    }
+                  ]
+                }
+              ],
+              "staleTime": 900000,
+              "category": "Vendor Ops",
+              "data": {
+                "valueField": "vendor_review_form_value"
               }
-            ],
-            "staleTime": 900000,
-            "category": "Vendor Ops",
-            "data": {
-              "valueField": "vendor_review_form_value"
             }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Vendor SLA Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Vendor SLA Data",
+          "widget_id": "vendor_review_form"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Vendor SLA Data",
+          "widget_id": "vendor_review_form"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Vendor SLA Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Vendor SLA Data",
-        "widget_id": "vendor_review_form"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Vendor SLA Data",
-        "widget_id": "vendor_review_form"
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

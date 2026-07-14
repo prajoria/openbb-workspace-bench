@@ -4,31 +4,33 @@
   "family": "delegate",
   "difficulty": "easy",
   "prompt": "Call assign_tasks_to_agents with one task_request using id stress-analyst for risk review work: Run the historical stress scenarios and summarize losses.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Delegation Board",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "dashboard_id": "usage_risk_single_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "assign_tasks_to_agents"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Delegation Board",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "dashboard_id": "usage_risk_single_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "eval": {
     "required_tool_calls": [
       {
         "tool": "assign_tasks_to_agents"
@@ -47,28 +49,28 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "assign_tasks_to_agents",
-      "args": {
-        "task_requests": [
-          {
-            "id": "stress-analyst",
-            "description": "Run the historical stress scenarios and summarize losses.",
-            "assigned_holder_url": "workspace://agents/stress",
-            "assigned_agent_id": "stress-agent"
-          }
-        ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "assign_tasks_to_agents",
+        "args": {
+          "task_requests": [
+            {
+              "id": "stress-analyst",
+              "description": "Run the historical stress scenarios and summarize losses.",
+              "assigned_holder_url": "workspace://agents/stress",
+              "assigned_agent_id": "stress-agent"
+            }
+          ]
+        }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

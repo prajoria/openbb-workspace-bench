@@ -4,49 +4,51 @@
   "family": "skills",
   "difficulty": "medium",
   "prompt": "After calling get_skill_content with slug finance-earnings-prep, add a new tab named Earnings Prep and put a note on that tab capturing the workflow steps. Omit dashboard_id when adding the note.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
-      }
-    ]
-  },
-  "initial_state": {
-    "dashboard": {
-      "name": "Skill Review",
-      "activate": true,
-      "tabs": [
+  "setup": {
+    "fixtures": {
+      "backends": [
         {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "dashboard_id": "usage_file_finance_earnings_prep_under_its_own_tab_dashboard_001",
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "vendor_dataset_monitor_incidents_blast_radius_summary",
-          "data_args": {},
-          "tab_id": "overview",
-          "layout": {
-            "x": 0,
-            "y": 500,
-            "w": 8,
-            "h": 4
-          },
-          "widget_uuid": "usage_file_finance_earnings_prep_under_its_own_tab_widget_001"
+          "name": "stark-enterprise"
         }
       ]
-    }
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Skill Review",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "dashboard_id": "usage_file_finance_earnings_prep_under_its_own_tab_dashboard_001",
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "vendor_dataset_monitor_incidents_blast_radius_summary",
+            "data_args": {},
+            "tab_id": "overview",
+            "layout": {
+              "x": 0,
+              "y": 500,
+              "w": 8,
+              "h": 4
+            },
+            "widget_uuid": "usage_file_finance_earnings_prep_under_its_own_tab_widget_001"
+          }
+        ]
+      }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "get_skill_content",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "add_generative_widget"
+    ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "get_skill_content",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_tabs": [
       "overview",
       "earnings-prep"
@@ -94,47 +96,47 @@
         "min_count": 1,
         "max_count": 1
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "get_skill_content",
-      "args": {
-        "slug": "finance-earnings-prep"
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-earnings-prep"
+        }
+      },
+      {
+        "tool": "manage_navigation_bar",
+        "args": {
+          "operation": "add_tabs",
+          "tabs": [
+            {
+              "name": "Earnings Prep"
+            }
+          ]
+        }
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "tab",
+          "tab_id": "earnings-prep"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Finance Earnings Prep Note",
+          "data": "Finance Earnings Prep workflow: earnings prep; surprise drivers."
+        }
       }
-    },
-    {
-      "tool": "manage_navigation_bar",
-      "args": {
-        "operation": "add_tabs",
-        "tabs": [
-          {
-            "name": "Earnings Prep"
-          }
-        ]
-      }
-    },
-    {
-      "tool": "navigate_workspace",
-      "args": {
-        "operation": "tab",
-        "tab_id": "earnings-prep"
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Finance Earnings Prep Note",
-        "data": "Finance Earnings Prep workflow: earnings prep; surprise drivers."
-      }
+    ],
+    "limits": {
+      "max_turns": 8
     }
-  ],
-  "limits": {
-    "max_turns": 8
   }
 }

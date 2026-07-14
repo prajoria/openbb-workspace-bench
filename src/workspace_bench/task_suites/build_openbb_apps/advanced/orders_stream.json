@@ -9,31 +9,33 @@
     "venue",
     "order_id"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2,
@@ -107,90 +109,90 @@
         "path": "refetchInterval",
         "expected": false
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Execution Desk Data",
-        "url": "http://localhost:7806",
-        "widgets_json": {
-          "orders_stream": {
-            "name": "Orders Stream",
-            "description": "Streaming orders with a stable row id.",
-            "endpoint": "/orders-stream",
-            "type": "live_grid",
-            "wsEndpoint": "wss://execution.example/orders",
-            "gridData": {
-              "w": 24,
-              "h": 10
-            },
-            "data": {
-              "wsRowIdColumn": "order_id",
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "order_id",
-                    "headerName": "Order",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "px",
-                    "headerName": "Price",
-                    "cellDataType": "number",
-                    "renderFn": "showCellChange",
-                    "renderFnParams": {
-                      "colorValueKey": "px_change"
-                    }
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Execution Desk Data",
+          "url": "http://localhost:7806",
+          "widgets_json": {
+            "orders_stream": {
+              "name": "Orders Stream",
+              "description": "Streaming orders with a stable row id.",
+              "endpoint": "/orders-stream",
+              "type": "live_grid",
+              "wsEndpoint": "wss://execution.example/orders",
+              "gridData": {
+                "w": 24,
+                "h": 10
               },
-              "updateFrequency": 1000
-            },
-            "refetchInterval": false,
-            "params": [
-              {
-                "paramName": "venue",
-                "type": "text",
-                "label": "Venue",
-                "value": "ARCA",
-                "description": "Execution venue filter."
-              }
-            ],
-            "category": "Execution",
-            "staleTime": 900000
+              "data": {
+                "wsRowIdColumn": "order_id",
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "order_id",
+                      "headerName": "Order",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "px",
+                      "headerName": "Price",
+                      "cellDataType": "number",
+                      "renderFn": "showCellChange",
+                      "renderFnParams": {
+                        "colorValueKey": "px_change"
+                      }
+                    }
+                  ]
+                },
+                "updateFrequency": 1000
+              },
+              "refetchInterval": false,
+              "params": [
+                {
+                  "paramName": "venue",
+                  "type": "text",
+                  "label": "Venue",
+                  "value": "ARCA",
+                  "description": "Execution venue filter."
+                }
+              ],
+              "category": "Execution",
+              "staleTime": 900000
+            }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Execution Desk Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Execution Desk Data",
+          "widget_id": "orders_stream"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Execution Desk Data",
+          "widget_id": "orders_stream"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Execution Desk Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Execution Desk Data",
-        "widget_id": "orders_stream"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Execution Desk Data",
-        "widget_id": "orders_stream"
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

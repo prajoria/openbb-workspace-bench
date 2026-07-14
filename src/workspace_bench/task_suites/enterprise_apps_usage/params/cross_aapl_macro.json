@@ -4,35 +4,37 @@
   "family": "params",
   "difficulty": "hard",
   "prompt": "Build a dashboard with these two widgets after using parameter options for both: Getting Started/table_widget_with_grouping_by_cell_click symbol=AAPL; Getting Started/company_performance series=GM. Add a note mentioning AAPL and GM.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Cross Options",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "dashboard_id": "usage_cross_aapl_macro_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "create_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Cross Options",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "dashboard_id": "usage_cross_aapl_macro_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "create_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Getting Started",
@@ -88,80 +90,80 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Getting Started"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "table_widget_with_grouping_by_cell_click"
-      }
-    },
-    {
-      "tool": "get_params_options",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "table_widget_with_grouping_by_cell_click",
-        "param_name": "symbol"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "table_widget_with_grouping_by_cell_click",
-        "data_args": {
-          "symbol": "AAPL"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click"
+        }
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
+          "param_name": "symbol"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
+          "data_args": {
+            "symbol": "AAPL"
+          }
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "company_performance"
+        }
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
+          "param_name": "company"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
+          "data_args": {
+            "company": "GM",
+            "year": "2024"
+          }
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Options Note",
+          "data": "Options used: AAPL, GM."
         }
       }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "company_performance"
-      }
-    },
-    {
-      "tool": "get_params_options",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "company_performance",
-        "param_name": "company"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "company_performance",
-        "data_args": {
-          "company": "GM",
-          "year": "2024"
-        }
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Options Note",
-        "data": "Options used: AAPL, GM."
-      }
+    ],
+    "limits": {
+      "max_turns": 11
     }
-  ],
-  "limits": {
-    "max_turns": 11
   }
 }

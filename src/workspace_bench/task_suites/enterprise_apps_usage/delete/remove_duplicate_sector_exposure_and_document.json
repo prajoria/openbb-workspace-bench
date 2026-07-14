@@ -4,59 +4,61 @@
   "family": "delete",
   "difficulty": "hard",
   "prompt": "Remove exactly one duplicate from the two identical Live Grid widgets, then add a note saying the duplicate was removed.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "widget-examples"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "widget-examples"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Duplicate Repair",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Widget Examples",
+            "widget_id": "live_grid_example",
+            "data_args": {},
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_remove_duplicate_sector_exposure_and_document_widget_001"
+          },
+          {
+            "origin": "Widget Examples",
+            "widget_id": "live_grid_example",
+            "data_args": {},
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_remove_duplicate_sector_exposure_and_document_widget_002"
+          }
+        ],
+        "dashboard_id": "usage_remove_duplicate_sector_exposure_and_document_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "delete_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Duplicate Repair",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Widget Examples",
-          "widget_id": "live_grid_example",
-          "data_args": {},
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_remove_duplicate_sector_exposure_and_document_widget_001"
-        },
-        {
-          "origin": "Widget Examples",
-          "widget_id": "live_grid_example",
-          "data_args": {},
-          "layout": {
-            "x": 20,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_remove_duplicate_sector_exposure_and_document_widget_002"
-        }
-      ],
-      "dashboard_id": "usage_remove_duplicate_sector_exposure_and_document_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "delete_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Widget Examples",
@@ -86,29 +88,29 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "delete_widget",
-      "args": {
-        "widget_uuid": "usage_remove_duplicate_sector_exposure_and_document_widget_002"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "delete_widget",
+        "args": {
+          "widget_uuid": "usage_remove_duplicate_sector_exposure_and_document_widget_002"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Cleanup Note",
+          "data": "Removed the duplicate widget; one copy remains."
+        }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Cleanup Note",
-        "data": "Removed the duplicate widget; one copy remains."
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

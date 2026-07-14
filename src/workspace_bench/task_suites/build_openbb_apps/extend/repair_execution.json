@@ -10,97 +10,99 @@
     "Execution Desk Data",
     "EDGX"
   ],
-  "fixtures": {},
-  "initial_state": {
-    "custom_backends": [
-      {
-        "name": "Execution Desk Data",
-        "url": "http://localhost:7806",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "live_orders_grid": {
-            "name": "Live Orders Grid",
-            "description": "Streaming order blotter over websocket.",
-            "endpoint": "/live-orders",
-            "type": "live_grid",
-            "wsEndpoint": "live-orders-ws",
-            "gridData": {
-              "w": 24,
-              "h": 12
-            },
-            "data": {
-              "wsRowIdColumn": "order_id",
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "order_id",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "px",
-                    "headerName": "Price",
-                    "cellDataType": "number",
-                    "renderFn": "showCellChange",
-                    "renderFnParams": {
-                      "colorValueKey": "px_change"
+  "setup": {
+    "fixtures": {},
+    "initial_state": {
+      "custom_backends": [
+        {
+          "name": "Execution Desk Data",
+          "url": "http://localhost:7806",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "live_orders_grid": {
+              "name": "Live Orders Grid",
+              "description": "Streaming order blotter over websocket.",
+              "endpoint": "/live-orders",
+              "type": "live_grid",
+              "wsEndpoint": "live-orders-ws",
+              "gridData": {
+                "w": 24,
+                "h": 12
+              },
+              "data": {
+                "wsRowIdColumn": "order_id",
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "order_id",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "px",
+                      "headerName": "Price",
+                      "cellDataType": "number",
+                      "renderFn": "showCellChange",
+                      "renderFnParams": {
+                        "colorValueKey": "px_change"
+                      }
                     }
-                  }
-                ]
+                  ]
+                }
               }
             }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Execution Repair Live",
-            "description": "Live orders and exceptions.",
-            "tabs": {
-              "orders": {
-                "id": "orders",
-                "name": "Orders",
-                "layout": [
-                  {
-                    "i": "live_orders_grid",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
-            },
-            "groups": []
-          }
-        ],
-        "warnings": [
-          "workspace validation failed: 1 entry in the backend's served payload need fixing"
-        ]
-      }
+          },
+          "apps_json": [
+            {
+              "name": "Execution Repair Live",
+              "description": "Live orders and exceptions.",
+              "tabs": {
+                "orders": {
+                  "id": "orders",
+                  "name": "Orders",
+                  "layout": [
+                    {
+                      "i": "live_orders_grid",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ],
+          "warnings": [
+            "workspace validation failed: 1 entry in the backend's served payload need fixing"
+          ]
+        }
+      ]
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
     ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "html",
@@ -210,149 +212,149 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "refresh",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "live_orders_grid": {
-            "name": "Live Orders Grid",
-            "description": "Streaming order blotter over websocket.",
-            "endpoint": "/live-orders",
-            "type": "live_grid",
-            "wsEndpoint": "live-orders-ws",
-            "gridData": {
-              "w": 24,
-              "h": 12
-            },
-            "data": {
-              "wsRowIdColumn": "order_id",
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "order_id",
-                    "headerName": "Order",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "px",
-                    "headerName": "Price",
-                    "cellDataType": "number",
-                    "renderFn": "showCellChange",
-                    "renderFnParams": {
-                      "colorValueKey": "px_change"
-                    }
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "venue",
-                "type": "text",
-                "label": "Venue",
-                "value": "ARCA",
-                "description": "Execution venue filter."
-              }
-            ]
-          },
-          "exception_metric": {
-            "name": "Exceptions",
-            "description": "Open execution exceptions.",
-            "endpoint": "/exception-count",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
-            },
-            "params": [
-              {
-                "paramName": "venue",
-                "type": "text",
-                "label": "Venue",
-                "value": "ARCA",
-                "description": "Execution venue."
-              }
-            ],
-            "data": {
-              "valueField": "exception_metric_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Execution Repair Live",
-            "description": "Live orders and exceptions.",
-            "tabs": {
-              "orders": {
-                "id": "orders",
-                "name": "Orders",
-                "layout": [
-                  {
-                    "i": "live_orders_grid",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "live_orders_grid": {
+              "name": "Live Orders Grid",
+              "description": "Streaming order blotter over websocket.",
+              "endpoint": "/live-orders",
+              "type": "live_grid",
+              "wsEndpoint": "live-orders-ws",
+              "gridData": {
+                "w": 24,
+                "h": 12
               },
-              "posture": {
-                "id": "posture",
-                "name": "Posture",
-                "layout": [
-                  {
-                    "i": "exception_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 8,
-                    "h": 5
-                  }
-                ]
-              }
+              "data": {
+                "wsRowIdColumn": "order_id",
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "order_id",
+                      "headerName": "Order",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "px",
+                      "headerName": "Price",
+                      "cellDataType": "number",
+                      "renderFn": "showCellChange",
+                      "renderFnParams": {
+                        "colorValueKey": "px_change"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "venue",
+                  "type": "text",
+                  "label": "Venue",
+                  "value": "ARCA",
+                  "description": "Execution venue filter."
+                }
+              ]
             },
-            "groups": []
+            "exception_metric": {
+              "name": "Exceptions",
+              "description": "Open execution exceptions.",
+              "endpoint": "/exception-count",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
+              },
+              "params": [
+                {
+                  "paramName": "venue",
+                  "type": "text",
+                  "label": "Venue",
+                  "value": "ARCA",
+                  "description": "Execution venue."
+                }
+              ],
+              "data": {
+                "valueField": "exception_metric_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Execution Repair Live",
+              "description": "Live orders and exceptions.",
+              "tabs": {
+                "orders": {
+                  "id": "orders",
+                  "name": "Orders",
+                  "layout": [
+                    {
+                      "i": "live_orders_grid",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "posture": {
+                  "id": "posture",
+                  "name": "Posture",
+                  "layout": [
+                    {
+                      "i": "exception_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 8,
+                      "h": 5
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Execution Repair Live",
+          "dashboard_name": "Execution Repair Live Dashboard",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "live_orders_grid",
+          "data_args": {
+            "venue": "EDGX"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Execution Repair Live",
-        "dashboard_name": "Execution Repair Live Dashboard",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "live_orders_grid",
-        "data_args": {
-          "venue": "EDGX"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "html",
+          "name": "Execution Repair Live",
+          "data": "<section>Execution Repair Live is live from Execution Desk Data: execution repair done. Configured venue=EDGX.</section>"
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "html",
-        "name": "Execution Repair Live",
-        "data": "<section>Execution Repair Live is live from Execution Desk Data: execution repair done. Configured venue=EDGX.</section>"
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

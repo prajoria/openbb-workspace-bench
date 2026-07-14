@@ -11,31 +11,33 @@
     "MSFT",
     "ticker"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -171,162 +173,162 @@
         "path": "staleTime",
         "expected": 900000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Earnings Prep Data",
-        "url": "http://localhost:7805",
-        "widgets_json": {
-          "earnings_chart": {
-            "name": "EPS History",
-            "description": "Plotly EPS beat/miss history.",
-            "endpoint": "/eps-history",
-            "type": "chart",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "raw": true,
-            "staleTime": 900000,
-            "data": {
-              "valueField": "earnings_chart_value"
-            }
-          },
-          "surprise_metric": {
-            "name": "Avg Surprise",
-            "description": "Average EPS surprise last 4 quarters.",
-            "endpoint": "/avg-surprise",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "staleTime": 900000,
-            "data": {
-              "valueField": "surprise_metric_value"
-            }
-          },
-          "estimate_revisions": {
-            "name": "Estimate Revisions",
-            "description": "Street estimate revisions by quarter.",
-            "endpoint": "/estimate-revisions",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "quarter",
-                    "headerName": "Quarter",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "eps_estimate",
-                    "headerName": "EPS Est",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "revenue_estimate_b",
-                    "headerName": "Revenue Est ($B)",
-                    "cellDataType": "number"
-                  }
-                ]
-              }
-            },
-            "staleTime": 900000
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Earnings Chart Live",
-            "description": "EPS chart and surprise metric.",
-            "tabs": {
-              "earnings": {
-                "id": "earnings",
-                "name": "Earnings",
-                "layout": [
-                  {
-                    "i": "earnings_chart",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Earnings Prep Data",
+          "url": "http://localhost:7805",
+          "widgets_json": {
+            "earnings_chart": {
+              "name": "EPS History",
+              "description": "Plotly EPS beat/miss history.",
+              "endpoint": "/eps-history",
+              "type": "chart",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "signals": {
-                "id": "signals",
-                "name": "Signals",
-                "layout": [
-                  {
-                    "i": "surprise_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 8,
-                    "h": 5
-                  }
-                ]
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "raw": true,
+              "staleTime": 900000,
+              "data": {
+                "valueField": "earnings_chart_value"
               }
             },
-            "groups": []
+            "surprise_metric": {
+              "name": "Avg Surprise",
+              "description": "Average EPS surprise last 4 quarters.",
+              "endpoint": "/avg-surprise",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "staleTime": 900000,
+              "data": {
+                "valueField": "surprise_metric_value"
+              }
+            },
+            "estimate_revisions": {
+              "name": "Estimate Revisions",
+              "description": "Street estimate revisions by quarter.",
+              "endpoint": "/estimate-revisions",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "quarter",
+                      "headerName": "Quarter",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "eps_estimate",
+                      "headerName": "EPS Est",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "revenue_estimate_b",
+                      "headerName": "Revenue Est ($B)",
+                      "cellDataType": "number"
+                    }
+                  ]
+                }
+              },
+              "staleTime": 900000
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Earnings Chart Live",
+              "description": "EPS chart and surprise metric.",
+              "tabs": {
+                "earnings": {
+                  "id": "earnings",
+                  "name": "Earnings",
+                  "layout": [
+                    {
+                      "i": "earnings_chart",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "signals": {
+                  "id": "signals",
+                  "name": "Signals",
+                  "layout": [
+                    {
+                      "i": "surprise_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 8,
+                      "h": 5
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Earnings Chart Live",
+          "dashboard_name": "Earnings Chart Live Board",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "earnings_chart",
+          "data_args": {
+            "symbol": "MSFT"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Earnings Chart Live",
-        "dashboard_name": "Earnings Chart Live Board",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "earnings_chart",
-        "data_args": {
-          "symbol": "MSFT"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Earnings Chart Live",
+          "data": "Earnings Chart Live shipped from Earnings Prep Data: earnings history live. Configured symbol=MSFT."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Earnings Chart Live",
-        "data": "Earnings Chart Live shipped from Earnings Prep Data: earnings history live. Configured symbol=MSFT."
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

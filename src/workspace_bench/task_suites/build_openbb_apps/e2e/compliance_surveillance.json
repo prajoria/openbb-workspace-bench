@@ -10,31 +10,33 @@
     "Surveillance Data",
     "C-1044"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -153,141 +155,141 @@
         "scope": "dashboard",
         "contains": "Compliance Surveillance"
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Surveillance Data",
-        "url": "http://localhost:7807",
-        "widgets_json": {
-          "surveillance_cases_table": {
-            "name": "Surveillance Cases Table",
-            "description": "Open surveillance cases by severity.",
-            "endpoint": "/surveillance-cases-table",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "case_id",
-                    "headerName": "Case Id",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "desk",
-                    "headerName": "Desk",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "severity",
-                    "headerName": "Severity",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "age_days",
-                    "headerName": "Age Days",
-                    "cellDataType": "number"
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "case_id",
-                "type": "text",
-                "label": "Case Id",
-                "value": "C-1042",
-                "description": "Surveillance Cases Table focus field."
-              }
-            ]
-          },
-          "alert_metric": {
-            "name": "Open Alerts",
-            "description": "Open alert count.",
-            "endpoint": "/alert-count",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
-            },
-            "data": {
-              "valueField": "alert_metric_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Compliance Surveillance",
-            "description": "Surveillance cases and alert posture.",
-            "tabs": {
-              "cases": {
-                "id": "cases",
-                "name": "Cases",
-                "layout": [
-                  {
-                    "i": "surveillance_cases_table",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Surveillance Data",
+          "url": "http://localhost:7807",
+          "widgets_json": {
+            "surveillance_cases_table": {
+              "name": "Surveillance Cases Table",
+              "description": "Open surveillance cases by severity.",
+              "endpoint": "/surveillance-cases-table",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "posture": {
-                "id": "posture",
-                "name": "Posture",
-                "layout": [
-                  {
-                    "i": "alert_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "case_id",
+                      "headerName": "Case Id",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "desk",
+                      "headerName": "Desk",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "severity",
+                      "headerName": "Severity",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "age_days",
+                      "headerName": "Age Days",
+                      "cellDataType": "number"
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "case_id",
+                  "type": "text",
+                  "label": "Case Id",
+                  "value": "C-1042",
+                  "description": "Surveillance Cases Table focus field."
+                }
+              ]
             },
-            "groups": []
+            "alert_metric": {
+              "name": "Open Alerts",
+              "description": "Open alert count.",
+              "endpoint": "/alert-count",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
+              },
+              "data": {
+                "valueField": "alert_metric_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Compliance Surveillance",
+              "description": "Surveillance cases and alert posture.",
+              "tabs": {
+                "cases": {
+                  "id": "cases",
+                  "name": "Cases",
+                  "layout": [
+                    {
+                      "i": "surveillance_cases_table",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "posture": {
+                  "id": "posture",
+                  "name": "Posture",
+                  "layout": [
+                    {
+                      "i": "alert_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Compliance Surveillance",
+          "dashboard_name": "Compliance Surveillance Live",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "surveillance_cases_table",
+          "data_args": {
+            "case_id": "C-1044"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Compliance Surveillance",
-        "dashboard_name": "Compliance Surveillance Live",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "surveillance_cases_table",
-        "data_args": {
-          "case_id": "C-1044"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Compliance Surveillance",
+          "data": "Compliance Surveillance is live from Surveillance Data: surveillance ready. Configured case_id=C-1044."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Compliance Surveillance",
-        "data": "Compliance Surveillance is live from Surveillance Data: surveillance ready. Configured case_id=C-1044."
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

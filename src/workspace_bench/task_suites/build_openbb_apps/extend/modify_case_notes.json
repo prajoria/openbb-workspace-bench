@@ -8,73 +8,75 @@
   "business_terms": [
     "case_id"
   ],
-  "fixtures": {},
-  "initial_state": {
-    "custom_backends": [
-      {
-        "name": "Surveillance Data",
-        "url": "http://localhost:7807",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "case_notes": {
-            "name": "Case Notes",
-            "description": "Notes for one surveillance case.",
-            "endpoint": "/case-notes",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
+  "setup": {
+    "fixtures": {},
+    "initial_state": {
+      "custom_backends": [
+        {
+          "name": "Surveillance Data",
+          "url": "http://localhost:7807",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "case_notes": {
+              "name": "Case Notes",
+              "description": "Notes for one surveillance case.",
+              "endpoint": "/case-notes",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "case_id",
+                  "type": "dropdownz",
+                  "label": "Case",
+                  "value": "C-1042",
+                  "description": "Case identifier."
+                }
+              ]
             },
-            "params": [
-              {
-                "paramName": "case_id",
-                "type": "dropdownz",
-                "label": "Case",
-                "value": "C-1042",
-                "description": "Case identifier."
+            "alert_metric": {
+              "name": "Open Alerts",
+              "description": "Open alert count.",
+              "endpoint": "/alert-count",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
+              },
+              "data": {
+                "valueField": "alert_metric_value"
               }
-            ]
-          },
-          "alert_metric": {
-            "name": "Open Alerts",
-            "description": "Open alert count.",
-            "endpoint": "/alert-count",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
-            },
-            "data": {
-              "valueField": "alert_metric_value"
             }
           }
         }
-      }
+      ]
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
     ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2,
@@ -138,81 +140,81 @@
         "path": "staleTime",
         "expected": 600000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "refresh",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "case_notes": {
-            "name": "Case Notes",
-            "description": "Notes for one surveillance case.",
-            "endpoint": "/case-notes",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "case_id",
-                "type": "text",
-                "label": "Case",
-                "value": "C-1042",
-                "description": "Case identifier."
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "case_notes": {
+              "name": "Case Notes",
+              "description": "Notes for one surveillance case.",
+              "endpoint": "/case-notes",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "case_id",
+                  "type": "text",
+                  "label": "Case",
+                  "value": "C-1042",
+                  "description": "Case identifier."
+                }
+              ],
+              "staleTime": 600000,
+              "category": "Surveillance",
+              "data": {
+                "valueField": "case_notes_value"
               }
-            ],
-            "staleTime": 600000,
-            "category": "Surveillance",
-            "data": {
-              "valueField": "case_notes_value"
-            }
-          },
-          "alert_metric": {
-            "name": "Open Alerts",
-            "description": "Open alert count.",
-            "endpoint": "/alert-count",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
             },
-            "data": {
-              "valueField": "alert_metric_value"
+            "alert_metric": {
+              "name": "Open Alerts",
+              "description": "Open alert count.",
+              "endpoint": "/alert-count",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
+              },
+              "data": {
+                "valueField": "alert_metric_value"
+              }
             }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Surveillance Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Surveillance Data",
+          "widget_id": "case_notes"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Surveillance Data",
+          "widget_id": "case_notes"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Surveillance Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Surveillance Data",
-        "widget_id": "case_notes"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Surveillance Data",
-        "widget_id": "case_notes"
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

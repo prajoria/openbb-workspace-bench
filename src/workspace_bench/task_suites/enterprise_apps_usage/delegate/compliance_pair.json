@@ -4,46 +4,48 @@
   "family": "delegate",
   "difficulty": "medium",
   "prompt": "Use assign_tasks_to_agents with two task_requests using ids alerts-analyst and restricted-analyst for compliance surveillance work.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
-      }
-    ]
-  },
-  "initial_state": {
-    "dashboard": {
-      "name": "Delegation Board",
-      "activate": true,
-      "tabs": [
+  "setup": {
+    "fixtures": {
+      "backends": [
         {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "dashboard_id": "usage_compliance_pair_dashboard_001",
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "stress_liquidity_lab_overview_workflow_overview",
-          "data_args": {},
-          "tab_id": "overview",
-          "layout": {
-            "x": 0,
-            "y": 500,
-            "w": 8,
-            "h": 4
-          },
-          "widget_uuid": "usage_compliance_pair_widget_001"
+          "name": "stark-enterprise"
         }
       ]
-    }
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Delegation Board",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "dashboard_id": "usage_compliance_pair_dashboard_001",
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "stress_liquidity_lab_overview_workflow_overview",
+            "data_args": {},
+            "tab_id": "overview",
+            "layout": {
+              "x": 0,
+              "y": 500,
+              "w": 8,
+              "h": 4
+            },
+            "widget_uuid": "usage_compliance_pair_widget_001"
+          }
+        ]
+      }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "assign_tasks_to_agents"
+    ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "eval": {
     "required_tool_calls": [
       {
         "tool": "assign_tasks_to_agents"
@@ -73,34 +75,34 @@
         "min_count": 1,
         "max_count": 1
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "assign_tasks_to_agents",
-      "args": {
-        "task_requests": [
-          {
-            "id": "alerts-analyst",
-            "description": "Triage open surveillance alerts by severity.",
-            "assigned_holder_url": "workspace://agents/alerts",
-            "assigned_agent_id": "alerts-agent"
-          },
-          {
-            "id": "restricted-analyst",
-            "description": "Verify restricted list changes against orders.",
-            "assigned_holder_url": "workspace://agents/restricted",
-            "assigned_agent_id": "restricted-agent"
-          }
-        ]
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "assign_tasks_to_agents",
+        "args": {
+          "task_requests": [
+            {
+              "id": "alerts-analyst",
+              "description": "Triage open surveillance alerts by severity.",
+              "assigned_holder_url": "workspace://agents/alerts",
+              "assigned_agent_id": "alerts-agent"
+            },
+            {
+              "id": "restricted-analyst",
+              "description": "Verify restricted list changes against orders.",
+              "assigned_holder_url": "workspace://agents/restricted",
+              "assigned_agent_id": "restricted-agent"
+            }
+          ]
+        }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

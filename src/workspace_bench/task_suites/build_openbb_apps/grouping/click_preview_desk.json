@@ -9,31 +9,33 @@
     "symbol",
     "revision_pct"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 2,
       "max_repeated_snapshots": 2
@@ -122,147 +124,147 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Earnings Prep Data",
-        "url": "http://localhost:7805",
-        "widgets_json": {
-          "click_preview_table": {
-            "name": "Click Preview Table",
-            "description": "Preview rows whose symbol cell syncs the app.",
-            "endpoint": "/click-preview-table",
-            "type": "table",
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "symbol",
-                    "headerName": "Symbol",
-                    "cellDataType": "text",
-                    "renderFn": "cellOnClick",
-                    "renderFnParams": {
-                      "actionType": "groupBy",
-                      "groupByParamName": "symbol"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Earnings Prep Data",
+          "url": "http://localhost:7805",
+          "widgets_json": {
+            "click_preview_table": {
+              "name": "Click Preview Table",
+              "description": "Preview rows whose symbol cell syncs the app.",
+              "endpoint": "/click-preview-table",
+              "type": "table",
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "symbol",
+                      "headerName": "Symbol",
+                      "cellDataType": "text",
+                      "renderFn": "cellOnClick",
+                      "renderFnParams": {
+                        "actionType": "groupBy",
+                        "groupByParamName": "symbol"
+                      },
+                      "cellOnClick": {
+                        "actionType": "groupBy",
+                        "groupByParamName": "symbol"
+                      }
                     },
-                    "cellOnClick": {
-                      "actionType": "groupBy",
-                      "groupByParamName": "symbol"
+                    {
+                      "field": "revision_pct",
+                      "headerName": "Revision %",
+                      "cellDataType": "number",
+                      "formatterFn": "percent"
                     }
-                  },
-                  {
-                    "field": "revision_pct",
-                    "headerName": "Revision %",
-                    "cellDataType": "number",
-                    "formatterFn": "percent"
-                  }
-                ]
+                  ]
+                }
+              },
+              "gridData": {
+                "w": 20,
+                "h": 9
               }
             },
-            "gridData": {
-              "w": 20,
-              "h": 9
+            "earnings_note": {
+              "name": "Earnings Preview",
+              "description": "Preview note for the earnings call.",
+              "endpoint": "/earnings-preview",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "data": {
+                "valueField": "earnings_note_value"
+              }
             }
           },
-          "earnings_note": {
-            "name": "Earnings Preview",
-            "description": "Preview note for the earnings call.",
-            "endpoint": "/earnings-preview",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "data": {
-              "valueField": "earnings_note_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Click Preview Desk",
-            "description": "Clickable preview rows and notes.",
-            "tabs": {
-              "table": {
-                "id": "table",
-                "name": "Table",
-                "layout": [
-                  {
-                    "i": "click_preview_table",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+          "apps_json": [
+            {
+              "name": "Click Preview Desk",
+              "description": "Clickable preview rows and notes.",
+              "tabs": {
+                "table": {
+                  "id": "table",
+                  "name": "Table",
+                  "layout": [
+                    {
+                      "i": "click_preview_table",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "note": {
+                  "id": "note",
+                  "name": "Note",
+                  "layout": [
+                    {
+                      "i": "earnings_note",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 8
+                    }
+                  ]
+                }
               },
-              "note": {
-                "id": "note",
-                "name": "Note",
-                "layout": [
-                  {
-                    "i": "earnings_note",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 8
-                  }
-                ]
-              }
-            },
-            "groups": [
-              {
-                "name": "Click Preview Sync",
-                "type": "param",
-                "paramName": "symbol",
-                "widgetIds": [
-                  "click_preview_table",
-                  "earnings_note"
-                ]
-              }
-            ]
-          }
-        ]
+              "groups": [
+                {
+                  "name": "Click Preview Sync",
+                  "type": "param",
+                  "paramName": "symbol",
+                  "widgetIds": [
+                    "click_preview_table",
+                    "earnings_note"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Click Preview Desk",
+          "dashboard_name": "Click Preview Desk Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Click Preview Desk",
-        "dashboard_name": "Click Preview Desk Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

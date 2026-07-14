@@ -5,31 +5,33 @@
   "specification_level": "explicit",
   "difficulty": "medium",
   "prompt": "Connect the backend and make its first widget usable on the current dashboard. Use 'Execution Desk Data' at http://localhost:7806. Choose the native widget type that fits the content. The experience needs Venue Scorecard (`venue_pdf`, pdf) using `/venue-scorecard` for monthly venue scorecard PDF; cache for 30 minutes. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_widget_defs": [
       {
         "backend_name": "Execution Desk Data",
@@ -76,53 +78,53 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Execution Desk Data",
-        "url": "http://localhost:7806",
-        "widgets_json": {
-          "venue_pdf": {
-            "name": "Venue Scorecard",
-            "description": "Monthly venue scorecard PDF.",
-            "endpoint": "/venue-scorecard",
-            "type": "pdf",
-            "gridData": {
-              "w": 16,
-              "h": 14
-            },
-            "staleTime": 1800000,
-            "category": "Execution Reports"
+    },
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Execution Desk Data",
+          "url": "http://localhost:7806",
+          "widgets_json": {
+            "venue_pdf": {
+              "name": "Venue Scorecard",
+              "description": "Monthly venue scorecard PDF.",
+              "endpoint": "/venue-scorecard",
+              "type": "pdf",
+              "gridData": {
+                "w": 16,
+                "h": 14
+              },
+              "staleTime": 1800000,
+              "category": "Execution Reports"
+            }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Execution Desk Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Execution Desk Data",
+          "widget_id": "venue_pdf"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Execution Desk Data",
+          "widget_id": "venue_pdf"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Execution Desk Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Execution Desk Data",
-        "widget_id": "venue_pdf"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Execution Desk Data",
-        "widget_id": "venue_pdf"
-      }
+    ],
+    "limits": {
+      "max_turns": 7
     }
-  ],
-  "limits": {
-    "max_turns": 7
   }
 }

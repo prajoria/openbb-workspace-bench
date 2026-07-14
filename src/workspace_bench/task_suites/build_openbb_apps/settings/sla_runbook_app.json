@@ -8,31 +8,33 @@
   "business_terms": [
     "Vendor SLA Data"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2
@@ -85,73 +87,73 @@
         "path": "staleTime",
         "expected": 900000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Vendor SLA Data",
-        "url": "http://localhost:7804",
-        "widgets_json": {
-          "sla_runbook": {
-            "name": "SLA Runbook",
-            "description": "Runbook for SLA escalations.",
-            "endpoint": "/sla-runbook",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "staleTime": 900000,
-            "runButton": true,
-            "category": "Runbooks",
-            "data": {
-              "valueField": "sla_runbook_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Runbook Settings",
-            "description": "Configured SLA runbook.",
-            "tabs": {
-              "runbook": {
-                "id": "runbook",
-                "name": "Runbook",
-                "layout": [
-                  {
-                    "i": "sla_runbook",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 8
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Vendor SLA Data",
+          "url": "http://localhost:7804",
+          "widgets_json": {
+            "sla_runbook": {
+              "name": "SLA Runbook",
+              "description": "Runbook for SLA escalations.",
+              "endpoint": "/sla-runbook",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "staleTime": 900000,
+              "runButton": true,
+              "category": "Runbooks",
+              "data": {
+                "valueField": "sla_runbook_value"
               }
-            },
-            "groups": []
-          }
-        ]
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Runbook Settings",
+              "description": "Configured SLA runbook.",
+              "tabs": {
+                "runbook": {
+                  "id": "runbook",
+                  "name": "Runbook",
+                  "layout": [
+                    {
+                      "i": "sla_runbook",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 8
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Runbook Settings",
+          "dashboard_name": "Runbook Settings Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Runbook Settings",
-        "dashboard_name": "Runbook Settings Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

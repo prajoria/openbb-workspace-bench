@@ -4,25 +4,27 @@
   "family": "apps",
   "difficulty": "hard",
   "prompt": "Instantiate the Healthcare Research Dashboard app from the Bench Stark Enterprise backend as a new dashboard named Biotech Catalyst Desk. Then add the Regulatory Timeline widget (id healthcare_research_dashboard_clinical_regulatory_timeline) to the Clinical tab, and add a note on the same tab mentioning regulatory timeline and catalysts.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
-      }
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_backends",
+      "manage_apps",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_backends",
-    "manage_apps",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_dashboard_name_contains": "Biotech Catalyst Desk",
     "required_tabs": [
       "overview",
@@ -69,63 +71,63 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
+    },
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "list"
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Healthcare Research Dashboard",
+          "dashboard_name": "Biotech Catalyst Desk",
+          "activate": true
+        }
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "tab",
+          "tab_id": "clinical"
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "healthcare_research_dashboard_clinical_regulatory_timeline"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "healthcare_research_dashboard_clinical_regulatory_timeline",
+          "data_args": {}
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Brief Note",
+          "data": "Regulatory timeline added; clinical catalysts tracked."
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 9
     }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "list"
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Healthcare Research Dashboard",
-        "dashboard_name": "Biotech Catalyst Desk",
-        "activate": true
-      }
-    },
-    {
-      "tool": "navigate_workspace",
-      "args": {
-        "operation": "tab",
-        "tab_id": "clinical"
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Stark Enterprise"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "healthcare_research_dashboard_clinical_regulatory_timeline"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "healthcare_research_dashboard_clinical_regulatory_timeline",
-        "data_args": {}
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Brief Note",
-        "data": "Regulatory timeline added; clinical catalysts tracked."
-      }
-    }
-  ],
-  "limits": {
-    "max_turns": 9
   }
 }

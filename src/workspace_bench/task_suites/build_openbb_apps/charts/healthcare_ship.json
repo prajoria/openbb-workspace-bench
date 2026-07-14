@@ -11,31 +11,33 @@
     "III",
     "ticker"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -169,161 +171,161 @@
         "path": "staleTime",
         "expected": 900000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Healthcare Research Data",
-        "url": "http://localhost:7808",
-        "widgets_json": {
-          "pipeline_vegalite": {
-            "name": "Pipeline Mix (Vega-Lite)",
-            "description": "Vega-Lite bar spec of pipeline phase mix.",
-            "endpoint": "/pipeline-vegalite",
-            "type": "chart-vegalite",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "phase",
-                "type": "text",
-                "label": "Phase",
-                "value": "all",
-                "description": "Pipeline phase to chart."
-              }
-            ],
-            "staleTime": 900000,
-            "data": {
-              "valueField": "pipeline_vegalite_value"
-            }
-          },
-          "catalyst_metric": {
-            "name": "Catalysts 30d",
-            "description": "Catalysts in the next 30 days.",
-            "endpoint": "/catalyst-count",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "staleTime": 900000,
-            "data": {
-              "valueField": "catalyst_metric_value"
-            }
-          },
-          "trial_catalysts": {
-            "name": "Trial Catalysts",
-            "description": "Upcoming clinical trial readouts.",
-            "endpoint": "/trial-catalysts",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "ticker",
-                "type": "endpoint",
-                "label": "Ticker",
-                "value": "PFE",
-                "optionsEndpoint": "/tickers"
-              }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "ticker",
-                    "headerName": "Ticker",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "phase",
-                    "headerName": "Phase",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "readout_date",
-                    "headerName": "Readout",
-                    "cellDataType": "dateString"
-                  }
-                ]
-              }
-            },
-            "staleTime": 900000
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Pipeline Chart Live",
-            "description": "Vega-Lite pipeline and catalysts.",
-            "tabs": {
-              "pipeline": {
-                "id": "pipeline",
-                "name": "Pipeline",
-                "layout": [
-                  {
-                    "i": "pipeline_vegalite",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Healthcare Research Data",
+          "url": "http://localhost:7808",
+          "widgets_json": {
+            "pipeline_vegalite": {
+              "name": "Pipeline Mix (Vega-Lite)",
+              "description": "Vega-Lite bar spec of pipeline phase mix.",
+              "endpoint": "/pipeline-vegalite",
+              "type": "chart-vegalite",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "signals": {
-                "id": "signals",
-                "name": "Signals",
-                "layout": [
-                  {
-                    "i": "catalyst_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 8,
-                    "h": 5
-                  }
-                ]
+              "params": [
+                {
+                  "paramName": "phase",
+                  "type": "text",
+                  "label": "Phase",
+                  "value": "all",
+                  "description": "Pipeline phase to chart."
+                }
+              ],
+              "staleTime": 900000,
+              "data": {
+                "valueField": "pipeline_vegalite_value"
               }
             },
-            "groups": []
+            "catalyst_metric": {
+              "name": "Catalysts 30d",
+              "description": "Catalysts in the next 30 days.",
+              "endpoint": "/catalyst-count",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "staleTime": 900000,
+              "data": {
+                "valueField": "catalyst_metric_value"
+              }
+            },
+            "trial_catalysts": {
+              "name": "Trial Catalysts",
+              "description": "Upcoming clinical trial readouts.",
+              "endpoint": "/trial-catalysts",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "ticker",
+                  "type": "endpoint",
+                  "label": "Ticker",
+                  "value": "PFE",
+                  "optionsEndpoint": "/tickers"
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "ticker",
+                      "headerName": "Ticker",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "phase",
+                      "headerName": "Phase",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "readout_date",
+                      "headerName": "Readout",
+                      "cellDataType": "dateString"
+                    }
+                  ]
+                }
+              },
+              "staleTime": 900000
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Pipeline Chart Live",
+              "description": "Vega-Lite pipeline and catalysts.",
+              "tabs": {
+                "pipeline": {
+                  "id": "pipeline",
+                  "name": "Pipeline",
+                  "layout": [
+                    {
+                      "i": "pipeline_vegalite",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "signals": {
+                  "id": "signals",
+                  "name": "Signals",
+                  "layout": [
+                    {
+                      "i": "catalyst_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 8,
+                      "h": 5
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Pipeline Chart Live",
+          "dashboard_name": "Pipeline Chart Live Board",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "pipeline_vegalite",
+          "data_args": {
+            "phase": "III"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Pipeline Chart Live",
-        "dashboard_name": "Pipeline Chart Live Board",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "pipeline_vegalite",
-        "data_args": {
-          "phase": "III"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Pipeline Chart Live",
+          "data": "Pipeline Chart Live shipped from Healthcare Research Data: pipeline phases live. Configured phase=III."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Pipeline Chart Live",
-        "data": "Pipeline Chart Live shipped from Healthcare Research Data: pipeline phases live. Configured phase=III."
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

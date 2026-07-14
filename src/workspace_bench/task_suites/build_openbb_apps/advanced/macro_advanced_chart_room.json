@@ -4,31 +4,33 @@
   "family": "advanced",
   "difficulty": "hard",
   "prompt": "Build a rates strategist a dependable rates and Treasury markets workspace. The workspace must cover market history for treasury futures. The workspace must cover the Treasury yield curve. The workspace must cover current 2s10s spread in bps. Leave the complete working workspace open for review. Decide how best to organize the experience and preserve unrelated work.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 2,
       "max_repeated_snapshots": 2
@@ -150,123 +152,123 @@
         "path": "staleTime",
         "expected": 900000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Rates Watch Data",
-        "url": "http://localhost:7803",
-        "widgets_json": {
-          "macro_advanced_chart": {
-            "name": "Macro Advanced Chart",
-            "description": "TradingView chart for treasury futures.",
-            "endpoint": "/macro-udf",
-            "type": "advanced_charting",
-            "gridData": {
-              "w": 20,
-              "h": 18
-            },
-            "data": {
-              "defaultSymbol": "ZN",
-              "updateFrequency": 30000,
-              "valueField": "macro_advanced_chart_value"
-            },
-            "category": "Macro",
-            "staleTime": 900000
-          },
-          "yield_curve": {
-            "name": "Yield Curve",
-            "description": "Plotly treasury yield curve snapshot.",
-            "endpoint": "/yield-curve",
-            "type": "chart",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "raw": true,
-            "staleTime": 900000,
-            "data": {
-              "valueField": "yield_curve_value"
-            }
-          },
-          "curve_spread_metric": {
-            "name": "2s10s Spread",
-            "description": "Current 2s10s spread in bps.",
-            "endpoint": "/curve-spread",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "staleTime": 900000,
-            "data": {
-              "valueField": "curve_spread_metric_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Macro Chart Room",
-            "description": "TradingView rates chart, curve, and spread.",
-            "tabs": {
-              "chart": {
-                "id": "chart",
-                "name": "Chart",
-                "layout": [
-                  {
-                    "i": "macro_advanced_chart",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 18
-                  },
-                  {
-                    "i": "curve_spread_metric",
-                    "x": 20,
-                    "y": 0,
-                    "w": 8,
-                    "h": 5
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Rates Watch Data",
+          "url": "http://localhost:7803",
+          "widgets_json": {
+            "macro_advanced_chart": {
+              "name": "Macro Advanced Chart",
+              "description": "TradingView chart for treasury futures.",
+              "endpoint": "/macro-udf",
+              "type": "advanced_charting",
+              "gridData": {
+                "w": 20,
+                "h": 18
               },
-              "curve": {
-                "id": "curve",
-                "name": "Curve",
-                "layout": [
-                  {
-                    "i": "yield_curve",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+              "data": {
+                "defaultSymbol": "ZN",
+                "updateFrequency": 30000,
+                "valueField": "macro_advanced_chart_value"
+              },
+              "category": "Macro",
+              "staleTime": 900000
+            },
+            "yield_curve": {
+              "name": "Yield Curve",
+              "description": "Plotly treasury yield curve snapshot.",
+              "endpoint": "/yield-curve",
+              "type": "chart",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "raw": true,
+              "staleTime": 900000,
+              "data": {
+                "valueField": "yield_curve_value"
               }
             },
-            "groups": []
-          }
-        ]
+            "curve_spread_metric": {
+              "name": "2s10s Spread",
+              "description": "Current 2s10s spread in bps.",
+              "endpoint": "/curve-spread",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "staleTime": 900000,
+              "data": {
+                "valueField": "curve_spread_metric_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Macro Chart Room",
+              "description": "TradingView rates chart, curve, and spread.",
+              "tabs": {
+                "chart": {
+                  "id": "chart",
+                  "name": "Chart",
+                  "layout": [
+                    {
+                      "i": "macro_advanced_chart",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 18
+                    },
+                    {
+                      "i": "curve_spread_metric",
+                      "x": 20,
+                      "y": 0,
+                      "w": 8,
+                      "h": 5
+                    }
+                  ]
+                },
+                "curve": {
+                  "id": "curve",
+                  "name": "Curve",
+                  "layout": [
+                    {
+                      "i": "yield_curve",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Macro Chart Room",
+          "dashboard_name": "Macro Chart Room Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Macro Chart Room",
-        "dashboard_name": "Macro Chart Room Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

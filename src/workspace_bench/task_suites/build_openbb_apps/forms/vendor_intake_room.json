@@ -9,31 +9,33 @@
     "intake",
     "vendor"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 2,
       "max_repeated_snapshots": 2
@@ -146,192 +148,192 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Vendor SLA Data",
-        "url": "http://localhost:7804",
-        "widgets_json": {
-          "vendor_intake_form": {
-            "name": "Vendor Intake Form",
-            "description": "Submit a new vendor record into the SLA register.",
-            "endpoint": "/vendor-intake",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 10
-            },
-            "params": [
-              {
-                "paramName": "intake",
-                "type": "form",
-                "label": "New Vendor",
-                "endpoint": "/vendor-intake-submit",
-                "method": "POST",
-                "inputParams": [
-                  {
-                    "paramName": "vendor",
-                    "type": "text",
-                    "label": "Vendor"
-                  },
-                  {
-                    "paramName": "tier",
-                    "type": "number",
-                    "label": "Tier"
-                  },
-                  {
-                    "paramName": "submit",
-                    "type": "button",
-                    "label": "Add Vendor"
-                  }
-                ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Vendor SLA Data",
+          "url": "http://localhost:7804",
+          "widgets_json": {
+            "vendor_intake_form": {
+              "name": "Vendor Intake Form",
+              "description": "Submit a new vendor record into the SLA register.",
+              "endpoint": "/vendor-intake",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 10
               },
-              {
-                "paramName": "vendor_scope",
-                "type": "text",
-                "label": "Vendor scope",
-                "value": "Acme Cloud",
-                "description": "Vendor reviewed across intake and status."
+              "params": [
+                {
+                  "paramName": "intake",
+                  "type": "form",
+                  "label": "New Vendor",
+                  "endpoint": "/vendor-intake-submit",
+                  "method": "POST",
+                  "inputParams": [
+                    {
+                      "paramName": "vendor",
+                      "type": "text",
+                      "label": "Vendor"
+                    },
+                    {
+                      "paramName": "tier",
+                      "type": "number",
+                      "label": "Tier"
+                    },
+                    {
+                      "paramName": "submit",
+                      "type": "button",
+                      "label": "Add Vendor"
+                    }
+                  ]
+                },
+                {
+                  "paramName": "vendor_scope",
+                  "type": "text",
+                  "label": "Vendor scope",
+                  "value": "Acme Cloud",
+                  "description": "Vendor reviewed across intake and status."
+                }
+              ],
+              "data": {
+                "valueField": "vendor_intake_form_value"
               }
-            ],
-            "data": {
-              "valueField": "vendor_intake_form_value"
+            },
+            "vendor_sla_table": {
+              "name": "Vendor SLA Status",
+              "description": "Vendor SLA state with breach flags.",
+              "endpoint": "/vendor-sla",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "status",
+                  "type": "text",
+                  "label": "Status",
+                  "value": "Open",
+                  "options": [
+                    {
+                      "label": "Open",
+                      "value": "Open"
+                    },
+                    {
+                      "label": "Escalated",
+                      "value": "Escalated"
+                    },
+                    {
+                      "label": "Resolved",
+                      "value": "Resolved"
+                    }
+                  ]
+                },
+                {
+                  "paramName": "vendor_scope",
+                  "type": "text",
+                  "label": "Vendor scope",
+                  "value": "Acme Cloud",
+                  "description": "Vendor reviewed across intake and status."
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "vendor",
+                      "headerName": "Vendor",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "status",
+                      "headerName": "Status",
+                      "cellDataType": "text",
+                      "renderFn": "titleCase"
+                    },
+                    {
+                      "field": "latency_ms",
+                      "headerName": "Latency (ms)",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "breach",
+                      "headerName": "Breach",
+                      "cellDataType": "boolean"
+                    }
+                  ]
+                }
+              }
             }
           },
-          "vendor_sla_table": {
-            "name": "Vendor SLA Status",
-            "description": "Vendor SLA state with breach flags.",
-            "endpoint": "/vendor-sla",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "status",
-                "type": "text",
-                "label": "Status",
-                "value": "Open",
-                "options": [
-                  {
-                    "label": "Open",
-                    "value": "Open"
-                  },
-                  {
-                    "label": "Escalated",
-                    "value": "Escalated"
-                  },
-                  {
-                    "label": "Resolved",
-                    "value": "Resolved"
-                  }
-                ]
+          "apps_json": [
+            {
+              "name": "Vendor Intake Room",
+              "description": "Vendor intake and status.",
+              "tabs": {
+                "intake": {
+                  "id": "intake",
+                  "name": "Intake",
+                  "layout": [
+                    {
+                      "i": "vendor_intake_form",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 10
+                    }
+                  ]
+                },
+                "status": {
+                  "id": "status",
+                  "name": "Status",
+                  "layout": [
+                    {
+                      "i": "vendor_sla_table",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
               },
-              {
-                "paramName": "vendor_scope",
-                "type": "text",
-                "label": "Vendor scope",
-                "value": "Acme Cloud",
-                "description": "Vendor reviewed across intake and status."
-              }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "vendor",
-                    "headerName": "Vendor",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "status",
-                    "headerName": "Status",
-                    "cellDataType": "text",
-                    "renderFn": "titleCase"
-                  },
-                  {
-                    "field": "latency_ms",
-                    "headerName": "Latency (ms)",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "breach",
-                    "headerName": "Breach",
-                    "cellDataType": "boolean"
-                  }
-                ]
-              }
+              "groups": [
+                {
+                  "name": "Vendor Sync",
+                  "type": "param",
+                  "paramName": "vendor_scope",
+                  "widgetIds": [
+                    "vendor_intake_form",
+                    "vendor_sla_table"
+                  ]
+                }
+              ]
             }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Vendor Intake Room",
-            "description": "Vendor intake and status.",
-            "tabs": {
-              "intake": {
-                "id": "intake",
-                "name": "Intake",
-                "layout": [
-                  {
-                    "i": "vendor_intake_form",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 10
-                  }
-                ]
-              },
-              "status": {
-                "id": "status",
-                "name": "Status",
-                "layout": [
-                  {
-                    "i": "vendor_sla_table",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
-            },
-            "groups": [
-              {
-                "name": "Vendor Sync",
-                "type": "param",
-                "paramName": "vendor_scope",
-                "widgetIds": [
-                  "vendor_intake_form",
-                  "vendor_sla_table"
-                ]
-              }
-            ]
-          }
-        ]
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Vendor Intake Room",
+          "dashboard_name": "Vendor Intake Room Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Vendor Intake Room",
-        "dashboard_name": "Vendor Intake Room Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

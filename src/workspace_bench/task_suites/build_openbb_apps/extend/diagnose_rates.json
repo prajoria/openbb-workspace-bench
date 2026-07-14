@@ -4,103 +4,105 @@
   "family": "extend",
   "difficulty": "hard",
   "prompt": "The desk needs a production-ready rates and Treasury markets workflow for a rates strategist. The workspace must cover upcoming treasury auctions. The workspace must cover desk commentary on the rates day. The workspace must cover current 2s10s spread in bps. The workspace must cover the Treasury yield curve. Analysts need to inspect date, security, size billions. Preserve all working content while correcting the requested workflow. Use your judgment on the architecture and leave other work intact.",
-  "fixtures": {},
-  "initial_state": {
-    "custom_backends": [
-      {
-        "name": "Rates Watch Data",
-        "url": "http://localhost:7803",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "auction_calendar": {
-            "name": "Auction Calendar",
-            "description": "Upcoming treasury auctions.",
-            "endpoint": "/auction-calendar",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
+  "setup": {
+    "fixtures": {},
+    "initial_state": {
+      "custom_backends": [
+        {
+          "name": "Rates Watch Data",
+          "url": "http://localhost:7803",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "auction_calendar": {
+              "name": "Auction Calendar",
+              "description": "Upcoming treasury auctions.",
+              "endpoint": "/auction-calendar",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "date",
+                      "cellDataType": "dateString"
+                    },
+                    {
+                      "field": "security",
+                      "headerName": "Security",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "size_bn",
+                      "headerName": "Size ($B)",
+                      "cellDataType": "number"
+                    }
+                  ]
+                }
+              }
             },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "date",
-                    "cellDataType": "dateString"
-                  },
-                  {
-                    "field": "security",
-                    "headerName": "Security",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "size_bn",
-                    "headerName": "Size ($B)",
-                    "cellDataType": "number"
-                  }
-                ]
+            "rates_commentary": {
+              "name": "Rates Commentary",
+              "description": "Desk commentary on the rates day.",
+              "endpoint": "/rates-commentary",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "series",
+                  "type": "dropdownz",
+                  "label": "Series",
+                  "value": "DGS10",
+                  "optionsEndpoint": "/series-options"
+                }
+              ]
+            },
+            "curve_spread_metric": {
+              "name": "2s10s Spread",
+              "description": "Current 2s10s spread in bps.",
+              "endpoint": "/curve-spread",
+              "type": "metric",
+              "gridData": {
+                "w": 99,
+                "h": 4
               }
             }
           },
-          "rates_commentary": {
-            "name": "Rates Commentary",
-            "description": "Desk commentary on the rates day.",
-            "endpoint": "/rates-commentary",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "series",
-                "type": "dropdownz",
-                "label": "Series",
-                "value": "DGS10",
-                "optionsEndpoint": "/series-options"
-              }
-            ]
-          },
-          "curve_spread_metric": {
-            "name": "2s10s Spread",
-            "description": "Current 2s10s spread in bps.",
-            "endpoint": "/curve-spread",
-            "type": "metric",
-            "gridData": {
-              "w": 99,
-              "h": 4
-            }
-          }
-        },
-        "warnings": [
-          "workspace validation failed: 3 entries in the backend's served payload need fixing"
-        ]
-      }
+          "warnings": [
+            "workspace validation failed: 3 entries in the backend's served payload need fixing"
+          ]
+        }
+      ]
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
     ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 2,
       "max_repeated_snapshots": 2,
@@ -201,124 +203,124 @@
         "required_param_kinds": [],
         "required_config": {}
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "refresh",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "auction_calendar": {
-            "name": "Auction Calendar",
-            "description": "Upcoming treasury auctions.",
-            "endpoint": "/auction-calendar",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "date",
-                    "headerName": "Date",
-                    "cellDataType": "dateString"
-                  },
-                  {
-                    "field": "security",
-                    "headerName": "Security",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "size_bn",
-                    "headerName": "Size ($B)",
-                    "cellDataType": "number"
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "auction_calendar": {
+              "name": "Auction Calendar",
+              "description": "Upcoming treasury auctions.",
+              "endpoint": "/auction-calendar",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "date",
+                      "headerName": "Date",
+                      "cellDataType": "dateString"
+                    },
+                    {
+                      "field": "security",
+                      "headerName": "Security",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "size_bn",
+                      "headerName": "Size ($B)",
+                      "cellDataType": "number"
+                    }
+                  ]
+                }
               }
-            }
-          },
-          "rates_commentary": {
-            "name": "Rates Commentary",
-            "description": "Desk commentary on the rates day.",
-            "endpoint": "/rates-commentary",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
             },
-            "params": [
-              {
-                "paramName": "series",
-                "type": "endpoint",
-                "label": "Series",
-                "value": "DGS10",
-                "optionsEndpoint": "/series-options"
+            "rates_commentary": {
+              "name": "Rates Commentary",
+              "description": "Desk commentary on the rates day.",
+              "endpoint": "/rates-commentary",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "series",
+                  "type": "endpoint",
+                  "label": "Series",
+                  "value": "DGS10",
+                  "optionsEndpoint": "/series-options"
+                }
+              ],
+              "data": {
+                "valueField": "rates_commentary_value"
               }
-            ],
-            "data": {
-              "valueField": "rates_commentary_value"
-            }
-          },
-          "curve_spread_metric": {
-            "name": "2s10s Spread",
-            "description": "Current 2s10s spread in bps.",
-            "endpoint": "/curve-spread",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
             },
-            "data": {
-              "valueField": "curve_spread_metric_value"
-            }
-          },
-          "yield_curve": {
-            "name": "Yield Curve",
-            "description": "Plotly treasury yield curve snapshot.",
-            "endpoint": "/yield-curve",
-            "type": "chart",
-            "gridData": {
-              "w": 20,
-              "h": 9
+            "curve_spread_metric": {
+              "name": "2s10s Spread",
+              "description": "Current 2s10s spread in bps.",
+              "endpoint": "/curve-spread",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "data": {
+                "valueField": "curve_spread_metric_value"
+              }
             },
-            "raw": true,
-            "data": {
-              "valueField": "yield_curve_value"
+            "yield_curve": {
+              "name": "Yield Curve",
+              "description": "Plotly treasury yield curve snapshot.",
+              "endpoint": "/yield-curve",
+              "type": "chart",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "raw": true,
+              "data": {
+                "valueField": "yield_curve_value"
+              }
             }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Rates Watch Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Rates Watch Data",
+          "widget_id": "auction_calendar"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Rates Watch Data",
+          "widget_id": "auction_calendar"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Rates Watch Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Rates Watch Data",
-        "widget_id": "auction_calendar"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Rates Watch Data",
-        "widget_id": "auction_calendar"
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

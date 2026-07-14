@@ -4,24 +4,26 @@
   "family": "apps",
   "difficulty": "medium",
   "prompt": "Instantiate the Rebalance & Scenario Lab app from the Bench Stark Enterprise backend as a new dashboard named Rebalance Studio. Then add the Drift by Sleeve widget (id Drift by Sleeve) to the Drift tab of the new dashboard.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
-      }
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_backends",
+      "manage_apps",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget"
     ]
   },
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_backends",
-    "manage_apps",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget"
-  ],
-  "success": {
+  "eval": {
     "required_dashboard_name_contains": "Rebalance Studio",
     "required_tabs": [
       "overview",
@@ -58,55 +60,55 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
+    },
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "list"
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Rebalance & Scenario Lab",
+          "dashboard_name": "Rebalance Studio",
+          "activate": true
+        }
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "tab",
+          "tab_id": "drift"
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "rebalance_scenario_lab_drift_drift_by_sleeve"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "rebalance_scenario_lab_drift_drift_by_sleeve",
+          "data_args": {}
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 9
     }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "list"
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Rebalance & Scenario Lab",
-        "dashboard_name": "Rebalance Studio",
-        "activate": true
-      }
-    },
-    {
-      "tool": "navigate_workspace",
-      "args": {
-        "operation": "tab",
-        "tab_id": "drift"
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Stark Enterprise"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "rebalance_scenario_lab_drift_drift_by_sleeve"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "rebalance_scenario_lab_drift_drift_by_sleeve",
-        "data_args": {}
-      }
-    }
-  ],
-  "limits": {
-    "max_turns": 9
   }
 }

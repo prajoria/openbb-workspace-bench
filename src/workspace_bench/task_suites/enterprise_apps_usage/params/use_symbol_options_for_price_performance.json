@@ -4,32 +4,34 @@
   "family": "params",
   "difficulty": "easy",
   "prompt": "For Getting Started/table_widget_with_grouping_by_cell_click, call get_params_options on parameter symbol, choose AAPL, and create that widget with symbol=AAPL.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Parameter Options",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "dashboard_id": "usage_use_symbol_options_for_price_performance_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "get_params_options",
+      "create_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Parameter Options",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "dashboard_id": "usage_use_symbol_options_for_price_performance_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "get_params_options",
-    "create_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Getting Started",
@@ -62,33 +64,33 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "get_params_options",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "table_widget_with_grouping_by_cell_click",
-        "param_name": "symbol"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "table_widget_with_grouping_by_cell_click",
-        "data_args": {
-          "symbol": "AAPL"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
+          "param_name": "symbol"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
+          "data_args": {
+            "symbol": "AAPL"
+          }
         }
       }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

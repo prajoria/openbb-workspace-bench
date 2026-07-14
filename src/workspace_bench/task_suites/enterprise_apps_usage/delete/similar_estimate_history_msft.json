@@ -4,76 +4,78 @@
   "family": "delete",
   "difficulty": "medium",
   "prompt": "Remove exactly one duplicate MSFT Live Grid widget from the two identical MSFT copies, while keeping the other duplicate and the TSLA widget untouched.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Similar Cleanup",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "live_grid_data",
+            "data_args": {
+              "symbol": "MSFT"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_similar_estimate_history_msft_widget_001"
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "live_grid_data",
+            "data_args": {
+              "symbol": "MSFT"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_similar_estimate_history_msft_widget_002"
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "live_grid_data",
+            "data_args": {
+              "symbol": "TSLA"
+            },
+            "layout": {
+              "x": 0,
+              "y": 10,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_similar_estimate_history_msft_widget_003"
+          }
+        ],
+        "dashboard_id": "usage_similar_estimate_history_msft_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "delete_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Similar Cleanup",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "live_grid_data",
-          "data_args": {
-            "symbol": "MSFT"
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_similar_estimate_history_msft_widget_001"
-        },
-        {
-          "origin": "Getting Started",
-          "widget_id": "live_grid_data",
-          "data_args": {
-            "symbol": "MSFT"
-          },
-          "layout": {
-            "x": 20,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_similar_estimate_history_msft_widget_002"
-        },
-        {
-          "origin": "Getting Started",
-          "widget_id": "live_grid_data",
-          "data_args": {
-            "symbol": "TSLA"
-          },
-          "layout": {
-            "x": 0,
-            "y": 10,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_similar_estimate_history_msft_widget_003"
-        }
-      ],
-      "dashboard_id": "usage_similar_estimate_history_msft_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "delete_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Getting Started",
@@ -105,21 +107,21 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "delete_widget",
-      "args": {
-        "widget_uuid": "usage_similar_estimate_history_msft_widget_002"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "delete_widget",
+        "args": {
+          "widget_uuid": "usage_similar_estimate_history_msft_widget_002"
+        }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

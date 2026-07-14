@@ -4,49 +4,51 @@
   "family": "navigate",
   "difficulty": "medium",
   "prompt": "Rename the active dashboard to Research Command Center, add a new tab named Draft Reviews, and add a HTML card on the new tab that mentions draft reviews and says items are pending.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
-      }
-    ]
-  },
-  "initial_state": {
-    "dashboard": {
-      "name": "Research Board",
-      "activate": true,
-      "tabs": [
+  "setup": {
+    "fixtures": {
+      "backends": [
         {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "dashboard_id": "usage_expand_research_expansion_dashboard_001",
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "stress_liquidity_lab_stress_tests_historical_shocks",
-          "data_args": {},
-          "tab_id": "overview",
-          "layout": {
-            "x": 0,
-            "y": 500,
-            "w": 8,
-            "h": 4
-          },
-          "widget_uuid": "usage_expand_research_expansion_widget_001"
+          "name": "stark-enterprise"
         }
       ]
-    }
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Research Board",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "dashboard_id": "usage_expand_research_expansion_dashboard_001",
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "stress_liquidity_lab_stress_tests_historical_shocks",
+            "data_args": {},
+            "tab_id": "overview",
+            "layout": {
+              "x": 0,
+              "y": 500,
+              "w": 8,
+              "h": 4
+            },
+            "widget_uuid": "usage_expand_research_expansion_widget_001"
+          }
+        ]
+      }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "add_generative_widget"
+    ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_dashboard_name_contains": "Research Command Center",
     "required_tabs": [
       "overview",
@@ -85,45 +87,45 @@
         "min_count": 1,
         "max_count": 1
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_dashboard",
-      "args": {
-        "operation": "update",
-        "dashboard_id": "usage_expand_research_expansion_dashboard_001",
-        "name": "Research Command Center"
+    ],
+    "reference": [
+      {
+        "tool": "manage_dashboard",
+        "args": {
+          "operation": "update",
+          "dashboard_id": "usage_expand_research_expansion_dashboard_001",
+          "name": "Research Command Center"
+        }
+      },
+      {
+        "tool": "manage_navigation_bar",
+        "args": {
+          "operation": "add_tabs",
+          "tabs": [
+            {
+              "name": "Draft Reviews"
+            }
+          ]
+        }
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "tab",
+          "tab_id": "draft-reviews"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "html",
+          "name": "Tab Note",
+          "data": "<section>Tracking draft reviews: items are pending review.</section>"
+        }
       }
-    },
-    {
-      "tool": "manage_navigation_bar",
-      "args": {
-        "operation": "add_tabs",
-        "tabs": [
-          {
-            "name": "Draft Reviews"
-          }
-        ]
-      }
-    },
-    {
-      "tool": "navigate_workspace",
-      "args": {
-        "operation": "tab",
-        "tab_id": "draft-reviews"
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "html",
-        "name": "Tab Note",
-        "data": "<section>Tracking draft reviews: items are pending review.</section>"
-      }
+    ],
+    "limits": {
+      "max_turns": 7
     }
-  ],
-  "limits": {
-    "max_turns": 7
   }
 }

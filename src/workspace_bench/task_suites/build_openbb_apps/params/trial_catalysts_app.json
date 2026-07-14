@@ -5,31 +5,33 @@
   "specification_level": "explicit",
   "difficulty": "medium",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Healthcare Research Data' at http://localhost:7808. Make the user controls functional. The experience needs Trial Catalysts (`trial_catalysts`, table) using `/trial-catalysts` for upcoming clinical trial readouts; user controls: Ticker (`ticker`, endpoint) from `/tickers`; columns: ticker (text), phase (text), readout_date (dateString). Organize it as app 'Catalyst Filter' with tabs Catalysts (trial_catalysts). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_widget_defs": [
       {
         "backend_name": "Healthcare Research Data",
@@ -128,97 +130,97 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Healthcare Research Data",
-        "url": "http://localhost:7808",
-        "widgets_json": {
-          "trial_catalysts": {
-            "name": "Trial Catalysts",
-            "description": "Upcoming clinical trial readouts.",
-            "endpoint": "/trial-catalysts",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "ticker",
-                "type": "endpoint",
-                "label": "Ticker",
-                "value": "PFE",
-                "optionsEndpoint": "/tickers"
-              }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "ticker",
-                    "headerName": "Ticker",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "phase",
-                    "headerName": "Phase",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "readout_date",
-                    "headerName": "Readout",
-                    "cellDataType": "dateString"
-                  }
-                ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Healthcare Research Data",
+          "url": "http://localhost:7808",
+          "widgets_json": {
+            "trial_catalysts": {
+              "name": "Trial Catalysts",
+              "description": "Upcoming clinical trial readouts.",
+              "endpoint": "/trial-catalysts",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "ticker",
+                  "type": "endpoint",
+                  "label": "Ticker",
+                  "value": "PFE",
+                  "optionsEndpoint": "/tickers"
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "ticker",
+                      "headerName": "Ticker",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "phase",
+                      "headerName": "Phase",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "readout_date",
+                      "headerName": "Readout",
+                      "cellDataType": "dateString"
+                    }
+                  ]
+                }
               }
             }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Catalyst Filter",
-            "description": "Ticker-filtered trial catalysts.",
-            "tabs": {
-              "catalysts": {
-                "id": "catalysts",
-                "name": "Catalysts",
-                "layout": [
-                  {
-                    "i": "trial_catalysts",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
-            },
-            "groups": []
-          }
-        ]
+          },
+          "apps_json": [
+            {
+              "name": "Catalyst Filter",
+              "description": "Ticker-filtered trial catalysts.",
+              "tabs": {
+                "catalysts": {
+                  "id": "catalysts",
+                  "name": "Catalysts",
+                  "layout": [
+                    {
+                      "i": "trial_catalysts",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Catalyst Filter",
+          "dashboard_name": "Catalyst Filter Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Catalyst Filter",
-        "dashboard_name": "Catalyst Filter Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

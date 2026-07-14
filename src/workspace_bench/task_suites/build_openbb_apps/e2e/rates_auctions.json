@@ -10,31 +10,33 @@
     "2026-07-15",
     "date"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -153,141 +155,141 @@
         "scope": "dashboard",
         "contains": "Rates Auctions"
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Rates Watch Data",
-        "url": "http://localhost:7803",
-        "widgets_json": {
-          "rates_auctions_table": {
-            "name": "Rates Auctions Table",
-            "description": "Upcoming auctions and demand metrics.",
-            "endpoint": "/rates-auctions-table",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "auction_date",
-                    "headerName": "Auction Date",
-                    "cellDataType": "dateString"
-                  },
-                  {
-                    "field": "security",
-                    "headerName": "Security",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "size_bn",
-                    "headerName": "Size Bn",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "bid_to_cover",
-                    "headerName": "Bid To Cover",
-                    "cellDataType": "number"
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "auction_date",
-                "type": "text",
-                "label": "Auction Date",
-                "value": "2026-07-14",
-                "description": "Rates Auctions Table focus field."
-              }
-            ]
-          },
-          "curve_spread_metric": {
-            "name": "2s10s Spread",
-            "description": "Current 2s10s spread in bps.",
-            "endpoint": "/curve-spread",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "data": {
-              "valueField": "curve_spread_metric_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Rates Auctions",
-            "description": "Auction calendar and curve spread.",
-            "tabs": {
-              "auctions": {
-                "id": "auctions",
-                "name": "Auctions",
-                "layout": [
-                  {
-                    "i": "rates_auctions_table",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Rates Watch Data",
+          "url": "http://localhost:7803",
+          "widgets_json": {
+            "rates_auctions_table": {
+              "name": "Rates Auctions Table",
+              "description": "Upcoming auctions and demand metrics.",
+              "endpoint": "/rates-auctions-table",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "spread": {
-                "id": "spread",
-                "name": "Spread",
-                "layout": [
-                  {
-                    "i": "curve_spread_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "auction_date",
+                      "headerName": "Auction Date",
+                      "cellDataType": "dateString"
+                    },
+                    {
+                      "field": "security",
+                      "headerName": "Security",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "size_bn",
+                      "headerName": "Size Bn",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "bid_to_cover",
+                      "headerName": "Bid To Cover",
+                      "cellDataType": "number"
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "auction_date",
+                  "type": "text",
+                  "label": "Auction Date",
+                  "value": "2026-07-14",
+                  "description": "Rates Auctions Table focus field."
+                }
+              ]
             },
-            "groups": []
+            "curve_spread_metric": {
+              "name": "2s10s Spread",
+              "description": "Current 2s10s spread in bps.",
+              "endpoint": "/curve-spread",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "data": {
+                "valueField": "curve_spread_metric_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Rates Auctions",
+              "description": "Auction calendar and curve spread.",
+              "tabs": {
+                "auctions": {
+                  "id": "auctions",
+                  "name": "Auctions",
+                  "layout": [
+                    {
+                      "i": "rates_auctions_table",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "spread": {
+                  "id": "spread",
+                  "name": "Spread",
+                  "layout": [
+                    {
+                      "i": "curve_spread_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Rates Auctions",
+          "dashboard_name": "Rates Auctions Live",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "rates_auctions_table",
+          "data_args": {
+            "auction_date": "2026-07-15"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Rates Auctions",
-        "dashboard_name": "Rates Auctions Live",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "rates_auctions_table",
-        "data_args": {
-          "auction_date": "2026-07-15"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Rates Auctions",
+          "data": "Rates Auctions is live from Rates Watch Data: rates auctions ready. Configured auction_date=2026-07-15."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Rates Auctions",
-        "data": "Rates Auctions is live from Rates Watch Data: rates auctions ready. Configured auction_date=2026-07-15."
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

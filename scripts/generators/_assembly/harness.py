@@ -36,7 +36,6 @@ TASK_EXPORT_FIELDS = (
     "success",
     "oracle_tool_calls",
     "limits",
-    "code_task",
 )
 DEFAULT_SPECIFICATION_LEVEL = {
     "easy": "explicit",

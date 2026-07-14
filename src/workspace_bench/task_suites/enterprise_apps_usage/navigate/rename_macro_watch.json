@@ -4,31 +4,33 @@
   "family": "navigate",
   "difficulty": "easy",
   "prompt": "Rename the active dashboard to Rates Watch.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Macro Board",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "dashboard_id": "usage_rename_macro_watch_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Macro Board",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "dashboard_id": "usage_rename_macro_watch_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard"
-  ],
-  "success": {
+  "eval": {
     "required_dashboard_name_contains": "Rates Watch",
     "required_tool_calls": [
       {
@@ -44,19 +46,19 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_dashboard",
-      "args": {
-        "operation": "update",
-        "dashboard_id": "usage_rename_macro_watch_dashboard_001",
-        "name": "Rates Watch"
+    },
+    "reference": [
+      {
+        "tool": "manage_dashboard",
+        "args": {
+          "operation": "update",
+          "dashboard_id": "usage_rename_macro_watch_dashboard_001",
+          "name": "Rates Watch"
+        }
       }
+    ],
+    "limits": {
+      "max_turns": 4
     }
-  ],
-  "limits": {
-    "max_turns": 4
   }
 }

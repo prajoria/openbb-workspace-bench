@@ -4,38 +4,40 @@
   "family": "params",
   "difficulty": "medium",
   "prompt": "Set Getting Started/company_performance series=VWAGY using get_params_options, then add companion widget test_metric. Arrange both without overlap.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
-      },
-      {
-        "name": "widget-examples"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        },
+        {
+          "name": "widget-examples"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Parameter Pair",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "dashboard_id": "usage_options_constrained_pair_for_macro_timeseries_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "create_widget",
+      "update_widget_layout"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Parameter Pair",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "dashboard_id": "usage_options_constrained_pair_for_macro_timeseries_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "create_widget",
-    "update_widget_layout"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Getting Started",
@@ -88,88 +90,88 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Getting Started"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "company_performance"
-      }
-    },
-    {
-      "tool": "get_params_options",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "company_performance",
-        "param_name": "company"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "company_performance",
-        "data_args": {
-          "company": "VWAGY",
-          "year": "2024"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "company_performance"
+        }
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
+          "param_name": "company"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
+          "data_args": {
+            "company": "VWAGY",
+            "year": "2024"
+          }
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Widget Examples"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "test_metric"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
+          "data_args": {}
+        }
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "company_performance",
+          "x": 0,
+          "y": 0,
+          "w": 20,
+          "h": 10
+        }
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "test_metric",
+          "x": 20,
+          "y": 0,
+          "w": 20,
+          "h": 10
         }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Widget Examples"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "test_metric"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "test_metric",
-        "data_args": {}
-      }
-    },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_id": "company_performance",
-        "x": 0,
-        "y": 0,
-        "w": 20,
-        "h": 10
-      }
-    },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_id": "test_metric",
-        "x": 20,
-        "y": 0,
-        "w": 20,
-        "h": 10
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

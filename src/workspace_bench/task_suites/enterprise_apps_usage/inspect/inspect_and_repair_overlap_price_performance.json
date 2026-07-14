@@ -4,63 +4,65 @@
   "family": "inspect",
   "difficulty": "medium",
   "prompt": "Inspect the dashboard, find the overlapping sample_newsfeed widget, and move it to x=24, y=0, w=16, h=10.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Inspect Overlap",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "table_widget_with_grouping_by_cell_click",
+            "data_args": {
+              "symbol": "AAPL"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 24,
+              "h": 10
+            },
+            "widget_uuid": "usage_inspect_and_repair_overlap_price_performance_widget_001"
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "sample_newsfeed",
+            "data_args": {
+              "category": "tech",
+              "limit": 5
+            },
+            "layout": {
+              "x": 10,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_inspect_and_repair_overlap_price_performance_widget_002"
+          }
+        ],
+        "dashboard_id": "usage_inspect_and_repair_overlap_price_performance_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget_layout"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Inspect Overlap",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "table_widget_with_grouping_by_cell_click",
-          "data_args": {
-            "symbol": "AAPL"
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 24,
-            "h": 10
-          },
-          "widget_uuid": "usage_inspect_and_repair_overlap_price_performance_widget_001"
-        },
-        {
-          "origin": "Getting Started",
-          "widget_id": "sample_newsfeed",
-          "data_args": {
-            "category": "tech",
-            "limit": 5
-          },
-          "layout": {
-            "x": 10,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_inspect_and_repair_overlap_price_performance_widget_002"
-        }
-      ],
-      "dashboard_id": "usage_inspect_and_repair_overlap_price_performance_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget_layout"
-  ],
-  "success": {
+  "eval": {
     "required_layouts": [
       {
         "widget_uuid": "usage_inspect_and_repair_overlap_price_performance_widget_001",
@@ -94,31 +96,31 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "read_widget",
-      "args": {
-        "widget_uuid": "usage_inspect_and_repair_overlap_price_performance_widget_002"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "read_widget",
+        "args": {
+          "widget_uuid": "usage_inspect_and_repair_overlap_price_performance_widget_002"
+        }
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "usage_inspect_and_repair_overlap_price_performance_widget_002",
+          "x": 24,
+          "y": 0,
+          "w": 16,
+          "h": 10
+        }
       }
-    },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_uuid": "usage_inspect_and_repair_overlap_price_performance_widget_002",
-        "x": 24,
-        "y": 0,
-        "w": 16,
-        "h": 10
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

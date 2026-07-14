@@ -8,104 +8,233 @@ superset (agents may explore), and grader `required_tool_calls` are a subset
 
 Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=manage_navigation_bar, `nav`=navigate_workspace, `list_w`=list_available_widgets, `schema`=get_widget_schema, `params`=get_params_options, `data`=get_widget_data, `create`=create_widget, `update`=update_widget, `layout`=update_widget_layout, `delete`=delete_widget, `note`=add_generative_widget, `read_w`=read_widget, `backends`=manage_backends, `apps`=manage_apps, `skill`=get_skill_content, `resource`=read_workspace_resource, `prompt`=get_workspace_prompt, `agents`=assign_tasks_to_agents
 
-## smoke (20 tasks)
+## smoke (80 tasks)
 
 | # | task | snap | dash | nav_bar | nav | list_w | schema | params | data | create | update | layout | delete | note | read_w | backends | apps | skill | resource | prompt | agents | tools | difficulty |
 |--:|:---------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|--:|:-----------|
-| 1 | `smoke_add_generative_widget` |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 1 | easy |
-| 2 | `smoke_assign_tasks_to_agents` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 1 | easy |
-| 3 | `smoke_create_widget` |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
-| 4 | `smoke_delete_widget` |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 1 | easy |
-| 5 | `smoke_get_params_options` |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
-| 6 | `smoke_get_skill_content` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | 1 | easy |
-| 7 | `smoke_get_widget_data` |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
-| 8 | `smoke_get_widget_schema` |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
-| 9 | `smoke_get_workspace_prompt` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   | 1 | easy |
-| 10 | `smoke_get_workspace_snapshot` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
-| 11 | `smoke_list_available_widgets` |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
-| 12 | `smoke_manage_apps` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | 1 | easy |
-| 13 | `smoke_manage_backends` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | easy |
-| 14 | `smoke_manage_dashboard` |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
-| 15 | `smoke_manage_navigation_bar` |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
-| 16 | `smoke_navigate_workspace` |   |   |   | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 2 | easy |
-| 17 | `smoke_read_widget` |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   | 1 | easy |
-| 18 | `smoke_read_workspace_resource` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   | 1 | easy |
-| 19 | `smoke_update_widget` |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 1 | easy |
-| 20 | `smoke_update_widget_layout` |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 1 | easy |
+| 1 | `smoke_add_generative_widget_level0` |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 1 | level0 |
+| 2 | `smoke_add_generative_widget_level1` |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 1 | level1 |
+| 3 | `smoke_add_generative_widget_level2` |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 1 | level2 |
+| 4 | `smoke_add_generative_widget_level3` |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 1 | level3 |
+| 5 | `smoke_assign_tasks_to_agents_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 1 | level0 |
+| 6 | `smoke_assign_tasks_to_agents_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 1 | level1 |
+| 7 | `smoke_assign_tasks_to_agents_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 1 | level2 |
+| 8 | `smoke_assign_tasks_to_agents_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 1 | level3 |
+| 9 | `smoke_create_widget_level0` |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 1 | level0 |
+| 10 | `smoke_create_widget_level1` |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 2 | level1 |
+| 11 | `smoke_create_widget_level2` |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 2 | level2 |
+| 12 | `smoke_create_widget_level3` |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 2 | level3 |
+| 13 | `smoke_delete_widget_level0` |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 1 | level0 |
+| 14 | `smoke_delete_widget_level1` |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 1 | level1 |
+| 15 | `smoke_delete_widget_level2` |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 1 | level2 |
+| 16 | `smoke_delete_widget_level3` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | level3 |
+| 17 | `smoke_get_params_options_level0` |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level0 |
+| 18 | `smoke_get_params_options_level1` |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level1 |
+| 19 | `smoke_get_params_options_level2` |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level2 |
+| 20 | `smoke_get_params_options_level3` |   |   |   |   | x |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   | 2 | level3 |
+| 21 | `smoke_get_skill_content_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | 1 | level0 |
+| 22 | `smoke_get_skill_content_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | 1 | level1 |
+| 23 | `smoke_get_skill_content_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | 1 | level2 |
+| 24 | `smoke_get_skill_content_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | 1 | level3 |
+| 25 | `smoke_get_widget_data_level0` |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level0 |
+| 26 | `smoke_get_widget_data_level1` |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level1 |
+| 27 | `smoke_get_widget_data_level2` |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level2 |
+| 28 | `smoke_get_widget_data_level3` |   |   |   |   | x |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | level3 |
+| 29 | `smoke_get_widget_schema_level0` |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level0 |
+| 30 | `smoke_get_widget_schema_level1` |   |   |   |   | x | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 2 | level1 |
+| 31 | `smoke_get_widget_schema_level2` |   |   |   |   | x | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 2 | level2 |
+| 32 | `smoke_get_widget_schema_level3` |   |   |   |   | x | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 2 | level3 |
+| 33 | `smoke_get_workspace_prompt_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   | 1 | level0 |
+| 34 | `smoke_get_workspace_prompt_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   | 1 | level1 |
+| 35 | `smoke_get_workspace_prompt_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   | 1 | level2 |
+| 36 | `smoke_get_workspace_prompt_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   | 1 | level3 |
+| 37 | `smoke_get_workspace_snapshot_level0` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level0 |
+| 38 | `smoke_get_workspace_snapshot_level1` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level1 |
+| 39 | `smoke_get_workspace_snapshot_level2` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level2 |
+| 40 | `smoke_get_workspace_snapshot_level3` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level3 |
+| 41 | `smoke_list_available_widgets_level0` |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level0 |
+| 42 | `smoke_list_available_widgets_level1` |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level1 |
+| 43 | `smoke_list_available_widgets_level2` |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level2 |
+| 44 | `smoke_list_available_widgets_level3` |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level3 |
+| 45 | `smoke_manage_apps_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | 1 | level0 |
+| 46 | `smoke_manage_apps_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | 1 | level1 |
+| 47 | `smoke_manage_apps_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | 1 | level2 |
+| 48 | `smoke_manage_apps_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | 1 | level3 |
+| 49 | `smoke_manage_backends_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | level0 |
+| 50 | `smoke_manage_backends_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | level1 |
+| 51 | `smoke_manage_backends_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | level2 |
+| 52 | `smoke_manage_backends_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | 1 | level3 |
+| 53 | `smoke_manage_dashboard_level0` |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level0 |
+| 54 | `smoke_manage_dashboard_level1` |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level1 |
+| 55 | `smoke_manage_dashboard_level2` |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level2 |
+| 56 | `smoke_manage_dashboard_level3` | x | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 2 | level3 |
+| 57 | `smoke_manage_navigation_bar_level0` |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level0 |
+| 58 | `smoke_manage_navigation_bar_level1` |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level1 |
+| 59 | `smoke_manage_navigation_bar_level2` |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level2 |
+| 60 | `smoke_manage_navigation_bar_level3` |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level3 |
+| 61 | `smoke_navigate_workspace_level0` |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level0 |
+| 62 | `smoke_navigate_workspace_level1` |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level1 |
+| 63 | `smoke_navigate_workspace_level2` |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | level2 |
+| 64 | `smoke_navigate_workspace_level3` | x |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 2 | level3 |
+| 65 | `smoke_read_widget_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   | 1 | level0 |
+| 66 | `smoke_read_widget_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   | 1 | level1 |
+| 67 | `smoke_read_widget_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   | 1 | level2 |
+| 68 | `smoke_read_widget_level3` | x |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   | 2 | level3 |
+| 69 | `smoke_read_workspace_resource_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   | 1 | level0 |
+| 70 | `smoke_read_workspace_resource_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   | 1 | level1 |
+| 71 | `smoke_read_workspace_resource_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   | 1 | level2 |
+| 72 | `smoke_read_workspace_resource_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |   |   | 1 | level3 |
+| 73 | `smoke_update_widget_layout_level0` |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 1 | level0 |
+| 74 | `smoke_update_widget_layout_level1` |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 1 | level1 |
+| 75 | `smoke_update_widget_layout_level2` |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 1 | level2 |
+| 76 | `smoke_update_widget_layout_level3` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | level3 |
+| 77 | `smoke_update_widget_level0` |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 1 | level0 |
+| 78 | `smoke_update_widget_level1` |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 1 | level1 |
+| 79 | `smoke_update_widget_level2` |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 1 | level2 |
+| 80 | `smoke_update_widget_level3` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | level3 |
 
-## enterprise-apps-default (69 tasks)
+## enterprise-apps-default (138 tasks)
 
 | # | task | snap | dash | nav_bar | nav | list_w | schema | params | data | create | update | layout | delete | note | read_w | backends | apps | skill | resource | prompt | agents | tools | difficulty |
 |--:|:---------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|--:|:-----------|
-| 1 | `cio_investment_committee_pack_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 2 | `cio_investment_committee_pack_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 3 | `cio_investment_committee_pack_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 4 | `client_360_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 5 | `client_360_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 6 | `client_360_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 7 | `compliance_surveillance_hub_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 8 | `compliance_surveillance_hub_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 9 | `compliance_surveillance_hub_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 10 | `corporate_access_meeting_notes_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 11 | `corporate_access_meeting_notes_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 12 | `corporate_access_meeting_notes_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 13 | `crypto_research_dashboard_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 14 | `crypto_research_dashboard_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 15 | `crypto_research_dashboard_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 16 | `earnings_estimates_monitor_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 17 | `earnings_estimates_monitor_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 18 | `earnings_estimates_monitor_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 19 | `equity_research_workbench_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 20 | `equity_research_workbench_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 21 | `equity_research_workbench_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 22 | `execution_desk_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 23 | `execution_desk_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 24 | `execution_desk_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 25 | `executive_investment_dashboard_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 26 | `executive_investment_dashboard_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 27 | `executive_investment_dashboard_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 28 | `fund_operations_control_tower_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 29 | `fund_operations_control_tower_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 30 | `fund_operations_control_tower_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 31 | `healthcare_research_dashboard_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 32 | `healthcare_research_dashboard_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 33 | `healthcare_research_dashboard_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 34 | `liquidity_tca_workbench_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 35 | `liquidity_tca_workbench_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 36 | `liquidity_tca_workbench_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 37 | `mnpi_research_review_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 38 | `mnpi_research_review_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 39 | `mnpi_research_review_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 40 | `nav_fees_close_dashboard_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 41 | `nav_fees_close_dashboard_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 42 | `nav_fees_close_dashboard_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 43 | `portfolio_command_center_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 44 | `portfolio_command_center_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 45 | `portfolio_command_center_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 46 | `quant_research_backtest_lab_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 47 | `quant_research_backtest_lab_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 48 | `quant_research_backtest_lab_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 49 | `rebalance_scenario_lab_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 50 | `rebalance_scenario_lab_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 51 | `rebalance_scenario_lab_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 52 | `reporting_factsheet_studio_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 53 | `reporting_factsheet_studio_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 54 | `reporting_factsheet_studio_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 55 | `risk_exposure_monitor_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 56 | `risk_exposure_monitor_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 57 | `risk_exposure_monitor_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 58 | `strategy_health_monitor_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 59 | `strategy_health_monitor_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 60 | `strategy_health_monitor_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 61 | `stress_liquidity_lab_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 62 | `stress_liquidity_lab_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 63 | `stress_liquidity_lab_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 64 | `vendor_dataset_monitor_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 65 | `vendor_dataset_monitor_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 66 | `vendor_dataset_monitor_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 67 | `workspace_data_control_center_p1` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 68 | `workspace_data_control_center_p2` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 69 | `workspace_data_control_center_p3` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 1 | `cio_investment_committee_pack_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 2 | `cio_investment_committee_pack_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 3 | `cio_investment_committee_pack_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 4 | `cio_investment_committee_pack_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 5 | `cio_investment_committee_pack_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 6 | `cio_investment_committee_pack_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 7 | `client_360_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 8 | `client_360_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 9 | `client_360_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 10 | `client_360_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 11 | `client_360_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 12 | `client_360_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 13 | `compliance_surveillance_hub_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 14 | `compliance_surveillance_hub_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 15 | `compliance_surveillance_hub_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 16 | `compliance_surveillance_hub_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 17 | `compliance_surveillance_hub_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 18 | `compliance_surveillance_hub_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 19 | `corporate_access_meeting_notes_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 20 | `corporate_access_meeting_notes_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 21 | `corporate_access_meeting_notes_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 22 | `corporate_access_meeting_notes_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 23 | `corporate_access_meeting_notes_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 24 | `corporate_access_meeting_notes_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 25 | `crypto_research_dashboard_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 26 | `crypto_research_dashboard_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 27 | `crypto_research_dashboard_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 28 | `crypto_research_dashboard_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 29 | `crypto_research_dashboard_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 30 | `crypto_research_dashboard_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 31 | `earnings_estimates_monitor_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 32 | `earnings_estimates_monitor_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 33 | `earnings_estimates_monitor_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 34 | `earnings_estimates_monitor_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 35 | `earnings_estimates_monitor_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 36 | `earnings_estimates_monitor_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 37 | `equity_research_workbench_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 38 | `equity_research_workbench_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 39 | `equity_research_workbench_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 40 | `equity_research_workbench_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 41 | `equity_research_workbench_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 42 | `equity_research_workbench_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 43 | `execution_desk_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 44 | `execution_desk_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 45 | `execution_desk_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 46 | `execution_desk_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 47 | `execution_desk_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 48 | `execution_desk_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 49 | `executive_investment_dashboard_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 50 | `executive_investment_dashboard_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 51 | `executive_investment_dashboard_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 52 | `executive_investment_dashboard_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 53 | `executive_investment_dashboard_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 54 | `executive_investment_dashboard_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 55 | `fund_operations_control_tower_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 56 | `fund_operations_control_tower_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 57 | `fund_operations_control_tower_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 58 | `fund_operations_control_tower_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 59 | `fund_operations_control_tower_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 60 | `fund_operations_control_tower_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 61 | `healthcare_research_dashboard_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 62 | `healthcare_research_dashboard_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 63 | `healthcare_research_dashboard_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 64 | `healthcare_research_dashboard_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 65 | `healthcare_research_dashboard_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 66 | `healthcare_research_dashboard_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 67 | `liquidity_tca_workbench_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 68 | `liquidity_tca_workbench_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 69 | `liquidity_tca_workbench_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 70 | `liquidity_tca_workbench_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 71 | `liquidity_tca_workbench_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 72 | `liquidity_tca_workbench_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 73 | `mnpi_research_review_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 74 | `mnpi_research_review_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 75 | `mnpi_research_review_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 76 | `mnpi_research_review_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 77 | `mnpi_research_review_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 78 | `mnpi_research_review_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 79 | `nav_fees_close_dashboard_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 80 | `nav_fees_close_dashboard_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 81 | `nav_fees_close_dashboard_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 82 | `nav_fees_close_dashboard_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 83 | `nav_fees_close_dashboard_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 84 | `nav_fees_close_dashboard_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 85 | `portfolio_command_center_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 86 | `portfolio_command_center_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 87 | `portfolio_command_center_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 88 | `portfolio_command_center_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 89 | `portfolio_command_center_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 90 | `portfolio_command_center_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 91 | `quant_research_backtest_lab_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 92 | `quant_research_backtest_lab_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 93 | `quant_research_backtest_lab_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 94 | `quant_research_backtest_lab_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 95 | `quant_research_backtest_lab_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 96 | `quant_research_backtest_lab_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 97 | `rebalance_scenario_lab_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 98 | `rebalance_scenario_lab_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 99 | `rebalance_scenario_lab_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 100 | `rebalance_scenario_lab_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 101 | `rebalance_scenario_lab_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 102 | `rebalance_scenario_lab_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 103 | `reporting_factsheet_studio_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 104 | `reporting_factsheet_studio_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 105 | `reporting_factsheet_studio_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 106 | `reporting_factsheet_studio_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 107 | `reporting_factsheet_studio_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 108 | `reporting_factsheet_studio_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 109 | `risk_exposure_monitor_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 110 | `risk_exposure_monitor_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 111 | `risk_exposure_monitor_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 112 | `risk_exposure_monitor_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 113 | `risk_exposure_monitor_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 114 | `risk_exposure_monitor_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 115 | `strategy_health_monitor_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 116 | `strategy_health_monitor_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 117 | `strategy_health_monitor_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 118 | `strategy_health_monitor_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 119 | `strategy_health_monitor_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 120 | `strategy_health_monitor_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 121 | `stress_liquidity_lab_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 122 | `stress_liquidity_lab_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 123 | `stress_liquidity_lab_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 124 | `stress_liquidity_lab_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 125 | `stress_liquidity_lab_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 126 | `stress_liquidity_lab_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 127 | `vendor_dataset_monitor_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 128 | `vendor_dataset_monitor_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 129 | `vendor_dataset_monitor_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 130 | `vendor_dataset_monitor_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 131 | `vendor_dataset_monitor_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 132 | `vendor_dataset_monitor_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 133 | `workspace_data_control_center_p1_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 134 | `workspace_data_control_center_p1_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 135 | `workspace_data_control_center_p2_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 136 | `workspace_data_control_center_p2_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 137 | `workspace_data_control_center_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 138 | `workspace_data_control_center_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
 
 ## enterprise-apps-usage (300 tasks)
 
@@ -657,23 +786,23 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 
 | tool | tasks |
 |:-----|----------:|
-| `get_workspace_snapshot` | 466 |
-| `add_generative_widget` | 307 |
-| `manage_backends` | 285 |
-| `manage_apps` | 197 |
-| `get_widget_schema` | 193 |
-| `list_available_widgets` | 189 |
-| `create_widget` | 177 |
-| `get_widget_data` | 134 |
-| `update_widget` | 85 |
-| `read_widget` | 53 |
-| `read_workspace_resource` | 45 |
-| `update_widget_layout` | 41 |
-| `navigate_workspace` | 37 |
-| `manage_dashboard` | 25 |
-| `manage_navigation_bar` | 25 |
-| `get_params_options` | 25 |
-| `delete_widget` | 25 |
-| `get_skill_content` | 25 |
-| `get_workspace_prompt` | 21 |
-| `assign_tasks_to_agents` | 21 |
+| `get_workspace_snapshot` | 544 |
+| `manage_backends` | 288 |
+| `add_generative_widget` | 240 |
+| `get_widget_data` | 206 |
+| `list_available_widgets` | 200 |
+| `manage_apps` | 200 |
+| `get_widget_schema` | 196 |
+| `create_widget` | 180 |
+| `update_widget` | 88 |
+| `read_widget` | 56 |
+| `read_workspace_resource` | 48 |
+| `update_widget_layout` | 44 |
+| `navigate_workspace` | 40 |
+| `manage_dashboard` | 28 |
+| `manage_navigation_bar` | 28 |
+| `get_params_options` | 28 |
+| `delete_widget` | 28 |
+| `get_skill_content` | 28 |
+| `get_workspace_prompt` | 24 |
+| `assign_tasks_to_agents` | 24 |

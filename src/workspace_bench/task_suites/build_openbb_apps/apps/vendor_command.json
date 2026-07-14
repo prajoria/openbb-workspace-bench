@@ -8,126 +8,128 @@
     "status",
     "vendor"
   ],
-  "fixtures": {},
-  "initial_state": {
-    "custom_backends": [
-      {
-        "name": "Vendor SLA Data",
-        "url": "http://localhost:7804",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "vendor_sla_table": {
-            "name": "Vendor SLA Status",
-            "description": "Vendor SLA state with breach flags.",
-            "endpoint": "/vendor-sla",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "status",
-                "type": "text",
-                "label": "Status",
-                "value": "Open",
-                "options": [
-                  {
-                    "label": "Open",
-                    "value": "Open"
-                  },
-                  {
-                    "label": "Escalated",
-                    "value": "Escalated"
-                  },
-                  {
-                    "label": "Resolved",
-                    "value": "Resolved"
-                  }
-                ]
+  "setup": {
+    "fixtures": {},
+    "initial_state": {
+      "custom_backends": [
+        {
+          "name": "Vendor SLA Data",
+          "url": "http://localhost:7804",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "vendor_sla_table": {
+              "name": "Vendor SLA Status",
+              "description": "Vendor SLA state with breach flags.",
+              "endpoint": "/vendor-sla",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "status",
+                  "type": "text",
+                  "label": "Status",
+                  "value": "Open",
+                  "options": [
+                    {
+                      "label": "Open",
+                      "value": "Open"
+                    },
+                    {
+                      "label": "Escalated",
+                      "value": "Escalated"
+                    },
+                    {
+                      "label": "Resolved",
+                      "value": "Resolved"
+                    }
+                  ]
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "vendor",
+                      "headerName": "Vendor",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "status",
+                      "headerName": "Status",
+                      "cellDataType": "text",
+                      "renderFn": "titleCase"
+                    },
+                    {
+                      "field": "latency_ms",
+                      "headerName": "Latency (ms)",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "breach",
+                      "headerName": "Breach",
+                      "cellDataType": "boolean"
+                    }
+                  ]
+                }
               }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "vendor",
-                    "headerName": "Vendor",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "status",
-                    "headerName": "Status",
-                    "cellDataType": "text",
-                    "renderFn": "titleCase"
-                  },
-                  {
-                    "field": "latency_ms",
-                    "headerName": "Latency (ms)",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "breach",
-                    "headerName": "Breach",
-                    "cellDataType": "boolean"
-                  }
-                ]
+            },
+            "breach_metric": {
+              "name": "Open Breaches",
+              "description": "Count of open SLA breaches.",
+              "endpoint": "/breach-count",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "data": {
+                "valueField": "breach_metric_value"
               }
-            }
-          },
-          "breach_metric": {
-            "name": "Open Breaches",
-            "description": "Count of open SLA breaches.",
-            "endpoint": "/breach-count",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
             },
-            "data": {
-              "valueField": "breach_metric_value"
-            }
-          },
-          "sla_newsfeed": {
-            "name": "Vendor Notices",
-            "description": "Vendor incident notices feed.",
-            "endpoint": "/vendor-notices",
-            "type": "newsfeed",
-            "gridData": {
-              "w": 12,
-              "h": 10
-            },
-            "data": {
-              "valueField": "sla_newsfeed_value"
+            "sla_newsfeed": {
+              "name": "Vendor Notices",
+              "description": "Vendor incident notices feed.",
+              "endpoint": "/vendor-notices",
+              "type": "newsfeed",
+              "gridData": {
+                "w": 12,
+                "h": 10
+              },
+              "data": {
+                "valueField": "sla_newsfeed_value"
+              }
             }
           }
         }
-      }
+      ]
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
     ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2
@@ -254,76 +256,76 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "refresh",
-        "backend_id": "backend_001",
-        "apps_json": [
-          {
-            "name": "Vendor Command",
-            "description": "Vendors, breaches, headlines.",
-            "tabs": {
-              "vendors": {
-                "id": "vendors",
-                "name": "Vendors",
-                "layout": [
-                  {
-                    "i": "vendor_sla_table",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9,
-                    "state": {
-                      "params": {
-                        "status": "breach"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_001",
+          "apps_json": [
+            {
+              "name": "Vendor Command",
+              "description": "Vendors, breaches, headlines.",
+              "tabs": {
+                "vendors": {
+                  "id": "vendors",
+                  "name": "Vendors",
+                  "layout": [
+                    {
+                      "i": "vendor_sla_table",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9,
+                      "state": {
+                        "params": {
+                          "status": "breach"
+                        }
                       }
+                    },
+                    {
+                      "i": "breach_metric",
+                      "x": 20,
+                      "y": 0,
+                      "w": 12,
+                      "h": 6
+                    },
+                    {
+                      "i": "sla_newsfeed",
+                      "x": 20,
+                      "y": 6,
+                      "w": 12,
+                      "h": 8
                     }
-                  },
-                  {
-                    "i": "breach_metric",
-                    "x": 20,
-                    "y": 0,
-                    "w": 12,
-                    "h": 6
-                  },
-                  {
-                    "i": "sla_newsfeed",
-                    "x": 20,
-                    "y": 6,
-                    "w": 12,
-                    "h": 8
-                  }
-                ]
-              }
-            },
-            "groups": [],
-            "prompts": [
-              "Which vendors breached SLA this week?"
-            ]
-          }
-        ]
+                  ]
+                }
+              },
+              "groups": [],
+              "prompts": [
+                "Which vendors breached SLA this week?"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Vendor Command",
+          "dashboard_name": "Vendor Command Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Vendor Command",
-        "dashboard_name": "Vendor Command Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

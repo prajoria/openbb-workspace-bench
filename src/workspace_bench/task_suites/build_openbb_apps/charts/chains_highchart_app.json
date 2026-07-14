@@ -5,31 +5,33 @@
   "specification_level": "explicit",
   "difficulty": "medium",
   "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Chain TVL Data' at http://localhost:7802. Choose a working chart representation for the data. The experience needs TVL by Chain (Highcharts) (`chains_highchart`, chart-highcharts) using `/chains-highchart` for highcharts rendering of chain TVL. Organize it as app 'Chain Highchart' with tabs Chains (chains_highchart). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_widget_defs": [
       {
         "backend_name": "Chain TVL Data",
@@ -105,67 +107,67 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Chain TVL Data",
-        "url": "http://localhost:7802",
-        "widgets_json": {
-          "chains_highchart": {
-            "name": "TVL by Chain (Highcharts)",
-            "description": "Highcharts rendering of chain TVL.",
-            "endpoint": "/chains-highchart",
-            "type": "chart-highcharts",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Chain Highchart",
-            "description": "Highcharts TVL view.",
-            "tabs": {
-              "chains": {
-                "id": "chains",
-                "name": "Chains",
-                "layout": [
-                  {
-                    "i": "chains_highchart",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Chain TVL Data",
+          "url": "http://localhost:7802",
+          "widgets_json": {
+            "chains_highchart": {
+              "name": "TVL by Chain (Highcharts)",
+              "description": "Highcharts rendering of chain TVL.",
+              "endpoint": "/chains-highchart",
+              "type": "chart-highcharts",
+              "gridData": {
+                "w": 20,
+                "h": 9
               }
-            },
-            "groups": []
-          }
-        ]
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Chain Highchart",
+              "description": "Highcharts TVL view.",
+              "tabs": {
+                "chains": {
+                  "id": "chains",
+                  "name": "Chains",
+                  "layout": [
+                    {
+                      "i": "chains_highchart",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Chain Highchart",
+          "dashboard_name": "Chain Highchart Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Chain Highchart",
-        "dashboard_name": "Chain Highchart Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

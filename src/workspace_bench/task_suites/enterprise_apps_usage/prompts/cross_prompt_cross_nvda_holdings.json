@@ -4,26 +4,28 @@
   "family": "prompts",
   "difficulty": "hard",
   "prompt": "Get workspace_tool_usage and workspace_session_context, create Prompt Cross TSLA Holdings, build the cross-backend dashboard with Getting Started/live_grid_data with data_args {\"symbol\": \"TSLA\"} and Widget Examples/test_metric, and add a note mentioning TSLA and holdings and current-dashboard.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
-      },
-      {
-        "name": "widget-examples"
-      }
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        },
+        {
+          "name": "widget-examples"
+        }
+      ]
+    },
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_prompt",
+      "manage_dashboard",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_prompt",
-    "manage_dashboard",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_dashboard_name_contains": "Prompt Cross TSLA Holdings",
     "required_tool_calls": [
       {
@@ -76,82 +78,82 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_prompt",
-      "args": {
-        "name": "workspace_tool_usage"
-      }
     },
-    {
-      "tool": "get_workspace_prompt",
-      "args": {
-        "name": "workspace_session_context"
-      }
-    },
-    {
-      "tool": "manage_dashboard",
-      "args": {
-        "operation": "create",
-        "name": "Prompt Cross TSLA Holdings"
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Getting Started"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "live_grid_data"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "live_grid_data",
-        "data_args": {
-          "symbol": "TSLA"
+    "reference": [
+      {
+        "tool": "get_workspace_prompt",
+        "args": {
+          "name": "workspace_tool_usage"
+        }
+      },
+      {
+        "tool": "get_workspace_prompt",
+        "args": {
+          "name": "workspace_session_context"
+        }
+      },
+      {
+        "tool": "manage_dashboard",
+        "args": {
+          "operation": "create",
+          "name": "Prompt Cross TSLA Holdings"
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
+          "data_args": {
+            "symbol": "TSLA"
+          }
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Widget Examples"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "test_metric"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
+          "data_args": {}
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Prompt Cross Note",
+          "data": "Prompt cross build: TSLA, holdings, current-dashboard."
         }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Widget Examples"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "test_metric"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "test_metric",
-        "data_args": {}
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Prompt Cross Note",
-        "data": "Prompt cross build: TSLA, holdings, current-dashboard."
-      }
+    ],
+    "limits": {
+      "max_turns": 12
     }
-  ],
-  "limits": {
-    "max_turns": 12
   }
 }

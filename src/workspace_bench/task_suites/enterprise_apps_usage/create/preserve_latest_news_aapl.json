@@ -4,52 +4,54 @@
   "family": "create",
   "difficulty": "medium",
   "prompt": "Keep the existing Table widget with grouping by cell click widget undisturbed and non-overlapped while adding the Sample News Feed widget for AAPL next to it.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Existing Review",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "table_widget_with_grouping_by_cell_click",
+            "data_args": {
+              "symbol": "AAPL"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            },
+            "widget_uuid": "usage_preserve_latest_news_aapl_widget_001"
+          }
+        ],
+        "dashboard_id": "usage_preserve_latest_news_aapl_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "create_widget",
+      "update_widget_layout",
+      "read_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Existing Review",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "table_widget_with_grouping_by_cell_click",
-          "data_args": {
-            "symbol": "AAPL"
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 12
-          },
-          "widget_uuid": "usage_preserve_latest_news_aapl_widget_001"
-        }
-      ],
-      "dashboard_id": "usage_preserve_latest_news_aapl_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "create_widget",
-    "update_widget_layout",
-    "read_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Getting Started",
@@ -83,49 +85,49 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Getting Started"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "sample_newsfeed"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "sample_newsfeed",
-        "data_args": {
-          "category": "tech",
-          "limit": 5
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "sample_newsfeed"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "sample_newsfeed",
+          "data_args": {
+            "category": "tech",
+            "limit": 5
+          }
+        }
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "sample_newsfeed",
+          "x": 20,
+          "y": 0,
+          "w": 20,
+          "h": 10
         }
       }
-    },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_id": "sample_newsfeed",
-        "x": 20,
-        "y": 0,
-        "w": 20,
-        "h": 10
-      }
+    ],
+    "limits": {
+      "max_turns": 8
     }
-  ],
-  "limits": {
-    "max_turns": 8
   }
 }

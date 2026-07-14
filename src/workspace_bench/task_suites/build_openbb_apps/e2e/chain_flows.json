@@ -9,31 +9,33 @@
     "Chain TVL Data",
     "Solana"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -152,142 +154,142 @@
         "scope": "dashboard",
         "contains": "Chain Flows"
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Chain TVL Data",
-        "url": "http://localhost:7802",
-        "widgets_json": {
-          "chain_flows_table": {
-            "name": "Chain Flows Table",
-            "description": "Net chain flows and fee share.",
-            "endpoint": "/chain-flows-table",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "chain",
-                    "headerName": "Chain",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "net_flow_usd",
-                    "headerName": "Net Flow Usd",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "fee_pct",
-                    "headerName": "Fee Pct",
-                    "cellDataType": "number",
-                    "formatterFn": "percent"
-                  },
-                  {
-                    "field": "as_of",
-                    "headerName": "As Of",
-                    "cellDataType": "dateString"
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "chain",
-                "type": "text",
-                "label": "Chain",
-                "value": "Ethereum",
-                "description": "Chain Flows Table focus field."
-              }
-            ]
-          },
-          "gas_metric": {
-            "name": "Gas Now",
-            "description": "Current gas price snapshot.",
-            "endpoint": "/gas-now",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
-            },
-            "data": {
-              "valueField": "gas_metric_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Chain Flows",
-            "description": "Chain flows and gas context.",
-            "tabs": {
-              "flows": {
-                "id": "flows",
-                "name": "Flows",
-                "layout": [
-                  {
-                    "i": "chain_flows_table",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Chain TVL Data",
+          "url": "http://localhost:7802",
+          "widgets_json": {
+            "chain_flows_table": {
+              "name": "Chain Flows Table",
+              "description": "Net chain flows and fee share.",
+              "endpoint": "/chain-flows-table",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "gas": {
-                "id": "gas",
-                "name": "Gas",
-                "layout": [
-                  {
-                    "i": "gas_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "chain",
+                      "headerName": "Chain",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "net_flow_usd",
+                      "headerName": "Net Flow Usd",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "fee_pct",
+                      "headerName": "Fee Pct",
+                      "cellDataType": "number",
+                      "formatterFn": "percent"
+                    },
+                    {
+                      "field": "as_of",
+                      "headerName": "As Of",
+                      "cellDataType": "dateString"
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "chain",
+                  "type": "text",
+                  "label": "Chain",
+                  "value": "Ethereum",
+                  "description": "Chain Flows Table focus field."
+                }
+              ]
             },
-            "groups": []
+            "gas_metric": {
+              "name": "Gas Now",
+              "description": "Current gas price snapshot.",
+              "endpoint": "/gas-now",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
+              },
+              "data": {
+                "valueField": "gas_metric_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Chain Flows",
+              "description": "Chain flows and gas context.",
+              "tabs": {
+                "flows": {
+                  "id": "flows",
+                  "name": "Flows",
+                  "layout": [
+                    {
+                      "i": "chain_flows_table",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "gas": {
+                  "id": "gas",
+                  "name": "Gas",
+                  "layout": [
+                    {
+                      "i": "gas_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Chain Flows",
+          "dashboard_name": "Chain Flows Live",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "chain_flows_table",
+          "data_args": {
+            "chain": "Solana"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Chain Flows",
-        "dashboard_name": "Chain Flows Live",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "chain_flows_table",
-        "data_args": {
-          "chain": "Solana"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Chain Flows",
+          "data": "Chain Flows is live from Chain TVL Data: chain flows ready. Configured chain=Solana."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Chain Flows",
-        "data": "Chain Flows is live from Chain TVL Data: chain flows ready. Configured chain=Solana."
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

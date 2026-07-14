@@ -4,31 +4,33 @@
   "family": "forms",
   "difficulty": "hard",
   "prompt": "An execution analyst needs a decision-ready Workspace for orders and venue quality. The workspace must cover record an execution venue exception. The workspace must cover live open orders blotter. The workspace must cover open execution exceptions. Analysts need to inspect order ID, symbol, quantity, status. An analyst can adjust the relevant numeric scope. The user can enter the required details and submit the workflow. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Choose an effective architecture and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 2,
       "max_repeated_snapshots": 2
@@ -168,196 +170,196 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Execution Desk Data",
-        "url": "http://localhost:7806",
-        "widgets_json": {
-          "venue_exception_form": {
-            "name": "Venue Exception Form",
-            "description": "Record an execution venue exception.",
-            "endpoint": "/venue-exception",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 10
-            },
-            "params": [
-              {
-                "paramName": "exception",
-                "type": "form",
-                "label": "Exception",
-                "endpoint": "/venue-exception-submit",
-                "method": "POST",
-                "inputParams": [
-                  {
-                    "paramName": "venue",
-                    "type": "text",
-                    "label": "Venue",
-                    "value": "ARCA"
-                  },
-                  {
-                    "paramName": "slippage_bps",
-                    "type": "number",
-                    "label": "Slippage bps",
-                    "value": 12,
-                    "min": 0
-                  },
-                  {
-                    "paramName": "record",
-                    "type": "button",
-                    "label": "Record"
-                  }
-                ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Execution Desk Data",
+          "url": "http://localhost:7806",
+          "widgets_json": {
+            "venue_exception_form": {
+              "name": "Venue Exception Form",
+              "description": "Record an execution venue exception.",
+              "endpoint": "/venue-exception",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 10
               },
-              {
-                "paramName": "venue_scope",
-                "type": "text",
-                "label": "Venue scope",
-                "value": "ARCA",
-                "description": "Venue reviewed across intake and status."
+              "params": [
+                {
+                  "paramName": "exception",
+                  "type": "form",
+                  "label": "Exception",
+                  "endpoint": "/venue-exception-submit",
+                  "method": "POST",
+                  "inputParams": [
+                    {
+                      "paramName": "venue",
+                      "type": "text",
+                      "label": "Venue",
+                      "value": "ARCA"
+                    },
+                    {
+                      "paramName": "slippage_bps",
+                      "type": "number",
+                      "label": "Slippage bps",
+                      "value": 12,
+                      "min": 0
+                    },
+                    {
+                      "paramName": "record",
+                      "type": "button",
+                      "label": "Record"
+                    }
+                  ]
+                },
+                {
+                  "paramName": "venue_scope",
+                  "type": "text",
+                  "label": "Venue scope",
+                  "value": "ARCA",
+                  "description": "Venue reviewed across intake and status."
+                }
+              ],
+              "data": {
+                "valueField": "venue_exception_form_value"
               }
-            ],
-            "data": {
-              "valueField": "venue_exception_form_value"
+            },
+            "open_orders": {
+              "name": "Open Orders",
+              "description": "Live open orders blotter.",
+              "endpoint": "/open-orders",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "order_id",
+                      "headerName": "Order",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "symbol",
+                      "headerName": "Symbol",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "qty",
+                      "headerName": "Qty",
+                      "cellDataType": "number",
+                      "formatterFn": "int"
+                    },
+                    {
+                      "field": "status",
+                      "headerName": "Status",
+                      "cellDataType": "text",
+                      "renderFn": "titleCase"
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "venue_scope",
+                  "type": "text",
+                  "label": "Venue scope",
+                  "value": "ARCA",
+                  "description": "Venue reviewed across intake and status."
+                }
+              ]
+            },
+            "exception_metric": {
+              "name": "Exceptions",
+              "description": "Open execution exceptions.",
+              "endpoint": "/exception-count",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
+              },
+              "data": {
+                "valueField": "exception_metric_value"
+              }
             }
           },
-          "open_orders": {
-            "name": "Open Orders",
-            "description": "Live open orders blotter.",
-            "endpoint": "/open-orders",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "order_id",
-                    "headerName": "Order",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "symbol",
-                    "headerName": "Symbol",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "qty",
-                    "headerName": "Qty",
-                    "cellDataType": "number",
-                    "formatterFn": "int"
-                  },
-                  {
-                    "field": "status",
-                    "headerName": "Status",
-                    "cellDataType": "text",
-                    "renderFn": "titleCase"
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "venue_scope",
-                "type": "text",
-                "label": "Venue scope",
-                "value": "ARCA",
-                "description": "Venue reviewed across intake and status."
-              }
-            ]
-          },
-          "exception_metric": {
-            "name": "Exceptions",
-            "description": "Open execution exceptions.",
-            "endpoint": "/exception-count",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
-            },
-            "data": {
-              "valueField": "exception_metric_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Exception Intake Room",
-            "description": "Venue exceptions and order status.",
-            "tabs": {
-              "intake": {
-                "id": "intake",
-                "name": "Intake",
-                "layout": [
-                  {
-                    "i": "venue_exception_form",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 10
-                  },
-                  {
-                    "i": "exception_metric",
-                    "x": 20,
-                    "y": 0,
-                    "w": 8,
-                    "h": 6
-                  }
-                ]
+          "apps_json": [
+            {
+              "name": "Exception Intake Room",
+              "description": "Venue exceptions and order status.",
+              "tabs": {
+                "intake": {
+                  "id": "intake",
+                  "name": "Intake",
+                  "layout": [
+                    {
+                      "i": "venue_exception_form",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 10
+                    },
+                    {
+                      "i": "exception_metric",
+                      "x": 20,
+                      "y": 0,
+                      "w": 8,
+                      "h": 6
+                    }
+                  ]
+                },
+                "status": {
+                  "id": "status",
+                  "name": "Status",
+                  "layout": [
+                    {
+                      "i": "open_orders",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
               },
-              "status": {
-                "id": "status",
-                "name": "Status",
-                "layout": [
-                  {
-                    "i": "open_orders",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
-            },
-            "groups": [
-              {
-                "name": "Venue Sync",
-                "type": "param",
-                "paramName": "venue_scope",
-                "widgetIds": [
-                  "venue_exception_form",
-                  "open_orders"
-                ]
-              }
-            ]
-          }
-        ]
+              "groups": [
+                {
+                  "name": "Venue Sync",
+                  "type": "param",
+                  "paramName": "venue_scope",
+                  "widgetIds": [
+                    "venue_exception_form",
+                    "open_orders"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Exception Intake Room",
+          "dashboard_name": "Exception Intake Room Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Exception Intake Room",
-        "dashboard_name": "Exception Intake Room Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

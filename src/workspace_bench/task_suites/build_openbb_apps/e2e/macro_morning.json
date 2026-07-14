@@ -9,31 +9,33 @@
     "Rates Watch Data",
     "DGS2"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -156,142 +158,142 @@
         "scope": "dashboard",
         "contains": "Macro Morning"
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Rates Watch Data",
-        "url": "http://localhost:7803",
-        "widgets_json": {
-          "macro_morning_table": {
-            "name": "Macro Morning Table",
-            "description": "Rates morning levels and changes.",
-            "endpoint": "/macro-morning-table",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "series",
-                    "headerName": "Series",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "level",
-                    "headerName": "Level",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "change_bp",
-                    "headerName": "Change Bp",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "as_of",
-                    "headerName": "As Of",
-                    "cellDataType": "dateString"
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "series",
-                "type": "text",
-                "label": "Series",
-                "value": "DGS10",
-                "description": "Macro Morning Table focus field."
-              }
-            ]
-          },
-          "yield_curve": {
-            "name": "Yield Curve",
-            "description": "Plotly treasury yield curve snapshot.",
-            "endpoint": "/yield-curve",
-            "type": "chart",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "raw": true,
-            "data": {
-              "valueField": "yield_curve_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Macro Morning",
-            "description": "Rates levels and curve context.",
-            "tabs": {
-              "levels": {
-                "id": "levels",
-                "name": "Levels",
-                "layout": [
-                  {
-                    "i": "macro_morning_table",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Rates Watch Data",
+          "url": "http://localhost:7803",
+          "widgets_json": {
+            "macro_morning_table": {
+              "name": "Macro Morning Table",
+              "description": "Rates morning levels and changes.",
+              "endpoint": "/macro-morning-table",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "curve": {
-                "id": "curve",
-                "name": "Curve",
-                "layout": [
-                  {
-                    "i": "yield_curve",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "series",
+                      "headerName": "Series",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "level",
+                      "headerName": "Level",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "change_bp",
+                      "headerName": "Change Bp",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "as_of",
+                      "headerName": "As Of",
+                      "cellDataType": "dateString"
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "series",
+                  "type": "text",
+                  "label": "Series",
+                  "value": "DGS10",
+                  "description": "Macro Morning Table focus field."
+                }
+              ]
             },
-            "groups": []
+            "yield_curve": {
+              "name": "Yield Curve",
+              "description": "Plotly treasury yield curve snapshot.",
+              "endpoint": "/yield-curve",
+              "type": "chart",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "raw": true,
+              "data": {
+                "valueField": "yield_curve_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Macro Morning",
+              "description": "Rates levels and curve context.",
+              "tabs": {
+                "levels": {
+                  "id": "levels",
+                  "name": "Levels",
+                  "layout": [
+                    {
+                      "i": "macro_morning_table",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "curve": {
+                  "id": "curve",
+                  "name": "Curve",
+                  "layout": [
+                    {
+                      "i": "yield_curve",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Macro Morning",
+          "dashboard_name": "Macro Morning Live",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "macro_morning_table",
+          "data_args": {
+            "series": "DGS2"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Macro Morning",
-        "dashboard_name": "Macro Morning Live",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "macro_morning_table",
-        "data_args": {
-          "series": "DGS2"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Macro Morning",
+          "data": "Macro Morning is live from Rates Watch Data: macro morning ready. Configured series=DGS2."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Macro Morning",
-        "data": "Macro Morning is live from Rates Watch Data: macro morning ready. Configured series=DGS2."
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

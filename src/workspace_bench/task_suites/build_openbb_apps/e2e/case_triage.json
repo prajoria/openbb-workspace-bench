@@ -9,31 +9,33 @@
     "Surveillance Data",
     "C-1048"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -148,150 +150,150 @@
         "scope": "dashboard",
         "contains": "Case Triage"
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Surveillance Data",
-        "url": "http://localhost:7807",
-        "widgets_json": {
-          "case_triage_table": {
-            "name": "Case Triage Table",
-            "description": "Case owners, priorities, and SLA days.",
-            "endpoint": "/case-triage-table",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "case_id",
-                    "headerName": "Case Id",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "owner",
-                    "headerName": "Owner",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "priority",
-                    "headerName": "Priority",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "sla_days",
-                    "headerName": "Sla Days",
-                    "cellDataType": "number"
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "case_id",
-                "type": "text",
-                "label": "Case Id",
-                "value": "C-1045",
-                "description": "Case Triage Table focus field."
-              }
-            ]
-          },
-          "case_notes": {
-            "name": "Case Notes",
-            "description": "Notes for one surveillance case.",
-            "endpoint": "/case-notes",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "case_id",
-                "type": "text",
-                "label": "Case",
-                "value": "C-1042",
-                "description": "Case identifier."
-              }
-            ],
-            "data": {
-              "valueField": "case_notes_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Case Triage",
-            "description": "Case triage queue and notes.",
-            "tabs": {
-              "triage": {
-                "id": "triage",
-                "name": "Triage",
-                "layout": [
-                  {
-                    "i": "case_triage_table",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Surveillance Data",
+          "url": "http://localhost:7807",
+          "widgets_json": {
+            "case_triage_table": {
+              "name": "Case Triage Table",
+              "description": "Case owners, priorities, and SLA days.",
+              "endpoint": "/case-triage-table",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "notes": {
-                "id": "notes",
-                "name": "Notes",
-                "layout": [
-                  {
-                    "i": "case_notes",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "case_id",
+                      "headerName": "Case Id",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "owner",
+                      "headerName": "Owner",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "priority",
+                      "headerName": "Priority",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "sla_days",
+                      "headerName": "Sla Days",
+                      "cellDataType": "number"
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "case_id",
+                  "type": "text",
+                  "label": "Case Id",
+                  "value": "C-1045",
+                  "description": "Case Triage Table focus field."
+                }
+              ]
             },
-            "groups": []
+            "case_notes": {
+              "name": "Case Notes",
+              "description": "Notes for one surveillance case.",
+              "endpoint": "/case-notes",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "case_id",
+                  "type": "text",
+                  "label": "Case",
+                  "value": "C-1042",
+                  "description": "Case identifier."
+                }
+              ],
+              "data": {
+                "valueField": "case_notes_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Case Triage",
+              "description": "Case triage queue and notes.",
+              "tabs": {
+                "triage": {
+                  "id": "triage",
+                  "name": "Triage",
+                  "layout": [
+                    {
+                      "i": "case_triage_table",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "notes": {
+                  "id": "notes",
+                  "name": "Notes",
+                  "layout": [
+                    {
+                      "i": "case_notes",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Case Triage",
+          "dashboard_name": "Case Triage Live",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "case_triage_table",
+          "data_args": {
+            "case_id": "C-1048"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Case Triage",
-        "dashboard_name": "Case Triage Live",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "case_triage_table",
-        "data_args": {
-          "case_id": "C-1048"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Case Triage",
+          "data": "Case Triage is live from Surveillance Data: case triage ready. Configured case_id=C-1048."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Case Triage",
-        "data": "Case Triage is live from Surveillance Data: case triage ready. Configured case_id=C-1048."
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

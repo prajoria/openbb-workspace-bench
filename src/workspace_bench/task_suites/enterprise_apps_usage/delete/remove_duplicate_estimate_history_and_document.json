@@ -4,63 +4,65 @@
   "family": "delete",
   "difficulty": "medium",
   "prompt": "Two identical Live Grid widgets are on this dashboard. Remove exactly one duplicate, then add a HTML card saying the duplicate was removed.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Duplicate Repair",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "live_grid_data",
+            "data_args": {
+              "symbol": "AAPL"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_remove_duplicate_estimate_history_and_document_widget_001"
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "live_grid_data",
+            "data_args": {
+              "symbol": "AAPL"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_remove_duplicate_estimate_history_and_document_widget_002"
+          }
+        ],
+        "dashboard_id": "usage_remove_duplicate_estimate_history_and_document_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "delete_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Duplicate Repair",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "live_grid_data",
-          "data_args": {
-            "symbol": "AAPL"
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_remove_duplicate_estimate_history_and_document_widget_001"
-        },
-        {
-          "origin": "Getting Started",
-          "widget_id": "live_grid_data",
-          "data_args": {
-            "symbol": "AAPL"
-          },
-          "layout": {
-            "x": 20,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_remove_duplicate_estimate_history_and_document_widget_002"
-        }
-      ],
-      "dashboard_id": "usage_remove_duplicate_estimate_history_and_document_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "delete_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Getting Started",
@@ -92,29 +94,29 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "delete_widget",
-      "args": {
-        "widget_uuid": "usage_remove_duplicate_estimate_history_and_document_widget_002"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "delete_widget",
+        "args": {
+          "widget_uuid": "usage_remove_duplicate_estimate_history_and_document_widget_002"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "html",
+          "name": "Cleanup Note",
+          "data": "<section>Removed the duplicate widget; one copy remains.</section>"
+        }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "html",
-        "name": "Cleanup Note",
-        "data": "<section>Removed the duplicate widget; one copy remains.</section>"
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

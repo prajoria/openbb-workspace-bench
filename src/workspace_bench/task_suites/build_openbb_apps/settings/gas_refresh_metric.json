@@ -8,31 +8,33 @@
   "business_terms": [
     "Chain TVL Data"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2,
@@ -87,61 +89,61 @@
         "path": "refetchInterval",
         "expected": 30000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Chain TVL Data",
-        "url": "http://localhost:7802",
-        "widgets_json": {
-          "gas_refresh_metric": {
-            "name": "Gas Refresh Metric",
-            "description": "Auto-refreshing gas snapshot.",
-            "endpoint": "/gas-refresh",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "refetchInterval": 30000,
-            "category": "Network Ops",
-            "runButton": true,
-            "data": {
-              "valueField": "gas_refresh_metric_value"
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Chain TVL Data",
+          "url": "http://localhost:7802",
+          "widgets_json": {
+            "gas_refresh_metric": {
+              "name": "Gas Refresh Metric",
+              "description": "Auto-refreshing gas snapshot.",
+              "endpoint": "/gas-refresh",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "refetchInterval": 30000,
+              "category": "Network Ops",
+              "runButton": true,
+              "data": {
+                "valueField": "gas_refresh_metric_value"
+              }
             }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Chain TVL Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Chain TVL Data",
+          "widget_id": "gas_refresh_metric"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Chain TVL Data",
+          "widget_id": "gas_refresh_metric"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Chain TVL Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Chain TVL Data",
-        "widget_id": "gas_refresh_metric"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Chain TVL Data",
-        "widget_id": "gas_refresh_metric"
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

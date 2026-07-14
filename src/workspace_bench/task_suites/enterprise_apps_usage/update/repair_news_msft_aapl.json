@@ -4,49 +4,51 @@
   "family": "update",
   "difficulty": "medium",
   "prompt": "This tech desk dashboard mistakenly shows business news. Repair the widget to tech and add a note saying what was repaired, mentioning both values.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Repair Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "sample_newsfeed",
+            "data_args": {
+              "category": "business"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            },
+            "widget_uuid": "usage_repair_news_msft_aapl_widget_001"
+          }
+        ],
+        "dashboard_id": "usage_repair_news_msft_aapl_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Repair Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "sample_newsfeed",
-          "data_args": {
-            "category": "business"
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 12
-          },
-          "widget_uuid": "usage_repair_news_msft_aapl_widget_001"
-        }
-      ],
-      "dashboard_id": "usage_repair_news_msft_aapl_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Getting Started",
@@ -82,38 +84,38 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "read_widget",
-      "args": {
-        "widget_id": "sample_newsfeed"
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_uuid": "usage_repair_news_msft_aapl_widget_001",
-        "data_args": {
-          "category": "tech"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "read_widget",
+        "args": {
+          "widget_id": "sample_newsfeed"
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "usage_repair_news_msft_aapl_widget_001",
+          "data_args": {
+            "category": "tech"
+          }
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Repair Note",
+          "data": "Repaired sample_newsfeed from business to tech."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Repair Note",
-        "data": "Repaired sample_newsfeed from business to tech."
-      }
+    ],
+    "limits": {
+      "max_turns": 7
     }
-  ],
-  "limits": {
-    "max_turns": 7
   }
 }

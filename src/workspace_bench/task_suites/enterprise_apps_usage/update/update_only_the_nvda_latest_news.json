@@ -4,64 +4,66 @@
   "family": "update",
   "difficulty": "medium",
   "prompt": "Leave the tech Sample News Feed widget untouched, and update only the science Sample News Feed widget to business.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Selective Update Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "sample_newsfeed",
+            "data_args": {
+              "category": "tech",
+              "limit": 5
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_update_only_the_nvda_latest_news_widget_001"
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "sample_newsfeed",
+            "data_args": {
+              "category": "science",
+              "limit": 5
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_update_only_the_nvda_latest_news_widget_002"
+          }
+        ],
+        "dashboard_id": "usage_update_only_the_nvda_latest_news_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Selective Update Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "sample_newsfeed",
-          "data_args": {
-            "category": "tech",
-            "limit": 5
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_update_only_the_nvda_latest_news_widget_001"
-        },
-        {
-          "origin": "Getting Started",
-          "widget_id": "sample_newsfeed",
-          "data_args": {
-            "category": "science",
-            "limit": 5
-          },
-          "layout": {
-            "x": 20,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_update_only_the_nvda_latest_news_widget_002"
-        }
-      ],
-      "dashboard_id": "usage_update_only_the_nvda_latest_news_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Getting Started",
@@ -97,24 +99,24 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_uuid": "usage_update_only_the_nvda_latest_news_widget_002",
-        "data_args": {
-          "category": "business"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "usage_update_only_the_nvda_latest_news_widget_002",
+          "data_args": {
+            "category": "business"
+          }
         }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

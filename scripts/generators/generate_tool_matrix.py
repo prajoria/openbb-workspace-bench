@@ -67,11 +67,23 @@ SHORT = [
 
 
 def load(directory: Path) -> list[dict]:
-    return [
-        json.loads(f.read_text())
-        for f in sorted(directory.rglob("*.json"), key=lambda path: path.name)
-        if f.name != "task_suite.json"
-    ]
+    manifest_path = directory / "task_suite.json"
+    defaults: dict = {}
+    if manifest_path.is_file():
+        defaults = json.loads(manifest_path.read_text()).get("task_defaults") or {}
+    tasks = []
+    for f in sorted(directory.rglob("*.json"), key=lambda path: path.name):
+        # Suite-root JSON (manifest, reference answer corpora) is metadata.
+        if f.parent == directory:
+            continue
+        task = json.loads(f.read_text())
+        # Slim payloads omit family (the directory) and manifest-defaulted
+        # labels; hydrate them the way the loader does.
+        task.setdefault("family", f.parent.name)
+        for key, value in defaults.items():
+            task.setdefault(key, value)
+        tasks.append(task)
+    return tasks
 
 
 def family_of(task: dict) -> str:
@@ -86,7 +98,13 @@ def family_of(task: dict) -> str:
 def rows_for(tasks: list[dict], suite: str) -> list[dict]:
     rows = []
     for index, task in enumerate(tasks, start=1):
-        used = {call["tool"] for call in task.get("oracle_tool_calls", [])}
+        evaluation = task.get("eval", {})
+        reference = (
+            evaluation.get("reference_trace")
+            or evaluation.get("reference")
+            or task.get("oracle_tool_calls", [])
+        )
+        used = {call["tool"] for call in reference}
         mask = sum(1 << i for i, tool in enumerate(TOOLS) if tool in used)
         rows.append(
             {

@@ -4,31 +4,33 @@
   "family": "types",
   "difficulty": "easy",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Vendor SLA Data' at http://localhost:7804. Choose the native widget type that fits the content. The experience needs Vendor Notices (`sla_newsfeed`, newsfeed) using `/vendor-notices` for vendor incident notices feed. Organize it as app 'Vendor Notices' with tabs Notices (sla_newsfeed). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_widget_defs": [
       {
         "backend_name": "Vendor SLA Data",
@@ -98,67 +100,67 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Vendor SLA Data",
-        "url": "http://localhost:7804",
-        "widgets_json": {
-          "sla_newsfeed": {
-            "name": "Vendor Notices",
-            "description": "Vendor incident notices feed.",
-            "endpoint": "/vendor-notices",
-            "type": "newsfeed",
-            "gridData": {
-              "w": 12,
-              "h": 10
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Vendor Notices",
-            "description": "Vendor incident notices.",
-            "tabs": {
-              "notices": {
-                "id": "notices",
-                "name": "Notices",
-                "layout": [
-                  {
-                    "i": "sla_newsfeed",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 10
-                  }
-                ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Vendor SLA Data",
+          "url": "http://localhost:7804",
+          "widgets_json": {
+            "sla_newsfeed": {
+              "name": "Vendor Notices",
+              "description": "Vendor incident notices feed.",
+              "endpoint": "/vendor-notices",
+              "type": "newsfeed",
+              "gridData": {
+                "w": 12,
+                "h": 10
               }
-            },
-            "groups": []
-          }
-        ]
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Vendor Notices",
+              "description": "Vendor incident notices.",
+              "tabs": {
+                "notices": {
+                  "id": "notices",
+                  "name": "Notices",
+                  "layout": [
+                    {
+                      "i": "sla_newsfeed",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 10
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Vendor Notices",
+          "dashboard_name": "Vendor Notices Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Vendor Notices",
-        "dashboard_name": "Vendor Notices Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

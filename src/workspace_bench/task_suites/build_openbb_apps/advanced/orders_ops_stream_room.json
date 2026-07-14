@@ -9,31 +9,33 @@
     "venue_scope",
     "order_id"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 2,
       "max_repeated_snapshots": 2
@@ -146,145 +148,145 @@
         "path": "refetchInterval",
         "expected": false
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Execution Desk Data",
-        "url": "http://localhost:7806",
-        "widgets_json": {
-          "orders_ops_stream": {
-            "name": "Orders Ops Stream",
-            "description": "Streaming order tape for the ops room.",
-            "endpoint": "/orders-ops-stream",
-            "type": "live_grid",
-            "wsEndpoint": "wss://execution.example/ops-orders",
-            "gridData": {
-              "w": 24,
-              "h": 10
-            },
-            "data": {
-              "wsRowIdColumn": "order_id",
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "order_id",
-                    "headerName": "Order",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "px",
-                    "headerName": "Price",
-                    "cellDataType": "number",
-                    "renderFn": "showCellChange",
-                    "renderFnParams": {
-                      "colorValueKey": "px_change"
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Execution Desk Data",
+          "url": "http://localhost:7806",
+          "widgets_json": {
+            "orders_ops_stream": {
+              "name": "Orders Ops Stream",
+              "description": "Streaming order tape for the ops room.",
+              "endpoint": "/orders-ops-stream",
+              "type": "live_grid",
+              "wsEndpoint": "wss://execution.example/ops-orders",
+              "gridData": {
+                "w": 24,
+                "h": 10
+              },
+              "data": {
+                "wsRowIdColumn": "order_id",
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "order_id",
+                      "headerName": "Order",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "px",
+                      "headerName": "Price",
+                      "cellDataType": "number",
+                      "renderFn": "showCellChange",
+                      "renderFnParams": {
+                        "colorValueKey": "px_change"
+                      }
                     }
-                  }
-                ]
+                  ]
+                },
+                "updateFrequency": 1000
               },
-              "updateFrequency": 1000
+              "refetchInterval": false,
+              "params": [
+                {
+                  "paramName": "venue_scope",
+                  "type": "text",
+                  "label": "Venue scope",
+                  "value": "ARCA",
+                  "description": "Venue reviewed across the stream room."
+                }
+              ]
             },
-            "refetchInterval": false,
-            "params": [
-              {
-                "paramName": "venue_scope",
-                "type": "text",
-                "label": "Venue scope",
-                "value": "ARCA",
-                "description": "Venue reviewed across the stream room."
+            "exception_metric": {
+              "name": "Exceptions",
+              "description": "Open execution exceptions.",
+              "endpoint": "/exception-count",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
+              },
+              "params": [
+                {
+                  "paramName": "venue_scope",
+                  "type": "text",
+                  "label": "Venue scope",
+                  "value": "ARCA",
+                  "description": "Venue reviewed across the stream room."
+                }
+              ],
+              "data": {
+                "valueField": "exception_metric_value"
               }
-            ]
-          },
-          "exception_metric": {
-            "name": "Exceptions",
-            "description": "Open execution exceptions.",
-            "endpoint": "/exception-count",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
-            },
-            "params": [
-              {
-                "paramName": "venue_scope",
-                "type": "text",
-                "label": "Venue scope",
-                "value": "ARCA",
-                "description": "Venue reviewed across the stream room."
-              }
-            ],
-            "data": {
-              "valueField": "exception_metric_value"
             }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Execution Stream Room",
-            "description": "Live orders and exception posture.",
-            "tabs": {
-              "stream": {
-                "id": "stream",
-                "name": "Stream",
-                "layout": [
-                  {
-                    "i": "orders_ops_stream",
-                    "x": 0,
-                    "y": 0,
-                    "w": 24,
-                    "h": 10
-                  }
-                ]
+          },
+          "apps_json": [
+            {
+              "name": "Execution Stream Room",
+              "description": "Live orders and exception posture.",
+              "tabs": {
+                "stream": {
+                  "id": "stream",
+                  "name": "Stream",
+                  "layout": [
+                    {
+                      "i": "orders_ops_stream",
+                      "x": 0,
+                      "y": 0,
+                      "w": 24,
+                      "h": 10
+                    }
+                  ]
+                },
+                "exceptions": {
+                  "id": "exceptions",
+                  "name": "Exceptions",
+                  "layout": [
+                    {
+                      "i": "exception_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 8,
+                      "h": 5
+                    }
+                  ]
+                }
               },
-              "exceptions": {
-                "id": "exceptions",
-                "name": "Exceptions",
-                "layout": [
-                  {
-                    "i": "exception_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 8,
-                    "h": 5
-                  }
-                ]
-              }
-            },
-            "groups": [
-              {
-                "name": "Venue Sync",
-                "type": "param",
-                "paramName": "venue_scope",
-                "widgetIds": [
-                  "orders_ops_stream",
-                  "exception_metric"
-                ]
-              }
-            ]
-          }
-        ]
+              "groups": [
+                {
+                  "name": "Venue Sync",
+                  "type": "param",
+                  "paramName": "venue_scope",
+                  "widgetIds": [
+                    "orders_ops_stream",
+                    "exception_metric"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Execution Stream Room",
+          "dashboard_name": "Execution Stream Room Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Execution Stream Room",
-        "dashboard_name": "Execution Stream Room Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

@@ -5,31 +5,33 @@
   "specification_level": "explicit",
   "difficulty": "hard",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Bench Stark Enterprise' at http://localhost:7809. Treat the app layout and navigation as the product outcome. The experience needs Risk Snapshot (`risk_exposure_monitor_dashboard_risk_snapshot`, metric) using `/risk_exposure_monitor_dashboard_risk_snapshot` for risk & Exposure Monitor (Risk User). Institutional demo view modeled on fund operating workflows; user controls: Portfolio (`portfolio`, text), Scenario (`scenario`, text), Period (`period`, text). Organize it as app 'Enterprise Risk Board' with tabs Risk (risk_exposure_monitor_dashboard_risk_snapshot). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_widget_defs": [
       {
         "backend_name": "Bench Stark Enterprise",
@@ -95,162 +97,162 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Bench Stark Enterprise",
-        "url": "http://localhost:7809",
-        "widgets_json": {
-          "risk_exposure_monitor_dashboard_risk_snapshot": {
-            "category": "Risk",
-            "data": {
-              "valueField": "value"
-            },
-            "description": "Risk Snapshot for Risk & Exposure Monitor (Risk User). Institutional demo view modeled on fund operating workflows.",
-            "endpoint": "/risk_exposure_monitor_dashboard_risk_snapshot",
-            "gridData": {
-              "h": 5,
-              "w": 40
-            },
-            "name": "Risk Snapshot",
-            "params": [
-              {
-                "description": "Portfolio to analyze.",
-                "label": "Portfolio",
-                "options": [
-                  {
-                    "label": "Global Equity",
-                    "value": "Global Equity"
-                  },
-                  {
-                    "label": "Long/Short Equity",
-                    "value": "Long/Short Equity"
-                  },
-                  {
-                    "label": "Credit Opportunities",
-                    "value": "Credit Opportunities"
-                  },
-                  {
-                    "label": "Macro Multi-Asset",
-                    "value": "Macro Multi-Asset"
-                  }
-                ],
-                "paramName": "portfolio",
-                "type": "text",
-                "value": "Global Equity"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Bench Stark Enterprise",
+          "url": "http://localhost:7809",
+          "widgets_json": {
+            "risk_exposure_monitor_dashboard_risk_snapshot": {
+              "category": "Risk",
+              "data": {
+                "valueField": "value"
               },
-              {
-                "description": "Stress scenario.",
-                "label": "Scenario",
-                "options": [
-                  {
-                    "label": "Equity -10%",
-                    "value": "Equity -10%"
-                  },
-                  {
-                    "label": "Rates +100bp",
-                    "value": "Rates +100bp"
-                  },
-                  {
-                    "label": "Credit +150bp",
-                    "value": "Credit +150bp"
-                  },
-                  {
-                    "label": "USD +5%",
-                    "value": "USD +5%"
-                  },
-                  {
-                    "label": "Oil +20%",
-                    "value": "Oil +20%"
-                  }
-                ],
-                "paramName": "scenario",
-                "type": "text",
-                "value": "Equity -10%"
+              "description": "Risk Snapshot for Risk & Exposure Monitor (Risk User). Institutional demo view modeled on fund operating workflows.",
+              "endpoint": "/risk_exposure_monitor_dashboard_risk_snapshot",
+              "gridData": {
+                "h": 5,
+                "w": 40
               },
-              {
-                "description": "Reporting period.",
-                "label": "Period",
-                "options": [
-                  {
-                    "label": "1D",
-                    "value": "1D"
-                  },
-                  {
-                    "label": "MTD",
-                    "value": "MTD"
-                  },
-                  {
-                    "label": "QTD",
-                    "value": "QTD"
-                  },
-                  {
-                    "label": "YTD",
-                    "value": "YTD"
-                  },
-                  {
-                    "label": "1Y",
-                    "value": "1Y"
-                  }
-                ],
-                "paramName": "period",
-                "type": "text",
-                "value": "YTD"
-              }
-            ],
-            "source": [
-              "MSCI BarraOne",
-              "Internal Risk Warehouse"
-            ],
-            "subCategory": "Portfolio Risk",
-            "type": "metric",
-            "widgetId": "risk_exposure_monitor_dashboard_risk_snapshot"
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Enterprise Risk Board",
-            "description": "Portfolio risk posture at a glance.",
-            "tabs": {
-              "risk": {
-                "id": "risk",
-                "name": "Risk",
-                "layout": [
-                  {
-                    "i": "risk_exposure_monitor_dashboard_risk_snapshot",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 6
-                  }
-                ]
-              }
-            },
-            "groups": []
-          }
-        ]
+              "name": "Risk Snapshot",
+              "params": [
+                {
+                  "description": "Portfolio to analyze.",
+                  "label": "Portfolio",
+                  "options": [
+                    {
+                      "label": "Global Equity",
+                      "value": "Global Equity"
+                    },
+                    {
+                      "label": "Long/Short Equity",
+                      "value": "Long/Short Equity"
+                    },
+                    {
+                      "label": "Credit Opportunities",
+                      "value": "Credit Opportunities"
+                    },
+                    {
+                      "label": "Macro Multi-Asset",
+                      "value": "Macro Multi-Asset"
+                    }
+                  ],
+                  "paramName": "portfolio",
+                  "type": "text",
+                  "value": "Global Equity"
+                },
+                {
+                  "description": "Stress scenario.",
+                  "label": "Scenario",
+                  "options": [
+                    {
+                      "label": "Equity -10%",
+                      "value": "Equity -10%"
+                    },
+                    {
+                      "label": "Rates +100bp",
+                      "value": "Rates +100bp"
+                    },
+                    {
+                      "label": "Credit +150bp",
+                      "value": "Credit +150bp"
+                    },
+                    {
+                      "label": "USD +5%",
+                      "value": "USD +5%"
+                    },
+                    {
+                      "label": "Oil +20%",
+                      "value": "Oil +20%"
+                    }
+                  ],
+                  "paramName": "scenario",
+                  "type": "text",
+                  "value": "Equity -10%"
+                },
+                {
+                  "description": "Reporting period.",
+                  "label": "Period",
+                  "options": [
+                    {
+                      "label": "1D",
+                      "value": "1D"
+                    },
+                    {
+                      "label": "MTD",
+                      "value": "MTD"
+                    },
+                    {
+                      "label": "QTD",
+                      "value": "QTD"
+                    },
+                    {
+                      "label": "YTD",
+                      "value": "YTD"
+                    },
+                    {
+                      "label": "1Y",
+                      "value": "1Y"
+                    }
+                  ],
+                  "paramName": "period",
+                  "type": "text",
+                  "value": "YTD"
+                }
+              ],
+              "source": [
+                "MSCI BarraOne",
+                "Internal Risk Warehouse"
+              ],
+              "subCategory": "Portfolio Risk",
+              "type": "metric",
+              "widgetId": "risk_exposure_monitor_dashboard_risk_snapshot"
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Enterprise Risk Board",
+              "description": "Portfolio risk posture at a glance.",
+              "tabs": {
+                "risk": {
+                  "id": "risk",
+                  "name": "Risk",
+                  "layout": [
+                    {
+                      "i": "risk_exposure_monitor_dashboard_risk_snapshot",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 6
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Enterprise Risk Board",
+          "dashboard_name": "Enterprise Risk Board Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Enterprise Risk Board",
-        "dashboard_name": "Enterprise Risk Board Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

@@ -2068,7 +2068,7 @@ APP_TOOLS = BUILD_TOOLS + ["manage_apps"]
 # ---------------------------------------------------------------------------
 
 STARK_ENTERPRISE = json.loads(
-    (REPO / "src/workspace_bench/workspace/data/stark_enterprise.json").read_text(
+    (REPO / "src/workspace_bench/data/backends/stark_enterprise_x.json").read_text(
         encoding="utf-8"
     )
 )

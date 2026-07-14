@@ -4,36 +4,38 @@
   "family": "prompts",
   "difficulty": "medium",
   "prompt": "Get workspace_session_context, add a Estimates tab, navigate to it, fetch the widget schema, create Getting Started/live_grid_data with data_args {\"symbol\": \"MSFT\"} there, and add a note mentioning Estimates on that tab.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Prompt Session",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "dashboard_id": "usage_session_tab_estimates_estimate_history_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_prompt",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Prompt Session",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "dashboard_id": "usage_session_tab_estimates_estimate_history_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_prompt",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_tabs": [
       "overview",
       "estimates"
@@ -78,66 +80,66 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_prompt",
-      "args": {
-        "name": "workspace_session_context"
-      }
     },
-    {
-      "tool": "manage_navigation_bar",
-      "args": {
-        "operation": "add_tabs",
-        "tabs": [
-          {
-            "name": "Estimates"
+    "reference": [
+      {
+        "tool": "get_workspace_prompt",
+        "args": {
+          "name": "workspace_session_context"
+        }
+      },
+      {
+        "tool": "manage_navigation_bar",
+        "args": {
+          "operation": "add_tabs",
+          "tabs": [
+            {
+              "name": "Estimates"
+            }
+          ]
+        }
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "tab",
+          "tab_id": "estimates"
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
+          "data_args": {
+            "symbol": "MSFT"
           }
-        ]
-      }
-    },
-    {
-      "tool": "navigate_workspace",
-      "args": {
-        "operation": "tab",
-        "tab_id": "estimates"
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Getting Started"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "live_grid_data"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "live_grid_data",
-        "data_args": {
-          "symbol": "MSFT"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Session Prompt Note",
+          "data": "Estimates built using current tab guidance."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Session Prompt Note",
-        "data": "Estimates built using current tab guidance."
-      }
+    ],
+    "limits": {
+      "max_turns": 10
     }
-  ],
-  "limits": {
-    "max_turns": 10
   }
 }

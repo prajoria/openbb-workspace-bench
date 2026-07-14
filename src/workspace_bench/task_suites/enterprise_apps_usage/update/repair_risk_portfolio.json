@@ -4,49 +4,51 @@
   "family": "update",
   "difficulty": "hard",
   "prompt": "This Long/Short Equity risk dashboard has its snapshot configured for Macro Multi-Asset. Repair the widget to Long/Short Equity and add a HTML card saying what was repaired, mentioning both values.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Repair Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot",
+            "data_args": {
+              "portfolio": "Macro Multi-Asset"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            },
+            "widget_uuid": "usage_repair_risk_portfolio_widget_001"
+          }
+        ],
+        "dashboard_id": "usage_repair_risk_portfolio_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Repair Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot",
-          "data_args": {
-            "portfolio": "Macro Multi-Asset"
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 12
-          },
-          "widget_uuid": "usage_repair_risk_portfolio_widget_001"
-        }
-      ],
-      "dashboard_id": "usage_repair_risk_portfolio_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Bench Stark Enterprise",
@@ -82,38 +84,38 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "read_widget",
-      "args": {
-        "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot"
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_uuid": "usage_repair_risk_portfolio_widget_001",
-        "data_args": {
-          "portfolio": "Long/Short Equity"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "read_widget",
+        "args": {
+          "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot"
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "usage_repair_risk_portfolio_widget_001",
+          "data_args": {
+            "portfolio": "Long/Short Equity"
+          }
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "html",
+          "name": "Repair Note",
+          "data": "<section>Repaired risk_exposure_monitor_dashboard_risk_snapshot from Macro Multi-Asset to Long/Short Equity.</section>"
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "html",
-        "name": "Repair Note",
-        "data": "<section>Repaired risk_exposure_monitor_dashboard_risk_snapshot from Macro Multi-Asset to Long/Short Equity.</section>"
-      }
+    ],
+    "limits": {
+      "max_turns": 7
     }
-  ],
-  "limits": {
-    "max_turns": 7
   }
 }

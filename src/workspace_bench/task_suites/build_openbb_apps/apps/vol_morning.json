@@ -8,111 +8,113 @@
     "window",
     "date"
   ],
-  "fixtures": {},
-  "initial_state": {
-    "custom_backends": [
-      {
-        "name": "Vol Desk Data",
-        "url": "http://localhost:7801",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "vix_history": {
-            "name": "VIX History",
-            "description": "Daily CBOE VIX closes with returns.",
-            "endpoint": "/vix-history",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "window",
-                "type": "number",
-                "label": "Window",
-                "value": 30,
-                "min": 5,
-                "max": 365
+  "setup": {
+    "fixtures": {},
+    "initial_state": {
+      "custom_backends": [
+        {
+          "name": "Vol Desk Data",
+          "url": "http://localhost:7801",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "vix_history": {
+              "name": "VIX History",
+              "description": "Daily CBOE VIX closes with returns.",
+              "endpoint": "/vix-history",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "window",
+                  "type": "number",
+                  "label": "Window",
+                  "value": 30,
+                  "min": 5,
+                  "max": 365
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "date",
+                      "headerName": "Date",
+                      "cellDataType": "dateString"
+                    },
+                    {
+                      "field": "close",
+                      "headerName": "Close",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "return_pct",
+                      "headerName": "Return %",
+                      "cellDataType": "number",
+                      "formatterFn": "percent",
+                      "renderFn": "greenRed"
+                    }
+                  ]
+                }
               }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "date",
-                    "headerName": "Date",
-                    "cellDataType": "dateString"
-                  },
-                  {
-                    "field": "close",
-                    "headerName": "Close",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "return_pct",
-                    "headerName": "Return %",
-                    "cellDataType": "number",
-                    "formatterFn": "percent",
-                    "renderFn": "greenRed"
-                  }
-                ]
+            },
+            "vix_term_structure": {
+              "name": "VIX Term Structure",
+              "description": "Plotly curve of VIX futures by expiry.",
+              "endpoint": "/vix-term-structure",
+              "type": "chart",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "raw": true,
+              "data": {
+                "valueField": "vix_term_structure_value"
               }
-            }
-          },
-          "vix_term_structure": {
-            "name": "VIX Term Structure",
-            "description": "Plotly curve of VIX futures by expiry.",
-            "endpoint": "/vix-term-structure",
-            "type": "chart",
-            "gridData": {
-              "w": 20,
-              "h": 9
             },
-            "raw": true,
-            "data": {
-              "valueField": "vix_term_structure_value"
-            }
-          },
-          "vol_regime_metric": {
-            "name": "Vol Regime",
-            "description": "Current volatility regime score.",
-            "endpoint": "/vol-regime",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "data": {
-              "valueField": "vol_regime_metric_value"
+            "vol_regime_metric": {
+              "name": "Vol Regime",
+              "description": "Current volatility regime score.",
+              "endpoint": "/vol-regime",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "data": {
+                "valueField": "vol_regime_metric_value"
+              }
             }
           }
         }
-      }
+      ]
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
     ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2
@@ -234,77 +236,77 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "refresh",
-        "backend_id": "backend_001",
-        "apps_json": [
-          {
-            "name": "Vol Morning",
-            "description": "Vol level, structure, regime.",
-            "tabs": {
-              "morning": {
-                "id": "morning",
-                "name": "Morning",
-                "layout": [
-                  {
-                    "i": "vix_history",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9,
-                    "state": {
-                      "params": {
-                        "window": 30
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_001",
+          "apps_json": [
+            {
+              "name": "Vol Morning",
+              "description": "Vol level, structure, regime.",
+              "tabs": {
+                "morning": {
+                  "id": "morning",
+                  "name": "Morning",
+                  "layout": [
+                    {
+                      "i": "vix_history",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9,
+                      "state": {
+                        "params": {
+                          "window": 30
+                        }
                       }
+                    },
+                    {
+                      "i": "vix_term_structure",
+                      "x": 20,
+                      "y": 0,
+                      "w": 12,
+                      "h": 9
+                    },
+                    {
+                      "i": "vol_regime_metric",
+                      "x": 32,
+                      "y": 0,
+                      "w": 8,
+                      "h": 6
                     }
-                  },
-                  {
-                    "i": "vix_term_structure",
-                    "x": 20,
-                    "y": 0,
-                    "w": 12,
-                    "h": 9
-                  },
-                  {
-                    "i": "vol_regime_metric",
-                    "x": 32,
-                    "y": 0,
-                    "w": 8,
-                    "h": 6
-                  }
-                ]
-              }
-            },
-            "groups": [],
-            "prompts": [
-              "What changed in the term structure overnight?",
-              "Summarize the vol regime in one line."
-            ]
-          }
-        ]
+                  ]
+                }
+              },
+              "groups": [],
+              "prompts": [
+                "What changed in the term structure overnight?",
+                "Summarize the vol regime in one line."
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Vol Morning",
+          "dashboard_name": "Vol Morning Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Vol Morning",
-        "dashboard_name": "Vol Morning Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

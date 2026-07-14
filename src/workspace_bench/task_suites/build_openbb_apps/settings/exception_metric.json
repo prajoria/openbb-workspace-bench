@@ -5,31 +5,33 @@
   "specification_level": "explicit",
   "difficulty": "medium",
   "prompt": "Register the backend and place the specified widget on the active dashboard. Use 'Execution Desk Data' at http://localhost:7806. Implement the requested runtime and refresh behavior. The experience needs Exceptions (`exception_metric`, metric) using `/exception-count` for open execution exceptions; refresh every 45 seconds; run on demand. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_widget_defs": [
       {
         "backend_name": "Execution Desk Data",
@@ -78,53 +80,53 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Execution Desk Data",
-        "url": "http://localhost:7806",
-        "widgets_json": {
-          "exception_metric": {
-            "name": "Exceptions",
-            "description": "Open execution exceptions.",
-            "endpoint": "/exception-count",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
-            },
-            "refetchInterval": 45000,
-            "runButton": true
+    },
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Execution Desk Data",
+          "url": "http://localhost:7806",
+          "widgets_json": {
+            "exception_metric": {
+              "name": "Exceptions",
+              "description": "Open execution exceptions.",
+              "endpoint": "/exception-count",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
+              },
+              "refetchInterval": 45000,
+              "runButton": true
+            }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Execution Desk Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Execution Desk Data",
+          "widget_id": "exception_metric"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Execution Desk Data",
+          "widget_id": "exception_metric"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Execution Desk Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Execution Desk Data",
-        "widget_id": "exception_metric"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Execution Desk Data",
-        "widget_id": "exception_metric"
-      }
+    ],
+    "limits": {
+      "max_turns": 7
     }
-  ],
-  "limits": {
-    "max_turns": 7
   }
 }

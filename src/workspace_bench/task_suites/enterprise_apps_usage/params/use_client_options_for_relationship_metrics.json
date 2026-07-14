@@ -4,32 +4,34 @@
   "family": "params",
   "difficulty": "easy",
   "prompt": "Use get_params_options for Bench Stark Enterprise/client_360_meeting_prep_relationship_metrics parameter client, choose Northstar Endowment, and create that widget with client=Northstar Endowment.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Parameter Options",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "dashboard_id": "usage_use_client_options_for_relationship_metrics_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "get_params_options",
+      "create_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Parameter Options",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "dashboard_id": "usage_use_client_options_for_relationship_metrics_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "get_params_options",
-    "create_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Bench Stark Enterprise",
@@ -62,33 +64,33 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "get_params_options",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "client_360_meeting_prep_relationship_metrics",
-        "param_name": "client"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "client_360_meeting_prep_relationship_metrics",
-        "data_args": {
-          "client": "Northstar Endowment"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "client_360_meeting_prep_relationship_metrics",
+          "param_name": "client"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "client_360_meeting_prep_relationship_metrics",
+          "data_args": {
+            "client": "Northstar Endowment"
+          }
         }
       }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

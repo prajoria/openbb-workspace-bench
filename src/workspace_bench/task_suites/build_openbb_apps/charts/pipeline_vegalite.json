@@ -5,31 +5,33 @@
   "specification_level": "explicit",
   "difficulty": "medium",
   "prompt": "Connect the backend and make its first widget usable on the current dashboard. Use 'Healthcare Research Data' at http://localhost:7808. Choose a working chart representation for the data. The experience needs Pipeline Mix (Vega-Lite) (`pipeline_vegalite`, chart-vegalite) using `/pipeline-vegalite` for vega-Lite bar spec of pipeline phase mix; cache for 30 minutes. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_widget_defs": [
       {
         "backend_name": "Healthcare Research Data",
@@ -87,53 +89,53 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Healthcare Research Data",
-        "url": "http://localhost:7808",
-        "widgets_json": {
-          "pipeline_vegalite": {
-            "name": "Pipeline Mix (Vega-Lite)",
-            "description": "Vega-Lite bar spec of pipeline phase mix.",
-            "endpoint": "/pipeline-vegalite",
-            "type": "chart-vegalite",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "staleTime": 1800000,
-            "category": "Pipeline Charts"
+    },
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Healthcare Research Data",
+          "url": "http://localhost:7808",
+          "widgets_json": {
+            "pipeline_vegalite": {
+              "name": "Pipeline Mix (Vega-Lite)",
+              "description": "Vega-Lite bar spec of pipeline phase mix.",
+              "endpoint": "/pipeline-vegalite",
+              "type": "chart-vegalite",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "staleTime": 1800000,
+              "category": "Pipeline Charts"
+            }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Healthcare Research Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Healthcare Research Data",
+          "widget_id": "pipeline_vegalite"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Healthcare Research Data",
+          "widget_id": "pipeline_vegalite"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Healthcare Research Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Healthcare Research Data",
-        "widget_id": "pipeline_vegalite"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Healthcare Research Data",
-        "widget_id": "pipeline_vegalite"
-      }
+    ],
+    "limits": {
+      "max_turns": 7
     }
-  ],
-  "limits": {
-    "max_turns": 7
   }
 }

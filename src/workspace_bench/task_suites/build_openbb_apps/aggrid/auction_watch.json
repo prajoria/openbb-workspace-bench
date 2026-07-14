@@ -9,31 +9,33 @@
     "auction_date",
     "security"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2,
@@ -107,83 +109,83 @@
         "path": "staleTime",
         "expected": 900000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Rates Watch Data",
-        "url": "http://localhost:7803",
-        "widgets_json": {
-          "auction_watch": {
-            "name": "Auction Watch",
-            "description": "Upcoming treasury auctions.",
-            "endpoint": "/auction-watch",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "auction_date",
-                    "headerName": "Auction Date",
-                    "cellDataType": "dateString"
-                  },
-                  {
-                    "field": "security",
-                    "headerName": "Security",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "size_bn",
-                    "headerName": "Size Bn",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "bid_to_cover",
-                    "headerName": "Bid To Cover",
-                    "cellDataType": "number"
-                  }
-                ]
-              }
-            },
-            "staleTime": 900000,
-            "runButton": true
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Rates Watch Data",
+          "url": "http://localhost:7803",
+          "widgets_json": {
+            "auction_watch": {
+              "name": "Auction Watch",
+              "description": "Upcoming treasury auctions.",
+              "endpoint": "/auction-watch",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "auction_date",
+                      "headerName": "Auction Date",
+                      "cellDataType": "dateString"
+                    },
+                    {
+                      "field": "security",
+                      "headerName": "Security",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "size_bn",
+                      "headerName": "Size Bn",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "bid_to_cover",
+                      "headerName": "Bid To Cover",
+                      "cellDataType": "number"
+                    }
+                  ]
+                }
+              },
+              "staleTime": 900000,
+              "runButton": true
+            }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Rates Watch Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Rates Watch Data",
+          "widget_id": "auction_watch"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Rates Watch Data",
+          "widget_id": "auction_watch"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Rates Watch Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Rates Watch Data",
-        "widget_id": "auction_watch"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Rates Watch Data",
-        "widget_id": "auction_watch"
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

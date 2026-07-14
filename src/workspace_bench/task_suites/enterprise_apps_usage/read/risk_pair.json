@@ -4,67 +4,69 @@
   "family": "read",
   "difficulty": "medium",
   "prompt": "Use get_widget_data on the Bench Stark Enterprise VaR Trend and Drawdown widgets, then add a short HTML card that cites risk_exposure_monitor_dashboard_var_trend and risk_exposure_monitor_dashboard_drawdown and says you reviewed the data.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Data Review",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "main",
+            "name": "Main"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "tab_id": "main",
+            "layout": {
+              "x": 0,
+              "y": 2,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_risk_pair_widget_001"
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "risk_exposure_monitor_dashboard_drawdown",
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "tab_id": "main",
+            "layout": {
+              "x": 20,
+              "y": 2,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_risk_pair_widget_002"
+          }
+        ],
+        "dashboard_id": "usage_risk_pair_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "get_widget_data",
+      "read_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Data Review",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "main",
-          "name": "Main"
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "risk_exposure_monitor_dashboard_var_trend",
-          "data_args": {
-            "fund": "Flagship Long/Short",
-            "period": "YTD"
-          },
-          "tab_id": "main",
-          "layout": {
-            "x": 0,
-            "y": 2,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_risk_pair_widget_001"
-        },
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "risk_exposure_monitor_dashboard_drawdown",
-          "data_args": {
-            "fund": "Flagship Long/Short",
-            "period": "YTD"
-          },
-          "tab_id": "main",
-          "layout": {
-            "x": 20,
-            "y": 2,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_risk_pair_widget_002"
-        }
-      ],
-      "dashboard_id": "usage_risk_pair_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "get_widget_data",
-    "read_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_tool_calls": [
       {
         "tool": "get_widget_data",
@@ -110,47 +112,47 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "get_widget_data",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "risk_exposure_monitor_dashboard_var_trend",
-        "widget_uuid": "usage_risk_pair_widget_001",
-        "data_args": {
-          "fund": "Flagship Long/Short",
-          "period": "YTD"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+          "widget_uuid": "usage_risk_pair_widget_001",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "period": "YTD"
+          }
+        }
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "risk_exposure_monitor_dashboard_drawdown",
+          "widget_uuid": "usage_risk_pair_widget_002",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "period": "YTD"
+          }
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "html",
+          "name": "Data Note",
+          "data": "<section>Reviewed the data returned by risk_exposure_monitor_dashboard_var_trend and risk_exposure_monitor_dashboard_drawdown.</section>"
         }
       }
-    },
-    {
-      "tool": "get_widget_data",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "risk_exposure_monitor_dashboard_drawdown",
-        "widget_uuid": "usage_risk_pair_widget_002",
-        "data_args": {
-          "fund": "Flagship Long/Short",
-          "period": "YTD"
-        }
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "html",
-        "name": "Data Note",
-        "data": "<section>Reviewed the data returned by risk_exposure_monitor_dashboard_var_trend and risk_exposure_monitor_dashboard_drawdown.</section>"
-      }
+    ],
+    "limits": {
+      "max_turns": 7
     }
-  ],
-  "limits": {
-    "max_turns": 7
   }
 }

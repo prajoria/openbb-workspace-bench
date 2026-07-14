@@ -4,31 +4,33 @@
   "family": "aggrid",
   "difficulty": "hard",
   "prompt": "Build a volatility analyst a dependable volatility and derivatives workspace. The workspace must cover realized volatility by tenor. The workspace must cover term structure for VIX futures by expiry. The workspace must cover current volatility regime score. Analysts need to inspect tenor, realized percentage, as of. Leave the complete working workspace open for review. Decide how best to organize the experience and preserve unrelated work.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 2,
       "max_repeated_snapshots": 2
@@ -157,139 +159,139 @@
         "path": "staleTime",
         "expected": 900000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Vol Desk Data",
-        "url": "http://localhost:7801",
-        "widgets_json": {
-          "realized_vol_grid": {
-            "name": "Realized Vol Grid",
-            "description": "Realized volatility by tenor.",
-            "endpoint": "/realized-vol-grid",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "tenor",
-                    "headerName": "Tenor",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "realized_pct",
-                    "headerName": "Realized Pct",
-                    "cellDataType": "number",
-                    "formatterFn": "percent"
-                  },
-                  {
-                    "field": "as_of",
-                    "headerName": "As Of",
-                    "cellDataType": "dateString"
-                  }
-                ]
-              }
-            },
-            "staleTime": 900000
-          },
-          "vix_term_structure": {
-            "name": "VIX Term Structure",
-            "description": "Plotly curve of VIX futures by expiry.",
-            "endpoint": "/vix-term-structure",
-            "type": "chart",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "raw": true,
-            "staleTime": 900000,
-            "data": {
-              "valueField": "vix_term_structure_value"
-            }
-          },
-          "vol_regime_metric": {
-            "name": "Vol Regime",
-            "description": "Current volatility regime score.",
-            "endpoint": "/vol-regime",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "staleTime": 900000,
-            "data": {
-              "valueField": "vol_regime_metric_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Vol Cockpit",
-            "description": "Realized, term structure, regime.",
-            "tabs": {
-              "realized": {
-                "id": "realized",
-                "name": "Realized",
-                "layout": [
-                  {
-                    "i": "realized_vol_grid",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  },
-                  {
-                    "i": "vol_regime_metric",
-                    "x": 20,
-                    "y": 0,
-                    "w": 12,
-                    "h": 6
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Vol Desk Data",
+          "url": "http://localhost:7801",
+          "widgets_json": {
+            "realized_vol_grid": {
+              "name": "Realized Vol Grid",
+              "description": "Realized volatility by tenor.",
+              "endpoint": "/realized-vol-grid",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "structure": {
-                "id": "structure",
-                "name": "Structure",
-                "layout": [
-                  {
-                    "i": "vix_term_structure",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "tenor",
+                      "headerName": "Tenor",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "realized_pct",
+                      "headerName": "Realized Pct",
+                      "cellDataType": "number",
+                      "formatterFn": "percent"
+                    },
+                    {
+                      "field": "as_of",
+                      "headerName": "As Of",
+                      "cellDataType": "dateString"
+                    }
+                  ]
+                }
+              },
+              "staleTime": 900000
+            },
+            "vix_term_structure": {
+              "name": "VIX Term Structure",
+              "description": "Plotly curve of VIX futures by expiry.",
+              "endpoint": "/vix-term-structure",
+              "type": "chart",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "raw": true,
+              "staleTime": 900000,
+              "data": {
+                "valueField": "vix_term_structure_value"
               }
             },
-            "groups": []
-          }
-        ]
+            "vol_regime_metric": {
+              "name": "Vol Regime",
+              "description": "Current volatility regime score.",
+              "endpoint": "/vol-regime",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "staleTime": 900000,
+              "data": {
+                "valueField": "vol_regime_metric_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Vol Cockpit",
+              "description": "Realized, term structure, regime.",
+              "tabs": {
+                "realized": {
+                  "id": "realized",
+                  "name": "Realized",
+                  "layout": [
+                    {
+                      "i": "realized_vol_grid",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    },
+                    {
+                      "i": "vol_regime_metric",
+                      "x": 20,
+                      "y": 0,
+                      "w": 12,
+                      "h": 6
+                    }
+                  ]
+                },
+                "structure": {
+                  "id": "structure",
+                  "name": "Structure",
+                  "layout": [
+                    {
+                      "i": "vix_term_structure",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Vol Cockpit",
+          "dashboard_name": "Vol Cockpit Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Vol Cockpit",
-        "dashboard_name": "Vol Cockpit Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

@@ -10,31 +10,33 @@
     "Execution Desk Data",
     "urgent"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "html",
@@ -180,165 +182,165 @@
         "path": "refetchInterval",
         "expected": 45000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Execution Desk Data",
-        "url": "http://localhost:7806",
-        "widgets_json": {
-          "exception_metric": {
-            "name": "Exceptions",
-            "description": "Open execution exceptions.",
-            "endpoint": "/exception-count",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
-            },
-            "runButton": true,
-            "refetchInterval": 45000,
-            "params": [
-              {
-                "paramName": "queue",
-                "type": "text",
-                "label": "Queue",
-                "value": "all",
-                "description": "Exception queue to inspect."
-              }
-            ],
-            "staleTime": 900000,
-            "data": {
-              "valueField": "exception_metric_value"
-            }
-          },
-          "open_orders": {
-            "name": "Open Orders",
-            "description": "Live open orders blotter.",
-            "endpoint": "/open-orders",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "order_id",
-                    "headerName": "Order",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "symbol",
-                    "headerName": "Symbol",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "qty",
-                    "headerName": "Qty",
-                    "cellDataType": "number",
-                    "formatterFn": "int"
-                  },
-                  {
-                    "field": "status",
-                    "headerName": "Status",
-                    "cellDataType": "text",
-                    "renderFn": "titleCase"
-                  }
-                ]
-              }
-            },
-            "runButton": true,
-            "refetchInterval": 45000,
-            "staleTime": 900000
-          },
-          "venue_pdf": {
-            "name": "Venue Scorecard",
-            "description": "Monthly venue scorecard PDF.",
-            "endpoint": "/venue-scorecard",
-            "type": "pdf",
-            "gridData": {
-              "w": 16,
-              "h": 14
-            },
-            "runButton": true,
-            "refetchInterval": 45000,
-            "staleTime": 900000,
-            "data": {
-              "valueField": "venue_pdf_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Execution Config Live",
-            "description": "Configured exceptions and orders.",
-            "tabs": {
-              "execution": {
-                "id": "execution",
-                "name": "Execution",
-                "layout": [
-                  {
-                    "i": "exception_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 8,
-                    "h": 5
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Execution Desk Data",
+          "url": "http://localhost:7806",
+          "widgets_json": {
+            "exception_metric": {
+              "name": "Exceptions",
+              "description": "Open execution exceptions.",
+              "endpoint": "/exception-count",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
               },
-              "posture": {
-                "id": "posture",
-                "name": "Posture",
-                "layout": [
-                  {
-                    "i": "open_orders",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+              "runButton": true,
+              "refetchInterval": 45000,
+              "params": [
+                {
+                  "paramName": "queue",
+                  "type": "text",
+                  "label": "Queue",
+                  "value": "all",
+                  "description": "Exception queue to inspect."
+                }
+              ],
+              "staleTime": 900000,
+              "data": {
+                "valueField": "exception_metric_value"
               }
             },
-            "groups": []
+            "open_orders": {
+              "name": "Open Orders",
+              "description": "Live open orders blotter.",
+              "endpoint": "/open-orders",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "order_id",
+                      "headerName": "Order",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "symbol",
+                      "headerName": "Symbol",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "qty",
+                      "headerName": "Qty",
+                      "cellDataType": "number",
+                      "formatterFn": "int"
+                    },
+                    {
+                      "field": "status",
+                      "headerName": "Status",
+                      "cellDataType": "text",
+                      "renderFn": "titleCase"
+                    }
+                  ]
+                }
+              },
+              "runButton": true,
+              "refetchInterval": 45000,
+              "staleTime": 900000
+            },
+            "venue_pdf": {
+              "name": "Venue Scorecard",
+              "description": "Monthly venue scorecard PDF.",
+              "endpoint": "/venue-scorecard",
+              "type": "pdf",
+              "gridData": {
+                "w": 16,
+                "h": 14
+              },
+              "runButton": true,
+              "refetchInterval": 45000,
+              "staleTime": 900000,
+              "data": {
+                "valueField": "venue_pdf_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Execution Config Live",
+              "description": "Configured exceptions and orders.",
+              "tabs": {
+                "execution": {
+                  "id": "execution",
+                  "name": "Execution",
+                  "layout": [
+                    {
+                      "i": "exception_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 8,
+                      "h": 5
+                    }
+                  ]
+                },
+                "posture": {
+                  "id": "posture",
+                  "name": "Posture",
+                  "layout": [
+                    {
+                      "i": "open_orders",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Execution Config Live",
+          "dashboard_name": "Execution Config Live Board",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "exception_metric",
+          "data_args": {
+            "queue": "urgent"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Execution Config Live",
-        "dashboard_name": "Execution Config Live Board",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "exception_metric",
-        "data_args": {
-          "queue": "urgent"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "html",
+          "name": "Execution Config Live",
+          "data": "<section>Execution Config Live shipped from Execution Desk Data: on-demand updates. Configured queue=urgent.</section>"
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "html",
-        "name": "Execution Config Live",
-        "data": "<section>Execution Config Live shipped from Execution Desk Data: on-demand updates. Configured queue=urgent.</section>"
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

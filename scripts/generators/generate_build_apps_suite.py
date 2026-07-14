@@ -40,6 +40,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from _assembly import slim_task_payload  # noqa: E402
 from build_apps_suite import common as c  # noqa: E402
+from workspace_bench.core.models import task_payload_to_eval_schema  # noqa: E402
 from workspace_bench.workspace.widget_params import flatten_params  # noqa: E402
 
 FAMILY_MODULES = [
@@ -470,7 +471,7 @@ def main() -> int:
         family_dir = out_dir / payload["family"]
         family_dir.mkdir(parents=True, exist_ok=True)
         (family_dir / f"{payload['id']}.json").write_text(
-            json.dumps(payload, indent=2) + "\n"
+            json.dumps(task_payload_to_eval_schema(payload), indent=2) + "\n"
         )
     manifest = {
         "suite_id": "build-openbb-apps",

@@ -4,31 +4,33 @@
   "family": "types",
   "difficulty": "hard",
   "prompt": "Build a surveillance analyst a dependable cases and compliance alerts workspace. The workspace must cover browse case evidence documents. The workspace must cover notes for one surveillance case. The workspace must cover open alert count. A selection in one part of the analysis stays linked to related results. Leave the complete working workspace open for review. Decide how best to organize the experience and preserve unrelated work.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 2,
       "max_repeated_snapshots": 2
@@ -136,162 +138,162 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Surveillance Data",
-        "url": "http://localhost:7807",
-        "widgets_json": {
-          "evidence_files": {
-            "name": "Evidence Files",
-            "description": "Browse case evidence documents.",
-            "endpoint": "/evidence-files",
-            "type": "multi_file_viewer",
-            "gridData": {
-              "w": 20,
-              "h": 14
-            },
-            "params": [
-              {
-                "paramName": "file",
-                "type": "endpoint",
-                "label": "File",
-                "optionsEndpoint": "/evidence-file-options",
-                "roles": [
-                  "fileSelector"
-                ],
-                "multiSelect": true,
-                "value": []
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Surveillance Data",
+          "url": "http://localhost:7807",
+          "widgets_json": {
+            "evidence_files": {
+              "name": "Evidence Files",
+              "description": "Browse case evidence documents.",
+              "endpoint": "/evidence-files",
+              "type": "multi_file_viewer",
+              "gridData": {
+                "w": 20,
+                "h": 14
               },
-              {
-                "paramName": "case_scope",
-                "type": "text",
-                "label": "Case scope",
-                "value": "C-1042",
-                "description": "Case bundle used by the evidence room."
+              "params": [
+                {
+                  "paramName": "file",
+                  "type": "endpoint",
+                  "label": "File",
+                  "optionsEndpoint": "/evidence-file-options",
+                  "roles": [
+                    "fileSelector"
+                  ],
+                  "multiSelect": true,
+                  "value": []
+                },
+                {
+                  "paramName": "case_scope",
+                  "type": "text",
+                  "label": "Case scope",
+                  "value": "C-1042",
+                  "description": "Case bundle used by the evidence room."
+                }
+              ],
+              "data": {
+                "valueField": "evidence_files_value"
               }
-            ],
-            "data": {
-              "valueField": "evidence_files_value"
+            },
+            "case_notes": {
+              "name": "Case Notes",
+              "description": "Notes for one surveillance case.",
+              "endpoint": "/case-notes",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "case_id",
+                  "type": "text",
+                  "label": "Case",
+                  "value": "C-1042",
+                  "description": "Case identifier."
+                },
+                {
+                  "paramName": "case_scope",
+                  "type": "text",
+                  "label": "Case scope",
+                  "value": "C-1042",
+                  "description": "Case bundle used by the evidence room."
+                }
+              ],
+              "data": {
+                "valueField": "case_notes_value"
+              }
+            },
+            "alert_metric": {
+              "name": "Open Alerts",
+              "description": "Open alert count.",
+              "endpoint": "/alert-count",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
+              },
+              "data": {
+                "valueField": "alert_metric_value"
+              }
             }
           },
-          "case_notes": {
-            "name": "Case Notes",
-            "description": "Notes for one surveillance case.",
-            "endpoint": "/case-notes",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "case_id",
-                "type": "text",
-                "label": "Case",
-                "value": "C-1042",
-                "description": "Case identifier."
+          "apps_json": [
+            {
+              "name": "Evidence Hub",
+              "description": "Evidence, notes, and alert posture.",
+              "tabs": {
+                "evidence": {
+                  "id": "evidence",
+                  "name": "Evidence",
+                  "layout": [
+                    {
+                      "i": "evidence_files",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 14
+                    },
+                    {
+                      "i": "alert_metric",
+                      "x": 20,
+                      "y": 0,
+                      "w": 6,
+                      "h": 4
+                    }
+                  ]
+                },
+                "notes": {
+                  "id": "notes",
+                  "name": "Notes",
+                  "layout": [
+                    {
+                      "i": "case_notes",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 8
+                    }
+                  ]
+                }
               },
-              {
-                "paramName": "case_scope",
-                "type": "text",
-                "label": "Case scope",
-                "value": "C-1042",
-                "description": "Case bundle used by the evidence room."
-              }
-            ],
-            "data": {
-              "valueField": "case_notes_value"
+              "groups": [
+                {
+                  "name": "Evidence Sync",
+                  "type": "param",
+                  "paramName": "case_scope",
+                  "widgetIds": [
+                    "evidence_files",
+                    "case_notes"
+                  ]
+                }
+              ]
             }
-          },
-          "alert_metric": {
-            "name": "Open Alerts",
-            "description": "Open alert count.",
-            "endpoint": "/alert-count",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
-            },
-            "data": {
-              "valueField": "alert_metric_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Evidence Hub",
-            "description": "Evidence, notes, and alert posture.",
-            "tabs": {
-              "evidence": {
-                "id": "evidence",
-                "name": "Evidence",
-                "layout": [
-                  {
-                    "i": "evidence_files",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 14
-                  },
-                  {
-                    "i": "alert_metric",
-                    "x": 20,
-                    "y": 0,
-                    "w": 6,
-                    "h": 4
-                  }
-                ]
-              },
-              "notes": {
-                "id": "notes",
-                "name": "Notes",
-                "layout": [
-                  {
-                    "i": "case_notes",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 8
-                  }
-                ]
-              }
-            },
-            "groups": [
-              {
-                "name": "Evidence Sync",
-                "type": "param",
-                "paramName": "case_scope",
-                "widgetIds": [
-                  "evidence_files",
-                  "case_notes"
-                ]
-              }
-            ]
-          }
-        ]
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Evidence Hub",
+          "dashboard_name": "Evidence Hub Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Evidence Hub",
-        "dashboard_name": "Evidence Hub Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

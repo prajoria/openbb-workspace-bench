@@ -4,65 +4,67 @@
   "family": "update",
   "difficulty": "hard",
   "prompt": "On this dashboard, repair two getting-started series: the first widget should show GM (not VWAGY), and the second should show F (not TM). Repair both existing widgets and add a note mentioning GM, F, and the word repaired.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Double Repair Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "company_performance",
+            "data_args": {
+              "company": "VWAGY",
+              "year": "2024"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_double_rates_switch_widget_001"
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "company_performance",
+            "data_args": {
+              "company": "TM",
+              "year": "2024"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_double_rates_switch_widget_002"
+          }
+        ],
+        "dashboard_id": "usage_double_rates_switch_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Double Repair Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "company_performance",
-          "data_args": {
-            "company": "VWAGY",
-            "year": "2024"
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_double_rates_switch_widget_001"
-        },
-        {
-          "origin": "Getting Started",
-          "widget_id": "company_performance",
-          "data_args": {
-            "company": "TM",
-            "year": "2024"
-          },
-          "layout": {
-            "x": 20,
-            "y": 0,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_double_rates_switch_widget_002"
-        }
-      ],
-      "dashboard_id": "usage_double_rates_switch_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Getting Started",
@@ -119,43 +121,43 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_uuid": "usage_double_rates_switch_widget_001",
-        "data_args": {
-          "company": "GM",
-          "year": "2024"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "usage_double_rates_switch_widget_001",
+          "data_args": {
+            "company": "GM",
+            "year": "2024"
+          }
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "usage_double_rates_switch_widget_002",
+          "data_args": {
+            "company": "F",
+            "year": "2024"
+          }
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Repair Note",
+          "data": "Repaired: GM, F, repaired."
         }
       }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_uuid": "usage_double_rates_switch_widget_002",
-        "data_args": {
-          "company": "F",
-          "year": "2024"
-        }
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Repair Note",
-        "data": "Repaired: GM, F, repaired."
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

@@ -4,33 +4,35 @@
   "family": "navigate",
   "difficulty": "easy",
   "prompt": "Change the active dashboard's name to Fund Close Control; also rename the Overview tab to Close Checklist.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Ops Board",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "dashboard_id": "usage_rename_both_ops_close_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Ops Board",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "dashboard_id": "usage_rename_both_ops_close_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace"
-  ],
-  "success": {
+  "eval": {
     "required_dashboard_name_contains": "Fund Close Control",
     "required_tab_names": [
       "Close Checklist"
@@ -55,28 +57,28 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_dashboard",
-      "args": {
-        "operation": "update",
-        "dashboard_id": "usage_rename_both_ops_close_dashboard_001",
-        "name": "Fund Close Control"
-      }
     },
-    {
-      "tool": "manage_navigation_bar",
-      "args": {
-        "operation": "rename_tabs",
-        "rename_map": {
-          "overview": "Close Checklist"
+    "reference": [
+      {
+        "tool": "manage_dashboard",
+        "args": {
+          "operation": "update",
+          "dashboard_id": "usage_rename_both_ops_close_dashboard_001",
+          "name": "Fund Close Control"
+        }
+      },
+      {
+        "tool": "manage_navigation_bar",
+        "args": {
+          "operation": "rename_tabs",
+          "rename_map": {
+            "overview": "Close Checklist"
+          }
         }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

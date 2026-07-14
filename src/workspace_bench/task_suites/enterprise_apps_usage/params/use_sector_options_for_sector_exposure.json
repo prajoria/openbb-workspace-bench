@@ -4,32 +4,34 @@
   "family": "params",
   "difficulty": "easy",
   "prompt": "Call get_params_options for Widget Examples/live_grid_example parameter sector, choose AAPL, and create that widget with sector=AAPL.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "widget-examples"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "widget-examples"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Parameter Options",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "dashboard_id": "usage_use_sector_options_for_sector_exposure_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "get_params_options",
+      "create_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Parameter Options",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "dashboard_id": "usage_use_sector_options_for_sector_exposure_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "get_params_options",
-    "create_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Widget Examples",
@@ -62,33 +64,33 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "get_params_options",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "live_grid_example",
-        "param_name": "symbol"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "live_grid_example",
-        "data_args": {
-          "symbol": "AAPL"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "live_grid_example",
+          "param_name": "symbol"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "live_grid_example",
+          "data_args": {
+            "symbol": "AAPL"
+          }
         }
       }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

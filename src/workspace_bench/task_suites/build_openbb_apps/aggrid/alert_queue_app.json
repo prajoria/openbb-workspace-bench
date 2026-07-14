@@ -9,31 +9,33 @@
     "severity",
     "alert_id"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2
@@ -102,117 +104,117 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Surveillance Data",
-        "url": "http://localhost:7807",
-        "widgets_json": {
-          "alert_queue": {
-            "name": "Alert Queue",
-            "description": "Open surveillance alerts.",
-            "endpoint": "/alert-queue",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "severity",
-                "type": "text",
-                "label": "Severity",
-                "value": "high",
-                "options": [
-                  {
-                    "label": "High",
-                    "value": "high"
-                  },
-                  {
-                    "label": "Medium",
-                    "value": "medium"
-                  },
-                  {
-                    "label": "Low",
-                    "value": "low"
-                  }
-                ]
-              }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "alert_id",
-                    "headerName": "Alert",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "desk",
-                    "headerName": "Desk",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "severity",
-                    "headerName": "Severity",
-                    "cellDataType": "text",
-                    "renderFn": "titleCase"
-                  },
-                  {
-                    "field": "age_days",
-                    "headerName": "Age (d)",
-                    "cellDataType": "number",
-                    "formatterFn": "int"
-                  }
-                ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Surveillance Data",
+          "url": "http://localhost:7807",
+          "widgets_json": {
+            "alert_queue": {
+              "name": "Alert Queue",
+              "description": "Open surveillance alerts.",
+              "endpoint": "/alert-queue",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "severity",
+                  "type": "text",
+                  "label": "Severity",
+                  "value": "high",
+                  "options": [
+                    {
+                      "label": "High",
+                      "value": "high"
+                    },
+                    {
+                      "label": "Medium",
+                      "value": "medium"
+                    },
+                    {
+                      "label": "Low",
+                      "value": "low"
+                    }
+                  ]
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "alert_id",
+                      "headerName": "Alert",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "desk",
+                      "headerName": "Desk",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "severity",
+                      "headerName": "Severity",
+                      "cellDataType": "text",
+                      "renderFn": "titleCase"
+                    },
+                    {
+                      "field": "age_days",
+                      "headerName": "Age (d)",
+                      "cellDataType": "number",
+                      "formatterFn": "int"
+                    }
+                  ]
+                }
               }
             }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Surveillance Desk",
-            "description": "Open surveillance alerts.",
-            "tabs": {
-              "alerts": {
-                "id": "alerts",
-                "name": "Alerts",
-                "layout": [
-                  {
-                    "i": "alert_queue",
-                    "x": 0,
-                    "y": 0,
-                    "w": 24,
-                    "h": 10
-                  }
-                ]
-              }
-            },
-            "groups": []
-          }
-        ]
+          },
+          "apps_json": [
+            {
+              "name": "Surveillance Desk",
+              "description": "Open surveillance alerts.",
+              "tabs": {
+                "alerts": {
+                  "id": "alerts",
+                  "name": "Alerts",
+                  "layout": [
+                    {
+                      "i": "alert_queue",
+                      "x": 0,
+                      "y": 0,
+                      "w": 24,
+                      "h": 10
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Surveillance Desk",
+          "dashboard_name": "Surveillance Desk Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Surveillance Desk",
-        "dashboard_name": "Surveillance Desk Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

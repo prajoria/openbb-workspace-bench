@@ -47,11 +47,12 @@ from _assembly import (
     slim_task_payload,
     snap,
 )
+from workspace_bench.core.models import task_payload_to_eval_schema
 from workspace_bench.core.suite_checks import task_payload_digest
 from workspace_bench.workspace.fixtures import get_fixture_backend
 
 REPO = Path(__file__).resolve().parents[2]
-STARK = json.loads((REPO / "src/workspace_bench/workspace/data/stark_enterprise.json").read_text())
+STARK = json.loads((REPO / "src/workspace_bench/data/backends/stark_enterprise_x.json").read_text())
 BUNDLED_OUT_DIR = REPO / "src/workspace_bench/task_suites/enterprise_apps_usage"
 OUT_DIRS = (BUNDLED_OUT_DIR,)
 
@@ -5649,12 +5650,12 @@ def main() -> None:
             family_dir = directory / task["family"]
             family_dir.mkdir(parents=True, exist_ok=True)
             (family_dir / f"{task['id']}.json").write_text(
-                json.dumps(payload, indent=2) + "\n")
+                json.dumps(task_payload_to_eval_schema(payload), indent=2) + "\n")
 
     manifest = {
         "suite_id": "enterprise-apps-usage",
         "visibility": "public",
-        "workspace_baseline": "default-v1",
+        "workspace_baseline": "all-stark-enterprise-apps",
         "content_sha256": task_payload_digest(shipped),
         "description": (
             "Operating the workspace: 15 MCP-surface families and 300 tasks "

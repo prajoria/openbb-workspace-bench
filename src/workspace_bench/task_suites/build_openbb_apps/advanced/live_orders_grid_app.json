@@ -5,31 +5,33 @@
   "specification_level": "explicit",
   "difficulty": "medium",
   "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Execution Desk Data' at http://localhost:7806. Implement the live or advanced interaction correctly. The experience needs Live Orders Grid (`live_orders_grid`, live_grid) using `/live-orders` for streaming order blotter over websocket; stream updates from `live-orders-ws`; stream row id `order_id`; columns: order_id (text), px (number, showCellChange). Organize it as app 'Live Order Tape' with tabs Orders (live_orders_grid). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_widget_defs": [
       {
         "backend_name": "Execution Desk Data",
@@ -120,89 +122,89 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Execution Desk Data",
-        "url": "http://localhost:7806",
-        "widgets_json": {
-          "live_orders_grid": {
-            "name": "Live Orders Grid",
-            "description": "Streaming order blotter over websocket.",
-            "endpoint": "/live-orders",
-            "type": "live_grid",
-            "wsEndpoint": "live-orders-ws",
-            "gridData": {
-              "w": 24,
-              "h": 12
-            },
-            "data": {
-              "wsRowIdColumn": "order_id",
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "order_id",
-                    "headerName": "Order",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "px",
-                    "headerName": "Price",
-                    "cellDataType": "number",
-                    "renderFn": "showCellChange",
-                    "renderFnParams": {
-                      "colorValueKey": "px_change"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Execution Desk Data",
+          "url": "http://localhost:7806",
+          "widgets_json": {
+            "live_orders_grid": {
+              "name": "Live Orders Grid",
+              "description": "Streaming order blotter over websocket.",
+              "endpoint": "/live-orders",
+              "type": "live_grid",
+              "wsEndpoint": "live-orders-ws",
+              "gridData": {
+                "w": 24,
+                "h": 12
+              },
+              "data": {
+                "wsRowIdColumn": "order_id",
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "order_id",
+                      "headerName": "Order",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "px",
+                      "headerName": "Price",
+                      "cellDataType": "number",
+                      "renderFn": "showCellChange",
+                      "renderFnParams": {
+                        "colorValueKey": "px_change"
+                      }
                     }
-                  }
-                ]
+                  ]
+                }
               }
             }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Live Order Tape",
-            "description": "Streaming orders for the execution desk.",
-            "tabs": {
-              "orders": {
-                "id": "orders",
-                "name": "Orders",
-                "layout": [
-                  {
-                    "i": "live_orders_grid",
-                    "x": 0,
-                    "y": 0,
-                    "w": 24,
-                    "h": 12
-                  }
-                ]
-              }
-            },
-            "groups": []
-          }
-        ]
+          },
+          "apps_json": [
+            {
+              "name": "Live Order Tape",
+              "description": "Streaming orders for the execution desk.",
+              "tabs": {
+                "orders": {
+                  "id": "orders",
+                  "name": "Orders",
+                  "layout": [
+                    {
+                      "i": "live_orders_grid",
+                      "x": 0,
+                      "y": 0,
+                      "w": 24,
+                      "h": 12
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Live Order Tape",
+          "dashboard_name": "Live Order Tape Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Live Order Tape",
-        "dashboard_name": "Live Order Tape Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

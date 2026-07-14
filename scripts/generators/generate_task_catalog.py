@@ -11,6 +11,8 @@ import json
 import re
 from pathlib import Path
 
+from workspace_bench.core.models import task_payload_conditions
+
 REPO = Path(__file__).resolve().parents[2]
 SMOKE_DIR = REPO / "src/workspace_bench/task_suites/smoke"
 APPS_DEFAULT_DIR = REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
@@ -38,13 +40,44 @@ def fmt_args(args: dict) -> str:
     return json.dumps(args, separators=(", ", ": "))
 
 
+def evaluation_of(task: dict) -> dict:
+    """Return a task's evaluation fields from either supported schema."""
+    evaluation = task.get("eval")
+    if isinstance(evaluation, dict):
+        return evaluation
+    return {
+        **task.get("success", {}),
+        "reference": task.get("oracle_tool_calls", []),
+        "limits": task.get("limits", {}),
+    }
+
+
 def describe_initial_state(task: dict) -> list[str]:
     lines = []
-    fixtures = [b.get("name") for b in task.get("fixtures", {}).get("backends", [])]
+    conditions = task_payload_conditions(task)
+    fixtures = [
+        backend.get("name")
+        for backend in conditions.get("fixtures", {}).get("backends", [])
+    ]
     if fixtures:
         lines.append(f"Fixture backends: {', '.join(fixtures)}")
-    dash = task.get("initial_state", {}).get("dashboard")
+    dash = conditions.get("initial_state", {}).get("dashboard")
     if not dash:
+        baseline = conditions.get("workspace_baseline")
+        backends = conditions.get("workspace_backends", [])
+        selected = conditions.get("default_selected_dashboard")
+        if baseline is not None or backends or selected:
+            parts = []
+            if baseline:
+                parts.append(f"baseline `{baseline}`")
+            elif baseline == "":
+                parts.append("bare workspace")
+            if backends:
+                parts.append("backends " + ", ".join(f"`{name}`" for name in backends))
+            if selected:
+                parts.append(f'active dashboard "{selected}"')
+            lines.append("Initial workspace: " + "; ".join(parts))
+            return lines
         lines.append("Initial workspace: empty (no seeded dashboard)")
         return lines
     tabs = dash.get("tabs", [])
@@ -172,17 +205,20 @@ def render_task(task: dict, noop: dict[str, str]) -> str:
     lines.append("")
     for line in describe_initial_state(task):
         lines.append(f"- {line}")
-    tools = task.get("allowed_tools", [])
+    tools = task_payload_conditions(task).get("allowed_tools", [])
     lines.append(f"- Allowed tools ({len(tools)}): " + ", ".join(f"`{t}`" for t in tools))
-    max_turns = task.get("limits", {}).get("max_turns")
-    oracle_steps = len(task.get("oracle_tool_calls", []))
+    evaluation = evaluation_of(task)
+    max_turns = evaluation.get("limits", {}).get("max_turns")
+    oracle_steps = len(evaluation.get("reference_trace") or evaluation.get("reference") or [])
     lines.append(f"- Turn budget: {max_turns} · oracle reference trace: {oracle_steps} calls")
     lines.append("")
     lines.append(
         "**Passes only if all of these checks hold** (each failure emits the issue code shown):"
     )
     lines.append("")
-    for check in describe_success(task.get("success", {})):
+    for check in describe_success(
+        {key: value for key, value in evaluation.items() if key not in ("reference", "reference_trace")}
+    ):
         lines.append(f"- {check}")
     lines.append("")
     return "\n".join(lines)
@@ -194,7 +230,7 @@ def main() -> None:
         (
             "smoke",
             sorted(
-                (p for p in SMOKE_DIR.rglob("*.json") if p.name != "task_suite.json"),
+                (p for p in SMOKE_DIR.rglob("*.json") if p.parent != SMOKE_DIR),
                 key=lambda path: path.name,
             ),
         ),
@@ -204,7 +240,7 @@ def main() -> None:
                 (
                     p
                     for p in APPS_DEFAULT_DIR.rglob("*.json")
-                    if p.name != "task_suite.json"
+                    if p.parent != APPS_DEFAULT_DIR
                 ),
                 key=lambda path: path.name,
             ),
@@ -212,14 +248,14 @@ def main() -> None:
         (
             "enterprise-apps-usage",
             sorted(
-                (p for p in PACK_DIR.rglob("*.json") if p.name != "task_suite.json"),
+                (p for p in PACK_DIR.rglob("*.json") if p.parent != PACK_DIR),
                 key=lambda path: path.name,
             ),
         ),
         (
             "build-openbb-apps",
             sorted(
-                (p for p in BUILD_PACK_DIR.rglob("*.json") if p.name != "task_suite.json"),
+                (p for p in BUILD_PACK_DIR.rglob("*.json") if p.parent != BUILD_PACK_DIR),
                 key=lambda path: path.name,
             ),
         ),
@@ -257,7 +293,18 @@ def main() -> None:
 
     total = 0
     for suite_name, files in packs:
-        tasks = [json.loads(f.read_text()) for f in files]
+        tasks = []
+        for f in files:
+            task = json.loads(f.read_text())
+            # Slim payloads omit family (the directory) and labels the suite
+            # manifest defaults supply; hydrate them the way the loader does.
+            task.setdefault("family", f.parent.name)
+            manifest_path = f.parent.parent / "task_suite.json"
+            if manifest_path.is_file():
+                defaults = json.loads(manifest_path.read_text()).get("task_defaults") or {}
+                for key, value in defaults.items():
+                    task.setdefault(key, value)
+            tasks.append(task)
         total += len(tasks)
         out.append(f"## Suite: {suite_name} ({len(tasks)} tasks)")
         out.append("")

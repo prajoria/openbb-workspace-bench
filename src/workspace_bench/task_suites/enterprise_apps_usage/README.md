@@ -8,7 +8,7 @@ A pass means the agent can operate a Workspace through the MCP surface: inspect 
 
 ## Workspace baseline
 
-The suite runs on the default Workspace (`default-v1` in the manifest): Home plus all 23 enterprise apps instantiated and the stark-enterprise, daloopa, getting-started, and widget-examples backends connected, with each task's fixtures seeded on top. Real workspaces are never empty, so every episode starts in a realistic, crowded one; certification (oracle 300/300 pass, no-op 300/300 fail) holds on exactly this state.
+The suite runs on the default Workspace (`all-stark-enterprise-apps` in the manifest): Home plus all 23 enterprise apps instantiated and the stark-enterprise, daloopa, getting-started, and widget-examples backends connected, with each task's fixtures seeded on top. Real workspaces are never empty, so every episode starts in a realistic, crowded one; certification (oracle 300/300 pass, no-op 300/300 fail) holds on exactly this state.
 
 ```bash
 uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 300

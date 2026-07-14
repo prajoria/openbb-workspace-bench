@@ -4,33 +4,35 @@
   "family": "delegate",
   "difficulty": "medium",
   "prompt": "After calling get_skill_content with slug finance-tearsheet to understand the workflow, call assign_tasks_to_agents with two task_requests using ids valuation-analyst and catalyst-analyst covering that workflow, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Delegation Board",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "dashboard_id": "usage_skill_tearsheet_skill_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "get_skill_content",
+      "assign_tasks_to_agents",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Delegation Board",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "dashboard_id": "usage_skill_tearsheet_skill_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "get_skill_content",
-    "assign_tasks_to_agents",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_tool_calls": [
       {
         "tool": "get_skill_content",
@@ -74,48 +76,48 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
+    },
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-tearsheet"
+        }
+      },
+      {
+        "tool": "assign_tasks_to_agents",
+        "args": {
+          "task_requests": [
+            {
+              "id": "valuation-analyst",
+              "description": "Build the valuation section of the tearsheet.",
+              "assigned_holder_url": "workspace://agents/valuation",
+              "assigned_agent_id": "valuation-agent"
+            },
+            {
+              "id": "catalyst-analyst",
+              "description": "List catalysts and risks for the tearsheet.",
+              "assigned_holder_url": "workspace://agents/catalyst",
+              "assigned_agent_id": "catalyst-agent"
+            }
+          ]
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Delegation Note",
+          "data": "valuation analyst; catalyst analyst; tearsheet."
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 7
     }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "get_skill_content",
-      "args": {
-        "slug": "finance-tearsheet"
-      }
-    },
-    {
-      "tool": "assign_tasks_to_agents",
-      "args": {
-        "task_requests": [
-          {
-            "id": "valuation-analyst",
-            "description": "Build the valuation section of the tearsheet.",
-            "assigned_holder_url": "workspace://agents/valuation",
-            "assigned_agent_id": "valuation-agent"
-          },
-          {
-            "id": "catalyst-analyst",
-            "description": "List catalysts and risks for the tearsheet.",
-            "assigned_holder_url": "workspace://agents/catalyst",
-            "assigned_agent_id": "catalyst-agent"
-          }
-        ]
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Delegation Note",
-        "data": "valuation analyst; catalyst analyst; tearsheet."
-      }
-    }
-  ],
-  "limits": {
-    "max_turns": 7
   }
 }

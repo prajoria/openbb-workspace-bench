@@ -4,36 +4,38 @@
   "family": "skills",
   "difficulty": "hard",
   "prompt": "Call get_skill_content with slug finance-tearsheet. Following that workflow, add the Table widget with grouping by cell click widget for AAPL, read its data, and add a note that cites the exact key value from the data. Omit dashboard_id when adding the note.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Skill Review",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "dashboard_id": "usage_grounded_finance_tearsheet_for_aapl_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "get_skill_content",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget",
+      "get_widget_data",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Skill Review",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "dashboard_id": "usage_grounded_finance_tearsheet_for_aapl_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "get_skill_content",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget",
-    "get_widget_data",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_tool_calls": [
       {
         "tool": "get_skill_content",
@@ -91,62 +93,62 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "get_skill_content",
-      "args": {
-        "slug": "finance-tearsheet"
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Getting Started"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "table_widget_with_grouping_by_cell_click"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "table_widget_with_grouping_by_cell_click",
-        "data_args": {
-          "symbol": "AAPL"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-tearsheet"
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
+          "data_args": {
+            "symbol": "AAPL"
+          }
+        }
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
+          "data_args": {
+            "symbol": "AAPL"
+          }
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Skill Note",
+          "data": "AAPL tearsheet: price 150.25; valuation next."
         }
       }
-    },
-    {
-      "tool": "get_widget_data",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "table_widget_with_grouping_by_cell_click",
-        "data_args": {
-          "symbol": "AAPL"
-        }
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Skill Note",
-        "data": "AAPL tearsheet: price 150.25; valuation next."
-      }
+    ],
+    "limits": {
+      "max_turns": 9
     }
-  ],
-  "limits": {
-    "max_turns": 9
   }
 }

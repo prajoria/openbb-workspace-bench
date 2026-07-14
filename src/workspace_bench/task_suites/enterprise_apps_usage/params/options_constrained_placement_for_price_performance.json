@@ -4,35 +4,37 @@
   "family": "params",
   "difficulty": "medium",
   "prompt": "Choose AAPL for symbol with get_params_options, fetch the widget schema, create Getting Started/table_widget_with_grouping_by_cell_click, and place it at x=0, y=0, width 20, height 10.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Parameter Placement",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "dashboard_id": "usage_options_constrained_placement_for_price_performance_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "create_widget",
+      "update_widget_layout"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Parameter Placement",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "dashboard_id": "usage_options_constrained_placement_for_price_performance_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "create_widget",
-    "update_widget_layout"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Getting Started",
@@ -72,56 +74,56 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Getting Started"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "table_widget_with_grouping_by_cell_click"
-      }
-    },
-    {
-      "tool": "get_params_options",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "table_widget_with_grouping_by_cell_click",
-        "param_name": "symbol"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "table_widget_with_grouping_by_cell_click",
-        "data_args": {
-          "symbol": "AAPL"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click"
+        }
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
+          "param_name": "symbol"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "table_widget_with_grouping_by_cell_click",
+          "data_args": {
+            "symbol": "AAPL"
+          }
+        }
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "table_widget_with_grouping_by_cell_click",
+          "x": 0,
+          "y": 0,
+          "w": 20,
+          "h": 10
         }
       }
-    },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_id": "table_widget_with_grouping_by_cell_click",
-        "x": 0,
-        "y": 0,
-        "w": 20,
-        "h": 10
-      }
+    ],
+    "limits": {
+      "max_turns": 9
     }
-  ],
-  "limits": {
-    "max_turns": 9
   }
 }

@@ -4,124 +4,126 @@
   "family": "extend",
   "difficulty": "hard",
   "prompt": "Build a vendor-operations manager a dependable vendor service levels workspace. The workspace must cover vendor SLA state with breach flags. The workspace must cover count of open SLA breaches. The workspace must cover vendor incident notices feed. The workspace must cover runbook for SLA escalations. Analysts need to inspect vendor, status, latency milliseconds, breach. Preserve all working content while correcting the requested workflow. Decide how best to organize the experience and preserve unrelated work.",
-  "fixtures": {},
-  "initial_state": {
-    "custom_backends": [
-      {
-        "name": "Vendor SLA Data",
-        "url": "http://localhost:7804",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "vendor_sla_table": {
-            "name": "Vendor SLA Status",
-            "description": "Vendor SLA state with breach flags.",
-            "endpoint": "/vendor-sla",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
+  "setup": {
+    "fixtures": {},
+    "initial_state": {
+      "custom_backends": [
+        {
+          "name": "Vendor SLA Data",
+          "url": "http://localhost:7804",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "vendor_sla_table": {
+              "name": "Vendor SLA Status",
+              "description": "Vendor SLA state with breach flags.",
+              "endpoint": "/vendor-sla",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "status",
+                  "type": "text",
+                  "label": "Status",
+                  "value": "Open",
+                  "options": [
+                    {
+                      "label": "Open",
+                      "value": "Open"
+                    },
+                    {
+                      "label": "Escalated",
+                      "value": "Escalated"
+                    },
+                    {
+                      "label": "Resolved",
+                      "value": "Resolved"
+                    }
+                  ]
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "vendor",
+                      "headerName": "Vendor",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "status",
+                      "headerName": "Status",
+                      "cellDataType": "text",
+                      "renderFn": "titleCase"
+                    },
+                    {
+                      "field": "latency_ms",
+                      "headerName": "Latency (ms)",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "breach",
+                      "headerName": "Breach",
+                      "cellDataType": "boolean"
+                    }
+                  ]
+                }
+              },
+              "staleTime": 500
             },
-            "params": [
-              {
-                "paramName": "status",
-                "type": "text",
-                "label": "Status",
-                "value": "Open",
-                "options": [
-                  {
-                    "label": "Open",
-                    "value": "Open"
-                  },
-                  {
-                    "label": "Escalated",
-                    "value": "Escalated"
-                  },
-                  {
-                    "label": "Resolved",
-                    "value": "Resolved"
-                  }
-                ]
-              }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "vendor",
-                    "headerName": "Vendor",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "status",
-                    "headerName": "Status",
-                    "cellDataType": "text",
-                    "renderFn": "titleCase"
-                  },
-                  {
-                    "field": "latency_ms",
-                    "headerName": "Latency (ms)",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "breach",
-                    "headerName": "Breach",
-                    "cellDataType": "boolean"
-                  }
-                ]
+            "breach_metric": {
+              "name": "Open Breaches",
+              "description": "Count of open SLA breaches.",
+              "endpoint": "/breach-count",
+              "type": "metric",
+              "gridData": {
+                "w": 99,
+                "h": 4
               }
             },
-            "staleTime": 500
-          },
-          "breach_metric": {
-            "name": "Open Breaches",
-            "description": "Count of open SLA breaches.",
-            "endpoint": "/breach-count",
-            "type": "metric",
-            "gridData": {
-              "w": 99,
-              "h": 4
+            "sla_newsfeed": {
+              "name": "Vendor Notices",
+              "description": "Vendor incident notices feed.",
+              "endpoint": "/vendor-notices",
+              "type": "feedz",
+              "gridData": {
+                "w": 12,
+                "h": 10
+              }
             }
           },
-          "sla_newsfeed": {
-            "name": "Vendor Notices",
-            "description": "Vendor incident notices feed.",
-            "endpoint": "/vendor-notices",
-            "type": "feedz",
-            "gridData": {
-              "w": 12,
-              "h": 10
-            }
-          }
-        },
-        "warnings": [
-          "workspace validation failed: 3 entries in the backend's served payload need fixing"
-        ]
-      }
+          "warnings": [
+            "workspace validation failed: 3 entries in the backend's served payload need fixing"
+          ]
+        }
+      ]
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
     ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 2,
       "max_repeated_snapshots": 2,
@@ -238,143 +240,143 @@
         "path": "staleTime",
         "expected": 600000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "refresh",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "vendor_sla_table": {
-            "name": "Vendor SLA Status",
-            "description": "Vendor SLA state with breach flags.",
-            "endpoint": "/vendor-sla",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "vendor_sla_table": {
+              "name": "Vendor SLA Status",
+              "description": "Vendor SLA state with breach flags.",
+              "endpoint": "/vendor-sla",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "status",
+                  "type": "text",
+                  "label": "Status",
+                  "value": "Open",
+                  "options": [
+                    {
+                      "label": "Open",
+                      "value": "Open"
+                    },
+                    {
+                      "label": "Escalated",
+                      "value": "Escalated"
+                    },
+                    {
+                      "label": "Resolved",
+                      "value": "Resolved"
+                    }
+                  ]
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "vendor",
+                      "headerName": "Vendor",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "status",
+                      "headerName": "Status",
+                      "cellDataType": "text",
+                      "renderFn": "titleCase"
+                    },
+                    {
+                      "field": "latency_ms",
+                      "headerName": "Latency (ms)",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "breach",
+                      "headerName": "Breach",
+                      "cellDataType": "boolean"
+                    }
+                  ]
+                }
+              },
+              "staleTime": 600000
             },
-            "params": [
-              {
-                "paramName": "status",
-                "type": "text",
-                "label": "Status",
-                "value": "Open",
-                "options": [
-                  {
-                    "label": "Open",
-                    "value": "Open"
-                  },
-                  {
-                    "label": "Escalated",
-                    "value": "Escalated"
-                  },
-                  {
-                    "label": "Resolved",
-                    "value": "Resolved"
-                  }
-                ]
+            "breach_metric": {
+              "name": "Open Breaches",
+              "description": "Count of open SLA breaches.",
+              "endpoint": "/breach-count",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "data": {
+                "valueField": "breach_metric_value"
               }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "vendor",
-                    "headerName": "Vendor",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "status",
-                    "headerName": "Status",
-                    "cellDataType": "text",
-                    "renderFn": "titleCase"
-                  },
-                  {
-                    "field": "latency_ms",
-                    "headerName": "Latency (ms)",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "breach",
-                    "headerName": "Breach",
-                    "cellDataType": "boolean"
-                  }
-                ]
+            },
+            "sla_newsfeed": {
+              "name": "Vendor Notices",
+              "description": "Vendor incident notices feed.",
+              "endpoint": "/vendor-notices",
+              "type": "newsfeed",
+              "gridData": {
+                "w": 12,
+                "h": 10
+              },
+              "data": {
+                "valueField": "sla_newsfeed_value"
               }
             },
-            "staleTime": 600000
-          },
-          "breach_metric": {
-            "name": "Open Breaches",
-            "description": "Count of open SLA breaches.",
-            "endpoint": "/breach-count",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "data": {
-              "valueField": "breach_metric_value"
-            }
-          },
-          "sla_newsfeed": {
-            "name": "Vendor Notices",
-            "description": "Vendor incident notices feed.",
-            "endpoint": "/vendor-notices",
-            "type": "newsfeed",
-            "gridData": {
-              "w": 12,
-              "h": 10
-            },
-            "data": {
-              "valueField": "sla_newsfeed_value"
-            }
-          },
-          "sla_runbook": {
-            "name": "SLA Runbook",
-            "description": "Runbook for SLA escalations.",
-            "endpoint": "/sla-runbook",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "data": {
-              "valueField": "sla_runbook_value"
+            "sla_runbook": {
+              "name": "SLA Runbook",
+              "description": "Runbook for SLA escalations.",
+              "endpoint": "/sla-runbook",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "data": {
+                "valueField": "sla_runbook_value"
+              }
             }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Vendor SLA Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Vendor SLA Data",
+          "widget_id": "vendor_sla_table"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Vendor SLA Data",
+          "widget_id": "vendor_sla_table"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Vendor SLA Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Vendor SLA Data",
-        "widget_id": "vendor_sla_table"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Vendor SLA Data",
-        "widget_id": "vendor_sla_table"
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

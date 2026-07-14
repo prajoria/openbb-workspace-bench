@@ -11,31 +11,33 @@
     "MSFT",
     "ticker"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -161,162 +163,162 @@
         "path": "staleTime",
         "expected": 900000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Earnings Prep Data",
-        "url": "http://localhost:7805",
-        "widgets_json": {
-          "beat_miss_grid": {
-            "name": "Beat Miss Grid",
-            "description": "Beat/miss by ticker this season.",
-            "endpoint": "/beat-miss",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "ticker",
-                    "headerName": "Ticker",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "eps_surprise_pct",
-                    "headerName": "Eps Surprise Pct",
-                    "cellDataType": "number",
-                    "formatterFn": "percent"
-                  },
-                  {
-                    "field": "revenue_beat",
-                    "headerName": "Revenue Beat",
-                    "cellDataType": "boolean"
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "ticker",
-                "type": "text",
-                "label": "Ticker",
-                "value": "AAPL",
-                "description": "Ticker in focus."
-              }
-            ],
-            "staleTime": 900000
-          },
-          "surprise_metric": {
-            "name": "Avg Surprise",
-            "description": "Average EPS surprise last 4 quarters.",
-            "endpoint": "/avg-surprise",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "staleTime": 900000,
-            "data": {
-              "valueField": "surprise_metric_value"
-            }
-          },
-          "earnings_note": {
-            "name": "Earnings Preview",
-            "description": "Preview note for the earnings call.",
-            "endpoint": "/earnings-preview",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "staleTime": 900000,
-            "data": {
-              "valueField": "earnings_note_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Season Tracker",
-            "description": "Beats, misses, surprises.",
-            "tabs": {
-              "season": {
-                "id": "season",
-                "name": "Season",
-                "layout": [
-                  {
-                    "i": "beat_miss_grid",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Earnings Prep Data",
+          "url": "http://localhost:7805",
+          "widgets_json": {
+            "beat_miss_grid": {
+              "name": "Beat Miss Grid",
+              "description": "Beat/miss by ticker this season.",
+              "endpoint": "/beat-miss",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "signals": {
-                "id": "signals",
-                "name": "Signals",
-                "layout": [
-                  {
-                    "i": "surprise_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 6
-                  }
-                ]
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "ticker",
+                      "headerName": "Ticker",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "eps_surprise_pct",
+                      "headerName": "Eps Surprise Pct",
+                      "cellDataType": "number",
+                      "formatterFn": "percent"
+                    },
+                    {
+                      "field": "revenue_beat",
+                      "headerName": "Revenue Beat",
+                      "cellDataType": "boolean"
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "ticker",
+                  "type": "text",
+                  "label": "Ticker",
+                  "value": "AAPL",
+                  "description": "Ticker in focus."
+                }
+              ],
+              "staleTime": 900000
+            },
+            "surprise_metric": {
+              "name": "Avg Surprise",
+              "description": "Average EPS surprise last 4 quarters.",
+              "endpoint": "/avg-surprise",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "staleTime": 900000,
+              "data": {
+                "valueField": "surprise_metric_value"
               }
             },
-            "groups": []
+            "earnings_note": {
+              "name": "Earnings Preview",
+              "description": "Preview note for the earnings call.",
+              "endpoint": "/earnings-preview",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "staleTime": 900000,
+              "data": {
+                "valueField": "earnings_note_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Season Tracker",
+              "description": "Beats, misses, surprises.",
+              "tabs": {
+                "season": {
+                  "id": "season",
+                  "name": "Season",
+                  "layout": [
+                    {
+                      "i": "beat_miss_grid",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "signals": {
+                  "id": "signals",
+                  "name": "Signals",
+                  "layout": [
+                    {
+                      "i": "surprise_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 6
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Season Tracker",
+          "dashboard_name": "Season Tracker Live",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "beat_miss_grid",
+          "data_args": {
+            "ticker": "MSFT"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Season Tracker",
-        "dashboard_name": "Season Tracker Live",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "beat_miss_grid",
-        "data_args": {
-          "ticker": "MSFT"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Season Tracker",
+          "data": "Season Tracker is live from Earnings Prep Data: season on tap. Configured ticker=MSFT."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Season Tracker",
-        "data": "Season Tracker is live from Earnings Prep Data: season on tap. Configured ticker=MSFT."
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

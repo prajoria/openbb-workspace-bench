@@ -11,31 +11,33 @@
     "MSFT",
     "ticker"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -165,183 +167,183 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Earnings Prep Data",
-        "url": "http://localhost:7805",
-        "widgets_json": {
-          "estimate_revisions": {
-            "name": "Estimate Revisions",
-            "description": "Street estimate revisions by quarter.",
-            "endpoint": "/estimate-revisions",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
+    },
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Earnings Prep Data",
+          "url": "http://localhost:7805",
+          "widgets_json": {
+            "estimate_revisions": {
+              "name": "Estimate Revisions",
+              "description": "Street estimate revisions by quarter.",
+              "endpoint": "/estimate-revisions",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "quarter",
+                      "headerName": "Quarter",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "eps_estimate",
+                      "headerName": "EPS Est",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "revenue_estimate_b",
+                      "headerName": "Revenue Est ($B)",
+                      "cellDataType": "number"
+                    }
+                  ]
+                }
               }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "quarter",
-                    "headerName": "Quarter",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "eps_estimate",
-                    "headerName": "EPS Est",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "revenue_estimate_b",
-                    "headerName": "Revenue Est ($B)",
-                    "cellDataType": "number"
-                  }
-                ]
+            },
+            "earnings_chart": {
+              "name": "EPS History",
+              "description": "Plotly EPS beat/miss history.",
+              "endpoint": "/eps-history",
+              "type": "chart",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "raw": true,
+              "data": {
+                "valueField": "earnings_chart_value"
+              }
+            },
+            "earnings_note": {
+              "name": "Earnings Preview",
+              "description": "Preview note for the earnings call.",
+              "endpoint": "/earnings-preview",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "data": {
+                "valueField": "earnings_note_value"
               }
             }
           },
-          "earnings_chart": {
-            "name": "EPS History",
-            "description": "Plotly EPS beat/miss history.",
-            "endpoint": "/eps-history",
-            "type": "chart",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "raw": true,
-            "data": {
-              "valueField": "earnings_chart_value"
-            }
-          },
-          "earnings_note": {
-            "name": "Earnings Preview",
-            "description": "Preview note for the earnings call.",
-            "endpoint": "/earnings-preview",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "data": {
-              "valueField": "earnings_note_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Earnings Sync Live",
-            "description": "Live grouped revisions and EPS history.",
-            "tabs": {
-              "review": {
-                "id": "review",
-                "name": "Review",
-                "layout": [
-                  {
-                    "i": "estimate_revisions",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9,
-                    "state": {
-                      "params": {
-                        "symbol": "NVDA"
+          "apps_json": [
+            {
+              "name": "Earnings Sync Live",
+              "description": "Live grouped revisions and EPS history.",
+              "tabs": {
+                "review": {
+                  "id": "review",
+                  "name": "Review",
+                  "layout": [
+                    {
+                      "i": "estimate_revisions",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9,
+                      "state": {
+                        "params": {
+                          "symbol": "NVDA"
+                        }
                       }
                     }
-                  }
-                ]
+                  ]
+                },
+                "linked": {
+                  "id": "linked",
+                  "name": "Linked",
+                  "layout": [
+                    {
+                      "i": "earnings_chart",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 9
+                    }
+                  ]
+                }
               },
-              "linked": {
-                "id": "linked",
-                "name": "Linked",
-                "layout": [
-                  {
-                    "i": "earnings_chart",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 9
-                  }
-                ]
-              }
-            },
-            "groups": [
-              {
-                "name": "Live Symbol Sync",
-                "type": "param",
-                "paramName": "symbol",
-                "widgetIds": [
-                  "estimate_revisions",
-                  "earnings_chart"
-                ]
-              }
-            ]
+              "groups": [
+                {
+                  "name": "Live Symbol Sync",
+                  "type": "param",
+                  "paramName": "symbol",
+                  "widgetIds": [
+                    "estimate_revisions",
+                    "earnings_chart"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Earnings Sync Live",
+          "dashboard_name": "Earnings Sync Live Board",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "estimate_revisions",
+          "data_args": {
+            "symbol": "MSFT"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Earnings Sync Live",
-        "dashboard_name": "Earnings Sync Live Board",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "estimate_revisions",
-        "data_args": {
-          "symbol": "MSFT"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Earnings Sync Live",
+          "data": "Earnings Sync Live is live from Earnings Prep Data: symbol sync ready. Configured symbol=MSFT."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Earnings Sync Live",
-        "data": "Earnings Sync Live is live from Earnings Prep Data: symbol sync ready. Configured symbol=MSFT."
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

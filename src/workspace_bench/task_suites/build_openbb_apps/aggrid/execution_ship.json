@@ -10,31 +10,33 @@
     "Execution Desk Data",
     "EDGX"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "html",
@@ -170,154 +172,154 @@
         "path": "staleTime",
         "expected": 900000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Execution Desk Data",
-        "url": "http://localhost:7806",
-        "widgets_json": {
-          "venue_scorecard": {
-            "name": "Venue Scorecard",
-            "description": "Execution quality by venue.",
-            "endpoint": "/venue-scorecard",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "venue",
-                    "headerName": "Venue",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "fills",
-                    "headerName": "Fills",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "slippage_pct",
-                    "headerName": "Slippage Pct",
-                    "cellDataType": "number",
-                    "formatterFn": "percent"
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "venue",
-                "type": "text",
-                "label": "Venue",
-                "value": "ARCA",
-                "description": "Venue in focus."
-              }
-            ],
-            "staleTime": 900000
-          },
-          "exception_metric": {
-            "name": "Exceptions",
-            "description": "Open execution exceptions.",
-            "endpoint": "/exception-count",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
-            },
-            "staleTime": 900000,
-            "data": {
-              "valueField": "exception_metric_value"
-            }
-          },
-          "slippage_chart": {
-            "name": "Slippage by Venue",
-            "description": "Plotly slippage distribution by venue.",
-            "endpoint": "/slippage-by-venue",
-            "type": "chart",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "raw": true,
-            "staleTime": 900000,
-            "data": {
-              "valueField": "slippage_chart_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Execution Room",
-            "description": "Venue quality and exceptions.",
-            "tabs": {
-              "venues": {
-                "id": "venues",
-                "name": "Venues",
-                "layout": [
-                  {
-                    "i": "venue_scorecard",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Execution Desk Data",
+          "url": "http://localhost:7806",
+          "widgets_json": {
+            "venue_scorecard": {
+              "name": "Venue Scorecard",
+              "description": "Execution quality by venue.",
+              "endpoint": "/venue-scorecard",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "signals": {
-                "id": "signals",
-                "name": "Signals",
-                "layout": [
-                  {
-                    "i": "exception_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 6
-                  }
-                ]
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "venue",
+                      "headerName": "Venue",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "fills",
+                      "headerName": "Fills",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "slippage_pct",
+                      "headerName": "Slippage Pct",
+                      "cellDataType": "number",
+                      "formatterFn": "percent"
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "venue",
+                  "type": "text",
+                  "label": "Venue",
+                  "value": "ARCA",
+                  "description": "Venue in focus."
+                }
+              ],
+              "staleTime": 900000
+            },
+            "exception_metric": {
+              "name": "Exceptions",
+              "description": "Open execution exceptions.",
+              "endpoint": "/exception-count",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
+              },
+              "staleTime": 900000,
+              "data": {
+                "valueField": "exception_metric_value"
               }
             },
-            "groups": []
+            "slippage_chart": {
+              "name": "Slippage by Venue",
+              "description": "Plotly slippage distribution by venue.",
+              "endpoint": "/slippage-by-venue",
+              "type": "chart",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "raw": true,
+              "staleTime": 900000,
+              "data": {
+                "valueField": "slippage_chart_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Execution Room",
+              "description": "Venue quality and exceptions.",
+              "tabs": {
+                "venues": {
+                  "id": "venues",
+                  "name": "Venues",
+                  "layout": [
+                    {
+                      "i": "venue_scorecard",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "signals": {
+                  "id": "signals",
+                  "name": "Signals",
+                  "layout": [
+                    {
+                      "i": "exception_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 6
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Execution Room",
+          "dashboard_name": "Execution Room Live",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "venue_scorecard",
+          "data_args": {
+            "venue": "EDGX"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Execution Room",
-        "dashboard_name": "Execution Room Live",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "venue_scorecard",
-        "data_args": {
-          "venue": "EDGX"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "html",
+          "name": "Execution Room",
+          "data": "<section>Execution Room is live from Execution Desk Data: venues on tap. Configured venue=EDGX.</section>"
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "html",
-        "name": "Execution Room",
-        "data": "<section>Execution Room is live from Execution Desk Data: venues on tap. Configured venue=EDGX.</section>"
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

@@ -4,23 +4,25 @@
   "family": "prompts",
   "difficulty": "hard",
   "prompt": "After fetching workspace_tool_usage, create dashboard Portfolio Prompt Dashboard, add Widget Examples/test_metric and Widget Examples/whitepapers with schema-first discipline, and add a note mentioning holdings and schema.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "widget-examples"
-      }
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "widget-examples"
+        }
+      ]
+    },
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_prompt",
+      "manage_dashboard",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_prompt",
-    "manage_dashboard",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_dashboard_name_contains": "Portfolio Prompt Dashboard",
     "required_tool_results": [
       {
@@ -68,72 +70,72 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_prompt",
-      "args": {
-        "name": "workspace_tool_usage"
-      }
     },
-    {
-      "tool": "manage_dashboard",
-      "args": {
-        "operation": "create",
-        "name": "Portfolio Prompt Dashboard"
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Widget Examples"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "test_metric"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "test_metric",
-        "data_args": {}
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "whitepapers"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Widget Examples",
-        "widget_id": "whitepapers",
-        "data_args": {
-          "filenames": [
-            "bitcoin.pdf"
-          ]
+    "reference": [
+      {
+        "tool": "get_workspace_prompt",
+        "args": {
+          "name": "workspace_tool_usage"
+        }
+      },
+      {
+        "tool": "manage_dashboard",
+        "args": {
+          "operation": "create",
+          "name": "Portfolio Prompt Dashboard"
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Widget Examples"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "test_metric"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "test_metric",
+          "data_args": {}
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "whitepapers"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "whitepapers",
+          "data_args": {
+            "filenames": [
+              "bitcoin.pdf"
+            ]
+          }
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Prompt Build Note",
+          "data": "Prompt build used holdings and schema."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Prompt Build Note",
-        "data": "Prompt build used holdings and schema."
-      }
+    ],
+    "limits": {
+      "max_turns": 11
     }
-  ],
-  "limits": {
-    "max_turns": 11
   }
 }

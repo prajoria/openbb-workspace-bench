@@ -10,31 +10,33 @@
     "Healthcare Research Data",
     "II"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -170,152 +172,152 @@
         "path": "staleTime",
         "expected": 900000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Healthcare Research Data",
-        "url": "http://localhost:7808",
-        "widgets_json": {
-          "readout_calendar": {
-            "name": "Readout Calendar",
-            "description": "Upcoming trial readouts.",
-            "endpoint": "/readout-calendar",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "ticker",
-                    "headerName": "Ticker",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "phase",
-                    "headerName": "Phase",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "readout",
-                    "headerName": "Readout",
-                    "cellDataType": "dateString"
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "phase",
-                "type": "text",
-                "label": "Phase",
-                "value": "III",
-                "description": "Trial phase filter."
-              }
-            ],
-            "staleTime": 900000
-          },
-          "catalyst_metric": {
-            "name": "Catalysts 30d",
-            "description": "Catalysts in the next 30 days.",
-            "endpoint": "/catalyst-count",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "staleTime": 900000,
-            "data": {
-              "valueField": "catalyst_metric_value"
-            }
-          },
-          "fda_newsfeed": {
-            "name": "FDA Notices",
-            "description": "FDA decision and notice feed.",
-            "endpoint": "/fda-notices",
-            "type": "newsfeed",
-            "gridData": {
-              "w": 12,
-              "h": 10
-            },
-            "staleTime": 900000,
-            "data": {
-              "valueField": "fda_newsfeed_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Readout Desk",
-            "description": "Trial readouts and catalysts.",
-            "tabs": {
-              "readouts": {
-                "id": "readouts",
-                "name": "Readouts",
-                "layout": [
-                  {
-                    "i": "readout_calendar",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Healthcare Research Data",
+          "url": "http://localhost:7808",
+          "widgets_json": {
+            "readout_calendar": {
+              "name": "Readout Calendar",
+              "description": "Upcoming trial readouts.",
+              "endpoint": "/readout-calendar",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "signals": {
-                "id": "signals",
-                "name": "Signals",
-                "layout": [
-                  {
-                    "i": "catalyst_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 6
-                  }
-                ]
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "ticker",
+                      "headerName": "Ticker",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "phase",
+                      "headerName": "Phase",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "readout",
+                      "headerName": "Readout",
+                      "cellDataType": "dateString"
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "phase",
+                  "type": "text",
+                  "label": "Phase",
+                  "value": "III",
+                  "description": "Trial phase filter."
+                }
+              ],
+              "staleTime": 900000
+            },
+            "catalyst_metric": {
+              "name": "Catalysts 30d",
+              "description": "Catalysts in the next 30 days.",
+              "endpoint": "/catalyst-count",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "staleTime": 900000,
+              "data": {
+                "valueField": "catalyst_metric_value"
               }
             },
-            "groups": []
+            "fda_newsfeed": {
+              "name": "FDA Notices",
+              "description": "FDA decision and notice feed.",
+              "endpoint": "/fda-notices",
+              "type": "newsfeed",
+              "gridData": {
+                "w": 12,
+                "h": 10
+              },
+              "staleTime": 900000,
+              "data": {
+                "valueField": "fda_newsfeed_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Readout Desk",
+              "description": "Trial readouts and catalysts.",
+              "tabs": {
+                "readouts": {
+                  "id": "readouts",
+                  "name": "Readouts",
+                  "layout": [
+                    {
+                      "i": "readout_calendar",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "signals": {
+                  "id": "signals",
+                  "name": "Signals",
+                  "layout": [
+                    {
+                      "i": "catalyst_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 6
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Readout Desk",
+          "dashboard_name": "Readout Desk Live",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "readout_calendar",
+          "data_args": {
+            "phase": "II"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Readout Desk",
-        "dashboard_name": "Readout Desk Live",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "readout_calendar",
-        "data_args": {
-          "phase": "II"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Readout Desk",
+          "data": "Readout Desk is live from Healthcare Research Data: readouts on tap. Configured phase=II."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Readout Desk",
-        "data": "Readout Desk is live from Healthcare Research Data: readouts on tap. Configured phase=II."
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

@@ -4,52 +4,54 @@
   "family": "navigate",
   "difficulty": "medium",
   "prompt": "Keep the existing Overview tab intact while adding a tab named Estimates and placing the Live Grid widget for MSFT on it.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Incomplete Review",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "table_widget_with_grouping_by_cell_click",
+            "data_args": {
+              "symbol": "MSFT"
+            },
+            "tab_id": "overview",
+            "layout": {
+              "x": 0,
+              "y": 2,
+              "w": 20,
+              "h": 12
+            },
+            "widget_uuid": "usage_addtab_estimates_msft_widget_001"
+          }
+        ],
+        "dashboard_id": "usage_addtab_estimates_msft_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Incomplete Review",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "table_widget_with_grouping_by_cell_click",
-          "data_args": {
-            "symbol": "MSFT"
-          },
-          "tab_id": "overview",
-          "layout": {
-            "x": 0,
-            "y": 2,
-            "w": 20,
-            "h": 12
-          },
-          "widget_uuid": "usage_addtab_estimates_msft_widget_001"
-        }
-      ],
-      "dashboard_id": "usage_addtab_estimates_msft_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget"
-  ],
-  "success": {
+  "eval": {
     "required_tabs": [
       "overview",
       "estimates"
@@ -87,56 +89,56 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_navigation_bar",
-      "args": {
-        "operation": "add_tabs",
-        "tabs": [
-          {
-            "name": "Estimates"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_navigation_bar",
+        "args": {
+          "operation": "add_tabs",
+          "tabs": [
+            {
+              "name": "Estimates"
+            }
+          ]
+        }
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "tab",
+          "tab_id": "estimates"
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
+          "data_args": {
+            "symbol": "MSFT"
           }
-        ]
-      }
-    },
-    {
-      "tool": "navigate_workspace",
-      "args": {
-        "operation": "tab",
-        "tab_id": "estimates"
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Getting Started"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "live_grid_data"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "live_grid_data",
-        "data_args": {
-          "symbol": "MSFT"
         }
       }
+    ],
+    "limits": {
+      "max_turns": 9
     }
-  ],
-  "limits": {
-    "max_turns": 9
   }
 }

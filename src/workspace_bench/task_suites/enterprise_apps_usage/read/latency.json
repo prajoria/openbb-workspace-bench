@@ -4,51 +4,53 @@
   "family": "read",
   "difficulty": "easy",
   "prompt": "Use get_widget_data for the Bench Stark Enterprise Latency by Feed widget; then add a short note that cites vendor_dataset_monitor_slas_latency_by_feed and says you reviewed the data.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Data Review",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "main",
+            "name": "Main"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "vendor_dataset_monitor_slas_latency_by_feed",
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "tab_id": "main",
+            "layout": {
+              "x": 0,
+              "y": 2,
+              "w": 20,
+              "h": 10
+            },
+            "widget_uuid": "usage_latency_widget_001"
+          }
+        ],
+        "dashboard_id": "usage_latency_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "get_widget_data",
+      "read_widget",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Data Review",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "main",
-          "name": "Main"
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "vendor_dataset_monitor_slas_latency_by_feed",
-          "data_args": {
-            "fund": "Flagship Long/Short",
-            "period": "YTD"
-          },
-          "tab_id": "main",
-          "layout": {
-            "x": 0,
-            "y": 2,
-            "w": 20,
-            "h": 10
-          },
-          "widget_uuid": "usage_latency_widget_001"
-        }
-      ],
-      "dashboard_id": "usage_latency_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "get_widget_data",
-    "read_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_tool_calls": [
       {
         "tool": "get_widget_data",
@@ -80,35 +82,35 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "get_widget_data",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "vendor_dataset_monitor_slas_latency_by_feed",
-        "widget_uuid": "usage_latency_widget_001",
-        "data_args": {
-          "fund": "Flagship Long/Short",
-          "period": "YTD"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "vendor_dataset_monitor_slas_latency_by_feed",
+          "widget_uuid": "usage_latency_widget_001",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "period": "YTD"
+          }
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Data Note",
+          "data": "Reviewed the data returned by vendor_dataset_monitor_slas_latency_by_feed."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Data Note",
-        "data": "Reviewed the data returned by vendor_dataset_monitor_slas_latency_by_feed."
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

@@ -4,30 +4,32 @@
   "family": "backends",
   "difficulty": "medium",
   "prompt": "Call manage_backends with operation add and name stark-enterprise to register Bench Stark Enterprise; then discover Post-Earnings Checklist, fetch its schema, and add Bench Stark Enterprise/Post-Earnings Checklist to the active dashboard.",
-  "fixtures": {
-    "backends": []
+  "setup": {
+    "fixtures": {
+      "backends": []
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Backend Build",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "dashboard_id": "usage_register_backend_and_add_post_earnings_checklist_dashboard_001"
+      }
+    },
+    "allowed_tools": [
+      "manage_backends",
+      "get_workspace_snapshot",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget"
+    ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Backend Build",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "dashboard_id": "usage_register_backend_and_add_post_earnings_checklist_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "manage_backends",
-    "get_workspace_snapshot",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Bench Stark Enterprise",
@@ -19697,45 +19699,45 @@
         }
       ],
       "pinned_paths": true
+    },
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "stark-enterprise"
+        }
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "list"
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist",
+          "data_args": {}
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 8
     }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "stark-enterprise"
-      }
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "list"
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Stark Enterprise"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "earnings_estimates_monitor_post_earnings_post_earnings_checklist",
-        "data_args": {}
-      }
-    }
-  ],
-  "limits": {
-    "max_turns": 8
   }
 }

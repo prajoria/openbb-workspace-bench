@@ -4,33 +4,35 @@
   "family": "navigate",
   "difficulty": "easy",
   "prompt": "Change the active dashboard's name to Client Review Agenda; also rename the Overview tab to Talking Points.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Client Prep",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "dashboard_id": "usage_rename_both_client_review_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Client Prep",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "overview",
-          "name": "Overview"
-        }
-      ],
-      "dashboard_id": "usage_rename_both_client_review_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace"
-  ],
-  "success": {
+  "eval": {
     "required_dashboard_name_contains": "Client Review Agenda",
     "required_tab_names": [
       "Talking Points"
@@ -55,28 +57,28 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_dashboard",
-      "args": {
-        "operation": "update",
-        "dashboard_id": "usage_rename_both_client_review_dashboard_001",
-        "name": "Client Review Agenda"
-      }
     },
-    {
-      "tool": "manage_navigation_bar",
-      "args": {
-        "operation": "rename_tabs",
-        "rename_map": {
-          "overview": "Talking Points"
+    "reference": [
+      {
+        "tool": "manage_dashboard",
+        "args": {
+          "operation": "update",
+          "dashboard_id": "usage_rename_both_client_review_dashboard_001",
+          "name": "Client Review Agenda"
+        }
+      },
+      {
+        "tool": "manage_navigation_bar",
+        "args": {
+          "operation": "rename_tabs",
+          "rename_map": {
+            "overview": "Talking Points"
+          }
         }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

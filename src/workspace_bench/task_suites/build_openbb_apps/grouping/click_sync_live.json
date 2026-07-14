@@ -11,31 +11,33 @@
     "AAPL",
     "ticker"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "html",
@@ -160,188 +162,188 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Earnings Prep Data",
-        "url": "http://localhost:7805",
-        "widgets_json": {
-          "click_live_table": {
-            "name": "Click Live Table",
-            "description": "Clickable live symbol rows for grouped review.",
-            "endpoint": "/click-live-table",
-            "type": "table",
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "symbol",
-                    "headerName": "Symbol",
-                    "cellDataType": "text",
-                    "renderFn": "cellOnClick",
-                    "renderFnParams": {
-                      "actionType": "groupBy",
-                      "groupByParamName": "symbol"
+    },
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Earnings Prep Data",
+          "url": "http://localhost:7805",
+          "widgets_json": {
+            "click_live_table": {
+              "name": "Click Live Table",
+              "description": "Clickable live symbol rows for grouped review.",
+              "endpoint": "/click-live-table",
+              "type": "table",
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "symbol",
+                      "headerName": "Symbol",
+                      "cellDataType": "text",
+                      "renderFn": "cellOnClick",
+                      "renderFnParams": {
+                        "actionType": "groupBy",
+                        "groupByParamName": "symbol"
+                      },
+                      "cellOnClick": {
+                        "actionType": "groupBy",
+                        "groupByParamName": "symbol"
+                      }
                     },
-                    "cellOnClick": {
-                      "actionType": "groupBy",
-                      "groupByParamName": "symbol"
+                    {
+                      "field": "revision_pct",
+                      "headerName": "Revision %",
+                      "cellDataType": "number",
+                      "formatterFn": "percent"
                     }
-                  },
-                  {
-                    "field": "revision_pct",
-                    "headerName": "Revision %",
-                    "cellDataType": "number",
-                    "formatterFn": "percent"
-                  }
-                ]
+                  ]
+                }
+              },
+              "gridData": {
+                "w": 20,
+                "h": 9
               }
             },
-            "gridData": {
-              "w": 20,
-              "h": 9
+            "earnings_chart": {
+              "name": "EPS History",
+              "description": "Plotly EPS beat/miss history.",
+              "endpoint": "/eps-history",
+              "type": "chart",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "raw": true,
+              "data": {
+                "valueField": "earnings_chart_value"
+              }
+            },
+            "earnings_note": {
+              "name": "Earnings Preview",
+              "description": "Preview note for the earnings call.",
+              "endpoint": "/earnings-preview",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "data": {
+                "valueField": "earnings_note_value"
+              }
             }
           },
-          "earnings_chart": {
-            "name": "EPS History",
-            "description": "Plotly EPS beat/miss history.",
-            "endpoint": "/eps-history",
-            "type": "chart",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "raw": true,
-            "data": {
-              "valueField": "earnings_chart_value"
-            }
-          },
-          "earnings_note": {
-            "name": "Earnings Preview",
-            "description": "Preview note for the earnings call.",
-            "endpoint": "/earnings-preview",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "data": {
-              "valueField": "earnings_note_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Click Sync Live",
-            "description": "Live grouped click table and chart.",
-            "tabs": {
-              "clicks": {
-                "id": "clicks",
-                "name": "Clicks",
-                "layout": [
-                  {
-                    "i": "click_live_table",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9,
-                    "state": {
-                      "params": {
-                        "symbol": "NVDA"
+          "apps_json": [
+            {
+              "name": "Click Sync Live",
+              "description": "Live grouped click table and chart.",
+              "tabs": {
+                "clicks": {
+                  "id": "clicks",
+                  "name": "Clicks",
+                  "layout": [
+                    {
+                      "i": "click_live_table",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9,
+                      "state": {
+                        "params": {
+                          "symbol": "NVDA"
+                        }
                       }
                     }
-                  }
-                ]
+                  ]
+                },
+                "linked": {
+                  "id": "linked",
+                  "name": "Linked",
+                  "layout": [
+                    {
+                      "i": "earnings_chart",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 9
+                    }
+                  ]
+                }
               },
-              "linked": {
-                "id": "linked",
-                "name": "Linked",
-                "layout": [
-                  {
-                    "i": "earnings_chart",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 9
-                  }
-                ]
-              }
-            },
-            "groups": [
-              {
-                "name": "Click Live Sync",
-                "type": "param",
-                "paramName": "symbol",
-                "widgetIds": [
-                  "click_live_table",
-                  "earnings_chart"
-                ]
-              }
-            ]
+              "groups": [
+                {
+                  "name": "Click Live Sync",
+                  "type": "param",
+                  "paramName": "symbol",
+                  "widgetIds": [
+                    "click_live_table",
+                    "earnings_chart"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Click Sync Live",
+          "dashboard_name": "Click Sync Live Board",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "click_live_table",
+          "data_args": {
+            "symbol": "AAPL"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Click Sync Live",
-        "dashboard_name": "Click Sync Live Board",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "click_live_table",
-        "data_args": {
-          "symbol": "AAPL"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "html",
+          "name": "Click Sync Live",
+          "data": "<section>Click Sync Live is live from Earnings Prep Data: click sync ready. Configured symbol=AAPL.</section>"
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "html",
-        "name": "Click Sync Live",
-        "data": "<section>Click Sync Live is live from Earnings Prep Data: click sync ready. Configured symbol=AAPL.</section>"
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

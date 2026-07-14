@@ -12,31 +12,33 @@
     "ticker",
     "date"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -166,188 +168,188 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Healthcare Research Data",
-        "url": "http://localhost:7808",
-        "widgets_json": {
-          "trial_readout_form": {
-            "name": "Trial Readout Form",
-            "description": "Capture a clinical trial readout note.",
-            "endpoint": "/trial-readout-form",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 10
-            },
-            "params": [
-              {
-                "paramName": "readout",
-                "type": "form",
-                "label": "Readout",
-                "endpoint": "/trial-readout-submit",
-                "method": "POST",
-                "inputParams": [
-                  {
-                    "paramName": "ticker",
-                    "type": "text",
-                    "label": "Ticker",
-                    "value": "PFE"
-                  },
-                  {
-                    "paramName": "readout_date",
-                    "type": "date",
-                    "label": "Readout date",
-                    "value": "2026-08-19"
-                  },
-                  {
-                    "paramName": "save",
-                    "type": "button",
-                    "label": "Save"
-                  }
-                ]
+    },
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Healthcare Research Data",
+          "url": "http://localhost:7808",
+          "widgets_json": {
+            "trial_readout_form": {
+              "name": "Trial Readout Form",
+              "description": "Capture a clinical trial readout note.",
+              "endpoint": "/trial-readout-form",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 10
               },
-              {
-                "paramName": "ticker_scope",
-                "type": "text",
-                "label": "Ticker Scope",
-                "value": "PFE",
-                "description": "Trial readout ticker filter."
+              "params": [
+                {
+                  "paramName": "readout",
+                  "type": "form",
+                  "label": "Readout",
+                  "endpoint": "/trial-readout-submit",
+                  "method": "POST",
+                  "inputParams": [
+                    {
+                      "paramName": "ticker",
+                      "type": "text",
+                      "label": "Ticker",
+                      "value": "PFE"
+                    },
+                    {
+                      "paramName": "readout_date",
+                      "type": "date",
+                      "label": "Readout date",
+                      "value": "2026-08-19"
+                    },
+                    {
+                      "paramName": "save",
+                      "type": "button",
+                      "label": "Save"
+                    }
+                  ]
+                },
+                {
+                  "paramName": "ticker_scope",
+                  "type": "text",
+                  "label": "Ticker Scope",
+                  "value": "PFE",
+                  "description": "Trial readout ticker filter."
+                }
+              ],
+              "category": "Research",
+              "staleTime": 900000,
+              "data": {
+                "valueField": "trial_readout_form_value"
               }
-            ],
-            "category": "Research",
-            "staleTime": 900000,
-            "data": {
-              "valueField": "trial_readout_form_value"
+            },
+            "catalyst_metric": {
+              "name": "Catalysts 30d",
+              "description": "Catalysts in the next 30 days.",
+              "endpoint": "/catalyst-count",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "staleTime": 900000,
+              "data": {
+                "valueField": "catalyst_metric_value"
+              }
+            },
+            "trial_catalysts": {
+              "name": "Trial Catalysts",
+              "description": "Upcoming clinical trial readouts.",
+              "endpoint": "/trial-catalysts",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "ticker",
+                  "type": "endpoint",
+                  "label": "Ticker",
+                  "value": "PFE",
+                  "optionsEndpoint": "/tickers"
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "ticker",
+                      "headerName": "Ticker",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "phase",
+                      "headerName": "Phase",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "readout_date",
+                      "headerName": "Readout",
+                      "cellDataType": "dateString"
+                    }
+                  ]
+                }
+              },
+              "staleTime": 900000
             }
           },
-          "catalyst_metric": {
-            "name": "Catalysts 30d",
-            "description": "Catalysts in the next 30 days.",
-            "endpoint": "/catalyst-count",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "staleTime": 900000,
-            "data": {
-              "valueField": "catalyst_metric_value"
-            }
-          },
-          "trial_catalysts": {
-            "name": "Trial Catalysts",
-            "description": "Upcoming clinical trial readouts.",
-            "endpoint": "/trial-catalysts",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "ticker",
-                "type": "endpoint",
-                "label": "Ticker",
-                "value": "PFE",
-                "optionsEndpoint": "/tickers"
-              }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "ticker",
-                    "headerName": "Ticker",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "phase",
-                    "headerName": "Phase",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "readout_date",
-                    "headerName": "Readout",
-                    "cellDataType": "dateString"
-                  }
-                ]
-              }
-            },
-            "staleTime": 900000
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Trial Intake Live",
-            "description": "Trial readouts and catalyst count.",
-            "tabs": {
-              "trials": {
-                "id": "trials",
-                "name": "Trials",
-                "layout": [
-                  {
-                    "i": "trial_readout_form",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 10
-                  }
-                ]
+          "apps_json": [
+            {
+              "name": "Trial Intake Live",
+              "description": "Trial readouts and catalyst count.",
+              "tabs": {
+                "trials": {
+                  "id": "trials",
+                  "name": "Trials",
+                  "layout": [
+                    {
+                      "i": "trial_readout_form",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 10
+                    }
+                  ]
+                },
+                "status": {
+                  "id": "status",
+                  "name": "Status",
+                  "layout": [
+                    {
+                      "i": "catalyst_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 8,
+                      "h": 6
+                    }
+                  ]
+                }
               },
-              "status": {
-                "id": "status",
-                "name": "Status",
-                "layout": [
-                  {
-                    "i": "catalyst_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 8,
-                    "h": 6
-                  }
-                ]
-              }
-            },
-            "groups": []
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Trial Intake Live",
+          "dashboard_name": "Trial Intake Live Board",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "trial_readout_form",
+          "data_args": {
+            "ticker_scope": "MRNA"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Trial Intake Live",
-        "dashboard_name": "Trial Intake Live Board",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "trial_readout_form",
-        "data_args": {
-          "ticker_scope": "MRNA"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Trial Intake Live",
+          "data": "Trial Intake Live is live from Healthcare Research Data: trial intake ready. Configured ticker_scope=MRNA."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Trial Intake Live",
-        "data": "Trial Intake Live is live from Healthcare Research Data: trial intake ready. Configured ticker_scope=MRNA."
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

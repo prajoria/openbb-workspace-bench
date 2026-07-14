@@ -5,255 +5,257 @@
   "specification_level": "explicit",
   "difficulty": "hard",
   "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Bench Stark Enterprise' at http://localhost:7809. Treat the app layout and navigation as the product outcome. The experience needs Holdings Table (`portfolio_command_center_holdings_holdings_table`, table) using `/portfolio_command_center_holdings_holdings_table` for portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows; user controls: Fund (`fund`, text), Period (`period`, text); columns: ticker (number, int), company (text), sector (text), weight (number, percent), active_weight (number, percent), pnl (number, int, greenRed), rating (text); Portfolio Snapshot (`portfolio_command_center_overview_portfolio_snapshot`, metric) using `/portfolio_command_center_overview_portfolio_snapshot` for portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows; user controls: Fund (`fund`, text), Period (`period`, text). Organize it as app 'Enterprise Portfolio Control' with tabs Overview (portfolio_command_center_holdings_holdings_table, portfolio_command_center_overview_portfolio_snapshot) with 2 starter prompt(s). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {
-    "custom_backends": [
-      {
-        "name": "Bench Stark Enterprise",
-        "url": "http://localhost:7809",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "portfolio_command_center_holdings_holdings_table": {
-            "category": "Portfolio",
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "cellDataType": "number",
-                    "chartDataType": "series",
-                    "field": "ticker",
-                    "formatterFn": "int",
-                    "headerName": "Ticker",
-                    "pinned": "left",
-                    "width": 150
-                  },
-                  {
-                    "cellDataType": "text",
-                    "chartDataType": "category",
-                    "field": "company",
-                    "headerName": "Company",
-                    "pinned": "left",
-                    "width": 150
-                  },
-                  {
-                    "cellDataType": "text",
-                    "chartDataType": "category",
-                    "field": "sector",
-                    "headerName": "Sector",
-                    "width": 150
-                  },
-                  {
-                    "cellDataType": "number",
-                    "chartDataType": "series",
-                    "field": "weight",
-                    "formatterFn": "percent",
-                    "headerName": "Weight",
-                    "width": 150
-                  },
-                  {
-                    "cellDataType": "number",
-                    "chartDataType": "series",
-                    "field": "active_weight",
-                    "formatterFn": "percent",
-                    "headerName": "Active Weight",
-                    "width": 150
-                  },
-                  {
-                    "cellDataType": "number",
-                    "chartDataType": "series",
-                    "field": "pnl",
-                    "formatterFn": "int",
-                    "headerName": "Pnl",
-                    "renderFn": "greenRed",
-                    "width": 150
-                  },
-                  {
-                    "cellDataType": "text",
-                    "chartDataType": "category",
-                    "field": "rating",
-                    "headerName": "Rating",
-                    "width": 150
-                  }
-                ],
-                "enableAdvanced": true,
-                "enableCharts": true,
-                "showAll": true
-              }
-            },
-            "description": "Holdings Table for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows.",
-            "endpoint": "/portfolio_command_center_holdings_holdings_table",
-            "gridData": {
-              "h": 14,
-              "w": 20
-            },
-            "name": "Holdings Table",
-            "params": [
-              {
-                "description": "Fund or vehicle scope.",
-                "label": "Fund",
-                "options": [
-                  {
-                    "label": "Flagship Long/Short",
-                    "value": "Flagship Long/Short"
-                  },
-                  {
-                    "label": "Global Opportunities",
-                    "value": "Global Opportunities"
-                  },
-                  {
-                    "label": "Income Fund",
-                    "value": "Income Fund"
-                  },
-                  {
-                    "label": "Multi-Asset Fund",
-                    "value": "Multi-Asset Fund"
-                  }
-                ],
-                "paramName": "fund",
-                "type": "text",
-                "value": "Flagship Long/Short"
+  "setup": {
+    "fixtures": {},
+    "initial_state": {
+      "custom_backends": [
+        {
+          "name": "Bench Stark Enterprise",
+          "url": "http://localhost:7809",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "portfolio_command_center_holdings_holdings_table": {
+              "category": "Portfolio",
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "cellDataType": "number",
+                      "chartDataType": "series",
+                      "field": "ticker",
+                      "formatterFn": "int",
+                      "headerName": "Ticker",
+                      "pinned": "left",
+                      "width": 150
+                    },
+                    {
+                      "cellDataType": "text",
+                      "chartDataType": "category",
+                      "field": "company",
+                      "headerName": "Company",
+                      "pinned": "left",
+                      "width": 150
+                    },
+                    {
+                      "cellDataType": "text",
+                      "chartDataType": "category",
+                      "field": "sector",
+                      "headerName": "Sector",
+                      "width": 150
+                    },
+                    {
+                      "cellDataType": "number",
+                      "chartDataType": "series",
+                      "field": "weight",
+                      "formatterFn": "percent",
+                      "headerName": "Weight",
+                      "width": 150
+                    },
+                    {
+                      "cellDataType": "number",
+                      "chartDataType": "series",
+                      "field": "active_weight",
+                      "formatterFn": "percent",
+                      "headerName": "Active Weight",
+                      "width": 150
+                    },
+                    {
+                      "cellDataType": "number",
+                      "chartDataType": "series",
+                      "field": "pnl",
+                      "formatterFn": "int",
+                      "headerName": "Pnl",
+                      "renderFn": "greenRed",
+                      "width": 150
+                    },
+                    {
+                      "cellDataType": "text",
+                      "chartDataType": "category",
+                      "field": "rating",
+                      "headerName": "Rating",
+                      "width": 150
+                    }
+                  ],
+                  "enableAdvanced": true,
+                  "enableCharts": true,
+                  "showAll": true
+                }
               },
-              {
-                "description": "Reporting period.",
-                "label": "Period",
-                "options": [
-                  {
-                    "label": "1D",
-                    "value": "1D"
-                  },
-                  {
-                    "label": "MTD",
-                    "value": "MTD"
-                  },
-                  {
-                    "label": "QTD",
-                    "value": "QTD"
-                  },
-                  {
-                    "label": "YTD",
-                    "value": "YTD"
-                  },
-                  {
-                    "label": "1Y",
-                    "value": "1Y"
-                  }
-                ],
-                "paramName": "period",
-                "type": "text",
-                "value": "YTD"
-              }
-            ],
-            "source": [
-              "Aladdin Portfolio Master",
-              "Performance Book of Record"
-            ],
-            "subCategory": "Holdings & Performance",
-            "type": "table",
-            "widgetId": "portfolio_command_center_holdings_holdings_table"
-          },
-          "portfolio_command_center_overview_portfolio_snapshot": {
-            "category": "Portfolio",
-            "data": {
-              "valueField": "value"
-            },
-            "description": "Portfolio Snapshot for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows.",
-            "endpoint": "/portfolio_command_center_overview_portfolio_snapshot",
-            "gridData": {
-              "h": 5,
-              "w": 40
-            },
-            "name": "Portfolio Snapshot",
-            "params": [
-              {
-                "description": "Fund or vehicle scope.",
-                "label": "Fund",
-                "options": [
-                  {
-                    "label": "Flagship Long/Short",
-                    "value": "Flagship Long/Short"
-                  },
-                  {
-                    "label": "Global Opportunities",
-                    "value": "Global Opportunities"
-                  },
-                  {
-                    "label": "Income Fund",
-                    "value": "Income Fund"
-                  },
-                  {
-                    "label": "Multi-Asset Fund",
-                    "value": "Multi-Asset Fund"
-                  }
-                ],
-                "paramName": "fund",
-                "type": "text",
-                "value": "Flagship Long/Short"
+              "description": "Holdings Table for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows.",
+              "endpoint": "/portfolio_command_center_holdings_holdings_table",
+              "gridData": {
+                "h": 14,
+                "w": 20
               },
-              {
-                "description": "Reporting period.",
-                "label": "Period",
-                "options": [
-                  {
-                    "label": "1D",
-                    "value": "1D"
-                  },
-                  {
-                    "label": "MTD",
-                    "value": "MTD"
-                  },
-                  {
-                    "label": "QTD",
-                    "value": "QTD"
-                  },
-                  {
-                    "label": "YTD",
-                    "value": "YTD"
-                  },
-                  {
-                    "label": "1Y",
-                    "value": "1Y"
-                  }
-                ],
-                "paramName": "period",
-                "type": "text",
-                "value": "YTD"
-              }
-            ],
-            "source": [
-              "Aladdin Portfolio Master",
-              "Performance Book of Record"
-            ],
-            "subCategory": "Holdings & Performance",
-            "type": "metric",
-            "widgetId": "portfolio_command_center_overview_portfolio_snapshot"
+              "name": "Holdings Table",
+              "params": [
+                {
+                  "description": "Fund or vehicle scope.",
+                  "label": "Fund",
+                  "options": [
+                    {
+                      "label": "Flagship Long/Short",
+                      "value": "Flagship Long/Short"
+                    },
+                    {
+                      "label": "Global Opportunities",
+                      "value": "Global Opportunities"
+                    },
+                    {
+                      "label": "Income Fund",
+                      "value": "Income Fund"
+                    },
+                    {
+                      "label": "Multi-Asset Fund",
+                      "value": "Multi-Asset Fund"
+                    }
+                  ],
+                  "paramName": "fund",
+                  "type": "text",
+                  "value": "Flagship Long/Short"
+                },
+                {
+                  "description": "Reporting period.",
+                  "label": "Period",
+                  "options": [
+                    {
+                      "label": "1D",
+                      "value": "1D"
+                    },
+                    {
+                      "label": "MTD",
+                      "value": "MTD"
+                    },
+                    {
+                      "label": "QTD",
+                      "value": "QTD"
+                    },
+                    {
+                      "label": "YTD",
+                      "value": "YTD"
+                    },
+                    {
+                      "label": "1Y",
+                      "value": "1Y"
+                    }
+                  ],
+                  "paramName": "period",
+                  "type": "text",
+                  "value": "YTD"
+                }
+              ],
+              "source": [
+                "Aladdin Portfolio Master",
+                "Performance Book of Record"
+              ],
+              "subCategory": "Holdings & Performance",
+              "type": "table",
+              "widgetId": "portfolio_command_center_holdings_holdings_table"
+            },
+            "portfolio_command_center_overview_portfolio_snapshot": {
+              "category": "Portfolio",
+              "data": {
+                "valueField": "value"
+              },
+              "description": "Portfolio Snapshot for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows.",
+              "endpoint": "/portfolio_command_center_overview_portfolio_snapshot",
+              "gridData": {
+                "h": 5,
+                "w": 40
+              },
+              "name": "Portfolio Snapshot",
+              "params": [
+                {
+                  "description": "Fund or vehicle scope.",
+                  "label": "Fund",
+                  "options": [
+                    {
+                      "label": "Flagship Long/Short",
+                      "value": "Flagship Long/Short"
+                    },
+                    {
+                      "label": "Global Opportunities",
+                      "value": "Global Opportunities"
+                    },
+                    {
+                      "label": "Income Fund",
+                      "value": "Income Fund"
+                    },
+                    {
+                      "label": "Multi-Asset Fund",
+                      "value": "Multi-Asset Fund"
+                    }
+                  ],
+                  "paramName": "fund",
+                  "type": "text",
+                  "value": "Flagship Long/Short"
+                },
+                {
+                  "description": "Reporting period.",
+                  "label": "Period",
+                  "options": [
+                    {
+                      "label": "1D",
+                      "value": "1D"
+                    },
+                    {
+                      "label": "MTD",
+                      "value": "MTD"
+                    },
+                    {
+                      "label": "QTD",
+                      "value": "QTD"
+                    },
+                    {
+                      "label": "YTD",
+                      "value": "YTD"
+                    },
+                    {
+                      "label": "1Y",
+                      "value": "1Y"
+                    }
+                  ],
+                  "paramName": "period",
+                  "type": "text",
+                  "value": "YTD"
+                }
+              ],
+              "source": [
+                "Aladdin Portfolio Master",
+                "Performance Book of Record"
+              ],
+              "subCategory": "Holdings & Performance",
+              "type": "metric",
+              "widgetId": "portfolio_command_center_overview_portfolio_snapshot"
+            }
           }
         }
-      }
+      ]
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
     ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "eval": {
     "required_app_defs": [
       {
         "backend_name": "Bench Stark Enterprise",
@@ -361,65 +363,65 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "refresh",
-        "backend_id": "backend_001",
-        "apps_json": [
-          {
-            "name": "Enterprise Portfolio Control",
-            "description": "Holdings and portfolio posture.",
-            "tabs": {
-              "overview": {
-                "id": "overview",
-                "name": "Overview",
-                "layout": [
-                  {
-                    "i": "portfolio_command_center_holdings_holdings_table",
-                    "x": 0,
-                    "y": 0,
-                    "w": 24,
-                    "h": 10
-                  },
-                  {
-                    "i": "portfolio_command_center_overview_portfolio_snapshot",
-                    "x": 24,
-                    "y": 0,
-                    "w": 12,
-                    "h": 6
-                  }
-                ]
-              }
-            },
-            "groups": [],
-            "prompts": [
-              "Summarize the most important signal in Enterprise Portfolio Control.",
-              "What needs attention in Enterprise Portfolio Control right now?"
-            ]
-          }
-        ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_001",
+          "apps_json": [
+            {
+              "name": "Enterprise Portfolio Control",
+              "description": "Holdings and portfolio posture.",
+              "tabs": {
+                "overview": {
+                  "id": "overview",
+                  "name": "Overview",
+                  "layout": [
+                    {
+                      "i": "portfolio_command_center_holdings_holdings_table",
+                      "x": 0,
+                      "y": 0,
+                      "w": 24,
+                      "h": 10
+                    },
+                    {
+                      "i": "portfolio_command_center_overview_portfolio_snapshot",
+                      "x": 24,
+                      "y": 0,
+                      "w": 12,
+                      "h": 6
+                    }
+                  ]
+                }
+              },
+              "groups": [],
+              "prompts": [
+                "Summarize the most important signal in Enterprise Portfolio Control.",
+                "What needs attention in Enterprise Portfolio Control right now?"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Enterprise Portfolio Control",
+          "dashboard_name": "Enterprise Portfolio Control Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Enterprise Portfolio Control",
-        "dashboard_name": "Enterprise Portfolio Control Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

@@ -5,101 +5,103 @@
   "specification_level": "explicit",
   "difficulty": "hard",
   "prompt": "Build the specified app, publish it, and leave a working instance open. Use 'Earnings Prep Data' at http://localhost:7805. Make the cross-widget interaction work. The experience needs Estimate Revisions (`estimate_revisions`, table) using `/estimate-revisions` for street estimate revisions by quarter; user controls: Symbol (`symbol`, endpoint) from `/symbols`; columns: quarter (text), eps_estimate (number), revenue_estimate_b (number); EPS History (`earnings_chart`, chart) using `/eps-history` for plotly EPS beat/miss history; user controls: Symbol (`symbol`, endpoint) from `/symbols`; consume the raw backend payload. Organize it as app 'NVDA Review Board' with tabs NVDA (estimate_revisions, earnings_chart) with shared interactions NVDA Symbol Sync across estimate_revisions, earnings_chart via `symbol`. Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {
-    "custom_backends": [
-      {
-        "name": "Earnings Prep Data",
-        "url": "http://localhost:7805",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "estimate_revisions": {
-            "name": "Estimate Revisions",
-            "description": "Street estimate revisions by quarter.",
-            "endpoint": "/estimate-revisions",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
+  "setup": {
+    "fixtures": {},
+    "initial_state": {
+      "custom_backends": [
+        {
+          "name": "Earnings Prep Data",
+          "url": "http://localhost:7805",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "estimate_revisions": {
+              "name": "Estimate Revisions",
+              "description": "Street estimate revisions by quarter.",
+              "endpoint": "/estimate-revisions",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "quarter",
+                      "headerName": "Quarter",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "eps_estimate",
+                      "headerName": "EPS Est",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "revenue_estimate_b",
+                      "headerName": "Revenue Est ($B)",
+                      "cellDataType": "number"
+                    }
+                  ]
+                }
+              }
             },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "quarter",
-                    "headerName": "Quarter",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "eps_estimate",
-                    "headerName": "EPS Est",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "revenue_estimate_b",
-                    "headerName": "Revenue Est ($B)",
-                    "cellDataType": "number"
-                  }
-                ]
-              }
+            "earnings_chart": {
+              "name": "EPS History",
+              "description": "Plotly EPS beat/miss history.",
+              "endpoint": "/eps-history",
+              "type": "chart",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "endpoint",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "optionsEndpoint": "/symbols"
+                }
+              ],
+              "raw": true
             }
-          },
-          "earnings_chart": {
-            "name": "EPS History",
-            "description": "Plotly EPS beat/miss history.",
-            "endpoint": "/eps-history",
-            "type": "chart",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "params": [
-              {
-                "paramName": "symbol",
-                "type": "endpoint",
-                "label": "Symbol",
-                "value": "AAPL",
-                "optionsEndpoint": "/symbols"
-              }
-            ],
-            "raw": true
           }
         }
-      }
+      ]
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
     ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "eval": {
     "required_app_defs": [
       {
         "backend_name": "Earnings Prep Data",
@@ -211,71 +213,71 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "refresh",
-        "backend_id": "backend_001",
-        "apps_json": [
-          {
-            "name": "NVDA Review Board",
-            "description": "A second symbol-synced earnings review.",
-            "tabs": {
-              "nvda": {
-                "id": "nvda",
-                "name": "NVDA",
-                "layout": [
-                  {
-                    "i": "estimate_revisions",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  },
-                  {
-                    "i": "earnings_chart",
-                    "x": 20,
-                    "y": 0,
-                    "w": 12,
-                    "h": 9
-                  }
-                ]
-              }
-            },
-            "groups": [
-              {
-                "name": "NVDA Symbol Sync",
-                "type": "param",
-                "paramName": "symbol",
-                "widgetIds": [
-                  "estimate_revisions",
-                  "earnings_chart"
-                ]
-              }
-            ]
-          }
-        ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_001",
+          "apps_json": [
+            {
+              "name": "NVDA Review Board",
+              "description": "A second symbol-synced earnings review.",
+              "tabs": {
+                "nvda": {
+                  "id": "nvda",
+                  "name": "NVDA",
+                  "layout": [
+                    {
+                      "i": "estimate_revisions",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    },
+                    {
+                      "i": "earnings_chart",
+                      "x": 20,
+                      "y": 0,
+                      "w": 12,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": [
+                {
+                  "name": "NVDA Symbol Sync",
+                  "type": "param",
+                  "paramName": "symbol",
+                  "widgetIds": [
+                    "estimate_revisions",
+                    "earnings_chart"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "NVDA Review Board",
+          "dashboard_name": "NVDA Review Board Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "NVDA Review Board",
-        "dashboard_name": "NVDA Review Board Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

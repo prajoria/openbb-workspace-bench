@@ -10,31 +10,33 @@
     "Rates Watch Data",
     "30Y Bond"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -160,161 +162,161 @@
         "path": "staleTime",
         "expected": 900000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Rates Watch Data",
-        "url": "http://localhost:7803",
-        "widgets_json": {
-          "auction_ladder": {
-            "name": "Auction Ladder",
-            "description": "Upcoming treasury auctions.",
-            "endpoint": "/auction-ladder",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "auction_date",
-                    "headerName": "Auction Date",
-                    "cellDataType": "dateString"
-                  },
-                  {
-                    "field": "security",
-                    "headerName": "Security",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "size_bn",
-                    "headerName": "Size Bn",
-                    "cellDataType": "number"
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "security",
-                "type": "text",
-                "label": "Security",
-                "value": "10Y Note",
-                "description": "Security filter for the ladder."
-              }
-            ],
-            "staleTime": 900000
-          },
-          "curve_spread_metric": {
-            "name": "2s10s Spread",
-            "description": "Current 2s10s spread in bps.",
-            "endpoint": "/curve-spread",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "staleTime": 900000,
-            "data": {
-              "valueField": "curve_spread_metric_value"
-            }
-          },
-          "rates_commentary": {
-            "name": "Rates Commentary",
-            "description": "Desk commentary on the rates day.",
-            "endpoint": "/rates-commentary",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "series",
-                "type": "endpoint",
-                "label": "Series",
-                "value": "DGS10",
-                "optionsEndpoint": "/series-options"
-              }
-            ],
-            "staleTime": 900000,
-            "data": {
-              "valueField": "rates_commentary_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Auction Desk",
-            "description": "Auctions and curve posture.",
-            "tabs": {
-              "auctions": {
-                "id": "auctions",
-                "name": "Auctions",
-                "layout": [
-                  {
-                    "i": "auction_ladder",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Rates Watch Data",
+          "url": "http://localhost:7803",
+          "widgets_json": {
+            "auction_ladder": {
+              "name": "Auction Ladder",
+              "description": "Upcoming treasury auctions.",
+              "endpoint": "/auction-ladder",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "signals": {
-                "id": "signals",
-                "name": "Signals",
-                "layout": [
-                  {
-                    "i": "curve_spread_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 6
-                  }
-                ]
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "auction_date",
+                      "headerName": "Auction Date",
+                      "cellDataType": "dateString"
+                    },
+                    {
+                      "field": "security",
+                      "headerName": "Security",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "size_bn",
+                      "headerName": "Size Bn",
+                      "cellDataType": "number"
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "security",
+                  "type": "text",
+                  "label": "Security",
+                  "value": "10Y Note",
+                  "description": "Security filter for the ladder."
+                }
+              ],
+              "staleTime": 900000
+            },
+            "curve_spread_metric": {
+              "name": "2s10s Spread",
+              "description": "Current 2s10s spread in bps.",
+              "endpoint": "/curve-spread",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "staleTime": 900000,
+              "data": {
+                "valueField": "curve_spread_metric_value"
               }
             },
-            "groups": []
+            "rates_commentary": {
+              "name": "Rates Commentary",
+              "description": "Desk commentary on the rates day.",
+              "endpoint": "/rates-commentary",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "series",
+                  "type": "endpoint",
+                  "label": "Series",
+                  "value": "DGS10",
+                  "optionsEndpoint": "/series-options"
+                }
+              ],
+              "staleTime": 900000,
+              "data": {
+                "valueField": "rates_commentary_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Auction Desk",
+              "description": "Auctions and curve posture.",
+              "tabs": {
+                "auctions": {
+                  "id": "auctions",
+                  "name": "Auctions",
+                  "layout": [
+                    {
+                      "i": "auction_ladder",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "signals": {
+                  "id": "signals",
+                  "name": "Signals",
+                  "layout": [
+                    {
+                      "i": "curve_spread_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 6
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Auction Desk",
+          "dashboard_name": "Auction Desk Live",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "auction_ladder",
+          "data_args": {
+            "security": "30Y Bond"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Auction Desk",
-        "dashboard_name": "Auction Desk Live",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "auction_ladder",
-        "data_args": {
-          "security": "30Y Bond"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Auction Desk",
+          "data": "Auction Desk is live from Rates Watch Data: auctions on tap. Configured security=30Y Bond."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Auction Desk",
-        "data": "Auction Desk is live from Rates Watch Data: auctions on tap. Configured security=30Y Bond."
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

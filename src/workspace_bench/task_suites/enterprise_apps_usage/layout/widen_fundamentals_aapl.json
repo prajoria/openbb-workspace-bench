@@ -4,49 +4,51 @@
   "family": "layout",
   "difficulty": "easy",
   "prompt": "Widen the TM fundamentals widget to 20 columns. Keep its position and height.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Layout Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "charts",
+            "name": "Charts"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "company_list",
+            "data_args": {
+              "companyId": "TM"
+            },
+            "tab_id": "charts",
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 10,
+              "h": 8
+            },
+            "widget_uuid": "usage_widen_fundamentals_aapl_widget_001"
+          }
+        ],
+        "dashboard_id": "usage_widen_fundamentals_aapl_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget_layout"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Layout Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "charts",
-          "name": "Charts"
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "company_list",
-          "data_args": {
-            "companyId": "TM"
-          },
-          "tab_id": "charts",
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 10,
-            "h": 8
-          },
-          "widget_uuid": "usage_widen_fundamentals_aapl_widget_001"
-        }
-      ],
-      "dashboard_id": "usage_widen_fundamentals_aapl_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget_layout"
-  ],
-  "success": {
+  "eval": {
     "required_tabs": [
       "charts"
     ],
@@ -81,26 +83,26 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_id": "company_list",
-        "tab_id": "charts",
-        "x": 0,
-        "y": 0,
-        "w": 20,
-        "h": 8
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "company_list",
+          "tab_id": "charts",
+          "x": 0,
+          "y": 0,
+          "w": 20,
+          "h": 8
+        }
       }
+    ],
+    "limits": {
+      "max_turns": 5
     }
-  ],
-  "limits": {
-    "max_turns": 5
   }
 }

@@ -5,31 +5,33 @@
   "specification_level": "explicit",
   "difficulty": "medium",
   "prompt": "Implement the requested app and confirm it by opening it in Workspace. Use 'Rates Watch Data' at http://localhost:7803. Make the user controls functional. The experience needs Rates Commentary (`rates_commentary`, markdown) using `/rates-commentary` for desk commentary on the rates day; user controls: Series (`series`, endpoint) from `/series-options`. Organize it as app 'Series Commentary' with tabs Commentary (rates_commentary). Choose the appropriate Workspace tools, validate the result, and avoid unrelated changes.",
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_widget_defs": [
       {
         "backend_name": "Rates Watch Data",
@@ -95,76 +97,76 @@
         }
       ],
       "pinned_paths": false
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Rates Watch Data",
-        "url": "http://localhost:7803",
-        "widgets_json": {
-          "rates_commentary": {
-            "name": "Rates Commentary",
-            "description": "Desk commentary on the rates day.",
-            "endpoint": "/rates-commentary",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "series",
-                "type": "endpoint",
-                "label": "Series",
-                "value": "DGS10",
-                "optionsEndpoint": "/series-options"
-              }
-            ]
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Series Commentary",
-            "description": "Rates commentary by selected series.",
-            "tabs": {
-              "commentary": {
-                "id": "commentary",
-                "name": "Commentary",
-                "layout": [
-                  {
-                    "i": "rates_commentary",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 8
-                  }
-                ]
-              }
-            },
-            "groups": []
-          }
-        ]
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Rates Watch Data",
+          "url": "http://localhost:7803",
+          "widgets_json": {
+            "rates_commentary": {
+              "name": "Rates Commentary",
+              "description": "Desk commentary on the rates day.",
+              "endpoint": "/rates-commentary",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "series",
+                  "type": "endpoint",
+                  "label": "Series",
+                  "value": "DGS10",
+                  "optionsEndpoint": "/series-options"
+                }
+              ]
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Series Commentary",
+              "description": "Rates commentary by selected series.",
+              "tabs": {
+                "commentary": {
+                  "id": "commentary",
+                  "name": "Commentary",
+                  "layout": [
+                    {
+                      "i": "rates_commentary",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 8
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Series Commentary",
+          "dashboard_name": "Series Commentary Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Series Commentary",
-        "dashboard_name": "Series Commentary Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

@@ -4,31 +4,33 @@
   "family": "backends",
   "difficulty": "hard",
   "prompt": "Register the needed backends by exact name (stark-enterprise, widget-examples); then build a dashboard with Bench Stark Enterprise/equity_research_workbench_valuation_football_field and Usage Widget Examples multi_stark_portfolio/live_grid_example, and add a HTML card mentioning stark and sector exposure.",
-  "fixtures": {
-    "backends": []
+  "setup": {
+    "fixtures": {
+      "backends": []
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Multi Backend Build",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "dashboard_id": "usage_multi_stark_portfolio_dashboard_001"
+      }
+    },
+    "allowed_tools": [
+      "manage_backends",
+      "get_workspace_snapshot",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget",
+      "add_generative_widget"
+    ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Multi Backend Build",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "dashboard_id": "usage_multi_stark_portfolio_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "manage_backends",
-    "get_workspace_snapshot",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Bench Stark Enterprise",
@@ -19792,413 +19794,413 @@
         }
       ],
       "pinned_paths": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "stark-enterprise"
-      }
     },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Usage Widget Examples multi_stark_portfolio",
-        "url": "http://127.0.0.1:9107",
-        "widgets_json": {
-          "live_grid_example": {
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "symbol",
-                    "headerName": "Symbol"
-                  },
-                  {
-                    "field": "price",
-                    "headerName": "Price",
-                    "renderFn": "showCellChange",
-                    "renderFnParams": {
-                      "colorValueKey": "change"
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "stark-enterprise"
+        }
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Usage Widget Examples multi_stark_portfolio",
+          "url": "http://127.0.0.1:9107",
+          "widgets_json": {
+            "live_grid_example": {
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "symbol",
+                      "headerName": "Symbol"
+                    },
+                    {
+                      "field": "price",
+                      "headerName": "Price",
+                      "renderFn": "showCellChange",
+                      "renderFnParams": {
+                        "colorValueKey": "change"
+                      }
+                    },
+                    {
+                      "field": "change_percent",
+                      "headerName": "Change %",
+                      "renderFn": "greenRed"
+                    },
+                    {
+                      "enableCellChangeWs": false,
+                      "field": "volume",
+                      "headerName": "Volume"
                     }
-                  },
-                  {
-                    "field": "change_percent",
-                    "headerName": "Change %",
-                    "renderFn": "greenRed"
-                  },
-                  {
-                    "enableCellChangeWs": false,
-                    "field": "volume",
-                    "headerName": "Volume"
-                  }
-                ],
-                "showAll": true
-              },
-              "wsRowIdColumn": "symbol"
-            },
-            "description": "Live Grid",
-            "endpoint": "test_websocket",
-            "gridData": {
-              "h": 9,
-              "w": 20
-            },
-            "name": "Live Grid",
-            "params": [
-              {
-                "description": "The symbol to get details for",
-                "label": "Symbol",
-                "multiSelect": true,
-                "options": [
-                  {
-                    "label": "AAPL",
-                    "value": "AAPL"
-                  },
-                  {
-                    "label": "GOOGL",
-                    "value": "GOOGL"
-                  },
-                  {
-                    "label": "MSFT",
-                    "value": "MSFT"
-                  },
-                  {
-                    "label": "AMZN",
-                    "value": "AMZN"
-                  },
-                  {
-                    "label": "TSLA",
-                    "value": "TSLA"
-                  }
-                ],
-                "paramName": "symbol",
-                "type": "text",
-                "value": "TSLA"
-              }
-            ],
-            "sampleDataByArgs": [
-              {
-                "data": [
-                  {
-                    "change": 4.46,
-                    "change_percent": 0.03,
-                    "prev_close": 145.54,
-                    "price": 150.0,
-                    "symbol": "AAPL",
-                    "volume": 1000000
-                  }
-                ],
-                "dataArgs": {
-                  "symbol": "AAPL"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": -50.0,
-                    "change_percent": -0.01,
-                    "prev_close": 3450.0,
-                    "price": 3400.0,
-                    "symbol": "AMZN",
-                    "volume": 1000000
-                  }
-                ],
-                "dataArgs": {
-                  "symbol": "AMZN"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 50.0,
-                    "change_percent": 0.01,
-                    "prev_close": 2850.0,
-                    "price": 2900.0,
-                    "symbol": "GOOGL",
-                    "volume": 1000000
-                  }
-                ],
-                "dataArgs": {
-                  "symbol": "GOOGL"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": -95.0,
-                    "change_percent": -0.12,
-                    "prev_close": 305.0,
-                    "price": 300.0,
-                    "symbol": "MSFT",
-                    "volume": 1000000
-                  }
-                ],
-                "dataArgs": {
-                  "symbol": "MSFT"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 100.0,
-                    "change_percent": 0.12,
-                    "prev_close": 795.0,
-                    "price": 700.0,
-                    "symbol": "TSLA",
-                    "volume": 1000000
-                  }
-                ],
-                "dataArgs": {
-                  "symbol": "TSLA"
-                }
-              }
-            ],
-            "type": "live_grid",
-            "wsEndpoint": "ws"
-          },
-          "test_metric": {
-            "category": "Test",
-            "description": "A metric widget example",
-            "endpoint": "test_metric",
-            "gridData": {
-              "h": 5,
-              "w": 5
-            },
-            "name": "Metric Widget",
-            "sampleData": [
-              {
-                "delta": "0.01",
-                "label": "Example Label",
-                "value": "12345"
-              },
-              {
-                "delta": "-0.01",
-                "label": "Example Label 2",
-                "value": "12345"
-              },
-              {
-                "delta": "5.67",
-                "label": "Example Label 3",
-                "value": "12345"
-              },
-              {
-                "delta": "0.00",
-                "label": "Example Label 4",
-                "value": "12345"
-              },
-              {
-                "label": "Example Label 4",
-                "value": "12345"
-              }
-            ],
-            "type": "metric"
-          },
-          "whitepapers": {
-            "description": "A collection of crypto whitepapers.",
-            "endpoint": "/whitepapers/base64",
-            "gridData": {
-              "h": 10,
-              "w": 40
-            },
-            "name": "Whitepapers",
-            "params": [
-              {
-                "description": "Whitepaper filenames.",
-                "label": "Filenames",
-                "multiSelect": true,
-                "options": [
-                  {
-                    "label": "Bitcoin",
-                    "value": "bitcoin.pdf"
-                  },
-                  {
-                    "label": "Ethereum",
-                    "value": "ethereum.pdf"
-                  },
-                  {
-                    "label": "Chainlink",
-                    "value": "chainlink.pdf"
-                  },
-                  {
-                    "label": "Solana",
-                    "value": "solana.pdf"
-                  }
-                ],
-                "optionsEndpoint": "/options",
-                "optionsParams": {
-                  "category": "$category"
+                  ],
+                  "showAll": true
                 },
-                "paramName": "filenames",
-                "roles": [
-                  "fileSelector"
-                ],
-                "show": false,
-                "type": "endpoint",
-                "value": [
-                  "bitcoin.pdf"
-                ]
+                "wsRowIdColumn": "symbol"
               },
-              {
-                "description": "Category of whitepaper to fetch.",
-                "label": "Category",
-                "options": [
-                  {
-                    "label": "All",
-                    "value": "all"
-                  },
-                  {
-                    "label": "L1",
-                    "value": "l1"
-                  },
-                  {
-                    "label": "L2",
-                    "value": "l2"
-                  },
-                  {
-                    "label": "Oracles",
-                    "value": "oracles"
-                  },
-                  {
-                    "label": "Defi",
-                    "value": "defi"
-                  }
-                ],
-                "paramName": "category",
-                "type": "text",
-                "value": "all"
-              }
-            ],
-            "sampleDataByArgs": [
-              {
-                "data": [
-                  {
-                    "content": "$base64:bitcoin.pdf",
-                    "data_format": {
-                      "data_type": "pdf",
-                      "filename": "bitcoin.pdf"
+              "description": "Live Grid",
+              "endpoint": "test_websocket",
+              "gridData": {
+                "h": 9,
+                "w": 20
+              },
+              "name": "Live Grid",
+              "params": [
+                {
+                  "description": "The symbol to get details for",
+                  "label": "Symbol",
+                  "multiSelect": true,
+                  "options": [
+                    {
+                      "label": "AAPL",
+                      "value": "AAPL"
+                    },
+                    {
+                      "label": "GOOGL",
+                      "value": "GOOGL"
+                    },
+                    {
+                      "label": "MSFT",
+                      "value": "MSFT"
+                    },
+                    {
+                      "label": "AMZN",
+                      "value": "AMZN"
+                    },
+                    {
+                      "label": "TSLA",
+                      "value": "TSLA"
                     }
+                  ],
+                  "paramName": "symbol",
+                  "type": "text",
+                  "value": "TSLA"
+                }
+              ],
+              "sampleDataByArgs": [
+                {
+                  "data": [
+                    {
+                      "change": 4.46,
+                      "change_percent": 0.03,
+                      "prev_close": 145.54,
+                      "price": 150.0,
+                      "symbol": "AAPL",
+                      "volume": 1000000
+                    }
+                  ],
+                  "dataArgs": {
+                    "symbol": "AAPL"
                   }
-                ],
-                "dataArgs": {
-                  "filenames": [
+                },
+                {
+                  "data": [
+                    {
+                      "change": -50.0,
+                      "change_percent": -0.01,
+                      "prev_close": 3450.0,
+                      "price": 3400.0,
+                      "symbol": "AMZN",
+                      "volume": 1000000
+                    }
+                  ],
+                  "dataArgs": {
+                    "symbol": "AMZN"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 50.0,
+                      "change_percent": 0.01,
+                      "prev_close": 2850.0,
+                      "price": 2900.0,
+                      "symbol": "GOOGL",
+                      "volume": 1000000
+                    }
+                  ],
+                  "dataArgs": {
+                    "symbol": "GOOGL"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": -95.0,
+                      "change_percent": -0.12,
+                      "prev_close": 305.0,
+                      "price": 300.0,
+                      "symbol": "MSFT",
+                      "volume": 1000000
+                    }
+                  ],
+                  "dataArgs": {
+                    "symbol": "MSFT"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 100.0,
+                      "change_percent": 0.12,
+                      "prev_close": 795.0,
+                      "price": 700.0,
+                      "symbol": "TSLA",
+                      "volume": 1000000
+                    }
+                  ],
+                  "dataArgs": {
+                    "symbol": "TSLA"
+                  }
+                }
+              ],
+              "type": "live_grid",
+              "wsEndpoint": "ws"
+            },
+            "test_metric": {
+              "category": "Test",
+              "description": "A metric widget example",
+              "endpoint": "test_metric",
+              "gridData": {
+                "h": 5,
+                "w": 5
+              },
+              "name": "Metric Widget",
+              "sampleData": [
+                {
+                  "delta": "0.01",
+                  "label": "Example Label",
+                  "value": "12345"
+                },
+                {
+                  "delta": "-0.01",
+                  "label": "Example Label 2",
+                  "value": "12345"
+                },
+                {
+                  "delta": "5.67",
+                  "label": "Example Label 3",
+                  "value": "12345"
+                },
+                {
+                  "delta": "0.00",
+                  "label": "Example Label 4",
+                  "value": "12345"
+                },
+                {
+                  "label": "Example Label 4",
+                  "value": "12345"
+                }
+              ],
+              "type": "metric"
+            },
+            "whitepapers": {
+              "description": "A collection of crypto whitepapers.",
+              "endpoint": "/whitepapers/base64",
+              "gridData": {
+                "h": 10,
+                "w": 40
+              },
+              "name": "Whitepapers",
+              "params": [
+                {
+                  "description": "Whitepaper filenames.",
+                  "label": "Filenames",
+                  "multiSelect": true,
+                  "options": [
+                    {
+                      "label": "Bitcoin",
+                      "value": "bitcoin.pdf"
+                    },
+                    {
+                      "label": "Ethereum",
+                      "value": "ethereum.pdf"
+                    },
+                    {
+                      "label": "Chainlink",
+                      "value": "chainlink.pdf"
+                    },
+                    {
+                      "label": "Solana",
+                      "value": "solana.pdf"
+                    }
+                  ],
+                  "optionsEndpoint": "/options",
+                  "optionsParams": {
+                    "category": "$category"
+                  },
+                  "paramName": "filenames",
+                  "roles": [
+                    "fileSelector"
+                  ],
+                  "show": false,
+                  "type": "endpoint",
+                  "value": [
                     "bitcoin.pdf"
                   ]
-                }
-              },
-              {
-                "data": [
-                  {
-                    "content": "$base64:chainlink.pdf",
-                    "data_format": {
-                      "data_type": "pdf",
-                      "filename": "chainlink.pdf"
+                },
+                {
+                  "description": "Category of whitepaper to fetch.",
+                  "label": "Category",
+                  "options": [
+                    {
+                      "label": "All",
+                      "value": "all"
+                    },
+                    {
+                      "label": "L1",
+                      "value": "l1"
+                    },
+                    {
+                      "label": "L2",
+                      "value": "l2"
+                    },
+                    {
+                      "label": "Oracles",
+                      "value": "oracles"
+                    },
+                    {
+                      "label": "Defi",
+                      "value": "defi"
                     }
-                  }
-                ],
-                "dataArgs": {
-                  "filenames": [
-                    "chainlink.pdf"
-                  ]
+                  ],
+                  "paramName": "category",
+                  "type": "text",
+                  "value": "all"
                 }
-              },
-              {
-                "data": [
-                  {
-                    "content": "$base64:ethereum.pdf",
-                    "data_format": {
-                      "data_type": "pdf",
-                      "filename": "ethereum.pdf"
+              ],
+              "sampleDataByArgs": [
+                {
+                  "data": [
+                    {
+                      "content": "$base64:bitcoin.pdf",
+                      "data_format": {
+                        "data_type": "pdf",
+                        "filename": "bitcoin.pdf"
+                      }
                     }
+                  ],
+                  "dataArgs": {
+                    "filenames": [
+                      "bitcoin.pdf"
+                    ]
                   }
-                ],
-                "dataArgs": {
-                  "filenames": [
-                    "ethereum.pdf"
-                  ]
-                }
-              },
-              {
-                "data": [
-                  {
-                    "content": "$base64:solana.pdf",
-                    "data_format": {
-                      "data_type": "pdf",
-                      "filename": "solana.pdf"
+                },
+                {
+                  "data": [
+                    {
+                      "content": "$base64:chainlink.pdf",
+                      "data_format": {
+                        "data_type": "pdf",
+                        "filename": "chainlink.pdf"
+                      }
                     }
+                  ],
+                  "dataArgs": {
+                    "filenames": [
+                      "chainlink.pdf"
+                    ]
                   }
-                ],
-                "dataArgs": {
-                  "filenames": [
-                    "solana.pdf"
-                  ]
+                },
+                {
+                  "data": [
+                    {
+                      "content": "$base64:ethereum.pdf",
+                      "data_format": {
+                        "data_type": "pdf",
+                        "filename": "ethereum.pdf"
+                      }
+                    }
+                  ],
+                  "dataArgs": {
+                    "filenames": [
+                      "ethereum.pdf"
+                    ]
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "content": "$base64:solana.pdf",
+                      "data_format": {
+                        "data_type": "pdf",
+                        "filename": "solana.pdf"
+                      }
+                    }
+                  ],
+                  "dataArgs": {
+                    "filenames": [
+                      "solana.pdf"
+                    ]
+                  }
                 }
-              }
-            ],
-            "type": "multi_file_viewer"
-          }
-        },
-        "apps_json": []
+              ],
+              "type": "multi_file_viewer"
+            }
+          },
+          "apps_json": []
+        }
+      },
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "equity_research_workbench_valuation_football_field"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "equity_research_workbench_valuation_football_field",
+          "data_args": {}
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Usage Widget Examples multi_stark_portfolio"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Usage Widget Examples multi_stark_portfolio",
+          "widget_id": "live_grid_example"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Usage Widget Examples multi_stark_portfolio",
+          "widget_id": "live_grid_example",
+          "data_args": {}
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "html",
+          "name": "Backend Build Note",
+          "data": "<section>Built with stark and sector exposure.</section>"
+        }
       }
-    },
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Stark Enterprise"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "equity_research_workbench_valuation_football_field"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "equity_research_workbench_valuation_football_field",
-        "data_args": {}
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Usage Widget Examples multi_stark_portfolio"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Usage Widget Examples multi_stark_portfolio",
-        "widget_id": "live_grid_example"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Usage Widget Examples multi_stark_portfolio",
-        "widget_id": "live_grid_example",
-        "data_args": {}
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "html",
-        "name": "Backend Build Note",
-        "data": "<section>Built with stark and sector exposure.</section>"
-      }
+    ],
+    "limits": {
+      "max_turns": 12
     }
-  ],
-  "limits": {
-    "max_turns": 12
   }
 }

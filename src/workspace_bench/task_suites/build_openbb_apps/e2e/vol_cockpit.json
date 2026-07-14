@@ -9,31 +9,33 @@
     "Vol Desk Data",
     "3M"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "html",
@@ -156,145 +158,145 @@
         "scope": "dashboard",
         "contains": "Vol Cockpit"
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Vol Desk Data",
-        "url": "http://localhost:7801",
-        "widgets_json": {
-          "vol_cockpit_table": {
-            "name": "Vol Cockpit Table",
-            "description": "Implied and realized volatility by tenor.",
-            "endpoint": "/vol-cockpit-table",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "tenor",
-                    "headerName": "Tenor",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "iv_pct",
-                    "headerName": "Iv Pct",
-                    "cellDataType": "number",
-                    "formatterFn": "percent"
-                  },
-                  {
-                    "field": "realized_pct",
-                    "headerName": "Realized Pct",
-                    "cellDataType": "number",
-                    "formatterFn": "percent"
-                  },
-                  {
-                    "field": "as_of",
-                    "headerName": "As Of",
-                    "cellDataType": "dateString"
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "tenor",
-                "type": "text",
-                "label": "Tenor",
-                "value": "1M",
-                "description": "Vol Cockpit Table focus field."
-              }
-            ]
-          },
-          "vix_advanced": {
-            "name": "VIX Advanced Chart",
-            "description": "TradingView advanced charting for VIX futures.",
-            "endpoint": "/udf",
-            "type": "advanced_charting",
-            "gridData": {
-              "w": 20,
-              "h": 20
-            },
-            "data": {
-              "defaultSymbol": "VIX",
-              "updateFrequency": 60000,
-              "valueField": "vix_advanced_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Vol Cockpit",
-            "description": "Volatility table and advanced chart.",
-            "tabs": {
-              "surface": {
-                "id": "surface",
-                "name": "Surface",
-                "layout": [
-                  {
-                    "i": "vol_cockpit_table",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Vol Desk Data",
+          "url": "http://localhost:7801",
+          "widgets_json": {
+            "vol_cockpit_table": {
+              "name": "Vol Cockpit Table",
+              "description": "Implied and realized volatility by tenor.",
+              "endpoint": "/vol-cockpit-table",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "chart": {
-                "id": "chart",
-                "name": "Chart",
-                "layout": [
-                  {
-                    "i": "vix_advanced",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "tenor",
+                      "headerName": "Tenor",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "iv_pct",
+                      "headerName": "Iv Pct",
+                      "cellDataType": "number",
+                      "formatterFn": "percent"
+                    },
+                    {
+                      "field": "realized_pct",
+                      "headerName": "Realized Pct",
+                      "cellDataType": "number",
+                      "formatterFn": "percent"
+                    },
+                    {
+                      "field": "as_of",
+                      "headerName": "As Of",
+                      "cellDataType": "dateString"
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "tenor",
+                  "type": "text",
+                  "label": "Tenor",
+                  "value": "1M",
+                  "description": "Vol Cockpit Table focus field."
+                }
+              ]
             },
-            "groups": []
+            "vix_advanced": {
+              "name": "VIX Advanced Chart",
+              "description": "TradingView advanced charting for VIX futures.",
+              "endpoint": "/udf",
+              "type": "advanced_charting",
+              "gridData": {
+                "w": 20,
+                "h": 20
+              },
+              "data": {
+                "defaultSymbol": "VIX",
+                "updateFrequency": 60000,
+                "valueField": "vix_advanced_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Vol Cockpit",
+              "description": "Volatility table and advanced chart.",
+              "tabs": {
+                "surface": {
+                  "id": "surface",
+                  "name": "Surface",
+                  "layout": [
+                    {
+                      "i": "vol_cockpit_table",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "chart": {
+                  "id": "chart",
+                  "name": "Chart",
+                  "layout": [
+                    {
+                      "i": "vix_advanced",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Vol Cockpit",
+          "dashboard_name": "Vol Cockpit Live",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "vol_cockpit_table",
+          "data_args": {
+            "tenor": "3M"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Vol Cockpit",
-        "dashboard_name": "Vol Cockpit Live",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "vol_cockpit_table",
-        "data_args": {
-          "tenor": "3M"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "html",
+          "name": "Vol Cockpit",
+          "data": "<section>Vol Cockpit is live from Vol Desk Data: vol cockpit ready. Configured tenor=3M.</section>"
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "html",
-        "name": "Vol Cockpit",
-        "data": "<section>Vol Cockpit is live from Vol Desk Data: vol cockpit ready. Configured tenor=3M.</section>"
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

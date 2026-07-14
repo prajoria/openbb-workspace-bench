@@ -4,24 +4,26 @@
   "family": "apps",
   "difficulty": "hard",
   "prompt": "Instantiate the Fund Operations Control Tower app from the Bench Stark Enterprise backend as a new dashboard named Ops Control Room. Then add the Break Aging widget (id fund_operations_control_tower_recons_break_aging) to the Recons tab of the new dashboard.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
-      }
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_backends",
+      "manage_apps",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget"
     ]
   },
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_backends",
-    "manage_apps",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget"
-  ],
-  "success": {
+  "eval": {
     "required_dashboard_name_contains": "Ops Control Room",
     "required_tabs": [
       "overview",
@@ -59,55 +61,55 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
+    },
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "list"
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Fund Operations Control Tower",
+          "dashboard_name": "Ops Control Room",
+          "activate": true
+        }
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "tab",
+          "tab_id": "recons"
+        }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "fund_operations_control_tower_recons_break_aging"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "fund_operations_control_tower_recons_break_aging",
+          "data_args": {}
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 9
     }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "list"
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Fund Operations Control Tower",
-        "dashboard_name": "Ops Control Room",
-        "activate": true
-      }
-    },
-    {
-      "tool": "navigate_workspace",
-      "args": {
-        "operation": "tab",
-        "tab_id": "recons"
-      }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Stark Enterprise"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "fund_operations_control_tower_recons_break_aging"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "fund_operations_control_tower_recons_break_aging",
-        "data_args": {}
-      }
-    }
-  ],
-  "limits": {
-    "max_turns": 9
   }
 }

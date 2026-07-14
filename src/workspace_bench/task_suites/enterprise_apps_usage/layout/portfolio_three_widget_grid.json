@@ -4,74 +4,76 @@
   "family": "layout",
   "difficulty": "hard",
   "prompt": "Arrange the three widget-examples widgets into a grid: holdings at columns 0-24 rows 0-12, sector exposure at columns 24-40 rows 0-12, and risk metrics full-width below them (40 columns, 8 rows, starting at row 12).",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "widget-examples"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "widget-examples"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Grid Task",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Widget Examples",
+            "widget_id": "test_metric",
+            "data_args": {},
+            "layout": {
+              "x": 2,
+              "y": 2,
+              "w": 16,
+              "h": 9
+            },
+            "widget_uuid": "usage_portfolio_three_widget_grid_widget_001"
+          },
+          {
+            "origin": "Widget Examples",
+            "widget_id": "live_grid_example",
+            "data_args": {},
+            "layout": {
+              "x": 6,
+              "y": 13,
+              "w": 16,
+              "h": 9
+            },
+            "widget_uuid": "usage_portfolio_three_widget_grid_widget_002"
+          },
+          {
+            "origin": "Widget Examples",
+            "widget_id": "whitepapers",
+            "data_args": {
+              "filenames": [
+                "bitcoin.pdf"
+              ]
+            },
+            "layout": {
+              "x": 10,
+              "y": 24,
+              "w": 16,
+              "h": 9
+            },
+            "widget_uuid": "usage_portfolio_three_widget_grid_widget_003"
+          }
+        ],
+        "dashboard_id": "usage_portfolio_three_widget_grid_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "read_widget",
+      "update_widget_layout"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Grid Task",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Widget Examples",
-          "widget_id": "test_metric",
-          "data_args": {},
-          "layout": {
-            "x": 2,
-            "y": 2,
-            "w": 16,
-            "h": 9
-          },
-          "widget_uuid": "usage_portfolio_three_widget_grid_widget_001"
-        },
-        {
-          "origin": "Widget Examples",
-          "widget_id": "live_grid_example",
-          "data_args": {},
-          "layout": {
-            "x": 6,
-            "y": 13,
-            "w": 16,
-            "h": 9
-          },
-          "widget_uuid": "usage_portfolio_three_widget_grid_widget_002"
-        },
-        {
-          "origin": "Widget Examples",
-          "widget_id": "whitepapers",
-          "data_args": {
-            "filenames": [
-              "bitcoin.pdf"
-            ]
-          },
-          "layout": {
-            "x": 10,
-            "y": 24,
-            "w": 16,
-            "h": 9
-          },
-          "widget_uuid": "usage_portfolio_three_widget_grid_widget_003"
-        }
-      ],
-      "dashboard_id": "usage_portfolio_three_widget_grid_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "read_widget",
-    "update_widget_layout"
-  ],
-  "success": {
+  "eval": {
     "required_layouts": [
       {
         "widget_uuid": "usage_portfolio_three_widget_grid_widget_001",
@@ -106,45 +108,45 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
+    },
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "usage_portfolio_three_widget_grid_widget_001",
+          "x": 0,
+          "y": 0,
+          "w": 24,
+          "h": 12
+        }
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "usage_portfolio_three_widget_grid_widget_002",
+          "x": 24,
+          "y": 0,
+          "w": 16,
+          "h": 12
+        }
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "usage_portfolio_three_widget_grid_widget_003",
+          "x": 0,
+          "y": 12,
+          "w": 40,
+          "h": 8
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 6
     }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_uuid": "usage_portfolio_three_widget_grid_widget_001",
-        "x": 0,
-        "y": 0,
-        "w": 24,
-        "h": 12
-      }
-    },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_uuid": "usage_portfolio_three_widget_grid_widget_002",
-        "x": 24,
-        "y": 0,
-        "w": 16,
-        "h": 12
-      }
-    },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_uuid": "usage_portfolio_three_widget_grid_widget_003",
-        "x": 0,
-        "y": 12,
-        "w": 40,
-        "h": 8
-      }
-    }
-  ],
-  "limits": {
-    "max_turns": 6
   }
 }

@@ -4,49 +4,51 @@
   "family": "params",
   "difficulty": "medium",
   "prompt": "Discover the catalog and schema for Bench Stark Enterprise/client_360_portfolio_view_exposure_summary, call get_params_options for client, then create it with client=Northstar Endowment.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
-      }
-    ]
-  },
-  "initial_state": {
-    "dashboard": {
-      "name": "Parameter Options",
-      "activate": true,
-      "tabs": [
+  "setup": {
+    "fixtures": {
+      "backends": [
         {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "dashboard_id": "usage_discover_schema_then_options_for_exposure_summary_dashboard_001",
-      "widgets": [
-        {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "stress_liquidity_lab_scenarios_position_impact_table",
-          "data_args": {},
-          "tab_id": "",
-          "layout": {
-            "x": 0,
-            "y": 500,
-            "w": 8,
-            "h": 4
-          },
-          "widget_uuid": "usage_discover_schema_then_options_for_exposure_summary_widget_001"
+          "name": "stark-enterprise"
         }
       ]
-    }
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Parameter Options",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "dashboard_id": "usage_discover_schema_then_options_for_exposure_summary_dashboard_001",
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "stress_liquidity_lab_scenarios_position_impact_table",
+            "data_args": {},
+            "tab_id": "",
+            "layout": {
+              "x": 0,
+              "y": 500,
+              "w": 8,
+              "h": 4
+            },
+            "widget_uuid": "usage_discover_schema_then_options_for_exposure_summary_widget_001"
+          }
+        ]
+      }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "create_widget"
+    ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "create_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Bench Stark Enterprise",
@@ -94,46 +96,46 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Bench Stark Enterprise"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "client_360_portfolio_view_exposure_summary"
-      }
-    },
-    {
-      "tool": "get_params_options",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "client_360_portfolio_view_exposure_summary",
-        "param_name": "client"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "client_360_portfolio_view_exposure_summary",
-        "data_args": {
-          "client": "Northstar Endowment"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "client_360_portfolio_view_exposure_summary"
+        }
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "client_360_portfolio_view_exposure_summary",
+          "param_name": "client"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "client_360_portfolio_view_exposure_summary",
+          "data_args": {
+            "client": "Northstar Endowment"
+          }
         }
       }
+    ],
+    "limits": {
+      "max_turns": 8
     }
-  ],
-  "limits": {
-    "max_turns": 8
   }
 }

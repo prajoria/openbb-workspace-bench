@@ -9,31 +9,33 @@
     "order_id",
     "symbol"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2,
@@ -109,80 +111,80 @@
         "path": "refetchInterval",
         "expected": 45000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Execution Desk Data",
-        "url": "http://localhost:7806",
-        "widgets_json": {
-          "exception_refresh_grid": {
-            "name": "Exception Refresh Grid",
-            "description": "Execution exceptions with manual refresh.",
-            "endpoint": "/exception-refresh",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "order_id",
-                    "headerName": "Order Id",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "symbol",
-                    "headerName": "Symbol",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "age_min",
-                    "headerName": "Age Min",
-                    "cellDataType": "number"
-                  }
-                ]
-              }
-            },
-            "refetchInterval": 45000,
-            "runButton": true,
-            "category": "Execution",
-            "staleTime": 900000
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Execution Desk Data",
+          "url": "http://localhost:7806",
+          "widgets_json": {
+            "exception_refresh_grid": {
+              "name": "Exception Refresh Grid",
+              "description": "Execution exceptions with manual refresh.",
+              "endpoint": "/exception-refresh",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "order_id",
+                      "headerName": "Order Id",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "symbol",
+                      "headerName": "Symbol",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "age_min",
+                      "headerName": "Age Min",
+                      "cellDataType": "number"
+                    }
+                  ]
+                }
+              },
+              "refetchInterval": 45000,
+              "runButton": true,
+              "category": "Execution",
+              "staleTime": 900000
+            }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Execution Desk Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Execution Desk Data",
+          "widget_id": "exception_refresh_grid"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Execution Desk Data",
+          "widget_id": "exception_refresh_grid"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Execution Desk Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Execution Desk Data",
-        "widget_id": "exception_refresh_grid"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Execution Desk Data",
-        "widget_id": "exception_refresh_grid"
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

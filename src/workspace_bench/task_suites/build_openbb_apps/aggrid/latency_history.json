@@ -9,31 +9,33 @@
     "vendor",
     "day"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 2,
       "max_repeated_snapshots": 2
@@ -136,120 +138,120 @@
         "path": "staleTime",
         "expected": 900000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Vendor SLA Data",
-        "url": "http://localhost:7804",
-        "widgets_json": {
-          "latency_history": {
-            "name": "Latency History",
-            "description": "Vendor latency history.",
-            "endpoint": "/latency-history",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "vendor",
-                    "headerName": "Vendor",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "day",
-                    "headerName": "Day",
-                    "cellDataType": "dateString"
-                  },
-                  {
-                    "field": "latency_ms",
-                    "headerName": "Latency Ms",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "breach",
-                    "headerName": "Breach",
-                    "cellDataType": "boolean"
-                  }
-                ]
-              }
-            },
-            "staleTime": 900000
-          },
-          "breach_metric": {
-            "name": "Open Breaches",
-            "description": "Count of open SLA breaches.",
-            "endpoint": "/breach-count",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "data": {
-              "valueField": "breach_metric_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Vendor Health",
-            "description": "Latency and breach posture.",
-            "tabs": {
-              "latency": {
-                "id": "latency",
-                "name": "Latency",
-                "layout": [
-                  {
-                    "i": "latency_history",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Vendor SLA Data",
+          "url": "http://localhost:7804",
+          "widgets_json": {
+            "latency_history": {
+              "name": "Latency History",
+              "description": "Vendor latency history.",
+              "endpoint": "/latency-history",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "signals": {
-                "id": "signals",
-                "name": "Signals",
-                "layout": [
-                  {
-                    "i": "breach_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 12,
-                    "h": 6
-                  }
-                ]
-              }
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "vendor",
+                      "headerName": "Vendor",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "day",
+                      "headerName": "Day",
+                      "cellDataType": "dateString"
+                    },
+                    {
+                      "field": "latency_ms",
+                      "headerName": "Latency Ms",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "breach",
+                      "headerName": "Breach",
+                      "cellDataType": "boolean"
+                    }
+                  ]
+                }
+              },
+              "staleTime": 900000
             },
-            "groups": []
-          }
-        ]
+            "breach_metric": {
+              "name": "Open Breaches",
+              "description": "Count of open SLA breaches.",
+              "endpoint": "/breach-count",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "data": {
+                "valueField": "breach_metric_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Vendor Health",
+              "description": "Latency and breach posture.",
+              "tabs": {
+                "latency": {
+                  "id": "latency",
+                  "name": "Latency",
+                  "layout": [
+                    {
+                      "i": "latency_history",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "signals": {
+                  "id": "signals",
+                  "name": "Signals",
+                  "layout": [
+                    {
+                      "i": "breach_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 12,
+                      "h": 6
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Vendor Health",
+          "dashboard_name": "Vendor Health Live",
+          "activate": true
+        }
       }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Vendor Health",
-        "dashboard_name": "Vendor Health Live",
-        "activate": true
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

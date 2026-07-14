@@ -10,31 +10,33 @@
     "MSFT",
     "ticker"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "html",
@@ -205,271 +207,271 @@
         "scope": "dashboard",
         "contains": "Research Room"
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Bench Stark Enterprise",
-        "url": "http://localhost:7809",
-        "widgets_json": {
-          "research_room_table": {
-            "name": "Research Room Table",
-            "description": "Analyst research actions by ticker.",
-            "endpoint": "/research-room-table",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Bench Stark Enterprise",
+          "url": "http://localhost:7809",
+          "widgets_json": {
+            "research_room_table": {
+              "name": "Research Room Table",
+              "description": "Analyst research actions by ticker.",
+              "endpoint": "/research-room-table",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "ticker",
+                      "headerName": "Ticker",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "analyst",
+                      "headerName": "Analyst",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "rating",
+                      "headerName": "Rating",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "upside_pct",
+                      "headerName": "Upside Pct",
+                      "cellDataType": "number",
+                      "formatterFn": "percent"
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "ticker",
+                  "type": "text",
+                  "label": "Ticker",
+                  "value": "AAPL",
+                  "description": "Research Room Table focus field."
+                }
+              ]
             },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "ticker",
-                    "headerName": "Ticker",
-                    "cellDataType": "text"
+            "portfolio_command_center_holdings_sector_exposure": {
+              "category": "Portfolio",
+              "data": {
+                "table": {
+                  "chartView": {
+                    "cellRangeCols": {
+                      "area": [
+                        "bucket",
+                        "value"
+                      ],
+                      "column": [
+                        "bucket",
+                        "value"
+                      ],
+                      "groupedBar": [
+                        "bucket",
+                        "value"
+                      ],
+                      "groupedColumn": [
+                        "bucket",
+                        "value"
+                      ],
+                      "line": [
+                        "bucket",
+                        "value"
+                      ],
+                      "stackedArea": [
+                        "bucket",
+                        "value"
+                      ],
+                      "stackedBar": [
+                        "bucket",
+                        "value"
+                      ],
+                      "stackedColumn": [
+                        "bucket",
+                        "value"
+                      ],
+                      "treemap": [
+                        "bucket",
+                        "value"
+                      ]
+                    },
+                    "chartMiniChartEnabled": false,
+                    "chartNavigatorEnabled": false,
+                    "chartType": "treemap",
+                    "enabled": true,
+                    "ignoreCellRange": false
                   },
-                  {
-                    "field": "analyst",
-                    "headerName": "Analyst",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "rating",
-                    "headerName": "Rating",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "upside_pct",
-                    "headerName": "Upside Pct",
-                    "cellDataType": "number",
-                    "formatterFn": "percent"
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "ticker",
-                "type": "text",
-                "label": "Ticker",
-                "value": "AAPL",
-                "description": "Research Room Table focus field."
-              }
-            ]
-          },
-          "portfolio_command_center_holdings_sector_exposure": {
-            "category": "Portfolio",
-            "data": {
-              "table": {
-                "chartView": {
-                  "cellRangeCols": {
-                    "area": [
-                      "bucket",
-                      "value"
-                    ],
-                    "column": [
-                      "bucket",
-                      "value"
-                    ],
-                    "groupedBar": [
-                      "bucket",
-                      "value"
-                    ],
-                    "groupedColumn": [
-                      "bucket",
-                      "value"
-                    ],
-                    "line": [
-                      "bucket",
-                      "value"
-                    ],
-                    "stackedArea": [
-                      "bucket",
-                      "value"
-                    ],
-                    "stackedBar": [
-                      "bucket",
-                      "value"
-                    ],
-                    "stackedColumn": [
-                      "bucket",
-                      "value"
-                    ],
-                    "treemap": [
-                      "bucket",
-                      "value"
-                    ]
-                  },
-                  "chartMiniChartEnabled": false,
-                  "chartNavigatorEnabled": false,
-                  "chartType": "treemap",
-                  "enabled": true,
-                  "ignoreCellRange": false
+                  "columnsDefs": [
+                    {
+                      "cellDataType": "text",
+                      "chartDataType": "category",
+                      "field": "bucket",
+                      "headerName": "Bucket",
+                      "width": 150
+                    },
+                    {
+                      "cellDataType": "number",
+                      "chartDataType": "series",
+                      "field": "value",
+                      "formatterFn": "int",
+                      "headerName": "Value",
+                      "width": 150
+                    }
+                  ],
+                  "enableAdvanced": true,
+                  "enableCharts": true,
+                  "showAll": false
+                }
+              },
+              "description": "Sector Exposure for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows.",
+              "endpoint": "/portfolio_command_center_holdings_sector_exposure",
+              "gridData": {
+                "h": 14,
+                "w": 20
+              },
+              "name": "Sector Exposure",
+              "params": [
+                {
+                  "description": "Fund or vehicle scope.",
+                  "label": "Fund",
+                  "options": [
+                    {
+                      "label": "Flagship Long/Short",
+                      "value": "Flagship Long/Short"
+                    },
+                    {
+                      "label": "Global Opportunities",
+                      "value": "Global Opportunities"
+                    },
+                    {
+                      "label": "Income Fund",
+                      "value": "Income Fund"
+                    },
+                    {
+                      "label": "Multi-Asset Fund",
+                      "value": "Multi-Asset Fund"
+                    }
+                  ],
+                  "paramName": "fund",
+                  "type": "text",
+                  "value": "Flagship Long/Short"
                 },
-                "columnsDefs": [
-                  {
-                    "cellDataType": "text",
-                    "chartDataType": "category",
-                    "field": "bucket",
-                    "headerName": "Bucket",
-                    "width": 150
-                  },
-                  {
-                    "cellDataType": "number",
-                    "chartDataType": "series",
-                    "field": "value",
-                    "formatterFn": "int",
-                    "headerName": "Value",
-                    "width": 150
-                  }
-                ],
-                "enableAdvanced": true,
-                "enableCharts": true,
-                "showAll": false
-              }
-            },
-            "description": "Sector Exposure for Portfolio Command Center (Portfolio Manager). Institutional demo view modeled on fund operating workflows.",
-            "endpoint": "/portfolio_command_center_holdings_sector_exposure",
-            "gridData": {
-              "h": 14,
-              "w": 20
-            },
-            "name": "Sector Exposure",
-            "params": [
-              {
-                "description": "Fund or vehicle scope.",
-                "label": "Fund",
-                "options": [
-                  {
-                    "label": "Flagship Long/Short",
-                    "value": "Flagship Long/Short"
-                  },
-                  {
-                    "label": "Global Opportunities",
-                    "value": "Global Opportunities"
-                  },
-                  {
-                    "label": "Income Fund",
-                    "value": "Income Fund"
-                  },
-                  {
-                    "label": "Multi-Asset Fund",
-                    "value": "Multi-Asset Fund"
-                  }
-                ],
-                "paramName": "fund",
-                "type": "text",
-                "value": "Flagship Long/Short"
+                {
+                  "description": "Reporting period.",
+                  "label": "Period",
+                  "options": [
+                    {
+                      "label": "1D",
+                      "value": "1D"
+                    },
+                    {
+                      "label": "MTD",
+                      "value": "MTD"
+                    },
+                    {
+                      "label": "QTD",
+                      "value": "QTD"
+                    },
+                    {
+                      "label": "YTD",
+                      "value": "YTD"
+                    },
+                    {
+                      "label": "1Y",
+                      "value": "1Y"
+                    }
+                  ],
+                  "paramName": "period",
+                  "type": "text",
+                  "value": "YTD"
+                }
+              ],
+              "source": [
+                "Aladdin Portfolio Master",
+                "Performance Book of Record"
+              ],
+              "subCategory": "Holdings & Performance",
+              "type": "table",
+              "widgetId": "portfolio_command_center_holdings_sector_exposure"
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Research Room",
+              "description": "Analyst actions and earnings notes.",
+              "tabs": {
+                "research": {
+                  "id": "research",
+                  "name": "Research",
+                  "layout": [
+                    {
+                      "i": "research_room_table",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "notes": {
+                  "id": "notes",
+                  "name": "Notes",
+                  "layout": [
+                    {
+                      "i": "portfolio_command_center_holdings_sector_exposure",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
               },
-              {
-                "description": "Reporting period.",
-                "label": "Period",
-                "options": [
-                  {
-                    "label": "1D",
-                    "value": "1D"
-                  },
-                  {
-                    "label": "MTD",
-                    "value": "MTD"
-                  },
-                  {
-                    "label": "QTD",
-                    "value": "QTD"
-                  },
-                  {
-                    "label": "YTD",
-                    "value": "YTD"
-                  },
-                  {
-                    "label": "1Y",
-                    "value": "1Y"
-                  }
-                ],
-                "paramName": "period",
-                "type": "text",
-                "value": "YTD"
-              }
-            ],
-            "source": [
-              "Aladdin Portfolio Master",
-              "Performance Book of Record"
-            ],
-            "subCategory": "Holdings & Performance",
-            "type": "table",
-            "widgetId": "portfolio_command_center_holdings_sector_exposure"
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Research Room",
+          "dashboard_name": "Research Room Live",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "research_room_table",
+          "data_args": {
+            "ticker": "MSFT"
           }
-        },
-        "apps_json": [
-          {
-            "name": "Research Room",
-            "description": "Analyst actions and earnings notes.",
-            "tabs": {
-              "research": {
-                "id": "research",
-                "name": "Research",
-                "layout": [
-                  {
-                    "i": "research_room_table",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              },
-              "notes": {
-                "id": "notes",
-                "name": "Notes",
-                "layout": [
-                  {
-                    "i": "portfolio_command_center_holdings_sector_exposure",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
-            },
-            "groups": []
-          }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Research Room",
-        "dashboard_name": "Research Room Live",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "research_room_table",
-        "data_args": {
-          "ticker": "MSFT"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "html",
+          "name": "Research Room",
+          "data": "<section>Research Room is live from Bench Stark Enterprise: research room ready. Configured ticker=MSFT.</section>"
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "html",
-        "name": "Research Room",
-        "data": "<section>Research Room is live from Bench Stark Enterprise: research room ready. Configured ticker=MSFT.</section>"
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

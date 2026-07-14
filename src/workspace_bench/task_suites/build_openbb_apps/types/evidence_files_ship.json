@@ -9,31 +9,33 @@
     "evidence",
     "Surveillance Data"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -135,149 +137,149 @@
       "required": true,
       "layout_refs_valid": true,
       "no_overlaps": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Surveillance Data",
-        "url": "http://localhost:7807",
-        "widgets_json": {
-          "evidence_files": {
-            "name": "Evidence Files",
-            "description": "Browse case evidence documents.",
-            "endpoint": "/evidence-files",
-            "type": "multi_file_viewer",
-            "gridData": {
-              "w": 20,
-              "h": 14
-            },
-            "params": [
-              {
-                "paramName": "file",
-                "type": "endpoint",
-                "label": "File",
-                "optionsEndpoint": "/evidence-file-options",
-                "roles": [
-                  "fileSelector"
-                ],
-                "multiSelect": true,
-                "value": []
-              }
-            ],
-            "staleTime": 900000,
-            "data": {
-              "valueField": "evidence_files_value"
-            }
-          },
-          "alert_metric": {
-            "name": "Open Alerts",
-            "description": "Open alert count.",
-            "endpoint": "/alert-count",
-            "type": "metric",
-            "gridData": {
-              "w": 5,
-              "h": 4
-            },
-            "staleTime": 900000,
-            "data": {
-              "valueField": "alert_metric_value"
-            }
-          },
-          "case_notes": {
-            "name": "Case Notes",
-            "description": "Notes for one surveillance case.",
-            "endpoint": "/case-notes",
-            "type": "markdown",
-            "gridData": {
-              "w": 12,
-              "h": 8
-            },
-            "params": [
-              {
-                "paramName": "case_id",
-                "type": "text",
-                "label": "Case",
-                "value": "C-1042",
-                "description": "Case identifier."
-              }
-            ],
-            "staleTime": 900000,
-            "data": {
-              "valueField": "case_notes_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Evidence Live",
-            "description": "Evidence files, alerts, and notes.",
-            "tabs": {
-              "evidence": {
-                "id": "evidence",
-                "name": "Evidence",
-                "layout": [
-                  {
-                    "i": "evidence_files",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 12
-                  }
-                ]
+    },
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Surveillance Data",
+          "url": "http://localhost:7807",
+          "widgets_json": {
+            "evidence_files": {
+              "name": "Evidence Files",
+              "description": "Browse case evidence documents.",
+              "endpoint": "/evidence-files",
+              "type": "multi_file_viewer",
+              "gridData": {
+                "w": 20,
+                "h": 14
               },
-              "signals": {
-                "id": "signals",
-                "name": "Signals",
-                "layout": [
-                  {
-                    "i": "alert_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 8,
-                    "h": 5
-                  }
-                ]
+              "params": [
+                {
+                  "paramName": "file",
+                  "type": "endpoint",
+                  "label": "File",
+                  "optionsEndpoint": "/evidence-file-options",
+                  "roles": [
+                    "fileSelector"
+                  ],
+                  "multiSelect": true,
+                  "value": []
+                }
+              ],
+              "staleTime": 900000,
+              "data": {
+                "valueField": "evidence_files_value"
               }
             },
-            "groups": []
-          }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Evidence Live",
-        "dashboard_name": "Evidence Live Live",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "evidence_files",
-        "data_args": {
-          "file": [
-            "case-pack.pdf"
+            "alert_metric": {
+              "name": "Open Alerts",
+              "description": "Open alert count.",
+              "endpoint": "/alert-count",
+              "type": "metric",
+              "gridData": {
+                "w": 5,
+                "h": 4
+              },
+              "staleTime": 900000,
+              "data": {
+                "valueField": "alert_metric_value"
+              }
+            },
+            "case_notes": {
+              "name": "Case Notes",
+              "description": "Notes for one surveillance case.",
+              "endpoint": "/case-notes",
+              "type": "markdown",
+              "gridData": {
+                "w": 12,
+                "h": 8
+              },
+              "params": [
+                {
+                  "paramName": "case_id",
+                  "type": "text",
+                  "label": "Case",
+                  "value": "C-1042",
+                  "description": "Case identifier."
+                }
+              ],
+              "staleTime": 900000,
+              "data": {
+                "valueField": "case_notes_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Evidence Live",
+              "description": "Evidence files, alerts, and notes.",
+              "tabs": {
+                "evidence": {
+                  "id": "evidence",
+                  "name": "Evidence",
+                  "layout": [
+                    {
+                      "i": "evidence_files",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 12
+                    }
+                  ]
+                },
+                "signals": {
+                  "id": "signals",
+                  "name": "Signals",
+                  "layout": [
+                    {
+                      "i": "alert_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 8,
+                      "h": 5
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
           ]
         }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Evidence Live",
+          "dashboard_name": "Evidence Live Live",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "evidence_files",
+          "data_args": {
+            "file": [
+              "case-pack.pdf"
+            ]
+          }
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Evidence Live",
+          "data": "Evidence Live is live from Surveillance Data: evidence ready."
+        }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Evidence Live",
-        "data": "Evidence Live is live from Surveillance Data: evidence ready."
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }

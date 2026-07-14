@@ -9,83 +9,85 @@
     "ticker",
     "as_of"
   ],
-  "fixtures": {},
-  "initial_state": {
-    "custom_backends": [
-      {
-        "name": "Vol Desk Data",
-        "url": "http://localhost:7801",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "vol_screener": {
-            "name": "Vol Screener",
-            "description": "Screen names by implied-vol criteria.",
-            "endpoint": "/vol-screener",
-            "type": "table",
-            "gridData": {
-              "w": 24,
-              "h": 10
+  "setup": {
+    "fixtures": {},
+    "initial_state": {
+      "custom_backends": [
+        {
+          "name": "Vol Desk Data",
+          "url": "http://localhost:7801",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "vol_screener": {
+              "name": "Vol Screener",
+              "description": "Screen names by implied-vol criteria.",
+              "endpoint": "/vol-screener",
+              "type": "table",
+              "gridData": {
+                "w": 24,
+                "h": 10
+              },
+              "params": [
+                {
+                  "paramName": "ticker",
+                  "type": "dropdownz",
+                  "label": "Ticker"
+                },
+                {
+                  "paramName": "as_of",
+                  "type": "date",
+                  "label": "As of",
+                  "value": "$currentDate-1d"
+                },
+                {
+                  "paramName": "only_liquid",
+                  "type": "boolean",
+                  "label": "Liquid only",
+                  "value": true
+                }
+              ]
             },
-            "params": [
-              {
-                "paramName": "ticker",
-                "type": "dropdownz",
-                "label": "Ticker"
+            "vol_regime_metric": {
+              "name": "Vol Regime",
+              "description": "Current volatility regime score.",
+              "endpoint": "/vol-regime",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
               },
-              {
-                "paramName": "as_of",
-                "type": "date",
-                "label": "As of",
-                "value": "$currentDate-1d"
-              },
-              {
-                "paramName": "only_liquid",
-                "type": "boolean",
-                "label": "Liquid only",
-                "value": true
+              "data": {
+                "valueField": "vol_regime_metric_value"
               }
-            ]
-          },
-          "vol_regime_metric": {
-            "name": "Vol Regime",
-            "description": "Current volatility regime score.",
-            "endpoint": "/vol-regime",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "data": {
-              "valueField": "vol_regime_metric_value"
             }
           }
         }
-      }
+      ]
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
     ]
   },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "eval": {
     "trace_checks": {
       "max_invalid_tool_calls": 1,
       "max_repeated_snapshots": 2,
@@ -161,91 +163,91 @@
         "path": "staleTime",
         "expected": 600000
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "refresh",
-        "backend_id": "backend_001",
-        "widgets_json": {
-          "vol_screener": {
-            "name": "Vol Screener",
-            "description": "Screen names by implied-vol criteria.",
-            "endpoint": "/vol-screener",
-            "type": "table",
-            "gridData": {
-              "w": 24,
-              "h": 10
-            },
-            "params": [
-              {
-                "paramName": "ticker",
-                "type": "ticker",
-                "label": "Ticker"
+    ],
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_001",
+          "widgets_json": {
+            "vol_screener": {
+              "name": "Vol Screener",
+              "description": "Screen names by implied-vol criteria.",
+              "endpoint": "/vol-screener",
+              "type": "table",
+              "gridData": {
+                "w": 24,
+                "h": 10
               },
-              {
-                "paramName": "as_of",
-                "type": "date",
-                "label": "As of",
-                "value": "$currentDate-1d"
-              },
-              {
-                "paramName": "only_liquid",
-                "type": "boolean",
-                "label": "Liquid only",
-                "value": true
+              "params": [
+                {
+                  "paramName": "ticker",
+                  "type": "ticker",
+                  "label": "Ticker"
+                },
+                {
+                  "paramName": "as_of",
+                  "type": "date",
+                  "label": "As of",
+                  "value": "$currentDate-1d"
+                },
+                {
+                  "paramName": "only_liquid",
+                  "type": "boolean",
+                  "label": "Liquid only",
+                  "value": true
+                }
+              ],
+              "staleTime": 600000,
+              "category": "Volatility",
+              "data": {
+                "valueField": "vol_screener_value"
               }
-            ],
-            "staleTime": 600000,
-            "category": "Volatility",
-            "data": {
-              "valueField": "vol_screener_value"
-            }
-          },
-          "vol_regime_metric": {
-            "name": "Vol Regime",
-            "description": "Current volatility regime score.",
-            "endpoint": "/vol-regime",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
             },
-            "data": {
-              "valueField": "vol_regime_metric_value"
+            "vol_regime_metric": {
+              "name": "Vol Regime",
+              "description": "Current volatility regime score.",
+              "endpoint": "/vol-regime",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "data": {
+                "valueField": "vol_regime_metric_value"
+              }
             }
           }
         }
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Vol Desk Data"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Vol Desk Data",
+          "widget_id": "vol_screener"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Vol Desk Data",
+          "widget_id": "vol_screener"
+        }
       }
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Vol Desk Data"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Vol Desk Data",
-        "widget_id": "vol_screener"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Vol Desk Data",
-        "widget_id": "vol_screener"
-      }
+    ],
+    "limits": {
+      "max_turns": 13
     }
-  ],
-  "limits": {
-    "max_turns": 13
   }
 }

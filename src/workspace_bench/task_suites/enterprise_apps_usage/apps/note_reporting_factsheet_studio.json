@@ -4,22 +4,24 @@
   "family": "apps",
   "difficulty": "medium",
   "prompt": "Create a new dashboard named Factsheet Control by instantiating the Reporting & Factsheet Studio app from the Bench Stark Enterprise backend, then add a note on the Factsheets tab mentioning factsheet and distribution.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "stark-enterprise"
-      }
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "stark-enterprise"
+        }
+      ]
+    },
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_backends",
+      "manage_apps",
+      "navigate_workspace",
+      "add_generative_widget"
     ]
   },
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_backends",
-    "manage_apps",
-    "navigate_workspace",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_dashboard_name_contains": "Factsheet Control",
     "required_tabs": [
       "overview",
@@ -60,42 +62,42 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
+    },
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "list"
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Reporting & Factsheet Studio",
+          "dashboard_name": "Factsheet Control",
+          "activate": true
+        }
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "tab",
+          "tab_id": "factsheets"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Brief Note",
+          "data": "Factsheet preview done; distribution status pending."
+        }
+      }
+    ],
+    "limits": {
+      "max_turns": 7
     }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "list"
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Reporting & Factsheet Studio",
-        "dashboard_name": "Factsheet Control",
-        "activate": true
-      }
-    },
-    {
-      "tool": "navigate_workspace",
-      "args": {
-        "operation": "tab",
-        "tab_id": "factsheets"
-      }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Brief Note",
-        "data": "Factsheet preview done; distribution status pending."
-      }
-    }
-  ],
-  "limits": {
-    "max_turns": 7
   }
 }

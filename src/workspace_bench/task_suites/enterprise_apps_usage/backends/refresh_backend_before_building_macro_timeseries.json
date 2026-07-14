@@ -4,31 +4,33 @@
   "family": "backends",
   "difficulty": "medium",
   "prompt": "Register Usage Getting Started refresh_backend_before_building_macro_timeseries with backend name getting-started, refresh it, then add Usage Getting Started refresh_backend_before_building_macro_timeseries/company_performance with data_args {\"company\": \"GM\", \"year\": \"2024\"} and document that the backend was refreshed.",
-  "fixtures": {
-    "backends": []
+  "setup": {
+    "fixtures": {
+      "backends": []
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Backend Refresh Build",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "dashboard_id": "usage_refresh_backend_before_building_macro_timeseries_dashboard_001"
+      }
+    },
+    "allowed_tools": [
+      "manage_backends",
+      "get_workspace_snapshot",
+      "list_available_widgets",
+      "get_widget_schema",
+      "create_widget",
+      "add_generative_widget"
+    ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Backend Refresh Build",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "dashboard_id": "usage_refresh_backend_before_building_macro_timeseries_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "manage_backends",
-    "get_workspace_snapshot",
-    "list_available_widgets",
-    "get_widget_schema",
-    "create_widget",
-    "add_generative_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Usage Getting Started refresh_backend_before_building_macro_timeseries",
@@ -291,1196 +293,1196 @@
         }
       ],
       "pinned_paths": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Usage Getting Started refresh_backend_before_building_macro_timeseries",
-        "url": "http://127.0.0.1:9106",
-        "widgets_json": {
-          "company_list": {
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "cellDataType": "text",
-                    "field": "companyName",
-                    "headerName": "Company",
-                    "renderFn": "cellOnClick",
-                    "renderFnParams": {
-                      "actionType": "groupBy",
-                      "groupBy": {
-                        "paramName": "companyId",
-                        "valueField": "companyId"
-                      }
+    },
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Usage Getting Started refresh_backend_before_building_macro_timeseries",
+          "url": "http://127.0.0.1:9106",
+          "widgets_json": {
+            "company_list": {
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "cellDataType": "text",
+                      "field": "companyName",
+                      "headerName": "Company",
+                      "renderFn": "cellOnClick",
+                      "renderFnParams": {
+                        "actionType": "groupBy",
+                        "groupBy": {
+                          "paramName": "companyId",
+                          "valueField": "companyId"
+                        }
+                      },
+                      "width": 200
                     },
-                    "width": 200
-                  },
-                  {
-                    "cellDataType": "number",
-                    "field": "price",
-                    "formatterFn": "none",
-                    "headerName": "Price",
-                    "width": 120
-                  }
-                ],
-                "showAll": true
-              }
-            },
-            "description": "Table showing company names but passing IDs on click",
-            "endpoint": "company_list",
-            "name": "Company List with ID Mapping",
-            "params": [
-              {
-                "description": "Company identifier",
-                "label": "Company ID",
-                "options": [
-                  {
-                    "label": "Toyota Motor Corporation",
-                    "value": "TM"
-                  },
-                  {
-                    "label": "Volkswagen Group",
-                    "value": "VWAGY"
-                  },
-                  {
-                    "label": "General Motors",
-                    "value": "GM"
-                  },
-                  {
-                    "label": "Ford Motor Company",
-                    "value": "F"
-                  },
-                  {
-                    "label": "Tesla Inc.",
-                    "value": "TSLA"
-                  }
-                ],
-                "optionsEndpoint": "/company_options",
-                "paramName": "companyId",
-                "show": true,
-                "type": "endpoint",
-                "value": "AAPL"
-              }
-            ],
-            "sampleData": [
-              {
-                "companyId": "AAPL",
-                "companyName": "Apple Inc.",
-                "price": 150.25
-              },
-              {
-                "companyId": "MSFT",
-                "companyName": "Microsoft Corporation",
-                "price": 350.5
-              }
-            ],
-            "type": "table"
-          },
-          "company_performance": {
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "cellDataType": "text",
-                    "field": "metric",
-                    "headerName": "Metric",
-                    "width": 150
-                  },
-                  {
-                    "cellDataType": "text",
-                    "field": "value",
-                    "headerName": "Value",
-                    "width": 150
-                  },
-                  {
-                    "cellDataType": "number",
-                    "field": "change",
-                    "formatterFn": "percent",
-                    "headerName": "Change",
-                    "renderFn": "greenRed",
-                    "width": 150
-                  }
-                ],
-                "showAll": true
-              }
-            },
-            "description": "Displays performance metrics for the selected car manufacturer",
-            "endpoint": "company_performance",
-            "gridData": {
-              "h": 8,
-              "w": 16
-            },
-            "name": "Car Manufacturer Performance",
-            "params": [
-              {
-                "description": "Select a car manufacturer to view performance",
-                "label": "Manufacturer",
-                "options": [
-                  {
-                    "label": "Toyota Motor Corporation",
-                    "value": "TM"
-                  },
-                  {
-                    "label": "Volkswagen Group",
-                    "value": "VWAGY"
-                  },
-                  {
-                    "label": "General Motors",
-                    "value": "GM"
-                  },
-                  {
-                    "label": "Ford Motor Company",
-                    "value": "F"
-                  },
-                  {
-                    "label": "Tesla Inc.",
-                    "value": "TSLA"
-                  }
-                ],
-                "optionsEndpoint": "/company_options",
-                "paramName": "company",
-                "type": "endpoint",
-                "value": "TM"
-              },
-              {
-                "description": "Select model year to view performance",
-                "label": "Model Year",
-                "options": [
-                  {
-                    "label": "2024",
-                    "value": "2024"
-                  },
-                  {
-                    "label": "2023",
-                    "value": "2023"
-                  },
-                  {
-                    "label": "2022",
-                    "value": "2022"
-                  }
-                ],
-                "paramName": "year",
-                "type": "text",
-                "value": "2024"
-              }
-            ],
-            "sampleDataByArgs": [
-              {
-                "data": [
-                  {
-                    "change": 0.5,
-                    "metric": "Global Sales",
-                    "value": "4.02M"
-                  },
-                  {
-                    "change": 25.8,
-                    "metric": "EV Sales",
-                    "value": "0.31M"
-                  },
-                  {
-                    "change": -0.8,
-                    "metric": "Operating Margin",
-                    "value": "5.0%"
-                  },
-                  {
-                    "change": 8.9,
-                    "metric": "R&D Investment",
-                    "value": "$6.24B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "F",
-                  "year": "2022"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 1.5,
-                    "metric": "Global Sales",
-                    "value": "4.08M"
-                  },
-                  {
-                    "change": 35.2,
-                    "metric": "EV Sales",
-                    "value": "0.42M"
-                  },
-                  {
-                    "change": 1.0,
-                    "metric": "Operating Margin",
-                    "value": "6.0%"
-                  },
-                  {
-                    "change": 13.5,
-                    "metric": "R&D Investment",
-                    "value": "$7.08B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "F",
-                  "year": "2023"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 2.8,
-                    "metric": "Global Sales",
-                    "value": "4.2M"
-                  },
-                  {
-                    "change": 42.5,
-                    "metric": "EV Sales",
-                    "value": "0.6M"
-                  },
-                  {
-                    "change": 1.5,
-                    "metric": "Operating Margin",
-                    "value": "7.5%"
-                  },
-                  {
-                    "change": 15.8,
-                    "metric": "R&D Investment",
-                    "value": "$8.2B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "F",
-                  "year": "2024"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 0.8,
-                    "metric": "Global Sales",
-                    "value": "6.43M"
-                  },
-                  {
-                    "change": 28.7,
-                    "metric": "EV Sales",
-                    "value": "0.39M"
-                  },
-                  {
-                    "change": -0.5,
-                    "metric": "Operating Margin",
-                    "value": "5.2%"
-                  },
-                  {
-                    "change": 9.8,
-                    "metric": "R&D Investment",
-                    "value": "$7.13B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "GM",
-                  "year": "2022"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 2.1,
-                    "metric": "Global Sales",
-                    "value": "6.57M"
-                  },
-                  {
-                    "change": 38.5,
-                    "metric": "EV Sales",
-                    "value": "0.54M"
-                  },
-                  {
-                    "change": 1.2,
-                    "metric": "Operating Margin",
-                    "value": "6.4%"
-                  },
-                  {
-                    "change": 14.2,
-                    "metric": "R&D Investment",
-                    "value": "$8.15B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "GM",
-                  "year": "2023"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 3.5,
-                    "metric": "Global Sales",
-                    "value": "6.8M"
-                  },
-                  {
-                    "change": 48.2,
-                    "metric": "EV Sales",
-                    "value": "0.8M"
-                  },
-                  {
-                    "change": 1.8,
-                    "metric": "Operating Margin",
-                    "value": "8.2%"
-                  },
-                  {
-                    "change": 16.5,
-                    "metric": "R&D Investment",
-                    "value": "$9.5B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "GM",
-                  "year": "2024"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 1.2,
-                    "metric": "Global Sales",
-                    "value": "9.67M"
-                  },
-                  {
-                    "change": 25.4,
-                    "metric": "EV Sales",
-                    "value": "0.61M"
-                  },
-                  {
-                    "change": -0.5,
-                    "metric": "Operating Margin",
-                    "value": "6.5%"
-                  },
-                  {
-                    "change": 8.7,
-                    "metric": "R&D Investment",
-                    "value": "$9.6B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "TM",
-                  "year": "2022"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 3.1,
-                    "metric": "Global Sales",
-                    "value": "9.98M"
-                  },
-                  {
-                    "change": 35.2,
-                    "metric": "EV Sales",
-                    "value": "0.82M"
-                  },
-                  {
-                    "change": 0.8,
-                    "metric": "Operating Margin",
-                    "value": "7.3%"
-                  },
-                  {
-                    "change": 12.5,
-                    "metric": "R&D Investment",
-                    "value": "$10.8B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "TM",
-                  "year": "2023"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 5.2,
-                    "metric": "Global Sales",
-                    "value": "10.5M"
-                  },
-                  {
-                    "change": 45.8,
-                    "metric": "EV Sales",
-                    "value": "1.2M"
-                  },
-                  {
-                    "change": 1.2,
-                    "metric": "Operating Margin",
-                    "value": "8.5%"
-                  },
-                  {
-                    "change": 15.3,
-                    "metric": "R&D Investment",
-                    "value": "$12.5B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "TM",
-                  "year": "2024"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 21.8,
-                    "metric": "Global Sales",
-                    "value": "1.21M"
-                  },
-                  {
-                    "change": 21.8,
-                    "metric": "EV Sales",
-                    "value": "1.21M"
-                  },
-                  {
-                    "change": 1.8,
-                    "metric": "Operating Margin",
-                    "value": "9.3%"
-                  },
-                  {
-                    "change": 18.5,
-                    "metric": "R&D Investment",
-                    "value": "$2.93B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "TSLA",
-                  "year": "2022"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 28.5,
-                    "metric": "Global Sales",
-                    "value": "1.55M"
-                  },
-                  {
-                    "change": 28.5,
-                    "metric": "EV Sales",
-                    "value": "1.55M"
-                  },
-                  {
-                    "change": 2.5,
-                    "metric": "Operating Margin",
-                    "value": "11.8%"
-                  },
-                  {
-                    "change": 22.3,
-                    "metric": "R&D Investment",
-                    "value": "$3.58B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "TSLA",
-                  "year": "2023"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 35.2,
-                    "metric": "Global Sales",
-                    "value": "2.1M"
-                  },
-                  {
-                    "change": 35.2,
-                    "metric": "EV Sales",
-                    "value": "2.1M"
-                  },
-                  {
-                    "change": 3.7,
-                    "metric": "Operating Margin",
-                    "value": "15.5%"
-                  },
-                  {
-                    "change": 25.8,
-                    "metric": "R&D Investment",
-                    "value": "$4.5B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "TSLA",
-                  "year": "2024"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 1.8,
-                    "metric": "Global Sales",
-                    "value": "8.5M"
-                  },
-                  {
-                    "change": 32.5,
-                    "metric": "EV Sales",
-                    "value": "0.69M"
-                  },
-                  {
-                    "change": -0.7,
-                    "metric": "Operating Margin",
-                    "value": "5.4%"
-                  },
-                  {
-                    "change": 10.8,
-                    "metric": "R&D Investment",
-                    "value": "$11.1B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "VWAGY",
-                  "year": "2022"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 3.2,
-                    "metric": "Global Sales",
-                    "value": "8.78M"
-                  },
-                  {
-                    "change": 42.1,
-                    "metric": "EV Sales",
-                    "value": "0.98M"
-                  },
-                  {
-                    "change": 0.9,
-                    "metric": "Operating Margin",
-                    "value": "6.3%"
-                  },
-                  {
-                    "change": 15.2,
-                    "metric": "R&D Investment",
-                    "value": "$12.8B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "VWAGY",
-                  "year": "2023"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 4.8,
-                    "metric": "Global Sales",
-                    "value": "9.2M"
-                  },
-                  {
-                    "change": 52.3,
-                    "metric": "EV Sales",
-                    "value": "1.5M"
-                  },
-                  {
-                    "change": 1.5,
-                    "metric": "Operating Margin",
-                    "value": "7.8%"
-                  },
-                  {
-                    "change": 18.5,
-                    "metric": "R&D Investment",
-                    "value": "$15.2B"
-                  }
-                ],
-                "dataArgs": {
-                  "company": "VWAGY",
-                  "year": "2024"
-                }
-              }
-            ],
-            "type": "table"
-          },
-          "live_grid_data": {
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "symbol",
-                    "headerName": "Symbol"
-                  },
-                  {
-                    "field": "price",
-                    "headerName": "Price",
-                    "renderFn": "showCellChange",
-                    "renderFnParams": {
-                      "colorValueKey": "change"
+                    {
+                      "cellDataType": "number",
+                      "field": "price",
+                      "formatterFn": "none",
+                      "headerName": "Price",
+                      "width": 120
                     }
-                  },
-                  {
-                    "field": "change_percent",
-                    "headerName": "Change %",
-                    "renderFn": "greenRed"
-                  },
-                  {
-                    "enableCellChangeWs": false,
-                    "field": "volume",
-                    "headerName": "Volume"
-                  }
-                ],
-                "showAll": true
+                  ],
+                  "showAll": true
+                }
               },
-              "wsRowIdColumn": "symbol"
+              "description": "Table showing company names but passing IDs on click",
+              "endpoint": "company_list",
+              "name": "Company List with ID Mapping",
+              "params": [
+                {
+                  "description": "Company identifier",
+                  "label": "Company ID",
+                  "options": [
+                    {
+                      "label": "Toyota Motor Corporation",
+                      "value": "TM"
+                    },
+                    {
+                      "label": "Volkswagen Group",
+                      "value": "VWAGY"
+                    },
+                    {
+                      "label": "General Motors",
+                      "value": "GM"
+                    },
+                    {
+                      "label": "Ford Motor Company",
+                      "value": "F"
+                    },
+                    {
+                      "label": "Tesla Inc.",
+                      "value": "TSLA"
+                    }
+                  ],
+                  "optionsEndpoint": "/company_options",
+                  "paramName": "companyId",
+                  "show": true,
+                  "type": "endpoint",
+                  "value": "AAPL"
+                }
+              ],
+              "sampleData": [
+                {
+                  "companyId": "AAPL",
+                  "companyName": "Apple Inc.",
+                  "price": 150.25
+                },
+                {
+                  "companyId": "MSFT",
+                  "companyName": "Microsoft Corporation",
+                  "price": 350.5
+                }
+              ],
+              "type": "table"
             },
-            "description": "Live Grid with real-time WebSocket updates",
-            "endpoint": "live_grid_data",
-            "gridData": {
-              "h": 9,
-              "w": 20
+            "company_performance": {
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "cellDataType": "text",
+                      "field": "metric",
+                      "headerName": "Metric",
+                      "width": 150
+                    },
+                    {
+                      "cellDataType": "text",
+                      "field": "value",
+                      "headerName": "Value",
+                      "width": 150
+                    },
+                    {
+                      "cellDataType": "number",
+                      "field": "change",
+                      "formatterFn": "percent",
+                      "headerName": "Change",
+                      "renderFn": "greenRed",
+                      "width": 150
+                    }
+                  ],
+                  "showAll": true
+                }
+              },
+              "description": "Displays performance metrics for the selected car manufacturer",
+              "endpoint": "company_performance",
+              "gridData": {
+                "h": 8,
+                "w": 16
+              },
+              "name": "Car Manufacturer Performance",
+              "params": [
+                {
+                  "description": "Select a car manufacturer to view performance",
+                  "label": "Manufacturer",
+                  "options": [
+                    {
+                      "label": "Toyota Motor Corporation",
+                      "value": "TM"
+                    },
+                    {
+                      "label": "Volkswagen Group",
+                      "value": "VWAGY"
+                    },
+                    {
+                      "label": "General Motors",
+                      "value": "GM"
+                    },
+                    {
+                      "label": "Ford Motor Company",
+                      "value": "F"
+                    },
+                    {
+                      "label": "Tesla Inc.",
+                      "value": "TSLA"
+                    }
+                  ],
+                  "optionsEndpoint": "/company_options",
+                  "paramName": "company",
+                  "type": "endpoint",
+                  "value": "TM"
+                },
+                {
+                  "description": "Select model year to view performance",
+                  "label": "Model Year",
+                  "options": [
+                    {
+                      "label": "2024",
+                      "value": "2024"
+                    },
+                    {
+                      "label": "2023",
+                      "value": "2023"
+                    },
+                    {
+                      "label": "2022",
+                      "value": "2022"
+                    }
+                  ],
+                  "paramName": "year",
+                  "type": "text",
+                  "value": "2024"
+                }
+              ],
+              "sampleDataByArgs": [
+                {
+                  "data": [
+                    {
+                      "change": 0.5,
+                      "metric": "Global Sales",
+                      "value": "4.02M"
+                    },
+                    {
+                      "change": 25.8,
+                      "metric": "EV Sales",
+                      "value": "0.31M"
+                    },
+                    {
+                      "change": -0.8,
+                      "metric": "Operating Margin",
+                      "value": "5.0%"
+                    },
+                    {
+                      "change": 8.9,
+                      "metric": "R&D Investment",
+                      "value": "$6.24B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "F",
+                    "year": "2022"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 1.5,
+                      "metric": "Global Sales",
+                      "value": "4.08M"
+                    },
+                    {
+                      "change": 35.2,
+                      "metric": "EV Sales",
+                      "value": "0.42M"
+                    },
+                    {
+                      "change": 1.0,
+                      "metric": "Operating Margin",
+                      "value": "6.0%"
+                    },
+                    {
+                      "change": 13.5,
+                      "metric": "R&D Investment",
+                      "value": "$7.08B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "F",
+                    "year": "2023"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 2.8,
+                      "metric": "Global Sales",
+                      "value": "4.2M"
+                    },
+                    {
+                      "change": 42.5,
+                      "metric": "EV Sales",
+                      "value": "0.6M"
+                    },
+                    {
+                      "change": 1.5,
+                      "metric": "Operating Margin",
+                      "value": "7.5%"
+                    },
+                    {
+                      "change": 15.8,
+                      "metric": "R&D Investment",
+                      "value": "$8.2B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "F",
+                    "year": "2024"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 0.8,
+                      "metric": "Global Sales",
+                      "value": "6.43M"
+                    },
+                    {
+                      "change": 28.7,
+                      "metric": "EV Sales",
+                      "value": "0.39M"
+                    },
+                    {
+                      "change": -0.5,
+                      "metric": "Operating Margin",
+                      "value": "5.2%"
+                    },
+                    {
+                      "change": 9.8,
+                      "metric": "R&D Investment",
+                      "value": "$7.13B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "GM",
+                    "year": "2022"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 2.1,
+                      "metric": "Global Sales",
+                      "value": "6.57M"
+                    },
+                    {
+                      "change": 38.5,
+                      "metric": "EV Sales",
+                      "value": "0.54M"
+                    },
+                    {
+                      "change": 1.2,
+                      "metric": "Operating Margin",
+                      "value": "6.4%"
+                    },
+                    {
+                      "change": 14.2,
+                      "metric": "R&D Investment",
+                      "value": "$8.15B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "GM",
+                    "year": "2023"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 3.5,
+                      "metric": "Global Sales",
+                      "value": "6.8M"
+                    },
+                    {
+                      "change": 48.2,
+                      "metric": "EV Sales",
+                      "value": "0.8M"
+                    },
+                    {
+                      "change": 1.8,
+                      "metric": "Operating Margin",
+                      "value": "8.2%"
+                    },
+                    {
+                      "change": 16.5,
+                      "metric": "R&D Investment",
+                      "value": "$9.5B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "GM",
+                    "year": "2024"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 1.2,
+                      "metric": "Global Sales",
+                      "value": "9.67M"
+                    },
+                    {
+                      "change": 25.4,
+                      "metric": "EV Sales",
+                      "value": "0.61M"
+                    },
+                    {
+                      "change": -0.5,
+                      "metric": "Operating Margin",
+                      "value": "6.5%"
+                    },
+                    {
+                      "change": 8.7,
+                      "metric": "R&D Investment",
+                      "value": "$9.6B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "TM",
+                    "year": "2022"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 3.1,
+                      "metric": "Global Sales",
+                      "value": "9.98M"
+                    },
+                    {
+                      "change": 35.2,
+                      "metric": "EV Sales",
+                      "value": "0.82M"
+                    },
+                    {
+                      "change": 0.8,
+                      "metric": "Operating Margin",
+                      "value": "7.3%"
+                    },
+                    {
+                      "change": 12.5,
+                      "metric": "R&D Investment",
+                      "value": "$10.8B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "TM",
+                    "year": "2023"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 5.2,
+                      "metric": "Global Sales",
+                      "value": "10.5M"
+                    },
+                    {
+                      "change": 45.8,
+                      "metric": "EV Sales",
+                      "value": "1.2M"
+                    },
+                    {
+                      "change": 1.2,
+                      "metric": "Operating Margin",
+                      "value": "8.5%"
+                    },
+                    {
+                      "change": 15.3,
+                      "metric": "R&D Investment",
+                      "value": "$12.5B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "TM",
+                    "year": "2024"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 21.8,
+                      "metric": "Global Sales",
+                      "value": "1.21M"
+                    },
+                    {
+                      "change": 21.8,
+                      "metric": "EV Sales",
+                      "value": "1.21M"
+                    },
+                    {
+                      "change": 1.8,
+                      "metric": "Operating Margin",
+                      "value": "9.3%"
+                    },
+                    {
+                      "change": 18.5,
+                      "metric": "R&D Investment",
+                      "value": "$2.93B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "TSLA",
+                    "year": "2022"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 28.5,
+                      "metric": "Global Sales",
+                      "value": "1.55M"
+                    },
+                    {
+                      "change": 28.5,
+                      "metric": "EV Sales",
+                      "value": "1.55M"
+                    },
+                    {
+                      "change": 2.5,
+                      "metric": "Operating Margin",
+                      "value": "11.8%"
+                    },
+                    {
+                      "change": 22.3,
+                      "metric": "R&D Investment",
+                      "value": "$3.58B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "TSLA",
+                    "year": "2023"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 35.2,
+                      "metric": "Global Sales",
+                      "value": "2.1M"
+                    },
+                    {
+                      "change": 35.2,
+                      "metric": "EV Sales",
+                      "value": "2.1M"
+                    },
+                    {
+                      "change": 3.7,
+                      "metric": "Operating Margin",
+                      "value": "15.5%"
+                    },
+                    {
+                      "change": 25.8,
+                      "metric": "R&D Investment",
+                      "value": "$4.5B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "TSLA",
+                    "year": "2024"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 1.8,
+                      "metric": "Global Sales",
+                      "value": "8.5M"
+                    },
+                    {
+                      "change": 32.5,
+                      "metric": "EV Sales",
+                      "value": "0.69M"
+                    },
+                    {
+                      "change": -0.7,
+                      "metric": "Operating Margin",
+                      "value": "5.4%"
+                    },
+                    {
+                      "change": 10.8,
+                      "metric": "R&D Investment",
+                      "value": "$11.1B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "VWAGY",
+                    "year": "2022"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 3.2,
+                      "metric": "Global Sales",
+                      "value": "8.78M"
+                    },
+                    {
+                      "change": 42.1,
+                      "metric": "EV Sales",
+                      "value": "0.98M"
+                    },
+                    {
+                      "change": 0.9,
+                      "metric": "Operating Margin",
+                      "value": "6.3%"
+                    },
+                    {
+                      "change": 15.2,
+                      "metric": "R&D Investment",
+                      "value": "$12.8B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "VWAGY",
+                    "year": "2023"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 4.8,
+                      "metric": "Global Sales",
+                      "value": "9.2M"
+                    },
+                    {
+                      "change": 52.3,
+                      "metric": "EV Sales",
+                      "value": "1.5M"
+                    },
+                    {
+                      "change": 1.5,
+                      "metric": "Operating Margin",
+                      "value": "7.8%"
+                    },
+                    {
+                      "change": 18.5,
+                      "metric": "R&D Investment",
+                      "value": "$15.2B"
+                    }
+                  ],
+                  "dataArgs": {
+                    "company": "VWAGY",
+                    "year": "2024"
+                  }
+                }
+              ],
+              "type": "table"
             },
-            "name": "Live Grid",
-            "params": [
-              {
-                "description": "The symbol to get details for",
-                "label": "Symbol",
-                "multiSelect": true,
-                "options": [
-                  {
-                    "label": "AAPL",
-                    "value": "AAPL"
-                  },
-                  {
-                    "label": "GOOGL",
-                    "value": "GOOGL"
-                  },
-                  {
-                    "label": "MSFT",
-                    "value": "MSFT"
-                  },
-                  {
-                    "label": "AMZN",
-                    "value": "AMZN"
-                  },
-                  {
-                    "label": "TSLA",
-                    "value": "TSLA"
-                  }
-                ],
-                "paramName": "symbol",
-                "type": "text",
-                "value": "TSLA"
-              }
-            ],
-            "sampleDataByArgs": [
-              {
-                "data": [
-                  {
-                    "change": 4.46,
-                    "change_percent": 0.03,
-                    "prev_close": 145.54,
-                    "price": 150.0,
-                    "symbol": "AAPL",
-                    "volume": 1000000
-                  }
-                ],
-                "dataArgs": {
-                  "symbol": "AAPL"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 2.5,
-                    "change_percent": 0.014,
-                    "prev_close": 175.5,
-                    "price": 178.0,
-                    "symbol": "AMZN",
-                    "volume": 900000
-                  }
-                ],
-                "dataArgs": {
-                  "symbol": "AMZN"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 1.8,
-                    "change_percent": 0.013,
-                    "prev_close": 138.2,
-                    "price": 140.0,
-                    "symbol": "GOOGL",
-                    "volume": 800000
-                  }
-                ],
-                "dataArgs": {
-                  "symbol": "GOOGL"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 5.0,
-                    "change_percent": 0.014,
-                    "prev_close": 345.0,
-                    "price": 350.0,
-                    "symbol": "MSFT",
-                    "volume": 1200000
-                  }
-                ],
-                "dataArgs": {
-                  "symbol": "MSFT"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "change": 5.0,
-                    "change_percent": 0.021,
-                    "prev_close": 240.0,
-                    "price": 245.0,
-                    "symbol": "TSLA",
-                    "volume": 1500000
-                  }
-                ],
-                "dataArgs": {
-                  "symbol": "TSLA"
-                }
-              }
-            ],
-            "type": "live_grid",
-            "wsEndpoint": "live_grid_ws"
-          },
-          "sample_newsfeed": {
-            "description": "A simple newsfeed widget with example articles",
-            "endpoint": "sample_newsfeed",
-            "gridData": {
-              "h": 20,
-              "w": 40
-            },
-            "name": "Sample News Feed",
-            "params": [
-              {
-                "description": "Filter news by category",
-                "label": "Category",
-                "options": [
-                  {
-                    "label": "All",
-                    "value": "all"
-                  },
-                  {
-                    "label": "Technology",
-                    "value": "tech"
-                  },
-                  {
-                    "label": "Business",
-                    "value": "business"
-                  },
-                  {
-                    "label": "Science",
-                    "value": "science"
-                  }
-                ],
-                "paramName": "category",
-                "type": "text",
-                "value": "all"
-              },
-              {
-                "description": "Maximum number of articles to display",
-                "label": "Number of Articles",
-                "paramName": "limit",
-                "type": "number",
-                "value": "5"
-              }
-            ],
-            "sampleDataByArgs": [
-              {
-                "data": [
-                  {
-                    "author": "Robert Williams",
-                    "body": "# Global Markets Rally on Positive Economic Data\n\nStock markets worldwide experienced significant gains today.\n\n## Market Performance\n- S&P 500: +2.3%\n- NASDAQ: +2.8%\n- FTSE 100: +1.9%\n- Nikkei 225: +2.1%",
-                    "date": "$currentDate-1h",
-                    "excerpt": "Stock markets across the globe surged today...",
-                    "title": "Global Markets Rally on Positive Economic Data"
-                  },
-                  {
-                    "author": "Lisa Anderson",
-                    "body": "# E-commerce Giant Announces Major Expansion into Southeast Asia\n\nMegaShop today unveiled ambitious plans to expand its presence across Southeast Asia with a $2 billion investment.\n\nThe expansion includes:\n- New fulfillment centers in 5 countries\n- Partnership with 10,000 local merchants\n- Same-day delivery in major metropolitan areas",
-                    "date": "$currentDate-4h",
-                    "excerpt": "MegaShop reveals plans to invest $2 billion...",
-                    "title": "E-commerce Giant Announces Major Expansion into Southeast Asia"
-                  }
-                ],
-                "dataArgs": {
-                  "category": "business"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "author": "Dr. Emily Rogers",
-                    "body": "# Scientists Discover New Earth-like Exoplanet in Habitable Zone\n\nA team of international astronomers has announced the discovery of an Earth-like exoplanet.\n\n## Planet Characteristics\n- **Size**: 1.2 times Earth's radius\n- **Orbital period**: 385 days\n- **Surface temperature**: Estimated 15\u00b0C average\n- **Atmosphere**: Preliminary data suggests presence of water vapor",
-                    "date": "$currentDate-3h",
-                    "excerpt": "Astronomers using the James Webb Space Telescope have identified...",
-                    "title": "Scientists Discover New Earth-like Exoplanet in Habitable Zone"
-                  },
-                  {
-                    "author": "Dr. James Martinez",
-                    "body": "# Breakthrough in Cancer Treatment: New Immunotherapy Shows Promise\n\nResearchers at the National Cancer Institute have reported extraordinary results from Phase II clinical trials.\n\n## Trial Results\n- 78% response rate in patients with advanced melanoma\n- 65% showed tumor reduction within 3 months\n- Minimal side effects compared to traditional chemotherapy",
-                    "date": "$currentDate-6h",
-                    "excerpt": "Clinical trials reveal remarkable success rates...",
-                    "title": "Breakthrough in Cancer Treatment: New Immunotherapy Shows Promise"
-                  }
-                ],
-                "dataArgs": {
-                  "category": "science"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "author": "Sarah Johnson",
-                    "body": "# AI Breakthrough: New Model Achieves Human-Level Reasoning\n\nResearchers at TechLab have unveiled a groundbreaking AI model that demonstrates unprecedented reasoning capabilities.\n\n## Key Features\n- **Advanced reasoning**: The model can solve complex logical problems\n- **Multimodal understanding**: Processes text, images, and audio simultaneously\n- **Energy efficient**: Uses 40% less computational resources than previous models",
-                    "date": "$currentDate-2h",
-                    "excerpt": "Researchers at TechLab have unveiled a groundbreaking AI model...",
-                    "title": "AI Breakthrough: New Model Achieves Human-Level Reasoning"
-                  },
-                  {
-                    "author": "Michael Chen",
-                    "body": "# Quantum Computing Startup Raises $500M in Series C Funding\n\nQuantumLeap Technologies announced today that it has secured $500 million in Series C funding.\n\nThe company plans to use the funding to:\n1. Scale manufacturing capabilities\n2. Expand research team by 200 engineers\n3. Develop partnerships with major cloud providers",
-                    "date": "$currentDate-5h",
-                    "excerpt": "QuantumLeap Technologies secures major funding round...",
-                    "title": "Quantum Computing Startup Raises $500M in Series C Funding"
-                  }
-                ],
-                "dataArgs": {
-                  "category": "tech"
-                }
-              },
-              {
-                "data": [
-                  {
-                    "author": "Robert Williams",
-                    "body": "# Global Markets Rally on Positive Economic Data\n\nStock markets worldwide experienced significant gains today.\n\n## Market Performance\n- S&P 500: +2.3%\n- NASDAQ: +2.8%\n- FTSE 100: +1.9%\n- Nikkei 225: +2.1%",
-                    "date": "$currentDate-1h",
-                    "excerpt": "Stock markets across the globe surged today...",
-                    "title": "Global Markets Rally on Positive Economic Data"
-                  },
-                  {
-                    "author": "Sarah Johnson",
-                    "body": "# AI Breakthrough: New Model Achieves Human-Level Reasoning\n\nResearchers at TechLab have unveiled a groundbreaking AI model that demonstrates unprecedented reasoning capabilities.\n\n## Key Features\n- **Advanced reasoning**: The model can solve complex logical problems\n- **Multimodal understanding**: Processes text, images, and audio simultaneously\n- **Energy efficient**: Uses 40% less computational resources than previous models",
-                    "date": "$currentDate-2h",
-                    "excerpt": "Researchers at TechLab have unveiled a groundbreaking AI model...",
-                    "title": "AI Breakthrough: New Model Achieves Human-Level Reasoning"
-                  },
-                  {
-                    "author": "Dr. Emily Rogers",
-                    "body": "# Scientists Discover New Earth-like Exoplanet in Habitable Zone\n\nA team of international astronomers has announced the discovery of an Earth-like exoplanet.\n\n## Planet Characteristics\n- **Size**: 1.2 times Earth's radius\n- **Orbital period**: 385 days\n- **Surface temperature**: Estimated 15\u00b0C average\n- **Atmosphere**: Preliminary data suggests presence of water vapor",
-                    "date": "$currentDate-3h",
-                    "excerpt": "Astronomers using the James Webb Space Telescope have identified...",
-                    "title": "Scientists Discover New Earth-like Exoplanet in Habitable Zone"
-                  },
-                  {
-                    "author": "Lisa Anderson",
-                    "body": "# E-commerce Giant Announces Major Expansion into Southeast Asia\n\nMegaShop today unveiled ambitious plans to expand its presence across Southeast Asia with a $2 billion investment.\n\nThe expansion includes:\n- New fulfillment centers in 5 countries\n- Partnership with 10,000 local merchants\n- Same-day delivery in major metropolitan areas",
-                    "date": "$currentDate-4h",
-                    "excerpt": "MegaShop reveals plans to invest $2 billion...",
-                    "title": "E-commerce Giant Announces Major Expansion into Southeast Asia"
-                  },
-                  {
-                    "author": "Michael Chen",
-                    "body": "# Quantum Computing Startup Raises $500M in Series C Funding\n\nQuantumLeap Technologies announced today that it has secured $500 million in Series C funding.\n\nThe company plans to use the funding to:\n1. Scale manufacturing capabilities\n2. Expand research team by 200 engineers\n3. Develop partnerships with major cloud providers",
-                    "date": "$currentDate-5h",
-                    "excerpt": "QuantumLeap Technologies secures major funding round...",
-                    "title": "Quantum Computing Startup Raises $500M in Series C Funding"
-                  }
-                ],
-                "dataArgs": {
-                  "category": "all"
-                }
-              }
-            ],
-            "source": "example",
-            "type": "newsfeed"
-          },
-          "table_to_time_series_widget": {
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "cellDataType": "dateString",
-                    "chartDataType": "category",
-                    "field": "date",
-                    "headerName": "Date"
-                  },
-                  {
-                    "cellDataType": "number",
-                    "chartDataType": "series",
-                    "field": "revenue",
-                    "headerName": "Revenue"
-                  },
-                  {
-                    "cellDataType": "number",
-                    "chartDataType": "series",
-                    "field": "profit",
-                    "headerName": "Profit"
-                  }
-                ],
-                "enableCharts": true,
-                "showAll": true
-              }
-            },
-            "description": "A table widget with time series data for line chart conversion",
-            "endpoint": "table_to_time_series_widget",
-            "gridData": {
-              "h": 12,
-              "w": 20
-            },
-            "name": "Table to Time Series Widget",
-            "sampleData": [
-              {
-                "date": "2024-01-01",
-                "profit": 25000,
-                "revenue": 100000
-              },
-              {
-                "date": "2024-02-01",
-                "profit": 28000,
-                "revenue": 115000
-              },
-              {
-                "date": "2024-03-01",
-                "profit": 32000,
-                "revenue": 125000
-              },
-              {
-                "date": "2024-04-01",
-                "profit": 35000,
-                "revenue": 140000
-              },
-              {
-                "date": "2024-05-01",
-                "profit": 40000,
-                "revenue": 155000
-              },
-              {
-                "date": "2024-06-01",
-                "profit": 45000,
-                "revenue": 170000
-              }
-            ],
-            "type": "table"
-          },
-          "table_widget_with_column_definitions": {
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "cellDataType": "text",
-                    "chartDataType": "category",
-                    "field": "stock",
-                    "headerName": "Stock"
-                  },
-                  {
-                    "cellDataType": "number",
-                    "chartDataType": "series",
-                    "field": "price",
-                    "headerName": "Price ($)"
-                  },
-                  {
-                    "cellDataType": "number",
-                    "chartDataType": "series",
-                    "field": "change",
-                    "headerName": "24h Change"
-                  }
-                ]
-              }
-            },
-            "description": "A table widget with custom column definitions",
-            "endpoint": "table_widget_with_column_definitions",
-            "gridData": {
-              "h": 6,
-              "w": 20
-            },
-            "name": "Table Widget with Column Definitions",
-            "sampleData": [
-              {
-                "change": 2.5,
-                "price": 150.25,
-                "stock": "AAPL"
-              },
-              {
-                "change": -1.2,
-                "price": 2800.75,
-                "stock": "GOOGL"
-              },
-              {
-                "change": 0.8,
-                "price": 340.5,
-                "stock": "MSFT"
-              }
-            ],
-            "type": "table"
-          },
-          "table_widget_with_grouping_by_cell_click": {
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "cellDataType": "text",
-                    "field": "symbol",
-                    "headerName": "Symbol",
-                    "pinned": "left",
-                    "renderFn": "cellOnClick",
-                    "renderFnParams": {
-                      "actionType": "groupBy",
-                      "groupBy": {
-                        "paramName": "symbol"
+            "live_grid_data": {
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "symbol",
+                      "headerName": "Symbol"
+                    },
+                    {
+                      "field": "price",
+                      "headerName": "Price",
+                      "renderFn": "showCellChange",
+                      "renderFnParams": {
+                        "colorValueKey": "change"
                       }
                     },
-                    "width": 120
-                  },
-                  {
-                    "cellDataType": "number",
-                    "field": "price",
-                    "formatterFn": "none",
-                    "headerName": "Price",
-                    "width": 120
-                  },
-                  {
-                    "cellDataType": "number",
-                    "field": "change",
-                    "formatterFn": "percent",
-                    "headerName": "Change",
-                    "renderFn": "greenRed",
-                    "width": 120
-                  },
-                  {
-                    "cellDataType": "number",
-                    "field": "volume",
-                    "formatterFn": "int",
-                    "headerName": "Volume",
-                    "width": 150
+                    {
+                      "field": "change_percent",
+                      "headerName": "Change %",
+                      "renderFn": "greenRed"
+                    },
+                    {
+                      "enableCellChangeWs": false,
+                      "field": "volume",
+                      "headerName": "Volume"
+                    }
+                  ],
+                  "showAll": true
+                },
+                "wsRowIdColumn": "symbol"
+              },
+              "description": "Live Grid with real-time WebSocket updates",
+              "endpoint": "live_grid_data",
+              "gridData": {
+                "h": 9,
+                "w": 20
+              },
+              "name": "Live Grid",
+              "params": [
+                {
+                  "description": "The symbol to get details for",
+                  "label": "Symbol",
+                  "multiSelect": true,
+                  "options": [
+                    {
+                      "label": "AAPL",
+                      "value": "AAPL"
+                    },
+                    {
+                      "label": "GOOGL",
+                      "value": "GOOGL"
+                    },
+                    {
+                      "label": "MSFT",
+                      "value": "MSFT"
+                    },
+                    {
+                      "label": "AMZN",
+                      "value": "AMZN"
+                    },
+                    {
+                      "label": "TSLA",
+                      "value": "TSLA"
+                    }
+                  ],
+                  "paramName": "symbol",
+                  "type": "text",
+                  "value": "TSLA"
+                }
+              ],
+              "sampleDataByArgs": [
+                {
+                  "data": [
+                    {
+                      "change": 4.46,
+                      "change_percent": 0.03,
+                      "prev_close": 145.54,
+                      "price": 150.0,
+                      "symbol": "AAPL",
+                      "volume": 1000000
+                    }
+                  ],
+                  "dataArgs": {
+                    "symbol": "AAPL"
                   }
-                ],
-                "showAll": true
-              }
-            },
-            "description": "A table widget that groups data when clicking on symbols. Click on a symbol to update all related widgets.",
-            "endpoint": "table_widget_with_grouping_by_cell_click",
-            "gridData": {
-              "h": 9,
-              "w": 20
-            },
-            "name": "Table widget with grouping by cell click",
-            "params": [
-              {
-                "description": "Select stocks to display",
-                "label": "Symbol",
-                "multiSelect": false,
-                "options": [
-                  {
-                    "label": "Apple Inc.",
-                    "value": "AAPL"
-                  },
-                  {
-                    "label": "Microsoft Corporation",
-                    "value": "MSFT"
-                  },
-                  {
-                    "label": "Google",
-                    "value": "GOOGL"
-                  },
-                  {
-                    "label": "Amazon",
-                    "value": "AMZN"
-                  },
-                  {
-                    "label": "Tesla",
-                    "value": "TSLA"
+                },
+                {
+                  "data": [
+                    {
+                      "change": 2.5,
+                      "change_percent": 0.014,
+                      "prev_close": 175.5,
+                      "price": 178.0,
+                      "symbol": "AMZN",
+                      "volume": 900000
+                    }
+                  ],
+                  "dataArgs": {
+                    "symbol": "AMZN"
                   }
-                ],
-                "optionsEndpoint": "/get_tickers_list",
-                "paramName": "symbol",
-                "show": true,
-                "type": "endpoint",
-                "value": "AAPL"
-              }
-            ],
-            "sampleData": [
-              {
-                "change": 2.5,
-                "price": 150.25,
-                "symbol": "AAPL",
-                "volume": 45000000
+                },
+                {
+                  "data": [
+                    {
+                      "change": 1.8,
+                      "change_percent": 0.013,
+                      "prev_close": 138.2,
+                      "price": 140.0,
+                      "symbol": "GOOGL",
+                      "volume": 800000
+                    }
+                  ],
+                  "dataArgs": {
+                    "symbol": "GOOGL"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 5.0,
+                      "change_percent": 0.014,
+                      "prev_close": 345.0,
+                      "price": 350.0,
+                      "symbol": "MSFT",
+                      "volume": 1200000
+                    }
+                  ],
+                  "dataArgs": {
+                    "symbol": "MSFT"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "change": 5.0,
+                      "change_percent": 0.021,
+                      "prev_close": 240.0,
+                      "price": 245.0,
+                      "symbol": "TSLA",
+                      "volume": 1500000
+                    }
+                  ],
+                  "dataArgs": {
+                    "symbol": "TSLA"
+                  }
+                }
+              ],
+              "type": "live_grid",
+              "wsEndpoint": "live_grid_ws"
+            },
+            "sample_newsfeed": {
+              "description": "A simple newsfeed widget with example articles",
+              "endpoint": "sample_newsfeed",
+              "gridData": {
+                "h": 20,
+                "w": 40
               },
-              {
-                "change": 1.8,
-                "price": 350.5,
-                "symbol": "MSFT",
-                "volume": 32000000
+              "name": "Sample News Feed",
+              "params": [
+                {
+                  "description": "Filter news by category",
+                  "label": "Category",
+                  "options": [
+                    {
+                      "label": "All",
+                      "value": "all"
+                    },
+                    {
+                      "label": "Technology",
+                      "value": "tech"
+                    },
+                    {
+                      "label": "Business",
+                      "value": "business"
+                    },
+                    {
+                      "label": "Science",
+                      "value": "science"
+                    }
+                  ],
+                  "paramName": "category",
+                  "type": "text",
+                  "value": "all"
+                },
+                {
+                  "description": "Maximum number of articles to display",
+                  "label": "Number of Articles",
+                  "paramName": "limit",
+                  "type": "number",
+                  "value": "5"
+                }
+              ],
+              "sampleDataByArgs": [
+                {
+                  "data": [
+                    {
+                      "author": "Robert Williams",
+                      "body": "# Global Markets Rally on Positive Economic Data\n\nStock markets worldwide experienced significant gains today.\n\n## Market Performance\n- S&P 500: +2.3%\n- NASDAQ: +2.8%\n- FTSE 100: +1.9%\n- Nikkei 225: +2.1%",
+                      "date": "$currentDate-1h",
+                      "excerpt": "Stock markets across the globe surged today...",
+                      "title": "Global Markets Rally on Positive Economic Data"
+                    },
+                    {
+                      "author": "Lisa Anderson",
+                      "body": "# E-commerce Giant Announces Major Expansion into Southeast Asia\n\nMegaShop today unveiled ambitious plans to expand its presence across Southeast Asia with a $2 billion investment.\n\nThe expansion includes:\n- New fulfillment centers in 5 countries\n- Partnership with 10,000 local merchants\n- Same-day delivery in major metropolitan areas",
+                      "date": "$currentDate-4h",
+                      "excerpt": "MegaShop reveals plans to invest $2 billion...",
+                      "title": "E-commerce Giant Announces Major Expansion into Southeast Asia"
+                    }
+                  ],
+                  "dataArgs": {
+                    "category": "business"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "author": "Dr. Emily Rogers",
+                      "body": "# Scientists Discover New Earth-like Exoplanet in Habitable Zone\n\nA team of international astronomers has announced the discovery of an Earth-like exoplanet.\n\n## Planet Characteristics\n- **Size**: 1.2 times Earth's radius\n- **Orbital period**: 385 days\n- **Surface temperature**: Estimated 15\u00b0C average\n- **Atmosphere**: Preliminary data suggests presence of water vapor",
+                      "date": "$currentDate-3h",
+                      "excerpt": "Astronomers using the James Webb Space Telescope have identified...",
+                      "title": "Scientists Discover New Earth-like Exoplanet in Habitable Zone"
+                    },
+                    {
+                      "author": "Dr. James Martinez",
+                      "body": "# Breakthrough in Cancer Treatment: New Immunotherapy Shows Promise\n\nResearchers at the National Cancer Institute have reported extraordinary results from Phase II clinical trials.\n\n## Trial Results\n- 78% response rate in patients with advanced melanoma\n- 65% showed tumor reduction within 3 months\n- Minimal side effects compared to traditional chemotherapy",
+                      "date": "$currentDate-6h",
+                      "excerpt": "Clinical trials reveal remarkable success rates...",
+                      "title": "Breakthrough in Cancer Treatment: New Immunotherapy Shows Promise"
+                    }
+                  ],
+                  "dataArgs": {
+                    "category": "science"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "author": "Sarah Johnson",
+                      "body": "# AI Breakthrough: New Model Achieves Human-Level Reasoning\n\nResearchers at TechLab have unveiled a groundbreaking AI model that demonstrates unprecedented reasoning capabilities.\n\n## Key Features\n- **Advanced reasoning**: The model can solve complex logical problems\n- **Multimodal understanding**: Processes text, images, and audio simultaneously\n- **Energy efficient**: Uses 40% less computational resources than previous models",
+                      "date": "$currentDate-2h",
+                      "excerpt": "Researchers at TechLab have unveiled a groundbreaking AI model...",
+                      "title": "AI Breakthrough: New Model Achieves Human-Level Reasoning"
+                    },
+                    {
+                      "author": "Michael Chen",
+                      "body": "# Quantum Computing Startup Raises $500M in Series C Funding\n\nQuantumLeap Technologies announced today that it has secured $500 million in Series C funding.\n\nThe company plans to use the funding to:\n1. Scale manufacturing capabilities\n2. Expand research team by 200 engineers\n3. Develop partnerships with major cloud providers",
+                      "date": "$currentDate-5h",
+                      "excerpt": "QuantumLeap Technologies secures major funding round...",
+                      "title": "Quantum Computing Startup Raises $500M in Series C Funding"
+                    }
+                  ],
+                  "dataArgs": {
+                    "category": "tech"
+                  }
+                },
+                {
+                  "data": [
+                    {
+                      "author": "Robert Williams",
+                      "body": "# Global Markets Rally on Positive Economic Data\n\nStock markets worldwide experienced significant gains today.\n\n## Market Performance\n- S&P 500: +2.3%\n- NASDAQ: +2.8%\n- FTSE 100: +1.9%\n- Nikkei 225: +2.1%",
+                      "date": "$currentDate-1h",
+                      "excerpt": "Stock markets across the globe surged today...",
+                      "title": "Global Markets Rally on Positive Economic Data"
+                    },
+                    {
+                      "author": "Sarah Johnson",
+                      "body": "# AI Breakthrough: New Model Achieves Human-Level Reasoning\n\nResearchers at TechLab have unveiled a groundbreaking AI model that demonstrates unprecedented reasoning capabilities.\n\n## Key Features\n- **Advanced reasoning**: The model can solve complex logical problems\n- **Multimodal understanding**: Processes text, images, and audio simultaneously\n- **Energy efficient**: Uses 40% less computational resources than previous models",
+                      "date": "$currentDate-2h",
+                      "excerpt": "Researchers at TechLab have unveiled a groundbreaking AI model...",
+                      "title": "AI Breakthrough: New Model Achieves Human-Level Reasoning"
+                    },
+                    {
+                      "author": "Dr. Emily Rogers",
+                      "body": "# Scientists Discover New Earth-like Exoplanet in Habitable Zone\n\nA team of international astronomers has announced the discovery of an Earth-like exoplanet.\n\n## Planet Characteristics\n- **Size**: 1.2 times Earth's radius\n- **Orbital period**: 385 days\n- **Surface temperature**: Estimated 15\u00b0C average\n- **Atmosphere**: Preliminary data suggests presence of water vapor",
+                      "date": "$currentDate-3h",
+                      "excerpt": "Astronomers using the James Webb Space Telescope have identified...",
+                      "title": "Scientists Discover New Earth-like Exoplanet in Habitable Zone"
+                    },
+                    {
+                      "author": "Lisa Anderson",
+                      "body": "# E-commerce Giant Announces Major Expansion into Southeast Asia\n\nMegaShop today unveiled ambitious plans to expand its presence across Southeast Asia with a $2 billion investment.\n\nThe expansion includes:\n- New fulfillment centers in 5 countries\n- Partnership with 10,000 local merchants\n- Same-day delivery in major metropolitan areas",
+                      "date": "$currentDate-4h",
+                      "excerpt": "MegaShop reveals plans to invest $2 billion...",
+                      "title": "E-commerce Giant Announces Major Expansion into Southeast Asia"
+                    },
+                    {
+                      "author": "Michael Chen",
+                      "body": "# Quantum Computing Startup Raises $500M in Series C Funding\n\nQuantumLeap Technologies announced today that it has secured $500 million in Series C funding.\n\nThe company plans to use the funding to:\n1. Scale manufacturing capabilities\n2. Expand research team by 200 engineers\n3. Develop partnerships with major cloud providers",
+                      "date": "$currentDate-5h",
+                      "excerpt": "QuantumLeap Technologies secures major funding round...",
+                      "title": "Quantum Computing Startup Raises $500M in Series C Funding"
+                    }
+                  ],
+                  "dataArgs": {
+                    "category": "all"
+                  }
+                }
+              ],
+              "source": "example",
+              "type": "newsfeed"
+            },
+            "table_to_time_series_widget": {
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "cellDataType": "dateString",
+                      "chartDataType": "category",
+                      "field": "date",
+                      "headerName": "Date"
+                    },
+                    {
+                      "cellDataType": "number",
+                      "chartDataType": "series",
+                      "field": "revenue",
+                      "headerName": "Revenue"
+                    },
+                    {
+                      "cellDataType": "number",
+                      "chartDataType": "series",
+                      "field": "profit",
+                      "headerName": "Profit"
+                    }
+                  ],
+                  "enableCharts": true,
+                  "showAll": true
+                }
               },
-              {
-                "change": -0.5,
-                "price": 140.75,
-                "symbol": "GOOGL",
-                "volume": 28000000
+              "description": "A table widget with time series data for line chart conversion",
+              "endpoint": "table_to_time_series_widget",
+              "gridData": {
+                "h": 12,
+                "w": 20
               },
-              {
-                "change": 3.2,
-                "price": 178.25,
-                "symbol": "AMZN",
-                "volume": 38000000
+              "name": "Table to Time Series Widget",
+              "sampleData": [
+                {
+                  "date": "2024-01-01",
+                  "profit": 25000,
+                  "revenue": 100000
+                },
+                {
+                  "date": "2024-02-01",
+                  "profit": 28000,
+                  "revenue": 115000
+                },
+                {
+                  "date": "2024-03-01",
+                  "profit": 32000,
+                  "revenue": 125000
+                },
+                {
+                  "date": "2024-04-01",
+                  "profit": 35000,
+                  "revenue": 140000
+                },
+                {
+                  "date": "2024-05-01",
+                  "profit": 40000,
+                  "revenue": 155000
+                },
+                {
+                  "date": "2024-06-01",
+                  "profit": 45000,
+                  "revenue": 170000
+                }
+              ],
+              "type": "table"
+            },
+            "table_widget_with_column_definitions": {
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "cellDataType": "text",
+                      "chartDataType": "category",
+                      "field": "stock",
+                      "headerName": "Stock"
+                    },
+                    {
+                      "cellDataType": "number",
+                      "chartDataType": "series",
+                      "field": "price",
+                      "headerName": "Price ($)"
+                    },
+                    {
+                      "cellDataType": "number",
+                      "chartDataType": "series",
+                      "field": "change",
+                      "headerName": "24h Change"
+                    }
+                  ]
+                }
               },
-              {
-                "change": -1.2,
-                "price": 245.8,
-                "symbol": "TSLA",
-                "volume": 52000000
-              }
-            ],
-            "type": "table"
+              "description": "A table widget with custom column definitions",
+              "endpoint": "table_widget_with_column_definitions",
+              "gridData": {
+                "h": 6,
+                "w": 20
+              },
+              "name": "Table Widget with Column Definitions",
+              "sampleData": [
+                {
+                  "change": 2.5,
+                  "price": 150.25,
+                  "stock": "AAPL"
+                },
+                {
+                  "change": -1.2,
+                  "price": 2800.75,
+                  "stock": "GOOGL"
+                },
+                {
+                  "change": 0.8,
+                  "price": 340.5,
+                  "stock": "MSFT"
+                }
+              ],
+              "type": "table"
+            },
+            "table_widget_with_grouping_by_cell_click": {
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "cellDataType": "text",
+                      "field": "symbol",
+                      "headerName": "Symbol",
+                      "pinned": "left",
+                      "renderFn": "cellOnClick",
+                      "renderFnParams": {
+                        "actionType": "groupBy",
+                        "groupBy": {
+                          "paramName": "symbol"
+                        }
+                      },
+                      "width": 120
+                    },
+                    {
+                      "cellDataType": "number",
+                      "field": "price",
+                      "formatterFn": "none",
+                      "headerName": "Price",
+                      "width": 120
+                    },
+                    {
+                      "cellDataType": "number",
+                      "field": "change",
+                      "formatterFn": "percent",
+                      "headerName": "Change",
+                      "renderFn": "greenRed",
+                      "width": 120
+                    },
+                    {
+                      "cellDataType": "number",
+                      "field": "volume",
+                      "formatterFn": "int",
+                      "headerName": "Volume",
+                      "width": 150
+                    }
+                  ],
+                  "showAll": true
+                }
+              },
+              "description": "A table widget that groups data when clicking on symbols. Click on a symbol to update all related widgets.",
+              "endpoint": "table_widget_with_grouping_by_cell_click",
+              "gridData": {
+                "h": 9,
+                "w": 20
+              },
+              "name": "Table widget with grouping by cell click",
+              "params": [
+                {
+                  "description": "Select stocks to display",
+                  "label": "Symbol",
+                  "multiSelect": false,
+                  "options": [
+                    {
+                      "label": "Apple Inc.",
+                      "value": "AAPL"
+                    },
+                    {
+                      "label": "Microsoft Corporation",
+                      "value": "MSFT"
+                    },
+                    {
+                      "label": "Google",
+                      "value": "GOOGL"
+                    },
+                    {
+                      "label": "Amazon",
+                      "value": "AMZN"
+                    },
+                    {
+                      "label": "Tesla",
+                      "value": "TSLA"
+                    }
+                  ],
+                  "optionsEndpoint": "/get_tickers_list",
+                  "paramName": "symbol",
+                  "show": true,
+                  "type": "endpoint",
+                  "value": "AAPL"
+                }
+              ],
+              "sampleData": [
+                {
+                  "change": 2.5,
+                  "price": 150.25,
+                  "symbol": "AAPL",
+                  "volume": 45000000
+                },
+                {
+                  "change": 1.8,
+                  "price": 350.5,
+                  "symbol": "MSFT",
+                  "volume": 32000000
+                },
+                {
+                  "change": -0.5,
+                  "price": 140.75,
+                  "symbol": "GOOGL",
+                  "volume": 28000000
+                },
+                {
+                  "change": 3.2,
+                  "price": 178.25,
+                  "symbol": "AMZN",
+                  "volume": 38000000
+                },
+                {
+                  "change": -1.2,
+                  "price": 245.8,
+                  "symbol": "TSLA",
+                  "volume": 52000000
+                }
+              ],
+              "type": "table"
+            }
+          },
+          "apps_json": []
+        }
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_001"
+        }
+      },
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Usage Getting Started refresh_backend_before_building_macro_timeseries"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Usage Getting Started refresh_backend_before_building_macro_timeseries",
+          "widget_id": "company_performance"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Usage Getting Started refresh_backend_before_building_macro_timeseries",
+          "widget_id": "company_performance",
+          "data_args": {
+            "company": "GM",
+            "year": "2024"
           }
-        },
-        "apps_json": []
-      }
-    },
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "refresh",
-        "backend_id": "backend_001"
-      }
-    },
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
-    },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Usage Getting Started refresh_backend_before_building_macro_timeseries"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Usage Getting Started refresh_backend_before_building_macro_timeseries",
-        "widget_id": "company_performance"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Usage Getting Started refresh_backend_before_building_macro_timeseries",
-        "widget_id": "company_performance",
-        "data_args": {
-          "company": "GM",
-          "year": "2024"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Backend Note",
+          "data": "Usage Getting Started refresh_backend_before_building_macro_timeseries backend refreshed before build."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Backend Note",
-        "data": "Usage Getting Started refresh_backend_before_building_macro_timeseries backend refreshed before build."
-      }
+    ],
+    "limits": {
+      "max_turns": 10
     }
-  ],
-  "limits": {
-    "max_turns": 10
   }
 }

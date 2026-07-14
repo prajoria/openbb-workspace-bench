@@ -4,52 +4,54 @@
   "family": "create",
   "difficulty": "hard",
   "prompt": "Keep the existing Live Grid widget undisturbed and non-overlapped while adding the Company List with ID Mapping widget for MSFT next to it.",
-  "fixtures": {
-    "backends": [
-      {
-        "name": "getting-started"
+  "setup": {
+    "fixtures": {
+      "backends": [
+        {
+          "name": "getting-started"
+        }
+      ]
+    },
+    "initial_state": {
+      "dashboard": {
+        "name": "Existing Review",
+        "activate": true,
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "live_grid_data",
+            "data_args": {
+              "symbol": "MSFT"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            },
+            "widget_uuid": "usage_preserve_fundamental_metrics_msft_widget_001"
+          }
+        ],
+        "dashboard_id": "usage_preserve_fundamental_metrics_msft_dashboard_001"
       }
+    },
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "create_widget",
+      "update_widget_layout",
+      "read_widget"
     ]
   },
-  "initial_state": {
-    "dashboard": {
-      "name": "Existing Review",
-      "activate": true,
-      "tabs": [
-        {
-          "id": "",
-          "name": ""
-        }
-      ],
-      "widgets": [
-        {
-          "origin": "Getting Started",
-          "widget_id": "live_grid_data",
-          "data_args": {
-            "symbol": "MSFT"
-          },
-          "layout": {
-            "x": 0,
-            "y": 0,
-            "w": 20,
-            "h": 12
-          },
-          "widget_uuid": "usage_preserve_fundamental_metrics_msft_widget_001"
-        }
-      ],
-      "dashboard_id": "usage_preserve_fundamental_metrics_msft_dashboard_001"
-    }
-  },
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "create_widget",
-    "update_widget_layout",
-    "read_widget"
-  ],
-  "success": {
+  "eval": {
     "required_widgets": [
       {
         "origin": "Getting Started",
@@ -82,48 +84,48 @@
     },
     "workspace_checks": {
       "preserve_other_dashboards": true
-    }
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "get_workspace_snapshot",
-      "args": {}
     },
-    {
-      "tool": "list_available_widgets",
-      "args": {
-        "origin": "Getting Started"
-      }
-    },
-    {
-      "tool": "get_widget_schema",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "company_list"
-      }
-    },
-    {
-      "tool": "create_widget",
-      "args": {
-        "origin": "Getting Started",
-        "widget_id": "company_list",
-        "data_args": {
-          "companyId": "VWAGY"
+    "reference": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        }
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "company_list"
+        }
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "company_list",
+          "data_args": {
+            "companyId": "VWAGY"
+          }
+        }
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "company_list",
+          "x": 20,
+          "y": 0,
+          "w": 20,
+          "h": 10
         }
       }
-    },
-    {
-      "tool": "update_widget_layout",
-      "args": {
-        "widget_id": "company_list",
-        "x": 20,
-        "y": 0,
-        "w": 20,
-        "h": 10
-      }
+    ],
+    "limits": {
+      "max_turns": 8
     }
-  ],
-  "limits": {
-    "max_turns": 8
   }
 }

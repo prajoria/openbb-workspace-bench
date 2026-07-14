@@ -9,31 +9,33 @@
     "Vendor SLA Data",
     "QuoteStream"
   ],
-  "fixtures": {},
-  "initial_state": {},
-  "allowed_tools": [
-    "get_workspace_snapshot",
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "list_available_widgets",
-    "get_widget_schema",
-    "get_params_options",
-    "get_widget_data",
-    "create_widget",
-    "update_widget",
-    "update_widget_layout",
-    "delete_widget",
-    "add_generative_widget",
-    "read_widget",
-    "manage_backends",
-    "manage_apps",
-    "get_skill_content",
-    "read_workspace_resource",
-    "get_workspace_prompt",
-    "assign_tasks_to_agents"
-  ],
-  "success": {
+  "setup": {
+    "fixtures": {},
+    "initial_state": {},
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -152,142 +154,142 @@
         "scope": "dashboard",
         "contains": "Vendor Ops"
       }
-    ]
-  },
-  "oracle_tool_calls": [
-    {
-      "tool": "manage_backends",
-      "args": {
-        "operation": "add",
-        "name": "Vendor SLA Data",
-        "url": "http://localhost:7804",
-        "widgets_json": {
-          "vendor_ops_table": {
-            "name": "Vendor Ops Table",
-            "description": "Vendor uptime and latency posture.",
-            "endpoint": "/vendor-ops-table",
-            "type": "table",
-            "gridData": {
-              "w": 20,
-              "h": 9
-            },
-            "data": {
-              "table": {
-                "columnsDefs": [
-                  {
-                    "field": "vendor",
-                    "headerName": "Vendor",
-                    "cellDataType": "text"
-                  },
-                  {
-                    "field": "uptime_pct",
-                    "headerName": "Uptime Pct",
-                    "cellDataType": "number",
-                    "formatterFn": "percent"
-                  },
-                  {
-                    "field": "latency_ms",
-                    "headerName": "Latency Ms",
-                    "cellDataType": "number"
-                  },
-                  {
-                    "field": "status",
-                    "headerName": "Status",
-                    "cellDataType": "text"
-                  }
-                ]
-              }
-            },
-            "params": [
-              {
-                "paramName": "vendor",
-                "type": "text",
-                "label": "Vendor",
-                "value": "AlphaFeed",
-                "description": "Vendor Ops Table focus field."
-              }
-            ]
-          },
-          "breach_metric": {
-            "name": "Open Breaches",
-            "description": "Count of open SLA breaches.",
-            "endpoint": "/breach-count",
-            "type": "metric",
-            "gridData": {
-              "w": 6,
-              "h": 4
-            },
-            "data": {
-              "valueField": "breach_metric_value"
-            }
-          }
-        },
-        "apps_json": [
-          {
-            "name": "Vendor Ops",
-            "description": "Vendor uptime, latency, and breaches.",
-            "tabs": {
-              "vendors": {
-                "id": "vendors",
-                "name": "Vendors",
-                "layout": [
-                  {
-                    "i": "vendor_ops_table",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
+    ],
+    "reference": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Vendor SLA Data",
+          "url": "http://localhost:7804",
+          "widgets_json": {
+            "vendor_ops_table": {
+              "name": "Vendor Ops Table",
+              "description": "Vendor uptime and latency posture.",
+              "endpoint": "/vendor-ops-table",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
               },
-              "breaches": {
-                "id": "breaches",
-                "name": "Breaches",
-                "layout": [
-                  {
-                    "i": "breach_metric",
-                    "x": 0,
-                    "y": 0,
-                    "w": 20,
-                    "h": 9
-                  }
-                ]
-              }
+              "data": {
+                "table": {
+                  "columnsDefs": [
+                    {
+                      "field": "vendor",
+                      "headerName": "Vendor",
+                      "cellDataType": "text"
+                    },
+                    {
+                      "field": "uptime_pct",
+                      "headerName": "Uptime Pct",
+                      "cellDataType": "number",
+                      "formatterFn": "percent"
+                    },
+                    {
+                      "field": "latency_ms",
+                      "headerName": "Latency Ms",
+                      "cellDataType": "number"
+                    },
+                    {
+                      "field": "status",
+                      "headerName": "Status",
+                      "cellDataType": "text"
+                    }
+                  ]
+                }
+              },
+              "params": [
+                {
+                  "paramName": "vendor",
+                  "type": "text",
+                  "label": "Vendor",
+                  "value": "AlphaFeed",
+                  "description": "Vendor Ops Table focus field."
+                }
+              ]
             },
-            "groups": []
+            "breach_metric": {
+              "name": "Open Breaches",
+              "description": "Count of open SLA breaches.",
+              "endpoint": "/breach-count",
+              "type": "metric",
+              "gridData": {
+                "w": 6,
+                "h": 4
+              },
+              "data": {
+                "valueField": "breach_metric_value"
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Vendor Ops",
+              "description": "Vendor uptime, latency, and breaches.",
+              "tabs": {
+                "vendors": {
+                  "id": "vendors",
+                  "name": "Vendors",
+                  "layout": [
+                    {
+                      "i": "vendor_ops_table",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                },
+                "breaches": {
+                  "id": "breaches",
+                  "name": "Breaches",
+                  "layout": [
+                    {
+                      "i": "breach_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        }
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_001",
+          "app_name": "Vendor Ops",
+          "dashboard_name": "Vendor Ops Live",
+          "activate": true
+        }
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_id": "vendor_ops_table",
+          "data_args": {
+            "vendor": "QuoteStream"
           }
-        ]
-      }
-    },
-    {
-      "tool": "manage_apps",
-      "args": {
-        "operation": "instantiate",
-        "backend_id": "backend_001",
-        "app_name": "Vendor Ops",
-        "dashboard_name": "Vendor Ops Live",
-        "activate": true
-      }
-    },
-    {
-      "tool": "update_widget",
-      "args": {
-        "widget_id": "vendor_ops_table",
-        "data_args": {
-          "vendor": "QuoteStream"
+        }
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Vendor Ops",
+          "data": "Vendor Ops is live from Vendor SLA Data: vendor ops ready. Configured vendor=QuoteStream."
         }
       }
-    },
-    {
-      "tool": "add_generative_widget",
-      "args": {
-        "widget_type": "note",
-        "name": "Vendor Ops",
-        "data": "Vendor Ops is live from Vendor SLA Data: vendor ops ready. Configured vendor=QuoteStream."
-      }
+    ],
+    "limits": {
+      "max_turns": 14
     }
-  ],
-  "limits": {
-    "max_turns": 14
   }
 }
