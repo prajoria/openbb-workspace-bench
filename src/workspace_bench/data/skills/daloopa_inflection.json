@@ -1,0 +1,6 @@
+{
+  "content": "Daloopa inflection workflow: pull daloopa_company_fundamentals and daloopa_kpi_metrics across all covered quarters for one ticker, compute quarter-over-quarter and year-over-year growth per series, flag growth-rate reversals as inflections, and cite the underlying inputs via source_url for every flagged move.",
+  "description": "Detect metric accelerations and decelerations across quarters.",
+  "name": "Daloopa Inflection",
+  "slug": "daloopa-inflection"
+}

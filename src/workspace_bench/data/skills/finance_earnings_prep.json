@@ -1,0 +1,6 @@
+{
+  "content": "Earnings prep workflow: compare internal estimates to street numbers, identify surprise drivers, review guidance, inspect transcript tone, and produce action items for the portfolio manager.",
+  "description": "Build an earnings preview from estimates, guidance, transcript, price reaction, and thesis risks.",
+  "name": "Finance Earnings Prep",
+  "slug": "finance-earnings-prep"
+}

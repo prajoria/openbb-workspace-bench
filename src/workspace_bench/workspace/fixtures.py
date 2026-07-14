@@ -86,9 +86,9 @@ class FixtureBackend:
                         return copy.deepcopy(sample.get("data"))
             if "sampleData" in definition:
                 return copy.deepcopy(definition["sampleData"])
-            if self.slug == "stark-enterprise" and "data" in definition:
+            if self.slug.startswith("stark-enterprise") and "data" in definition:
                 return _stark_widget_data(definition["data"], data_args)
-            if self.slug == "daloopa" and "data" in definition:
+            if self.slug == "support-daloopa-skills" and "data" in definition:
                 return _daloopa_widget_data(definition["data"], data_args)
             if self.slug in {"getting-started", "widget-examples"}:
                 return []
@@ -132,13 +132,13 @@ def build_portfolio_backend(url: str = "http://127.0.0.1:9103") -> FixtureBacken
 def build_stark_enterprise_backend(
     url: str = "http://127.0.0.1:9104",
 ) -> FixtureBackend:
-    """Build the deterministic Stark enterprise demo fixture backend."""
+    """Build Stark data world X, the canonical Stark enterprise backend."""
 
-    data_path = resources.files("workspace_bench.workspace.data") / "stark_enterprise.json"
+    data_path = resources.files("workspace_bench.data") / "backends" / "stark_enterprise_x.json"
     with data_path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
     return FixtureBackend(
-        "stark-enterprise",
+        "stark-enterprise-x",
         "Bench Stark Enterprise",
         payload["widgets"],
         payload["apps"],
@@ -146,12 +146,62 @@ def build_stark_enterprise_backend(
     )
 
 
+# X is the canonical world under its own builder above.
+build_stark_enterprise_x_backend = build_stark_enterprise_backend
+
+# Interchangeable Stark data worlds: one catalog, one display name, different
+# baked numbers. A workspace may connect at most one at a time.
+STARK_DATA_WORLDS = ("stark-enterprise-x", "stark-enterprise-y")
+
+# Task files authored before the slug renames keep resolving; the loader and
+# baseline merge normalize these to the canonical slugs.
+LEGACY_BACKEND_SLUGS = {
+    "stark-enterprise": "stark-enterprise-x",
+    "daloopa": "support-daloopa-skills",
+}
+
+
+def build_stark_enterprise_y_backend(url: str = "http://127.0.0.1:9109") -> FixtureBackend:
+    """Stark data world Y: the same catalog over materially different data.
+
+    Loaded from the self-contained ``backends/stark_enterprise_y.json``, which
+    is produced — and its widget-contract invariants certified — by
+    ``scripts/generators/generate_stark_world_y.py``. Catalog equality with
+    the canonical file is guarded by tests.
+    """
+
+    data_path = (
+        resources.files("workspace_bench.data")
+        / "backends"
+        / "stark_enterprise_y.json"
+    )
+    with data_path.open("r", encoding="utf-8") as handle:
+        payload = json.load(handle)
+    return FixtureBackend(
+        "stark-enterprise-y",
+        "Bench Stark Enterprise",
+        payload["widgets"],
+        payload["apps"],
+        url,
+    )
+
+
+# Replacement vocabularies used by the world-Y generator for entity fields not
+# backed by a declared param. Pools are disjoint from the canonical data's
+# tickers and chosen by the original value's domain, so a crypto widget keeps
+# crypto assets.
+_EQUITY_SUBSTITUTION_POOL = ("TSM", "COST", "AMD", "CRM", "ORCL", "NFLX", "GOOGL", "AMZN")
+_CRYPTO_SUBSTITUTION_POOL = ("AVAX", "DOT", "LINK", "MATIC", "ATOM", "XRP", "ADA", "DOGE")
+_CRYPTO_CANONICAL_ASSETS = frozenset({"BTC", "ETH", "SOL", "ARB", "BASE"})
+_FREE_ENTITY_FIELDS = {"ticker", "symbol"}
+
+
 def build_getting_started_backend(
     url: str = "http://127.0.0.1:9106",
 ) -> FixtureBackend:
     """Build the transcribed OpenBB getting-started fixture backend."""
 
-    data_path = resources.files("workspace_bench.workspace.data") / "getting_started.json"
+    data_path = resources.files("workspace_bench.data") / "backends" / "getting_started.json"
     with data_path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
     return FixtureBackend(
@@ -168,7 +218,7 @@ def build_widget_examples_backend(
 ) -> FixtureBackend:
     """Build the transcribed OpenBB widget-examples fixture backend."""
 
-    data_path = resources.files("workspace_bench.workspace.data") / "widget_examples.json"
+    data_path = resources.files("workspace_bench.data") / "backends" / "widget_examples.json"
     with data_path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
     return FixtureBackend(
@@ -188,11 +238,11 @@ def build_daloopa_backend(url: str = "http://127.0.0.1:9105") -> FixtureBackend:
     by scripts/generators/generate_daloopa_data.py.
     """
 
-    data_path = resources.files("workspace_bench.workspace.data") / "daloopa.json"
+    data_path = resources.files("workspace_bench.data") / "backends" / "support_daloopa_skills.json"
     with data_path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
     return FixtureBackend(
-        "daloopa",
+        "support-daloopa-skills",
         "Bench Daloopa",
         payload["widgets"],
         payload["apps"],
@@ -314,11 +364,16 @@ def default_fixture_backends() -> dict[str, FixtureBackend]:
         build_daloopa_backend(),
         build_getting_started_backend(),
         build_widget_examples_backend(),
+        build_stark_enterprise_y_backend(),
     ]
     result: dict[str, FixtureBackend] = {}
     for backend in backends:
         result[backend.slug] = backend
-        result[backend.name] = backend
+        # Data-world variants share a display name; the canonical backend
+        # (registered first) keeps the display-name key.
+        result.setdefault(backend.name, backend)
+    for legacy, canonical in LEGACY_BACKEND_SLUGS.items():
+        result[legacy] = result[canonical]
     # Keep the historical CLI slugs as lookup aliases without exposing the
     # retired invented catalogs.
     result["equities"] = result["getting-started"]

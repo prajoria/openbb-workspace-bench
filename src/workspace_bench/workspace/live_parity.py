@@ -505,7 +505,7 @@ def _fixture_widget_type(origin: str, widget_id: str) -> str:
     """Look up the static widget type from the bundled fixture catalog."""
 
     try:
-        backend = get_fixture_backend("stark-enterprise")
+        backend = get_fixture_backend("stark-enterprise-x")
     except Exception:  # noqa: BLE001 - type stays best-effort for non-Stark origins.
         return ""
     if backend.name != origin:

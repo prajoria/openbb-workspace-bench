@@ -27,7 +27,7 @@ from workspace_bench.workspace.widget_params import flatten_params
 
 REPO = Path(__file__).resolve().parents[2]
 REFERENCE_REPO = REPO / "references/openbb-backend-examples"
-DATA_DIR = REPO / "src/workspace_bench/workspace/data"
+DATA_DIR = REPO / "src/workspace_bench/data/backends"
 REFERENCE_REPO_URL = (
     "https://github.com/OpenBB-finance/backend-examples-for-openbb-workspace"
 )

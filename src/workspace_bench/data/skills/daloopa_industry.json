@@ -1,0 +1,6 @@
+{
+  "content": "Daloopa industry workflow: list peers from daloopa_company_directory, pull daloopa_company_fundamentals for each ticker, normalize on calendar_period labels when comparing across different fiscal year ends, compare revenue growth and margins side by side, and cite each company's figures via source_url.",
+  "description": "Compare covered companies on normalized calendar quarters.",
+  "name": "Daloopa Industry Comparison",
+  "slug": "daloopa-industry"
+}

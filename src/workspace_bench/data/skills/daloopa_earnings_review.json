@@ -1,0 +1,6 @@
+{
+  "content": "Daloopa earnings review workflow: on the Bench Daloopa origin, compare actuals against consensus in daloopa_consensus_estimates for the latest quarter, check daloopa_management_guidance verdicts for the same period, read the matching transcript from daloopa_document_search, and use daloopa_stock_prices quarter-end rows for the reaction. Consensus rows are not Daloopa-sourced and carry no citations; cite every Daloopa figure via source_url.",
+  "description": "Review an earnings print: consensus beat/miss, guidance verdicts, filings, and price reaction.",
+  "name": "Daloopa Earnings Review",
+  "slug": "daloopa-earnings-review"
+}

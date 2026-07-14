@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import copy
+import json
 from dataclasses import dataclass, field
+from importlib import resources
 from typing import Any
 
 from workspace_bench.core.models import FixtureBackendRef, JsonDict, RuntimeChecks, ToolCall
@@ -14,128 +16,21 @@ from workspace_bench.workspace.runtime import task_widget_data
 from workspace_bench.workspace.widget_params import sanitize_data_args
 
 
-WORKSPACE_SKILLS: dict[str, JsonDict] = {
-    "finance-earnings-prep": {
-        "slug": "finance-earnings-prep",
-        "name": "Finance Earnings Prep",
-        "description": "Build an earnings preview from estimates, guidance, transcript, price reaction, and thesis risks.",
-        "content": (
-            "Earnings prep workflow: compare internal estimates to street numbers, "
-            "identify surprise drivers, review guidance, inspect transcript tone, "
-            "and produce action items for the portfolio manager."
-        ),
-    },
-    "finance-tearsheet": {
-        "slug": "finance-tearsheet",
-        "name": "Finance Tearsheet",
-        "description": "Create a concise company or asset tear sheet with valuation, catalysts, risks, and ownership context.",
-        "content": (
-            "Tearsheet workflow: gather price action, fundamentals, valuation, "
-            "catalysts, risks, ownership, and a short investment conclusion."
-        ),
-    },
-    "finance-guidance-tracker": {
-        "slug": "finance-guidance-tracker",
-        "name": "Finance Guidance Tracker",
-        "description": "Track company guidance changes, management claims, and follow-up evidence.",
-        "content": (
-            "Guidance tracker workflow: extract management claims, compare them "
-            "with prior guidance, flag changed assumptions, and list evidence gaps."
-        ),
-    },
-    "finance-comps": {
-        "slug": "finance-comps",
-        "name": "Finance Comps",
-        "description": "Compare companies or assets using peer valuation and operating metrics.",
-        "content": (
-            "Comps workflow: define the peer set, normalize metrics, compare "
-            "valuation multiples, and explain why outliers deserve premium or discount."
-        ),
-    },
-    # Daloopa skills mirror the Daloopa Claude plugin workflows
-    # (github.com/daloopa/daloopa-plugin-claude) rewritten against the
-    # standalone Bench Daloopa fixture widgets instead of the Daloopa MCP.
-    "daloopa-tearsheet": {
-        "slug": "daloopa-tearsheet",
-        "name": "Daloopa Tearsheet",
-        "description": "Build a cited one-page company snapshot from Bench Daloopa fundamentals, KPIs, segments, and prices.",
-        "content": (
-            "Daloopa tearsheet workflow: on the Bench Daloopa origin, read "
-            "daloopa_company_directory and anchor all period math on "
-            "latest_calendar_quarter, never the wall clock. Pull "
-            "daloopa_stock_prices for the latest close, "
-            "daloopa_company_fundamentals for revenue through free cash flow, "
-            "daloopa_kpi_metrics for business drivers, and "
-            "daloopa_segment_breakdown for mix. Cite every Daloopa-sourced "
-            "figure with its source_url and label single-company periods with "
-            "fiscal_period."
-        ),
-    },
-    "daloopa-earnings-review": {
-        "slug": "daloopa-earnings-review",
-        "name": "Daloopa Earnings Review",
-        "description": "Review an earnings print: consensus beat/miss, guidance verdicts, filings, and price reaction.",
-        "content": (
-            "Daloopa earnings review workflow: on the Bench Daloopa origin, "
-            "compare actuals against consensus in daloopa_consensus_estimates "
-            "for the latest quarter, check daloopa_management_guidance "
-            "verdicts for the same period, read the matching transcript from "
-            "daloopa_document_search, and use daloopa_stock_prices "
-            "quarter-end rows for the reaction. Consensus rows are not "
-            "Daloopa-sourced and carry no citations; cite every Daloopa "
-            "figure via source_url."
-        ),
-    },
-    "daloopa-guidance-tracker": {
-        "slug": "daloopa-guidance-tracker",
-        "name": "Daloopa Guidance Tracker",
-        "description": "Score management guidance accuracy across the covered quarters.",
-        "content": (
-            "Daloopa guidance tracker workflow: pull "
-            "daloopa_management_guidance for one ticker, tally Beat, In Line, "
-            "and Missed verdicts across reported quarters, treat the Pending "
-            "row as the open guide for the next quarter, and cite each "
-            "quoted range via its source_url."
-        ),
-    },
-    "daloopa-inflection": {
-        "slug": "daloopa-inflection",
-        "name": "Daloopa Inflection",
-        "description": "Detect metric accelerations and decelerations across quarters.",
-        "content": (
-            "Daloopa inflection workflow: pull daloopa_company_fundamentals "
-            "and daloopa_kpi_metrics across all covered quarters for one "
-            "ticker, compute quarter-over-quarter and year-over-year growth "
-            "per series, flag growth-rate reversals as inflections, and cite "
-            "the underlying inputs via source_url for every flagged move."
-        ),
-    },
-    "daloopa-capital-allocation": {
-        "slug": "daloopa-capital-allocation",
-        "name": "Daloopa Capital Allocation",
-        "description": "Assess buybacks, dividends, and free cash flow coverage.",
-        "content": (
-            "Daloopa capital allocation workflow: from "
-            "daloopa_company_fundamentals, compare Share Buybacks plus "
-            "Dividends Paid against Free Cash Flow per quarter, use Diluted "
-            "Weighted Average Shares drift as buyback evidence, and cite "
-            "every figure via source_url."
-        ),
-    },
-    "daloopa-industry": {
-        "slug": "daloopa-industry",
-        "name": "Daloopa Industry Comparison",
-        "description": "Compare covered companies on normalized calendar quarters.",
-        "content": (
-            "Daloopa industry workflow: list peers from "
-            "daloopa_company_directory, pull daloopa_company_fundamentals for "
-            "each ticker, normalize on calendar_period labels when comparing "
-            "across different fiscal year ends, compare revenue growth and "
-            "margins side by side, and cite each company's figures via "
-            "source_url."
-        ),
-    },
-}
+def _load_workspace_skills() -> dict[str, JsonDict]:
+    """Load the platform skills from data/skills/*.json."""
+
+    root = resources.files("workspace_bench.data") / "skills"
+    skills: dict[str, JsonDict] = {}
+    for entry in sorted(root.iterdir(), key=lambda item: item.name):
+        if not entry.name.endswith(".json"):
+            continue
+        with entry.open("r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+        skills[str(payload["slug"])] = payload
+    return skills
+
+
+WORKSPACE_SKILLS: dict[str, JsonDict] = _load_workspace_skills()
 
 WORKSPACE_PROMPTS: dict[str, str] = {
     "workspace_tool_usage": (
@@ -270,6 +165,7 @@ class SimulatedWorkspace:
         backends: tuple[FixtureBackendRef, ...] | list[FixtureBackendRef] = (),
         initial_state: JsonDict | None = None,
         runtime_checks: RuntimeChecks | None = None,
+        skills: tuple[str, ...] | list[str] | None = None,
     ) -> None:
         self._dash_counter = 0
         self._widget_counter = 0
@@ -283,6 +179,13 @@ class SimulatedWorkspace:
         self.custom_backends: dict[str, JsonDict] = {}
         self.declared_backends: dict[str, JsonDict] = {}
         self.runtime_checks = runtime_checks
+        if skills is None:
+            self.skills = dict(WORKSPACE_SKILLS)
+        else:
+            unknown = sorted(set(skills) - set(WORKSPACE_SKILLS))
+            if unknown:
+                raise KeyError(f"Unknown workspace skill slugs: {unknown}")
+            self.skills = {slug: WORKSPACE_SKILLS[slug] for slug in skills}
 
         for backend_ref in backends:
             self.register_backend(backend_ref.name, backend_ref.backend_id, backend_ref.url)
@@ -1172,7 +1075,7 @@ class SimulatedWorkspace:
 
     def _tool_get_skill_content(self, args: JsonDict) -> JsonDict:
         slug = str(args.get("slug", ""))
-        skill = WORKSPACE_SKILLS.get(slug)
+        skill = self.skills.get(slug)
         if skill is None:
             return self._error(
                 "get_skill_content",
@@ -1213,7 +1116,7 @@ class SimulatedWorkspace:
         skill_prefix = "openbb://workspace/skills/"
         if uri.startswith(skill_prefix):
             slug = uri.removeprefix(skill_prefix)
-            skill = WORKSPACE_SKILLS.get(slug)
+            skill = self.skills.get(slug)
             if skill is not None:
                 return self._ok(
                     "read_workspace_resource",
@@ -1337,7 +1240,7 @@ class SimulatedWorkspace:
                     "name": skill["name"],
                     "description": skill["description"],
                 }
-                for skill in WORKSPACE_SKILLS.values()
+                for skill in self.skills.values()
             ],
         }
 
@@ -1383,7 +1286,7 @@ class SimulatedWorkspace:
                     "name": skill["name"],
                     "description": skill["description"],
                 }
-                for skill in WORKSPACE_SKILLS.values()
+                for skill in self.skills.values()
             ],
         }
 
@@ -1471,7 +1374,7 @@ class SimulatedWorkspace:
             *sorted(LIVE_WORKSPACE_RESOURCES),
             *[
                 f"openbb://workspace/skills/{slug}"
-                for slug in sorted(WORKSPACE_SKILLS)
+                for slug in sorted(self.skills)
             ],
         ]
 

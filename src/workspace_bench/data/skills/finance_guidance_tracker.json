@@ -1,0 +1,6 @@
+{
+  "content": "Guidance tracker workflow: extract management claims, compare them with prior guidance, flag changed assumptions, and list evidence gaps.",
+  "description": "Track company guidance changes, management claims, and follow-up evidence.",
+  "name": "Finance Guidance Tracker",
+  "slug": "finance-guidance-tracker"
+}

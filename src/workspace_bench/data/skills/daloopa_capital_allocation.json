@@ -1,0 +1,6 @@
+{
+  "content": "Daloopa capital allocation workflow: from daloopa_company_fundamentals, compare Share Buybacks plus Dividends Paid against Free Cash Flow per quarter, use Diluted Weighted Average Shares drift as buyback evidence, and cite every figure via source_url.",
+  "description": "Assess buybacks, dividends, and free cash flow coverage.",
+  "name": "Daloopa Capital Allocation",
+  "slug": "daloopa-capital-allocation"
+}

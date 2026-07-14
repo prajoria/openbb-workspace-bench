@@ -1,0 +1,6 @@
+{
+  "content": "Daloopa guidance tracker workflow: pull daloopa_management_guidance for one ticker, tally Beat, In Line, and Missed verdicts across reported quarters, treat the Pending row as the open guide for the next quarter, and cite each quoted range via its source_url.",
+  "description": "Score management guidance accuracy across the covered quarters.",
+  "name": "Daloopa Guidance Tracker",
+  "slug": "daloopa-guidance-tracker"
+}

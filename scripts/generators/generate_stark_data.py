@@ -12,7 +12,7 @@ from typing import Any
 
 
 REPO = Path(__file__).resolve().parents[2]
-DEFAULT_DATA_PATH = REPO / "src/workspace_bench/workspace/data/stark_enterprise.json"
+DEFAULT_DATA_PATH = REPO / "src/workspace_bench/data/backends/stark_enterprise_x.json"
 
 VENDORS = ["Bloomberg", "FactSet", "Refinitiv", "S&P Global", "MSCI", "ICE"]
 BROKERS = ["Goldman Sachs", "Morgan Stanley", "J.P. Morgan", "Citi", "UBS", "Barclays"]

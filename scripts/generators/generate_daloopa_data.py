@@ -20,7 +20,7 @@ from typing import Any
 
 
 REPO = Path(__file__).resolve().parents[2]
-DEFAULT_DATA_PATH = REPO / "src/workspace_bench/workspace/data/daloopa.json"
+DEFAULT_DATA_PATH = REPO / "src/workspace_bench/data/backends/support_daloopa_skills.json"
 
 SEED_PREFIX = "daloopa-v1"
 LATEST_CALENDAR_QUARTER = "2026Q1"

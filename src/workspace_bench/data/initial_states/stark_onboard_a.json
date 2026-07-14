@@ -1,0 +1,1180 @@
+{
+  "initial_state": {
+    "dashboards": [
+      {
+        "activate": true,
+        "name": "Home",
+        "tabs": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "widgets": []
+      },
+      {
+        "activate": false,
+        "name": "Portfolio Command Center",
+        "tabs": [
+          {
+            "id": "actions",
+            "name": "Actions"
+          },
+          {
+            "id": "attribution",
+            "name": "Attribution"
+          },
+          {
+            "id": "holdings",
+            "name": "Holdings"
+          },
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "widgets": [
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "actions",
+            "widget_id": "portfolio_command_center_actions_trade_ideas"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "actions",
+            "widget_id": "portfolio_command_center_actions_analyst_conviction"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "actions",
+            "widget_id": "portfolio_command_center_actions_pm_decision_notes"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "actions",
+            "widget_id": "portfolio_command_center_actions_approval_checklist"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD",
+              "raw": false
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "attribution",
+            "widget_id": "portfolio_command_center_attribution_brinson_attribution"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD",
+              "raw": false
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "attribution",
+            "widget_id": "portfolio_command_center_attribution_factor_attribution"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "attribution",
+            "widget_id": "portfolio_command_center_attribution_benchmark_drift"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "attribution",
+            "widget_id": "portfolio_command_center_attribution_active_return_bridge"
+          },
+          {
+            "data_args": {
+              "prompt": "SELECT sector, ROUND(SUM(market_value), 2) AS exposure, ROUND(AVG(var_95), 2) AS avg_var FROM DATA GROUP BY sector ORDER BY exposure DESC"
+            },
+            "layout": {
+              "h": 14,
+              "w": 40,
+              "x": 0,
+              "y": 28
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "attribution",
+            "widget_id": "portfolio_command_center_attribution_portfolio_metrics_sql"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 14,
+              "w": 40,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "holdings",
+            "widget_id": "portfolio_command_center_holdings_holdings_table"
+          },
+          {
+            "data_args": {
+              "symbol": "AAPL,NVDA,MSFT"
+            },
+            "layout": {
+              "h": 16,
+              "w": 40,
+              "x": 0,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "holdings",
+            "widget_id": "portfolio_command_center_holdings_slow_portfolio_marks"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 30
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "holdings",
+            "widget_id": "portfolio_command_center_holdings_sector_exposure"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD",
+              "raw": false
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 30
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "holdings",
+            "widget_id": "portfolio_command_center_holdings_exposure_treemap"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 44
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "holdings",
+            "widget_id": "portfolio_command_center_holdings_top_contributors_and_detractors"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 44
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "holdings",
+            "widget_id": "portfolio_command_center_holdings_issuer_concentration"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 24,
+              "w": 40,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "overview",
+            "widget_id": "portfolio_command_center_overview_workflow_overview"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 5,
+              "w": 40,
+              "x": 0,
+              "y": 24
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "overview",
+            "widget_id": "portfolio_command_center_overview_portfolio_snapshot"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 29
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "overview",
+            "widget_id": "portfolio_command_center_overview_return_vs_benchmark"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 29
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "overview",
+            "widget_id": "portfolio_command_center_overview_top_alerts"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "h": 14,
+              "w": 40,
+              "x": 0,
+              "y": 43
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "overview",
+            "widget_id": "portfolio_command_center_overview_limit_utilization"
+          }
+        ]
+      },
+      {
+        "activate": false,
+        "name": "Equity Research Workbench",
+        "tabs": [
+          {
+            "id": "company",
+            "name": "Company"
+          },
+          {
+            "id": "coverage",
+            "name": "Coverage"
+          },
+          {
+            "id": "overview",
+            "name": "Overview"
+          },
+          {
+            "id": "thesis",
+            "name": "Thesis"
+          },
+          {
+            "id": "valuation",
+            "name": "Valuation"
+          }
+        ],
+        "widgets": [
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 5,
+              "w": 40,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "company",
+            "widget_id": "equity_research_workbench_company_company_tear_sheet"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 5
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "company",
+            "widget_id": "equity_research_workbench_company_fundamentals_trend"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 5
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "company",
+            "widget_id": "equity_research_workbench_company_ownership_snapshot"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 40,
+              "x": 0,
+              "y": 19
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "company",
+            "widget_id": "equity_research_workbench_company_consensus_revisions"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "coverage",
+            "widget_id": "equity_research_workbench_coverage_coverage_universe"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "coverage",
+            "widget_id": "equity_research_workbench_coverage_recommendation_mix"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "coverage",
+            "widget_id": "equity_research_workbench_coverage_price_target_history"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "raw": false,
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "coverage",
+            "widget_id": "equity_research_workbench_coverage_price_target_fan_chart"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 40,
+              "x": 0,
+              "y": 28
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "coverage",
+            "widget_id": "equity_research_workbench_coverage_price_target_upside"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 24,
+              "w": 40,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "overview",
+            "widget_id": "equity_research_workbench_overview_workflow_overview"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "thesis",
+            "widget_id": "equity_research_workbench_thesis_bull_base_bear"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "thesis",
+            "widget_id": "equity_research_workbench_thesis_catalysts_and_risks"
+          },
+          {
+            "data_args": {
+              "pdf_name": [
+                "Ipsos GLP-1 Healthcare Revolution",
+                "MassHPC GLP-1 Utilization & Spending"
+              ]
+            },
+            "layout": {
+              "h": 18,
+              "w": 40,
+              "x": 0,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "thesis",
+            "widget_id": "equity_research_workbench_thesis_sell_side_research_pdfs"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 32
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "thesis",
+            "widget_id": "equity_research_workbench_thesis_analyst_thesis_note"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 32
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "thesis",
+            "widget_id": "equity_research_workbench_thesis_draft_research_review"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "valuation",
+            "widget_id": "equity_research_workbench_valuation_comps_table"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "raw": false,
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "valuation",
+            "widget_id": "equity_research_workbench_valuation_dcf_sensitivity"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "valuation",
+            "widget_id": "equity_research_workbench_valuation_football_field"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "valuation",
+            "widget_id": "equity_research_workbench_valuation_valuation_assumption_log"
+          }
+        ]
+      },
+      {
+        "activate": false,
+        "name": "Compliance Surveillance Hub",
+        "tabs": [
+          {
+            "id": "alerts",
+            "name": "Alerts"
+          },
+          {
+            "id": "audit",
+            "name": "Audit"
+          },
+          {
+            "id": "overview",
+            "name": "Overview"
+          },
+          {
+            "id": "personal_trading",
+            "name": "Personal Trading"
+          },
+          {
+            "id": "restricted_list",
+            "name": "Restricted List"
+          }
+        ],
+        "widgets": [
+          {
+            "data_args": {
+              "period": "YTD",
+              "severity": "High",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 14,
+              "w": 40,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "alerts",
+            "widget_id": "compliance_surveillance_hub_alerts_surveillance_alerts"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "severity": "High",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 5,
+              "w": 40,
+              "x": 0,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "alerts",
+            "widget_id": "compliance_surveillance_hub_alerts_open_alert_metrics"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "severity": "High",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 14,
+              "w": 40,
+              "x": 0,
+              "y": 19
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "alerts",
+            "widget_id": "compliance_surveillance_hub_alerts_alert_trend"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "severity": "High",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "audit",
+            "widget_id": "compliance_surveillance_hub_audit_access_and_export_logs"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "severity": "High",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "audit",
+            "widget_id": "compliance_surveillance_hub_audit_investigation_notes"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "severity": "High",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 14,
+              "w": 40,
+              "x": 0,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "audit",
+            "widget_id": "compliance_surveillance_hub_audit_investigation_evidence"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "severity": "High",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 24,
+              "w": 40,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "overview",
+            "widget_id": "compliance_surveillance_hub_overview_workflow_overview"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "severity": "High",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "personal_trading",
+            "widget_id": "compliance_surveillance_hub_personal_trading_employee_trades"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "severity": "High",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "personal_trading",
+            "widget_id": "compliance_surveillance_hub_personal_trading_pre_clearance_queue"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "severity": "High",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 14,
+              "w": 40,
+              "x": 0,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "personal_trading",
+            "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "severity": "High",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "restricted_list",
+            "widget_id": "compliance_surveillance_hub_restricted_list_restricted_and_watch_list"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "severity": "High",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "restricted_list",
+            "widget_id": "compliance_surveillance_hub_restricted_list_issuer_status_mix"
+          },
+          {
+            "data_args": {
+              "period": "YTD",
+              "severity": "High",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 14,
+              "w": 40,
+              "x": 0,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "restricted_list",
+            "widget_id": "compliance_surveillance_hub_restricted_list_restricted_list_changes"
+          }
+        ]
+      },
+      {
+        "activate": false,
+        "name": "Morning Markets",
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "widgets": [
+          {
+            "data_args": {
+              "period": "1D",
+              "strategy": "Global Equities"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "overview",
+            "widget_id": "executive_investment_dashboard_firm_overview_firm_snapshot"
+          },
+          {
+            "data_args": {
+              "period": "1D",
+              "portfolio": "Macro Multi-Asset",
+              "scenario": "Equity -10%"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "overview",
+            "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot"
+          },
+          {
+            "data_args": {
+              "period": "1D",
+              "sector": "Healthcare",
+              "ticker": "LLY"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "overview",
+            "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings"
+          },
+          {
+            "data_args": {
+              "chain": "Ethereum",
+              "crypto_asset": "BTC",
+              "period": "1D"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "overview",
+            "widget_id": "crypto_research_dashboard_market_price_and_volume"
+          }
+        ]
+      },
+      {
+        "activate": false,
+        "name": "IC Prep - Q3 Review",
+        "tabs": [
+          {
+            "id": "agenda",
+            "name": "Agenda"
+          },
+          {
+            "id": "evidence",
+            "name": "Evidence"
+          }
+        ],
+        "widgets": [
+          {
+            "data_args": {
+              "period": "QTD",
+              "strategy": "Global Equities"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "agenda",
+            "widget_id": "cio_investment_committee_pack_agenda_ic_agenda"
+          },
+          {
+            "data_args": {
+              "period": "QTD",
+              "strategy": "Global Equities"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "agenda",
+            "widget_id": "cio_investment_committee_pack_agenda_decisions_required"
+          },
+          {
+            "data_args": {
+              "period": "QTD",
+              "strategy": "Global Equities"
+            },
+            "layout": {
+              "h": 14,
+              "w": 40,
+              "x": 0,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "agenda",
+            "widget_id": "cio_investment_committee_pack_allocations_capital_allocation"
+          },
+          {
+            "data_args": {
+              "period": "QTD",
+              "strategy": "Global Equities"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "evidence",
+            "widget_id": "strategy_health_monitor_overview_workflow_overview"
+          },
+          {
+            "data_args": {
+              "client": "Atlas Pension",
+              "period": "QTD",
+              "region": "Americas"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "evidence",
+            "widget_id": "client_360_flows_subscriptions_and_redemptions"
+          },
+          {
+            "data_args": {
+              "client": "Atlas Pension",
+              "period": "QTD"
+            },
+            "layout": {
+              "h": 14,
+              "w": 40,
+              "x": 0,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "evidence",
+            "widget_id": "reporting_factsheet_studio_commentary_approved_commentary_library"
+          }
+        ]
+      },
+      {
+        "activate": false,
+        "name": "Ops Daily Checks",
+        "tabs": [
+          {
+            "id": "checks",
+            "name": "Checks"
+          }
+        ],
+        "widgets": [
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "1D",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "checks",
+            "widget_id": "fund_operations_control_tower_overview_workflow_overview"
+          },
+          {
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "MTD",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 0
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "checks",
+            "widget_id": "nav_fees_close_dashboard_close_close_exceptions"
+          },
+          {
+            "data_args": {
+              "period": "MTD",
+              "status": "Open",
+              "vendor": "FactSet"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 0,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "checks",
+            "widget_id": "vendor_dataset_monitor_incidents_incident_log"
+          },
+          {
+            "data_args": {
+              "backend": "Research Lake",
+              "period": "1D",
+              "status": "Open"
+            },
+            "layout": {
+              "h": 14,
+              "w": 20,
+              "x": 20,
+              "y": 14
+            },
+            "origin": "Bench Stark Enterprise",
+            "tab_id": "checks",
+            "widget_id": "workspace_data_control_center_data_health_feed_status"
+          }
+        ]
+      }
+    ]
+  },
+  "source": {
+    "derived_from": "backends/stark_enterprise_x.json",
+    "generator": "scripts/generators/generate_onboard_states.py",
+    "open_apps": [
+      "Portfolio Command Center",
+      "Equity Research Workbench",
+      "Compliance Surveillance Hub"
+    ]
+  }
+}

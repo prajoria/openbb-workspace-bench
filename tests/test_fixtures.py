@@ -16,8 +16,8 @@ from workspace_bench.workspace.fixtures import (
 
 
 REPO = Path(__file__).resolve().parents[1]
-STARK_DATA_PATH = REPO / "src/workspace_bench/workspace/data/stark_enterprise.json"
-DALOOPA_DATA_PATH = REPO / "src/workspace_bench/workspace/data/daloopa.json"
+STARK_DATA_PATH = REPO / "src/workspace_bench/data/backends/stark_enterprise_x.json"
+DALOOPA_DATA_PATH = REPO / "src/workspace_bench/data/backends/support_daloopa_skills.json"
 
 
 def _load_generator(name: str):

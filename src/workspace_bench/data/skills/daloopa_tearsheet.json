@@ -1,0 +1,6 @@
+{
+  "content": "Daloopa tearsheet workflow: on the Bench Daloopa origin, read daloopa_company_directory and anchor all period math on latest_calendar_quarter, never the wall clock. Pull daloopa_stock_prices for the latest close, daloopa_company_fundamentals for revenue through free cash flow, daloopa_kpi_metrics for business drivers, and daloopa_segment_breakdown for mix. Cite every Daloopa-sourced figure with its source_url and label single-company periods with fiscal_period.",
+  "description": "Build a cited one-page company snapshot from Bench Daloopa fundamentals, KPIs, segments, and prices.",
+  "name": "Daloopa Tearsheet",
+  "slug": "daloopa-tearsheet"
+}

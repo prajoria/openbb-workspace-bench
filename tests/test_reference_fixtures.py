@@ -24,7 +24,7 @@ from workspace_bench.workspace.widget_params import flatten_params, sanitize_dat
 
 REPO = Path(__file__).resolve().parents[1]
 GENERATOR_PATH = REPO / "scripts/generators/generate_reference_fixture_data.py"
-DATA_DIR = REPO / "src/workspace_bench/workspace/data"
+DATA_DIR = REPO / "src/workspace_bench/data/backends"
 
 
 def _load_generator() -> ModuleType:
