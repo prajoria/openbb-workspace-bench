@@ -48,7 +48,7 @@ task directory.
 
 ## Grading
 
-`judge.md` compares an agent's retrieved data and reply with one
+`JUDGE.md` compares an agent's retrieved data and reply with one
 known-good reference trajectory for the same prompt and data world. The judge
 accepts other valid analyses when their reads, figures, and conclusions support
 the ask.

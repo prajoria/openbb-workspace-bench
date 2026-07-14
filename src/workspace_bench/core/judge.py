@@ -177,13 +177,13 @@ def stark_app_catalog_entry(task: Task) -> JsonDict:
 def resolve_judge_template(task: Task | None) -> tuple[str, str]:
     """Return the judge template and its sha for a task.
 
-    A suite may define its own judge in a ``judge.md`` beside its task
-    families (e.g. ``task_suites/enterprise_apps_default/judge.md``); tasks
+    A suite may define its own judge in a ``JUDGE.md`` beside its task
+    families (e.g. ``task_suites/enterprise_apps_default/JUDGE.md``); tasks
     without one use the fixed default template.
     """
 
     if task is not None and task.source_path is not None:
-        candidate = task.source_path.parent.parent / "judge.md"
+        candidate = task.source_path.parent.parent / "JUDGE.md"
         if candidate.is_file():
             template = candidate.read_text(encoding="utf-8")
             return template, hashlib.sha256(template.encode("utf-8")).hexdigest()
