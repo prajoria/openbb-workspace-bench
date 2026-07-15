@@ -1,0 +1,187 @@
+{
+  "id": "investment_snapshot_governance_level5",
+  "category": "platform",
+  "difficulty": "level5",
+  "prompt": "Investment-snapshot governed build: read the Finance Tearsheet skill (finance-tearsheet), add Wave Three Investment Snapshot with a Investment Snapshot Register table, publish and instantiate Investment Snapshot App on Snapshot, and add a Investment-snapshot Build Note containing price action. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Wave Three Investment Snapshot",
+          "url": "http://127.0.0.1:9710",
+          "widgets_json": {
+            "investment_snapshot_register": {
+              "name": "Investment Snapshot Register",
+              "description": "Wave-1 view for Investment Snapshot Register.",
+              "endpoint": "/investment_snapshot_register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Investment Snapshot App",
+              "description": "Wave-1 authored app for Investment Snapshot App.",
+              "tabs": {
+                "snapshot": {
+                  "id": "snapshot",
+                  "name": "Snapshot",
+                  "layout": [
+                    {
+                      "i": "investment_snapshot_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Investment Snapshot App",
+          "dashboard_name": "Investment-snapshot Live",
+          "activate": true
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Investment-snapshot Build Note",
+          "data": "price action"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Wave Three Investment Snapshot",
+        "widget_id": "investment_snapshot_register",
+        "tab_id": "snapshot"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Investment-snapshot Build Note",
+        "data_contains": [
+          "price action"
+        ]
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Wave Three Investment Snapshot",
+        "widget_id": "investment_snapshot_register",
+        "expect": {
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Wave Three Investment Snapshot",
+        "name_contains": "Investment Snapshot App",
+        "tabs_include": [
+          "snapshot"
+        ],
+        "layout_refs_valid": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "snapshot",
+            "widget_id": "investment_snapshot_register"
+          }
+        ]
+      }
+    ],
+    "max_turns": 9
+  }
+}

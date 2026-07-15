@@ -1,0 +1,140 @@
+{
+  "id": "crypto_display_controls_level2",
+  "category": "single-widget",
+  "difficulty": "level2",
+  "prompt": "Crypto-display level-2 change: on the open Crypto Display Controls board, set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3 and preserve the other views.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Crypto Display Controls",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Crypto Display Controls",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "review",
+            "name": "Review"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Widget Examples",
+            "widget_id": "html_binance_ohlc",
+            "widget_uuid": "wave3_crypto_display_controls_0",
+            "tab_id": "review",
+            "data_args": {
+              "symbol": "BTCUSDT",
+              "interval": "30m",
+              "exchange": "BinanceUS"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 40,
+              "h": 12
+            }
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "omni_sql_widget",
+            "widget_uuid": "wave3_crypto_display_controls_1",
+            "tab_id": "review",
+            "data_args": {
+              "prompt": "SELECT * FROM DATA LIMIT 5"
+            },
+            "layout": {
+              "x": 0,
+              "y": 12,
+              "w": 40,
+              "h": 12
+            }
+          },
+          {
+            "origin": "Widget Examples",
+            "widget_id": "moving_parameters_example",
+            "widget_uuid": "wave3_crypto_display_controls_2",
+            "tab_id": "review",
+            "data_args": {
+              "datePicker1": "$currentDate-1d",
+              "textBox1": "Hello!",
+              "TrueFalse": true,
+              "daysPicker1": "1"
+            },
+            "layout": {
+              "x": 0,
+              "y": 24,
+              "w": 40,
+              "h": 12
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "wave3_crypto_display_controls_1",
+          "data_args": {
+            "prompt": "SELECT * FROM DATA LIMIT 3"
+          }
+        },
+        "graded_args": [
+          "data_args"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Getting Started",
+        "widget_id": "omni_sql_widget",
+        "data_args": {
+          "prompt": "SELECT * FROM DATA LIMIT 3"
+        }
+      }
+    ],
+    "max_turns": 4
+  }
+}

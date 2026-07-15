@@ -1,0 +1,225 @@
+{
+  "id": "live_quote_lookup_level5",
+  "category": "platform",
+  "difficulty": "level5",
+  "prompt": "Live-quote build request: add Wave Three Live Quote with a Live Quote Lookup table, carrying symbol and last_price columns; publish and instantiate Live Quote App on Quotes, read it with symbol AAPL, and report the exact symbol and last_price values shown. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents",
+      "final_answer"
+    ]
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Wave Three Live Quote",
+          "url": "http://127.0.0.1:9702",
+          "widgets_json": {
+            "live_quote_lookup": {
+              "name": "Live Quote Lookup",
+              "description": "Runtime-backed table for Live-quote.",
+              "endpoint": "/live_quote_lookup",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "text",
+                  "label": "Symbol",
+                  "value": "AAPL",
+                  "options": [
+                    {
+                      "label": "AAPL",
+                      "value": "AAPL"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Live Quote App",
+              "description": "Wave-1 authored app for Live Quote App.",
+              "tabs": {
+                "quotes": {
+                  "id": "quotes",
+                  "name": "Quotes",
+                  "layout": [
+                    {
+                      "i": "live_quote_lookup",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10,
+                      "state": {
+                        "params": {
+                          "symbol": "AAPL"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Live Quote App",
+          "dashboard_name": "Live-quote Live",
+          "activate": true
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Wave Three Live Quote",
+          "widget_id": "live_quote_lookup",
+          "data_args": {
+            "symbol": "AAPL"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Wave Three Live Quote",
+        "widget_id": "live_quote_lookup",
+        "data_args": {
+          "symbol": "AAPL"
+        },
+        "tab_id": "quotes"
+      }
+    ],
+    "required_values_in_answer": [
+      "AAPL",
+      "150.0"
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Wave Three Live Quote",
+        "widget_id": "live_quote_lookup",
+        "expect": {
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Wave Three Live Quote",
+        "name_contains": "Live Quote App",
+        "tabs_include": [
+          "quotes"
+        ],
+        "layout_refs_valid": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "quotes",
+            "widget_id": "live_quote_lookup"
+          }
+        ]
+      }
+    ],
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "wave3-live_quote_lookup",
+          "widget_id": "live_quote_lookup",
+          "fields": [
+            "symbol",
+            "last_price"
+          ],
+          "path": "/live_quote_lookup",
+          "payload": [
+            {
+              "symbol": "AAPL",
+              "last_price": "150.0"
+            }
+          ]
+        }
+      ]
+    },
+    "reference_answer": "The built lookup reports AAPL and 150.0.",
+    "max_turns": 9
+  }
+}

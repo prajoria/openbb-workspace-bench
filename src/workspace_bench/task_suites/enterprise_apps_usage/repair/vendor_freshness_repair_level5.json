@@ -1,0 +1,183 @@
+{
+  "id": "vendor_freshness_repair_level5",
+  "category": "repair",
+  "difficulty": "level5",
+  "prompt": "Vendor-freshness backend rebuild: on the open Vendor-freshness Backend Repair board, refresh Wave Three Vendor Repair so its Vendor Repair Queue table is published through Vendor Repair App on Incidents. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Vendor-freshness Backend Repair",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Vendor-freshness Backend Repair",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "incidents",
+            "name": "Incidents"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Wave Three Vendor Repair",
+            "widget_id": "vendor_repair_queue",
+            "widget_uuid": "vendor_freshness_repair_custom",
+            "tab_id": "incidents",
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 40,
+              "h": 10
+            }
+          }
+        ]
+      },
+      "custom_backends": [
+        {
+          "backend_id": "backend_005",
+          "name": "Wave Three Vendor Repair",
+          "url": "http://127.0.0.1:9707",
+          "widgets_json": {
+            "vendor_repair_queue": {
+              "name": "Vendor Repair Queue",
+              "type": "table"
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Vendor Repair App",
+              "tabs": {}
+            }
+          ],
+          "warnings": [
+            "missing endpoint and app layout"
+          ]
+        }
+      ]
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_005",
+          "widgets_json": {
+            "vendor_repair_queue": {
+              "name": "Vendor Repair Queue",
+              "description": "Wave-1 view for Vendor Repair Queue.",
+              "endpoint": "/vendor_repair_queue",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Vendor Repair App",
+              "description": "Wave-1 authored app for Vendor Repair App.",
+              "tabs": {
+                "incidents": {
+                  "id": "incidents",
+                  "name": "Incidents",
+                  "layout": [
+                    {
+                      "i": "vendor_repair_queue",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Wave Three Vendor Repair",
+        "widget_id": "vendor_repair_queue",
+        "tab_id": "incidents"
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Wave Three Vendor Repair",
+        "widget_id": "vendor_repair_queue",
+        "expect": {
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Wave Three Vendor Repair",
+        "name_contains": "Vendor Repair App",
+        "tabs_include": [
+          "incidents"
+        ],
+        "layout_refs_valid": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "incidents",
+            "widget_id": "vendor_repair_queue"
+          }
+        ]
+      }
+    ],
+    "max_turns": 5
+  }
+}

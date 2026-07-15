@@ -1,0 +1,201 @@
+{
+  "id": "execution_quality_review_level5",
+  "category": "platform",
+  "difficulty": "level5",
+  "prompt": "Execution-quality build board: add Wave Three Execution Review with a Execution Review Register table and publish and instantiate Execution Review App on Quality; also add Bench Stark Enterprise — Execution Desk, Live Orders; Getting Started — Getting Started, Multi PDF Viewer - URL. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Wave Three Execution Review",
+          "url": "http://127.0.0.1:9704",
+          "widgets_json": {
+            "execution_review_register": {
+              "name": "Execution Review Register",
+              "description": "Wave-1 view for Execution Review Register.",
+              "endpoint": "/execution_review_register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Execution Review App",
+              "description": "Wave-1 authored app for Execution Review App.",
+              "tabs": {
+                "quality": {
+                  "id": "quality",
+                  "name": "Quality",
+                  "layout": [
+                    {
+                      "i": "execution_review_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Execution Review App",
+          "dashboard_name": "Execution-quality Live",
+          "activate": true
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "execution_desk_blotter_live_orders"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "multi_pdf_url"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Wave Three Execution Review",
+        "widget_id": "execution_review_register",
+        "tab_id": "quality"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_blotter_live_orders"
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "multi_pdf_url"
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Wave Three Execution Review",
+        "widget_id": "execution_review_register",
+        "expect": {
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Wave Three Execution Review",
+        "name_contains": "Execution Review App",
+        "tabs_include": [
+          "quality"
+        ],
+        "layout_refs_valid": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "quality",
+            "widget_id": "execution_review_register"
+          }
+        ]
+      }
+    ],
+    "max_turns": 11
+  }
+}

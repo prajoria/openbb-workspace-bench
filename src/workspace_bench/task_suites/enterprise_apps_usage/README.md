@@ -1,6 +1,6 @@
 # `enterprise-apps-usage` task suite
 
-Tasks: 96
+Tasks: 192
 
 ## Purpose
 
@@ -26,14 +26,22 @@ the tools and data available.
 | `extend` | the data-backend lifecycle, up to writing new manifests | 0-5 |
 | `handoff` | durable notes with grounded facts, then delegation | 0-5 |
 
-Each family holds two spines (one target threaded up the ladder; catalog
+Each family holds four spines (one target threaded up the ladder; catalog
 balance across spines makes Getting Started, Widget Examples, and Daloopa
-first-class targets), and the grid is complete — 8 x 6 x 2 — so every level
-carries exactly 16 tasks and per-level pass rates rest on equal attempts. Levels add one difficulty driver each: level0 execute
-(everything stated, including param keys), level1 discover, level2 translate
-policy into declared parameter values, level3 ambient state under
-preservation, level4 knowledge-governed or multi-intent work, level5 build —
-author `widgets_json`, wrap it in `apps_json`, instantiate, and use it.
+first-class targets, and all ten workspace skills govern tasks somewhere in
+the suite), and the grid is complete — 8 x 6 x 4 — so every level carries
+exactly 32 tasks and per-level pass rates rest on equal attempts. Levels add
+one difficulty driver each: level0 execute (everything stated, including
+param keys), level1 discover, level2 translate policy into declared parameter
+values, level3 ambient state under preservation, level4 knowledge-governed
+(in half the spines, strictly: a skill, MCP resource, or workspace prompt
+named in the prompt determines the graded outcome) or multi-intent work,
+level5 build — author `widgets_json`, wrap it in `apps_json`, instantiate,
+and use it.
+
+Distinct graded targets per catalog: Bench Stark Enterprise 9/349, Bench
+Daloopa 7/10, Getting Started 19/70, Widget Examples 12/30 — spanning tables,
+charts, forms with submit inputs, live grids, and media/content widgets.
 
 ## Grading
 
@@ -62,12 +70,13 @@ must appear literally in the target's served rows; prompt register checks
 (<=110 words, no tool names, no shared opening 5-grams).
 
 Difficulty calibration (July 2026, on this exact content). gpt-4.1-mini
-(two repeats, 32 attempts per level): strict-pass staircase
-94% / 63% / 56% / 34% / 13% / 13% across level0-level5 — an achievable
-floor and a hard top that sits at the gating model's noise level. The top
-rungs were verified against GPT-5.5 (single attempt per task): 69% at
-level4 and 38% at level5, so the deep ladder separates frontier models
-where the gating model cannot.
+(two repeats, 64 attempts per level): strict-pass staircase
+94% / 72% / 66% / 45% / 14% / 20% across level0-level5 (51.8% overall) — an
+achievable floor and a hard top that sits at the gating model's noise
+level. The top rungs were verified against GPT-5.5 (single attempt per
+task, pooled over all 32 tasks per rung): 78% at level4 and 59% at level5,
+so the deep ladder orders correctly and separates frontier models where
+the gating model cannot.
 
 ## Limitations
 

@@ -1,0 +1,91 @@
+{
+  "id": "compliance_alert_review_level1",
+  "category": "dashboard",
+  "difficulty": "level1",
+  "prompt": "Compliance-alert discovery board: add Bench Stark Enterprise — Compliance Surveillance Hub, Policy Breaches to the current board.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches"
+      }
+    ],
+    "max_turns": 7
+  }
+}

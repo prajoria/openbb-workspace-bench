@@ -1,0 +1,149 @@
+{
+  "id": "visualization_gallery_level4",
+  "category": "dashboard",
+  "difficulty": "level4",
+  "prompt": "Visualization-gallery governed layout: follow the Finance Comps skill (finance-comps); create and open Visualization Gallery, add Valuation Multiples and Outliers tabs, and add Getting Started's Chains TVL Highcharts, Widget Examples's Vega-Lite Scatter Demo.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-comps"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "manage_dashboard",
+        "args": {
+          "operation": "create",
+          "name": "Visualization Gallery",
+          "activate": true
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_navigation_bar",
+        "args": {
+          "operation": "add_tabs",
+          "tabs": [
+            {
+              "name": "Valuation Multiples"
+            },
+            {
+              "name": "Outliers"
+            }
+          ]
+        },
+        "graded_args": [
+          "tabs"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Widget Examples"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "chains_highchart"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "vega_scatter_demo"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Getting Started",
+        "widget_id": "chains_highchart"
+      },
+      {
+        "origin": "Widget Examples",
+        "widget_id": "vega_scatter_demo"
+      }
+    ],
+    "required_tabs": [
+      "valuation-multiples",
+      "outliers"
+    ],
+    "required_dashboard_name_contains": "Visualization Gallery",
+    "max_turns": 11
+  }
+}

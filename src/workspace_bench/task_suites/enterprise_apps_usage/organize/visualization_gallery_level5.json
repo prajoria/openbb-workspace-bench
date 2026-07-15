@@ -1,0 +1,201 @@
+{
+  "id": "visualization_gallery_level5",
+  "category": "platform",
+  "difficulty": "level5",
+  "prompt": "Visualization-gallery navigation build: add Wave Three Visualization Gallery with a Visualization Review Register table, publish and instantiate Visualization Gallery App on Gallery, then add Getting Started's Vega-Lite Bar Demo, Widget Examples's Vega-Lite Scatter Demo. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Wave Three Visualization Gallery",
+          "url": "http://127.0.0.1:9706",
+          "widgets_json": {
+            "visualization_review_register": {
+              "name": "Visualization Review Register",
+              "description": "Wave-1 view for Visualization Review Register.",
+              "endpoint": "/visualization_review_register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Visualization Gallery App",
+              "description": "Wave-1 authored app for Visualization Gallery App.",
+              "tabs": {
+                "gallery": {
+                  "id": "gallery",
+                  "name": "Gallery",
+                  "layout": [
+                    {
+                      "i": "visualization_review_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Visualization Gallery App",
+          "dashboard_name": "Visualization-gallery Live",
+          "activate": true
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Widget Examples"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "vega_bar"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "vega_scatter_demo"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Wave Three Visualization Gallery",
+        "widget_id": "visualization_review_register",
+        "tab_id": "gallery"
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "vega_bar"
+      },
+      {
+        "origin": "Widget Examples",
+        "widget_id": "vega_scatter_demo"
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Wave Three Visualization Gallery",
+        "widget_id": "visualization_review_register",
+        "expect": {
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Wave Three Visualization Gallery",
+        "name_contains": "Visualization Gallery App",
+        "tabs_include": [
+          "gallery"
+        ],
+        "layout_refs_valid": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "gallery",
+            "widget_id": "visualization_review_register"
+          }
+        ]
+      }
+    ],
+    "max_turns": 11
+  }
+}

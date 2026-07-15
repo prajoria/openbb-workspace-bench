@@ -89,11 +89,11 @@ SUITE_TERMINOLOGY_RE = re.compile(
 
 REQUIRED_FACTS = {
     REPO / "README.md": (
-        "550 deterministic simulator tasks",
+        "646 deterministic simulator tasks",
         f"{ARCHETYPE_COUNT_WORD} archetypes",
     ),
     REPO / "RELEASE_CHECKLIST.md": (
-        "550 tasks",
+        "646 tasks",
         "17/43/176 measured difficulty",
         "60/92/84 specification levels",
     ),
@@ -102,7 +102,7 @@ REQUIRED_FACTS = {
         "118/59/59 (`build-openbb-apps`)",
     ),
     REPO / "src/workspace_bench/cli.py": (
-        "(96); build-openbb-apps",
+        "(192); build-openbb-apps",
         "apps (236).",
     ),
 }

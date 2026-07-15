@@ -12,7 +12,7 @@ Motivation: a [NY Tech Week talk](https://youtu.be/7fDTDYh2NJ4?t=1210) showed ag
 Five suites ship bundled in a capability ladder: `smoke` checks one round trip
 per Workspace MCP surface (20 tasks), `enterprise-apps-default` answers the
 default apps' product prompts in two data worlds (138), `enterprise-apps-usage` operates Workspace
-state (96), and `build-openbb-apps` builds and repairs custom apps (236).
+state (192), and `build-openbb-apps` builds and repairs custom apps (236).
 
 ## Contents
 
@@ -37,10 +37,10 @@ state (96), and `build-openbb-apps` builds and repairs custom apps (236).
 
 ## What Is Included
 
-- 550 deterministic simulator tasks across four certified suites:
+- 646 deterministic simulator tasks across four certified suites:
   - `smoke` — 80 tasks: a four-level execution ladder over every Workspace MCP surface
   - `enterprise-apps-default` — 138 tasks pairing 69 byte-verbatim product prompts across two data worlds
-  - `enterprise-apps-usage` — 96 operating tasks: 8 job-shaped families
+  - `enterprise-apps-usage` — 192 operating tasks: 8 job-shaped families
     (retrieve, curate, parameterize, organize, repair, platform, extend,
     handoff) climbing a level0-level5 operation ladder on the
     everything-mounted workspace, topped by authoring custom backends
@@ -100,7 +100,7 @@ uv run workspace-bench list
 uv run workspace-bench manifest --json
 uv run workspace-bench validate --suite smoke --min-tasks 80
 uv run workspace-bench validate --suite enterprise-apps-default --min-tasks 138
-uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 96
+uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 192
 uv run workspace-bench validate --suite build-openbb-apps --min-tasks 236
 ```
 
@@ -169,7 +169,7 @@ Six models have been run against both suites (pass@1, single fresh
 end-to-end attempt per suite, temperature 0, same grader and turn budget
 for every model — no patched or spliced results).
 
-Usage suite (operating the workspace, 96 tasks):
+Usage suite (operating the workspace, 192 tasks):
 
 | Model | Strict pass | t0 → t4 pass rate (%) |
 |---|---|---|
@@ -757,7 +757,7 @@ scripts/
   audits/                 Local, release, hosted-surface, and prompt audits
 runs/
   reports/                 Compiled reports and generated catalogs/matrices
-    task-catalog.md         All 550 deterministic simulator tasks
+    task-catalog.md         All 646 deterministic simulator tasks
     tool-coverage-matrix.md Per-task x Workspace MCP oracle-tool matrix
     tool-matrix-data.json   Machine-readable data behind the tool matrix
 references/

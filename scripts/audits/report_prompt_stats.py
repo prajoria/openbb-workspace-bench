@@ -30,7 +30,7 @@ SUITES = {
 EXPECTED_TASKS = {
     "smoke": 80,
     "enterprise-apps-default": 138,
-    "enterprise-apps-usage": 96,
+    "enterprise-apps-usage": 192,
     "build-openbb-apps": 236,
 }
 # The smoke ladder repeats each family's declarative prompt across levels

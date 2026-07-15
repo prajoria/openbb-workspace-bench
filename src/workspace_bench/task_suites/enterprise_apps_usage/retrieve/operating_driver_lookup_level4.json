@@ -1,0 +1,118 @@
+{
+  "id": "operating_driver_lookup_level4",
+  "category": "read",
+  "difficulty": "level4",
+  "prompt": "Operating-driver governed request: follow the Daloopa Inflection skill (daloopa-inflection), read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, report the exact calendar_period and Installed Base Active Devices value shown, and add a Operating-driver Governance Note that records growth-rate reversals.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents",
+      "final_answer"
+    ]
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-inflection"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Daloopa"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_kpi_metrics",
+          "data_args": {
+            "ticker": "AAPL",
+            "period": "2026Q1"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Operating-driver Governance Note",
+          "data": "growth-rate reversals"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_values_in_answer": [
+      "2026Q1",
+      "2420.9"
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Operating-driver Governance Note",
+        "data_contains": [
+          "growth-rate reversals"
+        ]
+      }
+    ],
+    "reference_answer": "The governed view reports 2026Q1 and 2420.9.",
+    "max_turns": 8
+  }
+}

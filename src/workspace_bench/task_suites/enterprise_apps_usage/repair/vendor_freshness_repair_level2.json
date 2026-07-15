@@ -1,0 +1,141 @@
+{
+  "id": "vendor_freshness_repair_level2",
+  "category": "repair",
+  "difficulty": "level2",
+  "prompt": "Vendor-freshness duplicate cleanup: the open Vendor Freshness Repair board has an extra SLA Metrics; the vendor-freshness duplicate marker identifies it. Remove that copy and preserve Vendor Contract Terms.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Vendor Freshness Repair",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Vendor Freshness Repair",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "review",
+            "name": "Review"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "vendor_dataset_monitor_vendors_sla_metrics",
+            "widget_uuid": "vendor_freshness_repair_primary",
+            "tab_id": "review",
+            "data_args": {
+              "vendor": "Bloomberg",
+              "status": "Open",
+              "period": "QTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 40,
+              "h": 12
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "vendor_dataset_monitor_vendors_vendor_contract_terms",
+            "widget_uuid": "vendor_freshness_repair_preserved",
+            "tab_id": "review",
+            "data_args": {
+              "vendor": "FactSet",
+              "status": "Open",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 12,
+              "w": 40,
+              "h": 12
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "vendor_dataset_monitor_vendors_sla_metrics",
+            "widget_uuid": "vendor_freshness_repair_duplicate",
+            "tab_id": "review",
+            "data_args": {
+              "vendor": "Bloomberg",
+              "status": "Open",
+              "period": "QTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 24,
+              "w": 40,
+              "h": 12
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "delete_widget",
+        "args": {
+          "widget_uuid": "vendor_freshness_repair_duplicate"
+        },
+        "graded_args": [
+          "widget_uuid"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "vendor_dataset_monitor_vendors_sla_metrics",
+        "min_count": 1,
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "vendor_dataset_monitor_vendors_vendor_contract_terms"
+      }
+    ],
+    "max_turns": 4
+  }
+}

@@ -1,6 +1,7 @@
-"""Generate and certify the 96-task usage-v3 wave-1 + wave-2 suite.
+"""Generate and certify the 192-task usage-v3 wave-1 through wave-3 suite.
 
-Each wave has one coherent spine in each of eight job-shaped families.  Most
+The first two waves have one coherent spine per family; wave 3 adds two more
+spines to each of eight job-shaped families.  Most
 spines follow the level0 execute, level1 discover, level2 translate, level3
 ambient, level4 governed/multi-intent, level5 build ladder exactly.  The
 honest deviations required by the brief are:
@@ -13,7 +14,7 @@ honest deviations required by the brief are:
   documenting and delegating its follow-up.
 
 The generator owns the enterprise-apps-usage suite directory and this file.  Its static
-certificate mechanically enforces F1-F10 and L1-L5 across both waves,
+certificate mechanically enforces F1-F11 and L1-L5 across all three waves,
 including per-value provenance for every synthesized graded call argument and
 every required-widget data value.
 """
@@ -42,7 +43,11 @@ from workspace_bench.core.models import (  # noqa: E402
 )
 from workspace_bench.core.runner import load_task_directory  # noqa: E402
 from workspace_bench.core.suite_checks import task_payload_digest  # noqa: E402
-from workspace_bench.workspace.simulated_workspace import WORKSPACE_SKILLS  # noqa: E402
+from workspace_bench.workspace.simulated_workspace import (  # noqa: E402
+    LIVE_WORKSPACE_RESOURCES,
+    WORKSPACE_PROMPTS,
+    WORKSPACE_SKILLS,
+)
 
 OUTPUT_DIR = REPO / "src" / "workspace_bench" / "task_suites" / "enterprise_apps_usage"
 RELATIVE_OUTPUT_DIR = Path("src/workspace_bench/task_suites/enterprise_apps_usage")
@@ -127,6 +132,78 @@ WAVE2_SPINES = {
     "research_feed_lifecycle",
     "news_desk_handoff",
 }
+WAVE3_SPINES = {
+    "operating_driver_lookup",
+    "live_quote_lookup",
+    "compliance_alert_review",
+    "execution_quality_review",
+    "client_intake_controls",
+    "crypto_display_controls",
+    "due_diligence_media_room",
+    "visualization_gallery",
+    "vendor_freshness_repair",
+    "protocol_display_repair",
+    "comps_governance",
+    "investment_snapshot_governance",
+    "inflection_service_lifecycle",
+    "guidance_service_lifecycle",
+    "segment_mix_handoff",
+    "consensus_exception_handoff",
+}
+WAVE3_SPINE_FAMILIES = {
+    "operating_driver_lookup": "retrieve",
+    "live_quote_lookup": "retrieve",
+    "compliance_alert_review": "curate",
+    "execution_quality_review": "curate",
+    "client_intake_controls": "parameterize",
+    "crypto_display_controls": "parameterize",
+    "due_diligence_media_room": "organize",
+    "visualization_gallery": "organize",
+    "vendor_freshness_repair": "repair",
+    "protocol_display_repair": "repair",
+    "comps_governance": "platform",
+    "investment_snapshot_governance": "platform",
+    "inflection_service_lifecycle": "extend",
+    "guidance_service_lifecycle": "extend",
+    "segment_mix_handoff": "handoff",
+    "consensus_exception_handoff": "handoff",
+}
+WAVE3_BUSINESS_THEMES = {
+    "operating_driver_lookup": "operating driver history",
+    "live_quote_lookup": "live equity quote",
+    "compliance_alert_review": "compliance alert triage",
+    "execution_quality_review": "execution venue quality",
+    "client_intake_controls": "client intake submission",
+    "crypto_display_controls": "crypto display tuning",
+    "due_diligence_media_room": "due diligence media room",
+    "visualization_gallery": "visualization gallery",
+    "vendor_freshness_repair": "vendor freshness incident",
+    "protocol_display_repair": "protocol display recovery",
+    "comps_governance": "comparable company review",
+    "investment_snapshot_governance": "investment snapshot review",
+    "inflection_service_lifecycle": "growth inflection service",
+    "guidance_service_lifecycle": "guidance evidence service",
+    "segment_mix_handoff": "segment mix escalation",
+    "consensus_exception_handoff": "consensus exception escalation",
+}
+LEGACY_BUSINESS_THEMES = {
+    "earnings lookup",
+    "decision briefing",
+    "technology decision inputs",
+    "committee navigation",
+    "nav exception station",
+    "governed earnings brief",
+    "risk service lifecycle",
+    "earnings handoff",
+    "closing tape lookup",
+    "market telemetry",
+    "crypto document controls",
+    "client onboarding flow",
+    "manufacturer details repair",
+    "cited research operations",
+    "research feed lifecycle",
+    "news desk handoff",
+}
 
 DISCOVERY_TOOLS = {
     "get_workspace_snapshot",
@@ -175,6 +252,16 @@ class GroundedGenerated:
 
 
 @dataclass(frozen=True)
+class GovernanceSpec:
+    """A named knowledge source and tokens that govern a graded outcome."""
+
+    tool: str
+    key: str
+    label: str
+    outcome_tokens: tuple[str, ...]
+
+
+@dataclass(frozen=True)
 class TaskRecord:
     """One task plus certification-only fairness metadata."""
 
@@ -185,6 +272,7 @@ class TaskRecord:
     pinned_widget_args: dict[tuple[str, str], frozenset[str]] = field(default_factory=dict)
     answer_source: tuple[str, str] | None = None
     grounded_generated: tuple[GroundedGenerated, ...] = ()
+    governance: GovernanceSpec | None = None
 
 
 def _call(
@@ -382,6 +470,7 @@ def _record(
     reference_answer: str | None = None,
     answer_source: tuple[str, str] | None = None,
     grounded_generated: tuple[GroundedGenerated, ...] = (),
+    governance: GovernanceSpec | None = None,
     selected_dashboard: str = "Home",
     initial_state: JsonDict | None = None,
 ) -> TaskRecord:
@@ -410,10 +499,7 @@ def _record(
         # cannot model (orientation, template discovery before instantiate).
         # Optional steps keep the replay honest and grow the budget through
         # the same ref+3 rule; without them a real agent is turn-starved.
-        if not (
-            required_tools
-            and required_tools[0]["tool"] == "get_workspace_snapshot"
-        ):
+        if not (required_tools and required_tools[0]["tool"] == "get_workspace_snapshot"):
             required_tools = [_snapshot(), *required_tools]
         for index, step in enumerate(required_tools):
             if step["tool"] == "manage_apps" and not step.get("optional"):
@@ -445,6 +531,7 @@ def _record(
         pinned_widget_args=pinned_widget_args or {},
         answer_source=answer_source,
         grounded_generated=grounded_generated,
+        governance=governance,
     )
 
 
@@ -2153,9 +2240,7 @@ def _build_repair_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": widget_id,
-                    "expect": {
-                        
-                        },
+                    "expect": {},
                 }
             ],
             required_app_defs=[
@@ -4807,9 +4892,7 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": widget_id,
-                    "expect": {
-                        
-                        },
+                    "expect": {},
                 }
             ],
             required_app_defs=[
@@ -5894,26 +5977,2305 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
     return tasks
 
 
+def _note_phrase(name: str) -> str:
+    """Phrase a generated-note mention without doubling the word "note"."""
+    return name if name.lower().endswith("note") else f"{name} note"
+
+
+def _wave3_catalog_target(
+    origin: str,
+    widget_id: str,
+    display_name: str,
+    *discriminators: str,
+    staged: bool = False,
+) -> TargetSpec:
+    return _target(
+        origin,
+        widget_id,
+        display_name,
+        *(discriminators or (origin, display_name)),
+        staged=staged,
+    )
+
+
+def _wave3_governance_call(spec: GovernanceSpec) -> JsonDict:
+    key_name = {
+        "get_skill_content": "slug",
+        "read_workspace_resource": "uri",
+        "get_workspace_prompt": "name",
+    }[spec.tool]
+    return _call(spec.tool, {key_name: spec.key}, graded_args=(key_name,))
+
+
+def _wave3_target_words(target: TargetSpec) -> str:
+    words = [target.origin, *target.discriminators]
+    return "'s ".join(words[:1]) + " — " + ", ".join(words[1:])
+
+
+def _wave3_place_call(target: TargetSpec, data_args: JsonDict | None = None) -> JsonDict:
+    args: JsonDict = {"origin": target.origin, "widget_id": target.widget_id}
+    if data_args:
+        args["data_args"] = data_args
+    return _call("create_widget", args, graded_args=("origin", "widget_id"))
+
+
+def _wave3_discover_targets(targets: tuple[TargetSpec, ...]) -> list[JsonDict]:
+    return [
+        _call("list_available_widgets", {"origin": origin}, optional=True)
+        for origin in dict.fromkeys(target.origin for target in targets)
+    ]
+
+
+def _wave3_read_call(
+    target: TargetSpec,
+    data_args: JsonDict,
+    *,
+    optional: bool = False,
+) -> JsonDict:
+    return _call(
+        "get_widget_data",
+        {
+            "origin": target.origin,
+            "widget_id": target.widget_id,
+            "data_args": data_args,
+        },
+        optional=optional,
+        graded_args=("origin", "widget_id"),
+    )
+
+
+def _wave3_generated_call(name: str, data: str) -> JsonDict:
+    return _call(
+        "add_generative_widget",
+        {"widget_type": "note", "name": name, "data": data},
+        graded_args=("widget_type", "name"),
+    )
+
+
+def _wave3_required_generated(name: str, *tokens: str) -> JsonDict:
+    return {
+        "widget_type": "note",
+        "name_contains": name,
+        "data_contains": list(tokens),
+    }
+
+
+def _build_wave3_retrieve_spine(
+    *,
+    spine: str,
+    title: str,
+    target: TargetSpec,
+    source_slug: str,
+    data_args: JsonDict,
+    tokens: tuple[str, str],
+    read_value_words: str,
+    served_columns: tuple[str, str],
+    governance: GovernanceSpec,
+    backend_name: str,
+    widget_name: str,
+    app_name: str,
+    tab_name: str,
+    url: str,
+) -> list[TaskRecord]:
+    tasks: list[TaskRecord] = []
+    subject = f"{target.origin}'s {target.display_name}"
+    openings = (
+        f"{title} morning request:",
+        f"{title} discovery request:",
+        f"{title} analyst request:",
+        f"{title} desk request:",
+    )
+    for level in range(4):
+        prompt = (
+            f"{openings[level]} read {subject} with "
+            + ", ".join(f"{key} {value}" for key, value in data_args.items())
+            + f", then report {read_value_words}."
+        )
+        tools: list[JsonDict] = []
+        if level in {0, 1}:
+            tools.append(_snapshot())
+        tools.extend(_wave3_discover_targets((target,)))
+        tools.append(_wave3_read_call(target, data_args))
+        tasks.append(
+            _record(
+                "retrieve",
+                spine,
+                level,
+                "read",
+                prompt,
+                tools,
+                targets=(target,),
+                required_values=list(tokens),
+                reference_answer=f"The requested view reports {tokens[0]} and {tokens[1]}.",
+                answer_source=(source_slug, target.widget_id),
+            )
+        )
+
+    note_name = f"{title} Governance Note"
+    governance_token = governance.outcome_tokens[0]
+    tasks.append(
+        _record(
+            "retrieve",
+            spine,
+            4,
+            "read",
+            (
+                f"{title} governed request: follow the {governance.label}, read {subject} "
+                + "with "
+                + ", ".join(f"{key} {value}" for key, value in data_args.items())
+                + f", report {read_value_words}, and add a {_note_phrase(note_name)} "
+                f"that records {governance_token}."
+            ),
+            [
+                _wave3_governance_call(governance),
+                *_wave3_discover_targets((target,)),
+                _wave3_read_call(target, data_args),
+                _wave3_generated_call(note_name, governance_token),
+            ],
+            targets=(target,),
+            required_values=list(tokens),
+            required_generated_widgets=[_wave3_required_generated(note_name, governance_token)],
+            reference_answer=f"The governed view reports {tokens[0]} and {tokens[1]}.",
+            answer_source=(source_slug, target.widget_id),
+            governance=governance,
+        )
+    )
+
+    widget_id = _snake_case(widget_name)
+    tab_id = _snake_case(tab_name)
+    params = [
+        {
+            "paramName": key,
+            "type": "text",
+            "label": key.replace("_", " ").title(),
+            "value": value,
+            "options": [{"label": str(value), "value": value}],
+        }
+        for key, value in data_args.items()
+    ]
+    widget_def = _widget_def(
+        widget_name,
+        f"/{widget_id}",
+        description=f"Runtime-backed table for {title}.",
+        params=params,
+        grid=(40, 10),
+    )
+    app_def = _app(
+        app_name,
+        [(tab_id, tab_name, [(widget_id, 0, 0, 40, 10, data_args)])],
+    )
+    payload = dict(zip(served_columns, tokens, strict=True))
+    tasks.append(
+        _record(
+            "retrieve",
+            spine,
+            5,
+            "platform",
+            (
+                f"{title} build request: add {backend_name} with a {widget_name} table, "
+                f"carrying {served_columns[0]} and {served_columns[1]} columns; "
+                f"publish and instantiate {app_name} on {tab_name}, read it with "
+                + ", ".join(f"{key} {value}" for key, value in data_args.items())
+                + f", and report the exact {served_columns[0]} and {served_columns[1]} "
+                "values shown. Follow the widgets manifest "
+                "specification. Widget ids are the snake_case of widget names; tab ids are "
+                "the snake_case of tab names."
+            ),
+            [
+                _call(
+                    "read_workspace_resource",
+                    {"uri": "openbb://workspace/specs/widgets-json"},
+                    optional=True,
+                ),
+                _call(
+                    "manage_backends",
+                    {
+                        "operation": "add",
+                        "name": backend_name,
+                        "url": url,
+                        "widgets_json": {widget_id: widget_def},
+                        "apps_json": [app_def],
+                    },
+                    graded_args=("operation", "name"),
+                ),
+                _call(
+                    "manage_apps",
+                    {
+                        "operation": "instantiate",
+                        "backend_id": "backend_005",
+                        "app_name": app_name,
+                        "dashboard_name": f"{title} Live",
+                        "activate": True,
+                    },
+                    graded_args=("operation",),
+                ),
+                _call(
+                    "get_widget_data",
+                    {"origin": backend_name, "widget_id": widget_id, "data_args": data_args},
+                    graded_args=("origin", "widget_id"),
+                ),
+            ],
+            targets=(_custom_target(backend_name, widget_id, widget_name),),
+            policies=(
+                PolicyMapping(
+                    "widgets manifest specification",
+                    ("openbb://workspace/specs/widgets-json",),
+                ),
+            ),
+            pinned_widget_args={(backend_name, widget_id): frozenset(data_args)},
+            required_widgets=[_required_widget(backend_name, widget_id, data_args, tab_id=tab_id)],
+            required_values=list(tokens),
+            required_widget_defs=[
+                {"backend_name": backend_name, "widget_id": widget_id, "expect": {"type": "table"}}
+            ],
+            required_app_defs=[
+                {
+                    "backend_name": backend_name,
+                    "name_contains": app_name,
+                    "tabs_include": [tab_id],
+                    "layout_refs_valid": True,
+                    "widgets_on_tab": [{"tab_id": tab_id, "widget_id": widget_id}],
+                }
+            ],
+            runtime_checks={
+                "datasets": [
+                    {
+                        "name": f"wave3-{spine}",
+                        "widget_id": widget_id,
+                        "fields": list(served_columns),
+                        "path": f"/{widget_id}",
+                        "payload": [payload],
+                    }
+                ]
+            },
+            reference_answer=f"The built lookup reports {tokens[0]} and {tokens[1]}.",
+            answer_source=(source_slug, target.widget_id),
+        )
+    )
+    return tasks
+
+
+def _build_wave3_retrieve_tasks() -> list[TaskRecord]:
+    kpi = _wave3_catalog_target(DALOOPA, "daloopa_kpi_metrics", "Operating KPIs")
+    live = _wave3_catalog_target(WIDGET_EXAMPLES, "live_grid_example", "Live Grid")
+    return [
+        *_build_wave3_retrieve_spine(
+            spine="operating_driver_lookup",
+            title="Operating-driver",
+            target=kpi,
+            source_slug="support-daloopa-skills",
+            data_args={"ticker": "AAPL", "period": "2026Q1"},
+            tokens=("2026Q1", "2420.9"),
+            read_value_words=(
+                "the exact calendar_period and Installed Base Active Devices value shown"
+            ),
+            served_columns=("fiscal_period", "driver_value"),
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "daloopa-inflection",
+                "Daloopa Inflection skill (daloopa-inflection)",
+                ("growth-rate reversals",),
+            ),
+            backend_name="Wave Three Operating Drivers",
+            widget_name="Operating Driver Lookup",
+            app_name="Operating Driver App",
+            tab_name="Drivers",
+            url="http://127.0.0.1:9701",
+        ),
+        *_build_wave3_retrieve_spine(
+            spine="live_quote_lookup",
+            title="Live-quote",
+            target=live,
+            source_slug="widget-examples",
+            data_args={"symbol": "AAPL"},
+            tokens=("AAPL", "150.0"),
+            read_value_words="the exact symbol and price shown",
+            served_columns=("symbol", "last_price"),
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "finance-tearsheet",
+                "Finance Tearsheet skill (finance-tearsheet)",
+                ("price action",),
+            ),
+            backend_name="Wave Three Live Quote",
+            widget_name="Live Quote Lookup",
+            app_name="Live Quote App",
+            tab_name="Quotes",
+            url="http://127.0.0.1:9702",
+        ),
+    ]
+
+
+def _build_wave3_curate_spine(
+    *,
+    spine: str,
+    title: str,
+    primary: TargetSpec,
+    same_app: TargetSpec,
+    cross_catalog: TargetSpec,
+    governance: GovernanceSpec,
+    backend_name: str,
+    widget_name: str,
+    app_name: str,
+    tab_name: str,
+    url: str,
+) -> list[TaskRecord]:
+    tasks: list[TaskRecord] = []
+    level_targets = (
+        (primary,),
+        (same_app,),
+        (primary, same_app),
+        (primary, cross_catalog),
+    )
+    level_words = ("opening", "discovery", "paired", "cross-catalog")
+    for level, targets in enumerate(level_targets):
+        names = "; ".join(_wave3_target_words(target) for target in targets)
+        tools: list[JsonDict] = []
+        if level in {0, 1}:
+            tools.append(_snapshot())
+        if level == 1:
+            tools.append(
+                _call("list_available_widgets", {"origin": targets[0].origin}, optional=True)
+            )
+        tools.extend(_wave3_discover_targets(targets))
+        tools.extend(_wave3_place_call(target) for target in targets)
+        tasks.append(
+            _record(
+                "curate",
+                spine,
+                level,
+                "dashboard",
+                f"{title} {level_words[level]} board: add {names} to the current board.",
+                tools,
+                targets=targets,
+                required_widgets=[
+                    _required_widget(target.origin, target.widget_id) for target in targets
+                ],
+            )
+        )
+
+    note_name = f"{title} Governance"
+    governed_token = governance.outcome_tokens[0]
+    governed_targets = (primary, cross_catalog)
+    governed_names = "; ".join(_wave3_target_words(target) for target in governed_targets)
+    tasks.append(
+        _record(
+            "curate",
+            spine,
+            4,
+            "dashboard",
+            (
+                f"{title} governed board: follow the {governance.label}, add {governed_names}, "
+                f"and add a {_note_phrase(note_name)} naming {governed_token}."
+            ),
+            [
+                _wave3_governance_call(governance),
+                *_wave3_discover_targets(governed_targets),
+                *(_wave3_place_call(target) for target in governed_targets),
+                _wave3_generated_call(note_name, governed_token),
+            ],
+            targets=governed_targets,
+            required_widgets=[
+                _required_widget(target.origin, target.widget_id) for target in governed_targets
+            ],
+            required_generated_widgets=[_wave3_required_generated(note_name, governed_token)],
+            governance=governance,
+        )
+    )
+
+    widget_id = _snake_case(widget_name)
+    tab_id = _snake_case(tab_name)
+    widget_def = _widget_def(widget_name, f"/{widget_id}", grid=(40, 10))
+    app_def = _app(app_name, [(tab_id, tab_name, [(widget_id, 0, 0, 40, 10, None)])])
+    build_targets = (primary, cross_catalog)
+    build_names = "; ".join(_wave3_target_words(target) for target in build_targets)
+    tasks.append(
+        _record(
+            "curate",
+            spine,
+            5,
+            "platform",
+            (
+                f"{title} build board: add {backend_name} with a {widget_name} table and "
+                f"publish and instantiate {app_name} on {tab_name}; also add {build_names}. "
+                "Widget ids are the snake_case of widget names; tab ids are the snake_case "
+                "of tab names."
+            ),
+            [
+                _call(
+                    "manage_backends",
+                    {
+                        "operation": "add",
+                        "name": backend_name,
+                        "url": url,
+                        "widgets_json": {widget_id: widget_def},
+                        "apps_json": [app_def],
+                    },
+                    graded_args=("operation", "name"),
+                ),
+                _call(
+                    "manage_apps",
+                    {
+                        "operation": "instantiate",
+                        "backend_id": "backend_005",
+                        "app_name": app_name,
+                        "dashboard_name": f"{title} Live",
+                        "activate": True,
+                    },
+                    graded_args=("operation",),
+                ),
+                *_wave3_discover_targets(build_targets),
+                *(_wave3_place_call(target) for target in build_targets),
+            ],
+            targets=(
+                _custom_target(backend_name, widget_id, widget_name),
+                *build_targets,
+            ),
+            required_widgets=[
+                _required_widget(backend_name, widget_id, tab_id=tab_id),
+                *(_required_widget(target.origin, target.widget_id) for target in build_targets),
+            ],
+            required_widget_defs=[
+                {"backend_name": backend_name, "widget_id": widget_id, "expect": {"type": "table"}}
+            ],
+            required_app_defs=[
+                {
+                    "backend_name": backend_name,
+                    "name_contains": app_name,
+                    "tabs_include": [tab_id],
+                    "layout_refs_valid": True,
+                    "widgets_on_tab": [{"tab_id": tab_id, "widget_id": widget_id}],
+                }
+            ],
+        )
+    )
+    return tasks
+
+
+def _build_wave3_curate_tasks() -> list[TaskRecord]:
+    compliance_alerts = _wave3_catalog_target(
+        STARK,
+        "compliance_surveillance_hub_alerts_open_alert_metrics",
+        "Open Alert Metrics",
+        "Compliance Surveillance Hub",
+        "Open Alert Metrics",
+    )
+    policy_breaches = _wave3_catalog_target(
+        STARK,
+        "compliance_surveillance_hub_personal_trading_policy_breaches",
+        "Policy Breaches",
+        "Compliance Surveillance Hub",
+        "Policy Breaches",
+    )
+    basic_table = _wave3_catalog_target(
+        GETTING_STARTED,
+        "markdown_widget_with_number_input",
+        "Markdown Widget with Number Input",
+    )
+    live_orders = _wave3_catalog_target(
+        STARK,
+        "execution_desk_blotter_live_orders",
+        "Live Orders",
+        "Execution Desk",
+        "Live Orders",
+    )
+    broker_scorecard = _wave3_catalog_target(
+        STARK,
+        "execution_desk_fills_broker_scorecard",
+        "Broker Scorecard",
+        "Execution Desk",
+        "Broker Scorecard",
+    )
+    pdfs = _wave3_catalog_target(
+        GETTING_STARTED,
+        "multi_pdf_url",
+        "Multi PDF Viewer - URL",
+    )
+    return [
+        *_build_wave3_curate_spine(
+            spine="compliance_alert_review",
+            title="Compliance-alert",
+            primary=compliance_alerts,
+            same_app=policy_breaches,
+            cross_catalog=basic_table,
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "finance-guidance-tracker",
+                "Finance Guidance Tracker skill (finance-guidance-tracker)",
+                ("evidence gaps",),
+            ),
+            backend_name="Wave Three Compliance Review",
+            widget_name="Compliance Review Register",
+            app_name="Compliance Review App",
+            tab_name="Review",
+            url="http://127.0.0.1:9703",
+        ),
+        *_build_wave3_curate_spine(
+            spine="execution_quality_review",
+            title="Execution-quality",
+            primary=live_orders,
+            same_app=broker_scorecard,
+            cross_catalog=pdfs,
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "finance-comps",
+                "Finance Comps skill (finance-comps)",
+                ("outliers",),
+            ),
+            backend_name="Wave Three Execution Review",
+            widget_name="Execution Review Register",
+            app_name="Execution Review App",
+            tab_name="Quality",
+            url="http://127.0.0.1:9704",
+        ),
+    ]
+
+
+def _wave3_stage(
+    name: str,
+    targets: tuple[TargetSpec, ...],
+    initial_args: tuple[JsonDict, ...],
+) -> JsonDict:
+    return _staged_dashboard(
+        name,
+        [
+            {
+                "origin": target.origin,
+                "widget_id": target.widget_id,
+                "widget_uuid": f"wave3_{_snake_case(name)}_{index}",
+                "tab_id": "review",
+                "data_args": data_args,
+                "layout": {"x": 0, "y": index * 12, "w": 40, "h": 12},
+            }
+            for index, (target, data_args) in enumerate(zip(targets, initial_args, strict=True))
+        ],
+    )
+
+
+def _wave3_update_call(widget_uuid: str, data_args: JsonDict) -> JsonDict:
+    return _call(
+        "update_widget",
+        {"widget_uuid": widget_uuid, "data_args": data_args},
+        graded_args=("data_args",),
+    )
+
+
+def _wave3_args_words(data_args: JsonDict, *, level0: bool = False) -> str:
+    if level0:
+        return ", ".join(f"{key} set to {value}" for key, value in data_args.items())
+    return ", ".join(f"{key} {value}" for key, value in data_args.items())
+
+
+def _build_wave3_parameterize_spine(
+    *,
+    spine: str,
+    title: str,
+    board_name: str,
+    targets: tuple[TargetSpec, TargetSpec, TargetSpec],
+    initial_args: tuple[JsonDict, JsonDict, JsonDict],
+    final_args: tuple[JsonDict, JsonDict, JsonDict],
+    governance: GovernanceSpec,
+    governed_index: int,
+    governed_args: JsonDict,
+) -> list[TaskRecord]:
+    stage = _wave3_stage(board_name, targets, initial_args)
+    uuids = tuple(f"wave3_{_snake_case(board_name)}_{index}" for index in range(len(targets)))
+    tasks: list[TaskRecord] = []
+    low_specs = (
+        (0, 0, final_args[0]),
+        (1, 0, final_args[0]),
+        (2, 1, final_args[1]),
+    )
+    for level, target_index, data_args in low_specs:
+        target = targets[target_index]
+        tools: list[JsonDict] = []
+        if level in {0, 1}:
+            tools.append(_snapshot())
+        if level == 1:
+            tools.append(_call("read_widget", {"widget_id": target.widget_id}, optional=True))
+        tools.append(_wave3_update_call(uuids[target_index], data_args))
+        tasks.append(
+            _record(
+                "parameterize",
+                spine,
+                level,
+                "single-widget",
+                (
+                    f"{title} level-{level} change: on the open {board_name} board, set "
+                    f"{target.display_name} with {_wave3_args_words(data_args, level0=level == 0)} "
+                    "and preserve the other views."
+                ),
+                tools,
+                targets=(target,),
+                pinned_widget_args={(target.origin, target.widget_id): frozenset(data_args)},
+                required_widgets=[_required_widget(target.origin, target.widget_id, data_args)],
+                selected_dashboard=board_name,
+                initial_state=stage,
+            )
+        )
+
+    pair = targets[:2]
+    tasks.append(
+        _record(
+            "parameterize",
+            spine,
+            3,
+            "single-widget",
+            (
+                f"{title} paired change: on the open {board_name} board, set "
+                f"{pair[0].display_name} with {_wave3_args_words(final_args[0])}; set "
+                f"{pair[1].display_name} with {_wave3_args_words(final_args[1])}; preserve "
+                "the last view."
+            ),
+            [
+                _wave3_update_call(uuids[0], final_args[0]),
+                _wave3_update_call(uuids[1], final_args[1]),
+            ],
+            targets=pair,
+            pinned_widget_args={
+                (target.origin, target.widget_id): frozenset(args)
+                for target, args in zip(pair, final_args[:2], strict=True)
+            },
+            required_widgets=[
+                _required_widget(target.origin, target.widget_id, args)
+                for target, args in zip(pair, final_args[:2], strict=True)
+            ],
+            selected_dashboard=board_name,
+            initial_state=stage,
+        )
+    )
+
+    governed_target = targets[governed_index]
+    tasks.append(
+        _record(
+            "parameterize",
+            spine,
+            4,
+            "single-widget",
+            (
+                f"{title} governed change: follow the {governance.label} on the open "
+                f"{board_name} board, then set {governed_target.display_name} with "
+                f"{_wave3_args_words(governed_args)} and preserve the other views. "
+                f"The governing concepts are {', '.join(governance.outcome_tokens)}."
+            ),
+            [
+                _wave3_governance_call(governance),
+                _wave3_update_call(uuids[governed_index], governed_args),
+            ],
+            targets=(governed_target,),
+            pinned_widget_args={
+                (governed_target.origin, governed_target.widget_id): frozenset(governed_args)
+            },
+            required_widgets=[
+                _required_widget(
+                    governed_target.origin,
+                    governed_target.widget_id,
+                    governed_args,
+                )
+            ],
+            governance=governance,
+            selected_dashboard=board_name,
+            initial_state=stage,
+        )
+    )
+
+    tasks.append(
+        _record(
+            "parameterize",
+            spine,
+            5,
+            "single-widget",
+            (
+                f"{title} full reset: on the open {board_name} board, set "
+                + "; set ".join(
+                    f"{target.display_name} with {_wave3_args_words(args)}"
+                    for target, args in zip(targets, final_args, strict=True)
+                )
+                + "; preserve all layout and surrounding content."
+            ),
+            [
+                _wave3_update_call(widget_uuid, args)
+                for widget_uuid, args in zip(uuids, final_args, strict=True)
+            ],
+            targets=targets,
+            pinned_widget_args={
+                (target.origin, target.widget_id): frozenset(args)
+                for target, args in zip(targets, final_args, strict=True)
+            },
+            required_widgets=[
+                _required_widget(target.origin, target.widget_id, args)
+                for target, args in zip(targets, final_args, strict=True)
+            ],
+            selected_dashboard=board_name,
+            initial_state=stage,
+        )
+    )
+    return tasks
+
+
+def _build_wave3_parameterize_tasks() -> list[TaskRecord]:
+    client_targets = (
+        _wave3_catalog_target(
+            WIDGET_EXAMPLES,
+            "form_submit_widget",
+            "Financial Entry Form",
+            staged=True,
+        ),
+        _wave3_catalog_target(GETTING_STARTED, "all_forms", "Entry Form", staged=True),
+        _wave3_catalog_target(
+            GETTING_STARTED,
+            "markdown_widget_with_text_input",
+            "Markdown Widget with Text Input",
+            staged=True,
+        ),
+    )
+    client_initial = (
+        {
+            "client_first_name": "Alex",
+            "client_last_name": "Rivera",
+            "risk_profile": "Conservative",
+            "add_record": False,
+        },
+        {
+            "client_first_name": "Taylor",
+            "client_last_name": "Morgan",
+            "risk_profile": "Balanced",
+            "add_record": False,
+        },
+        {"name": "Pending"},
+    )
+    client_final = (
+        {
+            "client_first_name": "Maya",
+            "client_last_name": "Chen",
+            "risk_profile": "Moderate",
+            "add_record": True,
+        },
+        {
+            "client_first_name": "Noah",
+            "client_last_name": "Patel",
+            "risk_profile": "Balanced",
+            "add_record": True,
+        },
+        {"name": "Intake Ready"},
+    )
+    crypto_targets = (
+        _wave3_catalog_target(
+            WIDGET_EXAMPLES,
+            "html_binance_ohlc",
+            "Binance OHLC",
+            staged=True,
+        ),
+        _wave3_catalog_target(GETTING_STARTED, "omni_sql_widget", "SQL Query Widget", staged=True),
+        _wave3_catalog_target(
+            WIDGET_EXAMPLES,
+            "moving_parameters_example",
+            "Moving Parameters Example",
+            staged=True,
+        ),
+    )
+    crypto_initial = (
+        {"symbol": "BTCUSDT", "interval": "30m", "exchange": "BinanceUS"},
+        {"prompt": "SELECT * FROM DATA LIMIT 5"},
+        {
+            "datePicker1": "$currentDate-1d",
+            "textBox1": "Hello!",
+            "TrueFalse": True,
+            "daysPicker1": "1",
+        },
+    )
+    crypto_final = (
+        {"symbol": "ethusdt", "interval": "1m", "exchange": "binancef"},
+        {"prompt": "SELECT * FROM DATA LIMIT 3"},
+        {
+            "datePicker1": "$currentDate-1d",
+            "textBox1": "Ready",
+            "TrueFalse": True,
+            "daysPicker1": "1",
+        },
+    )
+    governed_sql = {"prompt": "SELECT * FROM DATA LIMIT 3 -- growth-rate reversals"}
+    return [
+        *_build_wave3_parameterize_spine(
+            spine="client_intake_controls",
+            title="Client-intake",
+            board_name="Client Intake Controls",
+            targets=client_targets,
+            initial_args=client_initial,
+            final_args=client_final,
+            governance=GovernanceSpec(
+                "read_workspace_resource",
+                "openbb://workspace/specs/widget-parameters",
+                "Widget Parameters resource (openbb://workspace/specs/widget-parameters)",
+                ("form", "button"),
+            ),
+            governed_index=0,
+            governed_args=client_final[0],
+        ),
+        *_build_wave3_parameterize_spine(
+            spine="crypto_display_controls",
+            title="Crypto-display",
+            board_name="Crypto Display Controls",
+            targets=crypto_targets,
+            initial_args=crypto_initial,
+            final_args=crypto_final,
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "daloopa-inflection",
+                "Daloopa Inflection skill (daloopa-inflection)",
+                ("growth-rate reversals",),
+            ),
+            governed_index=1,
+            governed_args=governed_sql,
+        ),
+    ]
+
+
+def _build_wave3_organize_spine(
+    *,
+    spine: str,
+    title: str,
+    board_name: str,
+    targets: tuple[TargetSpec, TargetSpec, TargetSpec],
+    governance: GovernanceSpec,
+    governed_tabs: tuple[str, str],
+    backend_name: str,
+    widget_name: str,
+    app_name: str,
+    tab_name: str,
+    url: str,
+) -> list[TaskRecord]:
+    tasks: list[TaskRecord] = []
+    tasks.append(
+        _record(
+            "organize",
+            spine,
+            0,
+            "dashboard",
+            f"{title} board start: create and open {board_name}.",
+            [
+                _snapshot(),
+                _call(
+                    "manage_dashboard",
+                    {"operation": "create", "name": board_name, "activate": True},
+                    graded_args=("operation", "name"),
+                ),
+            ],
+            required_dashboard_name=board_name,
+        )
+    )
+    basic_tabs = ("Overview", "Review")
+    tasks.append(
+        _record(
+            "organize",
+            spine,
+            1,
+            "dashboard",
+            f"{title} tab setup: create and open {board_name}, then add Overview and Review tabs.",
+            [
+                _snapshot(),
+                _call(
+                    "manage_dashboard",
+                    {"operation": "create", "name": board_name, "activate": True},
+                    graded_args=("operation", "name"),
+                ),
+                _call(
+                    "manage_navigation_bar",
+                    {"operation": "add_tabs", "tabs": [{"name": name} for name in basic_tabs]},
+                    graded_args=("tabs",),
+                ),
+            ],
+            required_dashboard_name=board_name,
+            required_tabs=[_snake_case(name) for name in basic_tabs],
+        )
+    )
+    for level, chosen in ((2, targets[:1]), (3, targets[:2])):
+        names = ", ".join(f"{target.origin}'s {target.display_name}" for target in chosen)
+        tasks.append(
+            _record(
+                "organize",
+                spine,
+                level,
+                "dashboard",
+                (
+                    f"{title} level-{level} layout: create and open {board_name}, add Overview "
+                    f"and Review tabs, then add {names}."
+                ),
+                [
+                    _call(
+                        "manage_dashboard",
+                        {"operation": "create", "name": board_name, "activate": True},
+                        graded_args=("operation", "name"),
+                    ),
+                    _call(
+                        "manage_navigation_bar",
+                        {"operation": "add_tabs", "tabs": [{"name": name} for name in basic_tabs]},
+                        graded_args=("tabs",),
+                    ),
+                    *_wave3_discover_targets(chosen),
+                    *(_wave3_place_call(target) for target in chosen),
+                ],
+                targets=chosen,
+                required_dashboard_name=board_name,
+                required_tabs=[_snake_case(name) for name in basic_tabs],
+                required_widgets=[
+                    _required_widget(target.origin, target.widget_id) for target in chosen
+                ],
+            )
+        )
+
+    governed_targets = (targets[0], targets[2])
+    governed_names = ", ".join(
+        f"{target.origin}'s {target.display_name}" for target in governed_targets
+    )
+    tasks.append(
+        _record(
+            "organize",
+            spine,
+            4,
+            "dashboard",
+            (
+                f"{title} governed layout: follow the {governance.label}; create and open "
+                f"{board_name}, add {governed_tabs[0]} and {governed_tabs[1]} tabs, and add "
+                f"{governed_names}."
+            ),
+            [
+                _wave3_governance_call(governance),
+                _call(
+                    "manage_dashboard",
+                    {"operation": "create", "name": board_name, "activate": True},
+                    graded_args=("operation", "name"),
+                ),
+                _call(
+                    "manage_navigation_bar",
+                    {
+                        "operation": "add_tabs",
+                        "tabs": [{"name": name} for name in governed_tabs],
+                    },
+                    graded_args=("tabs",),
+                ),
+                *_wave3_discover_targets(governed_targets),
+                *(_wave3_place_call(target) for target in governed_targets),
+            ],
+            targets=governed_targets,
+            required_dashboard_name=board_name,
+            required_tabs=[name.casefold().replace(" ", "-") for name in governed_tabs],
+            required_widgets=[
+                _required_widget(target.origin, target.widget_id) for target in governed_targets
+            ],
+            governance=governance,
+        )
+    )
+
+    widget_id = _snake_case(widget_name)
+    tab_id = _snake_case(tab_name)
+    widget_def = _widget_def(widget_name, f"/{widget_id}", grid=(40, 10))
+    app_def = _app(app_name, [(tab_id, tab_name, [(widget_id, 0, 0, 40, 10, None)])])
+    build_targets = targets[1:]
+    build_names = ", ".join(f"{target.origin}'s {target.display_name}" for target in build_targets)
+    tasks.append(
+        _record(
+            "organize",
+            spine,
+            5,
+            "platform",
+            (
+                f"{title} navigation build: add {backend_name} with a {widget_name} table, "
+                f"publish and instantiate {app_name} on {tab_name}, then add {build_names}. "
+                "Widget ids are the snake_case of widget names; tab ids are the snake_case "
+                "of tab names."
+            ),
+            [
+                _call(
+                    "manage_backends",
+                    {
+                        "operation": "add",
+                        "name": backend_name,
+                        "url": url,
+                        "widgets_json": {widget_id: widget_def},
+                        "apps_json": [app_def],
+                    },
+                    graded_args=("operation", "name"),
+                ),
+                _call(
+                    "manage_apps",
+                    {
+                        "operation": "instantiate",
+                        "backend_id": "backend_005",
+                        "app_name": app_name,
+                        "dashboard_name": f"{title} Live",
+                        "activate": True,
+                    },
+                    graded_args=("operation",),
+                ),
+                *_wave3_discover_targets(build_targets),
+                *(_wave3_place_call(target) for target in build_targets),
+            ],
+            targets=(_custom_target(backend_name, widget_id, widget_name), *build_targets),
+            required_widgets=[
+                _required_widget(backend_name, widget_id, tab_id=tab_id),
+                *(_required_widget(target.origin, target.widget_id) for target in build_targets),
+            ],
+            required_widget_defs=[
+                {"backend_name": backend_name, "widget_id": widget_id, "expect": {"type": "table"}}
+            ],
+            required_app_defs=[
+                {
+                    "backend_name": backend_name,
+                    "name_contains": app_name,
+                    "tabs_include": [tab_id],
+                    "layout_refs_valid": True,
+                    "widgets_on_tab": [{"tab_id": tab_id, "widget_id": widget_id}],
+                }
+            ],
+        )
+    )
+    return tasks
+
+
+def _build_wave3_organize_tasks() -> list[TaskRecord]:
+    media_targets = (
+        _wave3_catalog_target(
+            GETTING_STARTED,
+            "get_video_with_transcript",
+            "Video Library with Transcript",
+        ),
+        _wave3_catalog_target(GETTING_STARTED, "pdf_widget_url", "PDF Widget with URL"),
+        _wave3_catalog_target(WIDGET_EXAMPLES, "url_pdf", "URL PDF files"),
+    )
+    chart_targets = (
+        _wave3_catalog_target(GETTING_STARTED, "chains_highchart", "Chains TVL Highcharts"),
+        _wave3_catalog_target(GETTING_STARTED, "vega_bar", "Vega-Lite Bar Demo"),
+        _wave3_catalog_target(WIDGET_EXAMPLES, "vega_scatter_demo", "Vega-Lite Scatter Demo"),
+    )
+    return [
+        *_build_wave3_organize_spine(
+            spine="due_diligence_media_room",
+            title="Media-room",
+            board_name="Due Diligence Media Room",
+            targets=media_targets,
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "finance-tearsheet",
+                "Finance Tearsheet skill (finance-tearsheet)",
+                ("catalysts", "risks"),
+            ),
+            governed_tabs=("Catalysts", "Risks"),
+            backend_name="Wave Three Media Room",
+            widget_name="Media Review Register",
+            app_name="Media Room App",
+            tab_name="Media",
+            url="http://127.0.0.1:9705",
+        ),
+        *_build_wave3_organize_spine(
+            spine="visualization_gallery",
+            title="Visualization-gallery",
+            board_name="Visualization Gallery",
+            targets=chart_targets,
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "finance-comps",
+                "Finance Comps skill (finance-comps)",
+                ("valuation multiples", "outliers"),
+            ),
+            governed_tabs=("Valuation Multiples", "Outliers"),
+            backend_name="Wave Three Visualization Gallery",
+            widget_name="Visualization Review Register",
+            app_name="Visualization Gallery App",
+            tab_name="Gallery",
+            url="http://127.0.0.1:9706",
+        ),
+    ]
+
+
+def _wave3_repair_stage(
+    board_name: str,
+    primary: TargetSpec,
+    secondary: TargetSpec,
+    primary_args: JsonDict,
+    secondary_args: JsonDict,
+    *,
+    duplicate: bool = False,
+    overlap: bool = False,
+) -> JsonDict:
+    widgets: list[JsonDict] = [
+        {
+            "origin": primary.origin,
+            "widget_id": primary.widget_id,
+            "widget_uuid": f"{_snake_case(board_name)}_primary",
+            "tab_id": "review",
+            "data_args": primary_args,
+            "layout": {"x": 0, "y": 0, "w": 40, "h": 12},
+        },
+        {
+            "origin": secondary.origin,
+            "widget_id": secondary.widget_id,
+            "widget_uuid": f"{_snake_case(board_name)}_preserved",
+            "tab_id": "review",
+            "data_args": secondary_args,
+            "layout": {"x": 0, "y": 0 if overlap else 12, "w": 40, "h": 12},
+        },
+    ]
+    if duplicate:
+        widgets.append(
+            {
+                "origin": primary.origin,
+                "widget_id": primary.widget_id,
+                "widget_uuid": f"{_snake_case(board_name)}_duplicate",
+                "tab_id": "review",
+                "data_args": primary_args,
+                "layout": {"x": 0, "y": 24, "w": 40, "h": 12},
+            }
+        )
+    return _staged_dashboard(board_name, widgets)
+
+
+def _build_wave3_repair_spine(
+    *,
+    spine: str,
+    title: str,
+    board_name: str,
+    primary: TargetSpec,
+    secondary: TargetSpec,
+    wrong_args: JsonDict,
+    correct_args: JsonDict,
+    secondary_args: JsonDict,
+    governance: GovernanceSpec,
+    backend_name: str,
+    widget_name: str,
+    app_name: str,
+    tab_name: str,
+    url: str,
+) -> list[TaskRecord]:
+    tasks: list[TaskRecord] = []
+    primary_uuid = f"{_snake_case(board_name)}_primary"
+    preserved_uuid = f"{_snake_case(board_name)}_preserved"
+    bad_stage = _wave3_repair_stage(
+        board_name,
+        primary,
+        secondary,
+        wrong_args,
+        secondary_args,
+    )
+    tasks.append(
+        _record(
+            "repair",
+            spine,
+            0,
+            "repair",
+            (
+                f"{title} direct fix: on the open {board_name} board, set "
+                f"{primary.display_name} with {_wave3_args_words(correct_args, level0=True)}."
+            ),
+            [_snapshot(), _wave3_update_call(primary_uuid, correct_args)],
+            targets=(primary,),
+            pinned_widget_args={(primary.origin, primary.widget_id): frozenset(correct_args)},
+            required_widgets=[_required_widget(primary.origin, primary.widget_id, correct_args)],
+            selected_dashboard=board_name,
+            initial_state=bad_stage,
+        )
+    )
+    tasks.append(
+        _record(
+            "repair",
+            spine,
+            1,
+            "repair",
+            (
+                f"{title} preserved fix: on the open {board_name} board, restore "
+                f"{primary.display_name} with {_wave3_args_words(correct_args)} and preserve "
+                f"{secondary.display_name}."
+            ),
+            [_snapshot(), _wave3_update_call(primary_uuid, correct_args)],
+            targets=(primary, secondary),
+            pinned_widget_args={(primary.origin, primary.widget_id): frozenset(correct_args)},
+            required_widgets=[
+                _required_widget(primary.origin, primary.widget_id, correct_args),
+                _required_widget(secondary.origin, secondary.widget_id),
+            ],
+            selected_dashboard=board_name,
+            initial_state=bad_stage,
+        )
+    )
+
+    duplicate_stage = _wave3_repair_stage(
+        board_name,
+        primary,
+        secondary,
+        correct_args,
+        secondary_args,
+        duplicate=True,
+    )
+    duplicate_uuid = f"{_snake_case(board_name)}_duplicate"
+    tasks.append(
+        _record(
+            "repair",
+            spine,
+            2,
+            "repair",
+            (
+                f"{title} duplicate cleanup: the open {board_name} board has an extra "
+                f"{primary.display_name}; the {title.casefold()} duplicate marker identifies "
+                f"it. Remove that copy and preserve {secondary.display_name}."
+            ),
+            [
+                _call(
+                    "delete_widget",
+                    {"widget_uuid": duplicate_uuid},
+                    graded_args=("widget_uuid",),
+                )
+            ],
+            targets=(primary, secondary),
+            policies=(PolicyMapping(f"{title.casefold()} duplicate marker", (duplicate_uuid,)),),
+            required_widgets=[
+                _required_widget(primary.origin, primary.widget_id, min_count=1, max_count=1),
+                _required_widget(secondary.origin, secondary.widget_id),
+            ],
+            selected_dashboard=board_name,
+            initial_state=duplicate_stage,
+        )
+    )
+
+    overlap_stage = _wave3_repair_stage(
+        board_name,
+        primary,
+        secondary,
+        correct_args,
+        secondary_args,
+        overlap=True,
+    )
+    tasks.append(
+        _record(
+            "repair",
+            spine,
+            3,
+            "repair",
+            (
+                f"{title} overlap fix: on the open {board_name} board, move "
+                f"{secondary.display_name} to x 0, y 12, width 40, height 12 on Review; "
+                f"preserve {primary.display_name}."
+            ),
+            [
+                _call(
+                    "update_widget_layout",
+                    {
+                        "widget_uuid": preserved_uuid,
+                        "x": 0,
+                        "y": 12,
+                        "w": 40,
+                        "h": 12,
+                        "tab_id": "review",
+                    },
+                    graded_args=("x", "y", "w", "h", "tab_id"),
+                )
+            ],
+            targets=(primary, secondary),
+            required_widgets=[
+                _required_widget(primary.origin, primary.widget_id),
+                _required_widget(secondary.origin, secondary.widget_id),
+            ],
+            selected_dashboard=board_name,
+            initial_state=overlap_stage,
+        )
+    )
+
+    note_name = f"{title} Governance Note"
+    governed_token = governance.outcome_tokens[0]
+    tasks.append(
+        _record(
+            "repair",
+            spine,
+            4,
+            "repair",
+            (
+                f"{title} governed repair: follow the {governance.label} on the open "
+                f"{board_name} board, restore {primary.display_name} with "
+                f"{_wave3_args_words(correct_args)}, preserve {secondary.display_name}, and "
+                f"add a {_note_phrase(note_name)} naming {governed_token}."
+            ),
+            [
+                _wave3_governance_call(governance),
+                _wave3_update_call(primary_uuid, correct_args),
+                _wave3_generated_call(note_name, governed_token),
+            ],
+            targets=(primary, secondary),
+            pinned_widget_args={(primary.origin, primary.widget_id): frozenset(correct_args)},
+            required_widgets=[
+                _required_widget(primary.origin, primary.widget_id, correct_args),
+                _required_widget(secondary.origin, secondary.widget_id),
+            ],
+            required_generated_widgets=[_wave3_required_generated(note_name, governed_token)],
+            governance=governance,
+            selected_dashboard=board_name,
+            initial_state=bad_stage,
+        )
+    )
+
+    widget_id = _snake_case(widget_name)
+    tab_id = _snake_case(tab_name)
+    fixed_widget = _widget_def(widget_name, f"/{widget_id}", grid=(40, 10))
+    fixed_app = _app(app_name, [(tab_id, tab_name, [(widget_id, 0, 0, 40, 10, None)])])
+    custom_board = f"{title} Backend Repair"
+    custom_state = _staged_dashboard(
+        custom_board,
+        [
+            {
+                "origin": backend_name,
+                "widget_id": widget_id,
+                "widget_uuid": f"{spine}_custom",
+                "tab_id": tab_id,
+                "layout": {"x": 0, "y": 0, "w": 40, "h": 10},
+            }
+        ],
+        tabs=[{"id": tab_id, "name": tab_name}],
+    )
+    custom_state["custom_backends"] = [
+        {
+            "backend_id": "backend_005",
+            "name": backend_name,
+            "url": url,
+            "widgets_json": {widget_id: {"name": widget_name, "type": "table"}},
+            "apps_json": [{"name": app_name, "tabs": {}}],
+            "warnings": ["missing endpoint and app layout"],
+        }
+    ]
+    tasks.append(
+        _record(
+            "repair",
+            spine,
+            5,
+            "repair",
+            (
+                f"{title} backend rebuild: on the open {custom_board} board, refresh "
+                f"{backend_name} so its {widget_name} table is published through {app_name} "
+                f"on {tab_name}. Widget ids are the snake_case of widget names; tab ids are "
+                "the snake_case of tab names."
+            ),
+            [
+                _call(
+                    "manage_backends",
+                    {
+                        "operation": "refresh",
+                        "backend_id": "backend_005",
+                        "widgets_json": {widget_id: fixed_widget},
+                        "apps_json": [fixed_app],
+                    },
+                    graded_args=("operation",),
+                )
+            ],
+            targets=(_custom_target(backend_name, widget_id, widget_name, staged=True),),
+            required_widgets=[_required_widget(backend_name, widget_id, tab_id=tab_id)],
+            required_widget_defs=[
+                {"backend_name": backend_name, "widget_id": widget_id, "expect": {"type": "table"}}
+            ],
+            required_app_defs=[
+                {
+                    "backend_name": backend_name,
+                    "name_contains": app_name,
+                    "tabs_include": [tab_id],
+                    "layout_refs_valid": True,
+                    "widgets_on_tab": [{"tab_id": tab_id, "widget_id": widget_id}],
+                }
+            ],
+            selected_dashboard=custom_board,
+            initial_state=custom_state,
+        )
+    )
+    return tasks
+
+
+def _build_wave3_repair_tasks() -> list[TaskRecord]:
+    vendor_primary = _wave3_catalog_target(
+        STARK,
+        "vendor_dataset_monitor_vendors_sla_metrics",
+        "SLA Metrics",
+        staged=True,
+    )
+    vendor_secondary = _wave3_catalog_target(
+        STARK,
+        "vendor_dataset_monitor_vendors_vendor_contract_terms",
+        "Vendor Contract Terms",
+        staged=True,
+    )
+    protocol_primary = _wave3_catalog_target(
+        WIDGET_EXAMPLES,
+        "defi_llama_protocol_details",
+        "Defi Llama Protocol Details",
+        staged=True,
+    )
+    server_grid = _wave3_catalog_target(
+        WIDGET_EXAMPLES,
+        "demo_data_ssrm",
+        "Demo Financial Data (SSRM)",
+        staged=True,
+    )
+    return [
+        *_build_wave3_repair_spine(
+            spine="vendor_freshness_repair",
+            title="Vendor-freshness",
+            board_name="Vendor Freshness Repair",
+            primary=vendor_primary,
+            secondary=vendor_secondary,
+            wrong_args={"vendor": "FactSet", "status": "Closed", "period": "1Y"},
+            correct_args={"vendor": "Bloomberg", "status": "Open", "period": "QTD"},
+            secondary_args={"vendor": "FactSet", "status": "Open", "period": "YTD"},
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "finance-guidance-tracker",
+                "Finance Guidance Tracker skill (finance-guidance-tracker)",
+                ("evidence gaps",),
+            ),
+            backend_name="Wave Three Vendor Repair",
+            widget_name="Vendor Repair Queue",
+            app_name="Vendor Repair App",
+            tab_name="Incidents",
+            url="http://127.0.0.1:9707",
+        ),
+        *_build_wave3_repair_spine(
+            spine="protocol_display_repair",
+            title="Protocol-display",
+            board_name="Protocol Display Repair",
+            primary=protocol_primary,
+            secondary=server_grid,
+            wrong_args={"protocol_id": "aave"},
+            correct_args={"protocol_id": "uniswap"},
+            secondary_args={},
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "daloopa-inflection",
+                "Daloopa Inflection skill (daloopa-inflection)",
+                ("growth-rate reversals",),
+            ),
+            backend_name="Wave Three Protocol Repair",
+            widget_name="Protocol Repair Queue",
+            app_name="Protocol Repair App",
+            tab_name="Protocols",
+            url="http://127.0.0.1:9708",
+        ),
+    ]
+
+
+def _build_wave3_platform_spine(
+    *,
+    spine: str,
+    title: str,
+    skill_slug: str,
+    skill_label: str,
+    governed_token: str,
+    targets: tuple[TargetSpec, TargetSpec],
+    backend_name: str,
+    widget_name: str,
+    app_name: str,
+    tab_name: str,
+    url: str,
+) -> list[TaskRecord]:
+    tasks: list[TaskRecord] = []
+    governance = GovernanceSpec(
+        "get_skill_content",
+        skill_slug,
+        skill_label,
+        (governed_token,),
+    )
+    for level in (0, 1):
+        note_name = f"{title} {('Starter', 'Discovery')[level]} Note"
+        tasks.append(
+            _record(
+                "platform",
+                spine,
+                level,
+                "platform",
+                (
+                    f"{title} level-{level} workflow: read the {skill_label} and add a "
+                    f"{_note_phrase(note_name)} containing {governed_token}."
+                ),
+                [
+                    _snapshot(),
+                    _wave3_governance_call(governance),
+                    _wave3_generated_call(note_name, governed_token),
+                ],
+                required_generated_widgets=[_wave3_required_generated(note_name, governed_token)],
+            )
+        )
+
+    primary = targets[0]
+    tasks.append(
+        _record(
+            "platform",
+            spine,
+            2,
+            "platform",
+            (
+                f"{title} governed placement: read the {skill_label}, then add "
+                f"{primary.origin}'s {primary.display_name} for {governed_token}."
+            ),
+            [
+                _wave3_governance_call(governance),
+                *_wave3_discover_targets((primary,)),
+                _wave3_place_call(primary),
+            ],
+            targets=(primary,),
+            required_widgets=[_required_widget(primary.origin, primary.widget_id)],
+        )
+    )
+    names = ", ".join(f"{target.origin}'s {target.display_name}" for target in targets)
+    tasks.append(
+        _record(
+            "platform",
+            spine,
+            3,
+            "platform",
+            (
+                f"{title} paired workflow: read the {skill_label}, then add {names} to "
+                f"support {governed_token}."
+            ),
+            [
+                _wave3_governance_call(governance),
+                *_wave3_discover_targets(targets),
+                *(_wave3_place_call(t) for t in targets),
+            ],
+            targets=targets,
+            required_widgets=[_required_widget(t.origin, t.widget_id) for t in targets],
+        )
+    )
+    note_name = f"{title} Governed Note"
+    tasks.append(
+        _record(
+            "platform",
+            spine,
+            4,
+            "platform",
+            (
+                f"{title} governed synthesis: follow the {skill_label}, add {names}, and "
+                f"add a {_note_phrase(note_name)} containing {governed_token}."
+            ),
+            [
+                _wave3_governance_call(governance),
+                *_wave3_discover_targets(targets),
+                *(_wave3_place_call(t) for t in targets),
+                _wave3_generated_call(note_name, governed_token),
+            ],
+            targets=targets,
+            required_widgets=[_required_widget(t.origin, t.widget_id) for t in targets],
+            required_generated_widgets=[_wave3_required_generated(note_name, governed_token)],
+            governance=governance,
+        )
+    )
+
+    widget_id = _snake_case(widget_name)
+    tab_id = _snake_case(tab_name)
+    widget_def = _widget_def(widget_name, f"/{widget_id}", grid=(40, 10))
+    app_def = _app(app_name, [(tab_id, tab_name, [(widget_id, 0, 0, 40, 10, None)])])
+    build_note = f"{title} Build Note"
+    tasks.append(
+        _record(
+            "platform",
+            spine,
+            5,
+            "platform",
+            (
+                f"{title} governed build: read the {skill_label}, add {backend_name} with "
+                f"a {widget_name} table, publish and instantiate {app_name} on {tab_name}, "
+                f"and add a {_note_phrase(build_note)} containing {governed_token}. Widget ids are "
+                "the snake_case of widget names; tab ids are the snake_case of tab names."
+            ),
+            [
+                _wave3_governance_call(governance),
+                _call(
+                    "manage_backends",
+                    {
+                        "operation": "add",
+                        "name": backend_name,
+                        "url": url,
+                        "widgets_json": {widget_id: widget_def},
+                        "apps_json": [app_def],
+                    },
+                    graded_args=("operation", "name"),
+                ),
+                _call(
+                    "manage_apps",
+                    {
+                        "operation": "instantiate",
+                        "backend_id": "backend_005",
+                        "app_name": app_name,
+                        "dashboard_name": f"{title} Live",
+                        "activate": True,
+                    },
+                    graded_args=("operation",),
+                ),
+                _wave3_generated_call(build_note, governed_token),
+            ],
+            targets=(_custom_target(backend_name, widget_id, widget_name),),
+            required_widgets=[_required_widget(backend_name, widget_id, tab_id=tab_id)],
+            required_generated_widgets=[_wave3_required_generated(build_note, governed_token)],
+            required_widget_defs=[
+                {"backend_name": backend_name, "widget_id": widget_id, "expect": {"type": "table"}}
+            ],
+            required_app_defs=[
+                {
+                    "backend_name": backend_name,
+                    "name_contains": app_name,
+                    "tabs_include": [tab_id],
+                    "layout_refs_valid": True,
+                    "widgets_on_tab": [{"tab_id": tab_id, "widget_id": widget_id}],
+                }
+            ],
+        )
+    )
+    return tasks
+
+
+def _build_wave3_platform_tasks() -> list[TaskRecord]:
+    comps_targets = (
+        _wave3_catalog_target(
+            GETTING_STARTED,
+            "plotly_chart_with_theme_and_toolbar_using_config_file",
+            "Plotly Chart with Theme and Toolbar using Config File",
+        ),
+        _wave3_catalog_target(
+            WIDGET_EXAMPLES,
+            "chains_plotly",
+            "Chains chart example Plotly with raw data",
+        ),
+    )
+    snapshot_targets = (
+        _wave3_catalog_target(GETTING_STARTED, "udf", "TradingView Chart"),
+        _wave3_catalog_target(GETTING_STARTED, "html_widget", "HTML Widget"),
+    )
+    return [
+        *_build_wave3_platform_spine(
+            spine="comps_governance",
+            title="Comps-governance",
+            skill_slug="finance-comps",
+            skill_label="Finance Comps skill (finance-comps)",
+            governed_token="valuation multiples",
+            targets=comps_targets,
+            backend_name="Wave Three Comps Governance",
+            widget_name="Comps Governance Register",
+            app_name="Comps Governance App",
+            tab_name="Comparables",
+            url="http://127.0.0.1:9709",
+        ),
+        *_build_wave3_platform_spine(
+            spine="investment_snapshot_governance",
+            title="Investment-snapshot",
+            skill_slug="finance-tearsheet",
+            skill_label="Finance Tearsheet skill (finance-tearsheet)",
+            governed_token="price action",
+            targets=snapshot_targets,
+            backend_name="Wave Three Investment Snapshot",
+            widget_name="Investment Snapshot Register",
+            app_name="Investment Snapshot App",
+            tab_name="Snapshot",
+            url="http://127.0.0.1:9710",
+        ),
+    ]
+
+
+def _wave3_service_parts(
+    names: tuple[str, ...],
+    app_name: str,
+    tab_names: tuple[str, ...],
+) -> tuple[dict[str, JsonDict], JsonDict]:
+    widgets = {
+        _snake_case(name): _widget_def(name, f"/{_snake_case(name)}", grid=(40, 10))
+        for name in names
+    }
+    tabs: list[tuple[str, str, list[tuple[str, int, int, int, int, JsonDict | None]]]] = [
+        (
+            _snake_case(tab_name),
+            tab_name,
+            [
+                (
+                    _snake_case(name),
+                    0,
+                    index * 10,
+                    40,
+                    10,
+                    None,
+                )
+                for index, name in enumerate(
+                    names
+                    if len(tab_names) == 1
+                    else names[:2]
+                    if tab_name == tab_names[0]
+                    else names[2:]
+                )
+            ],
+        )
+        for tab_name in tab_names
+    ]
+    return widgets, _app(app_name, tabs)
+
+
+def _build_wave3_extend_spine(
+    *,
+    spine: str,
+    title: str,
+    backend_name: str,
+    app_name: str,
+    widget_names: tuple[str, str, str],
+    governance: GovernanceSpec,
+    url: str,
+) -> list[TaskRecord]:
+    tasks: list[TaskRecord] = []
+    widget_ids = tuple(_snake_case(name) for name in widget_names)
+    two_widgets, two_app = _wave3_service_parts(widget_names[:2], app_name, ("Review",))
+    three_widgets, three_app = _wave3_service_parts(
+        widget_names,
+        app_name,
+        ("Review", "Archive"),
+    )
+
+    for level in (0, 1):
+        name = widget_names[level]
+        widget_id = widget_ids[level]
+        widgets = {widget_id: _widget_def(name, f"/{widget_id}", grid=(40, 10))}
+        tasks.append(
+            _record(
+                "extend",
+                spine,
+                level,
+                "platform",
+                (
+                    f"{title} level-{level} service: add a custom backend "
+                    f"{backend_name} with the {name} table."
+                ),
+                [
+                    _snapshot(),
+                    _call(
+                        "read_workspace_resource",
+                        {"uri": "openbb://workspace/specs/widgets-json"},
+                        optional=True,
+                    ),
+                    _call(
+                        "manage_backends",
+                        {
+                            "operation": "add",
+                            "name": backend_name,
+                            "url": url,
+                            "widgets_json": widgets,
+                            "apps_json": [],
+                        },
+                        graded_args=("operation", "name"),
+                    ),
+                ],
+                targets=(_custom_target(backend_name, widget_id, name),),
+                required_widget_defs=[
+                    {"backend_name": backend_name, "widget_id": widget_id, "expect": {}}
+                ],
+            )
+        )
+
+    first_two_targets = tuple(
+        _custom_target(backend_name, widget_id, name)
+        for widget_id, name in zip(widget_ids[:2], widget_names[:2], strict=True)
+    )
+    tasks.append(
+        _record(
+            "extend",
+            spine,
+            2,
+            "platform",
+            (
+                f"{title} paired service: add a custom backend {backend_name} "
+                f"with {widget_names[0]} and {widget_names[1]} tables."
+            ),
+            [
+                _call(
+                    "manage_backends",
+                    {
+                        "operation": "add",
+                        "name": backend_name,
+                        "url": url,
+                        "widgets_json": two_widgets,
+                        "apps_json": [],
+                    },
+                    graded_args=("operation", "name"),
+                )
+            ],
+            targets=first_two_targets,
+            required_widget_defs=[
+                {"backend_name": backend_name, "widget_id": widget_id, "expect": {}}
+                for widget_id in widget_ids[:2]
+            ],
+        )
+    )
+    tasks.append(
+        _record(
+            "extend",
+            spine,
+            3,
+            "platform",
+            (
+                f"{title} app service: add a custom backend {backend_name} with "
+                f"{widget_names[0]} and {widget_names[1]} tables, publish {app_name} on "
+                "Review, and instantiate it."
+            ),
+            [
+                _call(
+                    "manage_backends",
+                    {
+                        "operation": "add",
+                        "name": backend_name,
+                        "url": url,
+                        "widgets_json": two_widgets,
+                        "apps_json": [two_app],
+                    },
+                    graded_args=("operation", "name"),
+                ),
+                _call(
+                    "manage_apps",
+                    {
+                        "operation": "instantiate",
+                        "backend_id": "backend_005",
+                        "app_name": app_name,
+                        "dashboard_name": f"{title} Live",
+                        "activate": True,
+                    },
+                    graded_args=("operation",),
+                ),
+            ],
+            targets=first_two_targets,
+            required_widgets=[
+                _required_widget(backend_name, widget_id, tab_id="review")
+                for widget_id in widget_ids[:2]
+            ],
+            required_widget_defs=[
+                {"backend_name": backend_name, "widget_id": widget_id, "expect": {}}
+                for widget_id in widget_ids[:2]
+            ],
+            required_app_defs=[
+                {
+                    "backend_name": backend_name,
+                    "name_contains": app_name,
+                    "tabs_include": ["review"],
+                    "layout_refs_valid": True,
+                }
+            ],
+        )
+    )
+    tasks.append(
+        _record(
+            "extend",
+            spine,
+            4,
+            "platform",
+            (
+                f"{title} governed service: follow the {governance.label}; add a "
+                f"custom backend {backend_name} with {widget_names[0]} and "
+                f"{widget_names[1]} tables, "
+                f"publish {app_name} on Review, and instantiate it. Widget ids are the "
+                "snake_case of widget names; tab ids are the snake_case of tab names."
+            ),
+            [
+                _wave3_governance_call(governance),
+                _call(
+                    "manage_backends",
+                    {
+                        "operation": "add",
+                        "name": backend_name,
+                        "url": url,
+                        "widgets_json": two_widgets,
+                        "apps_json": [two_app],
+                    },
+                    graded_args=("operation", "name"),
+                ),
+                _call(
+                    "manage_apps",
+                    {
+                        "operation": "instantiate",
+                        "backend_id": "backend_005",
+                        "app_name": app_name,
+                        "dashboard_name": f"{title} Live",
+                        "activate": True,
+                    },
+                    graded_args=("operation",),
+                ),
+            ],
+            targets=first_two_targets,
+            required_widgets=[
+                _required_widget(backend_name, widget_id, tab_id="review")
+                for widget_id in widget_ids[:2]
+            ],
+            required_widget_defs=[
+                {"backend_name": backend_name, "widget_id": widget_id, "expect": {}}
+                for widget_id in widget_ids[:2]
+            ],
+            governance=governance,
+        )
+    )
+
+    all_targets = tuple(
+        _custom_target(backend_name, widget_id, name)
+        for widget_id, name in zip(widget_ids, widget_names, strict=True)
+    )
+    tasks.append(
+        _record(
+            "extend",
+            spine,
+            5,
+            "platform",
+            (
+                f"{title} complete service: follow the widgets manifest specification; "
+                f"add a custom backend {backend_name} with "
+                f"{', '.join(widget_names)} tables, publish {app_name} "
+                "with Review and Archive tabs, and instantiate it. Widget ids are the "
+                "snake_case of widget names; tab ids are the snake_case of tab names."
+            ),
+            [
+                _call(
+                    "read_workspace_resource",
+                    {"uri": "openbb://workspace/specs/widgets-json"},
+                    optional=True,
+                ),
+                _call(
+                    "manage_backends",
+                    {
+                        "operation": "add",
+                        "name": backend_name,
+                        "url": url,
+                        "widgets_json": three_widgets,
+                        "apps_json": [three_app],
+                    },
+                    graded_args=("operation", "name"),
+                ),
+                _call(
+                    "manage_apps",
+                    {
+                        "operation": "instantiate",
+                        "backend_id": "backend_005",
+                        "app_name": app_name,
+                        "dashboard_name": f"{title} Live",
+                        "activate": True,
+                    },
+                    graded_args=("operation",),
+                ),
+            ],
+            targets=all_targets,
+            policies=(
+                PolicyMapping(
+                    "widgets manifest specification",
+                    ("openbb://workspace/specs/widgets-json",),
+                ),
+            ),
+            required_widgets=[
+                _required_widget(
+                    backend_name,
+                    widget_id,
+                    tab_id="review" if index < 2 else "archive",
+                )
+                for index, widget_id in enumerate(widget_ids)
+            ],
+            required_widget_defs=[
+                {"backend_name": backend_name, "widget_id": widget_id, "expect": {}}
+                for widget_id in widget_ids
+            ],
+            required_app_defs=[
+                {
+                    "backend_name": backend_name,
+                    "name_contains": app_name,
+                    "tabs_include": ["review", "archive"],
+                    "layout_refs_valid": True,
+                    "no_overlaps": True,
+                }
+            ],
+        )
+    )
+    return tasks
+
+
+def _build_wave3_extend_tasks() -> list[TaskRecord]:
+    return [
+        *_build_wave3_extend_spine(
+            spine="inflection_service_lifecycle",
+            title="Inflection-service",
+            backend_name="Wave Three Inflection Service",
+            app_name="Inflection Service App",
+            widget_names=(
+                "Growth-Rate Reversals",
+                "Quarterly Series Monitor",
+                "Inflection Evidence Log",
+            ),
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "daloopa-inflection",
+                "Daloopa Inflection skill (daloopa-inflection)",
+                ("growth-rate reversals",),
+            ),
+            url="http://127.0.0.1:9711",
+        ),
+        *_build_wave3_extend_spine(
+            spine="guidance_service_lifecycle",
+            title="Guidance-service",
+            backend_name="Wave Three Guidance Service",
+            app_name="Guidance Service App",
+            widget_names=("Evidence Gaps", "Changed Assumptions", "Management Claims"),
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "finance-guidance-tracker",
+                "Finance Guidance Tracker skill (finance-guidance-tracker)",
+                ("evidence gaps",),
+            ),
+            url="http://127.0.0.1:9712",
+        ),
+    ]
+
+
+def _build_wave3_handoff_spine(
+    *,
+    spine: str,
+    title: str,
+    board_name: str,
+    source_slug: str,
+    target: TargetSpec,
+    data_args: JsonDict,
+    tokens: tuple[str, str],
+    fact_words: str,
+    governance: GovernanceSpec,
+    backend_name: str,
+    widget_name: str,
+    app_name: str,
+    tab_name: str,
+    url: str,
+) -> list[TaskRecord]:
+    stage = _staged_dashboard(board_name, [])
+    tasks: list[TaskRecord] = []
+    for level, rung in enumerate(("direct", "discovered", "analyst", "desk")):
+        note_name = f"{title} {rung.title()} Note"
+        tools: list[JsonDict] = []
+        if level in {0, 1}:
+            tools.append(_snapshot())
+        tools.extend(_wave3_discover_targets((target,)))
+        tools.extend(
+            [
+                _wave3_read_call(target, data_args),
+                _wave3_generated_call(
+                    note_name,
+                    f"Observed {tokens[0]} and {tokens[1]} for follow-up.",
+                ),
+            ]
+        )
+        tasks.append(
+            _record(
+                "handoff",
+                spine,
+                level,
+                "read",
+                (
+                    f"{title} {rung} handoff: on the open {board_name} board, read "
+                    f"{target.origin}'s {target.display_name} with "
+                    + ", ".join(f"{key} {value}" for key, value in data_args.items())
+                    + f", then add a {_note_phrase(note_name)} recording {fact_words}."
+                ),
+                tools,
+                targets=(target,),
+                required_generated_widgets=[_wave3_required_generated(note_name, *tokens)],
+                grounded_generated=(GroundedGenerated(source_slug, target.widget_id, tokens),),
+                selected_dashboard=board_name,
+                initial_state=stage,
+            )
+        )
+
+    note_name = f"{title} Governed Handoff"
+    governed_token = governance.outcome_tokens[0]
+    assignment = {
+        "task_requests": [
+            {
+                "id": f"{spine}_follow_up",
+                "description": f"Review the {title} follow-up.",
+                "assigned_holder_url": f"workspace://agents/{spine}",
+                "assigned_agent_id": f"{spine}-agent",
+            }
+        ]
+    }
+    tasks.append(
+        _record(
+            "handoff",
+            spine,
+            4,
+            "dashboard",
+            (
+                f"{title} governed handoff: follow the {governance.label} on the open "
+                f"{board_name} board, read {target.origin}'s {target.display_name} with "
+                + ", ".join(f"{key} {value}" for key, value in data_args.items())
+                + f", add a {_note_phrase(note_name)} recording {fact_words} and "
+                f"{governed_token}, then delegate the follow-up."
+            ),
+            [
+                _wave3_governance_call(governance),
+                *_wave3_discover_targets((target,)),
+                _wave3_read_call(target, data_args),
+                _wave3_generated_call(
+                    note_name,
+                    f"{governed_token}: observed {tokens[0]} and {tokens[1]}.",
+                ),
+                _call("assign_tasks_to_agents", assignment, graded_args=()),
+            ],
+            targets=(target,),
+            required_generated_widgets=[
+                _wave3_required_generated(note_name, governed_token, *tokens)
+            ],
+            grounded_generated=(GroundedGenerated(source_slug, target.widget_id, tokens),),
+            governance=governance,
+            selected_dashboard=board_name,
+            initial_state=stage,
+        )
+    )
+
+    widget_id = _snake_case(widget_name)
+    tab_id = _snake_case(tab_name)
+    widget_def = _widget_def(widget_name, f"/{widget_id}", grid=(40, 10))
+    app_def = _app(app_name, [(tab_id, tab_name, [(widget_id, 0, 0, 40, 10, None)])])
+    build_note = f"{title} Build Handoff"
+    tasks.append(
+        _record(
+            "handoff",
+            spine,
+            5,
+            "platform",
+            (
+                f"{title} build handoff: add {backend_name} with a {widget_name} table, "
+                f"publish and instantiate {app_name} with one {tab_name} tab, add a "
+                f"{_note_phrase(build_note)} grounded in {target.origin}'s "
+                f"{target.display_name} with {fact_words}, then delegate. Widget ids are "
+                "the snake_case of widget names; tab ids are the snake_case of tab names."
+            ),
+            [
+                *_wave3_discover_targets((target,)),
+                _wave3_read_call(target, data_args, optional=True),
+                _call(
+                    "manage_backends",
+                    {
+                        "operation": "add",
+                        "name": backend_name,
+                        "url": url,
+                        "widgets_json": {widget_id: widget_def},
+                        "apps_json": [app_def],
+                    },
+                    graded_args=("operation", "name"),
+                ),
+                _call(
+                    "manage_apps",
+                    {
+                        "operation": "instantiate",
+                        "backend_id": "backend_005",
+                        "app_name": app_name,
+                        "dashboard_name": f"{title} Live",
+                        "activate": True,
+                    },
+                    graded_args=("operation",),
+                ),
+                _wave3_generated_call(
+                    build_note,
+                    f"Catalog facts: {tokens[0]} and {tokens[1]}.",
+                ),
+                _call("assign_tasks_to_agents", assignment, graded_args=()),
+            ],
+            targets=(
+                _custom_target(backend_name, widget_id, widget_name),
+                target,
+            ),
+            required_widgets=[_required_widget(backend_name, widget_id, tab_id=tab_id)],
+            required_generated_widgets=[_wave3_required_generated(build_note, *tokens)],
+            required_widget_defs=[
+                {"backend_name": backend_name, "widget_id": widget_id, "expect": {"type": "table"}}
+            ],
+            required_app_defs=[
+                {
+                    "backend_name": backend_name,
+                    "name_contains": app_name,
+                    "tabs_include": [tab_id],
+                    "layout_refs_valid": True,
+                    "widgets_on_tab": [{"tab_id": tab_id, "widget_id": widget_id}],
+                }
+            ],
+            grounded_generated=(GroundedGenerated(source_slug, target.widget_id, tokens),),
+        )
+    )
+    return tasks
+
+
+def _build_wave3_handoff_tasks() -> list[TaskRecord]:
+    segment = _wave3_catalog_target(DALOOPA, "daloopa_segment_breakdown", "Segment Breakdown")
+    consensus = _wave3_catalog_target(
+        DALOOPA,
+        "daloopa_consensus_estimates",
+        "Consensus Estimates",
+    )
+    return [
+        *_build_wave3_handoff_spine(
+            spine="segment_mix_handoff",
+            title="Segment-mix",
+            board_name="Segment Mix Handoff",
+            source_slug="support-daloopa-skills",
+            target=segment,
+            data_args={"ticker": "AAPL", "period": "2026Q1"},
+            tokens=("iPhone", "52365.6"),
+            fact_words="the top segment and its exact revenue_musd",
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "daloopa-tearsheet",
+                "Daloopa Tearsheet skill (daloopa-tearsheet)",
+                ("mix",),
+            ),
+            backend_name="Wave Three Segment Handoff",
+            widget_name="Segment Handoff Register",
+            app_name="Segment Handoff App",
+            tab_name="Handoff",
+            url="http://127.0.0.1:9713",
+        ),
+        *_build_wave3_handoff_spine(
+            spine="consensus_exception_handoff",
+            title="Consensus-exception",
+            board_name="Consensus Exception Handoff",
+            source_slug="support-daloopa-skills",
+            target=consensus,
+            data_args={"ticker": "AAPL"},
+            tokens=("102070.1", "99404.2"),
+            fact_words="the exact Total Revenue actual and consensus for 2026Q1",
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "daloopa-earnings-review",
+                "Daloopa Earnings Review skill (daloopa-earnings-review)",
+                ("consensus",),
+            ),
+            backend_name="Wave Three Consensus Handoff",
+            widget_name="Consensus Handoff Register",
+            app_name="Consensus Handoff App",
+            tab_name="Handoff",
+            url="http://127.0.0.1:9714",
+        ),
+    ]
+
+
 def build_tasks() -> list[TaskRecord]:
-    """Build the complete deterministic two-wave task lattice."""
+    """Build the complete deterministic three-wave task lattice."""
 
     return [
         *_build_retrieve_tasks(),
         *_build_retrieve_wave2_tasks(),
+        *_build_wave3_retrieve_tasks(),
         *_build_curate_tasks(),
         *_build_curate_wave2_tasks(),
+        *_build_wave3_curate_tasks(),
         *_build_parameterize_tasks(),
         *_build_parameterize_wave2_tasks(),
+        *_build_wave3_parameterize_tasks(),
         *_build_organize_tasks(),
         *_build_organize_wave2_tasks(),
+        *_build_wave3_organize_tasks(),
         *_build_repair_tasks(),
         *_build_repair_wave2_tasks(),
+        *_build_wave3_repair_tasks(),
         *_build_platform_tasks(),
         *_build_platform_wave2_tasks(),
+        *_build_wave3_platform_tasks(),
         *_build_extend_tasks(),
         *_build_extend_wave2_tasks(),
+        *_build_wave3_extend_tasks(),
         *_build_handoff_tasks(),
         *_build_handoff_wave2_tasks(),
+        *_build_wave3_handoff_tasks(),
     ]
 
 
@@ -6031,7 +8393,7 @@ def _semantic_check_count(payload: JsonDict) -> int:
     return count
 
 
-def _selected_dashboard_specs(payload: JsonDict) -> list[JsonDict]:
+def _baseline_dashboard_specs(payload: JsonDict) -> list[JsonDict]:
     baseline_path = REPO / "src/workspace_bench/data/initial_states/stark_workspace_a.json"
     baseline = json.loads(baseline_path.read_text(encoding="utf-8"))["initial_state"]
     dashboards = copy.deepcopy(baseline["dashboards"])
@@ -6040,6 +8402,11 @@ def _selected_dashboard_specs(payload: JsonDict) -> list[JsonDict]:
         dashboards.append(initial["dashboard"])
     if isinstance(initial.get("dashboards"), list):
         dashboards.extend(item for item in initial["dashboards"] if isinstance(item, dict))
+    return dashboards
+
+
+def _selected_dashboard_specs(payload: JsonDict) -> list[JsonDict]:
+    dashboards = _baseline_dashboard_specs(payload)
     selected = payload["setup"]["default_selected_dashboard"]
     return [item for item in dashboards if item.get("name") == selected]
 
@@ -6119,10 +8486,7 @@ def _assert_f1_f3(records: list[TaskRecord], catalogs: dict[str, JsonDict]) -> N
         # field value (e.g. the widget type) must be stated in the prompt.
         for widget_def in payload["eval"].get("required_widget_defs", []):
             for field_name, expected in (widget_def.get("expect") or {}).items():
-                if (
-                    isinstance(expected, str)
-                    and expected.casefold() not in prompt.casefold()
-                ):
+                if isinstance(expected, str) and expected.casefold() not in prompt.casefold():
                     raise AssertionError(
                         f"{task_id}: F2 unstated expect value {expected!r} for "
                         f"{widget_def.get('widget_id')}.{field_name}"
@@ -6391,6 +8755,82 @@ def _assert_f10(records: list[TaskRecord]) -> None:
             raise AssertionError(f"{task_id}: F10 prompt contains implementation terms {forbidden}")
 
 
+def _assert_f11(records: list[TaskRecord]) -> None:
+    """Require discovery before opaque reads of unmounted catalog widgets."""
+
+    for record in records:
+        task_id = str(record.payload["id"])
+        if task_id.rsplit("_level", 1)[0] not in WAVE3_SPINES:
+            # Pre-wave-3 records are certified immutable content. F11 guards
+            # every mutable ladder that can introduce this defect again.
+            continue
+        prompt = str(record.payload["prompt"])
+        tools = record.payload["eval"]["required_tools"]
+        targets = {(target.origin, target.widget_id): target for target in record.targets}
+        mounted = {
+            (str(widget.get("origin")), str(widget.get("widget_id")))
+            for dashboard in _baseline_dashboard_specs(record.payload)
+            for widget in dashboard.get("widgets", [])
+            if widget.get("origin") is not None and widget.get("widget_id") is not None
+        }
+        for index, call in enumerate(tools):
+            if call["tool"] != "get_widget_data" or call.get("optional"):
+                continue
+            args = call.get("args", {})
+            key = (str(args.get("origin")), str(args.get("widget_id")))
+            target = targets.get(key)
+            if target is None or target.origin not in ORIGIN_SLUGS or key in mounted:
+                continue
+            if target.display_name.casefold() not in prompt.casefold():
+                continue
+            if target.widget_id == _snake_case(target.display_name):
+                continue
+            discovered = any(
+                prior["tool"] == "list_available_widgets"
+                and prior.get("args", {}).get("origin") == target.origin
+                for prior in tools[:index]
+            )
+            if not discovered:
+                raise AssertionError(f"F11 unmounted read without discovery: {task_id}")
+
+
+def _assert_f12(records: list[TaskRecord]) -> None:
+    """Forbid prompts from printing read-derived graded tokens (wave-3 scope)."""
+
+    for record in records:
+        task_id = str(record.payload["id"])
+        if task_id.rsplit("_level", 1)[0] not in WAVE3_SPINES:
+            # Pre-wave-3 records are certified immutable content.
+            continue
+        evaluation = record.payload["eval"]
+        if not any(
+            call["tool"] == "get_widget_data" for call in evaluation["required_tools"]
+        ):
+            continue
+        prompt = str(record.payload["prompt"]).casefold()
+        exempt: set[str] = set()
+        for call in evaluation["required_tools"]:
+            data_args = call.get("args", {}).get("data_args")
+            if isinstance(data_args, dict):
+                exempt.update(str(value).casefold() for value in data_args.values())
+        for required in evaluation.get("required_widgets", []):
+            if isinstance(required.get("data_args"), dict):
+                exempt.update(
+                    str(value).casefold() for value in required["data_args"].values()
+                )
+        tokens = {str(token) for token in evaluation.get("required_values_in_answer", [])}
+        for grounded in record.grounded_generated:
+            tokens.update(str(token) for token in grounded.tokens)
+        for token in sorted(tokens):
+            token_cf = token.casefold()
+            if token_cf in exempt:
+                continue
+            if token_cf in prompt:
+                raise AssertionError(
+                    f"F12 prompt prints read-derived token: {task_id}: {token!r}"
+                )
+
+
 def _assert_l1_l5(records: list[TaskRecord]) -> None:
     """Assert the wave-2 learned rules across both waves."""
 
@@ -6439,7 +8879,7 @@ def _assert_wave2_requirements(records: list[TaskRecord]) -> None:
     for record in records:
         spine = str(record.payload["id"]).rsplit("_level", 1)[0]
         by_spine[spine].append(record)
-    if set(by_spine) != WAVE1_SPINES | WAVE2_SPINES:
+    if set(by_spine) != WAVE1_SPINES | WAVE2_SPINES | WAVE3_SPINES:
         raise AssertionError(f"spine set mismatch: {sorted(by_spine)}")
 
     wave1_catalog_targets = {
@@ -6501,7 +8941,7 @@ def _assert_wave2_requirements(records: list[TaskRecord]) -> None:
         (record, target)
         for record in records
         for target in record.targets
-        if target.display_name == "Live Grid"
+        if target.display_name == "Live Grid" and target.widget_id == LIVE_GRID_WIDGET
     ]
     if len(collisions) != 1:
         raise AssertionError(f"expected one Live Grid collision test, got {len(collisions)}")
@@ -6515,6 +8955,476 @@ def _assert_wave2_requirements(records: list[TaskRecord]) -> None:
         raise AssertionError("Live Grid collision is not disambiguated by property alone")
 
 
+def _graded_catalog_targets(records: list[TaskRecord]) -> dict[str, set[str]]:
+    graded: dict[str, set[str]] = {origin: set() for origin in ORIGIN_SLUGS}
+    for record in records:
+        for required in record.payload["eval"].get("required_widgets", []):
+            origin = str(required["origin"])
+            if origin in graded:
+                graded[origin].add(str(required["widget_id"]))
+        for call in record.payload["eval"]["required_tools"]:
+            if call.get("optional"):
+                continue
+            args = call.get("args", {})
+            origin = args.get("origin")
+            widget_id = args.get("widget_id")
+            if origin in graded and isinstance(widget_id, str):
+                graded[str(origin)].add(widget_id)
+    return graded
+
+
+def _catalog_app_index(catalog: JsonDict) -> dict[str, str]:
+    index: dict[str, str] = {}
+    for app in catalog.get("apps", []):
+        if not isinstance(app, dict):
+            continue
+        app_name = str(app.get("name", ""))
+        for tab in app.get("tabs", {}).values():
+            for item in tab.get("layout", []):
+                widget_id = item.get("i")
+                if isinstance(widget_id, str):
+                    index[widget_id] = app_name
+    return index
+
+
+def _governance_content(spec: GovernanceSpec) -> str:
+    if spec.tool == "get_skill_content":
+        return str(WORKSPACE_SKILLS[spec.key]["content"])
+    if spec.tool == "read_workspace_resource":
+        return str(LIVE_WORKSPACE_RESOURCES[spec.key])
+    if spec.tool == "get_workspace_prompt":
+        return str(WORKSPACE_PROMPTS[spec.key])
+    raise AssertionError(f"unsupported governance tool {spec.tool}")
+
+
+def _assert_instantiation_and_expect_fairness(records: list[TaskRecord]) -> None:
+    for record in records:
+        evaluation = record.payload["eval"]
+        authored_targets = {
+            (target.origin, target.widget_id) for target in record.targets if target.custom
+        }
+        required_pairs = {
+            (str(required["origin"]), str(required["widget_id"]))
+            for required in evaluation.get("required_widgets", [])
+        }
+        for call in evaluation["required_tools"]:
+            if (
+                call["tool"] == "manage_apps"
+                and call["args"].get("operation") == "instantiate"
+                and not call.get("optional")
+            ):
+                if call.get("graded_args") != ["operation"]:
+                    raise AssertionError(
+                        f"{record.payload['id']}: instantiate must grade operation only"
+                    )
+                if not authored_targets & required_pairs:
+                    raise AssertionError(
+                        f"{record.payload['id']}: instantiate lacks authored-widget state check"
+                    )
+            if call["tool"] == "assign_tasks_to_agents" and not call.get("optional"):
+                if call.get("graded_args") != []:
+                    raise AssertionError(
+                        f"{record.payload['id']}: delegation must grade that delegation happened"
+                    )
+        for required in evaluation.get("required_widget_defs", []):
+            forbidden = {"endpoint", "description"} & set(required.get("expect", {}))
+            if forbidden:
+                raise AssertionError(
+                    f"{record.payload['id']}: forbidden authored definition pins {sorted(forbidden)}"
+                )
+
+
+def _assert_wave3_requirements(
+    records: list[TaskRecord],
+    catalogs: dict[str, JsonDict],
+) -> None:
+    by_spine: dict[str, list[TaskRecord]] = defaultdict(list)
+    for record in records:
+        by_spine[str(record.payload["id"]).rsplit("_level", 1)[0]].append(record)
+    if set(by_spine) != WAVE1_SPINES | WAVE2_SPINES | WAVE3_SPINES:
+        raise AssertionError(f"wave3 spine set mismatch: {sorted(by_spine)}")
+
+    if set(WAVE3_SPINE_FAMILIES) != WAVE3_SPINES:
+        raise AssertionError("wave3 family metadata is incomplete")
+    if len(set(WAVE3_BUSINESS_THEMES.values())) != len(WAVE3_SPINES):
+        raise AssertionError("wave3 business themes are not unique")
+    if set(WAVE3_BUSINESS_THEMES.values()) & LEGACY_BUSINESS_THEMES:
+        raise AssertionError("wave3 reuses a legacy business theme")
+    for spine in WAVE3_SPINES:
+        spine_records = by_spine[spine]
+        levels = {str(record.payload["difficulty"]) for record in spine_records}
+        if levels != set(LEVEL_CAPS) or len(spine_records) != 6:
+            raise AssertionError(f"{spine}: incomplete six-level wave3 ladder")
+        if {record.family for record in spine_records} != {WAVE3_SPINE_FAMILIES[spine]}:
+            raise AssertionError(f"{spine}: wrong family")
+
+    legacy_catalog_targets = {
+        (target.origin, target.widget_id)
+        for spine in WAVE1_SPINES | WAVE2_SPINES
+        for record in by_spine[spine]
+        for target in record.targets
+        if target.origin in ORIGIN_SLUGS
+    }
+    seen_wave3: dict[tuple[str, str], str] = {}
+    for spine in WAVE3_SPINES:
+        spine_targets = {
+            (target.origin, target.widget_id)
+            for record in by_spine[spine]
+            for target in record.targets
+            if target.origin in ORIGIN_SLUGS
+        }
+        reused_legacy = spine_targets & legacy_catalog_targets
+        if reused_legacy:
+            raise AssertionError(f"{spine}: reuses legacy targets {sorted(reused_legacy)}")
+        for target_key in spine_targets:
+            prior = seen_wave3.get(target_key)
+            if prior is not None and prior != spine:
+                raise AssertionError(f"{spine}: reuses {target_key} from wave3 spine {prior}")
+            seen_wave3[target_key] = spine
+
+    knowledge_tools = {
+        "get_skill_content",
+        "read_workspace_resource",
+        "get_workspace_prompt",
+    }
+    for spine in WAVE3_SPINES:
+        level4 = next(
+            record for record in by_spine[spine] if record.payload["difficulty"] == "level4"
+        )
+        spec = level4.governance
+        if spec is None:
+            raise AssertionError(f"{level4.payload['id']}: level4 governance metadata missing")
+        prompt = str(level4.payload["prompt"])
+        if spec.label.casefold() not in prompt.casefold():
+            raise AssertionError(f"{level4.payload['id']}: named governance absent from prompt")
+        key_name = {
+            "get_skill_content": "slug",
+            "read_workspace_resource": "uri",
+            "get_workspace_prompt": "name",
+        }[spec.tool]
+        graded_calls = [
+            call for call in level4.payload["eval"]["required_tools"] if not call.get("optional")
+        ]
+        if not any(
+            call["tool"] == spec.tool and call["args"].get(key_name) == spec.key
+            for call in graded_calls
+        ):
+            raise AssertionError(f"{level4.payload['id']}: governance read is not graded")
+        if not any(call["tool"] not in knowledge_tools for call in graded_calls):
+            raise AssertionError(f"{level4.payload['id']}: governance has no graded outcome")
+        content = _governance_content(spec)
+        catalog_documents = []
+        for target_spec in level4.targets:
+            if target_spec.origin not in ORIGIN_SLUGS:
+                continue
+            definition = catalogs[ORIGIN_SLUGS[target_spec.origin]]["widgets"][
+                target_spec.widget_id
+            ]
+            catalog_documents.append(definition)
+        outcome_document = json.dumps(
+            {
+                "evaluation": level4.payload["eval"],
+                "targets": [
+                    {
+                        "origin": target_spec.origin,
+                        "widget_id": target_spec.widget_id,
+                        "display_name": target_spec.display_name,
+                    }
+                    for target_spec in level4.targets
+                ],
+                "catalog_definitions": catalog_documents,
+            },
+            ensure_ascii=False,
+        )
+        for token in spec.outcome_tokens:
+            if token.casefold() not in content.casefold():
+                raise AssertionError(
+                    f"{level4.payload['id']}: governed token {token!r} absent from source"
+                )
+            if token.casefold() not in outcome_document.casefold():
+                raise AssertionError(
+                    f"{level4.payload['id']}: governed token {token!r} absent from outcome"
+                )
+
+    used_skills = {
+        str(call["args"]["slug"])
+        for record in records
+        for call in record.payload["eval"]["required_tools"]
+        if call["tool"] == "get_skill_content" and not call.get("optional")
+    }
+    if used_skills != set(SKILL_SLUGS):
+        raise AssertionError(f"skill coverage mismatch: {sorted(used_skills)}")
+    legacy_used_skills = {
+        str(call["args"]["slug"])
+        for spine in WAVE1_SPINES | WAVE2_SPINES
+        for record in by_spine[spine]
+        for call in record.payload["eval"]["required_tools"]
+        if call["tool"] == "get_skill_content" and not call.get("optional")
+    }
+    newly_used_skills = set(SKILL_SLUGS) - legacy_used_skills
+    for spine in ("comps_governance", "investment_snapshot_governance"):
+        spine_skills = {
+            str(call["args"]["slug"])
+            for record in by_spine[spine]
+            for call in record.payload["eval"]["required_tools"]
+            if call["tool"] == "get_skill_content" and not call.get("optional")
+        }
+        if not spine_skills or not spine_skills <= newly_used_skills:
+            raise AssertionError(f"{spine}: platform spine is not governed by a new skill")
+
+    legacy_records = [record for spine in WAVE1_SPINES | WAVE2_SPINES for record in by_spine[spine]]
+    wave3_records = [record for spine in WAVE3_SPINES for record in by_spine[spine]]
+    legacy_coverage = _graded_catalog_targets(legacy_records)
+    wave3_coverage = _graded_catalog_targets(wave3_records)
+    whole_coverage = _graded_catalog_targets(records)
+    expected_legacy = {
+        GETTING_STARTED: 7,
+        WIDGET_EXAMPLES: 3,
+        STARK: 3,
+        DALOOPA: 4,
+    }
+    if {origin: len(ids) for origin, ids in legacy_coverage.items()} != expected_legacy:
+        raise AssertionError("pre-wave3 coverage baseline changed")
+    delta_floors = {
+        GETTING_STARTED: 12,
+        WIDGET_EXAMPLES: 8,
+        STARK: 6,
+        DALOOPA: 2,
+    }
+    for origin, floor in delta_floors.items():
+        new_ids = wave3_coverage[origin] - legacy_coverage[origin]
+        if len(new_ids) < floor:
+            raise AssertionError(f"{origin}: wave3 graded coverage {len(new_ids)} is below {floor}")
+        if len(whole_coverage[origin]) < expected_legacy[origin] + floor:
+            raise AssertionError(f"{origin}: whole-suite coverage floor missed")
+
+    new_definitions = [
+        catalogs[ORIGIN_SLUGS[origin]]["widgets"][widget_id]
+        for origin, widget_ids in wave3_coverage.items()
+        for widget_id in widget_ids - legacy_coverage[origin]
+    ]
+    new_types = {str(definition.get("type", "")) for definition in new_definitions}
+    if "live_grid" not in new_types:
+        raise AssertionError("wave3 does not operate a live grid")
+    if not any(widget_type.startswith("chart") for widget_type in new_types):
+        raise AssertionError("wave3 does not operate a chart")
+    if not new_types & {"pdf", "youtube", "iframe", "newsfeed", "multi_file_viewer"}:
+        raise AssertionError("wave3 does not operate a media/content widget")
+
+    def contains_form_param(value: Any) -> bool:
+        if isinstance(value, dict):
+            return value.get("type") == "form" or any(
+                contains_form_param(item) for item in value.values()
+            )
+        if isinstance(value, list):
+            return any(contains_form_param(item) for item in value)
+        return False
+
+    form_targets = {
+        (origin, widget_id)
+        for origin, widget_ids in wave3_coverage.items()
+        for widget_id in widget_ids - legacy_coverage[origin]
+        if contains_form_param(
+            catalogs[ORIGIN_SLUGS[origin]]["widgets"][widget_id].get("params", [])
+        )
+    }
+    form_operated = False
+    for record in wave3_records:
+        required_pairs = {
+            (str(item["origin"]), str(item["widget_id"]))
+            for item in record.payload["eval"].get("required_widgets", [])
+        }
+        if not form_targets & required_pairs:
+            continue
+        form_operated = form_operated or any(
+            call["tool"] == "update_widget"
+            and call["args"].get("data_args", {}).get("add_record") is True
+            and {
+                "client_first_name",
+                "client_last_name",
+            }.issubset(call["args"].get("data_args", {}))
+            for call in record.payload["eval"]["required_tools"]
+            if not call.get("optional")
+        )
+    if not form_operated:
+        raise AssertionError("wave3 form target lacks graded inputs plus submit")
+
+    stark_catalog = catalogs[ORIGIN_SLUGS[STARK]]
+    stark_app_index = _catalog_app_index(stark_catalog)
+    legacy_stark_apps = {
+        stark_app_index[widget_id]
+        for widget_id in legacy_coverage[STARK]
+        if widget_id in stark_app_index
+    }
+    new_stark_ids = wave3_coverage[STARK] - legacy_coverage[STARK]
+    new_stark_apps = {
+        stark_app_index[widget_id] for widget_id in new_stark_ids if widget_id in stark_app_index
+    }
+    if len(new_stark_ids) < 6 or not 2 <= len(new_stark_apps) <= 3:
+        raise AssertionError(
+            f"wave3 Stark sweep has {len(new_stark_ids)} widgets across {len(new_stark_apps)} apps"
+        )
+    if new_stark_apps & legacy_stark_apps:
+        raise AssertionError("wave3 Stark sweep reuses an app touched by earlier waves")
+
+
+def _assert_wave3_repairs(records: list[TaskRecord]) -> dict[str, int]:
+    """Certify the five live-run repairs and return their report counts."""
+
+    wave3_records = [
+        record
+        for record in records
+        if str(record.payload["id"]).rsplit("_level", 1)[0] in WAVE3_SPINES
+    ]
+    spec_uri = "openbb://workspace/specs/widgets-json"
+
+    d1_refs: set[str] = set()
+    for record in wave3_records:
+        task_id = str(record.payload["id"])
+        for call in record.payload["eval"]["required_tools"]:
+            if (
+                call["tool"] == "read_workspace_resource"
+                and call.get("args", {}).get("uri") == spec_uri
+            ):
+                if not call.get("optional"):
+                    raise AssertionError(f"{task_id}: D1 widgets spec read is required")
+                if record.payload["difficulty"] == "level5":
+                    d1_refs.add(task_id)
+    if len(d1_refs) != 4:
+        raise AssertionError(f"D1 expected 4 repaired sites, got {sorted(d1_refs)}")
+
+    d2_refs: set[str] = set()
+    for record in wave3_records:
+        task_id = str(record.payload["id"])
+        tools = record.payload["eval"]["required_tools"]
+        for index, call in enumerate(tools):
+            args = call.get("args", {})
+            origin = args.get("origin")
+            if call["tool"] != "get_widget_data" or origin not in ORIGIN_SLUGS:
+                continue
+            if not any(
+                prior["tool"] == "list_available_widgets"
+                and prior.get("optional")
+                and prior.get("args", {}).get("origin") == origin
+                for prior in tools[:index]
+            ):
+                raise AssertionError(f"{task_id}: D2 catalog read lacks prior discovery")
+            if not call.get("optional") and record.payload["difficulty"] != "level1":
+                d2_refs.add(task_id)
+    if len(d2_refs) != 16:
+        raise AssertionError(f"D2 expected 16 added discovery refs, got {sorted(d2_refs)}")
+
+    d3_refs: set[str] = set()
+    for record in wave3_records:
+        if record.family != "extend" or record.payload["difficulty"] not in {
+            "level0",
+            "level1",
+        }:
+            continue
+        task_id = str(record.payload["id"])
+        tools = record.payload["eval"]["required_tools"]
+        spec_indexes = [
+            index
+            for index, call in enumerate(tools)
+            if call["tool"] == "read_workspace_resource"
+            and call.get("args", {}).get("uri") == spec_uri
+            and call.get("optional")
+        ]
+        backend_index = next(
+            index for index, call in enumerate(tools) if call["tool"] == "manage_backends"
+        )
+        if len(spec_indexes) != 1 or spec_indexes[0] >= backend_index:
+            raise AssertionError(f"{task_id}: D3 spec consultation is missing or misplaced")
+        d3_refs.add(task_id)
+    if len(d3_refs) != 4:
+        raise AssertionError(f"D3 expected 4 extend refs, got {sorted(d3_refs)}")
+
+    d4_tasks: set[str] = set()
+    for record in wave3_records:
+        if record.family != "retrieve" or record.payload["difficulty"] != "level5":
+            continue
+        task_id = str(record.payload["id"])
+        datasets = record.payload["eval"].get("runtime_checks", {}).get("datasets", [])
+        if len(datasets) != 1:
+            raise AssertionError(f"{task_id}: D4 expected one runtime dataset")
+        dataset = datasets[0]
+        fields = dataset.get("fields", [])
+        rows = dataset.get("payload", [])
+        prompt = str(record.payload["prompt"])
+        required_values = set(record.payload["eval"].get("required_values_in_answer", []))
+        if (
+            len(fields) != 2
+            or any(str(field).casefold() not in prompt.casefold() for field in fields)
+            or len(rows) != 1
+            or set(rows[0]) != set(fields)
+            or {str(value) for value in rows[0].values()} != required_values
+            or {"reported_first", "reported_second"} & set(fields)
+        ):
+            raise AssertionError(f"{task_id}: D4 served columns are not fully stated")
+        d4_tasks.add(task_id)
+    if len(d4_tasks) != 2:
+        raise AssertionError(f"D4 expected 2 stated-column tasks, got {sorted(d4_tasks)}")
+
+    d5_refs: set[str] = set()
+    for record in wave3_records:
+        if record.family != "handoff" or record.payload["difficulty"] != "level5":
+            continue
+        task_id = str(record.payload["id"])
+        if len(record.grounded_generated) != 1:
+            raise AssertionError(f"{task_id}: D5 grounding metadata is missing")
+        grounded = record.grounded_generated[0]
+        target = next(
+            (
+                candidate
+                for candidate in record.targets
+                if not candidate.custom and candidate.widget_id == grounded.widget_id
+            ),
+            None,
+        )
+        if target is None:
+            raise AssertionError(f"{task_id}: D5 grounding target is untracked")
+        tools = record.payload["eval"]["required_tools"]
+        discover_index = next(
+            (
+                index
+                for index, call in enumerate(tools)
+                if call["tool"] == "list_available_widgets"
+                and call.get("optional")
+                and call.get("args", {}).get("origin") == target.origin
+            ),
+            -1,
+        )
+        read_index = next(
+            (
+                index
+                for index, call in enumerate(tools)
+                if call["tool"] == "get_widget_data"
+                and call.get("optional")
+                and call.get("args", {}).get("origin") == target.origin
+                and call.get("args", {}).get("widget_id") == target.widget_id
+            ),
+            -1,
+        )
+        note_index = next(
+            index
+            for index, call in enumerate(tools)
+            if call["tool"] == "add_generative_widget"
+        )
+        if not 0 <= discover_index < read_index < note_index:
+            raise AssertionError(f"{task_id}: D5 grounding reads are missing or misplaced")
+        d5_refs.add(task_id)
+    if len(d5_refs) != 2:
+        raise AssertionError(f"D5 expected 2 grounding refs, got {sorted(d5_refs)}")
+
+    return {
+        "d1_optional_spec_reads": len(d1_refs),
+        "d2_discovery_refs": len(d2_refs),
+        "d3_extend_spec_reads": len(d3_refs),
+        "d4_stated_column_tasks": len(d4_tasks),
+        "d5_grounding_refs": len(d5_refs),
+    }
+
+
 def _assert_family_missions(records: list[TaskRecord]) -> None:
     by_family: dict[str, list[TaskRecord]] = defaultdict(list)
     for record in records:
@@ -6525,14 +9435,14 @@ def _assert_family_missions(records: list[TaskRecord]) -> None:
         actual_counts: dict[str, int] = defaultdict(int)
         for record in by_family[family]:
             actual_counts[str(record.payload["difficulty"])] += 1
-        expected_counts = {level: 2 for level in expected_levels}
+        expected_counts = {level: 4 for level in expected_levels}
         if dict(actual_counts) != expected_counts:
             raise AssertionError(
                 f"{family}: level counts {dict(actual_counts)} != {expected_counts}"
             )
         spines = {str(record.payload["id"]).rsplit("_level", 1)[0] for record in by_family[family]}
-        if len(spines) != 2:
-            raise AssertionError(f"{family}: expected two spines, got {spines}")
+        if len(spines) != 4:
+            raise AssertionError(f"{family}: expected four spines, got {spines}")
 
     if any(
         len({target.origin for target in record.targets if target.origin in ORIGIN_SLUGS}) < 2
@@ -6642,9 +9552,7 @@ def _assert_family_missions(records: list[TaskRecord]) -> None:
             "assign_tasks_to_agents",
         ]:
             raise AssertionError(f"{build.payload['id']}: handoff build chain is incomplete")
-        backend_call = next(
-            call for call in tools if call["tool"] == "manage_backends"
-        )
+        backend_call = next(call for call in tools if call["tool"] == "manage_backends")
         widgets_json = backend_call["args"].get("widgets_json", {})
         apps_json = backend_call["args"].get("apps_json", [])
         if len(widgets_json) != 1 or len(apps_json) != 1:
@@ -6659,10 +9567,10 @@ def _assert_family_missions(records: list[TaskRecord]) -> None:
 
 
 def validate_payloads(records: list[TaskRecord]) -> dict[str, int]:
-    """Run task shape, mission, and complete F1-F10/L1-L5 certification."""
+    """Run task shape, mission, and complete F1-F11/L1-L5 certification."""
 
-    if len(records) != 96:
-        raise AssertionError(f"expected 96 tasks, built {len(records)}")
+    if len(records) != 192:
+        raise AssertionError(f"expected 192 tasks, built {len(records)}")
     expected_top_keys = {"id", "category", "difficulty", "prompt", "setup", "eval"}
     allowed_eval = {
         "required_widgets",
@@ -6718,8 +9626,13 @@ def validate_payloads(records: list[TaskRecord]) -> dict[str, int]:
     _assert_f8(records, catalogs)
     _assert_f9(records, catalogs)
     _assert_f10(records)
+    _assert_f11(records)
+    _assert_f12(records)
     _assert_l1_l5(records)
     _assert_wave2_requirements(records)
+    _assert_instantiation_and_expect_fairness(records)
+    _assert_wave3_requirements(records, catalogs)
+    repair_summary = _assert_wave3_repairs(records)
     return {
         "tasks": len(records),
         "max_checks": max(counts.values()),
@@ -6727,6 +9640,7 @@ def validate_payloads(records: list[TaskRecord]) -> dict[str, int]:
             bool(record.payload["eval"].get("required_values_in_answer")) for record in records
         ),
         "grounded_handoffs": sum(bool(record.grounded_generated) for record in records),
+        **repair_summary,
     }
 
 
@@ -6749,8 +9663,9 @@ def _manifest(records: list[TaskRecord]) -> JsonDict:
         },
         "content_sha256": task_payload_digest([record.payload for record in records]),
         "description": (
-            "Usage-v3 waves 1-2: eight job-shaped families, two level-ladder spines "
-            "per family, and mechanically certified F1-F10/L1-L5 fairness."
+            "Usage-v3 waves 1-3: eight job-shaped families, four level-ladder spines "
+            "per family, and mechanically certified F1-F10/L1-L5 fairness plus wave-3 "
+            "knowledge governance and catalog coverage."
         ),
     }
 
@@ -6822,7 +9737,7 @@ def certify_loaded_suite(
     table: dict[tuple[str, str], tuple[int, int]] = {}
     total = len(tasks)
     for index, task in enumerate(tasks, start=1):
-        print(f"[certify {index:02d}/{total}] {task.family}/{task.id}", flush=True)
+        print(f"[certify {index:03d}/{total}] {task.family}/{task.id}", flush=True)
         oracle_episode = WorkspaceEpisode(task)
         for call in oracle.tool_calls(task):
             oracle_episode.step(call)
@@ -6867,10 +9782,30 @@ def _print_certification_table(
         print(f"{family:<12} | " + " | ".join(cells) + f" | {oracle_total}/{noop_total}")
 
 
+def _print_coverage_summary(records: list[TaskRecord]) -> None:
+    catalogs = _catalogs()
+    whole = _graded_catalog_targets(records)
+    legacy_spines = WAVE1_SPINES | WAVE2_SPINES
+    legacy_records = [
+        record
+        for record in records
+        if str(record.payload["id"]).rsplit("_level", 1)[0] in legacy_spines
+    ]
+    legacy = _graded_catalog_targets(legacy_records)
+    for slug, origin in BACKEND_ORIGINS.items():
+        total_widgets = len(catalogs[slug]["widgets"])
+        wave3_delta = len(whole[origin] - legacy[origin])
+        print(
+            f"COVERAGE {origin}: {len(whole[origin])}/{total_widgets} distinct graded "
+            f"targets (+{wave3_delta} wave3)",
+            flush=True,
+        )
+
+
 def main() -> int:
-    print("[1/4] Building sixteen usage-v3 spine ladders", flush=True)
+    print("[1/4] Building thirty-two usage-v3 spine ladders", flush=True)
     records = build_tasks()
-    print("[2/4] Asserting task shape, missions, F1-F10, and L1-L5", flush=True)
+    print("[2/4] Asserting task shape, missions, F1-F11, and L1-L5", flush=True)
     summary = validate_payloads(records)
     print(
         "[static] "
@@ -6884,11 +9819,28 @@ def main() -> int:
     print("[4/4] Replaying oracle and no-op certification", flush=True)
     replay, table = certify_loaded_suite(records)
     _print_certification_table(table)
+    expected_cell = (4, 4)
+    if any(
+        table.get((family, level)) != expected_cell
+        for family, levels in FAMILY_LEVELS.items()
+        for level in levels
+    ):
+        raise AssertionError("family x level certification table is not uniformly 4/4")
+    _print_coverage_summary(records)
+    print(f"D1 optional spec-reads: {summary['d1_optional_spec_reads']} sites", flush=True)
+    print(f"D2 discovery reads added: {summary['d2_discovery_refs']} refs", flush=True)
+    print(f"D3 extend L0/L1 spec-reads: {summary['d3_extend_spec_reads']} refs", flush=True)
+    print(f"D4 stated-column datasets: {summary['d4_stated_column_tasks']} tasks", flush=True)
+    print(f"D5 grounding reads: {summary['d5_grounding_refs']} refs", flush=True)
+    print("D6 read-derived tokens described, F12 assertion active", flush=True)
+    print("D7 extend prompts state the backend surface", flush=True)
+    print("F11 assertion active", flush=True)
     total = len(records)
     if replay != {"oracle_pass": total, "noop_fail": total}:
         raise AssertionError(f"incomplete certification: {replay}")
     print(
-        f"GRID COMPLETE {total}/{total} oracle pass, {total}/{total} noop fail",
+        f"WAVE3 REPAIR2 COMPLETE {total}/{total} oracle pass, "
+        f"{total}/{total} noop fail",
         flush=True,
     )
     return 0

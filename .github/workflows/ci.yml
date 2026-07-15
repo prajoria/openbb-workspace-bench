@@ -38,7 +38,7 @@ jobs:
           uv run python scripts/audits/audit_release_consistency.py
 
       - name: Validate the usage suite
-        run: uv run --extra dev workspace-bench validate --suite enterprise-apps-usage --min-tasks 96
+        run: uv run --extra dev workspace-bench validate --suite enterprise-apps-usage --min-tasks 192
 
       - name: Validate the build-openbb-apps suite
         run: uv run --extra dev workspace-bench validate --suite build-openbb-apps --min-tasks 236

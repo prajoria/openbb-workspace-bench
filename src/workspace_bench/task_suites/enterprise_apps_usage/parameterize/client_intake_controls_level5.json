@@ -1,0 +1,196 @@
+{
+  "id": "client_intake_controls_level5",
+  "category": "single-widget",
+  "difficulty": "level5",
+  "prompt": "Client-intake full reset: on the open Client Intake Controls board, set Financial Entry Form with client_first_name Maya, client_last_name Chen, risk_profile Moderate, add_record True; set Entry Form with client_first_name Noah, client_last_name Patel, risk_profile Balanced, add_record True; set Markdown Widget with Text Input with name Intake Ready; preserve all layout and surrounding content.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Client Intake Controls",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Client Intake Controls",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "review",
+            "name": "Review"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Widget Examples",
+            "widget_id": "form_submit_widget",
+            "widget_uuid": "wave3_client_intake_controls_0",
+            "tab_id": "review",
+            "data_args": {
+              "client_first_name": "Alex",
+              "client_last_name": "Rivera",
+              "risk_profile": "Conservative",
+              "add_record": false
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 40,
+              "h": 12
+            }
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "all_forms",
+            "widget_uuid": "wave3_client_intake_controls_1",
+            "tab_id": "review",
+            "data_args": {
+              "client_first_name": "Taylor",
+              "client_last_name": "Morgan",
+              "risk_profile": "Balanced",
+              "add_record": false
+            },
+            "layout": {
+              "x": 0,
+              "y": 12,
+              "w": 40,
+              "h": 12
+            }
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "markdown_widget_with_text_input",
+            "widget_uuid": "wave3_client_intake_controls_2",
+            "tab_id": "review",
+            "data_args": {
+              "name": "Pending"
+            },
+            "layout": {
+              "x": 0,
+              "y": 24,
+              "w": 40,
+              "h": 12
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "wave3_client_intake_controls_0",
+          "data_args": {
+            "client_first_name": "Maya",
+            "client_last_name": "Chen",
+            "risk_profile": "Moderate",
+            "add_record": true
+          }
+        },
+        "graded_args": [
+          "data_args"
+        ]
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "wave3_client_intake_controls_1",
+          "data_args": {
+            "client_first_name": "Noah",
+            "client_last_name": "Patel",
+            "risk_profile": "Balanced",
+            "add_record": true
+          }
+        },
+        "graded_args": [
+          "data_args"
+        ]
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "wave3_client_intake_controls_2",
+          "data_args": {
+            "name": "Intake Ready"
+          }
+        },
+        "graded_args": [
+          "data_args"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Widget Examples",
+        "widget_id": "form_submit_widget",
+        "data_args": {
+          "client_first_name": "Maya",
+          "client_last_name": "Chen",
+          "risk_profile": "Moderate",
+          "add_record": true
+        }
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "all_forms",
+        "data_args": {
+          "client_first_name": "Noah",
+          "client_last_name": "Patel",
+          "risk_profile": "Balanced",
+          "add_record": true
+        }
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "markdown_widget_with_text_input",
+        "data_args": {
+          "name": "Intake Ready"
+        }
+      }
+    ],
+    "max_turns": 7
+  }
+}

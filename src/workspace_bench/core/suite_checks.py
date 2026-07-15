@@ -119,14 +119,14 @@ BUILD_PARAM_OWNERSHIP = {
 # Job-shaped usage families: a full grid so every level carries the same
 # number of attempts (8 families x 6 levels x 2 spines).
 USAGE_FAMILIES = {
-    "retrieve": (12, (0, 1, 2, 3, 4, 5)),
-    "curate": (12, (0, 1, 2, 3, 4, 5)),
-    "parameterize": (12, (0, 1, 2, 3, 4, 5)),
-    "organize": (12, (0, 1, 2, 3, 4, 5)),
-    "repair": (12, (0, 1, 2, 3, 4, 5)),
-    "platform": (12, (0, 1, 2, 3, 4, 5)),
-    "extend": (12, (0, 1, 2, 3, 4, 5)),
-    "handoff": (12, (0, 1, 2, 3, 4, 5)),
+    "retrieve": (24, (0, 1, 2, 3, 4, 5)),
+    "curate": (24, (0, 1, 2, 3, 4, 5)),
+    "parameterize": (24, (0, 1, 2, 3, 4, 5)),
+    "organize": (24, (0, 1, 2, 3, 4, 5)),
+    "repair": (24, (0, 1, 2, 3, 4, 5)),
+    "platform": (24, (0, 1, 2, 3, 4, 5)),
+    "extend": (24, (0, 1, 2, 3, 4, 5)),
+    "handoff": (24, (0, 1, 2, 3, 4, 5)),
 }
 BUILD_LADDER_FAMILIES = {
     "advanced",
@@ -293,7 +293,7 @@ def usage_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> 
             for task in tasks
             if task.family == family and task.difficulty == f"level{level}"
         )
-        == 2
+        == 4
         for family, (_, levels) in USAGE_FAMILIES.items()
         for level in levels
     )
@@ -316,7 +316,7 @@ def usage_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> 
             expected={family: count for family, (count, _) in USAGE_FAMILIES.items()},
         ),
         "grader_mutation_sensitive": _mutation_suite_passes(tasks, oracle_results),
-        "task_count_96": total == 96,
+        "task_count_192": total == 192,
         "level_counts_equal": len(
             {
                 sum(1 for task in tasks if task.difficulty == f"level{level}")
@@ -324,7 +324,7 @@ def usage_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> 
             }
         )
         == 1,
-        "ladder_cells_two_spines": ladder_ok,
+        "ladder_cells_four_spines": ladder_ok,
         "turn_budget_reference_plus_three": budget_ok,
         "fingerprint_unique": len(set(fingerprints)) == total,
         "all_level_difficulties": all(
