@@ -169,10 +169,7 @@
             "period": "2026Q1"
           }
         },
-        "graded_args": [
-          "origin",
-          "widget_id"
-        ]
+        "optional": true
       }
     ],
     "required_widgets": [

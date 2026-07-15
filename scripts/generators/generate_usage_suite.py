@@ -6149,6 +6149,7 @@ def _build_wave3_retrieve_spine(
                 _call(
                     "get_widget_data",
                     {"origin": backend_name, "widget_id": widget_id, "data_args": data_args},
+                    optional=True,
                     graded_args=("origin", "widget_id"),
                 ),
             ],

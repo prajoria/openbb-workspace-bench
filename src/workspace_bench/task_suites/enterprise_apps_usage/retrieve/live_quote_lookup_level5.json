@@ -155,10 +155,7 @@
             "symbol": "AAPL"
           }
         },
-        "graded_args": [
-          "origin",
-          "widget_id"
-        ]
+        "optional": true
       }
     ],
     "required_widgets": [
