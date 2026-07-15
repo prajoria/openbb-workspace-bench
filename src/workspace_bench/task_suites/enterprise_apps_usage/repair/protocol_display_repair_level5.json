@@ -2,7 +2,7 @@
   "id": "protocol_display_repair_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "Protocol-display backend rebuild: on the open Protocol-display Backend Repair board, refresh Wave Three Protocol Repair so its Protocol Repair Queue table is published through Protocol Repair App on Protocols. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Protocol-display backend rebuild: Wave Three Protocol Repair was lost from the workspace; on the open Protocol-display Backend Repair board, rebuild it from scratch: add a custom backend Wave Three Protocol Repair with a Protocol Repair Queue table, publish Protocol Repair App, and instantiate it with one non-overlapping Protocol Repair Queue placement on Protocols, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -56,43 +56,8 @@
             "name": "Protocols"
           }
         ],
-        "widgets": [
-          {
-            "origin": "Wave Three Protocol Repair",
-            "widget_id": "protocol_repair_queue",
-            "widget_uuid": "protocol_display_repair_custom",
-            "tab_id": "protocols",
-            "layout": {
-              "x": 0,
-              "y": 0,
-              "w": 40,
-              "h": 10
-            }
-          }
-        ]
-      },
-      "custom_backends": [
-        {
-          "backend_id": "backend_005",
-          "name": "Wave Three Protocol Repair",
-          "url": "http://127.0.0.1:9708",
-          "widgets_json": {
-            "protocol_repair_queue": {
-              "name": "Protocol Repair Queue",
-              "type": "table"
-            }
-          },
-          "apps_json": [
-            {
-              "name": "Protocol Repair App",
-              "tabs": {}
-            }
-          ],
-          "warnings": [
-            "missing endpoint and app layout"
-          ]
-        }
-      ]
+        "widgets": []
+      }
     }
   },
   "eval": {
@@ -103,19 +68,27 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
-          "operation": "refresh",
-          "backend_id": "backend_005",
+          "operation": "add",
+          "name": "Wave Three Protocol Repair",
+          "url": "http://127.0.0.1:9708",
           "widgets_json": {
             "protocol_repair_queue": {
               "name": "Protocol Repair Queue",
-              "description": "Wave-1 view for Protocol Repair Queue.",
+              "description": "Rebuilt queue for Protocol-display.",
               "endpoint": "/protocol_repair_queue",
               "type": "table",
               "gridData": {
                 "w": 40,
-                "h": 10
+                "h": 12
               }
             }
           },
@@ -133,13 +106,34 @@
                       "x": 0,
                       "y": 0,
                       "w": 40,
-                      "h": 10
+                      "h": 12
                     }
                   ]
                 }
               }
             }
           ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Protocol Repair App",
+          "dashboard_name": "Protocol-display Restored",
+          "activate": true
         },
         "graded_args": [
           "operation"
@@ -170,6 +164,7 @@
           "protocols"
         ],
         "layout_refs_valid": true,
+        "no_overlaps": true,
         "widgets_on_tab": [
           {
             "tab_id": "protocols",
@@ -178,6 +173,6 @@
         ]
       }
     ],
-    "max_turns": 5
+    "max_turns": 8
   }
 }

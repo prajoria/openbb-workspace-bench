@@ -4442,7 +4442,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: single-widget · specification: -
 
-> Client-intake paired change: on the open Client Intake Controls board, set Financial Entry Form with client_first_name Maya, client_last_name Chen, risk_profile Moderate, add_record True; set Entry Form with client_first_name Noah, client_last_name Patel, risk_profile Balanced, add_record True; preserve the last view.
+> Client-intake paired change: on the open Client Intake Controls board, set Entry Form with client_first_name Noah, client_last_name Patel, risk_profile Balanced, add_record True; set Markdown Widget with Text Input with name Intake Ready; preserve the first view.
 
 - Initial workspace: dashboard "Client Intake Controls"; 1 tab(s): review; 3 seeded widget(s): form_submit_widget({"client_first_name": "Alex", "client_last_name": "Rivera", "risk_profile": "Conservative", "add_record": false}), all_forms({"client_first_name": "Taylor", "client_last_name": "Morgan", "risk_profile": "Balanced", "add_record": false}), markdown_widget_with_text_input({"name": "Pending"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4450,8 +4450,8 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Widget Examples/form_submit_widget` with data_args ⊇ {"client_first_name": "Maya", "client_last_name": "Chen", "risk_profile": "Moderate", "add_record": true} → `missing_widget`
 - **Widget** ≥1× `Getting Started/all_forms` with data_args ⊇ {"client_first_name": "Noah", "client_last_name": "Patel", "risk_profile": "Balanced", "add_record": true} → `missing_widget`
+- **Widget** ≥1× `Getting Started/markdown_widget_with_text_input` with data_args ⊇ {"name": "Intake Ready"} → `missing_widget`
 
 #### `client_intake_controls_level4`
 
@@ -4469,19 +4469,17 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `client_intake_controls_level5`
 
-**level5** · category: single-widget · specification: -
+**level5** · category: platform · specification: -
 
-> Client-intake full reset: on the open Client Intake Controls board, set Financial Entry Form with client_first_name Maya, client_last_name Chen, risk_profile Moderate, add_record True; set Entry Form with client_first_name Noah, client_last_name Patel, risk_profile Balanced, add_record True; set Markdown Widget with Text Input with name Intake Ready; preserve all layout and surrounding content.
+> Client-intake build tuning: add a custom backend Wave Three Intake Tuning with a Intake Control Panel table carrying risk_profile and client_last_name params, publish and instantiate Intake Tuning App on Controls, then set the live Intake Control Panel to risk_profile Moderate, client_last_name Chen. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
-- Initial workspace: dashboard "Client Intake Controls"; 1 tab(s): review; 3 seeded widget(s): form_submit_widget({"client_first_name": "Alex", "client_last_name": "Rivera", "risk_profile": "Conservative", "add_record": false}), all_forms({"client_first_name": "Taylor", "client_last_name": "Morgan", "risk_profile": "Balanced", "add_record": false}), markdown_widget_with_text_input({"name": "Pending"})
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Widget Examples/form_submit_widget` with data_args ⊇ {"client_first_name": "Maya", "client_last_name": "Chen", "risk_profile": "Moderate", "add_record": true} → `missing_widget`
-- **Widget** ≥1× `Getting Started/all_forms` with data_args ⊇ {"client_first_name": "Noah", "client_last_name": "Patel", "risk_profile": "Balanced", "add_record": true} → `missing_widget`
-- **Widget** ≥1× `Getting Started/markdown_widget_with_text_input` with data_args ⊇ {"name": "Intake Ready"} → `missing_widget`
+- **Widget** ≥1× `Wave Three Intake Tuning/intake_control_panel` with data_args ⊇ {"risk_profile": "Moderate", "client_last_name": "Chen"} on tab `controls` → `missing_widget`
 
 #### `crypto_display_controls_level0`
 
@@ -4529,7 +4527,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: single-widget · specification: -
 
-> Crypto-display paired change: on the open Crypto Display Controls board, set Binance OHLC with symbol ethusdt, interval 1m, exchange binancef; set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3; preserve the last view.
+> Crypto-display paired change: on the open Crypto Display Controls board, set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3; set Moving Parameters Example with datePicker1 $currentDate-1d, textBox1 Ready, TrueFalse True, daysPicker1 1; preserve the first view.
 
 - Initial workspace: dashboard "Crypto Display Controls"; 1 tab(s): review; 3 seeded widget(s): html_binance_ohlc({"symbol": "BTCUSDT", "interval": "30m", "exchange": "BinanceUS"}), omni_sql_widget({"prompt": "SELECT * FROM DATA LIMIT 5"}), moving_parameters_example({"datePicker1": "$currentDate-1d", "textBox1": "Hello!", "TrueFalse": true, "daysPicker1": "1"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4537,8 +4535,8 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Widget Examples/html_binance_ohlc` with data_args ⊇ {"symbol": "ethusdt", "interval": "1m", "exchange": "binancef"} → `missing_widget`
 - **Widget** ≥1× `Getting Started/omni_sql_widget` with data_args ⊇ {"prompt": "SELECT * FROM DATA LIMIT 3"} → `missing_widget`
+- **Widget** ≥1× `Widget Examples/moving_parameters_example` with data_args ⊇ {"datePicker1": "$currentDate-1d", "textBox1": "Ready", "TrueFalse": true, "daysPicker1": "1"} → `missing_widget`
 
 #### `crypto_display_controls_level4`
 
@@ -4556,19 +4554,17 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `crypto_display_controls_level5`
 
-**level5** · category: single-widget · specification: -
+**level5** · category: platform · specification: -
 
-> Crypto-display full reset: on the open Crypto Display Controls board, set Binance OHLC with symbol ethusdt, interval 1m, exchange binancef; set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3; set Moving Parameters Example with datePicker1 $currentDate-1d, textBox1 Ready, TrueFalse True, daysPicker1 1; preserve all layout and surrounding content.
+> Crypto-display build tuning: add a custom backend Wave Three Display Tuning with a Display Control Panel table carrying symbol and interval params, publish and instantiate Display Tuning App on Controls, then set the live Display Control Panel to symbol ethusdt, interval 1m. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
-- Initial workspace: dashboard "Crypto Display Controls"; 1 tab(s): review; 3 seeded widget(s): html_binance_ohlc({"symbol": "BTCUSDT", "interval": "30m", "exchange": "BinanceUS"}), omni_sql_widget({"prompt": "SELECT * FROM DATA LIMIT 5"}), moving_parameters_example({"datePicker1": "$currentDate-1d", "textBox1": "Hello!", "TrueFalse": true, "daysPicker1": "1"})
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Widget Examples/html_binance_ohlc` with data_args ⊇ {"symbol": "ethusdt", "interval": "1m", "exchange": "binancef"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/omni_sql_widget` with data_args ⊇ {"prompt": "SELECT * FROM DATA LIMIT 3"} → `missing_widget`
-- **Widget** ≥1× `Widget Examples/moving_parameters_example` with data_args ⊇ {"datePicker1": "$currentDate-1d", "textBox1": "Ready", "TrueFalse": true, "daysPicker1": "1"} → `missing_widget`
+- **Widget** ≥1× `Wave Three Display Tuning/display_control_panel` with data_args ⊇ {"symbol": "ethusdt", "interval": "1m"} on tab `controls` → `missing_widget`
 
 #### `crypto_document_controls_level0`
 
@@ -4644,19 +4640,17 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `crypto_document_controls_level5`
 
-**level5** · category: single-widget · specification: -
+**level5** · category: platform · specification: -
 
-> Finish the existing views on the open Crypto Document Controls board. Set Whitepapers to solana.pdf from l1, CoinDesk News to 8 in EN, and Multi PDF Viewer - Base64 to Bitcoin Whitepaper. Preserve all layout and other workspace content.
+> Document-controls build tuning: add a custom backend Wave Two Document Tuning with a Document Control Panel table carrying filenames and category params, publish and instantiate Document Tuning App on Controls, then set the live Document Control Panel to filenames solana.pdf, category l1. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
-- Initial workspace: dashboard "Crypto Document Controls"; 1 tab(s): review; 3 seeded widget(s): whitepapers({"filenames": "bitcoin.pdf", "category": "all"}), coindesk_news({"limit": 10, "lang": "EN"}), multi_pdf_base64({"pdf_name": "Bitcoin Whitepaper"})
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": "solana.pdf", "category": "l1"} → `missing_widget`
-- **Widget** ≥1× `Widget Examples/coindesk_news` with data_args ⊇ {"limit": 8, "lang": "EN"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/multi_pdf_base64` with data_args ⊇ {"pdf_name": "Bitcoin Whitepaper"} → `missing_widget`
+- **Widget** ≥1× `Wave Two Document Tuning/document_control_panel` with data_args ⊇ {"filenames": "solana.pdf", "category": "l1"} on tab `controls` → `missing_widget`
 
 #### `technology_decision_inputs_level0`
 
@@ -4732,19 +4726,17 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `technology_decision_inputs_level5`
 
-**level5** · category: single-widget · specification: -
+**level5** · category: platform · specification: -
 
-> Finish the rebuild on the open Technology Decision Inputs board using only its existing views. Set Car Manufacturer Performance to TSLA and 2024, Upcoming Earnings to Technology, AAPL, and QTD, and Trade Ideas to Flagship Long/Short and QTD. Preserve all layout and surrounding content.
+> Decision-inputs build tuning: add a custom backend Wave One Decision Tuning with a Decision Input Panel table carrying company and period params, publish and instantiate Decision Tuning App on Controls, then set the live Decision Input Panel to company TSLA, period QTD. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
-- Initial workspace: dashboard "Technology Decision Inputs"; 1 tab(s): review; 3 seeded widget(s): company_performance({"company": "TM", "year": 2024}), earnings_estimates_monitor_calendar_upcoming_earnings({"sector": "Healthcare", "ticker": "LLY", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TSLA", "year": 2024} → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/earnings_estimates_monitor_calendar_upcoming_earnings` with data_args ⊇ {"sector": "Technology", "ticker": "AAPL", "period": "QTD"} → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "QTD"} → `missing_widget`
+- **Widget** ≥1× `Wave One Decision Tuning/decision_input_panel` with data_args ⊇ {"company": "TSLA", "period": "QTD"} on tab `controls` → `missing_widget`
 
 ### platform (24)
 
@@ -5174,9 +5166,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: repair · specification: -
 
-> On the open Custom Detail Repair board, refresh the authored Wave Two Detail Repair backend so Manufacturer Detail Queue serves /manufacturer-details and Detail Repair App has one non-overlapping placement on Details. Keep the open view and all other content. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Detail-queue backend rebuild: Wave Two Detail Repair was lost from the workspace; on the open Custom Detail Repair board, rebuild it from scratch: add a custom backend Wave Two Detail Repair with a Manufacturer Detail Queue table, publish Detail Repair App, and instantiate it with one non-overlapping Manufacturer Detail Queue placement on Details, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
-- Initial workspace: dashboard "Custom Detail Repair"; 1 tab(s): details; 1 seeded widget(s): manufacturer_detail_queue({})
+- Initial workspace: dashboard "Custom Detail Repair"; 1 tab(s): details
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
@@ -5262,9 +5254,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: repair · specification: -
 
-> On the open Custom NAV Repair Staging board, refresh the authored Wave One NAV Repair backend so NAV Exception Queue serves /nav-exceptions and NAV Repair App has one non-overlapping placement on Exceptions. Keep the open view and all other workspace content. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> NAV-exception backend rebuild: Wave One NAV Repair was lost from the workspace; on the open Custom NAV Repair Staging board, rebuild it from scratch: add a custom backend Wave One NAV Repair with a NAV Exception Queue table, publish NAV Repair App, and instantiate it with one non-overlapping NAV Exception Queue placement on Exceptions, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
-- Initial workspace: dashboard "Custom NAV Repair Staging"; 1 tab(s): exceptions; 1 seeded widget(s): nav_exception_queue({})
+- Initial workspace: dashboard "Custom NAV Repair Staging"; 1 tab(s): exceptions
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
@@ -5351,9 +5343,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: repair · specification: -
 
-> Protocol-display backend rebuild: on the open Protocol-display Backend Repair board, refresh Wave Three Protocol Repair so its Protocol Repair Queue table is published through Protocol Repair App on Protocols. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Protocol-display backend rebuild: Wave Three Protocol Repair was lost from the workspace; on the open Protocol-display Backend Repair board, rebuild it from scratch: add a custom backend Wave Three Protocol Repair with a Protocol Repair Queue table, publish Protocol Repair App, and instantiate it with one non-overlapping Protocol Repair Queue placement on Protocols, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
-- Initial workspace: dashboard "Protocol-display Backend Repair"; 1 tab(s): protocols; 1 seeded widget(s): protocol_repair_queue({})
+- Initial workspace: dashboard "Protocol-display Backend Repair"; 1 tab(s): protocols
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
@@ -5440,9 +5432,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: repair · specification: -
 
-> Vendor-freshness backend rebuild: on the open Vendor-freshness Backend Repair board, refresh Wave Three Vendor Repair so its Vendor Repair Queue table is published through Vendor Repair App on Incidents. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Vendor-freshness backend rebuild: Wave Three Vendor Repair was lost from the workspace; on the open Vendor-freshness Backend Repair board, rebuild it from scratch: add a custom backend Wave Three Vendor Repair with a Vendor Repair Queue table, publish Vendor Repair App, and instantiate it with one non-overlapping Vendor Repair Queue placement on Incidents, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
-- Initial workspace: dashboard "Vendor-freshness Backend Repair"; 1 tab(s): incidents; 1 seeded widget(s): vendor_repair_queue({})
+- Initial workspace: dashboard "Vendor-freshness Backend Repair"; 1 tab(s): incidents
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 

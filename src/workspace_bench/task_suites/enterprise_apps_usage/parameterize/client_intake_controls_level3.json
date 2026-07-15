@@ -2,7 +2,7 @@
   "id": "client_intake_controls_level3",
   "category": "single-widget",
   "difficulty": "level3",
-  "prompt": "Client-intake paired change: on the open Client Intake Controls board, set Financial Entry Form with client_first_name Maya, client_last_name Chen, risk_profile Moderate, add_record True; set Entry Form with client_first_name Noah, client_last_name Patel, risk_profile Balanced, add_record True; preserve the last view.",
+  "prompt": "Client-intake paired change: on the open Client Intake Controls board, set Entry Form with client_first_name Noah, client_last_name Patel, risk_profile Balanced, add_record True; set Markdown Widget with Text Input with name Intake Ready; preserve the first view.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -117,21 +117,6 @@
       {
         "tool": "update_widget",
         "args": {
-          "widget_uuid": "wave3_client_intake_controls_0",
-          "data_args": {
-            "client_first_name": "Maya",
-            "client_last_name": "Chen",
-            "risk_profile": "Moderate",
-            "add_record": true
-          }
-        },
-        "graded_args": [
-          "data_args"
-        ]
-      },
-      {
-        "tool": "update_widget",
-        "args": {
           "widget_uuid": "wave3_client_intake_controls_1",
           "data_args": {
             "client_first_name": "Noah",
@@ -143,19 +128,21 @@
         "graded_args": [
           "data_args"
         ]
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "wave3_client_intake_controls_2",
+          "data_args": {
+            "name": "Intake Ready"
+          }
+        },
+        "graded_args": [
+          "data_args"
+        ]
       }
     ],
     "required_widgets": [
-      {
-        "origin": "Widget Examples",
-        "widget_id": "form_submit_widget",
-        "data_args": {
-          "client_first_name": "Maya",
-          "client_last_name": "Chen",
-          "risk_profile": "Moderate",
-          "add_record": true
-        }
-      },
       {
         "origin": "Getting Started",
         "widget_id": "all_forms",
@@ -164,6 +151,13 @@
           "client_last_name": "Patel",
           "risk_profile": "Balanced",
           "add_record": true
+        }
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "markdown_widget_with_text_input",
+        "data_args": {
+          "name": "Intake Ready"
         }
       }
     ],

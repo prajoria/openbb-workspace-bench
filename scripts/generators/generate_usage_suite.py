@@ -1317,6 +1317,219 @@ def _parameter_stage() -> JsonDict:
     )
 
 
+def _parameterize_build_level5(
+    *,
+    spine: str,
+    title: str,
+    backend_name: str,
+    widget_name: str,
+    app_name: str,
+    tab_name: str,
+    url: str,
+    param_args: JsonDict,
+) -> TaskRecord:
+    """Level5 build for parameterize spines: author and tune a param widget."""
+
+    widget_id = _snake_case(widget_name)
+    tab_id = _snake_case(tab_name)
+    params = [
+        {
+            "paramName": key,
+            "type": "text",
+            "label": key.replace("_", " ").title(),
+            "value": value,
+            "options": [{"label": str(value), "value": value}],
+        }
+        for key, value in param_args.items()
+    ]
+    widget_def = _widget_def(
+        widget_name,
+        f"/{widget_id}",
+        description=f"Authored tuning table for {title}.",
+        params=params,
+        grid=(40, 10),
+    )
+    app_def = _app(
+        app_name,
+        [(tab_id, tab_name, [(widget_id, 0, 0, 40, 10, None)])],
+    )
+    args_words = ", ".join(f"{key} {value}" for key, value in param_args.items())
+    return _record(
+        "parameterize",
+        spine,
+        5,
+        "platform",
+        (
+            f"{title} build tuning: add a custom backend {backend_name} with a "
+            f"{widget_name} table carrying {' and '.join(param_args)} params, "
+            f"publish and instantiate {app_name} on {tab_name}, then set the live "
+            f"{widget_name} to {args_words}. Follow the widgets manifest specification. "
+            "Widget ids are the snake_case of widget names; tab ids are the "
+            "snake_case of tab names."
+        ),
+        [
+            _call(
+                "read_workspace_resource",
+                {"uri": "openbb://workspace/specs/widgets-json"},
+                optional=True,
+            ),
+            _call(
+                "manage_backends",
+                {
+                    "operation": "add",
+                    "name": backend_name,
+                    "url": url,
+                    "widgets_json": {widget_id: widget_def},
+                    "apps_json": [app_def],
+                },
+                graded_args=("operation", "name"),
+            ),
+            _call(
+                "manage_apps",
+                {
+                    "operation": "instantiate",
+                    "backend_id": "backend_005",
+                    "app_name": app_name,
+                    "dashboard_name": f"{title} Tuned",
+                    "activate": True,
+                },
+                graded_args=("operation",),
+            ),
+            _call(
+                "update_widget",
+                {"widget_id": widget_id, "data_args": param_args},
+                graded_args=("data_args",),
+            ),
+        ],
+        targets=(_custom_target(backend_name, widget_id, widget_name),),
+        policies=(
+            PolicyMapping(
+                "widgets manifest specification",
+                ("openbb://workspace/specs/widgets-json",),
+            ),
+        ),
+        pinned_widget_args={(backend_name, widget_id): frozenset(param_args)},
+        required_widgets=[
+            _required_widget(backend_name, widget_id, param_args, tab_id=tab_id)
+        ],
+        required_widget_defs=[
+            {
+                "backend_name": backend_name,
+                "widget_id": widget_id,
+                "expect": {"type": "table"},
+            }
+        ],
+        required_app_defs=[
+            {
+                "backend_name": backend_name,
+                "name_contains": app_name,
+                "tabs_include": [tab_id],
+                "layout_refs_valid": True,
+                "widgets_on_tab": [{"tab_id": tab_id, "widget_id": widget_id}],
+            }
+        ],
+    )
+
+
+def _repair_rebuild_level5(
+    *,
+    spine: str,
+    title: str,
+    board_name: str,
+    backend_name: str,
+    widget_name: str,
+    app_name: str,
+    tab_name: str,
+    url: str,
+) -> TaskRecord:
+    """Level5 build for repair spines: re-author a lost backend from scratch."""
+
+    widget_id = _snake_case(widget_name)
+    tab_id = _snake_case(tab_name)
+    widget_def = _widget_def(
+        widget_name,
+        f"/{widget_id}",
+        description=f"Rebuilt queue for {title}.",
+        grid=(40, 12),
+    )
+    app_def = _app(
+        app_name,
+        [(tab_id, tab_name, [(widget_id, 0, 0, 40, 12, None)])],
+    )
+    stage = _staged_dashboard(board_name, [], tabs=[{"id": tab_id, "name": tab_name}])
+    return _record(
+        "repair",
+        spine,
+        5,
+        "repair",
+        (
+            f"{title} backend rebuild: {backend_name} was lost from the workspace; "
+            f"on the open {board_name} board, rebuild it from scratch: add a custom "
+            f"backend {backend_name} with a {widget_name} table, publish {app_name}, "
+            f"and instantiate it with one non-overlapping {widget_name} placement on "
+            f"{tab_name}, keeping all other workspace content. Follow the widgets "
+            "manifest specification. Widget ids are the snake_case of widget names; "
+            "tab ids are the snake_case of tab names."
+        ),
+        [
+            _call(
+                "read_workspace_resource",
+                {"uri": "openbb://workspace/specs/widgets-json"},
+                optional=True,
+            ),
+            _call(
+                "manage_backends",
+                {
+                    "operation": "add",
+                    "name": backend_name,
+                    "url": url,
+                    "widgets_json": {widget_id: widget_def},
+                    "apps_json": [app_def],
+                },
+                graded_args=("operation", "name"),
+            ),
+            _call(
+                "manage_apps",
+                {
+                    "operation": "instantiate",
+                    "backend_id": "backend_005",
+                    "app_name": app_name,
+                    "dashboard_name": f"{title} Restored",
+                    "activate": True,
+                },
+                graded_args=("operation",),
+            ),
+        ],
+        targets=(_custom_target(backend_name, widget_id, widget_name),),
+        policies=(
+            PolicyMapping(
+                "widgets manifest specification",
+                ("openbb://workspace/specs/widgets-json",),
+            ),
+        ),
+        required_widgets=[_required_widget(backend_name, widget_id, tab_id=tab_id)],
+        required_widget_defs=[
+            {
+                "backend_name": backend_name,
+                "widget_id": widget_id,
+                "expect": {"type": "table"},
+            }
+        ],
+        required_app_defs=[
+            {
+                "backend_name": backend_name,
+                "name_contains": app_name,
+                "tabs_include": [tab_id],
+                "layout_refs_valid": True,
+                "no_overlaps": True,
+                "widgets_on_tab": [{"tab_id": tab_id, "widget_id": widget_id}],
+            }
+        ],
+        selected_dashboard=board_name,
+        initial_state=stage,
+    )
+
+
 def _build_parameterize_tasks() -> list[TaskRecord]:
     tasks: list[TaskRecord] = []
     spine = "technology_decision_inputs"
@@ -1489,58 +1702,15 @@ def _build_parameterize_tasks() -> list[TaskRecord]:
         )
     )
     tasks.append(
-        _record(
-            "parameterize",
-            spine,
-            5,
-            "single-widget",
-            (
-                "Finish the rebuild on the open Technology Decision Inputs board using "
-                "only its existing views. Set Car Manufacturer Performance to TSLA and "
-                "2024, Upcoming Earnings to Technology, AAPL, and QTD, and Trade Ideas to "
-                "Flagship Long/Short and QTD. Preserve all layout and surrounding content."
-            ),
-            [
-                _call(
-                    "update_widget",
-                    {
-                        "widget_id": MANUFACTURER_WIDGET,
-                        "data_args": {"company": "TSLA", "year": 2024},
-                    },
-                    graded_args=("data_args",),
-                ),
-                _call(
-                    "update_widget",
-                    {"widget_id": EARNINGS_WIDGET, "data_args": earnings_args},
-                    graded_args=("data_args",),
-                ),
-                _call(
-                    "update_widget",
-                    {"widget_id": TRADE_IDEAS_WIDGET, "data_args": trade_args},
-                    graded_args=("data_args",),
-                ),
-            ],
-            targets=(
-                _manufacturer_target(staged=True),
-                _earnings_target(staged=True),
-                _trade_target(staged=True),
-            ),
-            pinned_widget_args={
-                (GETTING_STARTED, MANUFACTURER_WIDGET): frozenset({"company", "year"}),
-                (STARK, EARNINGS_WIDGET): frozenset({"sector", "ticker", "period"}),
-                (STARK, TRADE_IDEAS_WIDGET): frozenset({"fund", "period"}),
-            },
-            required_widgets=[
-                _required_widget(
-                    GETTING_STARTED,
-                    MANUFACTURER_WIDGET,
-                    {"company": "TSLA", "year": 2024},
-                ),
-                _required_widget(STARK, EARNINGS_WIDGET, earnings_args),
-                _required_widget(STARK, TRADE_IDEAS_WIDGET, trade_args),
-            ],
-            selected_dashboard="Technology Decision Inputs",
-            initial_state=stage,
+        _parameterize_build_level5(
+            spine=spine,
+            title="Decision-inputs",
+            backend_name="Wave One Decision Tuning",
+            widget_name="Decision Input Panel",
+            app_name="Decision Tuning App",
+            tab_name="Controls",
+            url="http://127.0.0.1:9721",
+            param_args={"company": "TSLA", "period": "QTD"},
         )
     )
     return tasks
@@ -2143,117 +2313,16 @@ def _build_repair_tasks() -> list[TaskRecord]:
         )
     )
 
-    backend_name = "Wave One NAV Repair"
-    widget_name = "NAV Exception Queue"
-    widget_id = "nav_exception_queue"
-    app_name = "NAV Repair App"
-    fixed_widget = _widget_def(
-        widget_name,
-        "/nav-exceptions",
-        description="Refreshed NAV exception queue.",
-    )
-    fixed_app = _app(
-        app_name,
-        [("exceptions", "Exceptions", [(widget_id, 0, 0, 40, 12, None)])],
-    )
-    broken_widget = {
-        "name": widget_name,
-        "description": "Broken authored NAV queue.",
-        "type": "table",
-    }
-    broken_app = {
-        "name": app_name,
-        "tabs": {
-            "exceptions": {
-                "id": "exceptions",
-                "name": "Exceptions",
-                "layout": [
-                    {"i": widget_id, "x": 0, "y": 0, "w": 30, "h": 12},
-                    {"i": widget_id, "x": 20, "y": 0, "w": 20, "h": 12},
-                ],
-            }
-        },
-    }
-    custom_state = _repair_stage(
-        [
-            {
-                "origin": backend_name,
-                "widget_id": widget_id,
-                "widget_uuid": "custom_nav_queue",
-                "tab_id": "exceptions",
-                "layout": {"x": 0, "y": 0, "w": 40, "h": 12},
-            }
-        ],
-        name="Custom NAV Repair Staging",
-    )
-    custom_state["custom_backends"] = [
-        {
-            "backend_id": "backend_005",
-            "name": backend_name,
-            "url": "http://127.0.0.1:9504",
-            "widgets_json": {widget_id: broken_widget},
-            "apps_json": [broken_app],
-            "warnings": ["missing endpoint and overlapping app layout"],
-        }
-    ]
     tasks.append(
-        _record(
-            "repair",
-            spine,
-            5,
-            "repair",
-            (
-                "On the open Custom NAV Repair Staging board, refresh the authored Wave One "
-                "NAV Repair backend so NAV Exception Queue serves /nav-exceptions and NAV "
-                "Repair App has one non-overlapping placement on Exceptions. Keep the open "
-                "view and all other workspace content. Widget ids are the snake_case of "
-                "widget names; tab ids are the snake_case of tab names."
-            ),
-            [
-                _call(
-                    "manage_backends",
-                    {
-                        "operation": "refresh",
-                        "backend_id": "backend_005",
-                        "widgets_json": {widget_id: fixed_widget},
-                        "apps_json": [fixed_app],
-                    },
-                    graded_args=("operation",),
-                )
-            ],
-            targets=(
-                _custom_target(
-                    backend_name,
-                    widget_id,
-                    widget_name,
-                    staged=True,
-                ),
-            ),
-            required_widgets=[
-                _required_widget(
-                    backend_name,
-                    widget_id,
-                    tab_id="exceptions",
-                )
-            ],
-            required_widget_defs=[
-                {
-                    "backend_name": backend_name,
-                    "widget_id": widget_id,
-                    "expect": {},
-                }
-            ],
-            required_app_defs=[
-                {
-                    "backend_name": backend_name,
-                    "name_contains": app_name,
-                    "tabs_include": ["exceptions"],
-                    "layout_refs_valid": True,
-                    "no_overlaps": True,
-                }
-            ],
-            selected_dashboard="Custom NAV Repair Staging",
-            initial_state=custom_state,
+        _repair_rebuild_level5(
+            spine=spine,
+            title="NAV-exception",
+            board_name="Custom NAV Repair Staging",
+            backend_name="Wave One NAV Repair",
+            widget_name="NAV Exception Queue",
+            app_name="NAV Repair App",
+            tab_name="Exceptions",
+            url="http://127.0.0.1:9504",
         )
     )
     return tasks
@@ -4193,63 +4262,16 @@ def _build_parameterize_wave2_tasks() -> list[TaskRecord]:
             initial_state=stage,
         )
     )
-    pdf_args = {"pdf_name": "Bitcoin Whitepaper"}
     tasks.append(
-        _record(
-            "parameterize",
-            spine,
-            5,
-            "single-widget",
-            (
-                "Finish the existing views on the open Crypto Document Controls board. "
-                "Set Whitepapers to solana.pdf from l1, CoinDesk News to 8 in EN, and Multi "
-                "PDF Viewer - Base64 to Bitcoin Whitepaper. Preserve all layout and other "
-                "workspace content."
-            ),
-            [
-                _call(
-                    "update_widget",
-                    {
-                        "widget_id": WHITEPAPERS_WIDGET,
-                        "data_args": {"filenames": "solana.pdf", "category": "l1"},
-                    },
-                    graded_args=("data_args",),
-                ),
-                _call(
-                    "update_widget",
-                    {
-                        "widget_id": COINDESK_WIDGET,
-                        "data_args": {"limit": 8, "lang": "EN"},
-                    },
-                    graded_args=("data_args",),
-                ),
-                _call(
-                    "update_widget",
-                    {"widget_id": MULTI_PDF_WIDGET, "data_args": pdf_args},
-                    graded_args=("data_args",),
-                ),
-            ],
-            targets=(white_target, news_target, pdf_target),
-            pinned_widget_args={
-                (WIDGET_EXAMPLES, WHITEPAPERS_WIDGET): frozenset({"filenames", "category"}),
-                (WIDGET_EXAMPLES, COINDESK_WIDGET): frozenset({"limit", "lang"}),
-                (GETTING_STARTED, MULTI_PDF_WIDGET): frozenset(pdf_args),
-            },
-            required_widgets=[
-                _required_widget(
-                    WIDGET_EXAMPLES,
-                    WHITEPAPERS_WIDGET,
-                    {"filenames": "solana.pdf", "category": "l1"},
-                ),
-                _required_widget(
-                    WIDGET_EXAMPLES,
-                    COINDESK_WIDGET,
-                    {"limit": 8, "lang": "EN"},
-                ),
-                _required_widget(GETTING_STARTED, MULTI_PDF_WIDGET, pdf_args),
-            ],
-            selected_dashboard="Crypto Document Controls",
-            initial_state=stage,
+        _parameterize_build_level5(
+            spine=spine,
+            title="Document-controls",
+            backend_name="Wave Two Document Tuning",
+            widget_name="Document Control Panel",
+            app_name="Document Tuning App",
+            tab_name="Controls",
+            url="http://127.0.0.1:9722",
+            param_args={"filenames": "solana.pdf", "category": "l1"},
         )
     )
     return tasks
@@ -4811,101 +4833,16 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
         )
     )
 
-    backend_name = "Wave Two Detail Repair"
-    widget_name = "Manufacturer Detail Queue"
-    widget_id = "manufacturer_detail_queue"
-    app_name = "Detail Repair App"
-    fixed_widget = _widget_def(
-        widget_name,
-        "/manufacturer-details",
-        description="Refreshed manufacturer detail queue.",
-    )
-    fixed_app = _app(
-        app_name,
-        [("details", "Details", [(widget_id, 0, 0, 40, 12, None)])],
-    )
-    broken_widget = {"name": widget_name, "description": "Broken detail queue.", "type": "table"}
-    broken_app = {
-        "name": app_name,
-        "tabs": {
-            "details": {
-                "id": "details",
-                "name": "Details",
-                "layout": [
-                    {"i": widget_id, "x": 0, "y": 0, "w": 30, "h": 12},
-                    {"i": widget_id, "x": 20, "y": 0, "w": 20, "h": 12},
-                ],
-            }
-        },
-    }
-    custom_state = _manufacturer_repair_stage(
-        [
-            {
-                "origin": backend_name,
-                "widget_id": widget_id,
-                "widget_uuid": "custom_detail_queue",
-                "tab_id": "details",
-                "layout": {"x": 0, "y": 0, "w": 40, "h": 12},
-            }
-        ],
-        name="Custom Detail Repair",
-    )
-    custom_state["custom_backends"] = [
-        {
-            "backend_id": "backend_005",
-            "name": backend_name,
-            "url": "http://127.0.0.1:9604",
-            "widgets_json": {widget_id: broken_widget},
-            "apps_json": [broken_app],
-            "warnings": ["missing endpoint and overlapping app layout"],
-        }
-    ]
     tasks.append(
-        _record(
-            "repair",
-            spine,
-            5,
-            "repair",
-            (
-                "On the open Custom Detail Repair board, refresh the authored Wave Two "
-                "Detail Repair backend so Manufacturer Detail Queue serves "
-                "/manufacturer-details and Detail Repair App has one non-overlapping "
-                "placement on Details. Keep the open view and all other content. Widget "
-                "ids are the snake_case of widget names; tab ids are the snake_case of tab "
-                "names."
-            ),
-            [
-                _call(
-                    "manage_backends",
-                    {
-                        "operation": "refresh",
-                        "backend_id": "backend_005",
-                        "widgets_json": {widget_id: fixed_widget},
-                        "apps_json": [fixed_app],
-                    },
-                    graded_args=("operation",),
-                )
-            ],
-            targets=(_custom_target(backend_name, widget_id, widget_name, staged=True),),
-            required_widgets=[_required_widget(backend_name, widget_id, tab_id="details")],
-            required_widget_defs=[
-                {
-                    "backend_name": backend_name,
-                    "widget_id": widget_id,
-                    "expect": {},
-                }
-            ],
-            required_app_defs=[
-                {
-                    "backend_name": backend_name,
-                    "name_contains": app_name,
-                    "tabs_include": ["details"],
-                    "layout_refs_valid": True,
-                    "no_overlaps": True,
-                }
-            ],
-            selected_dashboard="Custom Detail Repair",
-            initial_state=custom_state,
+        _repair_rebuild_level5(
+            spine=spine,
+            title="Detail-queue",
+            board_name="Custom Detail Repair",
+            backend_name="Wave Two Detail Repair",
+            widget_name="Manufacturer Detail Queue",
+            app_name="Detail Repair App",
+            tab_name="Details",
+            url="http://127.0.0.1:9604",
         )
     )
     return tasks
@@ -6577,6 +6514,11 @@ def _build_wave3_parameterize_spine(
     governance: GovernanceSpec,
     governed_index: int,
     governed_args: JsonDict,
+    build_backend: str,
+    build_widget: str,
+    build_app: str,
+    build_url: str,
+    build_args: JsonDict,
 ) -> list[TaskRecord]:
     stage = _wave3_stage(board_name, targets, initial_args)
     uuids = tuple(f"wave3_{_snake_case(board_name)}_{index}" for index in range(len(targets)))
@@ -6614,7 +6556,8 @@ def _build_wave3_parameterize_spine(
             )
         )
 
-    pair = targets[:2]
+    pair = targets[1:]
+    pair_args = final_args[1:]
     tasks.append(
         _record(
             "parameterize",
@@ -6623,22 +6566,22 @@ def _build_wave3_parameterize_spine(
             "single-widget",
             (
                 f"{title} paired change: on the open {board_name} board, set "
-                f"{pair[0].display_name} with {_wave3_args_words(final_args[0])}; set "
-                f"{pair[1].display_name} with {_wave3_args_words(final_args[1])}; preserve "
-                "the last view."
+                f"{pair[0].display_name} with {_wave3_args_words(pair_args[0])}; set "
+                f"{pair[1].display_name} with {_wave3_args_words(pair_args[1])}; preserve "
+                "the first view."
             ),
             [
-                _wave3_update_call(uuids[0], final_args[0]),
-                _wave3_update_call(uuids[1], final_args[1]),
+                _wave3_update_call(uuids[1], pair_args[0]),
+                _wave3_update_call(uuids[2], pair_args[1]),
             ],
             targets=pair,
             pinned_widget_args={
                 (target.origin, target.widget_id): frozenset(args)
-                for target, args in zip(pair, final_args[:2], strict=True)
+                for target, args in zip(pair, pair_args, strict=True)
             },
             required_widgets=[
                 _required_widget(target.origin, target.widget_id, args)
-                for target, args in zip(pair, final_args[:2], strict=True)
+                for target, args in zip(pair, pair_args, strict=True)
             ],
             selected_dashboard=board_name,
             initial_state=stage,
@@ -6680,34 +6623,15 @@ def _build_wave3_parameterize_spine(
     )
 
     tasks.append(
-        _record(
-            "parameterize",
-            spine,
-            5,
-            "single-widget",
-            (
-                f"{title} full reset: on the open {board_name} board, set "
-                + "; set ".join(
-                    f"{target.display_name} with {_wave3_args_words(args)}"
-                    for target, args in zip(targets, final_args, strict=True)
-                )
-                + "; preserve all layout and surrounding content."
-            ),
-            [
-                _wave3_update_call(widget_uuid, args)
-                for widget_uuid, args in zip(uuids, final_args, strict=True)
-            ],
-            targets=targets,
-            pinned_widget_args={
-                (target.origin, target.widget_id): frozenset(args)
-                for target, args in zip(targets, final_args, strict=True)
-            },
-            required_widgets=[
-                _required_widget(target.origin, target.widget_id, args)
-                for target, args in zip(targets, final_args, strict=True)
-            ],
-            selected_dashboard=board_name,
-            initial_state=stage,
+        _parameterize_build_level5(
+            spine=spine,
+            title=title,
+            backend_name=build_backend,
+            widget_name=build_widget,
+            app_name=build_app,
+            tab_name="Controls",
+            url=build_url,
+            param_args=build_args,
         )
     )
     return tasks
@@ -6811,6 +6735,11 @@ def _build_wave3_parameterize_tasks() -> list[TaskRecord]:
             ),
             governed_index=0,
             governed_args=client_final[0],
+            build_backend="Wave Three Intake Tuning",
+            build_widget="Intake Control Panel",
+            build_app="Intake Tuning App",
+            build_url="http://127.0.0.1:9723",
+            build_args={"risk_profile": "Moderate", "client_last_name": "Chen"},
         ),
         *_build_wave3_parameterize_spine(
             spine="crypto_display_controls",
@@ -6827,6 +6756,11 @@ def _build_wave3_parameterize_tasks() -> list[TaskRecord]:
             ),
             governed_index=1,
             governed_args=governed_sql,
+            build_backend="Wave Three Display Tuning",
+            build_widget="Display Control Panel",
+            build_app="Display Tuning App",
+            build_url="http://127.0.0.1:9724",
+            build_args={"symbol": "ethusdt", "interval": "1m"},
         ),
     ]
 
@@ -7311,74 +7245,16 @@ def _build_wave3_repair_spine(
         )
     )
 
-    widget_id = _snake_case(widget_name)
-    tab_id = _snake_case(tab_name)
-    fixed_widget = _widget_def(widget_name, f"/{widget_id}", grid=(40, 10))
-    fixed_app = _app(app_name, [(tab_id, tab_name, [(widget_id, 0, 0, 40, 10, None)])])
-    custom_board = f"{title} Backend Repair"
-    custom_state = _staged_dashboard(
-        custom_board,
-        [
-            {
-                "origin": backend_name,
-                "widget_id": widget_id,
-                "widget_uuid": f"{spine}_custom",
-                "tab_id": tab_id,
-                "layout": {"x": 0, "y": 0, "w": 40, "h": 10},
-            }
-        ],
-        tabs=[{"id": tab_id, "name": tab_name}],
-    )
-    custom_state["custom_backends"] = [
-        {
-            "backend_id": "backend_005",
-            "name": backend_name,
-            "url": url,
-            "widgets_json": {widget_id: {"name": widget_name, "type": "table"}},
-            "apps_json": [{"name": app_name, "tabs": {}}],
-            "warnings": ["missing endpoint and app layout"],
-        }
-    ]
     tasks.append(
-        _record(
-            "repair",
-            spine,
-            5,
-            "repair",
-            (
-                f"{title} backend rebuild: on the open {custom_board} board, refresh "
-                f"{backend_name} so its {widget_name} table is published through {app_name} "
-                f"on {tab_name}. Widget ids are the snake_case of widget names; tab ids are "
-                "the snake_case of tab names."
-            ),
-            [
-                _call(
-                    "manage_backends",
-                    {
-                        "operation": "refresh",
-                        "backend_id": "backend_005",
-                        "widgets_json": {widget_id: fixed_widget},
-                        "apps_json": [fixed_app],
-                    },
-                    graded_args=("operation",),
-                )
-            ],
-            targets=(_custom_target(backend_name, widget_id, widget_name, staged=True),),
-            required_widgets=[_required_widget(backend_name, widget_id, tab_id=tab_id)],
-            required_widget_defs=[
-                {"backend_name": backend_name, "widget_id": widget_id, "expect": {"type": "table"}}
-            ],
-            required_app_defs=[
-                {
-                    "backend_name": backend_name,
-                    "name_contains": app_name,
-                    "tabs_include": [tab_id],
-                    "layout_refs_valid": True,
-                    "widgets_on_tab": [{"tab_id": tab_id, "widget_id": widget_id}],
-                }
-            ],
-            selected_dashboard=custom_board,
-            initial_state=custom_state,
+        _repair_rebuild_level5(
+            spine=spine,
+            title=title,
+            board_name=f"{title} Backend Repair",
+            backend_name=backend_name,
+            widget_name=widget_name,
+            app_name=app_name,
+            tab_name=tab_name,
+            url=url,
         )
     )
     return tasks
@@ -8831,6 +8707,25 @@ def _assert_f12(records: list[TaskRecord]) -> None:
                 )
 
 
+def _assert_level5_builds(records: list[TaskRecord]) -> None:
+    """Level5 = build: every level5 task must author widgets_json and grade it."""
+
+    for record in records:
+        payload = record.payload
+        if payload["difficulty"] != "level5":
+            continue
+        evaluation = payload["eval"]
+        authored = any(
+            call["tool"] == "manage_backends"
+            and not call.get("optional")
+            and call.get("args", {}).get("operation") == "add"
+            and isinstance(call.get("args", {}).get("widgets_json"), dict)
+            for call in evaluation["required_tools"]
+        )
+        if not authored or not evaluation.get("required_widget_defs"):
+            raise AssertionError(f"level5 without authored build: {payload['id']}")
+
+
 def _assert_l1_l5(records: list[TaskRecord]) -> None:
     """Assert the wave-2 learned rules across both waves."""
 
@@ -9178,13 +9073,16 @@ def _assert_wave3_requirements(
     wave3_coverage = _graded_catalog_targets(wave3_records)
     whole_coverage = _graded_catalog_targets(records)
     expected_legacy = {
-        GETTING_STARTED: 7,
+        GETTING_STARTED: 6,
         WIDGET_EXAMPLES: 3,
         STARK: 3,
         DALOOPA: 4,
     }
     if {origin: len(ids) for origin, ids in legacy_coverage.items()} != expected_legacy:
-        raise AssertionError("pre-wave3 coverage baseline changed")
+        raise AssertionError(
+            "pre-wave3 coverage baseline changed: "
+            f"{ {origin: len(ids) for origin, ids in legacy_coverage.items()} }"
+        )
     delta_floors = {
         GETTING_STARTED: 12,
         WIDGET_EXAMPLES: 8,
@@ -9290,8 +9188,8 @@ def _assert_wave3_repairs(records: list[TaskRecord]) -> dict[str, int]:
                     raise AssertionError(f"{task_id}: D1 widgets spec read is required")
                 if record.payload["difficulty"] == "level5":
                     d1_refs.add(task_id)
-    if len(d1_refs) != 4:
-        raise AssertionError(f"D1 expected 4 repaired sites, got {sorted(d1_refs)}")
+    if len(d1_refs) != 8:
+        raise AssertionError(f"D1 expected 8 spec-read sites, got {sorted(d1_refs)}")
 
     d2_refs: set[str] = set()
     for record in wave3_records:
@@ -9453,9 +9351,10 @@ def _assert_family_missions(records: list[TaskRecord]) -> None:
     if any(
         call["tool"] in {"create_widget", "manage_backends", "manage_apps"}
         for record in by_family["parameterize"]
+        if record.payload["difficulty"] != "level5"
         for call in record.payload["eval"]["required_tools"]
     ):
-        raise AssertionError("parameterize spine creates fresh content")
+        raise AssertionError("parameterize spine creates fresh content below the build rung")
     if any(not record.payload["setup"].get("initial_state") for record in by_family["repair"]):
         raise AssertionError("repair task missing seeded defect")
     for low in (
@@ -9628,6 +9527,7 @@ def validate_payloads(records: list[TaskRecord]) -> dict[str, int]:
     _assert_f10(records)
     _assert_f11(records)
     _assert_f12(records)
+    _assert_level5_builds(records)
     _assert_l1_l5(records)
     _assert_wave2_requirements(records)
     _assert_instantiation_and_expect_fairness(records)

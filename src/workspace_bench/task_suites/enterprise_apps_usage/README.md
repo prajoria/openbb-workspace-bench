@@ -19,7 +19,7 @@ the tools and data available.
 | --- | --- | --- |
 | `retrieve` | find the right data and answer with exact figures (`final_answer`) | 0-5 |
 | `curate` | place and configure views, cross-catalog at the top | 0-5 |
-| `parameterize` | param surgery and policy translation on existing widgets | 0-5 |
+| `parameterize` | param surgery and policy translation; the build rung tunes an authored widget | 0-5 |
 | `organize` | dashboards, tabs, and navigation | 0-5 |
 | `repair` | fix seeded defects, preserve everything else | 0-5 |
 | `platform` | skills, workspace prompts, and MCP resources govern correctness | 0-5 |
@@ -40,7 +40,7 @@ level5 build — author `widgets_json`, wrap it in `apps_json`, instantiate,
 and use it.
 
 Distinct graded targets per catalog: Bench Stark Enterprise 9/349, Bench
-Daloopa 7/10, Getting Started 19/70, Widget Examples 12/30 — spanning tables,
+Daloopa 7/10, Getting Started 18/70, Widget Examples 12/30 — spanning tables,
 charts, forms with submit inputs, live grids, and media/content widgets.
 
 ## Grading
@@ -71,12 +71,13 @@ must appear literally in the target's served rows; prompt register checks
 
 Difficulty calibration (July 2026, on this exact content). gpt-4.1-mini
 (two repeats, 64 attempts per level): strict-pass staircase
-94% / 72% / 66% / 45% / 14% / 20% across level0-level5 (51.8% overall) — an
-achievable floor and a hard top that sits at the gating model's noise
-level. The top rungs were verified against GPT-5.5 (single attempt per
-task, pooled over all 32 tasks per rung): 78% at level4 and 59% at level5,
-so the deep ladder orders correctly and separates frontier models where
-the gating model cannot.
+91% / 75% / 67% / 39% / 13% / 5% across level0-level5 (48.2% overall) — a
+strictly decreasing ladder from an achievable floor to a hard top below
+the gating model's noise level. The top rungs were verified against
+GPT-5.5 (single attempt per task, pooled over all 32 tasks per rung): 78%
+at level4 and 62% at level5, so the deep ladder separates frontier models
+where the gating model cannot. A generator assertion pins the build-rung
+semantics: every level5 task grades an authored `widgets_json` backend.
 
 ## Limitations
 

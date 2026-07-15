@@ -2,7 +2,7 @@
   "id": "nav_exception_station_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "On the open Custom NAV Repair Staging board, refresh the authored Wave One NAV Repair backend so NAV Exception Queue serves /nav-exceptions and NAV Repair App has one non-overlapping placement on Exceptions. Keep the open view and all other workspace content. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "NAV-exception backend rebuild: Wave One NAV Repair was lost from the workspace; on the open Custom NAV Repair Staging board, rebuild it from scratch: add a custom backend Wave One NAV Repair with a NAV Exception Queue table, publish NAV Repair App, and instantiate it with one non-overlapping NAV Exception Queue placement on Exceptions, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -56,65 +56,8 @@
             "name": "Exceptions"
           }
         ],
-        "widgets": [
-          {
-            "origin": "Wave One NAV Repair",
-            "widget_id": "nav_exception_queue",
-            "widget_uuid": "custom_nav_queue",
-            "tab_id": "exceptions",
-            "layout": {
-              "x": 0,
-              "y": 0,
-              "w": 40,
-              "h": 12
-            }
-          }
-        ]
-      },
-      "custom_backends": [
-        {
-          "backend_id": "backend_005",
-          "name": "Wave One NAV Repair",
-          "url": "http://127.0.0.1:9504",
-          "widgets_json": {
-            "nav_exception_queue": {
-              "name": "NAV Exception Queue",
-              "description": "Broken authored NAV queue.",
-              "type": "table"
-            }
-          },
-          "apps_json": [
-            {
-              "name": "NAV Repair App",
-              "tabs": {
-                "exceptions": {
-                  "id": "exceptions",
-                  "name": "Exceptions",
-                  "layout": [
-                    {
-                      "i": "nav_exception_queue",
-                      "x": 0,
-                      "y": 0,
-                      "w": 30,
-                      "h": 12
-                    },
-                    {
-                      "i": "nav_exception_queue",
-                      "x": 20,
-                      "y": 0,
-                      "w": 20,
-                      "h": 12
-                    }
-                  ]
-                }
-              }
-            }
-          ],
-          "warnings": [
-            "missing endpoint and overlapping app layout"
-          ]
-        }
-      ]
+        "widgets": []
+      }
     }
   },
   "eval": {
@@ -125,19 +68,27 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
-          "operation": "refresh",
-          "backend_id": "backend_005",
+          "operation": "add",
+          "name": "Wave One NAV Repair",
+          "url": "http://127.0.0.1:9504",
           "widgets_json": {
             "nav_exception_queue": {
               "name": "NAV Exception Queue",
-              "description": "Refreshed NAV exception queue.",
-              "endpoint": "/nav-exceptions",
+              "description": "Rebuilt queue for NAV-exception.",
+              "endpoint": "/nav_exception_queue",
               "type": "table",
               "gridData": {
-                "w": 20,
-                "h": 10
+                "w": 40,
+                "h": 12
               }
             }
           },
@@ -164,6 +115,27 @@
           ]
         },
         "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "NAV Repair App",
+          "dashboard_name": "NAV-exception Restored",
+          "activate": true
+        },
+        "graded_args": [
           "operation"
         ]
       }
@@ -179,7 +151,9 @@
       {
         "backend_name": "Wave One NAV Repair",
         "widget_id": "nav_exception_queue",
-        "expect": {}
+        "expect": {
+          "type": "table"
+        }
       }
     ],
     "required_app_defs": [
@@ -190,9 +164,15 @@
           "exceptions"
         ],
         "layout_refs_valid": true,
-        "no_overlaps": true
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "exceptions",
+            "widget_id": "nav_exception_queue"
+          }
+        ]
       }
     ],
-    "max_turns": 5
+    "max_turns": 8
   }
 }

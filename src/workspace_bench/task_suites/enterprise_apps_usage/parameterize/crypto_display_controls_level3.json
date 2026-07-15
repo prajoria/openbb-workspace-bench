@@ -2,7 +2,7 @@
   "id": "crypto_display_controls_level3",
   "category": "single-widget",
   "difficulty": "level3",
-  "prompt": "Crypto-display paired change: on the open Crypto Display Controls board, set Binance OHLC with symbol ethusdt, interval 1m, exchange binancef; set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3; preserve the last view.",
+  "prompt": "Crypto-display paired change: on the open Crypto Display Controls board, set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3; set Moving Parameters Example with datePicker1 $currentDate-1d, textBox1 Ready, TrueFalse True, daysPicker1 1; preserve the first view.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -116,11 +116,9 @@
       {
         "tool": "update_widget",
         "args": {
-          "widget_uuid": "wave3_crypto_display_controls_0",
+          "widget_uuid": "wave3_crypto_display_controls_1",
           "data_args": {
-            "symbol": "ethusdt",
-            "interval": "1m",
-            "exchange": "binancef"
+            "prompt": "SELECT * FROM DATA LIMIT 3"
           }
         },
         "graded_args": [
@@ -130,9 +128,12 @@
       {
         "tool": "update_widget",
         "args": {
-          "widget_uuid": "wave3_crypto_display_controls_1",
+          "widget_uuid": "wave3_crypto_display_controls_2",
           "data_args": {
-            "prompt": "SELECT * FROM DATA LIMIT 3"
+            "datePicker1": "$currentDate-1d",
+            "textBox1": "Ready",
+            "TrueFalse": true,
+            "daysPicker1": "1"
           }
         },
         "graded_args": [
@@ -142,19 +143,20 @@
     ],
     "required_widgets": [
       {
-        "origin": "Widget Examples",
-        "widget_id": "html_binance_ohlc",
-        "data_args": {
-          "symbol": "ethusdt",
-          "interval": "1m",
-          "exchange": "binancef"
-        }
-      },
-      {
         "origin": "Getting Started",
         "widget_id": "omni_sql_widget",
         "data_args": {
           "prompt": "SELECT * FROM DATA LIMIT 3"
+        }
+      },
+      {
+        "origin": "Widget Examples",
+        "widget_id": "moving_parameters_example",
+        "data_args": {
+          "datePicker1": "$currentDate-1d",
+          "textBox1": "Ready",
+          "TrueFalse": true,
+          "daysPicker1": "1"
         }
       }
     ],

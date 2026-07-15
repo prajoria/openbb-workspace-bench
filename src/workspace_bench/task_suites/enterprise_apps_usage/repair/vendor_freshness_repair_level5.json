@@ -2,7 +2,7 @@
   "id": "vendor_freshness_repair_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "Vendor-freshness backend rebuild: on the open Vendor-freshness Backend Repair board, refresh Wave Three Vendor Repair so its Vendor Repair Queue table is published through Vendor Repair App on Incidents. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Vendor-freshness backend rebuild: Wave Three Vendor Repair was lost from the workspace; on the open Vendor-freshness Backend Repair board, rebuild it from scratch: add a custom backend Wave Three Vendor Repair with a Vendor Repair Queue table, publish Vendor Repair App, and instantiate it with one non-overlapping Vendor Repair Queue placement on Incidents, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -56,43 +56,8 @@
             "name": "Incidents"
           }
         ],
-        "widgets": [
-          {
-            "origin": "Wave Three Vendor Repair",
-            "widget_id": "vendor_repair_queue",
-            "widget_uuid": "vendor_freshness_repair_custom",
-            "tab_id": "incidents",
-            "layout": {
-              "x": 0,
-              "y": 0,
-              "w": 40,
-              "h": 10
-            }
-          }
-        ]
-      },
-      "custom_backends": [
-        {
-          "backend_id": "backend_005",
-          "name": "Wave Three Vendor Repair",
-          "url": "http://127.0.0.1:9707",
-          "widgets_json": {
-            "vendor_repair_queue": {
-              "name": "Vendor Repair Queue",
-              "type": "table"
-            }
-          },
-          "apps_json": [
-            {
-              "name": "Vendor Repair App",
-              "tabs": {}
-            }
-          ],
-          "warnings": [
-            "missing endpoint and app layout"
-          ]
-        }
-      ]
+        "widgets": []
+      }
     }
   },
   "eval": {
@@ -103,19 +68,27 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
-          "operation": "refresh",
-          "backend_id": "backend_005",
+          "operation": "add",
+          "name": "Wave Three Vendor Repair",
+          "url": "http://127.0.0.1:9707",
           "widgets_json": {
             "vendor_repair_queue": {
               "name": "Vendor Repair Queue",
-              "description": "Wave-1 view for Vendor Repair Queue.",
+              "description": "Rebuilt queue for Vendor-freshness.",
               "endpoint": "/vendor_repair_queue",
               "type": "table",
               "gridData": {
                 "w": 40,
-                "h": 10
+                "h": 12
               }
             }
           },
@@ -133,13 +106,34 @@
                       "x": 0,
                       "y": 0,
                       "w": 40,
-                      "h": 10
+                      "h": 12
                     }
                   ]
                 }
               }
             }
           ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Vendor Repair App",
+          "dashboard_name": "Vendor-freshness Restored",
+          "activate": true
         },
         "graded_args": [
           "operation"
@@ -170,6 +164,7 @@
           "incidents"
         ],
         "layout_refs_valid": true,
+        "no_overlaps": true,
         "widgets_on_tab": [
           {
             "tab_id": "incidents",
@@ -178,6 +173,6 @@
         ]
       }
     ],
-    "max_turns": 5
+    "max_turns": 8
   }
 }

@@ -1,8 +1,8 @@
 {
   "id": "crypto_display_controls_level5",
-  "category": "single-widget",
+  "category": "platform",
   "difficulty": "level5",
-  "prompt": "Crypto-display full reset: on the open Crypto Display Controls board, set Binance OHLC with symbol ethusdt, interval 1m, exchange binancef; set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3; set Moving Parameters Example with datePicker1 $currentDate-1d, textBox1 Ready, TrueFalse True, daysPicker1 1; preserve all layout and surrounding content.",
+  "prompt": "Crypto-display build tuning: add a custom backend Wave Three Display Tuning with a Display Control Panel table carrying symbol and interval params, publish and instantiate Display Tuning App on Controls, then set the live Display Control Panel to symbol ethusdt, interval 1m. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -23,7 +23,7 @@
       "finance-guidance-tracker",
       "finance-tearsheet"
     ],
-    "default_selected_dashboard": "Crypto Display Controls",
+    "default_selected_dashboard": "Home",
     "allowed_tools": [
       "get_workspace_snapshot",
       "manage_dashboard",
@@ -45,71 +45,7 @@
       "read_workspace_resource",
       "get_workspace_prompt",
       "assign_tasks_to_agents"
-    ],
-    "initial_state": {
-      "dashboard": {
-        "name": "Crypto Display Controls",
-        "activate": false,
-        "tabs": [
-          {
-            "id": "review",
-            "name": "Review"
-          }
-        ],
-        "widgets": [
-          {
-            "origin": "Widget Examples",
-            "widget_id": "html_binance_ohlc",
-            "widget_uuid": "wave3_crypto_display_controls_0",
-            "tab_id": "review",
-            "data_args": {
-              "symbol": "BTCUSDT",
-              "interval": "30m",
-              "exchange": "BinanceUS"
-            },
-            "layout": {
-              "x": 0,
-              "y": 0,
-              "w": 40,
-              "h": 12
-            }
-          },
-          {
-            "origin": "Getting Started",
-            "widget_id": "omni_sql_widget",
-            "widget_uuid": "wave3_crypto_display_controls_1",
-            "tab_id": "review",
-            "data_args": {
-              "prompt": "SELECT * FROM DATA LIMIT 5"
-            },
-            "layout": {
-              "x": 0,
-              "y": 12,
-              "w": 40,
-              "h": 12
-            }
-          },
-          {
-            "origin": "Widget Examples",
-            "widget_id": "moving_parameters_example",
-            "widget_uuid": "wave3_crypto_display_controls_2",
-            "tab_id": "review",
-            "data_args": {
-              "datePicker1": "$currentDate-1d",
-              "textBox1": "Hello!",
-              "TrueFalse": true,
-              "daysPicker1": "1"
-            },
-            "layout": {
-              "x": 0,
-              "y": 24,
-              "w": 40,
-              "h": 12
-            }
-          }
-        ]
-      }
-    }
+    ]
   },
   "eval": {
     "required_tools": [
@@ -119,40 +55,110 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Wave Three Display Tuning",
+          "url": "http://127.0.0.1:9724",
+          "widgets_json": {
+            "display_control_panel": {
+              "name": "Display Control Panel",
+              "description": "Authored tuning table for Crypto-display.",
+              "endpoint": "/display_control_panel",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              },
+              "params": [
+                {
+                  "paramName": "symbol",
+                  "type": "text",
+                  "label": "Symbol",
+                  "value": "ethusdt",
+                  "options": [
+                    {
+                      "label": "ethusdt",
+                      "value": "ethusdt"
+                    }
+                  ]
+                },
+                {
+                  "paramName": "interval",
+                  "type": "text",
+                  "label": "Interval",
+                  "value": "1m",
+                  "options": [
+                    {
+                      "label": "1m",
+                      "value": "1m"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Display Tuning App",
+              "description": "Wave-1 authored app for Display Tuning App.",
+              "tabs": {
+                "controls": {
+                  "id": "controls",
+                  "name": "Controls",
+                  "layout": [
+                    {
+                      "i": "display_control_panel",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Display Tuning App",
+          "dashboard_name": "Crypto-display Tuned",
+          "activate": true
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
         "tool": "update_widget",
         "args": {
-          "widget_uuid": "wave3_crypto_display_controls_0",
+          "widget_id": "display_control_panel",
           "data_args": {
             "symbol": "ethusdt",
-            "interval": "1m",
-            "exchange": "binancef"
-          }
-        },
-        "graded_args": [
-          "data_args"
-        ]
-      },
-      {
-        "tool": "update_widget",
-        "args": {
-          "widget_uuid": "wave3_crypto_display_controls_1",
-          "data_args": {
-            "prompt": "SELECT * FROM DATA LIMIT 3"
-          }
-        },
-        "graded_args": [
-          "data_args"
-        ]
-      },
-      {
-        "tool": "update_widget",
-        "args": {
-          "widget_uuid": "wave3_crypto_display_controls_2",
-          "data_args": {
-            "datePicker1": "$currentDate-1d",
-            "textBox1": "Ready",
-            "TrueFalse": true,
-            "daysPicker1": "1"
+            "interval": "1m"
           }
         },
         "graded_args": [
@@ -162,32 +168,40 @@
     ],
     "required_widgets": [
       {
-        "origin": "Widget Examples",
-        "widget_id": "html_binance_ohlc",
+        "origin": "Wave Three Display Tuning",
+        "widget_id": "display_control_panel",
         "data_args": {
           "symbol": "ethusdt",
-          "interval": "1m",
-          "exchange": "binancef"
-        }
-      },
+          "interval": "1m"
+        },
+        "tab_id": "controls"
+      }
+    ],
+    "required_widget_defs": [
       {
-        "origin": "Getting Started",
-        "widget_id": "omni_sql_widget",
-        "data_args": {
-          "prompt": "SELECT * FROM DATA LIMIT 3"
-        }
-      },
-      {
-        "origin": "Widget Examples",
-        "widget_id": "moving_parameters_example",
-        "data_args": {
-          "datePicker1": "$currentDate-1d",
-          "textBox1": "Ready",
-          "TrueFalse": true,
-          "daysPicker1": "1"
+        "backend_name": "Wave Three Display Tuning",
+        "widget_id": "display_control_panel",
+        "expect": {
+          "type": "table"
         }
       }
     ],
-    "max_turns": 7
+    "required_app_defs": [
+      {
+        "backend_name": "Wave Three Display Tuning",
+        "name_contains": "Display Tuning App",
+        "tabs_include": [
+          "controls"
+        ],
+        "layout_refs_valid": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "controls",
+            "widget_id": "display_control_panel"
+          }
+        ]
+      }
+    ],
+    "max_turns": 9
   }
 }

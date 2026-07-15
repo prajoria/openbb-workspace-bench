@@ -1,8 +1,8 @@
 {
   "id": "technology_decision_inputs_level5",
-  "category": "single-widget",
+  "category": "platform",
   "difficulty": "level5",
-  "prompt": "Finish the rebuild on the open Technology Decision Inputs board using only its existing views. Set Car Manufacturer Performance to TSLA and 2024, Upcoming Earnings to Technology, AAPL, and QTD, and Trade Ideas to Flagship Long/Short and QTD. Preserve all layout and surrounding content.",
+  "prompt": "Decision-inputs build tuning: add a custom backend Wave One Decision Tuning with a Decision Input Panel table carrying company and period params, publish and instantiate Decision Tuning App on Controls, then set the live Decision Input Panel to company TSLA, period QTD. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -23,7 +23,7 @@
       "finance-guidance-tracker",
       "finance-tearsheet"
     ],
-    "default_selected_dashboard": "Technology Decision Inputs",
+    "default_selected_dashboard": "Home",
     "allowed_tools": [
       "get_workspace_snapshot",
       "manage_dashboard",
@@ -45,67 +45,7 @@
       "read_workspace_resource",
       "get_workspace_prompt",
       "assign_tasks_to_agents"
-    ],
-    "initial_state": {
-      "dashboard": {
-        "name": "Technology Decision Inputs",
-        "activate": false,
-        "tabs": [
-          {
-            "id": "review",
-            "name": "Review"
-          }
-        ],
-        "widgets": [
-          {
-            "origin": "Getting Started",
-            "widget_id": "company_performance",
-            "tab_id": "review",
-            "data_args": {
-              "company": "TM",
-              "year": 2024
-            },
-            "layout": {
-              "x": 0,
-              "y": 0,
-              "w": 20,
-              "h": 12
-            }
-          },
-          {
-            "origin": "Bench Stark Enterprise",
-            "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
-            "tab_id": "review",
-            "data_args": {
-              "sector": "Healthcare",
-              "ticker": "LLY",
-              "period": "YTD"
-            },
-            "layout": {
-              "x": 20,
-              "y": 0,
-              "w": 20,
-              "h": 14
-            }
-          },
-          {
-            "origin": "Bench Stark Enterprise",
-            "widget_id": "portfolio_command_center_actions_trade_ideas",
-            "tab_id": "review",
-            "data_args": {
-              "fund": "Flagship Long/Short",
-              "period": "YTD"
-            },
-            "layout": {
-              "x": 0,
-              "y": 14,
-              "w": 40,
-              "h": 14
-            }
-          }
-        ]
-      }
-    }
+    ]
   },
   "eval": {
     "required_tools": [
@@ -115,38 +55,109 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Wave One Decision Tuning",
+          "url": "http://127.0.0.1:9721",
+          "widgets_json": {
+            "decision_input_panel": {
+              "name": "Decision Input Panel",
+              "description": "Authored tuning table for Decision-inputs.",
+              "endpoint": "/decision_input_panel",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              },
+              "params": [
+                {
+                  "paramName": "company",
+                  "type": "text",
+                  "label": "Company",
+                  "value": "TSLA",
+                  "options": [
+                    {
+                      "label": "TSLA",
+                      "value": "TSLA"
+                    }
+                  ]
+                },
+                {
+                  "paramName": "period",
+                  "type": "text",
+                  "label": "Period",
+                  "value": "QTD",
+                  "options": [
+                    {
+                      "label": "QTD",
+                      "value": "QTD"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Decision Tuning App",
+              "description": "Wave-1 authored app for Decision Tuning App.",
+              "tabs": {
+                "controls": {
+                  "id": "controls",
+                  "name": "Controls",
+                  "layout": [
+                    {
+                      "i": "decision_input_panel",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Decision Tuning App",
+          "dashboard_name": "Decision-inputs Tuned",
+          "activate": true
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
         "tool": "update_widget",
         "args": {
-          "widget_id": "company_performance",
+          "widget_id": "decision_input_panel",
           "data_args": {
             "company": "TSLA",
-            "year": 2024
-          }
-        },
-        "graded_args": [
-          "data_args"
-        ]
-      },
-      {
-        "tool": "update_widget",
-        "args": {
-          "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
-          "data_args": {
-            "sector": "Technology",
-            "ticker": "AAPL",
-            "period": "QTD"
-          }
-        },
-        "graded_args": [
-          "data_args"
-        ]
-      },
-      {
-        "tool": "update_widget",
-        "args": {
-          "widget_id": "portfolio_command_center_actions_trade_ideas",
-          "data_args": {
-            "fund": "Flagship Long/Short",
             "period": "QTD"
           }
         },
@@ -157,31 +168,40 @@
     ],
     "required_widgets": [
       {
-        "origin": "Getting Started",
-        "widget_id": "company_performance",
+        "origin": "Wave One Decision Tuning",
+        "widget_id": "decision_input_panel",
         "data_args": {
           "company": "TSLA",
-          "year": 2024
-        }
-      },
-      {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
-        "data_args": {
-          "sector": "Technology",
-          "ticker": "AAPL",
           "period": "QTD"
-        }
-      },
+        },
+        "tab_id": "controls"
+      }
+    ],
+    "required_widget_defs": [
       {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "portfolio_command_center_actions_trade_ideas",
-        "data_args": {
-          "fund": "Flagship Long/Short",
-          "period": "QTD"
+        "backend_name": "Wave One Decision Tuning",
+        "widget_id": "decision_input_panel",
+        "expect": {
+          "type": "table"
         }
       }
     ],
-    "max_turns": 7
+    "required_app_defs": [
+      {
+        "backend_name": "Wave One Decision Tuning",
+        "name_contains": "Decision Tuning App",
+        "tabs_include": [
+          "controls"
+        ],
+        "layout_refs_valid": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "controls",
+            "widget_id": "decision_input_panel"
+          }
+        ]
+      }
+    ],
+    "max_turns": 9
   }
 }

@@ -2,7 +2,7 @@
   "id": "manufacturer_details_repair_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "On the open Custom Detail Repair board, refresh the authored Wave Two Detail Repair backend so Manufacturer Detail Queue serves /manufacturer-details and Detail Repair App has one non-overlapping placement on Details. Keep the open view and all other content. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Detail-queue backend rebuild: Wave Two Detail Repair was lost from the workspace; on the open Custom Detail Repair board, rebuild it from scratch: add a custom backend Wave Two Detail Repair with a Manufacturer Detail Queue table, publish Detail Repair App, and instantiate it with one non-overlapping Manufacturer Detail Queue placement on Details, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -56,65 +56,8 @@
             "name": "Details"
           }
         ],
-        "widgets": [
-          {
-            "origin": "Wave Two Detail Repair",
-            "widget_id": "manufacturer_detail_queue",
-            "widget_uuid": "custom_detail_queue",
-            "tab_id": "details",
-            "layout": {
-              "x": 0,
-              "y": 0,
-              "w": 40,
-              "h": 12
-            }
-          }
-        ]
-      },
-      "custom_backends": [
-        {
-          "backend_id": "backend_005",
-          "name": "Wave Two Detail Repair",
-          "url": "http://127.0.0.1:9604",
-          "widgets_json": {
-            "manufacturer_detail_queue": {
-              "name": "Manufacturer Detail Queue",
-              "description": "Broken detail queue.",
-              "type": "table"
-            }
-          },
-          "apps_json": [
-            {
-              "name": "Detail Repair App",
-              "tabs": {
-                "details": {
-                  "id": "details",
-                  "name": "Details",
-                  "layout": [
-                    {
-                      "i": "manufacturer_detail_queue",
-                      "x": 0,
-                      "y": 0,
-                      "w": 30,
-                      "h": 12
-                    },
-                    {
-                      "i": "manufacturer_detail_queue",
-                      "x": 20,
-                      "y": 0,
-                      "w": 20,
-                      "h": 12
-                    }
-                  ]
-                }
-              }
-            }
-          ],
-          "warnings": [
-            "missing endpoint and overlapping app layout"
-          ]
-        }
-      ]
+        "widgets": []
+      }
     }
   },
   "eval": {
@@ -125,19 +68,27 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
-          "operation": "refresh",
-          "backend_id": "backend_005",
+          "operation": "add",
+          "name": "Wave Two Detail Repair",
+          "url": "http://127.0.0.1:9604",
           "widgets_json": {
             "manufacturer_detail_queue": {
               "name": "Manufacturer Detail Queue",
-              "description": "Refreshed manufacturer detail queue.",
-              "endpoint": "/manufacturer-details",
+              "description": "Rebuilt queue for Detail-queue.",
+              "endpoint": "/manufacturer_detail_queue",
               "type": "table",
               "gridData": {
-                "w": 20,
-                "h": 10
+                "w": 40,
+                "h": 12
               }
             }
           },
@@ -164,6 +115,27 @@
           ]
         },
         "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Detail Repair App",
+          "dashboard_name": "Detail-queue Restored",
+          "activate": true
+        },
+        "graded_args": [
           "operation"
         ]
       }
@@ -179,7 +151,9 @@
       {
         "backend_name": "Wave Two Detail Repair",
         "widget_id": "manufacturer_detail_queue",
-        "expect": {}
+        "expect": {
+          "type": "table"
+        }
       }
     ],
     "required_app_defs": [
@@ -190,9 +164,15 @@
           "details"
         ],
         "layout_refs_valid": true,
-        "no_overlaps": true
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "details",
+            "widget_id": "manufacturer_detail_queue"
+          }
+        ]
       }
     ],
-    "max_turns": 5
+    "max_turns": 8
   }
 }
