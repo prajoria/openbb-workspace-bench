@@ -1555,12 +1555,26 @@ def call_openai_chat(
                 "strict": False,
             },
         }
-    body = post_json(
-        f"{base_url}/chat/completions",
-        payload,
-        timeout,
-        headers={"Authorization": f"Bearer {api_key}"},
-    )
+    try:
+        body = post_json(
+            f"{base_url}/chat/completions",
+            payload,
+            timeout,
+            headers={"Authorization": f"Bearer {api_key}"},
+        )
+    except Exception as error:
+        # Reasoning-family OpenAI models reject max_tokens in favor of
+        # max_completion_tokens; swap the key once and retry.
+        if "max_completion_tokens" in str(error) and "max_tokens" in payload:
+            payload["max_completion_tokens"] = payload.pop("max_tokens")
+            body = post_json(
+                f"{base_url}/chat/completions",
+                payload,
+                timeout,
+                headers={"Authorization": f"Bearer {api_key}"},
+            )
+        else:
+            raise
     _record_provider_meta(
         model=body.get("model"),
         system_fingerprint=body.get("system_fingerprint"),
