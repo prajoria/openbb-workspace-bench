@@ -2,7 +2,7 @@
   "id": "earnings_lookup_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "The desk needs a Wave One Earnings Lookup backend with an Earnings Status Lookup for LLY and YTD. Build and add it, instantiate its Earnings Lookup App, read the lookup, and report the exact score and status. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "The desk needs a Wave One Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD. Build and add it, instantiate its Earnings Lookup App, read the lookup, and report the exact score and status. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -146,8 +146,7 @@
           "activate": true
         },
         "graded_args": [
-          "operation",
-          "app_name"
+          "operation"
         ]
       },
       {
@@ -186,8 +185,7 @@
         "backend_name": "Wave One Earnings Lookup",
         "widget_id": "earnings_status_lookup",
         "expect": {
-          "type": "table",
-          "endpoint": "/earnings-status"
+          "type": "table"
         }
       }
     ],

@@ -2,7 +2,7 @@
   "id": "closing_tape_lookup_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Build and add a Wave Two Closing Tape backend with a Closing Tape Lookup for NVDA, instantiate its Closing Tape App, read the result, and report the latest date and exact close. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Build and add a Wave Two Closing Tape backend with a Closing Tape Lookup table for NVDA, instantiate its Closing Tape App, read the result, and report the latest date and exact close. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -133,8 +133,7 @@
           "activate": true
         },
         "graded_args": [
-          "operation",
-          "app_name"
+          "operation"
         ]
       },
       {
@@ -171,8 +170,7 @@
         "backend_name": "Wave Two Closing Tape",
         "widget_id": "closing_tape_lookup",
         "expect": {
-          "type": "table",
-          "endpoint": "/closing-tape"
+          "type": "table"
         }
       }
     ],

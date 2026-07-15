@@ -113,8 +113,7 @@
           "activate": true
         },
         "graded_args": [
-          "operation",
-          "app_name"
+          "operation"
         ]
       }
     ],
@@ -129,9 +128,7 @@
       {
         "backend_name": "Governed Earnings Backend",
         "widget_id": "earnings_action_register",
-        "expect": {
-          "endpoint": "/earnings-actions"
-        }
+        "expect": {}
       }
     ],
     "required_app_defs": [

@@ -117,8 +117,7 @@
           "activate": true
         },
         "graded_args": [
-          "operation",
-          "app_name"
+          "operation"
         ]
       },
       {
@@ -169,9 +168,7 @@
       {
         "backend_name": "News Handoff Backend",
         "widget_id": "news_handoff_register",
-        "expect": {
-          "endpoint": "/news-handoff"
-        }
+        "expect": {}
       }
     ],
     "required_app_defs": [

@@ -2,7 +2,7 @@
   "id": "market_telemetry_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Author and add a Telemetry Summary Backend with a Telemetry Summary Tile, then instantiate its Market Telemetry App. On Monitor, place Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined at y 10, x 0 and x 20, each width 20 and height 12. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Author and add a Telemetry Summary Backend with a Telemetry Summary Tile metric, then instantiate its Market Telemetry App. On Monitor, place Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined at y 10, x 0 and x 20, each width 20 and height 12. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -104,8 +104,7 @@
           "activate": true
         },
         "graded_args": [
-          "operation",
-          "app_name"
+          "operation"
         ]
       },
       {

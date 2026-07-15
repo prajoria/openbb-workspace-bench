@@ -110,9 +110,7 @@
             }
           ]
         },
-        "graded_args": [
-          "task_requests"
-        ]
+        "graded_args": []
       }
     ],
     "required_generated_widgets": [

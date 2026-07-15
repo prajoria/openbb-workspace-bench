@@ -117,8 +117,7 @@
           "activate": true
         },
         "graded_args": [
-          "operation",
-          "app_name"
+          "operation"
         ]
       },
       {
@@ -169,9 +168,7 @@
       {
         "backend_name": "Earnings Handoff Backend",
         "widget_id": "earnings_handoff_register",
-        "expect": {
-          "endpoint": "/earnings-handoff"
-        }
+        "expect": {}
       }
     ],
     "required_app_defs": [

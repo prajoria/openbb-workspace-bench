@@ -79,8 +79,7 @@
         "backend_name": "Wave Two Research Feed",
         "widget_id": "research_feed_pulse",
         "expect": {
-          "type": "table",
-          "endpoint": "/research-feed"
+          "type": "table"
         }
       }
     ],

@@ -61,10 +61,13 @@ any mounted catalog matches a prompt's discriminating tokens); answer values
 must appear literally in the target's served rows; prompt register checks
 (<=110 words, no tool names, no shared opening 5-grams).
 
-Difficulty calibration (July 2026, gpt-4.1-mini, two repeats per task —
-32 attempts per level on this exact content): strict-pass staircase
-94% / 66% / 53% / 34% / 13% / 6% across level0-level5 — strictly
-decreasing with no ties, an achievable floor, and a hard but non-zero top.
+Difficulty calibration (July 2026, on this exact content). gpt-4.1-mini
+(two repeats, 32 attempts per level): strict-pass staircase
+94% / 63% / 56% / 34% / 13% / 13% across level0-level5 — an achievable
+floor and a hard top that sits at the gating model's noise level. The top
+rungs were verified against GPT-5.5 (single attempt per task): 69% at
+level4 and 38% at level5, so the deep ladder separates frontier models
+where the gating model cannot.
 
 ## Limitations
 

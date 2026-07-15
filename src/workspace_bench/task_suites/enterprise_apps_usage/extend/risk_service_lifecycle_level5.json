@@ -144,8 +144,7 @@
           "activate": true
         },
         "graded_args": [
-          "operation",
-          "app_name"
+          "operation"
         ]
       }
     ],
@@ -170,23 +169,17 @@
       {
         "backend_name": "Wave One Risk Service",
         "widget_id": "wave_one_risk_signal",
-        "expect": {
-          "endpoint": "/risk-signal"
-        }
+        "expect": {}
       },
       {
         "backend_name": "Wave One Risk Service",
         "widget_id": "wave_one_limit_alert",
-        "expect": {
-          "endpoint": "/limit-alert"
-        }
+        "expect": {}
       },
       {
         "backend_name": "Wave One Risk Service",
         "widget_id": "wave_one_stress_watch",
-        "expect": {
-          "endpoint": "/stress-watch"
-        }
+        "expect": {}
       }
     ],
     "required_app_defs": [

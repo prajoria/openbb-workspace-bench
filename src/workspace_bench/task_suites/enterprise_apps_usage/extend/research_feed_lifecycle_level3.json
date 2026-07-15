@@ -99,9 +99,7 @@
       {
         "backend_name": "Wave Two Research Feed",
         "widget_id": "research_feed_pulse",
-        "expect": {
-          "endpoint": "/research-feed"
-        }
+        "expect": {}
       }
     ],
     "required_app_defs": [

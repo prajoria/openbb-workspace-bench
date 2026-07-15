@@ -133,9 +133,7 @@
       {
         "backend_name": "Wave Two Research Feed",
         "widget_id": "research_feed_pulse",
-        "expect": {
-          "description": "Refreshed research feed."
-        }
+        "expect": {}
       }
     ],
     "max_turns": 6

@@ -3067,7 +3067,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> The PM needs a Decision Tile Backend with a Decision Summary Tile. Author and add it, then instantiate its Decision Briefing App. On Briefing, place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, beside Getting Started's Car Manufacturer Performance at y 10, x 0 and x 20, each width 20 and height 14. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> The PM needs a Decision Tile Backend with a Decision Summary Tile metric. Author and add it, then instantiate its Decision Briefing App. On Briefing, place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, beside Getting Started's Car Manufacturer Performance at y 10, x 0 and x 20, each width 20 and height 14. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3155,7 +3155,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Author and add a Telemetry Summary Backend with a Telemetry Summary Tile, then instantiate its Market Telemetry App. On Monitor, place Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined at y 10, x 0 and x 20, each width 20 and height 12. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Author and add a Telemetry Summary Backend with a Telemetry Summary Tile metric, then instantiate its Market Telemetry App. On Monitor, place Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined at y 10, x 0 and x 20, each width 20 and height 12. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3582,7 +3582,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Author and add a Client Onboarding Backend with Client Intake Queue and Approval Log views, then publish and instantiate a Client Onboarding App with Intake and Approvals tabs. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Author and add a Client Onboarding Backend with Client Intake Queue and Approval Log table views, then publish and instantiate a Client Onboarding App with Intake and Approvals tabs. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3665,7 +3665,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> The committee needs a Committee Navigation Backend with Agenda Queue and Evidence Register views. Author and add it, publish a Committee Review App with Agenda and Evidence tabs, and instantiate it. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> The committee needs a Committee Navigation Backend with Agenda Queue and Evidence Register table views. Author and add it, publish a Committee Review App with Agenda and Evidence tabs, and instantiate it. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4275,7 +4275,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Build and add a Wave Two Closing Tape backend with a Closing Tape Lookup for NVDA, instantiate its Closing Tape App, read the result, and report the latest date and exact close. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Build and add a Wave Two Closing Tape backend with a Closing Tape Lookup table for NVDA, instantiate its Closing Tape App, read the result, and report the latest date and exact close. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -4354,7 +4354,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> The desk needs a Wave One Earnings Lookup backend with an Earnings Status Lookup for LLY and YTD. Build and add it, instantiate its Earnings Lookup App, read the lookup, and report the exact score and status. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> The desk needs a Wave One Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD. Build and add it, instantiate its Earnings Lookup App, read the lookup, and report the exact score and status. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`

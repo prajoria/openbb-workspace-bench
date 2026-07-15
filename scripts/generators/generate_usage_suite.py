@@ -692,7 +692,7 @@ def _build_retrieve_tasks() -> list[TaskRecord]:
             "platform",
             (
                 "The desk needs a Wave One Earnings Lookup backend with an Earnings Status "
-                "Lookup for LLY and YTD. Build and add it, instantiate its Earnings Lookup "
+                "Lookup table for LLY and YTD. Build and add it, instantiate its Earnings Lookup "
                 "App, read the lookup, and report the exact score and status. Follow the "
                 "widgets manifest specification. Widget ids are the snake_case of widget "
                 "names; tab ids are the snake_case of tab names."
@@ -723,7 +723,7 @@ def _build_retrieve_tasks() -> list[TaskRecord]:
                         "dashboard_name": "Earnings Lookup Live",
                         "activate": True,
                     },
-                    graded_args=("operation", "app_name"),
+                    graded_args=("operation",),
                 ),
                 _call(
                     "get_widget_data",
@@ -756,7 +756,7 @@ def _build_retrieve_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": widget_id,
-                    "expect": {"type": "table", "endpoint": "/earnings-status"},
+                    "expect": {"type": "table"},
                 }
             ],
             required_app_defs=[
@@ -1062,7 +1062,7 @@ def _build_curate_tasks() -> list[TaskRecord]:
             5,
             "platform",
             (
-                "The PM needs a Decision Tile Backend with a Decision Summary Tile. Author "
+                "The PM needs a Decision Tile Backend with a Decision Summary Tile metric. Author "
                 "and add it, then instantiate its Decision Briefing App. On Briefing, place "
                 "Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, beside "
                 "Getting Started's Car Manufacturer Performance at y 10, x 0 and x 20, "
@@ -1090,7 +1090,7 @@ def _build_curate_tasks() -> list[TaskRecord]:
                         "dashboard_name": "Decision Briefing Live",
                         "activate": True,
                     },
-                    graded_args=("operation", "app_name"),
+                    graded_args=("operation",),
                 ),
                 _call(
                     "list_available_widgets",
@@ -1657,7 +1657,7 @@ def _build_organize_tasks() -> list[TaskRecord]:
             "platform",
             (
                 "The committee needs a Committee Navigation Backend with Agenda Queue and "
-                "Evidence Register views. Author and add it, publish a Committee Review App "
+                "Evidence Register table views. Author and add it, publish a Committee Review App "
                 "with Agenda and Evidence tabs, and instantiate it. Follow the apps manifest "
                 "specification. Widget ids are the snake_case of widget names; tab ids are "
                 "the snake_case of tab names."
@@ -1688,7 +1688,7 @@ def _build_organize_tasks() -> list[TaskRecord]:
                         "dashboard_name": "Committee Review Live",
                         "activate": True,
                     },
-                    graded_args=("operation", "app_name"),
+                    graded_args=("operation",),
                 ),
             ],
             targets=(
@@ -2135,9 +2135,8 @@ def _build_repair_tasks() -> list[TaskRecord]:
                     "backend_name": backend_name,
                     "widget_id": widget_id,
                     "expect": {
-                        "endpoint": "/nav-exceptions",
-                        "description": "Refreshed NAV exception queue.",
-                    },
+                        
+                        },
                 }
             ],
             required_app_defs=[
@@ -2467,7 +2466,7 @@ def _build_platform_tasks() -> list[TaskRecord]:
                         "dashboard_name": "Governed Earnings Live",
                         "activate": True,
                     },
-                    graded_args=("operation", "app_name"),
+                    graded_args=("operation",),
                 ),
             ],
             targets=(_custom_target(backend_name, widget_id, widget_name),),
@@ -2482,7 +2481,7 @@ def _build_platform_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": widget_id,
-                    "expect": {"endpoint": "/earnings-actions"},
+                    "expect": {},
                 }
             ],
             required_app_defs=[
@@ -2594,7 +2593,7 @@ def _build_extend_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": signal_id,
-                    "expect": {"description": "Refreshed risk signal feed."},
+                    "expect": {},
                 }
             ],
             selected_dashboard="Risk Service Staging",
@@ -2700,7 +2699,7 @@ def _build_extend_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": signal_id,
-                    "expect": {"type": "table", "endpoint": "/risk-signal"},
+                    "expect": {"type": "table"},
                 }
             ],
         )
@@ -2734,7 +2733,7 @@ def _build_extend_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": signal_id,
-                    "expect": {"endpoint": "/risk-signal"},
+                    "expect": {},
                 }
             ],
             required_app_defs=[
@@ -2796,7 +2795,7 @@ def _build_extend_tasks() -> list[TaskRecord]:
                         "dashboard_name": "Wave One Risk Live",
                         "activate": True,
                     },
-                    graded_args=("operation", "app_name"),
+                    graded_args=("operation",),
                 ),
             ],
             targets=(
@@ -2811,12 +2810,12 @@ def _build_extend_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": signal_id,
-                    "expect": {"endpoint": "/risk-signal"},
+                    "expect": {},
                 },
                 {
                     "backend_name": backend_name,
                     "widget_id": limit_id,
-                    "expect": {"endpoint": "/limit-alert"},
+                    "expect": {},
                 },
             ],
             required_app_defs=[
@@ -2881,7 +2880,7 @@ def _build_extend_tasks() -> list[TaskRecord]:
                         "dashboard_name": "Wave One Risk Live",
                         "activate": True,
                     },
-                    graded_args=("operation", "app_name"),
+                    graded_args=("operation",),
                 ),
             ],
             targets=(
@@ -2898,17 +2897,17 @@ def _build_extend_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": signal_id,
-                    "expect": {"endpoint": "/risk-signal"},
+                    "expect": {},
                 },
                 {
                     "backend_name": backend_name,
                     "widget_id": limit_id,
-                    "expect": {"endpoint": "/limit-alert"},
+                    "expect": {},
                 },
                 {
                     "backend_name": backend_name,
                     "widget_id": stress_id,
-                    "expect": {"endpoint": "/stress-watch"},
+                    "expect": {},
                 },
             ],
             required_app_defs=[
@@ -3144,7 +3143,7 @@ def _build_handoff_tasks() -> list[TaskRecord]:
                 _call(
                     "assign_tasks_to_agents",
                     {"task_requests": [task_request]},
-                    graded_args=("task_requests",),
+                    graded_args=(),
                 ),
             ],
             targets=(_earnings_target(),),
@@ -3222,7 +3221,7 @@ def _build_handoff_tasks() -> list[TaskRecord]:
                         "dashboard_name": "Earnings Handoff Live",
                         "activate": True,
                     },
-                    graded_args=("operation", "app_name"),
+                    graded_args=("operation",),
                 ),
                 _call(
                     "add_generative_widget",
@@ -3256,7 +3255,7 @@ def _build_handoff_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": widget_id,
-                    "expect": {"endpoint": "/earnings-handoff"},
+                    "expect": {},
                 }
             ],
             required_app_defs=[
@@ -3493,6 +3492,7 @@ def _build_retrieve_wave2_tasks() -> list[TaskRecord]:
             "platform",
             (
                 "Build and add a Wave Two Closing Tape backend with a Closing Tape Lookup "
+                "table "
                 "for NVDA, instantiate its Closing Tape App, read the result, and report "
                 "the latest date and exact close. Follow the widgets manifest "
                 "specification. Widget ids are the snake_case of widget names; tab ids are "
@@ -3524,7 +3524,7 @@ def _build_retrieve_wave2_tasks() -> list[TaskRecord]:
                         "dashboard_name": "Closing Tape Live",
                         "activate": True,
                     },
-                    graded_args=("operation", "app_name"),
+                    graded_args=("operation",),
                 ),
                 _call(
                     "get_widget_data",
@@ -3557,7 +3557,7 @@ def _build_retrieve_wave2_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": widget_id,
-                    "expect": {"type": "table", "endpoint": "/closing-tape"},
+                    "expect": {"type": "table"},
                 }
             ],
             required_app_defs=[
@@ -3806,7 +3806,8 @@ def _build_curate_wave2_tasks() -> list[TaskRecord]:
             5,
             "platform",
             (
-                "Author and add a Telemetry Summary Backend with a Telemetry Summary Tile, "
+                "Author and add a Telemetry Summary Backend with a Telemetry Summary Tile "
+                "metric, "
                 "then instantiate its Market Telemetry App. On Monitor, place Getting "
                 "Started's Stock Price Trends - Line Sparklines with First/Last Points "
                 "beside Widget Examples' "
@@ -3835,7 +3836,7 @@ def _build_curate_wave2_tasks() -> list[TaskRecord]:
                         "dashboard_name": "Market Telemetry Live",
                         "activate": True,
                     },
-                    graded_args=("operation", "app_name"),
+                    graded_args=("operation",),
                 ),
                 _call("list_available_widgets", {"origin": GETTING_STARTED}, optional=True),
                 _call("list_available_widgets", {"origin": WIDGET_EXAMPLES}, optional=True),
@@ -4348,7 +4349,7 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
             "platform",
             (
                 "Author and add a Client Onboarding Backend with Client Intake Queue and "
-                "Approval Log views, then publish and instantiate a Client Onboarding App "
+                "Approval Log table views, then publish and instantiate a Client Onboarding App "
                 "with Intake and Approvals tabs. Follow the apps manifest specification. "
                 "Widget ids are the snake_case of widget names; tab ids are the snake_case "
                 "of tab names."
@@ -4379,7 +4380,7 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
                         "dashboard_name": "Client Onboarding Live",
                         "activate": True,
                     },
-                    graded_args=("operation", "app_name"),
+                    graded_args=("operation",),
                 ),
             ],
             targets=(
@@ -4788,9 +4789,8 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
                     "backend_name": backend_name,
                     "widget_id": widget_id,
                     "expect": {
-                        "endpoint": "/manufacturer-details",
-                        "description": "Refreshed manufacturer detail queue.",
-                    },
+                        
+                        },
                 }
             ],
             required_app_defs=[
@@ -5108,7 +5108,7 @@ def _build_platform_wave2_tasks() -> list[TaskRecord]:
                         "dashboard_name": "Cited Research Live",
                         "activate": True,
                     },
-                    graded_args=("operation", "app_name"),
+                    graded_args=("operation",),
                 ),
             ],
             targets=(_custom_target(backend_name, widget_id, widget_name),),
@@ -5118,7 +5118,7 @@ def _build_platform_wave2_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": widget_id,
-                    "expect": {"endpoint": "/citation-review"},
+                    "expect": {},
                 }
             ],
             required_app_defs=[
@@ -5221,7 +5221,7 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": pulse_id,
-                    "expect": {"description": "Refreshed research feed."},
+                    "expect": {},
                 }
             ],
             selected_dashboard="Research Feed Staging",
@@ -5312,7 +5312,7 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": pulse_id,
-                    "expect": {"type": "table", "endpoint": "/research-feed"},
+                    "expect": {"type": "table"},
                 }
             ],
         )
@@ -5346,7 +5346,7 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": pulse_id,
-                    "expect": {"endpoint": "/research-feed"},
+                    "expect": {},
                 }
             ],
             required_app_defs=[
@@ -5408,7 +5408,7 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
                         "dashboard_name": "Research Feed Live",
                         "activate": True,
                     },
-                    graded_args=("operation", "app_name"),
+                    graded_args=("operation",),
                 ),
             ],
             targets=(
@@ -5423,12 +5423,12 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": pulse_id,
-                    "expect": {"endpoint": "/research-feed"},
+                    "expect": {},
                 },
                 {
                     "backend_name": backend_name,
                     "widget_id": freshness_id,
-                    "expect": {"endpoint": "/source-freshness"},
+                    "expect": {},
                 },
             ],
             required_app_defs=[
@@ -5493,7 +5493,7 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
                         "dashboard_name": "Research Feed Live",
                         "activate": True,
                     },
-                    graded_args=("operation", "app_name"),
+                    graded_args=("operation",),
                 ),
             ],
             targets=(
@@ -5510,17 +5510,17 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": pulse_id,
-                    "expect": {"endpoint": "/research-feed"},
+                    "expect": {},
                 },
                 {
                     "backend_name": backend_name,
                     "widget_id": freshness_id,
-                    "expect": {"endpoint": "/source-freshness"},
+                    "expect": {},
                 },
                 {
                     "backend_name": backend_name,
                     "widget_id": archive_id,
-                    "expect": {"endpoint": "/archive-coverage"},
+                    "expect": {},
                 },
             ],
             required_app_defs=[
@@ -5750,7 +5750,7 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
                 _call(
                     "assign_tasks_to_agents",
                     {"task_requests": [task_request]},
-                    graded_args=("task_requests",),
+                    graded_args=(),
                 ),
             ],
             targets=(target,),
@@ -5822,7 +5822,7 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
                         "dashboard_name": "News Handoff Live",
                         "activate": True,
                     },
-                    graded_args=("operation", "app_name"),
+                    graded_args=("operation",),
                 ),
                 _call(
                     "add_generative_widget",
@@ -5856,7 +5856,7 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
                 {
                     "backend_name": backend_name,
                     "widget_id": widget_id,
-                    "expect": {"endpoint": "/news-handoff"},
+                    "expect": {},
                 }
             ],
             required_app_defs=[
@@ -6094,6 +6094,19 @@ def _assert_f1_f3(records: list[TaskRecord], catalogs: dict[str, JsonDict]) -> N
                     raise AssertionError(
                         f"{task_id}: F2 ungrounded graded value {value!r} "
                         f"at {call['tool']}:{'.'.join(path)}"
+                    )
+
+        # F2 covers authored-definition expectations too: any graded expect
+        # field value (e.g. the widget type) must be stated in the prompt.
+        for widget_def in payload["eval"].get("required_widget_defs", []):
+            for field_name, expected in (widget_def.get("expect") or {}).items():
+                if (
+                    isinstance(expected, str)
+                    and expected.casefold() not in prompt.casefold()
+                ):
+                    raise AssertionError(
+                        f"{task_id}: F2 unstated expect value {expected!r} for "
+                        f"{widget_def.get('widget_id')}.{field_name}"
                     )
 
         for required in payload["eval"].get("required_widgets", []):

@@ -174,10 +174,7 @@
       {
         "backend_name": "Wave Two Detail Repair",
         "widget_id": "manufacturer_detail_queue",
-        "expect": {
-          "endpoint": "/manufacturer-details",
-          "description": "Refreshed manufacturer detail queue."
-        }
+        "expect": {}
       }
     ],
     "required_app_defs": [

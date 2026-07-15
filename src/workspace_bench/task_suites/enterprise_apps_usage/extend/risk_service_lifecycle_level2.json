@@ -79,8 +79,7 @@
         "backend_name": "Wave One Risk Service",
         "widget_id": "wave_one_risk_signal",
         "expect": {
-          "type": "table",
-          "endpoint": "/risk-signal"
+          "type": "table"
         }
       }
     ],

@@ -174,10 +174,7 @@
       {
         "backend_name": "Wave One NAV Repair",
         "widget_id": "nav_exception_queue",
-        "expect": {
-          "endpoint": "/nav-exceptions",
-          "description": "Refreshed NAV exception queue."
-        }
+        "expect": {}
       }
     ],
     "required_app_defs": [

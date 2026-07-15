@@ -133,9 +133,7 @@
       {
         "backend_name": "Wave One Risk Service",
         "widget_id": "wave_one_risk_signal",
-        "expect": {
-          "description": "Refreshed risk signal feed."
-        }
+        "expect": {}
       }
     ],
     "max_turns": 6

@@ -144,8 +144,7 @@
           "activate": true
         },
         "graded_args": [
-          "operation",
-          "app_name"
+          "operation"
         ]
       }
     ],
@@ -170,23 +169,17 @@
       {
         "backend_name": "Wave Two Research Feed",
         "widget_id": "research_feed_pulse",
-        "expect": {
-          "endpoint": "/research-feed"
-        }
+        "expect": {}
       },
       {
         "backend_name": "Wave Two Research Feed",
         "widget_id": "source_freshness_alert",
-        "expect": {
-          "endpoint": "/source-freshness"
-        }
+        "expect": {}
       },
       {
         "backend_name": "Wave Two Research Feed",
         "widget_id": "archive_coverage_watch",
-        "expect": {
-          "endpoint": "/archive-coverage"
-        }
+        "expect": {}
       }
     ],
     "required_app_defs": [

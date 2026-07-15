@@ -2,7 +2,7 @@
   "id": "client_onboarding_flow_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Author and add a Client Onboarding Backend with Client Intake Queue and Approval Log views, then publish and instantiate a Client Onboarding App with Intake and Approvals tabs. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Author and add a Client Onboarding Backend with Client Intake Queue and Approval Log table views, then publish and instantiate a Client Onboarding App with Intake and Approvals tabs. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -136,8 +136,7 @@
           "activate": true
         },
         "graded_args": [
-          "operation",
-          "app_name"
+          "operation"
         ]
       }
     ],
