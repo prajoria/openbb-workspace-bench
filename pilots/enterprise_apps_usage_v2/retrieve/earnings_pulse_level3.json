@@ -1,0 +1,77 @@
+{
+  "id": "earnings_pulse_level3",
+  "category": "read",
+  "difficulty": "level3",
+  "prompt": "Inspect the lived-in Earnings & Estimates Monitor already open in the workspace. Using its configured Upcoming Earnings view, report LLY's exact year-to-date score and status without changing the dashboard.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Earnings & Estimates Monitor",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents",
+      "final_answer"
+    ]
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
+          "data_args": {
+            "sector": "Healthcare",
+            "ticker": "LLY",
+            "period": "YTD"
+          }
+        }
+      }
+    ],
+    "required_values_in_answer": [
+      "27.63",
+      "Open"
+    ],
+    "reference_answer": "The configured LLY view shows a 27.63 score with status Open.",
+    "max_turns": 5
+  }
+}

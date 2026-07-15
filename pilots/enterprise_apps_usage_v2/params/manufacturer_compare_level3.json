@@ -1,0 +1,118 @@
+{
+  "id": "manufacturer_compare_level3",
+  "category": "repair",
+  "difficulty": "level3",
+  "prompt": "Inspect Manufacturer Parameter Staging and correct its existing performance view to General Motors at the oldest available year. Keep the board and all unrelated workspace content intact.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Manufacturer Parameter Staging",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Manufacturer Parameter Staging",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "comparison",
+            "name": "Comparison"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "company_performance",
+            "tab_id": "comparison",
+            "data_args": {
+              "company": "TM",
+              "year": "2024"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_widgets": [
+      {
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
+        "data_args": {
+          "company": "GM",
+          "year": "2022"
+        },
+        "tab_id": "comparison"
+      }
+    ],
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {}
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "company_performance",
+          "param_name": "year"
+        },
+        "optional": true
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "widget_333",
+          "data_args": {
+            "company": "GM",
+            "year": "2022"
+          }
+        }
+      }
+    ],
+    "max_turns": 6
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "suite_id": "enterprise-apps-usage-v2",
+  "visibility": "private",
+  "task_defaults": {
+    "eval": {
+      "layout": {
+        "within_grid": true,
+        "no_overlaps": true,
+        "grid_width": 40
+      },
+      "trace_checks": {
+        "max_invalid_tool_calls": 1,
+        "forbid_invented_widget_ids": true
+      },
+      "workspace_checks": {
+        "preserve_other_dashboards": true
+      }
+    }
+  },
+  "content_sha256": "34c5750a27a3f01cc95233f9b01cc11edc88580f63199b7462a70d7e3b3ade24",
+  "description": "A 36-task pilot for operating, governing, and authoring in a lived-in multi-catalog enterprise workspace."
+}

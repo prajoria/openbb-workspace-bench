@@ -1,0 +1,181 @@
+{
+  "id": "capability_card_view_level5",
+  "category": "platform",
+  "difficulty": "level5",
+  "prompt": "Build a Pilot Capability Cards backend with two compact single big-number widgets: User Metric and Session Metric. Compose them without overlap on a Cards tab in a Capability Card Board, publish and instantiate the app, and leave it open. Keep both widget definitions minimal and free of sample rows.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
+    "required_widgets": [
+      {
+        "origin": "Pilot Capability Cards",
+        "widget_id": "user_metric",
+        "data_args": {},
+        "tab_id": "cards"
+      },
+      {
+        "origin": "Pilot Capability Cards",
+        "widget_id": "session_metric",
+        "data_args": {},
+        "tab_id": "cards"
+      }
+    ],
+    "required_tools": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Pilot Capability Cards",
+          "url": "http://127.0.0.1:9406",
+          "widgets_json": {
+            "user_metric": {
+              "name": "User Metric",
+              "description": "Single big-number user adoption card.",
+              "endpoint": "/user-metric",
+              "type": "metric",
+              "gridData": {
+                "w": 10,
+                "h": 5
+              },
+              "params": []
+            },
+            "session_metric": {
+              "name": "Session Metric",
+              "description": "Single big-number active-session card.",
+              "endpoint": "/session-metric",
+              "type": "metric",
+              "gridData": {
+                "w": 10,
+                "h": 5
+              },
+              "params": []
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Capability Card Board",
+              "description": "Pilot app for Capability Card Board.",
+              "tabs": {
+                "cards": {
+                  "id": "cards",
+                  "name": "Cards",
+                  "layout": [
+                    {
+                      "i": "user_metric",
+                      "x": 0,
+                      "y": 0,
+                      "w": 10,
+                      "h": 5,
+                      "state": {
+                        "params": {}
+                      }
+                    },
+                    {
+                      "i": "session_metric",
+                      "x": 10,
+                      "y": 0,
+                      "w": 10,
+                      "h": 5,
+                      "state": {
+                        "params": {}
+                      }
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Capability Card Board",
+          "dashboard_name": "Capability Cards Live",
+          "activate": true
+        },
+        "graded_args": [
+          "operation",
+          "app_name"
+        ]
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Pilot Capability Cards",
+        "widget_id": "user_metric",
+        "expect": {
+          "type": "metric"
+        }
+      },
+      {
+        "backend_name": "Pilot Capability Cards",
+        "widget_id": "session_metric",
+        "expect": {
+          "type": "metric"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Pilot Capability Cards",
+        "name_contains": "Capability Card Board",
+        "tabs_include": [
+          "cards"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true
+      }
+    ],
+    "max_turns": 5
+  }
+}

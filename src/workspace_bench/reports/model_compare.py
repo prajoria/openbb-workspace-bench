@@ -1278,7 +1278,7 @@ def run_interactive_agent(
         if episode.answered:
             break
         done_rule = None
-        if task.success.required_answer_judgment:
+        if task.success.required_answer_judgment or task.success.required_values_in_answer:
             done_rule = (
                 "Choose the next single tool call. The task completes when you "
                 "call final_answer with your full answer text, quoting exact "
@@ -1428,7 +1428,10 @@ def build_interactive_messages(
                     "final_answer completes the episode.",
                     "",
                 ]
-                if "enterprise-apps-default/" in str(task.get("qualified_id", ""))
+                # The allow-listed answer channel IS the announcement that a
+                # reply is expected — true for judge-graded and deterministic
+                # answer tasks alike.
+                if "final_answer" in allowed_tools
                 else []
             ),
             "Choose the first tool call.",

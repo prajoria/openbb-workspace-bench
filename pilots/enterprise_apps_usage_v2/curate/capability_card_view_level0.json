@@ -1,0 +1,77 @@
+{
+  "id": "capability_card_view_level0",
+  "category": "dashboard",
+  "difficulty": "level0",
+  "prompt": "Place Getting Started's single big-number card whose first sample is Total Users on Home.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
+    "required_widgets": [
+      {
+        "origin": "Getting Started",
+        "widget_id": "metric_widget",
+        "data_args": {}
+      }
+    ],
+    "required_tools": [
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "metric_widget",
+          "data_args": {}
+        }
+      }
+    ],
+    "max_turns": 5
+  }
+}

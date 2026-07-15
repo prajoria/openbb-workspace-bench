@@ -1,0 +1,245 @@
+{
+  "id": "earnings_pulse_level5",
+  "category": "platform",
+  "difficulty": "level5",
+  "prompt": "Build a small backend named Pilot Earnings Lookup with an Earnings Pulse Lookup table for ticker and calendar-period lookups. Wrap it in an Earnings Pulse App, open the app, read Apple for 2026 Q1, and report the quarter, actual revenue, and surprise percentage. Keep the definition free of sample rows.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents",
+      "final_answer"
+    ]
+  },
+  "eval": {
+    "required_widgets": [
+      {
+        "origin": "Pilot Earnings Lookup",
+        "widget_id": "earnings_pulse_lookup",
+        "data_args": {
+          "ticker": "AAPL",
+          "period": "2026Q1"
+        },
+        "tab_id": "lookup"
+      }
+    ],
+    "required_tools": [
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Pilot Earnings Lookup",
+          "url": "http://127.0.0.1:9401",
+          "widgets_json": {
+            "earnings_pulse_lookup": {
+              "name": "Earnings Pulse Lookup",
+              "description": "Latest reported earnings pulse by ticker and calendar period.",
+              "endpoint": "/earnings-pulse",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 9
+              },
+              "params": [
+                {
+                  "paramName": "ticker",
+                  "type": "text",
+                  "label": "Ticker",
+                  "value": "AAPL",
+                  "options": [
+                    {
+                      "label": "Apple",
+                      "value": "AAPL"
+                    },
+                    {
+                      "label": "Microsoft",
+                      "value": "MSFT"
+                    }
+                  ]
+                },
+                {
+                  "paramName": "period",
+                  "type": "text",
+                  "label": "Calendar Period",
+                  "value": "2026Q1",
+                  "options": [
+                    {
+                      "label": "2026 Q1",
+                      "value": "2026Q1"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Earnings Pulse App",
+              "description": "Pilot app for Earnings Pulse App.",
+              "tabs": {
+                "lookup": {
+                  "id": "lookup",
+                  "name": "Lookup",
+                  "layout": [
+                    {
+                      "i": "earnings_pulse_lookup",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 9,
+                      "state": {
+                        "params": {
+                          "ticker": "AAPL",
+                          "period": "2026Q1"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "groups": []
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Earnings Pulse App",
+          "dashboard_name": "Earnings Pulse Live",
+          "activate": true
+        },
+        "graded_args": [
+          "operation",
+          "app_name"
+        ]
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Pilot Earnings Lookup",
+          "widget_id": "earnings_pulse_lookup",
+          "data_args": {
+            "ticker": "AAPL",
+            "period": "2026Q1"
+          }
+        }
+      }
+    ],
+    "required_values_in_answer": [
+      "2026Q1",
+      "102070.1",
+      "0.0268"
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Pilot Earnings Lookup",
+        "widget_id": "earnings_pulse_lookup",
+        "expect": {
+          "type": "table"
+        },
+        "params_include": [
+          {
+            "paramName": "ticker",
+            "type": "text"
+          },
+          {
+            "paramName": "period",
+            "value": "2026Q1"
+          }
+        ]
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Pilot Earnings Lookup",
+        "name_contains": "Earnings Pulse App",
+        "tabs_include": [
+          "lookup"
+        ],
+        "layout_refs_valid": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "lookup",
+            "widget_id": "earnings_pulse_lookup"
+          }
+        ]
+      }
+    ],
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "pilot-earnings-pulse",
+          "widget_id": "earnings_pulse_lookup",
+          "fields": [
+            "ticker",
+            "period",
+            "actual",
+            "surprise_pct"
+          ],
+          "path": "/earnings-pulse",
+          "payload": [
+            {
+              "ticker": "AAPL",
+              "period": "2026Q1",
+              "actual": 102070.1,
+              "surprise_pct": 0.0268
+            }
+          ]
+        }
+      ]
+    },
+    "reference_answer": "The lookup returns 2026Q1, actual revenue 102070.1, and surprise 0.0268.",
+    "max_turns": 7
+  }
+}
