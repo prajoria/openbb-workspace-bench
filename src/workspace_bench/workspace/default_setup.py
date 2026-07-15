@@ -42,6 +42,9 @@ from workspace_bench.workspace.widget_params import sanitize_data_args
 DEFAULT_WORKSPACE_VERSION = "all-stark-enterprise-apps"
 ONBOARD_A_WORKSPACE_VERSION = "stark-onboard-a"
 ONBOARD_B_WORKSPACE_VERSION = "stark-onboard-b"
+# The lived-in everything-mounted workspace: Home + every Stark app +
+# personal desk dashboards, with all four catalog backends connected.
+WORKSPACE_A_VERSION = "stark-workspace-a"
 
 _DEFAULT_BASELINE_BACKENDS: dict[str, tuple[str, ...]] = {
     DEFAULT_WORKSPACE_VERSION: (
@@ -52,12 +55,19 @@ _DEFAULT_BASELINE_BACKENDS: dict[str, tuple[str, ...]] = {
     ),
     ONBOARD_A_WORKSPACE_VERSION: ("stark-enterprise-x",),
     ONBOARD_B_WORKSPACE_VERSION: ("stark-enterprise-x",),
+    WORKSPACE_A_VERSION: (
+        "stark-enterprise-x",
+        "support-daloopa-skills",
+        "getting-started",
+        "widget-examples",
+    ),
 }
 
 _REQUIRED_BASELINE_BACKENDS: dict[str, tuple[str, ...]] = {
     DEFAULT_WORKSPACE_VERSION: ("stark-enterprise-x",),
     ONBOARD_A_WORKSPACE_VERSION: ("stark-enterprise-x",),
     ONBOARD_B_WORKSPACE_VERSION: ("stark-enterprise-x",),
+    WORKSPACE_A_VERSION: ("stark-enterprise-x",),
 }
 
 
@@ -136,6 +146,7 @@ _INITIAL_STATE_BUILDERS: dict[str, Callable[[], JsonDict]] = {
     DEFAULT_WORKSPACE_VERSION: _build_default_v1_state,
     ONBOARD_A_WORKSPACE_VERSION: lambda: _load_initial_state_file("stark_onboard_a.json"),
     ONBOARD_B_WORKSPACE_VERSION: lambda: _load_initial_state_file("stark_onboard_b.json"),
+    WORKSPACE_A_VERSION: lambda: _load_initial_state_file("stark_workspace_a.json"),
 }
 
 if set(KNOWN_WORKSPACE_BASELINES) != set(_INITIAL_STATE_BUILDERS):

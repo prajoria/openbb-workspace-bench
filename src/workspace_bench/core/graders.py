@@ -193,16 +193,23 @@ def grade_task(
             ),
         )
 
-    if task.success.required_answer_judgment:
-        # Judge-graded tasks answer by reply: they still gate
-        # deterministically on a submitted final answer, so no-op baselines
-        # fail without a judge and the judge only ever scores a real answer.
+    if task.success.required_answer_judgment or task.success.required_values_in_answer:
+        # Answer-graded tasks reply through final_answer: they gate
+        # deterministically on a submitted answer, so no-op baselines fail
+        # and any judge only ever scores a real answer.
         submitted = final_answer_from_trace(trace)
         state_builder.check(
             bool(submitted and submitted.strip()),
             "missing_final_answer",
             "Expected the episode to end with a final_answer submission.",
         )
+        answer_text = (submitted or "").casefold()
+        for value in task.success.required_values_in_answer:
+            state_builder.check(
+                value.casefold() in answer_text,
+                "missing_answer_value",
+                f"Expected the final answer to state {value!r}.",
+            )
 
     for required_layout in task.success.required_layouts:
         layout_matches = _matching_layouts(required_layout, widgets)

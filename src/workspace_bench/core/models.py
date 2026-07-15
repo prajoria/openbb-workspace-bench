@@ -51,6 +51,8 @@ TASK_DIFFICULTIES = (
     "level1",
     "level2",
     "level3",
+    "level4",
+    "level5",
 )
 _DEFAULT_SPECIFICATION_LEVELS = {
     "easy": "explicit",
@@ -60,6 +62,8 @@ _DEFAULT_SPECIFICATION_LEVELS = {
     "level1": "explicit",
     "level2": "explicit",
     "level3": "partially-specified",
+    "level4": "partially-specified",
+    "level5": "open-brief",
 }
 # Category fallback for the canonical Workspace MCP tool families, so smoke
 # task files carry family without repeating a derivable category.
@@ -91,6 +95,7 @@ KNOWN_WORKSPACE_BASELINES = (
     "all-stark-enterprise-apps",
     "stark-onboard-a",
     "stark-onboard-b",
+    "stark-workspace-a",
 )
 # Pre-rename spelling, normalized at validation.
 LEGACY_WORKSPACE_BASELINES = {"default-v1": "all-stark-enterprise-apps"}
@@ -304,14 +309,24 @@ def _validated_task_defaults(value: Any) -> JsonDict | None:
         return None
     if not isinstance(value, dict) or not value:
         raise ValueError("task suite task_defaults must be a non-empty object")
-    allowed = {"category", "difficulty"}
+    allowed = {"category", "difficulty", "eval"}
     unknown = sorted(set(value) - allowed)
     if unknown:
         raise ValueError(
             f"task suite task_defaults contains unknown fields: {', '.join(unknown)}"
         )
-    if any(not isinstance(item, str) or not item for item in value.values()):
-        raise ValueError("task suite task_defaults values must be non-empty strings")
+    for key, item in value.items():
+        if key == "eval":
+            # Suite policy defaults: eval criteria merged into every task's
+            # eval block wherever the task file omits the key.
+            if not isinstance(item, dict) or not item:
+                raise ValueError(
+                    "task suite task_defaults.eval must be a non-empty object"
+                )
+        elif not isinstance(item, str) or not item:
+            raise ValueError(
+                "task suite task_defaults values must be non-empty strings"
+            )
     return dict(value)
 
 
@@ -1126,6 +1141,7 @@ class SuccessCriteria:
     """All success checks for a task."""
 
     required_answer_judgment: bool = False
+    required_values_in_answer: tuple[str, ...] = ()
     required_tabs: tuple[str, ...] = ()
     required_tab_names: tuple[str, ...] = ()
     required_widgets: tuple[RequiredWidget, ...] = ()
@@ -1157,6 +1173,7 @@ class SuccessCriteria:
             {
                 "judge_evaluation",
                 "required_answer_judgment",
+                "required_values_in_answer",
                 "required_tabs",
                 "required_tab_names",
                 "required_widgets",
@@ -1228,6 +1245,12 @@ class SuccessCriteria:
             required_answer_judgment=bool(
                 payload.get(
                     "judge_evaluation", payload.get("required_answer_judgment", False)
+                )
+            ),
+            required_values_in_answer=tuple(
+                _string_list(
+                    payload.get("required_values_in_answer", []),
+                    "required_values_in_answer",
                 )
             ),
             required_tabs=tuple(required_tabs),
@@ -1370,9 +1393,24 @@ class Task:
                     f"task {task_id} mixes reference_trace with the legacy "
                     "reference key"
                 )
+            required_tools_source = eval_payload.pop("required_tools", None)
             oracle_source = eval_payload.pop(
                 "reference_trace", eval_payload.pop("reference", [])
             )
+            if required_tools_source is not None:
+                # required_tools IS the reference trajectory with grading on:
+                # every step is a required call unless annotated optional.
+                if oracle_source:
+                    raise ValueError(
+                        f"task {task_id} mixes required_tools with reference_trace"
+                    )
+                if eval_payload.get("calls_match_reference"):
+                    raise ValueError(
+                        f"task {task_id} required_tools already implies "
+                        "calls_match_reference"
+                    )
+                oracle_source = required_tools_source
+                eval_payload["calls_match_reference"] = True
             reference_answer = eval_payload.pop("reference_answer", None)
             if reference_answer is not None and (
                 not isinstance(reference_answer, str) or not reference_answer

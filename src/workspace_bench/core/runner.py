@@ -116,7 +116,16 @@ def load_task_file(
         payload = json.load(handle)
     if task_suite and task_suite.task_defaults:
         # Suite-wide labels apply only where the task file omits the field.
-        payload = {**task_suite.task_defaults, **payload}
+        defaults = dict(task_suite.task_defaults)
+        eval_defaults = defaults.pop("eval", None)
+        payload = {**defaults, **payload}
+        if eval_defaults and isinstance(payload.get("eval"), dict):
+            # Suite policy criteria (layout hygiene, trace discipline,
+            # preservation) apply wherever the task's eval omits the key.
+            payload = {
+                **payload,
+                "eval": {**eval_defaults, **payload["eval"]},
+            }
     task = Task.from_dict(payload, source_path=path)
     return replace(task, suite=task_suite) if task_suite else task
 
