@@ -76,7 +76,7 @@ decreasing ladder from an achievable floor to a hard top below the gating
 model's noise level. GLM-5.2 (one attempt per task):
 97% / 91% / 88% / 75% / 56% / 28%, 72.4% overall — strictly decreasing.
 GPT-5.5 (one attempt per task): 97% / 100% / 88% / 97% / 75% / 56%, 85.4%
-overall. Every rung separates the three tiers (level4 13/56/75, level5
+overall. Every rung separates the three models (level4 13/56/75, level5
 5/28/56), and the deep ladder separates frontier models where the gating
 model has no signal. A generator assertion pins the build-rung semantics:
 every level5 task grades an authored `widgets_json` backend.
