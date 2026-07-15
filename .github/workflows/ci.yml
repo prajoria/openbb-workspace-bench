@@ -37,18 +37,18 @@ jobs:
           uv run python scripts/audits/report_prompt_stats.py
           uv run python scripts/audits/audit_release_consistency.py
 
-      - name: Validate the core suite
-        run: uv run --extra dev workspace-bench validate --suite enterprise-apps-usage --min-tasks 300
+      - name: Validate the usage suite
+        run: uv run --extra dev workspace-bench validate --suite enterprise-apps-usage --min-tasks 90
 
       - name: Validate the build-openbb-apps suite
         run: uv run --extra dev workspace-bench validate --suite build-openbb-apps --min-tasks 236
       - name: Validate enterprise-apps-default suite
-        run: uv run --extra dev workspace-bench validate --suite enterprise-apps-default --min-tasks 69
+        run: uv run --extra dev workspace-bench validate --suite enterprise-apps-default --min-tasks 138
 
       - name: Validate the smoke suite
-        run: uv run --extra dev workspace-bench validate --suite smoke --min-tasks 20
+        run: uv run --extra dev workspace-bench validate --suite smoke --min-tasks 80
 
-      - name: Run oracle baseline (core)
+      - name: Run oracle baseline (usage)
         run: uv run --extra dev workspace-bench run --suite enterprise-apps-usage --agent oracle
 
       - name: Run oracle baseline (build-openbb-apps)
