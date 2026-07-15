@@ -63,6 +63,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "get_skill_content",
         "args": {
           "slug": "daloopa-capital-allocation"
@@ -135,6 +140,6 @@
         ]
       }
     ],
-    "max_turns": 8
+    "max_turns": 9
   }
 }

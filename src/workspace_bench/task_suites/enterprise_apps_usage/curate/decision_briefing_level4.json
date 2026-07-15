@@ -63,6 +63,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "get_workspace_prompt",
         "args": {
           "name": "workspace_session_context"
@@ -166,6 +171,6 @@
         }
       }
     ],
-    "max_turns": 10
+    "max_turns": 11
   }
 }

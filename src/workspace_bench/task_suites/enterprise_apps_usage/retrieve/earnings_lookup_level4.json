@@ -51,6 +51,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "get_skill_content",
         "args": {
           "slug": "finance-earnings-prep"
@@ -81,6 +86,6 @@
       "In Review"
     ],
     "reference_answer": "The governed AAPL QTD view shows 6.52 with status In Review.",
-    "max_turns": 5
+    "max_turns": 6
   }
 }

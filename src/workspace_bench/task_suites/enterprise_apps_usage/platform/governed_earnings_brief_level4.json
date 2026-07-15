@@ -63,6 +63,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "get_skill_content",
         "args": {
           "slug": "finance-earnings-prep"
@@ -119,6 +124,6 @@
         "tab_id": "actions"
       }
     ],
-    "max_turns": 7
+    "max_turns": 8
   }
 }

@@ -50,6 +50,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
           "operation": "add",
@@ -137,6 +142,13 @@
       {
         "tool": "manage_apps",
         "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
           "operation": "instantiate",
           "backend_id": "backend_005",
           "app_name": "Research Feed App",
@@ -194,6 +206,6 @@
         "no_overlaps": true
       }
     ],
-    "max_turns": 5
+    "max_turns": 7
   }
 }

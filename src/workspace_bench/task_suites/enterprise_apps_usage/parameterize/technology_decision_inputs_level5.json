@@ -110,6 +110,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "update_widget",
         "args": {
           "widget_id": "company_performance",
@@ -177,6 +182,6 @@
         }
       }
     ],
-    "max_turns": 6
+    "max_turns": 7
   }
 }

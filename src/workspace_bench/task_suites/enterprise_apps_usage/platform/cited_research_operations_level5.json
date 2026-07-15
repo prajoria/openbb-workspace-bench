@@ -50,6 +50,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "get_skill_content",
         "args": {
           "slug": "daloopa-tearsheet"
@@ -106,6 +111,13 @@
       {
         "tool": "manage_apps",
         "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
           "operation": "instantiate",
           "backend_id": "backend_005",
           "app_name": "Cited Research App",
@@ -147,6 +159,6 @@
         ]
       }
     ],
-    "max_turns": 6
+    "max_turns": 8
   }
 }

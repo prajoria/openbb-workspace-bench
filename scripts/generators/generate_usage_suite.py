@@ -405,6 +405,25 @@ def _record(
         evaluation["runtime_checks"] = runtime_checks
     if reference_answer:
         evaluation["reference_answer"] = reference_answer
+    if level >= 4:
+        # Deep-rung chains carry legitimate overhead the graded reference
+        # cannot model (orientation, template discovery before instantiate).
+        # Optional steps keep the replay honest and grow the budget through
+        # the same ref+3 rule; without them a real agent is turn-starved.
+        if not (
+            required_tools
+            and required_tools[0]["tool"] == "get_workspace_snapshot"
+        ):
+            required_tools = [_snapshot(), *required_tools]
+        for index, step in enumerate(required_tools):
+            if step["tool"] == "manage_apps" and not step.get("optional"):
+                required_tools = [
+                    *required_tools[:index],
+                    _call("manage_apps", {"operation": "list"}, optional=True),
+                    *required_tools[index:],
+                ]
+                break
+        evaluation["required_tools"] = required_tools
     evaluation["max_turns"] = len(required_tools) + 3
     payload: JsonDict = {
         "id": f"{spine}_{difficulty}",
@@ -6615,14 +6634,17 @@ def _assert_family_missions(records: list[TaskRecord]) -> None:
         ):
             raise AssertionError(f"{build.payload['id']}: handoff build chain is not minimal")
         tools = evaluation["required_tools"]
-        if [call["tool"] for call in tools] != [
+        graded = [call["tool"] for call in tools if not call.get("optional")]
+        if graded != [
             "manage_backends",
             "manage_apps",
             "add_generative_widget",
             "assign_tasks_to_agents",
         ]:
             raise AssertionError(f"{build.payload['id']}: handoff build chain is incomplete")
-        backend_call = tools[0]
+        backend_call = next(
+            call for call in tools if call["tool"] == "manage_backends"
+        )
         widgets_json = backend_call["args"].get("widgets_json", {})
         apps_json = backend_call["args"].get("apps_json", [])
         if len(widgets_json) != 1 or len(apps_json) != 1:

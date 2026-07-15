@@ -114,6 +114,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "update_widget",
         "args": {
           "widget_uuid": "nav_primary",
@@ -172,6 +177,6 @@
         "widget_id": "portfolio_command_center_actions_trade_ideas"
       }
     ],
-    "max_turns": 6
+    "max_turns": 7
   }
 }

@@ -50,6 +50,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "read_workspace_resource",
         "args": {
           "uri": "openbb://workspace/specs/apps-json"
@@ -129,6 +134,13 @@
       {
         "tool": "manage_apps",
         "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
           "operation": "instantiate",
           "backend_id": "backend_005",
           "app_name": "Client Onboarding App",
@@ -189,6 +201,6 @@
         ]
       }
     ],
-    "max_turns": 6
+    "max_turns": 8
   }
 }

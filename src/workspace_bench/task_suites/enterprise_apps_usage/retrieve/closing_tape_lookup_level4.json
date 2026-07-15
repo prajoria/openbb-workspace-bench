@@ -51,6 +51,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "get_skill_content",
         "args": {
           "slug": "daloopa-tearsheet"
@@ -79,6 +84,6 @@
       "266.02"
     ],
     "reference_answer": "Apple's governed latest row is dated 2026-07-10 at 266.02.",
-    "max_turns": 5
+    "max_turns": 6
   }
 }

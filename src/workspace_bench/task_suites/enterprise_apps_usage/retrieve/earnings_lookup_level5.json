@@ -51,6 +51,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "read_workspace_resource",
         "args": {
           "uri": "openbb://workspace/specs/widgets-json"
@@ -135,6 +140,13 @@
           "operation",
           "name"
         ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
       },
       {
         "tool": "manage_apps",
@@ -229,6 +241,6 @@
       ]
     },
     "reference_answer": "The LLY YTD lookup returns score 27.63 and status Open.",
-    "max_turns": 7
+    "max_turns": 9
   }
 }

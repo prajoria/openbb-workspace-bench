@@ -63,6 +63,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
           "operation": "add",
@@ -106,6 +111,13 @@
           "operation",
           "name"
         ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
       },
       {
         "tool": "manage_apps",
@@ -187,6 +199,6 @@
         ]
       }
     ],
-    "max_turns": 7
+    "max_turns": 9
   }
 }
