@@ -15,7 +15,7 @@ from workspace_bench.core.runner import TaskRunner, find_task
 
 
 def test_grader_detects_missing_required_widget() -> None:
-    task = find_task("price_performance_aapl")
+    task = find_task("decision_briefing_level0")
     snapshot = {
         "dashboard_composition": {
             "name": "Empty",
@@ -31,7 +31,7 @@ def test_grader_detects_missing_required_widget() -> None:
 
 
 def test_grader_detects_layout_overlap() -> None:
-    task = find_task("price_performance_aapl")
+    task = find_task("decision_briefing_level0")
     task = replace(
         task,
         success=replace(
@@ -71,7 +71,7 @@ def test_grader_detects_layout_overlap() -> None:
 
 
 def test_grader_matches_generated_percent_equivalent() -> None:
-    task = find_task("fact_top_holding")
+    task = find_task("decision_briefing_level0")
     task = replace(
         task,
         success=SuccessCriteria(
@@ -107,7 +107,7 @@ def test_grader_matches_generated_percent_equivalent() -> None:
 
 
 def test_grader_requires_tool_results_for_skill_task() -> None:
-    task = find_task("enterprise-apps-usage/skills/read_the_finance_earnings_prep_skill")
+    task = find_task("enterprise-apps-usage/platform/governed_earnings_brief_level1")
     result = TaskRunner().run(task, "oracle")
 
     assert result.grade.passed is True
@@ -115,7 +115,7 @@ def test_grader_requires_tool_results_for_skill_task() -> None:
 
 
 def test_grader_matches_generated_widget_display_alias() -> None:
-    task = find_task("price_performance_aapl")
+    task = find_task("decision_briefing_level0")
     task = replace(
         task,
         success=SuccessCriteria(
@@ -154,7 +154,7 @@ def test_grader_matches_generated_widget_display_alias() -> None:
 
 
 def test_grader_dashboard_name_allows_stopwords_between_terms() -> None:
-    task = find_task("price_performance_aapl")
+    task = find_task("decision_briefing_level0")
     task = replace(
         task,
         success=SuccessCriteria(
@@ -175,7 +175,7 @@ def test_grader_dashboard_name_allows_stopwords_between_terms() -> None:
 
 
 def test_grader_detects_missing_required_resource_read() -> None:
-    task = find_task("price_performance_aapl")
+    task = find_task("decision_briefing_level0")
     task = replace(
         task,
         success=SuccessCriteria(
@@ -202,7 +202,7 @@ def test_grader_detects_missing_required_resource_read() -> None:
 
 
 def test_grader_matches_required_resource_read() -> None:
-    task = find_task("price_performance_aapl")
+    task = find_task("decision_briefing_level0")
     task = replace(
         task,
         success=SuccessCriteria(

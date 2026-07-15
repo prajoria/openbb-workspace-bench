@@ -345,7 +345,7 @@ def _add_task_collection_args(parser: argparse.ArgumentParser) -> None:
         choices=list(BUILTIN_TASK_SUITE_ORDER),
         help=(
             "Bundled task suite. core = operating the workspace "
-            "(336); build-openbb-apps = building and debugging custom backend apps (236)."
+            "(90); build-openbb-apps = building and debugging custom backend apps (236)."
         ),
     )
     parser.add_argument(

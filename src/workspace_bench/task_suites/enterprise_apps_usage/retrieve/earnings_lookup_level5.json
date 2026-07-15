@@ -1,0 +1,236 @@
+{
+  "id": "earnings_lookup_level5",
+  "category": "platform",
+  "difficulty": "level5",
+  "prompt": "The desk needs a Wave One Earnings Lookup backend with an Earnings Status Lookup for LLY and YTD. Build and add it, instantiate its Earnings Lookup App, read the lookup, and report the exact score and status. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents",
+      "final_answer"
+    ]
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "graded_args": [
+          "uri"
+        ]
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Wave One Earnings Lookup",
+          "url": "http://127.0.0.1:9501",
+          "widgets_json": {
+            "earnings_status_lookup": {
+              "name": "Earnings Status Lookup",
+              "description": "Lookup for a catalog capability not otherwise served.",
+              "endpoint": "/earnings-status",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 10
+              },
+              "params": [
+                {
+                  "paramName": "ticker",
+                  "type": "text",
+                  "label": "Ticker",
+                  "value": "LLY",
+                  "options": [
+                    {
+                      "label": "LLY",
+                      "value": "LLY"
+                    }
+                  ]
+                },
+                {
+                  "paramName": "period",
+                  "type": "text",
+                  "label": "Period",
+                  "value": "YTD",
+                  "options": [
+                    {
+                      "label": "YTD",
+                      "value": "YTD"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Earnings Lookup App",
+              "description": "Wave-1 authored app for Earnings Lookup App.",
+              "tabs": {
+                "lookup": {
+                  "id": "lookup",
+                  "name": "Lookup",
+                  "layout": [
+                    {
+                      "i": "earnings_status_lookup",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 10,
+                      "state": {
+                        "params": {
+                          "ticker": "LLY",
+                          "period": "YTD"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Earnings Lookup App",
+          "dashboard_name": "Earnings Lookup Live",
+          "activate": true
+        },
+        "graded_args": [
+          "operation",
+          "app_name"
+        ]
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Wave One Earnings Lookup",
+          "widget_id": "earnings_status_lookup",
+          "data_args": {
+            "ticker": "LLY",
+            "period": "YTD"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Wave One Earnings Lookup",
+        "widget_id": "earnings_status_lookup",
+        "data_args": {
+          "ticker": "LLY",
+          "period": "YTD"
+        },
+        "tab_id": "lookup"
+      }
+    ],
+    "required_values_in_answer": [
+      "27.63",
+      "Open"
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Wave One Earnings Lookup",
+        "widget_id": "earnings_status_lookup",
+        "expect": {
+          "type": "table",
+          "endpoint": "/earnings-status"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Wave One Earnings Lookup",
+        "name_contains": "Earnings Lookup App",
+        "tabs_include": [
+          "lookup"
+        ],
+        "layout_refs_valid": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "lookup",
+            "widget_id": "earnings_status_lookup"
+          }
+        ]
+      }
+    ],
+    "runtime_checks": {
+      "datasets": [
+        {
+          "name": "wave1-earnings-status",
+          "widget_id": "earnings_status_lookup",
+          "fields": [
+            "ticker",
+            "period",
+            "score",
+            "status"
+          ],
+          "path": "/earnings-status",
+          "payload": [
+            {
+              "ticker": "LLY",
+              "period": "YTD",
+              "score": 27.63,
+              "status": "Open"
+            }
+          ]
+        }
+      ]
+    },
+    "reference_answer": "The LLY YTD lookup returns score 27.63 and status Open.",
+    "max_turns": 7
+  }
+}

@@ -56,7 +56,6 @@ jobs:
 
       - name: Probe runtime endpoints
         run: |
-          uv run workspace-bench runtime-probe --suite enterprise-apps-usage --family backends
           uv run workspace-bench runtime-probe --suite build-openbb-apps
 
       - name: Reject adversarial candidates
@@ -73,10 +72,10 @@ jobs:
           uv run --extra browser workspace-bench browser-cert --self-test
 
       - name: Export agent task envelope
-        run: uv run --extra dev workspace-bench export-task --task enterprise-apps-usage/create/price_performance_aapl --output /tmp/workspace-task.json
+        run: uv run --extra dev workspace-bench export-task --task enterprise-apps-usage/curate/decision_briefing_level0 --output /tmp/workspace-task.json
 
       - name: Run demo external agent
-        run: uv run --extra dev workspace-bench run-agent-command --task enterprise-apps-usage/create/price_performance_aapl --agent-command "python -m workspace_bench.agents.rule_agent"
+        run: uv run --extra dev workspace-bench run-agent-command --task enterprise-apps-usage/curate/decision_briefing_level0 --agent-command "python -m workspace_bench.agents.rule_agent"
 
       - name: Build manifests
         run: |
@@ -90,8 +89,8 @@ jobs:
 
       - name: Smoke the evaluator dispatch
         run: |
-          printf '{"models": [{"slug": "rule", "label": "Rule agent", "provider": "command", "command": "python -m workspace_bench.agents.rule_agent"}]}' > /tmp/models.json
-          uv run --extra dev workspace-bench --models-file /tmp/models.json --difficulty easy --dry-run
+          printf '{"models": [{"slug": "rule", "label": "Rule agent", "provider": "command", "model": "rule-agent", "command": "python -m workspace_bench.agents.rule_agent"}]}' > /tmp/models.json
+          uv run --extra dev workspace-bench --models-file /tmp/models.json --task decision_briefing_level0 --runner batch --dry-run
 
       - name: Build package
         run: uv build

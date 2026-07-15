@@ -2987,3726 +2987,87 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 
 
-## Suite: enterprise-apps-usage (336 tasks)
+## Suite: enterprise-apps-usage (90 tasks)
 
-### apps (20)
+### curate (12)
 
-#### `client_360`
-
-**easy** · category: platform · specification: - · no-op baseline score: 0.000
-
-> From the Bench Stark Enterprise backend, instantiate the Client 360 app as a new dashboard named Client Review Workspace.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (3): `get_workspace_snapshot`, `manage_backends`, `manage_apps`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Client Review Workspace" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_apps` with args ⊇ {"operation": "instantiate"} must appear in the trace → `missing_tool_call`
-
-#### `compliance_surveillance_hub`
-
-**easy** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Instantiate the Compliance Surveillance Hub app from the Bench Stark Enterprise backend as a new dashboard named Daily Surveillance Board.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (4): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Daily Surveillance Board" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `alerts` must exist (matched by tab id) → `missing_tab`
-- **Tab** `audit` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/compliance_surveillance_hub_alerts_surveillance_alerts` on tab `alerts` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/compliance_surveillance_hub_audit_access_and_export_logs` on tab `audit` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `earnings_estimates_monitor`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> From the Bench Stark Enterprise backend, instantiate the Earnings & Estimates Monitor app as a new dashboard named Earnings Season Monitor.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (4): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Earnings Season Monitor" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `calendar` must exist (matched by tab id) → `missing_tab`
-- **Tab** `estimates` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/earnings_estimates_monitor_calendar_upcoming_earnings` on tab `calendar` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/earnings_estimates_monitor_estimates_consensus_revisions` on tab `estimates` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `equity_research_workbench`
-
-**easy** · category: platform · specification: - · no-op baseline score: 0.000
-
-> From the Bench Stark Enterprise backend, instantiate the Equity Research Workbench app as a new dashboard named Coverage Workbench.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (4): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Coverage Workbench" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `company` must exist (matched by tab id) → `missing_tab`
-- **Tab** `coverage` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/equity_research_workbench_company_company_tear_sheet` on tab `company` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/equity_research_workbench_coverage_coverage_universe` on tab `coverage` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `execution_desk`
-
-**easy** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Create a new dashboard named AM Execution Desk by instantiating the Execution Desk app from the Bench Stark Enterprise backend.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (3): `get_workspace_snapshot`, `manage_backends`, `manage_apps`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "AM Execution Desk" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_apps` with args ⊇ {"operation": "instantiate"} must appear in the trace → `missing_tool_call`
-
-#### `executive_investment_dashboard`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> From the Bench Stark Enterprise backend, instantiate the Executive Investment Dashboard app as a new dashboard named Executive Morning Brief.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (4): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Executive Morning Brief" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `firm_overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `issues` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/executive_investment_dashboard_firm_overview_firm_snapshot` on tab `firm_overview` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/executive_investment_dashboard_issues_major_open_issues` on tab `issues` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `extend_fund_operations_control_tower`
-
-**hard** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Instantiate the Fund Operations Control Tower app from the Bench Stark Enterprise backend as a new dashboard named Ops Control Room. Then add the Break Aging widget (id fund_operations_control_tower_recons_break_aging) to the Recons tab of the new dashboard.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (7): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Ops Control Room" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `corporate_actions` must exist (matched by tab id) → `missing_tab`
-- **Tab** `pricing` must exist (matched by tab id) → `missing_tab`
-- **Tab** `recons` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_corporate_actions_corporate_action_calendar` on tab `corporate_actions` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_stale_prices` on tab `pricing` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_recons_break_aging` on tab `recons` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `extend_portfolio_command_center`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> From the Bench Stark Enterprise backend, instantiate the Portfolio Command Center app as a new dashboard named PM Command Post. Then add the Sector Exposure widget (id portfolio_command_center_holdings_sector_exposure) to the Holdings tab of the new dashboard.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (7): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "PM Command Post" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `actions` must exist (matched by tab id) → `missing_tab`
-- **Tab** `attribution` must exist (matched by tab id) → `missing_tab`
-- **Tab** `holdings` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` on tab `actions` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_attribution_brinson_attribution` on tab `attribution` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_holdings_sector_exposure` on tab `holdings` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `extend_rebalance_scenario_lab`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Instantiate the Rebalance & Scenario Lab app from the Bench Stark Enterprise backend as a new dashboard named Rebalance Studio. Then add the Drift by Sleeve widget (id Drift by Sleeve) to the Drift tab of the new dashboard.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (7): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Rebalance Studio" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `approval` must exist (matched by tab id) → `missing_tab`
-- **Tab** `drift` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/rebalance_scenario_lab_approval_approval_checklist` on tab `approval` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/rebalance_scenario_lab_drift_current_vs_target_weights` on tab `drift` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/rebalance_scenario_lab_drift_drift_by_sleeve` on tab `drift` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `extend_strategy_health_monitor`
-
-**hard** · category: platform · specification: - · no-op baseline score: 0.000
-
-> From the Bench Stark Enterprise backend, instantiate the Strategy Health Monitor app as a new dashboard named Strategy Health Desk. Then add the Catalyst Calendar widget (id strategy_health_monitor_watchlist_catalyst_calendar) to the Watchlist tab of the new dashboard.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (7): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Strategy Health Desk" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `capacity` must exist (matched by tab id) → `missing_tab`
-- **Tab** `performance` must exist (matched by tab id) → `missing_tab`
-- **Tab** `watchlist` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/strategy_health_monitor_capacity_capacity_utilization` on tab `capacity` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/strategy_health_monitor_performance_strategy_health_metrics` on tab `performance` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/strategy_health_monitor_watchlist_catalyst_calendar` on tab `watchlist` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `full_corporate_access_meeting_notes`
-
-**hard** · category: platform · specification: - · no-op baseline score: 0.000
-
-> From the Bench Stark Enterprise backend, instantiate the Corporate Access & Meeting Notes app as a new dashboard named Corporate Access Log. Then add the Expert Calls widget (id corporate_access_meeting_notes_meetings_expert_calls) to the Meetings tab, and add a note on the same tab mentioning expert calls and meeting calendar.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (8): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Corporate Access Log" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `claims` must exist (matched by tab id) → `missing_tab`
-- **Tab** `compliance` must exist (matched by tab id) → `missing_tab`
-- **Tab** `meetings` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/corporate_access_meeting_notes_claims_management_claims_tracker` on tab `claims` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/corporate_access_meeting_notes_compliance_mnpi_attestation_status` on tab `compliance` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/corporate_access_meeting_notes_meetings_expert_calls` on tab `meetings` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "expert calls", "meeting calendar" on tab `meetings` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `full_crypto_research_dashboard`
-
-**hard** · category: platform · specification: - · no-op baseline score: 0.000
-
-> From the Bench Stark Enterprise backend, instantiate the Crypto Research Dashboard app as a new dashboard named Digital Assets Desk. Then add the Crypto Market Metrics widget (id crypto_research_dashboard_market_crypto_market_metrics) to the Market tab, and add a note on the same tab mentioning market metrics and token.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (8): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Digital Assets Desk" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `derivatives` must exist (matched by tab id) → `missing_tab`
-- **Tab** `market` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/crypto_research_dashboard_derivatives_crypto_volatility_surface` on tab `derivatives` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/crypto_research_dashboard_market_crypto_market_metrics` on tab `market` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/crypto_research_dashboard_market_crypto_market_metrics` on tab `market` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "market metrics", "token" on tab `market` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `full_healthcare_research_dashboard`
-
-**hard** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Instantiate the Healthcare Research Dashboard app from the Bench Stark Enterprise backend as a new dashboard named Biotech Catalyst Desk. Then add the Regulatory Timeline widget (id healthcare_research_dashboard_clinical_regulatory_timeline) to the Clinical tab, and add a note on the same tab mentioning regulatory timeline and catalysts.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (8): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Biotech Catalyst Desk" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `clinical` must exist (matched by tab id) → `missing_tab`
-- **Tab** `commercial` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/healthcare_research_dashboard_clinical_trial_catalyst_calendar` on tab `clinical` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/healthcare_research_dashboard_commercial_drug_revenue_bridge` on tab `commercial` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/healthcare_research_dashboard_clinical_regulatory_timeline` on tab `clinical` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "regulatory timeline", "catalysts" on tab `clinical` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `full_mnpi_research_review`
-
-**hard** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Instantiate the MNPI & Research Review app from the Bench Stark Enterprise backend as a new dashboard named MNPI Control Desk. Then add the Reviewer Comments widget (id mnpi_research_review_research_reviewer_comments) to the Research tab, and add a note on the same tab mentioning reviewer comments and sign off.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (8): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "MNPI Control Desk" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `evidence` must exist (matched by tab id) → `missing_tab`
-- **Tab** `meetings` must exist (matched by tab id) → `missing_tab`
-- **Tab** `research` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/mnpi_research_review_evidence_evidence_and_sign_off_history` on tab `evidence` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/mnpi_research_review_meetings_company_meeting_logs` on tab `meetings` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/mnpi_research_review_research_reviewer_comments` on tab `research` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "reviewer comments", "sign off" on tab `research` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `note_nav_fees_close_dashboard`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Create a new dashboard named Monthly Close Control by instantiating the NAV, Fees & Close Dashboard app from the Bench Stark Enterprise backend, then add a note on the Close tab mentioning close checklist and exceptions.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Monthly Close Control" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `cash` must exist (matched by tab id) → `missing_tab`
-- **Tab** `close` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/nav_fees_close_dashboard_cash_cash_movements` on tab `cash` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/nav_fees_close_dashboard_close_close_exceptions` on tab `close` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "close checklist", "exceptions" on tab `close` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `note_quant_research_backtest_lab`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Instantiate the Quant Research & Backtest Lab app from the Bench Stark Enterprise backend as a new dashboard named Signal Research Lab, then add a note on the Signals tab mentioning signal and decay.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Signal Research Lab" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `backtest` must exist (matched by tab id) → `missing_tab`
-- **Tab** `optimization` must exist (matched by tab id) → `missing_tab`
-- **Tab** `signals` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/quant_research_backtest_lab_backtest_backtest_performance` on tab `backtest` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/quant_research_backtest_lab_optimization_efficient_frontier` on tab `optimization` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "signal", "decay" on tab `signals` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `note_reporting_factsheet_studio`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Create a new dashboard named Factsheet Control by instantiating the Reporting & Factsheet Studio app from the Bench Stark Enterprise backend, then add a note on the Factsheets tab mentioning factsheet and distribution.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Factsheet Control" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `commentary` must exist (matched by tab id) → `missing_tab`
-- **Tab** `ddqs` must exist (matched by tab id) → `missing_tab`
-- **Tab** `factsheets` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/reporting_factsheet_studio_commentary_approved_commentary_library` on tab `commentary` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/reporting_factsheet_studio_ddqs_ddq_and_rfp_tracker` on tab `ddqs` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "factsheet", "distribution" on tab `factsheets` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `note_stress_liquidity_lab`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Create a new dashboard named Quarterly Stress Review by instantiating the Stress & Liquidity Lab app from the Bench Stark Enterprise backend, then add a HTML card on the Sign Off tab mentioning sign off and residual risk.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (5): `get_workspace_snapshot`, `manage_backends`, `manage_apps`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Quarterly Stress Review" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `liquidity` must exist (matched by tab id) → `missing_tab`
-- **Tab** `scenarios` must exist (matched by tab id) → `missing_tab`
-- **Tab** `sign_off` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/stress_liquidity_lab_liquidity_days_to_liquidate` on tab `liquidity` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/stress_liquidity_lab_scenarios_scenario_builder_assumptions` on tab `scenarios` → `missing_widget`
-- **Generated html** ≥1× whose content mentions "sign off", "residual risk" on tab `sign_off` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `risk_exposure_monitor`
-
-**easy** · category: platform · specification: - · no-op baseline score: 0.000
-
-> From the Bench Stark Enterprise backend, instantiate the Risk & Exposure Monitor app as a new dashboard named Risk Watch.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (3): `get_workspace_snapshot`, `manage_backends`, `manage_apps`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Risk Watch" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_apps` with args ⊇ {"operation": "instantiate"} must appear in the trace → `missing_tool_call`
-
-#### `vendor_dataset_monitor`
-
-**easy** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Create a new dashboard named Data Vendor Watch by instantiating the Vendor & Dataset Monitor app from the Bench Stark Enterprise backend.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (3): `get_workspace_snapshot`, `manage_backends`, `manage_apps`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Data Vendor Watch" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_apps` with args ⊇ {"operation": "instantiate"} must appear in the trace → `missing_tool_call`
-
-### backends (20)
-
-#### `add_equities`
-
-**easy** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> With manage_backends, use operation add and name getting-started to register Usage Getting Started add_equities, then list it with operation list.
-
-- Initial workspace: dashboard "Backend Registration"
-- Allowed tools (1): `manage_backends`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "list"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `manage_backends` must contain "Usage Getting Started add_equities" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `add_macro`
-
-**easy** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Call manage_backends with operation add and name getting-started to register Usage Getting Started add_macro, then call manage_backends with operation list.
-
-- Initial workspace: dashboard "Backend Registration"
-- Allowed tools (1): `manage_backends`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "list"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `manage_backends` must contain "Usage Getting Started add_macro" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `add_portfolio`
-
-**easy** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> With manage_backends, use operation add and name widget-examples to register Usage Widget Examples add_portfolio, then list it with operation list.
-
-- Initial workspace: dashboard "Backend Registration"
-- Allowed tools (1): `manage_backends`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "list"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `manage_backends` must contain "Usage Widget Examples add_portfolio" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `add_stark_enterprise`
-
-**easy** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> With manage_backends, use operation add and name stark-enterprise to register Bench Stark Enterprise, then list it with operation list.
-
-- Initial workspace: dashboard "Backend Registration"
-- Allowed tools (1): `manage_backends`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "list"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `manage_backends` must contain "Bench Stark Enterprise" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `multi_equities_macro`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Register the needed backends by exact name (getting-started, getting-started); then build a dashboard with Usage Getting Started multi_equities_macro/sample_newsfeed with data_args {"limit": 5, "symbol": "tech"} and Usage Widget Examples multi_equities_macro/test_metric, and add a HTML card mentioning tech and yield curve.
-
-- Initial workspace: dashboard "Multi Backend Build"
-- Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 10 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Usage Getting Started multi_equities_macro/sample_newsfeed` with data_args ⊇ {"category": "tech", "limit": 5} → `missing_widget`
-- **Widget** ≥1× `Usage Widget Examples multi_equities_macro/test_metric` → `missing_widget`
-- **Generated html** ≥1× whose content mentions "tech", "yield curve" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥2× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `multi_equities_portfolio`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> After registering backend names getting-started, widget-examples, build a dashboard with Usage Getting Started multi_equities_portfolio/sample_newsfeed with data_args {"limit": 5, "symbol": "science"} and Usage Widget Examples multi_equities_portfolio/test_metric, and add a note mentioning science and holdings.
-
-- Initial workspace: dashboard "Multi Backend Build"
-- Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 10 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Usage Getting Started multi_equities_portfolio/sample_newsfeed` with data_args ⊇ {"category": "science", "limit": 5} → `missing_widget`
-- **Widget** ≥1× `Usage Widget Examples multi_equities_portfolio/test_metric` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "science", "holdings" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥2× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `multi_portfolio_macro`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Register backend names widget-examples, getting-started, build a dashboard with Usage Widget Examples multi_portfolio_macro/whitepapers and Usage Getting Started multi_portfolio_macro/company_performance with data_args {"series": "GM"}, and add a HTML card mentioning widget-examples and GM.
-
-- Initial workspace: dashboard "Multi Backend Build"
-- Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 10 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Usage Widget Examples multi_portfolio_macro/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"]} → `missing_widget`
-- **Widget** ≥1× `Usage Getting Started multi_portfolio_macro/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Generated html** ≥1× whose content mentions "widget-examples", "GM" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥2× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `multi_stark_portfolio`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Register the needed backends by exact name (stark-enterprise, widget-examples); then build a dashboard with Bench Stark Enterprise/equity_research_workbench_valuation_football_field and Usage Widget Examples multi_stark_portfolio/live_grid_example, and add a HTML card mentioning stark and sector exposure.
-
-- Initial workspace: dashboard "Multi Backend Build"
-- Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 10 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/equity_research_workbench_valuation_football_field` → `missing_widget`
-- **Widget** ≥1× `Usage Widget Examples multi_stark_portfolio/live_grid_example` → `missing_widget`
-- **Generated html** ≥1× whose content mentions "stark", "sector exposure" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥2× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `refresh_backend_before_building_holdings_table`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> After registering backend name widget-examples and refreshing Usage Widget Examples refresh_backend_before_building_holdings_table, add Usage Widget Examples refresh_backend_before_building_holdings_table/test_metric and document that the backend was refreshed.
-
-- Initial workspace: dashboard "Backend Refresh Build"
-- Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Usage Widget Examples refresh_backend_before_building_holdings_table/test_metric` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "refreshed", "Usage Widget Examples refresh_backend_before_building_holdings_table" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "refresh"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `refresh_backend_before_building_macro_timeseries`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Register Usage Getting Started refresh_backend_before_building_macro_timeseries with backend name getting-started, refresh it, then add Usage Getting Started refresh_backend_before_building_macro_timeseries/company_performance with data_args {"company": "GM", "year": "2024"} and document that the backend was refreshed.
-
-- Initial workspace: dashboard "Backend Refresh Build"
-- Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Usage Getting Started refresh_backend_before_building_macro_timeseries/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "refreshed", "Usage Getting Started refresh_backend_before_building_macro_timeseries" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "refresh"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `refresh_backend_before_building_post_earnings_checklist`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> After registering backend name stark-enterprise and refreshing Bench Stark Enterprise, add Bench Stark Enterprise/Post-Earnings Checklist and document that the backend was refreshed.
-
-- Initial workspace: dashboard "Backend Refresh Build"
-- Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/earnings_estimates_monitor_post_earnings_post_earnings_checklist` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "refreshed", "Bench Stark Enterprise" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "refresh"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `refresh_backend_before_building_price_performance`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> After registering backend name getting-started and refreshing Usage Getting Started refresh_backend_before_building_price_performance, add Usage Getting Started refresh_backend_before_building_price_performance/table_widget_with_grouping_by_cell_click with data_args {"symbol": "AAPL"} and document that the backend was refreshed.
-
-- Initial workspace: dashboard "Backend Refresh Build"
-- Allowed tools (6): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Usage Getting Started refresh_backend_before_building_price_performance/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Generated html** ≥1× whose content mentions "refreshed", "Usage Getting Started refresh_backend_before_building_price_performance" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "refresh"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `register_backend_and_add_holdings_table`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Call manage_backends with operation add and name widget-examples to register Usage Widget Examples register_backend_and_add_holdings_table; then discover test_metric, fetch its schema, and add Usage Widget Examples register_backend_and_add_holdings_table/test_metric to the active dashboard.
-
-- Initial workspace: dashboard "Backend Build"
-- Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Usage Widget Examples register_backend_and_add_holdings_table/test_metric` → `missing_widget`
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `register_backend_and_add_macro_timeseries`
-
-**easy** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> After calling manage_backends with operation add and name getting-started for Usage Getting Started register_backend_and_add_macro_timeseries, discover company_performance, fetch its schema, and add Usage Getting Started register_backend_and_add_macro_timeseries/company_performance with data_args {"series": "GM"} to the active dashboard.
-
-- Initial workspace: dashboard "Backend Build"
-- Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Usage Getting Started register_backend_and_add_macro_timeseries/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `register_backend_and_add_post_earnings_checklist`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Call manage_backends with operation add and name stark-enterprise to register Bench Stark Enterprise; then discover Post-Earnings Checklist, fetch its schema, and add Bench Stark Enterprise/Post-Earnings Checklist to the active dashboard.
-
-- Initial workspace: dashboard "Backend Build"
-- Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/earnings_estimates_monitor_post_earnings_post_earnings_checklist` → `missing_widget`
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `register_backend_and_add_price_performance`
-
-**easy** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> After calling manage_backends with operation add and name getting-started for Usage Getting Started register_backend_and_add_price_performance, discover table_widget_with_grouping_by_cell_click, fetch its schema, and add Usage Getting Started register_backend_and_add_price_performance/table_widget_with_grouping_by_cell_click with data_args {"symbol": "AAPL"} to the active dashboard.
-
-- Initial workspace: dashboard "Backend Build"
-- Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Usage Getting Started register_backend_and_add_price_performance/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Tool call** ≥1× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `register_two_backends_fundamental_metrics_and_holdings_table`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Register both backends by name (getting-started, widget-examples); then fetch each widget's schema and add Usage Getting Started register_two_backends_fundamental_metrics_and_holdings_table/company_list with data_args {"symbol": "GM"} and Usage Widget Examples register_two_backends_fundamental_metrics_and_holdings_table/test_metric to the active dashboard.
-
-- Initial workspace: dashboard "Cross Backend Build"
-- Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 9 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Usage Getting Started register_two_backends_fundamental_metrics_and_holdings_table/company_list` with data_args ⊇ {"companyId": "GM"} → `missing_widget`
-- **Widget** ≥1× `Usage Widget Examples register_two_backends_fundamental_metrics_and_holdings_table/test_metric` → `missing_widget`
-- **Tool call** ≥2× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `register_two_backends_latest_news_and_yield_curve`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Register both backends by name (getting-started, getting-started); then fetch each widget's schema and add Usage Getting Started register_two_backends_latest_news_and_yield_curve/sample_newsfeed with data_args {"limit": 5, "symbol": "business"} and Usage Widget Examples register_two_backends_latest_news_and_yield_curve/test_metric to the active dashboard.
-
-- Initial workspace: dashboard "Cross Backend Build"
-- Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 9 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Usage Getting Started register_two_backends_latest_news_and_yield_curve/sample_newsfeed` with data_args ⊇ {"category": "business", "limit": 5} → `missing_widget`
-- **Widget** ≥1× `Usage Widget Examples register_two_backends_latest_news_and_yield_curve/test_metric` → `missing_widget`
-- **Tool call** ≥2× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `register_two_backends_ownership_snapshot_and_risk_metrics`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Register backend names stark-enterprise and widget-examples; then fetch each widget's schema and add Bench Stark Enterprise/equity_research_workbench_company_ownership_snapshot and Usage Widget Examples register_two_backends_ownership_snapshot_and_risk_metrics/whitepapers to the active dashboard.
-
-- Initial workspace: dashboard "Cross Backend Build"
-- Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 9 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/equity_research_workbench_company_ownership_snapshot` → `missing_widget`
-- **Widget** ≥1× `Usage Widget Examples register_two_backends_ownership_snapshot_and_risk_metrics/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"]} → `missing_widget`
-- **Tool call** ≥2× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `register_two_backends_sector_exposure_and_macro_timeseries`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Register backend names widget-examples and getting-started; then fetch each widget's schema and add Usage Widget Examples register_two_backends_sector_exposure_and_macro_timeseries/live_grid_example and Usage Getting Started register_two_backends_sector_exposure_and_macro_timeseries/company_performance with data_args {"series": "TM"} to the active dashboard.
-
-- Initial workspace: dashboard "Cross Backend Build"
-- Allowed tools (5): `manage_backends`, `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 9 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Usage Widget Examples register_two_backends_sector_exposure_and_macro_timeseries/live_grid_example` → `missing_widget`
-- **Widget** ≥1× `Usage Getting Started register_two_backends_sector_exposure_and_macro_timeseries/company_performance` with data_args ⊇ {"company": "TM", "year": "2024"} → `missing_widget`
-- **Tool call** ≥2× `manage_backends` with args ⊇ {"operation": "add"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-### create (32)
-
-#### `capability_card_view_level0`
-
-**level0** · category: dashboard · specification: -
-
-> Place Getting Started's single big-number card whose first sample is Total Users on Home.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/metric_widget` → `missing_widget`
-
-#### `capability_card_view_level1`
-
-**level1** · category: dashboard · specification: -
-
-> Discover which connected catalog offers the single big-number card whose leading sample is Total Users, then add that card to Home.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/metric_widget` → `missing_widget`
-
-#### `capability_card_view_level2`
-
-**level2** · category: dashboard · specification: -
-
-> Build a Home overview with the Total Users single big-number card beside the firm snapshot for the global equities strategy this year. Resolve the strategy and period from the snapshot's declared choices.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/metric_widget` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/executive_investment_dashboard_firm_overview_firm_snapshot` with data_args ⊇ {"strategy": "Global Equities", "period": "YTD"} → `missing_widget`
-
-#### `capability_card_view_level3`
-
-**level3** · category: dashboard · specification: -
-
-> Inspect Morning Markets and extend its overview, including the firm snapshot, with the single big-number card led by Total Users. Keep all four market widgets, their settings, and every other dashboard unchanged.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Morning Markets"
-- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/executive_investment_dashboard_firm_overview_firm_snapshot` with data_args ⊇ {"strategy": "Global Equities", "period": "1D"} on tab `overview` → `missing_widget`
-- **Widget** ≥1× `Getting Started/metric_widget` on tab `overview` → `missing_widget`
-
-#### `capability_card_view_level4`
-
-**level4** · category: dashboard · specification: -
-
-> Extend the Total Users single big-number card with Apple spot-and-revenue evidence under the desk tearsheet convention. Add the two convention-governed sources for latest price and latest-quarter fundamentals on Home.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Daloopa/daloopa_stock_prices` with data_args ⊇ {"ticker": "AAPL"} → `missing_widget`
-- **Widget** ≥1× `Bench Daloopa/daloopa_company_fundamentals` with data_args ⊇ {"ticker": "AAPL", "period": "2026Q1"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/metric_widget` → `missing_widget`
-
-#### `capability_card_view_level5`
-
-**level5** · category: platform · specification: -
-
-> Build a Pilot Capability Cards backend with two compact single big-number widgets: User Metric and Session Metric. Compose them without overlap on a Cards tab in a Capability Card Board, publish and instantiate the app, and leave it open. Keep both widget definitions minimal and free of sample rows.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Pilot Capability Cards/user_metric` on tab `cards` → `missing_widget`
-- **Widget** ≥1× `Pilot Capability Cards/session_metric` on tab `cards` → `missing_widget`
-
-#### `cross_aapl_rates`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> On the active dashboard, add these two widgets: the Table widget with grouping by cell click widget from Getting Started for AAPL and the Car Manufacturer Performance widget from Getting Started for GM. Then add a HTML card mentioning AAPL and GM.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Cross-Backend Task"
-- Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Generated html** ≥1× whose content mentions "AAPL", "GM" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `cross_book_inflation`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Build the active dashboard with these two widgets: the Metric Widget from Widget Examples and the Car Manufacturer Performance widget from Getting Started for F. Add a note mentioning holdings and F.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Cross-Backend Task"
-- Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 8 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "F", "year": "2024"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "holdings", "F" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `cross_msft_exposure`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Add these two widgets to the active dashboard: the Sample News Feed widget from Getting Started for business and the Live Grid widget from Widget Examples. Then add a note mentioning business and sector exposure.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Cross-Backend Task"
-- Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 8 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "business", "limit": 5} → `missing_widget`
-- **Widget** ≥1× `Widget Examples/live_grid_example` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "business", "sector exposure" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `cross_nvda_curve`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> On the active dashboard, add these two widgets: the Table widget with grouping by cell click widget from Getting Started for TSLA and the Metric Widget from Widget Examples. Then add a note mentioning TSLA and yield curve.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Cross-Backend Task"
-- Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 8 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "TSLA", "yield curve" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `estimate_history_nvda`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Add the Live Grid widget for TSLA to the active dashboard. Discover the widget catalog and its schema before creating.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Creation Task"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `read_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `latest_news_aapl`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> On the active dashboard, create a Sample News Feed widget (widget_id sample_newsfeed) from the Getting Started backend with data_args {"symbol": "tech", "limit": 5}.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Creation Task"
-- Allowed tools (3): `get_workspace_snapshot`, `create_widget`, `read_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "tech", "limit": 5} → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `macro_timeseries_dgs10`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> To the active dashboard, add the Car Manufacturer Performance widget for GM. Discover the widget catalog and its schema before creating.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Creation Task"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `read_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `place_fundamental_metrics_aapl`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Place a Company List with ID Mapping widget for TM at exactly x=0, y=0, width 10, height 8. Fetch the widget schema and confirm the symbol value through the parameter options before creating.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Placement Task"
-- Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_list` with data_args ⊇ {"companyId": "TM"} → `missing_widget`
-- **Layout** `company_list` must sit at exactly x=0, y=0, w=10, h=8 → `layout_mismatch`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "company_list", "param_name": "companyId"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `place_latest_news_msft`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Add the Sample News Feed widget for business and place it at exactly x=20, y=0, width 20, height 10. Fetch the widget schema and confirm the symbol value through the parameter options before creating.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Placement Task"
-- Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "business", "limit": 5} → `missing_widget`
-- **Layout** `sample_newsfeed` must sit at exactly x=20, y=0, w=20, h=10 → `layout_mismatch`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "sample_newsfeed", "param_name": "category"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `place_macro_timeseries_fedfunds`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Fetch the widget schema and confirm the series value through the parameter options before creating the Car Manufacturer Performance widget for TM, then place it at exactly x=0, y=2, width 20, height 10.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Placement Task"
-- Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TM", "year": "2024"} → `missing_widget`
-- **Layout** `company_performance` must sit at exactly x=0, y=2, w=20, h=10 → `layout_mismatch`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "company_performance", "param_name": "company"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `place_price_performance_nvda`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Fetch the widget schema and confirm the symbol value through the parameter options before creating the Table widget with grouping by cell click widget for TSLA, then place it at exactly x=0, y=2, width 20, height 12.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Placement Task"
-- Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`
-- **Layout** `table_widget_with_grouping_by_cell_click` must sit at exactly x=0, y=2, w=20, h=12 → `layout_mismatch`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "table_widget_with_grouping_by_cell_click", "param_name": "symbol"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `pm_research_view_level0`
-
-**level0** · category: dashboard · specification: -
-
-> Put Portfolio Command Center's Trade Ideas on Home for Flagship Long/Short year to date.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "YTD"} → `missing_widget`
-
-#### `pm_research_view_level1`
-
-**level1** · category: dashboard · specification: -
-
-> Identify the Portfolio Command Center view that carries actionable trade ideas, then place its Global Opportunities quarter-to-date configuration on Home.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Global Opportunities", "period": "QTD"} → `missing_widget`
-
-#### `pm_research_view_level2`
-
-**level2** · category: dashboard · specification: -
-
-> Compose a Home decision view with Portfolio Command Center's Trade Ideas for the flagship book this year and the multi-file viewer that can place the Bitcoin whitepaper in its layer-one category. Resolve the catalog controls.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "YTD"} → `missing_widget`
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"], "category": "l1"} → `missing_widget`
-
-#### `pm_research_view_level3`
-
-**level3** · category: dashboard · specification: -
-
-> Inspect IC Prep - Q3 Review and extend its Evidence tab with the flagship year-to-date Trade Ideas view from Portfolio Command Center. Preserve its agenda, evidence widgets, and every other dashboard.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "IC Prep - Q3 Review"
-- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `evidence` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "YTD"} on tab `evidence` → `missing_widget`
-
-#### `pm_research_view_level4`
-
-**level4** · category: dashboard · specification: -
-
-> Arrange Home for an Apple review with Portfolio Command Center's flagship year-to-date Trade Ideas and the governing source required by the desk guidance-tracker convention. Preserve all unrelated workspace content.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Daloopa/daloopa_management_guidance` with data_args ⊇ {"ticker": "AAPL"} → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "YTD"} → `missing_widget`
-
-#### `pm_research_view_level5`
-
-**level5** · category: platform · specification: -
-
-> Author a Pilot PM Research backend with an Idea Queue table and a Risk Snapshot metric, both governed by flagship-book and year-to-date controls. Compose them side by side in a PM Research Board Decision tab, publish and instantiate the app, and leave it open without embedding sample rows.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Pilot PM Research/idea_queue` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "YTD"} on tab `decision` → `missing_widget`
-- **Widget** ≥1× `Pilot PM Research/risk_snapshot` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "YTD"} on tab `decision` → `missing_widget`
-
-#### `preserve_fundamental_metrics_msft`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Keep the existing Live Grid widget undisturbed and non-overlapped while adding the Company List with ID Mapping widget for MSFT next to it.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): live_grid_data({"symbol": "MSFT"})
-- Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Getting Started/company_list` with data_args ⊇ {"companyId": "VWAGY"} → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `preserve_latest_news_aapl`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Keep the existing Table widget with grouping by cell click widget undisturbed and non-overlapped while adding the Sample News Feed widget for AAPL next to it.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"})
-- Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "tech", "limit": 5} → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `preserve_risk_metrics_plain`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> This dashboard already has a Metric Widget. Add the Whitepapers widget next to it without disturbing the existing widget or overlapping it.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): test_metric({})
-- Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"]} → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `preserve_yield_curve_plain`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Keep the existing Car Manufacturer Performance widget undisturbed and non-overlapped while adding the Metric Widget next to it.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): company_performance({"company": "GM", "year": "2024"})
-- Allowed tools (7): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`, `read_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `price_performance_aapl`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> On the active dashboard, create a Table widget with grouping by cell click widget (widget_id table_widget_with_grouping_by_cell_click) from the Getting Started backend with data_args {"symbol": "AAPL"}.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Creation Task"
-- Allowed tools (3): `get_workspace_snapshot`, `create_widget`, `read_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `price_performance_msft`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> To the active dashboard, add the Table widget with grouping by cell click widget for MSFT. Discover the widget catalog and its schema before creating.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Creation Task"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `read_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `risk_metrics_plain`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Create a Whitepapers widget (widget_id whitepapers) from the Widget Examples backend on the active dashboard.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Creation Task"
-- Allowed tools (3): `get_workspace_snapshot`, `create_widget`, `read_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"]} → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `sector_exposure_plain`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> To the active dashboard, add the Live Grid widget. Discover the widget catalog and its schema before creating.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Creation Task"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `read_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/live_grid_example` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `yield_curve_plain`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Create a Metric Widget (widget_id test_metric) from the Widget Examples backend on the active dashboard.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Creation Task"
-- Allowed tools (3): `get_workspace_snapshot`, `create_widget`, `read_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-### delegate (20)
-
-#### `build_earnings_build`
-
-**hard** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Use assign_tasks_to_agents with two task_requests using ids revisions-analyst and reaction-analyst. Then add the Consensus Revisions widget (id earnings_estimates_monitor_estimates_consensus_revisions) from the Bench Stark Enterprise backend so the workstreams have their data, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_themes_crowded_names({})
-- Allowed tools (6): `get_workspace_snapshot`, `assign_tasks_to_agents`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/earnings_estimates_monitor_estimates_consensus_revisions` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/strategy_health_monitor_themes_crowded_names` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "revisions analyst", "reaction analyst", "consensus revisions" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "revisions-analyst", "reaction-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `build_exec_build`
-
-**hard** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Use assign_tasks_to_agents with two task_requests using ids rejects-analyst and restricted-analyst. Then add the Rejected Orders widget (id execution_desk_exceptions_rejected_orders) from the Bench Stark Enterprise backend so the workstreams have their data, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_themes_factor_tilts({})
-- Allowed tools (6): `get_workspace_snapshot`, `assign_tasks_to_agents`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/execution_desk_exceptions_rejected_orders` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/strategy_health_monitor_themes_factor_tilts` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "rejects analyst", "restricted analyst", "rejected orders" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "rejects-analyst", "restricted-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `build_risk_build`
-
-**hard** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Use assign_tasks_to_agents with two task_requests using ids var-analyst and stress-analyst. Then add the VaR Trend widget (id risk_exposure_monitor_dashboard_var_trend) from the Bench Stark Enterprise backend so the workstreams have their data, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_themes_thematic_baskets({})
-- Allowed tools (6): `get_workspace_snapshot`, `assign_tasks_to_agents`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/risk_exposure_monitor_dashboard_var_trend` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/strategy_health_monitor_themes_thematic_baskets` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "var analyst", "stress analyst", "var trend" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "var-analyst", "stress-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `build_vendor_build`
-
-**hard** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Call assign_tasks_to_agents with two task_requests using ids triage-analyst and sla-analyst. Then add the Incident Log widget (id vendor_dataset_monitor_incidents_incident_log) from the Bench Stark Enterprise backend so the workstreams have their data, and add a coordinator HTML card naming both workstreams. Omit dashboard_id when adding the HTML card.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_watchlist_names_near_action_levels({})
-- Allowed tools (6): `get_workspace_snapshot`, `assign_tasks_to_agents`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_incidents_incident_log` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/strategy_health_monitor_watchlist_names_near_action_levels` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated html** ≥1× whose content mentions "triage analyst", "sla analyst", "incident log" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "triage-analyst", "sla-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `client_note`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Call assign_tasks_to_agents with two task_requests using ids ir-analyst and portfolio-analyst for client meeting prep work. Then add a coordinator note naming both workstreams on the active dashboard; omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_watchlist_trade_ideas({})
-- Allowed tools (3): `get_workspace_snapshot`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/strategy_health_monitor_watchlist_trade_ideas` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "ir analyst", "portfolio analyst", "client meeting" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "ir-analyst", "portfolio-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `client_pair`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Use assign_tasks_to_agents with two task_requests using ids ir-analyst and portfolio-analyst for client meeting prep work.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_liquidity_crowded_names({})
-- Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/stress_liquidity_lab_liquidity_crowded_names` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "ir-analyst", "portfolio-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `client_single`
-
-**easy** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Use assign_tasks_to_agents with one task_request using id ir-analyst for client meeting prep work: Prepare talking points and open requests for the client meeting.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_liquidity_redemption_stress({})
-- Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/stress_liquidity_lab_liquidity_redemption_stress` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "ir-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `compliance_pair`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Use assign_tasks_to_agents with two task_requests using ids alerts-analyst and restricted-analyst for compliance surveillance work.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_overview_workflow_overview({})
-- Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/stress_liquidity_lab_overview_workflow_overview` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "alerts-analyst", "restricted-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `earnings_note`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Call assign_tasks_to_agents with two task_requests using ids coverage-analyst and model-analyst for earnings prep work. Then add a coordinator note naming both workstreams on the active dashboard; omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_sign_off_approval_checklist({})
-- Allowed tools (3): `get_workspace_snapshot`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/stress_liquidity_lab_sign_off_approval_checklist` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "coverage analyst", "model analyst", "earnings prep" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "coverage-analyst", "model-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `earnings_pair`
-
-**easy** · category: platform · specification: - · no-op baseline score: 0.000
-
-> For earnings prep work, call assign_tasks_to_agents with two task_requests using ids coverage-analyst and model-analyst.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_sign_off_residual_risk_actions({})
-- Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/stress_liquidity_lab_sign_off_residual_risk_actions` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "coverage-analyst", "model-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `earnings_single`
-
-**easy** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Use assign_tasks_to_agents with one task_request using id coverage-analyst for earnings prep work: Review estimate revisions and transcript tone for earnings prep.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_sign_off_risk_committee_comments({})
-- Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/stress_liquidity_lab_sign_off_risk_committee_comments` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "coverage-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `ops_note`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> For vendor sla monitoring work, call assign_tasks_to_agents with two task_requests using ids triage-analyst and sla-analyst. Then add a coordinator note naming both workstreams on the active dashboard; omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
-- Allowed tools (3): `get_workspace_snapshot`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "triage analyst", "sla analyst", "vendor" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "triage-analyst", "sla-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `risk_note`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Use assign_tasks_to_agents with two task_requests using ids stress-analyst and limits-analyst for risk review work. Then add a coordinator note naming both workstreams on the active dashboard; omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
-- Allowed tools (3): `get_workspace_snapshot`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "stress analyst", "limits analyst", "risk review" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "stress-analyst", "limits-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `risk_pair`
-
-**easy** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Call assign_tasks_to_agents with two task_requests using ids stress-analyst and limits-analyst for risk review work.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
-- Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "stress-analyst", "limits-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `risk_single`
-
-**easy** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Call assign_tasks_to_agents with one task_request using id stress-analyst for risk review work: Run the historical stress scenarios and summarize losses.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
-- Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "stress-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `skill_comps_skill`
-
-**hard** · category: platform · specification: - · no-op baseline score: 0.000
-
-> After calling get_skill_content with slug finance-comps to understand the workflow, call assign_tasks_to_agents with two task_requests using ids peers-analyst and multiples-analyst covering that workflow, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
-- Allowed tools (4): `get_workspace_snapshot`, `get_skill_content`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "peers analyst", "multiples analyst", "comps" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-comps"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Comps workflow", "peer set", "valuation multiples" (agent must actually retrieve the data) → `missing_tool_result`
-- **Tool result** of `assign_tasks_to_agents` must contain "peers-analyst", "multiples-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `skill_earnings_skill`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Call get_skill_content with slug finance-earnings-prep to understand the workflow. Then call assign_tasks_to_agents with two task_requests using ids coverage-analyst and model-analyst covering that workflow, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
-- Allowed tools (4): `get_workspace_snapshot`, `get_skill_content`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "coverage analyst", "model analyst", "earnings prep" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-earnings-prep"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Earnings prep workflow", "surprise drivers", "portfolio manager" (agent must actually retrieve the data) → `missing_tool_result`
-- **Tool result** of `assign_tasks_to_agents` must contain "coverage-analyst", "model-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `skill_guidance_skill`
-
-**hard** · category: platform · specification: - · no-op baseline score: 0.000
-
-> After calling get_skill_content with slug finance-guidance-tracker to understand the workflow, call assign_tasks_to_agents with two task_requests using ids claims-analyst and evidence-analyst covering that workflow, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
-- Allowed tools (4): `get_workspace_snapshot`, `get_skill_content`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "claims analyst", "evidence analyst", "guidance" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-guidance-tracker"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Guidance tracker workflow", "management claims", "evidence gaps" (agent must actually retrieve the data) → `missing_tool_result`
-- **Tool result** of `assign_tasks_to_agents` must contain "claims-analyst", "evidence-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `skill_tearsheet_skill`
-
-**medium** · category: platform · specification: - · no-op baseline score: 0.000
-
-> After calling get_skill_content with slug finance-tearsheet to understand the workflow, call assign_tasks_to_agents with two task_requests using ids valuation-analyst and catalyst-analyst covering that workflow, and add a coordinator note naming both workstreams. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
-- Allowed tools (4): `get_workspace_snapshot`, `get_skill_content`, `assign_tasks_to_agents`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "valuation analyst", "catalyst analyst", "tearsheet" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-tearsheet"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Tearsheet workflow", "valuation", "investment conclusion" (agent must actually retrieve the data) → `missing_tool_result`
-- **Tool result** of `assign_tasks_to_agents` must contain "valuation-analyst", "catalyst-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `vendor_single`
-
-**easy** · category: platform · specification: - · no-op baseline score: 0.000
-
-> Call assign_tasks_to_agents with one task_request using id triage-analyst for vendor sla monitoring work: Triage the open vendor incident log by severity.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Delegation Board"; 1 tab(s): overview
-- Allowed tools (2): `get_workspace_snapshot`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tool call** ≥1× `assign_tasks_to_agents` must appear in the trace → `missing_tool_call`
-- **Tool result** of `assign_tasks_to_agents` must contain "triage-analyst" (agent must actually retrieve the data) → `missing_tool_result`
-
-### delete (20)
-
-#### `deduplicate_and_fix_latest_news`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> This dashboard has two identical Sample News Feed widgets for science, and the desk actually needs tech. Remove exactly one duplicate, update the remaining widget to tech, and add a note mentioning tech and the word repaired.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Dedup And Fix"; 2 seeded widget(s): sample_newsfeed({"category": "science", "limit": 5}), sample_newsfeed({"category": "science", "limit": 5})
-- Allowed tools (5): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "tech"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥0× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "science"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "tech", "repaired" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `deduplicate_and_fix_macro_timeseries`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> This dashboard has two identical Car Manufacturer Performance widgets for GM, and the desk actually needs VWAGY. Remove exactly one duplicate, update the remaining widget to VWAGY, and add a note mentioning VWAGY and the word repaired.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Dedup And Fix"; 2 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), company_performance({"company": "GM", "year": "2024"})
-- Allowed tools (5): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "VWAGY", "year": "2024"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥0× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "VWAGY", "repaired" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `deduplicate_and_fix_price_performance`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Remove exactly one duplicate from the two identical Table widget with grouping by cell click widgets for AAPL; then update the remaining widget to TSLA and add a note mentioning TSLA and the word repaired.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Dedup And Fix"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), table_widget_with_grouping_by_cell_click({"symbol": "AAPL"})
-- Allowed tools (5): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥0× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "TSLA", "repaired" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `deduplicate_and_fix_vendor_sla_status`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> The dashboard contains two identical Vendor SLA Status widgets for YTD, but the desk actually needs MTD. Remove exactly one duplicate, update the remaining widget to MTD, and add a note mentioning MTD and the word repaired.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Dedup And Fix"; 2 seeded widget(s): vendor_dataset_monitor_slas_vendor_sla_status({"period": "YTD"}), vendor_dataset_monitor_slas_vendor_sla_status({"period": "YTD"})
-- Allowed tools (5): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_slas_vendor_sla_status` with data_args ⊇ {"period": "MTD"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥0× `Bench Stark Enterprise/vendor_dataset_monitor_slas_vendor_sla_status` with data_args ⊇ {"period": "YTD"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "MTD", "repaired" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `remove_duplicate_estimate_history_and_document`
-
-**medium** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Two identical Live Grid widgets are on this dashboard. Remove exactly one duplicate, then add a HTML card saying the duplicate was removed.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Duplicate Repair"; 2 seeded widget(s): live_grid_data({"symbol": "AAPL"}), live_grid_data({"symbol": "AAPL"})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated html** ≥1× whose content mentions "duplicate", "removed" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `remove_duplicate_fundamental_metrics_and_document`
-
-**medium** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Remove exactly one duplicate from the two identical Company List with ID Mapping widgets, then add a note saying the duplicate was removed.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Duplicate Repair"; 2 seeded widget(s): company_list({"companyId": "GM"}), company_list({"companyId": "GM"})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_list` with data_args ⊇ {"companyId": "GM"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "duplicate", "removed" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `remove_duplicate_latest_news`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> The dashboard has two identical Sample News Feed widgets. Remove exactly one so a single copy remains; do not change the one that stays.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Duplicate Cleanup"; 2 seeded widget(s): sample_newsfeed({"category": "business", "limit": 5}), sample_newsfeed({"category": "business", "limit": 5})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "business", "limit": 5} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `remove_duplicate_live_orders_and_document`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Remove exactly one duplicate from the two identical Live Orders widgets, then add a note saying the duplicate was removed.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Duplicate Repair"; 2 seeded widget(s): execution_desk_blotter_live_orders({"desk": "US Equity"}), execution_desk_blotter_live_orders({"desk": "US Equity"})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/execution_desk_blotter_live_orders` with data_args ⊇ {"desk": "US Equity"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "duplicate", "removed" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `remove_duplicate_macro_timeseries`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> There are two identical Car Manufacturer Performance widgets on the dashboard. Remove exactly one so a single copy remains; do not change the one that stays.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Duplicate Cleanup"; 2 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), company_performance({"company": "GM", "year": "2024"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `remove_duplicate_price_performance`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> There are two identical Table widget with grouping by cell click widgets on the dashboard. Remove exactly one so a single copy remains; do not change the one that stays.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Duplicate Cleanup"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), table_widget_with_grouping_by_cell_click({"symbol": "AAPL"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `remove_duplicate_sector_exposure_and_document`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Remove exactly one duplicate from the two identical Live Grid widgets, then add a note saying the duplicate was removed.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Duplicate Repair"; 2 seeded widget(s): live_grid_example({}), live_grid_example({})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `delete_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/live_grid_example` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "duplicate", "removed" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `remove_duplicate_vendor_sla_status`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> The dashboard has two identical Vendor SLA Status widgets. Remove exactly one so a single copy remains; do not change the one that stays.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Duplicate Cleanup"; 2 seeded widget(s): vendor_dataset_monitor_slas_vendor_sla_status({"vendor": "FactSet"}), vendor_dataset_monitor_slas_vendor_sla_status({"vendor": "FactSet"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_slas_vendor_sla_status` with data_args ⊇ {"vendor": "FactSet"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `remove_latest_news`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> This dashboard no longer needs the Sample News Feed widget; remove it.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Removal Task"; 1 seeded widget(s): sample_newsfeed({"category": "tech", "limit": 5})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥0× `Getting Started/sample_newsfeed` → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-
-#### `remove_macro_timeseries`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> The Car Manufacturer Performance widget is no longer needed on this dashboard. Remove it.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Removal Task"; 1 seeded widget(s): company_performance({"company": "VWAGY", "year": "2024"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥0× `Getting Started/company_performance` with data_args ⊇ {"year": "2024"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-
-#### `remove_price_performance`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> This dashboard no longer needs the Table widget with grouping by cell click widget; remove it.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Removal Task"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "TSLA"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥0× `Getting Started/table_widget_with_grouping_by_cell_click` → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-
-#### `remove_top_alerts`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> This dashboard no longer needs the Top Alerts widget; remove it.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Removal Task"; 1 seeded widget(s): portfolio_command_center_overview_top_alerts({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥0× `Bench Stark Enterprise/portfolio_command_center_overview_top_alerts` → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-
-#### `similar_estimate_history_msft`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Remove exactly one duplicate MSFT Live Grid widget from the two identical MSFT copies, while keeping the other duplicate and the TSLA widget untouched.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Similar Cleanup"; 3 seeded widget(s): live_grid_data({"symbol": "MSFT"}), live_grid_data({"symbol": "MSFT"}), live_grid_data({"symbol": "TSLA"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `similar_latest_news_nvda`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Remove exactly one duplicate science Sample News Feed widget from the two identical science copies, while keeping the other duplicate and the tech widget untouched.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Similar Cleanup"; 3 seeded widget(s): sample_newsfeed({"category": "science", "limit": 5}), sample_newsfeed({"category": "science", "limit": 5}), sample_newsfeed({"category": "tech", "limit": 5})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "science"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "tech"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `similar_macro_timeseries_dgs10`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> This dashboard has three Car Manufacturer Performance widgets: two identical ones for GM and one for VWAGY. Remove exactly one duplicate GM widget; keep the other and keep the VWAGY widget untouched.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Similar Cleanup"; 3 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), company_performance({"company": "GM", "year": "2024"}), company_performance({"company": "VWAGY", "year": "2024"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "VWAGY", "year": "2024"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `similar_price_performance_aapl`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> This dashboard has three Table widget with grouping by cell click widgets: two identical ones for AAPL and one for MSFT. Remove exactly one duplicate AAPL widget; keep the other and keep the MSFT widget untouched.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Similar Cleanup"; 3 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-### inspect (20)
-
-#### `ambient_repair_and_brief_macro_timeseries`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> After inspecting the dashboard, find the widget with series=VWAGY, repair it to GM, keep the companion widget, and add a note mentioning the repair.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Inspect Full Repair"; 2 seeded widget(s): test_metric({}), company_performance({"company": "VWAGY", "year": "2024"})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Widget** ≥0× `Getting Started/company_performance` with data_args ⊇ {"company": "VWAGY", "year": "2024"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "VWAGY", "GM", "repair" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `ambient_repair_and_brief_price_performance`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Keep the companion widget while finding the widget with symbol=MSFT, repairing it to AAPL, and adding a note mentioning the repair after inspecting the dashboard.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Inspect Full Repair"; 2 seeded widget(s): sample_newsfeed({"category": "tech", "limit": 5}), table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "tech", "limit": 5} → `missing_widget`
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Widget** ≥0× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "MSFT", "AAPL", "repair" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `ambient_repair_and_brief_risk_stats`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> After inspecting the dashboard, find the widget with client=Northstar Endowment, repair it to Atlas Pension, keep the companion widget, and add a HTML card mentioning the repair.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Inspect Full Repair"; 2 seeded widget(s): reporting_factsheet_studio_overview_workflow_overview({}), reporting_factsheet_studio_factsheets_risk_stats({"client": "Northstar Endowment"})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/reporting_factsheet_studio_overview_workflow_overview` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/reporting_factsheet_studio_factsheets_risk_stats` with data_args ⊇ {"client": "Atlas Pension"} → `missing_widget`
-- **Widget** ≥0× `Bench Stark Enterprise/reporting_factsheet_studio_factsheets_risk_stats` with data_args ⊇ {"client": "Northstar Endowment"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated html** ≥1× whose content mentions "Northstar Endowment", "Atlas Pension", "repair" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `ambient_repair_and_brief_sector_exposure`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Inspect the dashboard, find the widget with sector=Consumer Staples, repair it to Technology, keep the companion widget, and add a note mentioning the repair.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Inspect Full Repair"; 2 seeded widget(s): whitepapers({"filenames": ["bitcoin.pdf"]}), live_grid_example({"symbol": "TSLA"})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"]} → `missing_widget`
-- **Widget** ≥1× `Widget Examples/live_grid_example` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Widget** ≥0× `Widget Examples/live_grid_example` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "Consumer Staples", "Technology", "repair" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `find_and_fix_misconfigured_estimate_history`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use read_widget with widget_id live_grid_data to inspect the widget configured with symbol=AAPL, then update_widget so symbol=TSLA.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Inspect Repair"; 1 seeded widget(s): live_grid_data({"symbol": "AAPL"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-
-#### `find_and_fix_misconfigured_factor_exposure_table`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use read_widget with widget_id quant_research_backtest_lab_risk_model_factor_exposure_table to inspect the widget configured with universe=Liquid Crypto, then update_widget so universe=US Large Cap.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Inspect Repair"; 1 seeded widget(s): quant_research_backtest_lab_risk_model_factor_exposure_table({"universe": "Liquid Crypto"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/quant_research_backtest_lab_risk_model_factor_exposure_table` with data_args ⊇ {"universe": "US Large Cap"} → `missing_widget`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-
-#### `find_and_fix_misconfigured_macro_timeseries`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> After calling read_widget with widget_id company_performance, update the widget configured with series=TM so series=GM.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Inspect Repair"; 1 seeded widget(s): company_performance({"company": "TM", "year": "2024"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-
-#### `find_and_fix_misconfigured_price_performance`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> After calling read_widget with widget_id table_widget_with_grouping_by_cell_click, update the widget configured with symbol=MSFT so symbol=AAPL.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Inspect Repair"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-
-#### `find_duplicate_drift_by_sleeve`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Inspect the dashboard, identify the duplicate Drift by Sleeve among the seeded widgets, and remove exactly one duplicate while preserving the Workflow Overview widget.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Inspect Deduplicate"; 3 seeded widget(s): rebalance_scenario_lab_drift_drift_by_sleeve({}), rebalance_scenario_lab_drift_drift_by_sleeve({}), rebalance_scenario_lab_overview_workflow_overview({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/rebalance_scenario_lab_drift_drift_by_sleeve` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Bench Stark Enterprise/rebalance_scenario_lab_overview_workflow_overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `find_duplicate_latest_news`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Preserve the table_widget_with_grouping_by_cell_click widget while inspecting the dashboard, identifying the duplicate sample_newsfeed among the seeded widgets, and removing exactly one duplicate.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Inspect Deduplicate"; 3 seeded widget(s): sample_newsfeed({"category": "tech", "limit": 5}), sample_newsfeed({"category": "tech", "limit": 5}), table_widget_with_grouping_by_cell_click({"symbol": "AAPL"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "tech", "limit": 5} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `find_duplicate_macro_timeseries`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> After inspecting the dashboard, identify the duplicate company_performance among the seeded widgets and remove exactly one duplicate while preserving the test_metric widget.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Inspect Deduplicate"; 3 seeded widget(s): company_performance({"company": "VWAGY", "year": "2024"}), company_performance({"company": "VWAGY", "year": "2024"}), test_metric({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "VWAGY", "year": "2024"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `find_duplicate_risk_metrics`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Preserve the test_metric widget while inspecting the dashboard, identifying the duplicate whitepapers among the seeded widgets, and removing exactly one duplicate.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Inspect Deduplicate"; 3 seeded widget(s): whitepapers({"filenames": ["bitcoin.pdf"]}), whitepapers({"filenames": ["bitcoin.pdf"]}), test_metric({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `delete_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"]} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `inspect_and_repair_overlap_disclosure_checklist`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Move the overlapping reporting_factsheet_studio_commentary_pm_quote_bank widget to x=24, y=0, w=16, h=10 after inspecting the dashboard and finding it.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Inspect Overlap"; 2 seeded widget(s): reporting_factsheet_studio_commentary_disclosure_checklist({}), reporting_factsheet_studio_commentary_pm_quote_bank({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `usage_inspect_and_repair_overlap_disclosure_checklist_widget_001` must sit at exactly x=0, y=0, w=24, h=10 → `layout_mismatch`
-- **Layout** `usage_inspect_and_repair_overlap_disclosure_checklist_widget_002` must sit at exactly x=24, y=0, w=16, h=10 → `layout_mismatch`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `inspect_and_repair_overlap_holdings_table`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Inspect the dashboard, find the overlapping live_grid_example widget, and move it to x=24, y=0, w=16, h=10.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Inspect Overlap"; 2 seeded widget(s): test_metric({}), live_grid_example({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `usage_inspect_and_repair_overlap_holdings_table_widget_001` must sit at exactly x=0, y=0, w=24, h=10 → `layout_mismatch`
-- **Layout** `usage_inspect_and_repair_overlap_holdings_table_widget_002` must sit at exactly x=24, y=0, w=16, h=10 → `layout_mismatch`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `inspect_and_repair_overlap_macro_timeseries`
-
-**medium** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Find the overlapping test_metric widget after inspecting the dashboard, and move it to x=24, y=0, w=16, h=10.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Inspect Overlap"; 2 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), test_metric({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `usage_inspect_and_repair_overlap_macro_timeseries_widget_001` must sit at exactly x=0, y=0, w=24, h=10 → `layout_mismatch`
-- **Layout** `usage_inspect_and_repair_overlap_macro_timeseries_widget_002` must sit at exactly x=24, y=0, w=16, h=10 → `layout_mismatch`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `inspect_and_repair_overlap_price_performance`
-
-**medium** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Inspect the dashboard, find the overlapping sample_newsfeed widget, and move it to x=24, y=0, w=16, h=10.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Inspect Overlap"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), sample_newsfeed({"category": "tech", "limit": 5})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `usage_inspect_and_repair_overlap_price_performance_widget_001` must sit at exactly x=0, y=0, w=24, h=10 → `layout_mismatch`
-- **Layout** `usage_inspect_and_repair_overlap_price_performance_widget_002` must sit at exactly x=24, y=0, w=16, h=10 → `layout_mismatch`
-- **Tool call** ≥1× `read_widget` must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `inspect_holdings_table`
-
-**easy** · category: read · specification: - · no-op baseline score: 0.000
-
-> After calling read_widget with widget_id test_metric for the existing Widget Examples/test_metric widget, add a note mentioning holdings.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Inspect Board"; 1 seeded widget(s): test_metric({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "holdings" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `read_widget` with args ⊇ {"widget_id": "test_metric"} must appear in the trace → `missing_tool_call`
-
-#### `inspect_macro_timeseries`
-
-**easy** · category: read · specification: - · no-op baseline score: 0.000
-
-> Call read_widget with widget_id company_performance for the existing Getting Started/company_performance widget, then add a note mentioning GM.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Inspect Board"; 1 seeded widget(s): company_performance({"company": "GM", "year": "2024"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "GM" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `read_widget` with args ⊇ {"widget_id": "company_performance"} must appear in the trace → `missing_tool_call`
-
-#### `inspect_price_performance`
-
-**easy** · category: read · specification: - · no-op baseline score: 0.000
-
-> After calling read_widget with widget_id table_widget_with_grouping_by_cell_click for the existing Getting Started/table_widget_with_grouping_by_cell_click widget, add a note mentioning AAPL.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Inspect Board"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "AAPL" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `read_widget` with args ⊇ {"widget_id": "table_widget_with_grouping_by_cell_click"} must appear in the trace → `missing_tool_call`
-
-#### `inspect_workflow_overview`
-
-**easy** · category: read · specification: - · no-op baseline score: 0.000
-
-> Call read_widget with widget_id portfolio_command_center_overview_workflow_overview for the existing Bench Stark Enterprise/portfolio_command_center_overview_workflow_overview widget, then add a note mentioning stark.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Inspect Board"; 1 seeded widget(s): portfolio_command_center_overview_workflow_overview({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "stark" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `read_widget` with args ⊇ {"widget_id": "portfolio_command_center_overview_workflow_overview"} must appear in the trace → `missing_tool_call`
-
-### layout (20)
-
-#### `arrange_split_macro`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Set the getting-started widgets side by side with the 10Y series on the left half and the yield curve on the right half; both should be 10 rows tall starting at row 0.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Arrangement Task"; 2 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), test_metric({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `company_performance` must sit at exactly x=0, y=0, w=20, h=10 → `layout_mismatch`
-- **Layout** `test_metric` must sit at exactly x=20, y=0, w=20, h=10 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `arrange_split_portfolio`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Arrange the widget-examples widgets: holdings on the left with width 24 and sector exposure to its right with width 16, both 12 rows tall starting at row 0.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Arrangement Task"; 2 seeded widget(s): test_metric({}), live_grid_example({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `test_metric` must sit at exactly x=0, y=0, w=24, h=12 → `layout_mismatch`
-- **Layout** `live_grid_example` must sit at exactly x=24, y=0, w=16, h=12 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `arrange_split_price_news_aapl`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Place the AAPL price widget on the left half and the AAPL news widget on the right half, side by side, both 12 rows tall starting at row 0.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Arrangement Task"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), sample_newsfeed({"category": "tech", "limit": 5})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `table_widget_with_grouping_by_cell_click` must sit at exactly x=0, y=0, w=20, h=12 → `layout_mismatch`
-- **Layout** `sample_newsfeed` must sit at exactly x=20, y=0, w=20, h=12 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `arrange_stack_price_news_nvda`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Arrange the NVDA widgets full-width with price on top (rows 0-12, 40 columns) and news below it (10 rows tall starting at row 12, 40 columns).
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Arrangement Task"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "TSLA"}), sample_newsfeed({"category": "science", "limit": 5})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `table_widget_with_grouping_by_cell_click` must sit at exactly x=0, y=0, w=40, h=12 → `layout_mismatch`
-- **Layout** `sample_newsfeed` must sit at exactly x=0, y=12, w=40, h=10 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `equity_three_widget_grid`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Arrange the three AAPL widgets into a grid: price at columns 0-20 rows 0-12, news at columns 20-40 rows 0-12, and estimates full-width below them (40 columns, 8 rows, starting at row 12).
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Grid Task"; 3 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), sample_newsfeed({"category": "tech", "limit": 5}), live_grid_data({"symbol": "AAPL"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `usage_equity_three_widget_grid_widget_001` must sit at exactly x=0, y=0, w=20, h=12 → `layout_mismatch`
-- **Layout** `usage_equity_three_widget_grid_widget_002` must sit at exactly x=20, y=0, w=20, h=12 → `layout_mismatch`
-- **Layout** `usage_equity_three_widget_grid_widget_003` must sit at exactly x=0, y=12, w=40, h=8 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `halve_price_msft`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Resize the MSFT price widget to half width (20 columns). Keep its position.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Layout Task"; 1 tab(s): charts; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `charts` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "MSFT"} on tab `charts` → `missing_widget`
-- **Layout** `table_widget_with_grouping_by_cell_click` must sit at exactly x=0, y=2, w=20, h=12 on tab `charts` → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `macro_three_widget_grid`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Arrange the three getting-started widgets into a grid: the 2Y series at columns 0-20 rows 0-10, the 10Y series at columns 20-40 rows 0-10, and the yield curve full-width below them (40 columns, 10 rows, starting at row 10).
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Grid Task"; 3 seeded widget(s): company_performance({"company": "VWAGY", "year": "2024"}), company_performance({"company": "GM", "year": "2024"}), test_metric({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `usage_macro_three_widget_grid_widget_001` must sit at exactly x=0, y=0, w=20, h=10 → `layout_mismatch`
-- **Layout** `usage_macro_three_widget_grid_widget_002` must sit at exactly x=20, y=0, w=20, h=10 → `layout_mismatch`
-- **Layout** `usage_macro_three_widget_grid_widget_003` must sit at exactly x=0, y=10, w=40, h=10 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `mixed_equity_three_widget_grid`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Arrange the three MSFT widgets: price full-width on top (40 columns, 10 rows), then estimates at columns 0-20 and fundamentals at columns 20-40, both 10 rows starting at row 10.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Grid Task"; 3 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "MSFT"}), live_grid_data({"symbol": "MSFT"}), company_list({"companyId": "VWAGY"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `usage_mixed_equity_three_widget_grid_widget_001` must sit at exactly x=0, y=0, w=40, h=10 → `layout_mismatch`
-- **Layout** `usage_mixed_equity_three_widget_grid_widget_002` must sit at exactly x=0, y=10, w=20, h=10 → `layout_mismatch`
-- **Layout** `usage_mixed_equity_three_widget_grid_widget_003` must sit at exactly x=20, y=10, w=20, h=10 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `move_news_right`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Keep the tech news widget's size and move it to start at column 20.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Layout Task"; 1 tab(s): charts; 1 seeded widget(s): sample_newsfeed({"category": "tech", "limit": 5})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `charts` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "tech", "limit": 5} on tab `charts` → `missing_widget`
-- **Layout** `sample_newsfeed` must sit at exactly x=20, y=0, w=20, h=10 on tab `charts` → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `portfolio_three_widget_grid`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Arrange the three widget-examples widgets into a grid: holdings at columns 0-24 rows 0-12, sector exposure at columns 24-40 rows 0-12, and risk metrics full-width below them (40 columns, 8 rows, starting at row 12).
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Grid Task"; 3 seeded widget(s): test_metric({}), live_grid_example({}), whitepapers({"filenames": ["bitcoin.pdf"]})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `usage_portfolio_three_widget_grid_widget_001` must sit at exactly x=0, y=0, w=24, h=12 → `layout_mismatch`
-- **Layout** `usage_portfolio_three_widget_grid_widget_002` must sit at exactly x=24, y=0, w=16, h=12 → `layout_mismatch`
-- **Layout** `usage_portfolio_three_widget_grid_widget_003` must sit at exactly x=0, y=12, w=40, h=8 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `preserve_estimates_fundamentals_msft`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Do not move the estimates widget; move the MSFT fundamentals widget beside it so it starts at column 24, row 0, keeping its size.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Preserve Layout Task"; 2 seeded widget(s): live_grid_data({"symbol": "MSFT"}), company_list({"companyId": "VWAGY"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `live_grid_data` must sit at exactly x=0, y=0, w=24, h=12 → `layout_mismatch`
-- **Layout** `company_list` must sit at exactly x=24, y=0, w=16, h=8 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `preserve_macro_pair`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Move the yield curve widget beside the 10Y series widget: it should start at column 20, row 0, keeping its size. Do not move the series widget.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Preserve Layout Task"; 2 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), test_metric({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `company_performance` must sit at exactly x=0, y=0, w=20, h=10 → `layout_mismatch`
-- **Layout** `test_metric` must sit at exactly x=20, y=0, w=20, h=10 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `preserve_portfolio_pair`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Move the sector exposure widget beside the holdings widget: it should start at column 24, row 0, keeping its size. Do not move the holdings widget.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Preserve Layout Task"; 2 seeded widget(s): test_metric({}), live_grid_example({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `test_metric` must sit at exactly x=0, y=0, w=24, h=12 → `layout_mismatch`
-- **Layout** `live_grid_example` must sit at exactly x=24, y=0, w=16, h=10 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `preserve_price_news_aapl`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Keeping its size, move the AAPL news widget up beside the price widget at column 20, row 0. Do not move the price widget.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Preserve Layout Task"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), sample_newsfeed({"category": "tech", "limit": 5})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `table_widget_with_grouping_by_cell_click` must sit at exactly x=0, y=0, w=20, h=12 → `layout_mismatch`
-- **Layout** `sample_newsfeed` must sit at exactly x=20, y=0, w=20, h=10 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `repair_aapl_price_news_overlap`
-
-**medium** · category: repair · specification: - · no-op baseline score: 0.000
-
-> The AAPL news widget overlaps the price widget. Move the news widget to start at column 20 with its current size. Do not move the price widget.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Overlap Repair"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), sample_newsfeed({"category": "tech", "limit": 5})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `table_widget_with_grouping_by_cell_click` must sit at exactly x=0, y=0, w=20, h=12 → `layout_mismatch`
-- **Layout** `sample_newsfeed` must sit at exactly x=20, y=0, w=20, h=10 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `repair_macro_overlap`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Do not move the 10Y series widget; resolve the overlap by moving the yield curve widget to start at column 20 with its current size.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Overlap Repair"; 2 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), test_metric({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `company_performance` must sit at exactly x=0, y=0, w=20, h=10 → `layout_mismatch`
-- **Layout** `test_metric` must sit at exactly x=20, y=0, w=20, h=10 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `repair_msft_estimates_overlap`
-
-**medium** · category: repair · specification: - · no-op baseline score: 0.000
-
-> The MSFT fundamentals widget overlaps the estimates widget. Move the fundamentals widget to start at column 24 with its current size. Do not move the estimates widget.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Overlap Repair"; 2 seeded widget(s): live_grid_data({"symbol": "MSFT"}), company_list({"companyId": "VWAGY"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `live_grid_data` must sit at exactly x=0, y=0, w=24, h=12 → `layout_mismatch`
-- **Layout** `company_list` must sit at exactly x=24, y=0, w=16, h=8 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `repair_portfolio_overlap`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> The sector exposure widget overlaps the holdings widget. Move the sector exposure widget to start at column 24 with its current size. Do not move the holdings widget.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Overlap Repair"; 2 seeded widget(s): test_metric({}), live_grid_example({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Layout** `test_metric` must sit at exactly x=0, y=0, w=24, h=12 → `layout_mismatch`
-- **Layout** `live_grid_example` must sit at exactly x=24, y=0, w=16, h=10 → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `shorten_estimates_nvda`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Keep the TSLA estimates widget's position and width, but reduce its height to 8 rows.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Layout Task"; 1 tab(s): charts; 1 seeded widget(s): live_grid_data({"symbol": "TSLA"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `charts` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "TSLA"} on tab `charts` → `missing_widget`
-- **Layout** `live_grid_data` must sit at exactly x=0, y=0, w=20, h=8 on tab `charts` → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `widen_fundamentals_aapl`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Widen the TM fundamentals widget to 20 columns. Keep its position and height.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Layout Task"; 1 tab(s): charts; 1 seeded widget(s): company_list({"companyId": "TM"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `charts` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Getting Started/company_list` with data_args ⊇ {"companyId": "TM"} on tab `charts` → `missing_widget`
-- **Layout** `company_list` must sit at exactly x=0, y=0, w=20, h=8 on tab `charts` → `layout_mismatch`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-### navigate (20)
-
-#### `addtab_curve`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Add the missing Curve tab to this dashboard and put the Metric Widget on it. Keep the existing Overview tab intact.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Incomplete Review"; 1 tab(s): overview; 1 seeded widget(s): company_performance({"company": "GM", "year": "2024"})
-- Allowed tools (6): `get_workspace_snapshot`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `curve` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} on tab `overview` → `missing_widget`
-- **Widget** ≥1× `Widget Examples/test_metric` on tab `curve` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `addtab_estimates_msft`
-
-**medium** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Keep the existing Overview tab intact while adding a tab named Estimates and placing the Live Grid widget for MSFT on it.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Incomplete Review"; 1 tab(s): overview; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
-- Allowed tools (6): `get_workspace_snapshot`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `estimates` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "MSFT"} on tab `overview` → `missing_widget`
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "MSFT"} on tab `estimates` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `addtab_fundamentals_aapl`
-
-**medium** · category: repair · specification: - · no-op baseline score: 0.000
-
-> This dashboard is missing its Fundamentals tab. Add a tab named Fundamentals and put the Company List with ID Mapping widget for AAPL on it. Keep the existing Overview tab intact.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Incomplete Review"; 1 tab(s): overview; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"})
-- Allowed tools (6): `get_workspace_snapshot`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `fundamentals` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} on tab `overview` → `missing_widget`
-- **Widget** ≥1× `Getting Started/company_list` with data_args ⊇ {"companyId": "TM"} on tab `fundamentals` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `addtab_risk`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> This dashboard is missing its Risk tab. Add a tab named Risk and put the Whitepapers widget on it. Keep the existing Overview tab intact.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Incomplete Review"; 1 tab(s): overview; 1 seeded widget(s): test_metric({})
-- Allowed tools (6): `get_workspace_snapshot`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `risk` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Widget Examples/test_metric` on tab `overview` → `missing_widget`
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"]} on tab `risk` → `missing_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `expand_client_expansion`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Set the active dashboard name to Client Command Center, add a new tab named Open Requests, and add a HTML card on the new tab that mentions open requests and says items are pending.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Client Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_sign_off_sign_off_tracker({})
-- Allowed tools (5): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Client Command Center" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `open-requests` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/stress_liquidity_lab_sign_off_sign_off_tracker` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated html** ≥1× whose content mentions "open requests", "pending" on tab `open-requests` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `manage_navigation_bar` with args ⊇ {"operation": "add_tabs"} must appear in the trace → `missing_tool_call`
-
-#### `expand_research_expansion`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Rename the active dashboard to Research Command Center, add a new tab named Draft Reviews, and add a HTML card on the new tab that mentions draft reviews and says items are pending.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Research Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_stress_tests_historical_shocks({})
-- Allowed tools (5): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Research Command Center" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `draft-reviews` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/stress_liquidity_lab_stress_tests_historical_shocks` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated html** ≥1× whose content mentions "draft reviews", "pending" on tab `draft-reviews` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `manage_navigation_bar` with args ⊇ {"operation": "add_tabs"} must appear in the trace → `missing_tool_call`
-
-#### `expand_risk_expansion`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Change the active dashboard's name to Risk Command Center; add a new tab named Stress Results; then add a HTML card on the new tab that mentions stress results and says items are pending.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Risk Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_stress_tests_risk_snapshot({})
-- Allowed tools (5): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Risk Command Center" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `stress-results` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/stress_liquidity_lab_stress_tests_risk_snapshot` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated html** ≥1× whose content mentions "stress results", "pending" on tab `stress-results` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `manage_navigation_bar` with args ⊇ {"operation": "add_tabs"} must appear in the trace → `missing_tool_call`
-
-#### `expand_vendor_expansion`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Set the active dashboard name to Vendor Control Center, add a new tab named Incident Log, and add a note on the new tab that mentions incident log and says items are pending.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Vendor Board"; 1 tab(s): overview; 1 seeded widget(s): stress_liquidity_lab_stress_tests_scenario_loss_waterfall({})
-- Allowed tools (5): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Vendor Control Center" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `incident-log` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/stress_liquidity_lab_stress_tests_scenario_loss_waterfall` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "incident log", "pending" on tab `incident-log` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `manage_navigation_bar` with args ⊇ {"operation": "add_tabs"} must appear in the trace → `missing_tool_call`
-
-#### `hub_book_hub`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Set the active dashboard name to Book Hub, add a new tab named Exposure, put the Live Grid widget on it, and add a note on the same tab mentioning exposure and book hub.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Starter Board"; 1 tab(s): overview
-- Allowed tools (8): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Book Hub" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `exposure` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Widget Examples/live_grid_example` on tab `exposure` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "exposure", "book hub" on tab `exposure` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `hub_desk_hub`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Rename the active dashboard to Desk Hub, add a new tab named News, put the Sample News Feed widget for science on it, and add a note on the same tab mentioning news and desk hub.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Starter Board"; 1 tab(s): overview
-- Allowed tools (8): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Desk Hub" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `news` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "science", "limit": 5} on tab `news` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "news", "desk hub" on tab `news` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `hub_earnings_hub`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Set the active dashboard name to Earnings Hub, add a new tab named Estimates, put the Live Grid widget for AAPL on it, and add a note on the same tab mentioning estimates and earnings hub.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Starter Board"; 1 tab(s): overview
-- Allowed tools (8): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Earnings Hub" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `estimates` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "AAPL"} on tab `estimates` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "estimates", "earnings hub" on tab `estimates` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `hub_rates_hub`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Set the active dashboard name to Rates Hub, add a new tab named Curve, put the Metric Widget on it, and add a note on the same tab mentioning curve and rates hub.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Starter Board"; 1 tab(s): overview
-- Allowed tools (8): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Rates Hub" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `curve` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Widget Examples/test_metric` on tab `curve` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "curve", "rates hub" on tab `curve` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `rename_both_client_review`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Change the active dashboard's name to Client Review Agenda; also rename the Overview tab to Talking Points.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Client Prep"; 1 tab(s): overview
-- Allowed tools (4): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Client Review Agenda" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_dashboard` with args ⊇ {"operation": "update", "name": "Client Review Agenda"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `manage_navigation_bar` with args ⊇ {"operation": "rename_tabs"} must appear in the trace → `missing_tool_call`
-
-#### `rename_both_earnings_week`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Rename the active dashboard to Earnings Week Planner and rename the Overview tab to Calendar.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Earnings Board"; 1 tab(s): overview
-- Allowed tools (4): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Earnings Week Planner" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_dashboard` with args ⊇ {"operation": "update", "name": "Earnings Week Planner"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `manage_navigation_bar` with args ⊇ {"operation": "rename_tabs"} must appear in the trace → `missing_tool_call`
-
-#### `rename_both_ops_close`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Change the active dashboard's name to Fund Close Control; also rename the Overview tab to Close Checklist.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Ops Board"; 1 tab(s): overview
-- Allowed tools (4): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Fund Close Control" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_dashboard` with args ⊇ {"operation": "update", "name": "Fund Close Control"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `manage_navigation_bar` with args ⊇ {"operation": "rename_tabs"} must appear in the trace → `missing_tool_call`
-
-#### `rename_both_pm_morning`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Set the active dashboard name to PM Morning Review and rename the Overview tab to Holdings View.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "PM Board"; 1 tab(s): overview
-- Allowed tools (4): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "PM Morning Review" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_dashboard` with args ⊇ {"operation": "update", "name": "PM Morning Review"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `manage_navigation_bar` with args ⊇ {"operation": "rename_tabs"} must appear in the trace → `missing_tool_call`
-
-#### `rename_compliance_day`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Set the active dashboard name to Daily Compliance Control.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Alert Triage"; 1 tab(s): overview
-- Allowed tools (2): `get_workspace_snapshot`, `manage_dashboard`
-- Turn budget: None · oracle reference trace: 1 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Daily Compliance Control" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_dashboard` with args ⊇ {"operation": "update", "name": "Daily Compliance Control"} must appear in the trace → `missing_tool_call`
-
-#### `rename_equity_desk`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Set the active dashboard name to Equity Desk Monitor.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Desk View"; 1 tab(s): overview
-- Allowed tools (2): `get_workspace_snapshot`, `manage_dashboard`
-- Turn budget: None · oracle reference trace: 1 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Equity Desk Monitor" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_dashboard` with args ⊇ {"operation": "update", "name": "Equity Desk Monitor"} must appear in the trace → `missing_tool_call`
-
-#### `rename_execution_open`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Set the active dashboard name to Execution Morning Board.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Desk Board"; 1 tab(s): overview
-- Allowed tools (2): `get_workspace_snapshot`, `manage_dashboard`
-- Turn budget: None · oracle reference trace: 1 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Execution Morning Board" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_dashboard` with args ⊇ {"operation": "update", "name": "Execution Morning Board"} must appear in the trace → `missing_tool_call`
-
-#### `rename_macro_watch`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Rename the active dashboard to Rates Watch.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Macro Board"; 1 tab(s): overview
-- Allowed tools (2): `get_workspace_snapshot`, `manage_dashboard`
-- Turn budget: None · oracle reference trace: 1 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Rates Watch" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_dashboard` with args ⊇ {"operation": "update", "name": "Rates Watch"} must appear in the trace → `missing_tool_call`
-
-### note (20)
-
-#### `crossbackend_aapl_vs_rates`
-
-**hard** · category: read · specification: - · no-op baseline score: 0.000
-
-> Add a note with the exact AAPL price and GM's 2024 operating margin from the data after reviewing both widgets.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), company_performance({"company": "GM", "year": "2024"})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "AAPL", "150.25", "GM", "8.2%" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `crossbackend_book_vs_fed`
-
-**hard** · category: read · specification: - · no-op baseline score: 0.000
-
-> Add a note with the returned filename and TM's exact 2024 global sales from the data after reviewing both widgets.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): whitepapers({"filenames": ["bitcoin.pdf"]}), company_performance({"company": "TM", "year": "2024"})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"]} → `missing_widget`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TM", "year": "2024"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "bitcoin.pdf", "TM", "10.5M" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `crossbackend_exposure_cpi`
-
-**hard** · category: read · specification: - · no-op baseline score: 0.000
-
-> Review the AAPL live-grid and F performance widgets and add a note with the exact AAPL price and F's 2024 global sales from the data.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): live_grid_example({}), company_performance({"company": "F", "year": "2024"})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/live_grid_example` → `missing_widget`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "F", "year": "2024"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "AAPL", "150.0", "F", "4.2M" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `crossbackend_msft_vs_curve`
-
-**hard** · category: read · specification: - · no-op baseline score: 0.000
-
-> Review the company-list and metric widgets and add a note with Microsoft's exact price and the first metric label and value from the data.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): company_list({"companyId": "VWAGY"}), test_metric({})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_list` with data_args ⊇ {"companyId": "VWAGY"} → `missing_widget`
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "VWAGY", "350.5", "Example Label", "12345" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `fact_close_aapl`
-
-**easy** · category: read · specification: - · no-op baseline score: 0.000
-
-> Review the existing AAPL price widget and add a note with the exact price from the data.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "AAPL", "150.25" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `fact_close_msft`
-
-**easy** · category: read · specification: - · no-op baseline score: 0.000
-
-> Add a note with the exact price from the data after reviewing the existing MSFT price widget.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "MSFT", "350.5" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `fact_macro_10y`
-
-**medium** · category: read · specification: - · no-op baseline score: 0.000
-
-> Add a note with the manufacturer and exact 2024 global sales from the data after reviewing the existing GM performance widget.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): company_performance({"company": "GM", "year": "2024"})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "GM", "6.8M" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `fact_top_holding`
-
-**medium** · category: read · specification: - · no-op baseline score: 0.000
-
-> Use the existing metric widget data to add a note with the first label and its exact value from the data.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Existing Review"; 1 seeded widget(s): test_metric({})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "Example Label", "12345" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `handover`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Add a note named Desk Handover saying the EU book is flat and the US open checklist is complete.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Notes Board"
-- Allowed tools (2): `get_workspace_snapshot`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× named ~"Desk Handover" whose content mentions "EU book", "checklist" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `outage`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> On the dashboard, add a HTML card named Vendor Outage stating that the FactSet feed is degraded and fallback pricing is active.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Notes Board"
-- Allowed tools (2): `get_workspace_snapshot`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated html** ≥1× named ~"Vendor Outage" whose content mentions "FactSet", "fallback" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `reminder`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> On the dashboard, add a note named Compliance Reminder stating that attestations are due Friday and trading in restricted names is blocked.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Notes Board"
-- Allowed tools (2): `get_workspace_snapshot`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× named ~"Compliance Reminder" whose content mentions "attestations", "restricted" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `standup`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> On the dashboard, add a note named Morning Standup stating that the desk meeting moved to 9am and the risk review is at noon.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Notes Board"
-- Allowed tools (2): `get_workspace_snapshot`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× named ~"Morning Standup" whose content mentions "9am", "noon" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `synthesis_aapl_msft_closes`
-
-**medium** · category: read · specification: - · no-op baseline score: 0.000
-
-> Compare the existing AAPL and MSFT price widgets and add a note with each exact price from the data.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "AAPL", "150.25", "MSFT", "350.5" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `synthesis_fed_vs_10y`
-
-**hard** · category: read · specification: - · no-op baseline score: 0.000
-
-> Add a note with both exact 2024 global-sales values from the data after reviewing the TM and GM performance widgets.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): company_performance({"company": "TM", "year": "2024"}), company_performance({"company": "GM", "year": "2024"})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TM", "year": "2024"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "TM", "10.5M", "GM", "6.8M" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `synthesis_holdings_beta`
-
-**hard** · category: read · specification: - · no-op baseline score: 0.000
-
-> Use the metric and whitepapers widget data to add a note with the first metric label, its exact value, and the returned filename from the data.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): test_metric({}), whitepapers({"filenames": ["bitcoin.pdf"]})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"]} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "Example Label", "12345", "bitcoin.pdf" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `synthesis_nvda_close_eps`
-
-**medium** · category: read · specification: - · no-op baseline score: 0.000
-
-> Add a note with the exact price from each response after reviewing the TSLA grouping-table and live-grid widgets.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Existing Review"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "TSLA"}), live_grid_data({"symbol": "TSLA"})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "TSLA", "245.8", "245.0" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `twofacts_estimates_aapl`
-
-**medium** · category: read · specification: - · no-op baseline score: 0.000
-
-> Add a HTML card on the overview tab with the exact price and volume from the data after reviewing the existing AAPL live-grid widget.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Existing Review"; 1 tab(s): overview; 1 seeded widget(s): live_grid_data({"symbol": "AAPL"})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "AAPL"} on tab `overview` → `missing_widget`
-- **Generated html** ≥1× whose content mentions "AAPL", "150.0", "1000000" on tab `overview` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `twofacts_estimates_msft`
-
-**medium** · category: read · specification: - · no-op baseline score: 0.000
-
-> Add a note on the overview tab with the exact price and volume from the data after reviewing the existing MSFT live-grid widget.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Existing Review"; 1 tab(s): overview; 1 seeded widget(s): live_grid_data({"symbol": "MSFT"})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "MSFT"} on tab `overview` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "MSFT", "350.0", "1200000" on tab `overview` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `twofacts_fundamentals_aapl`
-
-**medium** · category: read · specification: - · no-op baseline score: 0.000
-
-> Use the existing company-list widget data to add a note on the overview tab with Apple's company id and exact price from the data.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Existing Review"; 1 tab(s): overview; 1 seeded widget(s): company_list({"companyId": "TM"})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Getting Started/company_list` with data_args ⊇ {"companyId": "TM"} on tab `overview` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "TM", "150.25" on tab `overview` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `twofacts_fundamentals_nvda`
-
-**medium** · category: read · specification: - · no-op baseline score: 0.000
-
-> Add a note on the overview tab with Microsoft's company id and exact price from the data after reviewing the existing company-list widget.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Existing Review"; 1 tab(s): overview; 1 seeded widget(s): company_list({"companyId": "GM"})
-- Allowed tools (3): `get_workspace_snapshot`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Getting Started/company_list` with data_args ⊇ {"companyId": "GM"} on tab `overview` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "VWAGY", "350.5" on tab `overview` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-### params (32)
-
-#### `cross_aapl_macro`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Build a dashboard with these two widgets after using parameter options for both: Getting Started/table_widget_with_grouping_by_cell_click symbol=AAPL; Getting Started/company_performance series=GM. Add a note mentioning AAPL and GM.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Cross Options"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 9 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "AAPL", "GM" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "table_widget_with_grouping_by_cell_click", "param_name": "symbol"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "company_performance", "param_name": "company"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `cross_nvda_rates`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Build a dashboard with these two widgets after using parameter options for both: Getting Started/live_grid_data symbol=TSLA; Getting Started/company_performance series=TM. Add a note mentioning TSLA and TM.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Cross Options"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 9 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TM", "year": "2024"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "TSLA", "TM" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "live_grid_data", "param_name": "symbol"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "company_performance", "param_name": "company"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `cross_portfolio_sector`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Build a two-widget dashboard using parameter options for both widgets: Widget Examples/live_grid_example sector=AAPL; Getting Started/company_performance series=F. Add a note mentioning AAPL and F.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Cross Options"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 10 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/live_grid_example` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "F", "year": "2024"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "AAPL", "F" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "live_grid_example", "param_name": "symbol"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "company_performance", "param_name": "company"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `cross_stark_crypto`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Build a dashboard with these two widgets after using parameter options for both: Bench Stark Enterprise/crypto_research_dashboard_derivatives_liquidation_heatmap crypto_asset=ETH; Widget Examples/whitepapers sector=defi. Add a note mentioning ETH and options.
-
-- Fixture backends: stark-enterprise, widget-examples
-- Initial workspace: dashboard "Cross Options"; 1 seeded widget(s): stress_liquidity_lab_scenarios_portfolio_impact({})
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 10 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/crypto_research_dashboard_derivatives_liquidation_heatmap` with data_args ⊇ {"crypto_asset": "ETH"} → `missing_widget`
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"category": "defi", "filenames": ["bitcoin.pdf"]} → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/stress_liquidity_lab_scenarios_portfolio_impact` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "ETH", "options" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "crypto_research_dashboard_derivatives_liquidation_heatmap", "param_name": "crypto_asset"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "whitepapers", "param_name": "category"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `discover_schema_then_options_for_exposure_summary`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Discover the catalog and schema for Bench Stark Enterprise/client_360_portfolio_view_exposure_summary, call get_params_options for client, then create it with client=Northstar Endowment.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Parameter Options"; 1 seeded widget(s): stress_liquidity_lab_scenarios_position_impact_table({})
-- Allowed tools (5): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/client_360_portfolio_view_exposure_summary` with data_args ⊇ {"client": "Northstar Endowment"} → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/stress_liquidity_lab_scenarios_position_impact_table` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "client_360_portfolio_view_exposure_summary", "param_name": "client"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_params_options` must contain "Northstar Endowment" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `discover_schema_then_options_for_macro_timeseries`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Discover the catalog and schema for Getting Started/company_performance, call get_params_options for series, then create it with series=GM.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Parameter Options"
-- Allowed tools (5): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "company_performance", "param_name": "company"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_params_options` must contain "GM" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `discover_schema_then_options_for_price_performance`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> For Getting Started/table_widget_with_grouping_by_cell_click, discover the catalog and schema, call get_params_options for symbol, then create it with symbol=AAPL.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Parameter Options"
-- Allowed tools (5): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "table_widget_with_grouping_by_cell_click", "param_name": "symbol"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_params_options` must contain "AAPL" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `discover_schema_then_options_for_sector_exposure`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Before creating Widget Examples/live_grid_example with sector=AAPL, discover the catalog and schema and call get_params_options for sector.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Parameter Options"
-- Allowed tools (5): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/live_grid_example` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "live_grid_example", "param_name": "symbol"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_params_options` must contain "AAPL" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `manufacturer_compare_level0`
+#### `decision_briefing_level0`
 
 **level0** · category: single-widget · specification: -
 
-> Add Car Manufacturer Performance to Home for Toyota and 2024.
+> The PM wants Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, on the open Wave One Decision Brief board, with fund set to Flagship Long/Short and period set to YTD.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Wave One Decision Brief"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TM", "year": "2024"} → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "YTD"} → `missing_widget`
 
-#### `manufacturer_compare_level1`
+#### `decision_briefing_level1`
 
 **level1** · category: single-widget · specification: -
 
-> Browse the parameter-museum catalog for the car-manufacturer performance view, then place Ford's 2022 result on Home.
+> On the open Wave One Decision Brief board, find Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, and add it for Flagship Long/Short and YTD.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Wave One Decision Brief"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "F", "year": "2022"} → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "YTD"} → `missing_widget`
 
-#### `manufacturer_compare_level2`
+#### `decision_briefing_level2`
 
 **level2** · category: single-widget · specification: -
 
-> Configure the car-manufacturer performance view for Volkswagen and the year immediately before its default year. Resolve both selections from the declared choices and place it on Home.
+> Prepare the open Wave One Decision Brief board under the quarterly PM briefing policy. Add Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, for Flagship Long/Short; quarterly means QTD.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Wave One Decision Brief"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "VWAGY", "year": "2023"} → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "QTD"} → `missing_widget`
 
-#### `manufacturer_compare_level3`
+#### `decision_briefing_level3`
 
-**level3** · category: repair · specification: -
+**level3** · category: dashboard · specification: -
 
-> Inspect Manufacturer Parameter Staging and correct its existing performance view to General Motors at the oldest available year. Keep the board and all unrelated workspace content intact.
+> Set up the open Wave One Decision Brief board: place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, for Flagship Long/Short and QTD beside Getting Started's Car Manufacturer Performance for TSLA and 2024. Put Trade Ideas at x 0, y 0, width 20, height 14 and the manufacturer view at x 20, y 0, width 20, height 14.
 
-- Initial workspace: dashboard "Manufacturer Parameter Staging"; 1 tab(s): comparison; 1 seeded widget(s): company_performance({"company": "TM", "year": "2024"})
+- Initial workspace: dashboard "Wave One Decision Brief"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2022"} on tab `comparison` → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "QTD"} → `missing_widget`
+- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TSLA", "year": 2024} → `missing_widget`
 
-#### `manufacturer_compare_level4`
+#### `decision_briefing_level4`
 
-**level4** · category: single-widget · specification: -
+**level4** · category: dashboard · specification: -
 
-> Continue the manufacturer performance comparison with Toyota in 2024, then add Microsoft's normalized fundamentals source under the desk industry-comparison convention at its latest covered calendar quarter. Place both views on Home.
+> Use Workspace session guidance to prepare the open Wave One Decision Brief board: place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, for Flagship Long/Short and QTD beside Getting Started's Car Manufacturer Performance for TSLA and 2024. Put Trade Ideas at x 0, y 0, width 20, height 14 and the manufacturer view at x 20, y 0, width 20, height 14.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Wave One Decision Brief"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Bench Daloopa/daloopa_company_fundamentals` with data_args ⊇ {"ticker": "MSFT", "period": "2026Q1"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TM", "year": "2024"} → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "QTD"} → `missing_widget`
+- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TSLA", "year": 2024} → `missing_widget`
 
-#### `manufacturer_compare_level5`
+#### `decision_briefing_level5`
 
 **level5** · category: platform · specification: -
 
-> Build a Pilot Manufacturer Policy backend whose Manufacturer Policy table offers explicit company and year choices and defaults to Volkswagen in 2023. Wrap it in a Manufacturer Policy App on a Comparison tab, instantiate it, and leave it open. The widget definition must not contain sample rows.
+> The PM needs a Decision Tile Backend with a Decision Summary Tile. Author and add it, then instantiate its Decision Briefing App. On Briefing, place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, beside Getting Started's Car Manufacturer Performance at y 10, x 0 and x 20, each width 20 and height 14. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -6714,84 +3075,87 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Pilot Manufacturer Policy/manufacturer_policy` with data_args ⊇ {"company": "VWAGY", "year": "2023"} on tab `comparison` → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` on tab `briefing` → `missing_widget`
+- **Widget** ≥1× `Getting Started/company_performance` on tab `briefing` → `missing_widget`
+- **Widget** ≥1× `Decision Tile Backend/decision_summary_tile` → `missing_widget`
 
-#### `nav_exception_policy_level0`
+#### `market_telemetry_level0`
 
 **level0** · category: single-widget · specification: -
 
-> Place Fund Operations Control Tower's NAV Exceptions on Home for Flagship Long/Short, Open status, and YTD.
+> Add Getting Started's Stock Price Trends - Line Sparklines with First/Last Points to the open Wave Two Market Telemetry board.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Wave Two Market Telemetry"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` with data_args ⊇ {"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"} → `missing_widget`
+- **Widget** ≥1× `Getting Started/sparkline_line` → `missing_widget`
 
-#### `nav_exception_policy_level1`
+#### `market_telemetry_level1`
 
 **level1** · category: single-widget · specification: -
 
-> Search the connected catalogs for the Fund Operations Control Tower view of NAV Exceptions, then add it to Home for Global Opportunities, In Review, quarter to date.
+> On the open Wave Two Market Telemetry board, add Getting Started's live-updating grid with real-time WebSocket updates for AAPL.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Wave Two Market Telemetry"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` with data_args ⊇ {"fund": "Global Opportunities", "status": "In Review", "period": "QTD"} → `missing_widget`
+- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
 
-#### `nav_exception_policy_level2`
+#### `market_telemetry_level2`
 
 **level2** · category: single-widget · specification: -
 
-> Set up Fund Operations Control Tower's NAV Exceptions for the flagship book, limited to only open items for this year. Derive each control value from the view's available choices and place the result on Home.
+> Prepare the open Wave Two Market Telemetry board for the quarterly liquidity policy. Add Widget Examples' [MOCK DATA] Tabs + Dropdown Combined; quarterly liquidity means quarterly and liquidity. Place it at x 0, y 0, width 40, height 14.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Wave Two Market Telemetry"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` with data_args ⊇ {"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"} → `missing_widget`
+- **Widget** ≥1× `Widget Examples/tabs_with_dropdown` with data_args ⊇ {"period": "quarterly", "category": "liquidity"} → `missing_widget`
 
-#### `nav_exception_policy_level3`
+#### `market_telemetry_level3`
 
-**level3** · category: repair · specification: -
+**level3** · category: dashboard · specification: -
 
-> Review the existing NAV Exceptions view on Fund Operations Control Tower's Pricing tab. Re-scope that exact view for the Global Opportunities quarterly control meeting, with items still under review, while preserving every other workspace view.
+> Build out the open Wave Two Market Telemetry board with Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined for quarterly liquidity. Put the trends at x 0, y 0, width 20, height 12 and the ratio view at x 20, y 0, width 20, height 12.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Fund Operations Control Tower"
+- Initial workspace: dashboard "Wave Two Market Telemetry"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` with data_args ⊇ {"fund": "Global Opportunities", "status": "In Review", "period": "QTD"} on tab `pricing` → `missing_widget`
+- **Widget** ≥1× `Getting Started/sparkline_line` → `missing_widget`
+- **Widget** ≥1× `Widget Examples/tabs_with_dropdown` with data_args ⊇ {"period": "quarterly", "category": "liquidity"} → `missing_widget`
 
-#### `nav_exception_policy_level4`
+#### `market_telemetry_level4`
 
-**level4** · category: single-widget · specification: -
+**level4** · category: dashboard · specification: -
 
-> Pair Fund Operations Control Tower's flagship, open, year-to-date NAV Exceptions with the Apple fundamentals source required by the desk capital-allocation convention. Use Apple's latest available calendar quarter and place both views on Home.
+> Using Workspace session guidance, finish the open Wave Two Market Telemetry board with Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined for quarterly liquidity. Put them at x 0 and x 20, y 0, each width 20 and height 12.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Wave Two Market Telemetry"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Bench Daloopa/daloopa_company_fundamentals` with data_args ⊇ {"ticker": "AAPL", "period": "2026Q1"} → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` with data_args ⊇ {"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"} → `missing_widget`
+- **Widget** ≥1× `Getting Started/sparkline_line` → `missing_widget`
+- **Widget** ≥1× `Widget Examples/tabs_with_dropdown` with data_args ⊇ {"period": "quarterly", "category": "liquidity"} → `missing_widget`
 
-#### `nav_exception_policy_level5`
+#### `market_telemetry_level5`
 
 **level5** · category: platform · specification: -
 
-> Create a Pilot Close Policy backend whose Close Policy Exceptions table encodes the desk defaults: flagship book, only open items, and this year. Publish a Close Policy App with the table on an Exceptions tab and leave the instantiated app open. Use a compact definition with no sample rows.
+> Author and add a Telemetry Summary Backend with a Telemetry Summary Tile, then instantiate its Market Telemetry App. On Monitor, place Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined at y 10, x 0 and x 20, each width 20 and height 12. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -6799,759 +3163,968 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Pilot Close Policy/close_policy_exceptions` with data_args ⊇ {"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"} on tab `exceptions` → `missing_widget`
+- **Widget** ≥1× `Getting Started/sparkline_line` on tab `monitor` → `missing_widget`
+- **Widget** ≥1× `Widget Examples/tabs_with_dropdown` on tab `monitor` → `missing_widget`
+- **Widget** ≥1× `Telemetry Summary Backend/telemetry_summary_tile` → `missing_widget`
 
-#### `options_constrained_pair_for_evidence_and_sign_off_history`
+### extend (12)
 
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
+#### `research_feed_lifecycle_level0`
 
-> After using get_params_options for Bench Stark Enterprise/corporate_access_meeting_notes_claims_evidence_and_sign_off_history sector=Technology, add companion widget corporate_access_meeting_notes_claims_management_claims_tracker and arrange both without overlap.
+**level0** · category: platform · specification: -
 
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Parameter Pair"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 9 calls
+> On the open Research Feed Staging board, review the connected backends and refresh Wave Two Research Feed so Research Feed Pulse has the description Refreshed research feed.
 
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/corporate_access_meeting_notes_claims_evidence_and_sign_off_history` with data_args ⊇ {"sector": "Technology"} → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/corporate_access_meeting_notes_claims_management_claims_tracker` → `missing_widget`
-- **Layout** `corporate_access_meeting_notes_claims_evidence_and_sign_off_history` must sit at exactly x=0, y=0, w=20, h=10 → `layout_mismatch`
-- **Layout** `corporate_access_meeting_notes_claims_management_claims_tracker` must sit at exactly x=20, y=0, w=20, h=10 → `layout_mismatch`
-- **Tool result** of `get_params_options` must contain "Technology" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `options_constrained_pair_for_macro_timeseries`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Set Getting Started/company_performance series=VWAGY using get_params_options, then add companion widget test_metric. Arrange both without overlap.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Parameter Pair"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 10 calls
+- Initial workspace: dashboard "Research Feed Staging"; 1 tab(s): feed; 1 seeded widget(s): research_feed_pulse({})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "VWAGY", "year": "2024"} → `missing_widget`
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`
-- **Layout** `company_performance` must sit at exactly x=0, y=0, w=20, h=10 → `layout_mismatch`
-- **Layout** `test_metric` must sit at exactly x=20, y=0, w=20, h=10 → `layout_mismatch`
-- **Tool result** of `get_params_options` must contain "VWAGY" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
 
-#### `options_constrained_pair_for_price_performance`
+#### `research_feed_lifecycle_level1`
 
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
+**level1** · category: platform · specification: -
 
-> Set Getting Started/table_widget_with_grouping_by_cell_click symbol=AAPL using get_params_options, then add companion widget sample_newsfeed. Arrange both without overlap.
+> From the open Research Feed Staging board, review the connected backends, then refresh Wave Two Research Feed so Research Feed App has one non-overlapping Research Feed Pulse placement on Feed.
 
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Parameter Pair"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 9 calls
+- Initial workspace: dashboard "Research Feed Staging"; 1 tab(s): feed; 1 seeded widget(s): research_feed_pulse({})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "tech", "limit": 5} → `missing_widget`
-- **Layout** `table_widget_with_grouping_by_cell_click` must sit at exactly x=0, y=0, w=20, h=10 → `layout_mismatch`
-- **Layout** `sample_newsfeed` must sit at exactly x=20, y=0, w=20, h=10 → `layout_mismatch`
-- **Tool result** of `get_params_options` must contain "AAPL" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
 
-#### `options_constrained_pair_for_sector_exposure`
+#### `research_feed_lifecycle_level2`
 
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
+**level2** · category: platform · specification: -
 
-> After using get_params_options for Widget Examples/live_grid_example sector=Technology, add companion widget whitepapers and arrange both without overlap.
+> Add a minimal Wave Two Research Feed backend serving a Research Feed Pulse table at /research-feed.
 
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Parameter Pair"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 9 calls
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Widget Examples/live_grid_example` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"]} → `missing_widget`
-- **Layout** `live_grid_example` must sit at exactly x=0, y=0, w=20, h=10 → `layout_mismatch`
-- **Layout** `whitepapers` must sit at exactly x=20, y=0, w=20, h=10 → `layout_mismatch`
-- **Tool result** of `get_params_options` must contain "AAPL" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
 
-#### `options_constrained_placement_for_access_and_export_logs`
+#### `research_feed_lifecycle_level3`
 
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
+**level3** · category: platform · specification: -
 
-> Create Bench Stark Enterprise/compliance_surveillance_hub_audit_access_and_export_logs after fetching the widget schema and using get_params_options to choose Medium for severity, then place it at x=20, y=0, width 20, height 10.
+> Publish and add Wave Two Research Feed with Research Feed Pulse and a Research Feed App containing Feed. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Parameter Placement"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 6 calls
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Bench Stark Enterprise/compliance_surveillance_hub_audit_access_and_export_logs` with data_args ⊇ {"severity": "Medium"} → `missing_widget`
-- **Layout** `compliance_surveillance_hub_audit_access_and_export_logs` must sit at exactly x=20, y=0, w=20, h=10 → `layout_mismatch`
-- **Tool result** of `get_params_options` must contain "Medium" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
 
-#### `options_constrained_placement_for_macro_timeseries`
+#### `research_feed_lifecycle_level4`
 
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
+**level4** · category: platform · specification: -
 
-> Use get_params_options to choose GM for series, fetch the widget schema, create Getting Started/company_performance, and place it at x=20, y=0, width 20, height 10.
+> Set up and add Wave Two Research Feed with Research Feed Pulse and Source Freshness Alert, publish Research Feed App with both on Feed, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Parameter Placement"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 6 calls
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Layout** `company_performance` must sit at exactly x=20, y=0, w=20, h=10 → `layout_mismatch`
-- **Tool result** of `get_params_options` must contain "GM" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Widget** ≥1× `Wave Two Research Feed/research_feed_pulse` on tab `feed` → `missing_widget`
+- **Widget** ≥1× `Wave Two Research Feed/source_freshness_alert` on tab `feed` → `missing_widget`
 
-#### `options_constrained_placement_for_price_performance`
+#### `research_feed_lifecycle_level5`
 
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
+**level5** · category: platform · specification: -
 
-> Choose AAPL for symbol with get_params_options, fetch the widget schema, create Getting Started/table_widget_with_grouping_by_cell_click, and place it at x=0, y=0, width 20, height 10.
+> Complete the research service with Wave Two Research Feed, Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch. Add the backend, publish Research Feed App with Feed and Archive tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Parameter Placement"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 6 calls
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Layout** `table_widget_with_grouping_by_cell_click` must sit at exactly x=0, y=0, w=20, h=10 → `layout_mismatch`
-- **Tool result** of `get_params_options` must contain "AAPL" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Widget** ≥1× `Wave Two Research Feed/research_feed_pulse` on tab `feed` → `missing_widget`
+- **Widget** ≥1× `Wave Two Research Feed/source_freshness_alert` on tab `feed` → `missing_widget`
+- **Widget** ≥1× `Wave Two Research Feed/archive_coverage_watch` on tab `archive` → `missing_widget`
 
-#### `options_constrained_placement_for_sector_exposure`
+#### `risk_service_lifecycle_level0`
 
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
+**level0** · category: platform · specification: -
 
-> Use get_params_options to choose AAPL for sector, fetch the widget schema, create Widget Examples/live_grid_example, and place it at x=0, y=0, width 20, height 10.
+> On the open Risk Service Staging board, review the connected backends and refresh Wave One Risk Service so its Wave One Risk Signal description is Refreshed risk signal feed.
 
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Parameter Placement"
-- Allowed tools (6): `get_workspace_snapshot`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `create_widget`, `update_widget_layout`
-- Turn budget: None · oracle reference trace: 6 calls
+- Initial workspace: dashboard "Risk Service Staging"; 1 tab(s): monitor; 1 seeded widget(s): wave_one_risk_signal({})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Widget Examples/live_grid_example` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Layout** `live_grid_example` must sit at exactly x=0, y=0, w=20, h=10 → `layout_mismatch`
-- **Tool result** of `get_params_options` must contain "AAPL" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
 
-#### `use_client_options_for_relationship_metrics`
+#### `risk_service_lifecycle_level1`
 
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
+**level1** · category: platform · specification: -
 
-> Use get_params_options for Bench Stark Enterprise/client_360_meeting_prep_relationship_metrics parameter client, choose Northstar Endowment, and create that widget with client=Northstar Endowment.
+> Review the connected backends on the open Risk Service Staging board, then refresh Wave One Risk Service so Wave One Risk App has one non-overlapping Wave One Risk Signal placement on Monitor.
 
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Parameter Options"
-- Allowed tools (3): `get_workspace_snapshot`, `get_params_options`, `create_widget`
-- Turn budget: None · oracle reference trace: 3 calls
+- Initial workspace: dashboard "Risk Service Staging"; 1 tab(s): monitor; 1 seeded widget(s): wave_one_risk_signal({})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Bench Stark Enterprise/client_360_meeting_prep_relationship_metrics` with data_args ⊇ {"client": "Northstar Endowment"} → `missing_widget`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "client_360_meeting_prep_relationship_metrics", "param_name": "client"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_params_options` must contain "Northstar Endowment" (agent must actually retrieve the data) → `missing_tool_result`
 
-#### `use_sector_options_for_sector_exposure`
+#### `risk_service_lifecycle_level2`
 
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
+**level2** · category: platform · specification: -
 
-> Call get_params_options for Widget Examples/live_grid_example parameter sector, choose AAPL, and create that widget with sector=AAPL.
+> Add a minimal Wave One Risk Service backend that serves a Wave One Risk Signal table at /risk-signal.
 
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Parameter Options"
-- Allowed tools (3): `get_workspace_snapshot`, `get_params_options`, `create_widget`
-- Turn budget: None · oracle reference trace: 3 calls
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Widget Examples/live_grid_example` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "live_grid_example", "param_name": "symbol"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_params_options` must contain "AAPL" (agent must actually retrieve the data) → `missing_tool_result`
 
-#### `use_series_options_for_macro_timeseries`
+#### `risk_service_lifecycle_level3`
 
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
+**level3** · category: platform · specification: -
 
-> For Getting Started/company_performance, call get_params_options on parameter series, choose GM, and create that widget with series=GM.
+> The risk desk needs Wave One Risk Service with its Wave One Risk Signal and a Wave One Risk App containing Monitor. Publish and add it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Parameter Options"
-- Allowed tools (3): `get_workspace_snapshot`, `get_params_options`, `create_widget`
-- Turn budget: None · oracle reference trace: 3 calls
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "company_performance", "param_name": "company"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_params_options` must contain "GM" (agent must actually retrieve the data) → `missing_tool_result`
 
-#### `use_symbol_options_for_price_performance`
+#### `risk_service_lifecycle_level4`
 
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
+**level4** · category: platform · specification: -
 
-> For Getting Started/table_widget_with_grouping_by_cell_click, call get_params_options on parameter symbol, choose AAPL, and create that widget with symbol=AAPL.
+> Set up Wave One Risk Service with Wave One Risk Signal and Wave One Limit Alert. Author and add the service, publish Wave One Risk App with both on Monitor, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Parameter Options"
-- Allowed tools (3): `get_workspace_snapshot`, `get_params_options`, `create_widget`
-- Turn budget: None · oracle reference trace: 3 calls
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "table_widget_with_grouping_by_cell_click", "param_name": "symbol"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_params_options` must contain "AAPL" (agent must actually retrieve the data) → `missing_tool_result`
+- **Widget** ≥1× `Wave One Risk Service/wave_one_risk_signal` on tab `monitor` → `missing_widget`
+- **Widget** ≥1× `Wave One Risk Service/wave_one_limit_alert` on tab `monitor` → `missing_widget`
 
-### prompts (20)
+#### `risk_service_lifecycle_level5`
 
-#### `cross_prompt_cross_aapl_rates`
+**level5** · category: platform · specification: -
 
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
+> Complete the risk desk build with Wave One Risk Service, Wave One Risk Signal, Wave One Limit Alert, and Wave One Stress Watch. Add the service, publish Wave One Risk App with Monitor and Stress tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
-> Get workspace_tool_usage and workspace_session_context, create Prompt Cross AAPL Rates, build the cross-backend dashboard with Getting Started/table_widget_with_grouping_by_cell_click with data_args {"symbol": "AAPL"} and Getting Started/company_performance with data_args {"series": "GM"}, and add a note mentioning AAPL and GM and current-dashboard.
-
-- Fixture backends: getting-started
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 9 calls
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Dashboard name** must contain "Prompt Cross AAPL Rates" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "AAPL", "GM", "current-dashboard" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_tool_usage"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_session_context"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+- **Widget** ≥1× `Wave One Risk Service/wave_one_risk_signal` on tab `monitor` → `missing_widget`
+- **Widget** ≥1× `Wave One Risk Service/wave_one_limit_alert` on tab `monitor` → `missing_widget`
+- **Widget** ≥1× `Wave One Risk Service/wave_one_stress_watch` on tab `stress` → `missing_widget`
 
-#### `cross_prompt_cross_book_cpi`
+### handoff (10)
 
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Get workspace_tool_usage and workspace_session_context, create Prompt Cross Book CPI, build the cross-backend dashboard with Widget Examples/live_grid_example and Getting Started/company_performance with data_args {"series": "F"}, and add a HTML card mentioning sector and F and current-dashboard.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 10 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Prompt Cross Book CPI" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Widget** ≥1× `Widget Examples/live_grid_example` → `missing_widget`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "F", "year": "2024"} → `missing_widget`
-- **Generated html** ≥1× whose content mentions "sector", "F", "current-dashboard" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_tool_usage"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_session_context"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `cross_prompt_cross_nvda_holdings`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Get workspace_tool_usage and workspace_session_context, create Prompt Cross TSLA Holdings, build the cross-backend dashboard with Getting Started/live_grid_data with data_args {"symbol": "TSLA"} and Widget Examples/test_metric, and add a note mentioning TSLA and holdings and current-dashboard.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 10 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Prompt Cross TSLA Holdings" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "TSLA", "holdings", "current-dashboard" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_tool_usage"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_session_context"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `cross_prompt_cross_stark_risk`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Fetch workspace_tool_usage and workspace_session_context, create Prompt Cross Stark Risk, build the cross-backend dashboard with Bench Stark Enterprise/portfolio_command_center_actions_analyst_conviction and Widget Examples/whitepapers, and add a HTML card mentioning stark and risk and current-dashboard.
-
-- Fixture backends: stark-enterprise, widget-examples
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 10 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Prompt Cross Stark Risk" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_analyst_conviction` → `missing_widget`
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"]} → `missing_widget`
-- **Generated html** ≥1× whose content mentions "stark", "risk", "current-dashboard" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_tool_usage"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_session_context"} must appear in the trace → `missing_tool_call`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `dashboard_aapl_prompt_dashboard`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Get workspace_tool_usage, create dashboard AAPL Prompt Dashboard, add Getting Started/table_widget_with_grouping_by_cell_click with data_args {"symbol": "AAPL"} and Getting Started/sample_newsfeed with data_args {"limit": 5, "symbol": "AAPL"} with schema-first discipline, and add a note mentioning AAPL and schema.
-
-- Fixture backends: getting-started
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 8 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "AAPL Prompt Dashboard" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "tech", "limit": 5} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "AAPL", "schema" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool result** of `get_workspace_prompt` must contain "schema-before-create workspace tool discipline" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `dashboard_macro_prompt_dashboard`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> After fetching workspace_tool_usage, create dashboard Macro Prompt Dashboard, add Getting Started/company_performance with data_args {"series": "VWAGY"} and Widget Examples/test_metric with schema-first discipline, and add a note mentioning VWAGY and schema.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 9 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Macro Prompt Dashboard" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "VWAGY", "year": "2024"} → `missing_widget`
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "VWAGY", "schema" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool result** of `get_workspace_prompt` must contain "schema-before-create workspace tool discipline" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `dashboard_portfolio_prompt_dashboard`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> After fetching workspace_tool_usage, create dashboard Portfolio Prompt Dashboard, add Widget Examples/test_metric and Widget Examples/whitepapers with schema-first discipline, and add a note mentioning holdings and schema.
-
-- Fixture backends: widget-examples
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 8 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Portfolio Prompt Dashboard" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"]} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "holdings", "schema" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool result** of `get_workspace_prompt` must contain "schema-before-create workspace tool discipline" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `dashboard_stark_prompt_dashboard`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Get workspace_tool_usage, create dashboard Stark Prompt Dashboard, add Bench Stark Enterprise/mnpi_research_review_research_draft_research_review and Bench Stark Enterprise/mnpi_research_review_research_evidence_and_sign_off_history with schema-first discipline, and add a note mentioning stark and schema.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (6): `get_workspace_prompt`, `manage_dashboard`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 8 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Stark Prompt Dashboard" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Widget** ≥1× `Bench Stark Enterprise/mnpi_research_review_research_draft_research_review` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/mnpi_research_review_research_evidence_and_sign_off_history` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "stark", "schema" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool result** of `get_workspace_prompt` must contain "schema-before-create workspace tool discipline" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `follow_tool_usage_prompt_for_healthcare_thesis_note`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Use get_workspace_prompt with name workspace_tool_usage, then follow it by discovering schema before creating Bench Stark Enterprise/healthcare_research_dashboard_documents_healthcare_thesis_note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Prompt Build"; 1 seeded widget(s): vendor_dataset_monitor_overview_workflow_overview({})
-- Allowed tools (5): `get_workspace_snapshot`, `get_workspace_prompt`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/healthcare_research_dashboard_documents_healthcare_thesis_note` → `missing_widget`
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_overview_workflow_overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Tool result** of `get_workspace_prompt` must contain "schema-before-create workspace tool discipline" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `follow_tool_usage_prompt_for_macro_timeseries`
-
-**easy** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Before creating Getting Started/company_performance with data_args {"series": "GM"}, call get_workspace_prompt with name workspace_tool_usage and follow it by discovering schema.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Prompt Build"
-- Allowed tools (5): `get_workspace_snapshot`, `get_workspace_prompt`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Tool result** of `get_workspace_prompt` must contain "schema-before-create workspace tool discipline" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `follow_tool_usage_prompt_for_price_performance`
-
-**easy** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Call get_workspace_prompt with name workspace_tool_usage, then follow it by discovering schema before creating Getting Started/table_widget_with_grouping_by_cell_click with data_args {"symbol": "AAPL"}.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Prompt Build"
-- Allowed tools (5): `get_workspace_snapshot`, `get_workspace_prompt`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Tool result** of `get_workspace_prompt` must contain "schema-before-create workspace tool discipline" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `follow_tool_usage_prompt_for_risk_metrics`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Use get_workspace_prompt with name workspace_tool_usage, then follow it by discovering schema before creating Widget Examples/whitepapers.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Prompt Build"
-- Allowed tools (5): `get_workspace_snapshot`, `get_workspace_prompt`, `list_available_widgets`, `get_widget_schema`, `create_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"]} → `missing_widget`
-- **Tool result** of `get_workspace_prompt` must contain "schema-before-create workspace tool discipline" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `session_context_grounding_note`
-
-**easy** · category: read · specification: - · no-op baseline score: 0.000
-
-> Call get_workspace_prompt with name workspace_session_context and add a note mentioning current-dashboard current-tab session grounding.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Prompt Review"; 1 seeded widget(s): test_metric({})
-- Allowed tools (3): `get_workspace_snapshot`, `get_workspace_prompt`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "current-dashboard" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_session_context"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_workspace_prompt` must contain "current-dashboard current-tab session grounding" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `session_context_grounding_review`
-
-**easy** · category: read · specification: - · no-op baseline score: 0.000
-
-> After calling get_workspace_prompt with name workspace_session_context, add a note mentioning current-dashboard current-tab session grounding.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Prompt Review"; 1 seeded widget(s): live_grid_example({})
-- Allowed tools (3): `get_workspace_snapshot`, `get_workspace_prompt`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/live_grid_example` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "current-dashboard" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_session_context"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_workspace_prompt` must contain "current-dashboard current-tab session grounding" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `session_prompt_ops_slippage`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Fetch workspace_session_context, add a Ops tab, navigate to it, fetch the widget schema, create Bench Stark Enterprise/liquidity_tca_workbench_tca_slippage_by_algo there, and add a HTML card mentioning Ops on that tab.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Prompt Session"; 1 tab(s): overview
-- Allowed tools (7): `get_workspace_prompt`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `ops` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/liquidity_tca_workbench_tca_slippage_by_algo` on tab `ops` → `missing_widget`
-- **Generated html** ≥1× whose content mentions "Ops" on tab `ops` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool result** of `get_workspace_prompt` must contain "current-dashboard current-tab session grounding" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `session_tab_estimates_estimate_history`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Get workspace_session_context, add a Estimates tab, navigate to it, fetch the widget schema, create Getting Started/live_grid_data with data_args {"symbol": "MSFT"} there, and add a note mentioning Estimates on that tab.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Prompt Session"; 1 tab(s): overview
-- Allowed tools (7): `get_workspace_prompt`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `estimates` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "MSFT"} on tab `estimates` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "Estimates" on tab `estimates` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool result** of `get_workspace_prompt` must contain "current-dashboard current-tab session grounding" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `session_tab_exposure_sector_exposure`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Fetch workspace_session_context, add a Exposure tab, navigate to it, fetch the widget schema, create Widget Examples/live_grid_example there, and add a note mentioning Exposure on that tab.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Prompt Session"; 1 tab(s): overview
-- Allowed tools (7): `get_workspace_prompt`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `exposure` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Widget Examples/live_grid_example` on tab `exposure` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "Exposure" on tab `exposure` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool result** of `get_workspace_prompt` must contain "current-dashboard current-tab session grounding" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `session_tab_rates_yield_curve`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> After fetching workspace_session_context, add a Rates tab, navigate to it, fetch the widget schema, create Widget Examples/test_metric there, and add a note mentioning Rates on that tab.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Prompt Session"; 1 tab(s): overview
-- Allowed tools (7): `get_workspace_prompt`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `rates` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Widget Examples/test_metric` on tab `rates` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "Rates" on tab `rates` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool result** of `get_workspace_prompt` must contain "current-dashboard current-tab session grounding" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `tool_usage_schema_note`
-
-**easy** · category: read · specification: - · no-op baseline score: 0.000
-
-> Call get_workspace_prompt with name workspace_tool_usage and add a HTML card mentioning schema-before-create workspace tool discipline.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Prompt Review"; 1 seeded widget(s): whitepapers({"filenames": ["bitcoin.pdf"]})
-- Allowed tools (3): `get_workspace_snapshot`, `get_workspace_prompt`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"]} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated html** ≥1× whose content mentions "schema-before-create" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_tool_usage"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_workspace_prompt` must contain "schema-before-create workspace tool discipline" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `tool_usage_schema_summary`
-
-**easy** · category: read · specification: - · no-op baseline score: 0.000
-
-> Use get_workspace_prompt with name workspace_tool_usage, then add a HTML card mentioning schema-before-create workspace tool discipline.
-
-- Fixture backends: getting-started, widget-examples
-- Initial workspace: dashboard "Prompt Review"; 1 seeded widget(s): test_metric({})
-- Allowed tools (3): `get_workspace_snapshot`, `get_workspace_prompt`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/test_metric` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated html** ≥1× whose content mentions "schema-before-create" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_tool_usage"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_workspace_prompt` must contain "schema-before-create workspace tool discipline" (agent must actually retrieve the data) → `missing_tool_result`
-
-### read (32)
-
-#### `alert_trend`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_widget_data for the Bench Stark Enterprise Alert Trend widget; then add a short note that cites compliance_surveillance_hub_alerts_alert_trend and says you reviewed the data.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): compliance_surveillance_hub_alerts_alert_trend({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "compliance_surveillance_hub_alerts_alert_trend", "data" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "compliance_surveillance_hub_alerts_alert_trend"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "alert_count" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `attribution`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_widget_data on the Bench Stark Enterprise Attribution Summary widget, then add a short HTML card that cites Attribution Summary and says you reviewed the data.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): portfolio_command_center_attribution_attribution_summary({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated html** ≥1× whose content mentions "portfolio_command_center_attribution_attribution_summary", "data" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_attribution_attribution_summary"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "score" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `break_aging`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_widget_data on the Bench Stark Enterprise Break Aging widget, then add a short HTML card that cites fund_operations_control_tower_recons_break_aging and says you reviewed the data.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): fund_operations_control_tower_recons_break_aging({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated html** ≥1× whose content mentions "fund_operations_control_tower_recons_break_aging", "data" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "fund_operations_control_tower_recons_break_aging"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "score" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `broker_scorecard`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> On the Bench Stark Enterprise Broker Scorecard widget, use get_widget_data, find the exact score for execution_desk_fills_broker_scorecard, then add a HTML card that cites each widget id, the field name, and the exact value.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): execution_desk_fills_broker_scorecard({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated html** ≥1× whose content mentions "execution_desk_fills_broker_scorecard", "score", "68.41" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "execution_desk_fills_broker_scorecard"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "score", "68.41" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `client_pair`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> On the Bench Stark Enterprise Client Accounts and Relationship Metrics widgets, use get_widget_data, then add a short note that cites client_360_client_book_client_accounts and client_360_client_book_relationship_metrics and says you reviewed the data.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): client_360_client_book_client_accounts({"fund": "Flagship Long/Short", "period": "YTD"}), client_360_client_book_relationship_metrics({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "client_360_client_book_client_accounts", "client_360_client_book_relationship_metrics", "data" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "client_360_client_book_client_accounts"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "client_360_client_book_relationship_metrics"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "count" (agent must actually retrieve the data) → `missing_tool_result`
-- **Tool result** of `get_widget_data` must contain "value" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `earnings_pulse_level0`
+#### `earnings_handoff_level0`
 
 **level0** · category: read · specification: -
 
-> Give the Earnings & Estimates Monitor's Upcoming Earnings reading for LLY year to date. Report its exact score and change.
+> On the open Earnings Handoff board, read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Healthcare, LLY, and YTD. Add an LLY Earnings Handoff note with the exact score and status.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Initial workspace: dashboard "Earnings Handoff"; 1 tab(s): review
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
+- **Generated note** ≥1× named ~"LLY Earnings Handoff" whose content mentions "27.63", "Open" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
-#### `earnings_pulse_level1`
+#### `earnings_handoff_level1`
 
 **level1** · category: read · specification: -
 
-> Locate Upcoming Earnings in the Earnings & Estimates Monitor and read the quarter-to-date AAPL row. Return the exact score and change.
+> Build the Apple note on the open Earnings Handoff board. Find Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology, AAPL, and QTD, then add an Apple Earnings Handoff note with the exact score and status.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Initial workspace: dashboard "Earnings Handoff"; 1 tab(s): review
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
+- **Generated note** ≥1× named ~"Apple Earnings Handoff" whose content mentions "6.52", "In Review" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
-#### `earnings_pulse_level2`
+#### `earnings_handoff_level2`
 
 **level2** · category: read · specification: -
 
-> For Apple's current-quarter earnings watch, find the Upcoming Earnings view in the Earnings & Estimates Monitor and report the exact score and workflow status. Use the view's declared period choices to interpret current quarter.
+> Prepare a Microsoft note on the open Earnings Handoff board under the current-month handoff policy. Read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology and MSFT; current month means MTD. Add a Microsoft Earnings Handoff note with the exact score and status.
+
+- Initial workspace: dashboard "Earnings Handoff"; 1 tab(s): review
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Generated note** ≥1× named ~"Microsoft Earnings Handoff" whose content mentions "89.94", "Escalated" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
+#### `earnings_handoff_level3`
+
+**level3** · category: platform · specification: -
+
+> For the open Earnings Handoff board, follow Finance Earnings Prep governance and read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology, AAPL, and QTD. Add a Governed Apple Handoff note with the exact score and status.
+
+- Initial workspace: dashboard "Earnings Handoff"; 1 tab(s): review
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Generated note** ≥1× named ~"Governed Apple Handoff" whose content mentions "6.52", "In Review" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
+#### `earnings_handoff_level4`
+
+**level4** · category: platform · specification: -
+
+> Handle the coverage follow-up route from the open Earnings Handoff board under Finance Earnings Prep governance. Read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Healthcare, LLY, and YTD; add an LLY Delegation Handoff note with exact score and status, then delegate the coverage follow-up.
+
+- Initial workspace: dashboard "Earnings Handoff"; 1 tab(s): review
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Generated note** ≥1× named ~"LLY Delegation Handoff" whose content mentions "27.63", "Open" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
+#### `news_desk_handoff_level0`
+
+**level0** · category: read · specification: -
+
+> On the open News Desk Handoff board, read Getting Started's Sample News Feed with category set to business and limit set to 2. Add a Markets News Handoff note with the exact lead title and author.
+
+- Initial workspace: dashboard "News Desk Handoff"; 1 tab(s): review
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Generated note** ≥1× named ~"Markets News Handoff" whose content mentions "Global Markets Rally on Positive Economic Data", "Robert Williams" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
+#### `news_desk_handoff_level1`
+
+**level1** · category: read · specification: -
+
+> Find Getting Started's Sample News Feed from the open News Desk Handoff board for technology, limited to 2, then add a Technology News Handoff note with the exact lead title and author.
+
+- Initial workspace: dashboard "News Desk Handoff"; 1 tab(s): review
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Generated note** ≥1× named ~"Technology News Handoff" whose content mentions "AI Breakthrough: New Model Achieves Human-Level Reasoning", "Sarah Johnson" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
+#### `news_desk_handoff_level2`
+
+**level2** · category: read · specification: -
+
+> Prepare a Science News Handoff note on the open News Desk Handoff board under the science route. Read Getting Started's Sample News Feed for that route, limited to 2, and pin the exact lead title and author.
+
+- Initial workspace: dashboard "News Desk Handoff"; 1 tab(s): review
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Generated note** ≥1× named ~"Science News Handoff" whose content mentions "Scientists Discover New Earth-like Exoplanet in Habitable Zone", "Dr. Emily Rogers" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
+#### `news_desk_handoff_level3`
+
+**level3** · category: platform · specification: -
+
+> Using Workspace session guidance on the open News Desk Handoff board, read Getting Started's Sample News Feed for business, limited to 2. Add a Governed Expansion Handoff note with the exact second title and author.
+
+- Initial workspace: dashboard "News Desk Handoff"; 1 tab(s): review
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Generated note** ≥1× named ~"Governed Expansion Handoff" whose content mentions "E-commerce Giant Announces Major Expansion into Southeast Asia", "Lisa Anderson" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
+#### `news_desk_handoff_level4`
+
+**level4** · category: platform · specification: -
+
+> Handle the science follow-up route from the open News Desk Handoff board under Workspace session guidance. Read Getting Started's Sample News Feed for science, limited to 2; add a Science Delegation Handoff note with the exact lead title and author, then delegate the editorial follow-up.
+
+- Initial workspace: dashboard "News Desk Handoff"; 1 tab(s): review
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Generated note** ≥1× named ~"Science Delegation Handoff" whose content mentions "Scientists Discover New Earth-like Exoplanet in Habitable Zone", "Dr. Emily Rogers" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
+### organize (12)
+
+#### `client_onboarding_flow_level0`
+
+**level0** · category: dashboard · specification: -
+
+> For client operations, create a dashboard named Wave Two Client Onboarding and make it the active board.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `client_onboarding_flow_level1`
+
+**level1** · category: dashboard · specification: -
+
+> Create and activate Wave Two Client Onboarding with Intake and Review tabs for the operations team.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `client_onboarding_flow_level2`
+
+**level2** · category: dashboard · specification: -
+
+> Operations needs you to create and activate Wave Two Client Onboarding with Intake, Review, and Approval tabs, then open Review.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Dashboard name** must contain "Wave Two Client Onboarding" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
+- **Tab** `intake` must exist (matched by tab id) → `missing_tab`
+- **Tab** `review` must exist (matched by tab id) → `missing_tab`
+- **Tab** `approval` must exist (matched by tab id) → `missing_tab`
+
+#### `client_onboarding_flow_level3`
+
+**level3** · category: dashboard · specification: -
+
+> On the open Client Onboarding Staging board, rename the dashboard to Wave Two Client Onboarding and change Intake to Client Intake. Preserve Review and every other workspace item.
+
+- Initial workspace: dashboard "Client Onboarding Staging"; 2 tab(s): intake, review
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `client_onboarding_flow_level4`
+
+**level4** · category: dashboard · specification: -
+
+> Client operations needs a governed setup: following Workspace session guidance, create and activate Wave Two Client Onboarding with Client Intake, Due Diligence, and Approval tabs in that order.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `client_onboarding_flow_level5`
+
+**level5** · category: platform · specification: -
+
+> Author and add a Client Onboarding Backend with Client Intake Queue and Approval Log views, then publish and instantiate a Client Onboarding App with Intake and Approvals tabs. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Client Onboarding Backend/client_intake_queue` on tab `intake` → `missing_widget`
+- **Widget** ≥1× `Client Onboarding Backend/approval_log` on tab `approvals` → `missing_widget`
+
+#### `committee_navigation_level0`
+
+**level0** · category: dashboard · specification: -
+
+> Create a dashboard named Wave One Committee Review for the committee and make it the active board.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `committee_navigation_level1`
+
+**level1** · category: dashboard · specification: -
+
+> Create Wave One Committee Review as the active committee board, with Agenda and Evidence tabs.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `committee_navigation_level2`
+
+**level2** · category: dashboard · specification: -
+
+> The committee needs an active Wave One Committee Review board with Agenda and Evidence tabs. Create it, then open Evidence.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Dashboard name** must contain "Wave One Committee Review" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
+- **Tab** `agenda` must exist (matched by tab id) → `missing_tab`
+- **Tab** `evidence` must exist (matched by tab id) → `missing_tab`
+
+#### `committee_navigation_level3`
+
+**level3** · category: dashboard · specification: -
+
+> On the open Committee Review Staging board, rename the dashboard to Wave One Committee Review and change its Agenda tab to Decision Agenda. Keep Evidence and all other workspace content intact.
+
+- Initial workspace: dashboard "Committee Review Staging"; 2 tab(s): agenda, evidence
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `committee_navigation_level4`
+
+**level4** · category: dashboard · specification: -
+
+> Following Workspace session guidance, create and activate Wave One Committee Review with Decision Agenda, Evidence, and Sign-Off tabs in that order.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `committee_navigation_level5`
+
+**level5** · category: platform · specification: -
+
+> The committee needs a Committee Navigation Backend with Agenda Queue and Evidence Register views. Author and add it, publish a Committee Review App with Agenda and Evidence tabs, and instantiate it. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Committee Navigation Backend/agenda_queue` on tab `agenda` → `missing_widget`
+- **Widget** ≥1× `Committee Navigation Backend/evidence_register` on tab `evidence` → `missing_widget`
+
+### parameterize (12)
+
+#### `crypto_document_controls_level0`
+
+**level0** · category: single-widget · specification: -
+
+> On the open Crypto Document Controls board, set Whitepapers with filenames set to ethereum.pdf and category set to l1, preserving every other view.
+
+- Initial workspace: dashboard "Crypto Document Controls"; 1 tab(s): review; 3 seeded widget(s): whitepapers({"filenames": "bitcoin.pdf", "category": "all"}), coindesk_news({"limit": 10, "lang": "EN"}), multi_pdf_base64({"pdf_name": "Bitcoin Whitepaper"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": "ethereum.pdf", "category": "l1"} → `missing_widget`
+
+#### `crypto_document_controls_level1`
+
+**level1** · category: single-widget · specification: -
+
+> Use the whitepaper PDF on the open Crypto Document Controls board to show Solana's solana.pdf from the l1 collection, leaving the rest alone.
+
+- Initial workspace: dashboard "Crypto Document Controls"; 1 tab(s): review; 3 seeded widget(s): whitepapers({"filenames": "bitcoin.pdf", "category": "all"}), coindesk_news({"limit": 10, "lang": "EN"}), multi_pdf_base64({"pdf_name": "Bitcoin Whitepaper"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": "solana.pdf", "category": "l1"} → `missing_widget`
+
+#### `crypto_document_controls_level2`
+
+**level2** · category: single-widget · specification: -
+
+> Apply the DeFi research set to Whitepapers on the open Crypto Document Controls board and preserve the surrounding document views.
+
+- Initial workspace: dashboard "Crypto Document Controls"; 1 tab(s): review; 3 seeded widget(s): whitepapers({"filenames": "bitcoin.pdf", "category": "all"}), coindesk_news({"limit": 10, "lang": "EN"}), multi_pdf_base64({"pdf_name": "Bitcoin Whitepaper"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": "solana.pdf", "category": "defi"} → `missing_widget`
+
+#### `crypto_document_controls_level3`
+
+**level3** · category: single-widget · specification: -
+
+> Retune Whitepapers on the open Crypto Document Controls board to ethereum.pdf from l1. Keep CoinDesk News and every other view unchanged.
+
+- Initial workspace: dashboard "Crypto Document Controls"; 1 tab(s): review; 3 seeded widget(s): whitepapers({"filenames": "bitcoin.pdf", "category": "all"}), coindesk_news({"limit": 10, "lang": "EN"}), multi_pdf_base64({"pdf_name": "Bitcoin Whitepaper"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": "ethereum.pdf", "category": "l1"} → `missing_widget`
+- **Widget** ≥1× `Widget Examples/coindesk_news` → `missing_widget`
+
+#### `crypto_document_controls_level4`
+
+**level4** · category: single-widget · specification: -
+
+> Using Workspace session guidance, prepare the open Crypto Document Controls board with Whitepapers on ethereum.pdf from l1 and CoinDesk News limited to 6 in ES. Preserve the PDF viewer.
+
+- Initial workspace: dashboard "Crypto Document Controls"; 1 tab(s): review; 3 seeded widget(s): whitepapers({"filenames": "bitcoin.pdf", "category": "all"}), coindesk_news({"limit": 10, "lang": "EN"}), multi_pdf_base64({"pdf_name": "Bitcoin Whitepaper"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": "ethereum.pdf", "category": "l1"} → `missing_widget`
+- **Widget** ≥1× `Widget Examples/coindesk_news` with data_args ⊇ {"limit": 6, "lang": "ES"} → `missing_widget`
+
+#### `crypto_document_controls_level5`
+
+**level5** · category: single-widget · specification: -
+
+> Finish the existing views on the open Crypto Document Controls board. Set Whitepapers to solana.pdf from l1, CoinDesk News to 8 in EN, and Multi PDF Viewer - Base64 to Bitcoin Whitepaper. Preserve all layout and other workspace content.
+
+- Initial workspace: dashboard "Crypto Document Controls"; 1 tab(s): review; 3 seeded widget(s): whitepapers({"filenames": "bitcoin.pdf", "category": "all"}), coindesk_news({"limit": 10, "lang": "EN"}), multi_pdf_base64({"pdf_name": "Bitcoin Whitepaper"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": "solana.pdf", "category": "l1"} → `missing_widget`
+- **Widget** ≥1× `Widget Examples/coindesk_news` with data_args ⊇ {"limit": 8, "lang": "EN"} → `missing_widget`
+- **Widget** ≥1× `Getting Started/multi_pdf_base64` with data_args ⊇ {"pdf_name": "Bitcoin Whitepaper"} → `missing_widget`
+
+#### `technology_decision_inputs_level0`
+
+**level0** · category: single-widget · specification: -
+
+> On the open Technology Decision Inputs board, switch Car Manufacturer Performance with company set to TSLA and year set to 2023, and leave every other view unchanged.
+
+- Initial workspace: dashboard "Technology Decision Inputs"; 1 tab(s): review; 3 seeded widget(s): company_performance({"company": "TM", "year": 2024}), earnings_estimates_monitor_calendar_upcoming_earnings({"sector": "Healthcare", "ticker": "LLY", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TSLA", "year": 2023} → `missing_widget`
+
+#### `technology_decision_inputs_level1`
+
+**level1** · category: single-widget · specification: -
+
+> Look over the open Technology Decision Inputs board, then change Car Manufacturer Performance to TSLA and 2022 while preserving everything else.
+
+- Initial workspace: dashboard "Technology Decision Inputs"; 1 tab(s): review; 3 seeded widget(s): company_performance({"company": "TM", "year": 2024}), earnings_estimates_monitor_calendar_upcoming_earnings({"sector": "Healthcare", "ticker": "LLY", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TSLA", "year": 2022} → `missing_widget`
+
+#### `technology_decision_inputs_level2`
+
+**level2** · category: single-widget · specification: -
+
+> Apply the current Tesla model-year policy on the open Technology Decision Inputs board. Set Car Manufacturer Performance to company TSLA and year 2024, the current model year, and preserve the rest of the board.
+
+- Initial workspace: dashboard "Technology Decision Inputs"; 1 tab(s): review; 3 seeded widget(s): company_performance({"company": "TM", "year": 2024}), earnings_estimates_monitor_calendar_upcoming_earnings({"sector": "Healthcare", "ticker": "LLY", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TSLA", "year": 2024} → `missing_widget`
+
+#### `technology_decision_inputs_level3`
+
+**level3** · category: single-widget · specification: -
+
+> Retune Upcoming Earnings on the open Technology Decision Inputs board to Technology, AAPL, and QTD. Keep Car Manufacturer Performance and every other view as they are.
+
+- Initial workspace: dashboard "Technology Decision Inputs"; 1 tab(s): review; 3 seeded widget(s): company_performance({"company": "TM", "year": 2024}), earnings_estimates_monitor_calendar_upcoming_earnings({"sector": "Healthcare", "ticker": "LLY", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/earnings_estimates_monitor_calendar_upcoming_earnings` with data_args ⊇ {"sector": "Technology", "ticker": "AAPL", "period": "QTD"} → `missing_widget`
+- **Widget** ≥1× `Getting Started/company_performance` → `missing_widget`
+
+#### `technology_decision_inputs_level4`
+
+**level4** · category: single-widget · specification: -
+
+> Prepare the open Technology Decision Inputs board for the quarterly review under Finance Earnings Prep governance. Set Upcoming Earnings to Technology, AAPL, and QTD, and Trade Ideas to Flagship Long/Short and QTD. Preserve Car Manufacturer Performance.
+
+- Initial workspace: dashboard "Technology Decision Inputs"; 1 tab(s): review; 3 seeded widget(s): company_performance({"company": "TM", "year": 2024}), earnings_estimates_monitor_calendar_upcoming_earnings({"sector": "Healthcare", "ticker": "LLY", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/earnings_estimates_monitor_calendar_upcoming_earnings` with data_args ⊇ {"sector": "Technology", "ticker": "AAPL", "period": "QTD"} → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "QTD"} → `missing_widget`
+
+#### `technology_decision_inputs_level5`
+
+**level5** · category: single-widget · specification: -
+
+> Finish the rebuild on the open Technology Decision Inputs board using only its existing views. Set Car Manufacturer Performance to TSLA and 2024, Upcoming Earnings to Technology, AAPL, and QTD, and Trade Ideas to Flagship Long/Short and QTD. Preserve all layout and surrounding content.
+
+- Initial workspace: dashboard "Technology Decision Inputs"; 1 tab(s): review; 3 seeded widget(s): company_performance({"company": "TM", "year": 2024}), earnings_estimates_monitor_calendar_upcoming_earnings({"sector": "Healthcare", "ticker": "LLY", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TSLA", "year": 2024} → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/earnings_estimates_monitor_calendar_upcoming_earnings` with data_args ⊇ {"sector": "Technology", "ticker": "AAPL", "period": "QTD"} → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "QTD"} → `missing_widget`
+
+### platform (10)
+
+#### `cited_research_operations_level1`
+
+**level1** · category: platform · specification: -
+
+> On the open Cited Research Operations board, follow Daloopa Tearsheet governance and add Bench Daloopa's Company Directory.
+
+- Initial workspace: dashboard "Cited Research Operations"; 1 tab(s): research
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Daloopa/daloopa_company_directory` → `missing_widget`
+
+#### `cited_research_operations_level2`
+
+**level2** · category: platform · specification: -
+
+> Use Daloopa Guidance Tracker governance on the open Cited Research Operations board and add Bench Daloopa's Management Guidance for NVDA.
+
+- Initial workspace: dashboard "Cited Research Operations"; 1 tab(s): research
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Daloopa/daloopa_management_guidance` with data_args ⊇ {"ticker": "NVDA"} → `missing_widget`
+
+#### `cited_research_operations_level3`
+
+**level3** · category: dashboard · specification: -
+
+> For the open Cited Research Operations board, use Daloopa Industry governance to place two Bench Daloopa Company Fundamentals views, one for MSFT in 2025Q4 and one for NVDA in 2025Q4.
+
+- Initial workspace: dashboard "Cited Research Operations"; 1 tab(s): research
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Daloopa/daloopa_company_fundamentals` with data_args ⊇ {"ticker": "MSFT", "period": "2025Q4"} → `missing_widget`
+- **Widget** ≥1× `Bench Daloopa/daloopa_company_fundamentals` with data_args ⊇ {"ticker": "NVDA", "period": "2025Q4"} → `missing_widget`
+
+#### `cited_research_operations_level4`
+
+**level4** · category: dashboard · specification: -
+
+> Combine Daloopa Capital Allocation governance with Workspace session guidance on the open Cited Research Operations board. Add Bench Daloopa's Company Fundamentals for AMZN in 2026Q1 and a Citation Protocol note naming source_url and calendar_period.
+
+- Initial workspace: dashboard "Cited Research Operations"; 1 tab(s): research
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Daloopa/daloopa_company_fundamentals` with data_args ⊇ {"ticker": "AMZN", "period": "2026Q1"} → `missing_widget`
+- **Generated note** ≥1× named ~"Citation Protocol" whose content mentions "source_url", "calendar_period" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
+#### `cited_research_operations_level5`
+
+**level5** · category: platform · specification: -
+
+> Following Daloopa Tearsheet governance, author and add a Cited Research Backend with a Citation Review Queue, then publish and instantiate a Cited Research App with a Research tab. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Cited Research Backend/citation_review_queue` on tab `research` → `missing_widget`
+
+#### `governed_earnings_brief_level1`
+
+**level1** · category: platform · specification: -
+
+> On the open Governed Earnings Brief board, consult Finance Earnings Prep governance and add an Earnings Governance Actions note that names internal estimates and transcript tone.
+
+- Initial workspace: dashboard "Governed Earnings Brief"; 1 tab(s): overview
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Generated note** ≥1× named ~"Earnings Governance Actions" whose content mentions "internal estimates", "transcript tone" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
+#### `governed_earnings_brief_level2`
+
+**level2** · category: platform · specification: -
+
+> Review the backend contract for the open Governed Earnings Brief board, then add a Backend Contract Actions note that names endpoints and CORS.
+
+- Initial workspace: dashboard "Governed Earnings Brief"; 1 tab(s): overview
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Generated note** ≥1× named ~"Backend Contract Actions" whose content mentions "endpoints", "CORS" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
+#### `governed_earnings_brief_level3`
+
+**level3** · category: dashboard · specification: -
+
+> Use Workspace session guidance on the open Governed Earnings Brief board. Add an Actions tab and place a Session Grounding note there naming current-dashboard and current-tab.
+
+- Initial workspace: dashboard "Governed Earnings Brief"; 1 tab(s): overview
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Generated note** ≥1× named ~"Session Grounding" whose content mentions "current-dashboard", "current-tab" on tab `actions` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
+#### `governed_earnings_brief_level4`
+
+**level4** · category: dashboard · specification: -
+
+> For the open Governed Earnings Brief board, combine Finance Earnings Prep governance with Workspace session guidance. Add an Actions tab and an Earnings Session Actions note there naming action items and current-dashboard.
+
+- Initial workspace: dashboard "Governed Earnings Brief"; 1 tab(s): overview
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Generated note** ≥1× named ~"Earnings Session Actions" whose content mentions "action items", "current-dashboard" on tab `actions` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
+#### `governed_earnings_brief_level5`
+
+**level5** · category: platform · specification: -
+
+> The desk wants a Governed Earnings Backend with an Earnings Action Register. Following the build-an-app guide, author and add it, publish a Governed Earnings App with an Actions tab, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Governed Earnings Backend/earnings_action_register` on tab `actions` → `missing_widget`
+
+### repair (10)
+
+#### `manufacturer_details_repair_level1`
+
+**level1** · category: repair · specification: -
+
+> On the open Manufacturer Detail Repair board, restore Car Manufacturer Details to company F and year 2024. Preserve Markdown Widget and every other workspace item.
+
+- Initial workspace: dashboard "Manufacturer Detail Repair"; 1 tab(s): details; 2 seeded widget(s): company_details({"company": "F", "year": 2022}), markdown_widget({})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/company_details` with data_args ⊇ {"company": "F", "year": 2024} → `missing_widget`
+- **Widget** ≥1× `Getting Started/markdown_widget` → `missing_widget`
+
+#### `manufacturer_details_repair_level2`
+
+**level2** · category: repair · specification: -
+
+> The open Manufacturer Detail Repair board has an extra Car Manufacturer Details copy. The manufacturer-duplicate marker identifies it; remove that copy so exactly one remains, and preserve Markdown Widget.
+
+- Initial workspace: dashboard "Manufacturer Detail Repair"; 1 tab(s): details; 3 seeded widget(s): company_details({"company": "F", "year": 2024}), company_details({"company": "F", "year": 2024}), markdown_widget({})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/company_details` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
+- **Widget** ≥1× `Getting Started/markdown_widget` → `missing_widget`
+
+#### `manufacturer_details_repair_level3`
+
+**level3** · category: repair · specification: -
+
+> Car Manufacturer Details overlaps Markdown Widget on the open Manufacturer Detail Repair board. Move Car Manufacturer Details to x 0, y 10, width 40, height 14 on Details while preserving its settings.
+
+- Initial workspace: dashboard "Manufacturer Detail Repair"; 1 tab(s): details; 2 seeded widget(s): company_details({"company": "F", "year": 2024}), markdown_widget({})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/company_details` → `missing_widget`
+- **Widget** ≥1× `Getting Started/markdown_widget` → `missing_widget`
+
+#### `manufacturer_details_repair_level4`
+
+**level4** · category: repair · specification: -
+
+> Clean up the open Manufacturer Detail Repair board. Restore the primary Car Manufacturer Details to F and 2024; the manufacturer-duplicate marker identifies the extra copy. Move the primary to x 0, y 10, width 40, height 14 on Details, and preserve Markdown Widget.
+
+- Initial workspace: dashboard "Manufacturer Detail Repair"; 1 tab(s): details; 3 seeded widget(s): company_details({"company": "F", "year": 2022}), company_details({"company": "F", "year": 2022}), markdown_widget({})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/company_details` with data_args ⊇ {"company": "F", "year": 2024} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
+- **Widget** ≥1× `Getting Started/markdown_widget` → `missing_widget`
+
+#### `manufacturer_details_repair_level5`
+
+**level5** · category: repair · specification: -
+
+> On the open Custom Detail Repair board, refresh the authored Wave Two Detail Repair backend so Manufacturer Detail Queue serves /manufacturer-details and Detail Repair App has one non-overlapping placement on Details. Keep the open view and all other content. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+
+- Initial workspace: dashboard "Custom Detail Repair"; 1 tab(s): details; 1 seeded widget(s): manufacturer_detail_queue({})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Wave Two Detail Repair/manufacturer_detail_queue` on tab `details` → `missing_widget`
+
+#### `nav_exception_station_level1`
+
+**level1** · category: repair · specification: -
+
+> On the open NAV Repair Staging board, fix the NAV Exceptions setting by restoring Flagship Long/Short, Open, and YTD. Preserve Trade Ideas and every other workspace item.
+
+- Initial workspace: dashboard "NAV Repair Staging"; 1 tab(s): exceptions; 2 seeded widget(s): fund_operations_control_tower_pricing_nav_exceptions({"fund": "Flagship Long/Short", "status": "Closed", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` with data_args ⊇ {"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"} → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` → `missing_widget`
+
+#### `nav_exception_station_level2`
+
+**level2** · category: repair · specification: -
+
+> The open NAV Repair Staging board has an extra NAV Exceptions copy. The duplicate-cleanup marker identifies it; remove that copy so exactly one remains, and preserve Trade Ideas and all other content.
+
+- Initial workspace: dashboard "NAV Repair Staging"; 1 tab(s): exceptions; 3 seeded widget(s): fund_operations_control_tower_pricing_nav_exceptions({"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"}), fund_operations_control_tower_pricing_nav_exceptions({"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` → `missing_widget`
+
+#### `nav_exception_station_level3`
+
+**level3** · category: repair · specification: -
+
+> Fix the overlap on the open NAV Repair Staging board without disturbing Trade Ideas. Move NAV Exceptions to x 0, y 14, width 40, and height 14 on Exceptions, preserving all parameters and remaining workspace content.
+
+- Initial workspace: dashboard "NAV Repair Staging"; 1 tab(s): exceptions; 2 seeded widget(s): fund_operations_control_tower_pricing_nav_exceptions({"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` → `missing_widget`
+
+#### `nav_exception_station_level4`
+
+**level4** · category: repair · specification: -
+
+> Clean up the open NAV Repair Staging board. Restore the primary NAV Exceptions view to Flagship Long/Short, Open, and YTD; the duplicate-cleanup marker identifies the extra copy. Move the primary to x 0, y 14, width 40, height 14 on Exceptions, and preserve Trade Ideas.
+
+- Initial workspace: dashboard "NAV Repair Staging"; 1 tab(s): exceptions; 3 seeded widget(s): fund_operations_control_tower_pricing_nav_exceptions({"fund": "Flagship Long/Short", "status": "Closed", "period": "YTD"}), fund_operations_control_tower_pricing_nav_exceptions({"fund": "Flagship Long/Short", "status": "Closed", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` with data_args ⊇ {"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` → `missing_widget`
+
+#### `nav_exception_station_level5`
+
+**level5** · category: repair · specification: -
+
+> On the open Custom NAV Repair Staging board, refresh the authored Wave One NAV Repair backend so NAV Exception Queue serves /nav-exceptions and NAV Repair App has one non-overlapping placement on Exceptions. Keep the open view and all other workspace content. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+
+- Initial workspace: dashboard "Custom NAV Repair Staging"; 1 tab(s): exceptions; 1 seeded widget(s): nav_exception_queue({})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Wave One NAV Repair/nav_exception_queue` on tab `exceptions` → `missing_widget`
+
+### retrieve (12)
+
+#### `closing_tape_lookup_level0`
+
+**level0** · category: read · specification: -
+
+> Read the daily OHLCV rows in Bench Daloopa's Stock Prices with ticker set to NVDA, then report the latest date and exact close.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -7560,11 +4133,116 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 
-#### `earnings_pulse_level3`
+#### `closing_tape_lookup_level1`
+
+**level1** · category: read · specification: -
+
+> Find the daily OHLCV rows in Bench Daloopa's Stock Prices for Netflix and give me the latest date and exact close.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `closing_tape_lookup_level2`
+
+**level2** · category: read · specification: -
+
+> Pull the latest date and exact close from the daily OHLCV rows in Bench Daloopa's Stock Prices for the EV tape policy; that policy means the Tesla coverage name.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `closing_tape_lookup_level3`
 
 **level3** · category: read · specification: -
 
-> Inspect the lived-in Earnings & Estimates Monitor already open in the workspace. Using its configured Upcoming Earnings view, report LLY's exact year-to-date score and status without changing the dashboard.
+> On the open Closing Tape Review board, read the daily OHLCV rows in Bench Daloopa's configured Stock Prices view without changing it and report the latest date, exact close, and volume.
+
+- Initial workspace: dashboard "Closing Tape Review"; 1 tab(s): review; 1 seeded widget(s): daloopa_stock_prices({"ticker": "MSFT"})
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `closing_tape_lookup_level4`
+
+**level4** · category: read · specification: -
+
+> Use Daloopa Tearsheet governance to review the daily OHLCV rows in Bench Daloopa's Stock Prices for Apple, then report the latest date and exact close.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `closing_tape_lookup_level5`
+
+**level5** · category: platform · specification: -
+
+> Build and add a Wave Two Closing Tape backend with a Closing Tape Lookup for NVDA, instantiate its Closing Tape App, read the result, and report the latest date and exact close. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Wave Two Closing Tape/closing_tape_lookup` with data_args ⊇ {"ticker": "NVDA"} on tab `tape` → `missing_widget`
+
+#### `earnings_lookup_level0`
+
+**level0** · category: read · specification: -
+
+> Read Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor for Healthcare, LLY, and YTD, and report the exact score and status.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `earnings_lookup_level1`
+
+**level1** · category: read · specification: -
+
+> Find Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor, set the view to Technology, AAPL, and QTD, and give me the exact score and status.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `earnings_lookup_level2`
+
+**level2** · category: read · specification: -
+
+> I need MSFT's exact score and status from Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor. Use Technology for the coverage sector; the current-month policy means MTD.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `earnings_lookup_level3`
+
+**level3** · category: read · specification: -
+
+> On the open Earnings & Estimates Monitor board, read Bench Stark Enterprise's configured Upcoming Earnings view without changing it, and report LLY's exact YTD score and change.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Earnings & Estimates Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -7573,11 +4251,11 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 
-#### `earnings_pulse_level4`
+#### `earnings_lookup_level4`
 
 **level4** · category: read · specification: -
 
-> Apply the desk earnings-review convention for Apple and report the latest reported quarter's revenue actual and surprise percentage. Follow the convention's evidence source rather than a general market view.
+> Review Apple's earnings under Finance Earnings Prep governance. In Bench Stark Enterprise's Earnings & Estimates Monitor, use Upcoming Earnings for Technology, AAPL, and QTD, then report the exact score and status.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -7586,11 +4264,11 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 
-#### `earnings_pulse_level5`
+#### `earnings_lookup_level5`
 
 **level5** · category: platform · specification: -
 
-> Build a small backend named Pilot Earnings Lookup with an Earnings Pulse Lookup table for ticker and calendar-period lookups. Wrap it in an Earnings Pulse App, open the app, read Apple for 2026 Q1, and report the quarter, actual revenue, and surprise percentage. Keep the definition free of sample rows.
+> The desk needs a Wave One Earnings Lookup backend with an Earnings Status Lookup for LLY and YTD. Build and add it, instantiate its Earnings Lookup App, read the lookup, and report the exact score and status. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -7598,1428 +4276,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Pilot Earnings Lookup/earnings_pulse_lookup` with data_args ⊇ {"ticker": "AAPL", "period": "2026Q1"} on tab `lookup` → `missing_widget`
-
-#### `exec_pair`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_widget_data for the Bench Stark Enterprise Fills Table and Broker Scorecard widgets; then add a short note that cites Fills Table and execution_desk_fills_broker_scorecard and says you reviewed the data.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): execution_desk_fills_fills_table({"fund": "Flagship Long/Short", "period": "YTD"}), execution_desk_fills_broker_scorecard({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "execution_desk_fills_fills_table", "execution_desk_fills_broker_scorecard", "data" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "execution_desk_fills_fills_table"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "execution_desk_fills_broker_scorecard"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "score" (agent must actually retrieve the data) → `missing_tool_result`
-- **Tool result** of `get_widget_data` must contain "score" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `issuer_conc`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_widget_data on the Bench Stark Enterprise Issuer Concentration widget, find the exact score for portfolio_command_center_holdings_issuer_concentration, then add a note that cites each widget id, the field name, and the exact value.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): portfolio_command_center_holdings_issuer_concentration({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "portfolio_command_center_holdings_issuer_concentration", "score", "94.45" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_holdings_issuer_concentration"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "score", "94.45" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `latency`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_widget_data for the Bench Stark Enterprise Latency by Feed widget; then add a short note that cites vendor_dataset_monitor_slas_latency_by_feed and says you reviewed the data.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): vendor_dataset_monitor_slas_latency_by_feed({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "vendor_dataset_monitor_slas_latency_by_feed", "data" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "vendor_dataset_monitor_slas_latency_by_feed"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "latency_ms" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `limits`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> On the Bench Stark Enterprise Limit Utilization widget, use get_widget_data, then add a short HTML card that cites risk_exposure_monitor_limits_limit_utilization and says you reviewed the data.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): risk_exposure_monitor_limits_limit_utilization({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated html** ≥1× whose content mentions "risk_exposure_monitor_limits_limit_utilization", "data" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_limits_limit_utilization"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "exposure" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `negative_live_grid_level0`
-
-**level0** · category: read · specification: -
-
-> Read Widget Examples' live-updating grid whose stream is labeled 'ws' for MSFT. State the exact price and change percentage.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-
-#### `negative_live_grid_level1`
-
-**level1** · category: read · specification: -
-
-> Find the live-updating grid whose stream is labeled 'ws' and whose Microsoft sample is down, not the similarly named rising sample. Report Microsoft's exact price and change percentage.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-
-#### `negative_live_grid_level2`
-
-**level2** · category: read · specification: -
-
-> For Microsoft, use the declared symbol choices to query the live-updating grid with the short 'ws' stream. Return the exact price and change percentage from the negative sample.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-
-#### `negative_live_grid_level3`
-
-**level3** · category: read · specification: -
-
-> Examine the Live Grid Staging board already configured in the workspace. The live-updating grid uses the short 'ws' stream; report the exact price and change percentage for its configured Microsoft sample without altering it.
-
-- Initial workspace: dashboard "Live Grid Staging"; 1 tab(s): watch; 1 seeded widget(s): live_grid_example({"symbol": "MSFT"})
-- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-
-#### `negative_live_grid_level4`
-
-**level4** · category: read · specification: -
-
-> Use the workspace widget-type convention to select the live-updating grid with stream label 'ws'. For Microsoft, report the exact price and change percentage from its negative sample.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-
-#### `negative_live_grid_level5`
-
-**level5** · category: platform · specification: -
-
-> Author a Pilot Streaming Lookup backend with a Microsoft Stream Lookup table that serves the requested Microsoft sample, using the examples grid's row shape. Wrap it in a Streaming Pulse App, open it, read the lookup, and report the exact price and change percentage. Do not embed sample rows in the widget definition.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Pilot Streaming Lookup/msft_stream_lookup` with data_args ⊇ {"symbol": "MSFT"} on tab `stream` → `missing_widget`
-
-#### `order_status`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> On the Bench Stark Enterprise Order Status Metrics widget, use get_widget_data, then add a short note that cites execution_desk_blotter_order_status_metrics and says you reviewed the data.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): execution_desk_blotter_order_status_metrics({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "execution_desk_blotter_order_status_metrics", "data" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "execution_desk_blotter_order_status_metrics"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "value" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `pipeline`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> On the Bench Stark Enterprise Pipeline by Stage widget, use get_widget_data, then add a short HTML card that cites client_360_flows_pipeline_by_stage and says you reviewed the data.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): client_360_flows_pipeline_by_stage({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated html** ≥1× whose content mentions "client_360_flows_pipeline_by_stage", "data" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "client_360_flows_pipeline_by_stage"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "score" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `pm_values`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_widget_data for the Bench Stark Enterprise Portfolio Snapshot and Top Alerts widgets; find the exact value for portfolio_command_center_overview_portfolio_snapshot and alert_count for portfolio_command_center_overview_top_alerts, then add a note that cites each widget id, the field name, and the exact value.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): portfolio_command_center_overview_portfolio_snapshot({"fund": "Flagship Long/Short", "period": "YTD"}), portfolio_command_center_overview_top_alerts({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "portfolio_command_center_overview_portfolio_snapshot", "value", "87.94", "portfolio_command_center_overview_top_alerts", "alert_count", "193" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_overview_portfolio_snapshot"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "portfolio_command_center_overview_top_alerts"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "value", "87.94" (agent must actually retrieve the data) → `missing_tool_result`
-- **Tool result** of `get_widget_data` must contain "alert_count", "193" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `quant_values`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_widget_data on the Bench Stark Enterprise Signal Metrics and Backtest Performance widgets, find the exact value for quant_research_backtest_lab_signals_signal_metrics and score for Backtest Performance, then add a note that cites each widget id, the field name, and the exact value.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): quant_research_backtest_lab_signals_signal_metrics({"fund": "Flagship Long/Short", "period": "YTD"}), quant_research_backtest_lab_backtest_backtest_performance({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "quant_research_backtest_lab_signals_signal_metrics", "value", "83.92", "quant_research_backtest_lab_backtest_backtest_performance", "score", "35.41" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "quant_research_backtest_lab_signals_signal_metrics"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "quant_research_backtest_lab_backtest_backtest_performance"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "value", "83.92" (agent must actually retrieve the data) → `missing_tool_result`
-- **Tool result** of `get_widget_data` must contain "score", "35.41" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `risk_pair`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_widget_data on the Bench Stark Enterprise VaR Trend and Drawdown widgets, then add a short HTML card that cites risk_exposure_monitor_dashboard_var_trend and risk_exposure_monitor_dashboard_drawdown and says you reviewed the data.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): risk_exposure_monitor_dashboard_var_trend({"fund": "Flagship Long/Short", "period": "YTD"}), risk_exposure_monitor_dashboard_drawdown({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated html** ≥1× whose content mentions "risk_exposure_monitor_dashboard_var_trend", "risk_exposure_monitor_dashboard_drawdown", "data" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_dashboard_var_trend"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_dashboard_drawdown"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "var_usd" (agent must actually retrieve the data) → `missing_tool_result`
-- **Tool result** of `get_widget_data` must contain "drawdown_usd" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `risk_values`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_widget_data for the Bench Stark Enterprise Risk Snapshot and Limit Utilization widgets; find the exact value for risk_exposure_monitor_dashboard_risk_snapshot and exposure for risk_exposure_monitor_limits_limit_utilization, then add a note that cites each widget id, the field name, and the exact value.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): risk_exposure_monitor_dashboard_risk_snapshot({"fund": "Flagship Long/Short", "period": "YTD"}), risk_exposure_monitor_limits_limit_utilization({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "risk_exposure_monitor_dashboard_risk_snapshot", "value", "0.2878", "risk_exposure_monitor_limits_limit_utilization", "exposure", "0.0339" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_limits_limit_utilization"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "value", "0.2878" (agent must actually retrieve the data) → `missing_tool_result`
-- **Tool result** of `get_widget_data` must contain "exposure", "0.0339" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `sla_metrics`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> On the Bench Stark Enterprise SLA Metrics widget, use get_widget_data, find the exact value for vendor_dataset_monitor_vendors_sla_metrics, then add a HTML card that cites each widget id, the field name, and the exact value.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): vendor_dataset_monitor_vendors_sla_metrics({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated html** ≥1× whose content mentions "vendor_dataset_monitor_vendors_sla_metrics", "value", "63.73" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "vendor_dataset_monitor_vendors_sla_metrics"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "value", "63.73" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `strategy_health`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_widget_data for the Bench Stark Enterprise Strategy Health Metrics widget; then add a short note that cites strategy_health_monitor_performance_strategy_health_metrics and says you reviewed the data.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): strategy_health_monitor_performance_strategy_health_metrics({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "strategy_health_monitor_performance_strategy_health_metrics", "data" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "strategy_health_monitor_performance_strategy_health_metrics"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "value" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `stress_values`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_widget_data for the Bench Stark Enterprise Days to Liquidate and Risk Snapshot widgets; find the exact score for stress_liquidity_lab_liquidity_days_to_liquidate and value for stress_liquidity_lab_stress_tests_risk_snapshot, then add a HTML card that cites each widget id, the field name, and the exact value.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): stress_liquidity_lab_liquidity_days_to_liquidate({"fund": "Flagship Long/Short", "period": "YTD"}), stress_liquidity_lab_stress_tests_risk_snapshot({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated html** ≥1× whose content mentions "stress_liquidity_lab_liquidity_days_to_liquidate", "score", "62.96", "stress_liquidity_lab_stress_tests_risk_snapshot", "value", "83.56" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "stress_liquidity_lab_liquidity_days_to_liquidate"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "stress_liquidity_lab_stress_tests_risk_snapshot"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "score", "62.96" (agent must actually retrieve the data) → `missing_tool_result`
-- **Tool result** of `get_widget_data` must contain "value", "83.56" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `var_trend`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_widget_data for the Bench Stark Enterprise VaR Trend widget; find the exact var_usd for risk_exposure_monitor_dashboard_var_trend, then add a HTML card that cites each widget id, the field name, and the exact value.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 1 seeded widget(s): risk_exposure_monitor_dashboard_var_trend({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated html** ≥1× whose content mentions "risk_exposure_monitor_dashboard_var_trend", "var_usd", "-222500" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_dashboard_var_trend"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "var_usd", "-222500" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `vendor_pair`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_widget_data for the Bench Stark Enterprise Vendor SLA Status and Latency by Feed widgets; then add a short note that cites vendor_dataset_monitor_slas_vendor_sla_status and vendor_dataset_monitor_slas_latency_by_feed and says you reviewed the data.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Data Review"; 1 tab(s): main; 2 seeded widget(s): vendor_dataset_monitor_slas_vendor_sla_status({"fund": "Flagship Long/Short", "period": "YTD"}), vendor_dataset_monitor_slas_latency_by_feed({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `get_widget_data`, `read_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "vendor_dataset_monitor_slas_vendor_sla_status", "vendor_dataset_monitor_slas_latency_by_feed", "data" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "vendor_dataset_monitor_slas_vendor_sla_status"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "vendor_dataset_monitor_slas_latency_by_feed"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_widget_data` must contain "score" (agent must actually retrieve the data) → `missing_tool_result`
-- **Tool result** of `get_widget_data` must contain "latency_ms" (agent must actually retrieve the data) → `missing_tool_result`
-
-### resources (20)
-
-#### `full_client_360`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Read the app-builder index resource at openbb://workspace/app-builder/index, instantiate client-360 as Client Resource Command, navigate to flows, add widget client_360_flows_pipeline_by_stage, and add a note mentioning pipeline and resource.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (7): `read_workspace_resource`, `manage_backends`, `manage_apps`, `navigate_workspace`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Client Resource Command" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Widget** ≥1× `Bench Stark Enterprise/client_360_flows_pipeline_by_stage` on tab `flows` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "pipeline", "resource" on tab `flows` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/app-builder/index` must contain "client-360" (agent must actually retrieve the resource) → `missing_resource_read`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `full_portfolio_command_center`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Read the app-builder index resource at openbb://workspace/app-builder/index, instantiate portfolio-command-center as PM Resource Command, navigate to holdings, add widget portfolio_command_center_holdings_sector_exposure, and add a note mentioning sector exposure and resource.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (7): `read_workspace_resource`, `manage_backends`, `manage_apps`, `navigate_workspace`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "PM Resource Command" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_holdings_sector_exposure` on tab `holdings` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "sector exposure", "resource" on tab `holdings` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/app-builder/index` must contain "portfolio-command-center" (agent must actually retrieve the resource) → `missing_resource_read`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `full_risk_exposure_monitor`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Use the app-builder index resource openbb://workspace/app-builder/index, instantiate risk-exposure-monitor as Risk Resource Command, navigate to limits, add widget risk_exposure_monitor_limits_limit_utilization, and add a note mentioning limit utilization and resource.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (7): `read_workspace_resource`, `manage_backends`, `manage_apps`, `navigate_workspace`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Risk Resource Command" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Widget** ≥1× `Bench Stark Enterprise/risk_exposure_monitor_limits_limit_utilization` on tab `limits` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "limit utilization", "resource" on tab `limits` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/app-builder/index` must contain "risk-exposure-monitor" (agent must actually retrieve the resource) → `missing_resource_read`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `full_vendor_dataset_monitor`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Read the app-builder index resource at openbb://workspace/app-builder/index, instantiate vendor-dataset-monitor as Vendor Resource Command, navigate to incidents, add widget vendor_dataset_monitor_incidents_incident_log, and add a HTML card mentioning incident log and resource.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (7): `read_workspace_resource`, `manage_backends`, `manage_apps`, `navigate_workspace`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Vendor Resource Command" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_incidents_incident_log` on tab `incidents` → `missing_widget`
-- **Generated html** ≥1× whose content mentions "incident log", "resource" on tab `incidents` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/app-builder/index` must contain "vendor-dataset-monitor" (agent must actually retrieve the resource) → `missing_resource_read`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-
-#### `index_client_360`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> After calling read_workspace_resource with uri openbb://workspace/app-builder/index, add a HTML card naming the Client 360 template id client-360.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "App Index Review"; 1 seeded widget(s): vendor_dataset_monitor_quality_affected_apps({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_quality_affected_apps` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated html** ≥1× whose content mentions "Client 360", "client-360" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/app-builder/index` must contain "Client 360", "client-360" (agent must actually retrieve the resource) → `missing_resource_read`
-
-#### `index_equity_earnings_review`
-
-**easy** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Call read_workspace_resource with uri openbb://workspace/app-builder/index and add a note naming the Onboarding App for Devs app and its aggrid tab.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "App Index Review"
-- Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "Onboarding App for Devs", "tabs=aggrid" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/app-builder/index` must contain "Onboarding App for Devs", "tabs=aggrid" (agent must actually retrieve the resource) → `missing_resource_read`
-
-#### `index_portfolio_command_center`
-
-**easy** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> After calling read_workspace_resource with uri openbb://workspace/app-builder/index, add a note naming the Portfolio Command Center template id portfolio-command-center.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "App Index Review"; 1 seeded widget(s): vendor_dataset_monitor_quality_row_count_drift({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_quality_row_count_drift` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "Portfolio Command Center", "portfolio-command-center" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/app-builder/index` must contain "Portfolio Command Center", "portfolio-command-center" (agent must actually retrieve the resource) → `missing_resource_read`
-
-#### `index_risk_exposure_monitor`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Call read_workspace_resource with uri openbb://workspace/app-builder/index and add a note naming the Risk Exposure Monitor template id risk-exposure-monitor.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "App Index Review"; 1 seeded widget(s): vendor_dataset_monitor_quality_validation_errors({})
-- Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_quality_validation_errors` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "Risk Exposure Monitor", "risk-exposure-monitor" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/app-builder/index` must contain "Risk Exposure Monitor", "risk-exposure-monitor" (agent must actually retrieve the resource) → `missing_resource_read`
-
-#### `instantiate_compliance_surveillance_hub`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Use the app-builder index resource openbb://workspace/app-builder/index, then instantiate template compliance-surveillance-hub as a dashboard named Compliance Resource Dashboard.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (3): `read_workspace_resource`, `manage_backends`, `manage_apps`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Compliance Resource Dashboard" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_apps` with args ⊇ {"operation": "instantiate"} must appear in the trace → `missing_tool_call`
-- **Resource read** of `openbb://workspace/app-builder/index` must contain "compliance-surveillance-hub" (agent must actually retrieve the resource) → `missing_resource_read`
-
-#### `instantiate_equity_earnings_review`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Read the app-builder index resource at openbb://workspace/app-builder/index, then instantiate template onboarding-app-for-devs as a dashboard named Equity Resource Dashboard.
-
-- Fixture backends: getting-started
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (3): `read_workspace_resource`, `manage_backends`, `manage_apps`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Equity Resource Dashboard" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_apps` with args ⊇ {"operation": "instantiate"} must appear in the trace → `missing_tool_call`
-- **Resource read** of `openbb://workspace/app-builder/index` must contain "Onboarding App for Devs" (agent must actually retrieve the resource) → `missing_resource_read`
-
-#### `instantiate_execution_desk`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Read the app-builder index resource at openbb://workspace/app-builder/index, then instantiate template execution-desk as a dashboard named Execution Resource Dashboard.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (3): `read_workspace_resource`, `manage_backends`, `manage_apps`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Execution Resource Dashboard" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_apps` with args ⊇ {"operation": "instantiate"} must appear in the trace → `missing_tool_call`
-- **Resource read** of `openbb://workspace/app-builder/index` must contain "execution-desk" (agent must actually retrieve the resource) → `missing_resource_read`
-
-#### `instantiate_vendor_dataset_monitor`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> After reading the app-builder index resource openbb://workspace/app-builder/index, instantiate template vendor-dataset-monitor as a dashboard named Vendor Resource Dashboard.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: empty (no seeded dashboard)
-- Allowed tools (3): `read_workspace_resource`, `manage_backends`, `manage_apps`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Dashboard name** must contain "Vendor Resource Dashboard" (case-insensitive phrase or in-order word match, stopwords ignored) → `dashboard_name`
-- **Tool call** ≥1× `manage_apps` with args ⊇ {"operation": "instantiate"} must appear in the trace → `missing_tool_call`
-- **Resource read** of `openbb://workspace/app-builder/index` must contain "vendor-dataset-monitor" (agent must actually retrieve the resource) → `missing_resource_read`
-
-#### `skill_build_finance_comps`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Read resource openbb://workspace/specs/widget-parameters, add Widget Examples/live_grid_example, and add a note that mentions peer set.
-
-- Fixture backends: widget-examples
-- Initial workspace: dashboard "Resource Build"
-- Allowed tools (6): `get_workspace_snapshot`, `read_workspace_resource`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Widget Examples/live_grid_example` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "peer set" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/specs/widget-parameters` must contain "Widget Parameters" (agent must actually retrieve the resource) → `missing_resource_read`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `skill_build_finance_earnings_prep`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Read resource openbb://workspace/specs/widgets-json, add Getting Started/live_grid_data with data_args {"symbol": "AAPL"}, and add a note that mentions surprise drivers.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Resource Build"
-- Allowed tools (6): `get_workspace_snapshot`, `read_workspace_resource`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "surprise drivers" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/specs/widgets-json` must contain "widgets.json" (agent must actually retrieve the resource) → `missing_resource_read`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `skill_build_finance_guidance_tracker`
-
-**hard** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> After reading resource openbb://workspace/guides/build-an-app, add Bench Stark Enterprise/executive_investment_dashboard_risk_limit_utilization and add a note that mentions evidence gaps.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Resource Build"
-- Allowed tools (6): `get_workspace_snapshot`, `read_workspace_resource`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/executive_investment_dashboard_risk_limit_utilization` → `missing_widget`
-- **Generated note** ≥1× whose content mentions "evidence gaps" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/guides/build-an-app` must contain "Build an App" (agent must actually retrieve the resource) → `missing_resource_read`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `skill_build_finance_tearsheet`
-
-**medium** · category: dashboard · specification: - · no-op baseline score: 0.000
-
-> Read resource openbb://workspace/specs/widget-types, add Getting Started/company_list with data_args {"symbol": "VWAGY"}, and add a note that mentions valuation.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Resource Build"
-- Allowed tools (6): `get_workspace_snapshot`, `read_workspace_resource`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_list` with data_args ⊇ {"companyId": "VWAGY"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "valuation" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/specs/widget-types` must contain "table" (agent must actually retrieve the resource) → `missing_resource_read`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `skill_finance_comps`
-
-**easy** · category: read · specification: - · no-op baseline score: 0.000
-
-> Call read_workspace_resource with uri openbb://workspace/skills/finance-comps, then add a note mentioning peer set.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Resource Review"
-- Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "peer set" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/skills/finance-comps` must contain "Comps workflow" (agent must actually retrieve the resource) → `missing_resource_read`
-
-#### `skill_finance_earnings_prep`
-
-**easy** · category: read · specification: - · no-op baseline score: 0.000
-
-> Call read_workspace_resource with uri openbb://workspace/skills/finance-earnings-prep, then add a note mentioning surprise drivers.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Resource Review"
-- Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "surprise drivers" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/skills/finance-earnings-prep` must contain "Earnings prep workflow" (agent must actually retrieve the resource) → `missing_resource_read`
-
-#### `skill_finance_guidance_tracker`
-
-**easy** · category: read · specification: - · no-op baseline score: 0.000
-
-> Call read_workspace_resource with uri openbb://workspace/skills/finance-guidance-tracker, then add a note mentioning management claims.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Resource Review"
-- Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "management claims" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/skills/finance-guidance-tracker` must contain "Guidance tracker workflow" (agent must actually retrieve the resource) → `missing_resource_read`
-
-#### `skill_finance_tearsheet`
-
-**easy** · category: read · specification: - · no-op baseline score: 0.000
-
-> Use read_workspace_resource with uri openbb://workspace/skills/finance-tearsheet and add a note mentioning valuation.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Resource Review"
-- Allowed tools (3): `get_workspace_snapshot`, `read_workspace_resource`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "valuation" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Resource read** of `openbb://workspace/skills/finance-tearsheet` must contain "Tearsheet workflow" (agent must actually retrieve the resource) → `missing_resource_read`
-
-### skills (20)
-
-#### `apply_finance_comps_with_aapl`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_skill_content with slug finance-comps. Following that workflow, add the Company List with ID Mapping widget for TM to the active dashboard, then add a note that applies the skill's workflow steps to this widget. Omit dashboard_id when adding the note.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
-- Allowed tools (6): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_list` with data_args ⊇ {"companyId": "TM"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "comps", "peer set", "TM" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-comps"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Comps workflow", "peer set", "valuation multiples" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `apply_finance_comps_workflow_notes`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_skill_content with slug finance-comps, then add a note on the active dashboard that captures the workflow steps for an analyst. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_capacity_liquidity_capacity_curve({})
-- Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/strategy_health_monitor_capacity_liquidity_capacity_curve` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "comps", "peer set" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-comps"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Comps workflow", "peer set", "valuation multiples" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `apply_finance_earnings_prep_with_aapl`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> After calling get_skill_content with slug finance-earnings-prep, follow that workflow by adding the Live Grid widget for AAPL to the active dashboard, then add a note that applies the skill's workflow steps to this widget. Omit dashboard_id when adding the note.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
-- Allowed tools (6): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "earnings prep", "surprise drivers", "AAPL" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-earnings-prep"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Earnings prep workflow", "surprise drivers", "portfolio manager" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `apply_finance_earnings_prep_workflow_notes`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> After calling get_skill_content with slug finance-earnings-prep, add a note on the active dashboard that captures the workflow steps for an analyst. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_overview_workflow_overview({})
-- Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/strategy_health_monitor_overview_workflow_overview` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "earnings prep", "surprise drivers" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-earnings-prep"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Earnings prep workflow", "surprise drivers", "portfolio manager" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `apply_finance_guidance_tracker_with_aapl`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Call get_skill_content with slug finance-guidance-tracker. Following that workflow, add the Sample News Feed widget for tech to the active dashboard, then add a note that applies the skill's workflow steps to this widget. Omit dashboard_id when adding the note.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
-- Allowed tools (6): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "tech", "limit": 5} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "guidance", "claims", "tech" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-guidance-tracker"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Guidance tracker workflow", "management claims", "evidence gaps" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `apply_finance_guidance_tracker_workflow_notes`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Call get_skill_content with slug finance-guidance-tracker, then add a note on the active dashboard that captures the workflow steps for an analyst. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_performance_gross_and_net_exposure({})
-- Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/strategy_health_monitor_performance_gross_and_net_exposure` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "guidance", "claims" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-guidance-tracker"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Guidance tracker workflow", "management claims", "evidence gaps" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `apply_finance_tearsheet_with_msft`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Call get_skill_content with slug finance-tearsheet. Following that workflow, add the Table widget with grouping by cell click widget for MSFT to the active dashboard, then add a note that applies the skill's workflow steps to this widget. Omit dashboard_id when adding the note.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
-- Allowed tools (6): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 6 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "tearsheet", "valuation", "MSFT" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-tearsheet"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Tearsheet workflow", "valuation", "investment conclusion" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `apply_finance_tearsheet_workflow_notes`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Call get_skill_content with slug finance-tearsheet, then add a note on the active dashboard that captures the workflow steps for an analyst. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): strategy_health_monitor_performance_sleeve_performance({})
-- Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/strategy_health_monitor_performance_sleeve_performance` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "tearsheet", "valuation" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-tearsheet"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Tearsheet workflow", "valuation", "investment conclusion" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `file_finance_comps_under_its_own_tab`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_skill_content with slug finance-comps. Add a new tab named Comps and put a note on that tab capturing the workflow steps. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): vendor_dataset_monitor_incidents_affected_apps({})
-- Allowed tools (5): `get_workspace_snapshot`, `get_skill_content`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `comps` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_incidents_affected_apps` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "comps", "peer set" on tab `comps` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-comps"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Comps workflow", "peer set", "valuation multiples" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `file_finance_earnings_prep_under_its_own_tab`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> After calling get_skill_content with slug finance-earnings-prep, add a new tab named Earnings Prep and put a note on that tab capturing the workflow steps. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): vendor_dataset_monitor_incidents_blast_radius_summary({})
-- Allowed tools (5): `get_workspace_snapshot`, `get_skill_content`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `earnings-prep` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_incidents_blast_radius_summary` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "earnings prep", "surprise drivers" on tab `earnings-prep` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-earnings-prep"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Earnings prep workflow", "surprise drivers", "portfolio manager" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `file_finance_guidance_tracker_under_its_own_tab`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Call get_skill_content with slug finance-guidance-tracker. Add a new tab named Guidance and put a note on that tab capturing the workflow steps. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): vendor_dataset_monitor_incidents_freshness_exceptions({})
-- Allowed tools (5): `get_workspace_snapshot`, `get_skill_content`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `guidance` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_incidents_freshness_exceptions` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "guidance", "claims" on tab `guidance` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-guidance-tracker"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Guidance tracker workflow", "management claims", "evidence gaps" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `file_finance_tearsheet_under_its_own_tab`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Call get_skill_content with slug finance-tearsheet. Add a new tab named Tearsheet and put a note on that tab capturing the workflow steps. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview; 1 seeded widget(s): vendor_dataset_monitor_incidents_incident_timeline({})
-- Allowed tools (5): `get_workspace_snapshot`, `get_skill_content`, `manage_navigation_bar`, `navigate_workspace`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 5 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Tab** `overview` must exist (matched by tab id) → `missing_tab`
-- **Tab** `tearsheet` must exist (matched by tab id) → `missing_tab`
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_incidents_incident_timeline` on tab `overview` → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "tearsheet", "valuation" on tab `tearsheet` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-tearsheet"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Tearsheet workflow", "valuation", "investment conclusion" (agent must actually retrieve the data) → `missing_tool_result`
-
-#### `grounded_finance_comps_for_nvda`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_skill_content with slug finance-comps. Following that workflow, add the Company List with ID Mapping widget for GM, read its data, and add a note that cites the exact key value from the data. Omit dashboard_id when adding the note.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
-- Allowed tools (7): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_list` with data_args ⊇ {"companyId": "GM"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "VWAGY", "350.5", "peer set" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-comps"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"widget_id": "company_list"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Comps workflow", "peer set", "valuation multiples" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `grounded_finance_earnings_prep_for_msft`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> After calling get_skill_content with slug finance-earnings-prep, follow that workflow by adding the Live Grid widget for MSFT, reading its data, and adding a note that cites the exact key value from the data. Omit dashboard_id when adding the note.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
-- Allowed tools (7): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "MSFT", "350.0", "surprise drivers" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-earnings-prep"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"widget_id": "live_grid_data"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Earnings prep workflow", "surprise drivers", "portfolio manager" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `grounded_finance_guidance_tracker_for_nvda`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Call get_skill_content with slug finance-guidance-tracker. Following that workflow, add the Live Grid widget for TSLA, read its data, and add a note that cites the exact key value from the data. Omit dashboard_id when adding the note.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
-- Allowed tools (7): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "TSLA", "245.0", "claims" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-guidance-tracker"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"widget_id": "live_grid_data"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Guidance tracker workflow", "management claims", "evidence gaps" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `grounded_finance_tearsheet_for_aapl`
-
-**hard** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Call get_skill_content with slug finance-tearsheet. Following that workflow, add the Table widget with grouping by cell click widget for AAPL, read its data, and add a note that cites the exact key value from the data. Omit dashboard_id when adding the note.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
-- Allowed tools (7): `get_workspace_snapshot`, `get_skill_content`, `list_available_widgets`, `get_widget_schema`, `create_widget`, `get_widget_data`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 7 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Generated note** ≥1× whose content mentions "AAPL", "150.25", "valuation" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-tearsheet"} must appear in the trace → `missing_tool_call`
-- **Tool call** ≥1× `get_widget_data` with args ⊇ {"widget_id": "table_widget_with_grouping_by_cell_click"} must appear in the trace → `missing_tool_call`
-- **Tool result** of `get_skill_content` must contain "Tearsheet workflow", "valuation", "investment conclusion" (agent must actually retrieve the data) → `missing_tool_result`
-- **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
-- **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
-
-#### `read_the_finance_comps_skill`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Use get_skill_content with slug finance-comps, then add a note on the active dashboard naming the Finance Comps skill. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
-- Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "Finance Comps" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-comps"} must appear in the trace → `missing_tool_call`
-
-#### `read_the_finance_earnings_prep_skill`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> After calling get_skill_content with slug finance-earnings-prep, add a note on the active dashboard naming the Finance Earnings Prep skill. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
-- Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "Finance Earnings Prep" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-earnings-prep"} must appear in the trace → `missing_tool_call`
-
-#### `read_the_finance_guidance_tracker_skill`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Call get_skill_content with slug finance-guidance-tracker, then add a note on the active dashboard naming the Finance Guidance Tracker skill. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
-- Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "Finance Guidance Tracker" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-guidance-tracker"} must appear in the trace → `missing_tool_call`
-
-#### `read_the_finance_tearsheet_skill`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Call get_skill_content with slug finance-tearsheet, then add a note on the active dashboard naming the Finance Tearsheet skill. Omit dashboard_id when adding the note.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Skill Review"; 1 tab(s): overview
-- Allowed tools (3): `get_workspace_snapshot`, `get_skill_content`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Generated note** ≥1× whose content mentions "Finance Tearsheet" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-- **Tool call** ≥1× `get_skill_content` with args ⊇ {"slug": "finance-tearsheet"} must appear in the trace → `missing_tool_call`
-
-### update (20)
-
-#### `double_aapl_desk`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> This AAPL desk dashboard needs two repairs: the price widget should show AAPL, not MSFT, and the news widget should show 5 articles, not only 1. Repair both existing widgets and add a HTML card mentioning AAPL and the word repaired.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Double Repair Task"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "MSFT"}), sample_newsfeed({"category": "tech", "limit": 1})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-- **Widget** ≥0× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "tech", "limit": 5} → `missing_widget`
-- **Widget** ≥0× `Getting Started/sample_newsfeed` with data_args ⊇ {"limit": 1} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated html** ≥1× whose content mentions "AAPL", "repaired" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `double_nvda_switch`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> Repair the existing widgets on this TSLA dashboard: change the price widget from AAPL to TSLA and the estimates widget from MSFT to TSLA, then add a note mentioning TSLA and the word repaired.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Double Repair Task"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), live_grid_data({"symbol": "MSFT"})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`
-- **Widget** ≥0× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`
-- **Widget** ≥0× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "TSLA", "repaired" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `double_rates_switch`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> On this dashboard, repair two getting-started series: the first widget should show GM (not VWAGY), and the second should show F (not TM). Repair both existing widgets and add a note mentioning GM, F, and the word repaired.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Double Repair Task"; 2 seeded widget(s): company_performance({"company": "VWAGY", "year": "2024"}), company_performance({"company": "TM", "year": "2024"})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-- **Widget** ≥0× `Getting Started/company_performance` with data_args ⊇ {"company": "VWAGY", "year": "2024"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "F", "year": "2024"} → `missing_widget`
-- **Widget** ≥0× `Getting Started/company_performance` with data_args ⊇ {"company": "TM", "year": "2024"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "GM", "F", "repaired" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `double_stark_ops`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> The ops dashboard has two wrong settings: Vendor SLA Status is Open but should be In Review, and Portfolio Snapshot is YTD but should be MTD. Repair both existing widgets and add a note mentioning In Review, MTD, and the word repaired.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Double Repair Task"; 2 seeded widget(s): vendor_dataset_monitor_slas_vendor_sla_status({"vendor": "FactSet", "status": "Open"}), portfolio_command_center_overview_portfolio_snapshot({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_slas_vendor_sla_status` with data_args ⊇ {"vendor": "FactSet", "status": "In Review"} → `missing_widget`
-- **Widget** ≥0× `Bench Stark Enterprise/vendor_dataset_monitor_slas_vendor_sla_status` with data_args ⊇ {"status": "Open"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_overview_portfolio_snapshot` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "MTD"} → `missing_widget`
-- **Widget** ≥0× `Bench Stark Enterprise/portfolio_command_center_overview_portfolio_snapshot` with data_args ⊇ {"period": "YTD"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "In Review", "MTD", "repaired" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `repair_news_msft_aapl`
-
-**medium** · category: repair · specification: - · no-op baseline score: 0.000
-
-> This tech desk dashboard mistakenly shows business news. Repair the widget to tech and add a note saying what was repaired, mentioning both values.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Repair Task"; 1 seeded widget(s): sample_newsfeed({"category": "business"})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "tech"} → `missing_widget`
-- **Widget** ≥0× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "business"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "business", "tech", "repaired" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `repair_risk_portfolio`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> This Long/Short Equity risk dashboard has its snapshot configured for Macro Multi-Asset. Repair the widget to Long/Short Equity and add a HTML card saying what was repaired, mentioning both values.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Repair Task"; 1 seeded widget(s): risk_exposure_monitor_dashboard_risk_snapshot({"portfolio": "Macro Multi-Asset"})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/risk_exposure_monitor_dashboard_risk_snapshot` with data_args ⊇ {"portfolio": "Long/Short Equity"} → `missing_widget`
-- **Widget** ≥0× `Bench Stark Enterprise/risk_exposure_monitor_dashboard_risk_snapshot` with data_args ⊇ {"portfolio": "Macro Multi-Asset"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated html** ≥1× whose content mentions "Macro Multi-Asset", "Long/Short Equity", "repaired" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `repair_series_fedfunds_cpi`
-
-**hard** · category: repair · specification: - · no-op baseline score: 0.000
-
-> This inflation dashboard mistakenly shows the TM series. Add a HTML card saying what was repaired and mentioning both values after you repair the widget to F.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Repair Task"; 1 seeded widget(s): company_performance({"company": "TM", "year": "2024"})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "F", "year": "2024"} → `missing_widget`
-- **Widget** ≥0× `Getting Started/company_performance` with data_args ⊇ {"company": "TM", "year": "2024"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated html** ≥1× whose content mentions "TM", "F", "repaired" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `repair_ticker_nvda_msft`
-
-**medium** · category: repair · specification: - · no-op baseline score: 0.000
-
-> This MSFT review dashboard mistakenly shows TSLA in the price widget. Repair the widget to MSFT; then add a note saying what was repaired and mentioning both values.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Repair Task"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "TSLA"})
-- Allowed tools (4): `get_workspace_snapshot`, `read_widget`, `update_widget`, `add_generative_widget`
-- Turn budget: None · oracle reference trace: 4 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`
-- **Widget** ≥0× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-- **Generated note** ≥1× whose content mentions "TSLA", "MSFT", "repaired" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
-
-#### `set_latest_news_symbol_to_msft`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> For the existing Sample News Feed widget, set symbol to business.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Update Task"; 1 seeded widget(s): sample_newsfeed({"category": "science", "limit": 5})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "business", "limit": 5} → `missing_widget`
-
-#### `set_macro_timeseries_series_to_dgs10`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> For the existing Car Manufacturer Performance widget, set series to GM.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Update Task"; 1 seeded widget(s): company_performance({"company": "VWAGY", "year": "2024"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`
-
-#### `set_portfolio_snapshot_period_to_mtd`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> For the existing Portfolio Snapshot widget, set period to MTD.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Update Task"; 1 seeded widget(s): portfolio_command_center_overview_portfolio_snapshot({"fund": "Flagship Long/Short", "period": "YTD"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_overview_portfolio_snapshot` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "MTD"} → `missing_widget`
-
-#### `set_price_performance_symbol_to_aapl`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> For the existing Table widget with grouping by cell click widget, set symbol to AAPL.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Update Task"; 1 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`
-
-#### `update_estimate_history_aapl_to_nvda`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Update the existing Live Grid widget from AAPL to TSLA; do not create a new one and leave no widget showing the old value.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Update Task"; 1 seeded widget(s): live_grid_data({"symbol": "AAPL"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`
-- **Widget** ≥0× `Getting Started/live_grid_data` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-
-#### `update_fundamental_metrics_msft_to_nvda`
-
-**easy** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> The Company List with ID Mapping widget currently shows VWAGY. Update the existing widget to GM; do not create a new one and leave no widget showing the old value.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Update Task"; 1 seeded widget(s): company_list({"companyId": "VWAGY"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_list` with data_args ⊇ {"companyId": "GM"} → `missing_widget`
-- **Widget** ≥0× `Getting Started/company_list` with data_args ⊇ {"companyId": "VWAGY"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-
-#### `update_macro_timeseries_cpiaucsl_to_fedfunds`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> The existing Car Manufacturer Performance widget currently shows F. Update that widget to TM; do not create a new one and leave no widget showing the old value.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Update Task"; 1 seeded widget(s): company_performance({"company": "F", "year": "2024"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TM", "year": "2024"} → `missing_widget`
-- **Widget** ≥0× `Getting Started/company_performance` with data_args ⊇ {"company": "F", "year": "2024"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-
-#### `update_only_the_dgs2_macro_timeseries`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Two Car Manufacturer Performance widgets are on this dashboard: one for GM and one for VWAGY. Only update the VWAGY one to TM; leave the GM widget untouched.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Selective Update Task"; 2 seeded widget(s): company_performance({"company": "GM", "year": "2024"}), company_performance({"company": "VWAGY", "year": "2024"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2024"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TM", "year": "2024"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥0× `Getting Started/company_performance` with data_args ⊇ {"company": "VWAGY", "year": "2024"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-
-#### `update_only_the_factset_vendor_sla_status`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Leave the Bloomberg Vendor SLA Status widget untouched, and update only the FactSet Vendor SLA Status widget to S&P Global.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Selective Update Task"; 2 seeded widget(s): vendor_dataset_monitor_slas_vendor_sla_status({"vendor": "Bloomberg"}), vendor_dataset_monitor_slas_vendor_sla_status({"vendor": "FactSet"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_slas_vendor_sla_status` with data_args ⊇ {"vendor": "Bloomberg"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Bench Stark Enterprise/vendor_dataset_monitor_slas_vendor_sla_status` with data_args ⊇ {"vendor": "S&P Global"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥0× `Bench Stark Enterprise/vendor_dataset_monitor_slas_vendor_sla_status` with data_args ⊇ {"vendor": "FactSet"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-
-#### `update_only_the_msft_price_performance`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Two Table widget with grouping by cell click widgets are on this dashboard: one for AAPL and one for MSFT. Only update the MSFT one to TSLA; leave the AAPL widget untouched.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Selective Update Task"; 2 seeded widget(s): table_widget_with_grouping_by_cell_click({"symbol": "AAPL"}), table_widget_with_grouping_by_cell_click({"symbol": "MSFT"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "AAPL"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "TSLA"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥0× `Getting Started/table_widget_with_grouping_by_cell_click` with data_args ⊇ {"symbol": "MSFT"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-
-#### `update_only_the_nvda_latest_news`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> Leave the tech Sample News Feed widget untouched, and update only the science Sample News Feed widget to business.
-
-- Fixture backends: getting-started
-- Initial workspace: dashboard "Selective Update Task"; 2 seeded widget(s): sample_newsfeed({"category": "tech", "limit": 5}), sample_newsfeed({"category": "science", "limit": 5})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 2 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "tech"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥1× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "business"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
-- **Widget** ≥0× `Getting Started/sample_newsfeed` with data_args ⊇ {"category": "science"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
-
-#### `update_rejected_orders_desk_to_credit`
-
-**medium** · category: single-widget · specification: - · no-op baseline score: 0.000
-
-> The existing Rejected Orders widget currently shows US Equity. Update that widget to Credit; do not create a new one and leave no widget showing the old value.
-
-- Fixture backends: stark-enterprise
-- Initial workspace: dashboard "Update Task"; 1 seeded widget(s): execution_desk_exceptions_rejected_orders({"desk": "US Equity", "period": "YTD"})
-- Allowed tools (3): `get_workspace_snapshot`, `read_widget`, `update_widget`
-- Turn budget: None · oracle reference trace: 3 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/execution_desk_exceptions_rejected_orders` with data_args ⊇ {"desk": "Credit", "period": "YTD"} → `missing_widget`
-- **Widget** ≥0× `Bench Stark Enterprise/execution_desk_exceptions_rejected_orders` with data_args ⊇ {"desk": "US Equity"} → `missing_widget`; and ≤0 such widget(s) → `too_many_widgets`
+- **Widget** ≥1× `Wave One Earnings Lookup/earnings_status_lookup` with data_args ⊇ {"ticker": "LLY", "period": "YTD"} on tab `lookup` → `missing_widget`
 
 
 ## Suite: build-openbb-apps (236 tasks)
@@ -12400,4 +7657,4 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 ---
 
-Total: 790 tasks.
+Total: 544 tasks.

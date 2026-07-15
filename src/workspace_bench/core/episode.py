@@ -11,6 +11,7 @@ from workspace_bench.core.models import (
     ToolCall,
     ToolTraceEvent,
     final_answer_from_trace,
+    final_answer_text,
 )
 from workspace_bench.workspace.default_setup import apply_workspace_baseline
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
@@ -137,7 +138,7 @@ class WorkspaceEpisode:
         if call.name == FINAL_ANSWER_TOOL:
             # Harness-level answer action: recorded, never dispatched to the
             # workspace, and it completes the episode.
-            text = call.args.get("text")
+            text = final_answer_text(call.args)
             if not isinstance(text, str) or not text.strip():
                 return {
                     "ok": False,

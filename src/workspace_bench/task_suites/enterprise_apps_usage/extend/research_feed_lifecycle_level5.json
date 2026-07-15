@@ -1,0 +1,206 @@
+{
+  "id": "research_feed_lifecycle_level5",
+  "category": "platform",
+  "difficulty": "level5",
+  "prompt": "Complete the research service with Wave Two Research Feed, Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch. Add the backend, publish Research Feed App with Feed and Archive tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Wave Two Research Feed",
+          "url": "http://127.0.0.1:9606",
+          "widgets_json": {
+            "research_feed_pulse": {
+              "name": "Research Feed Pulse",
+              "description": "Refreshed research feed.",
+              "endpoint": "/research-feed",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            },
+            "source_freshness_alert": {
+              "name": "Source Freshness Alert",
+              "description": "Wave-1 view for Source Freshness Alert.",
+              "endpoint": "/source-freshness",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 10
+              }
+            },
+            "archive_coverage_watch": {
+              "name": "Archive Coverage Watch",
+              "description": "Wave-1 view for Archive Coverage Watch.",
+              "endpoint": "/archive-coverage",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Research Feed App",
+              "description": "Wave-1 authored app for Research Feed App.",
+              "tabs": {
+                "feed": {
+                  "id": "feed",
+                  "name": "Feed",
+                  "layout": [
+                    {
+                      "i": "research_feed_pulse",
+                      "x": 0,
+                      "y": 0,
+                      "w": 20,
+                      "h": 10
+                    },
+                    {
+                      "i": "source_freshness_alert",
+                      "x": 20,
+                      "y": 0,
+                      "w": 20,
+                      "h": 10
+                    }
+                  ]
+                },
+                "archive": {
+                  "id": "archive",
+                  "name": "Archive",
+                  "layout": [
+                    {
+                      "i": "archive_coverage_watch",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Research Feed App",
+          "dashboard_name": "Research Feed Live",
+          "activate": true
+        },
+        "graded_args": [
+          "operation",
+          "app_name"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Wave Two Research Feed",
+        "widget_id": "research_feed_pulse",
+        "tab_id": "feed"
+      },
+      {
+        "origin": "Wave Two Research Feed",
+        "widget_id": "source_freshness_alert",
+        "tab_id": "feed"
+      },
+      {
+        "origin": "Wave Two Research Feed",
+        "widget_id": "archive_coverage_watch",
+        "tab_id": "archive"
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Wave Two Research Feed",
+        "widget_id": "research_feed_pulse",
+        "expect": {
+          "endpoint": "/research-feed"
+        }
+      },
+      {
+        "backend_name": "Wave Two Research Feed",
+        "widget_id": "source_freshness_alert",
+        "expect": {
+          "endpoint": "/source-freshness"
+        }
+      },
+      {
+        "backend_name": "Wave Two Research Feed",
+        "widget_id": "archive_coverage_watch",
+        "expect": {
+          "endpoint": "/archive-coverage"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Wave Two Research Feed",
+        "name_contains": "Research Feed App",
+        "tabs_include": [
+          "feed",
+          "archive"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true
+      }
+    ],
+    "max_turns": 5
+  }
+}

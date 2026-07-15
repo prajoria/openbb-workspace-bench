@@ -1,0 +1,213 @@
+{
+  "id": "decision_briefing_level5",
+  "category": "platform",
+  "difficulty": "level5",
+  "prompt": "The PM needs a Decision Tile Backend with a Decision Summary Tile. Author and add it, then instantiate its Decision Briefing App. On Briefing, place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, beside Getting Started's Car Manufacturer Performance at y 10, x 0 and x 20, each width 20 and height 14. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Decision Tile Backend",
+          "url": "http://127.0.0.1:9502",
+          "widgets_json": {
+            "decision_summary_tile": {
+              "name": "Decision Summary Tile",
+              "description": "Wave-1 view for Decision Summary Tile.",
+              "endpoint": "/decision-summary",
+              "type": "metric",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Decision Briefing App",
+              "description": "Wave-1 authored app for Decision Briefing App.",
+              "tabs": {
+                "briefing": {
+                  "id": "briefing",
+                  "name": "Briefing",
+                  "layout": [
+                    {
+                      "i": "decision_summary_tile",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Decision Briefing App",
+          "dashboard_name": "Decision Briefing Live",
+          "activate": true
+        },
+        "graded_args": [
+          "operation",
+          "app_name"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "portfolio_command_center_actions_trade_ideas"
+        },
+        "graded_args": [
+          "origin"
+        ]
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "company_performance"
+        },
+        "graded_args": [
+          "origin"
+        ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "portfolio_command_center_actions_trade_ideas",
+          "x": 0,
+          "y": 10,
+          "w": 20,
+          "h": 14,
+          "tab_id": "briefing"
+        },
+        "optional": true
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "company_performance",
+          "x": 20,
+          "y": 10,
+          "w": 20,
+          "h": 14,
+          "tab_id": "briefing"
+        },
+        "optional": true
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_actions_trade_ideas",
+        "tab_id": "briefing"
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "company_performance",
+        "tab_id": "briefing"
+      },
+      {
+        "origin": "Decision Tile Backend",
+        "widget_id": "decision_summary_tile"
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Decision Tile Backend",
+        "widget_id": "decision_summary_tile",
+        "expect": {
+          "type": "metric"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Decision Tile Backend",
+        "name_contains": "Decision Briefing App",
+        "tabs_include": [
+          "briefing"
+        ],
+        "layout_refs_valid": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "briefing",
+            "widget_id": "decision_summary_tile"
+          }
+        ]
+      }
+    ],
+    "max_turns": 11
+  }
+}

@@ -67,36 +67,27 @@ def test_normalize_interactive_args_maps_fixture_origin_slug() -> None:
     ) == {"origin": "Bench Equities", "widget_id": "price_performance"}
 
 
-def test_stark_interactive_prompt_uses_display_origin_and_widget_hints() -> None:
-    task = find_task("discover_schema_then_options_for_exposure_summary")
+def test_stark_interactive_prompt_uses_display_origin_hints() -> None:
+    task = find_task("earnings_lookup_level1")
 
     messages = build_interactive_messages(build_task_envelope(task))
     prompt = messages[1]["content"]
 
-    assert '"stark-enterprise": "Bench Stark Enterprise"' in prompt
-    assert "client_360_portfolio_view_exposure_summary" in prompt
+    assert '"stark-enterprise-x": "Bench Stark Enterprise"' in prompt
+    # The retired widget-id cheat sheet must never reappear: discovery is
+    # the skill under test.
+    assert "widget_hints" not in prompt
 
 
-def test_non_widget_stark_prompt_omits_widget_hints() -> None:
-    task = find_task("earnings_single")
+def test_origin_hints_can_be_ablated() -> None:
+    task = find_task("earnings_lookup_level1")
 
-    messages = build_interactive_messages(build_task_envelope(task))
+    messages = build_interactive_messages(
+        build_task_envelope(task), include_widget_hints=False
+    )
     prompt = messages[1]["content"]
 
-    assert '"widget_hints": {}' in prompt
-
-
-def test_widget_hints_can_be_ablated() -> None:
-    task = find_task("discover_schema_then_options_for_exposure_summary")
-
-    messages = build_interactive_messages(build_task_envelope(task), include_widget_hints=False)
-    prompt = messages[1]["content"]
-
-    assert '"widget_hints": {}' in prompt
-
-    system = messages[0]["content"]
-    assert "Before create_widget" not in system
-    assert "origin_hints" not in system
+    assert '"origin_hints": {}' in prompt
 
 
 def test_batch_runner_executes_one_real_jsonl_agent_attempt(tmp_path) -> None:
@@ -111,7 +102,7 @@ def test_batch_runner_executes_one_real_jsonl_agent_attempt(tmp_path) -> None:
         provider="custom",
         model="rule-agent",
     )
-    task = find_task("price_performance_aapl")
+    task = find_task("decision_briefing_level0")
 
     runs, metadata = run_adapter(
         adapter,
@@ -178,11 +169,11 @@ def test_comparison_metadata_records_workspace_baseline_override() -> None:
         SimpleNamespace(
             task_dir=None,
             suite="enterprise-apps-usage",
-            workspace_baseline="all-stark-enterprise-apps",
+            workspace_baseline="stark-workspace-a",
         )
     )
 
-    assert metadata["workspace_baseline"] == "all-stark-enterprise-apps"
+    assert metadata["workspace_baseline"] == "stark-workspace-a"
 
 
 def test_colorize_wraps_enabled_status() -> None:

@@ -1,0 +1,143 @@
+{
+  "id": "risk_service_lifecycle_level0",
+  "category": "platform",
+  "difficulty": "level0",
+  "prompt": "On the open Risk Service Staging board, review the connected backends and refresh Wave One Risk Service so its Wave One Risk Signal description is Refreshed risk signal feed.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Risk Service Staging",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Risk Service Staging",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "monitor",
+            "name": "Monitor"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Wave One Risk Service",
+            "widget_id": "wave_one_risk_signal",
+            "widget_uuid": "seeded_risk_signal",
+            "tab_id": "monitor",
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 40,
+              "h": 10
+            }
+          }
+        ]
+      },
+      "custom_backends": [
+        {
+          "backend_id": "backend_005",
+          "name": "Wave One Risk Service",
+          "url": "http://127.0.0.1:9506",
+          "widgets_json": {
+            "wave_one_risk_signal": {
+              "name": "Wave One Risk Signal",
+              "description": "Stale risk signal feed.",
+              "endpoint": "/risk-signal",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_005",
+          "widgets_json": {
+            "wave_one_risk_signal": {
+              "name": "Wave One Risk Signal",
+              "description": "Refreshed risk signal feed.",
+              "endpoint": "/risk-signal",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          }
+        },
+        "graded_args": [
+          "operation"
+        ]
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Wave One Risk Service",
+        "widget_id": "wave_one_risk_signal",
+        "expect": {
+          "description": "Refreshed risk signal feed."
+        }
+      }
+    ],
+    "max_turns": 6
+  }
+}

@@ -26,8 +26,7 @@ from typing import Any, Callable, Iterator, Literal, cast
 
 from workspace_bench.agents.model_adapter_helpers import (
     TOOL_REFERENCE,
-    fixture_origin_hints,
-    fixture_widget_hints,
+    envelope_origin_hints,
     strip_code_fence,
 )
 from workspace_bench.agents.agent_command import (
@@ -1141,7 +1140,9 @@ def run_interactive_agent(
     conversation_path = run_dir / "conversation.json"
     responses_path = run_dir / "model_responses.jsonl"
     task_payload = build_task_envelope(task)
-    origin_hints = fixture_origin_hints(task_payload["task"]["fixtures"])
+    origin_hints = envelope_origin_hints(
+        {**task_payload.get("benchmark", {}), **task_payload["task"]}
+    )
     task_path.write_text(
         json.dumps(task_payload, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
@@ -1349,20 +1350,11 @@ def run_interactive_agent(
 def build_interactive_messages(
     task: JsonDict, *, include_widget_hints: bool = True
 ) -> list[JsonDict]:
+    benchmark = task.get("benchmark", {})
     task = task["task"]
     allowed_tools = task["allowed_tools"]
-    origin_hints = fixture_origin_hints(task["fixtures"]) if include_widget_hints else {}
-    widget_tool_names = {
-        "list_available_widgets",
-        "get_widget_schema",
-        "get_widget_data",
-        "get_params_options",
-        "create_widget",
-    }
-    widget_hints = (
-        fixture_widget_hints(origin_hints)
-        if include_widget_hints and widget_tool_names.intersection(allowed_tools)
-        else {}
+    origin_hints = (
+        envelope_origin_hints({**benchmark, **task}) if include_widget_hints else {}
     )
     tool_reference = {
         name: TOOL_REFERENCE[name] for name in allowed_tools if name in TOOL_REFERENCE
@@ -1377,7 +1369,6 @@ def build_interactive_messages(
         "business_terms": task.get("business_terms", []),
         "fixtures": task["fixtures"],
         "origin_hints": origin_hints,
-        "widget_hints": widget_hints,
         "initial_state": task["initial_state"],
         "allowed_tools": allowed_tools,
     }
@@ -1400,7 +1391,7 @@ def build_interactive_messages(
     guided_instructions = [
         "When a tool asks for origin, use the display origin from origin_hints, not the fixture slug.",
         "If dashboard_id is optional and you do not know the UUID, omit it instead of using a dashboard name.",
-        "Never invent widget_id values. Use exact widget_id values from list_available_widgets, widget_hints, or prior tool results.",
+        "Never invent widget_id values. Use exact widget_id values from list_available_widgets or prior tool results.",
         "Before create_widget, you MUST call list_available_widgets for the same origin when that tool is allowed.",
         "Before create_widget, you MUST call get_widget_schema for the same origin and widget_id when that tool is allowed.",
         "Calling create_widget before list_available_widgets and get_widget_schema will fail the benchmark.",

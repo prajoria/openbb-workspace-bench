@@ -15,156 +15,9 @@ FIXTURE_ORIGINS = {
     "stark-enterprise-y": "Bench Stark Enterprise",
     "daloopa": "Bench Daloopa",
     "support-daloopa-skills": "Bench Daloopa",
+    "getting-started": "Getting Started",
+    "widget-examples": "Widget Examples",
 }
-WIDGET_HINTS = {
-    "Bench Equities": {
-        "price_performance": {
-            "data_args": {"symbol": "AAPL"},
-            "note": "Use symbol, not ticker.",
-        },
-        "latest_news": {
-            "data_args": {"symbol": "AAPL", "limit": 5},
-            "note": "Use symbol for the company ticker.",
-        },
-        "estimate_history": {
-            "data_args": {"symbol": "AAPL"},
-            "note": "Use symbol for the company ticker.",
-        },
-        "fundamental_metrics": {
-            "data_args": {"symbol": "AAPL"},
-            "note": "Use symbol for the company ticker.",
-        },
-    },
-    "Bench Macro": {
-        "macro_timeseries": {
-            "data_args": {"series": "DGS2"},
-            "note": "Use series for macro identifiers such as FEDFUNDS, DGS2, DGS10, CPIAUCSL.",
-        },
-        "yield_curve": {"data_args": {}, "note": "No required data_args."},
-    },
-    "Bench Portfolio": {
-        "holdings_table": {"data_args": {}, "note": "No required data_args."},
-        "sector_exposure": {"data_args": {}, "note": "No required data_args."},
-        "risk_metrics": {"data_args": {}, "note": "No required data_args."},
-    },
-    "Bench Stark Enterprise": {
-        "client_360_meeting_prep_approved_talking_points": {
-            "data_args": {"client": "Northstar Pension", "period": "YTD"},
-            "note": "Client Meeting Prep tab.",
-        },
-        "client_360_meeting_prep_meeting_agenda": {
-            "data_args": {"client": "Northstar Pension", "period": "YTD"},
-            "note": "Client Meeting Prep tab.",
-        },
-        "client_360_portfolio_view_client_portfolio_summary": {
-            "data_args": {"client": "Northstar Pension", "period": "YTD"},
-            "note": "Portfolio tab.",
-        },
-        "compliance_surveillance_hub_alerts_surveillance_alerts": {
-            "data_args": {"status": "Open", "period": "YTD"},
-            "note": "Alerts tab.",
-        },
-        "compliance_surveillance_hub_restricted_list_restricted_and_watch_list": {
-            "data_args": {"status": "Open", "period": "YTD"},
-            "note": "Restricted List tab.",
-        },
-        "earnings_estimates_monitor_estimates_consensus_revisions": {
-            "data_args": {"ticker": "LLY", "period": "YTD"},
-            "note": "Estimates tab.",
-        },
-        "earnings_estimates_monitor_post_earnings_price_reaction": {
-            "data_args": {"ticker": "LLY", "period": "YTD"},
-            "note": "Price Reaction tab.",
-        },
-        "equity_research_workbench_company_company_tear_sheet": {
-            "data_args": {"ticker": "LLY", "period": "YTD"},
-            "note": "Company tab.",
-        },
-        "equity_research_workbench_valuation_comps_table": {
-            "data_args": {"ticker": "LLY", "period": "YTD"},
-            "note": "Valuation tab.",
-        },
-        "equity_research_workbench_valuation_dcf_sensitivity": {
-            "data_args": {"ticker": "LLY", "period": "YTD"},
-            "note": "Valuation tab.",
-        },
-        "execution_desk_blotter_live_orders": {
-            "data_args": {"desk": "US Equity", "period": "YTD"},
-            "note": "Blotter tab. Declared params: desk, period.",
-        },
-        "execution_desk_exceptions_rejected_orders": {
-            "data_args": {"desk": "US Equity", "period": "YTD"},
-            "note": "Exceptions tab. Declared params: desk, period.",
-        },
-        "execution_desk_exceptions_restricted_list_checks": {
-            "data_args": {"desk": "US Equity", "period": "YTD"},
-            "note": "Exceptions tab. Declared params: desk, period.",
-        },
-        "healthcare_research_dashboard_clinical_trial_catalyst_calendar": {
-            "data_args": {},
-            "note": "Healthcare research app.",
-        },
-        "healthcare_research_dashboard_documents_sell_side_research_pdfs": {
-            "data_args": {},
-            "note": "Healthcare research app.",
-        },
-        "portfolio_command_center_actions_trade_ideas": {
-            "data_args": {},
-            "note": "Actions tab.",
-        },
-        "portfolio_command_center_holdings_holdings_table": {
-            "data_args": {},
-            "note": "Holdings tab.",
-        },
-        "rebalance_scenario_lab_drift_current_vs_target_weights": {
-            "data_args": {"fund": "Flagship Long/Short", "period": "YTD"},
-            "note": "Drift tab.",
-        },
-        "risk_exposure_monitor_dashboard_var_trend": {
-            "data_args": {"fund": "Flagship Long/Short", "period": "YTD", "raw": True},
-            "note": "Use get_widget_data for underlying risk data.",
-        },
-        "vendor_dataset_monitor_slas_vendor_sla_status": {
-            "data_args": {"vendor": "FactSet", "status": "In Review", "period": "YTD"},
-            "note": "Vendor SLA monitoring.",
-        },
-    },
-    "Bench Daloopa": {
-        "daloopa_company_directory": {
-            "data_args": {},
-            "note": "Company ids and latest_calendar_quarter; anchor period math here.",
-        },
-        "daloopa_company_fundamentals": {
-            "data_args": {"ticker": "AAPL", "period": "2026Q1"},
-            "note": "period is a calendar quarter such as 2026Q1; rows carry citation urls.",
-        },
-        "daloopa_kpi_metrics": {
-            "data_args": {"ticker": "AAPL", "period": "2026Q1"},
-            "note": "Operating KPIs per calendar quarter.",
-        },
-        "daloopa_segment_breakdown": {
-            "data_args": {"ticker": "AAPL", "period": "2026Q1"},
-            "note": "Segment revenue with YoY growth.",
-        },
-        "daloopa_management_guidance": {
-            "data_args": {"ticker": "AAPL"},
-            "note": "Guidance vs actuals; latest guided quarter is Pending.",
-        },
-        "daloopa_consensus_estimates": {
-            "data_args": {"ticker": "AAPL"},
-            "note": "Consensus vs actual revenue and EPS.",
-        },
-        "daloopa_document_search": {
-            "data_args": {"ticker": "AAPL", "doc_type": "10-Q"},
-            "note": "doc_type is one of 10-K, 10-Q, 8-K, Earnings Call Transcript.",
-        },
-        "daloopa_stock_prices": {
-            "data_args": {"ticker": "AAPL"},
-            "note": "Quarter-end plus most recent trading week OHLCV rows.",
-        },
-    },
-}
-
 
 TOOL_REFERENCE = {
     "get_workspace_snapshot": {
@@ -395,12 +248,14 @@ def fixture_origin_hints(fixtures: dict[str, Any]) -> dict[str, str]:
     return hints
 
 
-def fixture_widget_hints(origin_hints: dict[str, str]) -> dict[str, Any]:
-    return {
-        origin: WIDGET_HINTS[origin]
-        for origin in origin_hints.values()
-        if origin in WIDGET_HINTS
-    }
+def envelope_origin_hints(task: dict[str, Any]) -> dict[str, str]:
+    """Slug -> display-name hints from fixtures and the workspace axes."""
+
+    hints = fixture_origin_hints(task.get("fixtures") or {})
+    for slug in task.get("workspace_backends") or []:
+        if isinstance(slug, str):
+            hints[slug] = FIXTURE_ORIGINS.get(slug, slug)
+    return hints
 
 
 def strip_code_fence(text: str) -> str:

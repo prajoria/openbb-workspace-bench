@@ -1,0 +1,193 @@
+{
+  "id": "research_feed_lifecycle_level1",
+  "category": "platform",
+  "difficulty": "level1",
+  "prompt": "From the open Research Feed Staging board, review the connected backends, then refresh Wave Two Research Feed so Research Feed App has one non-overlapping Research Feed Pulse placement on Feed.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Research Feed Staging",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Research Feed Staging",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "feed",
+            "name": "Feed"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Wave Two Research Feed",
+            "widget_id": "research_feed_pulse",
+            "widget_uuid": "seeded_research_feed",
+            "tab_id": "feed",
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 40,
+              "h": 10
+            }
+          }
+        ]
+      },
+      "custom_backends": [
+        {
+          "backend_id": "backend_005",
+          "name": "Wave Two Research Feed",
+          "url": "http://127.0.0.1:9606",
+          "widgets_json": {
+            "research_feed_pulse": {
+              "name": "Research Feed Pulse",
+              "description": "Stale research feed.",
+              "endpoint": "/research-feed",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Research Feed App",
+              "tabs": {
+                "feed": {
+                  "id": "feed",
+                  "name": "Feed",
+                  "layout": [
+                    {
+                      "i": "research_feed_pulse",
+                      "x": 0,
+                      "y": 0,
+                      "w": 30,
+                      "h": 10
+                    },
+                    {
+                      "i": "research_feed_pulse",
+                      "x": 20,
+                      "y": 0,
+                      "w": 20,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_005",
+          "widgets_json": {
+            "research_feed_pulse": {
+              "name": "Research Feed Pulse",
+              "description": "Refreshed research feed.",
+              "endpoint": "/research-feed",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Research Feed App",
+              "description": "Wave-1 authored app for Research Feed App.",
+              "tabs": {
+                "feed": {
+                  "id": "feed",
+                  "name": "Feed",
+                  "layout": [
+                    {
+                      "i": "research_feed_pulse",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation"
+        ]
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Wave Two Research Feed",
+        "name_contains": "Research Feed App",
+        "tabs_include": [
+          "feed"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true
+      }
+    ],
+    "max_turns": 6
+  }
+}

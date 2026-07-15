@@ -14,15 +14,19 @@ def main() -> int:
     task_id = task["task"]["id"]
 
     calls = []
-    if task_id == "price_performance_aapl":
+    if task_id == "decision_briefing_level0":
         calls = [
             {"tool": "get_workspace_snapshot", "args": {}},
             {
+                "tool": "list_available_widgets",
+                "args": {"origin": "Bench Stark Enterprise"},
+            },
+            {
                 "tool": "create_widget",
                 "args": {
-                    "origin": "Getting Started",
-                    "widget_id": "table_widget_with_grouping_by_cell_click",
-                    "data_args": {"symbol": "AAPL"},
+                    "origin": "Bench Stark Enterprise",
+                    "widget_id": "portfolio_command_center_actions_trade_ideas",
+                    "data_args": {"fund": "Flagship Long/Short", "period": "YTD"},
                 },
             },
         ]

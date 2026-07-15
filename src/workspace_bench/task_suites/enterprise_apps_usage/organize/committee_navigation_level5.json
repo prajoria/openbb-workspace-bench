@@ -1,0 +1,195 @@
+{
+  "id": "committee_navigation_level5",
+  "category": "platform",
+  "difficulty": "level5",
+  "prompt": "The committee needs a Committee Navigation Backend with Agenda Queue and Evidence Register views. Author and add it, publish a Committee Review App with Agenda and Evidence tabs, and instantiate it. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/apps-json"
+        },
+        "graded_args": [
+          "uri"
+        ]
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Committee Navigation Backend",
+          "url": "http://127.0.0.1:9503",
+          "widgets_json": {
+            "agenda_queue": {
+              "name": "Agenda Queue",
+              "description": "Wave-1 view for Agenda Queue.",
+              "endpoint": "/agenda",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 10
+              }
+            },
+            "evidence_register": {
+              "name": "Evidence Register",
+              "description": "Wave-1 view for Evidence Register.",
+              "endpoint": "/evidence",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Committee Review App",
+              "description": "Wave-1 authored app for Committee Review App.",
+              "tabs": {
+                "agenda": {
+                  "id": "agenda",
+                  "name": "Agenda",
+                  "layout": [
+                    {
+                      "i": "agenda_queue",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 12
+                    }
+                  ]
+                },
+                "evidence": {
+                  "id": "evidence",
+                  "name": "Evidence",
+                  "layout": [
+                    {
+                      "i": "evidence_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 12
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Committee Review App",
+          "dashboard_name": "Committee Review Live",
+          "activate": true
+        },
+        "graded_args": [
+          "operation",
+          "app_name"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Committee Navigation Backend",
+        "widget_id": "agenda_queue",
+        "tab_id": "agenda"
+      },
+      {
+        "origin": "Committee Navigation Backend",
+        "widget_id": "evidence_register",
+        "tab_id": "evidence"
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Committee Navigation Backend",
+        "widget_id": "agenda_queue",
+        "expect": {
+          "type": "table"
+        }
+      },
+      {
+        "backend_name": "Committee Navigation Backend",
+        "widget_id": "evidence_register",
+        "expect": {
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Committee Navigation Backend",
+        "name_contains": "Committee Review App",
+        "tabs_include": [
+          "agenda",
+          "evidence"
+        ],
+        "layout_refs_valid": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "agenda",
+            "widget_id": "agenda_queue"
+          },
+          {
+            "tab_id": "evidence",
+            "widget_id": "evidence_register"
+          }
+        ]
+      }
+    ],
+    "max_turns": 6
+  }
+}

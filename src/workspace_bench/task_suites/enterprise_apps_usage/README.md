@@ -1,50 +1,74 @@
 # `enterprise-apps-usage` task suite
 
-Tasks: 336
+Tasks: 90
 
 ## Purpose
 
-A pass means the agent can operate a Workspace through the MCP surface: inspect and read data, create and update widgets, arrange dashboards, navigate, use apps and resources, delegate work, and repair seeded state while satisfying the task's durable outcome contract.
+Operating a lived-in, everything-mounted workspace: every episode starts on
+the `stark-workspace-a` baseline (Home, all Stark Enterprise apps, three
+personal desk dashboards) with all four catalog backends connected
+(`stark-enterprise-x`, `support-daloopa-skills`, `getting-started`,
+`widget-examples`), all ten skills declared, and the full 20-tool surface
+allowed. Prompts are business asks — they never name tools, and above the
+floor rung they never name raw identifiers: the model connects the dots with
+the tools and data available.
 
-## Workspace baseline
+## Eight job families x a level ladder
 
-The suite runs on the default Workspace (`all-stark-enterprise-apps` in the manifest): Home plus all 23 enterprise apps instantiated and the stark-enterprise, daloopa, getting-started, and widget-examples backends connected, with each task's fixtures seeded on top. Real workspaces are never empty, so every episode starts in a realistic, crowded one; certification (oracle 300/300 pass, no-op 300/300 fail) holds on exactly this state.
+| family | the job | levels |
+| --- | --- | --- |
+| `retrieve` | find the right data and answer with exact figures (`final_answer`) | 0-5 |
+| `curate` | place and configure views, cross-catalog at the top | 0-5 |
+| `parameterize` | param surgery and policy translation on existing widgets | 0-5 |
+| `organize` | dashboards, tabs, and navigation | 0-5 |
+| `repair` | fix seeded defects, preserve everything else | 1-5 |
+| `platform` | skills, workspace prompts, and MCP resources govern correctness | 1-5 |
+| `extend` | the data-backend lifecycle, up to writing new manifests | 0-5 |
+| `handoff` | durable notes with grounded facts, then delegation | 0-4 |
 
-```bash
-uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 300
-```
+Each family holds two spines (one target threaded up the ladder; catalog
+balance across spines makes Getting Started, Widget Examples, and Daloopa
+first-class targets). Levels add one difficulty driver each: level0 execute
+(everything stated, including param keys), level1 discover, level2 translate
+policy into declared parameter values, level3 ambient state under
+preservation, level4 knowledge-governed or multi-intent work, level5 build —
+author `widgets_json`, wrap it in `apps_json`, instantiate, and use it.
+
+## Grading
+
+Deterministic and outcome-first. Mutations grade final state
+(`required_widgets`, `required_tabs`, `required_dashboard_name_contains`);
+information tasks grade the trajectory (`required_tools`, where discovery
+steps are `optional` and free-form arguments narrow via `graded_args`) plus
+exact answer values (`required_values_in_answer`, grounded in served rows);
+level5 grades authored definitions (`required_widget_defs`,
+`required_app_defs`). Suite policy (layout hygiene, `<=2` invalid calls,
+`forbid_invented_widget_ids`, preservation) applies through the manifest's
+`task_defaults.eval`. Budgets are `len(required_tools) + 3` turns, hidden
+from agents.
 
 ## Generation method
 
-`template-scaled-from-basis`. Fifteen tool-anchored families are expanded into five levels with four tasks per cell by `scripts/generators/generate_usage_suite.py`; generation-time quotas and adversarial certification are release gates. The deterministic phrasing and task assembly mechanics live in `scripts/generators/_assembly/`.
+`scripts/generators/generate_usage_suite.py` writes every task
+(ai-authored-direct) and certifies at generation time: the reference replay
+passes and a no-op fails every task; per-level graded-check caps; the
+fairness invariant is mechanical (every graded value must be stated in the
+prompt, derivable from a stated policy, or the declared catalog default;
+graded widget ids require their display name in the prompt or the stated
+snake_case convention); cross-catalog target uniqueness (no other widget in
+any mounted catalog matches a prompt's discriminating tokens); answer values
+must appear literally in the target's served rows; prompt register checks
+(<=110 words, no tool names, no shared opening 5-grams).
 
-Every widget catalog used by this suite is transcription-grade. `Bench Stark Enterprise` is transcribed from the [Stark Industries demo](https://github.com/DidierRLopes/stark-industries-demo). `Getting Started` is transcribed from `reference-backend/apps.json` and `reference-backend/widgets_*.py` in the real [OpenBB backend examples repository](https://github.com/OpenBB-finance/backend-examples-for-openbb-workspace). `Widget Examples` is transcribed from that repository's `widget-types/`, `parameters-types/`, and `ssrm_mode/` sources. Literal response samples and parameter options are extracted without importing or executing the source backends; unstable dates and binary bodies use explicit stable placeholders. The former Equities, Macro, and Portfolio fixture slugs remain lookup aliases only and expose no invented catalog.
-
-## Axes
-
-Family identifies the anchor capability. Each family contains five structural levels (`r0` through `r4`), with four tasks per level; higher levels add composition, discovery, pathology, and tighter budgets while the anchor capability stays central. Category names the workflow outcome, and difficulty is balanced independently across the level matrix rather than being another name for a level.
-
-| Axis | File-derived counts |
-| --- | --- |
-| `family` | 15 families, 20 tasks each: `apps`, `backends`, `create`, `delegate`, `delete`, `inspect`, `layout`, `navigate`, `note`, `params`, `prompts`, `read`, `resources`, `skills`, `update` |
-| `level` | 5 per family, 4 tasks per family/level cell; 60 tasks at each of `r0`, `r1`, `r2`, `r3`, `r4` |
-| `category` | `single-widget` 124; `dashboard` 76; `platform` 40; `repair` 32; `read` 28 |
-| `difficulty` | `easy` 90; `medium` 120; `hard` 90 |
-
-## Live parity eligibility
-
-The default live-origin map now includes `Getting Started` and `Widget Examples` as identity mappings alongside `Bench Stark Enterprise` to `Stark Fund`. As a result, 232 of the 300 legacy tasks are eligible for local-to-live structural parity replay: all 20 tasks in each of `create`, `delete`, `inspect`, `layout`, `navigate`, `note`, `params`, `prompts`, `read`, `skills`, and `update`, plus 12 resource tasks. The remaining 68 tasks use backend/app mutation or delegation tools that the conservative replay intentionally refuses. No live test is part of certification.
-
-| Eligibility | Tasks |
-| --- | ---: |
-| Eligible | 232 |
-| Ineligible: backend/app mutation | 48 |
-| Ineligible: delegation | 20 |
-
-## Gates
-
-The generator and both baseline validation commands require every reference trace to pass, every no-op trace to fail, rubric mutations to change grades, unique novelty fingerprints and prompts, a matching manifest content hash, and quotas for families, categories, backends, difficulty, widget pairs, and grader-check types. The adversarial audit must also reject certified incorrect behaviors without dirty reference traces or wrong-reason failures.
+Difficulty calibration (July 2026, gpt-4.1-mini, two repeats per task):
+strict-pass staircase 92% / 59% / 50% / 34% / 6% / 7% across level0-level5 —
+strictly decreasing, an achievable floor, and a hard but non-zero top.
+gpt-oss:20b failed every task of the pilot calibration rounds and serves as
+the below-floor reference point.
 
 ## Limitations
 
-The simulator uses deterministic fixture data, not live market data, so a pass demonstrates contract-level Workspace operation rather than full live-product parity. The levels are structural pressure settings, while difficulty remains a balanced label pending broader empirical measurement. Public task files include reference traces and success criteria and therefore are not hidden evaluation data.
+The `extend` family grades authored manifests and lifecycle calls without
+runtime HTTP probes (unlike `build-openbb-apps`). Live-parity eligibility for
+the rebuilt suite is pending re-derivation. Judge-free by design: every check
+is a deterministic boolean.

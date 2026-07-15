@@ -1,0 +1,155 @@
+{
+  "id": "cited_research_operations_level5",
+  "category": "platform",
+  "difficulty": "level5",
+  "prompt": "Following Daloopa Tearsheet governance, author and add a Cited Research Backend with a Citation Review Queue, then publish and instantiate a Cited Research App with a Research tab. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Home",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ]
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Cited Research Backend",
+          "url": "http://127.0.0.1:9605",
+          "widgets_json": {
+            "citation_review_queue": {
+              "name": "Citation Review Queue",
+              "description": "Wave-1 view for Citation Review Queue.",
+              "endpoint": "/citation-review",
+              "type": "table",
+              "gridData": {
+                "w": 20,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Cited Research App",
+              "description": "Wave-1 authored app for Cited Research App.",
+              "tabs": {
+                "research": {
+                  "id": "research",
+                  "name": "Research",
+                  "layout": [
+                    {
+                      "i": "citation_review_queue",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 12
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Cited Research App",
+          "dashboard_name": "Cited Research Live",
+          "activate": true
+        },
+        "graded_args": [
+          "operation",
+          "app_name"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Cited Research Backend",
+        "widget_id": "citation_review_queue",
+        "tab_id": "research"
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Cited Research Backend",
+        "widget_id": "citation_review_queue",
+        "expect": {
+          "endpoint": "/citation-review"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Cited Research Backend",
+        "name_contains": "Cited Research App",
+        "tabs_include": [
+          "research"
+        ],
+        "layout_refs_valid": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "research",
+            "widget_id": "citation_review_queue"
+          }
+        ]
+      }
+    ],
+    "max_turns": 6
+  }
+}

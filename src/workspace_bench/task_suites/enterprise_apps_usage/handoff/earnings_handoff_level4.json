@@ -1,0 +1,131 @@
+{
+  "id": "earnings_handoff_level4",
+  "category": "platform",
+  "difficulty": "level4",
+  "prompt": "Handle the coverage follow-up route from the open Earnings Handoff board under Finance Earnings Prep governance. Read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Healthcare, LLY, and YTD; add an LLY Delegation Handoff note with exact score and status, then delegate the coverage follow-up.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Earnings Handoff",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Earnings Handoff",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "review",
+            "name": "Review"
+          }
+        ],
+        "widgets": []
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-earnings-prep"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
+          "data_args": {
+            "sector": "Healthcare",
+            "ticker": "LLY",
+            "period": "YTD"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "LLY Delegation Handoff",
+          "data": "Score 27.63; status Open."
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      },
+      {
+        "tool": "assign_tasks_to_agents",
+        "args": {
+          "task_requests": [
+            {
+              "id": "coverage_follow_up",
+              "description": "Review LLY earnings risks and next actions.",
+              "assigned_holder_url": "workspace://agents/coverage",
+              "assigned_agent_id": "coverage-agent"
+            }
+          ]
+        },
+        "graded_args": [
+          "task_requests"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "LLY Delegation Handoff",
+        "data_contains": [
+          "27.63",
+          "Open"
+        ]
+      }
+    ],
+    "max_turns": 7
+  }
+}

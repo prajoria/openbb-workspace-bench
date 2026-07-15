@@ -8,6 +8,7 @@ from workspace_bench.core.runner import (
     task_workspace_baseline,
 )
 from workspace_bench.workspace.default_setup import (
+    WORKSPACE_A_VERSION,
     DEFAULT_WORKSPACE_VERSION,
     ONBOARD_A_WORKSPACE_VERSION,
     ONBOARD_B_WORKSPACE_VERSION,
@@ -60,7 +61,7 @@ def test_usage_and_default_suites_declare_the_default_workspace() -> None:
     usage_task = load_builtin_tasks("enterprise-apps-usage")[0]
     default_task = load_builtin_tasks("enterprise-apps-default")[0]
 
-    assert task_workspace_baseline(usage_task) == DEFAULT_WORKSPACE_VERSION
+    assert task_workspace_baseline(usage_task) == WORKSPACE_A_VERSION
     assert task_workspace_baseline(default_task) == DEFAULT_WORKSPACE_VERSION
 
 

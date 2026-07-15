@@ -1,0 +1,115 @@
+{
+  "id": "governed_earnings_brief_level3",
+  "category": "dashboard",
+  "difficulty": "level3",
+  "prompt": "Use Workspace session guidance on the open Governed Earnings Brief board. Add an Actions tab and place a Session Grounding note there naming current-dashboard and current-tab.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Governed Earnings Brief",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Governed Earnings Brief",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "overview",
+            "name": "Overview"
+          }
+        ],
+        "widgets": []
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_prompt",
+        "args": {
+          "name": "workspace_session_context"
+        },
+        "graded_args": [
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_navigation_bar",
+        "args": {
+          "operation": "add_tabs",
+          "tabs": [
+            {
+              "name": "Actions"
+            }
+          ]
+        },
+        "graded_args": [
+          "tabs"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Session Grounding",
+          "data": "Session grounding: current-dashboard and current-tab.",
+          "inner_tab": "actions"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Session Grounding",
+        "data_contains": [
+          "current-dashboard",
+          "current-tab"
+        ],
+        "tab_id": "actions"
+      }
+    ],
+    "max_turns": 6
+  }
+}

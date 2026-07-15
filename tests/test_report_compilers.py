@@ -14,7 +14,7 @@ from workspace_bench.reports.suites import summarize
 
 
 def test_cli_and_model_comparison_share_grade_serialization(tmp_path: Path) -> None:
-    result = TaskRunner().run(find_task("price_performance_aapl"), "oracle")
+    result = TaskRunner().run(find_task("decision_briefing_level0"), "oracle")
     comparison = ComparisonRun(
         run_result=result,
         command="test-agent",
@@ -34,8 +34,8 @@ def test_cli_and_model_comparison_share_grade_serialization(tmp_path: Path) -> N
 
     assert {key: cli_row[key] for key in canonical} == canonical
     assert comparison_row["passed"] is canonical["passed"]
-    assert cli_row["workspace_baseline"] == "all-stark-enterprise-apps"
-    assert comparison_row["workspace_baseline"] == "all-stark-enterprise-apps"
+    assert cli_row["workspace_baseline"] == "stark-workspace-a"
+    assert comparison_row["workspace_baseline"] == "stark-workspace-a"
     assert {
         key: comparison_row[key] for key in canonical if key != "passed"
     } == {key: value for key, value in canonical.items() if key != "passed"}

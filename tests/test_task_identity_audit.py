@@ -18,7 +18,7 @@ def test_repeated_token_phrase_finds_join_scars() -> None:
         "post_earnings"
     )
     assert repeated_token_phrase("drift_drift_by_sleeve".split("_")) == "drift"
-    assert repeated_token_phrase("price_performance_aapl".split("_")) is None
+    assert repeated_token_phrase("decision_briefing_level0".split("_")) is None
 
 
 def test_audit_task_flags_generator_identity_and_prompt_scars() -> None:

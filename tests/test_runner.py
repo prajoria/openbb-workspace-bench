@@ -35,7 +35,7 @@ def test_cli_can_write_trace_artifacts(tmp_path) -> None:
         [
             "run",
             "--task",
-            "price_performance_aapl",
+            "decision_briefing_level0",
             "--agent",
             "oracle",
             "--trace-dir",
@@ -44,12 +44,12 @@ def test_cli_can_write_trace_artifacts(tmp_path) -> None:
         ]
     )
 
-    artifact = tmp_path / "price_performance_aapl.json"
+    artifact = tmp_path / "decision_briefing_level0.json"
     payload = json.loads(artifact.read_text(encoding="utf-8"))
     assert exit_code == 0
     assert payload["grade"]["passed"] is True
-    assert payload["task"]["family"] == "create"
-    assert payload["task"]["difficulty"] == "easy"
+    assert payload["task"]["family"] == "curate"
+    assert payload["task"]["difficulty"] == "level0"
     assert payload["trace"][0]["tool"] == "get_workspace_snapshot"
 
 
@@ -72,13 +72,13 @@ def test_builtin_tasks_have_terminal_bench_style_metadata() -> None:
 
 def test_task_directory_derives_missing_family_from_its_directory(tmp_path) -> None:
     source = next(
-        task for task in load_builtin_tasks() if task.id == "price_performance_aapl"
+        task for task in load_builtin_tasks() if task.id == "decision_briefing_level0"
     )
     assert source.source_path is not None
     family_dir = tmp_path / source.family
     family_dir.mkdir()
     payload = json.loads(source.source_path.read_text(encoding="utf-8"))
-    payload.pop("family")
+    payload.pop("family", None)
     (family_dir / source.source_path.name).write_text(
         json.dumps(payload),
         encoding="utf-8",
@@ -93,7 +93,7 @@ def test_task_directory_derives_missing_family_from_its_directory(tmp_path) -> N
 
 
 def test_cli_validate_passes_for_builtin_tasks() -> None:
-    assert main(["validate", "--min-tasks", "300"]) == 0
+    assert main(["validate", "--min-tasks", "90"]) == 0
 
 
 def test_cli_validate_passes_for_build_suite(capsys) -> None:
@@ -109,7 +109,7 @@ def test_cli_validate_passes_for_build_suite(capsys) -> None:
 
 
 def test_cli_validate_skips_bundled_quotas_for_filtered_slices(capsys) -> None:
-    exit_code = main(["validate", "--difficulty", "easy", "--json"])
+    exit_code = main(["validate", "--suite", "smoke", "--difficulty", "level0", "--json"])
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
@@ -117,19 +117,19 @@ def test_cli_validate_skips_bundled_quotas_for_filtered_slices(capsys) -> None:
 
 
 def test_cli_filters_by_first_class_family(capsys) -> None:
-    exit_code = main(["list", "--family", "create", "--json"])
+    exit_code = main(["list", "--family", "curate", "--json"])
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
-    assert len(payload) == 32
-    assert {task["family"] for task in payload} == {"create"}
+    assert len(payload) == 12
+    assert {task["family"] for task in payload} == {"curate"}
 
 
 def test_find_task_searches_all_bundled_suites() -> None:
     from workspace_bench.core.runner import find_task
 
-    assert find_task("price_performance_aapl").id == (
-        "price_performance_aapl"
+    assert find_task("decision_briefing_level0").id == (
+        "decision_briefing_level0"
     )
     assert find_task("revision_grid").id == ("revision_grid")
     assert (
@@ -156,7 +156,7 @@ def test_cli_smoke_workspace_mcp_wires_task_and_suite(monkeypatch) -> None:
         [
             "smoke-workspace-mcp",
             "--task",
-            "price_performance_aapl",
+            "decision_briefing_level0",
             "--suite",
             "enterprise-apps-usage",
         ]
@@ -170,8 +170,8 @@ def test_cli_manifest_resolves_core_suite(capsys) -> None:
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
-    assert payload["task_count"] == 336
-    assert "create" in payload["families"]
+    assert payload["task_count"] == 90
+    assert "curate" in payload["families"]
     assert payload["task_suite"]["suite_id"] == "enterprise-apps-usage"
     assert len(payload["task_suite"]["content_sha256"]) == 64
     assert "read" in payload["categories"]
@@ -186,12 +186,11 @@ def test_cli_validate_fails_when_min_task_gate_is_not_met(capsys) -> None:
 
 
 def test_cli_filters_by_difficulty(capsys) -> None:
-    exit_code = main(["list", "--difficulty", "medium", "--family", "params"])
+    exit_code = main(["list", "--suite", "smoke", "--difficulty", "medium"])
 
     output = capsys.readouterr().out
     assert exit_code == 0
-    assert "options_constrained_pair_for_price_performance" in output
-    assert "price_performance_aapl" not in output
+    assert "decision_briefing_level0" not in output
 
 
 def test_cli_canary_command(capsys) -> None:
@@ -220,7 +219,7 @@ def test_cli_report_json_includes_release_checks(capsys) -> None:
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
-    assert payload["manifest"]["task_count"] >= 300
+    assert payload["manifest"]["task_count"] >= 90
     assert payload["release_checks"]["oracle_all_pass"] is True
     assert payload["release_checks"]["noop_all_fail"] is True
 
@@ -233,7 +232,7 @@ def test_cli_report_can_write_markdown(tmp_path) -> None:
     text = output.read_text(encoding="utf-8")
     assert exit_code == 0
     assert "# OpenBB Workspace Bench Report" in text
-    assert "task_count_at_least_300" in text
+    assert "task_count_90" in text
 
 
 def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
@@ -241,7 +240,7 @@ def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
         [
             "run",
             "--task",
-            "price_performance_aapl",
+            "decision_briefing_level0",
             "--agent",
             "oracle",
             "--json",
@@ -252,7 +251,7 @@ def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
     assert exit_code == 0
     assert payload["summary"]["passed"] == 1
     assert payload["results"][0]["category"] == "single-widget"
-    assert payload["results"][0]["difficulty"] == "easy"
+    assert payload["results"][0]["difficulty"] == "level0"
 
 
 def test_cli_run_resolves_build_suite_task_without_suite_flag(capsys) -> None:
@@ -297,10 +296,10 @@ def test_cli_runtime_result_row_includes_deployment_receipt(capsys) -> None:
 
 def test_cli_can_run_private_task_directory(tmp_path, capsys) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
+        item for item in load_builtin_tasks() if item.id == "decision_briefing_level0"
     )
     (tmp_path / "create").mkdir()
-    task_path = tmp_path / "create" / "price_performance_aapl.json"
+    task_path = tmp_path / "create" / "decision_briefing_level0.json"
     task_path.write_text(
         task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
@@ -390,7 +389,7 @@ def test_runner_round_trips_workspace_resource_and_prompt_task(tmp_path) -> None
 
 def test_cli_private_task_suite_manifest_applies(tmp_path, capsys) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
+        item for item in load_builtin_tasks() if item.id == "decision_briefing_level0"
     )
     (tmp_path / "task_suite.json").write_text(
         json.dumps(
@@ -401,7 +400,7 @@ def test_cli_private_task_suite_manifest_applies(tmp_path, capsys) -> None:
         ),
         encoding="utf-8",
     )
-    (tmp_path / "price_performance_aapl.json").write_text(
+    (tmp_path / "decision_briefing_level0.json").write_text(
         task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
     )
@@ -416,7 +415,7 @@ def test_cli_private_task_suite_manifest_applies(tmp_path, capsys) -> None:
 
 def test_cli_hidden_task_suite_redacts_trace_prompts(tmp_path, capsys) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
+        item for item in load_builtin_tasks() if item.id == "decision_briefing_level0"
     )
     task_dir = tmp_path / "hidden_pack"
     trace_dir = tmp_path / "traces"
@@ -426,7 +425,7 @@ def test_cli_hidden_task_suite_redacts_trace_prompts(tmp_path, capsys) -> None:
         encoding="utf-8",
     )
     (task_dir / "create").mkdir()
-    (task_dir / "create" / "price_performance_aapl.json").write_text(
+    (task_dir / "create" / "decision_briefing_level0.json").write_text(
         task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
     )
@@ -446,7 +445,7 @@ def test_cli_hidden_task_suite_redacts_trace_prompts(tmp_path, capsys) -> None:
         ]
     )
 
-    payload = json.loads((trace_dir / "price_performance_aapl.json").read_text())
+    payload = json.loads((trace_dir / "decision_briefing_level0.json").read_text())
     assert manifest_exit == 0
     assert run_exit == 0
     assert manifest["redacted"] is True
@@ -461,7 +460,7 @@ def test_cli_export_task_writes_public_agent_envelope(tmp_path) -> None:
         [
             "export-task",
             "--task",
-            "price_performance_aapl",
+            "decision_briefing_level0",
             "--output",
             str(output),
         ]
@@ -471,9 +470,9 @@ def test_cli_export_task_writes_public_agent_envelope(tmp_path) -> None:
     assert exit_code == 0
     assert payload["schema_version"] == "workspace-bench-envelope"
     assert payload["benchmark"]["suite_id"] == "enterprise-apps-usage"
-    assert payload["task"]["qualified_id"] == "enterprise-apps-usage/create/price_performance_aapl"
-    assert payload["task"]["id"] == "price_performance_aapl"
-    assert payload["task"]["family"] == "create"
+    assert payload["task"]["qualified_id"] == "enterprise-apps-usage/curate/decision_briefing_level0"
+    assert payload["task"]["id"] == "decision_briefing_level0"
+    assert payload["task"]["family"] == "curate"
     assert payload["task"]["business_terms"] == []
     assert "oracle_tool_calls" not in payload["task"]
     assert "success" not in payload["task"]
@@ -484,7 +483,7 @@ def test_cli_run_agent_command_uses_jsonl_contract(tmp_path, capsys) -> None:
         [
             "run-agent-command",
             "--task",
-            "price_performance_aapl",
+            "decision_briefing_level0",
             "--agent-command",
             "python -m workspace_bench.agents.rule_agent",
             "--run-dir",
@@ -507,7 +506,7 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
         [
             "run-agent-command",
             "--task",
-            "price_performance_aapl",
+            "decision_briefing_level0",
             "--agent-command",
             "python -m workspace_bench.agents.rule_agent",
             "--run-dir",
@@ -521,7 +520,7 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
         [
             "run-agent-command",
             "--task",
-            "price_performance_aapl",
+            "decision_briefing_level0",
             "--agent-command",
             'python -c "raise SystemExit(2)"',
             "--run-dir",
@@ -539,7 +538,7 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
 
 def test_task_loader_rejects_legacy_split_field(tmp_path) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
+        item for item in load_builtin_tasks() if item.id == "decision_briefing_level0"
     )
     payload = json.loads(task.source_path.read_text(encoding="utf-8"))
     payload["split"] = "train"
@@ -556,7 +555,7 @@ def test_task_loader_rejects_legacy_split_field(tmp_path) -> None:
 
 def test_task_loader_rejects_malformed_allowed_tools(tmp_path) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
+        item for item in load_builtin_tasks() if item.id == "decision_briefing_level0"
     )
     payload = json.loads(task.source_path.read_text(encoding="utf-8"))
     payload["setup"]["allowed_tools"] = "create_widget"
@@ -573,7 +572,7 @@ def test_task_loader_rejects_malformed_allowed_tools(tmp_path) -> None:
 
 def test_validate_reports_duplicate_task_ids(tmp_path, capsys) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "price_performance_aapl"
+        item for item in load_builtin_tasks() if item.id == "decision_briefing_level0"
     )
     source = task.source_path.read_text(encoding="utf-8")
     (tmp_path / "create").mkdir()

@@ -5,7 +5,6 @@ from __future__ import annotations
 import pytest
 
 from workspace_bench.core.models import Task
-from workspace_bench.core.runner import find_task
 from workspace_bench.workspace.live_parity import (
     DEFAULT_ORIGIN_MAP,
     LiveParityIneligible,
@@ -20,9 +19,95 @@ from workspace_bench.workspace.live_parity import (
 )
 
 
+def _machinery_task(
+    *,
+    origin: str = "Bench Stark Enterprise",
+    oracle_extra: list[dict] | None = None,
+) -> Task:
+    """A legacy-shaped seeded read task exercising the parity machinery."""
+
+    payload = {
+        "id": "parity_machinery_read",
+        "category": "single-widget",
+        "family": "read",
+        "difficulty": "easy",
+        "prompt": (
+            f"Use get_widget_data for the {origin} Alert Trend widget; then "
+            "add a short note that says you reviewed the data."
+        ),
+        "setup": {
+            "fixtures": {"backends": [{"name": "stark-enterprise"}]},
+            "initial_state": {
+                "dashboard": {
+                    "name": "Data Review",
+                    "activate": True,
+                    "tabs": [{"id": "main", "name": "Main"}],
+                    "widgets": [
+                        {
+                            "origin": origin,
+                            "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+                            "data_args": {"fund": "Flagship Long/Short", "period": "YTD"},
+                            "tab_id": "main",
+                            "layout": {"x": 0, "y": 2, "w": 20, "h": 10},
+                            "widget_uuid": "usage_alert_trend_widget_001",
+                        }
+                    ],
+                    "dashboard_id": "usage_alert_trend_dashboard_001",
+                }
+            },
+            "allowed_tools": [
+                "get_workspace_snapshot",
+                "get_widget_data",
+                "read_widget",
+                "add_generative_widget",
+            ],
+        },
+        "eval": {
+            "required_tool_calls": [
+                {
+                    "tool": "get_widget_data",
+                    "args_contains": {
+                        "origin": origin,
+                        "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+                    },
+                }
+            ],
+            "required_generated_widgets": [
+                {"widget_type": "note", "data_contains": ["alert_trend", "data"]}
+            ],
+            "reference_trace": [
+                {"tool": "get_workspace_snapshot", "args": {}},
+                {
+                    "tool": "get_widget_data",
+                    "args": {
+                        "origin": origin,
+                        "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
+                        "widget_uuid": "usage_alert_trend_widget_001",
+                        "data_args": {"fund": "Flagship Long/Short", "period": "YTD"},
+                    },
+                },
+                *(oracle_extra or []),
+                {
+                    "tool": "add_generative_widget",
+                    "args": {
+                        "widget_type": "note",
+                        "name": "Data Note",
+                        "data": (
+                            "Reviewed the data returned by "
+                            "compliance_surveillance_hub_alerts_alert_trend."
+                        ),
+                    },
+                },
+            ],
+            "max_turns": 6,
+        },
+    }
+    return Task.from_dict(payload)
+
+
 @pytest.fixture()
 def stark_read_task() -> Task:
-    return find_task("enterprise-apps-usage/read/alert_trend")
+    return _machinery_task()
 
 
 def test_map_origin_values_rewrites_only_origin_keys() -> None:
@@ -68,15 +153,9 @@ def test_eligibility_accepts_stark_read_task(stark_read_task: Task) -> None:
     check_eligibility(stark_read_task, DEFAULT_ORIGIN_MAP)
 
 
-@pytest.mark.parametrize(
-    "task_ref",
-    [
-        "enterprise-apps-usage/create/price_performance_aapl",
-        "enterprise-apps-usage/create/sector_exposure_plain",
-    ],
-)
-def test_eligibility_accepts_transcribed_production_origins(task_ref: str) -> None:
-    check_eligibility(find_task(task_ref), DEFAULT_ORIGIN_MAP)
+@pytest.mark.parametrize("origin", ["Getting Started", "Widget Examples"])
+def test_eligibility_accepts_transcribed_production_origins(origin: str) -> None:
+    check_eligibility(_machinery_task(origin=origin), DEFAULT_ORIGIN_MAP)
 
 
 def test_eligibility_rejects_unmapped_origin(stark_read_task: Task) -> None:
@@ -85,7 +164,11 @@ def test_eligibility_rejects_unmapped_origin(stark_read_task: Task) -> None:
 
 
 def test_eligibility_rejects_unreplayable_oracle_tool() -> None:
-    task = find_task("enterprise-apps-usage/backends/add_stark_enterprise")
+    task = _machinery_task(
+        oracle_extra=[
+            {"tool": "manage_backends", "args": {"operation": "add", "name": "X"}}
+        ]
+    )
     with pytest.raises(LiveParityIneligible):
         check_eligibility(task, DEFAULT_ORIGIN_MAP)
 

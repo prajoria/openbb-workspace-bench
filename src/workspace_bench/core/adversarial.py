@@ -21,6 +21,7 @@ from workspace_bench.core.models import (
     ToolTraceEvent,
 )
 from workspace_bench.workspace.runtime import bind_dataset, declared_fields
+from workspace_bench.workspace.default_setup import apply_workspace_baseline
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 from workspace_bench.workspace.widget_params import flatten_params
 
@@ -237,10 +238,17 @@ def run_adversarial_matrix(
 def adversarial_context(task: Task, oracle: RunResult) -> AdversarialContext:
     """Build the isolated grader input shared by oracle and mutant checks."""
 
+    fixtures, initial_state = apply_workspace_baseline(
+        task.suite,
+        task.fixtures,
+        task.initial_state,
+        baseline_override=task.workspace_baseline,
+        backends_override=task.workspace_backends,
+    )
     workspace = SimulatedWorkspace()
     workspace.reset(
-        backends=task.fixtures,
-        initial_state=task.initial_state,
+        backends=fixtures,
+        initial_state=initial_state,
         runtime_checks=task.success.runtime,
     )
     return AdversarialContext(
@@ -1126,10 +1134,17 @@ def _replay(
     context: AdversarialContext,
     calls: Iterable[ToolCall],
 ) -> AdversarialContext:
+    fixtures, initial_state = apply_workspace_baseline(
+        context.task.suite,
+        context.task.fixtures,
+        context.task.initial_state,
+        baseline_override=context.task.workspace_baseline,
+        backends_override=context.task.workspace_backends,
+    )
     workspace = SimulatedWorkspace()
     workspace.reset(
-        backends=context.task.fixtures,
-        initial_state=context.task.initial_state,
+        backends=fixtures,
+        initial_state=initial_state,
         runtime_checks=context.task.success.runtime,
     )
     initial_snapshot = workspace.snapshot()

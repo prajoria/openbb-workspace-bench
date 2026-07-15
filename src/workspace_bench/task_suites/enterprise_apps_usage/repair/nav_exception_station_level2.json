@@ -1,0 +1,140 @@
+{
+  "id": "nav_exception_station_level2",
+  "category": "repair",
+  "difficulty": "level2",
+  "prompt": "The open NAV Repair Staging board has an extra NAV Exceptions copy. The duplicate-cleanup marker identifies it; remove that copy so exactly one remains, and preserve Trade Ideas and all other content.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "NAV Repair Staging",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "NAV Repair Staging",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "exceptions",
+            "name": "Exceptions"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "fund_operations_control_tower_pricing_nav_exceptions",
+            "widget_uuid": "nav_primary",
+            "tab_id": "exceptions",
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "status": "Open",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 40,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "fund_operations_control_tower_pricing_nav_exceptions",
+            "widget_uuid": "nav_duplicate",
+            "tab_id": "exceptions",
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "status": "Open",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 28,
+              "w": 40,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "portfolio_command_center_actions_trade_ideas",
+            "widget_uuid": "repair_trade_ideas",
+            "tab_id": "exceptions",
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 14,
+              "w": 40,
+              "h": 14
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "delete_widget",
+        "args": {
+          "widget_uuid": "nav_duplicate"
+        },
+        "graded_args": [
+          "widget_uuid"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "fund_operations_control_tower_pricing_nav_exceptions",
+        "min_count": 1,
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_actions_trade_ideas"
+      }
+    ],
+    "max_turns": 4
+  }
+}

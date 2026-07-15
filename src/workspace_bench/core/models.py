@@ -1519,12 +1519,27 @@ class ToolTraceEvent:
     result: JsonDict
 
 
+# Models phrase the answer argument differently; accept the common keys so a
+# correct answer is never zeroed on key spelling (canonical: "text").
+FINAL_ANSWER_ARG_KEYS = ("text", "answer", "data", "content")
+
+
+def final_answer_text(args: JsonDict) -> str | None:
+    """Extract the answer text from final_answer args, whichever key is used."""
+
+    for key in FINAL_ANSWER_ARG_KEYS:
+        value = args.get(key)
+        if isinstance(value, str) and value.strip():
+            return value
+    return None
+
+
 def final_answer_from_trace(trace: tuple["ToolTraceEvent", ...]) -> str | None:
     """Return the episode's submitted final answer, if any."""
 
     for event in reversed(trace):
         if event.call.name == FINAL_ANSWER_TOOL and event.ok:
-            return str(event.call.args.get("text", ""))
+            return final_answer_text(event.call.args) or ""
     return None
 
 

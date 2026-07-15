@@ -116,22 +116,16 @@ BUILD_PARAM_OWNERSHIP = {
     "params": {"text", "date", "ticker", "number", "boolean", "endpoint", "tabs"},
     "forms": {"form", "button"},
 }
-CORE_FAMILIES = {
-    "apps",
-    "backends",
-    "create",
-    "delegate",
-    "delete",
-    "inspect",
-    "layout",
-    "navigate",
-    "note",
-    "params",
-    "prompts",
-    "read",
-    "resources",
-    "skills",
-    "update",
+# Job-shaped usage families: {family: (task count, levels present)}.
+USAGE_FAMILIES = {
+    "retrieve": (12, (0, 1, 2, 3, 4, 5)),
+    "curate": (12, (0, 1, 2, 3, 4, 5)),
+    "parameterize": (12, (0, 1, 2, 3, 4, 5)),
+    "organize": (12, (0, 1, 2, 3, 4, 5)),
+    "repair": (10, (1, 2, 3, 4, 5)),
+    "platform": (10, (1, 2, 3, 4, 5)),
+    "extend": (12, (0, 1, 2, 3, 4, 5)),
+    "handoff": (10, (0, 1, 2, 3, 4)),
 }
 BUILD_LADDER_FAMILIES = {
     "advanced",
@@ -155,7 +149,7 @@ def release_checks_for_suite(
     """Return the release checks for a bundled suite; {} for private suites."""
 
     if suite == USAGE_SUITE:
-        return core_release_checks(tasks, oracle_results)
+        return usage_release_checks(tasks, oracle_results)
     if suite == BUILD_SUITE:
         return build_release_checks(tasks, oracle_results)
     if suite == SMOKE_SUITE:
@@ -281,61 +275,59 @@ def _authored_task_payload(task: Task) -> JsonDict | None:
     return payload if isinstance(payload, dict) else None
 
 
-def core_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> dict[str, bool]:
+def usage_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> dict[str, bool]:
     total = len(tasks)
-    # The read/params/create families additionally carry the level0-level5
-    # operation-ladder tasks; band quotas apply to the banded subset only.
-    banded = [task for task in tasks if not task.difficulty.startswith("level")]
-    ladder = [task for task in tasks if task.difficulty.startswith("level")]
-    banded_total = len(banded)
-    categories = Counter(task.category for task in tasks)
-    difficulties = Counter(task.difficulty for task in banded)
-    backends = Counter(backend for task in tasks for backend in _task_backend_slugs(task))
-    widget_pairs = {
-        (required.origin, required.widget_id)
-        for task in tasks
-        for required in task.success.required_widgets
-        if required.min_count > 0
-    }
-    checks = _core_check_type_counts(tasks)
     fingerprints = [_task_fingerprint(task) for task in tasks]
-    ladder_families = {"read", "params", "create"}
-    expected = {
-        family: (32 if family in ladder_families else 20) for family in CORE_FAMILIES
-    }
+    origins: set[str] = set()
+    for task in tasks:
+        for call in task.oracle_tool_calls:
+            origin = call.args.get("origin")
+            if isinstance(origin, str):
+                origins.add(origin)
+        for required in task.success.required_widgets:
+            origins.add(required.origin)
+    ladder_ok = all(
+        sum(
+            1
+            for task in tasks
+            if task.family == family and task.difficulty == f"level{level}"
+        )
+        == 2
+        for family, (_, levels) in USAGE_FAMILIES.items()
+        for level in levels
+    )
+    budget_ok = all(
+        task.limits.get("max_turns") == len(task.oracle_tool_calls) + 3
+        for task in tasks
+    )
+    universal = _universal_release_checks(
+        tasks, max_duplicate_prompts=1, max_prompt_words=200
+    )
+    # The reply channel replaced note-mailbox deliverables: with only a
+    # handful of artifact tasks, the generated-widget-type share quotas
+    # would force artificial variety.
+    universal.pop("generated_widget_type_diversity", None)
+    universal.pop("generated_widget_type_max_share_80pct", None)
     return {
-        **_universal_release_checks(tasks, max_duplicate_prompts=2, max_prompt_words=350),
-        **_family_count_checks(tasks, expected=expected),
+        **universal,
+        **_family_count_checks(
+            tasks,
+            expected={family: count for family, (count, _) in USAGE_FAMILIES.items()},
+        ),
         "grader_mutation_sensitive": _mutation_suite_passes(tasks, oracle_results),
-        "runtime_all_backend_tasks": all(
-            task.success.runtime is not None for task in tasks if task.family == "backends"
-        ),
-        "task_count_at_least_300": total >= 300,
-        "ladder_cells_complete": (
-            len(ladder) == 36
-            and all(
-                sum(
-                    1
-                    for task in ladder
-                    if task.family == family and task.difficulty == f"level{level}"
-                )
-                == 2
-                for family in ladder_families
-                for level in range(6)
-            )
-        ),
+        "task_count_90": total == 90,
+        "ladder_cells_two_spines": ladder_ok,
+        "turn_budget_reference_plus_three": budget_ok,
         "fingerprint_unique": len(set(fingerprints)) == total,
-        "quota_dashboard_construction": categories["dashboard"] >= total * 0.15,
-        "quota_backend_getting_started": backends["getting-started"] >= banded_total * 0.15,
-        "quota_backend_widget_examples": backends["widget-examples"] >= banded_total * 0.15,
-        "quota_backend_stark_enterprise": backends["stark-enterprise"] >= banded_total * 0.15,
-        "quota_difficulty_bands": (
-            abs(difficulties["easy"] - banded_total * 0.30) <= banded_total * 0.05
-            and abs(difficulties["medium"] - banded_total * 0.40) <= banded_total * 0.05
-            and abs(difficulties["hard"] - banded_total * 0.30) <= banded_total * 0.05
+        "all_level_difficulties": all(
+            task.difficulty.startswith("level") for task in tasks
         ),
-        "quota_required_widget_pairs": len(widget_pairs) >= 120,
-        "quota_grader_check_types": bool(checks) and all(count >= 10 for count in checks.values()),
+        "catalog_coverage": {
+            "Bench Stark Enterprise",
+            "Getting Started",
+            "Widget Examples",
+            "Bench Daloopa",
+        } <= origins,
     }
 
 

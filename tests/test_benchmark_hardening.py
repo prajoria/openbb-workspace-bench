@@ -16,9 +16,10 @@ from workspace_bench.workspace.live_mcp import compare_tool_schemas
 
 
 def test_current_task_schema_is_strict() -> None:
-    source = find_task("price_performance_aapl", suite="enterprise-apps-usage")
+    source = find_task("decision_briefing_level0", suite="enterprise-apps-usage")
     assert source.source_path is not None
     payload = json.loads(source.source_path.read_text(encoding="utf-8"))
+    payload.setdefault("family", source.family)
 
     obsolete_level = dict(payload)
     obsolete_level["level"] = "t2"
@@ -58,7 +59,7 @@ def test_active_identity_is_suite_family_task_without_generation_labels() -> Non
         *load_builtin_tasks("build-openbb-apps"),
     ]
 
-    assert len(tasks) == 572
+    assert len(tasks) == 326
 
     debug_tasks = [task for task in tasks if task.family == "debug"]
     assert len(debug_tasks) == 24
@@ -163,7 +164,7 @@ def test_build_completion_notes_require_semantic_deployment_facts() -> None:
 
 
 def test_state_and_trace_requirements_are_reported_independently() -> None:
-    task = find_task("attribution", suite="enterprise-apps-usage")
+    task = find_task("earnings_handoff_level0", suite="enterprise-apps-usage")
     episode = WorkspaceEpisode(task)
     for call in task.oracle_tool_calls:
         if call.name != "get_widget_data":

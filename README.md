@@ -12,7 +12,7 @@ Motivation: a [NY Tech Week talk](https://youtu.be/7fDTDYh2NJ4?t=1210) showed ag
 Five suites ship bundled in a capability ladder: `smoke` checks one round trip
 per Workspace MCP surface (20 tasks), `enterprise-apps-default` answers the
 default apps' product prompts in two data worlds (138), `enterprise-apps-usage` operates Workspace
-state (336), and `build-openbb-apps` builds and repairs custom apps (236).
+state (90), and `build-openbb-apps` builds and repairs custom apps (236).
 
 ## Contents
 
@@ -37,11 +37,13 @@ state (336), and `build-openbb-apps` builds and repairs custom apps (236).
 
 ## What Is Included
 
-- 790 deterministic simulator tasks across four certified suites:
+- 544 deterministic simulator tasks across four certified suites:
   - `smoke` — 80 tasks: a four-level execution ladder over every Workspace MCP surface
   - `enterprise-apps-default` — 138 tasks pairing 69 byte-verbatim product prompts across two data worlds
-  - `enterprise-apps-usage` — 336 operating tasks across 15 tool-anchored families,
-    including a level0-level5 operation ladder on the everything-mounted workspace
+  - `enterprise-apps-usage` — 90 operating tasks: 8 job-shaped families
+    (retrieve, curate, parameterize, organize, repair, platform, extend,
+    handoff) climbing a level0-level5 operation ladder on the
+    everything-mounted workspace, topped by authoring custom backends
   - `build-openbb-apps` — 236 specification-level app-building tasks across 12 families,
     including 24 long diagnosis/repair/retest incidents
 
@@ -98,7 +100,7 @@ uv run workspace-bench list
 uv run workspace-bench manifest --json
 uv run workspace-bench validate --suite smoke --min-tasks 80
 uv run workspace-bench validate --suite enterprise-apps-default --min-tasks 138
-uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 300
+uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 90
 uv run workspace-bench validate --suite build-openbb-apps --min-tasks 236
 ```
 
@@ -167,7 +169,7 @@ Six models have been run against both suites (pass@1, single fresh
 end-to-end attempt per suite, temperature 0, same grader and turn budget
 for every model — no patched or spliced results).
 
-Core suite (operating the workspace, 336 tasks):
+Usage suite (operating the workspace, 90 tasks):
 
 | Model | Strict pass | t0 → t4 pass rate (%) |
 |---|---|---|
@@ -234,7 +236,7 @@ Run the included demo agent:
 
 ```bash
 uv run workspace-bench run-agent-command \
-  --task enterprise-apps-usage/create/price_performance_aapl \
+  --task enterprise-apps-usage/retrieve/earnings_lookup_level0 \
   --agent-command "python -m workspace_bench.agents.rule_agent" \
   --json
 ```
@@ -247,7 +249,7 @@ Run any external agent command (it receives the task envelope via
 
 ```bash
 uv run workspace-bench run-agent-command \
-  --task enterprise-apps-usage/create/price_performance_aapl \
+  --task enterprise-apps-usage/retrieve/earnings_lookup_level0 \
   --agent-command "python -m workspace_bench.agents.rule_agent" \
   --run-dir runs/rule-agent \
   --json
@@ -381,7 +383,7 @@ Export a task envelope without running an agent:
 
 ```bash
 uv run workspace-bench export-task \
-  --task enterprise-apps-usage/create/price_performance_aapl \
+  --task enterprise-apps-usage/retrieve/earnings_lookup_level0 \
   --output task.json
 ```
 
@@ -488,7 +490,7 @@ Then smoke-test the real MCP endpoint and browser bridge protocol:
 ```bash
 uv run --extra live workspace-bench smoke-workspace-mcp \
   --url http://127.0.0.1:8787 \
-  --task enterprise-apps-usage/create/price_performance_aapl \
+  --task enterprise-apps-usage/retrieve/earnings_lookup_level0 \
   --json
 ```
 
@@ -498,7 +500,7 @@ Check the broader live MCP surface against a workflow task:
 uv run --extra live workspace-bench smoke-workspace-mcp \
   --url http://127.0.0.1:8787 \
   --suite enterprise-apps-usage \
-  --task enterprise-apps-usage/skills/read_the_finance_earnings_prep_skill \
+  --task enterprise-apps-usage/platform/governed_earnings_brief_level1 \
   --check-surface \
   --json
 ```
@@ -518,7 +520,7 @@ back-to-back, graded by the same `grade_task`, and diffed check-by-check:
 
 ```bash
 export WORKSPACE_MCP_TOKEN=...   # or put it in .env
-uv run --extra live workspace-bench live-parity --task enterprise-apps-usage/read/alert_trend
+uv run --extra live workspace-bench live-parity --task smoke/get_widget_data/smoke_get_widget_data_level0
 ```
 
 The live leg reproduces the task's initial state through public tool calls on
@@ -534,7 +536,7 @@ faithfully are refused with a reason. Live runs execute in a real user
 workspace: results are validation evidence for grader fidelity, never board
 numbers.
 
-For `enterprise-apps-usage`, 232 of the 300 legacy operating tasks are eligible for structural parity
+The usage suite was rebuilt on job-shaped families in July 2026; its live-parity eligibility set is pending re-derivation
 replay. The 68 refused tasks use backend/app mutation or delegation tools that
 the conservative replay does not execute.
 
@@ -697,7 +699,7 @@ See [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) for release gates and
 ## Task Organization
 
 Every active task has the canonical identity `suite/family/task`, for example
-`enterprise-apps-usage/create/price_performance_aapl`. The local task id contains only the
+`enterprise-apps-usage/retrieve/earnings_lookup_level0`. The local task id contains only the
 descriptive slug; generator mechanics are not part of the public identity.
 
 **Category** — what kind of workflow the task is:
@@ -755,7 +757,7 @@ scripts/
   audits/                 Local, release, hosted-surface, and prompt audits
 runs/
   reports/                 Compiled reports and generated catalogs/matrices
-    task-catalog.md         All 790 deterministic simulator tasks
+    task-catalog.md         All 544 deterministic simulator tasks
     tool-coverage-matrix.md Per-task x Workspace MCP oracle-tool matrix
     tool-matrix-data.json   Machine-readable data behind the tool matrix
 references/

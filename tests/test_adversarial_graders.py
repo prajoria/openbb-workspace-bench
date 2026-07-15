@@ -16,7 +16,6 @@ from workspace_bench.core.adversarial import (
     SEVERED_SHARED_INTERACTION,
     SELF_SATISFIED_CONNECTION,
     STRIPPED_APP_PROMPTS,
-    WRONG_ENDPOINT_DATA,
     evaluate_adversarial_candidate,
     generate_adversarial_candidates,
     run_adversarial_matrix,
@@ -25,8 +24,7 @@ from workspace_bench.core.runner import TaskRunner, find_task, load_builtin_task
 
 
 CASES = (
-    ("enterprise-apps-usage/backends/add_equities", WRONG_ENDPOINT_DATA),
-    ("build-openbb-apps/apps/earnings_desk", NEVER_INSTANTIATED),
+        ("build-openbb-apps/apps/earnings_desk", NEVER_INSTANTIATED),
     ("build-openbb-apps/e2e/case_triage", ONE_WIDGET_MISSING),
     ("build-openbb-apps/charts/earnings_chart_room", INCOMPATIBLE_VALUES),
     ("build-openbb-apps/forms/vendor_review_form", BROKEN_FORM_SUBMISSION),

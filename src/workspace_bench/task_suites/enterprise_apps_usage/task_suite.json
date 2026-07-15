@@ -1,7 +1,13 @@
 {
   "suite_id": "enterprise-apps-usage",
   "visibility": "public",
-  "workspace_baseline": "all-stark-enterprise-apps",
+  "workspace_baseline": "stark-workspace-a",
+  "workspace_backends": [
+    "stark-enterprise-x",
+    "support-daloopa-skills",
+    "getting-started",
+    "widget-examples"
+  ],
   "workspace_skills": [
     "daloopa-capital-allocation",
     "daloopa-earnings-review",
@@ -22,7 +28,7 @@
         "grid_width": 40
       },
       "trace_checks": {
-        "max_invalid_tool_calls": 1,
+        "max_invalid_tool_calls": 2,
         "forbid_invented_widget_ids": true
       },
       "workspace_checks": {
@@ -30,6 +36,6 @@
       }
     }
   },
-  "content_sha256": "85b5694111554c34f99b3991906b5f3ab1f91bd3be132f5a46127567906edafa",
-  "description": "Operating the workspace: 15 MCP-surface families and 336 tasks on the default Workspace; the read, params, and create families additionally climb a level0-level5 operation ladder on the everything-mounted stark-workspace-a baseline, topped by authoring a custom backend."
+  "content_sha256": "adf7abbc495a935043aa4e0bf18d8bef580b446b9810e1b51cb4bcc7b4b8799c",
+  "description": "Usage-v3 waves 1-2: eight job-shaped families, two level-ladder spines per family, and mechanically certified F1-F10/L1-L5 fairness."
 }
