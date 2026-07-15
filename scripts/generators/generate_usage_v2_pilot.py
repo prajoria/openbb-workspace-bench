@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import copy
 import json
-import shutil
 import sys
 from collections import Counter
 from dataclasses import dataclass
@@ -32,8 +31,14 @@ from workspace_bench.core.runner import load_task_directory  # noqa: E402
 from workspace_bench.core.suite_checks import task_payload_digest  # noqa: E402
 from workspace_bench.workspace.simulated_workspace import WORKSPACE_SKILLS  # noqa: E402
 
-OUTPUT_DIR = REPO / "pilots" / "enterprise_apps_usage_v2"
-RELATIVE_OUTPUT_DIR = Path("pilots/enterprise_apps_usage_v2")
+# The pilot tasks ship inside the enterprise-apps-usage suite, extending
+# the existing families: retrieve -> read, params -> params, curate -> create.
+# Run generate_usage_suite.py FIRST (it rewrites the legacy 300 and the
+# manifest), then this generator (it writes the 36 level tasks and finalizes
+# the manifest hash over the whole suite).
+OUTPUT_DIR = REPO / "src" / "workspace_bench" / "task_suites" / "enterprise_apps_usage"
+RELATIVE_OUTPUT_DIR = Path("src/workspace_bench/task_suites/enterprise_apps_usage")
+FAMILY_DIRS = {"retrieve": "read", "params": "params", "curate": "create"}
 
 STARK = "Bench Stark Enterprise"
 DALOOPA = "Bench Daloopa"
@@ -2631,11 +2636,16 @@ def validate_payloads(records: list[TaskRecord]) -> dict[str, int]:
     }
 
 
-def _manifest(records: list[TaskRecord]) -> JsonDict:
-    payloads = [record.payload for record in records]
+def _manifest() -> JsonDict:
+    all_payloads = [
+        json.loads(path.read_text(encoding="utf-8"))
+        for path in sorted(OUTPUT_DIR.glob("*/*.json"))
+    ]
     return {
-        "suite_id": "enterprise-apps-usage-v2",
-        "visibility": "private",
+        "suite_id": "enterprise-apps-usage",
+        "visibility": "public",
+        "workspace_baseline": "all-stark-enterprise-apps",
+        "workspace_skills": sorted(WORKSPACE_SKILLS),
         "task_defaults": {
             "eval": {
                 "layout": {"within_grid": True, "no_overlaps": True, "grid_width": 40},
@@ -2646,49 +2656,36 @@ def _manifest(records: list[TaskRecord]) -> JsonDict:
                 "workspace_checks": {"preserve_other_dashboards": True},
             }
         },
-        "content_sha256": task_payload_digest(payloads),
+        "content_sha256": task_payload_digest(all_payloads),
         "description": (
-            "A 36-task pilot for operating, governing, and authoring in a lived-in "
-            "multi-catalog enterprise workspace."
+            "Operating the workspace: 15 MCP-surface families and "
+            f"{len(all_payloads)} tasks on the default Workspace; the read, "
+            "params, and create families additionally climb a level0-level5 "
+            "operation ladder on the everything-mounted stark-workspace-a "
+            "baseline, topped by authoring a custom backend."
         ),
     }
 
 
-def _readme() -> str:
-    return """# Enterprise Apps Usage v2 Pilot
-
-This pilot measures operating a lived-in, four-catalog enterprise workspace through six
-contained levels: execute, discover, translate, ambient state, governed knowledge, and build.
-
-| Level | Driver | Proof |
-| --- | --- | --- |
-| level0 | Execute | Perform the stated business action. |
-| level1 | Discover | Find the business object among all mounted catalogs. |
-| level2 | Translate | Convert business policy into declared parameter values. |
-| level3 | Ambient | Inspect and safely extend or repair lived-in state. |
-| level4 | Knowledge-governed | Follow a workspace skill or resource. |
-| level5 | Build | Author, wrap, instantiate, and use a custom backend. |
-
-Tasks: 36
-"""
-
-
 def write_suite(records: list[TaskRecord]) -> None:
-    """Write only the pilot-owned output directory."""
+    """Write the level tasks into the usage suite and finalize its manifest."""
 
-    if OUTPUT_DIR.exists():
-        shutil.rmtree(OUTPUT_DIR)
-    for family in ("retrieve", "params", "curate"):
-        (OUTPUT_DIR / family).mkdir(parents=True, exist_ok=True)
+    pilot_ids = {str(record.payload["id"]) for record in records}
+    for family_dir in set(FAMILY_DIRS.values()):
+        directory = OUTPUT_DIR / family_dir
+        directory.mkdir(parents=True, exist_ok=True)
+        # Remove any previously generated level tasks this run no longer emits.
+        for stale in directory.glob("*_level*.json"):
+            if stale.stem not in pilot_ids:
+                stale.unlink()
     for record in records:
         task_id = str(record.payload["id"])
-        path = OUTPUT_DIR / record.family / f"{task_id}.json"
+        path = OUTPUT_DIR / FAMILY_DIRS[record.family] / f"{task_id}.json"
         path.write_text(json.dumps(record.payload, indent=2) + "\n", encoding="utf-8")
     (OUTPUT_DIR / "task_suite.json").write_text(
-        json.dumps(_manifest(records), indent=2) + "\n",
+        json.dumps(_manifest(), indent=2) + "\n",
         encoding="utf-8",
     )
-    (OUTPUT_DIR / "README.md").write_text(_readme(), encoding="utf-8")
 
 
 def certify_loaded_suite(records: list[TaskRecord]) -> dict[str, int]:
@@ -2696,9 +2693,14 @@ def certify_loaded_suite(records: list[TaskRecord]) -> dict[str, int]:
 
     if Path.cwd().resolve() != REPO:
         raise RuntimeError(f"run this generator from repository root {REPO}")
-    tasks = load_task_directory(RELATIVE_OUTPUT_DIR)
+    pilot_ids = {str(record.payload["id"]) for record in records}
+    all_tasks = load_task_directory(RELATIVE_OUTPUT_DIR)
+    tasks = [task for task in all_tasks if task.id in pilot_ids]
     if len(tasks) != len(records):
-        raise AssertionError(f"loader returned {len(tasks)} tasks, expected {len(records)}")
+        raise AssertionError(
+            f"loader returned {len(tasks)} pilot tasks of {len(all_tasks)} total, "
+            f"expected {len(records)}"
+        )
     oracle = OracleAgent()
     noop = NoopAgent()
     oracle_pass = 0

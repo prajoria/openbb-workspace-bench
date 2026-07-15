@@ -2987,7 +2987,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 
 
-## Suite: enterprise-apps-usage (300 tasks)
+## Suite: enterprise-apps-usage (336 tasks)
 
 ### apps (20)
 
@@ -3769,7 +3769,96 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
 - **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
 
-### create (20)
+### create (32)
+
+#### `capability_card_view_level0`
+
+**level0** · category: dashboard · specification: -
+
+> Place Getting Started's single big-number card whose first sample is Total Users on Home.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/metric_widget` → `missing_widget`
+
+#### `capability_card_view_level1`
+
+**level1** · category: dashboard · specification: -
+
+> Discover which connected catalog offers the single big-number card whose leading sample is Total Users, then add that card to Home.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/metric_widget` → `missing_widget`
+
+#### `capability_card_view_level2`
+
+**level2** · category: dashboard · specification: -
+
+> Build a Home overview with the Total Users single big-number card beside the firm snapshot for the global equities strategy this year. Resolve the strategy and period from the snapshot's declared choices.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/metric_widget` → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/executive_investment_dashboard_firm_overview_firm_snapshot` with data_args ⊇ {"strategy": "Global Equities", "period": "YTD"} → `missing_widget`
+
+#### `capability_card_view_level3`
+
+**level3** · category: dashboard · specification: -
+
+> Inspect Morning Markets and extend its overview, including the firm snapshot, with the single big-number card led by Total Users. Keep all four market widgets, their settings, and every other dashboard unchanged.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Morning Markets"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/executive_investment_dashboard_firm_overview_firm_snapshot` with data_args ⊇ {"strategy": "Global Equities", "period": "1D"} on tab `overview` → `missing_widget`
+- **Widget** ≥1× `Getting Started/metric_widget` on tab `overview` → `missing_widget`
+
+#### `capability_card_view_level4`
+
+**level4** · category: dashboard · specification: -
+
+> Extend the Total Users single big-number card with Apple spot-and-revenue evidence under the desk tearsheet convention. Add the two convention-governed sources for latest price and latest-quarter fundamentals on Home.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Daloopa/daloopa_stock_prices` with data_args ⊇ {"ticker": "AAPL"} → `missing_widget`
+- **Widget** ≥1× `Bench Daloopa/daloopa_company_fundamentals` with data_args ⊇ {"ticker": "AAPL", "period": "2026Q1"} → `missing_widget`
+- **Widget** ≥1× `Getting Started/metric_widget` → `missing_widget`
+
+#### `capability_card_view_level5`
+
+**level5** · category: platform · specification: -
+
+> Build a Pilot Capability Cards backend with two compact single big-number widgets: User Metric and Session Metric. Compose them without overlap on a Cards tab in a Capability Card Board, publish and instantiate the app, and leave it open. Keep both widget definitions minimal and free of sample rows.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Pilot Capability Cards/user_metric` on tab `cards` → `missing_widget`
+- **Widget** ≥1× `Pilot Capability Cards/session_metric` on tab `cards` → `missing_widget`
 
 #### `cross_aapl_rates`
 
@@ -3973,6 +4062,94 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Tool call** ≥1× `get_params_options` with args ⊇ {"widget_id": "table_widget_with_grouping_by_cell_click", "param_name": "symbol"} must appear in the trace → `missing_tool_call`
 - **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
 - **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+
+#### `pm_research_view_level0`
+
+**level0** · category: dashboard · specification: -
+
+> Put Portfolio Command Center's Trade Ideas on Home for Flagship Long/Short year to date.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "YTD"} → `missing_widget`
+
+#### `pm_research_view_level1`
+
+**level1** · category: dashboard · specification: -
+
+> Identify the Portfolio Command Center view that carries actionable trade ideas, then place its Global Opportunities quarter-to-date configuration on Home.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Global Opportunities", "period": "QTD"} → `missing_widget`
+
+#### `pm_research_view_level2`
+
+**level2** · category: dashboard · specification: -
+
+> Compose a Home decision view with Portfolio Command Center's Trade Ideas for the flagship book this year and the multi-file viewer that can place the Bitcoin whitepaper in its layer-one category. Resolve the catalog controls.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "YTD"} → `missing_widget`
+- **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": ["bitcoin.pdf"], "category": "l1"} → `missing_widget`
+
+#### `pm_research_view_level3`
+
+**level3** · category: dashboard · specification: -
+
+> Inspect IC Prep - Q3 Review and extend its Evidence tab with the flagship year-to-date Trade Ideas view from Portfolio Command Center. Preserve its agenda, evidence widgets, and every other dashboard.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "IC Prep - Q3 Review"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Tab** `evidence` must exist (matched by tab id) → `missing_tab`
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "YTD"} on tab `evidence` → `missing_widget`
+
+#### `pm_research_view_level4`
+
+**level4** · category: dashboard · specification: -
+
+> Arrange Home for an Apple review with Portfolio Command Center's flagship year-to-date Trade Ideas and the governing source required by the desk guidance-tracker convention. Preserve all unrelated workspace content.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Daloopa/daloopa_management_guidance` with data_args ⊇ {"ticker": "AAPL"} → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "YTD"} → `missing_widget`
+
+#### `pm_research_view_level5`
+
+**level5** · category: platform · specification: -
+
+> Author a Pilot PM Research backend with an Idea Queue table and a Risk Snapshot metric, both governed by flagship-book and year-to-date controls. Compose them side by side in a PM Research Board Decision tab, publish and instantiate the app, and leave it open without embedding sample rows.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Pilot PM Research/idea_queue` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "YTD"} on tab `decision` → `missing_widget`
+- **Widget** ≥1× `Pilot PM Research/risk_snapshot` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "YTD"} on tab `decision` → `missing_widget`
 
 #### `preserve_fundamental_metrics_msft`
 
@@ -6290,7 +6467,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Widget** ≥1× `Getting Started/company_list` with data_args ⊇ {"companyId": "GM"} on tab `overview` → `missing_widget`
 - **Generated note** ≥1× whose content mentions "VWAGY", "350.5" on tab `overview` (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
-### params (20)
+### params (32)
 
 #### `cross_aapl_macro`
 
@@ -6453,6 +6630,176 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Tool result** of `get_params_options` must contain "AAPL" (agent must actually retrieve the data) → `missing_tool_result`
 - **Grid bounds**: every widget inside the 40-column grid (x≥0, y≥0, w>0, h>0, x+w≤40) → `layout_out_of_grid`
 - **No overlaps**: no two widgets on the same tab intersect → `layout_overlap`
+
+#### `manufacturer_compare_level0`
+
+**level0** · category: single-widget · specification: -
+
+> Add Car Manufacturer Performance to Home for Toyota and 2024.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TM", "year": "2024"} → `missing_widget`
+
+#### `manufacturer_compare_level1`
+
+**level1** · category: single-widget · specification: -
+
+> Browse the parameter-museum catalog for the car-manufacturer performance view, then place Ford's 2022 result on Home.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "F", "year": "2022"} → `missing_widget`
+
+#### `manufacturer_compare_level2`
+
+**level2** · category: single-widget · specification: -
+
+> Configure the car-manufacturer performance view for Volkswagen and the year immediately before its default year. Resolve both selections from the declared choices and place it on Home.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "VWAGY", "year": "2023"} → `missing_widget`
+
+#### `manufacturer_compare_level3`
+
+**level3** · category: repair · specification: -
+
+> Inspect Manufacturer Parameter Staging and correct its existing performance view to General Motors at the oldest available year. Keep the board and all unrelated workspace content intact.
+
+- Initial workspace: dashboard "Manufacturer Parameter Staging"; 1 tab(s): comparison; 1 seeded widget(s): company_performance({"company": "TM", "year": "2024"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "GM", "year": "2022"} on tab `comparison` → `missing_widget`
+
+#### `manufacturer_compare_level4`
+
+**level4** · category: single-widget · specification: -
+
+> Continue the manufacturer performance comparison with Toyota in 2024, then add Microsoft's normalized fundamentals source under the desk industry-comparison convention at its latest covered calendar quarter. Place both views on Home.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Daloopa/daloopa_company_fundamentals` with data_args ⊇ {"ticker": "MSFT", "period": "2026Q1"} → `missing_widget`
+- **Widget** ≥1× `Getting Started/company_performance` with data_args ⊇ {"company": "TM", "year": "2024"} → `missing_widget`
+
+#### `manufacturer_compare_level5`
+
+**level5** · category: platform · specification: -
+
+> Build a Pilot Manufacturer Policy backend whose Manufacturer Policy table offers explicit company and year choices and defaults to Volkswagen in 2023. Wrap it in a Manufacturer Policy App on a Comparison tab, instantiate it, and leave it open. The widget definition must not contain sample rows.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Pilot Manufacturer Policy/manufacturer_policy` with data_args ⊇ {"company": "VWAGY", "year": "2023"} on tab `comparison` → `missing_widget`
+
+#### `nav_exception_policy_level0`
+
+**level0** · category: single-widget · specification: -
+
+> Place Fund Operations Control Tower's NAV Exceptions on Home for Flagship Long/Short, Open status, and YTD.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` with data_args ⊇ {"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"} → `missing_widget`
+
+#### `nav_exception_policy_level1`
+
+**level1** · category: single-widget · specification: -
+
+> Search the connected catalogs for the Fund Operations Control Tower view of NAV Exceptions, then add it to Home for Global Opportunities, In Review, quarter to date.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` with data_args ⊇ {"fund": "Global Opportunities", "status": "In Review", "period": "QTD"} → `missing_widget`
+
+#### `nav_exception_policy_level2`
+
+**level2** · category: single-widget · specification: -
+
+> Set up Fund Operations Control Tower's NAV Exceptions for the flagship book, limited to only open items for this year. Derive each control value from the view's available choices and place the result on Home.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` with data_args ⊇ {"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"} → `missing_widget`
+
+#### `nav_exception_policy_level3`
+
+**level3** · category: repair · specification: -
+
+> Review the existing NAV Exceptions view on Fund Operations Control Tower's Pricing tab. Re-scope that exact view for the Global Opportunities quarterly control meeting, with items still under review, while preserving every other workspace view.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Fund Operations Control Tower"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` with data_args ⊇ {"fund": "Global Opportunities", "status": "In Review", "period": "QTD"} on tab `pricing` → `missing_widget`
+
+#### `nav_exception_policy_level4`
+
+**level4** · category: single-widget · specification: -
+
+> Pair Fund Operations Control Tower's flagship, open, year-to-date NAV Exceptions with the Apple fundamentals source required by the desk capital-allocation convention. Use Apple's latest available calendar quarter and place both views on Home.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Daloopa/daloopa_company_fundamentals` with data_args ⊇ {"ticker": "AAPL", "period": "2026Q1"} → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` with data_args ⊇ {"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"} → `missing_widget`
+
+#### `nav_exception_policy_level5`
+
+**level5** · category: platform · specification: -
+
+> Create a Pilot Close Policy backend whose Close Policy Exceptions table encodes the desk defaults: flagship book, only open items, and this year. Publish a Close Policy App with the table on an Exceptions tab and leave the instantiated app open. Use a compact definition with no sample rows.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Pilot Close Policy/close_policy_exceptions` with data_args ⊇ {"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"} on tab `exceptions` → `missing_widget`
 
 #### `options_constrained_pair_for_evidence_and_sign_off_history`
 
@@ -7085,7 +7432,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Tool call** ≥1× `get_workspace_prompt` with args ⊇ {"name": "workspace_tool_usage"} must appear in the trace → `missing_tool_call`
 - **Tool result** of `get_workspace_prompt` must contain "schema-before-create workspace tool discipline" (agent must actually retrieve the data) → `missing_tool_result`
 
-### read (20)
+### read (32)
 
 #### `alert_trend`
 
@@ -7174,6 +7521,85 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Tool result** of `get_widget_data` must contain "count" (agent must actually retrieve the data) → `missing_tool_result`
 - **Tool result** of `get_widget_data` must contain "value" (agent must actually retrieve the data) → `missing_tool_result`
 
+#### `earnings_pulse_level0`
+
+**level0** · category: read · specification: -
+
+> Give the Earnings & Estimates Monitor's Upcoming Earnings reading for LLY year to date. Report its exact score and change.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `earnings_pulse_level1`
+
+**level1** · category: read · specification: -
+
+> Locate Upcoming Earnings in the Earnings & Estimates Monitor and read the quarter-to-date AAPL row. Return the exact score and change.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `earnings_pulse_level2`
+
+**level2** · category: read · specification: -
+
+> For Apple's current-quarter earnings watch, find the Upcoming Earnings view in the Earnings & Estimates Monitor and report the exact score and workflow status. Use the view's declared period choices to interpret current quarter.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `earnings_pulse_level3`
+
+**level3** · category: read · specification: -
+
+> Inspect the lived-in Earnings & Estimates Monitor already open in the workspace. Using its configured Upcoming Earnings view, report LLY's exact year-to-date score and status without changing the dashboard.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Earnings & Estimates Monitor"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `earnings_pulse_level4`
+
+**level4** · category: read · specification: -
+
+> Apply the desk earnings-review convention for Apple and report the latest reported quarter's revenue actual and surprise percentage. Follow the convention's evidence source rather than a general market view.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `earnings_pulse_level5`
+
+**level5** · category: platform · specification: -
+
+> Build a small backend named Pilot Earnings Lookup with an Earnings Pulse Lookup table for ticker and calendar-period lookups. Wrap it in an Earnings Pulse App, open the app, read Apple for 2026 Q1, and report the quarter, actual revenue, and surprise percentage. Keep the definition free of sample rows.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Pilot Earnings Lookup/earnings_pulse_lookup` with data_args ⊇ {"ticker": "AAPL", "period": "2026Q1"} on tab `lookup` → `missing_widget`
+
 #### `exec_pair`
 
 **medium** · category: single-widget · specification: - · no-op baseline score: 0.000
@@ -7243,6 +7669,85 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Generated html** ≥1× whose content mentions "risk_exposure_monitor_limits_limit_utilization", "data" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 - **Tool call** ≥1× `get_widget_data` with args ⊇ {"origin": "Bench Stark Enterprise", "widget_id": "risk_exposure_monitor_limits_limit_utilization"} must appear in the trace → `missing_tool_call`
 - **Tool result** of `get_widget_data` must contain "exposure" (agent must actually retrieve the data) → `missing_tool_result`
+
+#### `negative_live_grid_level0`
+
+**level0** · category: read · specification: -
+
+> Read Widget Examples' live-updating grid whose stream is labeled 'ws' for MSFT. State the exact price and change percentage.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `negative_live_grid_level1`
+
+**level1** · category: read · specification: -
+
+> Find the live-updating grid whose stream is labeled 'ws' and whose Microsoft sample is down, not the similarly named rising sample. Report Microsoft's exact price and change percentage.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `negative_live_grid_level2`
+
+**level2** · category: read · specification: -
+
+> For Microsoft, use the declared symbol choices to query the live-updating grid with the short 'ws' stream. Return the exact price and change percentage from the negative sample.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `negative_live_grid_level3`
+
+**level3** · category: read · specification: -
+
+> Examine the Live Grid Staging board already configured in the workspace. The live-updating grid uses the short 'ws' stream; report the exact price and change percentage for its configured Microsoft sample without altering it.
+
+- Initial workspace: dashboard "Live Grid Staging"; 1 tab(s): watch; 1 seeded widget(s): live_grid_example({"symbol": "MSFT"})
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `negative_live_grid_level4`
+
+**level4** · category: read · specification: -
+
+> Use the workspace widget-type convention to select the live-updating grid with stream label 'ws'. For Microsoft, report the exact price and change percentage from its negative sample.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+
+#### `negative_live_grid_level5`
+
+**level5** · category: platform · specification: -
+
+> Author a Pilot Streaming Lookup backend with a Microsoft Stream Lookup table that serves the requested Microsoft sample, using the examples grid's row shape. Wrap it in a Streaming Pulse App, open it, read the lookup, and report the exact price and change percentage. Do not embed sample rows in the widget definition.
+
+- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Pilot Streaming Lookup/msft_stream_lookup` with data_args ⊇ {"symbol": "MSFT"} on tab `stream` → `missing_widget`
 
 #### `order_status`
 
@@ -11895,4 +12400,4 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 ---
 
-Total: 754 tasks.
+Total: 790 tasks.

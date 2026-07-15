@@ -8,16 +8,24 @@ from dataclasses import replace
 
 from workspace_bench.core.graders import grade_task
 from workspace_bench.core.models import JsonDict, RunResult, Task, ToolTraceEvent
+from workspace_bench.workspace.default_setup import apply_workspace_baseline
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
 def grader_mutation_failures(task: Task, oracle: RunResult) -> list[str]:
     """Return rubric dimensions for which an adversarial mutation still passes."""
 
+    fixtures, initial_state = apply_workspace_baseline(
+        task.suite,
+        task.fixtures,
+        task.initial_state,
+        baseline_override=task.workspace_baseline,
+        backends_override=task.workspace_backends,
+    )
     initial_workspace = SimulatedWorkspace()
     initial_workspace.reset(
-        backends=task.fixtures,
-        initial_state=task.initial_state,
+        backends=fixtures,
+        initial_state=initial_state,
         runtime_checks=task.success.runtime,
     )
     initial_snapshot = initial_workspace.snapshot()

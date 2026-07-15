@@ -1,6 +1,6 @@
 # `enterprise-apps-usage` task suite
 
-Tasks: 300
+Tasks: 336
 
 ## Purpose
 
@@ -33,7 +33,7 @@ Family identifies the anchor capability. Each family contains five structural le
 
 ## Live parity eligibility
 
-The default live-origin map now includes `Getting Started` and `Widget Examples` as identity mappings alongside `Bench Stark Enterprise` to `Stark Fund`. As a result, 232/300 tasks are eligible for local-to-live structural parity replay: all 20 tasks in each of `create`, `delete`, `inspect`, `layout`, `navigate`, `note`, `params`, `prompts`, `read`, `skills`, and `update`, plus 12 resource tasks. The remaining 68 tasks use backend/app mutation or delegation tools that the conservative replay intentionally refuses. No live test is part of certification.
+The default live-origin map now includes `Getting Started` and `Widget Examples` as identity mappings alongside `Bench Stark Enterprise` to `Stark Fund`. As a result, 232 of the 300 legacy tasks are eligible for local-to-live structural parity replay: all 20 tasks in each of `create`, `delete`, `inspect`, `layout`, `navigate`, `note`, `params`, `prompts`, `read`, `skills`, and `update`, plus 12 resource tasks. The remaining 68 tasks use backend/app mutation or delegation tools that the conservative replay intentionally refuses. No live test is part of certification.
 
 | Eligibility | Tasks |
 | --- | ---: |

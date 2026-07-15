@@ -14,6 +14,22 @@
     "finance-guidance-tracker",
     "finance-tearsheet"
   ],
-  "content_sha256": "44b67a63fb826f8fc48ec4add31f4f1dab189e3fc376dbc774008c7d4be3a8d7",
-  "description": "Operating the workspace: 15 MCP-surface families and 300 tasks on the default Workspace; difficulty is recorded independently as easy, medium, or hard."
+  "task_defaults": {
+    "eval": {
+      "layout": {
+        "within_grid": true,
+        "no_overlaps": true,
+        "grid_width": 40
+      },
+      "trace_checks": {
+        "max_invalid_tool_calls": 1,
+        "forbid_invented_widget_ids": true
+      },
+      "workspace_checks": {
+        "preserve_other_dashboards": true
+      }
+    }
+  },
+  "content_sha256": "85b5694111554c34f99b3991906b5f3ab1f91bd3be132f5a46127567906edafa",
+  "description": "Operating the workspace: 15 MCP-surface families and 336 tasks on the default Workspace; the read, params, and create families additionally climb a level0-level5 operation ladder on the everything-mounted stark-workspace-a baseline, topped by authoring a custom backend."
 }

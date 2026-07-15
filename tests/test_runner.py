@@ -62,7 +62,11 @@ def test_builtin_tasks_have_terminal_bench_style_metadata() -> None:
         in {"explicit", "partially-specified", "open-brief"}
         for task in tasks
     )
-    assert all(task.difficulty in {"easy", "medium", "hard"} for task in tasks)
+    ladder = {f"level{n}" for n in range(6)}
+    assert all(
+        task.difficulty in {"easy", "medium", "hard"} or task.difficulty in ladder
+        for task in tasks
+    )
     assert all(task.source_path and task.source_path.parent.name == task.family for task in tasks)
 
 
@@ -117,7 +121,7 @@ def test_cli_filters_by_first_class_family(capsys) -> None:
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
-    assert len(payload) == 20
+    assert len(payload) == 32
     assert {task["family"] for task in payload} == {"create"}
 
 
@@ -166,7 +170,7 @@ def test_cli_manifest_resolves_core_suite(capsys) -> None:
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
-    assert payload["task_count"] == 300
+    assert payload["task_count"] == 336
     assert "create" in payload["families"]
     assert payload["task_suite"]["suite_id"] == "enterprise-apps-usage"
     assert len(payload["task_suite"]["content_sha256"]) == 64

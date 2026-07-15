@@ -12,7 +12,7 @@ Motivation: a [NY Tech Week talk](https://youtu.be/7fDTDYh2NJ4?t=1210) showed ag
 Five suites ship bundled in a capability ladder: `smoke` checks one round trip
 per Workspace MCP surface (20 tasks), `enterprise-apps-default` answers the
 default apps' product prompts in two data worlds (138), `enterprise-apps-usage` operates Workspace
-state (300), and `build-openbb-apps` builds and repairs custom apps (236).
+state (336), and `build-openbb-apps` builds and repairs custom apps (236).
 
 ## Contents
 
@@ -37,10 +37,11 @@ state (300), and `build-openbb-apps` builds and repairs custom apps (236).
 
 ## What Is Included
 
-- 754 deterministic simulator tasks across four certified suites:
+- 790 deterministic simulator tasks across four certified suites:
   - `smoke` — 80 tasks: a four-level execution ladder over every Workspace MCP surface
   - `enterprise-apps-default` — 138 tasks pairing 69 byte-verbatim product prompts across two data worlds
-  - `enterprise-apps-usage` — 300 operating tasks across 15 tool-anchored families
+  - `enterprise-apps-usage` — 336 operating tasks across 15 tool-anchored families,
+    including a level0-level5 operation ladder on the everything-mounted workspace
   - `build-openbb-apps` — 236 specification-level app-building tasks across 12 families,
     including 24 long diagnosis/repair/retest incidents
 
@@ -166,7 +167,7 @@ Six models have been run against both suites (pass@1, single fresh
 end-to-end attempt per suite, temperature 0, same grader and turn budget
 for every model — no patched or spliced results).
 
-Core suite (operating the workspace, 300 tasks):
+Core suite (operating the workspace, 336 tasks):
 
 | Model | Strict pass | t0 → t4 pass rate (%) |
 |---|---|---|
@@ -533,7 +534,7 @@ faithfully are refused with a reason. Live runs execute in a real user
 workspace: results are validation evidence for grader fidelity, never board
 numbers.
 
-For `enterprise-apps-usage`, 232/300 tasks are eligible for structural parity
+For `enterprise-apps-usage`, 232 of the 300 legacy operating tasks are eligible for structural parity
 replay. The 68 refused tasks use backend/app mutation or delegation tools that
 the conservative replay does not execute.
 
@@ -754,7 +755,7 @@ scripts/
   audits/                 Local, release, hosted-surface, and prompt audits
 runs/
   reports/                 Compiled reports and generated catalogs/matrices
-    task-catalog.md         All 754 deterministic simulator tasks
+    task-catalog.md         All 790 deterministic simulator tasks
     tool-coverage-matrix.md Per-task x Workspace MCP oracle-tool matrix
     tool-matrix-data.json   Machine-readable data behind the tool matrix
 references/

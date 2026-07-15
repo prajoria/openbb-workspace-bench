@@ -236,7 +236,7 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 137 | `workspace_data_control_center_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
 | 138 | `workspace_data_control_center_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
 
-## enterprise-apps-usage (300 tasks)
+## enterprise-apps-usage (336 tasks)
 
 | # | task | snap | dash | nav_bar | nav | list_w | schema | params | data | create | update | layout | delete | note | read_w | backends | apps | skill | resource | prompt | agents | tools | difficulty |
 |--:|:---------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|--:|:-----------|
@@ -272,274 +272,310 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 30 | `build_exec_build` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   | x | 6 | hard |
 | 31 | `build_risk_build` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   | x | 6 | hard |
 | 32 | `build_vendor_build` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   | x | 6 | hard |
-| 33 | `client_360` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | easy |
-| 34 | `client_note` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   | x | 3 | medium |
-| 35 | `client_pair` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 36 | `client_pair` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | medium |
-| 37 | `client_single` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | easy |
-| 38 | `compliance_pair` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | medium |
-| 39 | `compliance_surveillance_hub` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | easy |
-| 40 | `cross_aapl_macro` | x |   |   |   | x | x | x |   | x |   |   |   | x |   |   |   |   |   |   |   | 6 | hard |
-| 41 | `cross_aapl_rates` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 5 | hard |
-| 42 | `cross_book_inflation` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 5 | hard |
-| 43 | `cross_msft_exposure` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 5 | hard |
-| 44 | `cross_nvda_curve` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 5 | hard |
-| 45 | `cross_nvda_rates` | x |   |   |   | x | x | x |   | x |   |   |   | x |   |   |   |   |   |   |   | 6 | hard |
-| 46 | `cross_portfolio_sector` | x |   |   |   | x | x | x |   | x |   |   |   | x |   |   |   |   |   |   |   | 6 | hard |
-| 47 | `cross_prompt_cross_aapl_rates` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
-| 48 | `cross_prompt_cross_book_cpi` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
-| 49 | `cross_prompt_cross_nvda_holdings` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
-| 50 | `cross_prompt_cross_stark_risk` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
-| 51 | `cross_stark_crypto` | x |   |   |   | x | x | x |   | x |   |   |   | x |   |   |   |   |   |   |   | 6 | hard |
-| 52 | `crossbackend_aapl_vs_rates` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 53 | `crossbackend_book_vs_fed` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 54 | `crossbackend_exposure_cpi` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 55 | `crossbackend_msft_vs_curve` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 56 | `dashboard_aapl_prompt_dashboard` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | medium |
-| 57 | `dashboard_macro_prompt_dashboard` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | medium |
-| 58 | `dashboard_portfolio_prompt_dashboard` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
-| 59 | `dashboard_stark_prompt_dashboard` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
-| 60 | `deduplicate_and_fix_latest_news` | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   |   |   |   | 4 | hard |
-| 61 | `deduplicate_and_fix_macro_timeseries` | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   |   |   |   | 4 | hard |
-| 62 | `deduplicate_and_fix_price_performance` | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   |   |   |   | 4 | hard |
-| 63 | `deduplicate_and_fix_vendor_sla_status` | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   |   |   |   | 4 | hard |
-| 64 | `discover_schema_then_options_for_exposure_summary` | x |   |   |   | x | x | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 5 | medium |
-| 65 | `discover_schema_then_options_for_macro_timeseries` | x |   |   |   | x | x | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 5 | easy |
-| 66 | `discover_schema_then_options_for_price_performance` | x |   |   |   | x | x | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 5 | easy |
-| 67 | `discover_schema_then_options_for_sector_exposure` | x |   |   |   | x | x | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 5 | medium |
-| 68 | `double_aapl_desk` | x |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 69 | `double_nvda_switch` | x |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 70 | `double_rates_switch` | x |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 71 | `double_stark_ops` | x |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 72 | `earnings_estimates_monitor` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | medium |
-| 73 | `earnings_note` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   | x | 3 | medium |
-| 74 | `earnings_pair` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | easy |
-| 75 | `earnings_single` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | easy |
-| 76 | `equity_research_workbench` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | easy |
-| 77 | `equity_three_widget_grid` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | hard |
-| 78 | `estimate_history_nvda` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 4 | easy |
-| 79 | `exec_pair` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 80 | `execution_desk` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | easy |
-| 81 | `executive_investment_dashboard` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | medium |
-| 82 | `expand_client_expansion` |   | x | x | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 4 | medium |
-| 83 | `expand_research_expansion` |   | x | x | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 4 | medium |
-| 84 | `expand_risk_expansion` |   | x | x | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 4 | medium |
-| 85 | `expand_vendor_expansion` |   | x | x | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 4 | medium |
-| 86 | `extend_fund_operations_control_tower` |   |   |   | x | x | x |   |   | x |   |   |   |   |   | x | x |   |   |   |   | 6 | hard |
-| 87 | `extend_portfolio_command_center` |   |   |   | x | x | x |   |   | x |   |   |   |   |   | x | x |   |   |   |   | 6 | medium |
-| 88 | `extend_rebalance_scenario_lab` |   |   |   | x | x | x |   |   | x |   |   |   |   |   | x | x |   |   |   |   | 6 | medium |
-| 89 | `extend_strategy_health_monitor` |   |   |   | x | x | x |   |   | x |   |   |   |   |   | x | x |   |   |   |   | 6 | hard |
-| 90 | `fact_close_aapl` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | easy |
-| 91 | `fact_close_msft` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | easy |
-| 92 | `fact_macro_10y` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 93 | `fact_top_holding` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 94 | `file_finance_comps_under_its_own_tab` | x |   | x | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 5 | medium |
-| 95 | `file_finance_earnings_prep_under_its_own_tab` | x |   | x | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 5 | medium |
-| 96 | `file_finance_guidance_tracker_under_its_own_tab` | x |   | x | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 5 | medium |
-| 97 | `file_finance_tearsheet_under_its_own_tab` | x |   | x | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 5 | medium |
-| 98 | `find_and_fix_misconfigured_estimate_history` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | easy |
-| 99 | `find_and_fix_misconfigured_factor_exposure_table` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | medium |
-| 100 | `find_and_fix_misconfigured_macro_timeseries` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | medium |
-| 101 | `find_and_fix_misconfigured_price_performance` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | easy |
-| 102 | `find_duplicate_drift_by_sleeve` | x |   |   |   |   |   |   |   |   |   |   | x |   | x |   |   |   |   |   |   | 3 | medium |
-| 103 | `find_duplicate_latest_news` | x |   |   |   |   |   |   |   |   |   |   | x |   | x |   |   |   |   |   |   | 3 | medium |
-| 104 | `find_duplicate_macro_timeseries` | x |   |   |   |   |   |   |   |   |   |   | x |   | x |   |   |   |   |   |   | 3 | medium |
-| 105 | `find_duplicate_risk_metrics` | x |   |   |   |   |   |   |   |   |   |   | x |   | x |   |   |   |   |   |   | 3 | medium |
-| 106 | `follow_tool_usage_prompt_for_healthcare_thesis_note` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   | x |   | 5 | medium |
-| 107 | `follow_tool_usage_prompt_for_macro_timeseries` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   | x |   | 5 | easy |
-| 108 | `follow_tool_usage_prompt_for_price_performance` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   | x |   | 5 | easy |
-| 109 | `follow_tool_usage_prompt_for_risk_metrics` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   | x |   | 5 | medium |
-| 110 | `full_client_360` |   |   |   | x |   | x |   |   | x |   |   |   | x |   | x | x |   | x |   |   | 7 | hard |
-| 111 | `full_corporate_access_meeting_notes` |   |   |   | x | x | x |   |   | x |   |   |   | x |   | x | x |   |   |   |   | 7 | hard |
-| 112 | `full_crypto_research_dashboard` |   |   |   | x | x | x |   |   | x |   |   |   | x |   | x | x |   |   |   |   | 7 | hard |
-| 113 | `full_healthcare_research_dashboard` |   |   |   | x | x | x |   |   | x |   |   |   | x |   | x | x |   |   |   |   | 7 | hard |
-| 114 | `full_mnpi_research_review` |   |   |   | x | x | x |   |   | x |   |   |   | x |   | x | x |   |   |   |   | 7 | hard |
-| 115 | `full_portfolio_command_center` |   |   |   | x |   | x |   |   | x |   |   |   | x |   | x | x |   | x |   |   | 7 | hard |
-| 116 | `full_risk_exposure_monitor` |   |   |   | x |   | x |   |   | x |   |   |   | x |   | x | x |   | x |   |   | 7 | hard |
-| 117 | `full_vendor_dataset_monitor` |   |   |   | x |   | x |   |   | x |   |   |   | x |   | x | x |   | x |   |   | 7 | hard |
-| 118 | `grounded_finance_comps_for_nvda` | x |   |   |   | x | x |   | x | x |   |   |   | x |   |   |   | x |   |   |   | 7 | hard |
-| 119 | `grounded_finance_earnings_prep_for_msft` | x |   |   |   | x | x |   | x | x |   |   |   | x |   |   |   | x |   |   |   | 7 | hard |
-| 120 | `grounded_finance_guidance_tracker_for_nvda` | x |   |   |   | x | x |   | x | x |   |   |   | x |   |   |   | x |   |   |   | 7 | hard |
-| 121 | `grounded_finance_tearsheet_for_aapl` | x |   |   |   | x | x |   | x | x |   |   |   | x |   |   |   | x |   |   |   | 7 | hard |
-| 122 | `halve_price_msft` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 123 | `handover` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 2 | easy |
-| 124 | `hub_book_hub` |   | x | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 7 | hard |
-| 125 | `hub_desk_hub` |   | x | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 7 | hard |
-| 126 | `hub_earnings_hub` |   | x | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 7 | hard |
-| 127 | `hub_rates_hub` |   | x | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 7 | hard |
-| 128 | `index_client_360` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | medium |
-| 129 | `index_equity_earnings_review` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | easy |
-| 130 | `index_portfolio_command_center` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | easy |
-| 131 | `index_risk_exposure_monitor` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | medium |
-| 132 | `inspect_and_repair_overlap_disclosure_checklist` | x |   |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   | 3 | hard |
-| 133 | `inspect_and_repair_overlap_holdings_table` | x |   |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   | 3 | hard |
-| 134 | `inspect_and_repair_overlap_macro_timeseries` | x |   |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   | 3 | medium |
-| 135 | `inspect_and_repair_overlap_price_performance` | x |   |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   | 3 | medium |
-| 136 | `inspect_holdings_table` | x |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   | 3 | easy |
-| 137 | `inspect_macro_timeseries` | x |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   | 3 | easy |
-| 138 | `inspect_price_performance` | x |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   | 3 | easy |
-| 139 | `inspect_workflow_overview` | x |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   | 3 | easy |
-| 140 | `instantiate_compliance_surveillance_hub` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   | x |   |   | 3 | medium |
-| 141 | `instantiate_equity_earnings_review` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   | x |   |   | 3 | medium |
-| 142 | `instantiate_execution_desk` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   | x |   |   | 3 | medium |
-| 143 | `instantiate_vendor_dataset_monitor` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   | x |   |   | 3 | medium |
-| 144 | `issuer_conc` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 145 | `latency` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | easy |
-| 146 | `latest_news_aapl` | x |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 147 | `limits` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | easy |
-| 148 | `macro_three_widget_grid` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | hard |
-| 149 | `macro_timeseries_dgs10` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 4 | medium |
-| 150 | `mixed_equity_three_widget_grid` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | hard |
-| 151 | `move_news_right` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 152 | `multi_equities_macro` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | hard |
-| 153 | `multi_equities_portfolio` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | hard |
-| 154 | `multi_portfolio_macro` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | hard |
-| 155 | `multi_stark_portfolio` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | hard |
-| 156 | `note_nav_fees_close_dashboard` |   |   |   | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   | 4 | medium |
-| 157 | `note_quant_research_backtest_lab` |   |   |   | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   | 4 | medium |
-| 158 | `note_reporting_factsheet_studio` |   |   |   | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   | 4 | medium |
-| 159 | `note_stress_liquidity_lab` |   |   |   | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   | 4 | medium |
-| 160 | `ops_note` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   | x | 3 | medium |
-| 161 | `options_constrained_pair_for_evidence_and_sign_off_history` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | hard |
-| 162 | `options_constrained_pair_for_macro_timeseries` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
-| 163 | `options_constrained_pair_for_price_performance` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
-| 164 | `options_constrained_pair_for_sector_exposure` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | hard |
-| 165 | `options_constrained_placement_for_access_and_export_logs` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
-| 166 | `options_constrained_placement_for_macro_timeseries` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
-| 167 | `options_constrained_placement_for_price_performance` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
-| 168 | `options_constrained_placement_for_sector_exposure` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
-| 169 | `order_status` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | easy |
-| 170 | `outage` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 2 | easy |
-| 171 | `pipeline` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | easy |
-| 172 | `place_fundamental_metrics_aapl` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
-| 173 | `place_latest_news_msft` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
-| 174 | `place_macro_timeseries_fedfunds` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
-| 175 | `place_price_performance_nvda` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
-| 176 | `pm_values` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 177 | `portfolio_three_widget_grid` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | hard |
-| 178 | `preserve_estimates_fundamentals_msft` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 179 | `preserve_fundamental_metrics_msft` | x |   |   |   | x | x |   |   | x |   | x |   |   |   |   |   |   |   |   |   | 5 | hard |
-| 180 | `preserve_latest_news_aapl` | x |   |   |   | x | x |   |   | x |   | x |   |   |   |   |   |   |   |   |   | 5 | medium |
-| 181 | `preserve_macro_pair` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | medium |
-| 182 | `preserve_portfolio_pair` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | medium |
-| 183 | `preserve_price_news_aapl` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 184 | `preserve_risk_metrics_plain` | x |   |   |   | x | x |   |   | x |   | x |   |   |   |   |   |   |   |   |   | 5 | hard |
-| 185 | `preserve_yield_curve_plain` | x |   |   |   | x | x |   |   | x |   | x |   |   |   |   |   |   |   |   |   | 5 | medium |
-| 186 | `price_performance_aapl` | x |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 187 | `price_performance_msft` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 4 | easy |
-| 188 | `quant_values` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 189 | `read_the_finance_comps_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 3 | easy |
-| 190 | `read_the_finance_earnings_prep_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 3 | easy |
-| 191 | `read_the_finance_guidance_tracker_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 3 | easy |
-| 192 | `read_the_finance_tearsheet_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 3 | easy |
-| 193 | `refresh_backend_before_building_holdings_table` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | hard |
-| 194 | `refresh_backend_before_building_macro_timeseries` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | medium |
-| 195 | `refresh_backend_before_building_post_earnings_checklist` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | hard |
-| 196 | `refresh_backend_before_building_price_performance` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | medium |
-| 197 | `register_backend_and_add_holdings_table` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 198 | `register_backend_and_add_macro_timeseries` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
-| 199 | `register_backend_and_add_post_earnings_checklist` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 200 | `register_backend_and_add_price_performance` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
-| 201 | `register_two_backends_fundamental_metrics_and_holdings_table` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | medium |
-| 202 | `register_two_backends_latest_news_and_yield_curve` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | medium |
-| 203 | `register_two_backends_ownership_snapshot_and_risk_metrics` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | medium |
-| 204 | `register_two_backends_sector_exposure_and_macro_timeseries` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | medium |
-| 205 | `reminder` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 2 | easy |
-| 206 | `remove_duplicate_estimate_history_and_document` | x |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   |   | 3 | medium |
-| 207 | `remove_duplicate_fundamental_metrics_and_document` | x |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   |   | 3 | medium |
-| 208 | `remove_duplicate_latest_news` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | easy |
-| 209 | `remove_duplicate_live_orders_and_document` | x |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   |   | 3 | hard |
-| 210 | `remove_duplicate_macro_timeseries` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | medium |
-| 211 | `remove_duplicate_price_performance` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | easy |
-| 212 | `remove_duplicate_sector_exposure_and_document` | x |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   |   | 3 | hard |
-| 213 | `remove_duplicate_vendor_sla_status` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | medium |
-| 214 | `remove_latest_news` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | easy |
-| 215 | `remove_macro_timeseries` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | easy |
-| 216 | `remove_price_performance` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | easy |
-| 217 | `remove_top_alerts` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | easy |
-| 218 | `rename_both_client_review` |   | x | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 219 | `rename_both_earnings_week` |   | x | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
-| 220 | `rename_both_ops_close` |   | x | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 221 | `rename_both_pm_morning` |   | x | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
-| 222 | `rename_compliance_day` |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
-| 223 | `rename_equity_desk` |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
-| 224 | `rename_execution_open` |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
-| 225 | `rename_macro_watch` |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
-| 226 | `repair_aapl_price_news_overlap` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | medium |
-| 227 | `repair_macro_overlap` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | hard |
-| 228 | `repair_msft_estimates_overlap` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | medium |
-| 229 | `repair_news_msft_aapl` | x |   |   |   |   |   |   |   |   | x |   |   | x | x |   |   |   |   |   |   | 4 | medium |
-| 230 | `repair_portfolio_overlap` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | hard |
-| 231 | `repair_risk_portfolio` | x |   |   |   |   |   |   |   |   | x |   |   | x | x |   |   |   |   |   |   | 4 | hard |
-| 232 | `repair_series_fedfunds_cpi` | x |   |   |   |   |   |   |   |   | x |   |   | x | x |   |   |   |   |   |   | 4 | hard |
-| 233 | `repair_ticker_nvda_msft` | x |   |   |   |   |   |   |   |   | x |   |   | x | x |   |   |   |   |   |   | 4 | medium |
-| 234 | `risk_exposure_monitor` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | easy |
-| 235 | `risk_metrics_plain` | x |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 236 | `risk_note` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   | x | 3 | medium |
-| 237 | `risk_pair` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 238 | `risk_pair` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | easy |
-| 239 | `risk_single` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | easy |
-| 240 | `risk_values` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 241 | `sector_exposure_plain` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 4 | medium |
-| 242 | `session_context_grounding_note` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | x |   | 3 | easy |
-| 243 | `session_context_grounding_review` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | x |   | 3 | easy |
-| 244 | `session_prompt_ops_slippage` |   |   | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 7 | medium |
-| 245 | `session_tab_estimates_estimate_history` |   |   | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 7 | medium |
-| 246 | `session_tab_exposure_sector_exposure` |   |   | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 7 | medium |
-| 247 | `session_tab_rates_yield_curve` |   |   | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 7 | medium |
-| 248 | `set_latest_news_symbol_to_msft` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 249 | `set_macro_timeseries_series_to_dgs10` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 250 | `set_portfolio_snapshot_period_to_mtd` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 251 | `set_price_performance_symbol_to_aapl` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 252 | `shorten_estimates_nvda` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 253 | `similar_estimate_history_msft` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | medium |
-| 254 | `similar_latest_news_nvda` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | medium |
-| 255 | `similar_macro_timeseries_dgs10` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | medium |
-| 256 | `similar_price_performance_aapl` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | medium |
-| 257 | `skill_build_finance_comps` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   | x |   |   | 6 | hard |
-| 258 | `skill_build_finance_earnings_prep` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   | x |   |   | 6 | medium |
-| 259 | `skill_build_finance_guidance_tracker` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   | x |   |   | 6 | hard |
-| 260 | `skill_build_finance_tearsheet` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   | x |   |   | 6 | medium |
-| 261 | `skill_comps_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   | x | 4 | hard |
-| 262 | `skill_earnings_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   | x | 4 | medium |
-| 263 | `skill_finance_comps` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | easy |
-| 264 | `skill_finance_earnings_prep` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | easy |
-| 265 | `skill_finance_guidance_tracker` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | easy |
-| 266 | `skill_finance_tearsheet` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | easy |
-| 267 | `skill_guidance_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   | x | 4 | hard |
-| 268 | `skill_tearsheet_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   | x | 4 | medium |
-| 269 | `sla_metrics` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 270 | `standup` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 2 | easy |
-| 271 | `strategy_health` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 272 | `stress_values` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 273 | `synthesis_aapl_msft_closes` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 274 | `synthesis_fed_vs_10y` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 275 | `synthesis_holdings_beta` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 276 | `synthesis_nvda_close_eps` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 277 | `tool_usage_schema_note` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | x |   | 3 | easy |
-| 278 | `tool_usage_schema_summary` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | x |   | 3 | easy |
-| 279 | `twofacts_estimates_aapl` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 280 | `twofacts_estimates_msft` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 281 | `twofacts_fundamentals_aapl` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 282 | `twofacts_fundamentals_nvda` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 283 | `update_estimate_history_aapl_to_nvda` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | easy |
-| 284 | `update_fundamental_metrics_msft_to_nvda` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | easy |
-| 285 | `update_macro_timeseries_cpiaucsl_to_fedfunds` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | medium |
-| 286 | `update_only_the_dgs2_macro_timeseries` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | medium |
-| 287 | `update_only_the_factset_vendor_sla_status` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | medium |
-| 288 | `update_only_the_msft_price_performance` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | medium |
-| 289 | `update_only_the_nvda_latest_news` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | medium |
-| 290 | `update_rejected_orders_desk_to_credit` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | medium |
-| 291 | `use_client_options_for_relationship_metrics` | x |   |   |   |   |   | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 3 | easy |
-| 292 | `use_sector_options_for_sector_exposure` | x |   |   |   |   |   | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 3 | easy |
-| 293 | `use_series_options_for_macro_timeseries` | x |   |   |   |   |   | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 3 | easy |
-| 294 | `use_symbol_options_for_price_performance` | x |   |   |   |   |   | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 3 | easy |
-| 295 | `var_trend` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
-| 296 | `vendor_dataset_monitor` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | easy |
-| 297 | `vendor_pair` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
-| 298 | `vendor_single` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | easy |
-| 299 | `widen_fundamentals_aapl` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | easy |
-| 300 | `yield_curve_plain` | x |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 33 | `capability_card_view_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 34 | `capability_card_view_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 35 | `capability_card_view_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 36 | `capability_card_view_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 37 | `capability_card_view_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 38 | `capability_card_view_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
+| 39 | `client_360` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | easy |
+| 40 | `client_note` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   | x | 3 | medium |
+| 41 | `client_pair` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 42 | `client_pair` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | medium |
+| 43 | `client_single` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | easy |
+| 44 | `compliance_pair` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | medium |
+| 45 | `compliance_surveillance_hub` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | easy |
+| 46 | `cross_aapl_macro` | x |   |   |   | x | x | x |   | x |   |   |   | x |   |   |   |   |   |   |   | 6 | hard |
+| 47 | `cross_aapl_rates` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 5 | hard |
+| 48 | `cross_book_inflation` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 5 | hard |
+| 49 | `cross_msft_exposure` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 5 | hard |
+| 50 | `cross_nvda_curve` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 5 | hard |
+| 51 | `cross_nvda_rates` | x |   |   |   | x | x | x |   | x |   |   |   | x |   |   |   |   |   |   |   | 6 | hard |
+| 52 | `cross_portfolio_sector` | x |   |   |   | x | x | x |   | x |   |   |   | x |   |   |   |   |   |   |   | 6 | hard |
+| 53 | `cross_prompt_cross_aapl_rates` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
+| 54 | `cross_prompt_cross_book_cpi` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
+| 55 | `cross_prompt_cross_nvda_holdings` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
+| 56 | `cross_prompt_cross_stark_risk` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
+| 57 | `cross_stark_crypto` | x |   |   |   | x | x | x |   | x |   |   |   | x |   |   |   |   |   |   |   | 6 | hard |
+| 58 | `crossbackend_aapl_vs_rates` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 59 | `crossbackend_book_vs_fed` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 60 | `crossbackend_exposure_cpi` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 61 | `crossbackend_msft_vs_curve` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 62 | `dashboard_aapl_prompt_dashboard` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | medium |
+| 63 | `dashboard_macro_prompt_dashboard` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | medium |
+| 64 | `dashboard_portfolio_prompt_dashboard` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
+| 65 | `dashboard_stark_prompt_dashboard` |   | x |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 6 | hard |
+| 66 | `deduplicate_and_fix_latest_news` | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   |   |   |   | 4 | hard |
+| 67 | `deduplicate_and_fix_macro_timeseries` | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   |   |   |   | 4 | hard |
+| 68 | `deduplicate_and_fix_price_performance` | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   |   |   |   | 4 | hard |
+| 69 | `deduplicate_and_fix_vendor_sla_status` | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   |   |   |   | 4 | hard |
+| 70 | `discover_schema_then_options_for_exposure_summary` | x |   |   |   | x | x | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 5 | medium |
+| 71 | `discover_schema_then_options_for_macro_timeseries` | x |   |   |   | x | x | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 5 | easy |
+| 72 | `discover_schema_then_options_for_price_performance` | x |   |   |   | x | x | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 5 | easy |
+| 73 | `discover_schema_then_options_for_sector_exposure` | x |   |   |   | x | x | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 5 | medium |
+| 74 | `double_aapl_desk` | x |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 75 | `double_nvda_switch` | x |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 76 | `double_rates_switch` | x |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 77 | `double_stark_ops` | x |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 78 | `earnings_estimates_monitor` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | medium |
+| 79 | `earnings_note` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   | x | 3 | medium |
+| 80 | `earnings_pair` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | easy |
+| 81 | `earnings_pulse_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 82 | `earnings_pulse_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 83 | `earnings_pulse_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 84 | `earnings_pulse_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 85 | `earnings_pulse_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 86 | `earnings_pulse_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
+| 87 | `earnings_single` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | easy |
+| 88 | `equity_research_workbench` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | easy |
+| 89 | `equity_three_widget_grid` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | hard |
+| 90 | `estimate_history_nvda` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 4 | easy |
+| 91 | `exec_pair` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 92 | `execution_desk` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | easy |
+| 93 | `executive_investment_dashboard` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | medium |
+| 94 | `expand_client_expansion` |   | x | x | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 4 | medium |
+| 95 | `expand_research_expansion` |   | x | x | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 4 | medium |
+| 96 | `expand_risk_expansion` |   | x | x | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 4 | medium |
+| 97 | `expand_vendor_expansion` |   | x | x | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 4 | medium |
+| 98 | `extend_fund_operations_control_tower` |   |   |   | x | x | x |   |   | x |   |   |   |   |   | x | x |   |   |   |   | 6 | hard |
+| 99 | `extend_portfolio_command_center` |   |   |   | x | x | x |   |   | x |   |   |   |   |   | x | x |   |   |   |   | 6 | medium |
+| 100 | `extend_rebalance_scenario_lab` |   |   |   | x | x | x |   |   | x |   |   |   |   |   | x | x |   |   |   |   | 6 | medium |
+| 101 | `extend_strategy_health_monitor` |   |   |   | x | x | x |   |   | x |   |   |   |   |   | x | x |   |   |   |   | 6 | hard |
+| 102 | `fact_close_aapl` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | easy |
+| 103 | `fact_close_msft` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | easy |
+| 104 | `fact_macro_10y` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 105 | `fact_top_holding` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 106 | `file_finance_comps_under_its_own_tab` | x |   | x | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 5 | medium |
+| 107 | `file_finance_earnings_prep_under_its_own_tab` | x |   | x | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 5 | medium |
+| 108 | `file_finance_guidance_tracker_under_its_own_tab` | x |   | x | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 5 | medium |
+| 109 | `file_finance_tearsheet_under_its_own_tab` | x |   | x | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 5 | medium |
+| 110 | `find_and_fix_misconfigured_estimate_history` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | easy |
+| 111 | `find_and_fix_misconfigured_factor_exposure_table` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | medium |
+| 112 | `find_and_fix_misconfigured_macro_timeseries` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | medium |
+| 113 | `find_and_fix_misconfigured_price_performance` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | easy |
+| 114 | `find_duplicate_drift_by_sleeve` | x |   |   |   |   |   |   |   |   |   |   | x |   | x |   |   |   |   |   |   | 3 | medium |
+| 115 | `find_duplicate_latest_news` | x |   |   |   |   |   |   |   |   |   |   | x |   | x |   |   |   |   |   |   | 3 | medium |
+| 116 | `find_duplicate_macro_timeseries` | x |   |   |   |   |   |   |   |   |   |   | x |   | x |   |   |   |   |   |   | 3 | medium |
+| 117 | `find_duplicate_risk_metrics` | x |   |   |   |   |   |   |   |   |   |   | x |   | x |   |   |   |   |   |   | 3 | medium |
+| 118 | `follow_tool_usage_prompt_for_healthcare_thesis_note` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   | x |   | 5 | medium |
+| 119 | `follow_tool_usage_prompt_for_macro_timeseries` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   | x |   | 5 | easy |
+| 120 | `follow_tool_usage_prompt_for_price_performance` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   | x |   | 5 | easy |
+| 121 | `follow_tool_usage_prompt_for_risk_metrics` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   | x |   | 5 | medium |
+| 122 | `full_client_360` |   |   |   | x |   | x |   |   | x |   |   |   | x |   | x | x |   | x |   |   | 7 | hard |
+| 123 | `full_corporate_access_meeting_notes` |   |   |   | x | x | x |   |   | x |   |   |   | x |   | x | x |   |   |   |   | 7 | hard |
+| 124 | `full_crypto_research_dashboard` |   |   |   | x | x | x |   |   | x |   |   |   | x |   | x | x |   |   |   |   | 7 | hard |
+| 125 | `full_healthcare_research_dashboard` |   |   |   | x | x | x |   |   | x |   |   |   | x |   | x | x |   |   |   |   | 7 | hard |
+| 126 | `full_mnpi_research_review` |   |   |   | x | x | x |   |   | x |   |   |   | x |   | x | x |   |   |   |   | 7 | hard |
+| 127 | `full_portfolio_command_center` |   |   |   | x |   | x |   |   | x |   |   |   | x |   | x | x |   | x |   |   | 7 | hard |
+| 128 | `full_risk_exposure_monitor` |   |   |   | x |   | x |   |   | x |   |   |   | x |   | x | x |   | x |   |   | 7 | hard |
+| 129 | `full_vendor_dataset_monitor` |   |   |   | x |   | x |   |   | x |   |   |   | x |   | x | x |   | x |   |   | 7 | hard |
+| 130 | `grounded_finance_comps_for_nvda` | x |   |   |   | x | x |   | x | x |   |   |   | x |   |   |   | x |   |   |   | 7 | hard |
+| 131 | `grounded_finance_earnings_prep_for_msft` | x |   |   |   | x | x |   | x | x |   |   |   | x |   |   |   | x |   |   |   | 7 | hard |
+| 132 | `grounded_finance_guidance_tracker_for_nvda` | x |   |   |   | x | x |   | x | x |   |   |   | x |   |   |   | x |   |   |   | 7 | hard |
+| 133 | `grounded_finance_tearsheet_for_aapl` | x |   |   |   | x | x |   | x | x |   |   |   | x |   |   |   | x |   |   |   | 7 | hard |
+| 134 | `halve_price_msft` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 135 | `handover` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 2 | easy |
+| 136 | `hub_book_hub` |   | x | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 7 | hard |
+| 137 | `hub_desk_hub` |   | x | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 7 | hard |
+| 138 | `hub_earnings_hub` |   | x | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 7 | hard |
+| 139 | `hub_rates_hub` |   | x | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   |   |   | 7 | hard |
+| 140 | `index_client_360` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | medium |
+| 141 | `index_equity_earnings_review` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | easy |
+| 142 | `index_portfolio_command_center` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | easy |
+| 143 | `index_risk_exposure_monitor` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | medium |
+| 144 | `inspect_and_repair_overlap_disclosure_checklist` | x |   |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   | 3 | hard |
+| 145 | `inspect_and_repair_overlap_holdings_table` | x |   |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   | 3 | hard |
+| 146 | `inspect_and_repair_overlap_macro_timeseries` | x |   |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   | 3 | medium |
+| 147 | `inspect_and_repair_overlap_price_performance` | x |   |   |   |   |   |   |   |   |   | x |   |   | x |   |   |   |   |   |   | 3 | medium |
+| 148 | `inspect_holdings_table` | x |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   | 3 | easy |
+| 149 | `inspect_macro_timeseries` | x |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   | 3 | easy |
+| 150 | `inspect_price_performance` | x |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   | 3 | easy |
+| 151 | `inspect_workflow_overview` | x |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   | 3 | easy |
+| 152 | `instantiate_compliance_surveillance_hub` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   | x |   |   | 3 | medium |
+| 153 | `instantiate_equity_earnings_review` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   | x |   |   | 3 | medium |
+| 154 | `instantiate_execution_desk` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   | x |   |   | 3 | medium |
+| 155 | `instantiate_vendor_dataset_monitor` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   | x |   |   | 3 | medium |
+| 156 | `issuer_conc` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 157 | `latency` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | easy |
+| 158 | `latest_news_aapl` | x |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 159 | `limits` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | easy |
+| 160 | `macro_three_widget_grid` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | hard |
+| 161 | `macro_timeseries_dgs10` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 4 | medium |
+| 162 | `manufacturer_compare_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 163 | `manufacturer_compare_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 164 | `manufacturer_compare_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 165 | `manufacturer_compare_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 166 | `manufacturer_compare_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 167 | `manufacturer_compare_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
+| 168 | `mixed_equity_three_widget_grid` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | hard |
+| 169 | `move_news_right` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 170 | `multi_equities_macro` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | hard |
+| 171 | `multi_equities_portfolio` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | hard |
+| 172 | `multi_portfolio_macro` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | hard |
+| 173 | `multi_stark_portfolio` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | hard |
+| 174 | `nav_exception_policy_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 175 | `nav_exception_policy_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 176 | `nav_exception_policy_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 177 | `nav_exception_policy_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 178 | `nav_exception_policy_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 179 | `nav_exception_policy_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
+| 180 | `negative_live_grid_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 181 | `negative_live_grid_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 182 | `negative_live_grid_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 183 | `negative_live_grid_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 184 | `negative_live_grid_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 185 | `negative_live_grid_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
+| 186 | `note_nav_fees_close_dashboard` |   |   |   | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   | 4 | medium |
+| 187 | `note_quant_research_backtest_lab` |   |   |   | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   | 4 | medium |
+| 188 | `note_reporting_factsheet_studio` |   |   |   | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   | 4 | medium |
+| 189 | `note_stress_liquidity_lab` |   |   |   | x |   |   |   |   |   |   |   |   | x |   | x | x |   |   |   |   | 4 | medium |
+| 190 | `ops_note` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   | x | 3 | medium |
+| 191 | `options_constrained_pair_for_evidence_and_sign_off_history` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | hard |
+| 192 | `options_constrained_pair_for_macro_timeseries` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
+| 193 | `options_constrained_pair_for_price_performance` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
+| 194 | `options_constrained_pair_for_sector_exposure` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | hard |
+| 195 | `options_constrained_placement_for_access_and_export_logs` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
+| 196 | `options_constrained_placement_for_macro_timeseries` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
+| 197 | `options_constrained_placement_for_price_performance` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
+| 198 | `options_constrained_placement_for_sector_exposure` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
+| 199 | `order_status` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | easy |
+| 200 | `outage` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 2 | easy |
+| 201 | `pipeline` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | easy |
+| 202 | `place_fundamental_metrics_aapl` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
+| 203 | `place_latest_news_msft` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
+| 204 | `place_macro_timeseries_fedfunds` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
+| 205 | `place_price_performance_nvda` | x |   |   |   | x | x | x |   | x |   | x |   |   |   |   |   |   |   |   |   | 6 | medium |
+| 206 | `pm_research_view_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 207 | `pm_research_view_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 208 | `pm_research_view_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 209 | `pm_research_view_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 210 | `pm_research_view_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 211 | `pm_research_view_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
+| 212 | `pm_values` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 213 | `portfolio_three_widget_grid` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | hard |
+| 214 | `preserve_estimates_fundamentals_msft` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 215 | `preserve_fundamental_metrics_msft` | x |   |   |   | x | x |   |   | x |   | x |   |   |   |   |   |   |   |   |   | 5 | hard |
+| 216 | `preserve_latest_news_aapl` | x |   |   |   | x | x |   |   | x |   | x |   |   |   |   |   |   |   |   |   | 5 | medium |
+| 217 | `preserve_macro_pair` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 218 | `preserve_portfolio_pair` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 219 | `preserve_price_news_aapl` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 220 | `preserve_risk_metrics_plain` | x |   |   |   | x | x |   |   | x |   | x |   |   |   |   |   |   |   |   |   | 5 | hard |
+| 221 | `preserve_yield_curve_plain` | x |   |   |   | x | x |   |   | x |   | x |   |   |   |   |   |   |   |   |   | 5 | medium |
+| 222 | `price_performance_aapl` | x |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 223 | `price_performance_msft` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 4 | easy |
+| 224 | `quant_values` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 225 | `read_the_finance_comps_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 3 | easy |
+| 226 | `read_the_finance_earnings_prep_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 3 | easy |
+| 227 | `read_the_finance_guidance_tracker_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 3 | easy |
+| 228 | `read_the_finance_tearsheet_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   | 3 | easy |
+| 229 | `refresh_backend_before_building_holdings_table` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | hard |
+| 230 | `refresh_backend_before_building_macro_timeseries` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | medium |
+| 231 | `refresh_backend_before_building_post_earnings_checklist` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | hard |
+| 232 | `refresh_backend_before_building_price_performance` | x |   |   |   | x | x |   |   | x |   |   |   | x |   | x |   |   |   |   |   | 6 | medium |
+| 233 | `register_backend_and_add_holdings_table` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
+| 234 | `register_backend_and_add_macro_timeseries` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 235 | `register_backend_and_add_post_earnings_checklist` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
+| 236 | `register_backend_and_add_price_performance` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
+| 237 | `register_two_backends_fundamental_metrics_and_holdings_table` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | medium |
+| 238 | `register_two_backends_latest_news_and_yield_curve` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | medium |
+| 239 | `register_two_backends_ownership_snapshot_and_risk_metrics` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | medium |
+| 240 | `register_two_backends_sector_exposure_and_macro_timeseries` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | medium |
+| 241 | `reminder` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 2 | easy |
+| 242 | `remove_duplicate_estimate_history_and_document` | x |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   |   | 3 | medium |
+| 243 | `remove_duplicate_fundamental_metrics_and_document` | x |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   |   | 3 | medium |
+| 244 | `remove_duplicate_latest_news` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | easy |
+| 245 | `remove_duplicate_live_orders_and_document` | x |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   |   | 3 | hard |
+| 246 | `remove_duplicate_macro_timeseries` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | medium |
+| 247 | `remove_duplicate_price_performance` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | easy |
+| 248 | `remove_duplicate_sector_exposure_and_document` | x |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   |   |   |   | 3 | hard |
+| 249 | `remove_duplicate_vendor_sla_status` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | medium |
+| 250 | `remove_latest_news` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | easy |
+| 251 | `remove_macro_timeseries` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | easy |
+| 252 | `remove_price_performance` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | easy |
+| 253 | `remove_top_alerts` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | easy |
+| 254 | `rename_both_client_review` |   | x | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 255 | `rename_both_earnings_week` |   | x | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 256 | `rename_both_ops_close` |   | x | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 257 | `rename_both_pm_morning` |   | x | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 258 | `rename_compliance_day` |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
+| 259 | `rename_equity_desk` |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
+| 260 | `rename_execution_open` |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
+| 261 | `rename_macro_watch` |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 1 | easy |
+| 262 | `repair_aapl_price_news_overlap` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 263 | `repair_macro_overlap` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | hard |
+| 264 | `repair_msft_estimates_overlap` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 265 | `repair_news_msft_aapl` | x |   |   |   |   |   |   |   |   | x |   |   | x | x |   |   |   |   |   |   | 4 | medium |
+| 266 | `repair_portfolio_overlap` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | hard |
+| 267 | `repair_risk_portfolio` | x |   |   |   |   |   |   |   |   | x |   |   | x | x |   |   |   |   |   |   | 4 | hard |
+| 268 | `repair_series_fedfunds_cpi` | x |   |   |   |   |   |   |   |   | x |   |   | x | x |   |   |   |   |   |   | 4 | hard |
+| 269 | `repair_ticker_nvda_msft` | x |   |   |   |   |   |   |   |   | x |   |   | x | x |   |   |   |   |   |   | 4 | medium |
+| 270 | `risk_exposure_monitor` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | easy |
+| 271 | `risk_metrics_plain` | x |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 272 | `risk_note` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   | x | 3 | medium |
+| 273 | `risk_pair` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 274 | `risk_pair` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | easy |
+| 275 | `risk_single` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | easy |
+| 276 | `risk_values` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 277 | `sector_exposure_plain` | x |   |   |   | x | x |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 4 | medium |
+| 278 | `session_context_grounding_note` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | x |   | 3 | easy |
+| 279 | `session_context_grounding_review` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | x |   | 3 | easy |
+| 280 | `session_prompt_ops_slippage` |   |   | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 7 | medium |
+| 281 | `session_tab_estimates_estimate_history` |   |   | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 7 | medium |
+| 282 | `session_tab_exposure_sector_exposure` |   |   | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 7 | medium |
+| 283 | `session_tab_rates_yield_curve` |   |   | x | x | x | x |   |   | x |   |   |   | x |   |   |   |   |   | x |   | 7 | medium |
+| 284 | `set_latest_news_symbol_to_msft` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 285 | `set_macro_timeseries_series_to_dgs10` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 286 | `set_portfolio_snapshot_period_to_mtd` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 287 | `set_price_performance_symbol_to_aapl` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 288 | `shorten_estimates_nvda` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 289 | `similar_estimate_history_msft` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | medium |
+| 290 | `similar_latest_news_nvda` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | medium |
+| 291 | `similar_macro_timeseries_dgs10` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | medium |
+| 292 | `similar_price_performance_aapl` | x |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   | 2 | medium |
+| 293 | `skill_build_finance_comps` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   | x |   |   | 6 | hard |
+| 294 | `skill_build_finance_earnings_prep` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   | x |   |   | 6 | medium |
+| 295 | `skill_build_finance_guidance_tracker` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   | x |   |   | 6 | hard |
+| 296 | `skill_build_finance_tearsheet` | x |   |   |   | x | x |   |   | x |   |   |   | x |   |   |   |   | x |   |   | 6 | medium |
+| 297 | `skill_comps_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   | x | 4 | hard |
+| 298 | `skill_earnings_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   | x | 4 | medium |
+| 299 | `skill_finance_comps` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | easy |
+| 300 | `skill_finance_earnings_prep` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | easy |
+| 301 | `skill_finance_guidance_tracker` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | easy |
+| 302 | `skill_finance_tearsheet` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   | x |   |   | 3 | easy |
+| 303 | `skill_guidance_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   | x | 4 | hard |
+| 304 | `skill_tearsheet_skill` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   | x | 4 | medium |
+| 305 | `sla_metrics` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 306 | `standup` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   | 2 | easy |
+| 307 | `strategy_health` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 308 | `stress_values` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 309 | `synthesis_aapl_msft_closes` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 310 | `synthesis_fed_vs_10y` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 311 | `synthesis_holdings_beta` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 312 | `synthesis_nvda_close_eps` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 313 | `tool_usage_schema_note` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | x |   | 3 | easy |
+| 314 | `tool_usage_schema_summary` | x |   |   |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   | x |   | 3 | easy |
+| 315 | `twofacts_estimates_aapl` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 316 | `twofacts_estimates_msft` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 317 | `twofacts_fundamentals_aapl` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 318 | `twofacts_fundamentals_nvda` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 319 | `update_estimate_history_aapl_to_nvda` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | easy |
+| 320 | `update_fundamental_metrics_msft_to_nvda` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | easy |
+| 321 | `update_macro_timeseries_cpiaucsl_to_fedfunds` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | medium |
+| 322 | `update_only_the_dgs2_macro_timeseries` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 323 | `update_only_the_factset_vendor_sla_status` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 324 | `update_only_the_msft_price_performance` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 325 | `update_only_the_nvda_latest_news` | x |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   | 2 | medium |
+| 326 | `update_rejected_orders_desk_to_credit` | x |   |   |   |   |   |   |   |   | x |   |   |   | x |   |   |   |   |   |   | 3 | medium |
+| 327 | `use_client_options_for_relationship_metrics` | x |   |   |   |   |   | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 3 | easy |
+| 328 | `use_sector_options_for_sector_exposure` | x |   |   |   |   |   | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 3 | easy |
+| 329 | `use_series_options_for_macro_timeseries` | x |   |   |   |   |   | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 3 | easy |
+| 330 | `use_symbol_options_for_price_performance` | x |   |   |   |   |   | x |   | x |   |   |   |   |   |   |   |   |   |   |   | 3 | easy |
+| 331 | `var_trend` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | medium |
+| 332 | `vendor_dataset_monitor` |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 2 | easy |
+| 333 | `vendor_pair` | x |   |   |   |   |   |   | x |   |   |   |   | x |   |   |   |   |   |   |   | 3 | hard |
+| 334 | `vendor_single` | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x | 2 | easy |
+| 335 | `widen_fundamentals_aapl` | x |   |   |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   | 2 | easy |
+| 336 | `yield_curve_plain` | x |   |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   | 2 | easy |
 
 ## build-openbb-apps (236 tasks)
 

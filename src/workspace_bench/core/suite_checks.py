@@ -283,8 +283,13 @@ def _authored_task_payload(task: Task) -> JsonDict | None:
 
 def core_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> dict[str, bool]:
     total = len(tasks)
+    # The read/params/create families additionally carry the level0-level5
+    # operation-ladder tasks; band quotas apply to the banded subset only.
+    banded = [task for task in tasks if not task.difficulty.startswith("level")]
+    ladder = [task for task in tasks if task.difficulty.startswith("level")]
+    banded_total = len(banded)
     categories = Counter(task.category for task in tasks)
-    difficulties = Counter(task.difficulty for task in tasks)
+    difficulties = Counter(task.difficulty for task in banded)
     backends = Counter(backend for task in tasks for backend in _task_backend_slugs(task))
     widget_pairs = {
         (required.origin, required.widget_id)
@@ -294,26 +299,40 @@ def core_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> d
     }
     checks = _core_check_type_counts(tasks)
     fingerprints = [_task_fingerprint(task) for task in tasks]
+    ladder_families = {"read", "params", "create"}
+    expected = {
+        family: (32 if family in ladder_families else 20) for family in CORE_FAMILIES
+    }
     return {
         **_universal_release_checks(tasks, max_duplicate_prompts=2, max_prompt_words=350),
-        **_family_count_checks(
-            tasks,
-            expected={family: 20 for family in CORE_FAMILIES},
-        ),
+        **_family_count_checks(tasks, expected=expected),
         "grader_mutation_sensitive": _mutation_suite_passes(tasks, oracle_results),
         "runtime_all_backend_tasks": all(
             task.success.runtime is not None for task in tasks if task.family == "backends"
         ),
         "task_count_at_least_300": total >= 300,
+        "ladder_cells_complete": (
+            len(ladder) == 36
+            and all(
+                sum(
+                    1
+                    for task in ladder
+                    if task.family == family and task.difficulty == f"level{level}"
+                )
+                == 2
+                for family in ladder_families
+                for level in range(6)
+            )
+        ),
         "fingerprint_unique": len(set(fingerprints)) == total,
         "quota_dashboard_construction": categories["dashboard"] >= total * 0.15,
-        "quota_backend_getting_started": backends["getting-started"] >= total * 0.15,
-        "quota_backend_widget_examples": backends["widget-examples"] >= total * 0.15,
-        "quota_backend_stark_enterprise": backends["stark-enterprise"] >= total * 0.15,
+        "quota_backend_getting_started": backends["getting-started"] >= banded_total * 0.15,
+        "quota_backend_widget_examples": backends["widget-examples"] >= banded_total * 0.15,
+        "quota_backend_stark_enterprise": backends["stark-enterprise"] >= banded_total * 0.15,
         "quota_difficulty_bands": (
-            abs(difficulties["easy"] - total * 0.30) <= total * 0.05
-            and abs(difficulties["medium"] - total * 0.40) <= total * 0.05
-            and abs(difficulties["hard"] - total * 0.30) <= total * 0.05
+            abs(difficulties["easy"] - banded_total * 0.30) <= banded_total * 0.05
+            and abs(difficulties["medium"] - banded_total * 0.40) <= banded_total * 0.05
+            and abs(difficulties["hard"] - banded_total * 0.30) <= banded_total * 0.05
         ),
         "quota_required_widget_pairs": len(widget_pairs) >= 120,
         "quota_grader_check_types": bool(checks) and all(count >= 10 for count in checks.values()),
