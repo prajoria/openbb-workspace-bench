@@ -1537,6 +1537,10 @@ def call_openai_chat(
     payload = {
         "model": model,
         "temperature": float(os.environ.get("OPENAI_TEMPERATURE", "0")),
+        # One next-action JSON per turn: cap the completion so providers'
+        # affordability prechecks (e.g. OpenRouter multiplies max_tokens by
+        # price) reflect real usage. Reasoning models keep ample headroom.
+        "max_tokens": int(os.environ.get("OPENAI_MAX_TOKENS", "4096")),
         "messages": messages,
     }
     # Some OpenAI-compatible providers (e.g. Anthropic models behind
