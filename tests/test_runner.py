@@ -93,7 +93,7 @@ def test_task_directory_derives_missing_family_from_its_directory(tmp_path) -> N
 
 
 def test_cli_validate_passes_for_builtin_tasks() -> None:
-    assert main(["validate", "--min-tasks", "90"]) == 0
+    assert main(["validate", "--min-tasks", "96"]) == 0
 
 
 def test_cli_validate_passes_for_build_suite(capsys) -> None:
@@ -170,7 +170,7 @@ def test_cli_manifest_resolves_core_suite(capsys) -> None:
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
-    assert payload["task_count"] == 90
+    assert payload["task_count"] == 96
     assert "curate" in payload["families"]
     assert payload["task_suite"]["suite_id"] == "enterprise-apps-usage"
     assert len(payload["task_suite"]["content_sha256"]) == 64
@@ -232,7 +232,7 @@ def test_cli_report_can_write_markdown(tmp_path) -> None:
     text = output.read_text(encoding="utf-8")
     assert exit_code == 0
     assert "# OpenBB Workspace Bench Report" in text
-    assert "task_count_90" in text
+    assert "task_count_96" in text
 
 
 def test_cli_run_json_includes_aggregate_summary(capsys) -> None:

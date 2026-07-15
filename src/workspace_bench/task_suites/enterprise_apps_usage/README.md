@@ -1,6 +1,6 @@
 # `enterprise-apps-usage` task suite
 
-Tasks: 90
+Tasks: 96
 
 ## Purpose
 
@@ -21,14 +21,15 @@ the tools and data available.
 | `curate` | place and configure views, cross-catalog at the top | 0-5 |
 | `parameterize` | param surgery and policy translation on existing widgets | 0-5 |
 | `organize` | dashboards, tabs, and navigation | 0-5 |
-| `repair` | fix seeded defects, preserve everything else | 1-5 |
-| `platform` | skills, workspace prompts, and MCP resources govern correctness | 1-5 |
+| `repair` | fix seeded defects, preserve everything else | 0-5 |
+| `platform` | skills, workspace prompts, and MCP resources govern correctness | 0-5 |
 | `extend` | the data-backend lifecycle, up to writing new manifests | 0-5 |
-| `handoff` | durable notes with grounded facts, then delegation | 0-4 |
+| `handoff` | durable notes with grounded facts, then delegation | 0-5 |
 
 Each family holds two spines (one target threaded up the ladder; catalog
 balance across spines makes Getting Started, Widget Examples, and Daloopa
-first-class targets). Levels add one difficulty driver each: level0 execute
+first-class targets), and the grid is complete — 8 x 6 x 2 — so every level
+carries exactly 16 tasks and per-level pass rates rest on equal attempts. Levels add one difficulty driver each: level0 execute
 (everything stated, including param keys), level1 discover, level2 translate
 policy into declared parameter values, level3 ambient state under
 preservation, level4 knowledge-governed or multi-intent work, level5 build —
@@ -60,11 +61,10 @@ any mounted catalog matches a prompt's discriminating tokens); answer values
 must appear literally in the target's served rows; prompt register checks
 (<=110 words, no tool names, no shared opening 5-grams).
 
-Difficulty calibration (July 2026, gpt-4.1-mini, two repeats per task):
-strict-pass staircase 92% / 59% / 50% / 34% / 6% / 7% across level0-level5 —
-strictly decreasing, an achievable floor, and a hard but non-zero top.
-gpt-oss:20b failed every task of the pilot calibration rounds and serves as
-the below-floor reference point.
+Difficulty calibration (July 2026, gpt-4.1-mini, two repeats per task —
+32 attempts per level on this exact content): strict-pass staircase
+94% / 66% / 53% / 34% / 13% / 6% across level0-level5 — strictly
+decreasing with no ties, an achievable floor, and a hard but non-zero top.
 
 ## Limitations
 

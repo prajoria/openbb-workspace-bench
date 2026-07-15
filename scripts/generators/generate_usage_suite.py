@@ -1,4 +1,4 @@
-"""Generate and certify the 90-task usage-v3 wave-1 + wave-2 suite.
+"""Generate and certify the 96-task usage-v3 wave-1 + wave-2 suite.
 
 Each wave has one coherent spine in each of eight job-shaped families.  Most
 spines follow the level0 execute, level1 discover, level2 translate, level3
@@ -9,8 +9,8 @@ honest deviations required by the brief are:
   because every parameterize rung must mutate existing widgets;
 * repair level5 rebuilds an already-authored backend through refresh rather
   than adding a new backend;
-* handoff ends at level4 with delegation, as the family explicitly has no
-  level5 rung.
+* handoff level5 builds and instantiates a minimal authored app before
+  documenting and delegating its follow-up.
 
 The generator owns the enterprise-apps-usage suite directory and this file.  Its static
 certificate mechanically enforces F1-F10 and L1-L5 across both waves,
@@ -82,10 +82,10 @@ FAMILY_LEVELS = {
     "curate": tuple(f"level{level}" for level in range(6)),
     "parameterize": tuple(f"level{level}" for level in range(6)),
     "organize": tuple(f"level{level}" for level in range(6)),
-    "repair": tuple(f"level{level}" for level in range(1, 6)),
-    "platform": tuple(f"level{level}" for level in range(1, 6)),
+    "repair": tuple(f"level{level}" for level in range(6)),
+    "platform": tuple(f"level{level}" for level in range(6)),
     "extend": tuple(f"level{level}" for level in range(6)),
-    "handoff": tuple(f"level{level}" for level in range(5)),
+    "handoff": tuple(f"level{level}" for level in range(6)),
 }
 
 EARNINGS_WIDGET = "earnings_estimates_monitor_calendar_upcoming_earnings"
@@ -197,8 +197,15 @@ def _call(
     item: JsonDict = {"tool": tool, "args": args}
     if optional:
         item["optional"] = True
-    elif graded_args is None or not graded_args:
+    elif graded_args is None:
         raise ValueError(f"graded call {tool} needs explicit non-empty graded_args")
+    elif not graded_args:
+        if tool != "assign_tasks_to_agents":
+            raise ValueError(f"graded call {tool} needs explicit non-empty graded_args")
+        # Level-5 handoffs grade that delegation happened, while the authored
+        # artifact checks grade the durable handoff content. Agent routing is
+        # intentionally not coupled to an echoed task-request payload.
+        item["graded_args"] = []
     else:
         item["graded_args"] = list(graded_args)
     return item
@@ -1743,6 +1750,7 @@ def _nav_widget(
     *,
     widget_uuid: str,
     status: str = "Open",
+    period: str = "YTD",
     layout: JsonDict | None = None,
 ) -> JsonDict:
     return {
@@ -1753,7 +1761,7 @@ def _nav_widget(
         "data_args": {
             "fund": "Flagship Long/Short",
             "status": status,
-            "period": "YTD",
+            "period": period,
         },
         "layout": layout or {"x": 0, "y": 0, "w": 40, "h": 14},
     }
@@ -1778,6 +1786,46 @@ def _build_repair_tasks() -> list[TaskRecord]:
         "status": "Open",
         "period": "YTD",
     }
+
+    stated_fix_stage = _repair_stage(
+        [
+            _nav_widget(widget_uuid="nav_primary", period="QTD"),
+            _repair_preserved_widget(),
+        ]
+    )
+    tasks.append(
+        _record(
+            "repair",
+            spine,
+            0,
+            "repair",
+            (
+                "NAV Exceptions on the open NAV Repair Staging board has fund set to "
+                "Flagship Long/Short, status set to Open, and period set to QTD. Set fund "
+                "to Flagship Long/Short, status to Open, and period back to YTD."
+            ),
+            [
+                _snapshot(),
+                _call(
+                    "update_widget",
+                    {
+                        "widget_uuid": "nav_primary",
+                        "data_args": correct_args,
+                    },
+                    graded_args=("data_args",),
+                ),
+            ],
+            targets=(_nav_target(staged=True),),
+            pinned_widget_args={
+                (STARK, NAV_EXCEPTIONS_WIDGET): frozenset({"fund", "status", "period"})
+            },
+            required_widgets=[
+                _required_widget(STARK, NAV_EXCEPTIONS_WIDGET, correct_args),
+            ],
+            selected_dashboard="NAV Repair Staging",
+            initial_state=stated_fix_stage,
+        )
+    )
 
     bad_param_stage = _repair_stage(
         [
@@ -2120,6 +2168,53 @@ def _build_platform_tasks() -> list[TaskRecord]:
     tasks: list[TaskRecord] = []
     spine = "governed_earnings_brief"
     stage = _platform_stage()
+
+    tasks.append(
+        _record(
+            "platform",
+            spine,
+            0,
+            "platform",
+            (
+                "Read the Finance Earnings Prep skill (finance-earnings-prep) for the open "
+                "Governed Earnings Brief board. Add an Earnings Prep Workflow note that "
+                "records the workflow title and its first and fourth actions."
+            ),
+            [
+                _snapshot(),
+                _call(
+                    "get_skill_content",
+                    {"slug": "finance-earnings-prep"},
+                    graded_args=("slug",),
+                ),
+                _call(
+                    "add_generative_widget",
+                    {
+                        "widget_type": "note",
+                        "name": "Earnings Prep Workflow",
+                        "data": (
+                            "Earnings prep workflow: compare internal estimates and inspect "
+                            "transcript tone."
+                        ),
+                    },
+                    graded_args=("widget_type", "name"),
+                ),
+            ],
+            required_generated_widgets=[
+                {
+                    "widget_type": "note",
+                    "name_contains": "Earnings Prep Workflow",
+                    "data_contains": [
+                        "Earnings prep workflow",
+                        "internal estimates",
+                        "transcript tone",
+                    ],
+                }
+            ],
+            selected_dashboard="Governed Earnings Brief",
+            initial_state=stage,
+        )
+    )
 
     tasks.append(
         _record(
@@ -3071,6 +3166,108 @@ def _build_handoff_tasks() -> list[TaskRecord]:
                 }
             ],
             grounded_generated=(GroundedGenerated(source[0], source[1], ("27.63", "Open")),),
+            selected_dashboard="Earnings Handoff",
+            initial_state=stage,
+        )
+    )
+
+    backend_name = "Earnings Handoff Backend"
+    widget_name = "Earnings Handoff Register"
+    widget_id = "earnings_handoff_register"
+    app_name = "Earnings Handoff App"
+    note_name = "Earnings Build Handoff"
+    widget_def = _widget_def(widget_name, "/earnings-handoff")
+    app_def = _app(
+        app_name,
+        [("handoff", "Handoff", [(widget_id, 0, 0, 40, 10, None)])],
+    )
+    build_follow_up = {
+        "id": "earnings_build_review",
+        "description": "Review the Earnings Handoff App build and ownership.",
+        "assigned_holder_url": "workspace://agents/coverage",
+        "assigned_agent_id": "coverage-agent",
+    }
+    tasks.append(
+        _record(
+            "handoff",
+            spine,
+            5,
+            "platform",
+            (
+                "From the open Earnings Handoff board, author and add a minimal custom "
+                "Earnings Handoff Backend with one Earnings Handoff Register. Publish and "
+                "instantiate Earnings Handoff App with one Handoff tab, add an Earnings "
+                "Build Handoff note naming Earnings Handoff App and Earnings Handoff "
+                "Register, then delegate the build-review follow-up. Widget ids are the "
+                "snake_case of widget names; tab ids are the snake_case of tab names."
+            ),
+            [
+                _call(
+                    "manage_backends",
+                    {
+                        "operation": "add",
+                        "name": backend_name,
+                        "url": "http://127.0.0.1:9508",
+                        "widgets_json": {widget_id: widget_def},
+                        "apps_json": [app_def],
+                    },
+                    graded_args=("operation", "name"),
+                ),
+                _call(
+                    "manage_apps",
+                    {
+                        "operation": "instantiate",
+                        "backend_id": "backend_005",
+                        "app_name": app_name,
+                        "dashboard_name": "Earnings Handoff Live",
+                        "activate": True,
+                    },
+                    graded_args=("operation", "app_name"),
+                ),
+                _call(
+                    "add_generative_widget",
+                    {
+                        "widget_type": "note",
+                        "name": note_name,
+                        "data": f"Built {app_name} with {widget_name}; review ownership.",
+                    },
+                    graded_args=("widget_type", "name"),
+                ),
+                # Grade delegation existence only; the authored artifacts and
+                # durable note carry the exact handoff-content checks.
+                _call(
+                    "assign_tasks_to_agents",
+                    {"task_requests": [build_follow_up]},
+                    graded_args=(),
+                ),
+            ],
+            targets=(_custom_target(backend_name, widget_id, widget_name),),
+            required_widgets=[
+                _required_widget(backend_name, widget_id, tab_id="handoff"),
+            ],
+            required_generated_widgets=[
+                {
+                    "widget_type": "note",
+                    "name_contains": note_name,
+                    "data_contains": [app_name, widget_name],
+                }
+            ],
+            required_widget_defs=[
+                {
+                    "backend_name": backend_name,
+                    "widget_id": widget_id,
+                    "expect": {"endpoint": "/earnings-handoff"},
+                }
+            ],
+            required_app_defs=[
+                {
+                    "backend_name": backend_name,
+                    "name_contains": app_name,
+                    "tabs_include": ["handoff"],
+                    "layout_refs_valid": True,
+                    "widgets_on_tab": [{"tab_id": "handoff", "widget_id": widget_id}],
+                }
+            ],
             selected_dashboard="Earnings Handoff",
             initial_state=stage,
         )
@@ -4284,6 +4481,41 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
         staged=True,
     )
 
+    stated_fix_stage = _manufacturer_repair_stage(
+        [
+            _manufacturer_detail_widget(widget_uuid="detail_primary", year=2022),
+            _manufacturer_preserved_widget(),
+        ]
+    )
+    tasks.append(
+        _record(
+            "repair",
+            spine,
+            0,
+            "repair",
+            (
+                "Car Manufacturer Details on the open Manufacturer Detail Repair board "
+                "has company set to F and year set to 2022. Set company to F and year back "
+                "to 2024."
+            ),
+            [
+                _snapshot(),
+                _call(
+                    "update_widget",
+                    {"widget_uuid": "detail_primary", "data_args": correct_args},
+                    graded_args=("data_args",),
+                ),
+            ],
+            targets=(detail_target,),
+            pinned_widget_args={(GETTING_STARTED, COMPANY_DETAILS_WIDGET): frozenset(correct_args)},
+            required_widgets=[
+                _required_widget(GETTING_STARTED, COMPANY_DETAILS_WIDGET, correct_args),
+            ],
+            selected_dashboard="Manufacturer Detail Repair",
+            initial_state=stated_fix_stage,
+        )
+    )
+
     bad_stage = _manufacturer_repair_stage(
         [
             _manufacturer_detail_widget(widget_uuid="detail_primary", year=2022),
@@ -4586,6 +4818,52 @@ def _build_platform_wave2_tasks() -> list[TaskRecord]:
         "Cited Research Operations",
         [],
         tabs=[{"id": "research", "name": "Research"}],
+    )
+
+    tasks.append(
+        _record(
+            "platform",
+            spine,
+            0,
+            "platform",
+            (
+                "From the open Cited Research Operations board, read the Daloopa "
+                "Tearsheet skill (daloopa-tearsheet). Add a Daloopa Tearsheet Workflow "
+                "note that records the workflow title and its period-math anchor."
+            ),
+            [
+                _snapshot(),
+                _call(
+                    "get_skill_content",
+                    {"slug": "daloopa-tearsheet"},
+                    graded_args=("slug",),
+                ),
+                _call(
+                    "add_generative_widget",
+                    {
+                        "widget_type": "note",
+                        "name": "Daloopa Tearsheet Workflow",
+                        "data": (
+                            "Daloopa tearsheet workflow: anchor period math on "
+                            "latest_calendar_quarter."
+                        ),
+                    },
+                    graded_args=("widget_type", "name"),
+                ),
+            ],
+            required_generated_widgets=[
+                {
+                    "widget_type": "note",
+                    "name_contains": "Daloopa Tearsheet Workflow",
+                    "data_contains": [
+                        "Daloopa tearsheet workflow",
+                        "latest_calendar_quarter",
+                    ],
+                }
+            ],
+            selected_dashboard="Cited Research Operations",
+            initial_state=stage,
+        )
     )
 
     directory_target = _target(DALOOPA, DALOOPA_DIRECTORY_WIDGET, "Company Directory")
@@ -5492,6 +5770,108 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
             initial_state=stage,
         )
     )
+
+    backend_name = "News Handoff Backend"
+    widget_name = "News Handoff Register"
+    widget_id = "news_handoff_register"
+    app_name = "News Handoff App"
+    note_name = "News Build Handoff"
+    widget_def = _widget_def(widget_name, "/news-handoff")
+    app_def = _app(
+        app_name,
+        [("handoff", "Handoff", [(widget_id, 0, 0, 40, 10, None)])],
+    )
+    build_follow_up = {
+        "id": "news_build_review",
+        "description": "Review the News Handoff App build and ownership.",
+        "assigned_holder_url": "workspace://agents/science-editor",
+        "assigned_agent_id": "science-editor-agent",
+    }
+    tasks.append(
+        _record(
+            "handoff",
+            spine,
+            5,
+            "platform",
+            (
+                "Starting from the open News Desk Handoff board, author and add a minimal "
+                "custom News Handoff Backend with one News Handoff Register. Publish and "
+                "instantiate News Handoff App with one Handoff tab, add a News Build "
+                "Handoff note naming News Handoff App and News Handoff Register, then "
+                "delegate the build-review follow-up. Widget ids are the snake_case of "
+                "widget names; tab ids are the snake_case of tab names."
+            ),
+            [
+                _call(
+                    "manage_backends",
+                    {
+                        "operation": "add",
+                        "name": backend_name,
+                        "url": "http://127.0.0.1:9608",
+                        "widgets_json": {widget_id: widget_def},
+                        "apps_json": [app_def],
+                    },
+                    graded_args=("operation", "name"),
+                ),
+                _call(
+                    "manage_apps",
+                    {
+                        "operation": "instantiate",
+                        "backend_id": "backend_005",
+                        "app_name": app_name,
+                        "dashboard_name": "News Handoff Live",
+                        "activate": True,
+                    },
+                    graded_args=("operation", "app_name"),
+                ),
+                _call(
+                    "add_generative_widget",
+                    {
+                        "widget_type": "note",
+                        "name": note_name,
+                        "data": f"Built {app_name} with {widget_name}; review ownership.",
+                    },
+                    graded_args=("widget_type", "name"),
+                ),
+                # Grade delegation existence only; the authored artifacts and
+                # durable note carry the exact handoff-content checks.
+                _call(
+                    "assign_tasks_to_agents",
+                    {"task_requests": [build_follow_up]},
+                    graded_args=(),
+                ),
+            ],
+            targets=(_custom_target(backend_name, widget_id, widget_name),),
+            required_widgets=[
+                _required_widget(backend_name, widget_id, tab_id="handoff"),
+            ],
+            required_generated_widgets=[
+                {
+                    "widget_type": "note",
+                    "name_contains": note_name,
+                    "data_contains": [app_name, widget_name],
+                }
+            ],
+            required_widget_defs=[
+                {
+                    "backend_name": backend_name,
+                    "widget_id": widget_id,
+                    "expect": {"endpoint": "/news-handoff"},
+                }
+            ],
+            required_app_defs=[
+                {
+                    "backend_name": backend_name,
+                    "name_contains": app_name,
+                    "tabs_include": ["handoff"],
+                    "layout_refs_valid": True,
+                    "widgets_on_tab": [{"tab_id": "handoff", "widget_id": widget_id}],
+                }
+            ],
+            selected_dashboard="News Desk Handoff",
+            initial_state=stage,
+        )
+    )
     return tasks
 
 
@@ -5605,6 +5985,8 @@ def _synthesized_contract(call: JsonDict) -> JsonDict | None:
         return None
     args = call["args"]
     graded_args = call.get("graded_args")
+    if graded_args == [] and call["tool"] == "assign_tasks_to_agents":
+        return {}
     if not isinstance(graded_args, list) or not graded_args:
         raise AssertionError(f"{call['tool']}: missing explicit graded_args")
     missing = sorted(set(graded_args) - set(args))
@@ -5667,7 +6049,12 @@ def _assert_f1_f3(records: list[TaskRecord], catalogs: dict[str, JsonDict]) -> N
             contract = _synthesized_contract(call)
             if contract is None:
                 continue
-            if _contains_forbidden_empty(contract):
+            existence_only_delegation = (
+                call["tool"] == "assign_tasks_to_agents"
+                and call.get("graded_args") == []
+                and contract == {}
+            )
+            if _contains_forbidden_empty(contract) and not existence_only_delegation:
                 raise AssertionError(
                     f"{task_id}: F1 empty value in {call['tool']} contract {contract!r}"
                 )
@@ -6058,7 +6445,7 @@ def _assert_wave2_requirements(records: list[TaskRecord]) -> None:
     daloopa_spine = by_spine["cited_research_operations"]
     if not all(
         any(target.origin == DALOOPA for target in record.targets)
-        or record.payload["difficulty"] == "level5"
+        or record.payload["difficulty"] in {"level0", "level5"}
         for record in daloopa_spine
     ) or not all(
         any(
@@ -6129,6 +6516,16 @@ def _assert_family_missions(records: list[TaskRecord]) -> None:
         raise AssertionError("parameterize spine creates fresh content")
     if any(not record.payload["setup"].get("initial_state") for record in by_family["repair"]):
         raise AssertionError("repair task missing seeded defect")
+    for low in (
+        record for record in by_family["repair"] if record.payload["difficulty"] == "level0"
+    ):
+        graded = [
+            call for call in low.payload["eval"]["required_tools"] if not call.get("optional")
+        ]
+        if [call["tool"] for call in graded] != ["update_widget"]:
+            raise AssertionError(f"{low.payload['id']}: repair level0 is not one stated update")
+        if len(low.payload["eval"].get("required_widgets", [])) != 1:
+            raise AssertionError(f"{low.payload['id']}: repair level0 state check is not singular")
     knowledge_tools = {
         "get_skill_content",
         "read_workspace_resource",
@@ -6142,6 +6539,30 @@ def _assert_family_missions(records: list[TaskRecord]) -> None:
         for record in by_family["platform"]
     ):
         raise AssertionError("platform rung lacks graded knowledge read")
+    for low in (
+        record for record in by_family["platform"] if record.payload["difficulty"] == "level0"
+    ):
+        graded = [
+            call for call in low.payload["eval"]["required_tools"] if not call.get("optional")
+        ]
+        knowledge = [call for call in graded if call["tool"] in knowledge_tools]
+        follow_ups = [call for call in graded if call["tool"] not in knowledge_tools]
+        if len(knowledge) != 1 or len(follow_ups) > 1:
+            raise AssertionError(f"{low.payload['id']}: platform level0 is not read-then-act")
+        if any(call["tool"] in DISCOVERY_TOOLS for call in graded):
+            raise AssertionError(f"{low.payload['id']}: platform level0 grades discovery")
+        knowledge_call = knowledge[0]
+        if knowledge_call["tool"] == "get_skill_content":
+            content = str(WORKSPACE_SKILLS[knowledge_call["args"]["slug"]]["content"])
+            pinned = {
+                token
+                for item in low.payload["eval"].get("required_generated_widgets", [])
+                for token in item.get("data_contains", [])
+            }
+            if not pinned or not all(token.casefold() in content.casefold() for token in pinned):
+                raise AssertionError(
+                    f"{low.payload['id']}: platform follow-up does not use skill content"
+                )
     for record in by_family["extend"]:
         if record.payload["difficulty"] in {"level4", "level5"}:
             targets = [target for target in record.targets if target.custom]
@@ -6154,21 +6575,59 @@ def _assert_family_missions(records: list[TaskRecord]) -> None:
                     f"{record.payload['id']}: extend top is not multi-widget instantiated"
                 )
     handoff = by_family["handoff"]
-    if any(not record.grounded_generated for record in handoff):
+    if any(
+        not record.grounded_generated
+        for record in handoff
+        if record.payload["difficulty"] != "level5"
+    ):
         raise AssertionError("handoff rung lacks catalog-grounded pinned facts")
-    for top in (record for record in handoff if record.payload["difficulty"] == "level4"):
+    for top in (
+        record for record in handoff if record.payload["difficulty"] in {"level4", "level5"}
+    ):
         if not any(
             call["tool"] == "assign_tasks_to_agents"
             for call in top.payload["eval"]["required_tools"]
         ):
             raise AssertionError(f"{top.payload['id']}: handoff top lacks delegation")
+    for build in (record for record in handoff if record.payload["difficulty"] == "level5"):
+        evaluation = build.payload["eval"]
+        if any(
+            len(evaluation.get(key, [])) != 1
+            for key in (
+                "required_widget_defs",
+                "required_app_defs",
+                "required_widgets",
+                "required_generated_widgets",
+            )
+        ):
+            raise AssertionError(f"{build.payload['id']}: handoff build chain is not minimal")
+        tools = evaluation["required_tools"]
+        if [call["tool"] for call in tools] != [
+            "manage_backends",
+            "manage_apps",
+            "add_generative_widget",
+            "assign_tasks_to_agents",
+        ]:
+            raise AssertionError(f"{build.payload['id']}: handoff build chain is incomplete")
+        backend_call = tools[0]
+        widgets_json = backend_call["args"].get("widgets_json", {})
+        apps_json = backend_call["args"].get("apps_json", [])
+        if len(widgets_json) != 1 or len(apps_json) != 1:
+            raise AssertionError(f"{build.payload['id']}: handoff backend is not one-widget/app")
+        if "sampleData" in json.dumps(widgets_json, ensure_ascii=False):
+            raise AssertionError(f"{build.payload['id']}: handoff widget embeds sampleData")
+        app_tabs = apps_json[0].get("tabs", {})
+        if len(app_tabs) != 1:
+            raise AssertionError(f"{build.payload['id']}: handoff app is not one-tab")
+        if tools[-1].get("graded_args") != []:
+            raise AssertionError(f"{build.payload['id']}: delegation must be existence-only")
 
 
 def validate_payloads(records: list[TaskRecord]) -> dict[str, int]:
     """Run task shape, mission, and complete F1-F10/L1-L5 certification."""
 
-    if len(records) != 90:
-        raise AssertionError(f"expected 90 tasks, built {len(records)}")
+    if len(records) != 96:
+        raise AssertionError(f"expected 96 tasks, built {len(records)}")
     expected_top_keys = {"id", "category", "difficulty", "prompt", "setup", "eval"}
     allowed_eval = {
         "required_widgets",
@@ -6299,7 +6758,12 @@ def _assert_loaded_contracts(records: list[TaskRecord], loaded: list[Any]) -> No
         for criterion, (tool, args_contains) in zip(actual, expected, strict=True):
             if criterion.name != tool or criterion.args_contains != args_contains:
                 raise AssertionError(f"{task.id}: loaded F1 contract mismatch for {tool}")
-            if _contains_forbidden_empty(criterion.args_contains):
+            existence_only_delegation = (
+                tool == "assign_tasks_to_agents"
+                and criterion.args_contains == {}
+                and args_contains == {}
+            )
+            if _contains_forbidden_empty(criterion.args_contains) and not existence_only_delegation:
                 raise AssertionError(f"{task.id}: loaded F1 contract contains empties")
         if task.limits.get("max_turns") != len(task.oracle_tool_calls) + 3:
             raise AssertionError(f"{task.id}: loaded F6 budget mismatch")
@@ -6388,7 +6852,10 @@ def main() -> int:
     total = len(records)
     if replay != {"oracle_pass": total, "noop_fail": total}:
         raise AssertionError(f"incomplete certification: {replay}")
-    print(f"V3 WAVE2 CERTIFIED {total}/{total}", flush=True)
+    print(
+        f"GRID COMPLETE {total}/{total} oracle pass, {total}/{total} noop fail",
+        flush=True,
+    )
     return 0
 
 

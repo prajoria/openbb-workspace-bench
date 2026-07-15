@@ -59,7 +59,7 @@ def test_active_identity_is_suite_family_task_without_generation_labels() -> Non
         *load_builtin_tasks("build-openbb-apps"),
     ]
 
-    assert len(tasks) == 326
+    assert len(tasks) == 332
 
     debug_tasks = [task for task in tasks if task.family == "debug"]
     assert len(debug_tasks) == 24

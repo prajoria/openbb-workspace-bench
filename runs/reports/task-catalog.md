@@ -2987,7 +2987,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 
 
-## Suite: enterprise-apps-usage (90 tasks)
+## Suite: enterprise-apps-usage (96 tasks)
 
 ### curate (12)
 
@@ -3335,7 +3335,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Widget** ≥1× `Wave One Risk Service/wave_one_limit_alert` on tab `monitor` → `missing_widget`
 - **Widget** ≥1× `Wave One Risk Service/wave_one_stress_watch` on tab `stress` → `missing_widget`
 
-### handoff (10)
+### handoff (12)
 
 #### `earnings_handoff_level0`
 
@@ -3407,6 +3407,21 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - **Generated note** ≥1× named ~"LLY Delegation Handoff" whose content mentions "27.63", "Open" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
+#### `earnings_handoff_level5`
+
+**level5** · category: platform · specification: -
+
+> From the open Earnings Handoff board, author and add a minimal custom Earnings Handoff Backend with one Earnings Handoff Register. Publish and instantiate Earnings Handoff App with one Handoff tab, add an Earnings Build Handoff note naming Earnings Handoff App and Earnings Handoff Register, then delegate the build-review follow-up. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+
+- Initial workspace: dashboard "Earnings Handoff"; 1 tab(s): review
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Earnings Handoff Backend/earnings_handoff_register` on tab `handoff` → `missing_widget`
+- **Generated note** ≥1× named ~"Earnings Build Handoff" whose content mentions "Earnings Handoff App", "Earnings Handoff Register" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
 #### `news_desk_handoff_level0`
 
 **level0** · category: read · specification: -
@@ -3476,6 +3491,21 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Generated note** ≥1× named ~"Science Delegation Handoff" whose content mentions "Scientists Discover New Earth-like Exoplanet in Habitable Zone", "Dr. Emily Rogers" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
+#### `news_desk_handoff_level5`
+
+**level5** · category: platform · specification: -
+
+> Starting from the open News Desk Handoff board, author and add a minimal custom News Handoff Backend with one News Handoff Register. Publish and instantiate News Handoff App with one Handoff tab, add a News Build Handoff note naming News Handoff App and News Handoff Register, then delegate the build-review follow-up. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+
+- Initial workspace: dashboard "News Desk Handoff"; 1 tab(s): review
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `News Handoff Backend/news_handoff_register` on tab `handoff` → `missing_widget`
+- **Generated note** ≥1× named ~"News Build Handoff" whose content mentions "News Handoff App", "News Handoff Register" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 ### organize (12)
 
@@ -3824,7 +3854,21 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Widget** ≥1× `Bench Stark Enterprise/earnings_estimates_monitor_calendar_upcoming_earnings` with data_args ⊇ {"sector": "Technology", "ticker": "AAPL", "period": "QTD"} → `missing_widget`
 - **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "QTD"} → `missing_widget`
 
-### platform (10)
+### platform (12)
+
+#### `cited_research_operations_level0`
+
+**level0** · category: platform · specification: -
+
+> From the open Cited Research Operations board, read the Daloopa Tearsheet skill (daloopa-tearsheet). Add a Daloopa Tearsheet Workflow note that records the workflow title and its period-math anchor.
+
+- Initial workspace: dashboard "Cited Research Operations"; 1 tab(s): research
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Generated note** ≥1× named ~"Daloopa Tearsheet Workflow" whose content mentions "Daloopa tearsheet workflow", "latest_calendar_quarter" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `cited_research_operations_level1`
 
@@ -3898,6 +3942,20 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - **Widget** ≥1× `Cited Research Backend/citation_review_queue` on tab `research` → `missing_widget`
 
+#### `governed_earnings_brief_level0`
+
+**level0** · category: platform · specification: -
+
+> Read the Finance Earnings Prep skill (finance-earnings-prep) for the open Governed Earnings Brief board. Add an Earnings Prep Workflow note that records the workflow title and its first and fourth actions.
+
+- Initial workspace: dashboard "Governed Earnings Brief"; 1 tab(s): overview
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Generated note** ≥1× named ~"Earnings Prep Workflow" whose content mentions "Earnings prep workflow", "internal estimates", "transcript tone" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+
 #### `governed_earnings_brief_level1`
 
 **level1** · category: platform · specification: -
@@ -3968,7 +4026,21 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - **Widget** ≥1× `Governed Earnings Backend/earnings_action_register` on tab `actions` → `missing_widget`
 
-### repair (10)
+### repair (12)
+
+#### `manufacturer_details_repair_level0`
+
+**level0** · category: repair · specification: -
+
+> Car Manufacturer Details on the open Manufacturer Detail Repair board has company set to F and year set to 2022. Set company to F and year back to 2024.
+
+- Initial workspace: dashboard "Manufacturer Detail Repair"; 1 tab(s): details; 2 seeded widget(s): company_details({"company": "F", "year": 2022}), markdown_widget({})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Getting Started/company_details` with data_args ⊇ {"company": "F", "year": 2024} → `missing_widget`
 
 #### `manufacturer_details_repair_level1`
 
@@ -4043,6 +4115,20 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave Two Detail Repair/manufacturer_detail_queue` on tab `details` → `missing_widget`
+
+#### `nav_exception_station_level0`
+
+**level0** · category: repair · specification: -
+
+> NAV Exceptions on the open NAV Repair Staging board has fund set to Flagship Long/Short, status set to Open, and period set to QTD. Set fund to Flagship Long/Short, status to Open, and period back to YTD.
+
+- Initial workspace: dashboard "NAV Repair Staging"; 1 tab(s): exceptions; 2 seeded widget(s): fund_operations_control_tower_pricing_nav_exceptions({"fund": "Flagship Long/Short", "status": "Open", "period": "QTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` with data_args ⊇ {"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"} → `missing_widget`
 
 #### `nav_exception_station_level1`
 
@@ -7657,4 +7743,4 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 ---
 
-Total: 544 tasks.
+Total: 550 tasks.

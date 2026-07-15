@@ -116,16 +116,17 @@ BUILD_PARAM_OWNERSHIP = {
     "params": {"text", "date", "ticker", "number", "boolean", "endpoint", "tabs"},
     "forms": {"form", "button"},
 }
-# Job-shaped usage families: {family: (task count, levels present)}.
+# Job-shaped usage families: a full grid so every level carries the same
+# number of attempts (8 families x 6 levels x 2 spines).
 USAGE_FAMILIES = {
     "retrieve": (12, (0, 1, 2, 3, 4, 5)),
     "curate": (12, (0, 1, 2, 3, 4, 5)),
     "parameterize": (12, (0, 1, 2, 3, 4, 5)),
     "organize": (12, (0, 1, 2, 3, 4, 5)),
-    "repair": (10, (1, 2, 3, 4, 5)),
-    "platform": (10, (1, 2, 3, 4, 5)),
+    "repair": (12, (0, 1, 2, 3, 4, 5)),
+    "platform": (12, (0, 1, 2, 3, 4, 5)),
     "extend": (12, (0, 1, 2, 3, 4, 5)),
-    "handoff": (10, (0, 1, 2, 3, 4)),
+    "handoff": (12, (0, 1, 2, 3, 4, 5)),
 }
 BUILD_LADDER_FAMILIES = {
     "advanced",
@@ -315,7 +316,14 @@ def usage_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> 
             expected={family: count for family, (count, _) in USAGE_FAMILIES.items()},
         ),
         "grader_mutation_sensitive": _mutation_suite_passes(tasks, oracle_results),
-        "task_count_90": total == 90,
+        "task_count_96": total == 96,
+        "level_counts_equal": len(
+            {
+                sum(1 for task in tasks if task.difficulty == f"level{level}")
+                for level in range(6)
+            }
+        )
+        == 1,
         "ladder_cells_two_spines": ladder_ok,
         "turn_budget_reference_plus_three": budget_ok,
         "fingerprint_unique": len(set(fingerprints)) == total,
