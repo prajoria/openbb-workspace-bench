@@ -629,6 +629,9 @@ class SimulatedWorkspace:
             )
         backend = self._backend_by_origin(str(origin))
         schema = backend.get_widget_schema(str(widget_id))
+        # Schema is metadata only: served rows come from get_widget_data.
+        for data_key in ("data", "sampleData", "sampleDataByArgs"):
+            schema.pop(data_key, None)
         return self._ok("get_widget_schema", {"schema": schema})
 
     def _tool_get_params_options(self, args: JsonDict) -> JsonDict:
