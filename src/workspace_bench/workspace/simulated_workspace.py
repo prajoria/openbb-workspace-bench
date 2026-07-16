@@ -1443,10 +1443,19 @@ class SimulatedWorkspace:
                 return app
             if template_id and app.get("template_id") == template_id:
                 return app
+        apps = backend.apps_json()
+        if not apps:
+            # The likeliest cause is an authoring gap, not an addressing one:
+            # the backend was registered without the app in its manifest.
+            raise KeyError(
+                f"App {app_name or template_id!r} not found: this backend "
+                "declares no apps. Publish it first - manage_backends "
+                "operation='refresh' with backend_id and an apps_json that "
+                "includes this app - then instantiate."
+            )
         served = ", ".join(
-            f"{app.get('name')} (template_id {app.get('template_id')})"
-            for app in backend.apps_json()
-        ) or "none"
+            f"{app.get('name')} (template_id {app.get('template_id')})" for app in apps
+        )
         raise KeyError(
             f"App {app_name or template_id!r} not found. Apps served by this "
             f"backend: {served}. Pass the app's name as app_name (or its "
