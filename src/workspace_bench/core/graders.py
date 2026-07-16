@@ -204,9 +204,13 @@ def grade_task(
             "Expected the episode to end with a final_answer submission.",
         )
         answer_text = (submitted or "").casefold()
+        # Digit-grouping is presentation, not precision: "16,457,690" states
+        # 16457690. Comparison strips grouping commas; rounding still fails.
+        degrouped_answer = re.sub(r"(?<=\d),(?=\d\d\d)", "", answer_text)
         for value in task.success.required_values_in_answer:
+            expected = value.casefold()
             state_builder.check(
-                value.casefold() in answer_text,
+                expected in answer_text or expected in degrouped_answer,
                 "missing_answer_value",
                 f"Expected the final answer to state {value!r}.",
             )
@@ -425,9 +429,8 @@ def _matching_generated_widgets(
             layout = widget.get("layout") or {}
             if layout.get("tab_id") != required.tab_id:
                 continue
-        if (
-            required.name_contains
-            and required.name_contains.lower() not in str(widget.get("name", "")).lower()
+        if required.name_contains and not _phrase_matches(
+            str(widget.get("name", "")), required.name_contains
         ):
             continue
         data_blob = " ".join(

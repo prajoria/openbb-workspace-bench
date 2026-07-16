@@ -1605,26 +1605,30 @@ def call_ollama_chat(model: str, messages: list[JsonDict], timeout: float) -> st
     # JSON (the teaching-turn recovery backstops malformed output).
     if os.environ.get("OLLAMA_FORMAT", "schema") != "none":
         payload["format"] = interactive_action_schema()
-    body = post_json(f"{base_url}/api/chat", payload, timeout)
-    _record_provider_meta(
-        model=body.get("model"),
-        usage={
-            "input_tokens": int(body.get("prompt_eval_count") or 0),
-            "output_tokens": int(body.get("eval_count") or 0),
-            "total_tokens": int(body.get("prompt_eval_count") or 0)
-            + int(body.get("eval_count") or 0),
-        },
-    )
-    message = body.get("message") or {}
-    content = message.get("content")
-    if isinstance(content, str) and content.strip():
-        return content
-    tool_calls = message.get("tool_calls")
-    if isinstance(tool_calls, list) and tool_calls:
-        return json.dumps(native_tool_call_to_action(tool_calls[0]), sort_keys=True)
-    if not isinstance(content, str) or not content.strip():
-        raise ValueError(f"Ollama returned no message content: {body!r}")
-    return content
+    # Reasoning models occasionally spend the whole generation in the thinking
+    # channel and return empty content; at temperature 0 that repeats forever.
+    # One same-request retry with sampling jitter breaks the deterministic loop.
+    for attempt in range(2):
+        if attempt:
+            payload["options"] = {**options, "temperature": max(0.3, options["temperature"])}
+        body = post_json(f"{base_url}/api/chat", payload, timeout)
+        _record_provider_meta(
+            model=body.get("model"),
+            usage={
+                "input_tokens": int(body.get("prompt_eval_count") or 0),
+                "output_tokens": int(body.get("eval_count") or 0),
+                "total_tokens": int(body.get("prompt_eval_count") or 0)
+                + int(body.get("eval_count") or 0),
+            },
+        )
+        message = body.get("message") or {}
+        content = message.get("content")
+        if isinstance(content, str) and content.strip():
+            return content
+        tool_calls = message.get("tool_calls")
+        if isinstance(tool_calls, list) and tool_calls:
+            return json.dumps(native_tool_call_to_action(tool_calls[0]), sort_keys=True)
+    raise ValueError(f"Ollama returned no message content: {body!r}")
 
 
 def openai_usage(body: JsonDict) -> JsonDict:

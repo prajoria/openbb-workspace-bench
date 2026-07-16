@@ -1521,7 +1521,7 @@ class ToolTraceEvent:
 
 # Models phrase the answer argument differently; accept the common keys so a
 # correct answer is never zeroed on key spelling (canonical: "text").
-FINAL_ANSWER_ARG_KEYS = ("text", "answer", "data", "content")
+FINAL_ANSWER_ARG_KEYS = ("text", "answer", "answer_text", "data", "content")
 
 
 def final_answer_text(args: JsonDict) -> str | None:
