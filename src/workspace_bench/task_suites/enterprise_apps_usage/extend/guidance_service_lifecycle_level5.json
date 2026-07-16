@@ -2,7 +2,7 @@
   "id": "guidance_service_lifecycle_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Guidance-service complete service: follow the widgets manifest specification; add a custom backend Wave Three Guidance Service with Evidence Gaps, Changed Assumptions, Management Claims tables, publish Guidance Service App with Review and Archive tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Guidance-service complete service: follow the widgets manifest specification; add a custom backend Wave Three Guidance Service with Evidence Gaps, Changed Assumptions, Management Claims tables, publish Guidance Service App with Review and Archive tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Guidance Tracker skill (finance-guidance-tracker) and add a Guidance-service Governing Note recording its governing concept.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -53,6 +53,15 @@
         "tool": "get_workspace_snapshot",
         "args": {},
         "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-guidance-tracker"
+        },
+        "graded_args": [
+          "slug"
+        ]
       },
       {
         "tool": "read_workspace_resource",
@@ -165,6 +174,18 @@
         "graded_args": [
           "operation"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Guidance-service Governing Note",
+          "data": "evidence gaps"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -182,6 +203,15 @@
         "origin": "Wave Three Guidance Service",
         "widget_id": "management_claims",
         "tab_id": "archive"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Guidance-service Governing Note",
+        "data_contains": [
+          "evidence gaps"
+        ]
       }
     ],
     "required_widget_defs": [
@@ -213,6 +243,6 @@
         "no_overlaps": true
       }
     ],
-    "max_turns": 8
+    "max_turns": 10
   }
 }

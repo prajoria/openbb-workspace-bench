@@ -20,6 +20,8 @@ every required-widget data value.
 
 from __future__ import annotations
 
+import dataclasses
+
 import copy
 import json
 import re
@@ -79,7 +81,9 @@ LEVEL_CAPS = {
     "level2": 5,
     "level3": 7,
     "level4": 7,
-    "level5": 10,
+    # The build rung composes three drivers (authoring, governance, use);
+    # its governed read and note add two graded dimensions over the old 10.
+    "level5": 12,
 }
 FAMILY_LEVELS = {
     "retrieve": tuple(f"level{level}" for level in range(6)),
@@ -1328,6 +1332,7 @@ def _parameterize_build_level5(
     tab_name: str,
     url: str,
     param_args: JsonDict,
+    governance: GovernanceSpec,
 ) -> TaskRecord:
     """Level5 build for parameterize spines: author and tune a param widget."""
 
@@ -1355,6 +1360,10 @@ def _parameterize_build_level5(
         [(tab_id, tab_name, [(widget_id, 0, 0, 40, 10, None)])],
     )
     args_words = ", ".join(f"{key} {value}" for key, value in param_args.items())
+    note_name = f"{title} Tuning Note"
+    gov_prompt, gov_steps, gov_required, gov_policy = _governed_build_note(
+        governance, note_name
+    )
     return _record(
         "parameterize",
         spine,
@@ -1367,8 +1376,10 @@ def _parameterize_build_level5(
             f"{widget_name} to {args_words}. Follow the widgets manifest specification. "
             "Widget ids are the snake_case of widget names; tab ids are the "
             "snake_case of tab names."
+            + gov_prompt
         ),
         [
+            *gov_steps[:1],
             _call(
                 "read_workspace_resource",
                 {"uri": "openbb://workspace/specs/widgets-json"},
@@ -1401,6 +1412,7 @@ def _parameterize_build_level5(
                 {"widget_id": widget_id, "data_args": param_args},
                 graded_args=("data_args",),
             ),
+            *gov_steps[1:],
         ],
         targets=(_custom_target(backend_name, widget_id, widget_name),),
         policies=(
@@ -1408,11 +1420,14 @@ def _parameterize_build_level5(
                 "widgets manifest specification",
                 ("openbb://workspace/specs/widgets-json",),
             ),
+            gov_policy,
         ),
         pinned_widget_args={(backend_name, widget_id): frozenset(param_args)},
         required_widgets=[
             _required_widget(backend_name, widget_id, param_args, tab_id=tab_id)
         ],
+        required_generated_widgets=[gov_required],
+        governance=governance,
         required_widget_defs=[
             {
                 "backend_name": backend_name,
@@ -1442,6 +1457,7 @@ def _repair_rebuild_level5(
     app_name: str,
     tab_name: str,
     url: str,
+    governance: GovernanceSpec,
 ) -> TaskRecord:
     """Level5 build for repair spines: re-author a lost backend from scratch."""
 
@@ -1458,6 +1474,10 @@ def _repair_rebuild_level5(
         [(tab_id, tab_name, [(widget_id, 0, 0, 40, 12, None)])],
     )
     stage = _staged_dashboard(board_name, [], tabs=[{"id": tab_id, "name": tab_name}])
+    note_name = f"{title} Rebuild Note"
+    gov_prompt, gov_steps, gov_required, gov_policy = _governed_build_note(
+        governance, note_name
+    )
     return _record(
         "repair",
         spine,
@@ -1471,8 +1491,10 @@ def _repair_rebuild_level5(
             f"{tab_name}, keeping all other workspace content. Follow the widgets "
             "manifest specification. Widget ids are the snake_case of widget names; "
             "tab ids are the snake_case of tab names."
+            + gov_prompt
         ),
         [
+            *gov_steps[:1],
             _call(
                 "read_workspace_resource",
                 {"uri": "openbb://workspace/specs/widgets-json"},
@@ -1500,6 +1522,7 @@ def _repair_rebuild_level5(
                 },
                 graded_args=("operation",),
             ),
+            *gov_steps[1:],
         ],
         targets=(_custom_target(backend_name, widget_id, widget_name),),
         policies=(
@@ -1507,8 +1530,11 @@ def _repair_rebuild_level5(
                 "widgets manifest specification",
                 ("openbb://workspace/specs/widgets-json",),
             ),
+            gov_policy,
         ),
         required_widgets=[_required_widget(backend_name, widget_id, tab_id=tab_id)],
+        required_generated_widgets=[gov_required],
+        governance=governance,
         required_widget_defs=[
             {
                 "backend_name": backend_name,
@@ -1713,6 +1739,12 @@ def _build_parameterize_tasks() -> list[TaskRecord]:
             tab_name="Controls",
             url="http://127.0.0.1:9721",
             param_args={"company": "TSLA", "period": "QTD"},
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "finance-earnings-prep",
+                "Finance Earnings Prep skill (finance-earnings-prep)",
+                ("internal estimates",),
+            ),
         )
     )
     return tasks
@@ -2327,6 +2359,12 @@ def _build_repair_tasks() -> list[TaskRecord]:
             app_name="NAV Repair App",
             tab_name="Exceptions",
             url="http://127.0.0.1:9504",
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "daloopa-guidance-tracker",
+                "Daloopa Guidance Tracker skill (daloopa-guidance-tracker)",
+                ("Missed",),
+            ),
         )
     )
     return tasks
@@ -4308,6 +4346,12 @@ def _build_parameterize_wave2_tasks() -> list[TaskRecord]:
             tab_name="Controls",
             url="http://127.0.0.1:9722",
             param_args={"filenames": "solana.pdf", "category": "l1"},
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "finance-tearsheet",
+                "Finance Tearsheet skill (finance-tearsheet)",
+                ("price action",),
+            ),
         )
     )
     return tasks
@@ -4881,6 +4925,12 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
             app_name="Detail Repair App",
             tab_name="Details",
             url="http://127.0.0.1:9604",
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "daloopa-industry",
+                "Daloopa Industry skill (daloopa-industry)",
+                ("peers",),
+            ),
         )
     )
     return tasks
@@ -5960,6 +6010,29 @@ def _note_phrase(name: str) -> str:
     return name if name.lower().endswith("note") else f"{name} note"
 
 
+def _governed_build_note(
+    governance: GovernanceSpec, note_name: str
+) -> tuple[str, list[JsonDict], JsonDict, PolicyMapping]:
+    """Level5 governance: read the named knowledge source, record its concept.
+
+    The graded token is described, never printed, so the read is causally
+    necessary; PolicyMapping supplies the token's provenance.
+    """
+
+    token = governance.outcome_tokens[0]
+    prompt_part = (
+        f" Follow the {governance.label} and add a {_note_phrase(note_name)} "
+        "recording its governing concept."
+    )
+    steps = [
+        _wave3_governance_call(governance),
+        _wave3_generated_call(note_name, token),
+    ]
+    required = _wave3_required_generated(note_name, token)
+    policy = PolicyMapping(governance.label, (token,))
+    return prompt_part, steps, required, policy
+
+
 def _wave3_catalog_target(
     origin: str,
     widget_id: str,
@@ -6143,6 +6216,10 @@ def _build_wave3_retrieve_spine(
         [(tab_id, tab_name, [(widget_id, 0, 0, 40, 10, data_args)])],
     )
     payload = dict(zip(served_columns, tokens, strict=True))
+    build_note = f"{title} Build Note"
+    gov_prompt, gov_steps, gov_required, gov_policy = _governed_build_note(
+        governance, build_note
+    )
     tasks.append(
         _record(
             "retrieve",
@@ -6158,8 +6235,10 @@ def _build_wave3_retrieve_spine(
                 "values shown. Follow the widgets manifest "
                 "specification. Widget ids are the snake_case of widget names; tab ids are "
                 "the snake_case of tab names."
+                + gov_prompt
             ),
             [
+                *gov_steps[:1],
                 _call(
                     "read_workspace_resource",
                     {"uri": "openbb://workspace/specs/widgets-json"},
@@ -6193,6 +6272,7 @@ def _build_wave3_retrieve_spine(
                     optional=True,
                     graded_args=("origin", "widget_id"),
                 ),
+                *gov_steps[1:],
             ],
             targets=(_custom_target(backend_name, widget_id, widget_name),),
             policies=(
@@ -6200,10 +6280,13 @@ def _build_wave3_retrieve_spine(
                     "widgets manifest specification",
                     ("openbb://workspace/specs/widgets-json",),
                 ),
+                gov_policy,
             ),
             pinned_widget_args={(backend_name, widget_id): frozenset(data_args)},
             required_widgets=[_required_widget(backend_name, widget_id, data_args, tab_id=tab_id)],
             required_values=list(tokens),
+            required_generated_widgets=[gov_required],
+            governance=governance,
             required_widget_defs=[
                 {"backend_name": backend_name, "widget_id": widget_id, "expect": {"type": "table"}}
             ],
@@ -6368,6 +6451,9 @@ def _build_wave3_curate_spine(
     app_def = _app(app_name, [(tab_id, tab_name, [(widget_id, 0, 0, 40, 10, None)])])
     build_targets = (primary, cross_catalog)
     build_names = "; ".join(_wave3_target_words(target) for target in build_targets)
+    gov_prompt, gov_steps, gov_required, gov_policy = _governed_build_note(
+        governance, f"{title} Build Note"
+    )
     tasks.append(
         _record(
             "curate",
@@ -6379,8 +6465,10 @@ def _build_wave3_curate_spine(
                 f"publish and instantiate {app_name} on {tab_name}; also add {build_names}. "
                 "Widget ids are the snake_case of widget names; tab ids are the snake_case "
                 "of tab names."
+                + gov_prompt
             ),
             [
+                *gov_steps[:1],
                 _call(
                     "manage_backends",
                     {
@@ -6405,15 +6493,19 @@ def _build_wave3_curate_spine(
                 ),
                 *_wave3_discover_targets(build_targets),
                 *(_wave3_place_call(target) for target in build_targets),
+                *gov_steps[1:],
             ],
             targets=(
                 _custom_target(backend_name, widget_id, widget_name),
                 *build_targets,
             ),
+            policies=(gov_policy,),
             required_widgets=[
                 _required_widget(backend_name, widget_id, tab_id=tab_id),
                 *(_required_widget(target.origin, target.widget_id) for target in build_targets),
             ],
+            required_generated_widgets=[gov_required],
+            governance=governance,
             required_widget_defs=[
                 {"backend_name": backend_name, "widget_id": widget_id, "expect": {"type": "table"}}
             ],
@@ -6674,6 +6766,7 @@ def _build_wave3_parameterize_spine(
             tab_name="Controls",
             url=build_url,
             param_args=build_args,
+            governance=governance,
         )
     )
     return tasks
@@ -6949,6 +7042,9 @@ def _build_wave3_organize_spine(
     app_def = _app(app_name, [(tab_id, tab_name, [(widget_id, 0, 0, 40, 10, None)])])
     build_targets = targets[1:]
     build_names = ", ".join(f"{target.origin}'s {target.display_name}" for target in build_targets)
+    gov_prompt, gov_steps, gov_required, gov_policy = _governed_build_note(
+        governance, f"{title} Build Note"
+    )
     tasks.append(
         _record(
             "organize",
@@ -6960,8 +7056,10 @@ def _build_wave3_organize_spine(
                 f"publish and instantiate {app_name} on {tab_name}, then add {build_names}. "
                 "Widget ids are the snake_case of widget names; tab ids are the snake_case "
                 "of tab names."
+                + gov_prompt
             ),
             [
+                *gov_steps[:1],
                 _call(
                     "manage_backends",
                     {
@@ -6986,12 +7084,16 @@ def _build_wave3_organize_spine(
                 ),
                 *_wave3_discover_targets(build_targets),
                 *(_wave3_place_call(target) for target in build_targets),
+                *gov_steps[1:],
             ],
             targets=(_custom_target(backend_name, widget_id, widget_name), *build_targets),
+            policies=(gov_policy,),
             required_widgets=[
                 _required_widget(backend_name, widget_id, tab_id=tab_id),
                 *(_required_widget(target.origin, target.widget_id) for target in build_targets),
             ],
+            required_generated_widgets=[gov_required],
+            governance=governance,
             required_widget_defs=[
                 {"backend_name": backend_name, "widget_id": widget_id, "expect": {"type": "table"}}
             ],
@@ -7297,6 +7399,7 @@ def _build_wave3_repair_spine(
             app_name=app_name,
             tab_name=tab_name,
             url=url,
+            governance=governance,
         )
     )
     return tasks
@@ -7830,6 +7933,9 @@ def _build_wave3_extend_spine(
         _custom_target(backend_name, widget_id, name)
         for widget_id, name in zip(widget_ids, widget_names, strict=True)
     )
+    gov_prompt, gov_steps, gov_required, gov_policy = _governed_build_note(
+        governance, f"{title} Governing Note"
+    )
     tasks.append(
         _record(
             "extend",
@@ -7842,8 +7948,10 @@ def _build_wave3_extend_spine(
                 f"{', '.join(widget_names)} tables, publish {app_name} "
                 "with Review and Archive tabs, and instantiate it. Widget ids are the "
                 "snake_case of widget names; tab ids are the snake_case of tab names."
+                + gov_prompt
             ),
             [
+                *gov_steps[:1],
                 _call(
                     "read_workspace_resource",
                     {"uri": "openbb://workspace/specs/widgets-json"},
@@ -7871,6 +7979,7 @@ def _build_wave3_extend_spine(
                     },
                     graded_args=("operation",),
                 ),
+                *gov_steps[1:],
             ],
             targets=all_targets,
             policies=(
@@ -7878,6 +7987,7 @@ def _build_wave3_extend_spine(
                     "widgets manifest specification",
                     ("openbb://workspace/specs/widgets-json",),
                 ),
+                gov_policy,
             ),
             required_widgets=[
                 _required_widget(
@@ -7900,6 +8010,8 @@ def _build_wave3_extend_spine(
                     "no_overlaps": True,
                 }
             ],
+            required_generated_widgets=[gov_required],
+            governance=governance,
         )
     )
     return tasks
@@ -8058,10 +8170,12 @@ def _build_wave3_handoff_spine(
                 f"{title} build handoff: add {backend_name} with a {widget_name} table, "
                 f"publish and instantiate {app_name} with one {tab_name} tab, add a "
                 f"{_note_phrase(build_note)} grounded in {target.origin}'s "
-                f"{target.display_name} with {fact_words}, then delegate. Widget ids are "
-                "the snake_case of widget names; tab ids are the snake_case of tab names."
+                f"{target.display_name} with {fact_words} and the {governance.label}'s "
+                "governing concept, then delegate. Widget ids are the snake_case of "
+                "widget names; tab ids are the snake_case of tab names."
             ),
             [
+                _wave3_governance_call(governance),
                 *_wave3_discover_targets((target,)),
                 _wave3_read_call(target, data_args, optional=True),
                 _call(
@@ -8088,7 +8202,7 @@ def _build_wave3_handoff_spine(
                 ),
                 _wave3_generated_call(
                     build_note,
-                    f"Catalog facts: {tokens[0]} and {tokens[1]}.",
+                    f"{governed_token}: catalog facts {tokens[0]} and {tokens[1]}.",
                 ),
                 _call("assign_tasks_to_agents", assignment, graded_args=()),
             ],
@@ -8096,8 +8210,11 @@ def _build_wave3_handoff_spine(
                 _custom_target(backend_name, widget_id, widget_name),
                 target,
             ),
+            policies=(PolicyMapping(governance.label, (governed_token,)),),
             required_widgets=[_required_widget(backend_name, widget_id, tab_id=tab_id)],
-            required_generated_widgets=[_wave3_required_generated(build_note, *tokens)],
+            required_generated_widgets=[
+                _wave3_required_generated(build_note, governed_token, *tokens)
+            ],
             required_widget_defs=[
                 {"backend_name": backend_name, "widget_id": widget_id, "expect": {"type": "table"}}
             ],
@@ -8111,6 +8228,7 @@ def _build_wave3_handoff_spine(
                 }
             ],
             grounded_generated=(GroundedGenerated(source_slug, target.widget_id, tokens),),
+            governance=governance,
         )
     )
     return tasks
@@ -8169,10 +8287,149 @@ def _build_wave3_handoff_tasks() -> list[TaskRecord]:
     ]
 
 
+LEGACY_LEVEL5_GOVERNANCE: dict[str, tuple[GovernanceSpec, str]] = {
+    "earnings_lookup": (
+        GovernanceSpec(
+            "get_skill_content",
+            "finance-earnings-prep",
+            "Finance Earnings Prep skill (finance-earnings-prep)",
+            ("surprise drivers",),
+        ),
+        "Earnings Lookup Build Note",
+    ),
+    "closing_tape_lookup": (
+        GovernanceSpec(
+            "get_skill_content",
+            "daloopa-tearsheet",
+            "Daloopa Tearsheet skill (daloopa-tearsheet)",
+            ("latest_calendar_quarter",),
+        ),
+        "Closing Tape Build Note",
+    ),
+    "decision_briefing": (
+        GovernanceSpec(
+            "get_skill_content",
+            "daloopa-capital-allocation",
+            "Daloopa Capital Allocation skill (daloopa-capital-allocation)",
+            ("Free Cash Flow",),
+        ),
+        "Decision Briefing Build Note",
+    ),
+    "market_telemetry": (
+        GovernanceSpec(
+            "get_skill_content",
+            "finance-tearsheet",
+            "Finance Tearsheet skill (finance-tearsheet)",
+            ("price action",),
+        ),
+        "Market Telemetry Build Note",
+    ),
+    "committee_navigation": (
+        GovernanceSpec(
+            "get_skill_content",
+            "finance-earnings-prep",
+            "Finance Earnings Prep skill (finance-earnings-prep)",
+            ("transcript tone",),
+        ),
+        "Committee Navigation Build Note",
+    ),
+    "client_onboarding_flow": (
+        GovernanceSpec(
+            "get_skill_content",
+            "finance-guidance-tracker",
+            "Finance Guidance Tracker skill (finance-guidance-tracker)",
+            ("changed assumptions",),
+        ),
+        "Client Onboarding Build Note",
+    ),
+    "risk_service_lifecycle": (
+        GovernanceSpec(
+            "get_skill_content",
+            "finance-guidance-tracker",
+            "Finance Guidance Tracker skill (finance-guidance-tracker)",
+            ("evidence gaps",),
+        ),
+        "Risk Service Build Note",
+    ),
+    "research_feed_lifecycle": (
+        GovernanceSpec(
+            "get_skill_content",
+            "daloopa-capital-allocation",
+            "Daloopa Capital Allocation skill (daloopa-capital-allocation)",
+            ("Dividends Paid",),
+        ),
+        "Research Feed Build Note",
+    ),
+    "earnings_handoff": (
+        GovernanceSpec(
+            "get_skill_content",
+            "finance-earnings-prep",
+            "Finance Earnings Prep skill (finance-earnings-prep)",
+            ("street numbers",),
+        ),
+        "Earnings Handoff Build Note",
+    ),
+    "news_desk_handoff": (
+        GovernanceSpec(
+            "get_skill_content",
+            "finance-tearsheet",
+            "Finance Tearsheet skill (finance-tearsheet)",
+            ("catalysts",),
+        ),
+        "News Desk Build Note",
+    ),
+}
+
+
+def _govern_level5(record: TaskRecord) -> TaskRecord:
+    """Retrofit the level5 governance driver onto a pre-wave-3 build record."""
+
+    spine = str(record.payload["id"]).rsplit("_level", 1)[0]
+    if record.payload["difficulty"] != "level5" or spine not in LEGACY_LEVEL5_GOVERNANCE:
+        return record
+    governance, note_name = LEGACY_LEVEL5_GOVERNANCE[spine]
+    token = governance.outcome_tokens[0]
+    payload = record.payload
+    tools = payload["eval"]["required_tools"]
+    existing_notes = payload["eval"].get("required_generated_widgets")
+    if existing_notes:
+        # The rung already documents itself (handoff builds): fold the
+        # governed concept into that note instead of adding a second one.
+        payload["prompt"] = (
+            str(payload["prompt"])
+            + f" Follow the {governance.label} and record its governing concept "
+            "in the note."
+        )
+        tools.insert(0, _wave3_governance_call(governance))
+        note_call = next(
+            call
+            for call in tools
+            if call["tool"] == "add_generative_widget" and not call.get("optional")
+        )
+        note_call["args"]["data"] = f"{token}: " + str(note_call["args"]["data"])
+        existing_notes[0].setdefault("data_contains", []).append(token)
+    else:
+        gov_prompt, gov_steps, gov_required, _ = _governed_build_note(
+            governance, note_name
+        )
+        payload["prompt"] = str(payload["prompt"]) + gov_prompt
+        tools.insert(0, gov_steps[0])
+        tools.append(gov_steps[1])
+        payload["eval"]["required_generated_widgets"] = [gov_required]
+    payload["eval"]["max_turns"] = len(tools) + 3
+    return dataclasses.replace(
+        record,
+        policies=record.policies + (PolicyMapping(governance.label, (token,)),),
+        governance=governance,
+    )
+
+
 def build_tasks() -> list[TaskRecord]:
     """Build the complete deterministic three-wave task lattice."""
 
     return [
+        _govern_level5(record)
+        for record in [
         *_build_retrieve_tasks(),
         *_build_retrieve_wave2_tasks(),
         *_build_wave3_retrieve_tasks(),
@@ -8197,6 +8454,7 @@ def build_tasks() -> list[TaskRecord]:
         *_build_handoff_tasks(),
         *_build_handoff_wave2_tasks(),
         *_build_wave3_handoff_tasks(),
+        ]
     ]
 
 
@@ -8769,6 +9027,35 @@ def _assert_level5_builds(records: list[TaskRecord]) -> None:
         )
         if not authored or not evaluation.get("required_widget_defs"):
             raise AssertionError(f"level5 without authored build: {payload['id']}")
+        # Level5 is a driver-superset of level4: a knowledge source must
+        # govern a graded outcome, so no model passes the build rung without
+        # the knowledge-following skill that gates the governed rung.
+        if record.family == "platform":
+            # The platform family's own mission assertion already requires a
+            # graded knowledge read at every rung, including the build.
+            continue
+        spec = record.governance
+        if spec is None:
+            raise AssertionError(f"level5 without governance: {payload['id']}")
+        prompt = str(payload["prompt"])
+        if spec.label.casefold() not in prompt.casefold():
+            raise AssertionError(f"{payload['id']}: level5 governance not named in prompt")
+        if not any(
+            call["tool"] in KNOWLEDGE_READ_TOOLS and not call.get("optional")
+            for call in evaluation["required_tools"]
+        ):
+            raise AssertionError(f"{payload['id']}: level5 governance read not graded")
+        token = spec.outcome_tokens[0]
+        content = _governance_content(spec)
+        if token.casefold() not in content.casefold():
+            raise AssertionError(f"{payload['id']}: level5 governed token absent from source")
+        graded_tokens = {
+            value
+            for generated in evaluation.get("required_generated_widgets", [])
+            for value in generated.get("data_contains", [])
+        }
+        if token not in graded_tokens:
+            raise AssertionError(f"{payload['id']}: level5 governed token not graded")
 
 
 KNOWLEDGE_READ_TOOLS = frozenset(
@@ -9156,23 +9443,22 @@ def _assert_wave3_requirements(
     }
     if used_skills != set(SKILL_SLUGS):
         raise AssertionError(f"skill coverage mismatch: {sorted(used_skills)}")
-    legacy_used_skills = {
-        str(call["args"]["slug"])
-        for spine in WAVE1_SPINES | WAVE2_SPINES
-        for record in by_spine[spine]
-        for call in record.payload["eval"]["required_tools"]
-        if call["tool"] == "get_skill_content" and not call.get("optional")
+    # The wave-3 platform spines were authored around skills unused at the
+    # time; the pin is now explicit because governed level5 builds spread
+    # skill reads across every wave.
+    expected_platform_skills = {
+        "comps_governance": {"finance-comps"},
+        "investment_snapshot_governance": {"finance-tearsheet"},
     }
-    newly_used_skills = set(SKILL_SLUGS) - legacy_used_skills
-    for spine in ("comps_governance", "investment_snapshot_governance"):
+    for spine, expected_skills in expected_platform_skills.items():
         spine_skills = {
             str(call["args"]["slug"])
             for record in by_spine[spine]
             for call in record.payload["eval"]["required_tools"]
             if call["tool"] == "get_skill_content" and not call.get("optional")
         }
-        if not spine_skills or not spine_skills <= newly_used_skills:
-            raise AssertionError(f"{spine}: platform spine is not governed by a new skill")
+        if spine_skills != expected_skills:
+            raise AssertionError(f"{spine}: platform spine governance drifted")
 
     legacy_records = [record for spine in WAVE1_SPINES | WAVE2_SPINES for record in by_spine[spine]]
     wave3_records = [record for spine in WAVE3_SPINES for record in by_spine[spine]]
@@ -9552,6 +9838,7 @@ def _assert_family_missions(records: list[TaskRecord]) -> None:
         tools = evaluation["required_tools"]
         graded = [call["tool"] for call in tools if not call.get("optional")]
         if graded != [
+            "get_skill_content",
             "manage_backends",
             "manage_apps",
             "add_generative_widget",

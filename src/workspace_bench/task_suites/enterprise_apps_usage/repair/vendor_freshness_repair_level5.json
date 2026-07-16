@@ -2,7 +2,7 @@
   "id": "vendor_freshness_repair_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "Vendor-freshness backend rebuild: Wave Three Vendor Repair was lost from the workspace; on the open Vendor-freshness Backend Repair board, rebuild it from scratch: add a custom backend Wave Three Vendor Repair with a Vendor Repair Queue table, publish Vendor Repair App, and instantiate it with one non-overlapping Vendor Repair Queue placement on Incidents, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Vendor-freshness backend rebuild: Wave Three Vendor Repair was lost from the workspace; on the open Vendor-freshness Backend Repair board, rebuild it from scratch: add a custom backend Wave Three Vendor Repair with a Vendor Repair Queue table, publish Vendor Repair App, and instantiate it with one non-overlapping Vendor Repair Queue placement on Incidents, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Guidance Tracker skill (finance-guidance-tracker) and add a Vendor-freshness Rebuild Note recording its governing concept.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -66,6 +66,15 @@
         "tool": "get_workspace_snapshot",
         "args": {},
         "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-guidance-tracker"
+        },
+        "graded_args": [
+          "slug"
+        ]
       },
       {
         "tool": "read_workspace_resource",
@@ -138,6 +147,18 @@
         "graded_args": [
           "operation"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Vendor-freshness Rebuild Note",
+          "data": "evidence gaps"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -145,6 +166,15 @@
         "origin": "Wave Three Vendor Repair",
         "widget_id": "vendor_repair_queue",
         "tab_id": "incidents"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Vendor-freshness Rebuild Note",
+        "data_contains": [
+          "evidence gaps"
+        ]
       }
     ],
     "required_widget_defs": [
@@ -173,6 +203,6 @@
         ]
       }
     ],
-    "max_turns": 8
+    "max_turns": 10
   }
 }

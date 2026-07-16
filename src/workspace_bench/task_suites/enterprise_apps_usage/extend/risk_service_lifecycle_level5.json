@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Complete the risk desk build with Wave One Risk Service, Wave One Risk Signal, Wave One Limit Alert, and Wave One Stress Watch. Add the service, publish Wave One Risk App with Monitor and Stress tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Complete the risk desk build with Wave One Risk Service, Wave One Risk Signal, Wave One Limit Alert, and Wave One Stress Watch. Add the service, publish Wave One Risk App with Monitor and Stress tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Guidance Tracker skill (finance-guidance-tracker) and add a Risk Service Build Note recording its governing concept.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -49,6 +49,15 @@
   },
   "eval": {
     "required_tools": [
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-guidance-tracker"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
       {
         "tool": "get_workspace_snapshot",
         "args": {},
@@ -158,6 +167,18 @@
         "graded_args": [
           "operation"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Risk Service Build Note",
+          "data": "evidence gaps"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -206,6 +227,15 @@
         "no_overlaps": true
       }
     ],
-    "max_turns": 7
+    "max_turns": 9,
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Risk Service Build Note",
+        "data_contains": [
+          "evidence gaps"
+        ]
+      }
+    ]
   }
 }

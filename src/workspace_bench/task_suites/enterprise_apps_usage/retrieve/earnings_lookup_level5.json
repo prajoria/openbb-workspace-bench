@@ -2,7 +2,7 @@
   "id": "earnings_lookup_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "The desk needs a Wave One Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD. Build and add it, instantiate its Earnings Lookup App, read the lookup, and report the exact score and status. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "The desk needs a Wave One Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD. Build and add it, instantiate its Earnings Lookup App, read the lookup, and report the exact score and status. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Earnings Prep skill (finance-earnings-prep) and add a Earnings Lookup Build Note recording its governing concept.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -50,6 +50,15 @@
   },
   "eval": {
     "required_tools": [
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-earnings-prep"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
       {
         "tool": "get_workspace_snapshot",
         "args": {},
@@ -173,6 +182,18 @@
           "origin",
           "widget_id"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Earnings Lookup Build Note",
+          "data": "surprise drivers"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -239,6 +260,15 @@
       ]
     },
     "reference_answer": "The LLY YTD lookup returns score 27.63 and status Open.",
-    "max_turns": 9
+    "max_turns": 11,
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Earnings Lookup Build Note",
+        "data_contains": [
+          "surprise drivers"
+        ]
+      }
+    ]
   }
 }

@@ -2,7 +2,7 @@
   "id": "segment_mix_handoff_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Segment-mix build handoff: add Wave Three Segment Handoff with a Segment Handoff Register table, publish and instantiate Segment Handoff App with one Handoff tab, add a Segment-mix Build Handoff note grounded in Bench Daloopa's Segment Breakdown with the top segment and its exact revenue_musd, then delegate. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Segment-mix build handoff: add Wave Three Segment Handoff with a Segment Handoff Register table, publish and instantiate Segment Handoff App with one Handoff tab, add a Segment-mix Build Handoff note grounded in Bench Daloopa's Segment Breakdown with the top segment and its exact revenue_musd and the Daloopa Tearsheet skill (daloopa-tearsheet)'s governing concept, then delegate. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -53,6 +53,15 @@
         "tool": "get_workspace_snapshot",
         "args": {},
         "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
       },
       {
         "tool": "list_available_widgets",
@@ -143,7 +152,7 @@
         "args": {
           "widget_type": "note",
           "name": "Segment-mix Build Handoff",
-          "data": "Catalog facts: iPhone and 52365.6."
+          "data": "mix: catalog facts iPhone and 52365.6."
         },
         "graded_args": [
           "widget_type",
@@ -177,6 +186,7 @@
         "widget_type": "note",
         "name_contains": "Segment-mix Build Handoff",
         "data_contains": [
+          "mix",
           "iPhone",
           "52365.6"
         ]
@@ -207,6 +217,6 @@
         ]
       }
     ],
-    "max_turns": 11
+    "max_turns": 12
   }
 }

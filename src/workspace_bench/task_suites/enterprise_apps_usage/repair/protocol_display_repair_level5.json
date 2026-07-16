@@ -2,7 +2,7 @@
   "id": "protocol_display_repair_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "Protocol-display backend rebuild: Wave Three Protocol Repair was lost from the workspace; on the open Protocol-display Backend Repair board, rebuild it from scratch: add a custom backend Wave Three Protocol Repair with a Protocol Repair Queue table, publish Protocol Repair App, and instantiate it with one non-overlapping Protocol Repair Queue placement on Protocols, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Protocol-display backend rebuild: Wave Three Protocol Repair was lost from the workspace; on the open Protocol-display Backend Repair board, rebuild it from scratch: add a custom backend Wave Three Protocol Repair with a Protocol Repair Queue table, publish Protocol Repair App, and instantiate it with one non-overlapping Protocol Repair Queue placement on Protocols, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Inflection skill (daloopa-inflection) and add a Protocol-display Rebuild Note recording its governing concept.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -66,6 +66,15 @@
         "tool": "get_workspace_snapshot",
         "args": {},
         "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-inflection"
+        },
+        "graded_args": [
+          "slug"
+        ]
       },
       {
         "tool": "read_workspace_resource",
@@ -138,6 +147,18 @@
         "graded_args": [
           "operation"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Protocol-display Rebuild Note",
+          "data": "growth-rate reversals"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -145,6 +166,15 @@
         "origin": "Wave Three Protocol Repair",
         "widget_id": "protocol_repair_queue",
         "tab_id": "protocols"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Protocol-display Rebuild Note",
+        "data_contains": [
+          "growth-rate reversals"
+        ]
       }
     ],
     "required_widget_defs": [
@@ -173,6 +203,6 @@
         ]
       }
     ],
-    "max_turns": 8
+    "max_turns": 10
   }
 }

@@ -2,7 +2,7 @@
   "id": "research_feed_lifecycle_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Complete the research service with Wave Two Research Feed, Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch. Add the backend, publish Research Feed App with Feed and Archive tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Complete the research service with Wave Two Research Feed, Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch. Add the backend, publish Research Feed App with Feed and Archive tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Capital Allocation skill (daloopa-capital-allocation) and add a Research Feed Build Note recording its governing concept.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -49,6 +49,15 @@
   },
   "eval": {
     "required_tools": [
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-capital-allocation"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
       {
         "tool": "get_workspace_snapshot",
         "args": {},
@@ -158,6 +167,18 @@
         "graded_args": [
           "operation"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Research Feed Build Note",
+          "data": "Dividends Paid"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -206,6 +227,15 @@
         "no_overlaps": true
       }
     ],
-    "max_turns": 7
+    "max_turns": 9,
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Research Feed Build Note",
+        "data_contains": [
+          "Dividends Paid"
+        ]
+      }
+    ]
   }
 }

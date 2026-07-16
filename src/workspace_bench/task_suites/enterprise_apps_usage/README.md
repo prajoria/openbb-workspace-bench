@@ -36,8 +36,11 @@ param keys), level1 discover, level2 translate policy into declared parameter
 values, level3 ambient state under preservation, level4 knowledge-governed
 (in half the spines, strictly: a skill, MCP resource, or workspace prompt
 named in the prompt determines the graded outcome) or multi-intent work,
-level5 build — author `widgets_json`, wrap it in `apps_json`, instantiate,
-and use it.
+level5 governed build — author `widgets_json`, wrap it in `apps_json`,
+instantiate, and use it, with a named skill or resource governing a graded
+outcome so the build rung strictly contains the knowledge driver
+(machine-asserted: every level5 grades an authored backend and a governed
+token that is never printed in the prompt).
 
 Distinct graded targets per catalog: Bench Stark Enterprise 9/349, Bench
 Daloopa 7/10, Getting Started 18/70, Widget Examples 12/30 — spanning tables,
@@ -69,17 +72,16 @@ any mounted catalog matches a prompt's discriminating tokens); answer values
 must appear literally in the target's served rows; prompt register checks
 (<=110 words, no tool names, no shared opening 5-grams).
 
-Difficulty calibration (July 2026, on this exact content; level0-level5
-strict-pass staircases). gpt-4.1-mini (two repeats, 64 attempts per
-level): 91% / 75% / 67% / 39% / 13% / 5%, 48.2% overall — a strictly
-decreasing ladder from an achievable floor to a hard top below the gating
-model's noise level. GLM-5.2 (one attempt per task):
-97% / 91% / 88% / 75% / 56% / 28%, 72.4% overall — strictly decreasing.
-GPT-5.5 (one attempt per task): 97% / 100% / 88% / 97% / 75% / 56%, 85.4%
-overall. Every rung separates the three models (level4 13/56/75, level5
-5/28/56), and the deep ladder separates frontier models where the gating
-model has no signal. A generator assertion pins the build-rung semantics:
-every level5 task grades an authored `widgets_json` backend.
+Difficulty calibration (July 2026; level0-level4 numbers are on this exact
+content, level5 recalibration follows the governed-build revision).
+gpt-4.1-mini (two repeats, 64 attempts per level): 91% / 75% / 67% / 39% /
+13% across level0-level4 (level5 pre-revision: 5%). GLM-5.2 (one attempt
+per task): 97% / 91% / 88% / 75% / 56% (level5 pre-revision: 28%).
+GPT-5.5: 97% / 100% / 88% / 97% / 75% (level5 pre-revision: 56%). Every
+rung separates the three models, and the deep ladder separates frontier
+models where the gating model has no signal. Local reference models run
+free-form (OLLAMA_FORMAT=none): schema-grammar decoding co-writes build
+manifests and overstates what the model can build.
 
 ## Limitations
 

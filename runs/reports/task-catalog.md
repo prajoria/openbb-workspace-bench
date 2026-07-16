@@ -3069,7 +3069,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Compliance-alert build board: add Wave Three Compliance Review with a Compliance Review Register table and publish and instantiate Compliance Review App on Review; also add Bench Stark Enterprise — Compliance Surveillance Hub, Open Alert Metrics; Getting Started — Getting Started, Markdown Widget with Number Input. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Compliance-alert build board: add Wave Three Compliance Review with a Compliance Review Register table and publish and instantiate Compliance Review App on Review; also add Bench Stark Enterprise — Compliance Surveillance Hub, Open Alert Metrics; Getting Started — Getting Started, Markdown Widget with Number Input. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Guidance Tracker skill (finance-guidance-tracker) and add a Compliance-alert Build Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3080,6 +3080,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Widget** ≥1× `Wave Three Compliance Review/compliance_review_register` on tab `review` → `missing_widget`
 - **Widget** ≥1× `Bench Stark Enterprise/compliance_surveillance_hub_alerts_open_alert_metrics` → `missing_widget`
 - **Widget** ≥1× `Getting Started/markdown_widget_with_number_input` → `missing_widget`
+- **Generated note** ≥1× named ~"Compliance-alert Build Note" whose content mentions "evidence gaps" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `decision_briefing_level0`
 
@@ -3157,7 +3158,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> The PM needs a Decision Tile Backend with a Decision Summary Tile metric. Author and add it, then instantiate its Decision Briefing App. On Briefing, place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, beside Getting Started's Car Manufacturer Performance at y 10, x 0 and x 20, each width 20 and height 14. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> The PM needs a Decision Tile Backend with a Decision Summary Tile metric. Author and add it, then instantiate its Decision Briefing App. On Briefing, place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, beside Getting Started's Car Manufacturer Performance at y 10, x 0 and x 20, each width 20 and height 14. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Capital Allocation skill (daloopa-capital-allocation) and add a Decision Briefing Build Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3168,6 +3169,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` on tab `briefing` → `missing_widget`
 - **Widget** ≥1× `Getting Started/company_performance` on tab `briefing` → `missing_widget`
 - **Widget** ≥1× `Decision Tile Backend/decision_summary_tile` → `missing_widget`
+- **Generated note** ≥1× named ~"Decision Briefing Build Note" whose content mentions "Free Cash Flow" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `execution_quality_review_level0`
 
@@ -3247,7 +3249,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Execution-quality build board: add Wave Three Execution Review with a Execution Review Register table and publish and instantiate Execution Review App on Quality; also add Bench Stark Enterprise — Execution Desk, Live Orders; Getting Started — Getting Started, Multi PDF Viewer - URL. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Execution-quality build board: add Wave Three Execution Review with a Execution Review Register table and publish and instantiate Execution Review App on Quality; also add Bench Stark Enterprise — Execution Desk, Live Orders; Getting Started — Getting Started, Multi PDF Viewer - URL. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Comps skill (finance-comps) and add a Execution-quality Build Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3258,6 +3260,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Widget** ≥1× `Wave Three Execution Review/execution_review_register` on tab `quality` → `missing_widget`
 - **Widget** ≥1× `Bench Stark Enterprise/execution_desk_blotter_live_orders` → `missing_widget`
 - **Widget** ≥1× `Getting Started/multi_pdf_url` → `missing_widget`
+- **Generated note** ≥1× named ~"Execution-quality Build Note" whose content mentions "outliers" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `market_telemetry_level0`
 
@@ -3335,7 +3338,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Author and add a Telemetry Summary Backend with a Telemetry Summary Tile metric, then instantiate its Market Telemetry App. On Monitor, place Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined at y 10, x 0 and x 20, each width 20 and height 12. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Author and add a Telemetry Summary Backend with a Telemetry Summary Tile metric, then instantiate its Market Telemetry App. On Monitor, place Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined at y 10, x 0 and x 20, each width 20 and height 12. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Tearsheet skill (finance-tearsheet) and add a Market Telemetry Build Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3346,6 +3349,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Widget** ≥1× `Getting Started/sparkline_line` on tab `monitor` → `missing_widget`
 - **Widget** ≥1× `Widget Examples/tabs_with_dropdown` on tab `monitor` → `missing_widget`
 - **Widget** ≥1× `Telemetry Summary Backend/telemetry_summary_tile` → `missing_widget`
+- **Generated note** ≥1× named ~"Market Telemetry Build Note" whose content mentions "price action" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 ### extend (24)
 
@@ -3353,7 +3357,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: platform · specification: -
 
-> Guidance-service level-0 service: add a custom backend Wave Three Guidance Service with the Evidence Gaps table.
+> Guidance-service level-0 service: add a custom backend Wave Three Guidance Service with the Evidence Gaps table. Widget ids are the snake_case of widget names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3366,7 +3370,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: platform · specification: -
 
-> Guidance-service level-1 service: add a custom backend Wave Three Guidance Service with the Changed Assumptions table.
+> Guidance-service level-1 service: add a custom backend Wave Three Guidance Service with the Changed Assumptions table. Widget ids are the snake_case of widget names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3379,7 +3383,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Guidance-service paired service: add a custom backend Wave Three Guidance Service with Evidence Gaps and Changed Assumptions tables.
+> Guidance-service paired service: add a custom backend Wave Three Guidance Service with Evidence Gaps and Changed Assumptions tables. Widget ids are the snake_case of widget names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3392,7 +3396,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> Guidance-service app service: add a custom backend Wave Three Guidance Service with Evidence Gaps and Changed Assumptions tables, publish Guidance Service App on Review, and instantiate it.
+> Guidance-service app service: add a custom backend Wave Three Guidance Service with Evidence Gaps and Changed Assumptions tables, publish Guidance Service App on Review, and instantiate it. Widget ids are the snake_case of widget names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3422,7 +3426,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Guidance-service complete service: follow the widgets manifest specification; add a custom backend Wave Three Guidance Service with Evidence Gaps, Changed Assumptions, Management Claims tables, publish Guidance Service App with Review and Archive tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Guidance-service complete service: follow the widgets manifest specification; add a custom backend Wave Three Guidance Service with Evidence Gaps, Changed Assumptions, Management Claims tables, publish Guidance Service App with Review and Archive tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Guidance Tracker skill (finance-guidance-tracker) and add a Guidance-service Governing Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3433,12 +3437,13 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Widget** ≥1× `Wave Three Guidance Service/evidence_gaps` on tab `review` → `missing_widget`
 - **Widget** ≥1× `Wave Three Guidance Service/changed_assumptions` on tab `review` → `missing_widget`
 - **Widget** ≥1× `Wave Three Guidance Service/management_claims` on tab `archive` → `missing_widget`
+- **Generated note** ≥1× named ~"Guidance-service Governing Note" whose content mentions "evidence gaps" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `inflection_service_lifecycle_level0`
 
 **level0** · category: platform · specification: -
 
-> Inflection-service level-0 service: add a custom backend Wave Three Inflection Service with the Growth-Rate Reversals table.
+> Inflection-service level-0 service: add a custom backend Wave Three Inflection Service with the Growth-Rate Reversals table. Widget ids are the snake_case of widget names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3451,7 +3456,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: platform · specification: -
 
-> Inflection-service level-1 service: add a custom backend Wave Three Inflection Service with the Quarterly Series Monitor table.
+> Inflection-service level-1 service: add a custom backend Wave Three Inflection Service with the Quarterly Series Monitor table. Widget ids are the snake_case of widget names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3464,7 +3469,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Inflection-service paired service: add a custom backend Wave Three Inflection Service with Growth-Rate Reversals and Quarterly Series Monitor tables.
+> Inflection-service paired service: add a custom backend Wave Three Inflection Service with Growth-Rate Reversals and Quarterly Series Monitor tables. Widget ids are the snake_case of widget names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3477,7 +3482,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> Inflection-service app service: add a custom backend Wave Three Inflection Service with Growth-Rate Reversals and Quarterly Series Monitor tables, publish Inflection Service App on Review, and instantiate it.
+> Inflection-service app service: add a custom backend Wave Three Inflection Service with Growth-Rate Reversals and Quarterly Series Monitor tables, publish Inflection Service App on Review, and instantiate it. Widget ids are the snake_case of widget names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3507,7 +3512,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Inflection-service complete service: follow the widgets manifest specification; add a custom backend Wave Three Inflection Service with Growth-Rate Reversals, Quarterly Series Monitor, Inflection Evidence Log tables, publish Inflection Service App with Review and Archive tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Inflection-service complete service: follow the widgets manifest specification; add a custom backend Wave Three Inflection Service with Growth-Rate Reversals, Quarterly Series Monitor, Inflection Evidence Log tables, publish Inflection Service App with Review and Archive tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Inflection skill (daloopa-inflection) and add a Inflection-service Governing Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3518,6 +3523,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Widget** ≥1× `Wave Three Inflection Service/growth_rate_reversals` on tab `review` → `missing_widget`
 - **Widget** ≥1× `Wave Three Inflection Service/quarterly_series_monitor` on tab `review` → `missing_widget`
 - **Widget** ≥1× `Wave Three Inflection Service/inflection_evidence_log` on tab `archive` → `missing_widget`
+- **Generated note** ≥1× named ~"Inflection-service Governing Note" whose content mentions "growth-rate reversals" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `research_feed_lifecycle_level0`
 
@@ -3549,7 +3555,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Add a minimal Wave Two Research Feed backend serving a Research Feed Pulse table at /research-feed.
+> Add a minimal Wave Two Research Feed backend serving a Research Feed Pulse table at /research-feed. Widget ids are the snake_case of widget names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3590,7 +3596,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Complete the research service with Wave Two Research Feed, Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch. Add the backend, publish Research Feed App with Feed and Archive tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Complete the research service with Wave Two Research Feed, Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch. Add the backend, publish Research Feed App with Feed and Archive tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Capital Allocation skill (daloopa-capital-allocation) and add a Research Feed Build Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3601,6 +3607,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Widget** ≥1× `Wave Two Research Feed/research_feed_pulse` on tab `feed` → `missing_widget`
 - **Widget** ≥1× `Wave Two Research Feed/source_freshness_alert` on tab `feed` → `missing_widget`
 - **Widget** ≥1× `Wave Two Research Feed/archive_coverage_watch` on tab `archive` → `missing_widget`
+- **Generated note** ≥1× named ~"Research Feed Build Note" whose content mentions "Dividends Paid" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `risk_service_lifecycle_level0`
 
@@ -3632,7 +3639,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Add a minimal Wave One Risk Service backend that serves a Wave One Risk Signal table at /risk-signal.
+> Add a minimal Wave One Risk Service backend that serves a Wave One Risk Signal table at /risk-signal. Widget ids are the snake_case of widget names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3673,7 +3680,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Complete the risk desk build with Wave One Risk Service, Wave One Risk Signal, Wave One Limit Alert, and Wave One Stress Watch. Add the service, publish Wave One Risk App with Monitor and Stress tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Complete the risk desk build with Wave One Risk Service, Wave One Risk Signal, Wave One Limit Alert, and Wave One Stress Watch. Add the service, publish Wave One Risk App with Monitor and Stress tabs, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Guidance Tracker skill (finance-guidance-tracker) and add a Risk Service Build Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3684,6 +3691,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Widget** ≥1× `Wave One Risk Service/wave_one_risk_signal` on tab `monitor` → `missing_widget`
 - **Widget** ≥1× `Wave One Risk Service/wave_one_limit_alert` on tab `monitor` → `missing_widget`
 - **Widget** ≥1× `Wave One Risk Service/wave_one_stress_watch` on tab `stress` → `missing_widget`
+- **Generated note** ≥1× named ~"Risk Service Build Note" whose content mentions "evidence gaps" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 ### handoff (24)
 
@@ -3761,7 +3769,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Consensus-exception build handoff: add Wave Three Consensus Handoff with a Consensus Handoff Register table, publish and instantiate Consensus Handoff App with one Handoff tab, add a Consensus-exception Build Handoff note grounded in Bench Daloopa's Consensus Estimates with the exact Total Revenue actual and consensus for 2026Q1, then delegate. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Consensus-exception build handoff: add Wave Three Consensus Handoff with a Consensus Handoff Register table, publish and instantiate Consensus Handoff App with one Handoff tab, add a Consensus-exception Build Handoff note grounded in Bench Daloopa's Consensus Estimates with the exact Total Revenue actual and consensus for 2026Q1 and the Daloopa Earnings Review skill (daloopa-earnings-review)'s governing concept, then delegate. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3770,7 +3778,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave Three Consensus Handoff/consensus_handoff_register` on tab `handoff` → `missing_widget`
-- **Generated note** ≥1× named ~"Consensus-exception Build Handoff" whose content mentions "102070.1", "99404.2" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Generated note** ≥1× named ~"Consensus-exception Build Handoff" whose content mentions "consensus", "102070.1", "99404.2" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `earnings_handoff_level0`
 
@@ -3846,7 +3854,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> From the open Earnings Handoff board, author and add a minimal custom Earnings Handoff Backend with one Earnings Handoff Register. Publish and instantiate Earnings Handoff App with one Handoff tab, add an Earnings Build Handoff note naming Earnings Handoff App and Earnings Handoff Register, then delegate the build-review follow-up. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> From the open Earnings Handoff board, author and add a minimal custom Earnings Handoff Backend with one Earnings Handoff Register. Publish and instantiate Earnings Handoff App with one Handoff tab, add an Earnings Build Handoff note naming Earnings Handoff App and Earnings Handoff Register, then delegate the build-review follow-up. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Earnings Prep skill (finance-earnings-prep) and record its governing concept in the note.
 
 - Initial workspace: dashboard "Earnings Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3855,7 +3863,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Earnings Handoff Backend/earnings_handoff_register` on tab `handoff` → `missing_widget`
-- **Generated note** ≥1× named ~"Earnings Build Handoff" whose content mentions "Earnings Handoff App", "Earnings Handoff Register" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Generated note** ≥1× named ~"Earnings Build Handoff" whose content mentions "Earnings Handoff App", "Earnings Handoff Register", "street numbers" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `news_desk_handoff_level0`
 
@@ -3931,7 +3939,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Starting from the open News Desk Handoff board, author and add a minimal custom News Handoff Backend with one News Handoff Register. Publish and instantiate News Handoff App with one Handoff tab, add a News Build Handoff note naming News Handoff App and News Handoff Register, then delegate the build-review follow-up. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Starting from the open News Desk Handoff board, author and add a minimal custom News Handoff Backend with one News Handoff Register. Publish and instantiate News Handoff App with one Handoff tab, add a News Build Handoff note naming News Handoff App and News Handoff Register, then delegate the build-review follow-up. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Tearsheet skill (finance-tearsheet) and record its governing concept in the note.
 
 - Initial workspace: dashboard "News Desk Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3940,7 +3948,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `News Handoff Backend/news_handoff_register` on tab `handoff` → `missing_widget`
-- **Generated note** ≥1× named ~"News Build Handoff" whose content mentions "News Handoff App", "News Handoff Register" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Generated note** ≥1× named ~"News Build Handoff" whose content mentions "News Handoff App", "News Handoff Register", "catalysts" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `segment_mix_handoff_level0`
 
@@ -4016,7 +4024,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Segment-mix build handoff: add Wave Three Segment Handoff with a Segment Handoff Register table, publish and instantiate Segment Handoff App with one Handoff tab, add a Segment-mix Build Handoff note grounded in Bench Daloopa's Segment Breakdown with the top segment and its exact revenue_musd, then delegate. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Segment-mix build handoff: add Wave Three Segment Handoff with a Segment Handoff Register table, publish and instantiate Segment Handoff App with one Handoff tab, add a Segment-mix Build Handoff note grounded in Bench Daloopa's Segment Breakdown with the top segment and its exact revenue_musd and the Daloopa Tearsheet skill (daloopa-tearsheet)'s governing concept, then delegate. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4025,7 +4033,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave Three Segment Handoff/segment_handoff_register` on tab `handoff` → `missing_widget`
-- **Generated note** ≥1× named ~"Segment-mix Build Handoff" whose content mentions "iPhone", "52365.6" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
+- **Generated note** ≥1× named ~"Segment-mix Build Handoff" whose content mentions "mix", "iPhone", "52365.6" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 ### organize (24)
 
@@ -4102,7 +4110,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Author and add a Client Onboarding Backend with Client Intake Queue and Approval Log table views, then publish and instantiate a Client Onboarding App with Intake and Approvals tabs. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Author and add a Client Onboarding Backend with Client Intake Queue and Approval Log table views, then publish and instantiate a Client Onboarding App with Intake and Approvals tabs. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Guidance Tracker skill (finance-guidance-tracker) and add a Client Onboarding Build Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4112,6 +4120,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - **Widget** ≥1× `Client Onboarding Backend/client_intake_queue` on tab `intake` → `missing_widget`
 - **Widget** ≥1× `Client Onboarding Backend/approval_log` on tab `approvals` → `missing_widget`
+- **Generated note** ≥1× named ~"Client Onboarding Build Note" whose content mentions "changed assumptions" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `committee_navigation_level0`
 
@@ -4185,7 +4194,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> The committee needs a Committee Navigation Backend with Agenda Queue and Evidence Register table views. Author and add it, publish a Committee Review App with Agenda and Evidence tabs, and instantiate it. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> The committee needs a Committee Navigation Backend with Agenda Queue and Evidence Register table views. Author and add it, publish a Committee Review App with Agenda and Evidence tabs, and instantiate it. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Earnings Prep skill (finance-earnings-prep) and add a Committee Navigation Build Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4195,6 +4204,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - **Widget** ≥1× `Committee Navigation Backend/agenda_queue` on tab `agenda` → `missing_widget`
 - **Widget** ≥1× `Committee Navigation Backend/evidence_register` on tab `evidence` → `missing_widget`
+- **Generated note** ≥1× named ~"Committee Navigation Build Note" whose content mentions "transcript tone" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `due_diligence_media_room_level0`
 
@@ -4283,7 +4293,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Media-room navigation build: add Wave Three Media Room with a Media Review Register table, publish and instantiate Media Room App on Media, then add Getting Started's PDF Widget with URL, Widget Examples's URL PDF files. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Media-room navigation build: add Wave Three Media Room with a Media Review Register table, publish and instantiate Media Room App on Media, then add Getting Started's PDF Widget with URL, Widget Examples's URL PDF files. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Tearsheet skill (finance-tearsheet) and add a Media-room Build Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4294,6 +4304,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Widget** ≥1× `Wave Three Media Room/media_review_register` on tab `media` → `missing_widget`
 - **Widget** ≥1× `Getting Started/pdf_widget_url` → `missing_widget`
 - **Widget** ≥1× `Widget Examples/url_pdf` → `missing_widget`
+- **Generated note** ≥1× named ~"Media-room Build Note" whose content mentions "catalysts" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `visualization_gallery_level0`
 
@@ -4382,7 +4393,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Visualization-gallery navigation build: add Wave Three Visualization Gallery with a Visualization Review Register table, publish and instantiate Visualization Gallery App on Gallery, then add Getting Started's Vega-Lite Bar Demo, Widget Examples's Vega-Lite Scatter Demo. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Visualization-gallery navigation build: add Wave Three Visualization Gallery with a Visualization Review Register table, publish and instantiate Visualization Gallery App on Gallery, then add Getting Started's Vega-Lite Bar Demo, Widget Examples's Vega-Lite Scatter Demo. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Comps skill (finance-comps) and add a Visualization-gallery Build Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4393,6 +4404,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Widget** ≥1× `Wave Three Visualization Gallery/visualization_review_register` on tab `gallery` → `missing_widget`
 - **Widget** ≥1× `Getting Started/vega_bar` → `missing_widget`
 - **Widget** ≥1× `Widget Examples/vega_scatter_demo` → `missing_widget`
+- **Generated note** ≥1× named ~"Visualization-gallery Build Note" whose content mentions "valuation multiples" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 ### parameterize (24)
 
@@ -4471,7 +4483,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Client-intake build tuning: add a custom backend Wave Three Intake Tuning with a Intake Control Panel table carrying risk_profile and client_last_name params, publish and instantiate Intake Tuning App on Controls, then set the live Intake Control Panel to risk_profile Moderate, client_last_name Chen. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Client-intake build tuning: add a custom backend Wave Three Intake Tuning with a Intake Control Panel table carrying risk_profile and client_last_name params, publish and instantiate Intake Tuning App on Controls, then set the live Intake Control Panel to risk_profile Moderate, client_last_name Chen. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Widget Parameters resource (openbb://workspace/specs/widget-parameters) and add a Client-intake Tuning Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4480,6 +4492,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave Three Intake Tuning/intake_control_panel` with data_args ⊇ {"risk_profile": "Moderate", "client_last_name": "Chen"} on tab `controls` → `missing_widget`
+- **Generated note** ≥1× named ~"Client-intake Tuning Note" whose content mentions "form" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `crypto_display_controls_level0`
 
@@ -4556,7 +4569,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Crypto-display build tuning: add a custom backend Wave Three Display Tuning with a Display Control Panel table carrying symbol and interval params, publish and instantiate Display Tuning App on Controls, then set the live Display Control Panel to symbol ethusdt, interval 1m. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Crypto-display build tuning: add a custom backend Wave Three Display Tuning with a Display Control Panel table carrying symbol and interval params, publish and instantiate Display Tuning App on Controls, then set the live Display Control Panel to symbol ethusdt, interval 1m. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Inflection skill (daloopa-inflection) and add a Crypto-display Tuning Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4565,6 +4578,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave Three Display Tuning/display_control_panel` with data_args ⊇ {"symbol": "ethusdt", "interval": "1m"} on tab `controls` → `missing_widget`
+- **Generated note** ≥1× named ~"Crypto-display Tuning Note" whose content mentions "growth-rate reversals" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `crypto_document_controls_level0`
 
@@ -4642,7 +4656,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Document-controls build tuning: add a custom backend Wave Two Document Tuning with a Document Control Panel table carrying filenames and category params, publish and instantiate Document Tuning App on Controls, then set the live Document Control Panel to filenames solana.pdf, category l1. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Document-controls build tuning: add a custom backend Wave Two Document Tuning with a Document Control Panel table carrying filenames and category params, publish and instantiate Document Tuning App on Controls, then set the live Document Control Panel to filenames solana.pdf, category l1. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Tearsheet skill (finance-tearsheet) and add a Document-controls Tuning Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4651,6 +4665,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave Two Document Tuning/document_control_panel` with data_args ⊇ {"filenames": "solana.pdf", "category": "l1"} on tab `controls` → `missing_widget`
+- **Generated note** ≥1× named ~"Document-controls Tuning Note" whose content mentions "price action" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `technology_decision_inputs_level0`
 
@@ -4728,7 +4743,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Decision-inputs build tuning: add a custom backend Wave One Decision Tuning with a Decision Input Panel table carrying company and period params, publish and instantiate Decision Tuning App on Controls, then set the live Decision Input Panel to company TSLA, period QTD. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Decision-inputs build tuning: add a custom backend Wave One Decision Tuning with a Decision Input Panel table carrying company and period params, publish and instantiate Decision Tuning App on Controls, then set the live Decision Input Panel to company TSLA, period QTD. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Earnings Prep skill (finance-earnings-prep) and add a Decision-inputs Tuning Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4737,6 +4752,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave One Decision Tuning/decision_input_panel` with data_args ⊇ {"company": "TSLA", "period": "QTD"} on tab `controls` → `missing_widget`
+- **Generated note** ≥1× named ~"Decision-inputs Tuning Note" whose content mentions "internal estimates" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 ### platform (24)
 
@@ -4946,7 +4962,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Review the backend contract for the open Governed Earnings Brief board, then add a Backend Contract Actions note that names endpoints and CORS.
+> Review the backend contract resource (openbb://workspace/contract/backend) for the open Governed Earnings Brief board, then add a Backend Contract Actions note recording the two contract items listed between the manifest files and authentication.
 
 - Initial workspace: dashboard "Governed Earnings Brief"; 1 tab(s): overview
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5166,7 +5182,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: repair · specification: -
 
-> Detail-queue backend rebuild: Wave Two Detail Repair was lost from the workspace; on the open Custom Detail Repair board, rebuild it from scratch: add a custom backend Wave Two Detail Repair with a Manufacturer Detail Queue table, publish Detail Repair App, and instantiate it with one non-overlapping Manufacturer Detail Queue placement on Details, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Detail-queue backend rebuild: Wave Two Detail Repair was lost from the workspace; on the open Custom Detail Repair board, rebuild it from scratch: add a custom backend Wave Two Detail Repair with a Manufacturer Detail Queue table, publish Detail Repair App, and instantiate it with one non-overlapping Manufacturer Detail Queue placement on Details, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Industry skill (daloopa-industry) and add a Detail-queue Rebuild Note recording its governing concept.
 
 - Initial workspace: dashboard "Custom Detail Repair"; 1 tab(s): details
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5175,6 +5191,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave Two Detail Repair/manufacturer_detail_queue` on tab `details` → `missing_widget`
+- **Generated note** ≥1× named ~"Detail-queue Rebuild Note" whose content mentions "peers" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `nav_exception_station_level0`
 
@@ -5254,7 +5271,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: repair · specification: -
 
-> NAV-exception backend rebuild: Wave One NAV Repair was lost from the workspace; on the open Custom NAV Repair Staging board, rebuild it from scratch: add a custom backend Wave One NAV Repair with a NAV Exception Queue table, publish NAV Repair App, and instantiate it with one non-overlapping NAV Exception Queue placement on Exceptions, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> NAV-exception backend rebuild: Wave One NAV Repair was lost from the workspace; on the open Custom NAV Repair Staging board, rebuild it from scratch: add a custom backend Wave One NAV Repair with a NAV Exception Queue table, publish NAV Repair App, and instantiate it with one non-overlapping NAV Exception Queue placement on Exceptions, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Guidance Tracker skill (daloopa-guidance-tracker) and add a NAV-exception Rebuild Note recording its governing concept.
 
 - Initial workspace: dashboard "Custom NAV Repair Staging"; 1 tab(s): exceptions
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5263,6 +5280,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave One NAV Repair/nav_exception_queue` on tab `exceptions` → `missing_widget`
+- **Generated note** ≥1× named ~"NAV-exception Rebuild Note" whose content mentions "Missed" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `protocol_display_repair_level0`
 
@@ -5343,7 +5361,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: repair · specification: -
 
-> Protocol-display backend rebuild: Wave Three Protocol Repair was lost from the workspace; on the open Protocol-display Backend Repair board, rebuild it from scratch: add a custom backend Wave Three Protocol Repair with a Protocol Repair Queue table, publish Protocol Repair App, and instantiate it with one non-overlapping Protocol Repair Queue placement on Protocols, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Protocol-display backend rebuild: Wave Three Protocol Repair was lost from the workspace; on the open Protocol-display Backend Repair board, rebuild it from scratch: add a custom backend Wave Three Protocol Repair with a Protocol Repair Queue table, publish Protocol Repair App, and instantiate it with one non-overlapping Protocol Repair Queue placement on Protocols, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Inflection skill (daloopa-inflection) and add a Protocol-display Rebuild Note recording its governing concept.
 
 - Initial workspace: dashboard "Protocol-display Backend Repair"; 1 tab(s): protocols
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5352,6 +5370,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave Three Protocol Repair/protocol_repair_queue` on tab `protocols` → `missing_widget`
+- **Generated note** ≥1× named ~"Protocol-display Rebuild Note" whose content mentions "growth-rate reversals" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `vendor_freshness_repair_level0`
 
@@ -5432,7 +5451,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: repair · specification: -
 
-> Vendor-freshness backend rebuild: Wave Three Vendor Repair was lost from the workspace; on the open Vendor-freshness Backend Repair board, rebuild it from scratch: add a custom backend Wave Three Vendor Repair with a Vendor Repair Queue table, publish Vendor Repair App, and instantiate it with one non-overlapping Vendor Repair Queue placement on Incidents, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Vendor-freshness backend rebuild: Wave Three Vendor Repair was lost from the workspace; on the open Vendor-freshness Backend Repair board, rebuild it from scratch: add a custom backend Wave Three Vendor Repair with a Vendor Repair Queue table, publish Vendor Repair App, and instantiate it with one non-overlapping Vendor Repair Queue placement on Incidents, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Guidance Tracker skill (finance-guidance-tracker) and add a Vendor-freshness Rebuild Note recording its governing concept.
 
 - Initial workspace: dashboard "Vendor-freshness Backend Repair"; 1 tab(s): incidents
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5441,6 +5460,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave Three Vendor Repair/vendor_repair_queue` on tab `incidents` → `missing_widget`
+- **Generated note** ≥1× named ~"Vendor-freshness Rebuild Note" whose content mentions "evidence gaps" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 ### retrieve (24)
 
@@ -5513,7 +5533,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Build and add a Wave Two Closing Tape backend with a Closing Tape Lookup table for NVDA, instantiate its Closing Tape App, read the result, and report the latest date and exact close. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Build and add a Wave Two Closing Tape backend with a Closing Tape Lookup table for NVDA, instantiate its Closing Tape App, read the result, and report the latest date and exact close. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Tearsheet skill (daloopa-tearsheet) and add a Closing Tape Build Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5522,6 +5542,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave Two Closing Tape/closing_tape_lookup` with data_args ⊇ {"ticker": "NVDA"} on tab `tape` → `missing_widget`
+- **Generated note** ≥1× named ~"Closing Tape Build Note" whose content mentions "latest_calendar_quarter" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `earnings_lookup_level0`
 
@@ -5592,7 +5613,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> The desk needs a Wave One Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD. Build and add it, instantiate its Earnings Lookup App, read the lookup, and report the exact score and status. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> The desk needs a Wave One Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD. Build and add it, instantiate its Earnings Lookup App, read the lookup, and report the exact score and status. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Earnings Prep skill (finance-earnings-prep) and add a Earnings Lookup Build Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5601,6 +5622,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave One Earnings Lookup/earnings_status_lookup` with data_args ⊇ {"ticker": "LLY", "period": "YTD"} on tab `lookup` → `missing_widget`
+- **Generated note** ≥1× named ~"Earnings Lookup Build Note" whose content mentions "surprise drivers" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `live_quote_lookup_level0`
 
@@ -5672,7 +5694,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Live-quote build request: add Wave Three Live Quote with a Live Quote Lookup table, carrying symbol and last_price columns; publish and instantiate Live Quote App on Quotes, read it with symbol AAPL, and report the exact symbol and last_price values shown. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Live-quote build request: add Wave Three Live Quote with a Live Quote Lookup table, carrying symbol and last_price columns; publish and instantiate Live Quote App on Quotes, read it with symbol AAPL, and report the exact symbol and last_price values shown. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Tearsheet skill (finance-tearsheet) and add a Live-quote Build Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5681,6 +5703,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave Three Live Quote/live_quote_lookup` with data_args ⊇ {"symbol": "AAPL"} on tab `quotes` → `missing_widget`
+- **Generated note** ≥1× named ~"Live-quote Build Note" whose content mentions "price action" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `operating_driver_lookup_level0`
 
@@ -5752,7 +5775,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Operating-driver build request: add Wave Three Operating Drivers with a Operating Driver Lookup table, carrying fiscal_period and driver_value columns; publish and instantiate Operating Driver App on Drivers, read it with ticker AAPL, period 2026Q1, and report the exact fiscal_period and driver_value values shown. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.
+> Operating-driver build request: add Wave Three Operating Drivers with a Operating Driver Lookup table, carrying fiscal_period and driver_value columns; publish and instantiate Operating Driver App on Drivers, read it with ticker AAPL, period 2026Q1, and report the exact fiscal_period and driver_value values shown. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Inflection skill (daloopa-inflection) and add a Operating-driver Build Note recording its governing concept.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5761,6 +5784,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Wave Three Operating Drivers/operating_driver_lookup` with data_args ⊇ {"ticker": "AAPL", "period": "2026Q1"} on tab `drivers` → `missing_widget`
+- **Generated note** ≥1× named ~"Operating-driver Build Note" whose content mentions "growth-rate reversals" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 
 ## Suite: build-openbb-apps (236 tasks)

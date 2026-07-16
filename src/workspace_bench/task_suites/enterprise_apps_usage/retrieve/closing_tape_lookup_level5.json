@@ -2,7 +2,7 @@
   "id": "closing_tape_lookup_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Build and add a Wave Two Closing Tape backend with a Closing Tape Lookup table for NVDA, instantiate its Closing Tape App, read the result, and report the latest date and exact close. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Build and add a Wave Two Closing Tape backend with a Closing Tape Lookup table for NVDA, instantiate its Closing Tape App, read the result, and report the latest date and exact close. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Tearsheet skill (daloopa-tearsheet) and add a Closing Tape Build Note recording its governing concept.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -50,6 +50,15 @@
   },
   "eval": {
     "required_tools": [
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
       {
         "tool": "get_workspace_snapshot",
         "args": {},
@@ -159,6 +168,18 @@
           "origin",
           "widget_id"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Closing Tape Build Note",
+          "data": "latest_calendar_quarter"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -222,6 +243,15 @@
       ]
     },
     "reference_answer": "The NVDA lookup ends on 2026-07-10 at 190.01.",
-    "max_turns": 9
+    "max_turns": 11,
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Closing Tape Build Note",
+        "data_contains": [
+          "latest_calendar_quarter"
+        ]
+      }
+    ]
   }
 }

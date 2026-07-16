@@ -2,7 +2,7 @@
   "id": "manufacturer_details_repair_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "Detail-queue backend rebuild: Wave Two Detail Repair was lost from the workspace; on the open Custom Detail Repair board, rebuild it from scratch: add a custom backend Wave Two Detail Repair with a Manufacturer Detail Queue table, publish Detail Repair App, and instantiate it with one non-overlapping Manufacturer Detail Queue placement on Details, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Detail-queue backend rebuild: Wave Two Detail Repair was lost from the workspace; on the open Custom Detail Repair board, rebuild it from scratch: add a custom backend Wave Two Detail Repair with a Manufacturer Detail Queue table, publish Detail Repair App, and instantiate it with one non-overlapping Manufacturer Detail Queue placement on Details, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Industry skill (daloopa-industry) and add a Detail-queue Rebuild Note recording its governing concept.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -66,6 +66,15 @@
         "tool": "get_workspace_snapshot",
         "args": {},
         "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-industry"
+        },
+        "graded_args": [
+          "slug"
+        ]
       },
       {
         "tool": "read_workspace_resource",
@@ -138,6 +147,18 @@
         "graded_args": [
           "operation"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Detail-queue Rebuild Note",
+          "data": "peers"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -145,6 +166,15 @@
         "origin": "Wave Two Detail Repair",
         "widget_id": "manufacturer_detail_queue",
         "tab_id": "details"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Detail-queue Rebuild Note",
+        "data_contains": [
+          "peers"
+        ]
       }
     ],
     "required_widget_defs": [
@@ -173,6 +203,6 @@
         ]
       }
     ],
-    "max_turns": 8
+    "max_turns": 10
   }
 }

@@ -2,7 +2,7 @@
   "id": "crypto_display_controls_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Crypto-display build tuning: add a custom backend Wave Three Display Tuning with a Display Control Panel table carrying symbol and interval params, publish and instantiate Display Tuning App on Controls, then set the live Display Control Panel to symbol ethusdt, interval 1m. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Crypto-display build tuning: add a custom backend Wave Three Display Tuning with a Display Control Panel table carrying symbol and interval params, publish and instantiate Display Tuning App on Controls, then set the live Display Control Panel to symbol ethusdt, interval 1m. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Inflection skill (daloopa-inflection) and add a Crypto-display Tuning Note recording its governing concept.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -53,6 +53,15 @@
         "tool": "get_workspace_snapshot",
         "args": {},
         "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-inflection"
+        },
+        "graded_args": [
+          "slug"
+        ]
       },
       {
         "tool": "read_workspace_resource",
@@ -164,6 +173,18 @@
         "graded_args": [
           "data_args"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Crypto-display Tuning Note",
+          "data": "growth-rate reversals"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -175,6 +196,15 @@
           "interval": "1m"
         },
         "tab_id": "controls"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Crypto-display Tuning Note",
+        "data_contains": [
+          "growth-rate reversals"
+        ]
       }
     ],
     "required_widget_defs": [
@@ -202,6 +232,6 @@
         ]
       }
     ],
-    "max_turns": 9
+    "max_turns": 11
   }
 }

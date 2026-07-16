@@ -2,7 +2,7 @@
   "id": "live_quote_lookup_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Live-quote build request: add Wave Three Live Quote with a Live Quote Lookup table, carrying symbol and last_price columns; publish and instantiate Live Quote App on Quotes, read it with symbol AAPL, and report the exact symbol and last_price values shown. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Live-quote build request: add Wave Three Live Quote with a Live Quote Lookup table, carrying symbol and last_price columns; publish and instantiate Live Quote App on Quotes, read it with symbol AAPL, and report the exact symbol and last_price values shown. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Tearsheet skill (finance-tearsheet) and add a Live-quote Build Note recording its governing concept.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -54,6 +54,15 @@
         "tool": "get_workspace_snapshot",
         "args": {},
         "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
       },
       {
         "tool": "read_workspace_resource",
@@ -156,6 +165,18 @@
           }
         },
         "optional": true
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Live-quote Build Note",
+          "data": "price action"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -171,6 +192,15 @@
     "required_values_in_answer": [
       "AAPL",
       "150.0"
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Live-quote Build Note",
+        "data_contains": [
+          "price action"
+        ]
+      }
     ],
     "required_widget_defs": [
       {
@@ -217,6 +247,6 @@
       ]
     },
     "reference_answer": "The built lookup reports AAPL and 150.0.",
-    "max_turns": 9
+    "max_turns": 11
   }
 }

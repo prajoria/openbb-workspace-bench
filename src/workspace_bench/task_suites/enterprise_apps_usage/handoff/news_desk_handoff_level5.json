@@ -2,7 +2,7 @@
   "id": "news_desk_handoff_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Starting from the open News Desk Handoff board, author and add a minimal custom News Handoff Backend with one News Handoff Register. Publish and instantiate News Handoff App with one Handoff tab, add a News Build Handoff note naming News Handoff App and News Handoff Register, then delegate the build-review follow-up. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Starting from the open News Desk Handoff board, author and add a minimal custom News Handoff Backend with one News Handoff Register. Publish and instantiate News Handoff App with one Handoff tab, add a News Build Handoff note naming News Handoff App and News Handoff Register, then delegate the build-review follow-up. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Tearsheet skill (finance-tearsheet) and record its governing concept in the note.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -62,6 +62,15 @@
   },
   "eval": {
     "required_tools": [
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
       {
         "tool": "get_workspace_snapshot",
         "args": {},
@@ -137,7 +146,7 @@
         "args": {
           "widget_type": "note",
           "name": "News Build Handoff",
-          "data": "Built News Handoff App with News Handoff Register; review ownership."
+          "data": "catalysts: Built News Handoff App with News Handoff Register; review ownership."
         },
         "graded_args": [
           "widget_type",
@@ -172,7 +181,8 @@
         "name_contains": "News Build Handoff",
         "data_contains": [
           "News Handoff App",
-          "News Handoff Register"
+          "News Handoff Register",
+          "catalysts"
         ]
       }
     ],
@@ -199,6 +209,6 @@
         ]
       }
     ],
-    "max_turns": 9
+    "max_turns": 10
   }
 }

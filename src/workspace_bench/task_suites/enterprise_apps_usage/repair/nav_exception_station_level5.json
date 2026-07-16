@@ -2,7 +2,7 @@
   "id": "nav_exception_station_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "NAV-exception backend rebuild: Wave One NAV Repair was lost from the workspace; on the open Custom NAV Repair Staging board, rebuild it from scratch: add a custom backend Wave One NAV Repair with a NAV Exception Queue table, publish NAV Repair App, and instantiate it with one non-overlapping NAV Exception Queue placement on Exceptions, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "NAV-exception backend rebuild: Wave One NAV Repair was lost from the workspace; on the open Custom NAV Repair Staging board, rebuild it from scratch: add a custom backend Wave One NAV Repair with a NAV Exception Queue table, publish NAV Repair App, and instantiate it with one non-overlapping NAV Exception Queue placement on Exceptions, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Guidance Tracker skill (daloopa-guidance-tracker) and add a NAV-exception Rebuild Note recording its governing concept.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -66,6 +66,15 @@
         "tool": "get_workspace_snapshot",
         "args": {},
         "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-guidance-tracker"
+        },
+        "graded_args": [
+          "slug"
+        ]
       },
       {
         "tool": "read_workspace_resource",
@@ -138,6 +147,18 @@
         "graded_args": [
           "operation"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "NAV-exception Rebuild Note",
+          "data": "Missed"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -145,6 +166,15 @@
         "origin": "Wave One NAV Repair",
         "widget_id": "nav_exception_queue",
         "tab_id": "exceptions"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "NAV-exception Rebuild Note",
+        "data_contains": [
+          "Missed"
+        ]
       }
     ],
     "required_widget_defs": [
@@ -173,6 +203,6 @@
         ]
       }
     ],
-    "max_turns": 8
+    "max_turns": 10
   }
 }

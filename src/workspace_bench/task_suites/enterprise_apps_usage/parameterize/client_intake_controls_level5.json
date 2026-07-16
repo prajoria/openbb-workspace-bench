@@ -2,7 +2,7 @@
   "id": "client_intake_controls_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Client-intake build tuning: add a custom backend Wave Three Intake Tuning with a Intake Control Panel table carrying risk_profile and client_last_name params, publish and instantiate Intake Tuning App on Controls, then set the live Intake Control Panel to risk_profile Moderate, client_last_name Chen. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Client-intake build tuning: add a custom backend Wave Three Intake Tuning with a Intake Control Panel table carrying risk_profile and client_last_name params, publish and instantiate Intake Tuning App on Controls, then set the live Intake Control Panel to risk_profile Moderate, client_last_name Chen. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Widget Parameters resource (openbb://workspace/specs/widget-parameters) and add a Client-intake Tuning Note recording its governing concept.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -53,6 +53,15 @@
         "tool": "get_workspace_snapshot",
         "args": {},
         "optional": true
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widget-parameters"
+        },
+        "graded_args": [
+          "uri"
+        ]
       },
       {
         "tool": "read_workspace_resource",
@@ -164,6 +173,18 @@
         "graded_args": [
           "data_args"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Client-intake Tuning Note",
+          "data": "form"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -175,6 +196,15 @@
           "client_last_name": "Chen"
         },
         "tab_id": "controls"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Client-intake Tuning Note",
+        "data_contains": [
+          "form"
+        ]
       }
     ],
     "required_widget_defs": [
@@ -202,6 +232,6 @@
         ]
       }
     ],
-    "max_turns": 9
+    "max_turns": 11
   }
 }
