@@ -51,6 +51,18 @@ def grade_trace(
                     listed_origins.add(listed_origin)
                 for widget in (event.result.get("data") or {}).get("widgets", []):
                     listed_widgets.add((widget.get("origin"), widget.get("widget_id")))
+                    # Listings addressed by backend_id (or unscoped) still show
+                    # the agent every origin they return.
+                    if widget.get("origin"):
+                        listed_origins.add(str(widget.get("origin")))
+            if event.call.name == "manage_backends" and event.ok:
+                args = event.call.args
+                if args.get("operation") in {"add", "refresh"} and args.get("name"):
+                    # The agent authored these ids itself; no listing needed.
+                    registered = str(args["name"])
+                    listed_origins.add(registered)
+                    for authored_id in args.get("widgets_json") or {}:
+                        listed_widgets.add((registered, str(authored_id)))
             if event.call.name in {"get_widget_schema", "create_widget"}:
                 used_origin = str(
                     event.call.args.get("origin") or event.call.args.get("backend_name") or ""

@@ -2,7 +2,7 @@
   "id": "research_feed_lifecycle_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "Add a minimal Wave Two Research Feed backend serving a Research Feed Pulse table at /research-feed.",
+  "prompt": "Add a minimal Wave Two Research Feed backend serving a Research Feed Pulse table at /research-feed. Widget ids are the snake_case of widget names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

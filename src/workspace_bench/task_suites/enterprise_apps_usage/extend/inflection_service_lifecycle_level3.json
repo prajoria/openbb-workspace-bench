@@ -2,7 +2,7 @@
   "id": "inflection_service_lifecycle_level3",
   "category": "platform",
   "difficulty": "level3",
-  "prompt": "Inflection-service app service: add a custom backend Wave Three Inflection Service with Growth-Rate Reversals and Quarterly Series Monitor tables, publish Inflection Service App on Review, and instantiate it.",
+  "prompt": "Inflection-service app service: add a custom backend Wave Three Inflection Service with Growth-Rate Reversals and Quarterly Series Monitor tables, publish Inflection Service App on Review, and instantiate it. Widget ids are the snake_case of widget names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

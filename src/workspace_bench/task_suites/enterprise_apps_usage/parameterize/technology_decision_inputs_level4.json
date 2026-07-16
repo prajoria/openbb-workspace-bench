@@ -119,9 +119,7 @@
         "args": {
           "slug": "finance-earnings-prep"
         },
-        "graded_args": [
-          "slug"
-        ]
+        "optional": true
       },
       {
         "tool": "update_widget",

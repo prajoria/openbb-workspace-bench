@@ -108,6 +108,30 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Widget Examples"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "whitepapers"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "whitepapers",
+          "param_name": "filenames"
+        },
+        "optional": true
+      },
+      {
         "tool": "update_widget",
         "args": {
           "widget_id": "whitepapers",
@@ -131,6 +155,6 @@
         }
       }
     ],
-    "max_turns": 4
+    "max_turns": 7
   }
 }

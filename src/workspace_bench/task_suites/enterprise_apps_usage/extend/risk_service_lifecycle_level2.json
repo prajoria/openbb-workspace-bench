@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "Add a minimal Wave One Risk Service backend that serves a Wave One Risk Signal table at /risk-signal.",
+  "prompt": "Add a minimal Wave One Risk Service backend that serves a Wave One Risk Signal table at /risk-signal. Widget ids are the snake_case of widget names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

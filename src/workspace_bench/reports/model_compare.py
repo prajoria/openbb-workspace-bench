@@ -1591,10 +1591,13 @@ def call_openai_chat(
 
 def call_ollama_chat(model: str, messages: list[JsonDict], timeout: float) -> str:
     base_url = os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rstrip("/")
+    options: JsonDict = {"temperature": float(os.environ.get("OLLAMA_TEMPERATURE", "0"))}
+    if os.environ.get("OLLAMA_NUM_CTX"):
+        options["num_ctx"] = int(os.environ["OLLAMA_NUM_CTX"])
     payload = {
         "model": os.environ.get("OLLAMA_MODEL", model),
         "stream": False,
-        "options": {"temperature": float(os.environ.get("OLLAMA_TEMPERATURE", "0"))},
+        "options": options,
         "messages": messages,
     }
     # Same escape hatch as OPENAI_RESPONSE_FORMAT: some generations 500 inside

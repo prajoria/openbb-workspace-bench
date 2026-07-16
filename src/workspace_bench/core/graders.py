@@ -504,16 +504,38 @@ def _layout_value_equals(layout: JsonDict, key: str, expected: float) -> bool:
         return False
 
 
+def _leaf_equals(observed: object, expected: object) -> bool:
+    if observed == expected:
+        return True
+    # JSON agents legitimately emit numbers as strings ("2024" for a numeric
+    # year param); graded values accept numeric-equal spellings. Booleans stay
+    # strict, and non-numeric strings never coerce.
+    if isinstance(expected, bool) or isinstance(observed, bool):
+        return False
+    numeric, text = None, None
+    if isinstance(expected, (int, float)) and isinstance(observed, str):
+        numeric, text = expected, observed
+    elif isinstance(observed, (int, float)) and isinstance(expected, str):
+        numeric, text = observed, expected
+    if numeric is None or text is None:
+        return False
+    try:
+        return float(text) == float(numeric)
+    except ValueError:
+        return False
+
+
 def _dict_contains(actual: JsonDict, expected: JsonDict) -> bool:
     # Required widget data_args and tool args are nested request payloads, so
-    # expected dictionaries intentionally match recursively with exact leaves.
+    # expected dictionaries intentionally match recursively; leaves compare
+    # exactly up to numeric spelling.
     for key, value in expected.items():
         observed = actual.get(key)
         if isinstance(observed, dict) and isinstance(value, dict):
             if not _dict_contains(observed, value):
                 return False
             continue
-        if observed != value:
+        if not _leaf_equals(observed, value):
             return False
     return True
 

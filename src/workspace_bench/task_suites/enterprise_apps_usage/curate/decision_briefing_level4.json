@@ -72,9 +72,7 @@
         "args": {
           "name": "workspace_session_context"
         },
-        "graded_args": [
-          "name"
-        ]
+        "optional": true
       },
       {
         "tool": "list_available_widgets",

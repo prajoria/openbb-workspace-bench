@@ -6,10 +6,9 @@ spines follow the level0 execute, level1 discover, level2 translate, level3
 ambient, level4 governed/multi-intent, level5 build ladder exactly.  The
 honest deviations required by the brief are:
 
-* parameterize level5 is a three-widget surgery rather than fresh authoring,
-  because every parameterize rung must mutate existing widgets;
-* repair level5 rebuilds an already-authored backend through refresh rather
-  than adding a new backend;
+* every level5 authors a widgets_json backend (machine-asserted): the
+  parameterize build tunes the authored widget live, and the repair build
+  re-authors a lost backend from scratch;
 * handoff level5 builds and instantiates a minimal authored app before
   documenting and delegating its follow-up.
 
@@ -807,6 +806,7 @@ def _build_retrieve_tasks() -> list[TaskRecord]:
                 _call(
                     "read_workspace_resource",
                     {"uri": "openbb://workspace/specs/widgets-json"},
+                    optional=True,
                     graded_args=("uri",),
                 ),
                 _call(
@@ -1046,6 +1046,7 @@ def _build_curate_tasks() -> list[TaskRecord]:
                 _call(
                     "get_workspace_prompt",
                     {"name": "workspace_session_context"},
+                    optional=True,
                     graded_args=("name",),
                 )
             )
@@ -1665,6 +1666,7 @@ def _build_parameterize_tasks() -> list[TaskRecord]:
                 _call(
                     "get_skill_content",
                     {"slug": "finance-earnings-prep"},
+                    optional=True,
                     graded_args=("slug",),
                 ),
                 _call(
@@ -1875,6 +1877,7 @@ def _build_organize_tasks() -> list[TaskRecord]:
                 _call(
                     "get_workspace_prompt",
                     {"name": "workspace_session_context"},
+                    optional=True,
                     graded_args=("name",),
                 ),
                 _call(
@@ -1942,6 +1945,7 @@ def _build_organize_tasks() -> list[TaskRecord]:
                 _call(
                     "read_workspace_resource",
                     {"uri": "openbb://workspace/specs/apps-json"},
+                    optional=True,
                     graded_args=("uri",),
                 ),
                 _call(
@@ -2443,8 +2447,10 @@ def _build_platform_tasks() -> list[TaskRecord]:
             2,
             "platform",
             (
-                "Review the backend contract for the open Governed Earnings Brief board, "
-                "then add a Backend Contract Actions note that names endpoints and CORS."
+                "Review the backend contract resource "
+                "(openbb://workspace/contract/backend) for the open Governed Earnings "
+                "Brief board, then add a Backend Contract Actions note recording the two "
+                "contract items listed between the manifest files and authentication."
             ),
             [
                 _call(
@@ -2853,7 +2859,8 @@ def _build_extend_tasks() -> list[TaskRecord]:
             "platform",
             (
                 "Add a minimal Wave One Risk Service backend that serves a Wave One Risk "
-                "Signal table at /risk-signal."
+                "Signal table at /risk-signal. Widget ids are the snake_case of widget "
+                "names."
             ),
             [
                 _call(
@@ -3675,6 +3682,7 @@ def _build_retrieve_wave2_tasks() -> list[TaskRecord]:
                 _call(
                     "read_workspace_resource",
                     {"uri": "openbb://workspace/specs/widgets-json"},
+                    optional=True,
                     graded_args=("uri",),
                 ),
                 _call(
@@ -3910,6 +3918,7 @@ def _build_curate_wave2_tasks() -> list[TaskRecord]:
                 _call(
                     "get_workspace_prompt",
                     {"name": "workspace_session_context"},
+                    optional=True,
                     graded_args=("name",),
                 )
             )
@@ -4166,6 +4175,32 @@ def _build_parameterize_wave2_tasks() -> list[TaskRecord]:
             tools.append(_snapshot())
         if level == 1:
             tools.append(_call("read_widget", {"widget_id": WHITEPAPERS_WIDGET}, optional=True))
+        if level == 2:
+            tools.append(
+                _call(
+                    "list_available_widgets",
+                    {"origin": WIDGET_EXAMPLES},
+                    optional=True,
+                )
+            )
+            tools.append(
+                _call(
+                    "get_widget_schema",
+                    {"origin": WIDGET_EXAMPLES, "widget_id": WHITEPAPERS_WIDGET},
+                    optional=True,
+                )
+            )
+            tools.append(
+                _call(
+                    "get_params_options",
+                    {
+                        "origin": WIDGET_EXAMPLES,
+                        "widget_id": WHITEPAPERS_WIDGET,
+                        "param_name": "filenames",
+                    },
+                    optional=True,
+                )
+            )
         tools.append(
             _call(
                 "update_widget",
@@ -4235,6 +4270,7 @@ def _build_parameterize_wave2_tasks() -> list[TaskRecord]:
                 _call(
                     "get_workspace_prompt",
                     {"name": "workspace_session_context"},
+                    optional=True,
                     graded_args=("name",),
                 ),
                 _call(
@@ -4426,6 +4462,7 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
                 _call(
                     "get_workspace_prompt",
                     {"name": "workspace_session_context"},
+                    optional=True,
                     graded_args=("name",),
                 ),
                 _call(
@@ -4484,6 +4521,7 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
                 _call(
                     "read_workspace_resource",
                     {"uri": "openbb://workspace/specs/apps-json"},
+                    optional=True,
                     graded_args=("uri",),
                 ),
                 _call(
@@ -5332,7 +5370,8 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
             "platform",
             (
                 "Add a minimal Wave Two Research Feed backend serving a Research Feed "
-                "Pulse table at /research-feed."
+                "Pulse table at /research-feed. Widget ids are the snake_case of widget "
+                "names."
             ),
             [
                 _call(
@@ -5704,6 +5743,7 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
                 _call(
                     "get_workspace_prompt",
                     {"name": "workspace_session_context"},
+                    optional=True,
                     graded_args=("name",),
                 ),
                 _call(
@@ -5766,6 +5806,7 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
                 _call(
                     "get_workspace_prompt",
                     {"name": "workspace_session_context"},
+                    optional=True,
                     graded_args=("name",),
                 ),
                 _call(
@@ -7616,6 +7657,7 @@ def _build_wave3_extend_spine(
                 (
                     f"{title} level-{level} service: add a custom backend "
                     f"{backend_name} with the {name} table."
+                    " Widget ids are the snake_case of widget names."
                 ),
                 [
                     _snapshot(),
@@ -7656,6 +7698,7 @@ def _build_wave3_extend_spine(
             (
                 f"{title} paired service: add a custom backend {backend_name} "
                 f"with {widget_names[0]} and {widget_names[1]} tables."
+                " Widget ids are the snake_case of widget names."
             ),
             [
                 _call(
@@ -7687,6 +7730,7 @@ def _build_wave3_extend_spine(
                 f"{title} app service: add a custom backend {backend_name} with "
                 f"{widget_names[0]} and {widget_names[1]} tables, publish {app_name} on "
                 "Review, and instantiate it."
+                " Widget ids are the snake_case of widget names."
             ),
             [
                 _call(
@@ -8727,6 +8771,68 @@ def _assert_level5_builds(records: list[TaskRecord]) -> None:
             raise AssertionError(f"level5 without authored build: {payload['id']}")
 
 
+KNOWLEDGE_READ_TOOLS = frozenset(
+    {"get_skill_content", "get_workspace_prompt", "read_workspace_resource"}
+)
+
+
+def _assert_authored_id_conventions(records: list[TaskRecord]) -> None:
+    """A widget-def id must be the stated snake_case of a prompt-stated name."""
+
+    for record in records:
+        payload = record.payload
+        prompt = str(payload["prompt"]).casefold().replace("-", " ")
+        seeded_ids = {
+            str(widget_id)
+            for backend in (payload["setup"].get("initial_state") or {}).get(
+                "custom_backends", []
+            )
+            for widget_id in backend.get("widgets_json") or {}
+        }
+        for definition in payload["eval"].get("required_widget_defs", []):
+            widget_id = str(definition["widget_id"])
+            if widget_id.casefold() in prompt or widget_id in seeded_ids:
+                # Stated literally, or discoverable from the seeded manifest.
+                continue
+            name_words = widget_id.replace("_", " ").casefold()
+            if name_words not in prompt:
+                raise AssertionError(
+                    f"{payload['id']}: authored id {widget_id!r} has no stated name"
+                )
+            if "snake_case" not in prompt:
+                raise AssertionError(
+                    f"{payload['id']}: authored id {widget_id!r} graded without the "
+                    "stated snake_case convention"
+                )
+
+
+def _assert_no_decorative_knowledge_reads(records: list[TaskRecord]) -> None:
+    """A required knowledge read must feed some token the prompt does not state."""
+
+    for record in records:
+        if record.governance is not None or record.family == "platform":
+            continue
+        payload = record.payload
+        evaluation = payload["eval"]
+        required_reads = [
+            call
+            for call in evaluation["required_tools"]
+            if call["tool"] in KNOWLEDGE_READ_TOOLS and not call.get("optional")
+        ]
+        if not required_reads:
+            continue
+        prompt = str(payload["prompt"]).casefold()
+        tokens: list[str] = list(evaluation.get("required_values_in_answer", []))
+        for generated in evaluation.get("required_generated_widgets", []):
+            tokens.extend(generated.get("data_contains", []))
+        unfed = [token for token in tokens if str(token).casefold() not in prompt]
+        if not unfed:
+            raise AssertionError(
+                f"{payload['id']}: required knowledge read feeds only prompt-stated "
+                "content - make it optional or describe a read-derived token"
+            )
+
+
 def _assert_l1_l5(records: list[TaskRecord]) -> None:
     """Assert the wave-2 learned rules across both waves."""
 
@@ -9529,6 +9635,8 @@ def validate_payloads(records: list[TaskRecord]) -> dict[str, int]:
     _assert_f11(records)
     _assert_f12(records)
     _assert_level5_builds(records)
+    _assert_authored_id_conventions(records)
+    _assert_no_decorative_knowledge_reads(records)
     _assert_l1_l5(records)
     _assert_wave2_requirements(records)
     _assert_instantiation_and_expect_fairness(records)

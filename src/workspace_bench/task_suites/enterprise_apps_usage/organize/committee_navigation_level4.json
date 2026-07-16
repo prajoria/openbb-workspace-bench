@@ -59,9 +59,7 @@
         "args": {
           "name": "workspace_session_context"
         },
-        "graded_args": [
-          "name"
-        ]
+        "optional": true
       },
       {
         "tool": "manage_dashboard",

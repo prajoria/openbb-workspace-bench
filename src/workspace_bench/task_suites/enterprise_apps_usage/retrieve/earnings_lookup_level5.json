@@ -60,9 +60,7 @@
         "args": {
           "uri": "openbb://workspace/specs/widgets-json"
         },
-        "graded_args": [
-          "uri"
-        ]
+        "optional": true
       },
       {
         "tool": "manage_backends",

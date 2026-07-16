@@ -2,7 +2,7 @@
   "id": "guidance_service_lifecycle_level1",
   "category": "platform",
   "difficulty": "level1",
-  "prompt": "Guidance-service level-1 service: add a custom backend Wave Three Guidance Service with the Changed Assumptions table.",
+  "prompt": "Guidance-service level-1 service: add a custom backend Wave Three Guidance Service with the Changed Assumptions table. Widget ids are the snake_case of widget names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
