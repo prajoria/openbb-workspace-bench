@@ -74,19 +74,19 @@ must appear literally in the target's served rows; prompt register checks
 
 Difficulty calibration (July 2026, on this exact governed-build content;
 strict-pass staircases level0-level5). gpt-4.1-mini (two repeats, 64
-attempts per level): 95 / 77 / 77 / 41 / 19 / 0, 51.3% overall. GLM-5.2
-(one attempt per task): 100 / 97 / 91 / 72 / 59 / 28, 74.5% overall.
-GPT-5.5: 100 / 100 / 94 / 97 / 81 / 62, 89.1% overall. Every rung
-separates the three models; the deep ladder separates frontier models
-where the gating model has no signal, and the governed build rung is
-certified solvable by the frontier (62%) while sitting below the gating
-model's floor. Local reference floors, run free-form (OLLAMA_FORMAT=none,
-since schema-grammar decoding co-writes build manifests and overstates
-what a model can build): gpt-oss:20b 53 / 44 / 38 / 12 / 9 / 3 (26.6%),
-qwen3:8b 59 / 38 / 53 / 25 / 3 / 0 (29.7%) — below-floor models order the
-tail correctly but wobble within the shallow rungs, where their binding
-constraint is per-action schema discipline rather than the rung's
-intended driver.
+attempts per level): 95 / 77 / 77 / 41 / 19 / 3, 51.8% overall. GLM-5.2
+(one attempt per task): 100 / 97 / 91 / 72 / 59 / 22, 73.4% overall.
+GPT-5.5: 100 / 100 / 94 / 97 / 81 / 56, 88.0% overall. Every rung
+separates the three models, every staircase is monotonic, and the
+governed build rung spans the whole capability range: certified solvable
+by the frontier (56%), reached by the gating model (3%), and out of
+reach for the local floors. Local reference floors, run free-form
+(OLLAMA_FORMAT=none, since schema-grammar decoding co-writes build
+manifests and overstates what a model can build): gpt-oss:20b
+53 / 44 / 38 / 12 / 9 / 0 (26.0%), qwen3:8b 59 / 38 / 53 / 25 / 3 / 0
+(29.7%) — below-floor models order the tail correctly but wobble within
+the shallow rungs, where their binding constraint is per-action schema
+discipline rather than the rung's intended driver.
 
 ## Limitations
 
