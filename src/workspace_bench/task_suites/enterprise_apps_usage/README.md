@@ -73,11 +73,13 @@ must appear literally in the target's served rows; prompt register checks
 (<=110 words, no tool names, no shared opening 5-grams).
 
 Difficulty calibration (July 2026, on this exact governed-build content;
-strict-pass staircases level0-level5). gpt-4.1-mini (two repeats, 64
-attempts per level): 95 / 77 / 77 / 41 / 19 / 3, 51.8% overall. GLM-5.2
-(one attempt per task): 100 / 97 / 91 / 72 / 59 / 22, 73.4% overall.
-GPT-5.5: 100 / 100 / 94 / 97 / 81 / 56, 88.0% overall. Every rung
-separates the three models, every staircase is monotonic, and the
+strict-pass staircases level0-level5; level1-level2 measured at doubled
+repeats to resolve their small gap from noise). gpt-4.1-mini (64-128
+attempts per level): 95 / 76 / 74 / 41 / 19 / 3, 51.3% overall. GLM-5.2
+(32-64 attempts per level): 100 / 95 / 92 / 72 / 59 / 22, 73.3% overall.
+GPT-5.5: 100 / 100 / 94 / 97 / 81 / 56, 88.0% overall (overall figures
+average the six level rates). Every rung separates the three models,
+every staircase is monotonic, and the
 governed build rung spans the whole capability range: certified solvable
 by the frontier (56%), reached by the gating model (3%), and out of
 reach for the local floors. Local reference floors, run free-form
