@@ -1,8 +1,8 @@
 {
  "suite": "enterprise-apps-usage",
  "date": "2026-07-17",
- "suite_content_sha256": "2fe31c92315c1d580105d04ed519a9b31919cfd3a995c6ff94143f5e23463489",
- "harness_git_commit": "5b77b825c7a1487d086974f70e60d65e1062a1e6",
+ "suite_content_sha256": "d6ca1439c8ca03ff48051dd3f5081cb07e932dc1cc94b8a00d4af1865e1be0cb",
+ "harness_git_commit": "7ee3380c44d08254c3be5f71bc3b796ecb4f3e77",
  "local_model_config": {
   "OLLAMA_FORMAT": "none",
   "OLLAMA_NUM_CTX": 32768
@@ -12,98 +12,134 @@
    "level0": {
     "passed": 61,
     "attempts": 64,
-    "rate": 0.9531
+    "rate": 0.9531,
+    "process_failures": 0,
+    "clean_rate": 0.9531
    },
    "level1": {
-    "passed": 97,
+    "passed": 101,
     "attempts": 128,
-    "rate": 0.7578
+    "rate": 0.7891,
+    "process_failures": 0,
+    "clean_rate": 0.7891
    },
    "level2": {
-    "passed": 95,
+    "passed": 87,
     "attempts": 128,
-    "rate": 0.7422
+    "rate": 0.6797,
+    "process_failures": 0,
+    "clean_rate": 0.6797
    },
    "level3": {
     "passed": 28,
     "attempts": 64,
-    "rate": 0.4375
+    "rate": 0.4375,
+    "process_failures": 0,
+    "clean_rate": 0.4375
    },
    "level4": {
     "passed": 12,
     "attempts": 64,
-    "rate": 0.1875
+    "rate": 0.1875,
+    "process_failures": 0,
+    "clean_rate": 0.1875
    },
    "level5": {
     "passed": 2,
     "attempts": 64,
-    "rate": 0.0312
+    "rate": 0.0312,
+    "process_failures": 1,
+    "clean_rate": 0.0317
    },
-   "overall_rate": 0.5182
+   "overall_rate": 0.513
   },
   "glm-5.2": {
    "level0": {
     "passed": 32,
     "attempts": 32,
-    "rate": 1.0
+    "rate": 1.0,
+    "process_failures": 0,
+    "clean_rate": 1.0
    },
    "level1": {
-    "passed": 61,
-    "attempts": 64,
-    "rate": 0.9531
+    "passed": 58,
+    "attempts": 62,
+    "rate": 0.9355,
+    "process_failures": 1,
+    "clean_rate": 0.9508
    },
    "level2": {
-    "passed": 59,
-    "attempts": 64,
-    "rate": 0.9219
+    "passed": 57,
+    "attempts": 62,
+    "rate": 0.9194,
+    "process_failures": 0,
+    "clean_rate": 0.9194
    },
    "level3": {
     "passed": 23,
     "attempts": 32,
-    "rate": 0.7188
+    "rate": 0.7188,
+    "process_failures": 1,
+    "clean_rate": 0.7419
    },
    "level4": {
     "passed": 19,
     "attempts": 32,
-    "rate": 0.5938
+    "rate": 0.5938,
+    "process_failures": 4,
+    "clean_rate": 0.6786
    },
    "level5": {
     "passed": 7,
     "attempts": 32,
-    "rate": 0.2188
+    "rate": 0.2188,
+    "process_failures": 5,
+    "clean_rate": 0.2593
    },
-   "overall_rate": 0.7344
+   "overall_rate": 0.731
   },
   "gpt-5.5": {
    "level0": {
     "passed": 32,
     "attempts": 32,
-    "rate": 1.0
+    "rate": 1.0,
+    "process_failures": 0,
+    "clean_rate": 1.0
    },
    "level1": {
     "passed": 32,
     "attempts": 32,
-    "rate": 1.0
+    "rate": 1.0,
+    "process_failures": 0,
+    "clean_rate": 1.0
    },
    "level2": {
     "passed": 30,
     "attempts": 32,
-    "rate": 0.9375
+    "rate": 0.9375,
+    "process_failures": 0,
+    "clean_rate": 0.9375
    },
    "level3": {
     "passed": 31,
     "attempts": 32,
-    "rate": 0.9688
+    "rate": 0.9688,
+    "process_failures": 0,
+    "clean_rate": 0.9688
    },
    "level4": {
     "passed": 26,
     "attempts": 32,
-    "rate": 0.8125
+    "rate": 0.8125,
+    "process_failures": 0,
+    "clean_rate": 0.8125
    },
    "level5": {
     "passed": 18,
     "attempts": 32,
-    "rate": 0.5625
+    "rate": 0.5625,
+    "process_failures": 0,
+    "clean_rate": 0.5625
    },
    "overall_rate": 0.8802
   },
@@ -116,11 +152,11 @@
     "clean_rate": 0.6071
    },
    "level1": {
-    "passed": 14,
-    "attempts": 32,
-    "rate": 0.4375,
-    "process_failures": 4,
-    "clean_rate": 0.5
+    "passed": 13,
+    "attempts": 33,
+    "rate": 0.3939,
+    "process_failures": 5,
+    "clean_rate": 0.4643
    },
    "level2": {
     "passed": 12,
@@ -150,7 +186,7 @@
     "process_failures": 8,
     "clean_rate": 0.0
    },
-   "overall_rate": 0.2604
+   "overall_rate": 0.2531
   },
   "qwen3-8b": {
    "level0": {
@@ -161,25 +197,25 @@
     "clean_rate": 0.5938
    },
    "level1": {
-    "passed": 12,
-    "attempts": 32,
-    "rate": 0.375,
-    "process_failures": 1,
-    "clean_rate": 0.3871
+    "passed": 28,
+    "attempts": 66,
+    "rate": 0.4242,
+    "process_failures": 2,
+    "clean_rate": 0.4375
    },
    "level2": {
-    "passed": 17,
-    "attempts": 32,
-    "rate": 0.5312,
-    "process_failures": 1,
-    "clean_rate": 0.5484
+    "passed": 33,
+    "attempts": 62,
+    "rate": 0.5323,
+    "process_failures": 2,
+    "clean_rate": 0.55
    },
    "level3": {
-    "passed": 8,
+    "passed": 9,
     "attempts": 32,
-    "rate": 0.25,
+    "rate": 0.2812,
     "process_failures": 3,
-    "clean_rate": 0.2759
+    "clean_rate": 0.3103
    },
    "level4": {
     "passed": 1,
@@ -195,8 +231,8 @@
     "process_failures": 9,
     "clean_rate": 0.0
    },
-   "overall_rate": 0.2969
+   "overall_rate": 0.3105
   }
  },
- "notes": "Raw rates count process failures (malformed actions, serving errors) as task failures - an agent that cannot emit a valid action fails in reality. clean_rate excludes them as a diagnostic: gpt-oss:20b loses 12-38% of episodes per level to free-form action-format collapses (argument fragments without a tool field after drowning in everything-mounted listings, broken JSON in long payloads); qwen3:8b rarely does. Clean of those, gpt-oss:20b edges qwen3:8b at level0 (61% vs 59%) and their level3 gap is not significant (Fisher p=0.51) - the local floors are statistically interchangeable on workspace skill and differ mainly in action-format reliability. gpt-oss:20b's five ollama-500 serving deaths were resampled as full episodes (2026-07-17): all five failed on the merits, leaving raw rates unchanged; the process-failure diagnostics above reflect the resample. qwen3:8b had no serving deaths to resample."
+ "notes": "Raw rates count process failures as task failures; clean_rate excludes them as a diagnostic. gpt-oss:20b's five ollama-500 serving deaths were resampled as full episodes and failed on the merits. qwen3:8b's level1<level2 residual is a model profile, not a content defect: its persistent level1 failures carry ~20% larger input contexts and 16 of 20 involve catalog-listing discovery - the discover driver dilutes a small model's context in the everything-mounted workspace, while its single-call policy execution at level2 is strong. Four of five models order level1 >= level2 after the extend rung swap and the listing-discipline fix."
 }

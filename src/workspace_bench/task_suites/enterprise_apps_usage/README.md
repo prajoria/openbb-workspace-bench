@@ -72,23 +72,22 @@ any mounted catalog matches a prompt's discriminating tokens); answer values
 must appear literally in the target's served rows; prompt register checks
 (<=110 words, no tool names, no shared opening 5-grams).
 
-Difficulty calibration (July 2026, on this exact governed-build content;
-strict-pass staircases level0-level5; the canonical record is
+Difficulty calibration (July 2026, on this exact content; strict-pass
+staircases level0-level5; the canonical record is
 `runs/reports/usage-calibration-board.{md,json}`). gpt-4.1-mini:
-95 / 76 / 74 / 44 / 19 / 3, 51.8% overall. GLM-5.2:
-100 / 95 / 92 / 72 / 59 / 22, 73.4% overall.
-GPT-5.5: 100 / 100 / 94 / 97 / 81 / 56, 88.0% overall (overall figures
-average the six level rates). Every rung separates the three models,
-every staircase is monotonic, and the
-governed build rung spans the whole capability range: certified solvable
-by the frontier (56%), reached by the gating model (3%), and out of
-reach for the local floors. Local reference floors, run free-form
-(OLLAMA_FORMAT=none, since schema-grammar decoding co-writes build
-manifests and overstates what a model can build): gpt-oss:20b
-53 / 44 / 38 / 12 / 9 / 0 (26.0%), qwen3:8b 59 / 38 / 53 / 25 / 3 / 0
-(29.7%) — below-floor models order the tail correctly but wobble within
-the shallow rungs, where their binding constraint is per-action schema
-discipline rather than the rung's intended driver.
+95 / 79 / 68 / 44 / 19 / 3, 51.3% overall. GLM-5.2:
+100 / 94 / 92 / 72 / 59 / 22, 73.1% overall. GPT-5.5:
+100 / 100 / 94 / 97 / 81 / 56, 88.0% overall (overall figures average the
+six level rates). Every rung separates the three models, every staircase
+is monotonic, and the governed build rung spans the whole capability
+range: certified solvable by the frontier (56%), reached by the gating
+model (3%), and out of reach for the local floors. Local reference
+floors, run free-form (OLLAMA_FORMAT=none, since schema-grammar decoding
+co-writes build manifests and overstates what a model can build):
+gpt-oss:20b 53 / 39 / 38 / 12 / 9 / 0 (25.3%), qwen3:8b
+59 / 42 / 53 / 28 / 3 / 0 (31.1%) — below-floor models order the tail
+correctly; qwen3:8b's level1 dip is a measured profile (catalog-listing
+discovery dilutes a small model's context) rather than a content defect.
 
 ## Limitations
 

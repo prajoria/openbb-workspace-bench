@@ -63,7 +63,9 @@ def grade_trace(
                     listed_origins.add(registered)
                     for authored_id in args.get("widgets_json") or {}:
                         listed_widgets.add((registered, str(authored_id)))
-            if event.call.name in {"get_widget_schema", "create_widget"}:
+            if event.call.name in {"get_widget_schema", "create_widget"} and event.ok:
+                # A failed call already pays through the invalid-call budget;
+                # listing discipline judges successful uses only.
                 used_origin = str(
                     event.call.args.get("origin") or event.call.args.get("backend_name") or ""
                 )
