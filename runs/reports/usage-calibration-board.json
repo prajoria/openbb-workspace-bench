@@ -133,8 +133,8 @@
     "passed": 4,
     "attempts": 32,
     "rate": 0.125,
-    "process_failures": 8,
-    "clean_rate": 0.1667
+    "process_failures": 7,
+    "clean_rate": 0.16
    },
    "level4": {
     "passed": 3,
@@ -147,7 +147,7 @@
     "passed": 0,
     "attempts": 32,
     "rate": 0.0,
-    "process_failures": 12,
+    "process_failures": 8,
     "clean_rate": 0.0
    },
    "overall_rate": 0.2604
@@ -198,5 +198,5 @@
    "overall_rate": 0.2969
   }
  },
- "notes": "Raw rates count process failures (malformed actions, serving errors) as task failures - an agent that cannot emit a valid action fails in reality. clean_rate excludes them as a diagnostic: gpt-oss:20b loses 12-38% of episodes per level to free-form action-format collapses (argument fragments without a tool field after drowning in everything-mounted listings, broken JSON in long payloads); qwen3:8b rarely does. Clean of those, gpt-oss:20b edges qwen3:8b at level0 (61% vs 59%) and their level3 gap is not significant (Fisher p=0.51) - the local floors are statistically interchangeable on workspace skill and differ mainly in action-format reliability."
+ "notes": "Raw rates count process failures (malformed actions, serving errors) as task failures - an agent that cannot emit a valid action fails in reality. clean_rate excludes them as a diagnostic: gpt-oss:20b loses 12-38% of episodes per level to free-form action-format collapses (argument fragments without a tool field after drowning in everything-mounted listings, broken JSON in long payloads); qwen3:8b rarely does. Clean of those, gpt-oss:20b edges qwen3:8b at level0 (61% vs 59%) and their level3 gap is not significant (Fisher p=0.51) - the local floors are statistically interchangeable on workspace skill and differ mainly in action-format reliability. gpt-oss:20b's five ollama-500 serving deaths were resampled as full episodes (2026-07-17): all five failed on the merits, leaving raw rates unchanged; the process-failure diagnostics above reflect the resample. qwen3:8b had no serving deaths to resample."
 }
