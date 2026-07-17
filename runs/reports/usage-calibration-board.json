@@ -2,7 +2,7 @@
  "suite": "enterprise-apps-usage",
  "date": "2026-07-17",
  "suite_content_sha256": "d6ca1439c8ca03ff48051dd3f5081cb07e932dc1cc94b8a00d4af1865e1be0cb",
- "harness_git_commit": "7ee3380c44d08254c3be5f71bc3b796ecb4f3e77",
+ "harness_git_commit": "0c2250f647a8b131db72956100388fe78816ef89",
  "local_model_config": {
   "OLLAMA_FORMAT": "none",
   "OLLAMA_NUM_CTX": 32768
@@ -62,11 +62,11 @@
     "clean_rate": 1.0
    },
    "level1": {
-    "passed": 58,
+    "passed": 59,
     "attempts": 62,
-    "rate": 0.9355,
-    "process_failures": 1,
-    "clean_rate": 0.9508
+    "rate": 0.9516,
+    "process_failures": 0,
+    "clean_rate": 0.9516
    },
    "level2": {
     "passed": 57,
@@ -96,7 +96,7 @@
     "process_failures": 5,
     "clean_rate": 0.2593
    },
-   "overall_rate": 0.731
+   "overall_rate": 0.7337
   },
   "gpt-5.5": {
    "level0": {
@@ -159,11 +159,11 @@
     "clean_rate": 0.4643
    },
    "level2": {
-    "passed": 12,
+    "passed": 13,
     "attempts": 32,
-    "rate": 0.375,
-    "process_failures": 3,
-    "clean_rate": 0.4138
+    "rate": 0.4062,
+    "process_failures": 2,
+    "clean_rate": 0.4333
    },
    "level3": {
     "passed": 4,
@@ -186,7 +186,7 @@
     "process_failures": 8,
     "clean_rate": 0.0
    },
-   "overall_rate": 0.2531
+   "overall_rate": 0.2584
   },
   "qwen3-8b": {
    "level0": {
@@ -204,11 +204,11 @@
     "clean_rate": 0.4375
    },
    "level2": {
-    "passed": 33,
+    "passed": 34,
     "attempts": 62,
-    "rate": 0.5323,
-    "process_failures": 2,
-    "clean_rate": 0.55
+    "rate": 0.5484,
+    "process_failures": 1,
+    "clean_rate": 0.5574
    },
    "level3": {
     "passed": 9,
@@ -231,8 +231,8 @@
     "process_failures": 9,
     "clean_rate": 0.0
    },
-   "overall_rate": 0.3105
+   "overall_rate": 0.3131
   }
  },
- "notes": "Raw rates count process failures as task failures; clean_rate excludes them as a diagnostic. gpt-oss:20b's five ollama-500 serving deaths were resampled as full episodes and failed on the merits. qwen3:8b's level1<level2 residual is a model profile, not a content defect: its persistent level1 failures carry ~20% larger input contexts and 16 of 20 involve catalog-listing discovery - the discover driver dilutes a small model's context in the everything-mounted workspace, while its single-call policy execution at level2 is strong. Four of five models order level1 >= level2 after the extend rung swap and the listing-discipline fix."
+ "notes": "Raw rates count process failures as task failures; clean_rate excludes them as a diagnostic. gpt-oss:20b's five ollama-500 serving deaths were resampled as full episodes and failed on the merits. qwen3:8b's level1<level2 residual is a model profile, not a content defect: its persistent level1 failures carry ~20% larger input contexts and 16 of 20 involve catalog-listing discovery - the discover driver dilutes a small model's context in the everything-mounted workspace, while its single-call policy execution at level2 is strong. Four of five models order level1 >= level2 after the extend rung swap and the listing-discipline fix. Pass is outcome-only: a process failure after every graded check has passed (trailing malformed turn, wrap-up timeout) no longer voids the episode; three such episodes were recovered (GLM-5.2 level1, gpt-oss:20b level2, qwen3:8b level2)."
 }

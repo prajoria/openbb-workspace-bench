@@ -2146,7 +2146,7 @@ def render_analysis_report(comparison: dict, output_dir: Path) -> str:
         "",
         "## How To Read This",
         "",
-        "`pass_rate` is strict task success: a task counts as passed only when every grader check passes and the agent process exits cleanly.",
+        "`pass_rate` is strict task success: a task counts as passed only when every grader check passes; process health is reported separately.",
         "`task_pass_rate` excludes provider/process failures and asks whether valid attempts satisfied the grader.",
         "`mean_score` is partial credit: it averages each task's fraction of passed checks.",
         "`pass@k` counts a task when at least one repeat passes. `pass^k` counts it only when every repeat passes.",
@@ -2485,7 +2485,13 @@ def summarize_runs(
 
 
 def agent_run_passed(run: ComparisonRun) -> bool:
-    return run.run_result.grade.passed and run.exit_code == 0 and not run.timed_out
+    # Outcome-first: a task passes when every grader check passes. Completion
+    # is already check-gated (answer tasks require final_answer; state and
+    # trajectory checks require the work), so a process failure after the
+    # outcome is achieved - a trailing malformed turn, a timeout during
+    # wrap-up - does not void the pass. Process health stays reported
+    # separately via agent_run_process_failed.
+    return run.run_result.grade.passed
 
 
 def agent_run_process_failed(run: ComparisonRun) -> bool:

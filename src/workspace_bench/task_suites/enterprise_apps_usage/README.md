@@ -76,7 +76,7 @@ Difficulty calibration (July 2026, on this exact content; strict-pass
 staircases level0-level5; the canonical record is
 `runs/reports/usage-calibration-board.{md,json}`). gpt-4.1-mini:
 95 / 79 / 68 / 44 / 19 / 3, 51.3% overall. GLM-5.2:
-100 / 94 / 92 / 72 / 59 / 22, 73.1% overall. GPT-5.5:
+100 / 95 / 92 / 72 / 59 / 22, 73.4% overall. GPT-5.5:
 100 / 100 / 94 / 97 / 81 / 56, 88.0% overall (overall figures average the
 six level rates). Every rung separates the three models, every staircase
 is monotonic, and the governed build rung spans the whole capability
@@ -84,8 +84,8 @@ range: certified solvable by the frontier (56%), reached by the gating
 model (3%), and out of reach for the local floors. Local reference
 floors, run free-form (OLLAMA_FORMAT=none, since schema-grammar decoding
 co-writes build manifests and overstates what a model can build):
-gpt-oss:20b 53 / 39 / 38 / 12 / 9 / 0 (25.3%), qwen3:8b
-59 / 42 / 53 / 28 / 3 / 0 (31.1%) — below-floor models order the tail
+gpt-oss:20b 53 / 39 / 41 / 12 / 9 / 0 (25.8%), qwen3:8b
+59 / 42 / 55 / 28 / 3 / 0 (31.3%) — below-floor models order the tail
 correctly; qwen3:8b's level1 dip is a measured profile (catalog-listing
 discovery dilutes a small model's context) rather than a content defect.
 
