@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "Add a minimal Wave One Risk Service backend that serves a Wave One Risk Signal table at /risk-signal. Widget ids are the snake_case of widget names.",
+  "prompt": "Review the connected backends on the open Risk Service Staging board, then refresh Wave One Risk Service so Wave One Risk App has one non-overlapping Wave One Risk Signal placement on Monitor.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -23,7 +23,7 @@
       "finance-guidance-tracker",
       "finance-tearsheet"
     ],
-    "default_selected_dashboard": "Home",
+    "default_selected_dashboard": "Risk Service Staging",
     "allowed_tools": [
       "get_workspace_snapshot",
       "manage_dashboard",
@@ -45,16 +45,99 @@
       "read_workspace_resource",
       "get_workspace_prompt",
       "assign_tasks_to_agents"
-    ]
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Risk Service Staging",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "monitor",
+            "name": "Monitor"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Wave One Risk Service",
+            "widget_id": "wave_one_risk_signal",
+            "widget_uuid": "seeded_risk_signal",
+            "tab_id": "monitor",
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 40,
+              "h": 10
+            }
+          }
+        ]
+      },
+      "custom_backends": [
+        {
+          "backend_id": "backend_005",
+          "name": "Wave One Risk Service",
+          "url": "http://127.0.0.1:9506",
+          "widgets_json": {
+            "wave_one_risk_signal": {
+              "name": "Wave One Risk Signal",
+              "description": "Stale risk signal feed.",
+              "endpoint": "/risk-signal",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Wave One Risk App",
+              "tabs": {
+                "monitor": {
+                  "id": "monitor",
+                  "name": "Monitor",
+                  "layout": [
+                    {
+                      "i": "wave_one_risk_signal",
+                      "x": 0,
+                      "y": 0,
+                      "w": 30,
+                      "h": 10
+                    },
+                    {
+                      "i": "wave_one_risk_signal",
+                      "x": 20,
+                      "y": 0,
+                      "w": 20,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
   },
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
-          "operation": "add",
-          "name": "Wave One Risk Service",
-          "url": "http://127.0.0.1:9506",
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "refresh",
+          "backend_id": "backend_005",
           "widgets_json": {
             "wave_one_risk_signal": {
               "name": "Wave One Risk Signal",
@@ -66,23 +149,45 @@
                 "h": 10
               }
             }
-          }
+          },
+          "apps_json": [
+            {
+              "name": "Wave One Risk App",
+              "description": "Wave-1 authored app for Wave One Risk App.",
+              "tabs": {
+                "monitor": {
+                  "id": "monitor",
+                  "name": "Monitor",
+                  "layout": [
+                    {
+                      "i": "wave_one_risk_signal",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
         },
         "graded_args": [
-          "operation",
-          "name"
+          "operation"
         ]
       }
     ],
-    "required_widget_defs": [
+    "required_app_defs": [
       {
         "backend_name": "Wave One Risk Service",
-        "widget_id": "wave_one_risk_signal",
-        "expect": {
-          "type": "table"
-        }
+        "name_contains": "Wave One Risk App",
+        "tabs_include": [
+          "monitor"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true
       }
     ],
-    "max_turns": 4
+    "max_turns": 6
   }
 }

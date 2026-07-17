@@ -2839,7 +2839,7 @@ def _build_extend_tasks() -> list[TaskRecord]:
         _record(
             "extend",
             spine,
-            1,
+            2,
             "platform",
             (
                 "Review the connected backends on the open Risk Service Staging board, "
@@ -2893,7 +2893,7 @@ def _build_extend_tasks() -> list[TaskRecord]:
         _record(
             "extend",
             spine,
-            2,
+            1,
             "platform",
             (
                 "Add a minimal Wave One Risk Service backend that serves a Wave One Risk "
@@ -2901,6 +2901,7 @@ def _build_extend_tasks() -> list[TaskRecord]:
                 "names."
             ),
             [
+                _snapshot(),
                 _call(
                     "manage_backends",
                     {
@@ -5378,7 +5379,7 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
         _record(
             "extend",
             spine,
-            1,
+            2,
             "platform",
             (
                 "From the open Research Feed Staging board, review the connected backends, "
@@ -5417,7 +5418,7 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
         _record(
             "extend",
             spine,
-            2,
+            1,
             "platform",
             (
                 "Add a minimal Wave Two Research Feed backend serving a Research Feed "
@@ -5425,6 +5426,7 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
                 "names."
             ),
             [
+                _snapshot(),
                 _call(
                     "manage_backends",
                     {
