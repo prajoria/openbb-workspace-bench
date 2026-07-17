@@ -1,0 +1,177 @@
+{
+ "suite": "enterprise-apps-usage",
+ "date": "2026-07-17",
+ "suite_content_sha256": "2fe31c92315c1d580105d04ed519a9b31919cfd3a995c6ff94143f5e23463489",
+ "harness_git_commit": "5b77b825c7a1487d086974f70e60d65e1062a1e6",
+ "local_model_config": {
+  "OLLAMA_FORMAT": "none",
+  "OLLAMA_NUM_CTX": 32768
+ },
+ "models": {
+  "gpt-4.1-mini": {
+   "level0": {
+    "passed": 61,
+    "attempts": 64,
+    "rate": 0.9531
+   },
+   "level1": {
+    "passed": 97,
+    "attempts": 128,
+    "rate": 0.7578
+   },
+   "level2": {
+    "passed": 95,
+    "attempts": 128,
+    "rate": 0.7422
+   },
+   "level3": {
+    "passed": 28,
+    "attempts": 64,
+    "rate": 0.4375
+   },
+   "level4": {
+    "passed": 12,
+    "attempts": 64,
+    "rate": 0.1875
+   },
+   "level5": {
+    "passed": 2,
+    "attempts": 64,
+    "rate": 0.0312
+   },
+   "overall_rate": 0.5182
+  },
+  "glm-5.2": {
+   "level0": {
+    "passed": 32,
+    "attempts": 32,
+    "rate": 1.0
+   },
+   "level1": {
+    "passed": 61,
+    "attempts": 64,
+    "rate": 0.9531
+   },
+   "level2": {
+    "passed": 59,
+    "attempts": 64,
+    "rate": 0.9219
+   },
+   "level3": {
+    "passed": 23,
+    "attempts": 32,
+    "rate": 0.7188
+   },
+   "level4": {
+    "passed": 19,
+    "attempts": 32,
+    "rate": 0.5938
+   },
+   "level5": {
+    "passed": 7,
+    "attempts": 32,
+    "rate": 0.2188
+   },
+   "overall_rate": 0.7344
+  },
+  "gpt-5.5": {
+   "level0": {
+    "passed": 32,
+    "attempts": 32,
+    "rate": 1.0
+   },
+   "level1": {
+    "passed": 32,
+    "attempts": 32,
+    "rate": 1.0
+   },
+   "level2": {
+    "passed": 30,
+    "attempts": 32,
+    "rate": 0.9375
+   },
+   "level3": {
+    "passed": 31,
+    "attempts": 32,
+    "rate": 0.9688
+   },
+   "level4": {
+    "passed": 26,
+    "attempts": 32,
+    "rate": 0.8125
+   },
+   "level5": {
+    "passed": 18,
+    "attempts": 32,
+    "rate": 0.5625
+   },
+   "overall_rate": 0.8802
+  },
+  "gpt-oss-20b": {
+   "level0": {
+    "passed": 17,
+    "attempts": 32,
+    "rate": 0.5312
+   },
+   "level1": {
+    "passed": 14,
+    "attempts": 32,
+    "rate": 0.4375
+   },
+   "level2": {
+    "passed": 12,
+    "attempts": 32,
+    "rate": 0.375
+   },
+   "level3": {
+    "passed": 4,
+    "attempts": 32,
+    "rate": 0.125
+   },
+   "level4": {
+    "passed": 3,
+    "attempts": 32,
+    "rate": 0.0938
+   },
+   "level5": {
+    "passed": 0,
+    "attempts": 32,
+    "rate": 0.0
+   },
+   "overall_rate": 0.2604
+  },
+  "qwen3-8b": {
+   "level0": {
+    "passed": 19,
+    "attempts": 32,
+    "rate": 0.5938
+   },
+   "level1": {
+    "passed": 12,
+    "attempts": 32,
+    "rate": 0.375
+   },
+   "level2": {
+    "passed": 17,
+    "attempts": 32,
+    "rate": 0.5312
+   },
+   "level3": {
+    "passed": 8,
+    "attempts": 32,
+    "rate": 0.25
+   },
+   "level4": {
+    "passed": 1,
+    "attempts": 32,
+    "rate": 0.0312
+   },
+   "level5": {
+    "passed": 0,
+    "attempts": 32,
+    "rate": 0.0
+   },
+   "overall_rate": 0.2969
+  }
+ }
+}
