@@ -2,7 +2,7 @@
   "id": "operating_driver_lookup_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Operating-driver build request: add Wave Three Operating Drivers with a Operating Driver Lookup table, carrying fiscal_period and driver_value columns; publish and instantiate Operating Driver App on Drivers, read it with ticker AAPL, period 2026Q1, and report the exact fiscal_period and driver_value values shown. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Inflection skill (daloopa-inflection) and add a Operating-driver Build Note recording its governing concept.",
+  "prompt": "Operating-driver build request: add Wave Three Operating Drivers with a Operating Driver Lookup table, carrying fiscal_period and driver_value columns; publish and instantiate Operating Driver App on Drivers, read it with ticker AAPL, period 2026Q1, and report the exact fiscal_period and driver_value values shown. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Inflection skill (daloopa-inflection) and add a Operating-driver Build Note recording what it flags as inflections.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

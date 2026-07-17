@@ -2,7 +2,7 @@
   "id": "inflection_service_lifecycle_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Inflection-service complete service: follow the widgets manifest specification; add a custom backend Wave Three Inflection Service with Growth-Rate Reversals, Quarterly Series Monitor, Inflection Evidence Log tables, publish Inflection Service App with Growth-Rate Reversals and Quarterly Series Monitor on Review and Inflection Evidence Log on Archive, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Inflection skill (daloopa-inflection) and add a Inflection-service Governing Note recording its governing concept.",
+  "prompt": "Inflection-service complete service: follow the widgets manifest specification; add a custom backend Wave Three Inflection Service with Growth-Rate Reversals, Quarterly Series Monitor, Inflection Evidence Log tables, publish Inflection Service App with Growth-Rate Reversals and Quarterly Series Monitor on Review and Inflection Evidence Log on Archive, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Inflection skill (daloopa-inflection) and add a Inflection-service Governing Note recording the first growth cadence it computes.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -180,7 +180,7 @@
         "args": {
           "widget_type": "note",
           "name": "Inflection-service Governing Note",
-          "data": "growth-rate reversals"
+          "data": "quarter-over-quarter"
         },
         "graded_args": [
           "widget_type",
@@ -210,7 +210,7 @@
         "widget_type": "note",
         "name_contains": "Inflection-service Governing Note",
         "data_contains": [
-          "growth-rate reversals"
+          "quarter-over-quarter"
         ]
       }
     ],

@@ -2,7 +2,7 @@
   "id": "compliance_alert_review_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Compliance-alert build board: add Wave Three Compliance Review with a Compliance Review Register table and publish and instantiate Compliance Review App on Review; also add Bench Stark Enterprise — Compliance Surveillance Hub, Open Alert Metrics; Getting Started — Getting Started, Markdown Widget with Number Input. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Guidance Tracker skill (finance-guidance-tracker) and add a Compliance-alert Build Note recording its governing concept.",
+  "prompt": "Compliance-alert build board: add Wave Three Compliance Review with a Compliance Review Register table and publish and instantiate Compliance Review App on Review; also add Bench Stark Enterprise — Compliance Surveillance Hub, Open Alert Metrics; Getting Started — Getting Started, Markdown Widget with Number Input. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Guidance Tracker skill (finance-guidance-tracker) and add a Compliance-alert Build Note recording the final thing its workflow lists.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

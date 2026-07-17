@@ -2,7 +2,7 @@
   "id": "segment_mix_handoff_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Segment-mix build handoff: add Wave Three Segment Handoff with a Segment Handoff Register table, publish and instantiate Segment Handoff App with one Handoff tab, add a Segment-mix Build Handoff note grounded in Bench Daloopa's Segment Breakdown with the top segment and its exact revenue_musd and the Daloopa Tearsheet skill (daloopa-tearsheet)'s governing concept, then delegate. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Segment-mix build handoff: add Wave Three Segment Handoff with a Segment Handoff Register table, publish and instantiate Segment Handoff App with one Handoff tab, add a Segment-mix Build Handoff note grounded in Bench Daloopa's Segment Breakdown with the top segment and its exact revenue_musd and, from the Daloopa Tearsheet skill (daloopa-tearsheet), the anchor it uses for all period math, then delegate. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -152,7 +152,7 @@
         "args": {
           "widget_type": "note",
           "name": "Segment-mix Build Handoff",
-          "data": "mix: catalog facts iPhone and 52365.6."
+          "data": "latest_calendar_quarter: catalog facts iPhone and 52365.6."
         },
         "graded_args": [
           "widget_type",
@@ -186,7 +186,7 @@
         "widget_type": "note",
         "name_contains": "Segment-mix Build Handoff",
         "data_contains": [
-          "mix",
+          "latest_calendar_quarter",
           "iPhone",
           "52365.6"
         ]

@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Complete the risk desk build with Wave One Risk Service, Wave One Risk Signal, Wave One Limit Alert, and Wave One Stress Watch. Add the service, publish Wave One Risk App with Wave One Risk Signal and Wave One Limit Alert on Monitor and Wave One Stress Watch on Stress, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Guidance Tracker skill (finance-guidance-tracker) and add a Risk Service Build Note recording its governing concept.",
+  "prompt": "Complete the risk desk build with Wave One Risk Service, Wave One Risk Signal, Wave One Limit Alert, and Wave One Stress Watch. Add the service, publish Wave One Risk App with Wave One Risk Signal and Wave One Limit Alert on Monitor and Wave One Stress Watch on Stress, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Guidance Tracker skill (finance-guidance-tracker) and add a Risk Service Build Note recording the final thing its workflow lists.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

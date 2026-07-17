@@ -2,7 +2,7 @@
   "id": "consensus_exception_handoff_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Consensus-exception build handoff: add Wave Three Consensus Handoff with a Consensus Handoff Register table, publish and instantiate Consensus Handoff App with one Handoff tab, add a Consensus-exception Build Handoff note grounded in Bench Daloopa's Consensus Estimates with the exact Total Revenue actual and consensus for 2026Q1 and the Daloopa Earnings Review skill (daloopa-earnings-review)'s governing concept, then delegate. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Consensus-exception build handoff: add Wave Three Consensus Handoff with a Consensus Handoff Register table, publish and instantiate Consensus Handoff App with one Handoff tab, add a Consensus-exception Build Handoff note grounded in Bench Daloopa's Consensus Estimates with the exact Total Revenue actual and consensus for 2026Q1 and, from the Daloopa Earnings Review skill (daloopa-earnings-review), what it tallies as Beat, In Line, and Missed, then delegate. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -151,7 +151,7 @@
         "args": {
           "widget_type": "note",
           "name": "Consensus-exception Build Handoff",
-          "data": "consensus: catalog facts 102070.1 and 99404.2."
+          "data": "verdicts: catalog facts 102070.1 and 99404.2."
         },
         "graded_args": [
           "widget_type",
@@ -185,7 +185,7 @@
         "widget_type": "note",
         "name_contains": "Consensus-exception Build Handoff",
         "data_contains": [
-          "consensus",
+          "verdicts",
           "102070.1",
           "99404.2"
         ]

@@ -2,7 +2,7 @@
   "id": "earnings_handoff_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "From the open Earnings Handoff board, author and add a minimal custom Earnings Handoff Backend with one Earnings Handoff Register. Publish and instantiate Earnings Handoff App with one Handoff tab, add an Earnings Build Handoff note naming Earnings Handoff App and Earnings Handoff Register, then delegate the build-review follow-up. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Earnings Prep skill (finance-earnings-prep) and record its governing concept in the note.",
+  "prompt": "From the open Earnings Handoff board, author and add a minimal custom Earnings Handoff Backend with one Earnings Handoff Register. Publish and instantiate Earnings Handoff App with one Handoff tab, add an Earnings Build Handoff note naming Earnings Handoff App and Earnings Handoff Register, then delegate the build-review follow-up. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Earnings Prep skill (finance-earnings-prep) and record in the note what internal estimates are compared to.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "technology_decision_inputs_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Decision-inputs build tuning: add a custom backend Wave One Decision Tuning with a Decision Input Panel table carrying company and period params, publish and instantiate Decision Tuning App on Controls, then set the live Decision Input Panel to company TSLA, period QTD. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Earnings Prep skill (finance-earnings-prep) and add a Decision-inputs Tuning Note recording its governing concept.",
+  "prompt": "Decision-inputs build tuning: add a custom backend Wave One Decision Tuning with a Decision Input Panel table carrying company and period params, publish and instantiate Decision Tuning App on Controls, then set the live Decision Input Panel to company TSLA, period QTD. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Earnings Prep skill (finance-earnings-prep) and add a Decision-inputs Tuning Note recording what it compares to street numbers first.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

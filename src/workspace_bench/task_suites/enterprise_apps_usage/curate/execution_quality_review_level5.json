@@ -2,7 +2,7 @@
   "id": "execution_quality_review_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Execution-quality build board: add Wave Three Execution Review with a Execution Review Register table and publish and instantiate Execution Review App on Quality; also add Bench Stark Enterprise — Execution Desk, Live Orders; Getting Started — Getting Started, Multi PDF Viewer - URL. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Comps skill (finance-comps) and add a Execution-quality Build Note recording its governing concept.",
+  "prompt": "Execution-quality build board: add Wave Three Execution Review with a Execution Review Register table and publish and instantiate Execution Review App on Quality; also add Bench Stark Enterprise — Execution Desk, Live Orders; Getting Started — Getting Started, Multi PDF Viewer - URL. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Comps skill (finance-comps) and add a Execution-quality Build Note recording what it says deserve premium or discount.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

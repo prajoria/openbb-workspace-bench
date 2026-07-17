@@ -6012,6 +6012,32 @@ def _note_phrase(name: str) -> str:
     return name if name.lower().endswith("note") else f"{name} note"
 
 
+GOVERNED_TOKEN_WORDS: dict[str, str] = {
+    # Each phrase uniquely determines its graded token inside the named
+    # knowledge source without printing the token in the prompt.
+    "Dividends Paid": "the payout item added to buybacks in its comparison",
+    "Free Cash Flow": "what buybacks plus payouts are compared against",
+    "verdicts": "what it tallies as Beat, In Line, and Missed",
+    "Missed": "the last of the three verdict kinds it tallies",
+    "peers": "who it lists from the company directory",
+    "growth-rate reversals": "what it flags as inflections",
+    "quarter-over-quarter": "the first growth cadence it computes",
+    "latest_calendar_quarter": "the anchor it uses for all period math",
+    "outliers": "what it says deserve premium or discount",
+    "valuation multiples": "what it compares after normalizing metrics",
+    "internal estimates": "what it compares to street numbers first",
+    "street numbers": "what internal estimates are compared to",
+    "surprise drivers": "what it identifies right after the estimate comparison",
+    "transcript tone": "what it inspects just before producing action items",
+    "changed assumptions": "what it flags after comparing claims with guidance",
+    "evidence gaps": "the final thing its workflow lists",
+    "prior guidance": "what management claims are compared with",
+    "catalysts": "the input it gathers between valuation and risks",
+    "price action": "the first input its workflow gathers",
+    "form": "the param kind it names between endpoint and button",
+}
+
+
 def _governed_build_note(
     governance: GovernanceSpec, note_name: str
 ) -> tuple[str, list[JsonDict], JsonDict, PolicyMapping]:
@@ -6022,9 +6048,12 @@ def _governed_build_note(
     """
 
     token = governance.outcome_tokens[0]
+    token_words = GOVERNED_TOKEN_WORDS[token]
+    if token.casefold() in token_words.casefold():
+        raise AssertionError(f"token description prints the token: {token!r}")
     prompt_part = (
         f" Follow the {governance.label} and add a {_note_phrase(note_name)} "
-        "recording its governing concept."
+        f"recording {token_words}."
     )
     steps = [
         _wave3_governance_call(governance),
@@ -7739,6 +7768,7 @@ def _build_wave3_extend_spine(
     widget_names: tuple[str, str, str],
     governance: GovernanceSpec,
     url: str,
+    build_token: str | None = None,
 ) -> list[TaskRecord]:
     tasks: list[TaskRecord] = []
     widget_ids = tuple(_snake_case(name) for name in widget_names)
@@ -7935,8 +7965,13 @@ def _build_wave3_extend_spine(
         _custom_target(backend_name, widget_id, name)
         for widget_id, name in zip(widget_ids, widget_names, strict=True)
     )
+    build_governance = (
+        governance
+        if build_token is None
+        else dataclasses.replace(governance, outcome_tokens=(build_token,))
+    )
     gov_prompt, gov_steps, gov_required, gov_policy = _governed_build_note(
-        governance, f"{title} Governing Note"
+        build_governance, f"{title} Governing Note"
     )
     tasks.append(
         _record(
@@ -8014,7 +8049,7 @@ def _build_wave3_extend_spine(
                 }
             ],
             required_generated_widgets=[gov_required],
-            governance=governance,
+            governance=build_governance,
         )
     )
     return tasks
@@ -8039,6 +8074,7 @@ def _build_wave3_extend_tasks() -> list[TaskRecord]:
                 ("growth-rate reversals",),
             ),
             url="http://127.0.0.1:9711",
+            build_token="quarter-over-quarter",
         ),
         *_build_wave3_extend_spine(
             spine="guidance_service_lifecycle",
@@ -8053,6 +8089,7 @@ def _build_wave3_extend_tasks() -> list[TaskRecord]:
                 ("evidence gaps",),
             ),
             url="http://127.0.0.1:9712",
+            build_token="prior guidance",
         ),
     ]
 
@@ -8068,6 +8105,7 @@ def _build_wave3_handoff_spine(
     tokens: tuple[str, str],
     fact_words: str,
     governance: GovernanceSpec,
+    build_token: str | None = None,
     backend_name: str,
     widget_name: str,
     app_name: str,
@@ -8163,6 +8201,12 @@ def _build_wave3_handoff_spine(
     widget_def = _widget_def(widget_name, f"/{widget_id}", grid=(40, 10))
     app_def = _app(app_name, [(tab_id, tab_name, [(widget_id, 0, 0, 40, 10, None)])])
     build_note = f"{title} Build Handoff"
+    build_governance = (
+        governance
+        if build_token is None
+        else dataclasses.replace(governance, outcome_tokens=(build_token,))
+    )
+    build_governed_token = build_governance.outcome_tokens[0]
     tasks.append(
         _record(
             "handoff",
@@ -8173,12 +8217,14 @@ def _build_wave3_handoff_spine(
                 f"{title} build handoff: add {backend_name} with a {widget_name} table, "
                 f"publish and instantiate {app_name} with one {tab_name} tab, add a "
                 f"{_note_phrase(build_note)} grounded in {target.origin}'s "
-                f"{target.display_name} with {fact_words} and the {governance.label}'s "
-                "governing concept, then delegate. Widget ids are the snake_case of "
-                "widget names; tab ids are the snake_case of tab names."
+                f"{target.display_name} with {fact_words} and, from the "
+                f"{build_governance.label}, "
+                f"{GOVERNED_TOKEN_WORDS[build_governance.outcome_tokens[0]]}, then "
+                "delegate. Widget ids are the snake_case of widget names; tab ids are "
+                "the snake_case of tab names."
             ),
             [
-                _wave3_governance_call(governance),
+                _wave3_governance_call(build_governance),
                 *_wave3_discover_targets((target,)),
                 _wave3_read_call(target, data_args, optional=True),
                 _call(
@@ -8205,7 +8251,7 @@ def _build_wave3_handoff_spine(
                 ),
                 _wave3_generated_call(
                     build_note,
-                    f"{governed_token}: catalog facts {tokens[0]} and {tokens[1]}.",
+                    f"{build_governed_token}: catalog facts {tokens[0]} and {tokens[1]}.",
                 ),
                 _call("assign_tasks_to_agents", assignment, graded_args=()),
             ],
@@ -8213,10 +8259,10 @@ def _build_wave3_handoff_spine(
                 _custom_target(backend_name, widget_id, widget_name),
                 target,
             ),
-            policies=(PolicyMapping(governance.label, (governed_token,)),),
+            policies=(PolicyMapping(build_governance.label, (build_governed_token,)),),
             required_widgets=[_required_widget(backend_name, widget_id, tab_id=tab_id)],
             required_generated_widgets=[
-                _wave3_required_generated(build_note, governed_token, *tokens)
+                _wave3_required_generated(build_note, build_governed_token, *tokens)
             ],
             required_widget_defs=[
                 {"backend_name": backend_name, "widget_id": widget_id, "expect": {"type": "table"}}
@@ -8231,7 +8277,7 @@ def _build_wave3_handoff_spine(
                 }
             ],
             grounded_generated=(GroundedGenerated(source_slug, target.widget_id, tokens),),
-            governance=governance,
+            governance=build_governance,
         )
     )
     return tasks
@@ -8260,6 +8306,7 @@ def _build_wave3_handoff_tasks() -> list[TaskRecord]:
                 "Daloopa Tearsheet skill (daloopa-tearsheet)",
                 ("mix",),
             ),
+            build_token="latest_calendar_quarter",
             backend_name="Wave Three Segment Handoff",
             widget_name="Segment Handoff Register",
             app_name="Segment Handoff App",
@@ -8281,6 +8328,7 @@ def _build_wave3_handoff_tasks() -> list[TaskRecord]:
                 "Daloopa Earnings Review skill (daloopa-earnings-review)",
                 ("consensus",),
             ),
+            build_token="verdicts",
             backend_name="Wave Three Consensus Handoff",
             widget_name="Consensus Handoff Register",
             app_name="Consensus Handoff App",
@@ -8400,8 +8448,8 @@ def _govern_level5(record: TaskRecord) -> TaskRecord:
         # governed concept into that note instead of adding a second one.
         payload["prompt"] = (
             str(payload["prompt"])
-            + f" Follow the {governance.label} and record its governing concept "
-            "in the note."
+            + f" Follow the {governance.label} and record in the note "
+            f"{GOVERNED_TOKEN_WORDS[token]}."
         )
         tools.insert(0, _wave3_governance_call(governance))
         note_call = next(
@@ -9059,6 +9107,11 @@ def _assert_level5_builds(records: list[TaskRecord]) -> None:
         }
         if token not in graded_tokens:
             raise AssertionError(f"{payload['id']}: level5 governed token not graded")
+        if token.casefold().replace("-", " ") in prompt.casefold().replace("-", " "):
+            # A prompt-visible token makes the knowledge read decorative.
+            raise AssertionError(
+                f"{payload['id']}: governed token {token!r} is printed in the prompt"
+            )
 
 
 KNOWLEDGE_READ_TOOLS = frozenset(
