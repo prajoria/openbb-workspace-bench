@@ -3073,7 +3073,8 @@ def _build_extend_tasks() -> list[TaskRecord]:
             (
                 "Complete the risk desk build with Wave One Risk Service, Wave One Risk "
                 "Signal, Wave One Limit Alert, and Wave One Stress Watch. Add the service, "
-                "publish Wave One Risk App with Monitor and Stress tabs, and instantiate it. "
+                "publish Wave One Risk App with Wave One Risk Signal and Wave One Limit "
+                "Alert on Monitor and Wave One Stress Watch on Stress, and instantiate it. "
                 "Widget ids are the snake_case of widget names; tab ids are the snake_case "
                 "of tab names."
             ),
@@ -5596,7 +5597,8 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
             (
                 "Complete the research service with Wave Two Research Feed, Research Feed "
                 "Pulse, Source Freshness Alert, and Archive Coverage Watch. Add the backend, "
-                "publish Research Feed App with Feed and Archive tabs, and instantiate it. "
+                "publish Research Feed App with Research Feed Pulse and Source Freshness "
+                "Alert on Feed and Archive Coverage Watch on Archive, and instantiate it. "
                 "Widget ids are the snake_case of widget names; tab ids are the snake_case "
                 "of tab names."
             ),
@@ -7945,8 +7947,9 @@ def _build_wave3_extend_spine(
             (
                 f"{title} complete service: follow the widgets manifest specification; "
                 f"add a custom backend {backend_name} with "
-                f"{', '.join(widget_names)} tables, publish {app_name} "
-                "with Review and Archive tabs, and instantiate it. Widget ids are the "
+                f"{', '.join(widget_names)} tables, publish {app_name} with "
+                f"{widget_names[0]} and {widget_names[1]} on Review and "
+                f"{widget_names[2]} on Archive, and instantiate it. Widget ids are the "
                 "snake_case of widget names; tab ids are the snake_case of tab names."
                 + gov_prompt
             ),
@@ -9120,6 +9123,39 @@ def _assert_no_decorative_knowledge_reads(records: list[TaskRecord]) -> None:
             )
 
 
+def _assert_tab_pin_fairness(records: list[TaskRecord]) -> None:
+    """A widget pinned to a tab must have the mapping stated or name-aligned."""
+
+    for record in records:
+        payload = record.payload
+        required = payload["eval"].get("required_widgets", [])
+        pinned = [item for item in required if item.get("tab_id")]
+        if len({item["tab_id"] for item in pinned}) < 2:
+            # A single pinned tab is derivable: it is the app's stated tab.
+            continue
+        prompt = str(payload["prompt"]).casefold().replace("-", " ")
+        for item in pinned:
+            widget_words = str(item["widget_id"]).replace("_", " ").casefold()
+            tab = str(item["tab_id"]).casefold()
+            if tab.rstrip("s") in widget_words:
+                continue
+            stated = False
+            start = prompt.find(widget_words)
+            while start >= 0:
+                window = prompt[start + len(widget_words) : start + len(widget_words) + 48]
+                if f" on {tab}" in window:
+                    # Stated mapping, possibly compound ("A and B on X").
+                    stated = True
+                    break
+                start = prompt.find(widget_words, start + 1)
+            if stated:
+                continue
+            raise AssertionError(
+                f"{payload['id']}: widget {item['widget_id']!r} pinned to tab "
+                f"{item['tab_id']!r} without a stated or name-aligned mapping"
+            )
+
+
 def _assert_l1_l5(records: list[TaskRecord]) -> None:
     """Assert the wave-2 learned rules across both waves."""
 
@@ -9924,6 +9960,7 @@ def validate_payloads(records: list[TaskRecord]) -> dict[str, int]:
     _assert_level5_builds(records)
     _assert_authored_id_conventions(records)
     _assert_no_decorative_knowledge_reads(records)
+    _assert_tab_pin_fairness(records)
     _assert_l1_l5(records)
     _assert_wave2_requirements(records)
     _assert_instantiation_and_expect_fairness(records)
