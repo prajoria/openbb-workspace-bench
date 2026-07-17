@@ -13,3 +13,10 @@ Strict-pass rates; local reference models run free-form (`OLLAMA_FORMAT=none`).
 | level5 | governed build | 0% | 0% | 3% | 22% | 56% |
 | **overall** | | **29.7%** | **26.0%** | **51.8%** | **73.4%** | **88.0%** |
 
+
+Serving note: raw rates count process failures (malformed actions, serving
+errors) as task failures. Diagnostic clean rates excluding them are in the
+JSON; clean of format deaths, gpt-oss:20b edges qwen3:8b at level0 (61% vs
+59%) and their remaining gaps are within sampling noise - the two local
+floors differ mainly in free-form action-format reliability, not workspace
+skill.

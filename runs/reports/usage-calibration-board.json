@@ -111,32 +111,44 @@
    "level0": {
     "passed": 17,
     "attempts": 32,
-    "rate": 0.5312
+    "rate": 0.5312,
+    "process_failures": 4,
+    "clean_rate": 0.6071
    },
    "level1": {
     "passed": 14,
     "attempts": 32,
-    "rate": 0.4375
+    "rate": 0.4375,
+    "process_failures": 4,
+    "clean_rate": 0.5
    },
    "level2": {
     "passed": 12,
     "attempts": 32,
-    "rate": 0.375
+    "rate": 0.375,
+    "process_failures": 3,
+    "clean_rate": 0.4138
    },
    "level3": {
     "passed": 4,
     "attempts": 32,
-    "rate": 0.125
+    "rate": 0.125,
+    "process_failures": 8,
+    "clean_rate": 0.1667
    },
    "level4": {
     "passed": 3,
     "attempts": 32,
-    "rate": 0.0938
+    "rate": 0.0938,
+    "process_failures": 3,
+    "clean_rate": 0.1034
    },
    "level5": {
     "passed": 0,
     "attempts": 32,
-    "rate": 0.0
+    "rate": 0.0,
+    "process_failures": 12,
+    "clean_rate": 0.0
    },
    "overall_rate": 0.2604
   },
@@ -144,34 +156,47 @@
    "level0": {
     "passed": 19,
     "attempts": 32,
-    "rate": 0.5938
+    "rate": 0.5938,
+    "process_failures": 0,
+    "clean_rate": 0.5938
    },
    "level1": {
     "passed": 12,
     "attempts": 32,
-    "rate": 0.375
+    "rate": 0.375,
+    "process_failures": 1,
+    "clean_rate": 0.3871
    },
    "level2": {
     "passed": 17,
     "attempts": 32,
-    "rate": 0.5312
+    "rate": 0.5312,
+    "process_failures": 1,
+    "clean_rate": 0.5484
    },
    "level3": {
     "passed": 8,
     "attempts": 32,
-    "rate": 0.25
+    "rate": 0.25,
+    "process_failures": 3,
+    "clean_rate": 0.2759
    },
    "level4": {
     "passed": 1,
     "attempts": 32,
-    "rate": 0.0312
+    "rate": 0.0312,
+    "process_failures": 2,
+    "clean_rate": 0.0333
    },
    "level5": {
     "passed": 0,
     "attempts": 32,
-    "rate": 0.0
+    "rate": 0.0,
+    "process_failures": 9,
+    "clean_rate": 0.0
    },
    "overall_rate": 0.2969
   }
- }
+ },
+ "notes": "Raw rates count process failures (malformed actions, serving errors) as task failures - an agent that cannot emit a valid action fails in reality. clean_rate excludes them as a diagnostic: gpt-oss:20b loses 12-38% of episodes per level to free-form action-format collapses (argument fragments without a tool field after drowning in everything-mounted listings, broken JSON in long payloads); qwen3:8b rarely does. Clean of those, gpt-oss:20b edges qwen3:8b at level0 (61% vs 59%) and their level3 gap is not significant (Fisher p=0.51) - the local floors are statistically interchangeable on workspace skill and differ mainly in action-format reliability."
 }
