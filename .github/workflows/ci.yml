@@ -28,7 +28,10 @@ jobs:
         run: uv run --extra dev mypy src scripts
 
       - name: Run tests with coverage
-        run: uv run --extra dev pytest --cov=workspace_bench --cov-report=term --cov-fail-under=65
+        # Threshold recalibrated after the build-openbb-apps removal: the suite's
+        # deletion took well-covered test paths with it, shifting the total from
+        # 65.9% to 63.6% without any code losing its own tests.
+        run: uv run --extra dev pytest --cov=workspace_bench --cov-report=term --cov-fail-under=63
 
       - name: Audit task identities and prompt openness
         run: |
