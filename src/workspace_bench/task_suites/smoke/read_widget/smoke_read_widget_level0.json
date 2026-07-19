@@ -2,7 +2,7 @@
   "id": "smoke_read_widget_level0",
   "family": "read_widget",
   "difficulty": "level0",
-  "prompt": "Call read_widget for the seeded widget_id 'client_360_client_book_client_accounts' from origin 'Bench Stark Enterprise'.",
+  "prompt": "Call read_widget with origin 'Bench Stark Enterprise' and widget_id 'client_360_client_book_client_accounts'. The widget sits on the active dashboard, so those two arguments are all the call needs.",
   "setup": {
     "workspace_baseline": "",
     "workspace_backends": [

@@ -331,9 +331,10 @@ def _family_specs() -> list[FamilySpec]:
         FamilySpec(
             tool="read_widget",
             prompt=(
-                "Call read_widget for the seeded widget_id "
-                "'client_360_client_book_client_accounts' from origin "
-                "'Bench Stark Enterprise'."
+                "Call read_widget with origin 'Bench Stark Enterprise' and "
+                "widget_id 'client_360_client_book_client_accounts'. The "
+                "widget sits on the active dashboard, so those two "
+                "arguments are all the call needs."
             ),
             open_prompt=(
                 "Read the configuration of the only widget on the "
