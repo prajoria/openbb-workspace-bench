@@ -1,7 +1,6 @@
 name: Workspace Bench CI
 
-# Expected on a GitHub-hosted Ubuntu runner: roughly 3–5 minutes, including
-# Chromium installation and the 12 real-code backend certifications.
+# Expected on a GitHub-hosted Ubuntu runner: roughly 3–5 minutes.
 
 on:
   pull_request:
@@ -40,8 +39,6 @@ jobs:
       - name: Validate the usage suite
         run: uv run --extra dev workspace-bench validate --suite enterprise-apps-usage --min-tasks 192
 
-      - name: Validate the build-openbb-apps suite
-        run: uv run --extra dev workspace-bench validate --suite build-openbb-apps --min-tasks 236
       - name: Validate enterprise-apps-default suite
         run: uv run --extra dev workspace-bench validate --suite enterprise-apps-default --min-tasks 138
 
@@ -51,25 +48,9 @@ jobs:
       - name: Run oracle baseline (usage)
         run: uv run --extra dev workspace-bench run --suite enterprise-apps-usage --agent oracle
 
-      - name: Run oracle baseline (build-openbb-apps)
-        run: uv run --extra dev workspace-bench run --suite build-openbb-apps --agent oracle
-
-      - name: Probe runtime endpoints
-        run: |
-          uv run workspace-bench runtime-probe --suite build-openbb-apps
-
       - name: Reject adversarial candidates
         run: |
           uv run workspace-bench adversarial --suite enterprise-apps-usage
-          uv run workspace-bench adversarial --suite build-openbb-apps
-
-      - name: Install Chromium
-        run: uv run --extra browser playwright install chromium
-
-      - name: Certify the browser harness
-        run: |
-          uv run --extra browser workspace-bench browser-cert --dry-run
-          uv run --extra browser workspace-bench browser-cert --self-test
 
       - name: Export agent task envelope
         run: uv run --extra dev workspace-bench export-task --task enterprise-apps-usage/curate/decision_briefing_level0 --output /tmp/workspace-task.json
@@ -80,12 +61,10 @@ jobs:
       - name: Build manifests
         run: |
           uv run --extra dev workspace-bench manifest --suite enterprise-apps-usage --json > /dev/null
-          uv run --extra dev workspace-bench manifest --suite build-openbb-apps --json > /dev/null
 
       - name: Build release reports
         run: |
           uv run --extra dev workspace-bench report --suite enterprise-apps-usage --json > /dev/null
-          uv run --extra dev workspace-bench report --suite build-openbb-apps --json > /dev/null
 
       - name: Smoke the evaluator dispatch
         run: |

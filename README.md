@@ -9,17 +9,16 @@ The benchmark asks a simple question: can an agent inspect, build, update, and r
 
 Motivation: a [NY Tech Week talk](https://youtu.be/7fDTDYh2NJ4?t=1210) showed agents driving real financial work in OpenBB Workspace over MCP, on the [Stark Industries demo](https://github.com/DidierRLopes/stark-industries-demo). A demo shows work can happen once; this benchmark measures how reliably agents actually drive it. The Stark demo is also where the enterprise tasks come from.
 
-Five suites ship bundled in a capability ladder: `smoke` checks one round trip
-per Workspace MCP surface (20 tasks), `enterprise-apps-default` answers the
-default apps' product prompts in two data worlds (138), `enterprise-apps-usage` operates Workspace
-state (192), and `build-openbb-apps` builds and repairs custom apps (236).
+Three suites ship bundled in a capability ladder: `smoke` checks one round trip
+per Workspace MCP surface (80 tasks), `enterprise-apps-default` answers the
+default apps' product prompts in two data worlds (138), and
+`enterprise-apps-usage` operates Workspace state (192).
 
 ## Contents
 
 - [What Is Included](#what-is-included)
 - [Scope & Limitations](#scope--limitations)
 - [Quick Start](#quick-start)
-- [Current Build Calibration](#current-build-calibration)
 - [Archived Baselines](#archived-baselines)
 - [Evaluate Your Agent](#evaluate-your-agent)
 - [Suites](#suites)
@@ -37,23 +36,21 @@ state (192), and `build-openbb-apps` builds and repairs custom apps (236).
 
 ## What Is Included
 
-- 646 deterministic simulator tasks across four certified suites:
+- 410 deterministic simulator tasks across three certified suites:
   - `smoke` — 80 tasks: a four-level execution ladder over every Workspace MCP surface
   - `enterprise-apps-default` — 138 tasks pairing 69 byte-verbatim product prompts across two data worlds
   - `enterprise-apps-usage` — 192 operating tasks: 8 job-shaped families
     (retrieve, curate, parameterize, organize, repair, platform, extend,
     handoff) climbing a level0-level5 operation ladder on the
     everything-mounted workspace, topped by authoring custom backends
-  - `build-openbb-apps` — 236 specification-level app-building tasks across 12 families,
-    including 24 long diagnosis/repair/retest incidents
 
   Each suite directory under `src/workspace_bench/task_suites/` has a README
   explaining how it is generated and how its tasks are categorized.
-- generated families covering widgets, apps, prompts, resources, skills, delegation, inspection, repair, layout, and backend/app building
+- generated families covering widgets, apps, prompts, resources, skills, delegation, inspection, repair, and layout
 - transcription-grade Getting Started, Widget Examples, Stark enterprise, and Daloopa fixture backends
 - simulator-backed Workspace MCP runtime for fast local evals
 - live `workspace-mcp` sidecar smoke runner
-- optional Playwright browser-certification harness with a 30-task realism subset
+- optional Playwright browser-certification harness for runtime-enabled suites
 - public task envelope export
 - external agent command contract
 - private task directory support
@@ -101,7 +98,6 @@ uv run workspace-bench manifest --json
 uv run workspace-bench validate --suite smoke --min-tasks 80
 uv run workspace-bench validate --suite enterprise-apps-default --min-tasks 138
 uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 192
-uv run workspace-bench validate --suite build-openbb-apps --min-tasks 236
 ```
 
 Run built-in baselines:
@@ -112,50 +108,14 @@ uv run workspace-bench run --agent noop
 uv run workspace-bench report --output runs/reports/benchmark-report.md
 ```
 
-Committed deterministic certification reports are
-`runs/reports/benchmark-report.md` (core) and
-`runs/reports/build-apps-benchmark-report.md` (build apps).
+The committed deterministic certification report is
+`runs/reports/benchmark-report.md` (core).
 
 Run tests:
 
 ```bash
 uv run --extra dev pytest
 ```
-
-## Current build calibration
-
-The current `build-openbb-apps` board is the July 2026 guided interactive
-calibration: 236 tasks × 2 repeats (472 strict attempts per model). The repeats
-remain separate observations; Wilson intervals and paired McNemar results are
-in `runs/reports/significance.json`.
-
-| Model | Strict pass (95% Wilson CI) | State pass | Runtime pass |
-| --- | ---: | ---: | ---: |
-| OpenAI GPT-5.5 | 105/472 (22.2%; 18.7–26.2%) | 137/472 (29.0%) | 224/472 (47.5%) |
-| OpenAI GPT-5.1 | 36/472 (7.6%; 5.6–10.4%) | 94/472 (19.9%) | 273/472 (57.8%) |
-| OpenAI GPT-5.4 mini | 12/472 (2.5%; 1.5–4.4%) | 35/472 (7.4%) | 164/472 (34.7%) |
-
-Every row above comes from the July 2026 replay-only fixed-grader run
-(each model recorded `resumed_cells=472` and `new_cells=0`); the compiled
-boards in `runs/reports/` are the retained evidence — the raw run
-directories are not committed. The before → after replay comparison is:
-
-| Model | Strict | Mean outcome | State | Runtime |
-| --- | ---: | ---: | ---: | ---: |
-| OpenAI GPT-5.5 | 150 → 105 | 0.731 → 0.653 | 181 → 137 | 227 → 224 |
-| OpenAI GPT-5.1 | 50 → 36 | 0.735 → 0.621 | 104 → 94 | 271 → 273 |
-| OpenAI GPT-5.4 mini | 15 → 12 | 0.513 → 0.261 | 37 → 35 | 165 → 164 |
-
-The replay removes vacuous preservation credit from the outcome numerator.
-Mean-outcome spread widens from 0.222 to 0.391 while strict-pass ordering stays
-GPT-5.5, GPT-5.1, GPT-5.4 mini. The repeated-evidence relabel review applies 44
-approved changes; the measured distribution is now 17/43/176, providing a
-material middle band without changing prompts to manufacture easier tasks.
-
-OpenRouter Claude Sonnet 5 and GLM-5.2 are excluded: credit exhaustion caused
-362/472 and 357/472 process failures, respectively, with 356 and 349 HTTP 402
-responses. Their alphabet-biased valid-attempt slices are limitation evidence
-only and never feed measured difficulty.
 
 ## Archived Baselines
 
@@ -191,33 +151,12 @@ The raw per-task traces from those runs predate the 2026-07 schema resets and
 were removed from the repository as non-comparable; the compiled evidence
 remains at `runs/reports/calibration.json` (built by
 `workspace-bench compile calibration`), and confidence intervals, difficulty
-slices, and all pairwise tests at `runs/reports/significance.json` (built by
-`workspace-bench compile significance`). The current analysis script additionally
-reports family-cluster bootstrap intervals; task-IID Wilson and McNemar
-statistics are retained only as descriptive historical measures.
+slices, and all pairwise tests at `runs/reports/significance.json`. Task-IID
+Wilson and McNemar statistics are retained only as descriptive historical
+measures.
 
-Archived pre-debug build-openbb-apps baseline (the former 212-task suite):
-
-| Model | Strict pass | t0 → t4 pass rate (%) |
-|---|---|---|
-| GPT-5.5 | 212/212 (100.0%) | 100 · 100 · 100 · 100 · 100 |
-| GLM-5.2 | 210/212 (99.1%) | 100 · 100 · 100 · 100 · 96 |
-| Claude Sonnet 5 | 209/212 (98.6%) | 100 · 98 · 100 · 95 · 100 |
-| gpt-4.1-mini ‡ | 153/212 (72.2%) | 95 · 90 · 73 · 63 · 48 |
-| gpt-oss:20b | 144/212 (67.9%) | 88 · 68 · 83 · 65 · 44 |
-| Qwen3 8B | 30/212 (14.2%) | 28 · 20 · 10 · 10 · 6 |
-
-The top three build scores are not statistically separable at n=212
-(GPT-5.5 vs GLM-5.2 p=0.50; GLM-5.2 vs Sonnet 5 p=1.0), and neither are
-gpt-4.1-mini vs gpt-oss:20b (p=0.35) — read those as ties. The suite is
-saturated at the frontier: its headroom is for small and mid-tier models,
-and it doubles as the certification gate for the build-task generator.
-Build process failures: gpt-oss:20b 11, GLM-5.2 2, Qwen3 8B 2.
-
-‡ gpt-4.1-mini is the calibration model. The build ladder was accepted only
-when its pass rate fell strictly from t0 to t4, so its build curve is a
-design target rather than an independent measurement; the other five models
-never influenced task selection.
+‡ gpt-4.1-mini is the calibration model; the other five models never
+influenced task selection.
 
 The retired 512-task pooled snapshot was GPT-5.5 96.5%, Sonnet 5 93.0%,
 GLM-5.2 85.7%, gpt-4.1-mini 71.1%, gpt-oss:20b 62.9%, and Qwen3 8B 35.0%.
@@ -263,11 +202,11 @@ Run several models side by side — `--model` is repeatable:
 uv run workspace-bench \
   --model openai:gpt-4.1-mini \
   --model ollama:qwen3:8b \
-  --suite build-openbb-apps
+  --suite enterprise-apps-usage
 ```
 
-Omit `--task` and the runner covers the whole suite (`--suite
-core` or `--suite build-openbb-apps`); add `--family`, `--difficulty`, or
+Omit `--task` and the runner covers the whole suite (e.g. `--suite
+enterprise-apps-usage`); add `--family`, `--difficulty`, or
 `--tag` to run a slice.
 
 Compare only one difficulty slice:
@@ -296,7 +235,7 @@ Run one specific task with one specific model — the fastest way to study
 what a model actually does on a single task:
 
 ```bash
-uv run workspace-bench --model openai:gpt-4.1-mini --task build-openbb-apps/aggrid/revision_grid
+uv run workspace-bench --model openai:gpt-4.1-mini --task enterprise-apps-usage/retrieve/earnings_lookup_level0
 ```
 
 That's the whole command - no subcommand needed, evaluating is what the tool does: `--model provider:model` needs no adapter config
@@ -353,7 +292,7 @@ OpenRouter is a first-class OpenAI-compatible provider. It reads
 ```bash
 uv run workspace-bench \
   --model openrouter:anthropic/claude-sonnet-4.5 \
-  --task build-openbb-apps/aggrid/auction_calendar
+  --task enterprise-apps-usage/curate/decision_briefing_level0
 ```
 
 Per-episode rows record wall time, input/output/total tokens, API-call count,
@@ -371,11 +310,10 @@ uv run workspace-bench compile calibration runs/comparison/<run-id> \
 
 After at least two model result sets exist,
 `workspace-bench compile difficulty` produces a raw band proposal and a
-conservatively approved override payload. `--apply-overrides` writes the
-approved table to `src/workspace_bench/core/measured_difficulty.json`; the
-generator consumes it and verifies the empirical counts.
+conservatively approved override payload; `--apply-overrides PATH` writes the
+approved table to a measured-difficulty JSON file for downstream review.
 
-Use `--suite enterprise-apps-usage|build-openbb-apps` for the stable interactive suites, and `--task-dir`
+Use `--suite enterprise-apps-usage` for the stable interactive suite, and `--task-dir`
 for a private task suite. You can slice with `--family`, `--category`, and
 `--difficulty`.
 
@@ -420,13 +358,12 @@ be added independently and reported separately or in aggregate. Bundled today:
 | --- | --- | --- |
 | `smoke` | 80 | four-level execution ladder across every Workspace MCP tool and knowledge surface |
 | `enterprise-apps-default` | 138 | answering 69 byte-verbatim product prompts across two seeded data worlds |
-| `enterprise-apps-usage` | 300 | operating the workspace across widgets, dashboards, apps, skills, and repair |
-| `build-openbb-apps` | 236 | building, diagnosing, repairing, retesting, and opening custom-backend widgets and apps |
+| `enterprise-apps-usage` | 192 | operating the workspace across widgets, dashboards, apps, skills, and repair |
 
 ```bash
 # run or validate one suite
-uv run workspace-bench validate --suite build-openbb-apps --min-tasks 236
-uv run workspace-bench --models-file my-models.json --suite build-openbb-apps
+uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 192
+uv run workspace-bench --models-file my-models.json --suite enterprise-apps-usage
 ```
 
 Every suite requires the reference solution to pass every task and a
@@ -443,7 +380,7 @@ run directory per model per suite:
 ```bash
 # each evaluator invocation writes one run directory per model
 uv run workspace-bench compile suites \
-  --run build-openbb-apps=runs/comparison/<run-id>/<model>.json \
+  --run enterprise-apps-usage=runs/comparison/<run-id>/<model>.json \
   --historical-run core=runs/comparison/<historical-run-id> \
   --output /tmp/workspace-bench-suites-example.json
 ```
@@ -549,8 +486,8 @@ uv sync --extra dev --extra browser
 uv run playwright install chromium
 ```
 
-The required local gates need no Workspace account. Dry-run validates all 30
-manifest entries, their oracle backends, runtime-derived evidence, parameters,
+The local gates need no Workspace account. Dry-run validates every manifest
+entry, its oracle backend, runtime-derived evidence, parameters,
 columns, tabs, CORS, and live HTTP routes. Self-test drives real Chromium
 through the same connection, app/widget placement, interaction, assertion,
 screenshot, and trace code used for the product run:
@@ -560,10 +497,9 @@ uv run --extra browser workspace-bench browser-cert --dry-run
 uv run --extra browser workspace-bench browser-cert --self-test
 ```
 
-The flagship code task is an optional additional self-test entry. Start an
-agent-built `risk_command_center_product` backend, then add
-`--code-task-backend http://127.0.0.1:<port>` to the self-test command. This
-does not change the fixed 30-task product subset.
+The bundled certification manifest currently ships no entries (the previous
+subset certified the retired app-building suite), so certification fails
+closed until a new subset of runtime-enabled tasks is authored.
 
 Artifacts are written under `runs/browser-cert/selftest-*/` as
 `screenshot.png`, `trace.zip`, and `verdict.json`.
@@ -643,16 +579,11 @@ workflows inside the enterprise workspace:
 uv run workspace-bench serve-fixture --backend daloopa --port 9105
 ```
 
-Serve one build task's oracle-declared backend and task-owned runtime datasets:
-
-```bash
-uv run workspace-bench serve-task-backend \
-  --task build-openbb-apps/apps/earnings_desk \
-  --port 9102
-```
-
-This exposes that task's `widgets.json`, `apps.json`, widget data, parameter
-options, and form-submit endpoints with CORS enabled.
+A runtime-enabled task's oracle-declared backend and task-owned runtime
+datasets can be served with `workspace-bench serve-task-backend` (pass the
+qualified task ref and a port), which exposes that task's `widgets.json`,
+`apps.json`, widget data, parameter options, and form-submit endpoints with
+CORS enabled.
 
 ## Reference
 
@@ -677,7 +608,7 @@ HTTP. Polish is observable but non-gating. Partial scores are reported by
 dimension; runtime-enabled outcome score is the mean of state and runtime
 scores, while trace remains a strict-pass condition.
 
-Capability grading makes less-specified build tasks behavior-first. The oracle
+Capability grading makes less-specified tasks behavior-first. The oracle
 is one witness, not a structural template: alternative solutions may choose
 different widget ids, paths, counts, tabs, layouts, or split/merged views when
 their runtime-valid widgets jointly expose the required business fields and
@@ -710,12 +641,11 @@ descriptive slug; generator mechanics are not part of the public identity.
 - `platform`: use app templates, tabs, parameter groups, prompts, skills, or delegation
 - `repair`: fix incorrect Workspace state or bad metadata assumptions
 
-**Difficulty** — `easy`, `medium`, or `hard`. For `build-openbb-apps` this is
-empirical metadata measured in July 2026: 17/43/176. It does not render prompts
-or select graders. **Specification level** is the structural axis that does:
-60 `explicit`, 92 `partially-specified`, and 84 `open-brief`. Core remains
-90/120/90. Every build task exposes the full tool surface, so selecting the
-right path is evaluated.
+**Difficulty** — `easy`, `medium`, or `hard` for classic tasks; the bundled
+suites instead grade a `level0`–`level5` (usage) or `level0`–`level3` (smoke)
+operation ladder. It does not render prompts or select graders.
+**Specification level** is the structural axis that does; see
+[TASK-SCHEMA.md](TASK-SCHEMA.md).
 
 ## Terminology
 
@@ -742,7 +672,6 @@ src/workspace_bench/
     enterprise_apps_default/            Default-app product prompts
     enterprise_apps_usage/              Workspace operating families
       create/ update/ ...                Family directories
-    build_openbb_apps/                  Custom-app building families
   workspace/             Fixture backends, simulator, live workspace-mcp smoke bridge
     data/                Packaged fixture metadata such as Stark and Daloopa widgets/apps
   agents/                Oracle/noop agents, JSONL command protocol, model adapter helpers
@@ -753,11 +682,10 @@ src/workspace_bench/
 scripts/
   generators/             Deterministic suite, catalog, matrix, and fixture generators
     _assembly/             Shared deterministic suite-assembly harness
-    build_apps_suite/      build-openbb-apps family modules
   audits/                 Local, release, hosted-surface, and prompt audits
 runs/
   reports/                 Compiled reports and generated catalogs/matrices
-    task-catalog.md         All 646 deterministic simulator tasks
+    task-catalog.md         Generated catalog of the deterministic simulator tasks
     tool-coverage-matrix.md Per-task x Workspace MCP oracle-tool matrix
     tool-matrix-data.json   Machine-readable data behind the tool matrix
 references/

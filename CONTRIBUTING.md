@@ -20,9 +20,9 @@ generators, never by editing generated artifacts.
 Private task discovery is recursive through `--task-dir`. The complete task and
 success-criteria contract is in [README.md](README.md#task--success-schema).
 
-## Author a build prompt
+## Author a prompt
 
-Generate build-suite prompts from the family modules and shared renderer; do
+Generate suite prompts from the family generators and shared renderer; do
 not edit bundled task JSON. Follow the structural specification contract:
 
 - Keep `explicit` tasks explicit.
@@ -40,25 +40,16 @@ must use `required_capabilities`, runtime datasets, generic app structure, and
 optional business names—not exact oracle widget/app definitions or layouts.
 
 ```bash
-uv run python scripts/generators/generate_build_apps_suite.py
 uv run python scripts/audits/audit_task_identity.py
 uv run python scripts/audits/report_prompt_stats.py
 ```
 
-The core and build-suite generators share their deterministic assembly mechanics
+The suite generators share their deterministic assembly mechanics
 in `scripts/generators/_assembly/`. Keep suite policy in small callbacks/configuration
 (identity cleanup, artifact prefixes, exceptional cell sizes) rather than adding
 a second implementation of phrasing, difficulty, novelty, or matrix logic.
-After changing either generator, run it twice and verify that the bundled JSON is
+After changing a generator, run it twice and verify that the bundled JSON is
 unchanged on the second run.
-
-The `debug` family is a fixed 24-task long-repair allocation rather than a
-four-task ladder cell. Each task must seed a genuinely broken custom backend,
-use task-owned runtime datasets for an agent-visible failed probe and repaired
-retest, keep its oracle within 8–20 calls, and set `max_turns` near 2.5 times
-the oracle length. Grade the repaired capability and preservation outcome, not
-the oracle's inspection sequence. New failure archetypes need a no-op proof and
-an independent still-broken repair mutant.
 
 ## Add a grader check
 
@@ -86,8 +77,8 @@ actual `apps.json` shared-parameter groups, so group names, ids, tab ids, and
 group JSON must not appear in the requirement. Use `business_names` only when
 the name itself is part of the brief.
 
-Keep exact `required_layouts` for core move/resize tasks. For build tasks,
-prefer `app_structure` plus `layout.within_grid`/`no_overlaps`. Put refresh
+Keep exact `required_layouts` for core move/resize tasks. For open app-shaped
+tasks, prefer `app_structure` plus `layout.within_grid`/`no_overlaps`. Put refresh
 cadence and other non-critical presentation conventions in `polish`; polish
 checks must never affect `passed`.
 
@@ -99,8 +90,7 @@ cleanly immediately before the mutation, then the invalid candidate must fail
 with its expected code. Add a representative test and run:
 
 ```bash
-uv run workspace-bench adversarial --suite enterprise-apps-usage --family backends
-uv run workspace-bench adversarial --suite build-openbb-apps
+uv run workspace-bench adversarial --suite enterprise-apps-usage
 ```
 
 In-memory archetypes run on every applicable task. HTTP/data-side archetypes
@@ -130,8 +120,8 @@ reviewable source when the provider omits cost. Large runs should use bounded
 
 Measured difficulty changes are source-reviewed. Run the proposal script on at
 least two complete model result sets, review its raw and conservatively
-approved evidence, then use `--apply-overrides` to generate
-`src/workspace_bench/core/measured_difficulty.json`. Never edit generated task
+approved evidence, then use `--apply-overrides PATH` to generate a
+measured-difficulty table. Never edit generated task
 labels directly. Relabeling difficulty must not alter specification level,
 prompt text, or success criteria.
 
@@ -146,10 +136,7 @@ uv run mypy src
 uv run python scripts/audits/audit_task_identity.py
 uv run python scripts/audits/report_prompt_stats.py
 uv run python scripts/audits/audit_release_consistency.py
-uv run --extra dev workspace-bench validate --suite enterprise-apps-usage --min-tasks 300
-uv run --extra dev workspace-bench validate --suite build-openbb-apps --min-tasks 236
-uv run workspace-bench runtime-probe --suite enterprise-apps-usage --family backends
-uv run workspace-bench runtime-probe --suite build-openbb-apps
+uv run --extra dev workspace-bench validate --suite enterprise-apps-usage --min-tasks 192
 ```
 
 For evaluator changes, also run the relevant adversarial gates and:

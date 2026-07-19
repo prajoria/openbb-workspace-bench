@@ -5,17 +5,8 @@ from __future__ import annotations
 import pytest
 
 from workspace_bench.core.adversarial import (
-    BROKEN_FORM_SUBMISSION,
-    COLLAPSED_CONNECTED_PAIR,
-    FIELDLESS_CONTRIBUTOR,
-    INCOMPATIBLE_VALUES,
-    INVALID_SETTING,
     NEVER_INSTANTIATED,
-    NOTE_ONLY_PROOF,
     ONE_WIDGET_MISSING,
-    SEVERED_SHARED_INTERACTION,
-    SELF_SATISFIED_CONNECTION,
-    STRIPPED_APP_PROMPTS,
     evaluate_adversarial_candidate,
     generate_adversarial_candidates,
     run_adversarial_matrix,
@@ -24,17 +15,8 @@ from workspace_bench.core.runner import TaskRunner, find_task, load_builtin_task
 
 
 CASES = (
-        ("build-openbb-apps/apps/earnings_desk", NEVER_INSTANTIATED),
-    ("build-openbb-apps/e2e/case_triage", ONE_WIDGET_MISSING),
-    ("build-openbb-apps/charts/earnings_chart_room", INCOMPATIBLE_VALUES),
-    ("build-openbb-apps/forms/vendor_review_form", BROKEN_FORM_SUBMISSION),
-    ("build-openbb-apps/grouping/click_season_desk", SEVERED_SHARED_INTERACTION),
-    ("build-openbb-apps/advanced/live_orders_grid_ship", INVALID_SETTING),
-    ("build-openbb-apps/debug/execution_broken_group", COLLAPSED_CONNECTED_PAIR),
-    ("build-openbb-apps/settings/alert_metric_room", FIELDLESS_CONTRIBUTOR),
-    ("build-openbb-apps/debug/execution_broken_group", SELF_SATISFIED_CONNECTION),
-    ("build-openbb-apps/e2e/case_triage", NOTE_ONLY_PROOF),
-    ("build-openbb-apps/apps/vol_overview", STRIPPED_APP_PROMPTS),
+    ("enterprise-apps-usage/platform/cited_research_operations_level5", NEVER_INSTANTIATED),
+    ("enterprise-apps-usage/organize/client_onboarding_flow_level5", ONE_WIDGET_MISSING),
 )
 
 
@@ -61,11 +43,11 @@ def test_invalid_candidate_fails_for_its_isolated_intended_reason(
     assert result.passed
 
 
-def test_adversarial_matrix_rejects_every_applicable_grouping_mutant() -> None:
+def test_adversarial_matrix_rejects_every_applicable_organize_mutant() -> None:
     tasks = [
         task
-        for task in load_builtin_tasks("build-openbb-apps")
-        if task.family == "grouping"
+        for task in load_builtin_tasks("enterprise-apps-usage")
+        if task.family == "organize"
     ]
 
     matrix = run_adversarial_matrix(tasks, runtime_sample_per_family=1)
@@ -76,13 +58,8 @@ def test_adversarial_matrix_rejects_every_applicable_grouping_mutant() -> None:
     assert all(row["applicable"] > 0 and row["exercised"] > 0 for row in rows)
     assert all(row["expected_code_observed"] == row["exercised"] for row in rows)
     assert {archetype for _family, archetype in matrix.applicable} == {
-        "fieldless_contributor",
-        "incompatible_values",
         "never_instantiated",
-        "note_only_proof",
         "one_widget_missing",
-        "severed_shared_interaction",
-        "wrong_endpoint_data",
     }
     assert {result.candidate.archetype for result in matrix.results} == {
         archetype for _family, archetype in matrix.applicable

@@ -1,6 +1,6 @@
 """Regression coverage for canonical widget-parameter traversal."""
 
-from workspace_bench.core import adversarial, graders, prompt_openness, suite_checks
+from workspace_bench.core import adversarial, graders, prompt_openness
 from workspace_bench.core.models import JsonDict
 from workspace_bench.workspace import runtime
 from workspace_bench.workspace.widget_params import flatten_params
@@ -43,7 +43,6 @@ def test_flatten_params_controls_recursive_input_traversal() -> None:
 def test_gate_lint_grader_and_runtime_share_recursive_param_visibility() -> None:
     recursive_consumers = (
         prompt_openness,
-        suite_checks,
         adversarial,
         graders,
         runtime,

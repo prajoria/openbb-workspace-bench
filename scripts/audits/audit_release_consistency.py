@@ -48,9 +48,6 @@ STALE_CLAIMS = {
     "browser_harness_outdated": re.compile(
         r"(?:future browser(?: runner)?|no browser harness)", re.IGNORECASE
     ),
-    "build_prompt_level_collapse": re.compile(
-        r"236\s+(?:open product briefs|open briefs)", re.IGNORECASE
-    ),
 }
 
 NUMBER_WORDS = (
@@ -89,21 +86,17 @@ SUITE_TERMINOLOGY_RE = re.compile(
 
 REQUIRED_FACTS = {
     REPO / "README.md": (
-        "646 deterministic simulator tasks",
+        "410 deterministic simulator tasks",
         f"{ARCHETYPE_COUNT_WORD} archetypes",
     ),
     REPO / "RELEASE_CHECKLIST.md": (
-        "646 tasks",
-        "17/43/176 measured difficulty",
-        "60/92/84 specification levels",
+        "410 tasks",
     ),
     REPO / "runs/README.md": (
         "GPT-5.1, GPT-5.4 mini, and GPT-5.5",
-        "118/59/59 (`build-openbb-apps`)",
     ),
     REPO / "src/workspace_bench/cli.py": (
-        "(192); build-openbb-apps",
-        "apps (236).",
+        "operating the workspace (192).",
     ),
 }
 

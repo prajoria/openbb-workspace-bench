@@ -1,4 +1,4 @@
-"""Tests for the Part 2 build-openbb-apps surface: validation, simulator, graders."""
+"""Tests for the custom-backend authoring surface: validation, simulator, graders."""
 
 from workspace_bench.core.episode import WorkspaceEpisode
 from workspace_bench.core.models import Task, ToolCall
@@ -86,24 +86,32 @@ def test_widgets_json_accepts_legacy_ssrm_alias() -> None:
 
 
 def test_missing_app_prompts_has_distinct_issue_code() -> None:
-    from dataclasses import replace
-
-    from workspace_bench.core.models import RequiredAppDef, SuccessCriteria
-    from workspace_bench.core.runner import find_task
     from workspace_bench.core.graders import grade_task
 
-    task = find_task("build-openbb-apps/apps/vol_morning")
-    task = replace(
-        task,
-        success=SuccessCriteria(
-            required_app_defs=(
-                RequiredAppDef(
-                    backend_name="Vol Desk Data",
-                    name_contains="Vol Morning",
-                    prompts_min_count=1,
-                ),
-            )
-        ),
+    task = Task.from_dict(
+        {
+            "id": "app_prompts_test",
+            "category": "platform",
+            "family": "backend-building",
+            "difficulty": "medium",
+            "prompt": "Ship the Vol Morning app with starter prompts.",
+            "fixtures": {},
+            "initial_state": {},
+            "allowed_tools": ["manage_backends"],
+            "success": {
+                "required_app_defs": [
+                    {
+                        "backend_name": "Vol Desk Data",
+                        "name_contains": "Vol Morning",
+                        "prompts_min_count": 1,
+                    }
+                ],
+            },
+            "oracle_tool_calls": [
+                {"tool": "manage_backends", "args": {"operation": "list"}}
+            ],
+            "limits": {},
+        }
     )
     snapshot = {
         "custom_backends": {
@@ -378,77 +386,6 @@ def test_delete_reconciles_seeded_duplicate_custom_backend_names():
         "get_widget_schema",
         {"origin": "Duplicate Desk", "widget_id": "vix_history"},
     )["ok"]
-
-
-def test_debug_episode_exposes_fault_then_returns_data_after_refresh():
-    from workspace_bench.core.runner import find_task
-
-    task = find_task("build-openbb-apps/debug/execution_data_mismatch")
-    episode = WorkspaceEpisode(task)
-    probe = ToolCall(
-        "get_widget_data",
-        {"origin": "Execution Repair Data", "widget_id": "review_queue"},
-    )
-
-    broken = episode.step(probe)
-    assert not broken["ok"]
-    assert "missing declared fields" in broken["error"]["message"]
-
-    refresh = next(
-        call
-        for call in task.oracle_tool_calls
-        if call.name == "manage_backends" and call.args.get("operation") == "refresh"
-    )
-    assert episode.step(refresh)["ok"]
-    repaired = episode.step(probe)
-    assert repaired["ok"]
-    assert repaired["data"]["data"][0]["order_id"] == "order_id-1"
-
-
-def test_debug_read_widget_surfaces_custom_backend_data_preview():
-    from workspace_bench.core.runner import find_task
-
-    task = find_task("build-openbb-apps/debug/vendor_wrong_form_endpoint")
-    episode = WorkspaceEpisode(task)
-    for call in task.oracle_tool_calls:
-        episode.step(call)
-        if call.name == "manage_apps":
-            break
-
-    result = episode.step(ToolCall("read_widget", {"widget_id": "review_queue"}))
-
-    assert result["ok"]
-    assert result["data"]["widget"]["data_preview"][0]["record_id"] == "record_id-1"
-
-
-def test_debug_episode_surfaces_form_route_and_live_row_identity_faults():
-    from workspace_bench.core.runner import find_task
-
-    cases = (
-        ("vendor_wrong_form_endpoint", "form submission route"),
-        ("execution_wrong_live_row_id", "live-grid row identifier"),
-    )
-    for task_id, expected in cases:
-        episode = WorkspaceEpisode(find_task(f"build-openbb-apps/debug/{task_id}"))
-        result = episode.step(
-            ToolCall(
-                "get_widget_data",
-                {
-                    "origin": (
-                        "Vendor Repair Data"
-                        if task_id.startswith("vendor")
-                        else "Execution Repair Data"
-                    ),
-                    "widget_id": "review_queue",
-                },
-            )
-        )
-        assert not result["ok"]
-        assert expected in result["error"]["message"]
-        assert set(episode.initial_snapshot["dashboard_compositions"]) == {
-            "incident_triage",
-            "archive_workspace",
-        }
 
 
 # ---------------------------------------------------------------- grading

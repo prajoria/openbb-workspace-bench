@@ -9,7 +9,6 @@ Usage (one --run per model per suite; the suite name is free-form,
 so a private suite joins the aggregate just by naming itself):
   uv run workspace-bench compile suites \
       --run core=runs/comparison/core-gpt-4.1-mini \
-      --run build-openbb-apps=runs/comparison/build-gpt-4.1-mini \
       --run my-desk-flows=runs/comparison/mydesk-gpt-4.1-mini \
       --output runs/reports/suites.json
 """

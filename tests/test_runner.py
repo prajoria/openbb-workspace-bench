@@ -96,18 +96,6 @@ def test_cli_validate_passes_for_builtin_tasks() -> None:
     assert main(["validate", "--min-tasks", "192"]) == 0
 
 
-def test_cli_validate_passes_for_build_suite(capsys) -> None:
-    exit_code = main(["validate", "--suite", "build-openbb-apps", "--min-tasks", "236", "--json"])
-
-    payload = json.loads(capsys.readouterr().out)
-    assert exit_code == 0
-    assert payload["release_checks"], "build suite must carry release quotas"
-    assert payload["release_checks"]["per_specification_level_graded_check_caps"] is True
-    assert payload["release_checks"]["prompt_specification_lint_236"] is True
-    assert payload["release_checks"]["ownership_aggrid_widget_types"] is True
-    assert all(payload["release_checks"].values())
-
-
 def test_cli_validate_skips_bundled_quotas_for_filtered_slices(capsys) -> None:
     exit_code = main(["validate", "--suite", "smoke", "--difficulty", "level0", "--json"])
 
@@ -131,17 +119,19 @@ def test_find_task_searches_all_bundled_suites() -> None:
     assert find_task("decision_briefing_level0").id == (
         "decision_briefing_level0"
     )
-    assert find_task("revision_grid").id == ("revision_grid")
+    assert find_task("smoke_get_widget_data_level0").id == (
+        "smoke_get_widget_data_level0"
+    )
     assert (
-        find_task("revision_grid", suite="build-openbb-apps").id
-        == "revision_grid"
+        find_task("smoke_get_widget_data_level0", suite="smoke").id
+        == "smoke_get_widget_data_level0"
     )
     try:
-        find_task("revision_grid", suite="enterprise-apps-usage")
+        find_task("smoke_get_widget_data_level0", suite="enterprise-apps-usage")
     except KeyError:
         pass
     else:
-        raise AssertionError("build task must not resolve from the core suite")
+        raise AssertionError("smoke task must not resolve from the core suite")
 
 
 def test_cli_smoke_workspace_mcp_wires_task_and_suite(monkeypatch) -> None:
@@ -254,12 +244,12 @@ def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
     assert payload["results"][0]["difficulty"] == "level0"
 
 
-def test_cli_run_resolves_build_suite_task_without_suite_flag(capsys) -> None:
+def test_cli_run_resolves_smoke_suite_task_without_suite_flag(capsys) -> None:
     exit_code = main(
         [
             "run",
             "--task",
-            "revision_grid",
+            "smoke_get_widget_data_level0",
             "--agent",
             "oracle",
             "--json",
@@ -269,29 +259,7 @@ def test_cli_run_resolves_build_suite_task_without_suite_flag(capsys) -> None:
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["summary"]["passed"] == 1
-    assert payload["results"][0]["id"] == "revision_grid"
-
-
-def test_cli_runtime_result_row_includes_deployment_receipt(capsys) -> None:
-    exit_code = main(
-        [
-            "run",
-            "--task",
-            "build-openbb-apps/e2e/case_triage",
-            "--agent",
-            "oracle",
-            "--json",
-        ]
-    )
-
-    payload = json.loads(capsys.readouterr().out)
-    receipt = payload["results"][0]["deployment_receipt"]
-    assert exit_code == 0
-    assert receipt["backend_names"] == ["Surveillance Data"]
-    assert receipt["app_ids"] == ["case-triage"]
-    assert receipt["instantiated_dashboard_ids"] == ["dash_002"]
-    assert receipt["counts"]["widget_probes"] == 2
-    assert all(probe["outcome"] == "passed" for probe in receipt["widget_probes"])
+    assert payload["results"][0]["id"] == "smoke_get_widget_data_level0"
 
 
 def test_cli_can_run_private_task_directory(tmp_path, capsys) -> None:

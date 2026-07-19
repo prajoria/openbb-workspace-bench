@@ -115,7 +115,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     compile_parser.add_argument(
         "kind",
-        choices=["calibration", "suites", "significance", "difficulty"],
+        choices=["calibration", "suites", "difficulty"],
         help="Which report to compile.",
     )
     compile_parser.add_argument(
@@ -344,8 +344,7 @@ def _add_task_collection_args(parser: argparse.ArgumentParser) -> None:
         default="enterprise-apps-usage",
         choices=list(BUILTIN_TASK_SUITE_ORDER),
         help=(
-            "Bundled task suite. core = operating the workspace "
-            "(192); build-openbb-apps = building and debugging custom backend apps (236)."
+            "Bundled task suite. core = operating the workspace (192)."
         ),
     )
     parser.add_argument(
@@ -460,8 +459,6 @@ def _cmd_compile(args: argparse.Namespace) -> int:
         from workspace_bench.reports.calibration import main as compile_main
     elif args.kind == "suites":
         from workspace_bench.reports.suites import main as compile_main
-    elif args.kind == "significance":
-        from workspace_bench.reports.significance import main as compile_main
     else:
         from workspace_bench.reports.difficulty import main as compile_main
     return compile_main(list(args.compile_args))

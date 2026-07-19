@@ -6,7 +6,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts/audits"))
 
 from audit_task_identity import (  # noqa: E402
-    audit_prompt_openness,
     audit_task,
     repeated_token_phrase,
 )
@@ -51,88 +50,6 @@ def test_audit_task_allows_business_numeric_suffix() -> None:
     )
 
 
-def _open_prompt_task(specification_level: str, prompt: str, terms: list[str]) -> dict:
-    return {
-        "id": "revision_monitor",
-        "specification_level": specification_level,
-        "prompt": prompt,
-        "business_terms": terms,
-        "oracle_tool_calls": [
-            {
-                "tool": "manage_backends",
-                "args": {
-                    "name": "Earnings Source",
-                    "url": "http://localhost:7805",
-                    "widgets_json": {
-                        "revision_grid": {
-                            "type": "table_ssrm",
-                            "endpoint": "/revision-momentum",
-                            "refetchInterval": 30000,
-                            "params": [{"paramName": "ticker", "type": "ticker"}],
-                            "data": {
-                                "table": {
-                                    "columnsDefs": [
-                                        {"field": "revised_up"},
-                                        {"field": "revised_down"},
-                                    ]
-                                }
-                            },
-                        }
-                    },
-                    "apps_json": [
-                        {
-                            "name": "Revision Room",
-                            "tabs": {
-                                "monitor": {
-                                    "name": "Monitor",
-                                    "layout": [
-                                        {"i": "revision_grid", "x": 0, "y": 0, "w": 20, "h": 8}
-                                    ],
-                                }
-                            },
-                        }
-                    ],
-                },
-            }
-        ],
-    }
-
-
-def test_hard_prompt_openness_flags_oracle_implementation_details() -> None:
-    task = _open_prompt_task(
-        "open-brief",
-        "Build revision_grid as a table_ssrm at /revision-momentum with revised_up; "
-        'place it at {"x": 0, "y": 0, "w": 20, "h": 8}.',
-        [],
-    )
-    reasons = [
-        finding.reason for finding in audit_prompt_openness("build-openbb-apps", "aggrid", task)
-    ]
-    assert sum("implementation_identifier_leak" in reason for reason in reasons) >= 4
-    assert any("layout_coordinate_leak" in reason for reason in reasons)
-
-
-def test_medium_prompt_openness_allows_only_declared_anchors() -> None:
-    task = _open_prompt_task(
-        "partially-specified",
-        "Build an earnings revision monitor anchored on `ticker` and `revised_up`.",
-        ["ticker", "revised_up"],
-    )
-    assert not audit_prompt_openness("build-openbb-apps", "aggrid", task)
-    task["prompt"] += " Use /revision-momentum."
-    findings = audit_prompt_openness("build-openbb-apps", "aggrid", task)
-    assert any("endpoint path" in finding.reason for finding in findings)
-
-
-def test_hard_prompt_openness_masks_declared_business_product_name() -> None:
-    task = _open_prompt_task(
-        "open-brief",
-        "Deliver the desk product called Revision Room for an earnings analyst.",
-        ["Revision Room"],
-    )
-    assert not audit_prompt_openness("build-openbb-apps", "aggrid", task)
-
-
 def test_release_consistency_allows_only_explicitly_archived_counts() -> None:
     path = Path("README.md")
     content = """# Current\n212 tasks\n## Archived Baselines\nformer 212 and 512 tasks\n## Evaluate Your Agent\n512 tasks\n"""
@@ -142,9 +59,7 @@ def test_release_consistency_allows_only_explicitly_archived_counts() -> None:
 
 def test_release_consistency_flags_cross_phase_claims() -> None:
     stale = (
-        "The "
-        + str(236)
-        + " open product briefs have no "
+        "The open product briefs have no "
         + "browser harness and no "
         + "runtime verification.\n"
     )
@@ -153,7 +68,6 @@ def test_release_consistency_flags_cross_phase_claims() -> None:
         stale,
     )
     reasons = {finding.reason for finding in findings}
-    assert "stale claim (build_prompt_level_collapse)" in reasons
     assert "stale claim (browser_harness_outdated)" in reasons
     assert "stale claim (runtime_verification_denial)" in reasons
 

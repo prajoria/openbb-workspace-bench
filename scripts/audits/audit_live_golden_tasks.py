@@ -17,7 +17,6 @@ from workspace_bench.workspace.live_mcp import run_workspace_mcp_smoke
 DEFAULT_GOLDENS = (
     ("enterprise-apps-usage", "enterprise-apps-usage/create/price_performance_aapl"),
     ("enterprise-apps-usage", "enterprise-apps-usage/layout/arrange_split_macro"),
-    ("build-openbb-apps", "build-openbb-apps/types/vol_commentary"),
 )
 
 

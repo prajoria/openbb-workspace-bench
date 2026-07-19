@@ -16,7 +16,6 @@ REPO = Path(__file__).resolve().parents[2]
 SMOKE = REPO / "src/workspace_bench/task_suites/smoke"
 APPS_DEFAULT = REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
 PACK = REPO / "src/workspace_bench/task_suites/enterprise_apps_usage"
-BUILD_PACK = REPO / "src/workspace_bench/task_suites/build_openbb_apps"
 OUT_MD = REPO / "runs/reports/tool-coverage-matrix.md"
 OUT_JSON = REPO / "runs/reports/tool-matrix-data.json"
 
@@ -125,7 +124,6 @@ def main() -> None:
         ("smoke", load(SMOKE)),
         ("enterprise-apps-default", load(APPS_DEFAULT)),
         ("enterprise-apps-usage", load(PACK)),
-        ("build-openbb-apps", load(BUILD_PACK)),
     ]
 
     all_rows: list[dict] = []

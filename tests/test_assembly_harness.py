@@ -78,12 +78,6 @@ def test_generated_widget_proof_diversification_is_deterministic() -> None:
     assert "HTML card" in task["prompt"]
 
 
-def test_build_family_prompt_sites_all_use_phrased() -> None:
-    from generate_build_apps_suite import prompt_sites_use_phrased
-
-    assert prompt_sites_use_phrased()
-
-
 def test_check_type_policies_make_historical_suite_differences_explicit() -> None:
     task = {
         "success": {

@@ -276,10 +276,7 @@ def main(argv: list[str] | None = None) -> int:
         dest="suite",
         default="enterprise-apps-usage",
         choices=list(BUILTIN_TASK_SUITE_ORDER),
-        help=(
-            "Bundled task suite. core = operating the workspace; "
-            "build-openbb-apps = building custom backend apps."
-        ),
+        help="Bundled task suite. core = operating the workspace.",
     )
     parser.add_argument(
         "--task-dir",

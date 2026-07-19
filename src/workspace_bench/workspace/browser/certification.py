@@ -181,15 +181,20 @@ def load_certification_subset(path: Path | None = None) -> tuple[CertificationEn
     task_refs = [entry.task_ref for entry in entries]
     if len(task_refs) != len(set(task_refs)):
         raise ValueError("browser subset task_ref values must be unique")
-    observed = {category: 0 for category in CATEGORY_COUNTS}
-    for entry in entries:
-        if entry.category not in observed:
-            raise ValueError(f"unknown browser subset category {entry.category!r}")
-        observed[entry.category] += 1
-    if observed != CATEGORY_COUNTS:
-        raise ValueError(f"browser subset category counts are {observed}, expected {CATEGORY_COUNTS}")
-    if sum(entry.self_test for entry in entries) < 3:
-        raise ValueError("browser subset must mark at least three self-test entries")
+    # An empty manifest is valid: certification then fails closed at run time.
+    # A non-empty manifest must satisfy the category and self-test quotas.
+    if entries:
+        observed = {category: 0 for category in CATEGORY_COUNTS}
+        for entry in entries:
+            if entry.category not in observed:
+                raise ValueError(f"unknown browser subset category {entry.category!r}")
+            observed[entry.category] += 1
+        if observed != CATEGORY_COUNTS:
+            raise ValueError(
+                f"browser subset category counts are {observed}, expected {CATEGORY_COUNTS}"
+            )
+        if sum(entry.self_test for entry in entries) < 3:
+            raise ValueError("browser subset must mark at least three self-test entries")
     return entries
 
 

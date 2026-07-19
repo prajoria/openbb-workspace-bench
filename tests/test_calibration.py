@@ -46,10 +46,10 @@ def _row(
 
 def test_calibration_metrics_include_variance_recovery_and_cost() -> None:
     rows = [
-        _row("build-openbb-apps/forms/a", 1, True, failed_calls=1),
-        _row("build-openbb-apps/forms/a", 2, False),
-        _row("build-openbb-apps/debug/b", 1, True),
-        _row("build-openbb-apps/debug/b", 2, True),
+        _row("enterprise-apps-usage/repair/a", 1, True, failed_calls=1),
+        _row("enterprise-apps-usage/repair/a", 2, False),
+        _row("enterprise-apps-usage/platform/b", 1, True),
+        _row("enterprise-apps-usage/platform/b", 2, True),
     ]
 
     summary = summarize_result_rows(rows)
@@ -63,24 +63,24 @@ def test_calibration_metrics_include_variance_recovery_and_cost() -> None:
     assert summary["pass_at_k"] == 1.0
     assert summary["pass_power_k"] == 0.5
     assert summary["cost_usd"] == 0.04
-    forms = next(item for item in matrix if item["family"] == "forms")
-    assert forms["outcomes"] == [True, False]
-    assert forms["flip_rate"] == 1.0
+    repair = next(item for item in matrix if item["family"] == "repair")
+    assert repair["outcomes"] == [True, False]
+    assert repair["flip_rate"] == 1.0
 
 
 def test_run_summary_builds_family_difficulty_matrix_from_result_rows() -> None:
     rows = [
-        {**_row("build-openbb-apps/forms/easy", 1, True), "difficulty": "easy"},
-        {**_row("build-openbb-apps/forms/hard", 1, False), "difficulty": "hard"},
-        {**_row("build-openbb-apps/debug/hard", 1, True), "difficulty": "hard"},
+        {**_row("enterprise-apps-usage/repair/easy", 1, True), "difficulty": "easy"},
+        {**_row("enterprise-apps-usage/repair/hard", 1, False), "difficulty": "hard"},
+        {**_row("enterprise-apps-usage/platform/hard", 1, True), "difficulty": "hard"},
     ]
 
     summary = summarize_runs([], result_rows=rows)
 
-    assert list(summary["family_difficulty_matrix"]) == ["debug", "forms"]
-    assert list(summary["family_difficulty_matrix"]["forms"]) == ["easy", "hard"]
-    assert summary["family_difficulty_matrix"]["forms"]["easy"]["strict_pass_rate"] == 1.0
-    assert summary["family_difficulty_matrix"]["forms"]["hard"]["strict_pass_rate"] == 0.0
+    assert list(summary["family_difficulty_matrix"]) == ["platform", "repair"]
+    assert list(summary["family_difficulty_matrix"]["repair"]) == ["easy", "hard"]
+    assert summary["family_difficulty_matrix"]["repair"]["easy"]["strict_pass_rate"] == 1.0
+    assert summary["family_difficulty_matrix"]["repair"]["hard"]["strict_pass_rate"] == 0.0
 
 
 def test_openai_usage_prefers_provider_cost_and_can_estimate() -> None:
@@ -154,9 +154,9 @@ def test_resume_manifest_rejects_incompatible_cells(tmp_path) -> None:
 
 def test_empirical_difficulty_proposal_emits_reviewable_override_table() -> None:
     tasks = [
-        ("build-openbb-apps/types/easy", "easy"),
-        ("build-openbb-apps/forms/medium", "hard"),
-        ("build-openbb-apps/debug/hard", "medium"),
+        ("enterprise-apps-usage/retrieve/easy", "easy"),
+        ("enterprise-apps-usage/repair/medium", "hard"),
+        ("enterprise-apps-usage/platform/hard", "medium"),
     ]
     model_a = {
         "model": {"slug": "frontier"},
@@ -192,25 +192,25 @@ def test_empirical_difficulty_proposal_emits_reviewable_override_table() -> None
             "competent_models": ["frontier", "small"],
             "frontier_models": ["frontier"],
             "small_models": ["small"],
-            "overrides": {"build-openbb-apps/charts/existing": "hard"},
+            "overrides": {"enterprise-apps-usage/curate/existing": "hard"},
         },
     )
 
     raw = {row["task_ref"]: row["raw_proposed"] for row in proposal["rows"]}
     proposed = {row["task_ref"]: row["proposed"] for row in proposal["rows"]}
     assert raw == {
-        "build-openbb-apps/debug/hard": "hard",
-        "build-openbb-apps/forms/medium": "medium",
-        "build-openbb-apps/types/easy": "easy",
+        "enterprise-apps-usage/platform/hard": "hard",
+        "enterprise-apps-usage/repair/medium": "medium",
+        "enterprise-apps-usage/retrieve/easy": "easy",
     }
     assert proposed == {
-        "build-openbb-apps/debug/hard": "hard",
-        "build-openbb-apps/forms/medium": "medium",
-        "build-openbb-apps/types/easy": "easy",
+        "enterprise-apps-usage/platform/hard": "hard",
+        "enterprise-apps-usage/repair/medium": "medium",
+        "enterprise-apps-usage/retrieve/easy": "easy",
     }
     assert proposal["override_table"]["bands"] == {"easy": 1, "medium": 1, "hard": 1}
     assert proposal["override_table"]["overrides"] == {
-        "build-openbb-apps/charts/existing": "hard",
-        "build-openbb-apps/debug/hard": "hard",
-        "build-openbb-apps/forms/medium": "medium",
+        "enterprise-apps-usage/curate/existing": "hard",
+        "enterprise-apps-usage/platform/hard": "hard",
+        "enterprise-apps-usage/repair/medium": "medium",
     }

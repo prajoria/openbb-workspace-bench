@@ -1,40 +1,102 @@
 from __future__ import annotations
 
 import json
-from collections import Counter
 from contextlib import contextmanager
 from pathlib import Path
 from types import SimpleNamespace
 from urllib.request import Request, urlopen
 
 
+from workspace_bench.core.models import Task
 from workspace_bench.workspace.browser.certification import (
-    CATEGORY_COUNTS,
     browser_certify,
-    dry_run_subset,
     load_certification_subset,
-    validate_entry,
 )
 from workspace_bench.workspace.browser.task_backend import TaskBackendServer
-from workspace_bench.core.runner import find_task
 
 
-def test_certification_subset_has_exact_categories_and_dataset_evidence() -> None:
-    entries = load_certification_subset()
+def test_certification_manifest_is_empty_pending_reauthoring() -> None:
+    # The previous 30-entry subset certified the retired app-building suite.
+    # An empty manifest must load cleanly; certification then fails closed.
+    assert load_certification_subset() == ()
 
-    assert len(entries) == 30
-    assert Counter(entry.category for entry in entries) == Counter(CATEGORY_COUNTS)
-    assert len({entry.task_ref for entry in entries}) == 30
-    assert sum(entry.self_test for entry in entries) == 3
-    for entry in entries:
-        result = validate_entry(entry, probe_backend=False)
-        assert result["passed"]
-        assert entry.rationale
-        assert entry.interactions
+
+def _form_backend_task() -> Task:
+    widget = {
+        "name": "Access Review Form",
+        "description": "Capture an access review decision.",
+        "endpoint": "/access-review",
+        "type": "markdown",
+        "gridData": {"w": 12, "h": 8},
+        "params": [
+            {
+                "paramName": "review",
+                "type": "form",
+                "label": "Access Review",
+                "endpoint": "/access-review-submit",
+                "method": "POST",
+                "inputParams": [
+                    {
+                        "paramName": "user_name",
+                        "type": "text",
+                        "label": "User",
+                        "value": "analyst1",
+                    },
+                    {
+                        "paramName": "approved",
+                        "type": "boolean",
+                        "label": "Approved",
+                        "value": False,
+                    },
+                ],
+            }
+        ],
+    }
+    return Task.from_dict(
+        {
+            "id": "task_backend_form_probe",
+            "category": "platform",
+            "family": "runtime",
+            "difficulty": "easy",
+            "prompt": "Serve the oracle backend for the access review form.",
+            "fixtures": {},
+            "initial_state": {},
+            "allowed_tools": ["manage_backends"],
+            "success": {
+                "runtime_checks": {
+                    "datasets": [
+                        {
+                            "name": "surveillance-data__access_review_form",
+                            "widget_id": "access_review_form",
+                            "fields": [],
+                            "path": "/access-review",
+                            "payload": (
+                                "Access Review Form fixture-backed runtime summary."
+                            ),
+                            "form_endpoint": "/access-review-submit",
+                        }
+                    ],
+                    "pinned_paths": False,
+                }
+            },
+            "oracle_tool_calls": [
+                {
+                    "tool": "manage_backends",
+                    "args": {
+                        "operation": "add",
+                        "name": "Surveillance Data",
+                        "url": "http://localhost:7807",
+                        "widgets_json": {"access_review_form": widget},
+                    },
+                }
+            ],
+            "limits": {},
+        }
+    )
 
 
 def test_task_backend_serves_oracle_metadata_datasets_forms_and_cors() -> None:
-    task = find_task("build-openbb-apps/forms/access_review_form")
+    task = _form_backend_task()
     with TaskBackendServer(task, backend_name="Surveillance Data") as server:
         with urlopen(server.base_url + "/widgets.json", timeout=2) as response:
             widgets = json.load(response)
@@ -58,15 +120,6 @@ def test_task_backend_serves_oracle_metadata_datasets_forms_and_cors() -> None:
             "/access-review",
             "/access-review-submit",
         }
-
-
-def test_full_subset_dry_run_probes_all_backends() -> None:
-    result = dry_run_subset(load_certification_subset())
-
-    assert result["passed"] is True
-    assert result["task_count"] == 30
-    assert result["category_counts"] == CATEGORY_COUNTS
-    assert result["http_probes"] >= 120
 
 
 def test_browser_certification_fails_closed_when_no_tasks_are_selected(

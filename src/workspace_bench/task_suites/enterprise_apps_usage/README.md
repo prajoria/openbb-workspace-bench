@@ -92,6 +92,6 @@ discovery dilutes a small model's context) rather than a content defect.
 ## Limitations
 
 The `extend` family grades authored manifests and lifecycle calls without
-runtime HTTP probes (unlike `build-openbb-apps`). Live-parity eligibility for
+runtime HTTP probes. Live-parity eligibility for
 the rebuilt suite is pending re-derivation. Judge-free by design: every check
 is a deterministic boolean.

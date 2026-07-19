@@ -17,7 +17,6 @@ REPO = Path(__file__).resolve().parents[2]
 SMOKE_DIR = REPO / "src/workspace_bench/task_suites/smoke"
 APPS_DEFAULT_DIR = REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
 PACK_DIR = REPO / "src/workspace_bench/task_suites/enterprise_apps_usage"
-BUILD_PACK_DIR = REPO / "src/workspace_bench/task_suites/build_openbb_apps"
 REPORT = REPO / "runs/reports/benchmark-report.md"
 OUT = REPO / "runs/reports/task-catalog.md"
 
@@ -252,13 +251,6 @@ def main() -> None:
                 key=lambda path: path.name,
             ),
         ),
-        (
-            "build-openbb-apps",
-            sorted(
-                (p for p in BUILD_PACK_DIR.rglob("*.json") if p.parent != BUILD_PACK_DIR),
-                key=lambda path: path.name,
-            ),
-        ),
     ]
 
     out = [
@@ -266,7 +258,7 @@ def main() -> None:
         "",
         "Auto-generated from the bundled task JSON files — regenerate with",
         "`python scripts/generators/generate_task_catalog.py` after editing tasks.",
-        "All four deterministic simulator suites are included.",
+        "All three deterministic simulator suites are included.",
         "",
         "## How grading works",
         "",

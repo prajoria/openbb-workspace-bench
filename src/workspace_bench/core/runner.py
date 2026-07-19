@@ -15,20 +15,17 @@ from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
 USAGE_TASKS_PACKAGE = "workspace_bench.task_suites.enterprise_apps_usage"
-BUILD_APPS_TASKS_PACKAGE = "workspace_bench.task_suites.build_openbb_apps"
 APPS_DEFAULT_TASKS_PACKAGE = "workspace_bench.task_suites.enterprise_apps_default"
 SMOKE_TASKS_PACKAGE = "workspace_bench.task_suites.smoke"
 TASK_SUITE_MANIFEST = "task_suite.json"
 BUILTIN_TASK_SUITES = {
     "enterprise-apps-usage": USAGE_TASKS_PACKAGE,
-    "build-openbb-apps": BUILD_APPS_TASKS_PACKAGE,
     "enterprise-apps-default": APPS_DEFAULT_TASKS_PACKAGE,
     "smoke": SMOKE_TASKS_PACKAGE,
 }
 BUILTIN_TASK_SUITE_ORDER = (
     "enterprise-apps-usage",
     "enterprise-apps-default",
-    "build-openbb-apps",
     "smoke",
 )
 

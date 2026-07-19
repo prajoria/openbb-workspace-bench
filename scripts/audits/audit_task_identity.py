@@ -17,7 +17,6 @@ from pathlib import Path
 from typing import Any
 
 from workspace_bench.core.models import task_payload_conditions
-from workspace_bench.core.prompt_openness import prompt_openness_issues
 from workspace_bench.workspace.fixtures import default_fixture_backends
 
 # Verbatim fixture-catalog widget ids are ground truth, not generator output;
@@ -36,7 +35,6 @@ SUITE_DIRS = {
         REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
     ),
     "enterprise-apps-usage": REPO / "src/workspace_bench/task_suites/enterprise_apps_usage",
-    "build-openbb-apps": REPO / "src/workspace_bench/task_suites/build_openbb_apps",
 }
 REFERENCE_FILES = (
     REPO / "README.md",
@@ -59,8 +57,7 @@ REPEATED_WORD_RE = re.compile(r"(?i)\b([a-z][a-z0-9-]*)\s+\1\b")
 REPEATED_BIGRAM_RE = re.compile(r"(?i)\b([a-z][a-z0-9-]*\s+[a-z][a-z0-9-]*)\s+\1\b")
 TASK_ARG_RE = re.compile(r"--task\s+([^\s`\"']+)")
 QUALIFIED_ID_RE = re.compile(
-    r"\b(?:smoke|enterprise-apps-default|enterprise-apps-usage|"
-    r"build-openbb-apps)/"
+    r"\b(?:smoke|enterprise-apps-default|enterprise-apps-usage)/"
     r"[a-z0-9]+(?:[-_][a-z0-9]+)*/"
     r"[a-z0-9]+(?:_[a-z0-9]+)*\b"
 )
@@ -185,23 +182,6 @@ def audit_task(suite: str, family: str, task: dict[str, Any]) -> list[Finding]:
     return findings
 
 
-def audit_prompt_openness(suite: str, family: str, task: dict[str, Any]) -> list[Finding]:
-    """Return specification-aware implementation-leak findings for build tasks."""
-
-    if suite != "build-openbb-apps":
-        return []
-    return [
-        Finding(
-            suite,
-            family,
-            str(task.get("id", "")),
-            "prompt",
-            f"{issue.code}: {issue.detail}",
-        )
-        for issue in prompt_openness_issues(task)
-    ]
-
-
 def load_tasks() -> list[tuple[str, str, dict[str, Any]]]:
     tasks: list[tuple[str, str, dict[str, Any]]] = []
     for suite, directory in SUITE_DIRS.items():
@@ -249,9 +229,7 @@ def run_audit() -> list[Finding]:
     findings = [
         finding
         for suite, family, task in tasks
-        for finding in (
-            audit_task(suite, family, task) + audit_prompt_openness(suite, family, task)
-        )
+        for finding in audit_task(suite, family, task)
     ]
     # State-variant tasks may repeat a prompt byte-for-byte on purpose: the
     # same instruction is graded under a different execution context (the
