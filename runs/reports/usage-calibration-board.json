@@ -10,48 +10,48 @@
  "models": {
   "gpt-4.1-mini": {
    "level0": {
-    "passed": 61,
-    "attempts": 64,
-    "rate": 0.9531,
+    "passed": 87,
+    "attempts": 96,
+    "rate": 0.9062,
     "process_failures": 0,
-    "clean_rate": 0.9531
+    "clean_rate": 0.9062
    },
    "level1": {
-    "passed": 101,
-    "attempts": 128,
-    "rate": 0.7891,
+    "passed": 72,
+    "attempts": 96,
+    "rate": 0.75,
     "process_failures": 0,
-    "clean_rate": 0.7891
+    "clean_rate": 0.75
    },
    "level2": {
-    "passed": 87,
-    "attempts": 128,
-    "rate": 0.6797,
+    "passed": 67,
+    "attempts": 96,
+    "rate": 0.6979,
     "process_failures": 0,
-    "clean_rate": 0.6797
+    "clean_rate": 0.6979
    },
    "level3": {
-    "passed": 28,
-    "attempts": 64,
-    "rate": 0.4375,
+    "passed": 45,
+    "attempts": 96,
+    "rate": 0.4688,
     "process_failures": 0,
-    "clean_rate": 0.4375
+    "clean_rate": 0.4688
    },
    "level4": {
-    "passed": 12,
-    "attempts": 64,
-    "rate": 0.1875,
+    "passed": 16,
+    "attempts": 96,
+    "rate": 0.1667,
     "process_failures": 0,
-    "clean_rate": 0.1875
+    "clean_rate": 0.1667
    },
    "level5": {
-    "passed": 2,
-    "attempts": 64,
-    "rate": 0.0312,
+    "passed": 7,
+    "attempts": 96,
+    "rate": 0.0729,
     "process_failures": 1,
-    "clean_rate": 0.0317
+    "clean_rate": 0.0737
    },
-   "overall_rate": 0.513
+   "overall_rate": 0.51
   },
   "glm-5.2": {
    "level0": {
@@ -234,5 +234,8 @@
    "overall_rate": 0.3131
   }
  },
- "notes": "Raw rates count process failures as task failures; clean_rate excludes them as a diagnostic. gpt-oss:20b's five ollama-500 serving deaths were resampled as full episodes and failed on the merits. qwen3:8b's level1<level2 residual is a model profile, not a content defect: its persistent level1 failures carry ~20% larger input contexts and 16 of 20 involve catalog-listing discovery - the discover driver dilutes a small model's context in the everything-mounted workspace, while its single-call policy execution at level2 is strong. Four of five models order level1 >= level2 after the extend rung swap and the listing-discipline fix. Pass is outcome-only: a process failure after every graded check has passed (trailing malformed turn, wrap-up timeout) no longer voids the episode; three such episodes were recovered (GLM-5.2 level1, gpt-oss:20b level2, qwen3:8b level2)."
+ "notes": {
+  "general": "Raw rates count process failures as task failures; clean_rate excludes them as a diagnostic. gpt-oss:20b's five ollama-500 serving deaths were resampled as full episodes and failed on the merits. qwen3:8b's level1<level2 residual is a model profile, not a content defect: its persistent level1 failures carry ~20% larger input contexts and 16 of 20 involve catalog-listing discovery - the discover driver dilutes a small model's context in the everything-mounted workspace, while its single-call policy execution at level2 is strong. Four of five models order level1 >= level2 after the extend rung swap and the listing-discipline fix. Pass is outcome-only: a process failure after every graded check has passed (trailing malformed turn, wrap-up timeout) no longer voids the episode; three such episodes were recovered (GLM-5.2 level1, gpt-oss:20b level2, qwen3:8b level2).",
+  "gpt-4.1-mini": "Re-measured 2026-07-19 with a uniform protocol: three full runs of all 192 tasks (repeats pooled, 96 attempts per level) on identical suite content d6ca1439c8ca. Replaces the earlier mixed-repeat pooling (51.3% overall there vs 51.0% here). All three runs are independently monotonic; run dir mini3x."
+ }
 }
