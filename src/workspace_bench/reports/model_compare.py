@@ -1543,6 +1543,16 @@ def call_openai_chat(
         "max_tokens": int(os.environ.get("OPENAI_MAX_TOKENS", "4096")),
         "messages": messages,
     }
+    # OpenRouter can route one model through several upstream providers with
+    # different serving behavior (e.g. Anthropic models on the Bedrock route
+    # return thinking-only turns whose message content is empty). Pinning the
+    # provider order keeps every episode on one serving path.
+    provider_order = os.environ.get("OPENROUTER_PROVIDER_ORDER")
+    if provider_order and "openrouter" in base_url:
+        payload["provider"] = {
+            "order": [entry.strip() for entry in provider_order.split(",") if entry.strip()],
+            "allow_fallbacks": False,
+        }
     # Some OpenAI-compatible providers (e.g. Anthropic models behind
     # OpenRouter/Bedrock) degrade to schema-minimal outputs under
     # json_schema response_format; allow opting out per adapter.
