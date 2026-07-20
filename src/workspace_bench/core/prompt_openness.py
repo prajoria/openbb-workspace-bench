@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import re
 
-from workspace_bench.core.models import JsonDict, Task
+from workspace_bench.core.models import JsonDict
 from workspace_bench.workspace.widget_params import flatten_params
 
 
@@ -166,18 +166,3 @@ def prompt_openness_issues(payload: JsonDict) -> list[PromptOpennessIssue]:
     ):
         issues.append(PromptOpennessIssue("tab_name_leak", "prompt names an app tab"))
     return issues
-
-
-def task_prompt_openness_issues(task: Task) -> list[PromptOpennessIssue]:
-    """Adapt a loaded task to the raw-payload openness check."""
-
-    payload: JsonDict = {
-        "specification_level": task.specification_level,
-        "prompt": task.prompt,
-        "business_terms": list(task.business_terms),
-        "initial_state": task.initial_state,
-        "oracle_tool_calls": [
-            {"tool": call.name, "args": call.args} for call in task.oracle_tool_calls
-        ],
-    }
-    return prompt_openness_issues(payload)

@@ -884,12 +884,6 @@ def _shape_error(definition: JsonDict, payload: Any) -> str | None:
     return None if _non_empty(payload) else f"{widget_type} response is empty."
 
 
-def response_shape_error(definition: JsonDict, payload: Any) -> str | None:
-    """Validate a real backend payload with the shared runtime shape semantics."""
-
-    return _shape_error(definition, payload)
-
-
 def _table_rows(definition: JsonDict, payload: Any) -> Any:
     data = definition.get("data")
     data_key = data.get("dataKey") if isinstance(data, dict) else None
@@ -911,12 +905,6 @@ def _contains_placeholder(payload: Any) -> bool:
     if isinstance(payload, list):
         return any(_contains_placeholder(value) for value in payload)
     return False
-
-
-def contains_placeholder(payload: Any) -> bool:
-    """Return whether a payload contains an obvious unfinished-value marker."""
-
-    return _contains_placeholder(payload)
 
 
 def _non_empty(payload: Any) -> bool:

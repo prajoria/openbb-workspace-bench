@@ -152,53 +152,6 @@ def _validated_workspace_baseline(value: Any, owner: str) -> str | None:
     return str(value)
 
 
-_SETUP_KEY_ORDER = (
-    "workspace_baseline",
-    "workspace_backends",
-    "workspace_skills",
-    "default_selected_dashboard",
-    "fixtures",
-    "initial_state",
-    "allowed_tools",
-)
-
-
-def task_payload_to_eval_schema(payload: JsonDict) -> JsonDict:
-    """Convert a legacy flat payload to the setup/eval schema.
-
-    Generators may keep authoring the legacy keys internally; this converts
-    them at the write boundary: condition fields group into a ``setup`` block
-    at the first condition key's position, and success/oracle_tool_calls/
-    limits become the ``eval`` block with ``reference_trace`` and a flat
-    ``max_turns`` as its last entries.
-    """
-
-    if "eval" in payload and "setup" in payload:
-        return dict(payload)
-    setup = {
-        key: payload[key] for key in _SETUP_KEY_ORDER if key in payload
-    }
-    result: JsonDict = {}
-    for key, value in payload.items():
-        if key in TASK_CONDITION_FIELDS:
-            if "setup" not in result:
-                result["setup"] = setup
-        elif key == "success":
-            evaluation: JsonDict = {
-                **value,
-                "reference_trace": payload.get("oracle_tool_calls", []),
-            }
-            limits = payload.get("limits", {})
-            if limits.get("max_turns"):
-                evaluation["max_turns"] = limits["max_turns"]
-            result["eval"] = evaluation
-        elif key in ("oracle_tool_calls", "limits"):
-            continue
-        else:
-            result[key] = value
-    return result
-
-
 def _apply_reference_call_grading(
     task_id: str,
     success: JsonDict,

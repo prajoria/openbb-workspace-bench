@@ -49,18 +49,6 @@ from workspace_bench.workspace.runtime import grade_runtime
 from workspace_bench.workspace.widget_params import flatten_params
 
 
-STATE_CHANGING_TOOLS = {
-    "manage_dashboard",
-    "manage_navigation_bar",
-    "navigate_workspace",
-    "create_widget",
-    "update_widget",
-    "delete_widget",
-    "update_widget_layout",
-    "add_generative_widget",
-    "manage_apps",
-}
-
 __all__ = [
     "GradeBuilder",
     "grade_task",

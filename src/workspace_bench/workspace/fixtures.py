@@ -117,18 +117,6 @@ def build_equities_backend(url: str = "http://127.0.0.1:9101") -> FixtureBackend
     return build_getting_started_backend(url)
 
 
-def build_macro_backend(url: str = "http://127.0.0.1:9102") -> FixtureBackend:
-    """Compatibility alias for the transcribed getting-started backend."""
-
-    return build_getting_started_backend(url)
-
-
-def build_portfolio_backend(url: str = "http://127.0.0.1:9103") -> FixtureBackend:
-    """Compatibility alias for the transcribed widget-examples backend."""
-
-    return build_widget_examples_backend(url)
-
-
 def build_stark_enterprise_backend(
     url: str = "http://127.0.0.1:9104",
 ) -> FixtureBackend:
