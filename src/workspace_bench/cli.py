@@ -271,6 +271,30 @@ def main(argv: list[str] | None = None) -> int:
     export_parser.add_argument("--suite", default="enterprise-apps-usage", choices=list(BUILTIN_TASK_SUITE_ORDER))
     export_parser.add_argument("--output", required=True)
 
+    harbor_parser = subparsers.add_parser(
+        "export-harbor",
+        help="Generate one self-contained Harbor task from a canonical task.",
+    )
+    harbor_parser.add_argument(
+        "--task",
+        default=(
+            "enterprise-apps-default/compliance_surveillance_hub/"
+            "compliance_surveillance_hub_p3_x"
+        ),
+        help="Qualified suite/family/task reference.",
+    )
+    harbor_parser.add_argument(
+        "--output-root",
+        type=Path,
+        default=Path("build/harbor"),
+    )
+    harbor_parser.add_argument(
+        "--workspace-mcp-repo",
+        type=Path,
+        default=Path.home() / "Documents/git/workspace-mcp",
+    )
+    harbor_parser.add_argument("--overwrite", action="store_true")
+
 
     agent_parser = subparsers.add_parser(
         "run-agent-command",
@@ -322,6 +346,17 @@ def main(argv: list[str] | None = None) -> int:
         return _cmd_smoke_workspace_mcp(args)
     if args.command == "export-task":
         return _cmd_export_task(args)
+    if args.command == "export-harbor":
+        from workspace_bench.integrations.harbor.exporter import export_harbor_task
+
+        output = export_harbor_task(
+            task_ref=args.task,
+            output_root=args.output_root,
+            workspace_mcp_repo=args.workspace_mcp_repo,
+            overwrite=args.overwrite,
+        )
+        print(output)
+        return 0
     if args.command == "run-agent-command":
         return _cmd_run_agent_command(args)
     if args.command == "canary":
@@ -1036,13 +1071,14 @@ def _cmd_judge(args: argparse.Namespace) -> int:
                 continue
             try:
                 stored, stored_path = _load_judge_input(args.run_dir, result_path, row)
-                task = Task.from_dict(stored["task"])
+                task = _resolve_judged_task(row) or Task.from_dict(stored["task"])
+                results_by_index = _stored_trace_results(stored, stored_path)
                 trace = tuple(
                     ToolTraceEvent(
                         index=int(event["index"]),
                         call=ToolCall(str(event["tool"]), dict(event.get("args", {}))),
                         ok=bool(event["ok"]),
-                        result={},
+                        result=results_by_index.get(int(event["index"]), {}),
                     )
                     for event in stored["trace"]
                 )
@@ -1088,6 +1124,61 @@ def _cmd_judge(args: argparse.Namespace) -> int:
     _refresh_comparison_summary(args.run_dir, updated_payloads)
     print(f"Judged {judged} row(s); errors={errors}.")
     return 1 if errors else 0
+
+
+def _resolve_judged_task(row: dict) -> Task | None:
+    """Load the bundled task for a judged row so the judge sees the real
+    reference answer and trace; stored judge inputs written before those
+    fields were persisted carry an empty reference, which starves the
+    judge template of its anchor."""
+
+    qualified = str(row.get("qualified_id") or "")
+    suite, _, _ = qualified.partition("/")
+    if suite not in BUILTIN_TASK_SUITE_ORDER:
+        return None
+    try:
+        for task in load_builtin_tasks(suite):
+            if task.id == row.get("id"):
+                return task
+    except Exception:  # noqa: BLE001 - fall back to the stored task.
+        return None
+    return None
+
+
+def _stored_trace_results(stored: dict, stored_path: Path) -> dict[int, dict]:
+    """Retrieved rows per trace index: from the stored input when present,
+    else recovered from the episode's conversation.json - the judge
+    verifies citations against retrieved rows, so an empty result map
+    makes every honest figure look fabricated."""
+
+    results: dict[int, dict] = {}
+    for event in stored.get("trace", []):
+        if isinstance(event, dict) and isinstance(event.get("result"), dict):
+            results[int(event["index"])] = {"data": event["result"].get("data")}
+    if results:
+        return results
+    conversation = stored_path.parent / "conversation.json"
+    if not conversation.is_file():
+        return results
+    try:
+        payload = json.loads(conversation.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return results
+    messages = payload if isinstance(payload, list) else payload.get("messages", [])
+    for message in messages:
+        content = str(message.get("content", ""))
+        if not content.startswith("Tool result for turn "):
+            continue
+        header, _, body = content.partition(":\n")
+        try:
+            index = int(header.rsplit(" ", 1)[-1])
+            parsed = json.loads(body.split("\n\nChoose the next", 1)[0])
+        except (ValueError, IndexError):
+            continue
+        result = parsed.get("result")
+        if isinstance(result, dict):
+            results[index] = result
+    return results
 
 
 def _load_judge_input(run_dir: Path, result_path: Path, row: dict) -> tuple[dict, Path]:

@@ -52,6 +52,7 @@ from workspace_bench.core.models import (
     TASK_CATEGORIES,
     Task,
     ToolCall,
+    ToolTraceEvent,
 )
 from workspace_bench.core.provenance import git_provenance
 from workspace_bench.reports.metrics import (
@@ -2071,6 +2072,26 @@ def judge_reason_line(verdict: JudgeVerdict) -> str:
     return lines[0] if lines else ""
 
 
+def _bounded_judge_result(event: "ToolTraceEvent") -> JsonDict | None:
+    """Persist the rows a read actually returned, bounded like the judge digest.
+
+    The judge verifies citations against retrieved rows; a stored trace
+    without them makes every honest figure look fabricated.
+    """
+
+    if event.call.name not in {"get_widget_data", "read_widget"} or not event.ok:
+        return None
+    data = (event.result or {}).get("data")
+    if isinstance(data, list):
+        return {"data": data[:6]}
+    if isinstance(data, dict):
+        series = data.get("series")
+        if isinstance(series, list):
+            return {"data": {"series": series[:6]}}
+        return {"data": data}
+    return None
+
+
 def persist_judge_input(run: ComparisonRun) -> None:
     """Store the bounded inputs needed to judge without replaying an agent."""
 
@@ -2108,7 +2129,15 @@ def persist_judge_input(run: ComparisonRun) -> None:
             "setup": setup,
             "eval": {
                 "judge_evaluation": True,
-                "reference_trace": [],
+                "reference_trace": [
+                    {"tool": call.name, "args": call.args}
+                    for call in task.oracle_tool_calls
+                ],
+                **(
+                    {"reference_answer": task.reference_answer}
+                    if task.reference_answer
+                    else {}
+                ),
                 **(
                     {"max_turns": task.limits["max_turns"]}
                     if task.limits.get("max_turns")
@@ -2122,6 +2151,11 @@ def persist_judge_input(run: ComparisonRun) -> None:
                 "tool": event.call.name,
                 "args": event.call.args,
                 "ok": event.ok,
+                **(
+                    {"result": _bounded_judge_result(event)}
+                    if _bounded_judge_result(event) is not None
+                    else {}
+                ),
             }
             for event in run.run_result.trace
         ],
