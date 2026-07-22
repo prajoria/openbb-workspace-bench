@@ -2,7 +2,7 @@
   "id": "earnings_lookup_level3",
   "category": "read",
   "difficulty": "level3",
-  "prompt": "On the open Earnings & Estimates Monitor board, read Bench Stark Enterprise's configured Upcoming Earnings view without changing it, and report LLY's exact YTD score and change.",
+  "prompt": "On the open Earnings & Estimates Monitor dashboard, read Bench Stark Enterprise's configured Upcoming Earnings view without changing it, and report LLY's exact YTD score and change.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

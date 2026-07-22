@@ -2,7 +2,7 @@
   "id": "manufacturer_details_repair_level1",
   "category": "repair",
   "difficulty": "level1",
-  "prompt": "On the open Manufacturer Detail Repair board, restore Car Manufacturer Details to company F and year 2024. Preserve Markdown Widget and every other workspace item.",
+  "prompt": "On the open Manufacturer Detail Repair dashboard, restore Car Manufacturer Details to company F and year 2024. Preserve Markdown Widget and every other workspace item.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

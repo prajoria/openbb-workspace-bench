@@ -2,7 +2,7 @@
   "id": "nav_exception_station_level4",
   "category": "repair",
   "difficulty": "level4",
-  "prompt": "Clean up the open NAV Repair Staging board. Restore the primary NAV Exceptions view to Flagship Long/Short, Open, and YTD; the duplicate-cleanup marker identifies the extra copy. Move the primary to x 0, y 14, width 40, height 14 on Exceptions, and preserve Trade Ideas.",
+  "prompt": "Clean up the open NAV Repair Staging dashboard. Restore the primary NAV Exceptions view to Flagship Long/Short, Open, and YTD; the duplicate-cleanup marker identifies the extra copy. Move the primary to x 0, y 14, width 40, height 14 on Exceptions, and preserve Trade Ideas.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

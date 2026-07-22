@@ -2,7 +2,7 @@
   "id": "protocol_display_repair_level2",
   "category": "repair",
   "difficulty": "level2",
-  "prompt": "Protocol-display duplicate cleanup: the open Protocol Display Repair board has an extra Defi Llama Protocol Details; the protocol-display duplicate marker identifies it. Remove that copy and preserve Demo Financial Data (SSRM).",
+  "prompt": "Protocol-display duplicate cleanup: the open Protocol Display Repair dashboard has an extra Defi Llama Protocol Details; the protocol-display duplicate marker identifies it. Remove that copy and preserve Demo Financial Data (SSRM).",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

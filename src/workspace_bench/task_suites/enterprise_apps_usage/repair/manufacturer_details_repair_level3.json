@@ -2,7 +2,7 @@
   "id": "manufacturer_details_repair_level3",
   "category": "repair",
   "difficulty": "level3",
-  "prompt": "Car Manufacturer Details overlaps Markdown Widget on the open Manufacturer Detail Repair board. Move Car Manufacturer Details to x 0, y 10, width 40, height 14 on Details while preserving its settings.",
+  "prompt": "Car Manufacturer Details overlaps Markdown Widget on the open Manufacturer Detail Repair dashboard. Move Car Manufacturer Details to x 0, y 10, width 40, height 14 on Details while preserving its parameters.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

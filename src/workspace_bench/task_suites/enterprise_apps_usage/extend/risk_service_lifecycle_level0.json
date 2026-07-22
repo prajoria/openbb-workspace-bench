@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level0",
   "category": "platform",
   "difficulty": "level0",
-  "prompt": "On the open Risk Service Staging board, review the connected backends and refresh Wave One Risk Service so its Wave One Risk Signal description is Refreshed risk signal feed.",
+  "prompt": "On the open Risk Service Staging dashboard, review the connected backends and refresh Wave One Risk Service so its Wave One Risk Signal description is Refreshed risk signal feed.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

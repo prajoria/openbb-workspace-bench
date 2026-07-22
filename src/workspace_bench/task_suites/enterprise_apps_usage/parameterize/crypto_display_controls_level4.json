@@ -2,7 +2,7 @@
   "id": "crypto_display_controls_level4",
   "category": "single-widget",
   "difficulty": "level4",
-  "prompt": "Crypto-display governed change: follow the Daloopa Inflection skill (daloopa-inflection) on the open Crypto Display Controls board, then set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3 -- growth-rate reversals and preserve the other views. The governing concepts are growth-rate reversals.",
+  "prompt": "Crypto-display governed change: follow the Daloopa Inflection skill (daloopa-inflection) on the open Crypto Display Controls dashboard, then set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3 -- growth-rate reversals and preserve the other views. The governing concepts are growth-rate reversals.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

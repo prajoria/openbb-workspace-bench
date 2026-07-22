@@ -2,7 +2,7 @@
   "id": "cited_research_operations_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "Use Daloopa Guidance Tracker governance on the open Cited Research Operations board and add Bench Daloopa's Management Guidance for NVDA.",
+  "prompt": "Use Daloopa Guidance Tracker governance on the open Cited Research Operations dashboard and add Bench Daloopa's Management Guidance for NVDA.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

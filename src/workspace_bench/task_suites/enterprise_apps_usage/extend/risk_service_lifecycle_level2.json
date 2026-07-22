@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "Review the connected backends on the open Risk Service Staging board, then refresh Wave One Risk Service so Wave One Risk App has one non-overlapping Wave One Risk Signal placement on Monitor.",
+  "prompt": "Review the connected backends on the open Risk Service Staging dashboard, then refresh Wave One Risk Service so Wave One Risk App has one non-overlapping Wave One Risk Signal placement on Monitor.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "vendor_freshness_repair_level1",
   "category": "repair",
   "difficulty": "level1",
-  "prompt": "Vendor-freshness preserved fix: on the open Vendor Freshness Repair board, restore SLA Metrics with vendor Bloomberg, status Open, period QTD and preserve Vendor Contract Terms.",
+  "prompt": "Vendor-freshness preserved fix: on the open Vendor Freshness Repair dashboard, restore SLA Metrics with vendor Bloomberg, status Open, period QTD and preserve Vendor Contract Terms.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

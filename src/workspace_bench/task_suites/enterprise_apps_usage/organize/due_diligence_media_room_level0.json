@@ -2,7 +2,7 @@
   "id": "due_diligence_media_room_level0",
   "category": "dashboard",
   "difficulty": "level0",
-  "prompt": "Media-room board start: create and open Due Diligence Media Room.",
+  "prompt": "Media-room dashboard start: create and open Due Diligence Media Room.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

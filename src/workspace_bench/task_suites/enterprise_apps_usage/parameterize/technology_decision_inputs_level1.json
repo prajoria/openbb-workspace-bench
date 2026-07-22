@@ -2,7 +2,7 @@
   "id": "technology_decision_inputs_level1",
   "category": "single-widget",
   "difficulty": "level1",
-  "prompt": "Look over the open Technology Decision Inputs board, then change Car Manufacturer Performance to TSLA and 2022 while preserving everything else.",
+  "prompt": "Look over the open Technology Decision Inputs dashboard, then change Car Manufacturer Performance to TSLA and 2022 while preserving everything else.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

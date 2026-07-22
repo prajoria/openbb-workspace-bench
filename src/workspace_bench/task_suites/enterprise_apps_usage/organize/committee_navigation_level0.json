@@ -2,7 +2,7 @@
   "id": "committee_navigation_level0",
   "category": "dashboard",
   "difficulty": "level0",
-  "prompt": "Create a dashboard named Wave One Committee Review for the committee and make it the active board.",
+  "prompt": "Create a dashboard named Wave One Committee Review for the committee and make it the active dashboard.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

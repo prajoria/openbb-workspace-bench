@@ -2,7 +2,7 @@
   "id": "earnings_handoff_level4",
   "category": "platform",
   "difficulty": "level4",
-  "prompt": "Handle the coverage follow-up route from the open Earnings Handoff board under Finance Earnings Prep governance. Read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Healthcare, LLY, and YTD; add an LLY Delegation Handoff note with exact score and status, then delegate the coverage follow-up.",
+  "prompt": "Handle the coverage follow-up route from the open Earnings Handoff dashboard under Finance Earnings Prep governance. Read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Healthcare, LLY, and YTD; add an LLY Delegation Handoff note with exact score and status, then delegate the coverage follow-up.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

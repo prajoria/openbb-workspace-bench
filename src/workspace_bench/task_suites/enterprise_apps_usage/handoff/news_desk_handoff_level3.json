@@ -2,7 +2,7 @@
   "id": "news_desk_handoff_level3",
   "category": "platform",
   "difficulty": "level3",
-  "prompt": "Using Workspace session guidance on the open News Desk Handoff board, read Getting Started's Sample News Feed for business, limited to 2. Add a Governed Expansion Handoff note with the exact second title and author.",
+  "prompt": "Using Workspace session guidance on the open News Desk Handoff dashboard, read Getting Started's Sample News Feed for business, limited to 2. Add a Governed Expansion Handoff note with the exact second title and author.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

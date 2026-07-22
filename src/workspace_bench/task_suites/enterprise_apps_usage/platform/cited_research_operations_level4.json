@@ -2,7 +2,7 @@
   "id": "cited_research_operations_level4",
   "category": "dashboard",
   "difficulty": "level4",
-  "prompt": "Combine Daloopa Capital Allocation governance with Workspace session guidance on the open Cited Research Operations board. Add Bench Daloopa's Company Fundamentals for AMZN in 2026Q1 and a Citation Protocol note naming source_url and calendar_period.",
+  "prompt": "Combine Daloopa Capital Allocation governance with Workspace session guidance on the open Cited Research Operations dashboard. Add Bench Daloopa's Company Fundamentals for AMZN in 2026Q1 and a Citation Protocol note naming source_url and calendar_period.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

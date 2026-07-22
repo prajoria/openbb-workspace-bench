@@ -2,7 +2,7 @@
   "id": "crypto_display_controls_level2",
   "category": "single-widget",
   "difficulty": "level2",
-  "prompt": "Crypto-display level-2 change: on the open Crypto Display Controls board, set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3 and preserve the other views.",
+  "prompt": "Crypto-display level-2 change: on the open Crypto Display Controls dashboard, set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3 and preserve the other views.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

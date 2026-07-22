@@ -2,7 +2,7 @@
   "id": "client_onboarding_flow_level3",
   "category": "dashboard",
   "difficulty": "level3",
-  "prompt": "On the open Client Onboarding Staging board, rename the dashboard to Wave Two Client Onboarding and change Intake to Client Intake. Preserve Review and every other workspace item.",
+  "prompt": "On the open Client Onboarding Staging dashboard, rename the dashboard to Wave Two Client Onboarding and change Intake to Client Intake. Preserve Review and every other workspace item.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

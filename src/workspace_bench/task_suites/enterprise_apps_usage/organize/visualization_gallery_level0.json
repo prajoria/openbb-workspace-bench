@@ -2,7 +2,7 @@
   "id": "visualization_gallery_level0",
   "category": "dashboard",
   "difficulty": "level0",
-  "prompt": "Visualization-gallery board start: create and open Visualization Gallery.",
+  "prompt": "Visualization-gallery dashboard start: create and open Visualization Gallery.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

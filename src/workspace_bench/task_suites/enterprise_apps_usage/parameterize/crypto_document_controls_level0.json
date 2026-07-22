@@ -2,7 +2,7 @@
   "id": "crypto_document_controls_level0",
   "category": "single-widget",
   "difficulty": "level0",
-  "prompt": "On the open Crypto Document Controls board, set Whitepapers with filenames set to ethereum.pdf and category set to l1, preserving every other view.",
+  "prompt": "On the open Crypto Document Controls dashboard, set Whitepapers with filenames set to ethereum.pdf and category set to l1, preserving every other view.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

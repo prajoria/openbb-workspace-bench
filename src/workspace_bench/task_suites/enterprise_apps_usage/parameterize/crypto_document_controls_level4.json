@@ -2,7 +2,7 @@
   "id": "crypto_document_controls_level4",
   "category": "single-widget",
   "difficulty": "level4",
-  "prompt": "Using Workspace session guidance, prepare the open Crypto Document Controls board with Whitepapers on ethereum.pdf from l1 and CoinDesk News limited to 6 in ES. Preserve the PDF viewer.",
+  "prompt": "Using Workspace session guidance, prepare the open Crypto Document Controls dashboard with Whitepapers on ethereum.pdf from l1 and CoinDesk News limited to 6 in ES. Preserve the PDF viewer.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

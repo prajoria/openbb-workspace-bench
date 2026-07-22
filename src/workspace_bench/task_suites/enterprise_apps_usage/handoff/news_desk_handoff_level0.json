@@ -2,7 +2,7 @@
   "id": "news_desk_handoff_level0",
   "category": "read",
   "difficulty": "level0",
-  "prompt": "On the open News Desk Handoff board, read Getting Started's Sample News Feed with category set to business and limit set to 2. Add a Markets News Handoff note with the exact lead title and author.",
+  "prompt": "On the open News Desk Handoff dashboard, read Getting Started's Sample News Feed with category set to business and limit set to 2. Add a Markets News Handoff note with the exact lead title and author.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

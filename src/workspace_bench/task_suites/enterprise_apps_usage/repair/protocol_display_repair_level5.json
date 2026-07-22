@@ -2,7 +2,7 @@
   "id": "protocol_display_repair_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "Protocol-display backend rebuild: Wave Three Protocol Repair was lost from the workspace; on the open Protocol-display Backend Repair board, rebuild it from scratch: add a custom backend Wave Three Protocol Repair with a Protocol Repair Queue table, publish Protocol Repair App, and instantiate it with one non-overlapping Protocol Repair Queue placement on Protocols, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Inflection skill (daloopa-inflection) and add a Protocol-display Rebuild Note recording what it flags as inflections.",
+  "prompt": "Protocol-display backend rebuild: Wave Three Protocol Repair was lost from the workspace; on the open Protocol-display Backend Repair dashboard, rebuild it from scratch: add a custom backend Wave Three Protocol Repair with a Protocol Repair Queue table, publish Protocol Repair App, and instantiate it with one non-overlapping Protocol Repair Queue placement on Protocols, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Inflection skill (daloopa-inflection) and add a Protocol-display Rebuild Note recording what it flags as inflections.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

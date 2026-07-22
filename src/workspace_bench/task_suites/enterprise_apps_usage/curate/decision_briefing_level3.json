@@ -2,7 +2,7 @@
   "id": "decision_briefing_level3",
   "category": "dashboard",
   "difficulty": "level3",
-  "prompt": "Set up the open Wave One Decision Brief board: place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, for Flagship Long/Short and QTD beside Getting Started's Car Manufacturer Performance for TSLA and 2024. Put Trade Ideas at x 0, y 0, width 20, height 14 and the manufacturer view at x 20, y 0, width 20, height 14.",
+  "prompt": "Set up the open Wave One Decision Brief dashboard: place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, for Flagship Long/Short and QTD beside Getting Started's Car Manufacturer Performance for TSLA and 2024. Put Trade Ideas at x 0, y 0, width 20, height 14 and the manufacturer view at x 20, y 0, width 20, height 14.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

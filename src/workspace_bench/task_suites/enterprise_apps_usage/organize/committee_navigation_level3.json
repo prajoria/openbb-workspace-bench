@@ -2,7 +2,7 @@
   "id": "committee_navigation_level3",
   "category": "dashboard",
   "difficulty": "level3",
-  "prompt": "On the open Committee Review Staging board, rename the dashboard to Wave One Committee Review and change its Agenda tab to Decision Agenda. Keep Evidence and all other workspace content intact.",
+  "prompt": "On the open Committee Review Staging dashboard, rename the dashboard to Wave One Committee Review and change its Agenda tab to Decision Agenda. Keep Evidence and all other workspace content intact.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

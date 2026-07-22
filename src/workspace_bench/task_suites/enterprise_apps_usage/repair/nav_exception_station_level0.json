@@ -2,7 +2,7 @@
   "id": "nav_exception_station_level0",
   "category": "repair",
   "difficulty": "level0",
-  "prompt": "NAV Exceptions on the open NAV Repair Staging board has fund set to Flagship Long/Short, status set to Open, and period set to QTD. Set fund to Flagship Long/Short, status to Open, and period back to YTD.",
+  "prompt": "NAV Exceptions on the open NAV Repair Staging dashboard has fund set to Flagship Long/Short, status set to Open, and period set to QTD. Set fund to Flagship Long/Short, status to Open, and period back to YTD.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "manufacturer_details_repair_level4",
   "category": "repair",
   "difficulty": "level4",
-  "prompt": "Clean up the open Manufacturer Detail Repair board. Restore the primary Car Manufacturer Details to F and 2024; the manufacturer-duplicate marker identifies the extra copy. Move the primary to x 0, y 10, width 40, height 14 on Details, and preserve Markdown Widget.",
+  "prompt": "Clean up the open Manufacturer Detail Repair dashboard. Restore the primary Car Manufacturer Details to F and 2024; the manufacturer-duplicate marker identifies the extra copy. Move the primary to x 0, y 10, width 40, height 14 on Details, and preserve Markdown Widget.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "client_intake_controls_level4",
   "category": "single-widget",
   "difficulty": "level4",
-  "prompt": "Client-intake governed change: follow the Widget Parameters resource (openbb://workspace/specs/widget-parameters) on the open Client Intake Controls board, then set Financial Entry Form with client_first_name Maya, client_last_name Chen, risk_profile Moderate, add_record True and preserve the other views. The governing concepts are form, button.",
+  "prompt": "Client-intake governed change: follow the Widget Parameters resource (openbb://workspace/specs/widget-parameters) on the open Client Intake Controls dashboard, then set Financial Entry Form with client_first_name Maya, client_last_name Chen, risk_profile Moderate, add_record True and preserve the other views. The governing concepts are form, button.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

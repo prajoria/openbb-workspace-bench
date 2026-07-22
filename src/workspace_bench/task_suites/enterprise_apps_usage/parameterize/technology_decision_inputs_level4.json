@@ -2,7 +2,7 @@
   "id": "technology_decision_inputs_level4",
   "category": "single-widget",
   "difficulty": "level4",
-  "prompt": "Prepare the open Technology Decision Inputs board for the quarterly review under Finance Earnings Prep governance. Set Upcoming Earnings to Technology, AAPL, and QTD, and Trade Ideas to Flagship Long/Short and QTD. Preserve Car Manufacturer Performance.",
+  "prompt": "Prepare the open Technology Decision Inputs dashboard for the quarterly review under Finance Earnings Prep governance. Set Upcoming Earnings to Technology, AAPL, and QTD, and Trade Ideas to Flagship Long/Short and QTD. Preserve Car Manufacturer Performance.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

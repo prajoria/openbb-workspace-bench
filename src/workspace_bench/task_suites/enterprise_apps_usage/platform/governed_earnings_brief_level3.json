@@ -2,7 +2,7 @@
   "id": "governed_earnings_brief_level3",
   "category": "dashboard",
   "difficulty": "level3",
-  "prompt": "Use Workspace session guidance on the open Governed Earnings Brief board. Add an Actions tab and place a Session Grounding note there naming current-dashboard and current-tab.",
+  "prompt": "Use Workspace session guidance on the open Governed Earnings Brief dashboard. Add an Actions tab and place a Session Grounding note there naming current-dashboard and current-tab.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

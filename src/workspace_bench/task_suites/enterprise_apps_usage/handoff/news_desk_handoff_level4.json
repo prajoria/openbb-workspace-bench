@@ -2,7 +2,7 @@
   "id": "news_desk_handoff_level4",
   "category": "platform",
   "difficulty": "level4",
-  "prompt": "Handle the science follow-up route from the open News Desk Handoff board under Workspace session guidance. Read Getting Started's Sample News Feed for science, limited to 2; add a Science Delegation Handoff note with the exact lead title and author, then delegate the editorial follow-up.",
+  "prompt": "Handle the science follow-up route from the open News Desk Handoff dashboard under Workspace session guidance. Read Getting Started's Sample News Feed for science, limited to 2; add a Science Delegation Handoff note with the exact lead title and author, then delegate the editorial follow-up.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "news_desk_handoff_level2",
   "category": "read",
   "difficulty": "level2",
-  "prompt": "Prepare a Science News Handoff note on the open News Desk Handoff board under the science route. Read Getting Started's Sample News Feed for that route, limited to 2, and pin the exact lead title and author.",
+  "prompt": "Prepare a Science News Handoff note on the open News Desk Handoff dashboard under the science route. Read Getting Started's Sample News Feed for that route, limited to 2, and pin the exact lead title and author.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

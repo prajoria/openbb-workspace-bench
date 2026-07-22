@@ -2,7 +2,7 @@
   "id": "manufacturer_details_repair_level0",
   "category": "repair",
   "difficulty": "level0",
-  "prompt": "Car Manufacturer Details on the open Manufacturer Detail Repair board has company set to F and year set to 2022. Set company to F and year back to 2024.",
+  "prompt": "Car Manufacturer Details on the open Manufacturer Detail Repair dashboard has company set to F and year set to 2022. Set company to F and year back to 2024.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

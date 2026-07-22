@@ -2,7 +2,7 @@
   "id": "research_feed_lifecycle_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "From the open Research Feed Staging board, review the connected backends, then refresh Wave Two Research Feed so Research Feed App has one non-overlapping Research Feed Pulse placement on Feed.",
+  "prompt": "From the open Research Feed Staging dashboard, review the connected backends, then refresh Wave Two Research Feed so Research Feed App has one non-overlapping Research Feed Pulse placement on Feed.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

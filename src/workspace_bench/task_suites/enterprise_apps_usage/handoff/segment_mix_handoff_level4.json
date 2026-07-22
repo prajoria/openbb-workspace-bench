@@ -2,7 +2,7 @@
   "id": "segment_mix_handoff_level4",
   "category": "dashboard",
   "difficulty": "level4",
-  "prompt": "Segment-mix governed handoff: follow the Daloopa Tearsheet skill (daloopa-tearsheet) on the open Segment Mix Handoff board, read Bench Daloopa's Segment Breakdown with ticker AAPL, period 2026Q1, add a Segment-mix Governed Handoff note recording the top segment and its exact revenue_musd and mix, then delegate the follow-up.",
+  "prompt": "Segment-mix governed handoff: follow the Daloopa Tearsheet skill (daloopa-tearsheet) on the open Segment Mix Handoff dashboard, read Bench Daloopa's Segment Breakdown with ticker AAPL, period 2026Q1, add a Segment-mix Governed Handoff note recording the top segment and its exact revenue_musd and mix, then delegate the follow-up.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

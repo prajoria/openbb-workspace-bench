@@ -2,7 +2,7 @@
   "id": "nav_exception_station_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "NAV-exception backend rebuild: Wave One NAV Repair was lost from the workspace; on the open Custom NAV Repair Staging board, rebuild it from scratch: add a custom backend Wave One NAV Repair with a NAV Exception Queue table, publish NAV Repair App, and instantiate it with one non-overlapping NAV Exception Queue placement on Exceptions, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Guidance Tracker skill (daloopa-guidance-tracker) and add a NAV-exception Rebuild Note recording the last of the three verdict kinds it tallies.",
+  "prompt": "NAV-exception backend rebuild: Wave One NAV Repair was lost from the workspace; on the open Custom NAV Repair Staging dashboard, rebuild it from scratch: add a custom backend Wave One NAV Repair with a NAV Exception Queue table, publish NAV Repair App, and instantiate it with one non-overlapping NAV Exception Queue placement on Exceptions, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Guidance Tracker skill (daloopa-guidance-tracker) and add a NAV-exception Rebuild Note recording the last of the three verdict kinds it tallies.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

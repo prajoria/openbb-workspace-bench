@@ -2,7 +2,7 @@
   "id": "news_desk_handoff_level1",
   "category": "read",
   "difficulty": "level1",
-  "prompt": "Find Getting Started's Sample News Feed from the open News Desk Handoff board for technology, limited to 2, then add a Technology News Handoff note with the exact lead title and author.",
+  "prompt": "Find Getting Started's Sample News Feed from the open News Desk Handoff dashboard for technology, limited to 2, then add a Technology News Handoff note with the exact lead title and author.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

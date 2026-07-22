@@ -2,7 +2,7 @@
   "id": "market_telemetry_level3",
   "category": "dashboard",
   "difficulty": "level3",
-  "prompt": "Build out the open Wave Two Market Telemetry board with Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined for quarterly liquidity. Put the trends at x 0, y 0, width 20, height 12 and the ratio view at x 20, y 0, width 20, height 12.",
+  "prompt": "Build out the open Wave Two Market Telemetry dashboard with Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined for quarterly liquidity. Put the trends at x 0, y 0, width 20, height 12 and the ratio view at x 20, y 0, width 20, height 12.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

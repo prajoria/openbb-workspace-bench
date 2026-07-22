@@ -2,7 +2,7 @@
   "id": "governed_earnings_brief_level1",
   "category": "platform",
   "difficulty": "level1",
-  "prompt": "On the open Governed Earnings Brief board, consult Finance Earnings Prep governance and add an Earnings Governance Actions note that names internal estimates and transcript tone.",
+  "prompt": "On the open Governed Earnings Brief dashboard, consult Finance Earnings Prep governance and add an Earnings Governance Actions note that names internal estimates and transcript tone.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

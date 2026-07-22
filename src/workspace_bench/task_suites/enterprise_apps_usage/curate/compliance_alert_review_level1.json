@@ -2,7 +2,7 @@
   "id": "compliance_alert_review_level1",
   "category": "dashboard",
   "difficulty": "level1",
-  "prompt": "Compliance-alert discovery board: add Bench Stark Enterprise — Compliance Surveillance Hub, Policy Breaches to the current board.",
+  "prompt": "Compliance-alert discovery dashboard: add Bench Stark Enterprise — Compliance Surveillance Hub, Policy Breaches to the current dashboard.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

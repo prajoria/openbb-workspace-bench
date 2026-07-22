@@ -2,7 +2,7 @@
   "id": "decision_briefing_level2",
   "category": "single-widget",
   "difficulty": "level2",
-  "prompt": "Prepare the open Wave One Decision Brief board under the quarterly PM briefing policy. Add Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, for Flagship Long/Short; quarterly means QTD.",
+  "prompt": "Prepare the open Wave One Decision Brief dashboard under the quarterly PM briefing policy. Add Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, for Flagship Long/Short; quarterly means QTD.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "vendor_freshness_repair_level0",
   "category": "repair",
   "difficulty": "level0",
-  "prompt": "Vendor-freshness direct fix: on the open Vendor Freshness Repair board, set SLA Metrics with vendor set to Bloomberg, status set to Open, period set to QTD.",
+  "prompt": "Vendor-freshness direct fix: on the open Vendor Freshness Repair dashboard, set SLA Metrics with vendor set to Bloomberg, status set to Open, period set to QTD.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

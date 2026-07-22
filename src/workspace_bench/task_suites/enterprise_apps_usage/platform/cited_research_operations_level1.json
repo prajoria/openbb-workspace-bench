@@ -2,7 +2,7 @@
   "id": "cited_research_operations_level1",
   "category": "platform",
   "difficulty": "level1",
-  "prompt": "On the open Cited Research Operations board, follow Daloopa Tearsheet governance and add Bench Daloopa's Company Directory.",
+  "prompt": "On the open Cited Research Operations dashboard, follow Daloopa Tearsheet governance and add Bench Daloopa's Company Directory.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

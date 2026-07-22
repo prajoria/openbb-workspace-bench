@@ -2,7 +2,7 @@
   "id": "nav_exception_station_level1",
   "category": "repair",
   "difficulty": "level1",
-  "prompt": "On the open NAV Repair Staging board, fix the NAV Exceptions setting by restoring Flagship Long/Short, Open, and YTD. Preserve Trade Ideas and every other workspace item.",
+  "prompt": "On the open NAV Repair Staging dashboard, fix the NAV Exceptions parameters by restoring Flagship Long/Short, Open, and YTD. Preserve Trade Ideas and every other workspace item.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

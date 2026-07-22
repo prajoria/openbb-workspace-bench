@@ -693,7 +693,7 @@ def _build_retrieve_tasks() -> list[TaskRecord]:
             3,
             "read",
             (
-                "On the open Earnings & Estimates Monitor board, read Bench Stark "
+                "On the open Earnings & Estimates Monitor dashboard, read Bench Stark "
                 "Enterprise's configured Upcoming Earnings view without changing it, and "
                 "report LLY's exact YTD score and change."
             ),
@@ -916,7 +916,7 @@ def _build_curate_tasks() -> list[TaskRecord]:
             "single-widget",
             (
                 "The PM wants Bench Stark Enterprise's Portfolio Command Center, Trade "
-                "Ideas, on the open Wave One Decision Brief board, with fund set to "
+                "Ideas, on the open Wave One Decision Brief dashboard, with fund set to "
                 "Flagship Long/Short and period set to YTD."
             ),
             [
@@ -950,7 +950,7 @@ def _build_curate_tasks() -> list[TaskRecord]:
             1,
             "single-widget",
             (
-                "On the open Wave One Decision Brief board, find Bench Stark Enterprise's "
+                "On the open Wave One Decision Brief dashboard, find Bench Stark Enterprise's "
                 "Portfolio Command Center, Trade Ideas, and add it for Flagship Long/Short "
                 "and YTD."
             ),
@@ -990,7 +990,7 @@ def _build_curate_tasks() -> list[TaskRecord]:
             2,
             "single-widget",
             (
-                "Prepare the open Wave One Decision Brief board under the quarterly PM "
+                "Prepare the open Wave One Decision Brief dashboard under the quarterly PM "
                 "briefing policy. Add Bench Stark Enterprise's Portfolio Command Center, "
                 "Trade Ideas, for Flagship Long/Short; quarterly means QTD."
             ),
@@ -1031,9 +1031,9 @@ def _build_curate_tasks() -> list[TaskRecord]:
     cross_args = {"company": "TSLA", "year": 2024}
     for level in (3, 4):
         prefix = (
-            "Set up the open Wave One Decision Brief board:"
+            "Set up the open Wave One Decision Brief dashboard:"
             if level == 3
-            else "Use Workspace session guidance to prepare the open Wave One Decision Brief board:"
+            else "Use Workspace session guidance to prepare the open Wave One Decision Brief dashboard:"
         )
         prompt = (
             f"{prefix} place Bench Stark Enterprise's Portfolio Command Center, Trade "
@@ -1450,7 +1450,7 @@ def _repair_rebuild_level5(
     *,
     spine: str,
     title: str,
-    board_name: str,
+    dashboard_name: str,
     backend_name: str,
     widget_name: str,
     app_name: str,
@@ -1472,7 +1472,7 @@ def _repair_rebuild_level5(
         app_name,
         [(tab_id, tab_name, [(widget_id, 0, 0, 40, 12, None)])],
     )
-    stage = _staged_dashboard(board_name, [], tabs=[{"id": tab_id, "name": tab_name}])
+    stage = _staged_dashboard(dashboard_name, [], tabs=[{"id": tab_id, "name": tab_name}])
     note_name = f"{title} Rebuild Note"
     gov_prompt, gov_steps, gov_required, gov_policy = _governed_build_note(
         governance, note_name
@@ -1484,7 +1484,7 @@ def _repair_rebuild_level5(
         "repair",
         (
             f"{title} backend rebuild: {backend_name} was lost from the workspace; "
-            f"on the open {board_name} board, rebuild it from scratch: add a custom "
+            f"on the open {dashboard_name} dashboard, rebuild it from scratch: add a custom "
             f"backend {backend_name} with a {widget_name} table, publish {app_name}, "
             f"and instantiate it with one non-overlapping {widget_name} placement on "
             f"{tab_name}, keeping all other workspace content. Follow the widgets "
@@ -1551,7 +1551,7 @@ def _repair_rebuild_level5(
                 "widgets_on_tab": [{"tab_id": tab_id, "widget_id": widget_id}],
             }
         ],
-        selected_dashboard=board_name,
+        selected_dashboard=dashboard_name,
         initial_state=stage,
     )
 
@@ -1564,7 +1564,7 @@ def _build_parameterize_tasks() -> list[TaskRecord]:
     low_specs = (
         (
             0,
-            "On the open Technology Decision Inputs board, switch Car Manufacturer "
+            "On the open Technology Decision Inputs dashboard, switch Car Manufacturer "
             "Performance with company set to TSLA and year set to 2023, and leave every "
             "other view unchanged.",
             {"company": "TSLA", "year": 2023},
@@ -1572,7 +1572,7 @@ def _build_parameterize_tasks() -> list[TaskRecord]:
         ),
         (
             1,
-            "Look over the open Technology Decision Inputs board, then change Car "
+            "Look over the open Technology Decision Inputs dashboard, then change Car "
             "Manufacturer Performance to TSLA and 2022 while preserving everything else.",
             {"company": "TSLA", "year": 2022},
             (),
@@ -1580,8 +1580,8 @@ def _build_parameterize_tasks() -> list[TaskRecord]:
         (
             2,
             "Apply the current Tesla model-year policy on the open Technology Decision "
-            "Inputs board. Set Car Manufacturer Performance to company TSLA and "
-            "year 2024, the current model year, and preserve the rest of the board.",
+            "Inputs dashboard. Set Car Manufacturer Performance to company TSLA and "
+            "year 2024, the current model year, and preserve the rest of the dashboard.",
             {"company": "TSLA", "year": 2024},
             (
                 PolicyMapping(
@@ -1647,7 +1647,7 @@ def _build_parameterize_tasks() -> list[TaskRecord]:
             3,
             "single-widget",
             (
-                "Retune Upcoming Earnings on the open Technology Decision Inputs board to "
+                "Retune Upcoming Earnings on the open Technology Decision Inputs dashboard to "
                 "Technology, AAPL, and QTD. Keep Car Manufacturer Performance and every "
                 "other view as they are."
             ),
@@ -1682,7 +1682,7 @@ def _build_parameterize_tasks() -> list[TaskRecord]:
             4,
             "single-widget",
             (
-                "Prepare the open Technology Decision Inputs board for the quarterly review "
+                "Prepare the open Technology Decision Inputs dashboard for the quarterly review "
                 "under Finance Earnings Prep governance. Set Upcoming Earnings to "
                 "Technology, AAPL, and QTD, and Trade Ideas to Flagship Long/Short and QTD. "
                 "Preserve Car Manufacturer Performance."
@@ -1761,7 +1761,7 @@ def _build_organize_tasks() -> list[TaskRecord]:
             "dashboard",
             (
                 "Create a dashboard named Wave One Committee Review for the committee and "
-                "make it the active board."
+                "make it the active dashboard."
             ),
             [
                 _snapshot(),
@@ -1784,7 +1784,7 @@ def _build_organize_tasks() -> list[TaskRecord]:
             1,
             "dashboard",
             (
-                "Create Wave One Committee Review as the active committee board, with "
+                "Create Wave One Committee Review as the active committee dashboard, with "
                 "Agenda and Evidence tabs."
             ),
             [
@@ -1816,7 +1816,7 @@ def _build_organize_tasks() -> list[TaskRecord]:
             2,
             "dashboard",
             (
-                "The committee needs an active Wave One Committee Review board with Agenda "
+                "The committee needs an active Wave One Committee Review dashboard with Agenda "
                 "and Evidence tabs. Create it, then open Evidence."
             ),
             [
@@ -1864,7 +1864,7 @@ def _build_organize_tasks() -> list[TaskRecord]:
             3,
             "dashboard",
             (
-                "On the open Committee Review Staging board, rename the dashboard to Wave "
+                "On the open Committee Review Staging dashboard, rename the dashboard to Wave "
                 "One Committee Review and change its Agenda tab to Decision Agenda. Keep "
                 "Evidence and all other workspace content intact."
             ),
@@ -2111,7 +2111,7 @@ def _build_repair_tasks() -> list[TaskRecord]:
             0,
             "repair",
             (
-                "NAV Exceptions on the open NAV Repair Staging board has fund set to "
+                "NAV Exceptions on the open NAV Repair Staging dashboard has fund set to "
                 "Flagship Long/Short, status set to Open, and period set to QTD. Set fund "
                 "to Flagship Long/Short, status to Open, and period back to YTD."
             ),
@@ -2151,7 +2151,7 @@ def _build_repair_tasks() -> list[TaskRecord]:
             1,
             "repair",
             (
-                "On the open NAV Repair Staging board, fix the NAV Exceptions setting by "
+                "On the open NAV Repair Staging dashboard, fix the NAV Exceptions parameters by "
                 "restoring Flagship Long/Short, Open, and YTD. Preserve Trade Ideas and "
                 "every other workspace item."
             ),
@@ -2196,7 +2196,7 @@ def _build_repair_tasks() -> list[TaskRecord]:
             2,
             "repair",
             (
-                "The open NAV Repair Staging board has an extra NAV Exceptions copy. The "
+                "The open NAV Repair Staging dashboard has an extra NAV Exceptions copy. The "
                 "duplicate-cleanup marker identifies it; remove that copy so exactly one "
                 "remains, and preserve Trade Ideas and all other content."
             ),
@@ -2242,7 +2242,7 @@ def _build_repair_tasks() -> list[TaskRecord]:
             3,
             "repair",
             (
-                "Fix the overlap on the open NAV Repair Staging board without disturbing "
+                "Fix the overlap on the open NAV Repair Staging dashboard without disturbing "
                 "Trade Ideas. Move NAV Exceptions to x 0, y 14, width 40, and height 14 on "
                 "Exceptions, preserving all parameters and remaining workspace content."
             ),
@@ -2296,7 +2296,7 @@ def _build_repair_tasks() -> list[TaskRecord]:
             4,
             "repair",
             (
-                "Clean up the open NAV Repair Staging board. Restore the primary NAV "
+                "Clean up the open NAV Repair Staging dashboard. Restore the primary NAV "
                 "Exceptions view to Flagship Long/Short, Open, and YTD; the "
                 "duplicate-cleanup marker identifies the extra copy. Move the primary to "
                 "x 0, y 14, width 40, height 14 on Exceptions, and preserve Trade Ideas."
@@ -2352,7 +2352,7 @@ def _build_repair_tasks() -> list[TaskRecord]:
         _repair_rebuild_level5(
             spine=spine,
             title="NAV-exception",
-            board_name="Custom NAV Repair Staging",
+            dashboard_name="Custom NAV Repair Staging",
             backend_name="Wave One NAV Repair",
             widget_name="NAV Exception Queue",
             app_name="NAV Repair App",
@@ -2390,7 +2390,7 @@ def _build_platform_tasks() -> list[TaskRecord]:
             "platform",
             (
                 "Read the Finance Earnings Prep skill (finance-earnings-prep) for the open "
-                "Governed Earnings Brief board. Add an Earnings Prep Workflow note that "
+                "Governed Earnings Brief dashboard. Add an Earnings Prep Workflow note that "
                 "records the workflow title and its first and fourth actions."
             ),
             [
@@ -2436,7 +2436,7 @@ def _build_platform_tasks() -> list[TaskRecord]:
             1,
             "platform",
             (
-                "On the open Governed Earnings Brief board, consult Finance Earnings Prep "
+                "On the open Governed Earnings Brief dashboard, consult Finance Earnings Prep "
                 "governance and add an Earnings Governance Actions note that names internal "
                 "estimates and transcript tone."
             ),
@@ -2486,7 +2486,7 @@ def _build_platform_tasks() -> list[TaskRecord]:
             (
                 "Review the backend contract resource "
                 "(openbb://workspace/contract/backend) for the open Governed Earnings "
-                "Brief board, then add a Backend Contract Actions note recording the two "
+                "Brief dashboard, then add a Backend Contract Actions note recording the two "
                 "contract items listed between the manifest files and authentication."
             ),
             [
@@ -2529,7 +2529,7 @@ def _build_platform_tasks() -> list[TaskRecord]:
             3,
             "dashboard",
             (
-                "Use Workspace session guidance on the open Governed Earnings Brief board. "
+                "Use Workspace session guidance on the open Governed Earnings Brief dashboard. "
                 "Add an Actions tab and place a Session Grounding note there naming "
                 "current-dashboard and current-tab."
             ),
@@ -2580,7 +2580,7 @@ def _build_platform_tasks() -> list[TaskRecord]:
             4,
             "dashboard",
             (
-                "For the open Governed Earnings Brief board, combine Finance Earnings Prep "
+                "For the open Governed Earnings Brief dashboard, combine Finance Earnings Prep "
                 "governance with Workspace session guidance. Add an Actions tab and an "
                 "Earnings Session Actions note there naming action items and "
                 "current-dashboard."
@@ -2776,7 +2776,7 @@ def _build_extend_tasks() -> list[TaskRecord]:
             0,
             "platform",
             (
-                "On the open Risk Service Staging board, review the connected backends and "
+                "On the open Risk Service Staging dashboard, review the connected backends and "
                 "refresh Wave One Risk Service so its Wave One Risk Signal description is "
                 "Refreshed risk signal feed."
             ),
@@ -2841,7 +2841,7 @@ def _build_extend_tasks() -> list[TaskRecord]:
             2,
             "platform",
             (
-                "Review the connected backends on the open Risk Service Staging board, "
+                "Review the connected backends on the open Risk Service Staging dashboard, "
                 "then refresh Wave One Risk Service so Wave One Risk App has "
                 "one non-overlapping Wave One Risk Signal placement on Monitor."
             ),
@@ -3156,7 +3156,7 @@ def _build_handoff_tasks() -> list[TaskRecord]:
     specs = (
         (
             0,
-            "On the open Earnings Handoff board, read Bench Stark Enterprise's Earnings & "
+            "On the open Earnings Handoff dashboard, read Bench Stark Enterprise's Earnings & "
             "Estimates Monitor, Upcoming Earnings, for Healthcare, LLY, and YTD. Add an LLY "
             "Earnings Handoff note with the exact score and status.",
             {"sector": "Healthcare", "ticker": "LLY", "period": "YTD"},
@@ -3166,7 +3166,7 @@ def _build_handoff_tasks() -> list[TaskRecord]:
         ),
         (
             1,
-            "Build the Apple note on the open Earnings Handoff board. Find "
+            "Build the Apple note on the open Earnings Handoff dashboard. Find "
             "Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for "
             "Technology, AAPL, and QTD, then add an Apple Earnings Handoff note with the "
             "exact score and status.",
@@ -3177,7 +3177,7 @@ def _build_handoff_tasks() -> list[TaskRecord]:
         ),
         (
             2,
-            "Prepare a Microsoft note on the open Earnings Handoff board under the "
+            "Prepare a Microsoft note on the open Earnings Handoff dashboard under the "
             "current-month handoff policy. Read Bench Stark Enterprise's Earnings & "
             "Estimates Monitor, Upcoming Earnings, for Technology and MSFT; current month "
             "means MTD. Add a Microsoft Earnings Handoff note with the exact score and status.",
@@ -3258,7 +3258,7 @@ def _build_handoff_tasks() -> list[TaskRecord]:
             3,
             "platform",
             (
-                "For the open Earnings Handoff board, follow Finance Earnings Prep "
+                "For the open Earnings Handoff dashboard, follow Finance Earnings Prep "
                 "governance and read Bench Stark Enterprise's Earnings & Estimates Monitor, "
                 "Upcoming Earnings, for Technology, AAPL, and QTD. Add a Governed Apple "
                 "Handoff note with the exact score and status."
@@ -3325,7 +3325,7 @@ def _build_handoff_tasks() -> list[TaskRecord]:
             4,
             "platform",
             (
-                "Handle the coverage follow-up route from the open Earnings Handoff board "
+                "Handle the coverage follow-up route from the open Earnings Handoff dashboard "
                 "under Finance Earnings Prep governance. Read Bench Stark Enterprise's "
                 "Earnings & Estimates Monitor, Upcoming Earnings, for Healthcare, LLY, and "
                 "YTD; add an LLY Delegation Handoff note with exact score and status, then "
@@ -3412,7 +3412,7 @@ def _build_handoff_tasks() -> list[TaskRecord]:
             5,
             "platform",
             (
-                "From the open Earnings Handoff board, author and add a minimal custom "
+                "From the open Earnings Handoff dashboard, author and add a minimal custom "
                 "Earnings Handoff Backend with one Earnings Handoff Register. Publish and "
                 "instantiate Earnings Handoff App with one Handoff tab, add an Earnings "
                 "Build Handoff note naming Earnings Handoff App and Earnings Handoff "
@@ -3620,7 +3620,7 @@ def _build_retrieve_wave2_tasks() -> list[TaskRecord]:
             3,
             "read",
             (
-                "On the open Closing Tape Review board, read the daily OHLCV rows in Bench "
+                "On the open Closing Tape Review dashboard, read the daily OHLCV rows in Bench "
                 "Daloopa's configured Stock Prices view without changing it and report the "
                 "latest date, exact close, and volume."
             ),
@@ -3830,7 +3830,7 @@ def _build_curate_wave2_tasks() -> list[TaskRecord]:
             "single-widget",
             (
                 "Add Getting Started's Stock Price Trends - Line Sparklines with First/Last "
-                "Points to the open Wave Two Market Telemetry board."
+                "Points to the open Wave Two Market Telemetry dashboard."
             ),
             [
                 _snapshot(),
@@ -3855,7 +3855,7 @@ def _build_curate_wave2_tasks() -> list[TaskRecord]:
             1,
             "single-widget",
             (
-                "On the open Wave Two Market Telemetry board, add Getting Started's "
+                "On the open Wave Two Market Telemetry dashboard, add Getting Started's "
                 "live-updating grid with real-time WebSocket updates for AAPL."
             ),
             [
@@ -3899,7 +3899,7 @@ def _build_curate_wave2_tasks() -> list[TaskRecord]:
             2,
             "single-widget",
             (
-                "Prepare the open Wave Two Market Telemetry board for the quarterly "
+                "Prepare the open Wave Two Market Telemetry dashboard for the quarterly "
                 "liquidity policy. Add Widget Examples' [MOCK DATA] Tabs + Dropdown "
                 "Combined; quarterly liquidity means quarterly and liquidity. Place it at "
                 "x 0, y 0, width 40, height 14."
@@ -3938,14 +3938,14 @@ def _build_curate_wave2_tasks() -> list[TaskRecord]:
 
     for level in (3, 4):
         prompt = (
-            "Build out the open Wave Two Market Telemetry board with Getting Started's "
+            "Build out the open Wave Two Market Telemetry dashboard with Getting Started's "
             "Stock Price Trends - Line Sparklines with First/Last Points beside Widget "
             "Examples' [MOCK DATA] "
             "Tabs + Dropdown Combined for quarterly liquidity. Put the trends at x 0, y "
             "0, width 20, height 12 and the ratio view at x 20, y 0, width 20, height 12."
             if level == 3
             else "Using Workspace session guidance, finish the open Wave Two Market "
-            "Telemetry board with Getting Started's Stock Price Trends - Line Sparklines "
+            "Telemetry dashboard with Getting Started's Stock Price Trends - Line Sparklines "
             "with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown "
             "Combined for quarterly "
             "liquidity. Put them at x 0 and x 20, y 0, each width 20 and height 12."
@@ -4182,7 +4182,7 @@ def _build_parameterize_wave2_tasks() -> list[TaskRecord]:
         (
             0,
             (
-                "On the open Crypto Document Controls board, set Whitepapers with "
+                "On the open Crypto Document Controls dashboard, set Whitepapers with "
                 "filenames set to ethereum.pdf and category set to l1, preserving every "
                 "other view."
             ),
@@ -4192,7 +4192,7 @@ def _build_parameterize_wave2_tasks() -> list[TaskRecord]:
         (
             1,
             (
-                "Use the whitepaper PDF on the open Crypto Document Controls board to "
+                "Use the whitepaper PDF on the open Crypto Document Controls dashboard to "
                 "show Solana's solana.pdf from the l1 collection, leaving the rest alone."
             ),
             {"filenames": "solana.pdf", "category": "l1"},
@@ -4202,7 +4202,7 @@ def _build_parameterize_wave2_tasks() -> list[TaskRecord]:
             2,
             (
                 "Apply the DeFi research set to Whitepapers on the open Crypto Document "
-                "Controls board and preserve the surrounding document views."
+                "Controls dashboard and preserve the surrounding document views."
             ),
             {"filenames": "solana.pdf", "category": "defi"},
             (PolicyMapping("DeFi research set", ("solana.pdf", "defi")),),
@@ -4272,7 +4272,7 @@ def _build_parameterize_wave2_tasks() -> list[TaskRecord]:
             3,
             "single-widget",
             (
-                "Retune Whitepapers on the open Crypto Document Controls board to "
+                "Retune Whitepapers on the open Crypto Document Controls dashboard to "
                 "ethereum.pdf from l1. Keep CoinDesk News and every other view unchanged."
             ),
             [
@@ -4302,7 +4302,7 @@ def _build_parameterize_wave2_tasks() -> list[TaskRecord]:
             "single-widget",
             (
                 "Using Workspace session guidance, prepare the open Crypto Document "
-                "Controls board with Whitepapers on ethereum.pdf from l1 and CoinDesk News "
+                "Controls dashboard with Whitepapers on ethereum.pdf from l1 and CoinDesk News "
                 "limited to 6 in ES. Preserve the PDF viewer."
             ),
             [
@@ -4363,7 +4363,7 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
 
     tasks: list[TaskRecord] = []
     spine = "client_onboarding_flow"
-    board_name = "Wave Two Client Onboarding"
+    dashboard_name = "Wave Two Client Onboarding"
     tasks.append(
         _record(
             "organize",
@@ -4372,13 +4372,13 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
             "dashboard",
             (
                 "For client operations, create a dashboard named Wave Two Client "
-                "Onboarding and make it the active board."
+                "Onboarding and make it the active dashboard."
             ),
             [
                 _snapshot(),
                 _call(
                     "manage_dashboard",
-                    {"operation": "create", "name": board_name, "activate": True},
+                    {"operation": "create", "name": dashboard_name, "activate": True},
                     graded_args=("operation", "name"),
                 ),
             ],
@@ -4398,7 +4398,7 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
                 _snapshot(),
                 _call(
                     "manage_dashboard",
-                    {"operation": "create", "name": board_name, "activate": True},
+                    {"operation": "create", "name": dashboard_name, "activate": True},
                     graded_args=("operation", "name"),
                 ),
                 _call(
@@ -4422,7 +4422,7 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
             [
                 _call(
                     "manage_dashboard",
-                    {"operation": "create", "name": board_name, "activate": True},
+                    {"operation": "create", "name": dashboard_name, "activate": True},
                     graded_args=("operation", "name"),
                 ),
                 _call(
@@ -4444,7 +4444,7 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
                 ),
             ],
             required_tabs=["intake", "review", "approval"],
-            required_dashboard_name=board_name,
+            required_dashboard_name=dashboard_name,
         )
     )
     staging = _staged_dashboard(
@@ -4463,7 +4463,7 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
             3,
             "dashboard",
             (
-                "On the open Client Onboarding Staging board, rename the dashboard to "
+                "On the open Client Onboarding Staging dashboard, rename the dashboard to "
                 "Wave Two Client Onboarding and change Intake to Client Intake. Preserve "
                 "Review and every other workspace item."
             ),
@@ -4474,7 +4474,7 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
                     {
                         "operation": "update",
                         "dashboard_id": "wave2_client_staging",
-                        "name": board_name,
+                        "name": dashboard_name,
                     },
                     graded_args=("name",),
                 ),
@@ -4512,7 +4512,7 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
                 ),
                 _call(
                     "manage_dashboard",
-                    {"operation": "create", "name": board_name, "activate": True},
+                    {"operation": "create", "name": dashboard_name, "activate": True},
                     graded_args=("operation", "name"),
                 ),
                 _call(
@@ -4704,7 +4704,7 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
             0,
             "repair",
             (
-                "Car Manufacturer Details on the open Manufacturer Detail Repair board "
+                "Car Manufacturer Details on the open Manufacturer Detail Repair dashboard "
                 "has company set to F and year set to 2022. Set company to F and year back "
                 "to 2024."
             ),
@@ -4739,7 +4739,7 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
             1,
             "repair",
             (
-                "On the open Manufacturer Detail Repair board, restore Car Manufacturer "
+                "On the open Manufacturer Detail Repair dashboard, restore Car Manufacturer "
                 "Details to company F and year 2024. Preserve Markdown Widget and every "
                 "other workspace item."
             ),
@@ -4779,7 +4779,7 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
             2,
             "repair",
             (
-                "The open Manufacturer Detail Repair board has an extra Car Manufacturer "
+                "The open Manufacturer Detail Repair dashboard has an extra Car Manufacturer "
                 "Details copy. The manufacturer-duplicate marker identifies it; remove "
                 "that copy so exactly one remains, and preserve Markdown Widget."
             ),
@@ -4823,8 +4823,8 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
             "repair",
             (
                 "Car Manufacturer Details overlaps Markdown Widget on the open Manufacturer "
-                "Detail Repair board. Move Car Manufacturer Details to x 0, y 10, width "
-                "40, height 14 on Details while preserving its settings."
+                "Detail Repair dashboard. Move Car Manufacturer Details to x 0, y 10, width "
+                "40, height 14 on Details while preserving its parameters."
             ),
             [
                 _snapshot(),
@@ -4869,7 +4869,7 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
             4,
             "repair",
             (
-                "Clean up the open Manufacturer Detail Repair board. Restore the primary "
+                "Clean up the open Manufacturer Detail Repair dashboard. Restore the primary "
                 "Car Manufacturer Details to F and 2024; the manufacturer-duplicate marker "
                 "identifies the extra copy. Move the primary to x 0, y 10, width 40, height "
                 "14 on Details, and preserve Markdown Widget."
@@ -4920,7 +4920,7 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
         _repair_rebuild_level5(
             spine=spine,
             title="Detail-queue",
-            board_name="Custom Detail Repair",
+            dashboard_name="Custom Detail Repair",
             backend_name="Wave Two Detail Repair",
             widget_name="Manufacturer Detail Queue",
             app_name="Detail Repair App",
@@ -4955,7 +4955,7 @@ def _build_platform_wave2_tasks() -> list[TaskRecord]:
             0,
             "platform",
             (
-                "From the open Cited Research Operations board, read the Daloopa "
+                "From the open Cited Research Operations dashboard, read the Daloopa "
                 "Tearsheet skill (daloopa-tearsheet). Add a Daloopa Tearsheet Workflow "
                 "note that records the workflow title and its period-math anchor."
             ),
@@ -5002,7 +5002,7 @@ def _build_platform_wave2_tasks() -> list[TaskRecord]:
             1,
             "platform",
             (
-                "On the open Cited Research Operations board, follow Daloopa Tearsheet "
+                "On the open Cited Research Operations dashboard, follow Daloopa Tearsheet "
                 "governance and add Bench Daloopa's Company Directory."
             ),
             [
@@ -5037,7 +5037,7 @@ def _build_platform_wave2_tasks() -> list[TaskRecord]:
             "platform",
             (
                 "Use Daloopa Guidance Tracker governance on the open Cited Research "
-                "Operations board and add Bench Daloopa's Management Guidance for NVDA."
+                "Operations dashboard and add Bench Daloopa's Management Guidance for NVDA."
             ),
             [
                 _call(
@@ -5081,7 +5081,7 @@ def _build_platform_wave2_tasks() -> list[TaskRecord]:
             3,
             "dashboard",
             (
-                "For the open Cited Research Operations board, use Daloopa Industry "
+                "For the open Cited Research Operations dashboard, use Daloopa Industry "
                 "governance to place two Bench Daloopa Company Fundamentals views, one for "
                 "MSFT in 2025Q4 and one for NVDA in 2025Q4."
             ),
@@ -5132,7 +5132,7 @@ def _build_platform_wave2_tasks() -> list[TaskRecord]:
             "dashboard",
             (
                 "Combine Daloopa Capital Allocation governance with Workspace session "
-                "guidance on the open Cited Research Operations board. Add Bench Daloopa's "
+                "guidance on the open Cited Research Operations dashboard. Add Bench Daloopa's "
                 "Company Fundamentals for AMZN in 2026Q1 and a Citation Protocol note "
                 "naming source_url and calendar_period."
             ),
@@ -5327,7 +5327,7 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
             0,
             "platform",
             (
-                "On the open Research Feed Staging board, review the connected backends "
+                "On the open Research Feed Staging dashboard, review the connected backends "
                 "and refresh Wave Two Research Feed so Research Feed Pulse has the "
                 "description Refreshed research feed."
             ),
@@ -5381,7 +5381,7 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
             2,
             "platform",
             (
-                "From the open Research Feed Staging board, review the connected backends, "
+                "From the open Research Feed Staging dashboard, review the connected backends, "
                 "then refresh Wave Two Research Feed so Research Feed App has one "
                 "non-overlapping Research Feed Pulse placement on Feed."
             ),
@@ -5680,7 +5680,7 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
         (
             0,
             (
-                "On the open News Desk Handoff board, read Getting Started's Sample News "
+                "On the open News Desk Handoff dashboard, read Getting Started's Sample News "
                 "Feed with category set to business and limit set to 2. Add a Markets News "
                 "Handoff note with the exact lead title and author."
             ),
@@ -5693,7 +5693,7 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
             1,
             (
                 "Find Getting Started's Sample News Feed from the open News Desk Handoff "
-                "board for technology, limited to 2, then add a Technology News Handoff "
+                "dashboard for technology, limited to 2, then add a Technology News Handoff "
                 "note with the exact lead title and author."
             ),
             {"category": "tech", "limit": 2},
@@ -5704,7 +5704,7 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
         (
             2,
             (
-                "Prepare a Science News Handoff note on the open News Desk Handoff board "
+                "Prepare a Science News Handoff note on the open News Desk Handoff dashboard "
                 "under the science route. Read Getting Started's Sample News Feed for that "
                 "route, limited to 2, and pin the exact lead title and author."
             ),
@@ -5788,7 +5788,7 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
             3,
             "platform",
             (
-                "Using Workspace session guidance on the open News Desk Handoff board, "
+                "Using Workspace session guidance on the open News Desk Handoff dashboard, "
                 "read Getting Started's Sample News Feed for business, limited to 2. Add a "
                 "Governed Expansion Handoff note with the exact second title and author."
             ),
@@ -5850,7 +5850,7 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
             4,
             "platform",
             (
-                "Handle the science follow-up route from the open News Desk Handoff board "
+                "Handle the science follow-up route from the open News Desk Handoff dashboard "
                 "under Workspace session guidance. Read Getting Started's Sample News Feed "
                 "for science, limited to 2; add a Science Delegation Handoff note with the "
                 "exact lead title and author, then delegate the editorial follow-up."
@@ -5927,7 +5927,7 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
             5,
             "platform",
             (
-                "Starting from the open News Desk Handoff board, author and add a minimal "
+                "Starting from the open News Desk Handoff dashboard, author and add a minimal "
                 "custom News Handoff Backend with one News Handoff Register. Publish and "
                 "instantiate News Handoff App with one Handoff tab, add a News Build "
                 "Handoff note naming News Handoff App and News Handoff Register, then "
@@ -6439,7 +6439,7 @@ def _build_wave3_curate_spine(
                 spine,
                 level,
                 "dashboard",
-                f"{title} {level_words[level]} board: add {names} to the current board.",
+                f"{title} {level_words[level]} dashboard: add {names} to the current dashboard.",
                 tools,
                 targets=targets,
                 required_widgets=[
@@ -6459,7 +6459,7 @@ def _build_wave3_curate_spine(
             4,
             "dashboard",
             (
-                f"{title} governed board: follow the {governance.label}, add {governed_names}, "
+                f"{title} governed dashboard: follow the {governance.label}, add {governed_names}, "
                 f"and add a {_note_phrase(note_name)} naming {governed_token}."
             ),
             [
@@ -6493,7 +6493,7 @@ def _build_wave3_curate_spine(
             5,
             "platform",
             (
-                f"{title} build board: add {backend_name} with a {widget_name} table and "
+                f"{title} build dashboard: add {backend_name} with a {widget_name} table and "
                 f"publish and instantiate {app_name} on {tab_name}; also add {build_names}. "
                 "Widget ids are the snake_case of widget names; tab ids are the snake_case "
                 "of tab names."
@@ -6673,7 +6673,7 @@ def _build_wave3_parameterize_spine(
     *,
     spine: str,
     title: str,
-    board_name: str,
+    dashboard_name: str,
     targets: tuple[TargetSpec, TargetSpec, TargetSpec],
     initial_args: tuple[JsonDict, JsonDict, JsonDict],
     final_args: tuple[JsonDict, JsonDict, JsonDict],
@@ -6686,8 +6686,8 @@ def _build_wave3_parameterize_spine(
     build_url: str,
     build_args: JsonDict,
 ) -> list[TaskRecord]:
-    stage = _wave3_stage(board_name, targets, initial_args)
-    uuids = tuple(f"wave3_{_snake_case(board_name)}_{index}" for index in range(len(targets)))
+    stage = _wave3_stage(dashboard_name, targets, initial_args)
+    uuids = tuple(f"wave3_{_snake_case(dashboard_name)}_{index}" for index in range(len(targets)))
     tasks: list[TaskRecord] = []
     low_specs = (
         (0, 0, final_args[0]),
@@ -6709,7 +6709,7 @@ def _build_wave3_parameterize_spine(
                 level,
                 "single-widget",
                 (
-                    f"{title} level-{level} change: on the open {board_name} board, set "
+                    f"{title} level-{level} change: on the open {dashboard_name} dashboard, set "
                     f"{target.display_name} with {_wave3_args_words(data_args, level0=level == 0)} "
                     "and preserve the other views."
                 ),
@@ -6717,7 +6717,7 @@ def _build_wave3_parameterize_spine(
                 targets=(target,),
                 pinned_widget_args={(target.origin, target.widget_id): frozenset(data_args)},
                 required_widgets=[_required_widget(target.origin, target.widget_id, data_args)],
-                selected_dashboard=board_name,
+                selected_dashboard=dashboard_name,
                 initial_state=stage,
             )
         )
@@ -6731,7 +6731,7 @@ def _build_wave3_parameterize_spine(
             3,
             "single-widget",
             (
-                f"{title} paired change: on the open {board_name} board, set "
+                f"{title} paired change: on the open {dashboard_name} dashboard, set "
                 f"{pair[0].display_name} with {_wave3_args_words(pair_args[0])}; set "
                 f"{pair[1].display_name} with {_wave3_args_words(pair_args[1])}; preserve "
                 "the first view."
@@ -6749,7 +6749,7 @@ def _build_wave3_parameterize_spine(
                 _required_widget(target.origin, target.widget_id, args)
                 for target, args in zip(pair, pair_args, strict=True)
             ],
-            selected_dashboard=board_name,
+            selected_dashboard=dashboard_name,
             initial_state=stage,
         )
     )
@@ -6763,7 +6763,7 @@ def _build_wave3_parameterize_spine(
             "single-widget",
             (
                 f"{title} governed change: follow the {governance.label} on the open "
-                f"{board_name} board, then set {governed_target.display_name} with "
+                f"{dashboard_name} dashboard, then set {governed_target.display_name} with "
                 f"{_wave3_args_words(governed_args)} and preserve the other views. "
                 f"The governing concepts are {', '.join(governance.outcome_tokens)}."
             ),
@@ -6783,7 +6783,7 @@ def _build_wave3_parameterize_spine(
                 )
             ],
             governance=governance,
-            selected_dashboard=board_name,
+            selected_dashboard=dashboard_name,
             initial_state=stage,
         )
     )
@@ -6890,7 +6890,7 @@ def _build_wave3_parameterize_tasks() -> list[TaskRecord]:
         *_build_wave3_parameterize_spine(
             spine="client_intake_controls",
             title="Client-intake",
-            board_name="Client Intake Controls",
+            dashboard_name="Client Intake Controls",
             targets=client_targets,
             initial_args=client_initial,
             final_args=client_final,
@@ -6911,7 +6911,7 @@ def _build_wave3_parameterize_tasks() -> list[TaskRecord]:
         *_build_wave3_parameterize_spine(
             spine="crypto_display_controls",
             title="Crypto-display",
-            board_name="Crypto Display Controls",
+            dashboard_name="Crypto Display Controls",
             targets=crypto_targets,
             initial_args=crypto_initial,
             final_args=crypto_final,
@@ -6936,7 +6936,7 @@ def _build_wave3_organize_spine(
     *,
     spine: str,
     title: str,
-    board_name: str,
+    dashboard_name: str,
     targets: tuple[TargetSpec, TargetSpec, TargetSpec],
     governance: GovernanceSpec,
     governed_tabs: tuple[str, str],
@@ -6953,16 +6953,16 @@ def _build_wave3_organize_spine(
             spine,
             0,
             "dashboard",
-            f"{title} board start: create and open {board_name}.",
+            f"{title} dashboard start: create and open {dashboard_name}.",
             [
                 _snapshot(),
                 _call(
                     "manage_dashboard",
-                    {"operation": "create", "name": board_name, "activate": True},
+                    {"operation": "create", "name": dashboard_name, "activate": True},
                     graded_args=("operation", "name"),
                 ),
             ],
-            required_dashboard_name=board_name,
+            required_dashboard_name=dashboard_name,
         )
     )
     basic_tabs = ("Overview", "Review")
@@ -6972,12 +6972,12 @@ def _build_wave3_organize_spine(
             spine,
             1,
             "dashboard",
-            f"{title} tab setup: create and open {board_name}, then add Overview and Review tabs.",
+            f"{title} tab setup: create and open {dashboard_name}, then add Overview and Review tabs.",
             [
                 _snapshot(),
                 _call(
                     "manage_dashboard",
-                    {"operation": "create", "name": board_name, "activate": True},
+                    {"operation": "create", "name": dashboard_name, "activate": True},
                     graded_args=("operation", "name"),
                 ),
                 _call(
@@ -6986,7 +6986,7 @@ def _build_wave3_organize_spine(
                     graded_args=("tabs",),
                 ),
             ],
-            required_dashboard_name=board_name,
+            required_dashboard_name=dashboard_name,
             required_tabs=[_snake_case(name) for name in basic_tabs],
         )
     )
@@ -6999,13 +6999,13 @@ def _build_wave3_organize_spine(
                 level,
                 "dashboard",
                 (
-                    f"{title} level-{level} layout: create and open {board_name}, add Overview "
+                    f"{title} level-{level} layout: create and open {dashboard_name}, add Overview "
                     f"and Review tabs, then add {names}."
                 ),
                 [
                     _call(
                         "manage_dashboard",
-                        {"operation": "create", "name": board_name, "activate": True},
+                        {"operation": "create", "name": dashboard_name, "activate": True},
                         graded_args=("operation", "name"),
                     ),
                     _call(
@@ -7017,7 +7017,7 @@ def _build_wave3_organize_spine(
                     *(_wave3_place_call(target) for target in chosen),
                 ],
                 targets=chosen,
-                required_dashboard_name=board_name,
+                required_dashboard_name=dashboard_name,
                 required_tabs=[_snake_case(name) for name in basic_tabs],
                 required_widgets=[
                     _required_widget(target.origin, target.widget_id) for target in chosen
@@ -7037,14 +7037,14 @@ def _build_wave3_organize_spine(
             "dashboard",
             (
                 f"{title} governed layout: follow the {governance.label}; create and open "
-                f"{board_name}, add {governed_tabs[0]} and {governed_tabs[1]} tabs, and add "
+                f"{dashboard_name}, add {governed_tabs[0]} and {governed_tabs[1]} tabs, and add "
                 f"{governed_names}."
             ),
             [
                 _wave3_governance_call(governance),
                 _call(
                     "manage_dashboard",
-                    {"operation": "create", "name": board_name, "activate": True},
+                    {"operation": "create", "name": dashboard_name, "activate": True},
                     graded_args=("operation", "name"),
                 ),
                 _call(
@@ -7059,7 +7059,7 @@ def _build_wave3_organize_spine(
                 *(_wave3_place_call(target) for target in governed_targets),
             ],
             targets=governed_targets,
-            required_dashboard_name=board_name,
+            required_dashboard_name=dashboard_name,
             required_tabs=[name.casefold().replace(" ", "-") for name in governed_tabs],
             required_widgets=[
                 _required_widget(target.origin, target.widget_id) for target in governed_targets
@@ -7162,7 +7162,7 @@ def _build_wave3_organize_tasks() -> list[TaskRecord]:
         *_build_wave3_organize_spine(
             spine="due_diligence_media_room",
             title="Media-room",
-            board_name="Due Diligence Media Room",
+            dashboard_name="Due Diligence Media Room",
             targets=media_targets,
             governance=GovernanceSpec(
                 "get_skill_content",
@@ -7180,7 +7180,7 @@ def _build_wave3_organize_tasks() -> list[TaskRecord]:
         *_build_wave3_organize_spine(
             spine="visualization_gallery",
             title="Visualization-gallery",
-            board_name="Visualization Gallery",
+            dashboard_name="Visualization Gallery",
             targets=chart_targets,
             governance=GovernanceSpec(
                 "get_skill_content",
@@ -7199,7 +7199,7 @@ def _build_wave3_organize_tasks() -> list[TaskRecord]:
 
 
 def _wave3_repair_stage(
-    board_name: str,
+    dashboard_name: str,
     primary: TargetSpec,
     secondary: TargetSpec,
     primary_args: JsonDict,
@@ -7212,7 +7212,7 @@ def _wave3_repair_stage(
         {
             "origin": primary.origin,
             "widget_id": primary.widget_id,
-            "widget_uuid": f"{_snake_case(board_name)}_primary",
+            "widget_uuid": f"{_snake_case(dashboard_name)}_primary",
             "tab_id": "review",
             "data_args": primary_args,
             "layout": {"x": 0, "y": 0, "w": 40, "h": 12},
@@ -7220,7 +7220,7 @@ def _wave3_repair_stage(
         {
             "origin": secondary.origin,
             "widget_id": secondary.widget_id,
-            "widget_uuid": f"{_snake_case(board_name)}_preserved",
+            "widget_uuid": f"{_snake_case(dashboard_name)}_preserved",
             "tab_id": "review",
             "data_args": secondary_args,
             "layout": {"x": 0, "y": 0 if overlap else 12, "w": 40, "h": 12},
@@ -7231,20 +7231,20 @@ def _wave3_repair_stage(
             {
                 "origin": primary.origin,
                 "widget_id": primary.widget_id,
-                "widget_uuid": f"{_snake_case(board_name)}_duplicate",
+                "widget_uuid": f"{_snake_case(dashboard_name)}_duplicate",
                 "tab_id": "review",
                 "data_args": primary_args,
                 "layout": {"x": 0, "y": 24, "w": 40, "h": 12},
             }
         )
-    return _staged_dashboard(board_name, widgets)
+    return _staged_dashboard(dashboard_name, widgets)
 
 
 def _build_wave3_repair_spine(
     *,
     spine: str,
     title: str,
-    board_name: str,
+    dashboard_name: str,
     primary: TargetSpec,
     secondary: TargetSpec,
     wrong_args: JsonDict,
@@ -7258,10 +7258,10 @@ def _build_wave3_repair_spine(
     url: str,
 ) -> list[TaskRecord]:
     tasks: list[TaskRecord] = []
-    primary_uuid = f"{_snake_case(board_name)}_primary"
-    preserved_uuid = f"{_snake_case(board_name)}_preserved"
+    primary_uuid = f"{_snake_case(dashboard_name)}_primary"
+    preserved_uuid = f"{_snake_case(dashboard_name)}_preserved"
     bad_stage = _wave3_repair_stage(
-        board_name,
+        dashboard_name,
         primary,
         secondary,
         wrong_args,
@@ -7274,14 +7274,14 @@ def _build_wave3_repair_spine(
             0,
             "repair",
             (
-                f"{title} direct fix: on the open {board_name} board, set "
+                f"{title} direct fix: on the open {dashboard_name} dashboard, set "
                 f"{primary.display_name} with {_wave3_args_words(correct_args, level0=True)}."
             ),
             [_snapshot(), _wave3_update_call(primary_uuid, correct_args)],
             targets=(primary,),
             pinned_widget_args={(primary.origin, primary.widget_id): frozenset(correct_args)},
             required_widgets=[_required_widget(primary.origin, primary.widget_id, correct_args)],
-            selected_dashboard=board_name,
+            selected_dashboard=dashboard_name,
             initial_state=bad_stage,
         )
     )
@@ -7292,7 +7292,7 @@ def _build_wave3_repair_spine(
             1,
             "repair",
             (
-                f"{title} preserved fix: on the open {board_name} board, restore "
+                f"{title} preserved fix: on the open {dashboard_name} dashboard, restore "
                 f"{primary.display_name} with {_wave3_args_words(correct_args)} and preserve "
                 f"{secondary.display_name}."
             ),
@@ -7303,20 +7303,20 @@ def _build_wave3_repair_spine(
                 _required_widget(primary.origin, primary.widget_id, correct_args),
                 _required_widget(secondary.origin, secondary.widget_id),
             ],
-            selected_dashboard=board_name,
+            selected_dashboard=dashboard_name,
             initial_state=bad_stage,
         )
     )
 
     duplicate_stage = _wave3_repair_stage(
-        board_name,
+        dashboard_name,
         primary,
         secondary,
         correct_args,
         secondary_args,
         duplicate=True,
     )
-    duplicate_uuid = f"{_snake_case(board_name)}_duplicate"
+    duplicate_uuid = f"{_snake_case(dashboard_name)}_duplicate"
     tasks.append(
         _record(
             "repair",
@@ -7324,7 +7324,7 @@ def _build_wave3_repair_spine(
             2,
             "repair",
             (
-                f"{title} duplicate cleanup: the open {board_name} board has an extra "
+                f"{title} duplicate cleanup: the open {dashboard_name} dashboard has an extra "
                 f"{primary.display_name}; the {title.casefold()} duplicate marker identifies "
                 f"it. Remove that copy and preserve {secondary.display_name}."
             ),
@@ -7341,13 +7341,13 @@ def _build_wave3_repair_spine(
                 _required_widget(primary.origin, primary.widget_id, min_count=1, max_count=1),
                 _required_widget(secondary.origin, secondary.widget_id),
             ],
-            selected_dashboard=board_name,
+            selected_dashboard=dashboard_name,
             initial_state=duplicate_stage,
         )
     )
 
     overlap_stage = _wave3_repair_stage(
-        board_name,
+        dashboard_name,
         primary,
         secondary,
         correct_args,
@@ -7361,7 +7361,7 @@ def _build_wave3_repair_spine(
             3,
             "repair",
             (
-                f"{title} overlap fix: on the open {board_name} board, move "
+                f"{title} overlap fix: on the open {dashboard_name} dashboard, move "
                 f"{secondary.display_name} to x 0, y 12, width 40, height 12 on Review; "
                 f"preserve {primary.display_name}."
             ),
@@ -7384,7 +7384,7 @@ def _build_wave3_repair_spine(
                 _required_widget(primary.origin, primary.widget_id),
                 _required_widget(secondary.origin, secondary.widget_id),
             ],
-            selected_dashboard=board_name,
+            selected_dashboard=dashboard_name,
             initial_state=overlap_stage,
         )
     )
@@ -7399,7 +7399,7 @@ def _build_wave3_repair_spine(
             "repair",
             (
                 f"{title} governed repair: follow the {governance.label} on the open "
-                f"{board_name} board, restore {primary.display_name} with "
+                f"{dashboard_name} dashboard, restore {primary.display_name} with "
                 f"{_wave3_args_words(correct_args)}, preserve {secondary.display_name}, and "
                 f"add a {_note_phrase(note_name)} naming {governed_token}."
             ),
@@ -7416,7 +7416,7 @@ def _build_wave3_repair_spine(
             ],
             required_generated_widgets=[_wave3_required_generated(note_name, governed_token)],
             governance=governance,
-            selected_dashboard=board_name,
+            selected_dashboard=dashboard_name,
             initial_state=bad_stage,
         )
     )
@@ -7425,7 +7425,7 @@ def _build_wave3_repair_spine(
         _repair_rebuild_level5(
             spine=spine,
             title=title,
-            board_name=f"{title} Backend Repair",
+            dashboard_name=f"{title} Backend Repair",
             backend_name=backend_name,
             widget_name=widget_name,
             app_name=app_name,
@@ -7466,7 +7466,7 @@ def _build_wave3_repair_tasks() -> list[TaskRecord]:
         *_build_wave3_repair_spine(
             spine="vendor_freshness_repair",
             title="Vendor-freshness",
-            board_name="Vendor Freshness Repair",
+            dashboard_name="Vendor Freshness Repair",
             primary=vendor_primary,
             secondary=vendor_secondary,
             wrong_args={"vendor": "FactSet", "status": "Closed", "period": "1Y"},
@@ -7487,7 +7487,7 @@ def _build_wave3_repair_tasks() -> list[TaskRecord]:
         *_build_wave3_repair_spine(
             spine="protocol_display_repair",
             title="Protocol-display",
-            board_name="Protocol Display Repair",
+            dashboard_name="Protocol Display Repair",
             primary=protocol_primary,
             secondary=server_grid,
             wrong_args={"protocol_id": "aave"},
@@ -8099,7 +8099,7 @@ def _build_wave3_handoff_spine(
     *,
     spine: str,
     title: str,
-    board_name: str,
+    dashboard_name: str,
     source_slug: str,
     target: TargetSpec,
     data_args: JsonDict,
@@ -8113,7 +8113,7 @@ def _build_wave3_handoff_spine(
     tab_name: str,
     url: str,
 ) -> list[TaskRecord]:
-    stage = _staged_dashboard(board_name, [])
+    stage = _staged_dashboard(dashboard_name, [])
     tasks: list[TaskRecord] = []
     for level, rung in enumerate(("direct", "discovered", "analyst", "desk")):
         note_name = f"{title} {rung.title()} Note"
@@ -8137,7 +8137,7 @@ def _build_wave3_handoff_spine(
                 level,
                 "read",
                 (
-                    f"{title} {rung} handoff: on the open {board_name} board, read "
+                    f"{title} {rung} handoff: on the open {dashboard_name} dashboard, read "
                     f"{target.origin}'s {target.display_name} with "
                     + ", ".join(f"{key} {value}" for key, value in data_args.items())
                     + f", then add a {_note_phrase(note_name)} recording {fact_words}."
@@ -8146,7 +8146,7 @@ def _build_wave3_handoff_spine(
                 targets=(target,),
                 required_generated_widgets=[_wave3_required_generated(note_name, *tokens)],
                 grounded_generated=(GroundedGenerated(source_slug, target.widget_id, tokens),),
-                selected_dashboard=board_name,
+                selected_dashboard=dashboard_name,
                 initial_state=stage,
             )
         )
@@ -8171,7 +8171,7 @@ def _build_wave3_handoff_spine(
             "dashboard",
             (
                 f"{title} governed handoff: follow the {governance.label} on the open "
-                f"{board_name} board, read {target.origin}'s {target.display_name} with "
+                f"{dashboard_name} dashboard, read {target.origin}'s {target.display_name} with "
                 + ", ".join(f"{key} {value}" for key, value in data_args.items())
                 + f", add a {_note_phrase(note_name)} recording {fact_words} and "
                 f"{governed_token}, then delegate the follow-up."
@@ -8192,7 +8192,7 @@ def _build_wave3_handoff_spine(
             ],
             grounded_generated=(GroundedGenerated(source_slug, target.widget_id, tokens),),
             governance=governance,
-            selected_dashboard=board_name,
+            selected_dashboard=dashboard_name,
             initial_state=stage,
         )
     )
@@ -8295,7 +8295,7 @@ def _build_wave3_handoff_tasks() -> list[TaskRecord]:
         *_build_wave3_handoff_spine(
             spine="segment_mix_handoff",
             title="Segment-mix",
-            board_name="Segment Mix Handoff",
+            dashboard_name="Segment Mix Handoff",
             source_slug="support-daloopa-skills",
             target=segment,
             data_args={"ticker": "AAPL", "period": "2026Q1"},
@@ -8317,7 +8317,7 @@ def _build_wave3_handoff_tasks() -> list[TaskRecord]:
         *_build_wave3_handoff_spine(
             spine="consensus_exception_handoff",
             title="Consensus-exception",
-            board_name="Consensus Exception Handoff",
+            dashboard_name="Consensus Exception Handoff",
             source_slug="support-daloopa-skills",
             target=consensus,
             data_args={"ticker": "AAPL"},
@@ -9243,9 +9243,9 @@ def _assert_l1_l5(records: list[TaskRecord]) -> None:
                             )
 
         selected = str(payload["setup"]["default_selected_dashboard"])
-        if selected != "Home" and f"open {selected} board".casefold() not in prompt.casefold():
+        if selected != "Home" and f"open {selected} dashboard".casefold() not in prompt.casefold():
             raise AssertionError(
-                f"{task_id}: L3 staged prompt does not say 'open {selected} board'"
+                f"{task_id}: L3 staged prompt does not say 'open {selected} dashboard'"
             )
         if any(term in prompt.casefold() for term in ("explicit", "checkpoint")):
             raise AssertionError(f"{task_id}: L4 scaffolding register remains")

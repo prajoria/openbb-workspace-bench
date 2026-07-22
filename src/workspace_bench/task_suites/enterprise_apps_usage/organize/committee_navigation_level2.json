@@ -2,7 +2,7 @@
   "id": "committee_navigation_level2",
   "category": "dashboard",
   "difficulty": "level2",
-  "prompt": "The committee needs an active Wave One Committee Review board with Agenda and Evidence tabs. Create it, then open Evidence.",
+  "prompt": "The committee needs an active Wave One Committee Review dashboard with Agenda and Evidence tabs. Create it, then open Evidence.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

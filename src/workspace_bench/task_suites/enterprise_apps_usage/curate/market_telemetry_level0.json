@@ -2,7 +2,7 @@
   "id": "market_telemetry_level0",
   "category": "single-widget",
   "difficulty": "level0",
-  "prompt": "Add Getting Started's Stock Price Trends - Line Sparklines with First/Last Points to the open Wave Two Market Telemetry board.",
+  "prompt": "Add Getting Started's Stock Price Trends - Line Sparklines with First/Last Points to the open Wave Two Market Telemetry dashboard.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

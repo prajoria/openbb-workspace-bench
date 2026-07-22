@@ -2,7 +2,7 @@
   "id": "cited_research_operations_level0",
   "category": "platform",
   "difficulty": "level0",
-  "prompt": "From the open Cited Research Operations board, read the Daloopa Tearsheet skill (daloopa-tearsheet). Add a Daloopa Tearsheet Workflow note that records the workflow title and its period-math anchor.",
+  "prompt": "From the open Cited Research Operations dashboard, read the Daloopa Tearsheet skill (daloopa-tearsheet). Add a Daloopa Tearsheet Workflow note that records the workflow title and its period-math anchor.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

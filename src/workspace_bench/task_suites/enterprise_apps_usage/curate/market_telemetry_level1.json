@@ -2,7 +2,7 @@
   "id": "market_telemetry_level1",
   "category": "single-widget",
   "difficulty": "level1",
-  "prompt": "On the open Wave Two Market Telemetry board, add Getting Started's live-updating grid with real-time WebSocket updates for AAPL.",
+  "prompt": "On the open Wave Two Market Telemetry dashboard, add Getting Started's live-updating grid with real-time WebSocket updates for AAPL.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

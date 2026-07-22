@@ -2,7 +2,7 @@
   "id": "technology_decision_inputs_level2",
   "category": "single-widget",
   "difficulty": "level2",
-  "prompt": "Apply the current Tesla model-year policy on the open Technology Decision Inputs board. Set Car Manufacturer Performance to company TSLA and year 2024, the current model year, and preserve the rest of the board.",
+  "prompt": "Apply the current Tesla model-year policy on the open Technology Decision Inputs dashboard. Set Car Manufacturer Performance to company TSLA and year 2024, the current model year, and preserve the rest of the dashboard.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
