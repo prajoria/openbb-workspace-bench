@@ -2,7 +2,7 @@
   "id": "consensus_exception_handoff_level3",
   "category": "read",
   "difficulty": "level3",
-  "prompt": "Day wrap - read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard with ticker AAPL, then add a Consensus-exception Desk Note recording the exact Total Revenue actual and consensus for 2026Q1.",
+  "prompt": "Day wrap for the desk - on the open Consensus Exception Handoff dashboard, read Consensus Estimates from Bench Daloopa with ticker AAPL and leave a Consensus-exception Desk Note recording the exact Total Revenue actual and consensus for 2026Q1.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

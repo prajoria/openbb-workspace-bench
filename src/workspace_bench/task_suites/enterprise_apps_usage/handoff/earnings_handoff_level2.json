@@ -2,7 +2,7 @@
   "id": "earnings_handoff_level2",
   "category": "read",
   "difficulty": "level2",
-  "prompt": "Prepare a Microsoft note on the open Earnings Handoff dashboard under the current-month handoff policy. Read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology and MSFT; current month means MTD. Add a Microsoft Earnings Handoff note with the exact score and status.",
+  "prompt": "Microsoft next, current-month lens: under the current-month handoff policy on the open Earnings Handoff dashboard, read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology and MSFT, then add a Microsoft Earnings Handoff note with the exact score and status.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

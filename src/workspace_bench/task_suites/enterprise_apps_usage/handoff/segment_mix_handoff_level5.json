@@ -2,7 +2,7 @@
   "id": "segment_mix_handoff_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Finish Segment Mix Handoff with a build: add Buildout Segment Handoff with a Segment Handoff Register table per the workspace's widgets.json spec, publish and instantiate Segment Handoff App with one Handoff tab, add a Segment-mix Build Handoff note grounded in Bench Daloopa's Segment Breakdown with the top segment and its exact revenue_musd and, from the Daloopa Tearsheet skill, the anchor it uses for all period math, then delegate.",
+  "prompt": "Finish Segment Mix Handoff with a build: add Buildout Segment Handoff with a Segment Handoff Register table per the workspace's widgets.json spec, publish and instantiate Segment Handoff App with one Handoff tab, then leave a Segment-mix Build Handoff note grounded in Bench Daloopa's Segment Breakdown with the top segment and its exact revenue_musd and, from the Daloopa Tearsheet skill, the anchor it uses for all period math - and delegate.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

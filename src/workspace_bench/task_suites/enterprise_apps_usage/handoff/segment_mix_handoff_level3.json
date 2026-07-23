@@ -2,7 +2,7 @@
   "id": "segment_mix_handoff_level3",
   "category": "read",
   "difficulty": "level3",
-  "prompt": "Day wrap - read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, period 2026Q1, then add a Segment-mix Desk Note recording the top segment and its exact revenue_musd.",
+  "prompt": "Day wrap on segments - read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, period 2026Q1, then leave a Segment-mix Desk Note recording the top segment and its exact revenue_musd.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

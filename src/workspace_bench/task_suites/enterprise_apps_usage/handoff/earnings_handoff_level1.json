@@ -2,7 +2,7 @@
   "id": "earnings_handoff_level1",
   "category": "read",
   "difficulty": "level1",
-  "prompt": "Build the Apple note on the open Earnings Handoff dashboard. Find Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology, AAPL, and QTD, then add an Apple Earnings Handoff note with the exact score and status.",
+  "prompt": "Apple's print is coming - build the Apple note on the open Earnings Handoff dashboard: find Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology, AAPL, and QTD, then add an Apple Earnings Handoff note with the exact score and status.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

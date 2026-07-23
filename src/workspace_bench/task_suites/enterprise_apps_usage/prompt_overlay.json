@@ -167,6 +167,30 @@
     "prompt": "Deliver Buildout Comps Governance end to end: read the Finance Comps skill, add the backend with a Comps Governance Register table per the workspace's widgets.json spec, publish and instantiate Comps Governance App on Comparables, and finish with a Comps-governance Build Note containing valuation multiples.",
     "spec_sha256": "311dc2d225d447b9b3281e85223939776e51e304776b4cde3af4807d5103ccf5"
   },
+  "consensus_exception_handoff_level0": {
+    "prompt": "Exception check before close: read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard with ticker AAPL, then leave a Consensus-exception Direct Note recording the exact Total Revenue actual and consensus for 2026Q1.",
+    "spec_sha256": "7ea16366cef0b9f06020a39b715057bf329c1b822ca57d9758faf9ecede94818"
+  },
+  "consensus_exception_handoff_level1": {
+    "prompt": "Pass this to the late shift - read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard with ticker AAPL, then add a Consensus-exception Discovered Note recording the exact Total Revenue actual and consensus for 2026Q1.",
+    "spec_sha256": "3b84089161986d509af9d5f172fe56b7572085a111c1816674099666925812a1"
+  },
+  "consensus_exception_handoff_level2": {
+    "prompt": "Handoff capture under the mega-cap coverage policy - Apple's line, in other words - read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard, then add a Consensus-exception Analyst Note recording the exact Total Revenue actual and consensus for 2026Q1.",
+    "spec_sha256": "5b55a4ffdc36f59f2003ca4d4920cc068d6d61a4a30956236079d1bae1100bb1"
+  },
+  "consensus_exception_handoff_level3": {
+    "prompt": "Day wrap for the desk - on the open Consensus Exception Handoff dashboard, read Consensus Estimates from Bench Daloopa with ticker AAPL and leave a Consensus-exception Desk Note recording the exact Total Revenue actual and consensus for 2026Q1.",
+    "spec_sha256": "b6ce55d9bb998e278a5dc39ceb13f247d81ad35a1eead7028e49afb701d2b503"
+  },
+  "consensus_exception_handoff_level4": {
+    "prompt": "Close out the open Consensus Exception Handoff dashboard under the Daloopa Earnings Review skill: read Bench Daloopa's Consensus Estimates with ticker AAPL, leave a Consensus-exception Governed Handoff note recording the exact Total Revenue actual and consensus for 2026Q1, then delegate the follow-up.",
+    "spec_sha256": "5238e2a5fabea78e9fde33685863350293726dccecdb6a8b33c6cea281ef4935"
+  },
+  "consensus_exception_handoff_level5": {
+    "prompt": "Finish Consensus Exception Handoff with a build: add Buildout Consensus Handoff with a Consensus Handoff Register table per the workspace's widgets.json spec, publish and instantiate Consensus Handoff App with one Handoff tab, then leave a Consensus-exception Build Handoff note grounded in Bench Daloopa's Consensus Estimates with the exact Total Revenue actual and consensus for 2026Q1 and, from the Daloopa Earnings Review skill, what it checks in the guidance data for the same period - and delegate.",
+    "spec_sha256": "92dd9326d6831d845490d83e5941e7496c1fba7dcd2bfeedaf15ea4b2fb02480"
+  },
   "crypto_display_controls_level0": {
     "prompt": "On the open Crypto Display Controls dashboard, set Binance OHLC: symbol to ethusdt, interval to 1m, exchange to binancef. Preserve the other views.",
     "spec_sha256": "3887f19ed866345abc0586df31961f38c51b67da74514667f72a3d2c8337f864"
@@ -262,6 +286,30 @@
   "due_diligence_media_room_level5": {
     "prompt": "Buildout Media Room goes live today: add it with a Media Review Register table per the widgets.json spec, publish and instantiate Media Room App on Media, then add Getting Started's PDF Widget with URL and Widget Examples's URL PDF files. Wrap with a Media-room Build Note recording what the Finance Tearsheet skill gathers between valuation and risks.",
     "spec_sha256": "daf3927559116fdb78583ccc0a50bea0896fbb58bc99ad13793db31c31314278"
+  },
+  "earnings_handoff_level0": {
+    "prompt": "Lilly first today: on the open Earnings Handoff dashboard, read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, with sector Healthcare, ticker LLY, period YTD, then add an LLY Earnings Handoff note with the exact score and status.",
+    "spec_sha256": "633749113b2904298ad0da79aac718061b679ce7850fbec1e237c8bd828b6550"
+  },
+  "earnings_handoff_level1": {
+    "prompt": "Apple's print is coming - build the Apple note on the open Earnings Handoff dashboard: find Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology, AAPL, and QTD, then add an Apple Earnings Handoff note with the exact score and status.",
+    "spec_sha256": "81c4785fe8235d0fe454023113a87477816205341f11ee1eaa0ae8f1af02576b"
+  },
+  "earnings_handoff_level2": {
+    "prompt": "Microsoft next, current-month lens: under the current-month handoff policy on the open Earnings Handoff dashboard, read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology and MSFT, then add a Microsoft Earnings Handoff note with the exact score and status.",
+    "spec_sha256": "99b5fa4d2e60faf98b2b0e87549ddc84992fdf54d2380492622e1929868e05f2"
+  },
+  "earnings_handoff_level3": {
+    "prompt": "Governance on the wrap: for the open Earnings Handoff dashboard, follow Finance Earnings Prep governance and read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology, AAPL, and QTD, then add a Governed Apple Handoff note with the exact score and status.",
+    "spec_sha256": "caea3c8e2b0beab065b236f02f1d0b940bd4ed89efa92bdd9e4dbf2847375326"
+  },
+  "earnings_handoff_level4": {
+    "prompt": "Take the coverage follow-up route from the open Earnings Handoff dashboard under Finance Earnings Prep governance: read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Healthcare, LLY, and YTD, add an LLY Delegation Handoff note with the exact score and status, then delegate the coverage follow-up.",
+    "spec_sha256": "21e127d5830cff055b6a9c306d56ee48971b7dd5688cce27b453428ee01126ae"
+  },
+  "earnings_handoff_level5": {
+    "prompt": "The earnings desk builds its own: from the open Earnings Handoff dashboard, author and add a minimal custom Earnings Handoff Backend with one Earnings Handoff Register. Publish and instantiate Earnings Handoff App with one Handoff tab, add an Earnings Build Handoff note naming Earnings Handoff App and Earnings Handoff Register plus, per the Finance Earnings Prep skill, what internal estimates are compared to, then delegate the build-review follow-up.",
+    "spec_sha256": "b4e3aa8748c58a8d98f30a105ff4306981f9120d623d7c6c20e99509f83cb631"
   },
   "earnings_lookup_level0": {
     "prompt": "Read Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor with sector Healthcare, ticker LLY, period YTD, and report the exact score and status.",
@@ -503,6 +551,30 @@
     "prompt": "We lost Pilot NAV Repair and its staging queue. On the open Custom NAV Repair Staging dashboard, stand it back up: add a custom backend Pilot NAV Repair carrying a NAV Exception Queue table per the widgets.json spec, publish and instantiate its app with the queue on Exceptions, then leave a NAV-exception Rebuild Note recording the last of the three verdict kinds the Daloopa Guidance Tracker skill tallies.",
     "spec_sha256": "5948326dcb316a5d5c0f310cacb4eb24951ec77b4093c7402bad89e2b778bb92"
   },
+  "news_desk_handoff_level0": {
+    "prompt": "Newsroom morning pass: on the open News Desk Handoff dashboard, read Getting Started's Sample News Feed with category set to business and limit set to 2, then add a Markets News Handoff note with the exact lead title and author.",
+    "spec_sha256": "6c82b07a31c59b2ef56dbd0d90e56229d4150748e344ba8a067f671848d0d906"
+  },
+  "news_desk_handoff_level1": {
+    "prompt": "Tech desk wants their cut - from the open News Desk Handoff dashboard, find Getting Started's Sample News Feed for technology, limited to 2, then add a Technology News Handoff note with the exact lead title and author.",
+    "spec_sha256": "c05a25bcbde08fa4f92fdf3775fffce899d5ec79e49beb73ac2a50b707bf1410"
+  },
+  "news_desk_handoff_level2": {
+    "prompt": "Science coverage rotates in: under the science route on the open News Desk Handoff dashboard, read Getting Started's Sample News Feed for that route, limited to 2, and pin the exact lead title and author in a Science News Handoff note.",
+    "spec_sha256": "c5bc89c2a5ae817b4dbd113b9c0553bfea443ab641c46db053778a75e108d7ee"
+  },
+  "news_desk_handoff_level3": {
+    "prompt": "Second story matters today - using Workspace session guidance on the open News Desk Handoff dashboard, read Getting Started's Sample News Feed for business, limited to 2, then add a Governed Expansion Handoff note with the exact second title and author.",
+    "spec_sha256": "098d8cc3cbb23e12ce42bf9dbb225c1ff1457b878a41dff974f7610478499141"
+  },
+  "news_desk_handoff_level4": {
+    "prompt": "Editorial wants the science follow-up route handled from the open News Desk Handoff dashboard under Workspace session guidance: read Getting Started's Sample News Feed for science, limited to 2, add a Science Delegation Handoff note with the exact lead title and author, then delegate the editorial follow-up.",
+    "spec_sha256": "32037a66e01167481178a199f7f7b8a949c0dd87eba5b0aaf28ca8bfe2f15c71"
+  },
+  "news_desk_handoff_level5": {
+    "prompt": "The news desk gets its own rail: starting from the open News Desk Handoff dashboard, author and add a minimal custom News Handoff Backend with one News Handoff Register. Publish and instantiate News Handoff App with one Handoff tab, add a News Build Handoff note naming News Handoff App and News Handoff Register plus, per the Finance Tearsheet skill, the input it gathers between valuation and risks, then delegate the build-review follow-up.",
+    "spec_sha256": "91acca392fea95e818bd45ebed5ccbd4b72da11ce804824c1c9a573ff78becc5"
+  },
   "operating_driver_lookup_level0": {
     "prompt": "Read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, then report the exact calendar_period and Installed Base Active Devices value shown.",
     "spec_sha256": "861da6445934b1cfcbe479049f20893de63888b38b38b0cb3b71130d33949458"
@@ -598,6 +670,30 @@
   "risk_service_lifecycle_level5": {
     "prompt": "Stress coverage completes the risk build: add the Pilot Risk Service backend with Pilot Risk Signal, Pilot Limit Alert, and Pilot Stress Watch, publish Pilot Risk App with Pilot Risk Signal and Pilot Limit Alert on Monitor and Pilot Stress Watch on Stress, and instantiate it. Then follow the Finance Guidance Tracker skill and leave a Risk Service Build Note recording the final thing its workflow lists.",
     "spec_sha256": "0669233272839490ed1e0ee7a5e5915d86361f98e8a98eb1393c6d6822edf8e5"
+  },
+  "segment_mix_handoff_level0": {
+    "prompt": "Quarter-end mix check: read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, period 2026Q1, then leave a Segment-mix Direct Note recording the top segment and its exact revenue_musd.",
+    "spec_sha256": "21e33f1e1d7e6523705bf6688ecf516d04309f8054a93ba56a82cd0b270bc796"
+  },
+  "segment_mix_handoff_level1": {
+    "prompt": "Leaving early - log the desk view first: read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, period 2026Q1, then add a Segment-mix Discovered Note recording the top segment and its exact revenue_musd.",
+    "spec_sha256": "4ad065f044c89e05c03cbc8f850cd891d265ce87db8b7470a63e7a18a2c316ff"
+  },
+  "segment_mix_handoff_level2": {
+    "prompt": "Handoff capture under the covered-quarter handoff policy - Apple's latest covered quarter, that is - read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, then add a Segment-mix Analyst Note recording the top segment and its exact revenue_musd.",
+    "spec_sha256": "1508d0b824e00a810bbd07fd8c88a154102365441dacf3ae72964765f734f780"
+  },
+  "segment_mix_handoff_level3": {
+    "prompt": "Day wrap on segments - read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, period 2026Q1, then leave a Segment-mix Desk Note recording the top segment and its exact revenue_musd.",
+    "spec_sha256": "6ae0ea47ba50d43b0545281f43238eb9fbe1e8c6f39c1f35ea0ff9dd9df19d69"
+  },
+  "segment_mix_handoff_level4": {
+    "prompt": "Close out the open Segment Mix Handoff dashboard under the Daloopa Tearsheet skill: read Bench Daloopa's Segment Breakdown with ticker AAPL, period 2026Q1, leave a Segment-mix Governed Handoff note recording the top segment, its exact revenue_musd, and the mix, then delegate the follow-up.",
+    "spec_sha256": "0c02fe1cfa81048d8b1b928f4c12398157cf154cefc1e62fc585866349db6574"
+  },
+  "segment_mix_handoff_level5": {
+    "prompt": "Finish Segment Mix Handoff with a build: add Buildout Segment Handoff with a Segment Handoff Register table per the workspace's widgets.json spec, publish and instantiate Segment Handoff App with one Handoff tab, then leave a Segment-mix Build Handoff note grounded in Bench Daloopa's Segment Breakdown with the top segment and its exact revenue_musd and, from the Daloopa Tearsheet skill, the anchor it uses for all period math - and delegate.",
+    "spec_sha256": "d3452c216de687f517601df1a3f09083446b4b298f9dce4a5ceb7875aa2aceaa"
   },
   "technology_decision_inputs_level0": {
     "prompt": "On the open Technology Decision Inputs dashboard, switch Car Manufacturer Performance: company to TSLA, year to 2023. Leave everything else in place.",

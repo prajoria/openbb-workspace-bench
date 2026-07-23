@@ -2,7 +2,7 @@
   "id": "consensus_exception_handoff_level0",
   "category": "read",
   "difficulty": "level0",
-  "prompt": "Read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard with ticker AAPL, then add a Consensus-exception Direct Note recording the exact Total Revenue actual and consensus for 2026Q1.",
+  "prompt": "Exception check before close: read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard with ticker AAPL, then leave a Consensus-exception Direct Note recording the exact Total Revenue actual and consensus for 2026Q1.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "consensus_exception_handoff_level2",
   "category": "read",
   "difficulty": "level2",
-  "prompt": "Handoff capture under the mega-cap coverage policy - that policy means the Apple line, ticker AAPL - read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard, then add a Consensus-exception Analyst Note recording the exact Total Revenue actual and consensus for 2026Q1.",
+  "prompt": "Handoff capture under the mega-cap coverage policy - Apple's line, in other words - read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard, then add a Consensus-exception Analyst Note recording the exact Total Revenue actual and consensus for 2026Q1.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

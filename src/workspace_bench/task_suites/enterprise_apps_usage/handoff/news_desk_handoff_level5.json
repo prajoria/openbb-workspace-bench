@@ -2,7 +2,7 @@
   "id": "news_desk_handoff_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Starting from the open News Desk Handoff dashboard, author and add a minimal custom News Handoff Backend with one News Handoff Register. Publish and instantiate News Handoff App with one Handoff tab, add a News Build Handoff note naming News Handoff App and News Handoff Register, then delegate the build-review follow-up. Follow the Finance Tearsheet skill and record in the note the input it gathers between valuation and risks.",
+  "prompt": "The news desk gets its own rail: starting from the open News Desk Handoff dashboard, author and add a minimal custom News Handoff Backend with one News Handoff Register. Publish and instantiate News Handoff App with one Handoff tab, add a News Build Handoff note naming News Handoff App and News Handoff Register plus, per the Finance Tearsheet skill, the input it gathers between valuation and risks, then delegate the build-review follow-up.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

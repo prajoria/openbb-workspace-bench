@@ -3701,7 +3701,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: read · specification: -
 
-> Read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard with ticker AAPL, then add a Consensus-exception Direct Note recording the exact Total Revenue actual and consensus for 2026Q1.
+> Exception check before close: read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard with ticker AAPL, then leave a Consensus-exception Direct Note recording the exact Total Revenue actual and consensus for 2026Q1.
 
 - Initial workspace: dashboard "Consensus Exception Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3715,7 +3715,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: read · specification: -
 
-> Desk log - read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard with ticker AAPL, then add a Consensus-exception Discovered Note recording the exact Total Revenue actual and consensus for 2026Q1.
+> Pass this to the late shift - read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard with ticker AAPL, then add a Consensus-exception Discovered Note recording the exact Total Revenue actual and consensus for 2026Q1.
 
 - Initial workspace: dashboard "Consensus Exception Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3729,7 +3729,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: read · specification: -
 
-> Handoff capture under the mega-cap coverage policy - that policy means the Apple line, ticker AAPL - read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard, then add a Consensus-exception Analyst Note recording the exact Total Revenue actual and consensus for 2026Q1.
+> Handoff capture under the mega-cap coverage policy - Apple's line, in other words - read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard, then add a Consensus-exception Analyst Note recording the exact Total Revenue actual and consensus for 2026Q1.
 
 - Initial workspace: dashboard "Consensus Exception Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3743,7 +3743,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: read · specification: -
 
-> Day wrap - read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard with ticker AAPL, then add a Consensus-exception Desk Note recording the exact Total Revenue actual and consensus for 2026Q1.
+> Day wrap for the desk - on the open Consensus Exception Handoff dashboard, read Consensus Estimates from Bench Daloopa with ticker AAPL and leave a Consensus-exception Desk Note recording the exact Total Revenue actual and consensus for 2026Q1.
 
 - Initial workspace: dashboard "Consensus Exception Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3757,7 +3757,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: dashboard · specification: -
 
-> Close out the open Consensus Exception Handoff dashboard under the Daloopa Earnings Review skill: read Bench Daloopa's Consensus Estimates with ticker AAPL, add a Consensus-exception Governed Handoff note recording the exact Total Revenue actual and consensus for 2026Q1 and consensus, then delegate the follow-up.
+> Close out the open Consensus Exception Handoff dashboard under the Daloopa Earnings Review skill: read Bench Daloopa's Consensus Estimates with ticker AAPL, leave a Consensus-exception Governed Handoff note recording the exact Total Revenue actual and consensus for 2026Q1, then delegate the follow-up.
 
 - Initial workspace: dashboard "Consensus Exception Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3771,7 +3771,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Finish Consensus Exception Handoff with a build: add Buildout Consensus Handoff with a Consensus Handoff Register table per the workspace's widgets.json spec, publish and instantiate Consensus Handoff App with one Handoff tab, add a Consensus-exception Build Handoff note grounded in Bench Daloopa's Consensus Estimates with the exact Total Revenue actual and consensus for 2026Q1 and, from the Daloopa Earnings Review skill, what it checks in the guidance data for the same period, then delegate.
+> Finish Consensus Exception Handoff with a build: add Buildout Consensus Handoff with a Consensus Handoff Register table per the workspace's widgets.json spec, publish and instantiate Consensus Handoff App with one Handoff tab, then leave a Consensus-exception Build Handoff note grounded in Bench Daloopa's Consensus Estimates with the exact Total Revenue actual and consensus for 2026Q1 and, from the Daloopa Earnings Review skill, what it checks in the guidance data for the same period - and delegate.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3786,7 +3786,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: read · specification: -
 
-> On the open Earnings Handoff dashboard, read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Healthcare, LLY, and YTD. Add an LLY Earnings Handoff note with the exact score and status.
+> Lilly first today: on the open Earnings Handoff dashboard, read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, with sector Healthcare, ticker LLY, period YTD, then add an LLY Earnings Handoff note with the exact score and status.
 
 - Initial workspace: dashboard "Earnings Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3800,7 +3800,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: read · specification: -
 
-> Build the Apple note on the open Earnings Handoff dashboard. Find Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology, AAPL, and QTD, then add an Apple Earnings Handoff note with the exact score and status.
+> Apple's print is coming - build the Apple note on the open Earnings Handoff dashboard: find Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology, AAPL, and QTD, then add an Apple Earnings Handoff note with the exact score and status.
 
 - Initial workspace: dashboard "Earnings Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3814,7 +3814,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: read · specification: -
 
-> Prepare a Microsoft note on the open Earnings Handoff dashboard under the current-month handoff policy. Read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology and MSFT; current month means MTD. Add a Microsoft Earnings Handoff note with the exact score and status.
+> Microsoft next, current-month lens: under the current-month handoff policy on the open Earnings Handoff dashboard, read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology and MSFT, then add a Microsoft Earnings Handoff note with the exact score and status.
 
 - Initial workspace: dashboard "Earnings Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3828,7 +3828,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> For the open Earnings Handoff dashboard, follow Finance Earnings Prep governance and read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology, AAPL, and QTD. Add a Governed Apple Handoff note with the exact score and status.
+> Governance on the wrap: for the open Earnings Handoff dashboard, follow Finance Earnings Prep governance and read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Technology, AAPL, and QTD, then add a Governed Apple Handoff note with the exact score and status.
 
 - Initial workspace: dashboard "Earnings Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3842,7 +3842,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: platform · specification: -
 
-> Handle the coverage follow-up route from the open Earnings Handoff dashboard under Finance Earnings Prep governance. Read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Healthcare, LLY, and YTD; add an LLY Delegation Handoff note with exact score and status, then delegate the coverage follow-up.
+> Take the coverage follow-up route from the open Earnings Handoff dashboard under Finance Earnings Prep governance: read Bench Stark Enterprise's Earnings & Estimates Monitor, Upcoming Earnings, for Healthcare, LLY, and YTD, add an LLY Delegation Handoff note with the exact score and status, then delegate the coverage follow-up.
 
 - Initial workspace: dashboard "Earnings Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3856,7 +3856,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> From the open Earnings Handoff dashboard, author and add a minimal custom Earnings Handoff Backend with one Earnings Handoff Register. Publish and instantiate Earnings Handoff App with one Handoff tab, add an Earnings Build Handoff note naming Earnings Handoff App and Earnings Handoff Register, then delegate the build-review follow-up. Follow the Finance Earnings Prep skill and record in the note what internal estimates are compared to.
+> The earnings desk builds its own: from the open Earnings Handoff dashboard, author and add a minimal custom Earnings Handoff Backend with one Earnings Handoff Register. Publish and instantiate Earnings Handoff App with one Handoff tab, add an Earnings Build Handoff note naming Earnings Handoff App and Earnings Handoff Register plus, per the Finance Earnings Prep skill, what internal estimates are compared to, then delegate the build-review follow-up.
 
 - Initial workspace: dashboard "Earnings Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3871,7 +3871,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: read · specification: -
 
-> On the open News Desk Handoff dashboard, read Getting Started's Sample News Feed with category set to business and limit set to 2. Add a Markets News Handoff note with the exact lead title and author.
+> Newsroom morning pass: on the open News Desk Handoff dashboard, read Getting Started's Sample News Feed with category set to business and limit set to 2, then add a Markets News Handoff note with the exact lead title and author.
 
 - Initial workspace: dashboard "News Desk Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3885,7 +3885,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: read · specification: -
 
-> Find Getting Started's Sample News Feed from the open News Desk Handoff dashboard for technology, limited to 2, then add a Technology News Handoff note with the exact lead title and author.
+> Tech desk wants their cut - from the open News Desk Handoff dashboard, find Getting Started's Sample News Feed for technology, limited to 2, then add a Technology News Handoff note with the exact lead title and author.
 
 - Initial workspace: dashboard "News Desk Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3899,7 +3899,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: read · specification: -
 
-> Prepare a Science News Handoff note on the open News Desk Handoff dashboard under the science route. Read Getting Started's Sample News Feed for that route, limited to 2, and pin the exact lead title and author.
+> Science coverage rotates in: under the science route on the open News Desk Handoff dashboard, read Getting Started's Sample News Feed for that route, limited to 2, and pin the exact lead title and author in a Science News Handoff note.
 
 - Initial workspace: dashboard "News Desk Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3913,7 +3913,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> Using Workspace session guidance on the open News Desk Handoff dashboard, read Getting Started's Sample News Feed for business, limited to 2. Add a Governed Expansion Handoff note with the exact second title and author.
+> Second story matters today - using Workspace session guidance on the open News Desk Handoff dashboard, read Getting Started's Sample News Feed for business, limited to 2, then add a Governed Expansion Handoff note with the exact second title and author.
 
 - Initial workspace: dashboard "News Desk Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3927,7 +3927,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: platform · specification: -
 
-> Handle the science follow-up route from the open News Desk Handoff dashboard under Workspace session guidance. Read Getting Started's Sample News Feed for science, limited to 2; add a Science Delegation Handoff note with the exact lead title and author, then delegate the editorial follow-up.
+> Editorial wants the science follow-up route handled from the open News Desk Handoff dashboard under Workspace session guidance: read Getting Started's Sample News Feed for science, limited to 2, add a Science Delegation Handoff note with the exact lead title and author, then delegate the editorial follow-up.
 
 - Initial workspace: dashboard "News Desk Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3941,7 +3941,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Starting from the open News Desk Handoff dashboard, author and add a minimal custom News Handoff Backend with one News Handoff Register. Publish and instantiate News Handoff App with one Handoff tab, add a News Build Handoff note naming News Handoff App and News Handoff Register, then delegate the build-review follow-up. Follow the Finance Tearsheet skill and record in the note the input it gathers between valuation and risks.
+> The news desk gets its own rail: starting from the open News Desk Handoff dashboard, author and add a minimal custom News Handoff Backend with one News Handoff Register. Publish and instantiate News Handoff App with one Handoff tab, add a News Build Handoff note naming News Handoff App and News Handoff Register plus, per the Finance Tearsheet skill, the input it gathers between valuation and risks, then delegate the build-review follow-up.
 
 - Initial workspace: dashboard "News Desk Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3956,7 +3956,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: read · specification: -
 
-> Read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, period 2026Q1, then add a Segment-mix Direct Note recording the top segment and its exact revenue_musd.
+> Quarter-end mix check: read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, period 2026Q1, then leave a Segment-mix Direct Note recording the top segment and its exact revenue_musd.
 
 - Initial workspace: dashboard "Segment Mix Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3970,7 +3970,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: read · specification: -
 
-> Desk log - read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, period 2026Q1, then add a Segment-mix Discovered Note recording the top segment and its exact revenue_musd.
+> Leaving early - log the desk view first: read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, period 2026Q1, then add a Segment-mix Discovered Note recording the top segment and its exact revenue_musd.
 
 - Initial workspace: dashboard "Segment Mix Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3984,7 +3984,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: read · specification: -
 
-> Handoff capture under the covered-quarter handoff policy - that policy means period 2026Q1, Apple's latest covered quarter - read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, then add a Segment-mix Analyst Note recording the top segment and its exact revenue_musd.
+> Handoff capture under the covered-quarter handoff policy - Apple's latest covered quarter, that is - read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, then add a Segment-mix Analyst Note recording the top segment and its exact revenue_musd.
 
 - Initial workspace: dashboard "Segment Mix Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3998,7 +3998,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: read · specification: -
 
-> Day wrap - read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, period 2026Q1, then add a Segment-mix Desk Note recording the top segment and its exact revenue_musd.
+> Day wrap on segments - read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, period 2026Q1, then leave a Segment-mix Desk Note recording the top segment and its exact revenue_musd.
 
 - Initial workspace: dashboard "Segment Mix Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4012,7 +4012,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: dashboard · specification: -
 
-> Close out the open Segment Mix Handoff dashboard under the Daloopa Tearsheet skill: read Bench Daloopa's Segment Breakdown with ticker AAPL, period 2026Q1, add a Segment-mix Governed Handoff note recording the top segment and its exact revenue_musd and mix, then delegate the follow-up.
+> Close out the open Segment Mix Handoff dashboard under the Daloopa Tearsheet skill: read Bench Daloopa's Segment Breakdown with ticker AAPL, period 2026Q1, leave a Segment-mix Governed Handoff note recording the top segment, its exact revenue_musd, and the mix, then delegate the follow-up.
 
 - Initial workspace: dashboard "Segment Mix Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4026,7 +4026,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Finish Segment Mix Handoff with a build: add Buildout Segment Handoff with a Segment Handoff Register table per the workspace's widgets.json spec, publish and instantiate Segment Handoff App with one Handoff tab, add a Segment-mix Build Handoff note grounded in Bench Daloopa's Segment Breakdown with the top segment and its exact revenue_musd and, from the Daloopa Tearsheet skill, the anchor it uses for all period math, then delegate.
+> Finish Segment Mix Handoff with a build: add Buildout Segment Handoff with a Segment Handoff Register table per the workspace's widgets.json spec, publish and instantiate Segment Handoff App with one Handoff tab, then leave a Segment-mix Build Handoff note grounded in Bench Daloopa's Segment Breakdown with the top segment and its exact revenue_musd and, from the Daloopa Tearsheet skill, the anchor it uses for all period math - and delegate.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
