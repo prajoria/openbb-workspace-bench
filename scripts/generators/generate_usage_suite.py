@@ -537,7 +537,7 @@ def _record(
         "id": f"{spine}_{difficulty}",
         "category": category,
         "difficulty": difficulty,
-        "prompt": prompt,
+        "prompt": re.sub(r"\s{2,}", " ", prompt).strip(),
         "setup": _base_setup(
             selected_dashboard=selected_dashboard,
             answer_task=bool(required_values),

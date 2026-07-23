@@ -2,7 +2,7 @@
   "id": "compliance_alert_review_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Launch Buildout Compliance Review: add it with a Compliance Review Register table and publish and instantiate Compliance Review App on Review, following the workspace's widgets.json spec; also add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Markdown Widget with Number Input from Getting Started.  Follow the Finance Guidance Tracker skill and add a Compliance-alert Build Note recording the final thing its workflow lists.",
+  "prompt": "Launch Buildout Compliance Review: add it with a Compliance Review Register table and publish and instantiate Compliance Review App on Review, following the workspace's widgets.json spec; also add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Markdown Widget with Number Input from Getting Started. Follow the Finance Guidance Tracker skill and add a Compliance-alert Build Note recording the final thing its workflow lists.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

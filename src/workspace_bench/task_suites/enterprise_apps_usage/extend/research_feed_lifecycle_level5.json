@@ -2,7 +2,7 @@
   "id": "research_feed_lifecycle_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Complete the research service with Rollout Research Feed, Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch. Add the backend, publish Research Feed App with Research Feed Pulse and Source Freshness Alert on Feed and Archive Coverage Watch on Archive, and instantiate it.  Follow the Daloopa Capital Allocation skill and add a Research Feed Build Note recording the payout item added to buybacks in its comparison.",
+  "prompt": "Complete the research service with Rollout Research Feed, Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch. Add the backend, publish Research Feed App with Research Feed Pulse and Source Freshness Alert on Feed and Archive Coverage Watch on Archive, and instantiate it. Follow the Daloopa Capital Allocation skill and add a Research Feed Build Note recording the payout item added to buybacks in its comparison.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

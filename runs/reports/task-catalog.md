@@ -3069,7 +3069,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Launch Buildout Compliance Review: add it with a Compliance Review Register table and publish and instantiate Compliance Review App on Review, following the workspace's widgets.json spec; also add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Markdown Widget with Number Input from Getting Started.  Follow the Finance Guidance Tracker skill and add a Compliance-alert Build Note recording the final thing its workflow lists.
+> Launch Buildout Compliance Review: add it with a Compliance Review Register table and publish and instantiate Compliance Review App on Review, following the workspace's widgets.json spec; also add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Markdown Widget with Number Input from Getting Started. Follow the Finance Guidance Tracker skill and add a Compliance-alert Build Note recording the final thing its workflow lists.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3249,7 +3249,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Launch Buildout Execution Review: add it with a Execution Review Register table and publish and instantiate Execution Review App on Quality, following the workspace's widgets.json spec; also add Live Orders from Bench Stark Enterprise's Execution Desk; Multi PDF Viewer - URL from Getting Started.  Follow the Finance Comps skill and add a Execution-quality Build Note recording what it says deserve premium or discount.
+> Launch Buildout Execution Review: add it with a Execution Review Register table and publish and instantiate Execution Review App on Quality, following the workspace's widgets.json spec; also add Live Orders from Bench Stark Enterprise's Execution Desk; Multi PDF Viewer - URL from Getting Started. Follow the Finance Comps skill and add a Execution-quality Build Note recording what it says deserve premium or discount.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3596,7 +3596,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Complete the research service with Rollout Research Feed, Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch. Add the backend, publish Research Feed App with Research Feed Pulse and Source Freshness Alert on Feed and Archive Coverage Watch on Archive, and instantiate it.  Follow the Daloopa Capital Allocation skill and add a Research Feed Build Note recording the payout item added to buybacks in its comparison.
+> Complete the research service with Rollout Research Feed, Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch. Add the backend, publish Research Feed App with Research Feed Pulse and Source Freshness Alert on Feed and Archive Coverage Watch on Archive, and instantiate it. Follow the Daloopa Capital Allocation skill and add a Research Feed Build Note recording the payout item added to buybacks in its comparison.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3680,7 +3680,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Complete the risk desk build with Pilot Risk Service, Pilot Risk Signal, Pilot Limit Alert, and Pilot Stress Watch. Add the service, publish Pilot Risk App with Pilot Risk Signal and Pilot Limit Alert on Monitor and Pilot Stress Watch on Stress, and instantiate it.  Follow the Finance Guidance Tracker skill and add a Risk Service Build Note recording the final thing its workflow lists.
+> Complete the risk desk build with Pilot Risk Service, Pilot Risk Signal, Pilot Limit Alert, and Pilot Stress Watch. Add the service, publish Pilot Risk App with Pilot Risk Signal and Pilot Limit Alert on Monitor and Pilot Stress Watch on Stress, and instantiate it. Follow the Finance Guidance Tracker skill and add a Risk Service Build Note recording the final thing its workflow lists.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4110,7 +4110,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Author and add a Client Onboarding Backend with Client Intake Queue and Approval Log table views, then publish and instantiate a Client Onboarding App with Intake and Approvals tabs. Follow the apps.json spec.  Follow the Finance Guidance Tracker skill and add a Client Onboarding Build Note recording what it flags after comparing claims with guidance.
+> Author and add a Client Onboarding Backend with Client Intake Queue and Approval Log table views, then publish and instantiate a Client Onboarding App with Intake and Approvals tabs. Follow the apps.json spec. Follow the Finance Guidance Tracker skill and add a Client Onboarding Build Note recording what it flags after comparing claims with guidance.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4293,7 +4293,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Assemble Buildout Media Room: add it with a Media Review Register table, publish and instantiate Media Room App on Media, following the workspace's widgets.json spec, then add Getting Started's PDF Widget with URL, Widget Examples's URL PDF files.  Follow the Finance Tearsheet skill and add a Media-room Build Note recording the input it gathers between valuation and risks.
+> Assemble Buildout Media Room: add it with a Media Review Register table, publish and instantiate Media Room App on Media, following the workspace's widgets.json spec, then add Getting Started's PDF Widget with URL, Widget Examples's URL PDF files. Follow the Finance Tearsheet skill and add a Media-room Build Note recording the input it gathers between valuation and risks.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4393,7 +4393,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Assemble Buildout Visualization Gallery: add it with a Visualization Review Register table, publish and instantiate Visualization Gallery App on Gallery, following the workspace's widgets.json spec, then add Getting Started's Vega-Lite Bar Demo, Widget Examples's Vega-Lite Scatter Demo.  Follow the Finance Comps skill and add a Visualization-gallery Build Note recording what it compares after normalizing metrics.
+> Assemble Buildout Visualization Gallery: add it with a Visualization Review Register table, publish and instantiate Visualization Gallery App on Gallery, following the workspace's widgets.json spec, then add Getting Started's Vega-Lite Bar Demo, Widget Examples's Vega-Lite Scatter Demo. Follow the Finance Comps skill and add a Visualization-gallery Build Note recording what it compares after normalizing metrics.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4483,7 +4483,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Tune Buildout Intake Tuning end to end: add it as a custom backend with a Intake Control Panel table carrying risk_profile and client_last_name params, publish and instantiate Intake Tuning App on Controls, then set the live Intake Control Panel to risk_profile Moderate, client_last_name Chen. Follow the widgets.json spec.  Follow the Widget Parameters resource (openbb://workspace/specs/widget-parameters) and add a Client-intake Tuning Note recording the param kind it names between endpoint and button.
+> Tune Buildout Intake Tuning end to end: add it as a custom backend with a Intake Control Panel table carrying risk_profile and client_last_name params, publish and instantiate Intake Tuning App on Controls, then set the live Intake Control Panel to risk_profile Moderate, client_last_name Chen. Follow the widgets.json spec. Follow the Widget Parameters resource (openbb://workspace/specs/widget-parameters) and add a Client-intake Tuning Note recording the param kind it names between endpoint and button.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4569,7 +4569,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Tune Buildout Display Tuning end to end: add it as a custom backend with a Display Control Panel table carrying symbol and interval params, publish and instantiate Display Tuning App on Controls, then set the live Display Control Panel to symbol ethusdt, interval 1m. Follow the widgets.json spec.  Follow the Daloopa Inflection skill and add a Crypto-display Tuning Note recording what it flags as inflections.
+> Tune Buildout Display Tuning end to end: add it as a custom backend with a Display Control Panel table carrying symbol and interval params, publish and instantiate Display Tuning App on Controls, then set the live Display Control Panel to symbol ethusdt, interval 1m. Follow the widgets.json spec. Follow the Daloopa Inflection skill and add a Crypto-display Tuning Note recording what it flags as inflections.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4656,7 +4656,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Tune Rollout Document Tuning end to end: add it as a custom backend with a Document Control Panel table carrying filenames and category params, publish and instantiate Document Tuning App on Controls, then set the live Document Control Panel to filenames solana.pdf, category l1. Follow the widgets.json spec.  Follow the Finance Tearsheet skill and add a Document-controls Tuning Note recording the first input its workflow gathers.
+> Tune Rollout Document Tuning end to end: add it as a custom backend with a Document Control Panel table carrying filenames and category params, publish and instantiate Document Tuning App on Controls, then set the live Document Control Panel to filenames solana.pdf, category l1. Follow the widgets.json spec. Follow the Finance Tearsheet skill and add a Document-controls Tuning Note recording the first input its workflow gathers.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4743,7 +4743,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Tune Pilot Decision Tuning end to end: add it as a custom backend with a Decision Input Panel table carrying company and period params, publish and instantiate Decision Tuning App on Controls, then set the live Decision Input Panel to company TSLA, period QTD. Follow the widgets.json spec.  Follow the Finance Earnings Prep skill and add a Decision-inputs Tuning Note recording what it compares to street numbers first.
+> Tune Pilot Decision Tuning end to end: add it as a custom backend with a Decision Input Panel table carrying company and period params, publish and instantiate Decision Tuning App on Controls, then set the live Decision Input Panel to company TSLA, period QTD. Follow the widgets.json spec. Follow the Finance Earnings Prep skill and add a Decision-inputs Tuning Note recording what it compares to street numbers first.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`

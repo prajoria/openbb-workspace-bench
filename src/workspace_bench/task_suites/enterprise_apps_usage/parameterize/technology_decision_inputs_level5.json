@@ -2,7 +2,7 @@
   "id": "technology_decision_inputs_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Tune Pilot Decision Tuning end to end: add it as a custom backend with a Decision Input Panel table carrying company and period params, publish and instantiate Decision Tuning App on Controls, then set the live Decision Input Panel to company TSLA, period QTD. Follow the widgets.json spec.  Follow the Finance Earnings Prep skill and add a Decision-inputs Tuning Note recording what it compares to street numbers first.",
+  "prompt": "Tune Pilot Decision Tuning end to end: add it as a custom backend with a Decision Input Panel table carrying company and period params, publish and instantiate Decision Tuning App on Controls, then set the live Decision Input Panel to company TSLA, period QTD. Follow the widgets.json spec. Follow the Finance Earnings Prep skill and add a Decision-inputs Tuning Note recording what it compares to street numbers first.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

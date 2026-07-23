@@ -2,7 +2,7 @@
   "id": "due_diligence_media_room_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Assemble Buildout Media Room: add it with a Media Review Register table, publish and instantiate Media Room App on Media, following the workspace's widgets.json spec, then add Getting Started's PDF Widget with URL, Widget Examples's URL PDF files.  Follow the Finance Tearsheet skill and add a Media-room Build Note recording the input it gathers between valuation and risks.",
+  "prompt": "Assemble Buildout Media Room: add it with a Media Review Register table, publish and instantiate Media Room App on Media, following the workspace's widgets.json spec, then add Getting Started's PDF Widget with URL, Widget Examples's URL PDF files. Follow the Finance Tearsheet skill and add a Media-room Build Note recording the input it gathers between valuation and risks.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

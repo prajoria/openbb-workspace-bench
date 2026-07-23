@@ -2,7 +2,7 @@
   "id": "crypto_document_controls_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Tune Rollout Document Tuning end to end: add it as a custom backend with a Document Control Panel table carrying filenames and category params, publish and instantiate Document Tuning App on Controls, then set the live Document Control Panel to filenames solana.pdf, category l1. Follow the widgets.json spec.  Follow the Finance Tearsheet skill and add a Document-controls Tuning Note recording the first input its workflow gathers.",
+  "prompt": "Tune Rollout Document Tuning end to end: add it as a custom backend with a Document Control Panel table carrying filenames and category params, publish and instantiate Document Tuning App on Controls, then set the live Document Control Panel to filenames solana.pdf, category l1. Follow the widgets.json spec. Follow the Finance Tearsheet skill and add a Document-controls Tuning Note recording the first input its workflow gathers.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
